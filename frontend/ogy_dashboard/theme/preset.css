@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 0deg, 0%, 98%;
+    --color-surface: 0deg, 0%, 100%;
+    --color-content: 195deg, 6%, 14%;
+    --color-content-light: 195deg, 6%, 14%;
+    --color-content-dark: 0deg, 0%, 100%;
+    --color-charcoal: 195deg, 6%, 14%;
+    --color-accent: 242deg, 100%, 68%;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: 0deg, 0%, 8%;
+      --color-surface: 0deg, 0%, 12.47%;
+      --color-content: 0deg, 0%, 100%;
+      --color-content-light: 195deg, 6%, 14%;
+      --color-content-dark: 0deg, 0%, 100%;
+      --color-charcoal: 195deg, 6%, 14%;
+      --color-accent: 242deg, 100%, 68%;
+    }
+  }
+}
