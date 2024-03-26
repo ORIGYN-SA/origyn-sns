@@ -1,0 +1,16 @@
+@import "../theme/preset.css";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  background-color: hsla(var(--color-surface), var(--tw-bg-opacity));
+  border-radius: 0.5rem;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  padding: 1.5rem;
+}
