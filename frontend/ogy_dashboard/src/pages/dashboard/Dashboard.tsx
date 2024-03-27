@@ -3,11 +3,11 @@ import TotalOGYSupply from "@pages/dashboard/components/total-ogy-supply/TotalOG
 const Dashboard = () => {
   return (
     <div className="container mx-auto">
-      <div className="p-16 flex flex-col items-center">
+      <div className="py-16 px-4 flex flex-col items-center">
         <span className="text-sm font-semibold uppercase tracking-wider">
           OGY Analytics
         </span>
-        <h1 className="text-6xl font-extrabold text-center mt-2">
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-center mt-2">
           Explore dashboard
         </h1>
         <p className="mt-3 text-lg text-center px-6">
