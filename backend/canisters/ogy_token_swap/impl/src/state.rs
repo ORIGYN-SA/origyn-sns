@@ -3,10 +3,15 @@ use canister_state_macros::canister_state;
 use serde::{Deserialize, Serialize};
 use types::TimestampMillis;
 use utils::{
-    consts::SNS_GOVERNANCE_CANISTER_ID,
+    consts::{
+        OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID,
+        OGY_LEGACY_LEDGER_CANISTER_ID, SNS_GOVERNANCE_CANISTER_ID,
+    },
     env::{CanisterEnv, Environment},
     memory::MemorySize,
 };
+
+use crate::model::token_swap::TokenSwap;
 
 canister_state!(RuntimeState);
 
@@ -33,7 +38,7 @@ impl RuntimeState {
         }
     }
 
-    pub fn is_caller_governance_principal(&self) -> bool {
+    pub fn is_caller_authorised_principal(&self) -> bool {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
     }
@@ -52,23 +57,39 @@ pub struct CanisterInfo {
     pub cycles_balance_in_tc: f64,
 }
 
-#[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]
-pub struct SyncInfo {
-    pub last_synced_start: TimestampMillis,
-    pub last_synced_end: TimestampMillis,
-    pub last_synced_number_of_neurons: usize,
-}
-
 #[derive(Serialize, Deserialize)]
 pub struct Data {
     /// authorized Principals for guarded calls
     pub authorized_principals: Vec<Principal>,
+    /// state of the swaps
+    pub token_swap: TokenSwap,
+    /// canister ids that are being interacted with
+    pub canister_ids: CanisterIds,
 }
 
 impl Default for Data {
     fn default() -> Self {
         Self {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
+            token_swap: TokenSwap::default(),
+            canister_ids: CanisterIds::default(),
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CanisterIds {
+    pub ogy_ledger: Principal,
+    pub ogy_legacy_ledger: Principal,
+    pub ogy_legacy_ledger_archive: Principal,
+}
+
+impl Default for CanisterIds {
+    fn default() -> Self {
+        Self {
+            ogy_ledger: OGY_LEDGER_CANISTER_ID,
+            ogy_legacy_ledger: OGY_LEGACY_LEDGER_CANISTER_ID,
+            ogy_legacy_ledger_archive: OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID,
         }
     }
 }

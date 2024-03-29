@@ -193,7 +193,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57663b653d948a338bfb3eeba9bb2fd5fcfaecb9e199e87e1eda4d9e8b240fd9"
 dependencies = [
  "ciborium-io",
- "half",
+ "half 2.4.0",
 ]
 
 [[package]]
@@ -353,6 +353,12 @@ dependencies = [
 
 [[package]]
 name = "half"
+version = "1.8.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b43ede17f21864e81be2fa654110bf1e793774238d86ef8555c37e6519c0403"
+
+[[package]]
+name = "half"
 version = "2.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5eceaaeec696539ddaf7b333340f1af35a5aa87ae3e4f3ead0532f72affab2e"
@@ -464,6 +470,48 @@ dependencies = [
 ]
 
 [[package]]
+name = "icp_ledger_archive_canister"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "candid_gen",
+ "ic-ledger-types",
+ "serde",
+]
+
+[[package]]
+name = "icp_ledger_archive_canister_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "canister_client",
+ "ic-cdk",
+ "icp_ledger_archive_canister",
+ "types",
+]
+
+[[package]]
+name = "icp_ledger_canister"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "candid_gen",
+ "ic-ledger-types",
+ "serde",
+]
+
+[[package]]
+name = "icp_ledger_canister_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "canister_client",
+ "ic-cdk",
+ "icp_ledger_canister",
+ "types",
+]
+
+[[package]]
 name = "icrc-ledger-types"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -519,6 +567,22 @@ name = "leb128"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "884e2677b40cc8c339eaefcb701c32ef1fd2493d71118dc0ca4b6a736c93bd67"
+
+[[package]]
+name = "ledger_utils"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "ic-ledger-types",
+ "icp_ledger_canister_c2c_client",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "serde",
+ "serde_cbor",
+ "sha2",
+ "sha256",
+ "types",
+]
 
 [[package]]
 name = "libc"
@@ -594,8 +658,11 @@ dependencies = [
  "ic-cdk-timers",
  "ic-ledger-types",
  "ic-stable-structures",
+ "icp_ledger_archive_canister_c2c_client",
+ "icp_ledger_canister_c2c_client",
  "icrc-ledger-types",
  "icrc_ledger_canister_c2c_client",
+ "ledger_utils",
  "num-bigint",
  "serde",
  "serializer",
@@ -726,6 +793,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_cbor"
+version = "0.11.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2bef2ebfde456fb76bbcf9f59315333decc4fda0b2b44b420243c11e0f5ec1f5"
+dependencies = [
+ "half 1.8.3",
+ "serde",
+]
+
+[[package]]
 name = "serde_derive"
 version = "1.0.197"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -775,6 +852,13 @@ dependencies = [
  "cfg-if",
  "cpufeatures",
  "digest",
+]
+
+[[package]]
+name = "sha256"
+version = "0.1.0"
+dependencies = [
+ "sha2",
 ]
 
 [[package]]
