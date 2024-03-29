@@ -1,9 +1,8 @@
 use std::collections::BTreeMap;
 
-use candid::{Nat, Principal};
+use candid::Principal;
 use canister_time::now_millis;
-use ic_ledger_types::{AccountIdentifier, BlockIndex};
-use icrc_ledger_types::icrc1::transfer::NumTokens;
+use ic_ledger_types::{AccountIdentifier, BlockIndex, Tokens};
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
 
@@ -34,7 +33,7 @@ impl TokenSwap {
                             BlockFailReason::QueryRequestFailed => {
                                 // The previous attempt to request the info for this block failed on a higher level.
                                 // Let's try again.
-                                Ok(Some(RecoverMode::RetryQueryBlock))
+                                Ok(None)
                             }
                             BlockFailReason::ReceiverNotSwapCanister => {
                                 // If this block is not sending tokens to the swap canister, it never will.
@@ -55,6 +54,12 @@ impl TokenSwap {
                                 // If this block doesn't contain a valid transfer operation, it never will.
                                 // So there is no reason to retry checking this block.
                                 Err(format!("Block is not a valid swap block. The operation is not a transfer operation."))
+                            }
+                            BlockFailReason::ZeroAmount => {
+                                // If the token amount in the block is zero, there is no need for a swap.
+                                // So there is no reason to retry checking this block.
+                                Err("Amount of tokens in the block was zero. Skipping swap."
+                                    .to_string())
                             }
                         }
                     }
@@ -77,9 +82,21 @@ impl TokenSwap {
         };
     }
 
-    pub fn set_amount(&mut self, block_index: BlockIndex, amount: NumTokens) {
+    pub fn set_amount(&mut self, block_index: BlockIndex, amount: Tokens) {
         match self.swap.get_mut(&block_index) {
             Some(entry) => entry.amount = amount,
+            None => (), // this is not possible because it was initialised before
+        }
+    }
+    pub fn get_amount(&self, block_index: BlockIndex) -> Tokens {
+        match self.swap.get(&block_index) {
+            Some(swap_info) => swap_info.amount.clone(),
+            None => Tokens::from_e8s(0), // this is not possible because it was initialised before
+        }
+    }
+    pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
+        match self.swap.get_mut(&block_index) {
+            Some(entry) => entry.burn_block_index = Some(burn_block_index),
             None => (), // this is not possible because it was initialised before
         }
     }
@@ -88,9 +105,10 @@ impl TokenSwap {
 #[derive(Serialize, Deserialize)]
 pub struct SwapInfo {
     status: SwapStatus,
-    amount: NumTokens,
+    amount: Tokens,
     principal: Principal,
     timestamp: u64,
+    burn_block_index: Option<BlockIndex>,
 }
 
 impl SwapInfo {
@@ -98,8 +116,9 @@ impl SwapInfo {
         Self {
             status: SwapStatus::Init,
             principal,
-            amount: Nat::from(0u8),
+            amount: Tokens::from_e8s(0),
             timestamp: now_millis(),
+            burn_block_index: None,
         }
     }
 }
@@ -127,10 +146,11 @@ pub enum BlockFailReason {
     QueryRequestFailed,
     ReceiverNotSwapCanister,
     SenderNotPrincipalDefaultSubaccount(AccountIdentifier),
+    ZeroAmount,
 }
 
 pub enum RecoverMode {
     RetryBurn,
-    RetryQueryBlock,
+    // RetryQueryBlock,
     RetryTransfer,
 }

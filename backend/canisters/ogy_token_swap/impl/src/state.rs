@@ -1,5 +1,6 @@
 use candid::{CandidType, Principal};
 use canister_state_macros::canister_state;
+use ic_ledger_types::{AccountIdentifier, Subaccount};
 use serde::{Deserialize, Serialize};
 use types::TimestampMillis;
 use utils::{
@@ -65,6 +66,8 @@ pub struct Data {
     pub token_swap: TokenSwap,
     /// canister ids that are being interacted with
     pub canister_ids: CanisterIds,
+    /// The minting account of legacy OGY where tokens are burned to
+    pub minting_account: AccountIdentifier,
 }
 
 impl Default for Data {
@@ -73,6 +76,10 @@ impl Default for Data {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             token_swap: TokenSwap::default(),
             canister_ids: CanisterIds::default(),
+            minting_account: AccountIdentifier::new(
+                &SNS_GOVERNANCE_CANISTER_ID, // TODO - REPLACE THIS!!!
+                &Subaccount([0; 32]),
+            ),
         }
     }
 }
