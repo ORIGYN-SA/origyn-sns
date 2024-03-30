@@ -9,8 +9,14 @@ use ic_ledger_types::{
     query_archived_blocks, query_blocks, transfer, ArchivedBlockRange, Block, BlockIndex,
     GetBlocksArgs, Memo, Operation, Tokens, TransferArgs,
 };
+use icrc_ledger_canister_c2c_client::icrc1_transfer;
+use icrc_ledger_types::icrc1::{
+    account::Account,
+    transfer::{Memo as MemoIcrc, TransferArg},
+};
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
+use serde_bytes::ByteBuf;
 use utils::consts::E8S_FEE_OGY;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
@@ -51,20 +57,17 @@ pub(crate) async fn swap_tokens_impl(
             // 3. burn old token
             burn_token(block_index).await?;
             // 4. transfer new token to user
-            // transfer_new_token(block_index).await
-            Ok(())
+            transfer_new_token(block_index).await
         }
         Some(RecoverMode::RetryBurn) => {
             // 3. burn old token
             burn_token(block_index).await?;
             // 4. transfer new token to user
-            // transfer_new_token(block_index).await
-            Ok(())
+            transfer_new_token(block_index).await
         }
         Some(RecoverMode::RetryTransfer) => {
             // 4. transfer new token to user
-            // transfer_new_token(block_index).await
-            Ok(())
+            transfer_new_token(block_index).await
         }
     }
 }
@@ -271,6 +274,61 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
                     .update_status(block_index, SwapStatus::Failed(SwapError::BurnFailed))
             });
             Err(format!("Token burn failed. Message: {msg}"))
+        }
+    }
+}
+
+async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
+    let (amount, ogy_ledger_canister_id, principal) = read_state(|s| {
+        (
+            s.data.token_swap.get_amount(block_index),
+            s.data.canister_ids.ogy_ledger,
+            s.data.token_swap.get_principal(block_index),
+        )
+    });
+    if amount == Tokens::from_e8s(0) {
+        // This was already checked above when the block was analysed but checking again to be sure.
+        return Err("Zero tokens cannot be swap.".to_string());
+    }
+    let args = TransferArg {
+        from_subaccount: None,
+        to: Account {
+            owner: principal.unwrap(), // TODO FIX THIS unwrap()
+            subaccount: None,
+        },
+        amount: Nat::from(amount.e8s()),
+        fee: None,
+        created_at_time: None,
+        memo: Some(MemoIcrc(ByteBuf::from(block_index.to_be_bytes()))),
+    };
+    match icrc1_transfer(ogy_ledger_canister_id, &args).await {
+        Ok(Ok(transfer_block_index)) => {
+            mutate_state(|s| {
+                s.data
+                    .token_swap
+                    .set_swap_block_index(block_index, transfer_block_index);
+                s.data
+                    .token_swap
+                    .update_status(block_index, SwapStatus::Complete);
+            });
+            Ok(())
+        }
+
+        Ok(Err(msg)) => {
+            mutate_state(|s| {
+                s.data
+                    .token_swap
+                    .update_status(block_index, SwapStatus::Failed(SwapError::TransferFailed))
+            });
+            Err(format!("Final token transfer failed. Message: {msg}"))
+        }
+        Err((_, msg)) => {
+            mutate_state(|s| {
+                s.data
+                    .token_swap
+                    .update_status(block_index, SwapStatus::Failed(SwapError::TransferFailed))
+            });
+            Err(format!("Final token transfer failed. Message: {msg}"))
         }
     }
 }

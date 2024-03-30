@@ -28,6 +28,7 @@ icp_ledger_archive_canister_c2c_client = { path = "../../../external_canisters/i
 ledger_utils = { path = "../../../libraries/ledger_utils" }
 num-bigint = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
+serde_bytes = { workspace = true }
 serializer = { path = '../../../libraries/serializer' }
 stable_memory = { path = '../../../libraries/stable_memory' }
 tracing = { workspace = true }

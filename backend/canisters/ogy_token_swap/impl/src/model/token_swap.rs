@@ -3,6 +3,7 @@ use std::collections::BTreeMap;
 use candid::Principal;
 use canister_time::now_millis;
 use ic_ledger_types::{AccountIdentifier, BlockIndex, Tokens};
+use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
 
@@ -94,9 +95,25 @@ impl TokenSwap {
             None => Tokens::from_e8s(0), // this is not possible because it was initialised before
         }
     }
+    pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
+        match self.swap.get(&block_index) {
+            Some(swap_info) => Ok(swap_info.principal.clone()),
+            None => Err(format!("Entry not found for block index {block_index}.")), // this is not possible because it was initialised before
+        }
+    }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
         match self.swap.get_mut(&block_index) {
             Some(entry) => entry.burn_block_index = Some(burn_block_index),
+            None => (), // this is not possible because it was initialised before
+        }
+    }
+    pub fn set_swap_block_index(
+        &mut self,
+        block_index: BlockIndex,
+        swap_block_index: BlockIndexIcrc,
+    ) {
+        match self.swap.get_mut(&block_index) {
+            Some(entry) => entry.token_swap_block_index = Some(swap_block_index),
             None => (), // this is not possible because it was initialised before
         }
     }
@@ -109,6 +126,7 @@ pub struct SwapInfo {
     principal: Principal,
     timestamp: u64,
     burn_block_index: Option<BlockIndex>,
+    token_swap_block_index: Option<BlockIndexIcrc>,
 }
 
 impl SwapInfo {
@@ -119,6 +137,7 @@ impl SwapInfo {
             amount: Tokens::from_e8s(0),
             timestamp: now_millis(),
             burn_block_index: None,
+            token_swap_block_index: None,
         }
     }
 }

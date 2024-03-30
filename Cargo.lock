@@ -665,6 +665,7 @@ dependencies = [
  "ledger_utils",
  "num-bigint",
  "serde",
+ "serde_bytes",
  "serializer",
  "stable_memory",
  "tracing",
