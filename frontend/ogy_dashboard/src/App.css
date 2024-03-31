@@ -8,7 +8,7 @@
 }
 
 .card {
-  background-color: hsla(var(--color-surface), var(--tw-bg-opacity));
+  background-color: rgb(var(--color-surface-default) / var(--tw-bg-opacity));
   border-radius: 0.5rem;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);

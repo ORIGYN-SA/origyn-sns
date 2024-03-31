@@ -26,7 +26,8 @@
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@shared/*": ["shared/*"],
-      "@helpers/*": ["helpers/*"]
+      "@helpers/*": ["helpers/*"],
+      "@theme/*": ["../theme/*"]
     }
   },
   "include": ["src", "theme"],
