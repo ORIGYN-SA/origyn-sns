@@ -1,0 +1,24 @@
+{
+  "dfx": "0.17.0",
+  "__0": "ORIGYN SNS monorepo",
+  "canisters": {
+    "ogy_token_swap": {
+      "build": ["npm run build:back"],
+      "candid": "backend/canisters/ogy_token_swap/api/can.did",
+      "declarations": {
+        "bindings": ["js", "did"],
+        "env_override": null,
+        "output": "backend/canisters/ogy_token_swap/api/declarations"
+      },
+      "package": "ogy_token_swap",
+      "type": "custom",
+      "wasm": "backend/canisters/ogy_token_swap/target/wasm32-unknown-unknown/release/ogy_token_swap_canister.wasm.gz"
+    }
+  },
+  "networks": {
+    "staging": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
+    }
+  }
+}
