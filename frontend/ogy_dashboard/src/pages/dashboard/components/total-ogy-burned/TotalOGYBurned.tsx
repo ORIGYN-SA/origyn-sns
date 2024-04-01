@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import Card from "@components/cards/Card";
 import BarChart from "@components/charts/bar/Bar";
 
 type TotalOGYBurned = {
@@ -5,8 +7,44 @@ type TotalOGYBurned = {
 };
 
 const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
+  const data = useMemo(
+    () => [
+      {
+        name: "27 feb",
+        value: 2000,
+      },
+      {
+        name: "27 mar",
+        value: 1500,
+      },
+      {
+        name: "27 apr",
+        value: 1200,
+      },
+      {
+        name: "27 may",
+        value: 1000,
+      },
+      {
+        name: "27 jun",
+        value: 850,
+      },
+      {
+        name: "27 jul",
+        value: 500,
+      },
+      {
+        name: "27 aug",
+        value: 200,
+      },
+    ],
+    []
+  );
+
+  const barFill = useMemo(() => "#34d399", []);
+
   return (
-    <div className={`${className} card`} {...restProps}>
+    <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-500">
           Total OGY Burned
@@ -21,9 +59,9 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
         <span className="text-gray-500">OGY</span>
       </div>
       <div className="mt-6 h-80 rounded-lg">
-        <BarChart barFill="#34d399" />
+        <BarChart data={data} barFill={barFill} />
       </div>
-    </div>
+    </Card>
   );
 };
 

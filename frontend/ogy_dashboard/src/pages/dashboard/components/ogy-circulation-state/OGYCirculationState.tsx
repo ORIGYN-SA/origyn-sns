@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import Card from "@components/cards/Card";
 import PieChart from "@components/charts/pie/Pie";
 
 type OGYCirculationState = {
@@ -8,8 +10,24 @@ const OGYCirculationState = ({
   className,
   ...restProps
 }: OGYCirculationState) => {
+  const data = useMemo(
+    () => [
+      {
+        name: "OGY not in the hand of the Foundation",
+        value: 6957526202.66,
+      },
+      {
+        name: "OGY locked in the hand of the Foundation",
+        value: 6744999999.98,
+      },
+    ],
+    []
+  );
+
+  const colors = useMemo(() => ["#645eff", "#333089"], []);
+
   return (
-    <div className={`${className} card`} {...restProps}>
+    <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
         <div className="text-lg font-semibold">OGY Circulation State</div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
@@ -18,7 +36,7 @@ const OGYCirculationState = ({
       </div>
 
       <div className="mt-6 h-80 rounded-lg">
-        <PieChart />
+        <PieChart data={data} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">
         <h2 className="text-lg font-semibold text-gray-500">
@@ -30,7 +48,7 @@ const OGYCirculationState = ({
           <span className="text-gray-500">OGY</span>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

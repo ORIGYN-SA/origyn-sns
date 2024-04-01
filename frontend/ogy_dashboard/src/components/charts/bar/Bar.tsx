@@ -22,7 +22,7 @@ type Bar = {
 
 type Data = {
   name: string;
-  value: string;
+  value: number;
 };
 
 type BarChart = {

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import Card from "@components/cards/Card";
 import PieChart from "@components/charts/pie/Pie";
 
 type OrigynFoundationReserve = {
@@ -22,8 +23,10 @@ const OrigynFoundationReserve = ({
     ],
     []
   );
+  const colors = useMemo(() => ["#ff55c5", "#90306f"], []);
+
   return (
-    <div className={`${className} card`} {...restProps}>
+    <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
         <div className="text-lg font-semibold">OGY Foundation Reserve</div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
@@ -32,7 +35,7 @@ const OrigynFoundationReserve = ({
       </div>
 
       <div className="mt-6 h-80 rounded-lg">
-        <PieChart colors={["#ff55c5", "#90306f"]} data={data} />
+        <PieChart data={data} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">
         <div className="flex flex-col items-center my-4">
@@ -46,7 +49,7 @@ const OrigynFoundationReserve = ({
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

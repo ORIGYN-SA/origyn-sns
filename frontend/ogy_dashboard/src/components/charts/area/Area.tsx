@@ -8,11 +8,9 @@ import {
   Tooltip,
 } from "recharts";
 
-// import { colors } from "@theme/preset";
-
 type Data = {
   name: string;
-  value: string;
+  value: number;
 };
 
 type AreaChart = {
@@ -53,25 +51,6 @@ const Area = ({ data, fill }: AreaChart) => {
           fill={`url(#fill${fill})`}
         />
       </AreaChart>
-      {/* <BarChart
-        data={data}
-        margin={{
-          top: 5,
-          right: 5,
-          left: 5,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid vertical={false} strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
-        <YAxis domain={[0, "dataMax + 500"]} />
-        <Legend />
-        <BarRechart
-          dataKey="value"
-          fill={barFill}
-          background={{ fill: barBgFill, radius: barBgRadius }}
-        />
-      </BarChart> */}
     </ResponsiveContainer>
   );
 };
