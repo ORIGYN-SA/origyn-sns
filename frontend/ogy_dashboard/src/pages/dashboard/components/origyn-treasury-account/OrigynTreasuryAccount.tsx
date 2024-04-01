@@ -39,16 +39,16 @@ const OrigynTreasuryAccount = ({
       <div className="text-lg font-semibold">ORIGYN Treasury Account (OTA)</div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {data.map(({ value, token }, index) => (
-          <Card className="bg-background/75 mt-8 pb-8" key={token}>
+          <Card className="bg-surface-2 mt-8 pb-8" key={token}>
             <div className="flex items-center text-lg font-semibold">
               <img src="/vite.svg" alt="OGY Logo" />
-              <span className="ml-2 text-gray-500">
+              <span className="ml-2 text-content/60">
                 Network Revenue ({token})
               </span>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">
               <span className="mr-3">{value}</span>
-              <span className="text-gray-500">{token}</span>
+              <span className="text-content/60">{token}</span>
             </div>
             <Card.BorderBottom
               className={`${borderBottomProps[index].className}`}

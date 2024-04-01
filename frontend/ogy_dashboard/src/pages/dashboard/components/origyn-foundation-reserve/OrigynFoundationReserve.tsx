@@ -39,13 +39,13 @@ const OrigynFoundationReserve = ({
       </div>
       <div className="flex flex-col items-center my-4">
         <div className="flex flex-col items-center my-4">
-          <h2 className="text-lg font-semibold text-gray-500">
+          <h2 className="text-lg font-semibold text-content/60">
             Total Foundation Supply
           </h2>
           <div className="mt-4 flex items-center text-2xl font-semibold">
             <img src="/vite.svg" alt="OGY Logo" />
             <span className="ml-2 mr-3">202 281 245,91</span>
-            <span className="text-gray-500">OGY</span>
+            <span className="text-content/60">OGY</span>
           </div>
         </div>
       </div>

@@ -1,15 +1,14 @@
 export const colors = {
   background: {
-    1: "rgb(var(--color-background-1))",
-    3: "rgb(var(--color-background-3))",
-    DEFAULT: "rgb(var(--color-background-default))",
+    DEFAULT: "rgb(var(--color-background-1))",
   },
   surface: {
     1: "rgb(var(--color-surface-1))",
-    DEFAULT: "rgb(var(--color-surface-default))",
+    2: "rgb(var(--color-surface-2))",
+    DEFAULT: "rgb(var(--color-surface-1))",
   },
   content: {
-    DEFAULT: "rgb(var(--color-content-default))",
+    DEFAULT: "rgb(var(--color-content-1))",
   },
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
@@ -40,7 +39,7 @@ export default {
     },
   },
   plugins: [
-    // require("@tailwindcss/typography"),
-    // require("@tailwindcss/aspect-ratio"),
+    import("@tailwindcss/typography"),
+    import("@tailwindcss/aspect-ratio"),
   ],
 };

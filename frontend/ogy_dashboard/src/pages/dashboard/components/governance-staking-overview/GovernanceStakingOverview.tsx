@@ -57,13 +57,13 @@ const GovernanceStakingOverview = ({
 
       <div className="flex flex-col xl:flex-row mt-8">
         <div className="shrink-0 mr-16 mb-8">
-          <h2 className="mb-2 text-lg font-semibold text-gray-500">
+          <h2 className="mb-2 text-lg font-semibold text-content/60">
             Total Token in Stakes
           </h2>
           <div className="flex items-center text-2xl font-semibold">
             <img src="/vite.svg" alt="OGY Logo" />
             <span className="ml-2 mr-3">10 418 169 376,19</span>
-            <span className="text-gray-500">OGY</span>
+            <span className="text-content/60">OGY</span>
           </div>
         </div>
 

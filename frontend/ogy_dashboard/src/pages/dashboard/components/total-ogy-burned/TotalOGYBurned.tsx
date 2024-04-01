@@ -46,7 +46,7 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-gray-500">
+        <h2 className="text-lg font-semibold text-content/60">
           Total OGY Burned
         </h2>
         <button className="text-sm font-medium rounded-full px-3 py-1">
@@ -56,7 +56,7 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
       <div className="mt-4 flex items-center text-2xl font-semibold">
         <img src="/vite.svg" alt="OGY Logo" />
         <span className="ml-2 mr-3">202 281 245,91</span>
-        <span className="text-gray-500">OGY</span>
+        <span className="text-content/60">OGY</span>
       </div>
       <div className="mt-6 h-80 rounded-lg">
         <BarChart data={data} barFill={barFill} />

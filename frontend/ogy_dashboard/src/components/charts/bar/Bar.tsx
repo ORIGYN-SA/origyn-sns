@@ -7,7 +7,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
 import { colors } from "@theme/preset";
 
 type BarColor = {
@@ -90,7 +89,7 @@ Bar.defaultProps = {
     },
   ],
   barFill: "#38bdf8",
-  barBgFill: colors.background["1"],
+  barBgFill: colors.surface["2"],
   barBgRadius: [50, 50, 0, 0],
 };
 
