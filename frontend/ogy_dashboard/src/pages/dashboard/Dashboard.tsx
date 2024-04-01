@@ -3,6 +3,7 @@ import TotalOGYBurned from "@pages/dashboard/components/total-ogy-burned/TotalOG
 import OGYCirculationState from "@pages/dashboard/components/ogy-circulation-state/OGYCirculationState";
 import OrigynFoundationReserve from "@pages/dashboard/components/origyn-foundation-reserve/OrigynFoundationReserve";
 import GovernanceStakingOverview from "@pages/dashboard/components/governance-staking-overview/GovernanceStakingOverview";
+import OrigynTreasuryAccount from "@pages/dashboard/components/origyn-treasury-account/OrigynTreasuryAccount";
 
 const Dashboard = () => {
   return (
@@ -27,6 +28,7 @@ const Dashboard = () => {
           <OGYCirculationState className="w-full" />
           <OrigynFoundationReserve className="w-full" />
           <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" />
+          <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
         </div>
       </div>
     </div>
