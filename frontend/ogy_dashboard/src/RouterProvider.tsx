@@ -16,11 +16,15 @@ const router = createBrowserRouter([
         index: true,
         element: <Dashboard />,
       },
-      //   {
-      //     path: "about",
-      //     // Single route in lazy file
-      //     lazy: () => import("./pages/About"),
-      //   },
+      {
+        path: "governance",
+        async lazy() {
+          const { GovernanceLoader, Governance } = await import(
+            "@pages/governance/Governance"
+          );
+          return { loader: GovernanceLoader, Component: Governance };
+        },
+      },
       //   {
       //     path: "dashboard",
       //     async lazy() {
