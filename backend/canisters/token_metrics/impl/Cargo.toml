@@ -1,5 +1,5 @@
 [package]
-name = "ogy_token_swap"
+name = "token_metrics"
 version = "0.1.0"
 description = "Canister to swap legacy OGY token to new OGY token."
 edition = "2021"

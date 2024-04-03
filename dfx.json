@@ -2,9 +2,9 @@
   "dfx": "0.17.0",
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
-    "ogy_token_swap": {
-      "candid": "backend/canisters/ogy_token_swap/api/can.did",
-      "package": "ogy_token_swap",
+    "token_metrics": {
+      "candid": "backend/canisters/token_metrics/api/can.did",
+      "package": "token_metrics",
       "type": "rust"
     }
   },

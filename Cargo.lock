@@ -579,35 +579,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ogy_token_swap"
-version = "0.1.0"
-dependencies = [
- "candid",
- "canister_logger",
- "canister_state_macros",
- "canister_time",
- "canister_tracing_macros",
- "futures",
- "http_request",
- "ic-cdk",
- "ic-cdk-macros",
- "ic-cdk-timers",
- "ic-ledger-types",
- "ic-stable-structures",
- "icrc-ledger-types",
- "icrc_ledger_canister_c2c_client",
- "num-bigint",
- "serde",
- "serializer",
- "sns_governance_canister",
- "sns_governance_canister_c2c_client",
- "stable_memory",
- "tracing",
- "types",
- "utils",
-]
-
-[[package]]
 name = "once_cell"
 version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -907,6 +878,35 @@ checksum = "8b9ef9bad013ada3808854ceac7b46812a6465ba368859a37e2100283d2d719c"
 dependencies = [
  "cfg-if",
  "once_cell",
+]
+
+[[package]]
+name = "token_metrics"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "http_request",
+ "ic-cdk",
+ "ic-cdk-macros",
+ "ic-cdk-timers",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "num-bigint",
+ "serde",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "tracing",
+ "types",
+ "utils",
 ]
 
 [[package]]

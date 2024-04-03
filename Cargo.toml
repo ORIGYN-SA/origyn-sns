@@ -1,6 +1,6 @@
 [workspace]
 members = [
-  "backend/canisters/ogy_token_swap/impl",
+  "backend/canisters/token_metrics/impl",
   "backend/external_canisters/sns_governance/api",
   "backend/external_canisters/sns_governance/c2c_client",
   "backend/external_canisters/icrc_ledger/api",
