@@ -1,0 +1,29 @@
+type Args = record { test_mode : bool };
+type HttpRequest = record {
+  url : text;
+  method : text;
+  body : blob;
+  headers : vec record { text; text };
+};
+type HttpResponse = record {
+  body : blob;
+  headers : vec record { text; text };
+  streaming_strategy : opt StreamingStrategy;
+  status_code : nat16;
+};
+type StreamingStrategy = variant {
+  Callback : record {
+    token : Token;
+    callback : func (Token) -> (HttpResponse) query;
+  };
+};
+type Token = record {
+  key : text;
+  sha256 : opt blob;
+  index : nat;
+  content_encoding : text;
+};
+service : (Args) -> {
+  __get_candid_interface_tmp_hack : () -> (text) query;
+  http_request : (HttpRequest) -> (HttpResponse) query;
+}

@@ -30,6 +30,8 @@ impl RuntimeState {
                 memory_used: MemorySize::used(),
                 cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
             },
+            sync_info: self.data.sync_info,
+            sns_governance_canister: self.data.sns_governance_canister,
         }
     }
 
@@ -42,6 +44,8 @@ impl RuntimeState {
 #[derive(CandidType, Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,
+    pub sns_governance_canister: Principal,
+    pub sync_info: SyncInfo,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -63,12 +67,18 @@ pub struct SyncInfo {
 pub struct Data {
     /// authorized Principals for guarded calls
     pub authorized_principals: Vec<Principal>,
+    /// SNS governance cansiter
+    pub sns_governance_canister: Principal,
+    /// Information about governance neurons sync
+    pub sync_info: SyncInfo,
 }
 
 impl Default for Data {
     fn default() -> Self {
         Self {
+            sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
+            sync_info: SyncInfo::default(),
         }
     }
 }
