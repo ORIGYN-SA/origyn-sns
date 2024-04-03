@@ -26,4 +26,5 @@ type Token = record {
 service : (Args) -> {
   __get_candid_interface_tmp_hack : () -> (text) query;
   http_request : (HttpRequest) -> (HttpResponse) query;
+  run_gov_job : () -> (text) query;
 }

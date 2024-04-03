@@ -1,6 +1,6 @@
-cargo build --target wasm32-unknown-unknown --target-dir ./target --release --locked -p ogy_token_swap
+cargo build --target wasm32-unknown-unknown --target-dir ./target --release --locked -p token_metrics
 
-defaultpath="backend/canisters/ogy_token_swap/api"
+defaultpath="backend/canisters/token_metrics/api"
 did_path="${outpath:-$defaultpath}"
 
-candid-extractor "target/wasm32-unknown-unknown/release/ogy_token_swap.wasm" > $did_path/can.did
+candid-extractor "target/wasm32-unknown-unknown/release/token_metrics.wasm" > $did_path/can.did

@@ -1,7 +1,7 @@
 use canister_time::{now_millis, run_now_then_interval, DAY_IN_MS};
 use sns_governance_canister::types::{ListNeuronsResponse, Neuron};
 use std::time::Duration;
-use tracing::{debug, error, info};
+use tracing::{debug, error, field::debug, info};
 use types::Milliseconds;
 
 use crate::state::{mutate_state, read_state, RuntimeState};
@@ -9,6 +9,7 @@ use crate::state::{mutate_state, read_state, RuntimeState};
 const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
 pub fn start_job() {
+    debug!("Starting the governance sync job..");
     run_now_then_interval(Duration::from_millis(10_000), run)
 }
 
@@ -17,6 +18,7 @@ pub fn run() {
 }
 
 pub async fn sync_neurons_data() {
+    info!("sync_neurons_data..");
     let canister_id = read_state(|state| state.data.sns_governance_canister);
 
     mutate_state(|state| {
@@ -39,9 +41,9 @@ pub async fn sync_neurons_data() {
             Ok(response) => {
                 // Mutate the state to update the principal with governance data
                 mutate_state(|state| {
-                    debug!("Updating neurons");
+                    info!("Updating neurons");
                     response.neurons.iter().for_each(|neuron| {
-                        debug!("{:?}", neuron);
+                        info!("{:?}", neuron);
                         // update_principal_neuron_mapping(state, neuron);
                         // update_neuron_maturity(state, neuron);
                     });
