@@ -75,7 +75,7 @@ impl TokenSwap {
                     }
                     SwapError::BurnFailed(_) => Ok(Some(RecoverMode::RetryBurn)),
                     SwapError::TransferFailed(_) => Ok(Some(RecoverMode::RetryTransfer)),
-                    SwapError::UnexpectedError(reason) => Err(format!("Previous execution ended with an unexpected error. Blocking any further execution as this indicates corrupted data. Reason: {reason}"))
+                    SwapError::UnexpectedError(reason) => Err(format!("Previous execution ended with an unexpected error. Blocking any further execution as this indicates corrupted data. Reason: {reason:?}"))
                 },
                 _ => Err("Swap already running.".to_string()),
             },
@@ -193,7 +193,7 @@ pub enum TransferFailReason {
     CallError(String),
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum ImpossibleErrorReason {
     PrincipalNotFound,
     AmountNotFound,
