@@ -7,7 +7,7 @@ use crate::{
 };
 use candid::{CandidType, Nat, Principal};
 use canister_tracing_macros::trace;
-use ic_cdk::{api, update};
+use ic_cdk::update;
 use ic_ledger_types::{
     query_archived_blocks, query_blocks, transfer, ArchivedBlockRange, Block, BlockIndex,
     GetBlocksArgs, Memo, Operation, Subaccount, Tokens, TransferArgs,
@@ -20,7 +20,7 @@ use icrc_ledger_types::icrc1::{
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
 use serde_bytes::ByteBuf;
-use utils::consts::E8S_FEE_OGY;
+use utils::{consts::E8S_FEE_OGY, env::Environment};
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub enum SwapTokensResponse {
@@ -37,9 +37,10 @@ pub struct SwapTokensRequest {
 #[trace]
 #[update]
 pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
+    let caller = read_state(|s| s.env.caller());
     let user = match args.user {
         Some(p) => p,
-        None => api::caller(),
+        None => caller,
     };
     match swap_tokens_impl(args.block_index, user).await {
         Ok(_) => SwapTokensResponse::Success,
@@ -134,8 +135,10 @@ pub fn verify_block_data(
             fee: _,
         }) => {
             let expected_subaccount = Subaccount::from(principal);
-            let expected_account_id =
-                principal_to_legacy_account_id(api::id(), Some(expected_subaccount));
+            let expected_account_id = principal_to_legacy_account_id(
+                read_state(|s| s.env.canister_id()),
+                Some(expected_subaccount),
+            );
             if to != expected_account_id {
                 // The tokens have to have been sent to the swap canister with a subaccount that is equal to the
                 // sending principal
