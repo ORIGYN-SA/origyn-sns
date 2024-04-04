@@ -7,6 +7,13 @@ import Layout from "@components/Layout";
 import NotFound from "@components/NotFound";
 import Dashboard from "@pages/dashboard/Dashboard";
 
+const { GovernanceLoader, Governance } = await import(
+  "@pages/governance/Governance"
+);
+const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+  "@pages/governance/components/neurons/details/Details"
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,24 +28,58 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            async lazy() {
-              const { GovernanceLoader, Governance } = await import(
-                "@pages/governance/Governance"
-              );
-              return { loader: GovernanceLoader, Component: Governance };
-            },
+            loader: GovernanceLoader,
+            element: <Governance />,
+            // async lazy() {
+            //   const { GovernanceLoader, Governance } = await import(
+            //     "@pages/governance/Governance"
+            //   );
+            //   return { loader: GovernanceLoader, Component: Governance };
+            // },
           },
           {
-            path: "neurons",
-            async lazy() {
-              const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-                "@pages/governance/components/neurons/details/Details"
-              );
-              return {
-                loader: NeuronsDetailsLoader,
-                Component: NeuronsDetails,
-              };
-            },
+            path: "neurons/details",
+            loader: NeuronsDetailsLoader,
+            element: <NeuronsDetails />,
+            // async lazy() {
+            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+            //     "@pages/governance/components/neurons/details/Details"
+            //   );
+            //   return {
+            //     loader: NeuronsDetailsLoader,
+            //     Component: NeuronsDetails,
+            //   };
+            // },
+          },
+        ],
+      },
+      {
+        path: "proposals",
+        children: [
+          {
+            index: true,
+            loader: GovernanceLoader,
+            element: <Governance />,
+            // async lazy() {
+            //   const { GovernanceLoader, Governance } = await import(
+            //     "@pages/governance/Governance"
+            //   );
+            //   return { loader: GovernanceLoader, Component: Governance };
+            // },
+          },
+          {
+            path: "neurons/details",
+            loader: NeuronsDetailsLoader,
+            element: <NeuronsDetails />,
+            // async lazy() {
+            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+            //     "@pages/governance/components/neurons/details/Details"
+            //   );
+            //   return {
+            //     loader: NeuronsDetailsLoader,
+            //     Component: NeuronsDetails,
+            //   };
+            // },
           },
         ],
       },
