@@ -1,10 +1,9 @@
-// import { useState } from "react";
 import "./App.css";
 
 import RouterProvider from "./RouterProvider";
 
-function App() {
+const App = () => {
   return <RouterProvider />;
-}
+};
 
 export default App;

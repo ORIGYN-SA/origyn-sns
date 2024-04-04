@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Card from "@components/cards/Card";
+import Card from "@components/ui/Card";
 import PieChart from "@components/charts/pie/Pie";
 
 type OGYCirculationState = {
