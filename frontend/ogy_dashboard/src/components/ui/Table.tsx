@@ -7,7 +7,7 @@ import {
   PaginationState,
   OnChangeFn,
 } from "@tanstack/react-table";
-import Select from "@components/select/Select";
+import { Select } from "@components/ui";
 
 interface ReactTableProps<T extends object> {
   data: T[];

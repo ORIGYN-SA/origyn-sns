@@ -1,10 +1,24 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { useCallback } from "react";
+import type { Location, useMatches } from "react-router-dom";
+import { ScrollRestoration, Outlet, useNavigation } from "react-router-dom";
 
 import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/footer/Footer";
 
 const Layout = () => {
   const navigation = useNavigation();
+
+  const getKey = useCallback(
+    (location: Location, matches: ReturnType<typeof useMatches>) => {
+      let match = matches.find((m) => (m.handle as any)?.scrollMode);
+      if ((match?.handle as any)?.scrollMode === "pathname") {
+        return location.pathname;
+      }
+
+      return location.key;
+    },
+    []
+  );
 
   return (
     <div className="flex flex-col h-screen">
@@ -15,6 +29,7 @@ const Layout = () => {
       <div className="flex-grow">
         <Outlet />
       </div>
+      <ScrollRestoration getKey={getKey} />
       <Footer />
     </div>
   );

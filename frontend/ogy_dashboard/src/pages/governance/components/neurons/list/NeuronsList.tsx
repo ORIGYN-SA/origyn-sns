@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { PaginationState, ColumnDef } from "@tanstack/react-table";
-import Table from "@components/table/Table";
+import { Table } from "@components/ui";
 
 import { fetchData, Neuron } from "./fetchData.dev";
 
@@ -87,7 +87,7 @@ const NeuronsList = () => {
 
   const handleClickView = (cell) => {
     navigate({
-      pathname: "neurons",
+      pathname: "neurons/details",
       search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
     });
   };
