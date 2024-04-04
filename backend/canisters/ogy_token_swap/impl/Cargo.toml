@@ -23,8 +23,6 @@ ic-stable-structures = { workspace = true }
 icrc-ledger-types = { workspace = true }
 icrc_ledger_canister_c2c_client = { path = "../../../external_canisters/icrc_ledger/c2c_client" }
 ic-ledger-types = { workspace = true }
-icp_ledger_canister_c2c_client = { path = "../../../external_canisters/icp_ledger/c2c_client" }
-icp_ledger_archive_canister_c2c_client = { path = "../../../external_canisters/icp_ledger_archive/c2c_client" }
 ledger_utils = { path = "../../../libraries/ledger_utils" }
 num-bigint = { workspace = true }
 serde = { workspace = true, features = ["derive"] }

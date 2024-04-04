@@ -470,48 +470,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "icp_ledger_archive_canister"
-version = "0.1.0"
-dependencies = [
- "candid",
- "candid_gen",
- "ic-ledger-types",
- "serde",
-]
-
-[[package]]
-name = "icp_ledger_archive_canister_c2c_client"
-version = "0.1.0"
-dependencies = [
- "candid",
- "canister_client",
- "ic-cdk",
- "icp_ledger_archive_canister",
- "types",
-]
-
-[[package]]
-name = "icp_ledger_canister"
-version = "0.1.0"
-dependencies = [
- "candid",
- "candid_gen",
- "ic-ledger-types",
- "serde",
-]
-
-[[package]]
-name = "icp_ledger_canister_c2c_client"
-version = "0.1.0"
-dependencies = [
- "candid",
- "canister_client",
- "ic-cdk",
- "icp_ledger_canister",
- "types",
-]
-
-[[package]]
 name = "icrc-ledger-types"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -574,7 +532,6 @@ version = "0.1.0"
 dependencies = [
  "candid",
  "ic-ledger-types",
- "icp_ledger_canister_c2c_client",
  "icrc-ledger-types",
  "icrc_ledger_canister_c2c_client",
  "serde",
@@ -658,8 +615,6 @@ dependencies = [
  "ic-cdk-timers",
  "ic-ledger-types",
  "ic-stable-structures",
- "icp_ledger_archive_canister_c2c_client",
- "icp_ledger_canister_c2c_client",
  "icrc-ledger-types",
  "icrc_ledger_canister_c2c_client",
  "ledger_utils",
