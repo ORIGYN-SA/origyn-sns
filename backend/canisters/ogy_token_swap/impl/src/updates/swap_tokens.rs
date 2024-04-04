@@ -381,3 +381,165 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use candid::Principal;
+    use ic_ledger_types::{
+        AccountIdentifier, Block, BlockIndex, Memo, Operation, Subaccount, Timestamp, Tokens,
+        Transaction, DEFAULT_SUBACCOUNT,
+    };
+    use ledger_utils::principal_to_legacy_account_id;
+    use utils::{
+        consts::{E8S_FEE_OGY, E8S_PER_OGY},
+        env::CanisterEnv,
+    };
+
+    use crate::state::{init_state, mutate_state, Data, RuntimeState};
+
+    use super::verify_block_data;
+
+    const OGY_SWAP_CANISTER_ID: Principal = Principal::anonymous(); // on non-wasm architecture, id() of canister is not available
+    const DUMMY_USER: &str = "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae";
+
+    #[test]
+    fn test_verify_block_valid() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::from_text(DUMMY_USER).unwrap();
+        init_swap(block_index, principal);
+
+        let block = dummy_block();
+
+        let result = verify_block_data(&block, block_index, principal);
+        let expected_result = Ok(());
+
+        assert_eq!(expected_result, result)
+    }
+    #[test]
+    fn test_verify_block_wrong_recipient() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::anonymous();
+        init_swap(block_index, principal);
+
+        let block = dummy_block();
+
+        let result = verify_block_data(&block, block_index, principal);
+        let expected_account_id =
+            principal_to_legacy_account_id(OGY_SWAP_CANISTER_ID, Some(Subaccount::from(principal)));
+        let to = principal_to_legacy_account_id(
+            OGY_SWAP_CANISTER_ID,
+            Some(Subaccount::from(Principal::from_text(DUMMY_USER).unwrap())),
+        );
+        let expected_result = Err(format!("Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"));
+
+        assert_eq!(expected_result, result)
+    }
+    #[test]
+    fn test_verify_block_wrong_sender() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::from_text(DUMMY_USER).unwrap();
+        init_swap(block_index, principal);
+
+        let mut block = dummy_block();
+        if let Some(Operation::Transfer { ref mut from, .. }) = block.transaction.operation {
+            *from = principal_to_legacy_account_id(principal, Some(Subaccount([1; 32])));
+        }
+
+        let result = verify_block_data(&block, block_index, principal);
+
+        let expected_result = Err(format!(
+            "Sending account is not default subaccount of principal {principal}."
+        ));
+
+        assert_eq!(expected_result, result)
+    }
+    #[test]
+    fn test_verify_block_amount_zero() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::from_text(DUMMY_USER).unwrap();
+        init_swap(block_index, principal);
+
+        let mut block = dummy_block();
+        if let Some(Operation::Transfer { ref mut amount, .. }) = block.transaction.operation {
+            *amount = Tokens::from_e8s(0u64);
+        }
+
+        let result = verify_block_data(&block, block_index, principal);
+
+        let expected_result = Err(format!("Number of tokens in block is zero."));
+
+        assert_eq!(expected_result, result)
+    }
+    #[test]
+    fn test_verify_block_invalid_operation() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::from_text(DUMMY_USER).unwrap();
+        init_swap(block_index, principal);
+
+        let mut block = dummy_block();
+        block.transaction.operation = Some(Operation::Mint {
+            to: dummy_account(),
+            amount: Tokens::from_e8s(100_000_000),
+        });
+
+        let result = verify_block_data(&block, block_index, principal);
+
+        let expected_result = Err(format!("Operation in block is not a valid transfer."));
+
+        assert_eq!(expected_result, result)
+    }
+
+    fn dummy_block() -> Block {
+        let user: Principal = Principal::from_text(DUMMY_USER).unwrap();
+        let from = AccountIdentifier::new(&user, &DEFAULT_SUBACCOUNT);
+        let to = AccountIdentifier::new(&OGY_SWAP_CANISTER_ID, &Subaccount::from(user));
+        let amount = Tokens::from_e8s(1 * E8S_PER_OGY);
+        Block {
+            transaction: Transaction {
+                memo: Memo(0u64),
+                operation: Some(Operation::Transfer {
+                    from,
+                    to,
+                    amount,
+                    fee: Tokens::from_e8s(E8S_FEE_OGY),
+                }),
+                created_at_time: Timestamp { timestamp_nanos: 0 },
+                icrc1_memo: None,
+            },
+            timestamp: Timestamp {
+                timestamp_nanos: 1_711_037_458_268_430_767,
+            },
+            parent_hash: None,
+        }
+    }
+
+    fn dummy_account() -> AccountIdentifier {
+        AccountIdentifier::new(
+            &Principal::from_text(DUMMY_USER).unwrap(),
+            &DEFAULT_SUBACCOUNT,
+        )
+    }
+
+    fn init_canister_state() {
+        let env = CanisterEnv::new(false);
+        let data = Data::default();
+
+        let runtime_state = RuntimeState::new(env, data);
+
+        init_state(runtime_state);
+    }
+
+    fn init_swap(block_index: BlockIndex, principal: Principal) {
+        let _ = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal));
+    }
+}
