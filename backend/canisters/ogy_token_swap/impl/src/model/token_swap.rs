@@ -2,8 +2,10 @@ use std::collections::BTreeMap;
 
 use candid::Principal;
 use canister_time::now_millis;
-use ic_ledger_types::{AccountIdentifier, BlockIndex, Tokens};
-use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
+use ic_ledger_types::{AccountIdentifier, BlockIndex, Subaccount, Tokens, TransferError};
+use icrc_ledger_types::icrc1::transfer::{
+    BlockIndex as BlockIndexIcrc, TransferError as TransferErrorIcrc,
+};
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
 
@@ -29,24 +31,31 @@ impl TokenSwap {
                                 // a block index that was higher than the latest one. To avoid blocking the proper
                                 // execution of this block in the future, it will be recovered here.
                                 self.swap.insert(block_index, SwapInfo::init(principal));
-                                Ok(None)
+                                Ok(Some(RecoverMode::RetryBlockValidation))
                             }
                             BlockFailReason::QueryRequestFailed => {
                                 // The previous attempt to request the info for this block failed on a higher level.
                                 // Let's try again.
-                                Ok(None)
+                                Ok(Some(RecoverMode::RetryBlockValidation))
                             }
-                            BlockFailReason::ReceiverNotSwapCanister => {
-                                // If this block is not sending tokens to the swap canister, it never will.
-                                // So there is not reason to retry checking this block.
-                                Err(format!("Block is not a valid swap block. The receiver of the token transfer is not the swap canister."))
+                            BlockFailReason::ReceiverNotCorrectAccountId(subaccount) => {
+                                // If the account id was wrong in the previous block that was checked, it could be
+                                // that the wrong principal was provided as a subaccount.
+                                // Check if new subaccount (principal) was provided and retry block validation if yes.
+                                // Otherwise skip.
+                                if *subaccount != Subaccount::from(principal) {
+                                    self.swap.insert(block_index, SwapInfo::init(principal));
+                                    Ok(Some(RecoverMode::RetryBlockValidation))
+                                } else {
+                                    Err(format!("Block is not a valid swap block and no new principal was provided. Not attempting a retry. Principal {principal}"))
+                                }
                             }
                             BlockFailReason::SenderNotPrincipalDefaultSubaccount(account_id) => {
                                 // Only if the new request is made with a different principal, there is a chance
                                 // that the account_id is valid this time and we retry.
                                 if *account_id != principal_to_legacy_account_id(principal, None) {
                                     self.swap.insert(block_index, SwapInfo::init(principal));
-                                    Ok(None)
+                                    Ok(Some(RecoverMode::RetryBlockValidation))
                                 } else {
                                     Err("Account id in block is not the default subaccount of the requesting principal.".to_string())
                                 }
@@ -64,8 +73,9 @@ impl TokenSwap {
                             }
                         }
                     }
-                    SwapError::BurnFailed => Ok(Some(RecoverMode::RetryBurn)),
-                    SwapError::TransferFailed => Ok(Some(RecoverMode::RetryTransfer)),
+                    SwapError::BurnFailed(_) => Ok(Some(RecoverMode::RetryBurn)),
+                    SwapError::TransferFailed(_) => Ok(Some(RecoverMode::RetryTransfer)),
+                    SwapError::UnexpectedError(reason) => Err(format!("Previous execution ended with an unexpected error. Blocking any further execution as this indicates corrupted data. Reason: {reason}"))
                 },
                 _ => Err("Swap already running.".to_string()),
             },
@@ -98,7 +108,9 @@ impl TokenSwap {
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
         match self.swap.get(&block_index) {
             Some(swap_info) => Ok(swap_info.principal.clone()),
-            None => Err(format!("Entry not found for block index {block_index}.")), // this is not possible because it was initialised before
+            None => Err(format!(
+                "No principal entry not found for block index {block_index}."
+            )), // this is not possible because it was initialised before but validating here in any case
         }
     }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
@@ -154,8 +166,9 @@ pub enum SwapStatus {
 #[derive(Serialize, Deserialize)]
 pub enum SwapError {
     BlockFailed(BlockFailReason),
-    BurnFailed,
-    TransferFailed,
+    BurnFailed(BurnFailReason),
+    TransferFailed(TransferFailReason),
+    UnexpectedError(ImpossibleErrorReason),
 }
 
 #[derive(Serialize, Deserialize)]
@@ -163,13 +176,31 @@ pub enum BlockFailReason {
     InvalidOperation,
     NotFound,
     QueryRequestFailed,
-    ReceiverNotSwapCanister,
+    ReceiverNotCorrectAccountId(Subaccount),
     SenderNotPrincipalDefaultSubaccount(AccountIdentifier),
     ZeroAmount,
 }
 
+#[derive(Serialize, Deserialize)]
+pub enum BurnFailReason {
+    TransferError(TransferError),
+    CallError(String),
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum TransferFailReason {
+    TransferError(TransferErrorIcrc),
+    CallError(String),
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum ImpossibleErrorReason {
+    PrincipalNotFound,
+    AmountNotFound,
+}
+
 pub enum RecoverMode {
     RetryBurn,
-    // RetryQueryBlock,
+    RetryBlockValidation,
     RetryTransfer,
 }

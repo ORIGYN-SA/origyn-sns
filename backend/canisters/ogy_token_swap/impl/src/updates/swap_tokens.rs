@@ -1,5 +1,8 @@
 use crate::{
-    model::token_swap::{BlockFailReason, RecoverMode, SwapError, SwapStatus},
+    model::token_swap::{
+        BlockFailReason, BurnFailReason, ImpossibleErrorReason, RecoverMode, SwapError, SwapStatus,
+        TransferFailReason,
+    },
     state::{mutate_state, read_state},
 };
 use candid::{CandidType, Nat, Principal};
@@ -7,7 +10,7 @@ use canister_tracing_macros::trace;
 use ic_cdk::{api, update};
 use ic_ledger_types::{
     query_archived_blocks, query_blocks, transfer, ArchivedBlockRange, Block, BlockIndex,
-    GetBlocksArgs, Memo, Operation, Tokens, TransferArgs,
+    GetBlocksArgs, Memo, Operation, Subaccount, Tokens, TransferArgs,
 };
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
 use icrc_ledger_types::icrc1::{
@@ -51,7 +54,7 @@ pub(crate) async fn swap_tokens_impl(
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
     match recover_mode {
-        None => {
+        None | Some(RecoverMode::RetryBlockValidation) => {
             // 2. validate block data
             validate_block(block_index, principal).await?;
             // 3. burn old token
@@ -130,17 +133,21 @@ pub fn analyse_block_data(
             amount,
             fee: _,
         }) => {
-            if to != principal_to_legacy_account_id(api::id(), None) {
-                // The tokens have to have been sent to the swap canister
+            let expected_subaccount = Subaccount::from(principal);
+            let expected_account_id =
+                principal_to_legacy_account_id(api::id(), Some(expected_subaccount));
+            if to != expected_account_id {
+                // The tokens have to have been sent to the swap canister with a subaccount that is equal to the
+                // sending principal
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
                         SwapStatus::Failed(SwapError::BlockFailed(
-                            BlockFailReason::ReceiverNotSwapCanister,
+                            BlockFailReason::ReceiverNotCorrectAccountId(expected_subaccount),
                         )),
                     )
                 });
-                return Err(format!("Receiving account {to} is not swap canister."));
+                return Err(format!("Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"));
             } else if from != principal_to_legacy_account_id(principal, None) {
                 // The tokens have to have been sent from the default subaccount of the defined principal
                 mutate_state(|s| {
@@ -228,13 +235,31 @@ async fn process_archive_block(
 }
 
 async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
-    let (amount, ogy_legacy_ledger_canister_id, ogy_legacy_minting_account) = read_state(|s| {
-        (
-            s.data.token_swap.get_amount(block_index),
-            s.data.canister_ids.ogy_legacy_ledger,
-            s.data.minting_account,
-        )
-    });
+    let (amount, principal_result, ogy_legacy_ledger_canister_id, ogy_legacy_minting_account) =
+        read_state(|s| {
+            (
+                s.data.token_swap.get_amount(block_index),
+                s.data.token_swap.get_principal(block_index),
+                s.data.canister_ids.ogy_legacy_ledger,
+                s.data.minting_account,
+            )
+        });
+    let principal: Principal = match principal_result {
+        Ok(p) => Ok(p),
+        Err(_) => {
+            mutate_state(|s| {
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::UnexpectedError(
+                        ImpossibleErrorReason::PrincipalNotFound,
+                    )),
+                );
+            });
+            return Err(format!(
+                "Principal not found in internal token_swap list for block {block_index}."
+            ));
+        }
+    }?;
     if amount == Tokens::from_e8s(0) {
         // This was already checked above when the block was analysed but checking again to be sure.
         return Err("Zero tokens cannot be swap.".to_string());
@@ -244,7 +269,7 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
         to: ogy_legacy_minting_account,
         amount,
         fee: Tokens::from_e8s(E8S_FEE_OGY),
-        from_subaccount: None,
+        from_subaccount: Some(Subaccount::from(principal)),
         created_at_time: None,
     };
     match transfer(ogy_legacy_ledger_canister_id, args).await {
@@ -261,31 +286,42 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
         }
         Ok(Err(msg)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::Failed(SwapError::BurnFailed))
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::BurnFailed(BurnFailReason::TransferError(
+                        msg.clone(),
+                    ))),
+                )
             });
-            Err(format!("Token burn failed. Message: {msg}"))
+            Err(format!(
+                "Token burn failed due to transfer error. Message: {msg}"
+            ))
         }
         Err((_, msg)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::Failed(SwapError::BurnFailed))
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::BurnFailed(BurnFailReason::CallError(
+                        msg.clone(),
+                    ))),
+                )
             });
-            Err(format!("Token burn failed. Message: {msg}"))
+            Err(format!(
+                "Token burn failed due to call error. Message: {msg}"
+            ))
         }
     }
 }
 
 async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
-    let (amount, ogy_ledger_canister_id, principal) = read_state(|s| {
+    let (amount, ogy_ledger_canister_id, principal_result) = read_state(|s| {
         (
             s.data.token_swap.get_amount(block_index),
-            s.data.canister_ids.ogy_ledger,
+            s.data.canister_ids.ogy_new_ledger,
             s.data.token_swap.get_principal(block_index),
         )
     });
+    let principal = principal_result?;
     if amount == Tokens::from_e8s(0) {
         // This was already checked above when the block was analysed but checking again to be sure.
         return Err("Zero tokens cannot be swap.".to_string());
@@ -293,7 +329,7 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
     let args = TransferArg {
         from_subaccount: None,
         to: Account {
-            owner: principal.unwrap(), // TODO FIX THIS unwrap()
+            owner: principal,
             subaccount: None,
         },
         amount: Nat::from(amount.e8s()),
@@ -316,19 +352,29 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
 
         Ok(Err(msg)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::Failed(SwapError::TransferFailed))
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::TransferFailed(
+                        TransferFailReason::TransferError(msg.clone()),
+                    )),
+                )
             });
-            Err(format!("Final token transfer failed. Message: {msg}"))
+            Err(format!(
+                "Final token transfer failed due to transfer error. Message: {msg}"
+            ))
         }
         Err((_, msg)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::Failed(SwapError::TransferFailed))
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::TransferFailed(TransferFailReason::CallError(
+                        msg.clone(),
+                    ))),
+                )
             });
-            Err(format!("Final token transfer failed. Message: {msg}"))
+            Err(format!(
+                "Final token transfer failed due to call error. Message: {msg}"
+            ))
         }
     }
 }

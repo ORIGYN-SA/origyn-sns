@@ -13,10 +13,10 @@ pub const OGY_LEGACY_LEDGER_CANISTER_ID_STAGING: CanisterId =
 // production constants
 pub const OGY_LEDGER_CANISTER_ID: CanisterId =
     Principal::from_slice(&[0, 0, 0, 0, 1, 32, 0, 185, 1, 1]);
-pub const OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID: CanisterId =
-    Principal::from_slice(&[0, 0, 0, 0, 1, 32, 24, 17, 1, 1]);
 pub const OGY_LEGACY_LEDGER_CANISTER_ID: CanisterId =
     Principal::from_slice(&[0, 0, 0, 0, 1, 32, 0, 185, 1, 1]);
+pub const OGY_LEGACY_MINTING_CANISTER_ID: CanisterId =
+    Principal::from_slice(&[0, 0, 0, 0, 1, 32, 0, 220, 1, 1]);
 pub const SNS_GOVERNANCE_CANISTER_ID: CanisterId =
     Principal::from_slice(&[0, 0, 0, 0, 2, 0, 0, 125, 1, 1]);
 
@@ -46,11 +46,12 @@ mod tests {
             Principal::from_text("jwcfb-hyaaa-aaaaj-aac4q-cai").unwrap()
         )
     }
+
     #[test]
-    fn ogy_legacy_ledger_archive_canister_id() {
+    fn ogy_legacy_minting_canister_id() {
         assert_eq!(
-            OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID,
-            Principal::from_text("b5bcg-nyaaa-aaaaj-adaiq-cai").unwrap()
+            OGY_LEGACY_MINTING_CANISTER_ID,
+            Principal::from_text("aomfs-vaaaa-aaaaj-aadoa-cai").unwrap()
         )
     }
     #[test]

@@ -4,10 +4,7 @@ use ic_ledger_types::{AccountIdentifier, Subaccount};
 use serde::{Deserialize, Serialize};
 use types::TimestampMillis;
 use utils::{
-    consts::{
-        OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID,
-        OGY_LEGACY_LEDGER_CANISTER_ID, SNS_GOVERNANCE_CANISTER_ID,
-    },
+    consts::{OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_CANISTER_ID, SNS_GOVERNANCE_CANISTER_ID},
     env::{CanisterEnv, Environment},
     memory::MemorySize,
 };
@@ -86,17 +83,15 @@ impl Default for Data {
 
 #[derive(Serialize, Deserialize)]
 pub struct CanisterIds {
-    pub ogy_ledger: Principal,
+    pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
-    pub ogy_legacy_ledger_archive: Principal,
 }
 
 impl Default for CanisterIds {
     fn default() -> Self {
         Self {
-            ogy_ledger: OGY_LEDGER_CANISTER_ID,
+            ogy_new_ledger: OGY_LEDGER_CANISTER_ID,
             ogy_legacy_ledger: OGY_LEGACY_LEDGER_CANISTER_ID,
-            ogy_legacy_ledger_archive: OGY_LEGACY_LEDGER_ARCHIVE_CANISTER_ID,
         }
     }
 }
