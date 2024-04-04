@@ -93,7 +93,7 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
             // 2. If it is too old, it will be searched for in the archive canister
             // Otherwise it is marked as not found.
             if block_data.blocks.len() > 0 {
-                analyse_block_data(&block_data.blocks[0], block_index, principal)
+                verify_block_data(&block_data.blocks[0], block_index, principal)
             } else if block_data.archived_blocks.len() > 0 {
                 process_archive_block(&block_data.archived_blocks[0], block_index, principal).await
             } else {
@@ -120,7 +120,7 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
     }
 }
 
-pub fn analyse_block_data(
+pub fn verify_block_data(
     block: &Block,
     block_index: BlockIndex,
     principal: Principal,
@@ -207,7 +207,7 @@ async fn process_archive_block(
     {
         Ok(Ok(block_range)) => {
             if block_range.blocks.len() > 0 {
-                analyse_block_data(&block_range.blocks[0], block_index, principal)
+                verify_block_data(&block_range.blocks[0], block_index, principal)
             } else {
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
