@@ -244,22 +244,22 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
                 s.data.minting_account,
             )
         });
-    let principal: Principal = match principal_result {
-        Ok(p) => Ok(p),
-        Err(_) => {
-            mutate_state(|s| {
-                s.data.token_swap.update_status(
-                    block_index,
-                    SwapStatus::Failed(SwapError::UnexpectedError(
-                        ImpossibleErrorReason::PrincipalNotFound,
-                    )),
-                );
-            });
-            return Err(format!(
-                "Principal not found in internal token_swap list for block {block_index}."
-            ));
-        }
-    }?;
+    let principal: Principal;
+    if let Ok(p) = principal_result {
+        principal = p;
+    } else {
+        mutate_state(|s| {
+            s.data.token_swap.update_status(
+                block_index,
+                SwapStatus::Failed(SwapError::UnexpectedError(
+                    ImpossibleErrorReason::PrincipalNotFound,
+                )),
+            );
+        });
+        return Err(format!(
+            "Principal not found in internal token_swap list for block {block_index}."
+        ));
+    }
     if amount == Tokens::from_e8s(0) {
         // This was already checked above when the block was analysed but checking again to be sure.
         return Err("Zero tokens cannot be swap.".to_string());
