@@ -7,12 +7,14 @@ const Layout = () => {
   const navigation = useNavigation();
 
   return (
-    <div>
-      <div style={{ position: "fixed", top: 0, right: 0 }}>
+    <div className="flex flex-col h-screen">
+      <div style={{ position: "fixed", top: 200, right: 0 }}>
         {navigation.state !== "idle" && <p>Navigation in progress...</p>}
       </div>
       <Navbar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

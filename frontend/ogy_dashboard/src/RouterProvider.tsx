@@ -18,42 +18,30 @@ const router = createBrowserRouter([
       },
       {
         path: "governance",
-        async lazy() {
-          const { GovernanceLoader, Governance } = await import(
-            "@pages/governance/Governance"
-          );
-          return { loader: GovernanceLoader, Component: Governance };
-        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              const { GovernanceLoader, Governance } = await import(
+                "@pages/governance/Governance"
+              );
+              return { loader: GovernanceLoader, Component: Governance };
+            },
+          },
+          {
+            path: "neurons",
+            async lazy() {
+              const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+                "@pages/governance/components/neurons/details/Details"
+              );
+              return {
+                loader: NeuronsDetailsLoader,
+                Component: NeuronsDetails,
+              };
+            },
+          },
+        ],
       },
-      //   {
-      //     path: "dashboard",
-      //     async lazy() {
-      //       // Multiple routes in lazy file
-      //       let { DashboardLayout } = await import("./pages/Dashboard");
-      //       return { Component: DashboardLayout };
-      //     },
-      //     children: [
-      //       {
-      //         index: true,
-      //         async lazy() {
-      //           let { DashboardIndex } = await import("./pages/Dashboard");
-      //           return { Component: DashboardIndex };
-      //         },
-      //       },
-      //       {
-      //         path: "messages",
-      //         async lazy() {
-      //           let { dashboardMessagesLoader, DashboardMessages } = await import(
-      //             "./pages/Dashboard"
-      //           );
-      //           return {
-      //             loader: dashboardMessagesLoader,
-      //             Component: DashboardMessages,
-      //           };
-      //         },
-      //       },
-      //     ],
-      //   },
       {
         path: "*",
         element: <NotFound />,

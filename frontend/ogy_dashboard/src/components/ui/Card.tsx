@@ -32,7 +32,7 @@ Card.BorderBottom = ({ className, color }: BorderBottomProps) => {
   return (
     <StyledBorderBottom
       color={color}
-      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-11/12 ${className}`}
+      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-11/12 rounded-full ${className}`}
     ></StyledBorderBottom>
   );
 };

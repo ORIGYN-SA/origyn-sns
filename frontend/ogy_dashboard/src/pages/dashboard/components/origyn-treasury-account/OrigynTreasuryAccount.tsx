@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Card from "@components/cards/Card";
+import Card from "@components/ui/Card";
 
 type OrigynTreasuryAccount = {
   className?: string;

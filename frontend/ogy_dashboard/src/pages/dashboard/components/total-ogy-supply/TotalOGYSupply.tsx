@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import BarChart from "@components/charts/bar/Bar";
-import Card from "@components/cards/Card";
+import Card from "@components/ui/Card";
 
 type TotalOGYSupply = {
   className?: string;
