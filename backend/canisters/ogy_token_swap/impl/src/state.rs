@@ -4,7 +4,10 @@ use ic_ledger_types::{AccountIdentifier, Subaccount};
 use serde::{Deserialize, Serialize};
 use types::TimestampMillis;
 use utils::{
-    consts::{OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_CANISTER_ID, SNS_GOVERNANCE_CANISTER_ID},
+    consts::{
+        OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_CANISTER_ID, OGY_LEGACY_MINTING_CANISTER_ID,
+        SNS_GOVERNANCE_CANISTER_ID,
+    },
     env::{CanisterEnv, Environment},
     memory::MemorySize,
 };
@@ -74,7 +77,7 @@ impl Default for Data {
             token_swap: TokenSwap::default(),
             canister_ids: CanisterIds::default(),
             minting_account: AccountIdentifier::new(
-                &SNS_GOVERNANCE_CANISTER_ID, // TODO - REPLACE THIS!!!
+                &OGY_LEGACY_MINTING_CANISTER_ID,
                 &Subaccount([0; 32]),
             ),
         }
