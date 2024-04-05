@@ -1,0 +1,14 @@
+[package]
+name = "integration_tests"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+candid = { workspace = true }
+ic-cdk = { workspace = true }
+ic-ledger-types = { workspace = true }
+ogy_token_swap = { path = "../canisters/ogy_token_swap/impl" }
+pocket-ic = { workspace = true }
+utils = { path = "../libraries/utils" }

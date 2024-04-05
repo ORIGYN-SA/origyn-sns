@@ -1,0 +1,7 @@
+type Args = record { test_mode : bool };
+type SwapTokensRequest = record { block_index : nat64; user : opt principal };
+type SwapTokensResponse = variant { Success; InternalError : text };
+service : (Args) -> {
+  request_deposit_account : (opt principal) -> (blob) query;
+  swap_tokens : (SwapTokensRequest) -> (SwapTokensResponse);
+}

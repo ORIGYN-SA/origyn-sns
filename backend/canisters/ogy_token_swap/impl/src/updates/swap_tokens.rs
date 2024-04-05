@@ -34,8 +34,8 @@ pub struct SwapTokensRequest {
     user: Option<Principal>,
 }
 
-#[trace]
 #[update]
+#[trace]
 pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
     let caller = read_state(|s| s.env.caller());
     let user = match args.user {
