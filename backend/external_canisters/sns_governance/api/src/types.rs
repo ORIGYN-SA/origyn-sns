@@ -1751,7 +1751,7 @@ pub struct ListNeurons {
     pub of_principal: Option<candid::Principal>,
 }
 /// A response to the ListNeurons command.
-#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq)]
+#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Debug)]
 pub struct ListNeuronsResponse {
     /// The returned list of neurons.
     pub neurons: Vec<Neuron>,

@@ -1,3 +1,5 @@
+use crate::state::GovernanceStats;
+use candid::Principal;
 use ic_cdk::export_candid;
 use lifecycle::Args;
 use types::{HttpRequest, HttpResponse};
