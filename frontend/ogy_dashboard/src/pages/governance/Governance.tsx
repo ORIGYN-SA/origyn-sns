@@ -9,6 +9,7 @@ import TokensInGovernanceKpi, {
   TokensInGovernanceKpiProps,
 } from "@pages/governance/components/tokens-in-governance-kpi/TokensInGovernanceKPI";
 import NeuronsList from "@pages/governance/components/neurons/list/NeuronsList";
+import ProposalsList from "@pages/proposals/list/List";
 
 export const GovernanceLoader = async () => {
   // tokens in governance total
@@ -162,6 +163,10 @@ export const Governance = () => {
             )}
           </Await>
         </Suspense>
+      </div>
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold mb-8">Proposals</h2>
+        <ProposalsList />
       </div>
       <div className="mb-16">
         <h2 className="text-3xl font-bold mb-8">Neurons</h2>
