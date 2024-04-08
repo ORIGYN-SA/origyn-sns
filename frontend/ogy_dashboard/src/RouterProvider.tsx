@@ -20,6 +20,17 @@ const { ProposalsLoader, Proposals } = await import(
 const { Loader: ProposalsDetailsLoader, Details: ProposalsDetails } =
   await import("@pages/proposals/details/Details");
 
+const { Loader: ExplorerLoader, Explorer } = await import(
+  "@pages/explorer/Explorer"
+);
+const { Loader: ExplorerTxDetailsLoader, Details: ExplorerTxDetails } =
+  await import("@pages/explorer/transaction-details/Details");
+
+const {
+  Loader: ExplorerAccountDetailsLoader,
+  Details: ExplorerAccountDetails,
+} = await import("@pages/explorer/account-details/Details");
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,6 +82,26 @@ const router = createBrowserRouter([
             path: "details",
             loader: ProposalsDetailsLoader,
             element: <ProposalsDetails />,
+          },
+        ],
+      },
+      {
+        path: "explorer",
+        children: [
+          {
+            index: true,
+            loader: ExplorerLoader,
+            element: <Explorer />,
+          },
+          {
+            path: "transaction-details",
+            loader: ProposalsDetailsLoader,
+            element: <ExplorerTxDetails />,
+          },
+          {
+            path: "account-details",
+            loader: ExplorerAccountDetailsLoader,
+            element: <ExplorerAccountDetails />,
           },
         ],
       },
