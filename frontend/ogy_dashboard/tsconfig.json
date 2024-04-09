@@ -27,6 +27,7 @@
       "@components/*": ["components/*"],
       "@shared/*": ["shared/*"],
       "@helpers/*": ["helpers/*"],
+      "@services/*": ["services/*"],
       "@theme/*": ["../theme/*"]
     }
   },

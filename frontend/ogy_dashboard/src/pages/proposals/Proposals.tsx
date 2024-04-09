@@ -1,15 +1,15 @@
 import { useMemo, Suspense } from "react";
 import { useLoaderData, defer, Await } from "react-router-dom";
 import { Card, Button } from "@components/ui";
-import EstimateRewards from "@pages/governance/components/estimate-rewards/EstimateRewards";
+import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal, {
   TokensInGovernanceProps,
-} from "@pages/governance/components/tokens-in-governance-total/TokensInGovernanceTotal";
+} from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
 import TokensInGovernanceKpi, {
   TokensInGovernanceKpiProps,
-} from "@pages/governance/components/tokens-in-governance-kpi/TokensInGovernanceKPI";
-import NeuronsList from "@pages/governance/components/neurons/list/NeuronsList";
-import ProposalsList from "@pages/proposals/list/List";
+} from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
+import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
+import ProposalsList from "@pages/proposals/proposals-list/List";
 
 export const ProposalsLoader = async () => {
   return null;

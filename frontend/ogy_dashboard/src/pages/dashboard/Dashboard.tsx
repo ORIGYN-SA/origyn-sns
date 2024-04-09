@@ -1,9 +1,9 @@
-import TotalOGYSupply from "@pages/dashboard/components/total-ogy-supply/TotalOGYSupply";
-import TotalOGYBurned from "@pages/dashboard/components/total-ogy-burned/TotalOGYBurned";
-import OGYCirculationState from "@pages/dashboard/components/ogy-circulation-state/OGYCirculationState";
-import OrigynFoundationReserve from "@pages/dashboard/components/origyn-foundation-reserve/OrigynFoundationReserve";
-import GovernanceStakingOverview from "@pages/dashboard/components/governance-staking-overview/GovernanceStakingOverview";
-import OrigynTreasuryAccount from "@pages/dashboard/components/origyn-treasury-account/OrigynTreasuryAccount";
+import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
+import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
+import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";
+import OrigynFoundationReserve from "@pages/dashboard/origyn-foundation-reserve/OrigynFoundationReserve";
+import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
+import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/OrigynTreasuryAccount";
 
 const Dashboard = () => {
   return (

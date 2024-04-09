@@ -29,7 +29,7 @@ export const Loader = async () => {
   });
 };
 
-export const Details = () => {
+export const ProposalsDetails = () => {
   const navigate = useNavigate();
 
   const handleOnClickBack = () => {

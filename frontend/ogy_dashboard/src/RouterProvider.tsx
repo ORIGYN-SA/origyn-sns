@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
+import { QueryClient } from "@tanstack/react-query";
 
 import Layout from "@components/Layout";
 import NotFound from "@components/NotFound";
@@ -11,25 +12,31 @@ const { GovernanceLoader, Governance } = await import(
   "@pages/governance/Governance"
 );
 const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-  "@pages/governance/components/neurons/details/Details"
+  "@pages/neurons-details/NeuronsDetails"
 );
 
 const { ProposalsLoader, Proposals } = await import(
   "@pages/proposals/Proposals"
 );
-const { Loader: ProposalsDetailsLoader, Details: ProposalsDetails } =
-  await import("@pages/proposals/details/Details");
+const { Loader: ProposalsDetailsLoader, ProposalsDetails } = await import(
+  "@pages/proposals-details/ProposalsDetails"
+);
 
 const { Loader: ExplorerLoader, Explorer } = await import(
   "@pages/explorer/Explorer"
 );
-const { Loader: ExplorerTxDetailsLoader, Details: ExplorerTxDetails } =
-  await import("@pages/explorer/transaction-details/Details");
+const { loader: TransactionsDetailsLoader, TransactionsDetails } = await import(
+  "@pages/transactions-details/TransactionsDetails"
+);
+
+const queryClient = new QueryClient();
 
 const {
-  Loader: ExplorerAccountDetailsLoader,
-  Details: ExplorerAccountDetails,
-} = await import("@pages/explorer/account-details/Details");
+  loader: TransactionsAccountsDetailsLoader,
+  TransactionsAccountsDetails,
+} = await import(
+  "@pages/transactions-accounts-details/TransactionsAccountsDetails"
+);
 
 const router = createBrowserRouter([
   {
@@ -94,14 +101,19 @@ const router = createBrowserRouter([
             element: <Explorer />,
           },
           {
-            path: "transaction-details",
-            loader: ProposalsDetailsLoader,
-            element: <ExplorerTxDetails />,
-          },
-          {
-            path: "account-details",
-            loader: ExplorerAccountDetailsLoader,
-            element: <ExplorerAccountDetails />,
+            path: "transactions",
+            children: [
+              {
+                path: "/explorer/transactions/:index",
+                loader: TransactionsDetailsLoader(queryClient),
+                element: <TransactionsDetails />,
+              },
+              {
+                path: "/explorer/transactions/accounts/:id",
+                loader: TransactionsAccountsDetailsLoader(queryClient),
+                element: <TransactionsAccountsDetails />,
+              },
+            ],
           },
         ],
       },

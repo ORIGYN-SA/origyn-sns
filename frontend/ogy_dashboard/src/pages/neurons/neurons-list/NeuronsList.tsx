@@ -4,57 +4,64 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { PaginationState, ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 
-import { fetchData, Proposal } from "./fetchData.dev";
+import { fetchData, Neuron } from "./fetchData.dev";
 
-const List = () => {
+const NeuronsList = () => {
   const navigate = useNavigate();
 
-  const columns = useMemo<ColumnDef<Proposal>[]>(
+  const columns = useMemo<ColumnDef<Neuron>[]>(
     () => [
       {
         accessorKey: "id",
         // accessorFn: (row) => row.id,
         id: "id",
         cell: (info) => info.getValue(),
-        header: "Principal ID",
+        header: "ID",
         meta: {
           className: "text-left",
         },
       },
       {
-        accessorKey: "title",
+        accessorKey: "state",
         // accessorFn: (row) => row.state,
-        id: "title",
+        id: "state",
         cell: (info) => info.getValue(),
-        header: "Title",
+        header: "State",
       },
       {
-        accessorKey: "proposed",
+        accessorKey: "stakedOGY",
         // accessorFn: (row) => row.stakedOGY,
-        id: "proposed",
+        id: "stakedOgy",
         cell: (info) => info.getValue(),
-        header: "Proposed",
+        header: "Staked OGY",
       },
       {
-        accessorKey: "timeRemaining",
+        accessorKey: "maturity",
         // accessorFn: (row) => row.maturity,
-        id: "timeRemaining",
+        id: "maturity",
         cell: (info) => info.getValue(),
-        header: "Time Remaining",
+        header: "Maturity",
       },
       {
-        accessorKey: "topic",
+        accessorKey: "dissolveDelay",
         // accessorFn: (row) => row.dissolveDelay,
-        id: "topic",
+        id: "dissolveDelay",
         cell: (info) => info.getValue(),
-        header: "Topic",
+        header: "Dissolve Delay",
       },
       {
-        accessorKey: "status",
+        accessorKey: "age",
         // accessorFn: (row) => row.age,
-        id: "status",
+        id: "age",
         cell: (info) => info.getValue(),
-        header: "Status",
+        header: "Age",
+      },
+      {
+        accessorKey: "votingPower",
+        // accessorFn: (row) => row.votingPower,
+        id: "votingPower",
+        cell: (info) => info.getValue(),
+        header: "Voting Power",
       },
       {
         header: "View",
@@ -73,14 +80,14 @@ const List = () => {
   });
 
   const data = useQuery({
-    queryKey: ["proposals_list", pagination],
+    queryKey: ["neurons_list", pagination],
     queryFn: () => fetchData(pagination),
     placeholderData: keepPreviousData,
   });
 
   const handleClickView = (cell) => {
     navigate({
-      pathname: "/proposals/details",
+      pathname: "neurons/details",
       search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
     });
   };
@@ -91,10 +98,11 @@ const List = () => {
         columns={columns}
         pagination={pagination}
         setPagination={setPagination}
-        data={data}
+        data={data?.data}
+        enablePagination={false}
       />
     </div>
   );
 };
 
-export default List;
+export default NeuronsList;
