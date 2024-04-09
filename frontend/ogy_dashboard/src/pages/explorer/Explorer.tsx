@@ -1,37 +1,15 @@
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await } from "react-router-dom";
-import TxList from "@pages/explorer/transactions-list/List";
+// import { useMemo, Suspense } from "react";
+// import { useLoaderData, defer, Await } from "react-router-dom";
+import useTableProps from "@helpers/table/useTableProps";
+import TransactionsList from "@pages/transactions/transactions-list/TransactionsList";
 
 export const Loader = async () => {
   return null;
 };
 
 export const Explorer = () => {
-  const data = useLoaderData();
-
-  //   const governanceFeatures = useMemo(
-  //     () => [
-  //       {
-  //         title: "Stake & Vote",
-  //         description:
-  //           "Influence the ORIGYN Network by staking OGY & voting on proposals.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Earn Rewards",
-  //         description:
-  //           "Participate in the decision-making process to earn rewards.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Govern Collectively",
-  //         description:
-  //           "Engage & influence the network as a collaborative ecosystem.",
-  //         icon: "",
-  //       },
-  //     ],
-  //     []
-  //   );
+  // const data = useLoaderData();
+  const { pagination, setPagination, enablePagination } = useTableProps({});
 
   return (
     <div className="container mx-auto pb-16">
@@ -41,7 +19,11 @@ export const Explorer = () => {
         </div>
       </div>
       <div className="mt-8 mb-16">
-        <TxList />
+        <TransactionsList
+          pagination={pagination}
+          setPagination={setPagination}
+          enablePagination={enablePagination}
+        />
       </div>
     </div>
   );

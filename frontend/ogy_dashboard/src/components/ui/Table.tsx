@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
@@ -14,6 +15,10 @@ interface ReactTableProps<T extends object> {
   columns: ColumnDef<T>[];
   pagination: PaginationState;
   setPagination: OnChangeFn<PaginationState>;
+  enablePagination: boolean;
+  // Useful if using two or more table on same page
+  pageIndexIdentifier: string;
+  pageSizeIdentifier: string;
 }
 
 const linesPerPageOptions = [
@@ -28,14 +33,18 @@ const Table = <T extends object>({
   pagination,
   setPagination,
   data,
+  enablePagination = true,
+  pageIndexIdentifier = "pageIndex",
+  pageSizeIdentifier = "pageSize",
 }: ReactTableProps<T>) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const defaultData = useMemo(() => [], []);
 
   const table = useReactTable({
-    data: data.data?.rows ?? defaultData,
+    data: data?.rows ?? defaultData,
     columns,
-    // pageCount: data.data?.pageCount ?? -1,
-    rowCount: data.data?.rowCount,
+    rowCount: data?.rowCount ?? 0,
     state: {
       pagination,
     },
@@ -43,6 +52,60 @@ const Table = <T extends object>({
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
   });
+
+  const handleOnChangePageSize = (value: string) => {
+    table.setPageSize(Number(value));
+    table.setPageIndex(0);
+    searchParams.set(pageSizeIdentifier, value);
+    searchParams.set(pageIndexIdentifier, "1");
+    setSearchParams(searchParams);
+  };
+
+  // const handleOnChangePageIndex = (e) => {
+  //   const page = e.target.value ? Number(e.target.value) - 1 : 0;
+  //   table.setPageIndex(page);
+  //   searchParams.set("pageIndex", (page + 1).toString());
+  //   setSearchParams(searchParams);
+  // };
+
+  const handleOnClickPreviousPage = () => {
+    table.previousPage();
+    searchParams.set(
+      pageIndexIdentifier,
+      table.getState().pagination.pageIndex.toString()
+    );
+    setSearchParams(searchParams);
+  };
+
+  const handleOnClickNextPage = () => {
+    table.nextPage();
+    searchParams.set(
+      pageIndexIdentifier,
+      (table.getState().pagination.pageIndex + 2).toString()
+    );
+    setSearchParams(searchParams);
+  };
+
+  const handleOnClickFirstPage = () => {
+    table.firstPage();
+    searchParams.set(pageIndexIdentifier, "1");
+    setSearchParams(searchParams);
+  };
+
+  const handleOnClickLastPage = () => {
+    table.lastPage();
+    searchParams.set(pageIndexIdentifier, table.getPageCount().toString());
+    setSearchParams(searchParams);
+  };
+
+  // useEffect(() => {
+  //   searchParams.set(
+  //     pageIndexIdentifier,
+  //     (table.getState().pagination.pageIndex + 1).toString()
+  //   );
+  //   setSearchParams(searchParams);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [pagination.pageSize]);
 
   return (
     <div className="bg-surface shadow-md rounded-lg">
@@ -85,7 +148,7 @@ const Table = <T extends object>({
                     return (
                       <td
                         key={cell.id}
-                        className={`px-8 py-4 ${
+                        className={`px-8 py-4 whitespace-normal break-words ${
                           cell.column.columnDef.meta?.className ?? "text-center"
                         }`}
                       >
@@ -102,67 +165,66 @@ const Table = <T extends object>({
           </tbody>
         </table>
       </div>
-
-      <div className="flex items-center justify-between w-full mt-4 px-8 pt-4 pb-8">
-        <div className="flex items-center">
-          <span>Lines per page</span>
-          <Select
-            options={linesPerPageOptions}
-            value={table.getState().pagination.pageSize}
-            handleOnChange={(value) => table.setPageSize(value)}
-            className="ml-2 w-25"
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            className="border rounded p-1"
-            onClick={() => table.firstPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {"<<"}
-          </button>
-          <button
-            className="border rounded p-1"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {"<"}
-          </button>
-          <button
-            className="border rounded p-1"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {">"}
-          </button>
-          <button
-            className="border rounded p-1"
-            onClick={() => table.lastPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {">>"}
-          </button>
-          <span className="flex items-center gap-1">
-            <div>Page</div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount().toLocaleString()}
-            </strong>
-          </span>
-          <span className="flex items-center gap-1">
-            | Go to page:
-            <input
-              type="number"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-              className="border p-1 rounded w-16"
+      {enablePagination && (
+        <div className="flex items-center justify-between w-full mt-4 px-8 pt-4 pb-8">
+          <div className="flex items-center">
+            <span>Lines per page</span>
+            <Select
+              options={linesPerPageOptions}
+              value={table.getState().pagination.pageSize}
+              handleOnChange={(value) => handleOnChangePageSize(value)}
+              className="ml-2 w-25"
             />
-          </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              className="border rounded p-1"
+              onClick={handleOnClickFirstPage}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<<"}
+            </button>
+            <button
+              className="border rounded p-1"
+              onClick={handleOnClickPreviousPage}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </button>
+            <button
+              className="border rounded p-1"
+              onClick={handleOnClickNextPage}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </button>
+            <button
+              className="border rounded p-1"
+              onClick={handleOnClickLastPage}
+              disabled={!table.getCanNextPage()}
+            >
+              {">>"}
+            </button>
+            <span className="flex items-center gap-1">
+              <div>Page</div>
+              <strong>
+                {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount().toLocaleString()}
+              </strong>
+            </span>
+            {/* <span className="flex items-center gap-1">
+              | Go to page:
+              <input
+                type="number"
+                defaultValue={table.getState().pagination.pageIndex + 1}
+                onChange={(e) => {
+                  handleOnChangePageIndex(e);
+                }}
+                className="border p-1 rounded w-16"
+              />
+            </span> */}
 
-          {/* <select
+            {/* <select
           value={table.getState().pagination.pageSize}
           onChange={(e) => {
             table.setPageSize(Number(e.target.value));
@@ -175,9 +237,10 @@ const Table = <T extends object>({
           ))}
         </select> */}
 
-          {data.isFetching ? "Loading..." : null}
+            {data.isFetching ? "Loading..." : null}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ export const colors = {
   surface: {
     1: "rgb(var(--color-surface-1))",
     2: "rgb(var(--color-surface-2))",
+    3: "rgb(var(--color-surface-3))",
     DEFAULT: "rgb(var(--color-surface-1))",
   },
   content: {
