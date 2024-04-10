@@ -832,8 +832,11 @@ dependencies = [
  "candid",
  "ic-cdk 0.13.1",
  "ic-ledger-types",
+ "icrc-ledger-types",
+ "ogy_legacy_ledger_canister",
  "ogy_token_swap",
  "pocket-ic",
+ "serde",
  "utils",
 ]
 
@@ -1001,6 +1004,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a6a622008b6e321afc04970976f62ee297fdbaa6f95318ca343e3eebb9648441"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "ogy_legacy_ledger_canister"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "candid_gen",
+ "ic-ledger-types",
+ "serde",
+]
+
+[[package]]
+name = "ogy_legacy_ledger_canister_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "canister_client",
+ "ic-cdk 0.13.1",
+ "ogy_legacy_ledger_canister",
+ "types",
 ]
 
 [[package]]
@@ -1891,6 +1915,7 @@ dependencies = [
  "canister_time",
  "ciborium",
  "ic-cdk 0.13.1",
+ "ic-ledger-types",
  "ic-stable-structures",
  "icrc-ledger-types",
  "serde",
