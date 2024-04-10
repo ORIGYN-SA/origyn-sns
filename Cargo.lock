@@ -1012,8 +1012,11 @@ version = "0.1.0"
 dependencies = [
  "candid",
  "candid_gen",
+ "ic-cdk 0.13.1",
  "ic-ledger-types",
+ "icrc-ledger-types",
  "serde",
+ "serde_bytes",
 ]
 
 [[package]]

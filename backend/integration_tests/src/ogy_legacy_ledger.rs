@@ -2,8 +2,8 @@
 mod test {
     use candid::{encode_one, Principal};
     use ic_cdk::api::management_canister::provisional::CanisterId;
-    use ic_ledger_types::{AccountIdentifier, Tokens};
-    use ogy_legacy_ledger_canister::init::InitArgs;
+    // use ic_ledger_types::{AccountIdentifier, Tokens};
+    use ogy_legacy_ledger_canister::{init::InitArgs, Tokens};
     use pocket_ic::{PocketIc, WasmResult};
     use std::path::PathBuf;
     use utils::consts::OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID;
@@ -20,19 +20,16 @@ mod test {
         pic.add_cycles(can_id, INIT_CYCLES);
 
         let args = InitArgs {
-            minting_account: Some(
-                AccountIdentifier::from_hex(OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID).unwrap(),
-            ),
+            minting_account: OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID.to_string(),
             initial_values: vec![],
             max_message_size_bytes: None,
             transaction_window: None,
             archive_options: None,
             send_whitelist: vec![],
-            standard_whitelist: vec![],
-            transfer_fee: Some(Tokens::from_e8s(200_000u64)),
+            transfer_fee: Some(Tokens { e8s: 200_000u64 }),
             token_symbol: Some("OGY".to_string()),
             token_name: Some("Origyn".to_string()),
-            admin: Principal::anonymous(),
+            icrc1_minting_account: None,
         };
 
         // Install the counter canister wasm file on the canister.
