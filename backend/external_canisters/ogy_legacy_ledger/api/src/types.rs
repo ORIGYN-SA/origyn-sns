@@ -1,8 +1,9 @@
 // This is an experimental feature to generate Rust binding from Candid.
 // You may want to manually adjust some of the types.
 #![allow(dead_code, unused_imports)]
-use candid::{self, CandidType, Decode, Deserialize, Encode, Principal};
+use candid::{self, CandidType, Decode, Deserialize, Encode, Nat, Principal};
 use ic_cdk::api::call::CallResult as Result;
+use ic_ledger_types::{AccountIdentifier, Subaccount};
 
 #[derive(CandidType, Deserialize)]
 pub struct Tokens {
@@ -90,12 +91,12 @@ pub struct TransferArg {
     pub to: Account,
     pub fee: Option<candid::Nat>,
     pub memo: Option<serde_bytes::ByteBuf>,
-    pub from_subaccount: Option<serde_bytes::ByteBuf>,
+    pub from_subaccount: Option<Subaccount>,
     pub created_at_time: Option<u64>,
     pub amount: candid::Nat,
 }
 
-#[derive(CandidType, Deserialize)]
+#[derive(CandidType, Deserialize, Debug, PartialEq, Eq)]
 pub enum TransferError {
     GenericError {
         message: String,
@@ -248,10 +249,10 @@ pub struct Symbol {
 
 #[derive(CandidType, Deserialize)]
 pub struct TransferArgs {
-    pub to: serde_bytes::ByteBuf,
+    pub to: AccountIdentifier,
     pub fee: Tokens,
     pub memo: u64,
-    pub from_subaccount: Option<serde_bytes::ByteBuf>,
+    pub from_subaccount: Option<Subaccount>,
     pub created_at_time: Option<TimeStamp>,
     pub amount: Tokens,
 }

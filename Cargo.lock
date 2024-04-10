@@ -833,7 +833,9 @@ dependencies = [
  "ic-cdk 0.13.1",
  "ic-ledger-types",
  "icrc-ledger-types",
+ "ledger_utils",
  "ogy_legacy_ledger_canister",
+ "ogy_legacy_ledger_canister_c2c_client",
  "ogy_token_swap",
  "pocket-ic",
  "serde",
@@ -1017,6 +1019,7 @@ dependencies = [
  "icrc-ledger-types",
  "serde",
  "serde_bytes",
+ "types",
 ]
 
 [[package]]
