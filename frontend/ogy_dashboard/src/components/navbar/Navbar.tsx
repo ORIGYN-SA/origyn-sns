@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useConnect } from "@connect2ic/react";
+import Auth from "@components/auth/Auth";
+import _truncate from "lodash/truncate";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isConnected, principal } = useConnect();
 
   const navItems = [
     { title: "Dashboard", url: "/" },
@@ -36,10 +40,16 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center">
-          <div className="flex items-center">
-            <span className="text-sm mr-2 hidden sm:block">My Account:</span>
-            <span className="text-sm font-medium mr-3">55vo...3dfa</span>
-          </div>
+          {!isConnected && <Auth />}
+          {isConnected && (
+            <button className="flex items-center">
+              <span className="text-sm mr-2 hidden sm:block">My Account:</span>
+              <span className="text-sm font-medium mr-3">
+                {_truncate(principal, { length: 20 })}
+              </span>
+            </button>
+          )}
+
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
