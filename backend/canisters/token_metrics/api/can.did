@@ -1,4 +1,10 @@
 type Args = record { test_mode : bool };
+type GovernanceStats = record {
+  total_rewards : nat64;
+  total_staked : nat64;
+  total_locked : nat64;
+  total_unlocked : nat64;
+};
 type HttpRequest = record {
   url : text;
   method : text;
@@ -25,6 +31,8 @@ type Token = record {
 };
 service : (Args) -> {
   __get_candid_interface_tmp_hack : () -> (text) query;
+  get_all_neuron_owners : () -> (vec principal) query;
+  get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   http_request : (HttpRequest) -> (HttpResponse) query;
   run_gov_job : () -> (text);
 }

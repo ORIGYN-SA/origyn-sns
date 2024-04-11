@@ -11,7 +11,7 @@ const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
 pub fn start_job() {
     debug!("Starting the governance sync job..");
-    run_now_then_interval(Duration::from_millis(10_000), run)
+    run_now_then_interval(Duration::from_millis(SYNC_NEURONS_INTERVAL), run)
 }
 
 pub fn run() {
@@ -60,7 +60,7 @@ pub async fn sync_neurons_data() {
                             None
                         },
                         |n| {
-                            continue_scanning = false;
+                            continue_scanning = true;
                             n.id.clone()
                         },
                     );
@@ -79,20 +79,7 @@ pub async fn sync_neurons_data() {
         state.data.sync_info.last_synced_number_of_neurons = number_of_scanned_neurons;
     });
 }
-// fn update_principal_gov_stats(principal: &Principal, neurons: &Vec<Neuron>) {
-//     if let Some(permissioned_principal) = neuron.permissions.first() {
-//         if let Some(pid) = permissioned_principal.principal {}
-//     }
-// }
-// fn update_principals_stats() {
-//     let principal_neurons = read_state(|state| state.data.principal_neurons);
 
-//     for (key, neuron) in principal_neurons.iter() {
-//         if let Some(permissioned_principal) = neuron.permissions.first() {
-//         if let Some(pid) = permissioned_principal.principal {}
-//     }
-//     }
-// }
 fn update_principal_neuron_mapping(state: &mut RuntimeState, neuron: &Neuron) {
     let principal_with_neurons = &mut state.data.principal_neurons;
     let principal_with_stats = &mut state.data.principal_gov_stats;
