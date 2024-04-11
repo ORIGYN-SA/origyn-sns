@@ -5,7 +5,7 @@ use candid::{self, CandidType, Decode, Deserialize, Encode, Nat, Principal};
 use ic_cdk::api::call::CallResult as Result;
 use ic_ledger_types::{AccountIdentifier, Subaccount};
 
-#[derive(CandidType, Deserialize)]
+#[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
 pub struct Tokens {
     pub e8s: u64,
 }
@@ -25,26 +25,28 @@ pub struct Account {
 #[derive(CandidType, Deserialize)]
 pub struct ArchiveOptions {
     pub num_blocks_to_archive: u64,
-    pub max_transactions_per_response: Option<u64>,
+    // pub max_transactions_per_response: Option<u64>,
     pub trigger_threshold: u64,
     pub max_message_size_bytes: Option<u64>,
-    pub cycles_for_archive_creation: Option<u64>,
+    // pub cycles_for_archive_creation: Option<u64>,
     pub node_max_memory_size_bytes: Option<u64>,
     pub controller_id: Principal,
 }
 
 #[derive(CandidType, Deserialize)]
 pub struct LedgerCanisterInitPayload {
+    pub minting_account: String,
+    pub initial_values: Vec<(String, Tokens)>,
+    pub max_message_size_bytes: Option<u64>,
+    pub transaction_window: Option<Duration>,
+    pub archive_options: Option<ArchiveOptions>,
+    pub standard_whitelist: Vec<Principal>,
+    pub transfer_fee: Option<Tokens>,
+    pub admin: Principal,
     pub send_whitelist: Vec<Principal>,
     pub token_symbol: Option<String>,
-    pub transfer_fee: Option<Tokens>,
-    pub minting_account: String,
-    pub transaction_window: Option<Duration>,
-    pub max_message_size_bytes: Option<u64>,
-    pub icrc1_minting_account: Option<Account>,
-    pub archive_options: Option<ArchiveOptions>,
-    pub initial_values: Vec<(String, Tokens)>,
     pub token_name: Option<String>,
+    // pub icrc1_minting_account: Option<Account>,
 }
 
 #[derive(CandidType, Deserialize)]
@@ -275,7 +277,7 @@ pub enum Result1 {
 #[derive(CandidType, Deserialize)]
 pub struct TransferFeeArg {}
 
-#[derive(CandidType, Deserialize)]
+#[derive(CandidType, Deserialize, Debug, PartialEq, Eq)]
 pub struct TransferFee {
     pub transfer_fee: Tokens,
 }

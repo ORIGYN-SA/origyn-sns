@@ -839,6 +839,7 @@ dependencies = [
  "ogy_token_swap",
  "pocket-ic",
  "serde",
+ "types",
  "utils",
 ]
 

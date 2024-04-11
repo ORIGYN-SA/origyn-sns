@@ -10,7 +10,7 @@ use super::init_canister;
 
 #[derive(Deserialize, CandidType)]
 pub struct Args {
-    test_mode: bool,
+    pub test_mode: bool,
 }
 
 #[init]

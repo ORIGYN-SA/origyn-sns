@@ -1,5 +1,5 @@
-use candid::{ CandidType, Principal };
-use serde::{ Deserialize, Serialize };
+use candid::{CandidType, Principal};
+use serde::{Deserialize, Serialize};
 
 mod http;
 mod neuron_info;
@@ -17,7 +17,7 @@ pub use token::*;
 pub struct Empty {}
 
 pub type CanisterId = Principal;
-pub type Cycles = u64;
+pub type Cycles = u128;
 pub type Hash = [u8; 32];
 pub type Maturity = u64;
 pub type Milliseconds = u64;
