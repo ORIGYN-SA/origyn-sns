@@ -6,7 +6,6 @@ use types::{ CanisterId, Cycles };
 
 mod client;
 mod init;
-mod ogy_legacy_ledger;
 mod tests;
 mod utils;
 mod wasms;
