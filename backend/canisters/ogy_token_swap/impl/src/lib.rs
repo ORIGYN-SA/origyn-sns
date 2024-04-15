@@ -3,8 +3,9 @@ use ic_cdk::export_candid;
 use ic_ledger_types::AccountIdentifier;
 use lifecycle::Args;
 // use updates::remove_swap_entry::RemoveSwapEntryRequest;
-use updates::swap_tokens::{SwapTokensRequest, SwapTokensResponse};
+use updates::swap_tokens::{ SwapTokensRequest, SwapTokensResponse };
 
+mod consts;
 mod guards;
 mod jobs;
 pub mod lifecycle;
@@ -12,7 +13,7 @@ mod memory;
 mod model;
 mod queries;
 mod state;
-mod updates;
+pub mod updates;
 
 // pub use lifecycle::*;
 

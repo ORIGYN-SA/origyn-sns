@@ -531,8 +531,13 @@ mod tests {
     }
 
     fn init_canister_state() {
+        let ogy_legacy_ledger_canister_id =
+            Principal::from_text("jwcfb-hyaaa-aaaaj-aac4q-cai").unwrap();
+        let ogy_new_ledger_canister_id =
+            Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai").unwrap();
+
         let env = CanisterEnv::new(false);
-        let data = Data::default();
+        let data = Data::new(ogy_new_ledger_canister_id, ogy_legacy_ledger_canister_id);
 
         let runtime_state = RuntimeState::new(env, data);
 

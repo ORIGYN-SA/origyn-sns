@@ -1,22 +1,19 @@
-use candid::{CandidType, Principal};
+use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
-use ic_ledger_types::{AccountIdentifier, Subaccount};
-use serde::{Deserialize, Serialize};
-use types::TimestampMillis;
+use ic_ledger_types::{ AccountIdentifier, Subaccount };
+use serde::{ Deserialize, Serialize };
+use types::{ CanisterId, TimestampMillis };
 use utils::{
-    consts::{
-        OGY_LEDGER_CANISTER_ID, OGY_LEGACY_LEDGER_CANISTER_ID, OGY_LEGACY_MINTING_CANISTER_ID,
-        SNS_GOVERNANCE_CANISTER_ID,
-    },
-    env::{CanisterEnv, Environment},
+    consts::SNS_GOVERNANCE_CANISTER_ID,
+    env::{ CanisterEnv, Environment },
     memory::MemorySize,
 };
 
-use crate::model::token_swap::TokenSwap;
+use crate::{ consts::OGY_LEGACY_MINTING_CANISTER_ID, model::token_swap::TokenSwap };
 
 canister_state!(RuntimeState);
 
-#[derive(Default, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct RuntimeState {
     /// Runtime environment
     pub env: CanisterEnv,
@@ -70,15 +67,18 @@ pub struct Data {
     pub minting_account: AccountIdentifier,
 }
 
-impl Default for Data {
-    fn default() -> Self {
+impl Data {
+    pub fn new(ogy_new_ledger: CanisterId, ogy_legacy_ledger: CanisterId) -> Self {
         Self {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             token_swap: TokenSwap::default(),
-            canister_ids: CanisterIds::default(),
+            canister_ids: CanisterIds {
+                ogy_new_ledger,
+                ogy_legacy_ledger,
+            },
             minting_account: AccountIdentifier::new(
                 &OGY_LEGACY_MINTING_CANISTER_ID,
-                &Subaccount([0; 32]),
+                &Subaccount([0; 32])
             ),
         }
     }
@@ -88,13 +88,4 @@ impl Default for Data {
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
-}
-
-impl Default for CanisterIds {
-    fn default() -> Self {
-        Self {
-            ogy_new_ledger: OGY_LEDGER_CANISTER_ID,
-            ogy_legacy_ledger: OGY_LEGACY_LEDGER_CANISTER_ID,
-        }
-    }
 }
