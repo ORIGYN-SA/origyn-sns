@@ -20,7 +20,7 @@ use icrc_ledger_types::icrc1::{
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{Deserialize, Serialize};
 use serde_bytes::ByteBuf;
-use utils::{consts::E8S_FEE_OGY, env::Environment};
+use utils::env::Environment;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub enum SwapTokensResponse {
@@ -30,8 +30,8 @@ pub enum SwapTokensResponse {
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct SwapTokensRequest {
-    block_index: BlockIndex,
-    user: Option<Principal>,
+    pub block_index: BlockIndex,
+    pub user: Option<Principal>,
 }
 
 #[update]
@@ -150,7 +150,11 @@ pub fn verify_block_data(
                         )),
                     )
                 });
-                return Err(format!("Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"));
+                return Err(
+                    format!(
+                        "Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"
+                    )
+                );
             } else if from != principal_to_legacy_account_id(principal, None) {
                 // The tokens have to have been sent from the default subaccount of the defined principal
                 mutate_state(|s| {
@@ -180,7 +184,7 @@ pub fn verify_block_data(
                     s.data
                         .token_swap
                         .update_status(block_index, SwapStatus::BlockValid);
-                })
+                });
             }
             Ok(())
         }
@@ -271,7 +275,7 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
         memo: Memo(block_index),
         to: ogy_legacy_minting_account,
         amount,
-        fee: Tokens::from_e8s(E8S_FEE_OGY),
+        fee: Tokens::from_e8s(0), // fees for burning are 0
         from_subaccount: Some(Subaccount::from(principal)),
         created_at_time: None,
     };
@@ -434,7 +438,11 @@ mod tests {
             OGY_SWAP_CANISTER_ID,
             Some(Subaccount::from(Principal::from_text(DUMMY_USER).unwrap())),
         );
-        let expected_result = Err(format!("Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"));
+        let expected_result = Err(
+            format!(
+                "Receiving account for principal {principal} is not the correct account id. Expected {expected_account_id}, found {to}"
+            )
+        );
 
         assert_eq!(expected_result, result)
     }
