@@ -3,7 +3,7 @@
 #![allow(dead_code, unused_imports)]
 use candid::{ self, CandidType, Decode, Deserialize, Encode, Nat, Principal };
 use ic_cdk::api::call::CallResult as Result;
-use ic_ledger_types::{ AccountIdentifier, Subaccount, Tokens };
+use ic_ledger_types::{ AccountIdentifier, BlockIndex, Subaccount, Tokens };
 
 // #[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
 // pub struct Tokens {
@@ -100,26 +100,18 @@ pub struct TransferArg {
 
 #[derive(CandidType, Deserialize, Debug, PartialEq, Eq)]
 pub enum TransferError {
-    GenericError {
-        message: String,
-        error_code: candid::Nat,
-    },
-    TemporarilyUnavailable,
-    BadBurn {
-        min_burn_amount: candid::Nat,
-    },
-    Duplicate {
-        duplicate_of: candid::Nat,
-    },
     BadFee {
-        expected_fee: candid::Nat,
+        expected_fee: Tokens,
     },
-    CreatedInFuture {
-        ledger_time: u64,
-    },
-    TooOld,
     InsufficientFunds {
-        balance: candid::Nat,
+        balance: Tokens,
+    },
+    TxTooOld {
+        allowed_window_nanos: u64,
+    },
+    TxCreatedInFuture,
+    TxDuplicate {
+        duplicate_of: BlockIndex,
     },
 }
 
