@@ -1,49 +1,66 @@
 use crate::{ generate_query_call, generate_update_call };
-use candid::Nat;
 
 // Queries
-// generate_query_call!(icrc1_balance_of);
+generate_query_call!(account_balance_dfx);
 
 // Updates
 generate_update_call!(transfer);
 
-// pub mod icrc1_balance_of {
-//     use super::*;
+pub mod account_balance_dfx {
+    use ic_ledger_types::Tokens;
+    use ogy_legacy_ledger_canister::AccountBalanceArgs;
 
-//     pub type Args = Account;
-//     pub type Response = Nat;
-// }
+    pub type Args = AccountBalanceArgs;
+    pub type Response = Tokens;
+}
 
 pub mod transfer {
     use ic_ledger_types::{ BlockIndex, TransferArgs };
-    use ogy_legacy_ledger_canister::{ TransferError };
+    use ogy_legacy_ledger_canister::TransferError;
 
-    use super::*;
-
-    type Type = TransferArgs;
-
-    pub type Args = Type;
+    pub type Args = TransferArgs;
     pub type Response = Result<BlockIndex, TransferError>;
 }
 
 pub mod happy_path {
     use super::*;
     use candid::Principal;
-    use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo };
+    use ic_ledger_types::{ AccountIdentifier, Memo };
     use ic_ledger_types::Tokens;
+    use ogy_token_swap::consts::OGY_LEGACY_MINTING_CANISTER_ID;
     use pocket_ic::PocketIc;
     use types::CanisterId;
     use utils::consts::E8S_FEE_OGY;
 
+    pub fn mint_ogy(
+        pic: &mut PocketIc,
+        ledger_canister_id: CanisterId,
+        recipient: impl Into<AccountIdentifier>,
+        amount: u64
+    ) -> transfer::Response {
+        transfer(
+            pic,
+            OGY_LEGACY_MINTING_CANISTER_ID,
+            ledger_canister_id,
+            &(transfer::Args {
+                from_subaccount: None,
+                to: recipient.into(),
+                fee: Tokens::from_e8s(0),
+                created_at_time: None,
+                memo: Memo(0),
+                amount: Tokens::from_e8s(amount),
+            })
+        )
+    }
     pub fn transfer_ogy(
-        env: &mut PocketIc,
+        pic: &mut PocketIc,
         sender: Principal,
         ledger_canister_id: CanisterId,
         recipient: impl Into<AccountIdentifier>,
         amount: u64
-    ) -> BlockIndex {
+    ) -> transfer::Response {
         transfer(
-            env,
+            pic,
             sender,
             ledger_canister_id,
             &(transfer::Args {
@@ -54,24 +71,17 @@ pub mod happy_path {
                 memo: Memo(0),
                 amount: Tokens::from_e8s(amount),
             })
-        ).unwrap()
-        // .0.try_into()
-        // .unwrap()
+        )
     }
 
-    // pub fn balance_of(
-    //     env: &PocketIc,
-    //     ledger_canister_id: CanisterId,
-    //     account: impl Into<Account>,
-    // ) -> u128 {
-    //     icrc1_balance_of(
-    //         env,
-    //         Principal::anonymous(),
-    //         ledger_canister_id,
-    //         &account.into(),
-    //     )
-    //     .0
-    //     .try_into()
-    //     .unwrap()
-    // }
+    pub fn balance_of(pic: &PocketIc, ledger_canister_id: CanisterId, account: String) -> Tokens {
+        account_balance_dfx(
+            pic,
+            Principal::anonymous(),
+            ledger_canister_id,
+            &(account_balance_dfx::Args {
+                account,
+            })
+        )
+    }
 }

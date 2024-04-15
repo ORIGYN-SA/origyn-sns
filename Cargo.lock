@@ -833,6 +833,8 @@ dependencies = [
  "ic-cdk 0.13.1",
  "ic-ledger-types",
  "icrc-ledger-types",
+ "icrc_ledger_canister",
+ "lazy_static",
  "ledger_utils",
  "ogy_legacy_ledger_canister",
  "ogy_legacy_ledger_canister_c2c_client",

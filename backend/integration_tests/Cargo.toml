@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-[dev-dependencies]
-ogy_token_swap = { path = "../canisters/ogy_token_swap/impl" }
 
-[dependencies]
+[dev-dependencies]
 candid = { workspace = true }
 ic-cdk = { workspace = true }
 ic-ledger-types = { workspace = true }
 icrc-ledger-types = { workspace = true }
+icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }
+lazy_static = { workspace = true }
 ledger_utils = { path = "../libraries/ledger_utils" }
 ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/api' }
 ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_legacy_ledger/c2c_client' }

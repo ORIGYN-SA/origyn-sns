@@ -4,7 +4,7 @@ use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens, 
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap::{
     consts::OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID,
-    lifecycle::Args as InitArgsOgySwap,
+    lifecycle::InitArgs as InitArgsOgySwap,
     updates::swap_tokens::{ SwapTokensRequest, SwapTokensResponse },
 };
 use ogy_legacy_ledger_canister::{
@@ -242,7 +242,7 @@ fn load_wasm() -> Vec<u8> {
         std::env::var("CARGO_MANIFEST_DIR").expect("Failed to read CARGO_MANIFEST_DIR env variable")
     );
     file_path.push("wasms");
-    file_path.push("ogy-legacy-ledger.gz");
+    file_path.push("ogy_legacy_ledger_canister.wasm.gz");
 
     std::fs::read(file_path).unwrap()
 }
