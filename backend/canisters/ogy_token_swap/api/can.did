@@ -1,4 +1,8 @@
-type Args = record { test_mode : bool };
+type Args = record {
+  test_mode : bool;
+  ogy_new_ledger_canister_id : principal;
+  ogy_legacy_ledger_canister_id : principal;
+};
 type SwapTokensRequest = record { block_index : nat64; user : opt principal };
 type SwapTokensResponse = variant { Success; InternalError : text };
 service : (Args) -> {

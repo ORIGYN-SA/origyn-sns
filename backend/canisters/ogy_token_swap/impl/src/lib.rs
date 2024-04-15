@@ -5,7 +5,7 @@ use lifecycle::Args;
 // use updates::remove_swap_entry::RemoveSwapEntryRequest;
 use updates::swap_tokens::{ SwapTokensRequest, SwapTokensResponse };
 
-mod consts;
+pub mod consts;
 mod guards;
 mod jobs;
 pub mod lifecycle;

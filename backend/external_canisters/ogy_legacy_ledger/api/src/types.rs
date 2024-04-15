@@ -1,14 +1,14 @@
 // This is an experimental feature to generate Rust binding from Candid.
 // You may want to manually adjust some of the types.
 #![allow(dead_code, unused_imports)]
-use candid::{self, CandidType, Decode, Deserialize, Encode, Nat, Principal};
+use candid::{ self, CandidType, Decode, Deserialize, Encode, Nat, Principal };
 use ic_cdk::api::call::CallResult as Result;
-use ic_ledger_types::{AccountIdentifier, Subaccount};
+use ic_ledger_types::{ AccountIdentifier, Subaccount, Tokens };
 
-#[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
-pub struct Tokens {
-    pub e8s: u64,
-}
+// #[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
+// pub struct Tokens {
+//     pub e8s: u64,
+// }
 
 #[derive(CandidType, Deserialize)]
 pub struct Duration {
@@ -19,7 +19,7 @@ pub struct Duration {
 #[derive(CandidType, Deserialize)]
 pub struct Account {
     pub owner: Principal,
-    pub subaccount: Option<serde_bytes::ByteBuf>,
+    pub subaccount: Option<Subaccount>,
 }
 
 #[derive(CandidType, Deserialize)]
@@ -261,11 +261,19 @@ pub struct TransferArgs {
 
 #[derive(CandidType, Deserialize)]
 pub enum TransferError1 {
-    TxTooOld { allowed_window_nanos: u64 },
-    BadFee { expected_fee: Tokens },
-    TxDuplicate { duplicate_of: u64 },
+    TxTooOld {
+        allowed_window_nanos: u64,
+    },
+    BadFee {
+        expected_fee: Tokens,
+    },
+    TxDuplicate {
+        duplicate_of: u64,
+    },
     TxCreatedInFuture,
-    InsufficientFunds { balance: Tokens },
+    InsufficientFunds {
+        balance: Tokens,
+    },
 }
 
 #[derive(CandidType, Deserialize)]

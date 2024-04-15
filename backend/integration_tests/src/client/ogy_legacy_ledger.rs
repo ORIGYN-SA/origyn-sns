@@ -1,4 +1,4 @@
-use crate::{generate_query_call, generate_update_call};
+use crate::{ generate_query_call, generate_update_call };
 use candid::Nat;
 
 // Queries
@@ -15,21 +15,22 @@ generate_update_call!(transfer);
 // }
 
 pub mod transfer {
-    use ogy_legacy_ledger_canister::{TransferArgs, TransferError};
+    use ic_ledger_types::{ BlockIndex, TransferArgs };
+    use ogy_legacy_ledger_canister::{ TransferError };
 
     use super::*;
 
     type Type = TransferArgs;
 
     pub type Args = Type;
-    pub type Response = Result<Nat, TransferError>;
+    pub type Response = Result<BlockIndex, TransferError>;
 }
 
 pub mod happy_path {
     use super::*;
     use candid::Principal;
-    use ic_ledger_types::{AccountIdentifier, BlockIndex};
-    use ogy_legacy_ledger_canister::Tokens;
+    use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo };
+    use ic_ledger_types::Tokens;
     use pocket_ic::PocketIc;
     use types::CanisterId;
     use utils::consts::E8S_FEE_OGY;
@@ -39,25 +40,23 @@ pub mod happy_path {
         sender: Principal,
         ledger_canister_id: CanisterId,
         recipient: impl Into<AccountIdentifier>,
-        amount: u64,
+        amount: u64
     ) -> BlockIndex {
         transfer(
             env,
             sender,
             ledger_canister_id,
-            &transfer::Args {
+            &(transfer::Args {
                 from_subaccount: None,
                 to: recipient.into(),
-                fee: Tokens { e8s: E8S_FEE_OGY },
+                fee: Tokens::from_e8s(E8S_FEE_OGY),
                 created_at_time: None,
-                memo: 0,
-                amount: Tokens { e8s: amount },
-            },
-        )
-        .unwrap()
-        .0
-        .try_into()
-        .unwrap()
+                memo: Memo(0),
+                amount: Tokens::from_e8s(amount),
+            })
+        ).unwrap()
+        // .0.try_into()
+        // .unwrap()
     }
 
     // pub fn balance_of(
