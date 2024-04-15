@@ -30,14 +30,14 @@ pub mod happy_path {
     use types::CanisterId;
 
     pub fn transfer(
-        env: &mut PocketIc,
+        pic: &mut PocketIc,
         sender: Principal,
         ledger_canister_id: CanisterId,
         recipient: impl Into<Account>,
         amount: u128
     ) -> icrc1_transfer::Response {
         icrc1_transfer(
-            env,
+            pic,
             sender,
             ledger_canister_id,
             &(icrc1_transfer::Args {
@@ -52,10 +52,10 @@ pub mod happy_path {
     }
 
     pub fn balance_of(
-        env: &PocketIc,
+        pic: &PocketIc,
         ledger_canister_id: CanisterId,
         account: impl Into<Account>
     ) -> icrc1_balance_of::Response {
-        icrc1_balance_of(env, Principal::anonymous(), ledger_canister_id, &account.into())
+        icrc1_balance_of(pic, Principal::anonymous(), ledger_canister_id, &account.into())
     }
 }
