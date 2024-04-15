@@ -17,6 +17,7 @@ ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/a
 ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_legacy_ledger/c2c_client' }
 ogy_token_swap = { path = "../canisters/ogy_token_swap/impl" }
 pocket-ic = { workspace = true }
+rand = "0.8.5"
 serde = { workspace = true }
 types = { path = "../libraries/types" }
 utils = { path = "../libraries/utils" }

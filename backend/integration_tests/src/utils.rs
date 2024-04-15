@@ -1,5 +1,8 @@
 use candid::Principal;
+use rand::{ RngCore, thread_rng };
 
-pub fn dummy_principal() -> Principal {
-    Principal::from_text("465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae").unwrap()
+pub fn random_principal() -> Principal {
+    let mut bytes = [0u8; 8];
+    thread_rng().fill_bytes(&mut bytes);
+    Principal::from_slice(&bytes)
 }

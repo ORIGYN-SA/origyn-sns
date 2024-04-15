@@ -11,7 +11,7 @@ use utils::consts::E8S_FEE_OGY;
 
 use crate::{
     client::{ create_canister, install_canister },
-    utils::dummy_principal,
+    utils::random_principal,
     wasms,
     CanisterIds,
     TestEnv,
@@ -24,7 +24,7 @@ pub fn init() -> TestEnv {
 
     let mut pic = PocketIc::new();
 
-    let controller = dummy_principal();
+    let controller = random_principal();
     let canister_ids = install_canisters(&mut pic, controller);
     TestEnv {
         pic,
