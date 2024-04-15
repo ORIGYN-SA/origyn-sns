@@ -1,28 +1,40 @@
 use crate::{
     model::token_swap::{
-        BlockFailReason, BurnFailReason, ImpossibleErrorReason, RecoverMode, SwapError, SwapStatus,
+        BlockFailReason,
+        BurnFailReason,
+        ImpossibleErrorReason,
+        RecoverMode,
+        SwapError,
+        SwapStatus,
         TransferFailReason,
     },
-    state::{mutate_state, read_state},
+    state::{ mutate_state, read_state },
 };
-use candid::{CandidType, Nat, Principal};
+use candid::{ CandidType, Nat, Principal };
 use canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::{
-    query_archived_blocks, query_blocks, transfer, ArchivedBlockRange, Block, BlockIndex,
-    GetBlocksArgs, Memo, Operation, Subaccount, Tokens, TransferArgs,
+    query_archived_blocks,
+    query_blocks,
+    transfer,
+    ArchivedBlockRange,
+    Block,
+    BlockIndex,
+    GetBlocksArgs,
+    Memo,
+    Operation,
+    Subaccount,
+    Tokens,
+    TransferArgs,
 };
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
-use icrc_ledger_types::icrc1::{
-    account::Account,
-    transfer::{Memo as MemoIcrc, TransferArg},
-};
+use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, TransferArg } };
 use ledger_utils::principal_to_legacy_account_id;
-use serde::{Deserialize, Serialize};
+use serde::{ Deserialize, Serialize };
 use serde_bytes::ByteBuf;
 use utils::env::Environment;
 
-#[derive(CandidType, Serialize, Deserialize, Debug)]
+#[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum SwapTokensResponse {
     Success,
     InternalError(String),
@@ -50,7 +62,7 @@ pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
 
 pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
-    principal: Principal,
+    principal: Principal
 ) -> Result<(), String> {
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
@@ -79,14 +91,11 @@ pub(crate) async fn swap_tokens_impl(
 async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result<(), String> {
     let ogy_legacy_ledger_canister_id = read_state(|s| s.data.canister_ids.ogy_legacy_ledger);
 
-    match query_blocks(
-        ogy_legacy_ledger_canister_id,
-        GetBlocksArgs {
+    match
+        query_blocks(ogy_legacy_ledger_canister_id, GetBlocksArgs {
             start: block_index,
             length: 1,
-        },
-    )
-    .await
+        }).await
     {
         Ok(block_data) => {
             // Two valid cases: either the block is in the ledger or it is in the archive canister
@@ -101,7 +110,7 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound)),
+                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound))
                     )
                 });
                 Err(format!("Block index {block_index} not found."))
@@ -111,12 +120,14 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::QueryRequestFailed)),
+                    SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::QueryRequestFailed))
                 )
             });
-            Err(format!(
-                "Failed to request block info for block index {block_index}. Message: {err}"
-            ))
+            Err(
+                format!(
+                    "Failed to request block info for block index {block_index}. Message: {err}"
+                )
+            )
         }
     }
 }
@@ -124,20 +135,15 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
 pub fn verify_block_data(
     block: &Block,
     block_index: BlockIndex,
-    principal: Principal,
+    principal: Principal
 ) -> Result<(), String> {
     // There is always exactly 1 transaction per block
     match block.transaction.operation {
-        Some(Operation::Transfer {
-            from,
-            to,
-            amount,
-            fee: _,
-        }) => {
+        Some(Operation::Transfer { from, to, amount, fee: _ }) => {
             let expected_subaccount = Subaccount::from(principal);
             let expected_account_id = principal_to_legacy_account_id(
                 read_state(|s| s.env.canister_id()),
-                Some(expected_subaccount),
+                Some(expected_subaccount)
             );
             if to != expected_account_id {
                 // The tokens have to have been sent to the swap canister with a subaccount that is equal to the
@@ -145,9 +151,11 @@ pub fn verify_block_data(
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(
-                            BlockFailReason::ReceiverNotCorrectAccountId(expected_subaccount),
-                        )),
+                        SwapStatus::Failed(
+                            SwapError::BlockFailed(
+                                BlockFailReason::ReceiverNotCorrectAccountId(expected_subaccount)
+                            )
+                        )
                     )
                 });
                 return Err(
@@ -160,20 +168,22 @@ pub fn verify_block_data(
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(
-                            BlockFailReason::SenderNotPrincipalDefaultSubaccount(from),
-                        )),
+                        SwapStatus::Failed(
+                            SwapError::BlockFailed(
+                                BlockFailReason::SenderNotPrincipalDefaultSubaccount(from)
+                            )
+                        )
                     )
                 });
-                return Err(format!(
-                    "Sending account is not default subaccount of principal {principal}."
-                ));
+                return Err(
+                    format!("Sending account is not default subaccount of principal {principal}.")
+                );
             } else if amount == Tokens::from_e8s(0) {
                 // The amount has to be greated than 0 to conduct a swap.
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::ZeroAmount)),
+                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::ZeroAmount))
                     )
                 });
                 return Err(format!("Number of tokens in block is zero."));
@@ -181,36 +191,32 @@ pub fn verify_block_data(
                 // This is the happy path if the conditions above are fulfilled
                 mutate_state(|s| {
                     s.data.token_swap.set_amount(block_index, amount);
-                    s.data
-                        .token_swap
-                        .update_status(block_index, SwapStatus::BlockValid);
+                    s.data.token_swap.update_status(block_index, SwapStatus::BlockValid);
                 });
             }
             Ok(())
         }
-        _ => mutate_state(|s| {
-            s.data.token_swap.update_status(
-                block_index,
-                SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::InvalidOperation)),
-            );
-            Err(format!("Operation in block is not a valid transfer."))
-        }),
+        _ =>
+            mutate_state(|s| {
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::InvalidOperation))
+                );
+                Err(format!("Operation in block is not a valid transfer."))
+            }),
     }
 }
 
 async fn process_archive_block(
     archive_block_range: &ArchivedBlockRange,
     block_index: BlockIndex,
-    principal: Principal,
+    principal: Principal
 ) -> Result<(), String> {
-    match query_archived_blocks(
-        &archive_block_range.callback,
-        GetBlocksArgs {
+    match
+        query_archived_blocks(&archive_block_range.callback, GetBlocksArgs {
             start: archive_block_range.start,
             length: archive_block_range.length,
-        },
-    )
-    .await
+        }).await
     {
         Ok(Ok(block_range)) => {
             if block_range.blocks.len() > 0 {
@@ -219,24 +225,20 @@ async fn process_archive_block(
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound)),
+                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound))
                     );
                 });
-                Err(format!(
-                    "Block {block_index} not found in archive canister."
-                ))
+                Err(format!("Block {block_index} not found in archive canister."))
             }
         }
         _ => {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound)),
+                    SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::NotFound))
                 );
             });
-            Err(format!(
-                "Block {block_index} not found in archive canister."
-            ))
+            Err(format!("Block {block_index} not found in archive canister."))
         }
     }
 }
@@ -258,14 +260,14 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
         mutate_state(|s| {
             s.data.token_swap.update_status(
                 block_index,
-                SwapStatus::Failed(SwapError::UnexpectedError(
-                    ImpossibleErrorReason::PrincipalNotFound,
-                )),
+                SwapStatus::Failed(
+                    SwapError::UnexpectedError(ImpossibleErrorReason::PrincipalNotFound)
+                )
             );
         });
-        return Err(format!(
-            "Principal not found in internal token_swap list for block {block_index}."
-        ));
+        return Err(
+            format!("Principal not found in internal token_swap list for block {block_index}.")
+        );
     }
     if amount == Tokens::from_e8s(0) {
         // This was already checked above when the block was analysed but checking again to be sure.
@@ -282,12 +284,8 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     match transfer(ogy_legacy_ledger_canister_id, args).await {
         Ok(Ok(burn_block_index)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .set_burn_block_index(block_index, burn_block_index);
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::BurnSuccess);
+                s.data.token_swap.set_burn_block_index(block_index, burn_block_index);
+                s.data.token_swap.update_status(block_index, SwapStatus::BurnSuccess);
             });
             Ok(())
         }
@@ -295,27 +293,23 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::BurnFailed(BurnFailReason::TransferError(
-                        msg.clone(),
-                    ))),
+                    SwapStatus::Failed(
+                        SwapError::BurnFailed(BurnFailReason::TransferError(msg.clone()))
+                    )
                 )
             });
-            Err(format!(
-                "Token burn failed due to transfer error. Message: {msg}"
-            ))
+            Err(format!("Token burn failed due to transfer error. Message: {msg}"))
         }
         Err((_, msg)) => {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::BurnFailed(BurnFailReason::CallError(
-                        msg.clone(),
-                    ))),
+                    SwapStatus::Failed(
+                        SwapError::BurnFailed(BurnFailReason::CallError(msg.clone()))
+                    )
                 )
             });
-            Err(format!(
-                "Token burn failed due to call error. Message: {msg}"
-            ))
+            Err(format!("Token burn failed due to call error. Message: {msg}"))
         }
     }
 }
@@ -347,12 +341,8 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
             mutate_state(|s| {
-                s.data
-                    .token_swap
-                    .set_swap_block_index(block_index, transfer_block_index);
-                s.data
-                    .token_swap
-                    .update_status(block_index, SwapStatus::Complete);
+                s.data.token_swap.set_swap_block_index(block_index, transfer_block_index);
+                s.data.token_swap.update_status(block_index, SwapStatus::Complete);
             });
             Ok(())
         }
@@ -361,27 +351,23 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::TransferFailed(
-                        TransferFailReason::TransferError(msg.clone()),
-                    )),
+                    SwapStatus::Failed(
+                        SwapError::TransferFailed(TransferFailReason::TransferError(msg.clone()))
+                    )
                 )
             });
-            Err(format!(
-                "Final token transfer failed due to transfer error. Message: {msg}"
-            ))
+            Err(format!("Final token transfer failed due to transfer error. Message: {msg}"))
         }
         Err((_, msg)) => {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Failed(SwapError::TransferFailed(TransferFailReason::CallError(
-                        msg.clone(),
-                    ))),
+                    SwapStatus::Failed(
+                        SwapError::TransferFailed(TransferFailReason::CallError(msg.clone()))
+                    )
                 )
             });
-            Err(format!(
-                "Final token transfer failed due to call error. Message: {msg}"
-            ))
+            Err(format!("Final token transfer failed due to call error. Message: {msg}"))
         }
     }
 }
@@ -390,16 +376,21 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
 mod tests {
     use candid::Principal;
     use ic_ledger_types::{
-        AccountIdentifier, Block, BlockIndex, Memo, Operation, Subaccount, Timestamp, Tokens,
-        Transaction, DEFAULT_SUBACCOUNT,
+        AccountIdentifier,
+        Block,
+        BlockIndex,
+        Memo,
+        Operation,
+        Subaccount,
+        Timestamp,
+        Tokens,
+        Transaction,
+        DEFAULT_SUBACCOUNT,
     };
     use ledger_utils::principal_to_legacy_account_id;
-    use utils::{
-        consts::{E8S_FEE_OGY, E8S_PER_OGY},
-        env::CanisterEnv,
-    };
+    use utils::{ consts::{ E8S_FEE_OGY, E8S_PER_OGY }, env::CanisterEnv };
 
-    use crate::state::{init_state, mutate_state, Data, RuntimeState};
+    use crate::state::{ init_state, mutate_state, Data, RuntimeState };
 
     use super::verify_block_data;
 
@@ -432,11 +423,13 @@ mod tests {
         let block = dummy_block();
 
         let result = verify_block_data(&block, block_index, principal);
-        let expected_account_id =
-            principal_to_legacy_account_id(OGY_SWAP_CANISTER_ID, Some(Subaccount::from(principal)));
+        let expected_account_id = principal_to_legacy_account_id(
+            OGY_SWAP_CANISTER_ID,
+            Some(Subaccount::from(principal))
+        );
         let to = principal_to_legacy_account_id(
             OGY_SWAP_CANISTER_ID,
-            Some(Subaccount::from(Principal::from_text(DUMMY_USER).unwrap())),
+            Some(Subaccount::from(Principal::from_text(DUMMY_USER).unwrap()))
         );
         let expected_result = Err(
             format!(
@@ -461,9 +454,9 @@ mod tests {
 
         let result = verify_block_data(&block, block_index, principal);
 
-        let expected_result = Err(format!(
-            "Sending account is not default subaccount of principal {principal}."
-        ));
+        let expected_result = Err(
+            format!("Sending account is not default subaccount of principal {principal}.")
+        );
 
         assert_eq!(expected_result, result)
     }
@@ -532,17 +525,16 @@ mod tests {
     }
 
     fn dummy_account() -> AccountIdentifier {
-        AccountIdentifier::new(
-            &Principal::from_text(DUMMY_USER).unwrap(),
-            &DEFAULT_SUBACCOUNT,
-        )
+        AccountIdentifier::new(&Principal::from_text(DUMMY_USER).unwrap(), &DEFAULT_SUBACCOUNT)
     }
 
     fn init_canister_state() {
-        let ogy_legacy_ledger_canister_id =
-            Principal::from_text("jwcfb-hyaaa-aaaaj-aac4q-cai").unwrap();
-        let ogy_new_ledger_canister_id =
-            Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai").unwrap();
+        let ogy_legacy_ledger_canister_id = Principal::from_text(
+            "jwcfb-hyaaa-aaaaj-aac4q-cai"
+        ).unwrap();
+        let ogy_new_ledger_canister_id = Principal::from_text(
+            "tr3th-kiaaa-aaaaq-aab6q-cai"
+        ).unwrap();
 
         let env = CanisterEnv::new(false);
         let data = Data::new(ogy_new_ledger_canister_id, ogy_legacy_ledger_canister_id);
