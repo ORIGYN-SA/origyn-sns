@@ -10,14 +10,14 @@ use crate::state::{ Data, RuntimeState };
 use super::init_canister;
 
 #[derive(Deserialize, CandidType)]
-pub struct Args {
+pub struct InitArgs {
     pub test_mode: bool,
     pub ogy_legacy_ledger_canister_id: CanisterId,
     pub ogy_new_ledger_canister_id: CanisterId,
 }
 
 #[init]
-fn init(args: Args) {
+fn init(args: InitArgs) {
     canister_logger::init(args.test_mode);
 
     let env = CanisterEnv::new(args.test_mode);
