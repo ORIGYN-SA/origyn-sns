@@ -70,7 +70,18 @@ fn valid_swap() {
 
     assert_eq!(result, SwapTokensResponse::Success);
 
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount)
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
+
+    // retry same swap should fail
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit
+    );
+    assert_eq!(result, SwapTokensResponse::InternalError("Swap already completed.".to_string()));
+    // balance shouldn't change
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
 }
 
 #[test]
