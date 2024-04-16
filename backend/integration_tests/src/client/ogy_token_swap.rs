@@ -2,6 +2,7 @@ use crate::{ generate_query_call, generate_update_call };
 
 // Queries
 generate_query_call!(request_deposit_account);
+generate_query_call!(get_swap_info);
 
 // Updates
 generate_update_call!(swap_tokens);
@@ -19,6 +20,13 @@ pub mod request_deposit_account {
 
     pub type Args = Principal;
     pub type Response = AccountIdentifier;
+}
+pub mod get_swap_info {
+    use ic_ledger_types::BlockIndex;
+    use ogy_token_swap::model::token_swap::SwapInfo;
+
+    pub type Args = BlockIndex;
+    pub type Response = Result<SwapInfo, String>;
 }
 
 pub mod happy_path {
@@ -67,5 +75,14 @@ pub mod happy_path {
         user: Principal
     ) -> request_deposit_account::Response {
         request_deposit_account(pic, Principal::anonymous(), ogy_token_swap_canister_id, &user)
+    }
+
+    pub fn swap_info(
+        pic: &PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId,
+        block_index: BlockIndex
+    ) -> get_swap_info::Response {
+        get_swap_info(pic, sender, ogy_token_swap_canister_id, &block_index)
     }
 }

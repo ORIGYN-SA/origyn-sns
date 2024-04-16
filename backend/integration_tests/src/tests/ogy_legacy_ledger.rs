@@ -1,5 +1,4 @@
-use candid::Principal;
-use ic_ledger_types::{ Subaccount, Tokens };
+use ic_ledger_types::Tokens;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_legacy_ledger_canister::TransferError;
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };

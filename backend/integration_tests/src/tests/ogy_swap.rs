@@ -1,14 +1,17 @@
 use candid::{ Nat, Principal };
-use ic_ledger_types::Subaccount;
+use ic_ledger_types::{ Subaccount, Tokens };
 use ledger_utils::principal_to_legacy_account_id;
-use ogy_token_swap::updates::swap_tokens::SwapTokensResponse;
+use ogy_token_swap::{
+    model::token_swap::{ BlockFailReason, SwapError, SwapInfo, SwapStatus },
+    updates::swap_tokens::SwapTokensResponse,
+};
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
     client::{
         icrc1::happy_path::{ balance_of, transfer },
         ogy_legacy_ledger::happy_path::{ mint_ogy, transfer_ogy },
-        ogy_token_swap::happy_path::{ deposit_account, swap_tokens_authenticated_call },
+        ogy_token_swap::happy_path::{ deposit_account, swap_info, swap_tokens_authenticated_call },
     },
     init::init,
     utils::random_principal,
@@ -135,7 +138,21 @@ fn invalid_deposit_account() {
         )
     );
 
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::default())
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::default());
+
+    assert_eq!(
+        swap_info(
+            &pic,
+            controller,
+            ogy_token_swap_canister_id,
+            block_index_deposit
+        ).unwrap().status,
+        SwapStatus::Failed(
+            SwapError::BlockFailed(
+                BlockFailReason::ReceiverNotCorrectAccountId(Subaccount::from(user))
+            )
+        )
+    )
 }
 
 #[test]
