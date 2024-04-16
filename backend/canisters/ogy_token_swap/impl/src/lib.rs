@@ -1,18 +1,19 @@
 use candid::Principal;
 use ic_cdk::export_candid;
-use ic_ledger_types::AccountIdentifier;
+use ic_ledger_types::{ AccountIdentifier, BlockIndex };
 use lifecycle::InitArgs;
 // use updates::remove_swap_entry::RemoveSwapEntryRequest;
 use updates::swap_tokens::{ SwapTokensRequest, SwapTokensResponse };
+use model::token_swap::SwapInfo;
 
 pub mod consts;
-mod guards;
-mod jobs;
+pub mod guards;
+pub mod jobs;
 pub mod lifecycle;
-mod memory;
-mod model;
-mod queries;
-mod state;
+pub mod memory;
+pub mod model;
+pub mod queries;
+pub mod state;
 pub mod updates;
 
 // pub use lifecycle::*;
