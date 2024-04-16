@@ -84,7 +84,10 @@ fn invalid_deposit_account() {
 
     let ogy_new_ledger_minting_account = controller;
 
+    // user who deposited the amount
     let user = random_principal();
+    // user who intially requests the swap but then fails
+    let user_false_request = random_principal();
     let amount = 100_000 * E8S_PER_OGY;
 
     // mint tokens to swapping user
@@ -106,7 +109,7 @@ fn invalid_deposit_account() {
 
     let swap_amount = amount - E8S_FEE_OGY;
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, Principal::anonymous());
+    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -118,7 +121,7 @@ fn invalid_deposit_account() {
 
     let result = swap_tokens_authenticated_call(
         &mut pic,
-        user,
+        user_false_request,
         ogy_token_swap_canister_id,
         block_index_deposit
     );
@@ -128,10 +131,10 @@ fn invalid_deposit_account() {
         SwapTokensResponse::InternalError(
             format!(
                 "Receiving account for principal {} is not the correct account id. Expected {}, found {}",
-                user,
+                user_false_request,
                 principal_to_legacy_account_id(
                     ogy_token_swap_canister_id,
-                    Some(Subaccount::from(user))
+                    Some(Subaccount::from(user_false_request))
                 ),
                 deposit_address
             )
@@ -149,9 +152,32 @@ fn invalid_deposit_account() {
         ).unwrap().status,
         SwapStatus::Failed(
             SwapError::BlockFailed(
-                BlockFailReason::ReceiverNotCorrectAccountId(Subaccount::from(user))
+                BlockFailReason::ReceiverNotCorrectAccountId(Subaccount::from(user_false_request))
             )
         )
+    );
+
+    // Try the recover process by requesting with the correct user
+
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit
+    );
+
+    assert_eq!(result, SwapTokensResponse::Success);
+
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
+
+    assert_eq!(
+        swap_info(
+            &pic,
+            controller,
+            ogy_token_swap_canister_id,
+            block_index_deposit
+        ).unwrap().status,
+        SwapStatus::Complete
     )
 }
 
