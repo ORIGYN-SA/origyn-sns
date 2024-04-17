@@ -5,6 +5,7 @@ use icrc_ledger_types::icrc1::transfer::{ TransferArg, TransferError };
 
 // Queries
 generate_query_call!(icrc1_balance_of);
+generate_query_call!(icrc1_total_supply);
 
 // Updates
 generate_update_call!(icrc1_transfer);
@@ -13,6 +14,12 @@ pub mod icrc1_balance_of {
     use super::*;
 
     pub type Args = Account;
+    pub type Response = Nat;
+}
+pub mod icrc1_total_supply {
+    use super::*;
+
+    pub type Args = ();
     pub type Response = Nat;
 }
 
@@ -26,6 +33,7 @@ pub mod icrc1_transfer {
 pub mod happy_path {
     use super::*;
     use candid::Principal;
+    use icrc_ledger_types::icrc1::transfer::NumTokens;
     use pocket_ic::PocketIc;
     use types::CanisterId;
 
@@ -34,7 +42,7 @@ pub mod happy_path {
         sender: Principal,
         ledger_canister_id: CanisterId,
         recipient: impl Into<Account>,
-        amount: u128
+        amount: NumTokens
     ) -> icrc1_transfer::Response {
         icrc1_transfer(
             pic,
@@ -57,5 +65,12 @@ pub mod happy_path {
         account: impl Into<Account>
     ) -> icrc1_balance_of::Response {
         icrc1_balance_of(pic, Principal::anonymous(), ledger_canister_id, &account.into())
+    }
+
+    pub fn total_supply(
+        pic: &PocketIc,
+        ledger_canister_id: CanisterId
+    ) -> icrc1_total_supply::Response {
+        icrc1_total_supply(pic, Principal::anonymous(), ledger_canister_id, &())
     }
 }

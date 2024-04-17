@@ -2,6 +2,8 @@ use crate::{ generate_query_call, generate_update_call };
 
 // Queries
 generate_query_call!(account_balance_dfx);
+generate_query_call!(name);
+generate_query_call!(icrc1_total_supply);
 
 // Updates
 generate_update_call!(transfer);
@@ -20,6 +22,13 @@ pub mod transfer {
 
     pub type Args = TransferArgs;
     pub type Response = Result<BlockIndex, TransferError>;
+}
+
+pub mod icrc1_total_supply {
+    pub use ogy_legacy_ledger_canister::icrc1_total_supply::{ Args, Response };
+}
+pub mod name {
+    pub use ogy_legacy_ledger_canister::name::{ Args, Response };
 }
 
 pub mod happy_path {
@@ -74,7 +83,11 @@ pub mod happy_path {
         )
     }
 
-    pub fn balance_of(pic: &PocketIc, ledger_canister_id: CanisterId, account: String) -> Tokens {
+    pub fn balance_of(
+        pic: &PocketIc,
+        ledger_canister_id: CanisterId,
+        account: String
+    ) -> account_balance_dfx::Response {
         account_balance_dfx(
             pic,
             Principal::anonymous(),
@@ -83,5 +96,14 @@ pub mod happy_path {
                 account,
             })
         )
+    }
+    pub fn total_supply(
+        pic: &PocketIc,
+        ledger_canister_id: CanisterId
+    ) -> icrc1_total_supply::Response {
+        icrc1_total_supply(pic, Principal::anonymous(), ledger_canister_id, &())
+    }
+    pub fn token_name(pic: &PocketIc, ledger_canister_id: CanisterId) -> name::Response {
+        name(pic, Principal::anonymous(), ledger_canister_id, &())
     }
 }

@@ -1,6 +1,4 @@
-use types::Empty;
-
 use crate::Name;
 
-pub type Args = Empty;
+pub type Args = ();
 pub type Response = Name;
