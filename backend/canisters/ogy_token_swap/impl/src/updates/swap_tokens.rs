@@ -1,4 +1,5 @@
 use crate::{
+    consts::OGY_MIN_SWAP_AMOUNT,
     model::token_swap::{
         BlockFailReason,
         BurnFailReason,
@@ -178,15 +179,19 @@ pub fn verify_block_data(
                 return Err(
                     format!("Sending account is not default subaccount of principal {principal}.")
                 );
-            } else if amount == Tokens::from_e8s(0) {
+            } else if amount < OGY_MIN_SWAP_AMOUNT {
                 // The amount has to be greated than 0 to conduct a swap.
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
-                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::ZeroAmount))
+                        SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::AmountTooSmall))
                     )
                 });
-                return Err(format!("Number of tokens in block is zero."));
+                return Err(
+                    format!(
+                        "Number of tokens in block is too small. Needs to be at least {OGY_MIN_SWAP_AMOUNT}, found: {amount}."
+                    )
+                );
             } else {
                 // This is the happy path if the conditions above are fulfilled
                 mutate_state(|s| {
@@ -461,7 +466,7 @@ mod tests {
         assert_eq!(expected_result, result)
     }
     #[test]
-    fn test_verify_block_amount_zero() {
+    fn test_verify_block_amount_too_small() {
         init_canister_state();
 
         let block_index = 1000;
@@ -470,12 +475,16 @@ mod tests {
 
         let mut block = dummy_block();
         if let Some(Operation::Transfer { ref mut amount, .. }) = block.transaction.operation {
-            *amount = Tokens::from_e8s(0u64);
+            *amount = Tokens::from_e8s(90_000_000u64);
         }
 
         let result = verify_block_data(&block, block_index, principal);
 
-        let expected_result = Err(format!("Number of tokens in block is zero."));
+        let expected_result = Err(
+            format!(
+                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.90000000."
+            )
+        );
 
         assert_eq!(expected_result, result)
     }

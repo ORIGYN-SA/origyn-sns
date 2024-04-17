@@ -89,11 +89,11 @@ impl TokenSwap {
                                             )
                                         )
                                     }
-                                    BlockFailReason::ZeroAmount => {
-                                        // If the token amount in the block is zero, there is no need for a swap.
+                                    BlockFailReason::AmountTooSmall => {
+                                        // If the token amount in the block is was too small, there is no need for a swap.
                                         // So there is no reason to retry checking this block.
                                         Err(
-                                            "Amount of tokens in the block was zero. Skipping swap.".to_string()
+                                            "Amount of tokens in the block was too small. Skipping swap.".to_string()
                                         )
                                     }
                                 }
@@ -218,7 +218,7 @@ pub enum BlockFailReason {
     QueryRequestFailed,
     ReceiverNotCorrectAccountId(Subaccount),
     SenderNotPrincipalDefaultSubaccount(AccountIdentifier),
-    ZeroAmount,
+    AmountTooSmall,
 }
 
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
