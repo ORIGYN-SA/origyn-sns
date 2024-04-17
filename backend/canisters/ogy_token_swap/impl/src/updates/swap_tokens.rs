@@ -180,7 +180,7 @@ pub fn verify_block_data(
                     format!("Sending account is not default subaccount of principal {principal}.")
                 );
             } else if amount < OGY_MIN_SWAP_AMOUNT - Tokens::from_e8s(E8S_FEE_OGY) {
-                // The amount has to be greated than 0 to conduct a swap.
+                // The amount has to be greated than the minimum amount to conduct a swap.
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
                         block_index,
