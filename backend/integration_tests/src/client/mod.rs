@@ -1,4 +1,6 @@
 #![allow(dead_code)]
+use std::time::Duration;
+
 use crate::T;
 use candid::{ CandidType, Principal };
 use pocket_ic::{ PocketIc, UserError, WasmResult };
@@ -16,6 +18,7 @@ const INIT_CYCLES_BALANCE: u128 = 1_000 * T;
 pub fn create_canister(pic: &mut PocketIc, controller: Principal) -> CanisterId {
     let canister_id = pic.create_canister_with_settings(Some(controller), None);
     pic.add_cycles(canister_id, INIT_CYCLES_BALANCE);
+    pic.advance_time(Duration::from_secs(1));
     canister_id
 }
 
@@ -29,6 +32,7 @@ pub fn create_canister_with_id(
         "Create canister with ID failed"
     );
     pic.add_cycles(canister_id, INIT_CYCLES_BALANCE);
+    pic.advance_time(Duration::from_secs(1));
     canister_id
 }
 
@@ -47,7 +51,8 @@ pub fn install_canister<P: CandidType>(
     wasm: Vec<u8>,
     payload: P
 ) {
-    pic.install_canister(canister_id, wasm, candid::encode_one(&payload).unwrap(), Some(sender))
+    pic.install_canister(canister_id, wasm, candid::encode_one(&payload).unwrap(), Some(sender));
+    pic.advance_time(Duration::from_secs(1));
 }
 
 pub fn execute_query<P: CandidType, R: CandidType + DeserializeOwned>(
@@ -57,6 +62,7 @@ pub fn execute_query<P: CandidType, R: CandidType + DeserializeOwned>(
     method_name: &str,
     payload: &P
 ) -> R {
+    pic.advance_time(Duration::from_secs(1));
     unwrap_response(
         pic.query_call(canister_id, sender, method_name, candid::encode_one(payload).unwrap())
     )
@@ -69,6 +75,7 @@ pub fn execute_update<P: CandidType, R: CandidType + DeserializeOwned>(
     method_name: &str,
     payload: &P
 ) -> R {
+    pic.advance_time(Duration::from_secs(1));
     unwrap_response(
         pic.update_call(canister_id, sender, method_name, candid::encode_one(payload).unwrap())
     )
@@ -81,6 +88,7 @@ pub fn execute_update_no_response<P: CandidType>(
     method_name: &str,
     payload: &P
 ) {
+    pic.advance_time(Duration::from_secs(1));
     pic.update_call(
         canister_id,
         sender,
