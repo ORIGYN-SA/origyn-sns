@@ -4,7 +4,7 @@ use ogy_legacy_ledger_canister::TransferError;
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
-    client::ogy_legacy_ledger::happy_path::{ balance_of, mint_ogy, transfer_ogy },
+    client::ogy_legacy_ledger::happy_path::{ balance_of, mint_ogy, token_name, transfer_ogy },
     init::init,
     utils::random_principal,
     TestEnv,
@@ -23,6 +23,8 @@ fn valid_transfer() {
     let user2 = principal_to_legacy_account_id(user2_principal, None);
 
     let amount = 100 * E8S_PER_OGY;
+
+    assert_eq!(token_name(&pic, ledger_canister_id).name, "Origyn");
 
     assert_eq!(mint_ogy(&mut pic, ledger_canister_id, user1, amount), Ok(0));
 
