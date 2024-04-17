@@ -189,7 +189,9 @@ pub fn verify_block_data(
                 });
                 return Err(
                     format!(
-                        "Number of tokens in block is too small. Needs to be at least {OGY_MIN_SWAP_AMOUNT}, found: {amount}."
+                        "Number of tokens in block is too small. Needs to be at least {}, found: {}.",
+                        OGY_MIN_SWAP_AMOUNT,
+                        amount + Tokens::from_e8s(E8S_FEE_OGY)
                     )
                 );
             } else {
@@ -274,9 +276,15 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
             format!("Principal not found in internal token_swap list for block {block_index}.")
         );
     }
-    if amount == Tokens::from_e8s(0) {
+    if amount < OGY_MIN_SWAP_AMOUNT - Tokens::from_e8s(E8S_FEE_OGY) {
         // This was already checked above when the block was analysed but checking again to be sure.
-        return Err("Zero tokens cannot be swap.".to_string());
+        return Err(
+            format!(
+                "At least {} OGY need to be swapped. Found: {}.",
+                OGY_MIN_SWAP_AMOUNT,
+                amount + Tokens::from_e8s(E8S_FEE_OGY)
+            )
+        );
     }
     let args = TransferArgs {
         memo: Memo(block_index),
@@ -328,9 +336,17 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
         )
     });
     let principal = principal_result?;
-    if amount == Tokens::from_e8s(0) {
+
+    // ORIGYN will cover the swapping fees so the user ends up with exactly 1:1 tokens after the swap
+    let amount_to_swap = amount + Tokens::from_e8s(E8S_FEE_OGY);
+
+    if amount_to_swap < OGY_MIN_SWAP_AMOUNT {
         // This was already checked above when the block was analysed but checking again to be sure.
-        return Err("Zero tokens cannot be swap.".to_string());
+        return Err(
+            format!(
+                "At least {OGY_MIN_SWAP_AMOUNT} OGY need to be swapped. Found: {amount_to_swap}."
+            )
+        );
     }
     let args = TransferArg {
         from_subaccount: None,
@@ -338,7 +354,7 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
             owner: principal,
             subaccount: None,
         },
-        amount: Nat::from(amount.e8s()),
+        amount: Nat::from(amount_to_swap.e8s()),
         fee: None,
         created_at_time: None,
         memo: Some(MemoIcrc(ByteBuf::from(block_index.to_be_bytes()))),
