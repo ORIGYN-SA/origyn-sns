@@ -33,7 +33,7 @@ use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, 
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{ Deserialize, Serialize };
 use serde_bytes::ByteBuf;
-use utils::env::Environment;
+use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
 #[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum SwapTokensResponse {
@@ -179,7 +179,7 @@ pub fn verify_block_data(
                 return Err(
                     format!("Sending account is not default subaccount of principal {principal}.")
                 );
-            } else if amount < OGY_MIN_SWAP_AMOUNT {
+            } else if amount < OGY_MIN_SWAP_AMOUNT - Tokens::from_e8s(E8S_FEE_OGY) {
                 // The amount has to be greated than 0 to conduct a swap.
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
