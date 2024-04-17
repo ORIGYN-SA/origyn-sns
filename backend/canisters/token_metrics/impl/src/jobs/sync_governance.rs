@@ -1,11 +1,12 @@
 use candid::Principal;
 use canister_time::{now_millis, run_now_then_interval, DAY_IN_MS};
-use sns_governance_canister::types::{Governance, ListNeuronsResponse, Neuron};
+use sns_governance_canister::types::{Neuron, NeuronId};
+use std::collections::BTreeMap as NormalBTreeMap;
 use std::time::Duration;
-use tracing::{debug, error, field::debug, info};
+use tracing::{debug, error, info};
 use types::Milliseconds;
 
-use crate::state::{mutate_state, read_state, GovernanceStats, RuntimeState};
+use crate::state::{mutate_state, read_state, GovernanceStats};
 
 const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -35,20 +36,32 @@ pub async fn sync_neurons_data() {
         of_principal: None,
     };
 
+    // We want new empty structures when re-computing the data, otherwise it will
+    // sum up with data from previous job
+    // Q: BTreeMap is a stable structure? Do we want that for a temp variable like this?
+    let mut temp_principal_with_neurons: NormalBTreeMap<Principal, Vec<NeuronId>> =
+        NormalBTreeMap::new();
+    let mut temp_principal_with_stats: NormalBTreeMap<Principal, GovernanceStats> =
+        NormalBTreeMap::new();
+    let mut temp_all_gov_stats: GovernanceStats = GovernanceStats::default();
+
     while continue_scanning {
         continue_scanning = false;
 
         match sns_governance_canister_c2c_client::list_neurons(canister_id, &args).await {
             Ok(response) => {
-                info!("{:?}", response);
+                // info!("{:?}", response);
                 // Mutate the state to update the principal with governance data
-                mutate_state(|state| {
-                    info!("Updating neurons");
-                    response.neurons.iter().for_each(|neuron| {
-                        info!("{:?}", neuron);
-                        update_principal_neuron_mapping(state, neuron);
-                        // update_neuron_maturity(state, neuron);
-                    });
+                info!("Updating neurons");
+                response.neurons.iter().for_each(|neuron| {
+                    info!("{:?}", neuron);
+                    update_principal_neuron_mapping(
+                        &mut temp_principal_with_neurons,
+                        &mut temp_principal_with_stats,
+                        &mut temp_all_gov_stats,
+                        neuron,
+                    );
+                    // update_neuron_maturity(state, neuron);
                 });
 
                 // Check if we hit the end of the list
@@ -74,16 +87,33 @@ pub async fn sync_neurons_data() {
         }
     }
     info!("Successfully scanned {number_of_scanned_neurons} neurons.");
+
     mutate_state(|state| {
         state.data.sync_info.last_synced_end = now_millis();
         state.data.sync_info.last_synced_number_of_neurons = number_of_scanned_neurons;
+
+        let principal_with_neurons = &mut state.data.principal_neurons;
+        let principal_with_stats = &mut state.data.principal_gov_stats;
+        let all_gov_stats = &mut state.data.all_gov_stats;
+
+        // Update the state with the newly computed data
+        principal_with_neurons.clear();
+        principal_with_stats.clear();
+        for (key, value) in temp_principal_with_neurons {
+            principal_with_neurons.insert(key, value);
+        }
+        for (key, value) in temp_principal_with_stats {
+            principal_with_stats.insert(key, value);
+        }
+        *all_gov_stats = temp_all_gov_stats;
     });
 }
-
-fn update_principal_neuron_mapping(state: &mut RuntimeState, neuron: &Neuron) {
-    let principal_with_neurons = &mut state.data.principal_neurons;
-    let principal_with_stats = &mut state.data.principal_gov_stats;
-    // only look at the first permissioned principal, as this is in 99% cases the owner of the neuron
+fn update_principal_neuron_mapping(
+    principal_with_neurons: &mut NormalBTreeMap<Principal, Vec<NeuronId>>,
+    principal_with_stats: &mut NormalBTreeMap<Principal, GovernanceStats>,
+    all_gov_stats: &mut GovernanceStats,
+    neuron: &Neuron,
+) {
     if let Some(permissioned_principal) = neuron.permissions.first() {
         if let Some(pid) = permissioned_principal.principal {
             // Update the array of neurons in the principal_neurons map
@@ -104,39 +134,36 @@ fn update_principal_neuron_mapping(state: &mut RuntimeState, neuron: &Neuron) {
                     }
                 });
 
-            let mut total_staked = 0u64;
-
             let neuron_staked_maturity = neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
             // Update the governance stats of the Principal
             principal_with_stats
                 .entry(pid)
                 .and_modify(|stats| {
                     // Total staked is how much the principal staked at the begginging + how much of maturity they restaked
-                    stats.total_staked += neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
+                    stats.total_staked += neuron.cached_neuron_stake_e8s
+                        + neuron_staked_maturity
+                        + neuron.maturity_e8s_equivalent;
                     // Total locked is the amount of tokens they have staked
-                    stats.total_locked += neuron.cached_neuron_stake_e8s;
+                    stats.total_locked += neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
                     // Total unlocked is `maturity_e8s_equivalent` which can be claimed
                     stats.total_unlocked += neuron.maturity_e8s_equivalent;
                     // Total rewards is what they have as maturity and what they have as staked_maturity
-                    stats.total_rewards += neuron.staked_maturity_e8s_equivalent.unwrap_or(0)
-                        + neuron.maturity_e8s_equivalent
+                    stats.total_rewards += neuron_staked_maturity + neuron.maturity_e8s_equivalent
                 })
                 .or_insert_with(|| GovernanceStats {
-                    total_locked: neuron.cached_neuron_stake_e8s,
-                    total_staked: neuron.cached_neuron_stake_e8s + neuron_staked_maturity,
-                    total_unlocked: neuron.maturity_e8s_equivalent,
-                    total_rewards: neuron.staked_maturity_e8s_equivalent.unwrap_or(0)
+                    total_staked: neuron.cached_neuron_stake_e8s
+                        + neuron_staked_maturity
                         + neuron.maturity_e8s_equivalent,
+                    total_locked: neuron.cached_neuron_stake_e8s + neuron_staked_maturity,
+                    total_unlocked: neuron.maturity_e8s_equivalent,
+                    total_rewards: neuron_staked_maturity + neuron.maturity_e8s_equivalent,
                 });
-            mutate_state(|state| {
-                state.data.all_gov_stats.total_locked += neuron.cached_neuron_stake_e8s;
-                state.data.all_gov_stats.total_staked +=
-                    neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
-                state.data.all_gov_stats.total_unlocked += neuron.maturity_e8s_equivalent;
-                state.data.all_gov_stats.total_rewards +=
-                    neuron.staked_maturity_e8s_equivalent.unwrap_or(0)
-                        + neuron.maturity_e8s_equivalent;
-            })
+            all_gov_stats.total_staked += neuron.cached_neuron_stake_e8s
+                + neuron_staked_maturity
+                + neuron.maturity_e8s_equivalent;
+            all_gov_stats.total_locked += neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
+            all_gov_stats.total_unlocked += neuron.maturity_e8s_equivalent;
+            all_gov_stats.total_rewards += neuron_staked_maturity + neuron.maturity_e8s_equivalent;
         }
     }
 }
