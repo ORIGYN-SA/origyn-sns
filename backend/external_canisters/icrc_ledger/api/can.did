@@ -14,7 +14,7 @@ type Account = record {
     subaccount : opt Subaccount;
 };
 
-type ICRC1_TransferArgs = record {
+type TransferArgs = record {
     from_subaccount : opt Subaccount;
     to : Account;
     amount : nat;
@@ -23,7 +23,7 @@ type ICRC1_TransferArgs = record {
     created_at_time : opt Timestamp;
 };
 
-type ICRC1_TransferError = variant {
+type TransferError = variant {
     BadFee : record { expected_fee : nat };
     BadBurn : record { min_burn_amount : nat };
     InsufficientFunds : record { balance : nat };
@@ -41,60 +41,15 @@ type Value = variant {
     Blob : blob;
 };
 
-type ICRC2_ApproveArgs = record {
-    from_subaccount : opt blob;
-    spender : Account;
-    amount : nat;
-    expected_allowance : opt nat;
-    expires_at : opt nat64;
-    fee : opt nat;
-    memo : opt blob;
-    created_at_time : opt nat64;
-};
-
-type ICRC2_ApproveError = variant {
-    BadFee : record { expected_fee : nat };
-    InsufficientFunds : record { balance : nat };
-    AllowanceChanged : record { current_allowance : nat };
-    Expired : record { ledger_time : nat64 };
-    TooOld;
-    CreatedInFuture : record { ledger_time : nat64 };
-    Duplicate : record { duplicate_of : nat };
-    TemporarilyUnavailable;
-    GenericError : record { error_code : nat; message : text };
-};
-
-type ICRC2_TransferFromArgs = record {
-    spender_subaccount : opt blob;
-    from : Account;
-    to : Account;
-    amount : nat;
-    fee : opt nat;
-    memo : opt blob;
-    created_at_time : opt nat64;
-};
-
-type ICRC2_TransferFromError = variant {
-    BadFee : record { expected_fee : nat };
-    BadBurn : record { min_burn_amount : nat };
-    InsufficientFunds : record { balance : nat };
-    InsufficientAllowance : record { allowance : nat };
-    TooOld;
-    CreatedInFuture : record { ledger_time : nat64 };
-    Duplicate : record { duplicate_of : nat };
-    TemporarilyUnavailable;
-    GenericError : record { error_code : nat; message : text };
-};
-
 service : {
     icrc1_metadata : () -> (vec record { text; Value }) query;
     icrc1_name : () -> (text) query;
     icrc1_symbol : () -> (text) query;
     icrc1_decimals : () -> (nat8) query;
     icrc1_fee : () -> (nat) query;
+    icrc1_total_supply : () -> (nat) query;
+    icrc1_minting_account : () -> (opt Account) query;
+    icrc1_balance_of : (Account) -> (nat) query;
+    icrc1_transfer : (TransferArgs) -> (variant { Ok : nat; Err : TransferError });
     icrc1_supported_standards : () -> (vec record { name : text; url : text }) query;
-    icrc1_transfer : (ICRC1_TransferArgs) -> (variant { Ok : nat; Err : ICRC1_TransferError });
-
-    icrc2_approve : (ICRC2_ApproveArgs) -> (variant { Ok : nat; Err : ICRC2_ApproveError });
-    icrc2_transfer_from : (ICRC2_TransferFromArgs) -> (variant { Ok : nat; Err : ICRC2_TransferFromError });
 };
