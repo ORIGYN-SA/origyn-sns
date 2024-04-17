@@ -61,7 +61,7 @@ fn valid_swap() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = deposit_account(&mut pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -128,7 +128,7 @@ fn invalid_deposit_account() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = deposit_account(&mut pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -231,7 +231,7 @@ fn test_anonymous_request() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = deposit_account(&mut pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -336,7 +336,7 @@ fn test_swap_amount_too_small() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = deposit_account(&mut pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -371,14 +371,14 @@ fn test_insufficient_funds_in_distribution_pool() {}
 #[test]
 fn test_deposit_account() {
     let env = init();
-    let TestEnv { pic, canister_ids, .. } = env;
+    let TestEnv { mut pic, canister_ids, .. } = env;
 
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
 
     let user = random_principal();
 
     assert_eq!(
-        deposit_account(&pic, ogy_token_swap_canister_id, user),
+        deposit_account(&mut pic, ogy_token_swap_canister_id, user),
         principal_to_legacy_account_id(ogy_token_swap_canister_id, Some(Subaccount::from(user)))
     )
 }
@@ -417,7 +417,7 @@ fn user_token_swap(
     ).e8s();
     let swap_amount = balance;
 
-    let deposit_address = deposit_account(&pic, swap_canister_id, user);
+    let deposit_address = deposit_account(pic, swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
         pic,

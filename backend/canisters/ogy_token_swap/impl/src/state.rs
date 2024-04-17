@@ -11,7 +11,7 @@ use utils::{
 
 use crate::{
     consts::{ OGY_LEGACY_MINTING_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL },
-    model::token_swap::TokenSwap,
+    model::{ deposit_principals::DepositPrincipals, token_swap::TokenSwap },
 };
 
 canister_state!(RuntimeState);
@@ -64,6 +64,8 @@ pub struct Data {
     pub authorized_principals: Vec<Principal>,
     /// state of the swaps
     pub token_swap: TokenSwap,
+    /// list of all principals that requested a deposit account
+    pub deposit_principals: DepositPrincipals,
     /// canister ids that are being interacted with
     pub canister_ids: CanisterIds,
     /// The minting account of legacy OGY where tokens are burned to
@@ -75,6 +77,7 @@ impl Data {
         Self {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL],
             token_swap: TokenSwap::default(),
+            deposit_principals: DepositPrincipals::default(),
             canister_ids: CanisterIds {
                 ogy_new_ledger,
                 ogy_legacy_ledger,

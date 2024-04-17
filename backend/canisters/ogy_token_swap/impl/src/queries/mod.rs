@@ -1,4 +1,4 @@
 mod candid;
-mod http_request;
-mod request_deposit_account;
+mod get_deposit_principals;
 mod get_swap_info;
+mod http_request;

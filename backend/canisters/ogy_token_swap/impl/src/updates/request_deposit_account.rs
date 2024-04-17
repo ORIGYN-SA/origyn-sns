@@ -1,13 +1,14 @@
 use candid::Principal;
-use ic_cdk::query;
+use ic_cdk::update;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
 use utils::env::Environment;
 
-use crate::state::read_state;
+use crate::state::{ mutate_state, read_state };
 
-#[query]
+#[update]
 fn request_deposit_account(of: Option<Principal>) -> AccountIdentifier {
     let principal = of.unwrap_or(read_state(|s| s.env.caller()));
+    mutate_state(|s| s.data.deposit_principals.insert(principal));
     compute_deposit_account(&principal)
 }
 
@@ -22,7 +23,7 @@ mod tests {
     use utils::env::CanisterEnv;
 
     use crate::{
-        queries::request_deposit_account::compute_deposit_account,
+        updates::request_deposit_account::compute_deposit_account,
         state::{ init_state, Data, RuntimeState },
     };
 

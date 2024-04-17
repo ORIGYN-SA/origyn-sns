@@ -1,10 +1,10 @@
 use crate::{ generate_query_call, generate_update_call };
 
 // Queries
-generate_query_call!(request_deposit_account);
 generate_query_call!(get_swap_info);
 
 // Updates
+generate_update_call!(request_deposit_account);
 generate_update_call!(swap_tokens);
 
 pub mod swap_tokens {
@@ -70,7 +70,7 @@ pub mod happy_path {
     }
 
     pub fn deposit_account(
-        pic: &PocketIc,
+        pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
         user: Principal
     ) -> request_deposit_account::Response {
