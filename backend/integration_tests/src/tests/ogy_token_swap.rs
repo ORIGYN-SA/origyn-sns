@@ -61,8 +61,6 @@ fn valid_swap() {
         swap_pool_amount.into()
     );
 
-    let swap_amount = amount - E8S_FEE_OGY;
-
     let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
@@ -70,7 +68,7 @@ fn valid_swap() {
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        swap_amount
+        amount - E8S_FEE_OGY
     ).unwrap();
 
     let result = swap_tokens_authenticated_call(
@@ -82,7 +80,7 @@ fn valid_swap() {
 
     assert_eq!(result, SwapTokensResponse::Success);
 
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
     // retry same swap should fail
     let result = swap_tokens_authenticated_call(
@@ -93,7 +91,7 @@ fn valid_swap() {
     );
     assert_eq!(result, SwapTokensResponse::InternalError("Swap already completed.".to_string()));
     // balance shouldn't change
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 }
 
 #[test]
@@ -130,8 +128,6 @@ fn invalid_deposit_account() {
         swap_pool_amount.into()
     );
 
-    let swap_amount = amount - E8S_FEE_OGY;
-
     let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
@@ -139,7 +135,7 @@ fn invalid_deposit_account() {
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        swap_amount
+        amount - E8S_FEE_OGY
     ).unwrap();
 
     let result = swap_tokens_authenticated_call(
@@ -191,7 +187,7 @@ fn invalid_deposit_account() {
 
     assert_eq!(result, SwapTokensResponse::Success);
 
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), swap_amount);
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
     assert_eq!(
         swap_info(
@@ -235,8 +231,6 @@ fn test_anonymous_request() {
         swap_pool_amount.into()
     );
 
-    let swap_amount = amount - E8S_FEE_OGY;
-
     let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
@@ -244,7 +238,7 @@ fn test_anonymous_request() {
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        swap_amount
+        amount - E8S_FEE_OGY
     ).unwrap();
 
     // requesting swap with anonymous principal simulating a call from e.g. the team on behalf of the user
@@ -257,7 +251,7 @@ fn test_anonymous_request() {
 
     assert_eq!(result, SwapTokensResponse::Success);
 
-    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::from(swap_amount));
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::from(amount));
 
     assert_eq!(
         swap_info(
@@ -292,7 +286,7 @@ fn test_massive_users_swapping() {
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
         ogy_token_swap_canister_id,
-        old_ledger_total_supply.clone()
+        old_ledger_total_supply.clone() + num_holders * E8S_FEE_OGY // fees need to be added as ORIGYN covers those
     );
 
     for holder in holders {
@@ -308,10 +302,7 @@ fn test_massive_users_swapping() {
     // old ledger should be zero
     assert_eq!(total_supply_legacy(pic, ogy_legacy_ledger_canister), Nat::default());
     // new ledger should be previous total supply minus the
-    assert_eq!(
-        total_supply_new(pic, ogy_new_ledger_canister),
-        old_ledger_total_supply - num_holders * E8S_FEE_OGY
-    )
+    assert_eq!(total_supply_new(pic, ogy_new_ledger_canister), old_ledger_total_supply)
 }
 
 #[test]
@@ -345,8 +336,6 @@ fn test_swap_amount_too_small() {
         swap_pool_amount.into()
     );
 
-    let swap_amount = amount - E8S_FEE_OGY;
-
     let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
 
     let block_index_deposit = transfer_ogy(
@@ -354,7 +343,7 @@ fn test_swap_amount_too_small() {
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        swap_amount
+        amount - E8S_FEE_OGY
     ).unwrap();
 
     let result = swap_tokens_authenticated_call(
@@ -368,7 +357,7 @@ fn test_swap_amount_too_small() {
         result,
         SwapTokensResponse::InternalError(
             format!(
-                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.00800000."
+                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.01000000."
             )
         )
     );
@@ -426,7 +415,7 @@ fn user_token_swap(
         old_ledger_canister_id,
         principal_to_legacy_account_id(user, None).to_string()
     ).e8s();
-    let swap_amount = balance - E8S_FEE_OGY;
+    let swap_amount = balance;
 
     let deposit_address = deposit_account(&pic, swap_canister_id, user);
 
@@ -435,7 +424,7 @@ fn user_token_swap(
         user,
         old_ledger_canister_id,
         deposit_address,
-        swap_amount
+        swap_amount - E8S_FEE_OGY
     ).unwrap();
 
     assert_eq!(
