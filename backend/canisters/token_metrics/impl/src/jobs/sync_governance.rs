@@ -6,7 +6,10 @@ use std::time::Duration;
 use tracing::{debug, error, info};
 use types::Milliseconds;
 
-use crate::state::{mutate_state, read_state, GovernanceStats};
+use crate::{
+    jobs::sync_supply_data::{self},
+    state::{mutate_state, read_state, GovernanceStats},
+};
 
 const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -107,6 +110,9 @@ pub async fn sync_neurons_data() {
         }
         *all_gov_stats = temp_all_gov_stats;
     });
+
+    // After we have computed governance stats, update the total supply and circulating supply
+    sync_supply_data::run();
 }
 fn update_principal_neuron_mapping(
     principal_with_neurons: &mut NormalBTreeMap<Principal, Vec<NeuronId>>,

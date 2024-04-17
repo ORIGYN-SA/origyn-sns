@@ -29,10 +29,15 @@ type Token = record {
   index : nat;
   content_encoding : text;
 };
+type TokenSupplyData = record {
+  circulating_supply : nat64;
+  total_supply : nat64;
+};
 service : (Args) -> {
   __get_candid_interface_tmp_hack : () -> (text) query;
   get_all_neuron_owners : () -> (vec principal) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
+  get_supply_data : () -> (TokenSupplyData) query;
   http_request : (HttpRequest) -> (HttpResponse) query;
   run_gov_job : () -> (text);
 }
