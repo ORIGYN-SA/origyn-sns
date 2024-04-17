@@ -1,5 +1,9 @@
 use candid::Principal;
+use ic_ledger_types::Tokens;
 use types::CanisterId;
+use utils::consts::E8S_PER_OGY;
+
+pub const OGY_MIN_SWAP_AMOUNT: Tokens = Tokens::from_e8s(1 * E8S_PER_OGY);
 
 pub const OGY_LEGACY_MINTING_CANISTER_ID: CanisterId = Principal::from_slice(
     &[0, 0, 0, 0, 1, 32, 0, 220, 1, 1]
