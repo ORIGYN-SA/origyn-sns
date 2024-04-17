@@ -1,16 +1,23 @@
 use candid::{ Nat, Principal };
-use ic_ledger_types::{ Subaccount, Tokens };
+use ic_ledger_types::Subaccount;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap::{
-    model::token_swap::{ BlockFailReason, SwapError, SwapInfo, SwapStatus },
+    model::token_swap::{ BlockFailReason, SwapError, SwapStatus },
     updates::swap_tokens::SwapTokensResponse,
 };
+use pocket_ic::PocketIc;
+use types::CanisterId;
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
     client::{
-        icrc1::happy_path::{ balance_of, transfer },
-        ogy_legacy_ledger::happy_path::{ mint_ogy, transfer_ogy },
+        icrc1::happy_path::{ balance_of, transfer, total_supply as total_supply_new },
+        ogy_legacy_ledger::happy_path::{
+            balance_of as balance_of_ogy_legacy,
+            mint_ogy,
+            total_supply as total_supply_legacy,
+            transfer_ogy,
+        },
         ogy_token_swap::happy_path::{
             deposit_account,
             swap_info,
@@ -19,7 +26,7 @@ use crate::{
         },
     },
     init::init,
-    utils::random_principal,
+    utils::{ random_amount, random_principal },
     TestEnv,
 };
 
@@ -262,6 +269,54 @@ fn test_anonymous_request() {
         SwapStatus::Complete
     );
 }
+
+#[test]
+fn test_massive_users_swapping() {
+    let mut env = init();
+    let TestEnv { ref mut pic, canister_ids, controller } = env;
+
+    let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
+    let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let ogy_new_ledger_minting_account = controller;
+
+    let num_holders = 100;
+    let holders = init_token_distribution(pic, ogy_legacy_ledger_canister, num_holders);
+    let old_ledger_total_supply = total_supply_legacy(pic, ogy_legacy_ledger_canister);
+
+    // mint tokens to swap reserve pool of swap canister
+    // test by adding the exact amount of tokens which corresponds to the total_supply of the old ledger
+    let _ = transfer(
+        pic,
+        ogy_new_ledger_minting_account,
+        ogy_new_ledger_canister,
+        ogy_token_swap_canister_id,
+        old_ledger_total_supply.clone()
+    );
+
+    for holder in holders {
+        user_token_swap(
+            pic,
+            holder,
+            ogy_legacy_ledger_canister,
+            ogy_new_ledger_canister,
+            ogy_token_swap_canister_id
+        );
+    }
+
+    // old ledger should be zero
+    assert_eq!(total_supply_legacy(pic, ogy_legacy_ledger_canister), Nat::default());
+    // new ledger should be previous total supply minus the
+    assert_eq!(
+        total_supply_new(pic, ogy_new_ledger_canister),
+        old_ledger_total_supply - num_holders * E8S_FEE_OGY
+    )
+}
+
+#[test]
+fn test_insufficient_funds_in_distribution_pool() {}
+
 #[test]
 fn test_deposit_account() {
     let env = init();
@@ -275,4 +330,56 @@ fn test_deposit_account() {
         deposit_account(&pic, ogy_token_swap_canister_id, user),
         principal_to_legacy_account_id(ogy_token_swap_canister_id, Some(Subaccount::from(user)))
     )
+}
+
+fn init_token_distribution(
+    pic: &mut PocketIc,
+    ledger_canister_id: CanisterId,
+    num_users: u64
+) -> Vec<Principal> {
+    let mut holders: Vec<Principal> = vec![];
+    for _ in 0..num_users {
+        let user = random_principal();
+        let amount = random_amount(1, 1_000_000) * E8S_PER_OGY;
+        let _ = mint_ogy(
+            pic,
+            ledger_canister_id,
+            principal_to_legacy_account_id(user, None),
+            amount
+        ).unwrap();
+        holders.push(user);
+    }
+    holders
+}
+
+fn user_token_swap(
+    pic: &mut PocketIc,
+    user: Principal,
+    old_ledger_canister_id: CanisterId,
+    new_ledger_canister_id: CanisterId,
+    swap_canister_id: CanisterId
+) {
+    let balance = balance_of_ogy_legacy(
+        pic,
+        old_ledger_canister_id,
+        principal_to_legacy_account_id(user, None).to_string()
+    ).e8s();
+    let swap_amount = balance - E8S_FEE_OGY;
+
+    let deposit_address = deposit_account(&pic, swap_canister_id, user);
+
+    let block_index_deposit = transfer_ogy(
+        pic,
+        user,
+        old_ledger_canister_id,
+        deposit_address,
+        swap_amount
+    ).unwrap();
+
+    assert_eq!(
+        swap_tokens_authenticated_call(pic, user, swap_canister_id, block_index_deposit),
+        SwapTokensResponse::Success
+    );
+
+    assert_eq!(balance_of(&pic, new_ledger_canister_id, user), swap_amount);
 }
