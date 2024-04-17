@@ -42,7 +42,7 @@ fn valid_swap() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
-    let amount = 100_000 * E8S_PER_OGY;
+    let amount = 1 * E8S_PER_OGY;
 
     // mint tokens to swapping user
     let _ = mint_ogy(
@@ -312,6 +312,68 @@ fn test_massive_users_swapping() {
         total_supply_new(pic, ogy_new_ledger_canister),
         old_ledger_total_supply - num_holders * E8S_FEE_OGY
     )
+}
+
+#[test]
+fn test_swap_amount_too_small() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, controller } = env;
+
+    let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
+    let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let ogy_new_ledger_minting_account = controller;
+
+    let user = random_principal();
+    let amount = 1_000_000;
+
+    // mint tokens to swapping user
+    let _ = mint_ogy(
+        &mut pic,
+        ogy_legacy_ledger_canister,
+        principal_to_legacy_account_id(user, None),
+        amount
+    ).unwrap();
+    // mint tokens to swap reserve pool of swap canister
+    let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
+    let _ = transfer(
+        &mut pic,
+        ogy_new_ledger_minting_account,
+        ogy_new_ledger_canister,
+        ogy_token_swap_canister_id,
+        swap_pool_amount.into()
+    );
+
+    let swap_amount = amount - E8S_FEE_OGY;
+
+    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+
+    let block_index_deposit = transfer_ogy(
+        &mut pic,
+        user,
+        ogy_legacy_ledger_canister,
+        deposit_address,
+        swap_amount
+    ).unwrap();
+
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit
+    );
+
+    assert_eq!(
+        result,
+        SwapTokensResponse::InternalError(
+            format!(
+                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.00800000."
+            )
+        )
+    );
+
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), 0u64);
 }
 
 #[test]

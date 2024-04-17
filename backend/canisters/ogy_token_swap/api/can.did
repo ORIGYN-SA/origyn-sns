@@ -1,10 +1,10 @@
 type BlockFailReason = variant {
   ReceiverNotCorrectAccountId : blob;
-  ZeroAmount;
   NotFound;
   QueryRequestFailed;
   SenderNotPrincipalDefaultSubaccount : blob;
   InvalidOperation;
+  AmountTooSmall;
 };
 type BurnFailReason = variant {
   TransferError : TransferError;
