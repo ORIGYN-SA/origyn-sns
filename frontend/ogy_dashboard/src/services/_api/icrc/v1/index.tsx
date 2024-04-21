@@ -1,9 +1,10 @@
 import axios from "axios";
+import { API_ICRC_V1_BASE_URL } from "@constants/index";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_ICRC_V1_BASE_URL,
+  baseURL: API_ICRC_V1_BASE_URL,
   timeout: 1000,
-  //   headers: { "X-Custom-Header": "foobar" },
+  //   headers: { "X-Custom-Header": "" },
   withCredentials: false,
 });
 

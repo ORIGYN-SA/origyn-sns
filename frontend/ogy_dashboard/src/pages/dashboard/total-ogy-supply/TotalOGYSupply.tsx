@@ -1,47 +1,29 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BarChart from "@components/charts/bar/Bar";
 import Card from "@components/ui/Card";
+import useTotalOGYSupply from "./useTotalOGYSupply";
+import { ChartData } from "@services/_api/types/charts.types";
 
 type TotalOGYSupply = {
   className?: string;
 };
 
 const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
-  const data = useMemo(
-    () => [
-      {
-        name: "27 feb",
-        value: 2000,
-      },
-      {
-        name: "27 mar",
-        value: 1500,
-      },
-      {
-        name: "27 apr",
-        value: 1200,
-      },
-      {
-        name: "27 may",
-        value: 1000,
-      },
-      {
-        name: "27 jun",
-        value: 850,
-      },
-      {
-        name: "27 jul",
-        value: 500,
-      },
-      {
-        name: "27 aug",
-        value: 200,
-      },
-    ],
-    []
+  const [totalSupplyOGY, setTotalSupplyOGY] = useState("0");
+  const [totalSupplyOGYTimeSeries, setTotalSupplyOGYTimeSeries] = useState(
+    [] as ChartData[]
   );
-
   const barFill = useMemo(() => "#38bdf8", []);
+
+  // TODO implement change period (dayly/weekly/monthly...)
+  const { data, isSuccess } = useTotalOGYSupply();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTotalSupplyOGY(data.totalSupply);
+      setTotalSupplyOGYTimeSeries(data.dataPieChart);
+    }
+  }, [isSuccess, data]);
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -55,11 +37,11 @@ const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">
         <img src="/vite.svg" alt="OGY Logo" />
-        <span className="ml-2 mr-3">10 418 169 376,19</span>
+        <span className="ml-2 mr-3">{totalSupplyOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-80 rounded-lg">
-        <BarChart data={data} barFill={barFill} />
+      <div className="mt-6 h-96 rounded-lg">
+        <BarChart data={totalSupplyOGYTimeSeries} barFill={barFill} />
       </div>
     </Card>
   );

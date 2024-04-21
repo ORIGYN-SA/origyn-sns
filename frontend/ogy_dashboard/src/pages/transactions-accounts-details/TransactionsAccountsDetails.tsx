@@ -7,12 +7,11 @@ import {
   useParams,
 } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-// import { Card } from "@components/ui";
 
-import useFetchOneAccount, {
+import fetchOneAccountQuery, {
   Account,
-  FetchOneAccountParams,
-} from "@services/accounts/fetchOne";
+  AccountParams,
+} from "@services/accounts/fetchOneAccountQuery";
 
 // export const loader = async () => {
 //   const dataProposals = new Promise((resolve) => {
@@ -29,8 +28,8 @@ import useFetchOneAccount, {
 // eslint-disable-next-line react-refresh/only-export-components
 export const loader =
   (queryClient: QueryClient) =>
-  async ({ params }: { params: FetchOneAccountParams }) => {
-    const query = useFetchOneAccount({ id: params.id });
+  async ({ params }: { params: AccountParams }) => {
+    const query = fetchOneAccountQuery({ id: params.id });
     return (
       queryClient.getQueryData(query.queryKey) ??
       (await queryClient.fetchQuery(query))
@@ -50,7 +49,7 @@ export const TransactionsAccountsDetails = () => {
   const params = useParams();
 
   const { data }: UseQueryResult<Account> = useQuery({
-    ...useFetchOneAccount({ id: params.id }),
+    ...fetchOneAccountQuery({ id: params.id }),
     initialData,
   });
 

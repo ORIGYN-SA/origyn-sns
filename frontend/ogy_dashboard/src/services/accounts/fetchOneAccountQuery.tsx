@@ -1,7 +1,10 @@
-import { keepPreviousData } from "@tanstack/react-query";
+import {
+  UseQueryOptions,
+  FetchQueryOptions,
+  keepPreviousData,
+} from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-
-const LEDGER_CANISTER_ID = import.meta.env.VITE_LEDGER_CANISTER_ID;
+import { LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface Account {
   id: string | null;
@@ -14,24 +17,28 @@ export interface Account {
   updated_at: string;
 }
 
-export interface FetchOneAccountParams {
+export interface AccountParams {
   id: string | undefined;
 }
 
-const fn = async ({ id }: FetchOneAccountParams): Promise<Account> => {
+const fn = async ({ id }: AccountParams): Promise<Account> => {
   const { data } = await icrcAPI.get(
     `/ledgers/${LEDGER_CANISTER_ID}/accounts/${id}`
   );
   return data ?? null;
 };
 
-const fetchOneAccount = ({ id = undefined }: FetchOneAccountParams) => {
+const fetchOneAccountQuery = (
+  { id = undefined }: AccountParams,
+  options?: UseQueryOptions
+) => {
   return {
     queryKey: ["fetchOneAccount", id],
-    queryFn: async () => fn({ id }),
+    queryFn: fn({ id }),
     placeholderData: keepPreviousData,
     enabled: !!id,
-  };
+    ...options,
+  } as FetchQueryOptions;
 };
 
-export default fetchOneAccount;
+export default fetchOneAccountQuery;

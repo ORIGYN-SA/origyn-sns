@@ -1,7 +1,6 @@
 import { keepPreviousData } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-
-const LEDGER_CANISTER_ID = import.meta.env.VITE_LEDGER_CANISTER_ID;
+import { LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface Transaction {
   index: number;
@@ -27,7 +26,7 @@ const fn = async ({
   return data ?? null;
 };
 
-const fetchOneTransaction = ({
+const fetchOneTransactionQuery = ({
   index = undefined,
 }: FetchOneTransactionParams) => {
   return {
@@ -38,4 +37,4 @@ const fetchOneTransaction = ({
   };
 };
 
-export default fetchOneTransaction;
+export default fetchOneTransactionQuery;

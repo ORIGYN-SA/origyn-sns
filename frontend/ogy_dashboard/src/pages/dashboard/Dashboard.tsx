@@ -13,7 +13,7 @@ const Dashboard = () => {
           <span className="text-sm font-semibold uppercase tracking-wider">
             OGY Analytics
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-center mt-2">
+          <h1 className="text-4xl sm:text-6xl font-bold text-center mt-2">
             Explore dashboard
           </h1>
           <p className="mt-3 text-lg text-center px-6">
