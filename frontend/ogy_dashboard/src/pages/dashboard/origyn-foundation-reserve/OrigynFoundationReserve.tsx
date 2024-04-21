@@ -1,6 +1,11 @@
-import { useMemo } from "react";
-import Card from "@components/ui/Card";
+import { useMemo, useState, useEffect } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { Card } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
+import fetchFoundationAssetsOGY, {
+  FoundationAssetsOGY,
+} from "@services/foundation/fetchFoundationAssetsOGYQuery";
+import { PieChart as PieChartTypes } from "@services/_api/types/charts.types";
 
 type OrigynFoundationReserve = {
   className?: string;
@@ -10,20 +15,27 @@ const OrigynFoundationReserve = ({
   className,
   ...restProps
 }: OrigynFoundationReserve) => {
-  const data = useMemo(
-    () => [
-      {
-        name: "Locked",
-        value: 6957526202.66,
-      },
-      {
-        name: "unlocked",
-        value: 744999999.98,
-      },
-    ],
-    []
-  );
+  const [totalSupply, setTotalSupply] = useState("0");
+  const [totalSupplyStaked, setTotalSupplyStaked] = useState("0");
+  const [totalSupplyVested, setTotalSupplyVested] = useState("0");
+  const [dataPieChart, setDataPieChart] = useState([] as Array<PieChartTypes>);
   const colors = useMemo(() => ["#ff55c5", "#90306f"], []);
+
+  const {
+    data: foundationAssets,
+    isSuccess,
+  }: UseQueryResult<FoundationAssetsOGY> = useQuery(
+    fetchFoundationAssetsOGY({})
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTotalSupply(foundationAssets.totalSupplyToString);
+      setDataPieChart(foundationAssets.dataPieChart);
+      setTotalSupplyStaked(foundationAssets.totalLockedStakedToString);
+      setTotalSupplyVested(foundationAssets.totalLockedVestedToString);
+    }
+  }, [isSuccess, foundationAssets]);
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -35,17 +47,43 @@ const OrigynFoundationReserve = ({
       </div>
 
       <div className="mt-6 h-80 rounded-lg">
-        <PieChart data={data} colors={colors} />
+        <PieChart data={dataPieChart} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">
-        <div className="flex flex-col items-center my-4">
-          <h2 className="text-lg font-semibold text-content/60">
-            Total Foundation Supply
-          </h2>
-          <div className="mt-4 flex items-center text-2xl font-semibold">
-            <img src="/vite.svg" alt="OGY Logo" />
-            <span className="ml-2 mr-3">202 281 245,91</span>
-            <span className="text-content/60">OGY</span>
+        <h2 className="text-lg font-semibold text-content/60">
+          Total Foundation Supply
+        </h2>
+        <div className="mt-4 flex items-center text-2xl font-semibold">
+          <img src="/vite.svg" alt="OGY Logo" />
+          <span className="ml-2 mr-3">{totalSupply}</span>
+          <span className="text-content/60">OGY</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 gap-4">
+        {dataPieChart.map(({ name, valueToString }, index) => (
+          <Card className="bg-surface-2 mt-8 pb-8" key={name}>
+            <div className="flex items-center text-lg">
+              {/* <img src="/vite.svg" alt="OGY Logo" /> */}
+              <span className="text-content/60">{name}</span>
+            </div>
+            <div className="flex items-center mt-4 text-2xl font-semibold">
+              <span className="mr-3">{valueToString}</span>
+              <span className="text-content/60">OGY</span>
+            </div>
+            <Card.BorderBottom color={colors[index]} />
+          </Card>
+        ))}
+      </div>
+      <div className="mt-8">
+        <div className="text-center">ORIGYN FOUNDATION LOCKED TOKENS</div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 text-center mt-4">
+          <div>
+            <span>Staked tokens </span>
+            <span>{totalSupplyStaked} OGY</span>
+          </div>
+          <div>
+            <span>Vested tokens </span>
+            <span>{totalSupplyVested} OGY</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import Card from "@components/ui/Card";
 import PieChart from "@components/charts/pie/Pie";
+import useOGYCirculationState from "./useOGYCirculationState";
 
 type OGYCirculationState = {
   className?: string;
@@ -10,21 +11,16 @@ const OGYCirculationState = ({
   className,
   ...restProps
 }: OGYCirculationState) => {
-  const data = useMemo(
-    () => [
-      {
-        name: "OGY not in the hand of the Foundation",
-        value: 6957526202.66,
-      },
-      {
-        name: "OGY locked in the hand of the Foundation",
-        value: 6744999999.98,
-      },
-    ],
-    []
-  );
-
   const colors = useMemo(() => ["#645eff", "#333089"], []);
+  const { circulationData, isLoading, error } = useOGYCirculationState();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -34,19 +30,35 @@ const OGYCirculationState = ({
           Info
         </button>
       </div>
-
       <div className="mt-6 h-80 rounded-lg">
-        <PieChart data={data} colors={colors} />
+        <PieChart data={circulationData.dataPieChart} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">
         <h2 className="text-lg font-semibold text-content/60">
-          Total OGY Burned
+          Total OGY Circulation
         </h2>
         <div className="mt-4 flex items-center text-2xl font-semibold">
           <img src="/vite.svg" alt="OGY Logo" />
-          <span className="ml-2 mr-3">202 281 245,91</span>
+          <span className="ml-2 mr-3">
+            {circulationData.totalCirculationState}
+          </span>
           <span className="text-content/60">OGY</span>
         </div>
+      </div>
+      <div className="grid grid-cols-1 gap-4">
+        {circulationData.dataPieChart.map(({ name, valueToString }, index) => (
+          <Card className="bg-surface-2 mt-8 pb-8" key={name}>
+            <div className="flex items-center text-lg">
+              {/* <img src="/vite.svg" alt="OGY Logo" /> */}
+              <span className="text-content/60">{name}</span>
+            </div>
+            <div className="flex items-center mt-4 text-2xl font-semibold">
+              <span className="mr-3">{valueToString}</span>
+              <span className="text-content/60">OGY</span>
+            </div>
+            <Card.BorderBottom color={colors[index]} />
+          </Card>
+        ))}
       </div>
     </Card>
   );

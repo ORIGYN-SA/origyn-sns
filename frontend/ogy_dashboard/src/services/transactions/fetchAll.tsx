@@ -1,36 +1,17 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-
-const LEDGER_CANISTER_ID = import.meta.env.VITE_LEDGER_CANISTER_ID;
-
-export interface DataTransaction {
-  index: number;
-  updated_at: Date;
-  from_account: string;
-  to_account: string;
-  amount: string;
-  fee: string;
-}
-
-interface Transaction {
-  rows: DataTransaction[];
-  pageCount: number;
-  rowCount: number;
-}
-
-interface FetchAllTransactionsQueryParams {
-  limit: number;
-  offset: number;
-}
+import { ApiServiceErr } from "@services/_api/types/api.types";
+import { ListParams } from "@services/_api/types/list.params.types";
+import { TransactionResults } from "@services/_api/types/transactions.types";
+import { LEDGER_CANISTER_ID } from "@constants/index";
 
 const fn = async ({
   limit,
   offset,
-}: FetchAllTransactionsQueryParams): Promise<Transaction> => {
+}: ListParams): Promise<TransactionResults> => {
   const { data } = await icrcAPI.get(
     `/ledgers/${LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}`
   );
-
   return {
     rows: data?.data ?? [],
     pageCount: data.total_transactions
@@ -40,11 +21,8 @@ const fn = async ({
   };
 };
 
-const useFetchAllTransactions = ({
-  limit = 20,
-  offset = 0,
-}: FetchAllTransactionsQueryParams) => {
-  return useQuery<Transaction, Error>({
+const useFetchAllTransactions = ({ limit = 20, offset = 0 }: ListParams) => {
+  return useQuery<TransactionResults, ApiServiceErr>({
     queryKey: ["fetchAllTransactions", limit, offset],
     queryFn: () => fn({ limit, offset }),
     placeholderData: keepPreviousData,

@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import _truncate from "lodash/truncate";
 import { Table, Tooltip } from "@components/ui";
-import useFetchAllTransactions, {
-  DataTransaction,
-} from "@services/transactions/fetchAll";
+import useFetchAllTransactions from "@services/transactions/fetchAll";
+import { Transaction } from "@services/_api/types/transactions.types";
 import { PaginationProps } from "@helpers/table/useTableProps";
 
 const TransactionsList = ({
@@ -14,7 +13,7 @@ const TransactionsList = ({
   enablePagination,
 }: PaginationProps) => {
   const navigate = useNavigate();
-  const columns = useMemo<ColumnDef<DataTransaction>[]>(
+  const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
       {
         accessorKey: "index",
@@ -92,7 +91,7 @@ const TransactionsList = ({
     offset: pagination.pageSize * pagination.pageIndex,
   });
 
-  const handleClickView = (cell: CellContext<DataTransaction, unknown>) => {
+  const handleClickView = (cell: CellContext<Transaction, unknown>) => {
     const columnId = cell.column?.id;
     const row = cell?.row?.original;
     const pathnames = {

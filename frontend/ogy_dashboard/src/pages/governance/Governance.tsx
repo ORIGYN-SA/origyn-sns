@@ -95,7 +95,7 @@ export const Governance = () => {
       <div className="py-16 px-4">
         <div className="grid grid-cols-1 xl:grid-cols-2 py-16 gap-8">
           <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left">
-            <h1 className="text-4xl sm:text-6xl font-extrabold">
+            <h1 className="text-4xl sm:text-6xl font-bold">
               Governance Overview
             </h1>
             <h2 className="mt-2 text-xl text-content/60">

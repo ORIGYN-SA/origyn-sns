@@ -3,5 +3,6 @@ import Button from "@components/ui/Button";
 import Select from "@components/ui/Select";
 import Table from "@components/ui/Table";
 import Tooltip from '@components/ui/Tooltip'
+import Dialog from '@components/ui/Dialog'
 
-export {Card, Button, Select, Table, Tooltip}
+export {Card, Button, Select, Table, Tooltip, Dialog}

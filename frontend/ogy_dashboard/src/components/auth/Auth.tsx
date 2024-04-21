@@ -1,4 +1,4 @@
-import { ConnectButton, ConnectDialog } from "@connect2ic/react";
+import { useConnect, ConnectButton, ConnectDialog } from "@connect2ic/react";
 import styled from "styled-components";
 import useThemeDetector from "@helpers/theme/useThemeDetector";
 
@@ -21,19 +21,19 @@ const Styles = styled.div`
 const Auth = () => {
   const isDarkTheme = useThemeDetector();
 
-  //   const { isConnected, principal, activeProvider } = useConnect({
-  //     onConnect: () => {
-  //       console.log("Connected");
-  //     },
-  //     onDisconnect: () => {
-  //       console.log("Disconected");
-  //     },
-  //   });
+  useConnect({
+    onConnect: () => {
+      document.body.style.overflow = "unset";
+    },
+    onDisconnect: () => {
+      console.log("disconnected");
+    },
+  });
 
   return (
     <Styles>
       <ConnectButton />
-      <ConnectDialog dark={isDarkTheme ? true : false} />
+      <ConnectDialog dark={isDarkTheme} />
     </Styles>
   );
 };

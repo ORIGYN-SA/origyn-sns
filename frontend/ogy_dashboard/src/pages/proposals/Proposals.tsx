@@ -46,7 +46,7 @@ export const Proposals = () => {
     <div className="container mx-auto pb-16">
       <div className="flex flex-col items-center py-16 px-4">
         <div className="max-w-4xl text-center">
-          <h1 className="text-4xl sm:text-6xl font-extrabold">Proposals</h1>
+          <h1 className="text-4xl sm:text-6xl font-bold">Proposals</h1>
           <p className="mt-6 text-content/60">
             Holders of OGY tokens can directly influence the ORIGYN Network by
             staking their OGY and voting on proposals. By participating in the

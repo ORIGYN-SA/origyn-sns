@@ -3,6 +3,7 @@ import { PropsWithChildren } from "react";
 interface ButtonProps
   extends PropsWithChildren<{
     className?: string;
+    onClick?: any;
   }> {}
 
 const Button = ({ className, children, ...restProps }: ButtonProps) => {

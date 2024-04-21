@@ -3,10 +3,10 @@ import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useQuery, QueryClient, UseQueryResult } from "@tanstack/react-query";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card } from "@components/ui";
-import useFetchOneTransaction, {
+import fetchOneTransactionQuery, {
   Transaction,
   FetchOneTransactionParams,
-} from "@services/transactions/fetchOne";
+} from "@services/transactions/fetchOneTransactionQuery";
 
 import { UserIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
@@ -14,7 +14,7 @@ import { UserIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 export const loader =
   (queryClient: QueryClient) =>
   async ({ params }: { params: FetchOneTransactionParams }) => {
-    const query = useFetchOneTransaction({ index: params.index });
+    const query = fetchOneTransactionQuery({ index: params.index });
     return (
       queryClient.getQueryData(query.queryKey) ??
       (await queryClient.fetchQuery(query))
@@ -29,7 +29,7 @@ export const TransactionsDetails = () => {
   const params = useParams();
 
   const { data }: UseQueryResult<Transaction> = useQuery({
-    ...useFetchOneTransaction({ index: params.index }),
+    ...fetchOneTransactionQuery({ index: params.index }),
     initialData,
   });
 

@@ -9,6 +9,11 @@ import {
 } from "recharts";
 import tc from "tinycolor2";
 import { colors as themeColors } from "@theme/preset";
+export interface PieChart {
+  name: string;
+  value: number;
+  valueToString?: string;
+}
 
 const Pie = ({ data, colors }) => {
   const [activeIndex, setActiveIndex] = useState(null);
