@@ -34,7 +34,7 @@ const fetchOneAccountQuery = (
 ) => {
   return {
     queryKey: ["fetchOneAccount", id],
-    queryFn: fn({ id }),
+    queryFn: () => fn({ id }),
     placeholderData: keepPreviousData,
     enabled: !!id,
     ...options,
