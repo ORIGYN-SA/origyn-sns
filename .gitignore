@@ -1,2 +1,5 @@
 target
 .dfx
+.vscode
+.env
+pocket-ic
