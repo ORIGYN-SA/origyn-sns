@@ -1,10 +1,10 @@
-use http_request::{ build_json_response, extract_route, Route, encode_logs };
+use http_request::{build_json_response, encode_logs, extract_route, Route};
 use ic_cdk_macros::query;
-use types::{ HttpRequest, HttpResponse, TimestampMillis };
+use types::{HttpRequest, HttpResponse, TimestampMillis};
 
-use crate::state::{ read_state, RuntimeState };
+use crate::state::{read_state, RuntimeState};
 
-#[query]
+#[query(hidden = true)]
 fn http_request(request: HttpRequest) -> HttpResponse {
     fn get_logs_impl(since: Option<TimestampMillis>) -> HttpResponse {
         encode_logs(canister_logger::export_logs(), since.unwrap_or(0))

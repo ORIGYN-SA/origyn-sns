@@ -1,9 +1,8 @@
 {
-  "dfx": "0.17.0",
+  "dfx": "0.19.0",
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
     "ogy_token_swap": {
-      "build": ["npm run build:back"],
       "candid": "backend/canisters/ogy_token_swap/api/can.did",
       "declarations": {
         "bindings": ["js", "did"],

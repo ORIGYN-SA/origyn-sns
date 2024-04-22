@@ -1,16 +1,22 @@
-use candid::{CandidType, Principal};
+use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
-use serde::{Deserialize, Serialize};
-use types::TimestampMillis;
+use ic_ledger_types::{ AccountIdentifier, Subaccount };
+use serde::{ Deserialize, Serialize };
+use types::{ CanisterId, TimestampMillis };
 use utils::{
     consts::SNS_GOVERNANCE_CANISTER_ID,
-    env::{CanisterEnv, Environment},
+    env::{ CanisterEnv, Environment },
     memory::MemorySize,
+};
+
+use crate::{
+    consts::{ OGY_LEGACY_MINTING_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL },
+    model::token_swap::TokenSwap,
 };
 
 canister_state!(RuntimeState);
 
-#[derive(Default, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct RuntimeState {
     /// Runtime environment
     pub env: CanisterEnv,
@@ -33,7 +39,7 @@ impl RuntimeState {
         }
     }
 
-    pub fn is_caller_governance_principal(&self) -> bool {
+    pub fn is_caller_authorised_principal(&self) -> bool {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
     }
@@ -52,23 +58,37 @@ pub struct CanisterInfo {
     pub cycles_balance_in_tc: f64,
 }
 
-#[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]
-pub struct SyncInfo {
-    pub last_synced_start: TimestampMillis,
-    pub last_synced_end: TimestampMillis,
-    pub last_synced_number_of_neurons: usize,
-}
-
 #[derive(Serialize, Deserialize)]
 pub struct Data {
     /// authorized Principals for guarded calls
     pub authorized_principals: Vec<Principal>,
+    /// state of the swaps
+    pub token_swap: TokenSwap,
+    /// canister ids that are being interacted with
+    pub canister_ids: CanisterIds,
+    /// The minting account of legacy OGY where tokens are burned to
+    pub minting_account: AccountIdentifier,
 }
 
-impl Default for Data {
-    fn default() -> Self {
+impl Data {
+    pub fn new(ogy_new_ledger: CanisterId, ogy_legacy_ledger: CanisterId) -> Self {
         Self {
-            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
+            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL],
+            token_swap: TokenSwap::default(),
+            canister_ids: CanisterIds {
+                ogy_new_ledger,
+                ogy_legacy_ledger,
+            },
+            minting_account: AccountIdentifier::new(
+                &OGY_LEGACY_MINTING_CANISTER_ID,
+                &Subaccount([0; 32])
+            ),
         }
     }
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CanisterIds {
+    pub ogy_new_ledger: Principal,
+    pub ogy_legacy_ledger: Principal,
 }
