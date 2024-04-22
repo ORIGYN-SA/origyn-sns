@@ -85,6 +85,9 @@ pub struct Data {
     pub principal_neurons: BTreeMap<Principal, Vec<NeuronId>>,
     /// Stores governance stats by principal
     pub principal_gov_stats: BTreeMap<Principal, GovernanceStats>,
+    /// Balance list containing all principals, with their governance and
+    /// ledger balances, updated every 1hr
+    pub balance_list: BTreeMap<Principal, PrincipalBalance>,
     /// Token supply data, such as total supply and circulating supply
     pub supply_data: TokenSupplyData,
 }
@@ -96,7 +99,11 @@ pub struct GovernanceStats {
     pub total_unlocked: u64,
     pub total_rewards: u64,
 }
-
+#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+pub struct PrincipalBalance {
+    pub governance: GovernanceStats,
+    pub ledger: u64,
+}
 #[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
 pub struct TokenSupplyData {
     pub total_supply: u64,
@@ -111,6 +118,7 @@ impl Default for Data {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
+            balance_list: BTreeMap::new(),
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),

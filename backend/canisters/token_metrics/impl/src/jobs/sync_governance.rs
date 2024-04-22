@@ -55,9 +55,8 @@ pub async fn sync_neurons_data() {
             Ok(response) => {
                 // info!("{:?}", response);
                 // Mutate the state to update the principal with governance data
-                info!("Updating neurons");
+                info!("Iterating neurons");
                 response.neurons.iter().for_each(|neuron| {
-                    info!("{:?}", neuron);
                     update_principal_neuron_mapping(
                         &mut temp_principal_with_neurons,
                         &mut temp_principal_with_stats,
