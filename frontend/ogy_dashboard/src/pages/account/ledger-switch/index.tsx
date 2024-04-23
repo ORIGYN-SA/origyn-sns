@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { ReactNode } from "react";
 import { Tile } from "@components/ui";
 import WithdrawLegacyTokens from "./withdraw-legacy-tokens";

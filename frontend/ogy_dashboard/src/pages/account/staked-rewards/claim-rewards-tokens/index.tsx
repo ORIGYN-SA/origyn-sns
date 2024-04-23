@@ -13,7 +13,7 @@ const ClaimRewardsTokens = () => {
       <Button className="w-full" onClick={handleShow}>
         Claim all
       </Button>
-      <Dialog show={show} handleOnClose={handleClose}>
+      <Dialog show={show} handleClose={handleClose}>
         <div className="p-12 text-center">
           <div className="">
             <span>You are about to claim </span>

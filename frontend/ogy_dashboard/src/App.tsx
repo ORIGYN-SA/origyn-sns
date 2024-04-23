@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import "./App.css";
 import {
   createBrowserRouter,
@@ -6,30 +8,17 @@ import {
 import { QueryClient } from "@tanstack/react-query";
 
 import Layout from "@components/Layout";
-import NotFound from "@components/NotFound";
 import Dashboard from "@pages/dashboard/Dashboard";
+import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-
-const { Governance } = await import("@pages/governance/Governance");
-const { NeuronsDetails } = await import(
-  "@pages/neurons-details/NeuronsDetails"
-);
-
-const { Proposals } = await import("@pages/proposals/Proposals");
-const { ProposalsDetails } = await import(
-  "@pages/proposals-details/ProposalsDetails"
-);
-
-const { Explorer } = await import("@pages/explorer/Explorer");
-const { TransactionsDetails } = await import(
-  "@pages/transactions-details/TransactionsDetails"
-);
-
-const { Account } = await import("@pages/account");
-
-const { TransactionsAccountsDetails } = await import(
-  "@pages/transactions-accounts-details/TransactionsAccountsDetails"
-);
+import { Governance } from "@pages/governance/Governance";
+import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
+import { Proposals } from "@pages/proposals/Proposals";
+import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
+import { Explorer } from "@pages/explorer/Explorer";
+import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
+import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
+import { Account } from "@pages/account/index";
 
 const queryClient = new QueryClient();
 

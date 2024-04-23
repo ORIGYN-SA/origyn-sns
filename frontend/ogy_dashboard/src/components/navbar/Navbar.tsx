@@ -151,7 +151,7 @@ const Navbar = () => {
 
       <AccountOverview
         show={showAccountOverview}
-        handleOnHide={() => handleOnClickShowAccountOverview(false)}
+        handleClose={() => handleOnClickShowAccountOverview(false)}
       />
     </>
   );

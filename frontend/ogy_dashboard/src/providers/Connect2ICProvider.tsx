@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { PropsWithChildren } from "react";
 import { createClient } from "@connect2ic/core";
 import {

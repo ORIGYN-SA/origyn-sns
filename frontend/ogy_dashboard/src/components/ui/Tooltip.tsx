@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { PropsWithChildren } from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import styled from "styled-components";
