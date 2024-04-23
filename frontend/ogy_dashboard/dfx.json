@@ -1,0 +1,23 @@
+{
+  "canisters": {
+    "ogy_dashboard": {
+      "build": ["npm run build"],
+      "type": "assets",
+      "source": ["dist"]
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "staging": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
+    }
+  },
+  "dfx": "0.19.0",
+  "version": 1
+}

@@ -7,7 +7,12 @@ import { Transition, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
 import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
 
-const AccountOverview = ({ show, handleOnHide }) => {
+interface AccountOverviewProps {
+  show: boolean;
+  handleClose: () => void;
+}
+
+const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
   const { principalShort } = useConnect();
   const [balanceOGY, setBalanceOGY] = useState(0);
@@ -32,13 +37,13 @@ const AccountOverview = ({ show, handleOnHide }) => {
 
   const handleClickAccount = () => {
     navigate("account");
-    handleOnHide();
+    handleClose();
   };
 
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
-        <Dialog as={Fragment} static open={show} onClose={handleOnHide}>
+        <Dialog as={Fragment} static open={show} onClose={handleClose}>
           <div className="absolute z-50 inset-0 overflow-hidden">
             <Transition.Child
               as={Fragment}

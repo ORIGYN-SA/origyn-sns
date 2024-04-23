@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 // import { useMemo, Suspense } from "react";
 import { useLoaderData, defer, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";

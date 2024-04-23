@@ -13,7 +13,7 @@ const WithdrawLegacyTokens = () => {
       <Button className="w-full" onClick={handleShow}>
         Withdraw your tokens
       </Button>
-      <Dialog show={show} handleOnClose={handleClose}>
+      <Dialog show={show} handleClose={handleClose}>
         <div className="p-12 text-center">
           <div className="">
             <span>You are about to withdraw </span>

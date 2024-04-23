@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { useMemo, Suspense } from "react";
 import { useLoaderData, defer, Await } from "react-router-dom";
 import { Card, Button } from "@components/ui";

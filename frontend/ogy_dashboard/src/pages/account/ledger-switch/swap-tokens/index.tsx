@@ -14,7 +14,7 @@ const ClaimRewardsTokens = () => {
       <Button className="w-full" onClick={handleShow}>
         Swap your tokens
       </Button>
-      <Dialog show={show} handleOnClose={handleClose}>
+      <Dialog show={show} handleClose={handleClose}>
         <DialogHeadlessui.Title>Stepper</DialogHeadlessui.Title>
         <div className="p-12 text-center">
           <div className="">

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";

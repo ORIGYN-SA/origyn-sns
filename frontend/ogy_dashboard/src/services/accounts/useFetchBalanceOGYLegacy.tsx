@@ -3,10 +3,18 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useConnect, useCanister } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
+import { ActorSubclass } from "@dfinity/agent";
+interface IFetchBalanceOGYLegacy {
+  actor: ActorSubclass;
+  owner: string;
+}
 
-const fn = async ({ actor, owner }) => {
+const fetchBalanceOGYLegacy = async ({
+  actor,
+  owner,
+}: IFetchBalanceOGYLegacy) => {
   const accountIdentifier = AccountIdentifier.fromPrincipal({
-    principal: Principal.fromText(owner as string),
+    principal: Principal.fromText(owner),
   });
   const result = (await actor.account_balance_dfx({
     account: accountIdentifier.toHex(),
@@ -25,7 +33,11 @@ const useCanisterFetchBalanceOGYLegacy = () => {
       principal,
       isConnected,
     ],
-    queryFn: () => fn({ actor: ledgerLegacyActor, owner: principal }),
+    queryFn: () =>
+      fetchBalanceOGYLegacy({
+        actor: ledgerLegacyActor,
+        owner: principal as string,
+      }),
     placeholderData: keepPreviousData,
     enabled: !!isConnected && !!principal,
   });
