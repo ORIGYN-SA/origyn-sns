@@ -10,8 +10,7 @@ import fetchOneTransactionQuery, {
 
 import { UserIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const loader =
+const loader =
   (queryClient: QueryClient) =>
   async ({ params }: { params: FetchOneTransactionParams }) => {
     const query = fetchOneTransactionQuery({ index: params.index });
@@ -130,3 +129,5 @@ export const TransactionsDetails = () => {
     </div>
   );
 };
+
+TransactionsDetails.loader = loader;

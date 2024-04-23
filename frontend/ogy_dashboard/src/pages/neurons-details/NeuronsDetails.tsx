@@ -1,14 +1,14 @@
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
+// import { useMemo, Suspense } from "react";
+import { useLoaderData, defer, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card } from "@components/ui";
 
-interface NeuronsData {
-  name: string;
-  value: number;
-}
+// interface NeuronsData {
+//   name: string;
+//   value: number;
+// }
 
-export const NeuronsDetailsLoader = async () => {
+const loader = async () => {
   const dataNeurons = new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -58,7 +58,7 @@ export const NeuronsDetails = () => {
         <div>Principal ID: 8329839839283982</div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 py-16">
-        {data.dataNeurons.map(({ name, value }, index) => (
+        {data.dataNeurons.map(({ name, value }) => (
           <Card className="bg-surface-2 pb-8" key={name}>
             <div className="flex items-center text-lg">
               <span className="text-content/60">{name}</span>
@@ -72,3 +72,5 @@ export const NeuronsDetails = () => {
     </div>
   );
 };
+
+NeuronsDetails.loader = loader;

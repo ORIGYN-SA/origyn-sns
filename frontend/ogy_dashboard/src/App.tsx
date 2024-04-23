@@ -10,37 +10,28 @@ import NotFound from "@components/NotFound";
 import Dashboard from "@pages/dashboard/Dashboard";
 import ProtectedRoute from "@providers/ProtectedRoute";
 
-const { GovernanceLoader, Governance } = await import(
-  "@pages/governance/Governance"
-);
-const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+const { Governance } = await import("@pages/governance/Governance");
+const { NeuronsDetails } = await import(
   "@pages/neurons-details/NeuronsDetails"
 );
 
-const { ProposalsLoader, Proposals } = await import(
-  "@pages/proposals/Proposals"
-);
-const { Loader: ProposalsDetailsLoader, ProposalsDetails } = await import(
+const { Proposals } = await import("@pages/proposals/Proposals");
+const { ProposalsDetails } = await import(
   "@pages/proposals-details/ProposalsDetails"
 );
 
-const { Loader: ExplorerLoader, Explorer } = await import(
-  "@pages/explorer/Explorer"
-);
-const { loader: TransactionsDetailsLoader, TransactionsDetails } = await import(
+const { Explorer } = await import("@pages/explorer/Explorer");
+const { TransactionsDetails } = await import(
   "@pages/transactions-details/TransactionsDetails"
 );
 
-const { loader: AccountLoader, Account } = await import("@pages/account");
+const { Account } = await import("@pages/account");
 
-const queryClient = new QueryClient();
-
-const {
-  loader: TransactionsAccountsDetailsLoader,
-  TransactionsAccountsDetails,
-} = await import(
+const { TransactionsAccountsDetails } = await import(
   "@pages/transactions-accounts-details/TransactionsAccountsDetails"
 );
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -56,7 +47,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: GovernanceLoader,
+            loader: Governance.loader,
             element: <Governance />,
             // async lazy() {
             //   const { GovernanceLoader, Governance } = await import(
@@ -67,7 +58,7 @@ const router = createBrowserRouter([
           },
           {
             path: "neurons/details",
-            loader: NeuronsDetailsLoader,
+            loader: NeuronsDetails.loader,
             element: <NeuronsDetails />,
             // async lazy() {
             //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
@@ -86,12 +77,12 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: ProposalsLoader,
+            loader: Proposals.loader,
             element: <Proposals />,
           },
           {
             path: "details",
-            loader: ProposalsDetailsLoader,
+            loader: ProposalsDetails.loader,
             element: <ProposalsDetails />,
           },
         ],
@@ -101,7 +92,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: ExplorerLoader,
+            loader: Explorer.loader,
             element: <Explorer />,
           },
           {
@@ -109,12 +100,12 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/explorer/transactions/:index",
-                loader: TransactionsDetailsLoader(queryClient),
+                loader: TransactionsDetails.loader(queryClient),
                 element: <TransactionsDetails />,
               },
               {
                 path: "/explorer/transactions/accounts/:id",
-                loader: TransactionsAccountsDetailsLoader(queryClient),
+                loader: TransactionsAccountsDetails.loader(queryClient),
                 element: <TransactionsAccountsDetails />,
               },
             ],
@@ -127,7 +118,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: AccountLoader,
+            loader: Account.loader,
             element: <Account />,
           },
         ],

@@ -25,8 +25,7 @@ import fetchOneAccountQuery, {
 //   });
 // };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const loader =
+const loader =
   (queryClient: QueryClient) =>
   async ({ params }: { params: AccountParams }) => {
     const query = fetchOneAccountQuery({ id: params.id });
@@ -108,3 +107,5 @@ export const TransactionsAccountsDetails = () => {
     </div>
   );
 };
+
+TransactionsAccountsDetails.loader = loader;

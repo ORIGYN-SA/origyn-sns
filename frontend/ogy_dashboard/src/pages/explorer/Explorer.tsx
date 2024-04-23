@@ -3,7 +3,7 @@
 import useTableProps from "@helpers/table/useTableProps";
 import TransactionsList from "@pages/transactions/transactions-list/TransactionsList";
 
-export const Loader = async () => {
+const loader = async () => {
   return null;
 };
 
@@ -28,3 +28,5 @@ export const Explorer = () => {
     </div>
   );
 };
+
+Explorer.loader = loader;

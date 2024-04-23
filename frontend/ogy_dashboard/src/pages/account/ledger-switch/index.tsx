@@ -1,32 +1,10 @@
 import { ReactNode } from "react";
-import useConnect from "@helpers/useConnect";
-import { Button } from "@components/ui";
-import useFakeLegacyOrigynDashboardIdentity from "@services/accounts/useFakeLegacyDashboardOGYIdentity";
-import WithdrawLegacyTokens from "@pages/account/ledger-switch/withdraw-legacy-tokens/index";
-
-const DepositComponent = () => {
-  const { principalShort } = useConnect();
-  return (
-    <div className="border border-surface-2 rounded-xl mt-4">
-      <div className="grid grid-cols-2 gap-4 p-4">
-        <div>Legacy OGY Balance</div>
-        <div className="">
-          <div className="text-xl">0 OGY</div>
-          <div className="text-sm">0 USD</div>
-        </div>
-      </div>
-      <div className="bg-surface-2 text-content/60 p-4">
-        <span>Account ID: </span>
-        <span>{principalShort}</span>
-      </div>
-    </div>
-  );
-};
+import { Tile } from "@components/ui";
+import WithdrawLegacyTokens from "./withdraw-legacy-tokens";
+import Deposit from "./deposit";
+import SwapTokens from "./swap-tokens";
 
 const LedgerSwitch = ({ className, ...restProps }) => {
-  const { principal: principalLegacyDashboadOGY } =
-    useFakeLegacyOrigynDashboardIdentity();
-
   const cards = [
     {
       title: "Step 1: Withdraw from old governance",
@@ -42,13 +20,15 @@ const LedgerSwitch = ({ className, ...restProps }) => {
       title: "Step 2: Deposit to your account",
       subtitle:
         "If you have any tokens outside of the OGY dashboard, deposit them to your account-id before you can start to swap them.",
-      children: <DepositComponent />,
+      children: <Deposit />,
     },
     {
       title: "Step 3: Swap tokens",
       subtitle: "Swap the legacy OGY token to the new ledger.",
       children: (
-        <Button className="mt-4 xl:mt-8 w-full">Swap your tokens</Button>
+        <div className="mt-4 xl:mt-8">
+          <SwapTokens />
+        </div>
       ),
     },
   ];
@@ -81,8 +61,13 @@ const LedgerSwitch = ({ className, ...restProps }) => {
                   className="flex flex-col p-4 border border-surface-2 rounded-lg"
                   key={title}
                 >
-                  <div className="font-semibold">{title}</div>
-                  <div className="text-content/60">{subtitle}</div>
+                  <div className="flex">
+                    <Tile className="rounded-lg h-20 w-20 mr-4">X</Tile>
+                    <div>
+                      <div className="font-semibold">{title}</div>
+                      <div className="text-content/60">{subtitle}</div>
+                    </div>
+                  </div>
                   <div>{children as ReactNode}</div>
                 </div>
               );

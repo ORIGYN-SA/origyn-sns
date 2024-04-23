@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Transition, Dialog as DialogHeadlessui } from "@headlessui/react";
 
-const Dialog = ({ show = true, handleOnClose, children, size = "md" }) => {
+const Dialog = ({ show = true, handleOnClose, children }) => {
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">

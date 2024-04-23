@@ -1,9 +1,9 @@
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
+// import { useMemo, Suspense } from "react";
+import { defer, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card } from "@components/ui";
 
-export const Loader = async () => {
+const loader = async () => {
   const dataProposals = new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -36,7 +36,7 @@ export const ProposalsDetails = () => {
     navigate(-1);
   };
 
-  const data = useLoaderData();
+  // const data = useLoaderData();
   return (
     <div className="container mx-auto pt-8 pb-16">
       <div className="flex flex-col xl:flex-row items-center justify-between py-8">
@@ -133,3 +133,5 @@ export const ProposalsDetails = () => {
     </div>
   );
 };
+
+ProposalsDetails.loader = loader;
