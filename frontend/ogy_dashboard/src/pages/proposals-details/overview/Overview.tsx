@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import Card from "@components/ui/Card";
 
 type TotalOGYSupply = {

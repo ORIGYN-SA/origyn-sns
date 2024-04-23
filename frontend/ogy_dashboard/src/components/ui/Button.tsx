@@ -1,9 +1,9 @@
-import { PropsWithChildren } from "react";
+import { MouseEventHandler, PropsWithChildren } from "react";
 
 interface ButtonProps
   extends PropsWithChildren<{
     className?: string;
-    onClick?: any;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
   }> {}
 
 const Button = ({ className, children, ...restProps }: ButtonProps) => {

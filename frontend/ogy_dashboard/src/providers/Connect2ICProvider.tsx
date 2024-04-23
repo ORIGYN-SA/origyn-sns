@@ -45,11 +45,13 @@ const Provider = ({ children }: PropsWithChildren) => {
         },
         providers: defaultProviders,
         globalProviderConfig: {
-          host: "https://identity.ic0.app",
+          // host: "https://identity.ic0.app",
+          host: "https://icp-api.io",
           // dev: true,
           whitelist: [
             GOVERNANCE_CANISTER_ID,
             LEDGER_CANISTER_ID,
+            LEGACY_LEDGER_CANISTER_ID,
             TOKEN_METRICS_CANISTER_ID,
           ],
           // autoConnect: true,

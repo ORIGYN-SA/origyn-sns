@@ -28,18 +28,21 @@ type Data = {
 
 type BarChart = {
   data: Data[];
-  barFill?: string;
+  barFill?: string | undefined;
   barBgFill?: string;
   barBgRadius?: number;
-  legendValue?: string;
+  legendValue?: string | undefined;
 };
 
 const StyledLegendIndicator = styled.div`
   background-color: ${({ color }) => color};
 `;
 
-const renderLegend = (props, legendValue: string, color: string) => {
-  const { payload } = props;
+const renderLegend = (
+  legendValue: string | undefined,
+  color: string | undefined
+) => {
+  // const { payload } = props;
 
   return (
     <div className="flex items-center mt-4">
@@ -72,7 +75,7 @@ const Bar = ({
         <YAxis tickFormatter={(value) => millify(value)} />
         <Legend
           margin={{ top: 8, left: 0, right: 0, bottom: 0 }}
-          content={(props) => renderLegend(props, legendValue, barFill)}
+          content={() => renderLegend(legendValue, barFill)}
         />
         <BarRechart
           dataKey="value"

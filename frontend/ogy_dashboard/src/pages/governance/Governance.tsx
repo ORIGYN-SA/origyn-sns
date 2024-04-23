@@ -2,18 +2,14 @@ import { useMemo, Suspense } from "react";
 import { useLoaderData, defer, Await } from "react-router-dom";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
-import TokensInGovernanceTotal, {
-  TokensInGovernanceProps,
-} from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
-import TokensInGovernanceKpi, {
-  TokensInGovernanceKpiProps,
-} from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
+import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
+import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI"; // TokensInGovernanceKpiProps,
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/List";
 
-export const GovernanceLoader = async () => {
+const loader = async () => {
   // tokens in governance total
-  const dataTokensInGovernanceTotal = new Promise((resolve, reject) => {
+  const dataTokensInGovernanceTotal = new Promise((resolve) => {
     setTimeout(() => {
       // reject(new Error("data error!"));
       resolve({
@@ -50,11 +46,6 @@ export const GovernanceLoader = async () => {
       ]);
     }, 300);
   });
-
-  // test data error
-  // const error = new Promise(function (_, reject) {
-  //   reject(new Error("data error!"));
-  // });
 
   return defer({
     dataTokensInGovernanceTotal: await dataTokensInGovernanceTotal,
@@ -175,3 +166,5 @@ export const Governance = () => {
     </div>
   );
 };
+
+Governance.loader = loader;

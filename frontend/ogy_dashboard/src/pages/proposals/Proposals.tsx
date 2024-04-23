@@ -1,22 +1,22 @@
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await } from "react-router-dom";
-import { Card, Button } from "@components/ui";
-import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
-import TokensInGovernanceTotal, {
-  TokensInGovernanceProps,
-} from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
-import TokensInGovernanceKpi, {
-  TokensInGovernanceKpiProps,
-} from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
-import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
+// import { useMemo, Suspense } from "react";
+// import { useLoaderData, defer, Await } from "react-router-dom";
+// import { Card, Button } from "@components/ui";
+// import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
+// import TokensInGovernanceTotal, {
+//   TokensInGovernanceProps,
+// } from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
+// import TokensInGovernanceKpi, {
+//   TokensInGovernanceKpiProps,
+// } from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
+// import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/List";
 
-export const ProposalsLoader = async () => {
+const loader = async () => {
   return null;
 };
 
 export const Proposals = () => {
-  const data = useLoaderData();
+  // const data = useLoaderData();
 
   //   const governanceFeatures = useMemo(
   //     () => [
@@ -60,3 +60,5 @@ export const Proposals = () => {
     </div>
   );
 };
+
+Proposals.loader = loader;
