@@ -16,7 +16,7 @@ const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
         </button>
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">
-        <img src="/vite.svg" alt="OGY Logo" />
+        <img src="/ogy_logo.svg" alt="OGY Logo" />
         <span className="ml-2 mr-3">10 418 169 376,19</span>
         <span className="text-content/60">OGY</span>
       </div>

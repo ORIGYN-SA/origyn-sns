@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="/vite.svg" alt="OGY Dashboard Logo" />
+              <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
               <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:block">
                 OGY Dashboard
               </span>
@@ -114,7 +114,7 @@ const Navbar = () => {
                       <div className="flex flex-col items-center px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <div className="flex items-center justify-between w-full mb-4">
                           <Link to="/" className="flex items-center pr-4">
-                            <img src="/vite.svg" alt="OGY Dashboard Logo" />
+                            <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
                             <span className="self-center text-xl font-semibold whitespace-nowrap">
                               OGY Dashboard
                             </span>

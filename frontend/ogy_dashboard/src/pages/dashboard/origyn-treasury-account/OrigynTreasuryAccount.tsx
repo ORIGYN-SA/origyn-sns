@@ -41,7 +41,7 @@ const OrigynTreasuryAccount = ({
         {data.map(({ value, token }, index) => (
           <Card className="bg-surface-2 mt-8 pb-8" key={token}>
             <div className="flex items-center text-lg font-semibold">
-              <img src="/vite.svg" alt="OGY Logo" />
+              <img src="/ogy_logo.svg" alt="OGY Logo" />
               <span className="ml-2 text-content/60">
                 Network Revenue ({token})
               </span>
