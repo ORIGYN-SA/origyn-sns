@@ -1,6 +1,7 @@
 export const LEDGER_CANISTER_ID = import.meta.env.VITE_LEDGER_CANISTER_ID;
 export const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_GOVERNANCE_CANISTER_ID;
 export const TOKEN_METRICS_CANISTER_ID = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
+export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env.VITE_OGY_TOKEN_SWAP_CANISTER_ID;
 export const LEGACY_LEDGER_CANISTER_ID = import.meta.env.VITE_LEGACY_LEDGER_CANISTER_ID;
 export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_LEGACY_GOVERNANCE_CANISTER_ID;
 export const LEGACY_VESTING_CANISTER_ID = import.meta.env.VITE_LEGACY_VESTING_CANISTER_ID;
@@ -27,6 +28,11 @@ if (!(APP_MODE === "production")) {
         console.log("No TOKEN_METRICS_CANISTER_ID environment variable. Set TOKEN_METRICS_CANISTER_ID environment variable.")
     else
         console.log(`TOKEN_METRICS_CANISTER_ID=${TOKEN_METRICS_CANISTER_ID}`)
+
+    if (!OGY_TOKEN_SWAP_CANISTER_ID)
+        console.log("No OGY_TOKEN_SWAP_CANISTER_ID environment variable. Set OGY_TOKEN_SWAP_CANISTER_ID environment variable.")
+    else
+        console.log(`OGY_TOKEN_SWAP_CANISTER_ID=${OGY_TOKEN_SWAP_CANISTER_ID}`)
     
     if (!LEGACY_LEDGER_CANISTER_ID)
         console.log("No LEGACY_LEDGER_CANISTER_ID environment variable. Set LEGACY_LEDGER_CANISTER_ID environment variable.")
