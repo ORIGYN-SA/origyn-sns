@@ -2,7 +2,7 @@ import useConnect from "@helpers/useConnect";
 import useFetchBalanceOGYLegacy from "@services/accounts/useFetchBalanceOGYLegacy";
 
 const Deposit = () => {
-  const { principalShort } = useConnect();
+  const { accountId } = useConnect();
 
   const { data } = useFetchBalanceOGYLegacy();
   return (
@@ -15,8 +15,7 @@ const Deposit = () => {
         </div>
       </div>
       <div className="bg-surface-2 text-content/60 p-4">
-        <span>Account ID: </span>
-        <span>{principalShort}</span>
+        <div className="truncate">Account ID: {accountId}</div>
       </div>
     </div>
   );

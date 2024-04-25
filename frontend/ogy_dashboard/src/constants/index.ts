@@ -7,6 +7,7 @@ export const LEGACY_VESTING_CANISTER_ID = import.meta.env.VITE_LEGACY_VESTING_CA
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
+export const LEGACY_OGY_DASHBOARD_URL = import.meta.env.VITE_LEGACY_OGY_DASHBOARD_URL
 export const APP_MODE = import.meta.env.MODE
 
 if (!(APP_MODE === "production")) {
@@ -52,8 +53,13 @@ if (!(APP_MODE === "production")) {
     else
         console.log(`API_OGY_BASE_URL=${API_OGY_BASE_URL}`)
     
-        if (!NNS_PLATFORM_URL)
+    if (!NNS_PLATFORM_URL)
         console.log("No NNS_PLATFORM_URL environment variable. Set NNS_PLATFORM_URL environment variable.")
     else
         console.log(`NNS_PLATFORM_URL=${NNS_PLATFORM_URL}`)
+
+    if (!LEGACY_OGY_DASHBOARD_URL)
+        console.log("No LEGACY_OGY_DASHBOARD_URL environment variable. Set LEGACY_OGY_DASHBOARD_URL environment variable.")
+    else
+        console.log(`LEGACY_OGY_DASHBOARD_URL=${LEGACY_OGY_DASHBOARD_URL}`)
 }

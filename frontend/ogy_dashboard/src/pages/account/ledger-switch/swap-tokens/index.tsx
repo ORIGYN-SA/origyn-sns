@@ -37,7 +37,7 @@ const SwapTokens = () => {
             Step {steps[state.currentStep].label} of {state.totalSteps}
           </div>
         </DialogHeadlessui.Title>
-        <div className="p-12 text-center">
+        <div className="px-12 pt-8 pb-12 text-center">
           <StepperContext.Provider
             value={{
               prevStep,
