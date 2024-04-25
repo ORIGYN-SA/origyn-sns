@@ -36,20 +36,20 @@ pub mod happy_path {
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Memo };
     use ic_ledger_types::Tokens;
-    use ogy_token_swap::consts::OGY_LEGACY_MINTING_CANISTER_ID;
     use pocket_ic::PocketIc;
     use types::CanisterId;
     use utils::consts::E8S_FEE_OGY;
 
     pub fn mint_ogy(
         pic: &mut PocketIc,
+        minting_account: Principal,
         ledger_canister_id: CanisterId,
         recipient: impl Into<AccountIdentifier>,
         amount: u64
     ) -> transfer::Response {
         transfer(
             pic,
-            OGY_LEGACY_MINTING_CANISTER_ID,
+            minting_account,
             ledger_canister_id,
             &(transfer::Args {
                 from_subaccount: None,

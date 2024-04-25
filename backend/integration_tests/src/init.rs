@@ -4,8 +4,8 @@ use candid::Principal;
 use ic_ledger_types::Tokens;
 use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
 use icrc_ledger_types::icrc1::account::Account;
+use ledger_utils::principal_to_legacy_account_id;
 use ogy_legacy_ledger_canister::{ ArchiveOptions as ArchiveOptionsLeg, Duration };
-use ogy_token_swap::consts::OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID;
 use pocket_ic::PocketIc;
 use utils::consts::E8S_FEE_OGY;
 
@@ -42,10 +42,13 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
     let ogy_legacy_ledger_canister_wasm = wasms::OGY_LEGACY_LEDGER.clone();
     let ogy_new_ledger_canister_wasm = wasms::IC_ICRC1_LEDGER.clone();
 
+    let ogy_legacy_minting_account_principal = controller;
+
     let ogy_token_swap_init_args = ogy_token_swap::lifecycle::InitArgs {
         test_mode: true,
         ogy_legacy_ledger_canister_id,
         ogy_new_ledger_canister_id,
+        ogy_legacy_minting_account_principal,
     };
     install_canister(
         pic,
@@ -56,7 +59,10 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
     );
 
     let ogy_legacy_ledger_init_args = ogy_legacy_ledger_canister::init::InitArgs {
-        minting_account: OGY_LEGACY_MINTING_CANISTER_ACCOUNT_ID.to_string(),
+        minting_account: principal_to_legacy_account_id(
+            ogy_legacy_minting_account_principal,
+            None
+        ).to_string(),
         initial_values: vec![],
         max_message_size_bytes: None,
         transaction_window: Some(Duration {

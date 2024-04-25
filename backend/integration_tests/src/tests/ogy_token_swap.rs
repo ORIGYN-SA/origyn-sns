@@ -47,6 +47,7 @@ fn valid_swap() {
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,
+        controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
         amount
@@ -114,6 +115,7 @@ fn invalid_deposit_account() {
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,
+        controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
         amount
@@ -217,6 +219,7 @@ fn test_anonymous_request() {
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,
+        controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
         amount
@@ -276,7 +279,7 @@ fn test_massive_users_swapping() {
     let ogy_new_ledger_minting_account = controller;
 
     let num_holders = 100;
-    let holders = init_token_distribution(pic, ogy_legacy_ledger_canister, num_holders);
+    let holders = init_token_distribution(pic, ogy_legacy_ledger_canister, controller, num_holders);
     let old_ledger_total_supply = total_supply_legacy(pic, ogy_legacy_ledger_canister);
 
     // mint tokens to swap reserve pool of swap canister
@@ -322,6 +325,7 @@ fn test_swap_amount_too_small() {
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,
+        controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
         amount
@@ -386,6 +390,7 @@ fn test_deposit_account() {
 fn init_token_distribution(
     pic: &mut PocketIc,
     ledger_canister_id: CanisterId,
+    minting_account: Principal,
     num_users: u64
 ) -> Vec<Principal> {
     let mut holders: Vec<Principal> = vec![];
@@ -394,6 +399,7 @@ fn init_token_distribution(
         let amount = random_amount(1, 1_000_000) * E8S_PER_OGY;
         let _ = mint_ogy(
             pic,
+            minting_account,
             ledger_canister_id,
             principal_to_legacy_account_id(user, None),
             amount
