@@ -4,5 +4,9 @@
 ./scripts/generate-did.sh ogy_token_swap &&
 ./scripts/build-canister.sh ogy_token_swap &&
 
-# dfx deploy --network staging ogy_token_swap --argument '(opt record {test_mode = true} )' --mode reinstall
+dfx deploy --network staging ogy_token_swap --argument "(record {
+  test_mode = true;
+  ogy_legacy_ledger_canister_id = principal \"$(dfx canister id ogy_ledger --network staging)\";
+  ogy_new_ledger_canister_id = principal \"$(dfx canister id ogy_legacy_ledger --network staging)\"
+  } )" --mode reinstall
 # dfx deploy --network staging ogy_token_swap --argument '(null)'
