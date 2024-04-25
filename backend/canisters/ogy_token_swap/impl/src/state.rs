@@ -9,10 +9,7 @@ use utils::{
     memory::MemorySize,
 };
 
-use crate::{
-    consts::{ OGY_LEGACY_MINTING_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL },
-    model::token_swap::TokenSwap,
-};
+use crate::{ consts::ORIGYN_ADMIN_PRINCIPAL, model::token_swap::TokenSwap };
 
 canister_state!(RuntimeState);
 
@@ -71,7 +68,11 @@ pub struct Data {
 }
 
 impl Data {
-    pub fn new(ogy_new_ledger: CanisterId, ogy_legacy_ledger: CanisterId) -> Self {
+    pub fn new(
+        ogy_new_ledger: CanisterId,
+        ogy_legacy_ledger: CanisterId,
+        ogy_legacy_minting_account_principal: Principal
+    ) -> Self {
         Self {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL],
             token_swap: TokenSwap::default(),
@@ -80,7 +81,7 @@ impl Data {
                 ogy_legacy_ledger,
             },
             minting_account: AccountIdentifier::new(
-                &OGY_LEGACY_MINTING_CANISTER_ID,
+                &ogy_legacy_minting_account_principal,
                 &Subaccount([0; 32])
             ),
         }

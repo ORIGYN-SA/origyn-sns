@@ -13,7 +13,7 @@ use crate::{
 #[test]
 fn valid_transfer() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, .. } = env;
+    let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ledger_canister_id = canister_ids.ogy_legacy_ledger;
 
@@ -26,7 +26,7 @@ fn valid_transfer() {
 
     assert_eq!(token_name(&pic, ledger_canister_id).name, "Origyn");
 
-    assert_eq!(mint_ogy(&mut pic, ledger_canister_id, user1, amount), Ok(0));
+    assert_eq!(mint_ogy(&mut pic, controller, ledger_canister_id, user1, amount), Ok(0));
 
     assert_eq!(balance_of(&pic, ledger_canister_id, user1.to_string()), Tokens::from_e8s(amount));
 

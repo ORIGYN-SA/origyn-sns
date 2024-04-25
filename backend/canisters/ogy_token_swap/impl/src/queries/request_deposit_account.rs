@@ -47,9 +47,16 @@ mod tests {
         let ogy_new_ledger_canister_id = Principal::from_text(
             "tr3th-kiaaa-aaaaq-aab6q-cai"
         ).unwrap();
+        let ogy_legacy_minting_account_principal = Principal::from_text(
+            "aomfs-vaaaa-aaaaj-aadoa-cai"
+        ).unwrap();
 
         let env = CanisterEnv::new(false);
-        let data = Data::new(ogy_new_ledger_canister_id, ogy_legacy_ledger_canister_id);
+        let data = Data::new(
+            ogy_new_ledger_canister_id,
+            ogy_legacy_ledger_canister_id,
+            ogy_legacy_minting_account_principal
+        );
 
         let runtime_state = RuntimeState::new(env, data);
 

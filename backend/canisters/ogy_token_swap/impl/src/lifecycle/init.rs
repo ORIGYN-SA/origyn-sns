@@ -1,4 +1,4 @@
-use candid::CandidType;
+use candid::{ CandidType, Principal };
 use ic_cdk_macros::init;
 use serde::Deserialize;
 use tracing::info;
@@ -14,6 +14,7 @@ pub struct InitArgs {
     pub test_mode: bool,
     pub ogy_legacy_ledger_canister_id: CanisterId,
     pub ogy_new_ledger_canister_id: CanisterId,
+    pub ogy_legacy_minting_account_principal: Principal,
 }
 
 #[init]
@@ -21,7 +22,11 @@ fn init(args: InitArgs) {
     canister_logger::init(args.test_mode);
 
     let env = CanisterEnv::new(args.test_mode);
-    let data = Data::new(args.ogy_new_ledger_canister_id, args.ogy_legacy_ledger_canister_id);
+    let data = Data::new(
+        args.ogy_new_ledger_canister_id,
+        args.ogy_legacy_ledger_canister_id,
+        args.ogy_legacy_minting_account_principal
+    );
 
     let runtime_state = RuntimeState::new(env.clone(), data);
 

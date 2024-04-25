@@ -12,6 +12,7 @@ type BurnFailReason = variant {
 };
 type ImpossibleErrorReason = variant { AmountNotFound; PrincipalNotFound };
 type InitArgs = record {
+  ogy_legacy_minting_account_principal : principal;
   test_mode : bool;
   ogy_new_ledger_canister_id : principal;
   ogy_legacy_ledger_canister_id : principal;

@@ -6,7 +6,7 @@ use types::CanisterWasm;
 
 lazy_static! {
     pub static ref OGY_LEGACY_LEDGER: CanisterWasm = get_canister_wasm("ogy_legacy_ledger");
-    pub static ref IC_ICRC1_LEDGER: CanisterWasm = get_canister_wasm("ic_icrc1_ledger");
+    pub static ref IC_ICRC1_LEDGER: CanisterWasm = get_canister_wasm("icrc1_ledger");
     pub static ref OGY_TOKEN_SWAP: CanisterWasm = get_canister_wasm("ogy_token_swap");
 }
 
