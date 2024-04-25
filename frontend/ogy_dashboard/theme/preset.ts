@@ -13,6 +13,10 @@ export const colors = {
   },
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
+  spacePurple: "rgb(var(--color-space-purple))",
+  jade: "rgb(var(--color-jade))",
+  sky: "rgb(var(--color-sky))",
+  candyFloss: "rgb(var(--color-candy-floss))",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

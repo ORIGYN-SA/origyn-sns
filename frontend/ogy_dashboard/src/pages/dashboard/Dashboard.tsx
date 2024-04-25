@@ -4,6 +4,7 @@ import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCircu
 import OrigynFoundationReserve from "@pages/dashboard/origyn-foundation-reserve/OrigynFoundationReserve";
 import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
 import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/OrigynTreasuryAccount";
+import { Badge } from "@components/ui";
 
 const Dashboard = () => {
   return (
@@ -11,7 +12,12 @@ const Dashboard = () => {
       <div className="py-16 px-4 flex flex-col items-center">
         <div className="py-16 flex flex-col items-center">
           <span className="text-sm font-semibold uppercase tracking-wider">
-            OGY Analytics
+            <Badge
+              colorClassName="bg-spacePurple"
+              backgoundColorClassName="text-white"
+            >
+              OGY ANALYTICS
+            </Badge>
           </span>
           <h1 className="text-4xl sm:text-6xl font-bold text-center mt-2">
             Explore dashboard
