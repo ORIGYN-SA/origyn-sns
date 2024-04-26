@@ -4,7 +4,7 @@
 
 const LoaderSpin = () => {
   return (
-    <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
+    <div className="border-candyFloss/20 h-10 w-10 animate-spin rounded-full border-4 border-t-candyFloss" />
   );
 };
 

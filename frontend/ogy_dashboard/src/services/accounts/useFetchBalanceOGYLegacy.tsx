@@ -4,9 +4,17 @@ import { useConnect, useCanister } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { ActorSubclass } from "@dfinity/agent";
+import ogyAPI from "@services/_api/ogy";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
+
 interface IFetchBalanceOGYLegacy {
   actor: ActorSubclass;
   owner: string;
+}
+
+export interface IBalanceOGYLegacy {
+  balanceOGY: number;
+  balanceOGYUSD: string;
 }
 
 const fetchBalanceOGYLegacy = async ({
@@ -16,10 +24,21 @@ const fetchBalanceOGYLegacy = async ({
   const accountIdentifier = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
   });
+
+  const { data: dataOGYPrice } = await ogyAPI.get(`/price`);
+  const { ogyPrice } = dataOGYPrice;
+
   const result = (await actor.account_balance_dfx({
     account: accountIdentifier.toHex(),
   })) as { e8s: bigint };
-  return Number(result.e8s) / 10 ** 8;
+
+  const balanceOGY = divideBy1e8(result.e8s);
+  const balanceOGYUSD = roundAndFormatLocale({ number: balanceOGY * ogyPrice });
+
+  return {
+    balanceOGY,
+    balanceOGYUSD,
+  };
 };
 
 const useCanisterFetchBalanceOGYLegacy = () => {

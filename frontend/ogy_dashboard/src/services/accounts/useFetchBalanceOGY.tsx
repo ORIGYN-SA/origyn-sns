@@ -29,7 +29,7 @@ const fetchBalanceOGY = async ({ actor, owner }: IFetchBalanceOGY) => {
   };
 };
 
-const useFetchBalanceOGY = () => {
+const useFetchBalanceOGY = ({ enabled = true }: { enabled?: boolean }) => {
   const { principal, isConnected } = useConnect();
   const [ledgerActor] = useCanister("ledger");
 
@@ -38,7 +38,8 @@ const useFetchBalanceOGY = () => {
     queryFn: () =>
       fetchBalanceOGY({ actor: ledgerActor, owner: principal as string }),
     placeholderData: keepPreviousData,
-    enabled: !!isConnected && !!principal,
+    enabled: !!isConnected && !!principal && !!enabled,
+    refetchOnWindowFocus: !!enabled,
   });
 };
 

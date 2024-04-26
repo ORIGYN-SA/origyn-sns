@@ -19,7 +19,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
 
   const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY();
+    useFetchBalanceOGY({});
   // const {
   //   data: account,
   //   isLoading: isLoadingAccount,
