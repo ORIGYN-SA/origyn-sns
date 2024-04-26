@@ -8,7 +8,7 @@
       "package": "ogy_token_swap",
       "wasm": "backend/canisters/ogy_token_swap/target/wasm32-unknown-unknown/release/ogy_token_swap_canister.wasm.gz",
       "declarations": {
-        "bindings": ["js", "did"],
+        "bindings": ["js", "did", "ts"],
         "env_override": null,
         "output": "backend/canisters/ogy_token_swap/api/declarations"
       }

@@ -3,3 +3,4 @@ target
 .vscode
 .env
 pocket-ic
+backend/canisters/ogy_token_swap/api/declarations
