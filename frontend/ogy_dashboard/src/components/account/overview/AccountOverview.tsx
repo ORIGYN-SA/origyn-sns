@@ -6,6 +6,7 @@ import useConnect from "@helpers/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
 import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import AuthButton from "@components/auth/Auth";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -67,10 +68,12 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                 leaveTo="translate-x-full"
               >
                 <div className="bg-background px-8 py-5">
-                  <div className="text-end">Logout</div>
+                  <div className="flex justify-end">
+                    <AuthButton />
+                  </div>
                   <div className="mt-8">{principalShort}</div>
-                  <div className="bg-surface text-center mt-16 rounded-lg">
-                    <div className="border-b border-surface-2 py-4">
+                  <div className="bg-surface text-center mt-16 border border-border rounded-xl">
+                    <div className="border-b border-border py-4">
                       Wallet Balance
                     </div>
                     <div className="grid grid-cols-1 gap-4 pb-8 px-32">

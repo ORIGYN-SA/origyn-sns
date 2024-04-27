@@ -11,6 +11,9 @@ export const colors = {
   content: {
     DEFAULT: "rgb(var(--color-content-1))",
   },
+  border: {
+    DEFAULT: "rgb(var(--color-border))",
+  },
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
   spacePurple: "rgb(var(--color-space-purple))",
@@ -41,6 +44,9 @@ export default {
       fontFamily: {
         sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
       },
+      backgroundImage: {
+        'ledger-switch': "url('/ogy-background.png')",
+      }
     },
   },
   plugins: [

@@ -67,7 +67,7 @@ const GovernanceStakingOverview = ({
           </div>
         </div>
 
-        <div className="w-full h-80 rounded-lg">
+        <div className="w-full h-80 rounded-xl">
           <AreaChart data={data} fill={fill} />
         </div>
       </div>

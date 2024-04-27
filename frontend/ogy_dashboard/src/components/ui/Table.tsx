@@ -110,9 +110,9 @@ const Table = <T extends object>({
   // }, [pagination.pageSize]);
 
   return (
-    <div className="bg-surface shadow-md rounded-lg">
+    <div className="bg-surface border border-border rounded-xl">
       <div className="overflow-x-auto">
-        <table className="table-auto w-full">
+        <table className="table-auto w-full rounded-xl">
           <thead className="bg-charcoal dark:bg-surface text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -145,7 +145,10 @@ const Table = <T extends object>({
           <tbody>
             {table.getRowModel().rows.map((row) => {
               return (
-                <tr key={row.id} className="bg-surface border border-surface-2">
+                <tr
+                  key={row.id}
+                  className="bg-surface border-b last:border-none border-border"
+                >
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td
@@ -167,82 +170,85 @@ const Table = <T extends object>({
           </tbody>
         </table>
       </div>
-      {enablePagination && (
-        <div className="flex items-center justify-between w-full mt-4 px-8 pt-4 pb-8">
-          <div className="flex items-center">
-            <span>Lines per page</span>
-            <Select
-              options={linesPerPageOptions}
-              value={table.getState().pagination.pageSize}
-              handleOnChange={(value) => handleOnChangePageSize(value)}
-              className="ml-2 w-25"
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              className="border rounded p-1"
-              onClick={handleOnClickFirstPage}
-              disabled={!table.getCanPreviousPage()}
-            >
-              {"<<"}
-            </button>
-            <button
-              className="border rounded p-1"
-              onClick={handleOnClickPreviousPage}
-              disabled={!table.getCanPreviousPage()}
-            >
-              {"<"}
-            </button>
-            <button
-              className="border rounded p-1"
-              onClick={handleOnClickNextPage}
-              disabled={!table.getCanNextPage()}
-            >
-              {">"}
-            </button>
-            <button
-              className="border rounded p-1"
-              onClick={handleOnClickLastPage}
-              disabled={!table.getCanNextPage()}
-            >
-              {">>"}
-            </button>
-            <span className="flex items-center gap-1">
-              <div>Page</div>
-              <strong>
-                {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount().toLocaleString()}
-              </strong>
-            </span>
-            {/* <span className="flex items-center gap-1">
-              | Go to page:
-              <input
-                type="number"
-                defaultValue={table.getState().pagination.pageIndex + 1}
-                onChange={(e) => {
-                  handleOnChangePageIndex(e);
-                }}
-                className="border p-1 rounded w-16"
+
+      <div className="p-1 w-full">
+        {enablePagination && (
+          <div className="flex items-center justify-between p-6">
+            <div className="flex items-center">
+              <span>Lines per page</span>
+              <Select
+                options={linesPerPageOptions}
+                value={table.getState().pagination.pageSize}
+                handleOnChange={(value) => handleOnChangePageSize(value)}
+                className="ml-2 w-25"
               />
-            </span> */}
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                className="border rounded p-1"
+                onClick={handleOnClickFirstPage}
+                disabled={!table.getCanPreviousPage()}
+              >
+                {"<<"}
+              </button>
+              <button
+                className="border rounded p-1"
+                onClick={handleOnClickPreviousPage}
+                disabled={!table.getCanPreviousPage()}
+              >
+                {"<"}
+              </button>
+              <button
+                className="border rounded p-1"
+                onClick={handleOnClickNextPage}
+                disabled={!table.getCanNextPage()}
+              >
+                {">"}
+              </button>
+              <button
+                className="border rounded p-1"
+                onClick={handleOnClickLastPage}
+                disabled={!table.getCanNextPage()}
+              >
+                {">>"}
+              </button>
+              <span className="flex items-center gap-1">
+                <div>Page</div>
+                <strong>
+                  {table.getState().pagination.pageIndex + 1} of{" "}
+                  {table.getPageCount().toLocaleString()}
+                </strong>
+              </span>
+              {/* <span className="flex items-center gap-1">
+            | Go to page:
+            <input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                handleOnChangePageIndex(e);
+              }}
+              className="border p-1 rounded w-16"
+            />
+          </span> */}
 
-            {/* <select
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select> */}
+              {/* <select
+        value={table.getState().pagination.pageSize}
+        onChange={(e) => {
+          table.setPageSize(Number(e.target.value));
+        }}
+      >
+        {[10, 20, 30, 40, 50].map((pageSize) => (
+          <option key={pageSize} value={pageSize}>
+            Show {pageSize}
+          </option>
+        ))}
+      </select> */}
 
-            {data.isFetching ? "Loading..." : null}
+              {data.isFetching ? "Loading..." : null}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

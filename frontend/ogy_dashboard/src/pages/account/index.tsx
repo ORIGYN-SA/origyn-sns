@@ -15,7 +15,7 @@ export const Account = () => {
   const { principalShort } = useConnect();
 
   return (
-    <div className="container mx-auto py-16 px-8">
+    <div className="container mx-auto py-16 px-4">
       <div className="text-center mb-16">
         <h1 className="text-4xl sm:text-6xl font-bold mb-4">Welcome back</h1>
         <div>{principalShort}</div>

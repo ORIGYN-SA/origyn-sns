@@ -72,8 +72,8 @@ const Step1SendTokens = () => {
       <div className="text-sm mb-8 text-content/60">
         Deposit any OGY tokens that you wish to swap to your account id
       </div>
-      <div className="mb-8 rounded-lg bg-surface-2 border border-surface-3">
-        <div className="truncate p-4 border-b border-surface-3">
+      <div className="mb-8 rounded-xl bg-surface-2 border border-border">
+        <div className="truncate p-4 border-b border-border">
           Account ID: {accountId}
         </div>
         <div>

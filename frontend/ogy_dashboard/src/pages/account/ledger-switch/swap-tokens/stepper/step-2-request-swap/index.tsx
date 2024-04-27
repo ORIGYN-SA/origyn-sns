@@ -97,7 +97,7 @@ const Step2RequestSwap = () => {
           Your tokens were deposited to the swap canister in the block index{" "}
           {(blockIndex as bigint).toString()}
         </div>
-        <div className="flex items-center rounded-full bg-surface-2 border border-surface-2 w-max pr-8 p-1 my-8">
+        <div className="flex items-center rounded-full bg-surface-2 border border-border w-max pr-8 p-1 my-8">
           <Tile className="bg-surface-3 h-12 w-12 mr-4">X</Tile>
           <div className="flex items-center">
             <div className="text-content/60 mr-2">Block index:</div>

@@ -30,7 +30,7 @@ const OGYCirculationState = ({
           Info
         </button>
       </div>
-      <div className="mt-6 h-80 rounded-lg">
+      <div className="mt-6 h-80 rounded-xl">
         <PieChart data={circulationData.dataPieChart} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">

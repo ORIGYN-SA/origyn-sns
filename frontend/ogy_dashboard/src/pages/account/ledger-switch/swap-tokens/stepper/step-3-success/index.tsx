@@ -18,8 +18,8 @@ const Step3Success = () => {
         <div className="font-semibold text-xl text-jade mb-8">
           Swap was successful!
         </div>
-        <div className="border border-surface-3 rounded-xl">
-          <div className="text-content/60 p-4 border-b border-surface-3 text-lg bg-surface-2 rounded-t-xl">
+        <div className="border border-border rounded-xl">
+          <div className="text-content/60 p-4 border-b border-border text-lg bg-surface-2 rounded-t-xl">
             Wallet balance on new ledger
           </div>
           <div className="py-10 px-4">

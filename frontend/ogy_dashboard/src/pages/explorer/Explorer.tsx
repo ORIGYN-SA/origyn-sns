@@ -12,13 +12,13 @@ export const Explorer = () => {
   const { pagination, setPagination, enablePagination } = useTableProps({});
 
   return (
-    <div className="container mx-auto pb-16">
-      <div className="flex flex-col items-center py-16 px-4">
+    <div className="container mx-auto py-16 px-4">
+      <div className="flex flex-col items-center">
         <div className="max-w-4xl text-center">
           <h1 className="text-4xl sm:text-6xl font-bold">Explorer</h1>
         </div>
       </div>
-      <div className="mt-8 mb-16">
+      <div className="mt-16">
         <TransactionsList
           pagination={pagination}
           setPagination={setPagination}

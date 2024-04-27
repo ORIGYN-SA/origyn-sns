@@ -46,7 +46,7 @@ const OrigynFoundationReserve = ({
         </button>
       </div>
 
-      <div className="mt-6 h-80 rounded-lg">
+      <div className="mt-6 h-80 rounded-xl">
         <PieChart data={dataPieChart} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">

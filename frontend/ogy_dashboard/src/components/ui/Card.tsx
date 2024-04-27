@@ -21,7 +21,7 @@ const Card: FC<CardProps> & { BorderBottom: FC<BorderBottomProps> } = ({
 }) => {
   return (
     <div
-      className={`relative bg-surface shadow-md p-6 rounded-lg ${className}`}
+      className={`relative bg-surface border border-border p-6 rounded-xl ${className}`}
     >
       {children}
     </div>

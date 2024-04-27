@@ -41,7 +41,7 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
         <span className="ml-2 mr-3">{totalBurnedOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-96 rounded-lg">
+      <div className="mt-6 h-96 rounded-xl">
         <BarChart
           data={totalBurnedOGYTimeSeries}
           barFill={barFill}

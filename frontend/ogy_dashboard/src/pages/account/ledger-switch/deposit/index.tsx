@@ -6,7 +6,7 @@ const Deposit = () => {
 
   const { data } = useFetchBalanceOGYLegacy();
   return (
-    <div className="border border-surface-2 rounded-xl mt-4">
+    <div className="border border-border rounded-xl">
       <div className="grid grid-cols-2 gap-4 p-4">
         <div>Legacy OGY Balance</div>
         <div className="">

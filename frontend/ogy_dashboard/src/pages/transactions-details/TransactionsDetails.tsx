@@ -64,7 +64,7 @@ export const TransactionsDetails = () => {
               <div>{data.kind}</div>
             </div>
             {/* // TODO: Create a component for this instead of duplicate it */}
-            <div className="flex justify-between items-center bg-surface-2 p-1 rounded-full border border-surface-3/60">
+            <div className="flex justify-between items-center bg-surface-2 p-1 rounded-full border border-border/60">
               <div className="rounded-full w-12 h-12 bg-surface-3 flex justify-center items-center shrink-0">
                 <UserIcon className="h-8 w-8 text-white" aria-hidden="true" />
               </div>
@@ -81,7 +81,7 @@ export const TransactionsDetails = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between items-center bg-surface-2 p-1 rounded-full border border-surface-3/60">
+            <div className="flex justify-between items-center bg-surface-2 p-1 rounded-full border border-border/60">
               <div className="rounded-full w-12 h-12 bg-surface-3 flex justify-center items-center shrink-0">
                 <UserIcon className="h-8 w-8 text-white" aria-hidden="true" />
               </div>
@@ -121,7 +121,7 @@ export const TransactionsDetails = () => {
               </div>
             </div>
           </div>
-          <div className="bg-surface-2 flex justify-center py-4 rounded-b-lg border-t border-surface-3/60">
+          <div className="bg-surface-2 flex justify-center py-4 rounded-b-lg border-t border-border/60">
             {data.updated_at}
           </div>
         </Card>
