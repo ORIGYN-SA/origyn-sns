@@ -37,11 +37,11 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
         </button>
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">
-        <img src="/vite.svg" alt="OGY Logo" />
+        <img src="/ogy_logo.svg" alt="OGY Logo" />
         <span className="ml-2 mr-3">{totalBurnedOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-96 rounded-lg">
+      <div className="mt-6 h-96 rounded-xl">
         <BarChart
           data={totalBurnedOGYTimeSeries}
           barFill={barFill}

@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="/vite.svg" alt="OGY Dashboard Logo" />
+              <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
               <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:block">
                 OGY Dashboard
               </span>
@@ -41,7 +41,7 @@ const Navbar = () => {
               {navItems.map(({ title, url }, i) => (
                 <Link
                   to={url}
-                  className="font-semibold hover:text-blue-600"
+                  className="font-semibold text-content/60 hover:text-content"
                   key={i}
                 >
                   {title}
@@ -70,7 +70,7 @@ const Navbar = () => {
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-full hover:bg-gray-200 focus:outline-none"
+                className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
               >
                 <span className="sr-only">Open main menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -114,7 +114,7 @@ const Navbar = () => {
                       <div className="flex flex-col items-center px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <div className="flex items-center justify-between w-full mb-4">
                           <Link to="/" className="flex items-center pr-4">
-                            <img src="/vite.svg" alt="OGY Dashboard Logo" />
+                            <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
                             <span className="self-center text-xl font-semibold whitespace-nowrap">
                               OGY Dashboard
                             </span>
@@ -122,7 +122,7 @@ const Navbar = () => {
                           <button
                             onClick={() => setShowMenu(!showMenu)}
                             type="button"
-                            className="inline-flex items-center justify-center p-2 rounded-full hover:bg-gray-200 focus:outline-none"
+                            className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
                           >
                             <span className="sr-only">Open main menu</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -133,7 +133,7 @@ const Navbar = () => {
                           <Link
                             onClick={handleOnHideMenu}
                             to={url}
-                            className="font-semibold hover:text-blue-600 px-3 py-2 rounded-md"
+                            className="font-semibold text-content/60 hover:text-content px-3 py-2 rounded-md"
                             key={i}
                           >
                             {title}
@@ -151,7 +151,7 @@ const Navbar = () => {
 
       <AccountOverview
         show={showAccountOverview}
-        handleOnHide={() => handleOnClickShowAccountOverview(false)}
+        handleClose={() => handleOnClickShowAccountOverview(false)}
       />
     </>
   );

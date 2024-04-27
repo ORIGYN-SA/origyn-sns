@@ -1,6 +1,6 @@
 export const locale = 'en-US';
 
-export const divideBy1e8 = (number: number | string) => Number(number) / 1e8;
+export const divideBy1e8 = (number: number | bigint | string) => Number(number) / 1e8;
 
 interface roundAndFormatLocaleParams {
     number : number;

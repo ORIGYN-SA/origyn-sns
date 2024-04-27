@@ -22,7 +22,7 @@ const TokensInGovernanceTotal = ({
   return (
     <Card className={`grid grid-cols-1 xl:grid-cols-2 gap-12 ${className}`}>
       <div>
-        <div className="mt-6 h-80 rounded-lg">
+        <div className="mt-6 h-80 rounded-xl">
           <PieChart data={data} colors={colors} />
         </div>
         <div className="flex flex-col items-center my-4">
@@ -30,7 +30,7 @@ const TokensInGovernanceTotal = ({
             Total Tokens in Governance
           </h2>
           <div className="mt-4 flex items-center text-2xl font-semibold">
-            <img src="/vite.svg" alt="OGY Logo" />
+            <img src="/ogy_logo.svg" alt="OGY Logo" />
             <span className="ml-2 mr-3">{total}</span>
             <span className="text-content/60">OGY</span>
           </div>

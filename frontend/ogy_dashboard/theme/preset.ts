@@ -11,8 +11,15 @@ export const colors = {
   content: {
     DEFAULT: "rgb(var(--color-content-1))",
   },
+  border: {
+    DEFAULT: "rgb(var(--color-border))",
+  },
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
+  spacePurple: "rgb(var(--color-space-purple))",
+  jade: "rgb(var(--color-jade))",
+  sky: "rgb(var(--color-sky))",
+  candyFloss: "rgb(var(--color-candy-floss))",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,6 +44,9 @@ export default {
       fontFamily: {
         sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
       },
+      backgroundImage: {
+        'ledger-switch': "url('/ogy-background.png')",
+      }
     },
   },
   plugins: [

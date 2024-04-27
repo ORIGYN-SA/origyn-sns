@@ -1,15 +1,22 @@
-import { PropsWithChildren } from "react";
+import { MouseEventHandler, PropsWithChildren } from "react";
 
 interface ButtonProps
   extends PropsWithChildren<{
     className?: string;
-    onClick?: any;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    disabled?: boolean;
   }> {}
 
-const Button = ({ className, children, ...restProps }: ButtonProps) => {
+const Button = ({
+  className,
+  children,
+  disabled = false,
+  ...restProps
+}: ButtonProps) => {
   return (
     <button
-      className={`bg-content dark:bg-background text-background dark:text-content dark:border-content dark:border py-2 px-4 font-semibold rounded-full ${className}`}
+      disabled={disabled}
+      className={`bg-content text-background py-2 px-4 font-semibold rounded-full ${className}`}
       {...restProps}
     >
       {children}

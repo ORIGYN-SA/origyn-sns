@@ -25,8 +25,7 @@ import fetchOneAccountQuery, {
 //   });
 // };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const loader =
+const loader =
   (queryClient: QueryClient) =>
   async ({ params }: { params: AccountParams }) => {
     const query = fetchOneAccountQuery({ id: params.id });
@@ -69,7 +68,7 @@ export const TransactionsAccountsDetails = () => {
           </div>
         </div>
       </div>
-      <div className="grid xl:grid-cols-3 mt-8 bg-surface rounded-lg shadow-md">
+      <div className="grid xl:grid-cols-3 mt-8 bg-surface rounded-xl border border-border">
         <div className="flex flex-col text-center xl:text-start xl:col-span-2 rounded-t-xl xl:rounded-tr-none xl:rounded-s-lg p-6 bg-surface">
           {[
             { title: "ID", value: data.id },
@@ -82,14 +81,14 @@ export const TransactionsAccountsDetails = () => {
             </div>
           ))}
         </div>
-        <div className="grid grid-flow-row xl:border-l border-surface-3">
-          <div className="xl:col-span-1 rounded-tr-none xl:rounded-tr-lg p-6 bg-surface flex items-center justify-center border-t border-surface-3 xl:border-none">
+        <div className="grid grid-flow-row xl:border-l border-border">
+          <div className="xl:col-span-1 rounded-tr-none xl:rounded-tr-lg p-6 bg-surface flex items-center justify-center border-t border-border xl:border-none">
             <div className="flex flex-col items-center">
               <div className="font-semibold mb-4">Balance</div>
               <div className="text-4xl font-semibold">{data.balance}</div>
             </div>
           </div>
-          <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-surface-3 p-6 bg-surface-2">
+          <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
             <div className="flex flex-col items-center">
               {[
                 { title: "Historical max balance", value: 1 },
@@ -108,3 +107,5 @@ export const TransactionsAccountsDetails = () => {
     </div>
   );
 };
+
+TransactionsAccountsDetails.loader = loader;

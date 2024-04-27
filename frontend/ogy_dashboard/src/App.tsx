@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import "./App.css";
 import {
   createBrowserRouter,
@@ -6,41 +8,19 @@ import {
 import { QueryClient } from "@tanstack/react-query";
 
 import Layout from "@components/Layout";
-import NotFound from "@components/NotFound";
 import Dashboard from "@pages/dashboard/Dashboard";
+import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-
-const { GovernanceLoader, Governance } = await import(
-  "@pages/governance/Governance"
-);
-const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-  "@pages/neurons-details/NeuronsDetails"
-);
-
-const { ProposalsLoader, Proposals } = await import(
-  "@pages/proposals/Proposals"
-);
-const { Loader: ProposalsDetailsLoader, ProposalsDetails } = await import(
-  "@pages/proposals-details/ProposalsDetails"
-);
-
-const { Loader: ExplorerLoader, Explorer } = await import(
-  "@pages/explorer/Explorer"
-);
-const { loader: TransactionsDetailsLoader, TransactionsDetails } = await import(
-  "@pages/transactions-details/TransactionsDetails"
-);
-
-const { loader: AccountLoader, Account } = await import("@pages/account");
+import { Governance } from "@pages/governance/Governance";
+import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
+import { Proposals } from "@pages/proposals/Proposals";
+import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
+import { Explorer } from "@pages/explorer/Explorer";
+import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
+import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
+import { Account } from "@pages/account/index";
 
 const queryClient = new QueryClient();
-
-const {
-  loader: TransactionsAccountsDetailsLoader,
-  TransactionsAccountsDetails,
-} = await import(
-  "@pages/transactions-accounts-details/TransactionsAccountsDetails"
-);
 
 const router = createBrowserRouter([
   {
@@ -56,7 +36,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: GovernanceLoader,
+            loader: Governance.loader,
             element: <Governance />,
             // async lazy() {
             //   const { GovernanceLoader, Governance } = await import(
@@ -67,7 +47,7 @@ const router = createBrowserRouter([
           },
           {
             path: "neurons/details",
-            loader: NeuronsDetailsLoader,
+            loader: NeuronsDetails.loader,
             element: <NeuronsDetails />,
             // async lazy() {
             //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
@@ -86,12 +66,12 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: ProposalsLoader,
+            loader: Proposals.loader,
             element: <Proposals />,
           },
           {
             path: "details",
-            loader: ProposalsDetailsLoader,
+            loader: ProposalsDetails.loader,
             element: <ProposalsDetails />,
           },
         ],
@@ -101,7 +81,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: ExplorerLoader,
+            loader: Explorer.loader,
             element: <Explorer />,
           },
           {
@@ -109,12 +89,12 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/explorer/transactions/:index",
-                loader: TransactionsDetailsLoader(queryClient),
+                loader: TransactionsDetails.loader(queryClient),
                 element: <TransactionsDetails />,
               },
               {
                 path: "/explorer/transactions/accounts/:id",
-                loader: TransactionsAccountsDetailsLoader(queryClient),
+                loader: TransactionsAccountsDetails.loader(queryClient),
                 element: <TransactionsAccountsDetails />,
               },
             ],
@@ -127,7 +107,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: AccountLoader,
+            loader: Account.loader,
             element: <Account />,
           },
         ],

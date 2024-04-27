@@ -46,7 +46,7 @@ const OrigynFoundationReserve = ({
         </button>
       </div>
 
-      <div className="mt-6 h-80 rounded-lg">
+      <div className="mt-6 h-80 rounded-xl">
         <PieChart data={dataPieChart} colors={colors} />
       </div>
       <div className="flex flex-col items-center my-4">
@@ -54,7 +54,7 @@ const OrigynFoundationReserve = ({
           Total Foundation Supply
         </h2>
         <div className="mt-4 flex items-center text-2xl font-semibold">
-          <img src="/vite.svg" alt="OGY Logo" />
+          <img src="/ogy_logo.svg" alt="OGY Logo" />
           <span className="ml-2 mr-3">{totalSupply}</span>
           <span className="text-content/60">OGY</span>
         </div>
@@ -63,7 +63,7 @@ const OrigynFoundationReserve = ({
         {dataPieChart.map(({ name, valueToString }, index) => (
           <Card className="bg-surface-2 mt-8 pb-8" key={name}>
             <div className="flex items-center text-lg">
-              {/* <img src="/vite.svg" alt="OGY Logo" /> */}
+              {/* <img src="/ogy_logo.svg" alt="OGY Logo" /> */}
               <span className="text-content/60">{name}</span>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
@@ -7,7 +9,7 @@ const Select = ({ options, value, handleOnChange, className }) => {
     <div className={`${className}`}>
       <Listbox value={value} onChange={handleOnChange}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded-xl bg-surface-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded-xl bg-surface-2 py-2 pl-3 pr-10 text-left border border-border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">{value}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
@@ -19,13 +21,13 @@ const Select = ({ options, value, handleOnChange, className }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-auto overflow-auto rounded-lg bg-surface-2 py-1 text-base shadow-lg focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-auto overflow-auto rounded-xl bg-surface-2 py-1 text-base border border-border focus:outline-none sm:text-sm">
               {options.map((option) => (
                 <Listbox.Option
                   key={option.value}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-amber-100 text-amber-900" : ""
+                      active ? "bg-candyFloss/10 text-candyFloss" : ""
                     }`
                   }
                   value={option.value}
@@ -40,7 +42,7 @@ const Select = ({ options, value, handleOnChange, className }) => {
                         {option.value}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-candyFloss">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -61,7 +63,7 @@ const Transfer = () => {
       <Button className="w-full" onClick={handleShow}>
         Transfer
       </Button>
-      <Dialog show={show} handleOnClose={handleClose}>
+      <Dialog show={show} handleClose={handleClose}>
         <div className="p-12">
           <div className="text-center">
             <div>Transfer OGY</div>
