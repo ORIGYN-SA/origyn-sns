@@ -4,14 +4,14 @@ import fetchFoundationAssetsOGY, {
   FoundationAssetsOGY,
 } from "@services/foundation/fetchFoundationAssetsOGYQuery";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
-import { PieChart } from "@components/charts/pie/Pie";
+import { PieChartData } from "@components/charts/pie/Pie";
 
 const useOGYCirculationState = () => {
   const [circulationData, setCirculationData] = useState({
     totalCirculationState: "0",
     totalSupplyLocked: "0",
     totalSupplyUnhand: "0",
-    dataPieChart: [] as PieChart[],
+    dataPieChart: [] as PieChartData[],
   });
 
   const {

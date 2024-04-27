@@ -1,14 +1,16 @@
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+// import { useMemo, Suspense } from "react";
+import { useLoaderData, defer, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card } from "@components/ui";
 
-interface NeuronsData {
-  name: string;
-  value: number;
-}
+// interface NeuronsData {
+//   name: string;
+//   value: number;
+// }
 
-export const NeuronsDetailsLoader = async () => {
+const loader = async () => {
   const dataNeurons = new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -43,8 +45,8 @@ export const NeuronsDetails = () => {
 
   const data = useLoaderData();
   return (
-    <div className="container mx-auto">
-      <div className="flex flex-col xl:flex-row items-center justify-between py-8">
+    <div className="container mx-auto py-16">
+      <div className="flex flex-col xl:flex-row items-center justify-between mb-8">
         <div className="flex flex-col xl:flex-row xl:justify-center items-center gap-4 xl:gap-8">
           <ArrowLeftIcon
             className="h-8 w-8 hover:cursor-pointer"
@@ -57,9 +59,9 @@ export const NeuronsDetails = () => {
         </div>
         <div>Principal ID: 8329839839283982</div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 py-16">
-        {data.dataNeurons.map(({ name, value }, index) => (
-          <Card className="bg-surface-2 pb-8" key={name}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        {data.dataNeurons.map(({ name, value }) => (
+          <Card className="bg-surface border border-border pb-8" key={name}>
             <div className="flex items-center text-lg">
               <span className="text-content/60">{name}</span>
             </div>
@@ -72,3 +74,5 @@ export const NeuronsDetails = () => {
     </div>
   );
 };
+
+NeuronsDetails.loader = loader;

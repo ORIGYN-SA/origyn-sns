@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { PropsWithChildren } from "react";
 import { createClient } from "@connect2ic/core";
 import {
@@ -14,12 +16,14 @@ import {
   GOVERNANCE_CANISTER_ID,
   TOKEN_METRICS_CANISTER_ID,
   LEGACY_LEDGER_CANISTER_ID,
+  OGY_TOKEN_SWAP_CANISTER_ID,
 } from "@constants/index";
 
 import { idlFactory as governanceIdl } from "@services/_candid/governance";
 import { idlFactory as ledgerIdl } from "@services/_candid/ledger";
 import { idlFactory as ledgerLegacyIdl } from "@services/_candid/ledger.legacy";
 import { idlFactory as tokenMetricsIdl } from "@services/_candid/token_metrics";
+import { idlFactory as OGYTokenSwapIdl } from "@services/_candid/ogy_token_swap";
 
 const Provider = ({ children }: PropsWithChildren) => {
   return (
@@ -42,15 +46,22 @@ const Provider = ({ children }: PropsWithChildren) => {
             canisterId: TOKEN_METRICS_CANISTER_ID,
             idlFactory: tokenMetricsIdl,
           },
+          OGYTokenSwap: {
+            canisterId: OGY_TOKEN_SWAP_CANISTER_ID,
+            idlFactory: OGYTokenSwapIdl,
+          },
         },
         providers: defaultProviders,
         globalProviderConfig: {
-          host: "https://identity.ic0.app",
+          // host: "https://identity.ic0.app",
+          host: "https://icp-api.io",
           // dev: true,
           whitelist: [
             GOVERNANCE_CANISTER_ID,
             LEDGER_CANISTER_ID,
+            LEGACY_LEDGER_CANISTER_ID,
             TOKEN_METRICS_CANISTER_ID,
+            OGY_TOKEN_SWAP_CANISTER_ID,
           ],
           // autoConnect: true,
         },

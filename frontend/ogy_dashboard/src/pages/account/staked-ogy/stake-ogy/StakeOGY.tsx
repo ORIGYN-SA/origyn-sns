@@ -14,7 +14,7 @@ const StakeOGY = () => {
       <Button className="w-full" onClick={handleShow}>
         Stake
       </Button>
-      <Dialog show={show} handleOnClose={handleClose}>
+      <Dialog show={show} handleClose={handleClose}>
         <div className="p-12 text-center">
           <div>Stake OGY</div>
           <div className="text-sm mb-8">

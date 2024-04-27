@@ -8,7 +8,7 @@ const AvailableOGY = () => {
   const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
 
   const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY();
+    useFetchBalanceOGY({});
 
   useEffect(() => {
     if (isSuccessFetchBalanceOGY) {

@@ -1,11 +1,17 @@
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import { Transition, Dialog as DialogHeadlessui } from "@headlessui/react";
 
-const Dialog = ({ show = true, handleOnClose, children, size = "md" }) => {
+interface DialogProps {
+  show: boolean;
+  handleClose: () => void;
+  children?: ReactNode;
+}
+
+const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
-        <DialogHeadlessui static as={Fragment} onClose={handleOnClose}>
+        <DialogHeadlessui static as={Fragment} onClose={handleClose}>
           <div className="absolute z-50 inset-0 overflow-hidden">
             <Transition.Child
               as={Fragment}

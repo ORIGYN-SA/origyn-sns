@@ -1,6 +1,6 @@
 import { UseMutationOptions, UseQueryOptions } from "@tanstack/react-query";
 
-export type ApiServiceErr = any;
+export type ApiServiceErr = unknown;
 
 export type MutOpt<Response, TVariables = unknown> = UseMutationOptions<
   Response,
@@ -13,5 +13,5 @@ export type QueryOptions<Response, TVariables = unknown> = UseQueryOptions<
   Response,
   ApiServiceErr,
   TVariables,
-  any[]
+  unknown[]
 >;
