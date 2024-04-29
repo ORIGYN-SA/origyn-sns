@@ -406,7 +406,32 @@ Swap:
     #
     # Each list element must be an ISO 3166-1 alpha-2 country code.
     restricted_countries:
-        - AQ  # Antarctica
+        - AF # AFGHANISTAN
+        - BY # BELARUS
+        - BI # BURUNDI
+        - CF # CENTRAL AFRICAN REPUBLIC
+        - KP # NORTH KOREA
+        - CD # DEMOCRATIC REPUBLIC OF THE CONGO
+        - GN # GUINEA
+        - GW # GUINEA-BISSAU
+        - HT # HAITI
+        - IR # IRAN
+        - IQ # IRAQ
+        - XK # KOSOVO
+        - LB # LEBANON
+        - LY # LIBYA
+        - ML # MALI
+        - MM # MYANMAR
+        - NI # NICARAGUA
+        - RU # RUSSIA
+        - SO # SOMALIA
+        - SD # SUDAN
+        - SS # SOUTH SUDAN
+        - SY # SYRIA
+        - UA # UKRAINE
+        - VE # VENEZUELA
+        - YE # YEMEN
+        - ZW # ZIMBABWE
 
     # Configuration of the vesting schedule of the neuron basket, i.e., the SNS
     # neurons that a participants will receive from a successful
