@@ -18,9 +18,9 @@ interface ISendTokensParams {
   owner: string;
 }
 
-interface IValueOGYBalance {
-  e8s: bigint;
-}
+// interface IValueOGYBalance {
+//   e8s: bigint;
+// }
 
 const sendTokens = async ({
   OGYTokenSwapActor,
@@ -42,8 +42,8 @@ const sendTokens = async ({
   const result = rawResult.filter(isFulfilled);
   const to = Principal.fromUint8Array(result[1]?.value as Uint8Array).toHex();
   const fee = { e8s: BigInt(FEE * 10 ** 8) };
-  const amount_e8s = (result[0]?.value as IValueOGYBalance).e8s;
-  const amount = { e8s: amount_e8s - fee.e8s };
+  // const amount_e8s = (result[0]?.value as IValueOGYBalance).e8s;
+  // const amount = { e8s: amount_e8s - fee.e8s };
 
   const resultSendTokens = await ledgerLegacyActor.send_dfx({
     to,

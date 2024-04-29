@@ -17,6 +17,7 @@
     --color-candy-floss: 255 85 197;
     --color-sky: 0 162 247;
     --color-jade: 80 190 143;
+    --color-mouse: 225 225 225;
     --color-border: 243 243 243;
   }
   @media (prefers-color-scheme: dark) {
@@ -32,6 +33,7 @@
       --color-candy-floss: 255 85 197;
       --color-sky: 0 162 247;
       --color-jade: 80 190 143;
+      --color-mouse: 225 225 225;
       --color-border: 46 46 46;
     }
   }
