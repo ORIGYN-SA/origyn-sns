@@ -7,7 +7,7 @@ interface IBadge
 
 const Badge = ({ children, className, ...restProps }: IBadge) => {
   return (
-    <div className={`rounded-full px-4 py-1 ${className}`} {...restProps}>
+    <div className={`rounded-full px-0 py-1 ${className}`} {...restProps}>
       {children}
     </div>
   );

@@ -15,7 +15,7 @@ const Dashboard = () => {
     <div className="container mx-auto py-16 px-4">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center">
-          <Badge className="bg-spacePurple">
+          <Badge className="bg-spacePurple px-4">
             <div className="text-white tracking-widest text-xs font-semibold uppercase">
               OGY ANALYTICS
             </div>

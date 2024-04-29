@@ -8,9 +8,12 @@ import { LEDGER_CANISTER_ID } from "@constants/index";
 const fn = async ({
   limit,
   offset,
+  sorting,
 }: ListParams): Promise<TransactionResults> => {
+  const { id, desc } = sorting[0];
+  const sort = desc ? `&sort_by=-${id}` : `&sort_by=${id}`;
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}`
+    `/ledgers/${LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}${sort}`
   );
   return {
     rows: data?.data ?? [],
@@ -21,10 +24,14 @@ const fn = async ({
   };
 };
 
-const useFetchAllTransactions = ({ limit = 20, offset = 0 }: ListParams) => {
+const useFetchAllTransactions = ({
+  limit = 20,
+  offset = 0,
+  sorting = [{ id: "index", desc: true }],
+}: ListParams) => {
   return useQuery<TransactionResults, ApiServiceErr>({
-    queryKey: ["fetchAllTransactions", limit, offset],
-    queryFn: () => fn({ limit, offset }),
+    queryKey: ["fetchAllTransactions", limit, offset, sorting],
+    queryFn: () => fn({ limit, offset, sorting }),
     placeholderData: keepPreviousData,
   });
 };

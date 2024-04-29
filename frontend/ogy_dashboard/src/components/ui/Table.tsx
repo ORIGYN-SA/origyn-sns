@@ -9,6 +9,7 @@ import {
   ColumnDef,
   PaginationState,
   OnChangeFn,
+  SortingState,
 } from "@tanstack/react-table";
 import { Select } from "@components/ui";
 
@@ -21,6 +22,8 @@ interface ReactTableProps<T extends object> {
   // Useful if using two or more table on same page
   pageIndexIdentifier: string;
   pageSizeIdentifier: string;
+  sorting: SortingState;
+  setSorting: OnChangeFn<SortingState>;
 }
 
 const linesPerPageOptions = [
@@ -38,6 +41,8 @@ const Table = <T extends object>({
   enablePagination = true,
   pageIndexIdentifier = "pageIndex",
   pageSizeIdentifier = "pageSize",
+  sorting,
+  setSorting,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -49,10 +54,13 @@ const Table = <T extends object>({
     rowCount: data?.rowCount ?? 0,
     state: {
       pagination,
+      sorting,
     },
+    onSortingChange: setSorting,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
+    manualSorting: true,
   });
 
   const handleOnChangePageSize = (value: string) => {
@@ -100,6 +108,17 @@ const Table = <T extends object>({
     setSearchParams(searchParams);
   };
 
+  const handleOnChangeSorting = (columnId: string) => {
+    // Detect the current sorting state of the column
+    const currentSort = table.getColumn(columnId).getIsSorted();
+    const newSortDirection =
+      currentSort === "asc" ? "desc" : currentSort === "desc" ? null : "asc";
+    setSorting([{ id: columnId, desc: newSortDirection === "desc" }]);
+    searchParams.set("id", columnId);
+    searchParams.set("desc", newSortDirection === "desc");
+    setSearchParams(searchParams);
+  };
+
   // useEffect(() => {
   //   searchParams.set(
   //     pageIndexIdentifier,
@@ -125,16 +144,46 @@ const Table = <T extends object>({
                     >
                       {header.isPlaceholder ? null : (
                         <div
-                          className={
+                          className={`${
+                            header.column.getCanSort()
+                              ? "cursor-pointer select-none"
+                              : ""
+                          } ${
                             header.column.columnDef.meta?.className ??
                             "text-center"
+                          }`}
+                          onClick={() => handleOnChangeSorting(header.id)}
+                          title={
+                            header.column.getCanSort()
+                              ? header.column.getNextSortingOrder() === "asc"
+                                ? "Sort ascending"
+                                : header.column.getNextSortingOrder() === "desc"
+                                ? "Sort descending"
+                                : "Clear sort"
+                              : undefined
                           }
                         >
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                          {{
+                            asc: " 🔼",
+                            desc: " 🔽",
+                          }[header.column.getIsSorted() as string] ?? null}
                         </div>
+
+                        // <div
+                        //   className={
+                        //     header.column.columnDef.meta?.className ??
+                        //     "text-center"
+                        //   }
+                        // >
+                        //   {flexRender(
+                        //     header.column.columnDef.header,
+                        //     header.getContext()
+                        //   )}
+                        // </div>
                       )}
                     </th>
                   );

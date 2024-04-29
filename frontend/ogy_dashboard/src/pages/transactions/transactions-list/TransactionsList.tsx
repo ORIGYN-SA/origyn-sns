@@ -4,15 +4,19 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import _truncate from "lodash/truncate";
-import { Table, Tooltip } from "@components/ui";
+import { Table, Tooltip, Badge } from "@components/ui";
 import useFetchAllTransactions from "@services/transactions/fetchAll";
 import { Transaction } from "@services/_api/types/transactions.types";
 import { PaginationProps } from "@helpers/table/useTableProps";
+import { timestampToDateShort } from "@helpers/dates";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 
 const TransactionsList = ({
   pagination,
   setPagination,
   enablePagination,
+  sorting,
+  setSorting,
 }: PaginationProps) => {
   const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Transaction>[]>(
@@ -31,9 +35,17 @@ const TransactionsList = ({
         },
       },
       {
-        accessorKey: "updated_at",
-        id: "updated_at",
-        cell: (info) => info.getValue(),
+        accessorKey: "timestamp",
+        id: "timestamp",
+        cell: (info) => (
+          <div>
+            <Badge className="bg-slate-500/20">
+              <div className="text-slate-500 text-xs font-semibold">
+                {timestampToDateShort(info.getValue())}
+              </div>
+            </Badge>
+          </div>
+        ),
         header: "Date",
       },
       {
@@ -74,13 +86,20 @@ const TransactionsList = ({
       {
         accessorKey: "amount",
         id: "amount",
-        cell: (info) => info.getValue(),
+        cell: (info) =>
+          roundAndFormatLocale({
+            number: divideBy1e8(parseInt(info.getValue())),
+          }),
         header: "Amount",
       },
       {
         accessorKey: "fee",
         id: "fee",
-        cell: (info) => info.getValue(),
+        cell: (info) =>
+          roundAndFormatLocale({
+            number: divideBy1e8(parseInt(info.getValue())),
+            decimals: 3,
+          }),
         header: "Fee",
       },
     ],
@@ -91,6 +110,7 @@ const TransactionsList = ({
   const { data: transactions, isSuccess } = useFetchAllTransactions({
     limit: pagination.pageSize,
     offset: pagination.pageSize * pagination.pageIndex,
+    sorting,
   });
 
   const handleClickView = (cell: CellContext<Transaction, unknown>) => {
@@ -113,6 +133,8 @@ const TransactionsList = ({
           setPagination={setPagination}
           data={transactions}
           enablePagination={enablePagination}
+          sorting={sorting}
+          setSorting={setSorting}
         />
       )}
     </div>

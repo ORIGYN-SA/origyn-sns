@@ -7,5 +7,6 @@ import Dialog from '@components/ui/Dialog'
 import Tile from '@components/ui/Tile'
 import LoaderSpin from '@components/ui/LoaderSpin'
 import Badge from '@components/ui/Badge'
+import Search from '@components/ui/Search'
 
-export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge}
+export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge, Search}
