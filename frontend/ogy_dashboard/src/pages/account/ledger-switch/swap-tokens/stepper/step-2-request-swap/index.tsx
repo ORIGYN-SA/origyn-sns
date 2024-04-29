@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button, Tile, LoaderSpin } from "@components/ui";
 import { StepperContext } from "../context";
@@ -7,14 +7,8 @@ import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
 
 const Step2RequestSwap = () => {
   const queryClient = useQueryClient();
-  const {
-    nextStep,
-    blockIndex,
-    OGYLegacyBalance,
-    setOGYBalance,
-    OGYBalance: currentOGYBalance,
-  } = useContext(StepperContext);
-  const [prevOGYBalance] = useState(currentOGYBalance);
+  const { nextStep, blockIndex, OGYLegacyBalance, setOGYBalance } =
+    useContext(StepperContext);
 
   const {
     data: OGYBalance,

@@ -11,3 +11,14 @@ export const getCurrentDateLastWeekInSeconds = () =>
       .plus({ days: DateTime.local().weekday - 1 })
       .toSeconds()
   ).toString();
+
+export const formatDateShort = (date: string) => {
+  const datetime = DateTime.fromISO(date);
+  return datetime.toLocaleString(DateTime.DATETIME_SHORT);
+};
+
+export const timestampToDateShort = (timestamp: number) => {
+  const millisecondsTimestamp = timestamp / 1000000;
+  const datetime = DateTime.fromMillis(millisecondsTimestamp);
+  return datetime.toLocaleString(DateTime.DATETIME_SHORT);
+};

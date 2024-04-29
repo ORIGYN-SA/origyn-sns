@@ -11,6 +11,8 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
   const { isConnected, isInitializing, principal } = useConnect();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const [, setSearchParams] = useSearchParams();
 
   const navItems = [
     { title: "Dashboard", url: "/" },
