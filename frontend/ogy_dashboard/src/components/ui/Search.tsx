@@ -63,7 +63,7 @@ const Search = ({
             onChange: (e) => handleOnChange(e),
             value: searchterm,
           })}
-          className="form-input w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
+          className="form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
         />
         {searchterm === "" ? (
           <div

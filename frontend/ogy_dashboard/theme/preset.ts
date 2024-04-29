@@ -53,5 +53,6 @@ export default {
   plugins: [
     import("@tailwindcss/typography"),
     import("@tailwindcss/aspect-ratio"),
+    import("@tailwindcss/line-clamp")
   ],
 };

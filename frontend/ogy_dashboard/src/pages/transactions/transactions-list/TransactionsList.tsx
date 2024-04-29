@@ -10,6 +10,7 @@ import { Transaction } from "@services/_api/types/transactions.types";
 import { PaginationProps } from "@helpers/table/useTableProps";
 import { timestampToDateShort } from "@helpers/dates";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
 
 const TransactionsList = ({
   pagination,
@@ -31,7 +32,7 @@ const TransactionsList = ({
         ),
         header: "Index",
         meta: {
-          className: "text-left",
+          className: "",
         },
       },
       {
@@ -39,8 +40,8 @@ const TransactionsList = ({
         id: "timestamp",
         cell: (info) => (
           <div>
-            <Badge className="bg-slate-500/20">
-              <div className="text-slate-500 text-xs font-semibold">
+            <Badge className="bg-slate-500/20 px-2">
+              <div className="text-slate-500 text-xs font-semibold shrink-0">
                 {timestampToDateShort(info.getValue())}
               </div>
             </Badge>
@@ -52,36 +53,41 @@ const TransactionsList = ({
         accessorKey: "from_account",
         id: "from_account",
         cell: (info) => (
-          <div>
+          <div className="flex items-center max-w-sm">
             <button
               onClick={() => handleClickView(info)}
               data-tooltip-id="tooltip_from_account"
               data-tooltip-content={info.getValue()}
+              className="mr-2 truncate"
             >
-              {_truncate(info.getValue(), { length: 30 })}
+              {info.getValue()}
             </button>
             <Tooltip id="tooltip_from_account" />
+            <CopyToClipboard value={info.getValue()} />
           </div>
         ),
         header: "From",
+        enableSorting: false,
       },
       {
         accessorKey: "to_account",
         id: "to_account",
-        // cell: (info) => info.getValue(),
         cell: (info) => (
-          <div>
+          <div className="flex items-center max-w-sm">
             <button
               onClick={() => handleClickView(info)}
               data-tooltip-id="tooltip_to_account"
               data-tooltip-content={info.getValue()}
+              className="truncate"
             >
-              {_truncate(info.getValue(), { length: 30 })}
+              {info.getValue()}
             </button>
             <Tooltip id="tooltip_to_account" />
+            <CopyToClipboard value={info.getValue()} />
           </div>
         ),
         header: "To",
+        enableSorting: false,
       },
       {
         accessorKey: "amount",
@@ -101,6 +107,7 @@ const TransactionsList = ({
             decimals: 3,
           }),
         header: "Fee",
+        enableSorting: false,
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps

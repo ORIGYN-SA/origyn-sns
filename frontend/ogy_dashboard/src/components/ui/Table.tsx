@@ -11,6 +11,14 @@ import {
   OnChangeFn,
   SortingState,
 } from "@tanstack/react-table";
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  ChevronDoubleRightIcon,
+  ChevronDoubleLeftIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/20/solid";
 import { Select } from "@components/ui";
 
 interface ReactTableProps<T extends object> {
@@ -130,7 +138,7 @@ const Table = <T extends object>({
 
   return (
     <div className="bg-surface border border-border rounded-xl">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table-auto w-full rounded-xl">
           <thead className="bg-charcoal dark:bg-surface text-white">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -144,22 +152,24 @@ const Table = <T extends object>({
                     >
                       {header.isPlaceholder ? null : (
                         <div
-                          className={`${
+                          className={`flex items-center ${
                             header.column.getCanSort()
                               ? "cursor-pointer select-none"
                               : ""
                           } ${
                             header.column.columnDef.meta?.className ??
-                            "text-center"
+                            "justify-center"
                           }`}
-                          onClick={() => handleOnChangeSorting(header.id)}
+                          onClick={
+                            header.column.getCanSort()
+                              ? () => handleOnChangeSorting(header.id)
+                              : null
+                          }
                           title={
                             header.column.getCanSort()
                               ? header.column.getNextSortingOrder() === "asc"
                                 ? "Sort ascending"
-                                : header.column.getNextSortingOrder() === "desc"
-                                ? "Sort descending"
-                                : "Clear sort"
+                                : "Sort descending"
                               : undefined
                           }
                         >
@@ -168,8 +178,8 @@ const Table = <T extends object>({
                             header.getContext()
                           )}
                           {{
-                            asc: " 🔼",
-                            desc: " 🔽",
+                            asc: <ArrowUpIcon className="h-5 w-5 ml-2" />,
+                            desc: <ArrowDownIcon className="h-5 w-5 ml-2" />,
                           }[header.column.getIsSorted() as string] ?? null}
                         </div>
 
@@ -202,7 +212,7 @@ const Table = <T extends object>({
                     return (
                       <td
                         key={cell.id}
-                        className={`px-8 py-4 whitespace-normal break-words ${
+                        className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
                           cell.column.columnDef.meta?.className ?? "text-center"
                         }`}
                       >
@@ -234,32 +244,32 @@ const Table = <T extends object>({
             </div>
             <div className="flex items-center gap-2">
               <button
-                className="border rounded p-1"
+                className="p-1"
                 onClick={handleOnClickFirstPage}
                 disabled={!table.getCanPreviousPage()}
               >
-                {"<<"}
+                <ChevronDoubleLeftIcon className="h-5 w-5" />
               </button>
               <button
-                className="border rounded p-1"
+                className="p-1"
                 onClick={handleOnClickPreviousPage}
                 disabled={!table.getCanPreviousPage()}
               >
-                {"<"}
+                <ChevronLeftIcon className="h-5 w-5" />
               </button>
               <button
-                className="border rounded p-1"
+                className="p-1"
                 onClick={handleOnClickNextPage}
                 disabled={!table.getCanNextPage()}
               >
-                {">"}
+                <ChevronRightIcon className="h-5 w-5" />
               </button>
               <button
-                className="border rounded p-1"
+                className="p-1"
                 onClick={handleOnClickLastPage}
                 disabled={!table.getCanNextPage()}
               >
-                {">>"}
+                <ChevronDoubleRightIcon className="h-5 w-5" />
               </button>
               <span className="flex items-center gap-1">
                 <div>Page</div>
