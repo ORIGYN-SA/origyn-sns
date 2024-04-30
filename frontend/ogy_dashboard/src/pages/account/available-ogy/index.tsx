@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
-import { Card } from "@components/ui";
+import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
 
 const AvailableOGY = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+  };
   const [balanceOGY, setBalanceOGY] = useState(0);
   const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
 
@@ -31,7 +36,10 @@ const AvailableOGY = () => {
         </div>
       </div>
       <div className="mt-8">
-        <Transfer />
+        <Button className="w-full" onClick={handleShow}>
+          Transfer
+        </Button>
+        <Transfer show={show} handleClose={handleClose} />
       </div>
     </Card>
   );
