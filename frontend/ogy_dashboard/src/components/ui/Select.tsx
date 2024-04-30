@@ -27,7 +27,7 @@ const Select = ({ options, value, handleOnChange, className }) => {
                   key={option.value}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-candyFloss/10 text-candyFloss" : ""
+                      active ? "bg-accent/10 text-accent" : ""
                     }`
                   }
                   value={option.value}
@@ -42,7 +42,7 @@ const Select = ({ options, value, handleOnChange, className }) => {
                         {option.value}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-candyFloss">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-accent">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}

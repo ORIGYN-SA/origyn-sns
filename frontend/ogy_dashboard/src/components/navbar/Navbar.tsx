@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-background sticky top-0 shadow shadow-background-1 px-6 py-5 z-40">
+      <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">

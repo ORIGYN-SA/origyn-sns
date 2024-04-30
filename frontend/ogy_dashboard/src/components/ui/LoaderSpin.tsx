@@ -4,7 +4,7 @@
 
 const LoaderSpin = () => {
   return (
-    <div className="border-candyFloss/20 h-10 w-10 animate-spin rounded-full border-4 border-t-candyFloss" />
+    <div className="border-4 border-accent/20 border-t-accent h-10 w-10 animate-spin rounded-full" />
   );
 };
 
