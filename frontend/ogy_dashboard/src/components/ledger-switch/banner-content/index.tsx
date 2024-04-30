@@ -7,7 +7,7 @@ const BannerContent = ({ children }: PropsWithChildren) => {
       <div className="flex justify-center items-center mb-16">
         <div className="flex items-center rounded-full bg-surface p-1">
           <Badge className="bg-sky">
-            <div className="text-white tracking-widest text-xs font-semibold uppercase xl:text-left text-center">
+            <div className="text-white tracking-widest px-2 text-xs font-semibold uppercase xl:text-left text-center">
               IMPORTANT INFORMATION
             </div>
           </Badge>
