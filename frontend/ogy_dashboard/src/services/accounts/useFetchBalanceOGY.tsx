@@ -24,6 +24,7 @@ const fetchBalanceOGY = async ({ actor, owner }: IFetchBalanceOGY) => {
   const balanceOGY = divideBy1e8(resultBalanceOgy);
   const balanceOGYUSD = roundAndFormatLocale({ number: balanceOGY * ogyPrice });
   return {
+    balanceOGYe8s: resultBalanceOgy,
     balanceOGY,
     balanceOGYUSD,
   };

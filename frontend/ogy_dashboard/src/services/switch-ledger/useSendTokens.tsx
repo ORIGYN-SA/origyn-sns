@@ -3,6 +3,7 @@ import { useConnect, useCanister } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { ActorSubclass } from "@dfinity/agent";
+import { TRANSACTION_FEE } from "@constants/index";
 
 // const isRejected = (
 //   input: PromiseSettledResult<unknown>
@@ -27,7 +28,6 @@ const sendTokens = async ({
   ledgerLegacyActor,
   owner,
 }: ISendTokensParams) => {
-  const FEE = 0.002;
   // for fetching OGY user balance
   const userAccountIdentifier = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
@@ -41,7 +41,7 @@ const sendTokens = async ({
 
   const result = rawResult.filter(isFulfilled);
   const to = Principal.fromUint8Array(result[1]?.value as Uint8Array).toHex();
-  const fee = { e8s: BigInt(FEE * 10 ** 8) };
+  const fee = { e8s: TRANSACTION_FEE };
   // const amount_e8s = (result[0]?.value as IValueOGYBalance).e8s;
   // const amount = { e8s: amount_e8s - fee.e8s };
 

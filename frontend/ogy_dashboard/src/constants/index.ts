@@ -10,6 +10,7 @@ export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
 export const LEGACY_OGY_DASHBOARD_URL = import.meta.env.VITE_LEGACY_OGY_DASHBOARD_URL
 export const APP_MODE = import.meta.env.MODE
+export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE)
 
 if (!(APP_MODE === "production")) {
     console.log(`APP_MODE=${APP_MODE}`)
@@ -68,4 +69,9 @@ if (!(APP_MODE === "production")) {
         console.log("No LEGACY_OGY_DASHBOARD_URL environment variable. Set LEGACY_OGY_DASHBOARD_URL environment variable.")
     else
         console.log(`LEGACY_OGY_DASHBOARD_URL=${LEGACY_OGY_DASHBOARD_URL}`)
+
+    if (!TRANSACTION_FEE)
+        console.log("No TRANSACTION_FEE environment variable. Set TRANSACTION_FEE environment variable.")
+    else
+        console.log(`TRANSACTION_FEE=${TRANSACTION_FEE}`)
 }

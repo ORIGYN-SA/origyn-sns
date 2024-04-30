@@ -52,7 +52,7 @@ const Search = ({
     <div className={`${className}`} {...restProps}>
       <form
         onKeyDown={handleOnKeyDown as () => void}
-        className="rounded-full bg-surface px-4 py-2 flex justify-between items-center w-full border-surface-2"
+        className="rounded-full bg-surface border border-border px-4 py-2 flex justify-between items-center w-full"
       >
         <input
           id={id}
