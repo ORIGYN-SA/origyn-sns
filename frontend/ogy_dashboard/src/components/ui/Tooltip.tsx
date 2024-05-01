@@ -12,7 +12,7 @@ interface TooltipProps
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
-  background-color: rgb(var(--color-content-1)) !important;
+  background-color: rgb(var(--color-content)) !important;
   color: rgb(var(--color-surface-1)) !important;
 `;
 

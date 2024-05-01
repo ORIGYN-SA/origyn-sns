@@ -11,3 +11,7 @@ interface roundAndFormatLocaleParams {
 export const roundAndFormatLocale = ({number, locale="en-US", decimals=2}: roundAndFormatLocaleParams) => {
     return Number(number.toFixed(decimals)).toLocaleString(locale);
 };
+
+export const numberToE8s = (value:string) => {
+    return BigInt(Math.round(parseFloat(value) * 1e8))
+}

@@ -8,5 +8,6 @@ import Tile from '@components/ui/Tile'
 import LoaderSpin from '@components/ui/LoaderSpin'
 import Badge from '@components/ui/Badge'
 import Search from '@components/ui/Search'
+import InputField from '@components/ui/InputField'
 
-export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge, Search}
+export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge, Search, InputField}
