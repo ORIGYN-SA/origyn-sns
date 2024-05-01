@@ -3,6 +3,9 @@ import { DateTime } from "luxon";
 export const getCurrentDateInSeconds = () =>
   Math.floor(DateTime.local().toSeconds()).toString();
 
+export const getCurrentDateInNanoseconds = () =>
+  DateTime.now().toMillis() * 1000000;
+
 export const getCurrentDateLastWeekInSeconds = () =>
   Math.floor(
     DateTime.local()

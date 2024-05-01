@@ -1,19 +1,13 @@
 export const colors = {
-  background: {
-    DEFAULT: "rgb(var(--color-background-1))",
-  },
+  background: "rgb(var(--color-background))",
+  content: "rgb(var(--color-content))",
   surface: {
     1: "rgb(var(--color-surface-1))",
     2: "rgb(var(--color-surface-2))",
     3: "rgb(var(--color-surface-3))",
     DEFAULT: "rgb(var(--color-surface-1))",
   },
-  content: {
-    DEFAULT: "rgb(var(--color-content-1))",
-  },
-  border: {
-    DEFAULT: "rgb(var(--color-border))",
-  },
+  border: "rgb(var(--color-border))",
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
   spacePurple: "rgb(var(--color-space-purple))",

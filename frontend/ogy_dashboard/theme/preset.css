@@ -6,35 +6,34 @@
 
 @layer base {
   :root {
-    --color-background-1: 250 250 250;
+    --color-background: 250 250 250;
+    --color-content: 34 37 38;
     --color-surface-1: 255 255 255;
     --color-surface-2: 240 240 240;
     --color-surface-3: 208 211 224;
-    --color-content-1: 34 37 38;
+    --color-border: 243 243 243;
+    /* candy floss baby! */
+    --color-accent: 255 85 197;
     --color-charcoal: 34 37 38;
-    --color-accent: 97 92 255;
     --color-space-purple: 97 91 255;
     --color-candy-floss: 255 85 197;
     --color-sky: 0 162 247;
     --color-jade: 80 190 143;
-    --color-mouse: 225 225 225;
-    --color-border: 243 243 243;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-background-1: 23 23 23;
+      --color-background: 23 23 23;
+      --color-content: 255 255 255;
       --color-surface-1: 32 32 32;
       --color-surface-2: 40 40 40;
       --color-surface-3: 52 52 52;
-      --color-content-1: 255 255 255;
+      --color-border: 46 46 46;
+      --color-accent: 255 85 197;
       --color-charcoal: 34 37 38;
-      --color-accent: 97 92 255;
       --color-space-purple: 97 91 255;
       --color-candy-floss: 255 85 197;
       --color-sky: 0 162 247;
       --color-jade: 80 190 143;
-      --color-mouse: 225 225 225;
-      --color-border: 46 46 46;
     }
   }
 }
