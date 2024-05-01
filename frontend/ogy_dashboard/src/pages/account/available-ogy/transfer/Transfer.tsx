@@ -27,7 +27,7 @@ const Transfer = ({ show, handleClose }) => {
     isError: isErrorTransfer,
     isPending: isPendingTransfer,
     isIdle: isIdleTransfer,
-    error: errorTransfer,
+    // error: errorTransfer,
   } = useTransfer();
 
   const {
