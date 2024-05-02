@@ -1,4 +1,4 @@
-export default ({ IDL }) => {
+export const idlFactory = ({ IDL }) => {
   const Args = IDL.Record({ test_mode: IDL.Bool });
   const NeuronId = IDL.Record({ id: IDL.Vec(IDL.Nat8) });
   const UserClaimErrorResponse = IDL.Variant({

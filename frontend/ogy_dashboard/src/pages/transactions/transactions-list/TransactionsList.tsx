@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
-import _truncate from "lodash/truncate";
 import { Table, Tooltip, Badge } from "@components/ui";
 import useFetchAllTransactions from "@services/transactions/fetchAll";
 import { Transaction } from "@services/_api/types/transactions.types";

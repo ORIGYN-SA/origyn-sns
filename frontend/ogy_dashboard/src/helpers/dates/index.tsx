@@ -1,5 +1,8 @@
 import { DateTime } from "luxon";
 
+export const getCurrentTimestamp = () =>
+  Math.floor(DateTime.local().toSeconds());
+
 export const getCurrentDateInSeconds = () =>
   Math.floor(DateTime.local().toSeconds()).toString();
 
