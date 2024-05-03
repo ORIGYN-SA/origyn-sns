@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
+  getExpandedRowModel,
   flexRender,
   ColumnDef,
   PaginationState,
@@ -24,14 +25,12 @@ import { Select } from "@components/ui";
 interface ReactTableProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
-  pagination: PaginationState;
-  setPagination: OnChangeFn<PaginationState>;
-  enablePagination: boolean;
-  // Useful if using two or more table on same page
-  pageIndexIdentifier: string;
-  pageSizeIdentifier: string;
-  sorting: SortingState;
-  setSorting: OnChangeFn<SortingState>;
+  pagination?: PaginationState;
+  setPagination?: OnChangeFn<PaginationState>;
+  sorting?: SortingState;
+  setSorting?: OnChangeFn<SortingState>;
+  getRowCanExpand?: (row: Row<T>) => boolean;
+  identifier?: string;
 }
 
 const linesPerPageOptions = [
@@ -43,16 +42,17 @@ const linesPerPageOptions = [
 
 const Table = <T extends object>({
   columns,
+  data,
   pagination,
   setPagination,
-  data,
-  enablePagination = true,
-  pageIndexIdentifier = "pageIndex",
-  pageSizeIdentifier = "pageSize",
   sorting,
   setSorting,
+  getRowCanExpand,
+  identifier = "",
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const pageIndex = `page_index${identifier ?? `_${identifier}`}`;
+  const pageSize = `page_size${identifier ?? `_${identifier}`}`;
 
   const defaultData = useMemo(() => [], []);
 
@@ -67,15 +67,17 @@ const Table = <T extends object>({
     onSortingChange: setSorting,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
-    manualPagination: true,
-    manualSorting: true,
+    getRowCanExpand,
+    getExpandedRowModel: getExpandedRowModel(),
+    manualPagination: setPagination ? true : undefined,
+    manualSorting: setSorting ? true : undefined,
   });
 
   const handleOnChangePageSize = (value: string) => {
     table.setPageSize(Number(value));
     table.setPageIndex(0);
-    searchParams.set(pageSizeIdentifier, value);
-    searchParams.set(pageIndexIdentifier, "1");
+    searchParams.set(pageSize, value);
+    searchParams.set(pageIndex, "1");
     setSearchParams(searchParams);
   };
 
@@ -89,7 +91,7 @@ const Table = <T extends object>({
   const handleOnClickPreviousPage = () => {
     table.previousPage();
     searchParams.set(
-      pageIndexIdentifier,
+      pageIndex,
       table.getState().pagination.pageIndex.toString()
     );
     setSearchParams(searchParams);
@@ -98,7 +100,7 @@ const Table = <T extends object>({
   const handleOnClickNextPage = () => {
     table.nextPage();
     searchParams.set(
-      pageIndexIdentifier,
+      pageIndex,
       (table.getState().pagination.pageIndex + 2).toString()
     );
     setSearchParams(searchParams);
@@ -106,13 +108,13 @@ const Table = <T extends object>({
 
   const handleOnClickFirstPage = () => {
     table.firstPage();
-    searchParams.set(pageIndexIdentifier, "1");
+    searchParams.set(pageIndex, "1");
     setSearchParams(searchParams);
   };
 
   const handleOnClickLastPage = () => {
     table.lastPage();
-    searchParams.set(pageIndexIdentifier, table.getPageCount().toString());
+    searchParams.set(pageIndex, table.getPageCount().toString());
     setSearchParams(searchParams);
   };
 
@@ -126,15 +128,6 @@ const Table = <T extends object>({
     searchParams.set("desc", newSortDirection === "desc");
     setSearchParams(searchParams);
   };
-
-  // useEffect(() => {
-  //   searchParams.set(
-  //     pageIndexIdentifier,
-  //     (table.getState().pagination.pageIndex + 1).toString()
-  //   );
-  //   setSearchParams(searchParams);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [pagination.pageSize]);
 
   return (
     <div className="bg-surface border border-border rounded-xl">
@@ -153,7 +146,7 @@ const Table = <T extends object>({
                       {header.isPlaceholder ? null : (
                         <div
                           className={`flex items-center ${
-                            header.column.getCanSort()
+                            setSorting && header.column.getCanSort()
                               ? "cursor-pointer select-none"
                               : ""
                           } ${
@@ -161,12 +154,12 @@ const Table = <T extends object>({
                             "justify-center"
                           }`}
                           onClick={
-                            header.column.getCanSort()
+                            setSorting && header.column.getCanSort()
                               ? () => handleOnChangeSorting(header.id)
                               : null
                           }
                           title={
-                            header.column.getCanSort()
+                            setSorting && header.column.getCanSort()
                               ? header.column.getNextSortingOrder() === "asc"
                                 ? "Sort ascending"
                                 : "Sort descending"
@@ -182,18 +175,6 @@ const Table = <T extends object>({
                             desc: <ArrowDownIcon className="h-5 w-5 ml-2" />,
                           }[header.column.getIsSorted() as string] ?? null}
                         </div>
-
-                        // <div
-                        //   className={
-                        //     header.column.columnDef.meta?.className ??
-                        //     "text-center"
-                        //   }
-                        // >
-                        //   {flexRender(
-                        //     header.column.columnDef.header,
-                        //     header.getContext()
-                        //   )}
-                        // </div>
                       )}
                     </th>
                   );
@@ -204,26 +185,37 @@ const Table = <T extends object>({
           <tbody>
             {table.getRowModel().rows.map((row) => {
               return (
-                <tr
-                  key={row.id}
-                  className="bg-surface border-b last:border-none border-border"
-                >
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
-                          cell.column.columnDef.meta?.className ?? "text-center"
-                        }`}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+                <>
+                  <tr
+                    key={row.id}
+                    className="bg-surface border-b last:border-none border-border"
+                  >
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td
+                          key={cell.id}
+                          className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
+                            cell.column.columnDef.meta?.className ??
+                            "text-center"
+                          }`}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                  {row.getIsExpanded() && (
+                    <tr>
+                      {/* 2nd row is a custom 1 cell row */}
+                      <td colSpan={row.getVisibleCells().length}>
+                        {renderSubComponent({ row })}
                       </td>
-                    );
-                  })}
-                </tr>
+                    </tr>
+                  )}
+                </>
               );
             })}
           </tbody>
@@ -231,7 +223,7 @@ const Table = <T extends object>({
       </div>
 
       <div className="p-1 w-full">
-        {enablePagination && (
+        {pagination && setPagination && (
           <div className="flex items-center justify-between p-6">
             <div className="flex items-center">
               <span>Lines per page</span>
@@ -302,13 +294,20 @@ const Table = <T extends object>({
           </option>
         ))}
       </select> */}
-
-              {data.isFetching ? "Loading..." : null}
+              {data?.isFetching ? "Loading..." : null}
             </div>
           </div>
         )}
       </div>
     </div>
+  );
+};
+
+const renderSubComponent = ({ row }: { row: Row<T> }) => {
+  return (
+    <pre style={{ fontSize: "10px" }}>
+      <code>{JSON.stringify(row.original, null, 2)}</code>
+    </pre>
   );
 };
 

@@ -1,14 +1,20 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { PaginationState, ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
+import { TableProps } from "@helpers/table/useTable";
 
 import { fetchData, Proposal } from "./fetchData.dev";
 
-const List = () => {
+const List = ({
+  pagination,
+  setPagination,
+  sorting,
+  setSorting,
+}: TableProps) => {
   const navigate = useNavigate();
 
   const columns = useMemo<ColumnDef<Proposal>[]>(
@@ -70,11 +76,6 @@ const List = () => {
     []
   );
 
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
-
   const data = useQuery({
     queryKey: ["proposals_list", pagination],
     queryFn: () => fetchData(pagination),
@@ -92,10 +93,11 @@ const List = () => {
     <div>
       <Table
         columns={columns}
+        data={data?.data}
         pagination={pagination}
         setPagination={setPagination}
-        data={data?.data}
-        enablePagination={false}
+        sorting={sorting}
+        setSorting={setSorting}
       />
     </div>
   );

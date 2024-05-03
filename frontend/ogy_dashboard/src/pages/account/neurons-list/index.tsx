@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Table, Tooltip, Badge } from "@components/ui";
 import { Transaction } from "@services/_api/types/transactions.types";
-import { PaginationProps } from "@helpers/table/useTableProps";
+import { ITableProps } from "@helpers/table/useTable";
 import { timestampToDateShort } from "@helpers/dates";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
@@ -18,6 +18,24 @@ const NeuronsList = () => {
   const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
       {
+        id: "expander",
+        header: () => null,
+        cell: ({ row }) => {
+          return row.getCanExpand() ? (
+            <button
+              {...{
+                onClick: row.getToggleExpandedHandler(),
+                style: { cursor: "pointer" },
+              }}
+            >
+              {row.getIsExpanded() ? "👇" : "👉"}
+            </button>
+          ) : (
+            "🔵"
+          );
+        },
+      },
+      {
         accessorKey: "id",
         id: "id",
         cell: (info) => (
@@ -25,7 +43,7 @@ const NeuronsList = () => {
             {info.getValue()}
           </button>
         ),
-        header: "Neuron ID",
+        header: "My OGY Neurons",
         meta: {
           className: "",
         },
@@ -43,25 +61,26 @@ const NeuronsList = () => {
           //   </Badge>
           // </div>
         ),
-        header: "Voting Power",
+
+        header: "",
       },
       {
         accessorKey: "dissolving",
         id: "dissolving",
         cell: (info) => <div>{info.getValue()}</div>,
-        header: "State",
+        header: "",
       },
       {
         accessorKey: "dissolveDelay",
         id: "dissolveDelay",
         cell: (info) => <div>{info.getValue()}</div>,
-        header: "DissolveDelay",
+        header: "",
       },
       {
         accessorKey: "age",
         id: "age",
         cell: (info) => <div>{info.getValue()}</div>,
-        header: "Age",
+        header: "",
       },
       //   {
       //     accessorKey: "from_account",
@@ -180,12 +199,8 @@ const NeuronsList = () => {
       {isSuccessGetNeuronsList && (
         <Table
           columns={columns}
-          //   pagination={pagination}
-          //   setPagination={setPagination}
           data={neuronsList}
-          enablePagination={false}
-          //   sorting={sorting}
-          //   setSorting={setSorting}
+          getRowCanExpand={() => true}
         />
       )}
     </div>

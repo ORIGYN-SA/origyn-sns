@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { PaginationState, ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 
 import { fetchData, Neuron } from "./fetchData.dev";
 
-const NeuronsList = () => {
+const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
   const navigate = useNavigate();
 
   const columns = useMemo<ColumnDef<Neuron>[]>(
@@ -77,11 +77,6 @@ const NeuronsList = () => {
     []
   );
 
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
-
   const data = useQuery({
     queryKey: ["neurons_list", pagination],
     queryFn: () => fetchData(pagination),
@@ -99,10 +94,11 @@ const NeuronsList = () => {
     <div>
       <Table
         columns={columns}
+        data={data?.data}
         pagination={pagination}
         setPagination={setPagination}
-        data={data?.data}
-        enablePagination={false}
+        sorting={sorting}
+        setSorting={setSorting}
       />
     </div>
   );

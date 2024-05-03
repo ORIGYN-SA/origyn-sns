@@ -8,6 +8,7 @@ import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-tota
 import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI"; // TokensInGovernanceKpiProps,
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/List";
+import { usePagination } from "@helpers/table/useTable";
 
 const loader = async () => {
   // tokens in governance total
@@ -83,6 +84,12 @@ export const Governance = () => {
     []
   );
 
+  const [pagination] = usePagination({ pageIndex: 0, pageSize: 10 });
+  // const [sorting, setSorting] = useSorting({
+  //   id: "index",
+  //   desc: true,
+  // });
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
@@ -155,11 +162,11 @@ export const Governance = () => {
       </Suspense>
       <div className="mb-16">
         <h2 className="text-3xl font-bold mb-8">Proposals</h2>
-        <ProposalsList />
+        <ProposalsList pagination={pagination} />
       </div>
       <div>
         <h2 className="text-3xl font-bold mb-8">Neurons</h2>
-        <NeuronsList />
+        <NeuronsList pagination={pagination} />
       </div>
     </div>
   );

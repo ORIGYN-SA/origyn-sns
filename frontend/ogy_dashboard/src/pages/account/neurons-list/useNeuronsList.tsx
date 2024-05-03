@@ -105,28 +105,25 @@ const useNeuronsList = () => {
   const isSuccessGetNeuronsByOwner = queryResults[0]?.isSuccess;
   const neuronsParameters = queryResults[1]?.data;
 
-  const neuronDetailsQueries = neuronIds.map((neuronId) => {
-    return {
-      queryKey: ["getNeuron", governanceActor, neuronId],
-      queryFn: () => getNeuron({ governanceActor, neuronId }),
-      placeholderData: keepPreviousData,
-      enabled: !!isSuccessGetNeuronsByOwner,
-    };
-  });
-
   const neuronDetailsResults = useQueries({
-    queries: neuronDetailsQueries,
+    queries: neuronIds
+      ? neuronIds.map((neuronId) => {
+          return {
+            queryKey: ["getNeuron", governanceActor, neuronId],
+            queryFn: () => getNeuron({ governanceActor, neuronId }),
+            placeholderData: keepPreviousData,
+            enabled: !!isSuccessGetNeuronsByOwner,
+          };
+        })
+      : [],
   });
-
-  //   const details = neuronDetailsResults[0]?.data || [];
-  //   const detailserror = neuronDetailsResults[0]?.error || [];
 
   const rows = neuronDetailsResults.every((result) => result.isSuccess)
     ? neuronDetailsResults.map((result, index) => {
         const status = result.data;
         const neuronId = Buffer.from(neuronIds[index][0].id).toString("hex");
         const neuronAge =
-          Math.round(Date.now() / 1000) -
+          Math.round(Date.now()) -
           Number(status.result[0].Neuron.aging_since_timestamp_seconds);
         const dissolveState = status.result[0].Neuron.dissolve_state[0];
         const { votingPower, dissolveDelay } = calculateVotingPower({
