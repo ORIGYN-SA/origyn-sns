@@ -14,5 +14,14 @@
   "ogy_legacy_ledger": {
     "ic": "jwcfb-hyaaa-aaaaj-aac4q-cai",
     "staging": "vmxlg-4qaaa-aaaag-ak7gq-cai"
+  },
+  "super_indexer_v3": {
+    "staging": "4iidd-jaaaa-aaaap-ahd5q-cai"
+  },
+  "super_stats_v3": {
+    "staging": "4pjfx-eyaaa-aaaap-ahd5a-cai"
+  },
+  "tx_store_v3": {
+    "staging": "45pso-iiaaa-aaaap-ahd6a-cai"
   }
 }
