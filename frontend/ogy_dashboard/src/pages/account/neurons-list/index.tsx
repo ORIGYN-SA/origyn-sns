@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Table, Tooltip, Badge } from "@components/ui";
 import { Transaction } from "@services/_api/types/transactions.types";
 import { ITableProps } from "@helpers/table/useTable";
@@ -12,41 +13,37 @@ import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useAddNeuronOwnership from "@services/sns-rewards/useAddNeuronOwnership";
 import useNeuronsList from "./useNeuronsList";
+import NeuronsDetails from "./neuron-details";
 
 const NeuronsList = () => {
   const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
       {
-        id: "expander",
-        header: () => null,
-        cell: ({ row }) => {
-          return row.getCanExpand() ? (
-            <button
-              {...{
-                onClick: row.getToggleExpandedHandler(),
-                style: { cursor: "pointer" },
-              }}
-            >
-              {row.getIsExpanded() ? "👇" : "👉"}
-            </button>
-          ) : (
-            "🔵"
-          );
-        },
-      },
-      {
         accessorKey: "id",
         id: "id",
-        cell: (info) => (
-          <button onClick={() => handleClickView(info)}>
-            {info.getValue()}
-          </button>
-        ),
-        header: "My OGY Neurons",
-        meta: {
-          className: "",
+        cell: ({ row, getValue }) => {
+          return row.getCanExpand() ? (
+            <div className="flex items-center ">
+              <button
+                {...{
+                  onClick: row.getToggleExpandedHandler(),
+                }}
+                className="cursor-pointer mr-2"
+              >
+                {row.getIsExpanded() ? (
+                  <ChevronUpIcon className="h-5 w-5" />
+                ) : (
+                  <ChevronDownIcon className="h-5 w-5" />
+                )}
+              </button>
+              <div>{getValue()}</div>
+            </div>
+          ) : (
+            ""
+          );
         },
+        header: "My OGY Neurons",
       },
       {
         accessorKey: "votingPower",
@@ -64,24 +61,24 @@ const NeuronsList = () => {
 
         header: "",
       },
-      {
-        accessorKey: "dissolving",
-        id: "dissolving",
-        cell: (info) => <div>{info.getValue()}</div>,
-        header: "",
-      },
-      {
-        accessorKey: "dissolveDelay",
-        id: "dissolveDelay",
-        cell: (info) => <div>{info.getValue()}</div>,
-        header: "",
-      },
-      {
-        accessorKey: "age",
-        id: "age",
-        cell: (info) => <div>{info.getValue()}</div>,
-        header: "",
-      },
+      // {
+      //   accessorKey: "dissolving",
+      //   id: "dissolving",
+      //   cell: (info) => <div>{info.getValue()}</div>,
+      //   header: "",
+      // },
+      // {
+      //   accessorKey: "dissolveDelay",
+      //   id: "dissolveDelay",
+      //   cell: (info) => <div>{info.getValue()}</div>,
+      //   header: "",
+      // },
+      // {
+      //   accessorKey: "age",
+      //   id: "age",
+      //   cell: (info) => <div>{info.getValue()}</div>,
+      //   header: "",
+      // },
       //   {
       //     accessorKey: "from_account",
       //     id: "from_account",
@@ -189,7 +186,7 @@ const NeuronsList = () => {
 
   useEffect(() => {
     if (isSuccessGetNeuronsList) {
-      console.log(neuronsList);
+      // console.log(neuronsList);
     }
   }, [isSuccessGetNeuronsList, neuronsList]);
 
@@ -201,6 +198,7 @@ const NeuronsList = () => {
           columns={columns}
           data={neuronsList}
           getRowCanExpand={() => true}
+          subComponent={NeuronsDetails}
         />
       )}
     </div>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   useReactTable,
@@ -30,6 +30,7 @@ interface ReactTableProps<T extends object> {
   sorting?: SortingState;
   setSorting?: OnChangeFn<SortingState>;
   getRowCanExpand?: (row: Row<T>) => boolean;
+  subComponent?: ReactNode;
   identifier?: string;
 }
 
@@ -49,6 +50,7 @@ const Table = <T extends object>({
   setSorting,
   getRowCanExpand,
   identifier = "",
+  subComponent,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndex = `page_index${identifier ?? `_${identifier}`}`;
@@ -211,7 +213,7 @@ const Table = <T extends object>({
                     <tr>
                       {/* 2nd row is a custom 1 cell row */}
                       <td colSpan={row.getVisibleCells().length}>
-                        {renderSubComponent({ row })}
+                        {subComponent({ row })}
                       </td>
                     </tr>
                   )}
@@ -300,14 +302,6 @@ const Table = <T extends object>({
         )}
       </div>
     </div>
-  );
-};
-
-const renderSubComponent = ({ row }: { row: Row<T> }) => {
-  return (
-    <pre style={{ fontSize: "10px" }}>
-      <code>{JSON.stringify(row.original, null, 2)}</code>
-    </pre>
   );
 };
 

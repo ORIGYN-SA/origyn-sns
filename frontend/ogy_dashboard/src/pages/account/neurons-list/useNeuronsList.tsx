@@ -152,9 +152,19 @@ const useNeuronsList = () => {
         return {
           id: neuronId,
           votingPower,
-          dissolveDelay,
-          age: DateTime.fromMillis(neuronAge).toRelativeCalendar() || "",
-          dissolving: neuronState(dissolveState),
+          details: [
+            { id: "state", label: "State", value: neuronState(dissolveState) },
+            {
+              id: "dissolveDelay",
+              label: "Dissolve delay",
+              value: dissolveDelay,
+            },
+            {
+              id: "age",
+              label: "Age",
+              value: DateTime.fromMillis(neuronAge).toRelativeCalendar() || "",
+            },
+          ],
         };
       })
     : [];
