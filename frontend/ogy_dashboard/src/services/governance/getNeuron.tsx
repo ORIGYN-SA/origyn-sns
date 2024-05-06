@@ -4,7 +4,7 @@ import { ActorSubclass } from "@dfinity/agent";
 
 interface IGetNeuron {
   governanceActor: ActorSubclass;
-  neuronId: string;
+  neuronId: object;
 }
 
 export const getNeuron = async ({ governanceActor, neuronId }: IGetNeuron) => {
@@ -18,7 +18,7 @@ const useGetNeuron = ({
   neuronId,
   enabled,
 }: {
-  neuronId: string;
+  neuronId: object;
   enabled: boolean;
 }) => {
   const { isConnected } = useConnect();

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo, Fragment } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   useReactTable,
@@ -187,11 +187,8 @@ const Table = <T extends object>({
           <tbody>
             {table.getRowModel().rows.map((row) => {
               return (
-                <>
-                  <tr
-                    key={row.id}
-                    className="bg-surface border-b last:border-none border-border"
-                  >
+                <Fragment key={row.id}>
+                  <tr className="bg-surface border-b last:border-none border-border">
                     {row.getVisibleCells().map((cell) => {
                       return (
                         <td
@@ -217,7 +214,7 @@ const Table = <T extends object>({
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               );
             })}
           </tbody>

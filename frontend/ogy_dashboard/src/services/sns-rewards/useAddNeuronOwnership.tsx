@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import { ActorSubclass } from "@dfinity/agent";
 
-interface IGetNeuronsByOwner {
+interface IAddNeuron {
   snsRewardsActor: ActorSubclass;
   neuronId: string;
 }
@@ -10,7 +10,7 @@ interface IGetNeuronsByOwner {
 const addNeuronOwnership = async ({
   snsRewardsActor,
   neuronId,
-}: IGetNeuronsByOwner) => {
+}: IAddNeuron) => {
   const id = [...Uint8Array.from(Buffer.from(neuronId, "hex"))];
   const result = await snsRewardsActor.add_neuron_ownership({
     id,

@@ -5,15 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Table, Tooltip, Badge } from "@components/ui";
+import { Table, Tooltip, Badge, Button } from "@components/ui";
 import { Transaction } from "@services/_api/types/transactions.types";
 import { ITableProps } from "@helpers/table/useTable";
 import { timestampToDateShort } from "@helpers/dates";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
-import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import useAddNeuronOwnership from "@services/sns-rewards/useAddNeuronOwnership";
 import useNeuronsList from "./useNeuronsList";
 import NeuronsDetails from "./neuron-details";
+import { AddNeuronProvider } from "./add-neurons/context";
+import BtnAddNeuron from "./add-neurons/button";
+import DialogAddNeuron from "./add-neurons/dialog";
 
 const NeuronsList = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const NeuronsList = () => {
         id: "id",
         cell: ({ row, getValue }) => {
           return row.getCanExpand() ? (
-            <div className="flex items-center ">
+            <div className="flex items-center">
               <button
                 {...{
                   onClick: row.getToggleExpandedHandler(),
@@ -44,6 +45,9 @@ const NeuronsList = () => {
           );
         },
         header: "My OGY Neurons",
+        meta: {
+          className: "",
+        },
       },
       {
         accessorKey: "votingPower",
@@ -61,12 +65,12 @@ const NeuronsList = () => {
 
         header: "",
       },
-      // {
-      //   accessorKey: "dissolving",
-      //   id: "dissolving",
-      //   cell: (info) => <div>{info.getValue()}</div>,
-      //   header: "",
-      // },
+      {
+        accessorKey: "claimBalance",
+        id: "claimBalance",
+        cell: (info) => <Button>Claim {info.getValue()} OGY</Button>,
+        header: "",
+      },
       // {
       //   accessorKey: "dissolveDelay",
       //   id: "dissolveDelay",
@@ -151,8 +155,6 @@ const NeuronsList = () => {
       // sorting,
     });
 
-  const { mutate: addNeuronOwnership } = useAddNeuronOwnership();
-
   const handleClickView = (cell: CellContext<Transaction, unknown>) => {
     // const columnId = cell.column?.id;
     // const row = cell?.row?.original;
@@ -165,25 +167,6 @@ const NeuronsList = () => {
     return;
   };
 
-  const handleAddNeuronOwnership = ({ neuronId }: { neuronId: string }) => {
-    addNeuronOwnership(
-      {
-        neuronId:
-          "eecfbdb1b41f8bf9330ec897bdd1c3409c7162b6e322f53e6aeb14a821bbd70b",
-      },
-      {
-        onSuccess: (data) => {
-          console.log("success");
-          console.log(data);
-        },
-        onError: (err) => {
-          console.log("error");
-          console.log(err);
-        },
-      }
-    );
-  };
-
   useEffect(() => {
     if (isSuccessGetNeuronsList) {
       // console.log(neuronsList);
@@ -192,7 +175,6 @@ const NeuronsList = () => {
 
   return (
     <div>
-      <button onClick={handleAddNeuronOwnership}>Add neuron</button>
       {isSuccessGetNeuronsList && (
         <Table
           columns={columns}
@@ -201,6 +183,12 @@ const NeuronsList = () => {
           subComponent={NeuronsDetails}
         />
       )}
+      <div className="flex justify-center mt-4">
+        <AddNeuronProvider>
+          <BtnAddNeuron />
+          <DialogAddNeuron />
+        </AddNeuronProvider>
+      </div>
     </div>
   );
 };
