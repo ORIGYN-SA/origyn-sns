@@ -280,13 +280,13 @@ Voting:
     RewardRate:
         # The initial reward rate at which the SNS voting rewards will increase
         # per year. This field is specified as a percentage. For example: "15%".
-        initial: 0.01%
+        initial: 0.1%
 
         # The final reward rate at which the SNS voting rewards will increase
         # per year. This rate is reached after `transition_duration` and remains
         # at this level unless changed by an SNS proposal. This field is
         # specified as a percentage. For example: "5%".
-        final: 0.01%
+        final: 0.1%
 
         # The voting reward rate falls quadratically from `initial` to `final`
         # over the time period defined by `transition_duration`.
@@ -364,13 +364,13 @@ Swap:
     # to the deadline or the maximum target being reached, and if there are less
     # than `minimum_participants` (here, only direct participants are counted),
     # the swap will be committed.
-    minimum_participants: 1000
+    minimum_participants: 88
 
     # Minimum amount of ICP from direct participants. This amount is required for
     # the swap to succeed. If this amount is not achieved, the swap will be
     # aborted (instead of committed) when the due date/time occurs.
     # Must be smaller than or equal than `maximum_direct_participation_icp`.
-    minimum_direct_participation_icp: 100_000 tokens
+    minimum_direct_participation_icp: 8 tokens
 
     # Maximum amount of ICP from direct participants. If this amount is achieved,
     # the swap will finalize immediately, without waiting for the due date/time;
@@ -378,17 +378,17 @@ Swap:
     # direct participants (`minimum_participants`) is reached (otherwise, it
     # would be aborted).
     # Must be at least `min_participants * minimum_direct_participation_icp`.
-    maximum_direct_participation_icp: 2_000_000 tokens
+    maximum_direct_participation_icp: 1_888_888 tokens
 
     # The minimum amount of ICP that each participant must contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    minimum_participant_icp: 10 tokens
+    minimum_participant_icp: 8 tokens
 
     # The maximum amount of ICP that each participant may contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    maximum_participant_icp: 10_000 tokens
+    maximum_participant_icp: 8_888 tokens
 
     # The text that swap participants must confirm before they may participate
     # in the swap.
@@ -406,7 +406,32 @@ Swap:
     #
     # Each list element must be an ISO 3166-1 alpha-2 country code.
     restricted_countries:
-        - AQ  # Antarctica
+        - AF # AFGHANISTAN
+        - BY # BELARUS
+        - BI # BURUNDI
+        - CF # CENTRAL AFRICAN REPUBLIC
+        - KP # NORTH KOREA
+        - CD # DEMOCRATIC REPUBLIC OF THE CONGO
+        - GN # GUINEA
+        - GW # GUINEA-BISSAU
+        - HT # HAITI
+        - IR # IRAN
+        - IQ # IRAQ
+        - XK # KOSOVO
+        - LB # LEBANON
+        - LY # LIBYA
+        - ML # MALI
+        - MM # MYANMAR
+        - NI # NICARAGUA
+        - RU # RUSSIA
+        - SO # SOMALIA
+        - SD # SUDAN
+        - SS # SOUTH SUDAN
+        - SY # SYRIA
+        - UA # UKRAINE
+        - VE # VENEZUELA
+        - YE # YEMEN
+        - ZW # ZIMBABWE
 
     # Configuration of the vesting schedule of the neuron basket, i.e., the SNS
     # neurons that a participants will receive from a successful
@@ -429,7 +454,7 @@ Swap:
         # neurons. While neuron basket neurons do not use `vesting_period`, they
         # have a vesting schedule. This field is specified as a duration. For
         # example: "1 month".
-        interval: 6 months
+        interval: 1 day
 
     # Absolute time of day when the decentralization swap is supposed to start.
     #

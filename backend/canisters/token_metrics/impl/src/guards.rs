@@ -1,9 +1,9 @@
 use crate::state::read_state;
 
-pub fn caller_is_governance_principal() -> Result<(), String> {
-    if read_state(|state| state.is_caller_governance_principal()) {
+pub fn caller_is_authorised_principal() -> Result<(), String> {
+    if read_state(|state| state.is_caller_authorised_principal()) {
         Ok(())
     } else {
-        Err("Caller is not a governance principal".to_string())
+        Err("Caller is not an authorised principal".to_string())
     }
 }

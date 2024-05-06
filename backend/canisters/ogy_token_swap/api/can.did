@@ -1,0 +1,70 @@
+type BlockFailReason = variant {
+  ReceiverNotCorrectAccountId : blob;
+  NotFound;
+  QueryRequestFailed;
+  SenderNotPrincipalDefaultSubaccount : blob;
+  InvalidOperation;
+  AmountTooSmall;
+};
+type BurnFailReason = variant {
+  TransferError : TransferError;
+  CallError : text;
+};
+type ImpossibleErrorReason = variant { AmountNotFound; PrincipalNotFound };
+type InitArgs = record {
+  ogy_legacy_minting_account_principal : principal;
+  test_mode : bool;
+  ogy_new_ledger_canister_id : principal;
+  ogy_legacy_ledger_canister_id : principal;
+};
+type Result = variant { Ok : SwapInfo; Err : text };
+type SwapError = variant {
+  BlockFailed : BlockFailReason;
+  BurnFailed : BurnFailReason;
+  UnexpectedError : ImpossibleErrorReason;
+  TransferFailed : TransferFailReason;
+};
+type SwapInfo = record {
+  status : SwapStatus;
+  "principal" : principal;
+  token_swap_block_index : opt nat;
+  burn_block_index : opt nat64;
+  timestamp : nat64;
+  amount : Tokens;
+};
+type SwapStatus = variant {
+  Failed : SwapError;
+  BurnSuccess;
+  Init;
+  Complete;
+  BlockValid;
+};
+type SwapTokensRequest = record { block_index : nat64; user : opt principal };
+type SwapTokensResponse = variant { Success; InternalError : text };
+type Tokens = record { e8s : nat64 };
+type TransferError = variant {
+  TxTooOld : record { allowed_window_nanos : nat64 };
+  BadFee : record { expected_fee : Tokens };
+  TxDuplicate : record { duplicate_of : nat64 };
+  TxCreatedInFuture;
+  InsufficientFunds : record { balance : Tokens };
+};
+type TransferError_1 = variant {
+  GenericError : record { message : text; error_code : nat };
+  TemporarilyUnavailable;
+  BadBurn : record { min_burn_amount : nat };
+  Duplicate : record { duplicate_of : nat };
+  BadFee : record { expected_fee : nat };
+  CreatedInFuture : record { ledger_time : nat64 };
+  TooOld;
+  InsufficientFunds : record { balance : nat };
+};
+type TransferFailReason = variant {
+  TransferError : TransferError_1;
+  CallError : text;
+};
+service : (InitArgs) -> {
+  get_swap_info : (nat64) -> (Result) query;
+  request_deposit_account : (opt principal) -> (blob) query;
+  swap_tokens : (SwapTokensRequest) -> (SwapTokensResponse);
+}

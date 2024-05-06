@@ -3,8 +3,14 @@ members = [
   "backend/canisters/token_metrics/impl",
   "backend/external_canisters/sns_governance/api",
   "backend/external_canisters/sns_governance/c2c_client",
+  "backend/canisters/ogy_token_swap/impl",
   "backend/external_canisters/icrc_ledger/api",
   "backend/external_canisters/icrc_ledger/c2c_client",
+  "backend/external_canisters/ogy_legacy_ledger/api",
+  "backend/external_canisters/ogy_legacy_ledger/c2c_client",
+  "backend/external_canisters/sns_governance/api",
+  "backend/external_canisters/sns_governance/c2c_client",
+  "backend/integration_tests",
   "backend/libraries/candid_gen",
   "backend/libraries/canister_client",
   "backend/libraries/canister_client_macros",
@@ -40,6 +46,8 @@ ic-transport-types = "0.34.0"
 ic0 = "0.21.1"
 icrc-ledger-types = "0.1.5"
 k256 = "0.13.1"
+lazy_static = "1.4.0"
+pocket-ic = "2.2.0"
 proc-macro2 = "1.0.78"
 quote = "1.0.33"
 rmp-serde = "1.1.2"

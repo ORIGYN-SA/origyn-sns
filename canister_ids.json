@@ -2,5 +2,21 @@
   "token_metrics": {
     "ic": "m5bu4-7qaaa-aaaap-abrxq-cai",
     "staging": "euyi3-3yaaa-aaaak-akoba-cai"
+  },
+  "ogy_dashboard": {
+    "ic": "",
+    "staging": "7ekbt-siaaa-aaaag-ak64a-cai"
+  },
+  "ogy_token_swap": {
+    "ic": "",
+    "staging": "jpuy7-oiaaa-aaaan-qmheq-cai"
+  },
+  "ogy_ledger": {
+    "ic": "",
+    "staging": "vlwns-riaaa-aaaag-ak7ga-cai"
+  },
+  "ogy_legacy_ledger": {
+    "ic": "jwcfb-hyaaa-aaaaj-aac4q-cai",
+    "staging": "vmxlg-4qaaa-aaaag-ak7gq-cai"
   }
 }

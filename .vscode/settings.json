@@ -1,0 +1,11 @@
+{
+  "[rust]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "jinxdash.prettier-rust",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 140
+  },
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"]
+}

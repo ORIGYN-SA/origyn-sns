@@ -1,11 +1,34 @@
 {
-  "dfx": "0.17.0",
+  "dfx": "0.19.0",
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
     "token_metrics": {
       "candid": "backend/canisters/token_metrics/api/can.did",
       "package": "token_metrics",
       "type": "rust"
+    },
+    "ogy_token_swap": {
+      "type": "custom",
+      "candid": "backend/canisters/ogy_token_swap/api/can.did",
+      "package": "ogy_token_swap",
+      "wasm": "backend/canisters/ogy_token_swap/target/wasm32-unknown-unknown/release/ogy_token_swap_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/ogy_token_swap/api/declarations"
+      }
+    },
+    "ogy_ledger": {
+      "build": "",
+      "candid": "backend/external_canisters/icrc_ledger/api/can.did",
+      "type": "custom",
+      "wasm": "backend/external_canisters/icrc_ledger/wasm/icrc1_ledger.wasm.gz"
+    },
+    "ogy_legacy_ledger": {
+      "build": "",
+      "candid": "backend/external_canisters/ogy_legacy_ledger/api/can.did",
+      "type": "custom",
+      "wasm": "backend/external_canisters/ogy_legacy_ledger/wasm/ogy_legacy_ledger_canister.wasm.gz"
     }
   },
   "networks": {

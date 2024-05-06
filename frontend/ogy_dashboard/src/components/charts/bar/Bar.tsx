@@ -7,6 +7,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import styled from "styled-components";
+import millify from "millify";
 import { colors } from "@theme/preset";
 
 type BarColor = {
@@ -26,12 +28,37 @@ type Data = {
 
 type BarChart = {
   data: Data[];
-  barFill?: string;
+  barFill?: string | undefined;
   barBgFill?: string;
   barBgRadius?: number;
+  legendValue?: string | undefined;
 };
 
-const Bar = ({ data, barFill, barBgFill, barBgRadius }: BarChart) => {
+const StyledLegendIndicator = styled.div`
+  background-color: ${({ color }) => color};
+`;
+
+const renderLegend = (
+  legendValue: string | undefined,
+  color: string | undefined
+) => {
+  // const { payload } = props;
+
+  return (
+    <div className="flex items-center mt-4">
+      <StyledLegendIndicator color={color} className="h-4 w-4 rounded-full" />
+      <div className="ml-2">{legendValue}</div>
+    </div>
+  );
+};
+
+const Bar = ({
+  data,
+  barFill,
+  barBgFill,
+  barBgRadius,
+  legendValue,
+}: BarChart) => {
   return (
     <ResponsiveContainer>
       <BarChart
@@ -45,8 +72,11 @@ const Bar = ({ data, barFill, barBgFill, barBgRadius }: BarChart) => {
       >
         <CartesianGrid vertical={false} strokeDasharray="5 5" />
         <XAxis dataKey="name" />
-        <YAxis domain={[0, "dataMax + 500"]} />
-        <Legend />
+        <YAxis tickFormatter={(value) => millify(value)} />
+        <Legend
+          margin={{ top: 8, left: 0, right: 0, bottom: 0 }}
+          content={() => renderLegend(legendValue, barFill)}
+        />
         <BarRechart
           dataKey="value"
           fill={barFill}
@@ -91,6 +121,7 @@ Bar.defaultProps = {
   barFill: "#38bdf8",
   barBgFill: colors.surface["2"],
   barBgRadius: [50, 50, 0, 0],
+  legendValue: "Total OGY Supply",
 };
 
 export default Bar;

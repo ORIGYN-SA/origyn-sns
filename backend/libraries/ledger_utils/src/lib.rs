@@ -1,19 +1,6 @@
 use candid::Principal;
 use ic_ledger_types::{ AccountIdentifier, Subaccount, DEFAULT_SUBACCOUNT };
 use icrc_ledger_types::icrc1::account::Account;
-use sha2::{ Digest, Sha256 };
-
-pub fn compute_neuron_staking_subaccount_bytes(controller: Principal, nonce: u64) -> [u8; 32] {
-    const DOMAIN: &[u8] = b"neuron-stake";
-    const DOMAIN_LENGTH: [u8; 1] = [0x0c];
-
-    let mut hasher = Sha256::new();
-    hasher.update(DOMAIN_LENGTH);
-    hasher.update(DOMAIN);
-    hasher.update(controller.as_slice());
-    hasher.update(nonce.to_be_bytes());
-    hasher.finalize().into()
-}
 
 pub fn icrc_account_to_legacy_account_id(icrc_account: Account) -> AccountIdentifier {
     let subaccount: Subaccount = icrc_account.subaccount.map_or(DEFAULT_SUBACCOUNT, |s|

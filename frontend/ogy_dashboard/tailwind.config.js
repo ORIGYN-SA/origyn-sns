@@ -1,9 +1,10 @@
 import Preset from "./theme/preset";
+import forms from "@tailwindcss/forms";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   presets: [Preset],
   darkMode: "media",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  plugins: [],
+  plugins: [forms],
 };

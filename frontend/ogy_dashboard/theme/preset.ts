@@ -1,17 +1,20 @@
 export const colors = {
-  background: {
-    DEFAULT: "rgb(var(--color-background-1))",
-  },
+  background: "rgb(var(--color-background))",
+  content: "rgb(var(--color-content))",
   surface: {
     1: "rgb(var(--color-surface-1))",
     2: "rgb(var(--color-surface-2))",
+    3: "rgb(var(--color-surface-3))",
     DEFAULT: "rgb(var(--color-surface-1))",
   },
-  content: {
-    DEFAULT: "rgb(var(--color-content-1))",
-  },
+  border: "rgb(var(--color-border))",
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
+  spacePurple: "rgb(var(--color-space-purple))",
+  jade: "rgb(var(--color-jade))",
+  sky: "rgb(var(--color-sky))",
+  mouse: "rgb(var(--color-mouse))",
+  candyFloss: "rgb(var(--color-candy-floss))",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,10 +39,14 @@ export default {
       fontFamily: {
         sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
       },
+      backgroundImage: {
+        'ledger-switch': "url('/ogy-background.png')",
+      }
     },
   },
   plugins: [
     import("@tailwindcss/typography"),
     import("@tailwindcss/aspect-ratio"),
+    import("@tailwindcss/line-clamp")
   ],
 };
