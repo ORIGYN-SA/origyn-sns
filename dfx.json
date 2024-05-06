@@ -29,6 +29,24 @@
       "candid": "backend/external_canisters/ogy_legacy_ledger/api/can.did",
       "type": "custom",
       "wasm": "backend/external_canisters/ogy_legacy_ledger/wasm/ogy_legacy_ledger_canister.wasm.gz"
+    },
+    "super_indexer_v3": {
+      "candid": "backend/canisters/super_indexer_v3/super_indexer_v3.did",
+      "package": "super_indexer_v3",
+      "type": "rust",
+      "optimize": "cycles"
+    },
+    "tx_store_v3": {
+      "candid": "backend/canisters/tx_store_v3/tx_store_v3.did",
+      "package": "tx_store_v3",
+      "type": "rust",
+      "optimize": "cycles"
+    },
+    "super_stats_v3": {
+      "candid": "backend/canisters/super_stats_v3/super_stats_v3.did",
+      "package": "super_stats_v3",
+      "type": "rust",
+      "optimize": "cycles"
     }
   },
   "networks": {
