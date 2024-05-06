@@ -47,6 +47,9 @@ pub const OGY_LEGACY_LEDGER_CANISTER_ID: CanisterId = Principal::from_slice(
 pub const SNS_LEDGER_CANISTER_ID_STAGING: CanisterId = Principal::from_slice(
     &[0, 0, 0, 0, 1, 224, 14, 185, 1, 1]
 );
+pub const SUPER_STATS_CANISTER_ID: CanisterId = Principal::from_slice(
+    &[0, 0, 0, 0, 1, 224, 56, 250, 1, 1]
+);
 
 // TODO: Fill this with principals of Foundation
 pub const TEAM_PRINCIPALS: [Account; 3] = [

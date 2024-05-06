@@ -1,18 +1,18 @@
-use candid::{CandidType, Nat, Principal};
+use candid::{ CandidType, Nat, Principal };
 use canister_state_macros::canister_state;
-use serde::{Deserialize, Serialize};
+use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
 use std::collections::BTreeMap;
-use types::{TimestampMillis, Token};
+use types::{ CanisterId, TimestampMillis, Token };
 use utils::{
-    consts::{SNS_GOVERNANCE_CANISTER_ID, SNS_LEDGER_CANISTER_ID},
-    env::{CanisterEnv, Environment},
+    consts::{ SNS_GOVERNANCE_CANISTER_ID, SNS_LEDGER_CANISTER_ID, SUPER_STATS_CANISTER_ID },
+    env::{ CanisterEnv, Environment },
     memory::MemorySize,
 };
 
 canister_state!(RuntimeState);
 
-#[derive(Default, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct RuntimeState {
     /// Runtime environment
     pub env: CanisterEnv,
@@ -39,7 +39,7 @@ impl RuntimeState {
         }
     }
 
-    pub fn is_caller_governance_principal(&self) -> bool {
+    pub fn is_caller_authorised_principal(&self) -> bool {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
     }
@@ -48,6 +48,7 @@ impl RuntimeState {
 #[derive(CandidType, Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,
+    // Do we need the canister ids here?
     pub sns_governance_canister: Principal,
     pub sns_ledger_canister: Principal,
     pub number_of_owners: usize,
@@ -80,6 +81,8 @@ pub struct Data {
     pub sns_governance_canister: Principal,
     /// SNS ledger canister
     pub sns_ledger_canister: Principal,
+    /// Super Stats canister that provides ledger stats
+    pub super_stats_canister: Principal,
     /// Information about governance neurons sync
     pub sync_info: SyncInfo,
     /// Stores the mapping of each principal to its neurons
@@ -111,11 +114,17 @@ pub struct TokenSupplyData {
     pub circulating_supply: u64,
 }
 
-impl Default for Data {
-    fn default() -> Self {
+impl Data {
+    pub fn new(
+        ogy_new_ledger: CanisterId,
+        ogy_legacy_ledger: CanisterId,
+        ogy_legacy_minting_account_principal: Principal
+    ) -> Self {
         Self {
+            // TODO: Replace the canister id with the onew from args
             sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
             sns_ledger_canister: SNS_LEDGER_CANISTER_ID,
+            super_stats_canister: SUPER_STATS_CANISTER_ID,
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
