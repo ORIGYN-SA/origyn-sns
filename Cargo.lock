@@ -2099,6 +2099,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "super_stats_v3_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "canister_client",
+ "ic-cdk 0.13.1",
+ "super_stats_v3",
+ "types",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2256,7 +2267,7 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 name = "token_metrics"
 version = "0.1.0"
 dependencies = [
- "candid",
+ "candid 0.10.6",
  "canister_logger",
  "canister_state_macros",
  "canister_time",
@@ -2265,7 +2276,7 @@ dependencies = [
  "http_request",
  "ic-cdk 0.13.1",
  "ic-cdk-macros 0.9.0",
- "ic-cdk-timers",
+ "ic-cdk-timers 0.7.0",
  "ic-ledger-types",
  "ic-stable-structures",
  "icrc-ledger-types",
@@ -2278,6 +2289,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "stable_memory",
+ "super_stats_v3_c2c_client",
  "tracing",
  "types",
  "utils",
