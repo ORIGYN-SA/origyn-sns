@@ -74,7 +74,7 @@ pub async fn init_target_ledger(args: SetTargetArgs, index_type: IndexerType) ->
 // get daily stats ☑️
 
 #[query]
-pub fn get_top_account_holders(number_to_return: u64) -> Vec<HolderBalanceResponse> {
+fn get_top_account_holders(number_to_return: u64) -> Vec<HolderBalanceResponse> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 
@@ -123,7 +123,7 @@ pub fn get_top_account_holders(number_to_return: u64) -> Vec<HolderBalanceRespon
 }
 
 #[query]
-pub fn get_top_principal_holders(number_to_return: u64) -> Vec<HolderBalanceResponse> {
+fn get_top_principal_holders(number_to_return: u64) -> Vec<HolderBalanceResponse> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 
@@ -172,7 +172,7 @@ pub fn get_top_principal_holders(number_to_return: u64) -> Vec<HolderBalanceResp
 }
 
 #[query]
-pub fn get_total_holders() -> TotalHolderResponse {
+fn get_total_holders() -> TotalHolderResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 
@@ -193,7 +193,7 @@ pub fn get_total_holders() -> TotalHolderResponse {
 }
 
 #[query]
-pub fn get_hourly_stats() -> TimeStats {
+fn get_hourly_stats() -> TimeStats {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
@@ -201,7 +201,7 @@ pub fn get_hourly_stats() -> TimeStats {
 }
 
 #[query]
-pub fn get_daily_stats() -> TimeStats {
+fn get_daily_stats() -> TimeStats {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
@@ -209,7 +209,7 @@ pub fn get_daily_stats() -> TimeStats {
 }
 
 #[query]
-pub fn get_account_overview(account: String) -> Option<Overview> {
+fn get_account_overview(account: String) -> Option<Overview> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
@@ -239,7 +239,7 @@ pub fn get_account_overview(account: String) -> Option<Overview> {
 }
 
 #[query]
-pub fn get_principal_overview(account: String) -> Option<Overview> {
+fn get_principal_overview(account: String) -> Option<Overview> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();

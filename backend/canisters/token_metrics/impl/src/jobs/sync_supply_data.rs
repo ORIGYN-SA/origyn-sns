@@ -1,13 +1,12 @@
-use candid::Principal;
 use canister_time::run_now_then_interval;
 use futures::future::join_all;
 use icrc_ledger_types::icrc1::account::Account;
 use std::time::Duration;
-use tracing::{debug, error, info};
+use tracing::{ debug, error, info };
 use types::Milliseconds;
 use utils::consts::TEAM_PRINCIPALS;
 
-use crate::state::{mutate_state, read_state};
+use crate::state::{ mutate_state, read_state };
 
 const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 3_600 * 1_000;
 
@@ -27,8 +26,9 @@ pub async fn sync_supply_data() {
         Ok(response) => {
             let total_supply = response.0.try_into().unwrap();
             let total_locked = read_state(|state| state.data.all_gov_stats.total_locked);
-            let total_foundation_balance =
-                get_total_ledger_balance_of_accounts(TEAM_PRINCIPALS.to_vec()).await;
+            let total_foundation_balance = get_total_ledger_balance_of_accounts(
+                TEAM_PRINCIPALS.to_vec()
+            ).await;
             info!(total_foundation_balance, "Total team balance");
             let circulating_supply = total_supply - total_locked - total_foundation_balance;
 

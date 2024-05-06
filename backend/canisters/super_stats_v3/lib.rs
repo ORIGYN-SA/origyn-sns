@@ -1,10 +1,7 @@
 mod core;
-mod stats;
+pub mod stats;
 mod timers;
 mod test_data;
-
-// We need to expose this for the c2c_client
-pub use stats::*;
 
 mod tests {
     use crate::{
