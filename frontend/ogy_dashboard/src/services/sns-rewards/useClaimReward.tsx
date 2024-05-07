@@ -4,14 +4,12 @@ import { ActorSubclass } from "@dfinity/agent";
 
 interface IClaimReward {
   snsRewardsActor: ActorSubclass;
-  id: string;
+  neuronId: { id: number[] };
 }
 
-const claimReward = async ({ snsRewardsActor, id }: IClaimReward) => {
+const claimReward = async ({ snsRewardsActor, neuronId }: IClaimReward) => {
   // const id = [...Uint8Array.from(Buffer.from(neuronId, "hex"))];
-  const result = await snsRewardsActor.claim_reward({
-    id,
-  });
+  const result = await snsRewardsActor.claim_reward(neuronId, "OGY");
   return result;
 };
 
@@ -19,10 +17,10 @@ const useClaimReward = () => {
   const [snsRewardsActor] = useCanister("SNSRewards");
 
   return useMutation({
-    mutationFn: ({ id }: { id: string }) =>
+    mutationFn: ({ neuronId }: { neuronId: { id: number[] } }) =>
       claimReward({
         snsRewardsActor,
-        id,
+        neuronId,
       }),
   });
 };

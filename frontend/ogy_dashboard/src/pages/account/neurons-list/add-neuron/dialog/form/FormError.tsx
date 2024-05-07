@@ -20,7 +20,9 @@ const FormError = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-red-500 font-semibold">Adding neuron error!</div>
-      <div className="mt-1 mb-8">{error?.message}</div>
+      <div className="mt-4 pb-4 mb-8 max-w-md overflow-x-auto">
+        {error?.message}
+      </div>
       <div className="flex items-center">
         <Button className="mr-2" onClick={handleOnClose}>
           Close

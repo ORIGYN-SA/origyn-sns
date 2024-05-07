@@ -1,4 +1,4 @@
-import { useQueries, keepPreviousData } from "@tanstack/react-query";
+import { useQueries, useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useConnect, useCanister } from "@connect2ic/react";
 import { getNeuronsByOwner } from "@services/sns-rewards/useGetNeuronsByOwner";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
@@ -7,25 +7,14 @@ import { getNeuron } from "@services/governance/getNeuron";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { DateTime } from "luxon";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
-
-interface IId {
-  id: string;
-}
-interface INeuronId extends Array<IId[]> {}
+import { roundAndFormatLocale } from "@helpers/numbers";
 
 export const neuronState = (dissolveState) => {
-  let state;
   const currentTimestampSeconds = new Date().getTime() / 1000;
-  if (dissolveState.DissolveDelaySeconds) {
-    state = "Not dissolving";
-  } else if (
-    dissolveState.WhenDissolvedTimestampSeconds > currentTimestampSeconds
-  ) {
-    state = "Dissolving";
-  } else {
-    state = "Dissolved";
-  }
-  return state;
+  if (dissolveState.DissolveDelaySeconds) return "Not dissolving";
+  if (dissolveState.WhenDissolvedTimestampSeconds > currentTimestampSeconds)
+    return "Dissolving";
+  return "Dissolved";
 };
 
 export const calculateVotingPower = (values) => {
@@ -94,131 +83,139 @@ const useNeuronsList = () => {
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
 
-  const queryResults = useQueries({
-    queries: [
-      {
-        queryKey: ["getNeuronsByOwner", isConnected],
-        queryFn: () => getNeuronsByOwner({ snsRewardsActor }),
-        enabled: !!isConnected,
-      },
-      {
-        queryKey: ["getNervousSystemParameters", governanceActor, isConnected],
-        queryFn: () => getNervousSystemParameters({ governanceActor }),
-        enabled: !!isConnected,
-      },
-    ],
+  const {
+    data: neuronsByOwner,
+    isSuccess: isSuccessGetNeuronsByOwner,
+    isError: isErrorGetNeuronsByOwner,
+    isLoading: isLoadingGetNeuronsByOwner,
+    error: errorGetNeuronsByOwner,
+  } = useQuery({
+    queryKey: ["getNeuronsByOwner", isConnected],
+    queryFn: () => getNeuronsByOwner({ snsRewardsActor }),
+    enabled: !!isConnected,
   });
 
-  const isSuccessGetNeurons =
-    queryResults[0]?.isSuccess && queryResults[1]?.isSuccess;
-  const neuronIds = (queryResults[0]?.data as INeuronId) || [];
-  const neuronsParameters = queryResults[1]?.data || [];
+  const {
+    data: nervousSystemParameters,
+    isSuccess: isSuccessGetNervousSystemParameters,
+    isError: isErrorGetNervousSystemParameters,
+    isLoading: isLoadingGetNervousSystemParameters,
+    error: errorGetNervousSystemParameters,
+  } = useQuery({
+    queryKey: ["getNervousSystemParameters", isConnected],
+    queryFn: () => getNervousSystemParameters({ governanceActor }),
+    enabled: !!isConnected,
+  });
 
   const neuronDetailsResults = useQueries({
-    queries: neuronIds[0]
-      ? neuronIds[0].map((neuronId) => {
-          return {
-            queryKey: ["getNeuron", governanceActor, neuronId],
-            queryFn: () => getNeuron({ governanceActor, neuronId: [neuronId] }),
-            placeholderData: keepPreviousData,
-            enabled: !!isSuccessGetNeurons,
-          };
-        })
-      : [],
+    queries:
+      neuronsByOwner?.map((neuronId) => {
+        return {
+          queryKey: ["getNeuron", governanceActor, neuronId],
+          queryFn: () => getNeuron({ governanceActor, neuronId: [neuronId] }),
+          placeholderData: keepPreviousData,
+          enabled:
+            !!isSuccessGetNeuronsByOwner && isSuccessGetNervousSystemParameters,
+        };
+      }) ?? [],
   });
 
   const neuronClaimBalanceResults = useQueries({
-    queries: neuronIds[0]
-      ? neuronIds[0].map((neuronId) => {
-          return {
-            queryKey: ["getNeuronClaimBalance", ledgerActor, neuronId],
-            queryFn: () =>
-              fetchBalanceOGY({
-                actor: ledgerActor,
-                owner: SNS_REWARDS_CANISTER_ID,
-                subaccount: [neuronId?.id],
-              }),
-            enabled: !!isSuccessGetNeurons,
-          };
-        })
-      : [],
+    queries:
+      neuronsByOwner?.map((neuronId) => {
+        return {
+          queryKey: ["getNeuronClaimBalance", ledgerActor, neuronId],
+          queryFn: () =>
+            fetchBalanceOGY({
+              actor: ledgerActor,
+              owner: SNS_REWARDS_CANISTER_ID,
+              subaccount: [neuronId?.id],
+            }),
+          enabled:
+            !!isSuccessGetNeuronsByOwner && isSuccessGetNervousSystemParameters,
+        };
+      }) ?? [],
   });
 
   const isSuccessGetNeuronsDetails =
     neuronDetailsResults.every((result) => result.isSuccess) &&
     neuronClaimBalanceResults.every((result) => result.isSuccess);
+
   const neuronsDetails = neuronDetailsResults;
   const neuronsClaimBalance = neuronClaimBalanceResults;
 
   const rows =
-    isSuccessGetNeuronsDetails && neuronIds[0]
-      ? neuronIds[0].map((neuron, index) => {
-          const status = neuronsDetails[index]?.data?.result[0];
-          const claimBalance = neuronsClaimBalance[index]?.data?.balanceOGY;
-          const neuronId = Buffer.from(neuron?.id).toString("hex");
-          const neuronAge =
-            Math.round(Date.now()) -
-            Number(status.Neuron.aging_since_timestamp_seconds);
-          const dissolveState = status.Neuron.dissolve_state[0];
-          const { votingPower, dissolveDelay } = calculateVotingPower({
-            cachedNeuronStakeE8s: Number(status.Neuron.cached_neuron_stake_e8s),
-            stakedMaturiryE8sEquivalent: Number(
-              status.Neuron.staked_maturity_e8s_equivalent[0] || 0
-            ),
-            age: neuronAge,
-            maxNeuronAgeForAgeBonus: Number(
-              neuronsParameters.max_neuron_age_for_age_bonus[0]
-            ),
-            maxAgeBonusPercentage: Number(
-              neuronsParameters.max_age_bonus_percentage[0]
-            ),
-            dissolveState,
-            maxDissolveDelayBonusPercentage: Number(
-              neuronsParameters.max_dissolve_delay_bonus_percentage[0]
-            ),
-            maxDissolveDelaySeconds: Number(
-              neuronsParameters.max_dissolve_delay_seconds[0]
-            ),
-          });
+    (isSuccessGetNeuronsDetails &&
+      neuronsByOwner?.map((neuron, index) => {
+        const status = neuronsDetails[index]?.data?.result[0];
+        const claimAmount = neuronsClaimBalance[index]?.data?.balanceOGY;
+        const neuronId = Buffer.from(neuron?.id).toString("hex");
+        const neuronAge =
+          Math.round(Date.now()) -
+          Number(status.Neuron.aging_since_timestamp_seconds);
+        const dissolveState = status.Neuron.dissolve_state[0];
+        const { votingPower, dissolveDelay } = calculateVotingPower({
+          cachedNeuronStakeE8s: Number(status.Neuron.cached_neuron_stake_e8s),
+          stakedMaturiryE8sEquivalent: Number(
+            status.Neuron.staked_maturity_e8s_equivalent[0] || 0
+          ),
+          age: neuronAge,
+          maxNeuronAgeForAgeBonus:
+            nervousSystemParameters?.maxNeuronAgeForAgeBonus,
+          maxAgeBonusPercentage: nervousSystemParameters?.maxAgeBonusPercentage,
+          dissolveState,
+          maxDissolveDelayBonusPercentage:
+            nervousSystemParameters?.maxDissolveDelayBonusPercentage,
+          maxDissolveDelaySeconds:
+            nervousSystemParameters?.maxDissolveDelaySeconds,
+        });
 
-          return {
-            id: neuronId,
-            votingPower,
-            claimBalance,
-            details: [
-              {
-                id: "state",
-                label: "State",
-                value: neuronState(dissolveState),
-              },
-              {
-                id: "dissolveDelay",
-                label: "Dissolve delay",
-                value: dissolveDelay,
-              },
-              {
-                id: "age",
-                label: "Age",
-                value:
-                  DateTime.fromMillis(neuronAge).toRelativeCalendar() || "",
-              },
-            ],
-          };
-        })
-      : [];
+        return {
+          id: neuronId,
+          votingPower: roundAndFormatLocale({ number: Number(votingPower) }),
+          claimAmount,
+          details: [
+            {
+              id: "state",
+              label: "State",
+              value: neuronState(dissolveState),
+            },
+            {
+              id: "dissolveDelay",
+              label: "Dissolve delay",
+              value: dissolveDelay,
+            },
+            {
+              id: "age",
+              label: "Age",
+              value: DateTime.fromMillis(neuronAge).toRelativeCalendar() || "",
+            },
+          ],
+        };
+      })) ??
+    [];
 
   return {
     data: { rows, rowCount: rows.length },
     isLoading:
-      queryResults.some((query) => query.isLoading) ||
-      neuronDetailsResults.some((query) => query.isLoading),
-    isSuccess: neuronDetailsResults.every((query) => query.isSuccess),
+      isLoadingGetNeuronsByOwner ||
+      isLoadingGetNervousSystemParameters ||
+      neuronDetailsResults.some((query) => query.isLoading) ||
+      neuronClaimBalanceResults.some((query) => query.isLoading),
+    isSuccess:
+      neuronDetailsResults.every((query) => query.isSuccess) &&
+      neuronClaimBalanceResults.every((query) => query.isSuccess),
     isError:
-      queryResults.some((query) => query.isError) ||
-      neuronDetailsResults.some((query) => query.isError),
-    errors: [...queryResults, ...neuronDetailsResults]
-      .map((query) => query.error)
-      .filter(Boolean),
+      isErrorGetNeuronsByOwner ||
+      isErrorGetNervousSystemParameters ||
+      neuronDetailsResults.some((query) => query.isError) ||
+      neuronClaimBalanceResults.some((query) => query.isError),
+    error:
+      errorGetNeuronsByOwner ||
+      errorGetNervousSystemParameters ||
+      [...neuronDetailsResults, ...neuronClaimBalanceResults]
+        .map((query) => query.error)
+        .filter(Boolean)[0],
   };
 };
 

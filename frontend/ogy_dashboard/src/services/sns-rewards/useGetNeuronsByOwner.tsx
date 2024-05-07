@@ -5,15 +5,23 @@ import { useConnect, useCanister } from "@connect2ic/react";
 import { ActorSubclass } from "@dfinity/agent";
 // import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
-interface IGetNeuronsByOwner {
+interface IGetNeuronsByOwnerProps {
   snsRewardsActor: ActorSubclass;
 }
 
+interface INeuronsByOwnerResult extends Array<{ id: string }> {
+  id: number[];
+}
+
+// interface INeuronsByOwnerResponse extends Array<INeuronsByOwnerResult[]> {}
+
 export const getNeuronsByOwner = async ({
   snsRewardsActor,
-}: IGetNeuronsByOwner) => {
-  const result = await snsRewardsActor.get_neurons_by_owner();
-  return result;
+}: IGetNeuronsByOwnerProps) => {
+  const result =
+    (await snsRewardsActor.get_neurons_by_owner()) as INeuronsByOwnerResult[];
+  // console.log(result);
+  return result[0] ?? [];
 };
 
 const useGetNeuronsByOwner = () => {

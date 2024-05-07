@@ -1,9 +1,9 @@
 import { Button } from "@components/ui";
-import { useAddNeuron } from "../context";
+import { useClaimReward } from "../context";
 
-const BtnAddNeuron = () => {
-  const { handleShow } = useAddNeuron();
-  return <Button onClick={handleShow}>Add neuron</Button>;
+const BtnClaimReward = () => {
+  const { handleShow, claimAmount } = useClaimReward();
+  return <Button onClick={handleShow}>Claim {claimAmount} OGY</Button>;
 };
 
-export default BtnAddNeuron;
+export default BtnClaimReward;

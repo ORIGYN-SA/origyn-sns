@@ -1,13 +1,13 @@
 import { Button } from "@components/ui";
-import { useAddNeuron } from "../../context";
+import { useClaimReward } from "../../context";
 
 const FormSuccess = () => {
-  const { handleClose } = useAddNeuron();
+  const { handleClose } = useClaimReward();
 
   return (
     <div className="flex flex-col items-center">
       <div className="mb-4 text-jade font-semibold">
-        Neuron added successfully!
+        Claim reward successfull!
       </div>
       <Button onClick={handleClose}>Close</Button>
     </div>

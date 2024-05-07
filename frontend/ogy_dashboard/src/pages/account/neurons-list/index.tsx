@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Table, Tooltip, Badge, Button } from "@components/ui";
 import { Transaction } from "@services/_api/types/transactions.types";
-import { ITableProps } from "@helpers/table/useTable";
-import { timestampToDateShort } from "@helpers/dates";
-import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+// import { ITableProps } from "@helpers/table/useTable";
+// import { timestampToDateShort } from "@helpers/dates";
+// import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import useNeuronsList from "./useNeuronsList";
 import NeuronsDetails from "./neuron-details";
-import { AddNeuronProvider } from "./add-neurons/context";
-import BtnAddNeuron from "./add-neurons/button";
-import DialogAddNeuron from "./add-neurons/dialog";
+import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";
+import {
+  ClaimRewardProvider,
+  BtnClaimReward,
+  DialogClaimReward,
+} from "./claim-reward";
 
 const NeuronsList = () => {
-  const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
       {
@@ -66,9 +66,17 @@ const NeuronsList = () => {
         header: "",
       },
       {
-        accessorKey: "claimBalance",
-        id: "claimBalance",
-        cell: (info) => <Button>Claim {info.getValue()} OGY</Button>,
+        accessorKey: "claimAmount",
+        id: "claimAmount",
+        cell: ({ row, getValue }) => (
+          <ClaimRewardProvider
+            neuronId={row?.original?.id}
+            claimAmount={getValue()}
+          >
+            <BtnClaimReward />
+            <DialogClaimReward />
+          </ClaimRewardProvider>
+        ),
         header: "",
       },
       // {
@@ -155,23 +163,23 @@ const NeuronsList = () => {
       // sorting,
     });
 
-  const handleClickView = (cell: CellContext<Transaction, unknown>) => {
-    // const columnId = cell.column?.id;
-    // const row = cell?.row?.original;
-    // const pathnames = {
-    //   index: `/explorer/transactions/${row?.index}`,
-    //   to_account: `/explorer/transactions/accounts/${row?.to_account}`,
-    //   from_account: `/explorer/transactions/accounts/${row?.from_account}`,
-    // };
-    // navigate(pathnames[columnId]);
-    return;
-  };
+  // const handleClickView = (cell: CellContext<Transaction, unknown>) => {
+  //   const columnId = cell.column?.id;
+  //   const row = cell?.row?.original;
+  //   const pathnames = {
+  //     index: `/explorer/transactions/${row?.index}`,
+  //     to_account: `/explorer/transactions/accounts/${row?.to_account}`,
+  //     from_account: `/explorer/transactions/accounts/${row?.from_account}`,
+  //   };
+  //   navigate(pathnames[columnId]);
+  //   return;
+  // };
 
-  useEffect(() => {
-    if (isSuccessGetNeuronsList) {
-      // console.log(neuronsList);
-    }
-  }, [isSuccessGetNeuronsList, neuronsList]);
+  // useEffect(() => {
+  //   if (isSuccessGetNeuronsList) {
+  //     // console.log(neuronsList);
+  //   }
+  // }, [isSuccessGetNeuronsList, neuronsList]);
 
   return (
     <div>

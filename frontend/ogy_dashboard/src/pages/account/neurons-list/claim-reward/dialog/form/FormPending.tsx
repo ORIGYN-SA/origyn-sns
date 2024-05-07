@@ -3,7 +3,7 @@ import { LoaderSpin } from "@components/ui";
 const FormPending = () => {
   return (
     <div className="flex flex-col items-center">
-      <div className="mb-4">Adding neuron...</div>
+      <div className="mb-4">Claiming reward...</div>
       <LoaderSpin />
     </div>
   );

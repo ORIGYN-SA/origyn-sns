@@ -1,20 +1,14 @@
-// contexts/ClaimRewardContext.tsx
 import { createContext, useContext, ReactNode, useState } from "react";
-import { useForm } from "@tanstack/react-form";
+import useConnect from "@helpers/useConnect";
 import useClaimRewardService from "@services/sns-rewards/useClaimReward";
-import type { FormApi } from "@tanstack/react-form";
-
 interface ClaimRewardContextType {
-  form: FormApi<
-    {
-      id: string;
-    },
-    undefined
-  >;
   mutation: ReturnType<typeof useClaimRewardService>;
   show: boolean;
   handleShow: () => void;
   handleClose: () => void;
+  neuronId: string;
+  claimAmount: number;
+  principal: string | undefined;
 }
 
 const ClaimRewardContext = createContext<ClaimRewardContextType | undefined>(
@@ -30,30 +24,32 @@ export const useClaimReward = () => {
   return context;
 };
 
-export const ClaimRewardProvider = ({ children }: { children: ReactNode }) => {
+export const ClaimRewardProvider = ({
+  children,
+  neuronId,
+  claimAmount,
+}: {
+  children: ReactNode;
+  neuronId: string;
+  claimAmount: number;
+}) => {
+  const { principal } = useConnect();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
   const mutation = useClaimRewardService();
 
-  const handleClaimReward = ({ id }: { id: string }) => {
-    mutation.mutate({
-      id,
-    });
-  };
-
-  const form = useForm({
-    defaultValues: {
-      id: "",
-    },
-    onSubmit: async ({ value }) => {
-      handleClaimReward({ id: value.id });
-    },
-  });
-
   return (
     <ClaimRewardContext.Provider
-      value={{ form, mutation, show, handleShow, handleClose }}
+      value={{
+        mutation,
+        show,
+        handleShow,
+        handleClose,
+        neuronId,
+        claimAmount,
+        principal,
+      }}
     >
       {children}
     </ClaimRewardContext.Provider>
