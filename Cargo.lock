@@ -2009,6 +2009,69 @@ dependencies = [
 ]
 
 [[package]]
+name = "sns_rewards"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "candid_gen",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "http_request",
+ "ic-cdk 0.13.1",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "num-bigint",
+ "serde",
+ "serde_json",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "sns_rewards_api_canister",
+ "stable_memory",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
+name = "sns_rewards_api_canister"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "candid_gen",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "http_request",
+ "ic-cdk 0.13.1",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "num-bigint",
+ "serde",
+ "serde_json",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
 name = "socket2"
 version = "0.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"

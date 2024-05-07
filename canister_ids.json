@@ -23,5 +23,9 @@
   },
   "tx_store_v3": {
     "staging": "45pso-iiaaa-aaaap-ahd6a-cai"
+  },
+  "sns_rewards": {
+    "ic": "yuijc-oiaaa-aaaap-ahezq-cai",
+    "staging": "fpmqz-aaaaa-aaaag-qjvua-cai"
   }
 }
