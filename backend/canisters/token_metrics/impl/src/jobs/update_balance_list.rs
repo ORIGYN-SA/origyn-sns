@@ -1,16 +1,15 @@
-// Updates the governance balance list with ledger balance
-// for each principal
-
 use canister_time::run_now_then_interval;
-use icrc_ledger_types::icrc1::account;
 use super_stats_v3_c2c_client::{
     helpers::account_tree::Overview,
-    queries::get_account_holders::GetHoldersArgs,
+    queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
+    queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
+use std::collections::BTreeMap as NormalBTreeMap;
 use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
-use crate::state::read_state;
+use crate::state::{ mutate_state, read_state, GovernanceStats, WalletOverview };
+use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
 
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 3_600 * 1_000;
 
@@ -24,14 +23,47 @@ pub fn run() {
 }
 
 pub async fn update_balance_list() {
-    info!("update_balance_list");
-
-    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
-
     let (principal_holders_map, account_holders_map) = get_all_holders().await;
+    let merged_holders: HashMap<String, Overview> = principal_holders_map
+        .into_iter()
+        .chain(account_holders_map.into_iter())
+        .collect();
 
-    for principal in principals_map.iter() {
+    let mut temp_wallets_list: NormalBTreeMap<String, WalletOverview> = NormalBTreeMap::new();
+    let mut temp_merged_wallets_list: NormalBTreeMap<
+        String,
+        WalletOverview
+    > = NormalBTreeMap::new();
+
+    for (wallet, stats) in merged_holders.into_iter() {
+        let new_stats = WalletOverview {
+            ledger: stats,
+            governance: GovernanceStats::default(),
+            total: stats.balance as u64,
+        };
+        let (principal, _) = split_into_principal_and_account(wallet.clone());
+        temp_wallets_list.insert(wallet, new_stats);
+        check_and_update_list(&mut temp_merged_wallets_list, principal, new_stats.clone());
     }
+
+    // Going through all governance principals and apending their stats
+    // to wallets_list and merged_wallets_list
+    let governance_principals = read_state(|state| state.data.principal_gov_stats.clone());
+
+    for (principal, gov_stats) in governance_principals {
+        let new_stats = WalletOverview {
+            ledger: LedgerOverview::default(),
+            governance: gov_stats,
+            total: gov_stats.total_staked,
+        };
+        check_and_update_list(&mut temp_merged_wallets_list, principal.to_string(), new_stats);
+        check_and_update_list(&mut temp_wallets_list, principal.to_string(), new_stats);
+    }
+
+    mutate_state(|state| {
+        state.data.wallets_list = temp_wallets_list;
+        state.data.merged_wallets_list = temp_merged_wallets_list;
+    })
 }
 
 async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overview>) {
@@ -40,50 +72,94 @@ async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overvi
     let mut principal_holders_map: HashMap<String, Overview> = HashMap::new();
     let mut account_holders_map: HashMap<String, Overview> = HashMap::new();
 
-    let mut args = GetHoldersArgs {
+    let mut p_args = GetPrincipalHoldersArgs {
         offset: 0,
         limit: 100,
     };
-    // Fetch principal holders
     loop {
-        let principal_holders = super_stats_v3_c2c_client::get_principal_holders(
-            super_stats_canister_id,
-            &args
-        ).await;
-
-        for response in principal_holders.iter() {
-            principal_holders_map.insert(response.holder.clone(), response.data.clone());
-        }
-
-        let count = principal_holders.len();
-        if count < args.limit {
-            break;
-        } else {
-            args.offset += count;
+        match
+            super_stats_v3_c2c_client::get_principal_holders(super_stats_canister_id, &p_args).await
+        {
+            Ok(principal_holders) => {
+                for response in principal_holders.iter() {
+                    principal_holders_map.insert(
+                        response.holder.to_string(),
+                        response.data.clone()
+                    );
+                }
+                let count = principal_holders.len();
+                if count < (p_args.limit as usize) {
+                    break;
+                } else {
+                    p_args.offset += count as u64;
+                }
+            }
+            Err(err) => {
+                let message = format!("{err:?}");
+                error!(message, "update_balance_list -> get_principal_holders");
+            }
         }
     }
 
-    // Reset offset and remaining_limit for account holders
-    args.offset = 0;
+    let mut a_args = GetAccountHoldersArgs {
+        offset: 0,
+        limit: 100,
+    };
 
     // Fetch account holders
     loop {
-        let account_holders = super_stats_v3_c2c_client::get_account_holders(
-            super_stats_canister_id,
-            &args
-        ).await;
+        match
+            super_stats_v3_c2c_client::get_account_holders(super_stats_canister_id, &a_args).await
+        {
+            Ok(account_holders) => {
+                for response in account_holders.iter() {
+                    account_holders_map.insert(response.holder.clone(), response.data.clone());
+                }
 
-        for response in account_holders.iter() {
-            account_holders_map.insert(response.holder.clone(), response.data.clone());
-        }
-
-        let count = principal_holders.len();
-        if count < args.limit {
-            break;
-        } else {
-            args.offset += count;
+                let count = account_holders.len();
+                if count < (a_args.limit as usize) {
+                    break;
+                } else {
+                    a_args.offset += count as u64;
+                }
+            }
+            Err(err) => {
+                let message = format!("{err:?}");
+                error!(message, "update_balance_list -> get_account_holders");
+            }
         }
     }
 
     (principal_holders_map, account_holders_map)
+}
+
+fn check_and_update_list(
+    list: &mut NormalBTreeMap<String, WalletOverview>,
+    key: String,
+    new_value: WalletOverview
+) {
+    match list.get(&key) {
+        Some(list_value) => {
+            // wallet already in the list
+            let updated_value = WalletOverview {
+                ledger: list_value.ledger + new_value.ledger,
+                governance: list_value.governance + new_value.governance,
+                total: list_value.total + new_value.total,
+            };
+            list.insert(key, updated_value);
+        }
+        None => {
+            list.insert(key, new_value);
+        }
+    }
+}
+
+fn split_into_principal_and_account(input: String) -> (String, Option<String>) {
+    if let Some(index) = input.find('.') {
+        let (left, right) = input.split_at(index);
+        let right = right.chars().skip(1).collect();
+        (left.to_string(), Some(right))
+    } else {
+        (input, None)
+    }
 }

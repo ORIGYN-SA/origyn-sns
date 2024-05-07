@@ -1,9 +1,10 @@
-use candid::{ CandidType, Nat, Principal };
+use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
-use std::collections::BTreeMap;
-use types::{ CanisterId, TimestampMillis, Token };
+use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
+use std::{ collections::BTreeMap, ops::Add };
+use types::{ CanisterId, TimestampMillis };
 use utils::{
     consts::{ SNS_GOVERNANCE_CANISTER_ID, SNS_LEDGER_CANISTER_ID, SUPER_STATS_CANISTER_ID },
     env::{ CanisterEnv, Environment },
@@ -94,6 +95,11 @@ pub struct Data {
     pub balance_list: BTreeMap<Principal, PrincipalBalance>,
     /// Token supply data, such as total supply and circulating supply
     pub supply_data: TokenSupplyData,
+    /// The list of all principals from ledger and governance, including their stats
+    pub wallets_list: BTreeMap<String, WalletOverview>,
+    /// Same thing as above, but we now merge all subaccounts stats of a principal
+    /// under the same principal item in the Map
+    pub merged_wallets_list: BTreeMap<String, WalletOverview>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
@@ -103,6 +109,19 @@ pub struct GovernanceStats {
     pub total_unlocked: u64,
     pub total_rewards: u64,
 }
+impl Add for GovernanceStats {
+    type Output = GovernanceStats;
+
+    fn add(self, other: Self) -> Self::Output {
+        GovernanceStats {
+            total_staked: self.total_staked + other.total_staked,
+            total_locked: self.total_locked + other.total_locked,
+            total_unlocked: self.total_unlocked + other.total_unlocked,
+            total_rewards: self.total_rewards + other.total_rewards,
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
 pub struct PrincipalBalance {
     pub governance: GovernanceStats,
@@ -112,6 +131,12 @@ pub struct PrincipalBalance {
 pub struct TokenSupplyData {
     pub total_supply: u64,
     pub circulating_supply: u64,
+}
+#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+pub struct WalletOverview {
+    pub ledger: LedgerOverview,
+    pub governance: GovernanceStats,
+    pub total: u64,
 }
 
 impl Data {
@@ -128,6 +153,8 @@ impl Data {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
+            wallets_list: BTreeMap::new(),
+            merged_wallets_list: BTreeMap::new(),
             balance_list: BTreeMap::new(),
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
