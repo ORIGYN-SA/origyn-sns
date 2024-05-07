@@ -1,6 +1,6 @@
-mod core;
+pub mod core;
 pub mod stats;
-mod timers;
+pub mod timers;
 mod test_data;
 
 mod tests {

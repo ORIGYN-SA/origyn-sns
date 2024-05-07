@@ -10,22 +10,23 @@ use crate::core::{
 };
 
 use super::{
-    fetch_data::{
-        dfinity_icp::{ SetTargetArgs, t1_impl_set_target_canister },
-        dfinity_icrc2::t2_impl_set_target_canister,
-    },
+    account_tree::Overview,
+    constants::HOUR_AS_NANOS,
     custom_types::{
-        IndexerType,
+        GetHoldersArgs,
         HolderBalance,
         HolderBalanceResponse,
-        TotalHolderResponse,
-        TimeStats,
+        IndexerType,
         ProcessedTX,
+        TimeStats,
+        TotalHolderResponse,
     },
-    account_tree::Overview,
     directory::lookup_directory,
-    constants::HOUR_AS_NANOS,
-    process_data::process_time_stats::{ StatsType, calculate_time_stats },
+    fetch_data::{
+        dfinity_icp::{ t1_impl_set_target_canister, SetTargetArgs },
+        dfinity_icrc2::t2_impl_set_target_canister,
+    },
+    process_data::process_time_stats::{ calculate_time_stats, StatsType },
 };
 
 // [][] -- ADMIN GATED -- [][]
@@ -165,6 +166,102 @@ fn get_top_principal_holders(number_to_return: u64) -> Vec<HolderBalanceResponse
                 });
             }
             None => {} // do nothing
+        }
+    }
+    api_count();
+    return return_data;
+}
+
+#[query]
+fn get_principal_holders(args: GetHoldersArgs) -> Vec<HolderBalanceResponse> {
+    // check authorised
+    RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
+
+    let top: Vec<HolderBalance> = STABLE_STATE.with(|s| {
+        let mut ac_vec: Vec<HolderBalance> = Vec::new();
+        for ac in s.borrow().as_ref().unwrap().principal_data.accounts.iter() {
+            let refs = ac.0.clone();
+            let ov = ac.1.clone();
+            ac_vec.push(HolderBalance {
+                holder: refs,
+                data: ov,
+            });
+        }
+
+        // catch 0 result
+        if ac_vec.is_empty() {
+            return Vec::new();
+        }
+
+        ac_vec.sort_unstable_by_key(|element| element.data.balance);
+        ac_vec.reverse();
+
+        let start_index = args.offset as usize;
+        let end_index = (args.offset + args.limit) as usize;
+
+        // Ensure end_index doesn't exceed the vector length
+        let end_index = if end_index > ac_vec.len() { ac_vec.len() } else { end_index };
+
+        ac_vec[start_index..end_index].to_vec()
+    });
+
+    // replace ref with full accounts
+    let mut return_data: Vec<HolderBalanceResponse> = Vec::new();
+    for ad in top {
+        let ac = lookup_directory(ad.holder);
+        if let Some(v) = ac {
+            return_data.push(HolderBalanceResponse {
+                holder: v,
+                data: ad.data,
+            });
+        }
+    }
+    api_count();
+    return return_data;
+}
+
+#[query]
+fn get_account_holders(args: GetHoldersArgs) -> Vec<HolderBalanceResponse> {
+    // check authorised
+    RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
+
+    let top: Vec<HolderBalance> = STABLE_STATE.with(|s| {
+        let mut ac_vec: Vec<HolderBalance> = Vec::new();
+        for ac in s.borrow().as_ref().unwrap().account_data.accounts.iter() {
+            let refs = ac.0.clone();
+            let ov = ac.1.clone();
+            ac_vec.push(HolderBalance {
+                holder: refs,
+                data: ov,
+            });
+        }
+
+        // catch 0 result
+        if ac_vec.is_empty() {
+            return Vec::new();
+        }
+
+        ac_vec.sort_unstable_by_key(|element| element.data.balance);
+        ac_vec.reverse();
+
+        let start_index = args.offset as usize;
+        let end_index = (args.offset + args.limit) as usize;
+
+        // Ensure end_index doesn't exceed the vector length
+        let end_index = if end_index > ac_vec.len() { ac_vec.len() } else { end_index };
+
+        ac_vec[start_index..end_index].to_vec()
+    });
+
+    // replace ref with full accounts
+    let mut return_data: Vec<HolderBalanceResponse> = Vec::new();
+    for ad in top {
+        let ac = lookup_directory(ad.holder);
+        if let Some(v) = ac {
+            return_data.push(HolderBalanceResponse {
+                holder: v,
+                data: ad.data,
+            });
         }
     }
     api_count();

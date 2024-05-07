@@ -1,9 +1,8 @@
 use core::fmt;
 use std::collections::VecDeque;
-use candid::{ CandidType, Nat };
-use num_bigint::BigUint;
+use candid::CandidType;
 use serde::{ Serialize, Deserialize };
-use super::{ constants::MAX_BLOCKS_RETAINED, account_tree::Overview };
+use super::account_tree::Overview;
 
 #[derive(CandidType, Debug, Serialize, Default, Deserialize, Clone, PartialEq, Eq)]
 pub enum IndexerType {
@@ -92,52 +91,6 @@ pub struct BlockHolder {
     pub hours_nano: u64,
     pub days_nano: u64,
 }
-impl BlockHolder {
-    pub const MAX_SIZE: usize = MAX_BLOCKS_RETAINED;
-
-    pub fn init(&mut self) {
-        self.blocks = VecDeque::with_capacity(Self::MAX_SIZE);
-        self.tip = 0_u64;
-    }
-
-    pub fn push_tx(&mut self, tx: ProcessedTX) {
-        if self.blocks.len() == Self::MAX_SIZE {
-            self.blocks.pop_back();
-        }
-        self.tip = tx.block.clone();
-        self.blocks.push_front(tx);
-    }
-
-    pub fn get_txs(&self, number_txs: usize) -> Vec<ProcessedTX> {
-        let n = if number_txs > Self::MAX_SIZE { Self::MAX_SIZE } else { number_txs };
-        let vec: Vec<ProcessedTX> = self.blocks.iter().take(n).cloned().collect();
-        return vec;
-    }
-
-    pub fn push_tx_vec(&mut self, tx_vec: Vec<ProcessedTX>) {
-        let time_now = ic_cdk::api::time();
-        let day_start_time = time_now.saturating_sub(self.days_nano);
-        let hour_start_time = time_now.saturating_sub(self.hours_nano);
-
-        let clean_before = if day_start_time < hour_start_time {
-            day_start_time
-        } else {
-            hour_start_time
-        };
-
-        // remove old txs
-        if self.blocks.len() > 0 {
-            self.blocks.retain(|transaction| transaction.tx_time >= clean_before);
-        }
-
-        // add new blocks
-        for tx in tx_vec {
-            if tx.tx_time >= clean_before {
-                self.blocks.push_back(tx);
-            }
-        }
-    }
-}
 
 #[derive(CandidType, Debug, Default, Serialize, Deserialize, Clone)]
 pub struct TimeChunkStats {
@@ -192,9 +145,4 @@ pub struct HolderBalanceResponse {
 pub struct TotalHolderResponse {
     pub total_accounts: u64,
     pub total_principals: u64,
-}
-#[derive(CandidType, Serialize, Deserialize, Clone, Default, Debug)]
-pub struct GetHoldersArgs {
-    pub offset: u64,
-    pub limit: u64,
 }

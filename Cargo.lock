@@ -2105,6 +2105,9 @@ dependencies = [
  "candid 0.10.6",
  "canister_client",
  "ic-cdk 0.13.1",
+ "ic-stable-memory",
+ "num-bigint",
+ "serde",
  "super_stats_v3",
  "types",
 ]

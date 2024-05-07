@@ -1,43 +1,22 @@
-type Args = record { test_mode : bool };
 type GovernanceStats = record {
   total_rewards : nat64;
   total_staked : nat64;
   total_locked : nat64;
   total_unlocked : nat64;
 };
-type HttpRequest = record {
-  url : text;
-  method : text;
-  body : blob;
-  headers : vec record { text; text };
-};
-type HttpResponse = record {
-  body : blob;
-  headers : vec record { text; text };
-  streaming_strategy : opt StreamingStrategy;
-  status_code : nat16;
-};
-type StreamingStrategy = variant {
-  Callback : record {
-    token : Token;
-    callback : func (Token) -> (HttpResponse) query;
-  };
-};
-type Token = record {
-  key : text;
-  sha256 : opt blob;
-  index : nat;
-  content_encoding : text;
+type InitArgs = record {
+  ogy_legacy_minting_account_principal : principal;
+  test_mode : bool;
+  ogy_new_ledger_canister_id : principal;
+  ogy_legacy_ledger_canister_id : principal;
 };
 type TokenSupplyData = record {
   circulating_supply : nat64;
   total_supply : nat64;
 };
-service : (Args) -> {
-  __get_candid_interface_tmp_hack : () -> (text) query;
+service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_supply_data : () -> (TokenSupplyData) query;
-  http_request : (HttpRequest) -> (HttpResponse) query;
   run_gov_job : () -> (text);
 }

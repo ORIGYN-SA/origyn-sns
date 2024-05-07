@@ -2,9 +2,13 @@
 // for each principal
 
 use canister_time::run_now_then_interval;
-use futures::future::join_all;
-use std::time::Duration;
-use tracing::{ debug, error };
+use icrc_ledger_types::icrc1::account;
+use super_stats_v3_c2c_client::{
+    helpers::account_tree::Overview,
+    queries::get_account_holders::GetHoldersArgs,
+};
+use std::{ collections::HashMap, time::Duration };
+use tracing::{ debug, error, info };
 use types::Milliseconds;
 use crate::state::read_state;
 
@@ -20,32 +24,66 @@ pub fn run() {
 }
 
 pub async fn update_balance_list() {
+    info!("update_balance_list");
+
     let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
-    match super_stats_v3_c2c_client::get_total_holders(super_stats_canister_id).await {
-        Ok(response) => {
-            let p_args = super_stats_v3_c2c_client::queries::get_top_principal_holders::Args {
-                number_to_return: response.total_principals,
-            };
-            let a_args = super_stats_v3_c2c_client::queries::get_top_account_holders::Args {
-                number_to_return: response.total_accounts,
-            };
-            let getter_futures: Vec<_> = [
-                super_stats_v3_c2c_client::get_top_principal_holders(
-                    super_stats_canister_id,
-                    &p_args
-                ),
-                super_stats_v3_c2c_client::get_top_account_holders(
-                    super_stats_canister_id,
-                    &a_args
-                ),
-            ]
-                .iter()
-                .collect();
-            let results = join_all(getter_futures).await;
+
+    let (principal_holders_map, account_holders_map) = get_all_holders().await;
+
+    for principal in principals_map.iter() {
+    }
+}
+
+async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overview>) {
+    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
+
+    let mut principal_holders_map: HashMap<String, Overview> = HashMap::new();
+    let mut account_holders_map: HashMap<String, Overview> = HashMap::new();
+
+    let mut args = GetHoldersArgs {
+        offset: 0,
+        limit: 100,
+    };
+    // Fetch principal holders
+    loop {
+        let principal_holders = super_stats_v3_c2c_client::get_principal_holders(
+            super_stats_canister_id,
+            &args
+        ).await;
+
+        for response in principal_holders.iter() {
+            principal_holders_map.insert(response.holder.clone(), response.data.clone());
         }
-        Err(err) => {
-            let message = format!("{err:?}");
-            error!(message, "There was an error while getting the total holders")
+
+        let count = principal_holders.len();
+        if count < args.limit {
+            break;
+        } else {
+            args.offset += count;
         }
     }
+
+    // Reset offset and remaining_limit for account holders
+    args.offset = 0;
+
+    // Fetch account holders
+    loop {
+        let account_holders = super_stats_v3_c2c_client::get_account_holders(
+            super_stats_canister_id,
+            &args
+        ).await;
+
+        for response in account_holders.iter() {
+            account_holders_map.insert(response.holder.clone(), response.data.clone());
+        }
+
+        let count = principal_holders.len();
+        if count < args.limit {
+            break;
+        } else {
+            args.offset += count;
+        }
+    }
+
+    (principal_holders_map, account_holders_map)
 }

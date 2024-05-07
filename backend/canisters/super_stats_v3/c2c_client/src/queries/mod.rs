@@ -5,3 +5,5 @@ pub mod get_account_overview;
 pub mod get_principal_overview;
 pub mod get_top_account_holders;
 pub mod get_top_principal_holders;
+pub mod get_principal_holders;
+pub mod get_account_holders;
