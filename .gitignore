@@ -4,3 +4,4 @@ target
 .env
 pocket-ic
 backend/canisters/ogy_token_swap/api/declarations
+.DS_Store
