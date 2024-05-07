@@ -423,7 +423,7 @@ mod tests {
         payments.insert(neuron_id_5, (Nat::from(1u64), PaymentStatus::Completed, 1));
 
         let ledger_id = Principal::from_text("ryjl3-tyaaa-aaaaa-aaaba-cai").unwrap();
-        let icp_symbol = TokenSymbol::parse("ICP").unwrap();
+        let ogy_symbol = TokenSymbol::parse("OGY").unwrap();
 
         let round = PaymentRound {
             id: 1u16,
@@ -431,7 +431,7 @@ mod tests {
             tokens_to_distribute: Nat::from(94_000u64), // 5 payments + reward pool -> round pool
             fees: Nat::from(50_000u64), // 5 payments
             ledger_id,
-            token: icp_symbol,
+            token: ogy_symbol,
             date_initialized: timestamp_millis(),
             total_neuron_maturity: 5u64,
             payments,
@@ -442,7 +442,7 @@ mod tests {
 
         assert_eq!(
             result,
-            "PAYMENT ROUND METRICS || round id : 1, round status : CompletedPartial, token : TokenSymbol(\"ICP\"), total : 5, successful : 4, maturity distributed : 4, round maturity : 5, retries : 0, tokens_to_distribute : 94_000"
+            "PAYMENT ROUND METRICS || round id : 1, round status : CompletedPartial, token : TokenSymbol(\"OGY\"), total : 5, successful : 4, maturity distributed : 4, round maturity : 5, retries : 0, tokens_to_distribute : 94_000"
         );
     }
 
@@ -458,8 +458,8 @@ mod tests {
         let expected_result = 150u64;
 
         let mut neuron_1_rewarded = HashMap::new();
-        let icp_symbol = TokenSymbol::parse("ICP").unwrap();
-        neuron_1_rewarded.insert(icp_symbol.clone(), 0);
+        let ogy_symbol = TokenSymbol::parse("OGY").unwrap();
+        neuron_1_rewarded.insert(ogy_symbol.clone(), 0);
 
         let neuron_info = NeuronInfo {
             accumulated_maturity: 0,
@@ -488,7 +488,7 @@ mod tests {
             tokens_to_distribute: Nat::from(98_000u64), // 1 payment + 1 reward pool -> round pool transfer
             fees: Nat::from(10_000u64),
             ledger_id,
-            token: icp_symbol.clone(),
+            token: ogy_symbol.clone(),
             date_initialized: timestamp_millis(),
             total_neuron_maturity: 5u64,
             payments,
@@ -501,7 +501,7 @@ mod tests {
         read_state(|state| {
             let neuron = state.data.neuron_maturity.get(&neuron_id_1).unwrap();
 
-            let rewarded_amount = neuron.rewarded_maturity.get(&icp_symbol).unwrap();
+            let rewarded_amount = neuron.rewarded_maturity.get(&ogy_symbol).unwrap();
             assert_eq!(rewarded_amount.clone(), expected_result);
         });
 
@@ -516,7 +516,7 @@ mod tests {
 
         read_state(|state| {
             let neuron = state.data.neuron_maturity.get(&neuron_id_1).unwrap();
-            let rewarded_amount = neuron.rewarded_maturity.get(&icp_symbol).unwrap();
+            let rewarded_amount = neuron.rewarded_maturity.get(&ogy_symbol).unwrap();
             assert_eq!(rewarded_amount.clone(), expected_result);
         });
 
