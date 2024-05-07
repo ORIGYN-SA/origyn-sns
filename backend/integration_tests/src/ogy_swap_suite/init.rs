@@ -10,7 +10,7 @@ use pocket_ic::PocketIc;
 use utils::consts::E8S_FEE_OGY;
 
 use crate::{
-    client::{ create_canister, install_canister },
+    client::pocket::{ create_canister, install_canister },
     utils::random_principal,
     wasms,
     CanisterIds,

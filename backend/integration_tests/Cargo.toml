@@ -21,3 +21,9 @@ rand = "0.8.5"
 serde = { workspace = true }
 types = { path = "../libraries/types" }
 utils = { path = "../libraries/utils" }
+sns_rewards_api_canister = { path = "../canisters/sns_rewards/api" }
+sns_governance_canister = { path = '../external_canisters/sns_governance/api' }
+sns_governance_canister_c2c_client = { path = '../external_canisters/sns_governance/c2c_client' }
+sha2 = "0.10.8"
+hex = "0.4"
+canister_time = { path = '../libraries/canister_time' }

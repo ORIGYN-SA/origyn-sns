@@ -31,7 +31,7 @@ pub mod name {
     pub use ogy_legacy_ledger_canister::name::{ Args, Response };
 }
 
-pub mod happy_path {
+pub mod client {
     use super::*;
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Memo };

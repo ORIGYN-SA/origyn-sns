@@ -29,7 +29,7 @@ pub mod get_swap_info {
     pub type Response = Result<SwapInfo, String>;
 }
 
-pub mod happy_path {
+pub mod client {
     use super::*;
     use candid::Principal;
     use ic_ledger_types::BlockIndex;

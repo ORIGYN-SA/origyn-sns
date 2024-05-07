@@ -11,21 +11,21 @@ use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
     client::{
-        icrc1::happy_path::{ balance_of, transfer, total_supply as total_supply_new },
-        ogy_legacy_ledger::happy_path::{
+        icrc1::client::{ balance_of, total_supply as total_supply_new, transfer },
+        ogy_legacy_ledger::client::{
             balance_of as balance_of_ogy_legacy,
             mint_ogy,
             total_supply as total_supply_legacy,
             transfer_ogy,
         },
-        ogy_token_swap::happy_path::{
+        ogy_token_swap::client::{
             deposit_account,
             swap_info,
             swap_tokens_anonymous_call,
             swap_tokens_authenticated_call,
         },
     },
-    init::init,
+    ogy_swap_suite::init::init,
     utils::{ random_amount, random_principal },
     TestEnv,
 };
@@ -58,6 +58,7 @@ fn valid_swap() {
         &mut pic,
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
+        None,
         ogy_token_swap_canister_id,
         swap_pool_amount.into()
     );
@@ -126,6 +127,7 @@ fn invalid_deposit_account() {
         &mut pic,
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
+        None,
         ogy_token_swap_canister_id,
         swap_pool_amount.into()
     );
@@ -230,6 +232,7 @@ fn test_anonymous_request() {
         &mut pic,
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
+        None,
         ogy_token_swap_canister_id,
         swap_pool_amount.into()
     );
@@ -288,6 +291,7 @@ fn test_massive_users_swapping() {
         pic,
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
+        None,
         ogy_token_swap_canister_id,
         old_ledger_total_supply.clone() + num_holders * E8S_FEE_OGY // fees need to be added as ORIGYN covers those
     );
@@ -336,6 +340,7 @@ fn test_swap_amount_too_small() {
         &mut pic,
         ogy_new_ledger_minting_account,
         ogy_new_ledger_canister,
+        None,
         ogy_token_swap_canister_id,
         swap_pool_amount.into()
     );
