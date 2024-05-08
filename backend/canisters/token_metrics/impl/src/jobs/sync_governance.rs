@@ -7,7 +7,7 @@ use tracing::{ debug, error, info };
 use types::Milliseconds;
 
 use crate::{
-    jobs::sync_supply_data::{ self },
+    jobs::{ sync_supply_data, update_balance_list },
     state::{ mutate_state, read_state, GovernanceStats },
 };
 
@@ -79,7 +79,7 @@ pub async fn sync_neurons_data() {
                             None
                         },
                         |n| {
-                            continue_scanning = true;
+                            continue_scanning = false;
                             n.id.clone()
                         }
                     );
@@ -116,6 +116,7 @@ pub async fn sync_neurons_data() {
 
     // After we have computed governance stats, update the total supply and circulating supply
     sync_supply_data::run();
+    update_balance_list::run();
 }
 fn update_principal_neuron_mapping(
     principal_with_neurons: &mut NormalBTreeMap<Principal, Vec<NeuronId>>,

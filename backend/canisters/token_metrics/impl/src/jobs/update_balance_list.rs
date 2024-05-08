@@ -13,8 +13,8 @@ use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview
 
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 3_600 * 1_000;
 
-pub fn _start_job_if_not_started() {
-    debug!("Starting the update ledger balance list job...");
+pub fn start_job() {
+    info!("Starting the update ledger balance list job...");
     run_now_then_interval(Duration::from_millis(UPDATE_LEDGER_BALANCE_LIST), run)
 }
 
@@ -23,6 +23,7 @@ pub fn run() {
 }
 
 pub async fn update_balance_list() {
+    debug!("update_balance_list");
     let (principal_holders_map, account_holders_map) = get_all_holders().await;
     let merged_holders: HashMap<String, Overview> = principal_holders_map
         .into_iter()
@@ -63,10 +64,12 @@ pub async fn update_balance_list() {
     mutate_state(|state| {
         state.data.wallets_list = temp_wallets_list;
         state.data.merged_wallets_list = temp_merged_wallets_list;
-    })
+    });
+    info!("update_balance_list -> done, mutated the state")
 }
 
 async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overview>) {
+    info!("getting all holders..");
     let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
 
     let mut principal_holders_map: HashMap<String, Overview> = HashMap::new();
