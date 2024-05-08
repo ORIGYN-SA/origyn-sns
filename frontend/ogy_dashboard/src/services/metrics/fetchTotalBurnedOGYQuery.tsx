@@ -4,7 +4,7 @@ import {
   keepPreviousData,
 } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
 export interface TotalBurnedOGY {
@@ -18,7 +18,7 @@ export interface TotalBurnedOGYParams {
 
 const fn = async (): Promise<TotalBurnedOGY> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/total-burned-per-day`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-burned-per-day`
   );
 
   const totalBurnedOGY = Number(data?.data[0][1]) ?? 0;

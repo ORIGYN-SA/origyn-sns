@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         duration: 3000,
         style: {
           background: themeColors.surface[2],
-          color: themeColors.content.DEFAULT,
+          color: themeColors.content,
         },
         // success: {
         //   duration: 3000,

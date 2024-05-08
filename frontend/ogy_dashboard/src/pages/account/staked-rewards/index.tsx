@@ -1,36 +1,37 @@
-import { useState, useEffect } from "react";
 import { Card } from "@components/ui";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
-import ClaimRewardsTokens from "@pages/account/staked-rewards/claim-rewards-tokens/index";
+import {
+  ClaimAllRewardsProvider,
+  BtnClaimAllRewards,
+  DialogClaimAllRewards,
+} from "@pages/account/staked-rewards/claim-all-rewards";
+import useNeurons from "../useNeurons";
 
 const StakedRewards = () => {
-  const [balanceOGY, setBalanceOGY] = useState(0);
-  const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
-
-  const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY({});
-
-  useEffect(() => {
-    if (isSuccessFetchBalanceOGY) {
-      setBalanceOGY(dataBalanceOGY.balanceOGY);
-      setBalanceOGYUSD(dataBalanceOGY.balanceOGYUSD);
-    }
-  }, [isSuccessFetchBalanceOGY, dataBalanceOGY]);
+  const { stakedRewardsOGY } = useNeurons();
 
   return (
     <Card>
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between mb-4">
         <div className="font-bold text-content/60">Staked Rewards</div>
       </div>
-      <div>
-        <div></div>
-        <div>
-          <div>{balanceOGY} OGY</div>
-          <div className="text-sm">{balanceOGYUSD} USD</div>
-        </div>
+      <div className="flex items-center text-2xl font-semibold">
+        <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
+        <span className="ml-2 mr-2">
+          {stakedRewardsOGY.totalStakedRewardsOGY}
+        </span>
+        <span className="text-content/60">OGY</span>
+      </div>
+      <div className="mt-2 text-sm text-content/60">
+        {stakedRewardsOGY.totalStakedRewardsOGYUSD} USD
       </div>
       <div className="mt-4 xl:mt-8">
-        <ClaimRewardsTokens />
+        <ClaimAllRewardsProvider
+          neuronIds={stakedRewardsOGY.neuronIds}
+          claimAmount={stakedRewardsOGY.totalStakedRewardsOGY}
+        >
+          <BtnClaimAllRewards />
+          <DialogClaimAllRewards />
+        </ClaimAllRewardsProvider>
       </div>
     </Card>
   );

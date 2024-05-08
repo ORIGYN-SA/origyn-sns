@@ -1,6 +1,6 @@
 import { keepPreviousData } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface Transaction {
   index: number;
@@ -21,7 +21,7 @@ const fn = async ({
   index,
 }: FetchOneTransactionParams): Promise<Transaction> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/transactions/${index}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions/${index}`
   );
   return data ?? null;
 };

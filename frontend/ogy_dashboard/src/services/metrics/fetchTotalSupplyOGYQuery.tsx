@@ -4,7 +4,7 @@ import {
   keepPreviousData,
 } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
 export interface TotalSupplyOGY {
@@ -18,7 +18,7 @@ export interface TotalSupplyOGYParams {
 
 const fn = async (): Promise<TotalSupplyOGY> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/total-supply`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply`
   );
 
   const totalSupplyOGY = Number(data?.data[0][1]) ?? 0;

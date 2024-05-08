@@ -10,6 +10,7 @@
 // } from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
 // import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/List";
+import { usePagination, useSorting } from "@helpers/table/useTable";
 
 const loader = async () => {
   return null;
@@ -17,6 +18,8 @@ const loader = async () => {
 
 export const Proposals = () => {
   // const data = useLoaderData();
+  const [pagination, setPagination] = usePagination({});
+  const [sorting] = useSorting({});
 
   //   const governanceFeatures = useMemo(
   //     () => [
@@ -55,7 +58,11 @@ export const Proposals = () => {
         </div>
       </div>
       <div className="mt-8 mb-16">
-        <ProposalsList />
+        <ProposalsList
+          pagination={pagination}
+          setPagination={setPagination}
+          sorting={sorting}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 // import { useLoaderData, defer, Await } from "react-router-dom";
-import useTableProps from "@helpers/table/useTableProps";
+import { usePagination, useSorting } from "@helpers/table/useTable";
 import TransactionsList from "@pages/transactions/transactions-list/TransactionsList";
 import Badge from "@components/ui/Badge";
 import { Search } from "@components/ui";
@@ -11,8 +11,11 @@ const loader = async () => {
 
 export const Explorer = () => {
   // const data = useLoaderData();
-  const { pagination, setPagination, enablePagination, sorting, setSorting } =
-    useTableProps({ id: "index", desc: true });
+  const [pagination, setPagination] = usePagination({});
+  const [sorting, setSorting] = useSorting({
+    id: "index",
+    desc: true,
+  });
   const searchForItems = useMemo(
     () => [
       { title: "PrincipalID", bgColorCn: "bg-jade/20", colorCn: "text-jade" },
@@ -53,7 +56,6 @@ export const Explorer = () => {
         <TransactionsList
           pagination={pagination}
           setPagination={setPagination}
-          enablePagination={enablePagination}
           sorting={sorting}
           setSorting={setSorting}
         />
