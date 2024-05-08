@@ -96,10 +96,10 @@ pub struct Data {
     /// Token supply data, such as total supply and circulating supply
     pub supply_data: TokenSupplyData,
     /// The list of all principals from ledger and governance, including their stats
-    pub wallets_list: BTreeMap<String, WalletOverview>,
+    pub wallets_list: Vec<(String, WalletOverview)>,
     /// Same thing as above, but we now merge all subaccounts stats of a principal
     /// under the same principal item in the Map
-    pub merged_wallets_list: BTreeMap<String, WalletOverview>,
+    pub merged_wallets_list: Vec<(String, WalletOverview)>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
@@ -153,8 +153,8 @@ impl Data {
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
-            wallets_list: BTreeMap::new(),
-            merged_wallets_list: BTreeMap::new(),
+            wallets_list: Vec::new(),
+            merged_wallets_list: Vec::new(),
             balance_list: BTreeMap::new(),
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),

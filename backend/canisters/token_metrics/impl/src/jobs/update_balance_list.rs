@@ -62,8 +62,8 @@ pub async fn update_balance_list() {
     }
 
     mutate_state(|state| {
-        state.data.wallets_list = temp_wallets_list;
-        state.data.merged_wallets_list = temp_merged_wallets_list;
+        state.data.wallets_list = sort_map_descending(&temp_wallets_list);
+        state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
     });
     info!("update_balance_list -> done, mutated the state")
 }
@@ -165,4 +165,17 @@ fn split_into_principal_and_account(input: String) -> (String, Option<String>) {
     } else {
         (input, None)
     }
+}
+
+fn sort_map_descending(
+    map: &NormalBTreeMap<String, WalletOverview>
+) -> Vec<(String, WalletOverview)> {
+    let mut vec: Vec<(String, WalletOverview)> = map
+        .iter()
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect();
+
+    vec.sort_by(|a, b| b.1.total.cmp(&a.1.total));
+
+    vec
 }

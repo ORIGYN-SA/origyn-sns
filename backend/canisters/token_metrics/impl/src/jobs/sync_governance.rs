@@ -79,7 +79,7 @@ pub async fn sync_neurons_data() {
                             None
                         },
                         |n| {
-                            continue_scanning = false;
+                            continue_scanning = true;
                             n.id.clone()
                         }
                     );

@@ -4,5 +4,5 @@ pub mod update_balance_list;
 
 pub(crate) fn start() {
     sync_governance::start_job();
-    update_balance_list::start_job();
+    // update_balance_list::start_job();
 }
