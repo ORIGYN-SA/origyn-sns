@@ -9,7 +9,7 @@ interface IGetNeuronsByOwnerProps {
   snsRewardsActor: ActorSubclass;
 }
 
-interface INeuronsByOwnerResult extends Array<{ id: string }> {
+export interface INeuronsByOwnerResult extends Array<{ id: string }> {
   id: number[];
 }
 

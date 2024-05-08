@@ -24,15 +24,21 @@ const AvailableOGY = () => {
 
   return (
     <Card>
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between mb-4">
         <div className="font-bold text-content/60">Available OGY</div>
         <div>Transaction history</div>
       </div>
       <div>
         <div></div>
         <div>
-          <div>{balanceOGY} OGY</div>
-          <div className="text-sm">{balanceOGYUSD} USD</div>
+          <div className="flex items-center text-2xl font-semibold">
+            <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
+            <span className="ml-2 mr-2">{balanceOGY}</span>
+            <span className="text-content/60">OGY</span>
+          </div>
+          <div className="mt-2 text-sm text-content/60">
+            {balanceOGYUSD} USD
+          </div>
         </div>
       </div>
       <div className="mt-8">

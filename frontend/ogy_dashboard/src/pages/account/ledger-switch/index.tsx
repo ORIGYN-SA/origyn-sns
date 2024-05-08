@@ -23,7 +23,7 @@ const LedgerSwitch = ({ className, ...restProps }) => {
           <WithdrawLegacyTokens />
         </div>
       ),
-      icon: <ArrowUpTrayIcon className="w-8 h-8 text-content/60" />,
+      icon: <ArrowUpTrayIcon className="w-7 h-7 text-content" />,
     },
     {
       title: "Step 2: Deposit to your account",
@@ -34,7 +34,7 @@ const LedgerSwitch = ({ className, ...restProps }) => {
           <Deposit />
         </div>
       ),
-      icon: <ArrowDownTrayIcon className="w-8 h-8 text-content/60" />,
+      icon: <ArrowDownTrayIcon className="w-7 h-7 text-content" />,
     },
     {
       title: "Step 3: Swap tokens",
@@ -44,7 +44,7 @@ const LedgerSwitch = ({ className, ...restProps }) => {
           <SwapTokens />
         </div>
       ),
-      icon: <ArrowPathIcon className="w-8 h-8 text-content/60" />,
+      icon: <ArrowPathIcon className="w-7 h-7 text-content" />,
     },
   ];
 
