@@ -3,11 +3,10 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
-import _truncate from "lodash/truncate";
 import { Table, Tooltip, Badge } from "@components/ui";
 import useFetchAllTransactions from "@services/transactions/fetchAll";
 import { Transaction } from "@services/_api/types/transactions.types";
-import { PaginationProps } from "@helpers/table/useTableProps";
+import { TableProps } from "@helpers/table/useTable";
 import { timestampToDateShort } from "@helpers/dates";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
@@ -15,10 +14,9 @@ import CopyToClipboard from "@components/buttons/CopyToClipboard";
 const TransactionsList = ({
   pagination,
   setPagination,
-  enablePagination,
   sorting,
   setSorting,
-}: PaginationProps) => {
+}: TableProps) => {
   const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
@@ -136,10 +134,9 @@ const TransactionsList = ({
       {isSuccess && (
         <Table
           columns={columns}
+          data={transactions}
           pagination={pagination}
           setPagination={setPagination}
-          data={transactions}
-          enablePagination={enablePagination}
           sorting={sorting}
           setSorting={setSorting}
         />

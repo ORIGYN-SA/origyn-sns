@@ -4,7 +4,7 @@ import {
   keepPreviousData,
 } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface Account {
   id: string | null;
@@ -23,7 +23,7 @@ export interface AccountParams {
 
 const fn = async ({ id }: AccountParams): Promise<Account> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/accounts/${id}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${id}`
   );
   return data ?? null;
 };

@@ -5,6 +5,7 @@ import LedgerSwitch from "@pages/account/ledger-switch";
 import AvailableOGY from "@pages/account/available-ogy";
 import StakedOGY from "@pages/account/staked-ogy";
 import StakedRewards from "@pages/account/staked-rewards";
+import NeuronsList from "./neurons-list/index";
 
 const loader = async () => {
   return null;
@@ -25,6 +26,9 @@ export const Account = () => {
         <AvailableOGY />
         <StakedOGY />
         <StakedRewards />
+      </div>
+      <div className="mt-8">
+        <NeuronsList />
       </div>
     </div>
   );
