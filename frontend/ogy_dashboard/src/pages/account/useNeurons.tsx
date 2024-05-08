@@ -76,7 +76,7 @@ const useNeurons = () => {
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: [neuronId?.id],
+              subaccount: neuronId?.id,
             }),
           enabled:
             !!isSuccessGetNeuronsByOwner &&

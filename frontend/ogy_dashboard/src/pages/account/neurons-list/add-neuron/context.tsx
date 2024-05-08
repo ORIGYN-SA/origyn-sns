@@ -33,13 +33,17 @@ export const useAddNeuron = () => {
 export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
   const mutation = useAddNeuronOwnership();
 
   const handleAddNeuron = ({ neuronId }: { neuronId: string }) => {
     mutation.mutate({
       neuronId,
     });
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    mutation.reset();
   };
 
   const form = useForm({

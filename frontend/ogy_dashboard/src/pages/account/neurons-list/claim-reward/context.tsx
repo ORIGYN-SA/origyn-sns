@@ -36,8 +36,12 @@ export const ClaimRewardProvider = ({
   const { principal } = useConnect();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
   const mutation = useClaimRewardService();
+
+  const handleClose = () => {
+    setShow(false);
+    mutation.reset();
+  };
 
   return (
     <ClaimRewardContext.Provider

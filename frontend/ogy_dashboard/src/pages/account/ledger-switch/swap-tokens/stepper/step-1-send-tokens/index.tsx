@@ -28,6 +28,9 @@ const Step1SendTokens = () => {
         setBlockIndex(data as bigint);
         nextStep();
       },
+      onError: (err) => {
+        console.log(err);
+      },
     });
   };
 

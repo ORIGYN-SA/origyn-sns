@@ -28,7 +28,6 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   // }: UseQueryResult<Account> = useQuery(
   //   fetchOneAccount({ id: principal }, { retry: false })
   // );
-
   useEffect(() => {
     if (isSuccessFetchBalanceOGY) {
       setBalanceOGY(dataBalanceOGY.balanceOGY);

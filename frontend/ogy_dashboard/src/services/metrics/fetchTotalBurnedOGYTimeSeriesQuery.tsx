@@ -4,7 +4,7 @@ import {
   keepPreviousData,
 } from "@tanstack/react-query";
 import icrcAPI from "@services/_api/icrc/v1";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { transformTimeSeriesToBarChartData } from "@helpers/charts/index";
 import { ChartData } from "@services/_api/types/charts.types";
 
@@ -25,7 +25,7 @@ const fn = async ({
   step,
 }: TotalBurnedOGYTimeSeriesParams): Promise<TotalBurnedOGYTimeSeries> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/total-burned-per-day?${
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-burned-per-day?${
       start ? `start=${start}` : ``
     }${end ? `&end=${end}` : ``}${step ? `&step=${step}` : ``}`
   );

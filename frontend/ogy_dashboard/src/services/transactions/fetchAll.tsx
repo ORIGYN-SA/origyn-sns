@@ -3,7 +3,7 @@ import icrcAPI from "@services/_api/icrc/v1";
 import { ApiServiceErr } from "@services/_api/types/api.types";
 import { ListParams } from "@services/_api/types/list.params.types";
 import { TransactionResults } from "@services/_api/types/transactions.types";
-import { LEDGER_CANISTER_ID } from "@constants/index";
+import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 const fn = async ({
   limit,
@@ -13,7 +13,7 @@ const fn = async ({
   const { id, desc } = sorting[0];
   const sort = desc ? `&sort_by=-${id}` : `&sort_by=${id}`;
   const { data } = await icrcAPI.get(
-    `/ledgers/${LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}${sort}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}${sort}`
   );
   return {
     rows: data?.data ?? [],

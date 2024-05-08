@@ -2,6 +2,7 @@ import { createContext, useContext, ReactNode, useState } from "react";
 import useClaimRewardService from "@services/sns-rewards/useClaimReward";
 import { useQueryClient } from "@tanstack/react-query";
 import useConnect from "@helpers/useConnect";
+import { INeuronsByOwnerResult } from "@services/sns-rewards/useGetNeuronsByOwner";
 
 interface ClaimAllRewardsContextType {
   mutation: ReturnType<typeof useClaimRewardService>;
@@ -34,15 +35,19 @@ export const ClaimAllRewardsProvider = ({
   claimAmount,
 }: {
   children: ReactNode;
-  neuronIds: string[];
+  neuronIds: INeuronsByOwnerResult[];
   claimAmount: number;
 }) => {
   const queryClient = useQueryClient();
   const { principal } = useConnect();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
   const mutation = useClaimRewardService();
+
+  const handleClose = () => {
+    setShow(false);
+    mutation.reset();
+  };
 
   const handleClaimAllRewards = () => {
     neuronIds.forEach((neuron) => {

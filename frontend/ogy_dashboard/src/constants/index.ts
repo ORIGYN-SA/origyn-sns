@@ -1,5 +1,5 @@
-export const LEDGER_CANISTER_ID = import.meta.env.VITE_LEDGER_CANISTER_ID;
-export const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_GOVERNANCE_CANISTER_ID;
+export const SNS_LEDGER_CANISTER_ID = import.meta.env.VITE_SNS_LEDGER_CANISTER_ID;
+export const SNS_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_SNS_GOVERNANCE_CANISTER_ID;
 export const TOKEN_METRICS_CANISTER_ID = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
 export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env.VITE_OGY_TOKEN_SWAP_CANISTER_ID;
 export const SNS_REWARDS_CANISTER_ID = import.meta.env.VITE_SNS_REWARDS_CANISTER_ID;
@@ -16,15 +16,15 @@ export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE)
 if (!(APP_MODE === "production")) {
     console.log(`APP_MODE=${APP_MODE}`)
 
-    if (!LEDGER_CANISTER_ID)
-        console.log("No LEDGER_CANISTER_ID environment variable. Set LEDGER_CANISTER_ID environment variable.")
+    if (!SNS_LEDGER_CANISTER_ID)
+        console.log("No SNS_LEDGER_CANISTER_ID environment variable. Set SNS_LEDGER_CANISTER_ID environment variable.")
     else
-        console.log(`LEDGER_CANISTER_ID=${LEDGER_CANISTER_ID}`)
+        console.log(`SNS_LEDGER_CANISTER_ID=${SNS_LEDGER_CANISTER_ID}`)
     
-    if (!GOVERNANCE_CANISTER_ID)
-        console.log("No GOVERNANCE_CANISTER_ID environment variable. Set GOVERNANCE_CANISTER_ID environment variable.")
+    if (!SNS_GOVERNANCE_CANISTER_ID)
+        console.log("No SNS_GOVERNANCE_CANISTER_ID environment variable. Set SNS_GOVERNANCE_CANISTER_ID environment variable.")
     else
-        console.log(`GOVERNANCE_CANISTER_ID=${GOVERNANCE_CANISTER_ID}`)
+        console.log(`SNS_GOVERNANCE_CANISTER_ID=${SNS_GOVERNANCE_CANISTER_ID}`)
 
     if (!TOKEN_METRICS_CANISTER_ID)
         console.log("No TOKEN_METRICS_CANISTER_ID environment variable. Set TOKEN_METRICS_CANISTER_ID environment variable.")

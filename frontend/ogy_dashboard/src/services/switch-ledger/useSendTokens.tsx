@@ -48,7 +48,7 @@ const sendTokens = async ({
   const resultSendTokens = await ledgerLegacyActor.send_dfx({
     to,
     fee,
-    memo: [],
+    memo: 0,
     from_subaccount: [],
     created_at_time: [],
     amount: { e8s: 100000000 }, // TODO: change to amount, hardcoded 1 OGY for testing
