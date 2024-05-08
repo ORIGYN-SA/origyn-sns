@@ -4,28 +4,51 @@
     "staging": "euyi3-3yaaa-aaaak-akoba-cai"
   },
   "ogy_dashboard": {
-    "ic": "",
+    "ic": "jbj2y-2qaaa-aaaal-ajc5q-cai",
     "staging": "7ekbt-siaaa-aaaag-ak64a-cai"
-  },
-  "ogy_token_swap": {
-    "ic": "",
-    "staging": "jpuy7-oiaaa-aaaan-qmheq-cai"
-  },
-  "ogy_ledger": {
-    "ic": "",
-    "staging": "vlwns-riaaa-aaaag-ak7ga-cai"
   },
   "ogy_legacy_ledger": {
     "ic": "jwcfb-hyaaa-aaaaj-aac4q-cai",
     "staging": "vmxlg-4qaaa-aaaag-ak7gq-cai"
   },
+  "ogy_token_swap": {
+    "ic": "",
+    "staging": "jpuy7-oiaaa-aaaan-qmheq-cai"
+  },
+  "sns_governance": {
+    "ic": "",
+    "staging": "jtpnb-waaaa-aaaal-ajc6q-cai"
+  },
+  "sns_index": {
+    "ic": "",
+    "staging": "j2mg5-aiaaa-aaaal-ajc7a-cai"
+  },
+  "sns_ledger": {
+    "ic": "",
+    "staging": "j5naj-nqaaa-aaaal-ajc7q-cai"
+  },
+  "sns_root": {
+    "ic": "",
+    "staging": "cd3sx-wyaaa-aaaal-ajdaa-cai"
+  },
+  "sns_swap": {
+    "ic": "",
+    "staging": "ce2ud-3aaaa-aaaal-ajdaq-cai"
+  },
   "super_indexer_v3": {
+    "ic": "cnz77-niaaa-aaaal-ajdba-cai",
     "staging": "4iidd-jaaaa-aaaap-ahd5q-cai"
   },
   "super_stats_v3": {
+    "ic": "ckyzl-aqaaa-aaaal-ajdbq-cai",
     "staging": "4pjfx-eyaaa-aaaap-ahd5a-cai"
   },
+  "token_metrics": {
+    "ic": "juolv-3yaaa-aaaal-ajc6a-cai",
+    "staging": "euyi3-3yaaa-aaaak-akoba-cai"
+  },
   "tx_store_v3": {
+    "ic": "c77ig-byaaa-aaaal-ajdca-cai",
     "staging": "45pso-iiaaa-aaaap-ahd6a-cai"
   }
 }
