@@ -29,17 +29,6 @@
       "type": "custom",
       "wasm": "backend/external_canisters/ogy_legacy_ledger/wasm/ogy_legacy_ledger_canister.wasm.gz"
     },
-    "ogy_token_swap": {
-      "candid": "backend/canisters/ogy_token_swap/api/can.did",
-      "declarations": {
-        "bindings": ["js", "did", "ts"],
-        "env_override": null,
-        "output": "backend/canisters/ogy_token_swap/api/declarations"
-      },
-      "package": "ogy_token_swap",
-      "type": "custom",
-      "wasm": "backend/canisters/ogy_token_swap/target/wasm32-unknown-unknown/release/ogy_token_swap_canister.wasm.gz"
-    },
     "sns_governance": {
       "build": "",
       "candid": "candid/sns_governance.did",
