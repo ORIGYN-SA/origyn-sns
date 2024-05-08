@@ -47,7 +47,7 @@
 
 # Name of the SNS project. This may differ from the name of the associated
 # token. Must be a string of max length = 255.
-name: ORIGYN
+name: ORIGYN DAO
 
 # Description of the SNS project.
 # Must be a string of max length = 2,000.
@@ -100,7 +100,7 @@ fallback_controller_principals:
     # principals of your intended fallback controllers.
     #
     # For testing, propose_sns.sh will fill this in automatically.
-    - YOUR_PRINCIPAL_ID
+    - jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
 
 # The list of dapp canister(s) that will be decentralized if the
 # decentralization swap succeeds. These are defined in the form of canister IDs,
@@ -114,7 +114,7 @@ dapp_canisters:
     # IDs of the canisters comprising your to-be-decentralized dapp.
     #
     # For testing, propose_sns.sh will fill this in automatically.
-    - YOUR_CANISTER_ID
+    - jpuy7-oiaaa-aaaan-qmheq-cai
 
 # Configuration of SNS tokens in the SNS Ledger canister deployed as part
 # of the SNS.
@@ -251,13 +251,13 @@ Voting:
             # the maximum age bonus. Once this age is reached, the neuron will
             # continue to age, but no more bonus will be applied. This field
             # is specified as a duration. For example: "2 years".
-            duration: 0.5 years
+            duration: 1 years
             # If a neuron's age is `duration` or older, its voting power will be
             # increased by this age`bonus` amount.
             # This field is specified as a percentage. For instance,
             # a value of "25%" means that the voting power will increase by a quarter
             # (multiplied by 1.25).
-            bonus: 25%
+            bonus: 0%
 
     # Configuration of SNS voting reward parameters.
     #
@@ -294,7 +294,7 @@ Voting:
         # Values of 0 result in the reward rate always being `final`.
         #
         # This field is specified as a duration. For example: "8 years".
-        transition_duration: 0
+        transition_duration: 1 day
 
 # Configuration of the initial token distribution of the SNS. You can configure
 # how SNS tokens are distributed in each of the three groups:
@@ -330,11 +330,136 @@ Distribution:
         # principals of your intended genesis neurons.
         #
         # For testing, propose_sns.sh will fill this in automatically.
-        - principal: uts47-wa2j2-xuhf2-er2vb-mbrfc-6xslp-fbhfx-lbcfp-rmqqz-xce7m-sqe
-          stake: 500_000_000 tokens
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 475_000_000 tokens
           memo: 0
-          dissolve_delay: 1 month
-          vesting_period: 0 years
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 1
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 2
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 3
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 4
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 5
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 6
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 7
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 8
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 9
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 10
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 11
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 12
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 13
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 14
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 15
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 16
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 17
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 18
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 19
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 20
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 21
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 22
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 23
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 24
+          dissolve_delay: 6 months
+          vesting_period: 1 years
+        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+          stake: 1_000_000 tokens
+          memo: 25
+          dissolve_delay: 6 months
+          vesting_period: 1 years
     # The initial SNS token balances of the various canisters of the SNS.
     InitialBalances:
         # The initial SNS token balance of the SNS Governance canister is known
@@ -348,9 +473,9 @@ Distribution:
         swap: 500_000_000 tokens
 
     # Checksum of the total number of tokens distributed in this section.
-    #     23 million    (dev neuron)
-    #     52 million    (governance)
-    # +   25 million    (swap)
+    #     500 million    (dev neuron)
+    #     0 million    (governance)
+    # +   500 million    (swap)
     # --------------
     total: 1_000_000_000 tokens
 
@@ -417,7 +542,6 @@ Swap:
         - HT # HAITI
         - IR # IRAN
         - IQ # IRAQ
-        - XK # KOSOVO
         - LB # LEBANON
         - LY # LIBYA
         - ML # MALI
