@@ -8,8 +8,10 @@ interface IClaimReward {
 }
 
 const claimReward = async ({ snsRewardsActor, neuronId }: IClaimReward) => {
-  // const id = [...Uint8Array.from(Buffer.from(neuronId, "hex"))];
-  const result = await snsRewardsActor.claim_reward(neuronId, "OGY");
+  const result = await snsRewardsActor.claim_reward({
+    token: "OGY",
+    neuron_id: neuronId,
+  });
   return result;
 };
 

@@ -20,7 +20,6 @@ export const getNeuronsByOwner = async ({
 }: IGetNeuronsByOwnerProps) => {
   const result =
     (await snsRewardsActor.get_neurons_by_owner()) as INeuronsByOwnerResult[];
-  // console.log(result);
   return result[0] ?? [];
 };
 
