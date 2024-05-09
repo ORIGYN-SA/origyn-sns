@@ -1,9 +1,29 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@components/ui";
 import { useClaimAllRewards } from "../../context";
 
 const Form = () => {
-  const { principal, claimAmount, handleClaimAllRewards } =
-    useClaimAllRewards();
+  const queryClient = useQueryClient();
+  const { principal, claimAmount, neuronIds, mutation } = useClaimAllRewards();
+
+  const handleClaimAllRewards = () => {
+    neuronIds.forEach((neuronId) => {
+      mutation.mutate(
+        {
+          neuronId: { id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["getNeuronsByOwner"] });
+            queryClient.invalidateQueries({ queryKey: ["getNeuron"] });
+            queryClient.invalidateQueries({
+              queryKey: ["getNeuronClaimBalance"],
+            });
+          },
+        }
+      );
+    });
+  };
 
   return (
     <div className="text-center mt-8">

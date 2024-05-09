@@ -73,7 +73,6 @@ export const listNeurons = async ({
 
   return (
     (result as IListNeuronsResult)?.neurons?.map((data) => {
-      console.log(data.id);
       const dissolveState = data.dissolve_state[0];
       // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
       const age =

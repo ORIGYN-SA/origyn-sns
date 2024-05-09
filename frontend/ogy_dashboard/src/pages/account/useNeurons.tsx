@@ -158,7 +158,7 @@ const useNeurons = () => {
     stakedRewardsOGY: {
       totalStakedRewardsOGY,
       totalStakedRewardsOGYUSD,
-      neuronIds: neurons?.map((neuron) => neuron.id) ?? [],
+      neuronIds: neurons?.map((neuron) => neuron.id2Hex) ?? [],
     },
     stakedOGY: {
       totalStakedOGY,

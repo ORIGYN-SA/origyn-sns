@@ -4,10 +4,7 @@ import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Table } from "@components/ui";
-import { Transaction } from "@services/_api/types/transactions.types";
-// import { ITableProps } from "@helpers/table/useTable";
-// import { timestampToDateShort } from "@helpers/dates";
-// import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import { INeuronData } from "@services/governance/listNeurons";
 import useNeurons from "../useNeurons";
 import NeuronsDetails from "./neuron-details";
 import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";
@@ -23,7 +20,7 @@ import {
 } from "./remove-neuron";
 
 const NeuronsList = () => {
-  const columns = useMemo<ColumnDef<Transaction>[]>(
+  const columns = useMemo<ColumnDef<INeuronData>[]>(
     () => [
       {
         accessorKey: "id",
