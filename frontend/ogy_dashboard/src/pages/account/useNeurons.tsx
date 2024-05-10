@@ -1,31 +1,21 @@
 import { useState, useEffect } from "react";
-import { useQueries, useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@connect2ic/react";
-import { getNeuronsByOwner } from "@services/sns-rewards/useGetNeuronsByOwner";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { useCanister } from "@connect2ic/react";
+import useConnect from "@helpers/useConnect";
+// import { getNeuronsByOwner } from "@services/sns-rewards/useGetNeuronsByOwner";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
 import { fetchBalanceOGY } from "@services/accounts/fetchBalanceOGY";
 import useFetchPriceOGY from "@services/accounts/fetchPriceOGY";
-import { getNeuron, INeuronData } from "@services/governance/getNeuron";
+// import { getNeuron, INeuronData } from "@services/governance/getNeuron";
+import { listNeurons } from "@services/governance/listNeurons";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
 
 const useNeurons = () => {
-  const { isConnected } = useConnect();
-  const [snsRewardsActor] = useCanister("SNSRewards");
+  const { isConnected, principal } = useConnect();
+  // const [snsRewardsActor] = useCanister("SNSRewards");
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
-
-  const {
-    data: neuronsByOwner,
-    isSuccess: isSuccessGetNeuronsByOwner,
-    isError: isErrorGetNeuronsByOwner,
-    isLoading: isLoadingGetNeuronsByOwner,
-    error: errorGetNeuronsByOwner,
-  } = useQuery({
-    queryKey: ["getNeuronsByOwner", isConnected],
-    queryFn: () => getNeuronsByOwner({ snsRewardsActor }),
-    enabled: !!isConnected,
-  });
 
   const {
     data: nervousSystemParameters,
@@ -40,6 +30,23 @@ const useNeurons = () => {
   });
 
   const {
+    data: neurons,
+    isSuccess: isSuccessListNeurons,
+    isError: isErrorListNeurons,
+    isLoading: isLoadingListNeurons,
+    error: errorListNeurons,
+  } = useQuery({
+    queryKey: ["listNeurons", isConnected],
+    queryFn: () =>
+      listNeurons({
+        governanceActor,
+        owner: principal as string,
+        nervousSystemParameters,
+      }),
+    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
+  });
+
+  const {
     data: priceOGY,
     isSuccess: isSuccessFetchPriceOGY,
     isError: isErrorFetchPriceOGY,
@@ -47,55 +54,30 @@ const useNeurons = () => {
     error: errorFetchPriceOGY,
   } = useQuery(useFetchPriceOGY({ enabled: true }));
 
-  const neuronDetailsResults = useQueries({
+  const neuronClaimBalance = useQueries({
     queries:
-      neuronsByOwner?.map((neuronId) => {
-        return {
-          queryKey: ["getNeuron", governanceActor, neuronId],
-          queryFn: () =>
-            getNeuron({
-              governanceActor,
-              neuronId: [neuronId],
-              nervousSystemParameters,
-            }),
-          placeholderData: keepPreviousData,
-          enabled:
-            !!isSuccessGetNeuronsByOwner &&
-            !!isSuccessGetNervousSystemParameters &&
-            !!isSuccessFetchPriceOGY,
-        };
-      }) ?? [],
-  });
-
-  const neuronClaimBalanceResults = useQueries({
-    queries:
-      neuronsByOwner?.map((neuronId) => {
+      neurons?.map(({ id: neuronId }) => {
         return {
           queryKey: ["getNeuronClaimBalance", ledgerActor, neuronId],
           queryFn: () =>
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: neuronId?.id,
+              subaccount: neuronId.id,
             }),
-          enabled:
-            !!isSuccessGetNeuronsByOwner &&
-            !!isSuccessGetNervousSystemParameters &&
-            !!isSuccessFetchPriceOGY,
+          enabled: !!isSuccessListNeurons && !!isSuccessFetchPriceOGY,
         };
       }) ?? [],
   });
 
-  const isSuccessGetNeuronsDetails =
-    neuronDetailsResults.every((result) => result.isSuccess) &&
-    neuronClaimBalanceResults.every((result) => result.isSuccess);
+  const isSuccess = neuronClaimBalance.every((result) => result.isSuccess);
 
-  const _totalStakedRewardsOGY = neuronClaimBalanceResults.reduce(
+  const _totalStakedRewardsOGY = neuronClaimBalance.reduce(
     (accumulator, currentValue) =>
       accumulator + (currentValue.data ? currentValue.data.balanceOGY : 0),
     0
   );
-  const _totalStakedRewardsOGYUSD = neuronClaimBalanceResults.reduce(
+  const _totalStakedRewardsOGYUSD = neuronClaimBalance.reduce(
     (accumulator, currentValue) =>
       accumulator +
       (currentValue.data
@@ -107,70 +89,65 @@ const useNeurons = () => {
   const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState(0);
   const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState(0);
 
-  const _totalStakedOGY = neuronDetailsResults.reduce(
-    (accumulator, currentValue) =>
-      accumulator +
-      (currentValue.data ? (currentValue.data as INeuronData).stakedAmount : 0),
-    0
-  );
-  const _totalStakedOGYUSD = neuronDetailsResults.reduce(
-    (accumulator, currentValue) =>
-      accumulator +
-      (currentValue.data
-        ? (currentValue.data as INeuronData).stakedAmount * priceOGY?.ogyPrice
-        : 0),
-    0
-  );
+  const _totalStakedOGY =
+    neurons?.reduce(
+      (accumulator, currentValue) =>
+        accumulator + (currentValue ? currentValue.stakedAmount : 0),
+      0
+    ) ?? 0;
+  const _totalStakedOGYUSD =
+    neurons?.reduce(
+      (accumulator, currentValue) =>
+        accumulator +
+        (currentValue ? currentValue.stakedAmount * priceOGY?.ogyPrice : 0),
+      0
+    ) ?? 0;
 
   const [totalStakedOGY, setTotalStakedOGY] = useState("0");
   const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState(0);
 
   useEffect(() => {
-    if (isSuccessGetNeuronsDetails) {
+    if (isSuccess) {
       setTotalStakedRewardsOGY(_totalStakedRewardsOGY);
       setTotalStakedRewardsOGYUSD(_totalStakedRewardsOGYUSD);
       setTotalStakedOGY(roundAndFormatLocale({ number: _totalStakedOGY }));
       setTotalStakedOGYUSD(_totalStakedOGYUSD);
     }
   }, [
-    isSuccessGetNeuronsDetails,
+    isSuccess,
     _totalStakedRewardsOGY,
     _totalStakedRewardsOGYUSD,
     _totalStakedOGY,
     _totalStakedOGYUSD,
-    neuronsByOwner,
   ]);
 
-  const rows = isSuccessGetNeuronsDetails
-    ? neuronsByOwner?.map((neuron, index) => {
-        const neuronDetails = neuronDetailsResults[index]?.data as INeuronData;
-        const claimAmount = neuronClaimBalanceResults[index]?.data?.balanceOGY;
-        const neuronId = Buffer.from(neuron?.id).toString("hex");
-
+  const rows = isSuccess
+    ? neurons?.map((neuron, index) => {
+        const claimAmount = neuronClaimBalance[index]?.data?.balanceOGY;
         return {
-          id: neuronId,
-          stakedAmount: neuronDetails.stakedAmountToString,
+          id: neuron.id2Hex,
+          stakedAmount: neuron.stakedAmountToString,
           claimAmount,
           details: [
             {
               id: "state",
               label: "State",
-              value: neuronDetails.state,
+              value: neuron.state,
             },
             {
               id: "votingPower",
               label: "Voting power",
-              value: neuronDetails.votingPowerToString,
+              value: neuron.votingPowerToString,
             },
             {
               id: "dissolveDelay",
               label: "Dissolve delay",
-              value: neuronDetails.dissolveDelay,
+              value: neuron.dissolveDelay,
             },
             {
               id: "age",
               label: "Age",
-              value: neuronDetails.ageToRelativeCalendar,
+              value: neuron.ageToRelativeCalendar,
             },
           ],
         };
@@ -181,7 +158,7 @@ const useNeurons = () => {
     stakedRewardsOGY: {
       totalStakedRewardsOGY,
       totalStakedRewardsOGYUSD,
-      neuronIds: neuronsByOwner,
+      neuronIds: neurons?.map((neuron) => neuron.id2Hex) ?? [],
     },
     stakedOGY: {
       totalStakedOGY,
@@ -189,27 +166,21 @@ const useNeurons = () => {
     },
     neuronsList: { rows, rowCount: rows?.length ?? 0 },
     isLoading:
-      isLoadingGetNeuronsByOwner ||
+      isLoadingListNeurons ||
       isLoadingGetNervousSystemParameters ||
       isLoadingFetchPriceOGY ||
-      neuronDetailsResults.some((query) => query.isLoading) ||
-      neuronClaimBalanceResults.some((query) => query.isLoading),
-    isSuccess:
-      neuronDetailsResults.every((query) => query.isSuccess) &&
-      neuronClaimBalanceResults.every((query) => query.isSuccess),
+      neuronClaimBalance.some((query) => query.isLoading),
+    isSuccess,
     isError:
-      isErrorGetNeuronsByOwner ||
+      isErrorListNeurons ||
       isErrorGetNervousSystemParameters ||
       isErrorFetchPriceOGY ||
-      neuronDetailsResults.some((query) => query.isError) ||
-      neuronClaimBalanceResults.some((query) => query.isError),
+      neuronClaimBalance.some((query) => query.isError),
     error:
-      errorGetNeuronsByOwner ||
+      errorListNeurons ||
       errorGetNervousSystemParameters ||
       errorFetchPriceOGY ||
-      [...neuronDetailsResults, ...neuronClaimBalanceResults]
-        .map((query) => query.error)
-        .filter(Boolean)[0],
+      neuronClaimBalance.map((query) => query.error).filter(Boolean)[0],
   };
 };
 
