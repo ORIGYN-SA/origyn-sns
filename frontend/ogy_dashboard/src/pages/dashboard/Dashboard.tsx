@@ -1,4 +1,4 @@
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
 import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";

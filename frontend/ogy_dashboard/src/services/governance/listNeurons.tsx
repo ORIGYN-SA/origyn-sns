@@ -13,7 +13,8 @@ interface INeuronId {
 
 interface IListNeurons {
   governanceActor: ActorSubclass;
-  owner: string;
+  owner?: string;
+  limit: number;
   nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
 }
 
@@ -36,7 +37,9 @@ interface IListNeuronsResult {
 
 export interface INeuronData {
   stakedAmount: number;
+  stakedMaturity: number;
   stakedAmountToString: string;
+  stakedMaturityToString: string;
   age: number;
   ageToRelativeCalendar: string;
   state: string;
@@ -61,11 +64,12 @@ const getNeuronState = (dissolveState: IDissolveState) => {
 export const listNeurons = async ({
   governanceActor,
   owner,
+  limit,
   nervousSystemParameters,
 }: IListNeurons) => {
   const result = await governanceActor.list_neurons({
-    of_principal: [Principal.fromText(owner)],
-    limit: 0,
+    of_principal: owner ? [Principal.fromText(owner)] : [],
+    limit,
     start_page_at: [],
   });
 
@@ -117,7 +121,11 @@ export const listNeurons = async ({
 
       return {
         stakedAmount,
+        stakedMaturity,
         stakedAmountToString: roundAndFormatLocale({ number: stakedAmount }),
+        stakedMaturityToString: roundAndFormatLocale({
+          number: stakedMaturity,
+        }),
         age,
         ageToRelativeCalendar:
           DateTime.fromMillis(age).toRelativeCalendar() ?? "",

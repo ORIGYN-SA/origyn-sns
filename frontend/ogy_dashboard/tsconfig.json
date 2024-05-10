@@ -24,6 +24,7 @@
     /* Paths */
     "baseUrl": "src",
     "paths": {
+      "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@shared/*": ["shared/*"],

@@ -1,6 +1,6 @@
 // import { useMemo, Suspense } from "react";
 // import { useLoaderData, defer, Await, RouteObject } from "react-router-dom";
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import LedgerSwitch from "@pages/account/ledger-switch";
 import AvailableOGY from "@pages/account/available-ogy";
 import StakedOGY from "@pages/account/staked-ogy";

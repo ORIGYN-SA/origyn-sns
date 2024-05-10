@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
-import useConnect from "@helpers/useConnect";
-// import { getNeuronsByOwner } from "@services/sns-rewards/useGetNeuronsByOwner";
+import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
 import { fetchBalanceOGY } from "@services/accounts/fetchBalanceOGY";
-import useFetchPriceOGY from "@services/accounts/fetchPriceOGY";
-// import { getNeuron, INeuronData } from "@services/governance/getNeuron";
+import { fetchPriceOGY } from "@services/accounts/fetchPriceOGY";
 import { listNeurons } from "@services/governance/listNeurons";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
 
-const useNeurons = () => {
-  const { isConnected, principal } = useConnect();
-  // const [snsRewardsActor] = useCanister("SNSRewards");
+const useNeurons = ({ limit, owner }: { limit: number; owner?: string }) => {
+  const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
 
@@ -36,11 +33,12 @@ const useNeurons = () => {
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeurons", isConnected],
+    queryKey: ["listNeurons", limit, isConnected],
     queryFn: () =>
       listNeurons({
         governanceActor,
-        owner: principal as string,
+        owner,
+        limit,
         nervousSystemParameters,
       }),
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
@@ -52,25 +50,45 @@ const useNeurons = () => {
     isError: isErrorFetchPriceOGY,
     isLoading: isLoadingFetchPriceOGY,
     error: errorFetchPriceOGY,
-  } = useQuery(useFetchPriceOGY({ enabled: true }));
+  } = useQuery({
+    queryKey: ["fetchPriceOGY", isConnected],
+    queryFn: () => fetchPriceOGY(),
+    enabled:
+      !!isConnected &&
+      !!isSuccessGetNervousSystemParameters &&
+      !!isSuccessListNeurons,
+  });
 
   const neuronClaimBalance = useQueries({
     queries:
       neurons?.map(({ id: neuronId }) => {
         return {
-          queryKey: ["getNeuronClaimBalance", ledgerActor, neuronId],
+          queryKey: [
+            "getNeuronClaimBalance",
+            ledgerActor,
+            isConnected,
+            neuronId,
+          ],
           queryFn: () =>
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
               subaccount: neuronId.id,
             }),
-          enabled: !!isSuccessListNeurons && !!isSuccessFetchPriceOGY,
+          enabled:
+            !!isConnected &&
+            !!isSuccessGetNervousSystemParameters &&
+            !!isSuccessListNeurons &&
+            !!isSuccessFetchPriceOGY,
         };
       }) ?? [],
   });
 
-  const isSuccess = neuronClaimBalance.every((result) => result.isSuccess);
+  const isSuccess =
+    isSuccessGetNervousSystemParameters &&
+    isSuccessListNeurons &&
+    isSuccessFetchPriceOGY &&
+    neuronClaimBalance.every((result) => result.isSuccess);
 
   const _totalStakedRewardsOGY = neuronClaimBalance.reduce(
     (accumulator, currentValue) =>
@@ -128,6 +146,12 @@ const useNeurons = () => {
           id: neuron.id2Hex,
           stakedAmount: neuron.stakedAmountToString,
           claimAmount,
+          state: neuron.state,
+          votingPower: neuron.votingPowerToString,
+          dissolveDelay: neuron.dissolveDelay,
+          age: neuron.ageToRelativeCalendar,
+          stakedOGY: neuron.stakedAmountToString,
+          maturity: neuron.stakedMaturityToString,
           details: [
             {
               id: "state",

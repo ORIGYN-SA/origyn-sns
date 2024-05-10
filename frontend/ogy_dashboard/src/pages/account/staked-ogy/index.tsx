@@ -1,10 +1,11 @@
-// import { useState, useEffect } from "react";
+import useConnect from "@hooks/useConnect";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
-import useNeurons from "../useNeurons";
+import useNeurons from "@hooks/useNeurons";
 
 const StakedOGY = () => {
-  const { stakedOGY } = useNeurons();
+  const { principal: owner } = useConnect();
+  const { stakedOGY } = useNeurons({ owner, limit: 0 });
 
   return (
     <Card>

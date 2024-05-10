@@ -44,8 +44,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["getNeuronsByOwner"] });
-          queryClient.invalidateQueries({ queryKey: ["getNeuron"] });
+          queryClient.invalidateQueries({ queryKey: ["listNeurons"] });
           queryClient.invalidateQueries({
             queryKey: ["getNeuronClaimBalance"],
           });

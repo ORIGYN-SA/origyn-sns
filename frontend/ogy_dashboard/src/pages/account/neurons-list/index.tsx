@@ -3,9 +3,10 @@
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import useConnect from "@hooks/useConnect";
 import { Table } from "@components/ui";
 import { INeuronData } from "@services/governance/listNeurons";
-import useNeurons from "../useNeurons";
+import useNeurons from "@hooks/useNeurons";
 import NeuronsDetails from "./neuron-details";
 import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";
 import {
@@ -20,6 +21,8 @@ import {
 } from "./remove-neuron";
 
 const NeuronsList = () => {
+  const { principal: owner } = useConnect();
+
   const columns = useMemo<ColumnDef<INeuronData>[]>(
     () => [
       {
@@ -91,6 +94,8 @@ const NeuronsList = () => {
     // limit: pagination.pageSize,
     // offset: pagination.pageSize * pagination.pageIndex,
     // sorting,
+    owner,
+    limit: 0,
   });
 
   return (

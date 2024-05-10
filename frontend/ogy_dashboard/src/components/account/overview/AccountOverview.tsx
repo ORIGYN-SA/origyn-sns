@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useQuery, UseQueryResult } from "@tanstack/react-query";
 // import { useConnect } from "@connect2ic/react";
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
 import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";

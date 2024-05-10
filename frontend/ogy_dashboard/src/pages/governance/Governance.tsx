@@ -2,6 +2,7 @@
 // @ts-nocheck
 import { useMemo, Suspense } from "react";
 import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
@@ -58,6 +59,7 @@ const loader = async () => {
 };
 
 export const Governance = () => {
+  const queryClient = useQueryClient();
   const data = useLoaderData();
   const navigate = useNavigate();
 
@@ -95,6 +97,9 @@ export const Governance = () => {
     navigate("/proposals");
   };
   const handleShowAllNeurons = () => {
+    queryClient.invalidateQueries({ queryKey: ["listNeurons"] });
+    // queryClient.invalidateQueries({ queryKey: ["getNervousSystemParameters"] });
+    // queryClient.invalidateQueries({ queryKey: ["getNeuronClaimBalance"] });
     navigate("/governance/neurons");
   };
 

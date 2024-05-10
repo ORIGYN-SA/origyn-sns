@@ -9,7 +9,8 @@
 //   TokensInGovernanceKpiProps,
 // } from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
-import { usePagination, useSorting } from "@helpers/table/useTable";
+import { usePagination } from "@helpers/table/useTable";
+import { PaginationState } from "@tanstack/react-table";
 
 const loader = async () => {
   return null;
@@ -17,8 +18,8 @@ const loader = async () => {
 
 export const Neurons = () => {
   // const data = useLoaderData();
-  const [pagination, setPagination] = usePagination({});
-  const [sorting, setSorting] = useSorting({});
+  const [pagination] = usePagination({ pageSize: 0 });
+  // const [sorting, setSorting] = useSorting({});
 
   //   const governanceFeatures = useMemo(
   //     () => [
@@ -58,10 +59,10 @@ export const Neurons = () => {
       </div>
       <div className="mt-8 mb-16">
         <NeuronsList
-          pagination={pagination}
-          setPagination={setPagination}
-          sorting={sorting}
-          setSorting={{ setSorting }}
+          pagination={pagination as PaginationState}
+          // setPagination={setPagination}
+          // sorting={sorting}
+          // setSorting={{ setSorting }}
         />
       </div>
     </div>
