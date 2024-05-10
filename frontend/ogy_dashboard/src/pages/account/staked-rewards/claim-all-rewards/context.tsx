@@ -1,8 +1,6 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import useClaimRewardService from "@services/sns-rewards/useClaimReward";
-import { useQueryClient } from "@tanstack/react-query";
 import useConnect from "@helpers/useConnect";
-import { INeuronsByOwnerResult } from "@services/sns-rewards/useGetNeuronsByOwner";
 
 interface ClaimAllRewardsContextType {
   mutation: ReturnType<typeof useClaimRewardService>;
@@ -10,8 +8,8 @@ interface ClaimAllRewardsContextType {
   handleShow: () => void;
   handleClose: () => void;
   claimAmount: number;
-  handleClaimAllRewards: () => void;
   principal: string | undefined;
+  neuronIds: string[];
 }
 
 const ClaimAllRewardsContext = createContext<
@@ -35,10 +33,9 @@ export const ClaimAllRewardsProvider = ({
   claimAmount,
 }: {
   children: ReactNode;
-  neuronIds: INeuronsByOwnerResult[];
+  neuronIds: string[];
   claimAmount: number;
 }) => {
-  const queryClient = useQueryClient();
   const { principal } = useConnect();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -49,25 +46,6 @@ export const ClaimAllRewardsProvider = ({
     mutation.reset();
   };
 
-  const handleClaimAllRewards = () => {
-    neuronIds.forEach((neuron) => {
-      mutation.mutate(
-        {
-          neuronId: neuron,
-        },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["getNeuronsByOwner"] });
-            queryClient.invalidateQueries({ queryKey: ["getNeuron"] });
-            queryClient.invalidateQueries({
-              queryKey: ["getNeuronClaimBalance"],
-            });
-          },
-        }
-      );
-    });
-  };
-
   return (
     <ClaimAllRewardsContext.Provider
       value={{
@@ -75,7 +53,7 @@ export const ClaimAllRewardsProvider = ({
         show,
         handleShow,
         handleClose,
-        handleClaimAllRewards,
+        neuronIds,
         claimAmount,
         principal,
       }}

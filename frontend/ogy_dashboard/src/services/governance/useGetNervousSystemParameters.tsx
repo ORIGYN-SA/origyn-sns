@@ -23,8 +23,9 @@ export interface ISystemNervousParametersResponse {
 export const getNervousSystemParameters = async ({
   governanceActor,
 }: IGetNervousSystemProps) => {
-  const result =
-    (await governanceActor.get_nervous_system_parameters()) as ISystemNervousParametersResult;
+  const result = (await governanceActor.get_nervous_system_parameters(
+    null
+  )) as ISystemNervousParametersResult;
   return {
     maxNeuronAgeForAgeBonus:
       Number(result.max_neuron_age_for_age_bonus[0]) ?? 0,
