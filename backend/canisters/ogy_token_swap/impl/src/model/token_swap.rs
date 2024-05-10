@@ -1,14 +1,27 @@
 use std::collections::BTreeMap;
 
-use candid::{ CandidType, Principal };
+use candid::{ CandidType, Nat, Principal };
 use canister_time::now_millis;
-use ic_ledger_types::{ AccountIdentifier, BlockIndex, Subaccount, Tokens, TransferError };
-use icrc_ledger_types::icrc1::transfer::{
-    BlockIndex as BlockIndexIcrc,
-    TransferError as TransferErrorIcrc,
+use ic_ledger_types::{
+    AccountIdentifier,
+    BlockIndex,
+    Memo,
+    Subaccount,
+    Timestamp,
+    Tokens,
+    TransferError,
+};
+use icrc_ledger_types::icrc1::{
+    account::Account,
+    transfer::{
+        BlockIndex as BlockIndexIcrc,
+        Memo as MemoIcrc,
+        TransferError as TransferErrorIcrc,
+    },
 };
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{ Deserialize, Serialize };
+use types::TimestampMillis;
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct TokenSwap {
@@ -24,7 +37,8 @@ impl TokenSwap {
         match self.swap.get(&block_index) {
             Some(entry) =>
                 match &entry.status {
-                    SwapStatus::Complete => Err("Swap already completed.".to_string()),
+                    SwapStatus::Complete(block_index) =>
+                        Err(format!("Swap already completed on block {block_index}.")),
                     SwapStatus::Failed(fail_reason) =>
                         match fail_reason {
                             SwapError::BlockFailed(block_fail_reason) => {
@@ -107,7 +121,12 @@ impl TokenSwap {
                                     )
                                 ),
                         }
-                    _ => Err("Swap already running.".to_string()),
+                    | SwapStatus::Init
+                    | SwapStatus::BlockRequest(_)
+                    | SwapStatus::BlockValid
+                    | SwapStatus::BurnRequest(_)
+                    | SwapStatus::BurnSuccess
+                    | SwapStatus::TransferRequest(_) => Err("Swap already running.".to_string()),
                 }
             None => {
                 self.swap.insert(block_index, SwapInfo::init(principal));
@@ -197,9 +216,12 @@ impl SwapInfo {
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
 pub enum SwapStatus {
     Init,
+    BlockRequest(BlockIndex),
     BlockValid,
+    BurnRequest((Option<Timestamp>, Option<Subaccount>, Tokens, Memo)),
     BurnSuccess,
-    Complete,
+    TransferRequest((Option<TimestampMillis>, Account, Nat, Option<MemoIcrc>)),
+    Complete(BlockIndexIcrc),
     Failed(SwapError),
 }
 

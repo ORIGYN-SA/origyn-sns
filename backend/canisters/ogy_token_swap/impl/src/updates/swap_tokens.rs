@@ -12,6 +12,7 @@ use crate::{
     state::{ mutate_state, read_state },
 };
 use candid::{ CandidType, Nat, Principal };
+use canister_time::timestamp_nanos;
 use canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::{
@@ -25,6 +26,7 @@ use ic_ledger_types::{
     Memo,
     Operation,
     Subaccount,
+    Timestamp,
     Tokens,
     TransferArgs,
 };
@@ -92,6 +94,9 @@ pub(crate) async fn swap_tokens_impl(
 async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result<(), String> {
     let ogy_legacy_ledger_canister_id = read_state(|s| s.data.canister_ids.ogy_legacy_ledger);
 
+    mutate_state(|s|
+        s.data.token_swap.update_status(block_index, SwapStatus::BlockRequest(block_index))
+    );
     match
         query_blocks(ogy_legacy_ledger_canister_id, GetBlocksArgs {
             start: block_index,
@@ -286,14 +291,26 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
             )
         );
     }
+
     let args = TransferArgs {
         memo: Memo(block_index),
         to: ogy_legacy_minting_account,
         amount,
         fee: Tokens::from_e8s(0), // fees for burning are 0
         from_subaccount: Some(Subaccount::from(principal)),
-        created_at_time: None,
+        created_at_time: Some(Timestamp { timestamp_nanos: timestamp_nanos() }),
     };
+    mutate_state(|s|
+        s.data.token_swap.update_status(
+            block_index,
+            SwapStatus::BurnRequest((
+                args.created_at_time,
+                args.from_subaccount,
+                args.amount,
+                args.memo,
+            ))
+        )
+    );
     match transfer(ogy_legacy_ledger_canister_id, args).await {
         Ok(Ok(burn_block_index)) => {
             mutate_state(|s| {
@@ -356,14 +373,29 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
         },
         amount: Nat::from(amount_to_swap.e8s()),
         fee: None,
-        created_at_time: None,
+        created_at_time: Some(timestamp_nanos()),
         memo: Some(MemoIcrc(ByteBuf::from(block_index.to_be_bytes()))),
     };
+
+    mutate_state(|s|
+        s.data.token_swap.update_status(
+            block_index,
+            SwapStatus::TransferRequest((
+                args.created_at_time,
+                args.to,
+                args.amount.clone(),
+                args.memo.clone(),
+            ))
+        )
+    );
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
             mutate_state(|s| {
-                s.data.token_swap.set_swap_block_index(block_index, transfer_block_index);
-                s.data.token_swap.update_status(block_index, SwapStatus::Complete);
+                s.data.token_swap.set_swap_block_index(block_index, transfer_block_index.clone());
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Complete(transfer_block_index)
+                );
             });
             Ok(())
         }
