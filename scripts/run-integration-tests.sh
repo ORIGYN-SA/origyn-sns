@@ -13,6 +13,8 @@ Options:
 EOF
 }
 
+./scripts/init-integration-test-environment.sh
+
 ./scripts/build-all-canister.sh
 
 cargo test -p integration_tests -- --nocapture
