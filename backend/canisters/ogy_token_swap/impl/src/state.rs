@@ -33,6 +33,10 @@ impl RuntimeState {
                 memory_used: MemorySize::used(),
                 cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
             },
+            canister_ids: CanisterIds {
+                ogy_legacy_ledger: self.data.canister_ids.ogy_legacy_ledger,
+                ogy_new_ledger: self.data.canister_ids.ogy_new_ledger,
+            },
         }
     }
 
@@ -45,6 +49,7 @@ impl RuntimeState {
 #[derive(CandidType, Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,
+    pub canister_ids: CanisterIds,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -88,7 +93,7 @@ impl Data {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, CandidType)]
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
