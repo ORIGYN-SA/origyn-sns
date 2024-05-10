@@ -1,4 +1,7 @@
 type Account = record { owner : principal; subaccount : opt blob };
+type Args = record { block_index : nat64 };
+type Args_1 = record { of : opt principal };
+type Args_2 = record { block_index : nat64; user : opt principal };
 type BlockFailReason = variant {
   ReceiverNotCorrectAccountId : blob;
   NotFound;
@@ -18,7 +21,9 @@ type InitArgs = record {
   ogy_new_ledger_canister_id : principal;
   ogy_legacy_ledger_canister_id : principal;
 };
-type Result = variant { Ok : SwapInfo; Err : text };
+type Response = variant { Success : SwapInfo; InternalError : text };
+type Response_1 = variant { Success : blob };
+type Response_2 = variant { Success; InternalError : text };
 type SwapError = variant {
   BlockFailed : BlockFailReason;
   BurnFailed : BurnFailReason;
@@ -43,8 +48,6 @@ type SwapStatus = variant {
   BurnRequest : record { opt Timestamp; opt blob; Tokens; nat64 };
   BlockValid;
 };
-type SwapTokensRequest = record { block_index : nat64; user : opt principal };
-type SwapTokensResponse = variant { Success; InternalError : text };
 type Timestamp = record { timestamp_nanos : nat64 };
 type Tokens = record { e8s : nat64 };
 type TransferError = variant {
@@ -69,7 +72,7 @@ type TransferFailReason = variant {
   CallError : text;
 };
 service : (InitArgs) -> {
-  get_swap_info : (nat64) -> (Result) query;
-  request_deposit_account : (opt principal) -> (blob) query;
-  swap_tokens : (SwapTokensRequest) -> (SwapTokensResponse);
+  get_swap_info : (Args) -> (Response) query;
+  request_deposit_account : (Args_1) -> (Response_1);
+  swap_tokens : (Args_2) -> (Response_2);
 }

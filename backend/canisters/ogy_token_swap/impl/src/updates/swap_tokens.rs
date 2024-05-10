@@ -1,17 +1,5 @@
-use crate::{
-    consts::OGY_MIN_SWAP_AMOUNT,
-    model::token_swap::{
-        BlockFailReason,
-        BurnFailReason,
-        ImpossibleErrorReason,
-        RecoverMode,
-        SwapError,
-        SwapStatus,
-        TransferFailReason,
-    },
-    state::{ mutate_state, read_state },
-};
-use candid::{ CandidType, Nat, Principal };
+use crate::{ consts::OGY_MIN_SWAP_AMOUNT, state::{ mutate_state, read_state } };
+use candid::{ Nat, Principal };
 use canister_time::timestamp_nanos;
 use canister_tracing_macros::trace;
 use ic_cdk::update;
@@ -33,25 +21,25 @@ use ic_ledger_types::{
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, TransferArg } };
 use ledger_utils::principal_to_legacy_account_id;
-use serde::{ Deserialize, Serialize };
 use serde_bytes::ByteBuf;
 use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
-#[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub enum SwapTokensResponse {
-    Success,
-    InternalError(String),
-}
-
-#[derive(CandidType, Serialize, Deserialize, Debug)]
-pub struct SwapTokensRequest {
-    pub block_index: BlockIndex,
-    pub user: Option<Principal>,
-}
+pub use ogy_token_swap_api::{
+    updates::swap_tokens::{ Args as SwapTokensArgs, Response as SwapTokensResponse },
+    types::token_swap::{
+        BlockFailReason,
+        BurnFailReason,
+        ImpossibleErrorReason,
+        RecoverMode,
+        SwapError,
+        SwapStatus,
+        TransferFailReason,
+    },
+};
 
 #[update]
 #[trace]
-pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
+pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
     let caller = read_state(|s| s.env.caller());
     let user = match args.user {
         Some(p) => p,

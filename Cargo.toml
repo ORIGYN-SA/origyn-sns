@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "backend/canisters/ogy_token_swap/impl",
+  "backend/canisters/ogy_token_swap/api",
   "backend/canisters/sns_rewards/impl",
   "backend/canisters/sns_rewards/api",
   "backend/canisters/super_indexer_v3",

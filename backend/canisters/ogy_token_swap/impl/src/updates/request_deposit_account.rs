@@ -1,14 +1,19 @@
 use candid::Principal;
-use ic_cdk::query;
+use ic_cdk::update;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
 use utils::env::Environment;
 
+pub use ogy_token_swap_api::updates::request_deposit_account::{
+    Args as RequestDepositAccountArgs,
+    Response as RequestDepositAccountResponse,
+};
+
 use crate::state::read_state;
 
-#[query]
-fn request_deposit_account(of: Option<Principal>) -> AccountIdentifier {
-    let principal = of.unwrap_or(read_state(|s| s.env.caller()));
-    compute_deposit_account(&principal)
+#[update]
+fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
+    let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
+    RequestDepositAccountResponse::Success(compute_deposit_account(&principal))
 }
 
 pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
@@ -22,7 +27,7 @@ mod tests {
     use utils::env::CanisterEnv;
 
     use crate::{
-        queries::request_deposit_account::compute_deposit_account,
+        updates::request_deposit_account::compute_deposit_account,
         state::{ init_state, Data, RuntimeState },
     };
 

@@ -1,32 +1,21 @@
 use crate::{ generate_query_call, generate_update_call };
 
 // Queries
-generate_query_call!(request_deposit_account);
 generate_query_call!(get_swap_info);
 
 // Updates
+generate_update_call!(request_deposit_account);
 generate_update_call!(swap_tokens);
 
 pub mod swap_tokens {
-    use ogy_token_swap::updates::swap_tokens::{ SwapTokensRequest, SwapTokensResponse };
-
-    pub type Args = SwapTokensRequest;
-    pub type Response = SwapTokensResponse;
+    pub use ogy_token_swap_api::updates::swap_tokens::{ Args, Response };
 }
 
 pub mod request_deposit_account {
-    use candid::Principal;
-    use ic_ledger_types::AccountIdentifier;
-
-    pub type Args = Principal;
-    pub type Response = AccountIdentifier;
+    pub use ogy_token_swap_api::updates::request_deposit_account::{ Args, Response };
 }
 pub mod get_swap_info {
-    use ic_ledger_types::BlockIndex;
-    use ogy_token_swap::model::token_swap::SwapInfo;
-
-    pub type Args = BlockIndex;
-    pub type Response = Result<SwapInfo, String>;
+    pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
 }
 
 pub mod client {
@@ -70,11 +59,16 @@ pub mod client {
     }
 
     pub fn deposit_account(
-        pic: &PocketIc,
+        pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
         user: Principal
     ) -> request_deposit_account::Response {
-        request_deposit_account(pic, Principal::anonymous(), ogy_token_swap_canister_id, &user)
+        request_deposit_account(
+            pic,
+            Principal::anonymous(),
+            ogy_token_swap_canister_id,
+            &(request_deposit_account::Args { of: Some(user) })
+        )
     }
 
     pub fn swap_info(
@@ -83,6 +77,11 @@ pub mod client {
         ogy_token_swap_canister_id: CanisterId,
         block_index: BlockIndex
     ) -> get_swap_info::Response {
-        get_swap_info(pic, sender, ogy_token_swap_canister_id, &block_index)
+        get_swap_info(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(get_swap_info::Args { block_index })
+        )
     }
 }

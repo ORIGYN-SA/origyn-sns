@@ -1,9 +1,9 @@
 use candid::{ Nat, Principal };
-use ic_ledger_types::Subaccount;
+use ic_ledger_types::{ AccountIdentifier, Subaccount };
 use ledger_utils::principal_to_legacy_account_id;
-use ogy_token_swap::{
-    model::token_swap::{ BlockFailReason, SwapError, SwapStatus },
-    updates::swap_tokens::SwapTokensResponse,
+use ogy_token_swap_api::{
+    types::token_swap::{ BlockFailReason, SwapError, SwapStatus },
+    updates::swap_tokens::Response as SwapTokensResponse,
 };
 use pocket_ic::PocketIc;
 use types::CanisterId;
@@ -25,9 +25,8 @@ use crate::{
             swap_tokens_authenticated_call,
         },
     },
-    ogy_swap_suite::init::init,
+    ogy_swap_suite::{ init::init, TestEnv },
     utils::{ random_amount, random_principal },
-    TestEnv,
 };
 
 #[test]
@@ -63,7 +62,11 @@ fn valid_swap() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -135,7 +138,11 @@ fn invalid_deposit_account() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -169,19 +176,20 @@ fn invalid_deposit_account() {
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::default());
 
-    assert_eq!(
-        swap_info(
-            &pic,
-            controller,
-            ogy_token_swap_canister_id,
-            block_index_deposit
-        ).unwrap().status,
-        SwapStatus::Failed(
-            SwapError::BlockFailed(
-                BlockFailReason::ReceiverNotCorrectAccountId(Subaccount::from(user_false_request))
-            )
-        )
-    );
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
+        ogy_token_swap_api::get_swap_info::Response::Success(info) =>
+            assert_eq!(
+                info.status,
+                SwapStatus::Failed(
+                    SwapError::BlockFailed(
+                        BlockFailReason::ReceiverNotCorrectAccountId(
+                            Subaccount::from(user_false_request)
+                        )
+                    )
+                )
+            ),
+        _ => panic!("Expect fail response."),
+    }
 
     // Try the recover process by requesting with the correct user
 
@@ -196,15 +204,11 @@ fn invalid_deposit_account() {
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
-    assert_eq!(
-        swap_info(
-            &pic,
-            controller,
-            ogy_token_swap_canister_id,
-            block_index_deposit
-        ).unwrap().status,
-        SwapStatus::Complete(Nat::from(1usize))
-    )
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
+        ogy_token_swap_api::get_swap_info::Response::Success(info) =>
+            assert_eq!(info.status, SwapStatus::Complete(Nat::from(1usize))),
+        _ => panic!("Expect success response."),
+    }
 }
 
 #[test]
@@ -240,7 +244,11 @@ fn test_anonymous_request() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -262,15 +270,11 @@ fn test_anonymous_request() {
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::from(amount));
 
-    assert_eq!(
-        swap_info(
-            &pic,
-            controller,
-            ogy_token_swap_canister_id,
-            block_index_deposit
-        ).unwrap().status,
-        SwapStatus::Complete(Nat::from(1usize))
-    );
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
+        ogy_token_swap_api::get_swap_info::Response::Success(info) =>
+            assert_eq!(info.status, SwapStatus::Complete(Nat::from(1usize))),
+        _ => panic!("Expect success response."),
+    }
 }
 
 #[test]
@@ -348,7 +352,11 @@ fn test_swap_amount_too_small() {
         swap_pool_amount.into()
     );
 
-    let deposit_address = deposit_account(&pic, ogy_token_swap_canister_id, user);
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
@@ -383,14 +391,14 @@ fn test_insufficient_funds_in_distribution_pool() {}
 #[test]
 fn test_deposit_account() {
     let env = init();
-    let TestEnv { pic, canister_ids, .. } = env;
+    let TestEnv { mut pic, canister_ids, .. } = env;
 
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
 
     let user = random_principal();
 
     assert_eq!(
-        deposit_account(&pic, ogy_token_swap_canister_id, user),
+        get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap(),
         principal_to_legacy_account_id(ogy_token_swap_canister_id, Some(Subaccount::from(user)))
     )
 }
@@ -431,7 +439,7 @@ fn user_token_swap(
     ).e8s();
     let swap_amount = balance;
 
-    let deposit_address = deposit_account(&pic, swap_canister_id, user);
+    let deposit_address = get_deposit_account_helper(pic, swap_canister_id, user).unwrap();
 
     let block_index_deposit = transfer_ogy(
         pic,
@@ -447,4 +455,15 @@ fn user_token_swap(
     );
 
     assert_eq!(balance_of(&pic, new_ledger_canister_id, user), swap_amount);
+}
+
+fn get_deposit_account_helper(
+    pic: &mut PocketIc,
+    ogy_legacy_ledger_canister: CanisterId,
+    user: Principal
+) -> Result<AccountIdentifier, String> {
+    match deposit_account(pic, ogy_legacy_ledger_canister, user) {
+        ogy_token_swap_api::request_deposit_account::Response::Success(account_id) =>
+            Ok(account_id),
+    }
 }

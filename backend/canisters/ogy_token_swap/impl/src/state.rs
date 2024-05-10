@@ -9,7 +9,8 @@ use utils::{
     memory::MemorySize,
 };
 
-use crate::{ consts::ORIGYN_ADMIN_PRINCIPAL, model::token_swap::TokenSwap };
+use crate::consts::ORIGYN_ADMIN_PRINCIPAL;
+use ogy_token_swap_api::types::token_swap::TokenSwap;
 
 canister_state!(RuntimeState);
 
