@@ -18,6 +18,7 @@ EOF
 
 BASE_CANISTER_PATH="backend/canisters"
 
+
 if [[ $# -gt 0 ]]; then
   while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
     case $1 in
@@ -26,6 +27,7 @@ if [[ $# -gt 0 ]]; then
         exit
         ;;
       -w | --wasmonly )
+        echo "Building wasm only without compressing."
         WASMONLY=1
         ;;
       --checksum )
@@ -42,6 +44,8 @@ else
   echo "Error: missing <CANISTER> argument"
   exit 1
 fi
+
+echo "Building canister $1"
 
 CHECKSUM_PATH=$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.checksum
 
