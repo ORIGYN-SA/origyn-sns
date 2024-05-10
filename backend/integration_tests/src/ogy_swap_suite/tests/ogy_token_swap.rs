@@ -91,7 +91,10 @@ fn valid_swap() {
         ogy_token_swap_canister_id,
         block_index_deposit
     );
-    assert_eq!(result, SwapTokensResponse::InternalError("Swap already completed.".to_string()));
+    assert_eq!(
+        result,
+        SwapTokensResponse::InternalError("Swap already completed on block 1.".to_string())
+    );
     // balance shouldn't change
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 }
@@ -200,7 +203,7 @@ fn invalid_deposit_account() {
             ogy_token_swap_canister_id,
             block_index_deposit
         ).unwrap().status,
-        SwapStatus::Complete
+        SwapStatus::Complete(Nat::from(1usize))
     )
 }
 
@@ -266,7 +269,7 @@ fn test_anonymous_request() {
             ogy_token_swap_canister_id,
             block_index_deposit
         ).unwrap().status,
-        SwapStatus::Complete
+        SwapStatus::Complete(Nat::from(1usize))
     );
 }
 
