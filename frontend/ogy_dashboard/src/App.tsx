@@ -12,6 +12,7 @@ import Dashboard from "@pages/dashboard/Dashboard";
 import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
 import { Governance } from "@pages/governance/Governance";
+import { Neurons } from "@pages/neurons/Neurons";
 import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
@@ -43,6 +44,20 @@ const router = createBrowserRouter([
             //     "@pages/governance/Governance"
             //   );
             //   return { loader: GovernanceLoader, Component: Governance };
+            // },
+          },
+          {
+            path: "neurons",
+            loader: Neurons.loader,
+            element: <Neurons />,
+            // async lazy() {
+            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
+            //     "@pages/governance/components/neurons/details/Details"
+            //   );
+            //   return {
+            //     loader: NeuronsDetailsLoader,
+            //     Component: NeuronsDetails,
+            //   };
             // },
           },
           {

@@ -85,7 +85,7 @@ const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
 
   const handleClickView = (cell) => {
     navigate({
-      pathname: "neurons/details",
+      pathname: "/governance/neurons/details",
       search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
     });
   };

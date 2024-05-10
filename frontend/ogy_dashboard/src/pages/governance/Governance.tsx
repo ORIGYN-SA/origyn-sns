@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await } from "react-router-dom";
+import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
@@ -59,6 +59,7 @@ const loader = async () => {
 
 export const Governance = () => {
   const data = useLoaderData();
+  const navigate = useNavigate();
 
   const governanceFeatures = useMemo(
     () => [
@@ -89,6 +90,13 @@ export const Governance = () => {
   //   id: "index",
   //   desc: true,
   // });
+
+  const handleShowAllProposals = () => {
+    navigate("/proposals");
+  };
+  const handleShowAllNeurons = () => {
+    navigate("/governance/neurons");
+  };
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -161,11 +169,18 @@ export const Governance = () => {
         </Await>
       </Suspense>
       <div className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">Proposals</h2>
+        <div className="flex items-center mb-8 gap-8">
+          <h2 className="text-3xl font-bold">Proposals</h2>
+          <Button onClick={handleShowAllProposals}>Show all</Button>
+        </div>
         <ProposalsList pagination={pagination} />
       </div>
       <div>
-        <h2 className="text-3xl font-bold mb-8">Neurons</h2>
+        <div className="flex items-center mb-8 gap-8">
+          <h2 className="text-3xl font-bold">Neurons</h2>
+          <Button onClick={handleShowAllNeurons}>Show all</Button>
+        </div>
+
         <NeuronsList pagination={pagination} />
       </div>
     </div>
