@@ -96,9 +96,9 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
             // 1. If it is there, it is directly analysed
             // 2. If it is too old, it will be searched for in the archive canister
             // Otherwise it is marked as not found.
-            if block_data.blocks.len() > 0 {
+            if !block_data.blocks.is_empty() {
                 verify_block_data(&block_data.blocks[0], block_index, principal)
-            } else if block_data.archived_blocks.len() > 0 {
+            } else if !block_data.archived_blocks.is_empty() {
                 process_archive_block(&block_data.archived_blocks[0], block_index, principal).await
             } else {
                 mutate_state(|s| {
@@ -202,7 +202,7 @@ pub fn verify_block_data(
                     block_index,
                     SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::InvalidOperation))
                 );
-                Err(format!("Operation in block is not a valid transfer."))
+                Err("Operation in block is not a valid transfer.".to_string())
             }),
     }
 }
@@ -219,7 +219,7 @@ async fn process_archive_block(
         }).await
     {
         Ok(Ok(block_range)) => {
-            if block_range.blocks.len() > 0 {
+            if !block_range.blocks.is_empty() {
                 verify_block_data(&block_range.blocks[0], block_index, principal)
             } else {
                 mutate_state(|s| {

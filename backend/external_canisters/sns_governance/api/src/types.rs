@@ -25,6 +25,8 @@ pub struct NeuronPermission {
     Ord,
     Debug
 )]
+
+#[derive(Default)]
 pub struct NeuronId {
     id: Vec<u8>,
 }
@@ -47,12 +49,6 @@ impl Storable for NeuronId {
 impl Display for NeuronId {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         write!(f, "{}", hex::encode(&self.id))
-    }
-}
-
-impl Default for NeuronId {
-    fn default() -> Self {
-        Self { id: Vec::new() }
     }
 }
 
@@ -90,7 +86,7 @@ impl<'a> From<NeuronId> for [u8; 32] {
 
 impl From<[u8; 32]> for NeuronId {
     fn from(value: [u8; 32]) -> Self {
-        return Self { id: value.to_vec() };
+        Self { id: value.to_vec() }
     }
 }
 

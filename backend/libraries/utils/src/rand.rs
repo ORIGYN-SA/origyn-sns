@@ -1,7 +1,7 @@
 use ic_cdk::api::management_canister::main::raw_rand;
 
 pub async fn generate_rand_nonce() -> Result<u64, String> {
-    generate_rand_byte_array().await.map(|b| u64::from_be_bytes(b))
+    generate_rand_byte_array().await.map(u64::from_be_bytes)
 }
 
 pub async fn generate_rand_byte_array() -> Result<[u8; 8], String> {

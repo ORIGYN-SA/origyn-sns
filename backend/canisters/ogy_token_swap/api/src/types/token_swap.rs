@@ -98,9 +98,7 @@ impl TokenSwap {
                                         // If this block doesn't contain a valid transfer operation, it never will.
                                         // So there is no reason to retry checking this block.
                                         Err(
-                                            format!(
-                                                "Block is not a valid swap block. The operation is not a transfer operation."
-                                            )
+                                            "Block is not a valid swap block. The operation is not a transfer operation.".to_string()
                                         )
                                     }
                                     BlockFailReason::AmountTooSmall => {
@@ -140,53 +138,41 @@ impl TokenSwap {
     }
 
     pub fn update_status(&mut self, block_index: BlockIndex, status: SwapStatus) {
-        match self.swap.get_mut(&block_index) {
-            Some(entry) => {
-                entry.status = status;
-            }
-            None => (), // this is not possible because it was initialised before
-        };
+        if let Some(entry) = self.swap.get_mut(&block_index) {
+            entry.status = status;
+        }; // other case is not possible because it was initialised before
     }
 
     pub fn set_amount(&mut self, block_index: BlockIndex, amount: Tokens) {
-        match self.swap.get_mut(&block_index) {
-            Some(entry) => {
-                entry.amount = amount;
-            }
-            None => (), // this is not possible because it was initialised before
-        }
+        if let Some(entry) = self.swap.get_mut(&block_index) {
+            entry.amount = amount;
+        } // other case is not possible because it was initialised before
     }
     pub fn get_amount(&self, block_index: BlockIndex) -> Tokens {
         match self.swap.get(&block_index) {
-            Some(swap_info) => swap_info.amount.clone(),
+            Some(swap_info) => swap_info.amount,
             None => Tokens::from_e8s(0), // this is not possible because it was initialised before
         }
     }
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
         match self.swap.get(&block_index) {
-            Some(swap_info) => Ok(swap_info.principal.clone()),
+            Some(swap_info) => Ok(swap_info.principal),
             None => Err(format!("No principal entry not found for block index {block_index}.")), // this is not possible because it was initialised before but validating here in any case
         }
     }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
-        match self.swap.get_mut(&block_index) {
-            Some(entry) => {
-                entry.burn_block_index = Some(burn_block_index);
-            }
-            None => (), // this is not possible because it was initialised before
-        }
+        if let Some(entry) = self.swap.get_mut(&block_index) {
+            entry.burn_block_index = Some(burn_block_index);
+        } // other case is not possible because it was initialised before
     }
     pub fn set_swap_block_index(
         &mut self,
         block_index: BlockIndex,
         swap_block_index: BlockIndexIcrc
     ) {
-        match self.swap.get_mut(&block_index) {
-            Some(entry) => {
-                entry.token_swap_block_index = Some(swap_block_index);
-            }
-            None => (), // this is not possible because it was initialised before
-        }
+        if let Some(entry) = self.swap.get_mut(&block_index) {
+            entry.token_swap_block_index = Some(swap_block_index);
+        } // other case is not possible because it was initialised before
     }
 }
 
