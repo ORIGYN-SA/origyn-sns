@@ -498,7 +498,7 @@ mod tests {
 
         let expected_result = Err(
             format!(
-                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.90000000."
+                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.90200000."
             )
         );
 

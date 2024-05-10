@@ -8,6 +8,16 @@ lazy_static! {
     pub static ref OGY_LEGACY_LEDGER: CanisterWasm = get_canister_wasm("ogy_legacy_ledger");
     pub static ref IC_ICRC1_LEDGER: CanisterWasm = get_canister_wasm("icrc1_ledger");
     pub static ref OGY_TOKEN_SWAP: CanisterWasm = get_canister_wasm("ogy_token_swap");
+    pub static ref SNS_GOVERNANCE: CanisterWasm = get_canister_wasm("sns_governance");
+    pub static ref REWARDS: CanisterWasm = get_rewards_canister_wasm();
+}
+
+fn get_rewards_canister_wasm() -> Vec<u8> {
+    read_file_from_relative_bin(
+        &format!(
+            "../canisters/sns_rewards/target/wasm32-unknown-unknown/release/sns_rewards_canister.wasm.gz"
+        )
+    ).unwrap()
 }
 
 fn get_canister_wasm(canister_name: &str) -> CanisterWasm {
@@ -32,4 +42,14 @@ pub fn local_bin() -> PathBuf {
     );
     file_path.push("wasms");
     file_path
+}
+fn read_file_from_relative_bin(file_path: &str) -> Result<Vec<u8>, std::io::Error> {
+    // Open the wasm file
+    let mut file = File::open(file_path)?;
+
+    // Read the contents of the file into a vector
+    let mut buffer = Vec::new();
+    file.read_to_end(&mut buffer)?;
+
+    Ok(buffer)
 }

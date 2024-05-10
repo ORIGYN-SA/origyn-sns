@@ -1,18 +1,25 @@
-use std::borrow::Cow;
+use std::{ borrow::Cow, fmt::Display };
 
-use candid::{CandidType, Decode, Encode, Principal};
-use ic_stable_structures::{storable::Bound, Storable};
-use serde::{Deserialize, Serialize};
+use candid::{ CandidType, Decode, Encode, Principal };
+use ic_stable_structures::{ storable::Bound, Storable };
+use serde::{ Deserialize, Serialize };
 
-#[derive(
-    Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, PartialOrd, Ord,
-)]
+#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct TokenSymbol(String);
 
 #[derive(Debug)]
 pub enum TokenSymbolParseError {
     InvalidTokenSymbol,
 }
+
+impl Display for TokenSymbolParseError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InvalidTokenSymbol => write!(f, "InvalidTokenSymbol"),
+        }
+    }
+}
+
 const MAX_VALUE_SIZE: u32 = 12;
 impl TokenSymbol {
     pub fn parse(symbol: &str) -> Result<TokenSymbol, TokenSymbolParseError> {
@@ -40,7 +47,7 @@ impl Storable for TokenSymbol {
     };
 }
 
-#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash)]
+#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, Copy)]
 pub struct TokenInfo {
     pub ledger_id: Principal,
     pub fee: u64,

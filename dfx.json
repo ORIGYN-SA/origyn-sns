@@ -42,6 +42,17 @@
       "type": "custom",
       "wasm": ""
     },
+    "sns_rewards": {
+      "build": ["./scripts/build-canister.sh sns_rewards"],
+      "candid": "backend/canisters/sns_rewards/api/can.did",
+      "declarations": {
+        "bindings": ["js", "did"],
+        "env_override": null,
+        "output": "backend/canisters/sns_rewards/api/declarations"
+      },
+      "type": "custom",
+      "wasm": "backend/canisters/sns_rewards/target/wasm32-unknown-unknown/release/sns_rewards_canister.wasm.gz"
+    },
     "sns_root": {
       "build": "",
       "candid": "candid/sns_root.did",

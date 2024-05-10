@@ -30,10 +30,10 @@ pub mod icrc1_transfer {
     pub type Response = Result<Nat, TransferError>;
 }
 
-pub mod happy_path {
+pub mod client {
     use super::*;
     use candid::Principal;
-    use icrc_ledger_types::icrc1::transfer::NumTokens;
+    use icrc_ledger_types::icrc1::{ account::Subaccount, transfer::NumTokens };
     use pocket_ic::PocketIc;
     use types::CanisterId;
 
@@ -41,6 +41,7 @@ pub mod happy_path {
         pic: &mut PocketIc,
         sender: Principal,
         ledger_canister_id: CanisterId,
+        from: Option<Subaccount>,
         recipient: impl Into<Account>,
         amount: NumTokens
     ) -> icrc1_transfer::Response {
