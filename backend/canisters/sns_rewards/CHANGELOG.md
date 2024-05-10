@@ -7,10 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
-### [1.0.0] - 2024-04-18
+### [1.0.0] - 2024-05-10
 
 #### Description
-This marks the initial release of SNS Rewards (sns_rewards canister). SNS Rewards calculates the contribution of each OGY neuron as a percentage of the total over a specified period. Subsequently, it transfers the DAO's treasury neuron rewards based on these percentages.
+This marks the initial release of SNS Rewards (sns_rewards canister). SNS Rewards calculates the contribution of each OGY neuron as a percentage of the total over a specified period. Subsequently, it transfers the DAO's treasury rewards based on these percentages.
 
 #### Added
 - **Daily OGY Neuron Synchronization** : Keeps track of each OGY neuron's maturity gains on a daily basis.
