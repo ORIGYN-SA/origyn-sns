@@ -158,12 +158,20 @@ fn update_principal_neuron_mapping(
                     stats.total_rewards += neuron_staked_maturity + neuron.maturity_e8s_equivalent;
                 })
                 .or_insert_with(|| GovernanceStats {
-                    total_staked: neuron.cached_neuron_stake_e8s +
-                    neuron_staked_maturity +
-                    neuron.maturity_e8s_equivalent,
-                    total_locked: neuron.cached_neuron_stake_e8s + neuron_staked_maturity,
-                    total_unlocked: neuron.maturity_e8s_equivalent,
-                    total_rewards: neuron_staked_maturity + neuron.maturity_e8s_equivalent,
+                    total_staked: (
+                        neuron.cached_neuron_stake_e8s +
+                        neuron_staked_maturity +
+                        neuron.maturity_e8s_equivalent
+                    )
+                        .try_into()
+                        .unwrap(),
+                    total_locked: (neuron.cached_neuron_stake_e8s + neuron_staked_maturity)
+                        .try_into()
+                        .unwrap(),
+                    total_unlocked: neuron.maturity_e8s_equivalent.try_into().unwrap(),
+                    total_rewards: (neuron_staked_maturity + neuron.maturity_e8s_equivalent)
+                        .try_into()
+                        .unwrap(),
                 });
             all_gov_stats.total_staked +=
                 neuron.cached_neuron_stake_e8s +

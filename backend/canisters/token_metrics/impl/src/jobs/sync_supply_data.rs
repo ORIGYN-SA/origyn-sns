@@ -2,7 +2,7 @@ use canister_time::run_now_then_interval;
 use futures::future::join_all;
 use icrc_ledger_types::icrc1::account::Account;
 use std::time::Duration;
-use tracing::{ debug, error, info };
+use tracing::{ debug, error };
 use types::Milliseconds;
 use utils::consts::TEAM_PRINCIPALS;
 
@@ -23,17 +23,15 @@ pub async fn sync_supply_data() {
     let ledger_canister_id = read_state(|state| state.data.sns_ledger_canister);
 
     match icrc_ledger_canister_c2c_client::icrc1_total_supply(ledger_canister_id).await {
-        Ok(response) => {
-            let total_supply = response.0.try_into().unwrap();
-            let total_locked = read_state(|state| state.data.all_gov_stats.total_locked);
+        Ok(total_supply) => {
+            let total_locked = read_state(|state| state.data.all_gov_stats.total_locked.clone());
             let total_foundation_balance = get_total_ledger_balance_of_accounts(
                 TEAM_PRINCIPALS.to_vec()
             ).await;
-            info!(total_foundation_balance, "Total team balance");
-            let circulating_supply = total_supply - total_locked - total_foundation_balance;
+            let circulating_supply = total_supply.clone() - total_locked - total_foundation_balance;
 
             mutate_state(|state| {
-                state.data.supply_data.total_supply = total_supply;
+                state.data.supply_data.total_supply = total_supply.clone();
                 state.data.supply_data.circulating_supply = circulating_supply;
             });
         }

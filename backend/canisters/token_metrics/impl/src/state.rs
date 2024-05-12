@@ -1,5 +1,6 @@
-use candid::{ CandidType, Principal };
+use candid::{ CandidType, Nat, Principal };
 use canister_state_macros::canister_state;
+use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
 use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
@@ -96,18 +97,18 @@ pub struct Data {
     /// Token supply data, such as total supply and circulating supply
     pub supply_data: TokenSupplyData,
     /// The list of all principals from ledger and governance, including their stats
-    pub wallets_list: Vec<(String, WalletOverview)>,
+    pub wallets_list: Vec<(Account, WalletOverview)>,
     /// Same thing as above, but we now merge all subaccounts stats of a principal
     /// under the same principal item in the Map
-    pub merged_wallets_list: Vec<(String, WalletOverview)>,
+    pub merged_wallets_list: Vec<(Account, WalletOverview)>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct GovernanceStats {
-    pub total_staked: u64,
-    pub total_locked: u64,
-    pub total_unlocked: u64,
-    pub total_rewards: u64,
+    pub total_staked: Nat,
+    pub total_locked: Nat,
+    pub total_unlocked: Nat,
+    pub total_rewards: Nat,
 }
 impl Add for GovernanceStats {
     type Output = GovernanceStats;
@@ -122,17 +123,17 @@ impl Add for GovernanceStats {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct PrincipalBalance {
     pub governance: GovernanceStats,
     pub ledger: u64,
 }
-#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct TokenSupplyData {
-    pub total_supply: u64,
-    pub circulating_supply: u64,
+    pub total_supply: Nat,
+    pub circulating_supply: Nat,
 }
-#[derive(Serialize, Deserialize, Clone, Copy, Default, CandidType)]
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct WalletOverview {
     pub ledger: LedgerOverview,
     pub governance: GovernanceStats,
@@ -143,13 +144,19 @@ impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
         ogy_legacy_ledger: CanisterId,
+        sns_governance_canister_id: CanisterId,
+        super_stats_canister_id: CanisterId,
         ogy_legacy_minting_account_principal: Principal
     ) -> Self {
         Self {
             // TODO: Replace the canister id with the onew from args
+            // super_stats_canister: super_stats_canister_id,
+            // sns_governance_canister: sns_governance_canister_id,
+
             sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
             sns_ledger_canister: SNS_LEDGER_CANISTER_ID,
             super_stats_canister: SUPER_STATS_CANISTER_ID,
+
             authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),

@@ -1,10 +1,12 @@
 use canister_time::run_now_then_interval;
+use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_c2c_client::{
     helpers::account_tree::Overview,
     queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
     queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
 use std::collections::BTreeMap as NormalBTreeMap;
+use std::str::FromStr;
 use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
@@ -30,9 +32,9 @@ pub async fn update_balance_list() {
         .chain(account_holders_map.into_iter())
         .collect();
 
-    let mut temp_wallets_list: NormalBTreeMap<String, WalletOverview> = NormalBTreeMap::new();
+    let mut temp_wallets_list: NormalBTreeMap<Account, WalletOverview> = NormalBTreeMap::new();
     let mut temp_merged_wallets_list: NormalBTreeMap<
-        String,
+        Account,
         WalletOverview
     > = NormalBTreeMap::new();
 
@@ -42,9 +44,18 @@ pub async fn update_balance_list() {
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
-        let (principal, _) = split_into_principal_and_account(wallet.clone());
-        temp_wallets_list.insert(wallet, new_stats);
-        check_and_update_list(&mut temp_merged_wallets_list, principal, new_stats.clone());
+        let account = Account::from_str(&wallet).unwrap();
+        temp_wallets_list.insert(account, new_stats.clone());
+
+        let account_merged_to_principal = Account {
+            owner: account.owner,
+            subaccount: None,
+        };
+        check_and_update_list(
+            &mut temp_merged_wallets_list,
+            account_merged_to_principal,
+            new_stats.clone()
+        );
     }
 
     // Going through all governance principals and apending their stats
@@ -52,13 +63,15 @@ pub async fn update_balance_list() {
     let governance_principals = read_state(|state| state.data.principal_gov_stats.clone());
 
     for (principal, gov_stats) in governance_principals {
+        let total_staked = gov_stats.total_staked.0.clone().try_into().unwrap();
         let new_stats = WalletOverview {
             ledger: LedgerOverview::default(),
             governance: gov_stats,
-            total: gov_stats.total_staked,
+            total: total_staked,
         };
-        check_and_update_list(&mut temp_merged_wallets_list, principal.to_string(), new_stats);
-        check_and_update_list(&mut temp_wallets_list, principal.to_string(), new_stats);
+        let account = Account::from(principal);
+        check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
+        check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
     }
 
     mutate_state(|state| {
@@ -137,8 +150,8 @@ async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overvi
 }
 
 fn check_and_update_list(
-    list: &mut NormalBTreeMap<String, WalletOverview>,
-    key: String,
+    list: &mut NormalBTreeMap<Account, WalletOverview>,
+    key: Account,
     new_value: WalletOverview
 ) {
     match list.get(&key) {
@@ -168,9 +181,9 @@ fn split_into_principal_and_account(input: String) -> (String, Option<String>) {
 }
 
 fn sort_map_descending(
-    map: &NormalBTreeMap<String, WalletOverview>
-) -> Vec<(String, WalletOverview)> {
-    let mut vec: Vec<(String, WalletOverview)> = map
+    map: &NormalBTreeMap<Account, WalletOverview>
+) -> Vec<(Account, WalletOverview)> {
+    let mut vec: Vec<(Account, WalletOverview)> = map
         .iter()
         .map(|(k, v)| (k.clone(), v.clone()))
         .collect();

@@ -12,6 +12,8 @@ use super::init_canister;
 #[derive(Deserialize, CandidType)]
 pub struct InitArgs {
     pub test_mode: bool,
+    pub sns_governance_canister_id: CanisterId,
+    pub super_stats_canister_id: CanisterId,
     pub ogy_legacy_ledger_canister_id: CanisterId,
     pub ogy_new_ledger_canister_id: CanisterId,
     pub ogy_legacy_minting_account_principal: Principal,
@@ -25,7 +27,9 @@ fn init(args: InitArgs) {
     let data = Data::new(
         args.ogy_new_ledger_canister_id,
         args.ogy_legacy_ledger_canister_id,
-        args.ogy_legacy_minting_account_principal
+        args.ogy_legacy_minting_account_principal,
+        args.super_stats_canister_id,
+        args.sns_governance_canister_id
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);
