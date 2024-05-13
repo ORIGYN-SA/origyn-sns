@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo } from "react";
+import { Dispatch, ReactNode, useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
   ColumnDef,
   PaginationState,
-  OnChangeFn,
   SortingState,
 } from "@tanstack/react-table";
 import { EyeIcon } from "@heroicons/react/24/outline";
@@ -23,9 +22,9 @@ const NeuronsList = ({
   setSorting,
 }: {
   pagination?: PaginationState;
-  setPagination?: OnChangeFn<PaginationState>;
+  setPagination?: Dispatch<PaginationState>;
   sorting?: SortingState;
-  setSorting?: OnChangeFn<SortingState>;
+  setSorting?: Dispatch<SortingState>;
 }) => {
   const navigate = useNavigate();
 
@@ -55,10 +54,10 @@ const NeuronsList = ({
                   data-tooltip-content={getValue()}
                   className="mr-2 truncate"
                 >
-                  {getValue()}
+                  {getValue() as ReactNode}
                 </div>
                 <Tooltip id="tooltip_from_id" />
-                <CopyToClipboard value={getValue()} />
+                <CopyToClipboard value={getValue() as string} />
               </div>
             </div>
           ) : (
@@ -73,19 +72,19 @@ const NeuronsList = ({
       {
         accessorKey: "state",
         id: "state",
-        cell: (info) => (
+        cell: ({ getValue }) => (
           <div>
             <Badge
               className={`bg-${
-                info.getValue() === "Dissolving" ? "jade" : "sky"
+                getValue() === "Dissolving" ? "jade" : "sky"
               }/20 px-2`}
             >
               <div
                 className={`text-${
-                  info.getValue() === "Dissolving" ? "jade" : "sky"
+                  getValue() === "Dissolving" ? "jade" : "sky"
                 } text-xs font-semibold shrink-0`}
               >
-                {info.getValue()}
+                {getValue() as ReactNode}
               </div>
             </Badge>
           </div>
@@ -145,8 +144,8 @@ const NeuronsList = ({
     isError: isErrorGetNeuronsList,
     error: errorGetNeuronsList,
   } = useNeurons({
-    limit: pagination.pageSize,
-    offset: pagination.pageSize * pagination.pageIndex,
+    limit: pagination?.pageSize as number,
+    offset: (pagination.pageSize * pagination.pageIndex) as number,
   });
 
   const handleClickView = (cell) => {

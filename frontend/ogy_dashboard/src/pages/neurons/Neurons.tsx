@@ -1,52 +1,14 @@
-// import { useMemo, Suspense } from "react";
-// import { useLoaderData, defer, Await } from "react-router-dom";
-// import { Card, Button } from "@components/ui";
-// import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
-// import TokensInGovernanceTotal, {
-//   TokensInGovernanceProps,
-// } from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
-// import TokensInGovernanceKpi, {
-//   TokensInGovernanceKpiProps,
-// } from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
-import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
-import { usePagination } from "@helpers/table/useTable";
+import { Dispatch } from "react";
 import { PaginationState } from "@tanstack/react-table";
-
-const loader = async () => {
-  return null;
-};
+import { usePagination } from "@helpers/table/useTable";
+import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 
 export const Neurons = () => {
-  // const data = useLoaderData();
   const [pagination, setPagination] = usePagination({
     pageSize: 10,
     pageIndex: 0,
   });
   // const [sorting, setSorting] = useSorting({});
-
-  //   const governanceFeatures = useMemo(
-  //     () => [
-  //       {
-  //         title: "Stake & Vote",
-  //         description:
-  //           "Influence the ORIGYN Network by staking OGY & voting on proposals.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Earn Rewards",
-  //         description:
-  //           "Participate in the decision-making process to earn rewards.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Govern Collectively",
-  //         description:
-  //           "Engage & influence the network as a collaborative ecosystem.",
-  //         icon: "",
-  //       },
-  //     ],
-  //     []
-  //   );
 
   return (
     <div className="container mx-auto py-16 px-4">
@@ -63,7 +25,7 @@ export const Neurons = () => {
       <div className="mt-8 mb-16">
         <NeuronsList
           pagination={pagination as PaginationState}
-          setPagination={setPagination}
+          setPagination={setPagination as Dispatch<PaginationState>}
           // sorting={sorting}
           // setSorting={{ setSorting }}
         />
@@ -71,5 +33,3 @@ export const Neurons = () => {
     </div>
   );
 };
-
-Neurons.loader = loader;
