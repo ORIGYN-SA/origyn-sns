@@ -1,7 +1,7 @@
 import useConnect from "@hooks/useConnect";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
-import useNeurons from "@hooks/useNeurons";
+import useNeurons from "@hooks/useNeuronsOwner";
 
 const StakedOGY = () => {
   const { principal: owner } = useConnect();

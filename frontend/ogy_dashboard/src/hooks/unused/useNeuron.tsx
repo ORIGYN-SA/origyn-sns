@@ -2,11 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
-import { getOneNeuronAll } from "@services/governance/getOneNeuronAll";
+import { fetchBalanceOGY } from "@services/accounts/fetchBalanceOGY";
+import { fetchPriceOGY } from "@services/accounts/fetchPriceOGY";
+import { getNeuron } from "@services/governance/getNeuron";
+import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 
 const useNeuron = ({ neuronId }: { neuronId: string }) => {
   const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
+  const [ledgerActor] = useCanister("ledger");
 
   const {
     data: nervousSystemParameters,
@@ -22,25 +26,66 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
 
   const {
     data: neuron,
-    isSuccess: isSuccessGetOneNeuron,
-    isError: isErrorGetOneNeuron,
-    isLoading: isLoadingGetOneNeuron,
-    error: errorGetOneNeuron,
+    isSuccess: isSuccessGetNeuron,
+    isError: isErrorGetNeuron,
+    isLoading: isLoadingGetNeuron,
+    error: errorGetNeuron,
   } = useQuery({
-    queryKey: ["oneNeuronAll", neuronId, isConnected],
+    queryKey: ["getNeuron", isConnected],
     queryFn: () =>
-      getOneNeuronAll({
+      getNeuron({
+        governanceActor,
         neuronId,
         nervousSystemParameters,
       }),
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
   });
 
-  const isSuccess =
-    isSuccessGetNervousSystemParameters && isSuccessGetOneNeuron;
+  const {
+    // data: priceOGY,
+    isSuccess: isSuccessFetchPriceOGY,
+    isError: isErrorFetchPriceOGY,
+    isLoading: isLoadingFetchPriceOGY,
+    error: errorFetchPriceOGY,
+  } = useQuery({
+    queryKey: ["fetchPriceOGY", isConnected],
+    queryFn: () => fetchPriceOGY(),
+    enabled:
+      !!isConnected &&
+      !!isSuccessGetNervousSystemParameters &&
+      !!isSuccessGetNeuron,
+  });
 
-  const id = neuron?.id;
+  const {
+    data: claimBalance,
+    isSuccess: isSuccessClaimBalance,
+    isError: isErrorClaimBalance,
+    isLoading: isLoadingClaimBalance,
+    error: errorClaimBalance,
+  } = useQuery({
+    queryKey: ["getNeuronClaimBalance", ledgerActor, isConnected, neuronId],
+    queryFn: () =>
+      fetchBalanceOGY({
+        actor: ledgerActor,
+        owner: SNS_REWARDS_CANISTER_ID,
+        subaccount: [...Uint8Array.from(Buffer.from(neuronId, "hex"))],
+      }),
+    enabled:
+      !!isConnected &&
+      !!isSuccessGetNervousSystemParameters &&
+      !!isSuccessGetNeuron &&
+      !!isSuccessFetchPriceOGY,
+  });
+
+  const isSuccess =
+    isSuccessGetNervousSystemParameters &&
+    isSuccessGetNeuron &&
+    isSuccessFetchPriceOGY &&
+    isSuccessClaimBalance;
+
+  const id2Hex = neuron?.id2Hex;
   const stakedAmount = neuron?.stakedAmountToString;
+  const claimAmount = claimBalance?.balanceOGY;
   const state = neuron?.state;
   const votingPower = neuron?.votingPowerToString;
   const dissolveDelay = neuron?.dissolveDelay;
@@ -54,8 +99,9 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
 
   return {
     data: {
-      id,
+      id: id2Hex,
       stakedAmount,
+      claimAmount,
       state,
       votingPower,
       dissolveDelay,
@@ -66,7 +112,7 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
       ageBonus,
       maxAgeBonusPercentage,
       dissolveDelayBonus,
-      details: [
+      pageDetails: [
         { name: "State", value: state },
         { name: "Staked Maturity", value: stakedMaturity },
         { name: "Staked OGY", value: stakedAmount },
@@ -82,10 +128,22 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
         { name: "Voting Power", value: votingPower },
       ],
     },
-    isLoading: isLoadingGetOneNeuron || isLoadingGetNervousSystemParameters,
+    isLoading:
+      isLoadingGetNeuron ||
+      isLoadingGetNervousSystemParameters ||
+      isLoadingFetchPriceOGY ||
+      isLoadingClaimBalance,
     isSuccess,
-    isError: isErrorGetOneNeuron || isErrorGetNervousSystemParameters,
-    error: errorGetOneNeuron || errorGetNervousSystemParameters,
+    isError:
+      isErrorGetNeuron ||
+      isErrorGetNervousSystemParameters ||
+      isErrorFetchPriceOGY ||
+      isErrorClaimBalance,
+    error:
+      errorGetNeuron ||
+      errorGetNervousSystemParameters ||
+      errorFetchPriceOGY ||
+      errorClaimBalance,
   };
 };
 

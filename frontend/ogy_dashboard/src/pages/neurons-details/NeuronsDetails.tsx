@@ -1,13 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-// import { useMemo, Suspense } from "react";
-// import { useEffect } from "react";
-import {
-  // useLoaderData,
-  // defer,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card, LoaderSpin, Badge } from "@components/ui";
 import useNeuron from "@hooks/useNeuron";
@@ -23,7 +14,7 @@ export const NeuronsDetails = () => {
     isError: isErrorGetNeuron,
     error: errorGetNeuron,
   } = useNeuron({
-    neuronId: searchParams.get("id"),
+    neuronId: searchParams.get("id") as string,
   });
 
   const handleOnClickBack = () => {
@@ -47,7 +38,7 @@ export const NeuronsDetails = () => {
       </div>
       {isSuccessGetNeuron && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-          {neuron.pageDetails.map(({ name, value }) => (
+          {neuron.details.map(({ name, value }) => (
             <Card className="bg-surface border border-border pb-8" key={name}>
               <div className="flex items-center text-lg">
                 <span className="text-content/60">{name}</span>

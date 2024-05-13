@@ -5,11 +5,19 @@ import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
 import { fetchBalanceOGY } from "@services/accounts/fetchBalanceOGY";
 import { fetchPriceOGY } from "@services/accounts/fetchPriceOGY";
-import { listNeurons } from "@services/governance/listNeuronsAPI";
+import { getListNeuronsOwner } from "@services/governance/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
 
-const useNeurons = ({ limit }: { limit: number }) => {
+const useNeuronsOwner = ({
+  limit,
+  owner,
+  neuronId,
+}: {
+  limit: number;
+  owner?: string;
+  neuronId?: string;
+}) => {
   const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
@@ -33,16 +41,17 @@ const useNeurons = ({ limit }: { limit: number }) => {
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeurons", limit, isConnected],
+    queryKey: ["listNeuronsOwner", limit, isConnected],
     queryFn: () =>
-      listNeurons({
+      getListNeuronsOwner({
+        governanceActor,
+        owner,
         limit,
-        offset: 0,
+        neuronId,
         nervousSystemParameters,
       }),
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
   });
-  console.log(errorListNeurons);
 
   const {
     data: priceOGY,
@@ -73,7 +82,7 @@ const useNeurons = ({ limit }: { limit: number }) => {
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: [...Uint8Array.from(Buffer.from(neuronId, "hex"))],
+              subaccount: neuronId.id,
             }),
           enabled:
             !!isConnected &&
@@ -142,17 +151,39 @@ const useNeurons = ({ limit }: { limit: number }) => {
   const rows = isSuccess
     ? neurons?.map((neuron, index) => {
         const claimAmount = neuronClaimBalance[index]?.data?.balanceOGY;
+        const id2Hex = neuron?.id2Hex;
+        const stakedAmount = neuron?.stakedAmountToString;
+        const state = neuron?.state;
+        const votingPower = neuron?.votingPowerToString;
+        const dissolveDelay = neuron?.dissolveDelay;
+        const age = neuron?.ageToRelativeCalendar;
+        const stakedOGY = neuron?.stakedAmountToString;
+        const stakedMaturity = neuron?.stakedMaturityToString;
+        const createdAt = neuron?.createdAt;
+        const ageBonus = neuron?.ageBonus;
+        const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
+        const dissolveDelayBonus = neuron?.dissolveDelayBonus;
         return {
-          id: neuron.id2Hex,
-          stakedAmount: neuron.stakedAmountToString,
+          id: id2Hex,
+          stakedAmount,
           claimAmount,
-          state: neuron.state,
-          votingPower: neuron.votingPowerToString,
-          dissolveDelay: neuron.dissolveDelay,
-          age: neuron.ageToRelativeCalendar,
-          stakedOGY: neuron.stakedAmountToString,
-          maturity: neuron.stakedMaturityToString,
-          details: [
+          state,
+          votingPower,
+          dissolveDelay,
+          age,
+          stakedOGY,
+          maturity: stakedMaturity,
+          tableDetails: [
+            { id: "", label: "Date Created", value: createdAt },
+            {
+              id: "",
+              label: "Dissolve Delay Bonus",
+              value: dissolveDelayBonus,
+            },
+            { id: "", label: "Age Bonus", value: ageBonus },
+            { id: "", label: "Total Bonus", value: maxAgeBonusPercentage },
+          ],
+          tableAccountDetails: [
             {
               id: "state",
               label: "State",
@@ -208,4 +239,4 @@ const useNeurons = ({ limit }: { limit: number }) => {
   };
 };
 
-export default useNeurons;
+export default useNeuronsOwner;

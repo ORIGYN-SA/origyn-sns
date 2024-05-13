@@ -97,9 +97,7 @@ export const Governance = () => {
     navigate("/proposals");
   };
   const handleShowAllNeurons = () => {
-    queryClient.invalidateQueries({ queryKey: ["listNeurons"] });
-    // queryClient.invalidateQueries({ queryKey: ["getNervousSystemParameters"] });
-    // queryClient.invalidateQueries({ queryKey: ["getNeuronClaimBalance"] });
+    queryClient.invalidateQueries({ queryKey: ["listNeuronsAll"] });
     navigate("/governance/neurons");
   };
 

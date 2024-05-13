@@ -12,9 +12,8 @@ import {
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
-import useNeurons from "@hooks/useNeurons";
-// import useNeurons from "@hooks/useNeuronsAPI";
-import { INeuronData } from "@services/governance/listNeurons";
+import useNeurons from "@hooks/useNeuronsAll";
+import { INeuronData } from "@services/governance/getListNeuronsAll";
 import NeuronsDetails from "./neuron-details";
 
 const NeuronsList = ({
@@ -140,13 +139,14 @@ const NeuronsList = ({
   );
 
   const {
-    neuronsList,
+    data,
     isSuccess: isSuccessGetNeuronsList,
     isLoading: isLoadingGetNeuronsList,
     isError: isErrorGetNeuronsList,
     error: errorGetNeuronsList,
   } = useNeurons({
     limit: pagination.pageSize,
+    offset: pagination.pageSize * pagination.pageIndex,
   });
 
   const handleClickView = (cell) => {
@@ -158,10 +158,10 @@ const NeuronsList = ({
 
   return (
     <div>
-      {isSuccessGetNeuronsList && neuronsList && (
+      {isSuccessGetNeuronsList && data && (
         <Table
           columns={columns}
-          data={neuronsList}
+          data={data.list}
           pagination={pagination}
           setPagination={setPagination}
           sorting={sorting}

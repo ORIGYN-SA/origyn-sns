@@ -4,7 +4,7 @@ import { Row } from "@tanstack/react-table";
 const NeuronDetails = ({ row }: { row: Row<any> }) => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-4">
-      {row?.original?.tableDetails.map(
+      {row?.original?.details.map(
         ({ label, value }: { label: string; value: string }) => (
           <div
             key={label}

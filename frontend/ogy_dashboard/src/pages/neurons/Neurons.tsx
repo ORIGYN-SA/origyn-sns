@@ -18,7 +18,10 @@ const loader = async () => {
 
 export const Neurons = () => {
   // const data = useLoaderData();
-  const [pagination] = usePagination({ pageSize: 0 });
+  const [pagination, setPagination] = usePagination({
+    pageSize: 10,
+    pageIndex: 0,
+  });
   // const [sorting, setSorting] = useSorting({});
 
   //   const governanceFeatures = useMemo(
@@ -60,7 +63,7 @@ export const Neurons = () => {
       <div className="mt-8 mb-16">
         <NeuronsList
           pagination={pagination as PaginationState}
-          // setPagination={setPagination}
+          setPagination={setPagination}
           // sorting={sorting}
           // setSorting={{ setSorting }}
         />
