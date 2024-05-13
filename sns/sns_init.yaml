@@ -80,7 +80,7 @@ url: https://www.origyn.com/
 # shown only in the NNS proposal.
 NnsProposal:
     # The title of the NNS proposal. Must be a string of 4 to 256 bytes.
-    title: "NNS Proposal to create an SNS named 'ORIGYN'"
+    title: "NNS Proposal to create an SNS named 'ORIGYN DAO'"
 
     # The HTTPS address of additional content required to evaluate the NNS
     # proposal.
@@ -187,7 +187,7 @@ Voting:
     #
     # Users cannot access the SNS tokens used to stake neurons (until the neuron
     # is dissolved). This field is specified as a duration. For example: "6 months".
-    minimum_dissolve_delay: 6 month
+    minimum_dissolve_delay: 12 months
 
     # Configuration of voting power bonuses that are applied to neurons to
     # incentivize alignment with the best interest of the DAO. Note, these
