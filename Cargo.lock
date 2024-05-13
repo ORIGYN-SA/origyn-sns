@@ -2276,6 +2276,7 @@ dependencies = [
  "canister_time",
  "canister_tracing_macros",
  "futures",
+ "hex",
  "http_request",
  "ic-cdk 0.13.1",
  "ic-cdk-macros 0.9.0",

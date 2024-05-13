@@ -1,5 +1,6 @@
+use candid::Principal;
 use canister_time::run_now_then_interval;
-use icrc_ledger_types::icrc1::account::Account;
+use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
 use super_stats_v3_c2c_client::{
     helpers::account_tree::Overview,
     queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
@@ -45,24 +46,54 @@ pub async fn update_balance_list() {
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
-        match Account::from_str(&wallet) {
-            Ok(account) => {
-                temp_wallets_list.insert(account, new_stats.clone());
-
-                let account_merged_to_principal = Account {
-                    owner: account.owner,
+        let (principal, subaccount) = split_into_principal_and_account(wallet.clone());
+        match Principal::from_str(principal.as_str()) {
+            Ok(valid_principal) => {
+                let merged_account_into_principal = Account {
+                    owner: valid_principal,
                     subaccount: None,
                 };
                 check_and_update_list(
                     &mut temp_merged_wallets_list,
-                    account_merged_to_principal,
+                    merged_account_into_principal,
                     new_stats.clone()
                 );
+
+                // If it is a subaccount
+                if let Some(subaccount_value) = subaccount {
+                    match hex::decode(subaccount_value) {
+                        Ok(decoded_subaccount) => {
+                            if decoded_subaccount.len() == 32 {
+                                let mut subaccount_array = [0u8; 32];
+                                subaccount_array.copy_from_slice(&decoded_subaccount);
+
+                                let unmerged_account = Account {
+                                    owner: valid_principal,
+                                    subaccount: Some(subaccount_array),
+                                };
+                                temp_wallets_list.insert(unmerged_account, new_stats.clone());
+                            } else {
+                                let err_message =
+                                    "Invalid length for subaccount. Expected 32 bytes.";
+                                error!(
+                                    err_message,
+                                    "update_balance_list -> subaccount length check"
+                                );
+                            }
+                        }
+                        Err(err) => {
+                            let err_message = format!("{err:?}");
+                            error!(
+                                err_message,
+                                "update_balance_list -> hex::decode(subaccount_value)"
+                            );
+                        }
+                    }
+                }
             }
             Err(err) => {
                 let err_message = format!("{err:?}");
-                error!(err_message, "Couldn't decode wallet");
-                return;
+                error!(err_message, "update_balance_list -> Principal::from_str");
             }
         }
     }
