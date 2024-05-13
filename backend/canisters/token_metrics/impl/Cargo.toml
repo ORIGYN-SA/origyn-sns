@@ -1,12 +1,12 @@
 [package]
-name = "token_metrics_impl"
+name = "token_metrics"
 version = "0.1.0"
 description = "Canister to expose metrics about the token."
 edition = "2021"
 
 [lib]
 path = "src/lib.rs"
-crate-type = ["lib", "cdylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 candid = { workspace = true }

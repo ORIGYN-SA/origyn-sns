@@ -5,9 +5,7 @@ use icrc_ledger_types::icrc1::account::Account;
 use std::time::Duration;
 use tracing::{ debug, error };
 use types::Milliseconds;
-use utils::consts::TEAM_PRINCIPALS;
-
-use crate::state::{ mutate_state, read_state };
+use crate::{ consts::TEAM_PRINCIPALS, state::{ mutate_state, read_state } };
 
 const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 3_600 * 1_000;
 

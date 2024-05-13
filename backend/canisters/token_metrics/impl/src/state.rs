@@ -11,11 +11,7 @@ use token_metrics_api::token_data::{
 };
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
-use utils::{
-    consts::{ SNS_GOVERNANCE_CANISTER_ID, SNS_LEDGER_CANISTER_ID, SUPER_STATS_CANISTER_ID },
-    env::{ CanisterEnv, Environment },
-    memory::MemorySize,
-};
+use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
 canister_state!(RuntimeState);
 
@@ -115,15 +111,10 @@ impl Data {
         super_stats_canister_id: CanisterId
     ) -> Self {
         Self {
-            // TODO: Replace the canister id with the onew from args
-            // super_stats_canister: super_stats_canister_id,
-            // sns_governance_canister: sns_governance_canister_id,
-
-            sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
-            sns_ledger_canister: SNS_LEDGER_CANISTER_ID,
-            super_stats_canister: SUPER_STATS_CANISTER_ID,
-
-            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
+            super_stats_canister: super_stats_canister_id,
+            sns_governance_canister: sns_governance_canister_id,
+            sns_ledger_canister: ogy_new_ledger,
+            authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
             wallets_list: Vec::new(),
