@@ -74,7 +74,7 @@ logo: logo.png
 
 # URL to the dapp controlled by the SNS project.
 # Must be a string from 10 to 512 bytes.
-url: https://forum.dfinity.org/thread-where-this-sns-is-discussed
+url: https://www.origyn.com/
 
 # Metadata for the NNS proposal required to create the SNS. This data will be
 # shown only in the NNS proposal.
@@ -84,7 +84,7 @@ NnsProposal:
 
     # The HTTPS address of additional content required to evaluate the NNS
     # proposal.
-    url: "https://forum.dfinity.org"
+    url: "https://forum.dfinity.org/t/origyn-the-upgrade/30218"
 
     # The description of the proposal. Must be a string of 10 to 2,000 bytes.
     summary: >
