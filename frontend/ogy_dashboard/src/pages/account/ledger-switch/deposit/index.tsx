@@ -1,4 +1,4 @@
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import useFetchBalanceOGYLegacy from "@services/accounts/useFetchBalanceOGYLegacy";
 
 const Deposit = () => {

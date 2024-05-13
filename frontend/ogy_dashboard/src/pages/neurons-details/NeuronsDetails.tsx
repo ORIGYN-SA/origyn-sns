@@ -1,49 +1,26 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-// import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { Card } from "@components/ui";
-
-// interface NeuronsData {
-//   name: string;
-//   value: number;
-// }
-
-const loader = async () => {
-  const dataNeurons = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { name: "State", value: "Dissolving" },
-        { name: "Staked Maturity", value: 0 },
-        { name: "Staked OGY", value: "5'424.1231817 OGY" },
-        { name: "Dissolve Delay", value: "1 year, 365 days" },
-        { name: "Total Maturity", value: 0 },
-        { name: "Age", value: "13 days" },
-        { name: "Date Created", value: "2024-03-14, 08:01:15 UTC" },
-        { name: "Age Bonus", value: "-2.89%" },
-        { name: "Total Bonus", value: "+101.78%" },
-        { name: "Auto-Stake Maturity", value: "Yes" },
-        { name: "Vesting Period", value: "None" },
-        { name: "Dissolve Delay Bonus", value: "+100%" },
-        { name: "Voting Power", value: "10^944.91" },
-      ]);
-    }, 300);
-  });
-
-  return defer({
-    dataNeurons: await dataNeurons,
-  });
-};
+import { Card, LoaderSpin, Badge } from "@components/ui";
+import useNeuron from "@hooks/useNeuron";
 
 export const NeuronsDetails = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const {
+    data: neuron,
+    isSuccess: isSuccessGetNeuron,
+    isLoading: isLoadingGetNeuron,
+    isError: isErrorGetNeuron,
+    error: errorGetNeuron,
+  } = useNeuron({
+    neuronId: searchParams.get("id") as string,
+  });
 
   const handleOnClickBack = () => {
     navigate(-1);
   };
 
-  const data = useLoaderData();
   return (
     <div className="container mx-auto py-16">
       <div className="flex flex-col xl:flex-row items-center justify-between mb-8">
@@ -57,22 +34,50 @@ export const NeuronsDetails = () => {
             <div className="text-3xl font-bold mb-4 xl:mb-0">OGY Neuron</div>
           </div>
         </div>
-        <div>Principal ID: 8329839839283982</div>
+        {/* <div>Principal ID: 8329839839283982</div> */}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {data.dataNeurons.map(({ name, value }) => (
-          <Card className="bg-surface border border-border pb-8" key={name}>
-            <div className="flex items-center text-lg">
-              <span className="text-content/60">{name}</span>
-            </div>
-            <div className="flex items-center mt-2 text-2xl font-semibold">
-              {value}
-            </div>
-          </Card>
-        ))}
-      </div>
+      {isSuccessGetNeuron && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+          {neuron.details.map(({ name, value }) => (
+            <Card className="bg-surface border border-border pb-8" key={name}>
+              <div className="flex items-center text-lg">
+                <span className="text-content/60">{name}</span>
+              </div>
+              {["State"].includes(name) ? (
+                <div className="flex items-center mt-2">
+                  <Badge
+                    className={`bg-${
+                      value === "Dissolving" ? "jade" : "sky"
+                    }/20 px-2`}
+                  >
+                    <div
+                      className={`text-${
+                        value === "Dissolving" ? "jade" : "sky"
+                      } text-xs font-semibold shrink-0`}
+                    >
+                      {value}
+                    </div>
+                  </Badge>
+                </div>
+              ) : (
+                <div className="flex items-center mt-2 text-2xl font-semibold">
+                  {value}
+                </div>
+              )}
+            </Card>
+          ))}
+        </div>
+      )}
+      {isLoadingGetNeuron && (
+        <div className="flex items-center justify-center h-40">
+          <LoaderSpin />
+        </div>
+      )}
+      {isErrorGetNeuron && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{errorGetNeuron?.message}</div>
+        </div>
+      )}
     </div>
   );
 };
-
-NeuronsDetails.loader = loader;

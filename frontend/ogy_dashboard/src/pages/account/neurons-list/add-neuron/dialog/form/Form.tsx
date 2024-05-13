@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import type { FieldApi } from "@tanstack/react-form";
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import { Button } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NNS_PLATFORM_URL } from "@constants/index";

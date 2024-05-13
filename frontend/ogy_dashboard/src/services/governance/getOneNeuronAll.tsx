@@ -1,18 +1,13 @@
-// import { keepPreviousData } from "@tanstack/react-query";
-// import { useConnect, useCanister } from "@connect2ic/react";
-import { ActorSubclass } from "@dfinity/agent";
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/governance/useGetNervousSystemParameters";
+import snsAPI from "@services/_api/sns/v1";
+import { SNS_ROOT_CANISTER } from "@constants/index";
 
-interface INeuronId {
-  id: number[];
-}
-interface IGetNeuron {
-  governanceActor: ActorSubclass;
+interface IListNeurons {
   neuronId: string;
-  nervousSystemParameters: ISystemNervousParametersResponse | undefined;
+  nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
 }
 
 interface IDissolveState {
@@ -20,20 +15,18 @@ interface IDissolveState {
   WhenDissolvedTimestampSeconds?: bigint;
 }
 
-interface INeuron {
-  Neuron: {
-    cached_neuron_stake_e8s: bigint;
-    staked_maturity_e8s_equivalent: bigint[];
-    aging_since_timestamp_seconds: bigint;
-    dissolve_state: IDissolveState[];
-    created_timestamp_seconds: bigint;
-    id: INeuronId[];
-  };
-}
+// interface INeurons {
+//   cached_neuron_stake_e8s: bigint;
+//   staked_maturity_e8s_equivalent: bigint[];
+//   aging_since_timestamp_seconds: bigint;
+//   dissolve_state: IDissolveState;
+//   id: string;
+//   created_timestamp_seconds: bigint;
+// }
 
-interface INeuronResult {
-  result: INeuron[];
-}
+// interface IListNeuronsResult {
+//   data: INeurons;
+// }
 
 export interface INeuronData {
   stakedAmount: number;
@@ -46,7 +39,7 @@ export interface INeuronData {
   votingPower: number;
   votingPowerToString: string;
   dissolveDelay: number;
-  id: INeuronId;
+  id: string;
   id2Hex: string;
   createdAt: string;
   maxNeuronAgeForAgeBonus: number;
@@ -57,32 +50,30 @@ export interface INeuronData {
 
 const getNeuronState = (dissolveState: IDissolveState) => {
   const currentTimestampSeconds = new Date().getTime() / 1000;
-  if (dissolveState.DissolveDelaySeconds) return "Not dissolving";
+  if (dissolveState.DissolveDelaySeconds !== undefined) return "Not dissolving";
   if (
-    dissolveState.WhenDissolvedTimestampSeconds &&
+    dissolveState.WhenDissolvedTimestampSeconds !== undefined &&
     dissolveState.WhenDissolvedTimestampSeconds > currentTimestampSeconds
   )
     return "Dissolving";
   return "Dissolved";
 };
 
-export const getNeuron = async ({
-  governanceActor,
+export const getOneNeuronAll = async ({
   neuronId,
   nervousSystemParameters,
-}: IGetNeuron) => {
-  const result = await governanceActor.get_neuron({
-    neuron_id: [{ id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] }],
-  });
+}: IListNeurons) => {
+  const { data } = await snsAPI.get(
+    `/snses/${SNS_ROOT_CANISTER}/neurons/${neuronId}`
+  );
 
   const currentTimestamp = getCurrentTimestamp();
-  const data = (result as INeuronResult)?.result[0]?.Neuron;
-  const dissolveState = data?.dissolve_state[0];
+  const dissolveState = data.dissolve_state;
   // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
   const createdAt =
-    Math.round(Date.now()) - Number(data?.created_timestamp_seconds);
+    Math.round(Date.now()) - Number(data.created_timestamp_seconds);
   const age =
-    Math.round(Date.now()) - Number(data?.aging_since_timestamp_seconds);
+    Math.round(Date.now()) - Number(data.aging_since_timestamp_seconds);
   const maxNeuronAgeForAgeBonus = Number(
     nervousSystemParameters?.maxNeuronAgeForAgeBonus ?? 0
   );
@@ -93,24 +84,29 @@ export const getNeuron = async ({
     ? ((age / maxNeuronAgeForAgeBonus) * maxAgeBonusPercentage) / 100
     : 0;
   const dissolveDelay = dissolveState?.DissolveDelaySeconds
-    ? Number(dissolveState.DissolveDelaySeconds) || 0
+    ? Number(dissolveState.DissolveDelaySeconds !== undefined) || 0
     : Number(dissolveState.WhenDissolvedTimestampSeconds) - currentTimestamp ||
       0;
   const maxDissolveDelayBonusPercentage =
     nervousSystemParameters?.maxDissolveDelayBonusPercentage ?? 0;
   const maxDissolveDelaySeconds =
     nervousSystemParameters?.maxDissolveDelaySeconds ?? 0;
-  const dissolveDelayBonus = dissolveState?.DissolveDelaySeconds
-    ? (Number(dissolveState.DissolveDelaySeconds) /
-        (maxDissolveDelaySeconds * maxDissolveDelayBonusPercentage)) *
-      100
-    : ((Number(dissolveState.WhenDissolvedTimestampSeconds) -
-        currentTimestamp) /
-        (maxDissolveDelaySeconds * maxDissolveDelayBonusPercentage)) *
-      100;
-  const stakedAmount = divideBy1e8(Number(data?.cached_neuron_stake_e8s || 0));
+  const dissolveDelayBonus =
+    dissolveState?.DissolveDelaySeconds !== undefined
+      ? (Number(dissolveState.DissolveDelaySeconds) /
+          (maxDissolveDelaySeconds * maxDissolveDelayBonusPercentage)) *
+        100
+      : ((Number(dissolveState.WhenDissolvedTimestampSeconds) -
+          currentTimestamp) /
+          (maxDissolveDelaySeconds * maxDissolveDelayBonusPercentage)) *
+        100;
+  const stakedAmount = divideBy1e8(Number(data.cached_neuron_stake_e8s || 0));
   const stakedMaturity = divideBy1e8(
-    Number(data?.staked_maturity_e8s_equivalent[0] || 0)
+    Number(
+      data.staked_maturity_e8s_equivalent !== null
+        ? data.staked_maturity_e8s_equivalent[0]
+        : 0
+    )
   );
   const votingPower =
     (stakedAmount + stakedMaturity) * (1 + ageBonus) * (1 + dissolveDelayBonus);
@@ -130,8 +126,7 @@ export const getNeuron = async ({
     votingPower,
     votingPowerToString: votingPower.toFixed(2),
     dissolveDelay,
-    id: data.id[0],
-    id2Hex: Buffer.from(data.id[0].id).toString("hex"),
+    id: data.id,
     createdAt: DateTime.fromMillis(createdAt).toRelativeCalendar() ?? "",
     maxNeuronAgeForAgeBonus,
     maxAgeBonusPercentage,

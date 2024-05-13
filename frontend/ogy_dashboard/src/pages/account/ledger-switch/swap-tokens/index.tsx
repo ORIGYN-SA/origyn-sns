@@ -5,7 +5,7 @@ import useFetchBalanceOGYLegacy, {
 } from "@services/accounts/useFetchBalanceOGYLegacy";
 import { Dialog as DialogHeadlessui } from "@headlessui/react";
 import { useStepper } from "headless-stepper";
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import { Button, Dialog } from "@components/ui";
 import { StepperContext } from "./stepper/context";
 import Step1SendTokens from "./stepper/step-1-send-tokens";

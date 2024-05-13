@@ -8,7 +8,7 @@ interface TileProps
 const Tile = ({ className, children, ...restProps }: TileProps) => {
   return (
     <div
-      className={`bg-surface-2 flex justify-center items-center shrink-0 w-12 h-12 rounded-full ${className}`}
+      className={`flex justify-center items-center shrink-0 w-12 h-12 rounded-full ${className}`}
       {...restProps}
     >
       {children}
