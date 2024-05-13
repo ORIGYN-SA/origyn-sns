@@ -7,12 +7,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
-import useNeurons from "@hooks/useNeuronsAll";
-import { INeuronData } from "@services/governance/getListNeuronsAll";
-import NeuronsDetails from "./neuron-details";
+import useProposals from "@hooks/useProposalsAll";
+import { IProposalsData } from "@services/governance/getListProposalsAll";
+import ProposalDetails from "./proposal-details";
 import { TableProps } from "@helpers/table/useTable";
+import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 
-const NeuronsList = ({
+const List = ({
   pagination,
   setPagination,
   sorting,
@@ -20,7 +21,7 @@ const NeuronsList = ({
 }: TableProps) => {
   const navigate = useNavigate();
 
-  const columns = useMemo<ColumnDef<INeuronData>[]>(
+  const columns = useMemo<ColumnDef<IProposalsData>[]>(
     () => [
       {
         accessorKey: "id",
@@ -41,77 +42,89 @@ const NeuronsList = ({
                 )}
               </button>
               <div className="flex items-center max-w-sm">
-                <div
-                  data-tooltip-id="tooltip_id"
-                  data-tooltip-content={getValue()}
-                  className="mr-2 truncate"
-                >
-                  {getValue() as ReactNode}
-                </div>
-                <Tooltip id="tooltip_id" />
-                <CopyToClipboard value={getValue() as string} />
+                <div className="mr-2 truncate">{getValue() as ReactNode}</div>
               </div>
             </div>
           ) : (
             ""
           );
         },
-        header: "ID",
+        header: "Proposal ID",
         meta: {
           className: "text-left",
         },
       },
       {
-        accessorKey: "state",
-        id: "state",
+        accessorKey: "title",
+        id: "title",
+        cell: ({ getValue }) => (
+          <div className="flex items-center max-w-sm">
+            <div
+              data-tooltip-id="tooltip_title"
+              data-tooltip-content={getValue()}
+              className="mr-2 truncate font-semibold"
+            >
+              {getValue() as ReactNode}
+            </div>
+            <Tooltip id="tooltip_title" />
+          </div>
+        ),
+        header: "Title",
+        meta: {
+          className: "text-left",
+        },
+      },
+      {
+        accessorKey: "proposed",
+        id: "proposed",
+        cell: (info) => info.getValue(),
+        header: "Proposed",
+      },
+      {
+        accessorKey: "timeRemaining",
+        id: "timeRemaining",
+        cell: ({ getValue }) => (
+          <div className="font-semibold">{getValue()}</div>
+        ),
+        header: "Time Remaining",
+      },
+      {
+        accessorKey: "topic",
+        id: "topic",
         cell: ({ getValue }) => (
           <div>
-            <Badge
-              className={`bg-${
-                getValue() === "Dissolving" ? "jade" : "sky"
-              }/20 py-2 px-2`}
-            >
+            <Badge className={`bg-spacePurple/20 py-2 px-2`}>
               <div
-                className={`text-${
-                  getValue() === "Dissolving" ? "jade" : "sky"
-                } text-xs font-semibold shrink-0`}
+                className={`text-spacePurple text-xs font-semibold shrink-0`}
               >
                 {getValue() as ReactNode}
               </div>
             </Badge>
           </div>
         ),
-        header: "State",
+        header: "Topic",
       },
       {
-        accessorKey: "stakedOGY",
-        id: "stakedOgy",
-        cell: (info) => info.getValue(),
-        header: "Staked OGY",
-      },
-      {
-        accessorKey: "maturity",
-        id: "maturity",
-        cell: (info) => info.getValue(),
-        header: "Maturity",
-      },
-      {
-        accessorKey: "dissolveDelay",
-        id: "dissolveDelay",
-        cell: (info) => info.getValue(),
-        header: "Dissolve Delay",
-      },
-      {
-        accessorKey: "age",
-        id: "age",
-        cell: (info) => info.getValue(),
-        header: "Age",
-      },
-      {
-        accessorKey: "votingPower",
-        id: "votingPower",
-        cell: (info) => info.getValue(),
-        header: "Voting Power",
+        accessorKey: "status",
+        id: "status",
+        cell: ({ getValue }) => (
+          <div>
+            <Badge
+              className={`bg-${getColorByProposalStatus(
+                getValue()
+              )}/20 py-2 px-2`}
+            >
+              <div
+                className={`text-${getColorByProposalStatus(
+                  getValue()
+                )} text-xs font-semibold shrink-0`}
+              >
+                {getValue() as ReactNode}
+              </div>
+            </Badge>
+          </div>
+        ),
+        header: "Status",
       },
       {
         header: "View",
@@ -131,25 +144,25 @@ const NeuronsList = ({
 
   const {
     data,
-    isSuccess: isSuccessGetNeuronsList,
-    isLoading: isLoadingGetNeuronsList,
-    isError: isErrorGetNeuronsList,
-    error: errorGetNeuronsList,
-  } = useNeurons({
+    isSuccess: isSuccessGetProposalsList,
+    isLoading: isLoadingGetProposalsList,
+    isError: isErrorGetProposalsList,
+    error: errorGetProposalsList,
+  } = useProposals({
     limit: pagination?.pageSize as number,
     offset: (pagination.pageSize * pagination.pageIndex) as number,
   });
 
   const handleClickView = (cell) => {
     navigate({
-      pathname: "/governance/neurons/details",
+      pathname: "/proposals/details",
       search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
     });
   };
 
   return (
     <div>
-      {isSuccessGetNeuronsList && data && (
+      {isSuccessGetProposalsList && data && (
         <Table
           columns={columns}
           data={data.list}
@@ -158,21 +171,21 @@ const NeuronsList = ({
           sorting={sorting}
           setSorting={setSorting}
           getRowCanExpand={() => true}
-          subComponent={NeuronsDetails}
+          subComponent={ProposalDetails}
         />
       )}
-      {isLoadingGetNeuronsList && (
+      {isLoadingGetProposalsList && (
         <div className="flex items-center justify-center h-40">
           <LoaderSpin />
         </div>
       )}
-      {isErrorGetNeuronsList && (
+      {isErrorGetProposalsList && (
         <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorGetNeuronsList?.message}</div>
+          <div>{errorGetProposalsList?.message}</div>
         </div>
       )}
     </div>
   );
 };
 
-export default NeuronsList;
+export default List;

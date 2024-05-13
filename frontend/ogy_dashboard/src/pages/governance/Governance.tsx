@@ -8,7 +8,7 @@ import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards"
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
 import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI"; // TokensInGovernanceKpiProps,
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
-import ProposalsList from "@pages/proposals/proposals-list/List";
+import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
 
 const loader = async () => {

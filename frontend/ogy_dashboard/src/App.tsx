@@ -79,7 +79,6 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Proposals.loader,
             element: <Proposals />,
           },
           {

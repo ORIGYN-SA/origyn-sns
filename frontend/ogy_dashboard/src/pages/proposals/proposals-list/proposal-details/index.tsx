@@ -1,9 +1,9 @@
 import { Row } from "@tanstack/react-table";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const NeuronDetails = ({ row }: { row: Row<any> }) => {
+const ProposalDetails = ({ row }: { row: Row<any> }) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-4">
+    <div className="grid grid-cols-1 xl:grid-cols-1">
       {row?.original?.details.map(
         ({ label, value }: { label: string; value: string }) => (
           <div
@@ -19,4 +19,4 @@ const NeuronDetails = ({ row }: { row: Row<any> }) => {
   );
 };
 
-export default NeuronDetails;
+export default ProposalDetails;

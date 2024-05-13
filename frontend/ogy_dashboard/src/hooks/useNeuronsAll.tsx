@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
@@ -33,7 +33,7 @@ const useNeuronsAll = ({
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeuronsAll", limit, isConnected],
+    queryKey: ["listNeuronsAll", limit, offset, isConnected],
     queryFn: () =>
       getListNeuronsAll({
         limit,
@@ -41,6 +41,7 @@ const useNeuronsAll = ({
         nervousSystemParameters,
       }),
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
+    placeholderData: keepPreviousData,
   });
 
   const isSuccess = isSuccessGetNervousSystemParameters && isSuccessListNeurons;
