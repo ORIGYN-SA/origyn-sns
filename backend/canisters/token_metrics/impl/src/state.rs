@@ -143,10 +143,8 @@ pub struct WalletOverview {
 impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
-        ogy_legacy_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
-        super_stats_canister_id: CanisterId,
-        ogy_legacy_minting_account_principal: Principal
+        super_stats_canister_id: CanisterId
     ) -> Self {
         Self {
             // TODO: Replace the canister id with the onew from args

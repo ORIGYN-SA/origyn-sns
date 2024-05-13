@@ -44,18 +44,26 @@ pub async fn update_balance_list() {
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
-        let account = Account::from_str(&wallet).unwrap();
-        temp_wallets_list.insert(account, new_stats.clone());
+        match Account::from_str(&wallet) {
+            Ok(account) => {
+                temp_wallets_list.insert(account, new_stats.clone());
 
-        let account_merged_to_principal = Account {
-            owner: account.owner,
-            subaccount: None,
-        };
-        check_and_update_list(
-            &mut temp_merged_wallets_list,
-            account_merged_to_principal,
-            new_stats.clone()
-        );
+                let account_merged_to_principal = Account {
+                    owner: account.owner,
+                    subaccount: None,
+                };
+                check_and_update_list(
+                    &mut temp_merged_wallets_list,
+                    account_merged_to_principal,
+                    new_stats.clone()
+                );
+            }
+            Err(err) => {
+                let err_message = format!("{err:?}");
+                error!(err_message, "Couldn't decode wallet");
+                return;
+            }
+        }
     }
 
     // Going through all governance principals and apending their stats
