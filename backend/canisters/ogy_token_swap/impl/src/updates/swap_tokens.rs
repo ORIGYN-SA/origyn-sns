@@ -21,6 +21,7 @@ use ic_ledger_types::{
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, TransferArg } };
 use ledger_utils::principal_to_legacy_account_id;
+use ogy_token_swap_api::token_swap::{ BurnRequestArgs, TransferRequestArgs };
 use serde_bytes::ByteBuf;
 use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
@@ -291,12 +292,12 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     mutate_state(|s|
         s.data.token_swap.update_status(
             block_index,
-            SwapStatus::BurnRequest((
-                args.created_at_time,
-                args.from_subaccount,
-                args.amount,
-                args.memo,
-            ))
+            SwapStatus::BurnRequest(BurnRequestArgs {
+                created_at_time: args.created_at_time,
+                from_subaccount: args.from_subaccount,
+                amount: args.amount,
+                memo: args.memo,
+            })
         )
     );
     match transfer(ogy_legacy_ledger_canister_id, args).await {
@@ -332,7 +333,7 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     }
 }
 
-async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
+pub async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
     let (amount, ogy_ledger_canister_id, principal_result) = read_state(|s| {
         (
             s.data.token_swap.get_amount(block_index),
@@ -368,12 +369,12 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
     mutate_state(|s|
         s.data.token_swap.update_status(
             block_index,
-            SwapStatus::TransferRequest((
-                args.created_at_time,
-                args.to,
-                args.amount.clone(),
-                args.memo.clone(),
-            ))
+            SwapStatus::TransferRequest(TransferRequestArgs {
+                created_at_time: args.created_at_time,
+                to: args.to,
+                amount: args.amount.clone(),
+                memo: args.memo.clone(),
+            })
         )
     );
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {

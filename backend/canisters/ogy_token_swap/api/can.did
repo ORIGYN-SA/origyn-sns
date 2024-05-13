@@ -1,7 +1,8 @@
 type Account = record { owner : principal; subaccount : opt blob };
 type Args = record { block_index : nat64 };
-type Args_1 = record { of : opt principal };
-type Args_2 = record { block_index : nat64; user : opt principal };
+type Args_1 = record { block_index : nat64; block_index_burn : nat64 };
+type Args_2 = record { of : opt principal };
+type Args_3 = record { block_index : nat64; user : opt principal };
 type BlockFailReason = variant {
   ReceiverNotCorrectAccountId : blob;
   NotFound;
@@ -14,6 +15,12 @@ type BurnFailReason = variant {
   TransferError : TransferError;
   CallError : text;
 };
+type BurnRequestArgs = record {
+  memo : nat64;
+  from_subaccount : opt blob;
+  created_at_time : opt Timestamp;
+  amount : Tokens;
+};
 type ImpossibleErrorReason = variant { AmountNotFound; PrincipalNotFound };
 type InitArgs = record {
   ogy_legacy_minting_account_principal : principal;
@@ -22,8 +29,17 @@ type InitArgs = record {
   ogy_legacy_ledger_canister_id : principal;
 };
 type Response = variant { Success : SwapInfo; InternalError : text };
-type Response_1 = variant { Success : blob };
-type Response_2 = variant { Success; InternalError : text };
+type Response_1 = variant {
+  NotAValidBurnBlock : text;
+  BurnBlockNotFound;
+  FinalTransferFailed : text;
+  SwapIsNotStuckInBurn : SwapStatus;
+  Success;
+  InternalError : text;
+  NoSwapRequestFound;
+};
+type Response_2 = variant { Success : blob };
+type Response_3 = variant { Success; InternalError : text };
 type SwapError = variant {
   BlockFailed : BlockFailReason;
   BurnFailed : BurnFailReason;
@@ -44,8 +60,8 @@ type SwapStatus = variant {
   Init;
   BlockRequest : nat64;
   Complete : nat;
-  TransferRequest : record { opt nat64; Account; nat; opt blob };
-  BurnRequest : record { opt Timestamp; opt blob; Tokens; nat64 };
+  TransferRequest : TransferRequestArgs;
+  BurnRequest : BurnRequestArgs;
   BlockValid;
 };
 type Timestamp = record { timestamp_nanos : nat64 };
@@ -71,8 +87,15 @@ type TransferFailReason = variant {
   TransferError : TransferError_1;
   CallError : text;
 };
+type TransferRequestArgs = record {
+  to : Account;
+  memo : opt blob;
+  created_at_time : opt nat64;
+  amount : nat;
+};
 service : (InitArgs) -> {
   get_swap_info : (Args) -> (Response) query;
-  request_deposit_account : (Args_1) -> (Response_1);
-  swap_tokens : (Args_2) -> (Response_2);
+  recover_stuck_burn : (Args_1) -> (Response_1);
+  request_deposit_account : (Args_2) -> (Response_2);
+  swap_tokens : (Args_3) -> (Response_3);
 }

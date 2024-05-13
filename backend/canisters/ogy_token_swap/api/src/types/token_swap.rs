@@ -21,7 +21,9 @@ use icrc_ledger_types::icrc1::{
 };
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{ Deserialize, Serialize };
-use types::TimestampMillis;
+use types::TimestampNanos;
+
+use crate::updates::recover_stuck_burn::Response as RecoverStuckBurnResponse;
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct TokenSwap {
@@ -127,6 +129,23 @@ impl TokenSwap {
         }
     }
 
+    pub fn recover_stuck_burn(
+        &self,
+        block_index: BlockIndex
+    ) -> Result<BurnRequestArgs, RecoverStuckBurnResponse> {
+        match self.swap.get(&block_index) {
+            Some(entry) =>
+                match &entry.status {
+                    // If the swap status is in state BurnRequest, an attempt to recover can be made
+                    SwapStatus::BurnRequest(validation_info) => Ok(validation_info.clone()),
+                    // In all other cases, there is no legitimate reason to retry to recover
+                    val => Err(RecoverStuckBurnResponse::SwapIsNotStuckInBurn(val.clone())),
+                }
+            // If not entry is found for this block_index, it's not a valid request
+            None => Err(RecoverStuckBurnResponse::NoSwapRequestFound),
+        }
+    }
+
     pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<&SwapInfo> {
         self.swap.get(&block_index)
     }
@@ -198,9 +217,9 @@ pub enum SwapStatus {
     Init,
     BlockRequest(BlockIndex),
     BlockValid,
-    BurnRequest((Option<Timestamp>, Option<Subaccount>, Tokens, Memo)),
+    BurnRequest(BurnRequestArgs),
     BurnSuccess,
-    TransferRequest((Option<TimestampMillis>, Account, Nat, Option<MemoIcrc>)),
+    TransferRequest(TransferRequestArgs),
     Complete(BlockIndexIcrc),
     Failed(SwapError),
 }
@@ -245,4 +264,20 @@ pub enum RecoverMode {
     RetryBurn,
     RetryBlockValidation,
     RetryTransfer,
+}
+
+#[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
+pub struct BurnRequestArgs {
+    pub created_at_time: Option<Timestamp>,
+    pub from_subaccount: Option<Subaccount>,
+    pub amount: Tokens,
+    pub memo: Memo,
+}
+
+#[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
+pub struct TransferRequestArgs {
+    pub created_at_time: Option<TimestampNanos>,
+    pub to: Account,
+    pub amount: Nat,
+    pub memo: Option<MemoIcrc>,
 }
