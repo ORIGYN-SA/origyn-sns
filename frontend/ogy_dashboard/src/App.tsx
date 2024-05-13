@@ -62,7 +62,6 @@ const router = createBrowserRouter([
           },
           {
             path: "neurons/details",
-            loader: NeuronsDetails.loader,
             element: <NeuronsDetails />,
             // async lazy() {
             //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(

@@ -6,9 +6,12 @@ import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/governance/useGetNervousSystemParameters";
 
+interface INeuronId {
+  id: number[];
+}
 interface IGetNeuron {
   governanceActor: ActorSubclass;
-  neuronId: object;
+  neuronId: string;
   nervousSystemParameters: ISystemNervousParametersResponse | undefined;
 }
 
@@ -23,6 +26,8 @@ interface INeuron {
     staked_maturity_e8s_equivalent: bigint[];
     aging_since_timestamp_seconds: bigint;
     dissolve_state: IDissolveState[];
+    created_timestamp_seconds: bigint;
+    id: INeuronId[];
   };
 }
 
@@ -32,13 +37,22 @@ interface INeuronResult {
 
 export interface INeuronData {
   stakedAmount: number;
+  stakedMaturity: number;
   stakedAmountToString: string;
+  stakedMaturityToString: string;
   age: number;
   ageToRelativeCalendar: string;
   state: string;
   votingPower: number;
   votingPowerToString: string;
   dissolveDelay: number;
+  id: INeuronId;
+  id2Hex: string;
+  createdAt: string;
+  maxNeuronAgeForAgeBonus: number;
+  maxAgeBonusPercentage: number;
+  ageBonus: number;
+  dissolveDelayBonus: number;
 }
 
 const getNeuronState = (dissolveState: IDissolveState) => {
@@ -58,12 +72,15 @@ export const getNeuron = async ({
   nervousSystemParameters,
 }: IGetNeuron) => {
   const result = await governanceActor.get_neuron({
-    neuron_id: neuronId,
+    neuron_id: [{ id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] }],
   });
+
   const currentTimestamp = getCurrentTimestamp();
   const data = (result as INeuronResult)?.result[0]?.Neuron;
   const dissolveState = data?.dissolve_state[0];
   // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
+  const createdAt =
+    Math.round(Date.now()) - Number(data?.created_timestamp_seconds);
   const age =
     Math.round(Date.now()) - Number(data?.aging_since_timestamp_seconds);
   const maxNeuronAgeForAgeBonus = Number(
@@ -102,12 +119,23 @@ export const getNeuron = async ({
 
   return {
     stakedAmount,
+    stakedMaturity,
     stakedAmountToString: roundAndFormatLocale({ number: stakedAmount }),
+    stakedMaturityToString: roundAndFormatLocale({
+      number: stakedMaturity,
+    }),
     age,
     ageToRelativeCalendar: DateTime.fromMillis(age).toRelativeCalendar() ?? "",
     state,
     votingPower,
     votingPowerToString: votingPower.toFixed(2),
     dissolveDelay,
+    id: data.id[0],
+    id2Hex: Buffer.from(data.id[0].id).toString("hex"),
+    createdAt: DateTime.fromMillis(createdAt).toRelativeCalendar() ?? "",
+    maxNeuronAgeForAgeBonus,
+    maxAgeBonusPercentage,
+    ageBonus,
+    dissolveDelayBonus,
   } as INeuronData;
 };

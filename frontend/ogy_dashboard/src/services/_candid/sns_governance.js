@@ -81,6 +81,13 @@ export const idlFactory = ({ IDL }) => {
     followees: IDL.Vec(IDL.Tuple(IDL.Nat64, Followees)),
     neuron_fees_e8s: IDL.Nat64,
   });
+  const GovernanceError = IDL.Record({
+    error_message: IDL.Text,
+    error_type: IDL.Int32,
+  });
+  const GetNeuron = IDL.Record({ neuron_id: IDL.Opt(NeuronId) });
+  const Result = IDL.Variant({ Error: GovernanceError, Neuron: Neuron });
+  const GetNeuronResponse = IDL.Record({ result: IDL.Opt(Result) });
   const ListNeuronsResponse = IDL.Record({ neurons: IDL.Vec(Neuron) });
   const ProposalId = IDL.Record({ id: IDL.Nat64 });
   const ListProposals = IDL.Record({
@@ -89,10 +96,6 @@ export const idlFactory = ({ IDL }) => {
     limit: IDL.Nat32,
     exclude_type: IDL.Vec(IDL.Nat64),
     include_status: IDL.Vec(IDL.Int32),
-  });
-  const GovernanceError = IDL.Record({
-    error_message: IDL.Text,
-    error_type: IDL.Int32,
   });
   const Ballot = IDL.Record({
     vote: IDL.Int32,
@@ -314,6 +317,7 @@ export const idlFactory = ({ IDL }) => {
       ["query"]
     ),
     list_neurons: IDL.Func([ListNeurons], [ListNeuronsResponse], ["query"]),
+    get_neuron: IDL.Func([GetNeuron], [GetNeuronResponse], ["query"]),
     list_proposals: IDL.Func(
       [ListProposals],
       [ListProposalsResponse],

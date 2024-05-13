@@ -2,6 +2,7 @@
 // @ts-nocheck
 import { useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
   ColumnDef,
   PaginationState,
@@ -12,7 +13,9 @@ import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
 import useNeurons from "@hooks/useNeurons";
+// import useNeurons from "@hooks/useNeuronsAPI";
 import { INeuronData } from "@services/governance/listNeurons";
+import NeuronsDetails from "./neuron-details";
 
 const NeuronsList = ({
   pagination,
@@ -32,19 +35,37 @@ const NeuronsList = ({
       {
         accessorKey: "id",
         id: "id",
-        cell: (info) => (
-          <div className="flex items-center max-w-sm">
-            <div
-              data-tooltip-id="tooltip_from_account"
-              data-tooltip-content={info.getValue()}
-              className="mr-2 truncate"
-            >
-              {info.getValue()}
+        cell: ({ row, getValue }) => {
+          return row.getCanExpand() ? (
+            <div className="flex items-center">
+              <button
+                {...{
+                  onClick: row.getToggleExpandedHandler(),
+                }}
+                className="cursor-pointer mr-2"
+              >
+                {row.getIsExpanded() ? (
+                  <ChevronUpIcon className="h-5 w-5" />
+                ) : (
+                  <ChevronDownIcon className="h-5 w-5" />
+                )}
+              </button>
+              <div className="flex items-center max-w-sm">
+                <div
+                  data-tooltip-id="tooltip_id"
+                  data-tooltip-content={getValue()}
+                  className="mr-2 truncate"
+                >
+                  {getValue()}
+                </div>
+                <Tooltip id="tooltip_from_id" />
+                <CopyToClipboard value={getValue()} />
+              </div>
             </div>
-            <Tooltip id="tooltip_from_account" />
-            <CopyToClipboard value={info.getValue()} />
-          </div>
-        ),
+          ) : (
+            ""
+          );
+        },
         header: "ID",
         meta: {
           className: "text-left",
@@ -122,8 +143,8 @@ const NeuronsList = ({
     neuronsList,
     isSuccess: isSuccessGetNeuronsList,
     isLoading: isLoadingGetNeuronsList,
-    // isError: isErrorGetNeuronsList,
-    // error: errorGetNeuronsList,
+    isError: isErrorGetNeuronsList,
+    error: errorGetNeuronsList,
   } = useNeurons({
     limit: pagination.pageSize,
   });
@@ -145,11 +166,18 @@ const NeuronsList = ({
           setPagination={setPagination}
           sorting={sorting}
           setSorting={setSorting}
+          getRowCanExpand={() => true}
+          subComponent={NeuronsDetails}
         />
       )}
       {isLoadingGetNeuronsList && (
         <div className="flex items-center justify-center h-40">
           <LoaderSpin />
+        </div>
+      )}
+      {isErrorGetNeuronsList && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{errorGetNeuronsList?.message}</div>
         </div>
       )}
     </div>
