@@ -47,7 +47,7 @@ impl TokenSwap {
                                         // If the block was not found previously, maybe somebody accidentally provided
                                         // a block index that was higher than the latest one. To avoid blocking the proper
                                         // execution of this block in the future, it will be recovered here.
-                                        self.swap.insert(block_index, SwapInfo::init(principal));
+                                        self.swap.insert(block_index, SwapInfo::new(principal));
                                         Ok(Some(RecoverMode::RetryBlockValidation))
                                     }
                                     BlockFailReason::QueryRequestFailed => {
@@ -61,10 +61,7 @@ impl TokenSwap {
                                         // Check if new subaccount (principal) was provided and retry block validation if yes.
                                         // Otherwise skip.
                                         if *subaccount != Subaccount::from(principal) {
-                                            self.swap.insert(
-                                                block_index,
-                                                SwapInfo::init(principal)
-                                            );
+                                            self.swap.insert(block_index, SwapInfo::new(principal));
                                             Ok(Some(RecoverMode::RetryBlockValidation))
                                         } else {
                                             Err(
@@ -83,10 +80,7 @@ impl TokenSwap {
                                             *account_id !=
                                             principal_to_legacy_account_id(principal, None)
                                         {
-                                            self.swap.insert(
-                                                block_index,
-                                                SwapInfo::init(principal)
-                                            );
+                                            self.swap.insert(block_index, SwapInfo::new(principal));
                                             Ok(Some(RecoverMode::RetryBlockValidation))
                                         } else {
                                             Err(
@@ -127,7 +121,7 @@ impl TokenSwap {
                     | SwapStatus::TransferRequest(_) => Err("Swap already running.".to_string()),
                 }
             None => {
-                self.swap.insert(block_index, SwapInfo::init(principal));
+                self.swap.insert(block_index, SwapInfo::new(principal));
                 Ok(None)
             }
         }
@@ -187,7 +181,7 @@ pub struct SwapInfo {
 }
 
 impl SwapInfo {
-    pub fn init(principal: Principal) -> Self {
+    pub fn new(principal: Principal) -> Self {
         Self {
             status: SwapStatus::Init,
             principal,
