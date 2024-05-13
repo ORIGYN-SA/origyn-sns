@@ -1,15 +1,13 @@
 use candid::Principal;
 use canister_time::{ now_millis, run_now_then_interval, DAY_IN_MS };
 use sns_governance_canister::types::{ Neuron, NeuronId };
+use token_metrics_api::token_data::GovernanceStats;
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
 
-use crate::{
-    jobs::{ sync_supply_data, update_balance_list },
-    state::{ mutate_state, read_state, GovernanceStats },
-};
+use crate::{ jobs::{ sync_supply_data, update_balance_list }, state::{ mutate_state, read_state } };
 
 const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -72,7 +70,7 @@ pub async fn sync_neurons_data() {
 
                 // Check if we hit the end of the list
                 let number_of_received_neurons = response.neurons.len();
-                if (number_of_received_neurons as u32) == 100 {
+                if number_of_received_neurons == 100 {
                     args.start_page_at = response.neurons.last().map_or_else(
                         || {
                             error!("we should not be here, last neurons from response is missing?");

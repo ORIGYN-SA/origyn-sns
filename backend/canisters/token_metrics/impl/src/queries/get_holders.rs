@@ -1,10 +1,12 @@
 use ic_cdk_macros::query;
-use icrc_ledger_types::icrc1::account::Account;
-
-use crate::{ custom_types::GetHoldersArgs, state::{ read_state, WalletOverview } };
+pub use token_metrics_api::queries::get_holders::{
+    Args as GetHoldersArgs,
+    Response as GetHoldersResponse,
+};
+use crate::state::read_state;
 
 #[query]
-fn get_holders(args: GetHoldersArgs) -> Vec<(Account, WalletOverview)> {
+fn get_holders(args: GetHoldersArgs) -> GetHoldersResponse {
     let mut result = Vec::new();
     let mut current_offset = args.offset;
     let list = read_state(|state| {

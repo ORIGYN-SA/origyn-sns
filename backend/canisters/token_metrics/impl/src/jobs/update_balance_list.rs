@@ -5,12 +5,13 @@ use super_stats_v3_c2c_client::{
     queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
     queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
+use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::str::FromStr;
 use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
-use crate::state::{ mutate_state, read_state, GovernanceStats, WalletOverview };
+use crate::state::{ mutate_state, read_state };
 use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
 
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 3_600 * 1_000;

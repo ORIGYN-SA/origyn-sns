@@ -1,10 +1,15 @@
-use candid::{ CandidType, Nat, Principal };
+use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
-use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
-use std::{ collections::BTreeMap, ops::Add };
+use token_metrics_api::token_data::{
+    GovernanceStats,
+    PrincipalBalance,
+    TokenSupplyData,
+    WalletOverview,
+};
+use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{
     consts::{ SNS_GOVERNANCE_CANISTER_ID, SNS_LEDGER_CANISTER_ID, SUPER_STATS_CANISTER_ID },
@@ -101,43 +106,6 @@ pub struct Data {
     /// Same thing as above, but we now merge all subaccounts stats of a principal
     /// under the same principal item in the Map
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
-pub struct GovernanceStats {
-    pub total_staked: Nat,
-    pub total_locked: Nat,
-    pub total_unlocked: Nat,
-    pub total_rewards: Nat,
-}
-impl Add for GovernanceStats {
-    type Output = GovernanceStats;
-
-    fn add(self, other: Self) -> Self::Output {
-        GovernanceStats {
-            total_staked: self.total_staked + other.total_staked,
-            total_locked: self.total_locked + other.total_locked,
-            total_unlocked: self.total_unlocked + other.total_unlocked,
-            total_rewards: self.total_rewards + other.total_rewards,
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
-pub struct PrincipalBalance {
-    pub governance: GovernanceStats,
-    pub ledger: u64,
-}
-#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
-pub struct TokenSupplyData {
-    pub total_supply: Nat,
-    pub circulating_supply: Nat,
-}
-#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
-pub struct WalletOverview {
-    pub ledger: LedgerOverview,
-    pub governance: GovernanceStats,
-    pub total: u64,
 }
 
 impl Data {

@@ -1,19 +1,20 @@
+type Account = record { owner : principal; subaccount : opt blob };
 type GetHoldersArgs = record {
   offset : nat64;
   limit : nat64;
   merge_accounts_to_principals : bool;
 };
 type GovernanceStats = record {
-  total_rewards : nat64;
-  total_staked : nat64;
-  total_locked : nat64;
-  total_unlocked : nat64;
+  total_rewards : nat;
+  total_staked : nat;
+  total_locked : nat;
+  total_unlocked : nat;
 };
 type InitArgs = record {
-  ogy_legacy_minting_account_principal : principal;
   test_mode : bool;
   ogy_new_ledger_canister_id : principal;
-  ogy_legacy_ledger_canister_id : principal;
+  super_stats_canister_id : principal;
+  sns_governance_canister_id : principal;
 };
 type Overview = record {
   balance : nat;
@@ -22,10 +23,7 @@ type Overview = record {
   first_active : nat64;
   received : record { nat32; nat };
 };
-type TokenSupplyData = record {
-  circulating_supply : nat64;
-  total_supply : nat64;
-};
+type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
 type WalletOverview = record {
   total : nat64;
   ledger : Overview;
@@ -33,8 +31,9 @@ type WalletOverview = record {
 };
 service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
-  get_holders : (GetHoldersArgs) -> (vec record { text; WalletOverview }) query;
+  get_holders : (GetHoldersArgs) -> (
+      vec record { Account; WalletOverview },
+    ) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_supply_data : () -> (TokenSupplyData) query;
-  run_gov_job : () -> (text);
 }

@@ -3,7 +3,7 @@
   "canisters": {
     "token_metrics": {
       "candid": "backend/canisters/token_metrics/api/can.did",
-      "package": "token_metrics",
+      "package": "token_metrics_impl",
       "type": "rust"
     },
     "ogy_token_swap": {

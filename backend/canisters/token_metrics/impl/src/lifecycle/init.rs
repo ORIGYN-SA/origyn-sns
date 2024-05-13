@@ -1,21 +1,11 @@
-use candid::CandidType;
 use ic_cdk_macros::init;
-use serde::Deserialize;
+pub use token_metrics_api::init::InitArgs;
 use tracing::info;
-use types::CanisterId;
 use utils::env::CanisterEnv;
 
 use crate::state::{ Data, RuntimeState };
 
 use super::init_canister;
-
-#[derive(Deserialize, CandidType)]
-pub struct InitArgs {
-    pub test_mode: bool,
-    pub sns_governance_canister_id: CanisterId,
-    pub super_stats_canister_id: CanisterId,
-    pub ogy_new_ledger_canister_id: CanisterId,
-}
 
 #[init]
 fn init(args: InitArgs) {

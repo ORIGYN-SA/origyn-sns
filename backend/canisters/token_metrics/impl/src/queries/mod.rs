@@ -1,6 +1,11 @@
-mod candid;
-mod get_holders;
-mod get_all_neuron_owners;
-mod get_neurons_stats;
-mod get_supply_data;
-mod http_request;
+pub mod candid;
+pub mod get_holders;
+pub mod get_all_neuron_owners;
+pub mod get_neurons_stats;
+pub mod get_supply_data;
+pub mod http_request;
+
+pub use get_holders::*;
+pub use get_all_neuron_owners::*;
+pub use get_neurons_stats::*;
+pub use get_supply_data::*;

@@ -1,12 +1,8 @@
 [package]
-name = "token_metrics_impl"
+name = "token_metrics_api"
 version = "0.1.0"
-description = "Canister to expose metrics about the token."
+description = "API for token metrics canister."
 edition = "2021"
-
-[lib]
-path = "src/lib.rs"
-crate-type = ["lib", "cdylib"]
 
 [dependencies]
 candid = { workspace = true }
@@ -35,4 +31,3 @@ stable_memory = { path = '../../../libraries/stable_memory' }
 tracing = { workspace = true }
 types = { path = '../../../libraries/types' }
 utils = { path = '../../../libraries/utils' }
-token_metrics_api = { path = "../api" }
