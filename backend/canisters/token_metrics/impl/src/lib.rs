@@ -2,6 +2,7 @@ use crate::state::GovernanceStats;
 use crate::state::TokenSupplyData;
 use crate::state::WalletOverview;
 use crate::custom_types::GetHoldersArgs;
+use icrc_ledger_types::icrc1::account::Account;
 use candid::Principal;
 use ic_cdk::export_candid;
 use lifecycle::InitArgs;

@@ -1,3 +1,4 @@
+use candid::Nat;
 use canister_time::run_now_then_interval;
 use futures::future::join_all;
 use icrc_ledger_types::icrc1::account::Account;
@@ -42,7 +43,7 @@ pub async fn sync_supply_data() {
     }
 }
 
-async fn get_total_ledger_balance_of_accounts(accounts: Vec<Account>) -> u64 {
+async fn get_total_ledger_balance_of_accounts(accounts: Vec<Account>) -> Nat {
     let getter_futures: Vec<_> = accounts
         .iter()
         .map(|account| {
@@ -51,13 +52,13 @@ async fn get_total_ledger_balance_of_accounts(accounts: Vec<Account>) -> u64 {
         })
         .collect();
     let results = join_all(getter_futures).await;
-    results.iter().sum()
+    results.iter().fold(Nat::from(0u64), |acc, x| acc + x.clone())
 }
 
-async fn get_ledger_balance_of(account: Account) -> u64 {
+async fn get_ledger_balance_of(account: Account) -> Nat {
     let ledger_canister_id = read_state(|state| state.data.sns_ledger_canister);
     match icrc_ledger_canister_c2c_client::icrc1_balance_of(ledger_canister_id, &account).await {
-        Ok(response) => response.0.try_into().unwrap(),
+        Ok(response) => response,
         Err(err) => {
             let message = format!("{err:?}");
             let principal_as_text = account.owner.to_text();
@@ -65,7 +66,7 @@ async fn get_ledger_balance_of(account: Account) -> u64 {
                 ?message,
                 "There was an error while getting balance of {principal_as_text}."
             );
-            0
+            Nat::from(0u64)
         }
     }
 }

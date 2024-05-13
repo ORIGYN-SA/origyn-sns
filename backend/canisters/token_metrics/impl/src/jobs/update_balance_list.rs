@@ -159,7 +159,7 @@ fn check_and_update_list(
             // wallet already in the list
             let updated_value = WalletOverview {
                 ledger: list_value.ledger + new_value.ledger,
-                governance: list_value.governance + new_value.governance,
+                governance: list_value.governance.clone() + new_value.governance,
                 total: list_value.total + new_value.total,
             };
             list.insert(key, updated_value);
