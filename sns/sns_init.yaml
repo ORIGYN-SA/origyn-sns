@@ -175,7 +175,7 @@ Proposals:
 Neurons:
     # The minimum amount of SNS tokens to stake a neuron. This field is specified
     # as a token. For instance, "1 token".
-    minimum_creation_stake: 100 tokens
+    minimum_creation_stake: 1000 tokens
 
 # Configuration of SNS voting.
 Voting:
