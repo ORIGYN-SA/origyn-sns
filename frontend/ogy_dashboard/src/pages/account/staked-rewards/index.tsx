@@ -1,13 +1,15 @@
+import useConnect from "@hooks/useConnect";
 import { Card } from "@components/ui";
 import {
   ClaimAllRewardsProvider,
   BtnClaimAllRewards,
   DialogClaimAllRewards,
 } from "@pages/account/staked-rewards/claim-all-rewards";
-import useNeurons from "../useNeurons";
+import useNeurons from "@hooks/useNeuronsOwner";
 
 const StakedRewards = () => {
-  const { stakedRewardsOGY } = useNeurons();
+  const { principal: owner } = useConnect();
+  const { stakedRewardsOGY } = useNeurons({ owner, limit: 0 });
 
   return (
     <Card>

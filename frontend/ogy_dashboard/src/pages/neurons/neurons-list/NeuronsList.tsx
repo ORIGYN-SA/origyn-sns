@@ -1,23 +1,69 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo } from "react";
+import { Dispatch, ReactNode, useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { ColumnDef } from "@tanstack/react-table";
-import { Table } from "@components/ui";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import {
+  ColumnDef,
+  PaginationState,
+  SortingState,
+} from "@tanstack/react-table";
+import { EyeIcon } from "@heroicons/react/24/outline";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
+import useNeurons from "@hooks/useNeuronsAll";
+import { INeuronData } from "@services/governance/getListNeuronsAll";
+import NeuronsDetails from "./neuron-details";
 
-import { fetchData, Neuron } from "./fetchData.dev";
-
-const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
+const NeuronsList = ({
+  pagination,
+  setPagination,
+  sorting,
+  setSorting,
+}: {
+  pagination?: PaginationState;
+  setPagination?: Dispatch<PaginationState>;
+  sorting?: SortingState;
+  setSorting?: Dispatch<SortingState>;
+}) => {
   const navigate = useNavigate();
 
-  const columns = useMemo<ColumnDef<Neuron>[]>(
+  const columns = useMemo<ColumnDef<INeuronData>[]>(
     () => [
       {
         accessorKey: "id",
-        // accessorFn: (row) => row.id,
         id: "id",
-        cell: (info) => info.getValue(),
+        cell: ({ row, getValue }) => {
+          return row.getCanExpand() ? (
+            <div className="flex items-center">
+              <button
+                {...{
+                  onClick: row.getToggleExpandedHandler(),
+                }}
+                className="cursor-pointer mr-2"
+              >
+                {row.getIsExpanded() ? (
+                  <ChevronUpIcon className="h-5 w-5" />
+                ) : (
+                  <ChevronDownIcon className="h-5 w-5" />
+                )}
+              </button>
+              <div className="flex items-center max-w-sm">
+                <div
+                  data-tooltip-id="tooltip_id"
+                  data-tooltip-content={getValue()}
+                  className="mr-2 truncate"
+                >
+                  {getValue() as ReactNode}
+                </div>
+                <Tooltip id="tooltip_from_id" />
+                <CopyToClipboard value={getValue() as string} />
+              </div>
+            </div>
+          ) : (
+            ""
+          );
+        },
         header: "ID",
         meta: {
           className: "text-left",
@@ -25,42 +71,52 @@ const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
       },
       {
         accessorKey: "state",
-        // accessorFn: (row) => row.state,
         id: "state",
-        cell: (info) => info.getValue(),
+        cell: ({ getValue }) => (
+          <div>
+            <Badge
+              className={`bg-${
+                getValue() === "Dissolving" ? "jade" : "sky"
+              }/20 px-2`}
+            >
+              <div
+                className={`text-${
+                  getValue() === "Dissolving" ? "jade" : "sky"
+                } text-xs font-semibold shrink-0`}
+              >
+                {getValue() as ReactNode}
+              </div>
+            </Badge>
+          </div>
+        ),
         header: "State",
       },
       {
         accessorKey: "stakedOGY",
-        // accessorFn: (row) => row.stakedOGY,
         id: "stakedOgy",
         cell: (info) => info.getValue(),
         header: "Staked OGY",
       },
       {
         accessorKey: "maturity",
-        // accessorFn: (row) => row.maturity,
         id: "maturity",
         cell: (info) => info.getValue(),
         header: "Maturity",
       },
       {
         accessorKey: "dissolveDelay",
-        // accessorFn: (row) => row.dissolveDelay,
         id: "dissolveDelay",
         cell: (info) => info.getValue(),
         header: "Dissolve Delay",
       },
       {
         accessorKey: "age",
-        // accessorFn: (row) => row.age,
         id: "age",
         cell: (info) => info.getValue(),
         header: "Age",
       },
       {
         accessorKey: "votingPower",
-        // accessorFn: (row) => row.votingPower,
         id: "votingPower",
         cell: (info) => info.getValue(),
         header: "Voting Power",
@@ -69,7 +125,11 @@ const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
         header: "View",
         accessorKey: "view",
         cell: (props) => (
-          <button onClick={() => handleClickView(props)}>view</button>
+          <div className="flex justify-center items-center shrink-0 rounded-full bg-surface border border-border hover:bg-surface-2 w-10 h-10">
+            <button onClick={() => handleClickView(props)}>
+              <EyeIcon className="h-5 w-5" />
+            </button>
+          </div>
         ),
       },
     ],
@@ -77,29 +137,48 @@ const NeuronsList = ({ pagination, setPagination, sorting, setSorting }) => {
     []
   );
 
-  const data = useQuery({
-    queryKey: ["neurons_list", pagination],
-    queryFn: () => fetchData(pagination),
-    placeholderData: keepPreviousData,
+  const {
+    data,
+    isSuccess: isSuccessGetNeuronsList,
+    isLoading: isLoadingGetNeuronsList,
+    isError: isErrorGetNeuronsList,
+    error: errorGetNeuronsList,
+  } = useNeurons({
+    limit: pagination?.pageSize as number,
+    offset: (pagination.pageSize * pagination.pageIndex) as number,
   });
 
   const handleClickView = (cell) => {
     navigate({
-      pathname: "neurons/details",
+      pathname: "/governance/neurons/details",
       search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
     });
   };
 
   return (
     <div>
-      <Table
-        columns={columns}
-        data={data?.data}
-        pagination={pagination}
-        setPagination={setPagination}
-        sorting={sorting}
-        setSorting={setSorting}
-      />
+      {isSuccessGetNeuronsList && data && (
+        <Table
+          columns={columns}
+          data={data.list}
+          pagination={pagination}
+          setPagination={setPagination}
+          sorting={sorting}
+          setSorting={setSorting}
+          getRowCanExpand={() => true}
+          subComponent={NeuronsDetails}
+        />
+      )}
+      {isLoadingGetNeuronsList && (
+        <div className="flex items-center justify-center h-40">
+          <LoaderSpin />
+        </div>
+      )}
+      {isErrorGetNeuronsList && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{errorGetNeuronsList?.message}</div>
+        </div>
+      )}
     </div>
   );
 };

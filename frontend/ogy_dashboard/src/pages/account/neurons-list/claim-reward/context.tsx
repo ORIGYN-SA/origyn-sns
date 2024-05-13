@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import useConnect from "@helpers/useConnect";
+import useConnect from "@hooks/useConnect";
 import useClaimRewardService from "@services/sns-rewards/useClaimReward";
 interface ClaimRewardContextType {
   mutation: ReturnType<typeof useClaimRewardService>;

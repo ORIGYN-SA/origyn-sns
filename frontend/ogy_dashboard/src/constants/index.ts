@@ -3,11 +3,13 @@ export const SNS_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_SNS_GOVERNANCE_CA
 export const TOKEN_METRICS_CANISTER_ID = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
 export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env.VITE_OGY_TOKEN_SWAP_CANISTER_ID;
 export const SNS_REWARDS_CANISTER_ID = import.meta.env.VITE_SNS_REWARDS_CANISTER_ID;
+export const SNS_ROOT_CANISTER = import.meta.env.VITE_SNS_ROOT_CANISTER;
 export const LEGACY_LEDGER_CANISTER_ID = import.meta.env.VITE_LEGACY_LEDGER_CANISTER_ID;
 export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_LEGACY_GOVERNANCE_CANISTER_ID;
 export const LEGACY_VESTING_CANISTER_ID = import.meta.env.VITE_LEGACY_VESTING_CANISTER_ID;
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
+export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
 export const LEGACY_OGY_DASHBOARD_URL = import.meta.env.VITE_LEGACY_OGY_DASHBOARD_URL
 export const APP_MODE = import.meta.env.MODE
@@ -40,6 +42,11 @@ if (!(APP_MODE === "production")) {
         console.log("No SNS_REWARDS_CANISTER_ID environment variable. Set SNS_REWARDS_CANISTER_ID environment variable.")
     else
         console.log(`SNS_REWARDS_CANISTER_ID=${SNS_REWARDS_CANISTER_ID}`)
+
+    if (!SNS_ROOT_CANISTER)
+        console.log("No SNS_ROOT_CANISTER environment variable. Set SNS_ROOT_CANISTER environment variable.")
+    else
+        console.log(`SNS_ROOT_CANISTER=${SNS_ROOT_CANISTER}`)
     
     if (!LEGACY_LEDGER_CANISTER_ID)
         console.log("No LEGACY_LEDGER_CANISTER_ID environment variable. Set LEGACY_LEDGER_CANISTER_ID environment variable.")
@@ -65,6 +72,11 @@ if (!(APP_MODE === "production")) {
         console.log("No API_OGY_BASE_URL environment variable. Set API_OGY_BASE_URL environment variable.")
     else
         console.log(`API_OGY_BASE_URL=${API_OGY_BASE_URL}`)
+
+    if (!API_SNS_BASE_URL)
+        console.log("No API_SNS_BASE_URL environment variable. Set API_SNS_BASE_URL environment variable.")
+    else
+        console.log(`API_SNS_BASE_URL=${API_SNS_BASE_URL}`)
     
     if (!NNS_PLATFORM_URL)
         console.log("No NNS_PLATFORM_URL environment variable. Set NNS_PLATFORM_URL environment variable.")
