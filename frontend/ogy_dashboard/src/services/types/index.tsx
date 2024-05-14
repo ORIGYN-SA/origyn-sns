@@ -3,6 +3,13 @@ import {
   IProposalResult,
   IProposalResults,
   IProposalData,
+  IProposalVotes,
 } from "@services/types/proposals";
 
-export type { IListProps, IProposalResult, IProposalResults, IProposalData };
+export type {
+  IListProps,
+  IProposalResult,
+  IProposalResults,
+  IProposalData,
+  IProposalVotes,
+};

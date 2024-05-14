@@ -1,27 +1,49 @@
-import Card from "@components/ui/Card";
+import { Card, Badge } from "@components/ui";
+import { IProposalData } from "@services/types";
+import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 
-type TotalOGYSupply = {
-  className?: string;
-};
-
-const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
+const Overview = ({ proposal }: { proposal: IProposalData }) => {
+  const { id, status, proposed, payload, topic } = proposal;
   return (
-    <Card className={`${className}`} {...restProps}>
+    <Card>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-content/60">
-          Total OGY Supply
-        </h2>
-        <button className="text-sm font-medium rounded-full px-3 py-1">
-          Weekly
-        </button>
+        <Badge
+          className={`bg-${getColorByProposalStatus(
+            status as string
+          )}/20 py-2 px-2`}
+        >
+          <div
+            className={`text-${getColorByProposalStatus(
+              status
+            )} text-xs font-semibold shrink-0`}
+          >
+            {status}
+          </div>
+        </Badge>
+
+        <div className="text-content/60 text-sm font-semibold">
+          Posted {proposed}
+        </div>
       </div>
-      <div className="mt-4 flex items-center text-2xl font-semibold">
-        <img src="/ogy_logo.svg" alt="OGY Logo" />
-        <span className="ml-2 mr-3">10 418 169 376,19</span>
-        <span className="text-content/60">OGY</span>
+      <div className="mt-5">
+        <h3 className="text-2xl leading-6 font-semibold">Proposal ID: {id}</h3>
+      </div>
+      <div className="mt-6">
+        <h3 className="mb-2 text-content/60 font-semibold">More info:</h3>
+        <div className="rounded-xl bg-surface-2/40 p-8">
+          <pre className="whitespace-pre-wrap break-all text-sm">{payload}</pre>
+        </div>
+      </div>
+      <div className="flex items-center mt-12">
+        <div className="text-content/60 font-semibold mr-2">Topic:</div>
+        <Badge className={`bg-spacePurple/20 py-2 px-2`}>
+          <div className={`text-spacePurple text-xs font-semibold shrink-0`}>
+            {topic}
+          </div>
+        </Badge>
       </div>
     </Card>
   );
 };
 
-export default TotalOGYSupply;
+export default Overview;

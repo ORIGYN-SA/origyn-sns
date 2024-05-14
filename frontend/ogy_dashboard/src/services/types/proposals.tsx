@@ -1,3 +1,10 @@
+export interface IProposalVotes {
+  yes: number;
+  yesToString: string;
+  noToString: string;
+  no: number;
+  total: string;
+}
 export interface IProposalResult {
   id: number;
   proposer: string;
@@ -6,7 +13,13 @@ export interface IProposalResult {
   initial_voting_period_seconds: number;
   proposal_action_type: string;
   status: string;
-  payload_text_rendering?: string;
+  payload_text_rendering: string;
+  latest_tally: {
+    no: number;
+    yes: number;
+    total: number;
+    timestamp_seconds: number;
+  };
 }
 
 export interface IProposalResults {
@@ -22,4 +35,5 @@ export interface IProposalData {
   topic: string;
   status: string;
   payload?: string;
+  votes: IProposalVotes;
 }

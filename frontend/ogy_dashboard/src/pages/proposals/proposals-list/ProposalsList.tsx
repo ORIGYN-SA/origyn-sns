@@ -7,7 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { EyeIcon } from "@heroicons/react/24/outline";
 // import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
-import useProposals from "@hooks/useProposalsAll";
+import useProposals from "@hooks/proposals/useProposalsAll";
 import { IProposalData } from "@services/types";
 import ProposalDetails from "./proposal-details";
 import { TableProps } from "@helpers/table/useTable";

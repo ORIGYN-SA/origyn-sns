@@ -3,7 +3,7 @@ import { Row } from "@tanstack/react-table";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProposalDetails = ({ row }: { row: Row<any> }) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-1">
+    <div className="grid grid-cols-1 xl:grid-cols-3">
       {row?.original?.details.map(
         ({ label, value }: { label: string; value: string }) => (
           <div

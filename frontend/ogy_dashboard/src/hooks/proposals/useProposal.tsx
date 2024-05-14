@@ -29,6 +29,7 @@ const useProposal = ({ proposalId }: { proposalId: string }) => {
   const topic = proposal?.topic;
   const status = proposal?.status;
   const payload = proposal?.payload;
+  const votes = proposal?.votes;
   return {
     data: {
       id,
@@ -39,6 +40,7 @@ const useProposal = ({ proposalId }: { proposalId: string }) => {
       topic,
       status,
       payload,
+      votes,
     },
     isLoading: isLoadingGetOneProposal,
     isSuccess: isSuccessGetOneProposal,

@@ -5,7 +5,7 @@ import {
   BtnClaimAllRewards,
   DialogClaimAllRewards,
 } from "@pages/account/staked-rewards/claim-all-rewards";
-import useNeurons from "@hooks/useNeuronsOwner";
+import useNeurons from "@hooks/neurons/useNeuronsOwner";
 
 const StakedRewards = () => {
   const { principal: owner } = useConnect();

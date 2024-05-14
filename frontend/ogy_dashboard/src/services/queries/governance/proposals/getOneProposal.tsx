@@ -3,6 +3,7 @@ import _capitalize from "lodash/capitalize";
 import snsAPI from "@services/api/sns/v1";
 import { IProposalResult, IProposalData } from "@services/types";
 import { SNS_ROOT_CANISTER } from "@constants/index";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 
 export const getOneProposal = async ({
   proposalId,
@@ -23,6 +24,9 @@ export const getOneProposal = async ({
   const topic = data.proposal_action_type;
   const status = data.status;
   const payload = data.payload_text_rendering;
+  const votes = data.latest_tally;
+  const yes = (votes.yes * 100) / votes.total;
+  const no = (votes.no * 100) / votes.total;
 
   return {
     id,
@@ -34,5 +38,12 @@ export const getOneProposal = async ({
     topic,
     status: _capitalize(status),
     payload,
+    votes: {
+      yes,
+      yesToString: yes.toFixed(3),
+      no,
+      noToString: no.toFixed(3),
+      total: roundAndFormatLocale({ number: divideBy1e8(votes.total) }),
+    },
   } as IProposalData;
 };

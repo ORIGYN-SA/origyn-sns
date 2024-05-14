@@ -1,6 +1,9 @@
+import { ReactNode } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import useConnect from "@hooks/useConnect";
 import { getListProposalsAll } from "@services/queries/governance/proposals/getListProposalsAll";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { Tooltip } from "@components/ui";
 
 const useProposalsAll = ({
   limit = 10,
@@ -39,6 +42,7 @@ const useProposalsAll = ({
         const timeRemaining = proposal.timeRemaining;
         const topic = proposal.topic;
         const status = proposal.status;
+        const votes = proposal.votes;
         return {
           id,
           proposer,
@@ -47,7 +51,27 @@ const useProposalsAll = ({
           timeRemaining,
           topic,
           status,
-          details: [{ label: "Proposer", value: proposer }],
+          votes,
+          details: [
+            {
+              label: "Proposer",
+              value: (
+                <div className="flex items-center justify-center max-w-sm m-auto">
+                  <div
+                    data-tooltip-id="tooltip_title"
+                    data-tooltip-content={proposer}
+                    className="truncate"
+                  >
+                    {proposer}
+                  </div>
+                  <Tooltip id="tooltip_title" />
+                  <CopyToClipboard value={proposer} />
+                </div>
+              ) as ReactNode,
+            },
+            { label: "For votes", value: `${votes.yesToString} %` },
+            { label: "Against votes", value: `${votes.noToString} %` },
+          ],
         };
       })
     : [];
