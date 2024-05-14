@@ -87,10 +87,33 @@ NnsProposal:
     url: "https://forum.dfinity.org/t/origyn-the-upgrade/30218"
 
     # The description of the proposal. Must be a string of 10 to 2,000 bytes.
-    summary: >
-        Proposal to create an SNS for the project XX.
-        The SNS will be initialized with the following neurons:
-        ...
+    summary: |
+        # ORIGYN upgrade proposal to an SNS
+        This is a proposal to upgrade the existing ORIGYN DAO to an SNS.
+
+        ## SNS parameters
+        The SNS upgrade of ORIGYN is purely from a technical point of view and not meant to raise any funds.
+        The SNS parameters are intentionally chosen at utmost unattractive to external investors because the ORIGYN Foundation will withdraw all funds after the SNS sale to its own wallet.
+        So it is not encouraged to participate in this SNS swap but rather wait for the token to be available on exchanges afterwards to purchase.
+        Therefore, the parameters are chosen as follows.
+        * OGY tokens for sale: 8 OGY
+        * OGY tokens for the team: 8 OGY
+        * ICP to raise min: 888 ICP
+        * ICP to raise max: 8'888 ICP
+        * Min number of contributors: 8
+        * Min number of tokens per contributor: 88 ICP
+        * Max number of tokens per contributor: 888 ICP
+        * Duration: 8 days
+
+        ## Upgrade procedure
+        The procedure for the token ugprade on a high-level is the following
+        ** The SNS sale goes through, creating 16 new OGY tokens.
+        ** A minting proposal is sent which mints the equivalent total supply as on the legacy OGY ledger
+        ** Holders of the legacy OGY token go through a swap procedure to burn their legacy token and receive the new OGY token at a 1:1 ratio
+        ** Any tokens locked in the existing ORIGYN governance will be unlocked and holders can swap those to the new ledger
+
+        For more details, follow us on our social media channels (Telegram / Twitter)
+
 
 # If the SNS launch attempt fails, control over the dapp canister(s) is given to
 # these principals. In most use cases, this is chosen to be the original set of
@@ -331,135 +354,10 @@ Distribution:
         #
         # For testing, propose_sns.sh will fill this in automatically.
         - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 475_000_000 tokens
+          stake: 8 tokens
           memo: 0
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 1
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 2
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 3
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 4
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 5
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 6
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 7
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 8
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 9
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 10
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 11
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 12
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 13
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 14
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 15
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 16
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 17
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 18
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 19
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 20
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 21
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 22
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 23
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 24
-          dissolve_delay: 6 months
-          vesting_period: 1 years
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 1_000_000 tokens
-          memo: 25
-          dissolve_delay: 6 months
-          vesting_period: 1 years
+          dissolve_delay: 5 years
+          vesting_period: 0 year
     # The initial SNS token balances of the various canisters of the SNS.
     InitialBalances:
         # The initial SNS token balance of the SNS Governance canister is known
@@ -470,14 +368,14 @@ Distribution:
         # The initial SNS token balance of the Swap canister is what will be
         # available for the decentralization swap. These tokens will be swapped
         # for ICP.
-        swap: 500_000_000 tokens
+        swap: 8 tokens
 
     # Checksum of the total number of tokens distributed in this section.
-    #     500 million    (dev neuron)
-    #     0 million    (governance)
-    # +   500 million    (swap)
+    #     8     (dev neuron)
+    #     0     (governance)
+    # +   8     (swap)
     # --------------
-    total: 1_000_000_000 tokens
+    total: 16 tokens
 
 # Configuration of the decentralization swap parameters. Choose these parameters
 # carefully, if a decentralization swap fails, the SNS will restore the dapp
@@ -489,13 +387,13 @@ Swap:
     # to the deadline or the maximum target being reached, and if there are less
     # than `minimum_participants` (here, only direct participants are counted),
     # the swap will be committed.
-    minimum_participants: 88
+    minimum_participants: 8
 
     # Minimum amount of ICP from direct participants. This amount is required for
     # the swap to succeed. If this amount is not achieved, the swap will be
     # aborted (instead of committed) when the due date/time occurs.
     # Must be smaller than or equal than `maximum_direct_participation_icp`.
-    minimum_direct_participation_icp: 8 tokens
+    minimum_direct_participation_icp: 888 tokens
 
     # Maximum amount of ICP from direct participants. If this amount is achieved,
     # the swap will finalize immediately, without waiting for the due date/time;
@@ -503,17 +401,17 @@ Swap:
     # direct participants (`minimum_participants`) is reached (otherwise, it
     # would be aborted).
     # Must be at least `min_participants * minimum_direct_participation_icp`.
-    maximum_direct_participation_icp: 1_888_888 tokens
+    maximum_direct_participation_icp: 8_888 tokens
 
     # The minimum amount of ICP that each participant must contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    minimum_participant_icp: 8 tokens
+    minimum_participant_icp: 88 tokens
 
     # The maximum amount of ICP that each participant may contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    maximum_participant_icp: 8_888 tokens
+    maximum_participant_icp: 888 tokens
 
     # The text that swap participants must confirm before they may participate
     # in the swap.
@@ -609,7 +507,7 @@ Swap:
     # The duration of the decentralization swap. When `start_time` is calculated
     # during CreateServiceNervousSystem proposal execution, this `duration` will
     # be added to that absolute time and set as the swap's deadline.
-    duration: 14 days
+    duration: 8 days
 
     # Whether Neurons' Fund participation is requested.
     neurons_fund_participation: false
