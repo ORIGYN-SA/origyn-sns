@@ -1,42 +1,27 @@
-// import { useMemo, Suspense } from "react";
-import { defer, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { Card } from "@components/ui";
-
-const loader = async () => {
-  const dataProposals = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { name: "State", value: "Dissolving" },
-        { name: "Staked Maturity", value: 0 },
-        { name: "Staked OGY", value: "5'424.1231817 OGY" },
-        { name: "Dissolve Delay", value: "1 year, 365 days" },
-        { name: "Total Maturity", value: 0 },
-        { name: "Age", value: "13 days" },
-        { name: "Date Created", value: "2024-03-14, 08:01:15 UTC" },
-        { name: "Age Bonus", value: "-2.89%" },
-        { name: "Total Bonus", value: "+101.78%" },
-        { name: "Auto-Stake Maturity", value: "Yes" },
-        { name: "Vesting Period", value: "None" },
-        { name: "Dissolve Delay Bonus", value: "+100%" },
-        { name: "Voting Power", value: "10^944.91" },
-      ]);
-    }, 300);
-  });
-
-  return defer({
-    dataProposals: await dataProposals,
-  });
-};
+import { Card, LoaderSpin, Badge } from "@components/ui";
+import useProposal from "@hooks/useProposal";
+import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 
 export const ProposalsDetails = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const {
+    data: proposal,
+    isSuccess: isSuccessGetProposal,
+    isLoading: isLoadingGetProposal,
+    isError: isErrorGetProposal,
+    error: errorGetProposal,
+  } = useProposal({
+    proposalId: searchParams.get("id") as string,
+  });
 
   const handleOnClickBack = () => {
     navigate(-1);
   };
 
-  // const data = useLoaderData();
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="flex flex-col xl:flex-row items-center justify-between mb-8">
@@ -46,41 +31,101 @@ export const ProposalsDetails = () => {
             onClick={handleOnClickBack}
           />
           <div className="flex flex-col items-center xl:items-start">
-            <div className="text-sm">Governance</div>
+            <Badge className="bg-spacePurple px-4">
+              <div className="text-white tracking-widest text-xs font-semibold uppercase">
+                PROPOSALS
+              </div>
+            </Badge>
             <div className="text-3xl font-bold mb-4 xl:mb-0">Proposal</div>
           </div>
         </div>
-        <div>Principal ID: 8329839839283982</div>
+        {/* <div>Principal ID: 8329839839283982</div> */}
       </div>
-      <div className="flex items-start justify-center gap-4">
-        {/* Proposal Information Card */}
+      {isSuccessGetProposal && (
+        <div className="flex items-start justify-center gap-4">
+          <div className="flex flex-1 flex-col gap-4">
+            <Card>
+              <div className="flex items-center justify-between">
+                <Badge
+                  className={`bg-${getColorByProposalStatus(
+                    proposal.status as string
+                  )}/20 py-2 px-2`}
+                >
+                  <div
+                    className={`text-${getColorByProposalStatus(
+                      proposal.status as string
+                    )} text-xs font-semibold shrink-0`}
+                  >
+                    {proposal.status}
+                  </div>
+                </Badge>
 
-        <div className="flex flex-1 flex-col gap-4">
-          <Card className="">
-            <div className="pt-5 border-b border-gray-200">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Proposal ID: 1710947402604093042
-              </h3>
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Posted Mar 20, 2024, 4:10 PM
-              </p>
-            </div>
-            <div className="mt-6">
-              <h3 className="text-base font-medium text-gray-900">
-                More info:
-              </h3>
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                pellentesque sit amet enim ut tincidunt. Cras et nibh aliquet,
-                suscipit purus ut, egestas libero. Proin est magna, posuere a
-                consequat nec, accumsan et erat. Nunc ut convallis tellus, in
-                semper ex. Suspendisse ipsum enim, fringilla ut pellentesque ut,
-                laoreet sed tortor.
-              </p>
-            </div>
-          </Card>
+                <div className="text-content/60 text-sm font-semibold">
+                  Posted {proposal.proposed}
+                </div>
+              </div>
+              <div className="mt-5">
+                <h3 className="text-2xl leading-6 font-semibold">
+                  Proposal ID: {proposal.id}
+                </h3>
+              </div>
+              <div className="mt-6">
+                <h3 className="mb-2 text-content/60 font-semibold">
+                  More info:
+                </h3>
+                <div className="rounded-xl bg-surface-2/40 p-8">
+                  <pre className="whitespace-pre-wrap break-all text-sm">
+                    {proposal.payload}
+                  </pre>
+                </div>
+              </div>
+              <div className="flex items-center mt-12">
+                <div className="text-content/60 font-semibold mr-2">Topic:</div>
+                <Badge className={`bg-spacePurple/20 py-2 px-2`}>
+                  <div
+                    className={`text-spacePurple text-xs font-semibold shrink-0`}
+                  >
+                    {proposal.topic}
+                  </div>
+                </Badge>
+              </div>
+            </Card>
 
-          <Card className="block xl:hidden">
+            <Card className="block xl:hidden">
+              <div className="pt-5 border-b border-gray-200">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  Proposals status
+                </h3>
+              </div>
+              <div className="mt-6">
+                <h3 className="text-base font-medium text-gray-900">Votes:</h3>
+              </div>
+            </Card>
+
+            {/* <Card className="">
+              <div className="pt-5 border-b border-gray-200">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  Payload: Proposal to transfer SNS Treasury funds:
+                </h3>
+              </div>
+              <div className="mt-6">
+                <h3 className="text-base font-medium text-gray-900">
+                  Source treasury: SNS Token Treasury (SNS Ledger)
+                </h3>
+              </div>
+            </Card> */}
+
+            {/* <Card className="">
+              <div className="pt-5 border-b border-gray-200">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  My Voting History
+                </h3>
+              </div>
+              <div className="mt-6"></div>
+            </Card> */}
+          </div>
+
+          <Card className="hidden xl:block">
             <div className="pt-5 border-b border-gray-200">
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 Proposals status
@@ -88,50 +133,20 @@ export const ProposalsDetails = () => {
             </div>
             <div className="mt-6">
               <h3 className="text-base font-medium text-gray-900">Votes:</h3>
-              {/* Content for proposals status */}
             </div>
-          </Card>
-
-          {/* Proposal Payload Card */}
-          <Card className="">
-            <div className="pt-5 border-b border-gray-200">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Payload: Proposal to transfer SNS Treasury funds:
-              </h3>
-            </div>
-            <div className="mt-6">
-              <h3 className="text-base font-medium text-gray-900">
-                Source treasury: SNS Token Treasury (SNS Ledger)
-              </h3>
-              {/* Content for payload details */}
-            </div>
-          </Card>
-
-          {/* My Voting History Card */}
-          <Card className="">
-            <div className="pt-5 border-b border-gray-200">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                My Voting History
-              </h3>
-            </div>
-            <div className="mt-6">{/* Content for voting history */}</div>
           </Card>
         </div>
-
-        <Card className="hidden xl:block">
-          <div className="pt-5 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Proposals status
-            </h3>
-          </div>
-          <div className="mt-6">
-            <h3 className="text-base font-medium text-gray-900">Votes:</h3>
-            {/* Content for proposals status */}
-          </div>
-        </Card>
-      </div>
+      )}
+      {isLoadingGetProposal && (
+        <div className="flex items-center justify-center h-40">
+          <LoaderSpin />
+        </div>
+      )}
+      {isErrorGetProposal && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{errorGetProposal?.message}</div>
+        </div>
+      )}
     </div>
   );
 };
-
-ProposalsDetails.loader = loader;

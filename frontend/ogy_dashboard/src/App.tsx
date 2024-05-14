@@ -83,7 +83,6 @@ const router = createBrowserRouter([
           },
           {
             path: "details",
-            loader: ProposalsDetails.loader,
             element: <ProposalsDetails />,
           },
         ],

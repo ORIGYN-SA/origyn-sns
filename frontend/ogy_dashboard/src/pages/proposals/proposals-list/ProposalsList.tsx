@@ -5,7 +5,7 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { ColumnDef } from "@tanstack/react-table";
 import { EyeIcon } from "@heroicons/react/24/outline";
-import CopyToClipboard from "@components/buttons/CopyToClipboard";
+// import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
 import useProposals from "@hooks/useProposalsAll";
 import { IProposalsData } from "@services/governance/getListProposalsAll";
