@@ -14,8 +14,8 @@ fn init(args: InitArgs) {
     let env = CanisterEnv::new(args.test_mode);
     let data = Data::new(
         args.ogy_new_ledger_canister_id,
-        args.super_stats_canister_id,
-        args.sns_governance_canister_id
+        args.sns_governance_canister_id,
+        args.super_stats_canister_id
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);
