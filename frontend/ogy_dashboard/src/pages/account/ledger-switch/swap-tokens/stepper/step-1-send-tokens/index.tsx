@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Button } from "@components/ui";
 import { StepperContext } from "../context";
 import { LoaderSpin } from "@components/ui";
-import useSendTokens from "@services/switch-ledger/useSendTokens";
+import useSendTokens from "@services/queries/switch-ledger/useSendTokens";
 
 const Step1SendTokens = () => {
   const {

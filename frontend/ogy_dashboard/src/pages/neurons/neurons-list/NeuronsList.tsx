@@ -1,31 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { Dispatch, ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import {
-  ColumnDef,
-  PaginationState,
-  SortingState,
-} from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
-import useNeurons from "@hooks/useNeuronsAll";
-import { INeuronData } from "@services/governance/getListNeuronsAll";
+import useNeurons from "@hooks/neurons/useNeuronsAll";
+import { INeuronData } from "@services/queries/governance/neurons/getListNeuronsAll";
 import NeuronsDetails from "./neuron-details";
+import { TableProps } from "@helpers/table/useTable";
 
 const NeuronsList = ({
   pagination,
   setPagination,
   sorting,
   setSorting,
-}: {
-  pagination?: PaginationState;
-  setPagination?: Dispatch<PaginationState>;
-  sorting?: SortingState;
-  setSorting?: Dispatch<SortingState>;
-}) => {
+}: TableProps) => {
   const navigate = useNavigate();
 
   const columns = useMemo<ColumnDef<INeuronData>[]>(
@@ -56,7 +48,7 @@ const NeuronsList = ({
                 >
                   {getValue() as ReactNode}
                 </div>
-                <Tooltip id="tooltip_from_id" />
+                <Tooltip id="tooltip_id" />
                 <CopyToClipboard value={getValue() as string} />
               </div>
             </div>
@@ -77,7 +69,7 @@ const NeuronsList = ({
             <Badge
               className={`bg-${
                 getValue() === "Dissolving" ? "jade" : "sky"
-              }/20 px-2`}
+              }/20 py-2 px-2`}
             >
               <div
                 className={`text-${

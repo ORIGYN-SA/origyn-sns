@@ -20,12 +20,12 @@ import {
   SNS_REWARDS_CANISTER_ID,
 } from "@constants/index";
 
-import { idlFactory as governanceIdl } from "@services/_candid/sns_governance";
-import { idlFactory as ledgerIdl } from "@services/_candid/sns_ledger";
-import { idlFactory as ledgerLegacyIdl } from "@services/_candid/ledger.legacy";
-import { idlFactory as tokenMetricsIdl } from "@services/_candid/token_metrics";
-import { idlFactory as OGYTokenSwapIdl } from "@services/_candid/ogy_token_swap";
-import { idlFactory as SNSRewardsIdl } from "@services/_candid/sns_rewards";
+import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
+import { idlFactory as ledgerIdl } from "@services/candid/sns_ledger";
+import { idlFactory as ledgerLegacyIdl } from "@services/candid/ledger.legacy";
+import { idlFactory as tokenMetricsIdl } from "@services/candid/token_metrics";
+import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
+import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
 
 const Provider = ({ children }: PropsWithChildren) => {
   return (

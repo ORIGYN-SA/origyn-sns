@@ -1,7 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { Card, LoaderSpin, Badge } from "@components/ui";
-import useNeuron from "@hooks/useNeuron";
+import useNeuron from "@hooks/neurons/useNeuron";
 
 export const NeuronsDetails = () => {
   const navigate = useNavigate();

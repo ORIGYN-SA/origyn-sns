@@ -6,7 +6,7 @@ import { Card } from "@components/ui";
 import fetchOneTransactionQuery, {
   Transaction,
   FetchOneTransactionParams,
-} from "@services/transactions/fetchOneTransactionQuery";
+} from "@services/queries/transactions/fetchOneTransactionQuery";
 
 import { UserIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 

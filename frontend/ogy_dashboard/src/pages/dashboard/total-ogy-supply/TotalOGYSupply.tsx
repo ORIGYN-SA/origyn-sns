@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import BarChart from "@components/charts/bar/Bar";
 import Card from "@components/ui/Card";
 import useTotalOGYSupply from "./useTotalOGYSupply";
-import { ChartData } from "@services/_api/types/charts.types";
+import { ChartData } from "@services/types/charts.types";
 
 type TotalOGYSupply = {
   className?: string;

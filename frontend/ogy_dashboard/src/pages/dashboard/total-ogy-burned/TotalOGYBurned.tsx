@@ -3,7 +3,7 @@ import Card from "@components/ui/Card";
 import BarChart from "@components/charts/bar/Bar";
 
 import useTotalOGYBurned from "./useTotalOGYBurned";
-import { ChartData } from "@services/_api/types/charts.types";
+import { ChartData } from "@services/types/charts.types";
 
 type TotalOGYBurned = {
   className?: string;

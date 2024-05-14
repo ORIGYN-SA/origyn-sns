@@ -1,5 +1,3 @@
-import { Dispatch } from "react";
-import { PaginationState } from "@tanstack/react-table";
 import { usePagination } from "@helpers/table/useTable";
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 
@@ -24,8 +22,8 @@ export const Neurons = () => {
       </div>
       <div className="mt-8 mb-16">
         <NeuronsList
-          pagination={pagination as PaginationState}
-          setPagination={setPagination as Dispatch<PaginationState>}
+          pagination={pagination}
+          setPagination={setPagination}
           // sorting={sorting}
           // setSorting={{ setSorting }}
         />

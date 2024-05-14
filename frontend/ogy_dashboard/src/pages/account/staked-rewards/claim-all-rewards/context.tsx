@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import useClaimRewardService from "@services/sns-rewards/useClaimReward";
+import useClaimRewardService from "@services/queries/sns-rewards/useClaimReward";
 import useConnect from "@hooks/useConnect";
 
 interface ClaimAllRewardsContextType {

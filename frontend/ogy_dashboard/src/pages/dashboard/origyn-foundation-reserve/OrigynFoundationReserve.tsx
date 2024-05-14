@@ -4,8 +4,8 @@ import { Card } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import fetchFoundationAssetsOGY, {
   FoundationAssetsOGY,
-} from "@services/foundation/fetchFoundationAssetsOGYQuery";
-import { PieChart as PieChartTypes } from "@services/_api/types/charts.types";
+} from "@services/queries/foundation/fetchFoundationAssetsOGYQuery";
+import { PieChart as PieChartTypes } from "@services/types/charts.types";
 
 type OrigynFoundationReserve = {
   className?: string;
