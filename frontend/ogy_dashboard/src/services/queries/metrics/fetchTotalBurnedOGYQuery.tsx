@@ -3,7 +3,7 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import icrcAPI from "@services/_api/icrc/v1";
+import icrcAPI from "@services/api/icrc/v1";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 

@@ -1,5 +1,5 @@
 import useConnect from "@hooks/useConnect";
-import useFetchBalanceOGYLegacy from "@services/accounts/useFetchBalanceOGYLegacy";
+import useFetchBalanceOGYLegacy from "@services/queries/accounts/useFetchBalanceOGYLegacy";
 
 const Deposit = () => {
   const { accountId } = useConnect();

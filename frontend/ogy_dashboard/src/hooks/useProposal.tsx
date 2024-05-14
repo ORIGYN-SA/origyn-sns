@@ -1,6 +1,6 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import useConnect from "@hooks/useConnect";
-import { getOneProposal } from "@services/governance/getOneProposal";
+import { getOneProposal } from "@services/queries/governance/getOneProposal";
 
 const useProposal = ({ proposalId }: { proposalId: string }) => {
   const { isConnected } = useConnect();

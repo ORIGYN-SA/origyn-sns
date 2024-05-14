@@ -1,8 +1,8 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import icrcAPI from "@services/_api/icrc/v1";
-import { ApiServiceErr } from "@services/_api/types/api.types";
-import { ListParams } from "@services/_api/types/list.params.types";
-import { TransactionResults } from "@services/_api/types/transactions.types";
+import icrcAPI from "@services/api/icrc/v1";
+import { ApiServiceErr } from "@services/types/api.types";
+import { ListParams } from "@services/types/list.params.types";
+import { TransactionResults } from "@services/types/transactions.types";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 const fn = async ({

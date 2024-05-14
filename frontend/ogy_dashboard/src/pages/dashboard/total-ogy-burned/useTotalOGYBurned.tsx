@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchTotalBurnedOGY, {
   TotalBurnedOGY,
-} from "@services/metrics/fetchTotalBurnedOGYQuery";
+} from "@services/queries/metrics/fetchTotalBurnedOGYQuery";
 import fetchTotalBurnedOGYTimeSeries, {
   TotalBurnedOGYTimeSeries,
-} from "@services/metrics/fetchTotalBurnedOGYTimeSeriesQuery";
-import { ChartData } from "@services/_api/types/charts.types";
+} from "@services/queries/metrics/fetchTotalBurnedOGYTimeSeriesQuery";
+import { ChartData } from "@services/types/charts.types";
 import {
   getCurrentDateInSeconds,
   getCurrentDateLastWeekInSeconds,

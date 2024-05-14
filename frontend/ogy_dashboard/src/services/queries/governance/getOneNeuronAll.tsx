@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
-import { ISystemNervousParametersResponse } from "@services/governance/useGetNervousSystemParameters";
-import snsAPI from "@services/_api/sns/v1";
+import { ISystemNervousParametersResponse } from "@services/queries/governance/useGetNervousSystemParameters";
+import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
 
 interface IListNeurons {

@@ -1,6 +1,6 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import useConnect from "@hooks/useConnect";
-import { getListProposalsAll } from "@services/governance/getListProposalsAll";
+import { getListProposalsAll } from "@services/queries/governance/getListProposalsAll";
 
 const useProposalsAll = ({
   limit = 10,

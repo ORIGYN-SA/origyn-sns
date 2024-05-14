@@ -3,8 +3,8 @@ import {
   UseQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import ogyAPI from "@services/_api/ogy";
-import { PieChart } from "@services/_api/types/charts.types";
+import ogyAPI from "@services/api/ogy";
+import { PieChart } from "@services/types/charts.types";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
 
 export interface FoundationAssetsOGYParams {

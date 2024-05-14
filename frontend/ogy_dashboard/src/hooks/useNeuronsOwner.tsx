@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
-import { getNervousSystemParameters } from "@services/governance/useGetNervousSystemParameters";
-import { fetchBalanceOGY } from "@services/accounts/fetchBalanceOGY";
-import { fetchPriceOGY } from "@services/accounts/fetchPriceOGY";
-import { getListNeuronsOwner } from "@services/governance/getListNeuronsOwner";
+import { getNervousSystemParameters } from "@services/queries/governance/useGetNervousSystemParameters";
+import { fetchBalanceOGY } from "@services/queries/accounts/fetchBalanceOGY";
+import { fetchPriceOGY } from "@services/queries/accounts/fetchPriceOGY";
+import { getListNeuronsOwner } from "@services/queries/governance/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
 

@@ -3,7 +3,7 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import ogyAPI from "@services/_api/ogy";
+import ogyAPI from "@services/api/ogy";
 
 export interface Price {
   ogyPrice: number;

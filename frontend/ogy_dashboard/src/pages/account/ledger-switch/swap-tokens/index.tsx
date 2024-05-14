@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from "react";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 import useFetchBalanceOGYLegacy, {
   IBalanceOGYLegacy,
-} from "@services/accounts/useFetchBalanceOGYLegacy";
+} from "@services/queries/accounts/useFetchBalanceOGYLegacy";
 import { Dialog as DialogHeadlessui } from "@headlessui/react";
 import { useStepper } from "headless-stepper";
 import useConnect from "@hooks/useConnect";

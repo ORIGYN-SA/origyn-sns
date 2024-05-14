@@ -8,7 +8,7 @@ import { EyeIcon } from "@heroicons/react/24/outline";
 // import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
 import useProposals from "@hooks/useProposalsAll";
-import { IProposalsData } from "@services/governance/getListProposalsAll";
+import { IProposalData } from "@services/types";
 import ProposalDetails from "./proposal-details";
 import { TableProps } from "@helpers/table/useTable";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
@@ -21,7 +21,7 @@ const List = ({
 }: TableProps) => {
   const navigate = useNavigate();
 
-  const columns = useMemo<ColumnDef<IProposalsData>[]>(
+  const columns = useMemo<ColumnDef<IProposalData>[]>(
     () => [
       {
         accessorKey: "id",

@@ -4,7 +4,7 @@ import { useConnect, useCanister } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
 import { ActorSubclass } from "@dfinity/agent";
 
-import ogyAPI from "@services/_api/ogy";
+import ogyAPI from "@services/api/ogy";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
 interface IFetchBalanceOGY {

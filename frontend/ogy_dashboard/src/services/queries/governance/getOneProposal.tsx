@@ -1,36 +1,15 @@
 import { DateTime } from "luxon";
 import _capitalize from "lodash/capitalize";
-import snsAPI from "@services/_api/sns/v1";
+import snsAPI from "@services/api/sns/v1";
+import { IProposalResult, IProposalData } from "@services/types";
 import { SNS_ROOT_CANISTER } from "@constants/index";
-
-interface IProposal {
-  id: number;
-  proposer: string;
-  proposal_title: string;
-  proposal_creation_timestamp_seconds: number;
-  initial_voting_period_seconds: number;
-  proposal_action_type: string;
-  payload_text_rendering: string;
-  status: string;
-}
-
-export interface IProposalsData {
-  id: number;
-  proposer: string;
-  title: string;
-  proposed: string;
-  timeRemaining: string;
-  topic: string;
-  status: string;
-  payload: string;
-}
 
 export const getOneProposal = async ({
   proposalId,
 }: {
   proposalId: string;
 }) => {
-  const { data }: { data: IProposal } = await snsAPI.get(
+  const { data }: { data: IProposalResult } = await snsAPI.get(
     `/snses/${SNS_ROOT_CANISTER}/proposals/${proposalId}`
   );
 
@@ -55,5 +34,5 @@ export const getOneProposal = async ({
     topic,
     status: _capitalize(status),
     payload,
-  } as IProposalsData;
+  } as IProposalData;
 };

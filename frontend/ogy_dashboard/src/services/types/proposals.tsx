@@ -1,0 +1,25 @@
+export interface IProposalResult {
+  id: number;
+  proposer: string;
+  proposal_title: string;
+  proposal_creation_timestamp_seconds: number;
+  initial_voting_period_seconds: number;
+  proposal_action_type: string;
+  status: string;
+  payload_text_rendering?: string;
+}
+
+export interface IProposalResults {
+  data: IProposalResult[];
+}
+
+export interface IProposalData {
+  id: number;
+  proposer: string;
+  title: string;
+  proposed: string;
+  timeRemaining: string;
+  topic: string;
+  status: string;
+  payload?: string;
+}

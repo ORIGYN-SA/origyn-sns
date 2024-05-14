@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 
 const AvailableOGY = () => {
   const [show, setShow] = useState(false);
