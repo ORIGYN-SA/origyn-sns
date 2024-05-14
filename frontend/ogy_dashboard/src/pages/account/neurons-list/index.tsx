@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
 import { Table } from "@components/ui";
-import { INeuronData } from "@services/queries/governance/getListNeuronsOwner";
+import { INeuronData } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import useNeurons from "@hooks/useNeuronsOwner";
 import NeuronsDetails from "./neuron-details";
 import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";

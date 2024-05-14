@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
-import { ISystemNervousParametersResponse } from "@services/queries/governance/useGetNervousSystemParameters";
+import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
 

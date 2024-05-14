@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
-import { getNervousSystemParameters } from "@services/queries/governance/useGetNervousSystemParameters";
+import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { fetchBalanceOGY } from "@services/queries/accounts/fetchBalanceOGY";
 import { fetchPriceOGY } from "@services/queries/accounts/fetchPriceOGY";
-import { getNeuron } from "@services/queries/governance/getNeuron";
+import { getNeuron } from "@services/queries/governance/neurons/getNeuron";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 
 const useNeuron = ({ neuronId }: { neuronId: string }) => {

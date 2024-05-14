@@ -8,7 +8,7 @@ import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip, Badge } from "@components/ui";
 import useNeurons from "@hooks/useNeuronsAll";
-import { INeuronData } from "@services/queries/governance/getListNeuronsAll";
+import { INeuronData } from "@services/queries/governance/neurons/getListNeuronsAll";
 import NeuronsDetails from "./neuron-details";
 import { TableProps } from "@helpers/table/useTable";
 

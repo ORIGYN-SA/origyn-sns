@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
-import { getNervousSystemParameters } from "@services/queries/governance/useGetNervousSystemParameters";
-import { getOneNeuronAll } from "@services/queries/governance/getOneNeuronAll";
+import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
+import { getOneNeuronAll } from "@services/queries/governance/neurons/getOneNeuronAll";
 
 const useNeuron = ({ neuronId }: { neuronId: string }) => {
   const { isConnected } = useConnect();

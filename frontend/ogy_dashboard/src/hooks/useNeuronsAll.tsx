@@ -1,8 +1,8 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
-import { getNervousSystemParameters } from "@services/queries/governance/useGetNervousSystemParameters";
-import { getListNeuronsAll } from "@services/queries/governance/getListNeuronsAll";
+import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
+import { getListNeuronsAll } from "@services/queries/governance/neurons/getListNeuronsAll";
 
 const useNeuronsAll = ({
   limit = 10,
