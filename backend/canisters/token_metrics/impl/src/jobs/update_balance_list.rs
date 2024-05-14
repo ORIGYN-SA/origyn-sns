@@ -1,6 +1,6 @@
 use candid::Principal;
 use canister_time::run_now_then_interval;
-use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
+use icrc_ledger_types::icrc1::account::{ self, Account, Subaccount };
 use super_stats_v3_c2c_client::{
     helpers::account_tree::Overview,
     queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
@@ -46,11 +46,14 @@ pub async fn update_balance_list() {
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
-        let (principal, subaccount) = split_into_principal_and_account(wallet.clone());
-        match Principal::from_str(principal.as_str()) {
-            Ok(valid_principal) => {
+        match split_into_principal_and_account(wallet.clone()) {
+            Ok(account) => {
+                // Insert the item in the list with all accounts
+                temp_wallets_list.insert(account, new_stats.clone());
+
+                // Update the merged list with the principal
                 let merged_account_into_principal = Account {
-                    owner: valid_principal,
+                    owner: account.owner,
                     subaccount: None,
                 };
                 check_and_update_list(
@@ -58,43 +61,8 @@ pub async fn update_balance_list() {
                     merged_account_into_principal,
                     new_stats.clone()
                 );
-
-                // If it is a subaccount
-                if let Some(subaccount_value) = subaccount {
-                    match hex::decode(subaccount_value) {
-                        Ok(decoded_subaccount) => {
-                            if decoded_subaccount.len() == 32 {
-                                let mut subaccount_array = [0u8; 32];
-                                subaccount_array.copy_from_slice(&decoded_subaccount);
-
-                                let unmerged_account = Account {
-                                    owner: valid_principal,
-                                    subaccount: Some(subaccount_array),
-                                };
-                                temp_wallets_list.insert(unmerged_account, new_stats.clone());
-                            } else {
-                                let err_message =
-                                    "Invalid length for subaccount. Expected 32 bytes.";
-                                error!(
-                                    err_message,
-                                    "update_balance_list -> subaccount length check"
-                                );
-                            }
-                        }
-                        Err(err) => {
-                            let err_message = format!("{err:?}");
-                            error!(
-                                err_message,
-                                "update_balance_list -> hex::decode(subaccount_value)"
-                            );
-                        }
-                    }
-                }
             }
-            Err(err) => {
-                let err_message = format!("{err:?}");
-                error!(err_message, "update_balance_list -> Principal::from_str");
-            }
+            Err(err) => error!(err),
         }
     }
 
@@ -210,13 +178,49 @@ fn check_and_update_list(
     }
 }
 
-fn split_into_principal_and_account(input: String) -> (String, Option<String>) {
+fn split_into_principal_and_account(input: String) -> Result<Account, String> {
     if let Some(index) = input.find('.') {
-        let (left, right) = input.split_at(index);
-        let right = right.chars().skip(1).collect();
-        (left.to_string(), Some(right))
+        let (principal_str, subaccount_str) = input.split_at(index);
+        let subaccount_str: String = subaccount_str.chars().skip(1).collect();
+        match Principal::from_str(principal_str) {
+            Ok(valid_principal) => {
+                match hex::decode(subaccount_str) {
+                    Ok(decoded_subaccount) => {
+                        if decoded_subaccount.len() == 32 {
+                            let mut subaccount_array = [0u8; 32];
+                            subaccount_array.copy_from_slice(&decoded_subaccount);
+
+                            let principal_with_subaccount = Account {
+                                owner: valid_principal,
+                                subaccount: Some(subaccount_array),
+                            };
+                            Ok(principal_with_subaccount)
+                        } else {
+                            Err(
+                                "split_into_principal_and_account -> subaccount length check, expected 32 bytes".to_string()
+                            )
+                        }
+                    }
+                    Err(err) => {
+                        let err_message = format!(
+                            "split_into_principal_and_account -> hex::decode(subaccount_value){err:?}"
+                        );
+                        Err(err_message)
+                    }
+                }
+            }
+            Err(err) => Err(err.to_string()),
+        }
     } else {
-        (input, None)
+        match Principal::from_str(input.as_str()) {
+            Ok(valid_principal) => {
+                Ok(Account {
+                    owner: valid_principal,
+                    subaccount: None,
+                })
+            }
+            Err(err) => Err(err.to_string()),
+        }
     }
 }
 
