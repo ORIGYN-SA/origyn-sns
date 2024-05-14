@@ -8,7 +8,7 @@ const NeuronDetails = ({ row }: { row: Row<any> }) => {
         ({ label, value }: { label: string; value: string }) => (
           <div
             key={label}
-            className="text-center p-4 border-r last:border-r-0 border-b"
+            className="text-center p-4 border-r last:border-r-0 border-b border-border"
           >
             <div className="text-content/60">{label}</div>
             <div className="font-semibold">{value}</div>

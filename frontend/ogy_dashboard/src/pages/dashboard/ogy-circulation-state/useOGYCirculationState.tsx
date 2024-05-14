@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchFoundationAssetsOGY, {
   FoundationAssetsOGY,
-} from "@services/foundation/fetchFoundationAssetsOGYQuery";
+} from "@services/queries/foundation/fetchFoundationAssetsOGYQuery";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
 

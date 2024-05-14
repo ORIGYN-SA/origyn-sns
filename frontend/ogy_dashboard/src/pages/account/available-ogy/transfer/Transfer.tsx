@@ -5,10 +5,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
-import useTransfer from "@services/transfer/useTransfer";
+import useTransfer from "@services/queries/transfer/useTransfer";
 
 const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();

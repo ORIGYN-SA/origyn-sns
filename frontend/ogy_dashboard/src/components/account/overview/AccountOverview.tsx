@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 import AuthButton from "@components/auth/Auth";
 
 interface AccountOverviewProps {

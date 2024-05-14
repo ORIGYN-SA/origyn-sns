@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { IBalanceOGYLegacy } from "@services/accounts/useFetchBalanceOGYLegacy";
+import { IBalanceOGYLegacy } from "@services/queries/accounts/useFetchBalanceOGYLegacy";
 
 export interface IStepper {
   prevStep: () => void;

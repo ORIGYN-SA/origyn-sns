@@ -2,8 +2,8 @@ import { useContext, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button, Tile, LoaderSpin } from "@components/ui";
 import { StepperContext } from "../context";
-import useRequestSwap from "@services/switch-ledger/useRequestSwap";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useRequestSwap from "@services/queries/switch-ledger/useRequestSwap";
+import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 
 const Step2RequestSwap = () => {
   const queryClient = useQueryClient();
