@@ -130,14 +130,17 @@ impl TokenSwap {
     }
 
     pub fn recover_stuck_burn(
-        &self,
+        &mut self,
         block_index: BlockIndex
     ) -> Result<BurnRequestArgs, RecoverStuckBurnResponse> {
-        match self.swap.get(&block_index) {
+        match self.swap.get_mut(&block_index) {
             Some(entry) =>
-                match &entry.status {
-                    // If the swap status is in state BurnRequest, an attempt to recover can be made
-                    SwapStatus::BurnRequest(validation_info) => Ok(validation_info.clone()),
+                match entry.status.clone() {
+                    // If the swap status is in state BurnRequest, reset state to before burn request and an attempt to recover can be made
+                    SwapStatus::BurnRequest(validation_info) => {
+                        entry.status = SwapStatus::BlockValid;
+                        Ok(validation_info.clone())
+                    }
                     // In all other cases, there is no legitimate reason to retry to recover
                     val => Err(RecoverStuckBurnResponse::SwapIsNotStuckInBurn(val.clone())),
                 }
