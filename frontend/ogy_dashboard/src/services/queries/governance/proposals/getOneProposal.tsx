@@ -17,10 +17,10 @@ export const getOneProposal = async ({
   const id = data.id;
   const proposer = data.proposer;
   const title = data.proposal_title;
-  const proposed =
-    Math.round(Date.now()) - Number(data.proposal_creation_timestamp_seconds);
-  const timeRemaining =
-    Math.round(Date.now()) - Number(data.initial_voting_period_seconds);
+  const proposed = Number(data.proposal_creation_timestamp_seconds);
+  const timeRemaining = Number(
+    data.wait_for_quiet_state_current_deadline_timestamp_seconds
+  );
   const topic = data.proposal_action_type;
   const status = data.status;
   const payload = data.payload_text_rendering;
@@ -32,9 +32,9 @@ export const getOneProposal = async ({
     id,
     proposer,
     title,
-    proposed: DateTime.fromMillis(proposed).toRelativeCalendar() ?? "",
+    proposed: DateTime.fromSeconds(proposed).toRelativeCalendar() ?? "",
     timeRemaining:
-      DateTime.fromMillis(timeRemaining).toRelativeCalendar() ?? "",
+      DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
     topic,
     status: _capitalize(status),
     payload,

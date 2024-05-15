@@ -51,6 +51,8 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
   const ageBonus = neuron?.ageBonus;
   const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
   const dissolveDelayBonus = neuron?.dissolveDelayBonus;
+  const vestingPeriod = neuron?.vestingPeriod ?? 0;
+  const autoStakeMaturity = neuron?.autoStakeMaturity ?? 0;
 
   return {
     data: {
@@ -66,6 +68,8 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
       ageBonus,
       maxAgeBonusPercentage,
       dissolveDelayBonus,
+      vestingPeriod,
+      autoStakeMaturity,
       details: [
         { name: "State", value: state },
         { name: "Staked Maturity", value: stakedMaturity },
@@ -76,8 +80,8 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
         { name: "Date Created", value: createdAt },
         { name: "Age Bonus", value: ageBonus },
         { name: "Total Bonus", value: maxAgeBonusPercentage },
-        { name: "Auto-Stake Maturity", value: "TODO" },
-        { name: "Vesting Period", value: "TODO" },
+        { name: "Auto-Stake Maturity", value: autoStakeMaturity },
+        { name: "Vesting Period", value: vestingPeriod },
         { name: "Dissolve Delay Bonus", value: dissolveDelayBonus },
         { name: "Voting Power", value: votingPower },
       ],

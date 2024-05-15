@@ -20,10 +20,8 @@ export interface IProposalResult {
     total: number;
     timestamp_seconds: number;
   };
-}
-
-export interface IProposalResults {
-  data: IProposalResult[];
+  wait_for_quiet_state_current_deadline_timestamp_seconds: number;
+  reject_cost_e8s: number;
 }
 
 export interface IProposalData {
@@ -36,4 +34,5 @@ export interface IProposalData {
   status: string;
   payload?: string;
   votes: IProposalVotes;
+  riskedOGY?: string;
 }
