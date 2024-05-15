@@ -83,7 +83,7 @@ fn valid_swap() {
         block_index_deposit
     );
 
-    assert_eq!(result, SwapTokensResponse::Success);
+    assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
@@ -200,7 +200,7 @@ fn invalid_deposit_account() {
         block_index_deposit
     );
 
-    assert_eq!(result, SwapTokensResponse::Success);
+    assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
@@ -266,7 +266,7 @@ fn test_anonymous_request() {
         block_index_deposit
     );
 
-    assert_eq!(result, SwapTokensResponse::Success);
+    assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::from(amount));
 
@@ -303,13 +303,14 @@ fn test_massive_users_swapping() {
         old_ledger_total_supply.clone() + num_holders * E8S_FEE_OGY // fees need to be added as ORIGYN covers those
     );
 
-    for holder in holders {
+    for (index, holder) in holders.into_iter().enumerate() {
         user_token_swap(
             pic,
             holder,
             ogy_legacy_ledger_canister,
             ogy_new_ledger_canister,
-            ogy_token_swap_canister_id
+            ogy_token_swap_canister_id,
+            Nat::from(index + 1)
         );
     }
 
@@ -430,7 +431,8 @@ fn user_token_swap(
     user: Principal,
     old_ledger_canister_id: CanisterId,
     new_ledger_canister_id: CanisterId,
-    swap_canister_id: CanisterId
+    swap_canister_id: CanisterId,
+    user_index: Nat
 ) {
     let balance = balance_of_ogy_legacy(
         pic,
@@ -451,7 +453,7 @@ fn user_token_swap(
 
     assert_eq!(
         swap_tokens_authenticated_call(pic, user, swap_canister_id, block_index_deposit),
-        SwapTokensResponse::Success
+        SwapTokensResponse::Success(user_index)
     );
 
     assert_eq!(balance_of(&pic, new_ledger_canister_id, user), swap_amount);

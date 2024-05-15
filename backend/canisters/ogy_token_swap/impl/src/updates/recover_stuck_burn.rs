@@ -1,4 +1,8 @@
-use crate::{ state::{ mutate_state, read_state }, transfer_new_token };
+use crate::{
+    guards::caller_is_authorised_principal,
+    state::{ mutate_state, read_state },
+    transfer_new_token,
+};
 use canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::{
@@ -10,6 +14,7 @@ use ic_ledger_types::{
     GetBlocksArgs,
     Operation,
 };
+use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::token_swap::BurnRequestArgs;
 use utils::env::Environment;
@@ -30,11 +35,11 @@ pub use ogy_token_swap_api::{
     },
 };
 
-#[update]
+#[update(guard = "caller_is_authorised_principal", hidden = true)]
 #[trace]
 pub async fn recover_stuck_burn(args: RecoverStuckBurnArgs) -> RecoverStuckBurnResponse {
     match recover_stuck_burn_impl(args.block_index, args.block_index_burn).await {
-        Ok(_) => RecoverStuckBurnResponse::Success,
+        Ok(block_index_icrc) => RecoverStuckBurnResponse::Success(block_index_icrc),
         Err(err) => err,
     }
 }
@@ -42,7 +47,7 @@ pub async fn recover_stuck_burn(args: RecoverStuckBurnArgs) -> RecoverStuckBurnR
 pub(crate) async fn recover_stuck_burn_impl(
     block_index: BlockIndex,
     block_index_burn: BlockIndex
-) -> Result<(), RecoverStuckBurnResponse> {
+) -> Result<BlockIndexIcrc, RecoverStuckBurnResponse> {
     // 1. Check that block is actually stuck in burn mode
     let validation_data = mutate_state(|s| s.data.token_swap.recover_stuck_burn(block_index))?;
     // 2. Validate that block is a valid burn block

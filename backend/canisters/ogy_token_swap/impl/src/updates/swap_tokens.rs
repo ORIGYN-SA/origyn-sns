@@ -19,7 +19,10 @@ use ic_ledger_types::{
     TransferArgs,
 };
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
-use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, TransferArg } };
+use icrc_ledger_types::icrc1::{
+    account::Account,
+    transfer::{ BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferArg },
+};
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::token_swap::{ BurnRequestArgs, TransferRequestArgs };
 use serde_bytes::ByteBuf;
@@ -47,7 +50,7 @@ pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
         None => caller,
     };
     match swap_tokens_impl(args.block_index, user).await {
-        Ok(_) => SwapTokensResponse::Success,
+        Ok(block_index_icrc) => SwapTokensResponse::Success(block_index_icrc),
         Err(err) => SwapTokensResponse::InternalError(err),
     }
 }
@@ -55,7 +58,7 @@ pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
 pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
     principal: Principal
-) -> Result<(), String> {
+) -> Result<BlockIndexIcrc, String> {
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
     match recover_mode {
@@ -333,7 +336,7 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     }
 }
 
-pub async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
+pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcrc, String> {
     let (amount, ogy_ledger_canister_id, principal_result) = read_state(|s| {
         (
             s.data.token_swap.get_amount(block_index),
@@ -383,10 +386,10 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
                 s.data.token_swap.set_swap_block_index(block_index, transfer_block_index.clone());
                 s.data.token_swap.update_status(
                     block_index,
-                    SwapStatus::Complete(transfer_block_index)
+                    SwapStatus::Complete(transfer_block_index.clone())
                 );
             });
-            Ok(())
+            Ok(transfer_block_index)
         }
 
         Ok(Err(msg)) => {

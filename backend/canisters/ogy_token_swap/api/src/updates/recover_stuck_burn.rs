@@ -1,5 +1,6 @@
 use candid::CandidType;
 use ic_ledger_types::BlockIndex;
+use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 use serde::{ Deserialize, Serialize };
 
 use crate::token_swap::SwapStatus;
@@ -12,7 +13,7 @@ pub struct Args {
 
 #[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum Response {
-    Success,
+    Success(BlockIndexIcrc),
     BurnBlockNotFound,
     NoSwapRequestFound,
     NotAValidBurnBlock(String),
