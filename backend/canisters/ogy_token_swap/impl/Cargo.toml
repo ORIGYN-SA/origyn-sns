@@ -5,6 +5,10 @@ description = "Canister to swap legacy OGY token to new OGY token."
 edition = "2021"
 license = "AGPL-3.0-only"
 
+[features]
+inttest = []
+
+
 [lib]
 path = "src/lib.rs"
 crate-type = ["cdylib"]
