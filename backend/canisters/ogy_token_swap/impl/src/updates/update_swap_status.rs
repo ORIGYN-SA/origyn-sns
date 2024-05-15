@@ -6,10 +6,10 @@ pub use ogy_token_swap_api::updates::update_swap_status::{
     Args as UpdateSwapStateArgs, Response as UpdateSwapStateResponse,
 };
 
-use crate::state::mutate_state;
+use crate::{guards::caller_is_authorised_principal, state::mutate_state};
 
 #[cfg(feature = "inttest")]
-#[update]
+#[update(guard = "caller_is_authorised_principal")]
 pub async fn update_swap_status(args: UpdateSwapStateArgs) -> UpdateSwapStateResponse {
     _update_swap_status_impl(args.block_index, args.swap_status).await
 }
