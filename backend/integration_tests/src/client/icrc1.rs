@@ -50,7 +50,7 @@ pub mod client {
             sender,
             ledger_canister_id,
             &(icrc1_transfer::Args {
-                from_subaccount: None,
+                from_subaccount: from,
                 to: recipient.into(),
                 fee: None,
                 created_at_time: None,
