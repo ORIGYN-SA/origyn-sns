@@ -1,12 +1,16 @@
 use candid::{Nat, Principal};
 use ic_ledger_types::{AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens};
-use icrc_ledger_types::icrc1::transfer::TransferError;
+use icrc_ledger_types::icrc1::{account::Account, transfer::TransferError};
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::{
-    token_swap::{BurnRequestArgs, RecoverBurnMode, TransferFailReason},
+    token_swap::{
+        BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, TransferFailReason,
+        TransferRequestArgs,
+    },
     types::token_swap::{BlockFailReason, SwapError, SwapStatus},
     updates::{
         recover_stuck_burn::Response as RecoverStuckBurnResponse,
+        recover_stuck_transfer::Response as RecoverStuckTransferResponse,
         swap_tokens::Response as SwapTokensResponse,
     },
 };
@@ -22,8 +26,9 @@ use crate::{
             transfer_ogy,
         },
         ogy_token_swap::client::{
-            deposit_account, manipulate_swap_status, recover_stuck_burn_call, swap_info,
-            swap_tokens_anonymous_call, swap_tokens_authenticated_call,
+            deposit_account, manipulate_swap_status, recover_stuck_burn_call,
+            recover_stuck_transfer_call, swap_info, swap_tokens_anonymous_call,
+            swap_tokens_authenticated_call,
         },
     },
     ogy_swap_suite::{init::init, TestEnv},
@@ -680,6 +685,74 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
     );
     match swap_info(&env.pic, user, env.canister_ids.ogy_swap, block_index) {
+        ogy_token_swap_api::get_swap_info::Response::Success(info) => {
+            assert_eq!(info.status, SwapStatus::Complete(Nat::from(3usize)))
+        }
+        _ => panic!("Expect success response."),
+    }
+}
+
+#[test]
+fn test_recover_stuck_transfer_retry_transfer() {
+    let mut env = init();
+
+    let amount = Nat::from(1_000_000_000u64);
+
+    let user = user_init(&mut env, amount.clone());
+
+    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+
+    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+
+    // now we can manipulate the state and check if the recovery works
+    manipulate_swap_status(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        1u64,
+        SwapStatus::TransferRequest(TransferRequestArgs {
+            created_at_time: None,
+            to: Account {
+                owner: user,
+                subaccount: None,
+            },
+            amount: amount.clone(),
+            memo: None,
+        }),
+    );
+
+    // Note that the tokens were already swapped but we can burn those to correctly test
+    let _ = transfer(
+        &mut env.pic,
+        user,
+        env.canister_ids.ogy_new_ledger,
+        None,
+        env.controller,
+        amount.clone(),
+    );
+    assert_eq!(
+        Nat::from(0u8),
+        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
+    );
+
+    // run the recovery
+    let res = recover_stuck_transfer_call(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        1u64,
+        RecoverTransferMode::RetryTransfer,
+    );
+    assert_eq!(
+        RecoverStuckTransferResponse::Success(Nat::from(3usize)),
+        res
+    );
+
+    assert_eq!(
+        amount,
+        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
+    );
+    match swap_info(&env.pic, user, env.canister_ids.ogy_swap, 1u64) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(3usize)))
         }

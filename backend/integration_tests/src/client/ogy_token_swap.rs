@@ -5,6 +5,7 @@ generate_query_call!(get_swap_info);
 
 // Updates
 generate_update_call!(recover_stuck_burn);
+generate_update_call!(recover_stuck_transfer);
 generate_update_call!(request_deposit_account);
 generate_update_call!(swap_tokens);
 generate_update_call!(update_swap_status);
@@ -24,12 +25,17 @@ pub mod update_swap_status {
 pub mod recover_stuck_burn {
     pub use ogy_token_swap_api::updates::recover_stuck_burn::{Args, Response};
 }
+pub mod recover_stuck_transfer {
+    pub use ogy_token_swap_api::updates::recover_stuck_transfer::{Args, Response};
+}
 
 pub mod client {
     use super::*;
     use candid::Principal;
     use ic_ledger_types::BlockIndex;
-    use ogy_token_swap_api::token_swap::{BurnRequestArgs, RecoverBurnMode, SwapStatus};
+    use ogy_token_swap_api::token_swap::{
+        BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, SwapStatus,
+    };
     use pocket_ic::PocketIc;
     use types::CanisterId;
 
@@ -127,6 +133,23 @@ pub mod client {
                 block_index,
                 recover_mode,
                 validation_data,
+            }),
+        )
+    }
+    pub fn recover_stuck_transfer_call(
+        pic: &mut PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId,
+        block_index: BlockIndex,
+        recover_mode: RecoverTransferMode,
+    ) -> recover_stuck_transfer::Response {
+        recover_stuck_transfer(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(recover_stuck_transfer::Args {
+                block_index,
+                recover_mode,
             }),
         )
     }

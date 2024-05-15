@@ -286,3 +286,9 @@ pub enum RecoverBurnMode {
     RetryBurn,
     BurnBlockProvided(BlockIndex),
 }
+
+#[derive(CandidType, Serialize, Deserialize, Debug)]
+pub enum RecoverTransferMode {
+    RetryTransfer,
+    TransferBlockProvided(BlockIndexIcrc),
+}
