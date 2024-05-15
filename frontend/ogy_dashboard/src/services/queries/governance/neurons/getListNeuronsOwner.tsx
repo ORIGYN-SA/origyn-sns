@@ -1,61 +1,14 @@
-// import { keepPreviousData } from "@tanstack/react-query";
-// import { useConnect, useCanister } from "@connect2ic/react";
 import { ActorSubclass } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
-
-interface INeuronId {
-  id: number[];
-}
-
-interface IListNeurons {
-  governanceActor: ActorSubclass;
-  owner?: string;
-  limit: number;
-  neuronId?: string;
-  nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
-}
-
-interface IDissolveState {
-  DissolveDelaySeconds?: bigint;
-  WhenDissolvedTimestampSeconds?: bigint;
-}
-
-interface INeurons {
-  cached_neuron_stake_e8s: bigint;
-  staked_maturity_e8s_equivalent: bigint[];
-  aging_since_timestamp_seconds: bigint;
-  dissolve_state: IDissolveState[];
-  id: INeuronId[];
-  created_timestamp_seconds: bigint;
-}
-
-interface IListNeuronsResult {
-  neurons: INeurons[];
-}
-
-export interface INeuronData {
-  stakedAmount: number;
-  stakedMaturity: number;
-  stakedAmountToString: string;
-  stakedMaturityToString: string;
-  age: number;
-  ageToRelativeCalendar: string;
-  state: string;
-  votingPower: number;
-  votingPowerToString: string;
-  dissolveDelay: number;
-  id: INeuronId;
-  id2Hex: string;
-  createdAt: string;
-  maxNeuronAgeForAgeBonus: number;
-  maxAgeBonusPercentage: number;
-  ageBonus: number;
-  dissolveDelayBonus: number;
-}
+import {
+  INeuronResultCanister,
+  INeuronDataCanister as INeuronData,
+  IDissolveState,
+} from "@services/types";
 
 const getNeuronState = (dissolveState: IDissolveState) => {
   const currentTimestampSeconds = new Date().getTime() / 1000;
@@ -74,21 +27,25 @@ export const getListNeuronsOwner = async ({
   limit,
   neuronId,
   nervousSystemParameters,
-}: IListNeurons) => {
-  // console.log([...Uint8Array.from(Buffer.from(neuronId, "hex"))]);
-  const result = await governanceActor.list_neurons({
+}: {
+  governanceActor: ActorSubclass;
+  owner?: string;
+  limit: number;
+  neuronId?: string;
+  nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
+}) => {
+  const result = (await governanceActor.list_neurons({
     of_principal: owner ? [Principal.fromText(owner)] : [],
     limit,
     start_page_at: neuronId
       ? [{ id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] }]
       : [],
-  });
-  // console.log(result);
+  })) as { neurons: INeuronResultCanister[] };
 
   const currentTimestamp = getCurrentTimestamp();
 
   return (
-    (result as IListNeuronsResult)?.neurons?.map((data) => {
+    result?.neurons?.map((data) => {
       const dissolveState = data.dissolve_state[0];
       // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
       const createdAt =

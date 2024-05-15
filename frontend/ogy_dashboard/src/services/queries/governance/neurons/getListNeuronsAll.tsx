@@ -4,49 +4,12 @@ import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
+import { INeuronResultAPI, INeuronData, IDissolveState } from "@services/types";
 
-interface IListNeurons {
+interface IGetListNeuronsAll {
   limit: number;
   offset: number;
   nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
-}
-
-interface IDissolveState {
-  DissolveDelaySeconds?: bigint;
-  WhenDissolvedTimestampSeconds?: bigint;
-}
-
-interface INeurons {
-  cached_neuron_stake_e8s: bigint;
-  staked_maturity_e8s_equivalent: bigint[];
-  aging_since_timestamp_seconds: bigint;
-  dissolve_state: IDissolveState;
-  id: string;
-  created_timestamp_seconds: bigint;
-}
-
-interface IListNeuronsResult {
-  data: INeurons[];
-}
-
-export interface INeuronData {
-  stakedAmount: number;
-  stakedMaturity: number;
-  stakedAmountToString: string;
-  stakedMaturityToString: string;
-  age: number;
-  ageToRelativeCalendar: string;
-  state: string;
-  votingPower: number;
-  votingPowerToString: string;
-  dissolveDelay: number;
-  id: string;
-  id2Hex: string;
-  createdAt: string;
-  maxNeuronAgeForAgeBonus: number;
-  maxAgeBonusPercentage: number;
-  ageBonus: number;
-  dissolveDelayBonus: number;
 }
 
 const getNeuronState = (dissolveState: IDissolveState) => {
@@ -64,17 +27,20 @@ export const getListNeuronsAll = async ({
   limit = 10,
   offset = 0,
   nervousSystemParameters,
-}: IListNeurons) => {
-  const { data } = await snsAPI.get(
-    `/snses/${SNS_ROOT_CANISTER}/neurons?offset=${offset}&limit=${limit}&sort_by=-created_timestamp_seconds`
-  );
+}: IGetListNeuronsAll) => {
+  const {
+    data,
+  }: { data: { data: INeuronResultAPI[]; total_neurons: number } } =
+    await snsAPI.get(
+      `/snses/${SNS_ROOT_CANISTER}/neurons?offset=${offset}&limit=${limit}&sort_by=-created_timestamp_seconds`
+    );
 
   const currentTimestamp = getCurrentTimestamp();
 
   return {
     totalNeurons: data.total_neurons,
     data:
-      (data as IListNeuronsResult)?.data?.map((data) => {
+      data?.data?.map((data) => {
         const dissolveState = data.dissolve_state;
         // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
         const createdAt =
