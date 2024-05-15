@@ -2,6 +2,7 @@ type Account = record { owner : principal; subaccount : opt blob };
 type Args = record { block_index : nat64 };
 type Args_1 = record { of : opt principal };
 type Args_2 = record { block_index : nat64; user : opt principal };
+type Args_3 = record { block_index : nat64; swap_status : SwapStatus };
 type BlockFailReason = variant {
   ReceiverNotCorrectAccountId : blob;
   NotFound;
@@ -12,6 +13,7 @@ type BlockFailReason = variant {
 };
 type BurnFailReason = variant {
   TransferError : TransferError;
+  NoTokensToBurn;
   CallError : text;
 };
 type BurnRequestArgs = record {
@@ -24,6 +26,7 @@ type ImpossibleErrorReason = variant { AmountNotFound; PrincipalNotFound };
 type InitArgs = record {
   ogy_legacy_minting_account_principal : principal;
   test_mode : bool;
+  authorized_principals : vec principal;
   ogy_new_ledger_canister_id : principal;
   ogy_legacy_ledger_canister_id : principal;
 };
@@ -87,4 +90,5 @@ service : (InitArgs) -> {
   get_swap_info : (Args) -> (Response) query;
   request_deposit_account : (Args_1) -> (Response_1);
   swap_tokens : (Args_2) -> (Response_2);
+  update_swap_status : (Args_3) -> (null);
 }

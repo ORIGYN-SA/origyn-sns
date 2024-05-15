@@ -1,29 +1,21 @@
 use std::collections::BTreeMap;
 
-use candid::{ CandidType, Nat, Principal };
+use candid::{CandidType, Nat, Principal};
 use canister_time::now_millis;
 use ic_ledger_types::{
-    AccountIdentifier,
-    BlockIndex,
-    Memo,
-    Subaccount,
-    Timestamp,
-    Tokens,
-    TransferError,
+    AccountIdentifier, BlockIndex, Memo, Subaccount, Timestamp, Tokens, TransferError,
 };
 use icrc_ledger_types::icrc1::{
     account::Account,
     transfer::{
-        BlockIndex as BlockIndexIcrc,
-        Memo as MemoIcrc,
-        TransferError as TransferErrorIcrc,
+        BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferError as TransferErrorIcrc,
     },
 };
 use ledger_utils::principal_to_legacy_account_id;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 use types::TimestampNanos;
 
-use crate::updates::recover_stuck_burn::Response as RecoverStuckBurnResponse;
+use crate::updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse;
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct TokenSwap {
@@ -34,7 +26,7 @@ impl TokenSwap {
     pub fn init_swap(
         &mut self,
         block_index: BlockIndex,
-        principal: Principal
+        principal: Principal,
     ) -> Result<Option<RecoverMode>, String> {
         match self.swap.get(&block_index) {
             Some(entry) =>
@@ -129,23 +121,24 @@ impl TokenSwap {
         }
     }
 
-    pub fn recover_stuck_burn(
+    pub fn recover_stuck_transfer(
         &mut self,
-        block_index: BlockIndex
-    ) -> Result<BurnRequestArgs, RecoverStuckBurnResponse> {
+        block_index: BlockIndex,
+    ) -> Result<(), RecoverStuckTransferResponse> {
         match self.swap.get_mut(&block_index) {
-            Some(entry) =>
-                match entry.status.clone() {
-                    // If the swap status is in state BurnRequest, reset state to before burn request and an attempt to recover can be made
-                    SwapStatus::BurnRequest(validation_info) => {
-                        entry.status = SwapStatus::BlockValid;
-                        Ok(validation_info.clone())
-                    }
-                    // In all other cases, there is no legitimate reason to retry to recover
-                    val => Err(RecoverStuckBurnResponse::SwapIsNotStuckInBurn(val.clone())),
+            Some(entry) => match entry.status.clone() {
+                // If the swap status is in state TransferRequest, reset state to before transfer request and an attempt to recover can be made
+                SwapStatus::TransferRequest(_) => {
+                    entry.status = SwapStatus::BurnSuccess;
+                    Ok(())
                 }
+                // In all other cases, there is no legitimate reason to retry to recover
+                val => Err(RecoverStuckTransferResponse::SwapIsNotStuckInTransfer(
+                    val.clone(),
+                )),
+            },
             // If not entry is found for this block_index, it's not a valid request
-            None => Err(RecoverStuckBurnResponse::NoSwapRequestFound),
+            None => Err(RecoverStuckTransferResponse::NoSwapRequestFound),
         }
     }
 
@@ -173,7 +166,9 @@ impl TokenSwap {
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
         match self.swap.get(&block_index) {
             Some(swap_info) => Ok(swap_info.principal),
-            None => Err(format!("No principal entry not found for block index {block_index}.")), // this is not possible because it was initialised before but validating here in any case
+            None => Err(format!(
+                "No principal entry not found for block index {block_index}."
+            )), // this is not possible because it was initialised before but validating here in any case
         }
     }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
@@ -184,7 +179,7 @@ impl TokenSwap {
     pub fn set_swap_block_index(
         &mut self,
         block_index: BlockIndex,
-        swap_block_index: BlockIndexIcrc
+        swap_block_index: BlockIndexIcrc,
     ) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.token_swap_block_index = Some(swap_block_index);
@@ -249,6 +244,7 @@ pub enum BlockFailReason {
 pub enum BurnFailReason {
     TransferError(TransferError),
     CallError(String),
+    NoTokensToBurn,
 }
 
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
@@ -283,4 +279,10 @@ pub struct TransferRequestArgs {
     pub to: Account,
     pub amount: Nat,
     pub memo: Option<MemoIcrc>,
+}
+
+#[derive(CandidType, Serialize, Deserialize, Debug)]
+pub enum RecoverBurnMode {
+    RetryBurn,
+    BurnBlockProvided(BlockIndex),
 }
