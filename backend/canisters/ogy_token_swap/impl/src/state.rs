@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use candid::{CandidType, Principal};
 use canister_state_macros::canister_state;
 use ic_ledger_types::{AccountIdentifier, Subaccount};
@@ -69,6 +71,8 @@ pub struct Data {
     pub canister_ids: CanisterIds,
     /// The minting account of legacy OGY where tokens are burned to
     pub minting_account: AccountIdentifier,
+    /// List of requesting principals for deposit_accounts
+    pub requesting_principals: HashSet<Principal>,
 }
 
 impl Data {
@@ -89,6 +93,7 @@ impl Data {
                 &ogy_legacy_minting_account_principal,
                 &Subaccount([0; 32]),
             ),
+            requesting_principals: HashSet::default(),
         }
     }
 }

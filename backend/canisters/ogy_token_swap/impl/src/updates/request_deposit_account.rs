@@ -7,11 +7,12 @@ pub use ogy_token_swap_api::updates::request_deposit_account::{
     Args as RequestDepositAccountArgs, Response as RequestDepositAccountResponse,
 };
 
-use crate::state::read_state;
+use crate::state::{mutate_state, read_state};
 
 #[update]
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
+    mutate_state(|s| s.data.requesting_principals.insert(principal));
     RequestDepositAccountResponse::Success(compute_deposit_account(&principal))
 }
 

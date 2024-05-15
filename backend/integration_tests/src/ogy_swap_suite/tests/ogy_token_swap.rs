@@ -27,8 +27,8 @@ use crate::{
         },
         ogy_token_swap::client::{
             deposit_account, manipulate_swap_status, recover_stuck_burn_call,
-            recover_stuck_transfer_call, swap_info, swap_tokens_anonymous_call,
-            swap_tokens_authenticated_call,
+            recover_stuck_transfer_call, requesting_principals, swap_info,
+            swap_tokens_anonymous_call, swap_tokens_authenticated_call,
         },
     },
     ogy_swap_suite::{init::init, TestEnv},
@@ -813,6 +813,53 @@ fn test_deposit_account() {
         get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap(),
         principal_to_legacy_account_id(ogy_token_swap_canister_id, Some(Subaccount::from(user)))
     )
+}
+
+#[test]
+fn test_requesting_principals() {
+    let mut env = init();
+
+    let num_holders = 100;
+    let mut holders = init_token_distribution(&mut env, num_holders);
+
+    let mut subaccount_list = vec![];
+    for holder in holders.clone() {
+        subaccount_list.push(
+            get_deposit_account_helper(&mut env.pic, env.canister_ids.ogy_swap, holder).unwrap(),
+        );
+    }
+
+    assert_eq!(
+        holders
+            .clone()
+            .into_iter()
+            .map(|p| {
+                principal_to_legacy_account_id(env.canister_ids.ogy_swap, Some(Subaccount::from(p)))
+            })
+            .collect::<Vec<_>>(),
+        subaccount_list
+    );
+
+    let mut requested_principals =
+        requesting_principals(&env.pic, Principal::anonymous(), env.canister_ids.ogy_swap)
+            .into_iter()
+            .collect::<Vec<_>>();
+
+    assert_eq!(holders.sort(), requested_principals.sort());
+
+    assert_eq!(
+        subaccount_list.sort(),
+        requested_principals
+            .clone()
+            .into_iter()
+            .map(|p| {
+                principal_to_legacy_account_id(env.canister_ids.ogy_swap, Some(Subaccount::from(p)))
+            })
+            .collect::<Vec<_>>()
+            .sort()
+    );
+
+    assert_eq!(subaccount_list.len(), requested_principals.len())
 }
 
 fn init_token_distribution(env: &mut TestEnv, num_users: u64) -> Vec<Principal> {
