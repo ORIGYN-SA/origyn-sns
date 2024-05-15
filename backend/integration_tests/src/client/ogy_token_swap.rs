@@ -1,27 +1,35 @@
-use crate::{ generate_query_call, generate_update_call };
+use crate::{generate_query_call, generate_update_call};
 
 // Queries
 generate_query_call!(get_swap_info);
 
 // Updates
+generate_update_call!(recover_stuck_burn);
 generate_update_call!(request_deposit_account);
 generate_update_call!(swap_tokens);
+generate_update_call!(update_swap_status);
 
-pub mod swap_tokens {
-    pub use ogy_token_swap_api::updates::swap_tokens::{ Args, Response };
-}
-
-pub mod request_deposit_account {
-    pub use ogy_token_swap_api::updates::request_deposit_account::{ Args, Response };
-}
 pub mod get_swap_info {
-    pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
+    pub use ogy_token_swap_api::queries::get_swap_info::{Args, Response};
+}
+pub mod request_deposit_account {
+    pub use ogy_token_swap_api::updates::request_deposit_account::{Args, Response};
+}
+pub mod swap_tokens {
+    pub use ogy_token_swap_api::updates::swap_tokens::{Args, Response};
+}
+pub mod update_swap_status {
+    pub use ogy_token_swap_api::updates::update_swap_status::{Args, Response};
+}
+pub mod recover_stuck_burn {
+    pub use ogy_token_swap_api::updates::recover_stuck_burn::{Args, Response};
 }
 
 pub mod client {
     use super::*;
     use candid::Principal;
     use ic_ledger_types::BlockIndex;
+    use ogy_token_swap_api::token_swap::{BurnRequestArgs, RecoverBurnMode, SwapStatus};
     use pocket_ic::PocketIc;
     use types::CanisterId;
 
@@ -29,7 +37,7 @@ pub mod client {
         pic: &mut PocketIc,
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> swap_tokens::Response {
         swap_tokens(
             pic,
@@ -38,14 +46,14 @@ pub mod client {
             &(swap_tokens::Args {
                 block_index,
                 user: None,
-            })
+            }),
         )
     }
     pub fn swap_tokens_anonymous_call(
         pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
         user: Principal,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> swap_tokens::Response {
         swap_tokens(
             pic,
@@ -54,20 +62,20 @@ pub mod client {
             &(swap_tokens::Args {
                 block_index,
                 user: Some(user),
-            })
+            }),
         )
     }
 
     pub fn deposit_account(
         pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
-        user: Principal
+        user: Principal,
     ) -> request_deposit_account::Response {
         request_deposit_account(
             pic,
             Principal::anonymous(),
             ogy_token_swap_canister_id,
-            &(request_deposit_account::Args { of: Some(user) })
+            &(request_deposit_account::Args { of: Some(user) }),
         )
     }
 
@@ -75,13 +83,51 @@ pub mod client {
         pic: &PocketIc,
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> get_swap_info::Response {
         get_swap_info(
             pic,
             sender,
             ogy_token_swap_canister_id,
-            &(get_swap_info::Args { block_index })
+            &(get_swap_info::Args { block_index }),
+        )
+    }
+
+    pub fn manipulate_swap_status(
+        pic: &mut PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId,
+        block_index: BlockIndex,
+        swap_status: SwapStatus,
+    ) -> update_swap_status::Response {
+        update_swap_status(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(update_swap_status::Args {
+                block_index,
+                swap_status,
+            }),
+        )
+    }
+
+    pub fn recover_stuck_burn_call(
+        pic: &mut PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId,
+        block_index: BlockIndex,
+        recover_mode: RecoverBurnMode,
+        validation_data: Option<BurnRequestArgs>,
+    ) -> recover_stuck_burn::Response {
+        recover_stuck_burn(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(recover_stuck_burn::Args {
+                block_index,
+                recover_mode,
+                validation_data,
+            }),
         )
     }
 }
