@@ -1,7 +1,6 @@
 import { IListProps } from "@services/types/list";
 import {
   IProposalResult,
-  IProposalResults,
   IProposalData,
   IProposalVotes,
 } from "@services/types/proposals";
@@ -17,7 +16,6 @@ import {
 export type {
   IListProps,
   IProposalResult,
-  IProposalResults,
   IProposalData,
   IProposalVotes,
   INeuronResultAPI,

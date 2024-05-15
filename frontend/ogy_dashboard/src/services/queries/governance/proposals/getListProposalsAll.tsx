@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import _capitalize from "lodash/capitalize";
 import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
-import { IListProps, IProposalResults, IProposalData } from "@services/types";
+import { IListProps, IProposalResult, IProposalData } from "@services/types";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 
 export const getListProposalsAll = async ({
@@ -16,18 +16,17 @@ export const getListProposalsAll = async ({
   return {
     totalProposals: data.total,
     data:
-      (data as IProposalResults)?.data?.map((data) => {
+      (data as { data: IProposalResult[] })?.data?.map((data) => {
         const votes = data.latest_tally;
         const yes = (votes.yes * 100) / votes.total;
         const no = (votes.no * 100) / votes.total;
         const id = data.id;
         const proposer = data.proposer;
         const title = data.proposal_title;
-        const proposed =
-          Math.round(Date.now()) -
-          Number(data.proposal_creation_timestamp_seconds);
-        const timeRemaining =
-          Math.round(Date.now()) - Number(data.initial_voting_period_seconds);
+        const proposed = Number(data.proposal_creation_timestamp_seconds);
+        const timeRemaining = Number(
+          data.wait_for_quiet_state_current_deadline_timestamp_seconds
+        );
         const topic = data.proposal_action_type;
         const status = data.status;
 
@@ -35,9 +34,9 @@ export const getListProposalsAll = async ({
           id,
           proposer,
           title,
-          proposed: DateTime.fromMillis(proposed).toRelativeCalendar() ?? "",
+          proposed: DateTime.fromSeconds(proposed).toRelativeCalendar() ?? "",
           timeRemaining:
-            DateTime.fromMillis(timeRemaining).toRelativeCalendar() ?? "",
+            DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
           topic,
           status: _capitalize(status),
           votes: {

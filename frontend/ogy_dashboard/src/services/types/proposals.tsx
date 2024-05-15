@@ -20,10 +20,7 @@ export interface IProposalResult {
     total: number;
     timestamp_seconds: number;
   };
-}
-
-export interface IProposalResults {
-  data: IProposalResult[];
+  wait_for_quiet_state_current_deadline_timestamp_seconds: number;
 }
 
 export interface IProposalData {
