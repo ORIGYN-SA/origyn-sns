@@ -29,6 +29,7 @@ export const getListProposalsAll = async ({
         );
         const topic = data.proposal_action_type;
         const status = data.status;
+        const riskedOGY = data.reject_cost_e8s;
 
         return {
           id,
@@ -46,6 +47,7 @@ export const getListProposalsAll = async ({
             noToString: no.toFixed(3),
             total: roundAndFormatLocale({ number: divideBy1e8(votes.total) }),
           },
+          riskedOGY: roundAndFormatLocale({ number: divideBy1e8(riskedOGY) }),
         } as IProposalData;
       }) ?? [],
   };
