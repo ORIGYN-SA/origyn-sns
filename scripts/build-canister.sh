@@ -9,10 +9,11 @@ Usage:
   scripts/build-canister.sh [options] <CANISTER>
 
 Options:
-  -h, --help        Show this message and exit
-  -w, --wasmonly    Only produce a non-optimized wasm file (used for did generation)
-  --checksum        Compute sha256 evidence
-  --verify          Verify sha256 evidence of existing build
+  -h, --help                Show this message and exit
+  -w, --wasmonly            Only produce a non-optimized wasm file (used for did generation)
+  -it, --integration-test   Includes integration testing code
+  --checksum                Compute sha256 evidence
+  --verify                  Verify sha256 evidence of existing build
 EOF
 }
 
@@ -29,6 +30,10 @@ if [[ $# -gt 0 ]]; then
       -w | --wasmonly )
         echo "Building wasm only without compressing."
         WASMONLY=1
+        ;;
+      -it | --integration-test )
+        echo "Building for integration testing"
+        INTTEST="--features inttest"
         ;;
       --checksum )
         EVIDENCE=1
@@ -58,7 +63,7 @@ if [[ $WASMONLY == 1 ]]; then
   echo "" > $BASE_CANISTER_PATH/$1/api/can.did
 fi
 
-cargo build --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked -p $1
+cargo build --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked $INTTEST -p $1
 
 if [[ -v $WASMONLY ]]; then
   rm -f $BASE_CANISTER_PATH/$1/api/can.did
