@@ -2,7 +2,7 @@
   "[rust]": {
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "jinxdash.prettier-rust",
+    // "editor.defaultFormatter": "jinxdash.prettier-rust",
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 140
   },
