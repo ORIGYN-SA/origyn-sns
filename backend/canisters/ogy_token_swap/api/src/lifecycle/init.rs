@@ -1,4 +1,4 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use serde::Deserialize;
 use types::CanisterId;
 
@@ -8,4 +8,5 @@ pub struct InitArgs {
     pub ogy_legacy_ledger_canister_id: CanisterId,
     pub ogy_new_ledger_canister_id: CanisterId,
     pub ogy_legacy_minting_account_principal: Principal,
+    pub authorized_principals: Vec<Principal>,
 }

@@ -1,15 +1,13 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use canister_state_macros::canister_state;
-use ic_ledger_types::{ AccountIdentifier, Subaccount };
-use serde::{ Deserialize, Serialize };
-use types::{ CanisterId, TimestampMillis };
+use ic_ledger_types::{AccountIdentifier, Subaccount};
+use serde::{Deserialize, Serialize};
+use types::{CanisterId, TimestampMillis};
 use utils::{
-    consts::SNS_GOVERNANCE_CANISTER_ID,
-    env::{ CanisterEnv, Environment },
+    env::{CanisterEnv, Environment},
     memory::MemorySize,
 };
 
-use crate::consts::ORIGYN_ADMIN_PRINCIPAL;
 use ogy_token_swap_api::types::token_swap::TokenSwap;
 
 canister_state!(RuntimeState);
@@ -77,10 +75,11 @@ impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
         ogy_legacy_ledger: CanisterId,
-        ogy_legacy_minting_account_principal: Principal
+        ogy_legacy_minting_account_principal: Principal,
+        authorized_principals: Vec<Principal>,
     ) -> Self {
         Self {
-            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID, ORIGYN_ADMIN_PRINCIPAL],
+            authorized_principals,
             token_swap: TokenSwap::default(),
             canister_ids: CanisterIds {
                 ogy_new_ledger,
@@ -88,7 +87,7 @@ impl Data {
             },
             minting_account: AccountIdentifier::new(
                 &ogy_legacy_minting_account_principal,
-                &Subaccount([0; 32])
+                &Subaccount([0; 32]),
             ),
         }
     }
