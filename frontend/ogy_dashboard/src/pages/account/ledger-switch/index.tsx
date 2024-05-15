@@ -63,7 +63,7 @@ const LedgerSwitch = ({ className, ...restProps }) => {
                   key={title}
                 >
                   <div className="flex">
-                    <Tile className="rounded-xl h-20 w-20 mr-4">
+                    <Tile className="rounded-xl h-20 w-20 mr-4 bg-surface-2">
                       {icon as ReactNode}
                     </Tile>
                     <div>
