@@ -63,6 +63,8 @@ pub(crate) async fn swap_tokens_impl(
 ) -> Result<BlockIndexIcrc, String> {
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
+    // if it passed the first check, we update the last request time
+    mutate_state(|s| s.data.token_swap.update_last_request_time(block_index))?;
     match recover_mode {
         None | Some(RecoverMode::RetryBlockValidation) => {
             // 2. validate block data

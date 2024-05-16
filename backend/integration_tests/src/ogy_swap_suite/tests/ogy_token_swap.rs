@@ -1,6 +1,8 @@
-use candid::{ Nat, Principal };
-use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
-use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferError };
+use std::time::Duration;
+
+use candid::{Nat, Principal};
+use ic_ledger_types::{AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens};
+use icrc_ledger_types::icrc1::{account::Account, transfer::TransferError};
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::{
     token_swap::{
@@ -107,6 +109,7 @@ fn valid_swap() {
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
     // retry same swap should fail
+    pic.advance_time(Duration::from_secs(60));
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user,
@@ -211,6 +214,7 @@ fn invalid_deposit_account() {
     }
 
     // Try the recover process by requesting with the correct user
+    pic.advance_time(Duration::from_secs(60));
 
     let result = swap_tokens_authenticated_call(
         &mut pic,
@@ -761,6 +765,8 @@ fn test_insufficient_funds_in_distribution_pool() {
     );
 
     init_swap_pool(&mut env, Nat::from(100_000_000_000 * E8S_PER_OGY));
+
+    env.pic.advance_time(Duration::from_secs(60));
 
     // retry again in normal mode
     assert_eq!(

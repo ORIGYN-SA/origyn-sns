@@ -41,10 +41,11 @@ type SwapError = variant {
 };
 type SwapInfo = record {
   status : SwapStatus;
+  last_request : nat64;
   "principal" : principal;
   token_swap_block_index : opt nat;
   burn_block_index : opt nat64;
-  timestamp : nat64;
+  first_request : nat64;
   amount : Tokens;
 };
 type SwapStatus = variant {

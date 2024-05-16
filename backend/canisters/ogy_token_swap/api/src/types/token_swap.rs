@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 
-use candid::{CandidType, Nat, Principal};
-use canister_time::now_millis;
+use candid::{ CandidType, Nat, Principal };
+use canister_time::{ timestamp_millis, SECOND_IN_MS };
 use ic_ledger_types::{
     AccountIdentifier,
     BlockIndex,
@@ -20,10 +20,13 @@ use icrc_ledger_types::icrc1::{
     },
 };
 use ledger_utils::principal_to_legacy_account_id;
-use serde::{Deserialize, Serialize};
-use types::TimestampNanos;
+use serde::{ Deserialize, Serialize };
+use types::{ Milliseconds, TimestampNanos };
 
 use crate::updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse;
+
+const MINIMUM_TIMEOUT_IN_SECONDS: u64 = 30;
+const MINIMUM_TIMEOUT_IN_MS: Milliseconds = MINIMUM_TIMEOUT_IN_SECONDS * SECOND_IN_MS;
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct TokenSwap {
@@ -34,10 +37,13 @@ impl TokenSwap {
     pub fn init_swap(
         &mut self,
         block_index: BlockIndex,
-        principal: Principal,
+        principal: Principal
     ) -> Result<Option<RecoverMode>, String> {
         match self.swap.get(&block_index) {
-            Some(entry) =>
+            Some(entry) => {
+                // only allow requests per block_index within a certain interval to avoid spamming attempts
+                entry.check_timeout()?;
+                // if all good continue with the check
                 match &entry.status {
                     SwapStatus::Complete(block_index) =>
                         Err(format!("Swap already completed on block {block_index}.")),
@@ -122,6 +128,7 @@ impl TokenSwap {
                     | SwapStatus::BurnSuccess
                     | SwapStatus::TransferRequest(_) => Err("Swap already running.".to_string()),
                 }
+            }
             None => {
                 self.swap.insert(block_index, SwapInfo::new(principal));
                 Ok(None)
@@ -146,6 +153,24 @@ impl TokenSwap {
                 }
             // If not entry is found for this block_index, it's not a valid request
             None => Err(RecoverStuckTransferResponse::NoSwapRequestFound),
+        }
+    }
+
+    pub fn check_timeout(&mut self, block_index: BlockIndex) -> Result<(), String> {
+        match self.swap.get_mut(&block_index) {
+            Some(entry) => entry.check_timeout(),
+            None => Err(format!("No entry found for block index {}", block_index)),
+        }
+    }
+
+    pub fn update_last_request_time(&mut self, block_index: BlockIndex) -> Result<u64, String> {
+        match self.swap.get_mut(&block_index) {
+            Some(entry) => {
+                let now = timestamp_millis();
+                entry.last_request = now;
+                Ok(now)
+            }
+            None => Err(format!("No entry found for block index {}", block_index)),
         }
     }
 
@@ -197,7 +222,8 @@ pub struct SwapInfo {
     pub status: SwapStatus,
     pub amount: Tokens,
     pub principal: Principal,
-    pub timestamp: u64,
+    pub first_request: u64,
+    pub last_request: u64,
     pub burn_block_index: Option<BlockIndex>,
     pub token_swap_block_index: Option<BlockIndexIcrc>,
 }
@@ -208,9 +234,22 @@ impl SwapInfo {
             status: SwapStatus::Init,
             principal,
             amount: Tokens::from_e8s(0),
-            timestamp: now_millis(),
+            first_request: timestamp_millis(),
+            last_request: timestamp_millis(),
             burn_block_index: None,
             token_swap_block_index: None,
+        }
+    }
+
+    pub fn check_timeout(&self) -> Result<(), String> {
+        if timestamp_millis() - self.last_request > MINIMUM_TIMEOUT_IN_MS {
+            Ok(())
+        } else {
+            Err(
+                format!(
+                    "Timeout not yet reached. Wait at least {MINIMUM_TIMEOUT_IN_SECONDS} seconds between requests."
+                )
+            )
         }
     }
 }
