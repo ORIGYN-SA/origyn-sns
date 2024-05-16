@@ -1,25 +1,34 @@
 import { Principal } from "@dfinity/principal";
 import { ActorSubclass } from "@dfinity/agent";
-import { divideBy1e8 } from "@helpers/numbers/index";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 interface IFetchBalanceOGY {
   actor: ActorSubclass;
   owner: string;
-  subaccount?: number[];
+  subaccount?: string;
 }
 
-export const fetchBalanceOGY = async ({
+const fetchBalanceOGY = async ({
   actor,
   owner,
   subaccount,
 }: IFetchBalanceOGY) => {
+  const _subaccount = subaccount
+    ? [[...Uint8Array.from(Buffer.from(subaccount, "hex"))]]
+    : [];
+
   const resultBalanceOgy = (await actor.icrc1_balance_of({
     owner: Principal.fromText(owner),
-    subaccount: [subaccount],
+    subaccount: _subaccount,
   })) as number;
 
   const balanceOGY = divideBy1e8(resultBalanceOgy);
   return {
     balanceOGYe8s: resultBalanceOgy,
     balanceOGY,
+    string: {
+      balance: roundAndFormatLocale({ number: divideBy1e8(resultBalanceOgy) }),
+    },
   };
 };
+
+export default fetchBalanceOGY;

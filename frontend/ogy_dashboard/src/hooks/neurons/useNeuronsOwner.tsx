@@ -3,7 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
-import { fetchBalanceOGY } from "@services/queries/accounts/fetchBalanceOGY";
+import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { fetchPriceOGY } from "@services/queries/accounts/fetchPriceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
@@ -82,7 +82,7 @@ const useNeuronsOwner = ({
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: neuronId.id,
+              subaccount: Buffer.from(neuronId.id).toString("hex"),
             }),
           enabled:
             !!isConnected &&

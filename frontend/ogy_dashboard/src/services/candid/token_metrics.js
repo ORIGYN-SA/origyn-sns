@@ -1,56 +1,63 @@
-export const idlFactory = ({ IDL }) => {
-  const HttpResponse = IDL.Rec();
-  const Args = IDL.Record({ test_mode: IDL.Bool });
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export default ({ IDL }) => {
+  const InitArgs = IDL.Record({
+    test_mode: IDL.Bool,
+    ogy_new_ledger_canister_id: IDL.Principal,
+    super_stats_canister_id: IDL.Principal,
+    sns_governance_canister_id: IDL.Principal,
+  });
+  const GetHoldersArgs = IDL.Record({
+    offset: IDL.Nat64,
+    limit: IDL.Nat64,
+    merge_accounts_to_principals: IDL.Bool,
+  });
+  const Account = IDL.Record({
+    owner: IDL.Principal,
+    subaccount: IDL.Opt(IDL.Vec(IDL.Nat8)),
+  });
+  const Overview = IDL.Record({
+    balance: IDL.Nat,
+    sent: IDL.Tuple(IDL.Nat32, IDL.Nat),
+    last_active: IDL.Nat64,
+    first_active: IDL.Nat64,
+    received: IDL.Tuple(IDL.Nat32, IDL.Nat),
+  });
   const GovernanceStats = IDL.Record({
-    total_rewards: IDL.Nat64,
-    total_staked: IDL.Nat64,
-    total_locked: IDL.Nat64,
-    total_unlocked: IDL.Nat64,
+    total_rewards: IDL.Nat,
+    total_staked: IDL.Nat,
+    total_locked: IDL.Nat,
+    total_unlocked: IDL.Nat,
+  });
+  const WalletOverview = IDL.Record({
+    total: IDL.Nat64,
+    ledger: Overview,
+    governance: GovernanceStats,
   });
   const TokenSupplyData = IDL.Record({
-    circulating_supply: IDL.Nat64,
-    total_supply: IDL.Nat64,
+    circulating_supply: IDL.Nat,
+    total_supply: IDL.Nat,
   });
-  const HttpRequest = IDL.Record({
-    url: IDL.Text,
-    method: IDL.Text,
-    body: IDL.Vec(IDL.Nat8),
-    headers: IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text)),
-  });
-  const Token = IDL.Record({
-    key: IDL.Text,
-    sha256: IDL.Opt(IDL.Vec(IDL.Nat8)),
-    index: IDL.Nat,
-    content_encoding: IDL.Text,
-  });
-  const StreamingStrategy = IDL.Variant({
-    Callback: IDL.Record({
-      token: Token,
-      callback: IDL.Func([Token], [HttpResponse], ["query"]),
-    }),
-  });
-  HttpResponse.fill(
-    IDL.Record({
-      body: IDL.Vec(IDL.Nat8),
-      headers: IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text)),
-      streaming_strategy: IDL.Opt(StreamingStrategy),
-      status_code: IDL.Nat16,
-    })
-  );
   return IDL.Service({
-    __get_candid_interface_tmp_hack: IDL.Func([], [IDL.Text], ["query"]),
     get_all_neuron_owners: IDL.Func([], [IDL.Vec(IDL.Principal)], ["query"]),
+    get_holders: IDL.Func(
+      [GetHoldersArgs],
+      [IDL.Vec(IDL.Tuple(Account, WalletOverview))],
+      ["query"]
+    ),
     get_neurons_stats: IDL.Func(
       [IDL.Opt(IDL.Principal)],
       [GovernanceStats],
       ["query"]
     ),
     get_supply_data: IDL.Func([], [TokenSupplyData], ["query"]),
-    http_request: IDL.Func([HttpRequest], [HttpResponse], ["query"]),
-    run_gov_job: IDL.Func([], [IDL.Text], []),
   });
 };
 export const init = ({ IDL }) => {
-  const Args = IDL.Record({ test_mode: IDL.Bool });
-  return [Args];
+  const InitArgs = IDL.Record({
+    test_mode: IDL.Bool,
+    ogy_new_ledger_canister_id: IDL.Principal,
+    super_stats_canister_id: IDL.Principal,
+    sns_governance_canister_id: IDL.Principal,
+  });
+  return [InitArgs];
 };

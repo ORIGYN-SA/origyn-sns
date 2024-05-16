@@ -10,6 +10,9 @@ export const LEGACY_VESTING_CANISTER_ID = import.meta.env.VITE_LEGACY_VESTING_CA
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
+export const API_LEDGER_BASE_URL = import.meta.env.VITE_API_LEDGER_BASE_URL;
+export const ACCOUNT_ID_LEDGER_ICP = import.meta.env.VITE_ACCOUNT_ID_LEDGER_ICP;
+export const ACCOUNT_ID_LEDGER_OGY = import.meta.env.VITE_ACCOUNT_ID_LEDGER_OGY;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
 export const LEGACY_OGY_DASHBOARD_URL = import.meta.env.VITE_LEGACY_OGY_DASHBOARD_URL
 export const APP_MODE = import.meta.env.MODE
@@ -77,6 +80,21 @@ if (!(APP_MODE === "production")) {
         console.log("No API_SNS_BASE_URL environment variable. Set API_SNS_BASE_URL environment variable.")
     else
         console.log(`API_SNS_BASE_URL=${API_SNS_BASE_URL}`)
+
+    if (!API_LEDGER_BASE_URL)
+        console.log("No API_LEDGER_BASE_URL environment variable. Set API_LEDGER_BASE_URL environment variable.")
+    else
+        console.log(`API_LEDGER_BASE_URL=${API_LEDGER_BASE_URL}`)
+
+    if (!ACCOUNT_ID_LEDGER_ICP)
+        console.log("No ACCOUNT_ID_LEDGER_ICP environment variable. Set ACCOUNT_ID_LEDGER_ICP environment variable.")
+    else
+        console.log(`ACCOUNT_ID_LEDGER_ICP=${ACCOUNT_ID_LEDGER_ICP}`)
+
+    if (!ACCOUNT_ID_LEDGER_OGY)
+        console.log("No ACCOUNT_ID_LEDGER_OGY environment variable. Set ACCOUNT_ID_LEDGER_OGY environment variable.")
+    else
+        console.log(`ACCOUNT_ID_LEDGER_OGY=${ACCOUNT_ID_LEDGER_OGY}`)
     
     if (!NNS_PLATFORM_URL)
         console.log("No NNS_PLATFORM_URL environment variable. Set NNS_PLATFORM_URL environment variable.")

@@ -3,8 +3,9 @@ import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
 import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";
 import OrigynFoundationReserve from "@pages/dashboard/origyn-foundation-reserve/OrigynFoundationReserve";
-import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
+// import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
 import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/OrigynTreasuryAccount";
+import OrigynRewardAccount from "@pages/dashboard/origyn-reward-account";
 import { Badge } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
@@ -46,8 +47,10 @@ const Dashboard = () => {
           <TotalOGYBurned className="w-full" />
           <OGYCirculationState className="w-full" />
           <OrigynFoundationReserve className="w-full" />
-          <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" />
+          {/* TODO: Disabling for now. Waiting data after launch of SNS */}
+          {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}{" "}
           <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
+          <OrigynRewardAccount className="w-full col-span-1 xl:col-span-2" />
         </div>
       </div>
     </div>
