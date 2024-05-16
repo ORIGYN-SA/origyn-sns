@@ -3,12 +3,20 @@ use std::collections::BTreeMap;
 use candid::{CandidType, Nat, Principal};
 use canister_time::now_millis;
 use ic_ledger_types::{
-    AccountIdentifier, BlockIndex, Memo, Subaccount, Timestamp, Tokens, TransferError,
+    AccountIdentifier,
+    BlockIndex,
+    Memo,
+    Subaccount,
+    Timestamp,
+    Tokens,
+    TransferError,
 };
 use icrc_ledger_types::icrc1::{
     account::Account,
     transfer::{
-        BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferError as TransferErrorIcrc,
+        BlockIndex as BlockIndexIcrc,
+        Memo as MemoIcrc,
+        TransferError as TransferErrorIcrc,
     },
 };
 use ledger_utils::principal_to_legacy_account_id;
@@ -123,20 +131,19 @@ impl TokenSwap {
 
     pub fn recover_stuck_transfer(
         &mut self,
-        block_index: BlockIndex,
+        block_index: BlockIndex
     ) -> Result<(), RecoverStuckTransferResponse> {
         match self.swap.get_mut(&block_index) {
-            Some(entry) => match entry.status.clone() {
-                // If the swap status is in state TransferRequest, reset state to before transfer request and an attempt to recover can be made
-                SwapStatus::TransferRequest(_) => {
-                    entry.status = SwapStatus::BurnSuccess;
-                    Ok(())
+            Some(entry) =>
+                match entry.status.clone() {
+                    // If the swap status is in state TransferRequest, reset state to before transfer request and an attempt to recover can be made
+                    SwapStatus::TransferRequest(_) => {
+                        entry.status = SwapStatus::BurnSuccess;
+                        Ok(())
+                    }
+                    // In all other cases, there is no legitimate reason to retry to recover
+                    val => Err(RecoverStuckTransferResponse::SwapIsNotStuckInTransfer(val.clone())),
                 }
-                // In all other cases, there is no legitimate reason to retry to recover
-                val => Err(RecoverStuckTransferResponse::SwapIsNotStuckInTransfer(
-                    val.clone(),
-                )),
-            },
             // If not entry is found for this block_index, it's not a valid request
             None => Err(RecoverStuckTransferResponse::NoSwapRequestFound),
         }
@@ -166,9 +173,7 @@ impl TokenSwap {
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
         match self.swap.get(&block_index) {
             Some(swap_info) => Ok(swap_info.principal),
-            None => Err(format!(
-                "No principal entry not found for block index {block_index}."
-            )), // this is not possible because it was initialised before but validating here in any case
+            None => Err(format!("No principal entry not found for block index {block_index}.")), // this is not possible because it was initialised before but validating here in any case
         }
     }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
@@ -179,7 +184,7 @@ impl TokenSwap {
     pub fn set_swap_block_index(
         &mut self,
         block_index: BlockIndex,
-        swap_block_index: BlockIndexIcrc,
+        swap_block_index: BlockIndexIcrc
     ) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.token_swap_block_index = Some(swap_block_index);
