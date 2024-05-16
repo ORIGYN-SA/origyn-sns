@@ -1,4 +1,4 @@
-import { Card } from "@components/ui";
+import { Card, Button } from "@components/ui";
 import TokenDistributionList from "@pages/token-distribution/token-distribution-list";
 import { usePagination } from "@helpers/table/useTable";
 
@@ -12,13 +12,9 @@ const TokenDistribution = ({
 
   return (
     <Card className={`${className}`} {...restProps}>
-      <div className="flex items-center justify-between mb-8">
-        <div className="text-lg font-semibold">
-          ORIGYN Treasury Account (OTA)
-        </div>
-        <button className="text-sm font-medium rounded-full px-3 py-1">
-          Weekly
-        </button>
+      <div className="flex items-center mb-8 gap-8">
+        <div className="text-lg font-semibold">Token Distribution</div>
+        <Button onClick={() => null}>Show all</Button>
       </div>
       <TokenDistributionList pagination={pagination} />
     </Card>
