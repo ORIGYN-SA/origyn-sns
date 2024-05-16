@@ -1,8 +1,8 @@
 use std::time::Duration;
 
-use candid::{Nat, Principal};
-use ic_ledger_types::{AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens};
-use icrc_ledger_types::icrc1::{account::Account, transfer::TransferError};
+use candid::{ Nat, Principal };
+use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
+use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferError };
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::{
     token_swap::{
@@ -1032,6 +1032,7 @@ fn test_retry_transfer_when_new_ledger_inactive() {
 
     // retry the same block index with the new ledger online
     pic.start_canister(ogy_new_ledger_canister, Some(controller)).unwrap();
+    pic.advance_time(Duration::from_secs(60));
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user,
