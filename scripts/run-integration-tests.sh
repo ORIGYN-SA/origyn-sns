@@ -9,7 +9,7 @@ Usage:
   scripts/run-integration-tests.sh [options]
 
 Options:
-  -f, --fast        Only runs the integration tests without rebuilding the canister code
+  -b, --no-build    Only runs the integration tests without rebuilding the canister code
   -h, --help        Show this message and exit
 EOF
 }
@@ -38,4 +38,4 @@ fi
 
 ./scripts/init-integration-test-environment.sh
 
-cargo test -p integration_tests -- --nocapture
+cargo test -p integration_tests
