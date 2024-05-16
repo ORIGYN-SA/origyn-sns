@@ -1,13 +1,16 @@
-use candid::{Nat, Principal};
-use ic_ledger_types::{AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens};
-use icrc_ledger_types::icrc1::{account::Account, transfer::TransferError};
+use candid::{ Nat, Principal };
+use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
+use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferError };
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::{
     token_swap::{
-        BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, TransferFailReason,
+        BurnRequestArgs,
+        RecoverBurnMode,
+        RecoverTransferMode,
+        TransferFailReason,
         TransferRequestArgs,
     },
-    types::token_swap::{BlockFailReason, SwapError, SwapStatus},
+    types::token_swap::{ BlockFailReason, SwapError, SwapStatus },
     updates::{
         recover_stuck_burn::Response as RecoverStuckBurnResponse,
         recover_stuck_transfer::Response as RecoverStuckTransferResponse,
@@ -16,33 +19,39 @@ use ogy_token_swap_api::{
 };
 use pocket_ic::PocketIc;
 use types::CanisterId;
-use utils::consts::{E8S_FEE_OGY, E8S_PER_OGY};
+use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
     client::{
-        icrc1::client::{balance_of, total_supply as total_supply_new, transfer},
+        icrc1::client::{ balance_of, total_supply as total_supply_new, transfer },
         ogy_legacy_ledger::client::{
-            balance_of as balance_of_ogy_legacy, mint_ogy, total_supply as total_supply_legacy,
+            balance_of as balance_of_ogy_legacy,
+            mint_ogy,
+            total_supply as total_supply_legacy,
             transfer_ogy,
         },
-        ogy_token_swap::client::{
-            deposit_account, manipulate_swap_status, recover_stuck_burn_call,
-            recover_stuck_transfer_call, requesting_principals, swap_info,
-            swap_tokens_anonymous_call, swap_tokens_authenticated_call,
+        ogy_token_swap::{
+            client::{
+                deposit_account,
+                manipulate_swap_status,
+                recover_stuck_burn_call,
+                recover_stuck_transfer_call,
+                requesting_principals,
+                swap_info,
+                swap_tokens_anonymous_call,
+                swap_tokens_authenticated_call,
+            },
+            get_swap_info,
         },
     },
-    ogy_swap_suite::{init::init, TestEnv},
-    utils::{random_amount, random_principal},
+    ogy_swap_suite::{ init::init, TestEnv },
+    utils::{ random_amount, random_principal },
 };
 
 #[test]
 fn valid_swap() {
     let env = init();
-    let TestEnv {
-        mut pic,
-        canister_ids,
-        controller,
-    } = env;
+    let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
     let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
@@ -59,9 +68,8 @@ fn valid_swap() {
         controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
-        amount,
-    )
-    .unwrap();
+        amount
+    ).unwrap();
     // mint tokens to swap reserve pool of swap canister
     let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
     let _ = transfer(
@@ -70,26 +78,28 @@ fn valid_swap() {
         ogy_new_ledger_canister,
         None,
         ogy_token_swap_canister_id,
-        swap_pool_amount.into(),
+        swap_pool_amount.into()
     );
 
-    let deposit_address =
-        get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap();
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        amount - E8S_FEE_OGY,
-    )
-    .unwrap();
+        amount - E8S_FEE_OGY
+    ).unwrap();
 
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user,
         ogy_token_swap_canister_id,
-        block_index_deposit,
+        block_index_deposit
     );
 
     assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
@@ -101,7 +111,7 @@ fn valid_swap() {
         &mut pic,
         user,
         ogy_token_swap_canister_id,
-        block_index_deposit,
+        block_index_deposit
     );
     assert_eq!(
         result,
@@ -114,11 +124,7 @@ fn valid_swap() {
 #[test]
 fn invalid_deposit_account() {
     let env = init();
-    let TestEnv {
-        mut pic,
-        canister_ids,
-        controller,
-    } = env;
+    let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
     let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
@@ -138,9 +144,8 @@ fn invalid_deposit_account() {
         controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
-        amount,
-    )
-    .unwrap();
+        amount
+    ).unwrap();
     // mint tokens to swap reserve pool of swap canister
     let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
     let _ = transfer(
@@ -149,26 +154,28 @@ fn invalid_deposit_account() {
         ogy_new_ledger_canister,
         None,
         ogy_token_swap_canister_id,
-        swap_pool_amount.into(),
+        swap_pool_amount.into()
     );
 
-    let deposit_address =
-        get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap();
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        amount - E8S_FEE_OGY,
-    )
-    .unwrap();
+        amount - E8S_FEE_OGY
+    ).unwrap();
 
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user_false_request,
         ogy_token_swap_canister_id,
-        block_index_deposit,
+        block_index_deposit
     );
 
     assert_eq!(
@@ -186,23 +193,20 @@ fn invalid_deposit_account() {
         )
     );
 
-    assert_eq!(
-        balance_of(&pic, ogy_new_ledger_canister, user),
-        Nat::default()
-    );
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::default());
 
-    match swap_info(
-        &pic,
-        controller,
-        ogy_token_swap_canister_id,
-        block_index_deposit,
-    ) {
-        ogy_token_swap_api::get_swap_info::Response::Success(info) => assert_eq!(
-            info.status,
-            SwapStatus::Failed(SwapError::BlockFailed(
-                BlockFailReason::ReceiverNotCorrectAccountId(Subaccount::from(user_false_request))
-            ))
-        ),
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
+        ogy_token_swap_api::get_swap_info::Response::Success(info) =>
+            assert_eq!(
+                info.status,
+                SwapStatus::Failed(
+                    SwapError::BlockFailed(
+                        BlockFailReason::ReceiverNotCorrectAccountId(
+                            Subaccount::from(user_false_request)
+                        )
+                    )
+                )
+            ),
         _ => panic!("Expect fail response."),
     }
 
@@ -212,19 +216,14 @@ fn invalid_deposit_account() {
         &mut pic,
         user,
         ogy_token_swap_canister_id,
-        block_index_deposit,
+        block_index_deposit
     );
 
     assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), amount);
 
-    match swap_info(
-        &pic,
-        controller,
-        ogy_token_swap_canister_id,
-        block_index_deposit,
-    ) {
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(1usize)))
         }
@@ -235,11 +234,7 @@ fn invalid_deposit_account() {
 #[test]
 fn test_anonymous_request() {
     let env = init();
-    let TestEnv {
-        mut pic,
-        canister_ids,
-        controller,
-    } = env;
+    let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
     let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
@@ -256,9 +251,8 @@ fn test_anonymous_request() {
         controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
-        amount,
-    )
-    .unwrap();
+        amount
+    ).unwrap();
     // mint tokens to swap reserve pool of swap canister
     let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
     let _ = transfer(
@@ -267,42 +261,36 @@ fn test_anonymous_request() {
         ogy_new_ledger_canister,
         None,
         ogy_token_swap_canister_id,
-        swap_pool_amount.into(),
+        swap_pool_amount.into()
     );
 
-    let deposit_address =
-        get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap();
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        amount - E8S_FEE_OGY,
-    )
-    .unwrap();
+        amount - E8S_FEE_OGY
+    ).unwrap();
 
     // requesting swap with anonymous principal simulating a call from e.g. the team on behalf of the user
     let result = swap_tokens_anonymous_call(
         &mut pic,
         ogy_token_swap_canister_id,
         user,
-        block_index_deposit,
+        block_index_deposit
     );
 
     assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 
-    assert_eq!(
-        balance_of(&pic, ogy_new_ledger_canister, user),
-        Nat::from(amount)
-    );
+    assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), Nat::from(amount));
 
-    match swap_info(
-        &pic,
-        controller,
-        ogy_token_swap_canister_id,
-        block_index_deposit,
-    ) {
+    match swap_info(&pic, controller, ogy_token_swap_canister_id, block_index_deposit) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(1usize)))
         }
@@ -336,11 +324,7 @@ fn test_massive_users_swapping() {
 #[test]
 fn test_swap_amount_too_small() {
     let env = init();
-    let TestEnv {
-        mut pic,
-        canister_ids,
-        controller,
-    } = env;
+    let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
     let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
@@ -357,9 +341,8 @@ fn test_swap_amount_too_small() {
         controller,
         ogy_legacy_ledger_canister,
         principal_to_legacy_account_id(user, None),
-        amount,
-    )
-    .unwrap();
+        amount
+    ).unwrap();
     // mint tokens to swap reserve pool of swap canister
     let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
     let _ = transfer(
@@ -368,26 +351,28 @@ fn test_swap_amount_too_small() {
         ogy_new_ledger_canister,
         None,
         ogy_token_swap_canister_id,
-        swap_pool_amount.into(),
+        swap_pool_amount.into()
     );
 
-    let deposit_address =
-        get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap();
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         &mut pic,
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        amount - E8S_FEE_OGY,
-    )
-    .unwrap();
+        amount - E8S_FEE_OGY
+    ).unwrap();
 
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user,
         ogy_token_swap_canister_id,
-        block_index_deposit,
+        block_index_deposit
     );
 
     assert_eq!(
@@ -421,7 +406,7 @@ fn test_recover_stuck_burn_on_completed_swap() {
         env.canister_ids.ogy_swap,
         1u64,
         RecoverBurnMode::RetryBurn,
-        None,
+        None
     );
     assert_eq!(
         RecoverStuckBurnResponse::SwapIsNotStuckInBurn(SwapStatus::Complete(Nat::from(1usize))),
@@ -453,7 +438,7 @@ fn test_recover_stuck_burn_retry_burn() {
             from_subaccount: None,
             amount: Tokens::from_e8s(0),
             memo: Memo(0),
-        }),
+        })
     );
 
     // Note that the tokens were already minted but we can burn those to correctly test
@@ -463,12 +448,9 @@ fn test_recover_stuck_burn_retry_burn() {
         env.canister_ids.ogy_new_ledger,
         None,
         env.controller,
-        amount.clone(),
+        amount.clone()
     );
-    assert_eq!(
-        Nat::from(0u8),
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(Nat::from(0u8), balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
 
     // mint some tokens to the subaccount of the user again
     let tokens_to_mint: u64 = amount.clone().0.try_into().unwrap();
@@ -477,7 +459,7 @@ fn test_recover_stuck_burn_retry_burn() {
         env.controller,
         env.canister_ids.ogy_legacy_ledger,
         principal_to_legacy_account_id(env.canister_ids.ogy_swap, Some(Subaccount::from(user))),
-        tokens_to_mint - E8S_FEE_OGY,
+        tokens_to_mint - E8S_FEE_OGY
     );
 
     // run the recovery
@@ -487,14 +469,11 @@ fn test_recover_stuck_burn_retry_burn() {
         env.canister_ids.ogy_swap,
         1u64,
         RecoverBurnMode::RetryBurn,
-        None,
+        None
     );
     assert_eq!(RecoverStuckBurnResponse::Success(Nat::from(3usize)), res);
 
-    assert_eq!(
-        amount,
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(amount, balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
     match swap_info(&env.pic, user, env.canister_ids.ogy_swap, 1u64) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(3usize)))
@@ -529,7 +508,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
             from_subaccount: Some(Subaccount::from(user)),
             amount: Tokens::from_e8s(tokens_burned),
             memo: Memo(block_index),
-        }),
+        })
     );
 
     // Note that the tokens were already minted but we can burn those to correctly test
@@ -539,12 +518,9 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_new_ledger,
         None,
         env.controller,
-        amount.clone(),
+        amount.clone()
     );
-    assert_eq!(
-        Nat::from(0u8),
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(Nat::from(0u8), balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
 
     // try recovery with not a valid burn block
     let res = recover_stuck_burn_call(
@@ -553,12 +529,9 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index,
         RecoverBurnMode::BurnBlockProvided(1u64),
-        None,
+        None
     );
-    assert_eq!(
-        RecoverStuckBurnResponse::NotAValidBurnBlock("Not a burn block.".to_string()),
-        res
-    );
+    assert_eq!(RecoverStuckBurnResponse::NotAValidBurnBlock("Not a burn block.".to_string()), res);
 
     // try recovery with not a valid swap request block
     let res = recover_stuck_burn_call(
@@ -567,7 +540,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index + 1,
         RecoverBurnMode::BurnBlockProvided(1u64),
-        None,
+        None
     );
     assert_eq!(RecoverStuckBurnResponse::NoSwapRequestFound, res);
 
@@ -582,7 +555,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
             from_subaccount: None,
             amount: Tokens::from_e8s(tokens_burned),
             memo: Memo(block_index),
-        }),
+        })
     );
     let res = recover_stuck_burn_call(
         &mut env.pic,
@@ -590,14 +563,19 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index,
         RecoverBurnMode::BurnBlockProvided(2u64),
-        None,
+        None
     );
     assert_eq!(
-        RecoverStuckBurnResponse::NotAValidBurnBlock(format!(
-            "Sending account doesn't match. Expected: {}, found: {}.",
-            principal_to_legacy_account_id(env.canister_ids.ogy_swap, None),
-            principal_to_legacy_account_id(env.canister_ids.ogy_swap, Some(Subaccount::from(user)))
-        )),
+        RecoverStuckBurnResponse::NotAValidBurnBlock(
+            format!(
+                "Sending account doesn't match. Expected: {}, found: {}.",
+                principal_to_legacy_account_id(env.canister_ids.ogy_swap, None),
+                principal_to_legacy_account_id(
+                    env.canister_ids.ogy_swap,
+                    Some(Subaccount::from(user))
+                )
+            )
+        ),
         res
     );
 
@@ -612,7 +590,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
             from_subaccount: Some(Subaccount::from(user)),
             amount: Tokens::from_e8s(0),
             memo: Memo(block_index),
-        }),
+        })
     );
     let res = recover_stuck_burn_call(
         &mut env.pic,
@@ -620,7 +598,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index,
         RecoverBurnMode::BurnBlockProvided(2u64),
-        None,
+        None
     );
     assert_eq!(
         RecoverStuckBurnResponse::NotAValidBurnBlock(
@@ -640,7 +618,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
             from_subaccount: Some(Subaccount::from(user)),
             amount: Tokens::from_e8s(tokens_burned),
             memo: Memo(0),
-        }),
+        })
     );
     let res = recover_stuck_burn_call(
         &mut env.pic,
@@ -648,7 +626,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index,
         RecoverBurnMode::BurnBlockProvided(2u64),
-        None,
+        None
     );
     assert_eq!(
         RecoverStuckBurnResponse::NotAValidBurnBlock(
@@ -668,7 +646,7 @@ fn test_recover_stuck_burn_recheck_burn_block() {
             from_subaccount: Some(Subaccount::from(user)),
             amount: Tokens::from_e8s(tokens_burned),
             memo: Memo(block_index),
-        }),
+        })
     );
     let res = recover_stuck_burn_call(
         &mut env.pic,
@@ -676,14 +654,11 @@ fn test_recover_stuck_burn_recheck_burn_block() {
         env.canister_ids.ogy_swap,
         block_index,
         RecoverBurnMode::BurnBlockProvided(2u64),
-        None,
+        None
     );
     assert_eq!(RecoverStuckBurnResponse::Success(Nat::from(3usize)), res);
 
-    assert_eq!(
-        amount,
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(amount, balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
     match swap_info(&env.pic, user, env.canister_ids.ogy_swap, block_index) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(3usize)))
@@ -718,7 +693,7 @@ fn test_recover_stuck_transfer_retry_transfer() {
             },
             amount: amount.clone(),
             memo: None,
-        }),
+        })
     );
 
     // Note that the tokens were already swapped but we can burn those to correctly test
@@ -728,12 +703,9 @@ fn test_recover_stuck_transfer_retry_transfer() {
         env.canister_ids.ogy_new_ledger,
         None,
         env.controller,
-        amount.clone(),
+        amount.clone()
     );
-    assert_eq!(
-        Nat::from(0u8),
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(Nat::from(0u8), balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
 
     // run the recovery
     let res = recover_stuck_transfer_call(
@@ -741,17 +713,11 @@ fn test_recover_stuck_transfer_retry_transfer() {
         env.controller,
         env.canister_ids.ogy_swap,
         1u64,
-        RecoverTransferMode::RetryTransfer,
+        RecoverTransferMode::RetryTransfer
     );
-    assert_eq!(
-        RecoverStuckTransferResponse::Success(Nat::from(3usize)),
-        res
-    );
+    assert_eq!(RecoverStuckTransferResponse::Success(Nat::from(3usize)), res);
 
-    assert_eq!(
-        amount,
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user)
-    );
+    assert_eq!(amount, balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
     match swap_info(&env.pic, user, env.canister_ids.ogy_swap, 1u64) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => {
             assert_eq!(info.status, SwapStatus::Complete(Nat::from(3usize)))
@@ -775,15 +741,22 @@ fn test_insufficient_funds_in_distribution_pool() {
     user_token_swap_with_expected_response(
         &mut env,
         user,
-        SwapTokensResponse::InternalError(format!("Final token transfer failed due to transfer error. Message: the debit account doesn't have enough funds to complete the transaction, current balance: {}", init_pool_balance.clone())),
+        SwapTokensResponse::InternalError(
+            format!(
+                "Final token transfer failed due to transfer error. Message: the debit account doesn't have enough funds to complete the transaction, current balance: {}",
+                init_pool_balance.clone()
+            )
+        )
     );
 
     assert_eq!(
-        SwapStatus::Failed(SwapError::TransferFailed(
-            TransferFailReason::TransferError(TransferError::InsufficientFunds {
-                balance: init_pool_balance
-            })
-        )),
+        SwapStatus::Failed(
+            SwapError::TransferFailed(
+                TransferFailReason::TransferError(TransferError::InsufficientFunds {
+                    balance: init_pool_balance,
+                })
+            )
+        ),
         get_status(&mut env, block_index)
     );
 
@@ -799,11 +772,7 @@ fn test_insufficient_funds_in_distribution_pool() {
 #[test]
 fn test_deposit_account() {
     let env = init();
-    let TestEnv {
-        mut pic,
-        canister_ids,
-        ..
-    } = env;
+    let TestEnv { mut pic, canister_ids, .. } = env;
 
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
 
@@ -825,7 +794,7 @@ fn test_requesting_principals() {
     let mut subaccount_list = vec![];
     for holder in holders.clone() {
         subaccount_list.push(
-            get_deposit_account_helper(&mut env.pic, env.canister_ids.ogy_swap, holder).unwrap(),
+            get_deposit_account_helper(&mut env.pic, env.canister_ids.ogy_swap, holder).unwrap()
         );
     }
 
@@ -840,10 +809,13 @@ fn test_requesting_principals() {
         subaccount_list
     );
 
-    let mut requested_principals =
-        requesting_principals(&env.pic, Principal::anonymous(), env.canister_ids.ogy_swap)
-            .into_iter()
-            .collect::<Vec<_>>();
+    let mut requested_principals = requesting_principals(
+        &env.pic,
+        Principal::anonymous(),
+        env.canister_ids.ogy_swap
+    )
+        .into_iter()
+        .collect::<Vec<_>>();
 
     assert_eq!(holders.sort(), requested_principals.sort());
 
@@ -863,11 +835,7 @@ fn test_requesting_principals() {
 }
 
 fn init_token_distribution(env: &mut TestEnv, num_users: u64) -> Vec<Principal> {
-    let TestEnv {
-        ref mut pic,
-        ref canister_ids,
-        controller,
-    } = env;
+    let TestEnv { ref mut pic, ref canister_ids, controller } = env;
 
     let mut holders: Vec<Principal> = vec![];
     for _ in 0..num_users {
@@ -878,9 +846,8 @@ fn init_token_distribution(env: &mut TestEnv, num_users: u64) -> Vec<Principal> 
             *controller,
             canister_ids.ogy_legacy_ledger,
             principal_to_legacy_account_id(user, None),
-            amount,
-        )
-        .unwrap();
+            amount
+        ).unwrap();
         holders.push(user);
     }
     holders
@@ -895,19 +862,14 @@ fn user_init(env: &mut TestEnv, amount: Nat) -> Principal {
         env.controller,
         env.canister_ids.ogy_legacy_ledger,
         principal_to_legacy_account_id(user, None),
-        amount.0.try_into().unwrap(),
-    )
-    .unwrap();
+        amount.0.try_into().unwrap()
+    ).unwrap();
 
     user
 }
 
 fn init_swap_pool(env: &mut TestEnv, swap_pool_amount: Nat) {
-    let TestEnv {
-        ref mut pic,
-        ref canister_ids,
-        controller,
-    } = env;
+    let TestEnv { ref mut pic, ref canister_ids, controller } = env;
 
     let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
@@ -920,20 +882,16 @@ fn init_swap_pool(env: &mut TestEnv, swap_pool_amount: Nat) {
         ogy_new_ledger_canister,
         None,
         ogy_token_swap_canister_id,
-        swap_pool_amount.into(),
+        swap_pool_amount.into()
     );
 }
 
 fn user_token_swap_with_expected_response(
     env: &mut TestEnv,
     user: Principal,
-    response: SwapTokensResponse,
+    response: SwapTokensResponse
 ) -> u64 {
-    let TestEnv {
-        ref mut pic,
-        ref canister_ids,
-        ..
-    } = env;
+    let TestEnv { ref mut pic, ref canister_ids, .. } = env;
 
     let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
@@ -941,22 +899,23 @@ fn user_token_swap_with_expected_response(
     let balance = balance_of_ogy_legacy(
         pic,
         ogy_legacy_ledger_canister,
-        principal_to_legacy_account_id(user, None).to_string(),
-    )
-    .e8s();
+        principal_to_legacy_account_id(user, None).to_string()
+    ).e8s();
     let swap_amount = balance;
 
-    let deposit_address =
-        get_deposit_account_helper(pic, ogy_token_swap_canister_id, user).unwrap();
+    let deposit_address = get_deposit_account_helper(
+        pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
 
     let block_index_deposit = transfer_ogy(
         pic,
         user,
         ogy_legacy_ledger_canister,
         deposit_address,
-        swap_amount - E8S_FEE_OGY,
-    )
-    .unwrap();
+        swap_amount - E8S_FEE_OGY
+    ).unwrap();
 
     assert_eq!(
         swap_tokens_authenticated_call(pic, user, ogy_token_swap_canister_id, block_index_deposit),
@@ -967,19 +926,19 @@ fn user_token_swap_with_expected_response(
 }
 
 fn user_token_swap_valid(env: &mut TestEnv, user: Principal, swap_index: Nat) {
-    let swap_amount =
-        user_token_swap_with_expected_response(env, user, SwapTokensResponse::Success(swap_index));
-
-    assert_eq!(
-        balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user),
-        swap_amount
+    let swap_amount = user_token_swap_with_expected_response(
+        env,
+        user,
+        SwapTokensResponse::Success(swap_index)
     );
+
+    assert_eq!(balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user), swap_amount);
 }
 
 fn get_deposit_account_helper(
     pic: &mut PocketIc,
     ogy_legacy_ledger_canister: CanisterId,
-    user: Principal,
+    user: Principal
 ) -> Result<AccountIdentifier, String> {
     match deposit_account(pic, ogy_legacy_ledger_canister, user) {
         ogy_token_swap_api::request_deposit_account::Response::Success(account_id) => {
@@ -996,13 +955,82 @@ fn total_supply_new_wrapper(env: &mut TestEnv) -> Nat {
 }
 
 fn get_status(env: &mut TestEnv, block_index: BlockIndex) -> SwapStatus {
-    match swap_info(
-        &env.pic,
-        env.controller,
-        env.canister_ids.ogy_swap,
-        block_index,
-    ) {
+    match swap_info(&env.pic, env.controller, env.canister_ids.ogy_swap, block_index) {
         ogy_token_swap_api::get_swap_info::Response::Success(info) => info.status,
         _ => panic!("Expect success response."),
     }
+}
+
+#[test]
+fn test_retry_transfer() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, controller } = env;
+
+    let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
+    let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let ogy_new_ledger_minting_account = controller;
+
+    let user = random_principal();
+    let amount = 1 * E8S_PER_OGY;
+
+    // mint tokens to swapping user
+    let _ = mint_ogy(
+        &mut pic,
+        controller,
+        ogy_legacy_ledger_canister,
+        principal_to_legacy_account_id(user, None),
+        amount
+    ).unwrap();
+    // mint tokens to swap reserve pool of swap canister
+    let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
+    let _ = transfer(
+        &mut pic,
+        ogy_new_ledger_minting_account,
+        ogy_new_ledger_canister,
+        None,
+        ogy_token_swap_canister_id,
+        swap_pool_amount.into()
+    );
+
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
+
+    let block_index_deposit = transfer_ogy(
+        &mut pic,
+        user,
+        ogy_legacy_ledger_canister,
+        deposit_address,
+        amount - E8S_FEE_OGY
+    ).unwrap();
+    pic.stop_canister(ogy_new_ledger_canister, Some(controller)).unwrap(); // stop the new ledger - this should make the third step ( transfer fail )
+    swap_tokens_authenticated_call(&mut pic, user, ogy_token_swap_canister_id, block_index_deposit);
+
+    let res = get_swap_info(
+        &pic,
+        Principal::anonymous(),
+        ogy_token_swap_canister_id,
+        &(ogy_token_swap_api::get_swap_info::Args { block_index: block_index_deposit })
+    );
+    let swap_status = if let get_swap_info::Response::Success(inner) = res {
+        Some(inner.status)
+    } else {
+        None
+    };
+
+    assert!(matches!(swap_status.unwrap(), SwapStatus::Failed(_)));
+
+    // retry the same block index with the new ledger online
+    pic.start_canister(ogy_new_ledger_canister, Some(controller)).unwrap();
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit
+    );
+    assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 }
