@@ -1,6 +1,7 @@
-use std::ops::Deref;
+use std::{ops::Deref, time::{SystemTime, UNIX_EPOCH}};
 
 use ic_cdk_macros::{ update, query };
+use ic_stable_memory::collections::SBTreeMap;
 
 use crate::core::{
     runtime::RUNTIME_STATE,
@@ -10,7 +11,7 @@ use crate::core::{
 };
 
 use super::{
-    account_tree::Overview,
+    account_tree::{GetAccountBalanceHistory, HistoryData, Overview},
     constants::HOUR_AS_NANOS,
     custom_types::{
         GetHoldersArgs,
@@ -336,6 +337,37 @@ fn get_account_overview(account: String) -> Option<Overview> {
 }
 
 #[query]
+fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
+    // check authorised
+    RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
+    api_count();
+    // get ac_ref
+    let ac_ref = STABLE_STATE.with(|s| {
+        s.borrow().as_ref().unwrap().directory_data.get_ref(&args.account)
+    });
+    match ac_ref {
+        Some(v) => {
+            let keys = get_keys_for_last_x_days(v, args.days);
+            let mut results = Vec::new();
+            for key in keys {
+                let result = STABLE_STATE.with(|s| {
+                    match s.borrow().as_ref().unwrap().account_data.accounts_history.get(&key) {
+                        Some(v) => {
+                            results.push((key.1, v.to_owned()));
+                        }
+                        None => {}
+                    }
+                });
+            }
+            return Some(results);
+        }
+        None => {
+            return None;
+        }
+    }
+}
+
+#[query]
 fn get_principal_overview(account: String) -> Option<Overview> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
@@ -363,4 +395,17 @@ fn get_principal_overview(account: String) -> Option<Overview> {
             return None;
         }
     }
+}
+
+fn get_keys_for_last_x_days(account: u64, days: u64) -> Vec<(u64, u64)> {
+    let mut keys = Vec::new();
+
+    let now = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards");
+    let current_day_number = now.as_secs() / 86400; 
+
+    for i in 0..days {
+        keys.push((account, current_day_number - i));
+    }
+
+    keys
 }

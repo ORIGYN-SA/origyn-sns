@@ -1,3 +1,6 @@
+
+use std::collections::{BTreeMap, HashMap};
+
 use candid::{CandidType, Nat};
 use ic_stable_memory::{derive::{StableType, AsFixedSizeBytes}, collections::{SBTreeMap, SVec}};
 use num_bigint::BigUint;
@@ -11,12 +14,50 @@ use super::custom_types::{SmallTX, ProcessedTX};
 #[derive(StableType, AsFixedSizeBytes, Debug, Default)]
 pub struct AccountTree{
     pub accounts: SBTreeMap<u64, Overview>,
+    pub accounts_history: SBTreeMap<(u64, u64), HistoryData>,
     count: u64, // not used
     last_updated: u64, // not used
 }
+
+enum TransactionType {
+    In,
+    Out
+}
 impl AccountTree {
 
+    fn update_history_balance(&mut self, account_ref: &u64, stx: &SmallTX, tx_type: TransactionType) {
+        let day_of_transaction = stx.time % 86400;
+        let account_history_key = (*account_ref, day_of_transaction);
+
+        let previous_day_balance = self.accounts_history.get(&(*account_ref, day_of_transaction - 1)).map_or(0, |previous_day| previous_day.balance);
+
+        let fee: u128;
+        if let Some(f) = stx.fee { fee = f } else {
+            fee = RUNTIME_STATE.with(|s|{s.borrow().data.get_ledger_fee()})
+        };
+        let new_balance = match tx_type {
+            TransactionType::In => previous_day_balance + stx.value,
+            TransactionType::Out => previous_day_balance - stx.value - fee
+        };
+
+        if !self.accounts_history.contains_key(&account_history_key) && matches!(tx_type, TransactionType::In) {
+            self.accounts_history.insert((*account_ref, day_of_transaction), HistoryData {
+                balance: new_balance,
+            }).expect("Storage is full");
+        }
+        else if let Some(mut ach) = self.accounts_history.get_mut(&(*account_ref, day_of_transaction)) {
+            ach.balance = match tx_type {
+                TransactionType::In => ach.balance + stx.value,
+                TransactionType::Out => ach.balance - stx.value - fee
+            };
+            // Should we update further days balance here as well?
+            // Will we have a case where we process a new transaction before an old transaction? 
+        }
+    }
+
     pub fn process_transfer_to(&mut self, account_ref: &u64, stx: &SmallTX) -> Result<String, String> {
+      self.update_history_balance(account_ref, stx, TransactionType::In);
+
       if !self.accounts.contains_key(account_ref) {
          let acd = Overview { 
                   first_active: stx.time, 
@@ -41,6 +82,8 @@ impl AccountTree {
     }
 
     pub fn process_transfer_from(&mut self, account_ref: &u64, stx: &SmallTX ) -> Result<String, String> {
+        self.update_history_balance(account_ref, stx, TransactionType::Out);
+
         match self.accounts.get_mut(account_ref) {
             Some(mut ac) => {
                 let fee: u128;
@@ -59,6 +102,8 @@ impl AccountTree {
     }
 
     pub fn process_approve_from(&mut self, account_ref: &u64, stx: &SmallTX ) -> Result<String, String> {
+        self.update_history_balance(account_ref, stx, TransactionType::Out);
+
         match self.accounts.get_mut(account_ref) {
             Some(mut ac) => {
                let fee: u128;
@@ -76,8 +121,11 @@ impl AccountTree {
 #[derive(StableType, AsFixedSizeBytes, Debug, Default)]
 pub struct AccountData {
     pub overview: Overview
- }
-
+}
+#[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
+pub struct HistoryData {
+    balance: u128,
+}
  #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
  pub struct Overview {
     pub first_active: u64,
@@ -112,6 +160,7 @@ pub struct AccountData {
         self.received = (r1,r2);
     }
  }
+
 
  // IMPL 
  impl Main {
@@ -151,4 +200,10 @@ pub struct AccountData {
             None => {return None}
         }
     }
+}
+#[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, Debug)]
+
+pub struct GetAccountBalanceHistory {
+    pub account: String,
+    pub days: u64,
 }
