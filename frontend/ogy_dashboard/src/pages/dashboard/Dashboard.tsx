@@ -9,9 +9,11 @@ import OrigynRewardAccount from "@pages/dashboard/origyn-reward-account";
 import { Badge } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
+import TokenDistributionList from "@pages/dashboard/token-distribution";
 
 const Dashboard = () => {
   const { isConnected, isInitializing } = useConnect();
+
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="flex flex-col items-center">
@@ -48,9 +50,10 @@ const Dashboard = () => {
           <OGYCirculationState className="w-full" />
           <OrigynFoundationReserve className="w-full" />
           {/* TODO: Disabling for now. Waiting data after launch of SNS */}
-          {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}{" "}
+          {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
           <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
           <OrigynRewardAccount className="w-full col-span-1 xl:col-span-2" />
+          <TokenDistributionList className="w-full col-span-1 xl:col-span-2" />
         </div>
       </div>
     </div>
