@@ -962,7 +962,7 @@ fn get_status(env: &mut TestEnv, block_index: BlockIndex) -> SwapStatus {
 }
 
 #[test]
-fn test_retry_transfer() {
+fn test_retry_transfer_when_new_ledger_inactive() {
     let env = init();
     let TestEnv { mut pic, canister_ids, controller } = env;
 
@@ -1033,4 +1033,84 @@ fn test_retry_transfer() {
         block_index_deposit
     );
     assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
+}
+
+#[test]
+#[should_panic(expected = "FATAL ERROR: Caller is not an authorised principal")]
+fn test_recover_stuck_burn_can_only_be_called_by_authorised_principals() {
+    let mut env = init();
+
+    let amount = Nat::from(1_000_000_000u64);
+
+    let user = user_init(&mut env, amount.clone());
+
+    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+
+    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+
+    // now we can manipulate the state and check if the recovery works
+    // in the first test, we completely reburn the tokens as we simulate that the request failed. So the BurnRequestArgs are irrelevant
+    manipulate_swap_status(
+        &mut env.pic,
+        Principal::anonymous(),
+        env.canister_ids.ogy_swap,
+        1u64,
+        SwapStatus::BurnRequest(BurnRequestArgs {
+            created_at_time: None,
+            from_subaccount: None,
+            amount: Tokens::from_e8s(0),
+            memo: Memo(0),
+        })
+    );
+}
+
+#[test]
+#[should_panic(expected = "FATAL ERROR: Caller is not an authorised principal")]
+fn test_recover_stuck_transfer_can_only_be_called_by_authorised_principals() {
+    let mut env = init();
+
+    let amount = Nat::from(1_000_000_000u64);
+
+    let user = user_init(&mut env, amount.clone());
+
+    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+
+    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+
+    // now we can manipulate the state and check if the recovery works
+    manipulate_swap_status(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        1u64,
+        SwapStatus::TransferRequest(TransferRequestArgs {
+            created_at_time: None,
+            to: Account {
+                owner: user,
+                subaccount: None,
+            },
+            amount: amount.clone(),
+            memo: None,
+        })
+    );
+
+    // Note that the tokens were already swapped but we can burn those to correctly test
+    let _ = transfer(
+        &mut env.pic,
+        user,
+        env.canister_ids.ogy_new_ledger,
+        None,
+        env.controller,
+        amount.clone()
+    );
+    assert_eq!(Nat::from(0u8), balance_of(&env.pic, env.canister_ids.ogy_new_ledger, user));
+
+    // run the recovery - should fail because the caller is not authorised
+    recover_stuck_transfer_call(
+        &mut env.pic,
+        Principal::anonymous(),
+        env.canister_ids.ogy_swap,
+        1u64,
+        RecoverTransferMode::RetryTransfer
+    );
 }
