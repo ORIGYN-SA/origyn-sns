@@ -183,7 +183,6 @@ export const Governance = () => {
           <h2 className="text-3xl font-bold">Neurons</h2>
           <Button onClick={handleShowAllNeurons}>Show all</Button>
         </div>
-
         <NeuronsList pagination={pagination} />
       </div>
     </div>

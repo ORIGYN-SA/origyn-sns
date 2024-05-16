@@ -44,3 +44,15 @@ export default interface _SERVICE {
   'get_neurons_stats' : (arg_0: [] | [Principal]) => Promise<GovernanceStats>,
   'get_supply_data' : () => Promise<TokenSupplyData>,
 }
+
+export interface ITokenHolderData {
+  principal: string,
+  total: number,
+  ledgerBalance: number,
+  governanceBalance: number,
+  string: {
+    total: string,
+    governanceBalance: string,
+    ledgerBalance: string,
+  },
+}

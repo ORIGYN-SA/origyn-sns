@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export default ({ IDL }) => {
+export const idlFactory = ({ IDL }) => {
   const InitArgs = IDL.Record({
     test_mode: IDL.Bool,
     ogy_new_ledger_canister_id: IDL.Principal,
