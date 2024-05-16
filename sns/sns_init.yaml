@@ -47,7 +47,7 @@
 
 # Name of the SNS project. This may differ from the name of the associated
 # token. Must be a string of max length = 255.
-name: ORIGYN DAO
+name: ORIGYN
 
 # Description of the SNS project.
 # Must be a string of max length = 2,000.
@@ -80,7 +80,7 @@ url: https://www.origyn.com/
 # shown only in the NNS proposal.
 NnsProposal:
     # The title of the NNS proposal. Must be a string of 4 to 256 bytes.
-    title: "NNS Proposal to create an SNS named 'ORIGYN DAO'"
+    title: "NNS Proposal to upgrade ORIGYN to an SNS DAO"
 
     # The HTTPS address of additional content required to evaluate the NNS
     # proposal.
@@ -93,21 +93,19 @@ NnsProposal:
 
         ## SNS parameters
         The SNS upgrade of ORIGYN is purely from a technical point of view and not meant to raise any funds.
-        The SNS parameters are intentionally chosen at utmost unattractive to external investors because the ORIGYN Foundation will withdraw all funds after the SNS sale to its own wallet.
-        So it is not encouraged to participate in this SNS swap but rather wait for the token to be available on exchanges afterwards to purchase.
         Therefore, the parameters are chosen as follows.
-        * OGY tokens for sale: 8 OGY
-        * OGY tokens for the team: 8 OGY
-        * ICP to raise min: 888 ICP
-        * ICP to raise max: 8'888 ICP
+        * OGY tokens for sale: 8'888 OGY
+        * OGY tokens for the team: 8'888 OGY
+        * ICP to raise min: 8 ICP
+        * ICP to raise max: 88 ICP
         * Min number of contributors: 8
-        * Min number of tokens per contributor: 88 ICP
-        * Max number of tokens per contributor: 888 ICP
-        * Duration: 8 days
+        * Min number of tokens per contributor: 1 ICP
+        * Max number of tokens per contributor: 1 ICP
+        * Duration: 88 minutes
 
         ## Upgrade procedure
         The procedure for the token ugprade on a high-level is the following
-        ** The SNS sale goes through, creating 16 new OGY tokens.
+        ** The SNS sale goes through, creating newly minted OGY tokens from the SNS sale.
         ** A minting proposal is sent which mints the equivalent total supply as on the legacy OGY ledger
         ** Holders of the legacy OGY token go through a swap procedure to burn their legacy token and receive the new OGY token at a 1:1 ratio
         ** Any tokens locked in the existing ORIGYN governance will be unlocked and holders can swap those to the new ledger
@@ -198,7 +196,7 @@ Proposals:
 Neurons:
     # The minimum amount of SNS tokens to stake a neuron. This field is specified
     # as a token. For instance, "1 token".
-    minimum_creation_stake: 1000 tokens
+    minimum_creation_stake: 8 tokens
 
 # Configuration of SNS voting.
 Voting:
@@ -354,7 +352,7 @@ Distribution:
         #
         # For testing, propose_sns.sh will fill this in automatically.
         - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
-          stake: 8 tokens
+          stake: 8888 tokens
           memo: 0
           dissolve_delay: 5 years
           vesting_period: 0 year
@@ -368,14 +366,14 @@ Distribution:
         # The initial SNS token balance of the Swap canister is what will be
         # available for the decentralization swap. These tokens will be swapped
         # for ICP.
-        swap: 8 tokens
+        swap: 8888 tokens
 
     # Checksum of the total number of tokens distributed in this section.
-    #     8     (dev neuron)
-    #     0     (governance)
-    # +   8     (swap)
+    #     8'888     (dev neuron)
+    #     0         (treasury)
+    # +   8'888     (swap)
     # --------------
-    total: 16 tokens
+    total: 17776 tokens
 
 # Configuration of the decentralization swap parameters. Choose these parameters
 # carefully, if a decentralization swap fails, the SNS will restore the dapp
@@ -393,7 +391,7 @@ Swap:
     # the swap to succeed. If this amount is not achieved, the swap will be
     # aborted (instead of committed) when the due date/time occurs.
     # Must be smaller than or equal than `maximum_direct_participation_icp`.
-    minimum_direct_participation_icp: 888 tokens
+    minimum_direct_participation_icp: 8 tokens
 
     # Maximum amount of ICP from direct participants. If this amount is achieved,
     # the swap will finalize immediately, without waiting for the due date/time;
@@ -401,17 +399,17 @@ Swap:
     # direct participants (`minimum_participants`) is reached (otherwise, it
     # would be aborted).
     # Must be at least `min_participants * minimum_direct_participation_icp`.
-    maximum_direct_participation_icp: 8_888 tokens
+    maximum_direct_participation_icp: 88 tokens
 
     # The minimum amount of ICP that each participant must contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    minimum_participant_icp: 88 tokens
+    minimum_participant_icp: 1 tokens
 
     # The maximum amount of ICP that each participant may contribute
     # to participate. This field is specified as a token. For instance,
     # "1 token".
-    maximum_participant_icp: 888 tokens
+    maximum_participant_icp: 1 tokens
 
     # The text that swap participants must confirm before they may participate
     # in the swap.
@@ -502,12 +500,12 @@ Swap:
     #   the CreateServiceNervousSystem proposal is executed. This facilitates
     #   testing in an accelerated manner.
     #
-    # start_time: 23:30 UTC  # Intentionally commented out for testing.
+    start_time: 12:00 UTC
 
     # The duration of the decentralization swap. When `start_time` is calculated
     # during CreateServiceNervousSystem proposal execution, this `duration` will
     # be added to that absolute time and set as the swap's deadline.
-    duration: 8 days
+    duration: 88 minutes
 
     # Whether Neurons' Fund participation is requested.
     neurons_fund_participation: false
