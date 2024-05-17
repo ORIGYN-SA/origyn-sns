@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import useConnect from "@hooks/useConnect";
 import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
@@ -6,13 +7,18 @@ import OrigynFoundationReserve from "@pages/dashboard/origyn-foundation-reserve/
 // import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
 import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/OrigynTreasuryAccount";
 import OrigynRewardAccount from "@pages/dashboard/origyn-reward-account";
-import { Badge } from "@components/ui";
+import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { isConnected, isInitializing } = useConnect();
+
+  const handleClickAccount = () => {
+    navigate("account");
+  };
 
   return (
     <div className="container mx-auto py-16 px-4">
@@ -35,12 +41,14 @@ const Dashboard = () => {
 
         <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16">
           <LedgerSwitchBannerContent>
-            {!isConnected && !isInitializing && (
-              <div className="flex justify-center mt-8">
-                {/* <Button>Login to swap tokens</Button> */}
-                <AuthButton />
-              </div>
-            )}
+            <div className="flex justify-center mt-8">
+              {!isConnected && !isInitializing && <AuthButton />}
+              {isConnected && (
+                <Button onClick={handleClickAccount}>
+                  Login to swap tokens
+                </Button>
+              )}
+            </div>
           </LedgerSwitchBannerContent>
         </div>
 
