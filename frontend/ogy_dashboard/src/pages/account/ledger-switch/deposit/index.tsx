@@ -1,5 +1,7 @@
 import useConnect from "@hooks/useConnect";
 import useFetchBalanceOGYLegacy from "@services/queries/accounts/useFetchBalanceOGYLegacy";
+import { Tooltip } from "@components/ui";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
 
 const Deposit = () => {
   const { accountId } = useConnect();
@@ -14,8 +16,16 @@ const Deposit = () => {
           <div className="text-sm">{data?.balanceOGYUSD ?? 0} USD</div>
         </div>
       </div>
-      <div className="bg-surface-2 text-content/60 p-4">
-        <div className="truncate">Account ID: {accountId}</div>
+      <div className="flex items-center bg-surface-2 text-content/60 p-4">
+        <div
+          className="truncate"
+          data-tooltip-id="tooltip_account_id"
+          data-tooltip-content={accountId}
+        >
+          Account ID: {accountId}
+        </div>
+        <Tooltip id="tooltip_account_id" />
+        <CopyToClipboard value={accountId as string} />
       </div>
     </div>
   );

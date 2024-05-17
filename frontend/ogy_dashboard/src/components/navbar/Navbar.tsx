@@ -2,10 +2,10 @@ import { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useConnect } from "@connect2ic/react";
 import { Transition, Dialog } from "@headlessui/react";
-import { XMarkIcon, Bars3Icon } from "@heroicons/react/20/solid";
+import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import AccountOverview from "@components/account/overview/AccountOverview";
-import _truncate from "lodash/truncate";
+import { Tile } from "@components/ui";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -56,15 +56,22 @@ const Navbar = () => {
             {!isInitializing && !isConnected && <Auth />}
             {isConnected && (
               <button
-                className="flex items-center"
+                className="flex items-center bg-surface-2 rounded-full py-1 px-1"
                 onClick={() => handleOnClickShowAccountOverview(true)}
               >
-                <span className="text-sm mr-2 hidden sm:block">
-                  My Account:
-                </span>
-                <span className="text-sm font-medium mr-3">
-                  {_truncate(principal, { length: 20 })}
-                </span>
+                <div className="flex items-center">
+                  <Tile className="rounded-full h-8 w-8 bg-surface-3">
+                    <UserIcon className="p-1 text-white" />
+                  </Tile>
+                  <div className="hidden sm:block">
+                    <div className="ml-4 flex items-center text-sm max-w-xs pr-4">
+                      <span className="font-semibold mr-2 shrink-0">
+                        My Account:
+                      </span>
+                      <span className="truncate">{principal}</span>
+                    </div>
+                  </div>
+                </div>
               </button>
             )}
 
