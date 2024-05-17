@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useConnect } from "@connect2ic/react";
 import { Transition, Dialog } from "@headlessui/react";
@@ -25,6 +25,12 @@ const Navbar = () => {
     setShowAccountOverview(show);
 
   const handleOnHideMenu = () => setShowMenu(false);
+
+  useEffect(() => {
+    if (!isInitializing && !isConnected) {
+      setShowAccountOverview(false);
+    }
+  }, [isConnected, isInitializing]);
 
   return (
     <>
