@@ -41,7 +41,7 @@ const useNeuronsOwner = ({
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeuronsOwner", limit, isConnected],
+    queryKey: ["userListNeuronsAll", limit, isConnected],
     queryFn: () =>
       getListNeuronsOwner({
         governanceActor,

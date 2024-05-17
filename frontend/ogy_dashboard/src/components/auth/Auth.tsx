@@ -1,4 +1,5 @@
 import { useConnect, ConnectButton, ConnectDialog } from "@connect2ic/react";
+import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import useThemeDetector from "@helpers/theme/useThemeDetector";
 
@@ -20,12 +21,16 @@ const Styles = styled.div`
 
 const Auth = () => {
   const isDarkTheme = useThemeDetector();
+  const queryClient = useQueryClient();
 
   useConnect({
     onConnect: () => {
       document.body.style.overflow = "unset";
     },
     onDisconnect: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
       console.log("disconnected");
     },
   });

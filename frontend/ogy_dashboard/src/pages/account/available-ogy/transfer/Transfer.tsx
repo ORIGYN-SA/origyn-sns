@@ -73,7 +73,7 @@ const Transfer = ({ show, handleClose }) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: ["fetchBalanceOGY"],
+            queryKey: ["userFetchBalanceOGY"],
           });
           refetchFetchOGYBalance();
         },
