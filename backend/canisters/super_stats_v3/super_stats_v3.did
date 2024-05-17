@@ -101,6 +101,15 @@ type GetHoldersArgs = record {
     limit: nat64;
 };
 
+type GetAccountBalanceHistoryArgs = record {
+    account: text;
+    days: nat64;
+};
+
+type HistoryData = record {
+    balance: nat64;
+};
+
 service : (text) -> {
     // CORE API
     "add_authorised": (text) -> (text);
@@ -127,6 +136,7 @@ service : (text) -> {
     "get_principal_overview": (text) -> (opt Overview) query;
     "get_principal_holders": (GetHoldersArgs) -> (vec HolderBalanceResponse) query;
     "get_account_holders": (GetHoldersArgs) -> (vec HolderBalanceResponse) query;
+    "get_account_balance_history": (GetAccountBalanceHistoryArgs) -> (opt vec (nat64, HistoryData)) query;
 
     // TIMER API
     "start_processing_timer": (nat64) -> (text); // in seconds

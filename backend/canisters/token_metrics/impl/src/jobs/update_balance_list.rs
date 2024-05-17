@@ -29,10 +29,10 @@ pub fn run() {
 pub async fn update_balance_list() {
     debug!("update_balance_list");
     let (principal_holders_map, account_holders_map) = get_all_holders().await;
-    let merged_holders: HashMap<String, Overview> = principal_holders_map
-        .into_iter()
-        .chain(account_holders_map.into_iter())
-        .collect();
+    // let merged_holders: HashMap<String, Overview> = principal_holders_map
+    //     .into_iter()
+    //     .chain(account_holders_map.into_iter())
+    //     .collect();
 
     let mut temp_wallets_list: NormalBTreeMap<Account, WalletOverview> = NormalBTreeMap::new();
     let mut temp_merged_wallets_list: NormalBTreeMap<
@@ -40,17 +40,30 @@ pub async fn update_balance_list() {
         WalletOverview
     > = NormalBTreeMap::new();
 
-    for (wallet, stats) in merged_holders.into_iter() {
+    // Iterate through accounts
+    for (wallet, stats) in account_holders_map.into_iter() {
         let new_stats = WalletOverview {
             ledger: stats,
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
-        match split_into_principal_and_account(wallet.clone()) {
+        match string_to_account(wallet.clone()) {
             Ok(account) => {
                 // Insert the item in the list with all accounts
                 temp_wallets_list.insert(account, new_stats.clone());
-
+            }
+            Err(err) => error!(err),
+        }
+    }
+    // Iterate through principals
+    for (wallet, stats) in principal_holders_map.into_iter() {
+        let new_stats = WalletOverview {
+            ledger: stats,
+            governance: GovernanceStats::default(),
+            total: stats.balance as u64,
+        };
+        match string_to_account(wallet.clone()) {
+            Ok(account) => {
                 // Update the merged list with the principal
                 let merged_account_into_principal = Account {
                     owner: account.owner,
@@ -79,7 +92,7 @@ pub async fn update_balance_list() {
         };
         let account = Account::from(principal);
         check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
-        check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
+        // check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
     }
 
     mutate_state(|state| {
@@ -178,7 +191,7 @@ fn check_and_update_list(
     }
 }
 
-fn split_into_principal_and_account(input: String) -> Result<Account, String> {
+fn string_to_account(input: String) -> Result<Account, String> {
     if let Some(index) = input.find('.') {
         let (principal_str, subaccount_str) = input.split_at(index);
         let subaccount_str: String = subaccount_str.chars().skip(1).collect();

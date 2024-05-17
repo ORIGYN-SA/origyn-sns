@@ -397,21 +397,22 @@ fn get_principal_overview(account: String) -> Option<Overview> {
     }
 }
 
-#[query]
-fn get_merged_history_of_principal(principal_as_string: String) -> Option<Vec<(u64, HistoryData)>> {
-    // check authorised
-    RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
-    api_count();
+// May not be needed
+// #[query]
+// fn get_merged_history_of_principal(principal_as_string: String) -> Option<Vec<(u64, HistoryData)>> {
+//     // check authorised
+//     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
+//     api_count();
 
-    let result =  STABLE_STATE.with(|s| {
-        let history_res = merge_history_of_a_principal(principal_as_string, &s.borrow().as_ref().unwrap().account_data.accounts_history);
-        match history_res.len() {
-            0 => return None,
-            _ => return Some(history_res)
-        }
-    });
-    result
-}
+//     let result =  STABLE_STATE.with(|s| {
+//         let history_res = merge_history_of_a_principal(principal_as_string, &s.borrow().as_ref().unwrap().account_data.accounts_history);
+//         match history_res.len() {
+//             0 => return None,
+//             _ => return Some(history_res)
+//         }
+//     });
+//     result
+// }
 
 fn get_keys_for_last_x_days(account: u64, days: u64) -> Vec<(u64, u64)> {
     let mut keys = Vec::new();
@@ -425,11 +426,14 @@ fn get_keys_for_last_x_days(account: u64, days: u64) -> Vec<(u64, u64)> {
 
     keys
 }
-
+// May not be needed
+// Could be removed if we can use principal_data.accounts
+// and super_stats already has everything merged until the same principal
 fn merge_history_of_a_principal(
     target_principal: String,
     map: &SBTreeMap<(u64, u64), HistoryData>
 ) -> Vec<(u64, HistoryData)> {
+    // TODO: Last x days
     let mut result_map: HashMap<u64, HistoryData> = HashMap::new();
     for (key, value) in map.iter() {
         match STABLE_STATE.with(|s| { s.borrow().as_ref().unwrap().directory_data.get_id(&key.0) }) {
