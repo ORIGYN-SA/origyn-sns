@@ -59,7 +59,7 @@ const Transfer = ({ show, handleClose }) => {
     });
     return (
       <div>
-        {!isNaN(watchedAmount) && !errors
+        {!isNaN(watchedAmount) && !Object.keys(errors).length
           ? watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))
           : 0}{" "}
         OGY
