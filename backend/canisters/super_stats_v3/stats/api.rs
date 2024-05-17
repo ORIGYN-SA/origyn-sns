@@ -1,4 +1,4 @@
-use std::{ops::Deref, time::{SystemTime, UNIX_EPOCH}};
+use std::{ collections::HashMap, hash::Hash, ops::Deref, time::{ SystemTime, UNIX_EPOCH } };
 
 use ic_cdk_macros::{ update, query };
 use ic_stable_memory::collections::SBTreeMap;
@@ -11,7 +11,7 @@ use crate::core::{
 };
 
 use super::{
-    account_tree::{GetAccountBalanceHistory, HistoryData, Overview},
+    account_tree::{ GetAccountBalanceHistory, HistoryData, Overview },
     constants::HOUR_AS_NANOS,
     custom_types::{
         GetHoldersArgs,
@@ -397,15 +397,69 @@ fn get_principal_overview(account: String) -> Option<Overview> {
     }
 }
 
+#[query]
+fn get_merged_history_of_principal(principal_as_string: String) -> Option<Vec<(u64, HistoryData)>> {
+    // check authorised
+    RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
+    api_count();
+
+    let result =  STABLE_STATE.with(|s| {
+        let history_res = merge_history_of_a_principal(principal_as_string, &s.borrow().as_ref().unwrap().account_data.accounts_history);
+        match history_res.len() {
+            0 => return None,
+            _ => return Some(history_res)
+        }
+    });
+    result
+}
+
 fn get_keys_for_last_x_days(account: u64, days: u64) -> Vec<(u64, u64)> {
     let mut keys = Vec::new();
 
     let now = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards");
-    let current_day_number = now.as_secs() / 86400; 
+    let current_day_number = now.as_secs() / 86400;
 
     for i in 0..days {
         keys.push((account, current_day_number - i));
     }
 
     keys
+}
+
+fn merge_history_of_a_principal(
+    target_principal: String,
+    map: &SBTreeMap<(u64, u64), HistoryData>
+) -> Vec<(u64, HistoryData)> {
+    let mut result_map: HashMap<u64, HistoryData> = HashMap::new();
+    for (key, value) in map.iter() {
+        match STABLE_STATE.with(|s| { s.borrow().as_ref().unwrap().directory_data.get_id(&key.0) }) {
+            Some(ac_as_string) => {
+                match extract_principal_from_account(ac_as_string) {
+                    Some(principal_as_string) => {
+                        if principal_as_string == target_principal {
+                            let day = key.1;
+                            match result_map.get_mut(&day) {
+                                Some(existing_value) => *existing_value = existing_value.clone() + value.to_owned(),
+                                None => {
+                                    result_map.insert(day, value.to_owned());
+                                }
+                            }
+                        }
+                    }
+                    None => {}
+                }
+            }
+            None => {}
+        }
+    }
+    let result_as_vec: Vec<(u64, HistoryData)> = result_map.into_iter().collect();
+    result_as_vec
+}
+fn extract_principal_from_account(input: String) -> Option<String> {
+    if let Some(index) = input.find('.') {
+        let (principal_str, _) = input.split_at(index);
+        Some(principal_str.to_string())
+    } else {
+        None
+    }
 }

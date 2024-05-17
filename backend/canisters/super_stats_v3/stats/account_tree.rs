@@ -1,5 +1,5 @@
 
-use std::collections::{BTreeMap, HashMap};
+use std::{collections::{BTreeMap, HashMap}, ops::Add};
 
 use candid::{CandidType, Nat};
 use ic_stable_memory::{derive::{StableType, AsFixedSizeBytes}, collections::{SBTreeMap, SVec}};
@@ -125,6 +125,15 @@ pub struct AccountData {
 #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
 pub struct HistoryData {
     balance: u128,
+}
+impl Add for HistoryData {
+    type Output = HistoryData;
+
+    fn add(self, other: Self) -> Self::Output {
+        HistoryData {
+            balance: self.balance + other.balance,
+        }
+    }
 }
  #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
  pub struct Overview {
