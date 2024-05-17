@@ -57,7 +57,14 @@ const Transfer = ({ show, handleClose }) => {
       control,
       defaultValue: 0,
     });
-    return <div>{!isNaN(watchedAmount) ? watchedAmount : 0} OGY</div>;
+    return (
+      <div>
+        {!isNaN(watchedAmount) && !errors
+          ? watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))
+          : 0}{" "}
+        OGY
+      </div>
+    );
   };
 
   const onSubmit = (data) => {
@@ -77,7 +84,7 @@ const Transfer = ({ show, handleClose }) => {
   const isAmountUnderBalance = (value) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const balance = BigInt(balanceOGY.balanceOGYe8s);
-      const amount = numberToE8s(value) + TRANSACTION_FEE;
+      const amount = numberToE8s(value);
       if (amount > balance) return false;
     }
     return true;
@@ -119,6 +126,9 @@ const Transfer = ({ show, handleClose }) => {
                         "Amount must not exceed your balance.",
                       isPositive: (v) =>
                         Number(v) > 0 || "Amount must be a positive number.",
+                      isAmountUpperBalance: (v) =>
+                        Number(v) >= divideBy1e8(Number(TRANSACTION_FEE)) ||
+                        "Amount must be greater the or equal to transaction fees.",
                     },
                   })}
                   errors={errors?.amount}
@@ -144,7 +154,7 @@ const Transfer = ({ show, handleClose }) => {
 
               <div className="border-t border-border px-12 py-4">
                 <div className="flex justify-between items-center font-bold pt-4">
-                  <div>Amount</div>
+                  <div>Amount Received</div>
                   <div className="flex items-center font-semibold">
                     <img
                       className="mx-2 h-4 w-4"
