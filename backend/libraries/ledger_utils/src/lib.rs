@@ -3,9 +3,7 @@ use ic_ledger_types::{ AccountIdentifier, Subaccount, DEFAULT_SUBACCOUNT };
 use icrc_ledger_types::icrc1::account::Account;
 
 pub fn icrc_account_to_legacy_account_id(icrc_account: Account) -> AccountIdentifier {
-    let subaccount: Subaccount = icrc_account.subaccount.map_or(DEFAULT_SUBACCOUNT, |s|
-        Subaccount(s)
-    );
+    let subaccount: Subaccount = icrc_account.subaccount.map_or(DEFAULT_SUBACCOUNT, Subaccount);
     AccountIdentifier::new(&icrc_account.owner, &subaccount)
 }
 

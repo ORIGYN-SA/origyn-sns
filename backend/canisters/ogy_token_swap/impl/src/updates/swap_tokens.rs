@@ -1,6 +1,37 @@
-use crate::{
-    consts::OGY_MIN_SWAP_AMOUNT,
-    model::token_swap::{
+use crate::{ consts::OGY_MIN_SWAP_AMOUNT, state::{ mutate_state, read_state } };
+use candid::{ Nat, Principal };
+use canister_time::timestamp_nanos;
+use canister_tracing_macros::trace;
+use ic_cdk::update;
+use ic_ledger_types::{
+    account_balance,
+    query_archived_blocks,
+    query_blocks,
+    transfer,
+    AccountBalanceArgs,
+    ArchivedBlockRange,
+    Block,
+    BlockIndex,
+    GetBlocksArgs,
+    Memo,
+    Operation,
+    Subaccount,
+    Timestamp,
+    Tokens,
+    TransferArgs,
+};
+use icrc_ledger_canister_c2c_client::icrc1_transfer;
+use icrc_ledger_types::icrc1::{
+    account::Account,
+    transfer::{ BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferArg },
+};
+use ledger_utils::principal_to_legacy_account_id;
+use ogy_token_swap_api::token_swap::{ BurnRequestArgs, TransferRequestArgs };
+use serde_bytes::ByteBuf;
+use utils::{ consts::E8S_FEE_OGY, env::Environment };
+
+pub use ogy_token_swap_api::{
+    types::token_swap::{
         BlockFailReason,
         BurnFailReason,
         ImpossibleErrorReason,
@@ -9,54 +40,19 @@ use crate::{
         SwapStatus,
         TransferFailReason,
     },
-    state::{ mutate_state, read_state },
+    updates::swap_tokens::{ Args as SwapTokensArgs, Response as SwapTokensResponse },
 };
-use candid::{ CandidType, Nat, Principal };
-use canister_tracing_macros::trace;
-use ic_cdk::update;
-use ic_ledger_types::{
-    query_archived_blocks,
-    query_blocks,
-    transfer,
-    ArchivedBlockRange,
-    Block,
-    BlockIndex,
-    GetBlocksArgs,
-    Memo,
-    Operation,
-    Subaccount,
-    Tokens,
-    TransferArgs,
-};
-use icrc_ledger_canister_c2c_client::icrc1_transfer;
-use icrc_ledger_types::icrc1::{ account::Account, transfer::{ Memo as MemoIcrc, TransferArg } };
-use ledger_utils::principal_to_legacy_account_id;
-use serde::{ Deserialize, Serialize };
-use serde_bytes::ByteBuf;
-use utils::{ consts::E8S_FEE_OGY, env::Environment };
-
-#[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub enum SwapTokensResponse {
-    Success,
-    InternalError(String),
-}
-
-#[derive(CandidType, Serialize, Deserialize, Debug)]
-pub struct SwapTokensRequest {
-    pub block_index: BlockIndex,
-    pub user: Option<Principal>,
-}
 
 #[update]
 #[trace]
-pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
+pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
     let caller = read_state(|s| s.env.caller());
     let user = match args.user {
         Some(p) => p,
         None => caller,
     };
     match swap_tokens_impl(args.block_index, user).await {
-        Ok(_) => SwapTokensResponse::Success,
+        Ok(block_index_icrc) => SwapTokensResponse::Success(block_index_icrc),
         Err(err) => SwapTokensResponse::InternalError(err),
     }
 }
@@ -64,9 +60,11 @@ pub async fn swap_tokens(args: SwapTokensRequest) -> SwapTokensResponse {
 pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
     principal: Principal
-) -> Result<(), String> {
+) -> Result<BlockIndexIcrc, String> {
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
+    // if it passed the first check, we update the last request time
+    mutate_state(|s| s.data.token_swap.update_last_request_time(block_index))?;
     match recover_mode {
         None | Some(RecoverMode::RetryBlockValidation) => {
             // 2. validate block data
@@ -92,6 +90,9 @@ pub(crate) async fn swap_tokens_impl(
 async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result<(), String> {
     let ogy_legacy_ledger_canister_id = read_state(|s| s.data.canister_ids.ogy_legacy_ledger);
 
+    mutate_state(|s| {
+        s.data.token_swap.update_status(block_index, SwapStatus::BlockRequest(block_index))
+    });
     match
         query_blocks(ogy_legacy_ledger_canister_id, GetBlocksArgs {
             start: block_index,
@@ -103,9 +104,9 @@ async fn validate_block(block_index: BlockIndex, principal: Principal) -> Result
             // 1. If it is there, it is directly analysed
             // 2. If it is too old, it will be searched for in the archive canister
             // Otherwise it is marked as not found.
-            if block_data.blocks.len() > 0 {
+            if !block_data.blocks.is_empty() {
                 verify_block_data(&block_data.blocks[0], block_index, principal)
-            } else if block_data.archived_blocks.len() > 0 {
+            } else if !block_data.archived_blocks.is_empty() {
                 process_archive_block(&block_data.archived_blocks[0], block_index, principal).await
             } else {
                 mutate_state(|s| {
@@ -209,7 +210,7 @@ pub fn verify_block_data(
                     block_index,
                     SwapStatus::Failed(SwapError::BlockFailed(BlockFailReason::InvalidOperation))
                 );
-                Err(format!("Operation in block is not a valid transfer."))
+                Err("Operation in block is not a valid transfer.".to_string())
             }),
     }
 }
@@ -226,7 +227,7 @@ async fn process_archive_block(
         }).await
     {
         Ok(Ok(block_range)) => {
-            if block_range.blocks.len() > 0 {
+            if !block_range.blocks.is_empty() {
                 verify_block_data(&block_range.blocks[0], block_index, principal)
             } else {
                 mutate_state(|s| {
@@ -250,7 +251,7 @@ async fn process_archive_block(
     }
 }
 
-async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
+pub async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     let (amount, principal_result, ogy_legacy_ledger_canister_id, ogy_legacy_minting_account) =
         read_state(|s| {
             (
@@ -286,14 +287,49 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
             )
         );
     }
+
+    let args = AccountBalanceArgs {
+        account: principal_to_legacy_account_id(
+            read_state(|s| s.env.canister_id()),
+            Some(Subaccount::from(principal))
+        ),
+    };
+    let available_tokens = match account_balance(ogy_legacy_ledger_canister_id, args).await {
+        Ok(tokens) => tokens,
+        Err(_) => Tokens::from_e8s(0),
+    };
+    if amount > available_tokens {
+        // This can happen if the user withdrew the tokens again
+        return Err(
+            format!(
+                "Tokens to burn is larger than the balance in the account. Tokens in account: {}. Tokens requested to burn: {}.",
+                available_tokens,
+                amount
+            )
+        );
+    }
+
     let args = TransferArgs {
         memo: Memo(block_index),
         to: ogy_legacy_minting_account,
         amount,
         fee: Tokens::from_e8s(0), // fees for burning are 0
         from_subaccount: Some(Subaccount::from(principal)),
-        created_at_time: None,
+        created_at_time: Some(Timestamp {
+            timestamp_nanos: timestamp_nanos(),
+        }),
     };
+    mutate_state(|s| {
+        s.data.token_swap.update_status(
+            block_index,
+            SwapStatus::BurnRequest(BurnRequestArgs {
+                created_at_time: args.created_at_time,
+                from_subaccount: args.from_subaccount,
+                amount: args.amount,
+                memo: args.memo,
+            })
+        )
+    });
     match transfer(ogy_legacy_ledger_canister_id, args).await {
         Ok(Ok(burn_block_index)) => {
             mutate_state(|s| {
@@ -327,7 +363,7 @@ async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     }
 }
 
-async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
+pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcrc, String> {
     let (amount, ogy_ledger_canister_id, principal_result) = read_state(|s| {
         (
             s.data.token_swap.get_amount(block_index),
@@ -356,16 +392,31 @@ async fn transfer_new_token(block_index: BlockIndex) -> Result<(), String> {
         },
         amount: Nat::from(amount_to_swap.e8s()),
         fee: None,
-        created_at_time: None,
+        created_at_time: Some(timestamp_nanos()),
         memo: Some(MemoIcrc(ByteBuf::from(block_index.to_be_bytes()))),
     };
+
+    mutate_state(|s| {
+        s.data.token_swap.update_status(
+            block_index,
+            SwapStatus::TransferRequest(TransferRequestArgs {
+                created_at_time: args.created_at_time,
+                to: args.to,
+                amount: args.amount.clone(),
+                memo: args.memo.clone(),
+            })
+        )
+    });
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
             mutate_state(|s| {
-                s.data.token_swap.set_swap_block_index(block_index, transfer_block_index);
-                s.data.token_swap.update_status(block_index, SwapStatus::Complete);
+                s.data.token_swap.set_swap_block_index(block_index, transfer_block_index.clone());
+                s.data.token_swap.update_status(
+                    block_index,
+                    SwapStatus::Complete(transfer_block_index.clone())
+                );
             });
-            Ok(())
+            Ok(transfer_block_index)
         }
 
         Ok(Err(msg)) => {
@@ -568,7 +619,8 @@ mod tests {
         let data = Data::new(
             ogy_new_ledger_canister_id,
             ogy_legacy_ledger_canister_id,
-            ogy_legacy_minting_account_principal
+            ogy_legacy_minting_account_principal,
+            vec![]
         );
 
         let runtime_state = RuntimeState::new(env, data);
