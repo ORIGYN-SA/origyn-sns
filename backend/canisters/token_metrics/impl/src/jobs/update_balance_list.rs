@@ -12,6 +12,7 @@ use std::str::FromStr;
 use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
+use crate::consts::GOLD_TREASURY_SUBACCOUNT_STR;
 use crate::state::{ mutate_state, read_state };
 use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
 
@@ -92,12 +93,37 @@ pub async fn update_balance_list() {
         };
         let account = Account::from(principal);
         check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
-        // check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
     }
 
     mutate_state(|state| {
-        state.data.wallets_list = sort_map_descending(&temp_wallets_list);
+        // Remove the first item from the merged array, which is the governance canister
+        // including all stakes, also available in each principal.governance in the list
+        // and then replace its value with the value of subbaccount 32x0 
+        let governance_0_account = Account {
+            owner: state.data.sns_governance_canister,
+            subaccount: None,
+        };
+
+        match string_to_account(GOLD_TREASURY_SUBACCOUNT_STR) {
+            Ok(treasury_account) => {
+                match temp_wallets_list.get(&treasury_account) {
+                    Some(v) => {
+                        temp_merged_wallets_list.insert(governance_0_account, v.clone());
+                    }
+                    None => {
+                        let default_overview = WalletOverview::default();
+                        temp_merged_wallets_list.insert(governance_0_account, default_overview);
+                    }
+                }
+            }
+            Err(_) => {
+                let default_overview = WalletOverview::default();
+                temp_merged_wallets_list.insert(governance_0_account, default_overview);
+            }
+        }
+
         state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
+        state.data.wallets_list = sort_map_descending(&temp_wallets_list);
     });
     info!("update_balance_list -> done, mutated the state")
 }

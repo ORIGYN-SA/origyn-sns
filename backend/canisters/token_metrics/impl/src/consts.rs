@@ -46,6 +46,9 @@ pub const TEAM_PRINCIPALS: [Account; 3] = [
         ]),
     },
 ];
+
+pub const GOLD_TREASURY_SUBACCOUNT_STR: String = "tr3th-kiaaa-aaaaq-aab6q-cai.7776d299b4a804a14862b02bff7b74d1b956e431f5f832525d966d67ff3d7ce8".to_string();
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -58,5 +61,5 @@ mod tests {
                 "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae"
             ).unwrap()
         )
-    }
+    } 
 }
