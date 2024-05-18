@@ -23,6 +23,12 @@ type Overview = record {
   first_active : nat64;
   received : record { nat32; nat };
 };
+type SResponse = record {
+  current_offset : nat64;
+  data : vec record { Account; WalletOverview };
+  limit : nat64;
+  total_count : nat64;
+};
 type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
 type WalletOverview = record {
   total : nat64;
@@ -31,9 +37,7 @@ type WalletOverview = record {
 };
 service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
-  get_holders : (GetHoldersArgs) -> (
-      vec record { Account; WalletOverview },
-    ) query;
+  get_holders : (GetHoldersArgs) -> (SResponse) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_supply_data : () -> (TokenSupplyData) query;
 }
