@@ -337,7 +337,7 @@ fn get_account_overview(account: String) -> Option<Overview> {
 }
 
 #[query]
-fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
+fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<HashMap<u64, HistoryData>> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
@@ -345,38 +345,66 @@ fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u6
     let ac_ref = STABLE_STATE.with(|s| {
         s.borrow().as_ref().unwrap().directory_data.get_ref(&args.account)
     });
+    let acc = &args.account;
+    let account_as_str = format!("Account to check: {acc:?}");
+    log(account_as_str);
     match ac_ref {
-        Some(v) => {
-            let keys = get_keys_for_last_x_days(v, args.days);
-            log("get_account_balance_history -> keys:");
-            let keys_message = format!("{keys:?}");
-            log(keys_message);
-            let mut results = Vec::new();
-            for key in keys {
-                STABLE_STATE.with(|s| {
-                    if args.merge_subaccounts {
-                        match s.borrow().as_ref().unwrap().principal_data.accounts_history.get(&key) {
-                            Some(v) => {
-                                results.push((key.1, v.to_owned()));
-                            }
-                            None => {}
+        Some(ac_ref_value) => {
+            // Logs start
+            // STABLE_STATE.with(|s| {
+            //     match s.borrow().as_ref().unwrap().principal_data.accounts_history.iter().last() {
+            //         Some(v) => {
+            //             log("get_account_balance_history -> last principal_data.account_history:");
+            //             let lk = v.0.to_owned();
+            //             let lv = v.1.to_owned();
+            //             let last_message = format!("Key: {lk:?}, Value: {lv:?}");
+            //             log(last_message);
+            //         }
+            //         None => {}
+            //     }
+            // });
+            // Logs end
+
+            return STABLE_STATE.with(|s| {
+                let mut items: HashMap<u64, HistoryData> = HashMap::new();
+                let mut days_collected = 0;
+
+                let current_day = ic_time() / (86400 * 1_000_000_000);
+                let start_day = if current_day > args.days {
+                    current_day - args.days
+                } else {
+                    0
+                };
+
+                let stable_state = s.borrow();
+                let state_ref = stable_state.as_ref().unwrap();
+
+                let history_map = if args.merge_subaccounts {
+                    &state_ref.principal_data.accounts_history
+                } else {
+                    &state_ref.account_data.accounts_history
+                };
+
+                for day in (start_day..=current_day).rev() {
+                    let key = (ac_ref_value, day);
+
+                    if let Some(history) = history_map.get(&key) {
+                        log("found an item, pushing to array");
+                        items.insert(day, history.clone());
+                        days_collected += 1;
+                        if days_collected >= args.days {
+                            break;
                         }
                     }
-                    else {
-                        match s.borrow().as_ref().unwrap().account_data.accounts_history.get(&key) {
-                            Some(v) => {
-                                results.push((key.1, v.to_owned()));
-                            }
-                            None => {}
-                        }
-                    }
-                    
-                });
-            }
-            return Some(results);
+                }
+                let msg = format!("final items: {items:?}");
+                log(msg);
+                Some(items)
+            });
         }
         None => {
-            return None;
+            log("return type 0, no ac_ref");
+            None
         }
     }
 }
@@ -457,7 +485,9 @@ fn merge_history_of_a_principal(
                         if principal_as_string == target_principal {
                             let day = key.1;
                             match result_map.get_mut(&day) {
-                                Some(existing_value) => *existing_value = existing_value.clone() + value.to_owned(),
+                                Some(existing_value) => {
+                                    *existing_value = existing_value.clone() + value.to_owned();
+                                }
                                 None => {
                                     result_map.insert(day, value.to_owned());
                                 }

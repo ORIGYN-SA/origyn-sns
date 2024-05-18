@@ -111,7 +111,10 @@ type HistoryData = record {
     balance: nat64;
 };
 
-type AccountHistory = vec record { nat64; HistoryData };
+type AccountHistory = vec record {
+    key: nat64;
+    value: HistoryData;
+};
 
 service : (text) -> {
     // CORE API
