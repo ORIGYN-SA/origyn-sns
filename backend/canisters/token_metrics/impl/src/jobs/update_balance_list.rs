@@ -104,7 +104,7 @@ pub async fn update_balance_list() {
             subaccount: None,
         };
 
-        match string_to_account(GOLD_TREASURY_SUBACCOUNT_STR) {
+        match string_to_account(GOLD_TREASURY_SUBACCOUNT_STR.to_string()) {
             Ok(treasury_account) => {
                 match temp_wallets_list.get(&treasury_account) {
                     Some(v) => {

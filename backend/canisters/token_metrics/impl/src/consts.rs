@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use candid::Principal;
 use ic_ledger_types::Tokens;
 use icrc_ledger_types::icrc1::account::Account;
@@ -47,7 +49,7 @@ pub const TEAM_PRINCIPALS: [Account; 3] = [
     },
 ];
 
-pub const GOLD_TREASURY_SUBACCOUNT_STR: String = "tr3th-kiaaa-aaaaq-aab6q-cai.7776d299b4a804a14862b02bff7b74d1b956e431f5f832525d966d67ff3d7ce8".to_string();
+pub const GOLD_TREASURY_SUBACCOUNT_STR: &str = "tr3th-kiaaa-aaaaq-aab6q-cai.7776d299b4a804a14862b02bff7b74d1b956e431f5f832525d966d67ff3d7ce8";
 
 #[cfg(test)]
 mod tests {
