@@ -336,8 +336,8 @@ fn get_account_overview(account: String) -> Option<Overview> {
     }
 }
 
-#[query]
-fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<HashMap<u64, HistoryData>> {
+#[update]
+fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
@@ -365,7 +365,7 @@ fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<HashMap
             // });
             // Logs end
 
-            return STABLE_STATE.with(|s| {
+            let result = STABLE_STATE.with(|s| {
                 let mut items: HashMap<u64, HistoryData> = HashMap::new();
                 let mut days_collected = 0;
 
@@ -399,8 +399,10 @@ fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<HashMap
                 }
                 let msg = format!("final items: {items:?}");
                 log(msg);
-                Some(items)
+                let vec: Vec<(u64, HistoryData)> = items.iter().map(|(&k, v)| (k, v.clone())).collect();
+                Some(vec)
             });
+            result
         }
         None => {
             log("return type 0, no ac_ref");
