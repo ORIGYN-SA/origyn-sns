@@ -337,15 +337,13 @@ fn get_account_overview(account: String) -> Option<Overview> {
 }
 
 #[update]
-fn get_account_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
+fn get_account_history(args: GetAccountBalanceHistory) -> Vec<(u64, HistoryData)> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
-    if let Some(history) = get_account_last_days(args.clone()) {
-        let filled_history = fill_missing_days(history, args.days);
-        return Some(filled_history);
-    }
-    None
+    let history = get_account_last_days(args.clone());
+    let filled_history = fill_missing_days(history, args.days);
+    return filled_history;
 }
 fn fill_missing_days(mut history: Vec<(u64, HistoryData)>, days: u64) -> Vec<(u64, HistoryData)> {
     history.sort_by_key(|&(day, _)| day);
@@ -372,31 +370,13 @@ fn fill_missing_days(mut history: Vec<(u64, HistoryData)>, days: u64) -> Vec<(u6
 
     filled_history
 }
-fn get_account_last_days(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
+fn get_account_last_days(args: GetAccountBalanceHistory) -> Vec<(u64, HistoryData)> {
     // get ac_ref
     let ac_ref = STABLE_STATE.with(|s| {
         s.borrow().as_ref().unwrap().directory_data.get_ref(&args.account)
     });
-    let acc = &args.account;
-    let account_as_str = format!("Account to check: {acc:?}");
-    log(account_as_str);
     match ac_ref {
         Some(ac_ref_value) => {
-            // Logs start
-            // STABLE_STATE.with(|s| {
-            //     match s.borrow().as_ref().unwrap().principal_data.accounts_history.iter().last() {
-            //         Some(v) => {
-            //             log("get_account_balance_history -> last principal_data.account_history:");
-            //             let lk = v.0.to_owned();
-            //             let lv = v.1.to_owned();
-            //             let last_message = format!("Key: {lk:?}, Value: {lv:?}");
-            //             log(last_message);
-            //         }
-            //         None => {}
-            //     }
-            // });
-            // Logs end
-
             let result = STABLE_STATE.with(|s| {
                 let mut items: HashMap<u64, HistoryData> = HashMap::new();
                 let mut days_collected = 0;
@@ -417,7 +397,6 @@ fn get_account_last_days(args: GetAccountBalanceHistory) -> Option<Vec<(u64, His
                     let key = (ac_ref_value, day);
 
                     if let Some(history) = history_map.get(&key) {
-                        log("found an item, pushing to array");
                         items.insert(day, history.clone());
                         days_collected += 1;
                         if days_collected >= args.days {
@@ -431,13 +410,14 @@ fn get_account_last_days(args: GetAccountBalanceHistory) -> Option<Vec<(u64, His
                     .iter()
                     .map(|(&k, v)| (k, v.clone()))
                     .collect();
-                Some(vec)
+                return vec;
             });
-            result
+            return result;
         }
         None => {
             log("return type 0, no ac_ref");
-            None
+            let ret: Vec<(u64, HistoryData)> = Vec::new();
+            ret
         }
     }
 }

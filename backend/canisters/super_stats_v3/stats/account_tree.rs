@@ -37,8 +37,8 @@ impl AccountTree {
             fee = RUNTIME_STATE.with(|s|{s.borrow().data.get_ledger_fee()})
         };
         let new_balance = match tx_type {
-            TransactionType::In => previous_day_balance + stx.value,
-            TransactionType::Out => previous_day_balance - stx.value - fee
+            TransactionType::In => previous_day_balance.saturating_add(stx.value),
+            TransactionType::Out => previous_day_balance.saturating_sub(stx.value).saturating_sub(fee)
         };
 
         if !self.accounts_history.contains_key(&account_history_key) && tx_type == TransactionType::In {
@@ -49,8 +49,8 @@ impl AccountTree {
         }
         else if let Some(mut ach) = self.accounts_history.get_mut(&(*account_ref, day_of_transaction)) {
             ach.balance = match tx_type {
-                TransactionType::In => ach.balance + stx.value,
-                TransactionType::Out => ach.balance - stx.value - fee
+                TransactionType::In => ach.balance.saturating_add(stx.value),
+                TransactionType::Out => ach.balance.saturating_sub(stx.value).saturating_sub(fee)
             };
             // Should we update further days balance here as well?
             // Will we have a case where we process a new transaction before an old transaction? 
@@ -126,7 +126,7 @@ pub struct AccountData {
 }
 #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
 pub struct HistoryData {
-    balance: u128,
+    pub balance: u128,
 }
 impl Add for HistoryData {
     type Output = HistoryData;
