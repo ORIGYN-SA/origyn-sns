@@ -30,24 +30,25 @@ impl AccountTree {
         let day_of_transaction = stx.time / (86400 * 1_000_000_000);
         let account_history_key = (*account_ref, day_of_transaction);
 
-        let previous_day_balance = self.accounts_history.get(&(*account_ref, day_of_transaction - 1)).map_or(0, |previous_day| previous_day.balance);
-
         let fee: u128;
         if let Some(f) = stx.fee { fee = f } else {
             fee = RUNTIME_STATE.with(|s|{s.borrow().data.get_ledger_fee()})
         };
-        let new_balance = match tx_type {
-            TransactionType::In => previous_day_balance.saturating_add(stx.value),
-            TransactionType::Out => previous_day_balance.saturating_sub(stx.value).saturating_sub(fee)
-        };
-
+        
         if !self.accounts_history.contains_key(&account_history_key) && tx_type == TransactionType::In {
-            self.accounts_history.insert((*account_ref, day_of_transaction), HistoryData {
+            let previous_day_balance = self.accounts_history.get(&(*account_ref, day_of_transaction - 1)).map_or(0, |previous_day| previous_day.balance);
+
+            let new_balance = match tx_type {
+                TransactionType::In => previous_day_balance.saturating_add(stx.value),
+                TransactionType::Out => previous_day_balance.saturating_sub(stx.value).saturating_sub(fee)
+            };
+
+            self.accounts_history.insert(account_history_key, HistoryData {
                 balance: new_balance,
             }).expect("Storage is full");
             
         }
-        else if let Some(mut ach) = self.accounts_history.get_mut(&(*account_ref, day_of_transaction)) {
+        else if let Some(mut ach) = self.accounts_history.get_mut(&account_history_key) {
             ach.balance = match tx_type {
                 TransactionType::In => ach.balance.saturating_add(stx.value),
                 TransactionType::Out => ach.balance.saturating_sub(stx.value).saturating_sub(fee)
