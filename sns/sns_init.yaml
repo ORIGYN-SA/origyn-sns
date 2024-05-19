@@ -52,17 +52,16 @@ name: ORIGYN
 # Description of the SNS project.
 # Must be a string of max length = 2,000.
 description: >
-    A poem co-written with ChatGPT
+    The ORIGYN Protocol has been made possible thanks to the major contribution of the ORIGYN Foundation and embodies its vision of becoming the universal digital standard for certification, traceability, and authentication.
+    Achieving standardization requires neutrality, and as a DAO, the ORIGYN Protocol fulfills this requirement.
 
-    In a realm of code, a beacon forth surges,
-    a wondrous app on the Internet Computer emerges.
-    Born of inspiration divine,
-    This marvel of technology brilliantly shines.
+    The ORIGYN Protocol is the most advanced Real World Assets (RWA) infrastructure, enabling the creation of biometric digital certificates stored on the blockchain to prove the authenticity, identity, and ownership of valuable assets.
+    This makes them secure, transparent, and immutable, thus opening infinite possibilities for partners to create their own solutions or markets.
+    We are the building block, an open-source protocol to authenticate, certify, or trace RWA assets in the digital world.
+    The technology has been developed in close collaboration with top industry leaders to ensure the highest level of operational standards for industrial-grade solutions in RWAs.
 
-    With each line of code, a world takes flight,
-    A symphony of bits, a chorus of bytes.
-    Built on chainkey cryptography, secure and true,
-    An app that transcends, all we once knew...
+    The ORIGYN token (OGY) is a deflationary utility token integral to the ORIGYN ecosystem.
+    It is used to mint digital certificates that authenticate, certify, and trace the ownership of valuable assets. OGY tokens allow for DAO governance participation.
 
 # This is currently a placeholder field and must be left empty for now.
 Principals: []
@@ -106,11 +105,12 @@ NnsProposal:
         ## Upgrade procedure
         The procedure for the token ugprade on a high-level is the following
         ** The SNS sale goes through, creating newly minted OGY tokens from the SNS sale.
-        ** A minting proposal is sent which mints the equivalent total supply as on the legacy OGY ledger
-        ** Holders of the legacy OGY token go through a swap procedure to burn their legacy token and receive the new OGY token at a 1:1 ratio
-        ** Any tokens locked in the existing ORIGYN governance will be unlocked and holders can swap those to the new ledger
+        ** A minting proposal is sent which mints the equivalent total supply as on the legacy OGY ledger.
+        ** Holders of the legacy OGY token go through a swap procedure to burn their legacy token and receive the new OGY token at a 1:1 ratio.
+        ** Any tokens locked in the legacy ORIGYN governance will be unlocked and holders can swap those to the new ledger.
+        ** Holders can then stake their new OGY tokens again in the new OGY SNS governance.
 
-        For more details, follow us on our social media channels (Telegram / Twitter)
+        For more details, follow us on our social media channels (Telegram / Twitter) and the DFINITY forum.
 
 
 # If the SNS launch attempt fails, control over the dapp canister(s) is given to
@@ -121,7 +121,7 @@ fallback_controller_principals:
     # principals of your intended fallback controllers.
     #
     # For testing, propose_sns.sh will fill this in automatically.
-    - jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+    - 2gytz-5mjny-5qfcl-vjsle-654l2-ixgif-3vfqj-nryxk-uzgfx-5df5u-sqe
 
 # The list of dapp canister(s) that will be decentralized if the
 # decentralization swap succeeds. These are defined in the form of canister IDs,
@@ -301,13 +301,13 @@ Voting:
     RewardRate:
         # The initial reward rate at which the SNS voting rewards will increase
         # per year. This field is specified as a percentage. For example: "15%".
-        initial: 0.1%
+        initial: 0.01%
 
         # The final reward rate at which the SNS voting rewards will increase
         # per year. This rate is reached after `transition_duration` and remains
         # at this level unless changed by an SNS proposal. This field is
         # specified as a percentage. For example: "5%".
-        final: 0.1%
+        final: 0.01%
 
         # The voting reward rate falls quadratically from `initial` to `final`
         # over the time period defined by `transition_duration`.
@@ -351,7 +351,7 @@ Distribution:
         # principals of your intended genesis neurons.
         #
         # For testing, propose_sns.sh will fill this in automatically.
-        - principal: jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe
+        - principal: 2gytz-5mjny-5qfcl-vjsle-654l2-ixgif-3vfqj-nryxk-uzgfx-5df5u-sqe
           stake: 8888 tokens
           memo: 0
           dissolve_delay: 5 years
@@ -500,7 +500,7 @@ Swap:
     #   the CreateServiceNervousSystem proposal is executed. This facilitates
     #   testing in an accelerated manner.
     #
-    start_time: 12:00 UTC
+    start_time: 15:00 UTC
 
     # The duration of the decentralization swap. When `start_time` is calculated
     # during CreateServiceNervousSystem proposal execution, this `duration` will
