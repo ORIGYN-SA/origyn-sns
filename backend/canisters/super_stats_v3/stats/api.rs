@@ -337,10 +337,42 @@ fn get_account_overview(account: String) -> Option<Overview> {
 }
 
 #[update]
-fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
+fn get_account_history(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
+    if let Some(history) = get_account_last_days(args.clone()) {
+        let filled_history = fill_missing_days(history, args.days);
+        return Some(filled_history);
+    }
+    None
+}
+fn fill_missing_days(mut history: Vec<(u64, HistoryData)>, days: u64) -> Vec<(u64, HistoryData)> {
+    history.sort_by_key(|&(day, _)| day);
+
+    let mut filled_history = Vec::new();
+    let mut last_data: Option<&HistoryData> = None;
+    let current_day = ic_time() / (86400 * 1_000_000_000);
+
+    for day_offset in 0..=days {
+        let day = current_day - day_offset;
+
+        match history.iter().find(|&&(d, _)| d == current_day) {
+            Some(&(_, ref data)) => {
+                filled_history.push((current_day, data.clone()));
+                last_data = Some(data);
+            }
+            None => {
+                if let Some(data) = last_data {
+                    filled_history.push((current_day, data.clone()));
+                }
+            }
+        }
+    }
+
+    filled_history
+}
+fn get_account_last_days(args: GetAccountBalanceHistory) -> Option<Vec<(u64, HistoryData)>> {
     // get ac_ref
     let ac_ref = STABLE_STATE.with(|s| {
         s.borrow().as_ref().unwrap().directory_data.get_ref(&args.account)
@@ -370,11 +402,7 @@ fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u6
                 let mut days_collected = 0;
 
                 let current_day = ic_time() / (86400 * 1_000_000_000);
-                let start_day = if current_day > args.days {
-                    current_day - args.days
-                } else {
-                    0
-                };
+                let start_day = if current_day > args.days { current_day - args.days } else { 0 };
 
                 let stable_state = s.borrow();
                 let state_ref = stable_state.as_ref().unwrap();
@@ -399,7 +427,10 @@ fn get_account_balance_history(args: GetAccountBalanceHistory) -> Option<Vec<(u6
                 }
                 let msg = format!("final items: {items:?}");
                 log(msg);
-                let vec: Vec<(u64, HistoryData)> = items.iter().map(|(&k, v)| (k, v.clone())).collect();
+                let vec: Vec<(u64, HistoryData)> = items
+                    .iter()
+                    .map(|(&k, v)| (k, v.clone()))
+                    .collect();
                 Some(vec)
             });
             result
