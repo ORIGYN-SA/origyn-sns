@@ -357,14 +357,14 @@ fn fill_missing_days(mut history: Vec<(u64, HistoryData)>, days: u64) -> Vec<(u6
     for day_offset in 0..=days {
         let day = current_day - day_offset;
 
-        match history.iter().find(|&&(d, _)| d == current_day) {
+        match history.iter().find(|&&(d, _)| d == day) {
             Some(&(_, ref data)) => {
-                filled_history.push((current_day, data.clone()));
+                filled_history.push((day, data.clone()));
                 last_data = Some(data);
             }
             None => {
                 if let Some(data) = last_data {
-                    filled_history.push((current_day, data.clone()));
+                    filled_history.push((day, data.clone()));
                 }
             }
         }
