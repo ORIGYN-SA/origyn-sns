@@ -184,15 +184,15 @@ impl TokenSwap {
         }; // other case is not possible because it was initialised before
     }
 
-    pub fn set_amount(&mut self, block_index: BlockIndex, amount: Tokens) {
+    pub fn set_amount(&mut self, block_index: BlockIndex, amount: u64) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.amount = amount;
         } // other case is not possible because it was initialised before
     }
-    pub fn get_amount(&self, block_index: BlockIndex) -> Tokens {
+    pub fn get_amount(&self, block_index: BlockIndex) -> u64 {
         match self.swap.get(&block_index) {
             Some(swap_info) => swap_info.amount,
-            None => Tokens::from_e8s(0), // this is not possible because it was initialised before
+            None => 0, // this is not possible because it was initialised before
         }
     }
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
@@ -220,7 +220,7 @@ impl TokenSwap {
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
 pub struct SwapInfo {
     pub status: SwapStatus,
-    pub amount: Tokens,
+    pub amount: u64,
     pub principal: Principal,
     pub first_request: u64,
     pub last_request: u64,
@@ -233,7 +233,7 @@ impl SwapInfo {
         Self {
             status: SwapStatus::Init,
             principal,
-            amount: Tokens::from_e8s(0),
+            amount: 0,
             first_request: timestamp_millis(),
             last_request: timestamp_millis(),
             burn_block_index: None,

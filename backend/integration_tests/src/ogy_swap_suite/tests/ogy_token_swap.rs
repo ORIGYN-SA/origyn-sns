@@ -383,7 +383,7 @@ fn test_swap_amount_too_small() {
         result,
         SwapTokensResponse::InternalError(
             format!(
-                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.01000000."
+                "Number of tokens in block is too small. Needs to be at least 100000000, found: 1000000."
             )
         )
     );
