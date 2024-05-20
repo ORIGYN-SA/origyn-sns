@@ -35,7 +35,7 @@ const useFetchBalanceOGY = ({ enabled = true }: { enabled?: boolean }) => {
   const [ledgerActor] = useCanister("ledger");
 
   return useQuery({
-    queryKey: ["fetchBalanceOGY", ledgerActor, principal, isConnected],
+    queryKey: ["userFetchBalanceOGY", ledgerActor, principal, isConnected],
     queryFn: () =>
       fetchBalanceOGY({ actor: ledgerActor, owner: principal as string }),
     placeholderData: keepPreviousData,

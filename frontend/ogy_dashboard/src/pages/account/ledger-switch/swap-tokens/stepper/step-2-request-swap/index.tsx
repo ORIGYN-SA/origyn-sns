@@ -33,7 +33,7 @@ const Step2RequestSwap = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: ["fetchBalanceOGYLegacy"],
+            queryKey: ["userFetchBalanceOGYLegacy"],
           });
           refetchFetchOGYBalance();
         },

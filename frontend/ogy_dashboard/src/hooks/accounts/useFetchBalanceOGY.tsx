@@ -12,7 +12,7 @@ const useFetchBalanceOGY = ({
   const [ledgerActor] = useCanister("ledger");
 
   return useQuery({
-    queryKey: ["fetchBalanceOGY", owner, subaccount],
+    queryKey: ["userFetchBalanceOGY", owner, subaccount],
     queryFn: () => fetchBalanceOGY({ actor: ledgerActor, owner, subaccount }),
     placeholderData: keepPreviousData,
   });

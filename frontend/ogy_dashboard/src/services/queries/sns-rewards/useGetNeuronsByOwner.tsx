@@ -26,7 +26,7 @@ const useGetNeuronsByOwner = () => {
   const [snsRewardsActor] = useCanister("SNSRewards");
 
   return {
-    queryKey: ["getNeuronsByOwner", snsRewardsActor, isConnected],
+    queryKey: ["userListNeuronsAll", snsRewardsActor, isConnected],
     queryFn: () =>
       getNeuronsByOwner({
         snsRewardsActor,

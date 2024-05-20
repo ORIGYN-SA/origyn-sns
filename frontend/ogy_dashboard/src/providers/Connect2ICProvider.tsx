@@ -59,9 +59,8 @@ const Provider = ({ children }: PropsWithChildren) => {
         },
         providers: defaultProviders,
         globalProviderConfig: {
-          // host: "https://identity.ic0.app",
           host: "https://icp-api.io",
-          // dev: true,
+          dev: false,
           whitelist: [
             SNS_GOVERNANCE_CANISTER_ID,
             SNS_LEDGER_CANISTER_ID,

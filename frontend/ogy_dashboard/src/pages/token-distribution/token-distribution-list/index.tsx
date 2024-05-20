@@ -106,7 +106,7 @@ const TokenDistributionList = ({
       )}
       {isLoadingFetchTokenHolders && (
         <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
+          <LoaderSpin size="md" />
         </div>
       )}
       {isErrorFetchTokenHolders && (
