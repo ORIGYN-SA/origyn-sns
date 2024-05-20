@@ -59,7 +59,6 @@ const Provider = ({ children }: PropsWithChildren) => {
         },
         providers: defaultProviders,
         globalProviderConfig: {
-          // host: "https://identity.ic0.app",
           host: "https://icp-api.io",
           dev: false,
           whitelist: [
