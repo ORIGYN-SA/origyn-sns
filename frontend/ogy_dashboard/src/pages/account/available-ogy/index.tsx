@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
-import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const AvailableOGY = () => {
@@ -11,7 +12,10 @@ const AvailableOGY = () => {
     setShow(false);
   };
 
-  const { data: dataBalanceOGY } = useFetchBalanceOGY({});
+  const { data: balanceOGY } = useFetchBalanceOGYOwner();
+  const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
+    balance: balanceOGY?.balance,
+  });
 
   return (
     <Card>
@@ -25,9 +29,9 @@ const AvailableOGY = () => {
           <div className="flex items-center text-2xl font-semibold">
             <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
             <div className="flex ml-2">
-              {dataBalanceOGY?.balanceOGY !== undefined ? (
+              {balanceOGY?.balance !== undefined ? (
                 <div>
-                  {dataBalanceOGY.balanceOGY}
+                  {balanceOGY.balance}
                   <span className="text-content/60 ml-2">OGY</span>
                 </div>
               ) : (
@@ -35,16 +39,12 @@ const AvailableOGY = () => {
               )}
             </div>
           </div>
-          <div className="mt-2 text-sm">
-            <div className="flex">
-              {dataBalanceOGY?.balanceOGYUSD ? (
-                <div className="text-content/60">
-                  {dataBalanceOGY.balanceOGYUSD} USD
-                </div>
-              ) : (
-                <Skeleton className="w-16" />
-              )}
-            </div>
+          <div className="flex">
+            {balanceOGYUSD ? (
+              <div className="text-content/60">{balanceOGYUSD} USD</div>
+            ) : (
+              <Skeleton className="w-24" />
+            )}
           </div>
         </div>
       </div>
