@@ -174,7 +174,7 @@ const List = ({
       )}
       {isLoadingGetProposalsList && (
         <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
+          <LoaderSpin size="xl" />
         </div>
       )}
       {isErrorGetProposalsList && (

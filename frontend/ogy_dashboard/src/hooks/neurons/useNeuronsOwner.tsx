@@ -113,8 +113,12 @@ const useNeuronsOwner = ({
     0
   );
 
-  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState(0);
-  const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState(0);
+  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
+    null | number
+  >(null);
+  const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState<
+    null | number
+  >(null);
 
   const _totalStakedOGY =
     neurons?.reduce(
@@ -130,8 +134,10 @@ const useNeuronsOwner = ({
       0
     ) ?? 0;
 
-  const [totalStakedOGY, setTotalStakedOGY] = useState("0");
-  const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState(0);
+  const [totalStakedOGY, setTotalStakedOGY] = useState<null | string>(null);
+  const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState<null | number>(
+    null
+  );
 
   useEffect(() => {
     if (isSuccess) {
