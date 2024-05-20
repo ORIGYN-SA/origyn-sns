@@ -24,4 +24,8 @@ impl RequestingPrincipals {
     pub fn list(&self) -> HashSet<Principal> {
         self.list.clone()
     }
+
+    pub fn contains(&self, p: &Principal) -> bool {
+        self.list.contains(p)
+    }
 }
