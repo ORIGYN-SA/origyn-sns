@@ -150,6 +150,7 @@ pub fn verify_block_data(
                 read_state(|s| s.env.canister_id()),
                 Some(expected_subaccount)
             );
+            let amount_u64 = amount.e8s();
             if to != expected_account_id {
                 // The tokens have to have been sent to the swap canister with a subaccount that is equal to the
                 // sending principal
@@ -183,7 +184,12 @@ pub fn verify_block_data(
                 return Err(
                     format!("Sending account is not default subaccount of principal {principal}.")
                 );
-            } else if amount < OGY_MIN_SWAP_AMOUNT - Tokens::from_e8s(E8S_FEE_OGY) {
+            } else if
+                amount_u64 <
+                OGY_MIN_SWAP_AMOUNT.checked_sub(E8S_FEE_OGY).ok_or(
+                    "Overflow error when subtracting E8S_FEE_OGY from OGY_MIN_SWAP_AMOUNT".to_string()
+                )?
+            {
                 // The amount has to be greated than the minimum amount to conduct a swap.
                 mutate_state(|s| {
                     s.data.token_swap.update_status(
@@ -195,13 +201,13 @@ pub fn verify_block_data(
                     format!(
                         "Number of tokens in block is too small. Needs to be at least {}, found: {}.",
                         OGY_MIN_SWAP_AMOUNT,
-                        amount + Tokens::from_e8s(E8S_FEE_OGY)
+                        amount_u64 + E8S_FEE_OGY
                     )
                 );
             } else {
                 // This is the happy path if the conditions above are fulfilled
                 mutate_state(|s| {
-                    s.data.token_swap.set_amount(block_index, amount);
+                    s.data.token_swap.set_amount(block_index, amount_u64);
                     s.data.token_swap.update_status(block_index, SwapStatus::BlockValid);
                 });
             }
@@ -280,13 +286,18 @@ pub async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
             format!("Principal not found in internal token_swap list for block {block_index}.")
         );
     }
-    if amount < OGY_MIN_SWAP_AMOUNT - Tokens::from_e8s(E8S_FEE_OGY) {
+    if
+        amount <
+        OGY_MIN_SWAP_AMOUNT.checked_sub(E8S_FEE_OGY).ok_or(
+            "Overflow error when subtracting E8S_FEE_OGY from OGY_MIN_SWAP_AMOUNT".to_string()
+        )?
+    {
         // This was already checked above when the block was analysed but checking again to be sure.
         return Err(
             format!(
                 "At least {} OGY need to be swapped. Found: {}.",
                 OGY_MIN_SWAP_AMOUNT,
-                amount + Tokens::from_e8s(E8S_FEE_OGY)
+                amount + E8S_FEE_OGY
             )
         );
     }
@@ -298,8 +309,8 @@ pub async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
         ),
     };
     let available_tokens = match account_balance(ogy_legacy_ledger_canister_id, args).await {
-        Ok(tokens) => tokens,
-        Err(_) => Tokens::from_e8s(0),
+        Ok(tokens) => tokens.e8s(),
+        Err(_) => 0,
     };
     if amount > available_tokens {
         // This can happen if the user withdrew the tokens again
@@ -315,7 +326,7 @@ pub async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     let args = TransferArgs {
         memo: Memo(block_index),
         to: ogy_legacy_minting_account,
-        amount,
+        amount: Tokens::from_e8s(amount),
         fee: Tokens::from_e8s(0), // fees for burning are 0
         from_subaccount: Some(Subaccount::from(principal)),
         created_at_time: Some(Timestamp {
@@ -377,7 +388,9 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
     let principal = principal_result?;
 
     // ORIGYN will cover the swapping fees so the user ends up with exactly 1:1 tokens after the swap
-    let amount_to_swap = amount + Tokens::from_e8s(E8S_FEE_OGY);
+    let amount_to_swap = amount
+        .checked_add(E8S_FEE_OGY)
+        .ok_or("Overflow error when adding amount and E8S_FEE_OGY".to_string())?;
 
     if amount_to_swap < OGY_MIN_SWAP_AMOUNT {
         // This was already checked above when the block was analysed but checking again to be sure.
@@ -393,7 +406,7 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
             owner: principal,
             subaccount: None,
         },
-        amount: Nat::from(amount_to_swap.e8s()),
+        amount: Nat::from(amount_to_swap),
         fee: None,
         created_at_time: Some(timestamp_nanos()),
         memo: Some(MemoIcrc(ByteBuf::from(block_index.to_be_bytes()))),
@@ -553,7 +566,7 @@ mod tests {
 
         let expected_result = Err(
             format!(
-                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.90200000."
+                "Number of tokens in block is too small. Needs to be at least 100000000, found: 90200000."
             )
         );
 
