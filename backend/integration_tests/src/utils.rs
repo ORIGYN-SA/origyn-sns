@@ -1,7 +1,12 @@
 use candid::Principal;
+use ic_ledger_types::Tokens;
 use pocket_ic::PocketIc;
 use rand::{ RngCore, Rng, thread_rng };
 use types::Cycles;
+
+pub const E8S_PER_OGY: u64 = 100_000_000;
+pub const E8S_FEE_OGY: u64 = 200_000;
+pub const OGY_MIN_SWAP_AMOUNT: Tokens = Tokens::from_e8s(1 * E8S_PER_OGY);
 
 pub fn random_principal() -> Principal {
     let mut bytes = [0u8; 29];

@@ -1,12 +1,11 @@
 use ic_ledger_types::Tokens;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_legacy_ledger_canister::TransferError;
-use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::ogy_swap_suite::{ init::init, TestEnv };
 
 use crate::client::ogy_legacy_ledger::client::{ balance_of, mint_ogy, token_name, transfer_ogy };
-use crate::utils::random_principal;
+use crate::utils::{ random_principal, E8S_FEE_OGY, E8S_PER_OGY };
 
 #[test]
 fn valid_transfer() {

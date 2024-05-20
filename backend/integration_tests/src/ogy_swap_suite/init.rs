@@ -1,21 +1,20 @@
-use std::{env, path::Path};
+use std::{ env, path::Path };
 
 use candid::Principal;
 use ic_ledger_types::Tokens;
-use icrc_ledger_canister::init::{ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument};
+use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
 use icrc_ledger_types::icrc1::account::Account;
 use ledger_utils::principal_to_legacy_account_id;
-use ogy_legacy_ledger_canister::{ArchiveOptions as ArchiveOptionsLeg, Duration};
+use ogy_legacy_ledger_canister::{ ArchiveOptions as ArchiveOptionsLeg, Duration };
 use pocket_ic::PocketIc;
-use utils::consts::E8S_FEE_OGY;
 
 use crate::{
-    client::pocket::{create_canister, install_canister},
-    utils::random_principal,
+    client::pocket::{ create_canister, install_canister },
+    utils::{ random_principal, E8S_FEE_OGY },
     wasms,
 };
 
-use super::{CanisterIds, TestEnv};
+use super::{ CanisterIds, TestEnv };
 
 pub static POCKET_IC_BIN: &str = "./pocket-ic";
 
@@ -56,12 +55,14 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         ogy_token_swap_canister_id,
         ogy_token_swap_canister_wasm,
-        ogy_token_swap_init_args,
+        ogy_token_swap_init_args
     );
 
     let ogy_legacy_ledger_init_args = ogy_legacy_ledger_canister::init::InitArgs {
-        minting_account: principal_to_legacy_account_id(ogy_legacy_minting_account_principal, None)
-            .to_string(),
+        minting_account: principal_to_legacy_account_id(
+            ogy_legacy_minting_account_principal,
+            None
+        ).to_string(),
         initial_values: vec![],
         max_message_size_bytes: None,
         transaction_window: Some(Duration {
@@ -87,7 +88,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         ogy_legacy_ledger_canister_id,
         ogy_legacy_ledger_canister_wasm,
-        ogy_legacy_ledger_init_args,
+        ogy_legacy_ledger_init_args
     );
 
     let ogy_new_ledger_init_args = LedgerArgument::Init(InitArgs {
@@ -108,7 +109,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         ogy_new_ledger_canister_id,
         ogy_new_ledger_canister_wasm,
-        ogy_new_ledger_init_args,
+        ogy_new_ledger_init_args
     );
 
     CanisterIds {

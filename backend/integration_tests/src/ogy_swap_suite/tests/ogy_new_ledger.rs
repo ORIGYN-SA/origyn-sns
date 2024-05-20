@@ -1,11 +1,10 @@
 use candid::Nat;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferError };
-use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::client::icrc1::client::{ balance_of, transfer };
 use crate::ogy_swap_suite::{ init::init, TestEnv };
 
-use crate::utils::random_principal;
+use crate::utils::{ random_principal, E8S_FEE_OGY, E8S_PER_OGY };
 
 #[test]
 fn valid_transfer() {
