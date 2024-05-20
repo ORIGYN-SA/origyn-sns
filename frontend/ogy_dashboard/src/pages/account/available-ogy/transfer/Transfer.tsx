@@ -59,9 +59,11 @@ const Transfer = ({ show, handleClose }) => {
     });
     return (
       <div>
-        {!isNaN(watchedAmount) && !errors
-          ? watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))
-          : 0}{" "}
+        {isNaN(watchedAmount) ||
+        watchedAmount === 0 ||
+        Object.keys(errors).length > 0
+          ? 0
+          : watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))}{" "}
         OGY
       </div>
     );
@@ -73,7 +75,7 @@ const Transfer = ({ show, handleClose }) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: ["fetchBalanceOGY"],
+            queryKey: ["userFetchBalanceOGY"],
           });
           refetchFetchOGYBalance();
         },

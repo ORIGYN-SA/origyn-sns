@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   define: {
     global: 'globalThis',
+    'process.env': process.env
   },
   build: {
     target: "ES2022",

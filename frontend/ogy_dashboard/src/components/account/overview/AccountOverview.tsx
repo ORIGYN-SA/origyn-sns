@@ -1,7 +1,5 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useQuery, UseQueryResult } from "@tanstack/react-query";
-// import { useConnect } from "@connect2ic/react";
 import { UserIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
@@ -9,6 +7,7 @@ import { Button, Tile, Tooltip } from "@components/ui";
 import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 import AuthButton from "@components/auth/Auth";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { Skeleton } from "@components/ui";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -18,24 +17,8 @@ interface AccountOverviewProps {
 const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
   const { principal } = useConnect();
-  const [balanceOGY, setBalanceOGY] = useState(0);
-  const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
 
-  const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY({});
-  // const {
-  //   data: account,
-  //   isLoading: isLoadingAccount,
-  //   isError: isLoadingError,
-  // }: UseQueryResult<Account> = useQuery(
-  //   fetchOneAccount({ id: principal }, { retry: false })
-  // );
-  useEffect(() => {
-    if (isSuccessFetchBalanceOGY) {
-      setBalanceOGY(dataBalanceOGY.balanceOGY);
-      setBalanceOGYUSD(dataBalanceOGY.balanceOGYUSD);
-    }
-  }, [isSuccessFetchBalanceOGY, dataBalanceOGY]);
+  const { data: dataBalanceOGY } = useFetchBalanceOGY({});
 
   const handleClickAccount = () => {
     navigate("account");
@@ -101,11 +84,26 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     </div>
                     <div className="grid grid-cols-1 gap-4 pb-8 px-4">
                       <div className="py-8">
-                        <span className="text-2xl font-semibold">
-                          {balanceOGY}
-                        </span>
-                        <span> OGY</span>
-                        <div className="text-sm">($ {balanceOGYUSD})</div>
+                        <div className="flex justify-center ml-2">
+                          {dataBalanceOGY?.balanceOGY !== null ? (
+                            <div className="text-2xl font-semibold">
+                              {dataBalanceOGY?.balanceOGY}
+                              <span className="text-content/60 ml-2">OGY</span>
+                            </div>
+                          ) : (
+                            <Skeleton className="w-32" />
+                          )}
+                        </div>
+
+                        <div className="flex justify-center text-sm">
+                          {dataBalanceOGY?.balanceOGYUSD !== null ? (
+                            <div className="text-content/60">
+                              ($ {dataBalanceOGY?.balanceOGYUSD})
+                            </div>
+                          ) : (
+                            <Skeleton className="w-16" />
+                          )}
+                        </div>
                       </div>
                       <Button className="px-8" onClick={handleClickAccount}>
                         My account

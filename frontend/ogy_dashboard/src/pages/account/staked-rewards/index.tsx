@@ -6,6 +6,7 @@ import {
   DialogClaimAllRewards,
 } from "@pages/account/staked-rewards/claim-all-rewards";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
+import { Skeleton } from "@components/ui";
 
 const StakedRewards = () => {
   const { principal: owner } = useConnect();
@@ -18,18 +19,30 @@ const StakedRewards = () => {
       </div>
       <div className="flex items-center text-2xl font-semibold">
         <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
-        <span className="ml-2 mr-2">
-          {stakedRewardsOGY.totalStakedRewardsOGY}
-        </span>
-        <span className="text-content/60">OGY</span>
+        <div className="flex ml-2">
+          {stakedRewardsOGY.totalStakedRewardsOGY !== null ? (
+            <div>
+              {stakedRewardsOGY.totalStakedRewardsOGY}
+              <span className="text-content/60 ml-2">OGY</span>
+            </div>
+          ) : (
+            <Skeleton className="w-32" />
+          )}
+        </div>
       </div>
-      <div className="mt-2 text-sm text-content/60">
-        {stakedRewardsOGY.totalStakedRewardsOGYUSD} USD
+      <div className="flex">
+        {stakedRewardsOGY.totalStakedRewardsOGYUSD !== null ? (
+          <div className="text-content/60">
+            {stakedRewardsOGY.totalStakedRewardsOGYUSD} USD
+          </div>
+        ) : (
+          <Skeleton className="w-16" />
+        )}
       </div>
       <div className="mt-4 xl:mt-8">
         <ClaimAllRewardsProvider
           neuronIds={stakedRewardsOGY.neuronIds}
-          claimAmount={stakedRewardsOGY.totalStakedRewardsOGY}
+          claimAmount={stakedRewardsOGY.totalStakedRewardsOGY as number}
         >
           <BtnClaimAllRewards />
           <DialogClaimAllRewards />
