@@ -33,6 +33,15 @@ type InitArgs = record {
 type Response = variant { Success : SwapInfo; InternalError : text };
 type Response_1 = variant { Success : blob; MaxCapacityOfListReached };
 type Response_2 = variant { Success : nat; InternalError : text };
+type Response_3 = variant {
+  TransferError : text;
+  FailedToFetchBalance : text;
+  InsufficientBalance : nat64;
+  TransferCallError : text;
+  NoRecordOfSubaccountRequestFound;
+  Success : nat64;
+  InternalError : text;
+};
 type SwapError = variant {
   BlockFailed : BlockFailReason;
   BurnFailed : BurnFailReason;
@@ -92,4 +101,5 @@ service : (InitArgs) -> {
   request_deposit_account : (Args_1) -> (Response_1);
   swap_tokens : (Args_2) -> (Response_2);
   update_swap_status : (Args_3) -> (null);
+  withdraw_deposit : () -> (Response_3);
 }
