@@ -50,7 +50,7 @@ const sendTokens = async ({
     memo: 0,
     from_subaccount: [],
     created_at_time: [],
-    amount: { e8s: amount },
+    amount: { e8s: 100000000 },
   });
   return resultSendTokens;
 };

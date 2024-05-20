@@ -4,10 +4,11 @@ import { UserIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
 import { Button, Tile, Tooltip } from "@components/ui";
-import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import AuthButton from "@components/auth/Auth";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Skeleton } from "@components/ui";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -18,7 +19,10 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
   const { principal } = useConnect();
 
-  const { data: dataBalanceOGY } = useFetchBalanceOGY({});
+  const { data: balanceOGY } = useFetchBalanceOGYOwner();
+  const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
+    balance: balanceOGY?.balance,
+  });
 
   const handleClickAccount = () => {
     navigate("account");
@@ -85,9 +89,9 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     <div className="grid grid-cols-1 gap-4 pb-8 px-4">
                       <div className="py-8">
                         <div className="flex justify-center ml-2">
-                          {dataBalanceOGY?.balanceOGY !== null ? (
+                          {balanceOGY?.balance !== null ? (
                             <div className="text-2xl font-semibold">
-                              {dataBalanceOGY?.balanceOGY}
+                              {balanceOGY?.balance}
                               <span className="text-content/60 ml-2">OGY</span>
                             </div>
                           ) : (
@@ -96,12 +100,12 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                         </div>
 
                         <div className="flex justify-center text-sm">
-                          {dataBalanceOGY?.balanceOGYUSD !== null ? (
+                          {balanceOGYUSD !== null ? (
                             <div className="text-content/60">
-                              ($ {dataBalanceOGY?.balanceOGYUSD})
+                              {balanceOGYUSD} $
                             </div>
                           ) : (
-                            <Skeleton className="w-16" />
+                            <Skeleton className="w-24" />
                           )}
                         </div>
                       </div>
