@@ -370,7 +370,7 @@ fn fill_missing_days(mut history: Vec<(u64, HistoryData)>, days: u64) -> Vec<(u6
 
     filled_history
 }
-fn get_account_last_days(args: GetAccountBalanceHistory) -> Vec<(u64, HistoryData)> {
+pub fn get_account_last_days(args: GetAccountBalanceHistory) -> Vec<(u64, HistoryData)> {
     // get ac_ref
     let ac_ref = STABLE_STATE.with(|s| {
         s.borrow().as_ref().unwrap().directory_data.get_ref(&args.account)

@@ -105,7 +105,11 @@ impl AccountTree {
     }
 
     pub fn process_approve_from(&mut self, account_ref: &u64, stx: &SmallTX ) -> Result<String, String> {
-        self.update_history_balance(account_ref, stx, TransactionType::Out);
+        let stx_zero_value = SmallTX {
+            value: 0,
+            ..*stx
+        };
+        self.update_history_balance(account_ref, &stx_zero_value, TransactionType::Out);
 
         match self.accounts.get_mut(account_ref) {
             Some(mut ac) => {

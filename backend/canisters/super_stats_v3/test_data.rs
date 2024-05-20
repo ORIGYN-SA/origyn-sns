@@ -20,7 +20,103 @@ pub fn test_state_init(){
     });
 }
 
+pub fn ptx_test_data_for_history() -> Vec<ProcessedTX> {
+    let mut txs = Vec::new();
 
+    // Init mint transaction
+    txs.push(
+        ProcessedTX {
+            block: 0,
+            hash: "No-hash".to_string(),
+            tx_type: "Mint".to_string(),
+            from_account: "Token Ledger".to_string(),
+            to_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
+            tx_value: 100_000_000_000, 
+            tx_time: 86_400 * 1_000_000_000, // Day one
+            tx_fee: None,
+            spender: None,
+        }
+    );
+    
+    txs.push(
+        ProcessedTX {
+            block: 0,
+            hash: "No-hash".to_string(),
+            tx_type: "Mint".to_string(),
+            from_account: "Token Ledger".to_string(),
+            to_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
+            tx_value: 100_000_000_000, 
+            tx_time: 1 * 86_400 * 1_000_000_000, // Day one
+            tx_fee: None,
+            spender: None,
+        }
+    );
+
+    // Day 1:
+    // 220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5: 100_000_000_000
+    // 0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c: 0
+    // 24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6: 0
+
+    txs.push(
+        ProcessedTX {
+            block: 1,
+            hash: "No-hash".to_string(),
+            tx_type: "Transfer".to_string(),
+            from_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
+            to_account: "0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c".to_string(),
+            tx_value: 20_000_000_000,
+            tx_time: 2 * 86_400 * 1_000_000_000,
+            tx_fee: None,
+            spender: None,
+        }
+    );
+
+    // Day 2:
+    // 220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5: 80_000_000_000
+    // 0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c: 20_000_000_000
+    // 24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6: 0
+
+    txs.push(
+        ProcessedTX {
+            block: 2,
+            hash: "No-hash".to_string(),
+            tx_type: "Transfer".to_string(),
+            from_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
+            to_account: "24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6".to_string(),
+            tx_value: 20_000_000_000,
+            tx_time: 3 * 86_400 * 1_000_000_000,
+            tx_fee: None,
+            spender: None,
+        }
+    );
+
+    // Day 3:
+    // 220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5: 60_000_000_000
+    // 0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c: 20_000_000_000
+    // 24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6: 20_000_000_000
+
+    txs.push(
+        ProcessedTX {
+            block: 3,
+            hash: "No-hash".to_string(),
+            tx_type: "Transfer".to_string(),
+            from_account: "0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c".to_string(),
+            to_account: "24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6".to_string(),
+            tx_value: 10_000_000_000,
+            tx_time: 4 * 86_400 * 1_000_000_000,
+            tx_fee: None,
+            spender: None,
+        }
+    );
+
+    // Day 4:
+    // 220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5: 60_000_000_000
+    // 0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c: 10_000_000_000
+    // 24879af686568e7e95846e91dc364ee910b7156ddcca9882e0e42b6cd1273da6: 30_000_000_000
+
+    return txs;
+    
+}
 pub fn ptx_test_data() -> Vec<ProcessedTX> {
     // TEST DATA OVERVIEW
     // 
