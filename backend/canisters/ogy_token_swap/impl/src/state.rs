@@ -1,16 +1,16 @@
 use std::collections::HashSet;
 
-use candid::{CandidType, Principal};
+use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
-use ic_ledger_types::{AccountIdentifier, Subaccount};
-use serde::{Deserialize, Serialize};
-use types::{CanisterId, TimestampMillis};
-use utils::{
-    env::{CanisterEnv, Environment},
-    memory::MemorySize,
-};
+use ic_ledger_types::{ AccountIdentifier, Subaccount };
+use serde::{ Deserialize, Serialize };
+use types::{ CanisterId, TimestampMillis };
+use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use ogy_token_swap_api::types::token_swap::TokenSwap;
+use ogy_token_swap_api::{
+    requesting_principals::RequestingPrincipals,
+    types::token_swap::TokenSwap,
+};
 
 canister_state!(RuntimeState);
 
@@ -72,7 +72,7 @@ pub struct Data {
     /// The minting account of legacy OGY where tokens are burned to
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
-    pub requesting_principals: HashSet<Principal>,
+    pub requesting_principals: RequestingPrincipals,
 }
 
 impl Data {
@@ -80,7 +80,7 @@ impl Data {
         ogy_new_ledger: CanisterId,
         ogy_legacy_ledger: CanisterId,
         ogy_legacy_minting_account_principal: Principal,
-        authorized_principals: Vec<Principal>,
+        authorized_principals: Vec<Principal>
     ) -> Self {
         Self {
             authorized_principals,
@@ -91,9 +91,9 @@ impl Data {
             },
             minting_account: AccountIdentifier::new(
                 &ogy_legacy_minting_account_principal,
-                &Subaccount([0; 32]),
+                &Subaccount([0; 32])
             ),
-            requesting_principals: HashSet::default(),
+            requesting_principals: RequestingPrincipals::default(),
         }
     }
 }
