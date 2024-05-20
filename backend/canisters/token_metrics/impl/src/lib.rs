@@ -1,6 +1,5 @@
 use ic_cdk::export_candid;
 
-mod consts;
 mod guards;
 mod jobs;
 mod memory;

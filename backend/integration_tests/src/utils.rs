@@ -1,4 +1,5 @@
 use candid::Principal;
+use ic_ledger_types::Tokens;
 use pocket_ic::PocketIc;
 use rand::{ RngCore, Rng, thread_rng };
 use types::Cycles;

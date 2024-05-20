@@ -5,11 +5,7 @@ use candid::{ CandidType, Nat, Principal };
 use canister_state_macros::canister_state;
 use sns_rewards_api_canister::{ ReserveTokenAmounts, TokenRewardTypes };
 use types::{ NeuronInfo, TimestampMillis };
-use utils::{
-    consts::SNS_GOVERNANCE_CANISTER_ID,
-    env::{ CanisterEnv, Environment },
-    memory::MemorySize,
-};
+use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
 use crate::model::{
     maturity_history::MaturityHistory,
@@ -128,14 +124,14 @@ pub struct Data {
 impl Default for Data {
     fn default() -> Self {
         Self {
-            sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
+            sns_governance_canister: Principal::anonymous(),
             neuron_maturity: BTreeMap::new(),
             sync_info: SyncInfo::default(),
             maturity_history: MaturityHistory::default(),
             neuron_owners: NeuronOwnership::default(),
             payment_processor: PaymentProcessor::default(),
             tokens: HashMap::new(),
-            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
+            authorized_principals: vec![],
             is_synchronizing_neurons: false,
             daily_reserve_transfer: HashMap::new(),
             last_daily_reserve_transfer_time: TimestampMillis::default(),

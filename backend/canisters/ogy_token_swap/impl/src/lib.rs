@@ -1,6 +1,5 @@
 use ic_cdk::export_candid;
 
-pub mod consts;
 pub mod guards;
 pub mod jobs;
 pub mod lifecycle;

@@ -19,9 +19,9 @@ use ogy_token_swap_api::{
         swap_tokens::Response as SwapTokensResponse,
     },
 };
+use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 use pocket_ic::PocketIc;
 use types::CanisterId;
-use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 
 use crate::{
     client::{
