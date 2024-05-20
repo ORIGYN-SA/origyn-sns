@@ -19,7 +19,6 @@ export const Explorer = () => {
   const searchForItems = useMemo(
     () => [
       { title: "PrincipalID", bgColorCn: "bg-jade/20", colorCn: "text-jade" },
-      { title: "AccountID", bgColorCn: "bg-sky/20", colorCn: "text-sky" },
       {
         title: "Block index",
         bgColorCn: "bg-candyFloss/20",
