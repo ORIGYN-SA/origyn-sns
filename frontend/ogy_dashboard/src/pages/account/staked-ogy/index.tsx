@@ -2,11 +2,15 @@ import useConnect from "@hooks/useConnect";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const StakedOGY = () => {
   const { principal: owner } = useConnect();
   const { stakedOGY } = useNeurons({ owner, limit: 0 });
+  const { data: stakedOGYUSD } = useFetchBalanceOGYUSD({
+    balance: stakedOGY.totalStakedOGY,
+  });
 
   return (
     <Card>
@@ -16,9 +20,9 @@ const StakedOGY = () => {
       <div className="flex items-center text-2xl font-semibold">
         <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
         <div className="flex ml-2">
-          {stakedOGY.totalStakedOGY !== null ? (
+          {stakedOGY.string.totalStakedOGY !== null ? (
             <div>
-              {stakedOGY.totalStakedOGY}
+              {stakedOGY.string.totalStakedOGY}
               <span className="text-content/60 ml-2">OGY</span>
             </div>
           ) : (
@@ -27,12 +31,10 @@ const StakedOGY = () => {
         </div>
       </div>
       <div className="flex">
-        {stakedOGY.totalStakedOGYUSD !== null ? (
-          <div className="text-content/60">
-            {stakedOGY.totalStakedOGYUSD} USD
-          </div>
+        {stakedOGYUSD !== null ? (
+          <div className="text-content/60">{stakedOGYUSD} USD</div>
         ) : (
-          <Skeleton className="w-16" />
+          <Skeleton className="w-24" />
         )}
       </div>
 

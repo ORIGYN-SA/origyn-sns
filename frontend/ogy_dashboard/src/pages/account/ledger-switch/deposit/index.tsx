@@ -1,5 +1,6 @@
 import useConnect from "@hooks/useConnect";
-import useFetchBalanceOGYLegacy from "@services/queries/accounts/useFetchBalanceOGYLegacy";
+import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Tooltip } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Skeleton } from "@components/ui";
@@ -7,24 +8,28 @@ import { Skeleton } from "@components/ui";
 const Deposit = () => {
   const { accountId } = useConnect();
 
-  const { data } = useFetchBalanceOGYLegacy();
+  const { data: balanceOGYLegacy } = useFetchBalanceOGYLegacyOwner();
+  const { data: balanceOGYLegacyUSD } = useFetchBalanceOGYUSD({
+    balance: balanceOGYLegacy?.balance,
+  });
+
   return (
     <div className="border border-border rounded-xl">
       <div className="grid grid-cols-2 gap-4 p-4">
         <div>Legacy OGY Balance</div>
         <div className="">
           <div className="text-xl">
-            {data?.balanceOGY !== undefined ? (
-              `${data?.balanceOGY} OGY`
+            {balanceOGYLegacy?.balance !== undefined ? (
+              `${balanceOGYLegacy.balance} OGY`
             ) : (
               <Skeleton className="w-32" />
             )}
           </div>
           <div className="text-sm">
-            {data?.balanceOGYUSD ? (
-              `${data?.balanceOGYUSD} USD`
+            {balanceOGYLegacyUSD ? (
+              `${balanceOGYLegacyUSD} USD`
             ) : (
-              <Skeleton className="w-16" />
+              <Skeleton className="w-24" />
             )}
           </div>
         </div>
