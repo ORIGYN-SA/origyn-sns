@@ -49,5 +49,17 @@ pub fn parse_icrc_account(input: &String) -> Option<(String, String)>{ // -> Opt
         None
     }
 }
+#[cfg(target_arch = "wasm32")]
+pub fn timestamp_nanos() -> u64 {
+    ic_cdk::api::time()
+}
 
+#[cfg(not(target_arch = "wasm32"))]
+pub fn timestamp_nanos() -> u64 {
+    use std::time::SystemTime;
 
+    SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos() as u64
+}
+pub fn get_current_day() -> u64 {
+    return timestamp_nanos() / 86400 / 1_000_000_000;
+}

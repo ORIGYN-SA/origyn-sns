@@ -40,7 +40,7 @@ pub fn ptx_test_data_for_history() -> Vec<ProcessedTX> {
     
     txs.push(
         ProcessedTX {
-            block: 0,
+            block: 1,
             hash: "No-hash".to_string(),
             tx_type: "Mint".to_string(),
             from_account: "Token Ledger".to_string(),
@@ -59,7 +59,7 @@ pub fn ptx_test_data_for_history() -> Vec<ProcessedTX> {
 
     txs.push(
         ProcessedTX {
-            block: 1,
+            block: 2,
             hash: "No-hash".to_string(),
             tx_type: "Transfer".to_string(),
             from_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
@@ -78,7 +78,7 @@ pub fn ptx_test_data_for_history() -> Vec<ProcessedTX> {
 
     txs.push(
         ProcessedTX {
-            block: 2,
+            block: 3,
             hash: "No-hash".to_string(),
             tx_type: "Transfer".to_string(),
             from_account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
@@ -97,7 +97,7 @@ pub fn ptx_test_data_for_history() -> Vec<ProcessedTX> {
 
     txs.push(
         ProcessedTX {
-            block: 3,
+            block: 4,
             hash: "No-hash".to_string(),
             tx_type: "Transfer".to_string(),
             from_account: "0a1c18f29bda699bd646acb47f518b864cb2b35b944dc920b73325680b00b03c".to_string(),

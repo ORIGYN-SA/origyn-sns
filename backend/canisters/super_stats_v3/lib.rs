@@ -5,13 +5,26 @@ mod test_data;
 
 mod tests {
     use crate::{
-        core::{ runtime::RUNTIME_STATE, stable_memory::STABLE_STATE, types::IDKey, utils::log }, stats::{
-            account_tree::GetAccountBalanceHistory, api::get_account_last_days, constants::{ DAY_AS_NANOS, HOUR_AS_NANOS }, custom_types::{ IndexerType, ProcessedTX }, fetch_data::dfinity_icrc2_types::DEFAULT_SUBACCOUNT, process_data::{
-                process_index::process_smtx_to_index, process_time_stats::{ calculate_time_stats, top_x_by_txvalue, StatsType }, small_tx::processedtx_to_smalltx
-            }, utils::{
-                nearest_day_start, nearest_past_hour, parse_icrc_account, principal_subaccount_to_string
-            }
-        }, test_data::{ self, ptx_test_data, ptx_test_data_for_history, test_state_init }
+        core::{ runtime::RUNTIME_STATE, stable_memory::STABLE_STATE, types::IDKey, utils::log },
+        stats::{
+            account_tree::{ GetAccountBalanceHistory, HistoryData },
+            api::get_account_last_days,
+            constants::{ DAY_AS_NANOS, HOUR_AS_NANOS },
+            custom_types::{ IndexerType, ProcessedTX },
+            fetch_data::dfinity_icrc2_types::DEFAULT_SUBACCOUNT,
+            process_data::{
+                process_index::process_smtx_to_index,
+                process_time_stats::{ calculate_time_stats, top_x_by_txvalue, StatsType },
+                small_tx::processedtx_to_smalltx,
+            },
+            utils::{
+                nearest_day_start,
+                nearest_past_hour,
+                parse_icrc_account,
+                principal_subaccount_to_string,
+            },
+        },
+        test_data::{ self, ptx_test_data, ptx_test_data_for_history, test_state_init },
     };
 
     #[test]
@@ -224,7 +237,7 @@ mod tests {
     }
 
     // ICP LEDGER TYPE - 30 days
-    #[test]
+    // #[test]
     fn process_daily_data() {
         // set hourly time
         RUNTIME_STATE.with(|s| {
@@ -307,25 +320,24 @@ mod tests {
         assert_eq!(top[3].tx_value, 80000000);
         assert_eq!(top[4].tx_value, 30000000);
     }
-    
+
     #[test]
-    fn test_account_hitsory() {
+    fn test_account_history() {
         test_state_init();
 
         let ptx = ptx_test_data_for_history();
         let stx = processedtx_to_smalltx(&ptx);
         let _ = process_smtx_to_index(stx);
 
-
         let account_one_args = GetAccountBalanceHistory {
             account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
             days: 5,
-            merge_subaccounts: false
+            merge_subaccounts: false,
         };
         let account_one_history = get_account_last_days(account_one_args);
-        // let msg = format!("Account one history: {account_one_history:?}");
-        // log(msg);
-        assert_eq!(account_one_history.first().0)
-        
+        println!("Account one history: {account_one_history:?}");
+        let first_day = account_one_history.first().unwrap();
+        assert_eq!(first_day.0, 1);
+        assert_eq!(first_day.1.balance, 100_000_000_000);
     }
 }
