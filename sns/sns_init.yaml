@@ -87,10 +87,10 @@ NnsProposal:
 
     # The description of the proposal. Must be a string of 10 to 2,000 bytes.
     summary: |
-        # ORIGYN upgrade proposal to an SNS
+        ## ORIGYN upgrade proposal to an SNS
         This is a proposal to upgrade the existing ORIGYN DAO to an SNS.
 
-        ## SNS parameters
+        ### SNS parameters
         The SNS upgrade of ORIGYN is purely from a technical point of view and not meant to raise any funds.
         Therefore, the parameters are chosen as follows.
         * OGY tokens for sale: 8'888 OGY
@@ -102,7 +102,10 @@ NnsProposal:
         * Max number of tokens per contributor: 1 ICP
         * Duration: 88 minutes
 
-        ## Upgrade procedure
+        As this upgrade is not a fundraising but purely technical, we are not adding any canisters to the SNS for the swap.
+        These will be added when the upgrade goes through successfully.
+
+        ### Upgrade procedure
         The procedure for the token ugprade on a high-level is the following
         ** The SNS sale goes through, creating newly minted OGY tokens from the SNS sale.
         ** A minting proposal is sent which mints the equivalent total supply as on the legacy OGY ledger.
@@ -135,7 +138,7 @@ dapp_canisters:
     # IDs of the canisters comprising your to-be-decentralized dapp.
     #
     # For testing, propose_sns.sh will fill this in automatically.
-    - jpuy7-oiaaa-aaaan-qmheq-cai
+    # - jpuy7-oiaaa-aaaan-qmheq-cai
 
 # Configuration of SNS tokens in the SNS Ledger canister deployed as part
 # of the SNS.
