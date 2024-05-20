@@ -7,13 +7,18 @@ Go to the [official ORIGYN website](https://origyn.com) for more information abo
 
 ## Integration tests
 
-1) You will need to download the pocket-ic client and place it at backend/integration_tests/pocket-ic
+### Run existing integration tests
 
-2) Build canisters correctly.
-you will need to build the following canisters with the inttest features flag e.g cargo build --features inttest .......
-- ogy_token_swap
-- sns_rewards
+1) Simply call the script `./scripts/run-integration-tests.sh`. It will download the pocket-ic client and build all canisters that are included in the integrationt testing.
 
-3) you may need to set the max open files on your current shell before running `cargo test` by first running `ulimit -n 10240`
+### Add a new canister to integration testing
 
-4) Run the tests e.g cargo test
+1) Prepare all the integration test properly in the `backend/integration_tests/` folder.
+
+2) Add your canister to the list of canisters to build in `/scripts/build-all-canister.sh` in the field `canister_list`
+
+3) Call the script `./scripts/run-integration-tests.sh`
+
+### Troublshoot
+
+* You may need to set the max open files on your current shell before running the script by first running `ulimit -n 10240`
