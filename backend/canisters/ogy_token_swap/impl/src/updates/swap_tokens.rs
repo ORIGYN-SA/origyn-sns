@@ -1,4 +1,4 @@
-use crate::{ consts::{ E8S_FEE_OGY, OGY_MIN_SWAP_AMOUNT }, state::{ mutate_state, read_state } };
+use crate::state::{ mutate_state, read_state };
 use candid::{ Nat, Principal };
 use canister_time::timestamp_nanos;
 use canister_tracing_macros::trace;
@@ -26,9 +26,12 @@ use icrc_ledger_types::icrc1::{
     transfer::{ BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferArg },
 };
 use ledger_utils::principal_to_legacy_account_id;
-use ogy_token_swap_api::token_swap::{ BurnRequestArgs, TransferRequestArgs };
+use ogy_token_swap_api::{
+    token_swap::{ BurnRequestArgs, TransferRequestArgs },
+    OGY_MIN_SWAP_AMOUNT,
+};
 use serde_bytes::ByteBuf;
-use utils::env::Environment;
+use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
 pub use ogy_token_swap_api::{
     types::token_swap::{
@@ -462,10 +465,8 @@ mod tests {
     use ledger_utils::principal_to_legacy_account_id;
     use utils::env::CanisterEnv;
 
-    use crate::{
-        consts::{ E8S_FEE_OGY, E8S_PER_OGY },
-        state::{ init_state, mutate_state, Data, RuntimeState },
-    };
+    use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
+    use crate::state::{ init_state, mutate_state, Data, RuntimeState };
 
     use super::verify_block_data;
 

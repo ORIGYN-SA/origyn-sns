@@ -1,7 +1,7 @@
 use candid::Principal;
 use ic_ledger_types::Tokens;
-pub const E8S_PER_OGY: u64 = 100_000_000;
-pub const E8S_FEE_OGY: u64 = 200_000;
+use utils::consts::E8S_PER_OGY;
+
 pub const OGY_MIN_SWAP_AMOUNT: Tokens = Tokens::from_e8s(1 * E8S_PER_OGY);
 
 pub const ORIGYN_ADMIN_PRINCIPAL: Principal = Principal::from_slice(

@@ -19,6 +19,7 @@ use ogy_token_swap_api::{
         swap_tokens::Response as SwapTokensResponse,
     },
 };
+use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 use pocket_ic::PocketIc;
 use types::CanisterId;
 
@@ -46,7 +47,7 @@ use crate::{
         },
     },
     ogy_swap_suite::{ init::init, TestEnv },
-    utils::{ random_amount, random_principal, E8S_FEE_OGY, E8S_PER_OGY },
+    utils::{ random_amount, random_principal },
 };
 
 #[test]

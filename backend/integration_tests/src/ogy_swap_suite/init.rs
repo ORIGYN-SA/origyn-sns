@@ -7,10 +7,11 @@ use icrc_ledger_types::icrc1::account::Account;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_legacy_ledger_canister::{ ArchiveOptions as ArchiveOptionsLeg, Duration };
 use pocket_ic::PocketIc;
+use utils::consts::E8S_FEE_OGY;
 
 use crate::{
     client::pocket::{ create_canister, install_canister },
-    utils::{ random_principal, E8S_FEE_OGY },
+    utils::random_principal,
     wasms,
 };
 

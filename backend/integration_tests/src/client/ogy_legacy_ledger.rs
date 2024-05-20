@@ -32,14 +32,13 @@ pub mod name {
 }
 
 pub mod client {
-    use crate::utils::E8S_FEE_OGY;
-
     use super::*;
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Memo };
     use ic_ledger_types::Tokens;
     use pocket_ic::PocketIc;
     use types::CanisterId;
+    use utils::consts::E8S_FEE_OGY;
 
     pub fn mint_ogy(
         pic: &mut PocketIc,
