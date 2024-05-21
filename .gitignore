@@ -8,3 +8,4 @@ backend/canisters/ogy_token_swap/api/declarations
 .DS_Store
 backend/integration_tests/pocket-ic
 node_modules
+cobertura.xml
