@@ -35,22 +35,22 @@ include:
   # - local: scripts/ci-cd/.frontend_linter.yml
   #   inputs:
   #     src-folder: ogy_dashboard
-  # # Unit tests coverage
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: ogy_token_swap
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: sns_rewards
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: super_indexer_v3
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: super_stats_v3
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: tx_store_v3
+  # Unit tests coverage
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: ogy_token_swap
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: sns_rewards
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: super_indexer_v3
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: super_stats_v3
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: tx_store_v3
   # # Canister builds
   # - local: scripts/ci-cd/.canister_builds.yml
   #   inputs:
