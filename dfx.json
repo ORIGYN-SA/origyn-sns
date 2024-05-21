@@ -4,7 +4,8 @@
     "token_metrics": {
       "candid": "backend/canisters/token_metrics/api/can.did",
       "package": "token_metrics",
-      "type": "rust"
+      "type": "rust",
+      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz"
     },
     "ogy_token_swap": {
       "type": "custom",
@@ -74,19 +75,22 @@
       "candid": "backend/canisters/super_indexer_v3/super_indexer_v3.did",
       "optimize": "cycles",
       "package": "super_indexer_v3",
-      "type": "rust"
+      "type": "rust",
+      "wasm": "backend/canisters/super_indexer_v3/target/wasm32-unknown-unknown/release/super_indexer_v3_canister.wasm.gz"
     },
     "super_stats_v3": {
       "candid": "backend/canisters/super_stats_v3/api/can.did",
       "optimize": "cycles",
       "package": "super_stats_v3",
-      "type": "rust"
+      "type": "rust",
+      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz"
     },
     "tx_store_v3": {
       "candid": "backend/canisters/tx_store_v3/tx_store_v3.did",
       "optimize": "cycles",
       "package": "tx_store_v3",
-      "type": "rust"
+      "type": "rust",
+      "wasm": "backend/canisters/tx_store_v3/target/wasm32-unknown-unknown/release/tx_store_v3_canister.wasm.gz"
     }
   },
   "dfx": "0.19.0",
