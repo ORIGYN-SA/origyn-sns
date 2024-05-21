@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::{ borrow::Borrow, collections::BTreeMap };
 
 use candid::Principal;
 use canister_time::timestamp_millis;
@@ -41,7 +41,7 @@ impl TokenSwap {
         block_index: BlockIndex,
         principal: Principal
     ) -> Result<Option<RecoverMode>, String> {
-        match self.swap.get(&block_index) {
+        match self.get_swap_info(block_index) {
             Some(entry) => {
                 // only allow requests per block_index within a certain interval to avoid spamming attempts
                 entry.check_timeout()?;
@@ -176,10 +176,17 @@ impl TokenSwap {
         }
     }
 
-    pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<&SwapInfo> {
+    pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<SwapInfo> {
         let active_swap = self.swap.get(&block_index);
         let completed_swap = self.history.get(&block_index);
-        active_swap
+        if active_swap.is_some() {
+            return active_swap.cloned();
+        }
+        if completed_swap.is_some() {
+            completed_swap
+        } else {
+            None
+        }
     }
 
     pub fn update_status(&mut self, block_index: BlockIndex, status: SwapStatus) {

@@ -51,7 +51,7 @@ async fn recover_stuck_burn_impl(
     validation_data: Option<BurnRequestArgs>
 ) -> Result<BlockIndexIcrc, RecoverStuckBurnResponse> {
     let mut burn_request_args;
-    if let Some(info) = read_state(|s| s.data.token_swap.get_swap_info(block_index).cloned()) {
+    if let Some(info) = read_state(|s| s.data.token_swap.get_swap_info(block_index)) {
         match info.status {
             SwapStatus::BurnRequest(data) => {
                 burn_request_args = data;
