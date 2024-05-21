@@ -13,8 +13,8 @@ type BlockFailReason = variant {
 };
 type BurnFailReason = variant {
   TransferError : TransferError;
-  NoTokensToBurn;
   CallError : text;
+  TokenBalanceAndSwapRequestDontMatch;
 };
 type BurnRequestArgs = record {
   memo : nat64;

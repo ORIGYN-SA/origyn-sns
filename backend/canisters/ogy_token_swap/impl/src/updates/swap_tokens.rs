@@ -314,6 +314,14 @@ pub async fn burn_token(block_index: BlockIndex) -> Result<(), String> {
     };
     if amount > available_tokens {
         // This can happen if the user withdrew the tokens again
+        mutate_state(|s|
+            s.data.token_swap.update_status(
+                block_index,
+                SwapStatus::Failed(
+                    SwapError::BurnFailed(BurnFailReason::TokenBalanceAndSwapRequestDontMatch)
+                )
+            )
+        );
         return Err(
             format!(
                 "Tokens to burn is larger than the balance in the account. Tokens in account: {}. Tokens requested to burn: {}.",

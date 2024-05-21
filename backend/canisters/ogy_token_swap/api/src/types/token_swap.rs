@@ -112,7 +112,22 @@ impl TokenSwap {
                                     }
                                 }
                             }
-                            SwapError::BurnFailed(_) => Ok(Some(RecoverMode::RetryBurn)),
+                            SwapError::BurnFailed(burn_fail_reason) =>
+                                match burn_fail_reason {
+                                    BurnFailReason::TokenBalanceAndSwapRequestDontMatch => {
+                                        // If the balance is too low, there is no direct way to recover. The user has to
+                                        // withdraw and submit a new request with a new block index. So this block index
+                                        // will never be recoverable
+                                        Err(
+                                            "Token balance in subaccount is too small to perform swap for requested block. Skipping swap.".to_string()
+                                        )
+                                    }
+                                    | BurnFailReason::CallError(_)
+                                    | BurnFailReason::TransferError(_) => {
+                                        // If the burn failed because of transfer or call error, we try to recover by trying again.
+                                        Ok(Some(RecoverMode::RetryBurn))
+                                    }
+                                }
                             SwapError::TransferFailed(_) => Ok(Some(RecoverMode::RetryTransfer)),
                             SwapError::UnexpectedError(reason) =>
                                 Err(
@@ -288,7 +303,7 @@ pub enum BlockFailReason {
 pub enum BurnFailReason {
     TransferError(TransferError),
     CallError(String),
-    NoTokensToBurn,
+    TokenBalanceAndSwapRequestDontMatch,
 }
 
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
