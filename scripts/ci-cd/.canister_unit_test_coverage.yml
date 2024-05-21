@@ -16,7 +16,7 @@ $[[ inputs.src-folder ]] tests:
     - if: $CI_COMMIT_REF_NAME == "develop"
   extends: .rust template
   tags:
-    - dind
+    - docker
   services:
     - docker:dind
   variables:
