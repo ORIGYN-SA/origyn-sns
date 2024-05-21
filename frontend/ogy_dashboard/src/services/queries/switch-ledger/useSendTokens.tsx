@@ -42,7 +42,7 @@ const sendTokens = async ({
   const result = rawResult.filter(isFulfilled);
   const to = Principal.fromUint8Array(result[1]?.value as Uint8Array).toHex();
   const fee = { e8s: TRANSACTION_FEE };
-  const amount = (result[0]?.value as IValueOGYBalance).e8s;
+  const amount = (result[0]?.value as IValueOGYBalance).e8s - TRANSACTION_FEE;
 
   const resultSendTokens = await ledgerLegacyActor.send_dfx({
     to,
