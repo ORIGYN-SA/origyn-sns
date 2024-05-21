@@ -35,15 +35,22 @@ const Deposit = () => {
         </div>
       </div>
       <div className="flex items-center bg-surface-2 text-content/60 p-4">
-        <div
-          className="truncate"
-          data-tooltip-id="tooltip_account_id"
-          data-tooltip-content={accountId}
-        >
-          Account ID: {accountId}
-        </div>
-        <Tooltip id="tooltip_account_id" />
-        <CopyToClipboard value={accountId as string} />
+        <div className="mr-2 shrink-0">Account ID: </div>
+        {accountId ? (
+          <>
+            <div
+              className="truncate"
+              data-tooltip-id="tooltip_account_id"
+              data-tooltip-content={accountId}
+            >
+              {accountId}
+            </div>
+            <Tooltip id="tooltip_account_id" />
+            <CopyToClipboard value={accountId as string} />
+          </>
+        ) : (
+          <Skeleton className="w-32" />
+        )}
       </div>
     </div>
   );
