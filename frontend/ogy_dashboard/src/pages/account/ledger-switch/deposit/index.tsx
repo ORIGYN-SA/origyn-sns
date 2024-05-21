@@ -1,9 +1,8 @@
 import useConnect from "@hooks/useConnect";
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
-import { Tooltip } from "@components/ui";
+import { Tooltip, Skeleton } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Skeleton } from "@components/ui";
 
 const Deposit = () => {
   const { accountId } = useConnect();
