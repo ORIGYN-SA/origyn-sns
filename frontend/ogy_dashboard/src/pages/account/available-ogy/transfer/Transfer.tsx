@@ -77,7 +77,7 @@ const Transfer = ({ show, handleClose }) => {
           queryClient.invalidateQueries({
             queryKey: ["userFetchBalanceOGY"],
           });
-          refetchFetchOGYBalance();
+          // refetchFetchOGYBalance();
         },
       }
     );
