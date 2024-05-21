@@ -4,6 +4,7 @@ import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { ActorSubclass } from "@dfinity/agent";
 import { TRANSACTION_FEE } from "@constants/index";
+import { Response_1 } from "@services/types/ogy_token_swap";
 
 // const isRejected = (
 //   input: PromiseSettledResult<unknown>
@@ -36,11 +37,15 @@ const sendTokens = async ({
     ledgerLegacyActor.account_balance_dfx({
       account: userAccountIdentifier.toHex(),
     }),
-    OGYTokenSwapActor.request_deposit_account([Principal.fromText(owner)]),
+    OGYTokenSwapActor.request_deposit_account({
+      of: [Principal.fromText(owner)],
+    }),
   ]);
 
   const result = rawResult.filter(isFulfilled);
-  const to = Principal.fromUint8Array(result[1]?.value as Uint8Array).toHex();
+  const to = Principal.fromUint8Array(
+    (result[1]?.value as Response_1).Success as Uint8Array
+  ).toHex();
   const fee = { e8s: TRANSACTION_FEE };
   const amount = (result[0]?.value as IValueOGYBalance).e8s - TRANSACTION_FEE;
 
