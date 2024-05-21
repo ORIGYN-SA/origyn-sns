@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Rewards canister to distribute custom token rewards for SNS participants."
 edition = "2021"
 
+[features]
+inttest = []
+
 [lib]
 path = "src/lib.rs"
 crate-type = ["cdylib"]
@@ -32,6 +35,6 @@ types = { path = '../../../libraries/types' }
 utils = { path = '../../../libraries/utils' }
 tracing = { workspace = true }
 futures = { workspace = true }
-num-bigint = {workspace = true}
+num-bigint = { workspace = true }
 sns_rewards_api_canister = { path = "../api" }
 candid_gen = { path = "../../../libraries/candid_gen" }

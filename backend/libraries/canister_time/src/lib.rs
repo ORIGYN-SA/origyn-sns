@@ -24,7 +24,7 @@ pub fn timestamp_micros() -> u64 {
 
 #[cfg(target_arch = "wasm32")]
 pub fn timestamp_nanos() -> u64 {
-    unsafe { ic0::time() as u64 }
+    ic_cdk::api::time()
 }
 
 #[cfg(not(target_arch = "wasm32"))]

@@ -26,9 +26,9 @@ const List = ({
       {
         accessorKey: "id",
         id: "id",
-        cell: ({ row, getValue }) => {
-          return row.getCanExpand() ? (
-            <div className="flex items-center">
+        cell: ({ row, getValue }) => (
+          <div className="flex items-center">
+            {row.getCanExpand && (
               <button
                 {...{
                   onClick: row.getToggleExpandedHandler(),
@@ -41,14 +41,12 @@ const List = ({
                   <ChevronDownIcon className="h-5 w-5" />
                 )}
               </button>
-              <div className="flex items-center max-w-sm">
-                <div className="mr-2 truncate">{getValue() as ReactNode}</div>
-              </div>
+            )}
+            <div className="flex items-center max-w-sm">
+              <div className="mr-2 truncate">{getValue() as ReactNode}</div>
             </div>
-          ) : (
-            ""
-          );
-        },
+          </div>
+        ),
         header: "Proposal ID",
         meta: {
           className: "text-left",
@@ -176,7 +174,7 @@ const List = ({
       )}
       {isLoadingGetProposalsList && (
         <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
+          <LoaderSpin size="xl" />
         </div>
       )}
       {isErrorGetProposalsList && (

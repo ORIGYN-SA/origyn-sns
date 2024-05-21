@@ -14,7 +14,7 @@ const Form = () => {
         },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["listNeuronsOwner"] });
+            queryClient.invalidateQueries({ queryKey: ["userListNeuronsAll"] });
             queryClient.invalidateQueries({
               queryKey: ["getNeuronClaimBalance"],
             });

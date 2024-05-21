@@ -3,10 +3,15 @@ name = "ogy_token_swap"
 version = "0.1.0"
 description = "Canister to swap legacy OGY token to new OGY token."
 edition = "2021"
+license = "AGPL-3.0-only"
+
+[features]
+inttest = []
+
 
 [lib]
 path = "src/lib.rs"
-crate-type = ["lib", "cdylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 candid = { workspace = true }
@@ -25,6 +30,7 @@ icrc_ledger_canister_c2c_client = { path = "../../../external_canisters/icrc_led
 ic-ledger-types = { workspace = true }
 ledger_utils = { path = "../../../libraries/ledger_utils" }
 num-bigint = { workspace = true }
+ogy_token_swap_api = { path = "../api" }
 serde = { workspace = true, features = ["derive"] }
 serde_bytes = { workspace = true }
 serializer = { path = '../../../libraries/serializer' }

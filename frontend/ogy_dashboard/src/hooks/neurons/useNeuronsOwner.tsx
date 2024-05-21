@@ -3,7 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
-import { fetchBalanceOGY } from "@services/queries/accounts/fetchBalanceOGY";
+import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { fetchPriceOGY } from "@services/queries/accounts/fetchPriceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
@@ -41,7 +41,7 @@ const useNeuronsOwner = ({
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeuronsOwner", limit, isConnected],
+    queryKey: ["userListNeuronsAll", limit, isConnected],
     queryFn: () =>
       getListNeuronsOwner({
         governanceActor,
@@ -82,7 +82,7 @@ const useNeuronsOwner = ({
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: neuronId.id,
+              subaccount: Buffer.from(neuronId.id).toString("hex"),
             }),
           enabled:
             !!isConnected &&
@@ -113,8 +113,12 @@ const useNeuronsOwner = ({
     0
   );
 
-  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState(0);
-  const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState(0);
+  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
+    null | number
+  >(null);
+  const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState<
+    null | number
+  >(null);
 
   const _totalStakedOGY =
     neurons?.reduce(
@@ -130,8 +134,10 @@ const useNeuronsOwner = ({
       0
     ) ?? 0;
 
-  const [totalStakedOGY, setTotalStakedOGY] = useState("0");
-  const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState(0);
+  const [totalStakedOGY, setTotalStakedOGY] = useState<null | string>(null);
+  const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState<null | number>(
+    null
+  );
 
   useEffect(() => {
     if (isSuccess) {

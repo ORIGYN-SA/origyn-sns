@@ -4,48 +4,11 @@ import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
+import { INeuronResultAPI, INeuronData, IDissolveState } from "@services/types";
 
 interface IListNeurons {
   neuronId: string;
   nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
-}
-
-interface IDissolveState {
-  DissolveDelaySeconds?: bigint;
-  WhenDissolvedTimestampSeconds?: bigint;
-}
-
-// interface INeurons {
-//   cached_neuron_stake_e8s: bigint;
-//   staked_maturity_e8s_equivalent: bigint[];
-//   aging_since_timestamp_seconds: bigint;
-//   dissolve_state: IDissolveState;
-//   id: string;
-//   created_timestamp_seconds: bigint;
-// }
-
-// interface IListNeuronsResult {
-//   data: INeurons;
-// }
-
-export interface INeuronData {
-  stakedAmount: number;
-  stakedMaturity: number;
-  stakedAmountToString: string;
-  stakedMaturityToString: string;
-  age: number;
-  ageToRelativeCalendar: string;
-  state: string;
-  votingPower: number;
-  votingPowerToString: string;
-  dissolveDelay: number;
-  id: string;
-  id2Hex: string;
-  createdAt: string;
-  maxNeuronAgeForAgeBonus: number;
-  maxAgeBonusPercentage: number;
-  ageBonus: number;
-  dissolveDelayBonus: number;
 }
 
 const getNeuronState = (dissolveState: IDissolveState) => {
@@ -63,7 +26,7 @@ export const getOneNeuronAll = async ({
   neuronId,
   nervousSystemParameters,
 }: IListNeurons) => {
-  const { data } = await snsAPI.get(
+  const { data }: { data: INeuronResultAPI } = await snsAPI.get(
     `/snses/${SNS_ROOT_CANISTER}/neurons/${neuronId}`
   );
 
@@ -110,6 +73,8 @@ export const getOneNeuronAll = async ({
   );
   const votingPower =
     (stakedAmount + stakedMaturity) * (1 + ageBonus) * (1 + dissolveDelayBonus);
+  const vestingPeriod = data.vesting_period_seconds;
+  const autoStakeMaturity = data.auto_stake_maturity;
 
   const state = getNeuronState(dissolveState);
 
@@ -132,5 +97,7 @@ export const getOneNeuronAll = async ({
     maxAgeBonusPercentage,
     ageBonus,
     dissolveDelayBonus,
+    vestingPeriod,
+    autoStakeMaturity,
   } as INeuronData;
 };

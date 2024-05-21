@@ -33,7 +33,7 @@ const fetchOneAccountQuery = (
   options?: UseQueryOptions
 ) => {
   return {
-    queryKey: ["fetchOneAccount", id],
+    queryKey: ["userFetchOneAccount", id],
     queryFn: () => fn({ id }),
     placeholderData: keepPreviousData,
     enabled: !!id,

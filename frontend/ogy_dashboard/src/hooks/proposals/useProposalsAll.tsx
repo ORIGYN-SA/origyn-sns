@@ -43,6 +43,7 @@ const useProposalsAll = ({
         const topic = proposal.topic;
         const status = proposal.status;
         const votes = proposal.votes;
+        const riskedOGY = proposal.riskedOGY;
         return {
           id,
           proposer,
@@ -52,11 +53,12 @@ const useProposalsAll = ({
           topic,
           status,
           votes,
+          riskedOGY,
           details: [
             {
               label: "Proposer",
               value: (
-                <div className="flex items-center justify-center max-w-sm m-auto">
+                <div className="flex items-center justify-center max-w-72 m-auto">
                   <div
                     data-tooltip-id="tooltip_title"
                     data-tooltip-content={proposer}
@@ -69,6 +71,7 @@ const useProposalsAll = ({
                 </div>
               ) as ReactNode,
             },
+            { label: "Risked OGY", value: riskedOGY },
             { label: "For votes", value: `${votes.yesToString} %` },
             { label: "Against votes", value: `${votes.noToString} %` },
           ],

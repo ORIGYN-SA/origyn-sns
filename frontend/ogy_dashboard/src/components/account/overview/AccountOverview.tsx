@@ -1,12 +1,13 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useQuery, UseQueryResult } from "@tanstack/react-query";
-// import { useConnect } from "@connect2ic/react";
+import { UserIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
-import { Button } from "@components/ui";
+import { Button, Tile, Tooltip } from "@components/ui";
 import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
 import AuthButton from "@components/auth/Auth";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { Skeleton } from "@components/ui";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -15,25 +16,9 @@ interface AccountOverviewProps {
 
 const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
-  const { principalShort } = useConnect();
-  const [balanceOGY, setBalanceOGY] = useState(0);
-  const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
+  const { principal } = useConnect();
 
-  const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY({});
-  // const {
-  //   data: account,
-  //   isLoading: isLoadingAccount,
-  //   isError: isLoadingError,
-  // }: UseQueryResult<Account> = useQuery(
-  //   fetchOneAccount({ id: principal }, { retry: false })
-  // );
-  useEffect(() => {
-    if (isSuccessFetchBalanceOGY) {
-      setBalanceOGY(dataBalanceOGY.balanceOGY);
-      setBalanceOGYUSD(dataBalanceOGY.balanceOGYUSD);
-    }
-  }, [isSuccessFetchBalanceOGY, dataBalanceOGY]);
+  const { data: dataBalanceOGY } = useFetchBalanceOGY({});
 
   const handleClickAccount = () => {
     navigate("account");
@@ -56,7 +41,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
             >
               <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
             </Transition.Child>
-            <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div className="fixed inset-y-0 right-0 max-w-full flex">
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -66,22 +51,59 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <div className="bg-background px-8 py-5">
+                <div className="bg-background px-4 sm:px-8 py-5 sm:max-w-[480px] max-w-80">
                   <div className="flex justify-end">
                     <AuthButton />
                   </div>
-                  <div className="mt-8">{principalShort}</div>
+                  <div className="mt-12 flex items-center bg-surface-2 rounded-full py-1 px-1">
+                    <div className="flex items-center w-full">
+                      <Tile className="rounded-full h-8 w-8 bg-surface-3">
+                        <UserIcon className="p-1 text-white" />
+                      </Tile>
+
+                      <div className="flex items-center truncate pr-4">
+                        <div
+                          className="flex ml-4 items-center truncate text-sm"
+                          data-tooltip-id="tooltip_principal_id"
+                          data-tooltip-content={principal}
+                        >
+                          <div className="font-semibold mr-2 shrink-0">
+                            Principal ID:
+                          </div>
+                          <div className="truncate">{principal}</div>
+                        </div>
+                        <Tooltip id="tooltip_principal_id" />
+                        <CopyToClipboard value={principal as string} />
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-surface text-center mt-16 border border-border rounded-xl">
                     <div className="border-b border-border py-4">
                       Wallet Balance
                     </div>
-                    <div className="grid grid-cols-1 gap-4 pb-8 px-32">
+                    <div className="grid grid-cols-1 gap-4 pb-8 px-4">
                       <div className="py-8">
-                        <span className="text-2xl font-semibold">
-                          {balanceOGY}
-                        </span>
-                        <span> OGY</span>
-                        <div className="text-sm">($ {balanceOGYUSD})</div>
+                        <div className="flex justify-center ml-2">
+                          {dataBalanceOGY?.balanceOGY !== null ? (
+                            <div className="text-2xl font-semibold">
+                              {dataBalanceOGY?.balanceOGY}
+                              <span className="text-content/60 ml-2">OGY</span>
+                            </div>
+                          ) : (
+                            <Skeleton className="w-32" />
+                          )}
+                        </div>
+
+                        <div className="flex justify-center text-sm">
+                          {dataBalanceOGY?.balanceOGYUSD !== null ? (
+                            <div className="text-content/60">
+                              ($ {dataBalanceOGY?.balanceOGYUSD})
+                            </div>
+                          ) : (
+                            <Skeleton className="w-16" />
+                          )}
+                        </div>
                       </div>
                       <Button className="px-8" onClick={handleClickAccount}>
                         My account

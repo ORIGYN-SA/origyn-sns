@@ -2,6 +2,7 @@ import useConnect from "@hooks/useConnect";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
+import { Skeleton } from "@components/ui";
 
 const StakedOGY = () => {
   const { principal: owner } = useConnect();
@@ -14,12 +15,27 @@ const StakedOGY = () => {
       </div>
       <div className="flex items-center text-2xl font-semibold">
         <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
-        <span className="ml-2 mr-2">{stakedOGY.totalStakedOGY}</span>
-        <span className="text-content/60">OGY</span>
+        <div className="flex ml-2">
+          {stakedOGY.totalStakedOGY !== null ? (
+            <div>
+              {stakedOGY.totalStakedOGY}
+              <span className="text-content/60 ml-2">OGY</span>
+            </div>
+          ) : (
+            <Skeleton className="w-32" />
+          )}
+        </div>
       </div>
-      <div className="mt-2 text-sm text-content/60">
-        {stakedOGY.totalStakedOGYUSD} USD
+      <div className="flex">
+        {stakedOGY.totalStakedOGYUSD !== null ? (
+          <div className="text-content/60">
+            {stakedOGY.totalStakedOGYUSD} USD
+          </div>
+        ) : (
+          <Skeleton className="w-16" />
+        )}
       </div>
+
       <div className="mt-8 xl:mt-8">
         <StakeOGY />
       </div>

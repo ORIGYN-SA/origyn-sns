@@ -69,7 +69,7 @@ const Status = ({
             <div className="flex items-center justify-center">
               <div>Vote</div>
               <div>
-                <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-white font-semibold" />
+                <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
               </div>
             </div>
           </Button>

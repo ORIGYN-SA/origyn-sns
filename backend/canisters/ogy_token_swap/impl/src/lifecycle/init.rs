@@ -1,21 +1,11 @@
-use candid::{ CandidType, Principal };
 use ic_cdk_macros::init;
-use serde::Deserialize;
+pub use ogy_token_swap_api::init::InitArgs;
 use tracing::info;
-use types::CanisterId;
 use utils::env::CanisterEnv;
 
-use crate::state::{ Data, RuntimeState };
+use crate::state::{Data, RuntimeState};
 
 use super::init_canister;
-
-#[derive(Deserialize, CandidType)]
-pub struct InitArgs {
-    pub test_mode: bool,
-    pub ogy_legacy_ledger_canister_id: CanisterId,
-    pub ogy_new_ledger_canister_id: CanisterId,
-    pub ogy_legacy_minting_account_principal: Principal,
-}
 
 #[init]
 fn init(args: InitArgs) {
@@ -25,7 +15,8 @@ fn init(args: InitArgs) {
     let data = Data::new(
         args.ogy_new_ledger_canister_id,
         args.ogy_legacy_ledger_canister_id,
-        args.ogy_legacy_minting_account_principal
+        args.ogy_legacy_minting_account_principal,
+        args.authorized_principals,
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);

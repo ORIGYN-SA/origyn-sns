@@ -5,4 +5,3 @@ pub mod client;
 pub mod wasms;
 pub mod sns_rewards_suite;
 pub mod ogy_swap_suite;
-use ogy_swap_suite::*;

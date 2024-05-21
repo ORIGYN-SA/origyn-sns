@@ -118,7 +118,6 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Account.loader,
             element: <Account />,
           },
         ],
