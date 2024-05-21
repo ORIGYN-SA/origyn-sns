@@ -1084,6 +1084,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "sns_rewards_api_canister",
+ "super_stats_v3_api",
  "types",
  "utils",
 ]

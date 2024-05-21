@@ -13,7 +13,6 @@ pub struct TestEnv {
 
 #[derive(Debug)]
 pub struct CanisterIds {
-    pub ogy_swap: CanisterId,
-    pub ogy_legacy_ledger: CanisterId,
     pub ogy_new_ledger: CanisterId,
+    pub ogy_super_stats: CanisterId,
 }

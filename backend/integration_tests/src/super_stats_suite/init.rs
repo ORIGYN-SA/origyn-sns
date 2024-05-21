@@ -1,12 +1,9 @@
 use std::{ env, path::Path };
-
 use candid::Principal;
-use ic_ledger_types::Tokens;
 use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
 use icrc_ledger_types::icrc1::account::Account;
-use ledger_utils::principal_to_legacy_account_id;
-use ogy_legacy_ledger_canister::{ ArchiveOptions as ArchiveOptionsLeg, Duration };
 use pocket_ic::PocketIc;
+use super_stats_v3_api::init_and_upgrade::InitArgs as SuperStatsInitArgs;
 use utils::consts::E8S_FEE_OGY;
 
 use crate::{
@@ -34,63 +31,11 @@ pub fn init() -> TestEnv {
 }
 
 fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
-    let ogy_token_swap_canister_id = create_canister(pic, controller);
-    let ogy_legacy_ledger_canister_id = create_canister(pic, controller);
     let ogy_new_ledger_canister_id = create_canister(pic, controller);
+    let ogy_super_stats_canister_id = create_canister(pic, controller);
 
-    let ogy_token_swap_canister_wasm = wasms::OGY_TOKEN_SWAP.clone();
-    let ogy_legacy_ledger_canister_wasm = wasms::OGY_LEGACY_LEDGER.clone();
     let ogy_new_ledger_canister_wasm = wasms::IC_ICRC1_LEDGER.clone();
-
-    let ogy_legacy_minting_account_principal = controller;
-
-    let ogy_token_swap_init_args = ogy_token_swap_api::lifecycle::init::InitArgs {
-        test_mode: true,
-        ogy_legacy_ledger_canister_id,
-        ogy_new_ledger_canister_id,
-        ogy_legacy_minting_account_principal,
-        authorized_principals: vec![controller],
-    };
-    install_canister(
-        pic,
-        controller,
-        ogy_token_swap_canister_id,
-        ogy_token_swap_canister_wasm,
-        ogy_token_swap_init_args
-    );
-
-    let ogy_legacy_ledger_init_args = ogy_legacy_ledger_canister::init::InitArgs {
-        minting_account: principal_to_legacy_account_id(
-            ogy_legacy_minting_account_principal,
-            None
-        ).to_string(),
-        initial_values: vec![],
-        max_message_size_bytes: None,
-        transaction_window: Some(Duration {
-            secs: 600,
-            nanos: 0,
-        }),
-        archive_options: Some(ArchiveOptionsLeg {
-            trigger_threshold: 2000,
-            num_blocks_to_archive: 1000,
-            node_max_memory_size_bytes: None,
-            max_message_size_bytes: None,
-            controller_id: Principal::anonymous(),
-        }),
-        standard_whitelist: vec![],
-        transfer_fee: Some(Tokens::from_e8s(E8S_FEE_OGY)),
-        admin: Principal::anonymous(),
-        send_whitelist: vec![],
-        token_symbol: Some("OGY".to_string()),
-        token_name: Some("Origyn".to_string()),
-    };
-    install_canister(
-        pic,
-        controller,
-        ogy_legacy_ledger_canister_id,
-        ogy_legacy_ledger_canister_wasm,
-        ogy_legacy_ledger_init_args
-    );
+    let ogy_super_stats_canister_wasm = wasms::SUPER_STATS_V3.clone();
 
     let ogy_new_ledger_init_args = LedgerArgument::Init(InitArgs {
         minting_account: Account::from(controller),
@@ -113,10 +58,22 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         ogy_new_ledger_init_args
     );
 
+    let ogy_super_stats_init_args = SuperStatsInitArgs {
+        admin: Account::from(controller).to_string(),
+        test_mode: true,
+    };
+
+    install_canister(
+        pic,
+        controller,
+        ogy_super_stats_canister_id,
+        ogy_super_stats_canister_wasm,
+        ogy_super_stats_init_args
+    );
+
     CanisterIds {
-        ogy_swap: ogy_token_swap_canister_id,
-        ogy_legacy_ledger: ogy_legacy_ledger_canister_id,
         ogy_new_ledger: ogy_new_ledger_canister_id,
+        ogy_super_stats: ogy_super_stats_canister_id,
     }
 }
 
