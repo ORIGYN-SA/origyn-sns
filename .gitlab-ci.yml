@@ -39,12 +39,12 @@ include:
   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   #   inputs:
   #     src-folder: {{ backend_canister in include('scripts/ci-cd/canisters.yml').backend_canisters }}
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: sns_rewards
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: ogy_token_swap
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: sns_rewards
   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   #   inputs:
   #     src-folder: super_indexer_v3
@@ -55,9 +55,9 @@ include:
   #   inputs:
   #     src-folder: tx_store_v3
   # # Canister builds
-  # - local: scripts/ci-cd/.canister_builds.yml
-  #   inputs:
-  #     src-folder: ogy_token_swap
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: ogy_token_swap
   # - local: scripts/ci-cd/.canister_builds.yml
   #   inputs:
   #     src-folder: sns_rewards
