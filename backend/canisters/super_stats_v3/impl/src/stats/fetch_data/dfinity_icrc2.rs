@@ -12,17 +12,16 @@ use super_stats_v3_api::{
         DEFAULT_SUBACCOUNT,
     },
     runtime::RUNTIME_STATE,
-    stats::constants::{
+    stats::{constants::{
         DAY_AS_NANOS,
         HOUR_AS_NANOS,
         MAX_TOTAL_DOWNLOAD,
         MAX_TRANSACTION_BATCH_SIZE,
-    },
+    }, updates::init_target_ledger::TargetArgs},
 };
-use super::dfinity_icp::SetTargetArgs;
 
 //Set target canister, tx store, fee and decimals to runtime memory
-pub async fn t2_impl_set_target_canister(args: SetTargetArgs) -> Result<String, String> {
+pub async fn t2_impl_set_target_canister(args: TargetArgs) -> Result<String, String> {
     let check = RUNTIME_STATE.with(|s| { s.borrow().data.target_ledger_locked });
     let mut had_error = false;
     let mut errors: Vec<String> = Vec::new();
