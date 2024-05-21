@@ -21,58 +21,58 @@ cache:
 
 stages:
   - preparation
-  # - lint
-  # - test
-  # - build
-  # - integration_testing
-  # - deploy
+  - lint
+  - test
+  - build
+  - integration_testing
+  - deploy
 
 include:
   # Templates:
   - local: scripts/ci-cd/.node_template.yml
   - local: scripts/ci-cd/.rust_template.yml
-  # Frontend linters:
-  - local: scripts/ci-cd/.frontend_linter.yml
-    inputs:
-      src-folder: ogy_dashboard
-  # Unit tests coverage
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: sns_rewards
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: super_indexer_v3
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: super_stats_v3
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: tx_store_v3
-  # Canister builds
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: sns_rewards
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: super_indexer_v3
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: super_stats_v3
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: tx_store_v3
-  # Frontend builds
-  - local: scripts/ci-cd/.frontend_builds.yml
-    inputs:
-      src-folder: ogy_dashboard
-  # Deployments
-  - local: scripts/ci-cd/.dfx_templates.yml
+  # # Frontend linters:
+  # - local: scripts/ci-cd/.frontend_linter.yml
+  #   inputs:
+  #     src-folder: ogy_dashboard
+  # # Unit tests coverage
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: ogy_token_swap
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: sns_rewards
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: super_indexer_v3
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: super_stats_v3
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: tx_store_v3
+  # # Canister builds
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: ogy_token_swap
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: sns_rewards
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: super_indexer_v3
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: super_stats_v3
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: tx_store_v3
+  # # Frontend builds
+  # - local: scripts/ci-cd/.frontend_builds.yml
+  #   inputs:
+  #     src-folder: ogy_dashboard
+  # # Deployments
+  # - local: scripts/ci-cd/.dfx_templates.yml
 
 ################################################################################
 # Cache preparation
@@ -102,19 +102,19 @@ cargo cache:
 
 # See includes above for frontends lint
 
-rust lint:
-  stage: lint
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - "Cargo.{lock,toml}"
-        - "backend/canisters/{**}/*.{rs,toml,lock}"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "develop"
-  extends: .rust template
-  script:
-    - cargo clippy
+# rust lint:
+#   stage: lint
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       changes:
+#         - "Cargo.{lock,toml}"
+#         - "backend/canisters/{**}/*.{rs,toml,lock}"
+#     - if: $CI_OPEN_MERGE_REQUESTS
+#       when: never
+#     - if: $CI_COMMIT_REF_NAME == "develop"
+#   extends: .rust template
+#   script:
+#     - cargo clippy
 
 ################################################################################
 # Unit tests
@@ -128,171 +128,143 @@ rust lint:
 
 # See includes above for canister builds
 
-generate test declarations:
-  stage: test
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
-        ]
-  script:
-    - dfx generate
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
-    paths:
-      - backend/**/declarations
-    expire_in: 1 day
+# generate test declarations:
+#   stage: test
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_indexer_v3 test build",
+#           "super_stats_v3 test build",
+#           "tx_store_v3 test build",
+#         ]
+#   script:
+#     - dfx generate
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
+#     paths:
+#       - backend/**/declarations
+#     expire_in: 1 day
 
-generate declarations:
-  stage: build
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
-        ]
-  script:
-    - dfx generate
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
-    paths:
-      - backend/**/api
-    expire_in: 6 months
+# generate declarations:
+#   stage: build
+#   rules:
+#     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
+#       when: never
+#     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_indexer_v3 test build",
+#           "super_stats_v3 test build",
+#           "tx_store_v3 test build",
+#         ]
+#   script:
+#     - dfx generate
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
+#     paths:
+#       - backend/**/api
+#     expire_in: 6 months
 
 # See includes above for frontend builds
 
 ################################################################################
 # Integration tests
 ################################################################################
-integration tests:
-  stage: integration_testing
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs: ["ogy_token_swap test build", "ogy_token_swap tests", "sns_rewards test build", "sns_rewards tests", "super_indexer_v3 test build", "super_indexer_v3 tests", "super_stats_v3 test build", "super_stats_v3 tests", "tx_store_v3 test build", "tx_store_v3 tests"]
-    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-      needs: ["ogy_token_swap canister build", "sns_rewards canister build", "super_indexer_v3 canister build", "super_stats_v3 canister build", "tx_store_v3 canister build"]
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-  extends: .rust template
-  tags:
-    - dind
-  services:
-    - docker:dind
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
-  script:
-    - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/3.0.1/pocket-ic-x86_64-linux.gz
-    - gzip -d pocket-ic.gz
-    - chmod +x ./pocket-ic
-    - mv ./pocket-ic ./backend/integration_testing/pocket-ic
-    - ulimit -n 102400
-    - ulimit -f 1024000
-    - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
-  coverage: /^\d+.\d+% coverage/
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: cobertura.xml
+# integration tests:
+#   stage: integration_testing
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       needs: ["ogy_token_swap test build", "ogy_token_swap tests", "sns_rewards test build", "sns_rewards tests", "super_indexer_v3 test build", "super_indexer_v3 tests", "super_stats_v3 test build", "super_stats_v3 tests", "tx_store_v3 test build", "tx_store_v3 tests"]
+#     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+#       needs: ["ogy_token_swap canister build", "sns_rewards canister build", "super_indexer_v3 canister build", "super_stats_v3 canister build", "tx_store_v3 canister build"]
+#     - if: $CI_OPEN_MERGE_REQUESTS
+#       when: never
+#   extends: .rust template
+#   tags:
+#     - dind
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_TLS_CERTDIR: "/certs"
+#     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
+#   script:
+#     - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/3.0.1/pocket-ic-x86_64-linux.gz
+#     - gzip -d pocket-ic.gz
+#     - chmod +x ./pocket-ic
+#     - mv ./pocket-ic ./backend/integration_testing/pocket-ic
+#     - ulimit -n 102400
+#     - ulimit -f 1024000
+#     - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
+#   coverage: /^\d+.\d+% coverage/
+#   artifacts:
+#     reports:
+#       coverage_report:
+#         coverage_format: cobertura
+#         path: cobertura.xml
 
 ################################################################################
 # Deployments
 ################################################################################
-local deploy and tests:
-  stage: deploy
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
-          "integration tests"
-        ]
-  before_script:
-    - dfx --version
-    - dfx start --clean --background --artificial-delay 40
-  script:
-    - NETWORK='local' scripts/local-deploy.sh
-    # TODO: Some bash script to provision a wallet and test a few interactions with the canisters
-  after_script:
-    - cat canister_ids.json
-    - dfx stop
-
-check canister ids:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-      variables:
-        TARGET_NETWORK: staging
-        PEM_FILE: "${PEM_FILE_STAGING}"
-    - if: $CI_COMMIT_TAG =~ '/^(core)|(ogy_token_swap)|(sns_rewards)|(super_indexer_v3)|(super_stats_v3)|(tx_store_v3)-v\d+\.\d+\.\d+$/'
-      variables:
-        TARGET_NETWORK: ic
-        PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  before_script:
-    - !reference [.import dfx identity, before_script]
-  script:
-    - scripts/pre-deploy.sh --network $TARGET_NETWORK
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
-    paths:
-      - canister_ids.json
-    expire_in: 1 hour
-
-.asset canisters upgrade proposal tests:
-  stage: deploy
-  variables:
-    CANISTER_NAME: "ogy_token_swap"
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-      needs: ["ogy_token_swap test build"]
-      variables:
-        TARGET_NETWORK: staging
-        PEM_FILE: testid.pem
-        TEST_QUILL: "--dry-run"
-  cache:
-    policy: pull
-  before_script:
-    - dfx identity new --storage-mode plaintext testid
-    - dfx identity use testid
-    - dfx identity get-principal
-    - dfx start --clean --background --artificial-delay 40
-    - dfx identity export testid > testid.pem
-  script:
-    - dfx canister create --all
-    - export OGY_DASHBOARD_FRONT_ID=$(dfx canister id ogy_dashboard)
-    - !reference [.asset canister staging deploy, script]
-  after_script:
-    - dfx stop
-  environment:
-    name: swap app
-    deployment_tier: staging
-    url: $SWAP_APP_URL ## TODO
-    action: verify
-
-# .backend canisters upgrade proposal tests:
+# local deploy and tests:
 #   stage: deploy
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_indexer_v3 test build",
+#           "super_stats_v3 test build",
+#           "tx_store_v3 test build",
+#           "integration tests"
+#         ]
+#   before_script:
+#     - dfx --version
+#     - dfx start --clean --background --artificial-delay 40
+#   script:
+#     - NETWORK='local' scripts/local-deploy.sh
+#     # TODO: Some bash script to provision a wallet and test a few interactions with the canisters
+#   after_script:
+#     - cat canister_ids.json
+#     - dfx stop
+
+# check canister ids:
+#   stage: deploy
+#   rules:
+#     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+#       variables:
+#         TARGET_NETWORK: staging
+#         PEM_FILE: "${PEM_FILE_STAGING}"
+#     - if: $CI_COMMIT_TAG =~ '/^(core)|(ogy_token_swap)|(sns_rewards)|(super_indexer_v3)|(super_stats_v3)|(tx_store_v3)-v\d+\.\d+\.\d+$/'
+#       variables:
+#         TARGET_NETWORK: ic
+#         PEM_FILE: "${PEM_FILE_PRODUCTION}"
+#   before_script:
+#     - !reference [.import dfx identity, before_script]
+#   script:
+#     - scripts/pre-deploy.sh --network $TARGET_NETWORK
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
+#     paths:
+#       - canister_ids.json
+#     expire_in: 1 hour
+
+# .asset canisters upgrade proposal tests:
+#   stage: deploy
+#   variables:
+#     CANISTER_NAME: "ogy_token_swap"
 #   rules:
 #     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
 #       needs: ["ogy_token_swap test build"]
 #       variables:
 #         TARGET_NETWORK: staging
 #         PEM_FILE: testid.pem
+#         TEST_QUILL: "--dry-run"
 #   cache:
 #     policy: pull
 #   before_script:
@@ -303,92 +275,120 @@ check canister ids:
 #     - dfx identity export testid > testid.pem
 #   script:
 #     - dfx canister create --all
+#     - export OGY_DASHBOARD_FRONT_ID=$(dfx canister id ogy_dashboard)
+#     - !reference [.asset canister staging deploy, script]
 #   after_script:
 #     - dfx stop
 #   environment:
-#     name: gldt_core
+#     name: swap app
 #     deployment_tier: staging
-#     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
+#     url: $SWAP_APP_URL ## TODO
 #     action: verify
 
-ogy token swap staging:
-  stage: deploy
-  resource_group: backend canister staging deployment
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-  variables:
-    TARGET_NETWORK: staging
-    PEM_FILE: "${PEM_FILE_STAGING}"
-  needs: ["ogy_token_swap canister build", "check canister ids"]
-  before_script:
-    - !reference [.import dfx identity, before_script]
-  script:
-    - . scripts/deploy-ogy-token-swap.sh --reinstall $TARGET_NETWORK
-  environment:
-    name: ogy_token_swap
-    deployment_tier: staging
-    url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
-    action: start
+# # .backend canisters upgrade proposal tests:
+# #   stage: deploy
+# #   rules:
+# #     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+# #       needs: ["ogy_token_swap test build"]
+# #       variables:
+# #         TARGET_NETWORK: staging
+# #         PEM_FILE: testid.pem
+# #   cache:
+# #     policy: pull
+# #   before_script:
+# #     - dfx identity new --storage-mode plaintext testid
+# #     - dfx identity use testid
+# #     - dfx identity get-principal
+# #     - dfx start --clean --background --artificial-delay 40
+# #     - dfx identity export testid > testid.pem
+# #   script:
+# #     - dfx canister create --all
+# #   after_script:
+# #     - dfx stop
+# #   environment:
+# #     name: gldt_core
+# #     deployment_tier: staging
+# #     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
+# #     action: verify
 
-ogy token swap:
-  stage: deploy
-  resource_group: backend canister production deployment
-  rules:
-    - if: $CI_COMMIT_TAG =~ '/^ogy_token_swap-v\d+\.\d+\.\d+$/'
-  variables:
-    TARGET_NETWORK: ic
-    PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["ogy_token_swap canister build", "check canister ids"]
-  before_script:
-    - !reference [.import dfx identity, before_script]
-  script:
-    - . scripts/deploy-ogy-token-swap.sh $TARGET_NETWORK
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
-    paths:
-      - canister_ids.json
-    expire_in: 6 months
-  environment:
-    name: gldt_core
-    deployment_tier: production
-    url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=jpuy7-oiaaa-aaaan-qmheq-cai
-    action: start
+# ogy token swap staging:
+#   stage: deploy
+#   resource_group: backend canister staging deployment
+#   rules:
+#     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+#   variables:
+#     TARGET_NETWORK: staging
+#     PEM_FILE: "${PEM_FILE_STAGING}"
+#   needs: ["ogy_token_swap canister build", "check canister ids"]
+#   before_script:
+#     - !reference [.import dfx identity, before_script]
+#   script:
+#     - . scripts/deploy-ogy-token-swap.sh --reinstall $TARGET_NETWORK
+#   environment:
+#     name: ogy_token_swap
+#     deployment_tier: staging
+#     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
+#     action: start
 
-sns rewards staging:
-  stage: deploy
-  resource_group: backend canister staging deployment
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-  variables:
-    TARGET_NETWORK: staging
-    PEM_FILE: "${PEM_FILE_STAGING}"
-  needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  before_script:
-    - !reference [.import dfx identity, before_script]
-  script:
-    - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
-  environment:
-    name: sns_rewards
-    deployment_tier: staging
-    url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
-    action: start
+# ogy token swap:
+#   stage: deploy
+#   resource_group: backend canister production deployment
+#   rules:
+#     - if: $CI_COMMIT_TAG =~ '/^ogy_token_swap-v\d+\.\d+\.\d+$/'
+#   variables:
+#     TARGET_NETWORK: ic
+#     PEM_FILE: "${PEM_FILE_PRODUCTION}"
+#   needs: ["ogy_token_swap canister build", "check canister ids"]
+#   before_script:
+#     - !reference [.import dfx identity, before_script]
+#   script:
+#     - . scripts/deploy-ogy-token-swap.sh $TARGET_NETWORK
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
+#     paths:
+#       - canister_ids.json
+#     expire_in: 6 months
+#   environment:
+#     name: gldt_core
+#     deployment_tier: production
+#     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=jpuy7-oiaaa-aaaan-qmheq-cai
+#     action: start
 
-sns rewards:
-  stage: deploy
-  resource_group: backend canister staging deployment
-  rules:
-    - if: $CI_COMMIT_TAG =~ '/^sns_rewards-v\d+\.\d+\.\d+$/'
-      when: manual
-  variables:
-    TARGET_NETWORK: ic
-    PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  before_script:
-    - !reference [.import dfx identity, before_script]
-  script:
-    - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
-  environment:
-    name: sns_rewards
-    deployment_tier: production
-    url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
-    action: start
+# sns rewards staging:
+#   stage: deploy
+#   resource_group: backend canister staging deployment
+#   rules:
+#     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+#   variables:
+#     TARGET_NETWORK: staging
+#     PEM_FILE: "${PEM_FILE_STAGING}"
+#   needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+#   before_script:
+#     - !reference [.import dfx identity, before_script]
+#   script:
+#     - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
+#   environment:
+#     name: sns_rewards
+#     deployment_tier: staging
+#     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
+#     action: start
+
+# sns rewards:
+#   stage: deploy
+#   resource_group: backend canister staging deployment
+#   rules:
+#     - if: $CI_COMMIT_TAG =~ '/^sns_rewards-v\d+\.\d+\.\d+$/'
+#       when: manual
+#   variables:
+#     TARGET_NETWORK: ic
+#     PEM_FILE: "${PEM_FILE_PRODUCTION}"
+#   needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+#   before_script:
+#     - !reference [.import dfx identity, before_script]
+#   script:
+#     - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
+#   environment:
+#     name: sns_rewards
+#     deployment_tier: production
+#     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
+#     action: start
