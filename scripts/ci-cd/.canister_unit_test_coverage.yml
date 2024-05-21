@@ -17,8 +17,8 @@ $[[ inputs.src-folder ]] tests:
   extends: .rust template
   tags:
     - docker
-  services:
-    - docker:dind
+  # services:
+  #   - docker:dind
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
