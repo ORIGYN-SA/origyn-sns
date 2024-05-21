@@ -1,5 +1,5 @@
 use std::{ env, path::Path };
-use candid::Principal;
+use candid::{Nat, Principal};
 use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::PocketIc;
@@ -40,7 +40,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
     let ogy_new_ledger_init_args = LedgerArgument::Init(InitArgs {
         minting_account: Account::from(controller),
         initial_balances: Vec::new(),
-        transfer_fee: E8S_FEE_OGY.into(),
+        transfer_fee: Nat::from(0u64),
         token_name: "Origyn".into(),
         token_symbol: "OGY".into(),
         metadata: Vec::new(),

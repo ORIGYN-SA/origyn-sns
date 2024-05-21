@@ -34,6 +34,7 @@ pub struct Data {
     canister_logs: Vec<LogEntry>,
     self_id: String,
     target_ledger: String,
+pub test_mode: bool,
 pub target_ledger_locked: bool,
     tx_store: String,
     ledger_fee: u128,

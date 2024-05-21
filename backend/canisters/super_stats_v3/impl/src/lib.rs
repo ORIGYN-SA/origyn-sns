@@ -8,7 +8,7 @@ mod tests {
         custom_types::{ IndexerType, ProcessedTX },
         fetch_data::dfinity_icrc2::DEFAULT_SUBACCOUNT,
         process_data::process_time_stats::StatsType,
-        queries::get_account_history::GetAccountBalanceHistory,
+        stats::queries::get_account_history::GetAccountBalanceHistory,
         runtime::RUNTIME_STATE,
         stable_memory::STABLE_STATE,
         stats::constants::DAY_AS_NANOS,

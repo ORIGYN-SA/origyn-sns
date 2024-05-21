@@ -5,3 +5,4 @@ pub mod runtime;
 pub mod stable_memory;
 pub mod utils;
 pub mod working_stats;
+pub mod queries;

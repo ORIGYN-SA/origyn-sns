@@ -32,6 +32,7 @@ fn init(args: InitArgs) {
     data.add_authorised(args.admin);
     data.set_self_id(ic_cdk::api::id());
     data.max_return_length = STATS_RETURN_LENGTH;
+    data.test_mode = args.test_mode;
     let stats = WorkingStats::default();
     let runtime_state = RuntimeState { data, stats };
     RUNTIME_STATE.with(|state| {

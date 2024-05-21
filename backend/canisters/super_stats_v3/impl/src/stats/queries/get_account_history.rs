@@ -14,7 +14,8 @@ fn get_account_history(args: Args) -> Response {
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
     let history = get_account_last_days(args.clone());
-    let filled_history = fill_missing_days(history, args.days);
+    let mut filled_history = fill_missing_days(history, args.days);
+    filled_history.truncate(args.days as usize);
     return filled_history;
 }
 fn fill_missing_days(mut history: Response, days: u64) -> Response {

@@ -1,5 +1,5 @@
 use canister_client::{ generate_candid_c2c_call, generate_candid_c2c_call_no_args };
-use super_stats_v3_api::queries::*;
+use super_stats_v3_api::stats::queries::*;
 
 // Queries
 generate_candid_c2c_call!(get_top_account_holders);

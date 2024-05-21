@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{runtime::RUNTIME_STATE, stable_memory::STABLE_STATE};
 
-#[derive(CandidType, Deserialize, Serialize, Default, Clone)]
+#[derive(CandidType, Deserialize, Serialize, Default, Clone, Debug)]
 pub struct WorkingStats {
     timer_active: bool,
     pub is_busy: bool,
@@ -59,7 +59,7 @@ impl WorkingStats {
     }
 }
 
-#[derive(CandidType, Deserialize, Serialize, Default, Clone)]
+#[derive(CandidType, Deserialize, Serialize, Default, Clone, Debug)]
 pub struct Metrics {
     total_errors: u64,
     total_api_requests: u64,

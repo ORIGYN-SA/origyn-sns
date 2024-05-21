@@ -3,8 +3,8 @@ use canister_time::run_now_then_interval;
 use icrc_ledger_types::icrc1::account::{ self, Account, Subaccount };
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
 use super_stats_v3_api::{
-    queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
-    queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
+    stats::queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
+    stats::queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
 use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
 use token_metrics_api::GOLD_TREASURY_SUBACCOUNT_STR;
