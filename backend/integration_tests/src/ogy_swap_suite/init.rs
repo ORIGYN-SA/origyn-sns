@@ -13,9 +13,9 @@ use crate::{
     client::pocket::{ create_canister, install_canister },
     utils::random_principal,
     wasms,
-    CanisterIds,
-    TestEnv,
 };
+
+use super::{ CanisterIds, TestEnv };
 
 pub static POCKET_IC_BIN: &str = "./pocket-ic";
 
@@ -44,11 +44,12 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
 
     let ogy_legacy_minting_account_principal = controller;
 
-    let ogy_token_swap_init_args = ogy_token_swap::lifecycle::InitArgs {
+    let ogy_token_swap_init_args = ogy_token_swap_api::lifecycle::init::InitArgs {
         test_mode: true,
         ogy_legacy_ledger_canister_id,
         ogy_new_ledger_canister_id,
         ogy_legacy_minting_account_principal,
+        authorized_principals: vec![controller],
     };
     install_canister(
         pic,

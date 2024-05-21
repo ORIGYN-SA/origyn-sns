@@ -5,10 +5,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
-import useTransfer from "@services/transfer/useTransfer";
+import useTransfer from "@services/queries/transfer/useTransfer";
 
 const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();
@@ -18,7 +18,7 @@ const Transfer = ({ show, handleClose }) => {
     data: balanceOGY,
     isSuccess: isSuccessFetchBalanceOGY,
     refetch: refetchFetchOGYBalance,
-  } = useFetchBalanceOGY({});
+  } = useFetchBalanceOGYOwner();
 
   const {
     mutate: transfer,
@@ -57,7 +57,16 @@ const Transfer = ({ show, handleClose }) => {
       control,
       defaultValue: 0,
     });
-    return <div>{!isNaN(watchedAmount) ? watchedAmount : 0} OGY</div>;
+    return (
+      <div>
+        {isNaN(watchedAmount) ||
+        watchedAmount === 0 ||
+        Object.keys(errors).length > 0
+          ? 0
+          : watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))}{" "}
+        OGY
+      </div>
+    );
   };
 
   const onSubmit = (data) => {
@@ -66,7 +75,7 @@ const Transfer = ({ show, handleClose }) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: ["fetchBalanceOGY"],
+            queryKey: ["userFetchBalanceOGY"],
           });
           refetchFetchOGYBalance();
         },
@@ -76,8 +85,8 @@ const Transfer = ({ show, handleClose }) => {
 
   const isAmountUnderBalance = (value) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
-      const balance = BigInt(balanceOGY.balanceOGYe8s);
-      const amount = numberToE8s(value) + TRANSACTION_FEE;
+      const balance = BigInt(balanceOGY.balanceE8s);
+      const amount = numberToE8s(value);
       if (amount > balance) return false;
     }
     return true;
@@ -119,6 +128,9 @@ const Transfer = ({ show, handleClose }) => {
                         "Amount must not exceed your balance.",
                       isPositive: (v) =>
                         Number(v) > 0 || "Amount must be a positive number.",
+                      isAmountUpperBalance: (v) =>
+                        Number(v) >= divideBy1e8(Number(TRANSACTION_FEE)) ||
+                        "Amount must be greater the or equal to transaction fees.",
                     },
                   })}
                   errors={errors?.amount}
@@ -144,7 +156,7 @@ const Transfer = ({ show, handleClose }) => {
 
               <div className="border-t border-border px-12 py-4">
                 <div className="flex justify-between items-center font-bold pt-4">
-                  <div>Amount</div>
+                  <div>Amount Received</div>
                   <div className="flex items-center font-semibold">
                     <img
                       className="mx-2 h-4 w-4"
@@ -175,7 +187,7 @@ const Transfer = ({ show, handleClose }) => {
                   src="/ogy_logo.svg"
                   alt="OGY Logo"
                 />
-                <span>{balanceOGY.balanceOGY} OGY</span>
+                <span>{balanceOGY.balance} OGY</span>
               </div>
             </div>
           </div>

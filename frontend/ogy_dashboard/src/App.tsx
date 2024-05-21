@@ -79,12 +79,10 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Proposals.loader,
             element: <Proposals />,
           },
           {
             path: "details",
-            loader: ProposalsDetails.loader,
             element: <ProposalsDetails />,
           },
         ],
@@ -120,7 +118,6 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Account.loader,
             element: <Account />,
           },
         ],

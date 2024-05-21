@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
-import useFetchBalanceOGY from "@services/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
+import { Skeleton } from "@components/ui";
 
 const AvailableOGY = () => {
   const [show, setShow] = useState(false);
@@ -9,18 +11,11 @@ const AvailableOGY = () => {
   const handleClose = () => {
     setShow(false);
   };
-  const [balanceOGY, setBalanceOGY] = useState(0);
-  const [balanceOGYUSD, setBalanceOGYUSD] = useState("0");
 
-  const { data: dataBalanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
-    useFetchBalanceOGY({});
-
-  useEffect(() => {
-    if (isSuccessFetchBalanceOGY) {
-      setBalanceOGY(dataBalanceOGY.balanceOGY);
-      setBalanceOGYUSD(dataBalanceOGY.balanceOGYUSD);
-    }
-  }, [isSuccessFetchBalanceOGY, dataBalanceOGY]);
+  const { data: balanceOGY } = useFetchBalanceOGYOwner();
+  const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
+    balance: balanceOGY?.balance,
+  });
 
   return (
     <Card>
@@ -33,11 +28,23 @@ const AvailableOGY = () => {
         <div>
           <div className="flex items-center text-2xl font-semibold">
             <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
-            <span className="ml-2 mr-2">{balanceOGY}</span>
-            <span className="text-content/60">OGY</span>
+            <div className="flex ml-2">
+              {balanceOGY?.balance !== undefined ? (
+                <div>
+                  {balanceOGY.balance}
+                  <span className="text-content/60 ml-2">OGY</span>
+                </div>
+              ) : (
+                <Skeleton className="w-32" />
+              )}
+            </div>
           </div>
-          <div className="mt-2 text-sm text-content/60">
-            {balanceOGYUSD} USD
+          <div className="flex">
+            {balanceOGYUSD ? (
+              <div className="text-content/60">{balanceOGYUSD} USD</div>
+            ) : (
+              <Skeleton className="w-24" />
+            )}
           </div>
         </div>
       </div>

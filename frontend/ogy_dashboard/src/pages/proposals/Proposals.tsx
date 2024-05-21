@@ -1,49 +1,12 @@
-// import { useMemo, Suspense } from "react";
-// import { useLoaderData, defer, Await } from "react-router-dom";
-// import { Card, Button } from "@components/ui";
-// import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
-// import TokensInGovernanceTotal, {
-//   TokensInGovernanceProps,
-// } from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
-// import TokensInGovernanceKpi, {
-//   TokensInGovernanceKpiProps,
-// } from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
-// import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
-import ProposalsList from "@pages/proposals/proposals-list/List";
-import { usePagination, useSorting } from "@helpers/table/useTable";
-
-const loader = async () => {
-  return null;
-};
+import { usePagination } from "@helpers/table/useTable";
+import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 
 export const Proposals = () => {
-  // const data = useLoaderData();
-  const [pagination, setPagination] = usePagination({});
-  const [sorting] = useSorting({});
-
-  //   const governanceFeatures = useMemo(
-  //     () => [
-  //       {
-  //         title: "Stake & Vote",
-  //         description:
-  //           "Influence the ORIGYN Network by staking OGY & voting on proposals.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Earn Rewards",
-  //         description:
-  //           "Participate in the decision-making process to earn rewards.",
-  //         icon: "",
-  //       },
-  //       {
-  //         title: "Govern Collectively",
-  //         description:
-  //           "Engage & influence the network as a collaborative ecosystem.",
-  //         icon: "",
-  //       },
-  //     ],
-  //     []
-  //   );
+  const [pagination, setPagination] = usePagination({
+    pageSize: 10,
+    pageIndex: 0,
+  });
+  // const [sorting] = useSorting({});
 
   return (
     <div className="container mx-auto py-16 px-4">
@@ -61,11 +24,10 @@ export const Proposals = () => {
         <ProposalsList
           pagination={pagination}
           setPagination={setPagination}
-          sorting={sorting}
+          // sorting={sorting}
+          // setSorting={{ setSorting }}
         />
       </div>
     </div>
   );
 };
-
-Proposals.loader = loader;

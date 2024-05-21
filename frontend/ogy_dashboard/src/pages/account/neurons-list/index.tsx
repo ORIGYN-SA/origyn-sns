@@ -4,9 +4,9 @@ import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
-import { Table } from "@components/ui";
-import { INeuronData } from "@services/governance/getListNeuronsOwner";
-import useNeurons from "@hooks/useNeuronsOwner";
+import { Table, LoaderSpin } from "@components/ui";
+import { INeuronData } from "@services/types";
+import useNeurons from "@hooks/neurons/useNeuronsOwner";
 import NeuronsDetails from "./neuron-details";
 import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";
 import {
@@ -90,7 +90,11 @@ const NeuronsList = () => {
     []
   );
 
-  const { neuronsList, isSuccess: isSuccessGetNeuronsList } = useNeurons({
+  const {
+    neuronsList,
+    isSuccess: isSuccessGetNeuronsList,
+    isLoading: isLoadingGetNeuronsList,
+  } = useNeurons({
     // limit: pagination.pageSize,
     // offset: pagination.pageSize * pagination.pageIndex,
     // sorting,
@@ -107,6 +111,11 @@ const NeuronsList = () => {
           getRowCanExpand={() => true}
           subComponent={NeuronsDetails}
         />
+      )}
+      {isLoadingGetNeuronsList && (
+        <div className="flex items-center justify-center h-40">
+          <LoaderSpin />
+        </div>
       )}
       <div className="flex justify-center mt-4">
         <AddNeuronProvider>

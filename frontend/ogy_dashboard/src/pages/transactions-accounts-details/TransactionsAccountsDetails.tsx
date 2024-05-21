@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import fetchOneAccountQuery, {
   Account,
   AccountParams,
-} from "@services/accounts/fetchOneAccountQuery";
+} from "@services/queries/accounts/fetchOneAccountQuery";
 
 // export const loader = async () => {
 //   const dataProposals = new Promise((resolve) => {

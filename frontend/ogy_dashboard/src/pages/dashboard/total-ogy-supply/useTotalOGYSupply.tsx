@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
-} from "@services/metrics/fetchTotalSupplyOGYQuery";
+} from "@services/queries/metrics/fetchTotalSupplyOGYQuery";
 import fetchTotalSupplyOGYTimeSeries, {
   TotalSupplyOGYTimeSeries,
-} from "@services/metrics/fetchTotalSupplyOGYTimeSeriesQuery";
-import { ChartData } from "@services/_api/types/charts.types";
+} from "@services/queries/metrics/fetchTotalSupplyOGYTimeSeriesQuery";
+import { ChartData } from "@services/types/charts.types";
 import {
   getCurrentDateInSeconds,
   getCurrentDateLastWeekInSeconds,

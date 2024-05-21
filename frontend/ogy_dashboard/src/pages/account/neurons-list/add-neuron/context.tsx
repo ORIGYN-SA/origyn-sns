@@ -2,7 +2,7 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "@tanstack/react-form";
-import useAddNeuronOwnership from "@services/sns-rewards/useAddNeuronOwnership";
+import useAddNeuronOwnership from "@services/queries/sns-rewards/useAddNeuronOwnership";
 import type { FormApi } from "@tanstack/react-form";
 
 interface AddNeuronContextType {
@@ -44,7 +44,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["listNeuronsOwner"] });
+          queryClient.invalidateQueries({ queryKey: ["userListNeuronsAll"] });
           queryClient.invalidateQueries({
             queryKey: ["getNeuronClaimBalance"],
           });

@@ -9,5 +9,6 @@ import LoaderSpin from '@components/ui/LoaderSpin'
 import Badge from '@components/ui/Badge'
 import Search from '@components/ui/Search'
 import InputField from '@components/ui/InputField'
+import Skeleton from '@components/ui/Skeleton'
 
-export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge, Search, InputField}
+export {Card, Button, Select, Table, Tooltip, Dialog, Tile, LoaderSpin, Badge, Search, InputField, Skeleton}
