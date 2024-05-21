@@ -1,20 +1,19 @@
 use candid::Principal;
 use canister_time::run_now_then_interval;
 use icrc_ledger_types::icrc1::account::{ self, Account, Subaccount };
-use super_stats_v3_c2c_client::{
-    helpers::account_tree::Overview,
+use super_stats_v3_api::account_tree::Overview as LedgerOverview;
+use super_stats_v3_api::{
     queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
     queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
 use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
+use token_metrics_api::GOLD_TREASURY_SUBACCOUNT_STR;
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::str::FromStr;
 use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
-use crate::consts::GOLD_TREASURY_SUBACCOUNT_STR;
 use crate::state::{ mutate_state, read_state };
-use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
 
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 3_600 * 1_000;
 
@@ -44,9 +43,9 @@ pub async fn update_balance_list() {
     // Iterate through accounts
     for (wallet, stats) in account_holders_map.into_iter() {
         let new_stats = WalletOverview {
-            ledger: stats,
+            ledger: stats.clone(),
             governance: GovernanceStats::default(),
-            total: stats.balance as u64,
+            total: stats.balance.clone() as u64,
         };
         match string_to_account(wallet.clone()) {
             Ok(account) => {
@@ -59,7 +58,7 @@ pub async fn update_balance_list() {
     // Iterate through principals
     for (wallet, stats) in principal_holders_map.into_iter() {
         let new_stats = WalletOverview {
-            ledger: stats,
+            ledger: stats.clone(),
             governance: GovernanceStats::default(),
             total: stats.balance as u64,
         };
@@ -128,12 +127,12 @@ pub async fn update_balance_list() {
     info!("update_balance_list -> done, mutated the state")
 }
 
-async fn get_all_holders() -> (HashMap<String, Overview>, HashMap<String, Overview>) {
+async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {
     info!("getting all holders..");
     let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
 
-    let mut principal_holders_map: HashMap<String, Overview> = HashMap::new();
-    let mut account_holders_map: HashMap<String, Overview> = HashMap::new();
+    let mut principal_holders_map: HashMap<String, LedgerOverview> = HashMap::new();
+    let mut account_holders_map: HashMap<String, LedgerOverview> = HashMap::new();
 
     let mut p_args = GetPrincipalHoldersArgs {
         offset: 0,

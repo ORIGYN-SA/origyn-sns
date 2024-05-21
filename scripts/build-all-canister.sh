@@ -31,11 +31,11 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # List of canisters to include
-canister_list="ogy_token_swap sns_rewards super_stats_v3 tx_store_v3 token_metrics super_indexer_v3"
+canister_list="ogy_token_swap sns_rewards super_stats_v3 token_metrics"
 
 for canister in $canister_list; do
-  ./scripts/build-canister.sh -w $INTTEST "$canister"
-  ./scripts/generate-did.sh "$canister"
+  # ./scripts/build-canister.sh -w $INTTEST "$canister"
+  # ./scripts/generate-did.sh "$canister"
   ./scripts/build-canister.sh $INTTEST "$canister"
 done
 

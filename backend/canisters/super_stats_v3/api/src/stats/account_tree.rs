@@ -140,7 +140,7 @@ impl Add for HistoryData {
         }
     }
 }
- #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Debug)]
+ #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Copy, Debug)]
  pub struct Overview {
     pub first_active: u64,
     pub last_active: u64,
@@ -175,6 +175,24 @@ impl Add for HistoryData {
     }
  }
 
+ impl Add for Overview {
+    type Output = Overview;
+
+    fn add(self, other: Self) -> Self::Output {
+        let (sent_count1, sent_amount1) = self.sent;
+        let (sent_count2, sent_amount2) = other.sent;
+        let (received_count1, received_amount1) = self.received;
+        let (received_count2, received_amount2) = other.received;
+
+        Overview {
+            first_active: self.first_active.min(other.first_active),
+            last_active: self.last_active.max(other.last_active),
+            sent: (sent_count1 + sent_count2, sent_amount1 + sent_amount2),
+            received: (received_count1 + received_count2, received_amount1 + received_amount2),
+            balance: self.balance + other.balance,
+        }
+    }
+}
 
  // IMPL 
  impl Main {
