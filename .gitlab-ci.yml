@@ -50,7 +50,7 @@ include:
       src-folder: super_stats_v3
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
     inputs:
-      src-folder: super_store_v3
+      src-folder: tx_store_v3
   # Canister builds
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
@@ -202,7 +202,7 @@ integration tests:
     - chmod +x ./pocket-ic
     - mv ./pocket-ic ./backend/integration_testing/pocket-ic
     - ulimit -n 102400
-    - ulimit -f 1024000 
+    - ulimit -f 1024000
     - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
   coverage: /^\d+.\d+% coverage/
   artifacts:
