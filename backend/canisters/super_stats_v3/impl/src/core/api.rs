@@ -5,7 +5,7 @@ use super_stats_v3_api::{
     types::LogEntry,
     working_stats::WorkingStats,
 };
-
+use super_stats_v3_api::types::MemoryData;
 // [][] -- ADMIN METHODS -- [][]
 #[update]
 fn add_authorised(principal_id: String) -> String {

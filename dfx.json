@@ -77,7 +77,7 @@
       "type": "rust"
     },
     "super_stats_v3": {
-      "candid": "backend/canisters/super_stats_v3/super_stats_v3.did",
+      "candid": "backend/canisters/super_stats_v3/api/can.did",
       "optimize": "cycles",
       "package": "super_stats_v3",
       "type": "rust"
