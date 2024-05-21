@@ -14,11 +14,8 @@ const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
-  const {
-    data: balanceOGY,
-    isSuccess: isSuccessFetchBalanceOGY,
-    refetch: refetchFetchOGYBalance,
-  } = useFetchBalanceOGYOwner();
+  const { data: balanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
+    useFetchBalanceOGYOwner();
 
   const {
     mutate: transfer,
@@ -77,7 +74,6 @@ const Transfer = ({ show, handleClose }) => {
           queryClient.invalidateQueries({
             queryKey: ["userFetchBalanceOGY"],
           });
-          // refetchFetchOGYBalance();
         },
       }
     );
