@@ -23,13 +23,6 @@ use super_stats_v3_api::{
     },
 };
 
-#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
-pub struct SetTargetArgs {
-    pub target_ledger: String,
-    pub hourly_size: u8,
-    pub daily_size: u8,
-}
-
 //Set target canister, tx store, fee and decimals to runtime memory
 pub async fn t1_impl_set_target_canister(args: SetTargetArgs) -> Result<String, String> {
     let check = RUNTIME_STATE.with(|s| { s.borrow().data.target_ledger_locked });
