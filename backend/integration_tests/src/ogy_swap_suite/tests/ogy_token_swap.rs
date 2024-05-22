@@ -950,6 +950,8 @@ fn get_deposit_account_helper(
         ogy_token_swap_api::request_deposit_account::Response::Success(account_id) => {
             Ok(account_id)
         }
+        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfListReached =>
+            Err("Max limit reached.".to_string()),
     }
 }
 

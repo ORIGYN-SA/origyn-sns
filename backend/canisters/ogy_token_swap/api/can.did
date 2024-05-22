@@ -12,8 +12,8 @@ type BlockFailReason = variant {
 };
 type BurnFailReason = variant {
   TransferError : TransferError;
-  NoTokensToBurn;
   CallError : text;
+  TokenBalanceAndSwapRequestDontMatch;
 };
 type BurnRequestArgs = record {
   memo : nat64;
@@ -30,8 +30,17 @@ type InitArgs = record {
   ogy_legacy_ledger_canister_id : principal;
 };
 type Response = variant { Success : SwapInfo; InternalError : text };
-type Response_1 = variant { Success : blob };
+type Response_1 = variant { Success : blob; MaxCapacityOfListReached };
 type Response_2 = variant { Success : nat; InternalError : text };
+type Response_3 = variant {
+  TransferError : text;
+  FailedToFetchBalance : text;
+  InsufficientBalance : nat64;
+  TransferCallError : text;
+  NoRecordOfSubaccountRequestFound;
+  Success : nat64;
+  InternalError : text;
+};
 type SwapError = variant {
   BlockFailed : BlockFailReason;
   BurnFailed : BurnFailReason;
@@ -90,4 +99,5 @@ service : (InitArgs) -> {
   get_swap_info : (Args) -> (Response) query;
   request_deposit_account : (Args_1) -> (Response_1);
   swap_tokens : (Args_2) -> (Response_2);
+  withdraw_deposit : () -> (Response_3);
 }

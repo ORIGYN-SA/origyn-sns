@@ -6,7 +6,7 @@ Builds all canisters.
 Must be run from the repository's root folder.
 
 Usage:
-  scripts/build-canister.sh [options] <CANISTER>
+  scripts/build-all-canisters.sh [options] <CANISTER>
 
 Options:
   -h, --help                Show this message and exit
