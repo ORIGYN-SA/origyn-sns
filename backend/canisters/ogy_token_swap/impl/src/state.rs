@@ -63,7 +63,7 @@ pub struct Data {
     pub authorized_principals: Vec<Principal>,
     /// state of the swaps
     pub token_swap: TokenSwap,
-    /// swap history of completed swaps
+    /// canister ids that are being interacted with
     pub canister_ids: CanisterIds,
     /// The minting account of legacy OGY where tokens are burned to
     pub minting_account: AccountIdentifier,
