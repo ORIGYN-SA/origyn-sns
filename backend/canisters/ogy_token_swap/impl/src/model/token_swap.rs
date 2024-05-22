@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::{ collections::BTreeMap, mem };
 
 use candid::Principal;
 use canister_time::timestamp_millis;
@@ -265,5 +265,16 @@ impl TokenSwap {
                     )
                 ),
         }
+    }
+
+    pub fn is_capacity_full(&self) -> bool {
+        let block_index_size = mem::size_of::<BlockIndex>();
+        let swap_info_size = mem::size_of::<SwapInfo>();
+        let entry_size = block_index_size + swap_info_size;
+        let total_size = entry_size * self.swap.len();
+
+        const ONE_GB: usize = 1 * 1024 * 1024 * 1024; // 1 GB in bytes
+
+        total_size >= ONE_GB
     }
 }

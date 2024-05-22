@@ -13,6 +13,12 @@ use crate::state::{ mutate_state, read_state };
 #[update]
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
+
+    // check if there is room in the swaps heap
+    if true == read_state(|s| s.data.token_swap.is_capacity_full()) {
+        return RequestDepositAccountResponse::MaxCapacityOfSwapsReached;
+    }
+
     if let Err(error_response) = mutate_state(|s| s.data.requesting_principals.insert(principal)) {
         return error_response;
     }
@@ -36,7 +42,7 @@ mod tests {
     };
 
     use crate::{
-        state::{ init_state, Data, RuntimeState },
+        state::{ init_state, mutate_state, Data, RuntimeState },
         updates::request_deposit_account::{ compute_deposit_account, request_deposit_account },
     };
 
@@ -76,6 +82,22 @@ mod tests {
             RequestDepositAccountResponse::MaxCapacityOfListReached,
             request_deposit_account(RequestDepositAccountArgs {
                 of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
+            })
+        );
+    }
+
+    #[test]
+    fn test_swaps_limit_reached() {
+        init_canister_state();
+        let max_heap_swaps = 4_700_000;
+        for i in 0..max_heap_swaps {
+            mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
+        }
+
+        assert_eq!(
+            RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
+            request_deposit_account(RequestDepositAccountArgs {
+                of: Some(dummy_principal(1)),
             })
         );
     }
