@@ -55,6 +55,12 @@ const TokenDistributionList = ({
         cell: ({ getValue }) => <div className="">{getValue()}</div>,
         header: "Ledger Balance",
       },
+      {
+        accessorKey: "weight",
+        id: "weight",
+        cell: ({ getValue }) => <div className="">{getValue()}</div>,
+        header: "Weight In Total Supply",
+      },
       // {
       //   header: "View",
       //   accessorKey: "view",

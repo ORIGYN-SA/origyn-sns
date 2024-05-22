@@ -1,6 +1,14 @@
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import {
+  useQuery,
+  keepPreviousData,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
+import fetchTotalSupplyOGY, {
+  TotalSupplyOGY,
+} from "@services/queries/metrics/fetchTotalSupplyOGYQuery";
+import { divideBy1e8 } from "@helpers/numbers";
 
 const useTokenDistribution = ({
   limit = 10,
@@ -27,7 +35,15 @@ const useTokenDistribution = ({
     placeholderData: keepPreviousData,
   });
 
-  const isSuccess = isSuccessFetchTokenHolders;
+  const {
+    data: dataTotalSupply,
+    isSuccess: isSuccessFetchTotalSupply,
+    isLoading: isLoadingFetchTotalSupply,
+    isError: isErrorFetchTotalSupply,
+    error: errorFetchTotalSupply,
+  }: UseQueryResult<TotalSupplyOGY> = useQuery(fetchTotalSupplyOGY({}));
+
+  const isSuccess = isSuccessFetchTokenHolders && isSuccessFetchTotalSupply;
 
   const rows = isSuccess
     ? tokenDistribution.data.map((td) => {
@@ -35,11 +51,17 @@ const useTokenDistribution = ({
         const total = td.string.total;
         const governanceBalance = td.string.governanceBalance;
         const ledgerBalance = td.string.ledgerBalance;
+        const weight = divideBy1e8(
+          (td.total / dataTotalSupply.totalSupplyOGY > 0
+            ? dataTotalSupply.totalSupplyOGY
+            : 1) * 100
+        ).toFixed(2);
         return {
           principal,
           total,
           governanceBalance,
           ledgerBalance,
+          weight: `${weight} %`,
         };
       })
     : [];
@@ -54,10 +76,10 @@ const useTokenDistribution = ({
         rowCount: tokenDistribution?.totalHolders ?? 0,
       },
     },
-    isLoading: isLoadingFetchTokenHolders,
+    isLoading: isLoadingFetchTokenHolders || isLoadingFetchTotalSupply,
     isSuccess,
-    isError: isErrorFetchTokenHolders,
-    error: errorFetchTokenHolders,
+    isError: isErrorFetchTokenHolders || isErrorFetchTotalSupply,
+    error: errorFetchTokenHolders || errorFetchTotalSupply,
   };
 };
 
