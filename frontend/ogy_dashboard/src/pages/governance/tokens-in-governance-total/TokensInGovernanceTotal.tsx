@@ -1,6 +1,7 @@
 import { Card, LoaderSpin } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import useGovernanceStats from "@hooks/governance/useGovernanceStats";
+import { usePieChart } from "@components/charts/pie/context";
 
 export interface TokensInGovernanceProps {
   className?: string;
@@ -16,6 +17,7 @@ interface TokensInGovernanceData {
 
 const TokensInGovernanceTotal = ({ className }: { className: string }) => {
   const { data, isSuccess, isLoading, isError, error } = useGovernanceStats();
+  const { setActiveIndex } = usePieChart();
   return (
     <Card className={`${className}`}>
       {isSuccess && (
@@ -42,8 +44,13 @@ const TokensInGovernanceTotal = ({ className }: { className: string }) => {
           </div>
           <div className="grid grid-cols-1 gap-8">
             {data.tokensInGovernance.map(
-              ({ name, valueToString: value, color }) => (
-                <Card className="bg-surface-2 pb-8" key={name}>
+              ({ name, valueToString: value, color }, index) => (
+                <Card
+                  className="bg-surface-2 pb-8"
+                  key={name}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                >
                   <div className="flex items-center text-lg">
                     <span className="text-content/60">{name}</span>
                   </div>

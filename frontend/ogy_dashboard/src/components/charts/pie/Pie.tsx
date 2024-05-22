@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import {
   PieChart as PieChartRecharts,
   Cell,
@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import tc from "tinycolor2";
 import { colors as themeColors } from "@theme/preset";
+import { usePieChart } from "./context";
 
 export interface PieChartData {
   name: string;
@@ -25,7 +26,8 @@ interface PieChartProps {
 }
 
 const PieChart = ({ data, colors }: PieChartProps) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { activeIndex, setActiveIndex } = usePieChart();
+  // const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sumData = useMemo(
     () => data.reduce((acc, cur) => acc + cur.value, 0),
     [data]

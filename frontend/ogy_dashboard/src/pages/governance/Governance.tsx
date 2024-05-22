@@ -10,6 +10,7 @@ import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/To
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
+import { PieChartProvider } from "@components/charts/pie/context";
 
 const loader = async () => {
   // tokens in governance total
@@ -149,14 +150,18 @@ export const Governance = () => {
           <Button>More details</Button>
         </div>
       </div>
-      <TokensInGovernanceTotal
-        className="mb-16"
-        tokensInGovernance={data.dataTokensInGovernanceTotal.tokensInGovernance}
-        tokensInGovernanceTotal={
-          data.dataTokensInGovernanceTotal.tokensInGovernanceTotal
-        }
-        colors={data.dataTokensInGovernanceTotal.colors}
-      />
+      <PieChartProvider>
+        <TokensInGovernanceTotal
+          className="mb-16"
+          tokensInGovernance={
+            data.dataTokensInGovernanceTotal.tokensInGovernance
+          }
+          tokensInGovernanceTotal={
+            data.dataTokensInGovernanceTotal.tokensInGovernanceTotal
+          }
+          colors={data.dataTokensInGovernanceTotal.colors}
+        />
+      </PieChartProvider>
 
       <Suspense fallback={<p>Loading dataTokensInGovernanceKpi...</p>}>
         <Await
