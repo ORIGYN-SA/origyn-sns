@@ -139,9 +139,9 @@ generate test declarations:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
+          # "super_indexer_v3 test build",
+          # "super_stats_v3 test build",
+          # "tx_store_v3 test build",
         ]
   script:
     - dfx generate
@@ -161,9 +161,9 @@ generate declarations:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
+          # "super_indexer_v3 test build",
+          # "super_stats_v3 test build",
+          # "tx_store_v3 test build",
         ]
   script:
     - dfx generate
@@ -221,9 +221,9 @@ local deploy and tests:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          "super_indexer_v3 test build",
-          "super_stats_v3 test build",
-          "tx_store_v3 test build",
+          # "super_indexer_v3 test build",
+          # "super_stats_v3 test build",
+          # "tx_store_v3 test build",
           "integration tests"
         ]
   before_script:
