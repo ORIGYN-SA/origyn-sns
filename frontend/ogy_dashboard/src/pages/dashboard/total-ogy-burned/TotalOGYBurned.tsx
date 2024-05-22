@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Card from "@components/ui/Card";
 import BarChart from "@components/charts/bar/Bar";
-
-import useTotalOGYBurned from "./useTotalOGYBurned";
+import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 import { ChartData } from "@services/types/charts.types";
 
 type TotalOGYBurned = {
