@@ -27,7 +27,7 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 mod tests {
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Subaccount };
-    use ogy_token_swap_api::requesting_principals::{ RequestingPrincipals, LIST_MAX_LIMIT };
+    use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
     use utils::env::CanisterEnv;
 
     pub use ogy_token_swap_api::updates::request_deposit_account::{

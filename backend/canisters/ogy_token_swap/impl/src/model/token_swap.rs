@@ -1,8 +1,8 @@
-use std::{ borrow::Borrow, collections::BTreeMap };
+use std::collections::BTreeMap;
 
 use candid::Principal;
 use canister_time::timestamp_millis;
-use ic_ledger_types::{ Subaccount, Tokens, BlockIndex };
+use ic_ledger_types::{ Subaccount, BlockIndex };
 use ic_stable_structures::StableBTreeMap;
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{ Deserialize, Serialize };
@@ -13,7 +13,7 @@ use ogy_token_swap_api::{
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 
 use crate::memory::{ get_swap_history_memory, VM };
-use ogy_token_swap_api::{ types::token_swap::{ BlockFailReason, SwapInfo } };
+use ogy_token_swap_api::types::token_swap::{ BlockFailReason, SwapInfo };
 
 #[derive(Serialize, Deserialize)]
 pub struct TokenSwap {

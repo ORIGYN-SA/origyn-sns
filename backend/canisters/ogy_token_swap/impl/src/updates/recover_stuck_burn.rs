@@ -1,7 +1,7 @@
 use crate::{
     burn_token,
     guards::caller_is_authorised_principal,
-    state::{ mutate_state, read_state },
+    state::read_state,
     transfer_new_token,
 };
 use canister_tracing_macros::trace;
