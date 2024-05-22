@@ -8,13 +8,12 @@ const Overview = ({ proposal }: { proposal: IProposalData }) => {
     <Card>
       <div className="flex items-center justify-between">
         <Badge
-          className={`bg-${getColorByProposalStatus(
-            status as string
-          )}/20 py-2 px-2`}
+          className={`${getColorByProposalStatus(status, "bg")} py-2 px-2`}
         >
           <div
-            className={`text-${getColorByProposalStatus(
-              status
+            className={`${getColorByProposalStatus(
+              status,
+              "text"
             )} text-xs font-semibold shrink-0`}
           >
             {status}
