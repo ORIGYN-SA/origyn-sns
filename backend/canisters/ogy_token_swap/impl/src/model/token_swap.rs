@@ -249,7 +249,7 @@ impl TokenSwap {
                 ),
         }
     }
-
+    /// should only be used for integration testing
     pub fn _restore_archived_swap(&mut self, block_index: BlockIndex) -> Result<(), String> {
         let swap_info = self.history.get(&block_index);
         match swap_info {
