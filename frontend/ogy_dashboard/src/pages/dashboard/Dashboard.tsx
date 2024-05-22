@@ -53,15 +53,37 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-8">
-          <TotalOGYSupply className="w-full" />
-          <TotalOGYBurned className="w-full" />
-          <OGYCirculationState className="w-full" />
-          <OrigynFoundationReserve className="w-full" />
-          {/* TODO: Disabling for now. Waiting data after launch of SNS */}
+          <section className="w-full" id="total-ogy-supply">
+            <TotalOGYSupply />
+          </section>
+          <section className="w-full" id="total-ogy-burned">
+            <TotalOGYBurned />
+          </section>
+          <section className="w-full pt-8 -mt-8" id="ogy-circulation-state">
+            <OGYCirculationState />
+          </section>
+          <section className="w-full pt-8 -mt-8" id="ogy-foundation-reserve">
+            <OrigynFoundationReserve />
+          </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
-          <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
-          <OrigynRewardAccount className="w-full col-span-1 xl:col-span-2" />
-          <TokenDistributionList className="w-full col-span-1 xl:col-span-2" />
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-treasury-account"
+          >
+            <OrigynTreasuryAccount />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-reward-account"
+          >
+            <OrigynRewardAccount />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-token-distribution"
+          >
+            <TokenDistributionList />
+          </section>
         </div>
       </div>
     </div>

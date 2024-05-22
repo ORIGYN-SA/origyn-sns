@@ -69,7 +69,7 @@ const Provider = ({ children }: PropsWithChildren) => {
             OGY_TOKEN_SWAP_CANISTER_ID,
             SNS_REWARDS_CANISTER_ID,
           ],
-          // autoConnect: true,
+          autoConnect: true,
         },
       })}
     >

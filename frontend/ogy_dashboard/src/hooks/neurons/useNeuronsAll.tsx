@@ -1,6 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
-import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { getListNeuronsAll } from "@services/queries/governance/neurons/getListNeuronsAll";
 
@@ -11,7 +10,6 @@ const useNeuronsAll = ({
   limit: number;
   offset: number;
 }) => {
-  const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
 
   const {
@@ -21,9 +19,8 @@ const useNeuronsAll = ({
     isLoading: isLoadingGetNervousSystemParameters,
     error: errorGetNervousSystemParameters,
   } = useQuery({
-    queryKey: ["getNervousSystemParameters", isConnected],
+    queryKey: ["getNervousSystemParameters"],
     queryFn: () => getNervousSystemParameters({ governanceActor }),
-    enabled: !!isConnected,
   });
 
   const {
@@ -33,14 +30,14 @@ const useNeuronsAll = ({
     isLoading: isLoadingListNeurons,
     error: errorListNeurons,
   } = useQuery({
-    queryKey: ["listNeuronsAll", limit, offset, isConnected],
+    queryKey: ["listNeuronsAll", limit, offset],
     queryFn: () =>
       getListNeuronsAll({
         limit,
         offset,
         nervousSystemParameters,
       }),
-    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
+    enabled: !!isSuccessGetNervousSystemParameters,
     placeholderData: keepPreviousData,
   });
 
