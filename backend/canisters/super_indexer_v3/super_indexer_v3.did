@@ -1,0 +1,127 @@
+type LogEntry = record {timestamp: text; text: text};
+type MemoryStats = record {memory: nat64; heap_memory: nat64};
+type MetricStats = record {
+    total_errors: nat64;
+    total_api_requests: nat64;    
+};
+
+type WorkingStats = record {
+    timer_active: bool;
+    is_busy: bool;
+    next_block: nat64;
+    ledger_tip_of_chain: nat64;
+    is_upto_date: bool;
+    directory_count: nat64;
+    last_update_time: nat64;
+    metrics: MetricStats  
+};
+
+type SetTargetArgs = record {
+    target_ledger: text;
+    tx_store: text
+};
+
+type IndexerType = variant {
+    DfinityIcp;
+    DfinityIcrc2;
+    MemeIcrc;
+};
+
+type ProcessedTX = record {
+    block: nat64;
+    hash: text;
+    tx_type: text;
+    from_account: text;
+    to_account: text;
+    tx_value: nat;
+    tx_fee: opt nat;
+    spender: opt text;
+    tx_time: nat64;
+};
+
+type TxCount = record { nat32; nat }; // count, value 
+
+type Overview = record {
+    first_active: nat64;
+    last_active: nat64;
+    sent: TxCount; 
+    received: TxCount;
+    balance: nat;
+};
+
+type LinkData = record {
+   linked_from: nat64;
+   linked_id: nat64;
+   number_txs: nat32;
+   gross: nat;
+   net: int;
+};
+
+type LinkDataString = record {
+   linked_from: nat64;
+   linked_id: text;
+   number_txs: nat32;
+   gross: nat;
+   net: int;
+};
+
+type FullDataResponse = record {
+   account_ref: text;
+   overview: Overview;
+   links: vec LinkDataString;
+   blocks: vec ProcessedTX;
+};
+
+type FullDataResponseRaw = record {
+   account_ref: nat64;
+   overview: Overview;
+   links: vec LinkData; 
+   blocks: vec nat64;
+};
+
+type TimeSearchArgs = record {
+    id: text;
+    start: nat64; 
+    end: nat64;   
+};
+
+service : (text) -> {
+    // CORE API
+    "add_authorised": (text) -> (text);
+    "remove_authorised": (text) -> (text);
+    "get_all_authorised": () -> (vec text) query;
+    "get_logs": () -> (opt vec LogEntry) query;
+    "get_memory_stats": () -> (MemoryStats) query;
+    "add_admin": (text) -> (text); 
+    "remove_admin": (text) -> (text);
+    "get_all_admins": () -> (vec text) query;
+    "get_working_stats": () -> (WorkingStats) query; 
+    "get_cycles_balance": () -> (nat64) query;
+    "deposit_cycles": () -> (); 
+    "get_canister_version": () -> (text) query;
+
+    // INDEXER API
+    "init_target_ledger": (SetTargetArgs, IndexerType) -> (text);
+    "get_latest_transactions": (nat32) -> (vec ProcessedTX) query;
+    "get_tx": (nat64) -> (opt ProcessedTX);
+    "get_multiple_tx": (vec nat64) -> (vec ProcessedTX);
+    "get_full_from_ref": (nat64) -> (opt FullDataResponse);
+    "get_full_from_ref_raw": (nat64) -> (opt FullDataResponseRaw) query;
+    "get_full_from_id": (text) -> (opt FullDataResponse);
+    "get_full_from_id_raw": (text) -> (opt FullDataResponseRaw) query;
+    "get_overview_by_id": (text) -> (opt Overview) query;
+    "get_overview_by_ref": (nat64) -> (opt Overview) query;
+    "get_links_from_id": (text) -> (opt vec LinkDataString) query;
+    "get_links_from_id_raw": (nat64) -> (opt vec LinkData) query;
+    "get_links_from_ref": (nat64) -> (opt vec LinkDataString) query;
+    "get_links_from_ref_raw": (nat64) -> (opt vec LinkData) query;
+    "get_transactions_from_id": (text) -> (opt vec ProcessedTX);
+    "get_transactions_from_id_raw": (text) -> (opt vec nat64) query;
+    "get_transactions_from_ref": (nat64) -> (opt vec ProcessedTX);
+    "get_transactions_from_ref_raw": (nat64) -> (opt vec nat64) query;
+    "get_transactions_time_id": (TimeSearchArgs) -> (opt vec ProcessedTX);
+
+    // TIMER API
+    "start_processing_timer": (nat64) -> (text); // in seconds
+    "stop_all_timers": () -> (text);
+}

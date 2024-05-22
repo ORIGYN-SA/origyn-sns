@@ -1,0 +1,20 @@
+@import "../theme/preset.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  background-color: rgb(var(--color-surface-default) / var(--tw-bg-opacity));
+  border-radius: 0.5rem;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  padding: 1.5rem;
+}
