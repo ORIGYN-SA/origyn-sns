@@ -8,3 +8,4 @@ pub mod get_top_principal_holders;
 pub mod get_principal_holders;
 pub mod get_account_holders;
 pub mod get_account_history;
+pub mod get_principal_history;

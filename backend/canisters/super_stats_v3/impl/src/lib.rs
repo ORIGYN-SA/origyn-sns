@@ -5,13 +5,13 @@ mod test_data;
 
 mod tests {
     use super_stats_v3_api::{
-        custom_types::{ IndexerType, ProcessedTX },
+        account_tree::AccountTree,
+        custom_types::{ IndexerType, ProcessedTX, SmallTX, TransactionType },
         fetch_data::dfinity_icrc2::DEFAULT_SUBACCOUNT,
         process_data::process_time_stats::StatsType,
-        stats::queries::get_account_history::GetAccountBalanceHistory,
         runtime::RUNTIME_STATE,
         stable_memory::STABLE_STATE,
-        stats::constants::DAY_AS_NANOS,
+        stats::{ constants::DAY_AS_NANOS },
         types::IDKey,
     };
 
@@ -22,7 +22,6 @@ mod tests {
                 process_time_stats::{ calculate_time_stats, top_x_by_txvalue },
                 small_tx::processedtx_to_smalltx,
             },
-            queries::get_account_history::get_account_last_days,
             utils::{
                 nearest_day_start,
                 nearest_past_hour,
@@ -30,7 +29,7 @@ mod tests {
                 principal_subaccount_to_string,
             },
         },
-        test_data::{ ptx_test_data, ptx_test_data_for_history, test_state_init },
+        test_data::{ ptx_test_data, test_state_init },
     };
 
     #[test]
@@ -328,22 +327,136 @@ mod tests {
     }
 
     #[test]
-    fn test_account_history() {
+    fn test_update_account_balance() {
         test_state_init();
 
-        let ptx = ptx_test_data_for_history();
-        let stx = processedtx_to_smalltx(&ptx);
-        let _ = process_smtx_to_index(stx);
+        let mut account_tree = AccountTree::default();
 
-        let account_one_args = GetAccountBalanceHistory {
-            account: "220c3a33f90601896e26f76fa619fe288742df1fa75426edfaf759d39f2455a5".to_string(),
-            days: 5,
-            merge_subaccounts: false,
+        let account1 = 1000u64;
+        let account2 = 1002u64;
+        let account3 = 1003u64;
+
+        // Day 1
+        // account1: 100_000_000_000
+        // account2: 0
+        // account3: 0
+
+        let stx1 = SmallTX {
+            block: 0,
+            time: 86_400 * 1_000_000_000, // Day 1
+            tx_type: 1u8, // Mint
+            value: 100_000_000_000,
+            fee: Some(0),
+            to: Some(account1),
+            from: None,
         };
-        let account_one_history = get_account_last_days(account_one_args);
-        println!("Account one history: {account_one_history:?}");
-        let first_day = account_one_history.first().unwrap();
-        assert_eq!(first_day.0, 1);
-        assert_eq!(first_day.1.balance, 100_000_000_000);
+        assert_eq!(
+            account_tree.process_transfer_to(&account1, &stx1),
+            Ok("Transfer Processed".to_string())
+        );
+        account_tree.accounts_history.debug_print();
+        let day1_acc1_history = account_tree.accounts_history
+            .get(&(account1, 1))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day1_acc1_history.balance, 100_000_000_000);
+
+        // Day 2
+        // account1: 90_000_000_000
+        // account2: 10_000_000_000
+        // account3: 0
+        let stx2 = SmallTX {
+            block: 1,
+            time: 2 * 86_400 * 1_000_000_000, // Day 2
+            tx_type: 0u8, // Transfer
+            value: 10_000_000_000,
+            fee: Some(0),
+            to: Some(account2),
+            from: Some(account1),
+        };
+        assert_eq!(
+            account_tree.process_transfer_to(&account2, &stx2),
+            Ok("Transfer Processed".to_string())
+        );
+        assert_eq!(
+            account_tree.process_transfer_from(&account1, &stx2),
+            Ok("Processed OK".to_string())
+        );
+        account_tree.accounts_history.debug_print();
+
+        let day2_acc1_history = account_tree.accounts_history
+            .get(&(account1, 2))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day2_acc1_history.balance, 90_000_000_000);
+        let day2_acc2_history = account_tree.accounts_history
+            .get(&(account2, 2))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day2_acc2_history.balance, 10_000_000_000);
+
+        // Day 3
+        // account1: 95_000_000_000
+        // account2: 5_000_000_000
+        // account3: 0
+        let stx3 = SmallTX {
+            block: 2,
+            time: 3 * 86_400 * 1_000_000_000, // Day 3
+            tx_type: 0u8, // Transfer
+            value: 5_000_000_000,
+            fee: Some(0),
+            to: Some(account1),
+            from: Some(account2),
+        };
+        assert_eq!(
+            account_tree.process_transfer_to(&account1, &stx3),
+            Ok("Transfer Processed".to_string())
+        );
+        assert_eq!(
+            account_tree.process_transfer_from(&account2, &stx3),
+            Ok("Processed OK".to_string())
+        );
+        let day3_acc1_history = account_tree.accounts_history
+            .get(&(account1, 3))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day3_acc1_history.balance, 95_000_000_000);
+        let day3_acc2_history = account_tree.accounts_history
+            .get(&(account2, 3))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day3_acc2_history.balance, 5_000_000_000);
+        
+        // Day 3
+        // account1: 80_000_000_000
+        // account2: 5_000_000_000
+        // account3: 15_000_000_000
+        let stx4 = SmallTX {
+            block: 3,
+            time: 4 * 86_400 * 1_000_000_000, // Day 4
+            tx_type: 0u8, // Transfer
+            value: 15_000_000_000,
+            fee: Some(0),
+            to: Some(account3),
+            from: Some(account1),
+        };
+        assert_eq!(
+            account_tree.process_transfer_to(&account3, &stx4),
+            Ok("Transfer Processed".to_string())
+        );
+        assert_eq!(
+            account_tree.process_transfer_from(&account1, &stx4),
+            Ok("Processed OK".to_string())
+        );
+        let day4_acc1_history = account_tree.accounts_history
+            .get(&(account1, 4))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day4_acc1_history.balance, 80_000_000_000);
+        let day4_acc3_history = account_tree.accounts_history
+            .get(&(account3, 4))
+            .unwrap()
+            .to_owned();
+        assert_eq!(day4_acc3_history.balance, 15_000_000_000);
     }
 }

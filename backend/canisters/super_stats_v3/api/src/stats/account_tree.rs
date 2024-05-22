@@ -25,7 +25,7 @@ enum TransactionType {
 impl AccountTree {
 
     fn update_history_balance(&mut self, account_ref: &u64, stx: &SmallTX, tx_type: TransactionType) {
-        let day_of_transaction = stx.time / (86400 * 1_000_000_000);
+        let day_of_transaction = stx.time / 86400 / 1_000_000_000;
         let account_history_key = (*account_ref, day_of_transaction);
 
         let fee: u128;
@@ -33,7 +33,7 @@ impl AccountTree {
             fee = RUNTIME_STATE.with(|s|{s.borrow().data.get_ledger_fee()})
         };
         
-        if !self.accounts_history.contains_key(&account_history_key) && tx_type == TransactionType::In {
+        if !self.accounts_history.contains_key(&account_history_key) {
             let previous_day_balance = self.accounts_history.get(&(*account_ref, day_of_transaction - 1)).map_or(0, |previous_day| previous_day.balance);
 
             let new_balance = match tx_type {

@@ -4,3 +4,4 @@ pub mod process_data;
 pub mod queries;
 pub mod updates;
 pub mod utils;
+pub mod history;

@@ -5,15 +5,15 @@ use crate::{
 };
 use super_stats_v3_api::{
     runtime::RUNTIME_STATE,
-    stats::queries::get_account_history::{ Args, Response },
+    stats::queries::get_principal_history::{ Args, Response },
 };
 
 #[query]
-fn get_account_history(args: Args) -> Response {
+fn get_principal_history(args: Args) -> Response {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
-    let history = get_history_of_account(args.account, args.days, false);
+    let history = get_history_of_account(args.account, args.days, true);
     let mut filled_history = fill_missing_days(history, args.days);
     filled_history.truncate(args.days as usize);
     return filled_history;

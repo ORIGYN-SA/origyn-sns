@@ -28,6 +28,11 @@ type IndexerType = variant {
     DfinityIcrc3;
 };
 
+type InitLedgerArgs = record {
+  target: SetTargetArgs;
+  index_type: IndexerType;
+};
+
 type ProcessedTX = record {
     block: nat64;
     hash: text;
@@ -101,10 +106,9 @@ type GetHoldersArgs = record {
     limit: nat64;
 };
 
-type GetAccountBalanceHistoryArgs = record {
+type GetAccountHistoryArgs = record {
     account: text;
     days: nat64;
-    merge_subaccounts: bool;
 };
 
 type HistoryData = record {
@@ -113,7 +117,12 @@ type HistoryData = record {
 
 type AccountHistory = vec record { nat64; HistoryData; };
 
-service : (text) -> {
+type InitArgs = record {
+  admin: text;
+  test_mode : bool;
+};
+
+service : (InitArgs) -> {
     // CORE API
     "add_authorised": (text) -> (text);
     "remove_authorised": (text) -> (text);
@@ -129,7 +138,7 @@ service : (text) -> {
     "get_canister_version": () -> (text) query;
 
     // INDEXER API
-    "init_target_ledger": (SetTargetArgs, IndexerType) -> (text);
+    "init_target_ledger": (InitLedgerArgs) -> (text);
     "get_top_account_holders": (nat64) -> (vec HolderBalanceResponse) query;
     "get_top_principal_holders": (nat64) -> (vec HolderBalanceResponse) query;
     "get_total_holders": () -> (TotalHolderResponse) query;
@@ -139,7 +148,8 @@ service : (text) -> {
     "get_principal_overview": (text) -> (opt Overview) query;
     "get_principal_holders": (GetHoldersArgs) -> (vec HolderBalanceResponse) query;
     "get_account_holders": (GetHoldersArgs) -> (vec HolderBalanceResponse) query;
-    "get_account_history": (GetAccountBalanceHistoryArgs) -> (AccountHistory);
+    "get_account_history": (GetAccountHistoryArgs) -> (AccountHistory) query;
+    "get_principal_history": (GetAccountHistoryArgs) -> (AccountHistory) query;
 
     // TIMER API
     "start_processing_timer": (nat64) -> (text); // in seconds
