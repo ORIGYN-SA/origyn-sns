@@ -30,7 +30,7 @@ const useTokenDistribution = ({
   const isSuccess = isSuccessFetchTokenHolders;
 
   const rows = isSuccess
-    ? tokenDistribution?.map((td) => {
+    ? tokenDistribution.data.map((td) => {
         const principal = td.principal;
         const total = td.string.total;
         const governanceBalance = td.string.governanceBalance;
@@ -48,8 +48,10 @@ const useTokenDistribution = ({
     data: {
       list: {
         rows,
-        pageCount: 0,
-        rowCount: 0,
+        pageCount: tokenDistribution?.totalHolders
+          ? Math.ceil(tokenDistribution?.totalHolders / limit)
+          : 0,
+        rowCount: tokenDistribution?.totalHolders ?? 0,
       },
     },
     isLoading: isLoadingFetchTokenHolders,

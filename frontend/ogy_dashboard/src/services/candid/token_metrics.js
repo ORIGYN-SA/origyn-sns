@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export const idlFactory = ({ IDL }) => {
   const InitArgs = IDL.Record({
     test_mode: IDL.Bool,
@@ -33,17 +32,19 @@ export const idlFactory = ({ IDL }) => {
     ledger: Overview,
     governance: GovernanceStats,
   });
+  const SResponse = IDL.Record({
+    current_offset: IDL.Nat64,
+    data: IDL.Vec(IDL.Tuple(Account, WalletOverview)),
+    limit: IDL.Nat64,
+    total_count: IDL.Nat64,
+  });
   const TokenSupplyData = IDL.Record({
     circulating_supply: IDL.Nat,
     total_supply: IDL.Nat,
   });
   return IDL.Service({
     get_all_neuron_owners: IDL.Func([], [IDL.Vec(IDL.Principal)], ["query"]),
-    get_holders: IDL.Func(
-      [GetHoldersArgs],
-      [IDL.Vec(IDL.Tuple(Account, WalletOverview))],
-      ["query"]
-    ),
+    get_holders: IDL.Func([GetHoldersArgs], [SResponse], ["query"]),
     get_neurons_stats: IDL.Func(
       [IDL.Opt(IDL.Principal)],
       [GovernanceStats],

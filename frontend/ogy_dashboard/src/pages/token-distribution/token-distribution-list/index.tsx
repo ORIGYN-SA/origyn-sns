@@ -2,7 +2,6 @@
 // @ts-nocheck
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-// import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, LoaderSpin, Tooltip } from "@components/ui";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
@@ -15,8 +14,6 @@ const TokenDistributionList = ({
   sorting,
   setSorting,
 }: TableProps) => {
-  // const navigate = useNavigate();
-
   const columns = useMemo<ColumnDef<IProposalData>[]>(
     () => [
       {
