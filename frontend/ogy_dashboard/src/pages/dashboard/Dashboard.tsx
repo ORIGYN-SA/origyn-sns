@@ -44,9 +44,7 @@ const Dashboard = () => {
             <div className="flex justify-center mt-8">
               {!isConnected && !isInitializing && <AuthButton />}
               {isConnected && (
-                <Button onClick={handleClickAccount}>
-                  Login to swap tokens
-                </Button>
+                <Button onClick={handleClickAccount}>My account</Button>
               )}
             </div>
           </LedgerSwitchBannerContent>

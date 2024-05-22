@@ -16,6 +16,7 @@ import { Neurons } from "@pages/neurons/Neurons";
 import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
+import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
@@ -84,6 +85,15 @@ const router = createBrowserRouter([
           {
             path: "details",
             element: <ProposalsDetails />,
+          },
+        ],
+      },
+      {
+        path: "token-distribution",
+        children: [
+          {
+            index: true,
+            element: <TokenDistribution />,
           },
         ],
       },
