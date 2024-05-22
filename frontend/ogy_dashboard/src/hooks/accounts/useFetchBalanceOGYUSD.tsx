@@ -14,7 +14,7 @@ const useFetchBalanceOGYUSD = ({
     queryKey: ["fetchPriceOGY"],
     queryFn: () => fetchPriceOGY(),
     placeholderData: keepPreviousData,
-    enabled: !!balance,
+    enabled: balance !== undefined && balance !== null,
   });
 
   useEffect(() => {
