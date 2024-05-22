@@ -190,9 +190,9 @@ impl TokenSwap {
     }
 
     pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<SwapInfo> {
-        let swap_info_heap = self.swap.get(&block_index).cloned();
-        let swap_info_history = self.history.get(&block_index);
-        swap_info_heap.or(swap_info_history)
+        let swap_info_incomplete = self.swap.get(&block_index).cloned();
+        let swap_info_completed = self.history.get(&block_index);
+        swap_info_incomplete.or(swap_info_completed)
     }
 
     pub fn update_status(&mut self, block_index: BlockIndex, status: SwapStatus) {
