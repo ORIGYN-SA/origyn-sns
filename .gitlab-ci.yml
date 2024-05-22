@@ -224,7 +224,7 @@ local deploy and tests:
           # "super_indexer_v3 test build",
           # "super_stats_v3 test build",
           # "tx_store_v3 test build",
-          "integration tests"
+          # "integration tests"
         ]
   before_script:
     - dfx --version
