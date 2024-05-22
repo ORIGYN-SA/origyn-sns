@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
 import { Transition, Dialog } from "@headlessui/react";
-import { Button, Tile, Tooltip } from "@components/ui";
+import { Button, Tile, Tooltip, Skeleton } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import AuthButton from "@components/auth/Auth";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Skeleton } from "@components/ui";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 
 interface AccountOverviewProps {
@@ -66,18 +65,24 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                       </Tile>
 
                       <div className="flex items-center truncate pr-4">
-                        <div
-                          className="flex ml-4 items-center truncate text-sm"
-                          data-tooltip-id="tooltip_principal_id"
-                          data-tooltip-content={principal}
-                        >
-                          <div className="font-semibold mr-2 shrink-0">
-                            Principal ID:
-                          </div>
-                          <div className="truncate">{principal}</div>
+                        <div className="flex ml-4 items-center truncate text-sm">
+                          <div className="mr-2 shrink-0">Principal ID: </div>
+                          {principal ? (
+                            <>
+                              <div
+                                className="truncate"
+                                data-tooltip-id="tooltip_principal_id"
+                                data-tooltip-content={principal}
+                              >
+                                {principal}
+                              </div>
+                              <Tooltip id="tooltip_principal_id" />
+                              <CopyToClipboard value={principal as string} />
+                            </>
+                          ) : (
+                            <Skeleton className="w-64" />
+                          )}
                         </div>
-                        <Tooltip id="tooltip_principal_id" />
-                        <CopyToClipboard value={principal as string} />
                       </div>
                     </div>
                   </div>
