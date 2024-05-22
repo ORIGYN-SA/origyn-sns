@@ -433,14 +433,25 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
     });
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
+            let mut archive_error: String = "".to_string();
             mutate_state(|s| {
                 s.data.token_swap.set_swap_block_index(block_index, transfer_block_index.clone());
                 s.data.token_swap.update_status(
                     block_index,
                     SwapStatus::Complete(transfer_block_index.clone())
                 );
+                match s.data.token_swap.archive_swap(block_index) {
+                    Ok(_) => {}
+                    Err(e) => {
+                        archive_error = e;
+                    }
+                }
             });
-            Ok(transfer_block_index)
+            if archive_error.len() > 0 {
+                Err(archive_error)
+            } else {
+                Ok(transfer_block_index)
+            }
         }
 
         Ok(Err(msg)) => {

@@ -23,7 +23,7 @@ use ic_ledger_types::{
     BlockIndex,
 };
 
-const MAX_SWAP_INFO_BYTES_SIZE: u32 = 250;
+const MAX_SWAP_INFO_BYTES_SIZE: u32 = 534;
 const MINIMUM_TIMEOUT_IN_SECONDS: u64 = 30;
 const MINIMUM_TIMEOUT_IN_MS: Milliseconds = MINIMUM_TIMEOUT_IN_SECONDS * SECOND_IN_MS;
 

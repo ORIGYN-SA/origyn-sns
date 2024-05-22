@@ -190,7 +190,9 @@ impl TokenSwap {
     }
 
     pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<SwapInfo> {
-        self.swap.get(&block_index).cloned()
+        let swap_info_heap = self.swap.get(&block_index).cloned();
+        let swap_info_history = self.history.get(&block_index);
+        swap_info_heap.or(swap_info_history)
     }
 
     pub fn update_status(&mut self, block_index: BlockIndex, status: SwapStatus) {
@@ -229,5 +231,22 @@ impl TokenSwap {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.token_swap_block_index = Some(swap_block_index);
         } // other case is not possible because it was initialised before
+    }
+
+    pub fn archive_swap(&mut self, block_index: BlockIndex) -> Result<(), String> {
+        let swap_info = self.swap.get(&block_index);
+        match swap_info {
+            Some(swap) => {
+                self.history.insert(block_index, swap.clone());
+                self.swap.remove(&block_index);
+                Ok(())
+            }
+            None =>
+                Err(
+                    format!(
+                        "can't archive {block_index} because it doesn't exist in swap heap memory"
+                    )
+                ),
+        }
     }
 }
