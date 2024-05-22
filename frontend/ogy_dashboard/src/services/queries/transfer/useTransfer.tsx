@@ -14,6 +14,9 @@ interface ISendTokensParams {
 
 const transfer = async ({ ledgerActor, amount, to }: ISendTokensParams) => {
   // https://forum.dfinity.org/t/difference-between-nnsledger-container-icrc1-transfer-and-transfer/20535/5
+  console.log("transfer:");
+  console.log(`to: ${Principal.fromText(to)}`);
+  console.log(`amount: ${amount}`);
   const resultTransfer = await ledgerActor.icrc1_transfer({
     to: { owner: Principal.fromText(to), subaccount: [] },
     fee: [],
