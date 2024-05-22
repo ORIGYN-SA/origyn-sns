@@ -11,7 +11,6 @@ pub mod updates;
 
 use lifecycle::*;
 use queries::*;
-use model::*;
 use updates::*;
 
 export_candid!();
