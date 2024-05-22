@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
@@ -7,7 +5,8 @@ use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use crate::model::{ token_swap::TokenSwap };
+use crate::model::token_swap::TokenSwap;
+use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
 
 canister_state!(RuntimeState);
 
@@ -69,7 +68,7 @@ pub struct Data {
     /// The minting account of legacy OGY where tokens are burned to
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
-    pub requesting_principals: HashSet<Principal>,
+    pub requesting_principals: RequestingPrincipals,
 }
 
 impl Data {
@@ -90,7 +89,7 @@ impl Data {
                 &ogy_legacy_minting_account_principal,
                 &Subaccount([0; 32])
             ),
-            requesting_principals: HashSet::default(),
+            requesting_principals: RequestingPrincipals::default(),
         }
     }
 }

@@ -6,16 +6,14 @@ use ic_ledger_types::{ Subaccount, Tokens, BlockIndex };
 use ic_stable_structures::StableBTreeMap;
 use ledger_utils::principal_to_legacy_account_id;
 use serde::{ Deserialize, Serialize };
-use ogy_token_swap_api::updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse;
+use ogy_token_swap_api::{
+    token_swap::{ BurnFailReason, RecoverMode, SwapError, SwapStatus },
+    updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse,
+};
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 
 use crate::memory::{ get_swap_history_memory, VM };
-use ogy_token_swap_api::{
-    types::token_swap::{ BlockFailReason, SwapInfo },
-    RecoverMode,
-    SwapError,
-    SwapStatus,
-};
+use ogy_token_swap_api::{ types::token_swap::{ BlockFailReason, SwapInfo } };
 
 #[derive(Serialize, Deserialize)]
 pub struct TokenSwap {
@@ -114,7 +112,22 @@ impl TokenSwap {
                                     }
                                 }
                             }
-                            SwapError::BurnFailed(_) => Ok(Some(RecoverMode::RetryBurn)),
+                            SwapError::BurnFailed(burn_fail_reason) =>
+                                match burn_fail_reason {
+                                    BurnFailReason::TokenBalanceAndSwapRequestDontMatch => {
+                                        // If the balance is too low, there is no direct way to recover. The user has to
+                                        // withdraw and submit a new request with a new block index. So this block index
+                                        // will never be recoverable
+                                        Err(
+                                            "Token balance in subaccount is too small to perform swap for requested block. Skipping swap.".to_string()
+                                        )
+                                    }
+                                    | BurnFailReason::CallError(_)
+                                    | BurnFailReason::TransferError(_) => {
+                                        // If the burn failed because of transfer or call error, we try to recover by trying again.
+                                        Ok(Some(RecoverMode::RetryBurn))
+                                    }
+                                }
                             SwapError::TransferFailed(_) => Ok(Some(RecoverMode::RetryTransfer)),
                             SwapError::UnexpectedError(reason) =>
                                 Err(
@@ -177,16 +190,7 @@ impl TokenSwap {
     }
 
     pub fn get_swap_info(&self, block_index: BlockIndex) -> Option<SwapInfo> {
-        let active_swap = self.swap.get(&block_index);
-        let completed_swap = self.history.get(&block_index);
-        if active_swap.is_some() {
-            return active_swap.cloned();
-        }
-        if completed_swap.is_some() {
-            completed_swap
-        } else {
-            None
-        }
+        self.swap.get(&block_index).cloned()
     }
 
     pub fn update_status(&mut self, block_index: BlockIndex, status: SwapStatus) {
@@ -195,15 +199,15 @@ impl TokenSwap {
         }; // other case is not possible because it was initialised before
     }
 
-    pub fn set_amount(&mut self, block_index: BlockIndex, amount: Tokens) {
+    pub fn set_amount(&mut self, block_index: BlockIndex, amount: u64) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.amount = amount;
         } // other case is not possible because it was initialised before
     }
-    pub fn get_amount(&self, block_index: BlockIndex) -> Tokens {
+    pub fn get_amount(&self, block_index: BlockIndex) -> u64 {
         match self.swap.get(&block_index) {
             Some(swap_info) => swap_info.amount,
-            None => Tokens::from_e8s(0), // this is not possible because it was initialised before
+            None => 0, // this is not possible because it was initialised before
         }
     }
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {

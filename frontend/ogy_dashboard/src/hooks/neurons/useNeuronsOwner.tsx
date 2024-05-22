@@ -4,7 +4,6 @@ import { useCanister } from "@connect2ic/react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
-import { fetchPriceOGY } from "@services/queries/accounts/fetchPriceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
@@ -21,6 +20,10 @@ const useNeuronsOwner = ({
   const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
+  const [totalStakedOGY, setTotalStakedOGY] = useState<null | number>(null);
+  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
+    null | number
+  >(null);
 
   const {
     data: nervousSystemParameters,
@@ -53,21 +56,6 @@ const useNeuronsOwner = ({
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
   });
 
-  const {
-    data: priceOGY,
-    isSuccess: isSuccessFetchPriceOGY,
-    isError: isErrorFetchPriceOGY,
-    isLoading: isLoadingFetchPriceOGY,
-    error: errorFetchPriceOGY,
-  } = useQuery({
-    queryKey: ["fetchPriceOGY", isConnected],
-    queryFn: () => fetchPriceOGY(),
-    enabled:
-      !!isConnected &&
-      !!isSuccessGetNervousSystemParameters &&
-      !!isSuccessListNeurons,
-  });
-
   const neuronClaimBalance = useQueries({
     queries:
       neurons?.map(({ id: neuronId }) => {
@@ -87,8 +75,7 @@ const useNeuronsOwner = ({
           enabled:
             !!isConnected &&
             !!isSuccessGetNervousSystemParameters &&
-            !!isSuccessListNeurons &&
-            !!isSuccessFetchPriceOGY,
+            !!isSuccessListNeurons,
         };
       }) ?? [],
   });
@@ -96,29 +83,13 @@ const useNeuronsOwner = ({
   const isSuccess =
     isSuccessGetNervousSystemParameters &&
     isSuccessListNeurons &&
-    isSuccessFetchPriceOGY &&
     neuronClaimBalance.every((result) => result.isSuccess);
 
   const _totalStakedRewardsOGY = neuronClaimBalance.reduce(
     (accumulator, currentValue) =>
-      accumulator + (currentValue.data ? currentValue.data.balanceOGY : 0),
+      accumulator + (currentValue.data ? currentValue.data.balance : 0),
     0
   );
-  const _totalStakedRewardsOGYUSD = neuronClaimBalance.reduce(
-    (accumulator, currentValue) =>
-      accumulator +
-      (currentValue.data
-        ? currentValue.data.balanceOGY * priceOGY?.ogyPrice
-        : 0),
-    0
-  );
-
-  const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
-    null | number
-  >(null);
-  const [totalStakedRewardsOGYUSD, setTotalStakedRewardsOGYUSD] = useState<
-    null | number
-  >(null);
 
   const _totalStakedOGY =
     neurons?.reduce(
@@ -126,37 +97,17 @@ const useNeuronsOwner = ({
         accumulator + (currentValue ? currentValue.stakedAmount : 0),
       0
     ) ?? 0;
-  const _totalStakedOGYUSD =
-    neurons?.reduce(
-      (accumulator, currentValue) =>
-        accumulator +
-        (currentValue ? currentValue.stakedAmount * priceOGY?.ogyPrice : 0),
-      0
-    ) ?? 0;
-
-  const [totalStakedOGY, setTotalStakedOGY] = useState<null | string>(null);
-  const [totalStakedOGYUSD, setTotalStakedOGYUSD] = useState<null | number>(
-    null
-  );
 
   useEffect(() => {
     if (isSuccess) {
       setTotalStakedRewardsOGY(_totalStakedRewardsOGY);
-      setTotalStakedRewardsOGYUSD(_totalStakedRewardsOGYUSD);
-      setTotalStakedOGY(roundAndFormatLocale({ number: _totalStakedOGY }));
-      setTotalStakedOGYUSD(_totalStakedOGYUSD);
+      setTotalStakedOGY(_totalStakedOGY);
     }
-  }, [
-    isSuccess,
-    _totalStakedRewardsOGY,
-    _totalStakedRewardsOGYUSD,
-    _totalStakedOGY,
-    _totalStakedOGYUSD,
-  ]);
+  }, [isSuccess, _totalStakedRewardsOGY, _totalStakedOGY]);
 
   const rows = isSuccess
     ? neurons?.map((neuron, index) => {
-        const claimAmount = neuronClaimBalance[index]?.data?.balanceOGY;
+        const claimAmount = neuronClaimBalance[index]?.data?.balance;
         const id2Hex = neuron?.id2Hex;
         const stakedAmount = neuron?.stakedAmountToString;
         const state = neuron?.state;
@@ -218,29 +169,34 @@ const useNeuronsOwner = ({
   return {
     stakedRewardsOGY: {
       totalStakedRewardsOGY,
-      totalStakedRewardsOGYUSD,
+      string: {
+        totalStakedRewardsOGY: roundAndFormatLocale({
+          number: _totalStakedRewardsOGY,
+        }),
+      },
       neuronIds: neurons?.map((neuron) => neuron.id2Hex) ?? [],
     },
     stakedOGY: {
       totalStakedOGY,
-      totalStakedOGYUSD,
+      string: {
+        totalStakedOGY: roundAndFormatLocale({
+          number: _totalStakedOGY,
+        }),
+      },
     },
     neuronsList: { rows, rowCount: rows?.length ?? 0 },
     isLoading:
       isLoadingListNeurons ||
       isLoadingGetNervousSystemParameters ||
-      isLoadingFetchPriceOGY ||
       neuronClaimBalance.some((query) => query.isLoading),
     isSuccess,
     isError:
       isErrorListNeurons ||
       isErrorGetNervousSystemParameters ||
-      isErrorFetchPriceOGY ||
       neuronClaimBalance.some((query) => query.isError),
     error:
       errorListNeurons ||
       errorGetNervousSystemParameters ||
-      errorFetchPriceOGY ||
       neuronClaimBalance.map((query) => query.error).filter(Boolean)[0],
   };
 };

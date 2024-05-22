@@ -5,7 +5,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
-import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransfer from "@services/queries/transfer/useTransfer";
@@ -18,7 +18,7 @@ const Transfer = ({ show, handleClose }) => {
     data: balanceOGY,
     isSuccess: isSuccessFetchBalanceOGY,
     refetch: refetchFetchOGYBalance,
-  } = useFetchBalanceOGY({});
+  } = useFetchBalanceOGYOwner();
 
   const {
     mutate: transfer,
@@ -85,7 +85,7 @@ const Transfer = ({ show, handleClose }) => {
 
   const isAmountUnderBalance = (value) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
-      const balance = BigInt(balanceOGY.balanceOGYe8s);
+      const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
       if (amount > balance) return false;
     }
@@ -187,7 +187,7 @@ const Transfer = ({ show, handleClose }) => {
                   src="/ogy_logo.svg"
                   alt="OGY Logo"
                 />
-                <span>{balanceOGY.balanceOGY} OGY</span>
+                <span>{balanceOGY.balance} OGY</span>
               </div>
             </div>
           </div>
