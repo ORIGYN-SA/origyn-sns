@@ -14,8 +14,9 @@ import { colors as themeColors } from "@theme/preset";
 
 export interface PieChartData {
   name: string;
-  value: number;
+  value?: number;
   valueToString?: string;
+  color?: string;
 }
 
 interface PieChartProps {
