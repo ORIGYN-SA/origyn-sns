@@ -2,13 +2,16 @@ use candid::Nat;
 use canister_time::run_now_then_interval;
 use futures::future::join_all;
 use icrc_ledger_types::icrc1::account::Account;
-use super_stats_v3_api::stats::queries::{
-    get_account_history::GetAccountHistoryArgs,
-    get_principal_history::GetPrincipalHistoryArgs,
+use super_stats_v3_api::{
+    account_tree::HistoryData,
+    stats::queries::{
+        get_account_history::GetAccountHistoryArgs,
+        get_principal_history::GetPrincipalHistoryArgs,
+    },
 };
 use token_metrics_api::{ GOLD_TREASURY_SUBACCOUNT_STR, TEAM_PRINCIPALS };
 use std::{ str::FromStr, time::Duration };
-use tracing::{ debug, error };
+use tracing::{ debug, error, field::debug, info };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
@@ -36,21 +39,54 @@ pub async fn sync_governance_history() {
         days: 2000,
     };
 
-    // match super_stats_v3_c2c_client::get_principal_history(super_stats_canister_id, &principal_history_args).await {
-    //     Ok(principal_history) => {
-    //         match super_stats_v3_c2c_client::get_account_history(super_stats_canister_id, &principal_history_args).await {
-    //           Ok(treasury_history) => {
+    match
+        super_stats_v3_c2c_client::get_principal_history(
+            super_stats_canister_id,
+            &principal_history_args
+        ).await
+    {
+        Ok(principal_history) => {
+            match
+                super_stats_v3_c2c_client::get_account_history(
+                    super_stats_canister_id,
+                    &treasury_history_args
+                ).await
+            {
+                Ok(treasury_history) => {
+                    mutate_state(|state| {
+                        state.data.gov_stake_history = balance_difference(
+                            principal_history,
+                            treasury_history
+                        );
+                    });
+                }
+                Err(err) => {
+                    let message = format!("{err:?}");
+                    error!(?message, "Error while getting the treasury history");
+                }
+            }
+        }
+        Err(err) => {
+            let message = format!("{err:?}");
+            error!(?message, "Error while getting the governance principal history");
+        }
+    }
+}
 
-    //           }
-    //           Err(err) => {
-    //             let message = format!("{err:?}");
-    //             error!(?message, "Error while getting the treasury history");
-    //           }
-    //         }
-    //     }
-    //     Err(err) => {
-    //         let message = format!("{err:?}");
-    //         error!(?message, "Error while getting the governance principal history");
-    //     }
-    // }
+fn balance_difference(
+    vec1: Vec<(u64, HistoryData)>,
+    vec2: Vec<(u64, HistoryData)>
+) -> Vec<(u64, HistoryData)> {
+    let mut result: Vec<(u64, HistoryData)> = Vec::new();
+    for (index, item) in vec1.iter().enumerate() {
+        let data1 = item.clone();
+        let key1 = data1.0;
+        let history1 = data1.1;
+
+        let data2 = vec2[index].clone();
+        let history2 = data2.1;
+        result.push((key1, HistoryData { balance: history1.balance - history2.balance }));
+    }
+
+    result
 }

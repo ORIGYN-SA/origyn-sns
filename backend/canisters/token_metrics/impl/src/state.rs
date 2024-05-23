@@ -3,6 +3,7 @@ use canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
+use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
     GovernanceStats,
     PrincipalBalance,
@@ -102,6 +103,8 @@ pub struct Data {
     /// Same thing as above, but we now merge all subaccounts stats of a principal
     /// under the same principal item in the Map
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
+    /// Staking history for governance
+    pub gov_stake_history: Vec<(u64, HistoryData)>,
 }
 
 impl Data {
@@ -123,6 +126,7 @@ impl Data {
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),
+            gov_stake_history: Vec::new(),
         }
     }
 }
