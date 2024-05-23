@@ -13,6 +13,7 @@ use super::custom_types::SmallTX;
 pub struct AccountTree{
     pub accounts: SBTreeMap<u64, Overview>,
     pub accounts_history: SBTreeMap<(u64, u64), HistoryData>,
+    pub history_latest_balance_cache: SBTreeMap<u64, (u64, HistoryData)>,
     count: u64, // not used
     last_updated: u64, // not used
 }
@@ -24,6 +25,17 @@ enum TransactionType {
 }
 impl AccountTree {
 
+    fn find_previous_day_history(&mut self, account_ref: &u64) -> HistoryData {
+        match self.history_latest_balance_cache.get(account_ref) {
+            Some(last_history) => {
+                return last_history.to_owned().1;
+            }
+            None => {
+                return HistoryData::default();
+            }
+        }
+    }
+
     fn update_history_balance(&mut self, account_ref: &u64, stx: &SmallTX, tx_type: TransactionType) {
         let day_of_transaction = stx.time / 86400 / 1_000_000_000;
         let account_history_key = (*account_ref, day_of_transaction);
@@ -33,8 +45,9 @@ impl AccountTree {
             fee = RUNTIME_STATE.with(|s|{s.borrow().data.get_ledger_fee()})
         };
         
+        // This needs to find the last day available for this account
         if !self.accounts_history.contains_key(&account_history_key) {
-            let previous_day_balance = self.accounts_history.get(&(*account_ref, day_of_transaction - 1)).map_or(0, |previous_day| previous_day.balance);
+            let previous_day_balance = self.find_previous_day_history(account_ref).balance;
 
             let new_balance = match tx_type {
                 TransactionType::In => previous_day_balance.saturating_add(stx.value),
@@ -44,13 +57,16 @@ impl AccountTree {
             self.accounts_history.insert(account_history_key, HistoryData {
                 balance: new_balance,
             }).expect("Storage is full");
-            
+            // Update the cache with the latest known history
+            let _ = self.history_latest_balance_cache.insert(*account_ref, (day_of_transaction, HistoryData { balance: new_balance }));
         }
         else if let Some(mut ach) = self.accounts_history.get_mut(&account_history_key) {
             ach.balance = match tx_type {
                 TransactionType::In => ach.balance.saturating_add(stx.value),
                 TransactionType::Out => ach.balance.saturating_sub(stx.value).saturating_sub(fee)
             };
+            // Update the cache with the latest known history
+            let _ = self.history_latest_balance_cache.insert(*account_ref, (day_of_transaction, ach.clone()));
             // Should we update further days balance here as well?
             // Will we have a case where we process a new transaction before an old transaction? 
         }

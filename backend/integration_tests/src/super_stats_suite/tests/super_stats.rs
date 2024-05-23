@@ -176,6 +176,39 @@ fn principal_history_created() {
     // principal2: 15_000_000
     // principal3: 5_000_000
 
+    // .
+    // .
+    // .
+
+    // Day 8
+    // principal1: 60_000_000
+    // principal2: 15_000_000
+    // principal3: 25_000_000
+    pic.advance_time(Duration::from_secs(3 * 86410));
+    assert_eq!(
+        transfer(
+            &mut pic,
+            principal1.owner,
+            ledger_canister_id,
+            None,
+            principal3,
+            (20_000_000 * E8S_PER_OGY).into()
+        ),
+        Ok((5u8).into())
+    );
+
+    assert_eq!(
+        balance_of(&pic, ledger_canister_id, principal1),
+        Nat::from(60_000_000 * E8S_PER_OGY)
+    );
+    assert_eq!(
+        balance_of(&pic, ledger_canister_id, principal2),
+        Nat::from(15_000_000 * E8S_PER_OGY)
+    );
+    assert_eq!(
+        balance_of(&pic, ledger_canister_id, principal3),
+        Nat::from(25_000_000 * E8S_PER_OGY)
+    );
     // Init the target ledger for the super stats
     let super_stats_init_args = InitLedgerArgs {
         target: TargetArgs {
@@ -220,24 +253,33 @@ fn principal_history_created() {
 
     let p1_args = GetPrincipalHistoryArgs {
         account: principal1.to_string(),
-        days: 5,
+        days: 8,
     };
     let response1 = get_principal_history(&mut pic, controller, super_stats_canister_id, &p1_args);
     println!("Response from get_account_history: {response1:?}");
 
-    // 1 day ago = Day 5
+    // 1 day ago = Day 8
+    // principal1: 60_000_000
+    assert_eq!(response1[7].1.balance, (60_000_000 * E8S_PER_OGY) as u128);
+    // 2 days ago = Day 7
     // principal1: 80_000_000
-    assert_eq!(response1[0].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
-    // 2 days ago = Day 4
+    assert_eq!(response1[6].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
+    // 3 days ago = Day 6
+    // principal1: 80_000_000
+    assert_eq!(response1[5].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
+    // 4 days ago = Day 5
+    // principal1: 80_000_000
+    assert_eq!(response1[4].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
+    // 5 days ago = Day 4
     // principal1: 75_000_000
-    assert_eq!(response1[1].1.balance, (75_000_000 * E8S_PER_OGY) as u128);
-    // 3 days ago = Day 3
+    assert_eq!(response1[3].1.balance, (75_000_000 * E8S_PER_OGY) as u128);
+    // 6 days ago = Day 3
     // principal1: 70_000_000
     assert_eq!(response1[2].1.balance, (70_000_000 * E8S_PER_OGY) as u128);
-    // 4 days ago = Day 2
-    // principal1: 70_000_000
-    assert_eq!(response1[3].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
-    // 5 days ago = Day 1
-    // principal1: 70_000_000
-    assert_eq!(response1[4].1.balance, (100_000_000 * E8S_PER_OGY) as u128);
+    // 7 days ago = Day 2
+    // principal1: 80_000_000
+    assert_eq!(response1[1].1.balance, (80_000_000 * E8S_PER_OGY) as u128);
+    // 8 days ago = Day 1
+    // principal1: 100_000_000
+    assert_eq!(response1[0].1.balance, (100_000_000 * E8S_PER_OGY) as u128);
 }

@@ -66,7 +66,7 @@ pub fn fill_missing_days(mut history: Response, days: u64) -> Response {
     let mut last_data: Option<&HistoryData> = None;
     let current_day = get_current_day();
 
-    for day_offset in 0..=days {
+    for day_offset in (0..=days).rev() {
         let day = current_day - day_offset;
 
         match history.iter().find(|&&(d, _)| d == day) {
