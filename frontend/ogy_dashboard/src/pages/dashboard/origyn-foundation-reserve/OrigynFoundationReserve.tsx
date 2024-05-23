@@ -6,6 +6,7 @@ import fetchFoundationAssetsOGY, {
   FoundationAssetsOGY,
 } from "@services/queries/foundation/fetchFoundationAssetsOGYQuery";
 import { PieChart as PieChartTypes } from "@services/types/charts.types";
+import { usePieChart } from "@components/charts/pie/context";
 
 type OrigynFoundationReserve = {
   className?: string;
@@ -20,6 +21,7 @@ const OrigynFoundationReserve = ({
   const [totalSupplyVested, setTotalSupplyVested] = useState("0");
   const [dataPieChart, setDataPieChart] = useState([] as Array<PieChartTypes>);
   const colors = useMemo(() => ["#ff55c5", "#90306f"], []);
+  const { activeIndex, setActiveIndex } = usePieChart();
 
   const {
     data: foundationAssets,
@@ -61,9 +63,19 @@ const OrigynFoundationReserve = ({
       </div>
       <div className="grid grid-cols-1 gap-4">
         {dataPieChart.map(({ name, valueToString }, index) => (
-          <Card className="bg-surface-2 mt-8 pb-8" key={name}>
+          <Card
+            className={`bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
+              activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
+            } transition-opacity duration-300`}
+            key={name}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
             <div className="flex items-center text-lg">
-              {/* <img src="/ogy_logo.svg" alt="OGY Logo" /> */}
+              <div
+                className="h-3 w-3 rounded-full mr-2"
+                style={{ backgroundColor: colors[index] }}
+              ></div>
               <span className="text-content/60">{name}</span>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">
