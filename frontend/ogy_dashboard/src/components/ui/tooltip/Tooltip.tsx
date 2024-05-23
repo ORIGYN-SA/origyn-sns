@@ -9,6 +9,8 @@ interface TooltipProps
     className?: string;
     id: string;
     place?: string;
+    clickable?: boolean;
+    openOnClick?: boolean;
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
@@ -24,6 +26,8 @@ const Tooltip = ({
   id,
   place = "bottom",
   children,
+  clickable = false,
+  openOnClick = false,
   ...restProps
 }: TooltipProps) => {
   return (
@@ -31,6 +35,9 @@ const Tooltip = ({
       className={`${className}`}
       id={id}
       place={place}
+      clickable={clickable}
+      // delayShow={300}
+      openOnClick={openOnClick}
       {...restProps}
     >
       {children}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, LoaderSpin } from "@components/ui";
+import { Card, LoaderSpin, TooltipInfo, Button } from "@components/ui";
 import useFetchBalanceOGY from "@hooks/accounts/useFetchBalanceOGY";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 
@@ -52,11 +52,35 @@ const OrigynTreasuryAccount = ({
             className="bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8"
             key={data.token}
           >
-            <div className="flex items-center text-lg font-semibold">
-              <img src="/ogy_logo.svg" alt="OGY Logo" />
-              <span className="ml-2 text-content/60">
-                ORA Balance ({data.token})
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center text-lg font-semibold">
+                <img src="/ogy_logo.svg" alt="OGY Logo" />
+                <span className="ml-2 text-content/60">
+                  ORA Balance ({data.token})
+                </span>
+              </div>
+              <TooltipInfo id="tooltip-ora-ogy" clickable={true}>
+                <p>
+                  Token holders are able to stake their OGY and gain rewards by
+                  participating in governance.
+                </p>
+                <p>
+                  Rewards will come from the ORIGYN Reward Account, which ORIGYN
+                  will seed with one billion OGY.
+                </p>
+                <p>
+                  The reward pool consists of 250 million OGY in its first year
+                  and will halve every two years to incentivize and reward early
+                  and long-term contributors of the ecosystem.
+                </p>
+                <a
+                  href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="my-4 mx-auto w-full">More details</Button>
+                </a>
+              </TooltipInfo>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">
               <span className="mr-3">{data.value}</span>

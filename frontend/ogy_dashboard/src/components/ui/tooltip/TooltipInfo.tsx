@@ -5,16 +5,28 @@ import Tooltip from "./Tooltip";
 interface TooltipInfoProps extends PropsWithChildren {
   className?: string;
   id?: string;
+  clickable?: boolean;
+  openOnClick?: boolean;
 }
 
-const TooltipInfo = ({ children, id = "tootltip-id" }: TooltipInfoProps) => {
+const TooltipInfo = ({
+  children,
+  id = "tootltip-id",
+  clickable = false,
+  openOnClick = true,
+}: TooltipInfoProps) => {
   return (
     <div>
       <InformationCircleIcon
-        className="h-6 w-6 text-content"
+        className="h-6 w-6 text-content cursor-pointer"
         data-tooltip-id={id}
       />
-      <Tooltip id={id} className="max-w-64">
+      <Tooltip
+        id={id}
+        clickable={clickable}
+        openOnClick={openOnClick}
+        className="max-w-64"
+      >
         {children}
       </Tooltip>
     </div>
