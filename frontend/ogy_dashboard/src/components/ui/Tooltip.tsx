@@ -12,8 +12,14 @@ interface TooltipProps
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
-  background-color: rgb(var(--color-content)) !important;
-  color: rgb(var(--color-surface-1)) !important;
+  background-color: rgb(var(--color-surface-2)) !important;
+  color: rgb(var(--color-content)) !important;
+  &.tooltip {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 90%;
+    width: max-content;
+  }
 `;
 
 const Tooltip = ({

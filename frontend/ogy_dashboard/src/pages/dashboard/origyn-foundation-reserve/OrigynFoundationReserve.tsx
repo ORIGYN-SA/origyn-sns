@@ -64,8 +64,8 @@ const OrigynFoundationReserve = ({
       <div className="grid grid-cols-1 gap-4">
         {dataPieChart.map(({ name, valueToString }, index) => (
           <Card
-            className={`bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
-              activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
+            className={`bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/5 ${
+              activeIndex === index ? `dark:bg-white/10 bg-black/5` : ``
             } transition-opacity duration-300`}
             key={name}
             onMouseEnter={() => setActiveIndex(index)}

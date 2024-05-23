@@ -48,7 +48,10 @@ const OrigynTreasuryAccount = ({
       <div className="text-lg font-semibold">ORIGYN Reward Account (OTA)</div>
       {isSuccessBalanceOGY && (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-          <Card className="bg-surface-2 mt-8 pb-8" key={data.token}>
+          <Card
+            className="bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8"
+            key={data.token}
+          >
             <div className="flex items-center text-lg font-semibold">
               <img src="/ogy_logo.svg" alt="OGY Logo" />
               <span className="ml-2 text-content/60">

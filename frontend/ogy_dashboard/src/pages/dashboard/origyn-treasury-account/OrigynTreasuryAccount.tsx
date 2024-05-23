@@ -71,7 +71,10 @@ const OrigynTreasuryAccount = ({
       {isSuccessBalanceICP && isSuccessBalanceOGY && (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data.map(({ value, token, className }) => (
-            <Card className="bg-surface-2 mt-8 pb-8" key={token}>
+            <Card
+              className="bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8"
+              key={token}
+            >
               <div className="flex items-center text-lg font-semibold">
                 <img src="/ogy_logo.svg" alt="OGY Logo" />
                 <span className="ml-2 text-content/60">
