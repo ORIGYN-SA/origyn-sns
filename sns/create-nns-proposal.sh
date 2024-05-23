@@ -8,3 +8,8 @@
 NEURON_ID="2625453517496851295" # dedicate neuron for this proposal
 
 dfx sns propose --network ic --neuron $NEURON_ID sns_init.yaml
+
+
+# dfx sns threw an error when trying to launch, had to download direct client
+curl --fail -L "https://download.dfinity.systems/ic/751b2a0cf904934b4afb62b1457f6bf4f0a20275/binaries/x86_64-darwin/sns.gz" -o sns.gz
+./sns propose --network ic --neuron-id 2625453517496851295 sns_init.yaml
