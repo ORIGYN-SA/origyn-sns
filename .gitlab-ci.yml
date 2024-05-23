@@ -144,7 +144,8 @@ generate test declarations:
           # "tx_store_v3 test build",
         ]
   script:
-    - dfx generate
+    - dfx generate ogy_token_swap
+    - dfx generate sns_rewards
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
     paths:
