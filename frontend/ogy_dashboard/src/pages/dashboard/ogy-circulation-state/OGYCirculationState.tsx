@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import Card from "@components/ui/Card";
 import PieChart from "@components/charts/pie/Pie";
 import useOGYCirculationState from "./useOGYCirculationState";
+import { usePieChart } from "@components/charts/pie/context";
 
 type OGYCirculationState = {
   className?: string;
@@ -13,6 +14,7 @@ const OGYCirculationState = ({
 }: OGYCirculationState) => {
   const colors = useMemo(() => ["#645eff", "#333089"], []);
   const { circulationData, isLoading, error } = useOGYCirculationState();
+  const { activeIndex, setActiveIndex } = usePieChart();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -47,9 +49,19 @@ const OGYCirculationState = ({
       </div>
       <div className="grid grid-cols-1 gap-4">
         {circulationData.dataPieChart.map(({ name, valueToString }, index) => (
-          <Card className="bg-surface-2 mt-8 pb-8" key={name}>
+          <Card
+            className={`bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
+              activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
+            } transition-opacity duration-300`}
+            key={name}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
             <div className="flex items-center text-lg">
-              {/* <img src="/ogy_logo.svg" alt="OGY Logo" /> */}
+              <div
+                className="h-3 w-3 rounded-full mr-2"
+                style={{ backgroundColor: colors[index] }}
+              ></div>
               <span className="text-content/60">{name}</span>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">
