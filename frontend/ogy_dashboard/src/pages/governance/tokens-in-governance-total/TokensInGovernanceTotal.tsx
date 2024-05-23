@@ -48,7 +48,7 @@ const TokensInGovernanceTotal = ({ className }: { className: string }) => {
                 <Card
                   className={`bg-surface-2 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
                     activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
-                  } transition-opacity duration-300 `}
+                  } transition-opacity duration-300`}
                   key={name}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(null)}
