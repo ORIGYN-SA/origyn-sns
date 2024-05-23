@@ -11,6 +11,7 @@ import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
+import UsersMap from "./users-map/UsersMap";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const Dashboard = () => {
           <OrigynFoundationReserve className="w-full" />
           {/* TODO: Disabling for now. Waiting data after launch of SNS */}
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
+          <UsersMap className="w-full col-span-1 xl:col-span-2" />
           <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
           <OrigynRewardAccount className="w-full col-span-1 xl:col-span-2" />
           <TokenDistributionList className="w-full col-span-1 xl:col-span-2" />
