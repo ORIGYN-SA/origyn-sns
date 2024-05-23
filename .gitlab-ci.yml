@@ -219,6 +219,7 @@ local deploy and tests:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       needs:
         [
+          "generate test declarations",
           "ogy_token_swap test build",
           "sns_rewards test build",
           # "super_indexer_v3 test build",
