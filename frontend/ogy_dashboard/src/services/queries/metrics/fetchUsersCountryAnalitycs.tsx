@@ -27,7 +27,6 @@ const fn = async (): Promise<UserByCountry[]> => {
     const { data } = await analitycsAPI.get(
         `/dashboard.origyn.ch/countries?period=30d&date=2024-05-23&filters=%7B%7D&with_imported=true&auth=${PLAUSIBLE_API_KEY}&limit=300`
     );
-    console.log(data);
     return data;
 };
 

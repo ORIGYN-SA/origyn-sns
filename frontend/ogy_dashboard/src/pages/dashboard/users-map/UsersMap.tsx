@@ -9,10 +9,8 @@ type UsersMapProps = {
 const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
     const { data } = useUsersCountryAnalitycs();
 
-    console.log("DATA MAP", data);
     useEffect(() => {
         if (data.length) {
-            console.log(data);
             const datObj = data.reduce((res, c: any) => ({
                 ...res, [c.alpha_3]: {
                     ...c,

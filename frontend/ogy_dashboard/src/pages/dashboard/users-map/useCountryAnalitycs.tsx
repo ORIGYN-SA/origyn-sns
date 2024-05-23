@@ -12,8 +12,6 @@ const useUsersCountryAnalitycs = () => {
     error,
   }: UseQueryResult<UserByCountry[]> = useQuery(fetchUsersCountryAnalitycs({}));
 
-
-  console.log("12323", fetchedData);
   useEffect(() => {
     if (isSuccess) {
       setData(fetchedData);
