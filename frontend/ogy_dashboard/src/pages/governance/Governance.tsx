@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useMemo, Suspense } from "react";
-import { useLoaderData, defer, Await, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useLoaderData, defer, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
@@ -117,7 +118,20 @@ export const Governance = () => {
             staking their OGY and voting on proposals. By participating in the
             decision-making process, these staked token holders earn rewards.
           </p>
-          <Button className="mt-8">Learn more</Button>
+          <a
+            href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="mt-8">
+              <div className="flex items-center justify-center">
+                <div>Learn more</div>
+                <div>
+                  <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
+                </div>
+              </div>
+            </Button>
+          </a>
         </div>
         <EstimateRewards />
       </div>
@@ -136,19 +150,29 @@ export const Governance = () => {
           </Card>
         ))}
       </div>
-      <div className="flex flex-col xl:flex-row justify-between items-center xl:items-end mt-32 mb-12">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-32 mb-12">
         <div className="text-center xl:text-left">
           <h2 className="text-3xl font-bold">Tokens in Governance</h2>
-          <p className="mt-2">
+          <p className="mt-4">
             Holders of OGY tokens can directly influence the ORIGYN Network by
-            staking their OGY and voting on proposals. By participating in the
-            decision-making process, these staked token holders earn rewards and
-            govern collectively and democratically. Learn more about OGY
+            staking their OGY and voting on proposals.{" "}
           </p>
+          <p className="mb-1">
+            By participating in the decision-making process, these staked token
+            holders earn rewards and govern collectively and democratically.
+          </p>
+          <a
+            href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-content font-semibold hover:underline"
+          >
+            Learn more about OGY
+          </a>
         </div>
-        <div className="mt-8 xl:mt-0 pl-0 xl:pl-16 shrink-0">
+        {/* <div className="mt-8 xl:mt-0 pl-0 xl:pl-16 shrink-0">
           <Button>More details</Button>
-        </div>
+        </div> */}
       </div>
       <PieChartProvider>
         <TokensInGovernanceTotal
@@ -163,19 +187,8 @@ export const Governance = () => {
         />
       </PieChartProvider>
 
-      <Suspense fallback={<p>Loading dataTokensInGovernanceKpi...</p>}>
-        <Await
-          resolve={data.dataTokensInGovernanceKpi}
-          errorElement={<p>Error loading dataTokensInGovernanceKpi!</p>}
-        >
-          {(dataTokensInGovernanceKpi) => (
-            <TokensInGovernanceKpi
-              className="mb-16"
-              data={dataTokensInGovernanceKpi}
-            />
-          )}
-        </Await>
-      </Suspense>
+      <TokensInGovernanceKpi className="mb-16" />
+
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">
           <h2 className="text-3xl font-bold">Proposals</h2>

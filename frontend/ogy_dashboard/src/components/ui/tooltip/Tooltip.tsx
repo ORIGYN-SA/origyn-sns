@@ -27,7 +27,6 @@ const Tooltip = ({
   place = "bottom",
   children,
   clickable = false,
-  openOnClick = false,
   ...restProps
 }: TooltipProps) => {
   return (
@@ -36,8 +35,8 @@ const Tooltip = ({
       id={id}
       place={place}
       clickable={clickable}
-      // delayShow={300}
-      openOnClick={openOnClick}
+      openEvents={{ click: true }}
+      closeEvents={{ click: true }}
       {...restProps}
     >
       {children}
