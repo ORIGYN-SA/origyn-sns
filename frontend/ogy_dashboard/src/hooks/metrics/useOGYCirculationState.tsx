@@ -18,6 +18,7 @@ const useOGYCirculationState = () => {
     data: foundationAssets,
     isSuccess: isSuccessFetchFoundationAssets,
     isLoading: isLoadingFoundationAssets,
+    isError: isErrorFoundationAssets,
     error: errorFoundationAssets,
   }: UseQueryResult<FoundationAssetsOGY> = useQuery(
     fetchFoundationAssetsOGY({})
@@ -53,10 +54,12 @@ const useOGYCirculationState = () => {
     }
   }, [isSuccessFetchFoundationAssets, foundationAssets]);
 
+  const isSuccess = isSuccessFetchFoundationAssets;
+  const isError = isErrorFoundationAssets;
   const isLoading = isLoadingFoundationAssets;
   const error = errorFoundationAssets;
 
-  return { circulationData, isLoading, error };
+  return { data: circulationData, isSuccess, isError, isLoading, error };
 };
 
 export default useOGYCirculationState;

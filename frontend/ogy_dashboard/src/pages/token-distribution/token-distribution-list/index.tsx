@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Table, LoaderSpin, Tooltip } from "@components/ui";
+import { Table, Tooltip, Skeleton } from "@components/ui";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { IProposalData } from "@services/types";
 import { TableProps } from "@helpers/table/useTable";
@@ -106,11 +106,7 @@ const TokenDistributionList = ({
           setSorting={setSorting}
         />
       )}
-      {isLoadingFetchTokenHolders && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin size="md" />
-        </div>
-      )}
+      {isLoadingFetchTokenHolders && <Skeleton count={10} height={52} />}
       {isErrorFetchTokenHolders && (
         <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
           <div>{errorFetchTokenHolders?.message}</div>

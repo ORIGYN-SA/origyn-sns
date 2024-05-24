@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Card from "@components/ui/Card";
+import Card from "@components/ui/cards/Card";
 import AreaChart from "@components/charts/area/Area";
 
 type GovernanceStakingOverview = {

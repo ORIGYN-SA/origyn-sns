@@ -1,8 +1,10 @@
-interface ILoaderSpinProps {
+const LoaderSpin = ({
+  size,
+  className,
+}: {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-}
-
-const LoaderSpin = ({ size }: ILoaderSpinProps) => {
+  className?: string;
+}) => {
   const getSize = (size?: string) => {
     switch (size) {
       case "xs":
@@ -20,11 +22,13 @@ const LoaderSpin = ({ size }: ILoaderSpinProps) => {
     }
   };
   return (
-    <div
-      className={`border-accent/20 border-t-accent animate-spin rounded-full ${getSize(
-        size
-      )}`}
-    />
+    <div className={`${className}`}>
+      <div
+        className={`border-accent/20 border-t-accent animate-spin rounded-full ${getSize(
+          size
+        )}`}
+      />
+    </div>
   );
 };
 
