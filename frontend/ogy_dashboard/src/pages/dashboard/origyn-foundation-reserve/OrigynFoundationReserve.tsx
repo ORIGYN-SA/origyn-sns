@@ -7,6 +7,7 @@ import fetchFoundationAssetsOGY, {
 } from "@services/queries/foundation/fetchFoundationAssetsOGYQuery";
 import { PieChart as PieChartTypes } from "@services/types/charts.types";
 import { usePieChart } from "@components/charts/pie/context";
+import { TooltipInfo } from "@components/ui";
 
 type OrigynFoundationReserve = {
   className?: string;
@@ -21,6 +22,38 @@ const OrigynFoundationReserve = ({
   const [totalSupplyVested, setTotalSupplyVested] = useState("0");
   const [dataPieChart, setDataPieChart] = useState([] as Array<PieChartTypes>);
   const colors = useMemo(() => ["#ff55c5", "#90306f"], []);
+  const infos = useMemo(
+    () => [
+      {
+        id: "tooltip-amount-locked",
+        value: (
+          <div>
+            <p>ORIGYN foundation tokens locked in stakes or vestings.</p>
+            <br />
+            <p>
+              1) Stakes- tokens that are generating the rewards thanks to
+              participation in the governance voting.
+            </p>
+            <p>Those tokens were locked voluntarily.</p>
+            <br />
+            <p>
+              2) Vestings- Tokens that are not receiving any rewards and they
+              cant participate in voting.
+            </p>
+            <p>
+              Those tokens were locked by your contract with the ORIGYN
+              Foundation.
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: "tooltip-amount-unlocked",
+        value: "Unlocked found owned by ORIGYN foundation.",
+      },
+    ],
+    []
+  );
   const { activeIndex, setActiveIndex } = usePieChart();
 
   const {
@@ -43,9 +76,10 @@ const OrigynFoundationReserve = ({
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
         <div className="text-lg font-semibold">OGY Foundation Reserve</div>
-        <button className="text-sm font-medium rounded-full px-3 py-1">
-          Info
-        </button>
+        <TooltipInfo id="tooltip-amount-foundation">
+          Total amount of OGY tokens owned by ORIGYN foundation across all
+          wallets.
+        </TooltipInfo>
       </div>
 
       <div className="mt-6 h-80 rounded-xl">
@@ -64,19 +98,24 @@ const OrigynFoundationReserve = ({
       <div className="grid grid-cols-1 gap-4">
         {dataPieChart.map(({ name, valueToString }, index) => (
           <Card
-            className={`bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
-              activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
+            className={`bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/5 ${
+              activeIndex === index ? `dark:bg-white/10 bg-black/5` : ``
             } transition-opacity duration-300`}
             key={name}
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
           >
-            <div className="flex items-center text-lg">
-              <div
-                className="h-3 w-3 rounded-full mr-2"
-                style={{ backgroundColor: colors[index] }}
-              ></div>
-              <span className="text-content/60">{name}</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center text-lg">
+                <div
+                  className="h-3 w-3 rounded-full mr-2"
+                  style={{ backgroundColor: colors[index] }}
+                ></div>
+                <span className="text-content/60">{name}</span>
+              </div>
+              <TooltipInfo id={infos[index].id}>
+                {infos[index].value}
+              </TooltipInfo>
             </div>
             <div className="flex items-center mt-4 text-2xl font-semibold">
               <span className="mr-3">{valueToString}</span>
