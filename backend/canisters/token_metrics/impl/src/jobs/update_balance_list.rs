@@ -1,13 +1,12 @@
 use candid::Principal;
 use canister_time::run_now_then_interval;
-use icrc_ledger_types::icrc1::account::{ self, Account, Subaccount };
+use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
 use super_stats_v3_api::{
     stats::queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
     stats::queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
 use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
-use token_metrics_api::GOLD_TREASURY_SUBACCOUNT_STR;
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::str::FromStr;
 use std::{ collections::HashMap, time::Duration };
@@ -29,10 +28,6 @@ pub fn run() {
 pub async fn update_balance_list() {
     debug!("update_balance_list");
     let (principal_holders_map, account_holders_map) = get_all_holders().await;
-    // let merged_holders: HashMap<String, Overview> = principal_holders_map
-    //     .into_iter()
-    //     .chain(account_holders_map.into_iter())
-    //     .collect();
 
     let mut temp_wallets_list: NormalBTreeMap<Account, WalletOverview> = NormalBTreeMap::new();
     let mut temp_merged_wallets_list: NormalBTreeMap<
@@ -94,6 +89,8 @@ pub async fn update_balance_list() {
         check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
     }
 
+    let treasury_account = read_state(|state| state.data.treasury_account.clone());
+
     mutate_state(|state| {
         // Remove the first item from the merged array, which is the governance canister
         // including all stakes, also available in each principal.governance in the list
@@ -103,7 +100,7 @@ pub async fn update_balance_list() {
             subaccount: None,
         };
 
-        match string_to_account(GOLD_TREASURY_SUBACCOUNT_STR.to_string()) {
+        match string_to_account(treasury_account.to_string()) {
             Ok(treasury_account) => {
                 match temp_wallets_list.get(&treasury_account) {
                     Some(v) => {

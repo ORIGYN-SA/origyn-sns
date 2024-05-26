@@ -87,6 +87,8 @@ pub struct Data {
     pub sns_ledger_canister: Principal,
     /// Super Stats canister that provides ledger stats
     pub super_stats_canister: Principal,
+    /// The account that holds the treasury
+    pub treasury_account: String,
     /// Information about governance neurons sync
     pub sync_info: SyncInfo,
     /// Stores the mapping of each principal to its neurons
@@ -111,12 +113,14 @@ impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
-        super_stats_canister_id: CanisterId
+        super_stats_canister_id: CanisterId,
+        treasury_account: String
     ) -> Self {
         Self {
             super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
+            treasury_account,
             authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),

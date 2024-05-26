@@ -37,4 +37,3 @@ pub const TEAM_PRINCIPALS: [Account; 3] = [
     },
 ];
 
-pub const GOLD_TREASURY_SUBACCOUNT_STR: &str = "tr3th-kiaaa-aaaaq-aab6q-cai.7776d299b4a804a14862b02bff7b74d1b956e431f5f832525d966d67ff3d7ce8";
