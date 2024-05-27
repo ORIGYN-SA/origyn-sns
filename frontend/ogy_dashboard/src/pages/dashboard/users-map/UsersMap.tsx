@@ -54,7 +54,7 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
     return <Card className={`${className}`} {...restProps}>
         <div id="mapContainer" style={{ position: 'relative', width: '100%', height: '600px' }} />
         <div className="text-center text-lg font-semibold text-content/60">Total visitors: </div>
-        <div className="text-center font-semibold">{users}</div>
+        <div className="text-center font-semibold text-2xl">{users}</div>
     </Card>
 }
 

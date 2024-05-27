@@ -383,7 +383,7 @@ fn test_swap_amount_too_small() {
         result,
         SwapTokensResponse::InternalError(
             format!(
-                "Number of tokens in block is too small. Needs to be at least 1.00000000, found: 0.01000000."
+                "Number of tokens in block is too small. Needs to be at least 100000000, found: 1000000."
             )
         )
     );
@@ -950,6 +950,8 @@ fn get_deposit_account_helper(
         ogy_token_swap_api::request_deposit_account::Response::Success(account_id) => {
             Ok(account_id)
         }
+        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfListReached =>
+            Err("Max limit reached.".to_string()),
     }
 }
 

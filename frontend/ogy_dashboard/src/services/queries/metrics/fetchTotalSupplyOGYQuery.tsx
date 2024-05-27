@@ -21,7 +21,9 @@ const fn = async (): Promise<TotalSupplyOGY> => {
     `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply`
   );
 
-  const totalSupplyOGY = Number(data?.data[0][1]) ?? 0;
+  const totalSupplyOGY =
+    data?.data[0] && data?.data[0][1] ? Number(data?.data[0][1]) : 0;
+
   return {
     totalSupplyOGY,
     totalSupplyOGYToString:

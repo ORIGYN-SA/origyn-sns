@@ -1,6 +1,7 @@
 import { Principal } from "@dfinity/principal";
 import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
+
 interface IFetchBalanceOGY {
   actor: ActorSubclass;
   owner: string;
@@ -21,10 +22,10 @@ const fetchBalanceOGY = async ({
     subaccount: _subaccount,
   })) as number;
 
-  const balanceOGY = divideBy1e8(resultBalanceOgy);
+  const balance = divideBy1e8(resultBalanceOgy);
   return {
-    balanceOGYe8s: resultBalanceOgy,
-    balanceOGY,
+    balanceE8s: resultBalanceOgy,
+    balance,
     string: {
       balance: roundAndFormatLocale({ number: divideBy1e8(resultBalanceOgy) }),
     },

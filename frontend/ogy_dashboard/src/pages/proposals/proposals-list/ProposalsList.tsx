@@ -108,13 +108,15 @@ const List = ({
         cell: ({ getValue }) => (
           <div>
             <Badge
-              className={`bg-${getColorByProposalStatus(
-                getValue()
-              )}/20 py-2 px-2`}
+              className={`${getColorByProposalStatus(
+                getValue(),
+                "bg"
+              )} py-2 px-2`}
             >
               <div
-                className={`text-${getColorByProposalStatus(
-                  getValue()
+                className={`${getColorByProposalStatus(
+                  getValue(),
+                  "text"
                 )} text-xs font-semibold shrink-0`}
               >
                 {getValue() as ReactNode}

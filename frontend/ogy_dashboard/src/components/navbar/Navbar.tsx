@@ -5,14 +5,12 @@ import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import AccountOverview from "@components/account/overview/AccountOverview";
-import { Tile } from "@components/ui";
+import { Tile, Skeleton } from "@components/ui";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
   const { isConnected, isInitializing, principal } = useConnect();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [, setSearchParams] = useSearchParams();
 
   const navItems = [
     { title: "Dashboard", url: "/" },
@@ -35,7 +33,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center h-10">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
               <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
@@ -70,11 +68,23 @@ const Navbar = () => {
                     <UserIcon className="p-1 text-white" />
                   </Tile>
                   <div className="hidden sm:block">
-                    <div className="ml-4 flex items-center text-sm max-w-xs pr-4">
-                      <span className="font-semibold mr-2 shrink-0">
-                        My Account:
-                      </span>
-                      <span className="truncate">{principal}</span>
+                    <div className="flex items-center truncate pr-4">
+                      <div className="flex ml-4 items-center truncate text-sm max-w-64">
+                        <div className="mr-2 shrink-0">Principal ID: </div>
+                        {principal ? (
+                          <>
+                            <div
+                              className="truncate"
+                              data-tooltip-id="tooltip_principal_id"
+                              data-tooltip-content={principal}
+                            >
+                              {principal}
+                            </div>
+                          </>
+                        ) : (
+                          <Skeleton className="w-64" />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

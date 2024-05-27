@@ -1,14 +1,13 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, HTMLAttributes } from "react";
 import styled from "styled-components";
 
 const StyledBorderBottom = styled.div`
   background-color: ${({ color }) => color};
 `;
 
-interface CardProps
-  extends PropsWithChildren<{
-    className?: string;
-  }> {}
+interface CardProps extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {
+  className?: string;
+}
 
 interface BorderBottomProps {
   className?: string;
@@ -18,10 +17,12 @@ interface BorderBottomProps {
 const Card: FC<CardProps> & { BorderBottom: FC<BorderBottomProps> } = ({
   className,
   children,
+  ...restProps
 }) => {
   return (
     <div
       className={`relative bg-surface border border-border p-6 rounded-xl ${className}`}
+      {...restProps}
     >
       {children}
     </div>

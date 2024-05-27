@@ -6,11 +6,15 @@ import {
   DialogClaimAllRewards,
 } from "@pages/account/staked-rewards/claim-all-rewards";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
+import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const StakedRewards = () => {
   const { principal: owner } = useConnect();
   const { stakedRewardsOGY } = useNeurons({ owner, limit: 0 });
+  const { data: stakedRewardOGYUSD } = useFetchBalanceOGYUSD({
+    balance: stakedRewardsOGY.totalStakedRewardsOGY,
+  });
 
   return (
     <Card>
@@ -20,9 +24,9 @@ const StakedRewards = () => {
       <div className="flex items-center text-2xl font-semibold">
         <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
         <div className="flex ml-2">
-          {stakedRewardsOGY.totalStakedRewardsOGY !== null ? (
+          {stakedRewardsOGY.string.totalStakedRewardsOGY !== null ? (
             <div>
-              {stakedRewardsOGY.totalStakedRewardsOGY}
+              {stakedRewardsOGY.string.totalStakedRewardsOGY}
               <span className="text-content/60 ml-2">OGY</span>
             </div>
           ) : (
@@ -31,12 +35,10 @@ const StakedRewards = () => {
         </div>
       </div>
       <div className="flex">
-        {stakedRewardsOGY.totalStakedRewardsOGYUSD !== null ? (
-          <div className="text-content/60">
-            {stakedRewardsOGY.totalStakedRewardsOGYUSD} USD
-          </div>
+        {stakedRewardOGYUSD !== null ? (
+          <div className="text-content/60">{stakedRewardOGYUSD} USD</div>
         ) : (
-          <Skeleton className="w-16" />
+          <Skeleton className="w-24" />
         )}
       </div>
       <div className="mt-4 xl:mt-8">

@@ -4,21 +4,23 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const StyledSkeleton = styled.div`
   .react-loading-skeleton {
-    --base-color: rgba(var(--color-surface-2) / 0.08);
-    --highlight-color: rgba(var(--color-surface-3) / 0.4);
+    --base-color: rgba(var(--color-accent) / 0.08);
+    --highlight-color: rgba(var(--color-accent) / 0.4);
   }
 `;
 
 const SkeletonCmp = ({
   className,
-  count,
+  count = 1,
+  height = undefined,
 }: {
   className?: string;
   count?: number;
+  height?: string | number;
 }) => {
   return (
     <StyledSkeleton className={className}>
-      <Skeleton count={count ?? 1} />
+      <Skeleton count={count} height={height} />
     </StyledSkeleton>
   );
 };

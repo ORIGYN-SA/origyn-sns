@@ -112,7 +112,22 @@ impl TokenSwap {
                                     }
                                 }
                             }
-                            SwapError::BurnFailed(_) => Ok(Some(RecoverMode::RetryBurn)),
+                            SwapError::BurnFailed(burn_fail_reason) =>
+                                match burn_fail_reason {
+                                    BurnFailReason::TokenBalanceAndSwapRequestDontMatch => {
+                                        // If the balance is too low, there is no direct way to recover. The user has to
+                                        // withdraw and submit a new request with a new block index. So this block index
+                                        // will never be recoverable
+                                        Err(
+                                            "Token balance in subaccount is too small to perform swap for requested block. Skipping swap.".to_string()
+                                        )
+                                    }
+                                    | BurnFailReason::CallError(_)
+                                    | BurnFailReason::TransferError(_) => {
+                                        // If the burn failed because of transfer or call error, we try to recover by trying again.
+                                        Ok(Some(RecoverMode::RetryBurn))
+                                    }
+                                }
                             SwapError::TransferFailed(_) => Ok(Some(RecoverMode::RetryTransfer)),
                             SwapError::UnexpectedError(reason) =>
                                 Err(
@@ -184,15 +199,15 @@ impl TokenSwap {
         }; // other case is not possible because it was initialised before
     }
 
-    pub fn set_amount(&mut self, block_index: BlockIndex, amount: Tokens) {
+    pub fn set_amount(&mut self, block_index: BlockIndex, amount: u64) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.amount = amount;
         } // other case is not possible because it was initialised before
     }
-    pub fn get_amount(&self, block_index: BlockIndex) -> Tokens {
+    pub fn get_amount(&self, block_index: BlockIndex) -> u64 {
         match self.swap.get(&block_index) {
             Some(swap_info) => swap_info.amount,
-            None => Tokens::from_e8s(0), // this is not possible because it was initialised before
+            None => 0, // this is not possible because it was initialised before
         }
     }
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
@@ -220,7 +235,7 @@ impl TokenSwap {
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
 pub struct SwapInfo {
     pub status: SwapStatus,
-    pub amount: Tokens,
+    pub amount: u64,
     pub principal: Principal,
     pub first_request: u64,
     pub last_request: u64,
@@ -233,7 +248,7 @@ impl SwapInfo {
         Self {
             status: SwapStatus::Init,
             principal,
-            amount: Tokens::from_e8s(0),
+            amount: 0,
             first_request: timestamp_millis(),
             last_request: timestamp_millis(),
             burn_block_index: None,
@@ -288,7 +303,7 @@ pub enum BlockFailReason {
 pub enum BurnFailReason {
     TransferError(TransferError),
     CallError(String),
-    NoTokensToBurn,
+    TokenBalanceAndSwapRequestDontMatch,
 }
 
 #[derive(Serialize, Deserialize, CandidType, Clone, Debug, PartialEq, Eq)]
