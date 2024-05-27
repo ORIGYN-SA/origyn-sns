@@ -31,10 +31,6 @@
     "ic": "",
     "staging": "ce2ud-3aaaa-aaaal-ajdaq-cai"
   },
-  "super_indexer_v3": {
-    "ic": "cnz77-niaaa-aaaal-ajdba-cai",
-    "staging": "4iidd-jaaaa-aaaap-ahd5q-cai"
-  },
   "super_stats_v3": {
     "ic": "ckyzl-aqaaa-aaaal-ajdbq-cai",
     "staging": "4pjfx-eyaaa-aaaap-ahd5a-cai"
@@ -42,10 +38,6 @@
   "token_metrics": {
     "ic": "juolv-3yaaa-aaaal-ajc6a-cai",
     "staging": "euyi3-3yaaa-aaaak-akoba-cai"
-  },
-  "tx_store_v3": {
-    "ic": "c77ig-byaaa-aaaal-ajdca-cai",
-    "staging": "45pso-iiaaa-aaaap-ahd6a-cai"
   },
   "sns_rewards": {
     "ic": "yuijc-oiaaa-aaaap-ahezq-cai",
