@@ -112,4 +112,9 @@ if (!(APP_MODE === "production")) {
         console.log("No TRANSACTION_FEE environment variable. Set TRANSACTION_FEE environment variable.")
     else
         console.log(`TRANSACTION_FEE=${TRANSACTION_FEE}`)
+
+    if (!PLAUSIBLE_API_KEY)
+        console.log("No PLAUSIBLE_API_KEY environment variable. Set PLAUSIBLE_API_KEY environment variable.")
+    else
+        console.log(`PLAUSIBLE_API_KEY=${PLAUSIBLE_API_KEY}`)
 }
