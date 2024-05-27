@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import useConnect from "@hooks/useConnect";
 import { getListProposalsAll } from "@services/queries/governance/proposals/getListProposalsAll";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Tooltip } from "@components/ui";
@@ -12,8 +11,6 @@ const useProposalsAll = ({
   limit: number;
   offset: number;
 }) => {
-  const { isConnected } = useConnect();
-
   const {
     data: proposals,
     isSuccess: isSuccessListProposals,
@@ -21,13 +18,12 @@ const useProposalsAll = ({
     isLoading: isLoadingListProposals,
     error: errorListProposals,
   } = useQuery({
-    queryKey: ["listProposalsAll", limit, offset, isConnected],
+    queryKey: ["listProposalsAll", limit, offset],
     queryFn: () =>
       getListProposalsAll({
         limit,
         offset,
       }),
-    enabled: !!isConnected,
     placeholderData: keepPreviousData,
   });
 

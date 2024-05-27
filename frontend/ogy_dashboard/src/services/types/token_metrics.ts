@@ -1,4 +1,4 @@
-import type { Principal } from "@dfinity/principal";
+import type { Principal } from '@dfinity/principal';
 export interface Account {
   'owner' : Principal,
   'subaccount' : [] | [Array<number>],
@@ -27,6 +27,12 @@ export interface Overview {
   'first_active' : bigint,
   'received' : [number, bigint],
 }
+export interface SResponse {
+  'current_offset' : bigint,
+  'data' : Array<[Account, WalletOverview]>,
+  'limit' : bigint,
+  'total_count' : bigint,
+}
 export interface TokenSupplyData {
   'circulating_supply' : bigint,
   'total_supply' : bigint,
@@ -38,9 +44,7 @@ export interface WalletOverview {
 }
 export default interface _SERVICE {
   'get_all_neuron_owners' : () => Promise<Array<Principal>>,
-  'get_holders' : (arg_0: GetHoldersArgs) => Promise<
-      Array<[Account, WalletOverview]>
-    >,
+  'get_holders' : (arg_0: GetHoldersArgs) => Promise<SResponse>,
   'get_neurons_stats' : (arg_0: [] | [Principal]) => Promise<GovernanceStats>,
   'get_supply_data' : () => Promise<TokenSupplyData>,
 }

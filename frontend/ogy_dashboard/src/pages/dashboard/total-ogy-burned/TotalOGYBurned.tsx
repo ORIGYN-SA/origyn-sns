@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import Card from "@components/ui/Card";
+import { Card, TooltipInfo } from "@components/ui";
 import BarChart from "@components/charts/bar/Bar";
-
-import useTotalOGYBurned from "./useTotalOGYBurned";
+import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 import { ChartData } from "@services/types/charts.types";
 
 type TotalOGYBurned = {
@@ -29,9 +28,21 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-content/60">
-          Total OGY Burned
-        </h2>
+        <div className="flex items-center">
+          <h2 className="text-lg font-semibold text-content/60 mr-2">
+            Total OGY Burned
+          </h2>
+          <TooltipInfo id="tooltip-total-ogy-burned">
+            <p>
+              Total amount of OGY tokens burned. These tokens have been burned
+              completely and are no longer available.
+            </p>
+            <p>
+              Tokens can be burned for different reasons for example certificate
+              minting fees, network utility fees or network transactions fees.
+            </p>
+          </TooltipInfo>
+        </div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
           Weekly
         </button>

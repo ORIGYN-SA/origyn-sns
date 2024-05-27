@@ -20,7 +20,7 @@ export const Proposals = () => {
           </p>
         </div>
       </div>
-      <div className="mt-8 mb-16">
+      <div className="my-16">
         <ProposalsList
           pagination={pagination}
           setPagination={setPagination}

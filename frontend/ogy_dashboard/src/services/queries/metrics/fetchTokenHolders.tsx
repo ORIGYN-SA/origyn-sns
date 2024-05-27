@@ -1,11 +1,7 @@
 import { ActorSubclass } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import {
-  Account,
-  WalletOverview,
-  ITokenHolderData,
-} from "@services/types/token_metrics";
+import { SResponse, ITokenHolderData } from "@services/types/token_metrics";
 
 const fetchTokenHolders = async ({
   actor,
@@ -22,9 +18,9 @@ const fetchTokenHolders = async ({
     limit,
     offset,
     merge_accounts_to_principals: mergeAccountsToPrincipals,
-  })) as Array<[Account, WalletOverview]>;
+  })) as SResponse;
 
-  const data = results.map((result) => {
+  const data = results.data.map((result) => {
     const principal = Principal.from(result[0].owner).toText();
     const total = Number(result[1].total);
     const ledgerBalance = Number(result[1].ledger.balance);
@@ -48,7 +44,10 @@ const fetchTokenHolders = async ({
       },
     };
   });
-  return data as ITokenHolderData[];
+  return {
+    totalHolders: Number(results.total_count),
+    data: data as ITokenHolderData[],
+  };
 };
 
 export default fetchTokenHolders;

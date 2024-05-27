@@ -5,7 +5,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
-import useFetchBalanceOGY from "@services/queries/accounts/useFetchBalanceOGY";
+import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransfer from "@services/queries/transfer/useTransfer";
@@ -14,11 +14,8 @@ const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
-  const {
-    data: balanceOGY,
-    isSuccess: isSuccessFetchBalanceOGY,
-    refetch: refetchFetchOGYBalance,
-  } = useFetchBalanceOGY({});
+  const { data: balanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
+    useFetchBalanceOGYOwner();
 
   const {
     mutate: transfer,
@@ -35,7 +32,7 @@ const Transfer = ({ show, handleClose }) => {
     handleSubmit,
     control,
     reset: resetForm,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     shouldUnregister: true,
@@ -77,7 +74,6 @@ const Transfer = ({ show, handleClose }) => {
           queryClient.invalidateQueries({
             queryKey: ["userFetchBalanceOGY"],
           });
-          refetchFetchOGYBalance();
         },
       }
     );
@@ -85,7 +81,7 @@ const Transfer = ({ show, handleClose }) => {
 
   const isAmountUnderBalance = (value) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
-      const balance = BigInt(balanceOGY.balanceOGYe8s);
+      const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
       if (amount > balance) return false;
     }
@@ -173,7 +169,7 @@ const Transfer = ({ show, handleClose }) => {
               </div>
 
               <div className="text-center mt-4 mb-8 px-12">
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={!isValid}>
                   Transfer OGY
                 </Button>
               </div>
@@ -187,7 +183,7 @@ const Transfer = ({ show, handleClose }) => {
                   src="/ogy_logo.svg"
                   alt="OGY Logo"
                 />
-                <span>{balanceOGY.balanceOGY} OGY</span>
+                <span>{balanceOGY.balance} OGY</span>
               </div>
             </div>
           </div>

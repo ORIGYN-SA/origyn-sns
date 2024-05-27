@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import BarChart from "@components/charts/bar/Bar";
-import Card from "@components/ui/Card";
-import useTotalOGYSupply from "./useTotalOGYSupply";
+import { Card, TooltipInfo } from "@components/ui";
+import useTotalOGYSupply from "@hooks/metrics/useTotalOGYSupply";
 import { ChartData } from "@services/types/charts.types";
 
 type TotalOGYSupply = {
@@ -28,9 +28,22 @@ const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-content/60">
-          Total OGY Supply
-        </h2>
+        <div className="flex items-center">
+          <h2 className="text-lg font-semibold text-content/60 mr-2">
+            Total OGY Supply
+          </h2>
+          <TooltipInfo id="tooltip-total-ogy-supply">
+            <p>
+              Total amount of OGY tokens available. This includes the
+              circulating supply and the supply under control of the ORIGYN
+              Foundation.
+            </p>
+            <p>
+              As of 18th September, ORIGYN switched to fully deflationary model
+              which means no more new minted tokens.
+            </p>
+          </TooltipInfo>
+        </div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
           Weekly
         </button>

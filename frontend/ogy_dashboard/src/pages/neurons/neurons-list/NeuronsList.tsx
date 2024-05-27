@@ -67,13 +67,13 @@ const NeuronsList = ({
         cell: ({ getValue }) => (
           <div>
             <Badge
-              className={`bg-${
-                getValue() === "Dissolving" ? "jade" : "sky"
-              }/20 py-2 px-2`}
+              className={`${
+                getValue() === "Dissolving" ? "bg-jade/20" : "bg-sky/20"
+              } py-2 px-2`}
             >
               <div
-                className={`text-${
-                  getValue() === "Dissolving" ? "jade" : "sky"
+                className={`${
+                  getValue() === "Dissolving" ? "text-jade" : "text-sky"
                 } text-xs font-semibold shrink-0`}
               >
                 {getValue() as ReactNode}

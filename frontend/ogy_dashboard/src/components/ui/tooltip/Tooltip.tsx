@@ -9,11 +9,16 @@ interface TooltipProps
     className?: string;
     id: string;
     place?: string;
+    clickable?: boolean;
+    openOnClick?: boolean;
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
-  background-color: rgb(var(--color-content)) !important;
-  color: rgb(var(--color-surface-1)) !important;
+  background-color: rgb(var(--color-surface-3)) !important;
+  opacity: 1 !important;
+  color: rgb(var(--color-content)) !important;
+  z-index: 9;
+  border-radius: 10px !important;
 `;
 
 const Tooltip = ({
@@ -21,6 +26,7 @@ const Tooltip = ({
   id,
   place = "bottom",
   children,
+  clickable = false,
   ...restProps
 }: TooltipProps) => {
   return (
@@ -28,6 +34,9 @@ const Tooltip = ({
       className={`${className}`}
       id={id}
       place={place}
+      clickable={clickable}
+      openEvents={{ click: true }}
+      closeEvents={{ click: true }}
       {...restProps}
     >
       {children}
