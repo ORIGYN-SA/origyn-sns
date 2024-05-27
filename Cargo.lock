@@ -1084,6 +1084,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "sns_rewards_api_canister",
+ "super_stats_v3_api",
  "types",
  "utils",
 ]
@@ -2305,6 +2306,27 @@ dependencies = [
  "serde_bytes",
  "serde_cbor",
  "sha2",
+ "super_stats_v3_api",
+]
+
+[[package]]
+name = "super_stats_v3_api"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "ciborium",
+ "hex",
+ "ic-cdk 0.12.0",
+ "ic-cdk-macros 0.8.4",
+ "ic-cdk-timers 0.6.0",
+ "ic-stable-memory",
+ "num-bigint",
+ "num-traits",
+ "scopeguard",
+ "serde",
+ "serde_bytes",
+ "serde_cbor",
+ "sha2",
 ]
 
 [[package]]
@@ -2317,7 +2339,7 @@ dependencies = [
  "ic-stable-memory",
  "num-bigint",
  "serde",
- "super_stats_v3",
+ "super_stats_v3_api",
  "types",
 ]
 
@@ -2481,6 +2503,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "stable_memory",
+ "super_stats_v3_api",
  "super_stats_v3_c2c_client",
  "token_metrics_api",
  "tracing",
@@ -2514,6 +2537,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "stable_memory",
+ "super_stats_v3_api",
  "super_stats_v3_c2c_client",
  "tracing",
  "types",

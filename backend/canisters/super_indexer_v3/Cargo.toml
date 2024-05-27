@@ -3,6 +3,9 @@ name = "super_indexer_v3"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+inttest = []
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
 path = "lib.rs"
@@ -25,5 +28,3 @@ num-bigint = "0.4.4"
 num-traits = "0.2.17"
 #pocket-ic = "2.0.1"
 #icrc-ledger-types = { path = "../icrc_types" }
-
-

@@ -2,7 +2,7 @@ use std::ops::Add;
 
 use candid::{ CandidType, Nat };
 use serde::{ Deserialize, Serialize };
-use super_stats_v3_c2c_client::helpers::account_tree::Overview as LedgerOverview;
+use super_stats_v3_api::account_tree::Overview as LedgerOverview;
 
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct TokenSupplyData {

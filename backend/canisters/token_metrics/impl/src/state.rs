@@ -3,6 +3,7 @@ use canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
+use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
     GovernanceStats,
     PrincipalBalance,
@@ -86,6 +87,8 @@ pub struct Data {
     pub sns_ledger_canister: Principal,
     /// Super Stats canister that provides ledger stats
     pub super_stats_canister: Principal,
+    /// The account that holds the treasury
+    pub treasury_account: String,
     /// Information about governance neurons sync
     pub sync_info: SyncInfo,
     /// Stores the mapping of each principal to its neurons
@@ -102,18 +105,22 @@ pub struct Data {
     /// Same thing as above, but we now merge all subaccounts stats of a principal
     /// under the same principal item in the Map
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
+    /// Staking history for governance
+    pub gov_stake_history: Vec<(u64, HistoryData)>,
 }
 
 impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
-        super_stats_canister_id: CanisterId
+        super_stats_canister_id: CanisterId,
+        treasury_account: String
     ) -> Self {
         Self {
             super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
+            treasury_account,
             authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
@@ -123,6 +130,7 @@ impl Data {
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),
+            gov_stake_history: Vec::new(),
         }
     }
 }
