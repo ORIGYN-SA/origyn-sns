@@ -29,5 +29,10 @@ fn get_holders(args: GetHoldersArgs) -> GetHoldersResponse {
         result.push((key.clone(), value.clone()));
     }
 
-    result
+    GetHoldersResponse {
+        data: result,
+        current_offset: args.offset,
+        limit: args.limit,
+        total_count: list.len()
+    }
 }
