@@ -122,6 +122,15 @@ type InitArgs = record {
   test_mode : bool;
 };
 
+type ActivitySnapshot = record {
+    start_time: nat64;
+    end_time: nat64;
+    total_unique_accounts: nat64;
+    total_unique_principals: nat64;
+    accounts_active_during_snapshot: nat64;
+    principals_active_during_snapshot: nat64;
+};
+
 service : (InitArgs) -> {
     // CORE API
     "add_authorised": (text) -> (text);
@@ -137,7 +146,7 @@ service : (InitArgs) -> {
     "deposit_cycles": () -> (); 
     "get_canister_version": () -> (text) query;
 
-    // INDEXER API
+    // STATS API
     "init_target_ledger": (InitLedgerArgs) -> (text);
     "get_top_account_holders": (nat64) -> (vec HolderBalanceResponse) query;
     "get_top_principal_holders": (nat64) -> (vec HolderBalanceResponse) query;
@@ -150,6 +159,7 @@ service : (InitArgs) -> {
     "get_account_holders": (GetHoldersArgs) -> (vec HolderBalanceResponse) query;
     "get_account_history": (GetAccountHistoryArgs) -> (AccountHistory) query;
     "get_principal_history": (GetAccountHistoryArgs) -> (AccountHistory) query;
+    "get_activity_stats": (nat64) -> (vec ActivitySnapshot) query;
 
     // TIMER API
     "start_processing_timer": (nat64) -> (text); // in seconds
