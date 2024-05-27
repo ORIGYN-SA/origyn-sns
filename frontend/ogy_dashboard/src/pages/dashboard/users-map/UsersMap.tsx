@@ -7,10 +7,13 @@ type UsersMapProps = {
 };
 
 const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
+    const [users, setUsers] = useState(0);
     const { data } = useUsersCountryAnalitycs();
 
     useEffect(() => {
         if (data.length) {
+            const count = data.reduce((res, c: any) => (res + c.visitors), 0);
+            setUsers(count);
             const datObj = data.reduce((res, c: any) => ({
                 ...res, [c.alpha_3]: {
                     ...c,
@@ -28,10 +31,12 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
                     geographyConfig: {
                         popupOnHover: true,
                         highlightOnHover: true,
+                        highlightFillColor: '#36454F',
+                        highlightBorderColor: '#36454F',
                         borderColor: '#69737C',
                         borderWidth: 0.5,
                         popupTemplate: function (geo, data) {
-                            return '<div class="hoverinfo" style="color: #000000">' + data.name + '<br/>' + 'Visitors:' + data.visitors + '</div>'
+                            return '<div class="hoverinfo" style="color: #000000; border-radius: 20px; padding: 8px 16px; box-shadow: none">' + data.name + '<br/>' + 'Visitors:' + data.visitors + '</div>'
                         },
                     },
                     data: datObj,
@@ -47,7 +52,9 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
     }, [data])
 
     return <Card className={`${className}`} {...restProps}>
-        <div id="mapContainer" style={{ position: 'relative', width: '100%', height: '600px' }}></div>
+        <div id="mapContainer" style={{ position: 'relative', width: '100%', height: '600px' }} />
+        <div className="text-center text-lg font-semibold text-content/60">Total visitors: </div>
+        <div className="text-center font-semibold">{users}</div>
     </Card>
 }
 
