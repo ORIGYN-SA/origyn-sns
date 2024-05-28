@@ -47,13 +47,7 @@ include:
   #     src-folder: sns_rewards
   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   #   inputs:
-  #     src-folder: super_indexer_v3
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
   #     src-folder: super_stats_v3
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: tx_store_v3
   # # Canister builds
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
@@ -61,15 +55,12 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: sns_rewards
-  # - local: scripts/ci-cd/.canister_builds.yml
-  #   inputs:
-  #     src-folder: super_indexer_v3
-  # - local: scripts/ci-cd/.canister_builds.yml
-  #   inputs:
-  #     src-folder: super_stats_v3
-  # - local: scripts/ci-cd/.canister_builds.yml
-  #   inputs:
-  #     src-folder: tx_store_v3
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: super_stats_v3
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: token_metrics
   # # Frontend builds
   # - local: scripts/ci-cd/.frontend_builds.yml
   #   inputs:
@@ -139,13 +130,14 @@ generate test declarations:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          # "super_indexer_v3 test build",
-          # "super_stats_v3 test build",
-          # "tx_store_v3 test build",
+          "super_stats_v3 test build",
+          "token_metrics test build",
         ]
   script:
     - dfx generate ogy_token_swap
     - dfx generate sns_rewards
+    - dfx generate super_stats_v3
+    - dfx generate token_metrics
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
     paths:
@@ -162,9 +154,8 @@ generate declarations:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          # "super_indexer_v3 test build",
           # "super_stats_v3 test build",
-          # "tx_store_v3 test build",
+          # "token_metrics test build",
         ]
   script:
     - dfx generate
@@ -223,9 +214,8 @@ local deploy and tests:
           "generate test declarations",
           "ogy_token_swap test build",
           "sns_rewards test build",
-          # "super_indexer_v3 test build",
-          # "super_stats_v3 test build",
-          # "tx_store_v3 test build",
+          "super_stats_v3 test build",
+          "token_metrics test build",
           # "integration tests"
         ]
   before_script:

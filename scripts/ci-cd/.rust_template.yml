@@ -11,9 +11,8 @@
       - .cargo
       - backend/canisters/ogy_token_swap/target
       - backend/canisters/sns_rewards/target
-      - backend/canisters/super_indexer_v3/target
       - backend/canisters/super_stats_v3/target
-      - backend/canisters/tx_store_v3/target
+      - backend/canisters/token_metrics/target
   before_script:
     - apt update > /dev/null && apt install -y wget build-essential pkg-config libssl-dev > /dev/null
     - rustup component add clippy
