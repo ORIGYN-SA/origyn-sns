@@ -1,9 +1,12 @@
-export const getColorByProposalStatus = (status: string) => {
+export const getColorByProposalStatus = (
+  status: string,
+  type: "text" | "bg"
+) => {
   switch (status) {
     case "Open":
-      return "sky";
+      return type === "bg" ? "bg-sky/20" : "text-sky";
     case "Executed":
-      return "jade";
+      return type === "bg" ? "bg-jade/20" : "text-jade";
     default:
       return "";
   }

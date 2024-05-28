@@ -7,7 +7,8 @@ pub struct Args {
     pub of: Option<Principal>,
 }
 
-#[derive(Deserialize, CandidType)]
+#[derive(Deserialize, CandidType, PartialEq, Debug)]
 pub enum Response {
     Success(AccountIdentifier),
+    MaxCapacityOfListReached,
 }

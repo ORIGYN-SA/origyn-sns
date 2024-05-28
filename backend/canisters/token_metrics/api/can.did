@@ -4,12 +4,19 @@ type GetHoldersArgs = record {
   limit : nat64;
   merge_accounts_to_principals : bool;
 };
+type GetHoldersResponse = record {
+  current_offset : nat64;
+  data : vec record { Account; WalletOverview };
+  limit : nat64;
+  total_count : nat64;
+};
 type GovernanceStats = record {
   total_rewards : nat;
   total_staked : nat;
   total_locked : nat;
   total_unlocked : nat;
 };
+type HistoryData = record { balance : nat };
 type InitArgs = record {
   test_mode : bool;
   ogy_new_ledger_canister_id : principal;
@@ -31,9 +38,8 @@ type WalletOverview = record {
 };
 service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
-  get_holders : (GetHoldersArgs) -> (
-      vec record { Account; WalletOverview },
-    ) query;
+  get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
+  get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
 }

@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
-import { Table, LoaderSpin } from "@components/ui";
+import { Table, LoaderSpin, Card } from "@components/ui";
 import { INeuronData } from "@services/types";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
 import NeuronsDetails from "./neuron-details";
@@ -49,7 +49,7 @@ const NeuronsList = () => {
             ""
           );
         },
-        header: "My OGY Neurons",
+        header: "ID",
         meta: {
           className: "",
         },
@@ -58,7 +58,7 @@ const NeuronsList = () => {
         accessorKey: "stakedAmount",
         id: "stakedAmount",
         cell: (info) => <div>{info.getValue()} OGY</div>,
-        header: "",
+        header: "Staked amount",
       },
       {
         accessorKey: "claimAmount",
@@ -72,7 +72,7 @@ const NeuronsList = () => {
             <DialogClaimReward />
           </ClaimRewardProvider>
         ),
-        header: "",
+        header: "Claim amount",
       },
       {
         accessorKey: "removeNeuron",
@@ -86,7 +86,6 @@ const NeuronsList = () => {
         header: "",
       },
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -94,17 +93,28 @@ const NeuronsList = () => {
     neuronsList,
     isSuccess: isSuccessGetNeuronsList,
     isLoading: isLoadingGetNeuronsList,
+    isError: isErrorGetNeuronsList,
   } = useNeurons({
-    // limit: pagination.pageSize,
-    // offset: pagination.pageSize * pagination.pageIndex,
-    // sorting,
     owner,
     limit: 0,
   });
 
   return (
-    <div>
-      {isSuccessGetNeuronsList && (
+    <Card>
+      <div className="flex items-center mb-8 gap-8">
+        <div className="text-lg font-semibold">My OGY Neurons</div>
+        <AddNeuronProvider>
+          <BtnAddNeuron />
+          <DialogAddNeuron />
+        </AddNeuronProvider>
+      </div>
+
+      {(isLoadingGetNeuronsList || isErrorGetNeuronsList) && (
+        <div className="flex items-center justify-center pt-4 pb-8">
+          <LoaderSpin />
+        </div>
+      )}
+      {isSuccessGetNeuronsList && neuronsList?.rows.length !== 0 && (
         <Table
           columns={columns}
           data={neuronsList}
@@ -112,18 +122,12 @@ const NeuronsList = () => {
           subComponent={NeuronsDetails}
         />
       )}
-      {isLoadingGetNeuronsList && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
+      {isSuccessGetNeuronsList && !neuronsList?.rows.length && (
+        <div className="flex items-center justify-center text-xl font-semibold pt-4 pb-8">
+          No neurons added yet.
         </div>
       )}
-      <div className="flex justify-center mt-4">
-        <AddNeuronProvider>
-          <BtnAddNeuron />
-          <DialogAddNeuron />
-        </AddNeuronProvider>
-      </div>
-    </div>
+    </Card>
   );
 };
 

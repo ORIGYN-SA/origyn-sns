@@ -33,10 +33,10 @@ export const getOneNeuronAll = async ({
   const currentTimestamp = getCurrentTimestamp();
   const dissolveState = data.dissolve_state;
   // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
-  const createdAt =
-    Math.round(Date.now()) - Number(data.created_timestamp_seconds);
+  const createdAt = Number(data.created_timestamp_seconds);
   const age =
-    Math.round(Date.now()) - Number(data.aging_since_timestamp_seconds);
+    Date.now() / 1000 -
+    (getCurrentTimestamp() - Number(data.aging_since_timestamp_seconds));
   const maxNeuronAgeForAgeBonus = Number(
     nervousSystemParameters?.maxNeuronAgeForAgeBonus ?? 0
   );
@@ -47,7 +47,7 @@ export const getOneNeuronAll = async ({
     ? ((age / maxNeuronAgeForAgeBonus) * maxAgeBonusPercentage) / 100
     : 0;
   const dissolveDelay = dissolveState?.DissolveDelaySeconds
-    ? Number(dissolveState.DissolveDelaySeconds !== undefined) || 0
+    ? currentTimestamp + Number(dissolveState.DissolveDelaySeconds) || 0
     : Number(dissolveState.WhenDissolvedTimestampSeconds) - currentTimestamp ||
       0;
   const maxDissolveDelayBonusPercentage =
@@ -86,13 +86,15 @@ export const getOneNeuronAll = async ({
       number: stakedMaturity,
     }),
     age,
-    ageToRelativeCalendar: DateTime.fromMillis(age).toRelativeCalendar() ?? "",
+    ageToRelativeCalendar: DateTime.fromSeconds(age).toRelativeCalendar() ?? "",
     state,
     votingPower,
     votingPowerToString: votingPower.toFixed(2),
-    dissolveDelay,
+    dissolveDelay: dissolveDelay
+      ? DateTime.fromSeconds(dissolveDelay).toRelativeCalendar()
+      : "-",
     id: data.id,
-    createdAt: DateTime.fromMillis(createdAt).toRelativeCalendar() ?? "",
+    createdAt: DateTime.fromSeconds(createdAt).toRelativeCalendar() ?? "",
     maxNeuronAgeForAgeBonus,
     maxAgeBonusPercentage,
     ageBonus,

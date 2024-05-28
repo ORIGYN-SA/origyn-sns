@@ -7,6 +7,7 @@ import StakedRewards from "@pages/account/staked-rewards";
 import NeuronsList from "./neurons-list/index";
 import { Tile, Tooltip } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { Skeleton } from "@components/ui";
 
 export const Account = () => {
   const { principal } = useConnect();
@@ -22,16 +23,24 @@ export const Account = () => {
             </Tile>
 
             <div className="flex items-center truncate pr-4">
-              <div
-                className="flex ml-4 items-center truncate text-sm"
-                data-tooltip-id="tooltip_principal_id"
-                data-tooltip-content={principal}
-              >
-                <div className="font-semibold mr-2 shrink-0">Principal ID:</div>
-                <div className="truncate">{principal}</div>
+              <div className="flex ml-4 items-center truncate text-sm">
+                <div className="mr-2 shrink-0">Principal ID: </div>
+                {principal ? (
+                  <>
+                    <div
+                      className="truncate"
+                      data-tooltip-id="tooltip_principal_id"
+                      data-tooltip-content={principal}
+                    >
+                      {principal}
+                    </div>
+                    <Tooltip id="tooltip_principal_id" />
+                    <CopyToClipboard value={principal as string} />
+                  </>
+                ) : (
+                  <Skeleton className="w-64" />
+                )}
               </div>
-              <Tooltip id="tooltip_principal_id" />
-              <CopyToClipboard value={principal as string} />
             </div>
           </div>
         </div>
@@ -42,7 +51,7 @@ export const Account = () => {
         <StakedOGY />
         <StakedRewards />
       </div>
-      <div className="mt-8">
+      <div className="mt-16">
         <NeuronsList />
       </div>
     </div>

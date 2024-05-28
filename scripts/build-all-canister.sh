@@ -6,7 +6,7 @@ Builds all canisters.
 Must be run from the repository's root folder.
 
 Usage:
-  scripts/build-canister.sh [options] <CANISTER>
+  scripts/build-all-canisters.sh [options] <CANISTER>
 
 Options:
   -h, --help                Show this message and exit
@@ -31,7 +31,7 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # List of canisters to include
-canister_list="ogy_token_swap sns_rewards"
+canister_list="ogy_token_swap sns_rewards super_stats_v3 token_metrics"
 
 for canister in $canister_list; do
   ./scripts/build-canister.sh -w $INTTEST "$canister"

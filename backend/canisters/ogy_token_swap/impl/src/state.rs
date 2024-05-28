@@ -7,7 +7,10 @@ use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use ogy_token_swap_api::types::token_swap::TokenSwap;
+use ogy_token_swap_api::{
+    requesting_principals::RequestingPrincipals,
+    types::token_swap::TokenSwap,
+};
 
 canister_state!(RuntimeState);
 
@@ -73,7 +76,7 @@ pub struct Data {
     /// The minting account of legacy OGY where tokens are burned to
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
-    pub requesting_principals: HashSet<Principal>,
+    pub requesting_principals: RequestingPrincipals,
 }
 
 impl Data {
@@ -94,7 +97,7 @@ impl Data {
                 &ogy_legacy_minting_account_principal,
                 &Subaccount([0; 32])
             ),
-            requesting_principals: HashSet::default(),
+            requesting_principals: RequestingPrincipals::default(),
         }
     }
 }

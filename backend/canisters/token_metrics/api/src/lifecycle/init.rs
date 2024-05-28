@@ -8,4 +8,5 @@ pub struct InitArgs {
     pub sns_governance_canister_id: CanisterId,
     pub super_stats_canister_id: CanisterId,
     pub ogy_new_ledger_canister_id: CanisterId,
+    pub treasury_account: String,
 }

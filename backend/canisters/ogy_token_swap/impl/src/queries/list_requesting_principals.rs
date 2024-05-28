@@ -13,5 +13,5 @@ async fn list_requesting_principals() -> GetSwapInfoResponse {
 }
 
 fn list_requesting_principals_impl() -> HashSet<Principal> {
-    read_state(|s| s.data.requesting_principals.clone())
+    read_state(|s| s.data.requesting_principals.list())
 }

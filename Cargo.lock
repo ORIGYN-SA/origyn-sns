@@ -1084,6 +1084,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "sns_rewards_api_canister",
+ "super_stats_v3_api",
  "types",
  "utils",
 ]
@@ -2268,7 +2269,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
 
 [[package]]
-name = "super_indexer_v3"
+name = "super_stats_v3"
 version = "0.1.0"
 dependencies = [
  "candid 0.10.6",
@@ -2285,10 +2286,11 @@ dependencies = [
  "serde_bytes",
  "serde_cbor",
  "sha2",
+ "super_stats_v3_api",
 ]
 
 [[package]]
-name = "super_stats_v3"
+name = "super_stats_v3_api"
 version = "0.1.0"
 dependencies = [
  "candid 0.10.6",
@@ -2317,7 +2319,7 @@ dependencies = [
  "ic-stable-memory",
  "num-bigint",
  "serde",
- "super_stats_v3",
+ "super_stats_v3_api",
  "types",
 ]
 
@@ -2481,6 +2483,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "stable_memory",
+ "super_stats_v3_api",
  "super_stats_v3_c2c_client",
  "token_metrics_api",
  "tracing",
@@ -2514,6 +2517,7 @@ dependencies = [
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "stable_memory",
+ "super_stats_v3_api",
  "super_stats_v3_c2c_client",
  "tracing",
  "types",
@@ -2710,19 +2714,6 @@ name = "try-lock"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
-
-[[package]]
-name = "tx_store_v3"
-version = "0.1.0"
-dependencies = [
- "candid 0.10.6",
- "ciborium",
- "ic-cdk 0.12.0",
- "ic-cdk-macros 0.8.4",
- "ic-stable-memory",
- "serde",
- "serde_bytes",
-]
 
 [[package]]
 name = "typed-arena"

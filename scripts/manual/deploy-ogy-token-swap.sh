@@ -9,5 +9,6 @@ dfx deploy --network staging ogy_token_swap --argument "(record {
   ogy_legacy_ledger_canister_id = principal \"$(dfx canister id ogy_legacy_ledger --network staging)\";
   ogy_new_ledger_canister_id = principal \"$(dfx canister id sns_ledger --network staging)\";
   ogy_legacy_minting_account_principal = principal \"$(dfx identity get-principal)\";
+  authorized_principals = vec {principal \"$(dfx identity get-principal)\";}
   } )" --mode reinstall
 # dfx deploy --network staging ogy_token_swap --argument '(null)'

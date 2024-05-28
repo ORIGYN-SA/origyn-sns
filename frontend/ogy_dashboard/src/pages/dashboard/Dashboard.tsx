@@ -11,6 +11,8 @@ import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
+import UsersMap from "./users-map/UsersMap";
+import { PieChartProvider } from "@components/charts/pie/context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -39,29 +41,59 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16">
+        <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16 w-full">
           <LedgerSwitchBannerContent>
             <div className="flex justify-center mt-8">
               {!isConnected && !isInitializing && <AuthButton />}
               {isConnected && (
-                <Button onClick={handleClickAccount}>
-                  Login to swap tokens
-                </Button>
+                <Button onClick={handleClickAccount}>My account</Button>
               )}
             </div>
           </LedgerSwitchBannerContent>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-8">
-          <TotalOGYSupply className="w-full" />
-          <TotalOGYBurned className="w-full" />
-          <OGYCirculationState className="w-full" />
-          <OrigynFoundationReserve className="w-full" />
-          {/* TODO: Disabling for now. Waiting data after launch of SNS */}
+          <section className="w-full" id="total-ogy-supply">
+            <TotalOGYSupply />
+          </section>
+          <section className="w-full" id="total-ogy-burned">
+            <TotalOGYBurned />
+          </section>
+          <section className="w-full pt-8 -mt-8" id="ogy-circulation-state">
+            <PieChartProvider>
+              <OGYCirculationState />
+            </PieChartProvider>
+          </section>
+          <section className="w-full pt-8 -mt-8" id="ogy-foundation-reserve">
+            <PieChartProvider>
+              <OrigynFoundationReserve />
+            </PieChartProvider>
+          </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
-          <OrigynTreasuryAccount className="w-full col-span-1 xl:col-span-2" />
-          <OrigynRewardAccount className="w-full col-span-1 xl:col-span-2" />
-          <TokenDistributionList className="w-full col-span-1 xl:col-span-2" />
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-treasury-account"
+          >
+            <OrigynTreasuryAccount />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-reward-account"
+          >
+            <OrigynRewardAccount />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-token-distribution"
+          >
+            <TokenDistributionList />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-users-map"
+          >
+            <UsersMap />
+          </section>
         </div>
       </div>
     </div>

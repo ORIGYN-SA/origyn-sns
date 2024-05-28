@@ -46,13 +46,13 @@ export const NeuronsDetails = () => {
               {["State"].includes(name) ? (
                 <div className="flex items-center mt-2">
                   <Badge
-                    className={`bg-${
-                      value === "Dissolving" ? "jade" : "sky"
-                    }/20 px-2`}
+                    className={`${
+                      value === "Dissolving" ? "bg-jade/20" : "bg-sky/20"
+                    } px-2`}
                   >
                     <div
-                      className={`text-${
-                        value === "Dissolving" ? "jade" : "sky"
+                      className={`${
+                        value === "Dissolving" ? "text-jade" : "text-sky"
                       } text-xs font-semibold shrink-0`}
                     >
                       {value}
