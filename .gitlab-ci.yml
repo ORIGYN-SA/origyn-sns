@@ -61,10 +61,10 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: token_metrics
-  # # Frontend builds
-  # - local: scripts/ci-cd/.frontend_builds.yml
-  #   inputs:
-  #     src-folder: ogy_dashboard
+  # Frontend builds
+  - local: scripts/ci-cd/.frontend_builds.yml
+    inputs:
+      src-folder: ogy_dashboard
   # Deployments
   - local: scripts/ci-cd/.dfx_templates.yml
 
