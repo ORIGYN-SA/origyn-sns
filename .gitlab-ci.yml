@@ -154,8 +154,8 @@ generate declarations:
         [
           "ogy_token_swap test build",
           "sns_rewards test build",
-          # "super_stats_v3 test build",
-          # "token_metrics test build",
+          "super_stats_v3 test build",
+          "token_metrics test build",
         ]
   script:
     - dfx generate
