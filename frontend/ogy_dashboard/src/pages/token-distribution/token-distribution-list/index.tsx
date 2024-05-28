@@ -28,7 +28,6 @@ const TokenDistributionList = ({
             >
               {getValue()}
             </div>
-            <Tooltip id="tooltip_address" />
             <CopyToClipboard value={getValue()} />
           </div>
         ),
@@ -112,6 +111,7 @@ const TokenDistributionList = ({
           <div>{errorFetchTokenHolders?.message}</div>
         </div>
       )}
+      <Tooltip id="tooltip_address" />
     </div>
   );
 };
