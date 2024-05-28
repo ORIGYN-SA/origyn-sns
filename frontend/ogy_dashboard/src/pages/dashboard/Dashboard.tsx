@@ -72,12 +72,6 @@ const Dashboard = () => {
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-users-map"
-          >
-            <UsersMap />
-          </section>
-          <section
-            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-treasury-account"
           >
             <OrigynTreasuryAccount />
@@ -93,6 +87,12 @@ const Dashboard = () => {
             id="ogy-token-distribution"
           >
             <TokenDistributionList />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-users-map"
+          >
+            <UsersMap />
           </section>
         </div>
       </div>
