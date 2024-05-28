@@ -14,7 +14,7 @@ $[[ inputs.src-folder ]] test build:
   needs: ["generate test declarations"]
   extends: .node template
   script:
-    - npm run build:$[[ inputs.src-folder ]]
+    - npm run build --workspace $[[ inputs.src-folder ]]
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-$[[ inputs.src-folder ]]-TEST"
     paths:
@@ -31,7 +31,7 @@ $[[ inputs.src-folder ]] staging build:
     CANISTER_NAME: "$[[ inputs.src-folder ]]"
     NETWORK: "staging"
   script:
-    - npm run build:$[[ inputs.src-folder ]]
+    - npm run build --workspace $[[ inputs.src-folder ]]
     - STAGING_URL=$(CAN=$CANISTER_NAME NET=$NETWORK node -e 'const ids=require("./canister_ids.json"); console.log(`https://${ids[process.env.CAN][process.env.NET]}.icp0.io`);')
     - echo "$(echo '$[[ inputs.src-folder ]]' | tr '[:lower:]' '[:upper:]')_URL=$STAGING_URL" > $[[ inputs.src-folder ]]_deploy.env
   artifacts:
@@ -60,7 +60,7 @@ $[[ inputs.src-folder ]] production build:
     CANISTER_NAME: "$[[ inputs.src-folder ]]"
     NETWORK: "ic"
   script:
-    - npm run build:$[[ inputs.src-folder ]]
+    - npm run build --workspace $[[ inputs.src-folder ]]
     - PRODUCTION_URL=$(CAN=$CANISTER_NAME NET=$NETWORK node -e 'const ids=require("./canister_ids.json"); console.log(`https://${ids[process.env.CAN][process.env.NET]}.icp0.io`);')
     - echo "$(echo '$[[ inputs.src-folder ]]' | tr '[:lower:]' '[:upper:]')_URL=$PRODUCTION_URL" > $[[ inputs.src-folder ]]_deploy.env
   artifacts:
