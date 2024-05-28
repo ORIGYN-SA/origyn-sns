@@ -51,7 +51,7 @@ export const Account = () => {
         <StakedOGY />
         <StakedRewards />
       </div>
-      <div className="mt-8">
+      <div className="mt-16">
         <NeuronsList />
       </div>
     </div>
