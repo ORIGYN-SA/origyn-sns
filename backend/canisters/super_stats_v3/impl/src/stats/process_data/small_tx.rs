@@ -1,7 +1,5 @@
 use super_stats_v3_api::{
-    core::constants::D1_AS_NANOS,
-    custom_types::{ ProcessedTX, SmallTX },
-    stable_memory::STABLE_STATE,
+    core::constants::D1_AS_NANOS, custom_types::{ IndexerType, ProcessedTX, SmallTX }, runtime::RUNTIME_STATE, stable_memory::STABLE_STATE
 };
 
 use crate::stats::{
@@ -47,7 +45,7 @@ pub fn processedtx_to_smalltx(input_vec: &Vec<ProcessedTX>) -> Vec<SmallTX> {
         let to: Option<u64>;
         let to_ac = tx.to_account.as_str();
         if to_ac != "Token Ledger" {
-            to = add_to_directory(&tx.to_account);
+            to = add_to_directory(&tx.to_account);            
         } else {
             to = None;
         }
@@ -88,6 +86,39 @@ pub fn processedtx_to_smalltx(input_vec: &Vec<ProcessedTX>) -> Vec<SmallTX> {
             fee,
         });
 
+        // Add the `to` account to account_data and principal_data
+        // so the snapshot can count correctly in the code below
+        if let Some(to_u64) = to {
+            STABLE_STATE.with(|s| {
+                s.borrow_mut()
+                    .as_mut()
+                    .unwrap()
+                    .account_data.create_account_if_not_exists(&to_u64, tx.tx_time)
+            });
+            let index_type = RUNTIME_STATE.with(|s| { s.borrow().data.get_index_type() });
+
+            if index_type != IndexerType::DfinityIcp {
+                match parse_icrc_account(&tx.to_account) {
+                    Some(parsed_from) => {
+                        match add_to_directory(&parsed_from.0) {
+                            Some(from_as_principal) => {
+                                STABLE_STATE.with(|s| {
+                                    s.borrow_mut()
+                                        .as_mut()
+                                        .unwrap()
+                                        .principal_data.create_account_if_not_exists(
+                                            &from_as_principal,
+                                            tx.tx_time
+                                        )
+                                });
+                            }
+                            None => {}
+                        };
+                    }
+                    None => {}
+                }
+            }
+        }
         // check for end of simple stats 'window'
         if tx.tx_time > activity_end_time {
             // update final numbers

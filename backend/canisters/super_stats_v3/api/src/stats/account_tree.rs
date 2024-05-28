@@ -72,13 +72,27 @@ impl AccountTree {
         }
     }
 
+    pub fn create_account_if_not_exists(&mut self, account_ref: &u64, creation_time: u64) {
+        if !self.accounts.contains_key(account_ref) {
+         let acd = Overview { 
+                  first_active: creation_time, 
+                  last_active: creation_time, 
+                  sent: (0_u32, 0_u128), 
+                  received: (0_u32, 0_u128), 
+                  balance: 0_u128
+               };
+
+         self.accounts.insert(*account_ref, acd).expect("Storage is full");
+      }
+    }
+
     pub fn process_transfer_to(&mut self, account_ref: &u64, stx: &SmallTX) -> Result<String, String> {
       self.update_history_balance(account_ref, stx, TransactionType::In);
 
       if !self.accounts.contains_key(account_ref) {
          let acd = Overview { 
                   first_active: stx.time, 
-                  last_active: stx.time, 
+                  last_active: stx.time,
                   sent: (0_u32, 0_u128), 
                   received: (1_u32, stx.value), 
                   balance: stx.value 

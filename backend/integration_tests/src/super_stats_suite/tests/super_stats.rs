@@ -20,7 +20,7 @@ use crate::super_stats_suite::{ init::init, TestEnv };
 
 use crate::utils::{ random_principal, random_subaccount };
 
-// #[test]
+#[test]
 fn principal_history_created() {
     let env = init();
     let TestEnv { mut pic, canister_ids, controller } = env;
@@ -241,7 +241,7 @@ fn principal_history_created() {
     println!("Response from start_processing_response: {start_processing_response:?}");
     assert_eq!(start_processing_response, "Processing timer has been started");
 
-    // Wait 15 seconds
+    // Wait 30 seconds
     thread::sleep(Duration::from_secs(30));
 
     let working_stats_response = get_working_stats(
@@ -345,7 +345,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 1
     // total_unique_principals: 1
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -361,7 +361,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 2
     // total_unique_principals: 2
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -377,7 +377,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 3
     // total_unique_principals: 2
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -393,7 +393,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 4
     // total_unique_principals: 2
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -409,7 +409,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 5
     // total_unique_principals: 3
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -425,7 +425,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 6
     // total_unique_principals: 3
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -441,7 +441,7 @@ fn accounts_and_principals_history_count() {
     // total_unique_accounts: 7
     // total_unique_principals: 3
 
-    pic.advance_time(Duration::from_secs(86410));
+    pic.advance_time(Duration::from_secs(86400));
     assert_eq!(
         transfer(
             &mut pic,
@@ -464,8 +464,8 @@ fn accounts_and_principals_history_count() {
     let super_stats_init_args = InitLedgerArgs {
         target: TargetArgs {
             target_ledger: ledger_canister_id.to_string(),
-            hourly_size: 30,
-            daily_size: 10,
+            hourly_size: 24,
+            daily_size: 30,
         },
         index_type: IndexerType::DfinityIcrc2,
     };
@@ -488,7 +488,7 @@ fn accounts_and_principals_history_count() {
     println!("Response from start_processing_response: {start_processing_response:?}");
     assert_eq!(start_processing_response, "Processing timer has been started");
 
-    // Wait 15 seconds
+    // Wait 30 seconds
     thread::sleep(Duration::from_secs(30));
 
     let working_stats_response = get_working_stats(
@@ -500,44 +500,44 @@ fn accounts_and_principals_history_count() {
     println!("Response from get_working_stats: {working_stats_response:?}");
 
     // Wait here 15 seconds before proceeding
-    thread::sleep(Duration::from_secs(15));
+    // thread::sleep(Duration::from_secs(15));
 
-    // Super stats v3 Initialization & Job  
+    // Super stats v3 Initialization & Job
     // ---------------------------------------------------------
-    
+
     let days_args = 8;
     let as_response = get_activity_stats(&mut pic, controller, super_stats_canister_id, &days_args);
     println!("Response from get_activity_stats: {as_response:?}");
 
-    // Day 8
+    // Day 9 (as we advanced in the next day after last tx)
     assert_eq!(as_response[7].total_unique_accounts, 8u64);
     assert_eq!(as_response[7].total_unique_principals, 3u64);
 
-    // Day 7
+    // Day 8
     assert_eq!(as_response[6].total_unique_accounts, 8u64);
     assert_eq!(as_response[6].total_unique_principals, 3u64);
 
-    // Day 6
-    assert_eq!(as_response[5].total_unique_accounts, 6u64);
+    // Day 7
+    assert_eq!(as_response[5].total_unique_accounts, 7u64);
     assert_eq!(as_response[5].total_unique_principals, 3u64);
 
-    // Day 5
-    assert_eq!(as_response[4].total_unique_accounts, 5u64);
+    // Day 6
+    assert_eq!(as_response[4].total_unique_accounts, 6u64);
     assert_eq!(as_response[4].total_unique_principals, 3u64);
 
-    // Day 4
-    assert_eq!(as_response[3].total_unique_accounts, 4u64);
-    assert_eq!(as_response[3].total_unique_principals, 2u64);
+    // Day 5
+    assert_eq!(as_response[3].total_unique_accounts, 5u64);
+    assert_eq!(as_response[3].total_unique_principals, 3u64);
 
-    // Day 3
-    assert_eq!(as_response[2].total_unique_accounts, 3u64);
+    // Day 4
+    assert_eq!(as_response[2].total_unique_accounts, 4u64);
     assert_eq!(as_response[2].total_unique_principals, 2u64);
 
-    // Day 2
-    assert_eq!(as_response[1].total_unique_accounts, 2u64);
+    // Day 3
+    assert_eq!(as_response[1].total_unique_accounts, 3u64);
     assert_eq!(as_response[1].total_unique_principals, 2u64);
 
-    // Day 1
-    assert_eq!(as_response[0].total_unique_accounts, 1u64);
-    assert_eq!(as_response[0].total_unique_principals, 1u64);
+    // Day 2
+    assert_eq!(as_response[0].total_unique_accounts, 2u64);
+    assert_eq!(as_response[0].total_unique_principals, 2u64);
 }
