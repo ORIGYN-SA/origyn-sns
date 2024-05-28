@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import millify from "millify";
 
 type Data = {
   name: string;
@@ -35,18 +36,25 @@ const Area = ({ data, fill }: AreaChart) => {
         <defs>
           <linearGradient id={`fill${fill}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={fill} stopOpacity={0.8} />
-            <stop offset="95%" stopColor={fill} stopOpacity={0} />
+            <stop offset="100%" stopColor={fill} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid vertical={false} strokeDasharray="5 5" />
+        <CartesianGrid
+          vertical={false}
+          strokeDasharray="5 20"
+          horizontal={false}
+        />
         <XAxis dataKey="name" />
-        <YAxis domain={[0, "dataMax + 500"]} />
-        <Tooltip />
+        <YAxis
+          domain={[0, "dataMax"]}
+          tickFormatter={(value) => millify(value)}
+        />
+        <Tooltip formatter={(value) => millify(value as number)} />
         <AreaRechart
           type="monotone"
           dataKey="value"
           stroke={fill}
-          strokeWidth={4}
+          strokeWidth={2}
           fillOpacity={1}
           fill={`url(#fill${fill})`}
         />
