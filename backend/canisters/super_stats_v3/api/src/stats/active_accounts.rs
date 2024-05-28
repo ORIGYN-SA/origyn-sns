@@ -1,5 +1,6 @@
 use candid::CandidType;
 use ic_stable_memory::{collections::{SHashMap, SVec}, derive::{AsFixedSizeBytes, StableType}, StableType};
+use serde::Deserialize;
 
 use crate::core::{constants::D1_AS_NANOS, stable_memory::STABLE_STATE, types::IDKey};
 
@@ -102,7 +103,7 @@ impl ActivityStats {
     }
 }
 
-#[derive(StableType, AsFixedSizeBytes, Debug, Default, Clone, CandidType)]
+#[derive(StableType, AsFixedSizeBytes, Deserialize, Debug, Default, Clone, CandidType)]
 pub struct ActivitySnapshot {
     pub start_time: u64,
     pub end_time: u64,
