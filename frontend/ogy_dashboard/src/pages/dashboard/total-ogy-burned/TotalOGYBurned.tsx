@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Card, TooltipInfo } from "@components/ui";
-import BarChart from "@components/charts/bar/Bar";
+// import BarChart from "@components/charts/bar/Bar";
+import AreaChart from "@components/charts/area/Area";
 import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 import { ChartData } from "@services/types/charts.types";
 
@@ -52,12 +53,13 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
         <span className="ml-2 mr-3">{totalBurnedOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-96 rounded-xl">
-        <BarChart
+      <div className="mt-6 h-72 rounded-xl">
+        {/* <BarChart
           data={totalBurnedOGYTimeSeries}
           barFill={barFill}
           legendValue="Total OGY Burned"
-        />
+        /> */}
+        <AreaChart data={totalBurnedOGYTimeSeries} fill={barFill} />
       </div>
     </Card>
   );

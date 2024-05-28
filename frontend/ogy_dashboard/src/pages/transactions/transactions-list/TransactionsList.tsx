@@ -60,7 +60,6 @@ const TransactionsList = ({
             >
               {info.getValue()}
             </button>
-            <Tooltip id="tooltip_from_account" />
             <CopyToClipboard value={info.getValue()} />
           </div>
         ),
@@ -80,7 +79,6 @@ const TransactionsList = ({
             >
               {info.getValue()}
             </button>
-            <Tooltip id="tooltip_to_account" />
             <CopyToClipboard value={info.getValue()} />
           </div>
         ),
@@ -141,6 +139,8 @@ const TransactionsList = ({
           setSorting={setSorting}
         />
       )}
+      <Tooltip id="tooltip_from_account" />
+      <Tooltip id="tooltip_to_account" />
     </div>
   );
 };

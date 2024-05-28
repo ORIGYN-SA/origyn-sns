@@ -52,7 +52,7 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
         },
         data: datObj,
         fills: {
-          defaultFill: "#FFFFFF", //the keys in this object map to the "fillKey" of [data] or [bubbles]
+          defaultFill: "#ffffff", //the keys in this object map to the "fillKey" of [data] or [bubbles]
           bubbleDefault: "#222526",
           bubbleSmall: "#E1E1E1",
           bubbleBig: "#222526",
@@ -67,7 +67,7 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
       <div
         id="mapContainer"
         style={{ position: "relative", width: "100%", height: "600px" }}
-        className="mt-8 border border-border rounded-xl"
+        className="mt-8 border border-border rounded-xl bg-surface-3/30"
       />
       <div className="text-center font-semibold mt-8">
         <div className="text-lg text-content/60">Total visitors:</div>
