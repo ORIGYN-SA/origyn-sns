@@ -8,7 +8,7 @@ const useFetchBalanceOGYOwner = () => {
   const [ledgerLegacyActor] = useCanister("ledgerLegacy");
 
   return useQuery({
-    queryKey: ["userFetchBalanceOGYLegacy", owner],
+    queryKey: ["userFetchBalanceOGYLegacy", owner, isConnected],
     queryFn: () =>
       fetchBalanceOGYLegacy({
         actor: ledgerLegacyActor,
