@@ -1,8 +1,8 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import _capitalize from "lodash/capitalize";
-import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransactionQuery";
-import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { DateTime } from "luxon";
+import _capitalize from "lodash/capitalize";
+import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 
 const useFetchOneTransaction = ({
   transactionId,
@@ -21,6 +21,7 @@ const useFetchOneTransaction = ({
       fetchOneTransaction({
         transactionId,
       }),
+    enabled: !!transactionId,
     placeholderData: keepPreviousData,
   });
 
