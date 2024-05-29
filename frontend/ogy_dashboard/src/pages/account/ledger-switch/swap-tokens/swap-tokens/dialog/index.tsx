@@ -5,7 +5,7 @@ import FormPending from "./form/FormPending";
 import FormSuccess from "./form/FormSuccess";
 import FormError from "./form/FormError";
 
-const DialogClaimAllRewards = () => {
+const DialogSwapTokens = () => {
   const { show, handleClose, sendTokens, requestSwap } = useSwapTokens();
 
   const {
@@ -38,4 +38,4 @@ const DialogClaimAllRewards = () => {
   );
 };
 
-export default DialogClaimAllRewards;
+export default DialogSwapTokens;

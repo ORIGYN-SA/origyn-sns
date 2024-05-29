@@ -67,7 +67,7 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
       <div
         id="mapContainer"
         style={{ position: "relative", width: "100%", height: "600px" }}
-        className="mt-8 border border-border rounded-xl bg-surface-3/30"
+        className="mt-8 border border-border rounded-xl"
       />
       <div className="text-center font-semibold mt-8">
         <div className="text-lg text-content/60">Total visitors:</div>

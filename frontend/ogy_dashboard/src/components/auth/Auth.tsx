@@ -31,7 +31,6 @@ const Auth = () => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
       });
-      console.log("disconnected");
     },
   });
 
