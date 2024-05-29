@@ -117,7 +117,7 @@ export const TransactionsDetails = () => {
                     Memo
                   </div>
                   <div className="text-md text-content/60 font-semibold">
-                    {data.memo}
+                    {data.formatted.memo}
                   </div>
                 </div>
               </div>

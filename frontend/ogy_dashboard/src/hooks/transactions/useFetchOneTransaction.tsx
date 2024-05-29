@@ -56,6 +56,7 @@ const useFetchOneTransaction = ({
       updated_at: updated_at
         ? DateTime.fromISO(updated_at).toLocaleString(DateTime.DATETIME_FULL)
         : "",
+      memo: memo ? memo : "-",
     },
   };
 
