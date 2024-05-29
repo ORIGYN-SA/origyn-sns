@@ -32,9 +32,9 @@ include:
   - local: scripts/ci-cd/.node_template.yml
   - local: scripts/ci-cd/.rust_template.yml
   # Frontend linters:
-  # - local: scripts/ci-cd/.frontend_linter.yml
-  #   inputs:
-  #     src-folder: ogy_dashboard
+  - local: scripts/ci-cd/.frontend_linter.yml
+    inputs:
+      src-folder: ogy_dashboard
   # Unit tests coverage
   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   #   inputs:

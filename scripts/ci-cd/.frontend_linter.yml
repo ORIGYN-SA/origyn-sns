@@ -19,4 +19,4 @@ $[[ inputs.src-folder ]] linter:
     - if: $CI_COMMIT_REF_NAME == "develop"
   extends: .node template
   script:
-    - npm run lint:$[[ inputs.src-folder ]]
+    - npm run --workspace $[[ inputs.src-folder ]] lint
