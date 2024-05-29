@@ -2,8 +2,7 @@ spec:
   inputs:
     src-folder:
       description: The NextJS project folder. Must be located in the /frontend/ folder
-      options:
-        ["ogy_dashboard"]
+      options: ["ogy_dashboard"]
 ---
 # Front-end (NextJS) linter job template
 
