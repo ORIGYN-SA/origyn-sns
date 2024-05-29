@@ -38,6 +38,8 @@ impl RuntimeState {
                 ogy_legacy_ledger: self.data.canister_ids.ogy_legacy_ledger,
                 ogy_new_ledger: self.data.canister_ids.ogy_new_ledger,
             },
+            ogy_legacy_minting_account: self.data.minting_account.to_string(),
+            authorized_principals: self.data.authorized_principals.clone(),
         }
     }
 
@@ -51,6 +53,8 @@ impl RuntimeState {
 pub struct Metrics {
     pub canister_info: CanisterInfo,
     pub canister_ids: CanisterIds,
+    pub ogy_legacy_minting_account: String,
+    pub authorized_principals: Vec<Principal>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
