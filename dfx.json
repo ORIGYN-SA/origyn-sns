@@ -94,7 +94,7 @@
       "providers": ["https://icp0.io"],
       "type": "persistent"
     },
-    "pre-prod": {
+    "preprod": {
       "providers": ["https://icp0.io"],
       "type": "persistent"
     },

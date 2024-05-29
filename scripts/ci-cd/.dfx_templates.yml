@@ -23,6 +23,10 @@
       --title "Upgrade ${CANISTER_NAME} to ${CI_COMMIT_SHORT_SHA}"
       --url ${DETAILS_URL} --summary-path proposal.md | quill send $TEST_QUILL --yes -
 
+.asset canister preprod deploy:
+  script:
+    - dfx deploy --network $TARGET_NETWORK --no-wallet --mode reinstall -y ${CANISTER_NAME}
+
 .asset canister production deploy:
   script:
     - . scripts/parse_proposal_details.sh

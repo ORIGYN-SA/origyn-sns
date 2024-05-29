@@ -13,10 +13,7 @@
     "deploy:staging": "npm run build:staging && dfx deploy ogy_dashboard --network=staging",
     "deploy:preprod": "npm run build:preprod && dfx deploy ogy_dashboard --network=preprod",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --mode staging",
-    "build:staging": "tsc && vite build --mode staging",
-    "build:preprod": "tsc && vite build --mode preprod",
-    "build:prod": "tsc && vite build --mode prod"
+    "preview": "vite preview --mode staging"
   },
   "dependencies": {
     "@connect2ic/core": "^0.2.0-beta.24",
