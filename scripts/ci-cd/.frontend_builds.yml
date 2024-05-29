@@ -18,7 +18,7 @@ $[[ inputs.src-folder ]] test build:
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-$[[ inputs.src-folder ]]-TEST"
     paths:
-      - frontend/$[[ inputs.src-folder ]]/out
+      - frontend/$[[ inputs.src-folder ]]/dist
     expire_in: 1 day
 
 $[[ inputs.src-folder ]] staging build:
@@ -37,7 +37,7 @@ $[[ inputs.src-folder ]] staging build:
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-$[[ inputs.src-folder ]]_STAGING_BUILD"
     paths:
-      - frontend/$[[ inputs.src-folder ]]/out
+      - frontend/$[[ inputs.src-folder ]]/dist
     reports:
       dotenv: $[[ inputs.src-folder ]]_deploy.env
     expire_in: 1 day
@@ -66,7 +66,7 @@ $[[ inputs.src-folder ]] production build:
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-$[[ inputs.src-folder ]]"
     paths:
-      - frontend/$[[ inputs.src-folder ]]/out
+      - frontend/$[[ inputs.src-folder ]]/dist
     reports:
       dotenv: $[[ inputs.src-folder ]]_deploy.env
     expire_in: 6 months
