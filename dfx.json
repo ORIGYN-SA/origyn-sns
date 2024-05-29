@@ -94,6 +94,10 @@
       "providers": ["https://icp0.io"],
       "type": "persistent"
     },
+    "pre-prod": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
+    },
     "local": {
       "bind": "localhost:8080",
       "type": "ephemeral"

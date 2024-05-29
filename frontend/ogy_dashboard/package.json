@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode preprod",
-    "build": "tsc && vite build --mode staging",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --mode staging"
+    "preview": "vite preview --mode staging",
+    "build:staging": "tsc && vite build --mode staging",
+    "build:preprod": "tsc && vite build --mode preprod",
+    "build:prod": "tsc && vite build --mode prod"
   },
   "dependencies": {
     "@connect2ic/core": "^0.2.0-beta.24",
