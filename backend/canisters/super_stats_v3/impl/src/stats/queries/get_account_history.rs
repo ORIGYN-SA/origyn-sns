@@ -15,6 +15,9 @@ fn get_account_history(args: Args) -> Response {
     api_count();
     let history = get_history_of_account(args.account, args.days, false);
     let mut filled_history = fill_missing_days(history, args.days);
-    let ret = filled_history.split_off(filled_history.len() - args.days as usize);
+    if filled_history.is_empty() {
+        return Vec::new();
+    }
+    let ret = filled_history.split_off(filled_history.len() - (args.days as usize));
     return ret;
 }
