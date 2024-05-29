@@ -1,56 +1,16 @@
-import { useQuery, QueryClient, UseQueryResult } from "@tanstack/react-query";
-import {
-  useLoaderData,
-  // defer,
-  // Await,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-
-import fetchOneAccountQuery, {
-  Account,
-  AccountParams,
-} from "@services/queries/accounts/fetchOneAccountQuery";
-
-// export const loader = async () => {
-//   const dataProposals = new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve([{ name: "State", value: "Dissolving" }]);
-//     }, 300);
-//   });
-
-//   return defer({
-//     dataProposals: await dataProposals,
-//   });
-// };
-
-const loader =
-  (queryClient: QueryClient) =>
-  async ({ params }: { params: AccountParams }) => {
-    const query = fetchOneAccountQuery({ id: params.id });
-    return (
-      queryClient.getQueryData(query.queryKey) ??
-      (await queryClient.fetchQuery(query))
-    );
-  };
+import { Tooltip } from "@components/ui";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 
 export const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
-
-  const handleOnClickBack = () => {
-    navigate(-1);
-  };
-
-  const initialData = useLoaderData() as Awaited<
-    ReturnType<ReturnType<typeof loader>>
-  >;
   const params = useParams();
 
-  const { data }: UseQueryResult<Account> = useQuery({
-    ...fetchOneAccountQuery({ id: params.id }),
-    initialData,
-  });
+  const handleOnClickBack = () => navigate(-1);
+
+  const { data } = useFecthOneAccount({ accountId: params.id as string });
 
   return (
     <div className="container mx-auto pt-8 pb-16 px-4">
@@ -73,11 +33,28 @@ export const TransactionsAccountsDetails = () => {
           {[
             { title: "ID", value: data.id },
             { title: "Owner", value: data.owner },
-            { title: "Subaccount", value: data.subaccount },
+            { title: "Subaccount", value: data.formatted.subaccount },
           ].map(({ title, value }) => (
             <div key={title} className="mb-4">
               <div className="text-content/60">{title}</div>
-              <div className="font-bold break-all">{value}</div>
+
+              <div className="flex items-center truncate max-w-2xl">
+                {title !== "Subaccount" ||
+                (title === "Subaccount" && data.has_subaccount) ? (
+                  <>
+                    <div
+                      className="truncate font-semibold"
+                      data-tooltip-id="tooltip"
+                      data-tooltip-content={value}
+                    >
+                      {value}
+                    </div>
+                    <CopyToClipboard value={value as string} />
+                  </>
+                ) : (
+                  <div className="font-semibold">{value}</div>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -85,11 +62,19 @@ export const TransactionsAccountsDetails = () => {
           <div className="xl:col-span-1 rounded-tr-none xl:rounded-tr-lg p-6 bg-surface flex items-center justify-center border-t border-border xl:border-none">
             <div className="flex flex-col items-center">
               <div className="font-semibold mb-4">Balance</div>
-              <div className="text-4xl font-semibold">{data.balance}</div>
+              <div className="flex items-center font-semibold">
+                <img src="/ogy_logo.svg" alt="OGY Logo" />
+                <div className="flex items-end">
+                  <span className="ml-4 mr-2 text-4xl">
+                    {data.formatted.balance}
+                  </span>
+                  <span className="text-content/60">OGY</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
-            <div className="flex flex-col items-center">
+            {/* <div className="flex flex-col items-center">
               {[
                 { title: "Historical max balance", value: 1 },
                 { title: "Genesis balance", value: 2 },
@@ -100,12 +85,11 @@ export const TransactionsAccountsDetails = () => {
                   <span className="">{value}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
+      <Tooltip id="tooltip" />
     </div>
   );
 };
-
-TransactionsAccountsDetails.loader = loader;
