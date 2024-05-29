@@ -25,9 +25,9 @@ $[[ inputs.src-folder ]] tests:
   script:
     # - cargo tarpaulin -p $[[ inputs.src-folder ]] -j 2 --lib --no-fail-fast -o Xml
     - cargo test -p $[[ inputs.src-folder ]]
-  coverage: /^\d+.\d+% coverage/
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: cobertura.xml
+  # coverage: /^\d+.\d+% coverage/
+  # artifacts:
+  #   reports:
+  #     coverage_report:
+  #       coverage_format: cobertura
+  #       path: cobertura.xml
