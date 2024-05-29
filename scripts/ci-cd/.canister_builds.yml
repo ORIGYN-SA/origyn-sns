@@ -8,7 +8,7 @@ spec:
 
 $[[ inputs.src-folder ]] test build:
   stage: build
-  needs: $[[ inputs.src-folder ]] tests
+  # needs: $[[ inputs.src-folder ]] tests
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   extends: .rust template
