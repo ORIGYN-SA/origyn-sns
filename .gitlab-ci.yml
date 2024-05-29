@@ -122,51 +122,51 @@ cargo cache:
 
 # See includes above for canister builds
 
-generate test declarations:
-  stage: test
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    # - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
-    paths:
-      - backend/**/declarations
-    expire_in: 1 day
+# generate test declarations:
+#   stage: test
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_stats_v3 test build",
+#           "token_metrics test build",
+#         ]
+#   script:
+#     - dfx generate ogy_token_swap
+#     - dfx generate sns_rewards
+#     # - dfx generate super_stats_v3
+#     - dfx generate token_metrics
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
+#     paths:
+#       - backend/**/declarations
+#     expire_in: 1 day
 
-generate declarations:
-  stage: build
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    # - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
-    paths:
-      - backend/**/api
-    expire_in: 6 months
+# generate declarations:
+#   stage: build
+#   rules:
+#     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
+#       when: never
+#     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_stats_v3 test build",
+#           "token_metrics test build",
+#         ]
+#   script:
+#     - dfx generate ogy_token_swap
+#     - dfx generate sns_rewards
+#     # - dfx generate super_stats_v3
+#     - dfx generate token_metrics
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
+#     paths:
+#       - backend/**/api
+#     expire_in: 6 months
 
 # See includes above for frontend builds
 
@@ -321,7 +321,7 @@ ogy token swap staging:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-ogy-token-swap.sh --reinstall $TARGET_NETWORK
+    - . scripts/deploy-ogy_token_swap.sh --reinstall $TARGET_NETWORK
   environment:
     name: ogy_token_swap
     deployment_tier: staging
@@ -340,7 +340,7 @@ ogy token swap:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-ogy-token-swap.sh $TARGET_NETWORK
+    - . scripts/deploy-ogy_token_swap.sh $TARGET_NETWORK
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
     paths:
@@ -390,3 +390,50 @@ ogy token swap:
 #     deployment_tier: production
 #     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
 #     action: start
+
+
+#######
+# DEPLOYMENTS FRONTEND
+#######
+
+ogy dashboard staging:
+  stage: deploy
+  resource_group: frontend staging deployment
+  variables:
+    CANISTER_NAME: "ogy_dashboard"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      needs: ["ogy_dashboard staging build"]
+      variables:
+        TARGET_NETWORK: staging
+        PEM_FILE: "${PEM_FILE_STAGING}"
+  before_script:
+    - !reference [.import dfx identity, before_script]
+  script:
+    - !reference [.asset canister staging deploy, script]
+  environment:
+    name: ogy dashboard
+    deployment_tier: staging
+    url: https://dashboard.origyn.com/
+    action: start
+
+ogy dashboard production:
+  stage: deploy
+  resource_group: frontend production deployment
+  variables:
+    CANISTER_NAME: "ogy_dashboard"
+  rules:
+    - if: $CI_COMMIT_TAG =~ '/^ogy_dashboard-v\d+\.\d+\.\d+$/'
+      needs: ["ogy_dashboard production build"]
+      variables:
+        TARGET_NETWORK: ic
+        PEM_FILE: "${PEM_FILE_PRODUCTION}"
+  before_script:
+    - !reference [.import dfx identity, before_script]
+  script:
+    - !reference [.asset canister production deploy, script]
+  environment:
+    name: ogy dashboard
+    deployment_tier: production
+    url: https://dashboard.origyn.com/
+    action: start
