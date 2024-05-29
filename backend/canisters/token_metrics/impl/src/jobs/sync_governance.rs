@@ -1,7 +1,8 @@
-use candid::Principal;
+use candid::{ Nat, Principal };
 use canister_time::{ now_millis, run_now_then_interval, DAY_IN_MS };
-use sns_governance_canister::types::{ Neuron, NeuronId };
-use token_metrics_api::token_data::GovernanceStats;
+use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
+use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
+use token_metrics_api::token_data::{ GovernanceStats, LockedNeuronsAmount };
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::time::Duration;
 use tracing::{ debug, error, info };
@@ -50,6 +51,8 @@ pub async fn sync_neurons_data() {
     > = NormalBTreeMap::new();
     let mut temp_all_gov_stats: GovernanceStats = GovernanceStats::default();
 
+    let mut temp_locked_neurons_amount: LockedNeuronsAmount = LockedNeuronsAmount::default();
+
     while continue_scanning {
         continue_scanning = false;
 
@@ -65,7 +68,7 @@ pub async fn sync_neurons_data() {
                         &mut temp_all_gov_stats,
                         neuron
                     );
-                    // update_neuron_maturity(state, neuron);
+                    update_locked_neurons_amount(&mut temp_locked_neurons_amount, neuron);
                 });
 
                 // Check if we hit the end of the list
@@ -99,6 +102,7 @@ pub async fn sync_neurons_data() {
         let principal_with_neurons = &mut state.data.principal_neurons;
         let principal_with_stats = &mut state.data.principal_gov_stats;
         let all_gov_stats = &mut state.data.all_gov_stats;
+        let locked_neurons_amount = &mut state.data.locked_neurons_amount;
 
         // Update the state with the newly computed data
         principal_with_neurons.clear();
@@ -110,11 +114,63 @@ pub async fn sync_neurons_data() {
             principal_with_stats.insert(key, value);
         }
         *all_gov_stats = temp_all_gov_stats;
+        *locked_neurons_amount = temp_locked_neurons_amount;
     });
 
     // After we have computed governance stats, update the total supply and circulating supply
     sync_supply_data::run();
     update_balance_list::run();
+}
+fn check_locked_neurons_period(
+    locked_neurons_amount: &mut LockedNeuronsAmount,
+    end_timestamp: u64,
+    current_timestamp: u64,
+    value: u64
+) {
+    let duration = end_timestamp - current_timestamp;
+    if duration >= 5 * SECONDS_IN_ONE_YEAR {
+        locked_neurons_amount.five_years += value;
+    } else if duration >= 4 * SECONDS_IN_ONE_YEAR {
+        locked_neurons_amount.four_years += value;
+    } else if duration >= 3 * SECONDS_IN_ONE_YEAR {
+        locked_neurons_amount.three_years += value;
+    } else if duration >= 2 * SECONDS_IN_ONE_YEAR {
+        locked_neurons_amount.three_years += value;
+    } else if duration >= 1 * SECONDS_IN_ONE_YEAR {
+        locked_neurons_amount.three_years += value;
+    }
+}
+fn update_locked_neurons_amount(locked_neurons_amount: &mut LockedNeuronsAmount, neuron: &Neuron) {
+    let current_timestamp_in_seconds = ic_cdk::api::time() / 1_000_000_000;
+
+    match neuron.staked_maturity_e8s_equivalent {
+        Some(staked_value) => {
+            match neuron.dissolve_state.clone() {
+                Some(dissolve_state) => {
+                    match dissolve_state {
+                        DissolveState::DissolveDelaySeconds(end_timestamp) => {
+                            check_locked_neurons_period(
+                                locked_neurons_amount,
+                                end_timestamp,
+                                current_timestamp_in_seconds,
+                                staked_value
+                            )
+                        }
+                        DissolveState::WhenDissolvedTimestampSeconds(end_timestamp) => {
+                            check_locked_neurons_period(
+                                locked_neurons_amount,
+                                end_timestamp,
+                                current_timestamp_in_seconds,
+                                staked_value
+                            )
+                        }
+                    }
+                }
+                None => {}
+            };
+        }
+        None => {}
+    }
 }
 fn update_principal_neuron_mapping(
     principal_with_neurons: &mut NormalBTreeMap<Principal, Vec<NeuronId>>,
