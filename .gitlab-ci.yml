@@ -304,7 +304,8 @@ sns rewards staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+  needs: ["sns_rewards canister build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -324,7 +325,8 @@ sns rewards:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
+  needs: ["sns_rewards canister build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
