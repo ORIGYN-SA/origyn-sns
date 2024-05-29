@@ -1,16 +1,6 @@
 import icrcAPI from "@services/api/icrc/v1";
+import { Transaction } from "@services/types/transactions.types";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
-
-export interface Transaction {
-  index: number;
-  updated_at: string;
-  from_account: string;
-  to_account: string;
-  amount: string;
-  fee: string;
-  memo: string;
-  kind: string;
-}
 
 export const fetchOneTransaction = async ({
   transactionId,
