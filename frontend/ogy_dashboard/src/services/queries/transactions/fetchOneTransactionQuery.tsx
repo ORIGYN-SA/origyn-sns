@@ -1,4 +1,3 @@
-import { keepPreviousData } from "@tanstack/react-query";
 import icrcAPI from "@services/api/icrc/v1";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
@@ -13,28 +12,13 @@ export interface Transaction {
   kind: string;
 }
 
-export interface FetchOneTransactionParams {
-  index: string | undefined;
-}
-
-const fn = async ({
-  index,
-}: FetchOneTransactionParams): Promise<Transaction> => {
+export const fetchOneTransaction = async ({
+  transactionId,
+}: {
+  transactionId: string;
+}): Promise<Transaction> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions/${index}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions/${transactionId}`
   );
-  return data ?? null;
+  return data;
 };
-
-const fetchOneTransactionQuery = ({
-  index = undefined,
-}: FetchOneTransactionParams) => {
-  return {
-    queryKey: ["fetchOneTransaction", index],
-    queryFn: async () => fn({ index }),
-    placeholderData: keepPreviousData,
-    enabled: !!index,
-  };
-};
-
-export default fetchOneTransactionQuery;
