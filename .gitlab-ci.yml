@@ -238,7 +238,7 @@ check canister ids:
       variables:
         TARGET_NETWORK: staging
         PEM_FILE: "${PEM_FILE_STAGING}"
-    - if: $CI_COMMIT_TAG =~ '/^(core)|(ogy_token_swap)|(sns_rewards)|(super_indexer_v3)|(super_stats_v3)|(tx_store_v3)-v\d+\.\d+\.\d+$/'
+    - if: $CI_COMMIT_TAG =~ '/^(ogy_token_swap)|(sns_rewards)|(super_stats_v3)|(token_metrics)-v\d+\.\d+\.\d+$/'
       variables:
         TARGET_NETWORK: ic
         PEM_FILE: "${PEM_FILE_PRODUCTION}"
@@ -251,63 +251,6 @@ check canister ids:
     paths:
       - canister_ids.json
     expire_in: 1 hour
-
-# .asset canisters upgrade proposal tests:
-#   stage: deploy
-#   variables:
-#     CANISTER_NAME: "ogy_token_swap"
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-#       needs: ["ogy_token_swap test build"]
-#       variables:
-#         TARGET_NETWORK: staging
-#         PEM_FILE: testid.pem
-#         TEST_QUILL: "--dry-run"
-#   cache:
-#     policy: pull
-#   before_script:
-#     - dfx identity new --storage-mode plaintext testid
-#     - dfx identity use testid
-#     - dfx identity get-principal
-#     - dfx start --clean --background --artificial-delay 40
-#     - dfx identity export testid > testid.pem
-#   script:
-#     - dfx canister create --all
-#     - export OGY_DASHBOARD_FRONT_ID=$(dfx canister id ogy_dashboard)
-#     - !reference [.asset canister staging deploy, script]
-#   after_script:
-#     - dfx stop
-#   environment:
-#     name: swap app
-#     deployment_tier: staging
-#     url: $SWAP_APP_URL ## TODO
-#     action: verify
-
-# # .backend canisters upgrade proposal tests:
-# #   stage: deploy
-# #   rules:
-# #     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-# #       needs: ["ogy_token_swap test build"]
-# #       variables:
-# #         TARGET_NETWORK: staging
-# #         PEM_FILE: testid.pem
-# #   cache:
-# #     policy: pull
-# #   before_script:
-# #     - dfx identity new --storage-mode plaintext testid
-# #     - dfx identity use testid
-# #     - dfx identity get-principal
-# #     - dfx start --clean --background --artificial-delay 40
-# #     - dfx identity export testid > testid.pem
-# #   script:
-# #     - dfx canister create --all
-# #   after_script:
-# #     - dfx stop
-# #   environment:
-# #     name: gldt_core
-# #     deployment_tier: staging
-# #     url: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=
-# #     action: verify
 
 
 ogy token swap staging:
