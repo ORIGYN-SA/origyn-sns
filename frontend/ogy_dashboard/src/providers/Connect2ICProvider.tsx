@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { PropsWithChildren } from "react";
 import { createClient } from "@connect2ic/core";
 import {
-  // AstroX,
-  // InfinityWallet,
-  // InternetIdentity,
-  // NFID,
-  // StoicWallet,
-  defaultProviders,
+  AstroX,
+  InfinityWallet,
+  InternetIdentity,
+  NFID,
+  PlugWallet,
+  // defaultProviders,
 } from "@connect2ic/core/providers";
 import { Connect2ICProvider } from "@connect2ic/react";
 import {
@@ -57,7 +55,13 @@ const Provider = ({ children }: PropsWithChildren) => {
             idlFactory: SNSRewardsIdl,
           },
         },
-        providers: defaultProviders,
+        providers: [
+          new AstroX(),
+          new InfinityWallet(),
+          new InternetIdentity(),
+          new NFID(),
+          new PlugWallet(),
+        ],
         globalProviderConfig: {
           host: "https://icp-api.io",
           dev: false,
@@ -69,7 +73,6 @@ const Provider = ({ children }: PropsWithChildren) => {
             OGY_TOKEN_SWAP_CANISTER_ID,
             SNS_REWARDS_CANISTER_ID,
           ],
-          autoConnect: true,
         },
       })}
     >

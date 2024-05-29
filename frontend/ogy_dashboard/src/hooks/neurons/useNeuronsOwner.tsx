@@ -32,9 +32,8 @@ const useNeuronsOwner = ({
     isLoading: isLoadingGetNervousSystemParameters,
     error: errorGetNervousSystemParameters,
   } = useQuery({
-    queryKey: ["getNervousSystemParameters", isConnected],
+    queryKey: ["getNervousSystemParameters"],
     queryFn: () => getNervousSystemParameters({ governanceActor }),
-    enabled: !!isConnected,
   });
 
   const {

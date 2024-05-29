@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@connect2ic/react";
+import { useCanister } from "@connect2ic/react";
+import useConnect from "@hooks/useConnect";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 
 const useFetchBalanceOGYOwner = () => {
@@ -8,7 +9,7 @@ const useFetchBalanceOGYOwner = () => {
   const [ledgerActor] = useCanister("ledger");
 
   return useQuery({
-    queryKey: ["userFetchBalanceOGY", owner],
+    queryKey: ["userFetchBalanceOGY", owner, isConnected],
     queryFn: () =>
       fetchBalanceOGY({ actor: ledgerActor, owner: owner as string }),
     placeholderData: keepPreviousData,

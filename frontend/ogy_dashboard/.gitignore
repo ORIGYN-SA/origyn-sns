@@ -13,6 +13,10 @@ dist-ssr
 *.local
 .dfx
 
+# TODO wait input from Dustin
+public/.well-known
+public/.ic-assets.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

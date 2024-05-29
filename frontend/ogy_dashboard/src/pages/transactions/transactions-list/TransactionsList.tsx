@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Table, Tooltip, Badge } from "@components/ui";
-import useFetchAllTransactions from "@services/queries/transactions/fetchAll";
+import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
 import { Transaction } from "@services/types/transactions.types";
 import { TableProps } from "@helpers/table/useTable";
 import { timestampToDateShort } from "@helpers/dates";
@@ -60,7 +60,6 @@ const TransactionsList = ({
             >
               {info.getValue()}
             </button>
-            <Tooltip id="tooltip_from_account" />
             <CopyToClipboard value={info.getValue()} />
           </div>
         ),
@@ -80,7 +79,6 @@ const TransactionsList = ({
             >
               {info.getValue()}
             </button>
-            <Tooltip id="tooltip_to_account" />
             <CopyToClipboard value={info.getValue()} />
           </div>
         ),
@@ -134,13 +132,15 @@ const TransactionsList = ({
       {isSuccess && (
         <Table
           columns={columns}
-          data={transactions}
+          data={transactions.list}
           pagination={pagination}
           setPagination={setPagination}
           sorting={sorting}
           setSorting={setSorting}
         />
       )}
+      <Tooltip id="tooltip_from_account" />
+      <Tooltip id="tooltip_to_account" />
     </div>
   );
 };

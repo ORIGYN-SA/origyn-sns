@@ -8,9 +8,11 @@ export const LEGACY_LEDGER_CANISTER_ID = import.meta.env.VITE_LEGACY_LEDGER_CANI
 export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_LEGACY_GOVERNANCE_CANISTER_ID;
 export const LEGACY_VESTING_CANISTER_ID = import.meta.env.VITE_LEGACY_VESTING_CANISTER_ID;
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
+export const API_PLAUSIBLE_BASE_URL = import.meta.env.VITE_API_PLAUSIBLE_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
 export const API_LEDGER_BASE_URL = import.meta.env.VITE_API_LEDGER_BASE_URL;
+export const PLAUSIBLE_API_KEY = import.meta.env.VITE_PLAUSIBLE_API_KEY;
 export const ACCOUNT_ID_LEDGER_ICP = import.meta.env.VITE_ACCOUNT_ID_LEDGER_ICP;
 export const ACCOUNT_ID_LEDGER_OGY = import.meta.env.VITE_ACCOUNT_ID_LEDGER_OGY;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
@@ -110,4 +112,9 @@ if (!(APP_MODE === "production")) {
         console.log("No TRANSACTION_FEE environment variable. Set TRANSACTION_FEE environment variable.")
     else
         console.log(`TRANSACTION_FEE=${TRANSACTION_FEE}`)
+
+    if (!PLAUSIBLE_API_KEY)
+        console.log("No PLAUSIBLE_API_KEY environment variable. Set PLAUSIBLE_API_KEY environment variable.")
+    else
+        console.log(`PLAUSIBLE_API_KEY=${PLAUSIBLE_API_KEY}`)
 }

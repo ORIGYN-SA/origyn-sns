@@ -35,8 +35,6 @@ const Tooltip = ({
       id={id}
       place={place}
       clickable={clickable}
-      openEvents={{ click: true }}
-      closeEvents={{ click: true }}
       {...restProps}
     >
       {children}

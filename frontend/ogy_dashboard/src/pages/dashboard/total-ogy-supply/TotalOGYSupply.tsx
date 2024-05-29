@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import BarChart from "@components/charts/bar/Bar";
+// import BarChart from "@components/charts/bar/Bar";
+import AreaChart from "@components/charts/area/Area";
 import { Card, TooltipInfo } from "@components/ui";
 import useTotalOGYSupply from "@hooks/metrics/useTotalOGYSupply";
 import { ChartData } from "@services/types/charts.types";
@@ -53,8 +54,9 @@ const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
         <span className="ml-2 mr-3">{totalSupplyOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-96 rounded-xl">
-        <BarChart data={totalSupplyOGYTimeSeries} barFill={barFill} />
+      <div className="mt-6 h-72 rounded-xl">
+        {/* <BarChart data={totalSupplyOGYTimeSeries} barFill={barFill} /> */}
+        <AreaChart data={totalSupplyOGYTimeSeries} fill={barFill} />
       </div>
     </Card>
   );

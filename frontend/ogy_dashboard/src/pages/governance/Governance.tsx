@@ -3,7 +3,12 @@
 import { useMemo } from "react";
 import { useLoaderData, defer, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowTopRightOnSquareIcon,
+  HandThumbUpIcon,
+  CheckBadgeIcon,
+  StarIcon,
+} from "@heroicons/react/24/outline";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
@@ -71,29 +76,25 @@ export const Governance = () => {
         title: "Stake & Vote",
         description:
           "Influence the ORIGYN Network by staking OGY & voting on proposals.",
-        icon: "",
+        icon: <HandThumbUpIcon className="h-8 w-8" />,
       },
       {
         title: "Earn Rewards",
         description:
           "Participate in the decision-making process to earn rewards.",
-        icon: "",
+        icon: <CheckBadgeIcon className="h-8 w-8" />,
       },
       {
         title: "Govern Collectively",
         description:
           "Engage & influence the network as a collaborative ecosystem.",
-        icon: "",
+        icon: <StarIcon className="h-8 w-8" />,
       },
     ],
     []
   );
 
   const [pagination] = usePagination({ pageIndex: 0, pageSize: 10 });
-  // const [sorting, setSorting] = useSorting({
-  //   id: "index",
-  //   desc: true,
-  // });
 
   const handleShowAllProposals = () => {
     navigate("/proposals");
