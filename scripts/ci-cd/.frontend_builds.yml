@@ -46,7 +46,7 @@ $[[ inputs.src-folder ]] staging build:
     deployment_tier: staging
     action: prepare
 
-$[[ inputs.src-folder ]] pro-prod build:
+$[[ inputs.src-folder ]] preprod build:
   stage: build
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
