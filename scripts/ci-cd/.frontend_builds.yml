@@ -8,7 +8,7 @@ spec:
 # Frontend builds
 
 $[[ inputs.src-folder ]] test build:
-  stage: test
+  stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   # needs: ["generate test declarations"]
