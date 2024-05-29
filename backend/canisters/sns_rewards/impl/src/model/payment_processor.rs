@@ -37,10 +37,10 @@ impl Default for PaymentProcessor {
 
 impl PaymentProcessor {
     // gets the last key of the last completed payment round and circles from 1 - u16::MAX - each cycle is 125 years.
-    pub fn next_key(&self, token_symbol: &TokenSymbol) -> u16 {
+    pub fn next_key(&self) -> u16 {
         let mut max_key = 0;
         for ((symbol, id), _) in self.round_history.iter() {
-            if id > max_key && token_symbol == &symbol {
+            if id > max_key {
                 max_key = id;
             }
         }
@@ -48,7 +48,6 @@ impl PaymentProcessor {
         let next_key = if max_key == u16::MAX { 1 } else { max_key + 1 };
         next_key
     }
-
     pub fn add_active_payment_round(&mut self, round: PaymentRound) {
         self.active_rounds.insert(round.token.clone(), round);
     }
@@ -156,7 +155,7 @@ mod tests {
         );
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(&ogy_token), 2);
+            assert_eq!(s.data.payment_processor.next_key(), 2);
         });
 
         mutate_state(|s|
@@ -175,7 +174,7 @@ mod tests {
         );
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(&ogy_token), 3);
+            assert_eq!(s.data.payment_processor.next_key(), 3);
         });
     }
 }
