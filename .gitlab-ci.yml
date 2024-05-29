@@ -457,5 +457,5 @@ ogy dashboard production:
   environment:
     name: ogy dashboard
     deployment_tier: production
-    url: https://dashboard.origyn.com/
+    url: https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io/
     action: start
