@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "vite --mode staging",
     "dev:preprod": "vite --mode preprod",
-    "build": "npm run lint && tsc && vite build --mode preprod",
-    "deploy": "dfx deploy ogy_dashboard --network=preprod",
+    "build": "",
+    "build:staging": "npm run lint && tsc && vite build --mode staging",
+    "build:preprod": "npm run lint && tsc && vite build --mode preprod",
+    "build:production": "npm run lint && tsc && vite build --mode production",
+    "deploy:staging": "npm run build:staging && dfx deploy ogy_dashboard --network=staging",
+    "deploy:preprod": "npm run build:preprod && dfx deploy ogy_dashboard --network=preprod",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --mode staging"
   },
