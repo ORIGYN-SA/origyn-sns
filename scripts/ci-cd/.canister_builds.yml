@@ -7,7 +7,8 @@ spec:
 # Rust canisters test and production builds
 
 $[[ inputs.src-folder ]] test build:
-  stage: test
+  stage: build
+  needs: $[[ inputs.src-folder ]] tests
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   extends: .rust template
