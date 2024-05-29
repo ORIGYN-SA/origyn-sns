@@ -110,7 +110,6 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/explorer/transactions/:index",
-                loader: TransactionsDetails.loader(queryClient),
                 element: <TransactionsDetails />,
               },
               {
