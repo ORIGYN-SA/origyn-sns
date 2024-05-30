@@ -2,10 +2,15 @@
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
     "token_metrics": {
+      "type": "custom",
       "candid": "backend/canisters/token_metrics/api/can.did",
       "package": "token_metrics",
-      "type": "rust",
-      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz"
+      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/token_metrics/api/declarations"
+      }
     },
     "ogy_token_swap": {
       "type": "custom",
@@ -81,11 +86,16 @@
       "wasm": ""
     },
     "super_stats_v3": {
+      "type": "custom",
       "candid": "backend/canisters/super_stats_v3/api/can.did",
       "optimize": "cycles",
       "package": "super_stats_v3",
-      "type": "rust",
-      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz"
+      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/super_stats_v3/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",
