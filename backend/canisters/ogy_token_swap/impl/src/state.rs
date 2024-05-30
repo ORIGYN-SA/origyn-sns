@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
@@ -7,10 +5,8 @@ use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use ogy_token_swap_api::{
-    requesting_principals::RequestingPrincipals,
-    types::token_swap::TokenSwap,
-};
+use crate::model::token_swap::TokenSwap;
+use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
 
 canister_state!(RuntimeState);
 
