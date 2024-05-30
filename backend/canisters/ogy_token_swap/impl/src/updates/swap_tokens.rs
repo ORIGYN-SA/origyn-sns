@@ -31,6 +31,7 @@ use ogy_token_swap_api::{
     OGY_MIN_SWAP_AMOUNT,
 };
 use serde_bytes::ByteBuf;
+use tracing::error;
 use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
 pub use ogy_token_swap_api::{
@@ -64,6 +65,9 @@ pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
     principal: Principal
 ) -> Result<BlockIndexIcrc, String> {
+    if read_state(|s| s.data.token_swap.is_capacity_full()) {
+        return Err(format!("Can't perform the swap. There are too many swaps in the heap"));
+    }
     // 1. Initialise internal state and verify previous entries in case they are present
     let recover_mode = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal))?;
     // if it passed the first check, we update the last request time
@@ -433,25 +437,18 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
     });
     match icrc1_transfer(ogy_ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
-            let mut archive_error: String = "".to_string();
             mutate_state(|s| {
                 s.data.token_swap.set_swap_block_index(block_index, transfer_block_index.clone());
                 s.data.token_swap.update_status(
                     block_index,
                     SwapStatus::Complete(transfer_block_index.clone())
                 );
-                match s.data.token_swap.archive_swap(block_index) {
-                    Ok(_) => {}
-                    Err(e) => {
-                        archive_error = e;
-                    }
+                if let Err(_) = s.data.token_swap.archive_swap(block_index) {
+                    s.data.token_swap.update_archiving_status(block_index, true)
                 }
             });
-            if archive_error.len() > 0 {
-                Err(archive_error)
-            } else {
-                Ok(transfer_block_index)
-            }
+
+            Ok(transfer_block_index)
         }
 
         Ok(Err(msg)) => {

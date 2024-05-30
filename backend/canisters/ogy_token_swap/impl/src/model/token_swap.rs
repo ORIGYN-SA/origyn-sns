@@ -11,6 +11,7 @@ use ogy_token_swap_api::{
     updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse,
 };
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
+use tracing::error;
 
 use crate::memory::{ get_swap_history_memory, VM };
 use ogy_token_swap_api::types::token_swap::{ BlockFailReason, SwapInfo };
@@ -201,6 +202,12 @@ impl TokenSwap {
         }; // other case is not possible because it was initialised before
     }
 
+    pub fn update_archiving_status(&mut self, block_index: BlockIndex, status: bool) {
+        if let Some(entry) = self.swap.get_mut(&block_index) {
+            entry.archiving_failed = status;
+        }
+    }
+
     pub fn set_amount(&mut self, block_index: BlockIndex, amount: u64) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.amount = amount;
@@ -233,7 +240,7 @@ impl TokenSwap {
         } // other case is not possible because it was initialised before
     }
 
-    pub fn archive_swap(&mut self, block_index: BlockIndex) -> Result<(), String> {
+    pub fn archive_swap(&mut self, block_index: BlockIndex) -> Result<(), ()> {
         let swap_info = self.swap.get(&block_index);
         match swap_info {
             Some(swap) => {
@@ -241,12 +248,12 @@ impl TokenSwap {
                 self.swap.remove(&block_index);
                 Ok(())
             }
-            None =>
-                Err(
-                    format!(
-                        "can't archive {block_index} because it doesn't exist in swap heap memory"
-                    )
-                ),
+            None => {
+                error!(
+                    "Failed to archive {block_index} because it doesn't exist in swap heap memory"
+                );
+                Err(())
+            }
         }
     }
     /// should only be used for integration testing
