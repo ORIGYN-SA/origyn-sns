@@ -7,7 +7,6 @@ import { Table, Tooltip, Badge } from "@components/ui";
 import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
 import { Transaction } from "@services/types/transactions.types";
 import { TableProps } from "@helpers/table/useTable";
-import { timestampToDateShort } from "@helpers/dates";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 
@@ -40,7 +39,7 @@ const TransactionsList = ({
           <div>
             <Badge className="bg-slate-500/20 px-2">
               <div className="text-slate-500 text-xs font-semibold shrink-0">
-                {timestampToDateShort(info.getValue())}
+                {info.getValue()}
               </div>
             </Badge>
           </div>
