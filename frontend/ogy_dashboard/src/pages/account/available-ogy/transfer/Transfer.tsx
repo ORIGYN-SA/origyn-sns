@@ -14,11 +14,8 @@ const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
-  const {
-    data: balanceOGY,
-    isSuccess: isSuccessFetchBalanceOGY,
-    refetch: refetchFetchOGYBalance,
-  } = useFetchBalanceOGYOwner();
+  const { data: balanceOGY, isSuccess: isSuccessFetchBalanceOGY } =
+    useFetchBalanceOGYOwner();
 
   const {
     mutate: transfer,
@@ -35,7 +32,7 @@ const Transfer = ({ show, handleClose }) => {
     handleSubmit,
     control,
     reset: resetForm,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     shouldUnregister: true,
@@ -77,7 +74,6 @@ const Transfer = ({ show, handleClose }) => {
           queryClient.invalidateQueries({
             queryKey: ["userFetchBalanceOGY"],
           });
-          refetchFetchOGYBalance();
         },
       }
     );
@@ -173,7 +169,7 @@ const Transfer = ({ show, handleClose }) => {
               </div>
 
               <div className="text-center mt-4 mb-8 px-12">
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={!isValid}>
                   Transfer OGY
                 </Button>
               </div>

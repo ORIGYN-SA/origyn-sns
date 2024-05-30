@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use candid::Principal;
 use ic_ledger_types::Tokens;
 use icrc_ledger_types::icrc1::account::Account;
@@ -34,5 +36,4 @@ pub const TEAM_PRINCIPALS: [Account; 3] = [
         ]),
     },
 ];
-#[cfg(test)]
-mod tests {}
+

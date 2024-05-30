@@ -2,9 +2,8 @@
 // @ts-nocheck
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-// import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Table, LoaderSpin, Tooltip } from "@components/ui";
+import { Table, Tooltip, Skeleton } from "@components/ui";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { IProposalData } from "@services/types";
 import { TableProps } from "@helpers/table/useTable";
@@ -15,8 +14,6 @@ const TokenDistributionList = ({
   sorting,
   setSorting,
 }: TableProps) => {
-  // const navigate = useNavigate();
-
   const columns = useMemo<ColumnDef<IProposalData>[]>(
     () => [
       {
@@ -31,7 +28,6 @@ const TokenDistributionList = ({
             >
               {getValue()}
             </div>
-            <Tooltip id="tooltip_address" />
             <CopyToClipboard value={getValue()} />
           </div>
         ),
@@ -58,6 +54,12 @@ const TokenDistributionList = ({
         cell: ({ getValue }) => <div className="">{getValue()}</div>,
         header: "Ledger Balance",
       },
+      {
+        accessorKey: "weight",
+        id: "weight",
+        cell: ({ getValue }) => <div className="">{getValue()}</div>,
+        header: "Weight In Total Supply",
+      },
       // {
       //   header: "View",
       //   accessorKey: "view",
@@ -70,7 +72,6 @@ const TokenDistributionList = ({
       //   ),
       // },
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -104,16 +105,13 @@ const TokenDistributionList = ({
           setSorting={setSorting}
         />
       )}
-      {isLoadingFetchTokenHolders && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin size="md" />
-        </div>
-      )}
+      {isLoadingFetchTokenHolders && <Skeleton count={10} height={52} />}
       {isErrorFetchTokenHolders && (
         <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
           <div>{errorFetchTokenHolders?.message}</div>
         </div>
       )}
+      <Tooltip id="tooltip_address" />
     </div>
   );
 };

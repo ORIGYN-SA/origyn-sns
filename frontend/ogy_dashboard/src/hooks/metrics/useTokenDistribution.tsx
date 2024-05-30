@@ -1,6 +1,13 @@
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import {
+  useQuery,
+  keepPreviousData,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
+import fetchTotalSupplyOGY, {
+  TotalSupplyOGY,
+} from "@services/queries/metrics/fetchTotalSupplyOGYQuery";
 
 const useTokenDistribution = ({
   limit = 10,
@@ -27,19 +34,33 @@ const useTokenDistribution = ({
     placeholderData: keepPreviousData,
   });
 
-  const isSuccess = isSuccessFetchTokenHolders;
+  const {
+    data: dataTotalSupply,
+    isSuccess: isSuccessFetchTotalSupply,
+    isLoading: isLoadingFetchTotalSupply,
+    isError: isErrorFetchTotalSupply,
+    error: errorFetchTotalSupply,
+  }: UseQueryResult<TotalSupplyOGY> = useQuery(fetchTotalSupplyOGY({}));
+
+  const isSuccess = isSuccessFetchTokenHolders && isSuccessFetchTotalSupply;
 
   const rows = isSuccess
-    ? tokenDistribution?.map((td) => {
+    ? tokenDistribution.data.map((td) => {
         const principal = td.principal;
         const total = td.string.total;
         const governanceBalance = td.string.governanceBalance;
         const ledgerBalance = td.string.ledgerBalance;
+        const weight = (
+          dataTotalSupply.totalSupplyOGY > 0
+            ? (td.total / dataTotalSupply.totalSupplyOGY) * 100
+            : 0
+        ).toFixed(2);
         return {
           principal,
           total,
           governanceBalance,
           ledgerBalance,
+          weight: `${weight} %`,
         };
       })
     : [];
@@ -48,14 +69,16 @@ const useTokenDistribution = ({
     data: {
       list: {
         rows,
-        pageCount: 0,
-        rowCount: 0,
+        pageCount: tokenDistribution?.totalHolders
+          ? Math.ceil(tokenDistribution?.totalHolders / limit)
+          : 0,
+        rowCount: tokenDistribution?.totalHolders ?? 0,
       },
     },
-    isLoading: isLoadingFetchTokenHolders,
+    isLoading: isLoadingFetchTokenHolders || isLoadingFetchTotalSupply,
     isSuccess,
-    isError: isErrorFetchTokenHolders,
-    error: errorFetchTokenHolders,
+    isError: isErrorFetchTokenHolders || isErrorFetchTotalSupply,
+    error: errorFetchTokenHolders || errorFetchTotalSupply,
   };
 };
 

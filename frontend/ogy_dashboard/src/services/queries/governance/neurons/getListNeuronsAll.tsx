@@ -43,10 +43,10 @@ export const getListNeuronsAll = async ({
       data?.data?.map((data) => {
         const dissolveState = data.dissolve_state;
         // const cachedNeuronStakeE8s = Number(data?.cached_neuron_stake_e8s);
-        const createdAt =
-          Math.round(Date.now()) - Number(data.created_timestamp_seconds);
+        const createdAt = Number(data.created_timestamp_seconds);
         const age =
-          Math.round(Date.now()) - Number(data.aging_since_timestamp_seconds);
+          Date.now() / 1000 -
+          (getCurrentTimestamp() - Number(data.aging_since_timestamp_seconds));
         const maxNeuronAgeForAgeBonus = Number(
           nervousSystemParameters?.maxNeuronAgeForAgeBonus ?? 0
         );
@@ -57,7 +57,7 @@ export const getListNeuronsAll = async ({
           ? ((age / maxNeuronAgeForAgeBonus) * maxAgeBonusPercentage) / 100
           : 0;
         const dissolveDelay = dissolveState?.DissolveDelaySeconds
-          ? Number(dissolveState.DissolveDelaySeconds !== undefined) || 0
+          ? currentTimestamp + Number(dissolveState.DissolveDelaySeconds) || 0
           : Number(dissolveState.WhenDissolvedTimestampSeconds) -
               currentTimestamp || 0;
         const maxDissolveDelayBonusPercentage =
@@ -93,19 +93,24 @@ export const getListNeuronsAll = async ({
         return {
           stakedAmount,
           stakedMaturity,
-          stakedAmountToString: roundAndFormatLocale({ number: stakedAmount }),
+          stakedAmountToString: roundAndFormatLocale({
+            number: stakedAmount,
+            decimals: 3,
+          }),
           stakedMaturityToString: roundAndFormatLocale({
             number: stakedMaturity,
           }),
           age,
           ageToRelativeCalendar:
-            DateTime.fromMillis(age).toRelativeCalendar() ?? "",
+            DateTime.fromSeconds(age).toRelativeCalendar() ?? "",
           state,
           votingPower,
-          votingPowerToString: votingPower.toFixed(2),
-          dissolveDelay,
+          votingPowerToString: votingPower.toFixed(0),
+          dissolveDelay: dissolveDelay
+            ? DateTime.fromSeconds(dissolveDelay).toRelativeCalendar()
+            : "-",
           id: data.id,
-          createdAt: DateTime.fromMillis(createdAt).toRelativeCalendar() ?? "",
+          createdAt: DateTime.fromSeconds(createdAt).toRelativeCalendar() ?? "",
           maxNeuronAgeForAgeBonus,
           maxAgeBonusPercentage,
           ageBonus,

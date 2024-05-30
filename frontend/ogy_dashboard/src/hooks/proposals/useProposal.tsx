@@ -1,10 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import useConnect from "@hooks/useConnect";
 import { getOneProposal } from "@services/queries/governance/proposals/getOneProposal";
 
 const useProposal = ({ proposalId }: { proposalId: string }) => {
-  const { isConnected } = useConnect();
-
   const {
     data: proposal,
     isSuccess: isSuccessGetOneProposal,
@@ -12,12 +9,11 @@ const useProposal = ({ proposalId }: { proposalId: string }) => {
     isLoading: isLoadingGetOneProposal,
     error: errorGetOneProposal,
   } = useQuery({
-    queryKey: ["oneProposal", proposalId, isConnected],
+    queryKey: ["oneProposal", proposalId],
     queryFn: () =>
       getOneProposal({
         proposalId,
       }),
-    enabled: !!isConnected,
     placeholderData: keepPreviousData,
   });
 

@@ -7,6 +7,10 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import styled from "styled-components";
+import millify from "millify";
+import { colors } from "@theme/preset";
+import CustomTooltip from "../utils/CustomTooltip";
 
 type Data = {
   name: string;
@@ -18,10 +22,22 @@ type AreaChart = {
   fill?: string;
 };
 
+const StyledAreaChart = styled(AreaChart)`
+  .recharts-cartesian-grid-vertical line {
+    stroke: ${colors.surface[3]} !important;
+  }
+  .recharts-cartesian-grid-horizontal line:first-child,
+  .recharts-cartesian-grid-horizontal line:last-child,
+  .recharts-cartesian-grid-vertical line:first-child,
+  .recharts-cartesian-grid-vertical line:last-child {
+    stroke-opacity: 0 !important;
+  }
+`;
+
 const Area = ({ data, fill }: AreaChart) => {
   return (
     <ResponsiveContainer>
-      <AreaChart
+      <StyledAreaChart
         width={500}
         height={400}
         data={data}
@@ -35,22 +51,37 @@ const Area = ({ data, fill }: AreaChart) => {
         <defs>
           <linearGradient id={`fill${fill}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={fill} stopOpacity={0.8} />
-            <stop offset="95%" stopColor={fill} stopOpacity={0} />
+            <stop offset="100%" stopColor={fill} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid vertical={false} strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
-        <YAxis domain={[0, "dataMax + 500"]} />
-        <Tooltip />
+        <CartesianGrid
+          vertical={true}
+          strokeDasharray="5 5"
+          horizontal={false}
+        />
+        <XAxis
+          dataKey="name"
+          tickLine={false}
+          tick={{ fill: colors.surface[1] }}
+          axisLine={false}
+        />
+        <YAxis
+          tickFormatter={(value) => millify(value)}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Tooltip
+          content={<CustomTooltip active={false} payload={[]} label={""} />}
+        />
         <AreaRechart
           type="monotone"
           dataKey="value"
           stroke={fill}
-          strokeWidth={4}
+          strokeWidth={2}
           fillOpacity={1}
           fill={`url(#fill${fill})`}
         />
-      </AreaChart>
+      </StyledAreaChart>
     </ResponsiveContainer>
   );
 };

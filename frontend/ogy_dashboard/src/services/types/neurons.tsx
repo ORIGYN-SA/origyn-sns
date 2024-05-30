@@ -43,7 +43,7 @@ export interface INeuronData {
   state: string;
   votingPower: number;
   votingPowerToString: string;
-  dissolveDelay: number;
+  dissolveDelay: string;
   id: string;
   id2Hex: string;
   createdAt: string;

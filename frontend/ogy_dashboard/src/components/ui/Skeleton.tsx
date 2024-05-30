@@ -11,14 +11,16 @@ const StyledSkeleton = styled.div`
 
 const SkeletonCmp = ({
   className,
-  count,
+  count = 1,
+  height = undefined,
 }: {
   className?: string;
   count?: number;
+  height?: string | number;
 }) => {
   return (
     <StyledSkeleton className={className}>
-      <Skeleton count={count ?? 1} />
+      <Skeleton count={count} height={height} />
     </StyledSkeleton>
   );
 };

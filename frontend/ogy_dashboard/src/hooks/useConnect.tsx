@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useConnect as useConnect2ic } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
-import _truncate from "lodash/truncate";
 
 const useConnect = () => {
   const {
@@ -19,12 +18,10 @@ const useConnect = () => {
     disconnect,
   } = useConnect2ic();
 
-  const [principalShort, setPrincipalShort] = useState("");
-  const [accountId, setAccountId] = useState("");
+  const [accountId, setAccountId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (principal) {
-      setPrincipalShort(_truncate(principal, { length: 26 }));
       setAccountId(
         AccountIdentifier.fromPrincipal({
           principal: Principal.fromText(principal as string),
@@ -35,7 +32,6 @@ const useConnect = () => {
 
   return {
     principal,
-    principalShort,
     accountId,
     activeProvider,
     status,
