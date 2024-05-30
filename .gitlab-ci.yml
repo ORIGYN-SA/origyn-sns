@@ -309,7 +309,7 @@ sns rewards staging:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/canister-deploy/deploy-sns-rewards.sh $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-sns_rewards.sh $TARGET_NETWORK
   environment:
     name: sns_rewards
     deployment_tier: staging
@@ -330,7 +330,7 @@ sns rewards:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/canister-deploy/deploy-sns-rewards.sh $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-sns_rewards.sh $TARGET_NETWORK
   environment:
     name: sns_rewards
     deployment_tier: production
