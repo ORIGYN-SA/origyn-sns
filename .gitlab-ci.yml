@@ -265,7 +265,7 @@ ogy token swap staging:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-ogy_token_swap.sh --reinstall $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-ogy_token_swap.sh --reinstall $TARGET_NETWORK
   environment:
     name: ogy_token_swap
     deployment_tier: staging
@@ -284,7 +284,7 @@ ogy token swap:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-ogy_token_swap.sh $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-ogy_token_swap.sh $TARGET_NETWORK
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-canister-ids"
     paths:
@@ -309,7 +309,7 @@ sns rewards staging:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-sns-rewards.sh $TARGET_NETWORK
   environment:
     name: sns_rewards
     deployment_tier: staging
@@ -330,7 +330,7 @@ sns rewards:
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
-    - . scripts/deploy-sns-rewards.sh $TARGET_NETWORK
+    - . scripts/canister-deploy/deploy-sns-rewards.sh $TARGET_NETWORK
   environment:
     name: sns_rewards
     deployment_tier: production
