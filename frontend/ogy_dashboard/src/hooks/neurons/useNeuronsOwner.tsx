@@ -7,6 +7,8 @@ import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 const useNeuronsOwner = ({
   limit,
