@@ -8,6 +8,8 @@ import { getListNeuronsOwner } from "@services/queries/governance/neurons/getLis
 import getNeuronsByOwner from "@services/queries/sns-rewards//getNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 const useNeuronsOwner = ({
   limit,
