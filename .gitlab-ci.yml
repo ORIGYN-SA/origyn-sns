@@ -123,7 +123,7 @@ rust lint:
 # See includes above for canister builds
 
 generate test declarations:
-  stage: test
+  stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       needs:
