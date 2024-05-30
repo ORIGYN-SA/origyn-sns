@@ -202,12 +202,6 @@ impl TokenSwap {
         }; // other case is not possible because it was initialised before
     }
 
-    pub fn update_archiving_status(&mut self, block_index: BlockIndex, status: bool) {
-        if let Some(entry) = self.swap.get_mut(&block_index) {
-            entry.archiving_failed = status;
-        }
-    }
-
     pub fn set_amount(&mut self, block_index: BlockIndex, amount: u64) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.amount = amount;
@@ -244,7 +238,9 @@ impl TokenSwap {
         let swap_info = self.swap.get(&block_index);
         match swap_info {
             Some(swap) => {
-                self.history.insert(block_index, swap.clone());
+                let mut modified_swap = swap.clone();
+                modified_swap.is_archived = true;
+                self.history.insert(block_index, modified_swap.clone());
                 self.swap.remove(&block_index);
                 Ok(())
             }
@@ -262,7 +258,9 @@ impl TokenSwap {
         match swap_info {
             Some(swap) => {
                 self.history.remove(&block_index);
-                self.swap.insert(block_index, swap.clone());
+                let mut modified_swap = swap.clone();
+                modified_swap.is_archived = false;
+                self.swap.insert(block_index, modified_swap);
                 Ok(())
             }
             None =>

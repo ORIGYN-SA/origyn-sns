@@ -36,7 +36,7 @@ pub struct SwapInfo {
     pub last_request: u64,
     pub burn_block_index: Option<BlockIndex>,
     pub token_swap_block_index: Option<BlockIndexIcrc>,
-    pub archiving_failed: bool,
+    pub is_archived: bool,
 }
 
 impl Storable for SwapInfo {
@@ -62,7 +62,7 @@ impl SwapInfo {
             last_request: timestamp_millis(),
             burn_block_index: None,
             token_swap_block_index: None,
-            archiving_failed: false,
+            is_archived: false,
         }
     }
 

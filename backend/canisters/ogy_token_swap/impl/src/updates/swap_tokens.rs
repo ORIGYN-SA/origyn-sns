@@ -443,9 +443,7 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
                     block_index,
                     SwapStatus::Complete(transfer_block_index.clone())
                 );
-                if let Err(_) = s.data.token_swap.archive_swap(block_index) {
-                    s.data.token_swap.update_archiving_status(block_index, true)
-                }
+                let _ = s.data.token_swap.archive_swap(block_index);
             });
 
             Ok(transfer_block_index)
