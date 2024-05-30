@@ -15,7 +15,7 @@ fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAcc
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
 
     // check if there is room in the swaps heap
-    if true == read_state(|s| s.data.token_swap.is_capacity_full()) {
+    if read_state(|s| s.data.token_swap.is_capacity_full()) {
         return RequestDepositAccountResponse::MaxCapacityOfSwapsReached;
     }
 
