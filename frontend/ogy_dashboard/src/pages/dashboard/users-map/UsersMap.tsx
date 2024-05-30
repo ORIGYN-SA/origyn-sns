@@ -71,10 +71,10 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
           className="relative flex justify-center items-start w-full h-[250px] xl:h-[500px]"
         ></div>
         <div className="text-center font-semibold mt-8">
-          <div className="text-xl font-semibold text-background">
+          <div className="text-xl font-semibold text-charcoal">
             Total visitors
           </div>
-          <div className="text-2xl text-background/60">{users}</div>
+          <div className="text-2xl text-charcoal/60">{users}</div>
         </div>
       </ResponsiveContainer>
     </Card>
