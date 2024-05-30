@@ -1,6 +1,8 @@
 import { Principal } from "@dfinity/principal";
 import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 interface IFetchBalanceOGY {
   actor: ActorSubclass;
