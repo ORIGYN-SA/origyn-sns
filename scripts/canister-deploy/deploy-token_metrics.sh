@@ -4,7 +4,7 @@
 
 show_help() {
   cat << EOF
-ogy_token_swap canister deployment script.
+token_metrics canister deployment script.
 Must be run from the repository's root folder, and with a running replica if for local deployment.
 'staging' and 'ic' networks can only be selected from a Gitlab CI/CD environment.
 The NETWORK argument should preferably be passed from the env variable that was previously defined
@@ -13,7 +13,7 @@ by the pre-deploy script (using the dot notation, or inside a macro deploy scrip
 The canister will always be reinstalled locally, and only upgraded in staging and production (ic).
 
 Usage:
-  scripts/deploy-ogy_token_swap.sh [options] <NETWORK>
+  scripts/deploy-token_metrics.sh [options] <NETWORK>
 
 Options:
   -h, --help        Show this message and exit
