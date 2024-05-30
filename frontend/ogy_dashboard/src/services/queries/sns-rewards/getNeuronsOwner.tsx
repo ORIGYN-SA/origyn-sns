@@ -1,4 +1,6 @@
 import { ActorSubclass } from "@dfinity/agent";
+import { Buffer } from "buffer";
+window.Buffer = window.Buffer || Buffer;
 
 const getNeuronsByOwner = async ({
   snsRewardsActor,
