@@ -65,7 +65,7 @@ ARGUMENTS="(record {
   sns_ledger_canister_id = principal \"$OGY_LEDGER\";
   sns_gov_canister_id = principal \"$SNS_GOVERNANCE\";
   super_stats_canister_id = principal \"$SUPER_STATS\";
-  treasury_account = $ORIGYN_TREASURY_ACCOUNT;
+  treasury_account = \"$ORIGYN_TREASURY_ACCOUNT\";
   } )"
 
 
