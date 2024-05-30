@@ -493,7 +493,7 @@ mod tests {
     use utils::env::CanisterEnv;
 
     use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
-    use crate::state::{ init_state, mutate_state, Data, RuntimeState };
+    use crate::state::{ init_state, mutate_state, read_state, Data, RuntimeState };
 
     use super::verify_block_data;
 
@@ -605,6 +605,27 @@ mod tests {
         let expected_result = Err(format!("Operation in block is not a valid transfer."));
 
         assert_eq!(expected_result, result)
+    }
+
+    #[test]
+    fn test_verify_archiving_works() {
+        init_canister_state();
+
+        let block_index = 1000;
+        let principal = Principal::from_text(DUMMY_USER).unwrap();
+        init_swap(block_index, principal);
+        let swap_info = read_state(|s| s.data.token_swap.get_swap_info(block_index).unwrap());
+        assert_eq!(swap_info.is_archived, false);
+        let block = dummy_block();
+
+        let result = verify_block_data(&block, block_index, principal);
+        let expected_result = Ok(());
+
+        assert_eq!(expected_result, result);
+
+        mutate_state(|s| s.data.token_swap.archive_swap(block_index).unwrap());
+        let swap_info = read_state(|s| s.data.token_swap.get_swap_info(block_index).unwrap());
+        assert_eq!(swap_info.is_archived, true)
     }
 
     fn dummy_block() -> Block {
