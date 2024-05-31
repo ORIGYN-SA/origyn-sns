@@ -1,6 +1,8 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import useRemoveNeuronService from "@services/queries/sns-rewards/useRemoveNeuronOwnership";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 interface RemoveNeuronContextType {
   mutation: ReturnType<typeof useRemoveNeuronService>;
   show: boolean;

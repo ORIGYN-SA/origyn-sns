@@ -11,6 +11,8 @@ import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
+import UsersMap from "./users-map/UsersMap";
+import { PieChartProvider } from "@components/charts/pie/context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16">
+        <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16 w-full">
           <LedgerSwitchBannerContent>
             <div className="flex justify-center mt-8">
               {!isConnected && !isInitializing && <AuthButton />}
@@ -58,10 +60,14 @@ const Dashboard = () => {
             <TotalOGYBurned />
           </section>
           <section className="w-full pt-8 -mt-8" id="ogy-circulation-state">
-            <OGYCirculationState />
+            <PieChartProvider>
+              <OGYCirculationState />
+            </PieChartProvider>
           </section>
           <section className="w-full pt-8 -mt-8" id="ogy-foundation-reserve">
-            <OrigynFoundationReserve />
+            <PieChartProvider>
+              <OrigynFoundationReserve />
+            </PieChartProvider>
           </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
           <section
@@ -81,6 +87,12 @@ const Dashboard = () => {
             id="ogy-token-distribution"
           >
             <TokenDistributionList />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-users-map"
+          >
+            <UsersMap />
           </section>
         </div>
       </div>

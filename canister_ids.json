@@ -1,6 +1,7 @@
 {
   "ogy_dashboard": {
     "ic": "jbj2y-2qaaa-aaaal-ajc5q-cai",
+    "preprod": "m7nki-xaaaa-aaaan-qmlwa-cai",
     "staging": "7ekbt-siaaa-aaaag-ak64a-cai"
   },
   "ogy_legacy_ledger": {
@@ -8,32 +9,28 @@
     "staging": "vmxlg-4qaaa-aaaag-ak7gq-cai"
   },
   "ogy_token_swap": {
-    "ic": "",
+    "ic": "gzcjd-xiaaa-aaaak-qijga-cai",
     "staging": "jpuy7-oiaaa-aaaan-qmheq-cai"
   },
   "sns_governance": {
-    "ic": "",
+    "ic": "lnxxh-yaaaa-aaaaq-aadha-cai",
     "staging": "jtpnb-waaaa-aaaal-ajc6q-cai"
   },
   "sns_index": {
-    "ic": "",
+    "ic": "jqkzp-liaaa-aaaaq-aadiq-cai",
     "staging": "j2mg5-aiaaa-aaaal-ajc7a-cai"
   },
   "sns_ledger": {
-    "ic": "",
+    "ic": "lkwrt-vyaaa-aaaaq-aadhq-cai",
     "staging": "j5naj-nqaaa-aaaal-ajc7q-cai"
   },
   "sns_root": {
-    "ic": "",
+    "ic": "leu43-oiaaa-aaaaq-aadgq-cai",
     "staging": "cd3sx-wyaaa-aaaal-ajdaa-cai"
   },
   "sns_swap": {
-    "ic": "",
+    "ic": "jxl73-gqaaa-aaaaq-aadia-cai",
     "staging": "ce2ud-3aaaa-aaaal-ajdaq-cai"
-  },
-  "super_indexer_v3": {
-    "ic": "cnz77-niaaa-aaaal-ajdba-cai",
-    "staging": "4iidd-jaaaa-aaaap-ahd5q-cai"
   },
   "super_stats_v3": {
     "ic": "ckyzl-aqaaa-aaaal-ajdbq-cai",
@@ -42,10 +39,6 @@
   "token_metrics": {
     "ic": "juolv-3yaaa-aaaal-ajc6a-cai",
     "staging": "euyi3-3yaaa-aaaak-akoba-cai"
-  },
-  "tx_store_v3": {
-    "ic": "c77ig-byaaa-aaaal-ajdca-cai",
-    "staging": "45pso-iiaaa-aaaap-ahd6a-cai"
   },
   "sns_rewards": {
     "ic": "yuijc-oiaaa-aaaap-ahezq-cai",

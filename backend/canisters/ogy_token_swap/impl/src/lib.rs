@@ -1,5 +1,6 @@
 use ic_cdk::export_candid;
 
+pub mod model;
 pub mod guards;
 pub mod jobs;
 pub mod lifecycle;

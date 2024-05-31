@@ -1,0 +1,11 @@
+{
+  "name": "origyn-sns-monorepo",
+  "description": "ORIGYN monorepo for canisters related to the SNS",
+  "author": "ORIGYN",
+  "workspaces": [
+    "frontend/ogy_dashboard"
+  ],
+  "license": "AGPL-3.0-only",
+  "version": "0.1.0",
+  "private": true
+}

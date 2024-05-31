@@ -7,5 +7,6 @@
     "editor.wordWrapColumn": 140
   },
   "rust-analyzer.checkOnSave": true,
-  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"]
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+  "yaml.customTags": ["!reference sequence"]
 }

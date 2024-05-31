@@ -1,14 +1,11 @@
 export interface Transaction {
   index: number;
-  updated_at: Date;
+  timestamp: string;
+  updated_at: string;
   from_account: string;
   to_account: string;
   amount: string;
   fee: string;
-}
-
-export interface TransactionResults {
-  rows: Transaction[];
-  pageCount: number;
-  rowCount: number;
+  memo: string;
+  kind: string;
 }

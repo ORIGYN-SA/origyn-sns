@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { useCanister } from "@connect2ic/react";
 import { ActorSubclass } from "@dfinity/agent";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 interface IAddNeuron {
   snsRewardsActor: ActorSubclass;

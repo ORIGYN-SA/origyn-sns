@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import Card from "@components/ui/Card";
-import BarChart from "@components/charts/bar/Bar";
+import { Card, TooltipInfo } from "@components/ui";
+// import BarChart from "@components/charts/bar/Bar";
+import AreaChart from "@components/charts/area/Area";
 import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 import { ChartData } from "@services/types/charts.types";
 
@@ -28,9 +29,21 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-content/60">
-          Total OGY Burned
-        </h2>
+        <div className="flex items-center">
+          <h2 className="text-lg font-semibold text-content/60 mr-2">
+            Total OGY Burned
+          </h2>
+          <TooltipInfo id="tooltip-total-ogy-burned">
+            <p>
+              Total amount of OGY tokens burned. These tokens have been burned
+              completely and are no longer available.
+            </p>
+            <p>
+              Tokens can be burned for different reasons for example certificate
+              minting fees, network utility fees or network transactions fees.
+            </p>
+          </TooltipInfo>
+        </div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
           Weekly
         </button>
@@ -40,12 +53,13 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
         <span className="ml-2 mr-3">{totalBurnedOGY}</span>
         <span className="text-content/60">OGY</span>
       </div>
-      <div className="mt-6 h-96 rounded-xl">
-        <BarChart
+      <div className="mt-6 h-72 rounded-xl">
+        {/* <BarChart
           data={totalBurnedOGYTimeSeries}
           barFill={barFill}
           legendValue="Total OGY Burned"
-        />
+        /> */}
+        <AreaChart data={totalBurnedOGYTimeSeries} fill={barFill} />
       </div>
     </Card>
   );

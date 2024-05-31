@@ -5,6 +5,7 @@ use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens }
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferError };
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::{
+    get_swap_info::{ Args as GetSwapInfoArgs, Response as GetSwapInfoResponse },
     token_swap::{
         BurnRequestArgs,
         RecoverBurnMode,
@@ -952,6 +953,8 @@ fn get_deposit_account_helper(
         }
         ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfListReached =>
             Err("Max limit reached.".to_string()),
+        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfSwapsReached =>
+            Err("Max swaps limit reached".to_string()),
     }
 }
 
@@ -1122,4 +1125,74 @@ fn test_recover_stuck_transfer_can_only_be_called_by_authorised_principals() {
         1u64,
         RecoverTransferMode::RetryTransfer
     );
+}
+
+#[test]
+fn valid_swap_can_be_archived() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, controller } = env;
+
+    let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
+    let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let ogy_new_ledger_minting_account = controller;
+
+    let user = random_principal();
+    let amount = 1 * E8S_PER_OGY;
+
+    // mint tokens to swapping user
+    let _ = mint_ogy(
+        &mut pic,
+        controller,
+        ogy_legacy_ledger_canister,
+        principal_to_legacy_account_id(user, None),
+        amount
+    ).unwrap();
+    // mint tokens to swap reserve pool of swap canister
+    let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
+    let _ = transfer(
+        &mut pic,
+        ogy_new_ledger_minting_account,
+        ogy_new_ledger_canister,
+        None,
+        ogy_token_swap_canister_id,
+        swap_pool_amount.into()
+    );
+
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
+
+    let block_index_deposit = transfer_ogy(
+        &mut pic,
+        user,
+        ogy_legacy_ledger_canister,
+        deposit_address,
+        amount - E8S_FEE_OGY
+    ).unwrap();
+
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit
+    );
+
+    assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
+
+    let swap_info_result = get_swap_info(
+        &pic,
+        Principal::anonymous(),
+        ogy_token_swap_canister_id,
+        &(GetSwapInfoArgs {
+            block_index: block_index_deposit,
+        })
+    );
+
+    if let GetSwapInfoResponse::Success(swap_info) = swap_info_result {
+        assert_eq!(swap_info.is_archived, true)
+    }
 }

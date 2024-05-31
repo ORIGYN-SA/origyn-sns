@@ -32,7 +32,7 @@ const useGovernanceStats = () => {
         },
         {
           name: "Unlocked",
-          value: data?.number.totalLocked,
+          value: data?.number.totalUnlocked,
           valueToString: data?.string.totalUnlocked,
           color: "#1d7555",
         },

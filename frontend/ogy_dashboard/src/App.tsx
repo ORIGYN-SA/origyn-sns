@@ -5,7 +5,6 @@ import {
   createBrowserRouter,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
-import { QueryClient } from "@tanstack/react-query";
 
 import Layout from "@components/Layout";
 import Dashboard from "@pages/dashboard/Dashboard";
@@ -21,8 +20,6 @@ import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
 import { Account } from "@pages/account/index";
-
-const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -110,12 +107,10 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/explorer/transactions/:index",
-                loader: TransactionsDetails.loader(queryClient),
                 element: <TransactionsDetails />,
               },
               {
                 path: "/explorer/transactions/accounts/:id",
-                loader: TransactionsAccountsDetails.loader(queryClient),
                 element: <TransactionsAccountsDetails />,
               },
             ],

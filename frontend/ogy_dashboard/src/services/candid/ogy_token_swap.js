@@ -1,4 +1,5 @@
 export const idlFactory = ({ IDL }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const InitArgs = IDL.Record({
     ogy_legacy_minting_account_principal: IDL.Principal,
     test_mode: IDL.Bool,

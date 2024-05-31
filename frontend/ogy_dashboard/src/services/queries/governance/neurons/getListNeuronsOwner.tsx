@@ -9,6 +9,8 @@ import {
   INeuronDataCanister as INeuronData,
   IDissolveState,
 } from "@services/types";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 const getNeuronState = (dissolveState: IDissolveState) => {
   const currentTimestampSeconds = new Date().getTime() / 1000;
