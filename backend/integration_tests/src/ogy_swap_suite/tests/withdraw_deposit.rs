@@ -33,6 +33,7 @@ fn withdraw_deposit_insufficient_balance() {
 
     let amount = 2 * E8S_FEE_OGY;
     let user = user_init(&mut env, amount.into());
+
     transfer_deposit(&mut env, user, amount);
 
     assert_eq!(
