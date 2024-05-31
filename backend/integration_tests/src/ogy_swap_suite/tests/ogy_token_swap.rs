@@ -1293,3 +1293,57 @@ fn valid_swap_can_be_archived() {
         assert_eq!(swap_info.is_archived, true)
     }
 }
+
+#[should_panic(
+    expected = "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
+)]
+#[test]
+fn should_panic_if_user_not_in_whitelist() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, controller } = env;
+
+    let ogy_legacy_ledger_canister = canister_ids.ogy_legacy_ledger;
+    let ogy_new_ledger_canister = canister_ids.ogy_new_ledger;
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let ogy_new_ledger_minting_account = controller;
+
+    let user = random_principal();
+    tick_n_blocks(&pic, 10);
+    let amount = 1 * E8S_PER_OGY;
+
+    // mint tokens to swapping user
+    let _ = mint_ogy(
+        &mut pic,
+        controller,
+        ogy_legacy_ledger_canister,
+        principal_to_legacy_account_id(user, None),
+        amount
+    ).unwrap();
+    // mint tokens to swap reserve pool of swap canister
+    let swap_pool_amount = 9_400_000_000 * E8S_PER_OGY;
+    let _ = transfer(
+        &mut pic,
+        ogy_new_ledger_minting_account,
+        ogy_new_ledger_canister,
+        None,
+        ogy_token_swap_canister_id,
+        swap_pool_amount.into()
+    );
+
+    let deposit_address = get_deposit_account_helper(
+        &mut pic,
+        ogy_token_swap_canister_id,
+        user
+    ).unwrap();
+
+    let block_index_deposit = transfer_ogy(
+        &mut pic,
+        user,
+        ogy_legacy_ledger_canister,
+        deposit_address,
+        amount - E8S_FEE_OGY
+    ).unwrap();
+
+    swap_tokens_authenticated_call(&mut pic, user, ogy_token_swap_canister_id, block_index_deposit);
+}

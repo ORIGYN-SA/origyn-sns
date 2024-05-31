@@ -128,6 +128,19 @@ mod tests {
         );
     }
 
+    #[test]
+    fn test_should_fail_if_user_not_in_whitelist() {
+        init_canister_state();
+        assert!(
+            matches!(
+                request_deposit_account(RequestDepositAccountArgs {
+                    of: Some(dummy_principal(1)),
+                }),
+                RequestDepositAccountResponse::NotAuthorized(_)
+            )
+        );
+    }
+
     fn init_canister_state() {
         let ogy_legacy_ledger_canister_id = Principal::from_text(
             "jwcfb-hyaaa-aaaaj-aac4q-cai"
