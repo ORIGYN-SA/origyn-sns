@@ -11,10 +11,7 @@ const removeNeuronOwnership = async ({
   snsRewardsActor,
   neuronId,
 }: IRemoveNeuronOwnership) => {
-  const result = await snsRewardsActor.claim_reward({
-    token: "OGY",
-    neuron_id: neuronId,
-  });
+  const result = await snsRewardsActor.remove_neuron_ownership(neuronId);
   return result;
 };
 
