@@ -29,6 +29,14 @@ pub struct GovernanceStats {
     pub total_unlocked: Nat,
     pub total_rewards: Nat,
 }
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
+pub struct LockedNeuronsAmount {
+    pub one_year: u64,
+    pub two_years: u64,
+    pub three_years: u64,
+    pub four_years: u64,
+    pub five_years: u64,
+}
 impl Add for GovernanceStats {
     type Output = GovernanceStats;
 
