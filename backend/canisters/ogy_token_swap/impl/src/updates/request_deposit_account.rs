@@ -14,6 +14,14 @@ use crate::state::{ mutate_state, read_state };
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
 
+    if read_state(|s| !s.is_caller_whitelisted_principal(principal)) {
+        return RequestDepositAccountResponse::NotAuthorized(
+            format!(
+                "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
+            )
+        );
+    }
+
     // check if there is room in the swaps heap
     if read_state(|s| s.data.token_swap.is_capacity_full()) {
         return RequestDepositAccountResponse::MaxCapacityOfSwapsReached;

@@ -94,6 +94,8 @@ fn get_deposit_account_helper(
             Err("Max limit reached.".to_string()),
         ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfSwapsReached =>
             Err("Max swaps limit reached".to_string()),
+        ogy_token_swap_api::request_deposit_account::Response::NotAuthorized(message) =>
+            Err(message),
     }
 }
 

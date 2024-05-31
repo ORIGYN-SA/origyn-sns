@@ -1,4 +1,4 @@
-use std::time::Duration;
+use std::{ collections::HashSet, time::Duration };
 
 use candid::{ Nat, Principal };
 use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
@@ -14,6 +14,7 @@ use ogy_token_swap_api::{
         TransferRequestArgs,
     },
     types::token_swap::{ BlockFailReason, SwapError, SwapStatus },
+    update_white_list_principals::Args,
     updates::{
         recover_stuck_burn::Response as RecoverStuckBurnResponse,
         recover_stuck_transfer::Response as RecoverStuckTransferResponse,
@@ -45,10 +46,11 @@ use crate::{
                 swap_tokens_authenticated_call,
             },
             get_swap_info,
+            update_white_list_principals,
         },
     },
     ogy_swap_suite::{ init::init, TestEnv },
-    utils::{ random_amount, random_principal },
+    utils::{ random_amount, random_principal, tick_n_blocks },
 };
 
 #[test]
@@ -63,6 +65,13 @@ fn valid_swap() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
+    tick_n_blocks(&pic, 10);
     let amount = 1 * E8S_PER_OGY;
 
     // mint tokens to swapping user
@@ -955,6 +964,8 @@ fn get_deposit_account_helper(
             Err("Max limit reached.".to_string()),
         ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfSwapsReached =>
             Err("Max swaps limit reached".to_string()),
+        ogy_token_swap_api::request_deposit_account::Response::NotAuthorized(message) =>
+            Err(message),
     }
 }
 
@@ -1139,6 +1150,13 @@ fn valid_swap_can_be_archived() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        &HashSet::from_iter(vec![user.clone()])
+    );
+    tick_n_blocks(&pic, 10);
     let amount = 1 * E8S_PER_OGY;
 
     // mint tokens to swapping user

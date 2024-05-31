@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
@@ -43,6 +45,10 @@ impl RuntimeState {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
     }
+
+    pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
+        self.data.whitelisted_principals.contains(&caller)
+    }
 }
 
 #[derive(CandidType, Serialize)]
@@ -73,6 +79,8 @@ pub struct Data {
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
     pub requesting_principals: RequestingPrincipals,
+    /// A list of principals allowed to perform swaps - temporarily used
+    pub whitelisted_principals: HashSet<Principal>,
 }
 
 impl Data {
@@ -94,6 +102,7 @@ impl Data {
                 &Subaccount([0; 32])
             ),
             requesting_principals: RequestingPrincipals::default(),
+            whitelisted_principals: white_listed_principals(),
         }
     }
 }
@@ -102,4 +111,18 @@ impl Data {
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
+}
+
+pub fn white_listed_principals() -> HashSet<Principal> {
+    let mut principals = Vec::new();
+
+    if let Ok(p) = Principal::from_text("<whatever-principal-we-want-to-whitelist-1>") {
+        principals.push(p);
+    }
+    if let Ok(p2) = Principal::from_text("<whatever-principal-we-want-to-whitelist-2>") {
+        principals.push(p2);
+    }
+    // Add more principals as needed
+
+    HashSet::from_iter(principals)
 }
