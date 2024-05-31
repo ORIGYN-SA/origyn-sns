@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
-import useFetchBalanceICP from "@hooks/accounts/useFetchBalanceICP";
+import useFetchNetworkRevenueICP from "@hooks/accounts/useFetchNetworkRevenueICP";
 import useFetchBalanceOGY from "@hooks/accounts/useFetchBalanceOGY";
 import {
   SNS_GOVERNANCE_CANISTER_ID,
@@ -70,7 +70,7 @@ const OrigynTreasuryAccount = ({
     isLoading: isLoadingBalanceICP,
     isError: isErrorBalanceICP,
     isSuccess: isSuccessBalanceICP,
-  } = useFetchBalanceICP();
+  } = useFetchNetworkRevenueICP();
   const {
     data: balanceOGY,
     isLoading: isLoadingBalanceOGY,

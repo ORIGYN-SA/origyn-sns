@@ -11,6 +11,7 @@ import {
 import { Connect2ICProvider } from "@connect2ic/react";
 import {
   SNS_LEDGER_CANISTER_ID,
+  ICP_LEDGER_CANISTER_ID,
   SNS_GOVERNANCE_CANISTER_ID,
   TOKEN_METRICS_CANISTER_ID,
   LEGACY_LEDGER_CANISTER_ID,
@@ -40,6 +41,10 @@ const Provider = ({ children }: PropsWithChildren) => {
           },
           ledgerLegacy: {
             canisterId: LEGACY_LEDGER_CANISTER_ID,
+            idlFactory: ledgerLegacyIdl,
+          },
+          ledgerICP: {
+            canisterId: ICP_LEDGER_CANISTER_ID,
             idlFactory: ledgerLegacyIdl,
           },
           tokenMetrics: {
@@ -72,6 +77,7 @@ const Provider = ({ children }: PropsWithChildren) => {
             TOKEN_METRICS_CANISTER_ID,
             OGY_TOKEN_SWAP_CANISTER_ID,
             SNS_REWARDS_CANISTER_ID,
+            ICP_LEDGER_CANISTER_ID,
           ],
         },
       })}

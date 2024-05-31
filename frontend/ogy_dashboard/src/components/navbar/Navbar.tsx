@@ -90,7 +90,7 @@ const Navbar = () => {
               </button>
             )}
 
-            <div className="lg:hidden">
+            <div className="xl:hidden">
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
