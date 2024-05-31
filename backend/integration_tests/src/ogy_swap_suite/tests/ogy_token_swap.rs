@@ -399,6 +399,7 @@ fn test_recover_stuck_burn_on_completed_swap() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
     user_token_swap_valid(&mut env, user, Nat::from(1u8));
@@ -856,7 +857,6 @@ fn init_token_distribution(env: &mut TestEnv, num_users: u64) -> Vec<Principal> 
         ).unwrap();
         holders.push(user);
     }
-
     holders
 }
 
