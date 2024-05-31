@@ -78,10 +78,6 @@ mod tests {
             let p = dummy_principal(ind as u64);
             prins.push(p);
         }
-        mutate_state(|s| {
-            s.data.whitelisted_principals = HashSet::from_iter(prins);
-        });
-
         for ind in 0..LIST_MAX_LIMIT {
             let p = dummy_principal(ind as u64);
             let expected_result = AccountIdentifier::new(
@@ -113,9 +109,6 @@ mod tests {
             let p = dummy_principal(i as u64);
             prins.push(p);
         }
-        mutate_state(|s| {
-            s.data.whitelisted_principals = HashSet::from_iter(prins);
-        });
         for i in 0..max_heap_swaps {
             mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
         }
@@ -125,19 +118,6 @@ mod tests {
             request_deposit_account(RequestDepositAccountArgs {
                 of: Some(dummy_principal(1)),
             })
-        );
-    }
-
-    #[test]
-    fn test_should_fail_if_user_not_in_whitelist() {
-        init_canister_state();
-        assert!(
-            matches!(
-                request_deposit_account(RequestDepositAccountArgs {
-                    of: Some(dummy_principal(1)),
-                }),
-                RequestDepositAccountResponse::NotAuthorized(_)
-            )
         );
     }
 

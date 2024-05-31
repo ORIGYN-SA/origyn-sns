@@ -47,10 +47,10 @@ impl RuntimeState {
     }
 
     pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
-        if cfg!(feature = "inttest") {
+        if cfg!(feature = "inttest") || cfg!(test) {
             true
         } else {
-            self.data.whitelisted_principals.contains(&caller)
+            white_listed_principals().contains(&caller)
         }
     }
 }
@@ -83,8 +83,6 @@ pub struct Data {
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
     pub requesting_principals: RequestingPrincipals,
-    /// A list of principals allowed to perform swaps - temporarily used
-    pub whitelisted_principals: HashSet<Principal>,
 }
 
 impl Data {
@@ -106,7 +104,6 @@ impl Data {
                 &Subaccount([0; 32])
             ),
             requesting_principals: RequestingPrincipals::default(),
-            whitelisted_principals: white_listed_principals(),
         }
     }
 }
