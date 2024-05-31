@@ -19,6 +19,7 @@ type GovernanceStats = record {
 type HistoryData = record { balance : nat };
 type InitArgs = record {
   test_mode : bool;
+  foundation_accounts : vec text;
   treasury_account : text;
   ogy_new_ledger_canister_id : principal;
   super_stats_canister_id : principal;
@@ -30,6 +31,7 @@ type Overview = record {
   last_active : nat64;
   first_active : nat64;
   received : record { nat32; nat };
+  max_balance : nat;
 };
 type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
 type WalletOverview = record {
@@ -39,6 +41,7 @@ type WalletOverview = record {
 };
 service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
+  get_foundation_assets : () -> (vec record { text; WalletOverview }) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
