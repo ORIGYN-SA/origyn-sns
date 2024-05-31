@@ -123,11 +123,18 @@ pub async fn sync_neurons_data() {
 }
 fn check_locked_neurons_period(
     locked_neurons_amount: &mut LockedNeuronsAmount,
-    end_timestamp: u64,
-    current_timestamp: u64,
-    value: u64
+    value: u64,
+    dissolve_delay: Option<u64>,
+    end_timestamp: Option<u64>
 ) {
-    let duration = end_timestamp - current_timestamp;
+    let duration = if let Some(dissolve_delay) = dissolve_delay {
+        dissolve_delay
+    } else if let Some(ets) = end_timestamp {
+        let current_timestamp_in_seconds = ic_cdk::api::time() / 1_000_000_000;
+        ets - current_timestamp_in_seconds
+    } else {
+        0
+    };
     if duration >= 5 * SECONDS_IN_ONE_YEAR {
         locked_neurons_amount.five_years += value;
     } else if duration >= 4 * SECONDS_IN_ONE_YEAR {
@@ -141,27 +148,25 @@ fn check_locked_neurons_period(
     }
 }
 fn update_locked_neurons_amount(locked_neurons_amount: &mut LockedNeuronsAmount, neuron: &Neuron) {
-    let current_timestamp_in_seconds = ic_cdk::api::time() / 1_000_000_000;
-
     match neuron.staked_maturity_e8s_equivalent {
         Some(staked_value) => {
             match neuron.dissolve_state.clone() {
                 Some(dissolve_state) => {
                     match dissolve_state {
-                        DissolveState::DissolveDelaySeconds(end_timestamp) => {
+                        DissolveState::DissolveDelaySeconds(dissolve_delay) => {
                             check_locked_neurons_period(
                                 locked_neurons_amount,
-                                end_timestamp,
-                                current_timestamp_in_seconds,
-                                staked_value
+                                staked_value,
+                                Some(dissolve_delay),
+                                None
                             )
                         }
                         DissolveState::WhenDissolvedTimestampSeconds(end_timestamp) => {
                             check_locked_neurons_period(
                                 locked_neurons_amount,
-                                end_timestamp,
-                                current_timestamp_in_seconds,
-                                staked_value
+                                staked_value,
+                                None,
+                                Some(end_timestamp)
                             )
                         }
                     }
