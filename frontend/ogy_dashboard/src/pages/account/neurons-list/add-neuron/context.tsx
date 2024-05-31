@@ -43,7 +43,10 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
         neuronId,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          if (data !== "Ok") {
+            throw new Error(data);
+          }
           queryClient.invalidateQueries({
             queryKey: ["userGetNeuronsByOwner"],
           });
