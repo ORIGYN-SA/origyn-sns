@@ -1,4 +1,4 @@
-use std::{ collections::HashSet, time::Duration };
+use std::time::Duration;
 
 use candid::{ Nat, Principal };
 use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
@@ -48,7 +48,7 @@ use crate::{
         },
     },
     ogy_swap_suite::{ init::init, TestEnv },
-    utils::{ random_amount, random_principal, tick_n_blocks },
+    utils::{ random_amount, random_principal },
 };
 
 #[test]
@@ -1141,7 +1141,6 @@ fn valid_swap_can_be_archived() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
-    tick_n_blocks(&pic, 10);
     let amount = 1 * E8S_PER_OGY;
 
     // mint tokens to swapping user

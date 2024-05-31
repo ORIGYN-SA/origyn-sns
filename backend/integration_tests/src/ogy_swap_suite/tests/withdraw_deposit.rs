@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 use candid::{ Nat, Principal };
 use ic_ledger_types::{ AccountIdentifier, Tokens };
 use ledger_utils::principal_to_legacy_account_id;
