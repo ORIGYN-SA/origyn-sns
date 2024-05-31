@@ -114,7 +114,7 @@ export const Governance = () => {
           <h2 className="mt-2 text-xl text-content/60">
             Welcome to ORIGYN Governance!
           </h2>
-          <p className="mt-6  text-content/60">
+          <p className="mt-6 text-content/60">
             Holders of OGY tokens can directly influence the ORIGYN Network by
             staking their OGY and voting on proposals. By participating in the
             decision-making process, these staked token holders earn rewards.

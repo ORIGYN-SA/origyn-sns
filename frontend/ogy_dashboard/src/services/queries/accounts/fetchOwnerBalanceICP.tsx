@@ -3,15 +3,13 @@ import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
-interface IFetchBalanceOGYLegacy {
-  actor: ActorSubclass;
-  owner: string;
-}
-
-const fetchBalanceOGYLegacy = async ({
+const fetchOwnerBalanceICP = async ({
   actor,
   owner,
-}: IFetchBalanceOGYLegacy) => {
+}: {
+  actor: ActorSubclass;
+  owner: string;
+}) => {
   const account = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
   }).toHex();
@@ -22,12 +20,14 @@ const fetchBalanceOGYLegacy = async ({
 
   const balance = divideBy1e8(result.e8s);
   return {
-    balanceE8s: result.e8s,
-    balance,
+    balance: result,
+    number: {
+      balance: balance,
+    },
     string: {
-      balance: roundAndFormatLocale({ number: divideBy1e8(balance) }),
+      balance: roundAndFormatLocale({ number: balance, decimals: 4 }),
     },
   };
 };
 
-export default fetchBalanceOGYLegacy;
+export default fetchOwnerBalanceICP;
