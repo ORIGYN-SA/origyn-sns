@@ -24,6 +24,13 @@ type InitArgs = record {
   super_stats_canister_id : principal;
   sns_governance_canister_id : principal;
 };
+type LockedNeuronsAmount = record {
+  one_year : nat64;
+  two_years : nat64;
+  three_years : nat64;
+  four_years : nat64;
+  five_years : nat64;
+};
 type Overview = record {
   balance : nat;
   sent : record { nat32; nat };
@@ -40,6 +47,7 @@ type WalletOverview = record {
 service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
+  get_locked_neurons_period : () -> (LockedNeuronsAmount) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
