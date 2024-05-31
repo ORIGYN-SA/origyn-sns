@@ -14,11 +14,11 @@ const transferICP = async ({
 }) => {
   const accountId = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(to),
-  });
+  }).toHex();
   const result = await ledgerActor.send_dfx({
     to: accountId,
     fee: {
-      e8s: TRANSACTION_FEE_ICP,
+      e8s: BigInt(TRANSACTION_FEE_ICP),
     },
     memo: 0n,
     from_subaccount: [],

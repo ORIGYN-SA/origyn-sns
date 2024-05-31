@@ -8,7 +8,7 @@ import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
 import useFetchBalanceICPOwner from "@hooks/accounts/useFetchBalanceICPOwner";
 import { TRANSACTION_FEE_ICP, ICP_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
-import useTransferICP from "@hooks/transfer/useTransferOGY";
+import useTransferICP from "@hooks/transfer/useTransferICP";
 
 const TransferICP = () => {
   const [show, setShow] = useState(false);
@@ -60,7 +60,6 @@ const TransferICP = () => {
       control,
       defaultValue: 0,
     });
-    console.log(watchedAmount);
     return (
       <div>
         {isNaN(watchedAmount) ||
