@@ -27,6 +27,11 @@ import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
 
 const Provider = ({ children }: PropsWithChildren) => {
+  const internetIdentityAuthClient = new InternetIdentity({
+    identityProvider: "https://identity.ic0.app",
+    derivationOrigin: "https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io",
+  });
+
   return (
     <Connect2ICProvider
       client={createClient({
@@ -63,12 +68,12 @@ const Provider = ({ children }: PropsWithChildren) => {
         providers: [
           new AstroX(),
           new InfinityWallet(),
-          new InternetIdentity(),
+          internetIdentityAuthClient,
           new NFID(),
           new PlugWallet(),
         ],
         globalProviderConfig: {
-          host: "https://icp-api.io",
+          host: "https://identity.ic0.app",
           dev: false,
           whitelist: [
             SNS_GOVERNANCE_CANISTER_ID,
