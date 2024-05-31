@@ -138,7 +138,6 @@ generate test declarations:
     - dfx generate sns_rewards
     - dfx generate super_stats_v3
     - dfx generate token_metrics
-  extends: .rust template
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
     paths:
