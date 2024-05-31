@@ -5,7 +5,6 @@ mod swap_tokens;
 mod update_swap_status;
 pub mod withdraw_deposit;
 pub mod restore_archived_swap;
-pub mod update_white_list_principals;
 
 pub use recover_stuck_burn::*;
 pub use recover_stuck_transfer::*;
@@ -14,4 +13,3 @@ pub use swap_tokens::*;
 pub use update_swap_status::*;
 pub use withdraw_deposit::*;
 pub use restore_archived_swap::*;
-pub use update_white_list_principals::*;

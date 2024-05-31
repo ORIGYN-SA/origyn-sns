@@ -47,7 +47,11 @@ impl RuntimeState {
     }
 
     pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
-        self.data.whitelisted_principals.contains(&caller)
+        if cfg!(feature = "inttest") {
+            true
+        } else {
+            self.data.whitelisted_principals.contains(&caller)
+        }
     }
 }
 

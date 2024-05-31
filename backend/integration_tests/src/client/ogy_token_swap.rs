@@ -12,7 +12,6 @@ generate_update_call!(swap_tokens);
 generate_update_call!(update_swap_status);
 generate_update_call!(withdraw_deposit);
 generate_update_call!(restore_archived_swap);
-generate_update_call!(update_white_list_principals);
 
 pub mod get_swap_info {
     pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
@@ -40,9 +39,6 @@ pub mod recover_stuck_transfer {
 }
 pub mod withdraw_deposit {
     pub use ogy_token_swap_api::updates::withdraw_deposit::{ Args, Response };
-}
-pub mod update_white_list_principals {
-    pub use ogy_token_swap_api::updates::update_white_list_principals::{ Args, Response };
 }
 
 pub mod client {

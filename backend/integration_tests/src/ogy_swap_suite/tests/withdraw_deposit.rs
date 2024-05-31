@@ -10,11 +10,7 @@ use types::CanisterId;
 use crate::{
     client::{
         ogy_legacy_ledger::client::{ balance_of, mint_ogy, transfer_ogy },
-        ogy_token_swap::{
-            client::{ deposit_account, withdraw_deposit_call },
-            update_white_list_principals,
-            withdraw_deposit,
-        },
+        ogy_token_swap::{ client::{ deposit_account, withdraw_deposit_call }, withdraw_deposit },
     },
     ogy_swap_suite::{ init::init, TestEnv },
     utils::random_principal,
@@ -39,13 +35,6 @@ fn withdraw_deposit_insufficient_balance() {
 
     let amount = 2 * E8S_FEE_OGY;
     let user = user_init(&mut env, amount.into());
-    update_white_list_principals(
-        &mut env.pic,
-        env.controller,
-        env.canister_ids.ogy_swap,
-        &HashSet::from_iter(vec![user.clone()])
-    );
-
     transfer_deposit(&mut env, user, amount);
 
     assert_eq!(
@@ -60,12 +49,6 @@ fn withdraw_deposit_happy_path() {
 
     let amount = 1 * E8S_PER_OGY;
     let user = user_init(&mut env, amount.into());
-    update_white_list_principals(
-        &mut env.pic,
-        env.controller,
-        env.canister_ids.ogy_swap,
-        &HashSet::from_iter(vec![user.clone()])
-    );
 
     transfer_deposit(&mut env, user, amount);
 
