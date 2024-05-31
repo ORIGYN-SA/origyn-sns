@@ -2,7 +2,7 @@
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
     "token_metrics": {
-      "type": "custom",
+      "type": "rust",
       "candid": "backend/canisters/token_metrics/api/can.did",
       "package": "token_metrics",
       "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz",
@@ -13,7 +13,7 @@
       }
     },
     "ogy_token_swap": {
-      "type": "custom",
+      "type": "rust",
       "candid": "backend/canisters/ogy_token_swap/api/can.did",
       "package": "ogy_token_swap",
       "wasm": "backend/canisters/ogy_token_swap/target/wasm32-unknown-unknown/release/ogy_token_swap_canister.wasm.gz",
@@ -70,7 +70,8 @@
         "env_override": null,
         "output": "backend/canisters/sns_rewards/api/declarations"
       },
-      "type": "custom",
+      "type": "rust",
+      "package": "sns_rewards",
       "wasm": "backend/canisters/sns_rewards/target/wasm32-unknown-unknown/release/sns_rewards_canister.wasm.gz"
     },
     "sns_root": {
@@ -86,7 +87,7 @@
       "wasm": ""
     },
     "super_stats_v3": {
-      "type": "custom",
+      "type": "rust",
       "candid": "backend/canisters/super_stats_v3/api/can.did",
       "optimize": "cycles",
       "package": "super_stats_v3",
