@@ -32,35 +32,41 @@ const Form = () => {
   };
   return (
     <>
-      <div>
-        To successfully add each neuron to the dashboard, please complete the
-        following two steps for every individual neuron:
-      </div>
-      <div className="mt-4">
-        1. Add your principal{" "}
-        <span className="font-semibold">
-          <span>{principal}</span>
-          <span>
-            <CopyToClipboard value={principal as string} />
+      <div className="text-center">
+        <div className="mb-4 text-xl font-semibold">Add neuron</div>
+        <div>
+          To successfully add each neuron to the dashboard, please complete the
+          following two steps for every individual neuron
+        </div>
+        <div className="mt-6">
+          <div className="text-content/60 font-semibold mb-2">Step 1</div>
+          Add your principal{" "}
+          <span className="font-semibold">
+            <span>{principal}</span>
+            <span>
+              <CopyToClipboard value={principal as string} />
+            </span>
           </span>
-        </span>
-        as a HotKey to your OGY neuron which you wish to include in this
-        dashboard.
-        <br />
-        To do this, open your{" "}
-        <span>
-          <Link
-            to={NNS_PLATFORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent font-semibold"
-          >
-            NNS app
-          </Link>
-        </span>{" "}
-        and click into each Neuron.
+          as a HotKey to your OGY neuron which you wish to include in this
+          dashboard.
+          <br />
+          To do this, open your{" "}
+          <span>
+            <Link
+              to={NNS_PLATFORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent font-semibold"
+            >
+              NNS app
+            </Link>
+          </span>{" "}
+          and click into each Neuron.
+        </div>
+        <div className="text-content/60 font-semibold mt-6 mb-2">Step 2</div>
+        <div className="mb-2">Enter your OGY neuron ID here:</div>
       </div>
-      <div className="mt-4 mb-2">2. Enter your OGY neuron ID here:</div>
+
       <form onSubmit={(e) => handleOnSubmit(e)}>
         <Field
           name="neuronId"
