@@ -114,15 +114,13 @@ pub struct CanisterIds {
 }
 
 pub fn white_listed_principals() -> HashSet<Principal> {
-    let mut principals = Vec::new();
+    let text_principals = vec![
+        "<whatever-principal-we-want-to-whitelist-1>",
+        "<whatever-principal-we-want-to-whitelist-2>"
+    ];
 
-    if let Ok(p) = Principal::from_text("<whatever-principal-we-want-to-whitelist-1>") {
-        principals.push(p);
-    }
-    if let Ok(p2) = Principal::from_text("<whatever-principal-we-want-to-whitelist-2>") {
-        principals.push(p2);
-    }
-    // Add more principals as needed
-
-    HashSet::from_iter(principals)
+    text_principals
+        .iter()
+        .filter_map(|text_prin| Principal::from_text(text_prin).ok())
+        .collect()
 }

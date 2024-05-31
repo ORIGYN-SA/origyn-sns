@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 
-use candid::{ CandidType, Principal };
-use serde::{ Deserialize, Serialize };
+use candid::Principal;
 
 pub type Args = HashSet<Principal>;
 
