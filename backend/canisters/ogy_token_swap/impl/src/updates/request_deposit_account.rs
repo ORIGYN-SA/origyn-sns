@@ -39,6 +39,8 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashSet;
+
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Subaccount };
     use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
@@ -71,6 +73,14 @@ mod tests {
     #[test]
     fn test_limit_reached() {
         init_canister_state();
+        let mut prins = vec![];
+        for ind in 0..=LIST_MAX_LIMIT {
+            let p = dummy_principal(ind as u64);
+            prins.push(p);
+        }
+        mutate_state(|s| {
+            s.data.whitelisted_principals = HashSet::from_iter(prins);
+        });
 
         for ind in 0..LIST_MAX_LIMIT {
             let p = dummy_principal(ind as u64);
@@ -98,6 +108,14 @@ mod tests {
     fn test_swaps_limit_reached() {
         init_canister_state();
         let max_heap_swaps = 4_700_000;
+        let mut prins = vec![];
+        for i in 0..max_heap_swaps {
+            let p = dummy_principal(i as u64);
+            prins.push(p);
+        }
+        mutate_state(|s| {
+            s.data.whitelisted_principals = HashSet::from_iter(prins);
+        });
         for i in 0..max_heap_swaps {
             mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
         }

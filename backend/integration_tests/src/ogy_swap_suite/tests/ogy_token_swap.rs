@@ -149,6 +149,12 @@ fn invalid_deposit_account() {
     let user = random_principal();
     // user who intially requests the swap but then fails
     let user_false_request = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone(), user_false_request.clone()])
+    );
     let amount = 100_000 * E8S_PER_OGY;
 
     // mint tokens to swapping user
@@ -257,6 +263,12 @@ fn test_anonymous_request() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
     let amount = 100_000 * E8S_PER_OGY;
 
     // mint tokens to swapping user
@@ -347,6 +359,12 @@ fn test_swap_amount_too_small() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
     let amount = 1_000_000;
 
     // mint tokens to swapping user
@@ -408,6 +426,12 @@ fn test_recover_stuck_burn_on_completed_swap() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
@@ -435,6 +459,12 @@ fn test_recover_stuck_burn_retry_burn() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
@@ -502,6 +532,12 @@ fn test_recover_stuck_burn_recheck_burn_block() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
     let block_index = 1u64;
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
@@ -688,6 +724,12 @@ fn test_recover_stuck_transfer_retry_transfer() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
@@ -747,6 +789,12 @@ fn test_insufficient_funds_in_distribution_pool() {
     let amount = Nat::from(10_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
     let block_index = 1u64;
 
     let init_pool_balance = Nat::from(10 * E8S_PER_OGY);
@@ -793,6 +841,12 @@ fn test_deposit_account() {
     let ogy_token_swap_canister_id = canister_ids.ogy_swap;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        env.controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     assert_eq!(
         get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap(),
@@ -866,6 +920,13 @@ fn init_token_distribution(env: &mut TestEnv, num_users: u64) -> Vec<Principal> 
         ).unwrap();
         holders.push(user);
     }
+
+    update_white_list_principals(
+        pic,
+        controller.clone(),
+        canister_ids.ogy_swap,
+        &&HashSet::from_iter(holders.clone())
+    );
     holders
 }
 
@@ -995,6 +1056,12 @@ fn test_retry_transfer_when_new_ledger_inactive() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
+    update_white_list_principals(
+        &mut pic,
+        env.controller,
+        ogy_token_swap_canister_id,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
     let amount = 1 * E8S_PER_OGY;
 
     // mint tokens to swapping user
@@ -1066,6 +1133,12 @@ fn test_recover_stuck_burn_can_only_be_called_by_authorised_principals() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
@@ -1095,6 +1168,12 @@ fn test_recover_stuck_transfer_can_only_be_called_by_authorised_principals() {
     let amount = Nat::from(1_000_000_000u64);
 
     let user = user_init(&mut env, amount.clone());
+    update_white_list_principals(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        &&HashSet::from_iter(vec![user.clone()])
+    );
 
     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
