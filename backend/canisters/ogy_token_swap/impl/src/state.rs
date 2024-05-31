@@ -50,7 +50,7 @@ impl RuntimeState {
         if cfg!(feature = "inttest") || cfg!(test) {
             true
         } else {
-            white_listed_principals().contains(&caller)
+            get_white_listed_principals().contains(&caller)
         }
     }
 }
@@ -114,7 +114,7 @@ pub struct CanisterIds {
     pub ogy_legacy_ledger: Principal,
 }
 
-pub fn white_listed_principals() -> HashSet<Principal> {
+pub fn get_white_listed_principals() -> HashSet<Principal> {
     let text_principals = vec![
         "<whatever-principal-we-want-to-whitelist-1>",
         "<whatever-principal-we-want-to-whitelist-2>"
