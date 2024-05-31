@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
@@ -7,10 +5,8 @@ use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use ogy_token_swap_api::{
-    requesting_principals::RequestingPrincipals,
-    types::token_swap::TokenSwap,
-};
+use crate::model::token_swap::TokenSwap;
+use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
 
 canister_state!(RuntimeState);
 
@@ -38,6 +34,8 @@ impl RuntimeState {
                 ogy_legacy_ledger: self.data.canister_ids.ogy_legacy_ledger,
                 ogy_new_ledger: self.data.canister_ids.ogy_new_ledger,
             },
+            ogy_legacy_minting_account: self.data.minting_account.to_string(),
+            authorized_principals: self.data.authorized_principals.clone(),
         }
     }
 
@@ -51,6 +49,8 @@ impl RuntimeState {
 pub struct Metrics {
     pub canister_info: CanisterInfo,
     pub canister_ids: CanisterIds,
+    pub ogy_legacy_minting_account: String,
+    pub authorized_principals: Vec<Principal>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]

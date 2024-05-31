@@ -5,6 +5,8 @@ import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 
 interface INeuronId {
   id: number[];

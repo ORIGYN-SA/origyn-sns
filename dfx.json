@@ -2,10 +2,15 @@
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
     "token_metrics": {
+      "type": "custom",
       "candid": "backend/canisters/token_metrics/api/can.did",
       "package": "token_metrics",
-      "type": "rust",
-      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz"
+      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/token_metrics/api/declarations"
+      }
     },
     "ogy_token_swap": {
       "type": "custom",
@@ -17,6 +22,15 @@
         "env_override": null,
         "output": "backend/canisters/ogy_token_swap/api/declarations"
       }
+    },
+    "ogy_dashboard": {
+      "declarations": {
+        "bindings": [],
+        "env_override": null,
+        "output": null
+      },
+      "source": ["frontend/ogy_dashboard/dist"],
+      "type": "assets"
     },
     "ogy_ledger": {
       "build": "",
@@ -32,19 +46,19 @@
     },
     "sns_governance": {
       "build": "",
-      "candid": "candid/sns_governance.did",
+      "candid": "backend/external_canisters/sns_governance/api/can.did",
       "type": "custom",
       "wasm": ""
     },
     "sns_index": {
       "build": "",
-      "candid": "candid/sns_index.did",
+      "candid": "backend/external_canisters/sns_index/api/can.did",
       "type": "custom",
       "wasm": ""
     },
     "sns_ledger": {
       "build": "",
-      "candid": "candid/sns_ledger.did",
+      "candid": "backend/external_canisters/sns_ledger/api/can.did",
       "type": "custom",
       "wasm": ""
     },
@@ -61,27 +75,36 @@
     },
     "sns_root": {
       "build": "",
-      "candid": "candid/sns_root.did",
+      "candid": "backend/external_canisters/sns_root/api/can.did",
       "type": "custom",
       "wasm": ""
     },
     "sns_swap": {
       "build": "",
-      "candid": "candid/sns_swap.did",
+      "candid": "backend/external_canisters/sns_swap/api/can.did",
       "type": "custom",
       "wasm": ""
     },
     "super_stats_v3": {
+      "type": "custom",
       "candid": "backend/canisters/super_stats_v3/api/can.did",
       "optimize": "cycles",
       "package": "super_stats_v3",
-      "type": "rust",
-      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz"
+      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/super_stats_v3/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",
   "networks": {
     "staging": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
+    },
+    "preprod": {
       "providers": ["https://icp0.io"],
       "type": "persistent"
     },

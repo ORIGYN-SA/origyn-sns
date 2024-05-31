@@ -35,6 +35,7 @@ const Tooltip = ({
       id={id}
       place={place}
       clickable={clickable}
+      delayShow={300}
       {...restProps}
     >
       {children}

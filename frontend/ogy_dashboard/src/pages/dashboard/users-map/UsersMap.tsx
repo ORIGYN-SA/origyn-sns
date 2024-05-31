@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { useState, useEffect } from "react";
+import { ResponsiveContainer } from "recharts";
 import useCountryAnalytics from "@hooks/metrics/useCountryAnalytics";
 import { Card } from "@components/ui";
 
@@ -64,15 +65,18 @@ const UsersMap = ({ className, ...restProps }: UsersMapProps) => {
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="text-lg font-semibold">OGY Users Map</div>
-      <div
-        id="mapContainer"
-        style={{ position: "relative", width: "100%", height: "600px" }}
-        className="mt-8 border border-border rounded-xl"
-      />
-      <div className="text-center font-semibold mt-8">
-        <div className="text-lg text-content/60">Total visitors:</div>
-        <div className="text-2xl">{users}</div>
-      </div>
+      <ResponsiveContainer className="mt-8 p-6 xl:p-16 border border-border rounded-xl bg-gradient-to-b from-[#F4F9FB] to-[#DCE7EC]">
+        <div
+          id="mapContainer"
+          className="relative flex justify-center items-start w-full h-[250px] xl:h-[500px]"
+        ></div>
+        <div className="text-center font-semibold mt-8">
+          <div className="text-xl font-semibold text-charcoal">
+            Total visitors
+          </div>
+          <div className="text-2xl text-charcoal/60">{users}</div>
+        </div>
+      </ResponsiveContainer>
     </Card>
   );
 };

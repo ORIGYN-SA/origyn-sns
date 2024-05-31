@@ -4,6 +4,7 @@ mod request_deposit_account;
 mod swap_tokens;
 mod update_swap_status;
 pub mod withdraw_deposit;
+pub mod restore_archived_swap;
 
 pub use recover_stuck_burn::*;
 pub use recover_stuck_transfer::*;
@@ -11,3 +12,4 @@ pub use request_deposit_account::*;
 pub use swap_tokens::*;
 pub use update_swap_status::*;
 pub use withdraw_deposit::*;
+pub use restore_archived_swap::*;
