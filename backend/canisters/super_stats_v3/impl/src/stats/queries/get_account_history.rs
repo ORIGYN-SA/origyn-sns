@@ -4,6 +4,7 @@ use crate::{
     stats::history::{ fill_missing_days, get_history_of_account },
 };
 use super_stats_v3_api::{
+    account_tree::HistoryData,
     runtime::RUNTIME_STATE,
     stats::queries::get_account_history::{ Args, Response },
 };
@@ -14,10 +15,10 @@ fn get_account_history(args: Args) -> Response {
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
     let history = get_history_of_account(args.account, args.days, false);
-    let mut filled_history = fill_missing_days(history, args.days);
-    if filled_history.is_empty() {
-        return Vec::new();
-    }
+    let default_history_data = HistoryData {
+        balance: 0,
+    };
+    let mut filled_history = fill_missing_days(history, args.days, default_history_data);
     let ret = filled_history.split_off(filled_history.len() - (args.days as usize));
     return ret;
 }

@@ -6,6 +6,7 @@ use sns_governance_canister::types::NeuronId;
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
     GovernanceStats,
+    LockedNeuronsAmount,
     PrincipalBalance,
     TokenSupplyData,
     WalletOverview,
@@ -107,6 +108,8 @@ pub struct Data {
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
     /// Staking history for governance
     pub gov_stake_history: Vec<(u64, HistoryData)>,
+    /// Amount of locked tokens and their period
+    pub locked_neurons_amount: LockedNeuronsAmount,
 }
 
 impl Data {
@@ -131,6 +134,7 @@ impl Data {
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
+            locked_neurons_amount: LockedNeuronsAmount::default(),
         }
     }
 }
