@@ -5,6 +5,7 @@ use candid::Nat;
 use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_api::custom_types::IndexerType;
 use super_stats_v3_api::stats::queries::get_principal_history::GetPrincipalHistoryArgs;
+use super_stats_v3_api::stats::queries::get_principal_overview::Args as GetPrincipalOverviewArgs;
 use super_stats_v3_api::stats::updates::init_target_ledger::{ InitLedgerArgs, TargetArgs };
 use utils::consts::E8S_PER_OGY;
 
@@ -15,6 +16,7 @@ use crate::client::super_stats::{
     get_working_stats,
     init_target_ledger,
     start_processing_timer,
+    get_principal_overview,
 };
 use crate::super_stats_suite::{ init::init, TestEnv };
 
@@ -255,6 +257,17 @@ fn principal_history_created() {
     // Wait here 15 seconds before proceeding
     thread::sleep(Duration::from_secs(15));
 
+    // Check max account balances
+    let p2_ow_args = principal2.to_string();
+    let principal2_overview = get_principal_overview(
+        &mut pic,
+        controller,
+        super_stats_canister_id,
+        &p2_ow_args
+    );
+    assert_eq!(principal2_overview.unwrap().max_balance, 20_000_000);
+
+    println!("Principal2 overview: {principal2_overview:?}");
     let p1_args = GetPrincipalHistoryArgs {
         account: principal1.to_string(),
         days: 8,

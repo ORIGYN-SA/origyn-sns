@@ -17,6 +17,7 @@ fn init(args: InitArgs) {
         args.sns_governance_canister_id,
         args.super_stats_canister_id,
         args.treasury_account,
+        args.foundation_accounts
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);

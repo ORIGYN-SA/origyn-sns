@@ -107,6 +107,10 @@ pub struct Data {
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
     /// Staking history for governance
     pub gov_stake_history: Vec<(u64, HistoryData)>,
+    /// These accounts hold the tokens in hand of foundation, passed as init args
+    pub foundation_accounts: Vec<String>,
+    /// Holds the total value of tokens in hand of foundation
+    pub foundation_accounts_data: Vec<(String, WalletOverview)>,
 }
 
 impl Data {
@@ -114,13 +118,16 @@ impl Data {
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
         super_stats_canister_id: CanisterId,
-        treasury_account: String
+        treasury_account: String,
+        foundation_accounts: Vec<String>
     ) -> Self {
         Self {
             super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
             treasury_account,
+            foundation_accounts,
+            foundation_accounts_data: Vec::new(),
             authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
@@ -132,5 +139,17 @@ impl Data {
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
         }
+    }
+
+    pub fn update_foundation_accounts_data(&mut self) {
+        let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
+
+        for (account, wallet_overview) in &self.wallets_list {
+            if self.foundation_accounts.contains(&account.to_string()) {
+                temp_foundation_accounts_data.push((account.to_string(), wallet_overview.clone()));
+            }
+        }
+
+        self.foundation_accounts_data = temp_foundation_accounts_data;
     }
 }
