@@ -122,51 +122,52 @@ rust lint:
 
 # See includes above for canister builds
 
-generate test declarations:
-  stage: build
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
-    paths:
-      - backend/**/declarations
-    expire_in: 1 day
+# generate test declarations:
+#   stage: build
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#       needs:
+#         [
+#           "ogy_token_swap test build",
+#           "sns_rewards test build",
+#           "super_stats_v3 test build",
+#           "token_metrics test build",
+#         ]
+#   script:
+#     - dfx generate ogy_token_swap
+#     - dfx generate sns_rewards
+#     - dfx generate super_stats_v3
+#     - dfx generate token_metrics
+#   extends: .rust template
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
+#     paths:
+#       - backend/**/declarations
+#     expire_in: 1 day
 
-generate declarations:
-  stage: build
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
-      needs:
-        [
-          "ogy_token_swap canister build",
-          "sns_rewards canister build",
-          "super_stats_v3 canister build",
-          "token_metrics canister build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
-    paths:
-      - backend/**/api
-    expire_in: 6 months
+# generate declarations:
+#   stage: build
+#   rules:
+#     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
+#       when: never
+#     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
+#       needs:
+#         [
+#           "ogy_token_swap canister build",
+#           "sns_rewards canister build",
+#           "super_stats_v3 canister build",
+#           "token_metrics canister build",
+#         ]
+#   script:
+#     - dfx generate ogy_token_swap
+#     - dfx generate sns_rewards
+#     - dfx generate super_stats_v3
+#     - dfx generate token_metrics
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
+#     paths:
+#       - backend/**/api
+#     expire_in: 6 months
 
 # See includes above for frontend builds
 
