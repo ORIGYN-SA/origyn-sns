@@ -94,7 +94,7 @@ pub async fn update_balance_list() {
     mutate_state(|state| {
         // Remove the first item from the merged array, which is the governance canister
         // including all stakes, also available in each principal.governance in the list
-        // and then replace its value with the value of subbaccount 32x0 
+        // and then replace its value with the value of subbaccount 32x0
         let governance_0_account = Account {
             owner: state.data.sns_governance_canister,
             subaccount: None,
@@ -120,10 +120,10 @@ pub async fn update_balance_list() {
 
         state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
         state.data.wallets_list = sort_map_descending(&temp_wallets_list);
+        state.data.update_foundation_accounts_data();
     });
     info!("update_balance_list -> done, mutated the state")
 }
-
 async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {
     info!("getting all holders..");
     let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
