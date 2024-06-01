@@ -52,12 +52,16 @@ if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network staging)
   SUPER_STATS=$(dfx canister id super_stats_v3 --network staging)
   ORIGYN_TREASURY_ACCOUNT="$SNS_GOVERNANCE.9a703b745d9182542eb16f2d922c9f45c932f29f74acec6c2b807b543fee2383"
+  ORIGYN_FOUNDATION_ACCOUNT="b3j22-o6yuq-jdcbo-kk7js-jm24t-q6hkj-hf5fd-bhizo-2erxi-6gk5s-qae.0000000000000000000000000000000000000000000000000000000000000000"
+  ORIGYN_NEURON_MAIN_ACCOUNT="2gytz-5mjny-5qfcl-vjsle-654l2-ixgif-3vfqj-nryxk-uzgfx-5df5u-sqe.0000000000000000000000000000000000000000000000000000000000000000"
 else
   TESTMODE="false"
   OGY_LEDGER=$(dfx canister id sns_ledger --network $NETWORK)
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
   SUPER_STATS=$(dfx canister id super_stats_v3 --network $NETWORK)
   ORIGYN_TREASURY_ACCOUNT="$SNS_GOVERNANCE.9a703b745d9182542eb16f2d922c9f45c932f29f74acec6c2b807b543fee2383"
+  ORIGYN_FOUNDATION_ACCOUNT="b3j22-o6yuq-jdcbo-kk7js-jm24t-q6hkj-hf5fd-bhizo-2erxi-6gk5s-qae.0000000000000000000000000000000000000000000000000000000000000000"
+  ORIGYN_NEURON_MAIN_ACCOUNT="2gytz-5mjny-5qfcl-vjsle-654l2-ixgif-3vfqj-nryxk-uzgfx-5df5u-sqe.0000000000000000000000000000000000000000000000000000000000000000"
 fi
 
 ARGUMENTS="(record {
@@ -66,6 +70,10 @@ ARGUMENTS="(record {
   sns_governance_canister_id = principal \"$SNS_GOVERNANCE\";
   super_stats_canister_id = principal \"$SUPER_STATS\";
   treasury_account = \"$ORIGYN_TREASURY_ACCOUNT\";
+  foundation_accounts = vec {
+    \"$ORIGYN_FOUNDATION_ACCOUNT\"; 
+    \"$ORIGYN_NEURON_MAIN_ACCOUNT\"
+    }
   } )"
 
 
