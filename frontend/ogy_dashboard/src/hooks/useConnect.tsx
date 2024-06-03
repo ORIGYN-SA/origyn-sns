@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useConnect as useConnect2ic } from "@connect2ic/react";
+import { useConnect as useConnect2ic } from "@amerej/connect2ic-react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 
