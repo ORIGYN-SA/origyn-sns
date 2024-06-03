@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@connect2ic/react";
+import { useConnect, useCanister } from "@amerej/connect2ic-react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { ActorSubclass } from "@dfinity/agent";

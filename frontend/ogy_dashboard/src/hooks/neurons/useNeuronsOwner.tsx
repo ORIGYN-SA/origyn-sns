@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
@@ -8,7 +8,7 @@ import { getListNeuronsOwner } from "@services/queries/governance/neurons/getLis
 import getNeuronsByOwner from "@services/queries/sns-rewards//getNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 
 const useNeuronsOwner = ({
