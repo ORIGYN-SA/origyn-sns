@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { createClient } from "@connect2ic/core";
+import { createClient } from "@amerej/connect2ic-core";
 import {
   AstroX,
   InfinityWallet,
@@ -7,8 +7,8 @@ import {
   NFID,
   PlugWallet,
   // defaultProviders,
-} from "@connect2ic/core/providers";
-import { Connect2ICProvider } from "@connect2ic/react";
+} from "@amerej/connect2ic-core/providers";
+import { Connect2ICProvider } from "@amerej/connect2ic-react";
 import {
   SNS_LEDGER_CANISTER_ID,
   ICP_LEDGER_CANISTER_ID,

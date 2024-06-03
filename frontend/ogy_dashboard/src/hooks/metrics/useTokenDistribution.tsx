@@ -3,7 +3,7 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,

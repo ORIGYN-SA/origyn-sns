@@ -1,11 +1,11 @@
 // import { keepPreviousData } from "@tanstack/react-query";
-// import { useConnect, useCanister } from "@connect2ic/react";
+// import { useConnect, useCanister } from "@amerej/connect2ic-react";
 import { ActorSubclass } from "@dfinity/agent";
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { getCurrentTimestamp } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 
 interface INeuronId {

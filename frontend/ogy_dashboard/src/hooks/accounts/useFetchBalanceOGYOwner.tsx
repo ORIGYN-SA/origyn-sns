@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import useConnect from "@hooks/useConnect";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 

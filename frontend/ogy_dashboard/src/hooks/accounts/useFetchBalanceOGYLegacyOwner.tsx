@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@connect2ic/react";
+import { useConnect, useCanister } from "@amerej/connect2ic-react";
 import fetchBalanceOGYLegacy from "@services/queries/accounts/fetchBalanceOGYLegacy";
 
 const useFetchBalanceOGYOwner = () => {

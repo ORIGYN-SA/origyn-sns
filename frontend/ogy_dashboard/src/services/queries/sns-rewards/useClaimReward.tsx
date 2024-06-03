@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { ActorSubclass } from "@dfinity/agent";
 
 interface IClaimReward {
