@@ -53,6 +53,7 @@ type Overview = record {
     sent: TxCount; 
     received: TxCount;
     balance: nat;
+    max_balance: nat;
 };
 
 type HolderBalanceResponse = record {

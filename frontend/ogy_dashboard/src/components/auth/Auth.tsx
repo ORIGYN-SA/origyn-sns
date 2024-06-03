@@ -1,4 +1,8 @@
-import { useConnect, ConnectButton, ConnectDialog } from "@connect2ic/react";
+import {
+  useConnect,
+  ConnectButton,
+  ConnectDialog,
+} from "@amerej/connect2ic-react";
 import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import useThemeDetector from "@helpers/theme/useThemeDetector";

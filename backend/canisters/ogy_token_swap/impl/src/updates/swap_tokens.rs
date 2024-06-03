@@ -65,6 +65,14 @@ pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
     principal: Principal
 ) -> Result<BlockIndexIcrc, String> {
+    if read_state(|s| !s.is_caller_whitelisted_principal(principal)) {
+        return Err(
+            format!(
+                "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
+            )
+        );
+    }
+
     if read_state(|s| s.data.token_swap.is_capacity_full()) {
         return Err(format!("Can't perform the swap. There are too many swaps in the heap"));
     }

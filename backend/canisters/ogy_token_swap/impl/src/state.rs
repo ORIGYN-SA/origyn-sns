@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
@@ -42,6 +44,14 @@ impl RuntimeState {
     pub fn is_caller_authorised_principal(&self) -> bool {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
+    }
+
+    pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
+        if cfg!(feature = "inttest") || cfg!(test) || self.env.is_test_mode() {
+            true
+        } else {
+            get_white_listed_principals().contains(&caller)
+        }
     }
 }
 
@@ -102,4 +112,16 @@ impl Data {
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
+}
+
+pub fn get_white_listed_principals() -> HashSet<Principal> {
+    let text_principals = vec![
+        "<whatever-principal-we-want-to-whitelist-1>",
+        "<whatever-principal-we-want-to-whitelist-2>"
+    ];
+
+    text_principals
+        .iter()
+        .filter_map(|text_prin| Principal::from_text(text_prin).ok())
+        .collect()
 }

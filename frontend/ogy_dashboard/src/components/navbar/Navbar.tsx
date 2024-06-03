@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useConnect } from "@connect2ic/react";
+import { useConnect } from "@amerej/connect2ic-react";
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
@@ -90,7 +90,7 @@ const Navbar = () => {
               </button>
             )}
 
-            <div className="lg:hidden">
+            <div className="xl:hidden">
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"

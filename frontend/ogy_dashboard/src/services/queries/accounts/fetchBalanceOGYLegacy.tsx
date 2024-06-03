@@ -12,12 +12,12 @@ const fetchBalanceOGYLegacy = async ({
   actor,
   owner,
 }: IFetchBalanceOGYLegacy) => {
-  const accountIdentifier = AccountIdentifier.fromPrincipal({
+  const account = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
-  });
+  }).toHex();
 
   const result = (await actor.account_balance_dfx({
-    account: accountIdentifier.toHex(),
+    account,
   })) as { e8s: bigint };
 
   const balance = divideBy1e8(result.e8s);

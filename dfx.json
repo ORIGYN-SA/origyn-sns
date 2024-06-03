@@ -71,6 +71,7 @@
         "output": "backend/canisters/sns_rewards/api/declarations"
       },
       "type": "custom",
+      "package": "sns_rewards",
       "wasm": "backend/canisters/sns_rewards/target/wasm32-unknown-unknown/release/sns_rewards_canister.wasm.gz"
     },
     "sns_root": {

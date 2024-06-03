@@ -31,6 +31,7 @@ type InitArgs = record {
 };
 type Response = variant { Success : SwapInfo; InternalError : text };
 type Response_1 = variant {
+  NotAuthorized : text;
   Success : blob;
   MaxCapacityOfListReached;
   MaxCapacityOfSwapsReached;

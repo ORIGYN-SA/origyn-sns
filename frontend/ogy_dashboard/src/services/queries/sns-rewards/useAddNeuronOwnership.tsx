@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { ActorSubclass } from "@dfinity/agent";
-import { Buffer } from 'buffer';
+import type { Response } from "@services/types/sns_rewards";
+import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 
 interface IAddNeuron {
@@ -14,10 +15,11 @@ const addNeuronOwnership = async ({
   neuronId,
 }: IAddNeuron) => {
   const id = [...Uint8Array.from(Buffer.from(neuronId, "hex"))];
-  const result = await snsRewardsActor.add_neuron_ownership({
+  const result = (await snsRewardsActor.add_neuron_ownership({
     id,
-  });
-  return result;
+  })) as Response;
+
+  return Object.keys(result).toString();
 };
 
 const useAddNeuronOwnership = () => {

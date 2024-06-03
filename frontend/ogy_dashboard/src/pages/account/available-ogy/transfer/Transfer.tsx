@@ -8,7 +8,7 @@ import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
-import useTransfer from "@services/queries/transfer/useTransfer";
+import useTransferOGY from "@hooks/transfer/useTransferOGY";
 
 const Transfer = ({ show, handleClose }) => {
   const queryClient = useQueryClient();
@@ -25,7 +25,7 @@ const Transfer = ({ show, handleClose }) => {
     isPending: isPendingTransfer,
     isIdle: isIdleTransfer,
     // error: errorTransfer,
-  } = useTransfer();
+  } = useTransferOGY();
 
   const {
     register,

@@ -12,4 +12,5 @@ pub enum Response {
     Success(AccountIdentifier),
     MaxCapacityOfListReached,
     MaxCapacityOfSwapsReached,
+    NotAuthorized(String),
 }

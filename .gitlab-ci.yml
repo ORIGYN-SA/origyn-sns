@@ -152,10 +152,10 @@ generate declarations:
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
       needs:
         [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
+          "ogy_token_swap canister build",
+          "sns_rewards canister build",
+          "super_stats_v3 canister build",
+          "token_metrics canister build",
         ]
   script:
     - dfx generate ogy_token_swap
