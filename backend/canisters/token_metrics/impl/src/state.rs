@@ -150,9 +150,9 @@ impl Data {
         let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
 
         for (account, wallet_overview) in &self.wallets_list {
-            if self.foundation_accounts.contains(&account.to_icrc2_format()) {
+            if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
                 temp_foundation_accounts_data.push((
-                    account.to_icrc2_format(),
+                    account.to_principal_dot_account(),
                     wallet_overview.clone(),
                 ));
             }
@@ -160,12 +160,12 @@ impl Data {
         self.foundation_accounts_data = temp_foundation_accounts_data;
     }
 }
-pub trait Icrc2Format {
-    fn to_icrc2_format(&self) -> String;
+pub trait PrincipalDotAccountFormat {
+    fn to_principal_dot_account(&self) -> String;
 }
 
-impl Icrc2Format for Account {
-    fn to_icrc2_format(&self) -> String {
+impl PrincipalDotAccountFormat for Account {
+    fn to_principal_dot_account(&self) -> String {
         match &self.subaccount {
             Some(subaccount) => format!("{}.{}", self.owner, hex::encode(subaccount)),
             None => self.owner.to_string(),
@@ -178,7 +178,7 @@ mod tests {
     use candid::Principal;
 
     #[test]
-    fn test_to_icrc2_format_with_subaccount() {
+    fn test_to_principal_dot_account_with_subaccount() {
         let principal = Principal::from_text("aaaaa-aa").unwrap();
         let subaccount = Some([0u8; 32]);
 
@@ -188,17 +188,20 @@ mod tests {
         };
 
         // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
-        assert_eq!(account.to_icrc2_format(), format!("{}.{}", principal, hex::encode([0u8; 32])));
+        assert_eq!(
+            account.to_principal_dot_account(),
+            format!("{}.{}", principal, hex::encode([0u8; 32]))
+        );
     }
 
     #[test]
-    fn test_to_icrc2_format_without_subaccount() {
+    fn test_to_principal_dot_account_without_subaccount() {
         let principal = Principal::from_text("aaaaa-aa").unwrap();
         let account = Account {
             owner: principal,
             subaccount: None,
         };
 
-        assert_eq!(account.to_icrc2_format(), principal.to_string());
+        assert_eq!(account.to_principal_dot_account(), principal.to_string());
     }
 }
