@@ -46,6 +46,7 @@
     "recharts": "^2.12.3",
     "styled-components": "^6.1.11",
     "tinycolor2": "^1.6.0",
+    "vis-network": "^9.1.9",
     "yup": "^1.4.0"
   },
   "devDependencies": {
