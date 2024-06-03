@@ -11,6 +11,7 @@ use token_metrics_api::token_data::{
     TokenSupplyData,
     WalletOverview,
 };
+use tracing::info;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -149,11 +150,55 @@ impl Data {
         let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
 
         for (account, wallet_overview) in &self.wallets_list {
-            if self.foundation_accounts.contains(&account.to_string()) {
-                temp_foundation_accounts_data.push((account.to_string(), wallet_overview.clone()));
+            if self.foundation_accounts.contains(&account.to_icrc2_format()) {
+                temp_foundation_accounts_data.push((
+                    account.to_icrc2_format(),
+                    wallet_overview.clone(),
+                ));
             }
         }
-
         self.foundation_accounts_data = temp_foundation_accounts_data;
+    }
+}
+pub trait Icrc2Format {
+    fn to_icrc2_format(&self) -> String;
+}
+
+impl Icrc2Format for Account {
+    fn to_icrc2_format(&self) -> String {
+        match &self.subaccount {
+            Some(subaccount) => format!("{}.{}", self.owner, hex::encode(subaccount)),
+            None => self.owner.to_string(),
+        }
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use candid::Principal;
+
+    #[test]
+    fn test_to_icrc2_format_with_subaccount() {
+        let principal = Principal::from_text("aaaaa-aa").unwrap();
+        let subaccount = Some([0u8; 32]);
+
+        let account = Account {
+            owner: principal,
+            subaccount,
+        };
+
+        // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
+        assert_eq!(account.to_icrc2_format(), format!("{}.{}", principal, hex::encode([0u8; 32])));
+    }
+
+    #[test]
+    fn test_to_icrc2_format_without_subaccount() {
+        let principal = Principal::from_text("aaaaa-aa").unwrap();
+        let account = Account {
+            owner: principal,
+            subaccount: None,
+        };
+
+        assert_eq!(account.to_icrc2_format(), principal.to_string());
     }
 }
