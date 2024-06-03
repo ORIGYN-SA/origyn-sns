@@ -38,6 +38,10 @@ impl RuntimeState {
             },
             ogy_legacy_minting_account: self.data.minting_account.to_string(),
             authorized_principals: self.data.authorized_principals.clone(),
+            whitelisted_principals: get_white_listed_principals()
+                .into_iter()
+                .map(|p| p.to_string())
+                .collect(),
         }
     }
 
@@ -61,6 +65,7 @@ pub struct Metrics {
     pub canister_ids: CanisterIds,
     pub ogy_legacy_minting_account: String,
     pub authorized_principals: Vec<Principal>,
+    pub whitelisted_principals: Vec<String>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -116,8 +121,8 @@ pub struct CanisterIds {
 
 pub fn get_white_listed_principals() -> HashSet<Principal> {
     let text_principals = vec![
-        "<whatever-principal-we-want-to-whitelist-1>",
-        "<whatever-principal-we-want-to-whitelist-2>"
+        "6c4n7-npq2s-ciyt6-w2xdg-353ze-e64q2-t4q7f-lke7q-2xqws-tcyke-uqe",
+        "thrhh-hnmzu-kjquw-6ebmf-vdhed-yf2ry-avwy7-2jrrm-byg34-zoqaz-wqe"
     ];
 
     text_principals
