@@ -21,6 +21,7 @@ import { TransactionsDetails } from "@pages/transactions-details/TransactionsDet
 import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
+import Support from "@pages/support";
 
 const router = createBrowserRouter([
   {
@@ -135,6 +136,15 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Recovery />,
+          },
+        ],
+      },
+      {
+        path: "support",
+        children: [
+          {
+            index: true,
+            element: <Support />,
           },
         ],
       },
