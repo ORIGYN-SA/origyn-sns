@@ -270,7 +270,7 @@ fn principal_history_created() {
     println!("Principal2 overview: {principal2_overview:?}");
     let p1_args = GetPrincipalHistoryArgs {
         account: principal1.to_string(),
-        days: 2000,
+        days: 8,
     };
     let response1 = get_principal_history(&mut pic, controller, super_stats_canister_id, &p1_args);
     println!("Response from get_account_history: {response1:?}");
