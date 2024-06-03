@@ -265,12 +265,12 @@ fn principal_history_created() {
         super_stats_canister_id,
         &p2_ow_args
     );
-    assert_eq!(principal2_overview.unwrap().max_balance, 20_000_000);
+    assert_eq!(principal2_overview.unwrap().max_balance, (20_000_000 * E8S_PER_OGY) as u128);
 
     println!("Principal2 overview: {principal2_overview:?}");
     let p1_args = GetPrincipalHistoryArgs {
         account: principal1.to_string(),
-        days: 8,
+        days: 2000,
     };
     let response1 = get_principal_history(&mut pic, controller, super_stats_canister_id, &p1_args);
     println!("Response from get_account_history: {response1:?}");
