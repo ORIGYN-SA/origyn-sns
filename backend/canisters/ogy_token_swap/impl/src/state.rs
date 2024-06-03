@@ -38,6 +38,10 @@ impl RuntimeState {
             },
             ogy_legacy_minting_account: self.data.minting_account.to_string(),
             authorized_principals: self.data.authorized_principals.clone(),
+            whitelisted_principals: get_white_listed_principals()
+                .into_iter()
+                .map(|p| p.to_string())
+                .collect(),
         }
     }
 
@@ -61,6 +65,7 @@ pub struct Metrics {
     pub canister_ids: CanisterIds,
     pub ogy_legacy_minting_account: String,
     pub authorized_principals: Vec<Principal>,
+    pub whitelisted_principals: Vec<String>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
