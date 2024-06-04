@@ -130,7 +130,7 @@ const router = createBrowserRouter([
       },
       {
         path: "recovery",
-        element: <ProtectedRoute />,
+        // element: <ProtectedRoute />,
         children: [
           {
             index: true,

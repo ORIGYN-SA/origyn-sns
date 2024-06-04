@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
+import useConnect from "@hooks/useConnect";
+import Auth from "@components/auth/Auth";
 import { Card, Select } from "@components/ui";
 import TransferICP from "./transfer/TransferICP";
 
 const Recovery = () => {
   //   const navigate = useNavigate();
+  const { isConnected, isInitializing } = useConnect();
   const [token, setToken] = useState("");
   const selectOptions = useMemo(() => [{ value: "ICP" }], []);
 
@@ -27,15 +30,29 @@ const Recovery = () => {
         </div>
         <div className="w-full max-w-lg">
           <Card>
-            <Select
-              options={selectOptions}
-              value={token}
-              handleOnChange={(value) => handleOnChangeSelect(value as string)}
-              placeholder="Choose token"
-            />
-            {token === "ICP" && (
-              <div className="mt-8">
-                <TransferICP />
+            {isConnected && (
+              <>
+                <Select
+                  options={selectOptions}
+                  value={token}
+                  handleOnChange={(value) =>
+                    handleOnChangeSelect(value as string)
+                  }
+                  placeholder="Choose token"
+                />
+                {token === "ICP" && (
+                  <div className="mt-8">
+                    <TransferICP />
+                  </div>
+                )}
+              </>
+            )}
+            {!isConnected && !isInitializing && (
+              <div className="flex flex-col items-center py-8">
+                <div className="font-semibold text-center mb-8">
+                  In order to collect your tokens you must be logged in.
+                </div>
+                <Auth />
               </div>
             )}
           </Card>
