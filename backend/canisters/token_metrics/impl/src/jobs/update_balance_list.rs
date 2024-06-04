@@ -121,8 +121,8 @@ pub async fn update_balance_list() {
 
         state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
         state.data.wallets_list = sort_map_descending(&temp_wallets_list);
-        state.data.update_foundation_accounts_data();
     });
+    mutate_state(|state| state.data.update_foundation_accounts_data());
     info!("update_balance_list -> done, mutated the state")
 }
 async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {

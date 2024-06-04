@@ -1,12 +1,14 @@
-
 use ic_cdk::query;
-use crate::{core::working_stats::api_count, stats::directory::lookup_directory};
-use super_stats_v3_api::{
-    custom_types::{HolderBalance, HolderBalanceResponse}, runtime::RUNTIME_STATE, stable_memory::STABLE_STATE, stats::queries::get_top_account_holders::Response
+use crate::{ core::working_stats::api_count, stats::directory::lookup_directory };
+pub use super_stats_v3_api::{
+    custom_types::{ HolderBalance, HolderBalanceResponse },
+    runtime::RUNTIME_STATE,
+    stable_memory::STABLE_STATE,
+    stats::queries::get_top_account_holders::Response as GetTopAccountHoldersResponse,
 };
 
 #[query]
-fn get_top_account_holders(number_to_return: u64) -> Response {
+pub fn get_top_account_holders(number_to_return: u64) -> GetTopAccountHoldersResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 

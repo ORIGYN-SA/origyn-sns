@@ -14,6 +14,7 @@ use token_metrics_api::token_data::{
     TokenSupplyData,
     WalletOverview,
 };
+use tracing::info;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -160,9 +161,16 @@ impl Data {
 
     pub fn update_foundation_accounts_data(&mut self) {
         let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
-
+        let fc = self.foundation_accounts.clone();
+        info!("foundation_accounts: {fc:?}");
         for (account, wallet_overview) in &self.wallets_list {
+            let acc = account.to_principal_dot_account();
+
+            if acc.contains("ud7qh") {
+                info!("it contains ud7qh: {acc:?}");
+            }
             if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
+                info!("contains: {acc:?}");
                 temp_foundation_accounts_data.push((
                     account.to_principal_dot_account(),
                     wallet_overview.clone(),
@@ -199,6 +207,7 @@ mod tests {
             subaccount,
         };
 
+        // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
         // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
         assert_eq!(
             account.to_principal_dot_account(),

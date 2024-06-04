@@ -1,9 +1,16 @@
 // [][] -- ADMIN GATED -- [][]
 
 use ic_cdk::update;
-use super_stats_v3_api::{custom_types::IndexerType, runtime::RUNTIME_STATE, stats::updates::init_target_ledger::InitLedgerArgs};
+pub use super_stats_v3_api::{
+    custom_types::IndexerType,
+    runtime::RUNTIME_STATE,
+    stats::updates::init_target_ledger::InitLedgerArgs,
+};
 
-use crate::stats::fetch_data::{dfinity_icp::t1_impl_set_target_canister, dfinity_icrc2::t2_impl_set_target_canister};
+use crate::stats::fetch_data::{
+    dfinity_icp::t1_impl_set_target_canister,
+    dfinity_icrc2::t2_impl_set_target_canister,
+};
 
 #[update]
 pub async fn init_target_ledger(args: InitLedgerArgs) -> String {
