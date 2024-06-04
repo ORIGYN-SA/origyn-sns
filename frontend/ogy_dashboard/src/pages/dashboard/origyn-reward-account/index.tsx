@@ -45,7 +45,7 @@ const OrigynTreasuryAccount = ({
 
   return (
     <Card className={`${className}`} {...restProps}>
-      <div className="text-lg font-semibold">ORIGYN Reward Account (OTA)</div>
+      <div className="text-lg font-semibold">ORIGYN Reward Account (ORA)</div>
       {isSuccessBalanceOGY && (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
           <Card
