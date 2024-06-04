@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Card, LoaderSpin, TooltipInfo, Skeleton } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import useOGYCirculationState from "@hooks/metrics/useOGYCirculationState";
+import useCirculationStateOGY from "@hooks/metrics/useCirculationStateOGY";
 import { usePieChart } from "@components/charts/pie/context";
 
 type OGYCirculationState = {
@@ -28,6 +29,9 @@ const OGYCirculationState = ({
   );
   const { data, isLoading, isSuccess, isError, error } =
     useOGYCirculationState();
+
+  useCirculationStateOGY();
+
   const { activeIndex, setActiveIndex } = usePieChart();
 
   return (

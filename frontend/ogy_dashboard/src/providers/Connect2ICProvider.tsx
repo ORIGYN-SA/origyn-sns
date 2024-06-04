@@ -10,6 +10,7 @@ import {
 } from "@amerej/connect2ic-core/providers";
 import { Connect2ICProvider } from "@amerej/connect2ic-react";
 import {
+  APP_MODE,
   SNS_LEDGER_CANISTER_ID,
   ICP_LEDGER_CANISTER_ID,
   SNS_GOVERNANCE_CANISTER_ID,
@@ -68,7 +69,9 @@ const Provider = ({ children }: PropsWithChildren) => {
         providers: [
           new AstroX(),
           new InfinityWallet(),
-          internetIdentityAuthClient,
+          APP_MODE === "dev"
+            ? new InternetIdentity()
+            : internetIdentityAuthClient,
           new NFID(),
           new PlugWallet(),
         ],

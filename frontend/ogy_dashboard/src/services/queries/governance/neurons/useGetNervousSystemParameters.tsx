@@ -11,6 +11,7 @@ interface ISystemNervousParametersResult {
   max_age_bonus_percentage: bigint[];
   max_dissolve_delay_bonus_percentage: bigint[];
   max_dissolve_delay_seconds: bigint[];
+  neuron_minimum_dissolve_delay_to_vote_seconds: bigint[];
 }
 
 export interface ISystemNervousParametersResponse {
@@ -18,6 +19,7 @@ export interface ISystemNervousParametersResponse {
   maxAgeBonusPercentage: number;
   maxDissolveDelayBonusPercentage: number;
   maxDissolveDelaySeconds: number;
+  neuronMinimumDissolveDelayToVoteSeconds: number;
 }
 
 export const getNervousSystemParameters = async ({
@@ -33,6 +35,8 @@ export const getNervousSystemParameters = async ({
     maxDissolveDelayBonusPercentage:
       Number(result.max_dissolve_delay_bonus_percentage[0]) ?? 0,
     maxDissolveDelaySeconds: Number(result.max_dissolve_delay_seconds[0]) ?? 0,
+    neuronMinimumDissolveDelayToVoteSeconds:
+      Number(result.neuron_minimum_dissolve_delay_to_vote_seconds[0]) ?? 0,
   } as ISystemNervousParametersResponse;
 };
 
