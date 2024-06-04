@@ -1,4 +1,4 @@
-import type { Principal } from "@dfinity/principal";
+import type { Principal } from "@dfinity/principal"
 export interface Account {
   'owner' : Principal,
   'subaccount' : [] | [Array<number>],
@@ -20,7 +20,7 @@ export interface GovernanceStats {
   'total_locked' : bigint,
   'total_unlocked' : bigint,
 }
-export interface HistoryData { 'balance' : bigint };
+export interface HistoryData { 'balance' : bigint }
 export interface InitArgs {
   'test_mode' : boolean,
   'foundation_accounts' : Array<string>,
