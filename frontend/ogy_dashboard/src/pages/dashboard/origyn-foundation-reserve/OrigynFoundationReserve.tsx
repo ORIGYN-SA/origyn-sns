@@ -7,6 +7,7 @@ import fetchFoundationAssetsOGY, {
 } from "@services/queries/foundation/fetchFoundationAssetsOGYQuery";
 import { PieChart as PieChartTypes } from "@services/types/charts.types";
 import { usePieChart } from "@components/charts/pie/context";
+import fetchFoundationAssetsOGYNew from "@services/queries/metrics/fetchFoundationAssetsOGY";
 
 type OrigynFoundationReserve = {
   className?: string;
@@ -58,6 +59,13 @@ const OrigynFoundationReserve = ({
   const {
     data: foundationAssets,
     isSuccess,
+  }: UseQueryResult<FoundationAssetsOGY> = useQuery(
+    fetchFoundationAssetsOGY({})
+  );
+
+  const {
+    data: foundationAssetsNew,
+    isSuccess: isSuccessNew,
   }: UseQueryResult<FoundationAssetsOGY> = useQuery(
     fetchFoundationAssetsOGY({})
   );
