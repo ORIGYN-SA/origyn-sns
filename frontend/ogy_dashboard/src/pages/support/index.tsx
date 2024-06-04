@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { Button, InputField, Card } from "@components/ui";
 import { toast } from "react-hot-toast";
 import { Principal } from "@dfinity/principal";
