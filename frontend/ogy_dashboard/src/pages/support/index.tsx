@@ -1,27 +1,37 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { Button, InputField, Card } from "@components/ui";
+import { toast } from "react-hot-toast";
 import { Principal } from "@dfinity/principal";
 import sendSupportRequest from "@services/queries/support/sendSupportRequest";
 import { useState } from "react";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import useCreateSupportTicket from "./useCreateSupportTicket";
 
 const Support = () => {
-  const [isSent, setIsSent] = useState(false);
+  const mutation = useCreateSupportTicket();
 
-  const onSubmit = (data) => {
-    sendSupportRequest(
-      { ...data },
+  const {
+    isSuccess,
+    isError,
+    isPending,
+  } = mutation;
+
+  const onSubmit = (data: any) => {
+    mutation.mutate(
+      data,
       {
-        onSuccess: () => {
-          console.log("Email sent succesfully");
-          setIsSent(true);
+        onSuccess: (data) => {
+          toast.error(error?.message || "Support ticket was created");
         },
-      }
-    );
+        onError: (error) => {
+          toast.error(error?.message || "Error");
+        },
+      })
   };
 
-  const isValidRecipientAddress = (value) => {
+  const isValidRecipientAddress = (value: string) => {
     try {
       Principal.fromText(value);
       return true;
@@ -47,7 +57,7 @@ const Support = () => {
         <section className="w-full" id="total-ogy-supply">
           <Card>
             {
-              isSent ? (
+              isSuccess ? (
                 <>
                   <div className="text-center px-12">
                     <div>Support ticket was created</div>
@@ -118,7 +128,7 @@ const Support = () => {
                     />
                   </div>
                   <div className="text-center mt-4 mb-8 px-12">
-                    <Button type="submit" className="w-full" disabled={!isValid}>
+                    <Button type="submit" className="w-full" disabled={!isValid && isPending}>
                       Submit
                     </Button>
                   </div>
