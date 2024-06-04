@@ -123,6 +123,7 @@ pub fn get_white_listed_principals() -> HashSet<Principal> {
     let text_principals = vec![
         "6c4n7-npq2s-ciyt6-w2xdg-353ze-e64q2-t4q7f-lke7q-2xqws-tcyke-uqe",
         "7xc7u-onriy-z2gvh-scsnt-sf3gz-ywjyk-sx2sx-uzqyk-3ugdz-lm7xe-5qe",
+        "lsxfn-keudc-mnjad-6d5sk-ztnhn-t2u6m-tzc2z-qrdoi-x63bv-j6cuh-lqe",
         "thrhh-hnmzu-kjquw-6ebmf-vdhed-yf2ry-avwy7-2jrrm-byg34-zoqaz-wqe"
     ];
 
