@@ -9,17 +9,19 @@ import {
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 import fetchOneAccountQuery, {
-  Account,
   AccountParams,
 } from "@services/queries/accounts/fetchOneAccountQuery";
 import {
   Network,
   Options,
 } from "vis-network/standalone/esm/vis-network";
+import { Principal } from "@dfinity/principal";
+import { AccountIdentifier } from "@dfinity/ledger-icp";
 import Skeleton from "react-loading-skeleton";
 import { useEffect, useRef, useState } from "react";
-import fetchAccountTransactions from "@services/queries/accounts/fetchAcoountTransactions";
 import useFetchAccountTransactions from "@hooks/accounts/useFetchAccaountTransactions";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
+import { useCanister } from "@connect2ic/react";
 
 // export const loader = async () => {
 //   const dataProposals = new Promise((resolve) => {
@@ -127,6 +129,7 @@ export const TransactionsAccountsDetails = () => {
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof loader>>
   >;
+
   const params = useParams();
 
   const { data, isError, isLoading, isSuccess } = useFetchAccountTransactions(params.id || '');
@@ -153,6 +156,7 @@ export const TransactionsAccountsDetails = () => {
   useEffect(() => {
 
     if (ref.current && data.accountTransactions) {
+    
       const hp = data.accountTransactions.data;
       const total = data.accountTransactions.total_transactions;
 
@@ -218,7 +222,6 @@ export const TransactionsAccountsDetails = () => {
     }
     return () => network?.destroy();
   }, [data]);
-  console.log(data);
 
   return (
     <>
@@ -249,18 +252,26 @@ export const TransactionsAccountsDetails = () => {
             </div>
             <div className="mb-4">
               <div className="text-content/60">Subaccount</div>
-              <div className="font-bold break-all">{data?.accountData?.subaccount}</div>
+              <div className="font-bold break-all">
+                {data?.accountData && (
+                  data?.accountData?.subaccount
+                || AccountIdentifier.fromPrincipal({principal: Principal.fromText(data?.accountData?.id || ""),}).toHex()
+                )}
+              </div>
             </div>
           </div>
           <div className="grid grid-flow-row xl:border-l border-border">
             <div className="xl:col-span-1 rounded-tr-none xl:rounded-tr-lg p-6 bg-surface div items-center justify-center border-t border-border xl:border-none">
               <div className="div div-col items-center">
                 <div className="font-semibold mb-4">Balance</div>
-                <div className="mt-4 div items-center text-2xl font-semibold">
+                <div className="mt-4 flex items-center text-2xl font-semibold">
                   {isSuccess && (
                     <>
                       <img src="/ogy_logo.svg" alt="OGY Logo" />
-                      <span className="ml-2 mr-3">{data?.accountData?.balance}</span>
+                      <span className="ml-2 mr-3">{
+                        roundAndFormatLocale({
+                          number: divideBy1e8(data?.accountData?.balance),
+                        })}</span>
                       <span className="text-content/60">OGY</span>
                     </>
                   )}
@@ -270,19 +281,18 @@ export const TransactionsAccountsDetails = () => {
             </div>
             <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
               <div className="div div-col items-center">
-                  <div className="mb-1">
-                    <span className="text-sm text-content/60">Historical max balance</span>
-                    <span className="">{1}</span>
-                  </div>
+                <div className="mb-1">
+                  <span className="text-sm text-content/60">Historical max balance</span>
+                  <span className="">{1}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-12 bg-surface rounded-xl border border-border">
           <div style={{ height: 600, width: "100%" }} ref={ref} />
-          <hr />
-          <div className="p-8 flex flex-col justify-between gap-6">
-            <div className="flex gap-12">
+          <div className="flex flex-col justify-between">
+            <div className="p-6 flex gap-12  border-border border-t border-b">
               <div className="flex gap-4 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="16" viewBox="0 0 33 16" fill="none">
                   <path d="M32.3536 8.35356C32.5488 8.1583 32.5488 7.84171 32.3536 7.64645L29.1716 4.46447C28.9763 4.26921 28.6597 4.26921 28.4645 4.46447C28.2692 4.65973 28.2692 4.97632 28.4645 5.17158L31.2929 8.00001L28.4645 10.8284C28.2692 11.0237 28.2692 11.3403 28.4645 11.5355C28.6597 11.7308 28.9763 11.7308 29.1716 11.5355L32.3536 8.35356ZM-8.74228e-08 8.5L2 8.5L2 7.5L8.74228e-08 7.5L-8.74228e-08 8.5ZM6 8.5L10 8.5L10 7.5L6 7.5L6 8.5ZM14 8.5L18 8.5L18 7.5L14 7.5L14 8.5ZM22 8.5L26 8.5L26 7.5L22 7.5L22 8.5ZM30 8.50001L32 8.50001L32 7.50001L30 7.50001L30 8.50001ZM32.7071 8.70711C33.0976 8.31659 33.0976 7.68342 32.7071 7.2929L26.3431 0.928937C25.9526 0.538412 25.3195 0.538412 24.9289 0.928937C24.5384 1.31946 24.5384 1.95263 24.9289 2.34315L30.5858 8.00001L24.9289 13.6569C24.5384 14.0474 24.5384 14.6805 24.9289 15.0711C25.3195 15.4616 25.9526 15.4616 26.3431 15.0711L32.7071 8.70711ZM-1.74846e-07 9L2 9L2 7L1.74846e-07 7L-1.74846e-07 9ZM6 9L10 9L10 7L6 7L6 9ZM14 9L18 9L18 7L14 7L14 9ZM22 9L26 9L26 7L22 7L22 9ZM30 9.00001L32 9.00001L32 7.00001L30 7.00001L30 9.00001Z" fill="#FB7474" />
@@ -302,22 +312,31 @@ export const TransactionsAccountsDetails = () => {
                 <p>Includes Initial Transaction</p>
               </div>
             </div>
-            <div className="flex gap-12">
-              <div className="flex gap-8 items-center">
+            <div className="p-6 flex gap-16">
+              <div className="flex gap-4 items-center">
                 <div style={{ width: 16, height: 16, borderRadius: 8, border: "1px solid #5D627B", background: "#8A92B8" }} />
-                <p>Root Account</p>
+                <p className="text-sm font-semibold">ROOT ACCOUNT</p>
               </div>
-              <div className="flex gap-8 items-center">
+              <div className="flex gap-4 items-center">
                 <div style={{ width: 16, height: 16, borderRadius: 8, border: "1px solid #FB7474", background: "#FFF4F4" }} />
-                <p>Account <br />(with transactions from root account)</p>
+                <div className="flex flex-col">
+                  <p className="text-sm font-semibold">ACCOUNT</p>
+                  <p className="text-xs">(with transactions from root account)</p>
+                </div>
               </div>
-              <div className="flex gap-8 items-center">
+              <div className="flex gap-4 items-center">
                 <div style={{ width: 16, height: 16, borderRadius: 8, border: "1px solid #0AB57F", background: "#F7FFFC" }} />
-                <p>Account <br />(with transactions to root account)</p>
+                <div className="flex flex-col">
+                  <p className="text-sm font-semibold">ACCOUNT</p>
+                  <p className="text-xs">(with transactions to root account)</p>
+                </div>
               </div>
-              <div className="flex gap-8 items-center">
+              <div className="flex gap-4 items-center">
                 <div style={{ width: 16, height: 16, borderRadius: 8, border: "1px solid #74D1EF", background: "#EDFBFF" }} />
-                <p>Account that made initial transaction<br /></p>
+                <div className="flex flex-col">
+                  <p className="text-sm font-semibold">ACCOUNT</p>
+                  <p className="text-xs">(that made initial transaction)</p>
+                </div>
               </div>
             </div>
           </div>
