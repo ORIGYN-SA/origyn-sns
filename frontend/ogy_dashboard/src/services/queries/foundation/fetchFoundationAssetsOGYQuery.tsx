@@ -26,7 +26,7 @@ export interface FoundationAssetsOGY {
 }
 
 const fn = async (): Promise<FoundationAssetsOGY> => {
-  const { data } = await ogyAPI.get(`/foundation/assets`);
+  const { data } = await ogyAPI.get(`/ogy/foundation/assets`);
 
   // Locked
   const foundationWalletLocked = data?.children[0]?.children[0];
