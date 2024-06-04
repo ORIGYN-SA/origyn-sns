@@ -1,4 +1,4 @@
-import type { Principal } from '@dfinity/principal';
+import type { Principal } from "@dfinity/principal";
 export interface Account {
   'owner' : Principal,
   'subaccount' : [] | [Array<number>],
@@ -8,17 +8,33 @@ export interface GetHoldersArgs {
   'limit' : bigint,
   'merge_accounts_to_principals' : boolean,
 }
+export interface GetHoldersResponse {
+  'current_offset' : bigint,
+  'data' : Array<[Account, WalletOverview]>,
+  'limit' : bigint,
+  'total_count' : bigint,
+}
 export interface GovernanceStats {
   'total_rewards' : bigint,
   'total_staked' : bigint,
   'total_locked' : bigint,
   'total_unlocked' : bigint,
 }
+export interface HistoryData { 'balance' : bigint };
 export interface InitArgs {
   'test_mode' : boolean,
+  'foundation_accounts' : Array<string>,
+  'treasury_account' : string,
   'ogy_new_ledger_canister_id' : Principal,
   'super_stats_canister_id' : Principal,
   'sns_governance_canister_id' : Principal,
+}
+export interface LockedNeuronsAmount {
+  'one_year' : bigint,
+  'two_years' : bigint,
+  'three_years' : bigint,
+  'four_years' : bigint,
+  'five_years' : bigint,
 }
 export interface Overview {
   'balance' : bigint,
@@ -26,12 +42,7 @@ export interface Overview {
   'last_active' : bigint,
   'first_active' : bigint,
   'received' : [number, bigint],
-}
-export interface SResponse {
-  'current_offset' : bigint,
-  'data' : Array<[Account, WalletOverview]>,
-  'limit' : bigint,
-  'total_count' : bigint,
+  'max_balance' : bigint,
 }
 export interface TokenSupplyData {
   'circulating_supply' : bigint,
@@ -44,8 +55,13 @@ export interface WalletOverview {
 }
 export default interface _SERVICE {
   'get_all_neuron_owners' : () => Promise<Array<Principal>>,
-  'get_holders' : (arg_0: GetHoldersArgs) => Promise<SResponse>,
+  'get_foundation_assets' : () => Promise<Array<[string, WalletOverview]>>,
+  'get_holders' : (arg_0: GetHoldersArgs) => Promise<GetHoldersResponse>,
+  'get_locked_neurons_period' : () => Promise<LockedNeuronsAmount>,
   'get_neurons_stats' : (arg_0: [] | [Principal]) => Promise<GovernanceStats>,
+  'get_stake_history' : (arg_0: bigint) => Promise<
+      Array<[bigint, HistoryData]>
+    >,
   'get_supply_data' : () => Promise<TokenSupplyData>,
 }
 
