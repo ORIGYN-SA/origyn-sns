@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { Buffer } from "buffer";
 import ogyAPI from "@services/api/ogy";
 
-type supportRequestProps = {
+export type supportRequestProps = {
   name: string;
   email: string;
   details: string;
@@ -24,7 +23,6 @@ const sendSupportRequest = async ({name, email, details, principal}: supportRequ
 };
 
 const useCreateSupportTicket = () => {
-  console.log();
   return useMutation({
     mutationFn: (data: supportRequestProps) => sendSupportRequest(
       data,

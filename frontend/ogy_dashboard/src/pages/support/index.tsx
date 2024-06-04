@@ -1,29 +1,23 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { Button, InputField, Card } from "@components/ui";
 import { toast } from "react-hot-toast";
 import { Principal } from "@dfinity/principal";
-import sendSupportRequest from "@services/queries/support/sendSupportRequest";
-import { useState } from "react";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import useCreateSupportTicket from "./useCreateSupportTicket";
+import useCreateSupportTicket, { supportRequestProps } from "./useCreateSupportTicket";
 
 const Support = () => {
   const mutation = useCreateSupportTicket();
 
   const {
     isSuccess,
-    isError,
     isPending,
   } = mutation;
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: supportRequestProps) => {
     mutation.mutate(
       data,
       {
-        onSuccess: (data) => {
-          toast.error(error?.message || "Support ticket was created");
+        onSuccess: () => {
+          toast.success("Support ticket was created");
         },
         onError: (error) => {
           toast.error(error?.message || "Error");
@@ -43,8 +37,6 @@ const Support = () => {
   const {
     register,
     handleSubmit,
-    control,
-    reset: resetForm,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -52,7 +44,7 @@ const Support = () => {
   });
 
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="container sm mx-auto py-16 px-4">
       <div className="flex flex-col items-center">
         <section className="w-full" id="total-ogy-supply">
           <Card>
@@ -60,9 +52,9 @@ const Support = () => {
               isSuccess ? (
                 <>
                   <div className="text-center px-12">
-                    <div>Support ticket was created</div>
+                    <div className="text-2xl">Support ticket was created</div>
                     <br />
-                    <div className="text-sm text-content/60">
+                    <div className="text-md text-content/60">
                       Please wait for our responce to the email address you specified.
                     </div>
                   </div>
@@ -70,8 +62,8 @@ const Support = () => {
               ) : (
                 <>
                 <div className="text-center px-12">
-                  <div>Create a support ticket</div>
-                  <div className="text-sm text-content/60 mb-8">
+                  <div className="text-2xl">Create a support ticket</div>
+                  <div className="text-md text-content/60 mb-8">
                     Describe your issue and provide your contacts.
                   </div>
                 </div>

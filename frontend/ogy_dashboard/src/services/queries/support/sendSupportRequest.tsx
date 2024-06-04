@@ -7,7 +7,7 @@ type supportRequestProps = {
   principal: string;
 }
 
-const sendSupportRequest = async ({name, email, details, principal}: supportRequestProps, options: {onSuccess: Function}) => {
+const sendSupportRequest = async ({name, email, details, principal}: supportRequestProps) => {
   const { data } = await ogyAPI.post(`/contact`, {
     name,
     email,
@@ -17,8 +17,6 @@ const sendSupportRequest = async ({name, email, details, principal}: supportRequ
       "Content-Type": "application/json",
     }
    });
-
-   options?.onSuccess();
 
   return {
     data,
