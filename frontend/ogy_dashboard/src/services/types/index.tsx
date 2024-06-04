@@ -6,10 +6,8 @@ import {
 } from "@services/types/proposals";
 
 import {
-  INeuronResultAPI,
-  INeuronResultCanister,
+  INeuronResult,
   INeuronData,
-  INeuronDataCanister,
   IDissolveState,
 } from "@services/types/neurons";
 
@@ -18,9 +16,7 @@ export type {
   IProposalResult,
   IProposalData,
   IProposalVotes,
-  INeuronResultAPI,
-  INeuronResultCanister,
+  INeuronResult,
   INeuronData,
-  INeuronDataCanister,
   IDissolveState,
 };

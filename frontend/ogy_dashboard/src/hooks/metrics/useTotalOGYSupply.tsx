@@ -9,7 +9,8 @@ import fetchTotalSupplyOGYTimeSeries, {
 import { ChartData } from "@services/types/charts.types";
 import {
   getCurrentDateInSeconds,
-  getCurrentDateLastWeekInSeconds,
+  // getCurrentDateLastWeekInSeconds,
+  getCurrentDateLastMonthInSeconds,
 } from "@helpers/dates/index";
 
 const useTotalOGYSupply = () => {
@@ -32,7 +33,7 @@ const useTotalOGYSupply = () => {
     error: errorTotalSupplyTimeSeries,
   }: UseQueryResult<TotalSupplyOGYTimeSeries> = useQuery(
     fetchTotalSupplyOGYTimeSeries({
-      start: getCurrentDateLastWeekInSeconds(),
+      start: getCurrentDateLastMonthInSeconds(),
       end: getCurrentDateInSeconds(),
       step: "86400",
     })

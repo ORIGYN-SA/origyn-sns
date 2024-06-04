@@ -45,7 +45,7 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
           </TooltipInfo>
         </div>
         <button className="text-sm font-medium rounded-full px-3 py-1">
-          Weekly
+          Monthly
         </button>
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">

@@ -75,7 +75,7 @@ const useNeuronsOwner = ({
   });
 
   const neurons = neuronsUnfiltered?.filter((n) =>
-    neuronsOwnerIds?.includes(n.id2Hex)
+    neuronsOwnerIds?.includes(n.id)
   );
 
   const neuronClaimBalance = useQueries({
@@ -92,7 +92,7 @@ const useNeuronsOwner = ({
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: Buffer.from(neuronId.id).toString("hex"),
+              subaccount: neuronId,
             }),
           enabled:
             !!isConnected &&
@@ -130,7 +130,7 @@ const useNeuronsOwner = ({
   const rows = isSuccess
     ? neurons?.map((neuron, index) => {
         const claimAmount = neuronClaimBalance[index]?.data?.balance;
-        const id2Hex = neuron?.id2Hex;
+        const id = neuron?.id;
         const stakedAmount = neuron?.stakedAmountToString;
         const state = neuron?.state;
         const votingPower = neuron?.votingPowerToString;
@@ -143,7 +143,7 @@ const useNeuronsOwner = ({
         const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
         const dissolveDelayBonus = neuron?.dissolveDelayBonus;
         return {
-          id: id2Hex,
+          id,
           stakedAmount,
           claimAmount,
           state,
@@ -196,7 +196,7 @@ const useNeuronsOwner = ({
           number: _totalStakedRewardsOGY,
         }),
       },
-      neuronIds: neurons?.map((neuron) => neuron.id2Hex) ?? [],
+      neuronIds: neurons?.map((neuron) => neuron.id) ?? [],
     },
     stakedOGY: {
       totalStakedOGY,

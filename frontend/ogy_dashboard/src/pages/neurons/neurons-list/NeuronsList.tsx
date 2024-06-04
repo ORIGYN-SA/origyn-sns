@@ -68,12 +68,12 @@ const NeuronsList = ({
           <div>
             <Badge
               className={`${
-                getValue() === "Dissolving" ? "bg-jade/20" : "bg-sky/20"
+                getValue() === "Dissolved" ? "bg-jade/20" : "bg-sky/20"
               } py-2 px-2`}
             >
               <div
                 className={`${
-                  getValue() === "Dissolving" ? "text-jade" : "text-sky"
+                  getValue() === "Dissolved" ? "text-jade" : "text-sky"
                 } text-xs font-semibold shrink-0`}
               >
                 {getValue() as ReactNode}
@@ -89,12 +89,12 @@ const NeuronsList = ({
         cell: (info) => info.getValue(),
         header: "Staked OGY",
       },
-      {
-        accessorKey: "maturity",
-        id: "maturity",
-        cell: (info) => info.getValue(),
-        header: "Maturity",
-      },
+      // {
+      //   accessorKey: "stakedMaturity",
+      //   id: "stakedMaturity",
+      //   cell: (info) => info.getValue(),
+      //   header: "Maturity",
+      // },
       {
         accessorKey: "dissolveDelay",
         id: "dissolveDelay",
