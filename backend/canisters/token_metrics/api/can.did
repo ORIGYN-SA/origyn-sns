@@ -40,6 +40,13 @@ type Overview = record {
   received : record { nat32; nat };
   max_balance : nat;
 };
+type ProposalsMetrics = record {
+  daily_voting_rewards : nat64;
+  average_voting_participation : text;
+  average_voting_power : nat64;
+  total_voting_power : nat64;
+  total_proposals : nat64;
+};
 type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
 type WalletOverview = record {
   total : nat64;
@@ -52,6 +59,7 @@ service : (InitArgs) -> {
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
   get_locked_neurons_period : () -> (LockedNeuronsAmount) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
+  get_proposals_metrics : () -> (ProposalsMetrics) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
 }

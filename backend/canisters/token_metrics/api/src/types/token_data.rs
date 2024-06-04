@@ -3,6 +3,7 @@ use std::ops::Add;
 use candid::{ CandidType, Nat };
 use serde::{ Deserialize, Serialize };
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
+use utils::consts::E8S_PER_OGY;
 
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct TokenSupplyData {
@@ -36,6 +37,37 @@ pub struct LockedNeuronsAmount {
     pub three_years: u64,
     pub four_years: u64,
     pub five_years: u64,
+}
+#[derive(Serialize, Deserialize, Clone, Default)]
+pub struct ProposalsMetricsCalculations {
+    pub cumulative_voting_participation: f64,
+    pub cumulative_voting_power: u64,
+    pub valid_tally_count: u64,
+}
+#[derive(Serialize, Deserialize, Clone, CandidType)]
+pub struct ProposalsMetrics {
+    pub total_proposals: u64,
+    pub daily_voting_rewards: u64,
+    pub total_voting_power: u64,
+    pub average_voting_power: u64,
+    pub average_voting_participation: String,
+}
+impl Default for ProposalsMetrics {
+    fn default() -> Self {
+        ProposalsMetrics {
+            total_proposals: 0,
+            daily_voting_rewards: (250_000_000 / 365) * E8S_PER_OGY,
+            total_voting_power: 0,
+            average_voting_power: 0,
+            average_voting_participation: "0".to_string(),
+        }
+    }
+}
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
+pub struct DailyVotingMetrics {
+    pub org_voting_power: u64,
+    pub total_voting_power: u64,
+    pub voting_participation: u64,
 }
 impl Add for GovernanceStats {
     type Output = GovernanceStats;

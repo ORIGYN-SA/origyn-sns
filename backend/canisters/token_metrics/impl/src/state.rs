@@ -5,13 +5,15 @@ use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
+    DailyVotingMetrics,
     GovernanceStats,
     LockedNeuronsAmount,
     PrincipalBalance,
+    ProposalsMetrics,
+    ProposalsMetricsCalculations,
     TokenSupplyData,
     WalletOverview,
 };
-use tracing::info;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -75,6 +77,7 @@ pub struct SyncInfo {
     pub last_synced_end: TimestampMillis,
     pub last_synced_number_of_neurons: usize,
     pub last_synced_transaction: usize,
+    pub last_synced_number_of_proposals: usize,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -115,6 +118,12 @@ pub struct Data {
     pub foundation_accounts_data: Vec<(String, WalletOverview)>,
     /// Amount of locked tokens and their period
     pub locked_neurons_amount: LockedNeuronsAmount,
+    /// Proposals metrics, succh as total, avg voting power and participation
+    pub porposals_metrics: ProposalsMetrics,
+    /// Used to calculate proposals_metrics
+    pub proposals_metrics_calculations: ProposalsMetricsCalculations,
+    /// Daily metrics for org voting power / total voting power and voting participation
+    pub daily_voting_metrics: BTreeMap<u64, DailyVotingMetrics>,
 }
 
 impl Data {
@@ -143,6 +152,9 @@ impl Data {
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
             locked_neurons_amount: LockedNeuronsAmount::default(),
+            porposals_metrics: ProposalsMetrics::default(),
+            proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
+            daily_voting_metrics: BTreeMap::new(),
         }
     }
 
