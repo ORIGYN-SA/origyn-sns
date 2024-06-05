@@ -33,20 +33,18 @@ pub async fn sync_proposals_metrics_data() {
         include_reward_status: Vec::new(),
     };
 
-    // let mut daily_metrics: NormalBTreeMap<u64, VotingMetrics> = NormalBTreeMap::new();
-
     while continue_scanning {
         continue_scanning = false;
 
         match sns_governance_canister_c2c_client::list_proposals(canister_id, &args).await {
             Ok(response) => {
-                response.proposals.iter().for_each(|proposal| {
-                    let date = proposal.proposal_creation_timestamp_seconds / 86400;
-                    update_proposals_metrics(proposal);
-                });
-
                 let number_of_received_proposals = response.proposals.len();
-                if number_of_received_proposals == 100 {
+                if number_of_received_proposals > 0 {
+                    response.proposals.iter().for_each(|proposal| {
+                        let date = proposal.proposal_creation_timestamp_seconds / 86400;
+                        update_proposals_metrics(proposal);
+                    });
+
                     args.before_proposal = response.proposals.last().map_or_else(
                         || {
                             error!(
@@ -71,7 +69,6 @@ pub async fn sync_proposals_metrics_data() {
     info!("Successfully scanned {number_of_scanned_proposals} proposals.");
 
     mutate_state(|state| {
-        // state.data.sync_info.last_synced_end = now_millis();
         state.data.sync_info.last_synced_number_of_proposals = number_of_scanned_proposals;
         state.data.sync_info.last_synced_proposal_id = args.before_proposal;
 
