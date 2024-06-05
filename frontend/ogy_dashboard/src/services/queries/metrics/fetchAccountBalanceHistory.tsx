@@ -12,7 +12,7 @@ export interface AccountBalanceHistoryParams {
 }
 
 const fn = async (account: string, actor: ActorSubclass) => {
-  const data = await actor.get_principal_history({days: 320, account});
+  const data = await actor.get_principal_history({days: 30, account});
   return data;
 };
 
