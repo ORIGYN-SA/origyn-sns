@@ -181,7 +181,11 @@ impl PrincipalDotAccountFormat for Account {
     fn to_principal_dot_account(&self) -> String {
         match &self.subaccount {
             Some(subaccount) => format!("{}.{}", self.owner, hex::encode(subaccount)),
-            None => self.owner.to_string(),
+            None =>
+                format!(
+                    "{}.0000000000000000000000000000000000000000000000000000000000000000",
+                    self.owner.to_string()
+                ),
         }
     }
 }
@@ -216,6 +220,10 @@ mod tests {
             subaccount: None,
         };
 
-        assert_eq!(account.to_principal_dot_account(), principal.to_string());
+        let expected = format!(
+            "{}.0000000000000000000000000000000000000000000000000000000000000000",
+            principal.to_string()
+        );
+        assert_eq!(account.to_principal_dot_account(), expected);
     }
 }
