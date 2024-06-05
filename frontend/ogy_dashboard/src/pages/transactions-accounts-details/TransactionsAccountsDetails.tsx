@@ -77,7 +77,7 @@ export const TransactionsAccountsDetails = () => {
                       <img src="/ogy_logo.svg" alt="OGY Logo" />
                       <span className="ml-2 mr-3">{
                         roundAndFormatLocale({
-                          number: divideBy1e8(data?.balance),
+                          number: divideBy1e8(data?.balance || 0),
                         })}</span>
                       <span className="text-content/60">OGY</span>
                     </>

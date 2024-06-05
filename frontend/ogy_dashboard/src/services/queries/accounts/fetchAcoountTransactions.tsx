@@ -16,8 +16,8 @@ export interface AccountTransactions {
   totalSupplyOGYTimeSeries: ChartData[];
 }
 
-export type TransactionsDetails = {
-  amount: string | null;
+export type Transaction = {
+  amount: string;
   created_at_time: string | null;
   expected_allowance: string | null;
   expires_at: string | null;
@@ -39,10 +39,14 @@ export type TransactionsDetails = {
   to_subaccount: string;
   updated_at: string;
 }
+export type TransactionsDetails = {
+  data: Transaction[];
+  total_transactions: number;
+}
 
 const fn = async ({
   accountPrincipal,
-}: AccountTransactionsParams): Promise<TransactionsDetails[]> => {
+}: AccountTransactionsParams): Promise<TransactionsDetails> => {
   const { data } = await icrcAPI.get(
     `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountPrincipal}/transactions`
   );

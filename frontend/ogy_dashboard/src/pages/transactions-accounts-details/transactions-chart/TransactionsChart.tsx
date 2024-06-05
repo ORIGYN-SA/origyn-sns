@@ -18,8 +18,10 @@ type Node = {
   isTo: boolean;
   isInitialTrans: boolean;
   isFrom: boolean;
-  toAmount: string;
-  fromAmount: string;
+  toAmount: number;
+  fromAmount: number;
+  to: string;
+  from: string;
 }
 
 
@@ -127,7 +129,7 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
       const hp = data.data;
       const total = data.total_transactions;
 
-      const accounts = hp.reduce((res, item, index) => {
+      const accounts = hp.reduce((res: {[key:string]: Node}, item, index) => {
         const result = res;
         const amount = parseFloat(item.amount.replace(/,/g, ""));
 

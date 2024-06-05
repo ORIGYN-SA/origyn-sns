@@ -2,7 +2,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import icrcAPI from "@services/api/icrc/v1";
 import { ApiServiceErr } from "@services/types/api.types";
 import { SortingState } from "@tanstack/react-table";
-import { TransactionResults } from "@services/types/transactions.types";
+import { Transaction } from "@services/types/transactions.types";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface ListParams {
@@ -10,6 +10,12 @@ export interface ListParams {
   limit: number;
   offset: number;
   sorting: SortingState;
+}
+
+type TransactionResults = {
+  rows: Transaction[];
+  pageCount: number;
+  rowCount: number;
 }
 
 const fn = async ({
