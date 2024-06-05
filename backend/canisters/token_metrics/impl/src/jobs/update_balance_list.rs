@@ -87,7 +87,9 @@ pub async fn update_balance_list() {
             total: total_staked,
         };
         let account = Account::from(principal);
+        // TODO: We should also add the principal.0x32 to the wallets_list
         check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
+        check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
     }
 
     let treasury_account = read_state(|state| state.data.treasury_account.clone());
@@ -121,8 +123,8 @@ pub async fn update_balance_list() {
 
         state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
         state.data.wallets_list = sort_map_descending(&temp_wallets_list);
-        state.data.update_foundation_accounts_data();
     });
+    mutate_state(|state| state.data.update_foundation_accounts_data());
     info!("update_balance_list -> done, mutated the state")
 }
 async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {
