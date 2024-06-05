@@ -103,7 +103,7 @@ export const TransactionsAccountsDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
+            {/* <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
               <div className="div div-col items-center">
                 <div className="mb-1">
                   <span className="text-sm text-content/60">Historical max balance</span>
@@ -122,7 +122,7 @@ export const TransactionsAccountsDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <TransactionsChart
