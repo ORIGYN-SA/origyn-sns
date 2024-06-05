@@ -5,6 +5,7 @@ mod jobs;
 mod memory;
 mod lifecycle;
 pub mod model;
+pub mod utils;
 pub mod queries;
 pub mod state;
 
