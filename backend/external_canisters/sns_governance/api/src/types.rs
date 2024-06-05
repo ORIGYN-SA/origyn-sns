@@ -98,7 +98,7 @@ impl From<[u8; 32]> for NeuronId {
 }
 
 /// The id of a specific proposal.
-#[derive(candid::CandidType, candid::Deserialize, Eq, Copy, Clone, PartialEq)]
+#[derive(candid::CandidType, Serialize, candid::Deserialize, Eq, Copy, Clone, PartialEq)]
 pub struct ProposalId {
     pub id: u64,
 }
@@ -653,7 +653,7 @@ pub struct WaitForQuietState {
 }
 /// The ProposalData that contains everything related to a proposal:
 /// the proposal itself (immutable), as well as mutable data such as ballots.
-#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq)]
+#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Default)]
 pub struct ProposalData {
     /// The proposal's action.
     /// Types 0-999 are reserved for current (and future) core governance

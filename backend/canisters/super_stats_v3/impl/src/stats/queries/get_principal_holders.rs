@@ -1,14 +1,17 @@
 use ic_cdk::query;
 use crate::{ core::working_stats::api_count, stats::directory::lookup_directory };
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     custom_types::{ HolderBalance, HolderBalanceResponse },
     runtime::RUNTIME_STATE,
     stable_memory::STABLE_STATE,
-    stats::queries::get_principal_holders::{ Args, Response },
+    stats::queries::get_principal_holders::{
+        Args as GetPrincipalHoldersArgs,
+        Response as GetPrincipalHoldersResponse,
+    },
 };
 
 #[query]
-fn get_principal_holders(args: Args) -> Response {
+pub fn get_principal_holders(args: GetPrincipalHoldersArgs) -> GetPrincipalHoldersResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 

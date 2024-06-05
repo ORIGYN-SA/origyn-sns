@@ -1,11 +1,11 @@
 use ic_cdk_macros::{ query, update };
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     core::constants::CANISTER_VERSION,
     runtime::RUNTIME_STATE,
     types::LogEntry,
     working_stats::WorkingStats,
 };
-use super_stats_v3_api::types::MemoryData;
+pub use super_stats_v3_api::types::MemoryData;
 // [][] -- ADMIN METHODS -- [][]
 #[update]
 fn add_authorised(principal_id: String) -> String {

@@ -51,9 +51,8 @@ const useTotalOGYBurned = () => {
           dataTotalBurned.totalBurnedOGY !== 0
             ? dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries
             : (dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries.map(
-                (d: ChartData, index: number) => {
-                  if (index === 0) return { value: 202420405.1, name: d.name };
-                  else return d;
+                (d: ChartData) => {
+                  return { value: 202420405.1, name: d.name };
                 }
               ) as ChartData[]),
       });

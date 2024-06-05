@@ -3,14 +3,17 @@ use crate::{
     core::working_stats::api_count,
     stats::history::{ fill_missing_days, get_history_of_account },
 };
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     account_tree::HistoryData,
     runtime::RUNTIME_STATE,
-    stats::queries::get_principal_history::{ Args, Response },
+    stats::queries::get_principal_history::{
+        Args as GetPrincipalHistoryArgs,
+        Response as GetPrincipalHistoryResponse,
+    },
 };
 
 #[query]
-fn get_principal_history(args: Args) -> Response {
+pub fn get_principal_history(args: GetPrincipalHistoryArgs) -> GetPrincipalHistoryResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();

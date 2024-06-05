@@ -1,9 +1,17 @@
 use ic_cdk::query;
-use super_stats_v3_api::{custom_types::{HolderBalance, HolderBalanceResponse}, runtime::RUNTIME_STATE, stable_memory::STABLE_STATE, stats::queries::get_account_holders::{Args, Response}};
-use crate::{core::working_stats::api_count, stats::directory::lookup_directory};
+pub use super_stats_v3_api::{
+    custom_types::{ HolderBalance, HolderBalanceResponse },
+    runtime::RUNTIME_STATE,
+    stable_memory::STABLE_STATE,
+    stats::queries::get_account_holders::{
+        Args as GetAccounHoldersArgs,
+        Response as GetAccounHoldersResponse,
+    },
+};
+use crate::{ core::working_stats::api_count, stats::directory::lookup_directory };
 
 #[query]
-fn get_account_holders(args: Args) -> Response {
+pub fn get_account_holders(args: GetAccounHoldersArgs) -> GetAccounHoldersResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
 

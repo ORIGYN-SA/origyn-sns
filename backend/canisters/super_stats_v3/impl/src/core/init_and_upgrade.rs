@@ -8,7 +8,7 @@ use ic_stable_memory::{
     stable_memory_post_upgrade,
     retrieve_custom_data,
 };
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     init_and_upgrade::InitArgs,
     runtime::{ Data, RuntimeState, RUNTIME_STATE },
     stable_memory::{ Main, STABLE_STATE },
