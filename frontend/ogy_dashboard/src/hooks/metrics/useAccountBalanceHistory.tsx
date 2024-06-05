@@ -23,10 +23,8 @@ const useAccountBalanceHistory = (account: string) => {
     fetchAccountBalanceHistory({ account, actor: statsActor })
   );
 
-  console.log(fetchedData);
   useEffect(() => {
     if (isSuccess) {
-      console.log(fetchedData);
       const formatted = fetchedData.map((v) => {
         const date = new Date(0);
         date.setDate(date.getDate() + Number(v[0]));
