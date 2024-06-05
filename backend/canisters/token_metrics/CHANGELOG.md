@@ -13,3 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added the `get_foundation_assets` query to return the total number of tokens in hand of the foundation.
 - Added the `get_locked_neurons_period` query to return the total number of tokens staked for 1 - 5 years.
+
+## [1.0.3] - 2024-06-05
+
+- Added the `get_proposals_metrics` query to return the metrics about proposals and voting, such as: total_voting_power, average_voting_power, average_voting_participation etc.
+- Fixed an issue that was not updating the `state.wallets_list` when the wallet only had tokens in governance. This was also impacting the response for `get_foundation_assets`.
+- Fixed a minor issue that was not allocating the locked tokens to the correct period.
