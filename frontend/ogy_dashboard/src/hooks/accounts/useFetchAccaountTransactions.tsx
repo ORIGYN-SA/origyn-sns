@@ -6,7 +6,6 @@ import fetchOneAccountQuery, {
   AccountParams,
 } from "@services/queries/accounts/fetchOneAccountQuery";
 import { useLoaderData } from "react-router-dom";
-import { useCanister } from "@connect2ic/react";
 
 
 const loader =
@@ -20,7 +19,7 @@ const loader =
     };
 
 const useFetchAccountTransactions = (accountPrincipal: string) => {
-  const [data, setData] = useState<any>({
+  const [data, setData] = useState({
     accountTransactions: null,
     accountData: null,
   });
