@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Badge, Card, TooltipInfo, LoaderSpin } from "@components/ui";
+import { Card, TooltipInfo, LoaderSpin } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
 import useFoundationReserve from "@hooks/metrics/useFoundationReserve";
@@ -140,7 +140,7 @@ const OrigynFoundationReserve = ({
             </div>
           )}
         </div>
-        {isSuccess && foundationAssets && (
+        {/* {isSuccess && foundationAssets && (
           <div className="mt-4 rounded-b-xl bg-candyFloss/5 p-6">
             <div className="flex justify-center">
               <Badge className="bg-candyFloss px-4">
@@ -161,7 +161,7 @@ const OrigynFoundationReserve = ({
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </>
     </div>
   );

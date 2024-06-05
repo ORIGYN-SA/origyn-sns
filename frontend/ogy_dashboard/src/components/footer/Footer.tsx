@@ -150,6 +150,11 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+      <div className="container mx-auto pb-12">
+        <div className="rounded-xl bg-surface-2 p-4 pl-12 pr-12 text-gray-400 text-xs text-center">
+          ORIGYN Foundation shall not be held liable for any loss, theft, or misappropriation of OGY Tokens occurring in connection with the swap process. Furthermore, ORIGYN Foundation shall not be held accountable for any failure to execute the swap if the involved party does not strictly adhere to the conditions specified by ORIGYN Foundation
+        </div>
+      </div>
     </footer>
   );
 };
