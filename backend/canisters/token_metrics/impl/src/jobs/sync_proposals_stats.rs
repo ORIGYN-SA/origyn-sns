@@ -90,7 +90,7 @@ pub fn update_proposals_metrics(proposal: &ProposalData) {
         match proposal.latest_tally.clone() {
             Some(tally) => {
                 let this_proposal_participation =
-                    ((tally.yes as f64) + (tally.no as f64)) / (tally.total as f64);
+                    (((tally.yes as f64) + (tally.no as f64)) / (tally.total as f64)) * 100.0;
                 println!("{this_proposal_participation:?}");
                 // We will update the value of total_voting_power to be
                 // the value from the latest proposal scanned
@@ -168,7 +168,7 @@ mod tests {
         assert_eq!(proposals_metrics.total_voting_power, 50);
         assert_eq!(proposals_metrics.average_voting_power, 50);
         // avg = (10 + 3) / 50) = 0.26
-        assert_eq!(proposals_metrics.average_voting_participation, 26u64);
+        assert_eq!(proposals_metrics.average_voting_participation, 2600u64);
 
         // Proposal 2
         let mut proposal_2 = ProposalData::default();
@@ -187,7 +187,7 @@ mod tests {
         // avg = 50 + 60 / 2 = 55
         assert_eq!(proposals_metrics.average_voting_power, 55);
         // avg = ((10 + 3) / 50 + (20 + 4) / 60) / 2 = 0.33
-        assert_eq!(proposals_metrics.average_voting_participation, 33u64);
+        assert_eq!(proposals_metrics.average_voting_participation, 3300u64);
 
         // Proposal 3
         let mut proposal_3 = ProposalData::default();
@@ -206,6 +206,6 @@ mod tests {
         // avg = 50 + 60 + 100 / 3 = 70
         assert_eq!(proposals_metrics.average_voting_power, 70);
         // avg = ((10 + 3) / 50 + (20 + 4) / 60 + (45 + 10) / 100) / 3 = 0.4033333333333333
-        assert_eq!(proposals_metrics.average_voting_participation, 40u64);
+        assert_eq!(proposals_metrics.average_voting_participation, 4033u64);
     }
 }
