@@ -2,12 +2,15 @@ use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
-use sns_governance_canister::types::NeuronId;
+use sns_governance_canister::types::{ NeuronId, ProposalId };
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
+    DailyVotingMetrics,
     GovernanceStats,
     LockedNeuronsAmount,
     PrincipalBalance,
+    ProposalsMetrics,
+    ProposalsMetricsCalculations,
     TokenSupplyData,
     WalletOverview,
 };
@@ -75,6 +78,8 @@ pub struct SyncInfo {
     pub last_synced_end: TimestampMillis,
     pub last_synced_number_of_neurons: usize,
     pub last_synced_transaction: usize,
+    pub last_synced_number_of_proposals: usize,
+    pub last_synced_proposal_id: Option<ProposalId>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -115,6 +120,12 @@ pub struct Data {
     pub foundation_accounts_data: Vec<(String, WalletOverview)>,
     /// Amount of locked tokens and their period
     pub locked_neurons_amount: LockedNeuronsAmount,
+    /// Proposals metrics, succh as total, avg voting power and participation
+    pub porposals_metrics: ProposalsMetrics,
+    /// Used to calculate proposals_metrics
+    pub proposals_metrics_calculations: ProposalsMetricsCalculations,
+    /// Daily metrics for org voting power / total voting power and voting participation
+    pub daily_voting_metrics: BTreeMap<u64, DailyVotingMetrics>,
 }
 
 impl Data {
@@ -143,12 +154,14 @@ impl Data {
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
             locked_neurons_amount: LockedNeuronsAmount::default(),
+            porposals_metrics: ProposalsMetrics::default(),
+            proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
+            daily_voting_metrics: BTreeMap::new(),
         }
     }
 
     pub fn update_foundation_accounts_data(&mut self) {
         let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
-
         for (account, wallet_overview) in &self.wallets_list {
             if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
                 temp_foundation_accounts_data.push((
@@ -187,6 +200,7 @@ mod tests {
             subaccount,
         };
 
+        // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
         // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
         assert_eq!(
             account.to_principal_dot_account(),

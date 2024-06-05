@@ -1,6 +1,6 @@
 use ic_cdk::query;
 use crate::core::working_stats::api_count;
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     runtime::RUNTIME_STATE,
     stable_memory::STABLE_STATE,
     stats::queries::get_activity_stats::{

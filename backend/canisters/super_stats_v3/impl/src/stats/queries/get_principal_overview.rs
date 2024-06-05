@@ -1,13 +1,13 @@
 use ic_cdk::query;
 use crate::core::working_stats::api_count;
-use super_stats_v3_api::{
+pub use super_stats_v3_api::{
     runtime::RUNTIME_STATE,
     stable_memory::STABLE_STATE,
-    stats::queries::get_principal_overview::Response,
+    stats::queries::get_principal_overview::Response as GetPrincipalOverviewResponse,
 };
 
 #[query]
-fn get_principal_overview(account: String) -> Response {
+pub fn get_principal_overview(account: String) -> GetPrincipalOverviewResponse {
     // check authorised
     RUNTIME_STATE.with(|s| { s.borrow().data.check_authorised(ic_cdk::caller().to_text()) });
     api_count();
