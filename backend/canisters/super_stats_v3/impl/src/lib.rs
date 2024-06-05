@@ -1,7 +1,16 @@
+use ic_cdk::export_candid;
+
 pub mod core;
 pub mod stats;
 pub mod timers;
 mod test_data;
+
+use stats::queries::*;
+use stats::updates::*;
+use core::api::*;
+use core::init_and_upgrade::*;
+
+export_candid!();
 
 mod tests {
     use super_stats_v3_api::{

@@ -119,7 +119,6 @@ pub async fn sync_neurons_data() {
 
     // After we have computed governance stats, update the total supply and circulating supply
     sync_supply_data::run();
-    update_balance_list::run();
 }
 fn check_locked_neurons_period(
     locked_neurons_amount: &mut LockedNeuronsAmount,

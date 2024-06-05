@@ -1,7 +1,10 @@
 import { ActorSubclass } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import { SResponse, ITokenHolderData } from "@services/types/token_metrics";
+import {
+  ITokenHolderData,
+  GetHoldersResponse,
+} from "@services/types/token_metrics";
 
 const fetchTokenHolders = async ({
   actor,
@@ -18,7 +21,7 @@ const fetchTokenHolders = async ({
     limit,
     offset,
     merge_accounts_to_principals: mergeAccountsToPrincipals,
-  })) as SResponse;
+  })) as GetHoldersResponse;
 
   const data = results.data.map((result) => {
     const principal = Principal.from(result[0].owner).toText();

@@ -142,6 +142,9 @@ const Footer = () => {
               </a>
             </li>
             <li>
+              <Link to="/support">Contact support</Link>
+            </li>
+            <li>
               <Link to="/recovery">Recover your tokens</Link>
             </li>
           </ul>
