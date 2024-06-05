@@ -51,7 +51,7 @@ const useOGYCirculationState = () => {
       const governance = data.governance;
 
       const totalSupply = divideBy1e8(data.total);
-      const totalSupplyLocked = divideBy1e8(governance.total_locked);
+      const totalSupplyLocked = divideBy1e8(governance.total_staked);
       const totalSupplyUnlocked = divideBy1e8(governance.total_unlocked);
       const totalStaked = divideBy1e8(governance.total_staked);
 
@@ -77,7 +77,7 @@ const useOGYCirculationState = () => {
             name: "Locked",
             value: totalSupplyLocked,
             valueToString: roundAndFormatLocale({
-              number: divideBy1e8(totalSupplyLocked),
+              number: totalSupplyLocked,
             }),
           },
           {

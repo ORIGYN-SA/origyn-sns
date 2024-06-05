@@ -39,7 +39,7 @@ const TokensInGovernanceTotal = ({ className }: { className: string }) => {
   );
   return (
     <Card className={`${className}`}>
-      {isSuccess && (
+      {isSuccess && data && (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
           <div>
             <div className="mt-6 h-80 rounded-xl">
