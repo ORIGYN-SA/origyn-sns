@@ -22,7 +22,15 @@ const useAccountBalanceHistory = (account: string) => {
 
   useEffect(() => {
     if (isSuccess) {
-      setData(fetchedData.map((v) => ({name: new Date(Number(v[0])).toDateString(), value: divideBy1e8(v[1].balance)})));
+      const formatted = fetchedData.map((v) => {
+        const date = new Date(0);
+        date.setDate(date.getDate() + Number(v[0]));
+
+        return {name: date.toDateString(), value: divideBy1e8(v[1].balance)}
+      });
+
+      console.log(formatted);
+      setData(formatted);
     }
   }, [
     isSuccess,
