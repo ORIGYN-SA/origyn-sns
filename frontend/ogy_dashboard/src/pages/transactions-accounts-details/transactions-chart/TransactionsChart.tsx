@@ -98,7 +98,7 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [mapAmount] = useState(10);
   // const [transactions, setTransactions] = useState<any>();
-  const [network, addNetwork] = useState<Network | null>(null);
+  // const [network, addNetwork] = useState<Network | null>(null);
 
   // TODO: add loading status
   const { data, isError } = useFetchAccountTransactions(id);
@@ -121,7 +121,6 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
       color: colors[node.isInitialTrans ? "inOut" : (node.isTo ? "out" : "in")]
     })),
   });
-  console.log("data22", data);
 
   useEffect(() => {
     if (ref.current && data) {
@@ -185,11 +184,10 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
       );
 
       const instance = new Network(ref.current, initialData, options);
-      // setTransactions(initialData);
-      addNetwork(instance);
+      // addNetwork(instance);
+      return () => instance?.destroy();
     }
-    return () => network?.destroy();
-  }, [data, id, mapAmount, network]);
+  }, [data, id, mapAmount]);
 
   return (
     <div className="mt-12 bg-surface rounded-xl border border-border">
