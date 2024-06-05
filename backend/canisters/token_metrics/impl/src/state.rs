@@ -2,7 +2,7 @@ use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
-use sns_governance_canister::types::{NeuronId, ProposalId};
+use sns_governance_canister::types::{ NeuronId, ProposalId };
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
     DailyVotingMetrics,
@@ -162,16 +162,8 @@ impl Data {
 
     pub fn update_foundation_accounts_data(&mut self) {
         let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
-        let fc = self.foundation_accounts.clone();
-        info!("foundation_accounts: {fc:?}");
         for (account, wallet_overview) in &self.wallets_list {
-            let acc = account.to_principal_dot_account();
-
-            if acc.contains("ud7qh") {
-                info!("it contains ud7qh: {acc:?}");
-            }
             if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
-                info!("contains: {acc:?}");
                 temp_foundation_accounts_data.push((
                     account.to_principal_dot_account(),
                     wallet_overview.clone(),
