@@ -90,8 +90,12 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
             <div className="mt-4 flex gap-16 items-center">
               {activeIndex < 5 && (
                 <div className="gap-2">
-                  <div className="text-xl">
-                    {data[activeIndex - 1].lockedSum}
+                  <div className="mt-4 flex items-center text-2xl font-semibold">
+                    <img src="/ogy_logo.svg" alt="OGY Logo" />
+                    <span className="ml-2 mr-3">
+                      {data[activeIndex - 1].lockedSum}
+                    </span>
+                    <span className="text-content/60">OGY</span>
                   </div>
                   <div className="text-content/60">
                     currently locked for at least {activeIndex} year
@@ -99,7 +103,13 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
                 </div>
               )}
               <div className="gap-2">
-                <div className="text-xl">{data[activeIndex - 1].locked}</div>
+                <div className="mt-4 flex items-center text-2xl font-semibold">
+                  <img src="/ogy_logo.svg" alt="OGY Logo" />
+                  <span className="ml-2 mr-3">
+                    {data[activeIndex - 1].locked}
+                  </span>
+                  <span className="text-content/60">OGY</span>
+                </div>
                 <div className="text-content/60">
                   currently locked for {activeIndex} year
                 </div>

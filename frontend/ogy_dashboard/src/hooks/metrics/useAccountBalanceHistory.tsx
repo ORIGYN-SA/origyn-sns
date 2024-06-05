@@ -5,12 +5,13 @@ import { useCanister } from "@amerej/connect2ic-react";
 import { ChartData } from "@services/types/charts.types";
 import { divideBy1e8 } from "@helpers/numbers";
 
-interface NumberStringTuple extends Array<{balance: string}|number>{0:number; 1:{balance: string}}
+interface NumberStringTuple extends Array<{ balance: string } | number> {
+  0: number;
+  1: { balance: string };
+}
 
 const useAccountBalanceHistory = (account: string) => {
-  const [data, setData] = useState(
-    [] as ChartData[]
-  );
+  const [data, setData] = useState([] as ChartData[]);
   const [statsActor] = useCanister("tokenStats");
 
   const {
@@ -18,7 +19,9 @@ const useAccountBalanceHistory = (account: string) => {
     isSuccess,
     isLoading,
     error,
-  }: UseQueryResult<Array<NumberStringTuple>> = useQuery(fetchAccountBalanceHistory({account, actor: statsActor}));
+  }: UseQueryResult<Array<NumberStringTuple>> = useQuery(
+    fetchAccountBalanceHistory({ account, actor: statsActor })
+  );
 
   console.log(fetchedData);
   useEffect(() => {
@@ -29,14 +32,9 @@ const useAccountBalanceHistory = (account: string) => {
         date.setDate(date.getDate() + Number(v[0]));
         return {name: date.toDateString(), value: divideBy1e8(v[1]?.balance)}
       });
-
-      console.log(formatted);
       setData(formatted);
     }
-  }, [
-    isSuccess,
-    fetchedData,
-  ]);
+  }, [isSuccess, fetchedData]);
 
   return { data, isSuccess, isLoading, error };
 };
