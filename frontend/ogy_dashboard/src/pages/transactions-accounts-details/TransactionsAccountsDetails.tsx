@@ -14,6 +14,8 @@ import { usePagination, useSorting } from "@helpers/table/useTable";
 import AccountTransactionsList from "@pages/transactions-accounts-details/account-transactions-list/AccountTransactionsList";
 import BalanceHistory from "./balance-history/BalanceHistory";
 import TransactionsChart from "./transactions-chart/TransactionsChart";
+import TransactionsInOutChart from "./transactions-chart/TransactionsInOutCharts";
+import AccountMaxBalance from "./AccountMaxBalance";
 
 export const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
@@ -86,32 +88,26 @@ export const TransactionsAccountsDetails = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
+            <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
               <div className="div div-col items-center">
                 <div className="mb-1">
                   <span className="text-sm text-content/60">Historical max balance</span>
-                  <div className="mt-2 flex items-center text-md font-semibold">
-                    {isSuccess && (
-                      <>
-                        <img src="/ogy_logo.svg" style={{ width: 20 }} alt="OGY Logo" />
-                        <span className="ml-2 mr-3">{
-                          roundAndFormatLocale({
-                            number: divideBy1e8(data?.balance),
-                          })}</span>
-                        <span className="text-content/60">OGY</span>
-                      </>
-                    )}
-                    {(isLoading || isError) && <Skeleton className="w-64" />}
-                  </div>
+                  <AccountMaxBalance
+                    account={params?.id || ''}
+                  />
                 </div>
               </div>
 
-            </div> */}
+            </div>
           </div>
         </div>
         <TransactionsChart
           id={params.id || ''}
         />
+        {/* <TransactionsInOutChart
+          className="mt-16"
+          account={params?.id || ''}
+        /> */}
         <BalanceHistory
           className="mt-16"
           account={params?.id || ''}

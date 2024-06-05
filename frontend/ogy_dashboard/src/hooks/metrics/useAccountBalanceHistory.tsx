@@ -20,13 +20,14 @@ const useAccountBalanceHistory = (account: string) => {
     error,
   }: UseQueryResult<Array<NumberStringTuple>> = useQuery(fetchAccountBalanceHistory({account, actor: statsActor}));
 
+  console.log(fetchedData);
   useEffect(() => {
     if (isSuccess) {
+      console.log(fetchedData);
       const formatted = fetchedData.map((v) => {
         const date = new Date(0);
         date.setDate(date.getDate() + Number(v[0]));
-
-        return {name: date.toDateString(), value: divideBy1e8(v[1].balance)}
+        return {name: date.toDateString(), value: divideBy1e8(v[1]?.balance)}
       });
 
       console.log(formatted);
