@@ -6,7 +6,7 @@ use token_metrics_api::TEAM_PRINCIPALS;
 use std::time::Duration;
 use tracing::{ debug, error };
 use types::Milliseconds;
-use crate::state::{ mutate_state, read_state };
+use crate::{ state::{ mutate_state, read_state }, utils::string_to_account };
 
 const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 3_600 * 1_000;
 
@@ -25,10 +25,23 @@ pub async fn sync_supply_data() {
     match icrc_ledger_canister_c2c_client::icrc1_total_supply(ledger_canister_id).await {
         Ok(total_supply) => {
             let total_locked = read_state(|state| state.data.all_gov_stats.total_locked.clone());
-            // TODO: Also subtract state.foundation_accounts balances?
-            let total_foundation_balance = get_total_ledger_balance_of_accounts(
-                TEAM_PRINCIPALS.to_vec()
-            ).await;
+            let foundation_account_strings = read_state(|state|
+                state.data.foundation_accounts.clone()
+            );
+
+            let mut foundation_accounts = Vec::new();
+            for account_str in foundation_account_strings {
+                match string_to_account(account_str) {
+                    Ok(account) => {
+                        foundation_accounts.push(account);
+                    }
+                    Err(err) => error!(err),
+                }
+            }
+
+            foundation_accounts.extend_from_slice(&TEAM_PRINCIPALS);
+            let total_foundation_balance =
+                get_total_ledger_balance_of_accounts(foundation_accounts).await;
             let circulating_supply = total_supply.clone() - total_locked - total_foundation_balance;
 
             mutate_state(|state| {
