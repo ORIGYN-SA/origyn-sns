@@ -7,7 +7,10 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import styled from "styled-components";
 import millify from "millify";
+import { colors } from "@theme/preset";
+import CustomTooltip from "../utils/CustomTooltip";
 
 type Data = {
   name: string;
@@ -19,10 +22,22 @@ type AreaChart = {
   fill?: string;
 };
 
+const StyledAreaChart = styled(AreaChart)`
+  .recharts-cartesian-grid-vertical line {
+    stroke: ${colors.surface[3]} !important;
+  }
+  .recharts-cartesian-grid-horizontal line:first-child,
+  .recharts-cartesian-grid-horizontal line:last-child,
+  .recharts-cartesian-grid-vertical line:first-child,
+  .recharts-cartesian-grid-vertical line:last-child {
+    stroke-opacity: 0 !important;
+  }
+`;
+
 const Area = ({ data, fill }: AreaChart) => {
   return (
     <ResponsiveContainer>
-      <AreaChart
+      <StyledAreaChart
         width={500}
         height={400}
         data={data}
@@ -40,16 +55,24 @@ const Area = ({ data, fill }: AreaChart) => {
           </linearGradient>
         </defs>
         <CartesianGrid
-          vertical={false}
-          strokeDasharray="5 20"
+          vertical={true}
+          strokeDasharray="5 5"
           horizontal={false}
         />
-        <XAxis dataKey="name" />
-        <YAxis
-          domain={[0, "dataMax"]}
-          tickFormatter={(value) => millify(value)}
+        <XAxis
+          dataKey="name"
+          tickLine={false}
+          tick={{ fill: colors.surface[1] }}
+          axisLine={false}
         />
-        <Tooltip formatter={(value) => millify(value as number)} />
+        <YAxis
+          tickFormatter={(value) => millify(value)}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Tooltip
+          content={<CustomTooltip active={false} payload={[]} label={""} />}
+        />
         <AreaRechart
           type="monotone"
           dataKey="value"
@@ -58,7 +81,7 @@ const Area = ({ data, fill }: AreaChart) => {
           fillOpacity={1}
           fill={`url(#fill${fill})`}
         />
-      </AreaChart>
+      </StyledAreaChart>
     </ResponsiveContainer>
   );
 };

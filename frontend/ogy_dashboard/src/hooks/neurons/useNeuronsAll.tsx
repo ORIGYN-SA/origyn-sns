@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { getListNeuronsAll } from "@services/queries/governance/neurons/getListNeuronsAll";
 
@@ -54,7 +54,6 @@ const useNeuronsAll = ({
         const stakedOGY = neuron?.stakedAmountToString;
         const stakedMaturity = neuron?.stakedMaturityToString;
         const createdAt = neuron?.createdAt;
-        const ageBonus = neuron?.ageBonus;
         const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
         const dissolveDelayBonus = neuron?.dissolveDelayBonus;
         return {
@@ -74,7 +73,6 @@ const useNeuronsAll = ({
               label: "Dissolve Delay Bonus",
               value: dissolveDelayBonus,
             },
-            { id: "", label: "Age Bonus", value: ageBonus },
             { id: "", label: "Total Bonus", value: maxAgeBonusPercentage },
           ],
         };

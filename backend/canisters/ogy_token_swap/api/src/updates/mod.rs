@@ -4,3 +4,4 @@ pub mod request_deposit_account;
 pub mod swap_tokens;
 pub mod update_swap_status;
 pub mod withdraw_deposit;
+pub mod restore_archived_swap;

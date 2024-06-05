@@ -17,7 +17,7 @@ const TooltipInfo = ({
   return (
     <div>
       <InformationCircleIcon
-        className="h-6 w-6 text-content cursor-pointer"
+        className="h-6 w-6 text-content/60 cursor-pointer"
         data-tooltip-id={id}
       />
       <Tooltip id={id} clickable={clickable} className="max-w-64">

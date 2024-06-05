@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import useConnect from "@hooks/useConnect";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
+import getNeuronsByOwner from "@services/queries/sns-rewards//getNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
+import { Buffer } from "buffer";
+window.Buffer = window.Buffer || Buffer;
 
 const useNeuronsOwner = ({
   limit,
@@ -20,6 +23,7 @@ const useNeuronsOwner = ({
   const { isConnected } = useConnect();
   const [governanceActor] = useCanister("governance");
   const [ledgerActor] = useCanister("ledger");
+  const [snsRewardsActor] = useCanister("SNSRewards");
   const [totalStakedOGY, setTotalStakedOGY] = useState<null | number>(null);
   const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
     null | number
@@ -37,7 +41,19 @@ const useNeuronsOwner = ({
   });
 
   const {
-    data: neurons,
+    data: neuronsOwnerIds,
+    isSuccess: isSuccessFetchNeuronsByOwner,
+    isError: isErrorFetchNeuronsByOwner,
+    isLoading: isLoadingFetchNeuronsByOwner,
+    error: errorFetchNeuronsByOwner,
+  } = useQuery({
+    queryKey: ["userGetNeuronsByOwner", isConnected],
+    queryFn: () => getNeuronsByOwner({ snsRewardsActor }),
+    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
+  });
+
+  const {
+    data: neuronsUnfiltered,
     isSuccess: isSuccessListNeurons,
     isError: isErrorListNeurons,
     isLoading: isLoadingListNeurons,
@@ -52,8 +68,15 @@ const useNeuronsOwner = ({
         neuronId,
         nervousSystemParameters,
       }),
-    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
+    enabled:
+      !!isConnected &&
+      !!isSuccessGetNervousSystemParameters &&
+      !!isSuccessFetchNeuronsByOwner,
   });
+
+  const neurons = neuronsUnfiltered?.filter((n) =>
+    neuronsOwnerIds?.includes(n.id)
+  );
 
   const neuronClaimBalance = useQueries({
     queries:
@@ -69,7 +92,7 @@ const useNeuronsOwner = ({
             fetchBalanceOGY({
               actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
-              subaccount: Buffer.from(neuronId.id).toString("hex"),
+              subaccount: neuronId,
             }),
           enabled:
             !!isConnected &&
@@ -107,7 +130,7 @@ const useNeuronsOwner = ({
   const rows = isSuccess
     ? neurons?.map((neuron, index) => {
         const claimAmount = neuronClaimBalance[index]?.data?.balance;
-        const id2Hex = neuron?.id2Hex;
+        const id = neuron?.id;
         const stakedAmount = neuron?.stakedAmountToString;
         const state = neuron?.state;
         const votingPower = neuron?.votingPowerToString;
@@ -120,7 +143,7 @@ const useNeuronsOwner = ({
         const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
         const dissolveDelayBonus = neuron?.dissolveDelayBonus;
         return {
-          id: id2Hex,
+          id,
           stakedAmount,
           claimAmount,
           state,
@@ -173,7 +196,7 @@ const useNeuronsOwner = ({
           number: _totalStakedRewardsOGY,
         }),
       },
-      neuronIds: neurons?.map((neuron) => neuron.id2Hex) ?? [],
+      neuronIds: neurons?.map((neuron) => neuron.id) ?? [],
     },
     stakedOGY: {
       totalStakedOGY,
@@ -186,15 +209,18 @@ const useNeuronsOwner = ({
     neuronsList: { rows, rowCount: rows?.length ?? 0 },
     isLoading:
       isLoadingListNeurons ||
+      isLoadingFetchNeuronsByOwner ||
       isLoadingGetNervousSystemParameters ||
       neuronClaimBalance.some((query) => query.isLoading),
     isSuccess,
     isError:
       isErrorListNeurons ||
+      isErrorFetchNeuronsByOwner ||
       isErrorGetNervousSystemParameters ||
       neuronClaimBalance.some((query) => query.isError),
     error:
       errorListNeurons ||
+      errorFetchNeuronsByOwner ||
       errorGetNervousSystemParameters ||
       neuronClaimBalance.map((query) => query.error).filter(Boolean)[0],
   };

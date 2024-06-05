@@ -18,6 +18,15 @@ export const getCurrentDateLastWeekInSeconds = () =>
       .toSeconds()
   ).toString();
 
+export const getCurrentDateLastMonthInSeconds = () =>
+  Math.floor(
+    DateTime.local()
+      .minus({ months: 1 })
+      .startOf("month")
+      .plus({ days: DateTime.local().weekday - 1 })
+      .toSeconds()
+  ).toString();
+
 export const formatDateShort = (date: string) => {
   const datetime = DateTime.fromISO(date);
   return datetime.toLocaleString(DateTime.DATETIME_SHORT);

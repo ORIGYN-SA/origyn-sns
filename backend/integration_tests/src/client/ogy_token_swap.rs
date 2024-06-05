@@ -11,6 +11,7 @@ generate_update_call!(request_deposit_account);
 generate_update_call!(swap_tokens);
 generate_update_call!(update_swap_status);
 generate_update_call!(withdraw_deposit);
+generate_update_call!(restore_archived_swap);
 
 pub mod get_swap_info {
     pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
@@ -26,6 +27,9 @@ pub mod swap_tokens {
 }
 pub mod update_swap_status {
     pub use ogy_token_swap_api::updates::update_swap_status::{ Args, Response };
+}
+pub mod restore_archived_swap {
+    pub use ogy_token_swap_api::updates::restore_archived_swap::{ Args, Response };
 }
 pub mod recover_stuck_burn {
     pub use ogy_token_swap_api::updates::recover_stuck_burn::{ Args, Response };
@@ -124,6 +128,12 @@ pub mod client {
         block_index: BlockIndex,
         swap_status: SwapStatus
     ) -> update_swap_status::Response {
+        restore_archived_swap(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(restore_archived_swap::Args { block_index: block_index })
+        );
         update_swap_status(
             pic,
             sender,

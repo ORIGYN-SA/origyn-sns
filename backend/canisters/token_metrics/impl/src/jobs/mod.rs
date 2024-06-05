@@ -10,4 +10,5 @@ pub(crate) fn start() {
     // Updates the balance list (ledger + governance) for each acc
     // Also calculates circulating supply
     sync_governance::start_job();
+    update_balance_list::start_job();
 }

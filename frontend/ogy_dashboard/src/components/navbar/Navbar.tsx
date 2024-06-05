@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useConnect } from "@connect2ic/react";
+import { useConnect } from "@amerej/connect2ic-react";
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
-        <div className="flex justify-between items-center h-10">
+        <div className="grid grid-cols-2 xl:grid-cols-3 items-center h-10">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
               <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
@@ -42,7 +42,7 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden xl:block justify-self-center">
             <div className="flex items-center space-x-12">
               {navItems.map(({ title, url }, i) => (
                 <Link
@@ -55,8 +55,7 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-
-          <div className="flex items-center">
+          <div className="flex justify-self-end items-center">
             {!isInitializing && !isConnected && <Auth />}
             {isConnected && (
               <button
@@ -91,7 +90,7 @@ const Navbar = () => {
               </button>
             )}
 
-            <div className="lg:hidden">
+            <div className="xl:hidden">
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
@@ -103,7 +102,6 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
         {/* Mobile menu */}
         <Transition show={showMenu} as={Fragment}>
           <div className="fixed z-50 inset-0 overflow-hidden">

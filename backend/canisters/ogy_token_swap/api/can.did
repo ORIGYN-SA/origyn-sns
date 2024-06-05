@@ -30,7 +30,12 @@ type InitArgs = record {
   ogy_legacy_ledger_canister_id : principal;
 };
 type Response = variant { Success : SwapInfo; InternalError : text };
-type Response_1 = variant { Success : blob; MaxCapacityOfListReached };
+type Response_1 = variant {
+  NotAuthorized : text;
+  Success : blob;
+  MaxCapacityOfListReached;
+  MaxCapacityOfSwapsReached;
+};
 type Response_2 = variant { Success : nat; InternalError : text };
 type Response_3 = variant {
   TransferError : text;
@@ -52,6 +57,7 @@ type SwapInfo = record {
   last_request : nat64;
   "principal" : principal;
   token_swap_block_index : opt nat;
+  is_archived : bool;
   burn_block_index : opt nat64;
   first_request : nat64;
   amount : nat64;

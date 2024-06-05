@@ -4,10 +4,14 @@ pub mod get_all_neuron_owners;
 pub mod get_neurons_stats;
 pub mod get_supply_data;
 pub mod get_stake_history;
+pub mod get_foundation_assets;
 pub mod http_request;
+pub mod get_locked_neurons_period;
 
 pub use get_holders::*;
 pub use get_all_neuron_owners::*;
+pub use get_foundation_assets::*;
 pub use get_neurons_stats::*;
 pub use get_supply_data::*;
 pub use get_stake_history::*;
+pub use get_locked_neurons_period::*;

@@ -1,3 +1,4 @@
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import useFetchAccountTransactions from "@hooks/accounts/useFetchAccaountTransactions";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -110,22 +111,22 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
       dashes: [1, 4],
       font: {
         multi: "markdown",
-        color: "#1A1D1E", // isDarktheme ? "#1A1D1E" : "#525252"
+        color: "#525252", // isDarktheme ? "#1A1D1E" : "#525252"
         strokeWidth: 0,
-        strokeColor: "#1A1D1E", // isDarktheme ? "#1A1D1E" : "#525252",
+        strokeColor: "#525252", // isDarktheme ? "#1A1D1E" : "#525252",
       },
-      label: node.count > 1 ? `     ${node.count} transactions \n ${node.amount.toFixed(2)} OGY   ` : `     ${node.amount.toFixed(2)} OGY     `,
-      title: node.isTo && node.isFrom ? `Out: ${node.toAmount} \nIn: ${node.fromAmount} \n Total: ${Math.abs(node.amount).toFixed(2)} OGY` : `Total: ${Math.abs(node.amount).toFixed(2)} OGY`,
+      label: node.count > 1 ? `     ${node.count} transactions \n ${roundAndFormatLocale({number: divideBy1e8(node.amount)})} OGY   ` : `     ${roundAndFormatLocale({number: divideBy1e8(node.amount)})} OGY     `,
+      title: node.isTo && node.isFrom ? `Out: ${roundAndFormatLocale({number: divideBy1e8(node.toAmount)})} \nIn: ${roundAndFormatLocale({number: divideBy1e8(node.fromAmount)})} \n Total: ${roundAndFormatLocale({number: divideBy1e8(Math.abs(node.amount))})} OGY` : `Total: ${Math.abs(node.amount).toFixed(2)} OGY`,
       arrows: node.isTo && node.isFrom ? "to, from" : (node.isTo ? "to" : "from"),
       color: colors[node.isInitialTrans ? "inOut" : (node.isTo ? "out" : "in")]
     })),
   });
+  console.log("data22", data);
 
   useEffect(() => {
-    if (ref.current && data.accountTransactions) {
-
-      const hp = data.accountTransactions.data;
-      const total = data.accountTransactions.total_transactions;
+    if (ref.current && data) {
+      const hp = data.data;
+      const total = data.total_transactions;
 
       const accounts = hp.reduce((res, item, index) => {
         const result = res;
@@ -188,7 +189,7 @@ const TransactionsChrart = ({ id, }: TransactionsChartProps) => {
       addNetwork(instance);
     }
     return () => network?.destroy();
-  }, [data]);
+  }, [data, id, mapAmount, network]);
 
   return (
     <div className="mt-12 bg-surface rounded-xl border border-border">

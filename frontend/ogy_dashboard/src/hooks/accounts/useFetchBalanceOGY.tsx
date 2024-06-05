@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 
 const useFetchBalanceOGY = ({

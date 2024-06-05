@@ -7,10 +7,8 @@ use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use ogy_token_swap_api::{
-    requesting_principals::RequestingPrincipals,
-    types::token_swap::TokenSwap,
-};
+use crate::model::token_swap::TokenSwap;
+use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
 
 canister_state!(RuntimeState);
 
@@ -38,6 +36,12 @@ impl RuntimeState {
                 ogy_legacy_ledger: self.data.canister_ids.ogy_legacy_ledger,
                 ogy_new_ledger: self.data.canister_ids.ogy_new_ledger,
             },
+            ogy_legacy_minting_account: self.data.minting_account.to_string(),
+            authorized_principals: self.data.authorized_principals.clone(),
+            whitelisted_principals: get_white_listed_principals()
+                .into_iter()
+                .map(|p| p.to_string())
+                .collect(),
         }
     }
 
@@ -45,12 +49,23 @@ impl RuntimeState {
         let caller = self.env.caller();
         self.data.authorized_principals.contains(&caller)
     }
+
+    pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
+        if cfg!(feature = "inttest") || cfg!(test) || self.env.is_test_mode() {
+            true
+        } else {
+            get_white_listed_principals().contains(&caller)
+        }
+    }
 }
 
 #[derive(CandidType, Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,
     pub canister_ids: CanisterIds,
+    pub ogy_legacy_minting_account: String,
+    pub authorized_principals: Vec<Principal>,
+    pub whitelisted_principals: Vec<String>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -102,4 +117,18 @@ impl Data {
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
+}
+
+pub fn get_white_listed_principals() -> HashSet<Principal> {
+    let text_principals = vec![
+        "6c4n7-npq2s-ciyt6-w2xdg-353ze-e64q2-t4q7f-lke7q-2xqws-tcyke-uqe",
+        "7xc7u-onriy-z2gvh-scsnt-sf3gz-ywjyk-sx2sx-uzqyk-3ugdz-lm7xe-5qe",
+        "lsxfn-keudc-mnjad-6d5sk-ztnhn-t2u6m-tzc2z-qrdoi-x63bv-j6cuh-lqe",
+        "thrhh-hnmzu-kjquw-6ebmf-vdhed-yf2ry-avwy7-2jrrm-byg34-zoqaz-wqe"
+    ];
+
+    text_principals
+        .iter()
+        .filter_map(|text_prin| Principal::from_text(text_prin).ok())
+        .collect()
 }

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { ActorSubclass } from "@dfinity/agent";
 
 interface IRemoveNeuronOwnership {
@@ -11,10 +11,7 @@ const removeNeuronOwnership = async ({
   snsRewardsActor,
   neuronId,
 }: IRemoveNeuronOwnership) => {
-  const result = await snsRewardsActor.claim_reward({
-    token: "OGY",
-    neuron_id: neuronId,
-  });
+  const result = await snsRewardsActor.remove_neuron_ownership(neuronId);
   return result;
 };
 

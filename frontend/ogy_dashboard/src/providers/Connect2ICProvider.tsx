@@ -1,18 +1,18 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { PropsWithChildren } from "react";
-import { createClient } from "@connect2ic/core";
+import { createClient } from "@amerej/connect2ic-core";
 import {
-  // AstroX,
-  // InfinityWallet,
-  // InternetIdentity,
-  // NFID,
-  // StoicWallet,
-  defaultProviders,
-} from "@connect2ic/core/providers";
-import { Connect2ICProvider } from "@connect2ic/react";
+  AstroX,
+  InfinityWallet,
+  InternetIdentity,
+  NFID,
+  PlugWallet,
+  // defaultProviders,
+} from "@amerej/connect2ic-core/providers";
+import { Connect2ICProvider } from "@amerej/connect2ic-react";
 import {
+  APP_MODE,
   SNS_LEDGER_CANISTER_ID,
+  ICP_LEDGER_CANISTER_ID,
   SNS_GOVERNANCE_CANISTER_ID,
   TOKEN_METRICS_CANISTER_ID,
   LEGACY_LEDGER_CANISTER_ID,
@@ -30,6 +30,11 @@ import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
 
 const Provider = ({ children }: PropsWithChildren) => {
+  const internetIdentityAuthClient = new InternetIdentity({
+    identityProvider: "https://identity.ic0.app",
+    derivationOrigin: "https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io",
+  });
+
   return (
     <Connect2ICProvider
       client={createClient({
@@ -44,6 +49,10 @@ const Provider = ({ children }: PropsWithChildren) => {
           },
           ledgerLegacy: {
             canisterId: LEGACY_LEDGER_CANISTER_ID,
+            idlFactory: ledgerLegacyIdl,
+          },
+          ledgerICP: {
+            canisterId: ICP_LEDGER_CANISTER_ID,
             idlFactory: ledgerLegacyIdl,
           },
           tokenMetrics: {
@@ -63,9 +72,17 @@ const Provider = ({ children }: PropsWithChildren) => {
             idlFactory: SNSRewardsIdl,
           },
         },
-        providers: defaultProviders,
+        providers: [
+          new AstroX(),
+          new InfinityWallet(),
+          APP_MODE === "dev"
+            ? new InternetIdentity()
+            : internetIdentityAuthClient,
+          new NFID(),
+          new PlugWallet(),
+        ],
         globalProviderConfig: {
-          host: "https://icp-api.io",
+          host: "https://identity.ic0.app",
           dev: false,
           whitelist: [
             SNS_GOVERNANCE_CANISTER_ID,
@@ -74,7 +91,8 @@ const Provider = ({ children }: PropsWithChildren) => {
             TOKEN_METRICS_CANISTER_ID,
             OGY_TOKEN_SWAP_CANISTER_ID,
             SNS_REWARDS_CANISTER_ID,
-            TOKEN_STATS_CANISTER_ID
+            TOKEN_STATS_CANISTER_ID,
+            ICP_LEDGER_CANISTER_ID,
           ],
         },
       })}

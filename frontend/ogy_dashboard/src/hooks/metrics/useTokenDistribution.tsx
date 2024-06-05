@@ -3,12 +3,11 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
 } from "@services/queries/metrics/fetchTotalSupplyOGYQuery";
-import { divideBy1e8 } from "@helpers/numbers";
 
 const useTokenDistribution = ({
   limit = 10,
@@ -51,10 +50,10 @@ const useTokenDistribution = ({
         const total = td.string.total;
         const governanceBalance = td.string.governanceBalance;
         const ledgerBalance = td.string.ledgerBalance;
-        const weight = divideBy1e8(
-          (td.total / dataTotalSupply.totalSupplyOGY > 0
-            ? dataTotalSupply.totalSupplyOGY
-            : 1) * 100
+        const weight = (
+          dataTotalSupply.totalSupplyOGY > 0
+            ? (td.total / dataTotalSupply.totalSupplyOGY) * 100
+            : 0
         ).toFixed(2);
         return {
           principal,

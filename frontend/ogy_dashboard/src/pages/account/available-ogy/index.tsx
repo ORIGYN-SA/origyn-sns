@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import useConnect from "@hooks/useConnect";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
@@ -6,6 +8,7 @@ import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const AvailableOGY = () => {
+  const { principal } = useConnect();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => {
@@ -21,7 +24,12 @@ const AvailableOGY = () => {
     <Card>
       <div className="flex justify-between mb-4">
         <div className="font-bold text-content/60">Available OGY</div>
-        <div>Transaction history</div>
+        <Link
+          className="font-semibold text-accent hover:underline"
+          to={`/explorer/transactions/accounts/${principal}`}
+        >
+          Transaction history
+        </Link>
       </div>
       <div>
         <div></div>

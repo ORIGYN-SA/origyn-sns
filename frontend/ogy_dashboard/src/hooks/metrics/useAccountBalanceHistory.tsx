@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchAccountBalanceHistory from "@services/queries/metrics/fetchAccountBalanceHistory";
-import { useCanister } from "@connect2ic/react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { ChartData } from "@services/types/charts.types";
 import { divideBy1e8 } from "@helpers/numbers";
 
@@ -22,7 +22,6 @@ const useAccountBalanceHistory = (account: string) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('fetchedData,fetchedData', fetchedData);
       setData(fetchedData.map((v) => ({name: new Date(Number(v[0])).toDateString(), value: divideBy1e8(v[1].balance)})));
     }
   }, [

@@ -6,10 +6,12 @@ use sns_governance_canister::types::NeuronId;
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
     GovernanceStats,
+    LockedNeuronsAmount,
     PrincipalBalance,
     TokenSupplyData,
     WalletOverview,
 };
+use tracing::info;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -107,6 +109,12 @@ pub struct Data {
     pub merged_wallets_list: Vec<(Account, WalletOverview)>,
     /// Staking history for governance
     pub gov_stake_history: Vec<(u64, HistoryData)>,
+    /// These accounts hold the tokens in hand of foundation, passed as init args
+    pub foundation_accounts: Vec<String>,
+    /// Holds the total value of tokens in hand of foundation
+    pub foundation_accounts_data: Vec<(String, WalletOverview)>,
+    /// Amount of locked tokens and their period
+    pub locked_neurons_amount: LockedNeuronsAmount,
 }
 
 impl Data {
@@ -114,13 +122,16 @@ impl Data {
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
         super_stats_canister_id: CanisterId,
-        treasury_account: String
+        treasury_account: String,
+        foundation_accounts: Vec<String>
     ) -> Self {
         Self {
             super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
             treasury_account,
+            foundation_accounts,
+            foundation_accounts_data: Vec::new(),
             authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
@@ -131,6 +142,66 @@ impl Data {
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
+            locked_neurons_amount: LockedNeuronsAmount::default(),
         }
+    }
+
+    pub fn update_foundation_accounts_data(&mut self) {
+        let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
+
+        for (account, wallet_overview) in &self.wallets_list {
+            if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
+                temp_foundation_accounts_data.push((
+                    account.to_principal_dot_account(),
+                    wallet_overview.clone(),
+                ));
+            }
+        }
+        self.foundation_accounts_data = temp_foundation_accounts_data;
+    }
+}
+pub trait PrincipalDotAccountFormat {
+    fn to_principal_dot_account(&self) -> String;
+}
+
+impl PrincipalDotAccountFormat for Account {
+    fn to_principal_dot_account(&self) -> String {
+        match &self.subaccount {
+            Some(subaccount) => format!("{}.{}", self.owner, hex::encode(subaccount)),
+            None => self.owner.to_string(),
+        }
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use candid::Principal;
+
+    #[test]
+    fn test_to_principal_dot_account_with_subaccount() {
+        let principal = Principal::from_text("aaaaa-aa").unwrap();
+        let subaccount = Some([0u8; 32]);
+
+        let account = Account {
+            owner: principal,
+            subaccount,
+        };
+
+        // aaaaa-aa.0000000000000000000000000000000000000000000000000000000000000000
+        assert_eq!(
+            account.to_principal_dot_account(),
+            format!("{}.{}", principal, hex::encode([0u8; 32]))
+        );
+    }
+
+    #[test]
+    fn test_to_principal_dot_account_without_subaccount() {
+        let principal = Principal::from_text("aaaaa-aa").unwrap();
+        let account = Account {
+            owner: principal,
+            subaccount: None,
+        };
+
+        assert_eq!(account.to_principal_dot_account(), principal.to_string());
     }
 }

@@ -9,6 +9,7 @@ pub use ogy_token_swap_api::updates::update_swap_status::{
 
 use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 
+// only to be used for integration testing
 #[cfg(feature = "inttest")]
 #[update(guard = "caller_is_authorised_principal", hidden = true)]
 pub async fn update_swap_status(args: UpdateSwapStateArgs) -> UpdateSwapStateResponse {

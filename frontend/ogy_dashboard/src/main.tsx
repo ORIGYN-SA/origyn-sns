@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Connect2ICProvider from "@providers/Connect2ICProvider";
 import { Toaster } from "react-hot-toast";
-import "@connect2ic/core/style.css";
+import "@amerej/connect2ic-core/style.css";
 import App from "./App.tsx";
 import { colors as themeColors } from "@theme/preset";
 

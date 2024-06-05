@@ -1,4 +1,5 @@
 export const SNS_LEDGER_CANISTER_ID = import.meta.env.VITE_SNS_LEDGER_CANISTER_ID;
+export const ICP_LEDGER_CANISTER_ID = import.meta.env.VITE_ICP_LEDGER_CANISTER_ID;
 export const SNS_GOVERNANCE_CANISTER_ID = import.meta.env.VITE_SNS_GOVERNANCE_CANISTER_ID;
 export const TOKEN_METRICS_CANISTER_ID = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
 export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env.VITE_OGY_TOKEN_SWAP_CANISTER_ID;
@@ -20,6 +21,7 @@ export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL
 export const LEGACY_OGY_DASHBOARD_URL = import.meta.env.VITE_LEGACY_OGY_DASHBOARD_URL
 export const APP_MODE = import.meta.env.MODE
 export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE)
+export const TRANSACTION_FEE_ICP = import.meta.env.VITE_TRANSACTION_FEE_ICP
 
 if (!(APP_MODE === "production")) {
     console.log(`APP_MODE=${APP_MODE}`)
@@ -28,6 +30,11 @@ if (!(APP_MODE === "production")) {
         console.log("No SNS_LEDGER_CANISTER_ID environment variable. Set SNS_LEDGER_CANISTER_ID environment variable.")
     else
         console.log(`SNS_LEDGER_CANISTER_ID=${SNS_LEDGER_CANISTER_ID}`)
+
+    if (!ICP_LEDGER_CANISTER_ID)
+        console.log("No ICP_LEDGER_CANISTER_ID environment variable. Set ICP_LEDGER_CANISTER_ID environment variable.")
+    else
+        console.log(`ICP_LEDGER_CANISTER_ID=${ICP_LEDGER_CANISTER_ID}`)
     
     if (!SNS_GOVERNANCE_CANISTER_ID)
         console.log("No SNS_GOVERNANCE_CANISTER_ID environment variable. Set SNS_GOVERNANCE_CANISTER_ID environment variable.")
@@ -113,6 +120,11 @@ if (!(APP_MODE === "production")) {
         console.log("No TRANSACTION_FEE environment variable. Set TRANSACTION_FEE environment variable.")
     else
         console.log(`TRANSACTION_FEE=${TRANSACTION_FEE}`)
+
+    if (!TRANSACTION_FEE_ICP)
+        console.log("No TRANSACTION_FEE_ICP environment variable. Set TRANSACTION_FEE_ICP environment variable.")
+    else
+        console.log(`TRANSACTION_FEE_ICP=${TRANSACTION_FEE_ICP}`)
 
     if (!PLAUSIBLE_API_KEY)
         console.log("No PLAUSIBLE_API_KEY environment variable. Set PLAUSIBLE_API_KEY environment variable.")

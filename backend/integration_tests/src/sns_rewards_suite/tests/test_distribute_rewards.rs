@@ -3,7 +3,10 @@ use std::time::Duration;
 use candid::{ Nat, Principal };
 use canister_time::DAY_IN_MS;
 use icrc_ledger_types::icrc1::account::Account;
-use sns_rewards_api_canister::{ get_historic_payment_round, subaccounts::REWARD_POOL_SUB_ACCOUNT };
+use sns_rewards_api_canister::{
+    get_historic_payment_round::{ self, Args as GetHistoricPaymentRoundArgs },
+    subaccounts::REWARD_POOL_SUB_ACCOUNT,
+};
 use types::TokenSymbol;
 
 use crate::{

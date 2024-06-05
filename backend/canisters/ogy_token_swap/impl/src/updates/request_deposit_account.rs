@@ -13,6 +13,20 @@ use crate::state::{ mutate_state, read_state };
 #[update]
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
+
+    if read_state(|s| !s.is_caller_whitelisted_principal(principal)) {
+        return RequestDepositAccountResponse::NotAuthorized(
+            format!(
+                "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
+            )
+        );
+    }
+
+    // check if there is room in the swaps heap
+    if read_state(|s| s.data.token_swap.is_capacity_full()) {
+        return RequestDepositAccountResponse::MaxCapacityOfSwapsReached;
+    }
+
     if let Err(error_response) = mutate_state(|s| s.data.requesting_principals.insert(principal)) {
         return error_response;
     }
@@ -25,9 +39,11 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashSet;
+
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Subaccount };
-    use ogy_token_swap_api::requesting_principals::{ RequestingPrincipals, LIST_MAX_LIMIT };
+    use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
     use utils::env::CanisterEnv;
 
     pub use ogy_token_swap_api::updates::request_deposit_account::{
@@ -36,7 +52,7 @@ mod tests {
     };
 
     use crate::{
-        state::{ init_state, Data, RuntimeState },
+        state::{ init_state, mutate_state, Data, RuntimeState },
         updates::request_deposit_account::{ compute_deposit_account, request_deposit_account },
     };
 
@@ -57,7 +73,11 @@ mod tests {
     #[test]
     fn test_limit_reached() {
         init_canister_state();
-
+        let mut prins = vec![];
+        for ind in 0..=LIST_MAX_LIMIT {
+            let p = dummy_principal(ind as u64);
+            prins.push(p);
+        }
         for ind in 0..LIST_MAX_LIMIT {
             let p = dummy_principal(ind as u64);
             let expected_result = AccountIdentifier::new(
@@ -76,6 +96,27 @@ mod tests {
             RequestDepositAccountResponse::MaxCapacityOfListReached,
             request_deposit_account(RequestDepositAccountArgs {
                 of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
+            })
+        );
+    }
+
+    #[test]
+    fn test_swaps_limit_reached() {
+        init_canister_state();
+        let max_heap_swaps = 4_700_000;
+        let mut prins = vec![];
+        for i in 0..max_heap_swaps {
+            let p = dummy_principal(i as u64);
+            prins.push(p);
+        }
+        for i in 0..max_heap_swaps {
+            mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
+        }
+
+        assert_eq!(
+            RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
+            request_deposit_account(RequestDepositAccountArgs {
+                of: Some(dummy_principal(1)),
             })
         );
     }

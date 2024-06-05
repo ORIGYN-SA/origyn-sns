@@ -9,7 +9,8 @@ import fetchTotalBurnedOGYTimeSeries, {
 import { ChartData } from "@services/types/charts.types";
 import {
   getCurrentDateInSeconds,
-  getCurrentDateLastWeekInSeconds,
+  // getCurrentDateLastWeekInSeconds,
+  getCurrentDateLastMonthInSeconds,
 } from "@helpers/dates/index";
 
 const useTotalOGYBurned = () => {
@@ -32,7 +33,7 @@ const useTotalOGYBurned = () => {
     error: errorTotalBurnedTimeSeries,
   }: UseQueryResult<TotalBurnedOGYTimeSeries> = useQuery(
     fetchTotalBurnedOGYTimeSeries({
-      start: getCurrentDateLastWeekInSeconds(),
+      start: getCurrentDateLastMonthInSeconds(),
       end: getCurrentDateInSeconds(),
       step: "86400",
     })
@@ -40,9 +41,21 @@ const useTotalOGYBurned = () => {
 
   useEffect(() => {
     if (isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries) {
+      // * fix for launch where burned OGY === 0
       setData({
-        totalBurned: dataTotalBurned.totalBurnedOGYToString,
-        dataPieChart: dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries,
+        totalBurned:
+          dataTotalBurned.totalBurnedOGY !== 0
+            ? dataTotalBurned.totalBurnedOGYToString
+            : "202,420,405.1",
+        dataPieChart:
+          dataTotalBurned.totalBurnedOGY !== 0
+            ? dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries
+            : (dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries.map(
+                (d: ChartData, index: number) => {
+                  if (index === 0) return { value: 202420405.1, name: d.name };
+                  else return d;
+                }
+              ) as ChartData[]),
       });
     }
   }, [

@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useConnect } from "@connect2ic/react";
+import { useConnect } from "@amerej/connect2ic-react";
 
 const ProtectedRoute = () => {
   const { isConnected, isInitializing } = useConnect();

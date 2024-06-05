@@ -1,15 +1,8 @@
 {
   "canisters": {
     "ogy_dashboard": {
-      "build": ["npm run build"],
       "type": "assets",
       "source": ["dist"]
-    }
-  },
-  "defaults": {
-    "build": {
-      "args": "",
-      "packtool": ""
     }
   },
   "networks": {

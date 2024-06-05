@@ -1,4 +1,3 @@
-import {  QueryClient } from "@tanstack/react-query";
 import {
   // defer,
   // Await,
@@ -6,29 +5,15 @@ import {
   useParams,
 } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-
-import fetchOneAccountQuery, {
-  AccountParams,
-} from "@services/queries/accounts/fetchOneAccountQuery";
+import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import Skeleton from "react-loading-skeleton";
-import useFetchAccountTransactions from "@hooks/accounts/useFetchAccaountTransactions";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import AccountTransactionsList from "@pages/transactions-accounts-details/account-transactions-list/AccountTransactionsList";
 import BalanceHistory from "./balance-history/BalanceHistory";
 import TransactionsChart from "./transactions-chart/TransactionsChart";
-
-const loader =
-  (queryClient: QueryClient) =>
-    async ({ params }: { params: AccountParams }) => {
-      const query = fetchOneAccountQuery({ id: params.id });
-      return (
-        queryClient.getQueryData(query.queryKey) ??
-        (await queryClient.fetchQuery(query))
-      );
-    };
 
 export const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
@@ -43,9 +28,7 @@ export const TransactionsAccountsDetails = () => {
 
   const params = useParams();
 
-  const { data, isError, isLoading, isSuccess } = useFetchAccountTransactions(params.id || '');
-
-
+  const { data, isError, isLoading, isSuccess } = useFecthOneAccount({ accountId: params.id as string });
 
   return (
     <>
@@ -68,19 +51,19 @@ export const TransactionsAccountsDetails = () => {
           <div className="div div-col text-center xl:text-start xl:col-span-2 rounded-t-xl xl:rounded-tr-none xl:rounded-s-lg p-6 bg-surface">
             <div className="mb-4">
               <div className="text-content/60">ID</div>
-              <div className="font-bold break-all">{data?.accountData?.id}</div>
+              <div className="font-bold break-all">{data?.id}</div>
             </div>
             <div className="mb-4">
               <div className="text-content/60">Owner</div>
-              <div className="font-bold break-all">{data?.accountData?.owner}</div>
+              <div className="font-bold break-all">{data?.owner}</div>
             </div>
             <div className="mb-4">
               <div className="text-content/60">Subaccount</div>
               <div className="font-bold break-all">
-                {data?.accountData && (
-                  data?.accountData?.subaccount
-                  || AccountIdentifier.fromPrincipal({ principal: Principal.fromText(data?.accountData?.id || ""), }).toHex()
-                )}
+                {
+                  data?.subaccount
+                  ||data?.id && ( AccountIdentifier.fromPrincipal({ principal: Principal.fromText(data?.id || ""), }).toHex())
+                  }
               </div>
             </div>
           </div>
@@ -94,7 +77,7 @@ export const TransactionsAccountsDetails = () => {
                       <img src="/ogy_logo.svg" alt="OGY Logo" />
                       <span className="ml-2 mr-3">{
                         roundAndFormatLocale({
-                          number: divideBy1e8(data?.accountData?.balance),
+                          number: divideBy1e8(data?.balance),
                         })}</span>
                       <span className="text-content/60">OGY</span>
                     </>
@@ -113,7 +96,7 @@ export const TransactionsAccountsDetails = () => {
                         <img src="/ogy_logo.svg" style={{ width: 20 }} alt="OGY Logo" />
                         <span className="ml-2 mr-3">{
                           roundAndFormatLocale({
-                            number: divideBy1e8(data?.accountData?.balance),
+                            number: divideBy1e8(data?.balance),
                           })}</span>
                         <span className="text-content/60">OGY</span>
                       </>
@@ -122,23 +105,20 @@ export const TransactionsAccountsDetails = () => {
                   </div>
                 </div>
               </div>
+
             </div> */}
           </div>
         </div>
         <TransactionsChart
           id={params.id || ''}
         />
-        {
-          data?.accountData?.id && (
-            <BalanceHistory
-              className="mt-16"
-              account={data?.accountData?.id}
-            />
-          )
-        }
+        <BalanceHistory
+          className="mt-16"
+          account={params?.id || ''}
+        />
         <div className="mt-16">
           <AccountTransactionsList
-            account={data?.accountData?.id}
+            account={params?.id}
             pagination={pagination}
             setPagination={setPagination}
             sorting={sorting}
@@ -149,5 +129,3 @@ export const TransactionsAccountsDetails = () => {
     </>
   );
 };
-
-TransactionsAccountsDetails.loader = loader;

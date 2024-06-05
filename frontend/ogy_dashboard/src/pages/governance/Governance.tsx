@@ -114,7 +114,7 @@ export const Governance = () => {
           <h2 className="mt-2 text-xl text-content/60">
             Welcome to ORIGYN Governance!
           </h2>
-          <p className="mt-6  text-content/60">
+          <p className="mt-6 text-content/60">
             Holders of OGY tokens can directly influence the ORIGYN Network by
             staking their OGY and voting on proposals. By participating in the
             decision-making process, these staked token holders earn rewards.
@@ -158,22 +158,19 @@ export const Governance = () => {
             Holders of OGY tokens can directly influence the ORIGYN Network by
             staking their OGY and voting on proposals.{" "}
           </p>
-          <p className="mb-1">
+          <p className="mb-2">
             By participating in the decision-making process, these staked token
             holders earn rewards and govern collectively and democratically.
           </p>
           <a
-            href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
+            href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-content font-semibold hover:underline"
+            className="font-semibold text-accent hover:underline"
           >
             Learn more about OGY
           </a>
         </div>
-        {/* <div className="mt-8 xl:mt-0 pl-0 xl:pl-16 shrink-0">
-          <Button>More details</Button>
-        </div> */}
       </div>
       <PieChartProvider>
         <TokensInGovernanceTotal

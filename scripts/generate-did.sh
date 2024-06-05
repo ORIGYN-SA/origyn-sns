@@ -38,6 +38,14 @@ else
   exit 1
 fi
 
+excluded_canisters=(super_stats_v3)
+for can in "${excluded_canisters[@]}"; do
+  if [[ "$can" == "$1" ]]; then
+    echo "Excluding $can because its can.did is written manually."
+    exit 0
+  fi
+done
+
 defaultpath="backend/canisters/$1/api"
 did_path="${outpath:-$defaultpath}"
 if [[ $dryrun -eq 1 ]]; then

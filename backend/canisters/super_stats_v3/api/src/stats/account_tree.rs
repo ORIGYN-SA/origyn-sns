@@ -72,16 +72,32 @@ impl AccountTree {
         }
     }
 
+    pub fn create_account_if_not_exists(&mut self, account_ref: &u64, creation_time: u64) {
+        if !self.accounts.contains_key(account_ref) {
+         let acd = Overview { 
+                  first_active: creation_time, 
+                  last_active: creation_time, 
+                  sent: (0_u32, 0_u128), 
+                  received: (0_u32, 0_u128), 
+                  balance: 0_u128,
+                  max_balance: 0_u128
+               };
+
+         self.accounts.insert(*account_ref, acd).expect("Storage is full");
+      }
+    }
+
     pub fn process_transfer_to(&mut self, account_ref: &u64, stx: &SmallTX) -> Result<String, String> {
       self.update_history_balance(account_ref, stx, TransactionType::In);
 
       if !self.accounts.contains_key(account_ref) {
          let acd = Overview { 
                   first_active: stx.time, 
-                  last_active: stx.time, 
+                  last_active: stx.time,
                   sent: (0_u32, 0_u128), 
                   received: (1_u32, stx.value), 
-                  balance: stx.value 
+                  balance: stx.value,
+                  max_balance: stx.value 
                };
 
          self.accounts.insert(*account_ref, acd).expect("Storage is full");
@@ -163,6 +179,7 @@ impl Add for HistoryData {
     pub sent: (u32, u128), // count, value
     pub received: (u32, u128), // count, value
     pub balance: u128,
+    pub max_balance: u128,
  }
  impl Overview {
     pub fn debit_account(&mut self, time:u64, value: u128, tx_fee: u128){
@@ -184,6 +201,9 @@ impl Add for HistoryData {
 
         // update balances
         self.balance = self.balance.saturating_add(value);
+        if self.balance > self.max_balance {
+            self.max_balance = self.balance;
+        }
         let (mut r1, mut r2) = self.received;
         r1 += 1;
         r2 = r2.saturating_add(value);
@@ -206,6 +226,7 @@ impl Add for HistoryData {
             sent: (sent_count1 + sent_count2, sent_amount1 + sent_amount2),
             received: (received_count1 + received_count2, received_amount1 + received_amount2),
             balance: self.balance + other.balance,
+            max_balance: self.max_balance.max(other.max_balance).max(self.balance + other.balance)
         }
     }
 }
@@ -223,6 +244,7 @@ impl Add for HistoryData {
                             sent: ac_value.sent,
                             received: ac_value.received,
                             balance: ac_value.balance,
+                            max_balance: ac_value.max_balance,
                         };
                         return Some(ov);
                     },
@@ -242,6 +264,7 @@ impl Add for HistoryData {
                     sent: ac_value.sent,
                     received: ac_value.received,
                     balance: ac_value.balance,
+                    max_balance: ac_value.max_balance,
                 };
                 return Some(ov);
             },
