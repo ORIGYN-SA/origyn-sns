@@ -87,7 +87,6 @@ pub async fn update_balance_list() {
             total: total_staked,
         };
         let account = Account::from(principal);
-        // TODO: We should also add the principal.0x32 to the wallets_list
         check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
         check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
     }
