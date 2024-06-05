@@ -1,14 +1,13 @@
-use candid::{ Nat, Principal };
-use canister_time::{ now_millis, run_now_then_interval, DAY_IN_MS };
+use canister_time::run_now_then_interval;
 use sns_governance_canister::types::ProposalData;
-use std::collections::BTreeMap as NormalBTreeMap;
-use std::time::{ Duration, SystemTime, UNIX_EPOCH };
+use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
 
 use crate::state::{ mutate_state, read_state };
 
-const SYNC_PROPOSALS_STATS_INTERVAL: u64 = 3600 * 1000;
+// every 5 minutes
+const SYNC_PROPOSALS_STATS_INTERVAL: Milliseconds = 5 * 60 * 1_000;
 
 pub fn start_job() {
     debug!("Starting the proposals metrics sync job..");
@@ -21,13 +20,14 @@ pub fn run() {
 
 pub async fn sync_proposals_metrics_data() {
     let canister_id = read_state(|state| state.data.sns_governance_canister);
+    let last_synced_proposal_id = read_state(|state| state.data.sync_info.last_synced_proposal_id);
 
     let mut number_of_scanned_proposals = 0;
     let mut continue_scanning: bool = true;
 
     let mut args = sns_governance_canister::list_proposals::Args {
         limit: 100,
-        before_proposal: None,
+        before_proposal: last_synced_proposal_id,
         exclude_type: Vec::new(),
         include_status: Vec::new(),
         include_reward_status: Vec::new(),
@@ -73,6 +73,7 @@ pub async fn sync_proposals_metrics_data() {
     mutate_state(|state| {
         // state.data.sync_info.last_synced_end = now_millis();
         state.data.sync_info.last_synced_number_of_proposals = number_of_scanned_proposals;
+        state.data.sync_info.last_synced_proposal_id = args.before_proposal;
 
         // let daily_voting_metrics = &mut state.data.daily_voting_metrics;
         // *daily_voting_metrics = daily_metrics.clone();
@@ -88,23 +89,24 @@ pub fn update_proposals_metrics(proposal: &ProposalData) {
         metrics.total_proposals += 1;
         match proposal.latest_tally.clone() {
             Some(tally) => {
-                let this_proposal_partcipation =
+                let this_proposal_participation =
                     ((tally.yes as f64) + (tally.no as f64)) / (tally.total as f64);
-                println!("{this_proposal_partcipation:?}");
+                println!("{this_proposal_participation:?}");
                 // We will update the value of total_voting_power to be
                 // the value from the latest proposal scanned
                 metrics.total_voting_power = tally.total;
                 metrics_calculations.cumulative_voting_power += tally.total;
 
                 // Update cumulative voting participation and count of valid tallies
-                metrics_calculations.cumulative_voting_participation += this_proposal_partcipation;
+                metrics_calculations.cumulative_voting_participation += this_proposal_participation;
                 metrics_calculations.valid_tally_count += 1;
 
                 // Update the average voting participation
-                metrics.average_voting_participation = (
-                    metrics_calculations.cumulative_voting_participation /
-                    (metrics_calculations.valid_tally_count as f64)
-                ).to_string();
+                metrics.average_voting_participation = (((
+                    metrics_calculations.cumulative_voting_participation as f64
+                ) /
+                    (metrics_calculations.valid_tally_count as f64)) *
+                    100.0) as u64;
 
                 // Update the average voting power
                 metrics.average_voting_power =
@@ -166,7 +168,7 @@ mod tests {
         assert_eq!(proposals_metrics.total_voting_power, 50);
         assert_eq!(proposals_metrics.average_voting_power, 50);
         // avg = (10 + 3) / 50) = 0.26
-        assert_eq!(proposals_metrics.average_voting_participation, "0.26");
+        assert_eq!(proposals_metrics.average_voting_participation, 26u64);
 
         // Proposal 2
         let mut proposal_2 = ProposalData::default();
@@ -185,7 +187,7 @@ mod tests {
         // avg = 50 + 60 / 2 = 55
         assert_eq!(proposals_metrics.average_voting_power, 55);
         // avg = ((10 + 3) / 50 + (20 + 4) / 60) / 2 = 0.33
-        assert_eq!(proposals_metrics.average_voting_participation, "0.33");
+        assert_eq!(proposals_metrics.average_voting_participation, 33u64);
 
         // Proposal 3
         let mut proposal_3 = ProposalData::default();
@@ -204,6 +206,6 @@ mod tests {
         // avg = 50 + 60 + 100 / 3 = 70
         assert_eq!(proposals_metrics.average_voting_power, 70);
         // avg = ((10 + 3) / 50 + (20 + 4) / 60 + (45 + 10) / 100) / 3 = 0.4033333333333333
-        assert_eq!(proposals_metrics.average_voting_participation, "0.4033333333333333");
+        assert_eq!(proposals_metrics.average_voting_participation, 40u64);
     }
 }

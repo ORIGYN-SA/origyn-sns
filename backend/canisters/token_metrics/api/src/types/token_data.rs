@@ -48,18 +48,20 @@ pub struct ProposalsMetricsCalculations {
 pub struct ProposalsMetrics {
     pub total_proposals: u64,
     pub daily_voting_rewards: u64,
+    pub reward_base_current_year: u64,
     pub total_voting_power: u64,
     pub average_voting_power: u64,
-    pub average_voting_participation: String,
+    pub average_voting_participation: u64,
 }
 impl Default for ProposalsMetrics {
     fn default() -> Self {
         ProposalsMetrics {
             total_proposals: 0,
+            reward_base_current_year: 250_000_000 * E8S_PER_OGY,
             daily_voting_rewards: (250_000_000 / 365) * E8S_PER_OGY,
             total_voting_power: 0,
             average_voting_power: 0,
-            average_voting_participation: "0".to_string(),
+            average_voting_participation: 0u64,
         }
     }
 }

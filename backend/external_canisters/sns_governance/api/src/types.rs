@@ -98,7 +98,7 @@ impl From<[u8; 32]> for NeuronId {
 }
 
 /// The id of a specific proposal.
-#[derive(candid::CandidType, candid::Deserialize, Eq, Copy, Clone, PartialEq)]
+#[derive(candid::CandidType, Serialize, candid::Deserialize, Eq, Copy, Clone, PartialEq)]
 pub struct ProposalId {
     pub id: u64,
 }

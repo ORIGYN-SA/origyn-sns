@@ -42,7 +42,8 @@ type Overview = record {
 };
 type ProposalsMetrics = record {
   daily_voting_rewards : nat64;
-  average_voting_participation : text;
+  reward_base_current_year : nat64;
+  average_voting_participation : nat64;
   average_voting_power : nat64;
   total_voting_power : nat64;
   total_proposals : nat64;
