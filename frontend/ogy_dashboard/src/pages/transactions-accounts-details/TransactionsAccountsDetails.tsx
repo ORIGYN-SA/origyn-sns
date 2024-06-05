@@ -14,7 +14,6 @@ import { usePagination, useSorting } from "@helpers/table/useTable";
 import AccountTransactionsList from "@pages/transactions-accounts-details/account-transactions-list/AccountTransactionsList";
 import BalanceHistory from "./balance-history/BalanceHistory";
 import TransactionsChart from "./transactions-chart/TransactionsChart";
-import TransactionsInOutChart from "./transactions-chart/TransactionsInOutCharts";
 import AccountMaxBalance from "./AccountMaxBalance";
 
 export const TransactionsAccountsDetails = () => {
