@@ -19,3 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added the `get_proposals_metrics` query to return the metrics about proposals and voting, such as: total_voting_power, average_voting_power, average_voting_participation etc.
 - Fixed an issue that was not updating the `state.wallets_list` when the wallet only had tokens in governance. This was also impacting the response for `get_foundation_assets`.
 - Fixed a minor issue that was not allocating the locked tokens to the correct period.
+
+## [1.0.4] - 2024-06-05
+
+- Fixed an issue that was calculating the proposals metrics wrong.
