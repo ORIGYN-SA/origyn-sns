@@ -1,6 +1,6 @@
 import Slider, {
   SliderThumb,
-  SliderValueLabelProps,
+  // SliderValueLabelProps,
 } from "@mui/material/Slider";
 import { Mark } from "@mui/base/useSlider";
 import { styled } from "@mui/material/styles";
@@ -60,8 +60,8 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
   const { data, isSuccess } = useEstimatedRewards();
   const [activeIndex, setActiveIndex] = useState(1);
 
-  const handleOnChange = (v) => {
-    setActiveIndex(v?.target?.value);
+  const handleOnChange = (v: Event) => {
+    setActiveIndex(Number((v.target as HTMLInputElement).value));
   };
 
   return (
