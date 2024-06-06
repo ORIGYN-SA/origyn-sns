@@ -6,9 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.1] - 2024-06-06
+
+#### Fix
+
+- Fix API path for OGY price in prod, stag and dev
+
 ### [1.0.0] - 2024-06-05
 
-## Added
+#### Added
 
 - Viewing OGY supply data.
 - Tracking governance statistics.
