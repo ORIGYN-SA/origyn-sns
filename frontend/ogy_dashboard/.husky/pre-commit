@@ -2,5 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 [ "$CI" = "true" ] && exit 0
-cd frontend/ogy_dashboard
 npx lint-staged
