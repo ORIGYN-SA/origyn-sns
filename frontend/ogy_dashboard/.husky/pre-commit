@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+[ "$CI" = "true" ] && exit 0
+npx lint-staged
