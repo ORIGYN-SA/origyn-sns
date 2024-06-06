@@ -20,7 +20,6 @@ const AvailableOGY = () => {
     balance: balanceOGY?.balance,
   });
   console.log("test husky ");
-
   return (
     <Card>
       <div className="flex justify-between mb-4">

@@ -83,6 +83,11 @@
     "vite": "^5.2.0",
     "vite-tsconfig-paths": "^4.3.2"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
