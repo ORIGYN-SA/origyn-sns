@@ -8,6 +8,7 @@ import useFetchOneTransaction from "@hooks/transactions/useFetchOneTransaction";
 export const TransactionsDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
+
   const { data } = useFetchOneTransaction({
     transactionId: params.index as string,
   });
