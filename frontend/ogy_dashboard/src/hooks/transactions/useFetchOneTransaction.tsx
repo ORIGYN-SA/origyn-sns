@@ -13,7 +13,7 @@ const useFetchOneTransaction = ({
   const {
     data: transactionRosetta,
     isSuccess: isSuccessFetchOneTransactionRosetta,
-    // isError: isErrorFetchOneTransactionRosetta,
+    isError: isErrorFetchOneTransactionRosetta,
     // isLoading: isLoadingFetchOneTransactionRosetta,
     // error: errorFetchOneTransactionRosetta,
   } = useQuery({
@@ -38,7 +38,12 @@ const useFetchOneTransaction = ({
       fetchOneTransaction({
         transactionId: transactionRosetta || transactionId,
       }),
-    enabled: !!transactionId && !!isSuccessFetchOneTransactionRosetta,
+    enabled:
+      !!transactionId &&
+      !!(
+        !isSuccessFetchOneTransactionRosetta ||
+        !isErrorFetchOneTransactionRosetta
+      ),
     placeholderData: keepPreviousData,
   });
 

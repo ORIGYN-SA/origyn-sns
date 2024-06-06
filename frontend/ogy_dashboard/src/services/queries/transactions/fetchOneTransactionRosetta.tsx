@@ -19,7 +19,11 @@ export const fetchOneTransactionRosetta = async ({
       },
       transaction_identifier: { hash: transactionId },
     },
-    { headers: { "content-type": "application/json" } }
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
   return (data?.transactions[0]?.block_identifier?.index as string) ?? null;
 };
