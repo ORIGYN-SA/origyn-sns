@@ -11,8 +11,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
-import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal"; // TokensInGovernanceProps,
-import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI"; // TokensInGovernanceKpiProps,
+import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
+// import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
@@ -185,7 +185,7 @@ export const Governance = () => {
         />
       </PieChartProvider>
 
-      <TokensInGovernanceKpi className="mb-16" />
+      {/* <TokensInGovernanceKpi className="mb-16" /> */}
 
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">
