@@ -12,7 +12,7 @@ const useFetchOneTransaction = ({
 }) => {
   const {
     data: transactionRosetta,
-    // isSuccess: isSuccessFetchOneTransactionRosetta,
+    isSuccess: isSuccessFetchOneTransactionRosetta,
     // isError: isErrorFetchOneTransactionRosetta,
     // isLoading: isLoadingFetchOneTransactionRosetta,
     // error: errorFetchOneTransactionRosetta,
@@ -38,7 +38,7 @@ const useFetchOneTransaction = ({
       fetchOneTransaction({
         transactionId: transactionRosetta || transactionId,
       }),
-    enabled: !!transactionId,
+    enabled: !!transactionId && !!isSuccessFetchOneTransactionRosetta,
     placeholderData: keepPreviousData,
   });
 
