@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .dfx
+.huskyrc
 
 # Editor directories and files
 .vscode/*
