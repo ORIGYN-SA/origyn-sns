@@ -5,7 +5,7 @@ import Slider, {
 import { Mark } from "@mui/base/useSlider";
 import { styled } from "@mui/material/styles";
 import { Card } from "@components/ui";
-import useEstimatedRewards from "@hooks/metrics/useEstimatedRewards";
+import useEstimatedRewards from "@hooks/governance/useEstimatedRewards";
 import { useState } from "react";
 
 interface EstimateRewardsProps {
@@ -65,58 +65,56 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
   };
 
   return (
-    <Card className={`${className}`} {...restProps}>
+    <Card className={`${className} text-center xl:text-left`} {...restProps}>
       <h2 className="text-lg font-semibold text-content/60 mb-4">
         Estimate rewards
       </h2>
       {isSuccess && data && (
-        <>
-          <div className="w-full px-8 py-4">
-            <div className="gap-2">
-              <div className="text-4xl mb-8">{data[activeIndex - 1].rate}</div>
-            </div>
-            <AirbnbSlider
-              slots={{ thumb: AirbnbThumbComponent }}
-              aria-label="Restricted values"
-              value={activeIndex}
-              // getAriaValueText={valuetext}
-              step={null}
-              valueLabelDisplay="auto"
-              min={1}
-              max={5}
-              marks={data as Mark[]}
-              onChange={(v) => handleOnChange(v)}
-            />
-            <div className="mt-4 flex gap-16 items-center">
-              {activeIndex < 5 && (
-                <div className="gap-2">
-                  <div className="mt-4 flex items-center text-2xl font-semibold">
-                    <img src="/ogy_logo.svg" alt="OGY Logo" />
-                    <span className="ml-2 mr-3">
-                      {data[activeIndex - 1].lockedSum}
-                    </span>
-                    <span className="text-content/60">OGY</span>
-                  </div>
-                  <div className="text-content/60">
-                    currently locked for at least {activeIndex} year
-                  </div>
-                </div>
-              )}
-              <div className="gap-2">
-                <div className="mt-4 flex items-center text-2xl font-semibold">
+        <div className="w-full px-4 py-4">
+          <div className="gap-2">
+            <div className="text-4xl mb-8">{data[activeIndex - 1].rate}</div>
+          </div>
+          <AirbnbSlider
+            slots={{ thumb: AirbnbThumbComponent }}
+            aria-label="Restricted values"
+            value={activeIndex}
+            // getAriaValueText={valuetext}
+            step={null}
+            valueLabelDisplay="auto"
+            min={1}
+            max={5}
+            marks={data as Mark[]}
+            onChange={(v) => handleOnChange(v)}
+          />
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-6">
+            {activeIndex < 5 && (
+              <div className="flex flex-col items-center xl:items-start">
+                <div className="flex items-center justify-center text-2xl font-semibold">
                   <img src="/ogy_logo.svg" alt="OGY Logo" />
                   <span className="ml-2 mr-3">
-                    {data[activeIndex - 1].locked}
+                    {data[activeIndex - 1].lockedSum}
                   </span>
                   <span className="text-content/60">OGY</span>
                 </div>
                 <div className="text-content/60">
-                  currently locked for {activeIndex} year
+                  currently locked for at least {activeIndex} year
                 </div>
+              </div>
+            )}
+            <div className="flex flex-col items-center xl:items-start">
+              <div className="flex items-center text-2xl font-semibold">
+                <img src="/ogy_logo.svg" alt="OGY Logo" />
+                <span className="ml-2 mr-3">
+                  {data[activeIndex - 1].locked}
+                </span>
+                <span className="text-content/60">OGY</span>
+              </div>
+              <div className="text-content/60">
+                currently locked for {activeIndex} year
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </Card>
   );
