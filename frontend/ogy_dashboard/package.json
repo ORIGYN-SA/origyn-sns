@@ -14,7 +14,7 @@
     "deploy:preprod": "npm run build:preprod && dfx deploy ogy_dashboard --network=preprod",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --mode staging",
-    "prepare": "husky"
+    "prepare": "cd .. && husky frontend/ogy_dashboard/.husky"
   },
   "dependencies": {
     "@amerej/connect2ic-core": "^0.0.2",
@@ -82,9 +82,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-tsconfig-paths": "^4.3.2"
-  },
-  "hooks": {
-    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
