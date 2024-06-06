@@ -8,7 +8,8 @@ import { useCanister } from "@amerej/connect2ic-react";
 import fetchSupplyDataOGY from "@services/queries/metrics/fetchSupplyDataOGY";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
-import { TokenSupplyData } from "@services/types/token_metrics";
+import { TokenSupplyData, WalletOverview } from "@services/types/token_metrics";
+import fetchFoundationAssetsOGY from "@services/queries/metrics/fetchFoundationAssetsOGY";
 
 interface ICirculationStateOGY {
   number: { circulatingSupply: number; totalSupply: number };
@@ -36,10 +37,29 @@ const useCirculationStateOGY = () => {
     placeholderData: keepPreviousData,
   });
 
+  const {
+    data: dataReserve,
+    isSuccess: isSuccessreserve,
+    isLoading: isLoadingReserve,
+    isError: isErrorReserve,
+    error: errorReserve,
+  }: UseQueryResult<WalletOverview> = useQuery({
+    queryKey: ["foundationAssets"],
+    queryFn: () =>
+      fetchFoundationAssetsOGY({
+        actor: tokenMetricsActor,
+      }),
+    placeholderData: keepPreviousData,
+  });
+
+  const isSuccessAll = isSuccess && isSuccessreserve;
+
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccessAll && data && dataReserve) {
       const totalSupply = Number(divideBy1e8(data.total_supply));
       const circulatingSupply = Number(divideBy1e8(data.circulating_supply));
+      const governance = dataReserve.governance;
+      const totalLocked = divideBy1e8(governance.total_staked);
 
       setFoundationReserve({
         number: {
@@ -54,25 +74,31 @@ const useCirculationStateOGY = () => {
         },
         dataPieChart: [
           {
-            name: "Locked",
-            value: totalSupply,
+            name: "OGY not in the hand of the Foundation",
+            value: circulatingSupply - totalLocked,
             valueToString: roundAndFormatLocale({
-              number: divideBy1e8(totalSupply),
+              number: circulatingSupply - totalLocked,
             }),
           },
           {
-            name: "Unlocked",
-            value: totalSupply,
+            name: "OGY locked in the hand of the Foundation",
+            value: totalLocked,
             valueToString: roundAndFormatLocale({
-              number: divideBy1e8(totalSupply),
+              number: totalLocked,
             }),
           },
         ],
       });
     }
-  }, [isSuccess, data]);
+  }, [isSuccessAll, data, dataReserve]);
 
-  return { data: foundationReserve, isSuccess, isError, isLoading, error };
+  return {
+    data: foundationReserve,
+    isSuccess: isSuccessAll,
+    isError: isError || isErrorReserve,
+    isLoading: isLoading || isLoadingReserve,
+    error: error || errorReserve,
+  };
 };
 
 export default useCirculationStateOGY;

@@ -37,3 +37,108 @@
     }
   }
 }
+
+div.vis-network div.vis-navigation div.vis-button.vis-up, 
+div.vis-network div.vis-navigation div.vis-button.vis-down, 
+div.vis-network div.vis-navigation div.vis-button.vis-left, 
+div.vis-network div.vis-navigation div.vis-button.vis-right, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomIn, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomOut, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+  background-image: none !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button:hover {
+  box-shadow: none !important;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+  display: none!important;
+}
+.vis-button {
+  background-color: #E1E3EC;
+  border: 1px solid #CACCD6;
+  width: 56px!important;
+  height: 46px!important;
+  border-radius: 0!important;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+.vis-up {
+  border-radius: 10px 10px 0 0!important;
+  bottom: 55px!important;
+  left: 70px!important;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-up {
+  background-image: url(data:image/png;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxOSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4LjcwNzEgOC43MDcxMUMxOS4wOTc2IDguMzE2NTkgMTkuMDk3NiA3LjY4MzQyIDE4LjcwNzEgNy4yOTI5TDEyLjM0MzEgMC45Mjg5MzRDMTEuOTUyNiAwLjUzODQxIDExLjMxOTUgMC41Mzg0MSAxMC45Mjg5IDAuOTI4OTM0QzEwLjUzODQgMS4zMTk0NiAxMC41Mzg0IDEuOTUyNjIgMTAuOTI4OSAyLjM0MzE1TDE2LjU4NTggOEwxMC45Mjg5IDEzLjY1NjlDMTAuNTM4NCAxNC4wNDc0IDEwLjUzODQgMTQuNjgwNSAxMC45Mjg5IDE1LjA3MTFDMTEuMzE5NSAxNS40NjE2IDExLjk1MjYgMTUuNDYxNiAxMi4zNDMxIDE1LjA3MTFMMTguNzA3MSA4LjcwNzExWk0tMS43NDg0NmUtMDcgOUwxOCA5TDE4IDdMMS43NDg0NmUtMDcgN0wtMS43NDg0NmUtMDcgOVoiIGZpbGw9IiM1RDYyN0IiLz4KPC9zdmc+Cg==);
+}
+div.vis-network div.vis-navigation div.vis-button.vis-right {
+  background-image: url(data:image/png;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxOSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4LjcwNzEgOC43MDcxMUMxOS4wOTc2IDguMzE2NTkgMTkuMDk3NiA3LjY4MzQyIDE4LjcwNzEgNy4yOTI5TDEyLjM0MzEgMC45Mjg5MzRDMTEuOTUyNiAwLjUzODQxIDExLjMxOTUgMC41Mzg0MSAxMC45Mjg5IDAuOTI4OTM0QzEwLjUzODQgMS4zMTk0NiAxMC41Mzg0IDEuOTUyNjIgMTAuOTI4OSAyLjM0MzE1TDE2LjU4NTggOEwxMC45Mjg5IDEzLjY1NjlDMTAuNTM4NCAxNC4wNDc0IDEwLjUzODQgMTQuNjgwNSAxMC45Mjg5IDE1LjA3MTFDMTEuMzE5NSAxNS40NjE2IDExLjk1MjYgMTUuNDYxNiAxMi4zNDMxIDE1LjA3MTFMMTguNzA3MSA4LjcwNzExWk0tMS43NDg0NmUtMDcgOUwxOCA5TDE4IDdMMS43NDg0NmUtMDcgN0wtMS43NDg0NmUtMDcgOVoiIGZpbGw9IiM1RDYyN0IiLz4KPC9zdmc+Cg==);
+}
+.vis-left {
+  border-radius: 10px 0 0 10px!important;
+}
+.vis-right {
+  border-radius: 0 10px 10px 0!important;
+  left: 125px!important;
+}
+.vis-down {
+  left: 70px!important;
+}
+
+.vis-button:after {
+  content: "";
+  display: block;
+  font-size: 2em;
+  color: gray;
+  content: "";
+}
+
+.vis-button:hover:after {
+  font-size: 2em;
+  color: lightgray;
+}
+
+.vis-button.vis-up:after {
+  width: 15px;
+  height: 19px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxNiAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTguNzA3MTEgMC4yOTI4OTJDOC4zMTY1OCAtMC4wOTc2MzE1IDcuNjgzNDIgLTAuMDk3NjMxNCA3LjI5Mjg5IDAuMjkyODkyTDAuOTI4OTMyIDYuNjU2ODVDMC41Mzg0MDcgNy4wNDczOCAwLjUzODQwNyA3LjY4MDU0IDAuOTI4OTMyIDguMDcxMDdDMS4zMTk0NiA4LjQ2MTU5IDEuOTUyNjIgOC40NjE1OSAyLjM0MzE1IDguMDcxMDdMOCAyLjQxNDIxTDEzLjY1NjkgOC4wNzEwN0MxNC4wNDc0IDguNDYxNTkgMTQuNjgwNSA4LjQ2MTU5IDE1LjA3MTEgOC4wNzEwN0MxNS40NjE2IDcuNjgwNTQgMTUuNDYxNiA3LjA0NzM4IDE1LjA3MTEgNi42NTY4NUw4LjcwNzExIDAuMjkyODkyWk05IDE5TDkgMUw3IDFMNyAxOUw5IDE5WiIgZmlsbD0iIzVENjI3QiIvPgo8L3N2Zz4K);
+}
+
+.vis-button.vis-down:after {
+  width: 15px;
+  height: 19px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxNiAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuMjkyODkgMTguNzA3MUM3LjY4MzQyIDE5LjA5NzYgOC4zMTY1OCAxOS4wOTc2IDguNzA3MTEgMTguNzA3MUwxNS4wNzExIDEyLjM0MzFDMTUuNDYxNiAxMS45NTI2IDE1LjQ2MTYgMTEuMzE5NSAxNS4wNzExIDEwLjkyODlDMTQuNjgwNSAxMC41Mzg0IDE0LjA0NzQgMTAuNTM4NCAxMy42NTY5IDEwLjkyODlMOCAxNi41ODU4TDIuMzQzMTUgMTAuOTI4OUMxLjk1MjYyIDEwLjUzODQgMS4zMTk0NiAxMC41Mzg0IDAuOTI4OTMyIDEwLjkyODlDMC41Mzg0MDcgMTEuMzE5NSAwLjUzODQwNyAxMS45NTI2IDAuOTI4OTMyIDEyLjM0MzFMNy4yOTI4OSAxOC43MDcxWk03IC00LjM3MTE0ZS0wOEw3IDE4TDkgMThMOSA0LjM3MTE0ZS0wOEw3IC00LjM3MTE0ZS0wOFoiIGZpbGw9IiM1RDYyN0IiLz4KPC9zdmc+Cg==);
+}
+
+.vis-button.vis-left:after {
+  width: 19px;
+  height: 15px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxOSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAuMjkyODkzIDcuMjkyODlDLTAuMDk3NjMxNCA3LjY4MzQyIC0wLjA5NzYzMTUgOC4zMTY1OCAwLjI5Mjg5MiA4LjcwNzExTDYuNjU2ODUgMTUuMDcxMUM3LjA0NzM4IDE1LjQ2MTYgNy42ODA1NCAxNS40NjE2IDguMDcxMDcgMTUuMDcxMUM4LjQ2MTU5IDE0LjY4MDUgOC40NjE1OSAxNC4wNDc0IDguMDcxMDcgMTMuNjU2OUwyLjQxNDIxIDhMOC4wNzEwNyAyLjM0MzE0QzguNDYxNTkgMS45NTI2MiA4LjQ2MTU5IDEuMzE5NDYgOC4wNzEwNyAwLjkyODkzMUM3LjY4MDU0IDAuNTM4NDA3IDcuMDQ3MzggMC41Mzg0MDcgNi42NTY4NiAwLjkyODkzMUwwLjI5Mjg5MyA3LjI5Mjg5Wk0xOSA3TDEgN0wxIDlMMTkgOUwxOSA3WiIgZmlsbD0iIzVENjI3QiIvPgo8L3N2Zz4K);
+}
+
+.vis-button.vis-right:after {
+  width: 19px;
+  height: 15px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxOSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4LjcwNzEgOC43MDcxMUMxOS4wOTc2IDguMzE2NTkgMTkuMDk3NiA3LjY4MzQyIDE4LjcwNzEgNy4yOTI5TDEyLjM0MzEgMC45Mjg5MzRDMTEuOTUyNiAwLjUzODQxIDExLjMxOTUgMC41Mzg0MSAxMC45Mjg5IDAuOTI4OTM0QzEwLjUzODQgMS4zMTk0NiAxMC41Mzg0IDEuOTUyNjIgMTAuOTI4OSAyLjM0MzE1TDE2LjU4NTggOEwxMC45Mjg5IDEzLjY1NjlDMTAuNTM4NCAxNC4wNDc0IDEwLjUzODQgMTQuNjgwNSAxMC45Mjg5IDE1LjA3MTFDMTEuMzE5NSAxNS40NjE2IDExLjk1MjYgMTUuNDYxNiAxMi4zNDMxIDE1LjA3MTFMMTguNzA3MSA4LjcwNzExWk0tMS43NDg0NmUtMDcgOUwxOCA5TDE4IDdMMS43NDg0NmUtMDcgN0wtMS43NDg0NmUtMDcgOVoiIGZpbGw9IiM1RDYyN0IiLz4KPC9zdmc+Cg==);
+
+}
+.vis-button.vis-zoomIn {
+  border-radius: 0 10px 10px 0!important;
+}
+.vis-button.vis-zoomIn:after {
+  content: "+";
+  font-weight: bold;
+}
+.vis-button.vis-zoomOut {
+  right: 70px!important;
+  border-radius: 10px 0 0 10px!important;
+}
+.vis-button.vis-zoomOut:after {
+  content: "−";
+  font-weight: bold;
+}
+
+.vis-button.vis-zoomExtends:after {
+  content: "⤧";
+}
