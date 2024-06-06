@@ -19,7 +19,7 @@ const AvailableOGY = () => {
   const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
     balance: balanceOGY?.balance,
   });
-  console.log("test husky d");
+  console.log("test husky");
 
   return (
     <Card>
