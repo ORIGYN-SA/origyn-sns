@@ -101,8 +101,13 @@ const getNeuronData = (
   const stakedAmount = divideBy1e8(Number(data.cached_neuron_stake_e8s || 0));
 
   const stakedMaturity = divideBy1e8(
-    Number(stakedMaturityEquivalent !== null ? stakedMaturityEquivalent : 0)
+    Number(
+      stakedMaturityEquivalent !== (null || undefined)
+        ? stakedMaturityEquivalent
+        : 0
+    )
   );
+
   const votingPower =
     dissolveDelaySeconds >= neuronMinimumDissolveDelayToVoteSeconds
       ? (stakedAmount + stakedMaturity) *
