@@ -12,9 +12,9 @@ $[[ inputs.src-folder ]] generate test declaration:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       needs:
-        - "${{ inputs.directory }} test build"
+        - "${{ inputs.src-folder }} test build"
   script:
-    - dfx generate ${{ inputs.directory }}
+    - dfx generate ${{ inputs.src-folder }}
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
     paths:
@@ -28,9 +28,9 @@ $[[ inputs.src-folder ]] generate declaration:
       when: never
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
       needs:
-        - "${{ inputs.directory }} canister build"
+        - "${{ inputs.src-folder }} canister build"
   script:
-    - dfx generate ${{ inputs.directory }}
+    - dfx generate ${{ inputs.src-folder }}
   artifacts:
     name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
     paths:
