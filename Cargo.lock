@@ -423,6 +423,74 @@ dependencies = [
 ]
 
 [[package]]
+name = "daily_jobs"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "daily_jobs_api",
+ "futures",
+ "hex",
+ "http_request",
+ "ic-cdk 0.13.2",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "ledger_utils",
+ "num-bigint",
+ "serde",
+ "serde_bytes",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "super_stats_v3_api",
+ "super_stats_v3_c2c_client",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
+name = "daily_jobs_api"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "http_request",
+ "ic-cdk 0.13.2",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "ledger_utils",
+ "num-bigint",
+ "serde",
+ "serde_bytes",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "super_stats_v3_api",
+ "super_stats_v3_c2c_client",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
 name = "data-encoding"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
