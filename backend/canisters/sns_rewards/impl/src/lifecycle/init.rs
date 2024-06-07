@@ -10,7 +10,7 @@ pub use sns_rewards_api_canister::init::*;
 
 #[init]
 fn init(args: InitArgs) {
-    canister_logger::init(args.test_mode);
+    canister_logger::init(true);
 
     let env = CanisterEnv::new(args.test_mode);
     let mut data = Data::default();
