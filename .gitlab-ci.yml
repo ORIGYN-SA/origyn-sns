@@ -88,6 +88,8 @@ node cache:
   stage: preparation
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "./frontend/{**,**/**,**/**/**}/*.{js,json,jsx,md,mdx,css,html,svg}"
   extends: .node template
   script:
     - npm pkg get name description author license workspaces engines
@@ -98,6 +100,8 @@ cargo cache:
   stage: preparation
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "./backend/{**,**/**,**/**/**}/*.{rs,toml}"
   extends: .rust template
   script:
     - cargo version
