@@ -1,3 +1,12 @@
+spec:
+  inputs:
+    src-folder:
+      description: Generate declatations for the canister
+      options: ["ogy_token_swap", "sns_rewards", "super_stats_v3", "token_metrics"]
+---
+# Frontend builds
+
+
 $[[ inputs.src-folder ]] generate test declaration:
   stage: build
   rules:
