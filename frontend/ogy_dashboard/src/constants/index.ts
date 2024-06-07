@@ -14,6 +14,7 @@ export const API_PLAUSIBLE_BASE_URL = import.meta.env.VITE_API_PLAUSIBLE_BASE_UR
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
 export const API_LEDGER_BASE_URL = import.meta.env.VITE_API_LEDGER_BASE_URL;
+export const API_ROSETTA = import.meta.env.VITE_API_ROSETTA;
 export const PLAUSIBLE_API_KEY = import.meta.env.VITE_PLAUSIBLE_API_KEY;
 export const ACCOUNT_ID_LEDGER_ICP = import.meta.env.VITE_ACCOUNT_ID_LEDGER_ICP;
 export const ACCOUNT_ID_LEDGER_OGY = import.meta.env.VITE_ACCOUNT_ID_LEDGER_OGY;
@@ -75,6 +76,11 @@ if (!(APP_MODE === "production")) {
         console.log("No LEGACY_VESTING_CANISTER_ID environment variable. Set LEGACY_VESTING_CANISTER_ID environment variable.")
     else
         console.log(`LEGACY_VESTING_CANISTER_ID=${LEGACY_VESTING_CANISTER_ID}`)
+
+    if (!TOKEN_STATS_CANISTER_ID)
+        console.log("No TOKEN_STATS_CANISTER_ID environment variable. Set TOKEN_STATS_CANISTER_ID environment variable.")
+    else
+        console.log(`TOKEN_STATS_CANISTER_ID=${TOKEN_STATS_CANISTER_ID}`)
     
     if (!API_ICRC_V1_BASE_URL)
         console.log("No API_ICRC_V1_BASE_URL environment variable. Set API_ICRC_V1_BASE_URL environment variable.")
@@ -95,6 +101,11 @@ if (!(APP_MODE === "production")) {
         console.log("No API_LEDGER_BASE_URL environment variable. Set API_LEDGER_BASE_URL environment variable.")
     else
         console.log(`API_LEDGER_BASE_URL=${API_LEDGER_BASE_URL}`)
+
+    if (!API_ROSETTA)
+        console.log("No API_ROSETTA environment variable. Set API_ROSETTA environment variable.")
+    else
+        console.log(`API_ROSETTA=${API_ROSETTA}`)
 
     if (!ACCOUNT_ID_LEDGER_ICP)
         console.log("No ACCOUNT_ID_LEDGER_ICP environment variable. Set ACCOUNT_ID_LEDGER_ICP environment variable.")

@@ -39,7 +39,7 @@ const AvailableOGY = () => {
             <div className="flex ml-2">
               {balanceOGY?.balance !== undefined ? (
                 <div>
-                  {balanceOGY.balance}
+                  {balanceOGY.string.balance}
                   <span className="text-content/60 ml-2">OGY</span>
                 </div>
               ) : (

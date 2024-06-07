@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.3] - 2024-06-07
+
+#### Added
+
+- Transaction hash compatibility for transactions details page.
+
+#### Fix
+
+- Display formatted value on page account for available OGY.
+- Responsivity and data accuracy for estimated rewards on Governance page.
+- Innacurate data for total OGY Burned on Home page chart.
+
 ### [1.0.2] - 2024-06-06
 
 #### Added
