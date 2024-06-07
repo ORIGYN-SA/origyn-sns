@@ -35,5 +35,5 @@ export interface INeuronData {
   ageBonus: number;
   dissolveDelayBonus: string;
   vestingPeriod?: number | null;
-  autoStakeMaturity?: number | null;
+  autoStakeMaturity?: string | null;
 }
