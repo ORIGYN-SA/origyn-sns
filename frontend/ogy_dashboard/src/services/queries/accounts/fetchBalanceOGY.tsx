@@ -1,7 +1,7 @@
 import { Principal } from "@dfinity/principal";
 import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 
 interface IFetchBalanceOGY {
@@ -29,7 +29,7 @@ const fetchBalanceOGY = async ({
     balanceE8s: resultBalanceOgy,
     balance,
     string: {
-      balance: roundAndFormatLocale({ number: divideBy1e8(resultBalanceOgy) }),
+      balance: roundAndFormatLocale({ number: balance }),
     },
   };
 };
