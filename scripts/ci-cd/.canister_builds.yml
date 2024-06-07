@@ -33,7 +33,20 @@ $[[ inputs.src-folder ]] canister build:
   rules:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
       when: never
+<<<<<<< HEAD
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_TAG =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/'
+=======
+      changes:
+        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
+    - if: $CI_COMMIT_REF_NAME == "develop" 
+      changes:
+        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
+    - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/')
+>>>>>>> ab6cf36 (enhance gitlab ci/cd pipeline)
   extends: .rust template
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
