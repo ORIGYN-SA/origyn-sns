@@ -12,6 +12,7 @@ import {
   // getCurrentDateLastWeekInSeconds,
   getCurrentDateLastMonthInSeconds,
 } from "@helpers/dates/index";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
 const useTotalOGYBurned = () => {
   const [data, setData] = useState({
@@ -41,20 +42,15 @@ const useTotalOGYBurned = () => {
 
   useEffect(() => {
     if (isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries) {
-      // * fix for launch where burned OGY === 0
       setData({
-        totalBurned:
-          dataTotalBurned.totalBurnedOGY !== 0
-            ? dataTotalBurned.totalBurnedOGYToString
-            : "202,420,405.1",
-        dataPieChart:
-          dataTotalBurned.totalBurnedOGY !== 0
-            ? dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries
-            : (dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries.map(
-                (d: ChartData) => {
-                  return { value: 202420405.1, name: d.name };
-                }
-              ) as ChartData[]),
+        totalBurned: roundAndFormatLocale({
+          number: divideBy1e8(dataTotalBurned.totalBurnedOGY) + 202420405.1,
+        }),
+        dataPieChart: dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries.map(
+          (d: ChartData) => {
+            return { value: d.value + 202420405.1, name: d.name };
+          }
+        ) as ChartData[],
       });
     }
   }, [

@@ -2,6 +2,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { DateTime } from "luxon";
 import _capitalize from "lodash/capitalize";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
+import { fetchOneTransactionRosetta } from "@services/queries/transactions/fetchOneTransactionRosetta";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 
 const useFetchOneTransaction = ({
@@ -9,6 +10,22 @@ const useFetchOneTransaction = ({
 }: {
   transactionId: string;
 }) => {
+  const {
+    data: transactionRosetta,
+    isLoading: isLoadingFetchOneTransactionRosetta,
+    isSuccess: isSuccessFetchOneTransactionRosetta,
+    isError: isErrorFetchOneTransactionRosetta,
+  } = useQuery({
+    queryKey: ["fetchOneTransactionRosetta", transactionId],
+    queryFn: () =>
+      fetchOneTransactionRosetta({
+        transactionId,
+      }),
+    enabled: !!transactionId,
+    placeholderData: keepPreviousData,
+    retry: 0,
+  });
+
   const {
     data: transaction,
     isSuccess: isSuccessFetchOneTransaction,
@@ -19,9 +36,12 @@ const useFetchOneTransaction = ({
     queryKey: ["fetchOneTransaction", transactionId],
     queryFn: () =>
       fetchOneTransaction({
-        transactionId,
+        transactionId: transactionRosetta || transactionId,
       }),
-    enabled: !!transactionId,
+    enabled:
+      !!transactionId &&
+      (!!isSuccessFetchOneTransactionRosetta ||
+        !!isErrorFetchOneTransactionRosetta),
     placeholderData: keepPreviousData,
   });
 
@@ -63,8 +83,10 @@ const useFetchOneTransaction = ({
 
   return {
     data,
-    isLoading: isLoadingFetchOneTransaction,
-    isSuccess: isSuccessFetchOneTransaction,
+    isLoading:
+      isLoadingFetchOneTransaction || isLoadingFetchOneTransactionRosetta,
+    isSuccess:
+      isSuccessFetchOneTransaction && !isLoadingFetchOneTransactionRosetta,
     isError: isErrorFetchOneTransaction,
     error: errorFetchOneTransaction,
   };

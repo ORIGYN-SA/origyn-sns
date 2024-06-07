@@ -22,8 +22,8 @@ const useEstimatedRewards = () => {
   const [estimatedRewards, setEstimatedRewards] = useState<
     IEstimatedReward[] | null
   >(null);
-  const REWARD_RATE = 0.01;
-  const STEPS = [1, 1.15, 1.4, 1.65, 2];
+  const REWARD_RATE = 0.25;
+  const STEPS = [1, 1.25, 1.5, 1.75, 2];
   const STEPS_LENGTH = 5;
 
   const {
@@ -62,7 +62,7 @@ const useEstimatedRewards = () => {
             label: ``,
             rate: `${(
               Math.round(STEPS[index] * (REWARD_RATE * Number(totalLocked))) /
-              1000000
+              10000000
             ).toFixed(1)} %`,
             locked: roundAndFormatLocale({ number: d }),
             lockedSum:
