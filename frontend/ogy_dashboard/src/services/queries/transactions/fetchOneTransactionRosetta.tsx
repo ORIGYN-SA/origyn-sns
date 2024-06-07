@@ -11,17 +11,19 @@ export const fetchOneTransactionRosetta = async ({
   transactionId: string;
 }): Promise<string> => {
   const { data } = await rosettaAPI.post(
-    `/search/transactions`,
-    {
+    "/search/transactions",
+    JSON.stringify({
       network_identifier: {
         blockchain: "Internet Computer",
-        network: SNS_LEDGER_CANISTER_ID,
+        network: "lkwrt-vyaaa-aaaaq-aadhq-cai",
       },
-      transaction_identifier: { hash: transactionId },
-    },
+      transaction_identifier: {
+        hash: "c741830b2b83bb6ef884935de58b2fa748d66fd56706670463ede96a7b8b5ccb",
+      },
+    }),
     {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
       },
     }
   );
