@@ -75,6 +75,11 @@ if (!(APP_MODE === "production")) {
         console.log("No LEGACY_VESTING_CANISTER_ID environment variable. Set LEGACY_VESTING_CANISTER_ID environment variable.")
     else
         console.log(`LEGACY_VESTING_CANISTER_ID=${LEGACY_VESTING_CANISTER_ID}`)
+
+    if (!TOKEN_STATS_CANISTER_ID)
+        console.log("No TOKEN_STATS_CANISTER_ID environment variable. Set TOKEN_STATS_CANISTER_ID environment variable.")
+    else
+        console.log(`TOKEN_STATS_CANISTER_ID=${TOKEN_STATS_CANISTER_ID}`)
     
     if (!API_ICRC_V1_BASE_URL)
         console.log("No API_ICRC_V1_BASE_URL environment variable. Set API_ICRC_V1_BASE_URL environment variable.")
