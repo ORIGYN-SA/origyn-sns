@@ -13,7 +13,7 @@ pub use sns_rewards_api_canister::{
     ReserveTokenAmounts,
 };
 
-#[update(guard = "caller_is_governance_principal")]
+#[update]
 #[trace]
 pub async fn set_reserve_transfer_amounts(
     args: SetReserveTransferAmountsArgs
