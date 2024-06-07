@@ -12,10 +12,9 @@ const useFetchOneTransaction = ({
 }) => {
   const {
     data: transactionRosetta,
+    isLoading: isLoadingFetchOneTransactionRosetta,
     isSuccess: isSuccessFetchOneTransactionRosetta,
-    // isError: isErrorFetchOneTransactionRosetta,
-    // isLoading: isLoadingFetchOneTransactionRosetta,
-    // error: errorFetchOneTransactionRosetta,
+    isError: isErrorFetchOneTransactionRosetta,
   } = useQuery({
     queryKey: ["fetchOneTransactionRosetta", transactionId],
     queryFn: () =>
@@ -24,6 +23,7 @@ const useFetchOneTransaction = ({
       }),
     enabled: !!transactionId,
     placeholderData: keepPreviousData,
+    retry: 0,
   });
 
   const {
@@ -38,7 +38,10 @@ const useFetchOneTransaction = ({
       fetchOneTransaction({
         transactionId: transactionRosetta || transactionId,
       }),
-    enabled: !!transactionId && !!isSuccessFetchOneTransactionRosetta,
+    enabled:
+      !!transactionId &&
+      (!!isSuccessFetchOneTransactionRosetta ||
+        !!isErrorFetchOneTransactionRosetta),
     placeholderData: keepPreviousData,
   });
 
@@ -80,8 +83,10 @@ const useFetchOneTransaction = ({
 
   return {
     data,
-    isLoading: isLoadingFetchOneTransaction,
-    isSuccess: isSuccessFetchOneTransaction,
+    isLoading:
+      isLoadingFetchOneTransaction || isLoadingFetchOneTransactionRosetta,
+    isSuccess:
+      isSuccessFetchOneTransaction && !isLoadingFetchOneTransactionRosetta,
     isError: isErrorFetchOneTransaction,
     error: errorFetchOneTransaction,
   };
