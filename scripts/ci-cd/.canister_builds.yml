@@ -11,6 +11,10 @@ $[[ inputs.src-folder ]] test build:
   # needs: $[[ inputs.src-folder ]] tests
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
   extends: .rust template
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
