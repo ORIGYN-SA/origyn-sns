@@ -45,7 +45,7 @@ impl RuntimeState {
                 .collect(),
             last_daily_reserve_transfer_time: self.data.last_daily_reserve_transfer_time,
             last_daily_ogy_burn_time: self.data.last_daily_ogy_burn.clone(),
-            daily_ogy_burn_amount: self.data.daily_ogy_burn_rate.clone(),
+            daily_ogy_burn_amount: self.data.daily_ogy_burn_rate.clone().unwrap_or_default(),
         }
     }
 
@@ -73,7 +73,7 @@ pub struct Metrics {
     pub daily_reserve_transfer: Vec<String>,
     pub last_daily_reserve_transfer_time: TimestampMillis,
     pub last_daily_ogy_burn_time: Option<TimestampMillis>,
-    pub daily_ogy_burn_amount: Option<Nat>,
+    pub daily_ogy_burn_amount: Nat,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
