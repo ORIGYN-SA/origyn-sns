@@ -14,7 +14,7 @@ pub use sns_rewards_api_canister::{
     ReserveTokenAmounts,
 };
 
-#[update]
+#[update(guard = "caller_is_governance_principal")]
 #[trace]
 pub async fn set_daily_ogy_burn_rate(
     amount: SetDailyOGYGovBurnRateArgs
