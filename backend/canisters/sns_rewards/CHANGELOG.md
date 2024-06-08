@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.4] - 2024-06-07
+
+#### Changed
+
+- reactivated the guard for set_daily_ogy_burn_rate
+
+### [1.0.3] - 2024-06-07
+
+#### Changed
+
+- reactivated the guard for set_daily_reserve_transfer
+- temporarily disable the guard for set_daily_ogy_burn_rate to set it manually
+
+### [1.0.2] - 2024-06-07
+
+#### Changed
+
+- temporarily disable the guard for set_daily_reserve_transfer to set it manually
+
 ### [1.0.1] - 2024-05-10
 
 #### Fixed
