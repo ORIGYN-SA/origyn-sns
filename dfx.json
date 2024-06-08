@@ -97,6 +97,18 @@
         "env_override": null,
         "output": "backend/canisters/super_stats_v3/api/declarations"
       }
+    },
+    "daily_jobs": {
+      "type": "custom",
+      "candid": "backend/canisters/daily_jobs/api/can.did",
+      "optimize": "cycles",
+      "package": "daily_jobs",
+      "wasm": "backend/canisters/daily_jobs/target/wasm32-unknown-unknown/release/daily_jobs.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/daily_jobs/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",

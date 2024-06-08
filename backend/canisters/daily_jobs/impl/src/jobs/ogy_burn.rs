@@ -1,5 +1,6 @@
 use candid::Nat;
 use canister_time::{ run_now_then_interval, timestamp_nanos };
+use daily_jobs_api::BurnJobResult;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferArg };
 use std::time::Duration;
 use tracing::{ debug, error };
@@ -36,7 +37,12 @@ pub async fn send_ogy_to_burn_account() {
 
     match icrc_ledger_canister_c2c_client::icrc1_transfer(ledger_canister_id, &args).await {
         Ok(Ok(transfer_block_index)) => {
+            let job_result = BurnJobResult {
+                timestamp: timestamp_nanos(),
+                block_height: transfer_block_index,
+            };
             mutate_state(|state| {
+                state.data.burn_jobs_results.push(job_result);
                 state.data.jobs_info.last_ogy_burn_timestamp = timestamp_nanos();
             });
         }

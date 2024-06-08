@@ -1,5 +1,6 @@
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
+use daily_jobs_api::BurnJobResult;
 use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -55,7 +56,6 @@ pub struct CanisterInfo {
 pub struct JobsInfo {
     pub last_ogy_burn_timestamp: TimestampMillis,
 }
-
 #[derive(Serialize, Deserialize)]
 pub struct Data {
     /// SNS ledger canister
@@ -66,6 +66,8 @@ pub struct Data {
     pub daily_burn_amount: u64,
     /// Jobs info
     pub jobs_info: JobsInfo,
+    /// Vector to hold jobs results
+    pub burn_jobs_results: Vec<BurnJobResult>,
 }
 
 impl Data {
@@ -79,6 +81,7 @@ impl Data {
             burn_account,
             daily_burn_amount,
             jobs_info: JobsInfo::default(),
+            burn_jobs_results: Vec::new(),
         }
     }
 }

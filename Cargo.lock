@@ -1135,6 +1135,7 @@ version = "0.1.0"
 dependencies = [
  "candid 0.10.6",
  "canister_time",
+ "daily_jobs_api",
  "hex",
  "ic-cdk 0.13.2",
  "ic-ledger-types",

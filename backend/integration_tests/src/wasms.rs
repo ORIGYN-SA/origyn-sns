@@ -13,6 +13,7 @@ lazy_static! {
     pub static ref OGY_TOKEN_SWAP: CanisterWasm = get_internal_canister_wasm("ogy_token_swap");
     pub static ref REWARDS: CanisterWasm = get_internal_canister_wasm("sns_rewards");
     pub static ref SUPER_STATS_V3: CanisterWasm = get_internal_canister_wasm("super_stats_v3");
+    pub static ref DAILY_JOBS: CanisterWasm = get_internal_canister_wasm("daily_jobs");
 }
 
 fn get_internal_canister_wasm(canister: &str) -> Vec<u8> {
