@@ -69,8 +69,8 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
     let daily_jobs_init_args = DailyJobsInitArgs {
         test_mode: true,
         ledger_canister_id: ogy_ledger_canister_id,
-        burn_account: Principal::from_text("aaaaa-aa").unwrap(),
-        daily_burn_amount: 1645 * E8S_PER_OGY,
+        burn_principal_id: controller,
+        daily_burn_amount: 1_000_000 * E8S_PER_OGY,
     };
 
     install_canister(

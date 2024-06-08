@@ -30,7 +30,7 @@ impl RuntimeState {
             jobs_info: self.data.jobs_info,
             daily_burn_amount: self.data.daily_burn_amount,
             ledger_canister_id: self.data.ledger_canister_id,
-            burn_account: self.data.burn_account,
+            burn_principal_id: self.data.burn_principal_id,
         }
     }
 }
@@ -41,7 +41,7 @@ pub struct Metrics {
     pub ledger_canister_id: Principal,
     pub jobs_info: JobsInfo,
     pub daily_burn_amount: u64,
-    pub burn_account: Principal,
+    pub burn_principal_id: Principal,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -61,7 +61,7 @@ pub struct Data {
     /// SNS ledger canister
     pub ledger_canister_id: Principal,
     /// The burning target account
-    pub burn_account: Principal,
+    pub burn_principal_id: Principal,
     /// The burning amount
     pub daily_burn_amount: u64,
     /// Jobs info
@@ -73,12 +73,12 @@ pub struct Data {
 impl Data {
     pub fn new(
         ledger_canister_id: CanisterId,
-        burn_account: Principal,
+        burn_principal_id: Principal,
         daily_burn_amount: u64
     ) -> Self {
         Self {
             ledger_canister_id,
-            burn_account,
+            burn_principal_id,
             daily_burn_amount,
             jobs_info: JobsInfo::default(),
             burn_jobs_results: Vec::new(),

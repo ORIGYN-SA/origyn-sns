@@ -6,6 +6,6 @@ use types::CanisterId;
 pub struct InitArgs {
     pub test_mode: bool,
     pub ledger_canister_id: CanisterId,
-    pub burn_account: Principal,
+    pub burn_principal_id: Principal,
     pub daily_burn_amount: u64,
 }

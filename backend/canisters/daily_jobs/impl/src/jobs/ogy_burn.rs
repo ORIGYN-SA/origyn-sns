@@ -1,5 +1,5 @@
 use candid::Nat;
-use canister_time::{ run_now_then_interval, timestamp_nanos };
+use canister_time::{ run_now_then_interval, timestamp_nanos, DAY_IN_MS };
 use daily_jobs_api::BurnJobResult;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferArg };
 use std::time::Duration;
@@ -7,7 +7,7 @@ use tracing::{ debug, error };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
-const OGY_BURN_JOB_INTERVAL: Milliseconds = 3_600 * 1_000;
+const OGY_BURN_JOB_INTERVAL: Milliseconds = DAY_IN_MS;
 
 pub fn start_job() {
     debug!("Starting the job to burn OGY...");
@@ -20,13 +20,13 @@ pub fn run() {
 
 pub async fn send_ogy_to_burn_account() {
     let ledger_canister_id = read_state(|state| state.data.ledger_canister_id);
-    let burn_account = read_state(|state| state.data.ledger_canister_id);
+    let burn_principal = read_state(|state| state.data.burn_principal_id);
     let daily_burn_amount = read_state(|state| state.data.daily_burn_amount);
 
     let args = TransferArg {
         from_subaccount: None,
         to: Account {
-            owner: burn_account,
+            owner: burn_principal,
             subaccount: None,
         },
         amount: Nat::from(daily_burn_amount),

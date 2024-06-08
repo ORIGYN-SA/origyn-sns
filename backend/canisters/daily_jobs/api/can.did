@@ -1,8 +1,8 @@
 type BurnJobResult = record { timestamp : nat64; block_height : nat };
 type InitArgs = record {
-  burn_account : principal;
   test_mode : bool;
   daily_burn_amount : nat64;
   ledger_canister_id : principal;
+  burn_principal_id : principal;
 };
 service : (InitArgs) -> { get_burn_history : () -> (vec BurnJobResult) query }
