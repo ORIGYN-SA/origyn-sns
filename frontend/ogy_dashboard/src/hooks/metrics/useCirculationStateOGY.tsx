@@ -8,7 +8,7 @@ import { useCanister } from "@amerej/connect2ic-react";
 import fetchSupplyDataOGY from "@services/queries/metrics/fetchSupplyDataOGY";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
-import { TokenSupplyData, WalletOverview } from "@services/types/token_metrics";
+import { TokenSupplyData } from "@services/types/token_metrics";
 import fetchFoundationAssetsOGY from "@services/queries/metrics/fetchFoundationAssetsOGY";
 
 interface ICirculationStateOGY {
@@ -43,7 +43,7 @@ const useCirculationStateOGY = () => {
     isLoading: isLoadingReserve,
     isError: isErrorReserve,
     error: errorReserve,
-  }: UseQueryResult<WalletOverview> = useQuery({
+  }: UseQueryResult<{ total_locked: number }> = useQuery({
     queryKey: ["foundationAssets"],
     queryFn: () =>
       fetchFoundationAssetsOGY({
@@ -58,8 +58,7 @@ const useCirculationStateOGY = () => {
     if (isSuccessAll && data && dataReserve) {
       const totalSupply = Number(divideBy1e8(data.total_supply));
       const circulatingSupply = Number(divideBy1e8(data.circulating_supply));
-      const governance = dataReserve.governance;
-      const totalLocked = divideBy1e8(governance.total_staked);
+      const totalLocked = dataReserve.total_locked;
 
       setFoundationReserve({
         number: {
