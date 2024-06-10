@@ -19,6 +19,7 @@ import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
+import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
@@ -112,8 +113,12 @@ const router = createBrowserRouter([
                 element: <TransactionsDetails />,
               },
               {
-                path: "/explorer/transactions/accounts/:id",
+                path: "/explorer/transactions/accounts/:accountId",
                 element: <TransactionsAccountsDetails />,
+              },
+              {
+                path: "/explorer/transactions/accounts/:accountId/history",
+                element: <TransactionsAccountHistory />,
               },
             ],
           },
