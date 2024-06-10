@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import List from "@pages/transactions/transactions-account-list";
 
@@ -21,8 +21,13 @@ const TxHistory = () => {
             Transactions history
           </h1>
           <p className="mt-6 text-content/60">
-            List of transactions history for the account{" "}
-            <span className="font-semibold">{params.accountId}</span>
+            List of transactions history for the account
+            <span className="font-semibold">
+              <Link className="text-accent hover:underline" to={`/account`}>
+                {" "}
+                {params.accountId}
+              </Link>
+            </span>
           </p>
         </div>
       </div>
