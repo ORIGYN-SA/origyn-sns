@@ -61,12 +61,12 @@ export const formatTimestampDifference = (timestamp: number) => {
   ]);
 
   const units: { unit: keyof DurationObjectUnits; label: string }[] = [
-    { unit: "years", label: "Year" },
-    { unit: "months", label: "Month" },
-    { unit: "days", label: "Day" },
-    { unit: "hours", label: "Hour" },
-    { unit: "minutes", label: "Minute" },
-    { unit: "seconds", label: "Second" },
+    { unit: "years", label: "year" },
+    { unit: "months", label: "month" },
+    { unit: "days", label: "day" },
+    { unit: "hours", label: "hour" },
+    { unit: "minutes", label: "minute" },
+    { unit: "seconds", label: "second" },
   ];
   const formattedDifference = units.find(({ unit }) => difference[unit]);
   return formattedDifference
