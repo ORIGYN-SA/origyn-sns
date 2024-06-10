@@ -5,3 +5,5 @@
     - docker
     # - big
   image: registry.bochslerfinance.com/runners-images/dfinity-canisters/rust-dfinity-build-ci:latest@sha256:b59632605ba16b53d32d84d2934f46abfcdf56c59a1da45e0a1384bf7bb831db
+    before_script:
+    - rust --version 
