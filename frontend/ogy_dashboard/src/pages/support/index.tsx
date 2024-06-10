@@ -106,7 +106,7 @@ const Support = () => {
                   />
                 </div>
                 <div className="my-8 px-12">
-                  <label htmlFor="amount">Description</label>
+                  <label htmlFor="description">Description</label>
                   <InputField
                     id="description"
                     type="text"
