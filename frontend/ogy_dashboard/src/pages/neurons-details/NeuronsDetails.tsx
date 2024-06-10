@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { Card, LoaderSpin, Badge } from "@components/ui";
+import { Card, LoaderSpin, Badge, Tooltip } from "@components/ui";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useNeuron from "@hooks/neurons/useNeuron";
 
 export const NeuronsDetails = () => {
@@ -23,7 +24,7 @@ export const NeuronsDetails = () => {
 
   return (
     <div className="container mx-auto py-16">
-      <div className="flex flex-col xl:flex-row items-center justify-between mb-8">
+      <div className="flex flex-col xl:flex-row items-center xl:items-end justify-between mb-8">
         <div className="flex flex-col xl:flex-row xl:justify-center items-center gap-4 xl:gap-8">
           <ArrowLeftIcon
             className="h-8 w-8 hover:cursor-pointer"
@@ -34,7 +35,18 @@ export const NeuronsDetails = () => {
             <div className="text-3xl font-bold mb-4 xl:mb-0">OGY Neuron</div>
           </div>
         </div>
-        {/* <div>Principal ID: 8329839839283982</div> */}
+        <div className="flex ml-4 items-center truncate text-sm max-w-96 bg-surface-2 rounded-full py-2 px-4">
+          <div className="mr-2 shrink-0 font-semibold">Neuron ID: </div>
+          <div
+            className="truncate"
+            data-tooltip-id="tooltip"
+            data-tooltip-content={searchParams.get("id")}
+          >
+            {searchParams.get("id")}
+          </div>
+
+          <CopyToClipboard value={searchParams.get("id") as string} />
+        </div>
       </div>
       {isSuccessGetNeuron && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -78,6 +90,7 @@ export const NeuronsDetails = () => {
           <div>{errorGetNeuron?.message}</div>
         </div>
       )}
+      <Tooltip id="tooltip" />
     </div>
   );
 };
