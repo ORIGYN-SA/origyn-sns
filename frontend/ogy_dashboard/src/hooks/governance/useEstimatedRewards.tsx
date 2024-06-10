@@ -22,7 +22,7 @@ const useEstimatedRewards = () => {
   const [estimatedRewards, setEstimatedRewards] = useState<
     IEstimatedReward[] | null
   >(null);
-  const REWARD_RATE = 0.25;
+  const REWARD_RATE_OGY = 250000000;
   const STEPS = [1, 1.25, 1.5, 1.75, 2];
   const STEPS_LENGTH = 5;
 
@@ -50,21 +50,24 @@ const useEstimatedRewards = () => {
         divideBy1e8(data.four_years),
         divideBy1e8(data.five_years),
       ];
-      const totalLocked = staked.reduce(
+      const totalVotingPower = staked.reduce(
         (accumulator, currentValue, index) =>
           accumulator + currentValue * STEPS[index],
         0
       );
+      const REWARD_RATE = REWARD_RATE_OGY / Number(totalVotingPower);
+
       setEstimatedRewards(
-        staked.map((d: number, index: number) => {
+        STEPS.map((step: number, index: number) => {
           const result = {
             value: index + 1,
             label: ``,
             rate: `${(
-              Math.round(STEPS[index] * (REWARD_RATE * Number(totalLocked))) /
-              10000000
+              ((REWARD_RATE_OGY * step) / totalVotingPower) *
+              REWARD_RATE *
+              100
             ).toFixed(1)} %`,
-            locked: roundAndFormatLocale({ number: d }),
+            locked: roundAndFormatLocale({ number: staked[index] }),
             lockedSum:
               index < STEPS_LENGTH - 1
                 ? roundAndFormatLocale({
