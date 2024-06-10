@@ -25,7 +25,7 @@ const AvailableOGY = () => {
       <div className="flex justify-between mb-4">
         <div className="font-bold text-content/60">Available OGY</div>
         <Link
-          className="text-accent hover:underline"
+          className="text-accent"
           to={`/explorer/transactions/accounts/${principal}/history`}
         >
           Transaction history
