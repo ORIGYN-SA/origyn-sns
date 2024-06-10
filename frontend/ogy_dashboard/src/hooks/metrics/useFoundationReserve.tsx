@@ -6,9 +6,8 @@ import {
 } from "@tanstack/react-query";
 import { useCanister } from "@amerej/connect2ic-react";
 import fetchFoundationAssetsOGY from "@services/queries/metrics/fetchFoundationAssetsOGY";
-import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
+import { roundAndFormatLocale } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
-import { WalletOverview } from "@services/types/token_metrics";
 
 interface IFoundationReserve {
   number: {
@@ -37,7 +36,12 @@ const useOGYCirculationState = () => {
     isLoading,
     isError,
     error,
-  }: UseQueryResult<WalletOverview> = useQuery({
+  }: UseQueryResult<{
+    total: number;
+    total_locked: number;
+    total_unlocked: number;
+    total_staked: number;
+  }> = useQuery({
     queryKey: ["foundationAssets"],
     queryFn: () =>
       fetchFoundationAssetsOGY({
@@ -48,12 +52,10 @@ const useOGYCirculationState = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      const governance = data.governance;
-
-      const totalSupply = divideBy1e8(data.total);
-      const totalSupplyLocked = divideBy1e8(governance.total_staked);
-      const totalSupplyUnlocked = divideBy1e8(governance.total_unlocked);
-      const totalStaked = divideBy1e8(governance.total_staked);
+      const totalSupply = data.total;
+      const totalSupplyLocked = data.total_locked;
+      const totalSupplyUnlocked = data.total - data.total_locked;
+      const totalStaked = data.total_staked;
 
       setFoundationReserve({
         number: {
