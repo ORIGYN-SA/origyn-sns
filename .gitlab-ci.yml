@@ -108,10 +108,16 @@ rust lint:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "Cargo.{lock,toml}"
-        - "backend/canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_OPEN_MERGE_REQUESTS
       when: never
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_COMMIT_REF_NAME == "develop"
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   extends: .rust template
   script:
     - cargo clippy

@@ -37,6 +37,10 @@ $[[ inputs.src-folder ]] generate declaration:
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
       needs:
         - "$[[ inputs.src-folder ]] canister build"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
   script:
     - dfx generate $[[ inputs.src-folder ]]
   artifacts:
