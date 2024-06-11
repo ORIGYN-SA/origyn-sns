@@ -1,16 +1,7 @@
-FROM rust:slim-bookworm@sha256:de22cea71b620c7fdc61e8c1bf3f048d0ffbafe062ca9d7b32aed6a7d59109a4
+FROM registry.bochslerfinance.com/runners-images/dfinity-canisters/rust-dfinity-build-ci:latest@sha256:b59632605ba16b53d32d84d2934f46abfcdf56c59a1da45e0a1384bf7bb831db
 
 # Default value, will be overwritten at runtime if `-e CANISTER_NAME=$CANISTER_NAME` is set
 ENV CANISTER_NAME=ogy_token_swap
-
-RUN apt update > /dev/null && \
-    apt install -y wget build-essential pkg-config libssl-dev > /dev/null
-RUN rustup component add clippy
-RUN rustup target add wasm32-unknown-unknown
-RUN mkdir -pv .cargo
-RUN cargo install -q --root .cargo ic-wasm@0.5.0 candid-extractor cargo-tarpaulin
-
-ENV PATH="/.cargo/bin:$PATH"
 
 COPY . /builds/origyn/origyn-sns
 
