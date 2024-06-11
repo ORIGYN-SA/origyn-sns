@@ -4,6 +4,7 @@ import { ArrowLeftIcon, UserIcon } from "@heroicons/react/20/solid";
 import { Card, Tile, Tooltip, LoaderSpin } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useFetchOneTransaction from "@hooks/transactions/useFetchOneTransaction";
+import getBadgeTransactionKind from "@helpers/badge/getBadgeTransactionKind";
 
 export const TransactionsDetails = () => {
   const navigate = useNavigate();
@@ -61,9 +62,7 @@ export const TransactionsDetails = () => {
                         {data.index}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between border border-border rounded-full py-2 px-6 font-semibold">
-                      {data.formatted.kind}
-                    </div>
+                    {getBadgeTransactionKind(data.kind as string)}
                   </div>
                   <div className="flex flex-col gap-4">
                     <div className="mt-12 flex items-center justify-between bg-surface-2 rounded-full py-1 px-1">
@@ -75,18 +74,24 @@ export const TransactionsDetails = () => {
                           <div className="flex items-center text-center truncate pr-4">
                             <div className="flex ml-4 items-center truncate text-sm max-w-96">
                               <div className="mr-2 shrink-0">From: </div>
-
-                              <div
-                                className="truncate"
-                                data-tooltip-id="tooltip_principal_id"
-                                data-tooltip-content={data.from_account}
-                              >
-                                {data.from_account}
-                              </div>
-                              <Tooltip id="tooltip_principal_id" />
-                              <CopyToClipboard
-                                value={data.from_account as string}
-                              />
+                              {data.kind && data.kind === "mint" && (
+                                <div> Minting account</div>
+                              )}
+                              {data.kind && data.kind !== "mint" && (
+                                <>
+                                  <div
+                                    className="truncate"
+                                    data-tooltip-id="tooltip_principal_id"
+                                    data-tooltip-content={data.from_account}
+                                  >
+                                    {data.from_account}
+                                  </div>
+                                  <Tooltip id="tooltip_principal_id" />
+                                  <CopyToClipboard
+                                    value={data.from_account as string}
+                                  />
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -101,16 +106,23 @@ export const TransactionsDetails = () => {
                           <div className="flex items-center truncate pr-4">
                             <div className="flex ml-4 items-center truncate text-sm max-w-96">
                               <div className="mr-2 shrink-0">To: </div>
-                              <div
-                                className="truncate"
-                                data-tooltip-id="tooltip"
-                                data-tooltip-content={data.to_account}
-                              >
-                                {data.to_account}
-                              </div>
-                              <CopyToClipboard
-                                value={data.to_account as string}
-                              />
+                              {data.kind && data.kind === "burn" && (
+                                <div> Minting account</div>
+                              )}
+                              {data.kind && data.kind !== "burn" && (
+                                <>
+                                  <div
+                                    className="truncate"
+                                    data-tooltip-id="tooltip"
+                                    data-tooltip-content={data.to_account}
+                                  >
+                                    {data.to_account}
+                                  </div>
+                                  <CopyToClipboard
+                                    value={data.to_account as string}
+                                  />
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>

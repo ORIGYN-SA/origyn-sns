@@ -21,13 +21,8 @@ const TxHistory = () => {
             Transactions history
           </h1>
           <p className="mt-6 text-content/60">
-            List of transactions history for the account
-            <span className="font-semibold">
-              <Link className="text-accent" to={`/account`}>
-                {" "}
-                {params.accountId}
-              </Link>
-            </span>
+            List of transactions history for account
+            <span className="font-semibold"> {params.accountId}</span>
           </p>
         </div>
       </div>

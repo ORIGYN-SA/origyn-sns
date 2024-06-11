@@ -13,7 +13,11 @@ const fetchOneAccountTransactions = async ({
   total_transactions: number;
 }> => {
   const { id, desc } = sorting[0];
-  const sort = desc ? `&sort_by=-${id}` : `&sort_by=${id}`;
+  const indexSort =
+    id === "kind" || id === "timestamp" || id === "amount" ? ",-index" : "";
+  const sort = desc
+    ? `&sort_by=-${id}${indexSort}`
+    : `&sort_by=${id}${indexSort}`;
   const { data } = await icrcAPI.get(
     `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}${sort}`
   );

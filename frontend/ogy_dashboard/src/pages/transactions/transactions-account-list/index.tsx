@@ -9,6 +9,7 @@ import { Transaction } from "@services/types/transactions.types";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { TableProps } from "@helpers/table/useTable";
+import getBadgeTransactionKind from "@helpers/badge/getBadgeTransactionKind";
 
 const TransactionsAccountList = ({
   pagination,
@@ -34,6 +35,23 @@ const TransactionsAccountList = ({
         },
       },
       {
+        accessorKey: "amount",
+        id: "amount",
+        cell: (info) =>
+          roundAndFormatLocale({
+            number: divideBy1e8(parseInt(info.getValue())),
+          }),
+        header: "Amount",
+      },
+      {
+        accessorKey: "kind",
+        id: "kind",
+        cell: ({ getValue }) => (
+          <div>{getBadgeTransactionKind(getValue())}</div>
+        ),
+        header: "Type",
+      },
+      {
         accessorKey: "timestamp",
         id: "timestamp",
         cell: (info) => (
@@ -51,16 +69,23 @@ const TransactionsAccountList = ({
         accessorKey: "from_account",
         id: "from_account",
         cell: (info) => (
-          <div className="flex items-center max-w-sm">
-            <button
-              onClick={() => handleClickView(info)}
-              data-tooltip-id="tooltip_from_account"
-              data-tooltip-content={info.getValue()}
-              className="mr-2 truncate"
-            >
-              {info.getValue()}
-            </button>
-            <CopyToClipboard value={info.getValue()} />
+          <div className="flex items-center max-w-72">
+            {info.getValue() && info.getValue() === "Minting account" && (
+              <div> {info.getValue()}</div>
+            )}
+            {info.getValue() && info.getValue() !== "Minting account" && (
+              <>
+                <button
+                  onClick={() => handleClickView(info)}
+                  data-tooltip-id="tooltip_from_account"
+                  data-tooltip-content={info.getValue()}
+                  className="mr-2 truncate"
+                >
+                  {info.getValue()}
+                </button>
+                <CopyToClipboard value={info.getValue()} />
+              </>
+            )}
           </div>
         ),
         header: "From",
@@ -70,41 +95,39 @@ const TransactionsAccountList = ({
         accessorKey: "to_account",
         id: "to_account",
         cell: (info) => (
-          <div className="flex items-center max-w-sm">
-            <button
-              onClick={() => handleClickView(info)}
-              data-tooltip-id="tooltip_to_account"
-              data-tooltip-content={info.getValue()}
-              className="truncate"
-            >
-              {info.getValue()}
-            </button>
-            <CopyToClipboard value={info.getValue()} />
+          <div className="flex items-center max-w-72">
+            {info.getValue() && info.getValue() === "Minting account" && (
+              <div> {info.getValue()}</div>
+            )}
+            {info.getValue() && info.getValue() !== "Minting account" && (
+              <>
+                <button
+                  onClick={() => handleClickView(info)}
+                  data-tooltip-id="tooltip_to_account"
+                  data-tooltip-content={info.getValue()}
+                  className="truncate"
+                >
+                  {info.getValue()}
+                </button>
+                <CopyToClipboard value={info.getValue()} />
+              </>
+            )}
           </div>
         ),
         header: "To",
         enableSorting: false,
       },
-      {
-        accessorKey: "amount",
-        id: "amount",
-        cell: (info) =>
-          roundAndFormatLocale({
-            number: divideBy1e8(parseInt(info.getValue())),
-          }),
-        header: "Amount",
-      },
-      {
-        accessorKey: "fee",
-        id: "fee",
-        cell: (info) =>
-          roundAndFormatLocale({
-            number: divideBy1e8(parseInt(info.getValue())),
-            decimals: 3,
-          }),
-        header: "Fee",
-        enableSorting: false,
-      },
+      // {
+      //   accessorKey: "fee",
+      //   id: "fee",
+      //   cell: (info) =>
+      //     roundAndFormatLocale({
+      //       number: divideBy1e8(parseInt(info.getValue())),
+      //       decimals: 3,
+      //     }),
+      //   header: "Fee",
+      //   enableSorting: false,
+      // },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
