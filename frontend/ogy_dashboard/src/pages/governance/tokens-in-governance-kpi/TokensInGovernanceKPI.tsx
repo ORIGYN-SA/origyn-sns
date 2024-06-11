@@ -46,7 +46,7 @@ const TokensInGovernanceKPI = ({ className }: TokensInGovernanceKPIProps) => {
                 href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-content font-semibold hover:underline"
+                className="text-content font-semibold"
               >
                 Please read token economy v3
               </a>

@@ -1,13 +1,14 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { fetchAllTransactions } from "@services/queries/transactions/fetchAllTransactions";
+import fetchOneAccountTransactions from "@services/queries/transactions/fetchOneAccountTransactions";
 import { ListParams } from "@services/types/list.params.types";
 import { timestampToDateShort } from "@helpers/dates";
 
-const useFetchAllTransactions = ({
-  limit = 20,
+const useFetchOneAccountTransactions = ({
+  limit = 10,
   offset = 0,
   sorting = [{ id: "index", desc: true }],
-}: ListParams) => {
+  accountId,
+}: ListParams & { accountId: string }) => {
   const {
     data: transactions,
     isSuccess: isSuccessFetchAllTransactions,
@@ -15,8 +16,15 @@ const useFetchAllTransactions = ({
     isLoading: isLoadingFetchAllTransactions,
     error: errorFetchAllTransactions,
   } = useQuery({
-    queryKey: ["fetchAllTransactions", limit, offset, sorting],
-    queryFn: () => fetchAllTransactions({ limit, offset, sorting }),
+    queryKey: [
+      "fetchOneAccountTransactions",
+      limit,
+      offset,
+      sorting,
+      accountId,
+    ],
+    queryFn: () =>
+      fetchOneAccountTransactions({ limit, offset, sorting, accountId }),
     placeholderData: keepPreviousData,
   });
 
@@ -62,4 +70,4 @@ const useFetchAllTransactions = ({
   };
 };
 
-export default useFetchAllTransactions;
+export default useFetchOneAccountTransactions;

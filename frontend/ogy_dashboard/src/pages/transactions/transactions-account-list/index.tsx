@@ -3,20 +3,21 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
-import { Table, Tooltip, Badge } from "@components/ui";
-import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
+import { Table, Tooltip, Badge, LoaderSpin } from "@components/ui";
+import useFetchOneAccountTransactions from "@hooks/transactions/useFetchOneAccountTransactions";
 import { Transaction } from "@services/types/transactions.types";
-import { TableProps } from "@helpers/table/useTable";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { TableProps } from "@helpers/table/useTable";
 import getBadgeTransactionKind from "@helpers/badge/getBadgeTransactionKind";
 
-const TransactionsList = ({
+const TransactionsAccountList = ({
   pagination,
   setPagination,
   sorting,
   setSorting,
-}: TableProps) => {
+  accountId,
+}: TableProps & { accountId: string | undefined }) => {
   const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Transaction>[]>(
     () => [
@@ -132,10 +133,17 @@ const TransactionsList = ({
     []
   );
 
-  const { data: transactions, isSuccess } = useFetchAllTransactions({
+  const {
+    data: transactions,
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+  } = useFetchOneAccountTransactions({
     limit: pagination.pageSize,
     offset: pagination.pageSize * pagination.pageIndex,
     sorting,
+    accountId,
   });
 
   const handleClickView = (cell: CellContext<Transaction, unknown>) => {
@@ -150,7 +158,7 @@ const TransactionsList = ({
   };
 
   return (
-    <div>
+    <>
       {isSuccess && (
         <Table
           columns={columns}
@@ -161,10 +169,20 @@ const TransactionsList = ({
           setSorting={setSorting}
         />
       )}
+      {isLoading && (
+        <div className="flex items-center justify-center h-40">
+          <LoaderSpin size="xl" />
+        </div>
+      )}
+      {isError && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{error?.message}</div>
+        </div>
+      )}
       <Tooltip id="tooltip_from_account" />
       <Tooltip id="tooltip_to_account" />
-    </div>
+    </>
   );
 };
 
-export default TransactionsList;
+export default TransactionsAccountList;

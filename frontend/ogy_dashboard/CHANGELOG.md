@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.6] - 2024-06-11
+
+#### Fix
+
+- Improve display footer notice.
+- Transactions table accounts columns display.
+
+#### Added
+
+- How to swap link on account page.
+- Transaction history page for all accounts and user account.
+- Transaction type in table transactions and transaction details.
+- Clickable account in table token distribution on Home page.
+- NNS Proposal link to chart's tooltip OGY circulation state on page dashboard.
+
 ### [1.0.5] - 2024-06-10
 
 #### Fix

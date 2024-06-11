@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Table, Tooltip, Skeleton } from "@components/ui";
@@ -14,6 +15,7 @@ const TokenDistributionList = ({
   sorting,
   setSorting,
 }: TableProps) => {
+  const navigate = useNavigate();
   const columns = useMemo<ColumnDef<IProposalData>[]>(
     () => [
       {
@@ -26,7 +28,13 @@ const TokenDistributionList = ({
               data-tooltip-content={getValue()}
               className="mr-2 truncate"
             >
-              {getValue()}
+              <button
+                onClick={() =>
+                  navigate(`/explorer/transactions/accounts/${getValue()}`)
+                }
+              >
+                {getValue()}
+              </button>
             </div>
             <CopyToClipboard value={getValue()} />
           </div>
@@ -72,6 +80,7 @@ const TokenDistributionList = ({
       //   ),
       // },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
