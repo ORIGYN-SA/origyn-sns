@@ -1,146 +1,146 @@
-# spec:
-#   inputs:
-#     src-folder:
-#       description: Name of the source folder, should be the same as the canister's cargo package name.
-#       options: ["ogy_token_swap", "sns_rewards", "super_stats_v3", "token_metrics"]
-# ---
+spec:
+  inputs:
+    src-folder:
+      description: Name of the source folder, should be the same as the canister's cargo package name.
+      options: ["ogy_token_swap", "sns_rewards", "super_stats_v3", "token_metrics"]
+---
 # Rust canisters test and production builds
 
-# $[[ inputs.src-folder ]] test build:
-  # stage: build
-  # # needs: $[[ inputs.src-folder ]] tests
-  # rules:
-  #   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  #     changes:
-  #       - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-  #       - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-  #       - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-  # extends: .rust template
-  # script:
-  #   - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
-  #   - scripts/generate-did.sh $[[ inputs.src-folder ]]
-  #   - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
-  #   - ic-wasm backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm info
-  # artifacts:
-  #   name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-TEST_BUILD"
-  #   paths:
-  #     - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
-  #     - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
-  #   expire_in: 1 day
-
-build test template: &build_test_template
+$[[ inputs.src-folder ]] test build:
   stage: build
+  # needs: $[[ inputs.src-folder ]] tests
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   extends: .rust template
   script:
-    - scripts/build-canister.sh --wasmonly $SRC_FOLDER
-    - scripts/generate-did.sh $SRC_FOLDER
-    - scripts/build-canister.sh --checksum $SRC_FOLDER
-    - ic-wasm backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release/$SRC_FOLDER_canister.wasm info
+    - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
+    - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
+    - ic-wasm backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm info
   artifacts:
-    name: "$SRC_FOLDER-${CI_COMMIT_SHORT_SHA}-wasm-TEST_BUILD"
+    name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-TEST_BUILD"
     paths:
-      - backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release
-      - backend/canisters/$SRC_FOLDER/api/can.did
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 1 day
 
-ogy_token_swap test build:
-  <<: *build_test_template
-  variables:
-    SRC_FOLDER: ogy_token_swap
-
-sns_rewards test build:
-  <<: *build_test_template
-  variables:
-    SRC_FOLDER: sns_rewards
-
-super_stats_v3 test build:
-  <<: *build_test_template
-  variables:
-    SRC_FOLDER: super_stats_v3
-
-token_metrics test build:
-  <<: *build_test_template
-  variables:
-    SRC_FOLDER: token_metrics
-
-
-# $[[ inputs.src-folder ]] canister build:
+# build test template: &build_test_template
 #   stage: build
 #   rules:
-#     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-#       when: never
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 #       changes:
-#         - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#         - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#         - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#     - if: $CI_COMMIT_REF_NAME == "develop" 
-#       changes:
-#         - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#         - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#         - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#     - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/')
+#         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
 #   extends: .rust template
 #   script:
-#     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
-#     - scripts/generate-did.sh $[[ inputs.src-folder ]]
-#     - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
+#     - scripts/build-canister.sh --wasmonly $SRC_FOLDER
+#     - scripts/generate-did.sh $SRC_FOLDER
+#     - scripts/build-canister.sh --checksum $SRC_FOLDER
+#     - ic-wasm backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release/$SRC_FOLDER_canister.wasm info
 #   artifacts:
-#     name: "${CI_PROJECT_NAME}-$[[ inputs.src-folder ]]-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm"
+#     name: "$SRC_FOLDER-${CI_COMMIT_SHORT_SHA}-wasm-TEST_BUILD"
 #     paths:
-#       - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
-#       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
-#     expire_in: 6 months
+#       - backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release
+#       - backend/canisters/$SRC_FOLDER/api/can.did
+#     expire_in: 1 day
 
-build  template: &build_template
+# ogy_token_swap test build:
+#   <<: *build_test_template
+#   variables:
+#     SRC_FOLDER: ogy_token_swap
+
+# sns_rewards test build:
+#   <<: *build_test_template
+#   variables:
+#     SRC_FOLDER: sns_rewards
+
+# super_stats_v3 test build:
+#   <<: *build_test_template
+#   variables:
+#     SRC_FOLDER: super_stats_v3
+
+# token_metrics test build:
+#   <<: *build_test_template
+#   variables:
+#     SRC_FOLDER: token_metrics
+
+
+$[[ inputs.src-folder ]] canister build:
   stage: build
   rules:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
       when: never
       changes:
-        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_COMMIT_REF_NAME == "develop" 
       changes:
-        - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "./backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-    - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$SRC_FOLDER-v\d+\.\d+\.\d+$/')
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+    - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/')
   extends: .rust template
   script:
-    - scripts/build-canister.sh --wasmonly $SRC_FOLDER
-    - scripts/generate-did.sh $SRC_FOLDER
-    - scripts/build-canister.sh --checksum $SRC_FOLDER
+    - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
+    - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
   artifacts:
-    name: "${CI_PROJECT_NAME}-$SRC_FOLDER-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm"
+    name: "${CI_PROJECT_NAME}-$[[ inputs.src-folder ]]-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm"
     paths:
-      - backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release
-      - backend/canisters/$SRC_FOLDER/api/can.did
-    expire_in: 1 day
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
+    expire_in: 6 months
 
-ogy_token_swap canister build:
-  <<: *build_template
-  variables:
-    SRC_FOLDER: ogy_token_swap
+# build  template: &build_template
+#   stage: build
+#   rules:
+#     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
+#       when: never
+#       changes:
+#         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#     - if: $CI_COMMIT_REF_NAME == "develop" 
+#       changes:
+#         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#         - "backend/canisters/$SRC_FOLDER/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+#     - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$SRC_FOLDER-v\d+\.\d+\.\d+$/')
+#   extends: .rust template
+#   script:
+#     - scripts/build-canister.sh --wasmonly $SRC_FOLDER
+#     - scripts/generate-did.sh $SRC_FOLDER
+#     - scripts/build-canister.sh --checksum $SRC_FOLDER
+#   artifacts:
+#     name: "${CI_PROJECT_NAME}-$SRC_FOLDER-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm"
+#     paths:
+#       - backend/canisters/$SRC_FOLDER/target/wasm32-unknown-unknown/release
+#       - backend/canisters/$SRC_FOLDER/api/can.did
+#     expire_in: 1 day
 
-sns_rewards canister build:
-  <<: *build_template
-  variables:
-    SRC_FOLDER: sns_rewards
+# ogy_token_swap canister build:
+#   <<: *build_template
+#   variables:
+#     SRC_FOLDER: ogy_token_swap
 
-super_stats_v3 canister build:
-  <<: *build_template
-  variables:
-    SRC_FOLDER: super_stats_v3
+# sns_rewards canister build:
+#   <<: *build_template
+#   variables:
+#     SRC_FOLDER: sns_rewards
 
-token_metrics canister build:
-  <<: *build_template
-  variables:
-    SRC_FOLDER: token_metrics
+# super_stats_v3 canister build:
+#   <<: *build_template
+#   variables:
+#     SRC_FOLDER: super_stats_v3
+
+# token_metrics canister build:
+#   <<: *build_template
+#   variables:
+#     SRC_FOLDER: token_metrics
 
