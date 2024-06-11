@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.5] - 2024-06-10
+
+#### Fix
+
+- Inacurate data for chart OGY foundation reserve on Home page.
+- Inacurate data for estimated rewards on Gorvenance page.
+- Improve display of neuron's data on Neuron table and Neuron details page.
+- Description not sended on contact support form.
+
 ### [1.0.3] - 2024-06-07
 
 #### Added

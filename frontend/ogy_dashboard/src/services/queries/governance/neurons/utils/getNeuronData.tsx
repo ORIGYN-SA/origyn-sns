@@ -1,6 +1,10 @@
 import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import { getCurrentTimestamp } from "@helpers/dates";
+import {
+  getCurrentTimestamp,
+  formatTimestampDifference,
+  formatYearsDifference,
+} from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { INeuronResult, INeuronData, IDissolveState } from "@services/types";
 import { Buffer } from "buffer";
@@ -101,8 +105,14 @@ const getNeuronData = (
   const stakedAmount = divideBy1e8(Number(data.cached_neuron_stake_e8s || 0));
 
   const stakedMaturity = divideBy1e8(
-    Number(stakedMaturityEquivalent !== null ? stakedMaturityEquivalent : 0)
+    Number(
+      stakedMaturityEquivalent !== (null || undefined)
+        ? stakedMaturityEquivalent
+        : 0
+    )
   );
+  const autoStakeMaturity = data.auto_stake_maturity ? "true" : "false";
+
   const votingPower =
     dissolveDelaySeconds >= neuronMinimumDissolveDelayToVoteSeconds
       ? (stakedAmount + stakedMaturity) *
@@ -130,9 +140,7 @@ const getNeuronData = (
       decimals: 1,
     }),
     age,
-    ageToRelativeCalendar: dissolveDelay
-      ? DateTime.fromSeconds(age).toRelativeCalendar()
-      : "-",
+    ageToRelativeCalendar: dissolveDelay ? formatTimestampDifference(age) : "-",
     state,
     votingPower,
     votingPowerToString: votingPower
@@ -141,14 +149,13 @@ const getNeuronData = (
           decimals: 0,
         })
       : "-",
-    dissolveDelay: dissolveDelay
-      ? DateTime.fromSeconds(dissolveDelay).toRelativeCalendar()
-      : "-",
-    createdAt: DateTime.fromSeconds(createdAt).toRelativeCalendar() ?? "",
+    dissolveDelay: dissolveDelay ? formatYearsDifference(dissolveDelay) : "-",
+    createdAt: DateTime.fromSeconds(createdAt).toFormat("ff") ?? "-",
     maxNeuronAgeForAgeBonus,
     maxAgeBonusPercentage: `${dissolveDelayBonus.toFixed(0)} %`,
     ageBonus,
     dissolveDelayBonus: `${dissolveDelayBonus.toFixed(0)} %`,
+    autoStakeMaturity,
   } as INeuronData;
 };
 
