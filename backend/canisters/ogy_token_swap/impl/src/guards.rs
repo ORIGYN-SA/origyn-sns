@@ -6,5 +6,4 @@ pub fn caller_is_authorised_principal() -> Result<(), String> {
     } else {
         Err("Caller is not an authorised principal".to_string())
     }
-    //test update a comment 23
 }
