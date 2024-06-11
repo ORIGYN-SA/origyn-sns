@@ -14,7 +14,7 @@ $[[ inputs.src-folder ]] test build:
       changes:
         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   extends: .rust template
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
@@ -78,12 +78,12 @@ $[[ inputs.src-folder ]] canister build:
       changes:
         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_COMMIT_REF_NAME == "develop" 
       changes:
         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-        - "backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/')
   extends: .rust template
   script:

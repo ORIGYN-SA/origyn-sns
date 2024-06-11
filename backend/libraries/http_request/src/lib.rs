@@ -16,7 +16,6 @@ pub fn build_json_response<T: Serialize>(body: &T) -> HttpResponse {
 
 pub fn build_response(body: Vec<u8>, content_type: impl Into<String>) -> HttpResponse {
     HttpResponse {
-        // test
         status_code: 200,
         headers: vec![
             HeaderField("Content-Type".to_string(), content_type.into()),
