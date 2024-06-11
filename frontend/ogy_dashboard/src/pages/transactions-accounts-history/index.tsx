@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import List from "@pages/transactions/transactions-account-list";
 
