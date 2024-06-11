@@ -1,0 +1,56 @@
+// ========第七屏===========
+.roadmpSection2 {
+    background: var(--background4);
+    background-size: cover;
+
+    .card {
+        margin: 0 auto;
+        width: 850px;
+        border-radius: 20px;
+        color: #000;
+        background: rgba(255, 255, 255, 0.1);
+        margin-bottom: 20px;
+        position: relative;
+
+        .cardTitle {
+            padding: 20px 40px;
+        }
+
+        .cardIcon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transition: all 0.4s ease-out;
+        }
+
+        .cardContent {
+            height: 0;
+            opacity: 0;
+            padding: 0px 40px;
+            transition: all 0.7s ease-out;
+        }
+
+        .cardText {
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+    }
+
+    .active {
+        .cardIcon {
+            transition: all 0.4s ease-in-out;
+            transform: rotate(180deg);
+        }
+
+        .cardContent {
+            height: 150px;
+            opacity: 1;
+            transition: all 0.2s ease-in;
+        }
+
+        .cardText {
+            opacity: 1;
+            transition: all 0.6s ease-in;
+        }
+    }
+}

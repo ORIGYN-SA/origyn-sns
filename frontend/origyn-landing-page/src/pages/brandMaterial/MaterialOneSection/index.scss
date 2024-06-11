@@ -1,0 +1,13 @@
+// ========第二屏===========
+.materialSection1 {
+    font-family: Montserrat-Bold;
+
+    .titleLinear {
+        display: inline-block;
+        background: var(--background1);
+        background-size: 100% 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

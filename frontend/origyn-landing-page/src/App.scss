@@ -1,0 +1,285 @@
+#root {
+    /* max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem; */
+    text-align: center;
+    font-family: Montserrat;
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+.read-the-docs {
+    color: #888;
+}
+
+:root {
+    --color-black: #000000;
+    --color-dark: #272727;
+    --color-gray-dark: #252d29;
+    --color-gray: #636363;
+    --color-gray-medium: #767270;
+    --color-lightgray: #e7e6e4;
+    --color-light: #ffffff;
+    --color-white: #ffffff;
+
+    --color-primary: #38f997;
+
+    --color-border: #474747;
+    --color-border-light: rgba(151, 151, 151, 0.225);
+
+    --color-text: var(--color-gray-dark);
+    --color-text-light: var(--color-light);
+
+    --alert-error: #ff1818;
+    --alert-success: var(--color-primary);
+
+    --animation-primary: 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+    --animation-fast: 0.3s cubic-bezier(0.7, 0, 0.3, 1);
+    --animation-smooth: 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+    --animation-slow: 0.9s cubic-bezier(0.7, 0, 0.3, 1);
+
+    --section-padding: 16.6666vh;
+    --container-padding: 7vw;
+    --gap-padding: clamp(1.5em, 4vw, 2.5em);
+
+    --columns: 1;
+    --title-size: 4vw;
+
+    /* 背景 */
+    --background1: url('./assets/bg1.png');
+    --background2: url('./assets/bg2.png');
+    --background3: url('./assets/bg3.png');
+    --background4: url('./assets/bg4.png');
+
+    /* 紫红 */
+    --linear-gradient4: linear-gradient(145deg, #5c2576 0%, #da336c 100%);
+}
+
+.noFixbg {
+    background-color: #fff;
+
+    .bgFix {
+        background: var(--background3);
+        background-size: cover;
+        opacity: 0;
+        transition: all 0.5s ease-in;
+        z-index: 0;
+    }
+    /* 动态设置背景 */
+    section {
+        transition: all 0.5s ease-in;
+    }
+
+    #smooth-wrapper {
+        // background-color: #fff;
+        z-index: 11;
+    }
+}
+
+.changeBg {
+    /* 动态设置背景 */
+    section {
+        background: transparent !important;
+        transition: all 0.5s ease-in;
+    }
+
+    .bgFix {
+        background: var(--background3);
+        background-size: cover;
+        opacity: 1;
+        z-index: 10;
+        transition: all 0.5s ease-in;
+    }
+}
+
+.socialHover {
+    height: 34px;
+    width: 34px;
+    border-radius: 100%;
+    transition: all 0.3s linear;
+
+    &:nth-child(1) {
+        background: url('./assets/common1.png');
+        background-size: 100% 100%;
+    }
+    &:nth-child(2) {
+        background: url('./assets/common2.png');
+        background-size: 100% 100%;
+    }
+    &:nth-child(3) {
+        background: url('./assets/common3.png');
+        background-size: 100% 100%;
+    }
+    &:nth-child(4) {
+        background: url('./assets/common4.png');
+        background-size: 100% 100%;
+    }
+    &:nth-child(5) {
+        background: url('./assets/common5.png');
+        background-size: 100% 100%;
+    }
+}
+
+.socialHover:hover {
+    border-radius: 100%;
+    box-shadow: 1px 1px 13px #ffffff;
+    transition: all 0.3s linear;
+}
+
+.iconBlack {
+    .socialHover {
+        height: 34px;
+        width: 34px;
+        border-radius: 100%;
+        transition: all 0.3s linear;
+
+        &:nth-child(1) {
+            background: url('./assets/commonBlack1.png');
+            background-size: 100% 100%;
+        }
+        &:nth-child(2) {
+            background: url('./assets/commonBlack2.png');
+            background-size: 100% 100%;
+        }
+        &:nth-child(3) {
+            background: url('./assets/commonBlack3.png');
+            background-size: 100% 100%;
+        }
+        &:nth-child(4) {
+            background: url('./assets/commonBlack4.png');
+            background-size: 100% 100%;
+        }
+        &:nth-child(5) {
+            background: url('./assets/commonBlack5.png');
+            background-size: 100% 100%;
+        }
+    }
+
+    .socialHover:hover {
+        border-radius: 100%;
+        box-shadow: 1px 1px 13px #000;
+        transition: all 0.3s linear;
+    }
+}
+
+.btn-common {
+    border-radius: 44px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0px 0px 10px 0px #ffffff;
+
+    &:before {
+        width: 100%;
+        height: 44px;
+        content: '';
+        position: absolute;
+        left: 0;
+
+        transform: translateX(-100%);
+        border-radius: 44px;
+        transition: 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    &:hover {
+        &:before {
+            transform: translateX(0);
+        }
+    }
+}
+
+.btn-common-white {
+    border-radius: 44px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0px 0px 10px 0px #ffffff;
+
+    &:before {
+        width: 100%;
+        height: 44px;
+        content: '';
+        position: absolute;
+        left: 0;
+        box-shadow: 0px 0px 24px 0px #ffffff;
+        transform: translateX(-100%);
+        border-radius: 44px;
+        transition: 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    // &:hover {
+    //     &:before {
+    //         transform: translateX(0);
+    //     }
+    // }
+}
+
+.btn-common-black {
+    border-radius: 44px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0px 0px 10px 0px #000;
+
+    &:before {
+        width: 100%;
+        height: 44px;
+        content: '';
+        position: absolute;
+        left: 0;
+
+        transform: translateX(-100%);
+        border-radius: 44px;
+        transition: 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    // &:hover {
+    //     &:before {
+    //         transform: translateX(0);
+    //     }
+    // }
+}
+
+.btn-common-rect {
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: var(--background3);
+    background-size: cover;
+
+    &:before {
+        width: 100%;
+        height: 55px;
+        content: '';
+        position: absolute;
+        left: 0;
+        /* background: ; */
+        transform: translateX(-100%);
+        border-radius: 10px;
+        transition: 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    // &:hover {
+    //     &:before {
+    //         transform: translateX(0);
+    //     }
+    // }
+}
