@@ -1,0 +1,93 @@
+// ========第四屏===========
+.tecSection4 {
+    // height: 100vh;
+    font-family: Montserrat;
+    padding-bottom: 200vh;
+
+    .accordions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .accordion {
+        background: #fff;
+        width: max(50vw, 900px);
+        padding: 30px;
+        height: 300px;
+        border-radius: 15px;
+        margin-bottom: 35vh;
+        box-shadow: 0 30px 30px -10px rgba(0, 0, 0, 0.3);
+
+        .title {
+            margin: 0;
+        }
+
+        .bgText {
+            background: var(--background2);
+            background-size: 100% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .accordion:last-child {
+        margin-bottom: 0;
+    }
+
+    .spacer {
+        height: 30vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tecSection4 {
+        padding-bottom: 20vh;
+
+        .accordion {
+            width: min(calc(100vw - 30px), 375px);
+            // margin-bottom: 20px;
+            height: 320px;
+            padding: 20px;
+        }
+
+        .spacer {
+            height: 0;
+        }
+
+        .swiper {
+            width: min(calc(100vw - 30px), 375px);
+            margin: 0 15px;
+            overflow: hidden;
+            // padding-top: 50px;
+            // padding-bottom: 50px;
+        }
+
+        .swiper-wrapper {
+            height: 380px;
+        }
+        .swiper-slide {
+            width: min(calc(100vw - 30px), 375px);
+            margin: 0 15px;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            // height: 400px;
+        }
+
+        .swiper-pagination-bullets {
+            // bottom: -10px;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            margin-left: 20px !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #000;
+        }
+    }
+}

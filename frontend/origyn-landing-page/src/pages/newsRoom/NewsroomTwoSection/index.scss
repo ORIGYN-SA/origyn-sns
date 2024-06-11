@@ -1,0 +1,24 @@
+// ========第七屏===========
+.newsroomSection2 {
+    background: #f4f4f4;
+
+    .language1 {
+        background: var(--background1);
+        background-size: cover;
+    }
+
+    .language2 {
+        background: var(--background3);
+        background-size: cover;
+    }
+
+    .language3 {
+        background: var(--background2);
+        background-size: cover;
+    }
+
+    .bg-leaner {
+        background: var(--background4);
+        background-size: 100% 100%;
+    }
+}

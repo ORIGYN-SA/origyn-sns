@@ -1,0 +1,53 @@
+// ========第四屏===========
+.prodSection3 {
+    height: 100vh;
+    font-family: Montserrat;
+
+    .card {
+        // border-radius: 20px;
+        // padding: 10px 60px 30px 10px;
+        // color: #000;
+    }
+
+    .swiper {
+        width: 100%;
+        // padding-top: 50px;
+        // padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 950px;
+        height: 360px;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+    }
+
+    .tabs {
+        .tab {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .active {
+            color: #fff;
+            background: var(--background3);
+            background-size: cover;
+            transition: all 0.2s ease-in-out;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        // .swiper-wrapper {
+        //     height: 460px;
+        // }
+        .swiper-slide {
+            width: 370px;
+            // height: 360px;
+            // height: 400px;
+        }
+    }
+}
