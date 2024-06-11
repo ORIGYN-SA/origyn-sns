@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { ReactNode } from "react";
-import { Tile } from "@components/ui";
+import { Tile, ExternalLink } from "@components/ui";
 import {
   ArrowUpTrayIcon,
   ArrowDownTrayIcon,
   ArrowPathIcon,
 } from "@heroicons/react/20/solid";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import WithdrawLegacyTokens from "./withdraw-legacy-tokens";
 import Deposit from "./deposit";
@@ -69,15 +68,9 @@ const LedgerSwitch = ({ className, ...restProps }) => {
         <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-t-xl">
           <LedgerSwitchBannerContent>
             <div className="w-full flex justify-center mt-4">
-              <a
-                href="https://origyn.gitbook.io/origyn/how-to/how-to-swap-legacy-ogy-to-sns-ogy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-accent"
-              >
+              <ExternalLink href="https://origyn.gitbook.io/origyn/how-to/how-to-swap-legacy-ogy-to-sns-ogy">
                 How to swap tokens
-                <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
-              </a>
+              </ExternalLink>
             </div>
           </LedgerSwitchBannerContent>
         </div>

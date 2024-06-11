@@ -1,5 +1,11 @@
 import { useMemo } from "react";
-import { Card, LoaderSpin, TooltipInfo, Skeleton } from "@components/ui";
+import {
+  Card,
+  LoaderSpin,
+  TooltipInfo,
+  Skeleton,
+  ExternalLink,
+} from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import useCirculationStateOGY from "@hooks/metrics/useCirculationStateOGY";
 import { usePieChart } from "@components/charts/pie/context";
@@ -43,9 +49,12 @@ const OGYCirculationState = ({
       <>
         <div className="flex items-center justify-between">
           <div className="text-lg font-semibold">OGY Circulation State</div>
-          <TooltipInfo id="tooltip-circulation-state">
+          <TooltipInfo id="tooltip-circulation-state" clickable={true}>
             The circulating supply is all tokens except unlocked tokens owned by
             the ORIGYN Foundation.
+            <ExternalLink href="https://dashboard.internetcomputer.org/proposal/117360">
+              NNS Proposal
+            </ExternalLink>
           </TooltipInfo>
         </div>
         <div className="mt-6 h-80 rounded-xl">
