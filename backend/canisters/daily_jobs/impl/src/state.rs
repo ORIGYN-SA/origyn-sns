@@ -31,7 +31,12 @@ impl RuntimeState {
             daily_burn_amount: self.data.daily_burn_amount,
             ledger_canister_id: self.data.ledger_canister_id,
             burn_principal_id: self.data.burn_principal_id,
+            authorized_principals: self.data.authorized_principals.clone(),
         }
+    }
+    pub fn is_caller_authorised_principal(&self) -> bool {
+        let caller = self.env.caller();
+        self.data.authorized_principals.contains(&caller)
     }
 }
 
@@ -42,6 +47,7 @@ pub struct Metrics {
     pub jobs_info: JobsInfo,
     pub daily_burn_amount: u64,
     pub burn_principal_id: Principal,
+    pub authorized_principals: Vec<Principal>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -58,6 +64,8 @@ pub struct JobsInfo {
 }
 #[derive(Serialize, Deserialize)]
 pub struct Data {
+    /// authorized Principals for guarded calls
+    pub authorized_principals: Vec<Principal>,
     /// SNS ledger canister
     pub ledger_canister_id: Principal,
     /// The burning target account
@@ -74,9 +82,11 @@ impl Data {
     pub fn new(
         ledger_canister_id: CanisterId,
         burn_principal_id: Principal,
-        daily_burn_amount: u64
+        daily_burn_amount: u64,
+        authorized_principals: Vec<Principal>
     ) -> Self {
         Self {
+            authorized_principals,
             ledger_canister_id,
             burn_principal_id,
             daily_burn_amount,

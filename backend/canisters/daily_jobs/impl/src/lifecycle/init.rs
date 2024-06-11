@@ -12,7 +12,12 @@ fn init(args: InitArgs) {
     canister_logger::init(args.test_mode);
 
     let env = CanisterEnv::new(args.test_mode);
-    let data = Data::new(args.ledger_canister_id, args.burn_principal_id, args.daily_burn_amount);
+    let data = Data::new(
+        args.ledger_canister_id,
+        args.burn_principal_id,
+        args.daily_burn_amount,
+        args.authorized_principals
+    );
 
     let runtime_state = RuntimeState::new(env.clone(), data);
 
