@@ -127,22 +127,22 @@ build  template: &build_template
       - backend/canisters/$SRC_FOLDER/api/can.did
     expire_in: 1 day
 
-ogy_token_swap build:
+ogy_token_swap canister build:
   <<: *build_template
   variables:
     SRC_FOLDER: ogy_token_swap
 
-sns_rewards build:
+sns_rewards canister build:
   <<: *build_template
   variables:
     SRC_FOLDER: sns_rewards
 
-super_stats_v3 build:
+super_stats_v3 canister build:
   <<: *build_template
   variables:
     SRC_FOLDER: super_stats_v3
 
-token_metrics build:
+token_metrics canister build:
   <<: *build_template
   variables:
     SRC_FOLDER: token_metrics
