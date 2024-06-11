@@ -97,37 +97,39 @@ export const TransactionsDetails = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between bg-surface-2 rounded-full py-1 px-1">
-                      <div className="flex items-center justify-between w-full pr-8">
-                        <Tile className="rounded-full h-8 w-8 bg-surface-3">
-                          <UserIcon className="p-1 text-white" />
-                        </Tile>
-                        <div className="flex justify-center w-full">
-                          <div className="flex items-center truncate pr-4">
-                            <div className="flex ml-4 items-center truncate text-sm max-w-96">
-                              <div className="mr-2 shrink-0">To: </div>
-                              {data.kind && data.kind === "burn" && (
-                                <div> Minting account</div>
-                              )}
-                              {data.kind && data.kind !== "burn" && (
-                                <>
-                                  <div
-                                    className="truncate"
-                                    data-tooltip-id="tooltip"
-                                    data-tooltip-content={data.to_account}
-                                  >
-                                    {data.to_account}
-                                  </div>
-                                  <CopyToClipboard
-                                    value={data.to_account as string}
-                                  />
-                                </>
-                              )}
+                    {data.to_account && (
+                      <div className="flex items-center justify-between bg-surface-2 rounded-full py-1 px-1">
+                        <div className="flex items-center justify-between w-full pr-8">
+                          <Tile className="rounded-full h-8 w-8 bg-surface-3">
+                            <UserIcon className="p-1 text-white" />
+                          </Tile>
+                          <div className="flex justify-center w-full">
+                            <div className="flex items-center truncate pr-4">
+                              <div className="flex ml-4 items-center truncate text-sm max-w-96">
+                                <div className="mr-2 shrink-0">To: </div>
+                                {data.kind && data.kind === "burn" && (
+                                  <div> Minting account</div>
+                                )}
+                                {data.kind && data.kind !== "burn" && (
+                                  <>
+                                    <div
+                                      className="truncate"
+                                      data-tooltip-id="tooltip"
+                                      data-tooltip-content={data.to_account}
+                                    >
+                                      {data.to_account}
+                                    </div>
+                                    <CopyToClipboard
+                                      value={data.to_account as string}
+                                    />
+                                  </>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   <div className="h-0.5 bg-surface-2"></div>
                   <div>

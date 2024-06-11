@@ -41,14 +41,14 @@ const getBadgeTransactionKind = (kind: string) => {
       );
     case "burn":
       return (
-        <Badge className="bg-orange-200">
+        <Badge className="bg-orange-100">
           <FireIcon className="h-4 w-4" />
           <div>Burn</div>
         </Badge>
       );
     case "transfer":
       return (
-        <Badge className="bg-indigo-300">
+        <Badge className="bg-indigo-100">
           <ArrowsRightLeftIcon className="h-4 w-4" />
           <div>Transfer</div>
         </Badge>
