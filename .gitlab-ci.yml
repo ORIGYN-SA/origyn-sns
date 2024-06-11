@@ -101,7 +101,7 @@ cargo cache:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "./backend/{**}/*.{rs,toml}"
+        - "backend/canisters/{**}/*.{rs,toml,lock}"
   extends: .rust template
   script:
     - cargo version
