@@ -8,13 +8,15 @@ spec:
 
 $[[ inputs.src-folder ]] test build:
   stage: build
+  variables:
+    src_folder: $[[ inputs.src-folder ]]
   # needs: $[[ inputs.src-folder ]] tests
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
         - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
-        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml}"
   extends: .rust template
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
@@ -30,6 +32,8 @@ $[[ inputs.src-folder ]] test build:
 
 $[[ inputs.src-folder ]] canister build:
   stage: build
+  variables:
+    src_folder: $[[ inputs.src-folder ]]
   rules:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
       when: never
@@ -39,12 +43,12 @@ $[[ inputs.src-folder ]] canister build:
       changes:
         - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
         - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
-        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml}"
     - if: $CI_COMMIT_REF_NAME == "develop" 
       changes:
         - "./backend/libraries/{**,**/**,**/**/**}/*.{rs,toml}"
         - "./backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml}"
-        - "./backend/canisters/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{rs,toml}"
+        - "./backend/canisters/$src_folder/{**,**/**,**/**/**}/*.{rs,toml}"
     - if: ($CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/')
 >>>>>>> ab6cf36 (enhance gitlab ci/cd pipeline)
   extends: .rust template
