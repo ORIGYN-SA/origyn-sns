@@ -50,17 +50,17 @@ include:
       src-folder: token_metrics
   # Canister builds
   - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: sns_rewards
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: super_stats_v3
-  - local: scripts/ci-cd/.canister_builds.yml
-    inputs:
-      src-folder: token_metrics
+  #   inputs:
+  #     src-folder: ogy_token_swap
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: sns_rewards
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: super_stats_v3
+  # - local: scripts/ci-cd/.canister_builds.yml
+  #   inputs:
+  #     src-folder: token_metrics
   # Canister generate declaration
   - local: scripts/ci-cd/.generate_declaration.yml
     inputs:
@@ -95,17 +95,6 @@ node cache:
     - npm pkg get name description author license workspaces engines
     - node --version
     - npm --version
-
-cargo cache:
-  stage: preparation
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - "backend/{**}/*.{rs,toml,lock}"
-  extends: .rust template
-  script:
-    - cargo version
-    - cargo verify-project
 
 ################################################################################
 # Linters
