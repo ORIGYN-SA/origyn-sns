@@ -166,7 +166,7 @@ export const Governance = () => {
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent hover:underline"
+            className="font-semibold text-accent"
           >
             Learn more about OGY
           </a>

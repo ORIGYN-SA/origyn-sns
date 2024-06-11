@@ -11,5 +11,6 @@ import Badge from '@components/ui/Badge'
 import Search from '@components/ui/Search'
 import InputField from '@components/ui/InputField'
 import Skeleton from '@components/ui/Skeleton'
+import ExternalLink from '@components/ui/links/ExternalLink'
 
-export {Card, Button, Select, Table, Tooltip, TooltipInfo, Dialog, Tile, LoaderSpin, Badge, Search, InputField, Skeleton}
+export {Card, Button, Select, Table, Tooltip, TooltipInfo, Dialog, Tile, LoaderSpin, Badge, Search, InputField, Skeleton, ExternalLink}

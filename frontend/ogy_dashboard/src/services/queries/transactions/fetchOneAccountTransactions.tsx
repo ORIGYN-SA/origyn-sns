@@ -3,11 +3,12 @@ import { ListParams } from "@services/types/list.params.types";
 import { Transaction } from "@services/types/transactions.types";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
-export const fetchAllTransactions = async ({
+const fetchOneAccountTransactions = async ({
   limit,
   offset,
   sorting,
-}: ListParams): Promise<{
+  accountId,
+}: ListParams & { accountId: string }): Promise<{
   data: Transaction[];
   total_transactions: number;
 }> => {
@@ -18,7 +19,9 @@ export const fetchAllTransactions = async ({
     ? `&sort_by=-${id}${indexSort}`
     : `&sort_by=${id}${indexSort}`;
   const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions?limit=${limit}&offset=${offset}${sort}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}${sort}`
   );
   return data;
 };
+
+export default fetchOneAccountTransactions;

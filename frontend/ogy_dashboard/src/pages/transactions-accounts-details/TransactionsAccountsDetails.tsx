@@ -1,9 +1,4 @@
-import {
-  // defer,
-  // Await,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 import { Principal } from "@dfinity/principal";
@@ -11,24 +6,33 @@ import { AccountIdentifier } from "@dfinity/ledger-icp";
 import Skeleton from "react-loading-skeleton";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
-import AccountTransactionsList from "@pages/transactions-accounts-details/account-transactions-list/AccountTransactionsList";
+import TransactionsAccountList from "@pages/transactions/transactions-account-list";
 import BalanceHistory from "./balance-history/BalanceHistory";
 import TransactionsChart from "./transactions-chart/TransactionsChart";
+import { Button } from "@components/ui";
 
 export const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
   const handleOnClickBack = () => {
     navigate(-1);
   };
-  const [pagination, setPagination] = usePagination({});
-  const [sorting, setSorting] = useSorting({
+  const [pagination] = usePagination({});
+  const [sorting] = useSorting({
     id: "index",
     desc: true,
   });
 
   const params = useParams();
 
-  const { data, isError, isLoading, isSuccess } = useFecthOneAccount({ accountId: params.id as string });
+  const { data, isError, isLoading, isSuccess } = useFecthOneAccount({
+    accountId: params.accountId as string,
+  });
+
+  const handleShowAllTxHistory = () => {
+    navigate(
+      `/explorer/transactions/accounts/${params.accountId as string}/history`
+    );
+  };
 
   return (
     <>
@@ -41,9 +45,7 @@ export const TransactionsAccountsDetails = () => {
             />
             <div className="div div-col items-center xl:items-start">
               <div className="text-sm">Explorer</div>
-              <div className="text-3xl font-bold mb-4 xl:mb-0">
-                OGY account
-              </div>
+              <div className="text-3xl font-bold mb-4 xl:mb-0">OGY account</div>
             </div>
           </div>
         </div>
@@ -60,10 +62,11 @@ export const TransactionsAccountsDetails = () => {
             <div className="mb-4">
               <div className="text-content/60">Subaccount</div>
               <div className="font-bold break-all">
-                {
-                  data?.subaccount
-                  ||data?.id && ( AccountIdentifier.fromPrincipal({ principal: Principal.fromText(data?.id || ""), }).toHex())
-                  }
+                {data?.subaccount ||
+                  (data?.id &&
+                    AccountIdentifier.fromPrincipal({
+                      principal: Principal.fromText(data?.id || ""),
+                    }).toHex())}
               </div>
             </div>
           </div>
@@ -75,10 +78,11 @@ export const TransactionsAccountsDetails = () => {
                   {isSuccess && (
                     <>
                       <img src="/ogy_logo.svg" alt="OGY Logo" />
-                      <span className="ml-2 mr-3">{
-                        roundAndFormatLocale({
+                      <span className="ml-2 mr-3">
+                        {roundAndFormatLocale({
                           number: divideBy1e8(data?.balance || 0),
-                        })}</span>
+                        })}
+                      </span>
                       <span className="text-content/60">OGY</span>
                     </>
                   )}
@@ -109,20 +113,17 @@ export const TransactionsAccountsDetails = () => {
             </div> */}
           </div>
         </div>
-        <TransactionsChart
-          id={params.id || ''}
-        />
-        <BalanceHistory
-          className="mt-16"
-          account={params?.id || ''}
-        />
-        <div className="mt-16">
-          <AccountTransactionsList
-            account={params?.id}
+        <TransactionsChart id={params.accountId || ""} />
+        <BalanceHistory className="mt-16" account={params?.accountId || ""} />
+        <div>
+          <div className="flex items-center mt-16 mb-8 gap-8">
+            <h2 className="text-3xl font-bold">Transactions history</h2>
+            <Button onClick={handleShowAllTxHistory}>Show all</Button>
+          </div>
+          <TransactionsAccountList
+            accountId={params?.accountId}
             pagination={pagination}
-            setPagination={setPagination}
             sorting={sorting}
-            setSorting={setSorting}
           />
         </div>
       </div>
