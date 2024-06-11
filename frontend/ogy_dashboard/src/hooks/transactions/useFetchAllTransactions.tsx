@@ -36,7 +36,7 @@ const useFetchAllTransactions = ({
           index,
           timestamp: timestamp ? timestampToDateShort(Number(timestamp)) : "",
           from_account: kind === "mint" ? "Minting account" : from_account,
-          to_account,
+          to_account: kind === "burn" ? "Minting account" : to_account,
           amount,
           fee,
           memo,

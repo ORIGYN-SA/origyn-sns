@@ -22,3 +22,8 @@ Go to the [official ORIGYN website](https://origyn.com) for more information abo
 ### Troublshoot
 
 * You may need to set the max open files on your current shell before running the script by first running `ulimit -n 10240`
+
+
+## Reproducible builds
+
+Refer to the documentation in the [build](/build/README.md) folder for the reproducible builds.

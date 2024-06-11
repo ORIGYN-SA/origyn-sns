@@ -1,0 +1,66 @@
+.navBar {
+    .nav {
+        li {
+            margin: 8px 16px;
+        }
+
+        .links {
+            .nav-item {
+                .nav-icon {
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            .nav-item:hover {
+                .nav-icon {
+                    transition: all 0.3s ease-in-out;
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .ant-dropdown-menu {
+            text-align: left;
+            padding: 10px 15px;
+            border-radius: 20px;
+
+            .ant-dropdown-menu-title-content {
+                padding: 5px 0;
+                font-size: 16px;
+                font-family: montserrat-bold;
+            }
+        }
+
+        .ant-dropdown {
+            top: 75px !important;
+        }
+    }
+
+    .invest {
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.4s;
+    }
+
+    .whitePage {
+        background: rgba(0, 0, 0, 0.2);
+        transition: all 0.4s;
+    }
+
+    .navLogo {
+        width: 150px;
+        height: 34px;
+        background: url('../../assets/logo.png');
+        background-size: cover;
+        transition: all 0.4s;
+    }
+
+    .whiteLogo {
+        background: url('../../assets/logo2.png');
+        background-size: cover;
+        transition: all 0.4s;
+    }
+}
+
+.ant-drawer-header {
+    padding: 16px 10px !important;
+}

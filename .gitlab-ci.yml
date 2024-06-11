@@ -22,8 +22,8 @@ cache:
 stages:
   - preparation
   - lint
-  - test
   - build
+  - test
   - integration_testing
   - deploy
 
@@ -61,6 +61,19 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: token_metrics
+  # Canister generate declaration
+  - local: scripts/ci-cd/.generate_declaration.yml
+    inputs:
+      src-folder: ogy_token_swap
+  - local: scripts/ci-cd/.generate_declaration.yml
+    inputs:
+      src-folder: sns_rewards
+  - local: scripts/ci-cd/.generate_declaration.yml
+    inputs:
+      src-folder: super_stats_v3
+  - local: scripts/ci-cd/.generate_declaration.yml
+    inputs:
+      src-folder: token_metrics
   # Frontend builds
   - local: scripts/ci-cd/.frontend_builds.yml
     inputs:
@@ -75,20 +88,13 @@ node cache:
   stage: preparation
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "./frontend/{**,**/**,**/**/**}/*.{js,json,jsx,md,mdx,css,html,svg}"
   extends: .node template
   script:
     - npm pkg get name description author license workspaces engines
     - node --version
     - npm --version
-
-cargo cache:
-  stage: preparation
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  extends: .rust template
-  script:
-    - cargo version
-    - cargo verify-project
 
 ################################################################################
 # Linters
@@ -102,10 +108,16 @@ rust lint:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "Cargo.{lock,toml}"
-        - "backend/canisters/{**}/*.{rs,toml,lock}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_OPEN_MERGE_REQUESTS
       when: never
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
     - if: $CI_COMMIT_REF_NAME == "develop"
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   extends: .rust template
   script:
     - cargo clippy
@@ -121,53 +133,6 @@ rust lint:
 ################################################################################
 
 # See includes above for canister builds
-
-generate test declarations:
-  stage: build
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-TEST-declarations"
-    paths:
-      - backend/**/declarations
-    expire_in: 1 day
-
-generate declarations:
-  stage: build
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ '/^(?:ogy_dashboard)-v\d+\.\d+\.\d+$/'
-      needs:
-        [
-          "ogy_token_swap canister build",
-          "sns_rewards canister build",
-          "super_stats_v3 canister build",
-          "token_metrics canister build",
-        ]
-  script:
-    - dfx generate ogy_token_swap
-    - dfx generate sns_rewards
-    - dfx generate super_stats_v3
-    - dfx generate token_metrics
-  artifacts:
-    name: "${CI_PROJECT_NAME}-${CI_COMMIT_SHORT_SHA}-declarations"
-    paths:
-      - backend/**/api
-    expire_in: 6 months
-
 # See includes above for frontend builds
 
 ################################################################################
@@ -208,29 +173,6 @@ generate declarations:
 ################################################################################
 # Deployments
 ################################################################################
-local deploy and tests:
-  stage: deploy
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs:
-        [
-          # "generate test declarations",
-          "ogy_token_swap test build",
-          "sns_rewards test build",
-          "super_stats_v3 test build",
-          "token_metrics test build",
-          "ogy_dashboard test build",
-          # "integration tests"
-        ]
-  before_script:
-    - dfx --version
-    - dfx start --clean --background --artificial-delay 40
-  script:
-    - NETWORK='local' scripts/local-deploy.sh
-  after_script:
-    - cat canister_ids.json
-    - dfx stop
-
 check canister ids:
   stage: deploy
   rules:
@@ -258,6 +200,10 @@ ogy token swap staging:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/ogy_token_swap/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
@@ -277,6 +223,10 @@ ogy token swap:
   resource_group: backend canister production deployment
   rules:
     - if: $CI_COMMIT_TAG =~ '/^ogy_token_swap-v\d+\.\d+\.\d+$/'
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/ogy_token_swap/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
@@ -301,6 +251,10 @@ sns rewards staging:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/sns_rewards/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
@@ -321,6 +275,10 @@ sns rewards:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_TAG =~ '/^sns_rewards-v\d+\.\d+\.\d+$/'
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/sns_rewards/{**,**/**,**/**/**}/*.{rs,toml,lock}"
       when: manual
   variables:
     TARGET_NETWORK: ic
@@ -342,6 +300,10 @@ token metrics staging:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/token_metrics/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
@@ -362,6 +324,10 @@ token metrics:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_TAG =~ '/^token_metrics-v\d+\.\d+\.\d+$/'
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/token_metrics/{**,**/**,**/**/**}/*.{rs,toml,lock}"
       when: manual
   variables:
     TARGET_NETWORK: ic
@@ -383,6 +349,10 @@ super stats staging:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/super_stats_v3/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
@@ -403,6 +373,10 @@ super stats:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_TAG =~ '/^super_stats_v3-v\d+\.\d+\.\d+$/'
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/super_stats_v3/{**,**/**,**/**/**}/*.{rs,toml,lock}"
       when: manual
   variables:
     TARGET_NETWORK: ic
@@ -431,6 +405,9 @@ ogy dashboard staging:
     CANISTER_NAME: "ogy_dashboard"
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "ogy_dashboard/*.{js,json}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard staging build"]
       variables:
         TARGET_NETWORK: staging
@@ -452,6 +429,9 @@ ogy dashboard preprod:
     CANISTER_NAME: "ogy_dashboard"
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "ogy_dashboard/*.{js,json}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard preprod build"]
       variables:
         TARGET_NETWORK: preprod
@@ -473,6 +453,9 @@ ogy dashboard production:
     CANISTER_NAME: "ogy_dashboard"
   rules:
     - if: $CI_COMMIT_TAG =~ '/^ogy_dashboard-v\d+\.\d+\.\d+$/'
+      changes:
+        - "ogy_dashboard/*.{js,json}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard production build"]
       variables:
         TARGET_NETWORK: ic

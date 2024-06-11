@@ -7,8 +7,7 @@
     paths:
       - .npm/
       - node_modules/
-      - client/**/.next/
-      - client/**/.npm/
-      - client/**/node_modules/
+      - frontend/**/.npm/
+      - frontend/**/node_modules/
   before_script:
     - npm ci --cache .npm --prefer-offline

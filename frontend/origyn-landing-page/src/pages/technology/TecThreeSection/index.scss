@@ -1,0 +1,18 @@
+// ========第三屏===========
+.tecSection3 {
+    .roundShadow {
+        box-shadow: 0px 0px 48px 0px #00000040;
+        margin: 0 auto;
+    }
+
+    .roundOne {
+        transform: translate(-45px, -20%);
+    }
+
+    .roundTwo {
+        transform: translate(130px, -35%);
+    }
+    .roundThree {
+        transform: translate(-40px, -70%);
+    }
+}
