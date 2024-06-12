@@ -1,10 +1,19 @@
 import { ActorSubclass } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import {
-  ITokenHolderData,
-  GetHoldersResponse,
-} from "@services/types/token_metrics";
+import { GetHoldersResponse } from "@services/types/token_metrics";
+
+interface ITokenHolderData {
+  principal: string;
+  total: number;
+  ledgerBalance: number;
+  governanceBalance: number;
+  string: {
+    total: string;
+    governanceBalance: string;
+    ledgerBalance: string;
+  };
+}
 
 const fetchTokenHolders = async ({
   actor,
