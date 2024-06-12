@@ -6,12 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
-### [1.0.6] - 2024-06-11
+### [1.0.6] - 2024-06-12
 
 #### Fix
 
 - Improve display footer notice.
 - Transactions table accounts columns display.
+- Inacurate OGY treasury account
 
 #### Added
 
