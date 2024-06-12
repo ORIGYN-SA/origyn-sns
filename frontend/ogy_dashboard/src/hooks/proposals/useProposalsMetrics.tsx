@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useCanister } from "@amerej/connect2ic-react";
-import fetchProposalsMetrics from "@services/queries/metrics/fetchProposalsMetrics";
+import fetchProposalsMetrics from "@services/queries/governance/proposals/fetchProposalsMetrics";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
 const useProposalsMetrics = () => {
@@ -33,8 +33,6 @@ const useProposalsMetrics = () => {
         total_proposals,
         total_voting_power,
       } = proposalsMetrics.data;
-
-      console.log(proposalsMetrics.data);
 
       setData([
         {
@@ -124,9 +122,9 @@ const useProposalsMetrics = () => {
         },
         {
           name: "Overall Voting Participation",
-          value: roundAndFormatLocale({
+          value: `${roundAndFormatLocale({
             number: Number(average_voting_participation) / 100,
-          }),
+          })} %`,
           tooltip: (
             <>
               <p>

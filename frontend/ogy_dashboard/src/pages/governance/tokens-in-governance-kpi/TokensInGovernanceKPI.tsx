@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Card, TooltipInfo, LoaderSpin } from "@components/ui";
-import useProposalsMetrics from "@hooks/metrics/useProposalsMetrics";
+import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
 
 export interface TokensInGovernanceKPIProps {
   className?: string;
