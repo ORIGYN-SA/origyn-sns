@@ -1,11 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
-import useFetchNetworkRevenueICP from "@hooks/accounts/useFetchNetworkRevenueICP";
-import useFetchBalanceOGY from "@hooks/accounts/useFetchBalanceOGY";
-import {
-  SNS_GOVERNANCE_CANISTER_ID,
-  ACCOUNT_ID_LEDGER_OGY,
-} from "@constants/index";
+import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
+import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
 interface DataItem {
   value: string;
@@ -70,25 +66,32 @@ const OrigynTreasuryAccount = ({
     isLoading: isLoadingBalanceICP,
     isError: isErrorBalanceICP,
     isSuccess: isSuccessBalanceICP,
-  } = useFetchNetworkRevenueICP();
+  } = useFetchTreasuryAccountICP();
+
+  // const {
+  //   data: balanceOGY,
+  //   isLoading: isLoadingBalanceOGY,
+  //   isError: isErrorBalanceOGY,
+  //   isSuccess: isSuccessBalanceOGY,
+  // } = useFetchTreasuryAccountOGY({
+  //   owner: SNS_GOVERNANCE_CANISTER_ID,
+  //   subaccount: ACCOUNT_ID_LEDGER_OGY,
+  // });
   const {
     data: balanceOGY,
     isLoading: isLoadingBalanceOGY,
     isError: isErrorBalanceOGY,
     isSuccess: isSuccessBalanceOGY,
-  } = useFetchBalanceOGY({
-    owner: SNS_GOVERNANCE_CANISTER_ID,
-    subaccount: ACCOUNT_ID_LEDGER_OGY,
-  });
+  } = useFetchTreasuryAccountOGY();
 
   useEffect(() => {
     if (isSuccessBalanceICP && isSuccessBalanceOGY) {
       setData((prevData) =>
         prevData.map((item) => {
           if (item.token === "OGY") {
-            return { ...item, value: balanceOGY.string.balance };
+            return { ...item, value: balanceOGY as string };
           } else if (item.token === "ICP") {
-            return { ...item, value: balanceICP.string.balance };
+            return { ...item, value: balanceICP as string };
           }
           return item;
         })

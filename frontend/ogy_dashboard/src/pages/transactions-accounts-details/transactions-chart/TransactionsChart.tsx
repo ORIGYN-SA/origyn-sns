@@ -1,5 +1,5 @@
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import useFetchAccountTransactions from "@hooks/accounts/useFetchAccaountTransactions";
+import useFetchAccountTransactions from "@hooks/accounts/useFetchAccountTransactions";
 import { useEffect, useRef, useState } from "react";
 import { Network, Options } from "vis-network/standalone/esm/vis-network";
 
