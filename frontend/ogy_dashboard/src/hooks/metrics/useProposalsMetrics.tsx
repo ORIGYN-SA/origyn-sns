@@ -125,7 +125,7 @@ const useProposalsMetrics = () => {
         {
           name: "Overall Voting Participation",
           value: roundAndFormatLocale({
-            number: divideBy1e8(average_voting_participation),
+            number: Number(average_voting_participation) / 100,
           }),
           tooltip: (
             <>
