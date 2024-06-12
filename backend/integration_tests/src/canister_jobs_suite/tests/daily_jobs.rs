@@ -3,7 +3,7 @@ use candid::Nat;
 use icrc_ledger_types::icrc1::account::Account;
 use utils::consts::E8S_PER_OGY;
 use crate::client::icrc1::client::{ balance_of, transfer, total_supply };
-use crate::daily_jobs_suite::{ init::init, TestEnv };
+use crate::canister_jobs_suite::{ init::init, TestEnv };
 
 #[test]
 fn daily_burn_job() {
@@ -11,11 +11,11 @@ fn daily_burn_job() {
     let TestEnv { mut pic, canister_ids, controller } = env;
 
     let ledger_canister_id = canister_ids.ogy_ledger_canister_id;
-    let daily_jobs_canister_id = canister_ids.daily_jobs_canister_id;
+    let canister_jobs_canister_id = canister_ids.canister_jobs_canister_id;
 
     let minting_account = controller;
 
-    let daily_jobs_account = Account { owner: daily_jobs_canister_id, subaccount: None };
+    let daily_jobs_account = Account { owner: canister_jobs_canister_id, subaccount: None };
 
     // Make the initial mint transaction to daily_jobs_account
     assert_eq!(

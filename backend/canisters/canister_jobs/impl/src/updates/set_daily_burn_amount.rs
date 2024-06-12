@@ -1,5 +1,5 @@
 use canister_tracing_macros::trace;
-pub use daily_jobs_api::set_daily_burn_amount::{
+pub use canister_jobs_api::set_daily_burn_amount::{
     Args as SetDailyBurnAmountArgs,
     Response as SetDailyBurnAmountResponse,
 };

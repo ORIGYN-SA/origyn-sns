@@ -1,6 +1,6 @@
 use candid::{ CandidType, Principal };
 use canister_state_macros::canister_state;
-use daily_jobs_api::BurnJobResult;
+use canister_jobs_api::BurnJobResult;
 use serde::{ Deserialize, Serialize };
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };

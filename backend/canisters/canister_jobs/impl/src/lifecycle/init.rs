@@ -1,5 +1,5 @@
 use ic_cdk_macros::init;
-pub use daily_jobs_api::init::InitArgs;
+pub use canister_jobs_api::init::InitArgs;
 use tracing::info;
 use utils::env::CanisterEnv;
 

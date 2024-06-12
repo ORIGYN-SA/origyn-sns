@@ -14,5 +14,5 @@ pub struct TestEnv {
 #[derive(Debug)]
 pub struct CanisterIds {
     pub ogy_ledger_canister_id: CanisterId,
-    pub daily_jobs_canister_id: CanisterId,
+    pub canister_jobs_canister_id: CanisterId,
 }

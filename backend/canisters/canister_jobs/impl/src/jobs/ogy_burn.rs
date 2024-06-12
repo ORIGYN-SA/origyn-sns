@@ -1,6 +1,6 @@
 use candid::Nat;
 use canister_time::{ run_now_then_interval, timestamp_nanos, DAY_IN_MS };
-use daily_jobs_api::BurnJobResult;
+use canister_jobs_api::BurnJobResult;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferArg };
 use std::time::Duration;
 use tracing::{ debug, error };

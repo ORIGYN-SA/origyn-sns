@@ -6,4 +6,4 @@ pub mod wasms;
 pub mod sns_rewards_suite;
 pub mod ogy_swap_suite;
 pub mod super_stats_suite;
-pub mod daily_jobs_suite;
+pub mod canister_jobs_suite;

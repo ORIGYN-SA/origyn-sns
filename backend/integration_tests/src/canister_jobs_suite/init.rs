@@ -3,7 +3,7 @@ use candid::{ Nat, Principal };
 use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::PocketIc;
-use daily_jobs_api::init::InitArgs as DailyJobsInitArgs;
+use canister_jobs_api::init::InitArgs as DailyJobsInitArgs;
 use utils::consts::E8S_PER_OGY;
 
 use crate::{
@@ -61,13 +61,14 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
 
     /*
      *********************************
-     ** Install Daily Jobs Canister **
+     ** Install Canister Jobs Canister **
      *********************************
      */
-    let daily_jobs_canister_id = create_canister(pic, controller);
-    let daily_jobs_canister_wasm = wasms::DAILY_JOBS.clone();
-    let daily_jobs_init_args = DailyJobsInitArgs {
+    let canister_jobs_canister_id = create_canister(pic, controller);
+    let canister_jobs_canister_wasm = wasms::CANISTER_JOBS.clone();
+    let canister_jobs_init_args = DailyJobsInitArgs {
         test_mode: true,
+        authorized_principals: vec![controller],
         ledger_canister_id: ogy_ledger_canister_id,
         burn_principal_id: controller,
         daily_burn_amount: 1_000_000 * E8S_PER_OGY,
@@ -76,14 +77,14 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
     install_canister(
         pic,
         controller,
-        daily_jobs_canister_id,
-        daily_jobs_canister_wasm,
-        daily_jobs_init_args
+        canister_jobs_canister_id,
+        canister_jobs_canister_wasm,
+        canister_jobs_init_args
     );
 
     CanisterIds {
         ogy_ledger_canister_id,
-        daily_jobs_canister_id,
+        canister_jobs_canister_id,
     }
 }
 

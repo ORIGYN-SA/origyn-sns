@@ -98,16 +98,16 @@
         "output": "backend/canisters/super_stats_v3/api/declarations"
       }
     },
-    "daily_jobs": {
+    "canister_jobs": {
       "type": "custom",
-      "candid": "backend/canisters/daily_jobs/api/can.did",
+      "candid": "backend/canisters/canister_jobs/api/can.did",
       "optimize": "cycles",
-      "package": "daily_jobs",
-      "wasm": "backend/canisters/daily_jobs/target/wasm32-unknown-unknown/release/daily_jobs.wasm.gz",
+      "package": "canister_jobs",
+      "wasm": "backend/canisters/canister_jobs/target/wasm32-unknown-unknown/release/canister_jobs.wasm.gz",
       "declarations": {
         "bindings": ["js", "did", "ts"],
         "env_override": null,
-        "output": "backend/canisters/daily_jobs/api/declarations"
+        "output": "backend/canisters/canister_jobs/api/declarations"
       }
     }
   },
