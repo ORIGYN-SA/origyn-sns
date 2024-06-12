@@ -49,6 +49,14 @@ export const idlFactory = ({ IDL }) => {
     four_years: IDL.Nat64,
     five_years: IDL.Nat64,
   });
+  const ProposalsMetrics = IDL.Record({
+    daily_voting_rewards: IDL.Nat64,
+    reward_base_current_year: IDL.Nat64,
+    average_voting_participation: IDL.Nat64,
+    average_voting_power: IDL.Nat64,
+    total_voting_power: IDL.Nat64,
+    total_proposals: IDL.Nat64,
+  });
   const HistoryData = IDL.Record({ balance: IDL.Nat });
   const TokenSupplyData = IDL.Record({
     circulating_supply: IDL.Nat,
@@ -68,6 +76,7 @@ export const idlFactory = ({ IDL }) => {
       [GovernanceStats],
       ["query"]
     ),
+    get_proposals_metrics: IDL.Func([], [ProposalsMetrics], ["query"]),
     get_stake_history: IDL.Func(
       [IDL.Nat64],
       [IDL.Vec(IDL.Tuple(IDL.Nat64, HistoryData))],
