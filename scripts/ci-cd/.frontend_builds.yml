@@ -13,7 +13,7 @@ $[[ inputs.src-folder ]] test build:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate test declarations"]
   extends: .node template
   script:
@@ -23,14 +23,14 @@ $[[ inputs.src-folder ]] test build:
     paths:
       - frontend/$[[ inputs.src-folder ]]/dist
     expire_in: 1 day
-
+g
 $[[ inputs.src-folder ]] staging build:
   stage: build
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate declarations"]
   extends: .node template
   variables:
@@ -58,7 +58,7 @@ $[[ inputs.src-folder ]] preprod build:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate declarations"]
   extends: .node template
   variables:
@@ -88,7 +88,7 @@ $[[ inputs.src-folder ]] production build:
     - if: $CI_COMMIT_REF_NAME == "master"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate declarations"]
   extends: .node template
   variables:

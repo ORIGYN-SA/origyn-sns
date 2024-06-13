@@ -12,16 +12,16 @@ $[[ inputs.src-folder ]] linter:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
     - if: $CI_OPEN_MERGE_REQUESTS
       when: never
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   extends: .node template
   script:
     - npm run --workspace $[[ inputs.src-folder ]] lint

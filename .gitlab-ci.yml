@@ -407,7 +407,7 @@ ogy dashboard staging:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - "ogy_dashboard/*.{js,json}"
-        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard staging build"]
       variables:
         TARGET_NETWORK: staging
@@ -431,7 +431,7 @@ ogy dashboard preprod:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - "ogy_dashboard/*.{js,json}"
-        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard preprod build"]
       variables:
         TARGET_NETWORK: preprod
@@ -455,7 +455,7 @@ ogy dashboard production:
     - if: $CI_COMMIT_TAG =~ '/^ogy_dashboard-v\d+\.\d+\.\d+$/'
       changes:
         - "ogy_dashboard/*.{js,json}"
-        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,md,mdx,css,html,svg}"
+        - "ogy_dashboard/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
       needs: ["ogy_dashboard production build"]
       variables:
         TARGET_NETWORK: ic
