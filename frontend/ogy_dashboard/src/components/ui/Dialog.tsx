@@ -6,13 +6,23 @@ interface DialogProps {
   show: boolean;
   handleClose: () => void;
   children?: ReactNode;
+  enableClose?: boolean;
 }
 
-const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
+const Dialog = ({
+  show = true,
+  handleClose,
+  enableClose = true,
+  children,
+}: DialogProps) => {
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
-        <DialogHeadlessui static as={Fragment} onClose={handleClose}>
+        <DialogHeadlessui
+          static
+          as={Fragment}
+          onClose={enableClose ? handleClose : () => null}
+        >
           <div className="absolute z-50 inset-0 overflow-hidden">
             <Transition.Child
               as={Fragment}
@@ -37,11 +47,13 @@ const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
               >
                 <DialogHeadlessui.Panel className="bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto">
                   <DialogHeadlessui.Title className="flex justify-end px-6 pt-6">
-                    <button onClick={handleClose}>
-                      <div className="hover:bg-accent hover:text-white p-1 rounded-full">
-                        <XMarkIcon className="h-8 w-8" />
-                      </div>
-                    </button>
+                    {enableClose && (
+                      <button onClick={handleClose}>
+                        <div className="hover:bg-accent hover:text-white p-1 rounded-full">
+                          <XMarkIcon className="h-8 w-8" />
+                        </div>
+                      </button>
+                    )}
                   </DialogHeadlessui.Title>
                   {children}
                 </DialogHeadlessui.Panel>
