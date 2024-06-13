@@ -6,12 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.7] - 2024-06-12
+
+#### Fix
+
+- Inacurate OGY and ICP treasury account data
+
+#### Added
+
+- Proposals metrics on Governance page.
+
 ### [1.0.6] - 2024-06-11
 
 #### Fix
 
 - Improve display footer notice.
 - Transactions table accounts columns display.
+- Inacurate OGY treasury account
 
 #### Added
 

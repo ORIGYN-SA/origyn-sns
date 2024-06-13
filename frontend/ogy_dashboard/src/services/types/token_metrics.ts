@@ -44,6 +44,14 @@ export interface Overview {
   'received' : [number, bigint],
   'max_balance' : bigint,
 }
+export interface ProposalsMetrics {
+  'daily_voting_rewards' : bigint,
+  'reward_base_current_year' : bigint,
+  'average_voting_participation' : bigint,
+  'average_voting_power' : bigint,
+  'total_voting_power' : bigint,
+  'total_proposals' : bigint,
+}
 export interface TokenSupplyData {
   'circulating_supply' : bigint,
   'total_supply' : bigint,
@@ -59,20 +67,9 @@ export default interface _SERVICE {
   'get_holders' : (arg_0: GetHoldersArgs) => Promise<GetHoldersResponse>,
   'get_locked_neurons_period' : () => Promise<LockedNeuronsAmount>,
   'get_neurons_stats' : (arg_0: [] | [Principal]) => Promise<GovernanceStats>,
+  'get_proposals_metrics' : () => Promise<ProposalsMetrics>,
   'get_stake_history' : (arg_0: bigint) => Promise<
       Array<[bigint, HistoryData]>
     >,
   'get_supply_data' : () => Promise<TokenSupplyData>,
-}
-
-export interface ITokenHolderData {
-  principal: string,
-  total: number,
-  ledgerBalance: number,
-  governanceBalance: number,
-  string: {
-    total: string,
-    governanceBalance: string,
-    ledgerBalance: string,
-  },
 }

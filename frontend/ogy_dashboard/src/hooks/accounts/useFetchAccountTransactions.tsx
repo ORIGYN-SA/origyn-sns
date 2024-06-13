@@ -1,5 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import fetchAccounttransactions, { TransactionsDetails } from "@services/queries/accounts/fetchAcoountTransactions";
+import fetchAccounttransactions, {
+  TransactionsDetails,
+} from "@services/queries/accounts/fetchAccountTransactions";
 
 const useFetchAccountTransactions = (accountPrincipal: string) => {
   const {
@@ -7,7 +9,9 @@ const useFetchAccountTransactions = (accountPrincipal: string) => {
     isSuccess,
     isLoading,
     error,
-  }: UseQueryResult<TransactionsDetails> = useQuery(fetchAccounttransactions({ accountPrincipal }));
+  }: UseQueryResult<TransactionsDetails> = useQuery(
+    fetchAccounttransactions({ accountPrincipal })
+  );
 
   return { data, isSuccess, isLoading, isError: error };
 };
