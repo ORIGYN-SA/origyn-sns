@@ -12,6 +12,7 @@ const DialogSwapTokens = () => {
     isSuccess: isSuccessSendTokens,
     isError: isErrorSendTokens,
     isPending: isPendingSendTokens,
+    isIdle: isIdleSendTokens,
   } = sendTokens;
   const {
     isSuccess: isSuccessRequestSwap,
@@ -19,10 +20,22 @@ const DialogSwapTokens = () => {
     isPending: isPendingRequestSwap,
   } = requestSwap;
 
+  const handleOnClose = () => {
+    if (
+      isSuccessRequestSwap ||
+      isErrorSendTokens ||
+      isErrorRequestSwap ||
+      isIdleSendTokens
+    ) {
+      handleClose();
+    }
+    return null;
+  };
+
   return (
     <>
-      <Dialog show={show} handleClose={handleClose}>
-        <div className="px-12 pt-8 pb-12">
+      <Dialog show={show} handleClose={handleOnClose}>
+        <div className="px-12 pt-6 pb-12">
           {!isPendingSendTokens &&
             !isPendingRequestSwap &&
             !isErrorSendTokens &&
