@@ -168,5 +168,3 @@ const App = () => {
 };
 
 export default App;
-
-//trigger pipeline
