@@ -23,7 +23,7 @@ $[[ inputs.src-folder ]] test build:
     paths:
       - frontend/$[[ inputs.src-folder ]]/dist
     expire_in: 1 day
-g
+
 $[[ inputs.src-folder ]] staging build:
   stage: build
   rules:
