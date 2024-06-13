@@ -1,5 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import { Transition, Dialog as DialogHeadlessui } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface DialogProps {
   show: boolean;
@@ -35,9 +36,13 @@ const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <DialogHeadlessui.Panel className="bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto">
-                  {/* <DialogHeadlessui.Title>
-                    Deactivate account
-                  </DialogHeadlessui.Title> */}
+                  <DialogHeadlessui.Title className="flex justify-end px-6 pt-6">
+                    <button onClick={handleClose}>
+                      <div className="hover:bg-accent hover:text-white p-1 rounded-full">
+                        <XMarkIcon className="h-8 w-8" />
+                      </div>
+                    </button>
+                  </DialogHeadlessui.Title>
                   {children}
                 </DialogHeadlessui.Panel>
               </Transition.Child>

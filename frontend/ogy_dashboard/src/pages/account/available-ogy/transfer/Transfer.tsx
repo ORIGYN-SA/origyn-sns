@@ -99,11 +99,11 @@ const Transfer = ({ show, handleClose }) => {
 
   return (
     <Dialog show={show} handleClose={handleClose}>
-      <div className="pt-12">
+      <div className="pt-6">
         {isSuccessFetchBalanceOGY && isIdleTransfer && (
           <div>
             <div className="text-center px-12">
-              <div>Transfer OGY</div>
+              <div className="font-bold text-lg">Transfer OGY</div>
               <div className="text-sm text-content/60 mb-8">
                 You can only send OGY from your available balance.
               </div>

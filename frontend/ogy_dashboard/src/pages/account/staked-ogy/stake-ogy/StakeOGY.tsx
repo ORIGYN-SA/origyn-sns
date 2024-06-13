@@ -16,8 +16,8 @@ const StakeOGY = () => {
         Stake
       </Button>
       <Dialog show={show} handleClose={handleClose}>
-        <div className="p-12 text-center">
-          <div>Stake OGY</div>
+        <div className="pt-6 pb-12 px-4 text-center">
+          <div className="font-bold text-lg">Stake OGY</div>
           <div className="text-sm mb-8">
             To stake OGY you need to go to our NNS platform.
           </div>
