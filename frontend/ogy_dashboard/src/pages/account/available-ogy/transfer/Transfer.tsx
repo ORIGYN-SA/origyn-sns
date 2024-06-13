@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
+import {
+  ArrowUpTrayIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from "@heroicons/react/24/outline";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
@@ -24,6 +29,7 @@ const Transfer = ({ show, handleClose }) => {
     isError: isErrorTransfer,
     isPending: isPendingTransfer,
     isIdle: isIdleTransfer,
+    error: errorTransfer,
     // error: errorTransfer,
   } = useTransferOGY();
 
@@ -32,10 +38,13 @@ const Transfer = ({ show, handleClose }) => {
     handleSubmit,
     control,
     reset: resetForm,
-    formState: { errors, isValid },
+    setValue,
+    setFocus,
+    formState: { errors, isValid, dirtyFields },
   } = useForm({
     mode: "onChange",
     shouldUnregister: true,
+    shouldFocusError: false,
   });
 
   useEffect(() => {
@@ -54,13 +63,14 @@ const Transfer = ({ show, handleClose }) => {
       control,
       defaultValue: 0,
     });
+    const total = divideBy1e8(
+      Number(watchedAmount) * 100000000 + Number(TRANSACTION_FEE)
+    );
     return (
       <div>
-        {isNaN(watchedAmount) ||
-        watchedAmount === 0 ||
-        Object.keys(errors).length > 0
+        {isNaN(watchedAmount) || watchedAmount === 0 || errors?.amount
           ? 0
-          : watchedAmount - divideBy1e8(Number(TRANSACTION_FEE))}{" "}
+          : total.toFixed(3)}{" "}
         OGY
       </div>
     );
@@ -83,7 +93,7 @@ const Transfer = ({ show, handleClose }) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
-      if (amount > balance) return false;
+      if (amount > balance - TRANSACTION_FEE) return false;
     }
     return true;
   };
@@ -97,6 +107,15 @@ const Transfer = ({ show, handleClose }) => {
     }
   };
 
+  const handleSetAmountMaxBalance = () => {
+    setValue(
+      "amount",
+      divideBy1e8(balanceOGY.balanceE8s - TRANSACTION_FEE).toFixed(3),
+      { shouldValidate: true }
+    );
+    setFocus("recipientAddress");
+  };
+
   return (
     <Dialog show={show} handleClose={handleClose}>
       <div className="pt-6">
@@ -104,13 +123,21 @@ const Transfer = ({ show, handleClose }) => {
           <div>
             <div className="text-center px-12">
               <div className="font-bold text-lg">Transfer OGY</div>
-              <div className="text-sm text-content/60 mb-8">
+              <div className="text-sm text-content/60 mb-12">
                 You can only send OGY from your available balance.
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="my-8 px-12">
-                <label htmlFor="amount">Amount</label>
+                <div className="flex justify-between items-center">
+                  <label htmlFor="amount">Amount</label>
+                  <button onClick={handleSetAmountMaxBalance} type="button">
+                    <div className="bg-accent px-4 py-1 rounded-full text-white flex items-center">
+                      <ArrowUpTrayIcon className="h-4 w-4 mr-2" />
+                      Max
+                    </div>
+                  </button>
+                </div>
                 <InputField
                   id="amount"
                   type="text"
@@ -124,9 +151,6 @@ const Transfer = ({ show, handleClose }) => {
                         "Amount must not exceed your balance.",
                       isPositive: (v) =>
                         Number(v) > 0 || "Amount must be a positive number.",
-                      isAmountUpperBalance: (v) =>
-                        Number(v) >= divideBy1e8(Number(TRANSACTION_FEE)) ||
-                        "Amount must be greater the or equal to transaction fees.",
                     },
                   })}
                   errors={errors?.amount}
@@ -146,7 +170,11 @@ const Transfer = ({ show, handleClose }) => {
                         "Invalid recipient address.",
                     },
                   })}
-                  errors={errors?.recipientAddress}
+                  // ? Object.keys(dirtyFields).length !== 0 fix form set errors when amount is setted via max button
+                  errors={
+                    Object.keys(dirtyFields).length !== 0 &&
+                    errors?.recipientAddress
+                  }
                 />
               </div>
 
@@ -163,7 +191,7 @@ const Transfer = ({ show, handleClose }) => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center text-content/60">
-                  <div>Transaction fee</div>
+                  <div>Transaction fee (billed to source)</div>
                   <div>{transactionFee} OGY</div>
                 </div>
               </div>
@@ -189,30 +217,33 @@ const Transfer = ({ show, handleClose }) => {
           </div>
         )}
         {isSuccessFetchBalanceOGY && isPendingTransfer && (
-          <div className="p-8 flex flex-col justify-center items-center">
+          <div className="px-4 pb-12 flex flex-col justify-center items-center">
             <LoaderSpin />
-            <div className="mt-8 font-semibold text-xl">
+            <div className="font-semibold text-xl mt-8">
               Transfer is being processed
             </div>
             <div className="text-content/60">This can take a few seconds</div>
           </div>
         )}
         {isSuccessFetchBalanceOGY && isSuccessTransfer && (
-          <div className="p-8 flex flex-col justify-center items-center">
-            <div className="font-semibold text-xl text-jade mb-8">
-              Transfer was successful!
+          <div className="px-4 pb-12 flex flex-col justify-center items-center">
+            <CheckCircleIcon className="h-24 w-24 text-jade mb-4" />
+            <div className="font-semibold text-xl mb-8">
+              Transfer was successful !
             </div>
-            <Button className="mt-8 w-full" onClick={handleClose}>
+            <Button className="px-8" onClick={handleClose}>
               Close
             </Button>
           </div>
         )}
         {isSuccessFetchBalanceOGY && isErrorTransfer && (
-          <div className="p-8 flex flex-col justify-center items-center">
-            <div className="font-semibold text-xl text-red-500 mb-8">
-              Transfer error!
+          <div className="px-4 pb-12 flex flex-col justify-center items-center">
+            <XCircleIcon className="h-24 w-24 text-red-400 mb-4" />
+            <div className="font-semibold text-xl mb-8">Transfer error !</div>
+            <div className="bg-surface-3 p-4 rounded-xl">
+              {errorTransfer?.message}
             </div>
-            <Button className="mt-8 w-full" onClick={handleClose}>
+            <Button className="mt-10 px-8" onClick={handleClose}>
               Close
             </Button>
           </div>
