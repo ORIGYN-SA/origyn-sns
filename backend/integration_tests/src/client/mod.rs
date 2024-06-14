@@ -8,3 +8,4 @@ pub mod ogy_token_swap;
 pub mod rewards;
 pub mod super_stats;
 pub mod sns_governance;
+pub mod token_metrics;
