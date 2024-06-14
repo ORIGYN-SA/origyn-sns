@@ -15,4 +15,5 @@ pub struct TestEnv {
 pub struct CanisterIds {
     pub ogy_new_ledger: CanisterId,
     pub ogy_super_stats: CanisterId,
+    pub ogy_governance: CanisterId,
 }

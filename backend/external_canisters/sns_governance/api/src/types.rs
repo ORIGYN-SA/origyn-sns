@@ -31,7 +31,7 @@ pub struct NeuronPermission {
 
 #[derive(Default)]
 pub struct NeuronId {
-    id: Vec<u8>,
+    pub id: Vec<u8>,
 }
 
 impl Storable for NeuronId {

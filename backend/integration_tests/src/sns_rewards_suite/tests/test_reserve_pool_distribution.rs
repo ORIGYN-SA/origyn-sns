@@ -18,6 +18,7 @@ use sns_rewards_api_canister::set_reserve_transfer_amounts_validate::{
     Response as SetReserveTransferAmountsValidateResponse,
 };
 
+use crate::sns_rewards_suite::init::default_test_setup;
 use crate::{
     client::{
         icrc1::client::{ balance_of, transfer },
@@ -27,7 +28,6 @@ use crate::{
             set_reserve_transfer_amounts_validate,
         },
     },
-    sns_rewards_suite::setup::default_test_setup,
     utils::tick_n_blocks,
 };
 
