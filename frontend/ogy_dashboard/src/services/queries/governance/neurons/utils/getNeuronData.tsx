@@ -1,9 +1,9 @@
-import { DateTime } from "luxon";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import {
   getCurrentTimestamp,
   formatTimestampDifference,
   formatYearsDifference,
+  formatDate,
 } from "@helpers/dates";
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { INeuronResult, INeuronData, IDissolveState } from "@services/types";
@@ -150,7 +150,7 @@ const getNeuronData = (
         })
       : "-",
     dissolveDelay: dissolveDelay ? formatYearsDifference(dissolveDelay) : "-",
-    createdAt: DateTime.fromSeconds(createdAt).toFormat("ff") ?? "-",
+    createdAt: formatDate(createdAt, { fromSeconds: true }) ?? "-",
     maxNeuronAgeForAgeBonus,
     maxAgeBonusPercentage: `${dissolveDelayBonus.toFixed(0)} %`,
     ageBonus,
