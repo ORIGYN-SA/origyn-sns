@@ -65,9 +65,7 @@ const useFetchOGYRewardAccount = () => {
 
   useEffect(() => {
     if (isSuccessRewardAcccountBalance) {
-      setTimeout(() => {
-        setRewardAccountBalance(rewardAcccountBalance.string.balance);
-      }, 5000);
+      setRewardAccountBalance(rewardAcccountBalance.string.balance);
     }
   }, [isSuccessRewardAcccountBalance, rewardAcccountBalance]);
 
