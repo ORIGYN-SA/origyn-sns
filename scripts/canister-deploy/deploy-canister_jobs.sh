@@ -64,7 +64,7 @@ ARGUMENTS="(record {
   burn_principal_id = principal \"$SNS_GOVERNANCE\";
   ledger_canister_id = \"$OGY_LEDGER\";
   authorized_principals = vec {
-    \"$CANISTER_JOBS_CANISTER_ID\"
+    \"$SNS_GOVERNANCE\"
     }
   } )"
 

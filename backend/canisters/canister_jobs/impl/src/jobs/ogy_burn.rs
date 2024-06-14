@@ -1,15 +1,20 @@
 use candid::Nat;
-use canister_time::{ run_now_then_interval, timestamp_nanos, DAY_IN_MS };
+use canister_time::{
+    is_interval_more_than_1_day,
+    run_now_then_interval,
+    timestamp_millis,
+    timestamp_nanos,
+    DAY_IN_MS,
+};
 use canister_jobs_api::BurnJobResult;
 use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferArg };
 use std::time::Duration;
-use tracing::{ debug, error };
+use tracing::{ debug, error, info };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
 const OGY_BURN_JOB_INTERVAL: Milliseconds = DAY_IN_MS;
 // Day in nanoseconds minus 1hr
-const DAY_IN_NANOSECONDS: u64 = 1_000_000_000 * 60 * 60 * (24 - 1);
 
 pub fn start_job() {
     debug!("Starting the job to burn OGY...");
@@ -23,9 +28,8 @@ pub fn run() {
 pub async fn send_ogy_to_burn_account() {
     // Prevent the job from running twice a day
     let last_ogy_burn_timestamp = read_state(|state| state.data.jobs_info.last_ogy_burn_timestamp);
-    let timestamp_now = timestamp_nanos();
-    if timestamp_now - last_ogy_burn_timestamp < DAY_IN_NANOSECONDS {
-        debug!("send_ogy_to_burn_account => time since last run is less than 1 day");
+    if !is_interval_more_than_1_day(last_ogy_burn_timestamp, timestamp_millis()) {
+        info!("send_ogy_to_burn_account => time since last run is less than 1 day");
         return;
     }
 
@@ -53,7 +57,7 @@ pub async fn send_ogy_to_burn_account() {
             };
             mutate_state(|state| {
                 state.data.burn_jobs_results.push(job_result);
-                state.data.jobs_info.last_ogy_burn_timestamp = timestamp_nanos();
+                state.data.jobs_info.last_ogy_burn_timestamp = timestamp_millis();
             });
         }
         Ok(Err(msg)) => {
