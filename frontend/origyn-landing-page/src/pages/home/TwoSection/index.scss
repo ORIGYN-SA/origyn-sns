@@ -1,0 +1,159 @@
+/* ------------------------- 打字效果屏 -------------------------------------------------- */
+
+.splitTextSection {
+    .home-future {
+        padding: 0;
+        // background-color: #f4f4f4;
+        background: var(--background3);
+        background-size: cover !important;
+    }
+
+    .home-future .container.lottie-timeline-text {
+        position: relative;
+        /* padding-top: calc(var(--section-padding) * 1.5); */
+    }
+
+    .home-future .container.lottie-timeline-text .row {
+        height: 100vh;
+        align-items: center;
+    }
+
+    .home-future .lottie-wrapper-1 {
+        width: calc(var(--title-size) * 1.3888);
+        margin-top: 3em;
+    }
+
+    .main-wrap {
+        box-sizing: border-box;
+        width: 100vw;
+        will-change: transform;
+        display: block;
+    }
+
+    main.touch {
+        position: relative;
+        height: auto;
+    }
+
+    main.touch .main-wrap {
+        position: relative;
+    }
+
+    @media screen and (max-width: 1024px) {
+        main {
+            position: relative;
+        }
+        .main-wrap {
+            position: relative;
+        }
+    }
+
+    .section {
+        // background-color: #f0f0f0;
+
+        display: block;
+        // padding-top: var(--section-padding);
+        padding-bottom: var(--section-padding);
+        position: relative;
+    }
+
+    .container {
+        /* margin: 0 auto; */
+        // padding-left: var(--container-padding);
+        // padding-right: var(--container-padding);
+        max-width: 1200px;
+        // width: 100vw;
+        text-align: left;
+        // font-size: 20px;
+    }
+
+    .container.medium {
+        max-width: 1200px;
+        // padding-left: calc(var(--container-padding) * 1.5);
+        // padding-right: calc(var(--container-padding) * 1.5);
+    }
+
+    h1 span.normal,
+    h2 span.normal,
+    h3 span.normal {
+        display: block;
+        font-weight: 500;
+        letter-spacing: -0.013em;
+    }
+
+    /* ------------------------- Split Lines -------------------------------------------------- */
+
+    .split-lines.normal .single-line {
+        overflow: hidden;
+        padding: 0.05em 0;
+        margin: -0.07em 0;
+    }
+
+    .split-lines.alt .single-line {
+        overflow: hidden;
+    }
+
+    .split-lines .single-line .single-line-inner {
+        font-size: 26px;
+        line-height: 55px;
+        transform: translateY(0%) rotate(0.001deg);
+    }
+
+    .animate-split-lines {
+        margin-top: 40px;
+    }
+
+    .split-chars {
+        font-size: 40px;
+        margin-bottom: 50px;
+        font-family: Montserrat-bold;
+    }
+
+    .split-lines .single-line:nth-child(3) {
+        margin-top: 30px;
+    }
+
+    .flexCol {
+        display: block;
+        width: 100%;
+        order: 2;
+        position: relative;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    .row.no-flex {
+        display: block;
+    }
+
+    .row.no-wrap {
+        flex-wrap: nowrap;
+    }
+
+    @media screen and (max-width: 768px) {
+        .section {
+            padding: 0;
+        }
+        .split-lines .single-line .single-line-inner {
+            font-size: 16px;
+            line-height: 28px;
+            color: #fff;
+        }
+        .split-chars {
+            font-size: 26px;
+        }
+        .split-lines .single-line:nth-child(3) {
+            margin-top: 0px;
+        }
+    }
+
+    @media screen and (max-width: 430px) {
+        .split-lines .single-line:nth-child(7) {
+            margin-top: 20px;
+        }
+    }
+}

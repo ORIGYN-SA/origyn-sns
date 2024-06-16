@@ -1,0 +1,62 @@
+.title {
+    & > p {
+        cursor: pointer;
+        // text-transform: uppercase;
+        text-transform: capitalize;
+        font-family: Montserrat-Bold;
+        color: #fff;
+    }
+
+    .realTitle {
+        line-height: 100%;
+        position: relative;
+        .hoverTitle {
+            display: inline-block;
+            transition: clip-path 0.3s linear;
+            text-shadow: 1px 1px 10px #ffffff;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            clip-path: circle(0% at 50% 100%);
+            position: absolute;
+            z-index: 10;
+            left: 0;
+        }
+    }
+
+    .titleStroke {
+        margin: 0 20px;
+        color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s linear;
+    }
+
+    &:hover {
+        .hoverTitle {
+            clip-path: circle(150% at 0% 50%);
+        }
+
+        .titleStroke {
+            -webkit-text-stroke: none;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+}
+
+@keyframes fill-text {
+    0% {
+        clip-path: var(--fill-from);
+    }
+
+    100% {
+        clip-path: var(--fill-to);
+    }
+}
+
+.numBox {
+    box-shadow: inset 0px 0px 15px 1px #ffffff;
+}
+
+.section1 {
+    background: var(--background2);
+    background-size: cover;
+}

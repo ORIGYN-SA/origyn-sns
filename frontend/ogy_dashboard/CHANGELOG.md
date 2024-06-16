@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.7] - 2024-06-12
+
+#### Fix
+
+- Inacurate OGY and ICP treasury account data
+
+#### Added
+
+- Proposals metrics on Governance page.
+
+### [1.0.6] - 2024-06-11
+
+#### Fix
+
+- Improve display footer notice.
+- Transactions table accounts columns display.
+- Inacurate OGY treasury account
+
+#### Added
+
+- How to swap link on account page.
+- Transaction history page for all accounts and user account.
+- Transaction type in table transactions and transaction details.
+- Clickable account in table token distribution on Home page.
+- NNS Proposal link to chart's tooltip OGY circulation state on page dashboard.
+
+### [1.0.5] - 2024-06-10
+
+#### Fix
+
+- Inacurate data for chart OGY foundation reserve on Home page.
+- Inacurate data for estimated rewards on Gorvenance page.
+- Improve display of neuron's data on Neuron table and Neuron details page.
+- Description not sended on contact support form.
+
 ### [1.0.3] - 2024-06-07
 
 #### Added

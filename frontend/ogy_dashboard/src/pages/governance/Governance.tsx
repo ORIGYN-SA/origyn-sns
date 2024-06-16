@@ -12,7 +12,7 @@ import {
 import { Card, Button } from "@components/ui";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
-// import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
+import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
@@ -166,7 +166,7 @@ export const Governance = () => {
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent hover:underline"
+            className="font-semibold text-accent"
           >
             Learn more about OGY
           </a>
@@ -185,7 +185,7 @@ export const Governance = () => {
         />
       </PieChartProvider>
 
-      {/* <TokensInGovernanceKpi className="mb-16" /> */}
+      <TokensInGovernanceKpi className="mb-16" />
 
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">

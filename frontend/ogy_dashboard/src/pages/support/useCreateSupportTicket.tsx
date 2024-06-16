@@ -4,15 +4,15 @@ import ogyAPI from "@services/api/ogy";
 export type supportRequestProps = {
   name: string;
   email: string;
-  details: string;
+  description: string;
   principal: string;
 }
 
-const sendSupportRequest = async ({name, email, details, principal}: supportRequestProps) => {
+const sendSupportRequest = async ({name, email, description, principal}: supportRequestProps) => {
   const result = await ogyAPI.post(`/contact`, {
     name,
     email,
-    message: `${details} User Principal:${principal}`
+    message: `${description} User Principal:${principal}`
   }, {
     headers: {
       "Content-Type": "application/json",
