@@ -32,52 +32,58 @@ fn test_proposals_metrics() {
     let neuron_id_1 = test_env.neuron_data.get(&0usize).unwrap().clone().id.unwrap();
     assert!(neuron_1.permissions.get(1).unwrap().principal == Some(user_1));
 
-    let proposal = Proposal {
-        title: "Proposal 1".to_string(),
-        summary: "Summary Proposal 1".to_string(),
-        url: "https://origyn.com".to_string(),
-        action: Some(
-            Action::RegisterDappCanisters(RegisterDappCanisters {
-                canister_ids: vec![random_principal()],
-            })
-        ),
-    };
+    for i in 1..3 {
+        let proposal = Proposal {
+            title: "Proposal 1".to_string(),
+            summary: "Summary Proposal 1".to_string(),
+            url: "https://origyn.com".to_string(),
+            action: Some(
+                Action::RegisterDappCanisters(RegisterDappCanisters {
+                    canister_ids: vec![random_principal()],
+                })
+            ),
+        };
 
-    let manage_neuron_args1 = ManageNeuron {
-        subaccount: neuron_id_1.id.clone(),
-        command: Some(Command::MakeProposal(proposal)),
-    };
-    manage_neuron(&mut test_env.pic, user_1, sns_governance_canister_id, &manage_neuron_args1);
+        let manage_neuron_args1 = ManageNeuron {
+            subaccount: neuron_id_1.id.clone(),
+            command: Some(Command::MakeProposal(proposal)),
+        };
+        manage_neuron(&mut test_env.pic, user_1, sns_governance_canister_id, &manage_neuron_args1);
 
-    // let msg = format!("{res:?}");
-    // println!("Manage neuron res: {}", msg);
-    let list_proposals_args = sns_governance_canister::list_proposals::Args {
-        limit: 100,
-        before_proposal: None,
-        exclude_type: Vec::new(),
-        include_status: Vec::new(),
-        include_reward_status: Vec::new(),
-    };
-    let proposals_list = list_proposals(
-        &mut test_env.pic,
-        user_1,
-        sns_governance_canister_id,
-        &list_proposals_args
-    );
-    assert_eq!(proposals_list.proposals.len(), 1);
+        // let msg = format!("{res:?}");
+        // println!("Manage neuron res: {}", msg);
+        let list_proposals_args = sns_governance_canister::list_proposals::Args {
+            limit: 100,
+            before_proposal: None,
+            exclude_type: Vec::new(),
+            include_status: Vec::new(),
+            include_reward_status: Vec::new(),
+        };
+        let proposals_list = list_proposals(
+            &mut test_env.pic,
+            user_1,
+            sns_governance_canister_id,
+            &list_proposals_args
+        );
+        assert_eq!(proposals_list.proposals.len(), i);
 
-    // Advance 6 minutes, the sync proposal occurs every 5 minutes in token_metrics
-    test_env.pic.advance_time(Duration::from_millis(6 * 60 * 1_000));
+        // Advance 5 minutes
+        test_env.pic.advance_time(Duration::from_millis(5 * 60 * 1_000));
 
-    // Sleep 2 seconds
-    thread::sleep(Duration::from_secs(2));
+        // For some reason we need this
+        for _ in 1..20 {
+            test_env.pic.tick();
+        }
 
-    let proposals_metrics = get_proposals_metrics(
-        &mut test_env.pic,
-        user_1,
-        token_metrics_canister_id,
-        &()
-    );
-    println!("Proposals metrics: {proposals_metrics:?}");
-    assert_eq!(proposals_metrics.total_proposals, 1);
+        // Sleep 2 seconds
+        thread::sleep(Duration::from_secs(2));
+
+        let proposals_metrics = get_proposals_metrics(
+            &mut test_env.pic,
+            user_1,
+            token_metrics_canister_id,
+            &()
+        );
+        assert_eq!(proposals_metrics.total_proposals, i as u64);
+    }
 }

@@ -157,6 +157,7 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
             Err(err) => {
                 let message = format!("{err:?}");
                 error!(message, "update_balance_list -> get_principal_holders");
+                break;
             }
         }
     }
