@@ -48,6 +48,9 @@ include:
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
     inputs:
       src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: canister_jobs
   # Canister builds
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
@@ -61,6 +64,9 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: canister_jobs
   # Canister generate declaration
   - local: scripts/ci-cd/.generate_declaration.yml
     inputs:
@@ -74,6 +80,9 @@ include:
   - local: scripts/ci-cd/.generate_declaration.yml
     inputs:
       src-folder: token_metrics
+  - local: scripts/ci-cd/.generate_declaration.yml
+    inputs:
+      src-folder: canister_jobs
   # Frontend builds
   - local: scripts/ci-cd/.frontend_builds.yml
     inputs:
@@ -180,7 +189,7 @@ check canister ids:
       variables:
         TARGET_NETWORK: staging
         PEM_FILE: "${PEM_FILE_STAGING}"
-    - if: $CI_COMMIT_TAG =~ '/^(ogy_token_swap)|(sns_rewards)|(super_stats_v3)|(token_metrics)-v\d+\.\d+\.\d+$/'
+    - if: $CI_COMMIT_TAG =~ '/^(ogy_token_swap)|(sns_rewards)|(super_stats_v3)|(token_metrics)|(canister_jobs)-v\d+\.\d+\.\d+$/'
       variables:
         TARGET_NETWORK: ic
         PEM_FILE: "${PEM_FILE_PRODUCTION}"
@@ -348,6 +357,10 @@ canister jobs staging:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/canister_jobs/{**,**/**,**/**/**}/*.{rs,toml,lock}"
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
@@ -368,6 +381,10 @@ canister jobs:
   resource_group: backend canister staging deployment
   rules:
     - if: $CI_COMMIT_TAG =~ '/^canister_jobs-v\d+\.\d+\.\d+$/'
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/canister_jobs/{**,**/**,**/**/**}/*.{rs,toml,lock}"
       when: manual
   variables:
     TARGET_NETWORK: ic

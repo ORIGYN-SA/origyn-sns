@@ -50,12 +50,10 @@ if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   TESTMODE="true"
   OGY_LEDGER=$(dfx canister id sns_ledger --network staging)
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network staging)
-  CANISTER_JOBS_CANISTER_ID=$(dfx canister id canister_jobs --network staging)
 else
   TESTMODE="false"
   OGY_LEDGER=$(dfx canister id sns_ledger --network $NETWORK)
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
-  CANISTER_JOBS_CANISTER_ID=$(dfx canister id canister_jobs --network $NETWORK)
 fi
 
 ARGUMENTS="(record {
