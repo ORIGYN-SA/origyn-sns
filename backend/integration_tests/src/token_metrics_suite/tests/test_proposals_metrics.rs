@@ -1,4 +1,6 @@
 use std::fmt::format;
+use std::thread;
+use std::time::Duration;
 
 use sns_governance_canister::types::manage_neuron::Command;
 use sns_governance_canister::types::proposal::Action;
@@ -17,7 +19,9 @@ use crate::utils::random_principal;
 
 #[test]
 fn test_proposals_metrics() {
-    let mut test_env = default_test_setup();
+    let setup = default_test_setup();
+    let mut test_env = setup.sns_with_rewards_test_env;
+    let token_metrics_canister_id = setup.token_metrics_canister_id;
 
     let sns_governance_canister_id = test_env.sns_gov_canister_id;
     //let token_metrics_canister_id = test_env.tok;
@@ -43,12 +47,7 @@ fn test_proposals_metrics() {
         subaccount: neuron_id_1.id.clone(),
         command: Some(Command::MakeProposal(proposal)),
     };
-    let res = manage_neuron(
-        &mut test_env.pic,
-        user_1,
-        sns_governance_canister_id,
-        &manage_neuron_args1
-    );
+    manage_neuron(&mut test_env.pic, user_1, sns_governance_canister_id, &manage_neuron_args1);
 
     // let msg = format!("{res:?}");
     // println!("Manage neuron res: {}", msg);
@@ -67,10 +66,18 @@ fn test_proposals_metrics() {
     );
     assert_eq!(proposals_list.proposals.len(), 1);
 
+    // Advance 6 minutes, the sync proposal occurs every 5 minutes in token_metrics
+    test_env.pic.advance_time(Duration::from_millis(6 * 60 * 1_000));
+
+    // Sleep 2 seconds
+    thread::sleep(Duration::from_secs(2));
+
     let proposals_metrics = get_proposals_metrics(
         &mut test_env.pic,
         user_1,
         token_metrics_canister_id,
         &()
     );
+    println!("Proposals metrics: {proposals_metrics:?}");
+    assert_eq!(proposals_metrics.total_proposals, 1);
 }

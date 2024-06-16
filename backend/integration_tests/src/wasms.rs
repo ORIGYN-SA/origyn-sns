@@ -11,6 +11,7 @@ lazy_static! {
     pub static ref SNS_GOVERNANCE: CanisterWasm = get_external_canister_wasm("sns_governance");
     // internal canisters
     pub static ref OGY_TOKEN_SWAP: CanisterWasm = get_internal_canister_wasm("ogy_token_swap");
+    pub static ref TOKEN_METRICS: CanisterWasm = get_internal_canister_wasm("token_metrics");
     pub static ref REWARDS: CanisterWasm = get_internal_canister_wasm("sns_rewards");
     pub static ref SUPER_STATS_V3: CanisterWasm = get_internal_canister_wasm("super_stats_v3");
 }

@@ -21,7 +21,8 @@ pub fn run() {
 pub async fn sync_proposals_metrics_data() {
     let canister_id = read_state(|state| state.data.sns_governance_canister);
     let last_synced_proposal_id = read_state(|state| state.data.sync_info.last_synced_proposal_id);
-
+    info!("last synced proposal id: {last_synced_proposal_id:?}");
+    println!("last synced proposal id: {last_synced_proposal_id:?}");
     let mut number_of_scanned_proposals = 0;
     let mut continue_scanning: bool = true;
 
@@ -39,6 +40,7 @@ pub async fn sync_proposals_metrics_data() {
         match sns_governance_canister_c2c_client::list_proposals(canister_id, &args).await {
             Ok(response) => {
                 let number_of_received_proposals = response.proposals.len();
+                info!("##number_of_received_proposals: {number_of_received_proposals:?}");
                 if number_of_received_proposals > 0 {
                     response.proposals.iter().for_each(|proposal| {
                         let date = proposal.proposal_creation_timestamp_seconds / 86400;
