@@ -103,7 +103,7 @@
       "candid": "backend/canisters/canister_jobs/api/can.did",
       "optimize": "cycles",
       "package": "canister_jobs",
-      "wasm": "backend/canisters/canister_jobs/target/wasm32-unknown-unknown/release/canister_jobs.wasm.gz",
+      "wasm": "backend/canisters/canister_jobs/target/wasm32-unknown-unknown/release/canister_jobs_canister.wasm.gz",
       "declarations": {
         "bindings": ["js", "did", "ts"],
         "env_override": null,
