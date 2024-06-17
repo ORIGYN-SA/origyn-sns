@@ -1,19 +1,36 @@
 import { Fragment, ReactNode } from "react";
-import { Transition, Dialog as DialogHeadlessui } from "@headlessui/react";
+import {
+  Transition,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface DialogProps {
   show: boolean;
   handleClose: () => void;
   children?: ReactNode;
+  enableClose?: boolean;
 }
 
-const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
+const DialogComponent = ({
+  show = true,
+  handleClose,
+  enableClose = true,
+  children,
+}: DialogProps) => {
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
-        <DialogHeadlessui static as={Fragment} onClose={handleClose}>
+        <Dialog
+          static
+          as={Fragment}
+          onClose={enableClose ? handleClose : () => null}
+        >
           <div className="absolute z-50 inset-0 overflow-hidden">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-in-out duration-500"
               enterFrom="opacity-0"
@@ -22,10 +39,10 @@ const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <DialogHeadlessui.Overlay className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
-            </Transition.Child>
+              <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
+            </TransitionChild>
             <div className="fixed flex justify-center h-screen w-full p-4">
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95"
@@ -34,19 +51,25 @@ const Dialog = ({ show = true, handleClose, children }: DialogProps) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogHeadlessui.Panel className="bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto">
-                  {/* <DialogHeadlessui.Title>
-                    Deactivate account
-                  </DialogHeadlessui.Title> */}
+                <DialogPanel className="bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto">
+                  <DialogTitle className="flex justify-end px-6 pt-6">
+                    {enableClose && (
+                      <button onClick={handleClose}>
+                        <div className="hover:bg-accent hover:text-white p-1 rounded-full">
+                          <XMarkIcon className="h-8 w-8" />
+                        </div>
+                      </button>
+                    )}
+                  </DialogTitle>
                   {children}
-                </DialogHeadlessui.Panel>
-              </Transition.Child>
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
-        </DialogHeadlessui>
+        </Dialog>
       </div>
     </Transition>
   );
 };
 
-export default Dialog;
+export default DialogComponent;

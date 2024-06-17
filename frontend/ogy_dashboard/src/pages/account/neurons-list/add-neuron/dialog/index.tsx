@@ -17,7 +17,7 @@ const DialogAddNeuron = () => {
   return (
     <>
       <Dialog show={show} handleClose={handleClose}>
-        <div className="px-12 pt-8 pb-12">
+        <div className="px-12 pt-6 pb-12">
           {!isPendingAddNeuron &&
             !isErrorAddNeuron &&
             !isSuccessAddNeuron &&

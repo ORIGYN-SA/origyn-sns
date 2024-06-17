@@ -27,15 +27,19 @@ export const getCurrentDateLastMonthInSeconds = () =>
       .toSeconds()
   ).toString();
 
-export const formatDateShort = (date: string) => {
-  const datetime = DateTime.fromISO(date);
-  return datetime.toLocaleString(DateTime.DATETIME_SHORT);
-};
-
-export const timestampToDateShort = (timestamp: number) => {
-  const millisecondsTimestamp = timestamp / 1000000;
-  const datetime = DateTime.fromMillis(millisecondsTimestamp);
-  return datetime.toLocaleString(DateTime.DATETIME_SHORT);
+export const formatDate = (
+  date: string | number,
+  options?: { fromSeconds?: boolean; fromMillis?: boolean; fromISO?: boolean }
+): string => {
+  let dateTime = DateTime.fromMillis(Number(date), { zone: "utc" });
+  if (options?.fromSeconds)
+    dateTime = DateTime.fromSeconds(Number(date), { zone: "utc" });
+  else if (options?.fromMillis)
+    dateTime = DateTime.fromMillis(Number(date) / 1000000, { zone: "utc" });
+  else if (options?.fromISO)
+    dateTime = DateTime.fromISO(date.toString(), { zone: "utc" });
+  const result = dateTime.toFormat("yyyy-LL-dd, hh:mm:ss z");
+  return `${result}, ${dateTime.toRelative()}`;
 };
 
 export const formatYearsDifference = (timestamp: number) => {
@@ -44,7 +48,6 @@ export const formatYearsDifference = (timestamp: number) => {
   const difference = givenDate.diff(now, ["years"]);
   const { years } = difference.toObject();
   const roundedYears = Math.round(years ?? 0);
-
   return `${roundedYears} year${roundedYears > 1 ? "s" : ""}`;
 };
 
