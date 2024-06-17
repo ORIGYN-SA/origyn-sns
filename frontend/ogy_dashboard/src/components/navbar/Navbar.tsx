@@ -111,7 +111,11 @@ const Navbar = () => {
               open={showMenu}
               onClose={handleOnHideMenu}
             >
-              <div className="absolute z-50 inset-0 overflow-hidden">
+              <div
+                className="absolute z-50 inset-0 overflow-hidden"
+                aria-hidden="true"
+                onClick={() => setShowMenu(false)}
+              >
                 <TransitionChild
                   as={Fragment}
                   enter="ease-in-out duration-500"
