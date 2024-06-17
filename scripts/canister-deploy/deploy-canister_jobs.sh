@@ -60,9 +60,9 @@ ARGUMENTS="(record {
   test_mode = $TESTMODE;
   daily_burn_amount = 164_500_000_000 : nat64;
   burn_principal_id = principal \"$SNS_GOVERNANCE\";
-  ledger_canister_id = \"$OGY_LEDGER\";
+  ledger_canister_id = principal \"$OGY_LEDGER\";
   authorized_principals = vec {
-    \"$SNS_GOVERNANCE\"
+    principal \"$SNS_GOVERNANCE\"
     }
   } )"
 

@@ -17,7 +17,7 @@ const OGY_BURN_JOB_INTERVAL: Milliseconds = DAY_IN_MS;
 // Day in nanoseconds minus 1hr
 
 pub fn start_job() {
-    debug!("Starting the job to burn OGY...");
+    debug!("Starting the job to burn OGY.");
     run_now_then_interval(Duration::from_millis(OGY_BURN_JOB_INTERVAL), run)
 }
 
