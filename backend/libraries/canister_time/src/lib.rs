@@ -56,3 +56,15 @@ pub fn run_now_then_interval(interval: Duration, func: fn()) {
 pub fn run_interval(interval: Duration, func: fn()) {
     ic_cdk_timers::set_timer_interval(interval, func);
 }
+
+pub fn is_interval_more_than_1_day(
+    previous_time: TimestampMillis,
+    now_time: TimestampMillis
+) -> bool {
+    // convert the milliseconds to the number of days since UNIX Epoch.
+    // integer division means partial days will be truncated down or effectively rounded down. e.g 245.5 becomes 245
+    let previous_in_days = previous_time / DAY_IN_MS;
+    let current_in_days = now_time / DAY_IN_MS;
+    // never allow distributions to happen twice i.e if the last run distribution in days since UNIX epoch is the same as the current time in days since the last UNIX Epoch then return early.
+    current_in_days != previous_in_days
+}

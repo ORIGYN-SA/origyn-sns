@@ -97,6 +97,18 @@
         "env_override": null,
         "output": "backend/canisters/super_stats_v3/api/declarations"
       }
+    },
+    "canister_jobs": {
+      "type": "custom",
+      "candid": "backend/canisters/canister_jobs/api/can.did",
+      "optimize": "cycles",
+      "package": "canister_jobs",
+      "wasm": "backend/canisters/canister_jobs/target/wasm32-unknown-unknown/release/canister_jobs.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/canister_jobs/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",
