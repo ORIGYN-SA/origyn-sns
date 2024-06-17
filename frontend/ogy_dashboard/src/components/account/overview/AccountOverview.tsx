@@ -42,7 +42,11 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+                aria-hidden="true"
+                onClick={() => handleClose()}
+              />
             </TransitionChild>
             <div className="fixed inset-y-0 right-0 max-w-full flex">
               <TransitionChild
@@ -96,7 +100,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                         <div className="flex justify-center ml-2">
                           {balanceOGY?.balance !== null ? (
                             <div className="text-2xl font-semibold">
-                              {balanceOGY?.balance}
+                              {balanceOGY?.string.balance}
                               <span className="text-content/60 ml-2">OGY</span>
                             </div>
                           ) : (
