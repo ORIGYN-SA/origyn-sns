@@ -58,7 +58,7 @@ fi
 
 ARGUMENTS="(record {
   test_mode = $TESTMODE;
-  daily_burn_amount = 1645 * 100_000_000;
+  daily_burn_amount = 164_500_000_000 : nat64;
   burn_principal_id = principal \"$SNS_GOVERNANCE\";
   ledger_canister_id = \"$OGY_LEDGER\";
   authorized_principals = vec {
