@@ -69,7 +69,7 @@ const TransactionsAccountList = ({
         accessorKey: "from_account",
         id: "from_account",
         cell: (info) => (
-          <div className="flex items-center max-w-72">
+          <div className="flex items-center max-w-64">
             {info.getValue() && info.getValue() === "Minting account" && (
               <div> {info.getValue()}</div>
             )}
@@ -95,7 +95,7 @@ const TransactionsAccountList = ({
         accessorKey: "to_account",
         id: "to_account",
         cell: (info) => (
-          <div className="flex items-center max-w-72">
+          <div className="flex items-center max-w-64">
             {info.getValue() && info.getValue() === "Minting account" && (
               <div> {info.getValue()}</div>
             )}

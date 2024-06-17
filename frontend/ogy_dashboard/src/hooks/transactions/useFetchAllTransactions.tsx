@@ -1,7 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { fetchAllTransactions } from "@services/queries/transactions/fetchAllTransactions";
 import { ListParams } from "@services/types/list.params.types";
-import { timestampToDateShort } from "@helpers/dates";
+import { formatDate } from "@helpers/dates";
 
 const useFetchAllTransactions = ({
   limit = 20,
@@ -24,7 +24,6 @@ const useFetchAllTransactions = ({
     ? transactions.data?.map((transaction) => {
         const index = transaction?.index;
         const timestamp = transaction?.timestamp;
-        // const updated_at = transaction?.updated_at;
         const from_account = transaction?.from_account;
         const to_account = transaction?.to_account;
         const amount = transaction?.amount;
@@ -34,7 +33,9 @@ const useFetchAllTransactions = ({
 
         return {
           index,
-          timestamp: timestamp ? timestampToDateShort(Number(timestamp)) : "",
+          timestamp: timestamp
+            ? formatDate(timestamp, { fromMillis: true })
+            : "",
           from_account: kind === "mint" ? "Minting account" : from_account,
           to_account: kind === "burn" ? "Minting account" : to_account,
           amount,

@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.8] - 2024-06-13
+
+#### Added
+
+- Disabling close dialog during swap tokens process
+- Close icon to dialogs
+- Disclaimer on OGY stake dialog when user are not connected with Internet Identity
+- Transaction fees are now billed to source in transfer
+- Button max for filling amount to transfer to usermax balance
+- Error message when transfer did'nt succeed
+- Improve UI on dialog transfer success/error
+- OGY reward pool chart on dashboard page
+- Date uniformization, use UTC zone and display time elapsed
+
+#### Changed
+
+- headlessui package to version 2
+
 ### [1.0.7] - 2024-06-12
 
 #### Fix

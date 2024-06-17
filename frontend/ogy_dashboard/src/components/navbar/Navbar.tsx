@@ -1,7 +1,7 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useConnect } from "@amerej/connect2ic-react";
-import { Transition, Dialog } from "@headlessui/react";
+import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import AccountOverview from "@components/account/overview/AccountOverview";
@@ -112,7 +112,7 @@ const Navbar = () => {
               onClose={handleOnHideMenu}
             >
               <div className="absolute z-50 inset-0 overflow-hidden">
-                <Transition.Child
+                <TransitionChild
                   as={Fragment}
                   enter="ease-in-out duration-500"
                   enterFrom="opacity-0"
@@ -121,10 +121,10 @@ const Navbar = () => {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Dialog.Overlay className="fixed w-full inset-0 bg-black bg-opacity-50 transition-opacity" />
-                </Transition.Child>
+                  <div className="fixed w-full inset-0 bg-black bg-opacity-50 transition-opacity" />
+                </TransitionChild>
                 <div className="fixed inset-x-0 top-0 w-full flex">
-                  <Transition.Child
+                  <TransitionChild
                     as={Fragment}
                     enter="transform transition ease-in-out duration-500 sm:duration-700"
                     enterFrom="-translate-y-full"
@@ -164,7 +164,7 @@ const Navbar = () => {
                         ))}
                       </div>
                     </div>
-                  </Transition.Child>
+                  </TransitionChild>
                 </div>
               </div>
             </Dialog>
