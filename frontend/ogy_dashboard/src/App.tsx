@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 
 import Layout from "@components/Layout";
-import Dashboard from "@pages/dashboard/Dashboard";
+import Dashboard from "@pages/dashboard";
 import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-import { Governance } from "@pages/governance/Governance";
+import { Governance } from "@pages/governance";
 import { Neurons } from "@pages/neurons/Neurons";
 import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
@@ -18,7 +18,7 @@ import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
-import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
+import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
 import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";

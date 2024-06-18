@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
+import { DateTime } from "luxon";
 import {
   useQuery,
-  UseQueryResult,
   keepPreviousData,
+  UseQueryResult,
 } from "@tanstack/react-query";
-import { DateTime } from "luxon";
-import fetchAccountBalanceHistory from "@services/queries/metrics/fetchAccountBalanceHistory";
-import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { useCanister } from "@amerej/connect2ic-react";
-import { ChartData } from "@services/types/charts.types";
+import fetchStakeHistory from "@services/queries/metrics/fetchStakeHistory";
 import { HistoryData } from "@services/types/token_metrics";
+import { ChartData } from "@services/types/charts.types";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 
-const useAccountBalanceHistory = ({ account }: { account: string }) => {
+const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
+  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [data, setData] = useState<
     { total: string; dataChart: ChartData[] } | undefined
   >(undefined);
-  const [statsActor] = useCanister("tokenStats");
 
   const {
     data: response,
@@ -24,8 +24,12 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
     isError,
     error,
   }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
-    queryKey: ["accountBalanceHistory", account],
-    queryFn: () => fetchAccountBalanceHistory({ account, actor: statsActor }),
+    queryKey: ["totalTokensStakes"],
+    queryFn: () =>
+      fetchStakeHistory({
+        actor: tokenMetricsActor,
+        start,
+      }),
     placeholderData: keepPreviousData,
   });
 
@@ -38,8 +42,8 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
         const value = divideBy1e8(r[1].balance);
         return {
           name,
-          value,
-          valueToString: roundAndFormatLocale({ number: value, decimals: 3 }),
+          value: divideBy1e8(r[1].balance),
+          valueToString: roundAndFormatLocale({ number: value }),
         };
       });
       setData({
@@ -58,4 +62,4 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
   };
 };
 
-export default useAccountBalanceHistory;
+export default useTotalTokensStakes;

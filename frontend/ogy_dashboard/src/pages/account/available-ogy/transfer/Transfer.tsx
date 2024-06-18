@@ -108,11 +108,10 @@ const Transfer = ({ show, handleClose }) => {
   };
 
   const handleSetAmountMaxBalance = () => {
-    setValue(
-      "amount",
-      divideBy1e8(balanceOGY.balanceE8s - TRANSACTION_FEE).toFixed(3),
-      { shouldValidate: true }
-    );
+    const value = divideBy1e8(balanceOGY.balanceE8s - TRANSACTION_FEE);
+    setValue("amount", value > 0 ? value.toFixed(3) : 0, {
+      shouldValidate: true,
+    });
     setFocus("recipientAddress");
   };
 
