@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
-import { Principal } from "@dfinity/principal";
-import { AccountIdentifier } from "@dfinity/ledger-icp";
+// import { Principal } from "@dfinity/principal";
+// import { AccountIdentifier } from "@dfinity/ledger-icp";
 import Skeleton from "react-loading-skeleton";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
@@ -62,11 +62,12 @@ const TransactionsAccountsDetails = () => {
             <div className="mb-4">
               <div className="text-content/60">Subaccount</div>
               <div className="font-bold break-all">
-                {data?.subaccount ||
+                {data?.formatted.subaccount}
+                {/* {data?.has_subaccount ||
                   (data?.id &&
                     AccountIdentifier.fromPrincipal({
                       principal: Principal.fromText(data?.id || ""),
-                    }).toHex())}
+                    }).toHex())} */}
               </div>
             </div>
           </div>
