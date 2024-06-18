@@ -47,7 +47,7 @@ const List = ({
             </div>
           </div>
         ),
-        header: "Proposal ID",
+        header: "ID",
         meta: {
           className: "text-left",
         },
@@ -56,7 +56,7 @@ const List = ({
         accessorKey: "title",
         id: "title",
         cell: ({ getValue }) => (
-          <div className="flex items-center max-w-sm">
+          <div className="flex items-center max-w-64">
             <div
               data-tooltip-id="tooltip_title"
               data-tooltip-content={getValue()}
