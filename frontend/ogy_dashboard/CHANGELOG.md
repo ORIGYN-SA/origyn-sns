@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
-### [1.0.8] - 2024-06-13
+### [1.0.8] - 2024-06-18
 
 #### Added
 
@@ -19,10 +19,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Improve UI on dialog transfer success/error
 - OGY reward pool chart on dashboard page
 - Date uniformization, use UTC zone and display time elapsed
+- Tokens in staking chart on Governance/Dashboard page
+- Current blance account on chart on account details page
 
 #### Changed
 
 - headlessui package to version 2
+
+#### Fixed
+
+- Balance amount format in account overview
+- Inacurate data in balance history chart on account details page
 
 ### [1.0.7] - 2024-06-12
 
