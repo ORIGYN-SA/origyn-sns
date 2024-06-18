@@ -44,7 +44,7 @@ const Area = ({ data, fill }: AreaChart) => {
         margin={{
           top: 10,
           right: 30,
-          left: 0,
+          left: 5,
           bottom: 0,
         }}
       >
@@ -66,7 +66,7 @@ const Area = ({ data, fill }: AreaChart) => {
           axisLine={false}
         />
         <YAxis
-          tickFormatter={(value) => millify(value)}
+          tickFormatter={(value) => (value >= 1000 ? millify(value) : value)}
           tickLine={false}
           axisLine={false}
         />

@@ -7,11 +7,11 @@ import Skeleton from "react-loading-skeleton";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import TransactionsAccountList from "@pages/transactions/transactions-account-list";
-import BalanceHistory from "./balance-history/BalanceHistory";
+import BalanceHistory from "./ChartBalanceHistory";
 import TransactionsChart from "./transactions-chart/TransactionsChart";
 import { Button } from "@components/ui";
 
-export const TransactionsAccountsDetails = () => {
+const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
   const handleOnClickBack = () => {
     navigate(-1);
@@ -130,3 +130,5 @@ export const TransactionsAccountsDetails = () => {
     </>
   );
 };
+
+export default TransactionsAccountsDetails;

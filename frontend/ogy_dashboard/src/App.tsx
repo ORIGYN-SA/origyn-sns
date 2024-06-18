@@ -18,7 +18,7 @@ import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
-import { TransactionsAccountsDetails } from "@pages/transactions-accounts-details/TransactionsAccountsDetails";
+import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
 import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
