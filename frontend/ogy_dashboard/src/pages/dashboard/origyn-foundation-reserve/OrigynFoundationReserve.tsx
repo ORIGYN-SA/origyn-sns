@@ -75,7 +75,7 @@ const OrigynFoundationReserve = ({
             </TooltipInfo>
           </div>
 
-          <div className="mt-6 h-80 rounded-xl">
+          <div className="mt-6 h-72 rounded-xl">
             {isSuccess && foundationAssets && (
               <PieChart data={foundationAssets.dataPieChart} colors={colors} />
             )}

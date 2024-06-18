@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 
 import Layout from "@components/Layout";
-import Dashboard from "@pages/dashboard/Dashboard";
+import Dashboard from "@pages/dashboard";
 import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-import { Governance } from "@pages/governance/Governance";
+import { Governance } from "@pages/governance";
 import { Neurons } from "@pages/neurons/Neurons";
 import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
