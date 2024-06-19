@@ -10,13 +10,13 @@ transfers tokens from reserve pool to the reward pool on a daily basis.
 
 use crate::{ state::{ mutate_state, read_state }, utils::transfer_token };
 use candid::{ Nat, Principal };
-use canister_time::{ now_millis, run_interval, DAY_IN_MS };
+use canister_time::{ is_interval_more_than_1_day, now_millis, run_interval, DAY_IN_MS };
 use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
 use sns_rewards_api_canister::subaccounts::RESERVE_POOL_SUB_ACCOUNT;
 use utils::env::Environment;
 use std::time::Duration;
 use tracing::{ debug, error, info };
-use types::{ Milliseconds, TimestampMillis, TokenSymbol };
+use types::{ Milliseconds, TokenSymbol };
 
 const BURN_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -133,21 +133,9 @@ async fn fetch_balance_of_sub_account(
     }
 }
 
-pub fn is_interval_more_than_1_day(
-    previous_time: TimestampMillis,
-    now_time: TimestampMillis
-) -> bool {
-    // convert the milliseconds to the number of days since UNIX Epoch.
-    // integer division means partial days will be truncated down or effectively rounded down. e.g 245.5 becomes 245
-    let previous_in_days = previous_time / BURN_INTERVAL;
-    let current_in_days = now_time / BURN_INTERVAL;
-    // never allow distributions to happen twice i.e if the last run distribution in days since UNIX epoch is the same as the current time in days since the last UNIX Epoch then return early.
-    current_in_days != previous_in_days
-}
-
 #[cfg(test)]
 mod tests {
-    use super::is_interval_more_than_1_day;
+    use canister_time::is_interval_more_than_1_day;
 
     #[test]
     fn test_is_interval_more_than_1_day() {

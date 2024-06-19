@@ -1,9 +1,9 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { DateTime } from "luxon";
 import _capitalize from "lodash/capitalize";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
 import { fetchOneTransactionRosetta } from "@services/queries/transactions/fetchOneTransactionRosetta";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
+import { formatDate } from "@helpers/dates";
 
 const useFetchOneTransaction = ({
   transactionId,
@@ -74,9 +74,7 @@ const useFetchOneTransaction = ({
           })
         : "",
       kind: _capitalize(kind),
-      updated_at: updated_at
-        ? DateTime.fromISO(updated_at).toLocaleString(DateTime.DATETIME_FULL)
-        : "",
+      updated_at: updated_at ? formatDate(updated_at, { fromISO: true }) : "",
       memo: memo ? memo : "-",
     },
   };

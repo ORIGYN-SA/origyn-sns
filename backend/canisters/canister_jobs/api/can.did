@@ -1,0 +1,13 @@
+type BurnJobResult = record { timestamp : nat64; block_height : nat };
+type InitArgs = record {
+  test_mode : bool;
+  daily_burn_amount : nat64;
+  authorized_principals : vec principal;
+  ledger_canister_id : principal;
+  burn_principal_id : principal;
+};
+type Result = variant { Ok : nat64; Err : text };
+service : (InitArgs) -> {
+  get_burn_history : () -> (vec BurnJobResult) query;
+  set_daily_burn_amount : (nat64) -> (Result);
+}

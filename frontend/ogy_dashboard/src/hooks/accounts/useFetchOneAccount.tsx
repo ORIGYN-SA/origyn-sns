@@ -28,6 +28,8 @@ const useFetchOneAccount = ({ accountId }: { accountId: string }) => {
   const created_timestamp = account?.created_timestamp;
   const latest_transaction_index = account?.latest_transaction_index;
   const updated_at = account?.updated_at;
+  const has_subaccount =
+    subaccount !== "" && subaccount !== null && subaccount !== undefined;
 
   const data = {
     id,
@@ -38,7 +40,7 @@ const useFetchOneAccount = ({ accountId }: { accountId: string }) => {
     created_timestamp,
     latest_transaction_index,
     updated_at,
-    has_subaccount: !!subaccount,
+    has_subaccount,
     formatted: {
       balance: balance
         ? roundAndFormatLocale({ number: divideBy1e8(Number(balance)) })
@@ -46,7 +48,7 @@ const useFetchOneAccount = ({ accountId }: { accountId: string }) => {
       updated_at: updated_at
         ? DateTime.fromISO(updated_at).toLocaleString(DateTime.DATETIME_FULL)
         : "",
-      subaccount: subaccount ? subaccount : "None (default subaccount)",
+      subaccount: has_subaccount ? subaccount : "None (default subaccount)",
     },
   };
 

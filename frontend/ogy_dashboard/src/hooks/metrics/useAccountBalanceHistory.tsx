@@ -1,41 +1,61 @@
 import { useState, useEffect } from "react";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {
+  useQuery,
+  UseQueryResult,
+  keepPreviousData,
+} from "@tanstack/react-query";
+import { DateTime } from "luxon";
 import fetchAccountBalanceHistory from "@services/queries/metrics/fetchAccountBalanceHistory";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { useCanister } from "@amerej/connect2ic-react";
 import { ChartData } from "@services/types/charts.types";
-import { divideBy1e8 } from "@helpers/numbers";
+import { HistoryData } from "@services/types/token_metrics";
 
-interface NumberStringTuple extends Array<{ balance: string } | number> {
-  0: number;
-  1: { balance: string };
-}
-
-const useAccountBalanceHistory = (account: string) => {
-  const [data, setData] = useState([] as ChartData[]);
+const useAccountBalanceHistory = ({ account }: { account: string }) => {
+  const [data, setData] = useState<
+    { total: string; dataChart: ChartData[] } | undefined
+  >(undefined);
   const [statsActor] = useCanister("tokenStats");
 
   const {
-    data: fetchedData,
+    data: response,
     isSuccess,
     isLoading,
+    isError,
     error,
-  }: UseQueryResult<Array<NumberStringTuple>> = useQuery(
-    fetchAccountBalanceHistory({ account, actor: statsActor })
-  );
+  }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
+    queryKey: ["accountBalanceHistory", account],
+    queryFn: () => fetchAccountBalanceHistory({ account, actor: statsActor }),
+    placeholderData: keepPreviousData,
+  });
 
   useEffect(() => {
-    if (isSuccess) {
-      const formatted = fetchedData.map((v) => {
-        const date = new Date(0);
-        date.setDate(date.getDate() + Number(v[0]));
-
-        return { name: date.toDateString(), value: divideBy1e8(v[1].balance) };
+    if (isSuccess && response) {
+      const results = response.map((r) => {
+        const name = DateTime.fromMillis(0)
+          .plus({ days: Number(r[0]) })
+          .toFormat("LLL dd");
+        const value = divideBy1e8(r[1].balance);
+        return {
+          name,
+          value,
+          valueToString: roundAndFormatLocale({ number: value, decimals: 3 }),
+        };
       });
-      setData(formatted);
+      setData({
+        dataChart: results,
+        total: results[results.length - 1].valueToString,
+      });
     }
-  }, [isSuccess, fetchedData]);
+  }, [isSuccess, response]);
 
-  return { data, isSuccess, isLoading, error };
+  return {
+    data,
+    isSuccess: isSuccess && data,
+    isError,
+    isLoading: isLoading || (!data && !isError),
+    error,
+  };
 };
 
 export default useAccountBalanceHistory;

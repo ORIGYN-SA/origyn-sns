@@ -43,5 +43,9 @@
   "sns_rewards": {
     "ic": "yuijc-oiaaa-aaaap-ahezq-cai",
     "staging": "fpmqz-aaaaa-aaaag-qjvua-cai"
+  },
+  "canister_jobs": {
+    "ic": "bvbns-zaaaa-aaaan-qmnbq-cai",
+    "staging": "gf7uu-oyaaa-aaaap-qhmla-cai"
   }
 }

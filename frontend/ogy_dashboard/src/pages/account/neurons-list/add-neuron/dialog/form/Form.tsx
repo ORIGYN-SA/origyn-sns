@@ -33,8 +33,8 @@ const Form = () => {
   return (
     <>
       <div className="text-center">
-        <div className="mb-4 text-xl font-semibold">Add neuron</div>
-        <div>
+        <div className="mb-1 text-xl font-semibold">Add neuron</div>
+        <div className="text-content/60">
           To successfully add each neuron to the dashboard, please complete the
           following two steps for every individual neuron
         </div>

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/20/solid";
 import useConnect from "@hooks/useConnect";
-import { Transition, Dialog } from "@headlessui/react";
+import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { Button, Tile, Tooltip, Skeleton } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import AuthButton from "@components/auth/Auth";
@@ -33,7 +33,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
       <div className="fixed z-50 inset-0 overflow-hidden">
         <Dialog as={Fragment} static open={show} onClose={handleClose}>
           <div className="absolute z-50 inset-0 overflow-hidden">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-in-out duration-500"
               enterFrom="opacity-0"
@@ -42,10 +42,14 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
-            </Transition.Child>
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+                aria-hidden="true"
+                onClick={() => handleClose()}
+              />
+            </TransitionChild>
             <div className="fixed inset-y-0 right-0 max-w-full flex">
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                 enterFrom="translate-x-full"
@@ -96,7 +100,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                         <div className="flex justify-center ml-2">
                           {balanceOGY?.balance !== null ? (
                             <div className="text-2xl font-semibold">
-                              {balanceOGY?.balance}
+                              {balanceOGY?.string.balance}
                               <span className="text-content/60 ml-2">OGY</span>
                             </div>
                           ) : (
@@ -121,7 +125,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     </div>
                   </div>
                 </div>
-              </Transition.Child>
+              </TransitionChild>
             </div>
           </div>
         </Dialog>
