@@ -2802,6 +2802,7 @@ name = "types"
 version = "0.1.0"
 dependencies = [
  "candid 0.10.6",
+ "ic-ledger-types",
  "ic-stable-structures",
  "icrc-ledger-types",
  "serde",

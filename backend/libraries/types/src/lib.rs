@@ -5,12 +5,14 @@ mod http;
 mod neuron_info;
 mod proposals;
 mod rewards_recipients;
+mod ogy_swap_statistics;
 mod token;
 
 pub use http::*;
 pub use neuron_info::*;
 pub use proposals::*;
 pub use rewards_recipients::*;
+pub use ogy_swap_statistics::*;
 pub use token::*;
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug, Default)]
