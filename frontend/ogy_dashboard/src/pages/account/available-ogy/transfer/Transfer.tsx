@@ -64,7 +64,7 @@ const Transfer = ({ show, handleClose }) => {
       defaultValue: 0,
     });
     const total = divideBy1e8(
-      Number(watchedAmount) * 100000000 + Number(TRANSACTION_FEE)
+      Number(watchedAmount) * 100000000 - Number(TRANSACTION_FEE)
     );
     return (
       <div>
@@ -80,10 +80,14 @@ const Transfer = ({ show, handleClose }) => {
     transfer(
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: ["userFetchBalanceOGY"],
-          });
+        onSuccess: (result) => {
+          if (result !== "Ok") {
+            throw new Error(Object.keys(result.Err).toString());
+          } else {
+            queryClient.invalidateQueries({
+              queryKey: ["userFetchBalanceOGY"],
+            });
+          }
         },
       }
     );
@@ -93,7 +97,15 @@ const Transfer = ({ show, handleClose }) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
-      if (amount > balance - TRANSACTION_FEE) return false;
+      if (amount > balance) return false;
+    }
+    return true;
+  };
+
+  const isAmountUpperFee = (value) => {
+    if (balanceOGY && Number(value) && Number(value) > 0) {
+      const amount = numberToE8s(value);
+      if (amount < TRANSACTION_FEE) return false;
     }
     return true;
   };
@@ -108,7 +120,7 @@ const Transfer = ({ show, handleClose }) => {
   };
 
   const handleSetAmountMaxBalance = () => {
-    const value = divideBy1e8(balanceOGY.balanceE8s - TRANSACTION_FEE);
+    const value = divideBy1e8(balanceOGY.balanceE8s);
     setValue("amount", value > 0 ? value.toFixed(3) : 0, {
       shouldValidate: true,
     });
@@ -148,6 +160,9 @@ const Transfer = ({ show, handleClose }) => {
                       isAmountUnderBalance: (v) =>
                         isAmountUnderBalance(v) ||
                         "Amount must not exceed your balance.",
+                      isAmountUpperFee: (v) =>
+                        isAmountUpperFee(v) ||
+                        "Amount must not be less than transaction fee.",
                       isPositive: (v) =>
                         Number(v) > 0 || "Amount must be a positive number.",
                     },

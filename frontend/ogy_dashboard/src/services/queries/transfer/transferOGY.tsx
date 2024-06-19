@@ -18,7 +18,7 @@ const transferOGY = async ({
     memo: [],
     from_subaccount: [],
     created_at_time: [],
-    amount: amount + BigInt(TRANSACTION_FEE),
+    amount: amount - BigInt(TRANSACTION_FEE),
   });
   return result;
 };
