@@ -1,4 +1,4 @@
-use std::time::Duration;
+use std::{ collections::HashMap, time::Duration };
 
 use candid::{ Nat, Principal };
 use ic_ledger_types::{ AccountIdentifier, BlockIndex, Memo, Subaccount, Tokens };
@@ -22,7 +22,7 @@ use ogy_token_swap_api::{
 };
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 use pocket_ic::PocketIc;
-use types::CanisterId;
+use types::{ CanisterId, SwapStatistics, UserSwap };
 
 use crate::{
     client::{
@@ -43,6 +43,7 @@ use crate::{
                 swap_info,
                 swap_tokens_anonymous_call,
                 swap_tokens_authenticated_call,
+                swapping_statistics,
             },
             get_swap_info,
         },
@@ -1197,4 +1198,76 @@ fn valid_swap_can_be_archived() {
     if let GetSwapInfoResponse::Success(swap_info) = swap_info_result {
         assert_eq!(swap_info.is_archived, true)
     }
+}
+
+#[test]
+fn test_swap_statistics_single_swap() {
+    let mut env = init();
+
+    let amount = Nat::from(1_000_000_000u64);
+
+    let user = user_init(&mut env, amount.clone());
+
+    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+
+    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+
+    let res = swapping_statistics(&env.pic, Principal::anonymous(), env.canister_ids.ogy_swap);
+
+    let mut swaps = HashMap::new();
+    swaps.insert(user, UserSwap {
+        desposit_account: principal_to_legacy_account_id(
+            env.canister_ids.ogy_swap,
+            Some(Subaccount::from(user))
+        ),
+        amount: 1_000_000_000u64 - E8S_FEE_OGY,
+        swaps: 1,
+    });
+    let expected_res = SwapStatistics {
+        total_amount_swapped: 1_000_000_000u64 - E8S_FEE_OGY,
+        number_of_attempted_swaps: 1,
+        number_of_completed_swaps: 1,
+        number_of_failed_swaps: 0,
+        user_swaps: swaps,
+    };
+    assert_eq!(res, expected_res);
+}
+
+#[test]
+fn test_swap_statistics_many_swap() {
+    let mut env = init();
+
+    let num_holders = 10;
+    let holders = init_token_distribution(&mut env, num_holders);
+    let old_ledger_total_supply = total_supply_legacy_wrapper(&mut env);
+
+    // mint tokens to swap reserve pool of swap canister
+    // test by adding the exact amount of tokens which corresponds to the total_supply of the old ledger
+    let swap_pool_amount = old_ledger_total_supply.clone() + num_holders * E8S_FEE_OGY;
+    init_swap_pool(&mut env, swap_pool_amount);
+
+    for (index, holder) in holders.into_iter().enumerate() {
+        user_token_swap_valid(&mut env, holder, Nat::from(index + 1));
+    }
+
+    // old ledger should be zero
+    assert_eq!(total_supply_legacy_wrapper(&mut env), Nat::default());
+    // new ledger should be previous total supply minus the
+    assert_eq!(total_supply_new_wrapper(&mut env), old_ledger_total_supply);
+
+    let mut res = swapping_statistics(&env.pic, Principal::anonymous(), env.canister_ids.ogy_swap);
+
+    res.user_swaps = HashMap::new();
+
+    let total_swapped: u64 = old_ledger_total_supply.0.try_into().unwrap();
+
+    let expected_res = SwapStatistics {
+        total_amount_swapped: total_swapped - num_holders * E8S_FEE_OGY,
+        number_of_attempted_swaps: num_holders,
+        number_of_completed_swaps: num_holders,
+        number_of_failed_swaps: 0,
+        user_swaps: HashMap::new(),
+    };
+
+    assert_eq!(res, expected_res);
 }
