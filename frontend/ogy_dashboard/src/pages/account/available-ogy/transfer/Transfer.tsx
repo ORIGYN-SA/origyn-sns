@@ -81,7 +81,7 @@ const Transfer = ({ show, handleClose }) => {
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
         onSuccess: (result) => {
-          if (result !== "Ok") {
+          if (Object.keys(result)[0] !== "Ok") {
             throw new Error(Object.keys(result.Err).toString());
           } else {
             queryClient.invalidateQueries({
