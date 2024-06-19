@@ -4,6 +4,7 @@ import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
 import { IListProps, IProposalResult, IProposalData } from "@services/types";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import { formatDate } from "@helpers/dates";
 
 export const getListProposalsAll = async ({
   limit = 10,
@@ -23,7 +24,7 @@ export const getListProposalsAll = async ({
         const id = data.id;
         const proposer = data.proposer;
         const title = data.proposal_title;
-        const proposed = Number(data.proposal_creation_timestamp_seconds);
+        const proposed = data.proposal_creation_timestamp_seconds;
         const timeRemaining = Number(
           data.wait_for_quiet_state_current_deadline_timestamp_seconds
         );
@@ -35,7 +36,7 @@ export const getListProposalsAll = async ({
           id,
           proposer,
           title,
-          proposed: DateTime.fromSeconds(proposed).toRelativeCalendar() ?? "",
+          proposed: formatDate(proposed, { fromSeconds: true }) ?? "",
           timeRemaining:
             DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
           topic,

@@ -57,7 +57,7 @@ const OGYCirculationState = ({
             </ExternalLink>
           </TooltipInfo>
         </div>
-        <div className="mt-6 h-80 rounded-xl">
+        <div className="mt-6 h-72 rounded-xl">
           {isSuccess && data && (
             <PieChart data={data.dataPieChart} colors={colors} />
           )}

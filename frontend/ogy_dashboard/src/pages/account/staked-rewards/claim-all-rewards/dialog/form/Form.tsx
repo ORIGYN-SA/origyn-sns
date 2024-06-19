@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@components/ui";
 import { useClaimAllRewards } from "../../context";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 
 const Form = () => {
@@ -27,7 +27,7 @@ const Form = () => {
   };
 
   return (
-    <div className="text-center mt-8">
+    <div className="text-center">
       <div>
         <span>
           You're about to claim

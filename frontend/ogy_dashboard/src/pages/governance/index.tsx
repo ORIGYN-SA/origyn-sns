@@ -17,6 +17,7 @@ import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
 import { PieChartProvider } from "@components/charts/pie/context";
+import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
 
 const loader = async () => {
   // tokens in governance total
@@ -186,6 +187,10 @@ export const Governance = () => {
       </PieChartProvider>
 
       <TokensInGovernanceKpi className="mb-16" />
+
+      <div className="mb-16">
+        <ChartTotalTokensStakes />
+      </div>
 
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">
