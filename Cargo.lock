@@ -274,6 +274,75 @@ name = "canister_client_macros"
 version = "0.1.0"
 
 [[package]]
+name = "canister_jobs"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "canister_jobs_api",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "hex",
+ "http_request",
+ "ic-cdk 0.13.2",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "ledger_utils",
+ "num-bigint",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "super_stats_v3_api",
+ "super_stats_v3_c2c_client",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
+name = "canister_jobs_api"
+version = "0.1.0"
+dependencies = [
+ "candid 0.10.6",
+ "canister_logger",
+ "canister_state_macros",
+ "canister_time",
+ "canister_tracing_macros",
+ "futures",
+ "http_request",
+ "ic-cdk 0.13.2",
+ "ic-cdk-macros 0.9.0",
+ "ic-cdk-timers 0.7.0",
+ "ic-ledger-types",
+ "ic-stable-structures",
+ "icrc-ledger-types",
+ "icrc_ledger_canister_c2c_client",
+ "ledger_utils",
+ "num-bigint",
+ "serde",
+ "serde_bytes",
+ "serializer",
+ "sns_governance_canister",
+ "sns_governance_canister_c2c_client",
+ "stable_memory",
+ "super_stats_v3_api",
+ "super_stats_v3_c2c_client",
+ "tracing",
+ "types",
+ "utils",
+]
+
+[[package]]
 name = "canister_logger"
 version = "0.1.0"
 dependencies = [
@@ -1066,6 +1135,7 @@ name = "integration_tests"
 version = "0.1.0"
 dependencies = [
  "candid 0.10.6",
+ "canister_jobs_api",
  "canister_time",
  "hex",
  "ic-cdk 0.13.2",

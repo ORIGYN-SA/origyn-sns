@@ -23,7 +23,7 @@ const Footer = () => {
                 <Link to="/#ogy-circulation-state">Circulation</Link>
               </li>
               <li>
-                <Link to="/">Governance</Link>
+                <Link to="/#governance-tokens-stakes">Governance</Link>
               </li>
               <li>
                 <Link to="/#ogy-treasury-account">Revenue</Link>

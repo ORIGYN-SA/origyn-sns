@@ -18,6 +18,7 @@ ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_lega
 ogy_token_swap_api = { path = "../canisters/ogy_token_swap/api" }
 super_stats_v3_api = { path = "../canisters/super_stats_v3/api" }
 token_metrics_api = { path = "../canisters/token_metrics/api" }
+canister_jobs_api = { path = "../canisters/canister_jobs/api" }
 pocket-ic = { workspace = true }
 rand = "0.8.5"
 serde = { workspace = true }
