@@ -23,6 +23,7 @@ pub async fn sync_proposals_metrics_data() {
     let canister_id = read_state(|state| state.data.sns_governance_canister);
     let last_synced_proposal_id = read_state(|state| state.data.sync_info.last_synced_proposal_id);
     let mut number_of_scanned_proposals = 0;
+    let mut continue_scanning = true;
 
     let mut args = sns_governance_canister::list_proposals::Args {
         limit: 200,
@@ -32,16 +33,22 @@ pub async fn sync_proposals_metrics_data() {
         include_reward_status: Vec::new(),
     };
 
-    match sns_governance_canister_c2c_client::list_proposals(canister_id, &args).await {
-        Ok(response) => {
-            let number_of_received_proposals = response.proposals.len();
-            if number_of_received_proposals > 0 {
+    while continue_scanning {
+        continue_scanning = false;
+
+        match sns_governance_canister_c2c_client::list_proposals(canister_id, &args).await {
+            Ok(response) => {
+                let number_of_received_proposals = response.proposals.len();
+                if number_of_received_proposals == 0 {
+                    break;
+                }
+
                 let last_proposal_id = response.proposals.first().map_or_else(
                     || {
                         error!("We should not be here, last proposal from response is missing?");
                         None
                     },
-                    |p| { p.id.clone() }
+                    |p| p.id.clone()
                 );
 
                 if let Some(last_from_response) = last_proposal_id {
@@ -63,19 +70,28 @@ pub async fn sync_proposals_metrics_data() {
                         .for_each(|proposal| {
                             update_proposals_metrics(proposal);
                         });
-                }
-                mutate_state(|state| {
-                    state.data.sync_info.last_synced_proposal_id = last_proposal_id;
-                });
-            }
 
-            number_of_scanned_proposals += number_of_received_proposals;
-        }
-        Err(err) => {
-            let error_message = format!("{err:?}");
-            error!(?error_message, "Error fetching proposal data");
+                    mutate_state(|state| {
+                        state.data.sync_info.last_synced_proposal_id = last_proposal_id;
+                    });
+                }
+
+                number_of_scanned_proposals += number_of_received_proposals;
+
+                args.before_proposal = last_proposal_id;
+
+                if number_of_received_proposals == (args.limit as usize) {
+                    continue_scanning = true;
+                }
+            }
+            Err(err) => {
+                let error_message = format!("{err:?}");
+                error!(?error_message, "Error fetching proposal data");
+                break;
+            }
         }
     }
+
     info!("Successfully scanned {number_of_scanned_proposals} proposals.");
 
     mutate_state(|state| {
