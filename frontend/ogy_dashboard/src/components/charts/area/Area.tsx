@@ -8,9 +8,9 @@ import {
   Tooltip,
 } from "recharts";
 import styled from "styled-components";
-import millify from "millify";
 import { colors } from "@theme/preset";
 import CustomTooltip from "../utils/CustomTooltip";
+import { millify } from "@helpers/numbers";
 
 type Data = {
   name: string;
