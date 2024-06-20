@@ -1,5 +1,5 @@
 use canister_time::run_now_then_interval;
-use sns_governance_canister::types::ProposalData;
+use sns_governance_canister::types::{ ProposalData, ProposalId };
 use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
@@ -18,7 +18,6 @@ pub fn run() {
     ic_cdk::spawn(sync_proposals_metrics_data())
 }
 
-// This might need an update if there are more than 200 proposals created within 5 minutes
 pub async fn sync_proposals_metrics_data() {
     let canister_id = read_state(|state| state.data.sns_governance_canister);
     let last_synced_proposal_id = read_state(|state| state.data.sync_info.last_synced_proposal_id);
@@ -26,7 +25,7 @@ pub async fn sync_proposals_metrics_data() {
     let mut continue_scanning = true;
 
     let mut args = sns_governance_canister::list_proposals::Args {
-        limit: 200,
+        limit: 50,
         before_proposal: None,
         exclude_type: Vec::new(),
         include_status: Vec::new(),
@@ -43,45 +42,47 @@ pub async fn sync_proposals_metrics_data() {
                     break;
                 }
 
-                let last_proposal_id = response.proposals.first().map_or_else(
-                    || {
-                        error!("We should not be here, last proposal from response is missing?");
-                        None
-                    },
-                    |p| p.id.clone()
-                );
-
-                if let Some(last_from_response) = last_proposal_id {
-                    let proposals_already_calculated = match last_synced_proposal_id {
-                        Some(last_from_state) => {
-                            if last_from_response.id > last_from_state.id {
-                                let new_proposals = last_from_response.id - last_from_state.id;
-                                number_of_received_proposals - (new_proposals as usize)
-                            } else {
-                                0
-                            }
-                        }
-                        None => 0,
-                    };
-
-                    response.proposals
-                        .iter()
-                        .skip(proposals_already_calculated)
-                        .for_each(|proposal| {
-                            update_proposals_metrics(proposal);
+                match response.proposals.first() {
+                    Some(first_proposal_in_batch) => {
+                        let first_id = first_proposal_in_batch.id.unwrap_or(ProposalId { id: 0 });
+                        let last_synced_id = last_synced_proposal_id.unwrap_or(ProposalId {
+                            id: 0,
                         });
-
-                    mutate_state(|state| {
-                        state.data.sync_info.last_synced_proposal_id = last_proposal_id;
-                    });
+                        if first_id.id > last_synced_id.id {
+                            mutate_state(|state| {
+                                state.data.sync_info.last_synced_proposal_id = Some(first_id);
+                            });
+                        }
+                    }
+                    None => {}
                 }
 
-                number_of_scanned_proposals += number_of_received_proposals;
+                for proposal in &response.proposals {
+                    if let Some(last_from_state) = &last_synced_proposal_id {
+                        match proposal.id {
+                            Some(proposal_id) => {
+                                if proposal_id.id <= last_from_state.id {
+                                    continue_scanning = false;
+                                    break;
+                                } else {
+                                    args.before_proposal = Some(proposal_id);
+                                }
+                            }
+                            None => {
+                                // Get out of the loop if we don't have an id
+                                continue_scanning = false;
+                                break;
+                            }
+                        }
+                    }
+                    update_proposals_metrics(proposal);
+                    number_of_scanned_proposals += 1;
+                }
 
-                args.before_proposal = last_proposal_id;
-
-                if number_of_received_proposals == (args.limit as usize) {
+                if number_of_received_proposals == (args.limit as usize) && continue_scanning {
                     continue_scanning = true;
+                } else {
+                    continue_scanning = false;
                 }
             }
             Err(err) => {
@@ -111,9 +112,9 @@ pub fn update_proposals_metrics(proposal: &ProposalData) {
                 let this_proposal_participation =
                     (((tally.yes as f64) + (tally.no as f64)) / (tally.total as f64)) * 100.0;
                 println!("{this_proposal_participation:?}");
-                // We will update the value of total_voting_power to be
-                // the value from the latest proposal scanned
-                metrics.total_voting_power = tally.total;
+                if tally.total > metrics.total_voting_power {
+                    metrics.total_voting_power = tally.total;
+                }
                 metrics_calculations.cumulative_voting_power += tally.total;
 
                 // Update cumulative voting participation and count of valid tallies
