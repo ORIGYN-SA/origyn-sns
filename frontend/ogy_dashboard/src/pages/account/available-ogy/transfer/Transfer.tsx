@@ -70,7 +70,7 @@ const Transfer = ({ show, handleClose }) => {
       <div>
         {isNaN(watchedAmount) || watchedAmount === 0 || errors?.amount
           ? 0
-          : total.toFixed(3)}{" "}
+          : total}{" "}
         OGY
       </div>
     );
@@ -121,7 +121,7 @@ const Transfer = ({ show, handleClose }) => {
 
   const handleSetAmountMaxBalance = () => {
     const value = divideBy1e8(balanceOGY.balanceE8s);
-    setValue("amount", value > 0 ? value.toFixed(3) : 0, {
+    setValue("amount", value > 0 ? value : 0, {
       shouldValidate: true,
     });
     setFocus("recipientAddress");
