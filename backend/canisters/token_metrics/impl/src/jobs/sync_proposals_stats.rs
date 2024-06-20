@@ -79,16 +79,13 @@ pub async fn sync_proposals_metrics_data() {
                     number_of_scanned_proposals += 1;
                 }
 
-                if number_of_received_proposals == (args.limit as usize) && continue_scanning {
+                if number_of_received_proposals == (args.limit as usize) {
                     continue_scanning = true;
-                } else {
-                    continue_scanning = false;
                 }
             }
             Err(err) => {
                 let error_message = format!("{err:?}");
                 error!(?error_message, "Error fetching proposal data");
-                break;
             }
         }
     }
