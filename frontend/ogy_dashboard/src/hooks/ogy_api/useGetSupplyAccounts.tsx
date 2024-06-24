@@ -6,31 +6,27 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { ActorSubclass } from "@dfinity/agent";
-import { ActivitySnapshot } from "./types";
 import { millify } from "@helpers/numbers";
+import ogyAPI from "@services/api/ogy";
+import { SupplyAccounts } from "./types";
 
-const useGetActivityStats = ({
-  actor,
+const useGetSupplyAccounts = ({
   start = 30,
   options = {
     placeholderData: keepPreviousData,
-    queryKey: ["GET_ACTIVITY_STATS"],
+    queryKey: ["GET_SUPPLY_ACCOUNTS"],
   },
 }: {
   start: number;
-  actor: ActorSubclass;
-  options?: Omit<UseQueryOptions<Array<ActivitySnapshot>>, "queryFn">;
+  options?: Omit<UseQueryOptions<Array<SupplyAccounts>>, "queryFn">;
 }) => {
   const [data, setData] = useState<
     | Array<{
-        total_unique_accounts: {
-          e8s: bigint;
+        count: {
           number: number;
           string: string;
         };
-        start_time: {
-          e8s: bigint;
+        date: {
           datetime: DateTime;
         };
       }>
@@ -43,34 +39,34 @@ const useGetActivityStats = ({
     isLoading,
     isError,
     error,
-  }: UseQueryResult<Array<ActivitySnapshot>> = useQuery({
+  }: UseQueryResult<Array<SupplyAccounts>> = useQuery({
     ...options,
-    queryFn: async (): Promise<Array<ActivitySnapshot>> => {
-      const results = await actor.get_activity_stats(start);
-      return results as Array<ActivitySnapshot>;
+    queryFn: async () => {
+      const { data } = await ogyAPI.get(`/ogy/supply/accounts`);
+      return data;
     },
   });
 
   useEffect(() => {
     if (isSuccess && response) {
-      const results = response.map((r) => {
-        const number = Number(r.total_unique_accounts);
-        const datetime = DateTime.fromMillis(Number(r.start_time) / 1000000);
+      const lenResponse = response.length;
+      const filteredRangePeriodResponse = response.slice(lenResponse - start);
+      const results = filteredRangePeriodResponse.map((r) => {
+        const number = r.count;
+        const datetime = DateTime.fromISO(r.date);
         return {
-          total_unique_accounts: {
-            e8s: r.total_unique_accounts,
+          count: {
             number,
             string: millify(number),
           },
-          start_time: {
-            e8s: r.start_time,
+          date: {
             datetime,
           },
         };
       });
       setData(results);
     }
-  }, [isSuccess, response]);
+  }, [isSuccess, response, start]);
 
   return {
     data,
@@ -81,4 +77,4 @@ const useGetActivityStats = ({
   };
 };
 
-export default useGetActivityStats;
+export default useGetSupplyAccounts;

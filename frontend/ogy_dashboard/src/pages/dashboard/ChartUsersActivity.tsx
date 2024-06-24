@@ -1,12 +1,11 @@
 import { useMemo } from "react";
-import { useCanister } from "@amerej/connect2ic-react";
 import { Card, TooltipInfo } from "@components/ui";
 import {
   Loader as ChartLoader,
   Error as ChartError,
   Area as ChartArea,
 } from "@components/charts";
-import { useGetActivityStats } from "@hooks/super_stats_v3";
+import useUsersOverview from "@hooks/dashboard/useUsersOverview";
 
 const ChartUsersActivity = ({
   className,
@@ -15,13 +14,9 @@ const ChartUsersActivity = ({
   className?: string;
 }) => {
   const barFill = useMemo(() => "#34d399", []);
-  const [statsActor] = useCanister("tokenStats");
 
   // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isLoading, isSuccess, isError } = useGetActivityStats({
-    start: 30,
-    actor: statsActor,
-  });
+  const { data, isLoading, isSuccess, isError } = useUsersOverview();
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -36,7 +31,7 @@ const ChartUsersActivity = ({
         )}
       </div>
       {isLoading && <ChartLoader />}
-      {isSuccess && (
+      {isSuccess && data && (
         <div className="mt-4 grid grid-cols-1 xl:grid-cols-4">
           <div className="col-span-1 flex flex-col justify-between">
             <div>
@@ -49,7 +44,7 @@ const ChartUsersActivity = ({
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-                {data && data[data.length - 1].total_unique_accounts?.string}
+                {data.total}
               </div>
             </div>
             <div className="xl:flex items-center mb-6 hidden">
@@ -61,10 +56,10 @@ const ChartUsersActivity = ({
           </div>
           <div className="col-span-3 h-72 rounded-xl">
             <ChartArea
-              data={data?.map((e) => {
+              data={data.chart.map(({ name, value }) => {
                 return {
-                  name: e.start_time.datetime.toFormat("LLL dd"),
-                  value: e.total_unique_accounts.number,
+                  name,
+                  value,
                 };
               })}
               fill={barFill}
