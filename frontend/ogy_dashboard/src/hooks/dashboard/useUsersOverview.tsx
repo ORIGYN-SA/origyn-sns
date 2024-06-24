@@ -70,9 +70,9 @@ const useUsersOverview = (start: number = 30) => {
     isSuccess: isSuccessActivityStats && isSuccessActivityStats && data,
     isError: isErrorActivityStats || isErrorSupplyAccounts,
     isLoading:
-      isLoadingActivityStats ||
-      isLoadingSupplyAccounts ||
-      (!data && !(isErrorActivityStats || isErrorSupplyAccounts)),
+      (isLoadingActivityStats || isLoadingSupplyAccounts) &&
+      !data &&
+      (!isErrorActivityStats || !isErrorSupplyAccounts),
     error: errorActivityStats || errorSupplyAccounts,
   };
 };
