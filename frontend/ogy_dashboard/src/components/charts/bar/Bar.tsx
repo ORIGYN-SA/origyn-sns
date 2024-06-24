@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import styled from "styled-components";
-import millify from "millify";
+import { millify } from "@helpers/numbers";
 import { colors } from "@theme/preset";
 
 type BarColor = {

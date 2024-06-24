@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.9] - 2024-06-20
+
+#### Changed
+
+- Precision for long numbers converted to human readable strings (e.g. charts axis, charts tooltips)
+- Ledger switch banner styles on page Dashboard and Account
+
+#### Fixed
+
+- Set full amount (not rounded one) of user OGY balance when click on max btn on transfer.
+- Estimated rewards calculation on page Governance
+- Users can no longer claim reward if reward value is 0
+
+#### Added
+
+- Unique OGY account holders chart on page Dashboard
+
 ### [1.0.8] - 2024-06-18
 
 #### Added
