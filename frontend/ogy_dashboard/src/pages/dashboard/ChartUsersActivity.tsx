@@ -6,7 +6,7 @@ import {
   Error as ChartError,
   Area as ChartArea,
 } from "@components/charts";
-import { useGetActivityStats } from "@hooks/metrics/super_stats_v3";
+import { useGetActivityStats } from "@hooks/super_stats_v3";
 
 const ChartUsersActivity = ({
   className,
