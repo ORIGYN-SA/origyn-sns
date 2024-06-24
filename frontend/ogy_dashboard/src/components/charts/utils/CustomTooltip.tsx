@@ -1,4 +1,4 @@
-import millify from "millify";
+import { millify } from "@helpers/numbers";
 
 const CustomTooltip = ({
   active,
