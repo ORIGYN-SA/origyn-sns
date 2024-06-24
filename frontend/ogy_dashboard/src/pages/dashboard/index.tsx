@@ -4,7 +4,6 @@ import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
 import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";
 import OrigynFoundationReserve from "@pages/dashboard/origyn-foundation-reserve/OrigynFoundationReserve";
-// import GovernanceStakingOverview from "@pages/dashboard/governance-staking-overview/GovernanceStakingOverview";
 import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/OrigynTreasuryAccount";
 import OrigynRewardAccount from "@pages/dashboard/origyn-reward-account";
 import { Badge, Button } from "@components/ui";
@@ -12,6 +11,7 @@ import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
+import ChartUsersActivity from "./ChartUsersActivity";
 // import UsersMap from "./users-map/UsersMap";
 import { PieChartProvider } from "@components/charts/pie/context";
 
@@ -94,6 +94,12 @@ const Dashboard = () => {
             id="ogy-token-distribution"
           >
             <TokenDistributionList />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="users-activity"
+          >
+            <ChartUsersActivity />
           </section>
           {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
