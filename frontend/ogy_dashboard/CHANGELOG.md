@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Set full amount (not rounded one) of user OGY balance when click on max btn on transfer.
 - Estimated rewards calculation on page Governance
+- Users can no longer claim reward if reward value is 0
 
 #### Added
 
