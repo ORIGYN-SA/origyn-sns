@@ -11,7 +11,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 #### Changed
 
 - Precision for long numbers converted to human readable strings (e.g. charts axis, charts tooltips)
-- Ledger switch banner styles on page Dashboard and Account
 
 #### Fixed
 

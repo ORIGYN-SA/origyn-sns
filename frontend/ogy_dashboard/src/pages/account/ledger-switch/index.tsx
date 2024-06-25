@@ -68,10 +68,7 @@ const LedgerSwitch = ({ className, ...restProps }) => {
         <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-t-xl">
           <LedgerSwitchBannerContent>
             <div className="w-full flex justify-center mt-4">
-              <ExternalLink
-                className="text-white"
-                href="https://origyn.gitbook.io/origyn/how-to/how-to-swap-legacy-ogy-to-sns-ogy"
-              >
+              <ExternalLink href="https://origyn.gitbook.io/origyn/how-to/how-to-swap-legacy-ogy-to-sns-ogy">
                 How to swap tokens
               </ExternalLink>
             </div>
