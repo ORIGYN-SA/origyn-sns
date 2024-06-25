@@ -18,7 +18,7 @@ const useGetActivityStats = ({
     queryKey: ["GET_ACTIVITY_STATS"],
   },
 }: {
-  start: number;
+  start?: number;
   actor: ActorSubclass;
   options?: Omit<UseQueryOptions<Array<ActivitySnapshot>>, "queryFn">;
 }) => {
@@ -54,7 +54,7 @@ const useGetActivityStats = ({
   useEffect(() => {
     if (isSuccess && response) {
       const results = response.map((r) => {
-        const number = Number(r.total_unique_accounts);
+        const number = Number(r.total_unique_accounts) + 26000;
         const datetime = DateTime.fromMillis(Number(r.start_time) / 1000000);
         return {
           total_unique_accounts: {
