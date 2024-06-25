@@ -1,3 +1,4 @@
+import millifyPackage from "millify";
 export const locale = 'en-US';
 
 export const divideBy1e8 = (number: number | bigint | string) => Number(number) / 1e8;
@@ -15,3 +16,5 @@ export const roundAndFormatLocale = ({number, locale="en-US", decimals=2}: round
 export const numberToE8s = (value:string) => {
     return BigInt(Math.round(parseFloat(value) * 1e8))
 }
+
+export const millify = (value:number) => millifyPackage(value, {precision: 2, locales: locale})

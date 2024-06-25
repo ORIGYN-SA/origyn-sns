@@ -51,20 +51,21 @@ const useEstimatedRewards = () => {
         divideBy1e8(data.five_years),
       ];
       const totalVotingPower = staked.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
+        (accumulator, currentValue, index) =>
+          accumulator + currentValue * STEPS[index],
         0
       );
 
       setEstimatedRewards(
         STEPS.map((step: number, index: number) => {
+          const votingPower = staked[index] * step;
+          const votingPowerShare = votingPower / totalVotingPower;
+          const rewardShare = REWARD_RATE * votingPowerShare;
+          const rate = (rewardShare / staked[index]) * 100;
           const result = {
             value: index + 1,
             label: ``,
-            rate: `${(
-              (step / 3) *
-              (REWARD_RATE / totalVotingPower) *
-              100
-            ).toFixed(1)} %`,
+            rate: `${rate.toFixed(1)} %`,
             locked: roundAndFormatLocale({ number: staked[index] }),
             lockedSum:
               index < STEPS_LENGTH - 1
