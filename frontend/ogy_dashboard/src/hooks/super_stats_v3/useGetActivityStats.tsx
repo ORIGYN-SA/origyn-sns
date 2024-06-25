@@ -76,7 +76,7 @@ const useGetActivityStats = ({
     data,
     isSuccess: isSuccess && data,
     isError,
-    isLoading: isLoading || (!data && !isError),
+    isLoading: isLoading || !data,
     error,
   };
 };
