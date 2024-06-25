@@ -12,8 +12,9 @@ use ogy_token_swap_api::{
 };
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 use tracing::error;
+use types::{ SwapStatistics, UserSwap };
 
-use crate::memory::{ get_swap_history_memory, VM };
+use crate::{ compute_deposit_account, memory::{ get_swap_history_memory, VM } };
 use ogy_token_swap_api::types::token_swap::{ BlockFailReason, SwapInfo };
 
 #[derive(Serialize, Deserialize)]
@@ -281,5 +282,39 @@ impl TokenSwap {
         const ONE_GB: usize = 1 * 1024 * 1024 * 1024; // 1 GB in bytes
 
         total_size >= ONE_GB
+    }
+
+    pub fn compute_swapping_statistics(&self) -> SwapStatistics {
+        let mut stats = SwapStatistics::default();
+        self.history.iter().for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
+        self.swap.iter().for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
+        stats
+    }
+
+    fn analyse_swap_block(statistics: &mut SwapStatistics, info: &SwapInfo) {
+        statistics.number_of_attempted_swaps += 1;
+        match info.status {
+            SwapStatus::Complete(_) => {
+                statistics.total_amount_swapped += info.amount;
+                statistics.number_of_completed_swaps += 1;
+                match statistics.user_swaps.get_mut(&info.principal) {
+                    Some(val) => {
+                        val.amount += info.amount;
+                        val.swaps += 1;
+                    }
+                    None => {
+                        statistics.user_swaps.insert(info.principal, UserSwap {
+                            desposit_account: compute_deposit_account(&info.principal),
+                            amount: info.amount,
+                            swaps: 1,
+                        });
+                    }
+                }
+            }
+            SwapStatus::Failed(_) => {
+                statistics.number_of_failed_swaps += 1;
+            }
+            _ => {}
+        }
     }
 }
