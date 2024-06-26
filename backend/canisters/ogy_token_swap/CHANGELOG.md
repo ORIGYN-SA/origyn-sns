@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### unreleased
+
+#### Added
+
+- added endpoint to fetch swap statistics
+
 ### [1.0.2] - 2024-06-05
 
 #### Changed

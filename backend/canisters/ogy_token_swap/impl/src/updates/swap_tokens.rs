@@ -31,7 +31,6 @@ use ogy_token_swap_api::{
     OGY_MIN_SWAP_AMOUNT,
 };
 use serde_bytes::ByteBuf;
-use tracing::error;
 use utils::{ consts::E8S_FEE_OGY, env::Environment };
 
 pub use ogy_token_swap_api::{

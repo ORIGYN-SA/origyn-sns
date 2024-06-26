@@ -39,8 +39,6 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 
 #[cfg(test)]
 mod tests {
-    use std::collections::HashSet;
-
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Subaccount };
     use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;

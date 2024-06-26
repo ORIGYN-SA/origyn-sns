@@ -3,6 +3,7 @@ use crate::{ generate_query_call, generate_update_call };
 // Queries
 generate_query_call!(get_swap_info);
 generate_query_call!(list_requesting_principals);
+generate_query_call!(list_swapping_statistics);
 
 // Updates
 generate_update_call!(recover_stuck_burn);
@@ -18,6 +19,9 @@ pub mod get_swap_info {
 }
 pub mod list_requesting_principals {
     pub use ogy_token_swap_api::queries::list_requesting_principals::{ Args, Response };
+}
+pub mod list_swapping_statistics {
+    pub use ogy_token_swap_api::queries::list_swapping_statistics::{ Args, Response };
 }
 pub mod request_deposit_account {
     pub use ogy_token_swap_api::updates::request_deposit_account::{ Args, Response };
@@ -119,6 +123,13 @@ pub mod client {
         ogy_token_swap_canister_id: CanisterId
     ) -> list_requesting_principals::Response {
         list_requesting_principals(pic, sender, ogy_token_swap_canister_id, &())
+    }
+    pub fn swapping_statistics(
+        pic: &PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId
+    ) -> list_swapping_statistics::Response {
+        list_swapping_statistics(pic, sender, ogy_token_swap_canister_id, &())
     }
 
     pub fn manipulate_swap_status(
