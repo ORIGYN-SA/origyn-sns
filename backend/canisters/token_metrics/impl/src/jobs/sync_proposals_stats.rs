@@ -62,7 +62,7 @@ pub async fn sync_proposals_metrics_data() {
                         match proposal.id {
                             Some(proposal_id) => {
                                 if proposal_id.id <= last_from_state.id {
-                                    continue_scanning = false;
+                                    // Get out of the loop if we reached a proposal we already scanned
                                     break;
                                 } else {
                                     args.before_proposal = Some(proposal_id);
@@ -70,7 +70,6 @@ pub async fn sync_proposals_metrics_data() {
                             }
                             None => {
                                 // Get out of the loop if we don't have an id
-                                continue_scanning = false;
                                 break;
                             }
                         }
