@@ -1,11 +1,12 @@
 import { useMemo } from "react";
+import { useCanister } from "@amerej/connect2ic-react";
 import { Card, TooltipInfo } from "@components/ui";
 import {
   Loader as ChartLoader,
   Error as ChartError,
   Area as ChartArea,
 } from "@components/charts";
-import useUsersOverview from "@hooks/dashboard/useUsersOverview";
+import useGetActivityStats from "@hooks/super_stats_v3/useGetActivityStats";
 
 const ChartUsersActivity = ({
   className,
@@ -13,10 +14,13 @@ const ChartUsersActivity = ({
 }: {
   className?: string;
 }) => {
+  const [statsActor] = useCanister("tokenStats");
   const barFill = useMemo(() => "#34d399", []);
 
   // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isLoading, isSuccess, isError } = useUsersOverview();
+  const { data, isLoading, isSuccess, isError } = useGetActivityStats({
+    actor: statsActor,
+  });
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -40,11 +44,11 @@ const ChartUsersActivity = ({
                   OGY Protocol Users
                 </span>
                 <TooltipInfo id="tooltip-users-account">
-                  <p>Unique OGY accounts</p>
+                  <p>Unique token holders of OGY tokens</p>
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-                {data.total}
+                {data[data.length - 1].total_unique_accounts.string}
               </div>
             </div>
             <div className="xl:flex items-center mb-6 hidden">
@@ -56,10 +60,10 @@ const ChartUsersActivity = ({
           </div>
           <div className="col-span-3 h-72 rounded-xl">
             <ChartArea
-              data={data.chart.map(({ name, value }) => {
+              data={data.map(({ total_unique_accounts, start_time }) => {
                 return {
-                  name,
-                  value,
+                  name: start_time.datetime.toFormat("LLL dd"),
+                  value: total_unique_accounts.number,
                 };
               })}
               fill={barFill}

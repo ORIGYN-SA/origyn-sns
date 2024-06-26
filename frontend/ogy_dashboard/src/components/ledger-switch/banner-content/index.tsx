@@ -15,14 +15,14 @@ const BannerContent = ({ children }: PropsWithChildren) => {
         </div>
       </div>
 
-      <div className="text-center text-white text-4xl mb-8">
+      <div className="text-center text-4xl mb-8">
         <div className="max-w-96 m-auto">
           We are switching ledger and governance
         </div>
       </div>
 
       <div className="grid xl:grid-cols-4">
-        <div className="col-start-2 col-span-2 text-center text-white/80">
+        <div className="col-start-2 col-span-2 text-center text-content/60">
           <p>ORIGYN governance and ledger have been upgraded to an SNS. </p>
           <p>
             In order to continue participating in ORIGYN governance and utilise

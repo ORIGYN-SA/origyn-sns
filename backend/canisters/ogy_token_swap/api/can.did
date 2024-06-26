@@ -62,6 +62,13 @@ type SwapInfo = record {
   first_request : nat64;
   amount : nat64;
 };
+type SwapStatistics = record {
+  number_of_completed_swaps : nat64;
+  user_swaps : vec record { principal; UserSwap };
+  number_of_failed_swaps : nat64;
+  total_amount_swapped : nat64;
+  number_of_attempted_swaps : nat64;
+};
 type SwapStatus = variant {
   Failed : SwapError;
   BurnSuccess;
@@ -101,8 +108,14 @@ type TransferRequestArgs = record {
   created_at_time : opt nat64;
   amount : nat;
 };
+type UserSwap = record {
+  desposit_account : blob;
+  swaps : nat64;
+  amount : nat64;
+};
 service : (InitArgs) -> {
   get_swap_info : (Args) -> (Response) query;
+  list_swapping_statistics : () -> (SwapStatistics) query;
   request_deposit_account : (Args_1) -> (Response_1);
   swap_tokens : (Args_2) -> (Response_2);
   withdraw_deposit : () -> (Response_3);
