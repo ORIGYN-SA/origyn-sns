@@ -1,10 +1,10 @@
-use canister_time::run_now_then_interval;
-use sns_governance_canister::types::{ ProposalData, ProposalId };
+use canister_time::{ run_now_then_interval, timestamp_seconds };
+use sns_governance_canister::types::{ get_proposal_response, ProposalData, ProposalId };
 use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
 
-use crate::state::{ mutate_state, read_state };
+use crate::{ state::{ mutate_state, read_state, RuntimeState }, utils::is_proposal_closed };
 
 // every 5 minutes
 const SYNC_PROPOSALS_STATS_INTERVAL: Milliseconds = 5 * 60 * 1_000;
@@ -15,7 +15,8 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::spawn(sync_proposals_metrics_data())
+    ic_cdk::spawn(sync_proposals_metrics_data());
+    ic_cdk::spawn(recheck_ongoing_proposals());
 }
 
 pub async fn sync_proposals_metrics_data() {
@@ -74,7 +75,7 @@ pub async fn sync_proposals_metrics_data() {
                             }
                         }
                     }
-                    update_proposals_metrics(proposal);
+                    analyze_proposal(proposal);
                     number_of_scanned_proposals += 1;
                 }
 
@@ -98,11 +99,83 @@ pub async fn sync_proposals_metrics_data() {
     info!("Voting metrics updated successfully.");
 }
 
-pub fn update_proposals_metrics(proposal: &ProposalData) {
+pub async fn recheck_ongoing_proposals() {
+    let ongoing_proposals = read_state(|state| state.data.sync_info.ongoing_proposals.clone());
+    let governance_canister_id = read_state(|state| state.data.sns_governance_canister);
+
+    for proposal_id in ongoing_proposals {
+        let args = sns_governance_canister::get_proposal::Args {
+            proposal_id: Some(proposal_id),
+        };
+        match sns_governance_canister_c2c_client::get_proposal(governance_canister_id, &args).await {
+            Ok(response) => {
+                match response.result {
+                    Some(value) => {
+                        match value {
+                            get_proposal_response::Result::Proposal(proposal_data) => {
+                                if is_proposal_closed(&proposal_data) {
+                                    mutate_state(|state| {
+                                        let ongoing_proposals =
+                                            &mut state.data.sync_info.ongoing_proposals;
+                                        if let Some(this_proposal_id) = proposal_data.id {
+                                            if
+                                                let Some(pos) = ongoing_proposals
+                                                    .iter()
+                                                    .position(|id| id == &this_proposal_id)
+                                            {
+                                                ongoing_proposals.remove(pos);
+                                            }
+                                        }
+
+                                        update_proposals_metrics(state, &proposal_data);
+                                    });
+                                }
+                            }
+                            get_proposal_response::Result::Error(e) => {
+                                let err_msg = format!("{e:?}");
+                                error!("recheck_ongoing_proposals -> {err_msg:?}");
+                            }
+                        }
+                    }
+                    None => {}
+                }
+            }
+            Err(e) => {
+                let err_msg = format!("{e:?}");
+                error!("recheck_ongoing_proposals -> {err_msg:?}");
+            }
+        }
+    }
+}
+
+pub fn analyze_proposal(proposal: &ProposalData) {
     mutate_state(|state| {
-        let metrics = &mut state.data.porposals_metrics;
-        let metrics_calculations = &mut state.data.proposals_metrics_calculations;
-        metrics.total_proposals += 1;
+        update_proposals_metrics(state, proposal);
+    });
+
+    mutate_state(|state| {
+        let ongoing_proposals = &mut state.data.sync_info.ongoing_proposals;
+
+        // If proposal is executed, we update the metrics
+        // else push it to a vector to be checked later
+        if !is_proposal_closed(proposal) {
+            if let Some(pid) = proposal.id {
+                ongoing_proposals.push(pid);
+            }
+        }
+    });
+}
+
+pub fn update_proposals_metrics(state: &mut RuntimeState, proposal: &ProposalData) {
+    let metrics = &mut state.data.porposals_metrics;
+    let metrics_calculations = &mut state.data.proposals_metrics_calculations;
+
+    let this_proposal_id = proposal.id.unwrap_or(ProposalId { id: 0 }).id;
+    if this_proposal_id > metrics.total_proposals {
+        metrics.total_proposals = this_proposal_id;
+    }
+
+    if is_proposal_closed(proposal) {
         match proposal.latest_tally.clone() {
             Some(tally) => {
                 let this_proposal_participation =
@@ -130,7 +203,7 @@ pub fn update_proposals_metrics(proposal: &ProposalData) {
             }
             None => {}
         }
-    });
+    }
 }
 
 #[cfg(test)]
@@ -143,12 +216,16 @@ mod tests {
         Neuron,
         NeuronId,
         ProposalData,
+        ProposalId,
         Tally,
     };
     use types::{ CanisterId, NeuronInfo };
     use utils::env::CanisterEnv;
 
-    use crate::state::{ init_state, mutate_state, read_state, Data, RuntimeState };
+    use crate::{
+        jobs::sync_proposals_stats::analyze_proposal,
+        state::{ init_state, mutate_state, read_state, Data, RuntimeState },
+    };
 
     fn init_runtime_state() {
         let env = CanisterEnv::new(true);
@@ -170,14 +247,22 @@ mod tests {
 
         // Proposal 1
         let mut proposal_1 = ProposalData::default();
+        proposal_1.id = Some(ProposalId {
+            id: 1,
+        });
         proposal_1.proposal_creation_timestamp_seconds = 86_400;
+        proposal_1.decided_timestamp_seconds = 86_400;
         proposal_1.latest_tally = Some(Tally {
             timestamp_seconds: 86_400,
             yes: 10,
             no: 3,
             total: 50,
         });
-        update_proposals_metrics(&proposal_1);
+
+        mutate_state(|state| {
+            update_proposals_metrics(state, &proposal_1);
+        });
+
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
 
         assert_eq!(proposals_metrics.total_proposals, 1);
@@ -188,14 +273,22 @@ mod tests {
 
         // Proposal 2
         let mut proposal_2 = ProposalData::default();
+        proposal_2.id = Some(ProposalId {
+            id: 2,
+        });
         proposal_2.proposal_creation_timestamp_seconds = 2 * 86_400;
+        proposal_2.decided_timestamp_seconds = 2 * 86_400;
         proposal_2.latest_tally = Some(Tally {
             timestamp_seconds: 2 * 86_400,
             yes: 20,
             no: 4,
             total: 60,
         });
-        update_proposals_metrics(&proposal_2);
+
+        mutate_state(|state| {
+            update_proposals_metrics(state, &proposal_2);
+        });
+
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
 
         assert_eq!(proposals_metrics.total_proposals, 2);
@@ -207,14 +300,22 @@ mod tests {
 
         // Proposal 3
         let mut proposal_3 = ProposalData::default();
+        proposal_3.id = Some(ProposalId {
+            id: 3,
+        });
         proposal_3.proposal_creation_timestamp_seconds = 3 * 86_400;
+        proposal_3.decided_timestamp_seconds = 3 * 86_400;
         proposal_3.latest_tally = Some(Tally {
             timestamp_seconds: 3 * 86_400,
             yes: 45,
             no: 10,
             total: 100,
         });
-        update_proposals_metrics(&proposal_3);
+
+        mutate_state(|state| {
+            update_proposals_metrics(state, &proposal_3);
+        });
+
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
 
         assert_eq!(proposals_metrics.total_proposals, 3);
@@ -223,5 +324,55 @@ mod tests {
         assert_eq!(proposals_metrics.average_voting_power, 70);
         // avg = ((10 + 3) / 50 + (20 + 4) / 60 + (45 + 10) / 100) / 3 = 0.4033333333333333
         assert_eq!(proposals_metrics.average_voting_participation, 4033u64);
+
+        // Proposal 4 - still open
+        let mut proposal_4 = ProposalData::default();
+        proposal_4.id = Some(ProposalId {
+            id: 4,
+        });
+        proposal_4.proposal_creation_timestamp_seconds = 4 * 86_400;
+        proposal_4.decided_timestamp_seconds = 0;
+        proposal_4.latest_tally = Some(Tally {
+            timestamp_seconds: 4 * 86_400,
+            yes: 90,
+            no: 10,
+            total: 150,
+        });
+
+        analyze_proposal(&proposal_4);
+
+        let ongoing_proposals = read_state(|state| state.data.sync_info.ongoing_proposals.clone());
+        assert_eq!(
+            ongoing_proposals.contains(
+                &(ProposalId {
+                    id: 4,
+                })
+            ),
+            true
+        );
+        let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
+
+        assert_eq!(proposals_metrics.total_proposals, 4);
+        // Expect the other values to be the same as before
+        assert_eq!(proposals_metrics.total_voting_power, 100);
+        // avg = 50 + 60 + 100 / 3 = 70
+        assert_eq!(proposals_metrics.average_voting_power, 70);
+        // avg = ((10 + 3) / 50 + (20 + 4) / 60 + (45 + 10) / 100) / 3 = 0.4033333333333333
+        assert_eq!(proposals_metrics.average_voting_participation, 4033u64);
+
+        // Close it and re-analyze the proposal
+        proposal_4.decided_timestamp_seconds = 4 * 86_400;
+        mutate_state(|state| {
+            update_proposals_metrics(state, &proposal_4);
+        });
+
+        let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
+        assert_eq!(proposals_metrics.total_proposals, 4);
+        // Expect the other values to be the same as before
+        assert_eq!(proposals_metrics.total_voting_power, 150);
+        // avg = 50 + 60 + 100 + 150 / 4 = 70
+        assert_eq!(proposals_metrics.average_voting_power, 90);
+        // avg = ((10 + 3) / 50 + (20 + 4) / 60 + (45 + 10) / 100 + (90 + 10) / 150) / 4 = 0.4033333333333333
+        assert_eq!(proposals_metrics.average_voting_participation, 4691u64);
     }
 }

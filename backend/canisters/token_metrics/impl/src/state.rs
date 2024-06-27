@@ -41,7 +41,7 @@ impl RuntimeState {
                 memory_used: MemorySize::used(),
                 cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
             },
-            sync_info: self.data.sync_info,
+            sync_info: self.data.sync_info.clone(),
             number_of_owners: self.data.principal_neurons.len(),
             sns_governance_canister: self.data.sns_governance_canister,
             sns_ledger_canister: self.data.sns_ledger_canister,
@@ -72,7 +72,7 @@ pub struct CanisterInfo {
     pub cycles_balance_in_tc: f64,
 }
 
-#[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]
+#[derive(CandidType, Deserialize, Serialize, Clone, Default)]
 pub struct SyncInfo {
     pub last_synced_start: TimestampMillis,
     pub last_synced_end: TimestampMillis,
@@ -80,6 +80,7 @@ pub struct SyncInfo {
     pub last_synced_transaction: usize,
     pub last_synced_number_of_proposals: usize,
     pub last_synced_proposal_id: Option<ProposalId>,
+    pub ongoing_proposals: Vec<ProposalId>,
 }
 
 #[derive(Serialize, Deserialize)]
