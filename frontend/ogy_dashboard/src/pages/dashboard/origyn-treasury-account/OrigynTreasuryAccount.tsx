@@ -89,7 +89,8 @@ const OrigynTreasuryAccount = ({
       setData((prevData) =>
         prevData.map((item) => {
           if (item.token === "OGY") {
-            return { ...item, value: balanceOGY as string };
+            // TODO hardcode value before swap complete
+            return { ...item, value: "99,661,463.92" as string };
           } else if (item.token === "ICP") {
             return { ...item, value: balanceICP as string };
           }
