@@ -104,40 +104,38 @@ pub async fn recheck_ongoing_proposals() {
     let governance_canister_id = read_state(|state| state.data.sns_governance_canister);
 
     for proposal_id in ongoing_proposals {
-        let args = sns_governance_canister::get_proposal::Args {
-            proposal_id: Some(proposal_id),
+        let args = sns_governance_canister::list_proposals::Args {
+            before_proposal: Some(ProposalId { id: proposal_id.id + 1 }),
+            limit: 1,
+            exclude_type: Vec::new(),
+            include_status: Vec::new(),
+            include_reward_status: Vec::new(),
         };
-        match sns_governance_canister_c2c_client::get_proposal(governance_canister_id, &args).await {
+        match
+            sns_governance_canister_c2c_client::list_proposals(governance_canister_id, &args).await
+        {
             Ok(response) => {
-                match response.result {
-                    Some(value) => {
-                        match value {
-                            get_proposal_response::Result::Proposal(proposal_data) => {
-                                if is_proposal_closed(&proposal_data) {
-                                    mutate_state(|state| {
-                                        let ongoing_proposals =
-                                            &mut state.data.sync_info.ongoing_proposals;
-                                        if let Some(this_proposal_id) = proposal_data.id {
-                                            if
-                                                let Some(pos) = ongoing_proposals
-                                                    .iter()
-                                                    .position(|id| id == &this_proposal_id)
-                                            {
-                                                ongoing_proposals.remove(pos);
-                                            }
-                                        }
-
-                                        update_proposals_metrics(state, &proposal_data);
-                                    });
+                let returned_proposal = response.proposals.first();
+                match returned_proposal {
+                    Some(proposal) => {
+                        if is_proposal_closed(&proposal) {
+                            mutate_state(|state| {
+                                let ongoing_proposals = &mut state.data.sync_info.ongoing_proposals;
+                                if let Some(this_proposal_id) = proposal.id {
+                                    if
+                                        let Some(pos) = ongoing_proposals
+                                            .iter()
+                                            .position(|id| id == &this_proposal_id)
+                                    {
+                                        ongoing_proposals.remove(pos);
+                                    }
                                 }
-                            }
-                            get_proposal_response::Result::Error(e) => {
-                                let err_msg = format!("{e:?}");
-                                error!("recheck_ongoing_proposals -> {err_msg:?}");
-                            }
+
+                                update_proposals_metrics(state, &proposal);
+                            });
                         }
                     }
-                    None => {}
+                    None => (),
                 }
             }
             Err(e) => {
