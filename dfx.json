@@ -23,6 +23,17 @@
         "output": "backend/canisters/ogy_token_swap/api/declarations"
       }
     },
+    "management": {
+      "type": "custom",
+      "candid": "backend/canisters/management/api/can.did",
+      "package": "management",
+      "wasm": "backend/canisters/management/target/wasm32-unknown-unknown/release/management_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/management/api/declarations"
+      }
+    },
     "ogy_dashboard": {
       "declarations": {
         "bindings": [],

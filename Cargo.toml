@@ -6,6 +6,8 @@ members = [
   "backend/canisters/canister_jobs/impl",
   "backend/external_canisters/sns_governance/api",
   "backend/external_canisters/sns_governance/c2c_client",
+  "backend/canisters/management/impl",
+  "backend/canisters/management/api",
   "backend/canisters/ogy_token_swap/impl",
   "backend/canisters/ogy_token_swap/api",
   "backend/canisters/sns_rewards/impl",

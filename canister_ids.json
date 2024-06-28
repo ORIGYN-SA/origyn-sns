@@ -1,4 +1,8 @@
 {
+  "management": {
+    "ic": "jhjml-syaaa-aaaap-qhkqq-cai",
+    "staging": "xzgwq-xyaaa-aaaan-qmo3a-cai"
+  },
   "ogy_dashboard": {
     "ic": "jbj2y-2qaaa-aaaal-ajc5q-cai",
     "preprod": "m7nki-xaaaa-aaaan-qmlwa-cai",
