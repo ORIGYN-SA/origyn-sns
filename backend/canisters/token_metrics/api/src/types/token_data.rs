@@ -44,7 +44,7 @@ pub struct ProposalsMetricsCalculations {
     pub cumulative_voting_power: u64,
     pub valid_tally_count: u64,
 }
-#[derive(Serialize, Deserialize, Clone, CandidType)]
+#[derive(Serialize, Deserialize, Clone, CandidType, Debug)]
 pub struct ProposalsMetrics {
     pub total_proposals: u64,
     pub daily_voting_rewards: u64,

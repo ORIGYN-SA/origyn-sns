@@ -38,4 +38,4 @@ fi
 
 ./scripts/init-integration-test-environment.sh
 
-cargo test -p integration_tests
+cargo test -p integration_tests -- --nocapture

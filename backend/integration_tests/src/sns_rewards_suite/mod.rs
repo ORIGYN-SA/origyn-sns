@@ -1,4 +1,4 @@
 #![cfg(test)]
 
-mod setup;
+mod init;
 mod tests;
