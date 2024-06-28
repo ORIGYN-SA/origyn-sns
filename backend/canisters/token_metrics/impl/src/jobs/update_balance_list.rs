@@ -136,7 +136,10 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
         offset: 0,
         limit: 100,
     };
-    loop {
+    let mut continue_scanning_principals = true;
+
+    while continue_scanning_principals {
+        continue_scanning_principals = false;
         match
             super_stats_v3_c2c_client::get_principal_holders(super_stats_canister_id, &p_args).await
         {
@@ -148,11 +151,10 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
                     );
                 }
                 let count = principal_holders.len();
-                if count < (p_args.limit as usize) {
-                    break;
-                } else {
-                    p_args.offset += count as u64;
+                if count == (p_args.limit as usize) {
+                    continue_scanning_principals = true;
                 }
+                p_args.offset += count as u64;
             }
             Err(err) => {
                 let message = format!("{err:?}");
@@ -165,9 +167,10 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
         offset: 0,
         limit: 100,
     };
+    let mut continue_scanning_accounts = true;
 
-    // Fetch account holders
-    loop {
+    while continue_scanning_accounts {
+        continue_scanning_accounts = false;
         match
             super_stats_v3_c2c_client::get_account_holders(super_stats_canister_id, &a_args).await
         {
@@ -175,13 +178,11 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
                 for response in account_holders.iter() {
                     account_holders_map.insert(response.holder.clone(), response.data.clone());
                 }
-
                 let count = account_holders.len();
-                if count < (a_args.limit as usize) {
-                    break;
-                } else {
-                    a_args.offset += count as u64;
+                if count == (a_args.limit as usize) {
+                    continue_scanning_accounts = true;
                 }
+                a_args.offset += count as u64;
             }
             Err(err) => {
                 let message = format!("{err:?}");
