@@ -4,7 +4,6 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchFoundationAssetsOGY from "@services/queries/metrics/fetchFoundationAssetsOGY";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
@@ -26,7 +25,6 @@ interface IFoundationReserve {
 }
 
 const useOGYCirculationState = () => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [foundationReserve, setFoundationReserve] =
     useState<IFoundationReserve | null>(null);
 
@@ -43,10 +41,7 @@ const useOGYCirculationState = () => {
     total_staked: number;
   }> = useQuery({
     queryKey: ["foundationAssets"],
-    queryFn: () =>
-      fetchFoundationAssetsOGY({
-        actor: tokenMetricsActor,
-      }),
+    queryFn: () => fetchFoundationAssetsOGY(),
     placeholderData: keepPreviousData,
   });
 

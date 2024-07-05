@@ -1,8 +1,9 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 import { GovernanceStats } from "@services/types/token_metrics";
+import { getActor } from "artemis-react";
 
-const fetchNeuronsStats = async ({ actor }: { actor: ActorSubclass }) => {
+const fetchNeuronsStats = async () => {
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const result = (await actor.get_neurons_stats([])) as GovernanceStats;
 
   const total =

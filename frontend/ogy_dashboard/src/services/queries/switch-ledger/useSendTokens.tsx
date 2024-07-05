@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@amerej/connect2ic-react";
+import { useWallet, getActor } from "artemis-react";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
-import { ActorSubclass } from "@dfinity/agent";
 import { TRANSACTION_FEE } from "@constants/index";
 import { Response_1 } from "@services/types/ogy_token_swap";
 
@@ -14,30 +13,22 @@ const isFulfilled = <T,>(
   input: PromiseSettledResult<T>
 ): input is PromiseFulfilledResult<T> => input.status === "fulfilled";
 
-interface ISendTokensParams {
-  OGYTokenSwapActor: ActorSubclass;
-  ledgerLegacyActor: ActorSubclass;
-  owner: string;
-}
-
 interface IValueOGYBalance {
   e8s: bigint;
 }
 
-const sendTokens = async ({
-  OGYTokenSwapActor,
-  ledgerLegacyActor,
-  owner,
-}: ISendTokensParams) => {
+const sendTokens = async ({ owner }: { owner: string }) => {
   // for fetching OGY user balance
   const userAccountIdentifier = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
   });
+  const actorLedgerLegacy = await getActor("ledgerLegacy", { isAnon: false });
+  const actorOGYTokenSwap = await getActor("OGYTokenSwap", { isAnon: false });
   const rawResult = await Promise.allSettled([
-    ledgerLegacyActor.account_balance_dfx({
+    actorLedgerLegacy.account_balance_dfx({
       account: userAccountIdentifier.toHex(),
     }),
-    OGYTokenSwapActor.request_deposit_account({
+    actorOGYTokenSwap.request_deposit_account({
       of: [Principal.fromText(owner)],
     }),
   ]);
@@ -49,7 +40,7 @@ const sendTokens = async ({
   const fee = { e8s: TRANSACTION_FEE };
   const amount = (result[0]?.value as IValueOGYBalance).e8s - TRANSACTION_FEE;
 
-  const resultSendTokens = await ledgerLegacyActor.send_dfx({
+  const resultSendTokens = await actorLedgerLegacy.send_dfx({
     to,
     fee,
     memo: 0,
@@ -61,16 +52,12 @@ const sendTokens = async ({
 };
 
 const useSendTokens = () => {
-  const { principal } = useConnect();
-  const [OGYTokenSwapActor] = useCanister("OGYTokenSwap");
-  const [ledgerLegacyActor] = useCanister("ledgerLegacy");
+  const { principalId } = useWallet();
 
   return useMutation({
     mutationFn: () =>
       sendTokens({
-        OGYTokenSwapActor,
-        ledgerLegacyActor,
-        owner: principal as string,
+        owner: principalId as string,
       }),
   });
 };

@@ -1,7 +1,7 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { GetHoldersResponse } from "@services/types/token_metrics";
+import { getActor } from "artemis-react";
 
 interface ITokenHolderData {
   principal: string;
@@ -16,16 +16,15 @@ interface ITokenHolderData {
 }
 
 const fetchTokenHolders = async ({
-  actor,
   offset = 0,
   limit = 10,
   mergeAccountsToPrincipals = true,
 }: {
-  actor: ActorSubclass;
   offset?: number;
   limit?: number;
   mergeAccountsToPrincipals?: boolean;
 }) => {
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const results = (await actor.get_holders({
     limit,
     offset,

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/20/solid";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { Button, Tile, Tooltip, Skeleton } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
@@ -16,7 +16,7 @@ interface AccountOverviewProps {
 
 const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
 
   const { data: balanceOGY } = useFetchBalanceOGYOwner();
   const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
@@ -71,17 +71,17 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                       <div className="flex items-center truncate pr-4">
                         <div className="flex ml-4 items-center truncate text-sm">
                           <div className="mr-2 shrink-0">Principal ID: </div>
-                          {principal ? (
+                          {principalId ? (
                             <>
                               <div
                                 className="truncate"
                                 data-tooltip-id="tooltip_principal_id"
-                                data-tooltip-content={principal}
+                                data-tooltip-content={principalId}
                               >
-                                {principal}
+                                {principalId}
                               </div>
                               <Tooltip id="tooltip_principal_id" />
-                              <CopyToClipboard value={principal as string} />
+                              <CopyToClipboard value={principalId as string} />
                             </>
                           ) : (
                             <Skeleton className="w-64" />

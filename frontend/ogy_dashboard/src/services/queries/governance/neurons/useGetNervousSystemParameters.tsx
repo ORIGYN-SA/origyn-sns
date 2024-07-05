@@ -1,10 +1,5 @@
 import { keepPreviousData } from "@tanstack/react-query";
-import { useConnect, useCanister } from "@amerej/connect2ic-react";
-import { ActorSubclass } from "@dfinity/agent";
-
-interface IGetNervousSystemProps {
-  governanceActor: ActorSubclass;
-}
+import { useWallet, getActor } from "artemis-react";
 
 interface ISystemNervousParametersResult {
   max_neuron_age_for_age_bonus: bigint[];
@@ -22,10 +17,9 @@ export interface ISystemNervousParametersResponse {
   neuronMinimumDissolveDelayToVoteSeconds: number;
 }
 
-export const getNervousSystemParameters = async ({
-  governanceActor,
-}: IGetNervousSystemProps) => {
-  const result = (await governanceActor.get_nervous_system_parameters(
+export const getNervousSystemParameters = async () => {
+  const actor = await getActor("governance", { isAnon: true });
+  const result = (await actor.get_nervous_system_parameters(
     null
   )) as ISystemNervousParametersResult;
   return {
@@ -41,15 +35,10 @@ export const getNervousSystemParameters = async ({
 };
 
 const useGetNervousSystemParameters = () => {
-  const { isConnected } = useConnect();
-  const [governanceActor] = useCanister("governance");
-
+  const { isConnected } = useWallet();
   return {
-    queryKey: ["getNervousSystemParameters", governanceActor, isConnected],
-    queryFn: () =>
-      getNervousSystemParameters({
-        governanceActor,
-      }),
+    queryKey: ["getNervousSystemParameters", isConnected],
+    queryFn: () => getNervousSystemParameters(),
     placeholderData: keepPreviousData,
     enabled: !!isConnected,
   };

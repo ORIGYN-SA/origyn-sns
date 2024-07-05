@@ -4,7 +4,6 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchSupplyDataOGY from "@services/queries/metrics/fetchSupplyDataOGY";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { PieChartData } from "@components/charts/pie/Pie";
@@ -18,7 +17,6 @@ interface ICirculationStateOGY {
 }
 
 const useCirculationStateOGY = () => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [foundationReserve, setFoundationReserve] =
     useState<ICirculationStateOGY | null>(null);
 
@@ -30,10 +28,7 @@ const useCirculationStateOGY = () => {
     error,
   }: UseQueryResult<TokenSupplyData> = useQuery({
     queryKey: ["circulationStateOGY"],
-    queryFn: () =>
-      fetchSupplyDataOGY({
-        actor: tokenMetricsActor,
-      }),
+    queryFn: () => fetchSupplyDataOGY(),
     placeholderData: keepPreviousData,
   });
 
@@ -45,10 +40,7 @@ const useCirculationStateOGY = () => {
     error: errorReserve,
   }: UseQueryResult<{ total_locked: number }> = useQuery({
     queryKey: ["foundationAssets"],
-    queryFn: () =>
-      fetchFoundationAssetsOGY({
-        actor: tokenMetricsActor,
-      }),
+    queryFn: () => fetchFoundationAssetsOGY(),
     placeholderData: keepPreviousData,
   });
 

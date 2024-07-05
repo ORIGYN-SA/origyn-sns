@@ -3,7 +3,6 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
@@ -16,7 +15,6 @@ const useTokenDistribution = ({
   limit: number;
   offset: number;
 }) => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const {
     data: tokenDistribution,
     isSuccess: isSuccessFetchTokenHolders,
@@ -27,7 +25,6 @@ const useTokenDistribution = ({
     queryKey: ["listTokenDistribution", limit, offset],
     queryFn: () =>
       fetchTokenHolders({
-        actor: tokenMetricsActor,
         limit,
         offset,
       }),

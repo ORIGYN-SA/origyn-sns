@@ -1,9 +1,9 @@
 import { createContext, useContext, ReactNode, useState } from "react";
+import { useWallet } from "artemis-react";
+
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useSendTokens from "@services/queries/switch-ledger/useSendTokens";
 import useRequestSwap from "@services/queries/switch-ledger/useRequestSwap";
-
-import useConnect from "@hooks/useConnect";
 
 interface SwapTokensContextType {
   sendTokens: ReturnType<typeof useSendTokens>;
@@ -30,7 +30,7 @@ export const useSwapTokens = () => {
 };
 
 export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
-  const { principal, accountId } = useConnect();
+  const { principalId, accountId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const sendTokens = useSendTokens();
@@ -52,7 +52,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
         show,
         handleShow,
         handleClose,
-        principal,
+        principal: principalId,
         accountId,
       }}
     >

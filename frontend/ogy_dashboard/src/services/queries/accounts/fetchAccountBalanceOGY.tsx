@@ -1,13 +1,12 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8 } from "@helpers/numbers/index";
+import { getActor } from "artemis-react";
 
 const fetchAccountBalanceOGY = async ({
-  actor,
   account,
 }: {
-  actor: ActorSubclass;
   account: string;
 }): Promise<number> => {
+  const actor = await getActor("ledgerLegacy", { isAnon: true });
   const result = (await actor.account_balance_dfx({
     account,
   })) as { e8s: bigint };

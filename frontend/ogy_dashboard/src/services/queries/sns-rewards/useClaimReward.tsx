@@ -1,14 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
-import { ActorSubclass } from "@dfinity/agent";
+import { getActor } from "artemis-react";
 
-interface IClaimReward {
-  snsRewardsActor: ActorSubclass;
-  neuronId: { id: number[] };
-}
-
-const claimReward = async ({ snsRewardsActor, neuronId }: IClaimReward) => {
-  const result = await snsRewardsActor.claim_reward({
+const claimReward = async ({ neuronId }: { neuronId: { id: number[] } }) => {
+  const actor = await getActor("SNSRewards", { isAnon: false });
+  const result = await actor.claim_reward({
     token: "OGY",
     neuron_id: neuronId,
   });
@@ -16,12 +11,9 @@ const claimReward = async ({ snsRewardsActor, neuronId }: IClaimReward) => {
 };
 
 const useClaimReward = () => {
-  const [snsRewardsActor] = useCanister("SNSRewards");
-
   return useMutation({
     mutationFn: ({ neuronId }: { neuronId: { id: number[] } }) =>
       claimReward({
-        snsRewardsActor,
         neuronId,
       }),
   });

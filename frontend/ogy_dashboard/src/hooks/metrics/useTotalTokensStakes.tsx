@@ -5,14 +5,12 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchStakeHistory from "@services/queries/metrics/fetchStakeHistory";
 import { HistoryData } from "@services/types/token_metrics";
 import { ChartData } from "@services/types/charts.types";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 
 const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [data, setData] = useState<
     { total: string; dataChart: ChartData[] } | undefined
   >(undefined);
@@ -27,7 +25,6 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
     queryKey: ["totalTokensStakes"],
     queryFn: () =>
       fetchStakeHistory({
-        actor: tokenMetricsActor,
         start,
       }),
     placeholderData: keepPreviousData,

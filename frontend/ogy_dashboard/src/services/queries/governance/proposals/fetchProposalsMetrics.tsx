@@ -1,7 +1,8 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { ProposalsMetrics } from "@services/types/token_metrics";
+import { getActor } from "artemis-react";
 
-const fetchProposalsMetrics = async ({ actor }: { actor: ActorSubclass }) => {
+const fetchProposalsMetrics = async () => {
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const result = (await actor.get_proposals_metrics()) as ProposalsMetrics;
   return result;
 };

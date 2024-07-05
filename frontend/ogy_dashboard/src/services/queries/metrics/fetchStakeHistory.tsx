@@ -1,13 +1,12 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { HistoryData } from "@services/types/token_metrics";
+import { getActor } from "artemis-react";
 
 const fetchTokenHolders = async ({
-  actor,
   start = 30,
 }: {
-  actor: ActorSubclass;
   start: number;
 }): Promise<Array<[bigint, HistoryData]>> => {
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const results = await actor.get_stake_history(start);
   return results as Array<[bigint, HistoryData]>;
 };

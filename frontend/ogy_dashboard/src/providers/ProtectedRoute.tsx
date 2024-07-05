@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useConnect } from "@amerej/connect2ic-react";
+import { useWallet } from "artemis-react";
 
 const ProtectedRoute = () => {
-  const { isConnected, isInitializing } = useConnect();
+  const { isConnected } = useWallet();
 
-  if (!isInitializing && !isConnected) {
+  if (!isConnected) {
     return <Navigate to="/" replace />;
   }
 

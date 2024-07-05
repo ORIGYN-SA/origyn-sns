@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "artemis-react";
 import Auth from "@components/auth/Auth";
 import { Card, Select } from "@components/ui";
 import TransferICP from "./transfer/TransferICP";
 
 const Recovery = () => {
   //   const navigate = useNavigate();
-  const { isConnected, isInitializing } = useConnect();
+  const { isConnected } = useWallet();
   const [token, setToken] = useState("");
   const selectOptions = useMemo(() => [{ value: "ICP" }], []);
 
@@ -47,7 +47,7 @@ const Recovery = () => {
                 )}
               </>
             )}
-            {!isConnected && !isInitializing && (
+            {!isConnected && (
               <div className="flex flex-col items-center py-8">
                 <div className="font-semibold text-center mb-8">
                   In order to collect your tokens you must be logged in.
