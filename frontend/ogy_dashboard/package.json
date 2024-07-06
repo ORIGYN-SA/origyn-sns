@@ -34,7 +34,7 @@
     "@tanstack/react-form": "^0.19.4",
     "@tanstack/react-query": "^5.28.14",
     "@tanstack/react-table": "^8.15.3",
-    "artemis-react": "file:../../../../auth/artemis-react",
+    "artemis-react": "file:../../../auth/artemis-react",
     "axios": "^1.6.8",
     "headless-stepper": "^1.10.0",
     "lodash": "^4.17.21",
