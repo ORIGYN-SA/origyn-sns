@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import "@amerej/connect2ic-core/style.css";
 import App from "./App.tsx";
 import { colors as themeColors } from "@theme/preset";
-import { Provider as AuthProvider } from "artemis-react";
+import { Provider as AuthProvider } from "@amerej/artemis-react";
 
 const queryClient = new QueryClient();
 

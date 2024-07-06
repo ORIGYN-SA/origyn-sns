@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
 import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";

@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
-import { useWalletInit } from "artemis-react";
+import { useWalletInit } from "@amerej/artemis-react";
 
 import {
   // APP_MODE,

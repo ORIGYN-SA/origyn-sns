@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";

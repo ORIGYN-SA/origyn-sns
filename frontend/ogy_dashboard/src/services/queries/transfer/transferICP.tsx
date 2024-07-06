@@ -1,7 +1,7 @@
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE_ICP } from "@constants/index";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const transferICP = async ({ amount, to }: { amount: bigint; to: string }) => {
   const accountId = AccountIdentifier.fromPrincipal({

@@ -1,5 +1,5 @@
 import { UserIcon } from "@heroicons/react/20/solid";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import LedgerSwitch from "@pages/account/ledger-switch";
 import AvailableOGY from "@pages/account/available-ogy";
 import StakedOGY from "@pages/account/staked-ogy";

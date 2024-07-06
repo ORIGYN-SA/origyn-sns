@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-// import { useWallet } from "artemis-react";
+// import { useWallet } from "@amerej/artemis-react";
 // import { Dialog, LoaderSpin } from "@components/ui";
 
 const ProtectedRoute = () => {

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/20/solid";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { Button, Tile, Tooltip, Skeleton } from "@components/ui";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";

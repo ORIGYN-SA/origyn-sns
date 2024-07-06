@@ -1,6 +1,6 @@
 import { Principal } from "@dfinity/principal";
 import { TRANSACTION_FEE } from "@constants/index";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const transferOGY = async ({ amount, to }: { amount: bigint; to: string }) => {
   // https://forum.dfinity.org/t/difference-between-nnsledger-container-icrc1-transfer-and-transfer/20535/5

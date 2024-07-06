@@ -1,5 +1,5 @@
 // import { useQueryClient } from "@tanstack/react-query";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 
 const Auth = () => {

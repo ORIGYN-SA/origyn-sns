@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import { Table, LoaderSpin, Card } from "@components/ui";
 import { INeuronData } from "@services/types";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";

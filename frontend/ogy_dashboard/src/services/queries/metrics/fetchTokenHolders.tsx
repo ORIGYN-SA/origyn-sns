@@ -1,7 +1,7 @@
 import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { GetHoldersResponse } from "@services/types/token_metrics";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 interface ITokenHolderData {
   principal: string;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 
 import { NNS_PLATFORM_URL } from "@constants/index";
 import { Button, Dialog } from "@components/ui";

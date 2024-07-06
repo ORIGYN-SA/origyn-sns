@@ -9,7 +9,7 @@ import {
 import { ActivitySnapshot } from "./types";
 import { millify } from "@helpers/numbers";
 
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const useGetActivityStats = ({
   start = 30,

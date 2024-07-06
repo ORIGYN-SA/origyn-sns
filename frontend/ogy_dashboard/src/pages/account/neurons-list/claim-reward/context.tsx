@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import useClaimRewardService from "@services/queries/sns-rewards/useClaimReward";
 interface ClaimRewardContextType {
   mutation: ReturnType<typeof useClaimRewardService>;

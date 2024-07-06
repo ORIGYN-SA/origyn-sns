@@ -1,4 +1,4 @@
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;
 

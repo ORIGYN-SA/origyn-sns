@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import Auth from "@components/auth/Auth";
 import { Card, Select } from "@components/ui";
 import TransferICP from "./transfer/TransferICP";

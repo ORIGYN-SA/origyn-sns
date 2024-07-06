@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const claimReward = async ({ neuronId }: { neuronId: { id: number[] } }) => {
   const actor = await getActor("SNSRewards", { isAnon: false });

@@ -1,6 +1,6 @@
 import { divideBy1e8 } from "@helpers/numbers";
 import { WalletOverview } from "@services/types/token_metrics";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const fetchFoundationAssetsOGY = async () => {
   const actor = await getActor("tokenMetrics", { isAnon: true });

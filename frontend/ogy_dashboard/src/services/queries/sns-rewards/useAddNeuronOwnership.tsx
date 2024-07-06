@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 import type { Response } from "@services/types/sns_rewards";
 import { Buffer } from "buffer";
 window.Buffer = window.Buffer || Buffer;

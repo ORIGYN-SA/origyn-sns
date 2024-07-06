@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useWallet, getActor } from "artemis-react";
+import { useWallet, getActor } from "@amerej/artemis-react";
 import { Principal } from "@dfinity/principal";
 
 const requestSwap = async ({

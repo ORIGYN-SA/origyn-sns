@@ -1,5 +1,5 @@
 import { LockedNeuronsAmount } from "@services/types/token_metrics";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const fetchEstimatedRewards = async () => {
   const actor = await getActor("tokenMetrics", { isAnon: true });

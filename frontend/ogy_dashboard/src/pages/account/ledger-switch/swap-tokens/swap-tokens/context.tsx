@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useSendTokens from "@services/queries/switch-ledger/useSendTokens";

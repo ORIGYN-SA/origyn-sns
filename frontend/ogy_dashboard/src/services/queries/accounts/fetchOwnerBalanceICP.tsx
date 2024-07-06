@@ -1,7 +1,7 @@
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
-import { getActor } from "artemis-react";
+import { getActor } from "@amerej/artemis-react";
 
 const fetchOwnerBalanceICP = async ({ owner }: { owner: string }) => {
   const account = AccountIdentifier.fromPrincipal({

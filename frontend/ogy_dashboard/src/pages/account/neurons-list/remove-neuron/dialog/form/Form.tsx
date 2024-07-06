@@ -1,5 +1,5 @@
 import { Button } from "@components/ui";
-import { useWallet } from "artemis-react";
+import { useWallet } from "@amerej/artemis-react";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { useRemoveNeuron } from "../../context";
 
