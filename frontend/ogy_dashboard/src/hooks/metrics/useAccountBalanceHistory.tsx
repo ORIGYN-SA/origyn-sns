@@ -7,7 +7,6 @@ import {
 import { DateTime } from "luxon";
 import fetchAccountBalanceHistory from "@services/queries/metrics/fetchAccountBalanceHistory";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
-import { useCanister } from "@amerej/connect2ic-react";
 import { ChartData } from "@services/types/charts.types";
 import { HistoryData } from "@services/types/token_metrics";
 
@@ -15,8 +14,6 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
   const [data, setData] = useState<
     { total: string; dataChart: ChartData[] } | undefined
   >(undefined);
-  const [statsActor] = useCanister("tokenStats");
-
   const {
     data: response,
     isSuccess,
@@ -25,7 +22,7 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
     error,
   }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
     queryKey: ["accountBalanceHistory", account],
-    queryFn: () => fetchAccountBalanceHistory({ account, actor: statsActor }),
+    queryFn: () => fetchAccountBalanceHistory({ account }),
     placeholderData: keepPreviousData,
   });
 

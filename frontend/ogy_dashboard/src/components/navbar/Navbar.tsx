@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useConnect } from "@amerej/connect2ic-react";
+import { useWallet } from "@amerej/artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
@@ -10,7 +10,7 @@ import { Tile, Skeleton } from "@components/ui";
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
-  const { isConnected, isInitializing, principal } = useConnect();
+  const { isConnected, principalId } = useWallet();
 
   const navItems = [
     { title: "Dashboard", url: "/" },
@@ -25,10 +25,10 @@ const Navbar = () => {
   const handleOnHideMenu = () => setShowMenu(false);
 
   useEffect(() => {
-    if (!isInitializing && !isConnected) {
+    if (!isConnected) {
       setShowAccountOverview(false);
     }
-  }, [isConnected, isInitializing]);
+  }, [isConnected]);
 
   return (
     <>
@@ -56,7 +56,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex justify-self-end items-center">
-            {!isInitializing && !isConnected && <Auth />}
+            {!isConnected && <Auth />}
             {isConnected && (
               <button
                 className="flex items-center bg-surface-2 rounded-full py-1 px-1"
@@ -70,14 +70,14 @@ const Navbar = () => {
                     <div className="flex items-center truncate pr-4">
                       <div className="flex ml-4 items-center truncate text-sm max-w-64">
                         <div className="mr-2 shrink-0">Principal ID: </div>
-                        {principal ? (
+                        {principalId ? (
                           <>
                             <div
                               className="truncate"
                               data-tooltip-id="tooltip_principal_id"
-                              data-tooltip-content={principal}
+                              data-tooltip-content={principalId}
                             >
-                              {principal}
+                              {principalId}
                             </div>
                           </>
                         ) : (

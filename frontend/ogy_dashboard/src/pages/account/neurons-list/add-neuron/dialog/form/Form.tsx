@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import type { FieldApi } from "@tanstack/react-form";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import { Button } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NNS_PLATFORM_URL } from "@constants/index";
@@ -21,7 +21,7 @@ const FieldInfo = ({ field }: { field: FieldApi<any, any, any, any> }) => {
 };
 
 const Form = () => {
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
   const { form } = useAddNeuron();
   const { Field, Subscribe, handleSubmit } = form;
 
@@ -42,9 +42,9 @@ const Form = () => {
           <div className="text-content/60 font-semibold mb-2">Step 1</div>
           Add your principal{" "}
           <span className="font-semibold">
-            <span>{principal}</span>
+            <span>{principalId}</span>
             <span>
-              <CopyToClipboard value={principal as string} />
+              <CopyToClipboard value={principalId as string} />
             </span>
           </span>
           as a HotKey to your OGY neuron which you wish to include in this

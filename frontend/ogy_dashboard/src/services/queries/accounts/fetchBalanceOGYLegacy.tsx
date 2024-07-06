@@ -1,21 +1,14 @@
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
-import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
+import { getActor } from "@amerej/artemis-react";
 
-interface IFetchBalanceOGYLegacy {
-  actor: ActorSubclass;
-  owner: string;
-}
-
-const fetchBalanceOGYLegacy = async ({
-  actor,
-  owner,
-}: IFetchBalanceOGYLegacy) => {
+const fetchBalanceOGYLegacy = async ({ owner }: { owner: string }) => {
   const account = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
   }).toHex();
 
+  const actor = await getActor("ledgerLegacy", { isAnon: false });
   const result = (await actor.account_balance_dfx({
     account,
   })) as { e8s: bigint };

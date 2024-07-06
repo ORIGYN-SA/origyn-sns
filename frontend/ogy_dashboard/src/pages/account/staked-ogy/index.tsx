@@ -1,4 +1,4 @@
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
@@ -6,7 +6,7 @@ import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const StakedOGY = () => {
-  const { principal: owner } = useConnect();
+  const { principalId: owner } = useWallet();
   const { stakedOGY } = useNeurons({ owner, limit: 0 });
   const { data: stakedOGYUSD } = useFetchBalanceOGYUSD({
     balance: stakedOGY.totalStakedOGY,

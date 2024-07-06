@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
 import OGYCirculationState from "@pages/dashboard/ogy-circulation-state/OGYCirculationState";
@@ -17,7 +17,7 @@ import { PieChartProvider } from "@components/charts/pie/context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { isConnected, isInitializing } = useConnect();
+  const { isConnected } = useWallet();
 
   const handleClickAccount = () => {
     navigate("account");
@@ -45,7 +45,7 @@ const Dashboard = () => {
         <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content px-8 pt-8 pb-16 rounded-xl my-16 w-full">
           <LedgerSwitchBannerContent>
             <div className="flex justify-center mt-8">
-              {!isConnected && !isInitializing && <AuthButton />}
+              {!isConnected && <AuthButton />}
               {isConnected && (
                 <Button onClick={handleClickAccount}>My account</Button>
               )}

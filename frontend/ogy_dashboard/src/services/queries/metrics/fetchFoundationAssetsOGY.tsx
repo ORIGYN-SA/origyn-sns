@@ -1,12 +1,9 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { divideBy1e8 } from "@helpers/numbers";
 import { WalletOverview } from "@services/types/token_metrics";
+import { getActor } from "@amerej/artemis-react";
 
-const fetchFoundationAssetsOGY = async ({
-  actor,
-}: {
-  actor: ActorSubclass;
-}) => {
+const fetchFoundationAssetsOGY = async () => {
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const results = (await actor.get_foundation_assets()) as Array<
     [string, WalletOverview]
   >;

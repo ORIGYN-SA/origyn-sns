@@ -4,7 +4,6 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchEstimatedRewards from "@services/queries/metrics/fetchEstimatedRewards";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { LockedNeuronsAmount } from "@services/types/token_metrics";
@@ -18,7 +17,6 @@ interface IEstimatedReward {
 }
 
 const useEstimatedRewards = () => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [estimatedRewards, setEstimatedRewards] = useState<
     IEstimatedReward[] | null
   >(null);
@@ -34,10 +32,7 @@ const useEstimatedRewards = () => {
     error,
   }: UseQueryResult<LockedNeuronsAmount> = useQuery({
     queryKey: ["estimatedRewards"],
-    queryFn: () =>
-      fetchEstimatedRewards({
-        actor: tokenMetricsActor,
-      }),
+    queryFn: () => fetchEstimatedRewards(),
     placeholderData: keepPreviousData,
   });
 

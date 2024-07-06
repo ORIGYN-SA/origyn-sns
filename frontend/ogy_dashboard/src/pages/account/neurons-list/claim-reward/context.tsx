@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import useClaimRewardService from "@services/queries/sns-rewards/useClaimReward";
 interface ClaimRewardContextType {
   mutation: ReturnType<typeof useClaimRewardService>;
@@ -33,7 +33,7 @@ export const ClaimRewardProvider = ({
   neuronId: string;
   claimAmount: number;
 }) => {
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const mutation = useClaimRewardService();
@@ -52,7 +52,7 @@ export const ClaimRewardProvider = ({
         handleClose,
         neuronId,
         claimAmount,
-        principal,
+        principal: principalId,
       }}
     >
       {children}

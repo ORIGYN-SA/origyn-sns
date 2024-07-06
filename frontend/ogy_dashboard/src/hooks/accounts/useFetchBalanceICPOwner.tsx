@@ -1,17 +1,14 @@
 // import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import fetchOwnerBalanceICP from "@services/queries/accounts/fetchOwnerBalanceICP";
 
 const useFetchBalanceICPOwner = () => {
-  const { principal: owner, isConnected } = useConnect();
-  const [ledgerActor] = useCanister("ledgerICP");
+  const { principalId: owner, isConnected } = useWallet();
 
   return useQuery({
     queryKey: ["userFetchBalanceICP", owner, isConnected],
-    queryFn: () =>
-      fetchOwnerBalanceICP({ actor: ledgerActor, owner: owner as string }),
+    queryFn: async () => fetchOwnerBalanceICP({ owner: owner as string }),
     placeholderData: keepPreviousData,
     enabled: !!isConnected && !!owner,
   });
