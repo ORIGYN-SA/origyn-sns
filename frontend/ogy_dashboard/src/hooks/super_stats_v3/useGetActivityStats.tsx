@@ -6,12 +6,12 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { ActorSubclass } from "@dfinity/agent";
 import { ActivitySnapshot } from "./types";
 import { millify } from "@helpers/numbers";
 
+import { getActor } from "@amerej/artemis-react";
+
 const useGetActivityStats = ({
-  actor,
   start = 30,
   options = {
     placeholderData: keepPreviousData,
@@ -19,7 +19,6 @@ const useGetActivityStats = ({
   },
 }: {
   start?: number;
-  actor: ActorSubclass;
   options?: Omit<UseQueryOptions<Array<ActivitySnapshot>>, "queryFn">;
 }) => {
   const [data, setData] = useState<
@@ -46,6 +45,7 @@ const useGetActivityStats = ({
   }: UseQueryResult<Array<ActivitySnapshot>> = useQuery({
     ...options,
     queryFn: async (): Promise<Array<ActivitySnapshot>> => {
+      const actor = await getActor("tokenStats", { isAnon: true });
       const results = await actor.get_activity_stats(start);
       return results as Array<ActivitySnapshot>;
     },

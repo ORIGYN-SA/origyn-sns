@@ -1,6 +1,5 @@
 import { useEffect, useState, SetStateAction } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchAccountBalanceICP from "@services/queries/accounts/fetchAccountBalanceICP";
 import {
   ACCOUNT_ID_LEDGER_ICP,
@@ -9,7 +8,6 @@ import {
 import { roundAndFormatLocale } from "@helpers/numbers";
 
 const useFetchTreasuryAccountICP = () => {
-  const [ledgerICPActor] = useCanister("ledgerICP");
   const [data, setData] = useState<SetStateAction<string | null>>(null);
 
   const {
@@ -22,7 +20,6 @@ const useFetchTreasuryAccountICP = () => {
     queryKey: ["fetchLedgerAccountBalanceICP"],
     queryFn: () =>
       fetchAccountBalanceICP({
-        actor: ledgerICPActor,
         account: ACCOUNT_ID_LEDGER_ICP,
       }),
     placeholderData: keepPreviousData,
@@ -38,7 +35,6 @@ const useFetchTreasuryAccountICP = () => {
     queryKey: ["fetchLedgerOldAccountBalanceICP"],
     queryFn: () =>
       fetchAccountBalanceICP({
-        actor: ledgerICPActor,
         account: ACCOUNT_ID_LEDGER_ICP_OLD,
       }),
     placeholderData: keepPreviousData,

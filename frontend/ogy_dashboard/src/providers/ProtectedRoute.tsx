@@ -1,10 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useConnect } from "@amerej/connect2ic-react";
+// import { useWallet } from "@amerej/artemis-react";
+// import { Dialog, LoaderSpin } from "@components/ui";
 
 const ProtectedRoute = () => {
-  const { isConnected, isInitializing } = useConnect();
+  // const { isConnected, state, walletState } = useWallet();
+  const walletId = localStorage.getItem("dfinityWallet") || "";
 
-  if (!isInitializing && !isConnected) {
+  if (!walletId) {
     return <Navigate to="/" replace />;
   }
 

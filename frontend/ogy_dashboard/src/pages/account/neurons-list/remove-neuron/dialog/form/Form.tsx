@@ -1,10 +1,10 @@
 import { Button } from "@components/ui";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { useRemoveNeuron } from "../../context";
 
 const Form = () => {
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
   const { handleRemoveNeuronOwnership, mutation, handleClose } =
     useRemoveNeuron();
 
@@ -21,9 +21,9 @@ const Form = () => {
       <div className="mt-4 text-sm text-content/60">
         Make sure to also remove your principal{" "}
         <span className="font-semibold text-content">
-          <span>{principal}</span>
+          <span>{principalId}</span>
           <span>
-            <CopyToClipboard value={principal as string} />
+            <CopyToClipboard value={principalId as string} />
           </span>
         </span>{" "}
         from the list of hotkeys of your neuron.

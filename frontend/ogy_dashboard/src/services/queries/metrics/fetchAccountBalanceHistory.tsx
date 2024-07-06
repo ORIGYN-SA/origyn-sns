@@ -1,13 +1,12 @@
-import { ActorSubclass } from "@dfinity/agent";
 import { HistoryData } from "@services/types/token_metrics";
+import { getActor } from "@amerej/artemis-react";
 
 const fetchAccountBalanceHistoryQuery = async ({
   account,
-  actor,
 }: {
   account: string;
-  actor: ActorSubclass;
 }): Promise<Array<[bigint, HistoryData]>> => {
+  const actor = await getActor("tokenStats", { isAnon: true });
   const data = await actor.get_principal_history({ days: 30, account });
   return data as Array<[bigint, HistoryData]>;
 };

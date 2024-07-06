@@ -1,5 +1,5 @@
 import { UserIcon } from "@heroicons/react/20/solid";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import LedgerSwitch from "@pages/account/ledger-switch";
 import AvailableOGY from "@pages/account/available-ogy";
 import StakedOGY from "@pages/account/staked-ogy";
@@ -10,7 +10,7 @@ import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Skeleton } from "@components/ui";
 
 export const Account = () => {
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
 
   return (
     <div className="container mx-auto py-16 px-4">
@@ -25,17 +25,17 @@ export const Account = () => {
             <div className="flex items-center truncate pr-4">
               <div className="flex ml-4 items-center truncate text-sm">
                 <div className="mr-2 shrink-0">Principal ID: </div>
-                {principal ? (
+                {principalId ? (
                   <>
                     <div
                       className="truncate"
                       data-tooltip-id="tooltip_principal_id"
-                      data-tooltip-content={principal}
+                      data-tooltip-content={principalId}
                     >
-                      {principal}
+                      {principalId}
                     </div>
                     <Tooltip id="tooltip_principal_id" />
-                    <CopyToClipboard value={principal as string} />
+                    <CopyToClipboard value={principalId as string} />
                   </>
                 ) : (
                   <Skeleton className="w-64" />

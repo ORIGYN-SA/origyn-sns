@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useCanister } from "@amerej/connect2ic-react";
+
 import { Card, TooltipInfo } from "@components/ui";
 import {
   Loader as ChartLoader,
@@ -14,13 +14,10 @@ const ChartUsersActivity = ({
 }: {
   className?: string;
 }) => {
-  const [statsActor] = useCanister("tokenStats");
   const barFill = useMemo(() => "#34d399", []);
 
   // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isLoading, isSuccess, isError } = useGetActivityStats({
-    actor: statsActor,
-  });
+  const { data, isLoading, isSuccess, isError } = useGetActivityStats({});
 
   return (
     <Card className={`${className}`} {...restProps}>

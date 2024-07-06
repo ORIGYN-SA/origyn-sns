@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import fetchNeuronsStats from "@services/queries/governance/fetchNeuronsStats";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
 
@@ -15,7 +14,6 @@ interface IGovernanceStats {
 }
 
 const useGovernanceStats = () => {
-  const [tokenMetricsActor] = useCanister("tokenMetrics");
   const [governanceData, setGovernanceData] = useState<IGovernanceStats | null>(
     null
   );
@@ -28,10 +26,7 @@ const useGovernanceStats = () => {
     error: errorGovernanceStats,
   } = useQuery({
     queryKey: ["governanceStats"],
-    queryFn: () =>
-      fetchNeuronsStats({
-        actor: tokenMetricsActor,
-      }),
+    queryFn: () => fetchNeuronsStats(),
     placeholderData: keepPreviousData,
   });
   const isSuccess = isSuccessGovernanceStats;

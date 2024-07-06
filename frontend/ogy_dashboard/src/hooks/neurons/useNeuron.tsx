@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { getOneNeuronAll } from "@services/queries/governance/neurons/getOneNeuronAll";
 
 const useNeuron = ({ neuronId }: { neuronId: string }) => {
-  const [governanceActor] = useCanister("governance");
-
   const {
     data: nervousSystemParameters,
     isSuccess: isSuccessGetNervousSystemParameters,
@@ -14,7 +11,7 @@ const useNeuron = ({ neuronId }: { neuronId: string }) => {
     error: errorGetNervousSystemParameters,
   } = useQuery({
     queryKey: ["getNervousSystemParameters"],
-    queryFn: () => getNervousSystemParameters({ governanceActor }),
+    queryFn: () => getNervousSystemParameters(),
   });
 
   const {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
@@ -8,7 +8,7 @@ import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Skeleton } from "@components/ui";
 
 const AvailableOGY = () => {
-  const { principal } = useConnect();
+  const { principalId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => {
@@ -26,7 +26,7 @@ const AvailableOGY = () => {
         <div className="font-bold text-content/60">Available OGY</div>
         <Link
           className="text-accent"
-          to={`/explorer/transactions/accounts/${principal}/history`}
+          to={`/explorer/transactions/accounts/${principalId}/history`}
         >
           Transaction history
         </Link>
