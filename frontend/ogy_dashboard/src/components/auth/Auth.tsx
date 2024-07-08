@@ -23,40 +23,36 @@ const Auth = () => {
       <Dialog
         show={state == walletState.OpenWalletList}
         handleClose={handleCloseWalletList}
+        size="sm"
       >
-        <div className="pt-6 pb-12 px-4">
+        <div className="pt-6 pb-12 px-12">
+          <div className="mb-8 text-center text-lg font-semibold">
+            Connect Wallet
+          </div>
           <div>
-            {walletList.map(({ id, icon, name, adapter }, i: number) => (
-              <div
-                onClick={() => handleSelectWallet(id)}
-                key={i}
-                className="flex flex-col justify-center items-center mb-6 cursor-pointer"
-              >
-                <div className="grid grid-cols-7 text-left">
-                  <div className="col-start-2 col-end-3">
-                    <img
-                      src={icon}
-                      alt=""
-                      width="32px"
-                      height="32px"
-                      className="rounded-full"
-                    />
+            {walletList.map(
+              ({ id, icon, name }, i: number) =>
+                !["stoic", "metamask"].includes(id) && (
+                  <div
+                    onClick={() => handleSelectWallet(id)}
+                    key={i}
+                    className="mb-3 cursor-pointer border-border border rounded-full"
+                  >
+                    <div className="flex items-center">
+                      <div className="w-[48px] h-[48px] flex items-center bg-surface-2/40 dark:bg-surface-2 rounded-full p-2">
+                        <img src={icon} alt="" className="rounded-full" />
+                      </div>
+                      <div className="ml-8">{name}</div>
+                    </div>
                   </div>
-                  <div className="col-span-1"></div>
-                  <div className="col-span-4">
-                    <div className="font-semibold">{name}</div>
-                    <div className="text-content/60">{adapter.readyState}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                )
+            )}
           </div>
         </div>
       </Dialog>
       <Dialog
         show={state == walletState.Connecting}
-        enableClose={false}
-        handleClose={() => null}
+        handleClose={handleCloseWalletList}
       >
         <div className="pt-6 pb-12 px-4 text-center">
           <div className="mb-8 font-semibold text-lg">Connecting...</div>
