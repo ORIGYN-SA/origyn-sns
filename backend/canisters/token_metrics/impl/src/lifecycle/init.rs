@@ -16,6 +16,7 @@ fn init(args: InitArgs) {
         args.ogy_new_ledger_canister_id,
         args.sns_governance_canister_id,
         args.super_stats_canister_id,
+        args.sns_rewards_canister_id,
         args.treasury_account,
         args.foundation_accounts
     );

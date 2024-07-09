@@ -1,5 +1,8 @@
 use candid::{ Nat, Principal };
 use canister_time::{ now_millis, run_now_then_interval, timestamp_seconds, DAY_IN_MS };
+use futures::future::join_all;
+use ic_cdk::api::call::RejectionCode;
+use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
 use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
 use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
 use token_metrics_api::token_data::{ GovernanceStats, LockedNeuronsAmount };
@@ -8,7 +11,10 @@ use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
 
-use crate::{ jobs::{ sync_supply_data, update_balance_list }, state::{ mutate_state, read_state } };
+use crate::{
+    jobs::{ sync_supply_data, update_balance_list },
+    state::{ mutate_state, read_state, PrincipalDotAccountFormat },
+};
 
 const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -95,6 +101,9 @@ pub async fn sync_neurons_data() {
     }
     info!("Successfully scanned {number_of_scanned_neurons} neurons.");
 
+    let total_rewards_in_sns_canister = get_total_from_sns_rewards_canister().await;
+    info!("Total rewards in the sns canister: {}", total_rewards_in_sns_canister);
+
     mutate_state(|state| {
         state.data.sync_info.last_synced_end = now_millis();
         state.data.sync_info.last_synced_number_of_neurons = number_of_scanned_neurons;
@@ -115,6 +124,8 @@ pub async fn sync_neurons_data() {
         }
         *all_gov_stats = temp_all_gov_stats;
         *locked_neurons_amount = temp_locked_neurons_amount;
+
+        all_gov_stats.total_rewards += total_rewards_in_sns_canister;
     });
 
     // After we have computed governance stats, update the total supply and circulating supply
@@ -194,47 +205,123 @@ fn update_principal_neuron_mapping(
                 });
 
             let neuron_staked_maturity = neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
+
+            let mut neuron_locked = 0;
+            let mut neuron_unlocked = 0;
+
+            let neuron_rewards =
+                neuron_staked_maturity + neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
+
+            match neuron.dissolve_state.clone() {
+                Some(DissolveState::DissolveDelaySeconds(dissolve_delay_in_seconds)) => {
+                    if dissolve_delay_in_seconds > 0 {
+                        neuron_locked = neuron.cached_neuron_stake_e8s;
+                    } else {
+                        neuron_unlocked = neuron.cached_neuron_stake_e8s;
+                    }
+                }
+                Some(DissolveState::WhenDissolvedTimestampSeconds(end_timestamp)) => {
+                    let current_timestamp_in_seconds = timestamp_seconds();
+                    if end_timestamp >= current_timestamp_in_seconds {
+                        neuron_locked = neuron.cached_neuron_stake_e8s;
+                    } else {
+                        neuron_unlocked = neuron.cached_neuron_stake_e8s;
+                    }
+                }
+                None => {}
+            }
+
             // Update the governance stats of the Principal
             principal_with_stats
                 .entry(pid)
                 .and_modify(|stats| {
                     // Total staked is how much the principal staked at the begginging + how much of maturity they restaked
-                    stats.total_staked +=
-                        neuron.cached_neuron_stake_e8s +
-                        neuron_staked_maturity +
-                        neuron.maturity_e8s_equivalent;
+                    stats.total_staked += neuron_locked + neuron_unlocked + neuron_rewards;
                     // Total locked is the amount of tokens they have staked
-                    stats.total_locked += neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
+                    stats.total_locked += neuron_locked;
                     // Total unlocked is `maturity_e8s_equivalent` which can be claimed
-                    stats.total_unlocked += neuron.maturity_e8s_equivalent;
+                    stats.total_unlocked += neuron_unlocked;
                     // Total rewards is what they have as maturity and what they have as staked_maturity
-                    stats.total_rewards += neuron_staked_maturity + neuron.maturity_e8s_equivalent;
+                    stats.total_rewards += neuron_rewards;
                 })
                 .or_insert_with(|| GovernanceStats {
-                    total_staked: (
-                        neuron.cached_neuron_stake_e8s +
-                        neuron_staked_maturity +
-                        neuron.maturity_e8s_equivalent
-                    )
+                    total_staked: (neuron_locked + neuron_unlocked + neuron_rewards)
                         .try_into()
                         .unwrap(),
-                    total_locked: (neuron.cached_neuron_stake_e8s + neuron_staked_maturity)
-                        .try_into()
-                        .unwrap(),
-                    total_unlocked: neuron.maturity_e8s_equivalent.try_into().unwrap(),
-                    total_rewards: (neuron_staked_maturity + neuron.maturity_e8s_equivalent)
-                        .try_into()
-                        .unwrap(),
+                    total_locked: neuron_locked.try_into().unwrap(),
+                    total_unlocked: neuron_unlocked.try_into().unwrap(),
+                    total_rewards: neuron_rewards.try_into().unwrap(),
                 });
-            all_gov_stats.total_staked +=
-                neuron.cached_neuron_stake_e8s +
-                neuron_staked_maturity +
-                neuron.maturity_e8s_equivalent;
-            all_gov_stats.total_locked += neuron.cached_neuron_stake_e8s + neuron_staked_maturity;
-            all_gov_stats.total_unlocked += neuron.maturity_e8s_equivalent;
-            all_gov_stats.total_rewards += neuron_staked_maturity + neuron.maturity_e8s_equivalent;
+            all_gov_stats.total_staked += neuron_locked + neuron_unlocked + neuron_rewards;
+            all_gov_stats.total_locked += neuron_locked;
+            all_gov_stats.total_unlocked += neuron_unlocked;
+            all_gov_stats.total_rewards += neuron_rewards;
         }
     }
+}
+async fn get_total_from_sns_rewards_canister() -> Nat {
+    let sns_rewards_canister_id = read_state(|state| state.data.sns_rewards_canister);
+
+    // Rewards pool are in the default subaccount of sns rewards
+    let rewards_pool_subaccount = Account {
+        owner: sns_rewards_canister_id,
+        subaccount: None,
+    };
+
+    // Reserve pool are in the subaccount [1, 31x0] of sns rewards
+    let reserve_pool_subaccount = Account {
+        owner: sns_rewards_canister_id,
+        subaccount: Some([
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0,
+        ]),
+    };
+
+    let getter_futures: Vec<_> = vec![
+        get_super_stats_balance_of(sns_rewards_canister_id.to_string(), false),
+        get_super_stats_balance_of(rewards_pool_subaccount.to_principal_dot_account(), true),
+        get_super_stats_balance_of(reserve_pool_subaccount.to_principal_dot_account(), true)
+    ];
+
+    let results = join_all(getter_futures).await;
+    return results[0].clone() - results[1].clone() - results[2].clone();
+}
+async fn get_super_stats_balance_of(account: String, is_subaccount: bool) -> Nat {
+    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
+
+    fn log_error(acc: String, err: (RejectionCode, String)) {
+        let error_message = format!("{err:?}");
+        info!(?error_message, "There has been an erorr while fetching the super_stats balance of {acc:?}");
+    }
+
+    let result = if is_subaccount {
+        match
+            super_stats_v3_c2c_client::get_account_overview(super_stats_canister_id, &account).await
+        {
+            Ok(response) => response,
+            Err(err) => {
+                log_error(account.clone(), err);
+                None
+            }
+        }
+    } else {
+        match
+            super_stats_v3_c2c_client::get_principal_overview(
+                super_stats_canister_id,
+                &account
+            ).await
+        {
+            Ok(response) => response,
+            Err(err) => {
+                log_error(account.clone(), err);
+                None
+            }
+        }
+    };
+    return match result {
+        Some(res) => { Nat::from(res.balance) }
+        None => Nat::from(0u64),
+    };
 }
 #[cfg(test)]
 mod tests {
