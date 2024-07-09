@@ -2358,6 +2358,7 @@ dependencies = [
  "serde_cbor",
  "sha2",
  "super_stats_v3_api",
+ "utils",
 ]
 
 [[package]]

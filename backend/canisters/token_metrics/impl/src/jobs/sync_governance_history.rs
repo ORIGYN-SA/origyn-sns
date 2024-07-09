@@ -56,6 +56,8 @@ pub async fn sync_governance_history() {
                             treasury_history
                         );
                     });
+                    // We want to sync voting stats now because we rely on stake history
+                    sync_voting_stats_job();
                 }
                 Err(err) => {
                     let message = format!("{err:?}");
@@ -86,4 +88,26 @@ fn balance_difference(
     }
 
     result
+}
+
+pub fn sync_voting_stats_job() {
+    // How can we get the staked amount history of origyn?
+    // We will just use a hardcoded value for now
+    let origyn_voting_power = 50_003_931_736_000_000u64;
+
+    // This might be wrong, I think the total voting power also depends on age and other stuff
+    let stake_history = read_state(|state| state.data.gov_stake_history.clone());
+
+    let voting_power_ratio: Vec<(u64, u64)> = stake_history
+        .iter()
+        .map(|(timestamp, history_data)| {
+            let ratio = (((origyn_voting_power as f64) / (history_data.balance as f64)) *
+                10000.0) as u64;
+            (*timestamp, ratio)
+        })
+        .collect();
+
+    mutate_state(|state| {
+        state.data.voting_power_ratio_history = voting_power_ratio;
+    })
 }

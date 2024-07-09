@@ -10,6 +10,8 @@ type GetHoldersResponse = record {
   limit : nat64;
   total_count : nat64;
 };
+type GetVotingParticipationHistoryArgs = record { days : nat64 };
+type GetVotingPowerRatioHistory = record { days : nat64 };
 type GovernanceStats = record {
   total_rewards : nat;
   total_staked : nat;
@@ -63,4 +65,10 @@ service : (InitArgs) -> {
   get_proposals_metrics : () -> (ProposalsMetrics) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
+  get_voting_participation_history : (GetVotingParticipationHistoryArgs) -> (
+      vec record { nat64; nat64 },
+    ) query;
+  get_voting_power_ratio_history : (GetVotingPowerRatioHistory) -> (
+      vec record { nat64; nat64 },
+    ) query;
 }
