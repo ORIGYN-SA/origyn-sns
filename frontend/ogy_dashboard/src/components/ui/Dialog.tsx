@@ -12,17 +12,13 @@ const DialogComponent = ({
   show = true,
   handleClose,
   enableClose = true,
-  size = "xl",
   children,
 }: {
   show: boolean;
   handleClose: () => void;
   children?: ReactNode;
   enableClose?: boolean;
-  size?: "sm" | "xl";
 }) => {
-  const getSize = (size: string): string => `max-w-${size}`;
-
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
@@ -54,9 +50,7 @@ const DialogComponent = ({
                 leaveTo="opacity-0 scale-95"
               >
                 <DialogPanel
-                  className={`bg-surface rounded-xl w-full ${getSize(
-                    size
-                  )} transform transition-all my-auto`}
+                  className={`bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto`}
                 >
                   <DialogTitle className="flex justify-end px-6 pt-6">
                     {enableClose && (

@@ -23,7 +23,6 @@ const Auth = () => {
       <Dialog
         show={state == walletState.OpenWalletList}
         handleClose={handleCloseWalletList}
-        size="sm"
       >
         <div className="pt-6 pb-12 px-12">
           <div className="mb-8 text-center text-lg font-semibold">
