@@ -204,13 +204,10 @@ fn update_principal_neuron_mapping(
                     if let Some(id) = &neuron.id { vec![id.clone()] } else { vec![] }
                 });
 
-            let neuron_staked_maturity = neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
-
             let mut neuron_locked = 0;
             let mut neuron_unlocked = 0;
 
-            let neuron_rewards =
-                neuron_staked_maturity + neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
+            let neuron_rewards = neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
 
             match neuron.dissolve_state.clone() {
                 Some(DissolveState::DissolveDelaySeconds(dissolve_delay_in_seconds)) => {
