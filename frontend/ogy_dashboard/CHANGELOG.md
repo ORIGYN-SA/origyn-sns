@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.12] - 2024-07-10
+
+#### Added
+
+- My account page link to navbar
+
+### [1.0.11] - 2024-07-10
+
+#### Changed
+
+- Authentication system, solve some issues with Plug wallet
+
 ### [1.0.10] - 2024-06-27
 
 #### Fixed
