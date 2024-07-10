@@ -17,6 +17,7 @@ const Navbar = () => {
     { title: "Governance", url: "/governance" },
     { title: "Explorer", url: "/explorer" },
     { title: "Proposals", url: "/proposals" },
+    { title: "My Account", url: "/account" },
   ];
 
   const handleOnClickShowAccountOverview = (show: boolean) =>
@@ -33,8 +34,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
-        <div className="grid grid-cols-2 xl:grid-cols-3 items-center h-10">
-          <div className="flex-shrink-0">
+        <div className="grid grid-cols-2 xl:grid-cols-5 items-center h-10">
+          <div className="col-start-1 col-end-1 flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
               <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
               <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:block">
@@ -42,20 +43,24 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
-          <div className="hidden xl:block justify-self-center">
+          <div className="hidden xl:block justify-self-center col-start-2 col-end-5">
             <div className="flex items-center space-x-12">
-              {navItems.map(({ title, url }, i) => (
-                <Link
-                  to={url}
-                  className="font-semibold text-content/60 hover:text-content"
-                  key={i}
-                >
-                  {title}
-                </Link>
-              ))}
+              {navItems.map(
+                ({ title, url }, i) =>
+                  (title !== "My Account" ||
+                    (title === "My Account" && isConnected)) && (
+                    <Link
+                      to={url}
+                      className="font-semibold text-content/60 hover:text-content"
+                      key={i}
+                    >
+                      {title}
+                    </Link>
+                  )
+              )}
             </div>
           </div>
-          <div className="flex justify-self-end items-center">
+          <div className="flex justify-self-end items-center col-start-5">
             {!isConnected && <Auth />}
             {isConnected && (
               <button
@@ -156,16 +161,20 @@ const Navbar = () => {
                           </button>
                         </div>
 
-                        {navItems.map(({ title, url }, i) => (
-                          <Link
-                            onClick={handleOnHideMenu}
-                            to={url}
-                            className="font-semibold text-content/60 hover:text-content px-3 py-2 rounded-md"
-                            key={i}
-                          >
-                            {title}
-                          </Link>
-                        ))}
+                        {navItems.map(
+                          ({ title, url }, i) =>
+                            (title !== "My Account" ||
+                              (title === "My Account" && isConnected)) && (
+                              <Link
+                                onClick={handleOnHideMenu}
+                                to={url}
+                                className="font-semibold text-content/60 hover:text-content px-3 py-2 rounded-md"
+                                key={i}
+                              >
+                                {title}
+                              </Link>
+                            )
+                        )}
                       </div>
                     </div>
                   </TransitionChild>
