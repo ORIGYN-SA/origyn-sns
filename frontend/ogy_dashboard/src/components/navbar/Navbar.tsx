@@ -31,8 +31,6 @@ const Navbar = () => {
     }
   }, [isConnected]);
 
-  console.log(isConnected);
-
   return (
     <>
       <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
