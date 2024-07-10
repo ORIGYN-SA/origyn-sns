@@ -16,9 +16,7 @@
     "preview": "vite preview --mode staging"
   },
   "dependencies": {
-    "@amerej/artemis-react": "^1.0.6",
-    "@amerej/connect2ic-core": "^0.0.2",
-    "@amerej/connect2ic-react": "^0.0.3",
+    "@amerej/artemis-react": "^1.0.18",
     "@dfinity/agent": "^1.2.0",
     "@dfinity/candid": "^1.2.0",
     "@dfinity/ledger-icp": "^2.2.2",
