@@ -1,4 +1,5 @@
 use candid::Principal;
+use sns_governance_canister::types::ProposalData;
 use std::str::FromStr;
 use icrc_ledger_types::icrc1::account::Account;
 
@@ -46,4 +47,8 @@ pub fn string_to_account(input: String) -> Result<Account, String> {
             Err(err) => Err(err.to_string()),
         }
     }
+}
+
+pub fn is_proposal_closed(proposal: &ProposalData) -> bool {
+    proposal.decided_timestamp_seconds > 0
 }

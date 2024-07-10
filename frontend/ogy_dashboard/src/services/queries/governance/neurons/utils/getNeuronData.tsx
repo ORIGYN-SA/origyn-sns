@@ -8,7 +8,6 @@ import {
 import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import { INeuronResult, INeuronData, IDissolveState } from "@services/types";
 import { Buffer } from "buffer";
-window.Buffer = window.Buffer || Buffer;
 
 const getDissolveDelaySeconds = (dissolveState: IDissolveState): number => {
   if (

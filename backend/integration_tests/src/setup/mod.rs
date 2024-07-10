@@ -1,3 +1,7 @@
+pub mod setup_sns;
+pub mod setup_ledger;
+pub mod setup_rewards;
+
 use std::collections::HashMap;
 
 use candid::{ Nat, Principal };
@@ -7,14 +11,13 @@ use sns_governance_canister::types::Neuron;
 
 use crate::{
     client::icrc1::client::transfer,
-    sns_rewards_suite::setup::{
+    setup::{
         setup_ledger::setup_ledgers,
-        setup_sns::{ create_sns_with_data, generate_neuron_data },
+        setup_rewards::setup_rewards_canister,
+        setup_sns::{ create_sns_with_data, generate_neuron_data, reinstall_sns_with_data },
     },
     utils::random_principal,
 };
-
-use super::{ setup_rewards::setup_rewards_canister, setup_sns::reinstall_sns_with_data };
 
 pub static POCKET_IC_BIN: &str = "./pocket-ic";
 
@@ -45,7 +48,7 @@ pub fn setup_reward_pools(
     }
 }
 
-pub struct RewardsTestEnv {
+pub struct SnsWithRewardsTestEnv {
     pub controller: Principal,
     pub neuron_data: HashMap<usize, Neuron>,
     pub users: Vec<Principal>,
@@ -56,7 +59,7 @@ pub struct RewardsTestEnv {
     pub neuron_owners: HashMap<Principal, usize>,
 }
 
-impl RewardsTestEnv {
+impl SnsWithRewardsTestEnv {
     /// simulate neurons voting by reinstalling the sns gov canister with an increase in maturity
     /// each neuton's initial maturity is multiplied
     pub fn simulate_neuron_voting(&mut self, multiplier: u64) {
@@ -77,7 +80,7 @@ impl RewardsTestEnv {
     }
 }
 
-pub struct RewardsTestEnvBuilder {
+pub struct SnsWithRewardsTestEnvBuilder {
     controller: Principal,
     users: Vec<Principal>,
     token_symbols: Vec<String>,
@@ -87,7 +90,7 @@ pub struct RewardsTestEnvBuilder {
     ledger_fees: HashMap<String, Nat>,
 }
 
-impl RewardsTestEnvBuilder {
+impl SnsWithRewardsTestEnvBuilder {
     pub fn new() -> Self {
         let default_controller = Principal::from_slice(&[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
 
@@ -136,7 +139,7 @@ impl RewardsTestEnvBuilder {
         self
     }
 
-    pub fn build(self) -> RewardsTestEnv {
+    pub fn build(self) -> SnsWithRewardsTestEnv {
         let mut pic = PocketIcBuilder::new().with_sns_subnet().with_application_subnet().build();
 
         let (neuron_data, neuron_owners) = generate_neuron_data(
@@ -173,7 +176,7 @@ impl RewardsTestEnvBuilder {
             );
         }
 
-        RewardsTestEnv {
+        SnsWithRewardsTestEnv {
             controller: self.controller,
             neuron_data,
             users: self.users,

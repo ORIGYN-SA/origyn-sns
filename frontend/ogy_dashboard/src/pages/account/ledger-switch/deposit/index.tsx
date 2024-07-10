@@ -1,11 +1,11 @@
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Tooltip, Skeleton } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 
 const Deposit = () => {
-  const { accountId } = useConnect();
+  const { accountId } = useWallet();
 
   const { data: balanceOGYLegacy } = useFetchBalanceOGYLegacyOwner();
   const { data: balanceOGYLegacyUSD } = useFetchBalanceOGYUSD({

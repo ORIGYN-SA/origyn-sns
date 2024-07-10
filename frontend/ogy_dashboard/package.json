@@ -16,8 +16,7 @@
     "preview": "vite preview --mode staging"
   },
   "dependencies": {
-    "@amerej/connect2ic-core": "^0.0.2",
-    "@amerej/connect2ic-react": "^0.0.3",
+    "@amerej/artemis-react": "^1.0.19",
     "@dfinity/agent": "^1.2.0",
     "@dfinity/candid": "^1.2.0",
     "@dfinity/ledger-icp": "^2.2.2",
@@ -75,6 +74,7 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-plugin-node-polyfills": "^0.22.0",
     "vite-tsconfig-paths": "^4.3.2"
   }
 }

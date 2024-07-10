@@ -8,19 +8,17 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-interface DialogProps {
-  show: boolean;
-  handleClose: () => void;
-  children?: ReactNode;
-  enableClose?: boolean;
-}
-
 const DialogComponent = ({
   show = true,
   handleClose,
   enableClose = true,
   children,
-}: DialogProps) => {
+}: {
+  show: boolean;
+  handleClose: () => void;
+  children?: ReactNode;
+  enableClose?: boolean;
+}) => {
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
@@ -51,7 +49,9 @@ const DialogComponent = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto">
+                <DialogPanel
+                  className={`bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto`}
+                >
                   <DialogTitle className="flex justify-end px-6 pt-6">
                     {enableClose && (
                       <button onClick={handleClose}>

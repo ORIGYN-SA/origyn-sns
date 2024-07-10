@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import { Table, LoaderSpin, Card } from "@components/ui";
 import { INeuronData } from "@services/types";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
@@ -21,7 +21,7 @@ import {
 } from "./remove-neuron";
 
 const NeuronsList = () => {
-  const { principal: owner } = useConnect();
+  const { principalId: owner } = useWallet();
 
   const columns = useMemo<ColumnDef<INeuronData>[]>(
     () => [

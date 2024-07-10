@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useCanister } from "@amerej/connect2ic-react";
-import useConnect from "@hooks/useConnect";
+import { useWallet } from "@amerej/artemis-react";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
 import getNeuronsByOwner from "@services/queries/sns-rewards//getNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
-import { Buffer } from "buffer";
-window.Buffer = window.Buffer || Buffer;
 
 const useNeuronsOwner = ({
   limit,
@@ -20,10 +17,7 @@ const useNeuronsOwner = ({
   owner?: string;
   neuronId?: string;
 }) => {
-  const { isConnected } = useConnect();
-  const [governanceActor] = useCanister("governance");
-  const [ledgerActor] = useCanister("ledger");
-  const [snsRewardsActor] = useCanister("SNSRewards");
+  const { isConnected } = useWallet();
   const [totalStakedOGY, setTotalStakedOGY] = useState<null | number>(null);
   const [totalStakedRewardsOGY, setTotalStakedRewardsOGY] = useState<
     null | number
@@ -37,7 +31,7 @@ const useNeuronsOwner = ({
     error: errorGetNervousSystemParameters,
   } = useQuery({
     queryKey: ["getNervousSystemParameters"],
-    queryFn: () => getNervousSystemParameters({ governanceActor }),
+    queryFn: () => getNervousSystemParameters(),
   });
 
   const {
@@ -48,7 +42,7 @@ const useNeuronsOwner = ({
     error: errorFetchNeuronsByOwner,
   } = useQuery({
     queryKey: ["userGetNeuronsByOwner", isConnected],
-    queryFn: () => getNeuronsByOwner({ snsRewardsActor }),
+    queryFn: () => getNeuronsByOwner(),
     enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
   });
 
@@ -62,7 +56,6 @@ const useNeuronsOwner = ({
     queryKey: ["userListNeuronsAll", limit, isConnected],
     queryFn: () =>
       getListNeuronsOwner({
-        governanceActor,
         owner,
         limit,
         neuronId,
@@ -82,15 +75,9 @@ const useNeuronsOwner = ({
     queries:
       neurons?.map(({ id: neuronId }) => {
         return {
-          queryKey: [
-            "getNeuronClaimBalance",
-            ledgerActor,
-            isConnected,
-            neuronId,
-          ],
+          queryKey: ["getNeuronClaimBalance", isConnected, neuronId],
           queryFn: () =>
             fetchBalanceOGY({
-              actor: ledgerActor,
               owner: SNS_REWARDS_CANISTER_ID,
               subaccount: neuronId,
             }),
