@@ -13,7 +13,6 @@ const ChartUsersActivity = ({
 }: {
   className?: string;
 }) => {
-  const [statsActor] = useCanister("tokenStats");
   const barFill = useMemo(() => "#34d399", []);
 
   // TODO implement change period (dayly/weekly/monthly...)
