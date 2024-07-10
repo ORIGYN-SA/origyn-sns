@@ -1,7 +1,6 @@
 import { Button } from "@components/ui";
 import { useClaimReward } from "../../context";
-import { Buffer } from 'buffer';
-window.Buffer = window.Buffer || Buffer;
+import { Buffer } from "buffer";
 
 const Form = () => {
   const { principal, claimAmount, neuronId, mutation } = useClaimReward();

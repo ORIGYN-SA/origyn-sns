@@ -4,7 +4,6 @@
 // import { getCurrentTimestamp } from "@helpers/dates";
 // import { ISystemNervousParametersResponse } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 // import { Buffer } from "buffer";
-// window.Buffer = window.Buffer || Buffer;
 // import getNeuronData from "./utils/getNeuronData";
 
 // export const getNeuron = async ({

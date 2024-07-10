@@ -4,7 +4,6 @@ import getNeuronData from "./utils/getNeuronData";
 import { INeuronResult } from "@services/types";
 import { Buffer } from "buffer";
 import { getActor } from "@amerej/artemis-react";
-window.Buffer = window.Buffer || Buffer;
 
 // Buffer.from(data.id[0].id).toString("hex")
 // const dissolveState = data.dissolve_state[0];

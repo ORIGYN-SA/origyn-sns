@@ -2,7 +2,6 @@ import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 import { getActor } from "@amerej/artemis-react";
 import { Buffer } from "buffer";
-window.Buffer = window.Buffer || Buffer;
 
 interface IFetchBalanceOGY {
   owner: string;

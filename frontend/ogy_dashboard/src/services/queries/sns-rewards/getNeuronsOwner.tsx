@@ -1,6 +1,5 @@
 import { getActor } from "@amerej/artemis-react";
 import { Buffer } from "buffer";
-window.Buffer = window.Buffer || Buffer;
 
 const getNeuronsByOwner = async (): Promise<string[]> => {
   const actor = await getActor("SNSRewards", { isAnon: false });
