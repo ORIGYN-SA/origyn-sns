@@ -12,6 +12,7 @@ use token_metrics_api::token_data::{
     ProposalsMetrics,
     ProposalsMetricsCalculations,
     TokenSupplyData,
+    VotingHistoryCalculations,
     WalletOverview,
 };
 use tracing::info;
@@ -127,6 +128,12 @@ pub struct Data {
     pub proposals_metrics_calculations: ProposalsMetricsCalculations,
     /// Daily metrics for org voting power / total voting power and voting participation
     pub daily_voting_metrics: BTreeMap<u64, DailyVotingMetrics>,
+    /// Voting Participation History, (days, u64 as percentage)
+    pub voting_participation_history: BTreeMap<u64, u64>,
+    /// Used to calculate voting_participation_history
+    pub voting_participation_history_calculations: BTreeMap<u64, VotingHistoryCalculations>,
+    /// Ratio foundation's voting power and total voting power (day, u64 as percentage)
+    pub voting_power_ratio_history: Vec<(u64, u64)>,
 }
 
 impl Data {
@@ -148,7 +155,10 @@ impl Data {
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
             wallets_list: Vec::new(),
+            voting_power_ratio_history: Vec::new(),
             merged_wallets_list: Vec::new(),
+            voting_participation_history: BTreeMap::new(),
+            voting_participation_history_calculations: BTreeMap::new(),
             balance_list: BTreeMap::new(),
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
