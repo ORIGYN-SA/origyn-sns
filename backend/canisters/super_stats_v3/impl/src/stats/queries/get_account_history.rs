@@ -1,8 +1,6 @@
 use ic_cdk::query;
-use crate::{
-    core::working_stats::api_count,
-    stats::history::{ fill_missing_days, get_history_of_account },
-};
+use utils::time::fill_missing_days;
+use crate::{ core::working_stats::api_count, stats::history::get_history_of_account };
 pub use super_stats_v3_api::{
     account_tree::HistoryData,
     runtime::RUNTIME_STATE,
