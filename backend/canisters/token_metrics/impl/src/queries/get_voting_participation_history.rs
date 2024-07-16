@@ -3,7 +3,7 @@ pub use token_metrics_api::queries::get_voting_participation_history::{
     Args as GetVotingParticipationArgs,
     Response as GetVotingParticipationHistory,
 };
-use utils::history::fill_missing_days;
+use utils::time::fill_missing_days;
 
 use crate::state::read_state;
 

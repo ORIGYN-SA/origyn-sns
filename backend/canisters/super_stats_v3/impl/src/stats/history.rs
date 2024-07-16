@@ -1,11 +1,8 @@
 use std::collections::HashMap;
 
-use super_stats_v3_api::{
-    account_tree::HistoryData,
-    stable_memory::STABLE_STATE,
-    stats::queries::get_account_history::Response,
-};
-use utils::history::get_current_day;
+use super_stats_v3_api::{ account_tree::HistoryData, stable_memory::STABLE_STATE };
+
+use utils::time::get_current_day;
 
 pub fn get_history_of_account(
     account: String,
