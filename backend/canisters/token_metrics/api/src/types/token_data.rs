@@ -44,6 +44,12 @@ pub struct ProposalsMetricsCalculations {
     pub cumulative_voting_power: u64,
     pub valid_tally_count: u64,
 }
+#[derive(Serialize, Deserialize, Clone, Default, CandidType, Debug)]
+pub struct VotingHistoryCalculations {
+    pub cumulative_voting_participation: f64,
+    pub valid_tally_count: u64,
+}
+
 #[derive(Serialize, Deserialize, Clone, CandidType, Debug)]
 pub struct ProposalsMetrics {
     pub total_proposals: u64,
