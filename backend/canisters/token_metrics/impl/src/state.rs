@@ -94,6 +94,8 @@ pub struct Data {
     pub sns_governance_canister: Principal,
     /// SNS ledger canister
     pub sns_ledger_canister: Principal,
+    /// SNS Rewards canister that distirbutes rewards
+    pub sns_rewards_canister: Principal,
     /// Super Stats canister that provides ledger stats
     pub super_stats_canister: Principal,
     /// The account that holds the treasury
@@ -141,6 +143,7 @@ impl Data {
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
         super_stats_canister_id: CanisterId,
+        sns_rewards_canister_id: CanisterId,
         treasury_account: String,
         foundation_accounts: Vec<String>
     ) -> Self {
@@ -148,6 +151,7 @@ impl Data {
             super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
+            sns_rewards_canister: sns_rewards_canister_id,
             treasury_account,
             foundation_accounts,
             foundation_accounts_data: Vec::new(),
