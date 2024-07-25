@@ -44,10 +44,23 @@ const ChartUsersActivity = ({
                   <p>Unique token holders of OGY tokens</p>
                 </TooltipInfo>
               </div>
-              <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
+              <div className="text-2xl font-semibold mt-2 mb-4 xl:mb-0">
                 {data[data.length - 1].total_unique_accounts.string}
               </div>
+
+              <div className="flex mt-6">
+                <span className="text-content/60 font-semibold mr-2">
+                  OGY Active Users
+                </span>
+                <TooltipInfo id="tooltip-users-account">
+                  <p>Active token holders of OGY tokens</p>
+                </TooltipInfo>
+              </div>
+              <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
+                4141
+              </div>
             </div>
+
             <div className="xl:flex items-center mb-6 hidden">
               <div className={`h-2 w-4 bg-[${barFill}] mr-2 rounded-lg`}></div>
               <div className="text-xs text-content/60 font-semibold">

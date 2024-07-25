@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.14] - 2024-07-25
+
+#### Added
+
+- Select time period for Total OGY Suplly & Total OGY Burned Charts
+
+#### Fixed
+
+- Total OGY burned data accuracy
+
+### [1.0.13] - 2024-07-11
+
+#### Fixed
+
+- Authentication on Safari issue
+
 ### [1.0.12] - 2024-07-10
 
 #### Added

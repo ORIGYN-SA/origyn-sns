@@ -39,7 +39,7 @@ const Select = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <ListboxOptions className="absolute mt-1 max-h-60 w-auto overflow-auto rounded-xl bg-surface-2 py-1 text-base border border-border focus:outline-none sm:text-sm">
+            <ListboxOptions className="absolute mt-1 max-h-60 w-auto overflow-auto rounded-xl bg-surface-2 z-50 py-1 text-base border border-border focus:outline-none sm:text-sm">
               {options.map((option) => (
                 <ListboxOption
                   key={option.value}

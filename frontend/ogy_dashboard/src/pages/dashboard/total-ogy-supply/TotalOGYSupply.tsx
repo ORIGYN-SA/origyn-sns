@@ -1,23 +1,36 @@
 import { useEffect, useMemo, useState } from "react";
 // import BarChart from "@components/charts/bar/Bar";
 import AreaChart from "@components/charts/area/Area";
-import { Card, TooltipInfo } from "@components/ui";
+import { Card, TooltipInfo, Select } from "@components/ui";
 import useTotalOGYSupply from "@hooks/metrics/useTotalOGYSupply";
 import { ChartData } from "@services/types/charts.types";
 
-type TotalOGYSupply = {
-  className?: string;
-};
+const SELECT_PERIOD_OPTIONS = [
+  { value: "daily" },
+  { value: "weekly" },
+  { value: "monthly" },
+  { value: "yearly" },
+];
 
-const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
+const TotalOGYSupply = ({
+  className,
+  ...restProps
+}: {
+  className?: string;
+}) => {
   const [totalSupplyOGY, setTotalSupplyOGY] = useState("0");
+  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const [totalSupplyOGYTimeSeries, setTotalSupplyOGYTimeSeries] = useState(
     [] as ChartData[]
   );
   const barFill = useMemo(() => "#38bdf8", []);
 
   // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isSuccess } = useTotalOGYSupply();
+  const { data, isSuccess } = useTotalOGYSupply({ period: selectedPeriod });
+
+  const handleOnChangePeriod = (period: string) => {
+    setSelectedPeriod(period);
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -45,9 +58,15 @@ const TotalOGYSupply = ({ className, ...restProps }: TotalOGYSupply) => {
             </p>
           </TooltipInfo>
         </div>
-        <button className="text-sm font-medium rounded-full px-3 py-1">
+        <Select
+          options={SELECT_PERIOD_OPTIONS}
+          value={selectedPeriod}
+          handleOnChange={(value) => handleOnChangePeriod(value as string)}
+          className="w-25"
+        />
+        {/* <button className="text-sm font-medium rounded-full px-3 py-1">
           Monthly
-        </button>
+        </button> */}
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">
         <img src="/ogy_logo.svg" alt="OGY Logo" />

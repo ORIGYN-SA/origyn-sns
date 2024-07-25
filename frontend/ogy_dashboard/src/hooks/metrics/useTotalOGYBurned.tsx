@@ -7,14 +7,9 @@ import fetchTotalBurnedOGYTimeSeries, {
   TotalBurnedOGYTimeSeries,
 } from "@services/queries/metrics/fetchTotalBurnedOGYTimeSeriesQuery";
 import { ChartData } from "@services/types/charts.types";
-import {
-  getCurrentDateInSeconds,
-  // getCurrentDateLastWeekInSeconds,
-  getCurrentDateLastMonthInSeconds,
-} from "@helpers/dates/index";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
-const useTotalOGYBurned = () => {
+const useTotalOGYBurned = ({ period }: { period: string }) => {
   const [data, setData] = useState({
     totalBurned: "0",
     dataPieChart: [] as ChartData[],
@@ -34,9 +29,7 @@ const useTotalOGYBurned = () => {
     error: errorTotalBurnedTimeSeries,
   }: UseQueryResult<TotalBurnedOGYTimeSeries> = useQuery(
     fetchTotalBurnedOGYTimeSeries({
-      start: getCurrentDateLastMonthInSeconds(),
-      end: getCurrentDateInSeconds(),
-      step: "86400",
+      period,
     })
   );
 
