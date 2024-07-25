@@ -5,6 +5,7 @@ use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::{ NeuronId, ProposalId };
 use super_stats_v3_api::account_tree::HistoryData;
 use token_metrics_api::token_data::{
+    ActiveUsers,
     DailyVotingMetrics,
     GovernanceStats,
     LockedNeuronsAmount,
@@ -83,7 +84,6 @@ pub struct SyncInfo {
     pub last_synced_proposal_id: Option<ProposalId>,
     pub ongoing_proposals: Vec<ProposalId>,
 }
-
 #[derive(Serialize, Deserialize)]
 pub struct Data {
     /// authorized Principals for guarded calls
@@ -136,6 +136,8 @@ pub struct Data {
     pub voting_participation_history_calculations: BTreeMap<u64, VotingHistoryCalculations>,
     /// Ratio foundation's voting power and total voting power (day, u64 as percentage)
     pub voting_power_ratio_history: Vec<(u64, u64)>,
+    /// Active users = users with > 0 OGY in their wallet
+    pub active_users: ActiveUsers,
 }
 
 impl Data {
@@ -172,6 +174,7 @@ impl Data {
             porposals_metrics: ProposalsMetrics::default(),
             proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
             daily_voting_metrics: BTreeMap::new(),
+            active_users: ActiveUsers::default(),
         }
     }
 

@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.7] - 2024-07-25
+
+- Add the `get_active_users_count` endpoint, returning the number of accounts and principals with > 0 tokens in their wallet or staked.
+
 ## [1.0.6] - 2024-07-15
 
 - Expose endpoints for total supply and circulating supply.
