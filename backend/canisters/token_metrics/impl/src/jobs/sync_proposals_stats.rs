@@ -265,6 +265,7 @@ mod tests {
             CanisterId::anonymous(),
             CanisterId::anonymous(),
             CanisterId::anonymous(),
+            CanisterId::anonymous(),
             "aaaa-aa.00..1".to_string(),
             Vec::new()
         );

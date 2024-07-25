@@ -58,6 +58,7 @@ pub fn default_test_setup() -> DefaultSetupEnv {
         treasury_account: "".to_string(),
         foundation_accounts: Vec::new(),
         sns_governance_canister_id: sns_with_rewards_test_env.sns_gov_canister_id,
+        sns_rewards_canister_id: sns_with_rewards_test_env.rewards_canister_id,
         super_stats_canister_id,
         ogy_new_ledger_canister_id: ogy_ledger_id,
     };
