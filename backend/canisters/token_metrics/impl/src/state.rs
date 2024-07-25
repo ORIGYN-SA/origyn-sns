@@ -16,7 +16,6 @@ use token_metrics_api::token_data::{
     VotingHistoryCalculations,
     WalletOverview,
 };
-use tracing::info;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
