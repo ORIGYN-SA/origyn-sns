@@ -96,3 +96,9 @@ pub struct GetHoldersArgs {
     pub limit: u64,
     pub merge_accounts_to_principals: bool,
 }
+
+#[derive(CandidType, Deserialize, Serialize, Clone, Default)]
+pub struct ActiveUsers {
+    pub active_accounts_count: usize,
+    pub active_principals_count: usize,
+}

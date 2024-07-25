@@ -1,4 +1,8 @@
 type Account = record { owner : principal; subaccount : opt blob };
+type ActiveUsers = record {
+  active_principals_count : nat64;
+  active_accounts_count : nat64;
+};
 type GetHoldersArgs = record {
   offset : nat64;
   limit : nat64;
@@ -58,6 +62,7 @@ type WalletOverview = record {
   governance : GovernanceStats;
 };
 service : (InitArgs) -> {
+  get_active_users_count : () -> (ActiveUsers) query;
   get_all_neuron_owners : () -> (vec principal) query;
   get_foundation_assets : () -> (vec record { text; WalletOverview }) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;

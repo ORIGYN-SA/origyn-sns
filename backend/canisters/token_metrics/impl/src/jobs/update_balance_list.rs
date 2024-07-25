@@ -1,4 +1,5 @@
 use canister_time::run_now_then_interval;
+use std::collections::BTreeMap;
 use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
 use super_stats_v3_api::{
@@ -121,6 +122,11 @@ pub async fn update_balance_list() {
 
         state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
         state.data.wallets_list = sort_map_descending(&temp_wallets_list);
+
+        state.data.active_users.active_principals_count = count_active_users(
+            &temp_merged_wallets_list
+        );
+        state.data.active_users.active_accounts_count = count_active_users(&temp_wallets_list);
     });
     mutate_state(|state| state.data.update_foundation_accounts_data());
     info!("update_balance_list -> done, mutated the state")
@@ -215,6 +221,11 @@ fn check_and_update_list(
     }
 }
 
+fn count_active_users(list: &BTreeMap<Account, WalletOverview>) -> usize {
+    list.values()
+        .filter(|wallet| wallet.total > 0)
+        .count()
+}
 fn sort_map_descending(
     map: &NormalBTreeMap<Account, WalletOverview>
 ) -> Vec<(Account, WalletOverview)> {
