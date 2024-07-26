@@ -8,6 +8,7 @@ import {
 } from "@components/charts";
 import useGetActivityStats from "@hooks/super_stats_v3/useGetActivityStats";
 import useGetActiveUsersCount from "@hooks/token_metrics/useGetActiveUsersCount";
+import { roundAndFormatLocale } from "@helpers/numbers";
 
 const ChartUsersActivity = ({
   className,
@@ -47,7 +48,7 @@ const ChartUsersActivity = ({
                 <span className="text-content/60 font-semibold mr-2">
                   OGY Protocol Users
                 </span>
-                <TooltipInfo id="tooltip-users-account">
+                <TooltipInfo id="tooltip-unique-token-holders">
                   <p>Unique token holders of OGY tokens</p>
                 </TooltipInfo>
               </div>
@@ -57,14 +58,16 @@ const ChartUsersActivity = ({
 
               <div className="flex mt-6">
                 <span className="text-content/60 font-semibold mr-2">
-                  OGY Active Users
+                  OGY Active Wallets
                 </span>
-                <TooltipInfo id="tooltip-users-account">
+                <TooltipInfo id="tooltip-active-users-account">
                   <p>Active token holders of OGY tokens</p>
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-                {Number(activeUsers.active_accounts_count)}
+                {roundAndFormatLocale({
+                  number: Number(activeUsers.active_accounts_count),
+                })}
               </div>
             </div>
 

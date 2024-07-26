@@ -7,7 +7,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import { ActivitySnapshot } from "./types";
-import { millify } from "@helpers/numbers";
+import { roundAndFormatLocale } from "@helpers/numbers";
 
 import { getActor } from "@amerej/artemis-react";
 
@@ -60,7 +60,7 @@ const useGetActivityStats = ({
           total_unique_accounts: {
             e8s: r.total_unique_accounts,
             number,
-            string: millify(number),
+            string: roundAndFormatLocale({ number: number }),
           },
           start_time: {
             e8s: r.start_time,
