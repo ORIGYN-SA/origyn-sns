@@ -7,6 +7,7 @@ import {
   Area as ChartArea,
 } from "@components/charts";
 import useGetActivityStats from "@hooks/super_stats_v3/useGetActivityStats";
+import useGetActiveUsersCount from "@hooks/token_metrics/useGetActiveUsersCount";
 
 const ChartUsersActivity = ({
   className,
@@ -18,6 +19,12 @@ const ChartUsersActivity = ({
 
   // TODO implement change period (dayly/weekly/monthly...)
   const { data, isLoading, isSuccess, isError } = useGetActivityStats({});
+  const {
+    data: activeUsers,
+    isLoading: isLoadingFetchActiveUsers,
+    isSuccess: isSuccessFetchActiveUsers,
+    isError: isErrorFetchActiveUsers,
+  } = useGetActiveUsersCount();
 
   return (
     <Card className={`${className}`} {...restProps}>
@@ -25,14 +32,14 @@ const ChartUsersActivity = ({
         <div className="flex items-center">
           <h2 className="text-lg font-semibold mr-2">Users Overview</h2>
         </div>
-        {isSuccess && (
+        {isSuccess && isSuccessFetchActiveUsers && (
           <button className="text-sm font-medium rounded-full px-3 py-1">
             Monthly
           </button>
         )}
       </div>
-      {isLoading && <ChartLoader />}
-      {isSuccess && data && (
+      {(isLoading || isLoadingFetchActiveUsers) && <ChartLoader />}
+      {isSuccess && isSuccessFetchActiveUsers && data && activeUsers && (
         <div className="mt-4 grid grid-cols-1 xl:grid-cols-4">
           <div className="col-span-1 flex flex-col justify-between">
             <div>
@@ -57,7 +64,7 @@ const ChartUsersActivity = ({
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-                4141
+                {Number(activeUsers.active_accounts_count)}
               </div>
             </div>
 
@@ -87,7 +94,7 @@ const ChartUsersActivity = ({
           </div>
         </div>
       )}
-      {isError && (
+      {(isError || isErrorFetchActiveUsers) && (
         <ChartError>Error while fetching users account data.</ChartError>
       )}
     </Card>
