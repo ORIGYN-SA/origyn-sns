@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 #### Added
 
 - Select time period for Total OGY Suplly & Total OGY Burned Charts
+- Active users count on Users Overview chart dashboard page
 
 #### Fixed
 
