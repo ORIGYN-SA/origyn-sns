@@ -4,26 +4,40 @@ export const getCurrentTimestamp = () =>
   Math.floor(DateTime.local().toSeconds());
 
 export const getCurrentDateInSeconds = () =>
-  Math.floor(DateTime.local().toSeconds()).toString();
+  Math.floor(DateTime.local().startOf("hour").toSeconds()).toString();
 
 export const getCurrentDateInNanoseconds = () =>
   DateTime.now().toMillis() * 1000000;
 
-export const getCurrentDateLastWeekInSeconds = () =>
+export const nowMinusOneDayToSeconds = () =>
   Math.floor(
     DateTime.local()
-      .minus({ weeks: 1 })
-      .startOf("week")
-      .plus({ days: DateTime.local().weekday - 1 })
+      .minus({ days: 1 })
+      // .plus({ days: DateTime.local().weekday - 1 })
       .toSeconds()
   ).toString();
 
-export const getCurrentDateLastMonthInSeconds = () =>
+export const nowMinusOneWeekToSeconds = () =>
+  Math.floor(
+    DateTime.local()
+      .minus({ weeks: 1 })
+      // .plus({ days: DateTime.local().weekday - 1 })
+      .toSeconds()
+  ).toString();
+
+export const nowMinusOneMonthToSeconds = () =>
   Math.floor(
     DateTime.local()
       .minus({ months: 1 })
-      .startOf("month")
-      .plus({ days: DateTime.local().weekday - 1 })
+      // .plus({ days: DateTime.local().weekday - 1 })
+      .toSeconds()
+  ).toString();
+
+export const nowMinusOneYearToSeconds = () =>
+  Math.floor(
+    DateTime.local()
+      .minus({ years: 1 })
+      // .plus({ days: DateTime.local().weekday - 1 })
       .toSeconds()
   ).toString();
 

@@ -17,7 +17,7 @@ const CustomTooltip = ({
         {payload.map((e, index) => (
           <div key={index}>
             <small key={index} className="text-content/60">
-              {e.value >= 1000 ? millify(e.value) : e.value}
+              {e.value >= 1000 ? millify(e.value, 9) : e.value}
             </small>
             <br />
           </div>

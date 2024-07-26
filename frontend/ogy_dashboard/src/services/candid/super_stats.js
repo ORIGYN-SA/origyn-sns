@@ -1,4 +1,5 @@
 export const idlFactory = ({ IDL }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const InitArgs = IDL.Record({ admin: IDL.Text, test_mode: IDL.Bool });
   const GetAccountHistoryArgs = IDL.Record({
     days: IDL.Nat64,

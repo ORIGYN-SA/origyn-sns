@@ -17,4 +17,4 @@ export const numberToE8s = (value:string) => {
     return BigInt(Math.round(parseFloat(value) * 1e8))
 }
 
-export const millify = (value:number) => millifyPackage(value, {precision: 2, locales: locale})
+export const millify = (value:number, precision?: number) => millifyPackage(value, {precision: precision ?? 3, locales: locale})
