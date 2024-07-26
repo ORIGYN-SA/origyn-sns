@@ -4,9 +4,14 @@ export const idlFactory = ({ IDL }) => {
     test_mode: IDL.Bool,
     foundation_accounts: IDL.Vec(IDL.Text),
     treasury_account: IDL.Text,
+    sns_rewards_canister_id: IDL.Principal,
     ogy_new_ledger_canister_id: IDL.Principal,
     super_stats_canister_id: IDL.Principal,
     sns_governance_canister_id: IDL.Principal,
+  });
+  const ActiveUsers = IDL.Record({
+    active_principals_count: IDL.Nat64,
+    active_accounts_count: IDL.Nat64,
   });
   const Overview = IDL.Record({
     balance: IDL.Nat,
@@ -62,7 +67,10 @@ export const idlFactory = ({ IDL }) => {
     circulating_supply: IDL.Nat,
     total_supply: IDL.Nat,
   });
+  const GetVotingParticipationHistoryArgs = IDL.Record({ days: IDL.Nat64 });
+  const GetVotingPowerRatioHistory = IDL.Record({ days: IDL.Nat64 });
   return IDL.Service({
+    get_active_users_count: IDL.Func([], [ActiveUsers], ["query"]),
     get_all_neuron_owners: IDL.Func([], [IDL.Vec(IDL.Principal)], ["query"]),
     get_foundation_assets: IDL.Func(
       [],
@@ -83,6 +91,16 @@ export const idlFactory = ({ IDL }) => {
       ["query"]
     ),
     get_supply_data: IDL.Func([], [TokenSupplyData], ["query"]),
+    get_voting_participation_history: IDL.Func(
+      [GetVotingParticipationHistoryArgs],
+      [IDL.Vec(IDL.Tuple(IDL.Nat64, IDL.Nat64))],
+      ["query"]
+    ),
+    get_voting_power_ratio_history: IDL.Func(
+      [GetVotingPowerRatioHistory],
+      [IDL.Vec(IDL.Tuple(IDL.Nat64, IDL.Nat64))],
+      ["query"]
+    ),
   });
 };
 export const init = ({ IDL }) => {
@@ -90,6 +108,7 @@ export const init = ({ IDL }) => {
     test_mode: IDL.Bool,
     foundation_accounts: IDL.Vec(IDL.Text),
     treasury_account: IDL.Text,
+    sns_rewards_canister_id: IDL.Principal,
     ogy_new_ledger_canister_id: IDL.Principal,
     super_stats_canister_id: IDL.Principal,
     sns_governance_canister_id: IDL.Principal,

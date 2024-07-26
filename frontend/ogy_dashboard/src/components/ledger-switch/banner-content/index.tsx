@@ -26,7 +26,7 @@ const BannerContent = ({ children }: PropsWithChildren) => {
           <p>ORIGYN governance and ledger have been upgraded to an SNS. </p>
           <p>
             In order to continue participating in ORIGYN governance and utilise
-            OGY, you need to swap your OGY tokens.
+            OGY, you need to migrate your OGY tokens.
           </p>
         </div>
       </div>

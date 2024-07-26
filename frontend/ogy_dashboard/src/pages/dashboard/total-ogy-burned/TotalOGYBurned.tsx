@@ -1,23 +1,36 @@
 import { useEffect, useMemo, useState } from "react";
-import { Card, TooltipInfo } from "@components/ui";
+import { Card, TooltipInfo, Select } from "@components/ui";
 // import BarChart from "@components/charts/bar/Bar";
 import AreaChart from "@components/charts/area/Area";
 import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 import { ChartData } from "@services/types/charts.types";
 
-type TotalOGYBurned = {
-  className?: string;
-};
+const SELECT_PERIOD_OPTIONS = [
+  // { value: "daily" },
+  { value: "weekly" },
+  { value: "monthly" },
+  { value: "yearly" },
+];
 
-const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
+const TotalOGYBurned = ({
+  className,
+  ...restProps
+}: {
+  className?: string;
+}) => {
   const [totalBurnedOGY, setTotalBurnedOGY] = useState("0");
+  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const [totalBurnedOGYTimeSeries, setTotalBurnedOGYTimeSeries] = useState(
     [] as ChartData[]
   );
   const barFill = useMemo(() => "#34d399", []);
 
   // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isSuccess } = useTotalOGYBurned();
+  const { data, isSuccess } = useTotalOGYBurned({ period: selectedPeriod });
+
+  const handleOnChangePeriod = (period: string) => {
+    setSelectedPeriod(period);
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -44,9 +57,15 @@ const TotalOGYBurned = ({ className, ...restProps }: TotalOGYBurned) => {
             </p>
           </TooltipInfo>
         </div>
-        <button className="text-sm font-medium rounded-full px-3 py-1">
+        <Select
+          options={SELECT_PERIOD_OPTIONS}
+          value={selectedPeriod}
+          handleOnChange={(value) => handleOnChangePeriod(value as string)}
+          className="w-25"
+        />
+        {/* <button className="text-sm font-medium rounded-full px-3 py-1">
           Monthly
-        </button>
+        </button> */}
       </div>
       <div className="mt-4 flex items-center text-2xl font-semibold">
         <img src="/ogy_logo.svg" alt="OGY Logo" />

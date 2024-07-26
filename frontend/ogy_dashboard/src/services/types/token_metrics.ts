@@ -1,7 +1,11 @@
-import type { Principal } from "@dfinity/principal"
+import type { Principal } from '@dfinity/principal';
 export interface Account {
   'owner' : Principal,
   'subaccount' : [] | [Array<number>],
+}
+export interface ActiveUsers {
+  'active_principals_count' : bigint,
+  'active_accounts_count' : bigint,
 }
 export interface GetHoldersArgs {
   'offset' : bigint,
@@ -14,6 +18,8 @@ export interface GetHoldersResponse {
   'limit' : bigint,
   'total_count' : bigint,
 }
+export interface GetVotingParticipationHistoryArgs { 'days' : bigint }
+export interface GetVotingPowerRatioHistory { 'days' : bigint }
 export interface GovernanceStats {
   'total_rewards' : bigint,
   'total_staked' : bigint,
@@ -25,6 +31,7 @@ export interface InitArgs {
   'test_mode' : boolean,
   'foundation_accounts' : Array<string>,
   'treasury_account' : string,
+  'sns_rewards_canister_id' : Principal,
   'ogy_new_ledger_canister_id' : Principal,
   'super_stats_canister_id' : Principal,
   'sns_governance_canister_id' : Principal,
@@ -62,6 +69,7 @@ export interface WalletOverview {
   'governance' : GovernanceStats,
 }
 export default interface _SERVICE {
+  'get_active_users_count' : () => Promise<ActiveUsers>,
   'get_all_neuron_owners' : () => Promise<Array<Principal>>,
   'get_foundation_assets' : () => Promise<Array<[string, WalletOverview]>>,
   'get_holders' : (arg_0: GetHoldersArgs) => Promise<GetHoldersResponse>,
@@ -72,4 +80,10 @@ export default interface _SERVICE {
       Array<[bigint, HistoryData]>
     >,
   'get_supply_data' : () => Promise<TokenSupplyData>,
+  'get_voting_participation_history' : (
+      arg_0: GetVotingParticipationHistoryArgs,
+    ) => Promise<Array<[bigint, bigint]>>,
+  'get_voting_power_ratio_history' : (
+      arg_0: GetVotingPowerRatioHistory,
+    ) => Promise<Array<[bigint, bigint]>>,
 }
