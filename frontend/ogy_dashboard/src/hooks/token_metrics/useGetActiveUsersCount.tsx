@@ -3,7 +3,7 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { ActiveUsers } from "./declarations/token_metrics";
+import { ActiveUsers } from "./declarations_files/token_metrics";
 
 import { getActor } from "@amerej/artemis-react";
 
