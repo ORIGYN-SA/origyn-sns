@@ -7,13 +7,8 @@ import fetchTotalSupplyOGYTimeSeries, {
   TotalSupplyOGYTimeSeries,
 } from "@services/queries/metrics/fetchTotalSupplyOGYTimeSeriesQuery";
 import { ChartData } from "@services/types/charts.types";
-import {
-  getCurrentDateInSeconds,
-  // getCurrentDateLastWeekInSeconds,
-  getCurrentDateLastMonthInSeconds,
-} from "@helpers/dates/index";
 
-const useTotalOGYSupply = () => {
+const useTotalOGYSupply = ({ period }: { period: string }) => {
   const [data, setData] = useState({
     totalSupply: "0",
     dataPieChart: [] as ChartData[],
@@ -33,9 +28,7 @@ const useTotalOGYSupply = () => {
     error: errorTotalSupplyTimeSeries,
   }: UseQueryResult<TotalSupplyOGYTimeSeries> = useQuery(
     fetchTotalSupplyOGYTimeSeries({
-      start: getCurrentDateLastMonthInSeconds(),
-      end: getCurrentDateInSeconds(),
-      step: "86400",
+      period,
     })
   );
 

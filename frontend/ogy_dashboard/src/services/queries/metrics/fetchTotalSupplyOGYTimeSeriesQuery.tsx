@@ -5,14 +5,15 @@ import {
 } from "@tanstack/react-query";
 import icrcAPI from "@services/api/icrc/v1";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
-import { transformTimeSeriesToBarChartData } from "@helpers/charts/index";
+import {
+  transformTimeSeriesToBarChartData,
+  timeseriesPeriodOptions,
+} from "@helpers/charts/index";
 import { ChartData } from "@services/types/charts.types";
 
 export interface TotalSupplyOGYTimeSeriesParams {
   options?: UseQueryOptions;
-  start?: string | null; // in timestamp
-  end?: string | null; // in timestamp
-  step?: string | null; // in seconds
+  period: string;
 }
 
 export interface TotalSupplyOGYTimeSeries {
@@ -20,14 +21,11 @@ export interface TotalSupplyOGYTimeSeries {
 }
 
 const fn = async ({
-  start,
-  end,
-  step,
+  period,
 }: TotalSupplyOGYTimeSeriesParams): Promise<TotalSupplyOGYTimeSeries> => {
+  const p = timeseriesPeriodOptions(period);
   const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply?${
-      start ? `start=${start}` : ``
-    }${end ? `&end=${end}` : ``}${step ? `&step=${step}` : ``}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply?start=${p.start}&step=${p.step}`
   );
   return {
     totalSupplyOGYTimeSeries:
@@ -37,13 +35,11 @@ const fn = async ({
 
 const fetchTotalSupplyOGYTimeSeriesQuery = ({
   options,
-  start = null,
-  end = null,
-  step = null,
+  period,
 }: TotalSupplyOGYTimeSeriesParams) => {
   return {
-    queryKey: ["fetchTotalSupplyOGYTimeSeries", start, end, step],
-    queryFn: async () => fn({ start, end, step }),
+    queryKey: ["fetchTotalSupplyOGYTimeSeries", period],
+    queryFn: async () => fn({ period }),
     placeholderData: keepPreviousData,
     ...options,
   } as FetchQueryOptions;
