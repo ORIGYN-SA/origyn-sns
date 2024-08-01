@@ -9,6 +9,7 @@ edition = "2021"
 candid = { workspace = true }
 canister_time = { path = "../canister_time" }
 ciborium = { workspace = true }
+hex = { workspace = true }
 ic-ledger-types = { workspace = true }
 icrc-ledger-types = { workspace = true }
 ic-cdk = { workspace = true }

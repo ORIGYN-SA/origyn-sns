@@ -3,10 +3,11 @@ use canister_time::run_now_then_interval;
 use futures::future::join_all;
 use icrc_ledger_types::icrc1::account::Account;
 use token_metrics_api::TEAM_PRINCIPALS;
+use utils::principal::string_to_account;
 use std::time::Duration;
 use tracing::{ debug, error };
 use types::Milliseconds;
-use crate::{ state::{ mutate_state, read_state }, utils::string_to_account };
+use crate::state::{ mutate_state, read_state };
 
 const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 3_600 * 1_000;
 
