@@ -12,20 +12,20 @@ pub fn fill_missing_days<T: Clone>(
     history.sort_by_key(|&(day, _)| day);
 
     let mut filled_history = Vec::new();
-    let mut last_data = default_data.clone();
     let current_day = get_current_day();
 
-    let history_map: std::collections::HashMap<u64, T> = history.into_iter().collect();
+    let mut last_data = default_data.clone();
+    let mut history_index = 0;
 
     for day_offset in (0..=days).rev() {
         let day = current_day - day_offset;
 
-        if let Some(data) = history_map.get(&day) {
-            last_data = data.clone();
-            filled_history.push((day, last_data.clone()));
-        } else {
-            filled_history.push((day, last_data.clone()));
+        while history_index < history.len() && history[history_index].0 <= day {
+            last_data = history[history_index].1.clone();
+            history_index += 1;
         }
+
+        filled_history.push((day, last_data.clone()));
     }
 
     filled_history
@@ -99,6 +99,21 @@ mod tests {
             (get_current_day() - 4, 0),
             (get_current_day() - 3, 0),
             (get_current_day() - 2, 200),
+            (get_current_day() - 1, 300),
+            (get_current_day(), 300)
+        ];
+        assert_eq!(filled, expected);
+    }
+
+    #[test]
+    fn test_fill_missing_days_with_old_history() {
+        let history = vec![(get_current_day() - 140, 200), (get_current_day() - 130, 300)];
+        let filled = fill_missing_days(history, 5, 0);
+        let expected = vec![
+            (get_current_day() - 5, 300),
+            (get_current_day() - 4, 300),
+            (get_current_day() - 3, 300),
+            (get_current_day() - 2, 300),
             (get_current_day() - 1, 300),
             (get_current_day(), 300)
         ];
