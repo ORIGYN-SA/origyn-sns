@@ -107,7 +107,7 @@ mod tests {
 
     #[test]
     fn test_fill_missing_days_with_old_history() {
-        let history = vec![(get_current_day() - 140, 200), (get_current_day() - 130, 300)];
+        let history = vec![(get_current_day() - 49, 300)];
         let filled = fill_missing_days(history, 5, 0);
         let expected = vec![
             (get_current_day() - 5, 300),
