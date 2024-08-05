@@ -74,7 +74,7 @@ const PieChart = ({ data, colors }: PieChartProps) => {
                       dy={-16}
                       fontSize={24}
                       fontWeight="bold"
-                      fill={themeColors.content.DEFAULT}
+                      fill={themeColors.content}
                       {...commonPositioningProps}
                     >
                       {((data[activeIndex].value / sumData) * 100).toFixed(1) +
@@ -83,7 +83,7 @@ const PieChart = ({ data, colors }: PieChartProps) => {
 
                     <Text
                       dy={24}
-                      fill={themeColors.content.DEFAULT}
+                      fill={themeColors.content}
                       fontSize={12}
                       width={100}
                       {...commonPositioningProps}
