@@ -6,7 +6,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { ActivitySnapshot } from "./types";
+import { ActivitySnapshot } from "./declarations";
 import { roundAndFormatLocale } from "@helpers/numbers";
 
 import { getActor } from "@amerej/artemis-react";
@@ -15,7 +15,7 @@ const useGetActivityStats = ({
   start = 30,
   options = {
     placeholderData: keepPreviousData,
-    queryKey: ["GET_ACTIVITY_STATS"],
+    queryKey: ["SUPER_STATS_GET_ACTIVITY_STATS"],
   },
 }: {
   start?: number;

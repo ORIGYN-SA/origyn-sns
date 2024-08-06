@@ -5,7 +5,7 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { TimeStats } from "./types";
+import { TimeStats } from "./declarations";
 // import { roundAndFormatLocale } from "@helpers/numbers";
 
 import { getActor } from "@amerej/artemis-react";
@@ -40,7 +40,7 @@ const useGetActiveAccounts = ({ start = 30 }: { start?: number }) => {
       return results as TimeStats;
     },
     placeholderData: keepPreviousData,
-    queryKey: ["GET_ACTIVE_ACCOUNTS"],
+    queryKey: ["SUPER_STATS_GET_ACTIVE_ACCOUNTS"],
   });
 
   useEffect(() => {

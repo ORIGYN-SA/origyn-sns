@@ -5,6 +5,8 @@ import TransactionsList from "@pages/transactions/transactions-list/Transactions
 // import Badge from "@components/ui/Badge";
 // import { Search } from "@components/ui";
 
+import { useSearchExplorer } from "@hooks/explorer";
+
 const loader = async () => {
   return null;
 };
@@ -27,6 +29,14 @@ export const Explorer = () => {
   //   ],
   //   []
   // );
+
+  // "4uwdt-f5sls-li6d7-hhkjy-3mc6v-bfzuz-77z2e-7avcd-vc6od-ceoke-eqe"
+  // "39916"
+  const t = useSearchExplorer({
+    searchterm: "39916",
+  });
+
+  console.log(t);
 
   return (
     <div className="container mx-auto py-16 px-4">
