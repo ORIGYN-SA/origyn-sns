@@ -244,7 +244,7 @@ fn principal_history_created() {
     assert_eq!(start_processing_response, "Processing timer has been started");
 
     // Wait 30 seconds
-    thread::sleep(Duration::from_secs(30));
+    thread::sleep(Duration::from_secs(1));
 
     let working_stats_response = get_working_stats(
         &mut pic,
@@ -255,7 +255,7 @@ fn principal_history_created() {
     println!("Response from get_working_stats: {working_stats_response:?}");
 
     // Wait here 15 seconds before proceeding
-    thread::sleep(Duration::from_secs(15));
+    thread::sleep(Duration::from_secs(1));
 
     // Check max account balances
     let p2_ow_args = principal2.to_string();
@@ -273,7 +273,7 @@ fn principal_history_created() {
         days: 8,
     };
     let response1 = get_principal_history(&mut pic, controller, super_stats_canister_id, &p1_args);
-    println!("Response from get_account_history: {response1:?}");
+    println!("Response from get_principal_history (p1): {response1:?}");
 
     // 1 day ago = Day 8
     // principal1: 60_000_000
@@ -299,6 +299,38 @@ fn principal_history_created() {
     // 8 days ago = Day 1
     // principal1: 100_000_000
     assert_eq!(response1[0].1.balance, (100_000_000 * E8S_PER_OGY) as u128);
+
+    let p2_args = GetPrincipalHistoryArgs {
+        account: principal2.to_string(),
+        days: 2,
+    };
+    let response2 = get_principal_history(&mut pic, controller, super_stats_canister_id, &p2_args);
+    println!("Response from get_principal_history (p2): {response2:?}");
+
+    // 1 day ago = Day 8
+    // principal1: 60_000_000
+    assert_eq!(response2[1].1.balance, (15_000_000 * E8S_PER_OGY) as u128);
+    // 2 days ago = Day 7
+    // principal1: 80_000_000
+    assert_eq!(response2[0].1.balance, (15_000_000 * E8S_PER_OGY) as u128);
+    // // 3 days ago = Day 6
+    // // principal1: 80_000_000
+    // assert_eq!(response2[5].1.balance, (15_000_000 * E8S_PER_OGY) as u128);
+    // // 4 days ago = Day 5
+    // // principal1: 80_000_000
+    // assert_eq!(response2[4].1.balance, (15_000_000 * E8S_PER_OGY) as u128);
+    // // 5 days ago = Day 4
+    // // principal1: 75_000_000
+    // assert_eq!(response2[3].1.balance, (15_000_000 * E8S_PER_OGY) as u128);
+    // // 6 days ago = Day 3
+    // // principal1: 70_000_000
+    // assert_eq!(response2[2].1.balance, (20_000_000 * E8S_PER_OGY) as u128);
+    // // 7 days ago = Day 2
+    // // principal1: 80_000_000
+    // assert_eq!(response2[1].1.balance, (20_000_000 * E8S_PER_OGY) as u128);
+    // // 8 days ago = Day 1
+    // // principal1: 100_000_000
+    // assert_eq!(response2[0].1.balance, (0 * E8S_PER_OGY) as u128);
 }
 
 #[test]
@@ -502,7 +534,7 @@ fn accounts_and_principals_history_count() {
     assert_eq!(start_processing_response, "Processing timer has been started");
 
     // Wait 30 seconds
-    thread::sleep(Duration::from_secs(30));
+    thread::sleep(Duration::from_secs(1));
 
     let working_stats_response = get_working_stats(
         &mut pic,
