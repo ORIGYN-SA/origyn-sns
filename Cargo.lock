@@ -2915,6 +2915,7 @@ dependencies = [
  "candid 0.10.9",
  "canister_time",
  "ciborium",
+ "hex",
  "ic-cdk 0.13.2",
  "ic-ledger-types",
  "ic-stable-structures",

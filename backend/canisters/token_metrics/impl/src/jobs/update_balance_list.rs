@@ -1,4 +1,5 @@
 use canister_time::run_now_then_interval;
+use utils::principal::string_to_account;
 use std::collections::BTreeMap;
 use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
@@ -12,7 +13,6 @@ use std::{ collections::HashMap, time::Duration };
 use tracing::{ debug, error, info };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
-use crate::utils::string_to_account;
 
 // every 15 minutes
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 15 * 60 * 1_000;

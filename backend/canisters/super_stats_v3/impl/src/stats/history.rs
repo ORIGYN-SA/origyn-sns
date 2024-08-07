@@ -42,6 +42,17 @@ pub fn get_history_of_account(
                         }
                     }
                 }
+                if days_collected == 0 {
+                    for day in (0..=current_day).rev() {
+                        let key = (ac_ref_value, day);
+
+                        if let Some(history) = history_map.get(&key) {
+                            items.insert(day, history.clone());
+                            break;
+                        }
+                    }
+                }
+
                 let vec: Vec<(u64, HistoryData)> = items
                     .iter()
                     .map(|(&k, v)| (k, v.clone()))
