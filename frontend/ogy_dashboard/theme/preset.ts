@@ -40,7 +40,7 @@ export default {
         sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
       },
       backgroundImage: {
-        'ledger-switch': "url('/ogy-background.png')",
+        'ledger-switch': "url('/bg_ledger_switch.jpg')",
       }
     },
   },
