@@ -1,7 +1,7 @@
-import rosettaAPI from "@services/api/rosetta";
+import rosettaAPI from "../services";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
-export const fetchOneTransactionRosetta = async ({
+export const fetchOneTransaction = async ({
   transactionId,
 }: {
   transactionId: string;

@@ -6,18 +6,16 @@ export const idlFactory = ({ IDL }) => {
     account: IDL.Text,
   });
   const HistoryData = IDL.Record({ balance: IDL.Nat });
-  const AccountHistory = IDL.Vec(IDL.Tuple(IDL.Nat64, HistoryData));
   const GetHoldersArgs = IDL.Record({
     offset: IDL.Nat64,
     limit: IDL.Nat64,
   });
-  const TxCount = IDL.Tuple(IDL.Nat32, IDL.Nat);
   const Overview = IDL.Record({
     balance: IDL.Nat,
-    sent: TxCount,
+    sent: IDL.Tuple(IDL.Nat32, IDL.Nat),
     last_active: IDL.Nat64,
     first_active: IDL.Nat64,
-    received: TxCount,
+    received: IDL.Tuple(IDL.Nat32, IDL.Nat),
     max_balance: IDL.Nat,
   });
   const HolderBalanceResponse = IDL.Record({
@@ -48,7 +46,6 @@ export const idlFactory = ({ IDL }) => {
     average: IDL.Float64,
     total_value: IDL.Nat,
   });
-  const ActiveAccount = IDL.Tuple(IDL.Text, IDL.Nat64);
   const TimeChunkStats = IDL.Record({
     mint_count: IDL.Nat64,
     transfer_count: IDL.Nat64,
@@ -64,11 +61,11 @@ export const idlFactory = ({ IDL }) => {
     top_burns: IDL.Vec(ProcessedTX),
     mint_stats: TotCntAvg,
     total_transaction_average: IDL.Float64,
-    most_active_principals: IDL.Vec(ActiveAccount),
+    most_active_principals: IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat64)),
     transfer_stats: TotCntAvg,
     top_mints: IDL.Vec(ProcessedTX),
     total_transaction_value: IDL.Nat,
-    most_active_accounts: IDL.Vec(ActiveAccount),
+    most_active_accounts: IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat64)),
     count_over_time: IDL.Vec(TimeChunkStats),
     total_transaction_count: IDL.Nat,
     total_unique_principals: IDL.Nat64,
@@ -76,7 +73,7 @@ export const idlFactory = ({ IDL }) => {
     approve_stats: TotCntAvg,
   });
   const LogEntry = IDL.Record({ text: IDL.Text, timestamp: IDL.Text });
-  const MemoryStats = IDL.Record({
+  const MemoryData = IDL.Record({
     memory: IDL.Nat64,
     heap_memory: IDL.Nat64,
   });
@@ -84,12 +81,12 @@ export const idlFactory = ({ IDL }) => {
     total_accounts: IDL.Nat64,
     total_principals: IDL.Nat64,
   });
-  const MetricStats = IDL.Record({
+  const Metrics = IDL.Record({
     total_errors: IDL.Nat64,
     total_api_requests: IDL.Nat64,
   });
   const WorkingStats = IDL.Record({
-    metrics: MetricStats,
+    metrics: Metrics,
     next_block: IDL.Nat64,
     last_update_time: IDL.Nat64,
     ledger_tip_of_chain: IDL.Nat64,
@@ -103,14 +100,14 @@ export const idlFactory = ({ IDL }) => {
     DfinityIcrc3: IDL.Null,
     DfinityIcp: IDL.Null,
   });
-  const SetTargetArgs = IDL.Record({
+  const TargetArgs = IDL.Record({
     daily_size: IDL.Nat8,
     target_ledger: IDL.Text,
     hourly_size: IDL.Nat8,
   });
   const InitLedgerArgs = IDL.Record({
     index_type: IndexerType,
-    target: SetTargetArgs,
+    target: TargetArgs,
   });
   return IDL.Service({
     add_admin: IDL.Func([IDL.Text], [IDL.Text], []),
@@ -118,7 +115,7 @@ export const idlFactory = ({ IDL }) => {
     deposit_cycles: IDL.Func([], [], []),
     get_account_history: IDL.Func(
       [GetAccountHistoryArgs],
-      [AccountHistory],
+      [IDL.Vec(IDL.Tuple(IDL.Nat64, HistoryData))],
       ["query"]
     ),
     get_account_holders: IDL.Func(
@@ -139,10 +136,10 @@ export const idlFactory = ({ IDL }) => {
     get_daily_stats: IDL.Func([], [TimeStats], ["query"]),
     get_hourly_stats: IDL.Func([], [TimeStats], ["query"]),
     get_logs: IDL.Func([], [IDL.Opt(IDL.Vec(LogEntry))], ["query"]),
-    get_memory_stats: IDL.Func([], [MemoryStats], ["query"]),
+    get_memory_stats: IDL.Func([], [MemoryData], ["query"]),
     get_principal_history: IDL.Func(
       [GetAccountHistoryArgs],
-      [AccountHistory],
+      [IDL.Vec(IDL.Tuple(IDL.Nat64, HistoryData))],
       ["query"]
     ),
     get_principal_holders: IDL.Func(
@@ -170,6 +167,8 @@ export const idlFactory = ({ IDL }) => {
     init_target_ledger: IDL.Func([InitLedgerArgs], [IDL.Text], []),
     remove_admin: IDL.Func([IDL.Text], [IDL.Text], []),
     remove_authorised: IDL.Func([IDL.Text], [IDL.Text], []),
+    self_call: IDL.Func([], [], []),
+    self_call2: IDL.Func([], [], []),
     start_processing_timer: IDL.Func([IDL.Nat64], [IDL.Text], []),
     stop_all_timers: IDL.Func([], [IDL.Text], []),
   });

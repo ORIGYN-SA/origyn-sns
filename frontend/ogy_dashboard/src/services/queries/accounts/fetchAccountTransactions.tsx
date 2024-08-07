@@ -38,17 +38,17 @@ export type Transaction = {
   to_owner: string;
   to_subaccount: string;
   updated_at: string;
-}
+};
 export type TransactionsDetails = {
   data: Transaction[];
   total_transactions: number;
-}
+};
 
 const fn = async ({
   accountPrincipal,
 }: AccountTransactionsParams): Promise<TransactionsDetails> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountPrincipal}/transactions`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountPrincipal}/transactions?limit=100&sortBy=timestamp`
   );
   return data;
 };
