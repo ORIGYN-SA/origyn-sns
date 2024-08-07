@@ -1,7 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import _capitalize from "lodash/capitalize";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
-import { fetchOneTransactionRosetta } from "@services/queries/transactions/fetchOneTransactionRosetta";
+import { fetchOneTransaction as fetchOneTransactionRosetta } from "@hooks/rosetta-api/queries";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { formatDate } from "@helpers/dates";
 
