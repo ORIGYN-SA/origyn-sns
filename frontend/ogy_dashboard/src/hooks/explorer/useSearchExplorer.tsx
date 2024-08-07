@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import _isNumeric from "validator/lib/isNumeric";
 
@@ -10,7 +9,6 @@ import { fetchOneTransaction as fetchOneTransactionRosetta } from "@hooks/rosett
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
 
 export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
-  const [data, setData] = useState<string | null>(null);
   const fetchSearch = async () => {
     const isSearchtermNumber = () =>
       _isNumeric(searchterm, { no_symbols: true });
@@ -21,7 +19,10 @@ export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
       const resultsPrincipalOverview = await getPrincipalOverview({
         principalId: searchterm,
       });
-      return [resultsAccountOverview, resultsPrincipalOverview];
+      if (resultsAccountOverview || resultsPrincipalOverview) {
+        return { type: "principalId", value: searchterm };
+      }
+      return null;
     } else {
       const resultsRosettaApi = await fetchOneTransactionRosetta({
         transactionId: searchterm,
@@ -29,7 +30,10 @@ export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
       const resultsLedgerApi = await fetchOneTransaction({
         transactionId: searchterm,
       });
-      return [resultsRosettaApi, resultsLedgerApi];
+      if (resultsRosettaApi || resultsLedgerApi) {
+        return { type: "blockIndex", value: searchterm };
+      }
+      return null;
     }
   };
 
@@ -40,21 +44,11 @@ export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
     retry: false,
   });
 
-  useEffect(() => {
-    if (results.isSuccess) {
-      if (results.data.some((r) => r && (r !== null || r !== undefined))) {
-        setData(searchterm);
-      } else {
-        setData("");
-      }
-    }
-  }, [results.isSuccess, results.data, searchterm]);
-
   return {
-    isLoading: results.isLoading || !data,
-    isSuccess: results.isSuccess && data !== null,
+    isLoading: results.isLoading,
+    isSuccess: results.isSuccess,
     isError: results.isError,
     error: results.error,
-    data,
+    data: results.data as { type: "blockIndex" | "principalId"; value: string },
   };
 };

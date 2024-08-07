@@ -1,7 +1,8 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react";
+import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import _debounce from "lodash/debounce";
 
 interface ISearch {
   className?: string;
@@ -33,15 +34,25 @@ const Search = ({
     reset();
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSetSearchParams = useCallback(
+    _debounce((value) => {
+      if (value !== "") {
+        searchParams.set("searchterm", value);
+        setSearchParams(searchParams);
+      }
+    }, 800),
+    [searchParams, setSearchParams]
+  );
+
   const handleOnChange = (e: ChangeEvent) => {
     const value = (e?.target as HTMLTextAreaElement)?.value;
     if (value === "") {
       handleResetSearch();
     } else {
       setSearchterm(value);
-      searchParams.set("searchterm", value);
-      setSearchParams(searchParams);
     }
+    debouncedSetSearchParams(value);
   };
 
   const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -58,6 +69,7 @@ const Search = ({
           id={id}
           type="text"
           placeholder={placeholder}
+          autoComplete="off"
           {...(register(id),
           {
             onChange: (e) => handleOnChange(e),
