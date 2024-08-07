@@ -340,7 +340,7 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
 
   return (
     <div className="relative mt-12 bg-surface text-content rounded-xl border border-border">
-      <div className="absolute top-10 left-10 z-50 w-96">
+      <div className="absolute top-10 left-10 z-10 w-96">
         <form
           onKeyDown={handleOnKeyDown as () => void}
           className="rounded-xl bg-surface-3 border border-border px-3 py-1 flex justify-between items-center w-full"
