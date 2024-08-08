@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.15] - 2024-08-8
+
+#### Added
+
+- Search in explorer view
+- Search in graph transactions and improve UI/UX
+
+#### Changed
+
+- Ledger switch banner styles
+
 ### [1.0.14] - 2024-07-25
 
 #### Added
