@@ -123,7 +123,6 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Explorer.loader,
             element: <Explorer />,
           },
           {
