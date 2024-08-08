@@ -4,7 +4,7 @@ import {
   useQuery,
   keepPreviousData,
   UseQueryOptions,
-  UseQueryResult,
+  UseQueryResult
 } from "@tanstack/react-query";
 import { ActivitySnapshot } from "./declarations";
 import { roundAndFormatLocale } from "@helpers/numbers";
@@ -41,14 +41,14 @@ const useGetActivityStats = ({
     isSuccess,
     isLoading,
     isError,
-    error,
+    error
   }: UseQueryResult<Array<ActivitySnapshot>> = useQuery({
     ...options,
     queryFn: async (): Promise<Array<ActivitySnapshot>> => {
       const actor = await getActor("tokenStats", { isAnon: true });
       const results = await actor.get_activity_stats(start);
       return results as Array<ActivitySnapshot>;
-    },
+    }
   });
 
   useEffect(() => {
@@ -60,12 +60,12 @@ const useGetActivityStats = ({
           total_unique_accounts: {
             e8s: r.total_unique_accounts,
             number,
-            string: roundAndFormatLocale({ number: number }),
+            string: roundAndFormatLocale({ number: number })
           },
           start_time: {
             e8s: r.start_time,
-            datetime,
-          },
+            datetime
+          }
         };
       });
       setData(results);
@@ -77,7 +77,7 @@ const useGetActivityStats = ({
     isSuccess: isSuccess && data,
     isError,
     isLoading: isLoading || !data,
-    error,
+    error
   };
 };
 

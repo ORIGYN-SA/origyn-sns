@@ -1,10 +1,9 @@
 import { useMemo } from "react";
-
 import { Card, TooltipInfo } from "@components/ui";
 import {
   Loader as ChartLoader,
   Error as ChartError,
-  Area as ChartArea,
+  Area as ChartArea
 } from "@components/charts";
 import useGetActivityStats from "@hooks/super_stats_v3/useGetActivityStats";
 import useGetActiveUsersCount from "@hooks/token_metrics/useGetActiveUsersCount";
@@ -83,7 +82,7 @@ const ChartUsersActivity = ({
               data={data.map(({ total_unique_accounts, start_time }) => {
                 return {
                   name: start_time.datetime.toFormat("LLL dd"),
-                  value: total_unique_accounts.number,
+                  value: total_unique_accounts.number
                 };
               })}
               fill={barFill}
