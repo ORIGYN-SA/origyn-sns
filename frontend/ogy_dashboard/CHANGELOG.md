@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.16] - 2024-08-9
+
+#### Added
+
+- Add tooltip ORIGYN account names in token distribution list
+
 ### [1.0.15] - 2024-08-8
 
 #### Added
