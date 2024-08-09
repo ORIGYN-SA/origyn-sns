@@ -7,6 +7,7 @@ import fetchTokenHolders from "@services/queries/metrics/fetchTokenHolders";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
 } from "@services/queries/metrics/fetchTotalSupplyOGYQuery";
+import { ORIGYN_ACCOUNTS } from "@constants/index";
 
 const useTokenDistribution = ({
   limit = 10,
@@ -44,6 +45,7 @@ const useTokenDistribution = ({
   const rows = isSuccess
     ? tokenDistribution.data.map((td) => {
         const principal = td.principal;
+        const tag = ORIGYN_ACCOUNTS.find((e) => e.value === td.principal)?.name;
         const total = td.string.total;
         const governanceBalance = td.string.governanceBalance;
         const ledgerBalance = td.string.ledgerBalance;
@@ -54,6 +56,7 @@ const useTokenDistribution = ({
         ).toFixed(2);
         return {
           principal,
+          tag,
           total,
           governanceBalance,
           ledgerBalance,
@@ -61,6 +64,8 @@ const useTokenDistribution = ({
         };
       })
     : [];
+
+  console.log(rows);
 
   return {
     data: {
