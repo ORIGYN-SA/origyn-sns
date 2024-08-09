@@ -25,6 +25,21 @@ export const APP_MODE = import.meta.env.MODE
 export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE)
 export const TRANSACTION_FEE_ICP = import.meta.env.VITE_TRANSACTION_FEE_ICP
 
+export const ORIGYN_ACCOUNTS = [
+    {name: "ORIGYN Foundation", value: "7xc7u-onriy-z2gvh-scsnt-sf3gz-ywjyk-sx2sx-uzqyk-3ugdz-lm7xe-5qe"},
+    {name: "ORIGYN Foundation", value: "ud7qh-vnh3c-krx66-e2fqy-saxxx-bdyno-2znkq-n5ivx-xeoc6-eygrq-nqe"},
+    {name: "Founder 1", value: "vinvi-plqfi-kzczp-gshps-rmjwu-udwrg-gcgxz-i2xlz-2jfln-gzhws-vae"},
+    {name: "Founder 1", value: "q7oeg-2audd-xb44f-du5wn-ffclb-ny45c-bevai-pww3z-vtn3c-viynm-oqe"},
+    {name: "Founder 2", value: "xjx44-sjcsp-gno44-v6s3r-rnuxq-ukogv-vyqnm-srpd3-wpq5r-kysnb-4qe"},
+    {name: "Founder 3", value: "flbgt-g5o2b-dusvz-om3pi-xn6lf-ycqbi-4poz7-2bf2s-aorzv-kga7f-zqe"},
+    {name: "Founder 3", value: "zsabt-2p6xo-devrd-asmls-y6r5k-t3lr3-54qo7-66e35-havqy-7jhx3-sqe"},
+    {name: "ORIGYN Ecosystem Fund", value: "k4vqr-zftut-n7l3t-fdevy-yehw6-be5az-wixxq-glrfg-lyeld-3siaj-uae"},
+    {name: "ORIGYN Rewards Account (ORA)", value: "yuijc-oiaaa-aaaap-ahezq-cai"},
+    {name: "OGY Token Migration Canister", value: "gzcjd-xiaaa-aaaak-qijga-cai"},
+    {name: "Gold DAO", value: "54vkq-taaaa-aaaap-ahqra-cai"},
+    // {name: "BFS", value: "3rzb3-4q77v-bkng4-khvjp-bf4aj-lvalh-ddend-svbfw-fhort-z64lm-3ae"},
+]
+
 if (!(APP_MODE === "production")) {
     console.log(`APP_MODE=${APP_MODE}`)
 

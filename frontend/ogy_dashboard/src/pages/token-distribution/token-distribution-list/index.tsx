@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Table, Tooltip, Skeleton } from "@components/ui";
+import { Table, Tooltip, Skeleton, TooltipInfo } from "@components/ui";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { IProposalData } from "@services/types";
 import { TableProps } from "@helpers/table/useTable";
@@ -21,22 +21,32 @@ const TokenDistributionList = ({
       {
         accessorKey: "principal",
         id: "principal",
-        cell: ({ getValue }) => (
-          <div className="flex items-center max-w-sm">
-            <div
-              data-tooltip-id="tooltip_address"
-              data-tooltip-content={getValue()}
-              className="mr-2 truncate"
-            >
+        cell: ({ getValue, row }) => (
+          <div className="flex items-center md:max-w-sm max-w-64">
+            <>
               <button
+                data-tooltip-id="tooltip_address"
+                data-tooltip-content={getValue()}
+                className="mr-2 truncate"
                 onClick={() =>
                   navigate(`/explorer/transactions/accounts/${getValue()}`)
                 }
               >
                 {getValue()}
               </button>
-            </div>
+            </>
             <CopyToClipboard value={getValue()} />
+
+            {row?.original?.tag && (
+              <div className="ml-3">
+                <TooltipInfo
+                  id={`tooltip_${row?.original?.tag}`}
+                  clickable={false}
+                >
+                  {row?.original?.tag}
+                </TooltipInfo>
+              </div>
+            )}
           </div>
         ),
         header: "Address",
