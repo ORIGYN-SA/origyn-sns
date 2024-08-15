@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { Principal } from "@dfinity/principal";
+import { decodeIcrcAccount } from "@dfinity/ledger-icrc";
 import {
   ArrowUpTrayIcon,
   CheckCircleIcon,
@@ -112,7 +112,7 @@ const Transfer = ({ show, handleClose }) => {
 
   const isValidRecipientAddress = (value) => {
     try {
-      Principal.fromText(value);
+      decodeIcrcAccount(value);
       return true;
     } catch (err) {
       return false;
