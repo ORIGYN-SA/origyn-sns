@@ -84,14 +84,14 @@ pub fn authenticate_by_hotkey(
     caller: &Principal
 ) -> AuthenticateByHotkeyResponse {
     // first is always the nns owner principal so if less than or equal to 1 then no hotkeys have been added.
-    if neuron_data.permissions.len() <= 1 {
-        return AuthenticateByHotkeyResponse::NeuronHotKeyAbsent;
-    }
+    // if neuron_data.permissions.len() <= 1 {
+    //     return AuthenticateByHotkeyResponse::NeuronHotKeyAbsent;
+    // }
 
     // Check if any of the permission principals contain an entry that matches the caller principal
     let matching_caller_hotkey = neuron_data.permissions
         .iter()
-        .skip(1)
+        // .skip(1)
         .filter(|permission| permission.principal.as_ref() == Some(caller))
         .count();
 

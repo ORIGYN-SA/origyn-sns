@@ -8,5 +8,10 @@
   },
   "rust-analyzer.checkOnSave": true,
   "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
-  "yaml.customTags": ["!reference sequence"]
+  "yaml.customTags": ["!reference sequence"],
+  "markdownlint.config": {
+    "MD024": {
+      "siblings_only": true
+    }
+  }
 }
