@@ -68,21 +68,21 @@ include:
     inputs:
       src-folder: canister_jobs
   # Canister generate declaration
-  - local: scripts/ci-cd/.generate_declaration.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.generate_declaration.yml
-    inputs:
-      src-folder: sns_rewards
-  - local: scripts/ci-cd/.generate_declaration.yml
-    inputs:
-      src-folder: super_stats_v3
-  - local: scripts/ci-cd/.generate_declaration.yml
-    inputs:
-      src-folder: token_metrics
-  - local: scripts/ci-cd/.generate_declaration.yml
-    inputs:
-      src-folder: canister_jobs
+  # - local: scripts/ci-cd/.generate_declaration.yml
+  #   inputs:
+  #     src-folder: ogy_token_swap
+  # - local: scripts/ci-cd/.generate_declaration.yml
+  #   inputs:
+  #     src-folder: sns_rewards
+  # - local: scripts/ci-cd/.generate_declaration.yml
+  #   inputs:
+  #     src-folder: super_stats_v3
+  # - local: scripts/ci-cd/.generate_declaration.yml
+  #   inputs:
+  #     src-folder: token_metrics
+  # - local: scripts/ci-cd/.generate_declaration.yml
+  #   inputs:
+  #     src-folder: canister_jobs
   # Frontend builds
   - local: scripts/ci-cd/.frontend_builds.yml
     inputs:
