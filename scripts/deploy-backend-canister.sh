@@ -72,9 +72,12 @@ elif [[ $MODE == "proposal" ]]; then
   fi
   . scripts/prepare_sns_canister_ids.sh $NETWORK && \
   . scripts/prepare_proposal_summary.sh $CANISTER $UPGRADEVERSION backend && \
+
+  echo "Sending proposal from proposer id $PROPOSER"
+
   quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
     --pem-file $PEM_FILE \
-    --canister-upgrade-arg $ARGUMENTS \
+    --canister-upgrade-arg "$ARGUMENTS" \
     --target-canister-id $(cat canister_ids.json | jq -r .$CANISTER.$NETWORK) \
     --wasm-path backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \
     --title "Upgrade $CANISTER to ${UPGRADEVERSION}" \
