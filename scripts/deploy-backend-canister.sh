@@ -71,7 +71,7 @@ elif [[ $MODE == "proposal" ]]; then
     UPGRADEVERSION=$CI_COMMIT_SHORT_SHA
   fi
   . scripts/prepare_sns_canister_ids.sh $NETWORK && \
-  . scripts/parse_proposal_details.sh $CANISTER && \
+  . scripts/parse_proposal_summary.sh $CANISTER && \
   quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
     --pem-file $PEM_FILE \
     --canister-upgrade-arg $ARGUMENTS \
