@@ -65,8 +65,6 @@ const useTokenDistribution = ({
       })
     : [];
 
-  console.log(rows);
-
   return {
     data: {
       list: {

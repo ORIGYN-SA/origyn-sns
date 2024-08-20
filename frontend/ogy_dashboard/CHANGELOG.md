@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.17] - 2024-08-15
+
+#### Added
+
+- Added support for account/subaccount address in transfer
+
 ### [1.0.16] - 2024-08-9
 
 #### Added
