@@ -215,7 +215,7 @@ ogy token swap staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  needs: ["ogy_token_swap canister build", "check canister ids"]
+  needs: ["ogy_token_swap staging build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -263,11 +263,18 @@ sns rewards staging:
         - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
         - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
         - "backend/canisters/sns_rewards/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+    - if: $CI_COMMIT_REF_NAME != "develop" && $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "backend/libraries/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/external_canisters/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+        - "backend/canisters/sns_rewards/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+      when: manual
+      allow_failure: true
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
   # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["sns_rewards canister build", "check canister ids"]
+  needs: ["sns_rewards staging build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -316,7 +323,7 @@ token metrics staging:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
   # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["token_metrics canister build", "check canister ids"]
+  needs: ["token_metrics staging build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -365,7 +372,7 @@ canister jobs staging:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
   # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["canister_jobs canister build", "check canister ids"]
+  needs: ["canister_jobs staging build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -414,7 +421,7 @@ super stats staging:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
   # needs: ["super_stats_v3 canister build", "check canister ids", "integration tests"]
-  needs: ["super_stats_v3 canister build", "check canister ids"]
+  needs: ["super_stats_v3 staging build", "check canister ids"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
