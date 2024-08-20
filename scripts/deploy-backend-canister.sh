@@ -46,41 +46,42 @@ ARGUMENTS=$3
 MODE=$4
 
 
-echo -e "CANISTER: $CANISTER \nNETWORK: $NETWORK \nARGUMENTS: $ARGUMENTS \nMODE: $MODE"
+echo -e "CANISTER: $CANISTER \nNETWORK: $NETWORK \nARGUMENTS: $ARGUMENTS \nMODE: $MODE \nTAG: $CI_COMMIT_TAG"
 
 if [[ ! $NETWORK =~ ^(local|staging|ic)$ ]]; then
   echo "Error: unknown network for deployment"
   exit 2
 fi
 
-if [[ $NETWORK == "local" ]]; then
-  dfx deploy $CANISTER --network $NETWORK ${REINSTALL} --argument "$ARGUMENTS" -y
-elif [[ $CI_COMMIT_REF_NAME == "develop" || ( $NETWORK == "ic" && $CI_COMMIT_TAG =~ ^$CANISTER-v{1}[[:digit:]]{1,2}.[[:digit:]]{1,2}.[[:digit:]]{1,3}$ ) ]]; then
-  if [[ $MODE == "direct" ]]; then
-    echo "Deploying $CANISTER directly via dfx."
-    dfx deploy $CANISTER --network $NETWORK ${REINSTALL} --argument "$ARGUMENTS" -y
-  elif [[ $MODE == "proposal" ]]; then
-    # echo "Deploying $CANISTER via SNS proposal needs to be implemented."
-    echo "Deploying $CANISTER via SNS proposal."
-    if [[ $NETWORK == "ic" ]]; then
-      PROPOSER=$SNS_PROPOSER_NEURON_ID_PRODUCTION
-      UPGRADEVERSION="${CI_COMMIT_TAG#*-v}"
-    else
-      PROPOSER=$SNS_PROPOSER_NEURON_ID_STAGING
-      UPGRADEVERSION=$CI_COMMIT_SHORT_SHA
-    fi
-    . scripts/prepare_sns_canister_ids.sh $NETWORK && \
-    . scripts/parse_proposal_details.sh $CANISTER && \
-    quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
-      --pem-file $PEM_FILE \
-      --canister-upgrade-arg $ARGUMENTS \
-      --target-canister-id $(cat canister_ids.json | jq -r .$CANISTER.$NETWORK) \
-      --wasm-path backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \
-      --title "Upgrade $CANISTER to ${UPGRADEVERSION}" \
-      --url ${DETAILS_URL} --summary-path proposal.md | quill send --yes -
-  else
-    echo "Error: invalid deployment mode. Needs to be 'direct' or 'proposal'."
-    exit 2
-  fi
+if [[ $NETWORK == ic && ! $CI_COMMIT_TAG =~ ^($CANISTER-v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+  echo "Error: Enter valid commit tag to deploy to production"
+  exit 2
 fi
+
+if [[ $MODE == "direct" ]]; then
+  echo "Deploying $CANISTER directly via dfx."
+  dfx deploy $CANISTER --network $NETWORK ${REINSTALL} --argument "$ARGUMENTS" -y
+elif [[ $MODE == "proposal" ]]; then
+  echo "Deploying $CANISTER via SNS proposal."
+  if [[ $NETWORK == "ic" ]]; then
+    PROPOSER=$SNS_PROPOSER_NEURON_ID_PRODUCTION
+    UPGRADEVERSION="${CI_COMMIT_TAG#*-v}"
+  else
+    PROPOSER=$SNS_PROPOSER_NEURON_ID_STAGING
+    UPGRADEVERSION=$CI_COMMIT_SHORT_SHA
+  fi
+  . scripts/prepare_sns_canister_ids.sh $NETWORK && \
+  . scripts/parse_proposal_details.sh $CANISTER && \
+  quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
+    --pem-file $PEM_FILE \
+    --canister-upgrade-arg $ARGUMENTS \
+    --target-canister-id $(cat canister_ids.json | jq -r .$CANISTER.$NETWORK) \
+    --wasm-path backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \
+    --title "Upgrade $CANISTER to ${UPGRADEVERSION}" \
+    --url ${DETAILS_URL} --summary-path proposal.md | quill send --yes -
+else
+  echo "Error: invalid deployment mode. Needs to be 'direct' or 'proposal'."
+  exit 2
+fi
+
 return
