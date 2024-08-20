@@ -215,7 +215,7 @@ ogy token swap staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  needs: ["ogy_token_swap staging build", "check canister ids"]
+  needs: ["ogy_token_swap staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -238,7 +238,7 @@ ogy token swap:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["ogy_token_swap canister build", "check canister ids"]
+  needs: ["ogy_token_swap canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -273,8 +273,8 @@ sns rewards staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["sns_rewards staging build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["sns_rewards staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -298,8 +298,8 @@ sns rewards:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["sns_rewards canister build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["sns_rewards canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -322,8 +322,8 @@ token metrics staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["token_metrics staging build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["token_metrics staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -347,8 +347,8 @@ token metrics:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["token_metrics canister build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["token_metrics canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -371,8 +371,8 @@ canister jobs staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["canister_jobs staging build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["canister_jobs staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -396,8 +396,8 @@ canister jobs:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "check canister ids", "integration tests"]
-  needs: ["canister_jobs canister build", "check canister ids"]
+  # needs: ["sns_rewards canister build", "integration tests"]
+  needs: ["canister_jobs canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -420,8 +420,8 @@ super stats staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["super_stats_v3 canister build", "check canister ids", "integration tests"]
-  needs: ["super_stats_v3 staging build", "check canister ids"]
+  # needs: ["super_stats_v3 canister build", "integration tests"]
+  needs: ["super_stats_v3 staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -445,8 +445,8 @@ super stats:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["super_stats_v3 canister build", "check canister ids", "integration tests"]
-  needs: ["super_stats_v3 canister build", "check canister ids"]
+  # needs: ["super_stats_v3 canister build", "integration tests"]
+  needs: ["super_stats_v3 canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
