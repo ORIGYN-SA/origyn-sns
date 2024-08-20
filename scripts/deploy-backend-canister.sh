@@ -70,9 +70,8 @@ elif [[ $MODE == "proposal" ]]; then
     PROPOSER=$SNS_PROPOSER_NEURON_ID_STAGING
     UPGRADEVERSION=$CI_COMMIT_SHORT_SHA
   fi
-  . scripts/extract_version_and_commit_sha.sh $CANISTER
   . scripts/prepare_sns_canister_ids.sh $NETWORK && \
-  . scripts/prepare_proposal_summary.sh $CANISTER $VERSION backend && \
+  . scripts/prepare_proposal_summary.sh $CANISTER $UPGRADEVERSION backend && \
   quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
     --pem-file $PEM_FILE \
     --canister-upgrade-arg $ARGUMENTS \
