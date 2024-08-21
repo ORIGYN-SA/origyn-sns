@@ -8,7 +8,9 @@ const transferOGY = async ({ amount, to }: { amount: bigint; to: string }) => {
 
   const decodedAccount = decodeIcrcAccount(to);
   const owner = decodedAccount.owner;
-  const subaccount = decodedAccount?.subaccount ?? [];
+  const subaccount = decodedAccount?.subaccount
+    ? [decodedAccount.subaccount]
+    : [];
 
   const result = await actor.icrc1_transfer({
     to: { owner: owner, subaccount: subaccount },
