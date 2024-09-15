@@ -109,6 +109,18 @@
         "env_override": null,
         "output": "backend/canisters/canister_jobs/api/declarations"
       }
+    },
+    "nft_index": {
+      "type": "custom",
+      "candid": "backend/canisters/nft_index/api/can.did",
+      "optimize": "cycles",
+      "package": "nft_index",
+      "wasm": "backend/canisters/nft_index/target/wasm32-unknown-unknown/release/nft_index_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/nft_index/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",
