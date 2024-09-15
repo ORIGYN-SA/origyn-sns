@@ -1,0 +1,31 @@
+type Certificate = record {
+  collection_id : text;
+  category : text;
+  certificate_id : text;
+};
+type GetCertificatesByCategoryArgs = record {
+  offset : nat64;
+  limit : nat64;
+  category : text;
+};
+type GetCertificatesByCollectionArgs = record {
+  collection_id : text;
+  offset : nat64;
+  limit : nat64;
+};
+type InitArgs = record {
+  test_mode : bool;
+  authorized_principals : vec principal;
+};
+type Result = variant { Ok : bool; Err : text };
+type Result_1 = variant { Ok : vec Certificate; Err : text };
+service : (InitArgs) -> {
+  add_authorised_principal : (principal) -> (Result);
+  get_certificates_by_category : (GetCertificatesByCategoryArgs) -> (
+      Result_1,
+    ) query;
+  get_certificates_by_collection_id : (GetCertificatesByCollectionArgs) -> (
+      Result_1,
+    ) query;
+  insert_certificate : (Certificate) -> (Result);
+}

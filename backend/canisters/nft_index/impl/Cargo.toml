@@ -7,6 +7,10 @@ edition = "2021"
 [features]
 inttest = []
 
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
 [dependencies]
 candid = { workspace = true }
 canister_logger = { path = '../../../libraries/canister_logger' }
