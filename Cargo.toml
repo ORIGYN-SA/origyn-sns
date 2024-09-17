@@ -21,6 +21,8 @@ members = [
   "backend/external_canisters/ogy_legacy_ledger/c2c_client",
   "backend/external_canisters/sns_governance/api",
   "backend/external_canisters/sns_governance/c2c_client",
+  "backend/external_canisters/origyn_nft_reference/api",
+  "backend/external_canisters/origyn_nft_reference/c2c_client",
   "backend/integration_tests",
   "backend/libraries/candid_gen",
   "backend/libraries/canister_client",

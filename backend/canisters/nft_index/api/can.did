@@ -1,7 +1,13 @@
 type Certificate = record {
-  collection_id : text;
+  collection_id : principal;
   category : text;
   certificate_id : text;
+};
+type Collection = record {
+  name : opt text;
+  certificates_count : nat;
+  is_promoted : bool;
+  logo_url : opt text;
 };
 type GetCertificatesByCategoryArgs = record {
   offset : nat64;
@@ -9,16 +15,33 @@ type GetCertificatesByCategoryArgs = record {
   category : text;
 };
 type GetCertificatesByCollectionArgs = record {
-  collection_id : text;
+  collection_id : principal;
   offset : nat64;
   limit : nat64;
 };
+type GetCollectionsArgs = record { offset : nat64; limit : nat64 };
 type InitArgs = record {
   test_mode : bool;
   authorized_principals : vec principal;
 };
+type InsertCertificateError = variant {
+  CertificateAlreadyExists;
+  TargetCollectionDoesNotExist;
+};
+type InsertCollectionArgs = record {
+  is_promoted : bool;
+  collection_canister_id : principal;
+};
+type InsertCollectionError = variant {
+  GenericOrigynNftError : text;
+  TargetCanisterIdNotOrigyn;
+  CollectionAlreadyExists;
+};
 type Result = variant { Ok : bool; Err : text };
 type Result_1 = variant { Ok : vec Certificate; Err : text };
+type Result_2 = variant { Ok : vec Collection; Err : text };
+type Result_3 = variant { Ok : bool; Err : InsertCertificateError };
+type Result_4 = variant { Ok : bool; Err : InsertCollectionError };
 service : (InitArgs) -> {
   add_authorised_principal : (principal) -> (Result);
   get_certificates_by_category : (GetCertificatesByCategoryArgs) -> (
@@ -27,5 +50,7 @@ service : (InitArgs) -> {
   get_certificates_by_collection_id : (GetCertificatesByCollectionArgs) -> (
       Result_1,
     ) query;
-  insert_certificate : (Certificate) -> (Result);
+  get_collections : (GetCollectionsArgs) -> (Result_2) query;
+  insert_certificate : (Certificate) -> (Result_3);
+  insert_collection : (InsertCollectionArgs) -> (Result_4);
 }

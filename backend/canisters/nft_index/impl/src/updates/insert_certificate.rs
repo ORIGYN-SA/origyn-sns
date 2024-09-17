@@ -4,7 +4,7 @@ pub use nft_index_api::insert_certificates::{
     Response as InsertCertificateResponse,
 };
 use ic_cdk::update;
-use crate::{ guards::caller_is_authorised_principal, state::{ mutate_state, read_state } };
+use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
