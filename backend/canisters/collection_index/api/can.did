@@ -1,7 +1,7 @@
 type Collection = record {
   name : opt text;
+  canister_id : principal;
   is_promoted : bool;
-  logo_url : opt text;
   category : opt vec nat64;
 };
 type GetCollectionsArgs = record { offset : nat64; limit : nat64 };

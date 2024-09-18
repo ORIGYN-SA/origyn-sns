@@ -1,5 +1,5 @@
 use candid::Principal;
-use ic_stable_structures::BTreeMap as StableBTreeMap;
+use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{ collection::Collection, errors::InsertCollectionError };
 use serde::{ Deserialize, Serialize };
 
@@ -25,6 +25,10 @@ impl Default for CollectionModel {
 }
 
 impl CollectionModel {
+    pub fn promote_collection() {}
+
+    pub fn demote_collection() {}
+
     pub fn insert_collection(
         &mut self,
         collection_canister_id: Principal,

@@ -9,8 +9,8 @@ pub type CertificateTokenId = String;
 
 #[derive(Clone, Debug, CandidType, Deserialize, Serialize)]
 pub struct Collection {
+    pub canister_id: Principal,
     pub name: Option<String>,
-    pub logo_url: Option<String>,
     pub category: Option<Vec<u64>>,
     pub is_promoted: bool,
 }
@@ -19,7 +19,7 @@ impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
     fn from(value: crate::services::origyn_nft::GetCollectionInfoResult) -> Self {
         Self {
             name: value.name,
-            logo_url: value.logo_url,
+            canister_id: Principal::anonymous(),
             category: Some(vec![]),
             is_promoted: false,
         }

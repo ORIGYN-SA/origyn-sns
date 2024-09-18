@@ -16,6 +16,7 @@ use crate::{
 pub async fn insert_collection(args: InsertCollectionArgs) -> InsertCollectionResponse {
     let mut collection: Collection = get_collection_info(args.collection_canister_id).await?.into();
     collection.is_promoted = args.is_promoted;
+    collection.canister_id = args.collection_canister_id;
 
     Ok(
         mutate_state(|state|
