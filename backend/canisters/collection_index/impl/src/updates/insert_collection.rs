@@ -20,7 +20,11 @@ pub async fn insert_collection(args: InsertCollectionArgs) -> InsertCollectionRe
 
     Ok(
         mutate_state(|state|
-            state.data.collections.insert_collection(args.collection_canister_id, &collection)
+            state.data.collections.insert_collection(
+                args.collection_canister_id,
+                &collection,
+                args.category
+            )
         )?
     )
 }

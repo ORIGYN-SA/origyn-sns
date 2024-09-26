@@ -9,5 +9,22 @@ use crate::state::mutate_state;
 #[query]
 #[trace]
 pub async fn get_collections(args: GetCollectionsArgs) -> GetCollectionsResponse {
-    Ok(mutate_state(|state| state.data.collections.get_all_collections(args.offset, args.limit)))
+    match args.category {
+        Some(category) =>
+            Ok(
+                mutate_state(|state|
+                    state.data.collections.get_collections_by_category(
+                        category,
+                        args.offset,
+                        args.limit
+                    )
+                )
+            )?,
+        None =>
+            Ok(
+                mutate_state(|state|
+                    state.data.collections.get_all_collections(args.offset, args.limit)
+                )
+            )?,
+    }
 }

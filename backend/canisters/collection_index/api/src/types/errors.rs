@@ -9,6 +9,16 @@ pub enum InsertCollectionError {
     CollectionAlreadyExists,
     GenericOrigynNftError(String),
     TargetCanisterIdNotOrigyn,
+    CategoryNotFound(String),
+}
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum UpdateCollectionCategoryError {
+    CollectionNotFound,
+    CategoryNotFound(String),
+}
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum GetCollectionsError {
+    CategoryNotFound(String),
 }
 impl From<crate::services::origyn_nft::GetCollectionInfoError> for InsertCollectionError {
     fn from(error: crate::services::origyn_nft::GetCollectionInfoError) -> Self {
@@ -19,4 +29,14 @@ impl From<crate::services::origyn_nft::GetCollectionInfoError> for InsertCollect
                 Self::GenericOrigynNftError(e),
         }
     }
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum SetCategoryHiddenError {
+    CategoryNotFound,
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum InsertCategoryError {
+    CategoryAlreadyExists,
 }

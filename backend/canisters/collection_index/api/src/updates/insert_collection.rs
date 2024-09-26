@@ -10,4 +10,5 @@ pub type Response = Result<bool, InsertCollectionError>;
 pub struct InsertCollectionArgs {
     pub collection_canister_id: Principal,
     pub is_promoted: bool,
+    pub category: String,
 }
