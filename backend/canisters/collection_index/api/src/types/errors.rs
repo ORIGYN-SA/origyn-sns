@@ -40,3 +40,8 @@ pub enum SetCategoryHiddenError {
 pub enum InsertCategoryError {
     CategoryAlreadyExists,
 }
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum RemoveCollectionError {
+    CollectionNotFound,
+}

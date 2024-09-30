@@ -9,3 +9,5 @@ pub mod rewards;
 pub mod super_stats;
 pub mod sns_governance;
 pub mod token_metrics;
+pub mod origyn_nft_reference;
+pub mod collection_index;

@@ -12,13 +12,16 @@ ic-ledger-types = { workspace = true }
 icrc-ledger-types = { workspace = true }
 icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }
 lazy_static = { workspace = true }
+serde_bytes = { workspace = true }
 ledger_utils = { path = "../libraries/ledger_utils" }
+origyn_nft_reference = { path = '../external_canisters/origyn_nft_reference/api' }
 ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/api' }
 ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_legacy_ledger/c2c_client' }
 ogy_token_swap_api = { path = "../canisters/ogy_token_swap/api" }
 super_stats_v3_api = { path = "../canisters/super_stats_v3/api" }
 token_metrics_api = { path = "../canisters/token_metrics/api" }
 canister_jobs_api = { path = "../canisters/canister_jobs/api" }
+collection_index_api = { path = "../canisters/collection_index/api" }
 pocket-ic = { workspace = true }
 rand = "0.8.5"
 serde = { workspace = true }

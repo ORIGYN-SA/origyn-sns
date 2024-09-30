@@ -2,11 +2,13 @@ use std::collections::BTreeMap;
 use candid::Principal;
 use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{
+    category::Category,
     collection::Collection,
     errors::{
         GetCollectionsError,
         InsertCategoryError,
         InsertCollectionError,
+        RemoveCollectionError,
         SetCategoryHiddenError,
         UpdateCollectionCategoryError,
     },
@@ -15,22 +17,6 @@ use serde::{ Deserialize, Serialize };
 
 use crate::memory::{ get_collection_model_memory, VM };
 
-#[derive(Serialize, Deserialize, Clone)]
-pub struct Category {
-    collection_ids: Vec<Principal>,
-    total_collections: u64,
-    hidden: bool,
-}
-
-impl Default for Category {
-    fn default() -> Self {
-        Self {
-            collection_ids: Vec::new(),
-            total_collections: 0,
-            hidden: false,
-        }
-    }
-}
 #[derive(Serialize, Deserialize)]
 pub struct CollectionModel {
     #[serde(skip, default = "init_collection_model")]
@@ -112,13 +98,18 @@ impl CollectionModel {
             new_category.total_collections += 1;
         }
 
+        if let Some(mut collection) = self.collections.remove(&collection_canister_id) {
+            collection.category = new_category.clone();
+            self.collections.insert(collection_canister_id, collection);
+        }
+
         Ok(true)
     }
 
     pub fn insert_collection(
         &mut self,
         collection_canister_id: Principal,
-        collection: &Collection,
+        collection: &mut Collection,
         category_name: String
     ) -> Result<bool, InsertCollectionError> {
         if self.collections.contains_key(&collection_canister_id) {
@@ -129,6 +120,7 @@ impl CollectionModel {
             return Err(InsertCollectionError::CategoryNotFound(category_name));
         }
 
+        collection.category = category_name.clone();
         self.collections.insert(collection_canister_id.clone(), collection.clone());
 
         if let Some(category) = self.categories.get_mut(&category_name) {
@@ -137,6 +129,22 @@ impl CollectionModel {
         }
 
         Ok(true)
+    }
+
+    pub fn remove_collection(
+        &mut self,
+        collection_canister_id: Principal
+    ) -> Result<bool, RemoveCollectionError> {
+        if let Some(collection) = self.collections.remove(&collection_canister_id) {
+            if let Some(category) = self.categories.get_mut(&collection.category) {
+                category.collection_ids.retain(|id| id != &collection_canister_id);
+                category.total_collections -= 1;
+            }
+
+            Ok(true)
+        } else {
+            Err(RemoveCollectionError::CollectionNotFound)
+        }
     }
 
     pub fn get_all_collections(
