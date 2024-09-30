@@ -36,3 +36,7 @@ impl Storable for Collection {
         Decode!(&bytes, Self).unwrap()
     }
 }
+
+pub struct GetCollectionsFilters {
+    pub category: Option<String>,
+}

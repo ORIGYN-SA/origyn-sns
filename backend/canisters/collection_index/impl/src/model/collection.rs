@@ -3,7 +3,7 @@ use candid::Principal;
 use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{
     category::Category,
-    collection::Collection,
+    collection::{ Collection, GetCollectionsFilters },
     errors::{
         GetCollectionsError,
         InsertCategoryError,
@@ -21,8 +21,6 @@ use crate::memory::{ get_collection_model_memory, VM };
 pub struct CollectionModel {
     #[serde(skip, default = "init_collection_model")]
     collections: StableBTreeMap<Principal, Collection, VM>,
-
-    #[serde(skip, default = "init_category_memory")]
     categories: BTreeMap<String, Category>,
 }
 
@@ -31,15 +29,11 @@ fn init_collection_model() -> StableBTreeMap<Principal, Collection, VM> {
     StableBTreeMap::init(memory)
 }
 
-fn init_category_memory() -> BTreeMap<String, Category> {
-    BTreeMap::new()
-}
-
 impl Default for CollectionModel {
     fn default() -> Self {
         Self {
             collections: init_collection_model(),
-            categories: init_category_memory(),
+            categories: BTreeMap::new(),
         }
     }
 }
@@ -147,52 +141,53 @@ impl CollectionModel {
         }
     }
 
-    pub fn get_all_collections(
+    pub fn get_collections(
         &self,
+        filters: GetCollectionsFilters,
         offset: usize,
         limit: usize
     ) -> Result<Vec<Collection>, GetCollectionsError> {
-        let mut collections_vec: Vec<(Principal, Collection)> = self.collections.iter().collect();
+        match filters.category {
+            Some(category_name) => {
+                if let Some(category) = self.categories.get(&category_name) {
+                    let collection_ids = &category.collection_ids;
 
-        collections_vec.sort_by_key(|(_, coll)| !coll.is_promoted);
+                    let paginated_ids = collection_ids
+                        .iter()
+                        .skip(offset)
+                        .take(limit)
+                        .cloned()
+                        .collect::<Vec<Principal>>();
 
-        Ok(
-            collections_vec
-                .iter()
-                .skip(offset)
-                .take(limit)
-                .cloned()
-                .map(|(_, col)| col)
-                .collect()
-        )
-    }
+                    let mut collections = Vec::new();
+                    for collection_id in paginated_ids {
+                        if let Some(collection) = self.collections.get(&collection_id) {
+                            collections.push(collection.clone());
+                        }
+                    }
 
-    pub fn get_collections_by_category(
-        &self,
-        category_name: String,
-        offset: usize,
-        limit: usize
-    ) -> Result<Vec<Collection>, GetCollectionsError> {
-        if let Some(category) = self.categories.get(&category_name) {
-            let collection_ids = &category.collection_ids;
-
-            let paginated_ids = collection_ids
-                .iter()
-                .skip(offset)
-                .take(limit)
-                .cloned()
-                .collect::<Vec<Principal>>();
-
-            let mut collections = Vec::new();
-            for collection_id in paginated_ids {
-                if let Some(collection) = self.collections.get(&collection_id) {
-                    collections.push(collection.clone());
+                    Ok(collections)
+                } else {
+                    Err(GetCollectionsError::CategoryNotFound(category_name))
                 }
             }
+            None => {
+                let mut collections_vec: Vec<(Principal, Collection)> = self.collections
+                    .iter()
+                    .collect();
 
-            Ok(collections)
-        } else {
-            Err(GetCollectionsError::CategoryNotFound(category_name))
+                collections_vec.sort_by_key(|(_, coll)| !coll.is_promoted);
+
+                Ok(
+                    collections_vec
+                        .iter()
+                        .skip(offset)
+                        .take(limit)
+                        .cloned()
+                        .map(|(_, col)| col)
+                        .collect()
+                )
+            }
         }
     }
 
