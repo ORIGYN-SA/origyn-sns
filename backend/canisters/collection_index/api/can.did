@@ -1,20 +1,20 @@
-type Category = record {
-  collection_ids : vec principal;
-  total_collections : nat64;
-  hidden : bool;
-};
+type Category = record { active : bool; name : text; collection_count : nat64 };
 type Collection = record {
   name : opt text;
   canister_id : principal;
   is_promoted : bool;
-  category : text;
+  category : opt nat64;
 };
 type GetCollectionsArgs = record {
+  categories : opt vec nat64;
   offset : nat64;
   limit : nat64;
-  category : opt text;
 };
 type GetCollectionsError = variant { CategoryNotFound : text };
+type GetCollectionsResult = record {
+  total_pages : nat64;
+  collections : vec Collection;
+};
 type InitArgs = record {
   test_mode : bool;
   authorized_principals : vec principal;
@@ -24,7 +24,7 @@ type InsertCategoryError = variant { CategoryAlreadyExists };
 type InsertCollectionArgs = record {
   is_promoted : bool;
   collection_canister_id : principal;
-  category : text;
+  category : nat64;
 };
 type InsertCollectionError = variant {
   GenericOrigynNftError : text;
@@ -35,18 +35,21 @@ type InsertCollectionError = variant {
 type RemoveCollectionArgs = record { collection_canister_id : principal };
 type RemoveCollectionError = variant { CollectionNotFound };
 type Result = variant { Ok : bool; Err : text };
-type Result_1 = variant { Ok : vec record { text; Category }; Err };
-type Result_2 = variant { Ok : vec Collection; Err : GetCollectionsError };
-type Result_3 = variant { Ok : bool; Err : InsertCategoryError };
-type Result_4 = variant { Ok : bool; Err : InsertCollectionError };
-type Result_5 = variant { Ok : bool; Err : RemoveCollectionError };
-type Result_6 = variant { Ok : bool; Err : SetCategoryHiddenError };
-type Result_7 = variant { Ok : bool; Err : UpdateCollectionCategoryError };
-type SetCategoryHiddenArgs = record { hidden : bool; category_name : text };
-type SetCategoryHiddenError = variant { CategoryNotFound };
+type Result_1 = variant { Ok : vec record { nat64; Category }; Err };
+type Result_2 = variant {
+  Ok : GetCollectionsResult;
+  Err : GetCollectionsError;
+};
+type Result_3 = variant { Ok; Err : InsertCategoryError };
+type Result_4 = variant { Ok; Err : InsertCollectionError };
+type Result_5 = variant { Ok; Err : RemoveCollectionError };
+type Result_6 = variant { Ok; Err : SetCategoryVisibilityError };
+type Result_7 = variant { Ok; Err : UpdateCollectionCategoryError };
+type SetCategoryVisibility = record { hidden : bool; category_id : nat64 };
+type SetCategoryVisibilityError = variant { CategoryNotFound };
 type UpdateCollectionCategoryArgs = record {
-  new_category : text;
   collection_canister_id : principal;
+  category_id : nat64;
 };
 type UpdateCollectionCategoryError = variant {
   CollectionNotFound;
@@ -59,6 +62,6 @@ service : (InitArgs) -> {
   insert_category : (InsertCategoryArgs) -> (Result_3);
   insert_collection : (InsertCollectionArgs) -> (Result_4);
   remove_collection : (RemoveCollectionArgs) -> (Result_5);
-  set_category_hidden : (SetCategoryHiddenArgs) -> (Result_6);
+  set_category_visibility : (SetCategoryVisibility) -> (Result_6);
   update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_7);
 }

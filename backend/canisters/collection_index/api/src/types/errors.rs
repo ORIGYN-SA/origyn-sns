@@ -32,7 +32,7 @@ impl From<crate::services::origyn_nft::GetCollectionInfoError> for InsertCollect
 }
 
 #[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
-pub enum SetCategoryHiddenError {
+pub enum SetCategoryVisibilityError {
     CategoryNotFound,
 }
 

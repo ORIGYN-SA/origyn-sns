@@ -9,14 +9,15 @@ use collection_index_api::{
         InsertCategoryError,
         InsertCollectionError,
         RemoveCollectionError,
-        SetCategoryHiddenError,
+        SetCategoryVisibilityError,
         UpdateCollectionCategoryError,
     },
     get_collections::GetCollectionsResult,
 };
 use serde::{ Deserialize, Serialize };
+use tracing::trace;
 
-use crate::memory::{ get_collection_model_memory, VM };
+use crate::{ memory::{ get_collection_model_memory, VM }, utils::trace };
 
 #[derive(Serialize, Deserialize)]
 pub struct CollectionModel {
@@ -60,16 +61,16 @@ impl CollectionModel {
         Ok(())
     }
 
-    pub fn set_category_inactive(
+    pub fn set_category_visibility(
         &mut self,
         category_id: &CategoryID,
         switch: bool
-    ) -> Result<(), SetCategoryHiddenError> {
+    ) -> Result<(), SetCategoryVisibilityError> {
         if let Some(category) = self.categories.get_mut(category_id) {
             category.active = switch;
             Ok(())
         } else {
-            Err(SetCategoryHiddenError::CategoryNotFound)
+            Err(SetCategoryVisibilityError::CategoryNotFound)
         }
     }
 
@@ -78,24 +79,55 @@ impl CollectionModel {
         collection_canister_id: Principal,
         new_category_id: CategoryID
     ) -> Result<(), UpdateCollectionCategoryError> {
-        if let Some(category) = self.categories.get_mut(&new_category_id) {
-            if let Some(mut collection) = self.collections.get(&collection_canister_id) {
+        if let Some(mut collection) = self.collections.get(&collection_canister_id) {
+            let old_category_id = collection.category.clone();
+
+            // check the old category exists
+            if let Some(old_cat_id) = &old_category_id {
+                if let None = self.categories.get(&old_cat_id) {
+                    return Err(
+                        UpdateCollectionCategoryError::CategoryNotFound(
+                            format!(
+                                "Can't update collection because the old category of id : {old_cat_id} does not exist"
+                            )
+                        )
+                    );
+                };
+            }
+
+            // check the new category exists
+            if let None = self.categories.get(&new_category_id) {
+                return Err(
+                    UpdateCollectionCategoryError::CategoryNotFound(
+                        format!(
+                            "Can't update collection because the new category of id : {new_category_id} does not exist"
+                        )
+                    )
+                );
+            }
+
+            // if an old category is set then minus one from it's collection count
+            if let Some(old_cat_id) = old_category_id {
+                if let Some(cat) = self.categories.get_mut(&old_cat_id) {
+                    if cat.collection_count > 0u64 {
+                        cat.collection_count = cat.collection_count - 1;
+                    }
+                }
+            }
+
+            // set the new category and update the categorie's collection count
+            if let Some(category) = self.categories.get_mut(&new_category_id) {
                 collection.category = Some(new_category_id.clone());
 
                 self.collections.remove(&collection.canister_id);
                 self.collections.insert(collection_canister_id, collection);
 
                 category.collection_count += 1;
-                Ok(())
-            } else {
-                Err(UpdateCollectionCategoryError::CollectionNotFound)
             }
+
+            Ok(())
         } else {
-            Err(
-                UpdateCollectionCategoryError::CategoryNotFound(
-                    format!("Category not found for category id : {new_category_id}")
-                )
-            )
+            Err(UpdateCollectionCategoryError::CollectionNotFound)
         }
     }
 
@@ -110,6 +142,7 @@ impl CollectionModel {
         }
 
         let category = if let Some(cat) = self.categories.get_mut(&category_id) {
+            collection.category = Some(category_id);
             cat
         } else {
             return Err(

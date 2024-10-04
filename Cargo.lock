@@ -449,6 +449,7 @@ dependencies = [
  "ic-cdk-timers 0.7.0",
  "ic-ledger-types",
  "ic-stable-structures",
+ "ic0 0.23.0",
  "icrc-ledger-types",
  "num-bigint",
  "origyn_nft_reference",
