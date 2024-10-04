@@ -425,7 +425,7 @@ fn test_pagination_works_correctly() {
                     canister_id: collection_prin,
                     name: Some(format!("Collection {i}")),
                     category: Some(2u64),
-                    is_promoted: false,
+                    is_promoted: true,
                 },
                 category: 2,
             })
@@ -446,6 +446,132 @@ fn test_pagination_works_correctly() {
     ).unwrap();
 
     assert_eq!(res.collections.len(), 150);
+    // test that the promoted collections are first
+    res.collections[0..50].iter().for_each(|col| { assert_eq!(col.is_promoted, true) });
+    // test that the rest are not promoted
+    res.collections[50..150].iter().for_each(|col| { assert_eq!(col.is_promoted, false) });
+    assert_eq!(res.total_pages, 1);
+    // let only_names: Vec<String> = res.collections
+    //     .iter()
+    //     .map(|col| col.name.clone().unwrap())
+    //     .collect();
+    // println!("{only_names:?}");
+
+    // get only category a
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0]),
+            offset: 0,
+            limit: 200,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 50);
+    assert_eq!(res.total_pages, 1);
+
+    // get two categories worth of data
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 0,
+            limit: 200,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 100);
+    assert_eq!(res.total_pages, 1);
+
+    // step paginate through 2 categories worth of collections ( 100 )
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 0,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 20);
+    assert_eq!(res.total_pages, 5);
+
+    // step paginate through 2 categories worth of collections ( 100 )
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 20,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 20);
+    assert_eq!(res.total_pages, 5);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 40,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 20);
+    assert_eq!(res.total_pages, 5);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 60,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 20);
+    assert_eq!(res.total_pages, 5);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 80,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 20);
+    assert_eq!(res.total_pages, 5);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: Some(vec![0, 2]),
+            offset: 100,
+            limit: 20,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 0);
+    assert_eq!(res.total_pages, 5);
 }
 // fn full_flow() {
 //     let env = init();

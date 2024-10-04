@@ -1,4 +1,4 @@
-use std::{ borrow::BorrowMut, collections::{ BTreeMap, HashMap } };
+use std::{ borrow::BorrowMut, collections::{ BTreeMap, HashMap }, ops::Div };
 use candid::Principal;
 use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{
@@ -206,17 +206,42 @@ impl CollectionModel {
         };
 
         let total_pages: u64 = match cat_ids.len() {
-            0 => { self.collections.len() }
+            0 => {
+                match self.collections.len().checked_div(limit as u64) {
+                    Some(pages) => {
+                        if pages == 0 { 1 } else { pages }
+                    }
+                    None => 1,
+                }
+            }
             _ => {
-                cats.iter()
+                let total_cols: u64 = cats
+                    .iter()
                     .map(|(_, cat)| cat.collection_count)
-                    .sum()
+                    .sum();
+
+                match total_cols.checked_div(limit as u64) {
+                    Some(pages) => {
+                        if pages == 0 { 1 } else { pages }
+                    }
+                    None => 1,
+                }
             }
         };
 
-        let collections: Vec<Collection> = self.collections
+        // collect array of collections
+        let mut cols: Vec<Collection> = self.collections
             .iter()
-            .filter(|(id, collection)| {
+            .map(|(prin, col)| col.clone())
+            .collect();
+
+        // make sure promoted are first
+        cols.sort_by(|a, b| b.is_promoted.cmp(&a.is_promoted));
+
+        // apply pagination and category filtering
+        let collections: Vec<Collection> = cols
+            .into_iter()
+            .filter(|collection| {
                 match cat_ids.len() {
                     0 => { true }
                     _ => {
@@ -230,7 +255,6 @@ impl CollectionModel {
             })
             .skip(offset)
             .take(limit)
-            .map(|(prin, col)| col.clone())
             .collect();
 
         Ok(GetCollectionsResult {
