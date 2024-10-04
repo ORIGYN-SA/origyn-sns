@@ -1,8 +1,8 @@
-use std::collections::BTreeMap;
+use std::{ borrow::BorrowMut, collections::{ BTreeMap, HashMap } };
 use candid::Principal;
 use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{
-    category::Category,
+    category::{ Category, CategoryID },
     collection::{ Collection, GetCollectionsFilters },
     errors::{
         GetCollectionsError,
@@ -12,6 +12,7 @@ use collection_index_api::{
         SetCategoryHiddenError,
         UpdateCollectionCategoryError,
     },
+    get_collections::GetCollectionsResult,
 };
 use serde::{ Deserialize, Serialize };
 
@@ -21,7 +22,7 @@ use crate::memory::{ get_collection_model_memory, VM };
 pub struct CollectionModel {
     #[serde(skip, default = "init_collection_model")]
     collections: StableBTreeMap<Principal, Collection, VM>,
-    categories: BTreeMap<String, Category>,
+    categories: HashMap<u64, Category>,
 }
 
 fn init_collection_model() -> StableBTreeMap<Principal, Collection, VM> {
@@ -33,7 +34,7 @@ impl Default for CollectionModel {
     fn default() -> Self {
         Self {
             collections: init_collection_model(),
-            categories: BTreeMap::new(),
+            categories: HashMap::new(),
         }
     }
 }
@@ -43,24 +44,30 @@ impl CollectionModel {
 
     pub fn demote_collection() {}
 
-    pub fn insert_category(&mut self, category_name: String) -> Result<bool, InsertCategoryError> {
-        if self.categories.contains_key(&category_name) {
+    pub fn insert_category(&mut self, category_name: String) -> Result<(), InsertCategoryError> {
+        if
+            self.categories
+                .iter()
+                .any(|cat| cat.1.name.to_lowercase() == category_name.to_lowercase())
+        {
             return Err(InsertCategoryError::CategoryAlreadyExists);
         }
 
-        self.categories.insert(category_name.clone(), Category::default());
+        let mut new_category = Category::default();
+        new_category.name = category_name;
+        self.categories.insert(self.categories.len() as u64, new_category);
 
-        Ok(true)
+        Ok(())
     }
 
-    pub fn set_category_hidden(
+    pub fn set_category_inactive(
         &mut self,
-        category_name: &str,
-        hidden: bool
-    ) -> Result<bool, SetCategoryHiddenError> {
-        if let Some(category) = self.categories.get_mut(category_name) {
-            category.hidden = hidden;
-            Ok(true)
+        category_id: &CategoryID,
+        switch: bool
+    ) -> Result<(), SetCategoryHiddenError> {
+        if let Some(category) = self.categories.get_mut(category_id) {
+            category.active = switch;
+            Ok(())
         } else {
             Err(SetCategoryHiddenError::CategoryNotFound)
         }
@@ -69,73 +76,68 @@ impl CollectionModel {
     pub fn update_collection_category(
         &mut self,
         collection_canister_id: Principal,
-        new_category: String
-    ) -> Result<bool, UpdateCollectionCategoryError> {
-        if !self.collections.contains_key(&collection_canister_id) {
-            return Err(UpdateCollectionCategoryError::CollectionNotFound);
-        }
+        new_category_id: CategoryID
+    ) -> Result<(), UpdateCollectionCategoryError> {
+        if let Some(category) = self.categories.get_mut(&new_category_id) {
+            if let Some(mut collection) = self.collections.get(&collection_canister_id) {
+                collection.category = Some(new_category_id.clone());
 
-        if !self.categories.contains_key(&new_category) {
-            return Err(UpdateCollectionCategoryError::CategoryNotFound(new_category.clone()));
-        }
+                self.collections.remove(&collection.canister_id);
+                self.collections.insert(collection_canister_id, collection);
 
-        for (_, category) in self.categories.iter_mut() {
-            if category.collection_ids.contains(&collection_canister_id) {
-                category.collection_ids.retain(|id| id != &collection_canister_id);
-                category.total_collections -= 1;
-                break;
+                category.collection_count += 1;
+                Ok(())
+            } else {
+                Err(UpdateCollectionCategoryError::CollectionNotFound)
             }
+        } else {
+            Err(
+                UpdateCollectionCategoryError::CategoryNotFound(
+                    format!("Category not found for category id : {new_category_id}")
+                )
+            )
         }
-
-        if let Some(new_category) = self.categories.get_mut(&new_category) {
-            new_category.collection_ids.push(collection_canister_id.clone());
-            new_category.total_collections += 1;
-        }
-
-        if let Some(mut collection) = self.collections.remove(&collection_canister_id) {
-            collection.category = new_category.clone();
-            self.collections.insert(collection_canister_id, collection);
-        }
-
-        Ok(true)
     }
 
     pub fn insert_collection(
         &mut self,
         collection_canister_id: Principal,
         collection: &mut Collection,
-        category_name: String
-    ) -> Result<bool, InsertCollectionError> {
+        category_id: u64
+    ) -> Result<(), InsertCollectionError> {
         if self.collections.contains_key(&collection_canister_id) {
             return Err(InsertCollectionError::CollectionAlreadyExists);
         }
 
-        if !self.categories.contains_key(&category_name) {
-            return Err(InsertCollectionError::CategoryNotFound(category_name));
-        }
+        let category = if let Some(cat) = self.categories.get_mut(&category_id) {
+            cat
+        } else {
+            return Err(
+                InsertCollectionError::CategoryNotFound(
+                    format!(
+                        "Category with an id of {category_id} could not be found. failed to insert new collection"
+                    )
+                )
+            );
+        };
 
-        collection.category = category_name.clone();
         self.collections.insert(collection_canister_id.clone(), collection.clone());
-
-        if let Some(category) = self.categories.get_mut(&category_name) {
-            category.collection_ids.push(collection_canister_id.clone());
-            category.total_collections += 1;
-        }
-
-        Ok(true)
+        category.collection_count += 1;
+        Ok(())
     }
 
     pub fn remove_collection(
         &mut self,
         collection_canister_id: Principal
-    ) -> Result<bool, RemoveCollectionError> {
+    ) -> Result<(), RemoveCollectionError> {
         if let Some(collection) = self.collections.remove(&collection_canister_id) {
-            if let Some(category) = self.categories.get_mut(&collection.category) {
-                category.collection_ids.retain(|id| id != &collection_canister_id);
-                category.total_collections -= 1;
+            if let Some(cat_id) = &collection.category {
+                if let Some(category) = self.categories.get_mut(cat_id) {
+                    category.collection_count -= 1;
+                }
             }
 
-            Ok(true)
+            Ok(())
         } else {
             Err(RemoveCollectionError::CollectionNotFound)
         }
@@ -143,55 +145,68 @@ impl CollectionModel {
 
     pub fn get_collections(
         &self,
-        filters: GetCollectionsFilters,
+        categories: Option<Vec<u64>>,
         offset: usize,
         limit: usize
-    ) -> Result<Vec<Collection>, GetCollectionsError> {
-        match filters.category {
-            Some(category_name) => {
-                if let Some(category) = self.categories.get(&category_name) {
-                    let collection_ids = &category.collection_ids;
+    ) -> Result<GetCollectionsResult, GetCollectionsError> {
+        let mut cat_ids: Vec<u64> = vec![];
+        let cats: Vec<(CategoryID, Category)> = if let Some(ids) = categories {
+            let full_cats = ids
+                .iter()
+                .filter_map(|cat_id| {
+                    let cat = self.categories.get(cat_id);
+                    if let Some(category) = cat {
+                        if category.active {
+                            cat_ids.push(cat_id.clone());
+                            Some((cat_id.clone(), category.clone()))
+                        } else {
+                            None
+                        }
+                    } else {
+                        None
+                    }
+                })
+                .collect();
+            full_cats
+        } else {
+            vec![]
+        };
 
-                    let paginated_ids = collection_ids
-                        .iter()
-                        .skip(offset)
-                        .take(limit)
-                        .cloned()
-                        .collect::<Vec<Principal>>();
+        let total_pages: u64 = match cat_ids.len() {
+            0 => { self.collections.len() }
+            _ => {
+                cats.iter()
+                    .map(|(_, cat)| cat.collection_count)
+                    .sum()
+            }
+        };
 
-                    let mut collections = Vec::new();
-                    for collection_id in paginated_ids {
-                        if let Some(collection) = self.collections.get(&collection_id) {
-                            collections.push(collection.clone());
+        let collections: Vec<Collection> = self.collections
+            .iter()
+            .filter(|(id, collection)| {
+                match cat_ids.len() {
+                    0 => { true }
+                    _ => {
+                        if let Some(collection_cat_id) = collection.category {
+                            cat_ids.contains(&&collection_cat_id)
+                        } else {
+                            false
                         }
                     }
-
-                    Ok(collections)
-                } else {
-                    Err(GetCollectionsError::CategoryNotFound(category_name))
                 }
-            }
-            None => {
-                let mut collections_vec: Vec<(Principal, Collection)> = self.collections
-                    .iter()
-                    .collect();
+            })
+            .skip(offset)
+            .take(limit)
+            .map(|(prin, col)| col.clone())
+            .collect();
 
-                collections_vec.sort_by_key(|(_, coll)| !coll.is_promoted);
-
-                Ok(
-                    collections_vec
-                        .iter()
-                        .skip(offset)
-                        .take(limit)
-                        .cloned()
-                        .map(|(_, col)| col)
-                        .collect()
-                )
-            }
-        }
+        Ok(GetCollectionsResult {
+            collections,
+            total_pages,
+        })
     }
 
-    pub fn get_all_categories(&self) -> Vec<(String, Category)> {
+    pub fn get_all_categories(&self) -> Vec<(CategoryID, Category)> {
         self.categories
             .iter()
             .map(|(name, cat)| (name.clone(), cat.clone()))

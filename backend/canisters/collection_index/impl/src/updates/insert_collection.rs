@@ -18,13 +18,11 @@ pub async fn insert_collection(args: InsertCollectionArgs) -> InsertCollectionRe
     collection.is_promoted = args.is_promoted;
     collection.canister_id = args.collection_canister_id;
 
-    Ok(
-        mutate_state(|state|
-            state.data.collections.insert_collection(
-                args.collection_canister_id,
-                &mut collection,
-                args.category
-            )
-        )?
+    mutate_state(|state|
+        state.data.collections.insert_collection(
+            args.collection_canister_id,
+            &mut collection,
+            args.category
+        )
     )
 }

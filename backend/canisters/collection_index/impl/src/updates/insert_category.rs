@@ -9,5 +9,5 @@ use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
 pub fn insert_category(args: InsertCategoryArgs) -> InsertCategoryResponse {
-    Ok(mutate_state(|state| { state.data.collections.insert_category(args.category_name) })?)
+    mutate_state(|state| { state.data.collections.insert_category(args.category_name) })
 }

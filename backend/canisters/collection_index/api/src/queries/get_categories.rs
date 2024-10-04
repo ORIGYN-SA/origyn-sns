@@ -1,4 +1,4 @@
-use crate::category::Category;
+use crate::category::{ Category, CategoryID };
 
 pub type Args = ();
-pub type Response = Result<Vec<(String, Category)>, ()>;
+pub type Response = Result<Vec<(CategoryID, Category)>, ()>;

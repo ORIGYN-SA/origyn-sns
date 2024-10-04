@@ -11,7 +11,7 @@ pub type CertificateTokenId = String;
 pub struct Collection {
     pub canister_id: Principal,
     pub name: Option<String>,
-    pub category: String,
+    pub category: Option<u64>,
     pub is_promoted: bool,
 }
 
@@ -20,7 +20,7 @@ impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
         Self {
             name: value.name,
             canister_id: Principal::anonymous(),
-            category: String::new(),
+            category: None,
             is_promoted: false,
         }
     }
@@ -38,5 +38,5 @@ impl Storable for Collection {
 }
 
 pub struct GetCollectionsFilters {
-    pub category: Option<String>,
+    pub categories: Option<Vec<u64>>,
 }

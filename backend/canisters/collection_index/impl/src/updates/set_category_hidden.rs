@@ -9,9 +9,7 @@ use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
 pub fn set_category_hidden(args: SetCategoryHiddenArgs) -> SetCategoryHiddenResponse {
-    Ok(
-        mutate_state(|state| {
-            state.data.collections.set_category_hidden(&args.category_name, args.hidden)
-        })?
-    )
+    mutate_state(|state| {
+        state.data.collections.set_category_inactive(&args.category_id, args.hidden)
+    })
 }

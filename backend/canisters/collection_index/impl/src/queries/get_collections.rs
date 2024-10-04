@@ -12,13 +12,7 @@ use crate::state::mutate_state;
 pub async fn get_collections(args: GetCollectionsArgs) -> GetCollectionsResponse {
     Ok(
         mutate_state(|state|
-            state.data.collections.get_collections(
-                GetCollectionsFilters {
-                    category: args.category,
-                },
-                args.offset,
-                args.limit
-            )
+            state.data.collections.get_collections(args.categories, args.offset, args.limit)
         )?
     )
 }
