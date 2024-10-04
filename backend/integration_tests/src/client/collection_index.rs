@@ -7,6 +7,7 @@ use collection_index_api::updates::{
     set_category_visibility,
     update_collection_category,
     remove_collection,
+    insert_fake_collection,
 };
 
 generate_query_call!(get_collections);
@@ -16,3 +17,4 @@ generate_update_call!(insert_collection);
 generate_update_call!(set_category_visibility);
 generate_update_call!(update_collection_category);
 generate_update_call!(remove_collection);
+generate_update_call!(insert_fake_collection);

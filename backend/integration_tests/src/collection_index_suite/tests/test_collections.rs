@@ -1,4 +1,5 @@
 use candid::Principal;
+use collection_index_api::collection::Collection;
 use collection_index_api::errors::{ InsertCollectionError, RemoveCollectionError };
 use collection_index_api::get_collections::GetCollectionsArgs;
 use collection_index_api::insert_category::InsertCategoryArgs;
@@ -6,18 +7,20 @@ use collection_index_api::insert_collection::InsertCollectionArgs;
 use collection_index_api::remove_collection::RemoveCollectionArgs;
 use collection_index_api::set_category_visibility::SetCategoryVisibility;
 use collection_index_api::update_collection_category::UpdateCollectionCategoryArgs;
+use collection_index_api::insert_fake_collection::Args as InsertFakeCollectionArgs;
 
 use crate::client::collection_index::{
     get_categories,
     get_collections,
     insert_category,
     insert_collection,
+    insert_fake_collection,
     remove_collection,
     set_category_visibility,
     update_collection_category,
 };
 use crate::collection_index_suite::{ init::init, TestEnv };
-use crate::utils::tick_n_blocks;
+use crate::utils::{ random_principal, tick_n_blocks };
 
 #[test]
 fn insert_collection_basic() {
@@ -367,6 +370,82 @@ fn test_pagination_works_correctly() {
         ).unwrap(),
         ()
     );
+
+    let mut collection_prins: Vec<Principal> = vec![];
+
+    /// insert 50 colletions with category A // 0 - 49
+    for i in 0..50 {
+        let collection_prin = random_principal();
+        let res = insert_fake_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertFakeCollectionArgs {
+                collection: Collection {
+                    canister_id: collection_prin,
+                    name: Some(format!("Collection {i}")),
+                    category: Some(0u64),
+                    is_promoted: false,
+                },
+                category: 0,
+            })
+        ).unwrap();
+        collection_prins.push(collection_prin);
+    }
+
+    /// insert 50 colletions with category A // 50 - 99
+    for i in 50..100 {
+        let collection_prin = random_principal();
+        let res = insert_fake_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertFakeCollectionArgs {
+                collection: Collection {
+                    canister_id: collection_prin,
+                    name: Some(format!("Collection {i}")),
+                    category: Some(1u64),
+                    is_promoted: false,
+                },
+                category: 1,
+            })
+        ).unwrap();
+        collection_prins.push(collection_prin);
+    }
+
+    /// insert 50 colletions with category A // 50 - 99
+    for i in 100..150 {
+        let collection_prin = random_principal();
+        let res = insert_fake_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertFakeCollectionArgs {
+                collection: Collection {
+                    canister_id: collection_prin,
+                    name: Some(format!("Collection {i}")),
+                    category: Some(2u64),
+                    is_promoted: false,
+                },
+                category: 2,
+            })
+        ).unwrap();
+        collection_prins.push(collection_prin);
+    }
+
+    // get all collections
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: None,
+            offset: 0,
+            limit: 200,
+        })
+    ).unwrap();
+
+    assert_eq!(res.collections.len(), 150);
 }
 // fn full_flow() {
 //     let env = init();
