@@ -179,6 +179,14 @@ fn removing_a_collection_should_work() {
         ()
     );
 
+    let categories = get_categories(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &()
+    ).unwrap();
+    assert_eq!(categories[0].1.collection_count, 0);
+
     assert_eq!(
         insert_collection(
             &mut pic,
@@ -193,12 +201,28 @@ fn removing_a_collection_should_work() {
         ()
     );
 
+    let categories = get_categories(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &()
+    ).unwrap();
+    assert_eq!(categories[0].1.collection_count, 1);
+
     let res = remove_collection(
         &mut pic,
         principal_ids.controller,
         collection_canister,
         &(RemoveCollectionArgs { collection_canister_id: origyn_nft_one_canister_id })
     );
+
+    let categories = get_categories(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &()
+    ).unwrap();
+    assert_eq!(categories[0].1.collection_count, 0);
 
     matches!(res, Ok(()));
 }
@@ -300,6 +324,50 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
     assert_eq!(category_b.1.collection_count, 1);
 }
 
+#[test]
+fn test_pagination_works_correctly() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+
+    let collection_canister = canister_ids.collection_index;
+    let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
+
+    // insert 3 categories
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category A".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category B".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+    // Insert a new category, "Category A"
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category C".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+}
 // fn full_flow() {
 //     let env = init();
 //     let TestEnv { mut pic, canister_ids, principal_ids } = env;
