@@ -1,6 +1,6 @@
 use crate::{ generate_query_call, generate_update_call };
 
-use collection_index_api::queries::{ get_categories, get_collections };
+use collection_index_api::queries::{ get_categories, get_collections, search_collections };
 use collection_index_api::updates::{
     insert_category,
     insert_collection,
@@ -12,6 +12,7 @@ use collection_index_api::updates::{
 
 generate_query_call!(get_collections);
 generate_query_call!(get_categories);
+generate_query_call!(search_collections);
 generate_update_call!(insert_category);
 generate_update_call!(insert_collection);
 generate_update_call!(set_category_visibility);

@@ -50,6 +50,12 @@ type Result_5 = variant { Ok; Err };
 type Result_6 = variant { Ok; Err : RemoveCollectionError };
 type Result_7 = variant { Ok; Err : SetCategoryVisibilityError };
 type Result_8 = variant { Ok; Err : UpdateCollectionCategoryError };
+type SearchCollectionsArg = record {
+  categories : opt vec nat64;
+  search_string : text;
+  offset : nat64;
+  limit : nat64;
+};
 type SetCategoryVisibility = record { hidden : bool; category_id : nat64 };
 type SetCategoryVisibilityError = variant { CategoryNotFound };
 type UpdateCollectionCategoryArgs = record {
@@ -68,6 +74,7 @@ service : (InitArgs) -> {
   insert_collection : (InsertCollectionArgs) -> (Result_4);
   insert_fake_collection : (InsertFakeCollectionArgs) -> (Result_5);
   remove_collection : (RemoveCollectionArgs) -> (Result_6);
+  search_collections : (SearchCollectionsArg) -> (GetCollectionsResult) query;
   set_category_visibility : (SetCategoryVisibility) -> (Result_7);
   update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_8);
 }

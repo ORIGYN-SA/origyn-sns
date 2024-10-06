@@ -13,6 +13,7 @@ use collection_index_api::{
         UpdateCollectionCategoryError,
     },
     get_collections::GetCollectionsResult,
+    search_collections::SearchCollectionsResponse,
 };
 use serde::{ Deserialize, Serialize };
 use tracing::trace;
@@ -263,6 +264,82 @@ impl CollectionModel {
         })
     }
 
+    pub fn search_collections(
+        &self,
+        categories: Option<Vec<u64>>,
+        search_query: String,
+        offset: usize,
+        limit: usize
+    ) -> SearchCollectionsResponse {
+        let mut cat_ids: Vec<u64> = vec![];
+        let cats: Vec<(CategoryID, Category)> = if let Some(ids) = categories {
+            let full_cats = ids
+                .iter()
+                .filter_map(|cat_id| {
+                    let cat = self.categories.get(cat_id);
+                    if let Some(category) = cat {
+                        if category.active {
+                            cat_ids.push(cat_id.clone());
+                            Some((cat_id.clone(), category.clone()))
+                        } else {
+                            None
+                        }
+                    } else {
+                        None
+                    }
+                })
+                .collect();
+            full_cats
+        } else {
+            vec![]
+        };
+
+        // collect array of collections
+        let mut cols: Vec<Collection> = self.collections
+            .iter()
+            .map(|(prin, col)| col.clone())
+            .collect();
+
+        // make sure promoted are first
+        cols.sort_by(|a, b| b.is_promoted.cmp(&a.is_promoted));
+
+        // apply pagination and category filtering
+        let collections: Vec<Collection> = cols
+            .into_iter()
+            .filter(|collection| {
+                match cat_ids.len() {
+                    0 => { check_search_hit(&collection.name, &search_query) }
+                    _ => {
+                        if let Some(collection_cat_id) = collection.category {
+                            cat_ids.contains(&&collection_cat_id) &&
+                                check_search_hit(&collection.name, &search_query)
+                        } else {
+                            false
+                        }
+                    }
+                }
+            })
+            .collect();
+
+        let total_pages = match (collections.len().clone() as u64).checked_div(limit as u64) {
+            Some(pages) => {
+                if pages == 0 { 1 } else { pages }
+            }
+            None => 1,
+        };
+
+        let collections: Vec<Collection> = collections
+            .into_iter()
+            .skip(offset)
+            .take(limit)
+            .collect();
+
+        SearchCollectionsResponse {
+            collections,
+            total_pages,
+        }
+    }
+
     pub fn get_all_categories(&self) -> Vec<(CategoryID, Category)> {
         self.categories
             .iter()
@@ -272,5 +349,38 @@ impl CollectionModel {
 
     pub fn total_collections(&self) -> u64 {
         self.collections.len()
+    }
+}
+
+fn check_search_hit(collection_name: &Option<String>, search_string: &String) -> bool {
+    // if let Some(name) = collection_name {
+    //     let search_terms: Vec<String> = search_string
+    //         .to_lowercase()
+    //         .split_whitespace()
+    //         .map(|s| s.to_string())
+    //         .collect();
+
+    //     let name_lowercase = name.to_lowercase();
+
+    //     for term in &search_terms {
+    //         if !name_lowercase.contains(term) {
+    //             return false; // Early exit if any term is not found
+    //         }
+    //     }
+
+    //     true // Return true if all terms are found
+    // } else {
+    //     false
+    // }
+
+    if let Some(name) = collection_name {
+        // Convert both the collection name and search string to lowercase
+        let name_lowercase = name.to_lowercase();
+        let search_string_lowercase = search_string.to_lowercase();
+
+        // Check if the entire search string is a substring of the collection name
+        name_lowercase.contains(&search_string_lowercase)
+    } else {
+        false
     }
 }
