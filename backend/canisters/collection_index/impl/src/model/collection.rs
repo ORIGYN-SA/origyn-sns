@@ -350,6 +350,13 @@ impl CollectionModel {
     pub fn total_collections(&self) -> u64 {
         self.collections.len()
     }
+
+    pub fn get_all_collections(&self) -> Vec<Collection> {
+        self.collections
+            .iter()
+            .map(|(prin, collection)| collection)
+            .collect()
+    }
 }
 
 fn check_search_hit(collection_name: &Option<String>, search_string: &String) -> bool {

@@ -3,6 +3,7 @@
 #![allow(dead_code, unused_imports)]
 use candid::{ self, CandidType, Deserialize, Principal };
 use ic_cdk::api::call::CallResult as Result;
+
 use serde::Serialize;
 
 #[derive(CandidType, Deserialize, Debug, Clone, PartialEq)]

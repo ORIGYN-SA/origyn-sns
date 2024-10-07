@@ -70,6 +70,7 @@ service : (InitArgs) -> {
   add_authorised_principal : (principal) -> (Result);
   get_categories : () -> (Result_1) query;
   get_collections : (GetCollectionsArgs) -> (Result_2) query;
+  get_user_collections : (opt principal) -> (vec Collection);
   insert_category : (InsertCategoryArgs) -> (Result_3);
   insert_collection : (InsertCollectionArgs) -> (Result_4);
   insert_fake_collection : (InsertFakeCollectionArgs) -> (Result_5);
