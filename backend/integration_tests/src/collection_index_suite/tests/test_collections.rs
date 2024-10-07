@@ -82,6 +82,72 @@ fn insert_collection_basic() {
 }
 
 #[test]
+fn insert_collection_twice_with_same_category() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+
+    let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
+    let origyn_nft_two_canister_id = canister_ids.origyn_nft_two;
+    let collection_canister = canister_ids.collection_index;
+
+    // Insert a new category, "Category A"
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category A".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+
+    assert_eq!(
+        insert_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCollectionArgs {
+                collection_canister_id: origyn_nft_one_canister_id,
+                is_promoted: false,
+                category: 0,
+            })
+        ).unwrap(),
+        ()
+    );
+
+    assert_eq!(
+        insert_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCollectionArgs {
+                collection_canister_id: origyn_nft_two_canister_id,
+                is_promoted: false,
+                category: 0,
+            })
+        ).unwrap(),
+        ()
+    );
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: None,
+            offset: 0,
+            limit: 50,
+        })
+    ).unwrap();
+
+    assert_eq!(res.total_pages, 1);
+    assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
+    assert_eq!(res.collections[1].canister_id, origyn_nft_two_canister_id);
+}
+
+#[test]
 fn insert_collection_with_non_existent_category_should_fail() {
     let env = init();
     let TestEnv { mut pic, canister_ids, principal_ids } = env;
