@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import TagManager from 'react-gtm-module';
 import { useLocation, useRoutes } from 'react-router-dom';
 // import { FloatButton } from 'antd';
 import gsap from 'gsap';
@@ -12,6 +13,17 @@ import routes from './router';
 const whiteSections = {
     home: [1, 4, 5, 7, 8, 10, 11, 12],
 };
+
+const is_prod = import.meta.env.PROD;
+console.log(is_prod);
+if (is_prod) {
+    console.log('activating gtm');
+    const tagManagerArgs = {
+        gtmId: 'G-7NQBRJ2FC7',
+    };
+    TagManager.initialize(tagManagerArgs);
+}
+
 // 跳转第三方地址
 export const goCommunicate = (key: number) => {
     switch (key) {
@@ -54,7 +66,7 @@ function App() {
         console.log('isMobile', isMobile);
         const element = document.querySelector('.bgFix');
         // pathname !== '/newsroom' &&
-        if (pageWidth > 768) {
+        if (pageWidth > 768 && pathname !== '/runestone') {
             initSmoothScroll();
         }
 
@@ -120,7 +132,7 @@ function App() {
         tl.to(nav, { y: -250, duration: 0.21 }, 0);
     };
 
-    return (
+    const mainSite = (
         <div>
             {/* className={`noFixbg ${changebg ? 'changeBg' : ''}`} */}
             <div className="bgFix fixed top-0 z-[-5] h-[100vh] w-[100vw]"></div>
@@ -168,6 +180,10 @@ function App() {
             </div>
         </div>
     );
+
+    const runeStoneSite = views;
+
+    return pathname === '/runestone' ? runeStoneSite : mainSite;
 }
 
 export default App;
