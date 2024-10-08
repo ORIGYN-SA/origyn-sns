@@ -1,5 +1,6 @@
 use candid::Principal;
 use collection_index_api::origyn_nft::{ GetCollectionInfoError, GetCollectionInfoResult };
+use tracing::{ info, debug };
 
 pub async fn get_collection_info(
     collection_canister_id: Principal
@@ -9,6 +10,7 @@ pub async fn get_collection_info(
         &None
     ).await;
 
+    debug!("{result:?}");
     match result {
         Ok(result) => {
             match result {
@@ -16,6 +18,7 @@ pub async fn get_collection_info(
                     return Ok(data.into());
                 }
                 origyn_nft_reference::origyn_nft_reference_canister::CollectionResult::Err(err) => {
+                    debug!("{err:?}");
                     return Err(GetCollectionInfoError::GenericOrigynNftError(format!("{err:?}")));
                 }
             }
