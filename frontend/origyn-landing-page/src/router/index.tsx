@@ -5,6 +5,7 @@ import Home from '@/pages/home';
 import NewsRoom from '@/pages/newsRoom';
 import Products from '@/pages/products';
 import RoadMap from '@/pages/roadMap';
+import RuneStone from '@/pages/runeStone';
 import Technology from '@/pages/technology';
 
 const routes: RouteObject[] = [
@@ -39,6 +40,10 @@ const routes: RouteObject[] = [
     {
         path: '/*',
         element: <Navigate to="/" />,
+    },
+    {
+        path: '/runestone',
+        element: <RuneStone />,
     },
 ];
 

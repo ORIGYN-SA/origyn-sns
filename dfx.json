@@ -32,6 +32,15 @@
       "source": ["frontend/ogy_dashboard/dist"],
       "type": "assets"
     },
+    "origyn-landing-page": {
+      "declarations": {
+        "bindings": [],
+        "env_override": null,
+        "output": null
+      },
+      "source": ["frontend/origyn-landing-page/dist"],
+      "type": "assets"
+    },
     "ogy_ledger": {
       "build": "",
       "candid": "backend/external_canisters/icrc_ledger/api/can.did",

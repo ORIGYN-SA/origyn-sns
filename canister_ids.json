@@ -47,5 +47,9 @@
   "canister_jobs": {
     "ic": "bvbns-zaaaa-aaaan-qmnbq-cai",
     "staging": "gf7uu-oyaaa-aaaap-qhmla-cai"
+  },
+  "origyn-landing-page": {
+    "ic": "zsnes-jaaaa-aaaah-qdqmq-cai",
+    "staging": "ujkle-wiaaa-aaaap-qhxsa-cai"
   }
 }
