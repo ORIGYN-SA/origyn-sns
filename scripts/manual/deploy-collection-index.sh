@@ -22,10 +22,18 @@ dfx canister call --network staging collection_index insert_category "(record { 
 dfx canister call --network staging collection_index insert_category "(record { category_name = \"Diamonds\"; })"
 dfx canister call --network staging collection_index insert_category "(record { category_name = \"Art\"; })"
 
-# GLD NFT 1g prod 
-dfx canister call --network staging collection_index insert_collection "(record {is_promoted = true; collection_canister_id = principal \"obapm-2iaaa-aaaak-qcgca-cai\"; category = 0; })"
+
+
+# GLD NFT 1g prod
+dfx canister call --network staging collection_index insert_collection "(record {is_promoted = true; collection_canister_id = principal \"io7gn-vyaaa-aaaak-qcbiq-cai\"; category = 0; })"
 
 # GLD NFT 10g prod
+dfx canister call --network staging collection_index insert_collection "(record {is_promoted = true; collection_canister_id = principal \"sy3ra-iqaaa-aaaao-aixda-cai\"; category = 0; })"
+
+# GLD NFT 1g staging 
+dfx canister call --network staging collection_index insert_collection "(record {is_promoted = true; collection_canister_id = principal \"obapm-2iaaa-aaaak-qcgca-cai\"; category = 0; })"
+
+# GLD NFT 10g staging
 dfx canister call --network staging collection_index insert_collection "(record {is_promoted = false; collection_canister_id = principal \"xyo2o-gyaaa-aaaal-qb55a-cai\"; category = 0; })"
 
 # Federitaly classic
