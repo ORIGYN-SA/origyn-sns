@@ -33,10 +33,6 @@ type InsertCollectionError = variant {
   CollectionAlreadyExists;
   CategoryNotFound : text;
 };
-type InsertFakeCollectionArgs = record {
-  collection : Collection;
-  category : nat64;
-};
 type RemoveCollectionArgs = record { collection_canister_id : principal };
 type RemoveCollectionError = variant { CollectionNotFound };
 type Result = variant { Ok : bool; Err : text };
@@ -48,10 +44,9 @@ type Result_3 = variant {
 };
 type Result_4 = variant { Ok; Err : InsertCategoryError };
 type Result_5 = variant { Ok; Err : InsertCollectionError };
-type Result_6 = variant { Ok; Err };
-type Result_7 = variant { Ok; Err : RemoveCollectionError };
-type Result_8 = variant { Ok; Err : SetCategoryVisibilityError };
-type Result_9 = variant { Ok; Err : UpdateCollectionCategoryError };
+type Result_6 = variant { Ok; Err : RemoveCollectionError };
+type Result_7 = variant { Ok; Err : SetCategoryVisibilityError };
+type Result_8 = variant { Ok; Err : UpdateCollectionCategoryError };
 type SearchCollectionsArg = record {
   categories : opt vec nat64;
   search_string : text;
@@ -76,9 +71,8 @@ service : (InitArgs) -> {
   get_user_collections : (opt principal) -> (vec Collection);
   insert_category : (InsertCategoryArgs) -> (Result_4);
   insert_collection : (InsertCollectionArgs) -> (Result_5);
-  insert_fake_collection : (InsertFakeCollectionArgs) -> (Result_6);
-  remove_collection : (RemoveCollectionArgs) -> (Result_7);
+  remove_collection : (RemoveCollectionArgs) -> (Result_6);
   search_collections : (SearchCollectionsArg) -> (GetCollectionsResult) query;
-  set_category_visibility : (SetCategoryVisibility) -> (Result_8);
-  update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_9);
+  set_category_visibility : (SetCategoryVisibility) -> (Result_7);
+  update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_8);
 }
