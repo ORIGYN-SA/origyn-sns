@@ -5,6 +5,7 @@ use collection_index_api::{
     category::{ Category, CategoryID },
     collection::{ Collection, GetCollectionsFilters },
     errors::{
+        GetCollectionByPrincipal,
         GetCollectionsError,
         InsertCategoryError,
         InsertCollectionError,
@@ -357,29 +358,19 @@ impl CollectionModel {
             .map(|(prin, collection)| collection)
             .collect()
     }
+
+    pub fn get_collection_by_key(
+        &self,
+        canister_id: Principal
+    ) -> Result<Collection, GetCollectionByPrincipal> {
+        match self.collections.get(&canister_id) {
+            Some(collection) => Ok(collection),
+            None => { Err(GetCollectionByPrincipal::CollectionNotFound) }
+        }
+    }
 }
 
 fn check_search_hit(collection_name: &Option<String>, search_string: &String) -> bool {
-    // if let Some(name) = collection_name {
-    //     let search_terms: Vec<String> = search_string
-    //         .to_lowercase()
-    //         .split_whitespace()
-    //         .map(|s| s.to_string())
-    //         .collect();
-
-    //     let name_lowercase = name.to_lowercase();
-
-    //     for term in &search_terms {
-    //         if !name_lowercase.contains(term) {
-    //             return false; // Early exit if any term is not found
-    //         }
-    //     }
-
-    //     true // Return true if all terms are found
-    // } else {
-    //     false
-    // }
-
     if let Some(name) = collection_name {
         // Convert both the collection name and search string to lowercase
         let name_lowercase = name.to_lowercase();

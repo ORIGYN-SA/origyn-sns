@@ -5,6 +5,7 @@ use collection_index_api::queries::{
     get_collections,
     search_collections,
     get_user_collections,
+    get_collection_by_principal,
 };
 use collection_index_api::updates::{
     insert_category,
@@ -25,3 +26,4 @@ generate_update_call!(update_collection_category);
 generate_update_call!(remove_collection);
 generate_update_call!(insert_fake_collection);
 generate_update_call!(get_user_collections);
+generate_query_call!(get_collection_by_principal);

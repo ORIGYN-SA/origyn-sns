@@ -16,6 +16,7 @@ use crate::client::origyn_nft_reference::client::{ get_token_id_as_nat, icrc7_ow
 
 use crate::client::collection_index::{
     get_categories,
+    get_collection_by_principal,
     get_collections,
     get_user_collections,
     insert_category,
@@ -29,6 +30,40 @@ use crate::client::collection_index::{
 use crate::collection_index_suite::nft_utils;
 use crate::collection_index_suite::{ init::init, TestEnv };
 use crate::utils::{ random_principal, tick_n_blocks };
+
+fn init_nft_with_premint_nft(
+    pic: &mut PocketIc,
+    origyn_nft: Principal,
+    originator: Principal,
+    net_principal: Principal,
+    nft_owner: Principal,
+    nft_name: String
+) -> bool {
+    nft_utils::build_standard_nft(
+        pic,
+        nft_name.clone(),
+        origyn_nft.clone(),
+        origyn_nft.clone(),
+        originator.clone(),
+        Nat::from(1024 as u32),
+        false,
+        net_principal.clone()
+    );
+
+    let mint_return: origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult = crate::client::origyn_nft_reference::client::mint_nft_origyn(
+        pic,
+        origyn_nft.clone(),
+        Some(net_principal.clone()),
+        (nft_name.clone(), OrigynAccount::Account { owner: nft_owner.clone(), sub_account: None })
+    );
+
+    println!("mint_return: {:?}", mint_return);
+
+    match mint_return {
+        origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult::Ok(_) => true,
+        _ => false,
+    }
+}
 
 #[test]
 fn insert_collection_basic() {
@@ -79,6 +114,52 @@ fn insert_collection_basic() {
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
+}
+
+#[test]
+fn test_get_collection_by_principal_works_correctly() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+
+    let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
+    let origyn_nft_two_canister_id = canister_ids.origyn_nft_two;
+    let collection_canister = canister_ids.collection_index;
+
+    // Insert a new category, "Category A"
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category A".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+
+    assert_eq!(
+        insert_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCollectionArgs {
+                collection_canister_id: origyn_nft_one_canister_id,
+                is_promoted: false,
+                category: 0,
+            })
+        ).unwrap(),
+        ()
+    );
+
+    let res = get_collection_by_principal(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &origyn_nft_one_canister_id
+    ).unwrap();
+
+    assert_eq!(res.canister_id, origyn_nft_one_canister_id);
 }
 
 #[test]
@@ -877,38 +958,4 @@ fn test_get_user_collections_works_correctly() {
 
     assert_eq!(res.len(), 1);
     assert_eq!(res[0].canister_id, origyn_nft)
-}
-
-fn init_nft_with_premint_nft(
-    pic: &mut PocketIc,
-    origyn_nft: Principal,
-    originator: Principal,
-    net_principal: Principal,
-    nft_owner: Principal,
-    nft_name: String
-) -> bool {
-    nft_utils::build_standard_nft(
-        pic,
-        nft_name.clone(),
-        origyn_nft.clone(),
-        origyn_nft.clone(),
-        originator.clone(),
-        Nat::from(1024 as u32),
-        false,
-        net_principal.clone()
-    );
-
-    let mint_return: origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult = crate::client::origyn_nft_reference::client::mint_nft_origyn(
-        pic,
-        origyn_nft.clone(),
-        Some(net_principal.clone()),
-        (nft_name.clone(), OrigynAccount::Account { owner: nft_owner.clone(), sub_account: None })
-    );
-
-    println!("mint_return: {:?}", mint_return);
-
-    match mint_return {
-        origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult::Ok(_) => true,
-        _ => false,
-    }
 }
