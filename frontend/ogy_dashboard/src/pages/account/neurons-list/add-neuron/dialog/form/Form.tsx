@@ -1,6 +1,5 @@
 import { FormEvent } from "react";
 import { Link } from "react-router-dom";
-import type { FieldApi } from "@tanstack/react-form";
 import { useWallet } from "@amerej/artemis-react";
 import { Button } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
@@ -8,22 +7,11 @@ import { NNS_PLATFORM_URL } from "@constants/index";
 import { useAddNeuron } from "../../context";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const FieldInfo = ({ field }: { field: FieldApi<any, any, any, any> }) => {
-  return (
-    <>
-      {field.state.meta.touchedErrors ? (
-        <em className="text-red-500 text-sm ml-4 font-semibold">
-          {field.state.meta.touchedErrors}
-        </em>
-      ) : null}
-    </>
-  );
-};
 
 const Form = () => {
   const { principalId } = useWallet();
   const { form } = useAddNeuron();
-  const { Field, Subscribe, handleSubmit } = form;
+  const { Subscribe, handleSubmit } = form;
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,11 +54,9 @@ const Form = () => {
       <form onSubmit={(e) => handleOnSubmit(e)}>
         <Subscribe
           selector={(state) => [
-            state.canSubmit,
             state.isSubmitting,
-            state.isTouched,
           ]}
-          children={([canSubmit, isSubmitting, isTouched]) => (
+          children={([isSubmitting]) => (
             <Button
               type="submit"
               className="mt-4 w-full"

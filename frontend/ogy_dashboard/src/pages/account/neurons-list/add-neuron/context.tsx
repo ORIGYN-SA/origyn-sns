@@ -37,7 +37,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
   const handleShow = () => setShow(true);
   const mutation = useAddNeuronOwnership();
 
-  const handleAddNeuron = ({ neuronId }: { neuronId: string }) => {
+  const handleAddNeuron = () => {
     
     queryClient.invalidateQueries({
       queryKey: ["userGetNeuronsByOwner"],
@@ -59,8 +59,8 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
     defaultValues: {
       neuronId: "",
     },
-    onSubmit: async ({ value }) => {
-      handleAddNeuron({ neuronId: value.neuronId });
+    onSubmit: async () => {
+      handleAddNeuron();
     },
   });
 
