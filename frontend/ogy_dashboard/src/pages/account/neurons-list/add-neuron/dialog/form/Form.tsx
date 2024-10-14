@@ -6,8 +6,6 @@ import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NNS_PLATFORM_URL } from "@constants/index";
 import { useAddNeuron } from "../../context";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 const Form = () => {
   const { principalId } = useWallet();
   const { form } = useAddNeuron();
