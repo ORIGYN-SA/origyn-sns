@@ -2,7 +2,6 @@ import 'react';
 import { FormEvent, useState } from 'react';
 import axios from 'axios';
 import gsap from 'gsap';
-import CountdownTimer from '@/components/CountdownTimer';
 import DownArrowWhite from '@/assets/down-arrow-white.svg';
 import './index.scss';
 
@@ -19,9 +18,6 @@ const RuneStone = () => {
             ease: 'power2.inOut', // Smooth easing function
         });
     };
-
-    const TARGET_DATE = new Date('2024-10-08T10:00:00').getTime();
-    const countdown_time = TARGET_DATE;
 
     const submitForm = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -107,9 +103,6 @@ const RuneStone = () => {
                         src={DownArrowWhite}
                     />
                 </button>
-                <div className="text-kostas count-down-timer text-white">
-                    <CountdownTimer targetDate={countdown_time} />
-                </div>
             </div>
             <div className="rune-stone-page__content color-white w-90 mx-auto p-12  pt-6 sm:w-3/4 sm:p-0 md:w-2/3 md:max-w-[500px] md:p-0">
                 <div className="rune-stone-page__form pb-20" id="rune-stone-page__form">
