@@ -148,7 +148,11 @@ impl Default for Data {
             last_daily_ogy_burn: None,
             reward_distribution_interval: Some(TimeInterval::default()),
             reward_distribution_in_progress: Some(false),
-            neuron_sync_interval: Some(TimeInterval { weekday: None, start_hour: 9, end_hour: 11 }),
+            neuron_sync_interval: Some(TimeInterval {
+                weekday: None,
+                start_hour: 9,
+                end_hour: 11,
+            }),
         }
     }
 }
