@@ -8,9 +8,9 @@ import {
 import useVotingParticipationData from '@hooks/metrics/useVotingParticipationData'
 
 const SELECT_PERIOD_OPTIONS = [
-  { value: 'weekly' },
-  { value: 'monthly' },
-  { value: 'yearly' }
+  { value: 'weekly', label: 'Weekly' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' }
 ]
 
 const ChartVotingParticipation = ({
@@ -30,8 +30,6 @@ const ChartVotingParticipation = ({
 
   const barFill = useMemo(() => '#34d399', [])
 
-  console.log('Voting participation data:', data)
-
   return (
     <Card className={`${className}`} {...restProps}>
       <div className='flex items-center justify-between'>
@@ -47,7 +45,7 @@ const ChartVotingParticipation = ({
       {isError && (
         <ChartError>Error while fetching voting participation data.</ChartError>
       )}
-      {isSuccess && (
+      {isSuccess && !isLoading && (
         <div className='flex flex-col xl:flex-row mt-4'>
           {/* Left Panel */}
           <div className='xl:w-1/4 flex flex-col'>
