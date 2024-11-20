@@ -27,14 +27,14 @@ const useVotingPowerData = ({ period }: { period: string }) => {
         const metrics =
           (await actor.get_proposals_metrics()) as ProposalsMetrics
         const days = period === 'weekly' ? 7 : period === 'monthly' ? 30 : 365
-        const history = (await actor.get_voting_participation_history({
+        const history = (await actor.get_voting_power_ratio_history({
           days
         })) as VotingParticipationHistory
 
         const historyData = history.map(([day, balance]: [bigint, number]) => {
           const dateName = DateTime.fromMillis(0)
             .plus({ days: Number(day) })
-            .toFormat('LLL dd')
+            .toFormat('MMM dd yyyy') // Inclure l'année
           return {
             name: dateName,
             value: Number(balance),
