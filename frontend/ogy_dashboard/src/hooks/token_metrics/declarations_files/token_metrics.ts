@@ -74,6 +74,8 @@ export interface WalletOverview {
   ledger: Overview;
   governance: GovernanceStats;
 }
+
+export type VotingParticipationHistory = Array<[bigint, number]>;
 export default interface _SERVICE {
   get_active_users_count: () => Promise<ActiveUsers>;
   get_all_neuron_owners: () => Promise<Array<Principal>>;

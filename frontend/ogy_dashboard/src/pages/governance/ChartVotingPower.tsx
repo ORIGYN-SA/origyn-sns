@@ -8,9 +8,9 @@ import {
 } from '@components/charts'
 
 const SELECT_PERIOD_OPTIONS = [
-  { value: 'weekly' },
-  { value: 'monthly' },
-  { value: 'yearly' }
+  { value: 'weekly', label: 'Weekly' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' }
 ]
 
 const ChartVotingPower = ({
@@ -24,18 +24,17 @@ const ChartVotingPower = ({
     period: selectedPeriod
   })
 
+  console.log('data', data)
+
   const handleOnChangePeriod = (period: string) => {
     setSelectedPeriod(period)
   }
 
   const barFill = useMemo(() => '#34d399', [])
 
-  console.log('Voting power data:', data)
-
   return (
-    <Card className={`${className}`} {...restProps}>
+    <Card className={className} {...restProps}>
       <div className='flex items-center justify-between'>
-        {/* Title and Select */}
         <h2 className='text-lg font-semibold mr-2'>Origyn Voting Power</h2>
         <Select
           options={SELECT_PERIOD_OPTIONS}
@@ -48,11 +47,9 @@ const ChartVotingPower = ({
       {isError && (
         <ChartError>Error while fetching governance staking data.</ChartError>
       )}
-      {isSuccess && (
+      {isSuccess && data && !isLoading && (
         <div className='flex flex-col xl:flex-row mt-4'>
-          {/* Left Panel */}
           <div className='xl:w-1/4 flex flex-col'>
-            {/* Origyn Stake Power */}
             <div>
               <div className='flex'>
                 <span className='text-content/60 font-semibold mr-2'>
@@ -63,12 +60,11 @@ const ChartVotingPower = ({
                 </TooltipInfo>
               </div>
               <div className='text-2xl font-semibold mt-2'>
-                <span className='mr-3'>{data?.stakePower}</span>
+                <span className='mr-3'>{data.stakePower}</span>
                 <span className='text-content/60'>OGY</span>
               </div>
             </div>
             <div className='border-b border-[#E1E1E1] my-4 w-full xl:w-3/4' />
-            {/* Total Voting Power */}
             <div>
               <div className='flex'>
                 <span className='text-content/60 font-semibold mr-2'>
@@ -79,15 +75,13 @@ const ChartVotingPower = ({
                 </TooltipInfo>
               </div>
               <div className='text-2xl font-semibold mt-2'>
-                <span className='mr-3'>{data?.votingPower}</span>
+                <span className='mr-3'>{data.votingPower}</span>
                 <span className='text-content/60'>OGY</span>
               </div>
             </div>
           </div>
-
-          {/* Chart */}
           <div className='xl:w-3/4 h-72 rounded-xl'>
-            <ChartArea data={data?.dataChart} fill={barFill} />
+            <ChartArea data={data.dataChart} fill={barFill} />
           </div>
         </div>
       )}
