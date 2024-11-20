@@ -37,6 +37,7 @@ const useGetActiveAccounts = ({ start = 30 }: { start?: number }) => {
     queryFn: async (): Promise<TimeStats> => {
       const actor = await getActor("tokenStats", { isAnon: true });
       const results = await actor.get_daily_stats();
+      console.log(results);
       return results as TimeStats;
     },
     placeholderData: keepPreviousData,
