@@ -25,6 +25,7 @@ const Form = () => {
         add your principal 
         </div>
         <div className="mt-6">
+          Add
           <span className="font-semibold ml-1">
             <span>{principalId}</span>
             <span>
@@ -33,7 +34,6 @@ const Form = () => {
           </span>
           as a HotKey to your OGY neuron which you wish to include in this
           dashboard.
-          <br />
           To do this, open the{" "}
           <span>
             <Link

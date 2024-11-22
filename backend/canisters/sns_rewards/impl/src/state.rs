@@ -146,7 +146,11 @@ impl Default for Data {
             last_daily_reserve_transfer_time: TimestampMillis::default(),
             daily_ogy_burn_rate: None,
             last_daily_ogy_burn: None,
-            reward_distribution_interval: Some(TimeInterval::default()),
+            reward_distribution_interval: Some(TimeInterval {
+                weekday: Some("Monday".to_string()),
+                start_hour: 14,
+                end_hour: 16,
+            }),
             reward_distribution_in_progress: Some(false),
             neuron_sync_interval: Some(TimeInterval {
                 weekday: None,
