@@ -12,11 +12,9 @@ const Form = () => {
   const { Subscribe, handleSubmit } = form;
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    handleSubmit();
-
-    console.log(e)
     e.preventDefault();
     e.stopPropagation();
+    handleSubmit();
   };
   return (
     <>

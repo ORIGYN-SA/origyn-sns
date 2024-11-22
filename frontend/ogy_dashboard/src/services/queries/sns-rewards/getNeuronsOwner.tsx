@@ -11,8 +11,6 @@ const getNeuronsByOwner = async (): Promise<string[]> => {
         return Buffer.from(neuron.id).toString("hex");
       })
     : [];
-
-    
 };
 
 export default getNeuronsByOwner;
