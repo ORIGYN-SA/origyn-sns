@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.18] - 2024-11-22 
+
+#### Changed
+
+- **Add Neuron modal** - the text of the modal was wrong. user's only need to add their hotkey and the neurons should appear once the page loads or the confirm button in the add neuron modal is clicked to refresh the user's neuron list.
+
 ### [1.0.17] - 2024-08-15
 
 #### Added
