@@ -26,6 +26,19 @@ pub fn run() {
 }
 
 pub async fn synchronise_neuron_data() {
+    let is_synchronizing_neurons = read_state(|s| s.data.is_synchronizing_neurons);
+    // check neuron sync is within correct time frame
+    let sync_interval = match read_state(|s| s.data.neuron_sync_interval.clone()) {
+        Some(interval) => interval,
+        None => {
+            return;
+        }
+    };
+
+    let is_sync_time_valid = sync_interval.is_within_daily_interval(now_millis());
+    if !is_sync_time_valid && !is_synchronizing_neurons {
+        return;
+    }
     let canister_id = read_state(|state| state.data.sns_governance_canister);
     let is_test_mode = read_state(|s| s.env.is_test_mode());
     mutate_state(|state| {
@@ -68,9 +81,6 @@ pub async fn synchronise_neuron_data() {
                         },
                         |n| {
                             continue_scanning = true;
-                            if is_test_mode && number_of_scanned_neurons == 400 {
-                                continue_scanning = false;
-                            }
                             n.id.clone()
                         }
                     );

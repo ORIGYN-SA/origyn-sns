@@ -1,0 +1,155 @@
+$highlight: #5893cb;
+$dark: #161d24;
+$darkest: #0b0d0f;
+
+body {
+    background-color: $darkest;
+    color-scheme: only light;
+
+    #root {
+        width: 100%;
+    }
+}
+:root {
+    color-scheme: only light;
+}
+
+* {
+    color-scheme: only light;
+}
+.rune-stone-page__header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    video {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        object-fit: cover;
+        border: 1px solid black;
+    }
+    &::after {
+        content: '';
+        width: 100%;
+        height: 30%;
+        background: rgb(11, 13, 15);
+        background: linear-gradient(0deg, rgba(11, 13, 15, 1) 30%, rgba(255, 255, 255, 0) 100%);
+        position: absolute;
+        left: 0px;
+        top: 100%;
+        top: 101%;
+        transform: translateY(-100%);
+    }
+
+    @media screen and (max-width: 768px) {
+        height: 50vh;
+        video {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+        }
+    }
+
+    .rune-stone-page__find-out-more-btn {
+        display: flex;
+        position: absolute;
+        bottom: 5%;
+        font-size: 12px;
+        z-index: 2;
+        animation: bounce 0.8s ease-in-out infinite alternate;
+
+        @media screen and (max-width: 768px) {
+            // width: max-content;
+            // text-align: center;
+            // display: flex;
+            // justify-content: center;
+            display: none;
+        }
+    }
+}
+
+.rune-stone-page__form {
+    transition: 0.4s ease all;
+
+    button:focus,
+    button:active {
+        border-color: inherit !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none;
+    }
+}
+
+.rune-stone-page__form form.loading {
+    opacity: 0.5;
+    transition: 0.4s ease all;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.rune-stone-page__content {
+    position: relative;
+}
+
+.loader {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.count-down-timer {
+    top: 60px;
+    right: 50px;
+    font-size: 48px;
+    font-weight: 800;
+    position: absolute;
+
+    @media screen and (max-width: 768px) {
+        font-size: 32px;
+        top: 20px;
+        right: 20px;
+    }
+}
+
+
+.success-text {
+    color: $highlight;
+}
+
+.error-text {
+    color: red;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+ background-color: #fff;
+}

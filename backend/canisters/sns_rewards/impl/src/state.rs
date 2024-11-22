@@ -7,10 +7,9 @@ use sns_rewards_api_canister::{ ReserveTokenAmounts, TokenRewardTypes };
 use types::{ NeuronInfo, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
-use crate::model::{
-    maturity_history::MaturityHistory,
-    payment_processor::PaymentProcessor,
-    neuron_owners::NeuronOwnership,
+use crate::{
+    model::{ maturity_history::MaturityHistory, payment_processor::PaymentProcessor },
+    utils::TimeInterval,
 };
 
 canister_state!(RuntimeState);
@@ -49,6 +48,8 @@ impl RuntimeState {
                 "{}",
                 self.data.daily_ogy_burn_rate.clone().unwrap_or_default()
             ),
+            reward_distribution_interval: self.data.reward_distribution_interval.clone(),
+            neuron_sync_interval: self.data.neuron_sync_interval.clone(),
         }
     }
 
@@ -77,6 +78,8 @@ pub struct Metrics {
     pub last_daily_reserve_transfer_time: TimestampMillis,
     pub last_daily_ogy_burn_time: Option<TimestampMillis>,
     pub daily_ogy_burn_amount: String,
+    pub reward_distribution_interval: Option<TimeInterval>,
+    pub neuron_sync_interval: Option<TimeInterval>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -104,8 +107,6 @@ pub struct Data {
     pub sync_info: SyncInfo,
     /// The history of each neuron's maturity.
     pub maturity_history: MaturityHistory,
-    /// owners of neurons
-    pub neuron_owners: NeuronOwnership,
     /// Payment processor - responsible for queuing and processing rounds of payments
     pub payment_processor: PaymentProcessor,
     /// valid tokens and their associated ledger data
@@ -122,6 +123,12 @@ pub struct Data {
     pub daily_ogy_burn_rate: Option<Nat>,
     /// The last time a burn of OGY was done
     pub last_daily_ogy_burn: Option<TimestampMillis>,
+    /// The weekly interval for which a reward distribution occurs
+    pub reward_distribution_interval: Option<TimeInterval>,
+    /// An internal check if the distribution is running
+    pub reward_distribution_in_progress: Option<bool>,
+    /// The daily interval for which a neuron sync occurs
+    pub neuron_sync_interval: Option<TimeInterval>,
 }
 
 impl Default for Data {
@@ -131,7 +138,6 @@ impl Default for Data {
             neuron_maturity: BTreeMap::new(),
             sync_info: SyncInfo::default(),
             maturity_history: MaturityHistory::default(),
-            neuron_owners: NeuronOwnership::default(),
             payment_processor: PaymentProcessor::default(),
             tokens: HashMap::new(),
             authorized_principals: vec![],
@@ -140,6 +146,17 @@ impl Default for Data {
             last_daily_reserve_transfer_time: TimestampMillis::default(),
             daily_ogy_burn_rate: None,
             last_daily_ogy_burn: None,
+            reward_distribution_interval: Some(TimeInterval {
+                weekday: Some("Monday".to_string()),
+                start_hour: 14,
+                end_hour: 16,
+            }),
+            reward_distribution_in_progress: Some(false),
+            neuron_sync_interval: Some(TimeInterval {
+                weekday: None,
+                start_hour: 9,
+                end_hour: 11,
+            }),
         }
     }
 }
