@@ -20,20 +20,16 @@ const Form = () => {
     <>
       <div className="text-center">
         <div className="mb-1 text-xl font-semibold">Add neuron</div>
-        <div className="text-content/60">
-        To successfully connect each neuron to the dashboard, you need to
-        add your principal 
-        </div>
-        <div className="mt-6">
-          Add
+       
+        <div className="">
+        To successfully connect each neuron to the dashboard, you need to add your principal 
           <span className="font-semibold ml-1">
             <span>{principalId}</span>
             <span>
               <CopyToClipboard value={principalId as string} />
             </span>
           </span>
-          as a HotKey to your OGY neuron which you wish to include in this
-          dashboard.
+          as a hotkey to your OGY neuron which you wish to include in this dashboard.
           To do this, open the{" "}
           <span>
             <Link
