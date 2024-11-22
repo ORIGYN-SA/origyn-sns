@@ -38,7 +38,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
   const mutation = useAddNeuronOwnership();
 
   const handleAddNeuron = () => {
-    
+    queryClient.cancelQueries({queryKey : ["userGetNeuronsByOwner"]})
     queryClient.invalidateQueries({
       queryKey: ["userGetNeuronsByOwner"],
     });
@@ -46,7 +46,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
     queryClient.invalidateQueries({
       queryKey: ["getNeuronClaimBalance"],
     });
-
+    
     setShow(false)
   };
 
