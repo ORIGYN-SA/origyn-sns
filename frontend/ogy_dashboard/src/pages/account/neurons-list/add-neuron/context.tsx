@@ -1,21 +1,10 @@
-// contexts/AddNeuronContext.tsx
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useForm } from "@tanstack/react-form";
-import useAddNeuronOwnership from "@services/queries/sns-rewards/useAddNeuronOwnership";
-import type { FormApi } from "@tanstack/react-form";
-
 interface AddNeuronContextType {
-  form: FormApi<
-    {
-      neuronId: string;
-    },
-    undefined
-  >;
-  mutation: ReturnType<typeof useAddNeuronOwnership>;
   show: boolean;
   handleShow: () => void;
   handleClose: () => void;
+  handleAddNeuron: () => void;
 }
 
 const AddNeuronContext = createContext<AddNeuronContextType | undefined>(
@@ -35,7 +24,7 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = useQueryClient();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const mutation = useAddNeuronOwnership();
+  const handleClose = () => setShow(false);
 
   const handleAddNeuron = () => {
     queryClient.invalidateQueries({
@@ -44,26 +33,12 @@ export const AddNeuronProvider = ({ children }: { children: ReactNode }) => {
     queryClient.invalidateQueries({
       queryKey: ["getNeuronClaimBalance"],
     });
-    setShow(false);
+    handleClose();
   };
-
-  const handleClose = () => {
-    setShow(false);
-    mutation.reset();
-  };
-
-  const form = useForm({
-    defaultValues: {
-      neuronId: "",
-    },
-    onSubmit: async () => {
-      handleAddNeuron();
-    },
-  });
 
   return (
     <AddNeuronContext.Provider
-      value={{ form, mutation, show, handleShow, handleClose }}
+      value={{ show, handleShow, handleClose, handleAddNeuron }}
     >
       {children}
     </AddNeuronContext.Provider>

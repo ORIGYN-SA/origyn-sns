@@ -77,8 +77,8 @@ const NeuronsList = () => {
       {
         accessorKey: "removeNeuron",
         id: "removeNeuron",
-        cell: ({ row }) => (
-          <RemoveNeuronProvider neuronId={row?.original?.id}>
+        cell: () => (
+          <RemoveNeuronProvider>
             <BtnRemoveNeuron />
             <DialogRemoveNeuron />
           </RemoveNeuronProvider>

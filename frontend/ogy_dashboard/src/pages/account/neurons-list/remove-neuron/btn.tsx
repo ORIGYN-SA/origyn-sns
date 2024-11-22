@@ -1,6 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Tile } from "@components/ui";
-import { useRemoveNeuron } from "../context";
+import { useRemoveNeuron } from "./context";
 
 const BtnRemoveNeuron = () => {
   const { handleShow } = useRemoveNeuron();
