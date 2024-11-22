@@ -1,5 +1,5 @@
 import { Button } from "@components/ui";
-import { useAddNeuron } from "../context";
+import { useAddNeuron } from "./context";
 
 const BtnAddNeuron = () => {
   const { handleShow } = useAddNeuron();

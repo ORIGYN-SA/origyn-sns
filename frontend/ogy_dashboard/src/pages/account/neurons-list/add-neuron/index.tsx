@@ -1,5 +1,5 @@
 import { AddNeuronProvider, useAddNeuron } from "./context";
-import BtnAddNeuron from "./button";
+import BtnAddNeuron from "./btn";
 import DialogAddNeuron from "./dialog";
 
 export {
