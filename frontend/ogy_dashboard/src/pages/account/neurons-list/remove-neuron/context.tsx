@@ -1,14 +1,10 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import useRemoveNeuronService from "@services/queries/sns-rewards/useRemoveNeuronOwnership";
-import { Buffer } from "buffer";
 interface RemoveNeuronContextType {
-  mutation: ReturnType<typeof useRemoveNeuronService>;
   show: boolean;
   handleShow: () => void;
   handleClose: () => void;
-  neuronId: string;
-  handleRemoveNeuronOwnership: () => void;
+  handleRemoveNeuron: () => void;
 }
 
 const RemoveNeuronContext = createContext<RemoveNeuronContextType | undefined>(
@@ -26,48 +22,29 @@ export const useRemoveNeuron = () => {
   return context;
 };
 
-export const RemoveNeuronProvider = ({
-  children,
-  neuronId,
-}: {
-  children: ReactNode;
-  neuronId: string;
-}) => {
+export const RemoveNeuronProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = useQueryClient();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const mutation = useRemoveNeuronService();
 
-  const handleRemoveNeuronOwnership = () => {
-    const { mutate: removeNeuron } = mutation;
-    removeNeuron(
-      {
-        neuronId: { id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] },
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["userListNeuronsAll"] });
-          queryClient.invalidateQueries({
-            queryKey: ["userGetNeuronsByOwner"],
-          });
-          queryClient.invalidateQueries({
-            queryKey: ["getNeuronClaimBalance"],
-          });
-        },
-      }
-    );
+  const handleRemoveNeuron = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["userGetNeuronsByOwner"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["getNeuronClaimBalance"],
+    });
+    handleClose();
   };
 
   return (
     <RemoveNeuronContext.Provider
       value={{
-        mutation,
         show,
         handleShow,
         handleClose,
-        neuronId,
-        handleRemoveNeuronOwnership,
+        handleRemoveNeuron,
       }}
     >
       {children}

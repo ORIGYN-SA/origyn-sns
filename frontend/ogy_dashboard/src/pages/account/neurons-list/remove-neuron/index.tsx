@@ -1,5 +1,5 @@
 import { RemoveNeuronProvider, useRemoveNeuron } from "./context";
-import BtnRemoveNeuron from "./button";
+import BtnRemoveNeuron from "./btn";
 import DialogRemoveNeuron from "./dialog";
 
 export {
