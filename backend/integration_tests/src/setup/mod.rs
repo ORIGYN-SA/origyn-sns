@@ -175,7 +175,7 @@ impl SnsWithRewardsTestEnvBuilder {
                 self.initial_reward_pool_amount.0.try_into().unwrap()
             );
         }
-        pic.set_time(SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718528400000)); // Tuesday Jun 18, 2024, 9:00:00 AM
+        pic.set_time(SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718528400000)); // Sunday Jun 16, 2024, 9:00:00 AM
 
         SnsWithRewardsTestEnv {
             controller: self.controller,
