@@ -265,10 +265,10 @@ export function useElementPosition(elementId, path) {
         const add = isMobile
             ? 0
             : path !== 'home' && path !== 'RoadMap'
-            ? 0.2
-            : path === 'RoadMap'
-            ? 0.5
-            : 0.4;
+              ? 0.2
+              : path === 'RoadMap'
+                ? 0.5
+                : 0.4;
 
         const listener = () => {
             const scrollY = window.scrollY;

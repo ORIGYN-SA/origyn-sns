@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.7] - 2024-11-22
+
+#### Fix
+- post upgrade intervals - the intervals for consistent timers need to be set in post upgrade
+
+### [1.0.6] - 2024-11-22 
+
+#### Changed
+
+- **Consistent distribution times** - Upgrading the sns_rewards canister can reset the weekly timer of a reward distribution. This is not ideal because if the the next distribution is only 1 day away and the canister is upgraded then the timer resets and another week will have to pass until a reward distribution happens taking the total time for that distribution window to 1 week and 6 days. This new feature ensures a consistent distribution date and time window of every Monday between 14:00 and 16:00 UTC.
+
 ### [1.0.5] - 2024-08-20
 
 #### Changed

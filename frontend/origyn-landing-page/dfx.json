@@ -1,30 +1,16 @@
 {
   "canisters": {
-    "ogy_website": {
-      "frontend": {
-        "entrypoint": "index.html"
-      },
-      "source": [
-        "dist/"
-      ],
-      "type": "assets"
-    },
-    "ogy_website_staging": {
-      "frontend": {
-        "entrypoint": "index.html"
-      },
-      "source": [
-        "dist/"
-      ],
-      "type": "assets"
+    "origyn-landing-page": {
+      "type": "assets",
+      "source": ["dist"]
     }
   },
-  "defaults": {
-    "build": {
-      "args": "",
-      "packtool": ""
+  "networks": {
+    "staging": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
     }
   },
-  "output_env_file": ".env",
+  "dfx": "0.19.0",
   "version": 1
 }

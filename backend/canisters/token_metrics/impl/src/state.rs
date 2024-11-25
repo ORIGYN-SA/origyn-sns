@@ -123,6 +123,8 @@ pub struct Data {
     pub foundation_accounts_data: Vec<(String, WalletOverview)>,
     /// Amount of locked tokens and their period
     pub locked_neurons_amount: LockedNeuronsAmount,
+    /// Amount of locked tokens and their period
+    pub locked_neurons_unique_owners: LockedNeuronsAmount,
     /// Proposals metrics, succh as total, avg voting power and participation
     pub porposals_metrics: ProposalsMetrics,
     /// Used to calculate proposals_metrics
@@ -170,6 +172,7 @@ impl Data {
             sync_info: SyncInfo::default(),
             gov_stake_history: Vec::new(),
             locked_neurons_amount: LockedNeuronsAmount::default(),
+            locked_neurons_unique_owners: LockedNeuronsAmount::default(),
             porposals_metrics: ProposalsMetrics::default(),
             proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
             daily_voting_metrics: BTreeMap::new(),

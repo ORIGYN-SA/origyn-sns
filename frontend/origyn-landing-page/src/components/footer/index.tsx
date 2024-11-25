@@ -28,8 +28,8 @@ const Footer = () => {
                 pathname !== '/newsroom'
                     ? 'h-[100vh] '
                     : isMobile
-                    ? 'h-[calc(80vh-150px)]'
-                    : 'md:h-[325px]'
+                      ? 'h-[calc(80vh-150px)]'
+                      : 'md:h-[325px]'
             } ${isMobile ? 'h-[80vh]' : ''}
             `}
         >

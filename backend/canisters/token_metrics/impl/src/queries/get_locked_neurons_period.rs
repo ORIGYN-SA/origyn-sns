@@ -5,5 +5,11 @@ use crate::state::read_state;
 
 #[query]
 fn get_locked_neurons_period() -> GetLockedNeuronsPeriodResponse {
-    read_state(|state| state.data.locked_neurons_amount.clone())
+    let amount = read_state(|state| state.data.locked_neurons_amount.clone());
+    let count = read_state(|state| state.data.locked_neurons_unique_owners.clone());
+
+    GetLockedNeuronsPeriodResponse {
+        amount,
+        count,
+    }
 }
