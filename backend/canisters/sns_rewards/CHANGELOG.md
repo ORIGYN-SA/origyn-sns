@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+
+### [1.0.8] - 2024-11-25
+
+#### Fix
+- neuron sync interval - the interval for the neuron sync timer needs to be scheduled every hour
+
 ### [1.0.7] - 2024-11-22
 
 #### Fix
