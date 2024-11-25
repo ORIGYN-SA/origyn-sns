@@ -20,13 +20,11 @@ fn post_upgrade() {
 
     canister_logger::init_with_logs(runtime_state.env.is_test_mode(), logs, traces);
 
-    if runtime_state.data.reward_distribution_interval.is_none() {
-        runtime_state.data.reward_distribution_interval = Some(TimeInterval {
-            weekday: Some("Tuesday".to_string()),
-            start_hour: 14,
-            end_hour: 16,
-        });
-    }
+    runtime_state.data.reward_distribution_interval = Some(TimeInterval {
+        weekday: Some("Tuesday".to_string()),
+        start_hour: 14,
+        end_hour: 16,
+    });
 
     if runtime_state.data.neuron_sync_interval.is_none() {
         runtime_state.data.neuron_sync_interval = Some(TimeInterval {
