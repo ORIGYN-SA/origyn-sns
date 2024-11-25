@@ -147,7 +147,7 @@ impl Default for Data {
             daily_ogy_burn_rate: None,
             last_daily_ogy_burn: None,
             reward_distribution_interval: Some(TimeInterval {
-                weekday: Some("Monday".to_string()),
+                weekday: Some("Tuesday".to_string()),
                 start_hour: 14,
                 end_hour: 16,
             }),

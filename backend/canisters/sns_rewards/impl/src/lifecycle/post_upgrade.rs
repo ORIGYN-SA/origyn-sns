@@ -22,7 +22,7 @@ fn post_upgrade() {
 
     if runtime_state.data.reward_distribution_interval.is_none() {
         runtime_state.data.reward_distribution_interval = Some(TimeInterval {
-            weekday: Some("Monday".to_string()),
+            weekday: Some("Tuesday".to_string()),
             start_hour: 14,
             end_hour: 16,
         });
