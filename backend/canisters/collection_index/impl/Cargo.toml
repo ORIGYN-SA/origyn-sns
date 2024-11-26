@@ -37,3 +37,4 @@ types = { path = '../../../libraries/types' }
 utils = { path = '../../../libraries/utils' }
 collection_index_api = { path = "../api" }
 ic0 = "0.23.0"
+serde_json = { workspace = true }

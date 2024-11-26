@@ -4,7 +4,7 @@ pub use collection_index_api::insert_collection::{
     Args as InsertCollectionArgs,
     Response as InsertCollectionResponse,
 };
-use ic_cdk::update;
+use ic_cdk::{ query, update };
 use crate::{
     guards::caller_is_authorised_principal,
     services::origyn_nft::get_collection_info,
@@ -25,4 +25,10 @@ pub async fn insert_collection(args: InsertCollectionArgs) -> InsertCollectionRe
             args.category
         )
     )
+}
+
+#[query(guard = "caller_is_authorised_principal", hidden = true)]
+#[trace]
+async fn insert_collection_validate(args: InsertCollectionArgs) -> Result<String, String> {
+    serde_json::to_string_pretty(&args).map_err(|_| "invalid payload".to_string())
 }

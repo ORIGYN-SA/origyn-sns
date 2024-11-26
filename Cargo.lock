@@ -456,6 +456,7 @@ dependencies = [
  "origyn_nft_reference_c2c_client",
  "serde",
  "serde_bytes",
+ "serde_json",
  "serializer",
  "stable_memory",
  "tracing",
