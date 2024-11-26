@@ -14,6 +14,7 @@ use collection_index_api::updates::{
     update_collection_category,
     remove_collection,
     insert_fake_collection,
+    toggle_promoted,
 };
 
 generate_query_call!(get_collections);
@@ -27,3 +28,4 @@ generate_update_call!(remove_collection);
 generate_update_call!(insert_fake_collection);
 generate_update_call!(get_user_collections);
 generate_query_call!(get_collection_by_principal);
+generate_update_call!(toggle_promoted);

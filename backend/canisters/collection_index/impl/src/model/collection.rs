@@ -11,6 +11,7 @@ use collection_index_api::{
         InsertCollectionError,
         RemoveCollectionError,
         SetCategoryVisibilityError,
+        TogglePromotedError,
         UpdateCollectionCategoryError,
     },
     get_collections::GetCollectionsResult,
@@ -130,6 +131,20 @@ impl CollectionModel {
             Ok(())
         } else {
             Err(UpdateCollectionCategoryError::CollectionNotFound)
+        }
+    }
+
+    pub fn toggle_promoted(
+        &mut self,
+        collection_canister_id: Principal
+    ) -> Result<(), TogglePromotedError> {
+        if let Some(mut collection) = self.collections.get(&collection_canister_id) {
+            collection.is_promoted = !collection.is_promoted;
+            self.collections.remove(&collection.canister_id);
+            self.collections.insert(collection_canister_id, collection);
+            Ok(())
+        } else {
+            Err(TogglePromotedError::CollectionNotFound)
         }
     }
 

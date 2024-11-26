@@ -17,6 +17,10 @@ pub enum UpdateCollectionCategoryError {
     CategoryNotFound(String),
 }
 #[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum TogglePromotedError {
+    CollectionNotFound,
+}
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
 pub enum GetCollectionsError {
     CategoryNotFound(String),
 }

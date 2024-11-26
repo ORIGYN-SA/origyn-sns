@@ -8,6 +8,7 @@ use collection_index_api::insert_collection::InsertCollectionArgs;
 use collection_index_api::remove_collection::RemoveCollectionArgs;
 use collection_index_api::search_collections::SearchCollectionsArg;
 use collection_index_api::set_category_visibility::SetCategoryVisibility;
+use collection_index_api::toggle_promoted::TogglePromotedArgs;
 use collection_index_api::update_collection_category::UpdateCollectionCategoryArgs;
 use collection_index_api::insert_fake_collection::Args as InsertFakeCollectionArgs;
 use origyn_nft_reference::origyn_nft_reference_canister::{ Account as OrigynAccount };
@@ -25,6 +26,7 @@ use crate::client::collection_index::{
     remove_collection,
     search_collections,
     set_category_visibility,
+    toggle_promoted,
     update_collection_category,
 };
 use crate::collection_index_suite::nft_utils;
@@ -958,4 +960,92 @@ fn test_get_user_collections_works_correctly() {
 
     assert_eq!(res.len(), 1);
     assert_eq!(res[0].canister_id, origyn_nft)
+}
+
+#[test]
+fn test_promoting_and_demoting_collections() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+
+    let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
+    let collection_canister = canister_ids.collection_index;
+
+    // Insert a new category, "Category A"
+    assert_eq!(
+        insert_category(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCategoryArgs {
+                category_name: "Category A".to_string(),
+            })
+        ).unwrap(),
+        ()
+    );
+
+    assert_eq!(
+        insert_collection(
+            &mut pic,
+            principal_ids.controller,
+            collection_canister,
+            &(InsertCollectionArgs {
+                collection_canister_id: origyn_nft_one_canister_id,
+                is_promoted: false,
+                category: 0,
+            })
+        ).unwrap(),
+        ()
+    );
+
+    let _ = toggle_promoted(
+        &mut pic,
+        principal_ids.controller,
+        collection_canister,
+        &(TogglePromotedArgs {
+            collection_canister_id: origyn_nft_one_canister_id,
+        })
+    );
+
+    tick_n_blocks(&pic, 1);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: None,
+            offset: 0,
+            limit: 50,
+        })
+    ).unwrap();
+
+    assert_eq!(res.total_pages, 1);
+    assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
+    assert_eq!(res.collections[0].is_promoted, true);
+
+    let _ = toggle_promoted(
+        &mut pic,
+        principal_ids.controller,
+        collection_canister,
+        &(TogglePromotedArgs {
+            collection_canister_id: origyn_nft_one_canister_id,
+        })
+    );
+
+    tick_n_blocks(&pic, 1);
+
+    let res = get_collections(
+        &pic,
+        Principal::anonymous(),
+        collection_canister,
+        &(GetCollectionsArgs {
+            categories: None,
+            offset: 0,
+            limit: 50,
+        })
+    ).unwrap();
+
+    assert_eq!(res.total_pages, 1);
+    assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
+    assert_eq!(res.collections[0].is_promoted, false);
 }

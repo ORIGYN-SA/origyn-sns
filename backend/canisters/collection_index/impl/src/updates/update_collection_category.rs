@@ -21,7 +21,7 @@ pub fn update_collection_category(
 
 #[query(guard = "caller_is_authorised_principal", hidden = true)]
 #[trace]
-async fn set_category_visibility_validate(
+async fn update_collection_category_validate(
     args: UpdateCollectionCategoryArgs
 ) -> Result<String, String> {
     serde_json::to_string_pretty(&args).map_err(|_| "invalid payload".to_string())
