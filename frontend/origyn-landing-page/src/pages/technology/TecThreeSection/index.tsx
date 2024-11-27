@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 import onlyLogo from '@/assets/onlyLogo.png';
@@ -65,20 +66,17 @@ const TecThreeSection = () => {
                     <div className="mx-auto flex items-start justify-between md:w-[1120px]">
                         <div className="flex w-[55%] flex-1 flex-col items-start justify-center text-left">
                             <div className="tecSection3-line1 mb-[40px] text-left font-montserrat-bold text-[28px] leading-[36px] text-[#000] md:text-[40px] md:leading-[50px]">
-                                Learning about <br />
-                                the OGY Token
+                                <span>{intl.get('LearningAboutOGY1')}</span>
+                                <br />
+                                <span>{intl.get('LearningAboutOGY2')}</span>
                             </div>
                             <div className="tecSection3-line1 mb-[40px]">
                                 <div className="text-left text-[16px] leading-[30px] text-[#000] md:text-[20px]">
-                                    In the ORIGYN Protocol, the OGY token holds a place of great
-                                    significance. Firstly, it functions as a governance token, where
-                                    it can be staked to participate in decision-making. As a utility
-                                    token, it can be burned to create and mint ORIGYN Certificates
-                                    which also covers the gas for computation and data storage fees.
+                                    {intl.get('LearningAboutOGYContent')}
                                 </div>
                             </div>
                             <div className="tecSection3-line1 mb-[40px] text-left font-montserrat-bold text-[20px] leading-[30px] text-[#000] md:text-[24px]">
-                                Available on those wallets
+                                {intl.get('AvailableOnWallets')}
                             </div>
                             <div className="tecSection3-line1 flex items-start text-center font-montserrat-regular text-[20px] leading-[30px] text-[#000]">
                                 <div

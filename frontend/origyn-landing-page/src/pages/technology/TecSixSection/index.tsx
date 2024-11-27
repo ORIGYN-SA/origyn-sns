@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 import whereBuy1 from '@/assets/technology/whereBuy1.png';
@@ -52,10 +53,10 @@ const TecSixSection = () => {
                 <div className="tecSection6-line1 px-[15px] text-center md:px-0">
                     <div className="card rounded-[20px] p-[20px] text-[#fff] md:w-[950px] md:p-[60px]">
                         <div className="font-montserrat-bold text-[26px] leading-[34px] md:h-[50px] md:text-[32px] md:leading-[40px]">
-                            Where to buy OGY ? <br />
+                            {intl.get('WhereToBuy')} <br />
                         </div>
                         <div className="mt-[20px] text-[16px] leading-[30px] md:text-[20px]">
-                            The OGY Token is listed on multiple platform, more are yet to come.
+                            {intl.get('WhereToBuyContent')}
                         </div>
                         <div className="mx-auto mt-[20px] flex w-[100%] flex-wrap items-center justify-around md:mt-[40px]">
                             <img

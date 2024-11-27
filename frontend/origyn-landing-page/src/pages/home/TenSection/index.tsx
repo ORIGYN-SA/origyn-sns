@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 // import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -51,21 +52,14 @@ const TenSection = () => {
                 <div className="section10-line1 mx-[15px] items-center justify-center rounded-[30px] bg-[#fff] p-[20px] md:mx-auto md:flex md:w-[1120px] md:p-[50px]">
                     <div className="flex flex-1 flex-col items-center justify-center md:w-[50%] md:items-start md:text-left">
                         <div className="mb-[20px] w-full font-montserrat-regular text-[18px] leading-[30px] text-[#000] md:text-[24px]">
-                            {/* First contributor of the protocol */}
-                            First Contributor of the Protocol
+                            {intl.get('FirstContributor')}
                         </div>
                         <div className="mb-[15px] w-full font-montserrat-bold text-[26px] leading-[36px] text-[#000] md:mb-[30px] md:text-left md:text-[40px] md:leading-[50px]">
-                            About the Foundation
+                            {intl.get('AboutTheFoundation')}
                         </div>
                         <div className="w-full">
                             <div className="text-left text-[16px] leading-[24px] text-[#000] md:text-[20px] md:leading-[30px]">
-                                Founded in 2020, the ORIGYN Foundation is not just any foundation;
-                                it's a forward-looking Swiss Foundation with a mission: launching a
-                                decentralized protocol for safeguarding and tracking both digital
-                                and physical assets. The core focus of the foundation is to
-                                contribute, democratize and help to develop the ORIGYN Protocol.
-                                While the foundation is the primary contributor, they value
-                                collaboration and are not alone in this endeavor.
+                                {intl.get('AboutTheFoundationContent')}
                             </div>
                         </div>
                         <div className="mt-[30px] items-start justify-around text-center md:flex">
@@ -73,7 +67,7 @@ const TenSection = () => {
                                 className="btn-common-black h-[44px] w-[250px] cursor-pointer rounded-[44px] bg-[#000] font-montserrat-bold text-[14px] leading-[44px] text-[#fff] md:w-[320px] md:text-[16px]"
                                 onClick={() => window.open(OGY_FOUNDATION)}
                             >
-                                Visit the ORIGYN Foundation
+                                {intl.get('VisitORIGYNFoundation')}
                             </div>
                         </div>
                     </div>

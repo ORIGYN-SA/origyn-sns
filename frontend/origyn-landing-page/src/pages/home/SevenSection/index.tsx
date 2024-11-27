@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 // import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -75,22 +76,20 @@ const SevenSection = () => {
                     </div>
                     <div className="section7-line mx-[15px] mt-[20px] text-center text-[#000] md:mt-0 md:w-[50%] md:pl-[40px] md:text-left">
                         <div className="font-montserrat text-[20px] leading-[30px] md:text-[24px]">
-                            Cypherspace as Cloud
+                            {intl.get('CypherspaceAsCloud')}
                         </div>
                         <div className="mt-[20px] font-montserrat-bold text-[25px] leading-[36px] md:text-[40px] md:leading-[50px]">
-                            Build on Internet <br /> Computer
+                            <span>{intl.get('BuildOnICPart1')}</span> <br />
+                            <span>{intl.get('BuildOnICPart2')}</span>
                         </div>
                         <div className="mt-[20px] font-montserrat-regular leading-[25px] md:text-[20px]">
-                            ORIGYN Foundation has chosen to build its ORIGYN Protocol on the IC
-                            blockchain because of the infrastructure and its advanced unmatched
-                            technology. Speed, scalability, and cost-effective data storage stand
-                            out as key advantages over other market solutions.
+                            {intl.get('CypherspaceAsCloudDescription')}
                         </div>
                         <div
                             className="btn mx-auto mt-[30px] h-[45px] w-[270px] cursor-pointer rounded-[45px] bg-[#696F97] text-center font-montserrat-bold text-[16px] uppercase leading-[45px] text-[#fff] md:mx-0"
                             onClick={() => window.open('https://internetcomputer.org')}
                         >
-                            Learn more about ICP
+                            {intl.get('LearnMoreAboutICP')}
                         </div>
                     </div>
                 </div>

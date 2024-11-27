@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 import logo1 from '@/assets/home/logo9_1.png';
@@ -50,11 +51,11 @@ const NineSection = () => {
         <>
             <section className="section9 mx-auto flex flex-col items-center justify-center bg-[#f4f4f4] text-center">
                 <div className="section9-line1 mb-[20px]  max-w-[1120px] font-montserrat-regular text-[20px] leading-[30px] text-[#000]  md:text-[24px]">
-                    Trust & Excellence
+                    {intl.get('Authenticity')}
                 </div>
                 <div className="section9-line1 max-w-[1120px] font-montserrat-bold text-[26px] leading-[50px] text-[#000] md:mb-[40px] md:text-[40px]">
-                    List of contributors <br />
-                    to the ORIGYN protocol
+                    <span>{intl.get('ListOfContributorspart1')}</span> <br />
+                    <span>{intl.get('ListOfContributorspart2')}</span>
                 </div>
                 <div className="section9-line1 max-w-[1120px] text-center md:mt-[30px]">
                     <div className="flex flex-wrap items-center justify-center text-left text-[20px] leading-[30px] text-[#000]">

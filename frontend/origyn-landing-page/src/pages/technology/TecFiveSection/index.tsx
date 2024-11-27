@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 import { usePageInfoStore } from '@/store';
@@ -67,34 +68,30 @@ const TecFiveSection = () => {
                 <div className="mx-auto h-full items-center justify-center px-[15px] md:flex md:w-[1120px] md:px-0">
                     <div className="tecSection5-left flex h-[290px] flex-col items-start justify-around rounded-[20px] bg-[#fff] p-[15px] text-left text-[#000] md:h-[400px] md:w-[50%] md:p-[30px]">
                         <div className="font-montserrat-bold text-[26px] leading-[34px] md:text-[40px] md:leading-[50px]">
-                            Tokenomics 3.0
+                            {intl.get('Tokenomics3')}
                         </div>
                         <div className="mt-[10px] font-montserrat-regular text-[16px] leading-[28px] md:mt-[20px] md:text-[24px] md:leading-[32px]">
-                            ORIGYN Tokenomics 3.0 is closing the last phase of the token economy
-                            design. Now the completed mechanism benefit OGY holders and users
-                            globally.
+                            {intl.get('Tokenomics3Content')}
                         </div>
                         <div
                             className="btn-green mt-[15px] h-[45px] cursor-pointer rounded-[45px] px-[10px] text-center font-montserrat-bold text-[14px] uppercase leading-[45px] text-[#fff] md:mt-[30px] md:w-[360px] md:text-[20px]"
                             onClick={() => window.open('/pdf/tokenomics.pdf')}
                         >
-                            Download tokenomics 3.0
+                            {intl.get('DownloadTokenomics3')}
                         </div>
                     </div>
                     <div className="tecSection5-right mt-[30px] flex h-[290px] flex-col items-start justify-around rounded-[20px] bg-[#fff] p-[15px] text-left text-[#000] md:ml-[40px] md:mt-0 md:h-[400px] md:w-[50%] md:p-[30px] ">
                         <div className="font-montserrat-bold text-[26px] leading-[34px] md:text-[40px] md:leading-[50px]">
-                            OGY Dashboard
+                            {intl.get('OGYDashboard')}
                         </div>
                         <div className="mt-[10px] font-montserrat-regular text-[16px] leading-[28px] md:mt-[20px] md:text-[24px] md:leading-[32px]">
-                            ORIGYN Tokenomics 3.0 is closing the last phase of the token economy
-                            design. Now the completed mechanism benefit OGY holders and users
-                            globally.
+                            {intl.get('OGYDashboardTokenomics')}
                         </div>
                         <div
                             className="btn-green mt-[15px] h-[45px] cursor-pointer rounded-[45px] px-[10px] text-center font-montserrat-bold text-[14px] uppercase leading-[45px] text-[#fff] md:mt-[30px] md:w-[290px] md:text-[20px]"
                             onClick={() => window.open('https://dashboard.origyn.com')}
                         >
-                            Visit the Dashboard
+                            {intl.get('VisitDashboard')}
                         </div>
                     </div>
                 </div>

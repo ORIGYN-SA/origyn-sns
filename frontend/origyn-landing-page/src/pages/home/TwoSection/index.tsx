@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import intl from 'react-intl-universal';
 import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -296,23 +297,16 @@ const TwoSection = () => {
                         <div className="flexCol">
                             <h4 className="animate-typewriter">
                                 <span className="split-chars font-montserrat-bold text-[#fff]">
-                                    Today's Imperative
+                                    {intl.get('TodaysImperative')}
                                 </span>
                             </h4>
                             <h2 className="animate-split-lines">
                                 <span className="normal split-lines font-montserrat-semibold">
-                                    For millennia, people have transacted in person, where trust was
-                                    a given. With the rise of the internet and the acceleration
-                                    through the recent pandemic, commerce is shifting towards
-                                    remote, underscoring the need for trust in this evolving
-                                    landscape.
-                                    <br />
-                                    ORIGYN was created to safeguard what is essential to any
-                                    transactions for both physical and digital goods: trust. Serving
-                                    as an open, transparent and decentralized public registry
-                                    standard for commerce, ORIGYN ensures the safe, transparent, and
-                                    efficient tokenization, authentication, and transaction of
-                                    digital and physical assets.
+                                    {intl.get('TodaysImperativePart1')}
+                                </span>
+                                <br />
+                                <span className="normal split-lines font-montserrat-semibold">
+                                    {intl.get('TodaysImperativePart2')}
                                 </span>
                             </h2>
                         </div>

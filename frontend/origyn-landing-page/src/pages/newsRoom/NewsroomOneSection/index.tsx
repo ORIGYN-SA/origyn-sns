@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import intl from 'react-intl-universal';
 // import axios from 'axios';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -186,7 +187,7 @@ const NewsroomOneSection = () => {
                     <div className="newsroomSection1-line1 absolute left-0 top-[30vh] z-[1] w-full">
                         <div className="mx-auto w-[1120px] text-left text-[70px] leading-[70px] text-[#000]">
                             <div className="titleLinear inline-block font-montserrat-bold">
-                                Newsroom
+                                {intl.get('Newsroom')}
                             </div>
                         </div>
                     </div>
@@ -202,7 +203,7 @@ const NewsroomOneSection = () => {
                                         onClick={() => onSwiperChange(idx)}
                                     >
                                         <div className="mb-[20px] font-montserrat-semibold text-[12px] text-[rgba(0,0,0,0.5)]">
-                                            INDUSTRY
+                                            {intl.get('INDUSTRY')}
                                         </div>
                                         <div className="tabContent font-montserrat-bold text-[18px]">
                                             {/* ORIGYN Foundation Acquires CanDB, Paves the Way for New

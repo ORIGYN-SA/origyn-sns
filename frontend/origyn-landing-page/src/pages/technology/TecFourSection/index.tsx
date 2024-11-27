@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import intl from 'react-intl-universal';
 import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -180,10 +181,10 @@ const TecFourSection = () => {
                     <div className="spacer"></div>
                     <div className="hometitle">
                         <div className="tecSection4-line1 mb-[20px] text-center font-montserrat-regular text-[20px] leading-[30px] text-[#000] md:w-[950px]  md:text-[24px]">
-                            Unlocking Full Potential
+                            {intl.get('UnlockingFullPotential')}
                         </div>
                         <div className="tecSection4-line1 mb-[40px] text-center font-montserrat-bold text-[28px] leading-[36px] text-[#000] md:w-[950px] md:text-[40px]  md:leading-[50px]">
-                            Main Utilities
+                            {intl.get('MainUtilities')}
                         </div>
                     </div>
                     {isMobile ? (
@@ -211,17 +212,16 @@ const TecFourSection = () => {
                                 <SwiperSlide onClick={() => changeSlide(0)}>
                                     <div className="accordion accordion1">
                                         <div className="title text-left font-montserrat-regular text-[#000]">
-                                            UTILITY 1
+                                            {intl.get('UTILITY')} 1
                                         </div>
                                         <div className="text text-left">
                                             <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                                Key to ORIGYN <br /> Ecosystem
+                                                <span>{intl.get('KeyToORIGYN1')}</span>
+                                                <br />
+                                                <span>{intl.get('KeyToORIGYN2')}</span>
                                             </div>
                                             <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                                The OGY token is pivotal for accessing and operating
-                                                within the ORIGYN ecosystem, enabling users to tap
-                                                into its wide array of services, features, and
-                                                Dapps.
+                                                {intl.get('KeyToORIGYNContent')}
                                             </div>
                                         </div>
                                     </div>
@@ -229,17 +229,15 @@ const TecFourSection = () => {
                                 <SwiperSlide onClick={() => changeSlide(1)}>
                                     <div className="accordion accordion2">
                                         <div className="title text-left font-montserrat-regular text-[#000]">
-                                            UTILITY 2
+                                            {intl.get('UTILITY')} 2
                                         </div>
                                         <div className="text text-left">
                                             <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                                Fuel to Mint <br />
-                                                Certificates
+                                                <span>{intl.get('FuelToMint1')}</span> <br />
+                                                <span>{intl.get('FuelToMint2')}</span>
                                             </div>
                                             <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                                To create a certificate, you use OGY tokens to pay
-                                                for the process. Once the certificate is made, the
-                                                tokens are burned, removing them from circulation.
+                                                {intl.get('FuelToMintContent')}
                                             </div>
                                         </div>
                                     </div>
@@ -247,18 +245,16 @@ const TecFourSection = () => {
                                 <SwiperSlide onClick={() => changeSlide(2)}>
                                     <div className="accordion accordion3">
                                         <div className="title text-left font-montserrat-regular text-[#000]">
-                                            UTILITY 3
+                                            {intl.get('UTILITY')} 3
                                         </div>
                                         <div className="text text-left">
                                             <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                                Participate in <br /> Governance
+                                                <span>{intl.get('ParticipateInGovernance1')}</span>{' '}
+                                                <br />
+                                                <span>{intl.get('ParticipateInGovernance2')}</span>
                                             </div>
                                             <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                                The token plays a vital role in decentralizing
-                                                decision-making. Through governance mechanisms,
-                                                decisions are made collectively, with holders having
-                                                a vote weighted proportionally to their token
-                                                holdings.
+                                                {intl.get('ParticipateInGovernanceContent')}
                                             </div>
                                         </div>
                                     </div>
@@ -269,48 +265,44 @@ const TecFourSection = () => {
                         <>
                             <div className="accordion accordion1">
                                 <div className="title text-left font-montserrat-regular text-[#000]">
-                                    UTILITY 1
+                                    {intl.get('UTILITY')} 1
                                 </div>
                                 <div className="text text-left">
                                     <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                        Key to ORIGYN <br /> Ecosystem
+                                        <span>{intl.get('KeyToORIGYN1')}</span>
+                                        <br />
+                                        <span>{intl.get('KeyToORIGYN2')}</span>
                                     </div>
                                     <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                        The OGY token is pivotal for accessing and operating within
-                                        the ORIGYN ecosystem, enabling users to tap into its wide
-                                        array of services, features, and Dapps.
+                                        {intl.get('KeyToORIGYNContent')}
                                     </div>
                                 </div>
                             </div>
                             <div className="accordion accordion2">
                                 <div className="title text-left font-montserrat-regular text-[#000]">
-                                    UTILITY 2
+                                    {intl.get('UTILITY')} 2
                                 </div>
                                 <div className="text text-left">
                                     <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                        Fuel to Mint <br />
-                                        Certificates
+                                        <span>{intl.get('FuelToMint1')}</span> <br />
+                                        <span>{intl.get('FuelToMint2')}</span>
                                     </div>
                                     <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                        To create a certificate, you use OGY tokens to pay for the
-                                        process. Once the certificate is made, the tokens are
-                                        burned, removing them from circulation.
+                                        {intl.get('FuelToMintContent')}
                                     </div>
                                 </div>
                             </div>
                             <div className="accordion accordion3">
                                 <div className="title text-left font-montserrat-regular text-[#000]">
-                                    UTILITY 3
+                                    {intl.get('UTILITY')} 3
                                 </div>
                                 <div className="text text-left">
                                     <div className="bgText mt-[10px] inline-block text-left font-montserrat-bold text-[28px] leading-[36px] md:text-[34px] md:leading-[40px]">
-                                        Participate in <br /> Governance
+                                        <span>{intl.get('ParticipateInGovernance1')}</span> <br />
+                                        <span>{intl.get('ParticipateInGovernance2')}</span>
                                     </div>
                                     <div className="contentText mt-[10px] text-left font-montserrat-regular text-[16px] leading-[24px] text-[#000] md:mt-[20px] md:w-[70%] md:text-[20px] md:leading-[26px]">
-                                        The token plays a vital role in decentralizing
-                                        decision-making. Through governance mechanisms, decisions
-                                        are made collectively, with holders having a vote weighted
-                                        proportionally to their token holdings.
+                                        {intl.get('ParticipateInGovernanceContent')}
                                     </div>
                                 </div>
                             </div>

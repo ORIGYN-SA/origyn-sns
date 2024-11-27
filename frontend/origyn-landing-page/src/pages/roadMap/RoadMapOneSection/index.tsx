@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
+import intl from 'react-intl-universal';
 // import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -38,33 +39,21 @@ const RoadMapOneSection = () => {
             {isMobile ? (
                 <section className="roadmpSection1 flex h-[100vh] w-screen flex-col items-center justify-center bg-[#fff]">
                     <div className="mb-[30px] w-screen text-left text-[30px] leading-[40px] text-[#000] md:text-[50px] md:leading-[70px]">
-                        <div className="titleLinear inline-block px-[16px]">Roadmap</div>
+                        <div className="titleLinear inline-block px-[16px]">
+                            {intl.get('Roadmap')}
+                        </div>
                     </div>
                     <div className="roadmpSection1-line mx-auto w-screen text-left font-montserrat-regular text-[18px] leading-[28px] text-[#000] md:text-[26px] md:leading-[40px]">
-                        <div className="w-screen px-[16px]">
-                            The ORIGYN Foundation is dedicating extensive R&D assets across several
-                            developmental fields with the goal of enhancing the efficacy, speed, and
-                            usability of the ORIGYN Protocol. This roadmap provides insights into
-                            the numerous ongoing projects shaping the ORIGYN Protocol landscape, yet
-                            it doesn't encompass everything — stay tuned for more updates in the
-                            coming weeks.
-                        </div>
+                        <div className="w-screen px-[16px]">{intl.get('RoadmapContent')}</div>
                     </div>
                 </section>
             ) : (
                 <section className="roadmpSection1 flex h-[90vh] flex-col items-center justify-center bg-[#fff]">
                     <div className="roadmpSection1-line h-[100px] w-[1120px] text-left text-[70px] leading-[70px] text-[#000]">
-                        <div className="titleLinear inline-block">Roadmap</div>
+                        <div className="titleLinear inline-block">{intl.get('Roadmap')}</div>
                     </div>
                     <div className="roadmpSection1-line mx-auto mt-[30px] w-[1120px] text-left font-montserrat-regular text-[30px] leading-[40px] text-[#000]">
-                        <div className="w-[800px]">
-                            The ORIGYN Foundation is dedicating extensive R&D assets across several
-                            developmental fields with the goal of enhancing the efficacy, speed, and
-                            usability of the ORIGYN Protocol. This roadmap provides insights into
-                            the numerous ongoing projects shaping the ORIGYN Protocol landscape, yet
-                            it doesn't encompass everything — stay tuned for more updates in the
-                            coming weeks.
-                        </div>
+                        <div className="w-[800px]">{intl.get('RoadmapContent')}</div>
                     </div>
                 </section>
             )}

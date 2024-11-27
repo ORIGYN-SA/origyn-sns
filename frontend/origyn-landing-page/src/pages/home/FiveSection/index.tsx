@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { Down } from '@icon-park/react';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -16,45 +17,42 @@ type CollapseType = {
     btnText?: string;
 };
 
-const Collapses: CollapseType[] = [
-    {
-        active: false,
-        title: 'Traceability',
-        content:
-            'Ensuring the end-to-end provenance of products from inception through consumption using the powerful biometric ORIGYN certificate.',
-        icon: read,
-        btn: false,
-    },
-    {
-        active: false,
-        title: 'Authenticity',
-        content:
-            'Utilizing biometric technology to confirm products are genuine and true to their origin.',
-        icon: art,
-        btn: false,
-        btnText: 'VISIT THE GLD NFT PROJECT',
-    },
-    {
-        active: false,
-        title: 'Tradability',
-        content:
-            'Enhancing secure and transparent exchanges of goods and assets, ensuring fairness in every transaction.',
-        icon: gold,
-        btn: false,
-        btnText: 'VISIT THE JULIAN OPIE PROJECT',
-    },
-    // {
-    //     active: false,
-    //     title: 'Property',
-    //     content: '',
-    //     icon: '',
-    //     btn: false,
-    //     btnText: 'VISIT THE JULIAN OPIE PROJECT',
-    // },
-];
-
 const FiveSection = () => {
     const [collapses, setCollapses] = useState<CollapseType[]>([]);
+
+    const Collapses: CollapseType[] = [
+        {
+            active: false,
+            title: intl.get('Traceability'),
+            content: intl.get('TraceabilityContent'),
+            icon: read,
+            btn: false,
+        },
+        {
+            active: false,
+            title: intl.get('Authenticity'),
+            content: intl.get('AuthenticityContent'),
+            icon: art,
+            btn: false,
+            btnText: intl.get('VISIT_GLD_NFT'),
+        },
+        {
+            active: false,
+            title: intl.get('Tradability'),
+            content: intl.get('TradabilityContent'),
+            icon: gold,
+            btn: false,
+            btnText: intl.get('VISIT_JULIAN_OPIE'),
+        },
+        // {
+        //     active: false,
+        //     title: 'Property',
+        //     content: '',
+        //     icon: '',
+        //     btn: false,
+        //     btnText: 'VISIT THE JULIAN OPIE PROJECT',
+        // },
+    ];
     useEffect(() => {
         setCollapses(Collapses);
         secondSection();

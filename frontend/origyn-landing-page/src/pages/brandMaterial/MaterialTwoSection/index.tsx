@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 import onlyLogo from '@/assets/onlyLogo.png';
@@ -62,7 +63,7 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Logos</div>
+                                <div className="text-left text-[30px]">{intl.get('Logos')}</div>
                                 <div className="mt-[40px] w-full">
                                     <img alt="" src={onlyLogo} className="mx-auto w-[70%]" />
                                 </div>
@@ -75,7 +76,7 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Colors</div>
+                                <div className="text-left text-[30px]">{intl.get('Colors')}</div>
                                 <div className="mt-[45px] grid grid-cols-4 gap-3">
                                     {colors.map((color, idx) => {
                                         return (
@@ -97,21 +98,21 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Language</div>
+                                <div className="text-left text-[30px]">{intl.get('Language')}</div>
                                 <div className="mt-[45px] flex h-[calc(100%-45px-40px)] flex-col justify-between">
                                     <div className="flex justify-end">
                                         <div className="language1 h-[38px] rounded-[38px] px-[10px] text-[20px] leading-[38px] text-[#fff]">
-                                            ORIGYN Protocol
+                                            {intl.get('ORIGYNProtocol')}
                                         </div>
                                     </div>
                                     <div className="flex justify-start">
                                         <div className="language2 h-[34px] rounded-[34px] px-[10px] text-[12px] leading-[34px] text-[#fff]">
-                                            OGY Token
+                                            {intl.get('OGYToken')}
                                         </div>
                                     </div>
                                     <div className="flex justify-start">
                                         <div className="language3 h-[44px] rounded-[44px] px-[10px] text-[24px] leading-[44px] text-[#fff]">
-                                            ORIGYN Certificate
+                                            {intl.get('ORIGYNCertificate')}
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +121,9 @@ const MaterialTwoSection = () => {
                     </div>
                     <div className="materialSection2-line1 mt-[20px] w-screen text-left font-montserrat-bold text-[#000]">
                         <div className="w-screen px-[30px]">
-                            <div className="text-left text-[26px]">Download documents</div>
+                            <div className="text-left text-[26px]">
+                                {intl.get('DownloadDocuments')}
+                            </div>
                             <div className="mt-[40px] flex flex-col items-center justify-start gap-y-[30px]">
                                 {/* <div
                                 className="h-[44px] cursor-pointer rounded-[22px] bg-white px-[30px] text-[18px] uppercase leading-[44px] ml-[80px]"
@@ -132,19 +135,19 @@ const MaterialTwoSection = () => {
                                     className="h-[44px] w-3/4 cursor-pointer rounded-[22px] bg-white text-center  text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/tokenomics.pdf')}
                                 >
-                                    tokenomics 3.0
+                                    {intl.get('tokenomics3')}
                                 </div>
                                 <div
                                     className="h-[44px] w-3/4 cursor-pointer rounded-[22px] bg-white text-center text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/fullOverview.pdf')}
                                 >
-                                    full overview
+                                    {intl.get('FullOverview')}
                                 </div>
                                 <div
                                     className="h-[44px] w-3/4 cursor-pointer rounded-[22px] bg-white text-center text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/factsheet.pdf')}
                                 >
-                                    factsheet
+                                    {intl.get('Factsheet')}
                                 </div>
                             </div>
                         </div>
@@ -162,7 +165,7 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Logos</div>
+                                <div className="text-left text-[30px]">{intl.get('Logos')}</div>
                                 <div className="mt-[40px] w-full">
                                     <img alt="" src={onlyLogo} className="mx-auto w-[80%]" />
                                 </div>
@@ -175,7 +178,7 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Colors</div>
+                                <div className="text-left text-[30px]">{intl.get('Colors')}</div>
                                 <div className="mt-[45px]">
                                     {colors.map((color, idx) => {
                                         return (
@@ -200,21 +203,21 @@ const MaterialTwoSection = () => {
                                     )
                                 }
                             >
-                                <div className="text-left text-[30px]">Language</div>
+                                <div className="text-left text-[30px]">{intl.get('Language')}</div>
                                 <div className="mt-[45px] flex h-[calc(100%-45px-40px)] flex-col justify-between">
                                     <div className="flex justify-end">
                                         <div className="language1 h-[38px] rounded-[38px] px-[10px] text-[20px] leading-[38px] text-[#fff]">
-                                            ORIGYN Protocol
+                                            {intl.get('ORIGYNProtocol')}
                                         </div>
                                     </div>
                                     <div className="flex justify-start">
                                         <div className="language2 h-[34px] rounded-[34px] px-[10px] text-[12px] leading-[34px] text-[#fff]">
-                                            OGY Token
+                                            {intl.get('OGYToken')}
                                         </div>
                                     </div>
                                     <div className="flex justify-start">
                                         <div className="language3 h-[44px] rounded-[44px] px-[10px] text-[24px] leading-[44px] text-[#fff]">
-                                            ORIGYN Certificate
+                                            {intl.get('ORIGYNCertificate')}
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +226,9 @@ const MaterialTwoSection = () => {
                     </div>
                     <div className="materialSection2-line1 w-[1120px] px-[30px] text-left font-montserrat-bold text-[#000]">
                         <div className="w-full">
-                            <div className="text-left text-[30px]">Download documents</div>
+                            <div className="text-left text-[30px]">
+                                {intl.get('DownloadDocuments')}
+                            </div>
                             <div className="mt-[50px] flex items-center justify-start">
                                 {/* <div
                                 className="h-[44px] cursor-pointer rounded-[22px] bg-white px-[30px] text-[18px] uppercase leading-[44px] ml-[80px]"
@@ -235,19 +240,19 @@ const MaterialTwoSection = () => {
                                     className="h-[44px] cursor-pointer rounded-[22px] bg-white px-[30px] text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/tokenomics.pdf')}
                                 >
-                                    tokenomics 3.0
+                                    {intl.get('tokenomics3')}
                                 </div>
                                 <div
                                     className="ml-[80px] h-[44px] cursor-pointer rounded-[22px] bg-white px-[30px] text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/fullOverview.pdf')}
                                 >
-                                    full overview
+                                    {intl.get('FullOverview')}
                                 </div>
                                 <div
                                     className="ml-[80px] h-[44px] cursor-pointer rounded-[22px] bg-white px-[30px] text-[18px] uppercase leading-[44px]"
                                     onClick={() => fileDownload('/pdf/factsheet.pdf')}
                                 >
-                                    factsheet
+                                    {intl.get('Factsheet')}
                                 </div>
                             </div>
                         </div>

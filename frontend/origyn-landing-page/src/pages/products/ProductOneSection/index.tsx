@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 // import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -39,19 +40,12 @@ const ProductOneSection = () => {
             <section className="prodSection1 flex h-[100vh] flex-col items-center justify-center bg-[#fff] px-[15px] md:h-[90vh] md:px-0">
                 <div className="prodSection1-line w-full text-left text-[28px] leading-[40px] text-[#000] md:h-[170px] md:w-[1120px] md:text-[70px] md:leading-[70px]">
                     <div className="titleLinear">
-                        The Most Powerful <br />
-                        Certificate in the World
+                        <span>{intl.get('MostPowerfulCertificate1')}</span> <br />
+                        <span>{intl.get('MostPowerfulCertificate2')}</span>
                     </div>
                 </div>
                 <div className="prodSection1-line mx-auto mt-[30px] text-left font-montserrat-regular text-[18px] leading-[26px] text-[#000] md:w-[1120px] md:text-[30px] md:leading-[40px]">
-                    <div className="md:w-[900px]">
-                        Step into the future with the ORIGYN Certificate - a sleeker, more advanced
-                        version of the traditional digital certificate. It allows you to secure your
-                        most important assets —images, PDFs, biometric data, videos, NDAs,
-                        intellectual property and more — permanently on the blockchain. The ORIGYN
-                        Certificate makes the process of protecting and exchanging information safer
-                        and easier, as well as provides new services.
-                    </div>
+                    <div className="md:w-[900px]">{intl.get('MostPowerfulCertificateContent')}</div>
                 </div>
             </section>
         </>

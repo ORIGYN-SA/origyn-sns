@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useCountUp } from 'use-count-up';
@@ -128,31 +129,31 @@ const Home = () => {
             <section className="section1 relative flex h-[80vh] w-[100vw] flex-col items-center justify-center  overflow-hidden bg-white md:h-[100vh] ">
                 <div className="mt-[-5%] flex h-full w-full flex-col items-center justify-center overflow-hidden text-[40px] md:mt-0 md:text-[102px]">
                     <div className="title title1 my-[10px] ml-[-25vw] flex items-center tracking-[0px] md:my-[20px] md:ml-[-23vw] md:tracking-[2px]">
-                        <p className="titleStroke">traceability</p>
+                        <p className="titleStroke">{intl.get('traceability')}</p>
                         <p className="realTitle">
-                            <span>traceability</span>
-                            <span className="hoverTitle">traceability</span>
+                            <span>{intl.get('traceability')}</span>
+                            <span className="hoverTitle">{intl.get('traceability')}</span>
                         </p>
-                        <p className="titleStroke">traceability</p>
+                        <p className="titleStroke">{intl.get('traceability')}</p>
                     </div>
                     <div className="title title2 my-[10px] ml-[2vw] flex items-center tracking-[0px] md:my-[20px] md:ml-0 md:tracking-[2px]">
-                        <p className="titleStroke">Authentication</p>
+                        <p className="titleStroke">{intl.get('Authentication')}</p>
                         <p className="realTitle">
-                            Authentication
-                            <span className="hoverTitle">Authentication</span>
+                            {intl.get('Authentication')}
+                            <span className="hoverTitle">{intl.get('Authentication')}</span>
                         </p>
-                        <p className="titleStroke">Authentication</p>
+                        <p className="titleStroke">{intl.get('Authentication')}</p>
                     </div>
                     <div className="title title3 my-[10px] mr-[-12vw] flex items-center tracking-[0px] md:my-[20px]  md:mr-[-18vw] md:tracking-[2px]">
-                        <p className="titleStroke">Certification</p>
+                        <p className="titleStroke">{intl.get('Certification')}</p>
                         <p
                             className="realTitle"
                             onClick={() => !isMobile && navigator('/products/certificate')}
                         >
-                            Certification
-                            <span className="hoverTitle">Certification</span>
+                            {intl.get('Certification')}
+                            <span className="hoverTitle">{intl.get('Certification')}</span>
                         </p>
-                        <p className="titleStroke">Certification</p>
+                        <p className="titleStroke">{intl.get('Certification')}</p>
                     </div>
                     <div className="numBox mt-[10vh] flex h-[180px] w-[80%] max-w-[400px] flex-col items-center justify-center rounded-[20px] border-[2px] border-[#fff] px-[20px] md:mt-[5vw] md:h-[230px] md:w-[550px] md:max-w-none">
                         <div className="mr-[10px] mt-[8%] flex items-center font-montserrat-bold text-[24px] text-[#fff] md:text-[40px]">
@@ -160,7 +161,7 @@ const Home = () => {
                             <div className="ml-[10px] font-montserrat-bold">OGY</div>
                         </div>
                         <div className="mt-[3%] flex items-center font-montserrat-regular text-[12px] text-[#fff] md:text-[16px]">
-                            Total OGY Supply
+                            {intl.get('TotalOGYSupply')}
                         </div>
                         <div
                             onClick={() => window.open('https://dashboard.origyn.com/')}

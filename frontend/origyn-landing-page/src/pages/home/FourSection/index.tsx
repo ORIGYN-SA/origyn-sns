@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import intl from 'react-intl-universal';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -60,10 +61,10 @@ const ThreeSection = () => {
         <>
             <section className="section4 mx-auto flex h-[100vh] flex-col items-center justify-center bg-[#f4f4f4] md:h-[100vh] md:min-w-[1120px]">
                 <div className="section4-line1 mb-[20px] text-left font-montserrat-regular text-[24px] leading-[30px] text-[#000]  md:w-[950px]">
-                    Designed to Trust
+                    {intl.get('DesignedToTrust')}
                 </div>
                 <div className="section4-line1 mb-[40px] font-montserrat-bold text-[34px] leading-[50px] text-[#000] md:w-[950px] md:text-left  md:text-[40px]">
-                    Products & Tools
+                    {intl.get('ProductsAndTools')}
                 </div>
                 <div className="section4-line1 max-w-[375px] cursor-pointer text-center md:max-w-[1920px]">
                     <Swiper
@@ -90,89 +91,81 @@ const ThreeSection = () => {
                         <SwiperSlide onClick={() => changeSlide(0)}>
                             <div className="card h-[400px] w-[370px] p-[15px] md:h-[460px] md:w-[950px] md:p-[60px]">
                                 <div className="text-left font-montserrat-bold text-[24px] leading-[30px] md:h-[50px] md:text-[32px] md:leading-[40px]">
-                                    ORIGYN Certificate
+                                    {intl.get('ORIGYNCertificate')}
                                 </div>
                                 <div className="mt-[10px] text-left text-[16px] leading-[24px] md:mt-[25px] md:text-[20px] md:leading-[30px]">
-                                    This is the world's most advanced and comprehensive digital
-                                    biometric certification technology. All data is stored fully
-                                    on-chain to ensure certificates are immutable and transparent to
-                                    everyone.
+                                    {intl.get('ORIGYNCertificateDescription')}
                                 </div>
                                 <div className="mt-[10px] flex items-start justify-between font-montserrat-regular text-[14px] md:mt-[20px] md:text-[24px]">
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        100% On-chain
+                                        {intl.get('100OnChain')}
                                     </div>
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        Cost efficient
+                                        {intl.get('CostEfficient')}
                                     </div>
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        Immutable
+                                        {intl.get('Immutable')}
                                     </div>
                                 </div>
                                 <div
                                     className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => navigate('/products/certificate')}
                                 >
-                                    Learn more
+                                    {intl.get('LearnMore')}
                                 </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide onClick={() => changeSlide(1)}>
                             <div className="card cardGreen h-[400px] w-[370px] p-[15px] md:h-[460px] md:w-[950px] md:p-[60px]">
                                 <div className="text-left font-montserrat-bold text-[24px] leading-[30px] md:h-[50px] md:text-[32px] md:leading-[40px]">
-                                    OGY Dashboard <br />
+                                    {intl.get('OGYDashboard')} <br />
                                 </div>
                                 <div className="mt-[10px] text-left text-[16px] leading-[24px] md:mt-[25px] md:text-[20px] md:leading-[30px]">
-                                    The OGY Dashboard is “The ORIGYN Face” and delivers real-time
-                                    data about the OGY token within the Protocol. It allows users to
-                                    view and understand all the metrics, distribution of tokens,
-                                    transaction history, and governance information. It also
-                                    provides a visual interface to interact directly with the ORIGYN
-                                    Protocol and its different tools.
+                                    {intl.get('OGYDashboardDescription')}
                                 </div>
                                 <div className="mt-[10px] flex items-start justify-between font-montserrat-regular text-[14px] md:mt-[20px] md:text-[24px]">
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        Real-time data
+                                        {intl.get('RealTimeData')}
                                     </div>
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        Governance
+                                        {intl.get('Governance')}
                                     </div>
-                                    <div className="h-[32px] border-l-[2px] pl-[5px]">Explorer</div>
+                                    <div className="h-[32px] border-l-[2px] pl-[5px]">
+                                        {intl.get('Explorer')}
+                                    </div>
                                 </div>
                                 <div
                                     className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => window.open('https://dashboard.origyn.com')}
                                 >
-                                    Learn more
+                                    {intl.get('LearnMore')}
                                 </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide onClick={() => changeSlide(2)}>
                             <div className="card cardPurple h-[400px] w-[370px] p-[15px] md:h-[460px] md:w-[950px] md:p-[60px]">
                                 <div className="text-left font-montserrat-bold text-[24px] leading-[30px] md:h-[50px] md:text-[32px] md:leading-[40px]">
-                                    ORIGYN dApps <br />
+                                    {intl.get('LearnMore')} <br />
                                 </div>
                                 <div className="mt-[10px] text-left text-[16px] leading-[24px] md:mt-[25px] md:text-[20px] md:leading-[30px]">
-                                    ORIGYN dApps is a set of open source applications that that
-                                    allows users to design, edit and mint certificates. First
-                                    incepted by the ORIGYN Foundation, individual developers,
-                                    universities and companies will build a rich ecosystem of dApps
-                                    in the near future.
+                                    {intl.get('ORIGYNDAppsDescription')}
                                 </div>
                                 <div className="mt-[10px] flex items-start justify-between text-left font-montserrat-regular text-[14px] md:mt-[20px] md:text-[24px]">
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        Minting Studio
+                                        {intl.get('MintingStudio')}
                                     </div>
                                     <div className="h-[32px] border-l-[2px] pl-[5px]">
-                                        ORIGYN Vault
+                                        {intl.get('ORIGYNVault')}
                                     </div>
-                                    <div className="h-[32px] border-l-[2px] pl-[5px]">APIs</div>
+                                    <div className="h-[32px] border-l-[2px] pl-[5px]">
+                                        {intl.get('APIs')}
+                                    </div>
                                 </div>
                                 <div
                                     className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => navigate('/products/management-cloud')}
                                 >
-                                    Learn more
+                                    {intl.get('LearnMore')}
                                 </div>
                             </div>
                         </SwiperSlide>

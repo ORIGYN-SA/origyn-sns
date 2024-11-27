@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 // import barba from '@barba/core';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -55,13 +56,11 @@ const TecTwoSection = () => {
                 className="tecSection2 mx-auto flex h-[100vh] flex-col items-center justify-center"
             >
                 <div className="tecSection2-line1 mx-auto mb-[20px] w-full px-[15px] text-left font-montserrat-bold text-[26px] leading-[36px] text-[#fff] md:w-[1120px] md:px-0 md:text-[40px]  md:leading-[50px]">
-                    Learning about <br />
-                    the ORIGYN NFT Standard
+                    <span>{intl.get('LearningAboutStandard1')}</span> <br />
+                    <span>{intl.get('LearningAboutStandard2')}</span>
                 </div>
                 <div className="tecSection2-line1 mx-auto mb-[30px] px-[15px] text-left font-montserrat-regular text-[16px] leading-[30px] text-[#fff] md:mb-[40px] md:w-[1120px] md:px-0 md:text-[24px]">
-                    This standard is created so that the ORIGYN ecosystem can interoperate with the
-                    digital assets described by the standards. Standards encourage the creation of
-                    third-party applications and utilities.
+                    {intl.get('LearningAboutStandardContent')}
                 </div>
                 <div className="tecSection2-line1 md:w-[1120px]">
                     <div className="flex w-full items-center justify-between text-[20px] leading-[30px] text-[#000]">
@@ -89,7 +88,7 @@ const TecTwoSection = () => {
                             src={img5}
                             className="mr-[10px] h-[24px] w-[24px] md:h-[30px] md:w-[30px]"
                         />
-                        USE THE STANDARD
+                        {intl.get('USE_THE_STANDARD')}
                     </div>
                 </div>
             </section>

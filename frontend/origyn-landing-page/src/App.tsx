@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import TagManager from 'react-gtm-module';
+import intl from 'react-intl-universal';
 import { useLocation, useRoutes } from 'react-router-dom';
 // import { FloatButton } from 'antd';
 import gsap from 'gsap';
@@ -8,11 +9,19 @@ import Nav from '@/components/nav';
 import { useFollowingDotCursor } from '@/utils/index';
 import { usePageInfoStore } from '@/store';
 import './App.scss';
+import enUS from './locales/en_US.json';
 import routes from './router';
 
 const whiteSections = {
     home: [1, 4, 5, 7, 8, 10, 11, 12],
 };
+
+const LOCALES_LIST = [
+    {
+        label: 'English',
+        value: 'en-US',
+    },
+];
 
 const is_prod = import.meta.env.PROD;
 console.log(is_prod);
@@ -23,6 +32,10 @@ if (is_prod) {
     };
     TagManager.initialize(tagManagerArgs);
 }
+
+const LOCALE_DATA = {
+    'en-US': enUS,
+};
 
 // 跳转第三方地址
 export const goCommunicate = (key: number) => {
@@ -52,6 +65,8 @@ function App() {
     const smoother = useRef<ScrollSmoother>();
     const [showBlockIcon, setShowBlockIcon] = useState(false);
     const [isMobile, setIsmobile] = useState(false);
+    const [initDone, setInitDone] = useState(false);
+    console.log(initDone);
 
     const getPageWidth = usePageInfoStore((store) => store.getPageWidth);
     const reset = usePageInfoStore((store) => store.reset);
@@ -60,6 +75,33 @@ function App() {
     // const [changebg, setChangeBg] = useState(false);
     // 鼠标手势
     const { cursorDestroy } = useFollowingDotCursor({ color: ['transparent'] });
+
+    const setCurrentLocale = (currentLocale: string) => {
+        intl.init({
+            // debug: true,
+            currentLocale,
+            locales: LOCALE_DATA,
+        });
+    };
+
+    const initializeIntl = () => {
+        // 1. Get the currentLocale from url, cookie, or browser setting
+        let currentLocale = intl.determineLocale({
+            urlLocaleKey: 'lang', // Example: https://fe-tool.com/react-intl-universal?lang=en-US
+            cookieLocaleKey: 'lang', // Example: "lang=en-US" in cookie
+        });
+
+        // 2. Fallback to "en-US" if the currentLocale isn't supported in LOCALES_LIST
+        if (!LOCALES_LIST.some((item) => item.value === currentLocale)) {
+            currentLocale = 'en-US';
+        }
+
+        // 3. Set currentLocale and load locale data
+        setCurrentLocale(currentLocale);
+
+        // 4. After loading locale data, start to render
+        setInitDone(true);
+    };
 
     useEffect(() => {
         getPageWidth();
@@ -131,6 +173,10 @@ function App() {
         // 首屏字体变化过度
         tl.to(nav, { y: -250, duration: 0.21 }, 0);
     };
+
+    useEffect(() => {
+        initializeIntl();
+    }, []);
 
     const mainSite = (
         <div>

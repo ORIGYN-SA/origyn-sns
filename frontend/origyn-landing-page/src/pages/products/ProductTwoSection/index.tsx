@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { Down } from '@icon-park/react';
 import gsap from 'gsap';
 import $ from 'jquery';
@@ -14,20 +15,18 @@ type CollapseType = {
 const Collapses: CollapseType[] = [
     {
         active: false,
-        title: 'Expect more than just certification',
-        content:
-            'ORIGYN goes beyond certification by providing user-friendly tools. With our intuitive minting studio and API integration, businesses can effortlessly create and integrate our biometric powerful certificates.',
+        title: intl.get('AboutCertificateTitle1'),
+        content: intl.get('AboutCertificateContent1'),
     },
     {
         active: false,
-        title: 'Certificate crafted for your business',
-        content:
-            'The ORIGYN Certificate is one-of-a-kind—just like your business. Our modular approach ensures that the certificate features can be customized to match and grow with your products.',
+        title: intl.get('AboutCertificateTitle2'),
+        content: intl.get('AboutCertificateContent2'),
     },
     {
         active: false,
-        title: 'Most advanced certification technology',
-        content: `Powered by the groundbreaking Internet Computer (IC) blockchain, our certificates redefine what's possible. Experience unmatched data storage, fortified security, and seamless integration at an unbeatable price.`,
+        title: intl.get('AboutCertificateTitle3'),
+        content: intl.get('AboutCertificateContent3'),
     },
 ];
 
@@ -87,8 +86,8 @@ const ProductTwoSection = () => {
         <div>
             <section className="prodSection2 mx-auto flex h-[100vh] flex-col items-center justify-center md:min-w-[1120px]">
                 <div className="prodSection2-line1 mb-[20px] w-full px-[15px] text-left font-montserrat-bold text-[28px] leading-[36px] text-[#fff] md:mb-[40px] md:w-[850px] md:text-[40px] md:leading-[50px]">
-                    Learning about <br />
-                    the ORIGYN Certificate
+                    <span>{intl.get('LearningAboutCertificate1')}</span> <br />
+                    <span>{intl.get('LearningAboutCertificate2')}</span>
                 </div>
                 <div className="prodSection2-line1 text-left text-[#fff] md:w-[1120px]">
                     {collapses.map((item, index) => {
@@ -124,16 +123,18 @@ const ProductTwoSection = () => {
                 <div className="prodSection2-line1 mt-[15px] w-full px-[15px] text-center text-[#fff] md:mt-[30px] md:w-[1120px] md:px-0">
                     <div className="mx-auto flex flex-col items-start justify-center md:w-[850px]">
                         <div className="mb-[20px] font-montserrat-regular text-[16px] md:mb-[80px] md:text-[30px]">
-                            <span className="font-montserrat-regular">Secure </span>
+                            <span className="font-montserrat-regular">{intl.get('Secure')} </span>
                             <span className="font-montserrat-bold">1GB </span>
-                            <span className="font-montserrat-regular">of data for </span>
-                            <span className="font-montserrat-bold">100 years</span>
-                            <span className="font-montserrat-regular">, only </span>
+                            <span className="font-montserrat-regular">
+                                {intl.get('OfDataFor')}{' '}
+                            </span>
+                            <span className="font-montserrat-bold">100 {intl.get('Years')}</span>
+                            <span className="font-montserrat-regular">{intl.get('Only')}</span>
                             <span className="font-montserrat-bold">$60.</span>
                         </div>
 
                         <div className="mb-[20px] text-left font-montserrat-bold text-[15px] md:mb-[30px] md:text-[22px]">
-                            Example of a live certificate of FederItaly.
+                            {intl.get('ExampleCertificates')}
                         </div>
                         <div
                             className="btn-common flex h-[36px] cursor-pointer items-center justify-evenly rounded-[22px] bg-[#fff] px-[10px] font-montserrat-bold text-[14px] leading-[36px] text-[#000] md:mx-0 md:h-[44px] md:w-[300px] md:text-[16px] md:leading-[44px]"
@@ -143,7 +144,7 @@ const ProductTwoSection = () => {
                                 )
                             }
                         >
-                            ACCESS THE ORIGYN VAULT
+                            {intl.get('ACCESS_VAULT')}
                         </div>
                     </div>
                 </div>

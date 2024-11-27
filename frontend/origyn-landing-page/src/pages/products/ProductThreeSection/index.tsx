@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import intl from 'react-intl-universal';
 import gsap from 'gsap';
 import $ from 'jquery';
 // Import Swiper styles
@@ -63,11 +64,10 @@ const ProductThreeSection = () => {
         <>
             <section className="prodSection3 mx-auto flex flex-col items-center justify-center bg-[#f4f4f4] md:min-w-[1120px]">
                 <div className="prodSection3-line1 mb-[20px] text-left font-montserrat-bold text-[28px] leading-[36px] text-[#000] md:w-[950px] md:text-[40px]  md:leading-[50px]">
-                    ORIGYN dApps
+                    {intl.get('ORIGYNDApps')}
                 </div>
                 <div className="prodSection3-line1 mx-[15px] mb-[20px] text-left font-montserrat-regular text-[16px] leading-[30px] text-[#000] md:mx-0 md:mb-[40px] md:w-[950px]  md:text-[24px]">
-                    We have built a suite of solutions for corporate and end users to easily engage
-                    with the OGY certificates.
+                    {intl.get('ORIGYNDAppsContent')}
                 </div>
                 <div className="prodSection3-line1 tabs mx-[6px] flex h-[50px] w-[calc(100vw-30px)] items-center justify-around rounded-[35px] bg-[#fff] leading-[50px] md:h-[70px] md:w-[950px] md:leading-[70px]">
                     {tabsComps.map((item, idx) => {
@@ -97,14 +97,7 @@ const ProductThreeSection = () => {
                         <SwiperSlide>
                             <div className="card">
                                 <div className="mt-[15px] text-left text-[16px] leading-[30px] text-[#000] md:mt-[25px] md:text-[20px]">
-                                    The Minting Studio is a user-friendly tool designed to simplify
-                                    the process of creating and minting certificates onto the
-                                    blockchain. It was specifically developed to make blockchain
-                                    innovation accessible and effortless for companies seeking to
-                                    adopt the OGY standard offered by ORIGYN. The platform is
-                                    flexible and customizable to meet client needs. It allows users
-                                    to create, manage certificates and access analytics from one
-                                    simple interface.
+                                    {intl.get('TheMintingStudio')}
                                 </div>
                                 {/* <div className="btn-common-rect mt-[30px] h-[44px] w-[290px] rounded-[44px] text-center font-montserrat-bold text-[16px] leading-[44px] text-[#fff]">
                                     ACCESS THE MINTING STUDIO
@@ -114,11 +107,7 @@ const ProductThreeSection = () => {
                         <SwiperSlide>
                             <div className="card">
                                 <div className="mt-[15px] text-left text-[16px] leading-[30px] text-[#000] md:mt-[25px] md:text-[20px]">
-                                    A next-generation application designed to store, view and
-                                    transfer the OGY certificates, while securing data forever on an
-                                    impenetrable ledger. ORIGYN is using a secure but easy-to-use
-                                    interface that lower the barrier of entry to blockchain for
-                                    consumers via both desktop and mobile devices.
+                                    {intl.get('DAPPStore')}
                                 </div>
                                 {/* <div className="btn-common-rect mt-[30px] h-[44px] w-[280px] rounded-[44px] text-center font-montserrat-bold text-[16px] leading-[44px] text-[#fff]">
                                     ACCESS THE ORIGYN VAULT
@@ -128,14 +117,7 @@ const ProductThreeSection = () => {
                         <SwiperSlide>
                             <div className="card">
                                 <div className="mt-[15px] text-left text-[16px] leading-[30px] text-[#000] md:mt-[25px] md:text-[20px]">
-                                    ORIGYN is developing APIs (Application Programming Interfaces)
-                                    that allow businesses to seamlessly integrate their powerful
-                                    suite of tools into their existing systems. APIs act as a bridge
-                                    between different software systems, enabling smooth
-                                    communication and interaction. By leveraging ORIGYN's APIs,
-                                    companies can incorporate features such as the minting studio,
-                                    unlocking the full potential of the ORIGYN ecosystem within
-                                    their own systems.
+                                    {intl.get('ORIGYNAPIs')}
                                 </div>
                                 {/* <div className="btn-common-rect mt-[30px] h-[44px] w-[210px] rounded-[44px] text-center font-montserrat-bold text-[16px] leading-[44px] text-[#fff]">
                                     APIs USE THE APIs

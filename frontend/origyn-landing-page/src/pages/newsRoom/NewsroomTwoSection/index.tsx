@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import intl from 'react-intl-universal';
 import axios from 'axios';
 // import pg1 from '@/assets/bg1.png';
 // import pg2 from '@/assets/bg2.png';
@@ -21,7 +22,7 @@ const NewItem = ({ item, showTag }: itemPropType) => {
                 <img className="mx-auto h-full" src={item.thumbnail} alt="" />
                 {showTag && (
                     <div className="absolute bottom-0 left-0 h-[30px] w-[100px] rounded-tr-[20px] bg-[#fff] text-center font-montserrat-bold text-[12px] leading-[35px] text-[rgba(0,0,0,0.5)]">
-                        INDUSTRY
+                        {intl.get('INDUSTRY')}
                     </div>
                 )}
                 {item.isVideo && (
@@ -53,7 +54,7 @@ const VideoItem = ({ item, showTag }: itemPropType) => {
                 <img className="mx-auto" src={item.thumbnail} alt="" />
                 {showTag && (
                     <div className="absolute bottom-0 left-0 h-[30px] w-[100px] rounded-tr-[20px] bg-[#fff] text-center font-montserrat-bold text-[12px] leading-[35px] text-[rgba(0,0,0,0.5)]">
-                        INDUSTRY
+                        {intl.get('INDUSTRY')}
                     </div>
                 )}
                 {item.isVideo && (
@@ -170,7 +171,9 @@ const NewsroomTwoSection = () => {
             {isMobile ? (
                 <section className="newsroomSection2 min-h-[200vh] w-[100vw] bg-[#f4f4f4]">
                     <div className="newsroomSection2-line1 mx-auto w-screen px-[25px] pt-[80px] text-left font-montserrat-bold text-[#000]">
-                        <div className="text-left text-[30px]">Latest press releases</div>
+                        <div className="text-left text-[30px]">
+                            {intl.get('LatestPressReleases')}
+                        </div>
                         <div className="my-[50px] flex w-full grid-cols-3 flex-col gap-5">
                             {articles.map((item, idx) => {
                                 if (idx < 6 && !showAllArticle) {
@@ -198,12 +201,12 @@ const NewsroomTwoSection = () => {
                                 className="bg-leaner mx-auto mt-[30px] h-[44px] w-[300px] cursor-pointer rounded-[44px] text-center text-[16px] uppercase leading-[44px] text-[#fff]"
                                 onClick={() => setShowAllArticle(true)}
                             >
-                                view all
+                                {intl.get('ViewAll')}
                             </div>
                         )}
                     </div>
                     <div className="newsroomSection2-line1 mx-auto w-screen px-[25px] pb-[100px] pt-[80px] text-left font-montserrat-bold text-[#000]">
-                        <div className="text-left text-[30px]">Latest videos</div>
+                        <div className="text-left text-[30px]">{intl.get('LatestVideos')}</div>
                         <div className="mt-[50px] flex w-full flex-col gap-5">
                             {videoList.map((item, idx) => {
                                 if (idx < 6 && !showAllVideos) {
@@ -231,7 +234,7 @@ const NewsroomTwoSection = () => {
                                 className="bg-leaner rounded-[44px mx-auto mt-[30px] h-[44px] w-[300px] cursor-pointer rounded-[44px] text-center text-[16px] uppercase leading-[44px] text-[#fff]"
                                 onClick={() => setShowAllVideos(true)}
                             >
-                                view all
+                                {intl.get('ViewAll')}
                             </div>
                         )}
                     </div>
@@ -239,7 +242,9 @@ const NewsroomTwoSection = () => {
             ) : (
                 <section className="newsroomSection2 min-h-[200vh] w-[100vw] bg-[#f4f4f4]">
                     <div className="newsroomSection2-line1 mx-auto w-[1120px] px-[30px] pt-[80px] text-left font-montserrat-bold text-[#000]">
-                        <div className="text-left text-[30px]">Latest press releases</div>
+                        <div className="text-left text-[30px]">
+                            {intl.get('LatestPressReleases')}
+                        </div>
                         <div className="my-[50px] grid w-full grid-cols-3 gap-5">
                             {articles.map((item, idx) => {
                                 if (idx < 6 && !showAllArticle) {
@@ -267,12 +272,12 @@ const NewsroomTwoSection = () => {
                                 className="bg-leaner mx-auto mt-[30px] h-[44px] w-[300px] cursor-pointer rounded-[44px] text-center text-[16px] uppercase leading-[44px] text-[#fff]"
                                 onClick={() => setShowAllArticle(true)}
                             >
-                                view all
+                                {intl.get('ViewAll')}
                             </div>
                         )}
                     </div>
                     <div className="newsroomSection2-line1 mx-auto w-[1120px] px-[30px] pb-[100px] pt-[80px] text-left font-montserrat-bold text-[#000]">
-                        <div className="text-left text-[30px]">Latest videos</div>
+                        <div className="text-left text-[30px]">{intl.get('LatestVideos')}</div>
                         <div className="mt-[50px] grid w-full grid-cols-3 gap-5">
                             {videoList.map((item, idx) => {
                                 if (idx < 6 && !showAllVideos) {
@@ -300,7 +305,7 @@ const NewsroomTwoSection = () => {
                                 className="bg-leaner rounded-[44px mx-auto mt-[30px] h-[44px] w-[300px] cursor-pointer rounded-[44px] text-center text-[16px] uppercase leading-[44px] text-[#fff]"
                                 onClick={() => setShowAllVideos(true)}
                             >
-                                view all
+                                {intl.get('ViewAll')}
                             </div>
                         )}
                     </div>

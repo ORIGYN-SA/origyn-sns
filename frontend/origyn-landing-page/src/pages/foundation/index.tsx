@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import intl from 'react-intl-universal';
 import foundationImg from '@/assets/foundation.png';
 import './index.scss';
 
@@ -12,7 +13,7 @@ const Foundation = () => {
             <section className="flex h-[100vh] w-[100vw] flex-col items-center justify-center">
                 <img className="mb-[30px] w-[220px]" alt="" src={foundationImg} />
                 <div className="font-montserrat-regular text-[32px] leading-[40px]">
-                    Website in progress. Stay tuned for exciting updates.
+                    {intl.get('FoundationInProgress')}
                 </div>
             </section>
         </div>
