@@ -3,7 +3,10 @@ spec:
     src-folder:
       description: The NextJS project folder name. Must be located in the /frontend/ folder
       options:
-        ["ogy_dashboard"]
+        [
+        "ogy_dashboard",
+        "origyn_landing_page"
+        ]
 ---
 # Frontend builds
 
