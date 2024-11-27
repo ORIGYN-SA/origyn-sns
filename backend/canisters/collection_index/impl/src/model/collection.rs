@@ -57,8 +57,7 @@ impl CollectionModel {
             return Err(InsertCategoryError::CategoryAlreadyExists);
         }
 
-        let mut new_category = Category::default();
-        new_category.name = category_name;
+        let new_category = Category::new(&category_name);
         self.categories.insert(self.categories.len() as u64, new_category);
 
         Ok(())
@@ -84,19 +83,6 @@ impl CollectionModel {
     ) -> Result<(), UpdateCollectionCategoryError> {
         if let Some(mut collection) = self.collections.get(&collection_canister_id) {
             let old_category_id = collection.category.clone();
-
-            // check the old category exists
-            if let Some(old_cat_id) = &old_category_id {
-                if let None = self.categories.get(&old_cat_id) {
-                    return Err(
-                        UpdateCollectionCategoryError::CategoryNotFound(
-                            format!(
-                                "Can't update collection because the old category of id : {old_cat_id} does not exist"
-                            )
-                        )
-                    );
-                };
-            }
 
             // check the new category exists
             if let None = self.categories.get(&new_category_id) {

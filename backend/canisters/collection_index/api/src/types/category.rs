@@ -1,4 +1,4 @@
-use candid::{ CandidType, Principal };
+use candid::CandidType;
 use serde::{ Deserialize, Serialize };
 
 pub type CategoryID = u64;
@@ -10,12 +10,12 @@ pub struct Category {
     pub name: String,
 }
 
-impl Default for Category {
-    fn default() -> Self {
+impl Category {
+    pub fn new(name: &str) -> Self {
         Self {
             collection_count: 0u64,
             active: true,
-            name: String::default(),
+            name: name.to_string(),
         }
     }
 }
