@@ -1,7 +1,8 @@
 
-use std::ops::Add;
-use candid::CandidType;
+use std::{borrow::Cow, ops::Add};
+use candid::{CandidType, Decode, Encode};
 use ic_stable_memory::{derive::{StableType, AsFixedSizeBytes}, collections::{SBTreeMap, SVec}};
+use ic_stable_structures::{storable::Bound, Storable};
 use serde::{Deserialize, Serialize};
 
 use crate::core::{runtime::RUNTIME_STATE, stable_memory::Main};
@@ -172,6 +173,21 @@ impl Add for HistoryData {
         }
     }
 }
+impl Storable for HistoryData {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 32,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+
  #[derive(CandidType, StableType, Deserialize, Serialize, Clone, Default, AsFixedSizeBytes, Copy, Debug)]
  pub struct Overview {
     pub first_active: u64,

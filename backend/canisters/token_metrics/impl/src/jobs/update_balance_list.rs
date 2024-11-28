@@ -1,21 +1,22 @@
+use crate::memory::VM;
 use canister_time::run_now_then_interval;
 use utils::principal::string_to_account;
-use std::collections::BTreeMap;
+use ic_stable_structures::Vec as SVec;
 use icrc_ledger_types::icrc1::account::Account;
 use super_stats_v3_api::account_tree::Overview as LedgerOverview;
 use super_stats_v3_api::{
     stats::queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
     stats::queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
 };
-use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
+use token_metrics_api::token_data::{ GovernanceStats, WalletEntry, WalletOverview };
 use std::collections::BTreeMap as NormalBTreeMap;
 use std::{ collections::HashMap, time::Duration };
-use tracing::{ debug, error, info };
+use tracing::{ debug, info };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
-// every 2 hours
-const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 120 * 60 * 1_000;
+// every 3 hours
+const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 3 * 3_600 * 1000;
 
 pub fn start_job() {
     info!("Starting the update ledger balance list job...");
@@ -48,7 +49,7 @@ pub async fn update_balance_list() {
                 // Insert the item in the list with all accounts
                 temp_wallets_list.insert(account, new_stats.clone());
             }
-            Err(err) => error!(err),
+            Err(err) => info!(err),
         }
     }
     // Iterate through principals
@@ -71,25 +72,25 @@ pub async fn update_balance_list() {
                     new_stats.clone()
                 );
             }
-            Err(err) => error!(err),
+            Err(err) => info!(err),
         }
     }
 
     // Going through all governance principals and apending their stats
     // to wallets_list and merged_wallets_list
-    let governance_principals = read_state(|state| state.data.principal_gov_stats.clone());
-
-    for (principal, gov_stats) in governance_principals {
-        let total_staked = gov_stats.total_staked.0.clone().try_into().unwrap();
-        let new_stats = WalletOverview {
-            ledger: LedgerOverview::default(),
-            governance: gov_stats,
-            total: total_staked,
-        };
-        let account = Account::from(principal);
-        check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
-        check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
-    }
+    mutate_state(|state| {
+        for (principal, gov_stats) in state.data.principal_gov_stats.iter() {
+            let total_staked = gov_stats.clone().total_staked.0.try_into().unwrap_or(0u64);
+            let new_stats = WalletOverview {
+                ledger: LedgerOverview::default(),
+                governance: gov_stats,
+                total: total_staked,
+            };
+            let account = Account::from(principal);
+            check_and_update_list(&mut temp_merged_wallets_list, account, new_stats.clone());
+            check_and_update_list(&mut temp_wallets_list, account, new_stats.clone());
+        }
+    });
 
     let treasury_account = read_state(|state| state.data.treasury_account.clone());
 
@@ -120,8 +121,8 @@ pub async fn update_balance_list() {
             }
         }
 
-        state.data.merged_wallets_list = sort_map_descending(&temp_merged_wallets_list);
-        state.data.wallets_list = sort_map_descending(&temp_wallets_list);
+        sort_map_descending(&mut state.data.merged_wallets_list, &temp_merged_wallets_list);
+        sort_map_descending(&mut state.data.wallets_list, &temp_wallets_list);
 
         state.data.active_users.active_principals_count = count_active_users(
             &temp_merged_wallets_list
@@ -164,7 +165,7 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
             }
             Err(err) => {
                 let message = format!("{err:?}");
-                error!(message, "update_balance_list -> get_principal_holders");
+                info!(message, "update_balance_list -> get_principal_holders");
             }
         }
     }
@@ -192,7 +193,7 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
             }
             Err(err) => {
                 let message = format!("{err:?}");
-                error!(message, "update_balance_list -> get_account_holders");
+                info!(message, "update_balance_list -> get_account_holders");
             }
         }
     }
@@ -221,20 +222,30 @@ fn check_and_update_list(
     }
 }
 
-fn count_active_users(list: &BTreeMap<Account, WalletOverview>) -> usize {
+fn count_active_users(list: &NormalBTreeMap<Account, WalletOverview>) -> usize {
     list.values()
         .filter(|wallet| wallet.total > 0)
         .count()
 }
 fn sort_map_descending(
+    state_vec: &mut SVec<WalletEntry, VM>,
     map: &NormalBTreeMap<Account, WalletOverview>
-) -> Vec<(Account, WalletOverview)> {
-    let mut vec: Vec<(Account, WalletOverview)> = map
+) {
+    let mut vec: Vec<WalletEntry> = map
         .iter()
-        .map(|(k, v)| (k.clone(), v.clone()))
+        .map(|(k, v)| WalletEntry(k.clone(), v.clone()))
         .collect();
 
     vec.sort_by(|a, b| b.1.total.cmp(&a.1.total));
 
-    vec
+    for (index, value) in vec.iter().enumerate() {
+        if state_vec.len() > (index as u64) {
+            state_vec.set(index as u64, value);
+        } else {
+            match state_vec.push(value) {
+                Ok(_) => {}
+                Err(e) => info!("sort_map_descneding -> error when inserting to state_vec: {}", e),
+            }
+        }
+    }
 }

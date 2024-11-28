@@ -214,16 +214,17 @@ fn update_voting_history(state: &mut RuntimeState, proposal: &ProposalData, part
     // Update the daily voting_participation_history to include this proposal
     let day_of_proposal = proposal.proposal_creation_timestamp_seconds / 86400;
 
-    let updated_voting_calculations = voting_history_calculations
-        .entry(day_of_proposal)
-        .and_modify(|value| {
-            value.valid_tally_count += 1;
-            value.cumulative_voting_participation += participation;
-        })
-        .or_insert(VotingHistoryCalculations {
-            cumulative_voting_participation: participation,
-            valid_tally_count: 1,
+    let mut updated_voting_calculations = voting_history_calculations
+        .get(&day_of_proposal)
+        .unwrap_or(VotingHistoryCalculations {
+            cumulative_voting_participation: 0.0,
+            valid_tally_count: 0,
         });
+
+    updated_voting_calculations.valid_tally_count += 1;
+    updated_voting_calculations.cumulative_voting_participation += participation;
+
+    voting_history_calculations.insert(day_of_proposal, updated_voting_calculations.clone());
 
     let new_voting_history_value = (((
         updated_voting_calculations.cumulative_voting_participation as f64
@@ -231,12 +232,7 @@ fn update_voting_history(state: &mut RuntimeState, proposal: &ProposalData, part
         (updated_voting_calculations.valid_tally_count as f64)) *
         100.0) as u64;
 
-    voting_history
-        .entry(day_of_proposal)
-        .and_modify(|value| {
-            *value = new_voting_history_value;
-        })
-        .or_insert(new_voting_history_value);
+    voting_history.insert(day_of_proposal, new_voting_history_value);
 }
 #[cfg(test)]
 mod tests {
@@ -297,16 +293,15 @@ mod tests {
         });
 
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
-        let voting_participation_history = read_state(|state|
-            state.data.voting_participation_history.clone()
-        );
 
         assert_eq!(proposals_metrics.total_proposals, 1);
         assert_eq!(proposals_metrics.total_voting_power, 50);
         assert_eq!(proposals_metrics.average_voting_power, 50);
         // avg = (10 + 3) / 50) = 0.26
         assert_eq!(proposals_metrics.average_voting_participation, 2600u64);
-        assert_eq!(voting_participation_history.get(&1), Some(&2600u64));
+        read_state(|state| {
+            assert_eq!(state.data.voting_participation_history.get(&1), Some(2600u64));
+        });
 
         // Proposal 2
         let mut proposal_2 = ProposalData::default();
@@ -327,9 +322,6 @@ mod tests {
         });
 
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
-        let voting_participation_history = read_state(|state|
-            state.data.voting_participation_history.clone()
-        );
 
         assert_eq!(proposals_metrics.total_proposals, 2);
         assert_eq!(proposals_metrics.total_voting_power, 60);
@@ -339,7 +331,9 @@ mod tests {
         assert_eq!(proposals_metrics.average_voting_participation, 3300u64);
 
         // For this day = 20 + 4 / 60 = 0.4
-        assert_eq!(voting_participation_history.get(&2), Some(&4000u64));
+        read_state(|state| {
+            assert_eq!(state.data.voting_participation_history.get(&2), Some(4000u64));
+        });
 
         // Proposal 3
         let mut proposal_3 = ProposalData::default();
@@ -360,9 +354,6 @@ mod tests {
         });
 
         let proposals_metrics = read_state(|state| state.data.porposals_metrics.clone());
-        let voting_participation_history = read_state(|state|
-            state.data.voting_participation_history.clone()
-        );
 
         assert_eq!(proposals_metrics.total_proposals, 3);
         assert_eq!(proposals_metrics.total_voting_power, 100);
@@ -372,7 +363,9 @@ mod tests {
         assert_eq!(proposals_metrics.average_voting_participation, 4033u64);
 
         // For this day = 45 + 10 / 100 = 0.55
-        assert_eq!(voting_participation_history.get(&3), Some(&5500u64));
+        read_state(|state| {
+            assert_eq!(state.data.voting_participation_history.get(&3), Some(5500u64));
+        });
 
         // Proposal 4 - still open
         let mut proposal_4 = ProposalData::default();
@@ -440,11 +433,11 @@ mod tests {
         mutate_state(|state| {
             update_proposals_metrics(state, &proposal_5);
         });
-        let voting_participation_history = read_state(|state|
-            state.data.voting_participation_history.clone()
-        );
+
         // For day 4: avg between proposal 4 and proposal 5
         // = ((90 + 10) / 150 + (60 + 20) / 150) / 2 = 0.6
-        assert_eq!(voting_participation_history.get(&4), Some(&6000u64));
+        read_state(|state| {
+            assert_eq!(state.data.voting_participation_history.get(&4), Some(6000u64));
+        });
     }
 }

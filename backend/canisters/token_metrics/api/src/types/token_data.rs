@@ -1,8 +1,10 @@
-use std::ops::Add;
+use std::{ borrow::Cow, ops::Add };
 
-use candid::{ CandidType, Nat };
+use candid::{ CandidType, Decode, Encode, Nat };
+use ic_stable_structures::{ storable::Bound, Storable };
+use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
-use super_stats_v3_api::account_tree::Overview as LedgerOverview;
+use super_stats_v3_api::account_tree::{ HistoryData, Overview as LedgerOverview };
 use utils::consts::E8S_PER_OGY;
 
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
@@ -11,16 +13,95 @@ pub struct TokenSupplyData {
     pub circulating_supply: Nat,
 }
 
+impl Storable for TokenSupplyData {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 100,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct PrincipalBalance {
     pub governance: GovernanceStats,
     pub ledger: u64,
 }
+
+impl Storable for PrincipalBalance {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 256,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+#[derive(Serialize, Deserialize, Clone, CandidType)]
+pub struct WalletEntry(pub Account, pub WalletOverview);
+
+impl Storable for WalletEntry {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 400,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+#[derive(Serialize, Deserialize, Clone, CandidType)]
+pub struct GovHistoryEntry(pub u64, pub HistoryData);
+impl Storable for GovHistoryEntry {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 56,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct WalletOverview {
     pub ledger: LedgerOverview,
     pub governance: GovernanceStats,
     pub total: u64,
+}
+
+impl Storable for WalletOverview {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 400,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
@@ -30,6 +111,22 @@ pub struct GovernanceStats {
     pub total_unlocked: Nat,
     pub total_rewards: Nat,
 }
+
+impl Storable for GovernanceStats {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 100,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct LockedNeuronsAmount {
     pub one_year: u64,
@@ -48,6 +145,21 @@ pub struct ProposalsMetricsCalculations {
 pub struct VotingHistoryCalculations {
     pub cumulative_voting_participation: f64,
     pub valid_tally_count: u64,
+}
+
+impl Storable for VotingHistoryCalculations {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 40,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, CandidType, Debug)]
@@ -87,6 +199,21 @@ impl Add for GovernanceStats {
             total_unlocked: self.total_unlocked + other.total_unlocked,
             total_rewards: self.total_rewards + other.total_rewards,
         }
+    }
+}
+
+impl Storable for DailyVotingMetrics {
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 32,
+        is_fixed_size: false,
+    };
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
     }
 }
 

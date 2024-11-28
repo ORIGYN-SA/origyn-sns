@@ -2426,6 +2426,7 @@ dependencies = [
  "ic-cdk-macros 0.8.4",
  "ic-cdk-timers 0.6.0",
  "ic-stable-memory",
+ "ic-stable-structures",
  "num-bigint",
  "num-traits",
  "scopeguard",

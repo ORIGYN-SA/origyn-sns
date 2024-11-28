@@ -16,6 +16,7 @@ scopeguard = "1.2.0"
 serde_bytes = "0.11.2"
 sha2 = "0.10"
 hex = "0.4.2"
+ic-stable-structures = { workspace = true }
 serde_cbor = "0.11"
 num-bigint = "0.4.4"
 num-traits = "0.2.17"

@@ -1,4 +1,4 @@
-use candid::CandidType;
+use candid::{CandidType, Decode, Encode};
 use ic_stable_structures::{storable::Bound, Storable};
 use serde::{Deserialize, Serialize};
 use std::{
@@ -94,6 +94,35 @@ impl<'a> From<NeuronId> for [u8; 32] {
 impl From<[u8; 32]> for NeuronId {
     fn from(value: [u8; 32]) -> Self {
         Self { id: value.to_vec() }
+    }
+}
+
+
+#[derive(
+    CandidType,
+    Serialize,
+    Deserialize,
+    Eq,
+    std::hash::Hash,
+    Clone,
+    PartialEq,
+    PartialOrd,
+    Ord,
+    Debug,
+    Default,
+)]
+pub struct VecNeurons(pub Vec<NeuronId>);
+
+impl Storable for VecNeurons {
+    const BOUND: Bound = Bound::Unbounded;
+
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(&self.0).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        let neurons: Vec<NeuronId> = Decode!(&bytes, Vec<NeuronId>).unwrap();
+        Self(neurons)
     }
 }
 

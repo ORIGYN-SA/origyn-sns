@@ -3,6 +3,7 @@ use canister_time::{ now_millis, run_now_then_interval, timestamp_seconds, DAY_I
 use futures::future::join_all;
 use ic_cdk::api::call::RejectionCode;
 use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
+use sns_governance_canister::types::VecNeurons;
 use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
 use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
 use token_metrics_api::token_data::{ GovernanceStats, LockedNeuronsAmount };
@@ -49,7 +50,7 @@ pub async fn sync_neurons_data() {
     // Q: BTreeMap is a stable structure? Do we want that for a temp variable like this?
     let mut temp_principal_with_neurons: NormalBTreeMap<
         Principal,
-        Vec<NeuronId>
+        VecNeurons
     > = NormalBTreeMap::new();
     let mut temp_principal_with_stats: NormalBTreeMap<
         Principal,
@@ -120,8 +121,8 @@ pub async fn sync_neurons_data() {
         let locked_neurons_unique_owners = &mut state.data.locked_neurons_unique_owners;
 
         // Update the state with the newly computed data
-        principal_with_neurons.clear();
-        principal_with_stats.clear();
+        principal_with_neurons.clear_new();
+        principal_with_stats.clear_new();
         for (key, value) in temp_principal_with_neurons {
             principal_with_neurons.insert(key, value);
         }
@@ -216,7 +217,7 @@ fn update_locked_neurons_amount(
     }
 }
 fn update_principal_neuron_mapping(
-    principal_with_neurons: &mut NormalBTreeMap<Principal, Vec<NeuronId>>,
+    principal_with_neurons: &mut NormalBTreeMap<Principal, VecNeurons>,
     principal_with_stats: &mut NormalBTreeMap<Principal, GovernanceStats>,
     all_gov_stats: &mut GovernanceStats,
     neuron: &Neuron
@@ -228,13 +229,17 @@ fn update_principal_neuron_mapping(
                 .entry(pid)
                 .and_modify(|neurons| {
                     if let Some(id) = &neuron.id {
-                        if !neurons.contains(id) {
-                            neurons.push(id.clone());
+                        if !neurons.0.contains(id) {
+                            neurons.0.push(id.clone());
                         }
                     }
                 })
                 .or_insert_with(|| {
-                    if let Some(id) = &neuron.id { vec![id.clone()] } else { vec![] }
+                    if let Some(id) = &neuron.id {
+                        VecNeurons(vec![id.clone()])
+                    } else {
+                        VecNeurons(vec![])
+                    }
                 });
 
             let mut neuron_locked = 0;
