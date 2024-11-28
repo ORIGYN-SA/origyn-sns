@@ -32,13 +32,13 @@
       "source": ["frontend/ogy_dashboard/dist"],
       "type": "assets"
     },
-    "origyn-landing-page": {
+    "origyn_landing_page": {
       "declarations": {
         "bindings": [],
         "env_override": null,
         "output": null
       },
-      "source": ["frontend/origyn-landing-page/dist"],
+      "source": ["frontend/origyn_landing_page/dist"],
       "type": "assets"
     },
     "ogy_ledger": {
