@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
 import { OGY_FOUNDATION } from '@/utils/index';
@@ -36,7 +37,7 @@ const Footer = () => {
             {pathname !== '/newsroom' && (
                 <div className="flex flex-col items-center justify-center bg-[#f4f4f4] pt-[100px] md:h-[calc(100vh-325px)] md:pt-0">
                     <div className="font-montserrat-bold text-[26px] text-[#000] md:text-[50px]">
-                        ANY QUESTIONS ?
+                        {intl.get('ANY_QUESTIONS')}
                     </div>
                     <div
                         className="mx-auto mb-[40px] mt-[20px] h-[44px] cursor-pointer rounded-[44px] bg-[#000] px-[20px] font-montserrat-bold leading-[44px] text-[#fff] md:mb-0 md:mt-[50px]"
@@ -46,7 +47,7 @@ const Footer = () => {
                             )
                         }
                     >
-                        VIEW THE FAQ
+                        {intl.get('ANY_QUESTIONS')}
                     </div>
                 </div>
             )}
@@ -54,7 +55,7 @@ const Footer = () => {
                 <div className="mx-[20px] flex flex-col align-top md:flex-row">
                     {!isMobile && (
                         <div className="min-w-[190px] text-left text-[#000] md:flex-1">
-                            © 2023 ORIGYN
+                            {intl.get('Copyrights')}
                         </div>
                     )}
                     <div className="items-top flex flex-col justify-between md:flex-row">
@@ -63,89 +64,89 @@ const Footer = () => {
                                 className="mb-[5px] cursor-pointer font-montserrat-bold text-[16px] text-[#000] md:mb-[15px] md:leading-[28px]"
                                 onClick={() => goPage('/technology/index')}
                             >
-                                Technology
+                                {intl.get('Technology')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/technology/token-org')}
                             >
-                                OGY Token
+                                {intl.get('OGYToken')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/technology/perpetual-OS')}
                             >
-                                PerpetualOS
+                                {intl.get('PerpetualOS')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/technology/ORIGYN-NFT-Standard')}
                             >
-                                ORIGYN NFT Standard
+                                {intl.get('ORIGYNNFTStandard')}
                             </div>
                         </div>
                         <div className="mt-[15px] w-[240px] text-left md:mt-0">
                             <div className="mb-[5px] font-montserrat-bold text-[16px] text-[#000] md:mb-[15px] md:leading-[28px]">
-                                Products & Tools
+                                {intl.get('ProductsAndTools')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => window.open('https://dashboard.origyn.com')}
                             >
-                                OGY Dashboard
+                                {intl.get('OGYDashboard')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/products/index')}
                             >
-                                ORIGYN Certificate
+                                {intl.get('ORIGYNCertificate')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/products/management-cloud')}
                             >
-                                ORIGYN dApps
+                                {intl.get('ORIGYNDApps')}
                             </div>
                         </div>
                         <div className="mt-[15px] w-[240px] text-left md:mt-0">
                             <div className="mb-[5px] font-montserrat-bold text-[16px] text-[#000] md:mb-[15px] md:leading-[28px]">
-                                Resources
+                                {intl.get('Resources')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => window.open('https://origyn.gitbook.io/origyn/')}
                             >
-                                About ORIGYN
+                                {intl.get('About ORIGYN')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => window.open(OGY_FOUNDATION)}
                             >
-                                About the Foundation
+                                {intl.get('AboutFoundation')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/roadmap')}
                             >
-                                Roadmap
+                                {intl.get('Roadmap')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('')}
                             >
-                                Help Desk
+                                {intl.get('HelpDesk')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/newsroom')}
                             >
-                                Newsroom
+                                {intl.get('Newsroom')}
                             </div>
                             <div
                                 className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                                 onClick={() => goPage('/brandMaterial')}
                             >
-                                Brand Materials
+                                {intl.get('BrandMaterials')}
                             </div>
                         </div>
                         <div className="mt-[15px] w-[240px] text-left md:mt-0">
@@ -154,7 +155,7 @@ const Footer = () => {
                                 <div className="flex flex-col">
                                     <div className="mt-[15px] hidden w-[350px] text-left md:mr-[20px] md:mt-0">
                                         <div className="mb-[15px] cursor-pointer font-montserrat-bold text-[16px] leading-[28px] text-[#000]">
-                                            Join our newsletter
+                                            {intl.get('JoinNewsletter')}
                                         </div>
                                         <div className="flex items-center justify-between">
                                             <div className="flex h-[44px] flex-1 items-start rounded-[10px] border-[1px] border-[#000]">
@@ -166,7 +167,7 @@ const Footer = () => {
                                                 />
                                             </div>
                                             <div className="mx-auto ml-[10px] h-[44px] cursor-pointer rounded-[10px] bg-[#000] px-[20px] font-montserrat-bold leading-[44px] text-[#fff]">
-                                                Sign Up
+                                                {intl.get('SignUp')}
                                             </div>
                                         </div>
                                     </div>
@@ -253,13 +254,13 @@ const Footer = () => {
                             className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                             onClick={() => goPage('')}
                         >
-                            Terms & Conditions
+                            {intl.get('TermsAndConditions')}
                         </span>
                         <span
                             className="font-montserrat-rangule ml-[15px] cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                             onClick={() => goPage('')}
                         >
-                            Privacy Policy
+                            {intl.get('PrivacyPolicy')}
                         </span>
                     </div>
                 )}

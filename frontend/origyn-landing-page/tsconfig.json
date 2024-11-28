@@ -39,6 +39,7 @@
     "exclude": [
         "node_modules",
         ".vscode",
+        "src/public",
         "src/**/*.did.ts",
         "src/**/*.did.d.ts",
         "src/utils/index.js"

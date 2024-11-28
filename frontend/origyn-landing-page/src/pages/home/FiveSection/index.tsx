@@ -20,7 +20,7 @@ type CollapseType = {
 const FiveSection = () => {
     const [collapses, setCollapses] = useState<CollapseType[]>([]);
 
-    const Collapses: CollapseType[] = [
+    let Collapses: CollapseType[] = [
         {
             active: false,
             title: intl.get('Traceability'),
@@ -54,6 +54,39 @@ const FiveSection = () => {
         // },
     ];
     useEffect(() => {
+        Collapses = [
+            {
+                active: false,
+                title: intl.get('Traceability'),
+                content: intl.get('TraceabilityContent'),
+                icon: read,
+                btn: false,
+            },
+            {
+                active: false,
+                title: intl.get('Authenticity'),
+                content: intl.get('AuthenticityContent'),
+                icon: art,
+                btn: false,
+                btnText: intl.get('VISIT_GLD_NFT'),
+            },
+            {
+                active: false,
+                title: intl.get('Tradability'),
+                content: intl.get('TradabilityContent'),
+                icon: gold,
+                btn: false,
+                btnText: intl.get('VISIT_JULIAN_OPIE'),
+            },
+            // {
+            //     active: false,
+            //     title: 'Property',
+            //     content: '',
+            //     icon: '',
+            //     btn: false,
+            //     btnText: 'VISIT THE JULIAN OPIE PROJECT',
+            // },
+        ];
         setCollapses(Collapses);
         secondSection();
     }, []);
