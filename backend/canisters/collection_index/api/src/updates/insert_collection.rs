@@ -10,5 +10,5 @@ pub type Response = Result<(), InsertCollectionError>;
 pub struct InsertCollectionArgs {
     pub collection_canister_id: Principal,
     pub is_promoted: bool,
-    pub category: u64,
+    pub category: String,
 }

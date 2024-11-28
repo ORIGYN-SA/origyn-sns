@@ -11,7 +11,7 @@ pub type CertificateTokenId = String;
 pub struct Collection {
     pub canister_id: Principal,
     pub name: Option<String>,
-    pub category: Option<u64>,
+    pub category: Option<String>,
     pub is_promoted: bool,
 }
 
@@ -38,5 +38,5 @@ impl Storable for Collection {
 }
 
 pub struct GetCollectionsFilters {
-    pub categories: Option<Vec<u64>>,
+    pub categories: Option<Vec<String>>,
 }

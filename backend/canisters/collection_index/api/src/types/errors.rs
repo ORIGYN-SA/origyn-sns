@@ -46,6 +46,11 @@ pub enum InsertCategoryError {
 }
 
 #[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum RemoveCategoryError {
+    CategoryNotFound,
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
 pub enum RemoveCollectionError {
     CollectionNotFound,
 }

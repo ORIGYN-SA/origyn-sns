@@ -95,7 +95,7 @@ fn categories_can_be_made_inactive_or_active() {
     // check it is visible by default
     let res = get_categories(&pic, principal_ids.controller, colletion_canister, &()).unwrap();
     assert_eq!(res.len(), 1);
-    assert_eq!(res[0].0, 0u64);
+    assert_eq!(res[0].0, "Category A".to_string());
     assert_eq!(res[0].1.active, true);
 
     // set visibility to false
@@ -104,14 +104,14 @@ fn categories_can_be_made_inactive_or_active() {
         principal_ids.controller,
         colletion_canister,
         &(SetCategoryVisibilityArgs {
-            category_id: 0,
+            category_name: "Category A".to_string(),
             hidden: false,
         })
     ).unwrap();
     assert_eq!(res, ());
 
     let res = get_categories(&pic, principal_ids.controller, colletion_canister, &()).unwrap();
-    assert_eq!(res[0].0, 0u64);
+    assert_eq!(res[0].0, "Category A".to_string());
     assert_eq!(res[0].1.active, false);
 
     // set visibility to true
@@ -120,14 +120,14 @@ fn categories_can_be_made_inactive_or_active() {
         principal_ids.controller,
         colletion_canister,
         &(SetCategoryVisibilityArgs {
-            category_id: 0,
+            category_name: "Category A".to_string(),
             hidden: true,
         })
     ).unwrap();
     assert_eq!(res, ());
 
     let res = get_categories(&pic, principal_ids.controller, colletion_canister, &()).unwrap();
-    assert_eq!(res[0].0, 0u64);
+    assert_eq!(res[0].0, "Category A".to_string());
     assert_eq!(res[0].1.active, true);
 }
 

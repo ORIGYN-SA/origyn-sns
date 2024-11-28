@@ -97,7 +97,7 @@ fn insert_collection_basic() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -148,7 +148,7 @@ fn test_get_collection_by_principal_works_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -194,7 +194,7 @@ fn insert_collection_twice_with_same_category() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -208,7 +208,7 @@ fn insert_collection_twice_with_same_category() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_two_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -246,7 +246,7 @@ fn insert_collection_with_non_existent_category_should_fail() {
         &(InsertCollectionArgs {
             collection_canister_id: origyn_nft_one_canister_id,
             is_promoted: false,
-            category: 0,
+            category: "Category A".to_string(),
         })
     );
 
@@ -281,7 +281,7 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -295,7 +295,7 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
         &(InsertCollectionArgs {
             collection_canister_id: origyn_nft_one_canister_id,
             is_promoted: false,
-            category: 0,
+            category: "Category A".to_string(),
         })
     );
 
@@ -355,7 +355,7 @@ fn removing_a_collection_should_work() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -427,7 +427,7 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -443,11 +443,11 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
 
     let category_a = categories
         .iter()
-        .find(|(id, cat)| id == &0)
+        .find(|(name, cat)| *name == "Category A".to_string())
         .unwrap();
     let category_b = categories
         .iter()
-        .find(|(id, cat)| id == &1)
+        .find(|(name, cat)| *name == "Category B".to_string())
         .unwrap();
     assert_eq!(category_a.1.collection_count, 1);
     assert_eq!(category_b.1.collection_count, 0);
@@ -459,7 +459,7 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
         collection_canister,
         &(UpdateCollectionCategoryArgs {
             collection_canister_id: origyn_nft_one_canister_id,
-            category_id: 1,
+            category_name: "Category B".to_string(),
         })
     ).unwrap();
 
@@ -474,11 +474,11 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
     ).unwrap();
     let category_a = categories
         .iter()
-        .find(|(id, cat)| id == &0)
+        .find(|(name, cat)| *name == "Category A".to_string())
         .unwrap();
     let category_b = categories
         .iter()
-        .find(|(id, cat)| id == &1)
+        .find(|(name, cat)| *name == "Category B".to_string())
         .unwrap();
     assert_eq!(category_a.1.collection_count, 0);
     assert_eq!(category_b.1.collection_count, 1);
@@ -541,10 +541,10 @@ fn test_pagination_works_correctly() {
                 collection: Collection {
                     canister_id: collection_prin,
                     name: Some(format!("Collection {i}")),
-                    category: Some(0u64),
+                    category: Some("Category A".to_string()),
                     is_promoted: false,
                 },
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -561,10 +561,10 @@ fn test_pagination_works_correctly() {
                 collection: Collection {
                     canister_id: collection_prin,
                     name: Some(format!("Collection {i}")),
-                    category: Some(1u64),
+                    category: Some("Category B".to_string()),
                     is_promoted: false,
                 },
-                category: 1,
+                category: "Category B".to_string(),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -581,10 +581,10 @@ fn test_pagination_works_correctly() {
                 collection: Collection {
                     canister_id: collection_prin,
                     name: Some(format!("Collection {i}")),
-                    category: Some(2u64),
+                    category: Some("Category C".to_string()),
                     is_promoted: true,
                 },
-                category: 2,
+                category: "Category C".to_string(),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -620,7 +620,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0]),
+            categories: Some(vec!["Category A".to_string()]),
             offset: 0,
             limit: 200,
         })
@@ -635,7 +635,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 0,
             limit: 200,
         })
@@ -650,7 +650,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 0,
             limit: 20,
         })
@@ -665,7 +665,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 20,
             limit: 20,
         })
@@ -679,7 +679,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 40,
             limit: 20,
         })
@@ -693,7 +693,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 60,
             limit: 20,
         })
@@ -707,7 +707,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 80,
             limit: 20,
         })
@@ -721,7 +721,7 @@ fn test_pagination_works_correctly() {
         Principal::anonymous(),
         collection_canister,
         &(GetCollectionsArgs {
-            categories: Some(vec![0, 2]),
+            categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 100,
             limit: 20,
         })
@@ -777,10 +777,10 @@ fn test_search_collections_works_correctly() {
                 collection: Collection {
                     canister_id: collection_prin,
                     name: Some(format!("{i} {letter}")),
-                    category: Some(0u64),
+                    category: Some("Category A".to_string()),
                     is_promoted: true,
                 },
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -798,10 +798,10 @@ fn test_search_collections_works_correctly() {
                 collection: Collection {
                     canister_id: collection_prin,
                     name: Some(format!("{i} {letter}")),
-                    category: Some(1u64),
+                    category: Some("Category B".to_string()),
                     is_promoted: false,
                 },
-                category: 1,
+                category: "Category B".to_string(),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -922,7 +922,7 @@ fn test_get_user_collections_works_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -991,7 +991,7 @@ fn test_promoting_and_demoting_collections() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: 0,
+                category: "Category A".to_string(),
             })
         ).unwrap(),
         ()

@@ -14,7 +14,7 @@ pub fn update_collection_category(
     mutate_state(|state| {
         state.data.collections.update_collection_category(
             args.collection_canister_id,
-            args.category_id
+            args.category_name
         )
     })
 }

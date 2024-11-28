@@ -8,5 +8,5 @@ pub type Response = Result<(), UpdateCollectionCategoryError>;
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct UpdateCollectionCategoryArgs {
     pub collection_canister_id: Principal,
-    pub category_id: u64,
+    pub category_name: String,
 }

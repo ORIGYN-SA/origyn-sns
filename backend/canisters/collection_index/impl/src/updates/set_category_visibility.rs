@@ -10,7 +10,7 @@ use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 #[trace]
 pub fn set_category_visibility(args: SetCategoryVisibilityArgs) -> SetCategoryVisibilityResponse {
     mutate_state(|state| {
-        state.data.collections.set_category_visibility(&args.category_id, args.hidden)
+        state.data.collections.set_category_visibility(args.category_name, args.hidden)
     })
 }
 
