@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import TagManager from 'react-gtm-module';
 import intl from 'react-intl-universal';
 import { useLocation, useRoutes } from 'react-router-dom';
-// import { FloatButton } from 'antd';
 import gsap from 'gsap';
 import Footer from '@/components/footer';
 import Nav from '@/components/nav';
