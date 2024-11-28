@@ -63,6 +63,7 @@ const RuneStone = () => {
 
             // console.log(result);
         } catch (e) {
+            console.log(e);
             setErrorText('Something went wrong. please contact this email');
             setIsFail(true);
         }

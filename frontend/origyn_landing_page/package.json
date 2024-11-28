@@ -6,6 +6,8 @@
     "scripts": {
         "dev": "vite",
         "build": "",
+        "build:staging": "npm run lint && tsc && vite build --mode staging",
+        "build:production": "npm run lint && tsc && vite build --mode production",
         "web:build": "tsc && vite build",
         "preview": "vite preview",
         "prebuild": "dfx generate",
@@ -13,6 +15,7 @@
         "deploy:local": "dfx deploy --network=local",
         "deploy:ic": "dfx deploy --network=ic",
         "deploy:staging": "dfx deploy --network=staging",
+        "lint": "eslint . --ignore-pattern 'src/public/*' --report-unused-disable-directives",
         "generate": "dfx generate"
     },
     "dependencies": {
@@ -34,6 +37,7 @@
         "sass": "^1.66.1",
         "swiper": "^10.2.0",
         "terser": "^5.19.4",
+        "typescript-eslint": "^8.16.0",
         "use-count-up": "^3.0.1",
         "vite-plugin-compression": "^0.5.1",
         "zustand": "^4.4.1"

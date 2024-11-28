@@ -12,32 +12,27 @@ type CollapseType = {
     content: string;
 };
 
-const Collapses: CollapseType[] = [
-    {
-        active: false,
-        title: intl.get('AboutCertificateTitle1'),
-        content: intl.get('AboutCertificateContent1'),
-    },
-    {
-        active: false,
-        title: intl.get('AboutCertificateTitle2'),
-        content: intl.get('AboutCertificateContent2'),
-    },
-    {
-        active: false,
-        title: intl.get('AboutCertificateTitle3'),
-        content: intl.get('AboutCertificateContent3'),
-    },
-];
-
 const ProductTwoSection = () => {
     const [collapses, setCollapses] = useState<CollapseType[]>([]);
     const pageWidth = usePageInfoStore((store) => store.pageWidth);
-    useEffect(() => {
-        setCollapses(Collapses);
-        // pageWidth > 768 &&
-        secondSection();
-    }, []);
+
+    let Collapses: CollapseType[] = [
+        {
+            active: false,
+            title: intl.get('AboutCertificateTitle1'),
+            content: intl.get('AboutCertificateContent1'),
+        },
+        {
+            active: false,
+            title: intl.get('AboutCertificateTitle2'),
+            content: intl.get('AboutCertificateContent2'),
+        },
+        {
+            active: false,
+            title: intl.get('AboutCertificateTitle3'),
+            content: intl.get('AboutCertificateContent3'),
+        },
+    ];
 
     const secondSection = () => {
         const triggerElement = $('.prodSection2');
@@ -82,6 +77,29 @@ const ProductTwoSection = () => {
         setCollapses(newcollapses);
     };
 
+    useEffect(() => {
+        Collapses = [
+            {
+                active: false,
+                title: intl.get('AboutCertificateTitle1'),
+                content: intl.get('AboutCertificateContent1'),
+            },
+            {
+                active: false,
+                title: intl.get('AboutCertificateTitle2'),
+                content: intl.get('AboutCertificateContent2'),
+            },
+            {
+                active: false,
+                title: intl.get('AboutCertificateTitle3'),
+                content: intl.get('AboutCertificateContent3'),
+            },
+        ];
+        setCollapses(Collapses);
+        // pageWidth > 768 &&
+        secondSection();
+    }, []);
+
     return (
         <div>
             <section className="prodSection2 mx-auto flex h-[100vh] flex-col items-center justify-center md:min-w-[1120px]">
@@ -93,9 +111,8 @@ const ProductTwoSection = () => {
                     {collapses.map((item, index) => {
                         return (
                             <div
-                                className={`card relative mx-[15px] mb-[20px] rounded-[14px] text-[#000] md:mx-auto md:w-[850px] md:rounded-[20px] ${
-                                    item.active ? 'active' : ''
-                                }`}
+                                className={`card relative mx-[15px] mb-[20px] rounded-[14px] text-[#000] md:mx-auto md:w-[850px] md:rounded-[20px]
+                                    ${item.active ? 'active' : ''}`}
                                 key={`prodSection2_card_${index}`}
                             >
                                 <div
@@ -132,7 +149,6 @@ const ProductTwoSection = () => {
                             <span className="font-montserrat-regular">{intl.get('Only')}</span>
                             <span className="font-montserrat-bold">$60.</span>
                         </div>
-
                         <div className="mb-[20px] text-left font-montserrat-bold text-[15px] md:mb-[30px] md:text-[22px]">
                             {intl.get('ExampleCertificates')}
                         </div>

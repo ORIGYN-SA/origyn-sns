@@ -9,7 +9,12 @@ import Nav from '@/components/nav';
 import { useFollowingDotCursor } from '@/utils/index';
 import { usePageInfoStore } from '@/store';
 import './App.scss';
+import chSPL from './locales/ch_SPL.json';
+import chTRAD from './locales/ch_TRAD.json';
 import enUS from './locales/en_US.json';
+import esES from './locales/es_ES.json';
+import idID from './locales/id_ID.json';
+import ruRU from './locales/ru_RU.json';
 import routes from './router';
 
 const whiteSections = {
@@ -20,6 +25,26 @@ const LOCALES_LIST = [
     {
         label: 'English',
         value: 'en-US',
+    },
+    {
+        label: 'Simple Chinese',
+        value: 'ch-SPL',
+    },
+    {
+        label: 'Traditional Chinese',
+        value: 'ch-TRAD',
+    },
+    {
+        label: 'Spanish',
+        value: 'es-ES',
+    },
+    {
+        label: 'Indonesian',
+        value: 'id-ID',
+    },
+    {
+        label: 'Russian',
+        value: 'ru-RU',
     },
 ];
 
@@ -35,6 +60,11 @@ if (is_prod) {
 
 const LOCALE_DATA = {
     'en-US': enUS,
+    'ch-SPL': chSPL,
+    'ch-TRAD': chTRAD,
+    'es-ES': esES,
+    'id-ID': idID,
+    'ru-RU': ruRU,
 };
 
 // 跳转第三方地址
