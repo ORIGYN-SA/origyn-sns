@@ -1,77 +1,72 @@
-import { useState, useEffect } from "react";
-import { DateTime } from "luxon";
-import {
-  useQuery,
-  keepPreviousData,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import { TimeStats } from "./declarations";
-// import { roundAndFormatLocale } from "@helpers/numbers";
+import { useState, useEffect } from 'react'
+import { DateTime } from 'luxon'
+import { getActor } from '@amerej/artemis-react'
 
-import { getActor } from "@amerej/artemis-react";
+interface TimeChunkStats {
+  start_time: bigint
+  total_count: bigint
+}
 
-const useGetActiveAccounts = ({ start = 30 }: { start?: number }) => {
-  console.log(start);
-  const [data] = useState<
-    | Array<{
-        total_unique_accounts: {
-          e8s: bigint;
-          number: number;
-          string: string;
-        };
-        start_time: {
-          e8s: bigint;
-          datetime: DateTime;
-        };
-      }>
-    | undefined
-  >(undefined);
+interface TimeStats {
+  count_over_time: TimeChunkStats[]
+  total_unique_accounts: bigint
+}
 
-  const {
-    data: response,
-    isSuccess,
-    isLoading,
-    isError,
-    error,
-  }: UseQueryResult<TimeStats> = useQuery({
-    queryFn: async (): Promise<TimeStats> => {
-      const actor = await getActor("tokenStats", { isAnon: true });
-      const results = await actor.get_daily_stats();
-      return results as TimeStats;
-    },
-    placeholderData: keepPreviousData,
-    queryKey: ["SUPER_STATS_GET_ACTIVE_ACCOUNTS"],
-  });
+const useGetActiveAccounts = ({ period }: { period: string }) => {
+  const [data, setData] = useState<{
+    total: string
+    dataChart: { name: string; value: number }[]
+  } | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
-    if (isSuccess && response) {
-      console.log(response);
-      // const results = response.map((r) => {
-      //   const number = Number(r.total_unique_accounts) + 26000;
-      //   const datetime = DateTime.fromMillis(Number(r.start_time) / 1000000);
-      //   return {
-      //     total_unique_accounts: {
-      //       e8s: r.total_unique_accounts,
-      //       number,
-      //       string: roundAndFormatLocale({ number: number }),
-      //     },
-      //     start_time: {
-      //       e8s: r.start_time,
-      //       datetime,
-      //     },
-      //   };
-      // });
-      // setData(results);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true)
+        setIsError(false)
+
+        const actor = await getActor('tokenStats', { isAnon: true })
+
+        const days = period === 'weekly' ? 7 : period === 'monthly' ? 30 : 365
+
+        const results = await actor.get_daily_stats()
+        const { count_over_time } = results as TimeStats
+
+        const filteredData = count_over_time.slice(0, days).map(stat => {
+          const name = DateTime.fromMillis(
+            Number(stat.start_time) / 1e6
+          ).toFormat('LLL dd')
+          const value = Number(stat.total_count)
+          return { name, value }
+        })
+
+        const total =
+          filteredData[filteredData.length - 1]?.value.toLocaleString(
+            'en-US'
+          ) || '0'
+
+        setData({
+          total,
+          dataChart: filteredData
+        })
+      } catch (error) {
+        console.error('Error fetching active accounts data:', error)
+        setIsError(true)
+      } finally {
+        setIsLoading(false)
+      }
     }
-  }, [isSuccess, response]);
+
+    fetchData()
+  }, [period])
 
   return {
     data,
-    isSuccess: isSuccess && data,
+    isSuccess: !!data,
     isError,
-    isLoading: isLoading || !data,
-    error,
-  };
-};
+    isLoading
+  }
+}
 
-export default useGetActiveAccounts;
+export default useGetActiveAccounts

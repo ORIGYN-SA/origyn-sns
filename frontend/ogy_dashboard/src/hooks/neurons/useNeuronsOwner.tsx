@@ -4,7 +4,6 @@ import { useWallet } from "@amerej/artemis-react";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";
-import getNeuronsByOwner from "@services/queries/sns-rewards//getNeuronsOwner";
 import { SNS_REWARDS_CANISTER_ID } from "@constants/index";
 import { roundAndFormatLocale } from "@helpers/numbers";
 
@@ -35,25 +34,14 @@ const useNeuronsOwner = ({
   });
 
   const {
-    data: neuronsOwnerIds,
+    data: neurons,
     isSuccess: isSuccessFetchNeuronsByOwner,
     isError: isErrorFetchNeuronsByOwner,
     isLoading: isLoadingFetchNeuronsByOwner,
+    isFetching: isFetchingFetchNeuronsByOwner,
     error: errorFetchNeuronsByOwner,
   } = useQuery({
-    queryKey: ["userGetNeuronsByOwner", isConnected],
-    queryFn: () => getNeuronsByOwner(),
-    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
-  });
-
-  const {
-    data: neuronsUnfiltered,
-    isSuccess: isSuccessListNeurons,
-    isError: isErrorListNeurons,
-    isLoading: isLoadingListNeurons,
-    error: errorListNeurons,
-  } = useQuery({
-    queryKey: ["userListNeuronsAll", limit, isConnected],
+    queryKey: ["userGetNeuronsByOwner", isConnected, limit],
     queryFn: () =>
       getListNeuronsOwner({
         owner,
@@ -61,15 +49,8 @@ const useNeuronsOwner = ({
         neuronId,
         nervousSystemParameters,
       }),
-    enabled:
-      !!isConnected &&
-      !!isSuccessGetNervousSystemParameters &&
-      !!isSuccessFetchNeuronsByOwner,
+    enabled: !!isConnected && !!isSuccessGetNervousSystemParameters,
   });
-
-  const neurons = neuronsUnfiltered?.filter((n) =>
-    neuronsOwnerIds?.includes(n.id)
-  );
 
   const neuronClaimBalance = useQueries({
     queries:
@@ -84,14 +65,14 @@ const useNeuronsOwner = ({
           enabled:
             !!isConnected &&
             !!isSuccessGetNervousSystemParameters &&
-            !!isSuccessListNeurons,
+            !!isSuccessFetchNeuronsByOwner,
         };
       }) ?? [],
   });
 
   const isSuccess =
     isSuccessGetNervousSystemParameters &&
-    isSuccessListNeurons &&
+    isSuccessFetchNeuronsByOwner &&
     neuronClaimBalance.every((result) => result.isSuccess);
 
   const _totalStakedRewardsOGY = neuronClaimBalance.reduce(
@@ -195,18 +176,19 @@ const useNeuronsOwner = ({
     },
     neuronsList: { rows, rowCount: rows?.length ?? 0 },
     isLoading:
-      isLoadingListNeurons ||
       isLoadingFetchNeuronsByOwner ||
+      isFetchingFetchNeuronsByOwner ||
       isLoadingGetNervousSystemParameters ||
       neuronClaimBalance.some((query) => query.isLoading),
-    isSuccess,
+    isSuccess:
+      isSuccess &&
+      !isLoadingFetchNeuronsByOwner &&
+      !isFetchingFetchNeuronsByOwner,
     isError:
-      isErrorListNeurons ||
       isErrorFetchNeuronsByOwner ||
       isErrorGetNervousSystemParameters ||
       neuronClaimBalance.some((query) => query.isError),
     error:
-      errorListNeurons ||
       errorFetchNeuronsByOwner ||
       errorGetNervousSystemParameters ||
       neuronClaimBalance.map((query) => query.error).filter(Boolean)[0],

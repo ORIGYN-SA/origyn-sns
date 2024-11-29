@@ -4,7 +4,7 @@
   "author": "ORIGYN",
   "workspaces": [
     "frontend/ogy_dashboard",
-    "frontend/origyn-landing-page"
+    "frontend/origyn_landing_page"
   ],
   "license": "AGPL-3.0-only",
   "version": "0.1.0",

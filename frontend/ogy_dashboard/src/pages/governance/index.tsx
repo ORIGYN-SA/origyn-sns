@@ -192,6 +192,9 @@ export const Governance = () => {
       <div className='mb-16'>
         <ChartTotalTokensStakes />
       </div>
+      <div className='mb-16'>
+        <ChartVotingParticipation />
+      </div>
 
       <div className='mb-16'>
         <ChartVotingPower />
