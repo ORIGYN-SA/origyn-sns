@@ -37,7 +37,6 @@ const StyledAreaChart = styled(AreaChart)`
 const Area = ({ data, fill }: AreaChart) => {
   const minValue = Math.min(...data.map(d => d.value))
   const maxValue = Math.max(...data.map(d => d.value))
-
   return (
     <ResponsiveContainer>
       <StyledAreaChart
@@ -72,7 +71,7 @@ const Area = ({ data, fill }: AreaChart) => {
           tickFormatter={value => (value >= 1000 ? millify(value) : value)}
           tickLine={false}
           axisLine={false}
-          domain={[0, maxValue + (maxValue - minValue) * 0.1]} // Fixer le début à 0
+          domain={[0, maxValue + (maxValue - minValue) * 0.1]}
         />
         <Tooltip
           content={<CustomTooltip active={false} payload={[]} label={''} />}
