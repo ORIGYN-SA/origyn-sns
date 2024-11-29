@@ -2,7 +2,7 @@ pub mod setup_sns;
 pub mod setup_ledger;
 pub mod setup_rewards;
 
-use std::collections::HashMap;
+use std::{ collections::HashMap, time::SystemTime };
 
 use candid::{ Nat, Principal };
 use icrc_ledger_types::icrc1::account::Account;
@@ -175,6 +175,7 @@ impl SnsWithRewardsTestEnvBuilder {
                 self.initial_reward_pool_amount.0.try_into().unwrap()
             );
         }
+        pic.set_time(SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718614800000)); // Monday Jun 17, 2024, 9:00:00 AM
 
         SnsWithRewardsTestEnv {
             controller: self.controller,

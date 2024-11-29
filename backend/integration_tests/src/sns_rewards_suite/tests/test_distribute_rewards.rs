@@ -1,7 +1,7 @@
 use std::time::Duration;
 
 use candid::{ Nat, Principal };
-use canister_time::DAY_IN_MS;
+use canister_time::{ DAY_IN_MS, HOUR_IN_MS };
 use icrc_ledger_types::icrc1::account::Account;
 use sns_rewards_api_canister::{
     get_historic_payment_round::{ self, Args as GetHistoricPaymentRoundArgs },
@@ -34,17 +34,14 @@ fn test_distribute_rewards_happy_path() {
     // 1. Distribute rewards
     // ********************************
 
-    test_env.simulate_neuron_voting(2);
-
     // TRIGGER - synchronize_neurons
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS));
-    tick_n_blocks(&test_env.pic, 100);
+    test_env.simulate_neuron_voting(2);
+    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 1)); //
+    tick_n_blocks(&test_env.pic, 10);
 
-    // TRIGGER - distribute_rewards
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 6));
-    tick_n_blocks(&test_env.pic, 100);
-    test_env.pic.advance_time(Duration::from_secs(60 * 5));
-    tick_n_blocks(&test_env.pic, 100);
+    // TRIGGER - distribution
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 6)); // 15:00
+    tick_n_blocks(&test_env.pic, 20);
 
     // ********************************
     // 2. Check Neuron sub account got paid correctly
@@ -78,15 +75,14 @@ fn test_distribute_rewards_happy_path() {
         100_000_000_000u64
     );
 
-    // TRIGGER - synchronize_neurons
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS));
-    tick_n_blocks(&test_env.pic, 100);
+    // Trigger - neuron vote & Maturity sync
+    test_env.simulate_neuron_voting(3);
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 18)); // 9am
+    tick_n_blocks(&test_env.pic, 30);
 
-    // TRIGGER - distribute_rewards
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 6));
-    tick_n_blocks(&test_env.pic, 100);
-    test_env.pic.advance_time(Duration::from_secs(60 * 5));
-    tick_n_blocks(&test_env.pic, 100);
+    // TRIGGER - distribution
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 6 + DAY_IN_MS * 6)); // 3pm
+    tick_n_blocks(&test_env.pic, 30);
 
     let neuron_sub_account = Account {
         owner: rewards_canister_id,
@@ -158,18 +154,14 @@ fn test_distribute_rewards_with_no_rewards() {
     // ********************************
     // 2. Distribute rewards
     // ********************************
-
+    // TRIGGER - neuron vote & Maturity sync
     test_env.simulate_neuron_voting(2);
+    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 1)); //
+    tick_n_blocks(&test_env.pic, 10);
 
-    // TRIGGER - synchronize_neurons
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS));
-    tick_n_blocks(&test_env.pic, 100);
-
-    // TRIGGER - distribute_rewards
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 6));
-    tick_n_blocks(&test_env.pic, 100);
-    test_env.pic.advance_time(Duration::from_secs(60 * 5));
-    tick_n_blocks(&test_env.pic, 100);
+    // TRIGGER - distribution
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 6)); // 15:00
+    tick_n_blocks(&test_env.pic, 20);
 
     // there should be no historic or active rounds for OGY because it didn't have any rewards to pay out and a neuron should have no rewarded maturity
     let res = get_historic_payment_round(
@@ -208,18 +200,15 @@ fn test_distribute_rewards_with_no_rewards() {
         &test_env.token_ledgers.values().cloned().collect(),
         100_000_000_000u64
     );
-    // increase maturity maturity
+
+    // Trigger - neuron vote & Maturity sync
     test_env.simulate_neuron_voting(3);
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 18)); // 9am
+    tick_n_blocks(&test_env.pic, 30);
 
-    // TRIGGER - synchronize_neurons
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS));
-    tick_n_blocks(&test_env.pic, 100);
-
-    // TRIGGER - distribute_rewards
-    test_env.pic.advance_time(Duration::from_millis(DAY_IN_MS * 6));
-    tick_n_blocks(&test_env.pic, 100);
-    test_env.pic.advance_time(Duration::from_secs(60 * 5));
-    tick_n_blocks(&test_env.pic, 100);
+    // TRIGGER - distribution
+    test_env.pic.advance_time(Duration::from_millis(HOUR_IN_MS * 6 + DAY_IN_MS * 6)); // 3pm
+    tick_n_blocks(&test_env.pic, 30);
 
     // test historic rounds - note, payment round id's always go up by 1 if any rewards from any token are distributed so we get ("OGY".to_string(), 2)
     let res = get_historic_payment_round(
