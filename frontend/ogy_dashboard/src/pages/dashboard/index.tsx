@@ -15,7 +15,7 @@ import ChartUsersActivity from './ChartUsersActivity'
 // import ChartActiveAccounts from "./ChartActiveAccounts";
 // import UsersMap from "./users-map/UsersMap";
 import { PieChartProvider } from '@components/charts/pie/context'
-import ChartActiveAccounts from './ChartActiveAccounts'
+import Chart from './top-transfers-and-burns/Chart'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -73,6 +73,18 @@ const Dashboard = () => {
             </PieChartProvider>
           </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
+          <section
+            className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
+            id='top-transfers'
+          >
+            <Chart type='transfers' title='Top 5 Transfers' limit={5} />
+          </section>
+          <section
+            className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
+            id='top-burns'
+          >
+            <Chart type='burns' title='Top 5 Burns' limit={5} />
+          </section>
           <section
             className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
             id='governance-tokens-stakes'
