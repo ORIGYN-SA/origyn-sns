@@ -71,7 +71,7 @@ const Area = ({ data, fill }: AreaChart) => {
           tickFormatter={formatValue}
           tickLine={false}
           axisLine={false}
-          domain={[0, maxValue + (maxValue - minValue) * 0.1]} // Fixer le début à 0
+          domain={[0, maxValue + (maxValue - minValue) * 0.1]}
         />
         <Tooltip
           content={<CustomTooltip active={false} payload={[]} label={''} />}
