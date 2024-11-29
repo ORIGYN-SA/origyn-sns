@@ -12,8 +12,6 @@ import LedgerSwitchBannerContent from '@components/ledger-switch/banner-content'
 import TokenDistributionList from '@pages/dashboard/token-distribution'
 import ChartTotalTokensStakes from './ChartTotalTokensStakes'
 import ChartUsersActivity from './ChartUsersActivity'
-// import ChartActiveAccounts from "./ChartActiveAccounts";
-// import UsersMap from "./users-map/UsersMap";
 import { PieChartProvider } from '@components/charts/pie/context'
 import OGYActivitiesMetrics from './OGYActivitiesMetrics'
 
