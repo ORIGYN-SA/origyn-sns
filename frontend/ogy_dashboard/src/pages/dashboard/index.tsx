@@ -115,12 +115,6 @@ const Dashboard = () => {
           >
             <ChartUsersActivity />
           </section>
-          <section
-            className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
-            id='active-accounts'
-          >
-            <ChartActiveAccounts />
-          </section>
           {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-users-map"
