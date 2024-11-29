@@ -10,7 +10,7 @@ import {
 import styled from 'styled-components'
 import { colors } from '@theme/preset'
 import CustomTooltip from '../utils/CustomTooltip'
-import { millify } from '@helpers/numbers'
+import { formatValue } from '@helpers/numbers'
 
 type Data = {
   name: string
@@ -37,7 +37,6 @@ const StyledAreaChart = styled(AreaChart)`
 const Area = ({ data, fill }: AreaChart) => {
   const minValue = Math.min(...data.map(d => d.value))
   const maxValue = Math.max(...data.map(d => d.value))
-
   return (
     <ResponsiveContainer>
       <StyledAreaChart
@@ -69,7 +68,7 @@ const Area = ({ data, fill }: AreaChart) => {
           axisLine={false}
         />
         <YAxis
-          tickFormatter={value => (value >= 1000 ? millify(value) : value)}
+          tickFormatter={formatValue}
           tickLine={false}
           axisLine={false}
           domain={[0, maxValue + (maxValue - minValue) * 0.1]} // Fixer le début à 0

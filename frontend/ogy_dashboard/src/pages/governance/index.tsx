@@ -18,7 +18,7 @@ import ProposalsList from '@pages/proposals/proposals-list/ProposalsList'
 import { usePagination } from '@helpers/table/useTable'
 import { PieChartProvider } from '@components/charts/pie/context'
 import ChartTotalTokensStakes from './ChartTotalTokensStakes'
-import ChartVotingParticipation from './ChartVotingParticipation'
+import ChartVotingPower from './ChartVotingPower'
 
 const loader = async () => {
   // tokens in governance total
@@ -194,6 +194,10 @@ export const Governance = () => {
       </div>
       <div className='mb-16'>
         <ChartVotingParticipation />
+      </div>
+
+      <div className='mb-16'>
+        <ChartVotingPower />
       </div>
 
       <div className='mb-16'>
