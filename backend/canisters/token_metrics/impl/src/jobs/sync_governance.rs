@@ -6,7 +6,7 @@ use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
 use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
 use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
 use token_metrics_api::token_data::{ GovernanceStats, LockedNeuronsAmount };
-use std::collections::BTreeMap as NormalBTreeMap;
+use std::collections::{ BTreeMap as NormalBTreeMap, HashMap, HashSet };
 use std::time::Duration;
 use tracing::{ debug, error, info };
 use types::Milliseconds;
@@ -58,6 +58,7 @@ pub async fn sync_neurons_data() {
     let mut temp_all_gov_stats: GovernanceStats = GovernanceStats::default();
 
     let mut temp_locked_neurons_amount: LockedNeuronsAmount = LockedNeuronsAmount::default();
+    let mut temp_lifetime_counts: HashMap<i8, HashSet<Principal>> = HashMap::new();
 
     while continue_scanning {
         continue_scanning = false;
@@ -74,7 +75,11 @@ pub async fn sync_neurons_data() {
                         &mut temp_all_gov_stats,
                         neuron
                     );
-                    update_locked_neurons_amount(&mut temp_locked_neurons_amount, neuron);
+                    update_locked_neurons_amount(
+                        &mut temp_locked_neurons_amount,
+                        &mut temp_lifetime_counts,
+                        neuron
+                    );
                 });
 
                 // Check if we hit the end of the list
@@ -112,6 +117,7 @@ pub async fn sync_neurons_data() {
         let principal_with_stats = &mut state.data.principal_gov_stats;
         let all_gov_stats = &mut state.data.all_gov_stats;
         let locked_neurons_amount = &mut state.data.locked_neurons_amount;
+        let locked_neurons_unique_owners = &mut state.data.locked_neurons_unique_owners;
 
         // Update the state with the newly computed data
         principal_with_neurons.clear();
@@ -124,6 +130,13 @@ pub async fn sync_neurons_data() {
         }
         *all_gov_stats = temp_all_gov_stats;
         *locked_neurons_amount = temp_locked_neurons_amount;
+        *locked_neurons_unique_owners = LockedNeuronsAmount {
+            one_year: temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len() as u64,
+            two_years: temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len() as u64,
+            three_years: temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len() as u64,
+            four_years: temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len() as u64,
+            five_years: temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len() as u64,
+        };
 
         all_gov_stats.total_rewards += total_rewards_in_sns_canister;
     });
@@ -133,6 +146,8 @@ pub async fn sync_neurons_data() {
 }
 fn check_locked_neurons_period(
     locked_neurons_amount: &mut LockedNeuronsAmount,
+    lifetime_counts: &mut HashMap<i8, HashSet<Principal>>,
+    owner: Option<Principal>,
     value: u64,
     dissolve_delay: Option<u64>,
     end_timestamp: Option<u64>
@@ -145,6 +160,12 @@ fn check_locked_neurons_period(
     } else {
         0
     };
+
+    if let Some(owner) = owner {
+        let years = (duration / SECONDS_IN_ONE_YEAR).min(5) as i8;
+        lifetime_counts.entry(years).or_insert_with(HashSet::new).insert(owner);
+    }
+
     if duration >= 5 * SECONDS_IN_ONE_YEAR {
         locked_neurons_amount.five_years += value;
     } else if duration >= 4 * SECONDS_IN_ONE_YEAR {
@@ -157,13 +178,23 @@ fn check_locked_neurons_period(
         locked_neurons_amount.one_year += value;
     }
 }
-fn update_locked_neurons_amount(locked_neurons_amount: &mut LockedNeuronsAmount, neuron: &Neuron) {
+fn update_locked_neurons_amount(
+    locked_neurons_amount: &mut LockedNeuronsAmount,
+    lifetime_counts: &mut HashMap<i8, HashSet<Principal>>,
+    neuron: &Neuron
+) {
+    let owner = match neuron.permissions.first() {
+        Some(owner) => owner.principal,
+        None => None,
+    };
     match neuron.dissolve_state.clone() {
         Some(DissolveState::DissolveDelaySeconds(dissolve_delay_in_seconds)) => {
             let staked_value =
                 neuron.cached_neuron_stake_e8s + neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
             check_locked_neurons_period(
                 locked_neurons_amount,
+                lifetime_counts,
+                owner,
                 staked_value,
                 Some(dissolve_delay_in_seconds),
                 None
@@ -174,6 +205,8 @@ fn update_locked_neurons_amount(locked_neurons_amount: &mut LockedNeuronsAmount,
                 neuron.cached_neuron_stake_e8s + neuron.staked_maturity_e8s_equivalent.unwrap_or(0);
             check_locked_neurons_period(
                 locked_neurons_amount,
+                lifetime_counts,
+                owner,
                 staked_value,
                 None,
                 Some(end_timestamp)
@@ -322,10 +355,17 @@ async fn get_super_stats_balance_of(account: String, is_subaccount: bool) -> Nat
 }
 #[cfg(test)]
 mod tests {
-    use std::collections::HashMap;
+    use std::collections::{ HashMap, HashSet };
 
+    use candid::Principal;
     use canister_time::timestamp_seconds;
-    use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
+    use sns_governance_canister::types::{
+        neuron::{ self, DissolveState },
+        Neuron,
+        NeuronId,
+        NeuronPermission,
+        NeuronPermissionList,
+    };
     use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
     use token_metrics_api::token_data::LockedNeuronsAmount;
     use types::NeuronInfo;
@@ -353,6 +393,11 @@ mod tests {
             "5a9ab729b173e14cc88c6c4d7f7e9f3e7468e72fc2b49f76a6d4f5af37397f98"
         ).unwrap();
 
+        let principal_1 = Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap();
+        let principal_2 = Principal::from_text("jxl73-gqaaa-aaaaq-aadia-cai").unwrap();
+        let principal_3 = Principal::from_text("gzcjd-xiaaa-aaaak-qijga-cai").unwrap();
+        let principal_4 = Principal::from_text("lnxxh-yaaaa-aaaaq-aadha-cai").unwrap();
+
         let mut neuron_1 = Neuron::default();
         neuron_1.id = Some(neuron_id_1.clone());
         neuron_1.cached_neuron_stake_e8s = 10_000;
@@ -360,8 +405,13 @@ mod tests {
         neuron_1.dissolve_state = Some(
             DissolveState::DissolveDelaySeconds(1 * SECONDS_IN_ONE_YEAR)
         );
+        neuron_1.permissions.push(NeuronPermission {
+            principal: Some(principal_1.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
         // Neuron 1: 30_000
         // Staked for 1 year
+        // Owner: Principal 1
 
         let mut neuron_2 = Neuron::default();
         neuron_2.id = Some(neuron_id_2.clone());
@@ -370,8 +420,13 @@ mod tests {
         neuron_2.dissolve_state = Some(
             DissolveState::DissolveDelaySeconds(2 * SECONDS_IN_ONE_YEAR)
         );
+        neuron_2.permissions.push(NeuronPermission {
+            principal: Some(principal_1.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
         // Neuron 2: 60_000
         // Staked for 2 years
+        // Owner: Principal 1
 
         let mut neuron_3 = Neuron::default();
         neuron_3.id = Some(neuron_id_3.clone());
@@ -381,8 +436,13 @@ mod tests {
         neuron_3.dissolve_state = Some(
             DissolveState::WhenDissolvedTimestampSeconds(now_in_seconds + 1 * SECONDS_IN_ONE_YEAR)
         );
+        neuron_3.permissions.push(NeuronPermission {
+            principal: Some(principal_2.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
         // Neuron 3: 45_000
         // Staked for 1 year
+        // Owner: Principal 2
 
         let mut neuron_4 = Neuron::default();
         neuron_4.id = Some(neuron_id_4.clone());
@@ -391,9 +451,13 @@ mod tests {
         neuron_4.dissolve_state = Some(
             DissolveState::DissolveDelaySeconds(4 * SECONDS_IN_ONE_YEAR)
         );
+        neuron_4.permissions.push(NeuronPermission {
+            principal: Some(principal_3.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
         // Neuron 4: 45_000
         // Staked for 4 years
-
+        // Owner: Principal 3
         let mut neuron_5 = Neuron::default();
         neuron_5.id = Some(neuron_id_5.clone());
         neuron_5.cached_neuron_stake_e8s = 50_000;
@@ -401,20 +465,73 @@ mod tests {
         neuron_5.dissolve_state = Some(
             DissolveState::DissolveDelaySeconds(5 * SECONDS_IN_ONE_YEAR)
         );
+        neuron_5.permissions.push(NeuronPermission {
+            principal: Some(principal_4.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
         // Neuron 5: 100_000
         // Staked for 5 years
+        // Owner: Principal 4
 
         // Update the stats locked neurons amount
         let mut locked_neurons_amount: LockedNeuronsAmount = LockedNeuronsAmount::default();
-        update_locked_neurons_amount(&mut locked_neurons_amount, &neuron_1);
+        let mut temp_lifetime_counts: HashMap<i8, HashSet<Principal>> = HashMap::new();
+
+        update_locked_neurons_amount(
+            &mut locked_neurons_amount,
+            &mut temp_lifetime_counts,
+            &neuron_1
+        );
         assert_eq!(locked_neurons_amount.one_year, 30_000);
-        update_locked_neurons_amount(&mut locked_neurons_amount, &neuron_2);
+        assert_eq!(temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len(), 0);
+        update_locked_neurons_amount(
+            &mut locked_neurons_amount,
+            &mut temp_lifetime_counts,
+            &neuron_2
+        );
         assert_eq!(locked_neurons_amount.two_years, 60_000);
-        update_locked_neurons_amount(&mut locked_neurons_amount, &neuron_3);
+        assert_eq!(temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len(), 0);
+
+        update_locked_neurons_amount(
+            &mut locked_neurons_amount,
+            &mut temp_lifetime_counts,
+            &neuron_3
+        );
         assert_eq!(locked_neurons_amount.one_year, 75_000);
-        update_locked_neurons_amount(&mut locked_neurons_amount, &neuron_4);
+        assert_eq!(temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len(), 2);
+        assert_eq!(temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len(), 0);
+        update_locked_neurons_amount(
+            &mut locked_neurons_amount,
+            &mut temp_lifetime_counts,
+            &neuron_4
+        );
         assert_eq!(locked_neurons_amount.four_years, 45_000);
-        update_locked_neurons_amount(&mut locked_neurons_amount, &neuron_5);
+        assert_eq!(temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len(), 2);
+        assert_eq!(temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len(), 0);
+        update_locked_neurons_amount(
+            &mut locked_neurons_amount,
+            &mut temp_lifetime_counts,
+            &neuron_5
+        );
         assert_eq!(locked_neurons_amount.five_years, 100_000);
+        assert_eq!(temp_lifetime_counts.get(&1i8).unwrap_or(&HashSet::new()).len(), 2);
+        assert_eq!(temp_lifetime_counts.get(&2i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&3i8).unwrap_or(&HashSet::new()).len(), 0);
+        assert_eq!(temp_lifetime_counts.get(&4i8).unwrap_or(&HashSet::new()).len(), 1);
+        assert_eq!(temp_lifetime_counts.get(&5i8).unwrap_or(&HashSet::new()).len(), 1);
     }
 }

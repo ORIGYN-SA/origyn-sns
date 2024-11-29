@@ -78,21 +78,6 @@ pub async fn claim_reward_impl(
             }
         }
     }
-    // let owner = read_state(|s| s.data.neuron_owners.get_owner_of_neuron_id(&neuron_id));
-    // match owner {
-    //     Some(owner_principal) => {
-    //         if owner_principal == caller {
-    //             // neuron is owned by caller according to our state and has a valid hotkey
-    //             match transfer_rewards(&neuron_id, owner_principal, &token_info).await {
-    //                 Ok(amount) => ClaimRewardResponse::Ok(amount),
-    //                 Err(e) => ClaimRewardResponse::TransferFailed(e),
-    //             }
-    //         } else {
-    //             return ClaimRewardResponse::NeuronOwnerInvalid(Some(owner_principal));
-    //         }
-    //     }
-    //     None => { ClaimRewardResponse::NeuronNotClaimed }
-    // }
 }
 
 pub async fn transfer_rewards(

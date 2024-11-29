@@ -39,6 +39,10 @@ type LockedNeuronsAmount = record {
   four_years : nat64;
   five_years : nat64;
 };
+type LockedNeuronsPeriodResponse = record {
+  count : LockedNeuronsAmount;
+  amount : LockedNeuronsAmount;
+};
 type Overview = record {
   balance : nat;
   sent : record { nat32; nat };
@@ -66,7 +70,7 @@ service : (InitArgs) -> {
   get_all_neuron_owners : () -> (vec principal) query;
   get_foundation_assets : () -> (vec record { text; WalletOverview }) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
-  get_locked_neurons_period : () -> (LockedNeuronsAmount) query;
+  get_locked_neurons_period : () -> (LockedNeuronsPeriodResponse) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_proposals_metrics : () -> (ProposalsMetrics) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
