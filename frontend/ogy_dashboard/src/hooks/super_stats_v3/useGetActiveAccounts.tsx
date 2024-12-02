@@ -67,4 +67,4 @@ const useGetActiveAccounts = ({ period }: { period: string }) => {
   };
 };
 
-export default useGetActiveAccounts;
+export default useGetActiveAccounts
