@@ -17,6 +17,7 @@ import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 import Chart from "./top-transfers-and-burns/Chart";
 import ChartTransactionStats from "./ChartTransactionStats";
+import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -74,9 +75,8 @@ const Dashboard = () => {
             </PieChartProvider>
           </section>
           <section
-            className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
-            id='ogy-activities-metrics'
-          >
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-activities-metrics">
             <OGYActivitiesMetrics />
           </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
