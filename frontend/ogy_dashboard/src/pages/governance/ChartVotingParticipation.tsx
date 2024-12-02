@@ -98,7 +98,7 @@ const ChartVotingParticipation = ({
           </div>
 
           {/* Chart */}
-          <div className='xl:w-3/4 h-72 rounded-xl'>
+          <div className='xl:w-3/4 h-72 rounded-xl mt-8 md:mt-0'>
             <ChartArea data={data?.dataChart} fill={barFill} />
           </div>
         </div>

@@ -96,7 +96,7 @@ const ChartUsersActivity = ({
               </div>
             </div>
           </div>
-          <div className='col-span-3 h-72 rounded-xl'>
+          <div className=' h-72 rounded-xl'>
             <ChartArea
               data={data.map(({ total_unique_accounts, start_time }) => ({
                 name: start_time.datetime.toFormat('LLL dd'),
@@ -110,7 +110,7 @@ const ChartUsersActivity = ({
               className='h-2 w-4 rounded-lg'
               style={{ backgroundColor: barFill }}
             ></div>
-            <div className='text-xs text-content/60 font-semibold'>
+            <div className='text-xs text-content/60 font-semibold ml-2'>
               OGY PROTOCOL USERS
             </div>
           </div>
