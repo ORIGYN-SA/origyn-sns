@@ -114,21 +114,19 @@ function App() {
     };
 
     const initializeIntl = () => {
-        // 1. Get the currentLocale from url, cookie, or browser setting
-        let currentLocale = intl.determineLocale({
-            urlLocaleKey: 'lang', // Example: https://fe-tool.com/react-intl-universal?lang=en-US
-            cookieLocaleKey: 'lang', // Example: "lang=en-US" in cookie
-        });
-
-        // 2. Fallback to "en-US" if the currentLocale isn't supported in LOCALES_LIST
-        if (!LOCALES_LIST.some((item) => item.value === currentLocale)) {
-            currentLocale = 'en-US';
+        const storageLang = localStorage.getItem('lang');
+        let currentLang = 'en-US';
+        console.log(LOCALES_LIST);
+        if (storageLang) {
+            currentLang = storageLang;
+        } else {
+            currentLang = intl.determineLocale({
+                urlLocaleKey: 'lang', // Example: https://fe-tool.com/react-intl-universal?lang=en-US
+                cookieLocaleKey: 'lang', // Example: "lang=en-US" in cookie
+            });
         }
 
-        // 3. Set currentLocale and load locale data
-        setCurrentLocale(currentLocale);
-
-        // 4. After loading locale data, start to render
+        setCurrentLocale(currentLang);
         setInitDone(true);
     };
 
