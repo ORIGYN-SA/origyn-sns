@@ -1,77 +1,70 @@
-import { useState, useEffect } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { DateTime } from "luxon";
-import {
-  useQuery,
-  keepPreviousData,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import { TimeStats } from "./declarations";
-// import { roundAndFormatLocale } from "@helpers/numbers";
-
 import { getActor } from "@amerej/artemis-react";
 
-const useGetActiveAccounts = ({ start = 30 }: { start?: number }) => {
-  console.log(start);
-  const [data] = useState<
-    | Array<{
-        total_unique_accounts: {
-          e8s: bigint;
-          number: number;
-          string: string;
-        };
-        start_time: {
-          e8s: bigint;
-          datetime: DateTime;
-        };
-      }>
-    | undefined
-  >(undefined);
+interface TimeChunkStats {
+  start_time: bigint;
+  total_count: bigint;
+}
+
+interface TimeStats {
+  count_over_time: TimeChunkStats[];
+  total_unique_accounts: bigint;
+}
+
+interface ActiveAccountsData {
+  total: string;
+  dataChart: { name: string; value: number }[];
+}
+
+const useGetActiveAccounts = ({ period }: { period: string }) => {
+  const days = period === "weekly" ? 7 : period === "monthly" ? 30 : 365;
 
   const {
-    data: response,
-    isSuccess,
+    data,
     isLoading,
     isError,
     error,
-  }: UseQueryResult<TimeStats> = useQuery({
-    queryFn: async (): Promise<TimeStats> => {
+  }: UseQueryResult<ActiveAccountsData, Error> = useQuery<
+    ActiveAccountsData,
+    Error
+  >({
+    queryKey: ["ACTIVE_ACCOUNTS", period],
+    queryFn: async (): Promise<ActiveAccountsData> => {
       const actor = await getActor("tokenStats", { isAnon: true });
       const results = await actor.get_daily_stats();
-      return results as TimeStats;
-    },
-    placeholderData: keepPreviousData,
-    queryKey: ["SUPER_STATS_GET_ACTIVE_ACCOUNTS"],
-  });
+      const { count_over_time } = results as TimeStats;
 
-  useEffect(() => {
-    if (isSuccess && response) {
-      console.log(response);
-      // const results = response.map((r) => {
-      //   const number = Number(r.total_unique_accounts) + 26000;
-      //   const datetime = DateTime.fromMillis(Number(r.start_time) / 1000000);
-      //   return {
-      //     total_unique_accounts: {
-      //       e8s: r.total_unique_accounts,
-      //       number,
-      //       string: roundAndFormatLocale({ number: number }),
-      //     },
-      //     start_time: {
-      //       e8s: r.start_time,
-      //       datetime,
-      //     },
-      //   };
-      // });
-      // setData(results);
-    }
-  }, [isSuccess, response]);
+      const filteredData = count_over_time.slice(0, days).map((stat) => {
+        const name = DateTime.fromMillis(
+          Number(stat.start_time) / 1e6
+        ).toFormat("LLL dd");
+        const value = Number(stat.total_count);
+        return { name, value };
+      });
+
+      const total =
+        filteredData[filteredData.length - 1]?.value.toLocaleString("en-US") ||
+        "0";
+
+      return {
+        total,
+        dataChart: filteredData,
+      };
+    },
+    placeholderData: {
+      total: "0",
+      dataChart: [],
+    },
+  });
 
   return {
     data,
-    isSuccess: isSuccess && data,
+    isLoading,
     isError,
-    isLoading: isLoading || !data,
+    isSuccess: !!data,
     error,
   };
 };
 
-export default useGetActiveAccounts;
+export default useGetActiveAccounts

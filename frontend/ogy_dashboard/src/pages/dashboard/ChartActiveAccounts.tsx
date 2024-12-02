@@ -1,80 +1,72 @@
-// import { useMemo } from "react";
-// import { Card, TooltipInfo } from "@components/ui";
-// import {
-//   Loader as ChartLoader,
-//   Error as ChartError,
-//   Area as ChartArea,
-// } from "@components/charts";
-// import useGetActiveAccounts from "@hooks/super_stats_v3/useGetActiveAccounts";
+import { useState } from "react";
+import { Card, TooltipInfo, Select } from "@components/ui";
+import useGetActiveAccounts from "@hooks/super_stats_v3/useGetActiveAccounts";
+import {
+  Loader as ChartLoader,
+  Error as ChartError,
+  Area as ChartArea,
+} from "@components/charts";
 
-// const ChartActiveAccounts = ({
-//   className,
-//   ...restProps
-// }: {
-//   className?: string;
-// }) => {
-//   const barFill = useMemo(() => "#38bdf8", []);
+const SELECT_PERIOD_OPTIONS = [
+  { value: "weekly", label: "Weekly" },
+  { value: "monthly", label: "Monthly" },
+  { value: "yearly", label: "Yearly" },
+];
 
-//   // TODO implement change period (dayly/weekly/monthly...)
-//   // const { data, isLoading, isSuccess, isError } = useGetActiveAccounts({
-//   //   start: 30,
-//   // });
-//   useGetActiveAccounts({ start: 30 });
+const ChartActiveAccounts = ({
+  className,
+  ...restProps
+}: {
+  className?: string;
+}) => {
+  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
+  const { data, isSuccess, isLoading, isError } = useGetActiveAccounts({
+    period: selectedPeriod,
+  });
 
-//   return null;
-//   // <Card className={`${className}`} {...restProps}>
-//   //   <div className="flex items-center justify-between">
-//   //     <div className="flex items-center">
-//   //       <h2 className="text-lg font-semibold mr-2">
-//   //         Governance Staking Overview
-//   //       </h2>
-//   //     </div>
-//   //     {isSuccess && (
-//   //       <button className="text-sm font-medium rounded-full px-3 py-1">
-//   //         Monthly
-//   //       </button>
-//   //     )}
-//   //   </div>
-//   //   {isLoading && <ChartLoader />}
-//   //   {isSuccess && (
-//   //     <div className="mt-4 grid grid-cols-1 xl:grid-cols-4">
-//   //       <div className="col-span-1 flex flex-col justify-between">
-//   //         <div>
-//   //           <div className="flex">
-//   //             <span className="text-content/60 font-semibold mr-2">
-//   //               Total Tokens in Stakes
-//   //             </span>
-//   //             <TooltipInfo id="tooltip-total-tokens-in-stakes">
-//   //               <p>Tokens that are locked in stakes.</p>
-//   //             </TooltipInfo>
-//   //           </div>
-//   //           <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-//   //             <span className="mr-3">{data?.total}</span>
-//   //             <span className="text-content/60">OGY</span>
-//   //           </div>
-//   //         </div>
-//   //         <div className="xl:flex items-center mb-6 hidden">
-//   //           <div className="h-2 w-4 bg-[#38bdf8] mr-2 rounded-lg"></div>
-//   //           <div className="text-xs text-content/60 font-semibold">
-//   //             STAKED TOKENS
-//   //           </div>
-//   //         </div>
-//   //       </div>
-//   //       <div className="col-span-3 h-72 rounded-xl">
-//   //         <ChartArea data={data?.dataChart} fill={barFill} />
-//   //       </div>
-//   //       <div className="flex items-center justify-end mt-2 mr-6 xl:hidden">
-//   //         <div className="h-2 w-4 bg-[#38bdf8] mr-2 rounded-lg"></div>
-//   //         <div className="text-xs text-content/60 font-semibold">
-//   //           STAKED TOKENS
-//   //         </div>
-//   //       </div>
-//   //     </div>
-//   //   )}
-//   //   {isError && (
-//   //     <ChartError>Error while fetching governance staking data.</ChartError>
-//   //   )}
-//   // </Card>
-// };
+  const handleOnChangePeriod = (period: string) => {
+    setSelectedPeriod(period);
+  };
 
-// export default ChartActiveAccounts;
+  return (
+    <Card className={className} {...restProps}>
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold mr-2">Active Accounts</h2>
+        <Select
+          options={SELECT_PERIOD_OPTIONS}
+          value={selectedPeriod}
+          handleOnChange={(value) => handleOnChangePeriod(value as string)}
+          className="w-25"
+        />
+      </div>
+      {isLoading && <ChartLoader />}
+      {isError && (
+        <ChartError>Error while fetching active accounts data.</ChartError>
+      )}
+      {isSuccess && data && !isLoading && (
+        <div className="flex flex-col xl:flex-row mt-4">
+          <div className="xl:w-1/4 flex flex-col">
+            <div>
+              <div className="flex">
+                <span className="text-content/60 font-semibold mr-2">
+                  Total Unique Accounts
+                </span>
+                <TooltipInfo id="tooltip-total-accounts">
+                  <p>The total number of unique accounts.</p>
+                </TooltipInfo>
+              </div>
+              <div className="text-2xl font-semibold mt-2">
+                <span className="mr-3">{data.total}</span>
+              </div>
+            </div>
+          </div>
+          <div className="xl:w-3/4 h-72 rounded-xl">
+            <ChartArea data={data.dataChart} fill="#38bdf8" />
+          </div>
+        </div>
+      )}
+    </Card>
+  );
+};
+
+export default ChartActiveAccounts;

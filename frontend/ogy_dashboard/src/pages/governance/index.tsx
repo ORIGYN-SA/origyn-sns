@@ -18,6 +18,8 @@ import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
 import { PieChartProvider } from "@components/charts/pie/context";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
+import ChartVotingPower from "./ChartVotingPower";
+import ChartVotingParticipation from "./ChartVotingParticipation";
 
 const loader = async () => {
   // tokens in governance total
@@ -123,8 +125,7 @@ export const Governance = () => {
           <a
             href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <Button className="mt-8">
               <div className="flex items-center justify-center">
                 <div>Learn more</div>
@@ -167,8 +168,7 @@ export const Governance = () => {
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent"
-          >
+            className="font-semibold text-accent">
             Learn more about OGY
           </a>
         </div>
@@ -190,6 +190,13 @@ export const Governance = () => {
 
       <div className="mb-16">
         <ChartTotalTokensStakes />
+      </div>
+      <div className="mb-16">
+        <ChartVotingParticipation />
+      </div>
+
+      <div className="mb-16">
+        <ChartVotingPower />
       </div>
 
       <div className="mb-16">

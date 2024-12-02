@@ -1,31 +1,31 @@
-import { millify } from "@helpers/numbers";
+import { formatValue } from '@helpers/numbers'
 
 const CustomTooltip = ({
   active,
   payload,
-  label,
+  label
 }: {
-  active: boolean;
-  payload: Array<{ value: number }>;
-  label: string;
+  active: boolean
+  payload: Array<{ value: number }>
+  label: string
 }) => {
   if (active && payload?.length) {
     return (
-      <div className="bg-surface-2 rounded-xl p-3 shadow">
+      <div className='bg-surface-2 rounded-xl p-3 shadow'>
         <span>{label}</span>
         <br />
         {payload.map((e, index) => (
           <div key={index}>
-            <small key={index} className="text-content/60">
-              {e.value >= 1000 ? millify(e.value, 9) : e.value}
+            <small key={index} className='text-content/60'>
+              {formatValue(e.value)}
             </small>
             <br />
           </div>
         ))}
       </div>
-    );
+    )
   }
-  return null;
-};
+  return null
+}
 
-export default CustomTooltip;
+export default CustomTooltip
