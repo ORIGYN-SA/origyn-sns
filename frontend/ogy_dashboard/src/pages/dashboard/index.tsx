@@ -15,6 +15,7 @@ import ChartUsersActivity from "./ChartUsersActivity";
 // import ChartActiveAccounts from "./ChartActiveAccounts";
 // import UsersMap from "./users-map/UsersMap";
 import { PieChartProvider } from "@components/charts/pie/context";
+import ChartActiveAccounts from "./ChartActiveAccounts";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -74,32 +75,32 @@ const Dashboard = () => {
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="governance-tokens-stakes"
-          >
+            id="governance-tokens-stakes">
             <ChartTotalTokensStakes />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-treasury-account"
-          >
+            id="ogy-treasury-account">
             <OrigynTreasuryAccount />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-reward-account"
-          >
+            id="ogy-reward-account">
             <OrigynRewardAccount />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-token-distribution"
-          >
+            id="ogy-token-distribution">
             <TokenDistributionList />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="users-activity"
-          >
+            id="active-accounts">
+            <ChartActiveAccounts />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="users-activity">
             <ChartUsersActivity />
           </section>
           {/* <section
