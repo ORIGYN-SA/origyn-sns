@@ -1,69 +1,69 @@
-import { useState, useEffect } from 'react'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
-import { getActor } from '@amerej/artemis-react'
-import { divideBy1e8 } from '@helpers/numbers'
+import { useState, useEffect } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { getActor } from "@amerej/artemis-react";
+import { divideBy1e8 } from "@helpers/numbers";
 
 interface TransactionStats {
-  totalSend: number
-  totalReceive: number
-  totalVolume: number
+  totalSend: number;
+  totalReceive: number;
+  totalVolume: number;
 }
 
 const usePrincipalOverview = (principal: string) => {
-  const [data, setData] = useState<TransactionStats | null>(null)
+  const [data, setData] = useState<TransactionStats | null>(null);
 
   const {
     data: response,
     isSuccess,
     isLoading,
     isError,
-    error
-  }: UseQueryResult<any> = useQuery({
-    queryKey: ['principalOverview', principal],
+    error,
+  }: UseQueryResult<TransactionStats> = useQuery({
+    queryKey: ["principalOverview", principal],
     queryFn: async () => {
-      const actor = await getActor('tokenStats', { isAnon: true })
-      const result = await actor.get_principal_overview(principal)
-      return result
+      const actor = await getActor("tokenStats", { isAnon: true });
+      const result = await actor.get_principal_overview(principal);
+      return result;
     },
-    enabled: !!principal
-  })
+    enabled: !!principal,
+  });
 
   useEffect(() => {
     if (isLoading) {
-      setData(null)
+      setData(null);
     } else if (isSuccess) {
       if (Array.isArray(response) && response.length > 0) {
-        const principalData = response[0]
+        const principalData = response[0];
         if (
           principalData.sent.length === 2 &&
           principalData.received.length === 2
         ) {
-          const totalSendRaw = principalData.sent[1]
-          const totalReceiveRaw = principalData.received[1]
+          const totalSendRaw = principalData.sent[1];
+          const totalReceiveRaw = principalData.received[1];
 
-          const totalSend = divideBy1e8(totalSendRaw)
-          const totalReceive = divideBy1e8(totalReceiveRaw)
-          const totalVolume = totalSend + totalReceive
+          const totalSend = divideBy1e8(totalSendRaw);
+          const totalReceive = divideBy1e8(totalReceiveRaw);
+          const totalVolume = totalSend + totalReceive;
 
-          setData({ totalSend, totalReceive, totalVolume })
+          setData({ totalSend, totalReceive, totalVolume });
         } else {
-          setData(null)
+          setData(null);
         }
       } else {
-        setData(null)
+        setData(null);
       }
     } else {
-      setData(null)
+      setData(null);
     }
-  }, [isLoading, isSuccess, response])
+  }, [isLoading, isSuccess, response]);
 
   return {
     data,
     isSuccess,
     isLoading,
     isError,
-    error
-  }
-}
+    error,
+  };
+};
 
-export default usePrincipalOverview
+export default usePrincipalOverview;
