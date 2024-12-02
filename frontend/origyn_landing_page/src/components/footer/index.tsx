@@ -6,9 +6,30 @@ import { OGY_FOUNDATION } from '@/utils/index';
 import { goCommunicate } from '@/App';
 import { usePageInfoStore } from '@/store';
 
+const languages = {
+    'en-US': 'English',
+    'ch-SPL': 'Chinese (Simplified)',
+    'ch-TRAD': 'Chinese',
+    'es-ES': 'Spanish',
+    'id-ID': 'Indonesian',
+    'ru-RU': 'Russian',
+};
+
 const Footer = () => {
     const pageWidth = usePageInfoStore((store) => store.pageWidth);
     const [isMobile, setIsmobile] = useState(false);
+    const { pathname } = useLocation();
+    const navigage = useNavigate();
+    const goPage = (path: string) => {
+        path && window?.scrollTo({ top: 0 });
+        path && navigage(`${path}`);
+    };
+
+    const handleLanguageChange = (e) => {
+        localStorage.setItem('lang', e.target.value);
+        location.reload();
+    };
+
     useEffect(() => {
         if (pageWidth < 768) {
             setIsmobile(true);
@@ -16,12 +37,6 @@ const Footer = () => {
         }
         setIsmobile(false);
     }, [pageWidth]);
-    const { pathname } = useLocation();
-    const navigage = useNavigate();
-    const goPage = (path: string) => {
-        path && window?.scrollTo({ top: 0 });
-        path && navigage(`${path}`);
-    };
 
     return (
         <div
@@ -250,6 +265,21 @@ const Footer = () => {
                 </div>
                 {!isMobile && (
                     <div className="ml-[15px] mt-[15px] text-left md:mr-[20px] md:mt-[30px] md:text-right">
+                        <select
+                            name="Landuage"
+                            style={{
+                                color: '#000000',
+                                width: '100px',
+                                marginRight: '20px',
+                            }}
+                            onChange={handleLanguageChange}
+                        >
+                            {Object.keys(languages).map((l) => (
+                                <option value={l} selected={localStorage.getItem('lang') === l}>
+                                    {languages[l]}
+                                </option>
+                            ))}
+                        </select>
                         <span
                             className="font-montserrat-rangule cursor-pointer text-[14px] leading-[28px] text-[#000] hover:text-[#696f97]"
                             onClick={() => goPage('')}
