@@ -17,7 +17,7 @@ const TwoSection = () => {
         return () => {
             barba.destroy();
         };
-    }, []);
+    }, [intl.get('TodaysImperativePart1')]);
 
     const initText = () => {
         // Reset scroll on page next
