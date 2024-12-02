@@ -73,6 +73,12 @@ const Dashboard = () => {
               <OrigynFoundationReserve />
             </PieChartProvider>
           </section>
+          <section
+            className='w-full col-span-1 xl:col-span-2 pt-8 -mt-8'
+            id='ogy-activities-metrics'
+          >
+            <OGYActivitiesMetrics />
+          </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
@@ -114,12 +120,6 @@ const Dashboard = () => {
             id="users-activity">
             <ChartUsersActivity />
           </section>
-          {/* <section
-            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="active-accounts"
-          >
-            <ChartActiveAccounts />
-          </section> */}
           {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-users-map"

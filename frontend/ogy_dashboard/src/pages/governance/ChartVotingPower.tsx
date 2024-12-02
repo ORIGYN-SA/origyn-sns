@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Card, TooltipInfo, Select } from '@components/ui'
-import useGetActiveAccounts from '@hooks/super_stats_v3/useGetActiveAccounts'
+import useVotingPowerData from '@hooks/metrics/useVotingPowerData'
 import {
   Loader as ChartLoader,
   Error as ChartError,
@@ -13,25 +13,29 @@ const SELECT_PERIOD_OPTIONS = [
   { value: 'yearly', label: 'Yearly' }
 ]
 
-const ChartActiveAccounts = ({
+const ChartVotingPower = ({
   className,
   ...restProps
 }: {
   className?: string
 }) => {
   const [selectedPeriod, setSelectedPeriod] = useState('weekly')
-  const { data, isSuccess, isLoading, isError } = useGetActiveAccounts({
+  const { data, isSuccess, isLoading, isError } = useVotingPowerData({
     period: selectedPeriod
   })
+
+  console.log('data', data)
 
   const handleOnChangePeriod = (period: string) => {
     setSelectedPeriod(period)
   }
 
+  const barFill = useMemo(() => '#34d399', [])
+
   return (
     <Card className={className} {...restProps}>
       <div className='flex items-center justify-between'>
-        <h2 className='text-lg font-semibold mr-2'>Active Accounts</h2>
+        <h2 className='text-lg font-semibold mr-2'>Origyn Voting Power</h2>
         <Select
           options={SELECT_PERIOD_OPTIONS}
           value={selectedPeriod}
@@ -41,7 +45,7 @@ const ChartActiveAccounts = ({
       </div>
       {isLoading && <ChartLoader />}
       {isError && (
-        <ChartError>Error while fetching active accounts data.</ChartError>
+        <ChartError>Error while fetching governance staking data.</ChartError>
       )}
       {isSuccess && data && !isLoading && (
         <div className='flex flex-col xl:flex-row mt-4'>
@@ -49,19 +53,35 @@ const ChartActiveAccounts = ({
             <div>
               <div className='flex'>
                 <span className='text-content/60 font-semibold mr-2'>
-                  Total Unique Accounts
+                  Origyn Stake Power
                 </span>
-                <TooltipInfo id='tooltip-total-accounts'>
-                  <p>The total number of unique accounts.</p>
+                <TooltipInfo id='tooltip-stake-power'>
+                  <p>Tokens locked for staking purposes.</p>
                 </TooltipInfo>
               </div>
               <div className='text-2xl font-semibold mt-2'>
-                <span className='mr-3'>{data.total}</span>
+                <span className='mr-3'>{data.stakePower}</span>
+                <span className='text-content/60'>OGY</span>
+              </div>
+            </div>
+            <div className='border-b border-[#E1E1E1] my-4 w-full xl:w-3/4' />
+            <div>
+              <div className='flex'>
+                <span className='text-content/60 font-semibold mr-2'>
+                  Total Voting Power
+                </span>
+                <TooltipInfo id='tooltip-total-voting-power'>
+                  <p>The overall voting power across all participants.</p>
+                </TooltipInfo>
+              </div>
+              <div className='text-2xl font-semibold mt-2'>
+                <span className='mr-3'>{data.votingPower}</span>
+                <span className='text-content/60'>OGY</span>
               </div>
             </div>
           </div>
           <div className='xl:w-3/4 h-72 rounded-xl'>
-            <ChartArea data={data.dataChart} fill='#38bdf8' />
+            <ChartArea data={data.dataChart} fill={barFill} />
           </div>
         </div>
       )}
@@ -69,4 +89,4 @@ const ChartActiveAccounts = ({
   )
 }
 
-export default ChartActiveAccounts
+export default ChartVotingPower
