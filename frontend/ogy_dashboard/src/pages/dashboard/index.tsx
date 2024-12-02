@@ -14,6 +14,8 @@ import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 import ChartActiveAccounts from "./ChartActiveAccounts";
+import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
+import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -72,6 +74,11 @@ const Dashboard = () => {
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="ogy-activities-metrics">
+            <OGYActivitiesMetrics />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="governance-tokens-stakes">
             <ChartTotalTokensStakes />
           </section>
@@ -87,6 +94,21 @@ const Dashboard = () => {
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-reward-account">
             <OrigynRewardAccount />
+          </section>
+
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="top-transfers">
+            <TopTransfersAndBurns
+              type="transfers"
+              title="Top 5 Transfers"
+              limit={5}
+            />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="top-burns">
+            <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
