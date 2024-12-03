@@ -24,8 +24,6 @@ const ChartVotingPower = ({
     period: selectedPeriod,
   });
 
-  console.log("data", data);
-
   const handleOnChangePeriod = (period: string) => {
     setSelectedPeriod(period);
   };

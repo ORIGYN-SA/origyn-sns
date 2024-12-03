@@ -20,8 +20,6 @@ const ChartTotalTokensStakes = ({
     start: 30,
   });
 
-  console.log("total token in stake", data);
-
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center justify-between">

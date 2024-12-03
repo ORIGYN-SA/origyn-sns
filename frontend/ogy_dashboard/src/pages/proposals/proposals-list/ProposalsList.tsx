@@ -160,8 +160,6 @@ const List = ({
     });
   };
 
-  console.log("columns of proposals list", columns);
-  console.log("data of proposals list", data);
   return (
     <div>
       {isSuccessGetProposalsList && data && (

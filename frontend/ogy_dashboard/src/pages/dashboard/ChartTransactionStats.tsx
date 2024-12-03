@@ -28,8 +28,6 @@ const ChartTransactionStats = ({
     setSelectedPeriod(period);
   };
 
-  console.log("Data:", data);
-
   return (
     <Card className={className} {...restProps}>
       <div className="flex items-center justify-between">

@@ -50,7 +50,6 @@ const PieChart: React.FC<PieChartProps> = ({ data, colors }) => {
 
   const handleOnMouseLeaveCell = () => setActiveIndex(null);
 
-  console.log(data);
   return (
     <ResponsiveContainer>
       <RechartsPieChart>

@@ -75,6 +75,9 @@ const OGYActivitiesMetrics = ({
         <ChartError>Error fetching OGY activities metrics.</ChartError>
       )}
       {isLoading && <ChartLoader />}
+      <h2 className="text-lg font-semibold  mr-2 mb-6">
+        OGY Transfer and Burn Stats
+      </h2>
       {isSuccess && data && !isLoading && (
         <div className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8`}>
           {metrics.map(({ name, value, tooltip }, index) => (
