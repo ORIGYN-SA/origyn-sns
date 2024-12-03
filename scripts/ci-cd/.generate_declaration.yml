@@ -9,6 +9,7 @@ spec:
           "super_stats_v3",
           "token_metrics",
           "canister_jobs",
+          "collection_index"
         ]
 ---
 # Frontend builds
