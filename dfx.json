@@ -118,6 +118,18 @@
         "env_override": null,
         "output": "backend/canisters/canister_jobs/api/declarations"
       }
+    },
+    "collection_index": {
+      "type": "custom",
+      "candid": "backend/canisters/collection_index/api/can.did",
+      "optimize": "cycles",
+      "package": "collection_index",
+      "wasm": "backend/canisters/collection_index/target/wasm32-unknown-unknown/release/collection_index_canister.wasm.gz",
+      "declarations": {
+        "bindings": ["js", "did", "ts"],
+        "env_override": null,
+        "output": "backend/canisters/collection_index/api/declarations"
+      }
     }
   },
   "dfx": "0.19.0",

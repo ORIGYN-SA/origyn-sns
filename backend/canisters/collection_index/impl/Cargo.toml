@@ -1,0 +1,40 @@
+[package]
+name = "collection_index"
+version = "0.1.0"
+description = "Implementation for the nft index canister."
+edition = "2021"
+
+[features]
+inttest = []
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+candid = { workspace = true }
+canister_logger = { path = '../../../libraries/canister_logger' }
+canister_state_macros = { path = '../../../libraries/canister_state_macros' }
+canister_time = { path = '../../../libraries/canister_time' }
+canister_tracing_macros = { path = '../../../libraries/canister_tracing_macros' }
+origyn_nft_reference = { path = "../../../external_canisters/origyn_nft_reference/api" }
+origyn_nft_reference_c2c_client = { path = "../../../external_canisters/origyn_nft_reference/c2c_client" }
+futures = { workspace = true }
+http_request = { path = '../../../libraries/http_request' }
+ic-cdk = { workspace = true }
+ic-cdk-macros = { workspace = true }
+ic-cdk-timers = { workspace = true }
+ic-stable-structures = { workspace = true }
+icrc-ledger-types = { workspace = true }
+ic-ledger-types = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serializer = { path = '../../../libraries/serializer' }
+num-bigint = { workspace = true }
+serde_bytes = { workspace = true }
+stable_memory = { path = '../../../libraries/stable_memory' }
+tracing = { workspace = true }
+types = { path = '../../../libraries/types' }
+utils = { path = '../../../libraries/utils' }
+collection_index_api = { path = "../api" }
+ic0 = "0.23.0"
+serde_json = { workspace = true }

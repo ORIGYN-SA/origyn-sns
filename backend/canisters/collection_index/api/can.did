@@ -1,0 +1,83 @@
+type Category = record { active : bool; collection_count : nat64 };
+type Collection = record {
+  name : opt text;
+  canister_id : principal;
+  is_promoted : bool;
+  category : opt text;
+};
+type GetCollectionByPrincipal = variant { CollectionNotFound };
+type GetCollectionsArgs = record {
+  categories : opt vec text;
+  offset : nat64;
+  limit : nat64;
+};
+type GetCollectionsError = variant { CategoryNotFound : text };
+type GetCollectionsResult = record {
+  total_pages : nat64;
+  collections : vec Collection;
+};
+type InitArgs = record {
+  test_mode : bool;
+  authorized_principals : vec principal;
+};
+type InsertCategoryArgs = record { category_name : text };
+type InsertCategoryError = variant { CategoryAlreadyExists };
+type InsertCollectionArgs = record {
+  is_promoted : bool;
+  collection_canister_id : principal;
+  category : text;
+};
+type InsertCollectionError = variant {
+  GenericOrigynNftError : text;
+  TargetCanisterIdNotOrigyn;
+  CollectionAlreadyExists;
+  CategoryNotFound : text;
+};
+type RemoveCategoryError = variant { CategoryNotFound };
+type RemoveCollectionArgs = record { collection_canister_id : principal };
+type RemoveCollectionError = variant { CollectionNotFound };
+type Result = variant { Ok : bool; Err : text };
+type Result_1 = variant { Ok : vec record { text; Category }; Err };
+type Result_2 = variant { Ok : Collection; Err : GetCollectionByPrincipal };
+type Result_3 = variant {
+  Ok : GetCollectionsResult;
+  Err : GetCollectionsError;
+};
+type Result_4 = variant { Ok; Err : InsertCategoryError };
+type Result_5 = variant { Ok; Err : InsertCollectionError };
+type Result_6 = variant { Ok; Err : RemoveCategoryError };
+type Result_7 = variant { Ok; Err : RemoveCollectionError };
+type Result_8 = variant { Ok; Err : TogglePromotedError };
+type Result_9 = variant { Ok; Err : UpdateCollectionCategoryError };
+type SearchCollectionsArg = record {
+  categories : opt vec text;
+  search_string : text;
+  offset : nat64;
+  limit : nat64;
+};
+type SetCategoryVisibility = record { hidden : bool; category_name : text };
+type TogglePromotedArgs = record { collection_canister_id : principal };
+type TogglePromotedError = variant { CollectionNotFound };
+type UpdateCollectionCategoryArgs = record {
+  collection_canister_id : principal;
+  category_name : text;
+};
+type UpdateCollectionCategoryError = variant {
+  CollectionNotFound;
+  CategoryNotFound : text;
+};
+service : (InitArgs) -> {
+  add_authorised_principal : (principal) -> (Result);
+  get_categories : () -> (Result_1) query;
+  get_collection_by_principal : (principal) -> (Result_2) query;
+  get_collections : (GetCollectionsArgs) -> (Result_3) query;
+  get_user_collections : (opt principal) -> (vec Collection);
+  insert_category : (InsertCategoryArgs) -> (Result_4);
+  insert_collection : (InsertCollectionArgs) -> (Result_5);
+  remove_category : (InsertCategoryArgs) -> (Result_6);
+  remove_collection : (RemoveCollectionArgs) -> (Result_7);
+  search_collections : (SearchCollectionsArg) -> (GetCollectionsResult) query;
+  set_category_visibility : (SetCategoryVisibility) -> (Result_6);
+  toggle_promoted : (TogglePromotedArgs) -> (Result_8);
+  update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_9);
+}
