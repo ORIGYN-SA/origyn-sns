@@ -1,21 +1,22 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { useMemo } from "react";
+// src/components/charts/pie/Pie.tsx
+import React, { useMemo } from "react";
 import {
-  PieChart as PieChartRecharts,
+  PieChart as RechartsPieChart,
   Cell,
   Label,
   Text,
-  Pie as PieRecharts,
+  Pie as RechartsPie,
   ResponsiveContainer,
+  LabelProps,
 } from "recharts";
 import tc from "tinycolor2";
 import { colors as themeColors } from "@theme/preset";
 import { usePieChart } from "./context";
+import { PolarViewBox } from "recharts/types/util/types";
 
 export interface PieChartData {
   name: string;
-  value?: number;
+  value: number;
   valueToString?: string;
   color?: string;
 }
@@ -25,32 +26,48 @@ interface PieChartProps {
   colors: string[];
 }
 
-const PieChart = ({ data, colors }: PieChartProps) => {
+const PieChart: React.FC<PieChartProps> = ({ data, colors }) => {
   const { activeIndex, setActiveIndex } = usePieChart();
-  // const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const sumData = useMemo(
-    () => data.reduce((acc, cur) => acc + cur.value, 0),
+
+  const validData = useMemo(
+    () => data.filter((d) => typeof d.value === "number" && !isNaN(d.value)),
     [data]
   );
 
-  const handleOnMouseOverCell = (index: number) => setActiveIndex(index);
+  const sumData = useMemo(
+    () => validData.reduce((acc, cur) => acc + cur.value, 0),
+    [validData]
+  );
+
+  const isActiveIndexValid =
+    activeIndex !== null && activeIndex >= 0 && activeIndex < validData.length;
+
+  const handleOnMouseOverCell = (index: number) => {
+    if (index >= 0 && index < validData.length) {
+      setActiveIndex(index);
+    }
+  };
+
   const handleOnMouseLeaveCell = () => setActiveIndex(null);
 
+  console.log(data);
   return (
     <ResponsiveContainer>
-      <PieChartRecharts>
-        <PieRecharts
+      <RechartsPieChart>
+        <RechartsPie
           dataKey="value"
-          data={data}
+          data={validData}
           innerRadius={80}
           outerRadius={140}
         >
-          {data.map((_, index) => (
+          {validData.map((_, index) => (
             <Cell
               key={`cell-${index}`}
               fill={
-                activeIndex !== null && activeIndex !== index
-                  ? tc(colors[activeIndex % colors.length]).setAlpha(0.5)
+                isActiveIndexValid && activeIndex !== index
+                  ? tc(colors[activeIndex % colors.length])
+                      .setAlpha(0.5)
+                      .toString()
                   : colors[index % colors.length]
               }
               stroke={themeColors.surface.DEFAULT}
@@ -59,15 +76,19 @@ const PieChart = ({ data, colors }: PieChartProps) => {
               onMouseLeave={handleOnMouseLeaveCell}
             />
           ))}
-          {activeIndex !== null && (
+          {isActiveIndexValid && (
             <Label
-              content={({ viewBox }) => {
-                const commonPositioningProps = {
-                  x: viewBox.cx,
-                  y: viewBox.cy,
-                  textAnchor: "middle",
-                  verticalAnchor: "middle",
-                };
+              content={(props: LabelProps) => {
+                if (
+                  !props.viewBox ||
+                  typeof (props.viewBox as PolarViewBox).cx !== "number" ||
+                  typeof (props.viewBox as PolarViewBox).cy !== "number"
+                ) {
+                  return null;
+                }
+                const viewBox = props.viewBox as PolarViewBox;
+                const { cx, cy } = viewBox;
+                const activeData = validData[activeIndex];
                 return (
                   <>
                     <Text
@@ -75,28 +96,32 @@ const PieChart = ({ data, colors }: PieChartProps) => {
                       fontSize={24}
                       fontWeight="bold"
                       fill={themeColors.content}
-                      {...commonPositioningProps}
+                      x={cx}
+                      y={cy}
+                      textAnchor="middle"
+                      verticalAnchor="middle"
                     >
-                      {((data[activeIndex].value / sumData) * 100).toFixed(1) +
-                        " %"}
+                      {((activeData.value / sumData) * 100).toFixed(1) + " %"}
                     </Text>
-
                     <Text
                       dy={24}
                       fill={themeColors.content}
                       fontSize={12}
                       width={100}
-                      {...commonPositioningProps}
+                      x={cx}
+                      y={cy}
+                      textAnchor="middle"
+                      verticalAnchor="middle"
                     >
-                      {data[activeIndex].name}
+                      {activeData.name}
                     </Text>
                   </>
                 );
               }}
             />
           )}
-        </PieRecharts>
-      </PieChartRecharts>
+        </RechartsPie>
+      </RechartsPieChart>
     </ResponsiveContainer>
   );
 };
