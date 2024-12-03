@@ -13,6 +13,7 @@ const languages = {
     'es-ES': 'Spanish',
     'id-ID': 'Indonesian',
     'ru-RU': 'Russian',
+    'fr-FR': 'French',
 };
 
 const Footer = () => {
@@ -223,7 +224,24 @@ const Footer = () => {
                         </div>
                         {isMobile && (
                             <>
-                                {' '}
+                                <select
+                                    name="Landuage"
+                                    style={{
+                                        color: '#000000',
+                                        width: '100px',
+                                        marginRight: '20px',
+                                    }}
+                                    onChange={handleLanguageChange}
+                                >
+                                    {Object.keys(languages).map((l) => (
+                                        <option
+                                            value={l}
+                                            selected={localStorage.getItem('lang') === l}
+                                        >
+                                            {languages[l]}
+                                        </option>
+                                    ))}
+                                </select>{' '}
                                 <div className="mt-[20px] min-w-[190px] text-left text-[#000] md:flex-1">
                                     © 2023 ORIGYN
                                 </div>{' '}
