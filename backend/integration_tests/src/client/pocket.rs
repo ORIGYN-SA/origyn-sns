@@ -75,6 +75,17 @@ pub fn execute_update<P: CandidType, R: CandidType + DeserializeOwned>(
     )
 }
 
+pub fn execute_update_encoded_args<R: CandidType + DeserializeOwned>(
+    pic: &mut PocketIc,
+    sender: Principal,
+    canister_id: CanisterId,
+    method_name: &str,
+    payload: std::vec::Vec<u8>
+) -> R {
+    pic.advance_time(Duration::from_secs(1));
+    unwrap_response(pic.update_call(canister_id, sender, method_name, payload))
+}
+
 pub fn execute_update_no_response<P: CandidType>(
     pic: &mut PocketIc,
     sender: Principal,
