@@ -50,7 +50,8 @@ const TopTransfersAndBurns = ({
                 className="mr-2 truncate"
                 onClick={() =>
                   navigate(`/explorer/transactions/accounts/${address}`)
-                }>
+                }
+              >
                 {address}
               </button>
               <CopyToClipboard value={address} />
@@ -106,7 +107,8 @@ const TopTransfersAndBurns = ({
                 className="mr-2 truncate"
                 onClick={() =>
                   navigate(`/explorer/transactions/accounts/${address}`)
-                }>
+                }
+              >
                 {address}
               </button>
               <CopyToClipboard value={address} />
@@ -135,18 +137,21 @@ const TopTransfersAndBurns = ({
       <h1
         className={`text-4xl sm:text-6xl font-bold text-center ${
           isFullTopTransfersAndBurnsPage ? "mt-16 mb-16" : "hidden"
-        }`}>
+        }`}
+      >
         {title}
       </h1>
       <Card
         className={`p-6 space-y-6 ${
           isFullTopTransfersAndBurnsPage ? "my-16 w-11/12 mx-auto p-8" : ""
-        }`}>
+        }`}
+      >
         <div className="flex flex-row items-center">
           <div className="text-lg font-semibold">{title}</div>
           <Button
             onClick={() => handleClick()}
-            className={isFullTopTransfersAndBurnsPage ? "hidden" : "ml-4"}>
+            className={isFullTopTransfersAndBurnsPage ? "hidden" : "ml-4"}
+          >
             Show All
           </Button>
           <Tooltip id="tooltip_address" />

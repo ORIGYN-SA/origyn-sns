@@ -74,7 +74,8 @@ const PrincipalOverview = () => {
             {stats.map((stat, index) => (
               <Card
                 className="bg-surface-2/40 dark:bg-surface-2 pb-8"
-                key={stat.label}>
+                key={stat.label}
+              >
                 <div className="flex flex-col md:flex-row items-center justify-between">
                   <div className="flex flex-col md:flex-row items-center text-lg font-semibold">
                     <img

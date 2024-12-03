@@ -125,7 +125,8 @@ export const Governance = () => {
           <a
             href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <Button className="mt-8">
               <div className="flex items-center justify-center">
                 <div>Learn more</div>
@@ -168,7 +169,8 @@ export const Governance = () => {
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent">
+            className="font-semibold text-accent"
+          >
             Learn more about OGY
           </a>
         </div>
