@@ -22,7 +22,9 @@ const usePrincipalOverview = (principal: string) => {
     queryKey: ["principalOverview", principal],
     queryFn: async () => {
       const actor = await getActor("tokenStats", { isAnon: true });
+      console.log("principal", principal);
       const result = await actor.get_principal_overview(principal);
+      console.log("result", result);
       return result;
     },
     enabled: !!principal,
@@ -32,6 +34,7 @@ const usePrincipalOverview = (principal: string) => {
     if (isLoading) {
       setData(null);
     } else if (isSuccess) {
+      console.log("response", response);
       if (Array.isArray(response) && response.length > 0) {
         const principalData = response[0];
         if (

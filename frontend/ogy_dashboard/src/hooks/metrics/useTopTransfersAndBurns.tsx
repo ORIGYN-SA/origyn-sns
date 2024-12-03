@@ -3,6 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getActor } from "@amerej/artemis-react";
 import { DateTime } from "luxon";
 import { TimeStats } from "@hooks/super_stats_v3/declarations";
+import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";
 
 export interface TransformedData {
   hash: string;
@@ -65,8 +66,11 @@ const useTopTransfersAndBurns = ({
         .slice(0, limit)
         .map((tx) => ({
           hash: tx.hash !== "no-hash" ? tx.hash : "N/A",
-          from: tx.from_account || "Unknown",
-          to: tx.to_account || "Unknown",
+          from:
+            type === "burns"
+              ? codeAndDecodeAccount(tx.from_account)
+              : encodeAccount(tx.from_account),
+          to: tx.to_account ? encodeAccount(tx.to_account) : "Unknown",
           value:
             tx.tx_value && !isNaN(Number(tx.tx_value))
               ? Number(tx.tx_value).toLocaleString()

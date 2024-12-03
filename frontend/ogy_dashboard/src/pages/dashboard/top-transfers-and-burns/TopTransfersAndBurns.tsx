@@ -7,13 +7,7 @@ import useTopTransfersAndBurns, {
 } from "@hooks/metrics/useTopTransfersAndBurns";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { useNavigate } from "react-router-dom";
-
-const formatLargeNumber = (num: number): string => {
-  if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
-  if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
-  if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`;
-  return num.toFixed(2);
-};
+import { roundAndFormatLocale } from "@helpers/numbers";
 
 interface TopTransfersAndBurnsProps {
   type: "transfers" | "burns";
@@ -70,7 +64,7 @@ const TopTransfersAndBurns = ({
             <span>N/A</span>
           ) : (
             <span className="flex flex-row items-center justify-center">
-              {formatLargeNumber(rawValue)}{" "}
+              {roundAndFormatLocale({ number: rawValue })}{" "}
               <img
                 src="/ogy_logo.svg"
                 alt="OGY Logo"
@@ -125,33 +119,12 @@ const TopTransfersAndBurns = ({
     navigate(`/${type}`);
   };
 
-  const isFullTopTransfersAndBurnsPage = useMemo(() => {
-    return (
-      window.location.pathname.includes("transfers") ||
-      window.location.pathname.includes("burns")
-    );
-  }, []);
-
   return (
     <>
-      <h1
-        className={`text-4xl sm:text-6xl font-bold text-center ${
-          isFullTopTransfersAndBurnsPage ? "mt-16 mb-16" : "hidden"
-        }`}
-      >
-        {title}
-      </h1>
-      <Card
-        className={`p-6 space-y-6 ${
-          isFullTopTransfersAndBurnsPage ? "my-16 w-11/12 mx-auto p-8" : ""
-        }`}
-      >
+      <Card className="p-6 space-y-6">
         <div className="flex flex-row items-center">
           <div className="text-lg font-semibold">{title}</div>
-          <Button
-            onClick={() => handleClick()}
-            className={isFullTopTransfersAndBurnsPage ? "hidden" : "ml-4"}
-          >
+          <Button onClick={() => handleClick()} className="ml-4">
             Show All
           </Button>
           <Tooltip id="tooltip_address" />
@@ -167,7 +140,6 @@ const TopTransfersAndBurns = ({
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
             rowCount={data.length}
-            showPageSizeOptions={false}
           />
         ) : (
           !isLoading && (

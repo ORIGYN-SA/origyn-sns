@@ -11,6 +11,8 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
   const { data, isSuccess, isLoading, isError, error } = usePrincipalOverview(
     accountId || ""
   );
+
+  console.log("principalOverview", data);
   const { activeIndex, setActiveIndex } = usePieChart();
 
   const chartData = useMemo(

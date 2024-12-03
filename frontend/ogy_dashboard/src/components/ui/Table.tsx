@@ -34,7 +34,6 @@ interface ReactTableProps<T extends object> {
   getRowCanExpand?: (row: Row<T>) => boolean;
   subComponent?: ReactNode;
   identifier?: string;
-  showPageSizeOptions?: boolean;
 }
 
 const linesPerPageOptions = [
@@ -55,7 +54,6 @@ const Table = <T extends object>({
   getRowCanExpand,
   identifier = "",
   subComponent,
-  showPageSizeOptions = false,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexParam = `page_index${identifier ? `_${identifier}` : ""}`;
@@ -64,9 +62,9 @@ const Table = <T extends object>({
   const defaultData = useMemo(() => [], []);
 
   const table = useReactTable({
-    data: Array.isArray(data) ? data : (data?.rows ?? defaultData),
+    data: Array.isArray(data) ? data : data?.rows ?? defaultData,
     columns,
-    rowCount: rowCount,
+    rowCount: data?.rowCount ?? 0,
     state: {
       pagination,
       sorting,
@@ -83,16 +81,23 @@ const Table = <T extends object>({
   const handleOnChangePageSize = (value: string) => {
     table.setPageSize(Number(value));
     table.setPageIndex(0);
-    searchParams.set(pageSizeParam, value);
-    searchParams.set(pageIndexParam, "1");
+    searchParams.set(pageSize, value);
+    searchParams.set(pageIndex, "1");
     setSearchParams(searchParams);
   };
+
+  // const handleOnChangePageIndex = (e) => {
+  //   const page = e.target.value ? Number(e.target.value) - 1 : 0;
+  //   table.setPageIndex(page);
+  //   searchParams.set("pageIndex", (page + 1).toString());
+  //   setSearchParams(searchParams);
+  // };
 
   const handleOnClickPreviousPage = () => {
     table.previousPage();
     searchParams.set(
-      pageIndexParam,
-      (table.getState().pagination.pageIndex + 1).toString()
+      pageIndex,
+      table.getState().pagination.pageIndex.toString()
     );
     setSearchParams(searchParams);
   };
@@ -100,35 +105,32 @@ const Table = <T extends object>({
   const handleOnClickNextPage = () => {
     table.nextPage();
     searchParams.set(
-      pageIndexParam,
-      (table.getState().pagination.pageIndex + 1 + 1).toString()
+      pageIndex,
+      (table.getState().pagination.pageIndex + 2).toString()
     );
     setSearchParams(searchParams);
   };
 
   const handleOnClickFirstPage = () => {
-    table.setPageIndex(0);
-    searchParams.set(pageIndexParam, "1");
+    table.firstPage();
+    searchParams.set(pageIndex, "1");
     setSearchParams(searchParams);
   };
 
   const handleOnClickLastPage = () => {
-    table.setPageIndex(table.getPageCount() - 1);
-    searchParams.set(pageIndexParam, table.getPageCount().toString());
+    table.lastPage();
+    searchParams.set(pageIndex, table.getPageCount().toString());
     setSearchParams(searchParams);
   };
 
   const handleOnChangeSorting = (columnId: string) => {
+    // Detect the current sorting state of the column
     const currentSort = table.getColumn(columnId).getIsSorted();
     const newSortDirection =
       currentSort === "asc" ? "desc" : currentSort === "desc" ? null : "asc";
     setSorting([{ id: columnId, desc: newSortDirection === "desc" }]);
     searchParams.set("id", columnId);
-    if (newSortDirection) {
-      searchParams.set("desc", newSortDirection === "desc");
-    } else {
-      searchParams.delete("desc");
-    }
+    searchParams.set("desc", newSortDirection === "desc");
     setSearchParams(searchParams);
   };
 
@@ -187,10 +189,12 @@ const Table = <T extends object>({
             {table.getRowModel().rows.map((row) => (
               <Fragment key={row.id}>
                 <tr className="bg-surface border-b last:border-none border-border">
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map((cell, index) => (
                     <td
                       key={cell.id}
-                      className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap  place-items-center ${
+                      className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
+                        index === 0 ? "" : "place-items-center"
+                      } ${
                         cell.column.columnDef.meta?.className ?? "text-center"
                       }`}
                     >
@@ -217,17 +221,15 @@ const Table = <T extends object>({
       <div className="p-1 w-full">
         {pagination && setPagination && (
           <div className="flex items-center justify-between p-6">
-            {showPageSizeOptions && (
-              <div className="flex items-center">
-                <span>Lines per page</span>
-                <Select
-                  options={linesPerPageOptions}
-                  value={table.getState().pagination.pageSize}
-                  handleOnChange={(value) => handleOnChangePageSize(value)}
-                  className="ml-2 w-25"
-                />
-              </div>
-            )}
+            <div className="flex items-center">
+              <span>Lines per page</span>
+              <Select
+                options={linesPerPageOptions}
+                value={table.getState().pagination.pageSize}
+                handleOnChange={(value) => handleOnChangePageSize(value)}
+                className="ml-2 w-25"
+              />
+            </div>
             <div className="flex items-center gap-2">
               <button
                 className="p-1"
@@ -261,9 +263,34 @@ const Table = <T extends object>({
                 <div>Page</div>
                 <strong>
                   {table.getState().pagination.pageIndex + 1} of{" "}
-                  {Math.max(1, table.getPageCount())}
+                  {table.getPageCount().toLocaleString()}
                 </strong>
               </span>
+              {/* <span className="flex items-center gap-1">
+            | Go to page:
+            <input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                handleOnChangePageIndex(e);
+              }}
+              className="border p-1 rounded w-16"
+            />
+          </span> */}
+
+              {/* <select
+        value={table.getState().pagination.pageSize}
+        onChange={(e) => {
+          table.setPageSize(Number(e.target.value));
+        }}
+      >
+        {[10, 20, 30, 40, 50].map((pageSize) => (
+          <option key={pageSize} value={pageSize}>
+            Show {pageSize}
+          </option>
+        ))}
+      </select> */}
+              {data?.isFetching ? "Loading..." : null}
             </div>
           </div>
         )}
