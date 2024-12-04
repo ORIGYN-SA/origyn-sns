@@ -16,6 +16,7 @@ import { PieChartProvider } from "@components/charts/pie/context";
 import ChartActiveAccounts from "./ChartActiveAccounts";
 import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+import ChartTransactionStats from "./ChartTransactionStats";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -121,6 +122,12 @@ const Dashboard = () => {
             id="ogy-token-distribution"
           >
             <TokenDistributionList />
+          </section>
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="transaction-stats"
+          >
+            <ChartTransactionStats />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"

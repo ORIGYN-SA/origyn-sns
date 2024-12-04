@@ -10,7 +10,6 @@ import {
 const SELECT_PERIOD_OPTIONS = [
   { value: "weekly", label: "Weekly" },
   { value: "monthly", label: "Monthly" },
-  { value: "yearly", label: "Yearly" },
 ];
 
 const ChartTransactionStats = ({
@@ -19,7 +18,7 @@ const ChartTransactionStats = ({
 }: {
   className?: string;
 }) => {
-  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
+  const [selectedPeriod, setSelectedPeriod] = useState("monthly");
   const { data, isSuccess, isLoading, isError } = useGetTransactionStats({
     period: selectedPeriod,
   });
@@ -58,7 +57,7 @@ const ChartTransactionStats = ({
             </div>
           </div>
           <div className="xl:w-3/4 h-72 rounded-xl">
-            <ChartArea data={data.dataChart} fill="#38bdf8" />
+            <ChartArea data={data.dataChart} fill="#645eff" />
           </div>
         </div>
       )}
