@@ -167,7 +167,7 @@ const Home = () => {
                             onClick={() => window.open('https://dashboard.origyn.com/')}
                             className="btn-common my-auto flex h-[44px] w-[230px] cursor-pointer items-center justify-center rounded-[44px] bg-[#fff] font-montserrat-bold text-[14px] uppercase text-[#000] md:w-[260px] md:text-[16px]"
                         >
-                            Visit OGY Dashboard
+                            {intl.get('VisitOGYDashboard')}
                         </div>
                     </div>
                 </div>

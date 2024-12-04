@@ -1,4 +1,6 @@
 {
+  "UseCases": "Use Cases",
+  "CoreConcepts": "3 Core Concepts",
   "Traceability": "可追溯性",
   "traceability": "可追溯性",
   "Authentication": "身分驗證",

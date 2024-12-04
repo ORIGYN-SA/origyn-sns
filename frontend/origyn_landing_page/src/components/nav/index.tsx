@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useNavigate } from 'react-router-dom';
 import { Drawer, Dropdown } from 'antd';
 import { Down, HamburgerButton } from '@icon-park/react';
@@ -12,43 +13,6 @@ type JumpMenuType = { title?: string; path: string; isInner: boolean };
 type subMenuType = { label: JSX.Element; key: string; path: string };
 type memuType = { title: string; titleClick: boolean; subMenu: subMenuType[] };
 
-const menus = [
-    {
-        title: 'Technology',
-        titleClick: true,
-        subMenu: [
-            { title: 'OGY Token', path: '/technology/token-org', isInner: true },
-            { title: 'PerpetualOS', path: '/technology/perpetual-OS', isInner: true },
-            {
-                title: 'ORIGYN NFT Standard',
-                path: '/technology/ORIGYN-NFT-Standard',
-                isInner: true,
-            },
-        ],
-    },
-    {
-        title: 'Products & Tools',
-        titleClick: false,
-        subMenu: [
-            { title: 'OGY Dashboard', path: 'https://dashboard.origyn.com', isInner: false },
-            { title: 'ORIGYN Certificate', path: '/products/index', isInner: true }, // /products/certificate
-            { title: 'ORIGYN dApps', path: '/products/management-cloud', isInner: true }, // /products/management-cloud
-        ],
-    },
-    {
-        title: 'Resources',
-        titleClick: false,
-        subMenu: [
-            { title: 'About ORIGYN', path: 'https://origyn.gitbook.io/origyn/', isInner: false },
-            { title: 'About the Foundation', path: OGY_FOUNDATION, isInner: false },
-            { title: 'Roadmap', path: '/roadmap', isInner: true }, // /Roadmap
-            { title: 'Help Desk', path: '', isInner: true },
-            { title: 'Newsroom', path: '/newsroom', isInner: true },
-            { title: 'Brand materials', path: '/brandMaterial', isInner: true }, // /brandMaterial
-        ],
-    },
-];
-
 const Nav = () => {
     const navigage = useNavigate();
     const [menuList, setMenuList] = useState<memuType[]>([]);
@@ -57,6 +21,78 @@ const Nav = () => {
     const pageWidth = usePageInfoStore((store) => store.pageWidth);
     const [open, setOpen] = useState(false);
 
+    let menus = [
+        {
+            title: intl.get('Technology'),
+            titleClick: true,
+            subMenu: [
+                { title: intl.get('OGYToken'), path: '/technology/token-org', isInner: true },
+                { title: 'PerpetualOS', path: '/technology/perpetual-OS', isInner: true },
+                {
+                    title: intl.get('ORIGYNNFTStandard'),
+                    path: '/technology/ORIGYN-NFT-Standard',
+                    isInner: true,
+                },
+            ],
+        },
+        {
+            title: intl.get('ProductsAndTools'),
+            titleClick: false,
+            subMenu: [
+                {
+                    title: intl.get('OGYDashboard'),
+                    path: 'https://dashboard.origyn.com',
+                    isInner: false,
+                },
+                {
+                    title: intl.get('ORIGYNCertificate'),
+                    path: '/products/index',
+                    isInner: true,
+                }, // /products/certificate
+                {
+                    title: intl.get('ORIGYNDApps'),
+                    path: '/products/management-cloud',
+                    isInner: true,
+                }, // /products/management-cloud
+            ],
+        },
+        {
+            title: intl.get('Resources'),
+            titleClick: false,
+            subMenu: [
+                {
+                    title: intl.get('AboutORIGYN'),
+                    path: 'https://origyn.gitbook.io/origyn/',
+                    isInner: false,
+                },
+                {
+                    title: intl.get('AboutFoundation'),
+                    path: OGY_FOUNDATION,
+                    isInner: false,
+                },
+                {
+                    title: intl.get('Roadmap'),
+                    path: '/roadmap',
+                    isInner: true,
+                }, // Roadmap
+                {
+                    title: intl.get('HelpDesk'),
+                    path: '',
+                    isInner: true,
+                },
+                {
+                    title: intl.get('Newsroom'),
+                    path: '/newsroom',
+                    isInner: true,
+                },
+                {
+                    title: intl.get('BrandMaterials'),
+                    path: '/brandMaterial',
+                    isInner: true,
+                }, // /brandMaterial
+            ],
+        },
+    ];
     const showDrawer = () => {
         setOpen(true);
     };
@@ -115,6 +151,78 @@ const Nav = () => {
     };
 
     useEffect(() => {
+        menus = [
+            {
+                title: intl.get('Technology'),
+                titleClick: true,
+                subMenu: [
+                    { title: intl.get('OGYToken'), path: '/technology/token-org', isInner: true },
+                    { title: 'PerpetualOS', path: '/technology/perpetual-OS', isInner: true },
+                    {
+                        title: intl.get('ORIGYNNFTStandard'),
+                        path: '/technology/ORIGYN-NFT-Standard',
+                        isInner: true,
+                    },
+                ],
+            },
+            {
+                title: intl.get('ProductsAndTools'),
+                titleClick: false,
+                subMenu: [
+                    {
+                        title: intl.get('OGYDashboard'),
+                        path: 'https://dashboard.origyn.com',
+                        isInner: false,
+                    },
+                    {
+                        title: intl.get('ORIGYNCertificate'),
+                        path: '/products/index',
+                        isInner: true,
+                    }, // /products/certificate
+                    {
+                        title: intl.get('ORIGYNDApps'),
+                        path: '/products/management-cloud',
+                        isInner: true,
+                    }, // /products/management-cloud
+                ],
+            },
+            {
+                title: intl.get('Resources'),
+                titleClick: false,
+                subMenu: [
+                    {
+                        title: intl.get('AboutORIGYN'),
+                        path: 'https://origyn.gitbook.io/origyn/',
+                        isInner: false,
+                    },
+                    {
+                        title: intl.get('AboutFoundation'),
+                        path: OGY_FOUNDATION,
+                        isInner: false,
+                    },
+                    {
+                        title: intl.get('Roadmap'),
+                        path: '/roadmap',
+                        isInner: true,
+                    }, // Roadmap
+                    {
+                        title: intl.get('HelpDesk'),
+                        path: '',
+                        isInner: true,
+                    },
+                    {
+                        title: intl.get('Newsroom'),
+                        path: '/newsroom',
+                        isInner: true,
+                    },
+                    {
+                        title: intl.get('BrandMaterials'),
+                        path: '/brandMaterial',
+                        isInner: true,
+                    }, // /brandMaterial
+                ],
+            },
+        ];
         const menu = transMenu();
         setMenuList(menu);
     }, []);

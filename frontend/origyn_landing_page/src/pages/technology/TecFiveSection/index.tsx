@@ -88,7 +88,7 @@ const TecFiveSection = () => {
                             {intl.get('OGYDashboardTokenomics')}
                         </div>
                         <div
-                            className="btn-green mt-[15px] h-[45px] cursor-pointer rounded-[45px] px-[10px] text-center font-montserrat-bold text-[14px] uppercase leading-[45px] text-[#fff] md:mt-[30px] md:w-[290px] md:text-[20px]"
+                            className="btn-green mt-[15px] h-[45px] cursor-pointer rounded-[45px] px-[10px] text-center font-montserrat-bold text-[14px] uppercase leading-[45px] text-[#fff] md:mt-[30px] md:w-[340px] md:text-[20px]"
                             onClick={() => window.open('https://dashboard.origyn.com')}
                         >
                             {intl.get('VisitDashboard')}
