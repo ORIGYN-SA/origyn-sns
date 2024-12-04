@@ -10,7 +10,6 @@ import {
 const SELECT_PERIOD_OPTIONS = [
   { value: "weekly", label: "Weekly" },
   { value: "monthly", label: "Monthly" },
-  { value: "yearly", label: "Yearly" },
 ];
 
 const ChartActiveAccounts = ({
@@ -52,7 +51,10 @@ const ChartActiveAccounts = ({
                   Total Unique Accounts
                 </span>
                 <TooltipInfo id="tooltip-total-accounts">
-                  <p>The total number of unique accounts.</p>
+                  <p>
+                    The total number of unique accounts who has made at least
+                    one transaction.
+                  </p>
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2">
