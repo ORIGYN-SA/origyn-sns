@@ -80,7 +80,7 @@ const TecTwoSection = () => {
                 </div>
                 <div className="tecSection2-line1 mt-[40px] flex items-start justify-center text-center md:mt-[50px] md:w-[900px]">
                     <div
-                        className="btn-common flex h-[40px] cursor-pointer items-center justify-evenly rounded-[30px] bg-[#fff] px-[10px] font-montserrat-bold leading-[40px] text-[#000] md:h-[55px] md:w-[300px] md:text-[20px] md:leading-[55px]"
+                        className="btn-common flex h-[40px] cursor-pointer items-center justify-evenly rounded-[30px] bg-[#fff] px-[10px] font-montserrat-bold leading-[40px] text-[#000] md:h-[55px] md:w-[320px] md:text-[20px] md:leading-[55px]"
                         onClick={() => window.open('https://github.com/ORIGYN-SA/origyn_nft')}
                     >
                         <img

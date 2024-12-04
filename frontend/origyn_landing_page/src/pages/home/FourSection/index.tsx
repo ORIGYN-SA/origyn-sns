@@ -108,7 +108,7 @@ const ThreeSection = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
+                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] shrink-0 cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => navigate('/products/certificate')}
                                 >
                                     {intl.get('LearnMore')}
@@ -116,7 +116,7 @@ const ThreeSection = () => {
                             </div>
                         </SwiperSlide>
                         <SwiperSlide onClick={() => changeSlide(1)}>
-                            <div className="card cardGreen h-[400px] w-[370px] p-[15px] md:h-[460px] md:w-[950px] md:p-[60px]">
+                            <div className="card cardGreen h-[400px] w-[370px] p-[15px] md:h-[465px] md:w-[950px] md:p-[60px]">
                                 <div className="text-left font-montserrat-bold text-[24px] leading-[30px] md:h-[50px] md:text-[32px] md:leading-[40px]">
                                     {intl.get('OGYDashboard')} <br />
                                 </div>
@@ -135,7 +135,7 @@ const ThreeSection = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
+                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] shrink-0 cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => window.open('https://dashboard.origyn.com')}
                                 >
                                     {intl.get('LearnMore')}
@@ -162,7 +162,7 @@ const ThreeSection = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
+                                    className="btn-common-white mt-[10px] h-[30px] w-[140px] shrink-0 cursor-pointer bg-white text-center font-montserrat-bold text-[14px] uppercase leading-[30px] text-[#000] md:mt-[30px] md:h-[44px] md:rounded-[44px] md:text-[16px] md:leading-[44px]"
                                     onClick={() => navigate('/products/management-cloud')}
                                 >
                                     {intl.get('LearnMore')}

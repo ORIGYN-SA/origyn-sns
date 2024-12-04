@@ -97,7 +97,7 @@ const ThreeSection = () => {
                     <span>{intl.get('TheTechnology')}</span>
                 </div>
                 <div className="section3-line cursor-pointer justify-around rounded-[44px] text-left md:flex md:w-[1120px]">
-                    <div className="card cardAnimation mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[450px] md:w-[350px] md:px-[20px] md:py-[20px]">
+                    <div className="card cardAnimation mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[465px] md:w-[350px] md:px-[20px] md:py-[20px]">
                         <div className="mb-[10px] text-[24px] md:h-[75px] md:text-[32px] md:leading-[40px]">
                             <span>{intl.get('ORIGYNNFT')}</span> <br />{' '}
                             <span>{intl.get('Standard')}</span>
@@ -112,7 +112,7 @@ const ThreeSection = () => {
                             {intl.get('LearnMore')}
                         </div>
                     </div>
-                    <div className="card mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[450px] md:w-[350px] md:px-[20px] md:py-[20px]">
+                    <div className="card mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[465px] md:w-[350px] md:px-[20px] md:py-[20px]">
                         <div className="mb-[10px] text-[24px] md:h-[60px] md:text-[32px] md:leading-[40px]">
                             {intl.get('OGYToken')} <br />
                         </div>
@@ -126,7 +126,7 @@ const ThreeSection = () => {
                             {intl.get('LearnMore')}
                         </div>
                     </div>
-                    <div className="card cardAnimation mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[450px] md:w-[350px] md:px-[20px] md:py-[20px]">
+                    <div className="card cardAnimation mx-[15px] mt-[20px] flex flex-col items-start justify-between p-[20px] md:h-[465px] md:w-[350px] md:px-[20px] md:py-[20px]">
                         <div className="mb-[10px] text-[24px] md:h-[60px] md:text-[32px] md:leading-[40px]">
                             {intl.get('PerpetualOS')} <br />
                         </div>
