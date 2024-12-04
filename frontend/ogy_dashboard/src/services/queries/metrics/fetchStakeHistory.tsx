@@ -8,7 +8,6 @@ const fetchTokenHolders = async ({
 }): Promise<Array<[bigint, HistoryData]>> => {
   const actor = await getActor("tokenMetrics", { isAnon: true });
   const results = await actor.get_stake_history(start);
-  console.log("results", results);
   return results as Array<[bigint, HistoryData]>;
 };
 

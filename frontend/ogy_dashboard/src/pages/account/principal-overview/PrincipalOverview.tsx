@@ -12,7 +12,6 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
     accountId || ""
   );
 
-  console.log("principalOverview", data);
   const { activeIndex, setActiveIndex } = usePieChart();
 
   const chartData = useMemo(

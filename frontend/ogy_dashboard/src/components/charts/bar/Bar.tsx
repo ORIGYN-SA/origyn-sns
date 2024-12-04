@@ -53,11 +53,19 @@ const renderLegend = (
 };
 
 const Bar = ({
-  data,
-  barFill,
-  barBgFill,
-  barBgRadius,
-  legendValue,
+  data = [
+    { name: "27 feb", value: 2000 },
+    { name: "27 mar", value: 1500 },
+    { name: "27 apr", value: 1200 },
+    { name: "27 may", value: 1000 },
+    { name: "27 jun", value: 850 },
+    { name: "27 jul", value: 500 },
+    { name: "27 aug", value: 200 },
+  ],
+  barFill = "#38bdf8",
+  barBgFill = colors.surface["2"],
+  barBgRadius = 50,
+  legendValue = "Total OGY Supply",
 }: BarChart) => {
   return (
     <ResponsiveContainer>
@@ -85,43 +93,6 @@ const Bar = ({
       </BarChart>
     </ResponsiveContainer>
   );
-};
-
-Bar.defaultProps = {
-  data: [
-    {
-      name: "27 feb",
-      value: 2000,
-    },
-    {
-      name: "27 mar",
-      value: 1500,
-    },
-    {
-      name: "27 apr",
-      value: 1200,
-    },
-    {
-      name: "27 may",
-      value: 1000,
-    },
-    {
-      name: "27 jun",
-      value: 850,
-    },
-    {
-      name: "27 jul",
-      value: 500,
-    },
-    {
-      name: "27 aug",
-      value: 200,
-    },
-  ],
-  barFill: "#38bdf8",
-  barBgFill: colors.surface["2"],
-  barBgRadius: [50, 50, 0, 0],
-  legendValue: "Total OGY Supply",
 };
 
 export default Bar;

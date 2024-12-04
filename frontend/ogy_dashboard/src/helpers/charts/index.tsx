@@ -33,6 +33,7 @@ export const encodeAccount = (account?: string): string => {
 
   try {
     const [owner, subaccount] = account.split(".");
+    if (owner === "Token Ledger") return account;
     const result = encodeIcrcAccount({
       owner: Principal.fromText(owner),
       subaccount: subaccount

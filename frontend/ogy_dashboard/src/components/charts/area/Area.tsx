@@ -34,7 +34,18 @@ const StyledAreaChart = styled(AreaChart)`
   }
 `;
 
-const Area = ({ data, fill }: AreaChart) => {
+const Area = ({
+  data = [
+    { name: "27 feb", value: 2000 },
+    { name: "27 mar", value: 1500 },
+    { name: "27 apr", value: 1200 },
+    { name: "27 may", value: 1000 },
+    { name: "27 jun", value: 850 },
+    { name: "27 jul", value: 500 },
+    { name: "27 aug", value: 200 },
+  ],
+  fill = "#00A2F7",
+}: AreaChart) => {
   const minValue = Math.min(...data.map((d) => d.value));
   const maxValue = Math.max(...data.map((d) => d.value));
   return (
@@ -90,40 +101,6 @@ const Area = ({ data, fill }: AreaChart) => {
       </StyledAreaChart>
     </ResponsiveContainer>
   );
-};
-
-Area.defaultProps = {
-  data: [
-    {
-      name: "27 feb",
-      value: 2000,
-    },
-    {
-      name: "27 mar",
-      value: 1500,
-    },
-    {
-      name: "27 apr",
-      value: 1200,
-    },
-    {
-      name: "27 may",
-      value: 1000,
-    },
-    {
-      name: "27 jun",
-      value: 850,
-    },
-    {
-      name: "27 jul",
-      value: 500,
-    },
-    {
-      name: "27 aug",
-      value: 200,
-    },
-  ],
-  fill: "#00A2F7",
 };
 
 export default Area;

@@ -25,8 +25,19 @@ interface PieChartProps {
   data: PieChartData[];
   colors: string[];
 }
-
-const PieChart: React.FC<PieChartProps> = ({ data, colors }) => {
+const PieChart: React.FC<PieChartProps> = ({
+  data = [
+    {
+      name: "OGY not in the hand of the Foundation",
+      value: 6957526202.66,
+    },
+    {
+      name: "OGY locked in the hand of the Foundation",
+      value: 6744999999.98,
+    },
+  ],
+  colors = ["#645eff", "#333089"],
+}) => {
   const { activeIndex, setActiveIndex } = usePieChart();
 
   const validData = useMemo(
@@ -123,20 +134,6 @@ const PieChart: React.FC<PieChartProps> = ({ data, colors }) => {
       </RechartsPieChart>
     </ResponsiveContainer>
   );
-};
-
-PieChart.defaultProps = {
-  data: [
-    {
-      name: "OGY not in the hand of the Foundation",
-      value: 6957526202.66,
-    },
-    {
-      name: "OGY locked in the hand of the Foundation",
-      value: 6744999999.98,
-    },
-  ],
-  colors: ["#645eff", "#333089"],
 };
 
 export default PieChart;
