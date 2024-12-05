@@ -105,10 +105,10 @@ const FiveSection = () => {
         <div>
             <section className="section5 mx-auto flex h-[100vh] flex-col items-center justify-center md:min-w-[1120px]">
                 <div className="section5-line1 mb-[20px] text-left font-montserrat-regular text-[24px] leading-[30px]  text-[#fff] md:w-[750px]">
-                    Use Cases
+                    {intl.get('UseCases')}
                 </div>
                 <div className="section5-line1 mb-[20px] w-[370px] font-montserrat-bold text-[30px] leading-[50px] text-[#fff] md:mb-[40px] md:w-[750px] md:text-left md:text-[40px]">
-                    3 Core Concepts
+                    {intl.get('CoreConcepts')}
                 </div>
                 <div className="section5-line1 text-left text-[#fff] md:w-[1120px]">
                     {collapses.map((item, index) => {
