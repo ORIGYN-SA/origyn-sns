@@ -225,7 +225,7 @@ const Nav = () => {
         ];
         const menu = transMenu();
         setMenuList(menu);
-    }, []);
+    }, [intl.get('Technology')]);
 
     return (
         <div
@@ -299,7 +299,7 @@ const Nav = () => {
                                     className="mb-[5px] cursor-pointer font-montserrat-bold text-[20px] text-[#000] md:mb-[15px] md:leading-[28px]"
                                     onClick={() => mobileGoPage('/')}
                                 >
-                                    Home
+                                    {intl.get('Home')}
                                 </div>
                             </div>
                             <div className="mt-[25px] w-[220px] text-left md:mt-0">
@@ -307,89 +307,89 @@ const Nav = () => {
                                     className="mb-[5px] cursor-pointer font-montserrat-bold text-[20px] text-[#000] md:mb-[15px] md:leading-[28px]"
                                     onClick={() => mobileGoPage('/technology/index')}
                                 >
-                                    Technology
+                                    {intl.get('Technology')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/technology/token-org')}
                                 >
-                                    OGY Token
+                                    {intl.get('OGYToken')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/technology/perpetual-OS')}
                                 >
-                                    PerpetualOS
+                                    {intl.get('PerpetualOS')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/technology/ORIGYN-NFT-Standard')}
                                 >
-                                    ORIGYN NFT Standard
+                                    {intl.get('ORIGYNNFTStandard')}
                                 </div>
                             </div>
                             <div className="mt-[25px] w-[240px] text-left md:mt-0">
                                 <div className="mb-[5px] font-montserrat-bold text-[20px] text-[#000] md:mb-[15px] md:leading-[28px]">
-                                    Products & Tools
+                                    {intl.get('ProductsAndTools')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => window.open('https://dashboard.origyn.com/')}
                                 >
-                                    OGY Dashboard
+                                    {intl.get('OGYDashboard')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/products/index')}
                                 >
-                                    ORIGYN Certificate
+                                    {intl.get('ORIGYNCertificate')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/products/management-cloud')}
                                 >
-                                    ORIGYN dApps
+                                    {intl.get('ORIGYNDApps')}
                                 </div>
                             </div>
                             <div className="mt-[25px] w-[240px] text-left md:mt-0">
                                 <div className="mb-[5px] font-montserrat-bold text-[20px] text-[#000] md:mb-[15px] md:leading-[28px]">
-                                    Resources
+                                    {intl.get('Resources')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => window.open('https://origyn.gitbook.io/origyn/')}
                                 >
-                                    About ORIGYN
+                                    {intl.get('AboutORIGYN')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => window.open(OGY_FOUNDATION)}
                                 >
-                                    About the Foundation
+                                    {intl.get('AboutTheFoundation')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/roadmap')}
                                 >
-                                    Roadmap
+                                    {intl.get('Roadmap')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('')}
                                 >
-                                    Help Desk
+                                    {intl.get('HelpDesk')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/newsroom')}
                                 >
-                                    Newsroom
+                                    {intl.get('Newsroom')}
                                 </div>
                                 <div
                                     className="font-montserrat-rangule cursor-pointer text-[18px] leading-[32px] text-[#000] hover:text-[#696f97]"
                                     onClick={() => mobileGoPage('/brandMaterial')}
                                 >
-                                    Brand Materials
+                                    {intl.get('BrandMaterials')}
                                 </div>
                             </div>
                         </div>

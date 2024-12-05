@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.4] - 2024-12-05
+
+#### Added
+
+- Add German lenguage
+
 ### [1.0.3] - 2024-12-04
 
 #### Added
