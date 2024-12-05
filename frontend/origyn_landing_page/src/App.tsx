@@ -10,6 +10,7 @@ import { usePageInfoStore } from '@/store';
 import './App.scss';
 import chSPL from './locales/ch_SPL.json';
 import chTRAD from './locales/ch_TRAD.json';
+import deDE from './locales/de_DE.json';
 import enUS from './locales/en_US.json';
 import esES from './locales/es_ES.json';
 import frFR from './locales/fr_FR.json';
@@ -50,6 +51,10 @@ const LOCALES_LIST = [
         label: 'Franch',
         value: 'fr-FR',
     },
+    {
+        label: 'German',
+        value: 'de-DE',
+    },
 ];
 
 const is_prod = import.meta.env.PROD;
@@ -70,6 +75,7 @@ const LOCALE_DATA = {
     'id-ID': idID,
     'ru-RU': ruRU,
     'fr-FR': frFR,
+    'de-DE': deDE,
 };
 
 // 跳转第三方地址

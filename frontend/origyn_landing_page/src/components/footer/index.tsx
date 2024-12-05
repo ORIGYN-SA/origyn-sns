@@ -14,6 +14,7 @@ const languages = {
     'id-ID': 'Indonesian',
     'ru-RU': 'Russian',
     'fr-FR': 'French',
+    'de-DE': 'German',
 };
 
 const Footer = () => {
