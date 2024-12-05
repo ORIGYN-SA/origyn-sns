@@ -138,7 +138,7 @@ const ProductTwoSection = () => {
                     })}
                 </div>
                 <div className="prodSection2-line1 mt-[15px] w-full px-[15px] text-center text-[#fff] md:mt-[30px] md:w-[1120px] md:px-0">
-                    <div className="mx-auto flex flex-col items-start justify-center md:w-[900px]">
+                    <div className="mx-auto flex flex-col items-start justify-center md:w-[925px]">
                         <div className="mb-[20px] font-montserrat-regular text-[16px] md:mb-[80px] md:text-[30px]">
                             <span className="font-montserrat-regular">{intl.get('Secure')} </span>
                             <span className="font-montserrat-bold">1GB </span>

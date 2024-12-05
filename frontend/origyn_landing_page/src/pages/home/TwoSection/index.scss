@@ -14,6 +14,7 @@
     }
 
     .home-future .container.lottie-timeline-text .row {
+        padding: 52px 0;
         height: 100vh;
         align-items: center;
     }
@@ -45,6 +46,12 @@
         }
         .main-wrap {
             position: relative;
+        }
+
+        .home-future .container.lottie-timeline-text .row {
+            height: auto;
+            padding: 26px 0;
+            align-items: center;
         }
     }
 
