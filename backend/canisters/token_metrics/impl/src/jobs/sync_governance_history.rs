@@ -91,18 +91,25 @@ fn balance_difference(
 }
 
 pub fn sync_voting_stats_job() {
-    // How can we get the staked amount history of origyn?
-    // We will just use a hardcoded value for now
-    let origyn_voting_power = 50_003_931_736_000_000u64;
+    // We consider the origyn's voting power as 0 before the SNS
+    // and as 1 bilion after
+    let cutoff_time = 1717545600u64; // 2024-06-05 00:00:00 UTC
 
-    // This might be wrong, I think the total voting power also depends on age and other stuff
     let stake_history = read_state(|state| state.data.gov_stake_history.clone());
 
     let voting_power_ratio: Vec<(u64, u64)> = stake_history
         .iter()
         .map(|(timestamp, history_data)| {
-            let ratio = (((origyn_voting_power as f64) / (history_data.balance as f64)) *
-                10000.0) as u64;
+            let origyn_voting_power = if *timestamp >= cutoff_time {
+                1_000_000_000u64 * 100_000_000u64
+            } else {
+                0u64
+            };
+            let ratio = if history_data.balance > 0 {
+                (((origyn_voting_power as f64) / (history_data.balance as f64)) * 10000.0) as u64
+            } else {
+                0
+            };
             (*timestamp, ratio)
         })
         .collect();
