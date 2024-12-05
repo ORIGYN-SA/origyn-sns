@@ -225,7 +225,7 @@ const Nav = () => {
         ];
         const menu = transMenu();
         setMenuList(menu);
-    }, []);
+    }, [intl.get('Technology')]);
 
     return (
         <div
