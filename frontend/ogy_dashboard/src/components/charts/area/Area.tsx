@@ -18,7 +18,7 @@ type Data = {
 };
 
 type AreaChart = {
-  data: Data[];
+  data: Data[] | undefined;
   fill?: string;
 };
 

@@ -19,7 +19,7 @@ export const roundAndFormatLocale = ({
 };
 
 export const numberToE8s = (value: string) => {
-  return BigInt(Math.round(parseFloat(value) * 1e8));
+  return BigInt(Math.floor(parseFloat(value) * 1e8));
 };
 
 export const millify = (value: number, precision?: number) =>
