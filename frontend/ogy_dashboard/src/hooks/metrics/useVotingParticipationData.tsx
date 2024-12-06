@@ -28,14 +28,10 @@ const useVotingParticipationData = ({ period }: { period: string }) => {
 
         const metrics =
           (await actor.get_proposals_metrics()) as ProposalsMetrics;
-        console.log("metrics:", metrics);
-
-        console.log("metrics.total_voting_power:", metrics.total_voting_power);
 
         const history = (await actor.get_voting_participation_history({
           days,
         })) as VotingParticipationHistory;
-        console.log("history:", history);
 
         const historyData = history.map(([day, participation]) => ({
           name: DateTime.fromMillis(0)
@@ -44,35 +40,21 @@ const useVotingParticipationData = ({ period }: { period: string }) => {
           value: Number(participation),
         }));
 
-        const scaledTotalVotingPower = divideBy1e8(metrics.total_voting_power);
-        console.log("scaledTotalVotingPower:", scaledTotalVotingPower);
-
         const lastParticipationRaw =
           historyData[historyData.length - 1]?.value || 0;
-        console.log("lastParticipationRaw:", lastParticipationRaw);
 
-        const calcLastParticipation =
-          (lastParticipationRaw * 100) / scaledTotalVotingPower;
-        console.log("calcLastParticipation:", calcLastParticipation);
+        const calcLastParticipation = lastParticipationRaw / 100;
 
         const lastParticipation =
-          scaledTotalVotingPower > 0
+          calcLastParticipation > 0
             ? calcLastParticipation.toFixed(2) + "%"
             : "0%";
-        console.log("lastParticipation:", lastParticipation);
 
-        console.log(
-          "metrics.average_voting_participation:",
-          metrics.average_voting_participation
-        );
         const averageParticipation =
-          scaledTotalVotingPower > 0
-            ? (
-                (Number(metrics.average_voting_participation) * 100) /
-                scaledTotalVotingPower
-              ).toFixed(2) + "%"
+          metrics.average_voting_participation > 0
+            ? (Number(metrics.average_voting_participation) / 100).toFixed(2) +
+              "%"
             : "0%";
-        console.log("averageParticipation:", averageParticipation);
 
         setData({
           lastParticipation,
@@ -80,13 +62,7 @@ const useVotingParticipationData = ({ period }: { period: string }) => {
           averagePower: divideBy1e8(
             metrics.average_voting_power
           ).toLocaleString("en-US"),
-          dataChart: historyData.map((item) => ({
-            ...item,
-            value:
-              scaledTotalVotingPower > 0
-                ? (item.value * 100) / scaledTotalVotingPower
-                : 0,
-          })),
+          dataChart: historyData,
         });
       } catch (error) {
         console.error("Error fetching voting participation data:", error);

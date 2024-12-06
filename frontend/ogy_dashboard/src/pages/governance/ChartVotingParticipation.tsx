@@ -60,7 +60,7 @@ const ChartVotingParticipation = ({
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2">
-                <span>{data?.lastParticipation}%</span>
+                <span>{data?.lastParticipation}</span>
               </div>
             </div>
             <div className="border-b border-[#E1E1E1] my-4 w-3/4" />
@@ -76,7 +76,7 @@ const ChartVotingParticipation = ({
                 </TooltipInfo>
               </div>
               <div className="text-2xl font-semibold mt-2">
-                <span>{data?.averageParticipation}%</span>
+                <span>{data?.averageParticipation}</span>
               </div>
             </div>
             <div className="border-b border-[#E1E1E1] my-4 w-3/4" />
