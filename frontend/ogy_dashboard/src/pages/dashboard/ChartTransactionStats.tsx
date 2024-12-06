@@ -55,9 +55,27 @@ const ChartTransactionStats = ({
                 <span className="mr-3">{data.total}</span>
               </div>
             </div>
+            <div className="items-center justify-start mr-6 mt-auto mb-6 hidden md:flex">
+              <div
+                className="h-2 w-4 rounded-lg"
+                style={{ backgroundColor: "#645eff" }}
+              ></div>
+              <div className="text-xs text-content/60 font-semibold ml-2 uppercase">
+                Total Transactions
+              </div>
+            </div>
           </div>
-          <div className="xl:w-3/4 h-72 rounded-xl">
+          <div className="xl:w-3/4 h-72 rounded-xl my-6">
             <ChartArea data={data.dataChart} fill="#645eff" />
+          </div>
+          <div className="items- justify-end flex mr-6 md:hidden">
+            <div
+              className="h-2 w-4 rounded-lg"
+              style={{ backgroundColor: "#645eff" }}
+            ></div>
+            <div className="text-xs text-content/60 font-semibold ml-2 uppercase">
+              Total Transactions
+            </div>
           </div>
         </div>
       )}

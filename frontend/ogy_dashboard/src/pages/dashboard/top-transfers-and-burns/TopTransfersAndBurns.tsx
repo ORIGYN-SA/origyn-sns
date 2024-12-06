@@ -124,7 +124,7 @@ const TopTransfersAndBurns = ({
       <Card className="p-6 space-y-6">
         <div className="flex flex-row items-center">
           <div className="text-lg font-semibold">{title}</div>
-          <Button onClick={() => handleClick()} className="ml-4">
+          <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
             Show All
           </Button>
           <Tooltip id="tooltip_address" />

@@ -109,7 +109,7 @@ export const Governance = () => {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 2xl:gap-8">
         <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left">
           <h1 className="text-4xl sm:text-6xl font-bold">
             Governance Overview

@@ -31,10 +31,12 @@ const useVotingPowerData = ({ period }: { period: string }) => {
           days,
         })) as VotingParticipationHistory;
 
+        console.log(history);
+
         const historyData = history.map(([day, balance]: [bigint, number]) => {
           const dateName = DateTime.fromMillis(0)
             .plus({ days: Number(day) })
-            .toFormat("MMM dd yyyy"); // Inclure l'année
+            .toFormat("MMM dd yyyy");
           return {
             name: dateName,
             value: Number(balance),
@@ -48,6 +50,8 @@ const useVotingPowerData = ({ period }: { period: string }) => {
         const votingPower = divideBy1e8(
           metrics.total_voting_power
         ).toLocaleString("en-US");
+
+        console.log(historyData);
 
         setData({
           dataChart: historyData,

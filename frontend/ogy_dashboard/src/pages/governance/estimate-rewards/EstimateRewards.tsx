@@ -40,7 +40,7 @@ const AirbnbSlider = styled(Slider)(({ theme }) => ({
 
 interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
-function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
+function AirbnbThumbComponent (props: AirbnbThumbComponentProps) {
   const { children, ...other } = props;
   return (
     <SliderThumb {...other}>
@@ -79,9 +79,9 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         Estimate rewards
       </h2>
 
-      <div className="w-full px-2 py-2 md:px-4 md:py-4 xl:px-2 2xl:px-4">
+      <div className="w-full py-2 md:px-4 md:py-4 xl:px-0 2xl:px-4">
         <div className="gap-2">
-          <div className="text-4xl mb-8">
+          <div className="text-4xl mb-4 md:mb-8">
             {displayData[activeIndex - 1]?.rate || "N/A"}
           </div>
         </div>
@@ -100,19 +100,21 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
           {activeIndex < 5 && (
-            <div className="flex flex-col items-center xl:items-start">
-              <div className="flex flex-col md:flex-row xl:flex-col 2xl:flex-row items-center text-2xl font-semibold md:space-x-4 xl:space-x-0 2xl:space-x-4">
+            <div className="flex flex-col items-start">
+              <div className="flex flex-row space-x-4 items-center text-2xl font-semibold md:space-x-4">
                 <img
                   src="/ogy_logo.svg"
                   alt="OGY Logo"
-                  className="h-14 w-14 object-contain mb-2 md:mb-0 xl:mb-2 2xl:mb-0"
+                  className="h-12 w-12 2xl:w-14 2xl:h-14 object-contain"
                 />
                 <div className="flex flex-col text-left">
                   <div className="flex items-baseline">
                     <span className="text-2xl">
                       {displayData[activeIndex - 1]?.lockedSum || "0"}
                     </span>
-                    <span className="ml-2 text-content/60 text-2xl">OGY</span>
+                    <span className=" ml-1 text-content/60 text-lg 2xl:text-2xl">
+                      OGY
+                    </span>
                   </div>
                   <div className="text-content/60 text-lg">
                     <span className="text-content">
@@ -122,25 +124,27 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
                   </div>
                 </div>
               </div>
-              <div className="text-content/60 mt-2">
+              <div className="text-content/60 mt-0 md:mt-2">
                 currently locked for at least {activeIndex} year
               </div>
             </div>
           )}
 
-          <div className="flex flex-col items-center xl:items-start">
-            <div className="flex flex-col md:flex-row xl:flex-col 2xl:flex-row items-center text-2xl font-semibold md:space-x-4 xl:space-x-0 2xl:space-x-4">
+          <div className="flex flex-col items-start">
+            <div className="flex flex-row space-x-4  items-center text-2xl font-semibold md:space-x-4 2xl:space-x-4">
               <img
                 src="/ogy_logo.svg"
                 alt="OGY Logo"
-                className="h-14 w-14 object-contain mb-2 md:mb-0 xl:mb-2 2xl:mb-0"
+                className="h-12 w-12 2xl:w-14 2xl:h-14 object-contain"
               />
               <div className="flex flex-col text-left">
                 <div className="flex items-baseline">
                   <span className="text-2xl">
                     {displayData[activeIndex - 1]?.locked || "0"}
                   </span>
-                  <span className="ml-2 text-content/60 text-2xl">OGY</span>
+                  <span className=" ml-1 text-content/60 text-lg 2xl:text-2xl">
+                    OGY
+                  </span>
                 </div>
                 <div className="text-content/60 text-lg">
                   <span className="text-content">
@@ -150,7 +154,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
                 </div>
               </div>
             </div>
-            <div className="text-content/60 mt-2">
+            <div className="text-content/60 mt-0 md:mt-2">
               currently locked for {activeIndex} year
             </div>
           </div>

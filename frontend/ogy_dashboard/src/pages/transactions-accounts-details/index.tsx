@@ -126,7 +126,9 @@ const TransactionsAccountsDetails = () => {
         <div>
           <div className="flex items-center mt-16 mb-8 gap-8">
             <h2 className="text-3xl font-bold">Transactions history</h2>
-            <Button onClick={handleShowAllTxHistory}>Show all</Button>
+            <Button onClick={handleShowAllTxHistory} className="min-w-fit">
+              Show all
+            </Button>
           </div>
           <TransactionsAccountList
             accountId={params?.accountId}
