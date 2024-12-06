@@ -44,7 +44,6 @@ import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
-import TopTransfersAndBurns from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurns";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
 
 const router = createBrowserRouter([

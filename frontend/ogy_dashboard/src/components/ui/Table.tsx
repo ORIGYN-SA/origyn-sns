@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // @ts-nocheck
 import { ReactNode, useMemo, Fragment } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -26,14 +27,12 @@ import { Select } from "@components/ui";
 interface ReactTableProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
-  rowCount?: number;
   pagination?: PaginationState;
   setPagination?: OnChangeFn<PaginationState>;
   sorting?: SortingState;
   setSorting?: OnChangeFn<SortingState>;
   getRowCanExpand?: (row: Row<T>) => boolean;
   subComponent?: ReactNode;
-  identifier?: string;
 }
 
 const linesPerPageOptions = [
@@ -46,25 +45,20 @@ const linesPerPageOptions = [
 const Table = <T extends object>({
   columns,
   data,
-  rowCount = data.length,
   pagination,
   setPagination,
   sorting,
   setSorting,
   getRowCanExpand,
-  identifier = "",
   subComponent,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageIndexParam = `page_index${identifier ? `_${identifier}` : ""}`;
-  const pageSizeParam = `page_size${identifier ? `_${identifier}` : ""}`;
 
   const defaultData = useMemo(() => [], []);
 
   const table = useReactTable({
     data: Array.isArray(data) ? data : data?.rows ?? defaultData,
     columns,
-    rowCount: data?.rowCount ?? 0,
     state: {
       pagination,
       sorting,

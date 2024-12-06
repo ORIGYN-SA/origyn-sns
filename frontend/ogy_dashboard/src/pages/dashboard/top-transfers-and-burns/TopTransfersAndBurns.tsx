@@ -139,7 +139,6 @@ const TopTransfersAndBurns = ({
           <Table
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
-            rowCount={data.length}
           />
         ) : (
           !isLoading && (
