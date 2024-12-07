@@ -33,6 +33,8 @@ interface ReactTableProps<T extends object> {
   setSorting?: OnChangeFn<SortingState>;
   getRowCanExpand?: (row: Row<T>) => boolean;
   subComponent?: ReactNode;
+  identifier?: string;
+  serverSide?: boolean;
 }
 
 const linesPerPageOptions = [
@@ -50,9 +52,13 @@ const Table = <T extends object>({
   sorting,
   setSorting,
   getRowCanExpand,
+  identifier = "",
+  serverSide = true,
   subComponent,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const pageIndex = `page_index${identifier ?? `_${identifier}`}`;
+  const pageSize = `page_size${identifier ?? `_${identifier}`}`;
 
   const defaultData = useMemo(() => [], []);
 
@@ -68,8 +74,17 @@ const Table = <T extends object>({
     getCoreRowModel: getCoreRowModel(),
     getRowCanExpand,
     getExpandedRowModel: getExpandedRowModel(),
-    manualPagination: !!setPagination,
-    manualSorting: !!setSorting,
+    ...(serverSide && {
+      rowCount: data?.rowCount ?? 0,
+      manualPagination: setPagination ? true : undefined,
+      manualSorting: setSorting ? true : undefined,
+    }),
+    ...(!serverSide && {
+      getSortedRowModel: getSortedRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      onPaginationChange: setPagination,
+    }),
   });
 
   const handleOnChangePageSize = (value: string) => {
