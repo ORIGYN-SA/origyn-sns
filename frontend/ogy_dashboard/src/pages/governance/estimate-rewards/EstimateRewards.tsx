@@ -40,7 +40,7 @@ const AirbnbSlider = styled(Slider)(({ theme }) => ({
 
 interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
-function AirbnbThumbComponent (props: AirbnbThumbComponentProps) {
+function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
   const { children, ...other } = props;
   return (
     <SliderThumb {...other}>
@@ -98,10 +98,43 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
           }))}
           onChange={(event) => handleOnChange(event)}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
           {activeIndex < 5 && (
+            <div className="flex justify-center">
+              <div className="flex flex-col items-start">
+                <div className="flex flex-row space-x-4 items-center text-2xl font-semibold md:space-x-4">
+                  <img
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                    className="h-12 w-12 2xl:w-14 2xl:h-14 object-contain"
+                  />
+                  <div className="flex flex-col text-left">
+                    <div className="flex items-baseline">
+                      <span className="text-2xl">
+                        {displayData[activeIndex - 1]?.lockedSum || "0"}
+                      </span>
+                      <span className=" ml-1 text-content/60 text-lg 2xl:text-2xl">
+                        OGY
+                      </span>
+                    </div>
+                    <div className="text-content/60 text-base font-light">
+                      <span className="text-content font-semibold">
+                        {displayData[activeIndex - 1]?.countSum || "0"}
+                      </span>{" "}
+                      participants
+                    </div>
+                  </div>
+                </div>
+                <div className="text-content/60 mt-0 md:mt-2 text-center">
+                  currently locked for at least {activeIndex} year
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-center">
             <div className="flex flex-col items-start">
-              <div className="flex flex-row space-x-4 items-center text-2xl font-semibold md:space-x-4">
+              <div className="flex flex-row space-x-4 items-center text-2xl font-semibold md:space-x-4 2xl:space-x-4">
                 <img
                   src="/ogy_logo.svg"
                   alt="OGY Logo"
@@ -110,52 +143,23 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
                 <div className="flex flex-col text-left">
                   <div className="flex items-baseline">
                     <span className="text-2xl">
-                      {displayData[activeIndex - 1]?.lockedSum || "0"}
+                      {displayData[activeIndex - 1]?.locked || "0"}
                     </span>
                     <span className=" ml-1 text-content/60 text-lg 2xl:text-2xl">
                       OGY
                     </span>
                   </div>
-                  <div className="text-content/60 text-lg">
-                    <span className="text-content">
-                      {displayData[activeIndex - 1]?.countSum || "0"}
+                  <div className="text-content/60 text-base font-light">
+                    <span className="text-content font-semibold">
+                      {displayData[activeIndex - 1]?.count || "0"}
                     </span>{" "}
                     participants
                   </div>
                 </div>
               </div>
-              <div className="text-content/60 mt-0 md:mt-2">
-                currently locked for at least {activeIndex} year
+              <div className="text-content/60 mt-0 md:mt-3">
+                currently locked for {activeIndex} year
               </div>
-            </div>
-          )}
-
-          <div className="flex flex-col items-start">
-            <div className="flex flex-row space-x-4  items-center text-2xl font-semibold md:space-x-4 2xl:space-x-4">
-              <img
-                src="/ogy_logo.svg"
-                alt="OGY Logo"
-                className="h-12 w-12 2xl:w-14 2xl:h-14 object-contain"
-              />
-              <div className="flex flex-col text-left">
-                <div className="flex items-baseline">
-                  <span className="text-2xl">
-                    {displayData[activeIndex - 1]?.locked || "0"}
-                  </span>
-                  <span className=" ml-1 text-content/60 text-lg 2xl:text-2xl">
-                    OGY
-                  </span>
-                </div>
-                <div className="text-content/60 text-lg">
-                  <span className="text-content">
-                    {displayData[activeIndex - 1]?.count || "0"}
-                  </span>{" "}
-                  participants
-                </div>
-              </div>
-            </div>
-            <div className="text-content/60 mt-0 md:mt-2">
-              currently locked for {activeIndex} year
             </div>
           </div>
         </div>
