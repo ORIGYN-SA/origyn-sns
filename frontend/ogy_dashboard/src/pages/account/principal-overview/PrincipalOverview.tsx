@@ -49,24 +49,27 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
         tooltip: "Total amount received by the principal.",
         color: "#333089",
       },
-      {
-        label: "Total Volume",
-        value:
-          data?.totalVolume && !isNaN(Number(data.totalVolume))
-            ? data.totalVolume
-            : 0,
-        token: "OGY",
-        tooltip: "Total volume of transactions (sent + received).",
-        color: "#56aaff",
-      },
+      // {
+      //   label: "Total Volume",
+      //   value:
+      //     data?.totalVolume && !isNaN(Number(data.totalVolume))
+      //       ? data.totalVolume
+      //       : 0,
+      //   token: "OGY",
+      //   tooltip: "Total volume of transactions (sent + received).",
+      //   color: "#56aaff",
+      // },
     ],
     [data]
   );
 
   return (
     <Card className={`${className}`}>
+      <div className="flex items-center">
+        <h2 className="text-lg font-semibold mr-2">Transactions Overview</h2>
+      </div>
       {isSuccess && data && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-0">
           {/* Pie Chart Section */}
           <div>
             <div className="mt-6 h-80 rounded-xl">
@@ -78,10 +81,10 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
             <div className="flex flex-col items-center my-4">
               <div className="flex items-center">
                 <h2 className="text-lg font-semibold text-content/60 mr-2">
-                  Principal Account Overview
+                  Total amount
                 </h2>
                 <TooltipInfo id="tooltip-principal-overview">
-                  <p>Overview of the principal's account transactions.</p>
+                  <p>Total amount transactions of account.</p>
                 </TooltipInfo>
               </div>
               <div className="mt-4 flex items-center text-2xl font-semibold">
@@ -97,11 +100,11 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 gap-8">
+          <div className="flex flex-col gap-8">
             {stats.map(({ label, value, token, tooltip, color }, index) => (
               <Card
                 key={label}
-                className={`bg-surface-2 pb-8 dark:hover:bg-white/10 hover:bg-black/10 ${
+                className={`bg-surface-2 pb-12 dark:hover:bg-white/10 hover:bg-black/10 ${
                   activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
                 } transition-opacity duration-300`}
                 onMouseEnter={() => {
