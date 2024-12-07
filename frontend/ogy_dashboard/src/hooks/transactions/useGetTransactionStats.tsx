@@ -34,18 +34,21 @@ const useGetTransactionStats = ({ period }: { period: string }) => {
         const results = await actor.get_daily_stats();
         const { count_over_time } = results as TimeStats;
 
-        const filteredData: DataChart[] = count_over_time
+        const sortedData = count_over_time
           .slice(0, days)
-          .map((stat) => ({
-            name: DateTime.fromMillis(
-              Number(stat.start_time || 0n) / 1e6
-            ).toFormat("LLL dd"),
-            value: Number(stat.transfer_count || 0n),
-          }));
+          .sort((a, b) => Number(a.start_time) - Number(b.start_time));
 
-        const total: string = filteredData
-          .reduce((sum, item) => sum + item.value, 0)
-          .toLocaleString("en-US");
+        const filteredData = sortedData.map((stat) => {
+          const name = DateTime.fromMillis(
+            Number(stat.start_time) / 1e6
+          ).toFormat("LLL dd");
+          const value = Number(stat.transfer_count);
+          return { name, value };
+        });
+
+        const total = filteredData
+          .reduce((acc, cur) => acc + cur.value, 0)
+          .toString();
 
         return {
           total,

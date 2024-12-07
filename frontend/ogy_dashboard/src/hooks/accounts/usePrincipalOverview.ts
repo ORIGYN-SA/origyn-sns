@@ -43,9 +43,14 @@ const usePrincipalOverview = (principal: string) => {
 
           const totalSend = divideBy1e8(totalSendRaw);
           const totalReceive = divideBy1e8(totalReceiveRaw);
-          const totalVolume = totalSend + totalReceive;
+          const totalVolume =
+            totalSend && totalReceive ? totalSend + totalReceive : 0;
 
-          setData({ totalSend, totalReceive, totalVolume });
+          setData({
+            totalSend,
+            totalReceive,
+            totalVolume,
+          });
         } else {
           setData(null);
         }

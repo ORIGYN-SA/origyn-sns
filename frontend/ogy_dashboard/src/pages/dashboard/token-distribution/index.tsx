@@ -20,7 +20,12 @@ const TokenDistribution = ({
     <Card className={`${className}`} {...restProps}>
       <div className="flex items-center mb-8 gap-8">
         <div className="text-lg font-semibold">Token Distribution</div>
-        <Button onClick={handleShowAllTokenDistribution}>Show all</Button>
+        <Button
+          onClick={handleShowAllTokenDistribution}
+          className="min-w-fit ml-auto md:ml-0"
+        >
+          Show all
+        </Button>
       </div>
       <TokenDistributionList pagination={pagination} />
     </Card>

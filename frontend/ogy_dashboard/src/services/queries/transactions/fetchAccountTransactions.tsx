@@ -6,7 +6,7 @@ import { Transaction } from "@services/types/transactions.types";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 
 export interface ListParams {
-  account: string,
+  account: string;
   limit: number;
   offset: number;
   sorting: SortingState;
@@ -16,7 +16,7 @@ type TransactionResults = {
   rows: Transaction[];
   pageCount: number;
   rowCount: number;
-}
+};
 
 const fn = async ({
   account,

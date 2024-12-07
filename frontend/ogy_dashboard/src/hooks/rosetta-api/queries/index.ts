@@ -1,1 +1,1 @@
-export * from "./fetchOneTransaction"
+export * from "./fetchOneTransaction";
