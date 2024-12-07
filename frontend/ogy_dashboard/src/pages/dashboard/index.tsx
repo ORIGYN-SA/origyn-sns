@@ -13,10 +13,10 @@ import TokenDistributionList from "@pages/dashboard/token-distribution";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
-import ChartActiveAccounts from "./ChartActiveAccounts";
-import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
+// import ChartActiveAccounts from "./ChartActiveAccounts";
+// import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
-import ChartTransactionStats from "./ChartTransactionStats";
+// import ChartTransactionStats from "./ChartTransactionStats";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const Dashboard = () => {
             <OrigynRewardAccount />
           </section>
 
-          <section
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="top-transfers"
           >
@@ -110,31 +110,31 @@ const Dashboard = () => {
               title="Top 5 Transfers"
               limit={5}
             />
-          </section>
-          <section
+          </section> */}
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="top-burns"
           >
             <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
-          </section>
+          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-token-distribution"
           >
             <TokenDistributionList />
           </section>
-          <section
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="transaction-stats"
           >
             <ChartTransactionStats />
-          </section>
-          <section
+          </section> */}
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="active-accounts"
           >
             <ChartActiveAccounts />
-          </section>
+          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="users-activity"
