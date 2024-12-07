@@ -1,109 +1,160 @@
 import { useParams } from "react-router-dom";
+import { useMemo } from "react";
 import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
 import PieChart from "@components/charts/pie/Pie";
 import { roundAndFormatLocale } from "@helpers/numbers";
 import usePrincipalOverview from "@hooks/accounts/usePrincipalOverview";
+import { usePieChart } from "@components/charts/pie/context";
 
-const PrincipalOverview = () => {
+const PrincipalOverview = ({ className }: { className?: string }) => {
   const { accountId } = useParams<{ accountId: string }>();
   const { data, isSuccess, isLoading, isError, error } = usePrincipalOverview(
     accountId || ""
   );
 
-  const chartData =
-    isSuccess && data
-      ? [
-          { name: "Total Sent", value: Number(data.totalSend) },
-          { name: "Total Received", value: Number(data.totalReceive) },
-        ]
-      : [];
+  const { activeIndex, setActiveIndex } = usePieChart();
 
-  const borderColors = ["bg-purple-500", "bg-pink-500", "bg-green-500"];
+  const chartData = useMemo(
+    () =>
+      isSuccess && data
+        ? [
+            {
+              name: "Total Sent",
+              value: Number(data.totalSend) || 0,
+              color: "#645eff",
+            },
+            {
+              name: "Total Received",
+              value: Number(data.totalReceive) || 0,
+              color: "#333089",
+            },
+          ]
+        : [],
+    [data, isSuccess]
+  );
 
-  const stats = [
-    {
-      label: "Total Sent",
-      value: data?.totalSend,
-      token: "OGY",
-      tooltip: "Total amount sent by the principal.",
-    },
-    {
-      label: "Total Received",
-      value: data?.totalReceive,
-      token: "OGY",
-      tooltip: "Total amount received by the principal.",
-    },
-    {
-      label: "Total Volume",
-      value: data?.totalVolume,
-      token: "OGY",
-      tooltip: "Total volume of transactions (sent + received).",
-    },
-  ];
+  const stats = useMemo(
+    () => [
+      {
+        label: "Total Sent",
+        value: data?.totalSend || 0,
+        token: "OGY",
+        tooltip: "Total amount sent by the principal.",
+        color: "#645eff",
+      },
+      {
+        label: "Total Received",
+        value: data?.totalReceive || 0,
+        token: "OGY",
+        tooltip: "Total amount received by the principal.",
+        color: "#333089",
+      },
+      // {
+      //   label: "Total Volume",
+      //   value:
+      //     data?.totalVolume && !isNaN(Number(data.totalVolume))
+      //       ? data.totalVolume
+      //       : 0,
+      //   token: "OGY",
+      //   tooltip: "Total volume of transactions (sent + received).",
+      //   color: "#56aaff",
+      // },
+    ],
+    [data]
+  );
 
   return (
-    <Card className="p-6">
-      <h2 className="text-lg font-semibold mb-6">Principal Account Overview</h2>
-
-      {isLoading && (
-        <LoaderSpin
-          size="lg"
-          className="flex justify-center items-center h-full my-12"
-        />
-      )}
-
-      {isError && (
-        <div className="bg-rose-500 rounded-xl text-white font-bold mb-8 p-6">
-          {error?.message || "An error occurred"}
-        </div>
-      )}
-
-      {data === null && isSuccess && (
-        <div className="justify-center font-semibold my-8 p-6 flex italic">
-          No data found for this principal ID.
-        </div>
-      )}
-
+    <Card className={`${className}`}>
+      <div className="flex items-center">
+        <h2 className="text-lg font-semibold mr-2">Transactions Overview</h2>
+      </div>
       {isSuccess && data && (
-        <>
-          <div className="h-72 my-12">
-            <PieChart data={chartData} colors={["#645eff", "#333089"]} />
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-0">
+          {/* Pie Chart Section */}
+          <div>
+            <div className="mt-6 h-80 rounded-xl">
+              <PieChart
+                data={chartData}
+                colors={chartData.map((d) => d.color)}
+              />
+            </div>
+            <div className="flex flex-col items-center my-4">
+              <div className="flex items-center">
+                <h2 className="text-lg font-semibold text-content/60 mr-2">
+                  Total amount
+                </h2>
+                <TooltipInfo id="tooltip-principal-overview">
+                  <p>Total amount transactions of account.</p>
+                </TooltipInfo>
+              </div>
+              <div className="mt-4 flex items-center text-2xl font-semibold">
+                <img src="/ogy_logo.svg" alt="OGY Logo" />
+                <span className="ml-2 mr-3">
+                  {roundAndFormatLocale({
+                    number: Number(data.totalVolume),
+                  })}
+                </span>
+                <span className="text-content/60">OGY</span>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-            {stats.map((stat, index) => (
+          {/* Stats Section */}
+          <div className="flex flex-col gap-8">
+            {stats.map(({ label, value, token, tooltip, color }, index) => (
               <Card
-                className="bg-surface-2/40 dark:bg-surface-2 pb-8"
-                key={stat.label}>
-                <div className="flex flex-col md:flex-row items-center justify-between">
-                  <div className="flex flex-col md:flex-row items-center text-lg font-semibold">
-                    <img
-                      src="/ogy_logo.svg"
-                      height={32}
-                      width={32}
-                      alt="Token logo"
-                    />
-                    <h2 className="ml-2 text-content/60">{stat.label}</h2>
+                key={label}
+                className={`bg-surface-2 pb-12 dark:hover:bg-white/10 hover:bg-black/10 ${
+                  activeIndex === index ? `dark:bg-white/10 bg-black/10` : ``
+                } transition-opacity duration-300`}
+                onMouseEnter={() => {
+                  if (index >= 0 && index < chartData.length) {
+                    setActiveIndex(index);
+                  }
+                }}
+                onMouseLeave={() => {
+                  setActiveIndex(null);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-lg">
+                    <div
+                      className="h-3 w-3 rounded-full mr-2"
+                      style={{ backgroundColor: color }}
+                    ></div>
+                    <span className="text-content/60">{label}</span>
                   </div>
-                  <TooltipInfo id={`tooltip-${stat.label}`}>
-                    {stat.tooltip}
+                  <TooltipInfo
+                    id={`tooltip-${label.replace(" ", "-").toLowerCase()}`}
+                  >
+                    {tooltip}
                   </TooltipInfo>
                 </div>
-                <div className="flex flex-col md:flex-row items-center mt-4 text-2xl font-semibold">
+                <div className="flex items-center mt-2 text-2xl font-semibold">
                   <span className="mr-3">
-                    {stat.value !== undefined
-                      ? roundAndFormatLocale({ number: Number(stat.value) })
-                      : "N/A"}
+                    {roundAndFormatLocale({ number: value })}
                   </span>
-                  <span className="text-content/60">{stat.token}</span>
+                  <span className="text-content/60">{token}</span>
                 </div>
-                <Card.BorderBottom
-                  className={`${borderColors[index % borderColors.length]}`}
-                />
+                <Card.BorderBottom color={color} />
               </Card>
             ))}
           </div>
-        </>
+        </div>
+      )}
+
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center h-96 mx-auto">
+          <LoaderSpin size="xl" />
+        </div>
+      )}
+
+      {/* Error State */}
+      {isError && (
+        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+          <div>{error?.message || "An error occurred"}</div>
+        </div>
       )}
     </Card>
   );

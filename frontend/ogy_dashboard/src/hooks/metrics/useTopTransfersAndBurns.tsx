@@ -3,6 +3,8 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getActor } from "@amerej/artemis-react";
 import { DateTime } from "luxon";
 import { TimeStats } from "@hooks/super_stats_v3/declarations";
+import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
 export interface TransformedData {
   hash: string;
@@ -65,15 +67,18 @@ const useTopTransfersAndBurns = ({
         .slice(0, limit)
         .map((tx) => ({
           hash: tx.hash !== "no-hash" ? tx.hash : "N/A",
-          from: tx.from_account || "Unknown",
-          to: tx.to_account || "Unknown",
+          from:
+            type === "burns"
+              ? codeAndDecodeAccount(tx.from_account)
+              : encodeAccount(tx.from_account),
+          to: tx.to_account ? encodeAccount(tx.to_account) : "Unknown",
           value:
             tx.tx_value && !isNaN(Number(tx.tx_value))
-              ? Number(tx.tx_value).toLocaleString()
+              ? roundAndFormatLocale({number: divideBy1e8(tx.tx_value)})
               : "N/A",
           fee:
             tx.tx_fee?.[0] && !isNaN(Number(tx.tx_fee[0]))
-              ? Number(tx.tx_fee[0]).toLocaleString()
+              ? roundAndFormatLocale({number: divideBy1e8(tx.tx_fee[0])})
               : "N/A",
           time: tx.tx_time
             ? DateTime.fromMillis(Number(tx.tx_time) / 1e6)
@@ -88,11 +93,11 @@ const useTopTransfersAndBurns = ({
                 })
             : "N/A",
         }))
-        .sort((a, b) => {
-          const valueA = parseFloat(a.value.replace(/,/g, "")) || 0;
-          const valueB = parseFloat(b.value.replace(/,/g, "")) || 0;
-          return valueB - valueA;
-        });
+        // .sort((a, b) => {
+        //   const valueA = parseFloat(a.value.replace(/,/g, "")) || 0;
+        //   const valueB = parseFloat(b.value.replace(/,/g, "")) || 0;
+        //   return valueB - valueA;
+        // });
 
       setData(transformedData);
     }

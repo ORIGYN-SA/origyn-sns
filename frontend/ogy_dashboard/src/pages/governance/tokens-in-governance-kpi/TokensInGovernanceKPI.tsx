@@ -4,13 +4,12 @@ import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
 
 export interface TokensInGovernanceKPIProps {
   className?: string;
-  data: Data[];
 }
 
-interface Data {
-  name: string;
-  value: number;
-}
+// interface Data {
+//   name: string;
+//   value: number;
+// }
 
 const TokensInGovernanceKPI = ({ className }: TokensInGovernanceKPIProps) => {
   const { data, isLoading, isSuccess, isError } = useProposalsMetrics();

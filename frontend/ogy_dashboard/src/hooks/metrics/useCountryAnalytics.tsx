@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import fetchUsersCountryAnalitycs, { UserByCountry }  from "@services/queries/metrics/fetchUsersCountryAnalitycs";
+import fetchUsersCountryAnalitycs, {
+  UserByCountry,
+} from "@services/queries/metrics/fetchUsersCountryAnalitycs";
 
 const useUsersCountryAnalitycs = () => {
   const [data, setData] = useState<UserByCountry[]>([]);
@@ -16,10 +18,7 @@ const useUsersCountryAnalitycs = () => {
     if (isSuccess) {
       setData(fetchedData);
     }
-  }, [
-    isSuccess,
-    fetchedData,
-  ]);
+  }, [isSuccess, fetchedData]);
 
   return { data, isSuccess, isLoading, error };
 };

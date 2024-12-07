@@ -44,7 +44,7 @@ import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
-import TopTransfersAndBurns from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurns";
+import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       {
         path: "transfers",
         element: (
-          <TopTransfersAndBurns
+          <TopTransfersAndBurnsFull
             type="transfers"
             title="All Top 25 Transfers"
             limit={25}
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       {
         path: "burns",
         element: (
-          <TopTransfersAndBurns
+          <TopTransfersAndBurnsFull
             type="burns"
             title="All Top 25 Burns"
             limit={25}

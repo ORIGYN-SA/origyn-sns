@@ -18,7 +18,7 @@ import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
 import { PieChartProvider } from "@components/charts/pie/context";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
-import ChartVotingPower from "./ChartVotingPower";
+// import ChartVotingPower from "./ChartVotingPower";
 import ChartVotingParticipation from "./ChartVotingParticipation";
 
 const loader = async () => {
@@ -109,7 +109,7 @@ export const Governance = () => {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 2xl:gap-8">
         <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left">
           <h1 className="text-4xl sm:text-6xl font-bold">
             Governance Overview
@@ -125,7 +125,8 @@ export const Governance = () => {
           <a
             href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <Button className="mt-8">
               <div className="flex items-center justify-center">
                 <div>Learn more</div>
@@ -168,7 +169,8 @@ export const Governance = () => {
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent">
+            className="font-semibold text-accent"
+          >
             Learn more about OGY
           </a>
         </div>
@@ -195,9 +197,9 @@ export const Governance = () => {
         <ChartVotingParticipation />
       </div>
 
-      <div className="mb-16">
+      {/* <div className="mb-16">
         <ChartVotingPower />
-      </div>
+      </div> */}
 
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">

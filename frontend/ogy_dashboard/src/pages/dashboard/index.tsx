@@ -13,9 +13,10 @@ import TokenDistributionList from "@pages/dashboard/token-distribution";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
-import ChartActiveAccounts from "./ChartActiveAccounts";
-import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
+// import ChartActiveAccounts from "./ChartActiveAccounts";
+// import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+// import ChartTransactionStats from "./ChartTransactionStats";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -74,55 +75,70 @@ const Dashboard = () => {
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-activities-metrics">
+            id="ogy-activities-metrics"
+          >
             <OGYActivitiesMetrics />
           </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="governance-tokens-stakes">
+            id="governance-tokens-stakes"
+          >
             <ChartTotalTokensStakes />
           </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
 
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-treasury-account">
+            id="ogy-treasury-account"
+          >
             <OrigynTreasuryAccount />
           </section>
 
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-reward-account">
+            id="ogy-reward-account"
+          >
             <OrigynRewardAccount />
           </section>
 
-          <section
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="top-transfers">
+            id="top-transfers"
+          >
             <TopTransfersAndBurns
               type="transfers"
               title="Top 5 Transfers"
               limit={5}
             />
-          </section>
-          <section
+          </section> */}
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="top-burns">
+            id="top-burns"
+          >
             <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
-          </section>
+          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-token-distribution">
+            id="ogy-token-distribution"
+          >
             <TokenDistributionList />
           </section>
-          <section
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="active-accounts">
+            id="transaction-stats"
+          >
+            <ChartTransactionStats />
+          </section> */}
+          {/* <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="active-accounts"
+          >
             <ChartActiveAccounts />
-          </section>
+          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="users-activity">
+            id="users-activity"
+          >
             <ChartUsersActivity />
           </section>
           {/* <section
