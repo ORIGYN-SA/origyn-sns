@@ -18,7 +18,7 @@ import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { usePagination } from "@helpers/table/useTable";
 import { PieChartProvider } from "@components/charts/pie/context";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
-import ChartVotingPower from "./ChartVotingPower";
+// import ChartVotingPower from "./ChartVotingPower";
 import ChartVotingParticipation from "./ChartVotingParticipation";
 
 const loader = async () => {
@@ -197,9 +197,9 @@ export const Governance = () => {
         <ChartVotingParticipation />
       </div>
 
-      <div className="mb-16">
+      {/* <div className="mb-16">
         <ChartVotingPower />
-      </div>
+      </div> */}
 
       <div className="mb-16">
         <div className="flex items-center mb-8 gap-8">
