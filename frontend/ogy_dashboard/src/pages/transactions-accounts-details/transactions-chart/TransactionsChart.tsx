@@ -198,8 +198,8 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
               accounts[k].isInitialTrans
                 ? "inOut"
                 : accounts[k].isTo
-                ? "out"
-                : "in"
+                  ? "out"
+                  : "in"
             ].border,
         },
         margin: 25,
@@ -209,8 +209,8 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
             accounts[k].isInitialTrans
               ? "inOut"
               : accounts[k].isTo
-              ? "out"
-              : "in"
+                ? "out"
+                : "in"
           ],
       })),
     ];
