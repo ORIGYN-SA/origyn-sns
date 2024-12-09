@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Badge, Skeleton } from "@components/ui";
+import { Badge, Skeleton, Tooltip, TooltipInfo } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import useTopTransfersAndBurns, {
@@ -21,10 +21,11 @@ const TopTransfersAndBurnsFull = ({
   limit,
 }: TopTransfersAndBurnsFullProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useTopTransfersAndBurns({
-    type,
-    limit,
-  });
+  const { data, isLoading, isSuccess, isError, error } =
+    useTopTransfersAndBurns({
+      type,
+      limit,
+    });
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -36,19 +37,36 @@ const TopTransfersAndBurnsFull = ({
       {
         accessorKey: "from",
         header: "From",
-        cell: ({ getValue }) => {
+        cell: ({ getValue, row }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-sm truncate">
-              <button
-                className="mr-2 truncate"
-                onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
-                }
-              >
-                {address}
-              </button>
+            <div
+              className={`flex items-center justify-center ${type === "burns" && "w-full mx-auto"} md:max-w-sm max-w-64`}
+            >
+              <>
+                <button
+                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-content={address}
+                  className="mr-2 truncate "
+                  onClick={() =>
+                    navigate(`/explorer/transactions/accounts/${address}`)
+                  }
+                >
+                  {address}
+                </button>
+              </>
               <CopyToClipboard value={address} />
+
+              {row?.original?.tagFrom && (
+                <div className="ml-3">
+                  <TooltipInfo
+                    id={`tooltip_${row?.original?.tagFrom}`}
+                    clickable={false}
+                  >
+                    {row?.original?.tagFrom}
+                  </TooltipInfo>
+                </div>
+              )}
             </div>
           );
         },
@@ -93,19 +111,34 @@ const TopTransfersAndBurnsFull = ({
       baseColumns.splice(2, 0, {
         accessorKey: "to",
         header: "To",
-        cell: ({ getValue }) => {
+        cell: ({ getValue, row }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-xs truncate justify-center">
-              <button
-                className="mr-2 truncate"
-                onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
-                }
-              >
-                {address}
-              </button>
+            <div className="flex items-center  justify-center md:max-w-sm max-w-64">
+              <>
+                <button
+                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-content={address}
+                  className="mr-2 truncate"
+                  onClick={() =>
+                    navigate(`/explorer/transactions/accounts/${address}`)
+                  }
+                >
+                  {address}
+                </button>
+              </>
               <CopyToClipboard value={address} />
+
+              {row?.original?.tagTo && (
+                <div className="ml-3">
+                  <TooltipInfo
+                    id={`tooltip_${row?.original?.tagTo}`}
+                    clickable={false}
+                  >
+                    {row?.original?.tagTo}
+                  </TooltipInfo>
+                </div>
+              )}
             </div>
           );
         },
@@ -120,18 +153,19 @@ const TopTransfersAndBurnsFull = ({
       <h1 className="text-4xl sm:text-6xl font-bold text-center mt-16 mb-16">
         {title}
       </h1>
-      {isLoading && <Skeleton count={limit} height={52} />}
+      {isLoading && <Skeleton count={25} height={52} />}
       {isError && (
         <div className="text-red-500">
           An error occurred: {error?.message || "Unknown error"}
         </div>
       )}
-      {data && data.length > 0 ? (
+      {data && data.length > 0 && isSuccess ? (
         <div className="w-10/12 mx-auto my-8">
           <Table
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
           />
+          <Tooltip id="tooltip_bt_address" />
         </div>
       ) : (
         !isLoading && (

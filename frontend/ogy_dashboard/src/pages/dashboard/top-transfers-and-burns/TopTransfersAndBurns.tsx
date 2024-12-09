@@ -1,5 +1,12 @@
 import { useMemo } from "react";
-import { Badge, Button, Card, Skeleton, Tooltip } from "@components/ui";
+import {
+  Badge,
+  Button,
+  Card,
+  Skeleton,
+  Tooltip,
+  TooltipInfo,
+} from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import useTopTransfersAndBurns, {
@@ -21,10 +28,11 @@ const TopTransfersAndBurns = ({
   limit,
 }: TopTransfersAndBurnsProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useTopTransfersAndBurns({
-    type,
-    limit,
-  });
+  const { data, isLoading, isSuccess, isError, error } =
+    useTopTransfersAndBurns({
+      type,
+      limit,
+    });
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -36,19 +44,36 @@ const TopTransfersAndBurns = ({
       {
         accessorKey: "from",
         header: "From",
-        cell: ({ getValue }) => {
+        cell: ({ getValue, row }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-sm truncate justify-center place-items-center">
-              <button
-                className="mr-2 truncate"
-                onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
-                }
-              >
-                {address}
-              </button>
+            <div
+              className={`flex items-center justify-center ${type === "burns" && "w-full mx-auto"} md:max-w-sm max-w-64`}
+            >
+              <>
+                <button
+                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-content={address}
+                  className="mr-2 truncate "
+                  onClick={() =>
+                    navigate(`/explorer/transactions/accounts/${address}`)
+                  }
+                >
+                  {address}
+                </button>
+              </>
               <CopyToClipboard value={address} />
+
+              {row?.original?.tagFrom && (
+                <div className="ml-3">
+                  <TooltipInfo
+                    id={`tooltip_${row?.original?.tagFrom}`}
+                    clickable={false}
+                  >
+                    {row?.original?.tagFrom}
+                  </TooltipInfo>
+                </div>
+              )}
             </div>
           );
         },
@@ -93,19 +118,34 @@ const TopTransfersAndBurns = ({
       baseColumns.splice(2, 0, {
         accessorKey: "to",
         header: "To",
-        cell: ({ getValue }) => {
+        cell: ({ getValue, row }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-xs truncate justify-center">
-              <button
-                className="mr-2 truncate"
-                onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
-                }
-              >
-                {address}
-              </button>
+            <div className="flex items-center  justify-center md:max-w-sm max-w-64">
+              <>
+                <button
+                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-content={address}
+                  className="mr-2 truncate"
+                  onClick={() =>
+                    navigate(`/explorer/transactions/accounts/${address}`)
+                  }
+                >
+                  {address}
+                </button>
+              </>
               <CopyToClipboard value={address} />
+
+              {row?.original?.tagTo && (
+                <div className="ml-3">
+                  <TooltipInfo
+                    id={`tooltip_${row?.original?.tagTo}`}
+                    clickable={false}
+                  >
+                    {row?.original?.tagTo}
+                  </TooltipInfo>
+                </div>
+              )}
             </div>
           );
         },
@@ -127,15 +167,15 @@ const TopTransfersAndBurns = ({
           <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
             Show All
           </Button>
-          <Tooltip id="tooltip_address" />
+          <Tooltip id="tooltip_bt_address" />
         </div>
-        {isLoading && <Skeleton count={limit} height={52} />}
+        {isLoading && <Skeleton count={5} height={52} />}
         {isError && (
           <div className="text-red-500">
             An error occurred: {error?.message || "Unknown error"}
           </div>
         )}
-        {data && data.length > 0 ? (
+        {data && data.length > 0 && isSuccess ? (
           <Table
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
@@ -145,7 +185,6 @@ const TopTransfersAndBurns = ({
             <div className="text-center text-gray-500">No data available.</div>
           )
         )}
-        <Tooltip id="tooltip_address" />
       </Card>
     </>
   );

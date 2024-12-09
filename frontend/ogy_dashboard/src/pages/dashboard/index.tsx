@@ -15,7 +15,8 @@ import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 // import ChartActiveAccounts from "./ChartActiveAccounts";
 // import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
-// import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 // import ChartTransactionStats from "./ChartTransactionStats";
 
 const Dashboard = () => {
@@ -101,7 +102,7 @@ const Dashboard = () => {
             <OrigynRewardAccount />
           </section>
 
-          {/* <section
+          <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="top-transfers"
           >
@@ -110,13 +111,13 @@ const Dashboard = () => {
               title="Top 5 Transfers"
               limit={5}
             />
-          </section> */}
-          {/* <section
+          </section>
+          <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="top-burns"
           >
             <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
-          </section> */}
+          </section>
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-token-distribution"

@@ -41,6 +41,7 @@ const useOGYActivitiesMetrics = ({
     queryFn: async (): Promise<TimeStats> => {
       const actor = await getActor("tokenStats", { isAnon: true });
       const stats = (await actor.get_daily_stats()) as TimeStats;
+
       return stats;
     },
   });
