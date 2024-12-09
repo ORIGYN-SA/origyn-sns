@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.20] - 2024-11-22
+
+#### Fixed
+
+- Estimated rewards not fetched correctly
+
 ### [1.0.19] - 2024-11-22
 
 -- **Fix**: Neuron ids are no longer fetched from the sns_rewards canister, instead they are fetched from the sns governance canister
