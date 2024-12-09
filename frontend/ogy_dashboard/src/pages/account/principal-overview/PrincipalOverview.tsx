@@ -100,7 +100,7 @@ const PrincipalOverview = ({ className }: { className?: string }) => {
           </div>
 
           {/* Stats Section */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 justify-center">
             {stats.map(({ label, value, token, tooltip, color }, index) => (
               <Card
                 key={label}
