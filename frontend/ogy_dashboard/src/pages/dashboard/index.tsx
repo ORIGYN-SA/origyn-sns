@@ -15,7 +15,7 @@ import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 // import ChartActiveAccounts from "./ChartActiveAccounts";
 // import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
-import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+// import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 // import ChartTransactionStats from "./ChartTransactionStats";
 
 const Dashboard = () => {
@@ -73,12 +73,12 @@ const Dashboard = () => {
               <OrigynFoundationReserve />
             </PieChartProvider>
           </section>
-          <section
+          {/* <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-activities-metrics"
           >
             <OGYActivitiesMetrics />
-          </section>
+          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="governance-tokens-stakes"
