@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 #### Fixed
 
-- Estimated rewards not fetched correctly
+- Estimated rewards not fetched correctly after dashboard update
+- Table with expanded rows don't issue after dashboard update
 
 ### [1.0.19] - 2024-11-22
 
