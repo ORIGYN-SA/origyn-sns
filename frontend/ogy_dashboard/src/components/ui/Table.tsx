@@ -63,7 +63,7 @@ const Table = <T extends object>({
   const defaultData = useMemo(() => [], []);
 
   const table = useReactTable({
-    data: Array.isArray(data) ? data : data?.rows ?? defaultData,
+    data: Array.isArray(data) ? data : (data?.rows ?? defaultData),
     columns,
     state: {
       pagination,
@@ -217,7 +217,7 @@ const Table = <T extends object>({
                 {row.getIsExpanded() && (
                   <tr>
                     <td colSpan={row.getVisibleCells().length}>
-                      {subComponent && subComponent}
+                      {subComponent({ row })}
                     </td>
                   </tr>
                 )}
