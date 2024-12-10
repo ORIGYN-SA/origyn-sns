@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { DateTime } from "luxon";
 import {
   useQuery,
   keepPreviousData,
   UseQueryOptions,
 } from "@tanstack/react-query";
 import { getActor } from "@amerej/artemis-react";
+import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { TimeStats } from "@hooks/super_stats_v3/declarations";
 
 export interface OGYActivitiesMetricsData {
@@ -13,8 +13,6 @@ export interface OGYActivitiesMetricsData {
   transfersPerMonth: string;
   burnsPerDay: string;
   burnsPerMonth: string;
-  transfersTimeSeries: { name: string; value: number }[];
-  burnsTimeSeries: { name: string; value: number }[];
 }
 
 const useOGYActivitiesMetrics = ({
@@ -24,68 +22,53 @@ const useOGYActivitiesMetrics = ({
   },
 }: {
   start?: number;
-  options?: Omit<UseQueryOptions<TimeStats>, "queryFn">;
+  options?: Omit<
+    UseQueryOptions<{ statsByDay: TimeStats; statsByMonth: TimeStats }, Error>,
+    "queryFn"
+  >;
 } = {}) => {
   const [metricsData, setMetricsData] = useState<
     OGYActivitiesMetricsData | undefined
   >(undefined);
 
-  const {
-    data: rawData,
-    isSuccess,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<TimeStats, Error>({
+  const { data, isSuccess, isLoading, isError, error } = useQuery<
+    { statsByDay: TimeStats; statsByMonth: TimeStats },
+    Error
+  >({
     ...options,
-    queryFn: async (): Promise<TimeStats> => {
+    queryKey: ["OGY_ACTIVITIES_METRICS"],
+    queryFn: async () => {
       const actor = await getActor("tokenStats", { isAnon: true });
-      const stats = (await actor.get_daily_stats()) as TimeStats;
-      return stats;
+
+      const statsByMonth = (await actor.get_daily_stats()) as TimeStats;
+      const statsByDay = (await actor.get_hourly_stats()) as TimeStats;
+
+      return { statsByDay, statsByMonth };
     },
   });
 
   useEffect(() => {
-    if (isSuccess && rawData) {
-      const processedData = rawData.count_over_time.map((chunk) => {
-        const date = DateTime.fromMillis(Number(chunk.start_time) / 1e6);
-        const transferCount = Number(chunk.transfer_count || 0);
-        const burnCount = Number(chunk.burn_count || 0);
-        return { date, transferCount, burnCount };
-      });
+    if (isSuccess && data) {
+      const { statsByDay, statsByMonth } = data;
 
-      const transfersPerDay =
-        processedData[processedData.length - 1]?.transferCount || 0;
-      const transfersPerMonth = processedData
-        .slice(-30)
-        .reduce((sum, curr) => sum + curr.transferCount, 0);
+      const transfersPerDay = divideBy1e8(
+        statsByDay.transfer_stats.total_value
+      );
+      const burnsPerDay = divideBy1e8(statsByDay.burn_stats.total_value);
 
-      const burnsPerDay =
-        processedData[processedData.length - 1]?.burnCount || 0;
-      const burnsPerMonth = processedData
-        .slice(-30)
-        .reduce((sum, curr) => sum + curr.burnCount, 0);
-
-      const transfersTimeSeries = processedData.map((item) => ({
-        name: item.date.toFormat("LLL dd"),
-        value: item.transferCount,
-      }));
-
-      const burnsTimeSeries = processedData.map((item) => ({
-        name: item.date.toFormat("LLL dd"),
-        value: item.burnCount,
-      }));
+      const transfersPerMonth = divideBy1e8(
+        statsByMonth.transfer_stats.total_value
+      );
+      const burnsPerMonth = divideBy1e8(statsByMonth.burn_stats.total_value);
 
       setMetricsData({
-        transfersPerDay: transfersPerDay.toLocaleString(),
-        transfersPerMonth: transfersPerMonth.toLocaleString(),
-        burnsPerDay: burnsPerDay.toLocaleString(),
-        burnsPerMonth: burnsPerMonth.toLocaleString(),
-        transfersTimeSeries,
-        burnsTimeSeries,
+        transfersPerDay: roundAndFormatLocale({ number: transfersPerDay }),
+        transfersPerMonth: roundAndFormatLocale({ number: transfersPerMonth }),
+        burnsPerDay: roundAndFormatLocale({ number: burnsPerDay }),
+        burnsPerMonth: roundAndFormatLocale({ number: burnsPerMonth }),
       });
     }
-  }, [isSuccess, rawData]);
+  }, [isSuccess, data]);
 
   return {
     data: metricsData,
