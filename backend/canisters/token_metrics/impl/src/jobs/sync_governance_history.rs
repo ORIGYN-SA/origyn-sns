@@ -93,14 +93,14 @@ fn balance_difference(
 pub fn sync_voting_stats_job() {
     // We consider the origyn's voting power as 0 before the SNS
     // and as 1 bilion after
-    let cutoff_time = 1717545600u64; // 2024-06-05 00:00:00 UTC
+    let cutoff_time_in_days = 1717545600u64 / 86_400; // 2024-06-05 00:00:00 UTC
 
     let stake_history = read_state(|state| state.data.gov_stake_history.clone());
 
     let voting_power_ratio: Vec<(u64, u64)> = stake_history
         .iter()
         .map(|(timestamp, history_data)| {
-            let origyn_voting_power = if *timestamp >= cutoff_time {
+            let origyn_voting_power = if *timestamp >= cutoff_time_in_days {
                 1_000_000_000u64 * 100_000_000u64
             } else {
                 0u64
