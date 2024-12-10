@@ -15,7 +15,7 @@ import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 // import ChartActiveAccounts from "./ChartActiveAccounts";
 // import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
-import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
+// import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 // import ChartTransactionStats from "./ChartTransactionStats";
 
