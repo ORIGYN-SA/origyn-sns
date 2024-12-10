@@ -45,6 +45,7 @@ import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
+import { LoaderSpin } from "@components/ui";
 
 const router = createBrowserRouter([
   {
@@ -252,7 +253,14 @@ const App = () => {
     },
   });
   return (
-    <ReactRouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+    <ReactRouterProvider
+      router={router}
+      fallbackElement={
+        <div className="flex items-center justify-center h-screen">
+          <LoaderSpin size="xl" />
+        </div>
+      }
+    />
   );
 };
 
