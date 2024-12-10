@@ -1,12 +1,5 @@
 import { useMemo } from "react";
-import {
-  Badge,
-  Button,
-  Card,
-  Skeleton,
-  Tooltip,
-  TooltipInfo,
-} from "@components/ui";
+import { Badge, Button, Card, Skeleton, TooltipInfo } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import useTopTransfersAndBurns, {
@@ -52,7 +45,7 @@ const TopTransfersAndBurns = ({
             >
               <>
                 <button
-                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-id="tooltip"
                   data-tooltip-content={address}
                   className="mr-2 truncate "
                   onClick={() =>
@@ -124,7 +117,7 @@ const TopTransfersAndBurns = ({
             <div className="flex items-center  justify-center md:max-w-sm max-w-64">
               <>
                 <button
-                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-id="tooltip"
                   data-tooltip-content={address}
                   className="mr-2 truncate"
                   onClick={() =>
@@ -167,7 +160,6 @@ const TopTransfersAndBurns = ({
           <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
             Show All
           </Button>
-          <Tooltip id="tooltip_bt_address" />
         </div>
         {isLoading && <Skeleton count={5} height={52} />}
         {isError && (
@@ -176,10 +168,12 @@ const TopTransfersAndBurns = ({
           </div>
         )}
         {data && data.length > 0 && isSuccess ? (
-          <Table
-            columns={columns}
-            data={data.map((item, index) => ({ ...item, index }))}
-          />
+          <>
+            <Table
+              columns={columns}
+              data={data.map((item, index) => ({ ...item, index }))}
+            />
+          </>
         ) : (
           !isLoading && (
             <div className="text-center text-gray-500">No data available.</div>

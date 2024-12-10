@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Table, Tooltip, Skeleton, TooltipInfo } from "@components/ui";
+import { Table, Skeleton, TooltipInfo } from "@components/ui";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { IProposalData } from "@services/types";
 import { TableProps } from "@helpers/table/useTable";
@@ -25,7 +25,7 @@ const TokenDistributionList = ({
           <div className="flex items-center md:max-w-sm max-w-64">
             <>
               <button
-                data-tooltip-id="tooltip_address"
+                data-tooltip-id="tooltip"
                 data-tooltip-content={getValue()}
                 className="mr-2 truncate"
                 onClick={() =>
@@ -130,7 +130,6 @@ const TokenDistributionList = ({
           <div>{errorFetchTokenHolders?.message}</div>
         </div>
       )}
-      <Tooltip id="tooltip_address" />
     </div>
   );
 };

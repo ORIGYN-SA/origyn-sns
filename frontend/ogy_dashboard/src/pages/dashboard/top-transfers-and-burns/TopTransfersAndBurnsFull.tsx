@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Badge, Skeleton, Tooltip, TooltipInfo } from "@components/ui";
+import { Badge, Skeleton, TooltipInfo } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import useTopTransfersAndBurns, {
@@ -45,7 +45,7 @@ const TopTransfersAndBurnsFull = ({
             >
               <>
                 <button
-                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-id="tooltip"
                   data-tooltip-content={address}
                   className="mr-2 truncate "
                   onClick={() =>
@@ -117,7 +117,7 @@ const TopTransfersAndBurnsFull = ({
             <div className="flex items-center  justify-center md:max-w-sm max-w-64">
               <>
                 <button
-                  data-tooltip-id="tooltip_bt_address"
+                  data-tooltip-id="tooltip"
                   data-tooltip-content={address}
                   className="mr-2 truncate"
                   onClick={() =>
@@ -165,7 +165,6 @@ const TopTransfersAndBurnsFull = ({
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
           />
-          <Tooltip id="tooltip_bt_address" />
         </div>
       ) : (
         !isLoading && (
