@@ -15,6 +15,7 @@ import enUS from './locales/en_US.json';
 import esES from './locales/es_ES.json';
 import frFR from './locales/fr_FR.json';
 import idID from './locales/id_ID.json';
+import itIT from './locales/it_IT.json';
 import ruRU from './locales/ru_RU.json';
 import routes from './router';
 
@@ -55,6 +56,10 @@ const LOCALES_LIST = [
         label: 'German',
         value: 'de-DE',
     },
+    {
+        label: 'Italian',
+        value: 'it-IT',
+    },
 ];
 
 const is_prod = import.meta.env.PROD;
@@ -76,6 +81,7 @@ const LOCALE_DATA = {
     'ru-RU': ruRU,
     'fr-FR': frFR,
     'de-DE': deDE,
+    'it-IT': itIT,
 };
 
 // 跳转第三方地址
