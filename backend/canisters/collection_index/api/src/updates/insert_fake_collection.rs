@@ -1,7 +1,7 @@
-use candid::{ CandidType, Principal };
+use candid::CandidType;
 use serde::{ Deserialize, Serialize };
 
-use crate::{ collection::Collection };
+use crate::collection::Collection;
 
 pub type Args = InsertFakeCollectionArgs;
 pub type Response = Result<(), ()>;

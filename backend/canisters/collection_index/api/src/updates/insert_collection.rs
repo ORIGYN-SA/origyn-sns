@@ -11,4 +11,5 @@ pub struct InsertCollectionArgs {
     pub collection_canister_id: Principal,
     pub is_promoted: bool,
     pub category: String,
+    pub locked_value_usd: Option<u64>,
 }
