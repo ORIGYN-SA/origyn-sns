@@ -168,27 +168,31 @@ impl CollectionModel {
         &mut self,
         collection_canister_id: Principal,
         collection: &mut Collection,
-        category: String
+        category: Option<String>
     ) -> Result<(), InsertCollectionError> {
+        println!("collection to insert {collection:?}");
         if self.collections.contains_key(&collection_canister_id) {
             return Err(InsertCollectionError::CollectionAlreadyExists);
         }
 
-        let category = if let Some(cat) = self.categories.get_mut(&category) {
-            collection.category = Some(category);
-            cat
-        } else {
-            return Err(
-                InsertCollectionError::CategoryNotFound(
-                    format!(
-                        "Category {category} could not be found. failed to insert new collection"
+        if let Some(target_category) = category {
+            let found_category = if let Some(cat) = self.categories.get_mut(&target_category) {
+                collection.category = Some(target_category);
+                cat
+            } else {
+                return Err(
+                    InsertCollectionError::CategoryNotFound(
+                        format!(
+                            "Category {target_category} could not be found. failed to insert new collection"
+                        )
                     )
-                )
-            );
-        };
+                );
+            };
+
+            found_category.collection_count += 1;
+        }
 
         self.collections.insert(collection_canister_id.clone(), collection.clone());
-        category.collection_count += 1;
         Ok(())
     }
 

@@ -8,7 +8,7 @@ use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
 
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
-pub fn update_collection_category(args: UpdateCollectionArgs) -> UpdateCollectionResponse {
+pub fn update_collection(args: UpdateCollectionArgs) -> UpdateCollectionResponse {
     mutate_state(|state| {
         state.data.collections.update_collection(
             args.collection_canister_id,
@@ -20,6 +20,6 @@ pub fn update_collection_category(args: UpdateCollectionArgs) -> UpdateCollectio
 
 #[query(guard = "caller_is_authorised_principal", hidden = true)]
 #[trace]
-async fn update_collection_category_validate(args: UpdateCollectionArgs) -> Result<String, String> {
+async fn update_collection_validate(args: UpdateCollectionArgs) -> Result<String, String> {
     serde_json::to_string_pretty(&args).map_err(|_| "invalid payload".to_string())
 }
