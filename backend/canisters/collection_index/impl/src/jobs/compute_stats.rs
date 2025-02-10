@@ -25,8 +25,8 @@ async fn compute_stats() {
 
     mutate_state(|state| {
         state.data.overall_stats.total_value_locked = total_value_locked;
-
-        let count = state.data.collections.get_all_categories().len();
-        state.data.overall_stats.total_collections = if count == 0 { 0 } else { count + 1 };
+        state.data.overall_stats.total_collections = state.data.collections
+            .get_all_collections()
+            .len();
     });
 }
