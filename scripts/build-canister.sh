@@ -60,13 +60,17 @@ if [[ -v VERIFY ]]; then
 fi
 
 if [[ $WASMONLY == 1 ]]; then
-  echo "" > $BASE_CANISTER_PATH/$1/api/can.did
+  if [[ "$1" != "super_stats_v3" ]]; then
+      echo "" > $BASE_CANISTER_PATH/$1/api/can.did
+    fi
 fi
 
 cargo build --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked $INTTEST -p $1
 
 if [[ -v $WASMONLY ]]; then
-  rm -f $BASE_CANISTER_PATH/$1/api/can.did
+  if [[ "$1" != "super_stats_v3" ]]; then
+    rm -f $BASE_CANISTER_PATH/$1/api/can.did
+  fi
 	echo "$1 wasm file created and ready for did generation"
 else
 	ic-wasm $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm -o $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}.wasm shrink

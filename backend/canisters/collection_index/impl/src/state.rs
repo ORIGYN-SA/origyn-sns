@@ -1,4 +1,5 @@
 use candid::{ CandidType, Principal };
+use collection_index_api::stats::OverallStats;
 use serde::{ Deserialize as SerdeDeserialize, Serialize };
 use types::TimestampMillis;
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -56,13 +57,14 @@ pub struct CanisterInfo {
     pub memory_used: MemorySize,
     pub cycles_balance_in_tc: f64,
 }
-
 #[derive(Serialize, SerdeDeserialize)]
 pub struct Data {
     /// Authorised principals for guarded calls
     pub authorised_principals: Vec<Principal>,
     /// collection of nft canisters
     pub collections: CollectionModel,
+    /// Overall computed stats
+    pub overall_stats: OverallStats,
 }
 
 impl Data {
@@ -70,6 +72,7 @@ impl Data {
         Self {
             collections: CollectionModel::default(),
             authorised_principals,
+            overall_stats: OverallStats::default(),
         }
     }
 }

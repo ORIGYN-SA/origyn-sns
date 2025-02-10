@@ -11,7 +11,7 @@ use collection_index_api::updates::{
     insert_category,
     insert_collection,
     set_category_visibility,
-    update_collection_category,
+    update_collection,
     remove_collection,
     insert_fake_collection,
     toggle_promoted,
@@ -23,7 +23,7 @@ generate_query_call!(search_collections);
 generate_update_call!(insert_category);
 generate_update_call!(insert_collection);
 generate_update_call!(set_category_visibility);
-generate_update_call!(update_collection_category);
+generate_update_call!(update_collection);
 generate_update_call!(remove_collection);
 generate_update_call!(insert_fake_collection);
 generate_update_call!(get_user_collections);

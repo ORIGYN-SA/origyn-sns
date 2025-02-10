@@ -245,7 +245,7 @@ const Footer = () => {
                                     ))}
                                 </select>{' '}
                                 <div className="mt-[20px] min-w-[190px] text-left text-[#000] md:flex-1">
-                                    © 2023 ORIGYN
+                                    © 2025 ORIGYN
                                 </div>{' '}
                                 <div className=" mt-[8px] flex w-full justify-start gap-x-[15px] pr-[20px]">
                                     <img
