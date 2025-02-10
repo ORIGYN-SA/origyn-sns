@@ -13,6 +13,7 @@ pub struct Collection {
     pub name: Option<String>,
     pub category: Option<String>,
     pub is_promoted: bool,
+    pub locked_value_usd: Option<u64>,
 }
 
 impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
@@ -22,6 +23,7 @@ impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
             canister_id: Principal::anonymous(),
             category: None,
             is_promoted: false,
+            locked_value_usd: None,
         }
     }
 }

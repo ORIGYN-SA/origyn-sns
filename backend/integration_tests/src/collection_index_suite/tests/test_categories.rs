@@ -7,7 +7,7 @@ use collection_index_api::set_category_visibility::{
     Args as SetCategoryVisibilityArgs,
     Response as SetCategoryVisibilityResponse,
 };
-use collection_index_api::update_collection_category::UpdateCollectionCategoryArgs;
+use collection_index_api::update_collection::UpdateCollectionArgs;
 
 use crate::client::collection_index::{
     get_categories,
@@ -16,7 +16,7 @@ use crate::client::collection_index::{
     insert_collection,
     remove_collection,
     set_category_visibility,
-    update_collection_category,
+    update_collection,
 };
 use crate::collection_index_suite::{ init::init, TestEnv };
 

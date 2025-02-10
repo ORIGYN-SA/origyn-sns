@@ -4,7 +4,7 @@ pub mod insert_collection;
 pub mod remove_collection;
 pub mod remove_category;
 pub mod set_category_visibility;
-pub mod update_collection_category;
+pub mod update_collection;
 pub mod insert_fake_collection;
 pub mod toggle_promoted;
 
@@ -14,6 +14,6 @@ pub use insert_collection::*;
 pub use remove_collection::*;
 pub use remove_category::*;
 pub use set_category_visibility::*;
-pub use update_collection_category::*;
+pub use update_collection::*;
 pub use insert_fake_collection::*;
 pub use toggle_promoted::*;

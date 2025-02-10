@@ -9,7 +9,7 @@ use collection_index_api::remove_collection::RemoveCollectionArgs;
 use collection_index_api::search_collections::SearchCollectionsArg;
 use collection_index_api::set_category_visibility::SetCategoryVisibility;
 use collection_index_api::toggle_promoted::TogglePromotedArgs;
-use collection_index_api::update_collection_category::UpdateCollectionCategoryArgs;
+use collection_index_api::update_collection::UpdateCollectionArgs;
 use collection_index_api::insert_fake_collection::Args as InsertFakeCollectionArgs;
 use origyn_nft_reference::origyn_nft_reference_canister::{ Account as OrigynAccount };
 use pocket_ic::PocketIc;
@@ -27,7 +27,7 @@ use crate::client::collection_index::{
     search_collections,
     set_category_visibility,
     toggle_promoted,
-    update_collection_category,
+    update_collection,
 };
 use crate::collection_index_suite::nft_utils;
 use crate::collection_index_suite::{ init::init, TestEnv };
@@ -97,7 +97,8 @@ fn insert_collection_basic() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(10000000u64),
             })
         ).unwrap(),
         ()
@@ -116,6 +117,7 @@ fn insert_collection_basic() {
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
+    assert_eq!(res.collections[0].locked_value_usd, Some(10000000u64));
 }
 
 #[test]
@@ -148,7 +150,8 @@ fn test_get_collection_by_principal_works_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -194,7 +197,8 @@ fn insert_collection_twice_with_same_category() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -208,7 +212,8 @@ fn insert_collection_twice_with_same_category() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_two_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -246,7 +251,8 @@ fn insert_collection_with_non_existent_category_should_fail() {
         &(InsertCollectionArgs {
             collection_canister_id: origyn_nft_one_canister_id,
             is_promoted: false,
-            category: "Category A".to_string(),
+            category: Some("Category A".to_string()),
+            locked_value_usd: Some(100u64),
         })
     );
 
@@ -281,7 +287,8 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -295,7 +302,8 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
         &(InsertCollectionArgs {
             collection_canister_id: origyn_nft_one_canister_id,
             is_promoted: false,
-            category: "Category A".to_string(),
+            category: Some("Category A".to_string()),
+            locked_value_usd: Some(100u64),
         })
     );
 
@@ -355,7 +363,8 @@ fn removing_a_collection_should_work() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -427,7 +436,8 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: Some(100u64),
             })
         ).unwrap(),
         ()
@@ -453,13 +463,14 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
     assert_eq!(category_b.1.collection_count, 0);
 
     // assign a new category
-    update_collection_category(
+    update_collection(
         &mut pic,
         principal_ids.controller,
         collection_canister,
-        &(UpdateCollectionCategoryArgs {
+        &(UpdateCollectionArgs {
             collection_canister_id: origyn_nft_one_canister_id,
-            category_name: "Category B".to_string(),
+            category_name: Some("Category B".to_string()),
+            locked_value_usd: Some(500u64),
         })
     ).unwrap();
 
@@ -543,8 +554,9 @@ fn test_pagination_works_correctly() {
                     name: Some(format!("Collection {i}")),
                     category: Some("Category A".to_string()),
                     is_promoted: false,
+                    locked_value_usd: None,
                 },
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -563,8 +575,9 @@ fn test_pagination_works_correctly() {
                     name: Some(format!("Collection {i}")),
                     category: Some("Category B".to_string()),
                     is_promoted: false,
+                    locked_value_usd: None,
                 },
-                category: "Category B".to_string(),
+                category: Some("Category B".to_string()),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -583,8 +596,9 @@ fn test_pagination_works_correctly() {
                     name: Some(format!("Collection {i}")),
                     category: Some("Category C".to_string()),
                     is_promoted: true,
+                    locked_value_usd: None,
                 },
-                category: "Category C".to_string(),
+                category: Some("Category C".to_string()),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -779,8 +793,9 @@ fn test_search_collections_works_correctly() {
                     name: Some(format!("{i} {letter}")),
                     category: Some("Category A".to_string()),
                     is_promoted: true,
+                    locked_value_usd: None,
                 },
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -800,8 +815,9 @@ fn test_search_collections_works_correctly() {
                     name: Some(format!("{i} {letter}")),
                     category: Some("Category B".to_string()),
                     is_promoted: false,
+                    locked_value_usd: None,
                 },
-                category: "Category B".to_string(),
+                category: Some("Category B".to_string()),
             })
         ).unwrap();
         collection_prins.push(collection_prin);
@@ -906,7 +922,7 @@ fn test_get_user_collections_works_correctly() {
             principal_ids.controller,
             collection_canister,
             &(InsertCategoryArgs {
-                category_name: "Real world assets".to_string(),
+                category_name: "Category A".to_string(),
             })
         ).unwrap(),
         ()
@@ -922,7 +938,8 @@ fn test_get_user_collections_works_correctly() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: None,
             })
         ).unwrap(),
         ()
@@ -991,7 +1008,8 @@ fn test_promoting_and_demoting_collections() {
             &(InsertCollectionArgs {
                 collection_canister_id: origyn_nft_one_canister_id,
                 is_promoted: false,
-                category: "Category A".to_string(),
+                category: Some("Category A".to_string()),
+                locked_value_usd: None,
             })
         ).unwrap(),
         ()

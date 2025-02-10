@@ -11,11 +11,7 @@ pub enum InsertCollectionError {
     TargetCanisterIdNotOrigyn,
     CategoryNotFound(String),
 }
-#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
-pub enum UpdateCollectionCategoryError {
-    CollectionNotFound,
-    CategoryNotFound(String),
-}
+
 #[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
 pub enum TogglePromotedError {
     CollectionNotFound,
@@ -58,4 +54,16 @@ pub enum RemoveCollectionError {
 #[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
 pub enum GetCollectionByPrincipal {
     CollectionNotFound,
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum SynCollectionInfoError {
+    CollectionNotFound,
+    IcError,
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum UpdateCollectionError {
+    CollectionNotFound,
+    CategoryNotFound(String),
 }

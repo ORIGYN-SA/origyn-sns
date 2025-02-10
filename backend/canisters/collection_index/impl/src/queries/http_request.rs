@@ -18,10 +18,15 @@ fn http_request(request: HttpRequest) -> HttpResponse {
         build_json_response(&state.metrics())
     }
 
+    fn get_overall_stats(state: &RuntimeState) -> HttpResponse {
+        build_json_response(&state.data.overall_stats)
+    }
+
     match extract_route(&request.url) {
         Route::Logs(since) => get_logs_impl(since),
         Route::Traces(since) => get_traces_impl(since),
         Route::Metrics => read_state(get_metrics_impl),
+        Route::OverallStats => read_state(get_overall_stats),
         Route::Other(_path, _) => { HttpResponse::not_found() }
         _ => HttpResponse::not_found(),
     }

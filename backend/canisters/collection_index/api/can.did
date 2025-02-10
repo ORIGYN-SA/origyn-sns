@@ -2,6 +2,7 @@ type Category = record { active : bool; collection_count : nat64 };
 type Collection = record {
   name : opt text;
   canister_id : principal;
+  locked_value_usd : opt nat64;
   is_promoted : bool;
   category : opt text;
 };
@@ -23,9 +24,10 @@ type InitArgs = record {
 type InsertCategoryArgs = record { category_name : text };
 type InsertCategoryError = variant { CategoryAlreadyExists };
 type InsertCollectionArgs = record {
+  locked_value_usd : opt nat64;
   is_promoted : bool;
   collection_canister_id : principal;
-  category : text;
+  category : opt text;
 };
 type InsertCollectionError = variant {
   GenericOrigynNftError : text;
@@ -33,22 +35,32 @@ type InsertCollectionError = variant {
   CollectionAlreadyExists;
   CategoryNotFound : text;
 };
+type InsertFakeCollectionArgs = record {
+  collection : Collection;
+  category : opt text;
+};
+type OverallStats = record {
+  total_collections : nat64;
+  total_value_locked : nat64;
+};
 type RemoveCategoryError = variant { CategoryNotFound };
 type RemoveCollectionArgs = record { collection_canister_id : principal };
 type RemoveCollectionError = variant { CollectionNotFound };
 type Result = variant { Ok : bool; Err : text };
 type Result_1 = variant { Ok : vec record { text; Category }; Err };
+type Result_10 = variant { Ok; Err : TogglePromotedError };
+type Result_11 = variant { Ok; Err : UpdateCollectionError };
 type Result_2 = variant { Ok : Collection; Err : GetCollectionByPrincipal };
 type Result_3 = variant {
   Ok : GetCollectionsResult;
   Err : GetCollectionsError;
 };
-type Result_4 = variant { Ok; Err : InsertCategoryError };
-type Result_5 = variant { Ok; Err : InsertCollectionError };
-type Result_6 = variant { Ok; Err : RemoveCategoryError };
-type Result_7 = variant { Ok; Err : RemoveCollectionError };
-type Result_8 = variant { Ok; Err : TogglePromotedError };
-type Result_9 = variant { Ok; Err : UpdateCollectionCategoryError };
+type Result_4 = variant { Ok : OverallStats; Err };
+type Result_5 = variant { Ok; Err : InsertCategoryError };
+type Result_6 = variant { Ok; Err : InsertCollectionError };
+type Result_7 = variant { Ok; Err };
+type Result_8 = variant { Ok; Err : RemoveCategoryError };
+type Result_9 = variant { Ok; Err : RemoveCollectionError };
 type SearchCollectionsArg = record {
   categories : opt vec text;
   search_string : text;
@@ -58,11 +70,12 @@ type SearchCollectionsArg = record {
 type SetCategoryVisibility = record { hidden : bool; category_name : text };
 type TogglePromotedArgs = record { collection_canister_id : principal };
 type TogglePromotedError = variant { CollectionNotFound };
-type UpdateCollectionCategoryArgs = record {
+type UpdateCollectionArgs = record {
+  locked_value_usd : opt nat64;
   collection_canister_id : principal;
-  category_name : text;
+  category_name : opt text;
 };
-type UpdateCollectionCategoryError = variant {
+type UpdateCollectionError = variant {
   CollectionNotFound;
   CategoryNotFound : text;
 };
@@ -71,13 +84,15 @@ service : (InitArgs) -> {
   get_categories : () -> (Result_1) query;
   get_collection_by_principal : (principal) -> (Result_2) query;
   get_collections : (GetCollectionsArgs) -> (Result_3) query;
+  get_overall_stats : (null) -> (Result_4) query;
   get_user_collections : (opt principal) -> (vec Collection);
-  insert_category : (InsertCategoryArgs) -> (Result_4);
-  insert_collection : (InsertCollectionArgs) -> (Result_5);
-  remove_category : (InsertCategoryArgs) -> (Result_6);
-  remove_collection : (RemoveCollectionArgs) -> (Result_7);
+  insert_category : (InsertCategoryArgs) -> (Result_5);
+  insert_collection : (InsertCollectionArgs) -> (Result_6);
+  insert_fake_collection : (InsertFakeCollectionArgs) -> (Result_7);
+  remove_category : (InsertCategoryArgs) -> (Result_8);
+  remove_collection : (RemoveCollectionArgs) -> (Result_9);
   search_collections : (SearchCollectionsArg) -> (GetCollectionsResult) query;
-  set_category_visibility : (SetCategoryVisibility) -> (Result_6);
-  toggle_promoted : (TogglePromotedArgs) -> (Result_8);
-  update_collection_category : (UpdateCollectionCategoryArgs) -> (Result_9);
+  set_category_visibility : (SetCategoryVisibility) -> (Result_8);
+  toggle_promoted : (TogglePromotedArgs) -> (Result_10);
+  update_collection : (UpdateCollectionArgs) -> (Result_11);
 }
