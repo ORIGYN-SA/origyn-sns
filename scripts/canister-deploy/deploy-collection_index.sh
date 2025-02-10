@@ -58,7 +58,7 @@ else
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
   ARGUMENTS="(record {
     test_mode = $TESTMODE;
-    authorized_principals = vec { principal \"$SNS_GOVERNANCE\";  };
+    authorized_principals = vec { principal \"jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe\"; principal \"$SNS_GOVERNANCE\";  };
   } )"
 fi
 

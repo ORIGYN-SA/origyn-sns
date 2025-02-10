@@ -5,6 +5,7 @@ pub enum Route {
     Logs(Option<TimestampMillis>),
     Traces(Option<TimestampMillis>),
     Metrics,
+    OverallStats,
     Other(String, String),
 }
 
@@ -30,6 +31,9 @@ pub fn extract_route(path: &str) -> Route {
         }
         "metrics" => {
             return Route::Metrics;
+        }
+        "stats" => {
+            return Route::OverallStats;
         }
         _ => (),
     }

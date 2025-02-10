@@ -13,7 +13,7 @@ use collection_index_api::{
         RemoveCollectionError,
         SetCategoryVisibilityError,
         TogglePromotedError,
-        UpdateCollectionCategoryError,
+        UpdateCollectionError,
     },
     get_collections::GetCollectionsResult,
     search_collections::SearchCollectionsResponse,
@@ -99,47 +99,54 @@ impl CollectionModel {
         }
     }
 
-    pub fn update_collection_category(
+    pub fn update_collection(
         &mut self,
         collection_canister_id: Principal,
-        new_category: String
-    ) -> Result<(), UpdateCollectionCategoryError> {
+        new_category: Option<String>,
+        new_locked_value_usd: Option<u64>
+    ) -> Result<(), UpdateCollectionError> {
         if let Some(mut collection) = self.collections.get(&collection_canister_id) {
             let old_category_id = collection.category.clone();
 
-            // check the new category exists
-            if let None = self.categories.get(&new_category) {
-                return Err(
-                    UpdateCollectionCategoryError::CategoryNotFound(
-                        format!(
-                            "Can't update collection because the new category: {new_category} does not exist"
+            if let Some(new_category) = new_category {
+                // check the new category exists
+                if let None = self.categories.get(&new_category) {
+                    return Err(
+                        UpdateCollectionError::CategoryNotFound(
+                            format!(
+                                "Can't update collection because the new category: {new_category} does not exist"
+                            )
                         )
-                    )
-                );
-            }
+                    );
+                }
 
-            // if an old category is set then minus one from it's collection count
-            if let Some(old_cat_id) = old_category_id {
-                if let Some(cat) = self.categories.get_mut(&old_cat_id) {
-                    if cat.collection_count > 0u64 {
-                        cat.collection_count = cat.collection_count - 1;
+                // if an old category is set then minus one from it's collection count
+                if let Some(old_cat_id) = old_category_id {
+                    if let Some(cat) = self.categories.get_mut(&old_cat_id) {
+                        if cat.collection_count > 0u64 {
+                            cat.collection_count = cat.collection_count - 1;
+                        }
                     }
                 }
-            }
 
-            // set the new category and update the categorie's collection count
-            if let Some(category) = self.categories.get_mut(&new_category) {
-                collection.category = Some(new_category.clone());
+                // set the new category and update the categorie's collection count
+                if let Some(category) = self.categories.get_mut(&new_category) {
+                    collection.category = Some(new_category);
+
+                    category.collection_count += 1;
+                }
+
+                if let Some(new_locked_value_usd) = new_locked_value_usd.clone() {
+                    collection.locked_value_usd = Some(new_locked_value_usd);
+                }
 
                 self.collections.remove(&collection.canister_id);
                 self.collections.insert(collection_canister_id, collection);
-
-                category.collection_count += 1;
             }
 
             Ok(())
         } else {
-            Err(UpdateCollectionCategoryError::CollectionNotFound)
+            Err(UpdateCollectionError::CollectionNotFound)
         }
     }
 
@@ -161,27 +168,31 @@ impl CollectionModel {
         &mut self,
         collection_canister_id: Principal,
         collection: &mut Collection,
-        category: String
+        category: Option<String>
     ) -> Result<(), InsertCollectionError> {
+        println!("collection to insert {collection:?}");
         if self.collections.contains_key(&collection_canister_id) {
             return Err(InsertCollectionError::CollectionAlreadyExists);
         }
 
-        let category = if let Some(cat) = self.categories.get_mut(&category) {
-            collection.category = Some(category);
-            cat
-        } else {
-            return Err(
-                InsertCollectionError::CategoryNotFound(
-                    format!(
-                        "Category {category} could not be found. failed to insert new collection"
+        if let Some(target_category) = category {
+            let found_category = if let Some(cat) = self.categories.get_mut(&target_category) {
+                collection.category = Some(target_category);
+                cat
+            } else {
+                return Err(
+                    InsertCollectionError::CategoryNotFound(
+                        format!(
+                            "Category {target_category} could not be found. failed to insert new collection"
+                        )
                     )
-                )
-            );
-        };
+                );
+            };
+
+            found_category.collection_count += 1;
+        }
 
         self.collections.insert(collection_canister_id.clone(), collection.clone());
-        category.collection_count += 1;
         Ok(())
     }
 
