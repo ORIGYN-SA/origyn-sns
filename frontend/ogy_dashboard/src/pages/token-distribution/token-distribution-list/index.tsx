@@ -64,7 +64,14 @@ const TokenDistributionList = ({
         accessorKey: "governanceBalance",
         id: "governanceBalance",
         cell: ({ getValue }) => <div className="">{getValue()}</div>,
-        header: "Governance Balance",
+        header: (
+          <div className="flex items-center space-x-1">
+            <span>Governance Balance</span>
+            <TooltipInfo id="governance-balance-staked-tokens-tooltip">
+              Staked tokens
+            </TooltipInfo>
+          </div>
+        ),
       },
       {
         accessorKey: "ledgerBalance",
