@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
-### [1.0.21] - 2025-03-13 
+### [1.0.21] - 2025-02-13 
 
 #### Changed
 
