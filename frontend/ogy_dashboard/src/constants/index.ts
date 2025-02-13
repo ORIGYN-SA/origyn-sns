@@ -72,7 +72,11 @@ export const ORIGYN_ACCOUNTS = [
     value: "k4vqr-zftut-n7l3t-fdevy-yehw6-be5az-wixxq-glrfg-lyeld-3siaj-uae",
   },
   {
-    name: "ORIGYN Rewards Account (ORA)",
+    name: "Operational Wallet",
+    value: "25v3h-aoa5w-4sjgu-qa34v-qvmq5-q5vbl-lrbeb-arn57-lnslo-uxso7-pae",
+  },
+  {
+    name: "ORIGYN Rewards and Treasury Account (ORA + OTA)",
     value: "yuijc-oiaaa-aaaap-ahezq-cai",
   },
   {
