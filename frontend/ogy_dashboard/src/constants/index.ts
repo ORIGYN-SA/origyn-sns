@@ -69,7 +69,7 @@ export const ORIGYN_ACCOUNTS = [
   },
   {
     name: "ORIGYN Ecosystem Fund",
-    value: "k4vqr-zftut-n7l3t-fdevy-yehw6-be5az-wixxq-glrfg-lyeld-3siaj-uae",
+    value: "uqp7y-4u4ux-6rmlk-cnwcb-qggwx-x2vw2-q6ect-ulyfd-ivt5u-3uqfa-mqe",
   },
   {
     name: "Operational Wallet",
