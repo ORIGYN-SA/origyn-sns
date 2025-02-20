@@ -17,6 +17,7 @@ const Navbar = () => {
     { title: "Governance", url: "/governance" },
     { title: "Explorer", url: "/explorer" },
     { title: "Proposals", url: "/proposals" },
+    { title: "Calculator", url: "/calculator" },
     { title: "My Account", url: "/account" },
   ];
 
