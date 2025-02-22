@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
-import { CollectionCard } from "./CollectionCard";
-import { LoaderSpin } from "@components/ui";
 import { idlFactory } from "@services/candid/origyn_nft_reference";
+import { CollectionCard } from "./CollectionCard";
 
 type CollectionContainerProps = {
   canisterId: string;
@@ -28,15 +27,14 @@ export const CollectionContainer = ({
         canisterId: Principal.fromText(canisterId),
       });
 
-      const response = await actor.collection_nft_origyn([]);
-      console.log("🚀 ~ queryFn: ~ response:", response);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response: any = await actor.collection_nft_origyn([]);
       return response.ok;
     },
   });
-  console.log("🚀 ~ collectionData:", collectionData);
 
   if (isLoading) {
-    return <LoaderSpin />;
+    return <CollectionCard.Skeleton />;
   }
 
   let logo = collectionData?.logo[0];
@@ -45,10 +43,10 @@ export const CollectionContainer = ({
 
   return (
     <CollectionCard
-      name={collectionData?.ok?.name[0]}
+      name={collectionData?.name[0]}
       canisterId={canisterId}
       nftCount={parseInt(collectionData?.token_ids_count?.[0] ?? 0)}
-      imageUrl={logo}
+      imageUrl={logo || "/col_placeholder_logo.jpg"}
     />
   );
 };

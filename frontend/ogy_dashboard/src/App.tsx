@@ -48,7 +48,8 @@ import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
-import Certificates from "@pages/certificates/Certificates";
+import Categories from "@pages/certificates/Categories";
+import Collections from "@pages/certificates/Collections";
 
 const router = createBrowserRouter([
   {
@@ -204,7 +205,11 @@ const router = createBrowserRouter([
       },
       {
         path: "certificates",
-        element: <Certificates />,
+        element: <Categories />,
+      },
+      {
+        path: "certificates/:category",
+        element: <Collections />,
       },
       {
         path: "*",

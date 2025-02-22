@@ -1,16 +1,16 @@
-type CollectionCardProps = {
+type CategoryCardProps = {
   name: string;
   canisterId: string;
   nftCount?: number;
   imageUrl?: string;
 };
 
-export const CollectionCard = ({
+export const CategoryCard = ({
   name,
   canisterId,
   nftCount,
   imageUrl,
-}: CollectionCardProps) => {
+}: CategoryCardProps) => {
   return (
     <div className="bg-surface-2 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200">
       <div className="aspect-square w-full relative">
