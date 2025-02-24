@@ -464,6 +464,7 @@ mod tests {
             accumulated_maturity: 150,
             last_synced_maturity: 150,
             rewarded_maturity: neuron_1_rewarded,
+            last_disburse_event_considered: Some(0),
         };
         neurons.insert(neuron_id_1.clone(), neuron_info_1);
         let result = PaymentRound::calculate_neuron_maturity_for_interval(
@@ -506,6 +507,7 @@ mod tests {
             accumulated_maturity: 0,
             last_synced_maturity: 0,
             rewarded_maturity: neuron_1_rewarded,
+            last_disburse_event_considered: Some(0),
         };
         neurons.insert(neuron_id_1.clone(), neuron_info_1);
 
