@@ -72,7 +72,15 @@ export const ORIGYN_ACCOUNTS = [
     value: "uqp7y-4u4ux-6rmlk-cnwcb-qggwx-x2vw2-q6ect-ulyfd-ivt5u-3uqfa-mqe",
   },
   {
-    name: "Operational Wallet",
+    name: "Cecil DAO Neuron",
+    value: "itz44-maaaa-aaaae-qcszq-cai",
+  },
+  {
+    name: "ORIGYN Operational Walet",
+    value: "qlqay-cvxyu-k4xzq-ppa5v-2zabq-wmkpe-auxpy-kwels-lkep4-jy462-jqe",
+  },
+  {
+    name: "ORIGYN Foundation Distribution Wallet",
     value: "25v3h-aoa5w-4sjgu-qa34v-qvmq5-q5vbl-lrbeb-arn57-lnslo-uxso7-pae",
   },
   {

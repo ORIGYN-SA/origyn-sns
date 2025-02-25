@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.24] - 2025-02-26
+
+#### Changed
+
+- Updates the ORIGYN Foundation Distribution Wallet account on token distribution list.
+
 ### [1.0.23] - 2025-02-25
 
 #### Changed
