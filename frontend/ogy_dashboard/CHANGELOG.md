@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.23] - 2025-02-25
+
+#### Changed
+
+- Updates public asset files for the dashboard.
+
 ### [1.0.22] - 2025-02-17
 
 #### Changed
