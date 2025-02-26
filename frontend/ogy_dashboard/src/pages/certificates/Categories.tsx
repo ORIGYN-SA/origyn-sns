@@ -5,6 +5,7 @@ import { formatNumber } from "../../utils/format";
 import {
   CurrencyDollarIcon,
   RectangleStackIcon,
+  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,7 @@ type Category = {
   collection_count: bigint;
 };
 
-const CATEGORIES = ["Precious Metals", "Art", "Jewlery"];
+const CATEGORIES = ["Precious Metals", "Art", "Certification", "Jewlery"];
 
 const formatCategoryForUrl = (category: string): string => {
   return category.toLowerCase().replace(/\s+/g, "-");
@@ -33,6 +34,8 @@ const CategoryIcon = ({ category }: { category: string }) => {
         return "url('/cat_art_logo.png')";
       case "Jewlery":
         return "url('/cat_jewlery_logo.png')";
+      case "Certification":
+        return "url('/cat_certification_logo.jpg')";
       default:
         return "url('/images/default-bg.jpg')";
     }
@@ -91,7 +94,7 @@ const Categories = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
           Certificates
         </h1>
-        <p className="text-base md:text-lg text-text-2 px-4">
+        <p className="text-content/60 text-lg px-4">
           Browse and explore tokenized real-world assets across different
           categories using the{" "}
           <a
@@ -106,8 +109,24 @@ const Categories = () => {
       </div>
 
       {overallStats && (
-        <div className="flex flex-col md:flex-row gap-4 mb-8 md:mb-12 lg:mb-16 max-w-2xl mx-auto">
-          <div className="relative bg-surface border border-border p-4 rounded-xl flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 md:mb-12 lg:mb-16 max-w-4xl mx-auto">
+          <div className="relative bg-surface border border-border p-4 rounded-xl">
+            <div className="flex">
+              <div className="shrink-0 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center bg-surface-2 rounded-xl">
+                <DocumentTextIcon width={24} height={24} />
+              </div>
+              <div className="ml-4 md:ml-6">
+                <div className="text-xl md:text-2xl font-semibold">
+                  {formatNumber(Number(3056))}
+                </div>
+                <div className="text-xs md:text-sm text-content/60">
+                  Total Certificates
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative bg-surface border border-border p-4 rounded-xl">
             <div className="flex">
               <div className="shrink-0 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center bg-surface-2 rounded-xl">
                 <RectangleStackIcon width={24} height={24} />
@@ -123,7 +142,7 @@ const Categories = () => {
             </div>
           </div>
 
-          <div className="relative bg-surface border border-border p-4 rounded-xl flex-1">
+          <div className="relative bg-surface border border-border p-4 rounded-xl">
             <div className="flex">
               <div className="shrink-0 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center bg-surface-2 rounded-xl">
                 <CurrencyDollarIcon width={24} height={24} />
@@ -141,33 +160,42 @@ const Categories = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 gap-4 md:gap-6 max-w-4xl mx-auto">
         {isLoadingCategories ? (
           <div className="col-span-full flex justify-center">
             <LoaderSpin />
           </div>
         ) : (
-          CATEGORIES.map((category) => (
-            <button
-              key={category}
-              onClick={() =>
-                navigate(`/certificates/${formatCategoryForUrl(category)}`)
-              }
-              className="relative p-6 bg-surface-2 rounded-xl shadow-lg hover:bg-surface-3 hover:scale-105 transition-all duration-500 h-[250px] md:h-[300px] lg:h-[350px] w-full overflow-hidden"
-            >
-              <CategoryIcon category={category} />
-              <div className="relative flex flex-col items-center gap-2 h-full justify-end pb-4">
-                <h3 className="text-lg md:text-xl font-bold text-center text-white">
-                  {category}
-                </h3>
-                <p className="text-xs md:text-sm text-white/80">
-                  {categories && categories[category]
-                    ? `${formatNumber(Number(categories[category].collection_count))} ${Number(categories[category].collection_count) === 1 ? "collection" : "collections"}`
-                    : "0 collections"}
-                </p>
-              </div>
-            </button>
-          ))
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {CATEGORIES.map((category, index) => (
+              <button
+                key={category}
+                onClick={() =>
+                  navigate(`/certificates/${formatCategoryForUrl(category)}`)
+                }
+                className={`relative p-6 bg-surface-2 rounded-xl shadow-lg hover:bg-surface-3 hover:scale-105 transition-all duration-500 ${
+                  index === 0
+                    ? "h-[200px] md:h-[250px] md:col-span-3"
+                    : "h-[180px] md:h-[300px]"
+                } w-full overflow-hidden`}
+                style={{
+                  gridColumn: index === 0 ? "1 / -1" : "auto",
+                }}
+              >
+                <CategoryIcon category={category} />
+                <div className="relative flex flex-col items-center gap-2 h-full justify-end pb-4">
+                  <h3 className="text-lg md:text-xl font-bold text-center text-white">
+                    {category !== "Jewlery" ? category : "Jewelry"}
+                  </h3>
+                  <p className="text-xs md:text-sm text-white/80">
+                    {categories && categories[category]
+                      ? `${formatNumber(Number(categories[category].collection_count))} ${Number(categories[category].collection_count) === 1 ? "collection" : "collections"}`
+                      : "0 collections"}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </div>
         )}
       </div>
     </div>

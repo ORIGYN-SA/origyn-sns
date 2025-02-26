@@ -67,7 +67,7 @@ const Collections = () => {
     <div className="max-w-6xl mx-auto py-16 px-4">
       <div className="text-center mb-16">
         <h1 className="text-6xl font-bold mb-2">Certificates</h1>
-        <p className="text-lg text-text-2">
+        <p className="text-lg text-content/60">
           Browse and explore tokenized real-world assets across different
           categories using the{" "}
           <a
