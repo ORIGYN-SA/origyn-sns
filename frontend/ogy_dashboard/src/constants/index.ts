@@ -76,12 +76,16 @@ export const ORIGYN_ACCOUNTS = [
     value: "itz44-maaaa-aaaae-qcszq-cai",
   },
   {
-    name: "ORIGYN Operational Walet",
+    name: "ORIGYN Operational Wallet",
     value: "qlqay-cvxyu-k4xzq-ppa5v-2zabq-wmkpe-auxpy-kwels-lkep4-jy462-jqe",
   },
   {
-    name: "ORIGYN Foundation Distribution Wallet",
+    name: "ORIGYN Operational Wallet",
     value: "25v3h-aoa5w-4sjgu-qa34v-qvmq5-q5vbl-lrbeb-arn57-lnslo-uxso7-pae",
+  },
+  {
+    name: "ORIGYN Integrator Wallet",
+    value: "unz2d-kv2kp-ntszz-xasw2-oy7yi-wbz4q-aoj2i-ip7d4-filfd-fxd45-gae",
   },
   {
     name: "ORIGYN Rewards and Treasury Account (ORA + OTA)",
