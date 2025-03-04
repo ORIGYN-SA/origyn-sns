@@ -14,8 +14,8 @@ use tracing::{ debug, error, info };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
-// every 2 hours
-const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 120 * 60 * 1_000;
+// every 12 hours
+const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 12 * 60 * 60 * 1_000;
 
 pub fn start_job() {
     info!("Starting the update ledger balance list job...");
