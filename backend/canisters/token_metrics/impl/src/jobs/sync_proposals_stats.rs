@@ -7,8 +7,8 @@ use types::Milliseconds;
 
 use crate::{ state::{ mutate_state, read_state, RuntimeState }, utils::is_proposal_closed };
 
-// every 5 minutes
-const SYNC_PROPOSALS_STATS_INTERVAL: Milliseconds = 5 * 60 * 1_000;
+// every 5 hours
+const SYNC_PROPOSALS_STATS_INTERVAL: Milliseconds = 5 * 60 * 60 * 1_000;
 
 pub fn start_job() {
     debug!("Starting the proposals metrics sync job..");

@@ -9,7 +9,7 @@ use tracing::{ debug, error };
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
-const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 3_600 * 1_000;
+const SYNC_SUPPLY_DATA_INTERVAL: Milliseconds = 12 * 3_600 * 1_000;
 
 pub fn _start_job_if_not_started() {
     debug!("Starting the sync supply data job...");
