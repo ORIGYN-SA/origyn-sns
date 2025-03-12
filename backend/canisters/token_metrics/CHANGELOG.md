@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.12] - 2025-03-12
+
+- Increase all jobs timers.
+
 ## [1.0.11] - 2025-03-04
 
 - Increase interval for the update balance list to run the job every 12h instead of 2h.

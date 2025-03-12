@@ -11,7 +11,7 @@ use tracing::error;
 use types::Milliseconds;
 use crate::state::{ mutate_state, read_state };
 
-const SYNC_GOVERNANCE_HISTORY_INTERVAL: Milliseconds = 3_600 * 1_000;
+const SYNC_GOVERNANCE_HISTORY_INTERVAL: Milliseconds = 12 * 3_600 * 1_000;
 
 pub fn start_job() {
     run_now_then_interval(Duration::from_millis(SYNC_GOVERNANCE_HISTORY_INTERVAL), run)
