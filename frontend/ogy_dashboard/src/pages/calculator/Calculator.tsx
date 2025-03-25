@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 
 type CalculatorMode = "simple" | "advanced";
 
-type AssetQuality = "low" | "medium" | "high";
+type AssetQuality = "pdf" | "iphone" | "dslr" | "video";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "#3a8589",
@@ -55,7 +55,7 @@ function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
 const Calculator: React.FC = () => {
   const { data: pricing, loading, error } = usePricingData();
   const [mode, setMode] = useState<CalculatorMode>("simple");
-  const [assetQuality, setAssetQuality] = useState<AssetQuality>("medium");
+  const [assetQuality, setAssetQuality] = useState<AssetQuality>("pdf");
   const [calculations, setCalculations] = useState({
     collections: 0,
     storage: 0,
@@ -72,14 +72,17 @@ const Calculator: React.FC = () => {
       let newStorageSize = 0;
 
       switch (assetQuality) {
-        case "low":
-          newStorageSize = certificatesCount * 10;
+        case "pdf":
+          newStorageSize = certificatesCount * 0.25; // 250KB = 0.25MB
           break;
-        case "medium":
-          newStorageSize = certificatesCount * 100;
+        case "iphone":
+          newStorageSize = certificatesCount * 3; // 3MB
           break;
-        case "high":
-          newStorageSize = certificatesCount * 1000;
+        case "dslr":
+          newStorageSize = certificatesCount * 20; // 20MB
+          break;
+        case "video":
+          newStorageSize = certificatesCount * 4000; // 4GB = 4000MB
           break;
       }
 
@@ -320,41 +323,52 @@ const Calculator: React.FC = () => {
                   Select the quality level for your certificate assets:
                   <br />
                   <br />
-                  Low: 10 MB per certificate
+                  PDF Document: 250kb per certificate
                   <br />
-                  Medium: 100 MB per certificate
+                  iPhone Picture: 3MB per certificate
                   <br />
-                  High: 1000 MB per certificate
+                  DSLR Camera Picture: 20MB per certificate
+                  <br />
+                  1080p Video: 4GB per certificate
                 </TooltipInfo>
               </div>
               <div className="bg-surface border border-border rounded-lg p-4">
                 <div className="flex justify-between mb-2">
-                  <span className="text-sm">Low</span>
-                  <span className="text-sm">Medium</span>
-                  <span className="text-sm">High</span>
+                  <span className="text-sm">PDF Document</span>
+                  <span className="text-sm">iPhone Picture</span>
+                  <span className="text-sm">DSLR Picture</span>
+                  <span className="text-sm">1080p Video</span>
                 </div>
                 <AirbnbSlider
                   slots={{ thumb: AirbnbThumbComponent }}
                   aria-label="Asset Quality"
                   value={
-                    assetQuality === "low"
+                    assetQuality === "pdf"
                       ? 1
-                      : assetQuality === "medium"
+                      : assetQuality === "iphone"
                         ? 2
-                        : 3
+                        : assetQuality === "dslr"
+                          ? 3
+                          : 4
                   }
                   step={null}
                   valueLabelDisplay="auto"
                   min={1}
-                  max={3}
-                  marks={[{ value: 1 }, { value: 2 }, { value: 3 }]}
+                  max={4}
+                  marks={[
+                    { value: 1 },
+                    { value: 2 },
+                    { value: 3 },
+                    { value: 4 },
+                  ]}
                   onChange={(event) => {
                     const value = Number(
                       (event.target as HTMLInputElement).value
                     );
-                    if (value === 1) handleQualityChange("low");
-                    else if (value === 2) handleQualityChange("medium");
-                    else handleQualityChange("high");
+                    if (value === 1) handleQualityChange("pdf");
+                    else if (value === 2) handleQualityChange("iphone");
+                    else if (value === 3) handleQualityChange("dslr");
+                    else handleQualityChange("video");
                   }}
                 />
                 <div className="mt-4 text-sm text-content/60">
@@ -399,6 +413,97 @@ const Calculator: React.FC = () => {
         </div>
 
         <div className="mt-8 p-4 bg-muted rounded-lg">
+          <div className="mb-4">
+            <h4 className="text-lg font-medium mb-2">Cost Breakdown</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Collections ({calculations.collections})</span>
+                <span className="inline-flex items-center">
+                  {(
+                    calculations.collections * pricing.collectionCreation
+                  ).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  <img
+                    className="mx-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Storage Units ({calculations.storage})</span>
+                <span className="inline-flex items-center">
+                  {(
+                    calculations.storage * pricing.storageCreation
+                  ).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  <img
+                    className="mx-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Certificates ({calculations.certificates})</span>
+                <span className="inline-flex items-center">
+                  {(
+                    calculations.certificates * pricing.certificateCreation
+                  ).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  <img
+                    className="mx-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>
+                  Certificate Updates ({calculations.certificateUpdates})
+                </span>
+                <span className="inline-flex items-center">
+                  {(
+                    calculations.certificateUpdates * pricing.certificateUpdate
+                  ).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  <img
+                    className="mx-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>
+                  Storage Size ({calculations.storageSize.toLocaleString()} MB)
+                </span>
+                <span className="inline-flex items-center">
+                  {(
+                    calculations.storageSize * pricing.perMbSize
+                  ).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  <img
+                    className="mx-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                </span>
+              </div>
+              <div className="border-t border-border pt-2 mt-2"></div>
+            </div>
+          </div>
+
           <h3 className="text-xl font-semibold text-primary flex items-center">
             Total Price:{" "}
             {totalPrice.toLocaleString(undefined, {

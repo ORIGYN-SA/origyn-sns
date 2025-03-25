@@ -117,7 +117,7 @@ const Categories = () => {
               </div>
               <div className="ml-4 md:ml-6">
                 <div className="text-xl md:text-2xl font-semibold">
-                  {formatNumber(Number(3056))}
+                  {formatNumber(Number(3065))}
                 </div>
                 <div className="text-xs md:text-sm text-content/60">
                   Total Certificates
