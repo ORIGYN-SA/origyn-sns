@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 
 type CalculatorMode = "simple" | "advanced";
 
-type AssetQuality = "pdf" | "iphone" | "dslr" | "video";
+type AssetQuality = "pdf" | "iphone" | "dslr" | "video" | "video1hr";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "#3a8589",
@@ -82,7 +82,10 @@ const Calculator: React.FC = () => {
           newStorageSize = certificatesCount * 20; // 20MB
           break;
         case "video":
-          newStorageSize = certificatesCount * 4000; // 4GB = 4000MB
+          newStorageSize = certificatesCount * 1000; // 1GB = 1000MB
+          break;
+        case "video1hr":
+          newStorageSize = certificatesCount * 60000; // 60GB = 60000MB
           break;
       }
 
@@ -247,7 +250,7 @@ const Calculator: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="block text-sm font-medium text-foreground">
-                How many pieces you would like to certify?
+                How many pieces would you like to certify?
               </label>
               <TooltipInfo id="tooltip-certificates-count">
                 The total number of certificates to be minted. For example, one
@@ -327,17 +330,20 @@ const Calculator: React.FC = () => {
                   <br />
                   iPhone Picture: 3MB per certificate
                   <br />
-                  DSLR Camera Picture: 20MB per certificate
+                  Studio Camera Picture: 20MB per certificate
                   <br />
-                  1080p Video: 4GB per certificate
+                  4K Video (≈ 1min): 1GB per certificate
+                  <br />
+                  4K Video (1hr): 60GB per certificate
                 </TooltipInfo>
               </div>
               <div className="bg-surface border border-border rounded-lg p-4">
                 <div className="flex justify-between mb-2">
                   <span className="text-sm">PDF Document</span>
                   <span className="text-sm">iPhone Picture</span>
-                  <span className="text-sm">DSLR Picture</span>
-                  <span className="text-sm">1080p Video</span>
+                  <span className="text-sm">Studio Camera Picture</span>
+                  <span className="text-sm">4K Video (≈ 1min)</span>
+                  <span className="text-sm">4K Video (1hr)</span>
                 </div>
                 <AirbnbSlider
                   slots={{ thumb: AirbnbThumbComponent }}
@@ -349,17 +355,20 @@ const Calculator: React.FC = () => {
                         ? 2
                         : assetQuality === "dslr"
                           ? 3
-                          : 4
+                          : assetQuality === "video"
+                            ? 4
+                            : 5
                   }
                   step={null}
                   valueLabelDisplay="auto"
                   min={1}
-                  max={4}
+                  max={5}
                   marks={[
                     { value: 1 },
                     { value: 2 },
                     { value: 3 },
                     { value: 4 },
+                    { value: 5 },
                   ]}
                   onChange={(event) => {
                     const value = Number(
@@ -368,7 +377,8 @@ const Calculator: React.FC = () => {
                     if (value === 1) handleQualityChange("pdf");
                     else if (value === 2) handleQualityChange("iphone");
                     else if (value === 3) handleQualityChange("dslr");
-                    else handleQualityChange("video");
+                    else if (value === 4) handleQualityChange("video");
+                    else handleQualityChange("video1hr");
                   }}
                 />
                 <div className="mt-4 text-sm text-content/60">
