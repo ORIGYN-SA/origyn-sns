@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "build:staging": "vite build",
+    "build:preprod": "vite build",
     "build:production": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy:local": "dfx deploy origyn_production",
-    "deploy:ic": "dfx deploy --network ic origyn_production"
+    "deploy:staging": "npm run build:staging && dfx deploy origyn_landing_page --network=staging",
+    "deploy:preprod": "npm run build:preprod && dfx deploy origyn_landing_page --network=preprod"
   },
   "dependencies": {
     "@dfinity/agent": "^2.4.1",
