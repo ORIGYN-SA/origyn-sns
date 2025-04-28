@@ -1,0 +1,160 @@
+.container {
+  padding: 96px 70px;
+  background: #f5f4f4;
+  position: relative;
+}
+
+.header {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-family: "Montserrat";
+  font-weight: 200;
+  font-size: 96px;
+  line-height: 88px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: black;
+}
+
+.title span {
+  font-family: "Montserrat Italic";
+  font-weight: 200;
+  font-style: italic;
+  font-size: 90px;
+  line-height: 88px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.description {
+  margin-top: 24px;
+  font-family: "General Sans";
+  color: #222526;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 5%;
+  text-transform: uppercase;
+  max-width: 780px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .header {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+.roadmapCardsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  overflow-x: auto;
+  padding: 40px 25px;
+  position: relative;
+  z-index: 1;
+  scroll-snap-type: x mandatory;
+  justify-content: flex-start;
+  margin: 0 auto;
+  cursor: grab;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.roadmapCardsWrapper:active {
+  cursor: grabbing;
+}
+
+.roadmapCardsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.roadmapTimeline {
+  position: absolute;
+  top: 50%;
+  /* left: 25px;
+  right: 25px; */
+  height: 1px;
+  background: black;
+  z-index: 0;
+  transform: translateY(-50%);
+  /* min-width: 100%; */
+  left: 0;
+  right: 0;
+  width: 2284px;
+}
+
+.roadmapTimeline::before,
+.roadmapTimeline::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.roadmapTimeline::before {
+  left: 0;
+}
+
+.roadmapTimeline::after {
+  right: 0;
+}
+
+@media (max-width: 1200px) {
+  .roadmapCardsWrapper {
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    overflow-x: unset;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    padding: 25px 0;
+    z-index: 1;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .roadmapTimeline {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: black;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+
+  .roadmapTimeline::before,
+  .roadmapTimeline::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .roadmapTimeline::before {
+    top: 0;
+  }
+
+  .roadmapTimeline::after {
+    bottom: 0;
+    top: auto;
+  }
+}

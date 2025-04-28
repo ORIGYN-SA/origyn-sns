@@ -1,0 +1,76 @@
+.benefitsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-family: "General Sans", -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  max-width: 1350px;
+  margin: 0 auto;
+  border-top: 1px solid var(--Celeste, #cde9ec);
+  border-bottom: 1px solid var(--Celeste, #cde9ec);
+}
+
+.benefitItem {
+  background-color: #fcfafa;
+  display: flex;
+  padding: 24px 40px;
+  gap: 24px;
+  position: relative;
+}
+
+/* Add vertical dividers between items */
+.benefitItem:not(:nth-child(2n)) {
+  border-right: 1px solid var(--Celeste, #cde9ec);
+}
+
+/* Add horizontal dividers between rows */
+.benefitItem:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--Celeste, #cde9ec);
+}
+
+.iconContainer {
+  display: flex;
+  width: 40px;
+  flex-shrink: 0;
+  height: 40px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+}
+
+.title {
+  color: #222526;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 1.2px;
+}
+
+.description {
+  color: #69737c;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+}
+
+@media (max-width: 991px) {
+  .benefitsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitItem {
+    padding: 20px;
+  }
+
+  /* Remove vertical dividers on mobile */
+  .benefitItem:not(:nth-child(2n)) {
+    border-right: none;
+  }
+
+  /* Add horizontal dividers between all items on mobile */
+  .benefitItem:not(:last-child) {
+    border-bottom: 1px solid var(--Celeste, #cde9ec);
+  }
+}

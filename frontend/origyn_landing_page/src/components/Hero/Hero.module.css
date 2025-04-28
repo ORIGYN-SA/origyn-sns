@@ -1,0 +1,179 @@
+.heroContainer {
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 100%;
+  height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 48px;
+}
+
+.subtitle {
+  font-family: "General Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 2.24px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.logo {
+  height: 200px;
+  width: auto;
+  object-fit: contain;
+}
+
+.ipadMock {
+  width: 36%;
+  max-width: 600px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 54%;
+  transform: translateX(-50%) translateY(50%);
+  filter: drop-shadow(-100px 100px 100px rgba(0, 0, 0, 0.5));
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+  width: 100%;
+  position: relative;
+  padding-left: 40px;
+  padding-right: 78px;
+}
+
+.heroWithStats {
+  position: relative;
+}
+
+.heroWithStats > div:last-child {
+  position: absolute;
+  bottom: -73px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 2;
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: 200px;
+    line-height: 160px;
+  }
+
+  .logo {
+    height: 160px;
+  }
+
+  .ipadMock {
+    width: 40%;
+    transform: translateX(-50%) translateY(30%);
+  }
+}
+
+@media (max-width: 990px) {
+  .ipadMock {
+    display: none;
+  }
+
+  .contentWrapper {
+    height: 550px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 150px;
+    line-height: 120px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .logo {
+    width: 400px;
+  }
+
+  .heroContainer {
+    height: 580px;
+  }
+
+  .contentWrapper {
+    height: 400px;
+    padding: 0 24px;
+  }
+
+  .heroWithStats > div:last-child {
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    z-index: 2;
+    border-radius: 0;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.bottomText {
+  height: 38px;
+  background: #0a0a0a;
+  padding: 0 12px;
+  position: absolute;
+  bottom: 0;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Helvetica;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 38px;
+  letter-spacing: 0.52px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+.bottomText span {
+  display: inline-block;
+  animation: scroll 50s linear infinite;
+  padding-left: 0;
+}
