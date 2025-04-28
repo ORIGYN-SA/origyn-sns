@@ -15,7 +15,7 @@ const useCases = [
   },
   {
     title: "Gold",
-    image: "/uc-3.png",
+    image: "/uc-3.jpeg",
     height: "100%",
     position: "top",
   },

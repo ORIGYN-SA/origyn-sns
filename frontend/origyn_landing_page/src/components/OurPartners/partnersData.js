@@ -27,7 +27,7 @@ export const partners = [
   {
     id: 6,
     name: "Leo Calliard",
-    logo: "/p-leoc.jpg",
+    logo: "/p-leoc.png",
   },
   {
     id: 7,

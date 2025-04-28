@@ -2,7 +2,7 @@ import styles from "./Footer.module.css";
 import XIcon from "../../assets/icons/x-icon.svg?react";
 import TelegramIcon from "../../assets/icons/telegram-icon.svg?react";
 import MediumIcon from "../../assets/icons/medium-icon.svg?react";
-
+import LinkedInIcon from "../../assets/icons/linkedin-icon.svg?react";
 const socialLinks = [
   { name: "Twitter", url: "https://x.com/origyntech", Icon: XIcon },
   {
@@ -11,6 +11,11 @@ const socialLinks = [
     Icon: TelegramIcon,
   },
   { name: "Medium", url: "https://origyn.medium.com/", Icon: MediumIcon },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/origyn-foundation/",
+    Icon: LinkedInIcon,
+  },
 ];
 
 const leftLinks = [
