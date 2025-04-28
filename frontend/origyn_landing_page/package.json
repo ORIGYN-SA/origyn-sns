@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:staging": "vite build",
+    "build:production": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy:local": "dfx deploy origyn_production",
