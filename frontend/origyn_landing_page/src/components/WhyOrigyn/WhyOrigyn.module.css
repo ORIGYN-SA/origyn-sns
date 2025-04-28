@@ -33,6 +33,15 @@
   line-height: 88px;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding-top: 96px;
+  }
+  .why {
+    font-size: 68px;
+  }
+}
+
 .content {
   color: var(--Charcoal, #222526);
   text-align: center;

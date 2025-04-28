@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode staging",
     "build": "vite build",
     "build:staging": "vite build --mode staging",
     "build:preprod": "vite build --mode preprod",

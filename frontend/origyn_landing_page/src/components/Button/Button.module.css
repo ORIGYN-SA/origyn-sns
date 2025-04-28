@@ -37,3 +37,18 @@
   justify-content: center;
   margin-right: 16px;
 }
+
+@media (max-width: 768px) {
+  .button {
+    height: 40px;
+  }
+
+  .buttonText {
+    padding: 0 18px;
+  }
+
+  .circle {
+    width: 24px;
+    height: 24px;
+  }
+}

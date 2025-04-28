@@ -2,21 +2,6 @@ import { useState, useEffect } from "react";
 import { useSuperStats } from "./useSuperStats";
 import { useMarketCap } from "./useMarketCap";
 
-const formatLargeNumber = (num) => {
-  if (num === undefined) return undefined;
-
-  if (num >= 1e9) {
-    return `${(num / 1e9).toFixed(1)}B`;
-  }
-  if (num >= 1e6) {
-    return `${(num / 1e6).toFixed(1)}M`;
-  }
-  if (num >= 1e3) {
-    return `${(num / 1e3).toFixed(1)}K`;
-  }
-  return num.toLocaleString();
-};
-
 export const useStatsData = () => {
   const [data, setData] = useState({
     tvl: undefined,
@@ -57,17 +42,17 @@ export const useStatsData = () => {
         // Update data with available values, keeping existing values if new ones aren't available
         setData((prevData) => ({
           ...prevData,
-          tvl: formatLargeNumber(tvlData.total_value_locked),
+          tvl: tvlData.total_value_locked?.toLocaleString(),
           users: superStats?.users
             ? superStats.users.toLocaleString()
             : prevData.users,
-          marketCap: formatLargeNumber(marketCapData?.marketCap),
+          marketCap: marketCapData?.marketCap
+            ? parseInt(marketCapData?.marketCap)?.toLocaleString()
+            : prevData.marketCap,
           price: marketCapData?.price
-            ? `$${marketCapData.price.toFixed(4)}`
+            ? `$${marketCapData.price?.toLocaleString()}`
             : prevData.price,
-          circulatingSupply: formatLargeNumber(
-            marketCapData?.circulatingSupply
-          ),
+          circulatingSupply: marketCapData?.circulatingSupply?.toLocaleString(),
           assets: prevData.assets.toLocaleString(),
         }));
       } catch (err) {

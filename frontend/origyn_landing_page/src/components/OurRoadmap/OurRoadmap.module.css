@@ -53,10 +53,11 @@
     width: 100%;
     margin-bottom: 40px;
   }
+}
 
+@media (max-width: 990px) {
   .title {
-    font-size: 48px;
-    line-height: 56px;
+    font-size: 68px;
   }
 }
 

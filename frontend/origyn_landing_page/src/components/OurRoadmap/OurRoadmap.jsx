@@ -35,10 +35,8 @@ const OurRoadmap = () => {
       setIsDesktop(window.innerWidth > 1200);
     };
 
-    // Initial check
     checkScreenSize();
 
-    // Add resize listener
     window.addEventListener("resize", checkScreenSize);
 
     return () => {
@@ -64,9 +62,7 @@ const OurRoadmap = () => {
   return (
     <section className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.title}>
-          Our <span>Roadmap</span>
-        </h2>
+        <h2 className={styles.title}>Roadmap</h2>
         <p className={styles.description}>
           From new utilities and governance features to expanded support for
           industries and developers. Every milestone reflects our mission to

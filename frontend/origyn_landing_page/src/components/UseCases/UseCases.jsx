@@ -20,7 +20,7 @@ const useCases = [
     position: "top",
   },
   {
-    title: "Made In Federitaly",
+    title: "Made In Italy",
     image: "/uc-5.png",
     position: "top",
   },

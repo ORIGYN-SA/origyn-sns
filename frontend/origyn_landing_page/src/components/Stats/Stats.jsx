@@ -5,10 +5,10 @@ import styles from "./Stats.module.css";
 const Stats = ({ items }) => {
   return (
     <div className={styles.statsContainer}>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <React.Fragment key={item.title}>
           <StatsItem title={item.title} value={item.value} />
-          {index < items.length - 1 && <div className={styles.divider} />}
+          {/* {index < items.length - 1 && <div className={styles.divider} />} */}
         </React.Fragment>
       ))}
     </div>

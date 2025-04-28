@@ -82,7 +82,21 @@
     font-size: 3rem;
   }
 
+  .title span {
+    font-size: 3rem;
+  }
+
   .rightPanelWrapper {
     min-height: 300px;
+  }
+}
+
+@media (max-width: 990px) {
+  .title {
+    font-size: 68px;
+  }
+
+  .title span {
+    font-size: 68px;
   }
 }
