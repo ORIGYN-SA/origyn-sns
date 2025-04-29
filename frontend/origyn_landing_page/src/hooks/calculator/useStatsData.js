@@ -39,21 +39,28 @@ export const useStatsData = () => {
         }
         const tvlData = await tvlResponse.json();
 
-        // Update data with available values, keeping existing values if new ones aren't available
         setData((prevData) => ({
           ...prevData,
-          tvl: tvlData.total_value_locked?.toLocaleString(),
+          tvl: tvlData.total_value_locked
+            ?.toLocaleString("en-US")
+            .replace(/,/g, " "),
           users: superStats?.users
-            ? superStats.users.toLocaleString()
+            ? superStats.users.toLocaleString("en-US").replace(/,/g, " ")
             : prevData.users,
           marketCap: marketCapData?.marketCap
-            ? parseInt(marketCapData?.marketCap)?.toLocaleString()
+            ? parseInt(marketCapData?.marketCap)
+                ?.toLocaleString("en-US")
+                .replace(/,/g, " ")
             : prevData.marketCap,
           price: marketCapData?.price
-            ? `$${marketCapData.price?.toLocaleString()}`
+            ? `$${marketCapData.price
+                ?.toLocaleString("en-US")
+                .replace(/,/g, " ")}`
             : prevData.price,
-          circulatingSupply: marketCapData?.circulatingSupply?.toLocaleString(),
-          assets: prevData.assets.toLocaleString(),
+          circulatingSupply: marketCapData?.circulatingSupply
+            ?.toLocaleString("en-US")
+            .replace(/,/g, " "),
+          assets: prevData.assets.toLocaleString("en-US").replace(/,/g, " "),
         }));
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
@@ -62,13 +69,10 @@ export const useStatsData = () => {
       }
     };
 
-    // Fetch data as soon as possible, don't wait for other sources
     fetchStatsData();
   }, [superStats, marketCapData]);
 
-  // Only consider loading if all sources are loading
   const isLoading = loading && superStatsLoading && marketCapLoading;
-  // Collect all errors
   const errors = [];
   if (error) errors.push(error);
   if (superStatsError) errors.push(superStatsError);

@@ -125,7 +125,8 @@
   }
 
   .heroContainer {
-    height: 580px;
+    /* height: 580px; */
+    height: 100vh;
   }
 
   .contentWrapper {

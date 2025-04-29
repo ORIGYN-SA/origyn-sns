@@ -4,6 +4,13 @@ import RoadmapCard from "./RoadmapCard";
 
 const roadmapCards = [
   {
+    title: "Support of the launch of Cecil DAO",
+    description:
+      "Successfully supported the launch of Cecil DAO, advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
+    when: "Q1 2025",
+    image: "/roadmap-1.jpg",
+  },
+  {
     title: "New ICRC7 NFT Standard",
     description:
       "A new certificate standard designed to improve NFT interoperability, traceability, and utility across the ORIGYN ecosystem.",
@@ -14,13 +21,6 @@ const roadmapCards = [
     title: "Public Minting Studio",
     description:
       "A self-service platform allowing anyone to mint certified, on-chain digital assets using ORIGYN's infrastructure.",
-    when: "Q4 2025",
-    image: "/roadmap-2.jpg",
-  },
-  {
-    title: "Automatic Burning Mechanism",
-    description:
-      "Protocol-level feature to burn $OGY fees, enhancing long-term token value and ecosystem sustainability.",
     when: "Q4 2025",
     image: "/roadmap-2.jpg",
   },
