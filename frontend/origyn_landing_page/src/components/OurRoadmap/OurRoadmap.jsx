@@ -8,21 +8,21 @@ const roadmapCards = [
     description:
       "Successfully supported the launch of Cecil DAO, advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
     when: "Q1 2025",
-    image: "/roadmap-1.jpg",
+    image: "/roadmap-q1.png",
   },
   {
     title: "New ICRC7 NFT Standard",
     description:
       "A new certificate standard designed to improve NFT interoperability, traceability, and utility across the ORIGYN ecosystem.",
     when: "Q2 2025",
-    image: "/roadmap-1.jpg",
+    image: "/roadmap-q2.png",
   },
   {
     title: "Public Minting Studio",
     description:
       "A self-service platform allowing anyone to mint certified, on-chain digital assets using ORIGYN's infrastructure.",
     when: "Q4 2025",
-    image: "/roadmap-2.jpg",
+    image: "/roadmap-q4.png",
   },
 ];
 
