@@ -6,7 +6,7 @@ const roadmapCards = [
   {
     title: "Support of the launch of Cecil DAO",
     description:
-      "Successfully supported the launch of Cecil DAO, advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
+      "Advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
     when: "Q1 2025",
     image: "/roadmap-q1.png",
   },
