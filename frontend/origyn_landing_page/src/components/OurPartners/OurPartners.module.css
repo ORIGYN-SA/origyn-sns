@@ -17,6 +17,7 @@
   flex-direction: column;
   gap: 16px;
   width: 598px;
+  color: white;
 }
 
 .leftTitle {
