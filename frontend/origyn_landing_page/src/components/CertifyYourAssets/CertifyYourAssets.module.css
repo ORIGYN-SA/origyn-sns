@@ -1,0 +1,111 @@
+.container {
+  background-color: #05193666;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculatorWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gradientBackground {
+  position: absolute;
+  top: -250px;
+  left: 50%;
+  transform: translateX(-44%);
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 31%,
+    #75ff8040 0%,
+    transparent 28%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.title {
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 88px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.italic {
+  font-family: "General Sans";
+  font-weight: 300;
+  font-style: italic;
+}
+
+.subtitle {
+  margin-top: 28px;
+  margin-bottom: 96px;
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 5%;
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 806px;
+}
+
+.contactBoxAbsolute {
+  position: absolute;
+  top: 50%;
+  right: 11vw;
+  transform: translateY(-50%);
+  border-top: 1px solid #dbdbdb;
+  padding: 16px 7px;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+  width: 190px;
+}
+
+.contactText {
+  font-family: "General Sans";
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media (max-width: 1520px) {
+  .contactBoxAbsolute {
+    position: absolute;
+    margin-top: 24px;
+    transform: none;
+    right: 0.5vw;
+    top: 50%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .contactBoxAbsolute {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 24px;
+    transform: none;
+    right: 0;
+    top: auto;
+  }
+}
+
+@media (max-width: 990px) {
+  .title {
+    font-size: 68px;
+  }
+}

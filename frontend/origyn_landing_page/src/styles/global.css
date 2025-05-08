@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "General Sans";
+  src: url("/GeneralSans-Variable.woff2") format("woff2"),
+    url("/GeneralSans-Variable.woff") format("woff"),
+    url("/GeneralSans-Variable.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans Italic";
+  src: url("/GeneralSans-VariableItalic.woff2") format("woff2"),
+    url("/GeneralSans-VariableItalic.woff") format("woff"),
+    url("/GeneralSans-VariableItalic.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans Bold";
+  src: url("/dm-sans-bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "The Seasons Light";
+  src: url("/the-seasons.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat Italic";
+  src: url("/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "General Sans", sans-serif;
+  position: relative;
+}

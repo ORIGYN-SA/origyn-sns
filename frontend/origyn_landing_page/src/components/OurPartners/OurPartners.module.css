@@ -1,0 +1,191 @@
+.container {
+  background-image: url("/uc-3.png");
+  height: calc(100vh - 98px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  padding-top: 63px;
+  padding-left: 89px;
+  padding-right: 104px;
+  justify-content: space-between;
+  position: relative;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 598px;
+  color: white;
+}
+
+.leftTitle {
+  font-family: "Helvetica Neue";
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.leftTitle span {
+  font-family: "Gestura Display TRIAL";
+  font-weight: 200;
+  font-style: italic;
+  font-size: 52px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.leftSubtitle {
+  font-family: "Helvetica Neue";
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  text-transform: uppercase;
+}
+
+.leftDescription {
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.signature {
+  width: 150px;
+}
+
+.right img {
+  width: 150px;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
+    height: calc(100vh - 98px);
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.bottom {
+  width: 100%;
+  height: 98px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.bottomOurPartners {
+  width: 197px;
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 88px;
+  letter-spacing: 10%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  padding: 39px 0;
+  background-color: white;
+  color: black;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.partnersContainer {
+  display: flex;
+  gap: 40px;
+  padding-left: 20px;
+  position: absolute;
+  left: 197px;
+  right: 0;
+  width: calc(100% - 197px);
+  box-sizing: border-box;
+  animation: scroll 15s linear infinite;
+}
+
+.partnersContainer:hover {
+  animation-play-state: paused;
+}
+
+.partnerLogo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  /* filter: brightness(0); */
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .partnersContainer {
+    gap: 20px;
+  }
+
+  .partnerLogo {
+    height: 30px;
+  }
+
+  .bottomOurPartners {
+    padding: 20px 0;
+    width: 150px;
+  }
+}
+
+.indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicator:hover {
+  background-color: white;
+}
+.indicator.active {
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .indicators {
+    bottom: 40px;
+  }
+}

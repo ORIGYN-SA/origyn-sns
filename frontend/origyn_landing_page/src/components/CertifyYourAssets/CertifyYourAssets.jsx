@@ -1,0 +1,36 @@
+import React from "react";
+import Calculator from "../Calculator/Calculator";
+import styles from "./CertifyYourAssets.module.css";
+import Button from "../Button/Button";
+
+const CertifyYourAssets = ({ id }) => {
+  return (
+    <div id={id} className={styles.container}>
+      <h1 className={styles.title}>
+        Certify <br />
+        <span className={styles.italic}>your assets</span>
+      </h1>
+
+      <span className={styles.subtitle}>
+        Use the ORIGYN Certification Calculator to instantly estimate the costs
+        of securing your assets with fully on-chain digital certificates.
+        Whether you're certifying fine art, luxury goods, gold, or other
+        valuable assets, this tool gives you a clear picture of infrastructure
+        and technology costs with no guesswork.
+      </span>
+
+      <div className={styles.calculatorWrapper}>
+        <div className={styles.gradientBackground} />
+        <Calculator />
+      </div>
+      <div className={styles.contactBoxAbsolute}>
+        <div className={styles.contactText}>
+          To certify your assets get in touch with us:
+        </div>
+        <Button text="Contact ORIGYN" url="mailto:techsupport@origyn.com" />
+      </div>
+    </div>
+  );
+};
+
+export default CertifyYourAssets;

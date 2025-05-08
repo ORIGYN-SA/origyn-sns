@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.25] - 2025-05-08
+
+#### Added
+
+- Adds the Calculator to the Dashboard (/calculator).
+
 ### [1.0.24] - 2025-02-26
 
 #### Changed

@@ -1,0 +1,206 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  margin: 0 auto;
+  padding-left: 75px;
+  background: white;
+  min-height: 769px;
+}
+
+.leftPanel {
+  flex: 1;
+  display: flex;
+  padding-top: 64px;
+  flex-direction: column;
+  padding-right: 2rem;
+  padding-bottom: 64px;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 4.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 88px;
+  line-height: 88px;
+  letter-spacing: 0%;
+  line-height: 1;
+  color: #1a1a1a;
+}
+
+.title span {
+  font-family: "Montserrat Italic";
+  font-weight: 200;
+  font-style: italic;
+  font-size: 96px;
+  line-height: 88px;
+  letter-spacing: 0%;
+}
+
+.description {
+  font-family: "General Sans";
+  color: #222526;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 5%;
+  text-transform: uppercase;
+  white-space: pre-line;
+  max-width: 442px;
+}
+
+.indicators {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 24px;
+  flex-direction: column;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #e5e5e5;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #00e0ff;
+}
+
+.rightPanelWrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  cursor: pointer;
+}
+
+.rightPanelImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.rightPanel {
+  position: absolute;
+  inset: 0;
+  background: #061937;
+  border-radius: 16px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  z-index: 2;
+  margin: 19px;
+}
+
+.stepLabel {
+  display: inline-block;
+  background-color: #85f1ff;
+  color: #061937;
+  padding: 0.375rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  width: fit-content;
+  text-transform: uppercase;
+  font-family: "General Sans";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 23px;
+  letter-spacing: 5%;
+}
+
+.panelTitle {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 56px;
+  max-width: 500px;
+  letter-spacing: 0%;
+  color: #ffffff;
+}
+
+.panelDescription {
+  font-family: "General Sans";
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0%;
+  max-width: 450px;
+  color: #ffffff;
+}
+
+@media (max-width: 990px) {
+  .container {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    height: auto;
+  }
+
+  .leftPanel {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .rightPanel {
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .stepLabel {
+    margin-bottom: 1.5rem;
+  }
+
+  .indicators {
+    flex-direction: row;
+  }
+
+  .title {
+    font-size: 68px;
+  }
+
+  .title span {
+    font-size: 68px;
+  }
+
+  .panelTitle {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+
+  .rightPanelWrapper {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .panelDescription {
+    font-size: 18px;
+  }
+
+  .panelTitle {
+    font-size: 1.85rem;
+    line-height: normal;
+  }
+
+  .stepLabel {
+    font-size: 12px;
+  }
+}

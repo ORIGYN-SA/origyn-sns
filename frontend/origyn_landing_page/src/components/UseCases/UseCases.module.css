@@ -1,0 +1,130 @@
+.container {
+  padding: 96px 75px;
+  background: #f5f4f4;
+}
+
+.header {
+  width: 810px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 88px;
+  line-height: 88px;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+
+.title span {
+  font-family: "General Sans Italic";
+  font-weight: 200;
+  font-style: italic;
+}
+
+.description {
+  font-family: "General Sans";
+  color: #222526;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 5%;
+  text-transform: uppercase;
+  max-width: 710px;
+  text-align: center;
+}
+
+.grid {
+  margin-top: 83px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cardWrapper {
+  height: 478px;
+  position: relative;
+  overflow: visible;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card.top {
+  top: 0;
+}
+
+.card.bottom {
+  bottom: 0;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  /* background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); */
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 68px;
+    line-height: 56px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cardWrapper {
+    height: 330px;
+  }
+
+  .card {
+    position: relative;
+    height: 100%;
+  }
+}
