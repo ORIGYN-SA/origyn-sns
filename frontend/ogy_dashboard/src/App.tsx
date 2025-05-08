@@ -17,6 +17,7 @@ import {
   OGY_TOKEN_SWAP_CANISTER_ID,
   SNS_REWARDS_CANISTER_ID,
   TOKEN_STATS_CANISTER_ID,
+  COLLECTION_INDEX_CANISTER_ID,
 } from "@constants/index";
 
 import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
@@ -26,6 +27,7 @@ import { idlFactory as superStatsIdl } from "@services/candid/super_stats";
 import { idlFactory as tokenMetricsIdl } from "@services/candid/token_metrics";
 import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
+import { idlFactory as collectionIndexIdl } from "@services/candid/collection_index";
 
 import Layout from "@components/Layout";
 import Dashboard from "@pages/dashboard";
@@ -44,7 +46,10 @@ import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
+import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
+import Categories from "@pages/certificates/Categories";
+import Collections from "@pages/certificates/Collections";
 
 const router = createBrowserRouter([
   {
@@ -195,6 +200,18 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "calculator",
+        element: <Calculator />,
+      },
+      {
+        path: "certificates",
+        element: <Categories />,
+      },
+      {
+        path: "certificates/:category",
+        element: <Collections />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },
@@ -240,6 +257,10 @@ const App = () => {
       tokenStats: {
         canisterId: TOKEN_STATS_CANISTER_ID,
         idlFactory: superStatsIdl,
+      },
+      collectionIndex: {
+        canisterId: COLLECTION_INDEX_CANISTER_ID,
+        idlFactory: collectionIndexIdl,
       },
       OGYTokenSwap: {
         canisterId: OGY_TOKEN_SWAP_CANISTER_ID,
