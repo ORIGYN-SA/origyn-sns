@@ -33,9 +33,8 @@ const Hero = ({ data }) => {
         />
         <div className={styles.contentWrapper}>
           <div className={styles.subtitle}>
-            Secure your assets, intellectual property,
-            <br />
-            and identity fully on-chain.
+            Secure your assets, intellectual property, and identity fully
+            on-chain.
           </div>
           <div className={styles.titleWithButtons}>
             <img

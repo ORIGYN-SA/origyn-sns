@@ -1,8 +1,9 @@
+import { forwardRef } from "react";
 import styles from "./RoadmapCard.module.css";
 
-const RoadmapCard = ({ title, image, description, when }) => {
+const RoadmapCard = forwardRef(({ title, image, description, when }, ref) => {
   return (
-    <div className={styles.cardWrapper}>
+    <div className={styles.cardWrapper} ref={ref}>
       <div className={styles.left}>
         <div>
           <h1 className={styles.leftTitle}>{title}</h1>
@@ -15,6 +16,6 @@ const RoadmapCard = ({ title, image, description, when }) => {
       </div>
     </div>
   );
-};
+});
 
 export default RoadmapCard;

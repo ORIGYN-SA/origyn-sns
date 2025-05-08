@@ -121,7 +121,8 @@
   }
 
   .logo {
-    width: 400px;
+    width: 350px;
+    margin-bottom: 24px;
   }
 
   .heroContainer {
@@ -141,6 +142,19 @@
     width: 100%;
     z-index: 2;
     border-radius: 0;
+  }
+
+  .backgroundImage {
+    content: url("/ogy-background-mobile.png");
+  }
+
+  .subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 3px;
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 
