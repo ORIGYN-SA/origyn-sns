@@ -202,7 +202,6 @@ const OurRoadmap = () => {
     const wrapper = roadmapWrapperRef.current;
     if (!primaryCardRef.current || !wrapper) return;
 
-    // Wait for images to load
     const images = primaryCardRef.current.getElementsByTagName("img");
     let loadedImages = 0;
     const totalImages = images.length;
@@ -212,14 +211,11 @@ const OurRoadmap = () => {
       const cardRect = card.getBoundingClientRect();
       const wrapperRect = wrapper.getBoundingClientRect();
 
-      // Calculate how far the card is from the left edge of the wrapper
       const cardOffset = cardRect.left - wrapperRect.left;
 
-      // Calculate the center position
       const scrollPosition =
         cardOffset - wrapperRect.width / 2 + cardRect.width / 2;
 
-      // Apply the scroll
       wrapper.scrollLeft = scrollPosition;
     };
 

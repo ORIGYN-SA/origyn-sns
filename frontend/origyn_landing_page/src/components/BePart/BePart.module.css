@@ -65,3 +65,14 @@
     font-size: 68px;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .title {
+    font-size: 44px;
+    line-height: 60px;
+  }
+}

@@ -54,8 +54,7 @@ const HowItWorks = () => {
       <div className={styles.leftPanel}>
         <div>
           <h2 className={styles.title}>
-            How it
-            <br />
+            How it <br id="works-break" />
             <span>works</span>
           </h2>
           <p

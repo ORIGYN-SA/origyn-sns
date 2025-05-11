@@ -40,9 +40,8 @@
 }
 
 .italic {
-  font-family: "General Sans";
-  font-weight: 300;
-  font-style: italic;
+  font-family: "Montserrat Italic";
+  font-weight: 250;
 }
 
 .subtitle {
@@ -107,5 +106,51 @@
 @media (max-width: 990px) {
   .title {
     font-size: 68px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 48px 16px;
+    background-image: url("/cas-mobile-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .title {
+    font-size: 44px;
+    line-height: 60px;
+  }
+
+  .subtitle {
+    order: 2;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 300;
+    letter-spacing: 1.3px;
+  }
+
+  .calculatorWrapper {
+    order: 1;
+    margin-top: 24px;
+  }
+
+  .contactBoxAbsolute {
+    order: 3;
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    transform: none;
+    right: 0;
+    top: auto;
+  }
+
+  .contactText {
+    font-size: 12px;
+    line-height: 18px;
   }
 }

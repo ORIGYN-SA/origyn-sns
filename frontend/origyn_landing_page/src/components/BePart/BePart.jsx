@@ -7,7 +7,10 @@ const BePart = () => {
         <h2 className={styles.title}>
           Be part of
           <br />
-          <span className={styles.italic}>decision-making</span>
+          <span className={styles.italic}>
+            Decision <br />
+            Making
+          </span>
         </h2>
         <Button
           url="https://t.me/origynfoundation"

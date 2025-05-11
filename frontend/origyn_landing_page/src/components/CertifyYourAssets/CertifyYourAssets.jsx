@@ -6,10 +6,10 @@ import Button from "../Button/Button";
 const CertifyYourAssets = ({ id }) => {
   return (
     <div id={id} className={styles.container}>
-      <h1 className={styles.title}>
-        Certify <br />
-        <span className={styles.italic}>your assets</span>
-      </h1>
+      <div className={styles.title}>
+        Certify your <br />
+        <span className={styles.italic}>assets</span>
+      </div>
 
       <span className={styles.subtitle}>
         Use the ORIGYN Certification Calculator to instantly estimate the costs

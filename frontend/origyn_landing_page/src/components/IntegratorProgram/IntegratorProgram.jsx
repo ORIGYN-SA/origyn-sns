@@ -17,11 +17,6 @@ const IntegratorProgram = ({ id }) => {
           brand, you can offer secure, on-chain asset verification without
           rebuilding the wheel.
         </p>
-        <Button
-          url="mailto:techsupport@origyn.com"
-          styles={{ width: "max-content" }}
-          text="Join the Integrator Program"
-        />
       </div>
 
       <div className={styles.rightPanelWrapper}>
@@ -29,6 +24,14 @@ const IntegratorProgram = ({ id }) => {
           src="/integrator-program.png"
           alt="Integrator Program"
           className={styles.rightPanelImage}
+        />
+      </div>
+
+      <div className={styles.buttonContainer}>
+        <Button
+          url="mailto:techsupport@origyn.com"
+          styles={{ width: "max-content" }}
+          text="Join the Integrator Program"
         />
       </div>
     </section>

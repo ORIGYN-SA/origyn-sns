@@ -295,12 +295,12 @@ const Calculator = () => {
                     assetQuality === "pdf"
                       ? 1
                       : assetQuality === "iphone"
-                      ? 2
-                      : assetQuality === "dslr"
-                      ? 3
-                      : assetQuality === "video"
-                      ? 4
-                      : 5
+                        ? 2
+                        : assetQuality === "dslr"
+                          ? 3
+                          : assetQuality === "video"
+                            ? 4
+                            : 5
                   }
                   step={1}
                   marks
@@ -352,6 +352,7 @@ const Calculator = () => {
               </div>
             </div>
           )}
+          <div className={styles.dividerPrice}></div>
         </div>
 
         <div className={styles.totalPriceWrapper}>

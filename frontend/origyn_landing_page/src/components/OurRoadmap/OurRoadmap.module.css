@@ -38,7 +38,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 32px;
-  letter-spacing: 5%;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
   max-width: 780px;
   text-align: center;
@@ -46,7 +46,7 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 40px 20px;
+    padding: 48px 16px;
   }
 
   .header {
@@ -157,5 +157,21 @@
   .roadmapTimeline::after {
     bottom: 0;
     top: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 44px;
+    line-height: 60px;
+  }
+  .header {
+    align-items: flex-start;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 32px;
+    text-align: left;
+    max-width: 100%;
   }
 }

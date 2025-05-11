@@ -116,3 +116,10 @@
     align-items: center;
   }
 }
+
+@media (max-width: 768px) {
+  .link {
+    font-size: 12px;
+    line-height: 24px;
+  }
+}
