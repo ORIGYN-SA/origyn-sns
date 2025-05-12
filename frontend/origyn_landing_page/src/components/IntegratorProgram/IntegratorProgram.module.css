@@ -28,7 +28,7 @@
   font-size: 4.5rem;
   font-weight: 300;
   margin-bottom: 2rem;
-  font-family: "Montserrat";
+  font-family: "General Sans";
 
   font-weight: 300;
   font-size: 88px;
@@ -38,8 +38,8 @@
   color: #1a1a1a;
 }
 .program {
-  font-family: "Montserrat Italic", sans-serif;
-  font-weight: 200;
+  font-family: "General Sans Italic", sans-serif;
+  font-weight: 300;
   font-size: 88px;
   line-height: 88px;
 }

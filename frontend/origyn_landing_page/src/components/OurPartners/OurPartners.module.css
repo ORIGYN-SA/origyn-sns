@@ -1,5 +1,4 @@
 .container {
-  background-image: url("/uc-3.png");
   height: calc(100vh - 98px);
   background-size: cover;
   background-position: center;
@@ -10,6 +9,8 @@
   padding-right: 104px;
   justify-content: space-between;
   position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: darken;
 }
 
 .left {
@@ -42,7 +43,7 @@
   font-weight: 300;
   font-size: 24px;
   line-height: 100%;
-  letter-spacing: 5%;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
 }
 
@@ -50,8 +51,8 @@
   font-family: "General Sans";
   font-weight: 400;
   font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0%;
+  line-height: 24px;
+  letter-spacing: 1.3px;
 }
 
 .signature {

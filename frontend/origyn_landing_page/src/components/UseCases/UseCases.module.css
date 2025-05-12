@@ -49,7 +49,7 @@
 }
 
 .cardWrapper {
-  height: 478px;
+  height: 650px;
   position: relative;
   overflow: visible;
 }
@@ -78,11 +78,6 @@
 }
 
 .cardTitle {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 16px;
   /* background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); */
   font-family: "General Sans";
   font-weight: 400;
@@ -90,7 +85,7 @@
   line-height: 20px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: black;
 }
 
 .card:hover {
@@ -176,5 +171,24 @@
     gap: 8px;
     margin-top: 24px;
     justify-content: flex-start;
+  }
+
+  .cardWrapper {
+    height: 500px;
+  }
+  .card {
+    height: 100% !important;
+  }
+
+  .cardImage {
+    height: 500px !important;
+  }
+  .cardTitle {
+    position: absolute;
+    color: white;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
   }
 }

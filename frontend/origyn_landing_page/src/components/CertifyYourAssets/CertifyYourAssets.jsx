@@ -6,7 +6,11 @@ import Button from "../Button/Button";
 const CertifyYourAssets = ({ id }) => {
   return (
     <div id={id} className={styles.container}>
-      <div className={styles.title}>
+      <div className={styles.titleDesktop}>
+        Certify <br />
+        <span className={styles.italic}>your assets</span>
+      </div>
+      <div className={styles.titleMobile}>
         Certify your <br />
         <span className={styles.italic}>assets</span>
       </div>

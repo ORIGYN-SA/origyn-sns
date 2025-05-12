@@ -7,22 +7,23 @@ const useCases = [
     title: "Art",
     image: "/uc-1.png",
     position: "top",
-    height: "100%",
-  },
-  {
-    title: "Diamonds",
-    image: "/uc-2.png",
-    position: "bottom",
+    height: "550px",
   },
   {
     title: "Gold",
-    image: "/uc-3.jpeg",
-    height: "100%",
-    position: "top",
+    image: "/uc-2.jpg",
+    position: "bottom",
   },
   {
+    title: "Diamonds",
+    image: "/uc-3.jpg",
+    position: "top",
+    height: "610px",
+  },
+
+  {
     title: "Made In",
-    image: "/uc-5.png",
+    image: "/uc-4.jpg",
     position: "top",
   },
 ];
