@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.title {
+.titleDesktop {
   font-family: "General Sans";
   font-weight: 300;
   font-size: 88px;
@@ -16,11 +16,14 @@
   letter-spacing: 0%;
   text-align: center;
   color: #222526;
+  display: block;
 }
 
+.titleMobile {
+  display: none;
+}
 .italic {
-  font-family: "Montserrat Italic";
-  font-weight: 200;
+  font-family: "General Sans Italic";
 }
 
 .titleContainer {
@@ -60,19 +63,22 @@
   z-index: 1;
 }
 
-@media (max-width: 990px) {
-  .title {
-    font-size: 68px;
-  }
-}
-
 @media (max-width: 768px) {
   .container {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .title {
+  .titleMobile {
+    display: block;
     font-size: 44px;
     line-height: 60px;
+    font-family: "General Sans";
+    font-weight: 300;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #222526;
+  }
+  .titleDesktop {
+    display: none;
   }
 }

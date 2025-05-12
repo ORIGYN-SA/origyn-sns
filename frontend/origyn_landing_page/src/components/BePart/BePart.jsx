@@ -4,7 +4,12 @@ const BePart = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-        <h2 className={styles.title}>
+        <h2 className={styles.titleDesktop}>
+          Be part of
+          <br />
+          <span className={styles.italic}>decision-making</span>
+        </h2>
+        <h2 className={styles.titleMobile}>
           Be part of
           <br />
           <span className={styles.italic}>

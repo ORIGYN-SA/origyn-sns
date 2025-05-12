@@ -15,9 +15,18 @@
   border: 1px solid #000000;
 }
 
+.left {
+  width: 90%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #000000;
+}
+
 .right {
-  width: 45%;
-  padding: 12px;
+  width: 100%;
+  padding: 16px;
 }
 
 .rightImage {
@@ -25,16 +34,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
-}
-.left {
-  width: 55%;
-  padding-left: 42px;
-  padding-top: 33px;
-  padding-bottom: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #000000;
 }
 
 .leftTitle {
@@ -85,6 +84,7 @@
     min-width: 500px;
   }
 }
+
 @media (max-width: 768px) {
   .cardWrapper {
     width: 100%;
