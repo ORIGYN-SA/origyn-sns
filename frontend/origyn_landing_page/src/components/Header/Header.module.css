@@ -6,11 +6,11 @@
   z-index: 1000;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.9) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   padding: 20px 0;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .container {
@@ -118,5 +118,11 @@
 
   .logo {
     height: 24px;
+  }
+}
+@media (min-width: 990px) {
+  .header {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
 }

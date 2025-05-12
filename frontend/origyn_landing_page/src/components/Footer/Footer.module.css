@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  align-items: center;
+  align-items: start;
 }
 
 .link {
@@ -121,5 +121,8 @@
   .link {
     font-size: 12px;
     line-height: 24px;
+  }
+  .linkGroup {
+    align-items: center;
   }
 }

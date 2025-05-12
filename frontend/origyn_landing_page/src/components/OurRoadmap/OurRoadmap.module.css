@@ -97,7 +97,7 @@
   /* min-width: 100%; */
   left: 0;
   right: 0;
-  width: 7590px;
+  width: 19717px;
 }
 
 .roadmapTimeline::before,
@@ -209,7 +209,7 @@
 
 .yearIndicatorBtnSelected {
   outline: none;
-  background: #061937;
+  background: #061937 !important;
   color: #85f1ff;
   border-color: #061937;
   box-shadow: 0 2px 8px rgba(34, 37, 38, 0.08);
@@ -221,11 +221,6 @@
   outline: none;
 }
 
-@media (max-width: 768px) {
-  .yearIndicators {
-    justify-content: flex-start;
-  }
-}
 @media (max-width: 1200px) {
   .yearIndicators {
     margin: 32px 0;
@@ -245,6 +240,12 @@
   .yearIndicatorBtn {
     scroll-snap-align: start;
     flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .yearIndicators {
+    justify-content: flex-start;
   }
 }
 

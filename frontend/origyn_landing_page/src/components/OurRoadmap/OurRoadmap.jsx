@@ -4,60 +4,168 @@ import RoadmapCard from "./RoadmapCard";
 
 const roadmapCards = [
   {
-    title: "ORIGYN Foundation",
+    title: "ORIGYN Foundation Funded",
     description:
-      "First contributor of the ORIGYN Protocol - is funded in Neuchatel, Switzerland with the aim to launch the protocol",
+      "The ORIGYN Foundation was established in Neuchâtel, Switzerland to begin development of the ORIGYN Protocol.",
     when: "Q3 2020",
     year: 2020,
     image: "/roadmap-1.png",
   },
   {
-    title: "Creation of the ORIGYN NFT Standard v1.0",
-    description: "First Certificates Minted",
-    when: "Q3 2022 SEPTEMBER",
+    title: "OGY Token Launch",
+    description:
+      "The native utility token $OGY is created to power protocol fees, governance, and staking.",
+    when: "Q3 2021",
+    year: 2021,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "ORIGYN NFT Standard v1.0",
+    description:
+      "Launch of the first version of ORIGYN's NFT standard enabling on-chain certification.",
+    when: "Q3 2022",
     year: 2022,
     image: "/roadmap-2.png",
   },
   {
-    title: "Strategic Partnerships with Feder Italy and METALOR",
-    when: "Q3 2023 MARCH",
+    title: "Tokenomics 2.0 Update",
+    description:
+      "200 million $OGY tokens previously allocated to the Foundation are burned, initiating deflationary pressure.",
+    when: "Q4 2022",
+    year: 2022,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Minting Platform 1.0",
+    description:
+      "Launch of the first on-chain minting interface for digital certificates.",
+    when: "Q1 2023",
+    year: 2023,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Strategic Partnerships",
+    description:
+      "Strategic collaborations with FederItaly and METALOR to certify Italian-made products and tokenized gold.",
+    when: "Q1 2023",
     year: 2023,
     image: "/roadmap-3.png",
   },
   {
-    title: "Reached 10,000 OGY protocol users.",
+    title: "First Gold Purchase",
+    description:
+      "3 kg of physical gold bought and tokenized using the ORIGYN Protocol.",
+    when: "Q2 2023",
+    year: 2023,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Acquisition of CanDB",
+    description:
+      "ORIGYN acquires CanDB, a decentralized, scalable database solution optimized for NFT metadata.",
+    when: "Q2 2023",
+    year: 2023,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Tokenomics 3.0 and Dashboard Launch",
+    description:
+      "A deflationary model is introduced with Tokenomics 3.0 and the first version of the ORIGYN Dashboard is released.",
+    when: "Q3 2023",
+    year: 2023,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "10,000 Protocol Users",
+    description: "ORIGYN surpasses 10,000 unique protocol users.",
     when: "Q4 2023",
     year: 2023,
     image: "/roadmap-4.png",
   },
   {
-    title: "ORIGYN Dashboard V2",
+    title: "Launch of Gold DAO",
     description:
-      "A new certificate standard designed to improve NFT interoperability, traceability, and utility across the ORIGYN ecosystem.",
-    when: "Q2 2024 JUNE",
+      "Gold DAO becomes the first DAO built on ORIGYN to tokenize and certify physical gold on-chain.",
+    when: "Q4 2023",
+    year: 2023,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "500M OGY Donation to Gold DAO",
+    description:
+      "Half a billion $OGY tokens are donated to support Gold DAO's long-term treasury.",
+    when: "Q1 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "ORIGYN DAO Integrated with ICP SNS",
+    description:
+      "The ORIGYN DAO becomes fully decentralized and governed on the Internet Computer's SNS framework.",
+    when: "Q2 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Dashboard V2 Release",
+    description:
+      "New version of the dashboard includes live metrics, staking stats, and governance tools.",
+    when: "Q2 2024",
     year: 2024,
     image: "/integrator-program.png",
   },
   {
-    title: "Support of the launch of Cecil DAO",
+    title: "30,000 Users Milestone",
     description:
-      "Advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
+      "ORIGYN grows to over 30,000 users, a 300% increase in six months.",
+    when: "Q3 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Collaboration with Leo Caillard and Gil Sertissage",
+    description:
+      "ORIGYN certifies physical artworks and diamonds in high-profile partnerships.",
+    when: "Q3 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "ORIGYN NFT Standard v2.0",
+    description:
+      "NFT standard is upgraded to enable secure certificate transferability.",
+    when: "Q3 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Integrator Framework Launched",
+    description:
+      "Rules and onboarding structure created to guide new partners integrating with ORIGYN.",
+    when: "Q4 2024",
+    year: 2024,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Launch of Cecil DAO",
+    description:
+      "ORIGYN supports the launch of Cecil DAO to fund conservation and humanitarian projects using blockchain transparency.",
     when: "Q1 2025",
     year: 2025,
     image: "/roadmap-6.jpg",
   },
   {
-    title: "New ICRC7 NFT Standard",
+    title: "ICRC-7 NFT Standard",
     description:
-      "A new certificate standard designed to improve NFT interoperability, traceability, and utility across the ORIGYN ecosystem.",
+      "A new standard is introduced to increase certificate interoperability and ecosystem-wide utility.",
     when: "Q2 2025",
     year: 2025,
     image: "/roadmap-7.png",
   },
   {
-    title: "Launch of a Public Minting Studio",
+    title: "Public Minting Studio Launch",
     description:
-      "A self-service platform allowing anyone to mint certified, on-chain digital assets using ORIGYN's infrastructure.",
+      "A self-service tool is launched allowing anyone to mint on-chain, certified NFTs using ORIGYN infrastructure.",
     when: "Q4 2025",
     year: 2025,
     image: "/roadmap-8.png",
@@ -67,25 +175,54 @@ const roadmapCards = [
     when: "Q1 2026",
     year: 2026,
     description:
-      "Redefining luxury living, with a focus on blending safety and style.",
+      "Real-world marble sculpture is fractionalized into certified NFTs, bridging culture and on-chain value.",
     image: "/roadmap-9.png",
   },
   {
-    title: "Implementation Intellectual Property Protection",
+    title: "IP Protection Implementation",
+    description:
+      "Support for on-chain certification of intellectual property rights is integrated into the protocol.",
     when: "Q2 2026",
     year: 2026,
     image: "/roadmap-10.png",
   },
+  {
+    title: "Cross–Chain Implementation",
+    description:
+      "Cross-chain compatibility expands ORIGYN's reach to other major ecosystems.",
+    when: "Q3 2026",
+    year: 2026,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Global Wallet and Marketplace Integration",
+    description:
+      "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide.",
+    when: "Q3 2026",
+    year: 2026,
+    image: "/roadmap-1.png", // placeholder
+  },
+  {
+    title: "Becoming the Universal Certification Standard",
+    description:
+      "ORIGYN aims to establish itself as the global benchmark for digital certification across all asset classes.",
+    when: "Q1 2027",
+    year: 2027,
+    image: "/roadmap-1.png", // placeholder
+  },
 ];
 
-const yearRange = [2020, 2022, 2023, 2024, 2025, 2026];
+const yearRange = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027];
 
 const DesktopCards = () => {
+  console.log(roadmapCards.length);
   const roadmapWrapperRef = useRef(null);
   const primaryCardRef = useRef(null);
-  const [currentYear, setCurrentYear] = useState(yearRange[4]);
+  const [currentYear, setCurrentYear] = useState(2025);
   const yearRefs = useRef({});
   const firstCardIndexByYear = {};
+
+  // Build index of first cards by year
   roadmapCards.forEach((card, idx) => {
     if (card.year && firstCardIndexByYear[card.year] === undefined) {
       firstCardIndexByYear[card.year] = idx;
@@ -94,39 +231,93 @@ const DesktopCards = () => {
       }
     }
   });
+
+  // Add initial scroll to 2025
+  useEffect(() => {
+    const wrapper = roadmapWrapperRef.current;
+    const ref = yearRefs.current[2025];
+
+    if (wrapper && ref && ref.current) {
+      const card = ref.current;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+
+      // Calculate scroll position to center the card
+      const scrollLeft =
+        wrapper.scrollLeft +
+        (cardRect.left - wrapperRect.left) -
+        (wrapperRect.width - cardRect.width) / 2;
+
+      // Add a small delay to ensure all elements are properly rendered
+      setTimeout(() => {
+        wrapper.scrollTo({
+          left: scrollLeft,
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  }, []); // Empty dependency array means this runs once on mount
+
+  // Improved scroll position detection
   useEffect(() => {
     const wrapper = roadmapWrapperRef.current;
     if (!wrapper) return;
+
     const handleScroll = () => {
       const wrapperRect = wrapper.getBoundingClientRect();
       const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
-      let minDist = Infinity;
-      let foundYear = currentYear;
 
-      if (wrapper.scrollLeft === 0) {
-        foundYear = 2020;
-      } else {
-        roadmapCards.forEach((card, idx) => {
-          let ref = null;
-          if (firstCardIndexByYear[card.year] === idx) {
-            ref = yearRefs.current[card.year];
-          }
-          if (ref && ref.current) {
-            const cardRect = ref.current.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const dist = Math.abs(cardCenter - wrapperCenter);
-            if (dist < minDist) {
-              minDist = dist;
-              foundYear = card.year;
-            }
-          }
-        });
+      // If at start, select first year
+      if (wrapper.scrollLeft <= 10) {
+        setCurrentYear(yearRange[0]);
+        return;
       }
-      setCurrentYear(foundYear);
+
+      // If at end, select last year
+      if (
+        wrapper.scrollLeft >=
+        wrapper.scrollWidth - wrapper.clientWidth - 10
+      ) {
+        setCurrentYear(yearRange[yearRange.length - 1]);
+        return;
+      }
+
+      // Find closest year based on card positions
+      let closestYear = currentYear;
+      let minDistance = Infinity;
+
+      Object.entries(yearRefs.current).forEach(([year, ref]) => {
+        if (ref.current) {
+          const cardRect = ref.current.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(cardCenter - wrapperCenter);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestYear = parseInt(year);
+          }
+        }
+      });
+
+      if (closestYear !== currentYear) {
+        setCurrentYear(closestYear);
+      }
     };
-    wrapper.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => wrapper.removeEventListener("scroll", handleScroll);
+
+    // Debounce scroll handler for better performance
+    let scrollTimeout;
+    const debouncedHandleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(handleScroll, 50);
+    };
+
+    wrapper.addEventListener("scroll", debouncedHandleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      wrapper.removeEventListener("scroll", debouncedHandleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, [currentYear]);
 
   useEffect(() => {
@@ -200,23 +391,24 @@ const DesktopCards = () => {
             }
             onClick={() => {
               const ref = yearRefs.current[year];
-              if (ref && ref.current) {
+              if (ref && ref.current && roadmapWrapperRef.current) {
                 const wrapper = roadmapWrapperRef.current;
                 const card = ref.current;
-                const cardRect = card.getBoundingClientRect();
                 const wrapperRect = wrapper.getBoundingClientRect();
-                const cardOffset = cardRect.left - wrapperRect.left;
-                let scrollPosition =
-                  cardOffset - wrapperRect.width / 2 + cardRect.width / 2;
+                const cardRect = card.getBoundingClientRect();
 
-                if (year === 2026) {
-                  scrollPosition += 40;
-                }
+                // Calculate scroll position to center the card
+                const scrollLeft =
+                  wrapper.scrollLeft +
+                  (cardRect.left - wrapperRect.left) -
+                  (wrapperRect.width - cardRect.width) / 2;
 
                 wrapper.scrollTo({
-                  left: scrollPosition,
+                  left: scrollLeft,
                   behavior: "smooth",
                 });
+
+                setTimeout(() => document.activeElement.blur(), 1000);
               }
             }}
           >

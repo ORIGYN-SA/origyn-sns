@@ -45,11 +45,11 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .cardWrapper {
-  height: 650px;
+  height: 600px;
   position: relative;
   overflow: visible;
 }
