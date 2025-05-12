@@ -1,15 +1,6 @@
 export const testimonials = [
   {
     id: 1,
-    nameOne: "Leo",
-    nameTwo: "Caillard",
-    title: "Artist",
-    description:
-      "\"Inscribing on chain is something beautiful. It's exactly what we are doing with ORIGYN when we do the certification of the physical art piece. We are inscribing on chain something that exist for real… At the end of the day you need a technology that's going to push the boundaries a little bit further, a technology that can certify a physical art piece exactly with the details and with all the information needed to make it part of the blockchain, that's what you do with ORIGYN.\"",
-    backgroundImage: "/t-leo-c.jpg",
-  },
-  {
-    id: 2,
     nameOne: "Thomas",
     nameTwo: "Wenger",
     title: "Director of Metalor's Marin site",
@@ -18,7 +9,16 @@ export const testimonials = [
     backgroundImage: "/t-metalor-c.jpg",
   },
   {
-    id: 1,
+    id: 2,
+    nameOne: "Leo",
+    nameTwo: "Caillard",
+    title: "Artist",
+    description:
+      "\"Inscribing on chain is something beautiful. It's exactly what we are doing with ORIGYN when we do the certification of the physical art piece. We are inscribing on chain something that exist for real… At the end of the day you need a technology that's going to push the boundaries a little bit further, a technology that can certify a physical art piece exactly with the details and with all the information needed to make it part of the blockchain, that's what you do with ORIGYN.\"",
+    backgroundImage: "/t-leo-c.jpg",
+  },
+  {
+    id: 3,
     nameOne: "Jonatan",
     nameTwo: "Gil",
     title: "Co-Founder of Ciber",
