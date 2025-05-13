@@ -155,7 +155,7 @@ const roadmapCards = [
     image: "/roadmap-6.jpg",
   },
   {
-    title: "ICRC-7 NFT Standard",
+    title: "ICRC–7 NFT Standard",
     description:
       "A new standard is introduced to increase certificate interoperability and ecosystem-wide utility.",
     when: "Q2 2025",
@@ -423,7 +423,7 @@ const DesktopCards = () => {
 const MobileCards = () => {
   const roadmapWrapperRef = useRef(null);
   const yearIndicatorsRef = useRef(null);
-  const [currentYear, setCurrentYear] = useState(yearRange[4]);
+  const [currentYear, setCurrentYear] = useState(2025);
 
   const currentIndex = yearRange.indexOf(currentYear);
   const handlePrev = () => {
