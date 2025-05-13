@@ -50,6 +50,8 @@ const Header = () => {
           <a
             href="https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity"
             className={styles.navLink}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             CERTIFICATES
           </a>
@@ -74,10 +76,17 @@ const Header = () => {
           <a
             href="https://coinmarketcap.com/currencies/origyn-foundation/"
             className={styles.navLink}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             OGY TOKEN
           </a>
-          <a href="https://dashboard.origyn.com" className={styles.navLink}>
+          <a
+            href="https://dashboard.origyn.com"
+            className={styles.navLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             DASHBOARD
           </a>
         </nav>
