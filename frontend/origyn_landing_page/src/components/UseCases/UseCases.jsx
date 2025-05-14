@@ -16,7 +16,7 @@ const useCases = [
   },
   {
     title: "Diamonds",
-    image: "/uc-3.jpg",
+    image: "/uc-3-c.jpg",
     position: "top",
     height: "570px",
   },
