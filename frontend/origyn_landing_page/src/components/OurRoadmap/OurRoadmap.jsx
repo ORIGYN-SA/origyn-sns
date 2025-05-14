@@ -155,6 +155,14 @@ const roadmapCards = [
     image: "/roadmap-6.jpg",
   },
   {
+    title: "Acquisition of ClaimLink ",
+    description:
+      "ORIGYN acquires ClaimLink, a decentralized NFT and token distribution platform built on ICP.",
+    when: "Q1 2025",
+    year: 2025,
+    image: "/roadmap-1.png",
+  },
+  {
     title: "ICRC–7 NFT Standard",
     description:
       "A new standard is introduced to increase certificate interoperability and ecosystem-wide utility.",
