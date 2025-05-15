@@ -31,12 +31,9 @@ const Hero = ({ data }) => {
   useEffect(() => {
     const isDesktop = () => window.innerWidth >= 992;
 
-    // Toujours lire la position de base depuis le CSS pur
     const setInitialIpadY = () => {
       if (ipadRef.current) {
-        // On remet le transform à sa valeur CSS pour lire la base
         ipadRef.current.style.transform = "";
-        // Force le layout pour que le style soit à jour
         ipadRef.current.getBoundingClientRect();
         const style = window.getComputedStyle(ipadRef.current);
         const matrix = new DOMMatrixReadOnly(style.transform);
@@ -45,7 +42,7 @@ const Hero = ({ data }) => {
     };
 
     const handleScroll = () => {
-      if (!isDesktop()) return;
+      if (!isDesktop() && window.scrollY > 0) return;
       const scrollY = window.scrollY;
       setScrollY(scrollY);
       if (bgRef.current) {
@@ -59,7 +56,6 @@ const Hero = ({ data }) => {
 
     const handleResize = () => {
       if (!isDesktop()) {
-        // Reset sur mobile
         if (bgRef.current) bgRef.current.style.transform = "";
         if (ipadRef.current) ipadRef.current.style.transform = "";
       } else {
@@ -68,7 +64,6 @@ const Hero = ({ data }) => {
       }
     };
 
-    // Initialisation
     if (isDesktop()) {
       setInitialIpadY();
       handleScroll();
