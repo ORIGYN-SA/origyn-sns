@@ -8,6 +8,7 @@ const Hero = ({ data }) => {
   const ipadRef = useRef(null);
   const initialIpadY = useRef(0);
   const [scrollY, setScrollY] = useState(0);
+  const [ipadLoaded, setIpadLoaded] = useState(false); // NEW
 
   const statsData = [
     {
@@ -29,6 +30,8 @@ const Hero = ({ data }) => {
   ];
 
   useEffect(() => {
+    if (!ipadLoaded) return; // Wait for image to load
+
     const isDesktop = () => window.innerWidth >= 992;
 
     const setInitialIpadY = () => {
@@ -64,7 +67,7 @@ const Hero = ({ data }) => {
       }
     };
 
-    if (isDesktop() && window.scrollY > 0) {
+    if (isDesktop()) {
       setInitialIpadY();
       handleScroll();
     }
@@ -76,7 +79,7 @@ const Hero = ({ data }) => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [ipadLoaded]); // Only run after image is loaded
 
   return (
     <div className={styles.heroWithStats}>
@@ -126,6 +129,7 @@ const Hero = ({ data }) => {
           alt="iPad Interface"
           className={styles.ipadMock}
           style={{ willChange: "transform" }}
+          onLoad={() => setIpadLoaded(true)} // NEW
         />
         <div className={styles.bottomText}>
           <span>
