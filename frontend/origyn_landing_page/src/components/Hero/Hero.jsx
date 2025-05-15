@@ -1,9 +1,14 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import Stats from "../Stats/Stats";
 import styles from "./Hero.module.css";
 
 const Hero = ({ data }) => {
+  const bgRef = useRef(null);
+  const ipadRef = useRef(null);
+  const initialIpadY = useRef(0);
+  const [scrollY, setScrollY] = useState(0);
+
   const statsData = [
     {
       value: data?.marketCap,
@@ -23,13 +28,71 @@ const Hero = ({ data }) => {
     },
   ];
 
+  useEffect(() => {
+    const isDesktop = () => window.innerWidth >= 992;
+
+    // Toujours lire la position de base depuis le CSS pur
+    const setInitialIpadY = () => {
+      if (ipadRef.current) {
+        // On remet le transform à sa valeur CSS pour lire la base
+        ipadRef.current.style.transform = "";
+        // Force le layout pour que le style soit à jour
+        ipadRef.current.getBoundingClientRect();
+        const style = window.getComputedStyle(ipadRef.current);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        initialIpadY.current = matrix.m42;
+      }
+    };
+
+    const handleScroll = () => {
+      if (!isDesktop()) return;
+      const scrollY = window.scrollY;
+      setScrollY(scrollY);
+      if (bgRef.current) {
+        bgRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
+      }
+      if (ipadRef.current) {
+        const y = initialIpadY.current + scrollY * 0.3;
+        ipadRef.current.style.transform = `translateX(-50%) translateY(${y}px)`;
+      }
+    };
+
+    const handleResize = () => {
+      if (!isDesktop()) {
+        // Reset sur mobile
+        if (bgRef.current) bgRef.current.style.transform = "";
+        if (ipadRef.current) ipadRef.current.style.transform = "";
+      } else {
+        setInitialIpadY();
+        handleScroll();
+      }
+    };
+
+    // Initialisation
+    if (isDesktop()) {
+      setInitialIpadY();
+      handleScroll();
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.heroWithStats}>
       <div className={styles.heroContainer}>
         <img
+          id="hero-bg-img"
+          ref={bgRef}
           src="/ogy-background.png"
           alt="Background"
           className={styles.backgroundImage}
+          style={{ willChange: "transform" }}
         />
         <div className={styles.contentWrapper}>
           <div className={styles.subtitle}>
@@ -55,16 +118,19 @@ const Hero = ({ data }) => {
                 }}
               />
               <Button
-                text="Buy $OGY"
+                text={scrollY > 100 ? "Invest $OGY" : "Buy $OGY"}
                 url="https://www.mexc.com/exchange/OGY_USDT"
               />
             </div>
           </div>
         </div>
         <img
+          id="ipad-img"
+          ref={ipadRef}
           src="/ipad-mock.png"
           alt="iPad Interface"
           className={styles.ipadMock}
+          style={{ willChange: "transform" }}
         />
         <div className={styles.bottomText}>
           <span>

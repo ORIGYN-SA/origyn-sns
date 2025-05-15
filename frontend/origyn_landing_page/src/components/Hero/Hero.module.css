@@ -54,7 +54,7 @@
   z-index: 1;
   bottom: 0;
   left: 54%;
-  transform: translateX(-50%) translateY(50%);
+  transform: translateX(-50%) translateY(45%);
   filter: drop-shadow(-100px 100px 100px rgba(0, 0, 0, 0.5));
 }
 
