@@ -129,7 +129,7 @@ const Hero = ({ data }) => {
           alt="iPad Interface"
           className={styles.ipadMock}
           style={{ willChange: "transform" }}
-          onLoad={() => setIpadLoaded(true)} // NEW
+          onLoad={() => setIpadLoaded(true)}
         />
         <div className={styles.bottomText}>
           <span>

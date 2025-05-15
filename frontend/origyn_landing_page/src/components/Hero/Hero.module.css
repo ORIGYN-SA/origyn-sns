@@ -29,6 +29,7 @@
   width: 100%;
   max-width: 1440px;
   padding: 0 48px;
+  position: relative;
 }
 
 .subtitle {
@@ -48,14 +49,16 @@
 }
 
 .ipadMock {
-  width: 36%;
-  max-width: 600px;
+  width: 600px;
   position: absolute;
   z-index: 1;
   bottom: 0;
   left: 54%;
-  transform: translateX(-50%) translateY(45%);
+  transform: translateX(-50%) translateY(43%);
   filter: drop-shadow(-100px 100px 100px rgba(0, 0, 0, 0.5));
+  /* @media (min-width: 1200px) {
+    width: 600px;
+  } */
 }
 
 .buttonGroup {
@@ -93,8 +96,8 @@
   }
 
   .ipadMock {
-    width: 40%;
-    transform: translateX(-50%) translateY(30%);
+    width: 400px;
+    transform: translateX(-50%) translateY(14%);
   }
 }
 
