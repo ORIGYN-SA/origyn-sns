@@ -42,7 +42,7 @@ const Hero = ({ data }) => {
     };
 
     const handleScroll = () => {
-      if (!isDesktop() && window.scrollY > 0) return;
+      if (!isDesktop()) return;
       const scrollY = window.scrollY;
       setScrollY(scrollY);
       if (bgRef.current) {
@@ -64,7 +64,7 @@ const Hero = ({ data }) => {
       }
     };
 
-    if (isDesktop()) {
+    if (isDesktop() && window.scrollY > 0) {
       setInitialIpadY();
       handleScroll();
     }
