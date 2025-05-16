@@ -118,7 +118,7 @@ const Calculator = () => {
               <div className={styles.inputGroup}>
                 <div className={styles.label}>
                   <label className={styles.labelText}>
-                    How many pieces would you like to certify?
+                    Number of Collections
                   </label>
                   <TooltipInfo id="tooltip-collections-count">
                     A collection is a bucket/group of assets for example gold,
