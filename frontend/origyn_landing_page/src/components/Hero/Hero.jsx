@@ -7,7 +7,7 @@ const Hero = ({ data }) => {
   const bgRef = useRef(null);
   const ipadRef = useRef(null);
   const initialIpadY = useRef(0);
-  const [scrollY, setScrollY] = useState(0);
+  const [setScrollY] = useState(0);
   const [ipadLoaded, setIpadLoaded] = useState(false); // NEW
 
   const statsData = [
