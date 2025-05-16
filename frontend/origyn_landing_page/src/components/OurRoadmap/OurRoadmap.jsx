@@ -223,7 +223,6 @@ const roadmapCards = [
 const yearRange = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027];
 
 const DesktopCards = () => {
-  console.log(roadmapCards.length);
   const roadmapWrapperRef = useRef(null);
   const primaryCardRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);

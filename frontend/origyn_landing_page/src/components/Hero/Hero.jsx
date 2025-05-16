@@ -7,7 +7,8 @@ const Hero = ({ data }) => {
   const bgRef = useRef(null);
   const ipadRef = useRef(null);
   const initialIpadY = useRef(0);
-  const [setScrollY] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [scrollY, setScrollY] = useState(0);
   const [ipadLoaded, setIpadLoaded] = useState(false); // NEW
 
   const statsData = [
@@ -92,7 +93,6 @@ const Hero = ({ data }) => {
           className={styles.backgroundImage}
           style={{ willChange: "transform" }}
         />
-        <div className={styles.gradientOverlay} />
         <div className={styles.contentWrapper}>
           <div className={styles.subtitleDesktop}>
             Secure your assets, intellectual property, <br />

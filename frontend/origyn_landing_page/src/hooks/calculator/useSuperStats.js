@@ -28,7 +28,6 @@ export const useSuperStats = () => {
             parseInt(stats?.pop()?.total_unique_accounts) + PRE_SNS_ACCOUNTS,
         });
       } catch (err) {
-        console.log("🚀 ~ fetchTokenMetrics ~ err:", err);
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setLoading(false);
