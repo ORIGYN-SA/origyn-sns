@@ -92,10 +92,16 @@ const Hero = ({ data }) => {
           className={styles.backgroundImage}
           style={{ willChange: "transform" }}
         />
+        <div className={styles.gradientOverlay} />
         <div className={styles.contentWrapper}>
-          <div className={styles.subtitle}>
-            Secure your assets, intellectual property, and identity fully
-            on-chain.
+          <div className={styles.subtitleDesktop}>
+            Secure your assets, intellectual property, <br />
+            and identity fully on-chain.
+          </div>
+          <div className={styles.subtitleMobile}>
+            Secure your assets, <br />
+            intellectual property, <br />
+            and identity fully on-chain.
           </div>
           <div className={styles.titleWithButtons}>
             <img
@@ -116,7 +122,7 @@ const Hero = ({ data }) => {
                 }}
               />
               <Button
-                text={scrollY > 100 ? "Invest $OGY" : "Buy $OGY"}
+                text="Buy $OGY"
                 url="https://www.mexc.com/exchange/OGY_USDT"
               />
             </div>

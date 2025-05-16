@@ -51,15 +51,19 @@ const Calculator = () => {
   useEffect(() => {
     if (pricing) {
       const total =
-        calculations.collections * pricing.collectionCreation +
-        calculations.storage * pricing.storageCreation +
-        calculations.certificates * pricing.certificateCreation +
-        calculations.certificateUpdates * pricing.certificateUpdate +
-        calculations.storageSize * pricing.perMbSize;
+        mode === "simple"
+          ? calculations.certificates * pricing.certificateCreation +
+            calculations.certificateUpdates * pricing.certificateUpdate +
+            calculations.storageSize * pricing.perMbSize
+          : calculations.collections * pricing.collectionCreation +
+            calculations.storage * pricing.storageCreation +
+            calculations.certificates * pricing.certificateCreation +
+            calculations.certificateUpdates * pricing.certificateUpdate +
+            calculations.storageSize * pricing.perMbSize;
 
       setTotalPrice(total);
     }
-  }, [calculations, pricing]);
+  }, [calculations, pricing, mode]);
 
   const handleInputChange = (field) => (event) => {
     const value = parseFloat(event.target.value) || 0;
@@ -109,73 +113,79 @@ const Calculator = () => {
         </div>
 
         <div className={styles.calculatorGrid}>
-          <div className={styles.inputGroup}>
-            <div className={styles.label}>
-              <label className={styles.labelText}>Number of Collections</label>
-              <TooltipInfo id="tooltip-collections-count">
-                A collection is a bucket/group of assets for example gold,
-                diamond is a separate collection.
-                <br />
-                <br />1 collection deployed ={" "}
-                <span className={styles.costItemValue}>
-                  {pricing.collectionCreation.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}{" "}
-                  <img
-                    className={styles.ogyLogo}
-                    src="/ogy_logo.svg"
-                    alt="OGY Logo"
+          {mode === "advanced" && (
+            <>
+              <div className={styles.inputGroup}>
+                <div className={styles.label}>
+                  <label className={styles.labelText}>
+                    How many pieces would you like to certify?
+                  </label>
+                  <TooltipInfo id="tooltip-collections-count">
+                    A collection is a bucket/group of assets for example gold,
+                    diamond is a separate collection.
+                    <br />
+                    <br />1 collection deployed ={" "}
+                    <span className={styles.costItemValue}>
+                      {pricing.collectionCreation.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}{" "}
+                      <img
+                        className={styles.ogyLogo}
+                        src="/ogy_logo.svg"
+                        alt="OGY Logo"
+                      />
+                    </span>
+                  </TooltipInfo>
+                </div>
+                <div className={styles.inputWrapper}>
+                  <input
+                    type="number"
+                    min="0"
+                    className={styles.input}
+                    value={calculations.collections || ""}
+                    onChange={handleInputChange("collections")}
                   />
-                </span>
-              </TooltipInfo>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                type="number"
-                min="0"
-                className={styles.input}
-                value={calculations.collections || ""}
-                onChange={handleInputChange("collections")}
-              />
-            </div>
-          </div>
+                </div>
+              </div>
 
-          <div className={styles.inputGroup}>
-            <div className={styles.label}>
-              <label className={styles.labelText}>
-                Number of Storage Units{" "}
-                <span className={styles.optionalText}>(optional)</span>
-              </label>
-              <TooltipInfo id="tooltip-storage-units">
-                Storage canisters are used to store your certificate data. You
-                might need to spawn a new storage canister in case you run out
-                of space.
-                <br />
-                <br />1 storage canister ={" "}
-                <span className={styles.costItemValue}>
-                  {pricing.storageCreation.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}{" "}
-                  <img
-                    className={styles.ogyLogo}
-                    src="/ogy_logo.svg"
-                    alt="OGY Logo"
+              <div className={styles.inputGroup}>
+                <div className={styles.label}>
+                  <label className={styles.labelText}>
+                    Number of Storage Units{" "}
+                    <span className={styles.optionalText}>(optional)</span>
+                  </label>
+                  <TooltipInfo id="tooltip-storage-units">
+                    Storage canisters are used to store your certificate data.
+                    You might need to spawn a new storage canister in case you
+                    run out of space.
+                    <br />
+                    <br />1 storage canister ={" "}
+                    <span className={styles.costItemValue}>
+                      {pricing.storageCreation.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}{" "}
+                      <img
+                        className={styles.ogyLogo}
+                        src="/ogy_logo.svg"
+                        alt="OGY Logo"
+                      />
+                    </span>
+                  </TooltipInfo>
+                </div>
+                <div className={styles.inputWrapper}>
+                  <input
+                    type="number"
+                    min="0"
+                    className={styles.input}
+                    value={calculations.storage || ""}
+                    onChange={handleInputChange("storage")}
                   />
-                </span>
-              </TooltipInfo>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                type="number"
-                min="0"
-                className={styles.input}
-                value={calculations.storage || ""}
-                onChange={handleInputChange("storage")}
-              />
-            </div>
-          </div>
+                </div>
+              </div>
+            </>
+          )}
 
           <div className={styles.inputGroup}>
             <div className={styles.label}>
@@ -386,38 +396,42 @@ const Calculator = () => {
           <h4 className={styles.costBreakdownTitle}>Cost Breakdown</h4>
           <div className={styles.divider}></div>
           <div className={styles.costBreakdownItems}>
-            <div className={styles.costItem}>
-              <span>Collections ({calculations.collections})</span>
-              <span className={styles.costItemValue}>
-                {(
-                  calculations.collections * pricing.collectionCreation
-                ).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                <img
-                  className={styles.ogyLogo}
-                  src="/ogy_logo.svg"
-                  alt="OGY Logo"
-                />
-              </span>
-            </div>
-            <div className={styles.costItem}>
-              <span>Storage Units ({calculations.storage})</span>
-              <span className={styles.costItemValue}>
-                {(
-                  calculations.storage * pricing.storageCreation
-                ).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                <img
-                  className={styles.ogyLogo}
-                  src="/ogy_logo.svg"
-                  alt="OGY Logo"
-                />
-              </span>
-            </div>
+            {mode === "advanced" && (
+              <>
+                <div className={styles.costItem}>
+                  <span>Collections ({calculations.collections})</span>
+                  <span className={styles.costItemValue}>
+                    {(
+                      calculations.collections * pricing.collectionCreation
+                    ).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                    <img
+                      className={styles.ogyLogo}
+                      src="/ogy_logo.svg"
+                      alt="OGY Logo"
+                    />
+                  </span>
+                </div>
+                <div className={styles.costItem}>
+                  <span>Storage Units ({calculations.storage})</span>
+                  <span className={styles.costItemValue}>
+                    {(
+                      calculations.storage * pricing.storageCreation
+                    ).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                    <img
+                      className={styles.ogyLogo}
+                      src="/ogy_logo.svg"
+                      alt="OGY Logo"
+                    />
+                  </span>
+                </div>
+              </>
+            )}
             <div className={styles.costItem}>
               <span>Certificates ({calculations.certificates})</span>
               <span className={styles.costItemValue}>
