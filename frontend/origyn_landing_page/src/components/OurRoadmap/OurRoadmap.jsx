@@ -17,7 +17,7 @@ const roadmapCards = [
       "The native utility token $OGY is created to power protocol fees, governance, and staking.",
     when: "Q3 2021",
     year: 2021,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-ogy-launch.jpg",
   },
   {
     title: "ORIGYN NFT Standard v1.0",
@@ -25,7 +25,7 @@ const roadmapCards = [
       "Launch of the first version of ORIGYN's NFT standard enabling on-chain certification.",
     when: "Q3 2022",
     year: 2022,
-    image: "/roadmap-2.png",
+    image: "/roadmap-creation.jpg",
   },
   {
     title: "Tokenomics 2.0 Update",
@@ -33,7 +33,7 @@ const roadmapCards = [
       "200 million $OGY tokens previously allocated to the Foundation are burned, initiating deflationary pressure.",
     when: "Q4 2022",
     year: 2022,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-tokenmoics.png",
   },
   {
     title: "Minting Platform 1.0",
@@ -41,7 +41,7 @@ const roadmapCards = [
       "Launch of the first on-chain minting interface for digital certificates.",
     when: "Q1 2023",
     year: 2023,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-floating.png",
   },
   {
     title: "Strategic Partnerships",
@@ -65,7 +65,7 @@ const roadmapCards = [
       "ORIGYN acquires CanDB, a decentralized, scalable database solution optimized for NFT metadata.",
     when: "Q2 2023",
     year: 2023,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-candb.jpg",
   },
   {
     title: "Tokenomics 3.0 and Dashboard Launch",
@@ -73,7 +73,7 @@ const roadmapCards = [
       "A deflationary model is introduced with Tokenomics 3.0 and the first version of the ORIGYN Dashboard is released.",
     when: "Q3 2023",
     year: 2023,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-tokenomics-3.jpg",
   },
   {
     title: "10,000 Protocol Users",
@@ -88,7 +88,7 @@ const roadmapCards = [
       "Gold DAO becomes the first DAO built on ORIGYN to tokenize and certify physical gold on-chain.",
     when: "Q4 2023",
     year: 2023,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-golddao.png",
   },
   {
     title: "500M OGY Donation to Gold DAO",
@@ -96,7 +96,7 @@ const roadmapCards = [
       "Half a billion $OGY tokens are donated to support Gold DAO's long-term treasury.",
     when: "Q1 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-500m.png",
   },
   {
     title: "ORIGYN DAO Integrated with ICP SNS",
@@ -104,7 +104,7 @@ const roadmapCards = [
       "The ORIGYN DAO becomes fully decentralized and governed on the Internet Computer's SNS framework.",
     when: "Q2 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-sns.jpg",
   },
   {
     title: "Dashboard V2 Release",
@@ -120,7 +120,7 @@ const roadmapCards = [
       "ORIGYN grows to over 30,000 users, a 300% increase in six months.",
     when: "Q3 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-30k.png",
   },
   {
     title: "Collaboration with Leo Caillard and Gil Sertissage",
@@ -128,7 +128,7 @@ const roadmapCards = [
       "ORIGYN certifies physical artworks and diamonds in high-profile partnerships.",
     when: "Q3 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-leo-gil.jpg",
   },
   {
     title: "ORIGYN NFT Standard v2.0",
@@ -136,7 +136,7 @@ const roadmapCards = [
       "NFT standard is upgraded to enable secure certificate transferability.",
     when: "Q3 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-standard-v2.png",
   },
   {
     title: "Integrator Framework Launched",
@@ -144,7 +144,7 @@ const roadmapCards = [
       "Rules and onboarding structure created to guide new partners integrating with ORIGYN.",
     when: "Q4 2024",
     year: 2024,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-integrator.png",
   },
   {
     title: "Launch of Cecil DAO",
@@ -200,7 +200,7 @@ const roadmapCards = [
       "Cross-chain compatibility expands ORIGYN's reach to other major ecosystems.",
     when: "Q3 2026",
     year: 2026,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-chain.png",
   },
   {
     title: "Global Wallet and Marketplace Integration",
@@ -208,7 +208,7 @@ const roadmapCards = [
       "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide.",
     when: "Q3 2026",
     year: 2026,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-wallet-int.png",
   },
   {
     title: "Becoming the Universal Certification Standard",
@@ -216,7 +216,7 @@ const roadmapCards = [
       "ORIGYN aims to establish itself as the global benchmark for digital certification across all asset classes.",
     when: "Q1 2027",
     year: 2027,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-last.png", // placeholder
   },
 ];
 
