@@ -432,20 +432,20 @@ const MobileCards = () => {
   const yearIndicatorsRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);
 
-  useEffect(() => {
-    if (yearIndicatorsRef.current) {
-      const selectedButton = yearIndicatorsRef.current.querySelector(
-        `.${styles.yearIndicatorBtnSelected}`
-      );
-      if (selectedButton) {
-        selectedButton.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }
-  }, [currentYear]);
+  // useEffect(() => {
+  //   if (yearIndicatorsRef.current && window.innerWidth <= 1200) {
+  //     const selectedButton = yearIndicatorsRef.current.querySelector(
+  //       `.${styles.yearIndicatorBtnSelected}`
+  //     );
+  //     if (selectedButton) {
+  //       selectedButton.scrollIntoView({
+  //         behavior: "smooth",
+  //         block: "nearest",
+  //         inline: "center",
+  //       });
+  //     }
+  //   }
+  // }, [currentYear]);
 
   const currentIndex = yearRange.indexOf(currentYear);
   const handlePrev = () => {
@@ -469,7 +469,7 @@ const MobileCards = () => {
 
   return (
     <>
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", overflow: "hidden" }}>
         <div className={styles.yearIndicators} ref={yearIndicatorsRef}>
           {yearRange.map((year) => (
             <button
