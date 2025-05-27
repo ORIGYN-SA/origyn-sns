@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 
+const MAX_RETRIES = 5;
+const RETRY_DELAY = 2000; // 2 seconds delay between retries
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const useMarketCap = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMarketCap = async () => {
+    const fetchMarketCap = async (retryCount = 0) => {
       try {
         const supplyResponse = await fetch(
           `https://${
@@ -32,10 +37,17 @@ export const useMarketCap = () => {
           circulatingSupply,
           price: priceData.ogyPrice,
         });
+        setError(null);
       } catch (err) {
+        if (retryCount < MAX_RETRIES) {
+          await sleep(RETRY_DELAY);
+          return fetchMarketCap(retryCount + 1);
+        }
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
-        setLoading(false);
+        if (retryCount === MAX_RETRIES) {
+          setLoading(false);
+        }
       }
     };
 

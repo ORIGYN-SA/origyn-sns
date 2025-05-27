@@ -57,7 +57,7 @@ const roadmapCards = [
       "3 kg of physical gold bought and tokenized using the ORIGYN Protocol.",
     when: "Q2 2023",
     year: 2023,
-    image: "/roadmap-1.png", // placeholder
+    image: "/roadmap-first-gold.png",
   },
   {
     title: "Acquisition of CanDB",
@@ -160,7 +160,7 @@ const roadmapCards = [
       "ORIGYN acquires ClaimLink, a decentralized NFT and token distribution platform built on ICP.",
     when: "Q1 2025",
     year: 2025,
-    image: "/roadmap-1.png",
+    image: "/roadmap-claimlink.png",
   },
   {
     title: "ICRC–7 NFT Standard",
@@ -431,6 +431,21 @@ const MobileCards = () => {
   const roadmapWrapperRef = useRef(null);
   const yearIndicatorsRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);
+
+  useEffect(() => {
+    if (yearIndicatorsRef.current) {
+      const selectedButton = yearIndicatorsRef.current.querySelector(
+        `.${styles.yearIndicatorBtnSelected}`
+      );
+      if (selectedButton) {
+        selectedButton.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  }, [currentYear]);
 
   const currentIndex = yearRange.indexOf(currentYear);
   const handlePrev = () => {
