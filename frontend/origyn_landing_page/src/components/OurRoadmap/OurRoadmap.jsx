@@ -226,6 +226,8 @@ const DesktopCards = () => {
   const roadmapWrapperRef = useRef(null);
   const primaryCardRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(true);
   const yearRefs = useRef({});
   const firstCardIndexByYear = {};
 
@@ -265,11 +267,33 @@ const DesktopCards = () => {
     }
   }, []); // Empty dependency array means this runs once on mount
 
-  // Improved scroll position detection
+  // Simplified scroll position detection for fade effects
   useEffect(() => {
     const wrapper = roadmapWrapperRef.current;
     if (!wrapper) return;
 
+    const checkScroll = () => {
+      const isAtStart = wrapper.scrollLeft <= 0;
+      const isAtEnd =
+        wrapper.scrollLeft >= wrapper.scrollWidth - wrapper.clientWidth - 1;
+
+      setShowLeftFade(!isAtStart);
+      setShowRightFade(!isAtEnd);
+    };
+
+    wrapper.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+    checkScroll();
+
+    return () => {
+      wrapper.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const wrapper = roadmapWrapperRef.current;
+    if (!wrapper) return;
     const handleScroll = () => {
       const wrapperRect = wrapper.getBoundingClientRect();
       const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
@@ -376,16 +400,25 @@ const DesktopCards = () => {
   }, []);
   return (
     <>
-      <div className={styles.roadmapCardsWrapper} ref={roadmapWrapperRef}>
-        <div className={styles.roadmapTimeline}></div>
-        {roadmapCards.map((card, idx) => {
-          const ref =
-            firstCardIndexByYear[card.year] === idx
-              ? yearRefs.current[card.year]
-              : null;
-          return <RoadmapCard key={idx} {...card} ref={ref} />;
-        })}
+      <div className={styles.roadmapContainer}>
+        <div className={styles.roadmapCardsWrapper} ref={roadmapWrapperRef}>
+          <div className={styles.roadmapTimeline}></div>
+          {roadmapCards.map((card, idx) => {
+            const ref =
+              firstCardIndexByYear[card.year] === idx
+                ? yearRefs.current[card.year]
+                : null;
+            return <RoadmapCard key={idx} {...card} ref={ref} />;
+          })}
+        </div>
+        <div
+          className={`${styles.fadeLeft} ${showLeftFade ? styles.visible : ""}`}
+        />
+        <div
+          className={`${styles.fadeRight} ${showRightFade ? styles.visible : ""}`}
+        />
       </div>
+      <div className={styles.sliderContainer}></div>
       <div className={styles.yearIndicators}>
         {yearRange.map((year) => (
           <button
@@ -404,7 +437,6 @@ const DesktopCards = () => {
                 const wrapperRect = wrapper.getBoundingClientRect();
                 const cardRect = card.getBoundingClientRect();
 
-                // Calculate scroll position to center the card
                 const scrollLeft =
                   wrapper.scrollLeft +
                   (cardRect.left - wrapperRect.left) -
