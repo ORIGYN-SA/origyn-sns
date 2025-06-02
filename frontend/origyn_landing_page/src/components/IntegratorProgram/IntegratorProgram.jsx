@@ -21,7 +21,7 @@ const IntegratorProgram = ({ id }) => {
 
       <div className={styles.rightPanelWrapper}>
         <img
-          src="/integrator-program.png"
+          src="/integrator-program.jpg"
           alt="Integrator Program"
           className={styles.rightPanelImage}
         />

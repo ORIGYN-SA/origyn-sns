@@ -10,7 +10,7 @@ const steps = [
       step: "STEP 1",
       title: "Mint Your Digital Certificate",
       description: "Upload asset details, mint a blockchain certificate.",
-      bg: "/hiw-1.png",
+      bg: "/hiw-1.jpg",
     },
   },
   {
@@ -21,7 +21,7 @@ const steps = [
       step: "STEP 2",
       title: "Verify & Authenticate",
       description: "Ensure asset authenticity and ownership transparency.",
-      bg: "/hiw-2.png",
+      bg: "/hiw-2.jpg",
     },
   },
   {
@@ -33,7 +33,7 @@ const steps = [
       title: "Transfer & Trace",
       description:
         "Utilize and trace your certified asset for DeFi, resale, or investment.",
-      bg: "/hiw-3.png",
+      bg: "/hiw-3.jpg",
     },
   },
 ];

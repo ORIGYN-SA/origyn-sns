@@ -117,7 +117,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 48px 16px;
-    background-image: url("/cas-mobile-bg.png");
+    background-image: url("/cas-mobile-bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
