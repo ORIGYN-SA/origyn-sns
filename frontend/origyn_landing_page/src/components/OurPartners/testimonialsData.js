@@ -1,9 +1,9 @@
 export const testimonials = [
   {
     id: 1,
-    nameOne: "Thomas",
-    nameTwo: "Wenger",
-    title: "Director of Metalor's Marin site",
+    nameOne: "Nicolas",
+    nameTwo: "Carrera",
+    title: "CEO of Metalor",
     description:
       '"ORIGYN is the most advanced digital certification technology and the most comprehensive in the world. All data is fully stored in a blockchain to ensure that the certificates are immutable and transparent. Metalor is pleased to work with a Neuchâtel-based Fintech company like ORIGYN to bring an innovative solution to the markets."',
     backgroundImage: "/t-metalor.jpg",
