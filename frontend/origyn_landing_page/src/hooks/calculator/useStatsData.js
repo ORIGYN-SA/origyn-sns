@@ -41,16 +41,16 @@ export const useStatsData = () => {
 
         setData((prevData) => ({
           ...prevData,
-          tvl: tvlData.total_value_locked
+          tvl: `$${tvlData.total_value_locked
             ?.toLocaleString("en-US")
-            .replace(/,/g, " "),
+            .replace(/,/g, " ")}`,
           users: superStats?.users
             ? superStats.users.toLocaleString("en-US").replace(/,/g, " ")
             : prevData.users,
           marketCap: marketCapData?.marketCap
-            ? parseInt(marketCapData?.marketCap)
+            ? `$${parseInt(marketCapData?.marketCap)
                 ?.toLocaleString("en-US")
-                .replace(/,/g, " ")
+                .replace(/,/g, " ")}`
             : prevData.marketCap,
           price: marketCapData?.price
             ? `$${marketCapData.price

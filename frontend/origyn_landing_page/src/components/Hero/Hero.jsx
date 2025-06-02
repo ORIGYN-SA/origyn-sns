@@ -17,12 +17,12 @@ const Hero = ({ data }) => {
       title: "$OGY Market Cap",
     },
     {
-      value: data?.users,
-      title: "Users",
-    },
-    {
       value: data?.tvl,
       title: "Total Value Locked (TVL) of certified assets in usd",
+    },
+    {
+      value: data?.users,
+      title: "Users",
     },
     {
       value: data?.assets,
