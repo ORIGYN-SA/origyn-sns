@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.1.2] - 2025-06-02
+
+#### Added
+
+- Updates the `Stats` section on the landing page.
+
 ### [1.1.1] - 2025-06-02
 
 #### Added
