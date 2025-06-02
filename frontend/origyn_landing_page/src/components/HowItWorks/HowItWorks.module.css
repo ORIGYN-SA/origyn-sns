@@ -32,7 +32,7 @@
 }
 
 .title span {
-  font-family: "Montserrat Italic";
+  font-family: "General Sans Italic";
   font-weight: 200;
   font-style: italic;
   font-size: 96px;
@@ -149,14 +149,13 @@
 @media (max-width: 990px) {
   .container {
     flex-direction: column;
-    padding: 2rem 1rem;
+    padding: 48px 16px;
     gap: 2rem;
     height: auto;
   }
 
   .leftPanel {
-    padding-right: 0;
-    padding-bottom: 0;
+    padding: 0;
   }
 
   .rightPanel {
@@ -202,5 +201,28 @@
 
   .stepLabel {
     font-size: 12px;
+  }
+
+  .title {
+    font-size: 44px;
+    line-height: 60px;
+    margin-bottom: 24px;
+  }
+
+  .title span {
+    font-size: 44px;
+    line-height: 60px;
+  }
+
+  .rightPanel {
+    margin: 0;
+    padding: 16px;
+  }
+
+  .rightPanelWrapper {
+    min-height: 280px;
+  }
+  .rightPanelImage {
+    display: none;
   }
 }

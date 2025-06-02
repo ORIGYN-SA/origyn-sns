@@ -1,7 +1,6 @@
 .wrapper {
   position: relative;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,6 +17,7 @@
   border-radius: 20px;
   position: relative;
   z-index: 1;
+  box-shadow: 0 0 91px rgba(255, 255, 255, 0.2);
 }
 
 .modeToggle {
@@ -62,28 +62,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-}
-
-@media (max-width: 767px) {
-  .calculatorGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-  }
-  .container {
-    width: 100%;
-  }
-  .calculatorGrid > div {
-    width: 100%;
-  }
-  .inputGroup {
-    width: 100%;
-  }
-  .inputWrapper {
-    width: 100%;
-    min-width: 0;
-  }
 }
 
 .inputGroup {
@@ -303,4 +281,71 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 3px;
+}
+.dividerPrice {
+  display: none;
+}
+@media (max-width: 768px) {
+  .calculatorGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  .container {
+    width: 100%;
+    padding: 16px;
+  }
+  .calculatorGrid > div {
+    width: 100%;
+  }
+  .inputGroup {
+    width: 100%;
+  }
+  .inputWrapper {
+    width: 100%;
+    min-width: 0;
+  }
+  .modeToggle {
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .modeButton,
+  .modeButtonActive {
+    flex: 1 1 50%;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .costBreakdown {
+    padding: 0;
+  }
+
+  .dividerPrice {
+    display: block;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .label {
+    justify-content: space-between;
+  }
+  .label img {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .labelText {
+    font-size: 12px;
+  }
+  .assetQualityLabel {
+    font-size: 12px;
+  }
+  .storageSize {
+    font-size: 12px;
+  }
 }

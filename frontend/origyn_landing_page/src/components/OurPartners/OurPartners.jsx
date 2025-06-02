@@ -5,8 +5,19 @@ import { testimonials } from "./testimonialsData";
 
 const OurPartners = ({ id }) => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const currentTestimonial = testimonials[currentTestimonialIndex];
   const intervalRef = useRef(null);
+  const imagesRef = useRef({});
+
+  // Preload all testimonial background images
+  useEffect(() => {
+    testimonials.forEach((testimonial) => {
+      const img = new Image();
+      img.src = testimonial.backgroundImage;
+      imagesRef.current[testimonial.backgroundImage] = img;
+    });
+  }, []);
 
   useEffect(() => {
     if (intervalRef.current) {
@@ -14,10 +25,14 @@ const OurPartners = ({ id }) => {
     }
 
     intervalRef.current = setInterval(() => {
-      setCurrentTestimonialIndex(
-        (prevIndex) => (prevIndex + 1) % testimonials.length
-      );
-    }, 8000);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentTestimonialIndex(
+          (prevIndex) => (prevIndex + 1) % testimonials.length
+        );
+        setIsTransitioning(false);
+      }, 500);
+    }, 12000);
 
     return () => {
       if (intervalRef.current) {
@@ -27,13 +42,17 @@ const OurPartners = ({ id }) => {
   }, [currentTestimonialIndex]);
 
   const handleIndicatorClick = (index) => {
-    setCurrentTestimonialIndex(index);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentTestimonialIndex(index);
+      setIsTransitioning(false);
+    }, 500);
   };
 
   return (
     <>
       <div
-        className={styles.container}
+        className={`${styles.container} ${isTransitioning ? styles.fadeOut : ""}`}
         id={id}
         style={{
           backgroundImage: `url(${currentTestimonial.backgroundImage})`,

@@ -1,5 +1,5 @@
 .container {
-  background-color: #05193666;
+  background-color: #051936;
   padding-top: 96px;
   padding-bottom: 96px;
   display: flex;
@@ -16,21 +16,22 @@
 
 .gradientBackground {
   position: absolute;
-  top: -250px;
+  top: -209px;
   left: 50%;
-  transform: translateX(-44%);
+  transform: translateX(-41%);
   width: 100%;
-  height: 100%;
+  height: 95%;
+
   background-image: radial-gradient(
-    circle at 31%,
-    #75ff8040 0%,
-    transparent 28%
+    circle at 34%,
+    #75ff8040 -7%,
+    transparent 23%
   );
   z-index: 0;
   pointer-events: none;
 }
 
-.title {
+.titleDesktop {
   font-family: "General Sans";
   font-weight: 300;
   font-size: 96px;
@@ -39,10 +40,13 @@
   text-align: center;
 }
 
+.titleMobile {
+  display: none;
+}
+
 .italic {
-  font-family: "General Sans";
-  font-weight: 300;
-  font-style: italic;
+  font-family: "Montserrat Italic";
+  font-weight: 250;
 }
 
 .subtitle {
@@ -105,7 +109,75 @@
 }
 
 @media (max-width: 990px) {
-  .title {
+  .titleDesktop {
     font-size: 68px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 48px 16px;
+    background-image: url("/cas-mobile-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .titleMobile {
+    display: block;
+    font-size: 44px;
+    line-height: 60px;
+    font-family: "General Sans";
+    font-weight: 300;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .gradientBackground {
+    top: -283px;
+    left: 49%;
+    transform: translateX(-60%);
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+      circle at 33%,
+      #75ff8040 -7%,
+      transparent 28%
+    );
+  }
+
+  .titleDesktop {
+    display: none;
+  }
+
+  .subtitle {
+    order: 2;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 300;
+    letter-spacing: 1.3px;
+  }
+
+  .calculatorWrapper {
+    order: 1;
+    margin-top: 24px;
+  }
+
+  .contactBoxAbsolute {
+    order: 3;
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    transform: none;
+    right: 0;
+    top: auto;
+  }
+
+  .contactText {
+    font-size: 12px;
+    line-height: 18px;
   }
 }

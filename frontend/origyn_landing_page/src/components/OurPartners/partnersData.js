@@ -31,16 +31,11 @@ export const partners = [
   },
   {
     id: 7,
-    name: "Bochsler Finance",
-    logo: "/p-bf.png",
-  },
-  {
-    id: 8,
     name: "Connor Mccreedy",
     logo: "/p-conor.png",
   },
   {
-    id: 9,
+    id: 8,
     name: "Suzanne Syz",
     logo: "/p-syz.png",
   },

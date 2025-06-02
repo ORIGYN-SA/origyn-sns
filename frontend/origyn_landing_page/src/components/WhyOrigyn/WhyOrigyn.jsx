@@ -12,6 +12,9 @@ const WhyOrigyn = () => {
             ORIGYN
           </span>
         </div>
+        <div className={styles.subtitle}>
+          ORIGYN, Where real-world assets meet blockchain.
+        </div>
         <div className={styles.content}>
           ORIGYN is the world's most advanced rwa protocol designed to bring
           real-world assets fully on-chain. from fine art and gold to luxury

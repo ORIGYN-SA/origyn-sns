@@ -6,6 +6,7 @@
   padding-left: 75px;
   background: white;
   height: 769px;
+  position: relative;
 }
 
 .leftPanel {
@@ -17,11 +18,17 @@
   padding-bottom: 64px;
 }
 
+.buttonContainer {
+  position: absolute;
+  bottom: 64px;
+  left: 75px;
+}
+
 .title {
   font-size: 4.5rem;
   font-weight: 300;
   margin-bottom: 2rem;
-  font-family: "Montserrat";
+  font-family: "General Sans";
 
   font-weight: 300;
   font-size: 88px;
@@ -31,8 +38,8 @@
   color: #1a1a1a;
 }
 .program {
-  font-family: "Montserrat Italic", sans-serif;
-  font-weight: 200;
+  font-family: "General Sans Italic", sans-serif;
+  font-weight: 300;
   font-size: 88px;
   line-height: 88px;
 }
@@ -43,7 +50,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 32px;
-  letter-spacing: 5%;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
   white-space: pre-line;
   max-width: 442px;
@@ -78,16 +85,22 @@
     padding-bottom: 0;
   }
 
+  .rightPanelWrapper {
+    min-height: 300px;
+  }
+
+  .buttonContainer {
+    position: static;
+    display: flex;
+    width: 100%;
+  }
+
   .title {
     font-size: 3rem;
   }
 
   .title span {
     font-size: 3rem;
-  }
-
-  .rightPanelWrapper {
-    min-height: 300px;
   }
 }
 
@@ -98,5 +111,25 @@
 
   .title span {
     font-size: 68px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 44px;
+    line-height: 60px;
+  }
+
+  .title span {
+    font-size: 44px;
+    line-height: 60px;
+  }
+
+  .leftPanel {
+    padding: 0;
+  }
+
+  .container {
+    padding: 48px 16px;
   }
 }

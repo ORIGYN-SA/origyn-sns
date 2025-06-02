@@ -15,9 +15,18 @@
   border: 1px solid #000000;
 }
 
+.left {
+  width: 90%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #000000;
+}
+
 .right {
-  width: 45%;
-  padding: 12px;
+  width: 100%;
+  padding: 16px;
 }
 
 .rightImage {
@@ -25,16 +34,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
-}
-.left {
-  width: 55%;
-  padding-left: 42px;
-  padding-top: 33px;
-  padding-bottom: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #000000;
 }
 
 .leftTitle {
@@ -85,7 +84,8 @@
     min-width: 500px;
   }
 }
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
   .cardWrapper {
     width: 100%;
     min-width: unset;
@@ -95,19 +95,36 @@
 
   .badge {
     margin-top: 24px;
+    margin-bottom: 0;
   }
 
   .left {
     width: 100%;
-    padding: 24px 24px 0 24px;
+    padding: 16px;
   }
 
   .right {
     width: 100%;
-    padding: 0 24px 24px 24px;
+    padding: 16px 16px 0 16px;
+    order: -1;
   }
 
   .rightImage {
     height: 200px;
+    border-radius: 0;
+  }
+
+  .leftTitle {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .leftDescription {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .badge {
+    font-size: 12px;
+    line-height: 24px;
   }
 }

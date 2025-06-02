@@ -1,9 +1,16 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import Stats from "../Stats/Stats";
 import styles from "./Hero.module.css";
 
 const Hero = ({ data }) => {
+  const bgRef = useRef(null);
+  const ipadRef = useRef(null);
+  const initialIpadY = useRef(0);
+  // eslint-disable-next-line no-unused-vars
+  const [scrollY, setScrollY] = useState(0);
+  const [ipadLoaded, setIpadLoaded] = useState(false); // NEW
+
   const statsData = [
     {
       value: data?.marketCap,
@@ -23,18 +30,78 @@ const Hero = ({ data }) => {
     },
   ];
 
+  useEffect(() => {
+    if (!ipadLoaded) return; // Wait for image to load
+
+    const isDesktop = () => window.innerWidth >= 992;
+
+    const setInitialIpadY = () => {
+      if (ipadRef.current) {
+        ipadRef.current.style.transform = "";
+        ipadRef.current.getBoundingClientRect();
+        const style = window.getComputedStyle(ipadRef.current);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        initialIpadY.current = matrix.m42;
+      }
+    };
+
+    const handleScroll = () => {
+      if (!isDesktop()) return;
+      const scrollY = window.scrollY;
+      setScrollY(scrollY);
+      if (bgRef.current) {
+        bgRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
+      }
+      if (ipadRef.current) {
+        const y = initialIpadY.current + scrollY * 0.3;
+        ipadRef.current.style.transform = `translateX(-50%) translateY(${y}px)`;
+      }
+    };
+
+    const handleResize = () => {
+      if (!isDesktop()) {
+        if (bgRef.current) bgRef.current.style.transform = "";
+        if (ipadRef.current) ipadRef.current.style.transform = "";
+      } else {
+        setInitialIpadY();
+        handleScroll();
+      }
+    };
+
+    if (isDesktop()) {
+      setInitialIpadY();
+      handleScroll();
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [ipadLoaded]); // Only run after image is loaded
+
   return (
     <div className={styles.heroWithStats}>
       <div className={styles.heroContainer}>
         <img
+          id="hero-bg-img"
+          ref={bgRef}
           src="/ogy-background.png"
           alt="Background"
           className={styles.backgroundImage}
+          style={{ willChange: "transform" }}
         />
         <div className={styles.contentWrapper}>
-          <div className={styles.subtitle}>
-            Secure your assets, intellectual property, and identity fully
-            on-chain.
+          <div className={styles.subtitleDesktop}>
+            Secure your assets, intellectual property, <br />
+            and identity fully on-chain.
+          </div>
+          <div className={styles.subtitleMobile}>
+            Secure your assets, <br />
+            intellectual property, <br />
+            and identity fully on-chain.
           </div>
           <div className={styles.titleWithButtons}>
             <img
@@ -62,9 +129,13 @@ const Hero = ({ data }) => {
           </div>
         </div>
         <img
+          id="ipad-img"
+          ref={ipadRef}
           src="/ipad-mock.png"
           alt="iPad Interface"
           className={styles.ipadMock}
+          style={{ willChange: "transform" }}
+          onLoad={() => setIpadLoaded(true)}
         />
         <div className={styles.bottomText}>
           <span>
