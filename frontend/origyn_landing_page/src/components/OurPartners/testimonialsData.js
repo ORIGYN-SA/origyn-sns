@@ -30,7 +30,7 @@ export const testimonials = [
     id: 3,
     nameOne: "Jonatan",
     nameTwo: "Gil",
-    title: "Co-Founder of Ciber",
+    title: "Co-Founder of Cyber",
     description:
       '"We always say that diamonds will last forever, which is true. So the same has to be thought about the information you provide because in 100 years, 200 years those diamonds will still exist so we needed something with the technology to make sure we could still provide those informations. Mainly with a product that has a lot of value and goes through generations…The main reason we made a partnership with ORIGYN is because they could provide all of this"',
     backgroundImage: "/t-gil.jpg",

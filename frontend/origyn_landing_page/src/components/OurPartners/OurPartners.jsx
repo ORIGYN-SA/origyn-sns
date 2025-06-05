@@ -93,7 +93,7 @@ const OurPartners = ({ id }) => {
         </div>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.bottomOurPartners}>OUR PARTNERS</div>
+        <div className={styles.bottomOurPartners}>PARTNERS</div>
         <div className={styles.partnersContainer}>
           {[...partners, ...partners, ...partners].map((partner, index) => (
             <img
