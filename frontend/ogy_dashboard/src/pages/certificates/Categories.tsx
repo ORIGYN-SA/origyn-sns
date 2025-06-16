@@ -29,7 +29,7 @@ const CategoryIcon = ({ category }: { category: string }) => {
   const getBackgroundImage = (category: string) => {
     switch (category) {
       case "Precious Metals":
-        return "url('/cat_gold_logo.png')";
+        return "url('/cat_gold_logo.jpg')";
       case "Art":
         return "url('/cat_art_logo.png')";
       case "Jewlery":

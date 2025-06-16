@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.26] - 2025-06-16
+
+#### Added
+
+- Adds the Certificates viewer to the Dashboard (/ceritifcates).
+
 ### [1.0.25] - 2025-05-08
 
 #### Added
