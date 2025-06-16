@@ -18,6 +18,7 @@ const Navbar = () => {
     { title: "Explorer", url: "/explorer" },
     { title: "Proposals", url: "/proposals" },
     { title: "Calculator", url: "/calculator" },
+    { title: "Certificates", url: "/certificates" },
     { title: "My Account", url: "/account" },
   ];
 

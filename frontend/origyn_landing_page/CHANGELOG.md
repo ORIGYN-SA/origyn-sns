@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.1.3] - 2025-06-05
+
+#### Updated
+
+- Minor updates to wording/texts on the main
+
 ### [1.1.2] - 2025-06-02
 
 #### Added
