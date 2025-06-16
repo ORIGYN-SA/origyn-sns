@@ -25,6 +25,17 @@ const formatCategoryForUrl = (category: string): string => {
   return category.toLowerCase().replace(/\s+/g, "-");
 };
 
+const formatCategoryDisplay = (category: string): string => {
+  switch (category) {
+    case "Jewlery":
+      return "Jewelry";
+    case "Certification":
+      return "Made in";
+    default:
+      return category;
+  }
+};
+
 const CategoryIcon = ({ category }: { category: string }) => {
   const getBackgroundImage = (category: string) => {
     switch (category) {
@@ -185,7 +196,7 @@ const Categories = () => {
                 <CategoryIcon category={category} />
                 <div className="relative flex flex-col items-center gap-2 h-full justify-end pb-4">
                   <h3 className="text-lg md:text-xl font-bold text-center text-white">
-                    {category !== "Jewlery" ? category : "Jewelry"}
+                    {formatCategoryDisplay(category)}
                   </h3>
                   <p className="text-xs md:text-sm text-white/80">
                     {categories && categories[category]
