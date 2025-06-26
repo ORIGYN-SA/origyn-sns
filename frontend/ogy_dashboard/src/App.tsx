@@ -6,6 +6,7 @@ import {
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 import { useWalletInit } from "@amerej/artemis-react";
+import { useEffect } from "react";
 
 import {
   // APP_MODE,
@@ -219,7 +220,18 @@ const router = createBrowserRouter([
   },
 ]);
 
+const clearPlugWalletSession = () => {
+  const key = "dfinityWallet";
+  if (localStorage.getItem(key) === "plug") {
+    localStorage.removeItem(key);
+  }
+};
+
 const App = () => {
+  useEffect(() => {
+    clearPlugWalletSession();
+  }, []);
+
   useWalletInit({
     host: "https://identity.ic0.app",
     derivationOrigin: "https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io",
