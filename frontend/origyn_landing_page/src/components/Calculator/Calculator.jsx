@@ -387,7 +387,7 @@ const Calculator = () => {
               USDT
             </span>
             <span className={styles.ogyToUsd}>
-              (1 USDT = {pricing.ogyUsdt} OGY)
+              (1 OGY = {pricing.ogyUsdt} USDT)
             </span>
           </div>
         </div>

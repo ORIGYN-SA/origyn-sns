@@ -532,12 +532,13 @@ const Calculator: React.FC = () => {
           </h3>
           <p className="text-sm text-muted-foreground mt-2">
             <span className="inline-flex items-center">
-              1 USDT = {pricing.ogyUsdt}
+              1{" "}
               <img
                 className="mx-2 h-4 w-4"
                 src="/ogy_logo.svg"
                 alt="OGY Logo"
-              />
+              />{" "}
+              = {pricing.ogyUsdt} USDT
             </span>
           </p>
         </div>

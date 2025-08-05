@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.28] - 2025-08-05
+
+#### Changed
+
+- Fixes an issue where the wording was wrong when showing the ogy price in USDT.
+
 ### [1.0.27] - 2025-06-23
 
 #### Changed
