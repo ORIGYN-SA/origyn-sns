@@ -1,4 +1,4 @@
-use crate::state::{ mutate_state, read_state };
+use crate::{ guards::caller_is_authorised_principal, state::{ mutate_state, read_state } };
 use candid::{ Nat, Principal };
 use canister_time::timestamp_nanos;
 use canister_tracing_macros::trace;
@@ -46,7 +46,7 @@ pub use ogy_token_swap_api::{
     updates::swap_tokens::{ Args as SwapTokensArgs, Response as SwapTokensResponse },
 };
 
-#[update]
+#[update(guard = "caller_is_authorised_principal")]
 #[trace]
 pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
     let caller = read_state(|s| s.env.caller());
