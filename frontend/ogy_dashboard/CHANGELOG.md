@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.29] - 2025-08-20
+
+#### Changed
+
+- Adds constraint to only allow swapping more than 1'000 OGY.
+
 ### [1.0.28] - 2025-08-05
 
 #### Changed
