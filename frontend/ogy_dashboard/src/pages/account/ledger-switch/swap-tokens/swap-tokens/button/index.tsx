@@ -7,7 +7,7 @@ const Btn = () => {
 
   const needsMoreForSwap =
     typeof balanceOGYLegacy?.balance === "undefined" ||
-    balanceOGYLegacy?.balance < 1_000 * 1e8;
+    balanceOGYLegacy?.balance < 1_000;
 
   return (
     <>
