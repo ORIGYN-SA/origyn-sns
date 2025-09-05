@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.30] - 2025-09-05
+
+#### Changed
+
+- Updates the message on swap page, the swap is now manually reviewed and minimum swap set to 88 000 OGY.
+
+
 ### [1.0.29] - 2025-08-20
 
 #### Changed
