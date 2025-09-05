@@ -7,7 +7,7 @@ const Btn = () => {
 
   const needsMoreForSwap =
     typeof balanceOGYLegacy?.balance === "undefined" ||
-    balanceOGYLegacy?.balance < 1_000;
+    balanceOGYLegacy?.balance < 88_000;
 
   return (
     <>
@@ -20,11 +20,11 @@ const Btn = () => {
       >
         Swap your tokens
       </Button>
-      {needsMoreForSwap && (
-        <div className="text-sm text-red-500 text-center mt-2">
-          You need to have at least 1'000 OGY to swap
-        </div>
-      )}
+
+      <div className="text-sm text-yellow-500 text-center mt-2">
+        Automatic swap has been disabled. You will need to get your swap request
+        approved, min. amount is 88 000 OGY.
+      </div>
     </>
   );
 };
