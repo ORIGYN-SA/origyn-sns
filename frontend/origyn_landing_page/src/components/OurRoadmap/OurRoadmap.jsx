@@ -10,6 +10,7 @@ const roadmapCards = [
     when: "Q3 2020",
     year: 2020,
     image: "/roadmap-1.png",
+    link: "https://fr.wikipedia.org/wiki/Origyn_Foundation",
   },
   {
     title: "OGY Token Launch",
@@ -18,6 +19,7 @@ const roadmapCards = [
     when: "Q3 2021",
     year: 2021,
     image: "/roadmap-ogy-launch.jpg",
+    link: "https://origyn.medium.com/ogy-reserve-price-round-pre-registration-opening-soon-391187da3d7f",
   },
   {
     title: "ORIGYN NFT Standard v1.0",
@@ -26,6 +28,7 @@ const roadmapCards = [
     when: "Q3 2022",
     year: 2022,
     image: "/ogy-background-mobile.jpg",
+    link: "https://origyn.medium.com/intro-to-the-origyn-nft-cd96e7f9e9c1",
   },
   {
     title: "Tokenomics 2.0 Update",
@@ -34,6 +37,7 @@ const roadmapCards = [
     when: "Q4 2022",
     year: 2022,
     image: "/roadmap-tokenmoics.jpg",
+    link: "https://origyn.medium.com/origyn-announces-important-updates-to-ogy-governance-d2133f88e077",
   },
   {
     title: "Minting Platform 1.0",
@@ -42,6 +46,7 @@ const roadmapCards = [
     when: "Q1 2023",
     year: 2023,
     image: "/roadmap-floating.png",
+    link: "https://origyn.medium.com/the-origyn-digital-certificate-9b33f9766c78",
   },
   {
     title: "Strategic Partnerships",
@@ -50,6 +55,7 @@ const roadmapCards = [
     when: "Q1 2023",
     year: 2023,
     image: "/roadmap-3.png",
+    link: "https://origyn.medium.com/tradition-meets-innovation-a-digital-certificate-for-authentic-italian-products-7f61c98e5687",
   },
   {
     title: "First Gold Purchase",
@@ -58,6 +64,7 @@ const roadmapCards = [
     when: "Q2 2023",
     year: 2023,
     image: "/roadmap-first-gold.png",
+    link: "https://origyn.medium.com/origyn-technology-empowers-creation-of-digital-certificates-for-metalor-gold-bars-be092befb3e5",
   },
   {
     title: "Acquisition of CanDB",
@@ -66,6 +73,7 @@ const roadmapCards = [
     when: "Q2 2023",
     year: 2023,
     image: "/roadmap-candb.jpg",
+    link: "https://origyn.medium.com/origyn-foundation-acquires-candb-paves-the-way-for-new-decentralized-businesses-7a4a0481694f",
   },
   {
     title: "Tokenomics 3.0 and Dashboard Launch",
@@ -74,6 +82,7 @@ const roadmapCards = [
     when: "Q3 2023",
     year: 2023,
     image: "/roadmap-tokenomics-3.jpg",
+    link: "https://dashboard.origyn.com/",
   },
   {
     title: "10,000 Protocol Users",
@@ -81,6 +90,7 @@ const roadmapCards = [
     when: "Q4 2023",
     year: 2023,
     image: "/roadmap-4.png",
+    link: "https://origyn.medium.com/origyns-2024-year-in-review-milestones-and-achievements-09c629d5797c",
   },
   {
     title: "Launch of Gold DAO",
@@ -89,6 +99,7 @@ const roadmapCards = [
     when: "Q4 2023",
     year: 2023,
     image: "/roadmap-golddao.png",
+    link: "https://origyn.medium.com/case-study-how-origyn-powers-gold-daos-decentralized-gold-asset-management-with-gld-nfts-5a87f21af247",
   },
   {
     title: "500M OGY Donation to Gold DAO",
@@ -97,6 +108,7 @@ const roadmapCards = [
     when: "Q1 2024",
     year: 2024,
     image: "/roadmap-500m.png",
+    link: "https://dashboard.origyn.com/explorer/transactions/accounts/54vkq-taaaa-aaaap-ahqra-cai",
   },
   {
     title: "ORIGYN DAO Integrated with ICP SNS",
@@ -105,6 +117,7 @@ const roadmapCards = [
     when: "Q2 2024",
     year: 2024,
     image: "/roadmap-sns.jpg",
+    link: "https://origyn.medium.com/migrating-to-the-sns-ogy-token-and-the-new-governance-framework-cd6311e8334e",
   },
   {
     title: "Dashboard V2 Release",
@@ -113,6 +126,7 @@ const roadmapCards = [
     when: "Q2 2024",
     year: 2024,
     image: "/integrator-program.jpg",
+    link: "https://dashboard.origyn.com/",
   },
   {
     title: "30,000 Users Milestone",
@@ -121,6 +135,7 @@ const roadmapCards = [
     when: "Q3 2024",
     year: 2024,
     image: "/roadmap-30k.jpg",
+    link: "https://origyn.medium.com/origyns-2024-year-in-review-milestones-and-achievements-09c629d5797c",
   },
   {
     title: "Collaboration with Leo Caillard and Gil Sertissage",
@@ -129,6 +144,7 @@ const roadmapCards = [
     when: "Q3 2024",
     year: 2024,
     image: "/roadmap-leo-gil.jpg",
+    link: "https://origyn.medium.com/preserving-leo-caillards-timeless-marble-art-with-origyn-36c904a99a7a",
   },
   {
     title: "ORIGYN NFT Standard v2.0",
@@ -137,6 +153,7 @@ const roadmapCards = [
     when: "Q3 2024",
     year: 2024,
     image: "/roadmap-standard-v2.jpg",
+    link: "https://origyn.medium.com/origyn-nft-standard-2-0-transferability-395d22d02b0b",
   },
   {
     title: "Integrator Framework Launched",
@@ -145,6 +162,7 @@ const roadmapCards = [
     when: "Q4 2024",
     year: 2024,
     image: "/roadmap-integrator.jpg",
+    link: "https://origyn.medium.com/origyn-foundation-unveils-strategy-to-service-increasing-industry-demand-via-the-introduction-of-60b2498508da",
   },
   {
     title: "Launch of Cecil DAO",
@@ -153,6 +171,7 @@ const roadmapCards = [
     when: "Q1 2025",
     year: 2025,
     image: "/roadmap-6.jpg",
+    link: "https://cecil-dao.gitbook.io/cecil-dao/cecil-dao",
   },
   {
     title: "Acquisition of ClaimLink ",
@@ -161,6 +180,7 @@ const roadmapCards = [
     when: "Q1 2025",
     year: 2025,
     image: "/roadmap-claimlink.png",
+    link: "https://origyn.medium.com/origyn-acquires-claimlink-ushering-in-a-new-era-of-frictionless-digital-asset-distribution-00e3a741f22e",
   },
   {
     title: "ICRC–7 NFT Standard",
@@ -169,6 +189,7 @@ const roadmapCards = [
     when: "Q2 2025",
     year: 2025,
     image: "/roadmap-7.png",
+    link: "https://origyn.medium.com/a-new-chapter-for-nfts-on-icp-origyn-launches-icrc7-icrc37-986a009ee641",
   },
   {
     title: "Public Minting Studio Launch",
@@ -408,7 +429,18 @@ const DesktopCards = () => {
               firstCardIndexByYear[card.year] === idx
                 ? yearRefs.current[card.year]
                 : null;
-            return <RoadmapCard key={idx} {...card} ref={ref} />;
+            return card.link ? (
+              <a
+                href={card.link}
+                key={idx}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <RoadmapCard {...card} ref={ref} />
+              </a>
+            ) : (
+              <RoadmapCard key={idx} {...card} ref={ref} />
+            );
           })}
         </div>
         <div

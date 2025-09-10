@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.1.5] - 2025-09-10
+
+#### Updated
+
+- Updates the roadmap with links for each event.
+
 ### [1.1.4] - 2025-08-05
 
 #### Updated
