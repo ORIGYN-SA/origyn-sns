@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import CertifyYourAssets from "./components/CertifyYourAssets/CertifyYourAssets";
 import Hero from "./components/Hero/Hero";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
@@ -9,10 +10,11 @@ import OurRoadmap from "./components/OurRoadmap/OurRoadmap";
 import OurPartners from "./components/OurPartners/OurPartners";
 import BePart from "./components/BePart/BePart";
 import Footer from "./components/Footer/Footer";
+import UseCasesPage from "./components/UseCasesPage/UseCasesPage";
 import { useStatsData } from "./hooks/calculator/useStatsData";
 import "./styles/global.css";
 
-function App() {
+function HomePage() {
   const { data: statsData } = useStatsData();
 
   return (
@@ -29,6 +31,15 @@ function App() {
       <BePart />
       <Footer />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/use-case/:title" element={<UseCasesPage />} />
+    </Routes>
   );
 }
 

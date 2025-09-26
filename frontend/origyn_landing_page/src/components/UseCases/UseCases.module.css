@@ -52,16 +52,18 @@
   height: 600px;
   width: 100%;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .card {
   position: absolute;
   width: 100%;
   aspect-ratio: 1;
-  overflow: visible;
+  overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  border-radius: 16px;
 }
 
 .card.top {
@@ -78,14 +80,77 @@
   object-fit: cover;
 }
 
+.cardOverlay {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.cardContent {
+  text-align: center;
+  color: white;
+  max-width: 280px;
+}
+
 .cardTitle {
-  /* background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); */
+  font-family: "Gestura Text Extra Light Italic";
+  font-weight: 200;
+  font-size: 32px;
+  line-height: 28px;
+  letter-spacing: 1px;
+  color: white;
+  margin: 0 0 24px 0;
+}
+
+.cardDescription {
   font-family: "General Sans";
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  color: white;
+  margin: 0 0 28px 0;
+  opacity: 0.9;
+}
+
+.discoverButton {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 25px;
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "DM Sans Bold";
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+}
+
+.discoverButton:hover {
+  background: white;
   color: black;
 }
 
@@ -93,7 +158,21 @@
   transform: scale(1.02);
 }
 
+.card:hover .cardOverlay {
+  opacity: 1;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .card:active .cardOverlay {
+    opacity: 1;
+  }
+}
+
 .indicators {
+  display: none;
+}
+
+.mobileContent {
   display: none;
 }
 
@@ -149,47 +228,96 @@
   .grid {
     display: flex;
     overflow: hidden;
-    margin-top: 24px;
+    margin-top: 12px;
     width: 100%;
     gap: 0;
   }
 
   .cardWrapper {
-    height: 330px;
+    height: auto;
     flex: 0 0 100%;
     transform: translateX(calc(-100% * var(--current-index, 0)));
     transition: transform 0.3s ease-in-out;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .card {
     position: relative;
     height: 100%;
     width: 100%;
+    border-radius: 0;
   }
 
   .indicators {
     display: flex;
     gap: 8px;
     margin-top: 24px;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
-  .cardWrapper {
-    height: 500px;
-  }
   .card {
-    height: 100% !important;
+    height: 300px !important;
+    position: relative;
   }
 
   .cardImage {
-    height: 500px !important;
+    height: 300px !important;
   }
-  .cardTitle {
-    position: absolute;
+
+  .cardOverlay {
+    display: none !important;
+  }
+
+  .mobileContent {
+    display: block;
+    padding: 24px 0;
+    text-align: center;
+  }
+
+  .mobileTitle {
+    font-family: "General Sans";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #222526;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+  }
+
+  .mobileDescription {
+    font-family: "General Sans";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+  }
+
+  .mobileDiscoverButton {
+    background: #000000;
+    border-radius: 25px;
+    border: none;
     color: white;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
+    font-family: "General Sans";
+    font-weight: 400;
+    font-size: 12px;
+    padding-top: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+    width: 120px;
+    gap: 6px;
+  }
+
+  .mobileDiscoverButton:hover {
+    background: #333;
+    transform: scale(1.05);
   }
 }

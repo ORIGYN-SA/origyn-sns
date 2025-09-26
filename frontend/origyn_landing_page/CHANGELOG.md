@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.1.6] - 2025-09-26
+
+#### Updated
+
+- Updates the use cases section and adds the use cases pages to display more information.
+
 ### [1.1.5] - 2025-09-10
 
 #### Updated

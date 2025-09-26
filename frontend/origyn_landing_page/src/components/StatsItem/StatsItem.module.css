@@ -48,6 +48,13 @@
   }
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .title {
   font-family: "General Sans", sans-serif;
   font-size: 14px;

@@ -5,26 +5,37 @@ import UseCaseCard from "./UseCaseCard";
 const useCases = [
   {
     title: "Art",
+    description:
+      "Authenticate and protect the provenance of physical and digital artworks on-chain.",
     image: "/uc-1.png",
     position: "top",
     height: "550px",
+    link: "/use-case/art",
   },
   {
     title: "Gold",
+    description:
+      "Certify gold with immutable, traceable, and tamper-proof digital certificates.",
     image: "/uc-2.jpg",
     position: "bottom",
+    link: "/use-case/gold",
   },
   {
     title: "Diamonds",
+    description:
+      "Track origin, grading, and ownership of each diamond with blockchain precision.",
     image: "/uc-3-c.jpg",
     position: "top",
     height: "570px",
+    link: "/use-case/luxury",
   },
-
   {
     title: "Made In",
+    description:
+      "Prove the origin, authenticity, and craftsmanship of any product, from watches to fashion.",
     image: "/uc-4.jpg",
     position: "top",
+    link: "/use-case/madein",
   },
 ];
 
@@ -86,21 +97,6 @@ const UseCases = ({ id }) => {
         </p>
       </div>
 
-      {isMobile && (
-        <div className={styles.indicators}>
-          {useCases.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${
-                index === currentIndex ? styles.active : ""
-              }`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to use case ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
-
       <div
         className={styles.grid}
         ref={gridRef}
@@ -119,6 +115,21 @@ const UseCases = ({ id }) => {
           />
         ))}
       </div>
+
+      {isMobile && (
+        <div className={styles.indicators}>
+          {useCases.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.indicator} ${
+                index === currentIndex ? styles.active : ""
+              }`}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to use case ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
