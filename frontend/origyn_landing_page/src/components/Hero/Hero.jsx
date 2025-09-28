@@ -15,18 +15,27 @@ const Hero = ({ data }) => {
     {
       value: data?.marketCap,
       title: "$OGY Market Cap",
+      tooltip:
+        "The total market value of all OGY tokens currently in circulation, based on the live token price.",
     },
     {
       value: data?.tvl,
       title: "Total Value Locked (TVL) of certified assets in usd",
+      tooltipTitle: "Total Value Locked (TVL)",
+      tooltip:
+        "The combined estimated value in USD of all real‑world assets that have been certified and secured on ORIGYN’s blockchain.",
     },
     {
       value: data?.users,
       title: "Users",
+      tooltip:
+        "The total number of individuals, brands, and institutions who actively use ORIGYN to issue, manage, or own certified assets.",
     },
     {
       value: data?.assets,
       title: "Total Certified Assets",
+      tooltip:
+        "The number of physical or digital items that have received an official ORIGYN certificate.",
     },
   ];
 

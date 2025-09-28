@@ -42,7 +42,12 @@ const Stats = ({ items }) => {
       <div className={styles.statsContainer}>
         {items.map((item, index) => (
           <React.Fragment key={item.title}>
-            <StatsItem title={item.title} value={item.value} />
+            <StatsItem
+              title={item.title}
+              value={item.value}
+              tooltip={item.tooltip}
+              tooltipTitle={item.tooltipTitle}
+            />
             {index < items.length - 1 && <div className={styles.divider} />}
           </React.Fragment>
         ))}
@@ -56,6 +61,8 @@ const Stats = ({ items }) => {
         <StatsItem
           title={items[currentIndex].title}
           value={items[currentIndex].value}
+          tooltip={items[currentIndex].tooltip}
+          tooltipTitle={items[currentIndex].tooltipTitle}
         />
       </div>
       <div className={styles.dotsContainer}>
