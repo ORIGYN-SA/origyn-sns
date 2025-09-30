@@ -101,6 +101,21 @@ const UseCase = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (!caseData) return;
+
+    const preloadImages = () => {
+      const allImages = caseData.flatMap((item) => item.images);
+
+      allImages.forEach((imageSrc) => {
+        const img = new Image();
+        img.src = imageSrc;
+      });
+    };
+
+    preloadImages();
+  }, [caseData]);
+
   if (!caseData) {
     return (
       <div className={styles.container}>
@@ -122,7 +137,7 @@ const UseCase = () => {
         <UseCaseMobile caseData={caseData} />
       ) : (
         <div className={styles.main}>
-          {caseData.map((currentItem, index) => (
+          {caseData.map((currentItem) => (
             <div className={styles.itemSection}>
               <div className={styles.leftContainer}>
                 <div className={styles.content}>
@@ -134,7 +149,7 @@ const UseCase = () => {
                     }}
                   />
                 </div>
-                <div className={styles.indicators}>
+                {/* <div className={styles.indicators}>
                   {caseData.map((_, indicatorIndex) => (
                     <button
                       key={indicatorIndex}
@@ -145,7 +160,7 @@ const UseCase = () => {
                       aria-label={`Go to item ${index + 1}`}
                     />
                   ))}
-                </div>
+                </div> */}
               </div>
               <div className={styles.rightContainer}>
                 <div className={styles.image}>

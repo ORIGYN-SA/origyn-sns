@@ -4,6 +4,7 @@ import styles from "./Header.module.css";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,15 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    return () => window.removeEventListener("popstate", handleLocationChange);
   }, []);
 
   const toggleMenu = () => {
@@ -26,6 +36,8 @@ const Header = () => {
     }
     setIsMenuOpen(false);
   };
+
+  const isUseCasePage = currentPath.startsWith("/use-case/");
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
@@ -69,7 +81,7 @@ const Header = () => {
           </a>
           <a
             onClick={() => handleNavClick("use-cases")}
-            className={styles.navLink}
+            className={`${styles.navLink} ${isUseCasePage ? styles.active : ""}`}
           >
             USE CASES
           </a>

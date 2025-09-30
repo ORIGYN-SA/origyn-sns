@@ -11,16 +11,18 @@ const StatsItem = ({ title, value, tooltip, tooltipTitle }) => {
         </div>
       </div>
       <div className={styles.titleRow}>
-        <div className={styles.title}>{title}</div>
-        {tooltip && (
-          <TooltipInfo
-            id={`tooltip-${title.replace(/\s+/g, "-").toLowerCase()}`}
-          >
-            {tooltipTitle || title}
-            <br />
-            {tooltip}
-          </TooltipInfo>
-        )}
+        <div className={styles.title}>
+          {title}
+          {tooltip && (
+            <TooltipInfo
+              id={`tooltip-${title.replace(/\s+/g, "-").toLowerCase()}`}
+            >
+              {tooltipTitle || title}
+              <br />
+              {tooltip}
+            </TooltipInfo>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -6,13 +6,21 @@ const UseCasesSlideshow = ({ images }) => {
   useEffect(() => {
     if (!images || images.length <= 1) return;
 
-    const interval = setInterval(() => {
+    const getRandomInterval = () => Math.random() * (5000 - 4000) + 4000; // Random 5-4 seconds
+    let intervalId;
+
+    const changeImage = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2000);
+      intervalId = setTimeout(changeImage, getRandomInterval());
+    };
 
-    return () => clearInterval(interval);
+    intervalId = setTimeout(changeImage, getRandomInterval());
+
+    return () => {
+      if (intervalId) clearTimeout(intervalId);
+    };
   }, [images]);
 
   if (!images || images.length === 0) {
@@ -20,11 +28,27 @@ const UseCasesSlideshow = ({ images }) => {
   }
 
   return (
-    <img
-      src={images[currentImageIndex]}
-      alt={`Slideshow image ${currentImageIndex + 1}`}
-      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-    />
+    <>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+        `}
+      </style>
+      <img
+        key={currentImageIndex}
+        src={images[currentImageIndex]}
+        alt={`Slideshow image ${currentImageIndex + 1}`}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          animation: "fadeIn 1s ease-in-out",
+        }}
+      />
+    </>
   );
 };
 

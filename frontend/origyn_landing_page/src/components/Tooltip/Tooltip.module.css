@@ -11,6 +11,8 @@
   font-family: "General Sans", sans-serif;
   font-size: 12px;
   font-weight: 400;
+  word-wrap: break-word !important;
+  white-space: normal !important;
 }
 
 .icon {
@@ -18,4 +20,18 @@
   width: 24px;
   color: #69737c;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 100vw !important;
+    font-size: 11px !important;
+    padding: 8px 12px !important;
+    position: fixed !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
 }

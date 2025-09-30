@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./HowItWorks.module.css";
 
 const steps = [
@@ -40,6 +40,8 @@ const steps = [
 
 const HowItWorks = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -49,8 +51,53 @@ const HowItWorks = () => {
     }
   };
 
+  const prevStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      setCurrentStep(steps.length - 1);
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(distance) > minSwipeDistance) {
+      // Prevent click event from firing when swiping
+      e.preventDefault();
+
+      if (distance > 0) {
+        // Swipe left - go to next step
+        nextStep();
+      } else {
+        // Swipe right - go to previous step
+        prevStep();
+      }
+    }
+
+    // Reset values
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={styles.leftPanel}>
         <div>
           <h2 className={styles.title}>
