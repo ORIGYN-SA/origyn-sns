@@ -63,7 +63,7 @@
 
 .roadmapContainer {
   position: relative;
-  width: 100%;
+  width: 100vw;
 }
 
 .roadmapCardsWrapper {
@@ -162,6 +162,13 @@
     justify-content: center;
     margin-top: 24px;
     margin-bottom: 40px;
+    /* Hide scrollbar on mobile */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .roadmapCardsWrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 
   .roadmapTimeline {

@@ -14,7 +14,7 @@ const benefitsData = [
   {
     title: "$OGY Token Utility",
     description:
-      "Powering governance, staking, and real-world asset verification.",
+      "Powering the ORIGYN ecosystem through governance and protocol utility.",
     icon: BenefitToken,
   },
   {
