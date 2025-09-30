@@ -12,6 +12,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: darken;
   transition: opacity 0.5s ease;
+  touch-action: pan-y; /* Enable swipe detection while allowing vertical scrolling */
 }
 
 .left {
@@ -166,6 +167,7 @@
     padding: 40px 20px;
     gap: 40px;
     height: calc(100vh - 98px);
+    touch-action: pan-y; /* Allow vertical scrolling but enable horizontal swipe detection */
   }
 
   .left {

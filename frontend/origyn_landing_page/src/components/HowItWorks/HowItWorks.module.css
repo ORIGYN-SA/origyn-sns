@@ -152,6 +152,7 @@
     padding: 48px 16px;
     gap: 2rem;
     height: auto;
+    touch-action: pan-y; /* Allow vertical scrolling but enable horizontal swipe detection */
   }
 
   .leftPanel {
@@ -161,10 +162,11 @@
   .rightPanel {
     padding: 20px;
     justify-content: center;
+    transition: transform 0.3s ease;
   }
 
   .stepLabel {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
   }
 
   .indicators {
@@ -186,10 +188,29 @@
 
   .rightPanelWrapper {
     min-height: 300px;
+    position: relative;
+    overflow: hidden;
   }
+
+  /* swipe hint for mobile? */
+  /* .rightPanelWrapper::after {
+    content: "← Swipe →";
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    font-family: "General Sans";
+    z-index: 3;
+    pointer-events: none;
+  }*/
 }
 
 @media (max-width: 768px) {
+  .container {
+    touch-action: pan-y;
+  }
+
   .panelDescription {
     font-size: 18px;
   }
@@ -222,6 +243,13 @@
   .rightPanelWrapper {
     min-height: 280px;
   }
+
+  .rightPanelWrapper::after {
+    bottom: 8px;
+    right: 16px;
+    font-size: 11px;
+  }
+
   .rightPanelImage {
     display: none;
   }

@@ -9,8 +9,9 @@ const OurPartners = ({ id }) => {
   const currentTestimonial = testimonials[currentTestimonialIndex];
   const intervalRef = useRef(null);
   const imagesRef = useRef({});
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
-  // Preload all testimonial background images
   useEffect(() => {
     testimonials.forEach((testimonial) => {
       const img = new Image();
@@ -49,6 +50,47 @@ const OurPartners = ({ id }) => {
     }, 500);
   };
 
+  const navigateToNext = () => {
+    const nextIndex = (currentTestimonialIndex + 1) % testimonials.length;
+    handleIndicatorClick(nextIndex);
+  };
+
+  const navigateToPrev = () => {
+    const prevIndex =
+      currentTestimonialIndex === 0
+        ? testimonials.length - 1
+        : currentTestimonialIndex - 1;
+    handleIndicatorClick(prevIndex);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(distance) > minSwipeDistance) {
+      e.preventDefault();
+
+      if (distance > 0) {
+        navigateToNext();
+      } else {
+        navigateToPrev();
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <>
       <div
@@ -57,6 +99,9 @@ const OurPartners = ({ id }) => {
         style={{
           backgroundImage: `url(${currentTestimonial.backgroundImage})`,
         }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div className={styles.left}>
           <h1 className={styles.leftTitle}>

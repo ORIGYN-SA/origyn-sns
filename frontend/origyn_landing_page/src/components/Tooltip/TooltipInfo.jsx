@@ -3,14 +3,17 @@ import Tooltip from "./Tooltip";
 
 const TooltipInfo = ({ children, id = "tootltip-id", clickable = false }) => {
   return (
-    <div>
+    <span
+      style={{ display: "inline-block", position: "relative", top: "2.5px" }}
+    >
       <img
         style={{
-          verticalAlign: "middle",
           height: "16px",
           width: "16px",
+          marginLeft: "4px",
+          opacity: "0.85",
           filter:
-            "brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(1000%) hue-rotate(180deg) brightness(95%) contrast(86%)",
+            "brightness(0) saturate(5%) invert(60%) sepia(3%) saturate(5%) hue-rotate(180deg) brightness(100%) contrast(70%)",
         }}
         data-tooltip-id={id}
         src="info-icon.png"
@@ -18,7 +21,7 @@ const TooltipInfo = ({ children, id = "tootltip-id", clickable = false }) => {
       <Tooltip id={id} clickable={clickable}>
         {children}
       </Tooltip>
-    </div>
+    </span>
   );
 };
 
