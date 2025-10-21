@@ -23,7 +23,7 @@ const Btn = () => {
 
       <div className="text-sm text-yellow-500 text-center mt-2">
         Automatic swap has been disabled. You will need to get your swap request
-        approved, min. amount is 88 000 OGY.
+        approved, min. amount is 50 000 OGY.
       </div>
     </>
   );

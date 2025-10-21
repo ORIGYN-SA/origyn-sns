@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.32] - 2025-10-21
+
+#### Changed
+
+- Updates the test for swap on dashboard.
+
 ### [1.0.31] - 2025-10-21
 
 #### Changed
