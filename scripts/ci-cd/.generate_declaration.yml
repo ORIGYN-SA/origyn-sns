@@ -4,6 +4,7 @@ spec:
       description: Generate declatations for the canister
       options:
         [
+          "buyback_burn",
           "ogy_token_swap",
           "sns_rewards",
           "super_stats_v3",
