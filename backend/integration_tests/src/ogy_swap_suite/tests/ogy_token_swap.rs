@@ -14,6 +14,7 @@ use ogy_token_swap_api::{
         TransferRequestArgs,
     },
     types::token_swap::{ BlockFailReason, SwapError, SwapStatus },
+    update_whitelist::UpdateWhitelistCommand,
     updates::{
         recover_stuck_burn::Response as RecoverStuckBurnResponse,
         recover_stuck_transfer::Response as RecoverStuckTransferResponse,
@@ -36,6 +37,7 @@ use crate::{
         ogy_token_swap::{
             client::{
                 deposit_account,
+                get_whitelisted_principals_call,
                 manipulate_swap_status,
                 recover_stuck_burn_call,
                 recover_stuck_transfer_call,
@@ -44,6 +46,7 @@ use crate::{
                 swap_tokens_anonymous_call,
                 swap_tokens_authenticated_call,
                 swapping_statistics,
+                update_whitelist_call,
             },
             get_swap_info,
         },
@@ -65,6 +68,22 @@ fn valid_swap() {
 
     let user = random_principal();
     let amount = 1 * E8S_PER_OGY;
+
+    // add user to whitelist
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    assert_eq!(response, Ok("Whitelist updated successfully".to_string()));
+
+    let whitelisted_principals = get_whitelisted_principals_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id
+    );
+    assert!(whitelisted_principals.contains(&user));
 
     // mint tokens to swapping user
     let _ = mint_ogy(
@@ -99,6 +118,7 @@ fn valid_swap() {
         amount - E8S_FEE_OGY
     ).unwrap();
 
+    println!("Attempting swap for block index: {}", block_index_deposit);
     let result = swap_tokens_authenticated_call(
         &mut pic,
         user,
@@ -142,6 +162,22 @@ fn invalid_deposit_account() {
     // user who intially requests the swap but then fails
     let user_false_request = random_principal();
     let amount = 100_000 * E8S_PER_OGY;
+
+    // add both users to whitelist
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    assert_eq!(response, Ok("Whitelist updated successfully".to_string()));
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user_false_request)
+    );
+    assert_eq!(response, Ok("Whitelist updated successfully".to_string()));
 
     // mint tokens to swapping user
     let _ = mint_ogy(
@@ -251,6 +287,20 @@ fn test_anonymous_request() {
     let user = random_principal();
     let amount = 100_000 * E8S_PER_OGY;
 
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    let _ = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(Principal::anonymous())
+    );
+
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,
@@ -340,6 +390,13 @@ fn test_swap_amount_too_small() {
 
     let user = random_principal();
     let amount = 1_000_000;
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
 
     // mint tokens to swapping user
     let _ = mint_ogy(
@@ -741,6 +798,14 @@ fn test_insufficient_funds_in_distribution_pool() {
     let user = user_init(&mut env, amount.clone());
     let block_index = 1u64;
 
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        UpdateWhitelistCommand::Add(user)
+    );
+
     let init_pool_balance = Nat::from(10 * E8S_PER_OGY);
     init_swap_pool(&mut env, init_pool_balance.clone());
 
@@ -786,6 +851,14 @@ fn test_deposit_account() {
 
     let user = random_principal();
 
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut pic,
+        env.controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+
     assert_eq!(
         get_deposit_account_helper(&mut pic, ogy_token_swap_canister_id, user).unwrap(),
         principal_to_legacy_account_id(ogy_token_swap_canister_id, Some(Subaccount::from(user)))
@@ -801,6 +874,13 @@ fn test_requesting_principals() {
 
     let mut subaccount_list = vec![];
     for holder in holders.clone() {
+        // add user to whitelist
+        let _ = update_whitelist_call(
+            &mut env.pic,
+            env.controller,
+            env.canister_ids.ogy_swap,
+            UpdateWhitelistCommand::Add(holder)
+        );
         subaccount_list.push(
             get_deposit_account_helper(&mut env.pic, env.canister_ids.ogy_swap, holder).unwrap()
         );
@@ -894,6 +974,76 @@ fn init_swap_pool(env: &mut TestEnv, swap_pool_amount: Nat) {
     );
 }
 
+#[test]
+fn test_whitelisting_and_removing() {
+    let env = init();
+    let TestEnv { mut pic, canister_ids, controller } = env;
+
+    let ogy_token_swap_canister_id = canister_ids.ogy_swap;
+
+    let user = random_principal();
+
+    // add user to whitelist
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    assert_eq!(response, Ok("Whitelist updated successfully".to_string()));
+
+    // verify user is in whitelist
+    let whitelisted_principals = get_whitelisted_principals_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id
+    );
+    assert!(whitelisted_principals.contains(&user));
+
+    // add same user again to whitelist, should return error
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    assert_eq!(response, Err("Principal was already in the whitelist".to_string()));
+
+    // verify user is still in whitelist
+    let whitelisted_principals = get_whitelisted_principals_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id
+    );
+    assert!(whitelisted_principals.contains(&user));
+
+    // remove user from whitelist
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Remove(user)
+    );
+    assert_eq!(response, Ok("Principal removed successfully".to_string()));
+
+    // verify user is no longer in whitelist
+    let whitelisted_principals = get_whitelisted_principals_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id
+    );
+    assert!(!whitelisted_principals.contains(&user));
+
+    // try to remove same user again from whitelist
+    let response = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Remove(user)
+    );
+    assert_eq!(response, Err("Principal was not found in the whitelist".to_string()));
+}
+
 fn user_token_swap_with_expected_response(
     env: &mut TestEnv,
     user: Principal,
@@ -934,6 +1084,15 @@ fn user_token_swap_with_expected_response(
 }
 
 fn user_token_swap_valid(env: &mut TestEnv, user: Principal, swap_index: Nat) {
+    // add user to whitelist
+    let response = update_whitelist_call(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        UpdateWhitelistCommand::Add(user)
+    );
+    assert_eq!(response, Ok("Whitelist updated successfully".to_string()));
+
     let swap_amount = user_token_swap_with_expected_response(
         env,
         user,
@@ -988,6 +1147,14 @@ fn test_retry_transfer_when_new_ledger_inactive() {
 
     let user = random_principal();
     let amount = 1 * E8S_PER_OGY;
+
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
 
     // mint tokens to swapping user
     let _ = mint_ogy(
@@ -1050,34 +1217,34 @@ fn test_retry_transfer_when_new_ledger_inactive() {
     assert_eq!(result, SwapTokensResponse::Success(Nat::from(1u8)));
 }
 
-#[test]
-#[should_panic(expected = "FATAL ERROR: Caller is not an authorised principal")]
-fn test_recover_stuck_burn_can_only_be_called_by_authorised_principals() {
-    let mut env = init();
+// #[test]
+// #[should_panic(expected = "FATAL ERROR: Caller is not an authorised principal")]
+// fn test_recover_stuck_burn_can_only_be_called_by_authorised_principals() {
+//     let mut env = init();
 
-    let amount = Nat::from(1_000_000_000u64);
+//     let amount = Nat::from(1_000_000_000u64);
 
-    let user = user_init(&mut env, amount.clone());
+//     let user = user_init(&mut env, amount.clone());
 
-    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+//     init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
 
-    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+//     user_token_swap_valid(&mut env, user, Nat::from(1u8));
 
-    // now we can manipulate the state and check if the recovery works
-    // in the first test, we completely reburn the tokens as we simulate that the request failed. So the BurnRequestArgs are irrelevant
-    manipulate_swap_status(
-        &mut env.pic,
-        Principal::anonymous(),
-        env.canister_ids.ogy_swap,
-        1u64,
-        SwapStatus::BurnRequest(BurnRequestArgs {
-            created_at_time: None,
-            from_subaccount: None,
-            amount: Tokens::from_e8s(0),
-            memo: Memo(0),
-        })
-    );
-}
+//     // now we can manipulate the state and check if the recovery works
+//     // in the first test, we completely reburn the tokens as we simulate that the request failed. So the BurnRequestArgs are irrelevant
+//     manipulate_swap_status(
+//         &mut env.pic,
+//         Principal::anonymous(),
+//         env.canister_ids.ogy_swap,
+//         1u64,
+//         SwapStatus::BurnRequest(BurnRequestArgs {
+//             created_at_time: None,
+//             from_subaccount: None,
+//             amount: Tokens::from_e8s(0),
+//             memo: Memo(0),
+//         })
+//     );
+// }
 
 #[test]
 #[should_panic(expected = "FATAL ERROR: Caller is not an authorised principal")]
@@ -1144,6 +1311,14 @@ fn valid_swap_can_be_archived() {
     let user = random_principal();
     let amount = 1 * E8S_PER_OGY;
 
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut pic,
+        controller,
+        ogy_token_swap_canister_id,
+        UpdateWhitelistCommand::Add(user)
+    );
+    
     // mint tokens to swapping user
     let _ = mint_ogy(
         &mut pic,

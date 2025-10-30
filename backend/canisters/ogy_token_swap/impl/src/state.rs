@@ -38,7 +38,8 @@ impl RuntimeState {
             },
             ogy_legacy_minting_account: self.data.minting_account.to_string(),
             authorized_principals: self.data.authorized_principals.clone(),
-            whitelisted_principals: get_white_listed_principals()
+            whitelisted_principals: self.data.whitelisted_principals
+                .clone()
                 .into_iter()
                 .map(|p| p.to_string())
                 .collect(),
@@ -50,13 +51,17 @@ impl RuntimeState {
         self.data.authorized_principals.contains(&caller)
     }
 
-    pub fn is_caller_whitelisted_principal(&self, caller: Principal) -> bool {
-        true
+    pub fn is_caller_whitelisted_principal(&self) -> bool {
         // if cfg!(feature = "inttest") || cfg!(test) || self.env.is_test_mode() {
         //     true
         // } else {
-        //     get_white_listed_principals().contains(&caller)
+        let caller = self.env.caller();
+        self.data.whitelisted_principals.contains(&caller)
         // }
+    }
+
+    pub fn get_whitelisted_principals(&self) -> Vec<Principal> {
+        self.data.whitelisted_principals.clone().into_iter().collect()
     }
 }
 
@@ -89,6 +94,8 @@ pub struct Data {
     pub minting_account: AccountIdentifier,
     /// List of requesting principals for deposit_accounts
     pub requesting_principals: RequestingPrincipals,
+    /// whitelisted principals for guarded calls
+    pub whitelisted_principals: HashSet<Principal>,
 }
 
 impl Data {
@@ -96,7 +103,8 @@ impl Data {
         ogy_new_ledger: CanisterId,
         ogy_legacy_ledger: CanisterId,
         ogy_legacy_minting_account_principal: Principal,
-        authorized_principals: Vec<Principal>
+        authorized_principals: Vec<Principal>,
+        whitelisted_principals: HashSet<Principal>
     ) -> Self {
         Self {
             authorized_principals,
@@ -110,6 +118,7 @@ impl Data {
                 &Subaccount([0; 32])
             ),
             requesting_principals: RequestingPrincipals::default(),
+            whitelisted_principals,
         }
     }
 }
@@ -118,13 +127,4 @@ impl Data {
 pub struct CanisterIds {
     pub ogy_new_ledger: Principal,
     pub ogy_legacy_ledger: Principal,
-}
-
-pub fn get_white_listed_principals() -> HashSet<Principal> {
-    let text_principals = vec!["whitelist-deactivated"];
-
-    text_principals
-        .iter()
-        .filter_map(|text_prin| Principal::from_text(text_prin).ok())
-        .collect()
 }
