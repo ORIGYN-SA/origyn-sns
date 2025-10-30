@@ -1,6 +1,7 @@
 use candid::Principal;
 use ic_cdk::update;
 use ic_ledger_types::{ AccountIdentifier, Subaccount };
+
 use utils::env::Environment;
 
 pub use ogy_token_swap_api::updates::request_deposit_account::{
@@ -13,14 +14,6 @@ use crate::state::{ mutate_state, read_state };
 #[update]
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
     let principal = args.of.unwrap_or(read_state(|s| s.env.caller()));
-
-    if read_state(|s| !s.is_caller_whitelisted_principal(principal)) {
-        return RequestDepositAccountResponse::NotAuthorized(
-            format!(
-                "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
-            )
-        );
-    }
 
     // check if there is room in the swaps heap
     if read_state(|s| s.data.token_swap.is_capacity_full()) {
@@ -39,8 +32,11 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashSet;
+
     use candid::Principal;
     use ic_ledger_types::{ AccountIdentifier, Subaccount };
+    use icrc_ledger_types::icrc1::account::{ Account, Subaccount as IcrcSubaccount };
     use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
     use utils::env::CanisterEnv;
 
@@ -135,7 +131,8 @@ mod tests {
             ogy_new_ledger_canister_id,
             ogy_legacy_ledger_canister_id,
             ogy_legacy_minting_account_principal,
-            vec![]
+            vec![],
+            HashSet::new()
         );
 
         let runtime_state = RuntimeState::new(env, data);
@@ -145,5 +142,29 @@ mod tests {
 
     fn dummy_principal(index: u64) -> Principal {
         Principal::from_slice(&index.to_ne_bytes())
+    }
+
+    #[test]
+    fn test_compute_deposit_account_2() {
+        let principal = Principal::from_text(
+            "n4ihd-xm3yz-wqfdn-e4k2e-u4nwx-ffaeo-p2hae-l7tyf-3xg33-z5ndn-kae"
+        ).unwrap();
+
+        let account = Account {
+            owner: Principal::from_text("gzcjd-xiaaa-aaaak-qijga-cai").unwrap(),
+            subaccount: Some(Subaccount::from(principal).0),
+        };
+
+        println!("Account: {:?}", account.to_string());
+
+        // let account_id = AccountIdentifier::new(
+        //     &account.owner,
+        //     &Subaccount(account.subaccount.unwrap().as_ref())
+        // );
+        let account_id = AccountIdentifier::new(&account.owner, &Subaccount::from(principal));
+        let computed_account_id = AccountIdentifier::from_hex(
+            "43f51e2cbe02905a9c4d92463eea842274565c95d061a83aa5275c8fddfe5688"
+        ).unwrap();
+        assert_eq!(account_id, computed_account_id);
     }
 }

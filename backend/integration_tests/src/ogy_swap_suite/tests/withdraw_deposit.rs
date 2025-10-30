@@ -1,6 +1,7 @@
 use candid::{ Nat, Principal };
 use ic_ledger_types::{ AccountIdentifier, Tokens };
 use ledger_utils::principal_to_legacy_account_id;
+use ogy_token_swap_api::update_whitelist::UpdateWhitelistCommand;
 use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 use pocket_ic::PocketIc;
 use types::CanisterId;
@@ -8,7 +9,10 @@ use types::CanisterId;
 use crate::{
     client::{
         ogy_legacy_ledger::client::{ balance_of, mint_ogy, transfer_ogy },
-        ogy_token_swap::{ client::{ deposit_account, withdraw_deposit_call }, withdraw_deposit },
+        ogy_token_swap::{
+            client::{ deposit_account, update_whitelist_call, withdraw_deposit_call },
+            withdraw_deposit,
+        },
     },
     ogy_swap_suite::{ init::init, TestEnv },
     utils::random_principal,
@@ -34,6 +38,14 @@ fn withdraw_deposit_insufficient_balance() {
     let amount = 2 * E8S_FEE_OGY;
     let user = user_init(&mut env, amount.into());
 
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        UpdateWhitelistCommand::Add(user)
+    );
+
     transfer_deposit(&mut env, user, amount);
 
     assert_eq!(
@@ -48,6 +60,14 @@ fn withdraw_deposit_happy_path() {
 
     let amount = 1 * E8S_PER_OGY;
     let user = user_init(&mut env, amount.into());
+
+    // add user to whitelist
+    let _ = update_whitelist_call(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        UpdateWhitelistCommand::Add(user)
+    );
 
     transfer_deposit(&mut env, user, amount);
 

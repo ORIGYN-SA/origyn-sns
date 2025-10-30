@@ -1,9 +1,11 @@
+use std::collections::HashSet;
+
 use ic_cdk_macros::init;
 pub use ogy_token_swap_api::init::InitArgs;
 use tracing::info;
 use utils::env::CanisterEnv;
 
-use crate::state::{Data, RuntimeState};
+use crate::state::{ Data, RuntimeState };
 
 use super::init_canister;
 
@@ -17,11 +19,12 @@ fn init(args: InitArgs) {
         args.ogy_legacy_ledger_canister_id,
         args.ogy_legacy_minting_account_principal,
         args.authorized_principals,
+        HashSet::new()
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);
 
     init_canister(runtime_state);
 
-    info!("Init complete.")
+    info!("Init complete.");
 }

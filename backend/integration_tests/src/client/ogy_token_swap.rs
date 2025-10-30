@@ -4,6 +4,7 @@ use crate::{ generate_query_call, generate_update_call };
 generate_query_call!(get_swap_info);
 generate_query_call!(list_requesting_principals);
 generate_query_call!(list_swapping_statistics);
+generate_query_call!(get_whitelisted_principals);
 
 // Updates
 generate_update_call!(recover_stuck_burn);
@@ -13,6 +14,7 @@ generate_update_call!(swap_tokens);
 generate_update_call!(update_swap_status);
 generate_update_call!(withdraw_deposit);
 generate_update_call!(restore_archived_swap);
+generate_update_call!(update_whitelist);
 
 pub mod get_swap_info {
     pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
@@ -23,6 +25,9 @@ pub mod list_requesting_principals {
 pub mod list_swapping_statistics {
     pub use ogy_token_swap_api::queries::list_swapping_statistics::{ Args, Response };
 }
+pub mod get_whitelisted_principals {
+    pub use ogy_token_swap_api::queries::get_whitelisted_principals::{ Args, Response };
+}
 pub mod request_deposit_account {
     pub use ogy_token_swap_api::updates::request_deposit_account::{ Args, Response };
 }
@@ -31,6 +36,10 @@ pub mod swap_tokens {
 }
 pub mod update_swap_status {
     pub use ogy_token_swap_api::updates::update_swap_status::{ Args, Response };
+}
+
+pub mod update_whitelist {
+    pub use ogy_token_swap_api::updates::update_whitelist::{ Args, Response };
 }
 pub mod restore_archived_swap {
     pub use ogy_token_swap_api::updates::restore_archived_swap::{ Args, Response };
@@ -49,14 +58,28 @@ pub mod client {
     use super::*;
     use candid::Principal;
     use ic_ledger_types::BlockIndex;
-    use ogy_token_swap_api::token_swap::{
-        BurnRequestArgs,
-        RecoverBurnMode,
-        RecoverTransferMode,
-        SwapStatus,
+    use ogy_token_swap_api::{
+        token_swap::{ BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, SwapStatus },
+        update_whitelist::UpdateWhitelistCommand,
     };
     use pocket_ic::PocketIc;
     use types::CanisterId;
+
+    pub fn update_whitelist_call(
+        pic: &mut PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId,
+        command: UpdateWhitelistCommand
+    ) -> update_whitelist::Response {
+        update_whitelist(
+            pic,
+            sender,
+            ogy_token_swap_canister_id,
+            &(update_whitelist::Args {
+                command,
+            })
+        )
+    }
 
     pub fn swap_tokens_authenticated_call(
         pic: &mut PocketIc,
@@ -98,10 +121,17 @@ pub mod client {
     ) -> request_deposit_account::Response {
         request_deposit_account(
             pic,
-            Principal::anonymous(),
+            user,
             ogy_token_swap_canister_id,
             &(request_deposit_account::Args { of: Some(user) })
         )
+    }
+    pub fn get_whitelisted_principals_call(
+        pic: &mut PocketIc,
+        sender: Principal,
+        ogy_token_swap_canister_id: CanisterId
+    ) -> get_whitelisted_principals::Response {
+        get_whitelisted_principals(pic, sender, ogy_token_swap_canister_id, &())
     }
 
     pub fn swap_info(

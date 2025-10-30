@@ -115,6 +115,7 @@ type UserSwap = record {
 };
 service : (InitArgs) -> {
   get_swap_info : (Args) -> (Response) query;
+  is_caller_whitelisted : () -> (bool) query;
   list_swapping_statistics : () -> (SwapStatistics) query;
   request_deposit_account : (Args_1) -> (Response_1);
   swap_tokens : (Args_2) -> (Response_2);

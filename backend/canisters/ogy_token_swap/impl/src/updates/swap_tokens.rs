@@ -1,4 +1,4 @@
-use crate::{ guards::caller_is_authorised_principal, state::{ mutate_state, read_state } };
+use crate::{ state::{ mutate_state, read_state } };
 use candid::{ Nat, Principal };
 use canister_time::timestamp_nanos;
 use canister_tracing_macros::trace;
@@ -46,9 +46,15 @@ pub use ogy_token_swap_api::{
     updates::swap_tokens::{ Args as SwapTokensArgs, Response as SwapTokensResponse },
 };
 
-#[update(guard = "caller_is_authorised_principal")]
+#[update]
 #[trace]
 pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
+    if !is_caller_allowed_to_swap() {
+        return SwapTokensResponse::InternalError(
+            "Can't perform the swap. Caller principal is neither in the whitelist of principals allowed to currently swap nor an authorised principal to perform the swap".to_string()
+        );
+    }
+
     let caller = read_state(|s| s.env.caller());
     let user = match args.user {
         Some(p) => p,
@@ -64,14 +70,6 @@ pub(crate) async fn swap_tokens_impl(
     block_index: BlockIndex,
     principal: Principal
 ) -> Result<BlockIndexIcrc, String> {
-    if read_state(|s| !s.is_caller_whitelisted_principal(principal)) {
-        return Err(
-            format!(
-                "Can't perform the swap. User principal is not in the whitelist of principals allowed to currently swap"
-            )
-        );
-    }
-
     if read_state(|s| s.data.token_swap.is_capacity_full()) {
         return Err(format!("Can't perform the swap. There are too many swaps in the heap"));
     }
@@ -483,6 +481,8 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashSet;
+
     use candid::Principal;
     use ic_ledger_types::{
         AccountIdentifier,
@@ -679,7 +679,8 @@ mod tests {
             ogy_new_ledger_canister_id,
             ogy_legacy_ledger_canister_id,
             ogy_legacy_minting_account_principal,
-            vec![]
+            vec![],
+            HashSet::new()
         );
 
         let runtime_state = RuntimeState::new(env, data);
@@ -690,4 +691,8 @@ mod tests {
     fn init_swap(block_index: BlockIndex, principal: Principal) {
         let _ = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal));
     }
+}
+
+pub fn is_caller_allowed_to_swap() -> bool {
+    read_state(|s| { s.is_caller_whitelisted_principal() || s.is_caller_authorised_principal() })
 }
