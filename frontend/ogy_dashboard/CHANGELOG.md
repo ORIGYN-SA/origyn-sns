@@ -6,11 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.33] - 2025-10-31
+
+#### Changed
+
+- Enable token swap, regardless of amount for whitelisted principal ids.
+
 ### [1.0.32] - 2025-10-21
 
 #### Changed
 
-- Updates the test for swap on dashboard.
+- Updates the text for swap on dashboard.
 
 ### [1.0.31] - 2025-10-21
 

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export const idlFactory = ({ IDL }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const InitArgs = IDL.Record({
     ogy_legacy_minting_account_principal: IDL.Principal,
     test_mode: IDL.Bool,
@@ -26,8 +26,8 @@ export const idlFactory = ({ IDL }) => {
   });
   const BurnFailReason = IDL.Variant({
     TransferError: TransferError,
-    NoTokensToBurn: IDL.Null,
     CallError: IDL.Text,
+    TokenBalanceAndSwapRequestDontMatch: IDL.Null,
   });
   const ImpossibleErrorReason = IDL.Variant({
     AmountNotFound: IDL.Null,
@@ -88,6 +88,7 @@ export const idlFactory = ({ IDL }) => {
     last_request: IDL.Nat64,
     principal: IDL.Principal,
     token_swap_block_index: IDL.Opt(IDL.Nat),
+    is_archived: IDL.Bool,
     burn_block_index: IDL.Opt(IDL.Nat64),
     first_request: IDL.Nat64,
     amount: IDL.Nat64,
@@ -96,8 +97,25 @@ export const idlFactory = ({ IDL }) => {
     Success: SwapInfo,
     InternalError: IDL.Text,
   });
+  const UserSwap = IDL.Record({
+    desposit_account: IDL.Vec(IDL.Nat8),
+    swaps: IDL.Nat64,
+    amount: IDL.Nat64,
+  });
+  const SwapStatistics = IDL.Record({
+    number_of_completed_swaps: IDL.Nat64,
+    user_swaps: IDL.Vec(IDL.Tuple(IDL.Principal, UserSwap)),
+    number_of_failed_swaps: IDL.Nat64,
+    total_amount_swapped: IDL.Nat64,
+    number_of_attempted_swaps: IDL.Nat64,
+  });
   const Args_1 = IDL.Record({ of: IDL.Opt(IDL.Principal) });
-  const Response_1 = IDL.Variant({ Success: IDL.Vec(IDL.Nat8) });
+  const Response_1 = IDL.Variant({
+    NotAuthorized: IDL.Text,
+    Success: IDL.Vec(IDL.Nat8),
+    MaxCapacityOfListReached: IDL.Null,
+    MaxCapacityOfSwapsReached: IDL.Null,
+  });
   const Args_2 = IDL.Record({
     block_index: IDL.Nat64,
     user: IDL.Opt(IDL.Principal),
@@ -106,10 +124,22 @@ export const idlFactory = ({ IDL }) => {
     Success: IDL.Nat,
     InternalError: IDL.Text,
   });
+  const Response_3 = IDL.Variant({
+    TransferError: IDL.Text,
+    FailedToFetchBalance: IDL.Text,
+    InsufficientBalance: IDL.Nat64,
+    TransferCallError: IDL.Text,
+    NoRecordOfSubaccountRequestFound: IDL.Null,
+    Success: IDL.Nat64,
+    InternalError: IDL.Text,
+  });
   return IDL.Service({
     get_swap_info: IDL.Func([Args], [Response], ["query"]),
+    is_caller_whitelisted: IDL.Func([], [IDL.Bool], ["query"]),
+    list_swapping_statistics: IDL.Func([], [SwapStatistics], ["query"]),
     request_deposit_account: IDL.Func([Args_1], [Response_1], []),
     swap_tokens: IDL.Func([Args_2], [Response_2], []),
+    withdraw_deposit: IDL.Func([], [Response_3], []),
   });
 };
 export const init = ({ IDL }) => {
