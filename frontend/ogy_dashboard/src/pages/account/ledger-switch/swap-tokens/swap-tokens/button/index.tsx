@@ -2,7 +2,8 @@ import { Button } from "@components/ui";
 import { useSwapTokens } from "../context";
 
 const Btn = () => {
-  const { handleShow, fetchBalanceLegacy, accountId } = useSwapTokens();
+  const { handleShow, fetchBalanceLegacy, accountId, isWhitelisted } =
+    useSwapTokens();
   const { data: balanceOGYLegacy } = fetchBalanceLegacy;
 
   const needsMoreForSwap =
@@ -15,7 +16,8 @@ const Btn = () => {
         className="w-full"
         onClick={handleShow}
         disabled={
-          (!fetchBalanceLegacy.isSuccess && !accountId) || needsMoreForSwap
+          ((!fetchBalanceLegacy.isSuccess && !accountId) || needsMoreForSwap) &&
+          !isWhitelisted
         }
       >
         Swap your tokens

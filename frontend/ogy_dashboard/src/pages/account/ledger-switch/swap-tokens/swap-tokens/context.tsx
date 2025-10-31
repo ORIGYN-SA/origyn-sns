@@ -4,6 +4,7 @@ import { useWallet } from "@amerej/artemis-react";
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useSendTokens from "@services/queries/switch-ledger/useSendTokens";
 import useRequestSwap from "@services/queries/switch-ledger/useRequestSwap";
+import useIsWhitelisted from "@services/queries/switch-ledger/useIsWhitelisted";
 
 interface SwapTokensContextType {
   sendTokens: ReturnType<typeof useSendTokens>;
@@ -14,6 +15,7 @@ interface SwapTokensContextType {
   handleClose: () => void;
   principal: string | undefined;
   accountId: string | undefined;
+  isWhitelisted: boolean | undefined;
 }
 
 const SwapTokensContext = createContext<SwapTokensContextType | undefined>(
@@ -36,6 +38,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
   const sendTokens = useSendTokens();
   const requestSwap = useRequestSwap();
   const fetchBalanceLegacy = useFetchBalanceOGYLegacyOwner();
+  const { data: isWhitelisted } = useIsWhitelisted();
 
   const handleClose = () => {
     setShow(false);
@@ -54,6 +57,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
         handleClose,
         principal: principalId,
         accountId,
+        isWhitelisted,
       }}
     >
       {children}
