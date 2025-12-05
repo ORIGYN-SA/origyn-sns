@@ -11,6 +11,7 @@ import OurPartners from "./components/OurPartners/OurPartners";
 import BePart from "./components/BePart/BePart";
 import Footer from "./components/Footer/Footer";
 import UseCasesPage from "./components/UseCasesPage/UseCasesPage";
+import HelpCenterPage from "./components/HelpCenterPage/HelpCenterPage";
 import { useStatsData } from "./hooks/calculator/useStatsData";
 import "./styles/global.css";
 
@@ -39,6 +40,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/use-case/:title" element={<UseCasesPage />} />
+      <Route path="/help-center" element={<HelpCenterPage />} />
     </Routes>
   );
 }

@@ -1,0 +1,271 @@
+.helpCenterContainer {
+  min-height: 100vh;
+  background: #f5f4f4;
+  padding: 80px 0;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 97px;
+}
+
+.mainTitle {
+  font-size: 4.5rem;
+  font-weight: 300;
+  margin-bottom: 48px;
+  font-family: "General Sans";
+  font-weight: 300;
+  font-size: 88px;
+  line-height: 88px;
+  letter-spacing: 0%;
+  line-height: 1;
+  color: #1a1a1a;
+}
+
+.mainTitle span {
+  font-family: "General Sans Italic";
+  font-weight: 200;
+  font-style: italic;
+  font-size: 96px;
+  line-height: 88px;
+  letter-spacing: 0%;
+}
+
+.searchContainer {
+  margin-top: 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.searchInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  width: calc(100% - 36px);
+  padding: 12px 12px 12px 24px;
+  font-family: "General Sans";
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  background: #ffffff;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  box-shadow: 0px 4px 24px 0px #00000026;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-37%);
+  color: gray;
+  pointer-events: none;
+}
+
+.accordionContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.accordionItem {
+  background: #fcfafa;
+  border: 1px solid #cde9ec;
+  transition: all 0.3s ease;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.accordionHeader:hover {
+  background-color: #f9fafb;
+}
+
+.accordionHeaderLeft {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.iconContainer {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 12px;
+  padding-top: 5px;
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 24px;
+  color: #222526;
+  margin: 0 0 8px 0;
+  line-height: 32px;
+}
+
+.description {
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 16px;
+  color: #69737c;
+  margin: 0;
+  line-height: 24px;
+}
+
+.expandIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: #9ca3af;
+  margin-top: 4px;
+  transition:
+    transform 0.3s ease,
+    color 0.2s ease;
+}
+
+.expandIcon.rotated {
+  transform: rotate(180deg);
+}
+
+.accordionContent {
+  padding-bottom: 24px;
+}
+.accordionContent > div > a {
+  color: #69737c;
+}
+
+.answer {
+  font-family: "General Sans";
+  font-weight: 400;
+  padding: 0;
+  padding-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #69737c;
+}
+
+.answer strong {
+  font-weight: 600;
+}
+
+.answer a {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.answer a:hover {
+  color: #1d4ed8;
+}
+
+@media (max-width: 990px) {
+  .mainTitle {
+    font-size: 68px;
+  }
+
+  .mainTitle span {
+    font-size: 72px;
+  }
+
+  .searchContainer {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .helpCenterContainer {
+    padding: 40px 0;
+  }
+
+  .content {
+    padding: 0 16px;
+  }
+
+  .searchContainer {
+    width: calc(100% - 32px);
+
+    margin-top: 24px;
+  }
+
+  .searchInput {
+    padding: 14px 12px 14px 16px;
+    font-size: 15px;
+  }
+
+  .searchIcon {
+    right: 24px;
+  }
+
+  .accordionHeader {
+    padding: 20px;
+  }
+
+  .accordionHeaderLeft {
+    gap: 12px;
+  }
+
+  .iconContainer {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .answer {
+    padding: 0;
+    padding-top: 16px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .iconContainer {
+    align-self: flex-start;
+  }
+}

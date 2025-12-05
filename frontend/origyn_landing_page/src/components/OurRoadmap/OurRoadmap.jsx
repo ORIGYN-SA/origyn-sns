@@ -191,27 +191,35 @@ const roadmapCards = [
     image: "/roadmap-7.png",
     link: "https://origyn.medium.com/a-new-chapter-for-nfts-on-icp-origyn-launches-icrc7-icrc37-986a009ee641",
   },
+
   {
-    title: "Public Minting Studio Launch",
-    description:
-      "A self-service tool is launched allowing anyone to mint on-chain, certified NFTs using ORIGYN infrastructure.",
-    when: "Q4 2025",
-    year: 2025,
-    image: "/roadmap-8.png",
-  },
-  {
-    title: "Runestone",
+    title: "New Minting Studio for Integrators and Institutions",
     when: "Q1 2026",
     year: 2026,
     description:
-      "Real-world marble sculpture is fractionalized into certified NFTs, bridging culture and on-chain value.",
+      "A self-service tool is launched allowing anyone to mint on-chain, certificates of RWA on  ORIGYN infrastructure.",
+    image: "/roadmap-int.png",
+  },
+  {
+    title: "Runestone",
+    when: "Q2 2026",
+    year: 2026,
+    description: "The Runestone mystery will be revealed Q2 2026 in Geneva.",
     image: "/roadmap-9.png",
+  },
+  {
+    title: "Minting Lab",
+    description:
+      "A self-service tool is launched allowing anyone to mint on-chain, using ORIGYN infrastructure.",
+    when: "Q2 2026",
+    year: 2025,
+    image: "/roadmap-8.png",
   },
   {
     title: "IP Protection Implementation",
     description:
       "Support for on-chain certification of intellectual property rights is integrated into the protocol.",
-    when: "Q2 2026",
+    when: "Q3 2026",
     year: 2026,
     image: "/roadmap-10.png",
   },
@@ -227,7 +235,7 @@ const roadmapCards = [
     title: "Global Wallet and Marketplace Integration",
     description:
       "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide.",
-    when: "Q3 2026",
+    when: "Q4 2026",
     year: 2026,
     image: "/roadmap-wallet-int.jpg",
   },
@@ -265,7 +273,7 @@ const DesktopCards = () => {
   // Add initial scroll to 2025
   useEffect(() => {
     const wrapper = roadmapWrapperRef.current;
-    const ref = yearRefs.current[2025];
+    const ref = yearRefs.current[2026];
 
     if (wrapper && ref && ref.current) {
       const card = ref.current;

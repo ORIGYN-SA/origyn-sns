@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.1.8] - 2025-12-05
+
+#### Updated
+
+- Adds the help center page.
+- Updates the use cases page.
+- Minor update on the homepage 'How it works' section.
+
 ### [1.1.7] - 2025-09-30
 
 #### Updated

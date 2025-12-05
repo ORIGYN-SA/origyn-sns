@@ -74,6 +74,10 @@ body {
   display: block;
 }
 
+#help-center-breaks {
+  display: block;
+}
+
 #certify-break {
   display: none;
 }
@@ -84,6 +88,10 @@ body {
 
 @media (max-width: 768px) {
   #works-break {
+    display: none;
+  }
+
+  #help-center-breaks {
     display: none;
   }
 

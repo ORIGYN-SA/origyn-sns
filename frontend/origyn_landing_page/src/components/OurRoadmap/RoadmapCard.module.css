@@ -45,6 +45,15 @@
   margin-bottom: 8px;
 }
 
+.leftTitleSmall {
+  font-family: "The Seasons Light";
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: 0%;
+  margin-bottom: 8px;
+}
+
 .leftDescription {
   font-family: "General Sans";
   font-weight: 300;
@@ -118,6 +127,11 @@
   .leftTitle {
     font-size: 22px;
     line-height: 32px;
+  }
+
+  .leftTitleSmall {
+    font-size: 18px;
+    line-height: 28px;
   }
 
   .leftDescription {
