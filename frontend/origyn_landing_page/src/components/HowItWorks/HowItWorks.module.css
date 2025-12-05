@@ -56,7 +56,7 @@
   display: flex;
   gap: 0.8rem;
   margin-top: 24px;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .indicator {
@@ -71,7 +71,7 @@
 }
 
 .indicator.active {
-  background-color: #00e0ff;
+  background-color: #000000;
 }
 
 .rightPanelWrapper {

@@ -57,6 +57,19 @@ const UseCases = ({ id }) => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    const storedScrollPosition = localStorage.getItem("scrollPosition");
+    if (storedScrollPosition === "use-cases") {
+      const element = document.getElementById("use-cases");
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+      localStorage.removeItem("scrollPosition");
+    }
+  }, []);
+
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
