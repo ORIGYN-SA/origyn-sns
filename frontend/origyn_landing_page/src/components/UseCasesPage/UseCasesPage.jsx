@@ -11,7 +11,7 @@ const useCaseData = {
       title: "Gold",
       description:
         "As the world's largest asset and most closely monitored commodity, gold requires the highest levels of security. <br /><br />ORIGYN meets these requirements, as demonstrated by <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, the world leader in gold refining, which chose ORIGYN protocol to secure their data. For the first time, all technical information related to gold bars - including high-definition images and documents - is recorded in a single certificate on the blockchain.",
-      images: ["/uc-p-gold-1.jpg"],
+      images: ["/uc-p-gold-1.png"],
     },
     {
       description:
@@ -24,12 +24,17 @@ const useCaseData = {
       title: "Art",
       description:
         "Art experts are deeply concerned about trust and the guarantee of certificates for artworks. This is why several cases have already adopted ORIGYN technology.<br /><br />Established artists like <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> and <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> have created their own ORIGYN certificates to protect the data related to their work. These certificates are fully on-chain, tamper-proof and impossible to copy, allowing artists to combat counterfeiting while improving the collector experience through high-definition images, videos, and documents.",
-      images: ["/uc-p-art-1-1.jpg", "/uc-p-art-1-2.jpg", "/uc-p-art-1-3.jpeg"],
+      images: [
+        "/uc-p-art-1-1.jpg",
+        "/uc-p-art-1-2.png",
+        "/uc-p-art-1-3.png",
+        "/uc-p-art-1-4.png",
+      ],
     },
     {
       description:
         "Entities like foundations, organizations, families, galleries, and art advisors who need to create digital certificates for their clients started to use ORIGYN to maintain maximum security and confidentiality. Several galleries have already implemented ORIGYN technology, including the Retelet Gallery for certificates of René Magritte artworks.<br /><br />ORIGYN technology also enables sales through certificates, particularly co-ownership sales. This allows artworks to be shared among multiple owners by dividing the certificate into several parts, each serving as proof of ownership.",
-      images: ["/uc-p-art-2-1.jpg", "/uc-p-art-2-2.jpg"],
+      images: ["/uc-p-art-2-1.png"],
     },
   ],
   madein: [
@@ -38,7 +43,7 @@ const useCaseData = {
       description:
         "National origin is more than a label. It is a declaration of identity, quality, and cultural value. As counterfeiting rises, proving where and how a product is made has become a key differentiator for brands across industries.<br /><br />In response, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> created the 100% Made in Italy certification. This legally recognized standard protects Italian excellence through strict documentation, independent audits, and government-level advocacy. ORIGYN provides the digital foundation of this system by recording every certified product on the blockchain as a verifiable proof of origin.",
       images: [
-        "/uc-p-made-in-1-1.jpg",
+        "/uc-p-made-in-1-1.png",
         "/uc-p-made-in-1-2.png",
         "/uc-p-made-in-1-3.png",
         "/uc-p-made-in-1-4.png",
@@ -47,7 +52,7 @@ const useCaseData = {
     {
       description:
         "Each certificate becomes a secure, tamper-proof digital passport. It reinforces consumer trust, ensures transparency across the supply chain, and supports businesses that choose to lead with authenticity.",
-      images: ["/uc-p-made-in-2-1.jpg"],
+      images: ["/uc-p-made-in-2-1.png"],
     },
   ],
   luxury: [
@@ -60,7 +65,7 @@ const useCaseData = {
     {
       description:
         "Other luxury companies like <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> also use ORIGYN to record the complete traceability chain of their diamonds destined for renowned watchmakers.Many other applications are possible, including adding personalized marketing content to certificates or combining the technology with AI to determine authenticity in real time for secondary markets.",
-      images: ["/uc-p-luxury-2-1.jpg"],
+      images: ["/uc-p-luxury-2-1.png"],
     },
   ],
 };

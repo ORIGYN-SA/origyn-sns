@@ -25,11 +25,29 @@ const Header = () => {
     return () => window.removeEventListener("popstate", handleLocationChange);
   }, []);
 
+  // Handle scrolling to section when landing on home page with hash
+  useEffect(() => {
+    if (currentPath === "/" && window.location.hash) {
+      const elementId = window.location.hash.substring(1); // Remove the #
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100); // Small delay to ensure page is loaded
+    }
+  }, [currentPath]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleNavClick = (elementId) => {
+    if (currentPath === "/help-center") {
+      window.location.href = `/#${elementId}`;
+      return;
+    }
+
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -38,6 +56,7 @@ const Header = () => {
   };
 
   const isUseCasePage = currentPath.startsWith("/use-case/");
+  const isHelpCenterPage = currentPath === "/help-center";
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
@@ -100,6 +119,12 @@ const Header = () => {
             rel="noopener noreferrer"
           >
             DASHBOARD
+          </a>
+          <a
+            href="/help-center"
+            className={`${styles.navLink} ${isHelpCenterPage ? styles.active : ""}`}
+          >
+            HELP
           </a>
         </nav>
       </div>

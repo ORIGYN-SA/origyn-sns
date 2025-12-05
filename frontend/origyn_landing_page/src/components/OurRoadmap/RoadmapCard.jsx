@@ -2,11 +2,14 @@ import { forwardRef } from "react";
 import styles from "./RoadmapCard.module.css";
 
 const RoadmapCard = forwardRef(({ title, image, description, when }, ref) => {
+  const isLongTitle = title.length > 35;
+  const titleClass = isLongTitle ? styles.leftTitleSmall : styles.leftTitle;
+
   return (
     <div className={styles.cardWrapper} ref={ref}>
       <div className={styles.left}>
         <div>
-          <h1 className={styles.leftTitle}>{title}</h1>
+          <h1 className={titleClass}>{title}</h1>
           <p className={styles.leftDescription}>{description}</p>
         </div>
         <div className={styles.badge}>{when}</div>
