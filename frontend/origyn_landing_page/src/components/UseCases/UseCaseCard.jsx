@@ -18,6 +18,7 @@ const UseCaseCard = ({ title, description, image, height, position, link }) => {
             <button
               className={styles.discoverButton}
               onClick={() => {
+                localStorage.setItem("scrollPosition", "use-cases");
                 window.scrollTo(0, 0);
                 navigate(link);
               }}
@@ -32,6 +33,7 @@ const UseCaseCard = ({ title, description, image, height, position, link }) => {
         <button
           className={styles.mobileDiscoverButton}
           onClick={() => {
+            localStorage.setItem("scrollPosition", "use-cases");
             window.scrollTo(0, 0);
             navigate(link);
           }}
