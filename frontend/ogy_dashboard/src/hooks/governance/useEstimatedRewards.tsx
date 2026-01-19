@@ -23,7 +23,7 @@ const useEstimatedRewards = () => {
   const [estimatedRewards, setEstimatedRewards] = useState<
     IEstimatedReward[] | null
   >(null);
-  const REWARD_RATE = 250000000;
+  const REWARD_RATE = 125000000;
   const STEPS = [1, 1.25, 1.5, 1.75, 2];
   const STEPS_LENGTH = 5;
 
