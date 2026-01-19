@@ -10,6 +10,7 @@ interface CollectionCardProps {
   nftCount?: number;
   imageUrl?: string;
   isLoading?: boolean;
+  isLegacy?: boolean;
 }
 
 export const CollectionCard = ({
@@ -18,7 +19,11 @@ export const CollectionCard = ({
   canisterId,
   imageUrl,
   isLoading = false,
+  isLegacy = false,
 }: CollectionCardProps) => {
+  const collectionUrl = isLegacy
+    ? `https://${canisterId}.raw.icp0.io/collection/info`
+    : `https://dashboard.internetcomputer.org/canister/${canisterId}`;
   if (isLoading) {
     return (
       <div className="rounded-xl overflow-hidden bg-surface-2 w-full aspect-[4/3]">
@@ -52,7 +57,7 @@ export const CollectionCard = ({
         )}
       </div>
       <a
-        href={`https://${canisterId}.raw.icp0.io/collection/info`}
+        href={collectionUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="absolute bottom-0 left-0 w-full h-10 bg-gray-50 text-black text-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-full group-hover:translate-y-0"
