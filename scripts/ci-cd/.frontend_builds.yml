@@ -18,9 +18,6 @@ $[[ inputs.src-folder ]] test build:
         - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
         - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate test declarations"]
-  variables:
-    KUBERNETES_MEMORY_LIMIT: "5Gi"
-    KUBERNETES_MEMORY_REQUEST: "5Gi"
   extends: .node template
   script:
     - npm run build:staging --workspace $[[ inputs.src-folder ]]

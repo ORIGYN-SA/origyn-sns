@@ -11,3 +11,6 @@
       - frontend/**/node_modules/
   before_script:
     - npm ci --cache .npm --prefer-offline
+  variables:
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "5Gi"
