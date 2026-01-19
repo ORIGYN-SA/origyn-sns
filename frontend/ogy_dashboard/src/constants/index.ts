@@ -40,6 +40,41 @@ export const APP_MODE = import.meta.env.MODE;
 export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE);
 export const TRANSACTION_FEE_ICP = import.meta.env.VITE_TRANSACTION_FEE_ICP;
 
+/**
+ * Legacy ORIGYN NFT Standard Collection IDs
+ * These collections use the old ORIGYN NFT standard (collection_nft_origyn method)
+ * All other collections default to ICRC-7 standard
+ * This list will shrink as collections are deprecated
+ */
+export const LEGACY_ORIGYN_COLLECTION_IDS = new Set([
+  // Precious Metals
+  "rsvpl-kiaaa-aaaap-abhea-cai",
+  "vnuik-tyaaa-aaaap-abyyq-cai",
+  "vrhlk-mqaaa-aaaap-ahw3q-cai",
+  "u3ijq-oaaaa-aaaap-ahw4q-cai",
+  "b6zbl-pqaaa-aaaap-ahzaq-cai",
+  "bx2kx-zyaaa-aaaap-ahzba-cai",
+  "bq3md-uaaaa-aaaap-ahzbq-cai",
+  "qtmba-dyaaa-aaaap-akhgq-cai",
+  "qo7hj-fqaaa-aaaap-akmvq-cai",
+  "of6pp-2iaaa-aaaap-akoza-cai",
+  "45oqu-5qaaa-aaaap-anvwq-cai",
+  // Certification
+  "nszbk-7iaaa-aaaap-abczq-cai",
+  "ql47b-5iaaa-aaaap-ahcqa-cai",
+  "7ilpe-waaaa-aaaap-ahq7a-cai",
+  // Jewelry
+  "4clim-pyaaa-aaaap-abkaa-cai",
+  // Art
+  "fu7xh-xiaaa-aaaap-ahg7q-cai",
+  "gq4qu-3iaaa-aaaap-ahnfa-cai", // Suzanne Syz collection
+  "2gaw2-xyaaa-aaaap-ahpga-cai",
+]);
+
+export const isLegacyOrigynCollection = (canisterId: string): boolean => {
+  return LEGACY_ORIGYN_COLLECTION_IDS.has(canisterId);
+};
+
 export const ORIGYN_ACCOUNTS = [
   {
     name: "ORIGYN Foundation",
