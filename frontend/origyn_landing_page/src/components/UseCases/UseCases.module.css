@@ -5,7 +5,7 @@
 }
 
 .header {
-  width: 810px;
+  /* width: 810px; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -49,43 +49,37 @@
 }
 
 .cardWrapper {
-  height: 600px;
   width: 100%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
+  overflow: visible;
 }
 
 .card {
-  position: absolute;
+  position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  height: 450px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   border-radius: 16px;
 }
 
-.card.top {
-  top: 0;
-}
-
-.card.bottom {
-  bottom: 0;
-}
-
 .cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+}
+
+.cardWrapper:hover .cardImage {
+  transform: scale(1.1);
 }
 
 .cardOverlay {
   position: absolute;
-  top: 24px;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -98,9 +92,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  padding: 48px 12px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+}
+
+.cardWrapper:hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardTitleBelow {
+  font-family: "General Sans";
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 12px 0 0 0;
+  letter-spacing: 1px;
 }
 
 .cardContent {
@@ -152,20 +160,6 @@
 .discoverButton:hover {
   background: white;
   color: black;
-}
-
-.card:hover {
-  transform: scale(1.02);
-}
-
-.card:hover .cardOverlay {
-  opacity: 1;
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .card:active .cardOverlay {
-    opacity: 1;
-  }
 }
 
 .indicators {
@@ -234,20 +228,11 @@
   }
 
   .cardWrapper {
-    height: auto;
     flex: 0 0 100%;
-    transform: translateX(calc(-100% * var(--current-index, 0)));
-    transition: transform 0.3s ease-in-out;
-    border-radius: 0;
     display: flex;
     flex-direction: column;
-  }
-
-  .card {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    border-radius: 0;
+    transform: translateX(calc(-100% * var(--current-index, 0)));
+    transition: transform 0.3s ease-in-out;
   }
 
   .indicators {
@@ -257,67 +242,11 @@
     justify-content: center;
   }
 
-  .card {
-    height: 300px !important;
-    position: relative;
-  }
-
-  .cardImage {
-    height: 300px !important;
-  }
-
   .cardOverlay {
-    display: none !important;
+    opacity: 1;
   }
 
-  .mobileContent {
-    display: block;
-    padding: 24px 0;
-    text-align: center;
-  }
-
-  .mobileTitle {
-    font-family: "General Sans";
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 1px;
-    color: #222526;
-    text-transform: uppercase;
-    margin: 0 0 12px 0;
-  }
-
-  .mobileDescription {
-    font-family: "General Sans";
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: #666;
-    margin: 0 0 20px 0;
-    opacity: 0.9;
-  }
-
-  .mobileDiscoverButton {
-    background: #000000;
-    border-radius: 25px;
-    border: none;
-    color: white;
-    font-family: "General Sans";
-    font-weight: 400;
-    font-size: 12px;
-    padding-top: 12px;
-    padding-right: 12px;
-    padding-bottom: 12px;
-    padding-left: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: none;
-    width: 120px;
-    gap: 6px;
-  }
-
-  .mobileDiscoverButton:hover {
-    background: #333;
-    transform: scale(1.05);
+  .cardTitleBelow {
+    display: none;
   }
 }

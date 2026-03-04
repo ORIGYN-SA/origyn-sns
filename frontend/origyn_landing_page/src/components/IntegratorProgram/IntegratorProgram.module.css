@@ -5,23 +5,21 @@
   margin: 0 auto;
   padding-left: 75px;
   background: white;
-  height: 820px;
+
   position: relative;
 }
 
 .leftPanel {
   flex: 1;
   display: flex;
-  padding-top: 62px;
-  flex-direction: column;
+  padding-top: 64px;
+  justify-content: center;
   padding-right: 2rem;
   padding-bottom: 64px;
 }
 
-.buttonContainer {
-  position: absolute;
-  bottom: 64px;
-  left: 75px;
+.leftPanelContent {
+  text-align: left;
 }
 
 .title {

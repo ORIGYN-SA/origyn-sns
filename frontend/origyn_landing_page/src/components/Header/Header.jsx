@@ -1,67 +1,101 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Header.module.css";
+
+const NAV_ITEMS = [
+  {
+    id: "certificates",
+    label: "CERTIFICATES",
+    href: "https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity",
+    type: "external",
+  },
+  {
+    id: "integrator-program",
+    label: "INTEGRATORS",
+    type: "anchor",
+    activeWhen: (path) => path.startsWith("/integrator"),
+  },
+  // {
+  //   id: "our-partners",
+  //   label: "ECOSYSTEM",
+  //   type: "anchor",
+  // },
+  {
+    id: "use-cases",
+    label: "USE CASES",
+    type: "anchor",
+    activeWhen: (path) => path.startsWith("/use-case/"),
+  },
+  // {
+  //   id: "ogy-token",
+  //   label: "OGY TOKEN",
+  //   href: "https://coinmarketcap.com/currencies/origyn-foundation/",
+  //   type: "external",
+  // },
+  {
+    id: "governance",
+    label: "GOVERNANCE",
+    href: "https://dashboard.origyn.com",
+    type: "external",
+  },
+  {
+    id: "help-center",
+    label: "HELP",
+    href: "/help-center",
+    type: "internal",
+    activeWhen: (path) => path.startsWith("/help-center"),
+  },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const currentPath = window.location.pathname;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
-    window.addEventListener("popstate", handleLocationChange);
-    return () => window.removeEventListener("popstate", handleLocationChange);
-  }, []);
-
-  // Handle scrolling to section when landing on home page with hash
-  useEffect(() => {
-    if (currentPath === "/" && window.location.hash) {
-      const elementId = window.location.hash.substring(1); // Remove the #
-      setTimeout(() => {
-        const element = document.getElementById(elementId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100); // Small delay to ensure page is loaded
-    }
-  }, [currentPath]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleNavClick = (elementId) => {
-    if (currentPath === "/help-center") {
-      window.location.href = `/#${elementId}`;
-      return;
-    }
-
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleAnchorClick = (e, sectionId) => {
     setIsMenuOpen(false);
+
+    if (currentPath === "/") {
+      e.preventDefault();
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
-  const isUseCasePage = currentPath.startsWith("/use-case/");
-  const isHelpCenterPage = currentPath === "/help-center";
+  const renderNavItem = (item) => {
+    const isActive = item.activeWhen?.(currentPath) ?? false;
+    const isExternal = item.type === "external";
+
+    return (
+      <a
+        key={item.id}
+        href={item.href ?? `/#${item.id}`}
+        className={`${styles.navLink} ${isActive ? styles.active : ""}`}
+        onClick={
+          item.type === "anchor"
+            ? (e) => handleAnchorClick(e, item.id)
+            : undefined
+        }
+        {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+      >
+        {item.label}
+      </a>
+    );
+  };
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
+    <header className={styles.header}>
       <div className={styles.container}>
-        <a href="/" className={styles.logoContainer}>
+        <a
+          href="/"
+          className={styles.logoContainer}
+          onClick={(e) => {
+            if (currentPath === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <img
             src="/origyn-logo-white.png"
             alt="ORIGYN Logo"
@@ -70,7 +104,7 @@ const Header = () => {
         </a>
         <button
           className={`${styles.burgerMenu} ${isMenuOpen ? styles.open : ""}`}
-          onClick={toggleMenu}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
           <span></span>
@@ -78,54 +112,7 @@ const Header = () => {
           <span></span>
         </button>
         <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ""}`}>
-          <a
-            href="https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity"
-            className={styles.navLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CERTIFICATES
-          </a>
-          <a
-            onClick={() => handleNavClick("integrator-program")}
-            className={styles.navLink}
-          >
-            INTEGRATORS
-          </a>
-          <a
-            onClick={() => handleNavClick("our-partners")}
-            className={styles.navLink}
-          >
-            ECOSYSTEM
-          </a>
-          <a
-            onClick={() => handleNavClick("use-cases")}
-            className={`${styles.navLink} ${isUseCasePage ? styles.active : ""}`}
-          >
-            USE CASES
-          </a>
-          <a
-            href="https://coinmarketcap.com/currencies/origyn-foundation/"
-            className={styles.navLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            OGY TOKEN
-          </a>
-          <a
-            href="https://dashboard.origyn.com"
-            className={styles.navLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            DASHBOARD
-          </a>
-          <a
-            href="/help-center"
-            className={`${styles.navLink} ${isHelpCenterPage ? styles.active : ""}`}
-          >
-            HELP
-          </a>
+          {NAV_ITEMS.map(renderNavItem)}
         </nav>
       </div>
     </header>

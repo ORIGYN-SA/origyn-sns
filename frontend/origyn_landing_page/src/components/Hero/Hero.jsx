@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
+import ButtonAnchor from "../Button/ButtonAnchor";
 import Stats from "../Stats/Stats";
 import styles from "./Hero.module.css";
 
@@ -23,7 +24,7 @@ const Hero = ({ data }) => {
       title: "Total Value Locked (TVL) of certified assets in usd",
       tooltipTitle: "Total Value Locked (TVL)",
       tooltip:
-        "The combined estimated value in USD of all real‑world assets that have been certified and secured on ORIGYN’s blockchain.",
+        "TVL corresponds to the value of the issued certificates; this does not mean that ORIGYN holds these assets in custody.",
     },
     {
       value: data?.users,
@@ -94,14 +95,21 @@ const Hero = ({ data }) => {
   return (
     <div className={styles.heroWithStats}>
       <div className={styles.heroContainer}>
-        <img
+        <video
           id="hero-bg-img"
           ref={bgRef}
-          src="/ogy-background.png"
-          alt="Background"
           className={styles.backgroundImage}
           style={{ willChange: "transform" }}
-        />
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source
+            src="https://pub-1832d2c733894370a7282135b65cc177.r2.dev/claimlink_login_bg_video.mp4"
+            type="video/mp4"
+          />
+        </video>
         <div className={styles.contentWrapper}>
           <div className={styles.subtitleDesktop}>
             Secure your assets, intellectual property, <br />
@@ -123,17 +131,19 @@ const Hero = ({ data }) => {
                 text="Certify your assets"
                 onClick={() => {
                   const element = document.getElementById(
-                    "certify-your-assets"
+                    "certify-your-assets",
                   );
                   if (element) {
                     element.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               />
-              <Button
-                text="Buy $OGY"
-                url="https://www.mexc.com/exchange/OGY_USDT"
-              />
+              <div className="flex flex-col items-center gap-4">
+                <Button
+                  text="Buy $OGY"
+                  url="https://www.mexc.com/exchange/OGY_USDT"
+                />
+              </div>
             </div>
           </div>
         </div>
