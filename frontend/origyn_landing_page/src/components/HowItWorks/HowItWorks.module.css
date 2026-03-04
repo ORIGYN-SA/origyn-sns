@@ -11,11 +11,14 @@
 .leftPanel {
   flex: 1;
   display: flex;
+  justify-content: center;
   padding-top: 64px;
-  flex-direction: column;
   padding-right: 2rem;
   padding-bottom: 64px;
-  justify-content: space-between;
+}
+
+.leftPanelContent {
+  text-align: left;
 }
 
 .title {

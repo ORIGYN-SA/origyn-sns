@@ -105,7 +105,7 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className={styles.bottom}>©2025 all rights reserved – origyn</div>
+      <div className={styles.bottom}>©2026 All rights reserved – origyn</div>
     </>
   );
 };

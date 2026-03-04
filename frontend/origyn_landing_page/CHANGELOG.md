@@ -8,12 +8,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.2.0] - 2026-02-17
+
+#### Updated
+
+- Minor changes and improvements to UI.
+
+#### Added
+
+- Tokenized Gold section
+- Integrator program section & page
+- Integrator apply form
+
 ### [1.1.9] - 2025-0-05
 
 #### Updated
 
 - Small updates to ui to match design.
-
 
 ### [1.1.8] - 2025-12-05
 
@@ -28,7 +39,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 #### Updated
 
 - Minor changes and improvements to UI.
-
 
 ### [1.1.6] - 2025-09-26
 

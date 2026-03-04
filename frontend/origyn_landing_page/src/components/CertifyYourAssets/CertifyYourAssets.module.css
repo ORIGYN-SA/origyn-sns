@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  color: white;
 }
 
 .calculatorWrapper {
@@ -12,6 +14,10 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.calculatorInner {
+  position: relative;
 }
 
 .gradientBackground {
@@ -65,9 +71,9 @@
 .contactBoxAbsolute {
   position: absolute;
   top: 50%;
-  right: 11vw;
+  left: 100%;
+  margin-left: 40px;
   transform: translateY(-50%);
-  border-top: 1px solid #dbdbdb;
   padding: 16px 7px;
   min-width: 260px;
   max-width: 320px;
@@ -81,30 +87,25 @@
 
 .contactText {
   font-family: "General Sans";
-  font-weight: 600;
+  font-weight: 400;
   font-size: 18px;
   line-height: 24px;
 }
 
-@media (max-width: 1520px) {
-  .contactBoxAbsolute {
-    position: absolute;
-    margin-top: 24px;
-    transform: none;
-    right: 0.5vw;
-    top: 50%;
-  }
-}
-
 @media (max-width: 1200px) {
+  .calculatorInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
   .contactBoxAbsolute {
     position: static;
+    transform: none;
+    margin-left: 0;
     width: 100%;
     max-width: 100%;
-    margin-top: 24px;
-    transform: none;
-    right: 0;
-    top: auto;
   }
 }
 
@@ -167,13 +168,9 @@
 
   .contactBoxAbsolute {
     order: 3;
-    position: static;
     width: 100%;
     max-width: 100%;
     margin-top: 0;
-    transform: none;
-    right: 0;
-    top: auto;
   }
 
   .contactText {
