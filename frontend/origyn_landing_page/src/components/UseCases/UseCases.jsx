@@ -7,34 +7,28 @@ const useCases = [
     title: "Art",
     description:
       "Authenticate and protect the provenance of physical and digital artworks on-chain.",
-    image: "/uc-1.png",
-    position: "top",
-    height: "550px",
+    image: "/use-cases/art.webp",
     link: "/use-case/art",
   },
   {
     title: "Gold",
     description:
       "Certify gold with immutable, traceable, and tamper-proof digital certificates.",
-    image: "/uc-2.jpg",
-    position: "bottom",
+    image: "/use-cases/gold.webp",
     link: "/use-case/gold",
   },
   {
     title: "Diamonds",
     description:
       "Track origin, grading, and ownership of each diamond with blockchain precision.",
-    image: "/uc-3-c.jpg",
-    position: "top",
-    height: "570px",
+    image: "/use-cases/diamonds.webp",
     link: "/use-case/luxury",
   },
   {
     title: "Made In",
     description:
       "Prove the origin, authenticity, and craftsmanship of any product, from watches to fashion.",
-    image: "/uc-4.jpg",
-    position: "top",
+    image: "/use-cases/made_in.webp",
     link: "/use-case/madein",
   },
 ];

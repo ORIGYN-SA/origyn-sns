@@ -13,10 +13,12 @@
 
 .backgroundImage {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
+  z-index: 0;
 }
 
 .gradientOverlay {
@@ -40,10 +42,10 @@
   color: #fff;
   text-align: center;
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1440px;
   padding: 0 48px;
-  position: relative;
 }
 
 .subtitleDesktop {
@@ -82,12 +84,13 @@
 .buttonGroup {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   z-index: 3;
   width: 100%;
   position: relative;
   padding-left: 40px;
-  padding-right: 78px;
+  padding-right: 20px;
+  margin-top: 24px;
 }
 
 .heroWithStats {
@@ -137,6 +140,7 @@
 
   .buttonGroup {
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 0;
   }
@@ -206,6 +210,7 @@
   padding: 0 12px;
   position: absolute;
   bottom: 0;
+  z-index: 1;
   flex-shrink: 0;
   color: #fff;
   font-family: Helvetica;
@@ -224,4 +229,8 @@
   display: inline-block;
   animation: scroll 50s linear infinite;
   padding-left: 0;
+}
+
+.gldtButton a {
+  background: linear-gradient(to right, white, #fff2c9);
 }

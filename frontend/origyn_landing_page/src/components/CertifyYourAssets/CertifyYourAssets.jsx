@@ -25,13 +25,15 @@ const CertifyYourAssets = ({ id }) => {
 
       <div className={styles.calculatorWrapper}>
         <div className={styles.gradientBackground} />
-        <Calculator />
-      </div>
-      <div className={styles.contactBoxAbsolute}>
-        <div className={styles.contactText}>
-          To certify your assets get in touch with us:
+        <div className={styles.calculatorInner}>
+          <Calculator />
+          <div className={styles.contactBoxAbsolute}>
+            <div className={styles.contactText}>
+              To certify your assets get in touch with us:
+            </div>
+            <Button text="Contact ORIGYN" url="mailto:techsupport@origyn.com" />
+          </div>
         </div>
-        <Button text="Contact ORIGYN" url="mailto:techsupport@origyn.com" />
       </div>
     </div>
   );

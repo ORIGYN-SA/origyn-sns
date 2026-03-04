@@ -1,0 +1,9 @@
+name = "integrator-join"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+TO_EMAIL = "partnerships@origyn.ch"
+CC_EMAILS = "karolina@origyn.ch, silvia@origyn.ch, tess@origyn.ch"
+GOOGLE_CLIENT_EMAIL = "mail-worker-sender@gyb-project-4gj-wpq-l6c.iam.gserviceaccount.com"
+GOOGLE_IMPERSONATE_EMAIL = "noreply@origyn.ch"

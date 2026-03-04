@@ -193,15 +193,17 @@ const roadmapCards = [
   },
 
   {
-    title: "New Minting Studio for Integrators and Institutions",
+    title: "Launch of a Public",
+    titleSpan: "Minting Studio",
     when: "Q1 2026",
     year: 2026,
     description:
       "A self-service tool is launched allowing anyone to mint on-chain, certificates of RWA on  ORIGYN infrastructure.",
-    image: "/roadmap-int.png",
+    image: "/minting_studio_roadmap.jpg",
   },
   {
-    title: "Runestone",
+    title: "",
+    titleSpan: "Runestone",
     when: "Q2 2026",
     year: 2026,
     description: "The Runestone mystery will be revealed Q2 2026 in Geneva.",

@@ -1,15 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./UseCases.module.css";
 
-const UseCaseCard = ({ title, description, image, height, position, link }) => {
+const UseCaseCard = ({ title, description, image, height, link }) => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.cardWrapper}>
-      <div
-        className={`${styles.card} ${styles[position]}`}
-        style={height ? { height } : undefined}
-      >
+      <div className={`${styles.card}`} style={height ? { height } : undefined}>
         <img src={image} alt={title} className={styles.cardImage} />
         <div className={styles.cardOverlay}>
           <div className={styles.cardContent}>
@@ -28,6 +25,7 @@ const UseCaseCard = ({ title, description, image, height, position, link }) => {
           </div>
         </div>
       </div>
+      <h3 className={styles.cardTitleBelow}>{title}</h3>
       <div className={styles.mobileContent}>
         <h3 className={styles.mobileTitle}>{title}</h3>
         <button
