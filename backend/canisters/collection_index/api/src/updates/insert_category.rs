@@ -1,6 +1,6 @@
-use candid::CandidType;
-use serde::{ Deserialize, Serialize };
 use crate::errors::InsertCategoryError;
+use candid::CandidType;
+use serde::{Deserialize, Serialize};
 
 pub type Args = InsertCategoryArgs;
 pub type Response = Result<(), InsertCategoryError>;

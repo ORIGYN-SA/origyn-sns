@@ -1,10 +1,9 @@
+use crate::state::mutate_state;
 use canister_tracing_macros::trace;
 pub use collection_index_api::get_overall_stats::{
-    Args as GetOverallStatsArgs,
-    Response as GetOverallStatsResponse,
+    Args as GetOverallStatsArgs, Response as GetOverallStatsResponse,
 };
 use ic_cdk::query;
-use crate::state::mutate_state;
 
 #[query]
 #[trace]

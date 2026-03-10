@@ -17,7 +17,8 @@ origyn_nft_reference = { path = "../../../external_canisters/origyn_nft_referenc
 futures = { workspace = true }
 http_request = { path = '../../../libraries/http_request' }
 ic-cdk = { workspace = true }
-ic-cdk-macros = { workspace = true }
+ 
+bity-ic-types = { workspace = true }
 ic-cdk-timers = { workspace = true }
 ic-stable-structures = { workspace = true }
 icrc-ledger-types = { workspace = true }

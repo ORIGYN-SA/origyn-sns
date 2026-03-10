@@ -1,6 +1,6 @@
-use candid::CandidType;
-use serde::{ Deserialize, Serialize };
 use crate::errors::SetCategoryVisibilityError;
+use candid::CandidType;
+use serde::{Deserialize, Serialize};
 
 pub type Args = SetCategoryVisibility;
 pub type Response = Result<(), SetCategoryVisibilityError>;

@@ -1,5 +1,5 @@
 use candid::CandidType;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 #[derive(CandidType, Default, Serialize, Deserialize, Clone, Debug)]
 pub struct OverallStats {

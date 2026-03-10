@@ -1,18 +1,18 @@
-use candid::{ CandidType, Principal };
-use serde::{ Deserialize, Serialize };
+use candid::{CandidType, Principal};
+use serde::{Deserialize, Serialize};
 
 mod http;
 mod neuron_info;
+mod ogy_swap_statistics;
 mod proposals;
 mod rewards_recipients;
-mod ogy_swap_statistics;
 mod token;
 
 pub use http::*;
 pub use neuron_info::*;
+pub use ogy_swap_statistics::*;
 pub use proposals::*;
 pub use rewards_recipients::*;
-pub use ogy_swap_statistics::*;
 pub use token::*;
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug, Default)]
@@ -24,6 +24,7 @@ pub type Cycles = u128;
 pub type Hash = [u8; 32];
 pub type Maturity = u64;
 pub type Milliseconds = u64;
+pub type Second = u64;
 pub type NnsNeuronId = u64;
 pub type ProposalId = u64;
 pub type SnsNeuronId = [u8; 32];

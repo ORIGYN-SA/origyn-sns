@@ -1,7 +1,7 @@
+use crate::state::{mutate_state, read_state};
 use std::time::Duration;
 use tracing::debug;
 use types::Milliseconds;
-use crate::state::{ read_state, mutate_state };
 
 const COMPUTE_STATS_JOB_INTERVAL: Milliseconds = 10 * 60 * 1000; // 10 minutes
 
@@ -16,7 +16,9 @@ fn run() {
 
 async fn compute_stats() {
     let total_value_locked: u64 = read_state(|state| {
-        state.data.collections
+        state
+            .data
+            .collections
             .get_all_collections()
             .iter()
             .filter_map(|collection| collection.locked_value_usd)
@@ -25,8 +27,7 @@ async fn compute_stats() {
 
     mutate_state(|state| {
         state.data.overall_stats.total_value_locked = total_value_locked;
-        state.data.overall_stats.total_collections = state.data.collections
-            .get_all_collections()
-            .len();
+        state.data.overall_stats.total_collections =
+            state.data.collections.get_all_collections().len();
     });
 }

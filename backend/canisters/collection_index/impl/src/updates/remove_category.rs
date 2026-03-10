@@ -1,10 +1,9 @@
+use crate::{guards::caller_is_authorised_principal, state::mutate_state};
 use canister_tracing_macros::trace;
 pub use collection_index_api::remove_category::{
-    Args as RemoveCategoryArgs,
-    Response as RemoveCategoryResponse,
+    Args as RemoveCategoryArgs, Response as RemoveCategoryResponse,
 };
-use ic_cdk::{ query, update };
-use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
+use ic_cdk::{query, update};
 
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]

@@ -1,8 +1,8 @@
 use std::borrow::Cow;
 
-use candid::{ CandidType, Decode, Encode, Principal };
-use ic_stable_structures::{ storable::Bound, Storable };
-use serde::{ Deserialize, Serialize };
+use candid::{CandidType, Decode, Encode, Principal};
+use ic_stable_structures::{storable::Bound, Storable};
+use serde::{Deserialize, Serialize};
 
 pub type CollectionCanisterId = Principal;
 pub type CertificateTokenId = String;

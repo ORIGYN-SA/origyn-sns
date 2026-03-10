@@ -5,6 +5,7 @@ description = "Token swap canister for legacy OGY token to new OGY token."
 edition = "2021"
 
 [dependencies]
+bity-ic-types = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 candid = { workspace = true }
 ledger_utils = { path = "../../../libraries/ledger_utils" }
@@ -14,7 +15,7 @@ canister_time = { path = '../../../libraries/canister_time' }
 canister_tracing_macros = { path = '../../../libraries/canister_tracing_macros' }
 http_request = { path = '../../../libraries/http_request' }
 ic-cdk = { workspace = true }
-ic-cdk-macros = { workspace = true }
+ 
 ic-cdk-timers = { workspace = true }
 ic-stable-structures = { workspace = true }
 serde_json = { workspace = true }

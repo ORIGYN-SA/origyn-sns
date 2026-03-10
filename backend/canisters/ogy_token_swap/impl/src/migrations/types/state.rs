@@ -1,10 +1,10 @@
 use candid::Principal;
 use ic_ledger_types::AccountIdentifier;
 use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 use utils::env::CanisterEnv;
 
-use crate::{ model::token_swap::TokenSwap, state::CanisterIds };
+use crate::{model::token_swap::TokenSwap, state::CanisterIds};
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeStateV0 {

@@ -1,15 +1,19 @@
+use crate::{guards::caller_is_authorised_principal, state::mutate_state};
 use canister_tracing_macros::trace;
 pub use collection_index_api::toggle_promoted::{
-    Args as TogglePromotedArgs,
-    Response as TogglePromotedResponse,
+    Args as TogglePromotedArgs, Response as TogglePromotedResponse,
 };
-use ic_cdk::{ query, update };
-use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
+use ic_cdk::{query, update};
 
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
 pub fn toggle_promoted(args: TogglePromotedArgs) -> TogglePromotedResponse {
-    mutate_state(|state| { state.data.collections.toggle_promoted(args.collection_canister_id) })
+    mutate_state(|state| {
+        state
+            .data
+            .collections
+            .toggle_promoted(args.collection_canister_id)
+    })
 }
 
 #[query(guard = "caller_is_authorised_principal", hidden = true)]

@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.6] - 2025-12-04
+
+#### Added
+
+- **State**: Include versioning and commit info into CanisterInfo.
+
 ### [1.0.5] - 2025-10-30
 
 #### Added

@@ -2,6 +2,7 @@ use ic_cdk_macros::init;
 pub use canister_jobs_api::init::InitArgs;
 use tracing::info;
 use utils::env::CanisterEnv;
+use bity_ic_types::BuildVersion;
 
 use crate::state::{ Data, RuntimeState };
 
@@ -11,7 +12,11 @@ use super::init_canister;
 fn init(args: InitArgs) {
     canister_logger::init(args.test_mode);
 
-    let env = CanisterEnv::new(args.test_mode);
+    let env = CanisterEnv::new(
+                args.test_mode,
+                BuildVersion::default(),
+               "".to_string(),
+            );
     let data = Data::new(
         args.ledger_canister_id,
         args.burn_principal_id,

@@ -55,7 +55,7 @@ pub struct CanisterInfo {
     pub now: TimestampMillis,
     pub test_mode: bool,
     pub memory_used: MemorySize,
-    pub cycles_balance_in_tc: f64,
+    pub cycles_balance_in_tc: u128,
 }
 
 #[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]

@@ -1,16 +1,19 @@
-use std::collections::{ BTreeMap, HashMap };
-use serde::{ Deserialize, Serialize };
-use sns_governance_canister::types::NeuronId;
-use candid::{ CandidType, Nat, Principal };
-use canister_state_macros::canister_state;
-use sns_rewards_api_canister::{ ReserveTokenAmounts, TokenRewardTypes };
-use types::{ NeuronInfo, TimestampMillis };
-use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
-
-use crate::{
-    model::{ maturity_history::MaturityHistory, payment_processor::PaymentProcessor },
-    utils::TimeInterval,
+use crate::model::neuron_system::NeuronSystem;
+use crate::{model::payment_processor::PaymentProcessor, utils::TimeInterval};
+use bity_ic_canister_state_macros::canister_state;
+use bity_ic_types::BuildVersion;
+use candid::{CandidType, Principal};
+use serde::{Deserialize, Serialize};
+use sns_rewards_api_canister::TokenRewardTypes;
+use std::collections::HashMap;
+use types::TimestampMillis;
+use utils::{
+    consts::SNS_GOVERNANCE_CANISTER_ID,
+    env::{CanisterEnv, Environment},
+    memory::MemorySize,
 };
+use candid::Nat;
+use crate::ReserveTokenAmounts;
 
 canister_state!(RuntimeState);
 
@@ -33,23 +36,35 @@ impl RuntimeState {
                 test_mode: self.env.is_test_mode(),
                 memory_used: MemorySize::used(),
                 cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
+                version: self.env.version(),
+                commit_hash: self.env.commit_hash().to_string(),
             },
             sns_governance_canister: self.data.sns_governance_canister,
-            number_of_neurons: self.data.neuron_maturity.len(),
-            sync_info: self.data.sync_info,
+            number_of_neurons: self.data.neuron_system.neuron_maturity.len(),
+            sync_info: self.data.neuron_system.sync_info,
             authorized_principals: self.data.authorized_principals.clone(),
-            daily_reserve_transfer: self.data.daily_reserve_transfer
+            daily_reserve_transfer: self
+                .data
+                .daily_reserve_transfer
                 .iter()
                 .map(|(token, val)| format!("{:?} - {}", token, val))
                 .collect(),
             last_daily_reserve_transfer_time: self.data.last_daily_reserve_transfer_time,
-            last_daily_ogy_burn_time: self.data.last_daily_ogy_burn.clone(),
-            daily_ogy_burn_amount: format!(
-                "{}",
-                self.data.daily_ogy_burn_rate.clone().unwrap_or_default()
-            ),
+            last_daily_ogy_burn_time: self.data.last_daily_ogy_burn,
+            daily_ogy_burn_amount: self.data.daily_ogy_burn_rate.clone(),
             reward_distribution_interval: self.data.reward_distribution_interval.clone(),
             neuron_sync_interval: self.data.neuron_sync_interval.clone(),
+            registered_tokens: self
+                .data
+                .tokens
+                .iter()
+                .map(|(token, details)| {
+                    format!(
+                        "{:?} - id: {}, fee: {}, decimals: {}",
+                        token, details.ledger_id, details.fee, details.decimals
+                    )
+                })
+                .collect(),
         }
     }
 
@@ -77,17 +92,20 @@ pub struct Metrics {
     pub daily_reserve_transfer: Vec<String>,
     pub last_daily_reserve_transfer_time: TimestampMillis,
     pub last_daily_ogy_burn_time: Option<TimestampMillis>,
-    pub daily_ogy_burn_amount: String,
+    pub daily_ogy_burn_amount: Option<Nat>,
     pub reward_distribution_interval: Option<TimeInterval>,
     pub neuron_sync_interval: Option<TimeInterval>,
+    pub registered_tokens: Vec<String>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
 pub struct CanisterInfo {
     pub now: TimestampMillis,
     pub test_mode: bool,
+    pub version: BuildVersion,
+    pub commit_hash: String,
     pub memory_used: MemorySize,
-    pub cycles_balance_in_tc: f64,
+    pub cycles_balance_in_tc: u128,
 }
 
 #[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]
@@ -102,11 +120,7 @@ pub struct Data {
     /// SNS governance canister
     pub sns_governance_canister: Principal,
     /// Stores the maturity information about each neuron
-    pub neuron_maturity: BTreeMap<NeuronId, NeuronInfo>,
-    /// Information about periodic synchronization
-    pub sync_info: SyncInfo,
-    /// The history of each neuron's maturity.
-    pub maturity_history: MaturityHistory,
+    pub neuron_system: NeuronSystem,
     /// Payment processor - responsible for queuing and processing rounds of payments
     pub payment_processor: PaymentProcessor,
     /// valid tokens and their associated ledger data
@@ -134,23 +148,17 @@ pub struct Data {
 impl Default for Data {
     fn default() -> Self {
         Self {
-            sns_governance_canister: Principal::anonymous(),
-            neuron_maturity: BTreeMap::new(),
-            sync_info: SyncInfo::default(),
-            maturity_history: MaturityHistory::default(),
+            sns_governance_canister: SNS_GOVERNANCE_CANISTER_ID,
+            neuron_system: NeuronSystem::default(),
             payment_processor: PaymentProcessor::default(),
             tokens: HashMap::new(),
-            authorized_principals: vec![],
+            authorized_principals: vec![SNS_GOVERNANCE_CANISTER_ID],
             is_synchronizing_neurons: false,
             daily_reserve_transfer: HashMap::new(),
             last_daily_reserve_transfer_time: TimestampMillis::default(),
             daily_ogy_burn_rate: None,
             last_daily_ogy_burn: None,
-            reward_distribution_interval: Some(TimeInterval {
-                weekday: Some("Tuesday".to_string()),
-                start_hour: 14,
-                end_hour: 16,
-            }),
+            reward_distribution_interval: Some(TimeInterval::default()),
             reward_distribution_in_progress: Some(false),
             neuron_sync_interval: Some(TimeInterval {
                 weekday: None,

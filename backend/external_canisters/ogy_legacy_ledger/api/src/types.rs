@@ -1,9 +1,9 @@
 // This is an experimental feature to generate Rust binding from Candid.
 // You may want to manually adjust some of the types.
 #![allow(dead_code, unused_imports)]
-use candid::{ self, CandidType, Decode, Deserialize, Encode, Nat, Principal };
+use candid::{self, CandidType, Decode, Deserialize, Encode, Nat, Principal};
 use ic_cdk::api::call::CallResult as Result;
-use ic_ledger_types::{ AccountIdentifier, BlockIndex, Subaccount, Tokens };
+use ic_ledger_types::{AccountIdentifier, BlockIndex, Subaccount, Tokens};
 
 // #[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
 // pub struct Tokens {
@@ -100,19 +100,11 @@ pub struct TransferArg {
 
 #[derive(CandidType, Deserialize, Debug, PartialEq, Eq)]
 pub enum TransferError {
-    BadFee {
-        expected_fee: Tokens,
-    },
-    InsufficientFunds {
-        balance: Tokens,
-    },
-    TxTooOld {
-        allowed_window_nanos: u64,
-    },
+    BadFee { expected_fee: Tokens },
+    InsufficientFunds { balance: Tokens },
+    TxTooOld { allowed_window_nanos: u64 },
     TxCreatedInFuture,
-    TxDuplicate {
-        duplicate_of: BlockIndex,
-    },
+    TxDuplicate { duplicate_of: BlockIndex },
 }
 
 #[derive(CandidType, Deserialize)]
@@ -253,19 +245,11 @@ pub struct TransferArgs {
 
 #[derive(CandidType, Deserialize)]
 pub enum TransferError1 {
-    TxTooOld {
-        allowed_window_nanos: u64,
-    },
-    BadFee {
-        expected_fee: Tokens,
-    },
-    TxDuplicate {
-        duplicate_of: u64,
-    },
+    TxTooOld { allowed_window_nanos: u64 },
+    BadFee { expected_fee: Tokens },
+    TxDuplicate { duplicate_of: u64 },
     TxCreatedInFuture,
-    InsufficientFunds {
-        balance: Tokens,
-    },
+    InsufficientFunds { balance: Tokens },
 }
 
 #[derive(CandidType, Deserialize)]
