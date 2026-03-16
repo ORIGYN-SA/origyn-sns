@@ -5,8 +5,8 @@ use crate::{
     client::icrc1::client::{balance_of, transfer},
     utils::tick_n_blocks,
 };
+use bity_ic_canister_time::DAY_IN_MS;
 use candid::{Nat, Principal};
-use canister_time::DAY_IN_MS;
 use icrc_ledger_types::icrc1::account::Account;
 use sns_rewards_api_canister::set_daily_ogy_burn_rate::Response as SetDailyOGYBurnRateResponse;
 use sns_rewards_api_canister::set_daily_ogy_burn_rate_validate::Response as SetDailyOGYBurnRateValidateResponse;

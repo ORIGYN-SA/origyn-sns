@@ -47,7 +47,7 @@ impl From<PaymentRoundV0> for PaymentRound {
             tokens_to_distribute: v0.tokens_to_distribute,
             fees: v0.fees,
             ledger_id: v0.ledger_id,
-            token: TokenSymbol::parse(v0.token.0).expect("TokenSymbol is not valid"),
+            token: TokenSymbol::parse(&v0.token.0).expect("TokenSymbol is not valid"),
             date_initialized: v0.date_initialized,
             total_neuron_maturity: v0.total_neuron_maturity,
             payments: v0.payments,
@@ -257,9 +257,9 @@ impl Storable for PaymentRound {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
     }
-    // fn into_bytes(self) -> std::vec::Vec<u8> {
-    //     Encode!(&self).unwrap()
-    // }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
+    }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()
     }

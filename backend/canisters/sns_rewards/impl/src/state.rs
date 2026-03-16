@@ -1,7 +1,9 @@
 use crate::model::neuron_system::NeuronSystem;
+use crate::ReserveTokenAmounts;
 use crate::{model::payment_processor::PaymentProcessor, utils::TimeInterval};
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
+use candid::Nat;
 use candid::{CandidType, Principal};
 use serde::{Deserialize, Serialize};
 use sns_rewards_api_canister::TokenRewardTypes;
@@ -12,8 +14,6 @@ use utils::{
     env::{CanisterEnv, Environment},
     memory::MemorySize,
 };
-use candid::Nat;
-use crate::ReserveTokenAmounts;
 
 canister_state!(RuntimeState);
 
@@ -165,6 +165,7 @@ impl Default for Data {
                 start_hour: 9,
                 end_hour: 11,
             }),
+
         }
     }
 }

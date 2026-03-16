@@ -5,8 +5,8 @@ use crate::{
     client::icrc1::client::transfer, sns_rewards_suite::setup::setup_ledger::setup_ledgers,
     utils::random_principal, wasms,
 };
+use bity_ic_canister_time::HOUR_IN_MS;
 use candid::{encode_one, Nat, Principal};
-use canister_time::HOUR_IN_MS;
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::{PocketIc, PocketIcBuilder};
 use sns_governance_canister::types::Neuron;

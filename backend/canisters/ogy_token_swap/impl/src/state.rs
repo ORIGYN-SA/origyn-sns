@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
+use bity_ic_canister_state_macros::canister_state;
 use candid::{CandidType, Principal};
-use canister_state_macros::canister_state;
 use ic_ledger_types::{AccountIdentifier, Subaccount};
 use serde::{Deserialize, Serialize};
 use types::{CanisterId, TimestampMillis};

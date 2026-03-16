@@ -36,11 +36,11 @@ pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
 mod tests {
     use std::collections::HashSet;
 
+    use bity_ic_types::BuildVersion;
     use candid::Principal;
     use ic_ledger_types::{AccountIdentifier, Subaccount};
     use icrc_ledger_types::icrc1::account::{Account, Subaccount as IcrcSubaccount};
     use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
-    use bity_ic_types::BuildVersion;
     use utils::env::CanisterEnv;
 
     pub use ogy_token_swap_api::updates::request_deposit_account::{

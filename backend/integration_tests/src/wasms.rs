@@ -28,6 +28,22 @@ lazy_static! {
     pub static ref SNS_GOVERNANCE: CanisterWasm = get_canister_wasm_gz("sns_governance");
     pub static ref SNS_ROOT: CanisterWasm = get_canister_wasm_gz("sns_root");
     pub static ref SNS_LEDGER: CanisterWasm = get_canister_wasm("ic_icrc1_ledger");
+
+    // Wasms in particular canister folder
+    pub static ref SNS_NEURON_CONTROLLER: CanisterWasm =
+        get_canister_wasm_from_bin("sns_neuron_controller");
+
+    // NNS wasms
+    pub static ref NNS_LIFELINE: CanisterWasm = get_nns_canister_wasm("nns_lifeline");
+    pub static ref NNS_ROOT: CanisterWasm = get_nns_canister_wasm("nns_root");
+    pub static ref NNS_GOVERNANCE: CanisterWasm = get_nns_canister_wasm("nns_governance");
+    pub static ref NNS_LEDGER: CanisterWasm =  get_nns_canister_wasm("nns_ledger");
+    pub static ref NNS_REGISTRY: CanisterWasm = get_nns_canister_wasm("nns_registry");
+    pub static ref NNS_GENESIS_TOKEN: CanisterWasm = get_nns_canister_wasm("nns_genesis_token");
+    pub static ref NNS_INDEX: CanisterWasm = get_nns_canister_wasm("nns_index");
+    pub static ref NNS_CYCLES_MINTING: CanisterWasm = get_nns_canister_wasm("cycles_minting");
+    pub static ref NNS_UI: CanisterWasm = get_nns_canister_wasm("nns_ui");
+    pub static ref NNS_WASM_ID: CanisterWasm = get_nns_canister_wasm("nns_wasm_id");
 }
 
 fn get_internal_canister_wasm(canister: &str) -> Vec<u8> {
@@ -81,4 +97,36 @@ pub fn local_bin() -> PathBuf {
     );
     file_path.push("wasms");
     file_path
+}
+
+fn get_canister_wasm_from_bin(canister_name: &str) -> CanisterWasm {
+    match
+        read_file_from_relative_bin(
+            &format!(
+                "../canisters/{canister_name}/target/wasm32-unknown-unknown/release/{canister_name}_canister.wasm.gz"
+            )
+        )
+    {
+        Ok(wasm) => wasm,
+        Err(err) => {
+            println!(
+                "Failed to read {canister_name} wasm: {err}. \n\x1b[31mRun \"./scripts/build_canister.sh {canister_name}\"\x1b[0m"
+            );
+            panic!()
+        }
+    }
+}
+
+fn get_nns_canister_wasm(canister_name: &str) -> CanisterWasm {
+    match read_file_from_relative_bin(&format!(
+        "../integration_testing/wasms/nns/{canister_name}_canister.wasm.gz"
+    )) {
+        Ok(wasm) => wasm,
+        Err(err) => {
+            println!(
+            "Failed to read {canister_name} wasm: {err}. \n\x1b[31mRun \"./scripts/build_canister.sh {canister_name}\"\x1b[0m"
+        );
+            panic!()
+        }
+    }
 }

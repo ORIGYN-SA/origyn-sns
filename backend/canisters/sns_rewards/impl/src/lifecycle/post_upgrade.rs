@@ -1,8 +1,8 @@
 use bity_ic_canister_logger::LogEntry;
 use bity_ic_canister_tracing_macros::trace;
+use bity_ic_stable_memory::get_reader;
 use ic_cdk::post_upgrade;
 use sns_rewards_api_canister::Args;
-use bity_ic_stable_memory::get_reader;
 use tracing::info;
 
 use crate::migrations::types::state::RuntimeStateV0;

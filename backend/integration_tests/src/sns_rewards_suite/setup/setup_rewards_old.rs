@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 
 use crate::wasms;
+use bity_ic_types::BuildVersion;
 use candid::CandidType;
 use candid::{encode_one, Principal};
 use pocket_ic::PocketIc;
 use serde::Deserialize;
-use bity_ic_types::BuildVersion;
 
 #[derive(Deserialize, CandidType)]
 pub struct InitArgs {

@@ -1,9 +1,9 @@
 use crate::migrations::types::state::RuntimeStateV0;
-use canister_logger::LogEntry;
-use canister_tracing_macros::trace;
+use bity_ic_canister_logger::LogEntry;
+use bity_ic_canister_tracing_macros::trace;
+use bity_ic_stable_memory::get_reader;
 pub use collection_index_api::Args;
 use ic_cdk::post_upgrade;
-use stable_memory::get_reader;
 use tracing::info;
 
 use crate::{memory::get_upgrades_memory, state::RuntimeState};
@@ -39,7 +39,7 @@ fn post_upgrade(args: Args) {
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
 
-            canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
+            bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
             init_canister(state);
 
             info!(version = %upgrade_args.version, "Post-upgrade complete");

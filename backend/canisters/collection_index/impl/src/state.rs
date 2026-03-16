@@ -1,5 +1,5 @@
+use bity_ic_canister_state_macros::canister_state;
 use candid::{CandidType, Principal};
-use canister_state_macros::canister_state;
 use collection_index_api::stats::OverallStats;
 use ic_cdk::api::is_controller;
 use serde::{Deserialize as SerdeDeserialize, Serialize};

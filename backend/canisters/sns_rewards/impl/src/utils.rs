@@ -5,15 +5,15 @@ use icrc_ledger_types::icrc1::{
     account::{Account, Subaccount},
     transfer::TransferArg,
 };
-use std::collections::HashMap;
-use types::TokenSymbol;
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::{Neuron, NeuronId};
+use std::collections::HashMap;
 use time::Date;
 use time::UtcOffset;
 use time::{OffsetDateTime, Time, Weekday};
 use tracing::{debug, error, info, warn};
 use types::TimestampMillis;
+use types::TokenSymbol;
 
 use crate::state::read_state;
 
@@ -177,7 +177,6 @@ pub fn authenticate_by_hotkey(
     }
 }
 
-
 pub fn validate_set_reserve_transfer_amounts_payload(
     args: &HashMap<TokenSymbol, Nat>,
 ) -> Result<(), String> {
@@ -207,13 +206,13 @@ pub fn validate_set_daily_ogy_burn_rate_payload(amount: &Nat) -> Result<(), Stri
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use time::macros::datetime;
     use super::authenticate_by_hotkey;
+    use super::*;
     use super::*;
     use crate::utils::{AuthenticateByHotkeyResponse, TimeInterval};
     use candid::Principal;
     use sns_governance_canister::types::{Neuron, NeuronId, NeuronPermission};
+    use time::macros::datetime;
 
     #[test]
     fn test_authenticate_by_hotkey_with_correct_data() {

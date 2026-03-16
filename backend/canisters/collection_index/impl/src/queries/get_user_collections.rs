@@ -2,8 +2,8 @@ use crate::{
     state::{mutate_state, read_state},
     utils::trace,
 };
+use bity_ic_canister_tracing_macros::trace;
 use candid::Principal;
-use canister_tracing_macros::trace;
 use collection_index_api::collection::Collection;
 pub use collection_index_api::get_user_collections::{
     Args as GetUserCollectionsArgs, Response as GetUserCollectionsResponse,

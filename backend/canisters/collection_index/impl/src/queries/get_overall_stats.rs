@@ -1,5 +1,5 @@
 use crate::state::mutate_state;
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 pub use collection_index_api::get_overall_stats::{
     Args as GetOverallStatsArgs, Response as GetOverallStatsResponse,
 };

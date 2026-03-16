@@ -1,7 +1,7 @@
 use std::{collections::BTreeMap, mem};
 
+use bity_ic_canister_time::timestamp_millis;
 use candid::Principal;
-use canister_time::timestamp_millis;
 use ic_ledger_types::{BlockIndex, Subaccount};
 use ic_stable_structures::StableBTreeMap;
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
@@ -294,7 +294,7 @@ impl TokenSwap {
         let mut stats = SwapStatistics::default();
         self.history
             .iter()
-            .for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
+            .for_each(|entry| Self::analyse_swap_block(&mut stats, &entry.value()));
         self.swap
             .iter()
             .for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));

@@ -1,5 +1,5 @@
 use crate::state::mutate_state;
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 pub use collection_index_api::get_collection_by_principal::{
     Args as GetCollectionByPrincipalArg, Response as GetCollectionByPrincipalResponse,
 };

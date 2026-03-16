@@ -7,11 +7,10 @@ const COMPUTE_STATS_JOB_INTERVAL: Milliseconds = 10 * 60 * 1000; // 10 minutes
 
 pub fn start_job() {
     debug!("Starting the job to compute total locked value of collections");
-    ic_cdk_timers::set_timer_interval(Duration::from_millis(COMPUTE_STATS_JOB_INTERVAL), run);
-}
-
-fn run() {
-    ic_cdk::spawn(compute_stats());
+    ic_cdk_timers::set_timer_interval(
+        Duration::from_millis(COMPUTE_STATS_JOB_INTERVAL),
+        compute_stats,
+    );
 }
 
 async fn compute_stats() {

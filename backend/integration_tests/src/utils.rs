@@ -27,7 +27,7 @@ pub fn tick_n_blocks(pic: &PocketIc, times: u32) {
     }
 }
 
-use canister_time::DAY_IN_MS;
+use bity_ic_canister_time::DAY_IN_MS;
 use types::TimestampMillis;
 pub fn is_interval_more_than_7_days(
     previous_time: TimestampMillis,

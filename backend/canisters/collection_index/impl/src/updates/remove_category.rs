@@ -1,5 +1,5 @@
 use crate::{guards::caller_is_authorised_principal, state::mutate_state};
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 pub use collection_index_api::remove_category::{
     Args as RemoveCategoryArgs, Response as RemoveCategoryResponse,
 };

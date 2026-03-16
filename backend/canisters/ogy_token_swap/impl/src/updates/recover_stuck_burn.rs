@@ -1,7 +1,7 @@
 use crate::{
     burn_token, guards::caller_is_authorised_principal, state::read_state, transfer_new_token,
 };
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::{
     query_archived_blocks, query_blocks, ArchivedBlockRange, Block, BlockIndex, GetBlocksArgs,

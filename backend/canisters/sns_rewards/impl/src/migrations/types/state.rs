@@ -1,3 +1,4 @@
+use crate::model::neuron_system::NeuronSystem;
 use crate::state::Data;
 use crate::state::SyncInfo;
 use crate::{
@@ -16,7 +17,6 @@ use types::TokenSymbolV0;
 use types::{NeuronInfo, TimestampMillis};
 use utils::env::CanisterEnv;
 use utils::env::CanisterEnvV0;
-use crate::model::neuron_system::NeuronSystem;
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeStateV0 {
@@ -80,14 +80,13 @@ impl From<DataV0> for Data {
 
         Data {
             sns_governance_canister: v0.sns_governance_canister,
-            neuron_system:
-            NeuronSystem {
+            neuron_system: NeuronSystem {
                 sync_info: v0.sync_info,
                 neuron_maturity: v0
-                .neuron_maturity
-                .into_iter()
-                .map(|(k, v)| (k, NeuronInfo::from(v)))
-                .collect(),
+                    .neuron_maturity
+                    .into_iter()
+                    .map(|(k, v)| (k, NeuronInfo::from(v)))
+                    .collect(),
                 maturity_history: MaturityHistory::default(),
             },
             payment_processor: PaymentProcessor::from(v0.payment_processor),

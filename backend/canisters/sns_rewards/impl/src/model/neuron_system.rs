@@ -18,23 +18,22 @@ pub struct NeuronSystem {
     pub maturity_history: MaturityHistory,
 }
 
-// TODO: add here check that neuron is eligible for GLDT rewards
 impl NeuronSystem {
     // Save the neuron stake info and update total staked power accordingly
     pub fn upsert_neuron(&mut self, neuron: &Neuron) {
         // Save the neuron maturity info and total maturity accordingly
         if let Some(id) = &neuron.id {
-            // if !neuron.is_reward_eligible() {
-            //     // If the neuron is no longer eligible, we remove it from the active
-            //     // tracking map so it doesn't accrue rewards in the next distribution.
-            //     if self.neuron_maturity.remove(id).is_some() {
-            //         debug!(
-            //             "Neuron {} removed from system: no longer eligible for rewards.",
-            //             id
-            //         );
-            //     }
-            //     return;
-            // }
+            if !neuron.is_reward_eligible() {
+                // If the neuron is no longer eligible, we remove it from the active
+                // tracking map so it doesn't accrue rewards in the next distribution.
+                if self.neuron_maturity.remove(id).is_some() {
+                    debug!(
+                        "Neuron {} removed from system: no longer eligible for rewards.",
+                        id
+                    );
+                }
+                return;
+            }
 
             let updated_neuron: Option<(NeuronId, NeuronInfo)>;
 

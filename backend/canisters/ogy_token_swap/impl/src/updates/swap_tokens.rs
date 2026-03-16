@@ -1,7 +1,7 @@
 use crate::state::{mutate_state, read_state};
+use bity_ic_canister_time::timestamp_nanos;
+use bity_ic_canister_tracing_macros::trace;
 use candid::{Nat, Principal};
-use canister_time::timestamp_nanos;
-use canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::{
     account_balance, query_archived_blocks, query_blocks, transfer, AccountBalanceArgs,
@@ -467,17 +467,17 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
                 "Final token transfer failed due to transfer error. Message: {msg}"
             ))
         }
-        Err((_, msg)) => {
+        Err(err) => {
             mutate_state(|s| {
                 s.data.token_swap.update_status(
                     block_index,
                     SwapStatus::Failed(SwapError::TransferFailed(TransferFailReason::CallError(
-                        msg.clone(),
+                        format!("Final token transfer failed due to call error. Message: {err}"),
                     ))),
                 )
             });
             Err(format!(
-                "Final token transfer failed due to call error. Message: {msg}"
+                "Final token transfer failed due to call error. Message: {err}"
             ))
         }
     }
@@ -487,13 +487,13 @@ pub async fn transfer_new_token(block_index: BlockIndex) -> Result<BlockIndexIcr
 mod tests {
     use std::collections::HashSet;
 
+    use bity_ic_types::BuildVersion;
     use candid::Principal;
     use ic_ledger_types::{
         AccountIdentifier, Block, BlockIndex, Memo, Operation, Subaccount, Timestamp, Tokens,
         Transaction, DEFAULT_SUBACCOUNT,
     };
     use ledger_utils::principal_to_legacy_account_id;
-    use bity_ic_types::BuildVersion;
     use utils::env::CanisterEnv;
 
     use crate::state::{init_state, mutate_state, read_state, Data, RuntimeState};

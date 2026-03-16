@@ -1,15 +1,17 @@
 use std::{borrow::Cow, fmt::Display};
 
-use candid::{CandidType, Decode, Encode, Principal};
+use candid::{CandidType, Principal};
 use ic_stable_structures::{storable::Bound, Storable};
+
 use serde::{Deserialize, Serialize};
+
 
 #[derive(
     Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, PartialOrd, Ord,
 )]
 pub struct TokenSymbolV0(pub String);
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum TokenSymbolParseError {
     InvalidTokenSymbol,
 }
@@ -36,10 +38,13 @@ impl TokenSymbolV0 {
     }
 }
 
+use candid::Encode;
+use candid::Decode;
 impl Storable for TokenSymbolV0 {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
     }
+    fn into_bytes(self) -> std::vec::Vec<u8> { Encode!(&self).unwrap() }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()
     }
@@ -47,22 +52,6 @@ impl Storable for TokenSymbolV0 {
         max_size: MAX_VALUE_SIZE_V0,
         is_fixed_size: false,
     };
-}
-
-#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, Copy)]
-pub struct TokenInfo {
-    pub ledger_id: Principal,
-    pub fee: u64,
-    pub decimals: u64,
-}
-
-impl TokenInfo {
-    pub fn validate(self) -> Result<(), String> {
-        if self.ledger_id == Principal::anonymous() {
-            return Err("Invalid ledger_id: cannot be anonymous".to_string());
-        }
-        Ok(())
-    }
 }
 
 /// Compact enum for token identity (for keys, matching, etc.)
@@ -119,50 +108,70 @@ impl TokenSymbol {
         }
     }
 
-    pub fn parse<S: AsRef<str>>(symbol: S) -> Result<Self, TokenSymbolParseError> {
-        let normalized = symbol.as_ref().trim().to_ascii_uppercase();
-
-        match normalized.as_str() {
+    pub fn parse(symbol: &str) -> Result<Self, TokenSymbolParseError> {
+        match symbol {
             "ICP" => Ok(TokenSymbol::ICP),
             "OGY" => Ok(TokenSymbol::OGY),
-            "GOLDAO" | "GLDGOV" => Ok(TokenSymbol::GOLDAO),
+            "GOLDAO" | "GLDGov" => Ok(TokenSymbol::GOLDAO),
             "WTN" => Ok(TokenSymbol::WTN),
             _ => Err(TokenSymbolParseError::InvalidTokenSymbol),
         }
     }
 
-    pub fn get_token_info(self) -> TokenInfo {
-        match self {
-            TokenSymbol::ICP => TokenInfo {
-                fee: 10_000,
-                decimals: 8,
-                ledger_id: Principal::from_text("ryjl3-tyaaa-aaaaa-aaaba-cai")
-                    .expect("Invalid ICP ledger principal"),
+    pub fn get_prod_token_info(self) -> TokenInfo {
+        TokenInfo {
+            ledger_id: self.ledger_id(false),
+            fee: match self {
+                TokenSymbol::ICP => 10_000,
+                TokenSymbol::OGY => 200_000,
+                TokenSymbol::GOLDAO => 100_000,
+                TokenSymbol::WTN => 1_000_000,
+                TokenSymbol::GLDT => 10_000_000,
             },
-            TokenSymbol::OGY => TokenInfo {
-                fee: 200_000,
-                decimals: 8,
-                ledger_id: Principal::from_text("lkwrt-vyaaa-aaaaq-aadhq-cai")
-                    .expect("Invalid OGY ledger principal"),
+            decimals: 8,
+        }
+    }
+
+    pub fn get_token_info(self, is_test_mode: bool) -> TokenInfo {
+        TokenInfo {
+            ledger_id: self.ledger_id(is_test_mode),
+            fee: match self {
+                TokenSymbol::ICP => 10_000,
+                TokenSymbol::OGY => 200_000,
+                TokenSymbol::GOLDAO => 100_000,
+                TokenSymbol::WTN => 1_000_000,
+                TokenSymbol::GLDT => 10_000_000,
             },
-            TokenSymbol::GOLDAO => TokenInfo {
-                fee: 100_000,
-                decimals: 8,
-                ledger_id: Principal::from_text("tyyy3-4aaaa-aaaaq-aab7a-cai")
-                    .expect("Invalid GLDGov ledger principal"),
-            },
-            TokenSymbol::WTN => TokenInfo {
-                fee: 1_000_000,
-                decimals: 8,
-                ledger_id: Principal::from_text("jcmow-hyaaa-aaaaq-aadlq-cai")
-                    .expect("Invalid WTN ledger principal"),
-            },
-            TokenSymbol::GLDT => TokenInfo {
-                fee: 10_000_000,
-                decimals: 8,
-                ledger_id: Principal::from_text("6c7su-kiaaa-aaaar-qaira-cai")
-                    .expect("Invalid GLDT ledger principal"),
-            },
+            decimals: 8,
+        }
+    }
+
+    pub fn ledger_id(&self, test_mode: bool) -> Principal {
+        match (self, test_mode) {
+            (TokenSymbol::ICP, false) => Principal::from_text("ryjl3-tyaaa-aaaaa-aaaba-cai")
+                .expect("Invalid ICP ledger principal"),
+            (TokenSymbol::ICP, true) => Principal::from_text("ete3q-rqaaa-aaaal-qdlva-cai")
+                .expect("Invalid test ICP ledger principal"),
+
+            (TokenSymbol::OGY, false) => Principal::from_text("lkwrt-vyaaa-aaaaq-aadhq-cai")
+                .expect("Invalid OGY ledger principal"),
+            (TokenSymbol::OGY, true) => Principal::from_text("j5naj-nqaaa-aaaal-ajc7q-cai")
+                .expect("Invalid test OGY ledger principal"),
+
+            (TokenSymbol::GOLDAO, false) => Principal::from_text("tyyy3-4aaaa-aaaaq-aab7a-cai")
+                .expect("Invalid GLDGov ledger principal"),
+            (TokenSymbol::GOLDAO, true) => Principal::from_text("irhm6-5yaaa-aaaap-ab24q-cai")
+                .expect("Invalid test GLDGov ledger principal"),
+
+            (TokenSymbol::WTN, false) => Principal::from_text("jcmow-hyaaa-aaaaq-aadlq-cai")
+                .expect("Invalid WTN ledger principal"),
+            (TokenSymbol::WTN, true) => Principal::from_text("jcmow-hyaaa-aaaaq-aadlq-cai")
+                .expect("Invalid test WTN ledger principal"),
+
+            (TokenSymbol::GLDT, false) => Principal::from_text("6c7su-kiaaa-aaaar-qaira-cai")
+                .expect("Invalid GLDT ledger principal"),
+            (TokenSymbol::GLDT, true) => Principal::from_text("6uad6-fqaaa-aaaam-abovq-cai")
+                .expect("Invalid test GLDT ledger principal"),
         }
     }
 
@@ -171,6 +180,23 @@ impl TokenSymbol {
     }
 }
 
+#[macro_export]
+macro_rules! ledger_id {
+    ($symbol:ident) => {{
+        let is_test_mode = crate::state::read_state(|s| s.env.is_test_mode());
+        types::TokenSymbol::$symbol.ledger_id(is_test_mode)
+    }};
+}
+
+#[macro_export]
+macro_rules! token_info {
+    ($symbol:ident) => {{
+        let is_test_mode = crate::state::read_state(|s| s.env.is_test_mode());
+        types::TokenSymbol::$symbol.get_token_info(is_test_mode)
+    }};
+}
+
+
 const MAX_VALUE_SIZE: u32 = 20;
 
 impl Storable for TokenSymbol {
@@ -178,6 +204,12 @@ impl Storable for TokenSymbol {
         let mut buf = vec![];
         minicbor::encode(self, &mut buf).expect("token symbol encoding should always succeed");
         Cow::Owned(buf)
+    }
+
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        let mut buf = vec![];
+        minicbor::encode(self, &mut buf).expect("token symbol encoding should always succeed");
+        buf
     }
 
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
@@ -193,6 +225,22 @@ impl Storable for TokenSymbol {
         max_size: MAX_VALUE_SIZE,
         is_fixed_size: false,
     };
+}
+
+#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, Copy)]
+pub struct TokenInfo {
+    pub ledger_id: Principal,
+    pub fee: u64,
+    pub decimals: u64,
+}
+
+impl TokenInfo {
+    pub fn validate(self) -> Result<(), String> {
+        if self.ledger_id == Principal::anonymous() {
+            return Err("Invalid ledger_id: cannot be anonymous".to_string());
+        }
+        Ok(())
+    }
 }
 
 #[cfg(test)]
@@ -241,22 +289,22 @@ mod tests {
         }
     }
 
-    // #[test]
-    // fn test_token_symbol_parse() {
-    //     use crate::TokenSymbol;
+    #[test]
+    fn test_token_symbol_parse() {
+        use crate::TokenSymbol;
 
-    //     // Valid symbols
-    //     assert_eq!(TokenSymbol::parse("ICP"), Ok(TokenSymbol::ICP));
-    //     assert_eq!(TokenSymbol::parse("OGY"), Ok(TokenSymbol::OGY));
-    //     assert_eq!(TokenSymbol::parse("GOLDAO"), Ok(TokenSymbol::GOLDAO));
-    //     assert_eq!(TokenSymbol::parse("GLDGov"), Ok(TokenSymbol::GOLDAO)); // alias
-    //     assert_eq!(TokenSymbol::parse("WTN"), Ok(TokenSymbol::WTN));
+        // Valid symbols
+        assert_eq!(TokenSymbol::parse("ICP"), Ok(TokenSymbol::ICP));
+        assert_eq!(TokenSymbol::parse("OGY"), Ok(TokenSymbol::OGY));
+        assert_eq!(TokenSymbol::parse("GOLDAO"), Ok(TokenSymbol::GOLDAO));
+        assert_eq!(TokenSymbol::parse("GLDGov"), Ok(TokenSymbol::GOLDAO)); // alias
+        assert_eq!(TokenSymbol::parse("WTN"), Ok(TokenSymbol::WTN));
 
-    //     // Invalid symbols
-    //     assert!(TokenSymbol::parse("icp").is_err()); // case-sensitive
-    //     assert!(TokenSymbol::parse("goldao").is_err());
-    //     assert!(TokenSymbol::parse("GLD").is_err());
-    //     assert!(TokenSymbol::parse("").is_err());
-    //     assert!(TokenSymbol::parse("UNKNOWN").is_err());
-    // }
+        // Invalid symbols
+        assert!(TokenSymbol::parse("icp").is_err()); // case-sensitive
+        assert!(TokenSymbol::parse("goldao").is_err());
+        assert!(TokenSymbol::parse("GLD").is_err());
+        assert!(TokenSymbol::parse("").is_err());
+        assert!(TokenSymbol::parse("UNKNOWN").is_err());
+    }
 }

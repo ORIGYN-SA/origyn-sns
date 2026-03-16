@@ -38,9 +38,9 @@ impl Storable for NeuronId {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(self.id.clone())
     }
-    // fn into_bytes(self) -> std::vec::Vec<u8> {
-    //     self.id.clone()
-    // }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        self.id.clone()
+    }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Self {
             id: bytes.into_owned(),
@@ -121,9 +121,9 @@ impl Storable for VecNeurons {
         Cow::Owned(Encode!(&self.0).unwrap())
     }
 
-    // fn into_bytes(self) -> std::vec::Vec<u8> {
-    //     Encode!(&self.0).unwrap()
-    // }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self.0).unwrap()
+    }
 
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         let neurons: Vec<NeuronId> = Decode!(&bytes, Vec<NeuronId>).unwrap();
@@ -241,7 +241,7 @@ use tracing::warn;
 use types::Maturity;
 // Taken from SNS governance canister (1 year delay 31_536_000)
 
-const TWO_YEARS_IN_SECONDS: u64 = 63072000;
+const FIVE_YEARS_IN_SECONDS: u64 = 5 * 31536000;
 impl Neuron {
     pub fn is_reward_eligible(&self) -> bool {
         match self.dissolve_state {
@@ -250,7 +250,7 @@ impl Neuron {
             }
             Some(crate::types::neuron::DissolveState::DissolveDelaySeconds(
                 dissolve_delay_seconds,
-            )) => dissolve_delay_seconds >= TWO_YEARS_IN_SECONDS,
+            )) => dissolve_delay_seconds >= FIVE_YEARS_IN_SECONDS,
             None => false,
         }
     }
@@ -1984,9 +1984,9 @@ impl Storable for Account {
         Cow::Owned(Encode!(self).unwrap())
     }
 
-    // fn into_bytes(self) -> std::vec::Vec<u8> {
-    //     Encode!(&self).unwrap()
-    // }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
+    }
 
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()

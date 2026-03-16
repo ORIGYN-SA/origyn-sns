@@ -2,7 +2,6 @@
 // You may want to manually adjust some of the types.
 #![allow(dead_code, unused_imports)]
 use candid::{self, CandidType, Deserialize, Principal};
-use ic_cdk::api::call::CallResult as Result;
 
 use serde::Serialize;
 
@@ -2646,578 +2645,578 @@ candid::define_service!(pub NftCanister : {
   "whoami" : candid::func!(() -> (Principal) query);
 });
 
-#[derive(Clone, Debug)]
-pub struct Service(pub Principal);
-impl Service {
-    pub async fn advance_time(&self, arg0: candid::Int) -> Result<(candid::Int,)> {
-        ic_cdk::call(self.0, "__advance_time", (arg0,)).await
-    }
-    pub async fn set_time_mode(&self, arg0: NftCanisterSetTimeModeArg) -> Result<(bool,)> {
-        ic_cdk::call(self.0, "__set_time_mode", (arg0,)).await
-    }
-    pub async fn supports(&self) -> Result<(Vec<(String, String)>,)> {
-        ic_cdk::call(self.0, "__supports", ()).await
-    }
-    pub async fn version(&self) -> Result<(String,)> {
-        ic_cdk::call(self.0, "__version", ()).await
-    }
-    pub async fn back_up(&self, arg0: candid::Nat) -> Result<(NftCanisterBackUpRet,)> {
-        ic_cdk::call(self.0, "back_up", (arg0,)).await
-    }
-    pub async fn balance(&self, arg0: ExtBalanceRequest) -> Result<(ExtBalanceResult,)> {
-        ic_cdk::call(self.0, "balance", (arg0,)).await
-    }
-    pub async fn balance_ext(&self, arg0: ExtBalanceRequest) -> Result<(ExtBalanceResult,)> {
-        ic_cdk::call(self.0, "balanceEXT", (arg0,)).await
-    }
-    pub async fn balance_of_batch_nft_origyn(
-        &self,
-        arg0: Vec<Account>,
-    ) -> Result<(Vec<BalanceResult>,)> {
-        ic_cdk::call(self.0, "balance_of_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn balance_of_nft_origyn(&self, arg0: Account) -> Result<(BalanceResult,)> {
-        ic_cdk::call(self.0, "balance_of_nft_origyn", (arg0,)).await
-    }
-    pub async fn balance_of_secure_batch_nft_origyn(
-        &self,
-        arg0: Vec<Account>,
-    ) -> Result<(Vec<BalanceResult>,)> {
-        ic_cdk::call(self.0, "balance_of_secure_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn balance_of_secure_nft_origyn(&self, arg0: Account) -> Result<(BalanceResult,)> {
-        ic_cdk::call(self.0, "balance_of_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn bearer(&self, arg0: ExtTokenIdentifier) -> Result<(ExtBearerResult,)> {
-        ic_cdk::call(self.0, "bearer", (arg0,)).await
-    }
-    pub async fn bearer_ext(&self, arg0: ExtTokenIdentifier) -> Result<(ExtBearerResult,)> {
-        ic_cdk::call(self.0, "bearerEXT", (arg0,)).await
-    }
-    pub async fn bearer_batch_nft_origyn(&self, arg0: Vec<String>) -> Result<(Vec<BearerResult>,)> {
-        ic_cdk::call(self.0, "bearer_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn bearer_batch_secure_nft_origyn(
-        &self,
-        arg0: Vec<String>,
-    ) -> Result<(Vec<BearerResult>,)> {
-        ic_cdk::call(self.0, "bearer_batch_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn bearer_nft_origyn(&self, arg0: String) -> Result<(BearerResult,)> {
-        ic_cdk::call(self.0, "bearer_nft_origyn", (arg0,)).await
-    }
-    pub async fn bearer_secure_nft_origyn(&self, arg0: String) -> Result<(BearerResult,)> {
-        ic_cdk::call(self.0, "bearer_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn canister_status(
-        &self,
-        arg0: NftCanisterCanisterStatusArg,
-    ) -> Result<(CanisterStatus,)> {
-        ic_cdk::call(self.0, "canister_status", (arg0,)).await
-    }
-    pub async fn chunk_nft_origyn(&self, arg0: ChunkRequest) -> Result<(ChunkResult,)> {
-        ic_cdk::call(self.0, "chunk_nft_origyn", (arg0,)).await
-    }
-    pub async fn chunk_secure_nft_origyn(&self, arg0: ChunkRequest) -> Result<(ChunkResult,)> {
-        ic_cdk::call(self.0, "chunk_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn collect_canister_metrics(&self) -> Result<()> {
-        ic_cdk::call(self.0, "collectCanisterMetrics", ()).await
-    }
-    pub async fn collection_nft_origyn(
-        &self,
-        arg0: Option<Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>>,
-    ) -> Result<(CollectionResult,)> {
-        ic_cdk::call(self.0, "collection_nft_origyn", (arg0,)).await
-    }
-    pub async fn collection_secure_nft_origyn(
-        &self,
-        arg0: Option<Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>>,
-    ) -> Result<(CollectionResult,)> {
-        ic_cdk::call(self.0, "collection_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn collection_update_batch_nft_origyn(
-        &self,
-        arg0: Vec<ManageCollectionCommand>,
-    ) -> Result<(Vec<OrigynBoolResult>,)> {
-        ic_cdk::call(self.0, "collection_update_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn collection_update_nft_origyn(
-        &self,
-        arg0: ManageCollectionCommand,
-    ) -> Result<(OrigynBoolResult,)> {
-        ic_cdk::call(self.0, "collection_update_nft_origyn", (arg0,)).await
-    }
-    pub async fn cycles(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "cycles", ()).await
-    }
-    pub async fn dip_721_balance_of(&self, arg0: Principal) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "dip721_balance_of", (arg0,)).await
-    }
-    pub async fn dip_721_custodians(&self) -> Result<(Vec<Principal>,)> {
-        ic_cdk::call(self.0, "dip721_custodians", ()).await
-    }
-    pub async fn dip_721_is_approved_for_all(
-        &self,
-        arg0: Principal,
-        arg1: Principal,
-    ) -> Result<(Dip721BoolResult,)> {
-        ic_cdk::call(self.0, "dip721_is_approved_for_all", (arg0, arg1)).await
-    }
-    pub async fn dip_721_logo(&self) -> Result<(Option<String>,)> {
-        ic_cdk::call(self.0, "dip721_logo", ()).await
-    }
-    pub async fn dip_721_metadata(&self) -> Result<(Dip721Metadata,)> {
-        ic_cdk::call(self.0, "dip721_metadata", ()).await
-    }
-    pub async fn dip_721_name(&self) -> Result<(Option<String>,)> {
-        ic_cdk::call(self.0, "dip721_name", ()).await
-    }
-    pub async fn dip_721_operator_token_identifiers(
-        &self,
-        arg0: Principal,
-    ) -> Result<(Dip721TokensListMetadata,)> {
-        ic_cdk::call(self.0, "dip721_operator_token_identifiers", (arg0,)).await
-    }
-    pub async fn dip_721_operator_token_metadata(
-        &self,
-        arg0: Principal,
-    ) -> Result<(Dip721TokensMetadata,)> {
-        ic_cdk::call(self.0, "dip721_operator_token_metadata", (arg0,)).await
-    }
-    pub async fn dip_721_owner_of(&self, arg0: candid::Nat) -> Result<(OwnerOfResponse,)> {
-        ic_cdk::call(self.0, "dip721_owner_of", (arg0,)).await
-    }
-    pub async fn dip_721_owner_token_identifiers(
-        &self,
-        arg0: Principal,
-    ) -> Result<(Dip721TokensListMetadata,)> {
-        ic_cdk::call(self.0, "dip721_owner_token_identifiers", (arg0,)).await
-    }
-    pub async fn dip_721_owner_token_metadata(
-        &self,
-        arg0: Principal,
-    ) -> Result<(Dip721TokensMetadata,)> {
-        ic_cdk::call(self.0, "dip721_owner_token_metadata", (arg0,)).await
-    }
-    pub async fn dip_721_stats(&self) -> Result<(Dip721Stats,)> {
-        ic_cdk::call(self.0, "dip721_stats", ()).await
-    }
-    pub async fn dip_721_supported_interfaces(&self) -> Result<(Vec<Dip721SupportedInterface>,)> {
-        ic_cdk::call(self.0, "dip721_supported_interfaces", ()).await
-    }
-    pub async fn dip_721_symbol(&self) -> Result<(Option<String>,)> {
-        ic_cdk::call(self.0, "dip721_symbol", ()).await
-    }
-    pub async fn dip_721_token_metadata(
-        &self,
-        arg0: candid::Nat,
-    ) -> Result<(Dip721TokenMetadata,)> {
-        ic_cdk::call(self.0, "dip721_token_metadata", (arg0,)).await
-    }
-    pub async fn dip_721_total_supply(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "dip721_total_supply", ()).await
-    }
-    pub async fn dip_721_total_transactions(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "dip721_total_transactions", ()).await
-    }
-    pub async fn dip_721_transfer(
-        &self,
-        arg0: Principal,
-        arg1: candid::Nat,
-    ) -> Result<(Dip721NatResult,)> {
-        ic_cdk::call(self.0, "dip721_transfer", (arg0, arg1)).await
-    }
-    pub async fn dip_721_transfer_from(
-        &self,
-        arg0: Principal,
-        arg1: Principal,
-        arg2: candid::Nat,
-    ) -> Result<(Dip721NatResult,)> {
-        ic_cdk::call(self.0, "dip721_transfer_from", (arg0, arg1, arg2)).await
-    }
-    pub async fn get_canister_log(
-        &self,
-        arg0: Option<CanisterLogRequest>,
-    ) -> Result<(Option<CanisterLogResponse>,)> {
-        ic_cdk::call(self.0, "getCanisterLog", (arg0,)).await
-    }
-    pub async fn get_canister_metrics(
-        &self,
-        arg0: GetMetricsParameters,
-    ) -> Result<(Option<CanisterMetrics>,)> {
-        ic_cdk::call(self.0, "getCanisterMetrics", (arg0,)).await
-    }
-    pub async fn get_ext_token_identifier(&self, arg0: String) -> Result<(String,)> {
-        ic_cdk::call(self.0, "getEXTTokenIdentifier", (arg0,)).await
-    }
-    pub async fn get_access_key(&self) -> Result<(OrigynTextResult,)> {
-        ic_cdk::call(self.0, "get_access_key", ()).await
-    }
-    pub async fn get_halt(&self) -> Result<(bool,)> {
-        ic_cdk::call(self.0, "get_halt", ()).await
-    }
-    pub async fn get_nat_as_token_id_origyn(&self, arg0: candid::Nat) -> Result<(String,)> {
-        ic_cdk::call(self.0, "get_nat_as_token_id_origyn", (arg0,)).await
-    }
-    pub async fn get_tip(&self) -> Result<(Tip,)> {
-        ic_cdk::call(self.0, "get_tip", ()).await
-    }
-    pub async fn get_token_id_as_nat(&self, arg0: String) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "get_token_id_as_nat", (arg0,)).await
-    }
-    pub async fn governance_batch_nft_origyn(
-        &self,
-        arg0: Vec<GovernanceRequest>,
-    ) -> Result<(Vec<GovernanceResult>,)> {
-        ic_cdk::call(self.0, "governance_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn governance_nft_origyn(
-        &self,
-        arg0: GovernanceRequest,
-    ) -> Result<(GovernanceResult,)> {
-        ic_cdk::call(self.0, "governance_nft_origyn", (arg0,)).await
-    }
-    pub async fn history_batch_nft_origyn(
-        &self,
-        arg0: Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>,
-    ) -> Result<(Vec<HistoryResult>,)> {
-        ic_cdk::call(self.0, "history_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn history_batch_secure_nft_origyn(
-        &self,
-        arg0: Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>,
-    ) -> Result<(Vec<HistoryResult>,)> {
-        ic_cdk::call(self.0, "history_batch_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn history_nft_origyn(
-        &self,
-        arg0: String,
-        arg1: Option<candid::Nat>,
-        arg2: Option<candid::Nat>,
-    ) -> Result<(HistoryResult,)> {
-        ic_cdk::call(self.0, "history_nft_origyn", (arg0, arg1, arg2)).await
-    }
-    pub async fn history_secure_nft_origyn(
-        &self,
-        arg0: String,
-        arg1: Option<candid::Nat>,
-        arg2: Option<candid::Nat>,
-    ) -> Result<(HistoryResult,)> {
-        ic_cdk::call(self.0, "history_secure_nft_origyn", (arg0, arg1, arg2)).await
-    }
-    pub async fn http_access_key(&self) -> Result<(OrigynTextResult,)> {
-        ic_cdk::call(self.0, "http_access_key", ()).await
-    }
-    pub async fn http_request(&self, arg0: HttpRequest) -> Result<(HttpResponse,)> {
-        ic_cdk::call(self.0, "http_request", (arg0,)).await
-    }
-    pub async fn http_request_streaming_callback(
-        &self,
-        arg0: StreamingCallbackToken,
-    ) -> Result<(StreamingCallbackResponse,)> {
-        ic_cdk::call(self.0, "http_request_streaming_callback", (arg0,)).await
-    }
-    pub async fn icrc_3_get_archives(&self, arg0: GetArchivesArgs) -> Result<(GetArchivesResult,)> {
-        ic_cdk::call(self.0, "icrc3_get_archives", (arg0,)).await
-    }
-    pub async fn icrc_3_get_blocks(
-        &self,
-        arg0: Vec<TransactionRange>,
-    ) -> Result<(GetTransactionsResult,)> {
-        ic_cdk::call(self.0, "icrc3_get_blocks", (arg0,)).await
-    }
-    pub async fn icrc_3_get_tip_certificate(&self) -> Result<(Option<DataCertificate>,)> {
-        ic_cdk::call(self.0, "icrc3_get_tip_certificate", ()).await
-    }
-    pub async fn icrc_3_supported_block_types(&self) -> Result<(Vec<BlockType>,)> {
-        ic_cdk::call(self.0, "icrc3_supported_block_types", ()).await
-    }
-    pub async fn icrc_7_approve(&self, arg0: ApprovalArgs) -> Result<(ApprovalResult,)> {
-        ic_cdk::call(self.0, "icrc7_approve", (arg0,)).await
-    }
-    pub async fn icrc_7_atomic_batch_transfers(&self) -> Result<(Option<bool>,)> {
-        ic_cdk::call(self.0, "icrc7_atomic_batch_transfers", ()).await
-    }
-    pub async fn icrc_7_balance_of(&self, arg0: Vec<Account3>) -> Result<(Vec<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_balance_of", (arg0,)).await
-    }
-    pub async fn icrc_7_collection_metadata(&self) -> Result<(CollectionMetadata,)> {
-        ic_cdk::call(self.0, "icrc7_collection_metadata", ()).await
-    }
-    pub async fn icrc_7_default_take_value(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_default_take_value", ()).await
-    }
-    pub async fn icrc_7_description(&self) -> Result<(Option<String>,)> {
-        ic_cdk::call(self.0, "icrc7_description", ()).await
-    }
-    pub async fn icrc_7_logo(&self) -> Result<(Option<String>,)> {
-        ic_cdk::call(self.0, "icrc7_logo", ()).await
-    }
-    pub async fn icrc_7_max_approvals_per_token_or_collection(
-        &self,
-    ) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_approvals_per_token_or_collection", ()).await
-    }
-    pub async fn icrc_7_max_memo_size(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_memo_size", ()).await
-    }
-    pub async fn icrc_7_max_query_batch_size(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_query_batch_size", ()).await
-    }
-    pub async fn icrc_7_max_revoke_approvals(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_revoke_approvals", ()).await
-    }
-    pub async fn icrc_7_max_take_value(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_take_value", ()).await
-    }
-    pub async fn icrc_7_max_update_batch_size(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_max_update_batch_size", ()).await
-    }
-    pub async fn icrc_7_name(&self) -> Result<(String,)> {
-        ic_cdk::call(self.0, "icrc7_name", ()).await
-    }
-    pub async fn icrc_7_owner_of(
-        &self,
-        arg0: Vec<candid::Nat>,
-    ) -> Result<(Vec<Option<Account3>>,)> {
-        ic_cdk::call(self.0, "icrc7_owner_of", (arg0,)).await
-    }
-    pub async fn icrc_7_permitted_drift(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_permitted_drift", ()).await
-    }
-    pub async fn icrc_7_supply_cap(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_supply_cap", ()).await
-    }
-    pub async fn icrc_7_supported_standards(&self) -> Result<(Vec<SupportedStandard>,)> {
-        ic_cdk::call(self.0, "icrc7_supported_standards", ()).await
-    }
-    pub async fn icrc_7_symbol(&self) -> Result<(String,)> {
-        ic_cdk::call(self.0, "icrc7_symbol", ()).await
-    }
-    pub async fn icrc_7_token_metadata(
-        &self,
-        arg0: Vec<candid::Nat>,
-    ) -> Result<(Vec<Option<Vec<(String, Value)>>>,)> {
-        ic_cdk::call(self.0, "icrc7_token_metadata", (arg0,)).await
-    }
-    pub async fn icrc_7_tokens(
-        &self,
-        arg0: Option<candid::Nat>,
-        arg1: Option<u32>,
-    ) -> Result<(Vec<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_tokens", (arg0, arg1)).await
-    }
-    pub async fn icrc_7_tokens_of(
-        &self,
-        arg0: Account3,
-        arg1: Option<candid::Nat>,
-        arg2: Option<u32>,
-    ) -> Result<(Vec<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_tokens_of", (arg0, arg1, arg2)).await
-    }
-    pub async fn icrc_7_total_supply(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "icrc7_total_supply", ()).await
-    }
-    pub async fn icrc_7_transfer(&self, arg0: Vec<TransferArgs>) -> Result<(TransferResult,)> {
-        ic_cdk::call(self.0, "icrc7_transfer", (arg0,)).await
-    }
-    pub async fn icrc_7_transfer_fee(&self, arg0: candid::Nat) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_transfer_fee", (arg0,)).await
-    }
-    pub async fn icrc_7_tx_window(&self) -> Result<(Option<candid::Nat>,)> {
-        ic_cdk::call(self.0, "icrc7_tx_window", ()).await
-    }
-    pub async fn manage_storage_nft_origyn(
-        &self,
-        arg0: ManageStorageRequest,
-    ) -> Result<(ManageStorageResult,)> {
-        ic_cdk::call(self.0, "manage_storage_nft_origyn", (arg0,)).await
-    }
-    pub async fn market_transfer_batch_nft_origyn(
-        &self,
-        arg0: Vec<MarketTransferRequest>,
-    ) -> Result<(Vec<MarketTransferResult>,)> {
-        ic_cdk::call(self.0, "market_transfer_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn market_transfer_nft_origyn(
-        &self,
-        arg0: MarketTransferRequest,
-    ) -> Result<(MarketTransferResult,)> {
-        ic_cdk::call(self.0, "market_transfer_nft_origyn", (arg0,)).await
-    }
-    pub async fn metadata(&self) -> Result<(Dip721Metadata,)> {
-        ic_cdk::call(self.0, "metadata", ()).await
-    }
-    pub async fn metadata_ext(&self, arg0: ExtTokenIdentifier) -> Result<(ExtMetadataResult,)> {
-        ic_cdk::call(self.0, "metadataExt", (arg0,)).await
-    }
-    pub async fn mint_batch_nft_origyn(
-        &self,
-        arg0: Vec<(String, Account)>,
-    ) -> Result<(Vec<OrigynTextResult>,)> {
-        ic_cdk::call(self.0, "mint_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn mint_nft_origyn(
-        &self,
-        arg0: String,
-        arg1: Account,
-    ) -> Result<(OrigynTextResult,)> {
-        ic_cdk::call(self.0, "mint_nft_origyn", (arg0, arg1)).await
-    }
-    pub async fn nft_streaming_callback(
-        &self,
-        arg0: StreamingCallbackToken,
-    ) -> Result<(StreamingCallbackResponse,)> {
-        ic_cdk::call(self.0, "nftStreamingCallback", (arg0,)).await
-    }
-    pub async fn nft_batch_origyn(&self, arg0: Vec<String>) -> Result<(Vec<NftInfoResult>,)> {
-        ic_cdk::call(self.0, "nft_batch_origyn", (arg0,)).await
-    }
-    pub async fn nft_batch_secure_origyn(
-        &self,
-        arg0: Vec<String>,
-    ) -> Result<(Vec<NftInfoResult>,)> {
-        ic_cdk::call(self.0, "nft_batch_secure_origyn", (arg0,)).await
-    }
-    pub async fn nft_origyn(&self, arg0: String) -> Result<(NftInfoResult,)> {
-        ic_cdk::call(self.0, "nft_origyn", (arg0,)).await
-    }
-    pub async fn nft_secure_origyn(&self, arg0: String) -> Result<(NftInfoResult,)> {
-        ic_cdk::call(self.0, "nft_secure_origyn", (arg0,)).await
-    }
-    pub async fn operater_token_metadata(
-        &self,
-        arg0: Principal,
-    ) -> Result<(Dip721TokensMetadata,)> {
-        ic_cdk::call(self.0, "operaterTokenMetadata", (arg0,)).await
-    }
-    pub async fn owner_of(&self, arg0: candid::Nat) -> Result<(OwnerOfResponse,)> {
-        ic_cdk::call(self.0, "ownerOf", (arg0,)).await
-    }
-    pub async fn owner_token_metadata(&self, arg0: Principal) -> Result<(Dip721TokensMetadata,)> {
-        ic_cdk::call(self.0, "ownerTokenMetadata", (arg0,)).await
-    }
-    pub async fn sale_batch_nft_origyn(
-        &self,
-        arg0: Vec<ManageSaleRequest>,
-    ) -> Result<(Vec<ManageSaleResult>,)> {
-        ic_cdk::call(self.0, "sale_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn sale_info_batch_nft_origyn(
-        &self,
-        arg0: Vec<SaleInfoRequest>,
-    ) -> Result<(Vec<SaleInfoResult>,)> {
-        ic_cdk::call(self.0, "sale_info_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn sale_info_batch_secure_nft_origyn(
-        &self,
-        arg0: Vec<SaleInfoRequest>,
-    ) -> Result<(Vec<SaleInfoResult>,)> {
-        ic_cdk::call(self.0, "sale_info_batch_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn sale_info_nft_origyn(&self, arg0: SaleInfoRequest) -> Result<(SaleInfoResult,)> {
-        ic_cdk::call(self.0, "sale_info_nft_origyn", (arg0,)).await
-    }
-    pub async fn sale_info_secure_nft_origyn(
-        &self,
-        arg0: SaleInfoRequest,
-    ) -> Result<(SaleInfoResult,)> {
-        ic_cdk::call(self.0, "sale_info_secure_nft_origyn", (arg0,)).await
-    }
-    pub async fn sale_nft_origyn(&self, arg0: ManageSaleRequest) -> Result<(ManageSaleResult,)> {
-        ic_cdk::call(self.0, "sale_nft_origyn", (arg0,)).await
-    }
-    pub async fn set_data_harvester(&self, arg0: candid::Nat) -> Result<()> {
-        ic_cdk::call(self.0, "set_data_harvester", (arg0,)).await
-    }
-    pub async fn set_halt(&self, arg0: bool) -> Result<()> {
-        ic_cdk::call(self.0, "set_halt", (arg0,)).await
-    }
-    pub async fn share_wallet_nft_origyn(
-        &self,
-        arg0: ShareWalletRequest,
-    ) -> Result<(OwnerUpdateResult,)> {
-        ic_cdk::call(self.0, "share_wallet_nft_origyn", (arg0,)).await
-    }
-    pub async fn stage_batch_nft_origyn(
-        &self,
-        arg0: Vec<NftCanisterStageBatchNftOrigynArgItem>,
-    ) -> Result<(Vec<OrigynTextResult>,)> {
-        ic_cdk::call(self.0, "stage_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn stage_library_batch_nft_origyn(
-        &self,
-        arg0: Vec<StageChunkArg>,
-    ) -> Result<(Vec<StageLibraryResult>,)> {
-        ic_cdk::call(self.0, "stage_library_batch_nft_origyn", (arg0,)).await
-    }
-    pub async fn stage_library_nft_origyn(
-        &self,
-        arg0: StageChunkArg,
-    ) -> Result<(StageLibraryResult,)> {
-        ic_cdk::call(self.0, "stage_library_nft_origyn", (arg0,)).await
-    }
-    pub async fn stage_nft_origyn(
-        &self,
-        arg0: NftCanisterStageNftOrigynArg,
-    ) -> Result<(OrigynTextResult,)> {
-        ic_cdk::call(self.0, "stage_nft_origyn", (arg0,)).await
-    }
-    pub async fn state_size(&self) -> Result<(StateSize,)> {
-        ic_cdk::call(self.0, "state_size", ()).await
-    }
-    pub async fn storage_info_nft_origyn(&self) -> Result<(StorageMetricsResult,)> {
-        ic_cdk::call(self.0, "storage_info_nft_origyn", ()).await
-    }
-    pub async fn storage_info_secure_nft_origyn(&self) -> Result<(StorageMetricsResult,)> {
-        ic_cdk::call(self.0, "storage_info_secure_nft_origyn", ()).await
-    }
-    pub async fn tokens_ext(&self, arg0: String) -> Result<(ExtTokensResult,)> {
-        ic_cdk::call(self.0, "tokens_ext", (arg0,)).await
-    }
-    pub async fn transfer(&self, arg0: ExtTransferRequest) -> Result<(ExtTransferResponse,)> {
-        ic_cdk::call(self.0, "transfer", (arg0,)).await
-    }
-    pub async fn transfer_dip_721(
-        &self,
-        arg0: Principal,
-        arg1: candid::Nat,
-    ) -> Result<(Dip721NatResult,)> {
-        ic_cdk::call(self.0, "transferDip721", (arg0, arg1)).await
-    }
-    pub async fn transfer_ext(&self, arg0: ExtTransferRequest) -> Result<(ExtTransferResponse,)> {
-        ic_cdk::call(self.0, "transferEXT", (arg0,)).await
-    }
-    pub async fn transfer_from(
-        &self,
-        arg0: Principal,
-        arg1: Principal,
-        arg2: candid::Nat,
-    ) -> Result<(Dip721NatResult,)> {
-        ic_cdk::call(self.0, "transferFrom", (arg0, arg1, arg2)).await
-    }
-    pub async fn transfer_from_dip_721(
-        &self,
-        arg0: Principal,
-        arg1: Principal,
-        arg2: candid::Nat,
-    ) -> Result<(Dip721NatResult,)> {
-        ic_cdk::call(self.0, "transferFromDip721", (arg0, arg1, arg2)).await
-    }
-    pub async fn update_app_nft_origyn(
-        &self,
-        arg0: NftUpdateRequest,
-    ) -> Result<(NftUpdateResult,)> {
-        ic_cdk::call(self.0, "update_app_nft_origyn", (arg0,)).await
-    }
-    pub async fn update_icrc_3(&self, arg0: Vec<UpdateSetting>) -> Result<(Vec<bool>,)> {
-        ic_cdk::call(self.0, "update_icrc3", (arg0,)).await
-    }
-    pub async fn wallet_receive(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "wallet_receive", ()).await
-    }
-    pub async fn whoami(&self) -> Result<(Principal,)> {
-        ic_cdk::call(self.0, "whoami", ()).await
-    }
-}
+// #[derive(Clone, Debug)]
+// pub struct Service(pub Principal);
+// impl Service {
+//     pub async fn advance_time(&self, arg0: candid::Int) -> Result<(candid::Int,)> {
+//         ic_cdk::call(self.0, "__advance_time", (arg0,)).await
+//     }
+//     pub async fn set_time_mode(&self, arg0: NftCanisterSetTimeModeArg) -> Result<(bool,)> {
+//         ic_cdk::call(self.0, "__set_time_mode", (arg0,)).await
+//     }
+//     pub async fn supports(&self) -> Result<(Vec<(String, String)>,)> {
+//         ic_cdk::call(self.0, "__supports", ()).await
+//     }
+//     pub async fn version(&self) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "__version", ()).await
+//     }
+//     pub async fn back_up(&self, arg0: candid::Nat) -> Result<(NftCanisterBackUpRet,)> {
+//         ic_cdk::call(self.0, "back_up", (arg0,)).await
+//     }
+//     pub async fn balance(&self, arg0: ExtBalanceRequest) -> Result<(ExtBalanceResult,)> {
+//         ic_cdk::call(self.0, "balance", (arg0,)).await
+//     }
+//     pub async fn balance_ext(&self, arg0: ExtBalanceRequest) -> Result<(ExtBalanceResult,)> {
+//         ic_cdk::call(self.0, "balanceEXT", (arg0,)).await
+//     }
+//     pub async fn balance_of_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<Account>,
+//     ) -> Result<(Vec<BalanceResult>,)> {
+//         ic_cdk::call(self.0, "balance_of_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn balance_of_nft_origyn(&self, arg0: Account) -> Result<(BalanceResult,)> {
+//         ic_cdk::call(self.0, "balance_of_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn balance_of_secure_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<Account>,
+//     ) -> Result<(Vec<BalanceResult>,)> {
+//         ic_cdk::call(self.0, "balance_of_secure_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn balance_of_secure_nft_origyn(&self, arg0: Account) -> Result<(BalanceResult,)> {
+//         ic_cdk::call(self.0, "balance_of_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn bearer(&self, arg0: ExtTokenIdentifier) -> Result<(ExtBearerResult,)> {
+//         ic_cdk::call(self.0, "bearer", (arg0,)).await
+//     }
+//     pub async fn bearer_ext(&self, arg0: ExtTokenIdentifier) -> Result<(ExtBearerResult,)> {
+//         ic_cdk::call(self.0, "bearerEXT", (arg0,)).await
+//     }
+//     pub async fn bearer_batch_nft_origyn(&self, arg0: Vec<String>) -> Result<(Vec<BearerResult>,)> {
+//         ic_cdk::call(self.0, "bearer_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn bearer_batch_secure_nft_origyn(
+//         &self,
+//         arg0: Vec<String>,
+//     ) -> Result<(Vec<BearerResult>,)> {
+//         ic_cdk::call(self.0, "bearer_batch_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn bearer_nft_origyn(&self, arg0: String) -> Result<(BearerResult,)> {
+//         ic_cdk::call(self.0, "bearer_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn bearer_secure_nft_origyn(&self, arg0: String) -> Result<(BearerResult,)> {
+//         ic_cdk::call(self.0, "bearer_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn canister_status(
+//         &self,
+//         arg0: NftCanisterCanisterStatusArg,
+//     ) -> Result<(CanisterStatus,)> {
+//         ic_cdk::call(self.0, "canister_status", (arg0,)).await
+//     }
+//     pub async fn chunk_nft_origyn(&self, arg0: ChunkRequest) -> Result<(ChunkResult,)> {
+//         ic_cdk::call(self.0, "chunk_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn chunk_secure_nft_origyn(&self, arg0: ChunkRequest) -> Result<(ChunkResult,)> {
+//         ic_cdk::call(self.0, "chunk_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn collect_canister_metrics(&self) -> Result<()> {
+//         ic_cdk::call(self.0, "collectCanisterMetrics", ()).await
+//     }
+//     pub async fn collection_nft_origyn(
+//         &self,
+//         arg0: Option<Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>>,
+//     ) -> Result<(CollectionResult,)> {
+//         ic_cdk::call(self.0, "collection_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn collection_secure_nft_origyn(
+//         &self,
+//         arg0: Option<Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>>,
+//     ) -> Result<(CollectionResult,)> {
+//         ic_cdk::call(self.0, "collection_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn collection_update_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<ManageCollectionCommand>,
+//     ) -> Result<(Vec<OrigynBoolResult>,)> {
+//         ic_cdk::call(self.0, "collection_update_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn collection_update_nft_origyn(
+//         &self,
+//         arg0: ManageCollectionCommand,
+//     ) -> Result<(OrigynBoolResult,)> {
+//         ic_cdk::call(self.0, "collection_update_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn cycles(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "cycles", ()).await
+//     }
+//     pub async fn dip_721_balance_of(&self, arg0: Principal) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "dip721_balance_of", (arg0,)).await
+//     }
+//     pub async fn dip_721_custodians(&self) -> Result<(Vec<Principal>,)> {
+//         ic_cdk::call(self.0, "dip721_custodians", ()).await
+//     }
+//     pub async fn dip_721_is_approved_for_all(
+//         &self,
+//         arg0: Principal,
+//         arg1: Principal,
+//     ) -> Result<(Dip721BoolResult,)> {
+//         ic_cdk::call(self.0, "dip721_is_approved_for_all", (arg0, arg1)).await
+//     }
+//     pub async fn dip_721_logo(&self) -> Result<(Option<String>,)> {
+//         ic_cdk::call(self.0, "dip721_logo", ()).await
+//     }
+//     pub async fn dip_721_metadata(&self) -> Result<(Dip721Metadata,)> {
+//         ic_cdk::call(self.0, "dip721_metadata", ()).await
+//     }
+//     pub async fn dip_721_name(&self) -> Result<(Option<String>,)> {
+//         ic_cdk::call(self.0, "dip721_name", ()).await
+//     }
+//     pub async fn dip_721_operator_token_identifiers(
+//         &self,
+//         arg0: Principal,
+//     ) -> Result<(Dip721TokensListMetadata,)> {
+//         ic_cdk::call(self.0, "dip721_operator_token_identifiers", (arg0,)).await
+//     }
+//     pub async fn dip_721_operator_token_metadata(
+//         &self,
+//         arg0: Principal,
+//     ) -> Result<(Dip721TokensMetadata,)> {
+//         ic_cdk::call(self.0, "dip721_operator_token_metadata", (arg0,)).await
+//     }
+//     pub async fn dip_721_owner_of(&self, arg0: candid::Nat) -> Result<(OwnerOfResponse,)> {
+//         ic_cdk::call(self.0, "dip721_owner_of", (arg0,)).await
+//     }
+//     pub async fn dip_721_owner_token_identifiers(
+//         &self,
+//         arg0: Principal,
+//     ) -> Result<(Dip721TokensListMetadata,)> {
+//         ic_cdk::call(self.0, "dip721_owner_token_identifiers", (arg0,)).await
+//     }
+//     pub async fn dip_721_owner_token_metadata(
+//         &self,
+//         arg0: Principal,
+//     ) -> Result<(Dip721TokensMetadata,)> {
+//         ic_cdk::call(self.0, "dip721_owner_token_metadata", (arg0,)).await
+//     }
+//     pub async fn dip_721_stats(&self) -> Result<(Dip721Stats,)> {
+//         ic_cdk::call(self.0, "dip721_stats", ()).await
+//     }
+//     pub async fn dip_721_supported_interfaces(&self) -> Result<(Vec<Dip721SupportedInterface>,)> {
+//         ic_cdk::call(self.0, "dip721_supported_interfaces", ()).await
+//     }
+//     pub async fn dip_721_symbol(&self) -> Result<(Option<String>,)> {
+//         ic_cdk::call(self.0, "dip721_symbol", ()).await
+//     }
+//     pub async fn dip_721_token_metadata(
+//         &self,
+//         arg0: candid::Nat,
+//     ) -> Result<(Dip721TokenMetadata,)> {
+//         ic_cdk::call(self.0, "dip721_token_metadata", (arg0,)).await
+//     }
+//     pub async fn dip_721_total_supply(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "dip721_total_supply", ()).await
+//     }
+//     pub async fn dip_721_total_transactions(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "dip721_total_transactions", ()).await
+//     }
+//     pub async fn dip_721_transfer(
+//         &self,
+//         arg0: Principal,
+//         arg1: candid::Nat,
+//     ) -> Result<(Dip721NatResult,)> {
+//         ic_cdk::call(self.0, "dip721_transfer", (arg0, arg1)).await
+//     }
+//     pub async fn dip_721_transfer_from(
+//         &self,
+//         arg0: Principal,
+//         arg1: Principal,
+//         arg2: candid::Nat,
+//     ) -> Result<(Dip721NatResult,)> {
+//         ic_cdk::call(self.0, "dip721_transfer_from", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn get_canister_log(
+//         &self,
+//         arg0: Option<CanisterLogRequest>,
+//     ) -> Result<(Option<CanisterLogResponse>,)> {
+//         ic_cdk::call(self.0, "getCanisterLog", (arg0,)).await
+//     }
+//     pub async fn get_canister_metrics(
+//         &self,
+//         arg0: GetMetricsParameters,
+//     ) -> Result<(Option<CanisterMetrics>,)> {
+//         ic_cdk::call(self.0, "getCanisterMetrics", (arg0,)).await
+//     }
+//     pub async fn get_ext_token_identifier(&self, arg0: String) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "getEXTTokenIdentifier", (arg0,)).await
+//     }
+//     pub async fn get_access_key(&self) -> Result<(OrigynTextResult,)> {
+//         ic_cdk::call(self.0, "get_access_key", ()).await
+//     }
+//     pub async fn get_halt(&self) -> Result<(bool,)> {
+//         ic_cdk::call(self.0, "get_halt", ()).await
+//     }
+//     pub async fn get_nat_as_token_id_origyn(&self, arg0: candid::Nat) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "get_nat_as_token_id_origyn", (arg0,)).await
+//     }
+//     pub async fn get_tip(&self) -> Result<(Tip,)> {
+//         ic_cdk::call(self.0, "get_tip", ()).await
+//     }
+//     pub async fn get_token_id_as_nat(&self, arg0: String) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "get_token_id_as_nat", (arg0,)).await
+//     }
+//     pub async fn governance_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<GovernanceRequest>,
+//     ) -> Result<(Vec<GovernanceResult>,)> {
+//         ic_cdk::call(self.0, "governance_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn governance_nft_origyn(
+//         &self,
+//         arg0: GovernanceRequest,
+//     ) -> Result<(GovernanceResult,)> {
+//         ic_cdk::call(self.0, "governance_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn history_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>,
+//     ) -> Result<(Vec<HistoryResult>,)> {
+//         ic_cdk::call(self.0, "history_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn history_batch_secure_nft_origyn(
+//         &self,
+//         arg0: Vec<(String, Option<candid::Nat>, Option<candid::Nat>)>,
+//     ) -> Result<(Vec<HistoryResult>,)> {
+//         ic_cdk::call(self.0, "history_batch_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn history_nft_origyn(
+//         &self,
+//         arg0: String,
+//         arg1: Option<candid::Nat>,
+//         arg2: Option<candid::Nat>,
+//     ) -> Result<(HistoryResult,)> {
+//         ic_cdk::call(self.0, "history_nft_origyn", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn history_secure_nft_origyn(
+//         &self,
+//         arg0: String,
+//         arg1: Option<candid::Nat>,
+//         arg2: Option<candid::Nat>,
+//     ) -> Result<(HistoryResult,)> {
+//         ic_cdk::call(self.0, "history_secure_nft_origyn", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn http_access_key(&self) -> Result<(OrigynTextResult,)> {
+//         ic_cdk::call(self.0, "http_access_key", ()).await
+//     }
+//     pub async fn http_request(&self, arg0: HttpRequest) -> Result<(HttpResponse,)> {
+//         ic_cdk::call(self.0, "http_request", (arg0,)).await
+//     }
+//     pub async fn http_request_streaming_callback(
+//         &self,
+//         arg0: StreamingCallbackToken,
+//     ) -> Result<(StreamingCallbackResponse,)> {
+//         ic_cdk::call(self.0, "http_request_streaming_callback", (arg0,)).await
+//     }
+//     pub async fn icrc_3_get_archives(&self, arg0: GetArchivesArgs) -> Result<(GetArchivesResult,)> {
+//         ic_cdk::call(self.0, "icrc3_get_archives", (arg0,)).await
+//     }
+//     pub async fn icrc_3_get_blocks(
+//         &self,
+//         arg0: Vec<TransactionRange>,
+//     ) -> Result<(GetTransactionsResult,)> {
+//         ic_cdk::call(self.0, "icrc3_get_blocks", (arg0,)).await
+//     }
+//     pub async fn icrc_3_get_tip_certificate(&self) -> Result<(Option<DataCertificate>,)> {
+//         ic_cdk::call(self.0, "icrc3_get_tip_certificate", ()).await
+//     }
+//     pub async fn icrc_3_supported_block_types(&self) -> Result<(Vec<BlockType>,)> {
+//         ic_cdk::call(self.0, "icrc3_supported_block_types", ()).await
+//     }
+//     pub async fn icrc_7_approve(&self, arg0: ApprovalArgs) -> Result<(ApprovalResult,)> {
+//         ic_cdk::call(self.0, "icrc7_approve", (arg0,)).await
+//     }
+//     pub async fn icrc_7_atomic_batch_transfers(&self) -> Result<(Option<bool>,)> {
+//         ic_cdk::call(self.0, "icrc7_atomic_batch_transfers", ()).await
+//     }
+//     pub async fn icrc_7_balance_of(&self, arg0: Vec<Account3>) -> Result<(Vec<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_balance_of", (arg0,)).await
+//     }
+//     pub async fn icrc_7_collection_metadata(&self) -> Result<(CollectionMetadata,)> {
+//         ic_cdk::call(self.0, "icrc7_collection_metadata", ()).await
+//     }
+//     pub async fn icrc_7_default_take_value(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_default_take_value", ()).await
+//     }
+//     pub async fn icrc_7_description(&self) -> Result<(Option<String>,)> {
+//         ic_cdk::call(self.0, "icrc7_description", ()).await
+//     }
+//     pub async fn icrc_7_logo(&self) -> Result<(Option<String>,)> {
+//         ic_cdk::call(self.0, "icrc7_logo", ()).await
+//     }
+//     pub async fn icrc_7_max_approvals_per_token_or_collection(
+//         &self,
+//     ) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_approvals_per_token_or_collection", ()).await
+//     }
+//     pub async fn icrc_7_max_memo_size(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_memo_size", ()).await
+//     }
+//     pub async fn icrc_7_max_query_batch_size(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_query_batch_size", ()).await
+//     }
+//     pub async fn icrc_7_max_revoke_approvals(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_revoke_approvals", ()).await
+//     }
+//     pub async fn icrc_7_max_take_value(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_take_value", ()).await
+//     }
+//     pub async fn icrc_7_max_update_batch_size(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_max_update_batch_size", ()).await
+//     }
+//     pub async fn icrc_7_name(&self) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "icrc7_name", ()).await
+//     }
+//     pub async fn icrc_7_owner_of(
+//         &self,
+//         arg0: Vec<candid::Nat>,
+//     ) -> Result<(Vec<Option<Account3>>,)> {
+//         ic_cdk::call(self.0, "icrc7_owner_of", (arg0,)).await
+//     }
+//     pub async fn icrc_7_permitted_drift(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_permitted_drift", ()).await
+//     }
+//     pub async fn icrc_7_supply_cap(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_supply_cap", ()).await
+//     }
+//     pub async fn icrc_7_supported_standards(&self) -> Result<(Vec<SupportedStandard>,)> {
+//         ic_cdk::call(self.0, "icrc7_supported_standards", ()).await
+//     }
+//     pub async fn icrc_7_symbol(&self) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "icrc7_symbol", ()).await
+//     }
+//     pub async fn icrc_7_token_metadata(
+//         &self,
+//         arg0: Vec<candid::Nat>,
+//     ) -> Result<(Vec<Option<Vec<(String, Value)>>>,)> {
+//         ic_cdk::call(self.0, "icrc7_token_metadata", (arg0,)).await
+//     }
+//     pub async fn icrc_7_tokens(
+//         &self,
+//         arg0: Option<candid::Nat>,
+//         arg1: Option<u32>,
+//     ) -> Result<(Vec<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_tokens", (arg0, arg1)).await
+//     }
+//     pub async fn icrc_7_tokens_of(
+//         &self,
+//         arg0: Account3,
+//         arg1: Option<candid::Nat>,
+//         arg2: Option<u32>,
+//     ) -> Result<(Vec<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_tokens_of", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn icrc_7_total_supply(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "icrc7_total_supply", ()).await
+//     }
+//     pub async fn icrc_7_transfer(&self, arg0: Vec<TransferArgs>) -> Result<(TransferResult,)> {
+//         ic_cdk::call(self.0, "icrc7_transfer", (arg0,)).await
+//     }
+//     pub async fn icrc_7_transfer_fee(&self, arg0: candid::Nat) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_transfer_fee", (arg0,)).await
+//     }
+//     pub async fn icrc_7_tx_window(&self) -> Result<(Option<candid::Nat>,)> {
+//         ic_cdk::call(self.0, "icrc7_tx_window", ()).await
+//     }
+//     pub async fn manage_storage_nft_origyn(
+//         &self,
+//         arg0: ManageStorageRequest,
+//     ) -> Result<(ManageStorageResult,)> {
+//         ic_cdk::call(self.0, "manage_storage_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn market_transfer_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<MarketTransferRequest>,
+//     ) -> Result<(Vec<MarketTransferResult>,)> {
+//         ic_cdk::call(self.0, "market_transfer_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn market_transfer_nft_origyn(
+//         &self,
+//         arg0: MarketTransferRequest,
+//     ) -> Result<(MarketTransferResult,)> {
+//         ic_cdk::call(self.0, "market_transfer_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn metadata(&self) -> Result<(Dip721Metadata,)> {
+//         ic_cdk::call(self.0, "metadata", ()).await
+//     }
+//     pub async fn metadata_ext(&self, arg0: ExtTokenIdentifier) -> Result<(ExtMetadataResult,)> {
+//         ic_cdk::call(self.0, "metadataExt", (arg0,)).await
+//     }
+//     pub async fn mint_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<(String, Account)>,
+//     ) -> Result<(Vec<OrigynTextResult>,)> {
+//         ic_cdk::call(self.0, "mint_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn mint_nft_origyn(
+//         &self,
+//         arg0: String,
+//         arg1: Account,
+//     ) -> Result<(OrigynTextResult,)> {
+//         ic_cdk::call(self.0, "mint_nft_origyn", (arg0, arg1)).await
+//     }
+//     pub async fn nft_streaming_callback(
+//         &self,
+//         arg0: StreamingCallbackToken,
+//     ) -> Result<(StreamingCallbackResponse,)> {
+//         ic_cdk::call(self.0, "nftStreamingCallback", (arg0,)).await
+//     }
+//     pub async fn nft_batch_origyn(&self, arg0: Vec<String>) -> Result<(Vec<NftInfoResult>,)> {
+//         ic_cdk::call(self.0, "nft_batch_origyn", (arg0,)).await
+//     }
+//     pub async fn nft_batch_secure_origyn(
+//         &self,
+//         arg0: Vec<String>,
+//     ) -> Result<(Vec<NftInfoResult>,)> {
+//         ic_cdk::call(self.0, "nft_batch_secure_origyn", (arg0,)).await
+//     }
+//     pub async fn nft_origyn(&self, arg0: String) -> Result<(NftInfoResult,)> {
+//         ic_cdk::call(self.0, "nft_origyn", (arg0,)).await
+//     }
+//     pub async fn nft_secure_origyn(&self, arg0: String) -> Result<(NftInfoResult,)> {
+//         ic_cdk::call(self.0, "nft_secure_origyn", (arg0,)).await
+//     }
+//     pub async fn operater_token_metadata(
+//         &self,
+//         arg0: Principal,
+//     ) -> Result<(Dip721TokensMetadata,)> {
+//         ic_cdk::call(self.0, "operaterTokenMetadata", (arg0,)).await
+//     }
+//     pub async fn owner_of(&self, arg0: candid::Nat) -> Result<(OwnerOfResponse,)> {
+//         ic_cdk::call(self.0, "ownerOf", (arg0,)).await
+//     }
+//     pub async fn owner_token_metadata(&self, arg0: Principal) -> Result<(Dip721TokensMetadata,)> {
+//         ic_cdk::call(self.0, "ownerTokenMetadata", (arg0,)).await
+//     }
+//     pub async fn sale_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<ManageSaleRequest>,
+//     ) -> Result<(Vec<ManageSaleResult>,)> {
+//         ic_cdk::call(self.0, "sale_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn sale_info_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<SaleInfoRequest>,
+//     ) -> Result<(Vec<SaleInfoResult>,)> {
+//         ic_cdk::call(self.0, "sale_info_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn sale_info_batch_secure_nft_origyn(
+//         &self,
+//         arg0: Vec<SaleInfoRequest>,
+//     ) -> Result<(Vec<SaleInfoResult>,)> {
+//         ic_cdk::call(self.0, "sale_info_batch_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn sale_info_nft_origyn(&self, arg0: SaleInfoRequest) -> Result<(SaleInfoResult,)> {
+//         ic_cdk::call(self.0, "sale_info_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn sale_info_secure_nft_origyn(
+//         &self,
+//         arg0: SaleInfoRequest,
+//     ) -> Result<(SaleInfoResult,)> {
+//         ic_cdk::call(self.0, "sale_info_secure_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn sale_nft_origyn(&self, arg0: ManageSaleRequest) -> Result<(ManageSaleResult,)> {
+//         ic_cdk::call(self.0, "sale_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn set_data_harvester(&self, arg0: candid::Nat) -> Result<()> {
+//         ic_cdk::call(self.0, "set_data_harvester", (arg0,)).await
+//     }
+//     pub async fn set_halt(&self, arg0: bool) -> Result<()> {
+//         ic_cdk::call(self.0, "set_halt", (arg0,)).await
+//     }
+//     pub async fn share_wallet_nft_origyn(
+//         &self,
+//         arg0: ShareWalletRequest,
+//     ) -> Result<(OwnerUpdateResult,)> {
+//         ic_cdk::call(self.0, "share_wallet_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn stage_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<NftCanisterStageBatchNftOrigynArgItem>,
+//     ) -> Result<(Vec<OrigynTextResult>,)> {
+//         ic_cdk::call(self.0, "stage_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn stage_library_batch_nft_origyn(
+//         &self,
+//         arg0: Vec<StageChunkArg>,
+//     ) -> Result<(Vec<StageLibraryResult>,)> {
+//         ic_cdk::call(self.0, "stage_library_batch_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn stage_library_nft_origyn(
+//         &self,
+//         arg0: StageChunkArg,
+//     ) -> Result<(StageLibraryResult,)> {
+//         ic_cdk::call(self.0, "stage_library_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn stage_nft_origyn(
+//         &self,
+//         arg0: NftCanisterStageNftOrigynArg,
+//     ) -> Result<(OrigynTextResult,)> {
+//         ic_cdk::call(self.0, "stage_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn state_size(&self) -> Result<(StateSize,)> {
+//         ic_cdk::call(self.0, "state_size", ()).await
+//     }
+//     pub async fn storage_info_nft_origyn(&self) -> Result<(StorageMetricsResult,)> {
+//         ic_cdk::call(self.0, "storage_info_nft_origyn", ()).await
+//     }
+//     pub async fn storage_info_secure_nft_origyn(&self) -> Result<(StorageMetricsResult,)> {
+//         ic_cdk::call(self.0, "storage_info_secure_nft_origyn", ()).await
+//     }
+//     pub async fn tokens_ext(&self, arg0: String) -> Result<(ExtTokensResult,)> {
+//         ic_cdk::call(self.0, "tokens_ext", (arg0,)).await
+//     }
+//     pub async fn transfer(&self, arg0: ExtTransferRequest) -> Result<(ExtTransferResponse,)> {
+//         ic_cdk::call(self.0, "transfer", (arg0,)).await
+//     }
+//     pub async fn transfer_dip_721(
+//         &self,
+//         arg0: Principal,
+//         arg1: candid::Nat,
+//     ) -> Result<(Dip721NatResult,)> {
+//         ic_cdk::call(self.0, "transferDip721", (arg0, arg1)).await
+//     }
+//     pub async fn transfer_ext(&self, arg0: ExtTransferRequest) -> Result<(ExtTransferResponse,)> {
+//         ic_cdk::call(self.0, "transferEXT", (arg0,)).await
+//     }
+//     pub async fn transfer_from(
+//         &self,
+//         arg0: Principal,
+//         arg1: Principal,
+//         arg2: candid::Nat,
+//     ) -> Result<(Dip721NatResult,)> {
+//         ic_cdk::call(self.0, "transferFrom", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn transfer_from_dip_721(
+//         &self,
+//         arg0: Principal,
+//         arg1: Principal,
+//         arg2: candid::Nat,
+//     ) -> Result<(Dip721NatResult,)> {
+//         ic_cdk::call(self.0, "transferFromDip721", (arg0, arg1, arg2)).await
+//     }
+//     pub async fn update_app_nft_origyn(
+//         &self,
+//         arg0: NftUpdateRequest,
+//     ) -> Result<(NftUpdateResult,)> {
+//         ic_cdk::call(self.0, "update_app_nft_origyn", (arg0,)).await
+//     }
+//     pub async fn update_icrc_3(&self, arg0: Vec<UpdateSetting>) -> Result<(Vec<bool>,)> {
+//         ic_cdk::call(self.0, "update_icrc3", (arg0,)).await
+//     }
+//     pub async fn wallet_receive(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "wallet_receive", ()).await
+//     }
+//     pub async fn whoami(&self) -> Result<(Principal,)> {
+//         ic_cdk::call(self.0, "whoami", ()).await
+//     }
+// }

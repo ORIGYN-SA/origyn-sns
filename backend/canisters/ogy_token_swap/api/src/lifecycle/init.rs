@@ -1,7 +1,7 @@
+use bity_ic_types::BuildVersion;
 use candid::{CandidType, Principal};
 use serde::Deserialize;
 use serde::Serialize;
-use bity_ic_types::BuildVersion;
 use types::CanisterId;
 
 #[derive(Deserialize, Serialize, Debug, CandidType)]

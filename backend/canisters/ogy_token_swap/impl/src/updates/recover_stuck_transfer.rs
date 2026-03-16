@@ -1,5 +1,5 @@
 use crate::{guards::caller_is_authorised_principal, state::read_state, transfer_new_token};
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 use ic_cdk::update;
 use ic_ledger_types::BlockIndex;
 

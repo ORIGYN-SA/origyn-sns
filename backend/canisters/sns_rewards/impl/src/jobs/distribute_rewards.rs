@@ -61,7 +61,6 @@ pub fn run_distribution(initial_run_time: TimestampMillis) {
         return;
     }
 
-
     mutate_state(|s| {
         s.data.reward_distribution_in_progress = Some(true);
     });
@@ -74,8 +73,8 @@ pub fn run_distribution(initial_run_time: TimestampMillis) {
     }));
 }
 
-fn schedule_retry(initial_run_time: TimestampMillis, delay: Duration) {
-    ic_cdk_timers::set_timer(delay, move || run_distribution(initial_run_time));
+pub fn schedule_retry(initial_run_time: TimestampMillis, delay: Duration) {
+    ic_cdk_timers::set_timer(delay, async move { run_distribution(initial_run_time) });
 }
 
 pub fn finalize_distribution(processed_payment_rounds: Vec<PaymentRound>) {
@@ -299,7 +298,7 @@ pub async fn fetch_reward_pool_balance(ledger_canister_id: Principal) -> Nat {
         Err(e) => {
             error!(
                 "Fail - to fetch token balance of ledger canister id {ledger_canister_id} with ERROR_CODE : {} . MESSAGE",
-                e.1
+                e
             );
             Nat::from(0u64)
         }

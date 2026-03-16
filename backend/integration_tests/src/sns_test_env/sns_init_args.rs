@@ -582,3 +582,60 @@ use sns_governance_canister::types::{
     governance::SnsMetadata, DefaultFollowees, NervousSystemParameters, NeuronPermissionList,
     VotingRewardsParameters,
 };
+
+use crate::sns_test_env::utils::create_neuron_permissions;
+pub fn generate_sns_neuron_data(
+    start_at: usize,
+    n: usize,
+    maturity_multiplier: u64,
+    users: &Vec<Principal>,
+) -> (HashMap<usize, Neuron>, HashMap<Principal, usize>) {
+    let mut neuron_data = HashMap::new();
+    let mut owner_map = HashMap::new();
+    let mut index_user = 0;
+    for i in start_at..n {
+        let neuron_id = neuron_id_from_number(i);
+        let user_principal = users.get(index_user).clone();
+        let perms = create_neuron_permissions(user_principal);
+        let neuron = create_sns_neuron(neuron_id, maturity_multiplier, perms);
+        neuron_data.insert(i, neuron);
+        if user_principal.is_some() {
+            owner_map.insert(user_principal.unwrap().clone(), i);
+        }
+        if users.len() >= 1 && index_user == users.len() - 1 {
+            index_user = 0;
+        }
+    }
+
+    (neuron_data, owner_map)
+}
+
+use sns_governance_canister::types::NeuronId;
+use sns_governance_canister::types::NeuronPermission;
+pub fn create_sns_neuron(
+    id: NeuronId,
+    maturity_multiplier: u64,
+    perms: Vec<NeuronPermission>,
+) -> Neuron {
+    Neuron {
+        id: Some(id),
+        permissions: perms,
+        cached_neuron_stake_e8s: 3000000000000u64,
+        neuron_fees_e8s: 0u64,
+        created_timestamp_seconds: 1620329630,
+        aging_since_timestamp_seconds: 1620329630,
+        followees: BTreeMap::new(),
+        maturity_e8s_equivalent: 1 * maturity_multiplier,
+        voting_power_percentage_multiplier: 1,
+        source_nns_neuron_id: None,
+        staked_maturity_e8s_equivalent: Some(10),
+        auto_stake_maturity: Some(false),
+        vesting_period_seconds: Some(100000),
+        disburse_maturity_in_progress: vec![],
+        dissolve_state: Some(
+            sns_governance_canister::types::neuron::DissolveState::WhenDissolvedTimestampSeconds(
+                100000000000,
+            ),
+        ),
+    }
+}

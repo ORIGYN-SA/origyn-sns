@@ -1,0 +1,19 @@
+[package]
+name = "buyback_burn_api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+candid = { workspace = true }
+# bity-ic-candid-gen = { workspace = true }
+ic-ledger-types = { workspace = true }
+serde = { workspace = true }
+types = { path = "../../../libraries/types" }
+# bity-ic-canister-logger = { workspace = true }
+# sns_governance_canister = { path = '../../../external_canisters/sns_governance/api' }
+icrc-ledger-types = { workspace = true }
+ic-stable-structures = { workspace = true }
+utils = { path = '../../../libraries/utils' }
+bity-ic-types = { workspace = true }

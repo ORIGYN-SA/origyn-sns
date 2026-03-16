@@ -1,9 +1,9 @@
+use crate::memory::get_payment_round_history_memory_v0;
 use ic_stable_structures::StableBTreeMap;
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::NeuronId;
 use sns_rewards_api_canister::payment_round::{PaymentRound, PaymentStatus};
 use std::collections::BTreeMap;
-use crate::memory::get_payment_round_history_memory_v0;
 use tracing::debug;
 use types::TokenSymbol;
 
@@ -49,7 +49,8 @@ impl PaymentProcessor {
     // gets the last key of the last completed payment round and circles from 1 - u16::MAX - each cycle is 125 years.
     pub fn next_key(&self) -> u16 {
         let mut max_key = 0;
-        for ((_symbol, id), _) in self.round_history.iter() {
+        for (entry) in self.round_history.iter() {
+            let (_, id) = entry.key().clone();
             if id > max_key {
                 max_key = id;
             }
@@ -103,8 +104,10 @@ impl PaymentProcessor {
         let rounds = self
             .round_history
             .iter()
-            .filter(|((_, round_id), round)| *round_id == id && round.token == token)
-            .map(|((_, round_id), payment_round)| (round_id, payment_round.clone()))
+            // .filter(|((_, round_id), round)| *round_id == id && round.token == token)
+            .filter(|(entry)| entry.key().1 == id && entry.value().token == token)
+            // .map(|((_, round_id), payment_round)| (round_id, payment_round.clone()))
+            .map(|(entry)| (entry.key().1, entry.value().clone()))
             .collect();
 
         rounds
@@ -114,7 +117,7 @@ impl PaymentProcessor {
         let rounds = self
             .round_history
             .iter()
-            .map(|((_, round_id), payment_round)| (round_id, payment_round.clone()))
+            .map(|(entry)| (entry.key().1, entry.value().clone()))
             .collect();
 
         rounds

@@ -58,7 +58,9 @@ async fn fetch_balance(of: Subaccount) -> Result<u64, WithdrawDepositResponse> {
 
     match account_balance(ogy_legacy_ledger_canister_id, &args).await {
         Ok(tokens) => Ok(tokens.e8s()),
-        Err(err) => Err(WithdrawDepositResponse::FailedToFetchBalance(err.to_string())),
+        Err(err) => Err(WithdrawDepositResponse::FailedToFetchBalance(
+            err.to_string(),
+        )),
     }
 }
 

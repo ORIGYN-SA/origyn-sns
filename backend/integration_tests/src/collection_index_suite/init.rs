@@ -1,9 +1,9 @@
+use bity_ic_types::BuildVersion;
 use candid::{Nat, Principal};
 use collection_index_api::lifecycle::init::InitArgs as CollectionIndexInitArgs;
 use origyn_nft_reference::origyn_nft_reference_canister::ManageStorageRequestConfigureStorage;
 use pocket_ic::{PocketIc, PocketIcBuilder};
 use std::{env, path::Path};
-use bity_ic_types::BuildVersion;
 use types::CanisterId;
 use utils::consts::E8S_FEE_OGY;
 
@@ -166,12 +166,12 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         {},
     );
 
-    let collection_index_init_args = CollectionIndexInitArgs {
+    let collection_index_init_args = collection_index_api::lifecycle::Args::Init(CollectionIndexInitArgs {
         authorized_principals: vec![controller],
         test_mode: true,
         version: BuildVersion::default(),
         commit_hash: "commit_hash".to_string(),
-    };
+    });
 
     install_canister(
         pic,

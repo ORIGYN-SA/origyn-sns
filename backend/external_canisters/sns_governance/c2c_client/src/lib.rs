@@ -1,6 +1,5 @@
 use ::types::{CanisterId, SnsNeuronId};
 use bity_ic_canister_client::generate_candid_c2c_call;
-use ic_cdk::api::call::{CallResult, RejectionCode};
 use sns_governance_canister::types::manage_neuron::configure::Operation;
 use sns_governance_canister::types::manage_neuron::{Command, Configure};
 use sns_governance_canister::types::{manage_neuron_response, ManageNeuron};

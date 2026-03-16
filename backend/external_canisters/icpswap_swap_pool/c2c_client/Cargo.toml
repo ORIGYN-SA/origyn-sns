@@ -7,5 +7,4 @@ edition = "2021"
 
 [dependencies]
 icpswap_swap_pool_canister = { path = "../api" }
-canister_client = { path = "../../../libraries/canister_client" }
-#bity-ic-canister-client = { workspace = true }
+bity-ic-canister-client = { workspace = true }

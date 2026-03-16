@@ -15,10 +15,10 @@ crate-type = ["cdylib"]
 
 [dependencies]
 candid = { workspace = true }
-canister_logger = { path = '../../../libraries/canister_logger' }
-canister_state_macros = { path = '../../../libraries/canister_state_macros' }
-canister_time = { path = '../../../libraries/canister_time' }
-canister_tracing_macros = { path = '../../../libraries/canister_tracing_macros' }
+bity-ic-canister-logger = { workspace = true }
+bity-ic-canister-state-macros = { workspace = true }
+bity-ic-canister-time = { workspace = true }
+bity-ic-canister-tracing-macros = { workspace = true }
 futures = { workspace = true }
 http_request = { path = '../../../libraries/http_request' }
 ic-cdk = { workspace = true }
@@ -28,14 +28,13 @@ ic-stable-structures = { workspace = true }
 icrc-ledger-types = { workspace = true }
 icrc_ledger_canister_c2c_client = { path = "../../../external_canisters/icrc_ledger/c2c_client" }
 ic-ledger-types = { workspace = true }
-bity-ic-canister-logger = { workspace = true }
 ledger_utils = { path = "../../../libraries/ledger_utils" }
 num-bigint = { workspace = true }
 ogy_token_swap_api = { path = "../api" }
 serde = { workspace = true, features = ["derive"] }
 serde_bytes = { workspace = true }
 serializer = { path = '../../../libraries/serializer' }
-stable_memory = { path = '../../../libraries/stable_memory' }
+bity-ic-stable-memory = { workspace = true }
 tracing = { workspace = true }
 types = { path = '../../../libraries/types' }
 utils = { path = '../../../libraries/utils' }

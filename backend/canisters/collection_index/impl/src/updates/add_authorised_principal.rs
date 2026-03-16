@@ -2,7 +2,7 @@ use crate::{
     guards::caller_is_authorised_principal,
     state::{mutate_state, read_state},
 };
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 pub use collection_index_api::add_authorised_principal::{
     Args as AddAuthorisedPrincipalArgs, Response as AddAuthorisedPrincipalResponse,
 };

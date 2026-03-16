@@ -2,7 +2,7 @@ use crate::{
     guards::caller_is_authorised_principal, services::origyn_nft::get_collection_info,
     state::mutate_state,
 };
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 use collection_index_api::collection::Collection;
 pub use collection_index_api::insert_collection::{
     Args as InsertCollectionArgs, Response as InsertCollectionResponse,

@@ -1,5 +1,6 @@
 use std::{env, path::Path};
 
+use bity_ic_types::BuildVersion;
 use candid::Principal;
 use ic_ledger_types::Tokens;
 use icrc_ledger_canister::init::{ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument};
@@ -7,7 +8,6 @@ use icrc_ledger_types::icrc1::account::Account;
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_legacy_ledger_canister::{ArchiveOptions as ArchiveOptionsLeg, Duration};
 use pocket_ic::PocketIc;
-use bity_ic_types::BuildVersion;
 use utils::consts::E8S_FEE_OGY;
 
 use crate::{
@@ -45,7 +45,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
 
     let ogy_legacy_minting_account_principal = controller;
 
-    let ogy_token_swap_init_args = ogy_token_swap_api::lifecycle::init::InitArgs {
+    let ogy_token_swap_init_args = ogy_token_swap_api::lifecycle::Args::Init(ogy_token_swap_api::lifecycle::init::InitArgs {
         test_mode: true,
         version: BuildVersion::default(),
         commit_hash: "commit_hash".to_string(),
@@ -53,7 +53,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         ogy_new_ledger_canister_id,
         ogy_legacy_minting_account_principal,
         authorized_principals: vec![controller],
-    };
+    });
 
     install_canister(
         pic,

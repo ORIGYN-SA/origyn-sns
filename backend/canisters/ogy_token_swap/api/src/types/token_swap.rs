@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
+use bity_ic_canister_time::{timestamp_millis, SECOND_IN_MS};
 use candid::{CandidType, Decode, Encode, Nat, Principal};
-use canister_time::{timestamp_millis, SECOND_IN_MS};
 use ic_ledger_types::{
     AccountIdentifier, BlockIndex, Memo, Subaccount, Timestamp, Tokens, TransferError,
 };
@@ -34,6 +34,9 @@ pub struct SwapInfo {
 impl Storable for SwapInfo {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
+    }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
     }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()

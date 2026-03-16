@@ -12,11 +12,7 @@ use collection_index_api::{
 };
 use ic_stable_structures::StableBTreeMap;
 use serde::{Deserialize, Serialize};
-use std::{
-    borrow::BorrowMut,
-    collections::{BTreeMap, HashMap},
-    ops::Div,
-};
+use std::collections::HashMap;
 
 use crate::memory::{get_collection_model_memory, VM};
 
@@ -66,10 +62,10 @@ impl CollectionModel {
         let keys_to_update: Vec<Principal> = self
             .collections
             .iter()
-            .filter_map(|(key, collection)| {
-                if let Some(category_of_collection) = &collection.category {
+            .filter_map(|entry| {
+                if let Some(category_of_collection) = &entry.value().category {
                     if *category_of_collection == category_name {
-                        Some(key.clone())
+                        Some(entry.key().clone())
                     } else {
                         None
                     }
@@ -78,6 +74,21 @@ impl CollectionModel {
                 }
             })
             .collect();
+
+        // let keys_to_update: Vec<Principal> = self
+        //     .collections
+        //     .iter()
+        //     // The iterator yields a single 'entry', not (key, value)
+        //     .filter_map(|entry| {
+        //     // 1. key() is called -> deserializes Principal
+        //     // 2. value() is called -> deserializes the WHOLE Collection struct
+        //     if entry.value().category.as_deref() == Some(&category_name) {
+        //         Some(entry.key().clone())
+        //     } else {
+        //         None
+        //     }
+        // })
+        //     .collect();
 
         for key in keys_to_update {
             if let Some(mut collection) = self.collections.remove(&key) {
@@ -279,7 +290,7 @@ impl CollectionModel {
         let mut cols: Vec<Collection> = self
             .collections
             .iter()
-            .map(|(_, col)| col.clone())
+            .map(|entry| entry.value().clone())
             .collect();
 
         // make sure promoted are first
@@ -344,7 +355,7 @@ impl CollectionModel {
         let mut cols: Vec<Collection> = self
             .collections
             .iter()
-            .map(|(_, col)| col.clone())
+            .map(|entry| entry.value().clone())
             .collect();
 
         // make sure promoted are first
@@ -398,10 +409,7 @@ impl CollectionModel {
     }
 
     pub fn get_all_collections(&self) -> Vec<Collection> {
-        self.collections
-            .iter()
-            .map(|(_, collection)| collection)
-            .collect()
+        self.collections.iter().map(|entry| entry.value()).collect()
     }
 
     pub fn get_collection_by_key(
