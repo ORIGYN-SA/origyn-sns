@@ -3,7 +3,7 @@
 ## As argument, preferably pass $1 previously defined by calling the pre-deploy script with the dot notation.
 
 show_help() {
-  cat << EOF
+  cat <<EOF
 canister_jobs canister deployment script.
 Must be run from the repository's root folder, and with a running replica if for local deployment.
 'staging' and 'ic' networks can only be selected from a Gitlab CI/CD environment.
@@ -20,19 +20,20 @@ Options:
 EOF
 }
 
-
-
 if [[ $# -gt 0 ]]; then
   while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
     case $1 in
-      -h | --help )
+      -h | --help)
         show_help
         exit
         ;;
-    esac;
-    shift;
+    esac
+    shift
   done
-  if [[ "$1" == '--' ]]; then shift; fi
+
+  if [[ "$1" == "--" ]]; then
+    shift
+  fi
 else
   echo "Error: missing <NETWORK> argument"
   exit 1
@@ -52,19 +53,33 @@ if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   SNS_GOVERNANCE=$(dfx canister id sns_governance --network staging)
 else
   TESTMODE="false"
-  OGY_LEDGER=$(dfx canister id sns_ledger --network $NETWORK)
-  SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
+  OGY_LEDGER=$(dfx canister id sns_ledger --network "$NETWORK")
+  SNS_GOVERNANCE=$(dfx canister id sns_governance --network "$NETWORK")
 fi
 
-ARGUMENTS="(record {
-  test_mode = $TESTMODE;
-  daily_burn_amount = 164_500_000_000 : nat64;
-  burn_principal_id = principal \"$SNS_GOVERNANCE\";
-  ledger_canister_id = principal \"$OGY_LEDGER\";
-  authorized_principals = vec {
-    principal \"$SNS_GOVERNANCE\"
+if [[ $REINSTALL == "reinstall" ]]; then
+  ARGUMENTS="(
+    variant {
+      Init = record {
+        test_mode = $TESTMODE;
+        daily_burn_amount = 164_500_000_000 : nat64;
+        burn_principal_id = principal \"$SNS_GOVERNANCE\";
+        ledger_canister_id = principal \"$OGY_LEDGER\";
+        authorized_principals = vec {
+          principal \"$SNS_GOVERNANCE\"
+        }
+      }
     }
-  } )"
+  )"
 
+else
 
-. ./scripts/deploy-backend-canister.sh canister_jobs $NETWORK "$ARGUMENTS" $MODE
+  ARGUMENTS="(
+    variant {
+      Upgrade = record {}
+    }
+  )"
+
+fi
+
+. ./scripts/deploy-backend-canister.sh canister_jobs "$NETWORK" "$ARGUMENTS" "$MODE" "$REINSTALL"

@@ -49,6 +49,7 @@ where
 
 use ic_cdk_timers::TimerId;
 use std::rc::Rc;
+
 pub fn run_now_then_interval_with_args<F>(interval: Duration, func: F) -> TimerId
 where
     F: Fn() + 'static,
@@ -57,11 +58,14 @@ where
 
     ic_cdk_timers::set_timer(Duration::ZERO, {
         let func = Rc::clone(&func);
-        move || func()
+        async move { func() }
     });
 
     ic_cdk_timers::set_timer_interval(interval, {
         let func = Rc::clone(&func);
-        move || func()
+        move || {
+            let func = Rc::clone(&func);
+            async move { func() }
+        }
     })
 }

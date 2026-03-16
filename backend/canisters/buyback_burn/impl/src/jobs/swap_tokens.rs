@@ -175,10 +175,8 @@ async fn create_token_swap_if_possible(
                 );
 
                 let retry_job = exchange_job.clone();
-                ic_cdk_timers::set_timer(RETRY_DELAY, move || {
-                    ic_cdk::futures::spawn(async move {
-                        let _ = create_token_swap_if_possible(retry_job).await;
-                    });
+                ic_cdk_timers::set_timer(RETRY_DELAY, async move {
+                    let _ = create_token_swap_if_possible(retry_job).await;
                 });
 
                 return None;
