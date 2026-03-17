@@ -3,7 +3,6 @@ use candid::{Nat, Principal};
 use self::setup::{RewardsTestEnv, RewardsTestEnvBuilder};
 
 pub mod setup;
-pub mod setup_ledger;
 pub mod setup_rewards;
 pub mod setup_rewards_old;
 

@@ -1,5 +1,3 @@
-use crate::sns_test_env::sns_init_args::CanisterIds;
-use crate::sns_test_env::sns_init_args::SnsInitArgs;
 use crate::sns_test_env::utils::neuron_id_from_number;
 use crate::utils::tick_n_blocks;
 use crate::{client, wasms};
@@ -52,6 +50,7 @@ impl SnsTestEnvBuilder {
         }
     }
 
+    // FIXME: change to real ids
     pub fn generate_ids(&mut self) -> &mut Self {
         let controller = self.controller;
 

@@ -11,11 +11,6 @@ use crate::{
     utils::tick_n_blocks,
 };
 
-#[derive(Deserialize, CandidType, Serialize)]
-pub struct GetNeuronRequest {
-    neuron_id: NeuronId,
-}
-
 #[test]
 fn test_process_ogy_neurons_happy_path() {
     let test_env = test_setup_with_predefined_sns_neurons();

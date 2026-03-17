@@ -10,17 +10,10 @@ candid = { workspace = true }
 ic-cdk = { workspace = true }
 ic-ledger-types = { workspace = true }
 icrc-ledger-types = { workspace = true }
-icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }
 lazy_static = { workspace = true }
 serde_bytes = { workspace = true }
 ledger_utils = { path = "../libraries/ledger_utils" }
-origyn_nft_reference = { path = '../external_canisters/origyn_nft_reference/api' }
-ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/api' }
 ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_legacy_ledger/c2c_client' }
-ogy_token_swap_api = { path = "../canisters/ogy_token_swap/api" }
-collection_index_api = { path = "../canisters/collection_index/api" }
-sns_neuron_controller_api_canister = { path = "../canisters/sns_neuron_controller/api" }
-canister_jobs_api = { path = "../canisters/canister_jobs/api" }
 
 pocket-ic = { workspace = true }
 rand = "0.8.5"
@@ -28,7 +21,6 @@ slog = "2.7.0"
 serde = { workspace = true }
 types = { path = "../libraries/types" }
 utils = { path = "../libraries/utils" }
-sns_rewards_api_canister = { path = "../canisters/sns_rewards/api" }
 sha2 = "0.10.8"
 hex = "0.4"
 bity-ic-canister-time = { workspace = true }
@@ -50,3 +42,15 @@ nns_governance_canister = { path = '../external_canisters/nns_governance/api' }
 ic-nns-governance-api = { git = "https://github.com/dfinity/ic.git", branch = "master", package = "ic-nns-governance-api" }
 ic-nns-common = { git = "https://github.com/dfinity/ic.git", branch = "master", package = "ic-nns-common" }
 ic-management-canister-types = "0.5"
+
+
+# Canisters API
+buyback_burn_api = { path = "../canisters/buyback_burn/api" }
+sns_neuron_controller_api_canister = { path = "../canisters/sns_neuron_controller/api" }
+sns_rewards_api_canister = { path = "../canisters/sns_rewards/api" }
+ogy_token_swap_api = { path = "../canisters/ogy_token_swap/api" }
+collection_index_api = { path = "../canisters/collection_index/api" }
+canister_jobs_api = { path = "../canisters/canister_jobs/api" }
+origyn_nft_reference = { path = '../external_canisters/origyn_nft_reference/api' }
+ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/api' }
+icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }

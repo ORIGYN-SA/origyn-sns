@@ -99,7 +99,6 @@ pub fn create_neuron_permissions(user_hotkey: Option<&Principal>) -> Vec<NeuronP
     perms
 }
 
-
 pub fn neuron_id_from_number(n: usize) -> NeuronId {
     // Hash the random number using SHA-256
     let mut hasher = Sha256::new();

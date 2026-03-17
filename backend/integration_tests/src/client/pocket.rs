@@ -67,16 +67,24 @@ pub fn create_canister(pic: &PocketIc, controller: Principal) -> CanisterId {
     canister_id
 }
 
-pub fn create_canister_with_id(
+use std::convert::TryInto;
+pub fn create_canister_with_id<T>(
     pic: &PocketIc,
     controller: Principal,
-    canister_id: &str,
-) -> CanisterId {
-    let canister_id = canister_id.try_into().expect("Invalid canister ID");
+    canister_id: T,
+) -> CanisterId
+where
+    T: TryInto<Principal>,
+    T::Error: std::fmt::Debug,
+{
+    let canister_id: Principal = canister_id.try_into().expect("Invalid canister ID");
+
     pic.create_canister_with_id(Some(controller), None, canister_id)
         .expect("Create canister with ID failed");
+
     pic.add_cycles(canister_id, INIT_CYCLES_BALANCE);
     pic.advance_time(Duration::from_secs(1));
+
     canister_id
 }
 

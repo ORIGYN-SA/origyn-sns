@@ -48,56 +48,6 @@ impl SnsProject {
     }
 }
 
-#[derive(Default)]
-pub struct SnsInitArgsBuilder {
-    project: Option<SnsProject>,
-    canister_ids: Option<CanisterIds>,
-    neuron_data: Option<HashMap<usize, Neuron>>,
-    controller: Option<Principal>,
-    initial_balances: Option<Vec<(Account, Nat)>>,
-}
-
-impl SnsInitArgsBuilder {
-    pub fn new() -> Self {
-        Self::default()
-    }
-
-    pub fn project(mut self, project: SnsProject) -> Self {
-        self.project = Some(project);
-        self
-    }
-
-    pub fn canister_ids(mut self, ids: CanisterIds) -> Self {
-        self.canister_ids = Some(ids);
-        self
-    }
-
-    pub fn neuron_data(mut self, data: HashMap<usize, Neuron>) -> Self {
-        self.neuron_data = Some(data);
-        self
-    }
-
-    pub fn controller(mut self, controller: Principal) -> Self {
-        self.controller = Some(controller);
-        self
-    }
-
-    pub fn initial_balances(mut self, balances: Vec<(Account, Nat)>) -> Self {
-        self.initial_balances = Some(balances);
-        self
-    }
-
-    // pub fn build(self) -> SnsInitArgs {
-    //     SnsInitArgs::new(
-    //         self.project.expect("project required"),
-    //         &self.canister_ids.expect("canister_ids required"),
-    //         &self.neuron_data.expect("neuron_data required"),
-    //         self.controller.expect("controller required"),
-    //         self.initial_balances,
-    //     )
-    // }
-}
-
 #[derive(Clone)]
 pub struct SnsInitArgs {
     pub governance_args: Governance,

@@ -1,24 +1,21 @@
 use super::setup_rewards::setup_rewards_canister;
+use crate::sns_test_env::sns_init_args::SnsProject;
 use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::sns_test_env::utils::generate_5y_neuron_data;
-use crate::{
-    client::icrc1::client::transfer, sns_rewards_suite::setup::setup_ledger::setup_ledgers,
-    utils::random_principal, wasms,
-};
+use crate::sns_test_env::{SnsConfig, TestEnvBuilder};
+use crate::{client::icrc1::client::transfer, utils::random_principal, wasms};
 use bity_ic_canister_time::HOUR_IN_MS;
 use candid::{encode_one, Nat, Principal};
 use icrc_ledger_types::icrc1::account::Account;
-use pocket_ic::{PocketIc, PocketIcBuilder};
+use pocket_ic::PocketIc;
 use sns_governance_canister::types::Neuron;
 use std::cell::RefCell;
+use std::collections::HashMap;
 use std::rc::Rc;
-use std::{
-    collections::HashMap,
-    time::{Duration, SystemTime},
-};
+use std::time::{Duration, SystemTime};
 
 pub fn setup_reward_pools(
-    mut pic: &PocketIc,
+    pic: &PocketIc,
     minting_account: &Principal,
     reward_canister_id: &Principal,
     canister_ids: &Vec<Principal>,
@@ -26,15 +23,12 @@ pub fn setup_reward_pools(
 ) {
     let reward_account = Account {
         owner: reward_canister_id.clone(),
-        subaccount: Some([
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0,
-        ]),
+        subaccount: Some([0u8; 32]),
     };
 
-    for canister_id in canister_ids.into_iter() {
+    for canister_id in canister_ids {
         transfer(
-            &mut pic,
+            pic,
             minting_account.clone(),
             canister_id.clone(),
             None,
@@ -58,14 +52,12 @@ pub struct RewardsTestEnv {
 }
 
 impl RewardsTestEnv {
-    /// simulate neurons voting by reinstalling the sns gov canister with an increase in maturity
-    /// each neuron's initial maturity is multiplied
+    /// Simulate neurons voting by reinstalling the SNS governance canister with increased maturity.
     pub fn simulate_neuron_voting(&self, multiplier: u64) {
         let pic = self.pic.borrow();
         let (neuron_data, _) =
             generate_5y_neuron_data(0, self.neuron_data.len(), multiplier, &self.users);
         pic.tick();
-
         self.ogy_sns_test_env
             .reinstall_governance_with_neuron_data(&neuron_data);
         pic.tick();
@@ -73,14 +65,13 @@ impl RewardsTestEnv {
 
     pub fn upgrade_rewards_canister(&self) {
         let pic = self.pic.borrow();
-
         match pic.upgrade_canister(
             self.rewards_canister_id,
             wasms::REWARDS.clone(),
             encode_one(()).unwrap(),
             Some(self.controller.clone()),
         ) {
-            Ok(m) => println!("{}", "upgrade success"),
+            Ok(_) => println!("upgrade success"),
             Err(m) => println!("{m:?}"),
         }
     }
@@ -109,13 +100,13 @@ impl RewardsTestEnvBuilder {
         }
     }
 
-    /// is the controller of everything - no real need for this but nice to have if you want to be specific
+    /// Controller of everything — defaults to a random principal.
     pub fn add_controller(mut self, principal: Principal) -> Self {
         self.controller = principal;
         self
     }
 
-    /// users for neuron data - they will be added as hotkeys to neurons // each user users get added to neurons.len() / users.len(), repeating every users.len()
+    /// Users added as hotkeys to neurons, cycling through the list.
     pub fn add_users(mut self, users: Vec<Principal>) -> Self {
         self.users = users;
         self
@@ -138,81 +129,84 @@ impl RewardsTestEnvBuilder {
         self
     }
 
+    /// Note: counts as a mint and therefore increases total supply.
     pub fn with_reward_pools(mut self, amount: Nat) -> Self {
-        self.initial_reward_pool_amount = amount; // Note - this counts as a mint and therefore increases total supply
+        self.initial_reward_pool_amount = amount;
         self
     }
 
     pub fn build(self) -> RewardsTestEnv {
-        let pic_ref = Rc::new(RefCell::new(
-            PocketIcBuilder::new()
-                .with_log_level(slog::Level::Error)
-                .with_nns_subnet()
-                .with_sns_subnet()
-                .with_application_subnet()
-                .build(),
-        ));
-        let pic = pic_ref.borrow();
-        pic.set_time(
-            (SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718697600000)).into(),
-        ); // Tue Jun 18 2024 08:00:00 GMT
+        let mut env = TestEnvBuilder::new()
+            .with_controller(self.controller)
+            .add_sns(SnsConfig::new(SnsProject::Ogy).with_initial_balances(vec![(
+                sns_ledger_canister::types::Account {
+                    owner: self.controller,
+                    subaccount: None,
+                },
+                Nat::from(1_000_000_000_000_000u64),
+            )]))
+            .add_token_ledger_batch(
+                self.token_symbols,
+                self.initial_ledger_accounts,
+                self.ledger_fees,
+            )
+            .build();
 
-        let (gld_neuron_data, neuron_owners) =
-            generate_5y_neuron_data(0, self.neurons_to_create, 1, &self.users);
-        let initial_ledger_accounts = vec![(
-            sns_ledger_canister::types::Account {
-                owner: self.controller,
-                subaccount: None,
-            },
-            Nat::from(1_000_000_000_000_000u64),
-        )];
-        let ogy_sns_test_env = SnsTestEnv::ogy(
-            &pic_ref,
-            self.controller,
-            &gld_neuron_data,
-            Some(initial_ledger_accounts),
-        );
-        let sns_gov_canister_id = ogy_sns_test_env.governance_id;
+        // Tue Jun 18 2024 08:00:00 GMT
+        env.pic
+            .borrow()
+            .set_time((SystemTime::UNIX_EPOCH + Duration::from_millis(1718697600000)).into());
 
-        let mut token_ledgers = setup_ledgers(
-            &pic,
-            sns_gov_canister_id.clone(),
-            self.token_symbols,
-            self.initial_ledger_accounts,
-            self.ledger_fees,
-        );
+        let ogy_env = env.take_sns(SnsProject::Ogy);
+        let sns_gov_canister_id = ogy_env.test_env.governance_id;
+
+        let mut token_ledgers = env.token_ledgers;
         token_ledgers.insert(
             "ogy_ledger_canister_id".to_string(),
-            ogy_sns_test_env.ledger_id,
+            ogy_env.test_env.ledger_id,
         );
-        let rewards_canister_id =
-            setup_rewards_canister(&pic, &token_ledgers, &sns_gov_canister_id, &self.controller);
-        let token_ledger_ids: Vec<Principal> =
-            token_ledgers.iter().map(|(_, id)| id.clone()).collect();
+
+        let rewards_canister_id = setup_rewards_canister(
+            &env.pic.borrow(),
+            &token_ledgers,
+            &sns_gov_canister_id,
+            &env.controller,
+        );
+
         if self.initial_reward_pool_amount > Nat::from(0u64) {
+            let token_ledger_ids: Vec<Principal> = token_ledgers.values().cloned().collect();
             setup_reward_pools(
-                &pic,
+                &env.pic.borrow(),
                 &sns_gov_canister_id,
                 &rewards_canister_id,
                 &token_ledger_ids,
                 self.initial_reward_pool_amount.0.try_into().unwrap(),
             );
         }
+
+        let (neuron_data, neuron_owners) =
+            generate_5y_neuron_data(0, self.neurons_to_create, 1, &self.users);
+        ogy_env
+            .test_env
+            .reinstall_governance_with_neuron_data(&neuron_data);
+
         // Tuesday Jun 18, 2024, 9:00:00 AM
-        pic.advance_time(Duration::from_millis(HOUR_IN_MS));
-        pic.tick();
-        pic.tick();
-        pic.tick();
-        pic.tick();
+        env.pic
+            .borrow()
+            .advance_time(Duration::from_millis(HOUR_IN_MS));
+        for _ in 0..4 {
+            env.pic.borrow().tick();
+        }
+
         RewardsTestEnv {
-            controller: self.controller,
-            ogy_sns_test_env: ogy_sns_test_env,
-            neuron_data: gld_neuron_data,
+            pic: env.pic,
+            controller: env.controller,
+            ogy_sns_test_env: ogy_env.test_env,
+            neuron_data,
             users: self.users,
             token_ledgers,
             rewards_canister_id,
             sns_gov_canister_id,
-            pic: Rc::clone(&pic_ref),
             neuron_owners,
         }
     }
