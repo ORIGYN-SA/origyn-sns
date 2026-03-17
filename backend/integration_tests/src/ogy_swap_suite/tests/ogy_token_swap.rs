@@ -1313,7 +1313,9 @@ fn test_retry_transfer_when_new_ledger_inactive() {
 // }
 
 #[test]
-#[should_panic(expected = "FATAL ERROR: PocketIC returned a rejection error: reject code CanisterReject, reject message Caller is not an authorised principal, error code CanisterRejectedMessage")]
+#[should_panic(
+    expected = "FATAL ERROR: PocketIC returned a rejection error: reject code CanisterReject, reject message Caller is not an authorised principal, error code CanisterRejectedMessage"
+)]
 fn test_recover_stuck_transfer_can_only_be_called_by_authorised_principals() {
     let mut env = init();
 

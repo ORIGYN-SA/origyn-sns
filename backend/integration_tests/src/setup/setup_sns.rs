@@ -65,19 +65,40 @@ pub fn create_neuron(
     }
 }
 
+// pub fn create_neuron_permissions(user_hotkey: Option<&Principal>) -> Vec<NeuronPermission> {
+//     let mut perms = vec![NeuronPermission {
+//         principal: Some(Principal::anonymous()),
+//         permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+//     }];
+//     if user_hotkey.is_some() {
+//         perms.push(NeuronPermission {
+//             principal: Some(user_hotkey.unwrap().clone()),
+//             permission_type: vec![3, 4],
+//         });
+//     }
+//     perms
+// }
+
 pub fn create_neuron_permissions(user_hotkey: Option<&Principal>) -> Vec<NeuronPermission> {
-    let mut perms = vec![NeuronPermission {
-        principal: Some(Principal::anonymous()),
-        permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
-    }];
-    if user_hotkey.is_some() {
+    let mut perms = Vec::new();
+
+    if let Some(hotkey) = user_hotkey {
+        // Add the hotkey permissions
         perms.push(NeuronPermission {
-            principal: Some(user_hotkey.unwrap().clone()),
-            permission_type: vec![3, 4],
+            principal: Some(hotkey.clone()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
+        });
+    } else {
+        // If no user_hotkey, add anonymous permissions
+        perms.push(NeuronPermission {
+            principal: Some(Principal::anonymous()),
+            permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
         });
     }
+
     perms
 }
+
 
 pub fn neuron_id_from_number(n: usize) -> NeuronId {
     // Hash the random number using SHA-256

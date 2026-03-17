@@ -64,7 +64,7 @@ impl Debug for SNCTestEnv {
                 &self.sns_neuron_controller_id.to_text(),
             )
             .field("ogy_sns_test_env", &self.ogy_sns_test_env)
-            .field("ogy_sns_test_env", &self.goldao_sns_test_env)
+            .field("goldao_sns_test_env", &self.goldao_sns_test_env)
             .field(
                 "ogy_rewards_canister_id",
                 &self.ogy_rewards_canister_id.to_text(),
@@ -88,8 +88,6 @@ pub struct SNCTestEnvBuilder {
     // Marker to check whether the neuron data needs to be pre-generated
     with_sns_neuron_data: bool,
     with_nns_neuron_data: bool,
-
-    with_neuron_data: bool,
     with_other_user_neuron_data: bool,
 }
 
@@ -106,8 +104,6 @@ impl Default for SNCTestEnvBuilder {
             ledger_fees: HashMap::new(),
             with_sns_neuron_data: false,
             with_nns_neuron_data: false,
-
-            with_neuron_data: false,
             with_other_user_neuron_data: false,
         }
     }
@@ -238,7 +234,7 @@ impl SNCTestEnvBuilder {
     //         ogy_sns_ledger_canister_id,
     //     );
     //     token_ledgers.insert(
-    //         "gldgov_ledger_canister_id".to_string(),
+    //         "goldao_ledger_canister_id".to_string(),
     //         goldao_sns_ledger_canister_id,
     //     );
 
@@ -322,7 +318,7 @@ impl SNCTestEnvBuilder {
         let sns_subnet = pic.topology().get_sns().unwrap();
 
         // TODO: impl with method in sns_test_env
-        self.ogy_rewards_canister_id =
+        self.goldao_rewards_canister_id =
             pic.create_canister_on_subnet(Some(self.controller.clone()), None, sns_subnet);
         self.sns_neuron_controller_id =
             pic.create_canister_on_subnet(Some(self.controller.clone()), None, sns_subnet);
@@ -331,11 +327,11 @@ impl SNCTestEnvBuilder {
 
         let mut ogy_neuron_data = HashMap::new();
         let mut goldao_neuron_data = HashMap::new();
-        if self.with_neuron_data == true {
+        if self.with_sns_neuron_data == true {
             (ogy_neuron_data, _) =
                 generate_neuron_data(0, 1, 1, &vec![self.sns_neuron_controller_id]);
             (goldao_neuron_data, _) =
-                generate_neuron_data(0, 1, 1, &vec![self.sns_neuron_controller_id]);
+                generate_sns_neuron_data(0, 1, 1, &vec![self.sns_neuron_controller_id]);
         }
 
         let mut wtn_neuron_data = HashMap::new();
@@ -351,7 +347,7 @@ impl SNCTestEnvBuilder {
         let ogy_sns_test_env = SnsTestEnv::ogy(&pic_ref, self.controller, &ogy_neuron_data, None);
         let wtn_sns_test_env = SnsTestEnv::wtn(&pic_ref, self.controller, &wtn_neuron_data, None);
         let goldao_sns_test_env =
-            SnsTestEnv::goldao(&pic_ref, self.controller, &wtn_neuron_data, None);
+            SnsTestEnv::goldao(&pic_ref, self.controller, &goldao_neuron_data, None);
 
         let ogy_sns_ledger_canister_id = ogy_sns_test_env.ledger_id;
         let goldao_sns_ledger_canister_id = goldao_sns_test_env.ledger_id;
@@ -371,12 +367,23 @@ impl SNCTestEnvBuilder {
             "wtn_ledger_canister_id".to_string(),
             wtn_sns_test_env.ledger_id,
         );
+        token_ledgers.insert(
+            "goldao_ledger_canister_id".to_string(),
+            goldao_sns_test_env.ledger_id,
+        );
 
         let ogy_sns_rewards_canister_id = setup_rewards_canister(
             &pic_ref.borrow(),
             self.ogy_rewards_canister_id,
             &token_ledgers,
             ogy_sns_test_env.governance_id,
+            &self.controller,
+        );
+        let goldao_sns_rewards_canister_id = setup_rewards_canister(
+            &pic_ref.borrow(),
+            self.goldao_rewards_canister_id,
+            &token_ledgers,
+            goldao_sns_test_env.governance_id,
             &self.controller,
         );
 
@@ -386,7 +393,6 @@ impl SNCTestEnvBuilder {
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![
                 self.controller,
-                ogy_sns_test_env.governance_id,
                 ogy_sns_test_env.governance_id,
             ],
             rewards_destination: Some(self.rewards_destination),

@@ -165,7 +165,6 @@ impl Default for Data {
                 start_hour: 9,
                 end_hour: 11,
             }),
-
         }
     }
 }

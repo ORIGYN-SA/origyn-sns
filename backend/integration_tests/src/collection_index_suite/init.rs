@@ -166,12 +166,13 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         {},
     );
 
-    let collection_index_init_args = collection_index_api::lifecycle::Args::Init(CollectionIndexInitArgs {
-        authorized_principals: vec![controller],
-        test_mode: true,
-        version: BuildVersion::default(),
-        commit_hash: "commit_hash".to_string(),
-    });
+    let collection_index_init_args =
+        collection_index_api::lifecycle::Args::Init(CollectionIndexInitArgs {
+            authorized_principals: vec![controller],
+            test_mode: true,
+            version: BuildVersion::default(),
+            commit_hash: "commit_hash".to_string(),
+        });
 
     install_canister(
         pic,

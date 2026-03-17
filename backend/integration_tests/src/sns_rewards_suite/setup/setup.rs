@@ -1,6 +1,6 @@
 use super::setup_rewards::setup_rewards_canister;
 use crate::sns_test_env::sns_test_env::SnsTestEnv;
-use crate::sns_test_env::utils::generate_neuron_data;
+use crate::sns_test_env::utils::generate_5y_neuron_data;
 use crate::{
     client::icrc1::client::transfer, sns_rewards_suite::setup::setup_ledger::setup_ledgers,
     utils::random_principal, wasms,
@@ -63,7 +63,7 @@ impl RewardsTestEnv {
     pub fn simulate_neuron_voting(&self, multiplier: u64) {
         let pic = self.pic.borrow();
         let (neuron_data, _) =
-            generate_neuron_data(0, self.neuron_data.len(), multiplier, &self.users);
+            generate_5y_neuron_data(0, self.neuron_data.len(), multiplier, &self.users);
         pic.tick();
 
         self.ogy_sns_test_env
@@ -158,7 +158,7 @@ impl RewardsTestEnvBuilder {
         ); // Tue Jun 18 2024 08:00:00 GMT
 
         let (gld_neuron_data, neuron_owners) =
-            generate_neuron_data(0, self.neurons_to_create, 1, &self.users);
+            generate_5y_neuron_data(0, self.neurons_to_create, 1, &self.users);
         let initial_ledger_accounts = vec![(
             sns_ledger_canister::types::Account {
                 owner: self.controller,

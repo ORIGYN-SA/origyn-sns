@@ -77,8 +77,7 @@ impl NeuronRewardsManager for GoldaoManager {
 
     async fn claim_rewards(&self) -> ClaimRewardResult {
         let neurons = self.get_neurons().as_ref();
-        // FIXME: once the name is changed on prod, we would need to change it in this canister too
-        sns_rewards_claim_rewards(neurons, self.get_sns_rewards_canister_id(), "GLDGov").await
+        sns_rewards_claim_rewards(neurons, self.get_sns_rewards_canister_id(), "GOLDAO").await
     }
 }
 

@@ -5,7 +5,6 @@ use ic_stable_structures::{storable::Bound, Storable};
 
 use serde::{Deserialize, Serialize};
 
-
 #[derive(
     Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, PartialOrd, Ord,
 )]
@@ -38,13 +37,15 @@ impl TokenSymbolV0 {
     }
 }
 
-use candid::Encode;
 use candid::Decode;
+use candid::Encode;
 impl Storable for TokenSymbolV0 {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
     }
-    fn into_bytes(self) -> std::vec::Vec<u8> { Encode!(&self).unwrap() }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
+    }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()
     }
@@ -195,7 +196,6 @@ macro_rules! token_info {
         types::TokenSymbol::$symbol.get_token_info(is_test_mode)
     }};
 }
-
 
 const MAX_VALUE_SIZE: u32 = 20;
 
