@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use ic_ledger_types::AccountIdentifier;
 use serde::Deserialize;
 

@@ -23,10 +23,12 @@ pub enum GetCollectionsError {
 impl From<crate::services::origyn_nft::GetCollectionInfoError> for InsertCollectionError {
     fn from(error: crate::services::origyn_nft::GetCollectionInfoError) -> Self {
         match error {
-            crate::services::origyn_nft::GetCollectionInfoError::CanisterToCanisterCallError(_) =>
-                Self::TargetCanisterIdNotOrigyn,
-            crate::services::origyn_nft::GetCollectionInfoError::GenericOrigynNftError(e) =>
-                Self::GenericOrigynNftError(e),
+            crate::services::origyn_nft::GetCollectionInfoError::CanisterToCanisterCallError(_) => {
+                Self::TargetCanisterIdNotOrigyn
+            }
+            crate::services::origyn_nft::GetCollectionInfoError::GenericOrigynNftError(e) => {
+                Self::GenericOrigynNftError(e)
+            }
         }
     }
 }

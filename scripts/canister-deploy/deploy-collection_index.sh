@@ -1,66 +1,68 @@
 #!/usr/bin/env bash
 
-## As argument, preferably pass $1 previously defined by calling the pre-deploy script with the dot notation.
-
 show_help() {
   cat << EOF
-colection_index canister deployment script.
-Must be run from the repository's root folder, and with a running replica if for local deployment.
-'staging' and 'ic' networks can only be selected from a Gitlab CI/CD environment.
-The NETWORK argument should preferably be passed from the env variable that was previously defined
-by the pre-deploy script (using the dot notation, or inside a macro deploy script).
-
-The canister will always be reinstalled locally, and only upgraded in staging and production (ic).
-
+ogy_token_swap canister deployment script.
 Usage:
-  scripts/deploy-collection_index.sh [options] <NETWORK>
-
-Options:
-  -h, --help        Show this message and exit
+  scripts/deploy-ogy_token_swap.sh [options] <NETWORK>
 EOF
 }
-
-
 
 if [[ $# -gt 0 ]]; then
   while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
     case $1 in
-      -h | --help )
-        show_help
-        exit
-        ;;
+      -h | --help ) show_help; exit ;;
     esac;
     shift;
   done
-  if [[ "$1" == '--' ]]; then shift; fi
 else
   echo "Error: missing <NETWORK> argument"
   exit 1
 fi
 
 NETWORK=$1
-MODE="direct"
+MODE="proposal"
 
-if [[ ! $NETWORK =~ ^(local|staging|ic)$ ]]; then
-  echo "Error: unknown network for deployment"
-  exit 2
-fi
+# 1. Extract metadata (Populates $BUILD_VERSION and $COMMIT_SHA)
+. ./scripts/extract_commit_tag_data_and_commit_sha.sh ogy_token_swap $NETWORK
 
+# 2. Network-specific configuration
 if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   TESTMODE="true"
-  SNS_GOVERNANCE=$(dfx canister id sns_governance --network staging)
-  ARGUMENTS="(record {
-    test_mode = $TESTMODE;
-    authorized_principals = vec { principal \"jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe\"; principal \"$SNS_GOVERNANCE\"; };
-  } )"
+  REINSTALL="reinstall"
+  # For local/staging, use current identity as the authorized principal
+  OGY_LEGACY_MINTING_ACCOUNT_PRINCIPAL="$(dfx identity get-principal)"
+  AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
+  OGY_LEGACY_LEDGER=$(dfx canister id ogy_legacy_ledger --network staging)
+  OGY_NEW_LEDGER=$(dfx canister id sns_ledger --network staging)
 else
   TESTMODE="false"
-  SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
-  ARGUMENTS="(record {
-    test_mode = $TESTMODE;
-    authorized_principals = vec { principal \"jqdha-t6k7d-iitf4-6mxtc-dzkp2-kpk7c-mmtnp-ab2ef-xotlg-5m5qc-3qe\"; principal \"$SNS_GOVERNANCE\";  };
-  } )"
+  REINSTALL="upgrade"
+  OGY_LEGACY_MINTING_ACCOUNT_PRINCIPAL="aomfs-vaaaa-aaaaj-aadoa-cai"
+  AUTHORIZED_PRINCIPALS="principal \"f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae\""
+  OGY_LEGACY_LEDGER=$(dfx canister id ogy_legacy_ledger --network $NETWORK)
+  OGY_NEW_LEDGER=$(dfx canister id sns_ledger --network $NETWORK)
 fi
 
+# 3. Construct Enum-wrapped Arguments
+if [[ $REINSTALL == "reinstall" ]]; then
+  # Matches: Args::Init(InitArgs)
+  ARGUMENTS="(variant { Init = record {
+    test_mode = $TESTMODE;
+    version = $BUILD_VERSION;
+    commit_hash = \"$COMMIT_SHA\";
+    ogy_legacy_ledger_canister_id = principal \"$OGY_LEGACY_LEDGER\";
+    ogy_new_ledger_canister_id = principal \"$OGY_NEW_LEDGER\";
+    ogy_legacy_minting_account_principal = principal \"$OGY_LEGACY_MINTING_ACCOUNT_PRINCIPAL\";
+    authorized_principals = vec { $AUTHORIZED_PRINCIPALS };
+  }})"
+else
+  # Matches: Args::Upgrade(UpgradeArgs)
+  ARGUMENTS="(variant { Upgrade = record {
+    version = $BUILD_VERSION;
+    commit_hash = \"$COMMIT_SHA\";
+  }})"
+fi
 
-. ./scripts/deploy-backend-canister.sh collection_index $NETWORK "$ARGUMENTS" $MODE
+# 4. Execute deployment
+. ./scripts/deploy-backend-canister.sh ogy_token_swap $NETWORK "$ARGUMENTS" $MODE $VERSION $REINSTALL

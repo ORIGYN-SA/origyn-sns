@@ -1,3 +1,4 @@
+use bity_ic_types::BuildVersion;
 use ic_cdk_macros::init;
 pub use token_metrics_api::init::InitArgs;
 use tracing::info;
@@ -9,9 +10,9 @@ use super::init_canister;
 
 #[init]
 fn init(args: InitArgs) {
-    canister_logger::init(args.test_mode);
+    bity_ic_canister_logger::init(args.test_mode);
 
-    let env = CanisterEnv::new(args.test_mode);
+    let env = CanisterEnv::new(args.test_mode, BuildVersion::default(), String::new());
     let data = Data::new(
         args.ogy_new_ledger_canister_id,
         args.sns_governance_canister_id,

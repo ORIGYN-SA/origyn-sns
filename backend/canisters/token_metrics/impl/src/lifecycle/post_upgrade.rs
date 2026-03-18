@@ -1,7 +1,7 @@
-use canister_logger::LogEntry;
-use canister_tracing_macros::trace;
+use bity_ic_canister_logger::LogEntry;
+use bity_ic_canister_tracing_macros::trace;
 use ic_cdk_macros::post_upgrade;
-use stable_memory::get_reader;
+use bity_ic_stable_memory::get_reader;
 use tracing::info;
 
 use crate::{
@@ -30,7 +30,7 @@ fn post_upgrade() {
     ) = serializer::deserialize(reader).unwrap();
     let state = RuntimeState::from(runtime_state_v0);
 
-    canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
+    bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
     init_canister(state);
 
     info!("Post upgrade complete.")

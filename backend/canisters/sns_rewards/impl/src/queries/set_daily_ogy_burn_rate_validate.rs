@@ -1,19 +1,17 @@
 use crate::{
-    guards::caller_is_governance_principal,
-    utils::validate_set_daily_ogy_burn_rate_payload,
+    guards::caller_is_governance_principal, utils::validate_set_daily_ogy_burn_rate_payload,
 };
-use canister_tracing_macros::trace;
+use bity_ic_canister_tracing_macros::trace;
 use ic_cdk::query;
 
 pub use sns_rewards_api_canister::set_daily_ogy_burn_rate_validate::{
-    Args as SetDailyOGYBurnRateValidateArgs,
-    Response as SetDailyOGYBurnRateValidateResponse,
+    Args as SetDailyOGYBurnRateValidateArgs, Response as SetDailyOGYBurnRateValidateResponse,
 };
 
 #[query(guard = "caller_is_governance_principal", hidden = true)]
 #[trace]
 pub async fn set_daily_ogy_burn_rate_validate(
-    amount: SetDailyOGYBurnRateValidateArgs
+    amount: SetDailyOGYBurnRateValidateArgs,
 ) -> SetDailyOGYBurnRateValidateResponse {
     match validate_set_daily_ogy_burn_rate_payload(&amount) {
         Ok(_) => {}

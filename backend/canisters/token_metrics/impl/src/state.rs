@@ -1,5 +1,5 @@
 use candid::{ CandidType, Principal };
-use canister_state_macros::canister_state;
+use bity_ic_canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::{ NeuronId, ProposalId };

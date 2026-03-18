@@ -1,37 +1,28 @@
-use candid::{ Nat, Principal };
+use crate::client::origyn_nft_reference::client::{get_token_id_as_nat, icrc7_owner_of};
+use candid::{Nat, Principal};
 use collection_index_api::collection::Collection;
-use collection_index_api::errors::{ InsertCollectionError, RemoveCollectionError };
+use collection_index_api::errors::{InsertCollectionError, RemoveCollectionError};
 use collection_index_api::get_collections::GetCollectionsArgs;
 use collection_index_api::get_user_collections;
 use collection_index_api::insert_category::InsertCategoryArgs;
 use collection_index_api::insert_collection::InsertCollectionArgs;
+use collection_index_api::insert_fake_collection::Args as InsertFakeCollectionArgs;
 use collection_index_api::remove_collection::RemoveCollectionArgs;
 use collection_index_api::search_collections::SearchCollectionsArg;
 use collection_index_api::set_category_visibility::SetCategoryVisibility;
 use collection_index_api::toggle_promoted::TogglePromotedArgs;
 use collection_index_api::update_collection::UpdateCollectionArgs;
-use collection_index_api::insert_fake_collection::Args as InsertFakeCollectionArgs;
-use origyn_nft_reference::origyn_nft_reference_canister::{ Account as OrigynAccount };
+use origyn_nft_reference::origyn_nft_reference_canister::Account as OrigynAccount;
 use pocket_ic::PocketIc;
-use crate::client::origyn_nft_reference::client::{ get_token_id_as_nat, icrc7_owner_of };
 
 use crate::client::collection_index::{
-    get_categories,
-    get_collection_by_principal,
-    get_collections,
-    get_user_collections,
-    insert_category,
-    insert_collection,
-    insert_fake_collection,
-    remove_collection,
-    search_collections,
-    set_category_visibility,
-    toggle_promoted,
-    update_collection,
+    get_categories, get_collection_by_principal, get_collections, get_user_collections,
+    insert_category, insert_collection, insert_fake_collection, remove_collection,
+    search_collections, set_category_visibility, toggle_promoted, update_collection,
 };
 use crate::collection_index_suite::nft_utils;
-use crate::collection_index_suite::{ init::init, TestEnv };
-use crate::utils::{ random_principal, tick_n_blocks };
+use crate::collection_index_suite::{init::init, TestEnv};
+use crate::utils::{random_principal, tick_n_blocks};
 
 fn init_nft_with_premint_nft(
     pic: &mut PocketIc,
@@ -39,7 +30,7 @@ fn init_nft_with_premint_nft(
     originator: Principal,
     net_principal: Principal,
     nft_owner: Principal,
-    nft_name: String
+    nft_name: String,
 ) -> bool {
     nft_utils::build_standard_nft(
         pic,
@@ -49,15 +40,22 @@ fn init_nft_with_premint_nft(
         originator.clone(),
         Nat::from(1024 as u32),
         false,
-        net_principal.clone()
+        net_principal.clone(),
     );
 
-    let mint_return: origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult = crate::client::origyn_nft_reference::client::mint_nft_origyn(
-        pic,
-        origyn_nft.clone(),
-        Some(net_principal.clone()),
-        (nft_name.clone(), OrigynAccount::Account { owner: nft_owner.clone(), sub_account: None })
-    );
+    let mint_return: origyn_nft_reference::origyn_nft_reference_canister::OrigynTextResult =
+        crate::client::origyn_nft_reference::client::mint_nft_origyn(
+            pic,
+            origyn_nft.clone(),
+            Some(net_principal.clone()),
+            (
+                nft_name.clone(),
+                OrigynAccount::Account {
+                    owner: nft_owner.clone(),
+                    sub_account: None,
+                },
+            ),
+        );
 
     println!("mint_return: {:?}", mint_return);
 
@@ -70,7 +68,11 @@ fn init_nft_with_premint_nft(
 #[test]
 fn insert_collection_basic() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let origyn_nft_two_canister_id = canister_ids.origyn_nft_two;
@@ -85,7 +87,8 @@ fn insert_collection_basic() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -100,7 +103,8 @@ fn insert_collection_basic() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(10000000u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -112,8 +116,9 @@ fn insert_collection_basic() {
             categories: None,
             offset: 0,
             limit: 50,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
@@ -123,7 +128,11 @@ fn insert_collection_basic() {
 #[test]
 fn test_get_collection_by_principal_works_correctly() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let origyn_nft_two_canister_id = canister_ids.origyn_nft_two;
@@ -138,7 +147,8 @@ fn test_get_collection_by_principal_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -153,7 +163,8 @@ fn test_get_collection_by_principal_works_correctly() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -161,8 +172,9 @@ fn test_get_collection_by_principal_works_correctly() {
         &pic,
         Principal::anonymous(),
         collection_canister,
-        &origyn_nft_one_canister_id
-    ).unwrap();
+        &origyn_nft_one_canister_id,
+    )
+    .unwrap();
 
     assert_eq!(res.canister_id, origyn_nft_one_canister_id);
 }
@@ -170,7 +182,11 @@ fn test_get_collection_by_principal_works_correctly() {
 #[test]
 fn insert_collection_twice_with_same_category() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let origyn_nft_two_canister_id = canister_ids.origyn_nft_two;
@@ -185,7 +201,8 @@ fn insert_collection_twice_with_same_category() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -200,7 +217,8 @@ fn insert_collection_twice_with_same_category() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -215,7 +233,8 @@ fn insert_collection_twice_with_same_category() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -227,8 +246,9 @@ fn insert_collection_twice_with_same_category() {
             categories: None,
             offset: 0,
             limit: 50,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
@@ -238,7 +258,11 @@ fn insert_collection_twice_with_same_category() {
 #[test]
 fn insert_collection_with_non_existent_category_should_fail() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let collection_canister = canister_ids.collection_index;
@@ -253,7 +277,7 @@ fn insert_collection_with_non_existent_category_should_fail() {
             is_promoted: false,
             category: Some("Category A".to_string()),
             locked_value_usd: Some(100u64),
-        })
+        }),
     );
 
     matches!(res, Err(InsertCollectionError::CategoryNotFound(_)));
@@ -261,7 +285,11 @@ fn insert_collection_with_non_existent_category_should_fail() {
 #[test]
 fn insert_collection_with_principal_that_already_exists_should_fail() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let collection_canister = canister_ids.collection_index;
@@ -275,7 +303,8 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -290,7 +319,8 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -304,7 +334,7 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
             is_promoted: false,
             category: Some("Category A".to_string()),
             locked_value_usd: Some(100u64),
-        })
+        }),
     );
 
     matches!(res, Err(InsertCollectionError::CollectionAlreadyExists));
@@ -313,7 +343,11 @@ fn insert_collection_with_principal_that_already_exists_should_fail() {
 #[test]
 fn removing_a_collection_that_does_not_exist_should_fail() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
 
@@ -321,7 +355,9 @@ fn removing_a_collection_that_does_not_exist_should_fail() {
         &mut pic,
         principal_ids.controller,
         collection_canister,
-        &(RemoveCollectionArgs { collection_canister_id: Principal::anonymous() })
+        &(RemoveCollectionArgs {
+            collection_canister_id: Principal::anonymous(),
+        }),
     );
 
     matches!(res, Err(RemoveCollectionError::CollectionNotFound));
@@ -329,7 +365,11 @@ fn removing_a_collection_that_does_not_exist_should_fail() {
 #[test]
 fn removing_a_collection_should_work() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
@@ -343,16 +383,13 @@ fn removing_a_collection_should_work() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
-    let categories = get_categories(
-        &pic,
-        Principal::anonymous(),
-        collection_canister,
-        &()
-    ).unwrap();
+    let categories =
+        get_categories(&pic, Principal::anonymous(), collection_canister, &()).unwrap();
     assert_eq!(categories[0].1.collection_count, 0);
 
     assert_eq!(
@@ -366,31 +403,26 @@ fn removing_a_collection_should_work() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
-    let categories = get_categories(
-        &pic,
-        Principal::anonymous(),
-        collection_canister,
-        &()
-    ).unwrap();
+    let categories =
+        get_categories(&pic, Principal::anonymous(), collection_canister, &()).unwrap();
     assert_eq!(categories[0].1.collection_count, 1);
 
     let res = remove_collection(
         &mut pic,
         principal_ids.controller,
         collection_canister,
-        &(RemoveCollectionArgs { collection_canister_id: origyn_nft_one_canister_id })
+        &(RemoveCollectionArgs {
+            collection_canister_id: origyn_nft_one_canister_id,
+        }),
     );
 
-    let categories = get_categories(
-        &pic,
-        Principal::anonymous(),
-        collection_canister,
-        &()
-    ).unwrap();
+    let categories =
+        get_categories(&pic, Principal::anonymous(), collection_canister, &()).unwrap();
     assert_eq!(categories[0].1.collection_count, 0);
 
     matches!(res, Ok(()));
@@ -399,7 +431,11 @@ fn removing_a_collection_should_work() {
 #[test]
 fn updating_a_collection_assigned_category_should_update_correctly() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
@@ -413,7 +449,8 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
     assert_eq!(
@@ -424,7 +461,8 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category B".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -439,17 +477,14 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: Some(100u64),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
     // get the categories and check counts
-    let categories = get_categories(
-        &pic,
-        Principal::anonymous(),
-        collection_canister,
-        &()
-    ).unwrap();
+    let categories =
+        get_categories(&pic, Principal::anonymous(), collection_canister, &()).unwrap();
 
     let category_a = categories
         .iter()
@@ -471,18 +506,15 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             collection_canister_id: origyn_nft_one_canister_id,
             category_name: Some("Category B".to_string()),
             locked_value_usd: Some(500u64),
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     tick_n_blocks(&pic, 2);
 
     // get the categories and check collection counts
-    let categories = get_categories(
-        &pic,
-        Principal::anonymous(),
-        collection_canister,
-        &()
-    ).unwrap();
+    let categories =
+        get_categories(&pic, Principal::anonymous(), collection_canister, &()).unwrap();
     let category_a = categories
         .iter()
         .find(|(name, cat)| *name == "Category A".to_string())
@@ -498,7 +530,11 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
 #[test]
 fn test_pagination_works_correctly() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
@@ -512,7 +548,8 @@ fn test_pagination_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
     assert_eq!(
@@ -523,7 +560,8 @@ fn test_pagination_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category B".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
     // Insert a new category, "Category A"
@@ -535,7 +573,8 @@ fn test_pagination_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category C".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -557,8 +596,9 @@ fn test_pagination_works_correctly() {
                     locked_value_usd: None,
                 },
                 category: Some("Category A".to_string()),
-            })
-        ).unwrap();
+            }),
+        )
+        .unwrap();
         collection_prins.push(collection_prin);
     }
 
@@ -578,8 +618,9 @@ fn test_pagination_works_correctly() {
                     locked_value_usd: None,
                 },
                 category: Some("Category B".to_string()),
-            })
-        ).unwrap();
+            }),
+        )
+        .unwrap();
         collection_prins.push(collection_prin);
     }
 
@@ -599,8 +640,9 @@ fn test_pagination_works_correctly() {
                     locked_value_usd: None,
                 },
                 category: Some("Category C".to_string()),
-            })
-        ).unwrap();
+            }),
+        )
+        .unwrap();
         collection_prins.push(collection_prin);
     }
 
@@ -613,14 +655,19 @@ fn test_pagination_works_correctly() {
             categories: None,
             offset: 0,
             limit: 200,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 150);
     // test that the promoted collections are first
-    res.collections[0..50].iter().for_each(|col| { assert_eq!(col.is_promoted, true) });
+    res.collections[0..50]
+        .iter()
+        .for_each(|col| assert_eq!(col.is_promoted, true));
     // test that the rest are not promoted
-    res.collections[50..150].iter().for_each(|col| { assert_eq!(col.is_promoted, false) });
+    res.collections[50..150]
+        .iter()
+        .for_each(|col| assert_eq!(col.is_promoted, false));
     assert_eq!(res.total_pages, 1);
     // let only_names: Vec<String> = res.collections
     //     .iter()
@@ -637,8 +684,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string()]),
             offset: 0,
             limit: 200,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 50);
     assert_eq!(res.total_pages, 1);
@@ -652,8 +700,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 0,
             limit: 200,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 100);
     assert_eq!(res.total_pages, 1);
@@ -667,8 +716,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 0,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 20);
     assert_eq!(res.total_pages, 5);
@@ -682,8 +732,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 20,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 20);
     assert_eq!(res.total_pages, 5);
@@ -696,8 +747,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 40,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 20);
     assert_eq!(res.total_pages, 5);
@@ -710,8 +762,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 60,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 20);
     assert_eq!(res.total_pages, 5);
@@ -724,8 +777,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 80,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 20);
     assert_eq!(res.total_pages, 5);
@@ -738,8 +792,9 @@ fn test_pagination_works_correctly() {
             categories: Some(vec!["Category A".to_string(), "Category C".to_string()]),
             offset: 100,
             limit: 20,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 0);
     assert_eq!(res.total_pages, 5);
@@ -748,7 +803,11 @@ fn test_pagination_works_correctly() {
 #[test]
 fn test_search_collections_works_correctly() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
@@ -762,7 +821,8 @@ fn test_search_collections_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
     assert_eq!(
@@ -773,7 +833,8 @@ fn test_search_collections_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category B".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -796,8 +857,9 @@ fn test_search_collections_works_correctly() {
                     locked_value_usd: None,
                 },
                 category: Some("Category A".to_string()),
-            })
-        ).unwrap();
+            }),
+        )
+        .unwrap();
         collection_prins.push(collection_prin);
     }
 
@@ -818,8 +880,9 @@ fn test_search_collections_works_correctly() {
                     locked_value_usd: None,
                 },
                 category: Some("Category B".to_string()),
-            })
-        ).unwrap();
+            }),
+        )
+        .unwrap();
         collection_prins.push(collection_prin);
     }
 
@@ -832,12 +895,14 @@ fn test_search_collections_works_correctly() {
             categories: None,
             offset: 0,
             limit: 200,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.collections.len(), 100);
     assert_eq!(res.total_pages, 1);
-    let only_names: Vec<String> = res.collections
+    let only_names: Vec<String> = res
+        .collections
         .iter()
         .map(|col| col.name.clone().unwrap())
         .collect();
@@ -853,9 +918,10 @@ fn test_search_collections_works_correctly() {
             search_string: String::from("a"),
             offset: 0,
             limit: 200,
-        })
+        }),
     );
-    let only_names: Vec<String> = res.collections
+    let only_names: Vec<String> = res
+        .collections
         .iter()
         .map(|col| col.name.clone().unwrap())
         .collect();
@@ -873,9 +939,10 @@ fn test_search_collections_works_correctly() {
             search_string: String::from("b"),
             offset: 0,
             limit: 200,
-        })
+        }),
     );
-    let only_names: Vec<String> = res.collections
+    let only_names: Vec<String> = res
+        .collections
         .iter()
         .map(|col| col.name.clone().unwrap())
         .collect();
@@ -893,9 +960,10 @@ fn test_search_collections_works_correctly() {
             search_string: String::from("22 c"),
             offset: 0,
             limit: 200,
-        })
+        }),
     );
-    let only_names: Vec<String> = res.collections
+    let only_names: Vec<String> = res
+        .collections
         .iter()
         .map(|col| col.name.clone().unwrap())
         .collect();
@@ -907,7 +975,11 @@ fn test_search_collections_works_correctly() {
 #[test]
 fn test_get_user_collections_works_correctly() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let collection_canister = canister_ids.collection_index;
     let origyn_nft = canister_ids.origyn_nft_one;
@@ -924,7 +996,8 @@ fn test_get_user_collections_works_correctly() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -941,7 +1014,8 @@ fn test_get_user_collections_works_correctly() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: None,
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -954,7 +1028,7 @@ fn test_get_user_collections_works_correctly() {
         originator.clone(),
         net_principal.clone(),
         nft_owner.clone(),
-        "1".to_string()
+        "1".to_string(),
     );
 
     tick_n_blocks(&pic, 5);
@@ -963,14 +1037,14 @@ fn test_get_user_collections_works_correctly() {
         &pic,
         origyn_nft.clone(),
         net_principal.clone(),
-        "1".to_string()
+        "1".to_string(),
     );
 
     let owner_of = icrc7_owner_of(
         &pic,
         origyn_nft.clone(),
         net_principal.clone(),
-        vec![token_id_as_nat.clone()]
+        vec![token_id_as_nat.clone()],
     );
 
     let res = get_user_collections(&mut pic, nft_owner, collection_canister, &None);
@@ -982,7 +1056,11 @@ fn test_get_user_collections_works_correctly() {
 #[test]
 fn test_promoting_and_demoting_collections() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let origyn_nft_one_canister_id = canister_ids.origyn_nft_one;
     let collection_canister = canister_ids.collection_index;
@@ -996,7 +1074,8 @@ fn test_promoting_and_demoting_collections() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -1011,7 +1090,8 @@ fn test_promoting_and_demoting_collections() {
                 category: Some("Category A".to_string()),
                 locked_value_usd: None,
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -1021,7 +1101,7 @@ fn test_promoting_and_demoting_collections() {
         collection_canister,
         &(TogglePromotedArgs {
             collection_canister_id: origyn_nft_one_canister_id,
-        })
+        }),
     );
 
     tick_n_blocks(&pic, 1);
@@ -1034,8 +1114,9 @@ fn test_promoting_and_demoting_collections() {
             categories: None,
             offset: 0,
             limit: 50,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);
@@ -1047,7 +1128,7 @@ fn test_promoting_and_demoting_collections() {
         collection_canister,
         &(TogglePromotedArgs {
             collection_canister_id: origyn_nft_one_canister_id,
-        })
+        }),
     );
 
     tick_n_blocks(&pic, 1);
@@ -1060,8 +1141,9 @@ fn test_promoting_and_demoting_collections() {
             categories: None,
             offset: 0,
             limit: 50,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
 
     assert_eq!(res.total_pages, 1);
     assert_eq!(res.collections[0].canister_id, origyn_nft_one_canister_id);

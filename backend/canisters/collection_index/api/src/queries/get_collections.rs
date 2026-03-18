@@ -1,7 +1,7 @@
 use candid::CandidType;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
-use crate::{ collection::Collection, errors::GetCollectionsError };
+use crate::{collection::Collection, errors::GetCollectionsError};
 
 pub type Args = GetCollectionsArgs;
 pub type Response = Result<GetCollectionsResult, GetCollectionsError>;

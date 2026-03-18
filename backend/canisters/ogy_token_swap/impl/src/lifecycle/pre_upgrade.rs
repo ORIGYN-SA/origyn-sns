@@ -1,8 +1,8 @@
-use ic_cdk_macros::pre_upgrade;
-use stable_memory::get_writer;
+use bity_ic_stable_memory::get_writer;
+use ic_cdk::pre_upgrade;
 use tracing::info;
 
-use crate::{ memory::get_upgrades_memory, state::take_state };
+use crate::{memory::get_upgrades_memory, state::take_state};
 
 #[pre_upgrade]
 fn pre_upgrade() {
@@ -10,8 +10,8 @@ fn pre_upgrade() {
 
     let runtime_state = take_state();
 
-    let logs = canister_logger::export_logs();
-    let traces = canister_logger::export_traces();
+    let logs = bity_ic_canister_logger::export_logs();
+    let traces = bity_ic_canister_logger::export_traces();
 
     let stable_state = (runtime_state, logs, traces);
 

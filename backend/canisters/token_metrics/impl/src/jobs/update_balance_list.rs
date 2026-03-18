@@ -1,4 +1,4 @@
-use canister_time::run_now_then_interval;
+use bity_ic_canister_time::run_now_then_interval;
 use utils::principal::string_to_account;
 use std::collections::BTreeMap;
 use icrc_ledger_types::icrc1::account::Account;
@@ -23,7 +23,7 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::spawn(update_balance_list())
+    ic_cdk::futures::spawn(update_balance_list())
 }
 
 pub async fn update_balance_list() {

@@ -1,9 +1,8 @@
 // This is an experimental feature to generate Rust binding from Candid.
 // You may want to manually adjust some of the types.
 #![allow(dead_code, unused_imports)]
-use candid::{ self, CandidType, Decode, Deserialize, Encode, Nat, Principal };
-use ic_cdk::api::call::CallResult as Result;
-use ic_ledger_types::{ AccountIdentifier, BlockIndex, Subaccount, Tokens };
+use candid::{self, CandidType, Decode, Deserialize, Encode, Nat, Principal};
+use ic_ledger_types::{AccountIdentifier, BlockIndex, Subaccount, Tokens};
 
 // #[derive(CandidType, Deserialize, PartialEq, Eq, Debug)]
 // pub struct Tokens {
@@ -100,19 +99,11 @@ pub struct TransferArg {
 
 #[derive(CandidType, Deserialize, Debug, PartialEq, Eq)]
 pub enum TransferError {
-    BadFee {
-        expected_fee: Tokens,
-    },
-    InsufficientFunds {
-        balance: Tokens,
-    },
-    TxTooOld {
-        allowed_window_nanos: u64,
-    },
+    BadFee { expected_fee: Tokens },
+    InsufficientFunds { balance: Tokens },
+    TxTooOld { allowed_window_nanos: u64 },
     TxCreatedInFuture,
-    TxDuplicate {
-        duplicate_of: BlockIndex,
-    },
+    TxDuplicate { duplicate_of: BlockIndex },
 }
 
 #[derive(CandidType, Deserialize)]
@@ -253,19 +244,11 @@ pub struct TransferArgs {
 
 #[derive(CandidType, Deserialize)]
 pub enum TransferError1 {
-    TxTooOld {
-        allowed_window_nanos: u64,
-    },
-    BadFee {
-        expected_fee: Tokens,
-    },
-    TxDuplicate {
-        duplicate_of: u64,
-    },
+    TxTooOld { allowed_window_nanos: u64 },
+    BadFee { expected_fee: Tokens },
+    TxDuplicate { duplicate_of: u64 },
     TxCreatedInFuture,
-    InsufficientFunds {
-        balance: Tokens,
-    },
+    InsufficientFunds { balance: Tokens },
 }
 
 #[derive(CandidType, Deserialize)]
@@ -293,69 +276,69 @@ pub struct TransferStandardArgs {
     pub amount: Tokens,
 }
 
-pub struct Service(pub Principal);
-impl Service {
-    pub async fn account_balance(&self, arg0: BinaryAccountBalanceArgs) -> Result<(Tokens,)> {
-        ic_cdk::call(self.0, "account_balance", (arg0,)).await
-    }
-    pub async fn account_balance_dfx(&self, arg0: AccountBalanceArgs) -> Result<(Tokens,)> {
-        ic_cdk::call(self.0, "account_balance_dfx", (arg0,)).await
-    }
-    pub async fn archives(&self) -> Result<(Archives,)> {
-        ic_cdk::call(self.0, "archives", ()).await
-    }
-    pub async fn decimals(&self) -> Result<(Decimals,)> {
-        ic_cdk::call(self.0, "decimals", ()).await
-    }
-    pub async fn icrc_1_balance_of(&self, arg0: Account) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "icrc1_balance_of", (arg0,)).await
-    }
-    pub async fn icrc_1_decimals(&self) -> Result<(u8,)> {
-        ic_cdk::call(self.0, "icrc1_decimals", ()).await
-    }
-    pub async fn icrc_1_fee(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "icrc1_fee", ()).await
-    }
-    pub async fn icrc_1_metadata(&self) -> Result<(Vec<(String, Value)>,)> {
-        ic_cdk::call(self.0, "icrc1_metadata", ()).await
-    }
-    pub async fn icrc_1_minting_account(&self) -> Result<(Option<Account>,)> {
-        ic_cdk::call(self.0, "icrc1_minting_account", ()).await
-    }
-    pub async fn icrc_1_name(&self) -> Result<(String,)> {
-        ic_cdk::call(self.0, "icrc1_name", ()).await
-    }
-    pub async fn icrc_1_supported_standards(&self) -> Result<(Vec<StandardRecord>,)> {
-        ic_cdk::call(self.0, "icrc1_supported_standards", ()).await
-    }
-    pub async fn icrc_1_symbol(&self) -> Result<(String,)> {
-        ic_cdk::call(self.0, "icrc1_symbol", ()).await
-    }
-    pub async fn icrc_1_total_supply(&self) -> Result<(candid::Nat,)> {
-        ic_cdk::call(self.0, "icrc1_total_supply", ()).await
-    }
-    pub async fn icrc_1_transfer(&self, arg0: TransferArg) -> Result<(Result_,)> {
-        ic_cdk::call(self.0, "icrc1_transfer", (arg0,)).await
-    }
-    pub async fn name(&self) -> Result<(Name,)> {
-        ic_cdk::call(self.0, "name", ()).await
-    }
-    pub async fn query_blocks(&self, arg0: GetBlocksArgs) -> Result<(QueryBlocksResponse,)> {
-        ic_cdk::call(self.0, "query_blocks", (arg0,)).await
-    }
-    pub async fn send_dfx(&self, arg0: SendArgs) -> Result<(u64,)> {
-        ic_cdk::call(self.0, "send_dfx", (arg0,)).await
-    }
-    pub async fn symbol(&self) -> Result<(Symbol,)> {
-        ic_cdk::call(self.0, "symbol", ()).await
-    }
-    pub async fn transfer(&self, arg0: TransferArgs) -> Result<(Result1,)> {
-        ic_cdk::call(self.0, "transfer", (arg0,)).await
-    }
-    pub async fn transfer_fee(&self, arg0: TransferFeeArg) -> Result<(TransferFee,)> {
-        ic_cdk::call(self.0, "transfer_fee", (arg0,)).await
-    }
-    pub async fn transfer_standard_stdldg(&self, arg0: TransferStandardArgs) -> Result<(Result1,)> {
-        ic_cdk::call(self.0, "transfer_standard_stdldg", (arg0,)).await
-    }
-}
+// pub struct Service(pub Principal);
+// impl Service {
+//     pub async fn account_balance(&self, arg0: BinaryAccountBalanceArgs) -> Result<(Tokens,)> {
+//         ic_cdk::call(self.0, "account_balance", (arg0,)).await
+//     }
+//     pub async fn account_balance_dfx(&self, arg0: AccountBalanceArgs) -> Result<(Tokens,)> {
+//         ic_cdk::call(self.0, "account_balance_dfx", (arg0,)).await
+//     }
+//     pub async fn archives(&self) -> Result<(Archives,)> {
+//         ic_cdk::call(self.0, "archives", ()).await
+//     }
+//     pub async fn decimals(&self) -> Result<(Decimals,)> {
+//         ic_cdk::call(self.0, "decimals", ()).await
+//     }
+//     pub async fn icrc_1_balance_of(&self, arg0: Account) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "icrc1_balance_of", (arg0,)).await
+//     }
+//     pub async fn icrc_1_decimals(&self) -> Result<(u8,)> {
+//         ic_cdk::call(self.0, "icrc1_decimals", ()).await
+//     }
+//     pub async fn icrc_1_fee(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "icrc1_fee", ()).await
+//     }
+//     pub async fn icrc_1_metadata(&self) -> Result<(Vec<(String, Value)>,)> {
+//         ic_cdk::call(self.0, "icrc1_metadata", ()).await
+//     }
+//     pub async fn icrc_1_minting_account(&self) -> Result<(Option<Account>,)> {
+//         ic_cdk::call(self.0, "icrc1_minting_account", ()).await
+//     }
+//     pub async fn icrc_1_name(&self) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "icrc1_name", ()).await
+//     }
+//     pub async fn icrc_1_supported_standards(&self) -> Result<(Vec<StandardRecord>,)> {
+//         ic_cdk::call(self.0, "icrc1_supported_standards", ()).await
+//     }
+//     pub async fn icrc_1_symbol(&self) -> Result<(String,)> {
+//         ic_cdk::call(self.0, "icrc1_symbol", ()).await
+//     }
+//     pub async fn icrc_1_total_supply(&self) -> Result<(candid::Nat,)> {
+//         ic_cdk::call(self.0, "icrc1_total_supply", ()).await
+//     }
+//     pub async fn icrc_1_transfer(&self, arg0: TransferArg) -> Result<(Result_,)> {
+//         ic_cdk::call(self.0, "icrc1_transfer", (arg0,)).await
+//     }
+//     pub async fn name(&self) -> Result<(Name,)> {
+//         ic_cdk::call(self.0, "name", ()).await
+//     }
+//     pub async fn query_blocks(&self, arg0: GetBlocksArgs) -> Result<(QueryBlocksResponse,)> {
+//         ic_cdk::call(self.0, "query_blocks", (arg0,)).await
+//     }
+//     pub async fn send_dfx(&self, arg0: SendArgs) -> Result<(u64,)> {
+//         ic_cdk::call(self.0, "send_dfx", (arg0,)).await
+//     }
+//     pub async fn symbol(&self) -> Result<(Symbol,)> {
+//         ic_cdk::call(self.0, "symbol", ()).await
+//     }
+//     pub async fn transfer(&self, arg0: TransferArgs) -> Result<(Result1,)> {
+//         ic_cdk::call(self.0, "transfer", (arg0,)).await
+//     }
+//     pub async fn transfer_fee(&self, arg0: TransferFeeArg) -> Result<(TransferFee,)> {
+//         ic_cdk::call(self.0, "transfer_fee", (arg0,)).await
+//     }
+//     pub async fn transfer_standard_stdldg(&self, arg0: TransferStandardArgs) -> Result<(Result1,)> {
+//         ic_cdk::call(self.0, "transfer_standard_stdldg", (arg0,)).await
+//     }
+// }

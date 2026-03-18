@@ -1,20 +1,12 @@
-use crate::{ generate_query_call, generate_update_call };
+use crate::{generate_query_call, generate_update_call};
 
 use collection_index_api::queries::{
-    get_categories,
-    get_collections,
+    get_categories, get_collection_by_principal, get_collections, get_user_collections,
     search_collections,
-    get_user_collections,
-    get_collection_by_principal,
 };
 use collection_index_api::updates::{
-    insert_category,
-    insert_collection,
-    set_category_visibility,
-    update_collection,
-    remove_collection,
-    insert_fake_collection,
-    toggle_promoted,
+    insert_category, insert_collection, insert_fake_collection, remove_collection,
+    set_category_visibility, toggle_promoted, update_collection,
 };
 
 generate_query_call!(get_collections);

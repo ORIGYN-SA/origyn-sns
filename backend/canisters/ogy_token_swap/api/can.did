@@ -2,6 +2,7 @@ type Account = record { owner : principal; subaccount : opt blob };
 type Args = record { block_index : nat64 };
 type Args_1 = record { of : opt principal };
 type Args_2 = record { block_index : nat64; user : opt principal };
+type Args_3 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
 type BlockFailReason = variant {
   ReceiverNotCorrectAccountId : blob;
   NotFound;
@@ -10,6 +11,7 @@ type BlockFailReason = variant {
   InvalidOperation;
   AmountTooSmall;
 };
+type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
 type BurnFailReason = variant {
   TransferError : TransferError;
   CallError : text;
@@ -26,7 +28,9 @@ type InitArgs = record {
   ogy_legacy_minting_account_principal : principal;
   test_mode : bool;
   authorized_principals : vec principal;
+  version : BuildVersion;
   ogy_new_ledger_canister_id : principal;
+  commit_hash : text;
   ogy_legacy_ledger_canister_id : principal;
 };
 type Response = variant { Success : SwapInfo; InternalError : text };
@@ -108,12 +112,13 @@ type TransferRequestArgs = record {
   created_at_time : opt nat64;
   amount : nat;
 };
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
 type UserSwap = record {
   desposit_account : blob;
   swaps : nat64;
   amount : nat64;
 };
-service : (InitArgs) -> {
+service : (Args_3) -> {
   get_swap_info : (Args) -> (Response) query;
   is_caller_whitelisted : () -> (bool) query;
   list_swapping_statistics : () -> (SwapStatistics) query;

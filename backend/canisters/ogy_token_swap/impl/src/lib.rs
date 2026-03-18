@@ -1,14 +1,14 @@
 use ic_cdk::export_candid;
 
-pub mod model;
 pub mod guards;
 pub mod jobs;
 pub mod lifecycle;
 pub mod memory;
+pub mod migrations;
+pub mod model;
 pub mod queries;
 pub mod state;
 pub mod updates;
-pub mod migrations;
 
 use lifecycle::*;
 use queries::*;

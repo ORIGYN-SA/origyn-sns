@@ -1,28 +1,21 @@
+use crate::state::{mutate_state, read_state};
+use bity_ic_canister_time::{run_now_then_interval, timestamp_millis, timestamp_nanos, DAY_IN_MS};
 use candid::Nat;
-use canister_time::{
-    is_interval_more_than_1_day,
-    run_now_then_interval,
-    timestamp_millis,
-    timestamp_nanos,
-    DAY_IN_MS,
-};
 use canister_jobs_api::BurnJobResult;
-use icrc_ledger_types::icrc1::{ account::Account, transfer::TransferArg };
+use icrc_ledger_types::icrc1::{account::Account, transfer::TransferArg};
 use std::time::Duration;
-use tracing::{ debug, error, info };
+use tracing::{debug, error, info};
 use types::Milliseconds;
-use crate::state::{ mutate_state, read_state };
 
 const OGY_BURN_JOB_INTERVAL: Milliseconds = DAY_IN_MS;
-// Day in nanoseconds minus 1hr
 
 pub fn start_job() {
     debug!("Starting the job to burn OGY.");
-    run_now_then_interval(Duration::from_millis(OGY_BURN_JOB_INTERVAL), run)
+    run_now_then_interval(Duration::from_millis(OGY_BURN_JOB_INTERVAL), run);
 }
 
 pub fn run() {
-    ic_cdk::spawn(send_ogy_to_burn_account())
+    ic_cdk::futures::spawn(send_ogy_to_burn_account())
 }
 
 pub async fn send_ogy_to_burn_account() {
@@ -64,9 +57,22 @@ pub async fn send_ogy_to_burn_account() {
             let message = format!("{msg:?}");
             error!(?message, "(1) Error while sending the OGY to burn account.");
         }
-        Err((_, msg)) => {
-            let message = format!("{msg:?}");
+        Err(err) => {
+            let message = format!("{err:?}");
             error!(?message, "(2) Error while sending the OGY to burn account.");
         }
     }
+}
+
+use types::TimestampMillis;
+pub fn is_interval_more_than_1_day(
+    previous_time: TimestampMillis,
+    now_time: TimestampMillis,
+) -> bool {
+    // convert the milliseconds to the number of days since UNIX Epoch.
+    // integer division means partial days will be truncated down or effectively rounded down. e.g 245.5 becomes 245
+    let previous_in_days = previous_time / DAY_IN_MS;
+    let current_in_days = now_time / DAY_IN_MS;
+    // never allow distributions to happen twice i.e if the last run distribution in days since UNIX epoch is the same as the current time in days since the last UNIX Epoch then return early.
+    current_in_days != previous_in_days
 }

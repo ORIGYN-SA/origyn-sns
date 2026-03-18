@@ -1,21 +1,24 @@
-use std::{ collections::BTreeMap, mem };
+use std::{collections::BTreeMap, mem};
 
+use bity_ic_canister_time::timestamp_millis;
 use candid::Principal;
-use canister_time::timestamp_millis;
-use ic_ledger_types::{ Subaccount, BlockIndex };
+use ic_ledger_types::{BlockIndex, Subaccount};
 use ic_stable_structures::StableBTreeMap;
+use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
 use ledger_utils::principal_to_legacy_account_id;
-use serde::{ Deserialize, Serialize };
 use ogy_token_swap_api::{
-    token_swap::{ BurnFailReason, RecoverMode, SwapError, SwapStatus },
+    token_swap::{BurnFailReason, RecoverMode, SwapError, SwapStatus},
     updates::recover_stuck_transfer::Response as RecoverStuckTransferResponse,
 };
-use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
+use serde::{Deserialize, Serialize};
 use tracing::error;
-use types::{ SwapStatistics, UserSwap };
+use types::{SwapStatistics, UserSwap};
 
-use crate::{ compute_deposit_account, memory::{ get_swap_history_memory, VM } };
-use ogy_token_swap_api::types::token_swap::{ BlockFailReason, SwapInfo };
+use crate::{
+    compute_deposit_account,
+    memory::{get_swap_history_memory, VM},
+};
+use ogy_token_swap_api::types::token_swap::{BlockFailReason, SwapInfo};
 
 #[derive(Serialize, Deserialize)]
 pub struct TokenSwap {
@@ -31,7 +34,10 @@ fn init_map() -> StableBTreeMap<BlockIndex, SwapInfo, VM> {
 
 impl Default for TokenSwap {
     fn default() -> Self {
-        Self { history: init_map(), swap: BTreeMap::default() }
+        Self {
+            history: init_map(),
+            swap: BTreeMap::default(),
+        }
     }
 }
 
@@ -39,7 +45,7 @@ impl TokenSwap {
     pub fn init_swap(
         &mut self,
         block_index: BlockIndex,
-        principal: Principal
+        principal: Principal,
     ) -> Result<Option<RecoverMode>, String> {
         match self.get_swap_info(block_index) {
             Some(entry) => {
@@ -155,19 +161,20 @@ impl TokenSwap {
 
     pub fn recover_stuck_transfer(
         &mut self,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> Result<(), RecoverStuckTransferResponse> {
         match self.swap.get_mut(&block_index) {
-            Some(entry) =>
-                match entry.status.clone() {
-                    // If the swap status is in state TransferRequest, reset state to before transfer request and an attempt to recover can be made
-                    SwapStatus::TransferRequest(_) => {
-                        entry.status = SwapStatus::BurnSuccess;
-                        Ok(())
-                    }
-                    // In all other cases, there is no legitimate reason to retry to recover
-                    val => Err(RecoverStuckTransferResponse::SwapIsNotStuckInTransfer(val.clone())),
+            Some(entry) => match entry.status.clone() {
+                // If the swap status is in state TransferRequest, reset state to before transfer request and an attempt to recover can be made
+                SwapStatus::TransferRequest(_) => {
+                    entry.status = SwapStatus::BurnSuccess;
+                    Ok(())
                 }
+                // In all other cases, there is no legitimate reason to retry to recover
+                val => Err(RecoverStuckTransferResponse::SwapIsNotStuckInTransfer(
+                    val.clone(),
+                )),
+            },
             // If not entry is found for this block_index, it's not a valid request
             None => Err(RecoverStuckTransferResponse::NoSwapRequestFound),
         }
@@ -217,7 +224,9 @@ impl TokenSwap {
     pub fn get_principal(&self, block_index: BlockIndex) -> Result<Principal, String> {
         match self.swap.get(&block_index) {
             Some(swap_info) => Ok(swap_info.principal),
-            None => Err(format!("No principal entry not found for block index {block_index}.")), // this is not possible because it was initialised before but validating here in any case
+            None => Err(format!(
+                "No principal entry not found for block index {block_index}."
+            )), // this is not possible because it was initialised before but validating here in any case
         }
     }
     pub fn set_burn_block_index(&mut self, block_index: BlockIndex, burn_block_index: BlockIndex) {
@@ -228,7 +237,7 @@ impl TokenSwap {
     pub fn set_swap_block_index(
         &mut self,
         block_index: BlockIndex,
-        swap_block_index: BlockIndexIcrc
+        swap_block_index: BlockIndexIcrc,
     ) {
         if let Some(entry) = self.swap.get_mut(&block_index) {
             entry.token_swap_block_index = Some(swap_block_index);
@@ -264,12 +273,9 @@ impl TokenSwap {
                 self.swap.insert(block_index, modified_swap);
                 Ok(())
             }
-            None =>
-                Err(
-                    format!(
-                        "can't archive {block_index} because it doesn't exist in swap heap memory"
-                    )
-                ),
+            None => Err(format!(
+                "can't archive {block_index} because it doesn't exist in swap heap memory"
+            )),
         }
     }
 
@@ -286,8 +292,12 @@ impl TokenSwap {
 
     pub fn compute_swapping_statistics(&self) -> SwapStatistics {
         let mut stats = SwapStatistics::default();
-        self.history.iter().for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
-        self.swap.iter().for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
+        self.history
+            .iter()
+            .for_each(|entry| Self::analyse_swap_block(&mut stats, &entry.value()));
+        self.swap
+            .iter()
+            .for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
         stats
     }
 
@@ -303,11 +313,14 @@ impl TokenSwap {
                         val.swaps += 1;
                     }
                     None => {
-                        statistics.user_swaps.insert(info.principal, UserSwap {
-                            desposit_account: compute_deposit_account(&info.principal),
-                            amount: info.amount,
-                            swaps: 1,
-                        });
+                        statistics.user_swaps.insert(
+                            info.principal,
+                            UserSwap {
+                                desposit_account: compute_deposit_account(&info.principal),
+                                amount: info.amount,
+                                swaps: 1,
+                            },
+                        );
                     }
                 }
             }

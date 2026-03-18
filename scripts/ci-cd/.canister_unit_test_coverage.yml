@@ -34,10 +34,6 @@ $[[ inputs.src-folder ]] tests:
         - "backend/external_canisters/{**}/*.{rs,toml}"
         - "backend/canisters/$[[ inputs.src-folder ]]/{**}/*.{rs,toml}"
   extends: .rust template
-  tags:
-    - docker
-  # services:
-  #   - docker:dind
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"

@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::state::{ Data, RuntimeState };
+use crate::state::{Data, RuntimeState};
 
 use self::types::state::RuntimeStateV0;
 

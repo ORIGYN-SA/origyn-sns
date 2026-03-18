@@ -1,6 +1,6 @@
-use candid::CandidType;
-use serde::{ Deserialize, Serialize };
 use crate::collection::Collection;
+use candid::CandidType;
+use serde::{Deserialize, Serialize};
 
 pub type Args = SearchCollectionsArg;
 pub type Response = SearchCollectionsResponse;

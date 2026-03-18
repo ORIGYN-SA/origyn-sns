@@ -1,21 +1,28 @@
-use std::time::Duration;
+use crate::canister_jobs_suite::{init::init, TestEnv};
+use crate::client::icrc1::client::{balance_of, total_supply, transfer};
 use candid::Nat;
 use icrc_ledger_types::icrc1::account::Account;
+use std::time::Duration;
 use utils::consts::E8S_PER_OGY;
-use crate::client::icrc1::client::{ balance_of, transfer, total_supply };
-use crate::canister_jobs_suite::{ init::init, TestEnv };
 
 #[test]
 fn daily_burn_job() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, controller } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        controller,
+    } = env;
 
     let ledger_canister_id = canister_ids.ogy_ledger_canister_id;
     let canister_jobs_canister_id = canister_ids.canister_jobs_canister_id;
 
     let minting_account = controller;
 
-    let daily_jobs_account = Account { owner: canister_jobs_canister_id, subaccount: None };
+    let daily_jobs_account = Account {
+        owner: canister_jobs_canister_id,
+        subaccount: None,
+    };
 
     // Make the initial mint transaction to daily_jobs_account
     assert_eq!(
@@ -25,7 +32,7 @@ fn daily_burn_job() {
             ledger_canister_id,
             None,
             daily_jobs_account,
-            (100_000_000 * E8S_PER_OGY).into()
+            100_000_000 * E8S_PER_OGY
         ),
         Ok((0u8).into())
     );
@@ -38,7 +45,10 @@ fn daily_burn_job() {
     // Check the total supply to be 100_000_000 OGY.
     let ts = total_supply(&pic, ledger_canister_id);
     println!("Total supply: {}", ts);
-    assert_eq!(total_supply(&pic, ledger_canister_id), Nat::from(100_000_000 * E8S_PER_OGY));
+    assert_eq!(
+        total_supply(&pic, ledger_canister_id),
+        Nat::from(100_000_000 * E8S_PER_OGY)
+    );
 
     // Simulate 5 days of burning job
     for i in 1..5 {

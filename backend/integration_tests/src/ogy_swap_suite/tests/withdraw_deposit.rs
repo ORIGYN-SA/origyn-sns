@@ -1,20 +1,20 @@
-use candid::{ Nat, Principal };
-use ic_ledger_types::{ AccountIdentifier, Tokens };
+use candid::{Nat, Principal};
+use ic_ledger_types::{AccountIdentifier, Tokens};
 use ledger_utils::principal_to_legacy_account_id;
 use ogy_token_swap_api::update_whitelist::UpdateWhitelistCommand;
-use utils::consts::{ E8S_FEE_OGY, E8S_PER_OGY };
 use pocket_ic::PocketIc;
 use types::CanisterId;
+use utils::consts::{E8S_FEE_OGY, E8S_PER_OGY};
 
 use crate::{
     client::{
-        ogy_legacy_ledger::client::{ balance_of, mint_ogy, transfer_ogy },
+        ogy_legacy_ledger::client::{balance_of, mint_ogy, transfer_ogy},
         ogy_token_swap::{
-            client::{ deposit_account, update_whitelist_call, withdraw_deposit_call },
+            client::{deposit_account, update_whitelist_call, withdraw_deposit_call},
             withdraw_deposit,
         },
     },
-    ogy_swap_suite::{ init::init, TestEnv },
+    ogy_swap_suite::{init::init, TestEnv},
     utils::random_principal,
 };
 
@@ -43,7 +43,7 @@ fn withdraw_deposit_insufficient_balance() {
         &mut env.pic,
         env.controller,
         env.canister_ids.ogy_swap,
-        UpdateWhitelistCommand::Add(user)
+        UpdateWhitelistCommand::Add(user),
     );
 
     transfer_deposit(&mut env, user, amount);
@@ -66,7 +66,7 @@ fn withdraw_deposit_happy_path() {
         &mut env.pic,
         env.controller,
         env.canister_ids.ogy_swap,
-        UpdateWhitelistCommand::Add(user)
+        UpdateWhitelistCommand::Add(user),
     );
 
     transfer_deposit(&mut env, user, amount);
@@ -95,8 +95,9 @@ fn user_init(env: &mut TestEnv, amount: Nat) -> Principal {
         env.controller,
         env.canister_ids.ogy_legacy_ledger,
         principal_to_legacy_account_id(user, None),
-        amount.0.try_into().unwrap()
-    ).unwrap();
+        amount.0.try_into().unwrap(),
+    )
+    .unwrap();
 
     user
 }
@@ -104,33 +105,34 @@ fn user_init(env: &mut TestEnv, amount: Nat) -> Principal {
 fn get_deposit_account_helper(
     pic: &mut PocketIc,
     ogy_token_swap_canister: CanisterId,
-    user: Principal
+    user: Principal,
 ) -> Result<AccountIdentifier, String> {
     match deposit_account(pic, ogy_token_swap_canister, user) {
         ogy_token_swap_api::request_deposit_account::Response::Success(account_id) => {
             Ok(account_id)
         }
-        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfListReached =>
-            Err("Max limit reached.".to_string()),
-        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfSwapsReached =>
-            Err("Max swaps limit reached".to_string()),
-        ogy_token_swap_api::request_deposit_account::Response::NotAuthorized(message) =>
-            Err(message),
+        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfListReached => {
+            Err("Max limit reached.".to_string())
+        }
+        ogy_token_swap_api::request_deposit_account::Response::MaxCapacityOfSwapsReached => {
+            Err("Max swaps limit reached".to_string())
+        }
+        ogy_token_swap_api::request_deposit_account::Response::NotAuthorized(message) => {
+            Err(message)
+        }
     }
 }
 
 fn transfer_deposit(env: &mut TestEnv, user: Principal, amount: u64) {
-    let deposit_account = get_deposit_account_helper(
-        &mut env.pic,
-        env.canister_ids.ogy_swap,
-        user
-    ).unwrap();
+    let deposit_account =
+        get_deposit_account_helper(&mut env.pic, env.canister_ids.ogy_swap, user).unwrap();
 
     let _ = transfer_ogy(
         &mut env.pic,
         user,
         env.canister_ids.ogy_legacy_ledger,
         deposit_account,
-        amount - E8S_FEE_OGY
-    ).unwrap();
+        amount - E8S_FEE_OGY,
+    )
+    .unwrap();
 }

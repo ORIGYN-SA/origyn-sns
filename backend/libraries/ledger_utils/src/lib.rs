@@ -1,15 +1,17 @@
 use candid::Principal;
-use ic_ledger_types::{ AccountIdentifier, Subaccount, DEFAULT_SUBACCOUNT };
+use ic_ledger_types::{AccountIdentifier, Subaccount, DEFAULT_SUBACCOUNT};
 use icrc_ledger_types::icrc1::account::Account;
 
 pub fn icrc_account_to_legacy_account_id(icrc_account: Account) -> AccountIdentifier {
-    let subaccount: Subaccount = icrc_account.subaccount.map_or(DEFAULT_SUBACCOUNT, Subaccount);
+    let subaccount: Subaccount = icrc_account
+        .subaccount
+        .map_or(DEFAULT_SUBACCOUNT, Subaccount);
     AccountIdentifier::new(&icrc_account.owner, &subaccount)
 }
 
 pub fn principal_to_legacy_account_id(
     principal: Principal,
-    subaccount: Option<Subaccount>
+    subaccount: Option<Subaccount>,
 ) -> AccountIdentifier {
     AccountIdentifier::new(&principal, &subaccount.unwrap_or(DEFAULT_SUBACCOUNT))
 }
@@ -25,8 +27,9 @@ mod tests {
     fn convert_icrc_account_to_legacy_account_id() {
         let icrc_account = Account {
             owner: Principal::from_text(
-                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae"
-            ).unwrap(),
+                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae",
+            )
+            .unwrap(),
             subaccount: None,
         };
         let result = icrc_account_to_legacy_account_id(icrc_account);
@@ -41,8 +44,9 @@ mod tests {
     fn convert_icrc_account_to_legacy_account_id_with_subaccount() {
         let icrc_account = Account {
             owner: Principal::from_text(
-                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae"
-            ).unwrap(),
+                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae",
+            )
+            .unwrap(),
             subaccount: Some([
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 1,

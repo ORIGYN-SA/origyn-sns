@@ -158,27 +158,31 @@ const HowItWorks = () => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={styles.leftPanel}>
-        <div>
-          <h2 className={styles.title}>
-            How it <br id="works-break" />
-            <span>works</span>
-          </h2>
-          <p
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: steps[currentStep].description }}
-          />
-        </div>
-        <div className={styles.indicators}>
-          {steps.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${
-                index === currentStep ? styles.active : ""
-              }`}
-              onClick={() => setCurrentStep(index)}
-              aria-label={`Go to step ${index + 1}`}
+        <div className={styles.leftPanelContent}>
+          <div>
+            <h2 className={styles.title}>
+              How it <br id="works-break" />
+              <span>works</span>
+            </h2>
+            <p
+              className={styles.description}
+              dangerouslySetInnerHTML={{
+                __html: steps[currentStep].description,
+              }}
             />
-          ))}
+          </div>
+          <div className={styles.indicators}>
+            {steps.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.indicator} ${
+                  index === currentStep ? styles.active : ""
+                }`}
+                onClick={() => setCurrentStep(index)}
+                aria-label={`Go to step ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

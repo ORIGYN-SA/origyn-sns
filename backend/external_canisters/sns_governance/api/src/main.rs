@@ -1,4 +1,4 @@
-use candid_gen::generate_candid_method;
+use bity_ic_candid_gen::generate_candid_method;
 
 #[allow(deprecated)]
 fn main() {
@@ -7,6 +7,7 @@ fn main() {
     generate_candid_method!(sns_governance, list_neurons, query);
     generate_candid_method!(sns_governance, list_proposals, query);
     generate_candid_method!(sns_governance, get_neuron, query);
+
     generate_candid_method!(sns_governance, manage_neuron, update);
 
     candid::export_service!();

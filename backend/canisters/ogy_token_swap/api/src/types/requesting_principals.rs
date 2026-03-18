@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
 use candid::Principal;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 use crate::updates::request_deposit_account::Response;
 

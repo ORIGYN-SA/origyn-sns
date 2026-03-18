@@ -1,10 +1,9 @@
-use canister_tracing_macros::trace;
+use crate::{guards::caller_is_authorised_principal, state::mutate_state};
+use bity_ic_canister_tracing_macros::trace;
 pub use collection_index_api::update_collection::{
-    Args as UpdateCollectionArgs,
-    Response as UpdateCollectionResponse,
+    Args as UpdateCollectionArgs, Response as UpdateCollectionResponse,
 };
-use ic_cdk::{ query, update };
-use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
+use ic_cdk::{query, update};
 
 #[update(guard = "caller_is_authorised_principal")]
 #[trace]
@@ -13,7 +12,7 @@ pub fn update_collection(args: UpdateCollectionArgs) -> UpdateCollectionResponse
         state.data.collections.update_collection(
             args.collection_canister_id,
             args.category_name,
-            args.locked_value_usd
+            args.locked_value_usd,
         )
     })
 }

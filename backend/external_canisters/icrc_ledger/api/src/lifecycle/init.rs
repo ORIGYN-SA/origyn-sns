@@ -1,7 +1,7 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use icrc_ledger_types::{
     icrc::generic_metadata_value::MetadataValue,
-    icrc1::{ account::Account, transfer::NumTokens },
+    icrc1::{account::Account, transfer::NumTokens},
 };
 
 #[derive(CandidType)]
@@ -13,6 +13,7 @@ pub struct InitArgs {
     pub metadata: Vec<(String, MetadataValue)>,
     pub initial_balances: Vec<(Account, NumTokens)>,
     pub archive_options: ArchiveOptions,
+    pub fee_collector_account: Option<Account>,
 }
 
 #[derive(CandidType)]

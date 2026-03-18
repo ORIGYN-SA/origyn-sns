@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./Button.module.css";
 
-const Button = ({ text, className, url, onClick }) => {
+const Button = ({ text, className, url, onClick, download }) => {
+  const isInternal = typeof url === "string" && url.startsWith("/");
   return (
     <div className={`${styles.buttonWrapper} ${className || ""}`}>
       <a
         href={url}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(isInternal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+        {...(download ? { download: typeof download === "string" ? download : "" } : {})}
         className={styles.button}
         onClick={onClick}
       >
