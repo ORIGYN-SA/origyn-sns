@@ -1,11 +1,12 @@
 use super::setup_rewards::setup_rewards_canister;
-use crate::sns_test_env::sns_test_env::SnsTestEnv;
-use crate::sns_test_env::utils::generate_5y_neuron_data;
 use crate::client::icrc1::client::transfer;
-use crate::setup::setup_ledger::setup_ledgers;
+use crate::sns_test_env::sns_test_env::SnsTestEnv;
+use crate::sns_test_env::setup_ledger::setup_ledgers;
+use crate::sns_test_env::utils::generate_5y_neuron_data;
 use crate::{
     // client::icrc1::client::transfer, sns_rewards_suite::setup::setup_ledger::setup_ledgers,
-    utils::random_principal, wasms,
+    utils::random_principal,
+    wasms,
 };
 use bity_ic_canister_time::HOUR_IN_MS;
 use candid::{encode_one, Nat, Principal};

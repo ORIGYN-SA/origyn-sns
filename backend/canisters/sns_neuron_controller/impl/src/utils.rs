@@ -209,7 +209,6 @@ pub async fn sns_rewards_fetch_neuron_reward_balance(
         }
     }
 }
-
 // NOTE: the following function calculates the general rewards as sum of all neuron rewards (bigger than the fee).
 // If one of the rewards cannot be fetched, the general reward is calculated anyway, but it's
 // defined as RewardSumResult::Partial
@@ -218,9 +217,14 @@ pub async fn sns_rewards_calculate_available_rewards(
     sns_rewards_canister_id: Principal,
     sns_ledger_canister_id: Principal,
 ) -> RewardSumResult {
+    ic_cdk::println!("[REWARD-CALC] Starting calculation for {} neurons...", neurons.len());
+
+    let fee = ic_cdk::println!("[REWARD-CALC] Fetching fee from ledger {}...", sns_ledger_canister_id);
     let fee = icrc_ledger_canister_c2c_client::icrc1_fee(sns_ledger_canister_id)
         .await
         .unwrap_or_default();
+    
+    ic_cdk::println!("[REWARD-CALC] Current Ledger Fee: {}", fee);
 
     let futures: Vec<_> = neurons
         .iter()
@@ -235,38 +239,56 @@ pub async fn sns_rewards_calculate_available_rewards(
         })
         .collect();
 
+    let total_futures = futures.len();
+    ic_cdk::println!("[REWARD-CALC] Triggering {} balance queries...", total_futures);
+
     let results = join_all(futures).await;
 
     let mut available_rewards_amount: Nat = Nat::from(0u64);
     let mut error_messages = Vec::new();
+    let mut success_count = 0;
+    let mut ignored_count = 0;
+
     for result in results {
         match result {
             Ok(reward) => {
+                success_count += 1;
                 if reward > fee {
-                    available_rewards_amount += reward;
+                    available_rewards_amount += reward.clone();
+                } else {
+                    ignored_count += 1;
+                    // Log small balances if they are above 0 but below the fee
+                    if reward > 0_u64 {
+                        ic_cdk::println!("[REWARD-CALC] Reward {} is <= fee {}; ignoring.", reward, fee);
+                    }
                 }
             }
             Err(error) => {
-                error!("Failed to fetch neuron reward balance: {error}");
+                let msg = format!("Failed to fetch neuron reward balance: {error}");
+                ic_cdk::println!("[REWARD-CALC] [ERR] {}", msg);
+                error!("{}", msg);
                 error_messages.push(error);
             }
         }
     }
 
+    ic_cdk::println!(
+        "[REWARD-CALC] Summary: Success: {}, Ignored (below fee): {}, Errors: {}, Total Accrued: {}", 
+        success_count, ignored_count, error_messages.len(), available_rewards_amount
+    );
+
     if error_messages.is_empty() {
+        ic_cdk::println!("[REWARD-CALC] Status: FULL (All balances retrieved)");
         info!("Successfully got available rewards amount");
         RewardSumResult::Full(available_rewards_amount)
     } else {
         let error_message = error_messages.join("\n");
-        // NOTE: uncomment to be able to debug the errors
-        // error!(
-        //     "Failed to get available rewards amount: {:?}",
-        //     error_message
-        // );
         if error_messages.len() >= neurons.len() {
+            ic_cdk::println!("[REWARD-CALC] Status: EMPTY (All {} queries failed)", neurons.len());
             error!("Failed to get ALL neurons available rewards amount");
             RewardSumResult::Empty
         } else {
+            ic_cdk::println!("[REWARD-CALC] Status: PARTIAL ({} of {} failed)", error_messages.len(), neurons.len());
             error!("Failed to get SOME neurons available rewards amount");
             RewardSumResult::Partial(available_rewards_amount, error_message)
         }

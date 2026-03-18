@@ -112,7 +112,7 @@ impl TestEnv {
             canister_id,
             self.get_ledger_canister_id(TokenSymbol::ICP).unwrap(),
             self.get_ledger_canister_id(TokenSymbol::OGY).unwrap(),
-            self.get_ledger_canister_id(TokenSymbol::OGY).unwrap(),
+            self.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap(),
             sns_gov_canister_id,
             &self.controller,
         )
@@ -262,7 +262,7 @@ impl TestEnvBuilder {
                         &config.neurons,
                         config.initial_balances,
                     );
-                    tokens.push(TokenSymbol::OGY);
+                    tokens.push(TokenSymbol::GOLDAO);
                     sns
                 }
                 SnsProject::Wtn => {
@@ -272,7 +272,7 @@ impl TestEnvBuilder {
                         &config.neurons,
                         config.initial_balances,
                     );
-                    tokens.push(TokenSymbol::OGY);
+                    tokens.push(TokenSymbol::WTN);
                     sns
                 }
             };

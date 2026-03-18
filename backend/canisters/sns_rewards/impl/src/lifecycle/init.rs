@@ -24,8 +24,8 @@ fn init(args: Args) {
             // use staging canister ids
             if init_args.test_mode {
                 let icp_ledger_canister_id = init_args.icp_ledger_canister_id;
-                let ogy_ledger_canister_id = init_args.ogy_ledger_canister_id;
-                let goldao_ledger_canister_id = init_args.sns_ledger_canister_id;
+                let ogy_ledger_canister_id = init_args.sns_ledger_canister_id;
+                let goldao_ledger_canister_id = init_args.goldao_ledger_canister_id;
 
                 data.tokens.insert(
                     TokenSymbol::ICP,

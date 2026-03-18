@@ -53,6 +53,7 @@ fn test_process_ogy_neurons_happy_path() {
         300_000_000_000_000_u64,
     )
     .unwrap();
+    println!("neuron_account: {:?} {:?}", neuron_account.owner.to_text(), neuron_account.subaccount);
 
     let initial_neuron_rewards_balance = balance_of(
         &mut test_env.get_pic(),
@@ -103,3 +104,6 @@ fn test_process_ogy_neurons_happy_path() {
         initial_neuron_rewards_balance - Nat::from(2u32 * 200_000u32)
     );
 }
+
+
+// 2021-05-06 19:17:25.000000032 UTC: [Canister 7uieb-cx777-77776-qaaaq-cai] Neurons:"lnxxh-yaaaa-aaaaq-aadha-cai" [Neuron { id: Some(NeuronId { id: [175, 85, 112, 245, 161, 129, 11, 122, 247, 140, 175, 75, 199, 10, 102, 15, 13, 245, 30, 66, 186, 249, 29, 77, 229, 178, 50, 141, 224, 232, 61, 252] }), permissions: [NeuronPermission { principal: Some(Principal { len: 10, bytes: [255, 255, 255, 255, 255, 208, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }), permission_type: [1, 2, 3, 4, 5, 6, 7, 8, 9] }], cached_neuron_stake_e8s: 3000000000000, neuron_fees_e8s: 0, created_timestamp_seconds: 1713271942, aging_since_timestamp_seconds: 1713271942, followees: {}, maturity_e8s_equivalent: 100000, voting_power_percentage_multiplier: 1, source_nns_neuron_id: None, staked_maturity_e8s_equivalent: Some(100000), auto_stake_maturity: Some(false), vesting_period_seconds: Some(100000), disburse_maturity_in_progress: [], dissolve_state: Some(WhenDissolvedTimestampSeconds(100000000000)) }]

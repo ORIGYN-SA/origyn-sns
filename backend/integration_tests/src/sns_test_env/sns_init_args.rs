@@ -528,6 +528,147 @@ pub struct CanisterIds {
     pub dapp_canisters: HashMap<String, Principal>,
 }
 
+use crate::client::pocket::create_canister_with_id;
+use pocket_ic::PocketIc;
+
+impl CanisterIds {
+    pub fn goldao(pic: &PocketIc, controller: Principal) -> Self {
+        let governance_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai").unwrap(),
+        );
+        let ledger_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("tyyy3-4aaaa-aaaaq-aab7a-cai").unwrap(),
+        );
+        let root_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("tw2vt-hqaaa-aaaaq-aab6a-cai").unwrap(),
+        );
+        let index_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("efv5g-kqaaa-aaaaq-aacaa-cai").unwrap(),
+        );
+        let swap_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("t7z6p-ryaaa-aaaaq-aab7q-cai").unwrap(),
+        );
+
+        {
+            pic.add_cycles(governance_id, 1_000_000_000_000);
+            pic.add_cycles(root_id, 1_000_000_000_000);
+            pic.add_cycles(ledger_id, 1_000_000_000_000);
+            pic.add_cycles(index_id, 1_000_000_000_000);
+            pic.add_cycles(swap_id, 1_000_000_000_000);
+        }
+
+        Self {
+            governance_id,
+            ledger_id,
+            root_id,
+            index_id,
+            swap_id,
+            dapp_canisters: HashMap::new(),
+        }
+    }
+
+    pub fn ogy(pic: &PocketIc, controller: Principal) -> Self {
+        let governance_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("lnxxh-yaaaa-aaaaq-aadha-cai").unwrap(),
+        );
+        let ledger_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("lkwrt-vyaaa-aaaaq-aadhq-cai").unwrap(),
+        );
+        let root_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("leu43-oiaaa-aaaaq-aadgq-cai").unwrap(),
+        );
+        let index_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("jqkzp-liaaa-aaaaq-aadiq-cai").unwrap(),
+        );
+        let swap_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("jxl73-gqaaa-aaaaq-aadia-cai").unwrap(),
+        );
+
+        {
+            pic.add_cycles(governance_id, 1_000_000_000_000);
+            pic.add_cycles(root_id, 1_000_000_000_000);
+            pic.add_cycles(ledger_id, 1_000_000_000_000);
+            pic.add_cycles(index_id, 1_000_000_000_000);
+            pic.add_cycles(swap_id, 1_000_000_000_000);
+        }
+
+        Self {
+            governance_id,
+            ledger_id,
+            root_id,
+            index_id,
+            swap_id,
+            dapp_canisters: HashMap::new(),
+        }
+    }
+
+    pub fn wtn(pic: &PocketIc, controller: Principal) -> Self {
+        let governance_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("jfnic-kaaaa-aaaaq-aadla-cai").unwrap(),
+        );
+        let ledger_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("jcmow-hyaaa-aaaaq-aadlq-cai").unwrap(),
+        );
+        let root_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("jmod6-4iaaa-aaaaq-aadkq-cai").unwrap(),
+        );
+        let index_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("iidmm-fiaaa-aaaaq-aadmq-cai").unwrap(),
+        );
+        let swap_id = create_canister_with_id(
+            pic,
+            controller,
+            Principal::from_text("ipcky-iqaaa-aaaaq-aadma-cai").unwrap(),
+        );
+
+        {
+            pic.add_cycles(governance_id, 1_000_000_000_000);
+            pic.add_cycles(root_id, 1_000_000_000_000);
+            pic.add_cycles(ledger_id, 1_000_000_000_000);
+            pic.add_cycles(index_id, 1_000_000_000_000);
+            pic.add_cycles(swap_id, 1_000_000_000_000);
+        }
+
+
+        Self {
+            governance_id,
+            ledger_id,
+            root_id,
+            index_id,
+            swap_id,
+            dapp_canisters: HashMap::new(),
+        }
+    }
+}
+
 use sns_governance_canister::types::{
     governance::SnsMetadata, DefaultFollowees, NervousSystemParameters, NeuronPermissionList,
     VotingRewardsParameters,

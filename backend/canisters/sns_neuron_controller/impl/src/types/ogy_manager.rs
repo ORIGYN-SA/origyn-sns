@@ -64,15 +64,20 @@ impl NeuronRewardsManager for OgyManager {
         self.ogy_rewards_threshold.clone()
     }
 
-    async fn get_available_rewards(&self) -> Nat {
+async fn get_available_rewards(&self) -> Nat {
         let neurons = self.get_neurons().as_ref();
-        sns_rewards_calculate_available_rewards(
+        ic_cdk::println!("[OGY-MANAGER] Calculating rewards for {} neurons", neurons.len());
+        
+        let rewards = sns_rewards_calculate_available_rewards(
             neurons,
             self.get_sns_rewards_canister_id(),
             self.get_sns_ledger_canister_id(),
         )
         .await
-        .get_internal()
+        .get_internal();
+        
+        ic_cdk::println!("[OGY-MANAGER] Total available rewards: {}", rewards);
+        rewards
     }
 
     async fn claim_rewards(&self) -> ClaimRewardResult {

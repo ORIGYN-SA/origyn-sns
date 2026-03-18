@@ -12,7 +12,7 @@ pub fn setup(
     cansiter_id: Principal,
     icp_ledger_canister_id: Principal,
     sns_ledger_canister_id: Principal,
-    ogy_ledger_canister_id: Principal,
+    goldao_ledger_canister_id: Principal,
     sns_canister_id: Principal,
     controller: &Principal,
 ) -> Principal {
@@ -35,7 +35,7 @@ pub fn setup(
         commit_hash: "Test".to_string(),
         icp_ledger_canister_id,
         sns_ledger_canister_id,
-        ogy_ledger_canister_id,
+        goldao_ledger_canister_id,
         sns_gov_canister_id: sns_canister_id.clone(),
     });
     pic.install_canister(

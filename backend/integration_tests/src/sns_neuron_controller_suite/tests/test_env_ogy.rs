@@ -1,8 +1,8 @@
-use crate::client::sns_neuron_controller;
-use crate::setup::setup_sns::generate_neuron_data;
+
 use crate::sns_test_env::sns_test_env::SnsProject;
 use crate::test_env::test_env_builder::SnsConfig;
 use crate::test_env::test_env_builder::TestEnvBuilder;
+use crate::sns_test_env::utils::generate_neuron_data;
 use crate::{
     client::icrc1::client::{balance_of, transfer},
     utils::tick_n_blocks,
@@ -13,7 +13,7 @@ use icrc_ledger_types::icrc1::account::Account;
 use std::time::Duration;
 
 #[test]
-fn test_process_goldao_neurons_happy_path() {
+fn test_process_ogy_neurons_happy_path() {
     let (ogy_neuron_data, _) = generate_neuron_data(
         0,
         1,
@@ -32,7 +32,6 @@ fn test_process_goldao_neurons_happy_path() {
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(ogy_neuron_data))
         .add_sns(SnsConfig::new(SnsProject::GoldDao).with_neurons(goldao_neuron_data))
-        .add_token_ledger(&types::TokenSymbol::OGY)
         .add_token_ledger(&types::TokenSymbol::GLDT)
         .add_token_ledger(&types::TokenSymbol::ICP)
         .add_token_ledger(&types::TokenSymbol::WTN)
@@ -53,19 +52,19 @@ fn test_process_goldao_neurons_happy_path() {
         Some(rewards_destination),
         env.get_sns(SnsProject::Ogy).test_env.governance_id,
         env.get_sns(SnsProject::Ogy).test_env.ledger_id,
-        goldao_rewards_canister_id,
+        ogy_rewards_canister_id,
         env.get_sns(SnsProject::GoldDao).test_env.governance_id,
         env.get_sns(SnsProject::GoldDao).test_env.ledger_id,
-        ogy_rewards_canister_id,
+        goldao_rewards_canister_id,
     );
 
-    let goldao_ledger_canister_id = env
-        .get_ledger_canister_id(types::TokenSymbol::GOLDAO)
+    let ogy_ledger_canister_id = env
+        .get_ledger_canister_id(types::TokenSymbol::OGY)
         .unwrap();
 
     let initial_sns_rewards_balance = balance_of(
         &pic,
-        goldao_ledger_canister_id,
+        ogy_ledger_canister_id,
         Account {
             owner: rewards_destination,
             subaccount: None,
@@ -77,7 +76,7 @@ fn test_process_goldao_neurons_happy_path() {
     );
 
     let neuron = env
-        .get_sns(SnsProject::GoldDao)
+        .get_sns(SnsProject::Ogy)
         .neuron_data
         .get(&0usize)
         .unwrap()
@@ -87,24 +86,28 @@ fn test_process_goldao_neurons_happy_path() {
     assert!(neuron.permissions.get(0).unwrap().principal == Some(sns_neuron_controller_id)); // double check the data correct (sns_neuron_controller_id's hotkey is on the first neuron's permissions list)
 
     let neuron_account = Account {
-        owner: goldao_rewards_canister_id,
+        owner: ogy_rewards_canister_id,
         subaccount: Some(neuron_id.clone().into()),
     };
+
+    println!("neuron_account: {:?}", neuron_account);
+    println!("sns_neuron_controller_id: {:?}", sns_neuron_controller_id);
 
     // Transfer "rewards" to the neuron
     transfer(
         &pic,
-        // env.get_sns(SnsProject::GoldDao).test_env.governance_id,
-        env.controller,
-        goldao_ledger_canister_id,
+        env.get_sns(SnsProject::Ogy).test_env.governance_id,
+        // env.controller,
+        ogy_ledger_canister_id,
         None,
         neuron_account,
         300_000_000_000_000_u64,
     )
     .unwrap();
+    tick_n_blocks(&pic, 1);
 
     let initial_neuron_rewards_balance =
-        balance_of(&pic, goldao_ledger_canister_id, neuron_account);
+        balance_of(&pic, ogy_ledger_canister_id, neuron_account);
     println!(
         "initial_neuron_rewards_balance: {:?}",
         initial_neuron_rewards_balance
@@ -115,7 +118,7 @@ fn test_process_goldao_neurons_happy_path() {
 
     let current_sns_rewards_balance = balance_of(
         &pic,
-        goldao_ledger_canister_id,
+        ogy_ledger_canister_id,
         Account {
             owner: rewards_destination,
             subaccount: None,
@@ -127,7 +130,7 @@ fn test_process_goldao_neurons_happy_path() {
     );
 
     let current_neuron_rewards_balance =
-        balance_of(&pic, goldao_ledger_canister_id, neuron_account);
+        balance_of(&pic, ogy_ledger_canister_id, neuron_account);
     println!(
         "current_neuron_rewards_balance: {:?}",
         current_neuron_rewards_balance
@@ -141,6 +144,6 @@ fn test_process_goldao_neurons_happy_path() {
     // Should be the initial balance - 2x fees as two transactions happen in the claiming and distribution process.
     assert_eq!(
         current_sns_rewards_balance,
-        initial_neuron_rewards_balance - Nat::from(2u32 * 100_000u32)
+        initial_neuron_rewards_balance - Nat::from(2u32 * 200_000u32)
     );
 }
