@@ -167,7 +167,7 @@ integration tests:
   stage: integration_testing
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs: ["ogy_token_swap test build", "ogy_token_swap tests", "canister_jobs test build", "canister_jobs tests", "collection_index test build", "collection_index tests", "sns_rewards test build", "sns_rewards tests", "buyback_burn test build", "buyback_burn tests", "sns_neuron_controller test build", "buyback_burn test build", "sns_neuron_controller tests"]
+      needs: ["ogy_token_swap staging build", "ogy_token_swap tests", "canister_jobs staging build", "canister_jobs tests", "collection_index staging build", "collection_index tests", "sns_rewards staging build", "sns_rewards tests", "buyback_burn staging build", "buyback_burn tests", "sns_neuron_controller staging build", "buyback_burn staging build", "sns_neuron_controller tests"]
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       needs: ["ogy_token_swap canister build", "canister_jobs canister build", "collection_index canister build", "sns_rewards canister build", "buyback_burn canister build", "sns_neuron_controller canister build"]
     - if: $CI_OPEN_MERGE_REQUESTS

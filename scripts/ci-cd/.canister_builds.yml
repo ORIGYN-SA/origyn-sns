@@ -63,3 +63,4 @@ $[[ inputs.src-folder ]] canister build:
       - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 6 months
+
