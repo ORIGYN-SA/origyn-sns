@@ -161,41 +161,6 @@ rust lint:
 # See includes above for frontend builds
 
 ################################################################################
-# Integration tests
-################################################################################
-integration tests:
-  stage: integration_testing
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      needs: ["ogy_token_swap integration-test build", "ogy_token_swap tests", "canister_jobs integration-test build", "canister_jobs tests", "collection_index integration-test build", "collection_index tests", "sns_rewards integration-test build", "sns_rewards tests", "buyback_burn integration-test build", "buyback_burn tests", "sns_neuron_controller integration-test build", "sns_neuron_controller tests"]
-    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-      needs: ["ogy_token_swap canister build", "canister_jobs canister build", "collection_index canister build", "sns_rewards canister build", "buyback_burn canister build", "sns_neuron_controller canister build"]
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-  extends: .rust template
-  tags:
-    - dind
-  services:
-    - docker:dind
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
-  script:
-    - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/3.0.1/pocket-ic-x86_64-linux.gz
-    - gzip -d pocket-ic.gz
-    - chmod +x ./pocket-ic
-    - mv ./pocket-ic ./backend/integration_testing/pocket-ic
-    - ulimit -n 102400
-    - ulimit -f 1024000
-    - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
-  coverage: /^\d+.\d+% coverage/
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: cobertura.xml
-
-################################################################################
 # Deployments
 ################################################################################
 check canister ids:
