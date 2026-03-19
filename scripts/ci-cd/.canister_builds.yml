@@ -29,7 +29,7 @@ $[[ inputs.src-folder ]] staging build:
       allow_failure: true
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
-    - scripts/generate_did.sh $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
     - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
     - ic-wasm backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm info
   artifacts:
@@ -46,7 +46,7 @@ $[[ inputs.src-folder ]] production build:
     - if: $CI_COMMIT_REF_NAME =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+(-reinstall)?$/'
   script:
     - scripts/build-canister.sh --wasmonly $[[ inputs.src-folder ]]
-    - scripts/generate_did.sh $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
     - scripts/build-canister.sh --checksum $[[ inputs.src-folder ]]
     - ic-wasm backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm info
   artifacts:
@@ -76,7 +76,7 @@ $[[ inputs.src-folder ]] integration-test build:
   extends: .rust template
   script:
     - scripts/build-canister.sh -it $[[ inputs.src-folder ]]
-    - scripts/generate_did.sh $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
   artifacts:
     name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
     paths:
