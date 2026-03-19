@@ -66,7 +66,7 @@ $[[ inputs.src-folder ]] canister build:
 
 
 $[[ inputs.src-folder ]] integration-test build:
-  stage: integration_tests
+  stage: integration_testing
   rules:
     # This will always run when any backend canister is released. Doesn't need to be this canister
     - if: >
