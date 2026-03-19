@@ -1,20 +1,15 @@
+use std::collections::BTreeMap;
 use bity_ic_canister_time::run_now_then_interval;
-use super_stats_v3_api::{
-    account_tree::HistoryData,
-    stats::queries::{
-        get_account_history::GetAccountHistoryArgs,
-        get_principal_history::GetPrincipalHistoryArgs,
-    },
-};
+use token_metrics_api::types::ledger_indexer::{AccountDayKey, HistoryData};
 use std::time::Duration;
-use tracing::error;
+use tracing::{info, warn};
 use types::Milliseconds;
-use crate::state::{ mutate_state, read_state };
+use crate::state::{mutate_state, read_state};
 
 const SYNC_GOVERNANCE_HISTORY_INTERVAL: Milliseconds = 12 * 3_600 * 1_000;
 
 pub fn start_job() {
-    run_now_then_interval(Duration::from_millis(SYNC_GOVERNANCE_HISTORY_INTERVAL), run)
+    run_now_then_interval(Duration::from_millis(SYNC_GOVERNANCE_HISTORY_INTERVAL), run);
 }
 
 pub fn run() {
@@ -22,59 +17,78 @@ pub fn run() {
 }
 
 pub async fn sync_governance_history() {
-    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
     let sns_governance_canister_id = read_state(|state| state.data.sns_governance_canister);
     let treasury_account = read_state(|state| state.data.treasury_account.clone());
 
-    let principal_history_args = GetPrincipalHistoryArgs {
-        account: sns_governance_canister_id.to_string(),
-        days: 2000,
-    };
+    let principal_history = get_local_principal_history(&sns_governance_canister_id.to_string());
+    let treasury_history = get_local_account_history(&treasury_account);
 
-    let treasury_history_args = GetAccountHistoryArgs {
-        account: treasury_account.to_string(),
-        days: 2000,
-    };
-
-    match
-        super_stats_v3_c2c_client::get_principal_history(
-            super_stats_canister_id,
-            &principal_history_args
-        ).await
-    {
-        Ok(principal_history) => {
-            match
-                super_stats_v3_c2c_client::get_account_history(
-                    super_stats_canister_id,
-                    &treasury_history_args
-                ).await
-            {
-                Ok(treasury_history) => {
-                    mutate_state(|state| {
-                        state.data.gov_stake_history = balance_difference(
-                            principal_history,
-                            treasury_history
-                        );
-                    });
-                    // We want to sync voting stats now because we rely on stake history
-                    sync_voting_stats_job();
-                }
-                Err(err) => {
-                    let message = format!("{err:?}");
-                    error!(?message, "Error while getting the treasury history");
-                }
-            }
-        }
-        Err(err) => {
-            let message = format!("{err:?}");
-            error!(?message, "Error while getting the governance principal history");
-        }
+    if principal_history.is_empty() || treasury_history.is_empty() {
+        warn!("Ledger indexer not yet populated — skipping governance history sync");
+        return;
     }
+
+    mutate_state(|state| {
+        state.data.gov_stake_history = balance_difference(
+            principal_history,
+            treasury_history,
+        );
+    });
+    // We want to sync voting stats now because we rely on stake history
+    sync_voting_stats_job();
+}
+
+/// Read principal history via range query over all subaccounts of the principal.
+fn get_local_principal_history(account: &str) -> Vec<(u64, HistoryData)> {
+    use crate::ledger_indexer::state::with_history;
+    use crate::ledger_indexer::utils::{principal_account_range, text_to_principal};
+
+    let principal = match text_to_principal(account) {
+        Some(p) => p,
+        None => return Vec::new(),
+    };
+
+    let (start_acct, end_acct) = principal_account_range(principal);
+    let start_key = AccountDayKey { account: start_acct, day: 0 };
+    let end_key = AccountDayKey { account: end_acct, day: u64::MAX };
+
+    with_history(|m| {
+        let mut by_day: BTreeMap<u64, HistoryData> = BTreeMap::new();
+        for entry in m.range(start_key..=end_key) {
+            let k = entry.key();
+            let v = entry.value();
+            by_day
+                .entry(k.day)
+                .and_modify(|agg| *agg = agg.clone() + v.clone())
+                .or_insert(v);
+        }
+        by_day.into_iter().collect()
+    })
+}
+
+/// Read account history directly from the local ledger indexer's stable memory.
+fn get_local_account_history(account: &str) -> Vec<(u64, HistoryData)> {
+    use crate::ledger_indexer::state::with_history;
+    use crate::ledger_indexer::utils::text_to_account;
+
+    let acct = match text_to_account(account) {
+        Some(a) => a,
+        None => return Vec::new(),
+    };
+
+    let start_key = AccountDayKey { account: acct, day: 0 };
+    let end_key = AccountDayKey { account: acct, day: u64::MAX };
+
+    with_history(|m| {
+        m.range(start_key..=end_key)
+            .map(|entry| (entry.key().day, entry.value()))
+            .collect()
+    })
 }
 
 fn balance_difference(
     vec1: Vec<(u64, HistoryData)>,
-    vec2: Vec<(u64, HistoryData)>
+    vec2: Vec<(u64, HistoryData)>,
 ) -> Vec<(u64, HistoryData)> {
     let mut result: Vec<(u64, HistoryData)> = Vec::new();
     for (index, item) in vec1.iter().enumerate() {

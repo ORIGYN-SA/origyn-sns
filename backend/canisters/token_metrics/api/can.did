@@ -3,6 +3,16 @@ type ActiveUsers = record {
   active_principals_count : nat64;
   active_accounts_count : nat64;
 };
+type ActivitySnapshot = record {
+  principals_active_during_snapshot : nat64;
+  accounts_active_during_snapshot : nat64;
+  total_unique_accounts : nat64;
+  end_time : nat64;
+  start_time : nat64;
+  total_unique_principals : nat64;
+};
+type GetAccountHistoryArgs = record { days : nat64; account : text };
+type GetAccountHoldersArgs = record { offset : nat64; limit : nat64 };
 type GetHoldersArgs = record {
   offset : nat64;
   limit : nat64;
@@ -14,6 +24,7 @@ type GetHoldersResponse = record {
   limit : nat64;
   total_count : nat64;
 };
+type GetPrincipalHoldersArgs = record { offset : nat64; limit : nat64 };
 type GetVotingParticipationHistoryArgs = record { days : nat64 };
 type GetVotingPowerRatioHistory = record { days : nat64 };
 type GovernanceStats = record {
@@ -23,15 +34,16 @@ type GovernanceStats = record {
   total_unlocked : nat;
 };
 type HistoryData = record { balance : nat };
+type HolderBalanceResponse = record { data : Overview; holder : text };
 type InitArgs = record {
   test_mode : bool;
   foundation_accounts : vec text;
   treasury_account : text;
   sns_rewards_canister_id : principal;
   ogy_new_ledger_canister_id : principal;
-  super_stats_canister_id : principal;
   sns_governance_canister_id : principal;
 };
+type InitLedgerArgs = record { target : TargetArgs };
 type LockedNeuronsAmount = record {
   one_year : nat64;
   two_years : nat64;
@@ -51,6 +63,16 @@ type Overview = record {
   received : record { nat32; nat };
   max_balance : nat;
 };
+type ProcessedTX = record {
+  to_account : text;
+  tx_value : nat;
+  from_account : text;
+  block : nat64;
+  tx_fee : opt nat;
+  tx_time : nat64;
+  tx_type : text;
+  spender : opt text;
+};
 type ProposalsMetrics = record {
   daily_voting_rewards : nat64;
   reward_base_current_year : nat64;
@@ -59,26 +81,91 @@ type ProposalsMetrics = record {
   total_voting_power : nat64;
   total_proposals : nat64;
 };
+type TargetArgs = record {
+  daily_size : nat8;
+  target_ledger : text;
+  hourly_size : nat8;
+};
+type TimeChunkStats = record {
+  mint_count : nat64;
+  transfer_count : nat64;
+  end_time : nat64;
+  start_time : nat64;
+  burn_count : nat64;
+  approve_count : nat64;
+  total_count : nat64;
+};
+type TimeStats = record {
+  top_transfers : vec ProcessedTX;
+  total_unique_accounts : nat64;
+  top_burns : vec ProcessedTX;
+  mint_stats : TotCntAvg;
+  total_transaction_average : float64;
+  most_active_principals : vec record { text; nat64 };
+  transfer_stats : TotCntAvg;
+  top_mints : vec ProcessedTX;
+  total_transaction_value : nat;
+  most_active_accounts : vec record { text; nat64 };
+  count_over_time : vec TimeChunkStats;
+  total_transaction_count : nat;
+  total_unique_principals : nat64;
+  burn_stats : TotCntAvg;
+  approve_stats : TotCntAvg;
+};
 type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
+type TotCntAvg = record { count : nat; average : float64; total_value : nat };
+type TotalHolderResponse = record {
+  total_accounts : nat64;
+  total_principals : nat64;
+};
 type WalletOverview = record {
   total : nat64;
   ledger : Overview;
   governance : GovernanceStats;
 };
+type WorkingStats = record {
+  next_block : nat64;
+  last_update_time : nat64;
+  ledger_tip_of_chain : nat64;
+  timer_active : bool;
+  is_upto_date : bool;
+  directory_count : nat64;
+  is_busy : bool;
+};
 service : (InitArgs) -> {
+  get_account_history : (GetAccountHistoryArgs) -> (
+      vec record { nat64; HistoryData },
+    ) query;
+  get_account_holders : (GetAccountHoldersArgs) -> (vec HolderBalanceResponse) query;
+  get_account_overview : (text) -> (opt Overview) query;
   get_active_users_count : () -> (ActiveUsers) query;
+  get_activity_stats : (nat64) -> (vec ActivitySnapshot) query;
   get_all_neuron_owners : () -> (vec principal) query;
+  get_daily_stats : () -> (TimeStats) query;
   get_foundation_assets : () -> (vec record { text; WalletOverview }) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
+  get_hourly_stats : () -> (TimeStats) query;
   get_locked_neurons_period : () -> (LockedNeuronsPeriodResponse) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
+  get_principal_history : (GetAccountHistoryArgs) -> (
+      vec record { nat64; HistoryData },
+    ) query;
+  get_principal_holders : (GetPrincipalHoldersArgs) -> (vec HolderBalanceResponse) query;
+  get_principal_overview : (text) -> (opt Overview) query;
   get_proposals_metrics : () -> (ProposalsMetrics) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
+  get_top_account_holders : (nat64) -> (vec HolderBalanceResponse) query;
+  get_top_principal_holders : (nat64) -> (vec HolderBalanceResponse) query;
+  get_total_holders : () -> (TotalHolderResponse) query;
   get_voting_participation_history : (GetVotingParticipationHistoryArgs) -> (
       vec record { nat64; nat64 },
     ) query;
   get_voting_power_ratio_history : (GetVotingPowerRatioHistory) -> (
       vec record { nat64; nat64 },
     ) query;
+  get_working_stats : () -> (WorkingStats) query;
+  init_target_ledger : (InitLedgerArgs) -> (text);
+  start_processing_timer : (nat64) -> (text);
+  stop_all_timers : () -> (text);
 }

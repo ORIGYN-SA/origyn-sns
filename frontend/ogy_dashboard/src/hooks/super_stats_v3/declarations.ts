@@ -21,16 +21,11 @@ export interface HolderBalanceResponse {
   data: Overview;
   holder: string;
 }
-export type IndexerType =
-  | { DfinityIcrc2: null }
-  | { DfinityIcrc3: null }
-  | { DfinityIcp: null };
 export interface InitArgs {
   admin: string;
   test_mode: boolean;
 }
 export interface InitLedgerArgs {
-  index_type: IndexerType;
   target: TargetArgs;
 }
 export interface LogEntry {
@@ -54,7 +49,6 @@ export interface Overview {
   max_balance: bigint;
 }
 export interface ProcessedTX {
-  hash: string;
   to_account: string;
   tx_value: bigint;
   from_account: string;

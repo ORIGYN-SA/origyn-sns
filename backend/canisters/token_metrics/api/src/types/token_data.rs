@@ -1,9 +1,10 @@
 use std::ops::Add;
 
-use candid::{ CandidType, Nat };
-use serde::{ Deserialize, Serialize };
-use super_stats_v3_api::account_tree::Overview as LedgerOverview;
+use candid::{CandidType, Nat};
+use serde::{Deserialize, Serialize};
 use utils::consts::E8S_PER_OGY;
+
+use super::ledger_indexer::Overview as LedgerOverview;
 
 #[derive(Serialize, Deserialize, Clone, Default, CandidType)]
 pub struct TokenSupplyData {

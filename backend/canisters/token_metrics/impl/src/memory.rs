@@ -1,9 +1,16 @@
 use ic_stable_structures::{
-    memory_manager::{ MemoryId, MemoryManager, VirtualMemory },
+    memory_manager::{MemoryId, MemoryManager, VirtualMemory},
     DefaultMemoryImpl,
 };
 
+// Memory region IDs
 const UPGRADES: MemoryId = MemoryId::new(0);
+pub const ACCOUNT_OVERVIEWS: MemoryId = MemoryId::new(1);
+pub const ACCOUNT_HISTORY: MemoryId = MemoryId::new(2);
+pub const ACCOUNT_HISTORY_CACHE: MemoryId = MemoryId::new(3);
+// Regions 4-8 reserved (previously used by principal maps and directory)
+pub const ACTIVITY_SNAPSHOTS: MemoryId = MemoryId::new(9);
+pub const TRANSACTION_CACHE: MemoryId = MemoryId::new(10);
 
 pub type VM = VirtualMemory<DefaultMemoryImpl>;
 
@@ -17,6 +24,6 @@ pub fn get_upgrades_memory() -> VM {
     get_memory(UPGRADES)
 }
 
-fn get_memory(id: MemoryId) -> VM {
+pub fn get_memory(id: MemoryId) -> VM {
     MEMORY_MANAGER.with(|m| m.get(id))
 }

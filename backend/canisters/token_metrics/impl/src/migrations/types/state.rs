@@ -2,7 +2,7 @@ use candid::Principal;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::NeuronId;
-use super_stats_v3_api::account_tree::HistoryData;
+use token_metrics_api::types::ledger_indexer::HistoryData;
 use std::collections::BTreeMap;
 use utils::env::CanisterEnv;
 

@@ -12,18 +12,6 @@
         "output": "backend/canisters/token_metrics/api/declarations"
       }
     },
-    "super_stats_v3": {
-      "type": "custom",
-      "candid": "backend/canisters/super_stats_v3/api/can.did",
-      "optimize": "cycles",
-      "package": "super_stats_v3",
-      "wasm": "backend/canisters/super_stats_v3/target/wasm32-unknown-unknown/release/super_stats_v3_canister.wasm.gz",
-      "declarations": {
-        "bindings": ["js", "did", "ts"],
-        "env_override": null,
-        "output": "backend/canisters/super_stats_v3/api/declarations"
-      }
-    },
     "ogy_token_swap": {
       "type": "custom",
       "candid": "backend/canisters/ogy_token_swap/api/can.did",

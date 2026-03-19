@@ -13,6 +13,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 candid = { workspace = true }
+minicbor = { workspace = true }
+num-traits = { workspace = true }
 bity-ic-canister-logger = { workspace = true }
 bity-ic-canister-state-macros = { workspace = true }
 bity-ic-canister-time = { workspace = true }
@@ -28,8 +30,6 @@ icrc-ledger-types = { workspace = true }
 ic-ledger-types = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serializer = { path = '../../../libraries/serializer' }
-super_stats_v3_c2c_client = { path = "../../../canisters/super_stats_v3/c2c_client" }
-super_stats_v3_api = { path = "../../../canisters/super_stats_v3/api" }
 anyhow = { workspace = true }
 bity-ic-types = { workspace = true }
 sns_governance_canister = { path = '../../../external_canisters/sns_governance/api' }

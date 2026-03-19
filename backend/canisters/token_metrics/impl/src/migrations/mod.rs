@@ -16,7 +16,6 @@ impl From<RuntimeStateV0> for RuntimeState {
                 sns_governance_canister: old_state.data.sns_governance_canister,
                 sns_ledger_canister: old_state.data.sns_ledger_canister,
                 sns_rewards_canister: old_state.data.sns_rewards_canister,
-                super_stats_canister: old_state.data.super_stats_canister,
                 treasury_account: old_state.data.treasury_account,
                 sync_info: old_state.data.sync_info,
                 principal_neurons: old_state.data.principal_neurons,
@@ -37,6 +36,7 @@ impl From<RuntimeStateV0> for RuntimeState {
                 voting_participation_history_calculations: old_state.data.voting_participation_history_calculations,
                 voting_power_ratio_history: old_state.data.voting_power_ratio_history,
                 active_users: old_state.data.active_users,
+                ledger_indexer: token_metrics_api::types::ledger_indexer::LedgerIndexerData::default(),
             },
         }
     }

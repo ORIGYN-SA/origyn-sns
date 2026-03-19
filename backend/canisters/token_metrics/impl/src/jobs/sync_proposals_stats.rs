@@ -12,7 +12,7 @@ const SYNC_PROPOSALS_STATS_INTERVAL: Milliseconds = 5 * 60 * 60 * 1_000;
 
 pub fn start_job() {
     debug!("Starting the proposals metrics sync job..");
-    run_now_then_interval(Duration::from_millis(SYNC_PROPOSALS_STATS_INTERVAL), run)
+    run_now_then_interval(Duration::from_millis(SYNC_PROPOSALS_STATS_INTERVAL), run);
 }
 
 pub fn run() {
@@ -263,7 +263,6 @@ mod tests {
     fn init_runtime_state() {
         let env = CanisterEnv::new(true, BuildVersion::default(), String::new());
         let data = Data::new(
-            CanisterId::anonymous(),
             CanisterId::anonymous(),
             CanisterId::anonymous(),
             CanisterId::anonymous(),

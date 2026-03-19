@@ -3,7 +3,7 @@ use bity_ic_canister_state_macros::canister_state;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{ Deserialize, Serialize };
 use sns_governance_canister::types::{ NeuronId, ProposalId };
-use super_stats_v3_api::account_tree::HistoryData;
+use token_metrics_api::types::ledger_indexer::HistoryData;
 use token_metrics_api::token_data::{
     ActiveUsers,
     DailyVotingMetrics,
@@ -16,6 +16,7 @@ use token_metrics_api::token_data::{
     VotingHistoryCalculations,
     WalletOverview,
 };
+use token_metrics_api::types::ledger_indexer::LedgerIndexerData;
 use std::collections::BTreeMap;
 use types::{ CanisterId, TimestampMillis };
 use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
@@ -40,7 +41,7 @@ impl RuntimeState {
                 now: self.env.now(),
                 test_mode: self.env.is_test_mode(),
                 memory_used: MemorySize::used(),
-                cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
+                cycles_balance_in_tc: self.env.cycles_balance_in_tc() as f64,
             },
             sync_info: self.data.sync_info.clone(),
             number_of_owners: self.data.principal_neurons.len(),
@@ -95,8 +96,6 @@ pub struct Data {
     pub sns_ledger_canister: Principal,
     /// SNS Rewards canister that distirbutes rewards
     pub sns_rewards_canister: Principal,
-    /// Super Stats canister that provides ledger stats
-    pub super_stats_canister: Principal,
     /// The account that holds the treasury
     pub treasury_account: String,
     /// Information about governance neurons sync
@@ -139,19 +138,19 @@ pub struct Data {
     pub voting_power_ratio_history: Vec<(u64, u64)>,
     /// Active users = users with > 0 OGY in their wallet
     pub active_users: ActiveUsers,
+    /// Ledger indexer config and stats (heap-resident; stable maps are separate)
+    pub ledger_indexer: LedgerIndexerData,
 }
 
 impl Data {
     pub fn new(
         ogy_new_ledger: CanisterId,
         sns_governance_canister_id: CanisterId,
-        super_stats_canister_id: CanisterId,
         sns_rewards_canister_id: CanisterId,
         treasury_account: String,
         foundation_accounts: Vec<String>
     ) -> Self {
         Self {
-            super_stats_canister: super_stats_canister_id,
             sns_governance_canister: sns_governance_canister_id,
             sns_ledger_canister: ogy_new_ledger,
             sns_rewards_canister: sns_rewards_canister_id,
@@ -177,6 +176,7 @@ impl Data {
             proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
             daily_voting_metrics: BTreeMap::new(),
             active_users: ActiveUsers::default(),
+            ledger_indexer: LedgerIndexerData::default(),
         }
     }
 

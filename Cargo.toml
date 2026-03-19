@@ -16,10 +16,10 @@ members = [
   "backend/canisters/sns_rewards/api",
   "backend/canisters/token_metrics/api",
   "backend/canisters/token_metrics/impl",
-  # super_stats_v3/impl commented out — being merged into token_metrics
-  "backend/canisters/super_stats_v3/api",
+  # super_stats_v3 fully deprecated — merged into token_metrics
+  # "backend/canisters/super_stats_v3/api",
   # "backend/canisters/super_stats_v3/impl",
-  "backend/canisters/super_stats_v3/c2c_client",
+  # "backend/canisters/super_stats_v3/c2c_client",
   "backend/external_canisters/icrc_ledger/api",
   "backend/external_canisters/icrc_ledger/c2c_client",
   "backend/external_canisters/ogy_legacy_ledger/api",

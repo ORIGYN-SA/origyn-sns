@@ -2,24 +2,21 @@ use bity_ic_canister_time::run_now_then_interval;
 use utils::principal::string_to_account;
 use std::collections::BTreeMap;
 use icrc_ledger_types::icrc1::account::Account;
-use super_stats_v3_api::account_tree::Overview as LedgerOverview;
-use super_stats_v3_api::{
-    stats::queries::get_account_holders::GetHoldersArgs as GetAccountHoldersArgs,
-    stats::queries::get_principal_holders::GetHoldersArgs as GetPrincipalHoldersArgs,
-};
-use token_metrics_api::token_data::{ GovernanceStats, WalletOverview };
+use token_metrics_api::types::ledger_indexer::Overview as LedgerOverview;
+use token_metrics_api::token_data::{GovernanceStats, WalletOverview};
 use std::collections::BTreeMap as NormalBTreeMap;
-use std::{ collections::HashMap, time::Duration };
-use tracing::{ debug, error, info };
+use std::collections::HashMap;
+use std::time::Duration;
+use tracing::{debug, error, info, warn};
 use types::Milliseconds;
-use crate::state::{ mutate_state, read_state };
+use crate::state::{mutate_state, read_state};
 
 // every 12 hours
 const UPDATE_LEDGER_BALANCE_LIST: Milliseconds = 12 * 60 * 60 * 1_000;
 
 pub fn start_job() {
     info!("Starting the update ledger balance list job...");
-    run_now_then_interval(Duration::from_millis(UPDATE_LEDGER_BALANCE_LIST), run)
+    run_now_then_interval(Duration::from_millis(UPDATE_LEDGER_BALANCE_LIST), run);
 }
 
 pub fn run() {
@@ -28,12 +25,16 @@ pub fn run() {
 
 pub async fn update_balance_list() {
     debug!("update_balance_list");
-    let (principal_holders_map, account_holders_map) = get_all_holders().await;
+    let (principal_holders_map, account_holders_map) = get_all_holders();
+
+    if principal_holders_map.is_empty() && account_holders_map.is_empty() {
+        warn!("Ledger indexer not yet populated — skipping balance list update");
+    }
 
     let mut temp_wallets_list: NormalBTreeMap<Account, WalletOverview> = NormalBTreeMap::new();
     let mut temp_merged_wallets_list: NormalBTreeMap<
         Account,
-        WalletOverview
+        WalletOverview,
     > = NormalBTreeMap::new();
 
     // Iterate through accounts
@@ -68,14 +69,14 @@ pub async fn update_balance_list() {
                 check_and_update_list(
                     &mut temp_merged_wallets_list,
                     merged_account_into_principal,
-                    new_stats.clone()
+                    new_stats.clone(),
                 );
             }
             Err(err) => error!(err),
         }
     }
 
-    // Going through all governance principals and apending their stats
+    // Going through all governance principals and appending their stats
     // to wallets_list and merged_wallets_list
     let governance_principals = read_state(|state| state.data.principal_gov_stats.clone());
 
@@ -124,78 +125,43 @@ pub async fn update_balance_list() {
         state.data.wallets_list = sort_map_descending(&temp_wallets_list);
 
         state.data.active_users.active_principals_count = count_active_users(
-            &temp_merged_wallets_list
+            &temp_merged_wallets_list,
         );
         state.data.active_users.active_accounts_count = count_active_users(&temp_wallets_list);
     });
     mutate_state(|state| state.data.update_foundation_accounts_data());
     info!("update_balance_list -> done, mutated the state")
 }
-async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {
-    info!("getting all holders..");
-    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
 
-    let mut principal_holders_map: HashMap<String, LedgerOverview> = HashMap::new();
-    let mut account_holders_map: HashMap<String, LedgerOverview> = HashMap::new();
+/// Get all holders from the local ledger indexer's stable memory.
+/// Returns (principal_holders, account_holders) as HashMaps keyed by text representation.
+fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, LedgerOverview>) {
+    info!("getting all holders from local indexer..");
+    use candid::Principal;
+    use crate::ledger_indexer::state::with_overviews;
+    use crate::ledger_indexer::utils::account_to_text;
 
-    let mut p_args = GetPrincipalHoldersArgs {
-        offset: 0,
-        limit: 100,
-    };
-    let mut continue_scanning_principals = true;
+    // Build both maps in a single pass over the overviews
+    let (principal_holders_map, account_holders_map) = with_overviews(|m| {
+        let mut principals: HashMap<String, LedgerOverview> = HashMap::new();
+        let mut accounts: HashMap<String, LedgerOverview> = HashMap::new();
 
-    while continue_scanning_principals {
-        continue_scanning_principals = false;
-        match
-            super_stats_v3_c2c_client::get_principal_holders(super_stats_canister_id, &p_args).await
-        {
-            Ok(principal_holders) => {
-                for response in principal_holders.iter() {
-                    principal_holders_map.insert(
-                        response.holder.to_string(),
-                        response.data.clone()
-                    );
-                }
-                let count = principal_holders.len();
-                if count == (p_args.limit as usize) {
-                    continue_scanning_principals = true;
-                }
-                p_args.offset += count as u64;
-            }
-            Err(err) => {
-                let message = format!("{err:?}");
-                error!(message, "update_balance_list -> get_principal_holders");
-            }
+        for entry in m.iter() {
+            let account = entry.key();
+            let overview = entry.value();
+            // Account-level: use full "principal.subaccount" text
+            accounts.insert(account_to_text(account), overview.clone());
+
+            // Principal-level: group by owner
+            let principal_text = account.owner.to_text();
+            principals
+                .entry(principal_text)
+                .and_modify(|agg| *agg = *agg + overview)
+                .or_insert(overview);
         }
-    }
 
-    let mut a_args = GetAccountHoldersArgs {
-        offset: 0,
-        limit: 100,
-    };
-    let mut continue_scanning_accounts = true;
-
-    while continue_scanning_accounts {
-        continue_scanning_accounts = false;
-        match
-            super_stats_v3_c2c_client::get_account_holders(super_stats_canister_id, &a_args).await
-        {
-            Ok(account_holders) => {
-                for response in account_holders.iter() {
-                    account_holders_map.insert(response.holder.clone(), response.data.clone());
-                }
-                let count = account_holders.len();
-                if count == (a_args.limit as usize) {
-                    continue_scanning_accounts = true;
-                }
-                a_args.offset += count as u64;
-            }
-            Err(err) => {
-                let message = format!("{err:?}");
-                error!(message, "update_balance_list -> get_account_holders");
-            }
-        }
-    }
+        (principals, accounts)
+    });
 
     (principal_holders_map, account_holders_map)
 }
@@ -203,7 +169,7 @@ async fn get_all_holders() -> (HashMap<String, LedgerOverview>, HashMap<String, 
 fn check_and_update_list(
     list: &mut NormalBTreeMap<Account, WalletOverview>,
     key: Account,
-    new_value: WalletOverview
+    new_value: WalletOverview,
 ) {
     match list.get(&key) {
         Some(list_value) => {
@@ -227,7 +193,7 @@ fn count_active_users(list: &BTreeMap<Account, WalletOverview>) -> usize {
         .count()
 }
 fn sort_map_descending(
-    map: &NormalBTreeMap<Account, WalletOverview>
+    map: &NormalBTreeMap<Account, WalletOverview>,
 ) -> Vec<(Account, WalletOverview)> {
     let mut vec: Vec<(Account, WalletOverview)> = map
         .iter()

@@ -4,7 +4,7 @@ use futures::future::join_all;
 use anyhow::Error as AnyhowError;
 use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
 use sns_governance_canister::types::{ neuron::DissolveState, Neuron, NeuronId };
-use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
+use token_metrics_api::types::ledger_indexer::SECONDS_IN_ONE_YEAR;
 use token_metrics_api::token_data::{ GovernanceStats, LockedNeuronsAmount };
 use std::collections::{ BTreeMap as NormalBTreeMap, HashMap, HashSet };
 use std::time::Duration;
@@ -20,7 +20,7 @@ const SYNC_NEURONS_INTERVAL: Milliseconds = DAY_IN_MS;
 
 pub fn start_job() {
     debug!("Starting the governance sync job..");
-    run_now_then_interval(Duration::from_millis(SYNC_NEURONS_INTERVAL), run)
+    run_now_then_interval(Duration::from_millis(SYNC_NEURONS_INTERVAL), run);
 }
 
 pub fn run() {
@@ -291,15 +291,16 @@ fn update_principal_neuron_mapping(
 }
 async fn get_total_from_sns_rewards_canister() -> Nat {
     let sns_rewards_canister_id = read_state(|state| state.data.sns_rewards_canister);
+    let sns_ledger_canister_id = read_state(|state| state.data.sns_ledger_canister);
 
     // Rewards pool are in the default subaccount of sns rewards
-    let rewards_pool_subaccount = Account {
+    let rewards_pool_account = Account {
         owner: sns_rewards_canister_id,
         subaccount: None,
     };
 
     // Reserve pool are in the subaccount [1, 31x0] of sns rewards
-    let reserve_pool_subaccount = Account {
+    let reserve_pool_account = Account {
         owner: sns_rewards_canister_id,
         subaccount: Some([
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -307,51 +308,41 @@ async fn get_total_from_sns_rewards_canister() -> Nat {
         ]),
     };
 
-    let getter_futures: Vec<_> = vec![
-        get_super_stats_balance_of(sns_rewards_canister_id.to_string(), false),
-        get_super_stats_balance_of(rewards_pool_subaccount.to_principal_dot_account(), true),
-        get_super_stats_balance_of(reserve_pool_subaccount.to_principal_dot_account(), true)
-    ];
+    // Query ledger directly for principal overview (all subaccounts)
+    let principal_balance = get_ledger_balance(
+        sns_ledger_canister_id,
+        Account { owner: sns_rewards_canister_id, subaccount: None },
+    ).await;
 
-    let results = join_all(getter_futures).await;
-    return results[0].clone() - results[1].clone() - results[2].clone();
+    let rewards_pool_balance = get_ledger_balance(
+        sns_ledger_canister_id,
+        rewards_pool_account,
+    ).await;
+
+    let reserve_pool_balance = get_ledger_balance(
+        sns_ledger_canister_id,
+        reserve_pool_account,
+    ).await;
+
+    // total rewards = principal balance - rewards pool - reserve pool
+    let total = principal_balance.saturating_sub(rewards_pool_balance).saturating_sub(reserve_pool_balance);
+    Nat::from(total)
 }
-async fn get_super_stats_balance_of(account: String, is_subaccount: bool) -> Nat {
-    let super_stats_canister_id = read_state(|state| state.data.super_stats_canister);
 
-    fn log_error(acc: String, err: AnyhowError) {
-        let error_message = format!("{err:?}");
-        info!(?error_message, "There has been an erorr while fetching the super_stats balance of {acc:?}");
+async fn get_ledger_balance(ledger_canister_id: Principal, account: Account) -> u64 {
+    match icrc_ledger_canister_c2c_client::icrc1_balance_of(ledger_canister_id, &account).await {
+        Ok(balance) => {
+            use num_bigint::BigUint;
+            let zero = BigUint::from(0u64);
+            let nat_val = balance.0;
+            nat_val.try_into().unwrap_or(0u64)
+        }
+        Err(err) => {
+            let message = format!("{err:?}");
+            error!(message, "Error fetching ledger balance");
+            0u64
+        }
     }
-
-    let result = if is_subaccount {
-        match
-            super_stats_v3_c2c_client::get_account_overview(super_stats_canister_id, &account).await
-        {
-            Ok(response) => response,
-            Err(err) => {
-                log_error(account.clone(), err);
-                None
-            }
-        }
-    } else {
-        match
-            super_stats_v3_c2c_client::get_principal_overview(
-                super_stats_canister_id,
-                &account
-            ).await
-        {
-            Ok(response) => response,
-            Err(err) => {
-                log_error(account.clone(), err);
-                None
-            }
-        }
-    };
-    return match result {
-        Some(res) => { Nat::from(res.balance) }
-        None => Nat::from(0u64),
-    };
 }
 #[cfg(test)]
 mod tests {
@@ -366,7 +357,7 @@ mod tests {
         NeuronPermission,
         NeuronPermissionList,
     };
-    use super_stats_v3_api::stats::constants::SECONDS_IN_ONE_YEAR;
+    use token_metrics_api::types::ledger_indexer::SECONDS_IN_ONE_YEAR;
     use token_metrics_api::token_data::LockedNeuronsAmount;
     use types::NeuronInfo;
 

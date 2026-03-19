@@ -7,7 +7,6 @@ import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
 export interface TransformedData {
-  hash: string;
   from: string;
   to?: string;
   value: string;
@@ -66,7 +65,6 @@ const useTopTransfersAndBurns = ({
       const transformedData = sourceData
         .slice(0, limit)
         .map((tx) => ({
-          hash: tx.hash !== "no-hash" ? tx.hash : "N/A",
           from:
             type === "burns"
               ? codeAndDecodeAccount(tx.from_account)
