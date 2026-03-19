@@ -4,7 +4,7 @@ pub use token_metrics_api::init::InitArgs;
 use tracing::info;
 use utils::env::CanisterEnv;
 
-use crate::state::{ Data, RuntimeState };
+use crate::state::{Data, RuntimeState};
 
 use super::init_canister;
 
@@ -18,7 +18,7 @@ fn init(args: InitArgs) {
         args.sns_governance_canister_id,
         args.sns_rewards_canister_id,
         args.treasury_account,
-        args.foundation_accounts
+        args.foundation_accounts,
     );
 
     let runtime_state = RuntimeState::new(env.clone(), data);

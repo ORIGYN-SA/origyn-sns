@@ -1,9 +1,9 @@
+use crate::state::with_transaction_cache;
+use crate::utils::{nearest_day_start, nearest_past_hour, parse_icrc_account};
 use token_metrics_api::types::ledger_indexer::{
-    ProcessedTX, StatsType, TimeChunkStats, TimeStats, TotCntAvg,
-    DAY_AS_NANOS, HOUR_AS_NANOS, STATS_RETURN_LENGTH,
+    ProcessedTX, StatsType, TimeChunkStats, TimeStats, TotCntAvg, TransactionType, DAY_AS_NANOS,
+    HOUR_AS_NANOS, STATS_RETURN_LENGTH,
 };
-use crate::ledger_indexer::utils::{nearest_day_start, nearest_past_hour, parse_icrc_account};
-use crate::ledger_indexer::state::with_transaction_cache;
 
 /// Calculate time-based stats from the transaction cache.
 pub fn calculate_time_stats(process_from: u64, mode: StatsType, time_now: u64) -> TimeStats {
@@ -51,29 +51,29 @@ pub fn calculate_time_stats(process_from: u64, mode: StatsType, time_now: u64) -
         }
 
         match tx.tx_type.as_str() {
-            "Mint" => {
+            x if x == TransactionType::Mint.as_str() => {
                 mint_count += 1;
                 mint_value = mint_value.saturating_add(tx.tx_value);
                 all_mints.push(tx.clone());
             }
-            "Burn" => {
+            x if x == TransactionType::Burn.as_str() => {
                 burn_count += 1;
                 burn_value = burn_value.saturating_add(tx.tx_value);
                 all_burns.push(tx.clone());
             }
-            "Transfer" => {
+            x if x == TransactionType::Transfer.as_str() => {
                 transfer_count += 1;
                 transfer_value = transfer_value.saturating_add(tx.tx_value);
                 all_transfers.push(tx.clone());
             }
-            "Approve" => {
+            x if x == TransactionType::Approve.as_str() => {
                 approve_count += 1;
                 approve_value = approve_value.saturating_add(tx.tx_value);
             }
             _ => {}
         }
 
-        if tx.tx_type != "Approve" {
+        if tx.tx_type.as_str() != TransactionType::Approve.as_str() {
             total_value = total_value.saturating_add(tx.tx_value);
         }
         total_txs += 1;
@@ -105,22 +105,38 @@ pub fn calculate_time_stats(process_from: u64, mode: StatsType, time_now: u64) -
         burn_stats: TotCntAvg {
             total_value: burn_value,
             count: burn_count,
-            average: if burn_count > 0 { (burn_value as f64) / (burn_count as f64) } else { 0.0 },
+            average: if burn_count > 0 {
+                (burn_value as f64) / (burn_count as f64)
+            } else {
+                0.0
+            },
         },
         mint_stats: TotCntAvg {
             total_value: mint_value,
             count: mint_count,
-            average: if mint_count > 0 { (mint_value as f64) / (mint_count as f64) } else { 0.0 },
+            average: if mint_count > 0 {
+                (mint_value as f64) / (mint_count as f64)
+            } else {
+                0.0
+            },
         },
         transfer_stats: TotCntAvg {
             total_value: transfer_value,
             count: transfer_count,
-            average: if transfer_count > 0 { (transfer_value as f64) / (transfer_count as f64) } else { 0.0 },
+            average: if transfer_count > 0 {
+                (transfer_value as f64) / (transfer_count as f64)
+            } else {
+                0.0
+            },
         },
         approve_stats: TotCntAvg {
             total_value: approve_value,
             count: approve_count,
-            average: if approve_count > 0 { (approve_value as f64) / (approve_count as f64) } else { 0.0 },
+            average: if approve_count > 0 {
+                (approve_value as f64) / (approve_count as f64)
+            } else {
+                0.0
+            },
         },
         count_over_time,
         top_mints,
@@ -178,10 +194,10 @@ fn calculate_time_chunk_stats(
             if tx.tx_time >= start_chunk && tx.tx_time < end_chunk {
                 total_count += 1;
                 match tx.tx_type.as_str() {
-                    "Mint" => mint_count += 1,
-                    "Burn" => burn_count += 1,
-                    "Transfer" => transfer_count += 1,
-                    "Approve" => approve_count += 1,
+                    x if x == TransactionType::Mint.as_str() => mint_count += 1,
+                    x if x == TransactionType::Burn.as_str() => burn_count += 1,
+                    x if x == TransactionType::Transfer.as_str() => transfer_count += 1,
+                    x if x == TransactionType::Approve.as_str() => approve_count += 1,
                     _ => {}
                 }
             }

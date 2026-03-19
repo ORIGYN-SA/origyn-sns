@@ -1,12 +1,22 @@
-use std::collections::BTreeMap;
+use crate::state::{
+    read_state, with_gov_stake_history, with_gov_stake_history_mut, with_history,
+    with_voting_power_ratio_mut,
+};
+use crate::utils::{principal_account_range, text_to_account, text_to_principal};
 use bity_ic_canister_time::run_now_then_interval;
-use token_metrics_api::types::ledger_indexer::{AccountDayKey, HistoryData};
+use std::collections::BTreeMap;
 use std::time::Duration;
-use tracing::{info, warn};
+use token_metrics_api::types::ledger_indexer::{AccountDayKey, HistoryData};
+use tracing::warn;
 use types::Milliseconds;
-use crate::state::{mutate_state, read_state};
 
 const SYNC_GOVERNANCE_HISTORY_INTERVAL: Milliseconds = 12 * 3_600 * 1_000;
+
+/// SNS launch date: 2024-06-05 00:00:00 UTC (Unix seconds)
+const SNS_LAUNCH_TIMESTAMP: u64 = 1_717_545_600;
+
+/// Origyn Foundation's total voting power post-SNS: 1 billion OGY in e8s
+const ORIGYN_VOTING_POWER_POST_SNS: u64 = 1_000_000_000 * 100_000_000;
 
 pub fn start_job() {
     run_now_then_interval(Duration::from_millis(SYNC_GOVERNANCE_HISTORY_INTERVAL), run);
@@ -28,29 +38,36 @@ pub async fn sync_governance_history() {
         return;
     }
 
-    mutate_state(|state| {
-        state.data.gov_stake_history = balance_difference(
-            principal_history,
-            treasury_history,
-        );
+    let diff = balance_difference(principal_history, treasury_history);
+
+    // Write to stable map
+    with_gov_stake_history_mut(|m| {
+        m.clear_new();
+        for (day, hd) in &diff {
+            m.insert(*day, hd.clone());
+        }
     });
+
     // We want to sync voting stats now because we rely on stake history
     sync_voting_stats_job();
 }
 
 /// Read principal history via range query over all subaccounts of the principal.
 fn get_local_principal_history(account: &str) -> Vec<(u64, HistoryData)> {
-    use crate::ledger_indexer::state::with_history;
-    use crate::ledger_indexer::utils::{principal_account_range, text_to_principal};
-
     let principal = match text_to_principal(account) {
         Some(p) => p,
         None => return Vec::new(),
     };
 
     let (start_acct, end_acct) = principal_account_range(principal);
-    let start_key = AccountDayKey { account: start_acct, day: 0 };
-    let end_key = AccountDayKey { account: end_acct, day: u64::MAX };
+    let start_key = AccountDayKey {
+        account: start_acct,
+        day: 0,
+    };
+    let end_key = AccountDayKey {
+        account: end_acct,
+        day: u64::MAX,
+    };
 
     with_history(|m| {
         let mut by_day: BTreeMap<u64, HistoryData> = BTreeMap::new();
@@ -68,16 +85,19 @@ fn get_local_principal_history(account: &str) -> Vec<(u64, HistoryData)> {
 
 /// Read account history directly from the local ledger indexer's stable memory.
 fn get_local_account_history(account: &str) -> Vec<(u64, HistoryData)> {
-    use crate::ledger_indexer::state::with_history;
-    use crate::ledger_indexer::utils::text_to_account;
-
     let acct = match text_to_account(account) {
         Some(a) => a,
         None => return Vec::new(),
     };
 
-    let start_key = AccountDayKey { account: acct, day: 0 };
-    let end_key = AccountDayKey { account: acct, day: u64::MAX };
+    let start_key = AccountDayKey {
+        account: acct,
+        day: 0,
+    };
+    let end_key = AccountDayKey {
+        account: acct,
+        day: u64::MAX,
+    };
 
     with_history(|m| {
         m.range(start_key..=end_key)
@@ -90,32 +110,29 @@ fn balance_difference(
     vec1: Vec<(u64, HistoryData)>,
     vec2: Vec<(u64, HistoryData)>,
 ) -> Vec<(u64, HistoryData)> {
-    let mut result: Vec<(u64, HistoryData)> = Vec::new();
-    for (index, item) in vec1.iter().enumerate() {
-        let data1 = item.clone();
-        let key1 = data1.0;
-        let history1 = data1.1;
+    let map2: BTreeMap<u64, u128> = vec2.into_iter().map(|(d, h)| (d, h.balance)).collect();
 
-        let data2 = vec2[index].clone();
-        let history2 = data2.1;
-        result.push((key1, HistoryData { balance: history1.balance - history2.balance }));
-    }
-
-    result
+    vec1.into_iter()
+        .map(|(day, h1)| {
+            let balance = h1
+                .balance
+                .saturating_sub(map2.get(&day).copied().unwrap_or(0));
+            (day, HistoryData { balance })
+        })
+        .collect()
 }
 
 pub fn sync_voting_stats_job() {
-    // We consider the origyn's voting power as 0 before the SNS
-    // and as 1 bilion after
-    let cutoff_time = 1717545600u64; // 2024-06-05 00:00:00 UTC
+    // Read stake history from stable map
+    let stake_history: Vec<(u64, HistoryData)> =
+        with_gov_stake_history(|m| m.iter().map(|e| (*e.key(), e.value())).collect());
 
-    let stake_history = read_state(|state| state.data.gov_stake_history.clone());
-
-    let voting_power_ratio: Vec<(u64, u64)> = stake_history
-        .iter()
-        .map(|(timestamp, history_data)| {
-            let origyn_voting_power = if *timestamp >= cutoff_time {
-                1_000_000_000u64 * 100_000_000u64
+    // Write voting power ratio to stable map
+    with_voting_power_ratio_mut(|m| {
+        m.clear_new();
+        for (timestamp, history_data) in &stake_history {
+            let origyn_voting_power = if *timestamp >= SNS_LAUNCH_TIMESTAMP {
+                ORIGYN_VOTING_POWER_POST_SNS
             } else {
                 0u64
             };
@@ -124,11 +141,7 @@ pub fn sync_voting_stats_job() {
             } else {
                 0
             };
-            (*timestamp, ratio)
-        })
-        .collect();
-
-    mutate_state(|state| {
-        state.data.voting_power_ratio_history = voting_power_ratio;
-    })
+            m.insert(*timestamp, ratio);
+        }
+    });
 }

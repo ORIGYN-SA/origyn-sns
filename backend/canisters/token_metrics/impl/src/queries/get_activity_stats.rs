@@ -1,4 +1,4 @@
-use crate::ledger_indexer::state::with_activity_snapshots;
+use crate::state::with_activity_snapshots;
 use ic_cdk_macros::query;
 pub use token_metrics_api::types::ledger_indexer::ActivitySnapshot;
 

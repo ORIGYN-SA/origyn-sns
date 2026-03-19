@@ -1,19 +1,21 @@
+use crate::state::{mutate_state, read_state};
+use crate::utils::{icrc_account_to_string, nat_to_u128, nat_to_u64};
 use candid::Nat;
 use ic_cdk::call::Call;
 use token_metrics_api::types::ledger_indexer::{
-    ArchivedRange1, GetBlocksArgs1, GetTransactionsResponse, IcrcTransaction,
-    ProcessedTX, TransactionRange, TransactionType, TargetArgs,
-    HOUR_AS_NANOS, DAY_AS_NANOS, MAX_TOTAL_DOWNLOAD, MAX_TRANSACTION_BATCH_SIZE,
+    ArchivedRange1, GetBlocksArgs1, GetTransactionsResponse, IcrcTransaction, ProcessedTX,
+    TargetArgs, TransactionRange, TransactionType, DAY_AS_NANOS, HOUR_AS_NANOS, MAX_TOTAL_DOWNLOAD,
+    MAX_TRANSACTION_BATCH_SIZE,
 };
 use tracing::info;
-use crate::state::{mutate_state, read_state};
-use crate::ledger_indexer::utils::{icrc_account_to_string, nat_to_u128, nat_to_u64};
 
 /// Set target canister, fee, and decimals.
 pub async fn t2_impl_set_target_canister(args: TargetArgs) -> Result<String, String> {
     let locked = read_state(|s| s.data.ledger_indexer.target_ledger_locked);
     if locked {
-        return Err("Target canister can't be changed after being set. Re-install to change.".into());
+        return Err(
+            "Target canister can't be changed after being set. Re-install to change.".into(),
+        );
     }
 
     let ledger_principal = candid::Principal::from_text(&args.target_ledger)
@@ -114,8 +116,15 @@ async fn download_manager(
     let mut completed: u64 = 0;
 
     for i in 0..chunks {
-        let start = if i == 0 { next_block } else { next_block + completed };
-        let remaining = tip - start;
+        let start = if i == 0 {
+            next_block
+        } else {
+            next_block + completed
+        };
+        let remaining = tip.saturating_sub(start);
+        if remaining == 0 {
+            break;
+        }
         let length = remaining.min(MAX_TRANSACTION_BATCH_SIZE as u64);
 
         let txns = icrc2_download_chunk(start, length, ledger).await?;
@@ -160,9 +169,7 @@ async fn icrc2_download_chunk(
     }
 }
 
-async fn fetch_all_archives(
-    archives: &[ArchivedRange1],
-) -> Result<Vec<ProcessedTX>, String> {
+async fn fetch_all_archives(archives: &[ArchivedRange1]) -> Result<Vec<ProcessedTX>, String> {
     let mut all_txs = Vec::new();
     for archived in archives {
         let txs = get_transactions_from_archive(archived).await?;
@@ -230,7 +237,10 @@ fn process_single_transaction(
 
     if let Some(ref burn) = tx.burn {
         let fm_ac = icrc_account_to_string(burn.from.clone());
-        let spend = burn.spender.as_ref().map(|s| icrc_account_to_string(s.clone()));
+        let spend = burn
+            .spender
+            .as_ref()
+            .map(|s| icrc_account_to_string(s.clone()));
         let val = nat_to_u128(burn.amount.clone())?;
         output.push(ProcessedTX {
             block: *master_block,
@@ -248,8 +258,15 @@ fn process_single_transaction(
     if let Some(ref transfer) = tx.transfer {
         let to_ac = icrc_account_to_string(transfer.to.clone());
         let fm_ac = icrc_account_to_string(transfer.from.clone());
-        let spend = transfer.spender.as_ref().map(|s| icrc_account_to_string(s.clone()));
-        let fee = transfer.fee.as_ref().map(|f| nat_to_u128(f.clone())).transpose()?;
+        let spend = transfer
+            .spender
+            .as_ref()
+            .map(|s| icrc_account_to_string(s.clone()));
+        let fee = transfer
+            .fee
+            .as_ref()
+            .map(|f| nat_to_u128(f.clone()))
+            .transpose()?;
         let val = nat_to_u128(transfer.amount.clone())?;
         output.push(ProcessedTX {
             block: *master_block,
@@ -267,8 +284,12 @@ fn process_single_transaction(
     if let Some(ref approve) = tx.approve {
         let fm_ac = icrc_account_to_string(approve.from.clone());
         let spend = icrc_account_to_string(approve.spender.clone());
-        let fee = approve.fee.as_ref().map(|f| nat_to_u128(f.clone())).transpose()?;
-        let val = nat_to_u128(approve.amount.clone()).unwrap_or(u128::MAX);
+        let fee = approve
+            .fee
+            .as_ref()
+            .map(|f| nat_to_u128(f.clone()))
+            .transpose()?;
+        let val = nat_to_u128(approve.amount.clone()).unwrap_or(0);
         output.push(ProcessedTX {
             block: *master_block,
             tx_type: TransactionType::Approve.to_string(),

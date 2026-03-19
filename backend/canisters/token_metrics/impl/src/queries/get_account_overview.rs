@@ -1,5 +1,5 @@
-use crate::ledger_indexer::state::with_overviews;
-use crate::ledger_indexer::utils::text_to_account;
+use crate::state::with_overviews;
+use crate::utils::text_to_account;
 use ic_cdk_macros::query;
 pub use token_metrics_api::types::ledger_indexer::Overview;
 

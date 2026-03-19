@@ -1,14 +1,13 @@
 use ic_cdk::export_candid;
 
 mod guards;
+mod indexing;
 mod jobs;
-pub mod ledger_indexer;
 mod lifecycle;
 mod memory;
-mod migrations;
-pub mod model;
 pub mod queries;
 pub mod state;
+pub mod updates;
 pub mod utils;
 
 use lifecycle::*;

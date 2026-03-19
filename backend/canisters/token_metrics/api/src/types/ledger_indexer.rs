@@ -180,9 +180,7 @@ impl_storable_minicbor!(ActivitySnapshot);
 pub type Subaccount = [u8; 32];
 pub const DEFAULT_SUBACCOUNT: Subaccount = [0u8; 32];
 
-#[derive(
-    CandidType, Serialize, Deserialize, Clone, Copy, Debug, Encode, Decode,
-)]
+#[derive(CandidType, Serialize, Deserialize, Clone, Copy, Debug, Encode, Decode)]
 pub struct LedgerAccount {
     #[cbor(n(0), with = "crate::cbor::principal")]
     pub owner: Principal,
@@ -224,9 +222,10 @@ impl PartialOrd for LedgerAccount {
 
 impl Ord for LedgerAccount {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.owner
-            .cmp(&other.owner)
-            .then_with(|| self.effective_subaccount().cmp(other.effective_subaccount()))
+        self.owner.cmp(&other.owner).then_with(|| {
+            self.effective_subaccount()
+                .cmp(other.effective_subaccount())
+        })
     }
 }
 
@@ -250,7 +249,10 @@ impl From<LedgerAccount> for icrc_ledger_types::icrc1::account::Account {
 
 impl From<Principal> for LedgerAccount {
     fn from(p: Principal) -> Self {
-        Self { owner: p, subaccount: None }
+        Self {
+            owner: p,
+            subaccount: None,
+        }
     }
 }
 

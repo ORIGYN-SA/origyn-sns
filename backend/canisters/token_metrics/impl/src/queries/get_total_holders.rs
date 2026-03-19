@@ -1,6 +1,6 @@
+use crate::state::with_overviews;
 use ic_cdk_macros::query;
 use token_metrics_api::types::ledger_indexer::TotalHolderResponse;
-use crate::ledger_indexer::state::with_overviews;
 
 #[query]
 fn get_total_holders() -> TotalHolderResponse {

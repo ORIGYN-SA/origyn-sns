@@ -1,38 +1,45 @@
+use crate::state::{with_merged_wallets_list, with_wallets_list};
 use ic_cdk_macros::query;
+use icrc_ledger_types::icrc1::account::Account;
 pub use token_metrics_api::queries::get_holders::{
-    Args as GetHoldersArgs,
-    Response as GetHoldersResponse,
+    Args as GetHoldersArgs, Response as GetHoldersResponse,
 };
-use crate::state::read_state;
+use token_metrics_api::token_data::WalletOverview;
 
 #[query]
 fn get_holders(args: GetHoldersArgs) -> GetHoldersResponse {
-    let mut result = Vec::new();
-    let mut current_offset = args.offset;
-    let list = read_state(|state| {
-        if args.merge_accounts_to_principals {
-            state.data.merged_wallets_list.clone()
-        } else {
-            state.data.wallets_list.clone()
-        }
-    });
-    for (key, value) in list.iter() {
-        if current_offset > 0 {
-            current_offset -= 1;
-            continue;
-        }
+    let mut list: Vec<(Account, WalletOverview)> = if args.merge_accounts_to_principals {
+        with_merged_wallets_list(|m| {
+            m.iter()
+                .map(|e| (Account::from(*e.key()), e.value()))
+                .collect()
+        })
+    } else {
+        with_wallets_list(|m| {
+            m.iter()
+                .map(|e| (Account::from(*e.key()), e.value()))
+                .collect()
+        })
+    };
 
-        if result.len() >= (args.limit as usize) {
-            break;
-        }
+    list.sort_by(|a, b| b.1.total.cmp(&a.1.total));
 
-        result.push((key.clone(), value.clone()));
+    let total_count = list.len();
+    let start = args.offset as usize;
+    if start >= total_count {
+        return GetHoldersResponse {
+            data: Vec::new(),
+            current_offset: args.offset,
+            limit: args.limit,
+            total_count,
+        };
     }
+    let end = (start + args.limit as usize).min(total_count);
 
     GetHoldersResponse {
-        data: result,
+        data: list[start..end].to_vec(),
         current_offset: args.offset,
         limit: args.limit,
-        total_count: list.len()
+        total_count,
     }
 }

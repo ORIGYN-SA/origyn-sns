@@ -1,5 +1,6 @@
-use crate::ledger_indexer::state::with_history;
-use crate::ledger_indexer::utils::{nearest_day_start, text_to_account};
+use crate::state::with_history;
+use crate::utils::nearest_day_start;
+use crate::utils::text_to_account;
 use ic_cdk_macros::query;
 pub use token_metrics_api::types::ledger_indexer::{
     AccountDayKey, GetAccountHistoryArgs, HistoryData, DAY_AS_NANOS,

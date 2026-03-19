@@ -1,6 +1,5 @@
+use crate::state::{mutate_state, read_state, with_activity_snapshots_mut, with_overviews};
 use token_metrics_api::types::ledger_indexer::{ActivitySnapshot, DAY_AS_NANOS};
-use crate::state::{mutate_state, read_state};
-use super::state::{with_overviews, with_activity_snapshots_mut};
 
 /// Take an activity snapshot and advance the window.
 pub fn push_activity_snapshot() -> (u64, u64) {

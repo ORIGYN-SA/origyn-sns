@@ -1,17 +1,12 @@
+use crate::indexing::{
+    fetch_icrc2::t2_download_transactions, process_index::process_smtx_to_index,
+    process_transactions::process_transactions, time_stats::calculate_time_stats,
+};
+use crate::state::{mutate_state, read_state, with_transaction_cache_mut};
 use std::cell::RefCell;
 use std::time::Duration;
 use token_metrics_api::types::ledger_indexer::{ProcessedTX, StatsType};
 use tracing::{error, info};
-use crate::state::{mutate_state, read_state};
-use super::{
-    fetch_data::dfinity_icrc2::t2_download_transactions,
-    process_data::{
-        process_index::process_smtx_to_index,
-        small_tx::process_transactions,
-        time_stats::calculate_time_stats,
-    },
-    state::with_transaction_cache_mut,
-};
 
 thread_local! {
     static TIMER_IDS: RefCell<Vec<ic_cdk_timers::TimerId>> = RefCell::new(Vec::new());
@@ -20,9 +15,7 @@ thread_local! {
 /// Start the indexer processing loop at the given interval.
 pub fn start_processing_timer(secs: u64) {
     let duration = Duration::from_secs(secs);
-    let timer_id = ic_cdk_timers::set_timer_interval(duration, || {
-        schedule_data_processing()
-    });
+    let timer_id = ic_cdk_timers::set_timer_interval(duration, || schedule_data_processing());
     TIMER_IDS.with(|ids| ids.borrow_mut().push(timer_id));
     mutate_state(|s| {
         s.data.ledger_indexer.working_stats.timer_active = true;
@@ -76,7 +69,8 @@ async fn schedule_data_processing() {
                     // Store transactions in cache
                     store_transactions_in_cache(&txs);
 
-                    let tip = read_state(|s| s.data.ledger_indexer.working_stats.ledger_tip_of_chain);
+                    let tip =
+                        read_state(|s| s.data.ledger_indexer.working_stats.ledger_tip_of_chain);
                     let up_to_date = processed_tip + 1 >= tip;
 
                     let next = processed_tip + 1;

@@ -1,27 +1,205 @@
-use candid::{ CandidType, Principal };
-use bity_ic_canister_state_macros::canister_state;
-use icrc_ledger_types::icrc1::account::Account;
-use serde::{ Deserialize, Serialize };
-use sns_governance_canister::types::{ NeuronId, ProposalId };
-use token_metrics_api::types::ledger_indexer::HistoryData;
-use token_metrics_api::token_data::{
-    ActiveUsers,
-    DailyVotingMetrics,
-    GovernanceStats,
-    LockedNeuronsAmount,
-    PrincipalBalance,
-    ProposalsMetrics,
-    ProposalsMetricsCalculations,
-    TokenSupplyData,
-    VotingHistoryCalculations,
-    WalletOverview,
-};
-use token_metrics_api::types::ledger_indexer::LedgerIndexerData;
+use std::cell::RefCell;
 use std::collections::BTreeMap;
-use types::{ CanisterId, TimestampMillis };
-use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
+
+use bity_ic_canister_state_macros::canister_state;
+use candid::{CandidType, Principal};
+use ic_stable_structures::{StableBTreeMap, StableVec};
+use icrc_ledger_types::icrc1::account::Account;
+use serde::{Deserialize, Serialize};
+use sns_governance_canister::types::{NeuronId, ProposalId};
+use token_metrics_api::token_data::{
+    ActiveUsers, DailyVotingMetrics, GovernanceStats, LockedNeuronsAmount, ProposalsMetrics,
+    ProposalsMetricsCalculations, TokenSupplyData, VotingHistoryCalculations, WalletOverview,
+};
+use token_metrics_api::types::ledger_indexer::{
+    AccountDayKey, ActivitySnapshot, HistoryBalanceCache, HistoryData, LedgerAccount,
+    LedgerIndexerData, Overview, ProcessedTX,
+};
+use types::{CanisterId, TimestampMillis};
+use utils::{
+    env::{CanisterEnv, Environment},
+    memory::MemorySize,
+};
+
+use crate::memory::{self, VM};
 
 canister_state!(RuntimeState);
+
+// Stable memory maps
+
+thread_local! {
+    // Memory region 1: Account overviews (LedgerAccount → Overview)
+    static ACCOUNT_OVERVIEWS: RefCell<StableBTreeMap<LedgerAccount, Overview, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::ACCOUNT_OVERVIEWS))
+    );
+    // Memory region 2: Account history (AccountDayKey → HistoryData)
+    static ACCOUNT_HISTORY: RefCell<StableBTreeMap<AccountDayKey, HistoryData, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::ACCOUNT_HISTORY))
+    );
+    // Memory region 3: Account history balance cache (LedgerAccount → HistoryBalanceCache)
+    static ACCOUNT_HISTORY_CACHE: RefCell<StableBTreeMap<LedgerAccount, HistoryBalanceCache, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::ACCOUNT_HISTORY_CACHE))
+    );
+    // Memory region 9: Activity snapshots (daily activity records)
+    static ACTIVITY_SNAPSHOTS: RefCell<StableVec<ActivitySnapshot, VM>> = RefCell::new(
+        StableVec::init(memory::get_memory(memory::ACTIVITY_SNAPSHOTS))
+    );
+    // Memory region 10: Transaction cache (block_number → ProcessedTX)
+    static TRANSACTION_CACHE: RefCell<StableBTreeMap<u64, ProcessedTX, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::TRANSACTION_CACHE))
+    );
+    // Memory region 11: Wallets list — all accounts with ledger + governance overview
+    static WALLETS_LIST: RefCell<StableBTreeMap<LedgerAccount, WalletOverview, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::WALLETS_LIST))
+    );
+    // Memory region 12: Merged wallets list — subaccounts merged by principal
+    static MERGED_WALLETS_LIST: RefCell<StableBTreeMap<LedgerAccount, WalletOverview, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::MERGED_WALLETS_LIST))
+    );
+    // Memory region 13: Governance stake history (day → HistoryData)
+    static GOV_STAKE_HISTORY: RefCell<StableBTreeMap<u64, HistoryData, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::GOV_STAKE_HISTORY))
+    );
+    // Memory region 14: Voting power ratio history (day → ratio)
+    static VOTING_POWER_RATIO: RefCell<StableBTreeMap<u64, u64, VM>> = RefCell::new(
+        StableBTreeMap::init(memory::get_memory(memory::VOTING_POWER_RATIO))
+    );
+}
+
+// --- Account Overviews ---
+pub fn with_overviews<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<LedgerAccount, Overview, VM>) -> R,
+{
+    ACCOUNT_OVERVIEWS.with(|m| f(&m.borrow()))
+}
+
+pub fn with_overviews_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<LedgerAccount, Overview, VM>) -> R,
+{
+    ACCOUNT_OVERVIEWS.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Account History ---
+pub fn with_history<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<AccountDayKey, HistoryData, VM>) -> R,
+{
+    ACCOUNT_HISTORY.with(|m| f(&m.borrow()))
+}
+
+pub fn with_history_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<AccountDayKey, HistoryData, VM>) -> R,
+{
+    ACCOUNT_HISTORY.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Account History Cache ---
+pub fn with_history_cache<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<LedgerAccount, HistoryBalanceCache, VM>) -> R,
+{
+    ACCOUNT_HISTORY_CACHE.with(|m| f(&m.borrow()))
+}
+
+pub fn with_history_cache_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<LedgerAccount, HistoryBalanceCache, VM>) -> R,
+{
+    ACCOUNT_HISTORY_CACHE.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Activity Snapshots ---
+pub fn with_activity_snapshots<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableVec<ActivitySnapshot, VM>) -> R,
+{
+    ACTIVITY_SNAPSHOTS.with(|m| f(&m.borrow()))
+}
+
+pub fn with_activity_snapshots_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableVec<ActivitySnapshot, VM>) -> R,
+{
+    ACTIVITY_SNAPSHOTS.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Transaction Cache ---
+pub fn with_transaction_cache<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<u64, ProcessedTX, VM>) -> R,
+{
+    TRANSACTION_CACHE.with(|m| f(&m.borrow()))
+}
+
+pub fn with_transaction_cache_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<u64, ProcessedTX, VM>) -> R,
+{
+    TRANSACTION_CACHE.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Wallets List ---
+pub fn with_wallets_list<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<LedgerAccount, WalletOverview, VM>) -> R,
+{
+    WALLETS_LIST.with(|m| f(&m.borrow()))
+}
+
+pub fn with_wallets_list_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<LedgerAccount, WalletOverview, VM>) -> R,
+{
+    WALLETS_LIST.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Merged Wallets List ---
+pub fn with_merged_wallets_list<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<LedgerAccount, WalletOverview, VM>) -> R,
+{
+    MERGED_WALLETS_LIST.with(|m| f(&m.borrow()))
+}
+
+pub fn with_merged_wallets_list_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<LedgerAccount, WalletOverview, VM>) -> R,
+{
+    MERGED_WALLETS_LIST.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Governance Stake History ---
+pub fn with_gov_stake_history<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<u64, HistoryData, VM>) -> R,
+{
+    GOV_STAKE_HISTORY.with(|m| f(&m.borrow()))
+}
+
+pub fn with_gov_stake_history_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<u64, HistoryData, VM>) -> R,
+{
+    GOV_STAKE_HISTORY.with(|m| f(&mut m.borrow_mut()))
+}
+
+// --- Voting Power Ratio History ---
+pub fn with_voting_power_ratio<F, R>(f: F) -> R
+where
+    F: FnOnce(&StableBTreeMap<u64, u64, VM>) -> R,
+{
+    VOTING_POWER_RATIO.with(|m| f(&m.borrow()))
+}
+
+pub fn with_voting_power_ratio_mut<F, R>(f: F) -> R
+where
+    F: FnOnce(&mut StableBTreeMap<u64, u64, VM>) -> R,
+{
+    VOTING_POWER_RATIO.with(|m| f(&mut m.borrow_mut()))
+}
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeState {
@@ -90,11 +268,11 @@ pub struct Data {
     pub authorized_principals: Vec<Principal>,
     /// All stats about governance, total staked, unlocked, locked and rewards
     pub all_gov_stats: GovernanceStats,
-    /// SNS governance cansiter
+    /// SNS governance canister
     pub sns_governance_canister: Principal,
     /// SNS ledger canister
     pub sns_ledger_canister: Principal,
-    /// SNS Rewards canister that distirbutes rewards
+    /// SNS Rewards canister that distributes rewards
     pub sns_rewards_canister: Principal,
     /// The account that holds the treasury
     pub treasury_account: String,
@@ -104,18 +282,8 @@ pub struct Data {
     pub principal_neurons: BTreeMap<Principal, Vec<NeuronId>>,
     /// Stores governance stats by principal
     pub principal_gov_stats: BTreeMap<Principal, GovernanceStats>,
-    /// Balance list containing all principals, with their governance and
-    /// ledger balances, updated every 1hr
-    pub balance_list: BTreeMap<Principal, PrincipalBalance>,
     /// Token supply data, such as total supply and circulating supply
     pub supply_data: TokenSupplyData,
-    /// The list of all principals from ledger and governance, including their stats
-    pub wallets_list: Vec<(Account, WalletOverview)>,
-    /// Same thing as above, but we now merge all subaccounts stats of a principal
-    /// under the same principal item in the Map
-    pub merged_wallets_list: Vec<(Account, WalletOverview)>,
-    /// Staking history for governance
-    pub gov_stake_history: Vec<(u64, HistoryData)>,
     /// These accounts hold the tokens in hand of foundation, passed as init args
     pub foundation_accounts: Vec<String>,
     /// Holds the total value of tokens in hand of foundation
@@ -124,8 +292,8 @@ pub struct Data {
     pub locked_neurons_amount: LockedNeuronsAmount,
     /// Amount of locked tokens and their period
     pub locked_neurons_unique_owners: LockedNeuronsAmount,
-    /// Proposals metrics, succh as total, avg voting power and participation
-    pub porposals_metrics: ProposalsMetrics,
+    /// Proposals metrics, such as total, avg voting power and participation
+    pub proposals_metrics: ProposalsMetrics,
     /// Used to calculate proposals_metrics
     pub proposals_metrics_calculations: ProposalsMetricsCalculations,
     /// Daily metrics for org voting power / total voting power and voting participation
@@ -134,8 +302,6 @@ pub struct Data {
     pub voting_participation_history: BTreeMap<u64, u64>,
     /// Used to calculate voting_participation_history
     pub voting_participation_history_calculations: BTreeMap<u64, VotingHistoryCalculations>,
-    /// Ratio foundation's voting power and total voting power (day, u64 as percentage)
-    pub voting_power_ratio_history: Vec<(u64, u64)>,
     /// Active users = users with > 0 OGY in their wallet
     pub active_users: ActiveUsers,
     /// Ledger indexer config and stats (heap-resident; stable maps are separate)
@@ -148,7 +314,7 @@ impl Data {
         sns_governance_canister_id: CanisterId,
         sns_rewards_canister_id: CanisterId,
         treasury_account: String,
-        foundation_accounts: Vec<String>
+        foundation_accounts: Vec<String>,
     ) -> Self {
         Self {
             sns_governance_canister: sns_governance_canister_id,
@@ -160,19 +326,14 @@ impl Data {
             authorized_principals: vec![sns_governance_canister_id],
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
-            wallets_list: Vec::new(),
-            voting_power_ratio_history: Vec::new(),
-            merged_wallets_list: Vec::new(),
             voting_participation_history: BTreeMap::new(),
             voting_participation_history_calculations: BTreeMap::new(),
-            balance_list: BTreeMap::new(),
             all_gov_stats: GovernanceStats::default(),
             supply_data: TokenSupplyData::default(),
             sync_info: SyncInfo::default(),
-            gov_stake_history: Vec::new(),
             locked_neurons_amount: LockedNeuronsAmount::default(),
             locked_neurons_unique_owners: LockedNeuronsAmount::default(),
-            porposals_metrics: ProposalsMetrics::default(),
+            proposals_metrics: ProposalsMetrics::default(),
             proposals_metrics_calculations: ProposalsMetricsCalculations::default(),
             daily_voting_metrics: BTreeMap::new(),
             active_users: ActiveUsers::default(),
@@ -181,16 +342,17 @@ impl Data {
     }
 
     pub fn update_foundation_accounts_data(&mut self) {
-        let mut temp_foundation_accounts_data: Vec<(String, WalletOverview)> = Vec::new();
-        for (account, wallet_overview) in &self.wallets_list {
-            if self.foundation_accounts.contains(&account.to_principal_dot_account()) {
-                temp_foundation_accounts_data.push((
-                    account.to_principal_dot_account(),
-                    wallet_overview.clone(),
-                ));
+        let mut temp: Vec<(String, WalletOverview)> = Vec::new();
+        with_wallets_list(|m| {
+            for entry in m.iter() {
+                let account: Account = (*entry.key()).into();
+                let text = account.to_principal_dot_account();
+                if self.foundation_accounts.contains(&text) {
+                    temp.push((text, entry.value()));
+                }
             }
-        }
-        self.foundation_accounts_data = temp_foundation_accounts_data;
+        });
+        self.foundation_accounts_data = temp;
     }
 }
 pub trait PrincipalDotAccountFormat {
@@ -201,11 +363,10 @@ impl PrincipalDotAccountFormat for Account {
     fn to_principal_dot_account(&self) -> String {
         match &self.subaccount {
             Some(subaccount) => format!("{}.{}", self.owner, hex::encode(subaccount)),
-            None =>
-                format!(
-                    "{}.0000000000000000000000000000000000000000000000000000000000000000",
-                    self.owner.to_string()
-                ),
+            None => format!(
+                "{}.0000000000000000000000000000000000000000000000000000000000000000",
+                self.owner.to_string()
+            ),
         }
     }
 }

@@ -1,7 +1,7 @@
-use token_metrics_api::types::ledger_indexer::{SmallTX, TransactionType};
-use crate::ledger_indexer::account_tree::{
+use crate::indexing::account_tree::{
     process_approve_from, process_transfer_from, process_transfer_to,
 };
+use token_metrics_api::types::ledger_indexer::{SmallTX, TransactionType};
 
 /// Process SmallTX vec into the account-level index.
 pub fn process_smtx_to_index(blocks: &[SmallTX]) -> Result<u64, String> {

@@ -1,10 +1,10 @@
-use std::collections::BTreeMap;
+use crate::state::with_history;
+use crate::utils::{nearest_day_start, principal_account_range, text_to_principal};
 use ic_cdk_macros::query;
+use std::collections::BTreeMap;
 use token_metrics_api::types::ledger_indexer::{
     AccountDayKey, GetAccountHistoryArgs, HistoryData, DAY_AS_NANOS,
 };
-use crate::ledger_indexer::state::with_history;
-use crate::ledger_indexer::utils::{nearest_day_start, principal_account_range, text_to_principal};
 
 #[query]
 fn get_principal_history(args: GetAccountHistoryArgs) -> Vec<(u64, HistoryData)> {
@@ -18,8 +18,14 @@ fn get_principal_history(args: GetAccountHistoryArgs) -> Vec<(u64, HistoryData)>
     let start_day = nearest_day_start(time_now.saturating_sub(days_nano)) / 86400 / 1_000_000_000;
 
     let (start_acct, end_acct) = principal_account_range(principal);
-    let start_key = AccountDayKey { account: start_acct, day: 0 };
-    let end_key = AccountDayKey { account: end_acct, day: u64::MAX };
+    let start_key = AccountDayKey {
+        account: start_acct,
+        day: 0,
+    };
+    let end_key = AccountDayKey {
+        account: end_acct,
+        day: u64::MAX,
+    };
 
     with_history(|m| {
         let mut by_day: BTreeMap<u64, HistoryData> = BTreeMap::new();

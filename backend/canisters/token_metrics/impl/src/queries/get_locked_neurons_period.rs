@@ -8,8 +8,5 @@ fn get_locked_neurons_period() -> GetLockedNeuronsPeriodResponse {
     let amount = read_state(|state| state.data.locked_neurons_amount.clone());
     let count = read_state(|state| state.data.locked_neurons_unique_owners.clone());
 
-    GetLockedNeuronsPeriodResponse {
-        amount,
-        count,
-    }
+    GetLockedNeuronsPeriodResponse { amount, count }
 }

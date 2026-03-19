@@ -1,12 +1,14 @@
-use std::collections::HashSet;
-use candid::Principal;
-use token_metrics_api::types::ledger_indexer::LedgerAccount;
-use token_metrics_api::types::ledger_indexer::{DAY_AS_NANOS, ProcessedTX, SmallTX, TransactionType};
-use crate::state::{mutate_state, read_state};
-use crate::ledger_indexer::{
+use crate::indexing::{
     account_tree::create_account_if_not_exists,
     active_accounts::{init_activity_stats, push_activity_snapshot, push_padding_snapshot},
-    utils::text_to_account,
+};
+use crate::state::{mutate_state, read_state};
+use crate::utils::text_to_account;
+use candid::Principal;
+use std::collections::HashSet;
+use token_metrics_api::types::ledger_indexer::LedgerAccount;
+use token_metrics_api::types::ledger_indexer::{
+    ProcessedTX, SmallTX, TransactionType, DAY_AS_NANOS,
 };
 
 /// Convert ProcessedTX to SmallTX with activity tracking.
@@ -62,8 +64,8 @@ pub fn process_transactions(input_vec: &[ProcessedTX]) -> Vec<SmallTX> {
             create_account_if_not_exists(to_acct, tx.tx_time);
         }
 
-        // Check for end of activity window
-        if tx.tx_time > activity_end_time {
+        // Check for end of activity window (>= so boundary txs trigger new window)
+        if tx.tx_time >= activity_end_time {
             mutate_state(|s| {
                 s.data.ledger_indexer.activity_accounts_count += active_accounts.len() as u64;
                 s.data.ledger_indexer.activity_principals_count += active_principals.len() as u64;
