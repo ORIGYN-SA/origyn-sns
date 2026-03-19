@@ -289,8 +289,8 @@ sns rewards staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["sns_rewards staging build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["sns_rewards staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -321,8 +321,8 @@ collection index staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["sns_rewards staging build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["sns_rewards staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -346,8 +346,8 @@ collection index:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["collection_index canister build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["collection_index canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -371,8 +371,8 @@ sns rewards:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["sns_rewards canister build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["sns_rewards canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -444,8 +444,8 @@ canister jobs staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["canister_jobs staging build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["canister_jobs staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -469,8 +469,8 @@ canister jobs:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_rewards canister build", "integration tests"]
-  needs: ["canister_jobs canister build"]
+  needs: ["sns_rewards canister build", "integration tests"]
+  # needs: ["canister_jobs canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -493,8 +493,8 @@ sns neuron controller staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["sns_neuron_controller canister build", "integration tests"]
-  needs: ["sns_neuron_controller staging build"]
+  needs: ["sns_neuron_controller canister build", "integration tests"]
+  # needs: ["sns_neuron_controller staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -518,8 +518,8 @@ sns neuron controller:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["sns_neuron_controller canister build", "integration tests"]
-  needs: ["sns_neuron_controller canister build"]
+  needs: ["sns_neuron_controller canister build", "integration tests"]
+  # needs: ["sns_neuron_controller canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -542,8 +542,8 @@ buyback burn staging:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
-  # needs: ["buyback_burn canister build", "integration tests"]
-  needs: ["buyback_burn staging build"]
+  needs: ["buyback_burn canister build", "integration tests"]
+  # needs: ["buyback_burn staging build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
@@ -567,8 +567,8 @@ buyback burn:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["buyback_burn canister build", "integration tests"]
-  needs: ["buyback_burn canister build"]
+  needs: ["buyback_burn canister build", "integration tests"]
+  # needs: ["buyback_burn canister build"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
