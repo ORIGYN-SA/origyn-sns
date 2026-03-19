@@ -163,37 +163,37 @@ rust lint:
 ################################################################################
 # Integration tests
 ################################################################################
-# integration tests:
-#   stage: integration_testing
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-#       needs: ["ogy_token_swap test build", "ogy_token_swap tests", "sns_rewards test build", "sns_rewards tests", "super_indexer_v3 test build", "super_indexer_v3 tests", "sns_neuron_controller test build", "buyback_burn test build", "sns_neuron_controller tests", "tx_store_v3 test build", "tx_store_v3 tests"]
-#     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
-#       needs: ["ogy_token_swap canister build", "sns_rewards canister build", "super_indexer_v3 canister build", "sns_neuron_controller canister build", "tx_store_v3 canister build"]
-#     - if: $CI_OPEN_MERGE_REQUESTS
-#       when: never
-#   extends: .rust template
-#   tags:
-#     - dind
-#   services:
-#     - docker:dind
-#   variables:
-#     DOCKER_TLS_CERTDIR: "/certs"
-#     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
-#   script:
-#     - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/3.0.1/pocket-ic-x86_64-linux.gz
-#     - gzip -d pocket-ic.gz
-#     - chmod +x ./pocket-ic
-#     - mv ./pocket-ic ./backend/integration_testing/pocket-ic
-#     - ulimit -n 102400
-#     - ulimit -f 1024000
-#     - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
-#   coverage: /^\d+.\d+% coverage/
-#   artifacts:
-#     reports:
-#       coverage_report:
-#         coverage_format: cobertura
-#         path: cobertura.xml
+integration tests:
+  stage: integration_testing
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      needs: ["ogy_token_swap test build", "ogy_token_swap tests", "canister_jobs test build", "canister_jobs tests", "collection_index test build", "collection_index tests", "ogy_token_swap test build", "ogy_token_swap tests","sns_rewards test build", "sns_rewards tests", "buyback_burn test build", "buyback_burn tests", "sns_neuron_controller test build", "buyback_burn test build", "sns_neuron_controller tests"]
+    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      needs: ["ogy_token_swap canister build", "canister_jobs canister build", "collection_index canister build", "ogy_token_swap canister build", "sns_rewards canister build", "buyback_burn canister build", "sns_neuron_controller canister build"]
+    - if: $CI_OPEN_MERGE_REQUESTS
+      when: never
+  extends: .rust template
+  tags:
+    - dind
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
+  script:
+    - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/3.0.1/pocket-ic-x86_64-linux.gz
+    - gzip -d pocket-ic.gz
+    - chmod +x ./pocket-ic
+    - mv ./pocket-ic ./backend/integration_testing/pocket-ic
+    - ulimit -n 102400
+    - ulimit -f 1024000
+    - cargo tarpaulin -p integration_testing -j 2 --lib --no-fail-fast -o Xml
+  coverage: /^\d+.\d+% coverage/
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: cobertura.xml
 
 ################################################################################
 # Deployments
