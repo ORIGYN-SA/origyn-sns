@@ -6,7 +6,8 @@ spec:
         [
           "ogy_token_swap",
           "sns_rewards",
-          "super_stats_v3",
+          "sns_neuron_controller",
+          "buyback_burn",
           "token_metrics",
           "canister_jobs",
           "collection_index"
@@ -16,6 +17,14 @@ spec:
 
 $[[ inputs.src-folder ]] tests:
   stage: test
+  variables:
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_CPU_REQUEST: "1"
+    CARGO_BUILD_JOBS: "2"
+    CARGO_INCREMENTAL: "0"
+    RUSTFLAGS: "-C debuginfo=0"
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:

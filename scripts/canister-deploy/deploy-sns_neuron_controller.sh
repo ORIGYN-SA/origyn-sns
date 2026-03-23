@@ -20,32 +20,35 @@ if [[ $REINSTALL == "reinstall" ]]; then
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
     REWARDS_DESTINATION=null
-    AUTHORIZED_PRINCIPAL="fp72l-g7ndm-xsaub-5st4x-kcegj-jnssi-flbaz-awtx3-vr4wk-77wlf-yae"
-    
-    # OGY Local
-    OGY_SNS_GOVERNANCE_ID="jtpnb-waaaa-aaaal-ajc6q-cai"
-    OGY_SNS_LEDGER_ID="j5naj-nqaaa-aaaal-ajc7q-cai"
-    OGY_SNS_REWARDS_ID="fpmqz-aaaaa-aaaag-qjvua-cai"
-    
-    # GOLDAO Local (Using OGY IDs as placeholders for local test)
-    GOLDAO_SNS_GOVERNANCE_ID="jtpnb-waaaa-aaaal-ajc6q-cai"
-    GOLDAO_SNS_LEDGER_ID="j5naj-nqaaa-aaaal-ajc7q-cai"
-    GOLDAO_SNS_REWARDS_ID="fpmqz-aaaaa-aaaag-qjvua-cai"
+
+    AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
+
+    OGY_SNS_GOVERNANCE_CANISTER_ID=jtpnb-waaaa-aaaal-ajc6q-cai
+    OGY_SNS_LEDGER_CANISTER_ID=j5naj-nqaaa-aaaal-ajc7q-cai
+    OGY_SNS_REWARDS_CANISTER_ID=fpmqz-aaaaa-aaaag-qjvua-cai
+
+    GOLDAO_SNS_GOVERNANCE_CANISTER_ID=j3ioe-7iaaa-aaaap-ab23q-cai
+    GOLDAO_SNS_LEDGER_CANISTER_ID=irhm6-5yaaa-aaaap-ab24q-cai
+    GOLDAO_SNS_REWARDS_CANISTER_ID=rbv23-fqaaa-aaaam-qbfma-cai
+
+    NNS_GOVERNANCE_ID=rrkah-fqaaa-aaaaa-aaaaq-cai
+    NNS_LEDGER_ID=ryjl3-tyaaa-aaaaa-aaaba-cai
 
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
     REWARDS_DESTINATION=null
-    AUTHORIZED_PRINCIPAL="uvrim-vpson-krkki-4gaz2-fluwn-epogy-th3sx-kgvgw-3nra7-zs4n5-jae"
-    
-    # OGY Mainnet
-    OGY_SNS_GOVERNANCE_ID="lnxxh-yaaaa-aaaaq-aadha-cai"
-    OGY_SNS_LEDGER_ID="lkwrt-vyaaa-aaaaq-aadhq-cai"
-    OGY_SNS_REWARDS_ID="yuijc-oiaaa-aaaap-ahezq-cai"
-    
-    # GOLDAO Mainnet (Update these with real Goldao IDs)
-    GOLDAO_SNS_GOVERNANCE_ID="lnxxh-yaaaa-aaaaq-aadha-cai" 
-    GOLDAO_SNS_LEDGER_ID="lkwrt-vyaaa-aaaaq-aadhq-cai"
-    GOLDAO_SNS_REWARDS_ID="yuijc-oiaaa-aaaap-ahezq-cai"
+    AUTHORIZED_PRINCIPAL=$(dfx canister id sns_governance --network "$NETWORK")
+
+    OGY_SNS_GOVERNANCE_ID=lnxxh-yaaaa-aaaaq-aadha-cai
+    OGY_SNS_LEDGER_ID=lkwrt-vyaaa-aaaaq-aadhq-cai
+    OGY_SNS_REWARDS_ID=yuijc-oiaaa-aaaap-ahezq-cai
+
+    GOLDAO_SNS_GOVERNANCE_CANISTER_ID=tr3th-kiaaa-aaaaq-aab6q-cai
+    GOLDAO_SNS_LEDGER_CANISTER_ID=tyyy3-4aaaa-aaaaq-aab7a-cai
+    GOLDAO_SNS_REWARDS_CANISTER_ID=iyehc-lqaaa-aaaap-ab25a-cai
+
+    NNS_GOVERNANCE_ID=rrkah-fqaaa-aaaaa-aaaaq-cai
+    NNS_LEDGER_ID=ryjl3-tyaaa-aaaaa-aaaba-cai
   else
     echo "Error: unknown network for deployment. Found $NETWORK."
     exit 2

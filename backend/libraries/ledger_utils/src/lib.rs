@@ -27,7 +27,7 @@ mod tests {
     fn convert_icrc_account_to_legacy_account_id() {
         let icrc_account = Account {
             owner: Principal::from_text(
-                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae",
+                "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae",
             )
             .unwrap(),
             subaccount: None,
@@ -44,7 +44,7 @@ mod tests {
     fn convert_icrc_account_to_legacy_account_id_with_subaccount() {
         let icrc_account = Account {
             owner: Principal::from_text(
-                "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae",
+                "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae",
             )
             .unwrap(),
             subaccount: Some([

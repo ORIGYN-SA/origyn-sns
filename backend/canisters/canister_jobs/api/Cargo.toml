@@ -33,3 +33,4 @@ bity-ic-stable-memory = { workspace = true }
 tracing = { workspace = true }
 types = { path = '../../../libraries/types' }
 utils = { path = '../../../libraries/utils' }
+bity-ic-types = { workspace = true }

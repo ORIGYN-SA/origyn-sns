@@ -37,6 +37,10 @@ pub fn setup_rewards_canister(
         .get("ogy_ledger_canister_id")
         .expect("couldn't find ledger with 'ogy_ledger_canister_id'")
         .clone();
+    let goldao_ledger_canister_id = token_ledgers
+        .get("goldao_ledger_canister_id")
+        .expect("couldn't find ledger with 'ogy_ledger_canister_id'")
+        .clone();
 
     let init_args = Args::Init(InitArgs {
         test_mode: true,
@@ -44,7 +48,7 @@ pub fn setup_rewards_canister(
         commit_hash: "Test".to_string(),
         icp_ledger_canister_id,
         sns_ledger_canister_id,
-        ogy_ledger_canister_id,
+        goldao_ledger_canister_id,
         sns_gov_canister_id: sns_canister_id.clone(),
     });
     pic.install_canister(

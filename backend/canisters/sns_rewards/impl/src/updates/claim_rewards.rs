@@ -20,6 +20,7 @@ use utils::env::Environment;
 #[update]
 async fn claim_reward(args: ClaimRewardArgs) -> ClaimRewardResponse {
     let caller = read_state(|s| s.env.caller());
+    ic_cdk::println!("[REWARDS] User {} calling claim_reward for token: {}", caller, args.token);
     claim_reward_impl(args.neuron_id, args.token, caller).await
 }
 
@@ -32,6 +33,7 @@ pub async fn claim_reward_impl(
     let token_symbol = match TokenSymbol::parse(&token) {
         Ok(token) => token,
         Err(e) => {
+            ic_cdk::println!("[REWARDS] [ERR] Invalid token symbol: {}", token);
             return ClaimRewardResponse::TokenSymbolInvalid(format!(
                 "{e} : token of type {token:?} is not a valid token symbol."
             ));
@@ -43,18 +45,22 @@ pub async fn claim_reward_impl(
     {
         Some(token) => token,
         None => {
+            ic_cdk::println!("[REWARDS] [ERR] Token info for {:?} not found in state", token_symbol);
             return ClaimRewardResponse::TokenSymbolInvalid(format!(
                 "Token info for type {token_symbol:?} not found in state"
             ));
         }
     };
 
+    ic_cdk::println!("[REWARDS] Fetching neuron data for ID: {:?}", neuron_id);
     let neuron = fetch_neuron_data_by_id(&neuron_id).await;
     let neuron = match neuron {
         FetchNeuronDataByIdResponse::InternalError(e) => {
+            ic_cdk::println!("[REWARDS] [ERR] Internal error fetching neuron: {}", e);
             return ClaimRewardResponse::InternalError(e);
         }
         FetchNeuronDataByIdResponse::NeuronDoesNotExist => {
+            ic_cdk::println!("[REWARDS] [ERR] Neuron does not exist: {:?}", neuron_id);
             return ClaimRewardResponse::NeuronDoesNotExist;
         }
         FetchNeuronDataByIdResponse::Ok(n) => n,
@@ -63,12 +69,20 @@ pub async fn claim_reward_impl(
     // check the neuron contains the hotkey of the callers principal
     match authenticate_by_hotkey(&neuron, &caller) {
         AuthenticateByHotkeyResponse::NeuronHotKeyInvalid => {
+            ic_cdk::println!("[REWARDS] [AUTH] Hotkey invalid for caller {} on neuron {:?}", caller, neuron_id);
             return ClaimRewardResponse::NeuronHotKeyInvalid;
         }
         AuthenticateByHotkeyResponse::Ok(_) => {
+            ic_cdk::println!("[REWARDS] [AUTH] Success. Initiating transfer...");
             match transfer_rewards(neuron_id, caller, token_info).await {
-                Ok(amount) => ClaimRewardResponse::Ok(amount),
-                Err(e) => ClaimRewardResponse::TransferFailed(e),
+                Ok(amount) => {
+                    ic_cdk::println!("[REWARDS] [SUCCESS] Transfer complete for user {}", caller);
+                    ClaimRewardResponse::Ok(amount)
+                },
+                Err(e) => {
+                    ic_cdk::println!("[REWARDS] [ERR] Transfer failed: {}", e);
+                    ClaimRewardResponse::TransferFailed(e)
+                },
             }
         }
     }
@@ -81,22 +95,29 @@ pub async fn transfer_rewards(
 ) -> Result<bool, String> {
     // get the balance of the sub account ( NeuronId is the sub account id )
     let balance_of_neuron_id = fetch_balance_of_neuron_id(token_info.ledger_id, &neuron_id).await?;
+    
+    ic_cdk::println!("[TRANSFER] Neuron subaccount balance: {}. Required fee: {}", balance_of_neuron_id, token_info.fee);
+
     if balance_of_neuron_id <= Nat::from(token_info.fee) {
         return Err(format!(
             "Your balance must be higher than the transfer fee of {}",
             Nat::from(token_info.fee)
         ));
     }
+    
     let amount_to_transfer = balance_of_neuron_id - Nat::from(token_info.fee);
     if amount_to_transfer == Nat::from(0u64) {
         return Err("no rewards to claim".to_string());
     }
-    let neuron_sub_account: Subaccount = neuron_id.clone().into();
 
+    ic_cdk::println!("[TRANSFER] Sending {} to user {}", amount_to_transfer, user_id);
+
+    let neuron_sub_account: Subaccount = neuron_id.clone().into();
     let user_account = Account {
         owner: user_id,
         subaccount: None,
     };
+
     // transfer the tokens to the claimer
     let transfer = transfer_token(
         neuron_sub_account,
@@ -107,8 +128,14 @@ pub async fn transfer_rewards(
     .await;
 
     match transfer {
-        Ok(_) => Ok(true),
-        Err(e) => Err(e),
+        Ok(_) => {
+            ic_cdk::println!("[TRANSFER] ICRC Ledger call successful.");
+            Ok(true)
+        },
+        Err(e) => {
+            ic_cdk::println!("[TRANSFER] [ERR] Ledger transfer call failed: {}", e);
+            Err(e)
+        },
     }
 }
 
@@ -116,6 +143,7 @@ async fn fetch_balance_of_neuron_id(
     ledger_canister_id: Principal,
     neuron_id: &NeuronId,
 ) -> Result<Nat, String> {
+    ic_cdk::println!("[LEDGER] Querying balance for neuron subaccount on ledger {}", ledger_canister_id);
     match icrc_ledger_canister_c2c_client::icrc1_balance_of(
         ledger_canister_id,
         &(Account {
@@ -125,10 +153,15 @@ async fn fetch_balance_of_neuron_id(
     )
     .await
     {
-        Ok(t) => Ok(t),
+        Ok(t) => {
+            ic_cdk::println!("[LEDGER] Balance check returned: {}", t);
+            Ok(t)
+        },
         Err(err) => {
-            error!("Fail - to neuron rewards: {:?}", err);
-            Err(format!("{err}"))
+            let msg = format!("Fail - to fetch neuron rewards balance: {:?}", err);
+            ic_cdk::println!("[LEDGER] [ERR] {}", msg);
+            error!("{}", msg);
+            Err(msg)
         }
     }
 }

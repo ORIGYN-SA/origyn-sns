@@ -1,5 +1,3 @@
-use crate::sns_test_env::sns_init_args::CanisterIds;
-use crate::sns_test_env::sns_init_args::SnsInitArgs;
 use crate::sns_test_env::utils::neuron_id_from_number;
 use crate::utils::tick_n_blocks;
 use crate::{client, wasms};
@@ -52,44 +50,50 @@ impl SnsTestEnvBuilder {
         }
     }
 
-    pub fn generate_ids(&mut self) -> &mut Self {
-        let controller = self.controller;
-
-        // Scope the borrow to avoid holding it across the entire method
-        let (governance_id, root_id, ledger_id, index_id, swap_id) = {
-            let pic = self.pic.borrow();
-            let sns_subnet = pic.topology().get_sns().unwrap();
-
-            (
-                pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-                pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-                pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-                pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-                pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-            )
-        };
-
-        // Add cycles to canisters
-        {
-            let pic: std::cell::Ref<'_, PocketIc> = self.pic.borrow();
-            pic.add_cycles(governance_id, 1_000_000_000_000);
-            pic.add_cycles(root_id, 1_000_000_000_000);
-            pic.add_cycles(ledger_id, 1_000_000_000_000);
-            pic.add_cycles(index_id, 1_000_000_000_000);
-            pic.add_cycles(swap_id, 1_000_000_000_000);
-        }
-
-        self.canister_ids = Some(CanisterIds {
-            governance_id,
-            root_id,
-            ledger_id,
-            index_id,
-            swap_id,
-            dapp_canisters: HashMap::new(),
-        });
-
+    pub fn with_ids(&mut self, canister_ids: CanisterIds) -> &mut Self {
+        self.canister_ids = Some(canister_ids);
         self
     }
+
+    // // FIXME: change to real ids
+    // pub fn generate_ids(&mut self) -> &mut Self {
+    //     let controller = self.controller;
+
+    //     // Scope the borrow to avoid holding it across the entire method
+    //     let (governance_id, root_id, ledger_id, index_id, swap_id) = {
+    //         let pic = self.pic.borrow();
+    //         let sns_subnet = pic.topology().get_sns().unwrap();
+
+    //         (
+    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
+    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
+    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
+    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
+    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
+    //         )
+    //     };
+
+    //     // Add cycles to canisters
+    //     {
+    //         let pic: std::cell::Ref<'_, PocketIc> = self.pic.borrow();
+    //         pic.add_cycles(governance_id, 1_000_000_000_000);
+    //         pic.add_cycles(root_id, 1_000_000_000_000);
+    //         pic.add_cycles(ledger_id, 1_000_000_000_000);
+    //         pic.add_cycles(index_id, 1_000_000_000_000);
+    //         pic.add_cycles(swap_id, 1_000_000_000_000);
+    //     }
+
+    //     self.canister_ids = Some(CanisterIds {
+    //         governance_id,
+    //         root_id,
+    //         ledger_id,
+    //         index_id,
+    //         swap_id,
+    //         dapp_canisters: HashMap::new(),
+    //     });
+
+    //     self
+    // }
 
     pub fn with_init_args(mut self, init_args: SnsInitArgs) -> Self {
         self.init_args = Some(init_args);
@@ -500,7 +504,8 @@ impl SnsTestEnv {
         initial_balances: Option<Vec<(Account, Nat)>>,
     ) -> Self {
         let mut builder = SnsTestEnvBuilder::new(pic, controller);
-        builder.generate_ids();
+        let canister_ids = CanisterIds::goldao(&pic.borrow(), controller);
+        builder.with_ids(canister_ids);
         builder
             .with_goldao_init_args(neurons, initial_balances)
             .build()
@@ -513,7 +518,8 @@ impl SnsTestEnv {
         initial_balances: Option<Vec<(Account, Nat)>>,
     ) -> Self {
         let mut builder = SnsTestEnvBuilder::new(pic, controller);
-        builder.generate_ids();
+        let canister_ids = CanisterIds::wtn(&pic.borrow(), controller);
+        builder.with_ids(canister_ids);
         builder
             .with_wtn_init_args(neurons, initial_balances)
             .build()
@@ -526,7 +532,8 @@ impl SnsTestEnv {
         initial_balances: Option<Vec<(Account, Nat)>>,
     ) -> Self {
         let mut builder = SnsTestEnvBuilder::new(pic, controller);
-        builder.generate_ids();
+        let canister_ids = CanisterIds::ogy(&pic.borrow(), controller);
+        builder.with_ids(canister_ids);
         builder
             .with_ogy_init_args(neurons, initial_balances)
             .build()

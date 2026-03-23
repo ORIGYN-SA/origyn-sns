@@ -42,7 +42,6 @@ pub fn generate_neuron_data(
     (neuron_data, owner_map)
 }
 
-
 pub fn generate_5y_neuron_data(
     start_at: usize,
     n: usize,
@@ -125,34 +124,6 @@ pub fn create_5y_neuron(
         ),
     }
 }
-
-// pub fn create_neuron(
-//     id: NeuronId,
-//     maturity_multiplier: u64,
-//     perms: Vec<NeuronPermission>,
-// ) -> Neuron {
-//     Neuron {
-//         id: Some(id),
-//         permissions: perms,
-//         cached_neuron_stake_e8s: 3000000000000u64,
-//         neuron_fees_e8s: 0u64,
-//         created_timestamp_seconds: 1620329630,
-//         aging_since_timestamp_seconds: 1620329630,
-//         followees: BTreeMap::new(),
-//         maturity_e8s_equivalent: 1 * maturity_multiplier,
-//         voting_power_percentage_multiplier: 1,
-//         source_nns_neuron_id: None,
-//         staked_maturity_e8s_equivalent: Some(10),
-//         auto_stake_maturity: Some(false),
-//         vesting_period_seconds: Some(100000),
-//         disburse_maturity_in_progress: vec![],
-//         dissolve_state: Some(
-//             sns_governance_canister::types::neuron::DissolveState::WhenDissolvedTimestampSeconds(
-//                 100000000000,
-//             ),
-//         ),
-//     }
-// }
 
 use sns_governance_canister::types::NeuronPermission;
 pub fn create_neuron_permissions(user_hotkey: Option<&Principal>) -> Vec<NeuronPermission> {

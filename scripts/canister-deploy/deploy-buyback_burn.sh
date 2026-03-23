@@ -3,14 +3,13 @@
 NETWORK=$1
 DEPLOYMENT_VIA="proposal"
 
-
 . ./scripts/extract_commit_tag_data_and_commit_sha.sh buyback_burn $NETWORK
 
 if [[ $REINSTALL == "reinstall" ]]; then
 
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
-    AUTHORIZED_PRINCIPAL=465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae
+    AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
     # 4 hours
     BUYBACK_INTERVAL_IN_SECS=$((4 * 3600))
 

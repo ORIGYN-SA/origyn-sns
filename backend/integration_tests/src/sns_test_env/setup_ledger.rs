@@ -1,9 +1,8 @@
-use std::collections::HashMap;
-
 use candid::{encode_one, Nat, Principal};
 use icrc_ledger_canister::init::{ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument};
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::PocketIc;
+use std::collections::HashMap;
 
 use crate::wasms;
 
@@ -25,7 +24,7 @@ pub fn setup_ledgers(
         pic.install_canister(
             canister_id,
             icrc1_ledger_wasm.clone(),
-            encode_one(generate_ledger_canister_init_args(
+            encode_one(generate_ledger_init_args(
                 &symbol,
                 controller,
                 initial_ledger_accounts.clone(),
@@ -44,7 +43,7 @@ pub fn setup_ledgers(
     token_ledgers
 }
 
-pub fn generate_ledger_canister_init_args(
+pub fn generate_ledger_init_args(
     token: &str,
     controller: Principal,
     initial_ledger_accounts: Vec<(Account, Nat)>,
@@ -53,14 +52,10 @@ pub fn generate_ledger_canister_init_args(
     let initial_ledger_accounts = initial_ledger_accounts
         .iter()
         .cloned()
-        .chain(
-            vec![(
-                Account::from(controller),
-                Nat::from(1_000_000_000_000_000u64),
-            )]
-            .iter()
-            .cloned(),
-        )
+        .chain(vec![(
+            Account::from(controller),
+            Nat::from(1_000_000_000_000_000u64),
+        )])
         .collect();
     LedgerArgument::Init(InitArgs {
         minting_account: Account::from(controller),
