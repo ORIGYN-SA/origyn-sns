@@ -41,6 +41,7 @@ integration tests:
       "sns_rewards integration-test build",
       "buyback_burn integration-test build",
       "sns_neuron_controller integration-test build",
+      "token_metrics integration-test build",
     ]
   extends: .rust template
   script:

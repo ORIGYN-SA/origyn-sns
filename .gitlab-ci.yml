@@ -52,9 +52,9 @@ include:
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
     inputs:
       src-folder: buyback_burn
-  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-  #   inputs:
-  #     src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: token_metrics
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
     inputs:
       src-folder: canister_jobs
@@ -74,9 +74,9 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: buyback_burn
-  # - local: scripts/ci-cd/.canister_builds.yml
-  #   inputs:
-  #     src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: token_metrics
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: canister_jobs
@@ -118,9 +118,9 @@ include:
   - local: scripts/ci-cd/.canister_deploys.yml
     inputs:
       src-folder: buyback_burn
-  # - local: scripts/ci-cd/.canister_deploys.yml
-  #   inputs:
-  #     src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_deploys.yml
+    inputs:
+      src-folder: token_metrics
   - local: scripts/ci-cd/.canister_deploys.yml
     inputs:
       src-folder: canister_jobs

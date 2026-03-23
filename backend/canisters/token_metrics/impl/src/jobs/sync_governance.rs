@@ -171,7 +171,7 @@ fn check_locked_neurons_period(
         dissolve_delay
     } else if let Some(ets) = end_timestamp {
         let current_timestamp_in_seconds = timestamp_seconds();
-        ets - current_timestamp_in_seconds
+        ets.saturating_sub(current_timestamp_in_seconds)
     } else {
         0
     };
