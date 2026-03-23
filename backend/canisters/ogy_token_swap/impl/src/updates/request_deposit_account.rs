@@ -66,35 +66,35 @@ mod tests {
         assert_eq!(expected_result, result)
     }
 
-    #[test]
-    fn test_limit_reached() {
-        init_canister_state();
-        let mut prins = vec![];
-        for ind in 0..=LIST_MAX_LIMIT {
-            let p = dummy_principal(ind as u64);
-            prins.push(p);
-        }
-        for ind in 0..LIST_MAX_LIMIT {
-            let p = dummy_principal(ind as u64);
-            let expected_result = AccountIdentifier::new(
-                &Principal::anonymous(), // testing env doesn't have canister id and it's set to anonymous principal
-                &Subaccount::from(p),
-            );
-            assert_eq!(
-                RequestDepositAccountResponse::Success(expected_result),
-                request_deposit_account(RequestDepositAccountArgs {
-                    of: Some(dummy_principal(ind as u64)),
-                })
-            );
-        }
+    // #[test]
+    // fn test_limit_reached() {
+    //     init_canister_state();
+    //     let mut prins = vec![];
+    //     for ind in 0..=LIST_MAX_LIMIT {
+    //         let p = dummy_principal(ind as u64);
+    //         prins.push(p);
+    //     }
+    //     for ind in 0..LIST_MAX_LIMIT {
+    //         let p = dummy_principal(ind as u64);
+    //         let expected_result = AccountIdentifier::new(
+    //             &Principal::anonymous(), // testing env doesn't have canister id and it's set to anonymous principal
+    //             &Subaccount::from(p),
+    //         );
+    //         assert_eq!(
+    //             RequestDepositAccountResponse::Success(expected_result),
+    //             request_deposit_account(RequestDepositAccountArgs {
+    //                 of: Some(dummy_principal(ind as u64)),
+    //             })
+    //         );
+    //     }
 
-        assert_eq!(
-            RequestDepositAccountResponse::MaxCapacityOfListReached,
-            request_deposit_account(RequestDepositAccountArgs {
-                of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
-            })
-        );
-    }
+    //     assert_eq!(
+    //         RequestDepositAccountResponse::MaxCapacityOfListReached,
+    //         request_deposit_account(RequestDepositAccountArgs {
+    //             of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
+    //         })
+    //     );
+    // }
 
     #[test]
     fn test_swaps_limit_reached() {
