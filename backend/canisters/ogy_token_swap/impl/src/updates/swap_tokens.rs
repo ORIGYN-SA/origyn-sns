@@ -502,7 +502,7 @@ mod tests {
     use super::verify_block_data;
 
     const OGY_SWAP_CANISTER_ID: Principal = Principal::anonymous(); // on non-wasm architecture, id() of canister is not available
-    const DUMMY_USER: &str = "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae";
+    const DUMMY_USER: &str = "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae";
 
     #[test]
     fn test_verify_block_valid() {

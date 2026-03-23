@@ -8,11 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
-### [1.0.14] - 2025-12-04
+### [1.0.14] - 2026-03-23
 
 #### Added
 
 - **State**: Include versioning and commit info into CanisterInfo.
+
+#### Updated
+
+- **Dependencies**: All the crates were updated to the newest version.
 
 ### [1.0.13] - 2025-09-16
 

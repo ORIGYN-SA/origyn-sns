@@ -7,6 +7,7 @@ mod memory;
 pub mod queries;
 pub mod state;
 pub mod updates;
+mod migrations;
 
 use lifecycle::*;
 use queries::*;

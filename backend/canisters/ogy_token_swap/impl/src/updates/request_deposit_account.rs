@@ -52,7 +52,7 @@ mod tests {
         updates::request_deposit_account::{compute_deposit_account, request_deposit_account},
     };
 
-    const DUMMY_USER: &str = "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae";
+    const DUMMY_USER: &str = "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae";
 
     #[test]
     fn test_compute_deposit_account() {

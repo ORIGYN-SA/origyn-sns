@@ -1,5 +1,4 @@
-use crate::state::read_state;
-use crate::types::GOLDAO_BURNING_POOL;
+use crate::types::OGY_BURNING_POOL;
 use crate::utils::retry_with_attempts;
 use crate::utils::{get_token_balance, RETRY_DELAY};
 use bity_ic_canister_time::start_job_daily_at;
@@ -38,10 +37,10 @@ async fn run_async() {
 pub async fn process_token_burn() -> Result<(), String> {
     info!("Starting token burn process");
 
-    let goldao_ledger_canister_id = TokenSymbol::GOLDAO.get_prod_token_info().ledger_id;
+    let ogy_ledger_canister_id = TokenSymbol::OGY.get_prod_token_info().ledger_id;
 
     let amount_to_burn =
-        get_token_balance(goldao_ledger_canister_id, Some(GOLDAO_BURNING_POOL)).await?;
+        get_token_balance(ogy_ledger_canister_id, Some(OGY_BURNING_POOL)).await?;
 
     if amount_to_burn == 0u64 {
         let error_message = "Calculated burn amount is zero.".to_string();
@@ -49,8 +48,8 @@ pub async fn process_token_burn() -> Result<(), String> {
         return Err(error_message);
     }
 
-    let minting_account = get_minting_account(goldao_ledger_canister_id).await?;
-    burn_tokens(goldao_ledger_canister_id, minting_account, amount_to_burn).await
+    let minting_account = get_minting_account(ogy_ledger_canister_id).await?;
+    burn_tokens(ogy_ledger_canister_id, minting_account, amount_to_burn).await
 }
 
 async fn burn_tokens(

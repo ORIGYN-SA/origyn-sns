@@ -41,3 +41,4 @@ utils = { path = '../../../libraries/utils' }
 canister_jobs_api = { path = "../api" }
 bity-ic-canister-logger = { workspace = true }
 bity-ic-types = { workspace = true }
+bity-ic-serializer = { workspace = true }

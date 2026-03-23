@@ -120,6 +120,7 @@ mod tests {
 
         let mut neuron = Neuron::default();
         neuron.id = Some(neuron_id.clone());
+        neuron.dissolve_state = Some(sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(1000000000000000));
 
         // ********************************
         // 1. Insert new neuron
@@ -296,6 +297,7 @@ mod tests {
 
         let mut neuron = Neuron::default();
         neuron.id = Some(neuron_id.clone());
+        neuron.dissolve_state = Some(sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(1000000000000000));
 
         // ********************************
         // 1. Insert new neuron
