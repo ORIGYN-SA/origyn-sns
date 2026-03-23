@@ -24,7 +24,6 @@ type GetHoldersResponse = record {
   limit : nat64;
   total_count : nat64;
 };
-type GetPrincipalHoldersArgs = record { offset : nat64; limit : nat64 };
 type GetVotingParticipationHistoryArgs = record { days : nat64 };
 type GetVotingPowerRatioHistory = record { days : nat64 };
 type GovernanceStats = record {
@@ -45,11 +44,11 @@ type InitArgs = record {
 };
 type InitLedgerArgs = record { target : TargetArgs };
 type LockedNeuronsAmount = record {
-  one_year : nat64;
-  two_years : nat64;
-  three_years : nat64;
-  four_years : nat64;
-  five_years : nat64;
+  one_year : nat;
+  two_years : nat;
+  three_years : nat;
+  four_years : nat;
+  five_years : nat;
 };
 type LockedNeuronsPeriodResponse = record {
   count : LockedNeuronsAmount;
@@ -57,10 +56,12 @@ type LockedNeuronsPeriodResponse = record {
 };
 type Overview = record {
   balance : nat;
-  sent : record { nat32; nat };
+  sent_value : nat;
+  sent_count : nat32;
   last_active : nat64;
+  received_value : nat;
+  received_count : nat32;
   first_active : nat64;
-  received : record { nat32; nat };
   max_balance : nat;
 };
 type ProcessedTX = record {
@@ -74,8 +75,8 @@ type ProcessedTX = record {
   spender : opt text;
 };
 type ProposalsMetrics = record {
-  daily_voting_rewards : nat64;
-  reward_base_current_year : nat64;
+  daily_voting_rewards : nat;
+  reward_base_current_year : nat;
   average_voting_participation : nat64;
   average_voting_power : nat64;
   total_voting_power : nat64;
@@ -119,7 +120,7 @@ type TotalHolderResponse = record {
   total_principals : nat64;
 };
 type WalletOverview = record {
-  total : nat64;
+  total : nat;
   ledger : Overview;
   governance : GovernanceStats;
 };
@@ -136,7 +137,9 @@ service : (InitArgs) -> {
   get_account_history : (GetAccountHistoryArgs) -> (
       vec record { nat64; HistoryData },
     ) query;
-  get_account_holders : (GetAccountHoldersArgs) -> (vec HolderBalanceResponse) query;
+  get_account_holders : (GetAccountHoldersArgs) -> (
+      vec HolderBalanceResponse,
+    ) query;
   get_account_overview : (text) -> (opt Overview) query;
   get_active_users_count : () -> (ActiveUsers) query;
   get_activity_stats : (nat64) -> (vec ActivitySnapshot) query;
@@ -150,7 +153,9 @@ service : (InitArgs) -> {
   get_principal_history : (GetAccountHistoryArgs) -> (
       vec record { nat64; HistoryData },
     ) query;
-  get_principal_holders : (GetPrincipalHoldersArgs) -> (vec HolderBalanceResponse) query;
+  get_principal_holders : (GetAccountHoldersArgs) -> (
+      vec HolderBalanceResponse,
+    ) query;
   get_principal_overview : (text) -> (opt Overview) query;
   get_proposals_metrics : () -> (ProposalsMetrics) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;

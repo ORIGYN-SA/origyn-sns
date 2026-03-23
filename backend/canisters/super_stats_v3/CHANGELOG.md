@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Deprecated] - 2026-03-23
+
+- **This canister has been merged into `token_metrics` (v2.0.0).** All ledger indexing, account/principal queries, and activity stats are now served by the token_metrics canister.
+- Removed from CI/CD pipeline, `dfx.json`, and `canister_ids.json`.
+- The on-chain canister remains running as a read-only fallback until decommissioned.
+
 ## [1.0.4] - 2024-08-07
 
 - Added checksum validation for account queries.

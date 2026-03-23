@@ -3,6 +3,42 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.0.0] - 2026-03-23
+
+### Added
+- **Merged super_stats_v3 ledger indexer into token_metrics** — the canister now indexes the OGY ledger directly instead of relying on cross-canister calls to a separate super_stats canister.
+- New query endpoints ported from super_stats_v3: `get_account_holders`, `get_principal_holders`, `get_account_overview`, `get_principal_overview`, `get_account_history`, `get_principal_history`, `get_top_account_holders`, `get_top_principal_holders`, `get_total_holders`, `get_activity_stats`, `get_daily_stats`, `get_hourly_stats`, `get_working_stats`.
+- New update endpoints: `init_target_ledger`, `start_processing_timer`, `stop_all_timers`.
+- CBOR serialization infrastructure (`impl_storable_minicbor!`) for stable memory storage.
+- Type aliases (`BasisPoints`, `StakeE8s`, `VotingPower`) and named constants for readability.
+- Shared pagination and aggregation helpers to deduplicate query logic.
+
+### Changed
+- `GovernanceStats` fields changed from `Nat` to `u128` (enables stable memory storage).
+- `WalletOverview.total` changed from `u64` to `u128` (fixes silent truncation for large balances).
+- Moved `wallets_list`, `merged_wallets_list`, `gov_stake_history`, and `voting_power_ratio_history` from heap to stable memory — reduces serialized heap from ~100MB to ~15MB.
+- Flattened `ledger_indexer/` into `indexing/` module; merged ledger indexer state and utils into top-level modules.
+- Moved `init_target_ledger`, `start_processing_timer`, `stop_all_timers` from queries to updates.
+- Removed `super_stats_canister_id` from `InitArgs` — no longer needed.
+- Removed legacy migration code and unused `balance_list` field.
+
+### Fixed
+- `get_stake_history` panics when requested days exceeds available history.
+- `get_voting_participation_history` panics when requested days exceeds available history.
+- `get_voting_power_ratio_history` panics when requested days exceeds available history.
+- `balance_difference()` panics on mismatched vec lengths — now uses `zip()` + `saturating_sub`.
+- Locked neurons with <1 year dissolve delay silently dropped from owner counts.
+- Approve `tx_value` defaults to `u128::MAX`, saturating all stats — now properly handled.
+- Download manager underflows when tip < start block.
+- Transactions at exactly `activity_end_time` fall through both time checks.
+- SNS rewards queries same subaccount twice, always returning 0 for the second.
+- `check_locked_neurons_period` u64 underflow — dissolved neurons were incorrectly classified as 5-year locked due to wrapping subtraction.
+- Fixed `porposals_metrics` typo → `proposals_metrics`.
+- Removed `println!` from production code.
+
+### Security
+- Added authorization guards to `init_target_ledger`, `start_processing_timer`, and `stop_all_timers` update endpoints.
+
 ## [1.0.12] - 2025-03-12
 
 - Increase all jobs timers.
