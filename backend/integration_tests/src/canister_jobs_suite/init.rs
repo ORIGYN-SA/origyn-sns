@@ -1,5 +1,6 @@
 use candid::{Nat, Principal};
 use canister_jobs_api::init::InitArgs as DailyJobsInitArgs;
+use canister_jobs_api::lifecycle::Args as DailyJobsArgs;
 use icrc_ledger_canister::init::{ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument};
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::PocketIc;
@@ -80,7 +81,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         canister_jobs_canister_id,
         canister_jobs_canister_wasm,
-        canister_jobs_init_args,
+        DailyJobsArgs::Init(canister_jobs_init_args),
     );
 
     CanisterIds {
