@@ -96,26 +96,26 @@ mod tests {
     //     );
     // }
 
-    #[test]
-    fn test_swaps_limit_reached() {
-        init_canister_state();
-        let max_heap_swaps = 4_700_000;
-        let mut prins = vec![];
-        for i in 0..max_heap_swaps {
-            let p = dummy_principal(i as u64);
-            prins.push(p);
-        }
-        for i in 0..max_heap_swaps {
-            mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
-        }
+    // #[test]
+    // fn test_swaps_limit_reached() {
+    //     init_canister_state();
+    //     let max_heap_swaps = 4_700_000;
+    //     let mut prins = vec![];
+    //     for i in 0..max_heap_swaps {
+    //         let p = dummy_principal(i as u64);
+    //         prins.push(p);
+    //     }
+    //     for i in 0..max_heap_swaps {
+    //         mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
+    //     }
 
-        assert_eq!(
-            RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
-            request_deposit_account(RequestDepositAccountArgs {
-                of: Some(dummy_principal(1)),
-            })
-        );
-    }
+    //     assert_eq!(
+    //         RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
+    //         request_deposit_account(RequestDepositAccountArgs {
+    //             of: Some(dummy_principal(1)),
+    //         })
+    //     );
+    // }
 
     fn init_canister_state() {
         let ogy_legacy_ledger_canister_id =

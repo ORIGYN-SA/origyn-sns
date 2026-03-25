@@ -17,6 +17,11 @@ spec:
 
 $[[ inputs.src-folder ]] tests:
   stage: test
+  variables:
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_CPU_REQUEST: "1"
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
@@ -38,16 +43,6 @@ $[[ inputs.src-folder ]] tests:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
-    # --- Infrastructure & Resource Limits ---
-    KUBERNETES_MEMORY_LIMIT: "5Gi"
-    KUBERNETES_MEMORY_REQUEST: "4Gi"
-    KUBERNETES_CPU_LIMIT: "2"
-    KUBERNETES_CPU_REQUEST: "1"
-
-    CARGO_BUILD_JOBS: "1" 
-    
-    RUSTFLAGS: "-C debuginfo=0 -C codegen-units=1 -C panic=abort -C opt-level=0"
-
   script:
     # - cargo tarpaulin -p $[[ inputs.src-folder ]] -j 2 --lib --no-fail-fast -o Xml
     - cargo test -p $[[ inputs.src-folder ]]
