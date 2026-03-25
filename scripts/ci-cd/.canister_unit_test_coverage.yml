@@ -17,14 +17,6 @@ spec:
 
 $[[ inputs.src-folder ]] tests:
   stage: test
-  variables:
-    KUBERNETES_MEMORY_LIMIT: "5Gi"
-    KUBERNETES_MEMORY_REQUEST: "5Gi"
-    KUBERNETES_CPU_LIMIT: "2"
-    KUBERNETES_CPU_REQUEST: "1"
-    CARGO_BUILD_JOBS: "2"
-    CARGO_INCREMENTAL: "0"
-    RUSTFLAGS: "-C debuginfo=0"
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
@@ -46,6 +38,18 @@ $[[ inputs.src-folder ]] tests:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
+    # --- Infrastructure & Resource Limits ---
+    KUBERNETES_MEMORY_LIMIT: "8Gi"
+    KUBERNETES_MEMORY_REQUEST: "4Gi"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_CPU_REQUEST: "1"
+
+    # --- Rust Memory Optimizations ---
+    CARGO_BUILD_JOBS: "1" 
+    CARGO_INCREMENTAL: "0"
+    # codegen-units=1 reduces memory usage during the linking phase
+    RUSTFLAGS: "-C debuginfo=0 -C codegen-units=1"
+
   script:
     # - cargo tarpaulin -p $[[ inputs.src-folder ]] -j 2 --lib --no-fail-fast -o Xml
     - cargo test -p $[[ inputs.src-folder ]]
