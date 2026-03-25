@@ -741,7 +741,6 @@ dependencies = [
  "serde",
  "serde_bytes",
  "serde_json",
- "serializer",
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "tracing",
@@ -757,6 +756,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
@@ -773,7 +773,6 @@ dependencies = [
  "num-bigint",
  "serde",
  "serde_bytes",
- "serializer",
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "tracing",
@@ -922,6 +921,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "candid",
  "collection_index_api",
@@ -939,7 +939,6 @@ dependencies = [
  "serde",
  "serde_bytes",
  "serde_json",
- "serializer",
  "tracing",
  "types",
  "utils",
@@ -953,6 +952,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
@@ -967,7 +967,6 @@ dependencies = [
  "origyn_nft_reference",
  "serde",
  "serde_bytes",
- "serializer",
  "tracing",
  "types",
  "utils",
@@ -3955,6 +3954,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
@@ -3971,7 +3971,6 @@ dependencies = [
  "ogy_token_swap_api",
  "serde",
  "serde_bytes",
- "serializer",
  "tracing",
  "types",
  "utils",
@@ -3985,6 +3984,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
@@ -4001,7 +4001,6 @@ dependencies = [
  "num-bigint",
  "serde",
  "serde_json",
- "serializer",
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "tracing",
@@ -5275,14 +5274,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serializer"
-version = "0.1.0"
-dependencies = [
- "rmp-serde",
- "serde",
-]
-
-[[package]]
 name = "sev"
 version = "7.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5476,6 +5467,7 @@ dependencies = [
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
  "bity-ic-ledger-utils",
+ "bity-ic-serializer",
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "bity-ic-utils",
@@ -5493,7 +5485,6 @@ dependencies = [
  "nns_governance_canister_c2c_client",
  "serde",
  "serde_json",
- "serializer",
  "sns_governance_canister",
  "sns_governance_canister_c2c_client",
  "sns_neuron_controller_api_canister",

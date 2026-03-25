@@ -33,7 +33,7 @@ num-bigint = { workspace = true }
 ogy_token_swap_api = { path = "../api" }
 serde = { workspace = true, features = ["derive"] }
 serde_bytes = { workspace = true }
-serializer = { path = '../../../libraries/serializer' }
+bity-ic-serializer = { workspace = true }
 bity-ic-stable-memory = { workspace = true }
 tracing = { workspace = true }
 types = { path = '../../../libraries/types' }

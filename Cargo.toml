@@ -23,7 +23,6 @@ members = [
   "backend/integration_tests",
   "backend/libraries/candid_gen",
   "backend/libraries/http_request",
-  "backend/libraries/serializer",
   "backend/libraries/types",
   "backend/libraries/utils",
 ]

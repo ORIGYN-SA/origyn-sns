@@ -31,7 +31,6 @@ sns_rewards_api_canister = { path = "../../sns_rewards/api" }
 sns_rewards_c2c_client = { path = "../../../external_canisters/sns_rewards/c2c_client" }
 serde = { workspace = true }
 serde_json = { workspace = true }
-serializer = { path = "../../../libraries/serializer" }
 bity-ic-stable-memory = { workspace = true }
 tracing = { workspace = true }
 types = { path = "../../../libraries/types" }
@@ -46,3 +45,4 @@ bity-ic-types = { workspace = true }
 bity-ic-utils = { workspace = true }
 bity-ic-ledger-utils = { workspace = true }
 bity-ic-canister-logger = { workspace = true }
+bity-ic-serializer = { workspace = true }
