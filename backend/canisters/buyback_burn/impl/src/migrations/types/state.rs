@@ -23,7 +23,7 @@ pub struct DataV0 {
     pub buyback_interval: Duration,
     pub swap_clients: SwapClientsV0,
     pub burn_config: BurnConfigV0,
-    pub token_swaps: TokenSwaps,
+    pub token_swaps: TokenSwapsV0,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone)]
@@ -51,4 +51,40 @@ pub struct ICPSwapClientV0 {
     token0: TokenInfo,
     token1: TokenInfo,
     zero_for_one: bool,
+}
+
+
+use crate::memory::VM;
+use crate::types::TokenSwap;
+use ic_stable_structures::StableBTreeMap;
+#[derive(Serialize, Deserialize)]
+pub struct TokenSwapsV0 {
+    swaps: HashMap<u128, TokenSwap>,
+    #[serde(skip, default = "init_map")]
+    history: StableBTreeMap<u128, TokenSwap, VM>,
+}
+
+use crate::memory::get_swap_history_memory;
+fn init_map() -> StableBTreeMap<u128, TokenSwap, VM> {
+    let memory = get_swap_history_memory();
+    StableBTreeMap::init(memory)
+}
+
+impl From<TokenSwapsV0> for TokenSwaps {
+    fn from(old: TokenSwapsV0) -> Self {
+        let history = init_map();
+
+        // Calculate the next ID based on current state to prevent collisions
+        let active_max = old.swaps.keys().max().cloned().unwrap_or(0);
+        let history_max = history.iter().map(|entry| entry.key().clone()).max().unwrap_or(0);
+
+        // Next ID should be 1 higher than the highest ID ever seen
+        let next_id = std::cmp::max(active_max, history_max) + 1;
+
+        Self {
+            next_id,
+            swaps: old.swaps,
+            history,
+        }
+    }
 }
