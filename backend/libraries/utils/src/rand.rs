@@ -27,14 +27,7 @@ pub async fn generate_rand_byte_array() -> Result<[u8; 8], String> {
 pub async fn generate_random_delay(max_interval: Duration) -> Result<Duration, String> {
     let random_nonce = generate_rand_nonce().await?;
 
-    ic_cdk::println!("Generated random nonce: {}", random_nonce);
-
     let random_delay_nanos = random_nonce % (max_interval.as_nanos() as u64);
-    ic_cdk::println!(
-        "Generated random delay: {} nanos within max interval: {:?}",
-        random_delay_nanos,
-        max_interval
-    );
 
     Ok(Duration::from_nanos(random_delay_nanos))
 }

@@ -31,7 +31,7 @@ pub async fn synchronise_neuron_data() {
     let is_test_mode = read_state(|s| s.env.is_test_mode());
     mutate_state(|state| {
         state.data.neuron_system.sync_info.last_synced_start = timestamp_millis();
-        state.set_is_synchronizing_neurons(false);
+        state.set_is_synchronizing_neurons(true);
     });
 
     let mut number_of_scanned_neurons = 0;
@@ -81,6 +81,7 @@ pub async fn synchronise_neuron_data() {
             Err(err) => {
                 let error_message = format!("{err:?}");
                 error!(?error_message, "Error fetching neuron data");
+                continue_scanning = false;
             }
         }
     }
@@ -120,7 +121,11 @@ mod tests {
 
         let mut neuron = Neuron::default();
         neuron.id = Some(neuron_id.clone());
-        neuron.dissolve_state = Some(sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(1000000000000000));
+        neuron.dissolve_state = Some(
+            sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(
+                1000000000000000,
+            ),
+        );
 
         // ********************************
         // 1. Insert new neuron
@@ -297,7 +302,11 @@ mod tests {
 
         let mut neuron = Neuron::default();
         neuron.id = Some(neuron_id.clone());
-        neuron.dissolve_state = Some(sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(1000000000000000));
+        neuron.dissolve_state = Some(
+            sns_governance_canister::types::neuron::DissolveState::DissolveDelaySeconds(
+                1000000000000000,
+            ),
+        );
 
         // ********************************
         // 1. Insert new neuron

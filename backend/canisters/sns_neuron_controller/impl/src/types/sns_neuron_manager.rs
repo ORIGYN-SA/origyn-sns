@@ -165,9 +165,7 @@ pub trait NeuronManager: NeuronConfig {
 
         // Error is handled in fetch_neurons
         let neurons = fetch_neurons(sns_governance_canister_id, canister_id, is_test_mode).await?;
-        ic_cdk::println!("Neurons:{:?} {:?}", self.get_sns_governance_canister_id().to_text(), neurons);
-        ic_cdk::println!("self: {:?}", ic_cdk::api::canister_self());
-        
+
         self.get_neurons_mut().all_neurons = neurons.to_vec();
         Ok(())
     }

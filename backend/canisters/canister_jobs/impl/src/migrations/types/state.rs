@@ -1,8 +1,8 @@
-use candid::CandidType;
-use candid::Principal;
 use bity_ic_types::TimestampMillis;
-use serde::{Deserialize, Serialize};
+use candid::CandidType;
 use candid::Nat;
+use candid::Principal;
+use serde::{Deserialize, Serialize};
 use utils::env::CanisterEnv;
 
 #[derive(Serialize, Deserialize)]

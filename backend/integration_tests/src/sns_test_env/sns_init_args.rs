@@ -657,7 +657,6 @@ impl CanisterIds {
             pic.add_cycles(swap_id, 1_000_000_000_000);
         }
 
-
         Self {
             governance_id,
             ledger_id,

@@ -1,8 +1,7 @@
-
 use crate::sns_test_env::sns_test_env::SnsProject;
+use crate::sns_test_env::utils::generate_neuron_data;
 use crate::test_env::test_env_builder::SnsConfig;
 use crate::test_env::test_env_builder::TestEnvBuilder;
-use crate::sns_test_env::utils::generate_neuron_data;
 use crate::{
     client::icrc1::client::{balance_of, transfer},
     utils::tick_n_blocks,
@@ -58,9 +57,7 @@ fn test_process_ogy_neurons_happy_path() {
         goldao_rewards_canister_id,
     );
 
-    let ogy_ledger_canister_id = env
-        .get_ledger_canister_id(types::TokenSymbol::OGY)
-        .unwrap();
+    let ogy_ledger_canister_id = env.get_ledger_canister_id(types::TokenSymbol::OGY).unwrap();
 
     let initial_sns_rewards_balance = balance_of(
         &pic,
@@ -106,8 +103,7 @@ fn test_process_ogy_neurons_happy_path() {
     .unwrap();
     tick_n_blocks(&pic, 1);
 
-    let initial_neuron_rewards_balance =
-        balance_of(&pic, ogy_ledger_canister_id, neuron_account);
+    let initial_neuron_rewards_balance = balance_of(&pic, ogy_ledger_canister_id, neuron_account);
     println!(
         "initial_neuron_rewards_balance: {:?}",
         initial_neuron_rewards_balance
@@ -129,8 +125,7 @@ fn test_process_ogy_neurons_happy_path() {
         current_sns_rewards_balance
     );
 
-    let current_neuron_rewards_balance =
-        balance_of(&pic, ogy_ledger_canister_id, neuron_account);
+    let current_neuron_rewards_balance = balance_of(&pic, ogy_ledger_canister_id, neuron_account);
     println!(
         "current_neuron_rewards_balance: {:?}",
         current_neuron_rewards_balance

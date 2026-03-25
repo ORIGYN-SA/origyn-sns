@@ -171,7 +171,7 @@ pub async fn create_new_payment_rounds() {
     }
 }
 
-pub fn should_retry_distribution(payment_rounds: &Vec<PaymentRound>) -> bool {
+pub fn should_retry_distribution(payment_rounds: &[PaymentRound]) -> bool {
     let mut should_retry = false;
     for payment_round in payment_rounds {
         match determine_payment_round_status(payment_round) {
@@ -346,7 +346,7 @@ pub async fn process_payment_round(payment_round: PaymentRound, retry_attempt: u
     let payments: Vec<(&NeuronId, &Payment)> = payment_round
         .payments
         .iter()
-        .filter(|(_, (_, payment_status, _))| payment_status != &PaymentStatus::Completed)
+        .filter(|(_, (_, status, _))| status != &PaymentStatus::Completed)
         .collect();
     let payment_chunks = payments.chunks(batch_limit);
 
@@ -364,10 +364,9 @@ pub async fn process_payment_round(payment_round: PaymentRound, retry_attempt: u
         let (transfer_futures, neuron_ids): (Vec<_>, Vec<_>) = batch
             .iter()
             .map(|(neuron_id, (reward, _, _))| {
-                let n_id = *neuron_id;
                 let account = Account {
                     owner: ic_cdk::api::canister_self(),
-                    subaccount: Some(n_id.into()),
+                    subaccount: Some((*neuron_id).into()),
                 };
                 mutate_state(|state| {
                     state.data.payment_processor.set_active_payment_status(

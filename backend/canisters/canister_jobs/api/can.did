@@ -1,3 +1,5 @@
+type Args = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
 type BurnJobResult = record { timestamp : nat64; block_height : nat };
 type InitArgs = record {
   test_mode : bool;
@@ -7,7 +9,8 @@ type InitArgs = record {
   burn_principal_id : principal;
 };
 type Result = variant { Ok : nat64; Err : text };
-service : (InitArgs) -> {
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+service : (Args) -> {
   get_burn_history : () -> (vec BurnJobResult) query;
   set_daily_burn_amount : (nat64) -> (Result);
 }

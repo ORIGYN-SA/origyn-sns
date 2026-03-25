@@ -11,8 +11,6 @@ pub mod update_ogy_config;
 
 pub use manage_nns_neuron::*;
 pub use manage_sns_neuron::*;
-pub use process_nns_neurons::*;
-pub use process_sns_neurons::*;
 pub use stake_nns_neuron::*;
 pub use stake_sns_neuron::*;
 pub use update_config::*;

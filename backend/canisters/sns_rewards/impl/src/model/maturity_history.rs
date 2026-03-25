@@ -76,6 +76,5 @@ fn history_range(
 ) -> impl Iterator<Item = (TimestampMillis, NeuronInfo)> + '_ {
     hist.range((neuron_id.clone(), 0)..(neuron_id, u64::MAX))
         .take(len)
-        // .map(|((_, ts), event)| (ts, event.clone()))
-        .map(|(entry)| (entry.key().1, entry.value().clone()))
+        .map(|entry| (entry.key().1, entry.value().clone()))
 }

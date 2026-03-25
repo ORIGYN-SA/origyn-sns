@@ -50,9 +50,9 @@ impl PaymentProcessor {
     pub fn next_key(&self) -> u16 {
         let mut max_key = 0;
         for (entry) in self.round_history.iter() {
-            let (_, id) = entry.key().clone();
-            if id > max_key {
-                max_key = id;
+            let (_, id) = entry.key();
+            if *id > max_key {
+                max_key = *id;
             }
         }
 
@@ -105,9 +105,9 @@ impl PaymentProcessor {
             .round_history
             .iter()
             // .filter(|((_, round_id), round)| *round_id == id && round.token == token)
-            .filter(|(entry)| entry.key().1 == id && entry.value().token == token)
+            .filter(|entry| entry.key().1 == id && entry.value().token == token)
             // .map(|((_, round_id), payment_round)| (round_id, payment_round.clone()))
-            .map(|(entry)| (entry.key().1, entry.value().clone()))
+            .map(|entry| (entry.key().1, entry.value().clone()))
             .collect();
 
         rounds
@@ -117,7 +117,7 @@ impl PaymentProcessor {
         let rounds = self
             .round_history
             .iter()
-            .map(|(entry)| (entry.key().1, entry.value().clone()))
+            .map(|entry| (entry.key().1, entry.value().clone()))
             .collect();
 
         rounds

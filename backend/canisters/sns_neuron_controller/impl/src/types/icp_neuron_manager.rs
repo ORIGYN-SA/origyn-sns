@@ -129,18 +129,13 @@ impl IcpManager {
         amount: u64,
         add_disolve_delay_secs: Option<u32>,
     ) -> Result<u64, String> {
-        ic_cdk::println!("[stake_nns_neuron] Starting with amount: {}", amount);
-
         let nonce = generate_rand_nonce().await?;
-        ic_cdk::println!("[stake_nns_neuron] Generated nonce: {}", nonce);
 
         let icp_ledger_canister_id = self.get_nns_ledger_canister_id();
         let nns_governance_canister_id = self.get_nns_governance_canister_id();
         let principal = ic_cdk::api::canister_self();
-        ic_cdk::println!("[stake_nns_neuron] Principal: {}", principal);
 
         let subaccount = compute_neuron_staking_subaccount_bytes(principal, nonce);
-        ic_cdk::println!("[stake_nns_neuron] Subaccount: {:?}", subaccount);
 
         let transfer = TransferArg {
             from_subaccount: None,
@@ -154,27 +149,16 @@ impl IcpManager {
             amount: amount.into(),
         };
 
-        ic_cdk::println!(
-            "[stake_nns_neuron] Sending {} ICP to {} with memo {}",
-            amount,
-            nns_governance_canister_id,
-            nonce
-        );
-
         icrc_ledger_canister_c2c_client::icrc1_transfer(icp_ledger_canister_id, &transfer)
             .await
             .map_err(|e| {
                 let err = format!("[stake_nns_neuron] ICP transfer network error: {e:?}");
-                ic_cdk::println!("{err}");
                 err
             })?
             .map_err(|e| {
                 let err = format!("[stake_nns_neuron] ICP transfer error: {e:?}");
-                ic_cdk::println!("{err}");
                 err
             })?;
-
-        ic_cdk::println!("[stake_nns_neuron] Transfer successful. Claiming neuron...");
 
         let neuron_id = match nns_governance_canister_c2c_client::manage_neuron(
             nns_governance_canister_id,
@@ -194,33 +178,21 @@ impl IcpManager {
             Ok(response) => match response.command {
                 Some(manage_neuron_response::Command::ClaimOrRefresh(c)) => {
                     let neuron_id = c.refreshed_neuron_id.unwrap();
-                    ic_cdk::println!(
-                        "[stake_nns_neuron] Neuron claimed successfully: {:?}",
-                        neuron_id
-                    );
                     neuron_id
                 }
                 response => {
                     let err = format!("[stake_nns_neuron] Governance error: {response:?}");
-                    ic_cdk::println!("{err}");
                     return Err(err);
                 }
             },
             Err(error) => {
                 let err =
                     format!("[stake_nns_neuron] Network error while claiming neuron: {error:?}");
-                ic_cdk::println!("{err}");
                 return Err(err);
             }
         };
 
         if let Some(additional_dissolve_delay_seconds) = add_disolve_delay_secs {
-            ic_cdk::println!(
-                "[stake_nns_neuron] Increasing dissolve delay by {}s for neuron: {:?}",
-                additional_dissolve_delay_seconds,
-                neuron_id
-            );
-
             let response = nns_governance_canister_c2c_client::manage_neuron(
                 nns_governance_canister_id,
                 &(ManageNeuron {
@@ -245,13 +217,12 @@ impl IcpManager {
                     "[stake_nns_neuron] Failed to increase dissolve delay: {:?}",
                     e
                 );
-                ic_cdk::println!("{err_msg}");
                 err_msg
             })?;
 
             match response.command {
                 Some(manage_neuron_response::Command::Configure(_)) => {
-                    ic_cdk::println!(
+                    info!(
                         "[stake_nns_neuron] Dissolve delay increased successfully for neuron: {:?}",
                         neuron_id
                     );
@@ -261,13 +232,11 @@ impl IcpManager {
                         "[stake_nns_neuron] Unexpected response while increasing dissolve delay: {:?}",
                         response
                     );
-                    ic_cdk::println!("{err_msg}");
                     return Err(err_msg);
                 }
             }
         }
 
-        ic_cdk::println!("[stake_nns_neuron] Completed. Returning neuron ID.");
         Ok(neuron_id.id)
     }
 

@@ -63,7 +63,10 @@ async fn run_async_with_rand_delay(exchange_job_id: u128) {
                     "Scheduling token swap job after random delay of {:?}",
                     random_delay
                 );
-                ic_cdk_timers::set_timer(random_delay, run_async(exchange_job_id));
+                ic_cdk_timers::set_timer(
+                    random_delay,
+                    async move { run_async(exchange_job_id).await },
+                );
             }
             Err(e) => error!(
                 "Failed to generate random delay for job {}: {}",

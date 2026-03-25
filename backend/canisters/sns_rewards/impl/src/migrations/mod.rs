@@ -9,7 +9,6 @@ pub mod types;
 
 use crate::state::Data;
 
-// FIXME
 impl From<RuntimeStateV0> for RuntimeState {
     fn from(old_state: RuntimeStateV0) -> Self {
         let data = Data::from(old_state.data);

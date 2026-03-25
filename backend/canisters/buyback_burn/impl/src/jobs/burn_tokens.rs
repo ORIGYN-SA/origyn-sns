@@ -39,8 +39,7 @@ pub async fn process_token_burn() -> Result<(), String> {
 
     let ogy_ledger_canister_id = TokenSymbol::OGY.get_prod_token_info().ledger_id;
 
-    let amount_to_burn =
-        get_token_balance(ogy_ledger_canister_id, Some(OGY_BURNING_POOL)).await?;
+    let amount_to_burn = get_token_balance(ogy_ledger_canister_id, Some(OGY_BURNING_POOL)).await?;
 
     if amount_to_burn == 0u64 {
         let error_message = "Calculated burn amount is zero.".to_string();
