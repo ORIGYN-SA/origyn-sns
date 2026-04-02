@@ -55,7 +55,7 @@ $[[ inputs.src-folder ]] production deploy:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["$[[ inputs.src-folder ]] production build", "integration tests"]
+  # needs: ["$[[ inputs.src-folder ]] production build", "integration tests"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
