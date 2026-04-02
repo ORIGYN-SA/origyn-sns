@@ -21,7 +21,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     TESTMODE=true
     BUYBACK_BURN=$(dfx canister id dex_interaction --network "$NETWORK")
 
-    AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
+    AUTHORIZED_PRINCIPALS=$(dfx identity get-principal)
 
     OGY_SNS_GOVERNANCE_CANISTER_ID=jtpnb-waaaa-aaaal-ajc6q-cai
     OGY_SNS_LEDGER_CANISTER_ID=j5naj-nqaaa-aaaal-ajc7q-cai
