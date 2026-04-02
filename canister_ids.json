@@ -1,4 +1,7 @@
 {
+  "buyback_burn": {
+    "staging": "jej56-sqaaa-aaaab-qgqkq-cai"
+  },
   "ogy_dashboard": {
     "ic": "jbj2y-2qaaa-aaaal-ajc5q-cai",
     "preprod": "m7nki-xaaaa-aaaan-qmlwa-cai",
@@ -43,6 +46,9 @@
   "sns_rewards": {
     "ic": "yuijc-oiaaa-aaaap-ahezq-cai",
     "staging": "fpmqz-aaaaa-aaaag-qjvua-cai"
+  },
+  "sns_neuron_controller": {
+    "staging": "7jpfk-zqaaa-aaaan-q53hq-cai"
   },
   "canister_jobs": {
     "ic": "bvbns-zaaaa-aaaan-qmnbq-cai",
