@@ -13,41 +13,41 @@ integration tests trigger:
   script:
     - echo "Running integration tests"
 
-# integration tests:
-#   stage: integration_testing
-#   variables:
-#     KUBERNETES_MEMORY_LIMIT: "5Gi"
-#     KUBERNETES_MEMORY_REQUEST: "5Gi"
-#     KUBERNETES_CPU_LIMIT: "2"
-#     KUBERNETES_CPU_REQUEST: "1"
-#   rules:
-#     - if: >
-#         $CI_COMMIT_TAG =~ '/^[a-zA-Z0-9_]+-v\d+\.\d+\.\d+(-reinstall)?$/' &&
-#         $CI_COMMIT_TAG !~ '/gld_dashboard|gld_landing_page|gldt_swap_app/'
-#       when: always
-#     # This will run on any MR to develop
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-#           $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-#       changes:
-#         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#   needs:
-#     [
-#       "ogy_token_swap integration-test build",
-#       "canister_jobs integration-test build",
-#       "collection_index integration-test build",
-#       "sns_rewards integration-test build",
-#       "dex_interaction integration-test build",
-#       "sns_neuron_controller integration-test build",
-#     ]
-#   extends: .rust template
-#   script:
-#     - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/9.0.1/pocket-ic-x86_64-linux.gz
-#     - gzip -d pocket-ic.gz
-#     - chmod +x ./pocket-ic
-#     - mv ./pocket-ic ./backend/integration_tests/pocket-ic
-#     - ulimit -n 809600
-#     - ulimit -f 8096000
-#     - cargo test -p integration_tests
+integration tests:
+  stage: integration_testing
+  variables:
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_CPU_REQUEST: "1"
+  rules:
+    - if: >
+        $CI_COMMIT_TAG =~ '/^[a-zA-Z0-9_]+-v\d+\.\d+\.\d+(-reinstall)?$/' &&
+        $CI_COMMIT_TAG !~ '/gld_dashboard|gld_landing_page|gldt_swap_app/'
+      when: always
+    # This will run on any MR to develop
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+      changes:
+        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
+  needs:
+    [
+      "ogy_token_swap integration-test build",
+      "canister_jobs integration-test build",
+      "collection_index integration-test build",
+      "sns_rewards integration-test build",
+      "dex_interaction integration-test build",
+      "sns_neuron_controller integration-test build",
+    ]
+  extends: .rust template
+  script:
+    - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/9.0.1/pocket-ic-x86_64-linux.gz
+    - gzip -d pocket-ic.gz
+    - chmod +x ./pocket-ic
+    - mv ./pocket-ic ./backend/integration_tests/pocket-ic
+    - ulimit -n 809600
+    - ulimit -f 8096000
+    - cargo test -p integration_tests
