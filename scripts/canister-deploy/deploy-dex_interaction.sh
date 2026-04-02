@@ -9,7 +9,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
-    AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
+    AUTHORIZED_PRINCIPALS=$(dfx identity get-principal)
     # 4 hours
     BUYBACK_INTERVAL_IN_SECS=$((4 * 3600))
 
