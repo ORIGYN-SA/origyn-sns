@@ -56,29 +56,29 @@ $[[ inputs.src-folder ]] production build:
       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 6 months
 
-# $[[ inputs.src-folder ]] integration-test build:
-#   stage: integration_testing
-#   rules:
-#     # This will always run when any backend canister is released. Doesn't need to be this canister
-#     - if: >
-#         $CI_COMMIT_TAG =~ '/^[a-zA-Z0-9_]+-v\d+\.\d+\.\d+(-reinstall)?$/' &&
-#         $CI_COMMIT_TAG !~ '/gld_dashboard|gld_landing_page|gldt_swap_app/'
-#       when: always
-#     # This will run on any MR to develop
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-#           $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-#       changes:
-#         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#         - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
-#       needs: ["integration tests trigger"]
-#   extends: .rust template
-#   script:
-#     - scripts/build-canister.sh -it $[[ inputs.src-folder ]]
-#     - scripts/generate-did.sh $[[ inputs.src-folder ]]
-#   artifacts:
-#     name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
-#     paths:
-#       - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
-#     expire_in: 1 day
+$[[ inputs.src-folder ]] integration-test build:
+  stage: integration_testing
+  rules:
+    # This will always run when any backend canister is released. Doesn't need to be this canister
+    - if: >
+        $CI_COMMIT_TAG =~ '/^[a-zA-Z0-9_]+-v\d+\.\d+\.\d+(-reinstall)?$/' &&
+        $CI_COMMIT_TAG !~ '/gld_dashboard|gld_landing_page|gldt_swap_app/'
+      when: always
+    # This will run on any MR to develop
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+      changes:
+        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
+      needs: ["integration tests trigger"]
+  extends: .rust template
+  script:
+    - scripts/build-canister.sh -it $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
+  artifacts:
+    name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
+    paths:
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+    expire_in: 1 day

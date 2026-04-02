@@ -29,38 +29,38 @@ include:
   # Templates:
   - local: scripts/ci-cd/.node_template.yml
   - local: scripts/ci-cd/.rust_template.yml
-  # # Frontend linters:
-  # - local: scripts/ci-cd/.frontend_linter.yml
-  #   inputs:
-  #     src-folder: ogy_dashboard
-  # - local: scripts/ci-cd/.frontend_linter.yml
-  #   inputs:
-  #     src-folder: origyn_landing_page
+  # Frontend linters:
+  - local: scripts/ci-cd/.frontend_linter.yml
+    inputs:
+      src-folder: ogy_dashboard
+  - local: scripts/ci-cd/.frontend_linter.yml
+    inputs:
+      src-folder: origyn_landing_page
 
-# ################################################################################
-# # Unit Tests
-# ################################################################################
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: ogy_token_swap
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: sns_rewards
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: collection_index
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: sns_neuron_controller
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: dex_interaction
-#   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#   #   inputs:
-#   #     src-folder: token_metrics
-#   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-#     inputs:
-#       src-folder: canister_jobs
+################################################################################
+# Unit Tests
+################################################################################
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: ogy_token_swap
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: sns_rewards
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: collection_index
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: sns_neuron_controller
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: dex_interaction
+  # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+  #   inputs:
+  #     src-folder: token_metrics
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: canister_jobs
 
 ################################################################################
 # Canister Builds
@@ -114,10 +114,10 @@ include:
     inputs:
       src-folder: origyn_landing_page
 
-# ################################################################################
-# # Integration Tests
-# ################################################################################
-#   - local: scripts/ci-cd/.integration_tests.yml
+################################################################################
+# Integration Tests
+################################################################################
+  - local: scripts/ci-cd/.integration_tests.yml
 
 ################################################################################
 # Backend deployments
@@ -165,25 +165,25 @@ node cache:
 # Linters
 ################################################################################
 
-# rust lint:
-#   stage: lint
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-#       changes:
-#         - "Cargo.{lock,toml}"
-#         - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#     - if: $CI_OPEN_MERGE_REQUESTS
-#       when: never
-#       changes:
-#         - "Cargo.{lock,toml}"
-#         - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#     - if: $CI_COMMIT_REF_NAME == "develop"
-#       changes:
-#         - "Cargo.{lock,toml}"
-#         - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-#   extends: .rust template
-#   script:
-#     - cargo clippy
+rust lint:
+  stage: lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+    - if: $CI_OPEN_MERGE_REQUESTS
+      when: never
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+    - if: $CI_COMMIT_REF_NAME == "develop"
+      changes:
+        - "Cargo.{lock,toml}"
+        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
+  extends: .rust template
+  script:
+    - cargo clippy
 
 #######
 # DEPLOYMENTS FRONTEND
