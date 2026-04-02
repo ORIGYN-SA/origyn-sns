@@ -15,7 +15,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
-    AUTHORIZED_PRINCIPAL=$(dfx canister id --network $NETWORK sns_governance)
+    AUTHORIZED_PRINCIPALS=$(dfx canister id --network $NETWORK sns_governance)
     # 4 hours
     BUYBACK_INTERVAL_IN_SECS=$((4 * 3600))
 
@@ -33,7 +33,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
       zero_for_one = true;
     }
   }"
-  
+
   EXCHANGE_JOB_CONFIG_WTN_ICP="record {
     token_to_sell = variant { WTN };
     token_to_buy = variant { ICP };
@@ -55,7 +55,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
       zero_for_one = false;
     }
   }"
-  
+
   EXCHANGE_JOB_CONFIG_GOLDAO_OGY="record {
     token_to_sell = variant { GOLDAO };
     token_to_buy = variant { OGY };
@@ -76,7 +76,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
       zero_for_one = false;
     }
   }"
-  
+
   EXCHANGE_JOB_CONFIG_ICP_OGY="record {
     token_to_sell = variant { ICP };
     token_to_buy = variant { OGY };
@@ -98,7 +98,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
         version = $BUILD_VERSION;
         commit_hash = \"$COMMIT_HASH\";
         authorized_principals = vec {
-          principal \"$AUTHORIZED_PRINCIPAL\";
+          principal \"$AUTHORIZED_PRINCIPALS\";
         };
         icp_swap_canister_id = principal \"$ICP_SWAP_CANISTER_ID\";
         exchange_configs = $EXCHANGE_CONFIGS;
