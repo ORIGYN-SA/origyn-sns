@@ -3,6 +3,7 @@
 .import dfx identity:
   before_script:
     - echo "Loading identity for network" $TARGET_NETWORK
+    - export DFX_WARNING="-mainnet_plaintext_identity"
     - dfx --version
     - dfx identity import --storage-mode plaintext gitlab-ci-ogy $PEM_FILE
     - dfx identity use gitlab-ci-ogy

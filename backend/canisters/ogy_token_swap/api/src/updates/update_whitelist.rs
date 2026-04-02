@@ -1,6 +1,6 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub enum UpdateWhitelistCommand {

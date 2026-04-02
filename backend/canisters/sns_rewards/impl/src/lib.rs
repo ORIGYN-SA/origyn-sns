@@ -1,19 +1,18 @@
 use ic_cdk::export_candid;
-use sns_governance_canister::get_metadata::*;
 
-mod utils;
 mod guards;
 mod jobs;
 mod lifecycle;
+mod memory;
+mod migrations;
 pub mod model;
 pub mod queries;
 pub mod state;
-mod memory;
 pub mod updates;
-// use ::types::{ HttpRequest, HttpResponse };
+mod utils;
 
-use updates::*;
-use queries::*;
 use lifecycle::*;
+use queries::*;
+use updates::*;
 
 export_candid!();

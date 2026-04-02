@@ -1,5 +1,5 @@
-use ic_cdk_macros::query;
 pub use canister_jobs_api::queries::get_burn_history::Response as GetBurnHistoryResponse;
+use ic_cdk_macros::query;
 
 use crate::state::read_state;
 

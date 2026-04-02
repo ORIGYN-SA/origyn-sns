@@ -1,16 +1,25 @@
-use serde::{ Deserialize, Serialize };
-use sns_governance_canister::types::NeuronId;
-use types::{ NeuronInfo, TimestampMillis };
+use crate::memory::get_maturity_history_memory_v0;
 use ic_stable_structures::StableBTreeMap;
+use serde::{Deserialize, Serialize};
+use sns_governance_canister::types::NeuronId;
+use types::{NeuronInfo, NeuronInfoV0, TimestampMillis};
 
-use crate::memory::{ get_maturity_history_memory, VM };
+use crate::memory::{get_maturity_history_memory, VM};
 
 /// The history of each neuron's maturity.
 // NOTE: Stable structures don't need to be serialized, hence the #[serde(skip)].
 #[derive(Serialize, Deserialize)]
 pub struct MaturityHistory {
+    #[serde(skip, default = "init_map_v0")]
+    history_v0: StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfoV0, VM>,
     #[serde(skip, default = "init_map")]
     history: StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfo, VM>,
+}
+
+fn init_map_v0() -> StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfoV0, VM> {
+    let memory = get_maturity_history_memory_v0();
+
+    StableBTreeMap::init(memory)
 }
 
 fn init_map() -> StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfo, VM> {
@@ -21,7 +30,10 @@ fn init_map() -> StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfo, VM> {
 
 impl Default for MaturityHistory {
     fn default() -> Self {
-        Self { history: init_map() }
+        Self {
+            history_v0: init_map_v0(),
+            history: init_map(),
+        }
     }
 }
 
@@ -39,22 +51,30 @@ impl MaturityHistory {
     pub fn get_maturity_history(
         &self,
         neuron_id: NeuronId,
-        len: usize
+        len: usize,
     ) -> Vec<(TimestampMillis, NeuronInfo)> {
         history_range(&self.history, neuron_id, len).collect()
     }
 
+    // pub fn get(&self, size: usize) -> Vec<((NeuronId, TimestampMillis), NeuronInfo)> {
+    //     self.history.iter().take(size).collect()
+    // }
+
     pub fn get(&self, size: usize) -> Vec<((NeuronId, TimestampMillis), NeuronInfo)> {
-        self.history.iter().take(size).collect()
+        self.history
+            .iter()
+            .take(size)
+            .map(|entry| (entry.key().clone(), entry.value()))
+            .collect()
     }
 }
 
 fn history_range(
     hist: &StableBTreeMap<(NeuronId, TimestampMillis), NeuronInfo, VM>,
     neuron_id: NeuronId,
-    len: usize
+    len: usize,
 ) -> impl Iterator<Item = (TimestampMillis, NeuronInfo)> + '_ {
     hist.range((neuron_id.clone(), 0)..(neuron_id, u64::MAX))
         .take(len)
-        .map(|((_, ts), event)| (ts, event.clone()))
+        .map(|entry| (entry.key().1, entry.value().clone()))
 }

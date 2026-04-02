@@ -19,6 +19,7 @@ pub struct PrincipalIds {
     originator: Principal,
     nft_owner: Principal,
 }
+
 #[derive(Debug)]
 pub struct CanisterIds {
     pub origyn_nft_one: CanisterId,

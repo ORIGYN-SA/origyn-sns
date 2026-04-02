@@ -1,36 +1,73 @@
 use ic_cdk_macros::init;
+pub use sns_rewards_api_canister::Args;
 use tracing::info;
-use types::{ TokenInfo, TokenSymbol };
+use types::{TokenInfo, TokenSymbol};
 use utils::env::CanisterEnv;
 
-use crate::state::{ Data, RuntimeState };
+use crate::state::{Data, RuntimeState};
 
 use super::init_canister;
-pub use sns_rewards_api_canister::init::*;
 
 #[init]
-fn init(args: InitArgs) {
-    canister_logger::init(args.test_mode);
+fn init(args: Args) {
+    match args {
+        Args::Init(init_args) => {
+            bity_ic_canister_logger::init(init_args.test_mode);
 
-    let env = CanisterEnv::new(args.test_mode);
-    let mut data = Data::default();
+            let env = CanisterEnv::new(
+                init_args.test_mode,
+                init_args.version,
+                init_args.commit_hash,
+            );
+            let mut data = Data::default();
 
-    let ogy_ledger_canister_id = args.sns_ledger_canister_id;
+            // use staging canister ids
+            if init_args.test_mode {
+                let icp_ledger_canister_id = init_args.icp_ledger_canister_id;
+                let ogy_ledger_canister_id = init_args.sns_ledger_canister_id;
+                let goldao_ledger_canister_id = init_args.goldao_ledger_canister_id;
 
-    if let Ok(token) = TokenSymbol::parse("OGY") {
-        data.tokens.insert(token, TokenInfo {
-            ledger_id: ogy_ledger_canister_id,
-            fee: 200_000u64,
-            decimals: 8u64,
-        });
+                data.tokens.insert(
+                    TokenSymbol::ICP,
+                    TokenInfo {
+                        ledger_id: icp_ledger_canister_id,
+                        fee: 10_000u64,
+                        decimals: 8u64,
+                    },
+                );
+
+                data.tokens.insert(
+                    TokenSymbol::OGY,
+                    TokenInfo {
+                        ledger_id: ogy_ledger_canister_id,
+                        fee: 200_000u64,
+                        decimals: 8u64,
+                    },
+                );
+
+                data.tokens.insert(
+                    TokenSymbol::GOLDAO,
+                    TokenInfo {
+                        ledger_id: goldao_ledger_canister_id,
+                        fee: 100_000u64,
+                        decimals: 8u64,
+                    },
+                );
+
+                data.authorized_principals = vec![init_args.sns_gov_canister_id];
+                data.sns_governance_canister = init_args.sns_gov_canister_id;
+            }
+
+            let runtime_state = RuntimeState::new(env, data);
+
+            init_canister(runtime_state);
+
+            info!("Init complete.")
+        }
+        Args::Upgrade(_) => {
+            panic!(
+                "Cannot initialize the canister with an Upgrade argument. Please provide an Init argument."
+            );
+        }
     }
-
-    data.authorized_principals = vec![args.sns_gov_canister_id];
-    data.sns_governance_canister = args.sns_gov_canister_id;
-
-    let runtime_state = RuntimeState::new(env, data);
-
-    init_canister(runtime_state);
-
-    info!("Init complete.")
 }

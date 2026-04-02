@@ -1,8 +1,9 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use serde::Deserialize;
+use serde::Serialize;
 use types::CanisterId;
 
-#[derive(Deserialize, CandidType)]
+#[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct InitArgs {
     pub authorized_principals: Vec<Principal>,
     pub test_mode: bool,

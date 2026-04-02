@@ -1,0 +1,20 @@
+use candid::Nat;
+
+use self::setup::{SNCTestEnv, SNCTestEnvBuilder};
+
+pub mod setup;
+pub mod setup_rewards;
+pub mod setup_sns_neuron_controller;
+
+pub fn default_test_setup() -> SNCTestEnv {
+    SNCTestEnvBuilder::new()
+        .add_token_ledger("ICP", &mut vec![], Nat::from(10_000u64))
+        .build()
+}
+
+pub fn test_setup_with_predefined_sns_neurons() -> SNCTestEnv {
+    SNCTestEnvBuilder::new()
+        .with_sns_neuron_data()
+        .add_token_ledger("ICP", &mut vec![], Nat::from(10_000u64))
+        .build()
+}

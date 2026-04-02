@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::state::{ Data, RuntimeState };
+use crate::state::{Data, RuntimeState};
 
 use self::types::state::RuntimeStateV0;
 
@@ -10,7 +10,7 @@ impl From<RuntimeStateV0> for RuntimeState {
     fn from(old_state: RuntimeStateV0) -> Self {
         // construct new state
         Self {
-            env: old_state.env,
+            env: old_state.env.into(),
             data: Data {
                 authorized_principals: old_state.data.authorized_principals,
                 token_swap: old_state.data.token_swap,

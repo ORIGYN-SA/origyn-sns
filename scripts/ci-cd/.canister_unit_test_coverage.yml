@@ -6,7 +6,8 @@ spec:
         [
           "ogy_token_swap",
           "sns_rewards",
-          "super_stats_v3",
+          "sns_neuron_controller",
+          "dex_interaction",
           "token_metrics",
           "canister_jobs",
           "collection_index"
@@ -16,6 +17,11 @@ spec:
 
 $[[ inputs.src-folder ]] tests:
   stage: test
+  variables:
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_CPU_REQUEST: "1"
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
@@ -34,10 +40,6 @@ $[[ inputs.src-folder ]] tests:
         - "backend/external_canisters/{**}/*.{rs,toml}"
         - "backend/canisters/$[[ inputs.src-folder ]]/{**}/*.{rs,toml}"
   extends: .rust template
-  tags:
-    - docker
-  # services:
-  #   - docker:dind
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"

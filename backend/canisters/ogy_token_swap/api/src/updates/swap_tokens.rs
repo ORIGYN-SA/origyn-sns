@@ -1,7 +1,7 @@
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use ic_ledger_types::BlockIndex;
 use icrc_ledger_types::icrc1::transfer::BlockIndex as BlockIndexIcrc;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct Args {

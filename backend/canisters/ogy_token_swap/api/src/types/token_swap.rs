@@ -1,27 +1,19 @@
 use std::borrow::Cow;
 
-use candid::{ CandidType, Decode, Encode, Nat, Principal };
-use canister_time::{ timestamp_millis, SECOND_IN_MS };
-use ic_stable_structures::{ storable::Bound, Storable };
-use serde::{ Deserialize, Serialize };
-use types::{ Milliseconds, TimestampNanos };
+use bity_ic_canister_time::{timestamp_millis, SECOND_IN_MS};
+use candid::{CandidType, Decode, Encode, Nat, Principal};
+use ic_ledger_types::{
+    AccountIdentifier, BlockIndex, Memo, Subaccount, Timestamp, Tokens, TransferError,
+};
+use ic_stable_structures::{storable::Bound, Storable};
 use icrc_ledger_types::icrc1::{
     account::Account,
     transfer::{
-        Memo as MemoIcrc,
-        TransferError as TransferErrorIcrc,
-        BlockIndex as BlockIndexIcrc,
+        BlockIndex as BlockIndexIcrc, Memo as MemoIcrc, TransferError as TransferErrorIcrc,
     },
 };
-use ic_ledger_types::{
-    AccountIdentifier,
-    Memo,
-    Subaccount,
-    Timestamp,
-    Tokens,
-    TransferError,
-    BlockIndex,
-};
+use serde::{Deserialize, Serialize};
+use types::{Milliseconds, TimestampNanos};
 
 const MAX_SWAP_INFO_BYTES_SIZE: u32 = 1000;
 const MINIMUM_TIMEOUT_IN_SECONDS: u64 = 30;
@@ -42,6 +34,9 @@ pub struct SwapInfo {
 impl Storable for SwapInfo {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
+    }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
     }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()

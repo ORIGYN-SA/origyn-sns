@@ -1,12 +1,9 @@
-use crate::{ generate_query_call, generate_update_call };
+use crate::{generate_query_call, generate_update_call};
 
 use super_stats_v3_api::{
-    core::queries::get_working_stats,
-    stats::queries::get_account_history,
-    stats::queries::get_principal_history,
-    stats::queries::get_principal_overview,
-    stats::queries::get_activity_stats,
-    stats::updates::init_target_ledger,
+    core::queries::get_working_stats, stats::queries::get_account_history,
+    stats::queries::get_activity_stats, stats::queries::get_principal_history,
+    stats::queries::get_principal_overview, stats::updates::init_target_ledger,
     timers::updates::start_processing_timer,
 };
 

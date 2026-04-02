@@ -3,11 +3,10 @@ use ic_ledger_types::BlockIndex;
 use ogy_token_swap_api::token_swap::SwapStatus;
 
 pub use ogy_token_swap_api::updates::update_swap_status::{
-    Args as UpdateSwapStateArgs,
-    Response as UpdateSwapStateResponse,
+    Args as UpdateSwapStateArgs, Response as UpdateSwapStateResponse,
 };
 
-use crate::{ guards::caller_is_authorised_principal, state::mutate_state };
+use crate::{guards::caller_is_authorised_principal, state::mutate_state};
 
 // only to be used for integration testing
 #[cfg(feature = "inttest")]
@@ -17,5 +16,9 @@ pub async fn update_swap_status(args: UpdateSwapStateArgs) -> UpdateSwapStateRes
 }
 
 async fn _update_swap_status_impl(block_index: BlockIndex, swap_status: SwapStatus) {
-    mutate_state(|s| { s.data.token_swap.update_status(block_index, swap_status.clone()) });
+    mutate_state(|s| {
+        s.data
+            .token_swap
+            .update_status(block_index, swap_status.clone())
+    });
 }

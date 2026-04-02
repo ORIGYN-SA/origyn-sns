@@ -6,7 +6,8 @@ spec:
         [
           "ogy_token_swap",
           "sns_rewards",
-          "super_stats_v3",
+          "sns_neuron_controller",
+          "dex_interaction",
           "token_metrics",
           "canister_jobs",
           "collection_index"

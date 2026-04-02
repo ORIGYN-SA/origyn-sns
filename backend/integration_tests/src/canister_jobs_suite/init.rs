@@ -1,18 +1,18 @@
-use std::{ env, path::Path };
-use candid::{ Nat, Principal };
-use icrc_ledger_canister::init::{ ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument };
+use candid::{Nat, Principal};
+use canister_jobs_api::init::InitArgs as DailyJobsInitArgs;
+use icrc_ledger_canister::init::{ArchiveOptions as ArchiveOptionsIcrc, InitArgs, LedgerArgument};
 use icrc_ledger_types::icrc1::account::Account;
 use pocket_ic::PocketIc;
-use canister_jobs_api::init::InitArgs as DailyJobsInitArgs;
+use std::{env, path::Path};
 use utils::consts::E8S_PER_OGY;
 
 use crate::{
-    client::pocket::{ create_canister, install_canister },
+    client::pocket::{create_canister, install_canister},
     utils::random_principal,
     wasms,
 };
 
-use super::{ CanisterIds, TestEnv };
+use super::{CanisterIds, TestEnv};
 
 pub static POCKET_IC_BIN: &str = "./pocket-ic";
 
@@ -45,6 +45,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         token_name: "Origyn".into(),
         token_symbol: "OGY".into(),
         metadata: Vec::new(),
+        fee_collector_account: None,
         archive_options: ArchiveOptionsIcrc {
             trigger_threshold: 1000,
             num_blocks_to_archive: 1000,
@@ -56,7 +57,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         ogy_ledger_canister_id,
         ogy_ledger_canister_wasm,
-        ogy_ledger_init_args
+        ogy_ledger_init_args,
     );
 
     /*
@@ -66,20 +67,20 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
      */
     let canister_jobs_canister_id = create_canister(pic, controller);
     let canister_jobs_canister_wasm = wasms::CANISTER_JOBS.clone();
-    let canister_jobs_init_args = DailyJobsInitArgs {
+    let canister_jobs_init_args = canister_jobs_api::Args::Init(DailyJobsInitArgs {
         test_mode: true,
         authorized_principals: vec![controller],
         ledger_canister_id: ogy_ledger_canister_id,
         burn_principal_id: controller,
         daily_burn_amount: 1_000_000 * E8S_PER_OGY,
-    };
+    });
 
     install_canister(
         pic,
         controller,
         canister_jobs_canister_id,
         canister_jobs_canister_wasm,
-        canister_jobs_init_args
+        canister_jobs_init_args,
     );
 
     CanisterIds {

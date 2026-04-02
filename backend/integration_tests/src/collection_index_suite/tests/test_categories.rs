@@ -4,26 +4,24 @@ use collection_index_api::insert_category::InsertCategoryArgs;
 use collection_index_api::insert_collection::InsertCollectionArgs;
 use collection_index_api::remove_collection::RemoveCollectionArgs;
 use collection_index_api::set_category_visibility::{
-    Args as SetCategoryVisibilityArgs,
-    Response as SetCategoryVisibilityResponse,
+    Args as SetCategoryVisibilityArgs, Response as SetCategoryVisibilityResponse,
 };
 use collection_index_api::update_collection::UpdateCollectionArgs;
 
 use crate::client::collection_index::{
-    get_categories,
-    get_collections,
-    insert_category,
-    insert_collection,
-    remove_collection,
-    set_category_visibility,
-    update_collection,
+    get_categories, get_collections, insert_category, insert_collection, remove_collection,
+    set_category_visibility, update_collection,
 };
-use crate::collection_index_suite::{ init::init, TestEnv };
+use crate::collection_index_suite::{init::init, TestEnv};
 
 #[test]
 fn insert_a_category_works() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let colletion_canister = canister_ids.collection_index;
 
@@ -36,7 +34,8 @@ fn insert_a_category_works() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 }
@@ -44,7 +43,11 @@ fn insert_a_category_works() {
 #[test]
 fn inserting_a_duplicate_category_should_fail() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let colletion_canister = canister_ids.collection_index;
 
@@ -57,7 +60,8 @@ fn inserting_a_duplicate_category_should_fail() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -67,7 +71,7 @@ fn inserting_a_duplicate_category_should_fail() {
         colletion_canister,
         &(InsertCategoryArgs {
             category_name: "Category A".to_string(),
-        })
+        }),
     );
     matches!(res, Err(InsertCategoryError::CategoryAlreadyExists));
 }
@@ -75,7 +79,11 @@ fn inserting_a_duplicate_category_should_fail() {
 #[test]
 fn categories_can_be_made_inactive_or_active() {
     let env = init();
-    let TestEnv { mut pic, canister_ids, principal_ids } = env;
+    let TestEnv {
+        mut pic,
+        canister_ids,
+        principal_ids,
+    } = env;
 
     let colletion_canister = canister_ids.collection_index;
 
@@ -88,7 +96,8 @@ fn categories_can_be_made_inactive_or_active() {
             &(InsertCategoryArgs {
                 category_name: "Category A".to_string(),
             })
-        ).unwrap(),
+        )
+        .unwrap(),
         ()
     );
 
@@ -106,8 +115,9 @@ fn categories_can_be_made_inactive_or_active() {
         &(SetCategoryVisibilityArgs {
             category_name: "Category A".to_string(),
             hidden: false,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
     assert_eq!(res, ());
 
     let res = get_categories(&pic, principal_ids.controller, colletion_canister, &()).unwrap();
@@ -122,8 +132,9 @@ fn categories_can_be_made_inactive_or_active() {
         &(SetCategoryVisibilityArgs {
             category_name: "Category A".to_string(),
             hidden: true,
-        })
-    ).unwrap();
+        }),
+    )
+    .unwrap();
     assert_eq!(res, ());
 
     let res = get_categories(&pic, principal_ids.controller, colletion_canister, &()).unwrap();

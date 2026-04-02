@@ -6,19 +6,17 @@ Canister build and did generation script.
 Must be run from the repository's root folder.
 
 Usage:
-  scripts/build-canister.sh [options] <CANISTER>
+  scripts/build_canister.sh [options] <CANISTER>
 
 Options:
-  -h, --help                Show this message and exit
-  -w, --wasmonly            Only produce a non-optimized wasm file (used for did generation)
-  -it, --integration-test   Includes integration testing code
-  --checksum                Compute sha256 evidence
-  --verify                  Verify sha256 evidence of existing build
+  -h, --help        Show this message and exit
+  -w, --wasmonly    Only produce a non-optimized wasm file (used for did generation)
+  --checksum        Compute sha256 evidence
+  --verify          Verify sha256 evidence of existing build
 EOF
 }
 
 BASE_CANISTER_PATH="backend/canisters"
-
 
 if [[ $# -gt 0 ]]; then
   while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
@@ -28,7 +26,6 @@ if [[ $# -gt 0 ]]; then
         exit
         ;;
       -w | --wasmonly )
-        echo "Building wasm only without compressing."
         WASMONLY=1
         ;;
       -it | --integration-test )
@@ -50,8 +47,6 @@ else
   exit 1
 fi
 
-echo "Building canister $1"
-
 CHECKSUM_PATH=$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.checksum
 
 if [[ -v VERIFY ]]; then
@@ -60,25 +55,33 @@ if [[ -v VERIFY ]]; then
 fi
 
 if [[ $WASMONLY == 1 ]]; then
-  if [[ "$1" != "super_stats_v3" ]]; then
-      echo "" > $BASE_CANISTER_PATH/$1/api/can.did
-    fi
+  echo "" > $BASE_CANISTER_PATH/$1/api/can.did
 fi
 
+echo $INTTEST
+./scripts/canister-prebuilds.sh $1 $BASE_CANISTER_PATH "$INTTEST"
 cargo build --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked $INTTEST -p $1
 
 if [[ -v $WASMONLY ]]; then
-  if [[ "$1" != "super_stats_v3" ]]; then
-    rm -f $BASE_CANISTER_PATH/$1/api/can.did
-  fi
+  rm -f $BASE_CANISTER_PATH/$1/api/can.did
 	echo "$1 wasm file created and ready for did generation"
 else
-	ic-wasm $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm -o $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}.wasm shrink
-	ic-wasm $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm -o $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm optimize --inline-functions-with-loops O3
-	gzip --no-name -9 -v -c $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm > $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm.gz &&
-	gzip -v -t $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm.gz &&
-	echo "$1 successfully built, optimized and compressed"
+  ic-wasm $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm \
+  -o $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}.wasm \
+  shrink --keep-name-section
+
+  ic-wasm "$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm" \
+    -o "$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm" \
+    metadata candid:service \
+      -f "$BASE_CANISTER_PATH/$1/api/can.did" \
+      -v public \
+      --keep-name-section
+
+  gzip --no-name -9 -v -c $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm \
+    > $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm.gz
+  gzip -v -t $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm.gz
 fi
+
 
 if [[ -v $EVIDENCE ]]; then
   SUM=$(sha256sum $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm)

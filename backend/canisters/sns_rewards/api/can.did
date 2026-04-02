@@ -1,15 +1,69 @@
 type Args = record { token : text; neuron_id : NeuronId };
-type Args_1 = record { transfer_amounts : vec record { text; nat } };
-type Args_2 = record { token_list : vec record { text; TokenInfo } };
+type Args_1 = record { claim_reward_args : vec ClaimRewardArgs };
+type Args_2 = record { transfer_amounts : vec record { TokenSymbol; nat } };
+type Args_3 = record { token_list : vec record { TokenSymbol; TokenInfo } };
+type Args_4 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
+type ClaimRewardArgs = record { token : TokenSymbol; neuron_id : NeuronId };
+type ClaimRewardError = record {
+  token : opt TokenSymbol;
+  error : ClaimRewardErrorType;
+  neuron_id : NeuronId;
+};
+type ClaimRewardErrorType = variant {
+  TokenSymbolInvalid : TokenSymbol;
+  NeuronNotClaimed;
+  NeuronOwnerInvalid : opt principal;
+  NeuronHotKeyInvalid;
+  TransferFailed : text;
+  NeuronDoesNotExist;
+  InternalError : text;
+};
+type ConsentInfo = record {
+  metadata : ConsentMessageMetadata;
+  consent_message : ConsentMessage;
+};
+type ConsentMessage = variant {
+  FieldsDisplayMessage : FieldsDisplay;
+  GenericDisplayMessage : text;
+};
+type ConsentMessageMetadata = record {
+  utc_offset_minutes : opt int16;
+  language : text;
+};
+type ConsentMessageRequest = record {
+  arg : blob;
+  method : text;
+  user_preferences : ConsentMessageSpec;
+};
+type ConsentMessageSpec = record {
+  metadata : ConsentMessageMetadata;
+  device_spec : opt DisplayMessageType;
+};
+type DisplayMessageType = variant { GenericDisplay; FieldsDisplay };
+type ErrorInfo = record { description : text };
+type FieldsDisplay = record {
+  fields : vec record { text; Value };
+  intent : text;
+};
+type Icrc21Error = variant {
+  GenericError : record { description : text; error_code : nat };
+  InsufficientPayment : ErrorInfo;
+  UnsupportedCanisterCall : ErrorInfo;
+  ConsentMessageUnavailable : ErrorInfo;
+};
 type InitArgs = record {
   sns_gov_canister_id : principal;
   test_mode : bool;
+  version : BuildVersion;
+  icp_ledger_canister_id : principal;
   sns_ledger_canister_id : principal;
+  commit_hash : text;
+  goldao_ledger_canister_id : principal;
 };
 type NeuronId = record { id : blob };
 type Response = variant {
   Ok : bool;
-  NeuronHotKeyAbsent;
   TokenSymbolInvalid : text;
   NeuronNotClaimed;
   NeuronOwnerInvalid : opt principal;
@@ -20,14 +74,30 @@ type Response = variant {
 };
 type Response_1 = variant { Success; InternalError : text };
 type Response_2 = variant { Success; InternalError : text };
+type Result = variant { Ok; Err : vec ClaimRewardError };
+type Result_1 = variant { Ok : ConsentInfo; Err : Icrc21Error };
+type SupportedStandard = record { url : text; name : text };
 type TokenInfo = record {
   fee : nat64;
   decimals : nat64;
   ledger_id : principal;
 };
-service : (InitArgs) -> {
+type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+type Value = variant {
+  Text : record { content : text };
+  TokenAmount : record { decimals : nat8; amount : nat64; symbol : text };
+  TimestampSeconds : record { amount : nat64 };
+  DurationSeconds : record { amount : nat64 };
+};
+service : (Args_4) -> {
   claim_reward : (Args) -> (Response);
+  claim_rewards_batch : (Args_1) -> (Result);
+  icrc10_supported_standards : () -> (vec SupportedStandard) query;
+  icrc21_canister_call_consent_message : (ConsentMessageRequest) -> (
+      Result_1,
+    ) query;
   set_daily_ogy_burn_rate : (nat) -> (Response_1);
-  set_reserve_transfer_amounts : (Args_1) -> (Response_1);
-  set_reward_token_types : (Args_2) -> (Response_2);
+  set_reserve_transfer_amounts : (Args_2) -> (Response_1);
+  set_reward_token_types : (Args_3) -> (Response_2);
 }

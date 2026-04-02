@@ -1,66 +1,44 @@
 #!/usr/bin/env bash
 
-## As argument, preferably pass $1 previously defined by calling the pre-deploy script with the dot notation.
-
-show_help() {
-  cat << EOF
-ogy_token_swap canister deployment script.
-Must be run from the repository's root folder, and with a running replica if for local deployment.
-'staging' and 'ic' networks can only be selected from a Gitlab CI/CD environment.
-The NETWORK argument should preferably be passed from the env variable that was previously defined
-by the pre-deploy script (using the dot notation, or inside a macro deploy script).
-
-The canister will always be reinstalled locally, and only upgraded in staging and production (ic).
-
-Usage:
-  scripts/deploy-ogy_token_swap.sh [options] <NETWORK>
-
-Options:
-  -h, --help        Show this message and exit
-EOF
-}
-
-
-
-if [[ $# -gt 0 ]]; then
-  while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
-    case $1 in
-      -h | --help )
-        show_help
-        exit
-        ;;
-    esac;
-    shift;
-  done
-  if [[ "$1" == '--' ]]; then shift; fi
-else
-  echo "Error: missing <NETWORK> argument"
-  exit 1
-fi
-
 NETWORK=$1
-MODE="proposal"
+DEPLOYMENT_VIA="proposal"
 
-if [[ ! $NETWORK =~ ^(local|staging|ic)$ ]]; then
-  echo "Error: unknown network for deployment"
-  exit 2
-fi
+. ./scripts/extract_commit_tag_data_and_commit_sha.sh sns_rewards $NETWORK
 
-if [[ $NETWORK =~ ^(local|staging)$ ]]; then
-  TESTMODE="true"
-  OGY_LEDGER=$(dfx canister id sns_ledger --network staging)
-  SNS_GOVERNANCE=$(dfx canister id sns_governance --network staging)
+if [[ $REINSTALL == "reinstall" ]]; then
+
+  if [[ $NETWORK =~ ^(local|staging)$ ]]; then
+    TESTMODE=true
+    ICP_LEDGER_CANISTER_ID=ete3q-rqaaa-aaaal-qdlva-cai
+    SNS_LEDGER_CANISTER_ID=irhm6-5yaaa-aaaap-ab24q-cai
+    GOLDAO_LEDGER_CANISTER_ID=j5naj-nqaaa-aaaal-ajc7q-cai
+    SNS_GOVERNANCE_CANISTER_ID=j3ioe-7iaaa-aaaap-ab23q-cai
+  elif [[ $NETWORK =~ ^(ic)$ ]]; then
+    TESTMODE=false
+    ICP_LEDGER_CANISTER_ID=ryjl3-tyaaa-aaaaa-aaaba-cai
+    SNS_LEDGER_CANISTER_ID=tyyy3-4aaaa-aaaaq-aab7a-cai
+    GOLDAO_LEDGER_CANISTER_ID=lkwrt-vyaaa-aaaaq-aadhq-cai
+    SNS_GOVERNANCE_CANISTER_ID=tr3th-kiaaa-aaaaq-aab6q-cai
+  else
+    echo "Error: unknown network for deployment. Found $NETWORK."
+    exit 2
+  fi
+
+  ARGUMENTS="(variant { Init = record {
+    test_mode = $TESTMODE;
+    commit_hash = \"$COMMIT_SHA\";
+    version = $BUILD_VERSION;
+    icp_ledger_canister_id = principal \"$ICP_LEDGER_CANISTER_ID\";
+    sns_ledger_canister_id = principal \"$SNS_LEDGER_CANISTER_ID\";
+    goldao_ledger_canister_id = principal \"$GOLDAO_LEDGER_CANISTER_ID\";
+    sns_gov_canister_id = principal \"$SNS_GOVERNANCE_CANISTER_ID\"
+  }})"
+
 else
-  TESTMODE="false"
-  OGY_LEDGER=$(dfx canister id sns_ledger --network $NETWORK)
-  SNS_GOVERNANCE=$(dfx canister id sns_governance --network $NETWORK)
+  ARGUMENTS="(variant { Upgrade = record {
+    version = $BUILD_VERSION;
+    commit_hash = \"$COMMIT_SHA\";
+  }})"
 fi
 
-ARGUMENTS="(record {
-  test_mode = $TESTMODE;
-  sns_ledger_canister_id = principal \"$OGY_LEDGER\";
-  sns_gov_canister_id = principal \"$SNS_GOVERNANCE\";
-  } )"
-
-
-. ./scripts/deploy-backend-canister.sh sns_rewards $NETWORK "$ARGUMENTS" $MODE
+. ./scripts/deploy-backend-canister.sh sns_rewards $NETWORK "$ARGUMENTS" $DEPLOYMENT_VIA $VERSION $REINSTALL

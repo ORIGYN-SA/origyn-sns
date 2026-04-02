@@ -1,3 +1,5 @@
+type Args = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
 type Category = record { active : bool; collection_count : nat64 };
 type Collection = record {
   name : opt text;
@@ -20,6 +22,8 @@ type GetCollectionsResult = record {
 type InitArgs = record {
   test_mode : bool;
   authorized_principals : vec principal;
+  version : BuildVersion;
+  commit_hash : text;
 };
 type InsertCategoryArgs = record { category_name : text };
 type InsertCategoryError = variant { CategoryAlreadyExists };
@@ -79,7 +83,8 @@ type UpdateCollectionError = variant {
   CollectionNotFound;
   CategoryNotFound : text;
 };
-service : (InitArgs) -> {
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+service : (Args) -> {
   add_authorised_principal : (principal) -> (Result);
   get_categories : () -> (Result_1) query;
   get_collection_by_principal : (principal) -> (Result_2) query;

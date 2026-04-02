@@ -8,59 +8,63 @@ transfers tokens from reserve pool to the reward pool on a daily basis.
 
 */
 
-use crate::{ state::{ mutate_state, read_state }, utils::transfer_token };
-use candid::{ Nat, Principal };
-use canister_time::{ now_millis, run_interval, DAY_IN_MS };
-use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
-use sns_rewards_api_canister::subaccounts::{ RESERVE_POOL_SUB_ACCOUNT, REWARD_POOL_SUB_ACCOUNT };
+use crate::{
+    state::{mutate_state, read_state},
+    utils::transfer_token,
+};
+use bity_ic_canister_time::{now_millis, start_job_daily_at, DAY_IN_MS};
+use candid::{Nat, Principal};
+use icrc_ledger_types::icrc1::account::{Account, Subaccount};
+use sns_rewards_api_canister::subaccounts::{RESERVE_POOL_SUB_ACCOUNT, REWARD_POOL_SUB_ACCOUNT};
+use tracing::{debug, error, info};
+use types::{Milliseconds, TimestampMillis, TokenSymbol};
 use utils::env::Environment;
-use std::time::Duration;
-use tracing::{ debug, error, info };
-use types::{ Milliseconds, TimestampMillis, TokenSymbol };
 
 const DISTRIBUTION_INTERVAL: Milliseconds = DAY_IN_MS;
 
 pub fn start_job() {
-    run_interval(Duration::from_millis(DISTRIBUTION_INTERVAL), run_distribution);
+    start_job_daily_at(6, run);
 }
 
-pub fn run_distribution() {
-    ic_cdk::spawn(distribute_reserve_pool())
+pub fn run() {
+    ic_cdk::futures::spawn(run_async());
+}
+
+async fn run_async() {
+    distribute_reserve_pool().await;
 }
 
 pub async fn distribute_reserve_pool() {
     debug!("RESERVE POOL DISTRIBUTION - START");
-    handle_ogy_reserve_distribution().await;
+    handle_ogy_distribution().await;
     debug!("RESERVE POOL DISTRIBUTION - FINISH");
 }
 
-async fn handle_ogy_reserve_distribution() {
-    // chceck OGY is a valid token string
-    let token = match TokenSymbol::parse("OGY") {
-        Ok(t) => t,
-        Err(e) => {
-            error!("ERROR : failed to parse OGY token. error : {:?}", e);
-            return;
-        }
-    };
-    // get the OGY ledger id
+async fn handle_ogy_distribution() {
+    let token = TokenSymbol::OGY;
+    // get the ogy ledger id
     let ogy_token_info = match read_state(|s| s.data.tokens.get(&token).copied()) {
         Some(token_info) => token_info,
         None => {
-            error!("ERROR : failed to get token information and ledger id for token {:?}", &token);
+            error!(
+                "ERROR : failed to get token information and ledger id for token {:?}",
+                &token
+            );
             return;
         }
     };
-    // get the daily transfer amount of OGY
-    let amount_to_transfer = match
-        read_state(|s| s.data.daily_reserve_transfer.get(&token).cloned())
-    {
-        Some(amount) => amount,
-        None => {
-            error!("ERROR: can't find daily transfer amount for token : {:?} in state", token);
-            return;
-        }
-    };
+    // get the daily transfer amount of ogy
+    let amount_to_transfer =
+        match read_state(|s| s.data.daily_reserve_transfer.get(&token).cloned()) {
+            Some(amount) => amount,
+            None => {
+                error!(
+                    "ERROR: can't find daily transfer amount for token : {:?} in state",
+                    token
+                );
+                return;
+            }
+        };
     // check we're more than 1 day since the last distribution. The last_daily_reserve_transfer_time will be 0 on the first distribution because in state it's initialized with ::default() // 0
     let previous_time_ms = read_state(|s| s.data.last_daily_reserve_transfer_time);
     let current_time_ms = now_millis();
@@ -96,13 +100,13 @@ async fn handle_ogy_reserve_distribution() {
         subaccount: Some(REWARD_POOL_SUB_ACCOUNT),
     };
 
-    match
-        transfer_token(
-            RESERVE_POOL_SUB_ACCOUNT,
-            reward_pool_account,
-            ogy_token_info.ledger_id,
-            amount_to_transfer.clone()
-        ).await
+    match transfer_token(
+        RESERVE_POOL_SUB_ACCOUNT,
+        reward_pool_account,
+        ogy_token_info.ledger_id,
+        amount_to_transfer.clone(),
+    )
+    .await
     {
         Ok(_) => {
             info!(
@@ -125,25 +129,25 @@ async fn handle_ogy_reserve_distribution() {
 
 async fn fetch_balance_of_sub_account(
     ledger_canister_id: Principal,
-    sub_account: Subaccount
+    sub_account: Subaccount,
 ) -> Result<Nat, String> {
-    match
-        icrc_ledger_canister_c2c_client::icrc1_balance_of(
-            ledger_canister_id,
-            &(Account {
-                owner: read_state(|s| s.env.canister_id()),
-                subaccount: Some(sub_account),
-            })
-        ).await
+    match icrc_ledger_canister_c2c_client::icrc1_balance_of(
+        ledger_canister_id,
+        &(Account {
+            owner: read_state(|s| s.env.canister_id()),
+            subaccount: Some(sub_account),
+        }),
+    )
+    .await
     {
-        Ok(t) => { Ok(t) }
-        Err(e) => { Err(format!("ERROR: {:?}", e.1)) }
+        Ok(t) => Ok(t),
+        Err(e) => Err(format!("ERROR: {:?}", e)),
     }
 }
 
 pub fn is_valid_distribution_time(
     previous_time: TimestampMillis,
-    now_time: TimestampMillis
+    now_time: TimestampMillis,
 ) -> bool {
     // convert the milliseconds to the number of days since UNIX Epoch.
     // integer division means partial days will be truncated down or effectively rounded down. e.g 245.5 becomes 245

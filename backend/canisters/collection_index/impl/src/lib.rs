@@ -1,15 +1,16 @@
 use ic_cdk::export_candid;
 
-mod jobs;
-mod memory;
-mod lifecycle;
 mod guards;
-mod services;
+mod jobs;
+mod lifecycle;
+mod memory;
+mod migrations;
 mod model;
-pub mod utils;
 pub mod queries;
-pub mod updates;
+mod services;
 pub mod state;
+pub mod updates;
+pub mod utils;
 
 use lifecycle::*;
 use queries::*;
