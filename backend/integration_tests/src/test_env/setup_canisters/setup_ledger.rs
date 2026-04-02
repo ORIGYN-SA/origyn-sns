@@ -15,8 +15,8 @@ pub fn setup(
 ) -> Principal {
     let token_ticker = token.symbol().to_string();
     let token_info = token.get_prod_token_info();
-    let cansiter_id = create_canister_with_id(pic, controller, token_info.ledger_id);
-    pic.add_cycles(cansiter_id, 20_000_000_000_000);
+    let canister_id = create_canister_with_id(pic, controller, token_info.ledger_id);
+    pic.add_cycles(canister_id, 20_000_000_000_000);
 
     let wasm: Vec<u8> = wasms::IC_ICRC2_LEDGER.clone();
 
@@ -36,7 +36,7 @@ pub fn setup(
         token_name: token_ticker,
     });
 
-    install_canister(pic, controller, cansiter_id, wasm, ledger_init_args);
+    install_canister(pic, controller, canister_id, wasm, ledger_init_args);
 
-    cansiter_id
+    canister_id
 }

@@ -19,7 +19,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
-    REWARDS_DESTINATION=null
+    BUYBACK_BURN=$(dfx canister id buyback_burn --network "$NETWORK")
 
     AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
 
@@ -36,7 +36,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
-    REWARDS_DESTINATION=null
+    BUYBACK_BURN=$(dfx canister id buyback_burn --network "$NETWORK")
     AUTHORIZED_PRINCIPAL=$(dfx canister id sns_governance --network "$NETWORK")
 
     OGY_SNS_GOVERNANCE_ID=lnxxh-yaaaa-aaaaq-aadha-cai
@@ -61,7 +61,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     version = $BUILD_VERSION;
     commit_hash = \"$COMMIT_SHA\";
     authorized_principals = vec { principal \"$AUTHORIZED_PRINCIPAL\" };
-    rewards_destination = $REWARDS_DESTINATION;
+    rewards_destination = opt principal \"$BUYBACK_BURN\";
     ogy_manager_config = record {
         ogy_sns_governance_canister_id = principal \"$OGY_SNS_GOVERNANCE_ID\";
         ogy_sns_ledger_canister_id = principal \"$OGY_SNS_LEDGER_ID\";

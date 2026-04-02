@@ -24,24 +24,64 @@ if [[ $REINSTALL == "reinstall" ]]; then
     exit 2
   fi
 
-  ICPSWAP_POOL_ID_GOLDAO="k46ek-4qaaa-aaaag-qcyzq-cai"
-  ICPSWAP_POOL_ID_GLDT="4omhz-yiaaa-aaaag-qnalq-cai"
-  MIN_SWAP_AMOUNT=10_000_000                # 0.1 tokens
-  # Could be set if needed
-  #MAX_SWAP_AMOUNT=
+  MIN_SWAP_AMOUNT=10_000_000
+  ICPSWAP_POOL_ID_WTN_ICP="oqn67-kaaaa-aaaag-qj72q-cai"
 
-  EXCHANGE_CONFIG_GOLDAO="variant {
+  EXCHANGE_CONFIG_WTN_ICP="variant {
     ICPSwap = record {
-      swap_canister_id = principal \"$ICPSWAP_POOL_ID_GOLDAO\";
+      swap_canister_id = principal \"$ICPSWAP_POOL_ID_WTN_ICP\";
       zero_for_one = true;
     }
   }"
+  
+  EXCHANGE_JOB_CONFIG_WTN_ICP="record {
+    token_to_sell = variant { WTN };
+    token_to_buy = variant { ICP };
+    exchange = $EXCHANGE_CONFIG_WTN_ICP;
+    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
+    job_interval_ms = 14400 : nat64;
+    source_subaccount = null;
+    min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
+    max_amount = null;
+    destination_account = null;
+  }"
 
-  EXCHANGE_JOB_CONFIG_GOLDAO="record {
+
+  ICPSWAP_POOL_ID_GOLDAO_OGY="tblob-hiaaa-aaaag-qj2cq-cai"
+
+  EXCHANGE_CONFIG_GOLDAO_OGY="variant {
+    ICPSwap = record {
+      swap_canister_id = principal \"$ICPSWAP_POOL_ID_GOLDAO_OGY\";
+      zero_for_one = false;
+    }
+  }"
+  
+  EXCHANGE_JOB_CONFIG_GOLDAO_OGY="record {
+    token_to_sell = variant { GOLDAO };
+    token_to_buy = variant { OGY };
+    exchange = $EXCHANGE_CONFIG_GOLDAO_OGY;
+    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
+    job_interval_ms = 14400 : nat64;
+    source_subaccount = null;
+    min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
+    max_amount = null;
+    destination_account = null;
+  }"
+
+  ICPSWAP_POOL_ID_ICP_OGY="ttnzy-lyaaa-aaaag-qj2bq-cai"
+
+  EXCHANGE_CONFIG_ICP_OGY="variant {
+    ICPSwap = record {
+      swap_canister_id = principal \"$ICPSWAP_POOL_ID_ICP_OGY\";
+      zero_for_one = false;
+    }
+  }"
+  
+  EXCHANGE_JOB_CONFIG_ICP_OGY="record {
     token_to_sell = variant { ICP };
-    token_to_buy = variant { GOLDAO };
-    exchange = $EXCHANGE_CONFIG_GOLDAO;
-    rate_per_interval = 793_650 : nat64;
+    token_to_buy = variant { OGY };
+    exchange = $EXCHANGE_CONFIG_ICP_OGY;
+    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
     job_interval_ms = 14400 : nat64;
     source_subaccount = null;
     min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
@@ -50,9 +90,8 @@ if [[ $REINSTALL == "reinstall" ]]; then
   }"
 
   # Combine all exchange configs into a vector
-  EXCHANGE_CONFIGS="vec { $EXCHANGE_JOB_CONFIG_GOLDAO }"
+  EXCHANGE_CONFIGS="vec { $EXCHANGE_JOB_CONFIG_WTN_ICP, $EXCHANGE_JOB_CONFIG_GOLDAO_OGY, $EXCHANGE_JOB_CONFIG_ICP_OGY }"
   ICP_SWAP_CANISTER_ID="7eikv-2iaaa-aaaag-qdgwa-cai"
-
 
   ARGUMENTS="(variant { Init = record {
         test_mode = $TESTMODE;
@@ -76,5 +115,3 @@ else
 fi
 
 . ./scripts/deploy-backend-canister.sh buyback_burn $NETWORK "$ARGUMENTS" $DEPLOYMENT_VIA $VERSION $REINSTALL
-
-

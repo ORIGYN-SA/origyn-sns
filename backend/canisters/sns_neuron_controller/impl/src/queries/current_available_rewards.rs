@@ -6,6 +6,6 @@ use ic_cdk::query;
 
 #[query(guard = "caller_is_governance_principal", hidden = true)]
 async fn current_available_rewards() -> Nat {
-    let ogy_neuron_manager = read_state(|s| s.data.neuron_managers.ogy.clone());
-    ogy_neuron_manager.get_available_rewards().await
+    let goldao_neuron_manager = read_state(|s| s.data.neuron_managers.goldao.clone());
+    goldao_neuron_manager.get_available_rewards().await
 }

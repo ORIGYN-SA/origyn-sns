@@ -395,12 +395,6 @@ impl SNCTestEnvBuilder {
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![self.controller, ogy_sns_test_env.governance_id],
             rewards_destination: Some(self.rewards_destination),
-            ogy_manager_config: sns_neuron_controller_api_canister::init::OgyManagerConfig {
-                ogy_sns_governance_canister_id: ogy_sns_test_env.governance_id,
-                ogy_sns_ledger_canister_id,
-                ogy_sns_rewards_canister_id: self.ogy_rewards_canister_id,
-                ogy_rewards_threshold: Nat::from(100_000_000_000_000_u64),
-            },
             goldao_manager_config: sns_neuron_controller_api_canister::init::GoldaoManagerConfig {
                 goldao_sns_governance_canister_id: goldao_sns_test_env.governance_id,
                 goldao_sns_ledger_canister_id,

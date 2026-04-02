@@ -8,7 +8,7 @@ use pocket_ic::PocketIc;
 
 pub fn setup(
     pic: &PocketIc,
-    cansiter_id: Principal,
+    canister_id: Principal,
     controllers: Vec<Principal>,
     rewards_destination: Option<Principal>,
     ogy_sns_governance_canister_id: Principal,
@@ -19,13 +19,13 @@ pub fn setup(
     goldao_sns_rewards_canister_id: Principal,
 ) -> Principal {
     let controller = controllers.first().unwrap();
-    let cansiter_id = create_canister_with_id(pic, *controller, cansiter_id);
+    let canister_id = create_canister_with_id(pic, *controller, canister_id);
 
     let wasm = SNS_NEURON_CONTROLLER.clone();
-    pic.add_cycles(cansiter_id, 1_000_000_000_000_000);
+    pic.add_cycles(canister_id, 1_000_000_000_000_000);
 
     let cloned_controllers = controllers.clone();
-    pic.set_controllers(cansiter_id, Some(controller.clone()), cloned_controllers)
+    pic.set_controllers(canister_id, Some(controller.clone()), cloned_controllers)
         .unwrap();
     pic.tick();
 
@@ -36,12 +36,6 @@ pub fn setup(
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![*controller, ogy_sns_governance_canister_id],
             rewards_destination,
-            ogy_manager_config: sns_neuron_controller_api_canister::init::OgyManagerConfig {
-                ogy_sns_governance_canister_id,
-                ogy_sns_ledger_canister_id,
-                ogy_sns_rewards_canister_id,
-                ogy_rewards_threshold: Nat::from(100_000_000_000_000_u64),
-            },
             goldao_manager_config: sns_neuron_controller_api_canister::init::GoldaoManagerConfig {
                 goldao_sns_governance_canister_id,
                 goldao_sns_ledger_canister_id,
@@ -57,11 +51,11 @@ pub fn setup(
     );
 
     pic.install_canister(
-        cansiter_id,
+        canister_id,
         wasm,
         encode_one(snc_init_args).unwrap(),
         Some(controller.clone()),
     );
 
-    cansiter_id
+    canister_id
 }

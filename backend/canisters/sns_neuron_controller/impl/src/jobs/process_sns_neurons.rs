@@ -28,27 +28,6 @@ pub fn run() {
 async fn run_async() {
     info!("Start processing SNS neurons");
 
-    // --- OGY NEURONS ---
-    if let Err(err) = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, || async {
-        let mut ogy_neuron_manager = read_state(|state| {
-            state
-                .data
-                .neuron_managers
-                .get_neuron_manager(NeuronType::OGY)
-        });
-        fetch_and_process_neurons(&mut ogy_neuron_manager).await
-    })
-    .await
-    {
-        let msg = format!(
-            "Failed to process OGY neurons after {} attempts: {:?}",
-            MAX_ATTEMPTS, err
-        );
-        error!("{}", msg);
-    } else {
-        info!("Processing OGY neurons were successful");
-    }
-
     // --- GOLDAO NEURONS ---
     if let Err(err) = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, || async {
         let mut goldao_neuron_manager = read_state(|state| {
@@ -75,7 +54,6 @@ async fn run_async() {
 
 async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Result<(), String> {
     let manager_type = match neuron_manager {
-        NeuronManagerEnum::OgyManager(_) => "OGY",
         NeuronManagerEnum::GoldaoManager(_) => "GOLDAO",
     };
 
@@ -105,11 +83,6 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
     }
 
     match neuron_manager {
-        NeuronManagerEnum::OgyManager(ogy_manager) => {
-            mutate_state(|s| {
-                s.data.neuron_managers.ogy = ogy_manager.clone();
-            });
-        }
         NeuronManagerEnum::GoldaoManager(goldao_manager) => {
             mutate_state(|s| {
                 s.data.neuron_managers.goldao = goldao_manager.clone();

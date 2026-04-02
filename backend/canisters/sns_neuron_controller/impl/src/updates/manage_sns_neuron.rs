@@ -51,19 +51,12 @@ pub(crate) async fn manage_sns_neuron_impl(
 
 pub fn get_governance_canister_id(neuron_type: NeuronType) -> CanisterId {
     match neuron_type {
-        NeuronType::OGY => read_state(|state| {
-            state
-                .data
-                .neuron_managers
-                .ogy
-                .ogy_sns_governance_canister_id
-        }),
         NeuronType::GOLDAO => read_state(|state| {
             state
                 .data
                 .neuron_managers
-                .ogy
-                .ogy_sns_governance_canister_id
+                .goldao
+                .goldao_sns_governance_canister_id
         }),
     }
 }

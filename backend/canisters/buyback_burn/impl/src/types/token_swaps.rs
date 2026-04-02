@@ -25,7 +25,7 @@ fn init_map() -> StableBTreeMap<u128, TokenSwap, VM> {
 impl Default for TokenSwaps {
     fn default() -> Self {
         Self {
-                        next_id: 0,
+            next_id: 0,
             swaps: HashMap::new(),
             history: init_map(),
         }

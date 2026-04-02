@@ -18,8 +18,6 @@ use types::TokenSymbol;
 /// Describes a single SNS to spin up, with optional neuron data and initial ledger balances.
 pub struct SnsConfig {
     pub project: SnsProject,
-    /// If true, one neuron owned by the controller is pre-created.
-    pub with_neurons: bool,
     pub neurons: HashMap<usize, Neuron>,
     pub initial_balances: Option<Vec<(LedgerAccount, Nat)>>,
 }
@@ -28,7 +26,6 @@ impl SnsConfig {
     pub fn new(project: SnsProject) -> Self {
         Self {
             project,
-            with_neurons: false,
             neurons: HashMap::new(),
             initial_balances: None,
         }
@@ -36,11 +33,6 @@ impl SnsConfig {
 
     pub fn with_neurons(mut self, neurons: HashMap<usize, Neuron>) -> Self {
         self.neurons = neurons;
-        self
-    }
-
-    pub fn with_neurons_if(mut self, condition: bool) -> Self {
-        self.with_neurons = condition;
         self
     }
 

@@ -30,16 +30,12 @@ pub fn setup_rewards_canister(
         .expect("couldn't find ledger with 'icp_ledger_canister_id'")
         .clone();
     let sns_ledger_canister_id = token_ledgers
-        .get("goldao_ledger_canister_id")
-        .expect("couldn't find ledger with 'goldao_ledger_canister_id'")
-        .clone();
-    let ogy_ledger_canister_id = token_ledgers
         .get("ogy_ledger_canister_id")
-        .expect("couldn't find ledger with 'ogy_ledger_canister_id'")
+        .expect("couldn't find ledger with 'sns_ledger_canister_id'")
         .clone();
     let goldao_ledger_canister_id = token_ledgers
         .get("goldao_ledger_canister_id")
-        .expect("couldn't find ledger with 'ogy_ledger_canister_id'")
+        .expect("couldn't find ledger with 'goldao_ledger_canister_id'")
         .clone();
 
     let init_args = Args::Init(InitArgs {

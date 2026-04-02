@@ -9,20 +9,20 @@ use crate::wasms;
 
 pub fn setup(
     pic: &PocketIc,
-    cansiter_id: Principal,
+    canister_id: Principal,
     icp_ledger_canister_id: Principal,
     sns_ledger_canister_id: Principal,
     goldao_ledger_canister_id: Principal,
     sns_canister_id: Principal,
     controller: &Principal,
 ) -> Principal {
-    let cansiter_id = create_canister_with_id(pic, *controller, cansiter_id);
+    let canister_id = create_canister_with_id(pic, *controller, canister_id);
 
     let wasm = wasms::REWARDS.clone();
 
-    pic.add_cycles(cansiter_id, 100_000_000_000_000_000);
+    pic.add_cycles(canister_id, 100_000_000_000_000_000);
     pic.set_controllers(
-        cansiter_id,
+        canister_id,
         Some(controller.clone()),
         vec![controller.clone()],
     )
@@ -39,10 +39,10 @@ pub fn setup(
         sns_gov_canister_id: sns_canister_id.clone(),
     });
     pic.install_canister(
-        cansiter_id,
+        canister_id,
         wasm,
         encode_one(init_args).unwrap(),
         Some(controller.clone()),
     );
-    cansiter_id
+    canister_id
 }

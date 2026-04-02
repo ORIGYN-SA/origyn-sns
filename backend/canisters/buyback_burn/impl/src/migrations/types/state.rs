@@ -53,7 +53,6 @@ pub struct ICPSwapClientV0 {
     zero_for_one: bool,
 }
 
-
 use crate::memory::VM;
 use crate::types::TokenSwap;
 use ic_stable_structures::StableBTreeMap;
@@ -76,7 +75,11 @@ impl From<TokenSwapsV0> for TokenSwaps {
 
         // Calculate the next ID based on current state to prevent collisions
         let active_max = old.swaps.keys().max().cloned().unwrap_or(0);
-        let history_max = history.iter().map(|entry| entry.key().clone()).max().unwrap_or(0);
+        let history_max = history
+            .iter()
+            .map(|entry| entry.key().clone())
+            .max()
+            .unwrap_or(0);
 
         // Next ID should be 1 higher than the highest ID ever seen
         let next_id = std::cmp::max(active_max, history_max) + 1;
