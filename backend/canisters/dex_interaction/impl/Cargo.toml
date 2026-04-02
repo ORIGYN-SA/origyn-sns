@@ -1,5 +1,5 @@
 [package]
-name = "buyback_burn"
+name = "dex_interaction"
 version = "0.1.0"
 edition = "2021"
 
@@ -17,7 +17,7 @@ bity-ic-canister-state-macros = { workspace = true }
 bity-ic-canister-tracing-macros = { workspace = true }
 icpswap_client = { path = "../../../libraries/icpswap_client" }
 bity-ic-canister-time = { workspace = true }
-buyback_burn_api = { path = "../api" }
+dex_interaction_api = { path = "../api" }
 ic-cdk = { workspace = true }
 ic-cdk-macros = { workspace = true }
 ic-cdk-timers = { workspace = true }

@@ -1,7 +1,7 @@
 [workspace]
 members = [
-  "backend/canisters/buyback_burn/api",
-  "backend/canisters/buyback_burn/impl",
+  "backend/canisters/dex_interaction/api",
+  "backend/canisters/dex_interaction/impl",
   "backend/canisters/canister_jobs/api",
   "backend/canisters/canister_jobs/impl",
   "backend/canisters/collection_index/api",

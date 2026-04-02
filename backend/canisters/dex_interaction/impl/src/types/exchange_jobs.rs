@@ -1,8 +1,8 @@
 use crate::types::SwapClientEnum;
 use crate::utils::run_now_then_interval_with_args;
 use crate::UpdateExchangeConfigArgs;
-use buyback_burn_api::exchange_job_config::ExchangeJobConfig;
-use buyback_burn_api::swap_config::SwapConfig;
+use dex_interaction_api::exchange_job_config::ExchangeJobConfig;
+use dex_interaction_api::swap_config::SwapConfig;
 use ic_cdk_timers::TimerId;
 use ic_ledger_types::Tokens;
 use icrc_ledger_types::icrc1::account::Account;

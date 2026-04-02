@@ -3,7 +3,7 @@
 NETWORK=$1
 DEPLOYMENT_VIA="proposal"
 
-. ./scripts/extract_commit_tag_data_and_commit_sha.sh buyback_burn $NETWORK
+. ./scripts/extract_commit_tag_data_and_commit_sha.sh dex_interaction $NETWORK
 
 if [[ $REINSTALL == "reinstall" ]]; then
 
@@ -114,4 +114,4 @@ else
   }})"
 fi
 
-. ./scripts/deploy-backend-canister.sh buyback_burn $NETWORK "$ARGUMENTS" $DEPLOYMENT_VIA $VERSION $REINSTALL
+. ./scripts/deploy-backend-canister.sh dex_interaction $NETWORK "$ARGUMENTS" $DEPLOYMENT_VIA $VERSION $REINSTALL

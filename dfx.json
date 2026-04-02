@@ -83,16 +83,16 @@
       "type": "custom",
       "wasm": ""
     },
-    "buyback_burn": {
-      "build": ["./scripts/build-canister.sh buyback_burn"],
-      "candid": "backend/canisters/buyback_burn/api/can.did",
+    "dex_interaction": {
+      "build": ["./scripts/build-canister.sh dex_interaction"],
+      "candid": "backend/canisters/dex_interaction/api/can.did",
       "declarations": {
         "bindings": ["js", "did"],
         "env_override": null,
-        "output": "backend/canisters/buyback_burn/api/declarations"
+        "output": "backend/canisters/dex_interaction/api/declarations"
       },
       "type": "custom",
-      "wasm": "backend/canisters/buyback_burn/target/wasm32-unknown-unknown/release/buyback_burn_canister.wasm.gz"
+      "wasm": "backend/canisters/dex_interaction/target/wasm32-unknown-unknown/release/dex_interaction_canister.wasm.gz"
     },
     "sns_rewards": {
       "build": ["./scripts/build-canister.sh sns_rewards"],

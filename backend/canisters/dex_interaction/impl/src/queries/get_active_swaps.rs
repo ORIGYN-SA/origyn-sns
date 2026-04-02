@@ -1,5 +1,5 @@
 use crate::state::read_state;
-pub use buyback_burn_api::get_active_swaps::Response as GetActiveSwapsResponse;
+pub use dex_interaction_api::get_active_swaps::Response as GetActiveSwapsResponse;
 use ic_cdk_macros::query;
 
 #[query]

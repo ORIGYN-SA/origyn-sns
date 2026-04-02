@@ -19,7 +19,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
-    BUYBACK_BURN=$(dfx canister id buyback_burn --network "$NETWORK")
+    BUYBACK_BURN=$(dfx canister id dex_interaction --network "$NETWORK")
 
     AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
 
@@ -36,7 +36,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
-    BUYBACK_BURN=$(dfx canister id buyback_burn --network "$NETWORK")
+    BUYBACK_BURN=$(dfx canister id dex_interaction --network "$NETWORK")
     AUTHORIZED_PRINCIPALS=$(dfx canister id sns_governance --network "$NETWORK")
 
     OGY_SNS_GOVERNANCE_ID=lnxxh-yaaaa-aaaaq-aadha-cai

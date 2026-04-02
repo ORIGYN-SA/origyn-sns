@@ -54,7 +54,7 @@ include:
   #     src-folder: sns_neuron_controller
   # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   #   inputs:
-  #     src-folder: buyback_burn
+  #     src-folder: dex_interaction
   # # - local: scripts/ci-cd/.canister_unit_test_coverage.yml
   # #   inputs:
   # #     src-folder: token_metrics
@@ -79,7 +79,7 @@ include:
       src-folder: sns_neuron_controller
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
-      src-folder: buyback_burn
+      src-folder: dex_interaction
   # - local: scripts/ci-cd/.canister_builds.yml
   #   inputs:
   #     src-folder: token_metrics
@@ -133,7 +133,7 @@ include:
       src-folder: sns_neuron_controller
   - local: scripts/ci-cd/.canister_deploys.yml
     inputs:
-      src-folder: buyback_burn
+      src-folder: dex_interaction
   # - local: scripts/ci-cd/.canister_deploys.yml
   #   inputs:
   #     src-folder: token_metrics

@@ -7,7 +7,7 @@ spec:
           "ogy_token_swap",
           "sns_rewards",
           "sns_neuron_controller",
-          "buyback_burn",
+          "dex_interaction",
           "token_metrics",
           "canister_jobs",
           "collection_index"

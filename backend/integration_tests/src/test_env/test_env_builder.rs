@@ -3,7 +3,7 @@ use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::test_env::setup_canisters::*;
 use crate::utils::{random_principal, tick_n_blocks};
 use bity_ic_types::Hash;
-use buyback_burn_api::Args as BuybackBurnArgs;
+use dex_interaction_api::Args as BuybackBurnArgs;
 use candid::{Nat, Principal};
 use pocket_ic::PocketIcBuilder;
 use sns_governance_canister::types::Neuron;
@@ -85,8 +85,8 @@ impl TestEnv {
         }
     }
 
-    pub fn install_buyback_burn(&self, canister_id: Principal, args: BuybackBurnArgs) -> Principal {
-        setup_buyback_burn::setup(
+    pub fn install_dex_interaction(&self, canister_id: Principal, args: BuybackBurnArgs) -> Principal {
+        setup_dex_interaction::setup(
             &mut self.pic.borrow_mut(),
             canister_id,
             args,

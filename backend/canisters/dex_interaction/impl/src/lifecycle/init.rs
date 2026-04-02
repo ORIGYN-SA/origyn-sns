@@ -1,7 +1,7 @@
 use crate::lifecycle::init_canister;
 use crate::state::{Data, RuntimeState};
 use bity_ic_canister_tracing_macros::trace;
-pub use buyback_burn_api::Args;
+pub use dex_interaction_api::Args;
 use ic_cdk_macros::init;
 use tracing::info;
 use utils::consts::SNS_GOVERNANCE_CANISTER_ID_STAGING;

@@ -39,7 +39,7 @@ integration tests:
       "canister_jobs integration-test build",
       "collection_index integration-test build",
       "sns_rewards integration-test build",
-      "buyback_burn integration-test build",
+      "dex_interaction integration-test build",
       "sns_neuron_controller integration-test build",
     ]
   extends: .rust template

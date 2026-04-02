@@ -3,7 +3,7 @@ use crate::types::token_swaps::TokenSwapsMetrics;
 use crate::types::ExchangeJobs;
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
-use buyback_burn_api::exchange_job_config::ExchangeJobConfig;
+use dex_interaction_api::exchange_job_config::ExchangeJobConfig;
 use candid::{CandidType, Principal};
 use ic_ledger_types::Tokens;
 use serde::{Deserialize, Serialize};

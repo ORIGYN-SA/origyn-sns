@@ -1,8 +1,8 @@
 use crate::guards::caller_is_governance_principal;
 use crate::state::{mutate_state, RuntimeState};
 use bity_ic_canister_tracing_macros::trace;
-pub use buyback_burn_api::update_exchange_config::Args as UpdateExchangeConfigArgs;
-pub use buyback_burn_api::update_exchange_config::Response as UpdateExchangeConfigResponse;
+pub use dex_interaction_api::update_exchange_config::Args as UpdateExchangeConfigArgs;
+pub use dex_interaction_api::update_exchange_config::Response as UpdateExchangeConfigResponse;
 use ic_cdk_macros::{query, update};
 
 // TODO: fix validation

@@ -1,8 +1,8 @@
 use crate::guards::caller_is_governance_principal;
 use crate::state::{mutate_state, RuntimeState};
 use bity_ic_canister_tracing_macros::trace;
-pub use buyback_burn_api::add_exchange_jobs::Args as AddExchangeJobArgs;
-pub use buyback_burn_api::add_exchange_jobs::Response as AddExchangeJobResponse;
+pub use dex_interaction_api::add_exchange_jobs::Args as AddExchangeJobArgs;
+pub use dex_interaction_api::add_exchange_jobs::Response as AddExchangeJobResponse;
 use ic_cdk_macros::{query, update};
 
 #[query(guard = "caller_is_governance_principal", hidden = true)]

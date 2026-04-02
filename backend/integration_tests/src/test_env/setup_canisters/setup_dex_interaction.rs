@@ -7,7 +7,7 @@ use pocket_ic::PocketIc;
 pub fn setup(
     pic: &mut PocketIc,
     canister_id: Principal,
-    args: buyback_burn_api::Args,
+    args: dex_interaction_api::Args,
     controller: Principal,
 ) -> Principal {
     let canister_id = create_canister_with_id(pic, controller, canister_id);
@@ -34,15 +34,15 @@ pub fn setup(
 }
 
 use bity_ic_types::BuildVersion;
-use buyback_burn_api::post_upgrade::UpgradeArgs;
-use buyback_burn_api::Args;
+use dex_interaction_api::post_upgrade::UpgradeArgs;
+use dex_interaction_api::Args;
 use pocket_ic::RejectResponse;
-pub fn upgrade_buyback_burn_canister(
+pub fn upgrade_dex_interaction_canister(
     pic: &PocketIc,
     canister_id: Principal,
     controller: &Principal,
 ) -> std::result::Result<(), RejectResponse> {
-    let buyback_burn_wasm = crate::wasms::BUYBACK_BURN.clone();
+    let dex_interaction_wasm = crate::wasms::BUYBACK_BURN.clone();
 
     let upgrade_args = Args::Upgrade(UpgradeArgs {
         version: BuildVersion::min(),
@@ -53,7 +53,7 @@ pub fn upgrade_buyback_burn_canister(
 
     pic.upgrade_canister(
         canister_id,
-        buyback_burn_wasm,
+        dex_interaction_wasm,
         encoded_args,
         Some(controller.clone()),
     )
