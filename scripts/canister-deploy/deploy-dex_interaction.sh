@@ -90,7 +90,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
   }"
 
   # Combine all exchange configs into a vector
-  EXCHANGE_CONFIGS="vec { $EXCHANGE_JOB_CONFIG_WTN_ICP, $EXCHANGE_JOB_CONFIG_GOLDAO_OGY, $EXCHANGE_JOB_CONFIG_ICP_OGY }"
+  EXCHANGE_CONFIGS="vec { $EXCHANGE_JOB_CONFIG_WTN_ICP; $EXCHANGE_JOB_CONFIG_GOLDAO_OGY; $EXCHANGE_JOB_CONFIG_ICP_OGY }"
   ICP_SWAP_CANISTER_ID="7eikv-2iaaa-aaaag-qdgwa-cai"
 
   ARGUMENTS="(variant { Init = record {
