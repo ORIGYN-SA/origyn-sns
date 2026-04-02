@@ -47,7 +47,7 @@ integration tests:
     - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/9.0.1/pocket-ic-x86_64-linux.gz
     - gzip -d pocket-ic.gz
     - chmod +x ./pocket-ic
-    - mv ./pocket-ic ./backend/integration_testing/pocket-ic
+    - mv ./pocket-ic ./backend/integration_tests/pocket-ic
     - ulimit -n 809600
     - ulimit -f 8096000
-    - cargo test -p integration_testing
+    - cargo test -p integration_tests
