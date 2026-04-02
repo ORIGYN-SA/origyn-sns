@@ -1,5 +1,6 @@
 {
   "buyback_burn": {
+    "ic": "tss7g-syaaa-aaaai-axh4q-cai",
     "staging": "jej56-sqaaa-aaaab-qgqkq-cai"
   },
   "ogy_dashboard": {
@@ -48,6 +49,7 @@
     "staging": "fpmqz-aaaaa-aaaag-qjvua-cai"
   },
   "sns_neuron_controller": {
+    "ic": "piyk3-liaaa-aaaae-qjvsa-cai",
     "staging": "7jpfk-zqaaa-aaaan-q53hq-cai"
   },
   "canister_jobs": {
