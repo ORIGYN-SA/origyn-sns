@@ -154,7 +154,7 @@
       }
     }
   },
-  "dfx": "0.27.0",
+  "dfx": "0.31.0",
   "networks": {
     "staging": {
       "providers": ["https://icp0.io"],
