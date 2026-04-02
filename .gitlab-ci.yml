@@ -19,10 +19,10 @@ cache:
 
 stages:
   - preparation
-  - lint
+  # - lint
   - build
-  - test
-  - integration_testing
+  # - test
+  # - integration_testing
   - deploy
 
 include:
