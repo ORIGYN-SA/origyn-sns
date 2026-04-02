@@ -29,7 +29,6 @@ MODE="proposal"
 # 2. Network-specific configuration
 if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   TESTMODE="true"
-  REINSTALL="reinstall"
   # For local/staging, use current identity as the authorized principal
   OGY_LEGACY_MINTING_ACCOUNT_PRINCIPAL="$(dfx identity get-principal)"
   AUTHORIZED_PRINCIPALS="principal \"$(dfx identity get-principal)\""
@@ -37,7 +36,6 @@ if [[ $NETWORK =~ ^(local|staging)$ ]]; then
   OGY_NEW_LEDGER=$(dfx canister id sns_ledger --network staging)
 else
   TESTMODE="false"
-  REINSTALL="upgrade"
   OGY_LEGACY_MINTING_ACCOUNT_PRINCIPAL="aomfs-vaaaa-aaaaj-aadoa-cai"
   AUTHORIZED_PRINCIPALS="principal \"f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae\""
   OGY_LEGACY_LEDGER=$(dfx canister id ogy_legacy_ledger --network $NETWORK)

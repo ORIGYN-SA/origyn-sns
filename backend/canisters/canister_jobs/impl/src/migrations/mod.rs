@@ -9,7 +9,7 @@ pub mod types;
 impl From<RuntimeStateV0> for RuntimeState {
     fn from(old_state: RuntimeStateV0) -> Self {
         Self {
-            env: old_state.env,
+            env: old_state.env.into(),
             data: Data {
                 authorized_principals: old_state.data.authorized_principals,
                 ledger_canister_id: old_state.data.ledger_canister_id,
