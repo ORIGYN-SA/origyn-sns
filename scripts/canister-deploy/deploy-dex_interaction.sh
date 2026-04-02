@@ -38,7 +38,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     token_to_sell = variant { WTN };
     token_to_buy = variant { ICP };
     exchange = $EXCHANGE_CONFIG_WTN_ICP;
-    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
+    rate_per_interval = 2_380_950 : nat64;
     job_interval_ms = 14400 : nat64;
     source_subaccount = null;
     min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
@@ -60,7 +60,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     token_to_sell = variant { GOLDAO };
     token_to_buy = variant { OGY };
     exchange = $EXCHANGE_CONFIG_GOLDAO_OGY;
-    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
+    rate_per_interval = 2_380_950 : nat64;
     job_interval_ms = 14400 : nat64;
     source_subaccount = null;
     min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
@@ -81,7 +81,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     token_to_sell = variant { ICP };
     token_to_buy = variant { OGY };
     exchange = $EXCHANGE_CONFIG_ICP_OGY;
-    rate_per_interval = 2_380_950 : nat64; # FIXME: verify the rate is correct
+    rate_per_interval = 2_380_950 : nat64;
     job_interval_ms = 14400 : nat64;
     source_subaccount = null;
     min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
