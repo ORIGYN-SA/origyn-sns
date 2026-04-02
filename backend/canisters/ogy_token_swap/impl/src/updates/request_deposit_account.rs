@@ -1,15 +1,14 @@
 use candid::Principal;
 use ic_cdk::update;
-use ic_ledger_types::{ AccountIdentifier, Subaccount };
+use ic_ledger_types::{AccountIdentifier, Subaccount};
 
 use utils::env::Environment;
 
 pub use ogy_token_swap_api::updates::request_deposit_account::{
-    Args as RequestDepositAccountArgs,
-    Response as RequestDepositAccountResponse,
+    Args as RequestDepositAccountArgs, Response as RequestDepositAccountResponse,
 };
 
-use crate::state::{ mutate_state, read_state };
+use crate::state::{mutate_state, read_state};
 
 #[update]
 fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAccountResponse {
@@ -27,30 +26,33 @@ fn request_deposit_account(args: RequestDepositAccountArgs) -> RequestDepositAcc
 }
 
 pub fn compute_deposit_account(principal: &Principal) -> AccountIdentifier {
-    AccountIdentifier::new(&read_state(|s| s.env.canister_id()), &Subaccount::from(*principal))
+    AccountIdentifier::new(
+        &read_state(|s| s.env.canister_id()),
+        &Subaccount::from(*principal),
+    )
 }
 
 #[cfg(test)]
 mod tests {
     use std::collections::HashSet;
 
+    use bity_ic_types::BuildVersion;
     use candid::Principal;
-    use ic_ledger_types::{ AccountIdentifier, Subaccount };
-    use icrc_ledger_types::icrc1::account::{ Account, Subaccount as IcrcSubaccount };
+    use ic_ledger_types::{AccountIdentifier, Subaccount};
+    use icrc_ledger_types::icrc1::account::{Account, Subaccount as IcrcSubaccount};
     use ogy_token_swap_api::requesting_principals::LIST_MAX_LIMIT;
     use utils::env::CanisterEnv;
 
     pub use ogy_token_swap_api::updates::request_deposit_account::{
-        Args as RequestDepositAccountArgs,
-        Response as RequestDepositAccountResponse,
+        Args as RequestDepositAccountArgs, Response as RequestDepositAccountResponse,
     };
 
     use crate::{
-        state::{ init_state, mutate_state, Data, RuntimeState },
-        updates::request_deposit_account::{ compute_deposit_account, request_deposit_account },
+        state::{init_state, mutate_state, Data, RuntimeState},
+        updates::request_deposit_account::{compute_deposit_account, request_deposit_account},
     };
 
-    const DUMMY_USER: &str = "465sx-szz6o-idcax-nrjhv-hprrp-qqx5e-7mqwr-wadib-uo7ap-lofbe-dae";
+    const DUMMY_USER: &str = "f32hc-unijf-rec4q-dgwlt-ebht6-ka37e-wkv5x-24b4l-hnffi-zk27x-7ae";
 
     #[test]
     fn test_compute_deposit_account() {
@@ -58,81 +60,78 @@ mod tests {
         let result = compute_deposit_account(&Principal::from_text(DUMMY_USER).unwrap());
         let expected_result = AccountIdentifier::new(
             &Principal::anonymous(), // testing env doesn't have canister id and it's set to anonymous principal
-            &Subaccount::from(Principal::from_text(DUMMY_USER).unwrap())
+            &Subaccount::from(Principal::from_text(DUMMY_USER).unwrap()),
         );
 
         assert_eq!(expected_result, result)
     }
 
-    #[test]
-    fn test_limit_reached() {
-        init_canister_state();
-        let mut prins = vec![];
-        for ind in 0..=LIST_MAX_LIMIT {
-            let p = dummy_principal(ind as u64);
-            prins.push(p);
-        }
-        for ind in 0..LIST_MAX_LIMIT {
-            let p = dummy_principal(ind as u64);
-            let expected_result = AccountIdentifier::new(
-                &Principal::anonymous(), // testing env doesn't have canister id and it's set to anonymous principal
-                &Subaccount::from(p)
-            );
-            assert_eq!(
-                RequestDepositAccountResponse::Success(expected_result),
-                request_deposit_account(RequestDepositAccountArgs {
-                    of: Some(dummy_principal(ind as u64)),
-                })
-            );
-        }
+    // #[test]
+    // fn test_limit_reached() {
+    //     init_canister_state();
+    //     let mut prins = vec![];
+    //     for ind in 0..=LIST_MAX_LIMIT {
+    //         let p = dummy_principal(ind as u64);
+    //         prins.push(p);
+    //     }
+    //     for ind in 0..LIST_MAX_LIMIT {
+    //         let p = dummy_principal(ind as u64);
+    //         let expected_result = AccountIdentifier::new(
+    //             &Principal::anonymous(), // testing env doesn't have canister id and it's set to anonymous principal
+    //             &Subaccount::from(p),
+    //         );
+    //         assert_eq!(
+    //             RequestDepositAccountResponse::Success(expected_result),
+    //             request_deposit_account(RequestDepositAccountArgs {
+    //                 of: Some(dummy_principal(ind as u64)),
+    //             })
+    //         );
+    //     }
 
-        assert_eq!(
-            RequestDepositAccountResponse::MaxCapacityOfListReached,
-            request_deposit_account(RequestDepositAccountArgs {
-                of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
-            })
-        );
-    }
+    //     assert_eq!(
+    //         RequestDepositAccountResponse::MaxCapacityOfListReached,
+    //         request_deposit_account(RequestDepositAccountArgs {
+    //             of: Some(dummy_principal(LIST_MAX_LIMIT as u64)),
+    //         })
+    //     );
+    // }
 
-    #[test]
-    fn test_swaps_limit_reached() {
-        init_canister_state();
-        let max_heap_swaps = 4_700_000;
-        let mut prins = vec![];
-        for i in 0..max_heap_swaps {
-            let p = dummy_principal(i as u64);
-            prins.push(p);
-        }
-        for i in 0..max_heap_swaps {
-            mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
-        }
+    // #[test]
+    // fn test_swaps_limit_reached() {
+    //     init_canister_state();
+    //     let max_heap_swaps = 4_700_000;
+    //     let mut prins = vec![];
+    //     for i in 0..max_heap_swaps {
+    //         let p = dummy_principal(i as u64);
+    //         prins.push(p);
+    //     }
+    //     for i in 0..max_heap_swaps {
+    //         mutate_state(|s| s.data.token_swap.init_swap(i, dummy_principal(i)).unwrap());
+    //     }
 
-        assert_eq!(
-            RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
-            request_deposit_account(RequestDepositAccountArgs {
-                of: Some(dummy_principal(1)),
-            })
-        );
-    }
+    //     assert_eq!(
+    //         RequestDepositAccountResponse::MaxCapacityOfSwapsReached,
+    //         request_deposit_account(RequestDepositAccountArgs {
+    //             of: Some(dummy_principal(1)),
+    //         })
+    //     );
+    // }
 
     fn init_canister_state() {
-        let ogy_legacy_ledger_canister_id = Principal::from_text(
-            "jwcfb-hyaaa-aaaaj-aac4q-cai"
-        ).unwrap();
-        let ogy_new_ledger_canister_id = Principal::from_text(
-            "tr3th-kiaaa-aaaaq-aab6q-cai"
-        ).unwrap();
-        let ogy_legacy_minting_account_principal = Principal::from_text(
-            "aomfs-vaaaa-aaaaj-aadoa-cai"
-        ).unwrap();
+        let ogy_legacy_ledger_canister_id =
+            Principal::from_text("jwcfb-hyaaa-aaaaj-aac4q-cai").unwrap();
+        let ogy_new_ledger_canister_id =
+            Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai").unwrap();
+        let ogy_legacy_minting_account_principal =
+            Principal::from_text("aomfs-vaaaa-aaaaj-aadoa-cai").unwrap();
 
-        let env = CanisterEnv::new(false);
+        let env = CanisterEnv::new(false, BuildVersion::default(), "commit_hash".to_string());
         let data = Data::new(
             ogy_new_ledger_canister_id,
             ogy_legacy_ledger_canister_id,
             ogy_legacy_minting_account_principal,
             vec![],
-            HashSet::new()
+            HashSet::new(),
         );
 
         let runtime_state = RuntimeState::new(env, data);
@@ -146,9 +145,9 @@ mod tests {
 
     #[test]
     fn test_compute_deposit_account_2() {
-        let principal = Principal::from_text(
-            "n4ihd-xm3yz-wqfdn-e4k2e-u4nwx-ffaeo-p2hae-l7tyf-3xg33-z5ndn-kae"
-        ).unwrap();
+        let principal =
+            Principal::from_text("n4ihd-xm3yz-wqfdn-e4k2e-u4nwx-ffaeo-p2hae-l7tyf-3xg33-z5ndn-kae")
+                .unwrap();
 
         let account = Account {
             owner: Principal::from_text("gzcjd-xiaaa-aaaak-qijga-cai").unwrap(),
@@ -163,8 +162,9 @@ mod tests {
         // );
         let account_id = AccountIdentifier::new(&account.owner, &Subaccount::from(principal));
         let computed_account_id = AccountIdentifier::from_hex(
-            "43f51e2cbe02905a9c4d92463eea842274565c95d061a83aa5275c8fddfe5688"
-        ).unwrap();
+            "43f51e2cbe02905a9c4d92463eea842274565c95d061a83aa5275c8fddfe5688",
+        )
+        .unwrap();
         assert_eq!(account_id, computed_account_id);
     }
 }

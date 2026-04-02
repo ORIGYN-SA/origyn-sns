@@ -1,19 +1,20 @@
-use std::{ env, path::Path };
-use candid::{ Nat, Principal };
-use origyn_nft_reference::origyn_nft_reference_canister::ManageStorageRequestConfigureStorage;
-use pocket_ic::{ PocketIc, PocketIcBuilder };
+use bity_ic_types::BuildVersion;
+use candid::{Nat, Principal};
 use collection_index_api::lifecycle::init::InitArgs as CollectionIndexInitArgs;
+use origyn_nft_reference::origyn_nft_reference_canister::ManageStorageRequestConfigureStorage;
+use pocket_ic::{PocketIc, PocketIcBuilder};
+use std::{env, path::Path};
 use types::CanisterId;
 use utils::consts::E8S_FEE_OGY;
 
 use crate::{
-    client::pocket::{ create_canister, install_canister },
-    collection_index_suite::{ nft_utils, PrincipalIds },
+    client::pocket::{create_canister, install_canister},
+    collection_index_suite::{nft_utils, PrincipalIds},
     utils::random_principal,
     wasms,
 };
 
-use super::{ CanisterIds, TestEnv };
+use super::{CanisterIds, TestEnv};
 
 pub static POCKET_IC_BIN: &str = "./pocket-ic";
 
@@ -44,8 +45,14 @@ pub fn init() -> TestEnv {
         nft_owner: random_principal(),
     };
     let canister_ids: CanisterIds = install_canisters(&mut pic, principal_ids.controller);
-    println!("origyn_nft_one: {:?}", canister_ids.origyn_nft_one.to_string());
-    println!("origyn_nft_two: {:?}", canister_ids.origyn_nft_two.to_string());
+    println!(
+        "origyn_nft_one: {:?}",
+        canister_ids.origyn_nft_one.to_string()
+    );
+    println!(
+        "origyn_nft_two: {:?}",
+        canister_ids.origyn_nft_two.to_string()
+    );
 
     init_origyn_nft(
         &mut pic,
@@ -54,7 +61,7 @@ pub fn init() -> TestEnv {
         principal_ids.originator,
         principal_ids.net_principal,
         random_principal(), // placeholder for OGY ledger - not needed now,
-        "Collection A".to_string()
+        "Collection A".to_string(),
     );
 
     init_origyn_nft(
@@ -64,7 +71,7 @@ pub fn init() -> TestEnv {
         principal_ids.originator,
         principal_ids.net_principal,
         random_principal(), // placeholder for OGY ledger - not needed now,
-        "Collection A".to_string()
+        "Collection A".to_string(),
     );
     TestEnv {
         pic,
@@ -80,7 +87,7 @@ fn init_origyn_nft(
     originator: Principal,
     net_principal: Principal,
     ogy_principal: Principal,
-    collection_name: String
+    collection_name: String,
 ) {
     let manage_storage_return: origyn_nft_reference::origyn_nft_reference_canister::ManageStorageResult = crate::client::origyn_nft_reference::client::manage_storage_nft_origyn(
         pic,
@@ -112,7 +119,10 @@ fn init_origyn_nft(
             Some(collection_name)
         )
     );
-    println!("collection_update_name_return: {:?}", collection_update_name_return);
+    println!(
+        "collection_update_name_return: {:?}",
+        collection_update_name_return
+    );
 
     let collection = nft_utils::build_standard_collection(
         pic,
@@ -128,7 +138,7 @@ fn init_origyn_nft(
             decimals: Nat::from(8 as u32),
             standard: nft_utils::TokenStandard::Ledger,
             id: None,
-        }
+        },
     );
     println!("collection: {:?}", collection);
 }
@@ -146,21 +156,30 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
         controller,
         origyn_nft_one_canister_id,
         origyn_nft_canister_wasm.clone(),
-        {}
+        {},
     );
-    install_canister(pic, controller, origyn_nft_two_canister_id, origyn_nft_canister_wasm, {});
+    install_canister(
+        pic,
+        controller,
+        origyn_nft_two_canister_id,
+        origyn_nft_canister_wasm,
+        {},
+    );
 
-    let collection_index_init_args = CollectionIndexInitArgs {
-        authorized_principals: vec![controller],
-        test_mode: true,
-    };
+    let collection_index_init_args =
+        collection_index_api::lifecycle::Args::Init(CollectionIndexInitArgs {
+            authorized_principals: vec![controller],
+            test_mode: true,
+            version: BuildVersion::default(),
+            commit_hash: "commit_hash".to_string(),
+        });
 
     install_canister(
         pic,
         controller,
         collection_index_canister_id,
         collection_index_canister_wasm,
-        collection_index_init_args
+        collection_index_init_args,
     );
 
     CanisterIds {

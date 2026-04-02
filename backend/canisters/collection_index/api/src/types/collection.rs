@@ -1,8 +1,8 @@
 use std::borrow::Cow;
 
-use candid::{ CandidType, Decode, Encode, Principal };
-use ic_stable_structures::{ storable::Bound, Storable };
-use serde::{ Deserialize, Serialize };
+use candid::{CandidType, Decode, Encode, Principal};
+use ic_stable_structures::{storable::Bound, Storable};
+use serde::{Deserialize, Serialize};
 
 pub type CollectionCanisterId = Principal;
 pub type CertificateTokenId = String;
@@ -33,6 +33,9 @@ impl Storable for Collection {
 
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())
+    }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
     }
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
         Decode!(&bytes, Self).unwrap()

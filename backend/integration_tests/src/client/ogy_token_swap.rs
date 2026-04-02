@@ -1,4 +1,4 @@
-use crate::{ generate_query_call, generate_update_call };
+use crate::{generate_query_call, generate_update_call};
 
 // Queries
 generate_query_call!(get_swap_info);
@@ -17,41 +17,41 @@ generate_update_call!(restore_archived_swap);
 generate_update_call!(update_whitelist);
 
 pub mod get_swap_info {
-    pub use ogy_token_swap_api::queries::get_swap_info::{ Args, Response };
+    pub use ogy_token_swap_api::queries::get_swap_info::{Args, Response};
 }
 pub mod list_requesting_principals {
-    pub use ogy_token_swap_api::queries::list_requesting_principals::{ Args, Response };
+    pub use ogy_token_swap_api::queries::list_requesting_principals::{Args, Response};
 }
 pub mod list_swapping_statistics {
-    pub use ogy_token_swap_api::queries::list_swapping_statistics::{ Args, Response };
+    pub use ogy_token_swap_api::queries::list_swapping_statistics::{Args, Response};
 }
 pub mod get_whitelisted_principals {
-    pub use ogy_token_swap_api::queries::get_whitelisted_principals::{ Args, Response };
+    pub use ogy_token_swap_api::queries::get_whitelisted_principals::{Args, Response};
 }
 pub mod request_deposit_account {
-    pub use ogy_token_swap_api::updates::request_deposit_account::{ Args, Response };
+    pub use ogy_token_swap_api::updates::request_deposit_account::{Args, Response};
 }
 pub mod swap_tokens {
-    pub use ogy_token_swap_api::updates::swap_tokens::{ Args, Response };
+    pub use ogy_token_swap_api::updates::swap_tokens::{Args, Response};
 }
 pub mod update_swap_status {
-    pub use ogy_token_swap_api::updates::update_swap_status::{ Args, Response };
+    pub use ogy_token_swap_api::updates::update_swap_status::{Args, Response};
 }
 
 pub mod update_whitelist {
-    pub use ogy_token_swap_api::updates::update_whitelist::{ Args, Response };
+    pub use ogy_token_swap_api::updates::update_whitelist::{Args, Response};
 }
 pub mod restore_archived_swap {
-    pub use ogy_token_swap_api::updates::restore_archived_swap::{ Args, Response };
+    pub use ogy_token_swap_api::updates::restore_archived_swap::{Args, Response};
 }
 pub mod recover_stuck_burn {
-    pub use ogy_token_swap_api::updates::recover_stuck_burn::{ Args, Response };
+    pub use ogy_token_swap_api::updates::recover_stuck_burn::{Args, Response};
 }
 pub mod recover_stuck_transfer {
-    pub use ogy_token_swap_api::updates::recover_stuck_transfer::{ Args, Response };
+    pub use ogy_token_swap_api::updates::recover_stuck_transfer::{Args, Response};
 }
 pub mod withdraw_deposit {
-    pub use ogy_token_swap_api::updates::withdraw_deposit::{ Args, Response };
+    pub use ogy_token_swap_api::updates::withdraw_deposit::{Args, Response};
 }
 
 pub mod client {
@@ -59,7 +59,7 @@ pub mod client {
     use candid::Principal;
     use ic_ledger_types::BlockIndex;
     use ogy_token_swap_api::{
-        token_swap::{ BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, SwapStatus },
+        token_swap::{BurnRequestArgs, RecoverBurnMode, RecoverTransferMode, SwapStatus},
         update_whitelist::UpdateWhitelistCommand,
     };
     use pocket_ic::PocketIc;
@@ -69,15 +69,13 @@ pub mod client {
         pic: &mut PocketIc,
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
-        command: UpdateWhitelistCommand
+        command: UpdateWhitelistCommand,
     ) -> update_whitelist::Response {
         update_whitelist(
             pic,
             sender,
             ogy_token_swap_canister_id,
-            &(update_whitelist::Args {
-                command,
-            })
+            &(update_whitelist::Args { command }),
         )
     }
 
@@ -85,7 +83,7 @@ pub mod client {
         pic: &mut PocketIc,
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> swap_tokens::Response {
         swap_tokens(
             pic,
@@ -94,14 +92,14 @@ pub mod client {
             &(swap_tokens::Args {
                 block_index,
                 user: None,
-            })
+            }),
         )
     }
     pub fn swap_tokens_anonymous_call(
         pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
         user: Principal,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> swap_tokens::Response {
         swap_tokens(
             pic,
@@ -110,26 +108,27 @@ pub mod client {
             &(swap_tokens::Args {
                 block_index,
                 user: Some(user),
-            })
+            }),
         )
     }
 
     pub fn deposit_account(
         pic: &mut PocketIc,
         ogy_token_swap_canister_id: CanisterId,
-        user: Principal
+        user: Principal,
     ) -> request_deposit_account::Response {
         request_deposit_account(
             pic,
             user,
             ogy_token_swap_canister_id,
-            &(request_deposit_account::Args { of: Some(user) })
+            &(request_deposit_account::Args { of: Some(user) }),
         )
     }
+
     pub fn get_whitelisted_principals_call(
         pic: &mut PocketIc,
         sender: Principal,
-        ogy_token_swap_canister_id: CanisterId
+        ogy_token_swap_canister_id: CanisterId,
     ) -> get_whitelisted_principals::Response {
         get_whitelisted_principals(pic, sender, ogy_token_swap_canister_id, &())
     }
@@ -138,26 +137,26 @@ pub mod client {
         pic: &PocketIc,
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
-        block_index: BlockIndex
+        block_index: BlockIndex,
     ) -> get_swap_info::Response {
         get_swap_info(
             pic,
             sender,
             ogy_token_swap_canister_id,
-            &(get_swap_info::Args { block_index })
+            &(get_swap_info::Args { block_index }),
         )
     }
     pub fn requesting_principals(
         pic: &PocketIc,
         sender: Principal,
-        ogy_token_swap_canister_id: CanisterId
+        ogy_token_swap_canister_id: CanisterId,
     ) -> list_requesting_principals::Response {
         list_requesting_principals(pic, sender, ogy_token_swap_canister_id, &())
     }
     pub fn swapping_statistics(
         pic: &PocketIc,
         sender: Principal,
-        ogy_token_swap_canister_id: CanisterId
+        ogy_token_swap_canister_id: CanisterId,
     ) -> list_swapping_statistics::Response {
         list_swapping_statistics(pic, sender, ogy_token_swap_canister_id, &())
     }
@@ -167,13 +166,15 @@ pub mod client {
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
         block_index: BlockIndex,
-        swap_status: SwapStatus
+        swap_status: SwapStatus,
     ) -> update_swap_status::Response {
         restore_archived_swap(
             pic,
             sender,
             ogy_token_swap_canister_id,
-            &(restore_archived_swap::Args { block_index: block_index })
+            &(restore_archived_swap::Args {
+                block_index: block_index,
+            }),
         );
         update_swap_status(
             pic,
@@ -182,7 +183,7 @@ pub mod client {
             &(update_swap_status::Args {
                 block_index,
                 swap_status,
-            })
+            }),
         )
     }
 
@@ -192,7 +193,7 @@ pub mod client {
         ogy_token_swap_canister_id: CanisterId,
         block_index: BlockIndex,
         recover_mode: RecoverBurnMode,
-        validation_data: Option<BurnRequestArgs>
+        validation_data: Option<BurnRequestArgs>,
     ) -> recover_stuck_burn::Response {
         recover_stuck_burn(
             pic,
@@ -202,7 +203,7 @@ pub mod client {
                 block_index,
                 recover_mode,
                 validation_data,
-            })
+            }),
         )
     }
     pub fn recover_stuck_transfer_call(
@@ -210,7 +211,7 @@ pub mod client {
         sender: Principal,
         ogy_token_swap_canister_id: CanisterId,
         block_index: BlockIndex,
-        recover_mode: RecoverTransferMode
+        recover_mode: RecoverTransferMode,
     ) -> recover_stuck_transfer::Response {
         recover_stuck_transfer(
             pic,
@@ -219,13 +220,13 @@ pub mod client {
             &(recover_stuck_transfer::Args {
                 block_index,
                 recover_mode,
-            })
+            }),
         )
     }
     pub fn withdraw_deposit_call(
         pic: &mut PocketIc,
         sender: Principal,
-        ogy_token_swap_canister_id: CanisterId
+        ogy_token_swap_canister_id: CanisterId,
     ) -> withdraw_deposit::Response {
         withdraw_deposit(pic, sender, ogy_token_swap_canister_id, &())
     }

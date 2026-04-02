@@ -1,26 +1,20 @@
-use std::{ borrow::BorrowMut, collections::{ BTreeMap, HashMap }, ops::Div };
 use candid::Principal;
-use ic_stable_structures::StableBTreeMap;
 use collection_index_api::{
     category::Category,
     collection::Collection,
     errors::{
-        GetCollectionByPrincipal,
-        GetCollectionsError,
-        InsertCategoryError,
-        InsertCollectionError,
-        RemoveCategoryError,
-        RemoveCollectionError,
-        SetCategoryVisibilityError,
-        TogglePromotedError,
-        UpdateCollectionError,
+        GetCollectionByPrincipal, GetCollectionsError, InsertCategoryError, InsertCollectionError,
+        RemoveCategoryError, RemoveCollectionError, SetCategoryVisibilityError,
+        TogglePromotedError, UpdateCollectionError,
     },
     get_collections::GetCollectionsResult,
     search_collections::SearchCollectionsResponse,
 };
-use serde::{ Deserialize, Serialize };
+use ic_stable_structures::StableBTreeMap;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
-use crate::memory::{ get_collection_model_memory, VM };
+use crate::memory::{get_collection_model_memory, VM};
 
 #[derive(Serialize, Deserialize)]
 pub struct CollectionModel {
@@ -65,16 +59,36 @@ impl CollectionModel {
 
         self.categories.remove(&category_name);
 
-        let keys_to_update: Vec<Principal> = self.collections
+        let keys_to_update: Vec<Principal> = self
+            .collections
             .iter()
-            .filter_map(|(key, collection)| {
-                if let Some(category_of_collection) = &collection.category {
-                    if *category_of_collection == category_name { Some(key.clone()) } else { None }
+            .filter_map(|entry| {
+                if let Some(category_of_collection) = &entry.value().category {
+                    if *category_of_collection == category_name {
+                        Some(entry.key().clone())
+                    } else {
+                        None
+                    }
                 } else {
                     None
                 }
             })
             .collect();
+
+        // let keys_to_update: Vec<Principal> = self
+        //     .collections
+        //     .iter()
+        //     // The iterator yields a single 'entry', not (key, value)
+        //     .filter_map(|entry| {
+        //     // 1. key() is called -> deserializes Principal
+        //     // 2. value() is called -> deserializes the WHOLE Collection struct
+        //     if entry.value().category.as_deref() == Some(&category_name) {
+        //         Some(entry.key().clone())
+        //     } else {
+        //         None
+        //     }
+        // })
+        //     .collect();
 
         for key in keys_to_update {
             if let Some(mut collection) = self.collections.remove(&key) {
@@ -89,7 +103,7 @@ impl CollectionModel {
     pub fn set_category_visibility(
         &mut self,
         category_name: String,
-        switch: bool
+        switch: bool,
     ) -> Result<(), SetCategoryVisibilityError> {
         if let Some(category) = self.categories.get_mut(&category_name) {
             category.active = switch;
@@ -103,7 +117,7 @@ impl CollectionModel {
         &mut self,
         collection_canister_id: Principal,
         new_category: Option<String>,
-        new_locked_value_usd: Option<u64>
+        new_locked_value_usd: Option<u64>,
     ) -> Result<(), UpdateCollectionError> {
         if let Some(mut collection) = self.collections.get(&collection_canister_id) {
             let old_category_id = collection.category.clone();
@@ -152,7 +166,7 @@ impl CollectionModel {
 
     pub fn toggle_promoted(
         &mut self,
-        collection_canister_id: Principal
+        collection_canister_id: Principal,
     ) -> Result<(), TogglePromotedError> {
         if let Some(mut collection) = self.collections.get(&collection_canister_id) {
             collection.is_promoted = !collection.is_promoted;
@@ -168,7 +182,7 @@ impl CollectionModel {
         &mut self,
         collection_canister_id: Principal,
         collection: &mut Collection,
-        category: Option<String>
+        category: Option<String>,
     ) -> Result<(), InsertCollectionError> {
         println!("collection to insert {collection:?}");
         if self.collections.contains_key(&collection_canister_id) {
@@ -192,13 +206,14 @@ impl CollectionModel {
             found_category.collection_count += 1;
         }
 
-        self.collections.insert(collection_canister_id.clone(), collection.clone());
+        self.collections
+            .insert(collection_canister_id.clone(), collection.clone());
         Ok(())
     }
 
     pub fn remove_collection(
         &mut self,
-        collection_canister_id: Principal
+        collection_canister_id: Principal,
     ) -> Result<(), RemoveCollectionError> {
         if let Some(collection) = self.collections.remove(&collection_canister_id) {
             if let Some(category_name) = &collection.category {
@@ -219,7 +234,7 @@ impl CollectionModel {
         &self,
         categories: Option<Vec<String>>,
         offset: usize,
-        limit: usize
+        limit: usize,
     ) -> Result<GetCollectionsResult, GetCollectionsError> {
         let mut cat_names: Vec<String> = vec![];
         let cats: Vec<(String, Category)> = if let Some(items) = categories {
@@ -245,23 +260,26 @@ impl CollectionModel {
         };
 
         let total_pages: u64 = match cat_names.len() {
-            0 => {
-                match self.collections.len().checked_div(limit as u64) {
-                    Some(pages) => {
-                        if pages == 0 { 1 } else { pages }
+            0 => match self.collections.len().checked_div(limit as u64) {
+                Some(pages) => {
+                    if pages == 0 {
+                        1
+                    } else {
+                        pages
                     }
-                    None => 1,
                 }
-            }
+                None => 1,
+            },
             _ => {
-                let total_cols: u64 = cats
-                    .iter()
-                    .map(|(_, cat)| cat.collection_count)
-                    .sum();
+                let total_cols: u64 = cats.iter().map(|(_, cat)| cat.collection_count).sum();
 
                 match total_cols.checked_div(limit as u64) {
                     Some(pages) => {
-                        if pages == 0 { 1 } else { pages }
+                        if pages == 0 {
+                            1
+                        } else {
+                            pages
+                        }
                     }
                     None => 1,
                 }
@@ -269,9 +287,10 @@ impl CollectionModel {
         };
 
         // collect array of collections
-        let mut cols: Vec<Collection> = self.collections
+        let mut cols: Vec<Collection> = self
+            .collections
             .iter()
-            .map(|(_, col)| col.clone())
+            .map(|entry| entry.value().clone())
             .collect();
 
         // make sure promoted are first
@@ -280,15 +299,13 @@ impl CollectionModel {
         // apply pagination and category filtering
         let collections: Vec<Collection> = cols
             .into_iter()
-            .filter(|collection| {
-                match cat_names.len() {
-                    0 => { true }
-                    _ => {
-                        if let Some(collection_cat_name) = collection.category.clone() {
-                            cat_names.contains(&&collection_cat_name)
-                        } else {
-                            false
-                        }
+            .filter(|collection| match cat_names.len() {
+                0 => true,
+                _ => {
+                    if let Some(collection_cat_name) = collection.category.clone() {
+                        cat_names.contains(&&collection_cat_name)
+                    } else {
+                        false
                     }
                 }
             })
@@ -307,7 +324,7 @@ impl CollectionModel {
         categories: Option<Vec<String>>,
         search_query: String,
         offset: usize,
-        limit: usize
+        limit: usize,
     ) -> SearchCollectionsResponse {
         let mut cat_names: Vec<String> = vec![];
 
@@ -335,9 +352,10 @@ impl CollectionModel {
         };
 
         // collect array of collections
-        let mut cols: Vec<Collection> = self.collections
+        let mut cols: Vec<Collection> = self
+            .collections
             .iter()
-            .map(|(_, col)| col.clone())
+            .map(|entry| entry.value().clone())
             .collect();
 
         // make sure promoted are first
@@ -346,16 +364,14 @@ impl CollectionModel {
         // apply pagination and category filtering
         let collections: Vec<Collection> = cols
             .into_iter()
-            .filter(|collection| {
-                match cat_names.len() {
-                    0 => { check_search_hit(&collection.name, &search_query) }
-                    _ => {
-                        if let Some(collection_cat_name) = collection.category.clone() {
-                            cat_names.contains(&collection_cat_name) &&
-                                check_search_hit(&collection.name, &search_query)
-                        } else {
-                            false
-                        }
+            .filter(|collection| match cat_names.len() {
+                0 => check_search_hit(&collection.name, &search_query),
+                _ => {
+                    if let Some(collection_cat_name) = collection.category.clone() {
+                        cat_names.contains(&collection_cat_name)
+                            && check_search_hit(&collection.name, &search_query)
+                    } else {
+                        false
                     }
                 }
             })
@@ -363,16 +379,17 @@ impl CollectionModel {
 
         let total_pages = match (collections.len().clone() as u64).checked_div(limit as u64) {
             Some(pages) => {
-                if pages == 0 { 1 } else { pages }
+                if pages == 0 {
+                    1
+                } else {
+                    pages
+                }
             }
             None => 1,
         };
 
-        let collections: Vec<Collection> = collections
-            .into_iter()
-            .skip(offset)
-            .take(limit)
-            .collect();
+        let collections: Vec<Collection> =
+            collections.into_iter().skip(offset).take(limit).collect();
 
         SearchCollectionsResponse {
             collections,
@@ -392,19 +409,16 @@ impl CollectionModel {
     }
 
     pub fn get_all_collections(&self) -> Vec<Collection> {
-        self.collections
-            .iter()
-            .map(|(_, collection)| collection)
-            .collect()
+        self.collections.iter().map(|entry| entry.value()).collect()
     }
 
     pub fn get_collection_by_key(
         &self,
-        canister_id: Principal
+        canister_id: Principal,
     ) -> Result<Collection, GetCollectionByPrincipal> {
         match self.collections.get(&canister_id) {
             Some(collection) => Ok(collection),
-            None => { Err(GetCollectionByPrincipal::CollectionNotFound) }
+            None => Err(GetCollectionByPrincipal::CollectionNotFound),
         }
     }
 }

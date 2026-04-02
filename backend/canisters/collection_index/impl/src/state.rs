@@ -1,10 +1,13 @@
-use candid::{ CandidType, Principal };
+use bity_ic_canister_state_macros::canister_state;
+use candid::{CandidType, Principal};
 use collection_index_api::stats::OverallStats;
-use serde::{ Deserialize as SerdeDeserialize, Serialize };
-use types::TimestampMillis;
-use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
-use canister_state_macros::canister_state;
 use ic_cdk::api::is_controller;
+use serde::{Deserialize as SerdeDeserialize, Serialize};
+use types::TimestampMillis;
+use utils::{
+    env::{CanisterEnv, Environment},
+    memory::MemorySize,
+};
 
 use crate::model::collection::CollectionModel;
 
@@ -55,7 +58,7 @@ pub struct CanisterInfo {
     pub now: TimestampMillis,
     pub test_mode: bool,
     pub memory_used: MemorySize,
-    pub cycles_balance_in_tc: f64,
+    pub cycles_balance_in_tc: u128,
 }
 #[derive(Serialize, SerdeDeserialize)]
 pub struct Data {

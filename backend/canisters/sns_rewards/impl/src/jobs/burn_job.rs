@@ -8,15 +8,18 @@ transfers tokens from reserve pool to the reward pool on a daily basis.
 
 */
 
-use crate::{ state::{ mutate_state, read_state }, utils::transfer_token };
-use candid::{ Nat, Principal };
-use canister_time::{ is_interval_more_than_1_day, now_millis, run_interval, DAY_IN_MS };
-use icrc_ledger_types::icrc1::account::{ Account, Subaccount };
+use crate::{
+    state::{mutate_state, read_state},
+    utils::transfer_token,
+};
+use bity_ic_canister_time::{now_millis, run_interval, DAY_IN_MS};
+use candid::{Nat, Principal};
+use icrc_ledger_types::icrc1::account::{Account, Subaccount};
 use sns_rewards_api_canister::subaccounts::RESERVE_POOL_SUB_ACCOUNT;
-use utils::env::Environment;
 use std::time::Duration;
-use tracing::{ debug, error, info };
-use types::{ Milliseconds, TokenSymbol };
+use tracing::{debug, error, info};
+use types::{Milliseconds, TimestampMillis, TokenSymbol};
+use utils::env::Environment;
 
 const BURN_INTERVAL: Milliseconds = DAY_IN_MS;
 
@@ -25,7 +28,7 @@ pub fn start_job() {
 }
 
 pub fn spawn_burn_job() {
-    ic_cdk::spawn(handle_burn_job())
+    ic_cdk::futures::spawn(handle_burn_job())
 }
 
 pub async fn handle_burn_job() {
@@ -35,19 +38,14 @@ pub async fn handle_burn_job() {
 }
 
 async fn handle_burn_job_impl() {
-    // check OGY is a valid token type
-    let token = match TokenSymbol::parse("OGY") {
-        Ok(t) => t,
-        Err(e) => {
-            error!("ERROR : failed to parse OGY token. error : {:?}", e);
-            return;
-        }
-    };
     // get the OGY ledger id
-    let ogy_token_info = match read_state(|s| s.data.tokens.get(&token).copied()) {
+    let ogy_token_info = match read_state(|s| s.data.tokens.get(&TokenSymbol::OGY).copied()) {
         Some(token_info) => token_info,
         None => {
-            error!("ERROR : failed to get token information and ledger id for token {:?}", &token);
+            error!(
+                "ERROR : failed to get token information and ledger id for token {:?}",
+                &TokenSymbol::OGY
+            );
             return;
         }
     };
@@ -92,16 +90,19 @@ async fn handle_burn_job_impl() {
         subaccount: None,
     };
 
-    match
-        transfer_token(
-            RESERVE_POOL_SUB_ACCOUNT,
-            minting_account,
-            ogy_token_info.ledger_id,
-            amount_to_burn.clone()
-        ).await
+    match transfer_token(
+        RESERVE_POOL_SUB_ACCOUNT,
+        minting_account,
+        ogy_token_info.ledger_id,
+        amount_to_burn.clone(),
+    )
+    .await
     {
         Ok(_) => {
-            info!("SUCCESS : {:?} OGY tokens burned from reserve pool", amount_to_burn);
+            info!(
+                "SUCCESS : {:?} OGY tokens burned from reserve pool",
+                amount_to_burn
+            );
             mutate_state(|s| {
                 s.data.last_daily_ogy_burn = Some(current_time_ms);
             })
@@ -117,25 +118,37 @@ async fn handle_burn_job_impl() {
 
 async fn fetch_balance_of_sub_account(
     ledger_canister_id: Principal,
-    sub_account: Subaccount
+    sub_account: Subaccount,
 ) -> Result<Nat, String> {
-    match
-        icrc_ledger_canister_c2c_client::icrc1_balance_of(
-            ledger_canister_id,
-            &(Account {
-                owner: read_state(|s| s.env.canister_id()),
-                subaccount: Some(sub_account),
-            })
-        ).await
+    match icrc_ledger_canister_c2c_client::icrc1_balance_of(
+        ledger_canister_id,
+        &(Account {
+            owner: read_state(|s| s.env.canister_id()),
+            subaccount: Some(sub_account),
+        }),
+    )
+    .await
     {
-        Ok(t) => { Ok(t) }
-        Err(e) => { Err(format!("ERROR: {:?}", e.1)) }
+        Ok(t) => Ok(t),
+        Err(e) => Err(format!("ERROR: {:?}", e)),
     }
+}
+
+pub fn is_interval_more_than_1_day(
+    previous_time: TimestampMillis,
+    now_time: TimestampMillis,
+) -> bool {
+    // convert the milliseconds to the number of days since UNIX Epoch.
+    // integer division means partial days will be truncated down or effectively rounded down. e.g 245.5 becomes 245
+    let previous_in_days = previous_time / BURN_INTERVAL;
+    let current_in_days = now_time / BURN_INTERVAL;
+    // never allow distributions to happen twice i.e if the last run distribution in days since UNIX epoch is the same as the current time in days since the last UNIX Epoch then return early.
+    current_in_days != previous_in_days
 }
 
 #[cfg(test)]
 mod tests {
-    use canister_time::is_interval_more_than_1_day;
+    use super::is_interval_more_than_1_day;
 
     #[test]
     fn test_is_interval_more_than_1_day() {

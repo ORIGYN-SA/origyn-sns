@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.9] - 2026-04-02
+
+#### Added
+
+- **State**: Include versioning and commit info into CanisterInfo.
+- **Neuron dissolve delay**: Now rewards are only distributed to neurons with delay biger than 5 years.
+
+#### Updated
+
+- **Dependencies**: All the crates were updated to the newest version.
 
 ### [1.0.8] - 2024-11-25
 
