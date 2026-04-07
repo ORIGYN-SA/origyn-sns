@@ -1,4 +1,3 @@
-use crate::neuron_type::NeuronType;
 use candid::CandidType;
 use serde::{Deserialize, Serialize};
 

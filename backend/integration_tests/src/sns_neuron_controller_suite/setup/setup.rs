@@ -1,4 +1,3 @@
-
 // use crate::sns_neuron_controller_suite::setup::setup_ledger::setup_ledgers;
 use crate::sns_neuron_controller_suite::setup::setup_rewards::setup_rewards_canister;
 // use crate::sns_test_env::setup_ledger::setup_ledgers;
@@ -10,8 +9,8 @@ use crate::sns_test_env::utils::generate_neuron_data;
 // use crate::sns_test_env::nns_test_env::NnsTestEnvBuilder;
 use crate::sns_test_env::sns_init_args::generate_sns_neuron_data;
 // use crate::sns_test_env::sns_init_args::SnsInitArgs;
-use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::sns_test_env::setup_ledger::setup_ledgers;
+use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::utils::random_principal;
 use crate::utils::tick_n_blocks;
 use bity_ic_types::BuildVersion;
@@ -396,12 +395,6 @@ impl SNCTestEnvBuilder {
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![self.controller, ogy_sns_test_env.governance_id],
             rewards_destination: Some(self.rewards_destination),
-            ogy_manager_config: sns_neuron_controller_api_canister::init::OgyManagerConfig {
-                ogy_sns_governance_canister_id: ogy_sns_test_env.governance_id,
-                ogy_sns_ledger_canister_id,
-                ogy_sns_rewards_canister_id: self.ogy_rewards_canister_id,
-                ogy_rewards_threshold: Nat::from(100_000_000_000_000_u64),
-            },
             goldao_manager_config: sns_neuron_controller_api_canister::init::GoldaoManagerConfig {
                 goldao_sns_governance_canister_id: goldao_sns_test_env.governance_id,
                 goldao_sns_ledger_canister_id,

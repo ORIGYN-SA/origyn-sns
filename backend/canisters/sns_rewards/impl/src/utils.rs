@@ -8,10 +8,8 @@ use icrc_ledger_types::icrc1::{
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::{Neuron, NeuronId};
 use std::collections::HashMap;
-use time::Date;
-use time::UtcOffset;
-use time::{OffsetDateTime, Time, Weekday};
-use tracing::{debug, error, info, warn};
+use time::Weekday;
+use tracing::debug;
 use types::TimestampMillis;
 use types::TokenSymbol;
 
@@ -207,12 +205,9 @@ pub fn validate_set_daily_ogy_burn_rate_payload(amount: &Nat) -> Result<(), Stri
 #[cfg(test)]
 mod tests {
     use super::authenticate_by_hotkey;
-    use super::*;
-    use super::*;
     use crate::utils::{AuthenticateByHotkeyResponse, TimeInterval};
     use candid::Principal;
     use sns_governance_canister::types::{Neuron, NeuronId, NeuronPermission};
-    use time::macros::datetime;
 
     #[test]
     fn test_authenticate_by_hotkey_with_correct_data() {

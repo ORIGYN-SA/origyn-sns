@@ -12,15 +12,6 @@ pub use sns_neuron_controller_api_canister::get_config::{
 fn get_config(args: GetConfigArgs) -> GetConfigResponse {
     read_state(|state| {
         let config = match args.manager_type {
-            ManagerType::OGY => {
-                let ogy_manager = &state.data.neuron_managers.ogy;
-                ManagerConfig::OgyConfig(OgyManagerConfig {
-                    ogy_sns_governance_canister_id: ogy_manager.ogy_sns_governance_canister_id,
-                    ogy_sns_ledger_canister_id: ogy_manager.ogy_sns_ledger_canister_id,
-                    ogy_sns_rewards_canister_id: ogy_manager.ogy_sns_rewards_canister_id,
-                    ogy_rewards_threshold: ogy_manager.ogy_rewards_threshold.clone(),
-                })
-            }
             ManagerType::GOLDAO => {
                 let goldao_manager = &state.data.neuron_managers.goldao;
                 ManagerConfig::GoldaoConfig(GoldaoManagerConfig {

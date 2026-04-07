@@ -24,7 +24,6 @@ async fn stake_nns_neuron(args: StakeNnsNeuronArgs) -> StakeNnsNeuronResponse {
         Ok(neuron_id) => StakeNnsNeuronResponse::Success(neuron_id),
         Err(error) => {
             error!(error);
-            ic_cdk::println!("Error: {:?}", error);
             StakeNnsNeuronResponse::InternalError(error)
         }
     }

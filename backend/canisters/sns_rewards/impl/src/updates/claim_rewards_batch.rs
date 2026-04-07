@@ -32,7 +32,7 @@ async fn claim_rewards_batch(args: ClaimRewardsBatchArgs) -> ClaimRewardsBatchRe
     for (i, result) in fetch_results.into_iter().enumerate() {
         let arg = &args.claim_reward_args[i];
         let neuron_id = arg.neuron_id.clone();
-        let token = arg.token.clone();
+        let token = arg.token;
 
         match result {
             FetchNeuronDataByIdResponse::Ok(neuron) => {
@@ -71,21 +71,11 @@ async fn claim_rewards_batch(args: ClaimRewardsBatchArgs) -> ClaimRewardsBatchRe
     let mut transfer_meta = vec![]; // (neuron_id, token) for each future
 
     for (neuron_id, token) in &authed_requests {
-        let token_info_opt = read_state(|s: &RuntimeState| s.data.tokens.get(token).cloned());
-        let neuron_id_cloned = neuron_id.clone();
+        let token_info_opt = read_state(|s: &RuntimeState| s.data.tokens.get(token).copied());
         match token_info_opt {
             Some(token_info) => {
-                let token_cloned = token.clone();
-                let token_info = token_info.clone();
-                let caller_cloned = caller.clone();
-
-                // collect the futures
-                transfer_futures.push(transfer_rewards(
-                    neuron_id_cloned.clone(),
-                    caller_cloned,
-                    token_info,
-                ));
-                transfer_meta.push((neuron_id_cloned, token_cloned));
+                transfer_futures.push(transfer_rewards(neuron_id.clone(), caller, token_info));
+                transfer_meta.push((neuron_id.clone(), token.clone()));
             }
             None => {
                 error!("Token info for type {token:?} not found in state");

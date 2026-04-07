@@ -1,7 +1,7 @@
 use candid::{CandidType, Principal};
 use serde::Deserialize;
-use types::CanisterId;
 use serde::Serialize;
+use types::CanisterId;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct InitArgs {

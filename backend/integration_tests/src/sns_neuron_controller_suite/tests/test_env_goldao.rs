@@ -1,8 +1,7 @@
-
 use crate::sns_test_env::sns_test_env::SnsProject;
+use crate::sns_test_env::utils::generate_neuron_data;
 use crate::test_env::test_env_builder::SnsConfig;
 use crate::test_env::test_env_builder::TestEnvBuilder;
-use crate::sns_test_env::utils::generate_neuron_data;
 use crate::{
     client::icrc1::client::{balance_of, transfer},
     utils::tick_n_blocks,

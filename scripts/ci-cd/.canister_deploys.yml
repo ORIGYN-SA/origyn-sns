@@ -7,7 +7,7 @@ spec:
           "ogy_token_swap",
           "sns_rewards",
           "sns_neuron_controller",
-          "buyback_burn",
+          "dex_interaction",
           "token_metrics",
           "canister_jobs",
           "collection_index"
@@ -55,7 +55,7 @@ $[[ inputs.src-folder ]] production deploy:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  needs: ["$[[ inputs.src-folder ]] production build", "integration tests"]
+  # needs: ["$[[ inputs.src-folder ]] production build", "integration tests"]
   before_script:
     - !reference [.import dfx identity, before_script]
   script:

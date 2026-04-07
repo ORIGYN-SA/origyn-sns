@@ -22,7 +22,6 @@ fn init(args: Args) {
             );
             let mut data = Data::new(
                 init_args.authorized_principals,
-                init_args.ogy_manager_config,
                 init_args.goldao_manager_config,
                 init_args.icp_manager_config,
                 init_args.rewards_destination,

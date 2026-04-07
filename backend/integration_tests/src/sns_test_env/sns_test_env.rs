@@ -55,46 +55,6 @@ impl SnsTestEnvBuilder {
         self
     }
 
-    // // FIXME: change to real ids
-    // pub fn generate_ids(&mut self) -> &mut Self {
-    //     let controller = self.controller;
-
-    //     // Scope the borrow to avoid holding it across the entire method
-    //     let (governance_id, root_id, ledger_id, index_id, swap_id) = {
-    //         let pic = self.pic.borrow();
-    //         let sns_subnet = pic.topology().get_sns().unwrap();
-
-    //         (
-    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-    //             pic.create_canister_on_subnet(Some(controller), None, sns_subnet),
-    //         )
-    //     };
-
-    //     // Add cycles to canisters
-    //     {
-    //         let pic: std::cell::Ref<'_, PocketIc> = self.pic.borrow();
-    //         pic.add_cycles(governance_id, 1_000_000_000_000);
-    //         pic.add_cycles(root_id, 1_000_000_000_000);
-    //         pic.add_cycles(ledger_id, 1_000_000_000_000);
-    //         pic.add_cycles(index_id, 1_000_000_000_000);
-    //         pic.add_cycles(swap_id, 1_000_000_000_000);
-    //     }
-
-    //     self.canister_ids = Some(CanisterIds {
-    //         governance_id,
-    //         root_id,
-    //         ledger_id,
-    //         index_id,
-    //         swap_id,
-    //         dapp_canisters: HashMap::new(),
-    //     });
-
-    //     self
-    // }
-
     pub fn with_init_args(mut self, init_args: SnsInitArgs) -> Self {
         self.init_args = Some(init_args);
         self

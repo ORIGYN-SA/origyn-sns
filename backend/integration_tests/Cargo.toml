@@ -45,7 +45,7 @@ ic-management-canister-types = "0.5"
 
 
 # Canisters API
-buyback_burn_api = { path = "../canisters/buyback_burn/api" }
+dex_interaction_api = { path = "../canisters/dex_interaction/api" }
 sns_neuron_controller_api_canister = { path = "../canisters/sns_neuron_controller/api" }
 sns_rewards_api_canister = { path = "../canisters/sns_rewards/api" }
 ogy_token_swap_api = { path = "../canisters/ogy_token_swap/api" }

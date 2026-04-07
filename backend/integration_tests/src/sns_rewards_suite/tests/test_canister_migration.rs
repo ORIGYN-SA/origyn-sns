@@ -15,7 +15,6 @@ fn test_migration_happy_path() {
         &test_env.controller,
     );
     tick_n_blocks(&pic, 100);
-    tick_n_blocks(&pic, 100);
 
     let status = pic.canister_status(sns_rewards_id, Some(test_env.sns_gov_canister_id));
     println!("Canister status before migration: {:?}", status);

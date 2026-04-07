@@ -1,7 +1,7 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::{GoldaoManager, OgyManager};
+use crate::types::{GoldaoManager};
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
@@ -24,7 +24,6 @@ use utils::rand::generate_rand_nonce;
 #[enum_dispatch]
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum NeuronManagerEnum {
-    OgyManager(OgyManager),
     GoldaoManager(GoldaoManager),
 }
 
@@ -165,9 +164,7 @@ pub trait NeuronManager: NeuronConfig {
 
         // Error is handled in fetch_neurons
         let neurons = fetch_neurons(sns_governance_canister_id, canister_id, is_test_mode).await?;
-        ic_cdk::println!("Neurons:{:?} {:?}", self.get_sns_governance_canister_id().to_text(), neurons);
-        ic_cdk::println!("self: {:?}", ic_cdk::api::canister_self());
-        
+
         self.get_neurons_mut().all_neurons = neurons.to_vec();
         Ok(())
     }

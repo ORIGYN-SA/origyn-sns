@@ -29,7 +29,7 @@ ic-stable-structures = { workspace = true }
 icrc-ledger-types = { workspace = true }
 ic-ledger-types = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
-serializer = { path = '../../../libraries/serializer' }
+bity-ic-serializer = { workspace = true }
 anyhow = { workspace = true }
 bity-ic-types = { workspace = true }
 sns_governance_canister = { path = '../../../external_canisters/sns_governance/api' }

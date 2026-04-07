@@ -33,7 +33,7 @@ fn post_upgrade(args: Args) {
                 RuntimeStateV0,
                 Vec<LogEntry>,
                 Vec<LogEntry>,
-            ) = serializer::deserialize(reader).unwrap();
+            ) = bity_ic_serializer::deserialize(reader).unwrap();
             let mut state = RuntimeState::from(runtime_state_v0);
 
             state.env.set_version(upgrade_args.version);

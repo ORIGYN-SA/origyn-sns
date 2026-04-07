@@ -1,12 +1,10 @@
 use bity_ic_canister_state_macros::canister_state;
-use candid::{CandidType, Principal};
+use bity_ic_types::BuildVersion;
+use candid::{ CandidType, Principal };
 use canister_jobs_api::BurnJobResult;
-use serde::{Deserialize, Serialize};
-use types::{CanisterId, TimestampMillis};
-use utils::{
-    env::{CanisterEnv, Environment},
-    memory::MemorySize,
-};
+use serde::{ Deserialize, Serialize };
+use types::{ CanisterId, TimestampMillis };
+use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
 canister_state!(RuntimeState);
 
@@ -29,6 +27,8 @@ impl RuntimeState {
                 test_mode: self.env.is_test_mode(),
                 memory_used: MemorySize::used(),
                 cycles_balance_in_tc: self.env.cycles_balance_in_tc(),
+                version: self.env.version(),
+                commit_hash: self.env.commit_hash().to_string(),
             },
             jobs_info: self.data.jobs_info,
             daily_burn_amount: self.data.daily_burn_amount,
@@ -59,6 +59,8 @@ pub struct CanisterInfo {
     pub test_mode: bool,
     pub memory_used: MemorySize,
     pub cycles_balance_in_tc: u128,
+    pub version: BuildVersion,
+    pub commit_hash: String,
 }
 
 #[derive(CandidType, Deserialize, Serialize, Clone, Copy, Default)]
@@ -86,7 +88,7 @@ impl Data {
         ledger_canister_id: CanisterId,
         burn_principal_id: Principal,
         daily_burn_amount: u64,
-        authorized_principals: Vec<Principal>,
+        authorized_principals: Vec<Principal>
     ) -> Self {
         Self {
             authorized_principals,

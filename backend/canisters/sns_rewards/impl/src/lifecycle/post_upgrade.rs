@@ -7,7 +7,7 @@ use tracing::info;
 
 use crate::migrations::types::state::RuntimeStateV0;
 
-use crate::{memory::get_upgrades_memory, state::RuntimeState, utils::TimeInterval};
+use crate::{memory::get_upgrades_memory, state::RuntimeState};
 
 use super::init_canister;
 

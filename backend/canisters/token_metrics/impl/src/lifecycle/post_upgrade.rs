@@ -15,7 +15,7 @@ fn post_upgrade() {
     let reader = get_reader(&memory);
 
     let (state, logs, traces): (RuntimeState, Vec<LogEntry>, Vec<LogEntry>) =
-        serializer::deserialize(reader).unwrap();
+        bity_ic_serializer::deserialize(reader).unwrap();
 
     bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
     init_canister(state);

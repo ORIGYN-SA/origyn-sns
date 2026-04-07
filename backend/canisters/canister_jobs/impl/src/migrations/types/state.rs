@@ -1,13 +1,13 @@
-use candid::CandidType;
-use candid::Principal;
 use bity_ic_types::TimestampMillis;
-use serde::{Deserialize, Serialize};
+use candid::CandidType;
 use candid::Nat;
-use utils::env::CanisterEnv;
+use candid::Principal;
+use serde::{Deserialize, Serialize};
+use utils::env::CanisterEnvV0;
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeStateV0 {
-    pub env: CanisterEnv,
+    pub env: CanisterEnvV0,
     pub data: DataV0,
 }
 

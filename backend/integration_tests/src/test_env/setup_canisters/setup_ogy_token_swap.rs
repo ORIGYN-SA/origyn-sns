@@ -15,7 +15,7 @@ pub fn setup(
     let canister_id = create_canister_with_id(pic, controller, canister_id);
     pic.add_cycles(canister_id, 20_000_000_000_000);
 
-    let wasm = wasms::COLLECTION_INDEX.clone();
+    let wasm = wasms::OGY_TOKEN_SWAP.clone();
 
     let ogy_token_swap_init_args =
         ogy_token_swap_api::lifecycle::Args::Init(ogy_token_swap_api::lifecycle::init::InitArgs {

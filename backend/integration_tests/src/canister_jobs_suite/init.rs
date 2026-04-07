@@ -68,13 +68,13 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
      */
     let canister_jobs_canister_id = create_canister(pic, controller);
     let canister_jobs_canister_wasm = wasms::CANISTER_JOBS.clone();
-    let canister_jobs_init_args = DailyJobsInitArgs {
+    let canister_jobs_init_args = canister_jobs_api::Args::Init(DailyJobsInitArgs {
         test_mode: true,
         authorized_principals: vec![controller],
         ledger_canister_id: ogy_ledger_canister_id,
         burn_principal_id: controller,
         daily_burn_amount: 1_000_000 * E8S_PER_OGY,
-    };
+    });
 
     install_canister(
         pic,

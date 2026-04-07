@@ -15,7 +15,6 @@ use types::TokenInfo;
 use types::TokenSymbol;
 use types::TokenSymbolV0;
 use types::{NeuronInfo, TimestampMillis};
-use utils::env::CanisterEnv;
 use utils::env::CanisterEnvV0;
 
 #[derive(Serialize, Deserialize)]

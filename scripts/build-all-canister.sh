@@ -31,7 +31,7 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # List of canisters to include
-canister_list="buyback_burn canister_jobs collection_index ogy_token_swap sns_neuron_controller sns_rewards token_metrics"
+canister_list="dex_interaction canister_jobs collection_index ogy_token_swap sns_neuron_controller sns_rewards token_metrics"
 
 for canister in $canister_list; do
   ./scripts/build-canister.sh -w $INTTEST "$canister"

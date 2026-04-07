@@ -1,7 +1,7 @@
 use super::setup_rewards::setup_rewards_canister;
 use crate::client::icrc1::client::transfer;
-use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::sns_test_env::setup_ledger::setup_ledgers;
+use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::sns_test_env::utils::generate_5y_neuron_data;
 use crate::{
     // client::icrc1::client::transfer, sns_rewards_suite::setup::setup_ledger::setup_ledgers,
