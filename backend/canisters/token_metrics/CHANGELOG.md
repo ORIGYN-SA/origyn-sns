@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.0.1] - 2026-04-07
+
+### Changed
+- Merged latest `develop` branch: picks up updated crate versions, CI/CD streamlining, and `buyback_burn` → `dex_interaction` rename.
+- Replaced local `serializer` path dependency with published `bity-ic-serializer` workspace crate.
+- Deprecated `super_stats_v3` canister — source retained but removed from Cargo workspace and CI/CD.
+
 ## [2.0.0] - 2026-03-23
 
 ### Added
