@@ -1,4 +1,7 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
 type Account = record { owner : principal; subaccount : opt blob };
+// Active user counts (users with > 0 OGY balance).
 type ActiveUsers = record {
   active_principals_count : nat64;
   active_accounts_count : nat64;
@@ -26,10 +29,16 @@ type GetHoldersResponse = record {
 };
 type GetVotingParticipationHistoryArgs = record { days : nat64 };
 type GetVotingPowerRatioHistory = record { days : nat64 };
+// Aggregate governance statistics for a principal or the whole canister.
+// All token amounts are in e8s (1 OGY = 10^8 e8s).
 type GovernanceStats = record {
+  // Accumulated rewards (staked maturity)
   total_rewards : nat;
+  // Total tokens staked (locked + unlocked + restaked maturity)
   total_staked : nat;
+  // Tokens in locked neurons (non-zero dissolve delay)
   total_locked : nat;
+  // Tokens in unlocked neurons (zero dissolve delay or past dissolve timestamp)
   total_unlocked : nat;
 };
 type HistoryData = record { balance : nat };
@@ -43,6 +52,7 @@ type InitArgs = record {
   sns_governance_canister_id : principal;
 };
 type InitLedgerArgs = record { target : TargetArgs };
+// Amount of locked tokens bucketed by dissolve delay period.
 type LockedNeuronsAmount = record {
   one_year : nat;
   two_years : nat;
@@ -74,12 +84,19 @@ type ProcessedTX = record {
   tx_type : text;
   spender : opt text;
 };
+// Aggregated proposal and voting metrics across all proposals.
 type ProposalsMetrics = record {
+  // Daily voting rewards in e8s
   daily_voting_rewards : nat;
+  // Annual reward base for the current year in e8s
   reward_base_current_year : nat;
+  // Average voting participation in basis points (2600 = 26.00%)
   average_voting_participation : nat64;
+  // Average voting power across all proposals
   average_voting_power : nat64;
+  // Maximum total voting power observed in any single proposal tally
   total_voting_power : nat64;
+  // Highest proposal ID seen
   total_proposals : nat64;
 };
 type TargetArgs = record {
@@ -113,15 +130,20 @@ type TimeStats = record {
   burn_stats : TotCntAvg;
   approve_stats : TotCntAvg;
 };
+// Token supply data from the ledger (total and circulating).
 type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
 type TotCntAvg = record { count : nat; average : float64; total_value : nat };
 type TotalHolderResponse = record {
   total_accounts : nat64;
   total_principals : nat64;
 };
+// Combined view of a wallet's ledger and governance holdings.
 type WalletOverview = record {
+  // Total holdings across ledger + governance (in e8s)
   total : nat;
+  // Ledger-side overview (balance, sent/received counts, etc.)
   ledger : Overview;
+  // Governance-side stats (staked, locked, unlocked, rewards)
   governance : GovernanceStats;
 };
 type WorkingStats = record {
@@ -130,6 +152,7 @@ type WorkingStats = record {
   ledger_tip_of_chain : nat64;
   timer_active : bool;
   is_upto_date : bool;
+  // Repurposed: now holds total account count (was directory ref count).
   directory_count : nat64;
   is_busy : bool;
 };
