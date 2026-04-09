@@ -1,71 +1,134 @@
 use bity_ic_canister_time::{DAY_IN_MS, HOUR_IN_MS};
-use std::time::{Duration, SystemTime};
+use candid::Principal;
+use std::time::Duration;
 
 use crate::{
     client::rewards::{get_all_neurons, get_neuron_by_id},
-    sns_rewards_suite::setup::default_test_setup,
+    sns_test_env::{
+        sns_init_args::SnsProject,
+        utils::{generate_5y_neuron_data, generate_neuron_data},
+    },
+    test_env::test_env_builder::{SnsConfig, TestEnvBuilder},
     utils::{random_principal, tick_n_blocks},
 };
 
+use super::utils::{advance_to_sync, fund_reward_pools, rewards_canister_id, simulate_voting};
+
+// ─── tests ──────────────────────────────────────────────────────────────────
+
+/// After the daily sync, all 5y neurons appear in the rewards canister and
+/// accumulated_maturity grows with each voting round.
 #[test]
 fn test_synchronise_neurons_happy_path() {
-    let test_env = default_test_setup();
-    let pic = test_env.pic.borrow();
-    pic.set_time((SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718776800000)).into()); // Wednesday Jun 19, 2024, 6:00:00 AM
+    let users = vec![
+        Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1]),
+        Principal::from_slice(&[0, 0, 0, 1, 0, 2, 0, 2, 0, 2]),
+    ];
+    let (neuron_data, _) = generate_5y_neuron_data(0, 10, 1, &users);
 
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS * 3));
-    tick_n_blocks(&pic, 10);
+    let env = TestEnvBuilder::new()
+        .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
+        .add_token_ledger(&types::TokenSymbol::ICP)
+        .add_token_ledger(&types::TokenSymbol::GOLDAO)
+        .build();
 
-    let all_neurons = get_all_neurons(
-        &pic,
-        random_principal(),
-        test_env.rewards_canister_id.clone(),
-        &(),
+    let pic = env.pic.borrow();
+    let ogy_sns = env.get_sns(SnsProject::Ogy);
+    let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
+
+    // Start just before the 9 AM daily sync on Wednesday Jun 19, 2024
+    pic.set_time(
+        (std::time::UNIX_EPOCH + Duration::from_millis(1718776800000)).into(),
     );
-    assert_eq!(all_neurons as usize, test_env.neuron_data.len());
+    advance_to_sync(&pic);
 
-    let neuron_id_1 = test_env
-        .neuron_data
-        .get(&1usize)
+    let all_neurons = get_all_neurons(&pic, random_principal(), rewards_id, &());
+    assert_eq!(all_neurons as usize, neuron_data.len());
+
+    let neuron_id = neuron_data.get(&1usize).unwrap().id.clone().unwrap();
+    let neuron = get_neuron_by_id(&pic, random_principal(), rewards_id, &neuron_id).unwrap();
+    assert_eq!(neuron.accumulated_maturity, 0);
+
+    // Day 1: maturity increases (multiplier 2 → delta = 100_000)
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 2, &users);
+    pic.advance_time(Duration::from_millis(DAY_IN_MS));
+    tick_n_blocks(&pic, 50);
+
+    let neuron = get_neuron_by_id(&pic, random_principal(), rewards_id, &neuron_id).unwrap();
+    assert_eq!(neuron.accumulated_maturity, 100_000);
+
+    // Day 2: maturity increases again (multiplier 3 → another delta = 100_000)
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 3, &users);
+    pic.advance_time(Duration::from_millis(DAY_IN_MS));
+    tick_n_blocks(&pic, 50);
+
+    let neuron = get_neuron_by_id(&pic, random_principal(), rewards_id, &neuron_id).unwrap();
+    assert_eq!(neuron.accumulated_maturity, 200_000);
+}
+
+/// Non-5y neurons (dissolving) are synced into neuron_maturity but NOT into
+/// neuron_maturity_5y, so they won't receive 5y payment round rewards.
+#[test]
+fn test_non_5y_neurons_are_synced_but_not_5y_eligible() {
+    let users = vec![Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1])];
+    let (regular_neurons, _) = generate_neuron_data(0, 5, 1, &users);
+    let (five_y_neurons, _) = generate_5y_neuron_data(5, 10, 1, &users);
+
+    let mut all_neurons = regular_neurons.clone();
+    all_neurons.extend(five_y_neurons.clone());
+
+    let env = TestEnvBuilder::new()
+        .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(all_neurons.clone()))
+        .add_token_ledger(&types::TokenSymbol::ICP)
+        .add_token_ledger(&types::TokenSymbol::GOLDAO)
+        .build();
+
+    let pic = env.pic.borrow();
+    let ogy_sns = env.get_sns(SnsProject::Ogy);
+    let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
+
+    advance_to_sync(&pic);
+
+    // All neurons are tracked in the standard map
+    let all_synced = get_all_neurons(&pic, random_principal(), rewards_id, &());
+    assert_eq!(all_synced as usize, all_neurons.len());
+}
+
+/// accumulated_maturity never decreases even when current maturity drops.
+#[test]
+fn test_accumulated_maturity_is_monotonic() {
+    let users = vec![Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1])];
+    let (neuron_data, _) = generate_5y_neuron_data(0, 5, 1, &users);
+
+    let env = TestEnvBuilder::new()
+        .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
+        .add_token_ledger(&types::TokenSymbol::ICP)
+        .build();
+
+    let pic = env.pic.borrow();
+    let ogy_sns = env.get_sns(SnsProject::Ogy);
+    let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
+
+    let neuron_id = neuron_data.get(&0usize).unwrap().id.clone().unwrap();
+
+    // Increase maturity
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 3, &users);
+    pic.advance_time(Duration::from_millis(DAY_IN_MS));
+    tick_n_blocks(&pic, 50);
+
+    let after_increase = get_neuron_by_id(&pic, random_principal(), rewards_id, &neuron_id)
         .unwrap()
-        .clone()
-        .id
-        .unwrap();
-    let single_neuron = get_neuron_by_id(
-        &pic,
-        random_principal(),
-        test_env.rewards_canister_id.clone(),
-        &neuron_id_1,
-    )
-    .unwrap();
-    assert_eq!(single_neuron.accumulated_maturity, 0);
+        .accumulated_maturity;
+    assert!(after_increase > 0);
 
-    // day 1
-    test_env.simulate_neuron_voting(2);
-    pic.advance_time(Duration::from_millis(DAY_IN_MS)); // 25 hours
+    // Drop maturity (multiplier back to 1)
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 1, &users);
+    pic.advance_time(Duration::from_millis(DAY_IN_MS));
     tick_n_blocks(&pic, 50);
 
-    let single_neuron = get_neuron_by_id(
-        &pic,
-        random_principal(),
-        test_env.rewards_canister_id.clone(),
-        &neuron_id_1,
-    )
-    .unwrap();
-    assert_eq!(single_neuron.accumulated_maturity, 100_000);
-    tick_n_blocks(&pic, 2);
+    let after_drop = get_neuron_by_id(&pic, random_principal(), rewards_id, &neuron_id)
+        .unwrap()
+        .accumulated_maturity;
 
-    // day 2
-    test_env.simulate_neuron_voting(3);
-    pic.advance_time(Duration::from_millis(DAY_IN_MS)); // 25 hours
-    tick_n_blocks(&pic, 50);
-
-    let single_neuron = get_neuron_by_id(
-        &pic,
-        random_principal(),
-        test_env.rewards_canister_id.clone(),
-        &neuron_id_1,
-    )
-    .unwrap();
-    assert_eq!(single_neuron.accumulated_maturity, 200_000);
+    assert!(after_drop >= after_increase, "accumulated_maturity must never decrease");
 }

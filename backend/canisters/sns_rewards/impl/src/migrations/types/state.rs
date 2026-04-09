@@ -8,6 +8,7 @@ use crate::{
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::NeuronId;
+use sns_governance_canister::types::neuron;
 use sns_rewards_api_canister::{ReserveTokenAmounts, TokenRewardTypes};
 use std::collections::BTreeMap;
 use std::collections::HashMap;
@@ -77,15 +78,19 @@ impl From<DataV0> for Data {
             }
         }
 
+        let neuron_maturity: BTreeMap<_, _> = v0
+            .neuron_maturity
+            .into_iter()
+            .map(|(k, v)| (k, NeuronInfo::from(v)))
+            .collect();
+
         Data {
             sns_governance_canister: v0.sns_governance_canister,
             neuron_system: NeuronSystem {
                 sync_info: v0.sync_info,
-                neuron_maturity: v0
-                    .neuron_maturity
-                    .into_iter()
-                    .map(|(k, v)| (k, NeuronInfo::from(v)))
-                    .collect(),
+                neuron_maturity: neuron_maturity.clone(),
+                // FIXME: decide whether store the previous maturity rewarded or pay out one-time rewards bigger (like with goldao)
+                neuron_maturity_5y: neuron_maturity,
                 maturity_history: MaturityHistory::default(),
             },
             payment_processor: PaymentProcessor::from(v0.payment_processor),

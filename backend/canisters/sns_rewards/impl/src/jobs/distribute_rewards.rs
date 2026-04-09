@@ -95,7 +95,9 @@ pub async fn distribute_rewards(retry_attempt: u8) {
         read_state(|state| state.data.payment_processor.get_active_rounds());
 
     if pending_payment_rounds.is_empty() && retry_attempt == 0 {
+        // FIXME: it could be that payment orunds exist already for swapped tokens, which is not desirable, so the default won't be created, should check it
         create_new_payment_rounds().await;
+        create_new_5y_payment_rounds().await;
     }
 
     let active_rounds = read_state(|state| state.data.payment_processor.get_active_rounds());
@@ -135,6 +137,60 @@ pub async fn create_new_payment_rounds() {
         }
 
         let neuron_data = read_state(|state| state.data.neuron_system.neuron_maturity.clone());
+
+        let new_round = PaymentRound::new(
+            new_round_key,
+            reward_pool_balance,
+            token_info,
+            token,
+            neuron_data,
+        );
+        match new_round {
+            Ok(valid_round) => match transfer_funds_to_payment_round_account(&valid_round).await {
+                Ok(()) => {
+                    mutate_state(|state| {
+                        state
+                            .data
+                            .payment_processor
+                            .add_active_payment_round(valid_round);
+                    });
+                }
+                Err(e) => {
+                    info!(
+                        "ERROR - transferring funds to payment round sub account : {}",
+                        e
+                    );
+                }
+            },
+            Err(s) => {
+                info!(
+                    "ROUND ID : {} & TOKEN :{:?} - Invalid round : {}",
+                    new_round_key, token, s
+                );
+                continue;
+            }
+        }
+    }
+}
+
+
+pub async fn create_new_5y_payment_rounds() {
+    let reward_tokens = read_state(|s| s.data.tokens.clone());
+
+    for (token, token_info) in reward_tokens.into_iter() {
+        let new_round_key = read_state(|state| state.data.payment_processor.next_key());
+
+        let reward_pool_balance = fetch_reward_pool_balance(token_info.ledger_id).await;
+
+        if reward_pool_balance == 0u64 {
+            info!(
+                "ROUND ID : {} & TOKEN :{:?} - has no rewards for distribution",
+                new_round_key, token
+            );
+            continue;
+        }
+
+        let neuron_data = read_state(|state| state.data.neuron_system.neuron_maturity_5y.clone());
 
         let new_round = PaymentRound::new(
             new_round_key,

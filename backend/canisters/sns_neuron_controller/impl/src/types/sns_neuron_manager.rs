@@ -1,7 +1,7 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::{GoldaoManager};
+use crate::types::GoldaoManager;
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
