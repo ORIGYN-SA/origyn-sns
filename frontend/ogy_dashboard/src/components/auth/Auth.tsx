@@ -1,4 +1,5 @@
 // import { useQueryClient } from "@tanstack/react-query";
+import { useRef } from "react";
 import { useWallet } from "@amerej/artemis-react";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 
@@ -14,15 +15,34 @@ const Auth = () => {
     walletList,
   } = useWallet();
 
+  // Track user-initiated connections via event handlers so the "Connecting..."
+  // dialog only shows when the user explicitly clicked Connect.
+  // Auto-connect on page load can hang due to artemis-react bugs, so we
+  // suppress its dialog by leaving this ref as false.
+  const userInitiated = useRef(false);
+
+  const onOpenWalletList = () => {
+    userInitiated.current = true;
+    handleOpenWalletList();
+  };
+
+  const onCloseWalletList = () => {
+    userInitiated.current = false;
+    handleCloseWalletList();
+  };
+
+  const showConnectingDialog =
+    state === walletState.Connecting && userInitiated.current;
+
   return (
     <>
-      {!isConnected && <Button onClick={handleOpenWalletList}>Connect</Button>}
+      {!isConnected && <Button onClick={onOpenWalletList}>Connect</Button>}
       {isConnected && (
         <Button onClick={handleDisconnectWallet}>Disconnect</Button>
       )}
       <Dialog
         show={state == walletState.OpenWalletList}
-        handleClose={handleCloseWalletList}
+        handleClose={onCloseWalletList}
       >
         <div className="pt-6 pb-12 px-12">
           <div className="mb-8 text-center text-lg font-semibold">
@@ -50,8 +70,8 @@ const Auth = () => {
         </div>
       </Dialog>
       <Dialog
-        show={state == walletState.Connecting}
-        handleClose={handleCloseWalletList}
+        show={showConnectingDialog}
+        handleClose={onCloseWalletList}
       >
         <div className="pt-6 pb-12 px-4 text-center">
           <div className="mb-8 font-semibold text-lg">Connecting...</div>
