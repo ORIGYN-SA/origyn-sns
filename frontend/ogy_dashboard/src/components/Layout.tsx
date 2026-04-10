@@ -1,11 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { useCallback } from "react";
-import type { Location, useMatches } from "react-router-dom";
 import { ScrollRestoration, Outlet, useNavigation } from "react-router-dom";
 
 import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/footer/Footer";
+import useScrollToTopOnNavigation from "@hooks/useScrollToTopOnNavigation";
 
 const NavigationProgress = () => {
   return (
@@ -19,17 +16,7 @@ const NavigationProgress = () => {
 
 const Layout = () => {
   const navigation = useNavigation();
-
-  const getKey = useCallback(
-    (location: Location, matches: ReturnType<typeof useMatches>) => {
-      const match = matches.find((m) => m.handle?.scrollMode);
-      if (match?.handle?.scrollMode === "pathname") {
-        return location.pathname;
-      }
-      return location.key;
-    },
-    []
-  );
+  useScrollToTopOnNavigation();
 
   return (
     <div className="flex flex-col h-screen">
@@ -37,7 +24,7 @@ const Layout = () => {
       <div className="flex-grow">
         {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
       </div>
-      <ScrollRestoration getKey={getKey} />
+      <ScrollRestoration />
       <Footer />
     </div>
   );
