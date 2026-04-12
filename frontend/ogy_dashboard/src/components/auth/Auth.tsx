@@ -36,7 +36,14 @@ const Auth = () => {
 
   return (
     <>
-      {!isConnected && <Button onClick={onOpenWalletList}>Connect</Button>}
+      {!isConnected && (
+        <Button
+          className="!px-[25px] !py-0 text-[14px] leading-[48px]"
+          onClick={onOpenWalletList}
+        >
+          Connect
+        </Button>
+      )}
       {isConnected && (
         <Button onClick={handleDisconnectWallet}>Disconnect</Button>
       )}

@@ -1,65 +1,83 @@
-import { useState, Fragment, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, Fragment } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useWallet } from "@amerej/artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import AccountOverview from "@components/account/overview/AccountOverview";
 import { Tile, Skeleton } from "@components/ui";
+import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
+import useScrolledPast from "@hooks/useScrolledPast";
 
-const Navbar = () => {
+const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
+  { title: "Dashboard", url: "/" },
+  { title: "Governance", url: "/governance" },
+  { title: "Explorer", url: "/explorer" },
+  { title: "Proposals", url: "/proposals" },
+  { title: "Calculator", url: "/calculator" },
+  { title: "Certificates", url: "/certificates" },
+  { title: "My Account", url: "/account", requiresAuth: true },
+];
+
+const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
   const { isConnected, principalId } = useWallet();
+  const hidden = useHideOnScrollDown();
+  const pastWarning = useScrolledPast(30);
+  const showRounded = roundedTop && !pastWarning;
 
-  const navItems = [
-    { title: "Dashboard", url: "/" },
-    { title: "Governance", url: "/governance" },
-    { title: "Explorer", url: "/explorer" },
-    { title: "Proposals", url: "/proposals" },
-    { title: "Calculator", url: "/calculator" },
-    { title: "Certificates", url: "/certificates" },
-    { title: "My Account", url: "/account" },
-  ];
+  const effectiveShowAccountOverview = showAccountOverview && isConnected;
+  const visibleNavItems = navItems.filter(
+    (item) => !item.requiresAuth || isConnected
+  );
 
   const handleOnClickShowAccountOverview = (show: boolean) =>
     setShowAccountOverview(show);
 
   const handleOnHideMenu = () => setShowMenu(false);
 
-  useEffect(() => {
-    if (!isConnected) {
-      setShowAccountOverview(false);
-    }
-  }, [isConnected]);
-
   return (
     <>
-      <nav className="bg-background sticky top-0 shadow px-6 py-5 z-40">
-        <div className="grid grid-cols-2 xl:grid-cols-5 items-center h-10">
-          <div className="col-start-1 col-end-1 flex-shrink-0">
+      <nav
+        className={`bg-white sticky top-0 border-b border-[#E1E1E1] z-40 transition-[transform,border-radius] duration-300 ease-in-out ${
+          showRounded ? "rounded-t-2xl" : "rounded-t-none"
+        } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+      >
+        <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-[1440px] mx-auto px-6">
+          <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
-              <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:block">
+              <span className="self-center font-bold text-[20px] leading-none tracking-[-0.03em] text-[#222526] whitespace-nowrap hidden sm:block">
                 OGY Dashboard
               </span>
             </Link>
           </div>
-          <div className="hidden xl:block justify-self-center col-start-2 col-end-5">
-            <div className="flex items-center space-x-12">
-              {navItems.map(
-                ({ title, url }, i) =>
-                  (title !== "My Account" ||
-                    (title === "My Account" && isConnected)) && (
-                    <Link
-                      to={url}
-                      className="font-semibold text-content/60 hover:text-content"
-                      key={i}
-                    >
+          <div className="hidden xl:block justify-self-center col-start-2 col-end-5 h-full">
+            <div className="flex items-stretch space-x-12 h-full">
+              {visibleNavItems.map(({ title, url }) => (
+                <NavLink
+                  to={url}
+                  end={url === "/"}
+                  className={({ isActive }) =>
+                    `relative flex items-center font-semibold text-[16px] leading-none ${
+                      isActive
+                        ? "text-content"
+                        : "text-[#69737C] hover:text-content"
+                    }`
+                  }
+                  key={url}
+                >
+                  {({ isActive }) => (
+                    <>
                       {title}
-                    </Link>
-                  )
-              )}
+                      {isActive && (
+                        <span className="absolute left-0 right-0 bottom-[-1px] h-[2px] bg-[#222526]" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              ))}
             </div>
           </div>
           <div className="flex justify-self-end items-center col-start-5">
@@ -163,20 +181,16 @@ const Navbar = () => {
                           </button>
                         </div>
 
-                        {navItems.map(
-                          ({ title, url }, i) =>
-                            (title !== "My Account" ||
-                              (title === "My Account" && isConnected)) && (
-                              <Link
-                                onClick={handleOnHideMenu}
-                                to={url}
-                                className="font-semibold text-content/60 hover:text-content px-3 py-2 rounded-md"
-                                key={i}
-                              >
-                                {title}
-                              </Link>
-                            )
-                        )}
+                        {visibleNavItems.map(({ title, url }) => (
+                          <Link
+                            onClick={handleOnHideMenu}
+                            to={url}
+                            className="font-semibold text-[#69737C] hover:text-content px-3 py-2 rounded-md"
+                            key={url}
+                          >
+                            {title}
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </TransitionChild>
@@ -188,7 +202,7 @@ const Navbar = () => {
       </nav>
 
       <AccountOverview
-        show={showAccountOverview}
+        show={effectiveShowAccountOverview}
         handleClose={() => handleOnClickShowAccountOverview(false)}
       />
     </>
