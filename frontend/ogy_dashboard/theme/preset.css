@@ -19,6 +19,7 @@
     --color-candy-floss: 255 85 197;
     --color-sky: 0 162 247;
     --color-jade: 80 190 143;
+    --color-muted: 105 115 124;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -34,6 +35,7 @@
       --color-candy-floss: 255 85 197;
       --color-sky: 0 162 247;
       --color-jade: 80 190 143;
+      --color-muted: 105 115 124;
     }
   }
 }

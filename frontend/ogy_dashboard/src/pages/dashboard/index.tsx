@@ -29,19 +29,15 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center">
-          <Badge className="bg-spacePurple px-4">
-            <div className="text-white tracking-widest text-xs font-semibold uppercase">
-              OGY ANALYTICS
-            </div>
+        <div className="flex flex-col items-center gap-2 px-16 py-8 max-w-[528px]">
+          <Badge className="bg-spacePurple !py-0 px-[9px] text-white font-extrabold text-[10px] leading-[22px] tracking-[2px] uppercase">
+            OGY ANALYTICS
           </Badge>
-
-          <h1 className="text-4xl sm:text-6xl font-bold text-center mt-4">
+          <h1 className="font-extrabold text-[64px] leading-[60px] tracking-[-0.05em] text-center text-content">
             Explore dashboard
           </h1>
-          <p className="mt-3 text-lg text-center px-6">
-            Interact trustlessly with web3 dApps, DAOs, NFTs, DeFi and much
-            more.
+          <p className="font-light text-[22px] leading-none text-center text-muted">
+            Interact trustlessly with web3 dApps, DAOs, NFTs, DeFi and much more.
           </p>
         </div>
 

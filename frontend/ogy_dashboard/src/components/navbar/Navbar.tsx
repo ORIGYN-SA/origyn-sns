@@ -63,7 +63,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                     `relative flex items-center font-semibold text-[16px] leading-none ${
                       isActive
                         ? "text-content"
-                        : "text-[#69737C] hover:text-content"
+                        : "text-muted hover:text-content"
                     }`
                   }
                   key={url}
@@ -185,7 +185,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                           <Link
                             onClick={handleOnHideMenu}
                             to={url}
-                            className="font-semibold text-[#69737C] hover:text-content px-3 py-2 rounded-md"
+                            className="font-semibold text-muted hover:text-content px-3 py-2 rounded-md"
                             key={url}
                           >
                             {title}

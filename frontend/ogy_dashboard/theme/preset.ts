@@ -14,6 +14,7 @@ export const colors = {
   jade: "rgb(var(--color-jade))",
   sky: "rgb(var(--color-sky))",
   mouse: "rgb(var(--color-mouse))",
+  muted: "rgb(var(--color-muted))",
   candyFloss: "rgb(var(--color-candy-floss))",
 };
 
