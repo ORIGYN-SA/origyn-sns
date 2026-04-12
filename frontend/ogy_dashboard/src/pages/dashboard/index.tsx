@@ -41,7 +41,7 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="bg-ledger-switch bg-cover bg-center bg-surface-2 text-content p-12 rounded-[40px] shadow-[0px_10px_50px_0px_#06274926] my-16 w-full">
+        <div className="bg-ledger-switch bg-cover bg-center bg-black text-content p-12 rounded-[40px] shadow-[0px_10px_50px_0px_#06274926] my-16 w-full">
           <LedgerSwitchBannerContent>
             <div className="flex justify-center mt-8">
               {!isConnected && <AuthButton label="Login to swap tokens" />}
