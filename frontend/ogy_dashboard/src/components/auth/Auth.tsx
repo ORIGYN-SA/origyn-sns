@@ -3,7 +3,13 @@ import { useRef } from "react";
 import { useWallet } from "@amerej/artemis-react";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 
-const Auth = () => {
+const Auth = ({
+  label = "Connect",
+  className = "!px-[25px] !py-0 text-[14px] leading-[48px]",
+}: {
+  label?: string;
+  className?: string;
+}) => {
   const {
     state,
     isConnected,
@@ -37,11 +43,8 @@ const Auth = () => {
   return (
     <>
       {!isConnected && (
-        <Button
-          className="!px-[25px] !py-0 text-[14px] leading-[48px]"
-          onClick={onOpenWalletList}
-        >
-          Connect
+        <Button className={className} onClick={onOpenWalletList}>
+          {label}
         </Button>
       )}
       {isConnected && (

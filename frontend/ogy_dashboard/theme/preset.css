@@ -20,6 +20,7 @@
     --color-sky: 0 162 247;
     --color-jade: 80 190 143;
     --color-muted: 105 115 124;
+    --color-charcoal-light: 60 60 57;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -36,6 +37,7 @@
       --color-sky: 0 162 247;
       --color-jade: 80 190 143;
       --color-muted: 105 115 124;
+      --color-charcoal-light: 60 60 57;
     }
   }
 }

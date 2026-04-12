@@ -10,6 +10,7 @@ export const colors = {
   border: "rgb(var(--color-border))",
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
+  charcoalLight: "rgb(var(--color-charcoal-light))",
   spacePurple: "rgb(var(--color-space-purple))",
   jade: "rgb(var(--color-jade))",
   sky: "rgb(var(--color-sky))",
