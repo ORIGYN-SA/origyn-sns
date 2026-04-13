@@ -23,7 +23,11 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::futures::spawn(sync_governance_history())
+    crate::jobs::record_job_started("sync_governance_history", 43_200);
+    ic_cdk::futures::spawn(async {
+        sync_governance_history().await;
+        crate::jobs::record_job_completed("sync_governance_history");
+    })
 }
 
 pub async fn sync_governance_history() {

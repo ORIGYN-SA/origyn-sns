@@ -12,6 +12,7 @@ candid = { workspace = true }
 hex = { workspace = true }
 minicbor = { workspace = true }
 bity-ic-canister-logger = { workspace = true }
+bity-ic-types = { workspace = true }
 bity-ic-canister-state-macros = { workspace = true }
 bity-ic-canister-time = { workspace = true }
 bity-ic-canister-tracing-macros = { workspace = true }

@@ -20,7 +20,11 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::futures::spawn(sync_proposals_metrics_data());
+    crate::jobs::record_job_started("sync_proposals_stats", 18_000);
+    ic_cdk::futures::spawn(async {
+        sync_proposals_metrics_data().await;
+        crate::jobs::record_job_completed("sync_proposals_stats");
+    });
     ic_cdk::futures::spawn(recheck_ongoing_proposals());
 }
 
@@ -86,6 +90,7 @@ pub async fn sync_proposals_metrics_data() {
             Err(err) => {
                 let error_message = format!("{err:?}");
                 error!(?error_message, "Error fetching proposal data");
+                crate::jobs::record_job_error("sync_proposals_stats", &error_message);
             }
         }
     }
@@ -254,6 +259,7 @@ mod tests {
             CanisterId::anonymous(),
             "aaaa-aa.00..1".to_string(),
             Vec::new(),
+            vec![CanisterId::anonymous()],
         );
         init_state(RuntimeState::new(env.clone(), data));
     }

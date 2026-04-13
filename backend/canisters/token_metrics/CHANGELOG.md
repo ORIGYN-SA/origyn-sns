@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.1.0] - 2026-04-13
+
+### Added
+- `Args` enum lifecycle (`Init`/`Upgrade` variants) with `authorized_principals`, `version`, `commit_hash`.
+- Timer status tracking and `HealthStatus` in `/metrics` for all background jobs.
+- Ledger indexer auto-starts on init and restarts on upgrade.
+
+### Removed
+- `init_target_ledger` update endpoint (now automatic).
+- Stale manual deploy script.
+
 ## [2.0.1] - 2026-04-07
 
 ### Changed

@@ -17,7 +17,11 @@ pub fn _start_job_if_not_started() {
 }
 
 pub fn run() {
-    ic_cdk::futures::spawn(sync_supply_data())
+    crate::jobs::record_job_started("sync_supply_data", 0);
+    ic_cdk::futures::spawn(async {
+        sync_supply_data().await;
+        crate::jobs::record_job_completed("sync_supply_data");
+    })
 }
 
 pub async fn sync_supply_data() {
@@ -51,6 +55,7 @@ pub async fn sync_supply_data() {
         Err(err) => {
             let message = format!("{err:?}");
             error!(?message, "Error while getting the total supply data");
+            crate::jobs::record_job_error("sync_supply_data", &message);
         }
     }
 }

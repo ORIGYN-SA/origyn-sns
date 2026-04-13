@@ -6083,6 +6083,7 @@ dependencies = [
  "bity-ic-canister-tracing-macros",
  "bity-ic-serializer",
  "bity-ic-stable-memory",
+ "bity-ic-types 0.1.2",
  "candid",
  "futures",
  "hex",

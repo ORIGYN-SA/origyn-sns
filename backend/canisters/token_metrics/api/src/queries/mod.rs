@@ -26,6 +26,5 @@ pub mod get_total_holders;
 pub mod get_working_stats;
 
 // Ledger indexer update endpoints
-pub mod init_target_ledger;
 pub mod start_processing_timer;
 pub mod stop_all_timers;

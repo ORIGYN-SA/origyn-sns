@@ -44,6 +44,7 @@ async fn schedule_data_processing() {
     if is_busy {
         return;
     }
+    crate::jobs::record_job_started("sync_ledger", 60);
     mutate_state(|s| s.data.ledger_indexer.working_stats.is_busy = true);
 
     // Download latest transactions
@@ -88,15 +89,20 @@ async fn schedule_data_processing() {
                     }
                 }
                 Err(e) => {
-                    error!("Error processing account index: {}", e);
+                    let msg = format!("Error processing account index: {}", e);
+                    error!("{}", msg);
+                    crate::jobs::record_job_error("sync_ledger", &msg);
                 }
             }
         }
         Err(e) => {
-            error!("Error downloading transactions: {}", e);
+            let msg = format!("Error downloading transactions: {}", e);
+            error!("{}", msg);
+            crate::jobs::record_job_error("sync_ledger", &msg);
         }
     }
 
+    crate::jobs::record_job_completed("sync_ledger");
     mutate_state(|s| s.data.ledger_indexer.working_stats.is_busy = false);
 }
 

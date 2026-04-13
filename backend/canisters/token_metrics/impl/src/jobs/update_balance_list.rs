@@ -22,7 +22,11 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::futures::spawn(update_balance_list())
+    crate::jobs::record_job_started("update_balance_list", 43_200);
+    ic_cdk::futures::spawn(async {
+        update_balance_list().await;
+        crate::jobs::record_job_completed("update_balance_list");
+    })
 }
 
 pub async fn update_balance_list() {

@@ -15,6 +15,7 @@ use token_metrics_api::types::ledger_indexer::{
     AccountDayKey, ActivitySnapshot, HistoryBalanceCache, HistoryData, LedgerAccount,
     LedgerIndexerData, Overview, ProcessedTX,
 };
+use token_metrics_api::types::timer_status::{HealthStatus, TimerStatus};
 use types::{CanisterId, TimestampMillis};
 use utils::{
     env::{CanisterEnv, Environment},
@@ -225,6 +226,32 @@ impl RuntimeState {
             number_of_owners: self.data.principal_neurons.len(),
             sns_governance_canister: self.data.sns_governance_canister,
             sns_ledger_canister: self.data.sns_ledger_canister,
+            timer_statuses: self.data.timer_statuses.values().cloned().collect(),
+            health_status: self.health_status(),
+        }
+    }
+
+    pub fn health_status(&self) -> HealthStatus {
+        let mut errors = Vec::new();
+
+        let cycles_tc = self.env.cycles_balance_in_tc();
+        if cycles_tc < 1 {
+            errors.push(format!("Low cycles: {} TC", cycles_tc));
+        }
+
+        for status in self.data.timer_statuses.values() {
+            if let (Some(error), Some(error_at)) = (&status.last_error, status.last_error_at) {
+                let last_success = status.last_run_at.unwrap_or(0);
+                if error_at > last_success {
+                    errors.push(format!("{}: {}", status.name, error));
+                }
+            }
+        }
+
+        if errors.is_empty() {
+            HealthStatus::Healthy
+        } else {
+            HealthStatus::Error(errors.join("; "))
         }
     }
 
@@ -237,11 +264,12 @@ impl RuntimeState {
 #[derive(CandidType, Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,
-    // Do we need the canister ids here?
     pub sns_governance_canister: Principal,
     pub sns_ledger_canister: Principal,
     pub number_of_owners: usize,
     pub sync_info: SyncInfo,
+    pub timer_statuses: Vec<TimerStatus>,
+    pub health_status: HealthStatus,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
@@ -306,6 +334,9 @@ pub struct Data {
     pub active_users: ActiveUsers,
     /// Ledger indexer config and stats (heap-resident; stable maps are separate)
     pub ledger_indexer: LedgerIndexerData,
+    /// Status tracking for all background jobs/timers
+    #[serde(default)]
+    pub timer_statuses: BTreeMap<String, TimerStatus>,
 }
 
 impl Data {
@@ -315,6 +346,7 @@ impl Data {
         sns_rewards_canister_id: CanisterId,
         treasury_account: String,
         foundation_accounts: Vec<String>,
+        authorized_principals: Vec<Principal>,
     ) -> Self {
         Self {
             sns_governance_canister: sns_governance_canister_id,
@@ -323,7 +355,7 @@ impl Data {
             treasury_account,
             foundation_accounts,
             foundation_accounts_data: Vec::new(),
-            authorized_principals: vec![sns_governance_canister_id],
+            authorized_principals,
             principal_neurons: BTreeMap::new(),
             principal_gov_stats: BTreeMap::new(),
             voting_participation_history: BTreeMap::new(),
@@ -338,6 +370,7 @@ impl Data {
             daily_voting_metrics: BTreeMap::new(),
             active_users: ActiveUsers::default(),
             ledger_indexer: LedgerIndexerData::default(),
+            timer_statuses: BTreeMap::new(),
         }
     }
 

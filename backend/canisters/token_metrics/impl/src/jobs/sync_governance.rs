@@ -25,7 +25,11 @@ pub fn start_job() {
 }
 
 pub fn run() {
-    ic_cdk::futures::spawn(sync_neurons_data())
+    crate::jobs::record_job_started("sync_governance", 86_400);
+    ic_cdk::futures::spawn(async {
+        sync_neurons_data().await;
+        crate::jobs::record_job_completed("sync_governance");
+    })
 }
 
 pub async fn sync_neurons_data() {
@@ -98,6 +102,7 @@ pub async fn sync_neurons_data() {
             Err(err) => {
                 let error_message = format!("{err:?}");
                 error!(?error_message, "Error fetching neuron data");
+                crate::jobs::record_job_error("sync_governance", &error_message);
             }
         }
     }
