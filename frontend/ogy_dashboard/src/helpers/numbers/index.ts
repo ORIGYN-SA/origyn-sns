@@ -12,7 +12,7 @@ interface roundAndFormatLocaleParams {
 
 export const roundAndFormatLocale = ({
   number,
-  locale = "en-US",
+  locale,
   decimals = 2,
 }: roundAndFormatLocaleParams) => {
   return Number(number.toFixed(decimals)).toLocaleString(locale);

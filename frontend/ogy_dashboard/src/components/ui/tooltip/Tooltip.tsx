@@ -14,11 +14,15 @@ interface TooltipProps
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
-  background-color: rgb(var(--color-surface-3)) !important;
+  background-color: #F9FAFE !important;
+  border: 1px solid #E1E1E1 !important;
   opacity: 1 !important;
-  color: rgb(var(--color-content)) !important;
+  color: rgb(var(--color-muted)) !important;
   z-index: 9;
   border-radius: 10px !important;
+  padding: 0 !important;
+  transition: opacity 0.15s ease-in-out !important;
+  transform: none !important;
 `;
 
 const Tooltip = ({
@@ -35,7 +39,10 @@ const Tooltip = ({
       id={id}
       place={place}
       clickable={clickable}
-      delayShow={300}
+      noArrow
+      float={false}
+      offset={8}
+      globalCloseEvents={{ scroll: true, resize: true, escape: true }}
       {...restProps}
     >
       {children}

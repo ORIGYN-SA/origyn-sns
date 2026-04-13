@@ -52,9 +52,9 @@ const Dashboard = () => {
           </LedgerSwitchBannerContent>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-8">
-          <section className="w-full" id="total-ogy-supply">
-            <TotalOGYSupply />
+        <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-x-6 gap-y-16 pb-16">
+          <section className="w-full h-full" id="total-ogy-supply">
+            <TotalOGYSupply className="h-full" />
           </section>
           <section className="w-full" id="total-ogy-burned">
             <TotalOGYBurned />

@@ -56,8 +56,8 @@ const Area = ({
         data={data}
         margin={{
           top: 10,
-          right: 30,
-          left: 25,
+          right: 0,
+          left: 0,
           bottom: 0,
         }}
       >
@@ -68,8 +68,7 @@ const Area = ({
           </linearGradient>
         </defs>
         <CartesianGrid
-          vertical={true}
-          strokeDasharray="5 5"
+          vertical={false}
           horizontal={false}
         />
         <XAxis

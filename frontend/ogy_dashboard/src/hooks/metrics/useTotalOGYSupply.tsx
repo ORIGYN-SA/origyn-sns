@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
@@ -6,14 +5,8 @@ import fetchTotalSupplyOGY, {
 import fetchTotalSupplyOGYTimeSeries, {
   TotalSupplyOGYTimeSeries,
 } from "@services/queries/metrics/fetchTotalSupplyOGYTimeSeriesQuery";
-import { ChartData } from "@services/types/charts.types";
 
 const useTotalOGYSupply = ({ period }: { period: string }) => {
-  const [data, setData] = useState({
-    totalSupply: "0",
-    dataPieChart: [] as ChartData[],
-  });
-
   const {
     data: dataTotalSupply,
     isSuccess: isSuccessFetchTotalSupply,
@@ -27,32 +20,20 @@ const useTotalOGYSupply = ({ period }: { period: string }) => {
     isLoading: isLoadingFetchTotalSupplyTimeSeries,
     error: errorTotalSupplyTimeSeries,
   }: UseQueryResult<TotalSupplyOGYTimeSeries> = useQuery(
-    fetchTotalSupplyOGYTimeSeries({
-      period,
-    })
+    fetchTotalSupplyOGYTimeSeries({ period })
   );
 
-  useEffect(() => {
-    if (isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries) {
-      setData({
-        totalSupply: dataTotalSupply.totalSupplyOGYToString,
-        dataPieChart: dataTotalSupplyTimeSeries.totalSupplyOGYTimeSeries,
-      });
-    }
-  }, [
-    isSuccessFetchTotalSupply,
-    isSuccessFetchTotalSupplyTimeSeries,
-    dataTotalSupply,
-    dataTotalSupplyTimeSeries,
-  ]);
-
-  const isSuccess =
-    isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries;
-  const isLoading =
-    isLoadingFetchTotalSupply || isLoadingFetchTotalSupplyTimeSeries;
-  const error = errorFetchTotalSupply || errorTotalSupplyTimeSeries;
-
-  return { data, isSuccess, isLoading, error };
+  return {
+    data: {
+      totalSupply: dataTotalSupply?.totalSupplyOGYToString ?? "0",
+      dataPieChart: dataTotalSupplyTimeSeries?.totalSupplyOGYTimeSeries ?? [],
+    },
+    isSuccess:
+      isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries,
+    isLoading:
+      isLoadingFetchTotalSupply || isLoadingFetchTotalSupplyTimeSeries,
+    error: errorFetchTotalSupply || errorTotalSupplyTimeSeries,
+  };
 };
 
 export default useTotalOGYSupply;
