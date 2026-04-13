@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchTotalBurnedOGY, {
   TotalBurnedOGY,
@@ -9,12 +9,9 @@ import fetchTotalBurnedOGYTimeSeries, {
 import { ChartData } from "@services/types/charts.types";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
-const useTotalOGYBurned = ({ period }: { period: string }) => {
-  const [data, setData] = useState({
-    totalBurned: "0",
-    dataPieChart: [] as ChartData[],
-  });
+const BURN_OFFSET = 202420405.1;
 
+const useTotalOGYBurned = ({ period }: { period: string }) => {
   const {
     data: dataTotalBurned,
     isSuccess: isSuccessFetchTotalBurned,
@@ -28,38 +25,34 @@ const useTotalOGYBurned = ({ period }: { period: string }) => {
     isLoading: isLoadingFetchTotalBurnedTimeSeries,
     error: errorTotalBurnedTimeSeries,
   }: UseQueryResult<TotalBurnedOGYTimeSeries> = useQuery(
-    fetchTotalBurnedOGYTimeSeries({
-      period,
-    })
+    fetchTotalBurnedOGYTimeSeries({ period })
   );
 
-  useEffect(() => {
-    if (isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries) {
-      setData({
-        totalBurned: roundAndFormatLocale({
-          number: divideBy1e8(dataTotalBurned.totalBurnedOGY) + 202420405.1,
-        }),
-        dataPieChart: dataTotalBurnedTimeSeries.totalBurnedOGYTimeSeries.map(
-          (d: ChartData) => {
-            return { value: d.value + 202420405.1, name: d.name };
-          }
-        ) as ChartData[],
-      });
-    }
-  }, [
-    isSuccessFetchTotalBurned,
-    isSuccessFetchTotalBurnedTimeSeries,
-    dataTotalBurned,
-    dataTotalBurnedTimeSeries,
-  ]);
+  const data = useMemo(
+    () => ({
+      totalBurned: dataTotalBurned
+        ? roundAndFormatLocale({
+            number: divideBy1e8(dataTotalBurned.totalBurnedOGY) + BURN_OFFSET,
+          })
+        : "0",
+      dataPieChart: (
+        dataTotalBurnedTimeSeries?.totalBurnedOGYTimeSeries ?? []
+      ).map((d: ChartData) => ({
+        value: d.value + BURN_OFFSET,
+        name: d.name,
+      })),
+    }),
+    [dataTotalBurned, dataTotalBurnedTimeSeries]
+  );
 
-  const isSuccess =
-    isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries;
-  const isLoading =
-    isLoadingFetchTotalBurned || isLoadingFetchTotalBurnedTimeSeries;
-  const error = errorFetchTotalBurned || errorTotalBurnedTimeSeries;
-
-  return { data, isSuccess, isLoading, error };
+  return {
+    data,
+    isSuccess:
+      isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries,
+    isLoading:
+      isLoadingFetchTotalBurned || isLoadingFetchTotalBurnedTimeSeries,
+    error: errorFetchTotalBurned || errorTotalBurnedTimeSeries,
+  };
 };
 
 export default useTotalOGYBurned;

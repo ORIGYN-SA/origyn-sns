@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import {
   useQuery,
@@ -32,8 +31,6 @@ const useTotalOGYTransferred = ({
   start?: number;
   options?: Omit<UseQueryOptions<Array<TimeChunkStats>>, "queryFn">;
 }) => {
-  const [data, setData] = useState<TransferredData[] | undefined>(undefined);
-
   const {
     data: rawData,
     isSuccess,
@@ -49,11 +46,9 @@ const useTotalOGYTransferred = ({
     },
   });
 
-  useEffect(() => {
-    if (isSuccess && rawData) {
-      const transformedData = rawData.slice(-start).map((r) => {
+  const data: TransferredData[] | undefined = rawData
+    ? rawData.slice(-start).map((r) => {
         const number = Number(r.transfer_count);
-        const datetime = DateTime.fromMillis(Number(r.start_time) / 1e6);
         return {
           transfer_count: {
             e8s: r.transfer_count,
@@ -62,21 +57,13 @@ const useTotalOGYTransferred = ({
           },
           start_time: {
             e8s: r.start_time,
-            datetime,
+            datetime: DateTime.fromMillis(Number(r.start_time) / 1e6),
           },
         };
-      });
-      setData(transformedData);
-    }
-  }, [isSuccess, rawData, start]);
+      })
+    : undefined;
 
-  return {
-    data,
-    isSuccess: isSuccess && !!data,
-    isError,
-    isLoading: isLoading || !data,
-    error,
-  };
+  return { data, isSuccess, isError, isLoading, error };
 };
 
 export default useTotalOGYTransferred;

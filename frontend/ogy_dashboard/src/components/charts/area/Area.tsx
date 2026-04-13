@@ -81,6 +81,9 @@ const Area = ({
           tickFormatter={(value) => (value >= 1000 ? millify(value) : value)}
           tickLine={false}
           axisLine={false}
+          mirror
+          width={1}
+          tick={{ fill: "#69737C", fontSize: 12, dy: -8 }}
           domain={[
             Math.max(0, minValue - (maxValue - minValue) * 0.1),
             maxValue + (maxValue - minValue) * 0.1,

@@ -56,8 +56,8 @@ const Dashboard = () => {
           <section className="w-full h-full" id="total-ogy-supply">
             <TotalOGYSupply className="h-full" />
           </section>
-          <section className="w-full" id="total-ogy-burned">
-            <TotalOGYBurned />
+          <section className="w-full h-full" id="total-ogy-burned">
+            <TotalOGYBurned className="h-full" />
           </section>
           <section className="w-full pt-8 -mt-8" id="ogy-circulation-state">
             <PieChartProvider>
