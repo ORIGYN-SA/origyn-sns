@@ -299,8 +299,6 @@ impl TestEnvBuilder {
             tick_n_blocks(&pic, 50);
         }
 
-        
-
         TestEnv {
             pic: pic_ref,
             controller: self.controller,

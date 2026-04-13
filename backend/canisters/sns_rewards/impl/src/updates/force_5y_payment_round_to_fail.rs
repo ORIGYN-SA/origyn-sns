@@ -1,7 +1,7 @@
+use crate::model::payment_processor::NeuronFlow;
 use crate::{jobs::distribute_rewards::create_new_payment_rounds, state::mutate_state};
 use sns_governance_canister::types::NeuronId;
 use sns_rewards_api_canister::payment_round::PaymentStatus;
-use crate::model::payment_processor::NeuronFlow;
 
 #[cfg(feature = "inttest")]
 use crate::guards::caller_is_governance_principal;
@@ -24,7 +24,10 @@ pub async fn force_5y_payment_round_to_fail(
 async fn _force_5y_payment_round_to_fail_impl(neurons: Vec<NeuronId>) {
     create_new_payment_rounds(NeuronFlow::FiveYear).await;
     mutate_state(|s| {
-        let rounds = s.data.payment_processor.get_active_rounds(NeuronFlow::FiveYear);
+        let rounds = s
+            .data
+            .payment_processor
+            .get_active_rounds(NeuronFlow::FiveYear);
         for payment_round in rounds {
             let symbol = payment_round.token;
             for neuron_id in neurons.clone() {

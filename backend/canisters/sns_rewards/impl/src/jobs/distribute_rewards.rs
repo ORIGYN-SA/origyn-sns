@@ -83,10 +83,20 @@ pub async fn distribute_rewards(retry_attempt: u8) {
         retry_attempt
     );
 
-    let no_active_regular =
-        read_state(|state| state.data.payment_processor.get_active_rounds(NeuronFlow::Regular).is_empty());
-    let no_active_5y =
-        read_state(|state| state.data.payment_processor.get_active_rounds(NeuronFlow::FiveYear).is_empty());
+    let no_active_regular = read_state(|state| {
+        state
+            .data
+            .payment_processor
+            .get_active_rounds(NeuronFlow::Regular)
+            .is_empty()
+    });
+    let no_active_5y = read_state(|state| {
+        state
+            .data
+            .payment_processor
+            .get_active_rounds(NeuronFlow::FiveYear)
+            .is_empty()
+    });
 
     if no_active_5y && retry_attempt == 0 {
         create_new_payment_rounds(NeuronFlow::FiveYear).await;
@@ -97,7 +107,8 @@ pub async fn distribute_rewards(retry_attempt: u8) {
     }
 
     for flow in [NeuronFlow::Regular, NeuronFlow::FiveYear] {
-        let active_rounds = read_state(|state| state.data.payment_processor.get_active_rounds(flow));
+        let active_rounds =
+            read_state(|state| state.data.payment_processor.get_active_rounds(flow));
         if active_rounds.is_empty() {
             continue;
         }
@@ -144,22 +155,24 @@ pub async fn create_new_payment_rounds(flow: NeuronFlow) {
             neuron_data,
         );
         match new_round {
-            Ok(valid_round) => match transfer_funds_to_payment_round_account(flow, &valid_round).await {
-                Ok(()) => {
-                    mutate_state(|state| {
-                        state
-                            .data
-                            .payment_processor
-                            .add_active_payment_round(flow, valid_round);
-                    });
+            Ok(valid_round) => {
+                match transfer_funds_to_payment_round_account(flow, &valid_round).await {
+                    Ok(()) => {
+                        mutate_state(|state| {
+                            state
+                                .data
+                                .payment_processor
+                                .add_active_payment_round(flow, valid_round);
+                        });
+                    }
+                    Err(e) => {
+                        info!(
+                            "ERROR - transferring funds to payment round sub account : {}",
+                            e
+                        );
+                    }
                 }
-                Err(e) => {
-                    info!(
-                        "ERROR - transferring funds to payment round sub account : {}",
-                        e
-                    );
-                }
-            },
+            }
             Err(s) => {
                 info!(
                     "ROUND ID : {} & TOKEN :{:?} - Invalid round : {}",
@@ -263,7 +276,13 @@ pub async fn transfer_funds_to_payment_round_account(
         owner: ic_cdk::api::canister_self(),
         subaccount: Some(round.get_payment_round_sub_account_id()),
     };
-    transfer_token(from_sub_account, account, round.ledger_id, round.round_funds_total.clone()).await
+    transfer_token(
+        from_sub_account,
+        account,
+        round.ledger_id,
+        round.round_funds_total.clone(),
+    )
+    .await
 }
 
 pub fn update_neuron_rewards(flow: NeuronFlow, payment_round: &PaymentRound) {
@@ -345,7 +364,11 @@ fn determine_payment_round_status(payment_round: &PaymentRound) -> PaymentRoundS
     new_status
 }
 
-pub async fn process_payment_round(flow: NeuronFlow, payment_round: PaymentRound, retry_attempt: u8) {
+pub async fn process_payment_round(
+    flow: NeuronFlow,
+    payment_round: PaymentRound,
+    retry_attempt: u8,
+) {
     info!(
         "ROUND ID : {} & TOKEN :{:?} - STARTING PAYMENTS",
         payment_round.id, payment_round.token
@@ -362,9 +385,11 @@ pub async fn process_payment_round(flow: NeuronFlow, payment_round: PaymentRound
     let payment_chunks = payments.chunks(batch_limit);
 
     mutate_state(|s| {
-        s.data
-            .payment_processor
-            .set_payment_round_retry_count(flow, &payment_round.token, retry_attempt)
+        s.data.payment_processor.set_payment_round_retry_count(
+            flow,
+            &payment_round.token,
+            retry_attempt,
+        )
     });
 
     let total_to_process = payments.len();

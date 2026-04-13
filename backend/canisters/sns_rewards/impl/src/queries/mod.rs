@@ -1,6 +1,7 @@
 pub mod candid;
-pub mod get_active_payment_rounds;
+pub mod get_5y_neuron_by_id;
 pub mod get_active_5y_payment_rounds;
+pub mod get_active_payment_rounds;
 pub mod get_all_neurons;
 pub mod get_all_neurons_maturity;
 pub mod get_historic_payment_round;
@@ -8,7 +9,6 @@ pub mod get_historic_payment_rounds;
 pub mod get_maturity_history_of_neuron;
 pub mod get_n_history;
 pub mod get_neuron_by_id;
-pub mod get_5y_neuron_by_id;
 pub mod get_reserve_transfer_amounts;
 pub mod get_reward_token_types;
 pub mod http_request;
@@ -18,8 +18,8 @@ pub mod set_daily_ogy_burn_rate_validate;
 pub mod set_reserve_transfer_amounts_validate;
 pub mod set_reward_token_types_validate;
 
-pub use get_active_payment_rounds::*;
 pub use get_active_5y_payment_rounds::*;
+pub use get_active_payment_rounds::*;
 pub use get_all_neurons_maturity::*;
 pub use get_historic_payment_round::*;
 pub use get_historic_payment_rounds::*;

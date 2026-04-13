@@ -7,7 +7,6 @@ use crate::{
 };
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
-use sns_governance_canister::types::neuron;
 use sns_governance_canister::types::NeuronId;
 use sns_rewards_api_canister::{ReserveTokenAmounts, TokenRewardTypes};
 use std::collections::BTreeMap;
@@ -30,7 +29,7 @@ pub struct DataV0 {
     pub neuron_maturity: BTreeMap<NeuronId, NeuronInfoV0>,
     pub sync_info: SyncInfo,
     pub maturity_history: MaturityHistory,
-    pub payment_processor: PaymentProcessor,
+    pub payment_processor: PaymentProcessorV0,
     pub tokens: TokenRewardTypesV0,
     pub authorized_principals: Vec<Principal>,
     pub is_synchronizing_neurons: bool,
@@ -145,3 +144,40 @@ impl From<NeuronInfoV0> for NeuronInfo {
 
 pub type ReserveTokenAmountsV0 = HashMap<TokenSymbolV0, Nat>;
 pub type TokenRewardTypesV0 = HashMap<TokenSymbolV0, TokenInfo>;
+
+use crate::memory::VM;
+use ic_stable_structures::StableBTreeMap;
+use sns_rewards_api_canister::payment_round::PaymentRound;
+#[derive(Serialize, Deserialize)]
+pub struct PaymentProcessorV0 {
+    #[serde(skip, default = "init_map_v0")]
+    pub round_history_v0: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    /// Holds only PaymentRounds that are FULLY completed.
+    #[serde(skip, default = "init_map")]
+    pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    /// Holds active PaymentRounds that are being processed
+    pub active_rounds: BTreeMap<TokenSymbol, PaymentRound>,
+}
+
+use crate::memory::get_payment_round_history_memory_v0;
+fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+    let memory = get_payment_round_history_memory_v0();
+    StableBTreeMap::init(memory)
+}
+
+use crate::memory::get_payment_round_history_memory;
+fn init_map() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+    let memory = get_payment_round_history_memory();
+    StableBTreeMap::init(memory)
+}
+
+impl From<PaymentProcessorV0> for PaymentProcessor {
+    fn from(v0: PaymentProcessorV0) -> Self {
+        PaymentProcessor {
+            active_rounds: v0.active_rounds,
+            active_rounds_5y: BTreeMap::new(),
+            round_history_v0: init_map_v0(),
+            round_history: init_map(),
+        }
+    }
+}

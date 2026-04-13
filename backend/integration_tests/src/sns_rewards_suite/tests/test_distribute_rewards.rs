@@ -1,14 +1,14 @@
+use crate::client::sns_rewards::get_5y_neuron_by_id;
+use crate::client::sns_rewards::get_active_5y_payment_rounds;
+use crate::sns_rewards_suite::tests::utils::fund_5y_reward_pools;
 use bity_ic_canister_time::{DAY_IN_MS, HOUR_IN_MS};
 use candid::{Nat, Principal};
 use icrc_ledger_types::icrc1::account::Account;
-use crate::sns_rewards_suite::tests::utils::fund_5y_reward_pools;
 use sns_rewards_api_canister::{
     get_historic_payment_round::Args as GetHistoricPaymentRoundArgs,
     subaccounts::REWARD_POOL_SUB_ACCOUNT,
 };
-use crate::client::sns_rewards::get_5y_neuron_by_id;
 use std::time::Duration;
-use crate::client::sns_rewards::get_active_5y_payment_rounds;
 use types::TokenSymbol;
 
 use crate::{
@@ -21,8 +21,7 @@ use crate::{
     utils::tick_n_blocks,
 };
 
-use super::utils::{fund_reward_pools, rewards_canister_id, simulate_voting,
-};
+use super::utils::{fund_reward_pools, rewards_canister_id, simulate_voting};
 
 /// Happy path: rewards are distributed proportionally to all 5y neurons.
 #[test]
@@ -295,7 +294,7 @@ fn test_distribute_rewards_with_not_enough_rewards() {
 /// Multiple weekly rounds are added to history with incrementing IDs.
 #[test]
 fn test_distribute_rewards_adds_to_history_correctly() {
-       let users = vec![
+    let users = vec![
         Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1]),
         Principal::from_slice(&[0, 0, 0, 1, 0, 2, 0, 2, 0, 2]),
     ];
@@ -364,12 +363,13 @@ fn test_distribute_rewards_adds_to_history_correctly() {
 
     pic.advance_time(Duration::from_millis(HOUR_IN_MS * 18)); // → 09:00
     tick_n_blocks(&pic, 40);
-        println!("2 Time now is {:?}", pic.get_time()); // Wed Jun 26 2024 14:01:50 GMT+0000
+    println!("2 Time now is {:?}", pic.get_time()); // Wed Jun 26 2024 14:01:50 GMT+0000
 
     pic.advance_time(Duration::from_millis(HOUR_IN_MS * 5)); // → 14:00
     tick_n_blocks(&pic, 40);
 
     println!("3 Time now is {:?}", pic.get_time()); // Wed Jun 26 2024 14:01:50 GMT+0000
+    tick_n_blocks(&pic, 100);
 
     let res = get_historic_payment_round(
         &pic,
@@ -382,67 +382,6 @@ fn test_distribute_rewards_adds_to_history_correctly() {
     );
     assert_eq!(res.len(), 1, "Round 2 should be in history");
 }
-
-// /// Distribution interval is preserved across canister upgrades.
-// #[test]
-// fn test_distribution_interval_is_consistent_across_upgrades() {
-//     let users = vec![Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1])];
-//     let (neuron_data, _) = generate_5y_neuron_data(0, 10, 1, &users);
-
-//     let env = TestEnvBuilder::new()
-//         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-//         .add_token_ledger(&TokenSymbol::ICP)
-//         .add_token_ledger(&TokenSymbol::GOLDAO)
-//         .build();
-
-//     let pic = env.pic.borrow();
-//     let ogy_sns = env.get_sns(SnsProject::Ogy);
-//     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
-
-//     let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-//     let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-//     let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
-
-//     fund_reward_pools(
-//         &pic,
-//         rewards_id,
-//         &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-//         100_000_000_000,
-//     );
-
-//     // Tuesday Jun 18, 2024, 9:00:00 AM
-//     pic.advance_time(Duration::from_millis(HOUR_IN_MS));
-//     tick_n_blocks(&pic, 10);
-
-//     simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 2, &users);
-//     pic.advance_time(Duration::from_millis(DAY_IN_MS));
-//     tick_n_blocks(&pic, 10);
-
-//     // Upgrade mid-cycle
-//     pic.upgrade_canister(
-//         rewards_id,
-//         crate::wasms::REWARDS.clone(),
-//         candid::encode_one(sns_rewards_api_canister::Args::Upgrade(sns_rewards_api_canister::post_upgrade::UpgradeArgs {version: Default::default(),
-//      commit_hash: Default::default()})).unwrap(),
-//         Some(env.controller),
-//     )
-//     .unwrap();
-
-//     pic.advance_time(Duration::from_millis(HOUR_IN_MS * 6));
-//     tick_n_blocks(&pic, 20);
-
-//     let history = get_historic_payment_round(
-//         &pic,
-//         Principal::anonymous(),
-//         rewards_id,
-//         &GetHistoricPaymentRoundArgs {
-//             token: TokenSymbol::ICP,
-//             round_id: 1,
-//         },
-//     );
-//     assert_eq!(history.len(), 1, "Round 1 should exist after upgrade");
-// }
-
 
 /// Happy path: rewards are distributed proportionally to all 5y neurons.
 #[test]
@@ -599,11 +538,12 @@ fn test_mixed_neurons_both_receive_rewards() {
     // 2. Check Neuron account got paid correctly
     // ********************************
     let n = neuron_data.len() as u64;
-    let fees = n * TokenSymbol::ICP.get_token_info(true).fee + TokenSymbol::ICP.get_token_info(true).fee;
+    let fees =
+        n * TokenSymbol::ICP.get_token_info(true).fee + TokenSymbol::ICP.get_token_info(true).fee;
     let pool = (100_000_000_000u64 - fees) as f64;
     let expected_reward = 2 * (pool / n as f64) as u64; // NOTE: we expect 2x rewards since we funded both pools
     assert_eq!(expected_reward, 19_999_978_000);
-    
+
     let neuron_account = Account {
         owner: rewards_id,
         subaccount: Some(neuron_id.clone().into()),

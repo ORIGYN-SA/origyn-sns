@@ -12,7 +12,7 @@ use crate::{
     utils::{random_principal, tick_n_blocks},
 };
 
-use super::utils::{ rewards_canister_id, simulate_voting};
+use super::utils::{rewards_canister_id, simulate_voting};
 
 /// After the daily sync, all 5y neurons appear in the rewards canister and
 /// accumulated_maturity grows with each voting round.
