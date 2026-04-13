@@ -28,6 +28,7 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 bity-ic-serializer = { workspace = true }
 bity-ic-stable-memory = { workspace = true }
+bity-ic-utils = { workspace = true }
 tracing = { workspace = true }
 types = { path = "../../../libraries/types" }
 utils = { path = "../../../libraries/utils" }

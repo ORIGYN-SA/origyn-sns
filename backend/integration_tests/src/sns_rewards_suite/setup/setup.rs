@@ -3,10 +3,7 @@ use crate::client::icrc1::client::transfer;
 use crate::sns_test_env::setup_ledger::setup_ledgers;
 use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::sns_test_env::utils::generate_5y_neuron_data;
-use crate::{
-    utils::random_principal,
-    wasms,
-};
+use crate::{utils::random_principal, wasms};
 use bity_ic_canister_time::HOUR_IN_MS;
 use candid::{encode_one, Nat, Principal};
 use icrc_ledger_types::icrc1::account::Account;

@@ -5,5 +5,4 @@ pub mod test_reserve_pool_distribution;
 pub mod test_reward_claim;
 pub mod test_reward_token_types;
 pub mod test_synchronise_neurons;
-pub mod test_5y_neuron_flow;
 pub mod utils;

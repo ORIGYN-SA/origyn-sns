@@ -6,7 +6,7 @@ use sns_rewards_api_canister::claim_rewards_batch::{
     Args as ClaimRewardBatchArgs, Response as ClaimRewardResponse,
 };
 
-use crate::client::rewards::claim_rewards_batch;
+use crate::client::sns_rewards::claim_rewards_batch;
 use crate::{
     client::icrc1::client::{balance_of, transfer},
     sns_rewards_suite::setup::{default_test_setup, test_setup_with_no_neuron_hotkeys},

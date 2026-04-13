@@ -7,9 +7,9 @@ is stored in the canister and is used to determine the rewards that a neuron
 is eligible for.
 */
 
-use bity_ic_canister_time::start_job_daily_at;
 use crate::state::{mutate_state, read_state};
-use bity_ic_canister_time::{timestamp_millis};
+use bity_ic_canister_time::start_job_daily_at;
+use bity_ic_canister_time::timestamp_millis;
 use tracing::{debug, error, info};
 
 pub fn start_job() {

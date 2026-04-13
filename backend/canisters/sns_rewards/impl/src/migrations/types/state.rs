@@ -7,8 +7,8 @@ use crate::{
 };
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
-use sns_governance_canister::types::NeuronId;
 use sns_governance_canister::types::neuron;
+use sns_governance_canister::types::NeuronId;
 use sns_rewards_api_canister::{ReserveTokenAmounts, TokenRewardTypes};
 use std::collections::BTreeMap;
 use std::collections::HashMap;

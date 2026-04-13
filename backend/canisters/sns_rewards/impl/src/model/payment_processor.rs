@@ -23,6 +23,8 @@ pub struct PaymentProcessor {
     pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
     /// Holds active PaymentRounds that are being processed
     pub active_rounds: BTreeMap<TokenSymbol, PaymentRound>,
+    /// Holds active 5y PaymentRounds that are being processed
+    pub active_rounds_5y: BTreeMap<TokenSymbol, PaymentRound>,
 }
 
 fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
@@ -41,11 +43,32 @@ impl Default for PaymentProcessor {
             round_history_v0: init_map_v0(),
             round_history: init_map(),
             active_rounds: BTreeMap::new(),
+            active_rounds_5y: BTreeMap::new(),
         }
     }
 }
 
+#[derive(Clone, Copy)]
+pub enum NeuronFlow {
+    Regular,
+    FiveYear,
+}
+
 impl PaymentProcessor {
+    fn rounds_mut(&mut self, flow: NeuronFlow) -> &mut BTreeMap<TokenSymbol, PaymentRound> {
+        match flow {
+            NeuronFlow::Regular => &mut self.active_rounds,
+            NeuronFlow::FiveYear => &mut self.active_rounds_5y,
+        }
+    }
+
+    fn rounds(&self, flow: NeuronFlow) -> &BTreeMap<TokenSymbol, PaymentRound> {
+        match flow {
+            NeuronFlow::Regular => &self.active_rounds,
+            NeuronFlow::FiveYear => &self.active_rounds_5y,
+        }
+    }
+
     // gets the last key of the last completed payment round and circles from 1 - u16::MAX - each cycle is 125 years.
     pub fn next_key(&self) -> u16 {
         let mut max_key = 0;
@@ -63,21 +86,22 @@ impl PaymentProcessor {
         }
     }
 
-    pub fn add_active_payment_round(&mut self, round: PaymentRound) {
-        self.active_rounds.insert(round.token, round);
+    pub fn add_active_payment_round(&mut self, flow: NeuronFlow, round: PaymentRound) {
+        self.rounds_mut(flow).insert(round.token, round);
     }
 
-    pub fn get_active_rounds(&self) -> Vec<PaymentRound> {
-        self.active_rounds.values().cloned().collect()
+    pub fn get_active_rounds(&self, flow: NeuronFlow) -> Vec<PaymentRound> {
+        self.rounds(flow).values().cloned().collect()
     }
 
     pub fn set_active_payment_status(
         &mut self,
+        flow: NeuronFlow,
         round_token: &TokenSymbol,
         neuron_id: &NeuronId,
         new_status: PaymentStatus,
     ) {
-        if let Some(round) = self.active_rounds.get_mut(round_token) {
+        if let Some(round) = self.rounds_mut(flow).get_mut(round_token) {
             if let Some(payment) = round.payments.get_mut(neuron_id) {
                 payment.1 = new_status;
             } else {
@@ -104,9 +128,7 @@ impl PaymentProcessor {
         let rounds = self
             .round_history
             .iter()
-            // .filter(|((_, round_id), round)| *round_id == id && round.token == token)
             .filter(|entry| entry.key().1 == id && entry.value().token == token)
-            // .map(|((_, round_id), payment_round)| (round_id, payment_round.clone()))
             .map(|entry| (entry.key().1, entry.value().clone()))
             .collect();
 
@@ -128,12 +150,17 @@ impl PaymentProcessor {
             .insert((payment_round.token, payment_round.id), payment_round);
     }
 
-    pub fn delete_active_round(&mut self, round_token: TokenSymbol) {
-        self.active_rounds.remove_entry(&round_token);
+    pub fn delete_active_round(&mut self, flow: NeuronFlow, round_token: TokenSymbol) {
+        self.rounds_mut(flow).remove_entry(&round_token);
     }
 
-    pub fn set_payment_round_retry_count(&mut self, token: &TokenSymbol, attempt: u8) {
-        if let Some(round) = self.active_rounds.get_mut(token) {
+    pub fn set_payment_round_retry_count(
+        &mut self,
+        flow: NeuronFlow,
+        token: &TokenSymbol,
+        attempt: u8,
+    ) {
+        if let Some(round) = self.rounds_mut(flow).get_mut(token) {
             round.retries = attempt;
         } else {
             debug!(
@@ -153,6 +180,8 @@ mod tests {
     use types::TokenSymbol;
 
     use crate::state::{init_state, mutate_state, read_state, RuntimeState};
+
+    use super::NeuronFlow;
 
     fn init_runtime_state() {
         init_state(RuntimeState::default());

@@ -38,9 +38,10 @@ candid = { version = "0.10", features = ["value"] }
 ciborium = "0.2.2"
 futures = "0.3.29"
 # Enable `custom` feature of k256's getrandom dependency. See icp_neuron/impl/src/ecdsa.rs for more details.
-getrandom = { version = "0.2.12", features = ["custom"] }
+getrandom = { version = "0.4.2", features = ["custom"] }
 hex = "0.4.3"
 ic-cdk = "0.20"
+ic-management-canister-types = "0.7.1"
 ic-cdk-macros = "0.20"
 ic-cdk-timers = "1.0"
 ic-ledger-types = "0.16"

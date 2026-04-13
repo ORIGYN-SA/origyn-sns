@@ -13,6 +13,7 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::time::Duration;
+use std::time::SystemTime;
 use types::TokenSymbol;
 
 /// Describes a single SNS to spin up, with optional neuron data and initial ledger balances.
@@ -236,6 +237,10 @@ impl TestEnvBuilder {
                 .build(),
         ));
 
+        pic_ref.borrow().set_time(
+            (SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718697600000)).into(),
+        ); // Tue Jun 18 2024 08:00:00 GMT
+
         let mut sns_envs = HashMap::new();
         let mut tokens = vec![];
 
@@ -293,6 +298,8 @@ impl TestEnvBuilder {
             pic.advance_time(Duration::from_secs(100));
             tick_n_blocks(&pic, 50);
         }
+
+        
 
         TestEnv {
             pic: pic_ref,
