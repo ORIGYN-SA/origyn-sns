@@ -18,8 +18,8 @@ use sns_governance_canister::types::{
 };
 use tracing::{error, trace};
 use types::CanisterId;
+use bity_ic_utils::rand::generate_rand_nonce;
 use utils::env::Environment;
-use utils::rand::generate_rand_nonce;
 
 #[enum_dispatch]
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
