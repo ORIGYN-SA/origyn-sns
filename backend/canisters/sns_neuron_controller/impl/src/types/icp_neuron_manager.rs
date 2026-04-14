@@ -12,9 +12,9 @@ use nns_governance_canister::types::Neuron;
 use nns_governance_canister::types::{manage_neuron_response, ManageNeuron};
 use serde::{Deserialize, Serialize};
 // use tracing::trace;
-use bity_ic_utils::rand::generate_rand_nonce;
 use tracing::{error, info};
 use types::CanisterId;
+use utils::rand::generate_rand_nonce;
 
 #[derive(CandidType, Serialize, Deserialize, Clone)]
 pub struct IcpManager {

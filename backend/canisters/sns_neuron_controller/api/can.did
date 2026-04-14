@@ -1,16 +1,5 @@
-// A Ledger account identified by the owner of the account `of` and
-// the `subaccount`. If the `subaccount` is not specified then the default
-// one is used.
-type Account = record {
-  // The owner of the account.
-  owner : opt principal;
-  // The subaccount of the account. If not set then the default
-  // subaccount (all bytes set to 0) is used.
-  subaccount : opt Subaccount;
-};
+type Account = record { owner : opt principal; subaccount : opt Subaccount };
 type AccountIdentifier = record { hash : blob };
-// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
-// representation of ledgers supporting the ICRC-1 standard.
 type Account_1 = record { owner : principal; subaccount : opt blob };
 type Action = variant {
   RegisterKnownNeuron : KnownNeuron;
@@ -25,84 +14,23 @@ type Action = variant {
   AddOrRemoveNodeProvider : AddOrRemoveNodeProvider;
   Motion : Motion;
 };
-// The action that the proposal proposes to take on adoption.
-// 
-// Each action is associated with an function id that can be used for following.
-// Native (typed) actions each have an id in the range \[0-999\], while
-// NervousSystemFunctions with a `function_type` of GenericNervousSystemFunction
-// are each associated with an id in the range \[1000-u64:MAX\].
-// 
-// See `impl From<&Action> for u64` in src/types.rs for the implementation
-// of this mapping.
 type Action_1 = variant {
-  // Change the nervous system's parameters.
-  // Note that a change of a parameter will only affect future actions where
-  // this parameter is relevant.
-  // For example, NervousSystemParameters::neuron_minimum_stake_e8s specifies the
-  // minimum amount of stake a neuron must have, which is checked at the time when
-  // the neuron is created. If this NervousSystemParameter is decreased, all neurons
-  // created after this change will have at least the new minimum stake. However,
-  // neurons created before this change may have less stake.
-  // 
-  // Id = 2.
   ManageNervousSystemParameters : NervousSystemParameters;
-  // Add a new NervousSystemFunction, of generic type,  to be executable by proposal.
-  // 
-  // Id = 4.
   AddGenericNervousSystemFunction : NervousSystemFunction;
-  // Remove a NervousSystemFunction, of generic type, from being executable by proposal.
-  // 
-  // Id = 5.
   RemoveGenericNervousSystemFunction : nat64;
-  // Execute an upgrade to next version on the blessed SNS upgrade path.
-  // 
-  // Id = 7.
   UpgradeSnsToNextVersion : record {};
-  // Register one or more dapp canister(s) in the SNS root canister.
-  // 
-  // Id = 10.
   RegisterDappCanisters : RegisterDappCanisters;
-  // Transfer SNS treasury funds (ICP or SNS token) to an account.
-  // Id = 9.
   TransferSnsTreasuryFunds : TransferSnsTreasuryFunds;
-  // Upgrade a canister that is controlled by the SNS governance canister.
-  // 
-  // Id = 3.
   UpgradeSnsControlledCanister : UpgradeSnsControlledCanister;
-  // Deregister one or more dapp canister(s) in the SNS root canister.
-  // 
-  // Id = 11.
   DeregisterDappCanisters : DeregisterDappCanisters;
-  // The `Unspecified` action is used as a fallback when
-  // following. That is, if no followees are specified for a given
-  // action, the followees for this action are used instead.
-  // 
-  // Id = 0.
   Unspecified : record {};
-  // Modify values of SnsMetadata.
-  // 
-  // Id = 8
   ManageSnsMetadata : ManageSnsMetadata;
-  // Execute a method outside the SNS canisters.
-  // 
-  // Id = \[1000-u64::MAX\].
   ExecuteGenericNervousSystemFunction : ExecuteGenericNervousSystemFunction;
-  // A motion that should guide the future strategy of the SNS's ecosystem
-  // but does not have immediate effect in the sense that a method is executed.
-  // 
-  // Id = 1.
   Motion : Motion;
 };
 type AddHotKey = record { new_hot_key : opt principal };
-// Add a set of permissions to the Neuron for the given PrincipalId. These
-// permissions must be a subset of `NervousSystemParameters::neuron_grantable_permissions`.
-// If the PrincipalId doesn't have existing permissions, a new entry will be added for it
-// with the provided permissions. If a principalId already has permissions for the neuron,
-// the new permissions will be added to the existing set.
 type AddNeuronPermissions = record {
-  // The set of permissions that will be granted to the PrincipalId.
   permissions_to_add : opt NeuronPermissionList;
-  // The PrincipalId that the permissions will be granted to.
   principal_id : opt principal;
 };
 type AddOrRemoveNodeProvider = record { change : opt Change };
@@ -132,46 +60,22 @@ type Args_6 = record {
   icp_sns_ledger_canister_id : opt principal;
   icp_sns_governance_canister_id : opt principal;
 };
-type Args_7 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
-type BallotInfo = record { vote : int32; proposal_id : opt NeuronId_1 };
-// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
-// 
-// # Examples
-// 
-// ```
-// use types::BuildVersion;
-// 
-// let version = BuildVersion::new(1, 2, 3);
-// assert_eq!(version.to_string(), "1.2.3");
-// 
-// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
-// assert_eq!(version, parsed);
-// ```
-type BuildVersion = record {
-  // Major version number, incremented for incompatible API changes
-  major : nat32;
-  // Minor version number, incremented for backwards-compatible functionality additions
-  minor : nat32;
-  // Patch version number, incremented for backwards-compatible bug fixes
-  patch : nat32;
+type Args_7 = record {
+  ogy_rewards_threshold : opt nat;
+  ogy_sns_ledger_canister_id : opt principal;
+  ogy_sns_rewards_canister_id : opt principal;
+  ogy_sns_governance_canister_id : opt principal;
 };
+type Args_8 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+type BallotInfo = record { vote : int32; proposal_id : opt NeuronId_1 };
+type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
 type By = variant {
   NeuronIdOrSubaccount : record {};
   MemoAndController : MemoAndController;
   Memo : nat64;
 };
 type By_1 = variant {
-  // The memo and principal used to define the neuron to be claimed
-  // or refreshed. Specifically, the memo (nonce) and the given principal
-  // (called 'controller' or 'claimer') are used to compute the ledger
-  // subaccount to which the staked tokens to be used for claiming or
-  // refreshing a neuron were transferred to.
-  // If 'controller' is omitted, the id of the principal who calls this
-  // operation will be used.
   MemoAndController : MemoAndController;
-  // The neuron ID of a neuron that should be refreshed. This just serves
-  // as an alternative way to specify a neuron to be refreshed, but cannot
-  // be used to claim new neurons.
   NeuronId : record {};
 };
 type Canister = record { id : opt principal };
@@ -180,8 +84,6 @@ type ChangeAutoStakeMaturity = record {
   requested_setting_for_auto_stake_maturity : bool;
 };
 type ClaimOrRefresh = record { by : opt By };
-// The operation that claims a new neuron (if it does not exist yet) or
-// refreshes the stake of the neuron (if it already exists).
 type ClaimOrRefresh_1 = record { by : opt By_1 };
 type Command = variant {
   Spawn : Spawn;
@@ -224,8 +126,6 @@ type Command_2 = variant {
   ClaimOrRefresh : ClaimOrRefresh_1;
   Configure : Configure_1;
   RegisterVote : RegisterVote;
-  // Making a proposal is defined by a proposal, which contains the proposer neuron.
-  // Making a proposal will implicitly cast a yes vote for the proposing neuron.
   MakeProposal : Proposal_1;
   StakeMaturity : StakeMaturity;
   RemoveNeuronPermissions : RemoveNeuronPermissions;
@@ -234,9 +134,6 @@ type Command_2 = variant {
   Disburse : Disburse_1;
 };
 type Configure = record { operation : opt Operation };
-// Commands that only configure a given neuron, but do not interact
-// with the outside world. They all require the caller to have
-// `NeuronPermissionType::ConfigureDissolveState` for the neuron.
 type Configure_1 = record { operation : opt Operation_1 };
 type Countries = record { iso_codes : vec text };
 type CreateServiceNervousSystem = record {
@@ -251,14 +148,9 @@ type CreateServiceNervousSystem = record {
   swap_parameters : opt SwapParameters;
   initial_token_distribution : opt InitialTokenDistribution;
 };
-// The set of default followees that every newly created neuron will follow per function.
-// This is specified as a mapping of proposal functions to followees for that function.
 type DefaultFollowees = record { followees : vec record { nat64; Followees } };
-// A proposal to remove a list of dapps from the SNS and assign them to new controllers
 type DeregisterDappCanisters = record {
-  // The canister IDs to be deregistered (i.e. removed from the management of the SNS).
   canister_ids : vec principal;
-  // The new controllers for the deregistered canisters.
   new_controllers : vec principal;
 };
 type DeveloperDistribution = record {
@@ -269,9 +161,7 @@ type Disburse = record {
   amount : opt Amount;
 };
 type DisburseMaturity = record {
-  // The (optional) principal to which to transfer the stake.
   to_account : opt Account_1;
-  // The percentage to disburse, from 1 to 100
   percentage_to_disburse : nat32;
 };
 type DisburseMaturityInProgress = record {
@@ -279,15 +169,8 @@ type DisburseMaturityInProgress = record {
   amount_e8s : nat64;
   account_to_disburse_to : opt Account;
 };
-// Disburse the maturity of a neuron to any ledger account. If an account
-// is not specified, the caller's account will be used. The caller can choose
-// a percentage of the current maturity to disburse to the ledger account. The
-// resulting amount to disburse must be greater than or equal to the
-// transaction fee.
 type DisburseMaturity_1 = record {
-  // The (optional) principal to which to transfer the stake.
   to_account : opt Account;
-  // The percentage to disburse, from 1 to 100
   percentage_to_disburse : nat32;
 };
 type DisburseToNeuron = record {
@@ -297,96 +180,19 @@ type DisburseToNeuron = record {
   new_controller : opt principal;
   nonce : nat64;
 };
-// The operation that disburses a given number of tokens or all of a
-// neuron's tokens (if no argument is provided) to a given ledger account.
-// Thereby, the neuron's accumulated fees are burned and (if relevant in
-// the given nervous system) the token equivalent of the neuron's accumulated
-// maturity are minted and also transferred to the specified account.
-type Disburse_1 = record {
-  // The ledger account to which the disbursed tokens are transferred.
-  to_account : opt Account;
-  // The (optional) amount to disburse out of the neuron. If not specified the cached
-  // stake is used.
-  amount : opt Amount;
-};
-// The neuron's dissolve state, specifying whether the neuron is dissolving,
-// non-dissolving, or dissolved.
-// 
-// At any time, at most only one of `when_dissolved_timestamp_seconds` and
-// `dissolve_delay_seconds` are specified.
-// 
-// `NotDissolving`. This is represented by `dissolve_delay_seconds` being
-// set to a non zero value.
-// 
-// `Dissolving`. This is represented by `when_dissolved_timestamp_seconds` being
-// set, and this value is in the future.
-// 
-// `Dissolved`. All other states represent the dissolved
-// state. That is, (a) `when_dissolved_timestamp_seconds` is set and in the past,
-// (b) `when_dissolved_timestamp_seconds` is set to zero, (c) neither value is set.
+type Disburse_1 = record { to_account : opt Account; amount : opt Amount };
 type DissolveState = variant {
-  // When the dissolve timer is stopped, this stores how much time,
-  // in seconds, the dissolve timer will be started with if the neuron is set back to 'Dissolving'.
-  // 
-  // At any time while in this state, the neuron owner may (re)start
-  // dissolving, in which case `when_dissolved_timestamp_seconds`
-  // will get assigned to: `<timestamp when the action is taken> +
-  // dissolve_delay_seconds`.
   DissolveDelaySeconds : nat64;
-  // When the dissolve timer is running, this stores the timestamp,
-  // in seconds from the Unix epoch, at which the neuron is dissolved.
-  // 
-  // At any time while the neuron is dissolving, the neuron owner
-  // may pause dissolving, in which case `dissolve_delay_seconds`
-  // will get assigned to: `when_dissolved_timestamp_seconds -
-  // <timestamp when the action is taken>`.
   WhenDissolvedTimestampSeconds : nat64;
 };
 type Duration = record { seconds : opt nat64 };
-// A proposal function defining a generic proposal, i.e., a proposal
-// that is not build into the standard SNS and calls a canister outside
-// the SNS for execution.
-// The canister and method to call are derived from the `function_id`.
 type ExecuteGenericNervousSystemFunction = record {
-  // This enum value determines what canister to call and what
-  // function to call on that canister.
-  // 
-  // 'function_id` must be in the range `\[1000--u64:MAX\]` as this
-  // can't be used to execute native functions.
   function_id : nat64;
-  // The payload of the nervous system function's payload.
   payload : blob;
 };
 type ExecuteNnsFunction = record { nns_function : int32; payload : blob };
 type Follow = record { topic : int32; followees : vec NeuronId_1 };
-// The operation that adds a new follow relation to a neuron, specifying
-// that it follows a set of followee neurons for a given proposal function.
-// If the neuron already has a defined follow relation for this proposal
-// function, then the current list is replaced with the new list (not added).
-// If the provided followee list is empty, the follow relation for this
-// proposal function is removed.
-// 
-// A follow relation has the effect that the governance canister will
-// automatically cast a vote for the following neuron for proposals of
-// the given function if a majority of the specified followees vote in the
-// same way.
-// In more detail, once a majority of the followees vote to adopt
-// or reject a proposal belonging to the specified function, the neuron
-// votes the same way. If it becomes impossible for a majority of
-// the followees to adopt (for example, because they are split 50-50
-// between adopt and reject), then the neuron votes to reject.
-// If a rule is specified where the proposal function is UNSPECIFIED,
-// then it becomes a catch-all follow rule, which will be used to vote
-// automatically on proposals with actions for which no
-// specific rule has been specified.
-type Follow_1 = record {
-  // The function id of the proposal function defining for which proposals
-  // this follow relation is relevant.
-  function_id : nat64;
-  // The list of followee neurons, specified by their neuron ID.
-  followees : vec NeuronId;
-};
-// A list of a neuron's followees for a specific function.
+type Follow_1 = record { function_id : nat64; followees : vec NeuronId };
 type Followees = record { followees : vec NeuronId };
 type FolloweesForTopic = record {
   topic : opt int32;
@@ -394,28 +200,13 @@ type FolloweesForTopic = record {
 };
 type Followees_1 = record { followees : vec NeuronId_1 };
 type FunctionType = variant {
-  // Whether this is a native function (i.e. a Action::Motion or
-  // Action::UpgradeSnsControlledCanister) or one of user-defined
-  // NervousSystemFunctions.
   NativeNervousSystemFunction : record {};
-  // Whether this is a GenericNervousSystemFunction which can call
-  // any canister.
   GenericNervousSystemFunction : GenericNervousSystemFunction;
 };
 type GenericNervousSystemFunction = record {
-  // The id of the canister that will be called to validate the proposal before
-  // it is put up for a vote.
   validator_canister_id : opt principal;
-  // The id of the target canister that will be called to execute the proposal.
   target_canister_id : opt principal;
-  // The name of the method that will be called to validate the proposal
-  // before it is put up for a vote.
-  // The signature of the method must be equivalent to the following:
-  // <method_name>(proposal_data: ProposalData) -> Result<String, String>
   validator_method_name : opt text;
-  // The name of the method that will be called to execute the proposal.
-  // The signature of the method must be equivalent to the following:
-  // <method_name>(proposal_data: ProposalData) -> Result<(), String>.
   target_method_name : opt text;
 };
 type GetConfigArgs = record { manager_type : ManagerType };
@@ -466,6 +257,7 @@ type InitArgs = record {
   authorized_principals : vec principal;
   version : BuildVersion;
   goldao_manager_config : GoldaoManagerConfig_1;
+  ogy_manager_config : OgyManagerConfig_1;
   commit_hash : text;
 };
 type InitialTokenDistribution = record {
@@ -490,16 +282,10 @@ type ManageNeuron = record {
   command : opt Command;
   neuron_id_or_subaccount : opt NeuronIdOrSubaccount;
 };
-// A proposal function to change the values of SNS metadata.
-// Fields with None values will remain unchanged.
 type ManageSnsMetadata = record {
-  // Url string, must be between 10 and 256 characters.
   url : opt text;
-  // Base64 representation of the logo. Max length is 341334 characters, roughly 256 Kb.
   logo : opt text;
-  // Name string, must be between 4 and 255 characters.
   name : opt text;
-  // Description string, must be between 10 and 10000 characters.
   description : opt text;
 };
 type ManagerConfig = variant {
@@ -507,159 +293,37 @@ type ManagerConfig = variant {
   IcpConfig : IcpManagerConfig;
   OgyConfig : OgyManagerConfig;
 };
-type ManagerType = variant { ICP; GOLDAO };
+type ManagerType = variant { ICP; OGY; GOLDAO };
 type MemoAndController = record { controller : opt principal; memo : nat64 };
 type Merge = record { source_neuron_id : opt NeuronId_1 };
 type MergeMaturity = record { percentage_to_merge : nat32 };
 type Motion = record { motion_text : text };
-// A NervousSystem function that can be executed by governance as a result of an adopted proposal.
-// Each NervousSystem function has an id and a target canister and target method, that define
-// the method that will be called if the proposal is adopted.
-// Optionally, a validator_canister and a validator_method can be specified that define a method
-// that is called to validate that the proposal's payload is well-formed, prior to putting
-// it up for a vote.
-// TODO NNS1-1133 - Remove if there is no rendering canister/method?
-// Also optionally a rendering_canister and a rendering_method can be specified that define a method
-// that is called to return a pretty-printed version of the proposal's contents so that voters can inspect it.
-// 
-// Note that the target, validator and rendering methods can all coexist in
-// the same canister or be on different canisters.
 type NervousSystemFunction = record {
-  // The unique id of this function.
-  // 
-  // Ids 0-999 are reserved for native governance proposals and can't
-  // be used by generic NervousSystemFunction's.
   id : nat64;
-  // A short (<256 chars) description of the NervousSystemFunction.
   name : text;
-  // An optional description of what the NervousSystemFunction does.
   description : opt text;
   function_type : opt FunctionType;
 };
-// The nervous system's parameters, which are parameters that can be changed, via proposals,
-// by each nervous system community.
-// For some of the values there are specified minimum values (floor) or maximum values
-// (ceiling). The motivation for this is a) to prevent that the nervous system accidentally
-// chooses parameters that result in an un-upgradable (and thus stuck) governance canister
-// and b) to prevent the canister from growing too big (which could harm the other canisters
-// on the subnet).
-// 
-// Required invariant: the canister code assumes that all system parameters are always set.
 type NervousSystemParameters = record {
-  // TODO NNS1-2169: This field currently has no effect.
-  // TODO NNS1-2169: Design and implement this feature.
-  // 
-  // The set of default followees that every newly created neuron will follow
-  // per function. This is specified as a mapping of proposal functions to followees.
-  // 
-  // If unset, neurons will have no followees by default.
-  // The set of followees for each function can be at most of size
-  // max_followees_per_function.
   default_followees : opt DefaultFollowees;
-  // The maximum dissolve delay that a neuron can have. That is, the maximum
-  // that a neuron's dissolve delay can be increased to. The maximum is also enforced
-  // when saturating the dissolve delay bonus in the voting power computation.
   max_dissolve_delay_seconds : opt nat64;
-  // E.g. if a large dissolve delay can double the voting power of a neuron,
-  // then this field would have a value of 100, indicating a maximum of
-  // 100% additional voting power.
-  // 
-  // For no bonus, this should be set to 0.
-  // 
-  // To achieve functionality equivalent to NNS, this should be set to 100.
   max_dissolve_delay_bonus_percentage : opt nat64;
-  // The maximum number of followees each neuron can establish for each nervous system function.
-  // 
-  // This number can be at most as large as the defined ceiling
-  // MAX_FOLLOWEES_PER_FUNCTION_CEILING.
   max_followees_per_function : opt nat64;
-  // The default set of neuron permissions granted to the principal claiming a neuron.
   neuron_claimer_permissions : opt NeuronPermissionList;
-  // The minimum number of e8s (10E-8 of a token) that can be staked in a neuron.
-  // 
-  // To ensure that staking and disbursing of the neuron work, the chosen value
-  // must be larger than the transaction_fee_e8s.
   neuron_minimum_stake_e8s : opt nat64;
-  // The age of a neuron that saturates the age bonus for the voting power computation.
   max_neuron_age_for_age_bonus : opt nat64;
-  // The initial voting period of a newly created proposal.
-  // A proposal's voting period may then be further increased during
-  // a proposal's lifecycle due to the wait-for-quiet algorithm.
-  // 
-  // The voting period must be between (inclusive) the defined floor
-  // INITIAL_VOTING_PERIOD_SECONDS_FLOOR and ceiling
-  // INITIAL_VOTING_PERIOD_SECONDS_CEILING.
   initial_voting_period_seconds : opt nat64;
-  // The minimum dissolve delay a neuron must have to be eligible to vote.
-  // 
-  // The chosen value must be smaller than max_dissolve_delay_seconds.
   neuron_minimum_dissolve_delay_to_vote_seconds : opt nat64;
-  // The number of e8s (10E-8 of a token) that a rejected
-  // proposal costs the proposer.
   reject_cost_e8s : opt nat64;
-  // The maximum number of proposals to keep, per action. When the
-  // total number of proposals for a given action is greater than this
-  // number, the oldest proposals that have reached final decision state
-  // (rejected, executed, or failed) and final rewards status state
-  // (settled) may be deleted.
-  // 
-  // The number must be larger than zero and at most be as large as the
-  // defined ceiling MAX_PROPOSALS_TO_KEEP_PER_ACTION_CEILING.
   max_proposals_to_keep_per_action : opt nat32;
-  // The wait for quiet algorithm extends the voting period of a proposal when
-  // there is a flip in the majority vote during the proposal's voting period.
-  // This parameter determines the maximum time period that the voting period
-  // may be extended after a flip. If there is a flip at the very end of the
-  // original proposal deadline, the remaining time will be set to this parameter.
-  // If there is a flip before or after the original deadline, the deadline will
-  // extended by somewhat less than this parameter.
-  // The maximum total voting period extension is 2 * wait_for_quiet_deadline_increase_seconds.
-  // For more information, see the wiki page on the wait-for-quiet algorithm:
-  // <https://wiki.internetcomputer.org/wiki/Network_Nervous_System#Proposal_decision_and_wait-for-quiet>
   wait_for_quiet_deadline_increase_seconds : opt nat64;
-  // The maximum number of allowed neurons. When this maximum is reached, no new
-  // neurons will be created until some are removed.
-  // 
-  // This number must be larger than zero and at most as large as the defined
-  // ceiling MAX_NUMBER_OF_NEURONS_CEILING.
   max_number_of_neurons : opt nat64;
-  // The transaction fee that must be paid for ledger transactions (except
-  // minting and burning governance tokens).
   transaction_fee_e8s : opt nat64;
-  // The max number of proposals for which ballots are still stored, i.e.,
-  // unsettled proposals. If this number of proposals is reached, new proposals
-  // can only be added in exceptional cases (for few proposals it is defined
-  // that they are allowed even if resoures are low to guarantee that the relevant
-  // canisters can be upgraded).
-  // 
-  // This number must be larger than zero and at most as large as the defined
-  // ceiling MAX_NUMBER_OF_PROPOSALS_WITH_BALLOTS_CEILING.
   max_number_of_proposals_with_ballots : opt nat64;
-  // Analogous to the previous field (see the previous comment),
-  // but this one relates to neuron age instead of dissolve delay.
-  // 
-  // To achieve functionality equivalent to NNS, this should be set to 25.
   max_age_bonus_percentage : opt nat64;
-  // The superset of neuron permissions a principal with permission
-  // `NeuronPermissionType::ManagePrincipals` for a given neuron can grant to another
-  // principal for this same neuron.
-  // If this set changes via a ManageNervousSystemParameters proposal, previous
-  // neurons' permissions will be unchanged and only newly granted permissions will be affected.
   neuron_grantable_permissions : opt NeuronPermissionList;
-  // When this field is not populated, voting rewards are "disabled". Once this
-  // is set, it probably should not be changed, because the results would
-  // probably be pretty confusing.
   voting_rewards_parameters : opt VotingRewardsParameters;
-  // By default, maturity modulation is enabled; however, an SNS can use this
-  // field to disable it. When disabled, this canister will still poll the
-  // Cycles Minting Canister (CMC), and store the value received therefrom.
-  // However, the fetched value does not get used when this is set to true.
-  // 
-  // The reason we call this "disabled" instead of (positive) "enabled" is so
-  // that the PB default (bool fields are false) and our application default
-  // (enabled) agree.
   maturity_modulation_disabled : opt bool;
-  // The maximum number of principals that can have permissions for a neuron
   max_number_of_principals_per_neuron : opt nat64;
 };
 type NetworkEconomics = record {
@@ -672,97 +336,21 @@ type NetworkEconomics = record {
   minimum_icp_xdr_rate : nat64;
   maximum_node_provider_rewards_e8s : nat64;
 };
-// A neuron in the governance system.
 type Neuron = record {
-  // The unique id of this neuron.
   id : opt NeuronId;
-  // The accumulated staked maturity of the neuron, in "e8s equivalent" (see
-  // "maturity_e8s_equivalent"). Staked maturity becomes regular maturity once
-  // the neuron is dissolved.
-  // 
-  // Contrary to `maturity_e8s_equivalent` this maturity is staked and thus
-  // locked until the neuron is dissolved and contributes to voting power
-  // and rewards. Once the neuron is dissolved, this maturity will be "moved"
-  // to 'maturity_e8s_equivalent' and will be able to be spawned (with maturity
-  // modulation).
   staked_maturity_e8s_equivalent : opt nat64;
-  // The principal or list of principals with a particular set of permissions over a neuron.
   permissions : vec NeuronPermission;
-  // The accumulated unstaked maturity of the neuron, measured in "e8s equivalent", i.e., in equivalent of
-  // 10E-8 of a governance token.
-  // 
-  // The unit is "equivalent" to insist that, while this quantity is on the
-  // same scale as the governance token, maturity is not directly convertible to
-  // governance tokens: conversion requires a minting event and the conversion rate is variable.
   maturity_e8s_equivalent : nat64;
-  // The cached record of the neuron's staked governance tokens, measured in
-  // fractions of 10E-8 of a governance token.
-  // 
-  // There is a minimum cached state, NervousSystemParameters::neuron_minimum_stake_e8s,
-  // that can be set by each SNS. Neurons that are created by claiming a neuron, spawning a neuron,
-  // or splitting a neuron must have at least that stake (in the case of splitting both the parent neuron
-  // and the new neuron must have at least that stake).
   cached_neuron_stake_e8s : nat64;
-  // The timestamp, in seconds from the Unix epoch, when the neuron was created.
   created_timestamp_seconds : nat64;
-  // The ID of the NNS neuron whose Community Fund participation resulted in the
-  // creation of this SNS neuron.
   source_nns_neuron_id : opt nat64;
-  // If set and true the maturity rewarded to this neuron for voting will be
-  // automatically staked and will contribute to the neuron's voting power.
   auto_stake_maturity : opt bool;
-  // The timestamp, in seconds from the Unix epoch, when this neuron has entered
-  // the non-dissolving state. This is either the creation time or the last time at
-  // which the neuron has stopped dissolving.
-  // 
-  // This value is meaningless when the neuron is dissolving, since a
-  // dissolving neurons always has age zero. The canonical value of
-  // this field for a dissolving neuron is `u64::MAX`.
   aging_since_timestamp_seconds : nat64;
-  // The neuron's dissolve state, specifying whether the neuron is dissolving,
-  // non-dissolving, or dissolved.
-  // 
-  // At any time, at most only one of `when_dissolved_timestamp_seconds` and
-  // `dissolve_delay_seconds` are specified.
-  // 
-  // `NotDissolving`. This is represented by `dissolve_delay_seconds` being
-  // set to a non zero value.
-  // 
-  // `Dissolving`. This is represented by `when_dissolved_timestamp_seconds` being
-  // set, and this value is in the future.
-  // 
-  // `Dissolved`. All other states represent the dissolved
-  // state. That is, (a) `when_dissolved_timestamp_seconds` is set and in the past,
-  // (b) `when_dissolved_timestamp_seconds` is set to zero, (c) neither value is set.
   dissolve_state : opt DissolveState;
-  // A percentage multiplier to be applied when calculating the voting power of a neuron.
-  // The multiplier's unit is a integer percentage in the range of 0 to 100. The
-  // voting_power_percentage_multiplier can only be less than 100 for a developer neuron
-  // that is created at SNS initialization.
   voting_power_percentage_multiplier : nat64;
-  // The duration that this neuron is vesting.
-  // 
-  // A neuron that is vesting is non-dissolving and cannot start dissolving until the vesting duration has elapsed.
-  // Vesting can be used to lock a neuron more than the max allowed dissolve delay. This allows devs and members of
-  // a particular SNS instance to prove their long-term commitment to the community. For example, the max dissolve delay
-  // for a particular SNS instance might be 1 year, but the devs of the project may set their vesting duration to 3
-  // years and dissolve delay to 1 year in order to prove that they are making a minimum 4 year commitment to the
-  // project.
   vesting_period_seconds : opt nat64;
-  // Disburse maturity operations that are currently underway.
-  // The entries are sorted by `timestamp_of_disbursement_seconds`-values,
-  // with the oldest entries first, i.e. it holds for all i that:
-  // entry\[i\].timestamp_of_disbursement_seconds <= entry\[i+1\].timestamp_of_disbursement_seconds
   disburse_maturity_in_progress : vec DisburseMaturityInProgress;
-  // The neuron's followees, specified as a map of proposal functions IDs to followees neuron IDs.
-  // The map's keys are represented by integers as Protobuf does not support enum keys in maps.
   followees : vec record { nat64; Followees };
-  // TODO NNS1-1052 - Update if this ticket is done and fees are burned / minted instead of tracked in this attribute.
-  // 
-  // The amount of governance tokens that this neuron has forfeited
-  // due to making proposals that were subsequently rejected.
-  // Must be smaller than 'cached_neuron_stake_e8s'. When a neuron is
-  // disbursed, these governance tokens will be burned.
   neuron_fees_e8s : nat64;
 };
 type NeuronBasketConstructionParameters = record {
@@ -776,8 +364,6 @@ type NeuronDistribution = record {
   vesting_period : opt Duration;
   stake : opt Tokens;
 };
-// The id of a specific neuron, which equals the neuron's subaccount on the ledger canister
-// (the account that holds the neuron's staked tokens).
 type NeuronId = record { id : blob };
 type NeuronIdOrSubaccount = variant {
   Subaccount : blob;
@@ -785,19 +371,16 @@ type NeuronIdOrSubaccount = variant {
 };
 type NeuronId_1 = record { id : nat64 };
 type NeuronList = record {
+  ogy_neurons : vec Neuron;
   goldao_neurons : vec Neuron;
   icp_neuons : vec Neuron_1;
 };
-// A principal with a particular set of permissions over a neuron.
 type NeuronPermission = record {
-  // The principal that has the permissions.
   "principal" : opt principal;
-  // The list of permissions that this principal has.
   permission_type : vec int32;
 };
-// A wrapper for a list of neuron permissions.
 type NeuronPermissionList = record { permissions : vec int32 };
-type NeuronType = variant { GOLDAO };
+type NeuronType = variant { OGY; GOLDAO };
 type Neuron_1 = record {
   id : opt NeuronId_1;
   staked_maturity_e8s_equivalent : opt nat64;
@@ -834,6 +417,12 @@ type OgyManagerConfig = record {
   ogy_sns_rewards_canister_id : principal;
   ogy_sns_governance_canister_id : principal;
 };
+type OgyManagerConfig_1 = record {
+  ogy_rewards_threshold : nat;
+  ogy_sns_ledger_canister_id : principal;
+  ogy_sns_rewards_canister_id : principal;
+  ogy_sns_governance_canister_id : principal;
+};
 type Operation = variant {
   RemoveHotKey : RemoveHotKey;
   AddHotKey : AddHotKey;
@@ -860,47 +449,17 @@ type Proposal = record {
   action : opt Action;
   summary : text;
 };
-// A proposal is the immutable input of a proposal submission.
 type Proposal_1 = record {
-  // The web address of additional content required to evaluate the
-  // proposal, specified using HTTPS. The URL string must not be longer than
-  // 2000 bytes.
   url : text;
-  // The proposal's title as a text, which can be at most 256 bytes.
   title : text;
-  // The action that the proposal proposes to take on adoption.
-  // 
-  // Each action is associated with an function id that can be used for following.
-  // Native (typed) actions each have an id in the range \[0-999\], while
-  // NervousSystemFunctions with a `function_type` of GenericNervousSystemFunction
-  // are each associated with an id in the range \[1000-u64:MAX\].
-  // 
-  // See `impl From<&Action> for u64` in src/types.rs for the implementation
-  // of this mapping.
   action : opt Action_1;
-  // The description of the proposal which is a short text, composed
-  // using a maximum of 15000 bytes of characters.
   summary : text;
 };
-// A proposal to register a list of dapps in the root canister.
-type RegisterDappCanisters = record {
-  // The canister IDs to be registered (i.e. under the management of the SNS).
-  // The canisters must be already controlled by the SNS root canister before
-  // making this proposal. Any controllers besides the root canister will be
-  // removed when the proposal is executed.
-  // At least one canister ID is required.
-  canister_ids : vec principal;
-};
+type RegisterDappCanisters = record { canister_ids : vec principal };
 type RegisterVote = record { vote : int32; proposal : opt NeuronId_1 };
 type RemoveHotKey = record { hot_key_to_remove : opt principal };
-// Remove a set of permissions from the Neuron for the given PrincipalId. If a PrincipalId has all of
-// its permissions removed, it will be removed from the neuron's permissions list. This is a dangerous
-// operation as its possible to remove all permissions for a neuron and no longer be able to modify
-// it's state, i.e. disbursing the neuron back into the governance token.
 type RemoveNeuronPermissions = record {
-  // The set of permissions that will be revoked from the PrincipalId.
   permissions_to_remove : opt NeuronPermissionList;
-  // The PrincipalId that the permissions will be revoked from.
   principal_id : opt principal;
 };
 type Response = variant { Success : text; InternalError : text };
@@ -936,27 +495,8 @@ type Spawn = record {
   nonce : opt nat64;
 };
 type Split = record { amount_e8s : nat64 };
-// The operation that splits a neuron (called 'parent neuron'), or rather a neuron's stake,
-// into two neurons.
-// Specifically, the parent neuron's stake is decreased by the specified amount of
-// governance tokens and a new 'child neuron' is created with a stake that equals
-// this amount minus the transaction fee. The child neuron inherits from the parent neuron
-// the permissions (i.e., principals that can change the neuron), the age, the followees, and
-// the dissolve state. The parent neuron's fees and maturity (if applicable in the given
-// nervous system) remain in the parent neuron and the child neuron's fees and maturity
-// are initialized to be zero.
-type Split_1 = record {
-  // The nonce that is used to compute the child neuron's
-  // subaccount which also serves as the child neuron's ID. This nonce
-  // is also used as the memo field in the ledger transfer that transfers
-  // the stake from the parent to the child neuron.
-  memo : nat64;
-  // The amount of governance tokens (in measured in fractions of 10E-8 of
-  // a governance token) to be split to the child neuron.
-  amount_e8s : nat64;
-};
+type Split_1 = record { memo : nat64; amount_e8s : nat64 };
 type StakeMaturity = record { percentage_to_stake : opt nat32 };
-// A Ledger subaccount.
 type Subaccount = record { subaccount : blob };
 type SwapDistribution = record { total : opt Tokens };
 type SwapParameters = record {
@@ -976,30 +516,18 @@ type SwapParameters = record {
   restricted_countries : opt Countries;
 };
 type Tokens = record { e8s : opt nat64 };
-// A proposal to transfer SNS treasury funds to (optionally a Subaccount of) the
-// target principal.
 type TransferSnsTreasuryFunds = record {
   from_treasury : int32;
-  // The principal to transfer the funds to.
   to_principal : opt principal;
-  // An (optional) Subaccount of the principal to transfer the funds to.
   to_subaccount : opt Subaccount;
-  // An optional memo to use for the transfer.
   memo : opt nat64;
-  // The amount to transfer, in e8s.
   amount_e8s : nat64;
 };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
-// A proposal function that upgrades a canister that is controlled by the
-// SNS governance canister.
 type UpgradeSnsControlledCanister = record {
-  // The new wasm module that the canister is upgraded to.
   new_canister_wasm : blob;
-  // Canister install_code mode.
   mode : opt int32;
-  // The id of the canister that is upgraded.
   canister_id : opt principal;
-  // Arguments passed to the post-upgrade method of the new wasm module.
   canister_upgrade_arg : opt blob;
 };
 type VotingRewardParameters = record {
@@ -1009,39 +537,11 @@ type VotingRewardParameters = record {
 };
 type VotingRewardsParameters = record {
   final_reward_rate_basis_points : opt nat64;
-  // The amount of rewards is proportional to token_supply * current_rate. In
-  // turn, current_rate is somewhere between `initial_reward_rate_basis_points`
-  // and `final_reward_rate_basis_points`. In the first reward period, it is the
-  // initial growth rate, and after the growth rate transition period has elapsed,
-  // the growth rate becomes the final growth rate, and remains at that value for
-  // the rest of time. The transition between the initial and final growth rates is
-  // quadratic, and levels out at the end of the growth rate transition period.
-  // 
-  // (A basis point is one in ten thousand.)
   initial_reward_rate_basis_points : opt nat64;
-  // The amount of time that the growth rate changes (presumably, decreases)
-  // from the initial growth rate to the final growth rate. (See the two
-  // *_reward_rate_basis_points fields bellow.) The transition is quadratic, and
-  // levels out at the end of the growth rate transition period.
   reward_rate_transition_duration_seconds : opt nat64;
-  // The amount of time between reward events.
-  // 
-  // Must be > 0.
-  // 
-  // During such periods, proposals enter the ReadyToSettle state. Once the
-  // round is over, voting for those proposals entitle voters to voting
-  // rewards. Such rewards are calculated by the governance canister's
-  // heartbeat.
-  // 
-  // This is a nominal amount. That is, the actual time between reward
-  // calculations and distribution cannot be guaranteed to be perfectly
-  // periodic, but actual inter-reward periods are generally expected to be
-  // within a few seconds of this.
-  // 
-  // This supercedes super.reward_distribution_period_seconds.
   round_duration_seconds : opt nat64;
 };
-service : (Args_7) -> {
+service : (Args_8) -> {
   get_config : (GetConfigArgs) -> (GetConfigResponse) query;
   list_neurons : () -> (ListNeuronsResponse) query;
   manage_nns_neuron : (Args) -> (Response);
@@ -1051,4 +551,5 @@ service : (Args_7) -> {
   update_config : (Args_4) -> (Response_3);
   update_goldao_config : (Args_5) -> (Response_4);
   update_icp_config : (Args_6) -> (Response_5);
+  update_ogy_config : (Args_7) -> (Response_5);
 }

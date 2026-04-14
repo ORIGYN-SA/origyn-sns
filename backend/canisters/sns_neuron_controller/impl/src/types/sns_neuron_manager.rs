@@ -1,11 +1,10 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::GoldaoManager;
+use crate::types::{GoldaoManager};
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
-use bity_ic_utils::rand::generate_rand_nonce;
 use candid::{CandidType, Nat};
 use enum_dispatch::enum_dispatch;
 use icrc_ledger_types::icrc1::{account::Account, transfer::TransferArg};
@@ -20,6 +19,7 @@ use sns_governance_canister::types::{
 use tracing::{error, trace};
 use types::CanisterId;
 use utils::env::Environment;
+use utils::rand::generate_rand_nonce;
 
 #[enum_dispatch]
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]

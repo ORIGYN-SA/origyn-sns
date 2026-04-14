@@ -90,7 +90,11 @@ impl Data {
     ) -> Self {
         Self {
             authorized_principals,
-            neuron_managers: NeuronManagers::init(goldao_manager_config, icp_manager_config, now),
+            neuron_managers: NeuronManagers::init(
+                goldao_manager_config,
+                icp_manager_config,
+                now,
+            ),
             rewards_destination,
         }
     }
