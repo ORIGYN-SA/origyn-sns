@@ -14,7 +14,9 @@
     "deploy:preprod": "npm run build:preprod && dfx deploy ogy_dashboard --network=preprod",
     "lint": "eslint ./src/**/*.tsx",
     "preview": "vite preview --mode staging",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@amerej/artemis-react": "1.0.26",
@@ -81,6 +83,13 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "storybook": "^10.3.5",
+    "@storybook/react-vite": "^10.3.5",
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "eslint-plugin-storybook": "^10.3.5"
   }
 }
