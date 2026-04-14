@@ -18,3 +18,4 @@ num-bigint = {workspace = true}
 utils = { path = '../../../libraries/utils' }
 bity-ic-types = { workspace = true }
 bity-ic-canister-time = { workspace = true }
+ic-cdk = { workspace = true }

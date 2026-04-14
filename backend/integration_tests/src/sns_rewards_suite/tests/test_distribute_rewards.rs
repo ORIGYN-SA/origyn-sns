@@ -291,14 +291,34 @@ fn test_distribute_rewards_with_not_enough_rewards() {
     assert_eq!(goldao_history.len(), 1);
 }
 
-/// Multiple weekly rounds are added to history with incrementing IDs.
+pub fn wait_1_day(pic: &pocket_ic::PocketIc) {
+    for _ in 0..24 {
+        pic.advance_time(Duration::from_millis(HOUR_IN_MS)); // advance by 1 hour
+        tick_n_blocks(pic, 10);
+    }
+}
+
+use pocket_ic::PocketIc;
+fn advance_hours(pic: &PocketIc, hours: u64, ticks: u32) {
+    pic.advance_time(Duration::from_millis(HOUR_IN_MS * hours));
+    tick_n_blocks(pic, ticks);
+}
+
+fn advance_days(pic: &PocketIc, days: u64) {
+    for _ in 0..days {
+        advance_hours(pic, 24, 10);
+    }
+}
+
+use crate::utils::is_interval_more_than_7_days;
+use bity_ic_canister_time::MINUTE_IN_MS;
 #[test]
 fn test_distribute_rewards_adds_to_history_correctly() {
     let users = vec![
         Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1]),
-        Principal::from_slice(&[0, 0, 0, 1, 0, 2, 0, 2, 0, 2]),
     ];
-    let (neuron_data, _) = generate_neuron_data(0, 10, 1, &users);
+
+    let (neuron_data, _) = generate_neuron_data(0, 1, 1, &users);
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
@@ -308,33 +328,63 @@ fn test_distribute_rewards_adds_to_history_correctly() {
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
-    let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
+
+    let rewards_id =
+        env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
     let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
     let ogy_ledger_id = ogy_sns.test_env.ledger_id;
     let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
 
-    println!("1 Time now is {:?}", pic.get_time()); // Tue Jun 18 2024 08:01:50 GMT+0000
+    let all_ledgers = vec![icp_ledger_id, ogy_ledger_id, goldao_ledger_id];
+
+    // ================================
+    // 1. Initial Funding + First Activity
+    // ================================
+    fund_reward_pools(
+        &pic,
+        rewards_id,
+        &all_ledgers,
+        100_000_000_000,
+    );
+
+    advance_hours(&pic, 1, 10);
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 2, &users);
+
+    advance_days(&pic, 1);
+    advance_hours(&pic, 5, 40);
+
+    // ================================
+    // 2. Second Week Distribution
+    // ================================
+    tick_n_blocks(&pic, 2);
 
     fund_reward_pools(
         &pic,
         rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
+        &all_ledgers,
         100_000_000_000,
     );
-
-    // Tuesday Jun 18, 2024, 9:00:00 AM
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS));
     tick_n_blocks(&pic, 10);
-    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 3, &users);
 
-    pic.advance_time(Duration::from_millis(DAY_IN_MS));
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 30, &users);
+
+    advance_hours(&pic, 19, 30); // align to 9am
+
+    // instead of 6x wait_1_day
+    advance_days(&pic, 6);
+
+    // trigger distribution window
+    advance_hours(&pic, 5, 30); // 2pm
+    pic.advance_time(Duration::from_millis(MINUTE_IN_MS * 5));
     tick_n_blocks(&pic, 100);
 
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS * 5)); // → 14:00
-    tick_n_blocks(&pic, 40);
+    println!("Second distribution done at {:?}", pic.get_time());
 
-    let icp_history = get_historic_payment_round(
+    // ================================
+    // 3. Verify Round History
+    // ================================
+    let res_1 = get_historic_payment_round(
         &pic,
         Principal::anonymous(),
         rewards_id,
@@ -343,35 +393,8 @@ fn test_distribute_rewards_adds_to_history_correctly() {
             round_id: 1,
         },
     );
-    assert_eq!(icp_history.len(), 1);
 
-    // --- Round 2: next Wednesday ---
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
-
-    // Tuesday Jun 18, 2024, 9:00:00 AM
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS));
-    tick_n_blocks(&pic, 10);
-
-    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 2, &users);
-    pic.advance_time(Duration::from_millis(DAY_IN_MS * 5));
-    tick_n_blocks(&pic, 100);
-
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS * 18)); // → 09:00
-    tick_n_blocks(&pic, 40);
-    println!("2 Time now is {:?}", pic.get_time()); // Wed Jun 26 2024 14:01:50 GMT+0000
-
-    pic.advance_time(Duration::from_millis(HOUR_IN_MS * 5)); // → 14:00
-    tick_n_blocks(&pic, 40);
-
-    println!("3 Time now is {:?}", pic.get_time()); // Wed Jun 26 2024 14:01:50 GMT+0000
-    tick_n_blocks(&pic, 100);
-
-    let res = get_historic_payment_round(
+    let res_2 = get_historic_payment_round(
         &pic,
         Principal::anonymous(),
         rewards_id,
@@ -380,8 +403,51 @@ fn test_distribute_rewards_adds_to_history_correctly() {
             round_id: 2,
         },
     );
-    assert_eq!(res.len(), 1, "Round 2 should be in history");
+
+    assert_eq!(res_1.len(), 1, "Round 1 not found");
+    assert_eq!(res_2.len(), 1, "Round 2 not found");
+
+    let first_dist_time = res_1[0].1.date_initialized;
+    let second_dist_time = res_2[0].1.date_initialized;
+
+    assert!(is_interval_more_than_7_days(first_dist_time, second_dist_time));
+
+    // ================================
+    // 4. Third Round (GOLDAO)
+    // ================================
+    fund_reward_pools(
+        &pic,
+        rewards_id,
+        &all_ledgers,
+        100_000_000_000,
+    );
+    tick_n_blocks(&pic, 10);
+
+    simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 40, &users);
+
+    tick_n_blocks(&pic, 10);
+
+    advance_hours(&pic, 19, 0);
+    advance_days(&pic, 1);
+    advance_days(&pic, 6);
+    advance_hours(&pic, 3, 30);
+
+    pic.advance_time(Duration::from_millis(MINUTE_IN_MS * 5));
+    tick_n_blocks(&pic, 100);
+
+    let res_3 = get_historic_payment_round(
+        &pic,
+        Principal::anonymous(),
+        rewards_id,
+        &GetHistoricPaymentRoundArgs {
+            token: TokenSymbol::GOLDAO,
+            round_id: 3,
+        },
+    );
+
+    assert_eq!(res_3.len(), 1, "Failed to find GOLDAO Round 3");
 }
+
 
 /// Happy path: rewards are distributed proportionally to all 5y neurons.
 #[test]

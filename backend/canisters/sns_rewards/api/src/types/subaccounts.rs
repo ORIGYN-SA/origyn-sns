@@ -7,7 +7,6 @@ pub const REWARD_POOL_SUB_ACCOUNT: Subaccount = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
-// FIXME: check that everything is correct here
 pub const REWARD_POOL_SUB_ACCOUNT_5Y: Subaccount = [
     2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];

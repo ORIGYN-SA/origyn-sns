@@ -16,7 +16,6 @@ pub struct NeuronSystem {
     pub neuron_maturity: BTreeMap<NeuronId, NeuronInfo>,
     pub neuron_maturity_5y: BTreeMap<NeuronId, NeuronInfo>,
     /// The history of each neuron's maturity.
-    /// FIXME: make sure the gistory is ok with 5y and ususal neurons
     pub maturity_history: MaturityHistory,
 }
 

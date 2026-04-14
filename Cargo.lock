@@ -5657,6 +5657,7 @@ dependencies = [
  "bity-ic-canister-time",
  "bity-ic-types 0.1.2",
  "candid",
+ "ic-cdk 0.20.0",
  "ic-stable-structures 0.7.2",
  "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-bigint",

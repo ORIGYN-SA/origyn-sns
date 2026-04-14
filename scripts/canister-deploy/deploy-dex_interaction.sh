@@ -10,12 +10,14 @@ if [[ $REINSTALL == "reinstall" ]]; then
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
     AUTHORIZED_PRINCIPALS=$(dfx identity get-principal)
+    SNS_REWARDS_ID=$(dfx canister id --network $NETWORK sns_rewards)
     # 4 hours
     BUYBACK_INTERVAL_IN_SECS=$((4 * 3600))
 
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
     AUTHORIZED_PRINCIPALS=$(dfx canister id --network $NETWORK sns_governance)
+    SNS_REWARDS_ID=$(dfx canister id --network $NETWORK sns_rewards)
     # 4 hours
     BUYBACK_INTERVAL_IN_SECS=$((4 * 3600))
 
@@ -44,13 +46,11 @@ if [[ $REINSTALL == "reinstall" ]]; then
     source_subaccount = null;
     min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
     max_amount = null;
-    destination_account = null;
+    destination_account = opt record {
+      owner = principal \"$SNS_REWARDS_ID\";
+      subaccount = opt blob \"\02\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\";
+    };
   }"
-  # FIXME: 
-  #   destination_account: Some(Account { owner: sns_rewards_id, subaccount: Some([
-  #     2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  # ]) }), // all the GOLDAO burned from the 0 subaccount
-
 
   # Combine all exchange configs into a vector
   EXCHANGE_CONFIGS="vec { $EXCHANGE_JOB_CONFIG_GOLDAO_OGY }"
