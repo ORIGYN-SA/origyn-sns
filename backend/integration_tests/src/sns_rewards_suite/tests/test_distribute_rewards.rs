@@ -113,6 +113,7 @@ fn test_distribute_rewards_happy_path() {
             round_id: 1,
         },
     );
+    println!("ICP History: {:?}", icp_history);
     assert_eq!(icp_history.len(), 1);
 }
 

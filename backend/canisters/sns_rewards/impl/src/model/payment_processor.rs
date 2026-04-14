@@ -87,8 +87,8 @@ impl PaymentProcessor {
         // Insert into the appropriate active map
         self.rounds_mut(flow).insert(round.token, round);
         
-        // Increment the key for the next round
-        self.increment_next_key();
+        // // Increment the key for the next round
+        // self.increment_next_key();
     }
 
     pub fn get_active_rounds(&self, flow: NeuronFlow) -> Vec<PaymentRound> {
@@ -179,251 +179,101 @@ impl PaymentProcessor {
 
 #[cfg(test)]
 mod tests {
-    use std::collections::BTreeMap;
-
+    use super::*;
     use candid::{Nat, Principal};
-    use sns_rewards_api_canister::payment_round::PaymentRound;
+    use std::collections::BTreeMap;
     use types::TokenSymbol;
-
     use crate::state::{init_state, mutate_state, read_state, RuntimeState};
 
     fn init_runtime_state() {
         init_state(RuntimeState::default());
     }
 
+    fn mock_round(id: u16, token: TokenSymbol) -> PaymentRound {
+        PaymentRound {
+            id,
+            token,
+            round_funds_total: Nat::from(100u64),
+            tokens_to_distribute: Nat::from(100u64),
+            fees: Nat::from(10u64),
+            ledger_id: Principal::anonymous(),
+            date_initialized: 123456789,
+            total_neuron_maturity: 1000,
+            payments: BTreeMap::default(),
+            retries: 0,
+        }
+    }
+
+    // --- Tests ---
+
     #[test]
-    fn test_key_incrementation() {
+    fn test_next_key_increments_on_add_to_history() {
         init_runtime_state();
 
-        let icp_token = TokenSymbol::ICP;
-        let ogy_token = TokenSymbol::OGY;
+        // 1. Initial state check
+        read_state(|s| assert_eq!(s.data.payment_processor.next_key, 1));
 
+        // 2. Add round 1 (ICP). next_key should become 2.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 1,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
+            s.data.payment_processor.add_to_history(mock_round(1, TokenSymbol::ICP));
         });
+        read_state(|s| assert_eq!(s.data.payment_processor.next_key, 2));
+
+        // 3. Add round 1 again (for a different token OGY). 
+        // Logic in add_to_history says if id >= next_key, update. 
+        // Here 1 is not >= 2, so next_key remains 2.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 1,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: ogy_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
+            s.data.payment_processor.add_to_history(mock_round(1, TokenSymbol::OGY));
+        });
+        read_state(|s| assert_eq!(s.data.payment_processor.next_key, 2));
+
+        // 4. Add round 2 (ICP). next_key should become 3.
+        mutate_state(|s| {
+            s.data.payment_processor.add_to_history(mock_round(2, TokenSymbol::ICP));
+        });
+        read_state(|s| assert_eq!(s.data.payment_processor.next_key, 3));
+    }
+
+    #[test]
+    fn test_next_key_jumps_on_skipped_ids() {
+        init_runtime_state();
+
+        // If we manually insert a round with a much higher ID, 
+        // next_key should jump to preserve uniqueness for future rounds.
+        mutate_state(|s| {
+            s.data.payment_processor.add_to_history(mock_round(10, TokenSymbol::ICP));
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 2);
-        });
-
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 2,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 200,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 3);
-        });
-
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 3,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 3,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: ogy_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 4);
-        });
-
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 4,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: ogy_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 5);
+            assert_eq!(s.data.payment_processor.next_key, 11);
         });
     }
 
     #[test]
-    fn test_key_incrementation_with_skipped_rounds() {
+    fn test_next_key_wrap_around() {
         init_runtime_state();
 
-        let icp_token = TokenSymbol::ICP;
-        let ogy_token = TokenSymbol::OGY;
-        let goldao_token = TokenSymbol::GOLDAO;
-
+        // Simulate reaching the maximum value for u16
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 1,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 2,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
+            s.data.payment_processor.add_to_history(mock_round(u16::MAX, TokenSymbol::ICP));
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 3);
+            // According to the logic: if id == u16::MAX { 1 } else { id + 1 }
+            assert_eq!(s.data.payment_processor.next_key, 1);
         });
+    }
 
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 3,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 200,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
+    #[test]
+    fn test_flow_selection() {
+        let mut processor = PaymentProcessor::default();
+        let icp = TokenSymbol::ICP;
+        
+        // Ensure regular and 5y flows are separate
+        processor.add_active_payment_round(NeuronFlow::Regular, mock_round(1, icp.clone()));
+        processor.add_active_payment_round(NeuronFlow::FiveYear, mock_round(1, icp.clone()));
 
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 3,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: ogy_token.clone(),
-                date_initialized: 200,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 4);
-        });
-
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 4,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: icp_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 4,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: ogy_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-        mutate_state(|s| {
-            s.data.payment_processor.add_to_history(PaymentRound {
-                id: 4,
-                round_funds_total: Nat::from(100u64),
-                tokens_to_distribute: Nat::from(100u64),
-                fees: Nat::from(100u64),
-                ledger_id: Principal::anonymous(),
-                token: goldao_token.clone(),
-                date_initialized: 1,
-                total_neuron_maturity: 100,
-                payments: BTreeMap::default(),
-                retries: 0,
-            })
-        });
-
-        read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key, 5);
-        });
+        assert_eq!(processor.active_rounds.len(), 1);
+        assert_eq!(processor.active_rounds_5y.len(), 1);
     }
 }
