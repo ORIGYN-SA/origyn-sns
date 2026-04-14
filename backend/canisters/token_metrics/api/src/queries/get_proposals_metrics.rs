@@ -1,4 +1,4 @@
-use crate::token_data::ProposalsMetrics;
+use crate::token_data::ProposalsMetricsResponse;
 
 pub type Args = ();
-pub type Response = ProposalsMetrics;
+pub type Response = ProposalsMetricsResponse;

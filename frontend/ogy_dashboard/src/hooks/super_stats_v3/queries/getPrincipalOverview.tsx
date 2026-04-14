@@ -1,4 +1,4 @@
-import { Overview } from "../declarations";
+import { OverviewResponse as Overview } from "@hooks/token_metrics/declarations_files/token_metrics";
 
 import { getActor } from "@amerej/artemis-react";
 
@@ -7,7 +7,7 @@ export const getPrincipalOverview = async ({
 }: {
   principalId: string;
 }): Promise<Overview | null> => {
-  const actor = await getActor("tokenStats", { isAnon: true });
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const results = (await actor.get_principal_overview(
     principalId
   )) as Overview[];

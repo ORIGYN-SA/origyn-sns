@@ -65,19 +65,19 @@ pub async fn sync_proposals_metrics_data() {
                 for proposal in &response.proposals {
                     if let Some(last_from_state) = &last_synced_proposal_id {
                         match proposal.id {
-                            Some(proposal_id) => {
-                                if proposal_id.id <= last_from_state.id {
-                                    // Get out of the loop if we reached a proposal we already scanned
-                                    break;
-                                } else {
-                                    args.before_proposal = Some(proposal_id);
-                                }
-                            }
-                            None => {
-                                // Get out of the loop if we don't have an id
+                            Some(proposal_id) if proposal_id.id <= last_from_state.id => {
+                                // Stop if we reached a proposal we already scanned
                                 break;
                             }
+                            None => {
+                                break;
+                            }
+                            _ => {}
                         }
+                    }
+                    // Always advance pagination cursor regardless of last_synced state
+                    if let Some(pid) = proposal.id {
+                        args.before_proposal = Some(pid);
                     }
                     analyze_proposal(proposal);
                     number_of_scanned_proposals += 1;
@@ -126,14 +126,12 @@ pub async fn recheck_ongoing_proposals() {
                 if let Some(proposal) = returned_proposal {
                     if is_proposal_closed(&proposal) {
                         mutate_state(|state| {
-                            let ongoing_proposals = &mut state.data.sync_info.ongoing_proposals;
                             if let Some(this_proposal_id) = proposal.id {
-                                if let Some(pos) = ongoing_proposals
-                                    .iter()
-                                    .position(|id| id == &this_proposal_id)
-                                {
-                                    ongoing_proposals.remove(pos);
-                                }
+                                state
+                                    .data
+                                    .sync_info
+                                    .ongoing_proposals
+                                    .retain(|id| id != &this_proposal_id);
                             }
 
                             update_proposals_metrics(state, &proposal);
@@ -144,6 +142,7 @@ pub async fn recheck_ongoing_proposals() {
             Err(e) => {
                 let err_msg = format!("{e:?}");
                 error!("recheck_ongoing_proposals -> {err_msg:?}");
+                crate::jobs::record_job_error("sync_proposals_stats", &err_msg);
             }
         }
     }
@@ -161,7 +160,9 @@ pub fn analyze_proposal(proposal: &ProposalData) {
         // else push it to a vector to be checked later
         if !is_proposal_closed(proposal) {
             if let Some(pid) = proposal.id {
-                ongoing_proposals.push(pid);
+                if !ongoing_proposals.contains(&pid) {
+                    ongoing_proposals.push(pid);
+                }
             }
         }
     });
@@ -178,9 +179,11 @@ pub fn update_proposals_metrics(state: &mut RuntimeState, proposal: &ProposalDat
 
     if is_proposal_closed(proposal) {
         if let Some(tally) = proposal.latest_tally.clone() {
+            if tally.total == 0 {
+                return;
+            }
             let this_proposal_participation =
                 (((tally.yes as f64) + (tally.no as f64)) / (tally.total as f64)) * 100.0;
-            println!("{this_proposal_participation:?}");
             if tally.total > metrics.total_voting_power {
                 metrics.total_voting_power = tally.total;
             }
@@ -191,14 +194,18 @@ pub fn update_proposals_metrics(state: &mut RuntimeState, proposal: &ProposalDat
             metrics_calculations.valid_tally_count += 1;
 
             // Update the average voting participation
-            metrics.average_voting_participation =
-                (((metrics_calculations.cumulative_voting_participation as f64)
-                    / (metrics_calculations.valid_tally_count as f64))
-                    * 100.0) as u64;
+            if metrics_calculations.valid_tally_count > 0 {
+                metrics.average_voting_participation =
+                    (((metrics_calculations.cumulative_voting_participation as f64)
+                        / (metrics_calculations.valid_tally_count as f64))
+                        * 100.0) as u64;
+            }
 
             // Update the average voting power
-            metrics.average_voting_power =
-                metrics_calculations.cumulative_voting_power / metrics.total_proposals;
+            if metrics.total_proposals > 0 {
+                metrics.average_voting_power =
+                    metrics_calculations.cumulative_voting_power / metrics.total_proposals;
+            }
 
             update_voting_history(state, proposal, this_proposal_participation);
         }

@@ -37,7 +37,10 @@ fn get_holders(args: GetHoldersArgs) -> GetHoldersResponse {
     let end = (start + args.limit as usize).min(total_count);
 
     GetHoldersResponse {
-        data: list[start..end].to_vec(),
+        data: list[start..end]
+            .iter()
+            .map(|(account, wallet)| (*account, wallet.clone().into()))
+            .collect(),
         current_offset: args.offset,
         limit: args.limit,
         total_count,

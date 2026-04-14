@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { DateTime } from "luxon";
 import { getActor } from "@amerej/artemis-react";
-import { ActivitySnapshot } from "./declarations";
+import { ActivitySnapshot } from "@hooks/token_metrics/declarations_files/token_metrics";
 
 interface TimeChunkStats {
   start_time: bigint;
@@ -32,7 +32,7 @@ const useGetActiveAccounts = ({ period }: { period: string }) => {
   >({
     queryKey: ["ACTIVE_ACCOUNTS", period],
     queryFn: async (): Promise<ActiveAccountsData> => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const results = await actor.get_daily_stats();
       const activityStatsResults = (await actor.get_activity_stats(
         BigInt(days)

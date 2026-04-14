@@ -6,7 +6,7 @@ const fetchAccountBalanceHistoryQuery = async ({
 }: {
   account: string;
 }): Promise<Array<[bigint, HistoryData]>> => {
-  const actor = await getActor("tokenStats", { isAnon: true });
+  const actor = await getActor("tokenMetrics", { isAnon: true });
   const data = await actor.get_principal_history({ days: 30, account });
   return data as Array<[bigint, HistoryData]>;
 };

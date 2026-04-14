@@ -45,7 +45,7 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
       });
       setData({
         dataChart: results,
-        total: results[results.length - 1].valueToString,
+        total: results[results.length - 1]?.valueToString ?? "0",
       });
     }
   }, [isSuccess, response]);

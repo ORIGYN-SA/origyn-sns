@@ -23,6 +23,11 @@ fn post_upgrade(args: Args) {
             let (mut state, logs, traces): (RuntimeState, Vec<LogEntry>, Vec<LogEntry>) =
                 bity_ic_serializer::deserialize(reader).unwrap();
 
+            // IC timers don't survive upgrades — any in-flight async task was
+            // silently dropped, so clear the busy flag to unblock the next run.
+            state.data.ledger_indexer.working_stats.is_busy = false;
+            state.data.ledger_indexer.working_stats.busy_since = 0;
+
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
 
@@ -35,7 +40,7 @@ fn post_upgrade(args: Args) {
             init_canister(state);
 
             if is_ledger_locked {
-                crate::jobs::sync_ledger::start_processing_timer(60);
+                crate::jobs::sync_ledger::start_job();
             }
 
             info!(version = %upgrade_args.version, "Post-upgrade complete");

@@ -1,9 +1,8 @@
+use crate::state::{Data, RuntimeState};
 use ic_cdk_macros::init;
 pub use token_metrics_api::lifecycle::Args;
 use tracing::{error, info};
 use utils::env::CanisterEnv;
-
-use crate::state::{Data, RuntimeState};
 
 use super::init_canister;
 
@@ -30,9 +29,10 @@ fn init(args: Args) {
             let runtime_state = RuntimeState::new(env, data);
             init_canister(runtime_state);
 
-            // Auto-start ledger indexer (async — needs inter-canister calls for fee/decimals)
+            // Auto-start ledger indexer after init completes.
+            // Deferred to a timer because ic0_call_new is not allowed in init mode.
             let ledger_canister_id = init_args.ogy_new_ledger_canister_id;
-            ic_cdk::futures::spawn(async move {
+            ic_cdk_timers::set_timer(std::time::Duration::from_secs(0), async move {
                 let target = token_metrics_api::types::ledger_indexer::TargetArgs {
                     target_ledger: ledger_canister_id.to_text(),
                     hourly_size: 24,
@@ -41,7 +41,7 @@ fn init(args: Args) {
                 match crate::indexing::fetch_icrc2::t2_impl_set_target_canister(target).await {
                     Ok(msg) => {
                         info!("Ledger indexer initialized: {}", msg);
-                        crate::jobs::sync_ledger::start_processing_timer(60);
+                        crate::jobs::sync_ledger::start_job();
                     }
                     Err(e) => {
                         error!("Failed to initialize ledger indexer: {}", e);

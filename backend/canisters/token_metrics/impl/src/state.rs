@@ -228,6 +228,11 @@ impl RuntimeState {
             sns_ledger_canister: self.data.sns_ledger_canister,
             timer_statuses: self.data.timer_statuses.values().cloned().collect(),
             health_status: self.health_status(),
+            ledger_working_stats: {
+                let mut ws = self.data.ledger_indexer.working_stats.clone();
+                ws.directory_count = with_overviews(|m| m.len());
+                ws.into()
+            },
         }
     }
 
@@ -270,6 +275,7 @@ pub struct Metrics {
     pub sync_info: SyncInfo,
     pub timer_statuses: Vec<TimerStatus>,
     pub health_status: HealthStatus,
+    pub ledger_working_stats: token_metrics_api::types::ledger_indexer::WorkingStatsResponse,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]

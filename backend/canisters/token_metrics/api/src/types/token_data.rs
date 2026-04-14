@@ -5,8 +5,8 @@ use minicbor::{Decode, Encode};
 use serde::{Deserialize, Serialize};
 use utils::consts::E8S_PER_OGY;
 
-use super::ledger_indexer::Overview as LedgerOverview;
-use crate::impl_storable_minicbor;
+use super::ledger_indexer::{Overview as LedgerOverview, OverviewResponse};
+use crate::impl_storable_minicbor_bounded;
 
 // ============================================================================
 // Semantic type aliases — zero-cost, purely for readability
@@ -53,7 +53,7 @@ pub struct WalletOverview {
     pub total: u128,
 }
 
-impl_storable_minicbor!(WalletOverview);
+impl_storable_minicbor_bounded!(WalletOverview, 256);
 
 /// Aggregate governance statistics for a principal or the whole canister.
 /// All token amounts are in e8s (1 OGY = 10^8 e8s).
@@ -167,4 +167,72 @@ pub struct GetHoldersArgs {
 pub struct ActiveUsers {
     pub active_accounts_count: usize,
     pub active_principals_count: usize,
+}
+
+// ============================================================================
+// Candid-facing response DTOs (match the frontend IDL exactly)
+// ============================================================================
+
+/// Candid-facing WalletOverview with `total` as u64 to match frontend IDL.
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
+pub struct WalletOverviewResponse {
+    pub total: u64,
+    pub ledger: OverviewResponse,
+    pub governance: GovernanceStats,
+}
+
+impl From<WalletOverview> for WalletOverviewResponse {
+    fn from(w: WalletOverview) -> Self {
+        WalletOverviewResponse {
+            total: w.total as u64,
+            ledger: w.ledger.into(),
+            governance: w.governance,
+        }
+    }
+}
+
+/// Candid-facing LockedNeuronsAmount with u64 fields to match frontend IDL.
+#[derive(Serialize, Deserialize, Clone, Default, CandidType)]
+pub struct LockedNeuronsAmountResponse {
+    pub one_year: u64,
+    pub two_years: u64,
+    pub three_years: u64,
+    pub four_years: u64,
+    pub five_years: u64,
+}
+
+impl From<LockedNeuronsAmount> for LockedNeuronsAmountResponse {
+    fn from(l: LockedNeuronsAmount) -> Self {
+        LockedNeuronsAmountResponse {
+            one_year: l.one_year as u64,
+            two_years: l.two_years as u64,
+            three_years: l.three_years as u64,
+            four_years: l.four_years as u64,
+            five_years: l.five_years as u64,
+        }
+    }
+}
+
+/// Candid-facing ProposalsMetrics with all u64 fields to match frontend IDL.
+#[derive(Serialize, Deserialize, Clone, CandidType, Debug)]
+pub struct ProposalsMetricsResponse {
+    pub total_proposals: u64,
+    pub daily_voting_rewards: u64,
+    pub reward_base_current_year: u64,
+    pub total_voting_power: u64,
+    pub average_voting_power: u64,
+    pub average_voting_participation: u64,
+}
+
+impl From<ProposalsMetrics> for ProposalsMetricsResponse {
+    fn from(p: ProposalsMetrics) -> Self {
+        ProposalsMetricsResponse {
+            total_proposals: p.total_proposals,
+            daily_voting_rewards: p.daily_voting_rewards as u64,
+            reward_base_current_year: p.reward_base_current_year as u64,
+            total_voting_power: p.total_voting_power,
+            average_voting_power: p.average_voting_power,
+            average_voting_participation: p.average_voting_participation,
+        }
+    }
 }

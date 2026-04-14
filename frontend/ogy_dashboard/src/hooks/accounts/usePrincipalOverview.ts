@@ -21,7 +21,7 @@ const usePrincipalOverview = (principal: string) => {
   }: UseQueryResult<TransactionStats> = useQuery({
     queryKey: ["principalOverview", principal],
     queryFn: async () => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const result = await actor.get_principal_overview(principal);
       return result;
     },

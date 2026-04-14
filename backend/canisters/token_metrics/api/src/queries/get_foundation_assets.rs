@@ -1,4 +1,4 @@
-use crate::token_data::WalletOverview;
+use crate::token_data::WalletOverviewResponse;
 
 pub type Args = ();
-pub type Response = Vec<(String, WalletOverview)>;
+pub type Response = Vec<(String, WalletOverviewResponse)>;

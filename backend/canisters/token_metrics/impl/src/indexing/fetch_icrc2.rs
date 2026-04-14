@@ -1,4 +1,6 @@
-use crate::state::{mutate_state, read_state};
+use crate::indexing::process_index::process_smtx_to_index;
+use crate::indexing::process_transactions::process_transactions;
+use crate::state::{mutate_state, read_state, with_transaction_cache_mut};
 use crate::utils::{icrc_account_to_string, nat_to_u128, nat_to_u64};
 use candid::Nat;
 use ic_cdk::call::Call;
@@ -7,7 +9,7 @@ use token_metrics_api::types::ledger_indexer::{
     TargetArgs, TransactionRange, TransactionType, DAY_AS_NANOS, HOUR_AS_NANOS, MAX_TOTAL_DOWNLOAD,
     MAX_TRANSACTION_BATCH_SIZE,
 };
-use tracing::info;
+use tracing::{error, info};
 
 /// Set target canister, fee, and decimals.
 pub async fn t2_impl_set_target_canister(args: TargetArgs) -> Result<String, String> {
@@ -51,8 +53,10 @@ pub async fn t2_impl_set_target_canister(args: TargetArgs) -> Result<String, Str
     Ok("Target canister, fee and decimals set".into())
 }
 
-/// Download new transactions from the ICRC2 ledger.
-pub async fn t2_download_transactions() -> Result<Vec<ProcessedTX>, String> {
+/// Download and process new transactions from the ICRC2 ledger.
+/// Each chunk of transactions is processed and indexed immediately
+/// to stay within the IC instruction limit per message.
+pub async fn t2_download_and_process() -> Result<(), String> {
     let locked = read_state(|s| s.data.ledger_indexer.target_ledger_locked);
     if !locked {
         return Err("Target Ledger is not yet set!".into());
@@ -63,21 +67,24 @@ pub async fn t2_download_transactions() -> Result<Vec<ProcessedTX>, String> {
         .map_err(|e| format!("Invalid ledger principal: {}", e))?;
 
     // Get tip of chain
+    info!("fetch_icrc2: getting tip of chain from {}", ledger_canister);
     let chain_tip = get_tip_of_chain(ledger_principal).await?;
+    info!("fetch_icrc2: chain tip = {}", chain_tip);
     mutate_state(|s| {
         s.data.ledger_indexer.working_stats.ledger_tip_of_chain = chain_tip;
     });
 
     let next_block = read_state(|s| s.data.ledger_indexer.working_stats.next_block);
     if chain_tip <= next_block {
-        return Ok(Vec::new());
+        info!("fetch_icrc2: already up to date (tip={}, next={})", chain_tip, next_block);
+        return Ok(());
     }
 
     mutate_state(|s| {
         s.data.ledger_indexer.working_stats.is_upto_date = false;
     });
 
-    download_manager(chain_tip, next_block, ledger_principal).await
+    download_and_process_chunks(chain_tip, next_block, ledger_principal).await
 }
 
 async fn get_tip_of_chain(ledger: candid::Principal) -> Result<u64, String> {
@@ -94,11 +101,11 @@ async fn get_tip_of_chain(ledger: candid::Principal) -> Result<u64, String> {
     nat_to_u64(resp.log_length)
 }
 
-async fn download_manager(
+async fn download_and_process_chunks(
     tip: u64,
     next_block: u64,
     ledger: candid::Principal,
-) -> Result<Vec<ProcessedTX>, String> {
+) -> Result<(), String> {
     let tip_plus_one = tip.saturating_add(1);
     let blocks_needed = tip_plus_one.saturating_sub(next_block);
     let chunks_needed =
@@ -112,7 +119,6 @@ async fn download_manager(
         blocks_needed, chunks, tip, next_block
     );
 
-    let mut temp_tx_array: Vec<ProcessedTX> = Vec::new();
     let mut completed: u64 = 0;
 
     for i in 0..chunks {
@@ -127,13 +133,40 @@ async fn download_manager(
         }
         let length = remaining.min(MAX_TRANSACTION_BATCH_SIZE as u64);
 
+        info!("fetch_icrc2: chunk {}/{} — downloading blocks {}..{}", i + 1, chunks, start, start + length);
         let txns = icrc2_download_chunk(start, length, ledger).await?;
         let count = txns.len() as u64;
-        temp_tx_array.extend(txns);
+        info!("fetch_icrc2: chunk {}/{} — got {} txns, processing", i + 1, chunks, count);
+
+        if !txns.is_empty() {
+            // Process + index + cache this chunk immediately (stays within instruction limit)
+            let stx = process_transactions(&txns);
+            let processed_tip = process_smtx_to_index(&stx)
+                .map_err(|e| format!("Error indexing chunk {}: {}", i + 1, e))?;
+
+            with_transaction_cache_mut(|m| {
+                for tx in &txns {
+                    m.insert(tx.block, tx.clone());
+                }
+            });
+
+            let up_to_date = processed_tip + 1 >= tip;
+            let next = processed_tip + 1;
+            let time = ic_cdk::api::time();
+            mutate_state(|s| {
+                s.data.ledger_indexer.working_stats.next_block = next;
+                s.data.ledger_indexer.working_stats.last_update_time = time;
+                s.data.ledger_indexer.working_stats.is_upto_date = up_to_date;
+            });
+
+            info!("fetch_icrc2: chunk {}/{} — indexed up to block {}", i + 1, chunks, processed_tip);
+        }
+
         completed += count;
     }
 
-    Ok(temp_tx_array)
+    info!("fetch_icrc2: download complete — {} total txns processed", completed);
+    Ok(())
 }
 
 async fn icrc2_download_chunk(
@@ -154,25 +187,51 @@ async fn icrc2_download_chunk(
 
     let has_ledger = !resp.transactions.is_empty();
     let has_archive = !resp.archived_transactions.is_empty();
+    info!(
+        "fetch_icrc2: chunk response — ledger_txs={}, archive_ranges={}",
+        resp.transactions.len(),
+        resp.archived_transactions.len()
+    );
 
     match (has_ledger, has_archive) {
         (true, true) => {
+            info!("fetch_icrc2: fetching from {} archive range(s) + ledger", resp.archived_transactions.len());
             let mut all_txs = fetch_all_archives(&resp.archived_transactions).await?;
             let next = all_txs.last().map(|tx| tx.block + 1).unwrap_or(start);
             let mut ledger_txs = process_ledger_blocks(resp.transactions, next)?;
             all_txs.append(&mut ledger_txs);
             Ok(all_txs)
         }
-        (true, false) => process_ledger_blocks(resp.transactions, start),
-        (false, true) => fetch_all_archives(&resp.archived_transactions).await,
-        (false, false) => Ok(Vec::new()),
+        (true, false) => {
+            info!("fetch_icrc2: processing {} ledger blocks (no archive)", resp.transactions.len());
+            process_ledger_blocks(resp.transactions, start)
+        }
+        (false, true) => {
+            info!("fetch_icrc2: fetching from {} archive range(s) (no ledger)", resp.archived_transactions.len());
+            fetch_all_archives(&resp.archived_transactions).await
+        }
+        (false, false) => {
+            info!("fetch_icrc2: empty response");
+            Ok(Vec::new())
+        }
     }
 }
 
 async fn fetch_all_archives(archives: &[ArchivedRange1]) -> Result<Vec<ProcessedTX>, String> {
     let mut all_txs = Vec::new();
-    for archived in archives {
+    for (i, archived) in archives.iter().enumerate() {
+        let archive_start = nat_to_u64(archived.start.clone()).unwrap_or(0);
+        let archive_len = nat_to_u64(archived.length.clone()).unwrap_or(0);
+        info!(
+            "fetch_icrc2: archive {}/{} — canister={}, start={}, length={}",
+            i + 1,
+            archives.len(),
+            archived.callback.0.principal,
+            archive_start,
+            archive_len
+        );
         let txs = get_transactions_from_archive(archived).await?;
+        info!("fetch_icrc2: archive {}/{} — got {} txns", i + 1, archives.len(), txs.len());
         all_txs.extend(txs);
     }
     Ok(all_txs)
@@ -224,6 +283,7 @@ fn process_single_transaction(
         let val = nat_to_u128(mint.amount.clone())?;
         output.push(ProcessedTX {
             block: *master_block,
+            hash: String::new(),
             tx_type: TransactionType::Mint.to_string(),
             from_account: "Token Ledger".into(),
             to_account: to_ac,
@@ -244,6 +304,7 @@ fn process_single_transaction(
         let val = nat_to_u128(burn.amount.clone())?;
         output.push(ProcessedTX {
             block: *master_block,
+            hash: String::new(),
             tx_type: TransactionType::Burn.to_string(),
             from_account: fm_ac,
             to_account: "Token Ledger".into(),
@@ -270,6 +331,7 @@ fn process_single_transaction(
         let val = nat_to_u128(transfer.amount.clone())?;
         output.push(ProcessedTX {
             block: *master_block,
+            hash: String::new(),
             tx_type: TransactionType::Transfer.to_string(),
             from_account: fm_ac,
             to_account: to_ac,
@@ -292,6 +354,7 @@ fn process_single_transaction(
         let val = nat_to_u128(approve.amount.clone()).unwrap_or(0);
         output.push(ProcessedTX {
             block: *master_block,
+            hash: String::new(),
             tx_type: TransactionType::Approve.to_string(),
             from_account: fm_ac,
             to_account: spend.clone(),

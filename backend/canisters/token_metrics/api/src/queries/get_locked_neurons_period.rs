@@ -1,12 +1,12 @@
 use candid::CandidType;
 use serde::Deserialize;
 
-use crate::token_data::LockedNeuronsAmount;
+use crate::token_data::LockedNeuronsAmountResponse;
 
 #[derive(Deserialize, CandidType)]
 pub struct LockedNeuronsPeriodResponse {
-    pub amount: LockedNeuronsAmount,
-    pub count: LockedNeuronsAmount,
+    pub amount: LockedNeuronsAmountResponse,
+    pub count: LockedNeuronsAmountResponse,
 }
 
 pub type Args = ();

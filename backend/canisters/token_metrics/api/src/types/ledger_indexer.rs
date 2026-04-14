@@ -5,7 +5,7 @@ use candid::{CandidType, Principal};
 use minicbor::{Decode, Encode};
 use serde::{Deserialize, Serialize};
 
-use crate::impl_storable_minicbor;
+use crate::impl_storable_minicbor_bounded;
 
 // ============================================================================
 // Semantic type aliases — zero-cost, purely for readability
@@ -122,7 +122,86 @@ impl Add for Overview {
     }
 }
 
-impl_storable_minicbor!(Overview);
+impl_storable_minicbor_bounded!(Overview, 128);
+
+// ============================================================================
+// Candid-facing response DTOs (match the frontend IDL exactly)
+// ============================================================================
+
+/// Candid-facing Overview with `sent`/`received` as tuples to match frontend IDL.
+#[derive(CandidType, Serialize, Deserialize, Clone, Default, Debug)]
+pub struct OverviewResponse {
+    pub balance: TokenAmount,
+    pub sent: (u32, TokenAmount),
+    pub last_active: TimestampNanos,
+    pub first_active: TimestampNanos,
+    pub received: (u32, TokenAmount),
+    pub max_balance: TokenAmount,
+}
+
+impl From<Overview> for OverviewResponse {
+    fn from(o: Overview) -> Self {
+        OverviewResponse {
+            balance: o.balance,
+            sent: (o.sent_count, o.sent_value),
+            last_active: o.last_active,
+            first_active: o.first_active,
+            received: (o.received_count, o.received_value),
+            max_balance: o.max_balance,
+        }
+    }
+}
+
+/// Candid-facing HolderBalanceResponse wrapping OverviewResponse.
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
+pub struct HolderBalanceResponseCompat {
+    pub holder: String,
+    pub data: OverviewResponse,
+}
+
+impl From<HolderBalanceResponse> for HolderBalanceResponseCompat {
+    fn from(h: HolderBalanceResponse) -> Self {
+        HolderBalanceResponseCompat {
+            holder: h.holder,
+            data: h.data.into(),
+        }
+    }
+}
+
+/// Stub metrics for WorkingStats (frontend super_stats IDL expects this field).
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug, Default)]
+pub struct Metrics {
+    pub total_errors: u64,
+    pub total_api_requests: u64,
+}
+
+/// Candid-facing WorkingStats with `metrics` field to match frontend super_stats IDL.
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
+pub struct WorkingStatsResponse {
+    pub metrics: Metrics,
+    pub timer_active: bool,
+    pub is_busy: bool,
+    pub next_block: BlockNumber,
+    pub ledger_tip_of_chain: BlockNumber,
+    pub is_upto_date: bool,
+    pub directory_count: u64,
+    pub last_update_time: TimestampNanos,
+}
+
+impl From<WorkingStats> for WorkingStatsResponse {
+    fn from(ws: WorkingStats) -> Self {
+        WorkingStatsResponse {
+            metrics: Metrics::default(),
+            timer_active: ws.timer_active,
+            is_busy: ws.is_busy,
+            next_block: ws.next_block,
+            ledger_tip_of_chain: ws.ledger_tip_of_chain,
+            is_upto_date: ws.is_upto_date,
+            directory_count: ws.directory_count,
+            last_update_time: ws.last_update_time,
+        }
+    }
+}
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Default, Debug, PartialEq, Encode, Decode)]
 pub struct HistoryData {
@@ -140,7 +219,7 @@ impl Add for HistoryData {
     }
 }
 
-impl_storable_minicbor!(HistoryData);
+impl_storable_minicbor_bounded!(HistoryData, 64);
 
 #[derive(Encode, Decode, Clone, Default, Debug, PartialEq)]
 pub struct HistoryBalanceCache {
@@ -150,7 +229,7 @@ pub struct HistoryBalanceCache {
     pub data: HistoryData,
 }
 
-impl_storable_minicbor!(HistoryBalanceCache);
+impl_storable_minicbor_bounded!(HistoryBalanceCache, 64);
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Default, Debug, PartialEq, Encode, Decode)]
 pub struct ActivitySnapshot {
@@ -168,7 +247,7 @@ pub struct ActivitySnapshot {
     pub principals_active_during_snapshot: u64,
 }
 
-impl_storable_minicbor!(ActivitySnapshot);
+impl_storable_minicbor_bounded!(ActivitySnapshot, 128);
 
 // ============================================================================
 // LedgerAccount — our own Account type for stable memory maps.
@@ -256,7 +335,7 @@ impl From<Principal> for LedgerAccount {
     }
 }
 
-impl_storable_minicbor!(LedgerAccount);
+impl_storable_minicbor_bounded!(LedgerAccount, 128);
 
 // ============================================================================
 // AccountDayKey — composite key for daily history
@@ -273,7 +352,7 @@ pub struct AccountDayKey {
     pub day: DayNumber,
 }
 
-impl_storable_minicbor!(AccountDayKey);
+impl_storable_minicbor_bounded!(AccountDayKey, 128);
 
 // ============================================================================
 // Heap-resident types (serialized via serde for upgrade, not in stable maps)
@@ -285,6 +364,8 @@ impl_storable_minicbor!(AccountDayKey);
 pub struct ProcessedTX {
     #[n(0)]
     pub block: BlockNumber,
+    #[n(9)]
+    pub hash: String,
     #[n(2)]
     pub tx_type: String,
     #[n(3)]
@@ -301,7 +382,7 @@ pub struct ProcessedTX {
     pub tx_time: TimestampNanos,
 }
 
-impl_storable_minicbor!(ProcessedTX);
+impl_storable_minicbor_bounded!(ProcessedTX, 512);
 
 impl fmt::Display for ProcessedTX {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -480,6 +561,14 @@ pub struct WorkingStats {
     /// Repurposed: now holds total account count (was directory ref count).
     pub directory_count: u64,
     pub last_update_time: TimestampNanos,
+    /// Set once when the indexer first catches up to chain tip.
+    /// Used to re-trigger dependent jobs that skipped during initial indexing.
+    #[serde(default)]
+    pub initial_sync_complete: bool,
+    /// Timestamp (nanos) when `is_busy` was last set to `true`.
+    /// Used to detect stale busy flags from crashed/dropped async tasks.
+    #[serde(default)]
+    pub busy_since: TimestampNanos,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
@@ -754,6 +843,7 @@ mod tests {
             tx_fee: Some(10_000),
             spender: None,
             tx_time: 1_700_000_000_000_000_000,
+            hash: "no-hash".to_string(),
         };
         let bytes = original.to_bytes();
         let decoded = ProcessedTX::from_bytes(bytes);
@@ -771,6 +861,7 @@ mod tests {
             tx_fee: Some(u128::MAX),
             spender: Some("spender".to_string()),
             tx_time: 0,
+            hash: "no-hash".to_string(),
         };
         let bytes = original.to_bytes();
         let decoded = ProcessedTX::from_bytes(bytes);

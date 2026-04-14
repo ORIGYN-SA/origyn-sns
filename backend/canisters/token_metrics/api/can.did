@@ -45,7 +45,7 @@ type GetHoldersArgs = record {
 };
 type GetHoldersResponse = record {
   current_offset : nat64;
-  data : vec record { Account; WalletOverview };
+  data : vec record { Account; WalletOverviewResponse };
   limit : nat64;
   total_count : nat64;
 };
@@ -64,7 +64,11 @@ type GovernanceStats = record {
   total_unlocked : nat;
 };
 type HistoryData = record { balance : nat };
-type HolderBalanceResponse = record { data : Overview; holder : text };
+// Candid-facing HolderBalanceResponse wrapping OverviewResponse.
+type HolderBalanceResponseCompat = record {
+  data : OverviewResponse;
+  holder : text;
+};
 type InitArgs = record {
   test_mode : bool;
   foundation_accounts : vec text;
@@ -76,29 +80,41 @@ type InitArgs = record {
   commit_hash : text;
   sns_governance_canister_id : principal;
 };
-// Amount of locked tokens bucketed by dissolve delay period.
-type LockedNeuronsAmount = record {
-  one_year : nat;
-  two_years : nat;
-  three_years : nat;
-  four_years : nat;
-  five_years : nat;
+// Candid-facing LockedNeuronsAmount with u64 fields to match frontend IDL.
+type LockedNeuronsAmountResponse = record {
+  one_year : nat64;
+  two_years : nat64;
+  three_years : nat64;
+  four_years : nat64;
+  five_years : nat64;
 };
 type LockedNeuronsPeriodResponse = record {
-  count : LockedNeuronsAmount;
-  amount : LockedNeuronsAmount;
+  count : LockedNeuronsAmountResponse;
+  amount : LockedNeuronsAmountResponse;
 };
-type Overview = record {
+// Represents a single log entry with timestamp and message.
+// 
+// This struct is used to store individual log messages with their
+// associated timestamps.
+type LogEntry = record {
+  // The log message content
+  message : text;
+  // The timestamp when the log entry was created (in milliseconds)
+  timestamp : nat64;
+};
+// Stub metrics for WorkingStats (frontend super_stats IDL expects this field).
+type Metrics = record { total_errors : nat64; total_api_requests : nat64 };
+// Candid-facing Overview with `sent`/`received` as tuples to match frontend IDL.
+type OverviewResponse = record {
   balance : nat;
-  sent_value : nat;
-  sent_count : nat32;
+  sent : record { nat32; nat };
   last_active : nat64;
-  received_value : nat;
-  received_count : nat32;
   first_active : nat64;
+  received : record { nat32; nat };
   max_balance : nat;
 };
 type ProcessedTX = record {
+  hash : text;
   to_account : text;
   tx_value : nat;
   from_account : text;
@@ -108,19 +124,13 @@ type ProcessedTX = record {
   tx_type : text;
   spender : opt text;
 };
-// Aggregated proposal and voting metrics across all proposals.
-type ProposalsMetrics = record {
-  // Daily voting rewards in e8s
-  daily_voting_rewards : nat;
-  // Annual reward base for the current year in e8s
-  reward_base_current_year : nat;
-  // Average voting participation in basis points (2600 = 26.00%)
+// Candid-facing ProposalsMetrics with all u64 fields to match frontend IDL.
+type ProposalsMetricsResponse = record {
+  daily_voting_rewards : nat64;
+  reward_base_current_year : nat64;
   average_voting_participation : nat64;
-  // Average voting power across all proposals
   average_voting_power : nat64;
-  // Maximum total voting power observed in any single proposal tally
   total_voting_power : nat64;
-  // Highest proposal ID seen
   total_proposals : nat64;
 };
 type TimeChunkStats = record {
@@ -157,22 +167,20 @@ type TotalHolderResponse = record {
   total_principals : nat64;
 };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
-// Combined view of a wallet's ledger and governance holdings.
-type WalletOverview = record {
-  // Total holdings across ledger + governance (in e8s)
-  total : nat;
-  // Ledger-side overview (balance, sent/received counts, etc.)
-  ledger : Overview;
-  // Governance-side stats (staked, locked, unlocked, rewards)
+// Candid-facing WalletOverview with `total` as u64 to match frontend IDL.
+type WalletOverviewResponse = record {
+  total : nat64;
+  ledger : OverviewResponse;
   governance : GovernanceStats;
 };
-type WorkingStats = record {
+// Candid-facing WorkingStats with `metrics` field to match frontend super_stats IDL.
+type WorkingStatsResponse = record {
+  metrics : Metrics;
   next_block : nat64;
   last_update_time : nat64;
   ledger_tip_of_chain : nat64;
   timer_active : bool;
   is_upto_date : bool;
-  // Repurposed: now holds total account count (was directory ref count).
   directory_count : nat64;
   is_busy : bool;
 };
@@ -181,30 +189,35 @@ service : (Args) -> {
       vec record { nat64; HistoryData },
     ) query;
   get_account_holders : (GetAccountHoldersArgs) -> (
-      vec HolderBalanceResponse,
+      vec HolderBalanceResponseCompat,
     ) query;
-  get_account_overview : (text) -> (opt Overview) query;
+  get_account_overview : (text) -> (opt OverviewResponse) query;
   get_active_users_count : () -> (ActiveUsers) query;
   get_activity_stats : (nat64) -> (vec ActivitySnapshot) query;
   get_all_neuron_owners : () -> (vec principal) query;
   get_daily_stats : () -> (TimeStats) query;
-  get_foundation_assets : () -> (vec record { text; WalletOverview }) query;
+  get_foundation_assets : () -> (
+      vec record { text; WalletOverviewResponse },
+    ) query;
   get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
   get_hourly_stats : () -> (TimeStats) query;
   get_locked_neurons_period : () -> (LockedNeuronsPeriodResponse) query;
+  get_logs : () -> (vec LogEntry) query;
   get_neurons_stats : (opt principal) -> (GovernanceStats) query;
   get_principal_history : (GetAccountHistoryArgs) -> (
       vec record { nat64; HistoryData },
     ) query;
   get_principal_holders : (GetAccountHoldersArgs) -> (
-      vec HolderBalanceResponse,
+      vec HolderBalanceResponseCompat,
     ) query;
-  get_principal_overview : (text) -> (opt Overview) query;
-  get_proposals_metrics : () -> (ProposalsMetrics) query;
+  get_principal_overview : (text) -> (opt OverviewResponse) query;
+  get_proposals_metrics : () -> (ProposalsMetricsResponse) query;
   get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
   get_supply_data : () -> (TokenSupplyData) query;
-  get_top_account_holders : (nat64) -> (vec HolderBalanceResponse) query;
-  get_top_principal_holders : (nat64) -> (vec HolderBalanceResponse) query;
+  get_top_account_holders : (nat64) -> (vec HolderBalanceResponseCompat) query;
+  get_top_principal_holders : (nat64) -> (
+      vec HolderBalanceResponseCompat,
+    ) query;
   get_total_holders : () -> (TotalHolderResponse) query;
   get_voting_participation_history : (GetVotingParticipationHistoryArgs) -> (
       vec record { nat64; nat64 },
@@ -212,7 +225,7 @@ service : (Args) -> {
   get_voting_power_ratio_history : (GetVotingPowerRatioHistory) -> (
       vec record { nat64; nat64 },
     ) query;
-  get_working_stats : () -> (WorkingStats) query;
+  get_working_stats : () -> (WorkingStatsResponse) query;
   start_processing_timer : (nat64) -> (text);
   stop_all_timers : () -> (text);
 }

@@ -17,14 +17,12 @@ import {
   LEGACY_LEDGER_CANISTER_ID,
   OGY_TOKEN_SWAP_CANISTER_ID,
   SNS_REWARDS_CANISTER_ID,
-  TOKEN_STATS_CANISTER_ID,
   COLLECTION_INDEX_CANISTER_ID,
 } from "@constants/index";
 
 import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
 import { idlFactory as ledgerIdl } from "@services/candid/sns_ledger";
 import { idlFactory as ledgerLegacyIdl } from "@services/candid/ledger.legacy";
-import { idlFactory as superStatsIdl } from "@services/candid/super_stats";
 import { idlFactory as tokenMetricsIdl } from "@services/candid/token_metrics";
 import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
@@ -265,10 +263,6 @@ const App = () => {
       tokenMetrics: {
         canisterId: TOKEN_METRICS_CANISTER_ID,
         idlFactory: tokenMetricsIdl,
-      },
-      tokenStats: {
-        canisterId: TOKEN_STATS_CANISTER_ID,
-        idlFactory: superStatsIdl,
       },
       collectionIndex: {
         canisterId: COLLECTION_INDEX_CANISTER_ID,

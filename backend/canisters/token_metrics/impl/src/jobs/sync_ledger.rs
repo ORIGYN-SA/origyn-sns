@@ -1,117 +1,122 @@
-use crate::indexing::{
-    fetch_icrc2::t2_download_transactions, process_index::process_smtx_to_index,
-    process_transactions::process_transactions, time_stats::calculate_time_stats,
-};
-use crate::state::{mutate_state, read_state, with_transaction_cache_mut};
-use std::cell::RefCell;
+use crate::indexing::{fetch_icrc2::t2_download_and_process, time_stats::calculate_time_stats};
+use crate::state::{mutate_state, read_state};
+use bity_ic_canister_time::run_now_then_interval;
 use std::time::Duration;
-use token_metrics_api::types::ledger_indexer::{ProcessedTX, StatsType};
-use tracing::{error, info};
+use token_metrics_api::types::ledger_indexer::StatsType;
+use tracing::{error, info, warn};
+use types::Milliseconds;
 
-thread_local! {
-    static TIMER_IDS: RefCell<Vec<ic_cdk_timers::TimerId>> = RefCell::new(Vec::new());
+const SYNC_LEDGER_INTERVAL: Milliseconds = 60 * 1_000;
+/// Five minutes in nanoseconds — generous ceiling for a single sync run.
+const BUSY_TIMEOUT_NS: u64 = 5 * 60 * 1_000_000_000;
+
+pub fn start_job() {
+    info!("Indexer timer started with 60s interval");
+    run_now_then_interval(Duration::from_millis(SYNC_LEDGER_INTERVAL), run);
 }
 
-/// Start the indexer processing loop at the given interval.
-pub fn start_processing_timer(secs: u64) {
-    let duration = Duration::from_secs(secs);
-    let timer_id = ic_cdk_timers::set_timer_interval(duration, || schedule_data_processing());
-    TIMER_IDS.with(|ids| ids.borrow_mut().push(timer_id));
-    mutate_state(|s| {
-        s.data.ledger_indexer.working_stats.timer_active = true;
+pub fn run() {
+    let (is_busy, busy_since) = read_state(|s| {
+        let ws = &s.data.ledger_indexer.working_stats;
+        (ws.is_busy, ws.busy_since)
     });
-    info!("Indexer timer started with {}s interval", secs);
-}
 
-/// Stop all indexer timers.
-pub fn stop_all_timers() {
-    TIMER_IDS.with(|ids| {
-        for id in ids.borrow().iter() {
-            ic_cdk_timers::clear_timer(*id);
+    if is_busy {
+        let now = ic_cdk::api::time();
+        let elapsed = now.saturating_sub(busy_since);
+        if elapsed < BUSY_TIMEOUT_NS {
+            warn!("sync_ledger: skipping — previous run still busy");
+            return;
         }
-        ids.borrow_mut().clear();
+        warn!(
+            "sync_ledger: busy flag stale for {}s — force-clearing",
+            elapsed / 1_000_000_000
+        );
+        mutate_state(|s| {
+            s.data.ledger_indexer.working_stats.is_busy = false;
+            s.data.ledger_indexer.working_stats.busy_since = 0;
+        });
+    }
+
+    crate::jobs::record_job_started("sync_ledger", 60);
+    ic_cdk::futures::spawn(async {
+        process_ledger_sync().await;
+        crate::jobs::record_job_completed("sync_ledger");
     });
+}
+
+/// Main processing loop: download + process each chunk within the IC instruction limit.
+async fn process_ledger_sync() {
+    mutate_state(|s| {
+        s.data.ledger_indexer.working_stats.is_busy = true;
+        s.data.ledger_indexer.working_stats.busy_since = ic_cdk::api::time();
+    });
+    info!("sync_ledger: starting");
+
+    match t2_download_and_process().await {
+        Ok(()) => {
+            let is_upto_date = read_state(|s| s.data.ledger_indexer.working_stats.is_upto_date);
+            if is_upto_date {
+                // Stats calculation and dependent job triggering run in a separate
+                // spawned task so they don't share the instruction budget with the
+                // last chunk's processing (which already consumed most of it).
+                info!("sync_ledger: up to date, scheduling stats calculation");
+                schedule_post_sync_tasks();
+            }
+        }
+        Err(e) => {
+            error!("sync_ledger: {}", e);
+            crate::jobs::record_job_error("sync_ledger", &e);
+        }
+    }
+
+    info!("sync_ledger: run complete, clearing busy flag");
+    mutate_state(|s| {
+        s.data.ledger_indexer.working_stats.is_busy = false;
+        s.data.ledger_indexer.working_stats.busy_since = 0;
+    });
+
+    // If not caught up, immediately start the next cycle instead of waiting for the timer
+    let is_upto_date = read_state(|s| s.data.ledger_indexer.working_stats.is_upto_date);
+    if !is_upto_date {
+        info!("sync_ledger: more blocks to process, re-triggering immediately");
+        run();
+    }
+}
+
+/// Run stats calculation and dependent job triggers in a deferred timer callback
+/// so they get their own IC message with a full instruction budget.
+fn schedule_post_sync_tasks() {
+    ic_cdk_timers::set_timer(Duration::from_secs(0), async {
+        info!("sync_ledger: calculating daily stats");
+        calculate_daily_stats();
+        info!("sync_ledger: calculating hourly stats");
+        calculate_hourly_stats();
+
+        let already_synced =
+            read_state(|s| s.data.ledger_indexer.working_stats.initial_sync_complete);
+        if !already_synced {
+            info!("sync_ledger: initial sync complete, triggering dependent jobs");
+            mutate_state(|s| {
+                s.data.ledger_indexer.working_stats.initial_sync_complete = true;
+            });
+            crate::jobs::sync_governance_history::run();
+            crate::jobs::update_balance_list::run();
+        }
+    });
+}
+
+/// Keep the public Candid endpoint working — delegates to start_job.
+pub fn start_processing_timer(_secs: u64) {
+    start_job();
+}
+
+/// Stop all timers (placeholder — run_now_then_interval timers are not individually cancellable).
+pub fn stop_all_timers() {
     mutate_state(|s| {
         s.data.ledger_indexer.working_stats.timer_active = false;
     });
     info!("All indexer timers stopped");
-}
-
-/// Main processing loop: fetch → process → index → stats.
-async fn schedule_data_processing() {
-    // Check if already busy
-    let is_busy = read_state(|s| s.data.ledger_indexer.working_stats.is_busy);
-    if is_busy {
-        return;
-    }
-    crate::jobs::record_job_started("sync_ledger", 60);
-    mutate_state(|s| s.data.ledger_indexer.working_stats.is_busy = true);
-
-    // Download latest transactions
-    let result = t2_download_transactions().await;
-
-    match result {
-        Ok(txs) => {
-            if txs.is_empty() {
-                let time = ic_cdk::api::time();
-                mutate_state(|s| {
-                    s.data.ledger_indexer.working_stats.last_update_time = time;
-                    s.data.ledger_indexer.working_stats.is_busy = false;
-                });
-                return;
-            }
-
-            // Process account-level indexing (single pass — principal queries derived at query time)
-            let stx = process_transactions(&txs);
-            let index_result = process_smtx_to_index(&stx);
-
-            match index_result {
-                Ok(processed_tip) => {
-                    // Store transactions in cache
-                    store_transactions_in_cache(&txs);
-
-                    let tip =
-                        read_state(|s| s.data.ledger_indexer.working_stats.ledger_tip_of_chain);
-                    let up_to_date = processed_tip + 1 >= tip;
-
-                    let next = processed_tip + 1;
-                    let time = ic_cdk::api::time();
-                    mutate_state(|s| {
-                        s.data.ledger_indexer.working_stats.next_block = next;
-                        s.data.ledger_indexer.working_stats.last_update_time = time;
-                        s.data.ledger_indexer.working_stats.is_upto_date = up_to_date;
-                    });
-
-                    if up_to_date {
-                        // Calculate daily and hourly stats
-                        calculate_daily_stats();
-                        calculate_hourly_stats();
-                    }
-                }
-                Err(e) => {
-                    let msg = format!("Error processing account index: {}", e);
-                    error!("{}", msg);
-                    crate::jobs::record_job_error("sync_ledger", &msg);
-                }
-            }
-        }
-        Err(e) => {
-            let msg = format!("Error downloading transactions: {}", e);
-            error!("{}", msg);
-            crate::jobs::record_job_error("sync_ledger", &msg);
-        }
-    }
-
-    crate::jobs::record_job_completed("sync_ledger");
-    mutate_state(|s| s.data.ledger_indexer.working_stats.is_busy = false);
-}
-
-fn store_transactions_in_cache(txs: &[ProcessedTX]) {
-    with_transaction_cache_mut(|m| {
-        for tx in txs {
-            m.insert(tx.block, tx.clone());
-        }
-    });
 }
 
 fn calculate_daily_stats() {
