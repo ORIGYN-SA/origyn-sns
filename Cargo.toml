@@ -53,7 +53,6 @@ ic0 = "1.0.0"
 icrc-ledger-types = "0.1.6"
 k256 = "0.13.1"
 minicbor = { version = "1.0.0", features = ["alloc", "derive"] }
-
 proc-macro2 = "1.0.78"
 quote = "1.0.33"
 rmp-serde = "1.1.2"

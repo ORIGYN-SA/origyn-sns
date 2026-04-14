@@ -27,6 +27,8 @@ pub struct PaymentProcessor {
     pub active_rounds: BTreeMap<TokenSymbol, PaymentRound>,
     /// Holds active 5y PaymentRounds that are being processed
     pub active_rounds_5y: BTreeMap<TokenSymbol, PaymentRound>,
+    /// The next unique ID to be assigned to a payment round
+    pub next_key: u16,
 }
 
 fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
@@ -46,6 +48,7 @@ impl Default for PaymentProcessor {
             round_history: init_map(),
             active_rounds: BTreeMap::new(),
             active_rounds_5y: BTreeMap::new(),
+            next_key: 1,
         }
     }
 }
@@ -71,25 +74,21 @@ impl PaymentProcessor {
         }
     }
 
-    // gets the last key of the last completed payment round and circles from 1 - u16::MAX - each cycle is 125 years.
-    pub fn next_key(&self) -> u16 {
-        let mut max_key = 0;
-        for (entry) in self.round_history.iter() {
-            let (_, id) = entry.key();
-            if *id > max_key {
-                max_key = *id;
-            }
-        }
-
-        if max_key == u16::MAX {
-            1
+    /// Increments the internal key counter and handles the u16 wrap-around logic.
+    fn increment_next_key(&mut self) {
+        if self.next_key == u16::MAX {
+            self.next_key = 1;
         } else {
-            max_key + 1
+            self.next_key += 1;
         }
     }
-
+    
     pub fn add_active_payment_round(&mut self, flow: NeuronFlow, round: PaymentRound) {
+        // Insert into the appropriate active map
         self.rounds_mut(flow).insert(round.token, round);
+        
+        // Increment the key for the next round
+        self.increment_next_key();
     }
 
     pub fn get_active_rounds(&self, flow: NeuronFlow) -> Vec<PaymentRound> {
@@ -148,6 +147,11 @@ impl PaymentProcessor {
     }
 
     pub fn add_to_history(&mut self, payment_round: PaymentRound) {
+        // NOTE: Ensure that if we add something to history, the next_key stays ahead of the ID we just added
+        if payment_round.id >= self.next_key {
+            self.next_key = if payment_round.id == u16::MAX { 1 } else { payment_round.id + 1 };
+        }
+
         self.round_history
             .insert((payment_round.token, payment_round.id), payment_round);
     }
@@ -182,8 +186,6 @@ mod tests {
     use types::TokenSymbol;
 
     use crate::state::{init_state, mutate_state, read_state, RuntimeState};
-
-    use super::NeuronFlow;
 
     fn init_runtime_state() {
         init_state(RuntimeState::default());
@@ -226,7 +228,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 2);
+            assert_eq!(s.data.payment_processor.next_key, 2);
         });
 
         mutate_state(|s| {
@@ -245,7 +247,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 3);
+            assert_eq!(s.data.payment_processor.next_key, 3);
         });
 
         mutate_state(|s| {
@@ -278,7 +280,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 4);
+            assert_eq!(s.data.payment_processor.next_key, 4);
         });
 
         mutate_state(|s| {
@@ -297,7 +299,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 5);
+            assert_eq!(s.data.payment_processor.next_key, 5);
         });
     }
 
@@ -340,7 +342,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 3);
+            assert_eq!(s.data.payment_processor.next_key, 3);
         });
 
         mutate_state(|s| {
@@ -374,7 +376,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 4);
+            assert_eq!(s.data.payment_processor.next_key, 4);
         });
 
         mutate_state(|s| {
@@ -421,7 +423,7 @@ mod tests {
         });
 
         read_state(|s| {
-            assert_eq!(s.data.payment_processor.next_key(), 5);
+            assert_eq!(s.data.payment_processor.next_key, 5);
         });
     }
 }
