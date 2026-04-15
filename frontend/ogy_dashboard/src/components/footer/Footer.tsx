@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom";
+import BrandLogo from "@components/brand/BrandLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-charcoal text-white">
-      <div className="max-w-[1440px] mx-auto py-16 px-4 bg-charcoal text-white">
+    <footer className="bg-gradient-to-b from-charcoal via-[#2F2F2D] via-40% to-[#2F2F2D] text-white -mt-4">
+      <div className="max-w-[1440px] mx-auto py-16 px-4">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-10 text-center xl:text-left">
           <div className="mx-auto xl:mx-0">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
-              <span className="self-center text-xl font-semibold whitespace-nowrap">
-                OGY Dashboard
-              </span>
-            </Link>
+            <BrandLogo />
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-3">OGY Dashboard</h3>
-            <ul className="grid gap-4">
+            <h3 className="text-[16px] font-bold leading-none mb-3">OGY Dashboard</h3>
+            <ul className="grid gap-[2px] text-[13px] font-light [&_a:hover]:underline">
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -43,10 +39,10 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-3">
+            <h3 className="text-[16px] font-bold leading-none mb-3">
               Learn more about OGY Tokenomics & ORIGYN
             </h3>
-            <ul className="grid gap-4">
+            <ul className="grid gap-[2px] text-[13px] font-light [&_a:hover]:underline">
               <li>
                 <a
                   href="/Tokenomics_V3.pdf"
@@ -104,8 +100,8 @@ const Footer = () => {
             </ul>
           </div>
           <div className="justify-self-center">
-            <h3 className="text-lg font-semibold mb-3">Support</h3>
-            <ul className="grid gap-4">
+            <h3 className="text-[16px] font-bold leading-none mb-3">Support</h3>
+            <ul className="grid gap-[2px] text-[13px] font-light [&_a:hover]:underline">
               <li>
                 <a
                   href="https://twitter.com/ORIGYNTech"
@@ -152,8 +148,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="rounded-xl bg-surface-2 mt-16 p-8 text-content/60 text-xs text-center">
-          ORIGYN Foundation shall not be held liable for any loss, theft, or
+        <div className="rounded-2xl bg-[#222526] mt-10 py-4 px-10 text-[#E1E1E1] text-[10px] font-light leading-none text-center">
+          *ORIGYN Foundation shall not be held liable for any loss, theft, or
           misappropriation of OGY Tokens occurring in connection with the swap
           process.
           <br />

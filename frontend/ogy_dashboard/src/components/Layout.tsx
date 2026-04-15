@@ -35,7 +35,7 @@ const Layout = () => {
     >
       {SHOW_LEDGER_SWITCH_WARNING && <Warning />}
       <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
-      <div className="flex-grow w-full bg-background">
+      <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
         <div className="max-w-[1440px] mx-auto">
           {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
         </div>

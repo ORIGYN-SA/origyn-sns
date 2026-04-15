@@ -4,6 +4,7 @@ import { useWallet } from "@amerej/artemis-react";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
+import BrandLogo from "@components/brand/BrandLogo";
 import AccountOverview from "@components/account/overview/AccountOverview";
 import { Tile, Skeleton } from "@components/ui";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
@@ -45,13 +46,8 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
         } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-[1440px] mx-auto px-6">
-          <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
-              <span className="self-center font-bold text-[20px] leading-none tracking-[-0.03em] text-[#222526] whitespace-nowrap hidden sm:block">
-                OGY Dashboard
-              </span>
-            </Link>
+          <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center text-[#222526]">
+            <BrandLogo labelClassName="hidden sm:block" />
           </div>
           <div className="hidden xl:block justify-self-center col-start-2 col-end-5 h-full">
             <div className="flex items-stretch space-x-12 h-full">
@@ -165,12 +161,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                     <div className="bg-background w-full px-8 py-5">
                       <div className="flex flex-col items-center px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <div className="flex items-center justify-between w-full mb-4">
-                          <Link to="/" className="flex items-center pr-4">
-                            <img src="/ogy_logo.svg" alt="OGY Dashboard Logo" />
-                            <span className="self-center text-xl font-semibold whitespace-nowrap">
-                              OGY Dashboard
-                            </span>
-                          </Link>
+                          <BrandLogo className="pr-4" />
                           <button
                             onClick={() => setShowMenu(!showMenu)}
                             type="button"
