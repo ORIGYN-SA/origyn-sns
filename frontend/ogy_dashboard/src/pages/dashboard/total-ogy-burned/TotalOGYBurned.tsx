@@ -1,6 +1,7 @@
 import { useState } from "react";
-import AreaChart from "@components/charts/area/Area";
+import AreaChart from "@components/charts/shadcn/AreaChart";
 import { Card, TooltipInfo } from "@components/ui";
+import Skeleton from "@components/ui/SkeletonShadcn";
 import { CardHeader, PeriodSelect, Stat } from "@components/dashboard";
 import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 
@@ -10,11 +11,9 @@ const SELECT_PERIOD_OPTIONS = [
   { value: "yearly", label: "Yearly" },
 ];
 
-const CHART_FILL = "#34d399";
-
 const TotalOGYBurned = ({ className }: { className?: string }) => {
-  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
-  const { data } = useTotalOGYBurned({ period: selectedPeriod });
+  const [selectedPeriod, setSelectedPeriod] = useState("yearly");
+  const { data, isLoading } = useTotalOGYBurned({ period: selectedPeriod });
 
   return (
     <Card className={`flex flex-col ${className}`}>
@@ -37,7 +36,11 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
           </TooltipInfo>
         }
         subtitle={
-          <Stat iconSrc="/ogy_logo.svg" value={data.totalBurned} unit="OGY" />
+          isLoading ? (
+            <Skeleton className="h-7 w-40" />
+          ) : (
+            <Stat iconSrc="/ogy_logo.svg" value={data.totalBurned} unit="OGY" />
+          )
         }
         right={
           <PeriodSelect
@@ -48,7 +51,16 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
         }
       />
       <div className="mt-4 flex-1 min-h-72 w-full rounded-xl">
-        <AreaChart data={data.dataPieChart} fill={CHART_FILL} />
+        {isLoading ? (
+          <Skeleton className="h-full w-full" />
+        ) : (
+          <AreaChart
+            data={data.dataPieChart}
+            color="#34d399"
+            label="Total Burned"
+            className="h-full w-full"
+          />
+        )}
       </div>
     </Card>
   );
