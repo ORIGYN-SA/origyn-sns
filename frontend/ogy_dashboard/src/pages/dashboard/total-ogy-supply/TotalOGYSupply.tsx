@@ -1,6 +1,7 @@
 import { useState } from "react";
-import AreaChart from "@components/charts/area/Area";
+import TotalSupplyAreaChart from "@components/charts/shadcn/TotalSupplyAreaChart";
 import { Card, TooltipInfo } from "@components/ui";
+import Skeleton from "@components/ui/SkeletonShadcn";
 import { CardHeader, PeriodSelect, Stat } from "@components/dashboard";
 import useTotalOGYSupply from "@hooks/metrics/useTotalOGYSupply";
 
@@ -11,11 +12,9 @@ const SELECT_PERIOD_OPTIONS = [
   { value: "yearly", label: "Yearly" },
 ];
 
-const CHART_FILL = "#38bdf8";
-
 const TotalOGYSupply = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
-  const { data } = useTotalOGYSupply({ period: selectedPeriod });
+  const { data, isLoading } = useTotalOGYSupply({ period: selectedPeriod });
 
   return (
     <Card className={`flex flex-col ${className}`}>
@@ -37,7 +36,11 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
           </TooltipInfo>
         }
         subtitle={
-          <Stat iconSrc="/ogy_logo.svg" value={data.totalSupply} unit="OGY" />
+          isLoading ? (
+            <Skeleton className="h-7 w-40" />
+          ) : (
+            <Stat iconSrc="/ogy_logo.svg" value={data.totalSupply} unit="OGY" />
+          )
         }
         right={
           <PeriodSelect
@@ -48,7 +51,11 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
         }
       />
       <div className="mt-4 flex-1 min-h-72 w-full rounded-xl">
-        <AreaChart data={data.dataPieChart} fill={CHART_FILL} />
+        {isLoading ? (
+          <Skeleton className="h-full w-full" />
+        ) : (
+          <TotalSupplyAreaChart data={data.dataPieChart} className="h-full w-full" />
+        )}
       </div>
     </Card>
   );
