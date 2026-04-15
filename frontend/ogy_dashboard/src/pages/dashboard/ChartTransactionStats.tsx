@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Card, Select } from "@components/ui";
+import { Card } from "@components/ui";
+import { PeriodSelect } from "@components/dashboard";
 import useGetTransactionStats from "@hooks/transactions/useGetTransactionStats";
 import {
   Loader as ChartLoader,
@@ -31,11 +32,10 @@ const ChartTransactionStats = ({
     <Card className={className} {...restProps}>
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold mr-2">Transaction Statistics</h2>
-        <Select
+        <PeriodSelect
           options={SELECT_PERIOD_OPTIONS}
           value={selectedPeriod}
-          handleOnChange={(value) => handleOnChangePeriod(value as string)}
-          className="w-25"
+          onChange={handleOnChangePeriod}
         />
       </div>
       {isLoading && <ChartLoader />}

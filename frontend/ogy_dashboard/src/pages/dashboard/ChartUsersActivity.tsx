@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Card, TooltipInfo, Select } from "@components/ui";
+import { Card, TooltipInfo } from "@components/ui";
+import { PeriodSelect } from "@components/dashboard";
 import {
   Loader as ChartLoader,
   Error as ChartError,
@@ -47,11 +48,10 @@ const ChartUsersActivity = ({
         <div className="flex items-center">
           <h2 className="text-lg font-semibold mr-2">Users Overview</h2>
         </div>
-        <Select
+        <PeriodSelect
           options={SELECT_PERIOD_OPTIONS}
           value={selectedPeriod}
-          handleOnChange={(value) => handleOnChangePeriod(value as string)}
-          className="w-25"
+          onChange={handleOnChangePeriod}
         />
       </div>
       {(isLoading || isLoadingFetchActiveUsers) && <ChartLoader />}
