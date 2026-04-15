@@ -22,7 +22,7 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
     isError,
     error,
   }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
-    queryKey: ["totalTokensStakes"],
+    queryKey: ["totalTokensStakes", start],
     queryFn: () =>
       fetchStakeHistory({
         start,
