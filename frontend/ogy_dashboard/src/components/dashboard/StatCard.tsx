@@ -1,16 +1,18 @@
 import { FC, ReactNode } from "react";
 import clsx from "clsx";
 import { Card } from "@components/ui";
+import Skeleton from "@components/ui/SkeletonShadcn";
 
 type StatCardProps = {
-  title: ReactNode;
-  value: ReactNode;
+  title?: ReactNode;
+  value?: ReactNode;
   unit?: ReactNode;
   accessory?: ReactNode;
   tooltip?: ReactNode;
   underlineColor?: string;
   underlineClassName?: string;
   active?: boolean;
+  loading?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   className?: string;
@@ -25,11 +27,21 @@ const StatCard: FC<StatCardProps> = ({
   underlineColor,
   underlineClassName,
   active = false,
+  loading = false,
   onMouseEnter,
   onMouseLeave,
   className,
 }) => {
   const interactive = Boolean(onMouseEnter || onMouseLeave);
+
+  const renderedAccessory = loading ? (
+    <Skeleton className="h-8 w-8 rounded-full" />
+  ) : (
+    accessory
+  );
+  const renderedTitle = loading ? <Skeleton className="h-5 w-48" /> : title;
+  const renderedValue = loading ? <Skeleton className="h-7 w-32" /> : value;
+
   return (
     <Card
       className={clsx(
@@ -44,16 +56,18 @@ const StatCard: FC<StatCardProps> = ({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center text-lg font-semibold">
-          {accessory}
-          <span className={clsx(accessory && "ml-2", "text-content/60")}>
-            {title}
+          {renderedAccessory}
+          <span
+            className={clsx(renderedAccessory && "ml-2", "text-content/60")}
+          >
+            {renderedTitle}
           </span>
         </div>
-        {tooltip}
+        {!loading && tooltip}
       </div>
       <div className="flex items-center mt-4 text-2xl font-semibold">
-        <span className="mr-3">{value}</span>
-        {unit && <span className="text-content/60">{unit}</span>}
+        <span className="mr-3">{renderedValue}</span>
+        {!loading && unit && <span className="text-content/60">{unit}</span>}
       </div>
       <Card.BorderBottom color={underlineColor} className={underlineClassName} />
     </Card>

@@ -36,11 +36,12 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
           </TooltipInfo>
         }
         subtitle={
-          isLoading ? (
-            <Skeleton className="h-7 w-40" />
-          ) : (
-            <Stat iconSrc="/ogy_logo.svg" value={data.totalBurned} unit="OGY" />
-          )
+          <Stat
+            iconSrc="/ogy_logo.svg"
+            value={data.totalBurned}
+            unit="OGY"
+            loading={isLoading}
+          />
         }
         right={
           <PeriodSelect
@@ -52,7 +53,7 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
       />
       <div className="mt-4 flex-1 min-h-72 w-full rounded-xl">
         {isLoading ? (
-          <Skeleton className="h-full w-full" />
+          <Skeleton className="aspect-video w-full" />
         ) : (
           <AreaChart
             data={data.dataPieChart}

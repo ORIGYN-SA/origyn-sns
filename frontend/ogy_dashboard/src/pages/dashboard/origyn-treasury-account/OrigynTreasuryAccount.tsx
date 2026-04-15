@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
+import { Card, TooltipInfo } from "@components/ui";
 import { StatCard } from "@components/dashboard";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
@@ -101,14 +101,23 @@ const OrigynTreasuryAccount = ({
     }
   }, [isSuccessBalanceICP, isSuccessBalanceOGY, balanceICP, balanceOGY]);
 
+  const isLoading = isLoadingBalanceICP || isLoadingBalanceOGY;
+  const isError = isErrorBalanceICP || isErrorBalanceOGY;
+
   return (
     <Card className={`${className}`} {...restProps}>
       <div className="text-lg font-semibold">ORIGYN Treasury Account (OTA)</div>
-      {isSuccessBalanceICP && isSuccessBalanceOGY && (
+      {isError && (
+        <div className="flex items-center justify-center h-36 text-red-500 font-semibold">
+          <div>Network error: Unable to fetch OGY treasury account data</div>
+        </div>
+      )}
+      {!isError && (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
           {data.map(({ value, token, className, logo, tooltip }) => (
             <StatCard
               key={token}
+              loading={isLoading}
               title={`Network Revenue (${token})`}
               value={value}
               unit={token}
@@ -121,16 +130,6 @@ const OrigynTreasuryAccount = ({
               underlineClassName={className}
             />
           ))}
-        </div>
-      )}
-      {(isLoadingBalanceICP || isLoadingBalanceOGY) && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
-        </div>
-      )}
-      {(isErrorBalanceICP || isErrorBalanceOGY) && (
-        <div className="flex items-center justify-center h-36 text-red-500 font-semibold">
-          <div>Network error: Unable to fetch OGY treasury account data</div>
         </div>
       )}
     </Card>
