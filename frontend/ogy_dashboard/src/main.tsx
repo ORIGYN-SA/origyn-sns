@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import App from "./App.tsx";
 import { colors as themeColors } from "@theme/preset";
 import { Provider as AuthProvider } from "@amerej/artemis-react";
+import { TooltipProvider } from "@components/ui/tooltip/TooltipPrimitive";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +30,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     />
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <TooltipProvider delayDuration={200}>
+          <App />
+        </TooltipProvider>
       </QueryClientProvider>
     </AuthProvider>
   </>
