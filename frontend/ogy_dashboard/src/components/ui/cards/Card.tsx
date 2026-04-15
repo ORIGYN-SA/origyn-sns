@@ -1,9 +1,4 @@
 import { FC, PropsWithChildren, HTMLAttributes } from "react";
-import styled from "styled-components";
-
-const StyledBorderBottom = styled.div`
-  background-color: ${({ color }) => color};
-`;
 
 interface CardProps extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {
   className?: string;
@@ -31,10 +26,10 @@ const Card: FC<CardProps> & { BorderBottom: FC<BorderBottomProps> } = ({
 
 Card.BorderBottom = ({ className, color }: BorderBottomProps) => {
   return (
-    <StyledBorderBottom
-      color={color}
-      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-11/12 rounded-full ${className}`}
-    ></StyledBorderBottom>
+    <div
+      style={color ? { backgroundColor: color } : undefined}
+      className={`absolute bottom-0 left-6 right-6 h-0.5 rounded-full ${className ?? ""}`}
+    />
   );
 };
 
