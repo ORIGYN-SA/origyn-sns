@@ -57,8 +57,6 @@ export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
           className={clsx(
             "flex aspect-video justify-center text-xs",
             "[&_.recharts-cartesian-axis-tick_text]:fill-content/60",
-            "[&_.recharts-cartesian-grid_line]:stroke-content/10",
-            "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-content/20",
             "[&_.recharts-surface]:outline-none",
             className
           )}
@@ -110,13 +108,13 @@ export const ChartTooltipContent = ({
   if (!active || !payload?.length) return null;
 
   return (
-    <div className="rounded-[10px] border border-[#E1E1E1] bg-[#F9FAFE] px-3 py-2 text-xs text-muted shadow-md">
+    <div className="rounded-[100px] bg-white p-[15px] text-xs text-muted shadow-[0_4px_30px_0_#0000001A] flex flex-col gap-[5px]">
       {!hideLabel && label !== undefined && (
-        <div className="mb-1 font-semibold text-[13px] leading-none text-muted">
+        <div className="font-semibold text-[13px] leading-none text-muted">
           {labelFormatter ? labelFormatter(label) : label}
         </div>
       )}
-      <div className="flex flex-col gap-1 font-light text-[12px] leading-[16px] text-muted">
+      <div className="flex flex-col gap-[5px] font-light text-[12px] leading-[16px] text-muted">
         {payload.map((item, i) => {
           const key = item.dataKey;
           const cfg = config[key];

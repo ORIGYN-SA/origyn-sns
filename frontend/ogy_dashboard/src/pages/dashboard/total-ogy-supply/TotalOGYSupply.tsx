@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TotalSupplyAreaChart from "@components/charts/shadcn/TotalSupplyAreaChart";
+import AreaChart from "@components/charts/shadcn/AreaChart";
 import { Card, TooltipInfo } from "@components/ui";
 import Skeleton from "@components/ui/SkeletonShadcn";
 import { CardHeader, PeriodSelect, Stat } from "@components/dashboard";
@@ -54,7 +54,12 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
         {isLoading ? (
           <Skeleton className="h-full w-full" />
         ) : (
-          <TotalSupplyAreaChart data={data.dataPieChart} className="h-full w-full" />
+          <AreaChart
+            data={data.dataPieChart}
+            color="#38bdf8"
+            label="Total Supply"
+            className="h-full w-full"
+          />
         )}
       </div>
     </Card>
