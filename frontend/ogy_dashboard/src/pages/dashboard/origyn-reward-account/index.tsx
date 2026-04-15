@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { Card, LoaderSpin, TooltipInfo, Button } from "@components/ui";
+import { StatCard } from "@components/dashboard";
 import useFetchOGYRewardAccount from "@hooks/accounts/useFetchOGYRewardAccount";
 import { Table } from "@components/ui";
 
@@ -17,12 +18,12 @@ const OrigynTreasuryAccount = ({
       <div className="text-lg font-semibold">ORIGYN Reward Account (ORA)</div>
       {isSuccess && (
         <div className="grid grid-cols-1 gap-8 mt-8 pb-4">
-          <Card className="bg-surface-2/40 dark:bg-surface-2 h-36">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center text-lg font-semibold">
-                <img src="/ogy_logo.svg" alt="OGY Logo" />
-                <span className="ml-2 text-content/60">ORA Balance (OGY)</span>
-              </div>
+          <StatCard
+            title="ORA Balance (OGY)"
+            value={data.rewardAccountBalance}
+            unit="OGY"
+            accessory={<img src="/ogy_logo.svg" alt="OGY Logo" />}
+            tooltip={
               <TooltipInfo id="tooltip-ora-ogy" clickable={true}>
                 <p>
                   Token holders are able to stake their OGY and gain rewards by
@@ -45,13 +46,10 @@ const OrigynTreasuryAccount = ({
                   <Button className="my-4 mx-auto w-full">More details</Button>
                 </a>
               </TooltipInfo>
-            </div>
-            <div className="flex items-center mt-4 text-2xl font-semibold">
-              <span className="mr-3">{data.rewardAccountBalance}</span>
-              <span className="text-content/60">OGY</span>
-            </div>
-            <Card.BorderBottom className="bg-content" />
-          </Card>
+            }
+            underlineClassName="bg-content"
+            className="h-36"
+          />
           <div className="">
             <Table columns={data.rewardsPoolColumns} data={data.rewardsPool} />
           </div>

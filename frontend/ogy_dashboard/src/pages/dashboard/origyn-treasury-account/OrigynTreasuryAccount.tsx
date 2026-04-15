@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
+import { StatCard } from "@components/dashboard";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
@@ -104,28 +105,21 @@ const OrigynTreasuryAccount = ({
     <Card className={`${className}`} {...restProps}>
       <div className="text-lg font-semibold">ORIGYN Treasury Account (OTA)</div>
       {isSuccessBalanceICP && isSuccessBalanceOGY && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
           {data.map(({ value, token, className, logo, tooltip }) => (
-            <Card
-              className="bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8"
+            <StatCard
               key={token}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center text-lg font-semibold">
-                  <img src={logo} height={32} width={32} alt="Token logo" />
-                  <h2 className="ml-2 text-content/60">
-                    Network Revenue ({token})
-                  </h2>
-                </div>
+              title={`Network Revenue (${token})`}
+              value={value}
+              unit={token}
+              accessory={
+                <img src={logo} height={32} width={32} alt="Token logo" />
+              }
+              tooltip={
                 <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
-              </div>
-
-              <div className="flex items-center mt-4 text-2xl font-semibold">
-                <span className="mr-3">{value}</span>
-                <span className="text-content/60">{token}</span>
-              </div>
-              <Card.BorderBottom className={`${className}`} />
-            </Card>
+              }
+              underlineClassName={className}
+            />
           ))}
         </div>
       )}

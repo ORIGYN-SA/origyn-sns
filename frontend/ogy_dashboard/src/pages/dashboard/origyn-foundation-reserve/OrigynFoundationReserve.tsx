@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { Card, TooltipInfo, LoaderSpin } from "@components/ui";
+import { TooltipInfo, LoaderSpin } from "@components/ui";
+import { StatCard } from "@components/dashboard";
 import PieChart from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
 import useFoundationReserve from "@hooks/metrics/useFoundationReserve";
@@ -106,35 +107,30 @@ const OrigynFoundationReserve = ({
             </div>
           )}
           {isSuccess && foundationAssets && (
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 mt-8">
               {foundationAssets.dataPieChart.map(
                 ({ name, valueToString }, index) => (
-                  <Card
-                    className={`bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8 dark:hover:bg-white/10 hover:bg-black/5 ${
-                      activeIndex === index ? `dark:bg-white/10 bg-black/5` : ``
-                    } transition-opacity duration-300`}
+                  <StatCard
                     key={name}
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onMouseLeave={() => setActiveIndex(null)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-lg">
-                        <div
-                          className="h-3 w-3 rounded-full mr-2"
-                          style={{ backgroundColor: colors[index] }}
-                        ></div>
-                        <span className="text-content/60">{name}</span>
-                      </div>
+                    title={name}
+                    value={valueToString}
+                    unit="OGY"
+                    accessory={
+                      <div
+                        className="h-3 w-3 rounded-full"
+                        style={{ backgroundColor: colors[index] }}
+                      />
+                    }
+                    tooltip={
                       <TooltipInfo id={infos[index].id}>
                         {infos[index].value}
                       </TooltipInfo>
-                    </div>
-                    <div className="flex items-center mt-4 text-2xl font-semibold">
-                      <span className="mr-3">{valueToString}</span>
-                      <span className="text-content/60">OGY</span>
-                    </div>
-                    <Card.BorderBottom color={colors[index]} />
-                  </Card>
+                    }
+                    underlineColor={colors[index]}
+                    active={activeIndex === index}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onMouseLeave={() => setActiveIndex(null)}
+                  />
                 )
               )}
             </div>
