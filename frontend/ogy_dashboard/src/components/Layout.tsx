@@ -1,4 +1,4 @@
-import { ScrollRestoration, Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 
 import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/footer/Footer";
@@ -40,7 +40,6 @@ const Layout = () => {
           {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
         </div>
       </div>
-      <ScrollRestoration />
       <Footer />
     </div>
   );
