@@ -1,19 +1,15 @@
 import { useMemo } from "react";
-import { TooltipInfo, LoaderSpin } from "@components/ui";
-import { StatCard } from "@components/dashboard";
-import PieChart from "@components/charts/pie/Pie";
-import { usePieChart } from "@components/charts/pie/context";
+import { TooltipInfo } from "@components/ui";
+import { PieStatsCard } from "@components/dashboard";
 import useFoundationReserve from "@hooks/metrics/useFoundationReserve";
 
-type OrigynFoundationReserve = {
+type OrigynFoundationReserveProps = {
   className?: string;
 };
 
-const OrigynFoundationReserve = ({
-  className,
-  ...restProps
-}: OrigynFoundationReserve) => {
-  const colors = useMemo(() => ["#ff55c5", "#90306f"], []);
+const COLORS = ["#ff55c5", "#90306f"];
+
+const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) => {
   const infos = useMemo(
     () => [
       {
@@ -46,120 +42,33 @@ const OrigynFoundationReserve = ({
     ],
     []
   );
-  const { activeIndex, setActiveIndex } = usePieChart();
 
   const {
     data: foundationAssets,
-    isSuccess,
     isLoading,
     isError,
     error,
   } = useFoundationReserve();
 
   return (
-    <div
-      className={`relative bg-surface border border-border rounded-xl ${className}`}
-      {...restProps}
-    >
-      {isError && (
-        <div className="bg-rose-500 rounded-xl text-white font-bold mb-8 p-6">
-          {error?.message}
-        </div>
-      )}
-      <>
-        <div className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="text-lg font-semibold">OGY Foundation Reserve</div>
-            <TooltipInfo id="tooltip-amount-foundation">
-              Total amount of OGY tokens owned by ORIGYN foundation across all
-              wallets.
-            </TooltipInfo>
-          </div>
-
-          <div className="mt-6 h-72 rounded-xl">
-            {isSuccess && foundationAssets && (
-              <PieChart data={foundationAssets.dataPieChart} colors={colors} />
-            )}
-            {isSuccess && !foundationAssets && (
-              <div className="flex justify-center items-center h-full">
-                All good! But no data yet.
-              </div>
-            )}
-            {(isLoading || isError) && (
-              <LoaderSpin
-                size="lg"
-                className="flex justify-center items-center h-full "
-              />
-            )}
-          </div>
-          {isSuccess && foundationAssets && (
-            <div className="flex flex-col items-center my-4">
-              <h2 className="text-lg font-semibold text-content/60">
-                Total Foundation Supply
-              </h2>
-              <div className="mt-4 flex items-center text-2xl font-semibold">
-                <img src="/ogy_logo.svg" alt="OGY Logo" />
-                <span className="ml-2 mr-3">
-                  {foundationAssets.string.totalSupply}
-                </span>
-                <span className="text-content/60">OGY</span>
-              </div>
-            </div>
-          )}
-          {isSuccess && foundationAssets && (
-            <div className="grid grid-cols-1 gap-4 mt-8">
-              {foundationAssets.dataPieChart.map(
-                ({ name, valueToString }, index) => (
-                  <StatCard
-                    key={name}
-                    title={name}
-                    value={valueToString}
-                    unit="OGY"
-                    accessory={
-                      <div
-                        className="h-3 w-3 rounded-full"
-                        style={{ backgroundColor: colors[index] }}
-                      />
-                    }
-                    tooltip={
-                      <TooltipInfo id={infos[index].id}>
-                        {infos[index].value}
-                      </TooltipInfo>
-                    }
-                    underlineColor={colors[index]}
-                    active={activeIndex === index}
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onMouseLeave={() => setActiveIndex(null)}
-                  />
-                )
-              )}
-            </div>
-          )}
-        </div>
-        {/* {isSuccess && foundationAssets && (
-          <div className="mt-4 rounded-b-xl bg-candyFloss/5 p-6">
-            <div className="flex justify-center">
-              <Badge className="bg-candyFloss px-4">
-                <div className="text-white tracking-widest text-xs font-semibold uppercase">
-                  ORIGYN FOUNDATION LOCKED TOKENS
-                </div>
-              </Badge>
-            </div>
-            <div className="grid grid-cols-1 gap-4 text-center mt-4">
-              <div>
-                <span className="font-semibold text-sm text-content/60 mr-2">
-                  Staked tokens
-                </span>
-                <span className="mr-1 font-semibold">
-                  {foundationAssets.string.totalStaked}
-                </span>
-                <span className="text-content/60">OGY</span>
-              </div>
-            </div>
-          </div>
-        )} */}
-      </>
-    </div>
+    <PieStatsCard
+      className={className}
+      title="OGY Foundation Reserve"
+      titleTooltip={
+        <TooltipInfo id="tooltip-amount-foundation">
+          Total amount of OGY tokens owned by ORIGYN foundation across all
+          wallets.
+        </TooltipInfo>
+      }
+      data={foundationAssets?.dataPieChart}
+      colors={COLORS}
+      infos={infos}
+      totalLabel="Total Foundation Supply"
+      totalValue={foundationAssets?.string.totalSupply}
+      isLoading={isLoading}
+      isError={isError}
+      errorMessage={error?.message}
+    />
   );
 };
 
