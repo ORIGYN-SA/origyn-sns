@@ -3,6 +3,7 @@ import { Card, TooltipInfo } from "@components/ui";
 import Skeleton from "@components/ui/SkeletonShadcn";
 import PieChart, { PieChartData } from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
+import Stat from "./Stat";
 import StatCard from "./StatCard";
 
 type SegmentInfo = {
@@ -62,27 +63,26 @@ const PieStatsCard = ({
           </div>
         )}
       </div>
-      <div className="flex flex-col items-center my-4">
-        <h2 className="text-lg font-semibold text-content/60">{totalLabel}</h2>
-        <div className="mt-4 flex items-center text-2xl font-semibold">
-          {isLoading ? (
-            <>
-              <Skeleton className="h-8 w-8 rounded-full" />
-              <Skeleton className="ml-2 h-7 w-40" />
-              <Skeleton className="ml-3 h-7 w-10" />
-            </>
-          ) : totalValue ? (
-            <>
-              <img src="/ogy_logo.svg" alt="OGY Logo" />
-              <span className="ml-2 mr-3">{totalValue}</span>
-              <span className="text-content/60">OGY</span>
-            </>
-          ) : null}
-        </div>
+      <div className="flex flex-col items-center gap-4 my-4">
+        <h2 className="font-semibold text-[16px] leading-none text-muted">
+          {totalLabel}
+        </h2>
+        <Stat
+          iconSrc="/ogy_logo.svg"
+          value={totalValue}
+          unit="OGY"
+          loading={isLoading}
+        />
       </div>
       <div className="grid grid-cols-1 gap-4 mt-8">
         {isLoading
-          ? infos.map((info) => <StatCard key={info.id} loading />)
+          ? infos.map((info, index) => (
+              <StatCard
+                key={info.id}
+                loading
+                underlineColor={colors[index]}
+              />
+            ))
           : hasData &&
             data.map(({ name, valueToString }, index) => (
               <StatCard
@@ -92,7 +92,7 @@ const PieStatsCard = ({
                 unit="OGY"
                 accessory={
                   <div
-                    className="h-3 w-3 rounded-full"
+                    className="h-2 w-2 rounded-full"
                     style={{ backgroundColor: colors[index] }}
                   />
                 }

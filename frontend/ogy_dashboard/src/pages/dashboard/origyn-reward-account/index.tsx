@@ -19,10 +19,9 @@ const OrigynTreasuryAccount = ({
       {isSuccess && (
         <div className="grid grid-cols-1 gap-8 mt-8 pb-4">
           <StatCard
-            title="ORA Balance (OGY)"
+            title="ORA Balance"
             value={data.rewardAccountBalance}
             unit="OGY"
-            accessory={<img src="/ogy_logo.svg" alt="OGY Logo" />}
             tooltip={
               <TooltipInfo id="tooltip-ora-ogy" clickable={true}>
                 <p>
@@ -48,7 +47,6 @@ const OrigynTreasuryAccount = ({
               </TooltipInfo>
             }
             underlineClassName="bg-content"
-            className="h-36"
           />
           <div className="">
             <Table columns={data.rewardsPoolColumns} data={data.rewardsPool} />

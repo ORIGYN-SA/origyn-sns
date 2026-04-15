@@ -122,7 +122,11 @@ const OrigynTreasuryAccount = ({
               value={value}
               unit={token}
               accessory={
-                <img src={logo} height={32} width={32} alt="Token logo" />
+                <img
+                  src={logo}
+                  alt="Token logo"
+                  className="h-4 w-4 object-contain"
+                />
               }
               tooltip={
                 <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>

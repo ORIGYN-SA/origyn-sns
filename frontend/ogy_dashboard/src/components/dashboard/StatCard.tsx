@@ -2,11 +2,12 @@ import { FC, ReactNode } from "react";
 import clsx from "clsx";
 import { Card } from "@components/ui";
 import Skeleton from "@components/ui/SkeletonShadcn";
+import Stat from "./Stat";
 
 type StatCardProps = {
   title?: ReactNode;
-  value?: ReactNode;
-  unit?: ReactNode;
+  value?: string;
+  unit?: string;
   accessory?: ReactNode;
   tooltip?: ReactNode;
   underlineColor?: string;
@@ -40,7 +41,6 @@ const StatCard: FC<StatCardProps> = ({
     accessory
   );
   const renderedTitle = loading ? <Skeleton className="h-5 w-48" /> : title;
-  const renderedValue = loading ? <Skeleton className="h-7 w-32" /> : value;
 
   return (
     <Card
@@ -55,19 +55,23 @@ const StatCard: FC<StatCardProps> = ({
       onMouseLeave={onMouseLeave}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center text-lg font-semibold">
+        <div className="flex items-center text-[16px] font-medium leading-none">
           {renderedAccessory}
           <span
-            className={clsx(renderedAccessory && "ml-2", "text-content/60")}
+            className={clsx(renderedAccessory && "ml-2", "text-[#69737C]")}
           >
             {renderedTitle}
           </span>
         </div>
         {!loading && tooltip}
       </div>
-      <div className="flex items-center mt-4 text-2xl font-semibold">
-        <span className="mr-3">{renderedValue}</span>
-        {!loading && unit && <span className="text-content/60">{unit}</span>}
+      <div className="mt-4">
+        <Stat
+          value={value}
+          unit={unit}
+          unitClassName="ml-1 font-light text-[16px] leading-6"
+          loading={loading}
+        />
       </div>
       <Card.BorderBottom color={underlineColor} className={underlineClassName} />
     </Card>
