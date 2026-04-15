@@ -3,3 +3,5 @@ export { default as PeriodSelect } from "./PeriodSelect";
 export { default as Stat } from "./Stat";
 export { default as StatCard } from "./StatCard";
 export { default as PieStatsCard } from "./PieStatsCard";
+export { default as ChartStatsCard } from "./ChartStatsCard";
+export { default as AreaStatCard } from "./AreaStatCard";

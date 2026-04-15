@@ -1,8 +1,5 @@
 import { useState } from "react";
-import AreaChart from "@components/charts/shadcn/AreaChart";
-import { Card, TooltipInfo } from "@components/ui";
-import Skeleton from "@components/ui/SkeletonShadcn";
-import { CardHeader, PeriodSelect, Stat } from "@components/dashboard";
+import { AreaStatCard } from "@components/dashboard";
 import useTotalOGYBurned from "@hooks/metrics/useTotalOGYBurned";
 
 const SELECT_PERIOD_OPTIONS = [
@@ -16,54 +13,32 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
   const { data, isLoading } = useTotalOGYBurned({ period: selectedPeriod });
 
   return (
-    <Card className={`flex flex-col ${className}`}>
-      <CardHeader
-        title="Total OGY Burned"
-        tooltip={
-          <TooltipInfo
-            id="tooltip-total-ogy-burned"
-            title="Total amount of OGY tokens burned."
-          >
-            <p>
-              These tokens have been burned completely and are no longer
-              available.
-            </p>
-            <p>
-              Tokens can be burned for different reasons for example
-              certificate minting fees, network utility fees or network
-              transactions fees.
-            </p>
-          </TooltipInfo>
-        }
-        subtitle={
-          <Stat
-            iconSrc="/ogy_logo.svg"
-            value={data.totalBurned}
-            unit="OGY"
-            loading={isLoading}
-          />
-        }
-        right={
-          <PeriodSelect
-            options={SELECT_PERIOD_OPTIONS}
-            value={selectedPeriod}
-            onChange={setSelectedPeriod}
-          />
-        }
-      />
-      <div className="mt-4 flex-1 min-h-72 w-full rounded-xl">
-        {isLoading ? (
-          <Skeleton className="aspect-video w-full" />
-        ) : (
-          <AreaChart
-            data={data.dataPieChart}
-            color="#34d399"
-            label="Total Burned"
-            className="h-full w-full"
-          />
-        )}
-      </div>
-    </Card>
+    <AreaStatCard
+      className={className}
+      title="Total OGY Burned"
+      tooltipId="tooltip-total-ogy-burned"
+      tooltipTitle="Total amount of OGY tokens burned."
+      tooltipContent={
+        <>
+          <p>
+            These tokens have been burned completely and are no longer
+            available.
+          </p>
+          <p>
+            Tokens can be burned for different reasons for example certificate
+            minting fees, network utility fees or network transactions fees.
+          </p>
+        </>
+      }
+      value={data.totalBurned}
+      periodOptions={SELECT_PERIOD_OPTIONS}
+      period={selectedPeriod}
+      onPeriodChange={setSelectedPeriod}
+      chartData={data.dataPieChart}
+      chartColor="#34d399"
+      chartLabel="Total Burned"
+      loading={isLoading}
+    />
   );
 };
 
