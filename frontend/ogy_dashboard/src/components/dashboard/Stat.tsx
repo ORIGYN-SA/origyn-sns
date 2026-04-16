@@ -35,11 +35,11 @@ const Stat = ({
         />
       ))}
     <span className="font-bold text-[28px] leading-none truncate min-w-0">
-      {loading ? <span className={`${SKEL} w-40`}>&nbsp;</span> : value}
+      {loading ? <span className={`${SKEL} w-40 h-[28px]`} /> : value}
     </span>
     {(unit || loading) && (
       <span className={`text-muted shrink-0 ${unitClassName}`}>
-        {loading ? <span className={`${SKEL} w-10`}>&nbsp;</span> : unit}
+        {loading ? <span className={`${SKEL} w-10 h-4`} /> : unit}
       </span>
     )}
   </div>

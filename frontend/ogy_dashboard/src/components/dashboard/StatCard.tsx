@@ -35,12 +35,16 @@ const StatCard: FC<StatCardProps> = ({
 }) => {
   const interactive = Boolean(onMouseEnter || onMouseLeave);
 
-  const renderedAccessory = loading ? (
-    <Skeleton className="h-8 w-8 rounded-full" />
+  const renderedAccessory = loading && accessory ? (
+    <Skeleton className="h-4 w-4 rounded-full" />
   ) : (
     accessory
   );
-  const renderedTitle = loading ? <Skeleton className="h-5 w-48" /> : title;
+  const renderedTitle = loading ? (
+    <Skeleton className="h-[16px] w-32 leading-none" />
+  ) : (
+    title
+  );
 
   return (
     <Card
