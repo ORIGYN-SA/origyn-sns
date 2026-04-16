@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { Button } from "@components/ui";
 import {
-  ArrowTopRightOnSquareIcon,
-  HandThumbUpIcon,
-  CheckBadgeIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
-import { Card, Button } from "@components/ui";
+  StakeVoteIcon,
+  EarnRewardsIcon,
+  GovernCollectivelyIcon,
+} from "@components/ui/icons";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
 import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
@@ -37,19 +37,19 @@ export const Governance = () => {
         title: "Stake & Vote",
         description:
           "Influence the ORIGYN Network by staking OGY & voting on proposals.",
-        icon: <HandThumbUpIcon className="h-8 w-8" />,
+        icon: <StakeVoteIcon />,
       },
       {
         title: "Earn Rewards",
         description:
           "Participate in the decision-making process to earn rewards.",
-        icon: <CheckBadgeIcon className="h-8 w-8" />,
+        icon: <EarnRewardsIcon />,
       },
       {
         title: "Govern Collectively",
         description:
           "Engage & influence the network as a collaborative ecosystem.",
-        icon: <StarIcon className="h-8 w-8" />,
+        icon: <GovernCollectivelyIcon />,
       },
     ],
     []
@@ -89,17 +89,22 @@ export const Governance = () => {
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-3 mt-16 gap-8">
         {governanceFeatures.map(({ title, description, icon }) => (
-          <Card key={title}>
-            <div className="flex">
-              <div className="shrink-0 w-16 h-16 flex items-center justify-center bg-surface-2 rounded-xl">
-                {icon}
+          <div
+            key={title}
+            className="flex items-center gap-[10px] bg-white/50 border border-[#E9EAF1] rounded-[16px] p-2 h-[88px]"
+          >
+            <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-[#F1F6F9] rounded-[16px] text-[#69737C] opacity-70">
+              {icon}
+            </div>
+            <div className="min-w-0">
+              <div className="font-medium text-[16px] leading-none text-[#69737C]">
+                {title}
               </div>
-              <div className="ml-8">
-                <div className="font-semibold">{title}</div>
-                <div className="text-content/60">{description}</div>
+              <div className="text-[#69737C] font-normal text-[13px] leading-none mt-1">
+                {description}
               </div>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-32 mb-12">
