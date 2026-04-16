@@ -120,7 +120,7 @@ const TokenDistributionList = ({
           <span>Governance Balance</span>
           <TooltipInfo
             id="governance-balance-staked-tokens-tooltip"
-            className="!text-white/90 translate-y-[2px]"
+            className="!text-white/90 xl:translate-y-[1px]"
           >
             Staked tokens
           </TooltipInfo>
@@ -170,7 +170,7 @@ const TokenDistributionList = ({
           <span>Governance Balance</span>
           <TooltipInfo
             id="governance-balance-staked-tokens-tooltip"
-            className="!text-white/90 translate-y-[2px]"
+            className="!text-white/90 xl:translate-y-[1px]"
           >
             Staked tokens
           </TooltipInfo>
@@ -194,7 +194,7 @@ const TokenDistributionList = ({
   ];
 
   const paginationFooter =
-    setPagination && pageCount > 1 ? (
+    setPagination ? (
       <div className="flex items-center justify-between text-sm">
         <div className="flex items-center gap-2 text-[#86858A]">
           <span>Lines per page</span>
