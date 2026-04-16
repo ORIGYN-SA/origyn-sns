@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useWallet } from "@amerej/artemis-react";
 import TotalOGYSupply from "@pages/dashboard/total-ogy-supply/TotalOGYSupply";
 import TotalOGYBurned from "@pages/dashboard/total-ogy-burned/TotalOGYBurned";
@@ -21,13 +22,26 @@ import { PieChartProvider } from "@components/charts/pie/context";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { isConnected } = useWallet();
+  const location = useLocation();
+  const scrollTarget = (location.state as { scrollTo?: string })?.scrollTo;
+
+  const scrollRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (!node || !scrollTarget || node.id !== scrollTarget) return;
+      setTimeout(() => {
+        node.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+      window.history.replaceState({}, "");
+    },
+    [scrollTarget]
+  );
 
   const handleClickAccount = () => {
     navigate("account");
   };
 
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="max-w-[1440px] mx-auto py-16 px-6">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center gap-2 px-16 py-8 max-w-[528px]">
           <Badge className="bg-spacePurple !py-0 px-[9px] text-white font-extrabold text-[10px] leading-[22px] tracking-[2px] uppercase">
@@ -114,6 +128,7 @@ const Dashboard = () => {
             <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
           </section> */}
           <section
+            ref={scrollRef}
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="ogy-token-distribution"
           >

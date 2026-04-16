@@ -33,7 +33,7 @@ const NewTable = <T,>({
             {columns.map((column, index) => (
               <th
                 key={column.id}
-                className={`py-5 text-left font-semibold ${
+                className={`py-5 text-left font-semibold whitespace-nowrap ${
                   index === 0 ? "pl-[70px]" : "pl-4"
                 } ${index === columns.length - 1 ? "pr-[70px]" : ""} ${
                   column.headerClassName ?? ""
