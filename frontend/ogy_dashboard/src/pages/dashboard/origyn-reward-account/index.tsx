@@ -1,25 +1,60 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { Card, TooltipInfo, Button } from "@components/ui";
 import { StatCard } from "@components/dashboard";
 import { TableSkeleton } from "@components/ui/NewTable";
 import useFetchOGYRewardAccount from "@hooks/accounts/useFetchOGYRewardAccount";
+import { RewardPool } from "@hooks/accounts/useFetchOGYRewardAccount";
 
-const FAKE_ORA_ROWS = Array.from({ length: 6 }, (_, i) => ({
+const FAKE_ORA_ROWS: RewardPool[] = Array.from({ length: 6 }, (_, i) => ({
   year: `${2024 + i * 2}`,
   reward_pool: "0 OGY",
 }));
 
+const ORATable = ({ rows }: { rows: RewardPool[] }) => (
+  <div className="border border-border rounded-[25px] overflow-hidden overflow-x-auto h-full">
+    <table className="min-w-full h-full border-separate border-spacing-0">
+      <tbody>
+        <tr className="bg-charcoal text-white">
+          <td className="py-5 xl:py-3 pl-[70px] xl:pl-[35px] pr-4 font-semibold text-left whitespace-nowrap">
+            <strong className="font-semibold">Year</strong>
+          </td>
+          {rows.map((item, i) => (
+            <td
+              key={item.year ?? i}
+              className="py-5 xl:py-3 px-4 text-left text-[#E1E1E1] whitespace-nowrap"
+            >
+              <span>{item.year}</span>
+            </td>
+          ))}
+        </tr>
+        <tr className="bg-white">
+          <td className="py-3 pl-[35px] pr-4 font-semibold text-left text-[#222526] whitespace-nowrap">
+            <strong className="font-semibold">Reward Pool</strong>
+          </td>
+          {rows.map((item, i) => (
+            <td
+              key={item.year ?? i}
+              className="py-5 xl:py-3 px-4 text-left text-[#69737C] whitespace-nowrap"
+            >
+              <span>{item.reward_pool}</span>
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
+
 const OrigynTreasuryAccount = ({
   className,
-  ...restProps
 }: {
   className?: string;
 }) => {
   const { data, isLoading, isError } = useFetchOGYRewardAccount();
 
+  const rows = isLoading ? FAKE_ORA_ROWS : data.rewardsPool.rows;
+
   return (
-    <Card className={`${className}`} {...restProps}>
+    <Card className={className}>
       <div className="text-charcoal text-[22px] font-semibold leading-none">
         ORIGYN Reward Account (ORA)
       </div>
@@ -29,7 +64,7 @@ const OrigynTreasuryAccount = ({
             className="xl:col-span-1"
             loading={isLoading}
             title="ORA Balance"
-            value={data?.rewardAccountBalance}
+            value={data.rewardAccountBalance}
             unit="OGY"
             tooltip={
               <TooltipInfo id="tooltip-ora-ogy" clickable={true}>
@@ -57,46 +92,15 @@ const OrigynTreasuryAccount = ({
             }
             underlineClassName="bg-content"
           />
-          {(() => {
-            const rows = isLoading ? FAKE_ORA_ROWS : data?.rewardsPool.rows ?? [];
-            const tableInner = (
-              <div className={`border border-border rounded-[25px] overflow-hidden overflow-x-auto h-full ${isLoading ? "" : "xl:col-span-3"}`}>
-                <table className="min-w-full h-full border-separate border-spacing-0">
-                  <tbody>
-                    <tr className="bg-charcoal text-white">
-                      <td className="py-5 xl:py-3 pl-[70px] xl:pl-[35px] pr-4 font-semibold text-left whitespace-nowrap">
-                        <strong className="font-semibold">Year</strong>
-                      </td>
-                      {rows.map((item, i) => (
-                        <td
-                          key={item.year ?? i}
-                          className="py-5 xl:py-3 px-4 text-left text-[#E1E1E1] whitespace-nowrap"
-                        >
-                          <span>{item.year}</span>
-                        </td>
-                      ))}
-                    </tr>
-                    <tr className="bg-white">
-                      <td className="py-3 pl-[35px] pr-4 font-semibold text-left text-[#222526] whitespace-nowrap">
-                        <strong className="font-semibold">Reward Pool</strong>
-                      </td>
-                      {rows.map((item, i) => (
-                        <td
-                          key={item.year ?? i}
-                          className="py-5 xl:py-3 px-4 text-left text-[#69737C] whitespace-nowrap"
-                        >
-                          <span>{item.reward_pool}</span>
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            );
-            return isLoading ? (
-              <TableSkeleton className="xl:col-span-3 h-full">{tableInner}</TableSkeleton>
-            ) : tableInner;
-          })()}
+          {isLoading ? (
+            <TableSkeleton className="xl:col-span-3 h-full">
+              <ORATable rows={rows} />
+            </TableSkeleton>
+          ) : (
+            <div className="xl:col-span-3">
+              <ORATable rows={rows} />
+            </div>
+          )}
         </div>
       )}
       <p className="mt-6 font-light text-[13px] leading-none text-[#69737C]">

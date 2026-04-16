@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import fetchTotalSupplyOGY, {
   TotalSupplyOGY,
@@ -23,11 +24,16 @@ const useTotalOGYSupply = ({ period }: { period: string }) => {
     fetchTotalSupplyOGYTimeSeries({ period })
   );
 
-  return {
-    data: {
+  const data = useMemo(
+    () => ({
       totalSupply: dataTotalSupply?.totalSupplyOGYToString ?? "0",
       dataPieChart: dataTotalSupplyTimeSeries?.totalSupplyOGYTimeSeries ?? [],
-    },
+    }),
+    [dataTotalSupply, dataTotalSupplyTimeSeries]
+  );
+
+  return {
+    data,
     isSuccess:
       isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries,
     isLoading:

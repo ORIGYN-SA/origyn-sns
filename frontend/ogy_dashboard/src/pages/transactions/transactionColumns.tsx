@@ -1,10 +1,20 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useState } from "react";
 import { NewTableColumn } from "@components/ui/NewTable";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import { DateTime } from "luxon";
+
+export type TransactionRow = {
+  index: number;
+  timestampRaw: number;
+  timestamp: string;
+  from_account: string;
+  to_account: string;
+  amount: string;
+  fee: string;
+  memo: string;
+  kind: string;
+};
 
 const DateCell = ({ timestampRaw }: { timestampRaw: number }) => {
   const [showRelative, setShowRelative] = useState(false);
@@ -32,7 +42,7 @@ const KIND_COLORS: Record<string, string> = {
 
 export const getTransactionColumns = (
   navigate: (path: string) => void
-): NewTableColumn<any>[] => [
+): NewTableColumn<TransactionRow>[] => [
   {
     id: "index",
     header: "Index",
@@ -142,14 +152,17 @@ export const getTransactionColumns = (
   },
 ];
 
-const FAKE_ROW = {
+const FAKE_ROW: TransactionRow = {
   index: 100000,
   amount: "1000000000",
   kind: "transfer",
   timestampRaw: Date.now() * 1_000_000,
+  timestamp: "",
   from_account: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa",
   to_account: "bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbb",
+  fee: "",
+  memo: "",
 };
 
-export const buildSkeletonRows = (count: number) =>
-  Array.from({ length: count }, (_, i) => ({ ...FAKE_ROW, id: i }));
+export const buildSkeletonRows = (count: number): TransactionRow[] =>
+  Array.from({ length: count }, () => ({ ...FAKE_ROW }));

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { ChevronDownIcon } from "@components/ui/icons";
 
 type Option = { value: string; label: string };
 
@@ -13,23 +14,7 @@ const PeriodSelect = ({ options, value, onChange }: PeriodSelectProps) => {
   return (
     <div className="relative inline-flex items-center gap-2 rounded-full bg-white border border-[#E1E1E1] py-3 px-4 font-medium text-[13px] leading-none text-content">
       <span>{selected?.label ?? value}</span>
-      <svg
-        className="pointer-events-none shrink-0"
-        width="8"
-        height="8"
-        viewBox="0 0 8 8"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6.64 2.98328L4.46667 5.15661C4.21 5.41328 3.79 5.41328 3.53333 5.15661L1.36 2.98328"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeMiterlimit="10"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <ChevronDownIcon className="pointer-events-none shrink-0" />
       <select
         value={value}
         onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}

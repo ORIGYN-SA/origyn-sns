@@ -9,6 +9,9 @@ import fetchTotalBurnedOGYTimeSeries, {
 import { ChartData } from "@services/types/charts.types";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
+// OGY tokens burned before the on-chain tracking started (legacy ledger era).
+// Added to both the total and each time-series point so the chart reflects
+// the true cumulative burn from genesis.
 const BURN_OFFSET = 202420405.1;
 
 const useTotalOGYBurned = ({ period }: { period: string }) => {

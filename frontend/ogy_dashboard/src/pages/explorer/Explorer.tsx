@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { NewTable, TablePagination } from "@components/ui";
 import { TableSkeleton } from "@components/ui/NewTable";
 import { Search } from "@components/ui";
+import { ChevronRightIcon } from "@components/ui/icons";
 import { useSearchExplorer } from "@hooks/explorer";
 import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
 import {
@@ -33,7 +32,7 @@ export const Explorer = () => {
 
   const search = useSearchExplorer({ searchterm });
 
-  const { data, isSuccess, isLoading, isFetching } = useFetchAllTransactions({
+  const { data, isSuccess, isFetching } = useFetchAllTransactions({
     limit: pageSize,
     offset: pageSize * pageIndex,
     sorting: [{ id: "index", desc: sortDesc }],
@@ -119,9 +118,7 @@ export const Explorer = () => {
                 <span className="truncate text-sm font-medium text-[#222526]">
                   {search.data.value}
                 </span>
-                <svg className="shrink-0 ml-auto" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M6 4L10 8L6 12" stroke="#69737C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ChevronRightIcon className="shrink-0 ml-auto text-[#69737C]" />
               </button>
             ) : (
               <div className="h-10 flex items-center justify-center text-sm text-[#69737C]">

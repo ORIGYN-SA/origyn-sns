@@ -1,3 +1,5 @@
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "@components/ui/icons";
+
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 
 type PageItem = number | "ellipsis";
@@ -42,23 +44,7 @@ const TablePagination = ({
         <span>Lines per page</span>
         <div className="relative inline-flex items-center gap-[5px] rounded-full bg-white border border-[#E1E1E1] py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
           <span>{pageSize}</span>
-          <svg
-            className="pointer-events-none shrink-0"
-            width="8"
-            height="8"
-            viewBox="0 0 8 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.64 2.98328L4.46667 5.15661C4.21 5.41328 3.79 5.41328 3.53333 5.15661L1.36 2.98328"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronDownIcon className="pointer-events-none shrink-0" />
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange(Number(e.target.value))}
@@ -80,21 +66,7 @@ const TablePagination = ({
             aria-label="Previous page"
             className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-[#69737C] hover:bg-[#F1F6F9]"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 12L6 8L10 4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ChevronLeftIcon />
           </button>
         )}
         {pageItems.map((item, idx) =>
@@ -127,21 +99,7 @@ const TablePagination = ({
           aria-label="Next page"
           className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-[#69737C] hover:bg-[#F1F6F9] disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 4L10 8L6 12"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronRightIcon />
         </button>
       </div>
     </div>
