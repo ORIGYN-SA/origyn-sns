@@ -10,7 +10,10 @@ const TokenDistribution = ({
   className?: string;
 }) => {
   const navigate = useNavigate();
-  const [pagination] = usePagination({ pageIndex: 0, pageSize: 10 });
+  const [pagination, setPagination] = usePagination({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   const handleShowAllTokenDistribution = () => {
     navigate("/token-distribution");
@@ -18,16 +21,21 @@ const TokenDistribution = ({
 
   return (
     <Card className={`${className}`} {...restProps}>
-      <div className="flex items-center mb-8 gap-8">
-        <div className="text-lg font-semibold">Token Distribution</div>
+      <div className="flex items-center mb-8 gap-4">
+        <div className="text-charcoal text-[22px] font-semibold leading-none">
+          Token Distribution
+        </div>
         <Button
           onClick={handleShowAllTokenDistribution}
-          className="min-w-fit ml-auto md:ml-0"
+          className="min-w-fit ml-auto md:ml-0 !px-[25px] !py-0 text-[14px] leading-[40px]"
         >
           Show all
         </Button>
       </div>
-      <TokenDistributionList pagination={pagination} />
+      <TokenDistributionList
+        pagination={pagination}
+        setPagination={setPagination}
+      />
     </Card>
   );
 };

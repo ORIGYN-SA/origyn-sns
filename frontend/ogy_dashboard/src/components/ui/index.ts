@@ -2,6 +2,7 @@ import Card from "@components/ui/cards/Card";
 import Button from "@components/ui/Button";
 import Select from "@components/ui/Select";
 import Table from "@components/ui/Table";
+import NewTable from "@components/ui/NewTable";
 import Tooltip from "@components/ui/tooltip/Tooltip";
 import TooltipInfo from "@components/ui/tooltip/TooltipInfo";
 import Dialog from "@components/ui/Dialog";
@@ -18,6 +19,7 @@ export {
   Button,
   Select,
   Table,
+  NewTable,
   Tooltip,
   TooltipInfo,
   Dialog,
