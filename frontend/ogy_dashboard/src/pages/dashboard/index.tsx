@@ -11,6 +11,7 @@ import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
+import TransactionHistory from "@pages/dashboard/transaction-history";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
@@ -127,6 +128,12 @@ const Dashboard = () => {
           >
             <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
           </section> */}
+          <section
+            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
+            id="transaction-history"
+          >
+            <TransactionHistory />
+          </section>
           <section
             ref={scrollRef}
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"

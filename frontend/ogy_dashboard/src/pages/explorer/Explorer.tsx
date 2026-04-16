@@ -1,21 +1,26 @@
-import { useMemo } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { usePagination, useSorting } from "@helpers/table/useTable";
-import TransactionsList from "@pages/transactions/transactions-list/TransactionsList";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+import { useState, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { NewTable, TablePagination } from "@components/ui";
+import { TableSkeleton } from "@components/ui/NewTable";
 import Badge from "@components/ui/Badge";
 import { LoaderSpin, Search } from "@components/ui";
-
 import { useSearchExplorer } from "@hooks/explorer";
+import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
+import {
+  getTransactionColumns,
+  buildSkeletonRows,
+} from "@pages/transactions/transactionColumns";
 
 export const Explorer = () => {
   const navigate = useNavigate();
-  const [pagination, setPagination] = usePagination({});
   const [searchParams] = useSearchParams();
 
-  const [sorting, setSorting] = useSorting({
-    id: "index",
-    desc: true,
-  });
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const [sortDesc, setSortDesc] = useState(true);
+
   const searchterm = searchParams.get("searchterm") || "";
 
   const searchForItems = useMemo(
@@ -30,9 +35,17 @@ export const Explorer = () => {
     []
   );
 
-  const search = useSearchExplorer({
-    searchterm,
+  const search = useSearchExplorer({ searchterm });
+
+  const { data, isSuccess, isLoading, isFetching } = useFetchAllTransactions({
+    limit: pageSize,
+    offset: pageSize * pageIndex,
+    sorting: [{ id: "index", desc: sortDesc }],
   });
+
+  const columns = getTransactionColumns(navigate);
+
+  const pageCount = data?.list.pageCount ?? 0;
 
   const handleClickSearchResult = (
     searchType: "blockIndex" | "principalId",
@@ -45,24 +58,40 @@ export const Explorer = () => {
     navigate(pathnames[searchType]);
   };
 
+  const goToPage = (next: number) => setPageIndex(next);
+  const handlePageSizeChange = (next: number) => {
+    setPageSize(next);
+    setPageIndex(0);
+  };
+
+  const paginationFooter = (
+    <TablePagination
+      pageIndex={pageIndex}
+      pageSize={pageSize}
+      pageCount={pageCount}
+      onPageChange={goToPage}
+      onPageSizeChange={handlePageSizeChange}
+    />
+  );
+
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="max-w-[1440px] mx-auto py-16 px-6">
       <div className="flex flex-col items-center">
         <div className="max-w-4xl text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold">Explorer</h1>
+          <h1 className="text-4xl sm:text-6xl font-bold">
+            Transaction History
+          </h1>
           <div className="flex gap-2 mt-8">
             <div>Search for: </div>
-            {searchForItems.map(({ title, bgColorCn, colorCn }, index) => {
-              return (
-                <div key={index}>
-                  <Badge className={`${bgColorCn} px-4`}>
-                    <div className={`${colorCn} text-xs font-semibold`}>
-                      {title}
-                    </div>
-                  </Badge>
-                </div>
-              );
-            })}
+            {searchForItems.map(({ title, bgColorCn, colorCn }, index) => (
+              <div key={index}>
+                <Badge className={`${bgColorCn} px-4`}>
+                  <div className={`${colorCn} text-xs font-semibold`}>
+                    {title}
+                  </div>
+                </Badge>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -126,12 +155,27 @@ export const Explorer = () => {
       )}
 
       <div className="mt-16">
-        <TransactionsList
-          pagination={pagination}
-          setPagination={setPagination}
-          sorting={sorting}
-          setSorting={setSorting}
-        />
+        <div className="flex items-center mb-4 gap-4">
+          <button
+            onClick={() => setSortDesc((d) => !d)}
+            className="text-sm text-[#69737C] hover:text-[#222526] flex items-center gap-1"
+          >
+            Index {sortDesc ? "↓" : "↑"}
+          </button>
+        </div>
+        {isFetching ? (
+          <TableSkeleton>
+            <NewTable columns={columns} data={buildSkeletonRows(pageSize)} footer={paginationFooter} />
+          </TableSkeleton>
+        ) : (
+          isSuccess && data && (
+            <NewTable
+              columns={columns}
+              data={data.list.rows}
+              footer={paginationFooter}
+            />
+          )
+        )}
       </div>
     </div>
   );

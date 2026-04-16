@@ -1,0 +1,155 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+import { useState } from "react";
+import { NewTableColumn } from "@components/ui/NewTable";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import { DateTime } from "luxon";
+
+const DateCell = ({ timestampRaw }: { timestampRaw: number }) => {
+  const [showRelative, setShowRelative] = useState(false);
+  if (!timestampRaw) return null;
+  const dt = DateTime.fromMillis(timestampRaw / 1_000_000);
+  const label = showRelative
+    ? dt.toRelative() ?? ""
+    : dt.toFormat("yyyy-LL-dd, HH:mm:ss");
+  return (
+    <button
+      onClick={() => setShowRelative((r) => !r)}
+      className="inline-block bg-[#ECEEF4] text-[#69737C] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-[#E1E5ED] transition-colors"
+    >
+      {label}
+    </button>
+  );
+};
+
+const KIND_COLORS: Record<string, string> = {
+  mint: "bg-teal-100 text-teal-700",
+  approve: "bg-amber-100 text-amber-700",
+  burn: "bg-orange-100 text-orange-700",
+  transfer: "bg-indigo-100 text-indigo-700",
+};
+
+export const getTransactionColumns = (
+  navigate: (path: string) => void
+): NewTableColumn<any>[] => [
+  {
+    id: "index",
+    header: "Index",
+    cell: (row) => (
+      <div className="w-20">
+        <button
+          className="hover:underline"
+          onClick={() => navigate(`/explorer/transactions/${row.index}`)}
+        >
+          {row.index}
+        </button>
+      </div>
+    ),
+  },
+  {
+    id: "amount",
+    header: "Amount",
+    cell: (row) => (
+      <div className="w-32 whitespace-nowrap">
+        <span>{roundAndFormatLocale({ number: divideBy1e8(parseInt(row.amount)) })}</span>
+      </div>
+    ),
+  },
+  {
+    id: "kind",
+    header: "Type",
+    cell: (row) => (
+      <div className="w-20">
+        <span
+          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap capitalize ${KIND_COLORS[row.kind] ?? "bg-[#ECEEF4] text-[#69737C]"}`}
+        >
+          {row.kind}
+        </span>
+      </div>
+    ),
+  },
+  {
+    id: "timestamp",
+    header: "Date",
+    cell: (row) => (
+      <div className="w-44">
+        <DateCell timestampRaw={row.timestampRaw} />
+      </div>
+    ),
+  },
+  {
+    id: "from_account",
+    header: "From",
+    cell: (row) => {
+      const val = row.from_account;
+      const isCopyable = val && val !== "Minting account";
+      return (
+        <div className="flex items-center gap-2 w-64">
+          {isCopyable ? (
+            <button
+              className="truncate min-w-0 hover:underline"
+              onClick={() =>
+                navigate(`/explorer/transactions/accounts/${val}`)
+              }
+            >
+              {val}
+            </button>
+          ) : (
+            <span className="truncate min-w-0">{val || "-"}</span>
+          )}
+          <div className="ml-auto shrink-0">
+            {isCopyable ? (
+              <CopyToClipboard value={val} />
+            ) : (
+              <span className="inline-block w-4 h-4" aria-hidden="true" />
+            )}
+          </div>
+        </div>
+      );
+    },
+  },
+  {
+    id: "to_account",
+    header: "To",
+    cell: (row) => {
+      const val = row.to_account;
+      const isCopyable = val && val !== "Minting account";
+      return (
+        <div className="flex items-center gap-2 w-64">
+          {isCopyable ? (
+            <button
+              className="truncate min-w-0 hover:underline"
+              onClick={() =>
+                navigate(`/explorer/transactions/accounts/${val}`)
+              }
+            >
+              {val}
+            </button>
+          ) : (
+            <span className="truncate min-w-0">{val || "-"}</span>
+          )}
+          <div className="ml-auto shrink-0">
+            {isCopyable ? (
+              <CopyToClipboard value={val} />
+            ) : (
+              <span className="inline-block w-4 h-4" aria-hidden="true" />
+            )}
+          </div>
+        </div>
+      );
+    },
+  },
+];
+
+const FAKE_ROW = {
+  index: 100000,
+  amount: "1000000000",
+  kind: "transfer",
+  timestampRaw: Date.now() * 1_000_000,
+  from_account: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa",
+  to_account: "bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbbbb-bbb",
+};
+
+export const buildSkeletonRows = (count: number) =>
+  Array.from({ length: count }, (_, i) => ({ ...FAKE_ROW, id: i }));
