@@ -1,77 +1,49 @@
-import { useMemo } from "react";
-import { Card, TooltipInfo } from "@components/ui";
-import {
-  Loader as ChartLoader,
-  Error as ChartError,
-  Area as ChartArea,
-} from "@components/charts";
+import { useState } from "react";
+import { ChartStatsCard } from "@components/dashboard";
 import useTotalTokensStake from "@hooks/metrics/useTotalTokensStakes";
+
+const SELECT_PERIOD_OPTIONS = [
+  { value: "7", label: "Weekly" },
+  { value: "30", label: "Monthly" },
+  { value: "365", label: "Yearly" },
+];
 
 const ChartTotalTokensStakes = ({
   className,
-  ...restProps
 }: {
   className?: string;
 }) => {
-  const barFill = useMemo(() => "#34d399", []);
-
-  // TODO implement change period (dayly/weekly/monthly...)
-  const { data, isLoading, isSuccess, isError } = useTotalTokensStake({
-    start: 30,
+  const [selectedDays, setSelectedDays] = useState("30");
+  const { data, isLoading, isError } = useTotalTokensStake({
+    start: Number(selectedDays),
   });
 
   return (
-    <Card className={`${className}`} {...restProps}>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <h2 className="text-lg font-semibold mr-2">Staking Overview</h2>
-        </div>
-        {isSuccess && (
-          <button className="text-sm font-medium rounded-full px-3 py-1">
-            Monthly
-          </button>
-        )}
-      </div>
-      {isLoading && <ChartLoader />}
-      {isSuccess && (
-        <div className="mt-4 grid grid-cols-1 xl:grid-cols-4">
-          <div className="col-span-1 flex flex-col justify-between">
-            <div>
-              <div className="flex">
-                <span className="text-content/60 font-semibold mr-2">
-                  Total Tokens in Stakes
-                </span>
-                <TooltipInfo id="tooltip-total-tokens-in-stakes">
-                  <p>Tokens that are locked in stakes.</p>
-                </TooltipInfo>
-              </div>
-              <div className="text-2xl font-semibold mt-2 mb-12 xl:mb-0">
-                <span className="mr-3">{data?.total}</span>
-                <span className="text-content/60">OGY</span>
-              </div>
-            </div>
-            <div className="xl:flex items-center mb-6 hidden">
-              <div className="h-2 w-4 bg-[#34d399] mr-2 rounded-lg"></div>
-              <div className="text-xs text-content/60 font-semibold">
-                STAKED TOKENS
-              </div>
-            </div>
-          </div>
-          <div className="col-span-3 h-72 rounded-xl">
-            <ChartArea data={data?.dataChart} fill={barFill} />
-          </div>
-          <div className="flex items-center justify-end mt-2 mr-6 xl:hidden">
-            <div className="h-2 w-4 bg-[#34d399] mr-2 rounded-lg"></div>
-            <div className="text-xs text-content/60 font-semibold">
-              STAKED TOKENS
-            </div>
-          </div>
-        </div>
-      )}
-      {isError && (
-        <ChartError>Error while fetching governance staking data.</ChartError>
-      )}
-    </Card>
+    <ChartStatsCard
+      className={className}
+      title="Staking Overview"
+      periodOptions={SELECT_PERIOD_OPTIONS}
+      period={selectedDays}
+      onPeriodChange={setSelectedDays}
+      stats={[
+        {
+          id: "total-tokens-in-stakes",
+          label: "Total Tokens in Stakes",
+          tooltipContent: <p>Tokens that are locked in stakes.</p>,
+          value: data?.total,
+          unit: "OGY",
+        },
+      ]}
+      chart={{
+        data: data?.dataChart,
+        color: "#34d399",
+        label: "Staked Tokens",
+      }}
+      legendLabel="STAKED TOKENS"
+      loading={isLoading}
+      isError={isError}
+      errorMessage="Error while fetching governance staking data."
+    />
   );
 };
 

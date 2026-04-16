@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { useMemo } from "react";
-import { useLoaderData, defer, useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCallback, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import {
   ArrowTopRightOnSquareIcon,
   HandThumbUpIcon,
@@ -15,63 +12,24 @@ import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-tota
 import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
-import { usePagination } from "@helpers/table/useTable";
 import { PieChartProvider } from "@components/charts/pie/context";
 import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
-// import ChartVotingPower from "./ChartVotingPower";
 import ChartVotingParticipation from "./ChartVotingParticipation";
 
-const loader = async () => {
-  // tokens in governance total
-  const dataTokensInGovernanceTotal = new Promise((resolve) => {
-    setTimeout(() => {
-      // reject(new Error("data error!"));
-      resolve({
-        tokensInGovernance: [
-          {
-            name: "Locked",
-            value: 2678857678.32,
-          },
-          {
-            name: "Unlocked",
-            value: 524002220.01,
-          },
-          {
-            name: "Accumulated Rewards",
-            value: 202397569.16,
-          },
-        ],
-        tokensInGovernanceTotal: 4261654417.77,
-        colors: ["#34d399", "#1d7555", "#7bf8ca"],
-      });
-    }, 500);
-  });
-
-  // tokens in governance KPI's
-  const dataTokensInGovernanceKpi = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { name: "Proposals", value: "20192" },
-        { name: "Reward Base for the current year", value: "250,000,000" },
-        { name: "Daily Voting Rewards", value: "684,289" },
-        { name: "Average Voting Power", value: "794'992'323" },
-        { name: "Total Voting Power", value: "1'232'238'366" },
-        { name: "Overall Voting Participation", value: "1'232'238'366" },
-      ]);
-    }, 300);
-  });
-
-  return defer({
-    dataTokensInGovernanceTotal: await dataTokensInGovernanceTotal,
-    dataTokensInGovernanceKpi,
-    // error: error,
-  });
-};
-
 export const Governance = () => {
-  const queryClient = useQueryClient();
-  const data = useLoaderData();
-  const navigate = useNavigate();
+  const location = useLocation();
+  const scrollTarget = (location.state as { scrollTo?: string })?.scrollTo;
+
+  const scrollRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (!node || !scrollTarget || node.id !== scrollTarget) return;
+      setTimeout(() => {
+        node.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+      window.history.replaceState({}, "");
+    },
+    [scrollTarget]
+  );
 
   const governanceFeatures = useMemo(
     () => [
@@ -96,16 +54,6 @@ export const Governance = () => {
     ],
     []
   );
-
-  const [pagination] = usePagination({ pageIndex: 0, pageSize: 10 });
-
-  const handleShowAllProposals = () => {
-    navigate("/proposals");
-  };
-  const handleShowAllNeurons = () => {
-    queryClient.invalidateQueries({ queryKey: ["listNeuronsAll"] });
-    navigate("/governance/neurons");
-  };
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -176,16 +124,7 @@ export const Governance = () => {
         </div>
       </div>
       <PieChartProvider>
-        <TokensInGovernanceTotal
-          className="mb-16"
-          tokensInGovernance={
-            data.dataTokensInGovernanceTotal.tokensInGovernance
-          }
-          tokensInGovernanceTotal={
-            data.dataTokensInGovernanceTotal.tokensInGovernanceTotal
-          }
-          colors={data.dataTokensInGovernanceTotal.colors}
-        />
+        <TokensInGovernanceTotal className="mb-16" />
       </PieChartProvider>
 
       <TokensInGovernanceKpi className="mb-16" />
@@ -197,26 +136,14 @@ export const Governance = () => {
         <ChartVotingParticipation />
       </div>
 
-      {/* <div className="mb-16">
-        <ChartVotingPower />
-      </div> */}
-
-      <div className="mb-16">
-        <div className="flex items-center mb-8 gap-8">
-          <h2 className="text-3xl font-bold">Proposals</h2>
-          <Button onClick={handleShowAllProposals}>Show all</Button>
-        </div>
-        <ProposalsList pagination={pagination} />
+      <div id="governance-proposals" ref={scrollRef} className="mb-16">
+        <h2 className="text-3xl font-bold mb-8">Proposals</h2>
+        <ProposalsList />
       </div>
-      <div>
-        <div className="flex items-center mb-8 gap-8">
-          <h2 className="text-3xl font-bold">Neurons</h2>
-          <Button onClick={handleShowAllNeurons}>Show all</Button>
-        </div>
-        <NeuronsList pagination={pagination} />
+      <div id="governance-neurons" ref={scrollRef}>
+        <h2 className="text-3xl font-bold mb-8">Neurons</h2>
+        <NeuronsList />
       </div>
     </div>
   );
 };
-
-Governance.loader = loader;

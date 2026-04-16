@@ -86,14 +86,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Governance.loader,
             element: <Governance />,
-            // async lazy() {
-            //   const { GovernanceLoader, Governance } = await import(
-            //     "@pages/governance/Governance"
-            //   );
-            //   return { loader: GovernanceLoader, Component: Governance };
-            // },
           },
           {
             path: "neurons",
