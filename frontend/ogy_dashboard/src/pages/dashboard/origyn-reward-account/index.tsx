@@ -45,29 +45,29 @@ const OrigynTreasuryAccount = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button className="my-4 mx-auto w-full">More details</Button>
+                  <Button className="mt-2 mx-auto w-full">More details</Button>
                 </a>
               </TooltipInfo>
             }
             underlineClassName="bg-content"
           />
           <div className="xl:col-span-3 border border-border rounded-[25px] overflow-hidden overflow-x-auto h-full">
-            <table className="w-full h-full border-separate border-spacing-0">
+            <table className="min-w-full h-full border-separate border-spacing-0">
               <tbody>
                 <tr className="bg-charcoal text-white">
-                  <td className="py-3 pl-[35px] pr-4 font-semibold text-left whitespace-nowrap">
+                  <td className="py-5 xl:py-3 pl-[70px] xl:pl-[35px] pr-4 font-semibold text-left whitespace-nowrap">
                     Year
                   </td>
                   {isLoading
                     ? Array.from({ length: 6 }, (_, i) => (
-                        <td key={i} className="py-3 px-4">
+                        <td key={i} className="py-5 xl:py-3 px-4">
                           <div className="h-4 w-20 rounded bg-white/20 animate-pulse" />
                         </td>
                       ))
                     : data?.rewardsPool.rows.map((item) => (
                         <td
                           key={item.year}
-                          className="py-3 px-4 text-left text-[#E1E1E1] whitespace-nowrap"
+                          className="py-5 xl:py-3 px-4 text-left text-[#E1E1E1] whitespace-nowrap"
                         >
                           {item.year}
                         </td>
@@ -79,14 +79,14 @@ const OrigynTreasuryAccount = ({
                   </td>
                   {isLoading
                     ? Array.from({ length: 6 }, (_, i) => (
-                        <td key={i} className="py-3 px-4">
+                        <td key={i} className="py-5 xl:py-3 px-4">
                           <div className="h-4 w-20 rounded bg-muted/20 animate-pulse" />
                         </td>
                       ))
                     : data?.rewardsPool.rows.map((item) => (
                         <td
                           key={item.year}
-                          className="py-3 px-4 text-left text-[#69737C] whitespace-nowrap"
+                          className="py-5 xl:py-3 px-4 text-left text-[#69737C] whitespace-nowrap"
                         >
                           {item.reward_pool}
                         </td>
