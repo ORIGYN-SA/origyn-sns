@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { DateTime } from "luxon";
 import {
   useQuery,
@@ -11,10 +11,6 @@ import { ChartData } from "@services/types/charts.types";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 
 const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
-  const [data, setData] = useState<
-    { total: string; dataChart: ChartData[] } | undefined
-  >(undefined);
-
   const {
     data: response,
     isSuccess,
@@ -30,8 +26,9 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
     placeholderData: keepPreviousData,
   });
 
-  useEffect(() => {
-    if (isSuccess && response) {
+  const data = useMemo<{ total: string; dataChart: ChartData[] } | undefined>(
+    () => {
+      if (!isSuccess || !response) return undefined;
       const results = response.map((r) => {
         const name = DateTime.fromMillis(0)
           .plus({ days: Number(r[0]) })
@@ -39,20 +36,21 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
         const value = divideBy1e8(r[1].balance);
         return {
           name,
-          value: divideBy1e8(r[1].balance),
+          value,
           valueToString: roundAndFormatLocale({ number: value }),
         };
       });
-      setData({
+      return {
         dataChart: results,
         total: results[results.length - 1].valueToString,
-      });
-    }
-  }, [isSuccess, response]);
+      };
+    },
+    [isSuccess, response]
+  );
 
   return {
     data,
-    isSuccess: isSuccess && data,
+    isSuccess: isSuccess && !!data,
     isError,
     isLoading: isLoading || (!data && !isError),
     error,
