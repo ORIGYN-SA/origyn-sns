@@ -13,6 +13,7 @@ import Search from "@components/ui/Search";
 import InputField from "@components/ui/InputField";
 import Skeleton from "@components/ui/Skeleton";
 import ExternalLink from "@components/ui/links/ExternalLink";
+import TablePagination from "@components/ui/TablePagination";
 
 export {
   Card,
@@ -30,4 +31,5 @@ export {
   InputField,
   Skeleton,
   ExternalLink,
+  TablePagination,
 };

@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
 
+export const SkeletonBar = ({ className = "" }: { className?: string }) => (
+  <span
+    className={`block h-6 rounded bg-muted/20 animate-pulse ${className}`}
+  />
+);
+
 export type NewTableColumn<T> = {
   id: string;
   header: ReactNode;
@@ -70,6 +76,20 @@ const NewTable = <T,>({
       </table>
     </div>
     {footer && <div className="px-[70px] py-5">{footer}</div>}
+  </div>
+);
+
+export const TableSkeleton = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`pointer-events-none select-none [&_tbody_*]:!text-transparent [&_tbody_strong]:!text-inherit [&_tbody_svg]:!opacity-0 [&_tbody_button]:!bg-muted/20 [&_tbody_button]:!rounded [&_tbody_span]:!bg-muted/20 [&_tbody_span]:!rounded [&_tbody_td]:animate-pulse ${className ?? ""}`}
+  >
+    {children}
   </div>
 );
 
