@@ -138,12 +138,7 @@ const router = createBrowserRouter([
       },
       {
         path: "token-distribution",
-        children: [
-          {
-            index: true,
-            element: <TokenDistribution />,
-          },
-        ],
+        element: <TokenDistribution />,
       },
       {
         path: "explorer",

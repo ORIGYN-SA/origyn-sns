@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 
 export default function useScrollToTopOnNavigation() {
-  const { pathname } = useLocation();
+  const location = useLocation();
   const navigationType = useNavigationType();
   const isFirstRun = useRef(true);
   useEffect(() => {
@@ -10,8 +10,9 @@ export default function useScrollToTopOnNavigation() {
       isFirstRun.current = false;
       return;
     }
-    if (navigationType !== "POP") {
+    const state = location.state as { scrollTo?: string } | null;
+    if (navigationType !== "POP" && !state?.scrollTo) {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
-  }, [pathname, navigationType]);
+  }, [location.pathname, navigationType, location.state]);
 }
