@@ -49,7 +49,9 @@ const ChartStatsCard = ({
 }: ChartStatsCardProps) => (
   <Card className={className}>
     <div className="flex items-center justify-between">
-      <h2 className="text-lg font-semibold mr-2">{title}</h2>
+      <h2 className="text-charcoal text-[22px] font-semibold leading-none mr-2">
+        {title}
+      </h2>
       <PeriodSelect
         options={periodOptions}
         value={period}

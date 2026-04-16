@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   useQuery,
   keepPreviousData,
@@ -17,9 +16,6 @@ interface ICirculationStateOGY {
 }
 
 const useCirculationStateOGY = () => {
-  const [foundationReserve, setFoundationReserve] =
-    useState<ICirculationStateOGY | null>(null);
-
   const {
     data,
     isSuccess,
@@ -46,45 +42,42 @@ const useCirculationStateOGY = () => {
 
   const isSuccessAll = isSuccess && isSuccessreserve;
 
-  useEffect(() => {
-    if (isSuccessAll && data && dataReserve) {
-      const totalSupply = Number(divideBy1e8(data.total_supply));
-      const circulatingSupply = Number(divideBy1e8(data.circulating_supply));
-      const totalLocked = dataReserve.total_locked;
-
-      setFoundationReserve({
-        number: {
-          circulatingSupply,
-          totalSupply,
-        },
-        string: {
-          circulatingSupply: roundAndFormatLocale({
-            number: circulatingSupply,
-          }),
-          totalSupply: roundAndFormatLocale({ number: totalSupply }),
-        },
-        dataPieChart: [
-          {
-            name: "OGY not in the hand of the Foundation",
-            value: circulatingSupply - totalLocked,
-            valueToString: roundAndFormatLocale({
-              number: circulatingSupply - totalLocked,
-            }),
-          },
-          {
-            name: "OGY locked in the hand of the Foundation",
-            value: totalLocked,
-            valueToString: roundAndFormatLocale({
-              number: totalLocked,
-            }),
-          },
-        ],
-      });
-    }
-  }, [isSuccessAll, data, dataReserve]);
+  const circulationState: ICirculationStateOGY | null =
+    isSuccessAll && data && dataReserve
+      ? (() => {
+          const totalSupply = Number(divideBy1e8(data.total_supply));
+          const circulatingSupply = Number(
+            divideBy1e8(data.circulating_supply)
+          );
+          const totalLocked = dataReserve.total_locked;
+          return {
+            number: { circulatingSupply, totalSupply },
+            string: {
+              circulatingSupply: roundAndFormatLocale({
+                number: circulatingSupply,
+              }),
+              totalSupply: roundAndFormatLocale({ number: totalSupply }),
+            },
+            dataPieChart: [
+              {
+                name: "OGY not in the hand of the Foundation",
+                value: circulatingSupply - totalLocked,
+                valueToString: roundAndFormatLocale({
+                  number: circulatingSupply - totalLocked,
+                }),
+              },
+              {
+                name: "OGY locked in the hand of the Foundation",
+                value: totalLocked,
+                valueToString: roundAndFormatLocale({ number: totalLocked }),
+              },
+            ],
+          };
+        })()
+      : null;
 
   return {
-    data: foundationReserve,
+    data: circulationState,
     isSuccess: isSuccessAll,
     isError: isError || isErrorReserve,
     isLoading: isLoading || isLoadingReserve,

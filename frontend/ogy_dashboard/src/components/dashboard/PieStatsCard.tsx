@@ -49,7 +49,9 @@ const PieStatsCard = ({
         </div>
       )}
       <div className="flex items-center justify-between">
-        <div className="text-lg font-semibold">{title}</div>
+        <div className="text-charcoal text-[22px] font-semibold leading-none">
+          {title}
+        </div>
         {titleTooltip}
       </div>
       <div className="mt-6 h-72 rounded-xl">

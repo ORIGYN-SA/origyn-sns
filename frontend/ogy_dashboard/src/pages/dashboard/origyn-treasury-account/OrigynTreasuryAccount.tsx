@@ -106,7 +106,9 @@ const OrigynTreasuryAccount = ({
 
   return (
     <Card className={`${className}`} {...restProps}>
-      <div className="text-lg font-semibold">ORIGYN Treasury Account (OTA)</div>
+      <div className="text-charcoal text-[22px] font-semibold leading-none">
+        ORIGYN Treasury Account (OTA)
+      </div>
       {isError && (
         <div className="flex items-center justify-center h-36 text-red-500 font-semibold">
           <div>Network error: Unable to fetch OGY treasury account data</div>

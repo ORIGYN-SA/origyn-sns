@@ -12,10 +12,10 @@ interface roundAndFormatLocaleParams {
 
 export const roundAndFormatLocale = ({
   number,
-  locale,
+  locale: localeOverride = locale,
   decimals = 2,
 }: roundAndFormatLocaleParams) => {
-  return Number(number.toFixed(decimals)).toLocaleString(locale);
+  return Number(number.toFixed(decimals)).toLocaleString(localeOverride);
 };
 
 export const numberToE8s = (value: string) => {

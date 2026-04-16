@@ -21,6 +21,7 @@ const useTokenDistribution = ({
     isSuccess: isSuccessFetchTokenHolders,
     isError: isErrorFetchTokenHolders,
     isLoading: isLoadingFetchTokenHolders,
+    isFetching: isFetchingFetchTokenHolders,
     error: errorFetchTokenHolders,
   } = useQuery({
     queryKey: ["listTokenDistribution", limit, offset],
@@ -60,7 +61,7 @@ const useTokenDistribution = ({
           total,
           governanceBalance,
           ledgerBalance,
-          weight: `${weight} %`,
+          weight: `${weight}%`,
         };
       })
     : [];
@@ -76,6 +77,7 @@ const useTokenDistribution = ({
       },
     },
     isLoading: isLoadingFetchTokenHolders || isLoadingFetchTotalSupply,
+    isFetching: isFetchingFetchTokenHolders,
     isSuccess,
     isError: isErrorFetchTokenHolders || isErrorFetchTotalSupply,
     error: errorFetchTokenHolders || errorFetchTotalSupply,
