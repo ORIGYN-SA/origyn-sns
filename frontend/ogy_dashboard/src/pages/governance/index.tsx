@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { Button } from "@components/ui";
+import { Button, FeatureCard } from "@components/ui";
 import {
   StakeVoteIcon,
   EarnRewardsIcon,
@@ -89,22 +89,12 @@ export const Governance = () => {
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-3 mt-16 gap-8">
         {governanceFeatures.map(({ title, description, icon }) => (
-          <div
+          <FeatureCard
             key={title}
-            className="flex items-center gap-[10px] bg-surface-1/50 border border-border-faint rounded-[16px] p-2 h-[88px]"
-          >
-            <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-surface-faint rounded-[16px] text-muted opacity-70">
-              {icon}
-            </div>
-            <div className="min-w-0">
-              <div className="font-medium text-[16px] leading-none text-muted">
-                {title}
-              </div>
-              <div className="text-muted font-normal text-[13px] leading-none mt-1">
-                {description}
-              </div>
-            </div>
-          </div>
+            title={title}
+            description={description}
+            icon={icon}
+          />
         ))}
       </div>
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-32 mb-12">

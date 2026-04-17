@@ -1,4 +1,5 @@
 import Card from "@components/ui/cards/Card";
+import FeatureCard from "@components/ui/cards/FeatureCard";
 import Button from "@components/ui/Button";
 import Select from "@components/ui/Select";
 import Table from "@components/ui/Table";
@@ -18,6 +19,7 @@ import TablePagination from "@components/ui/TablePagination";
 
 export {
   Card,
+  FeatureCard,
   Button,
   Select,
   Table,
