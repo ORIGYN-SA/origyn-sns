@@ -64,10 +64,9 @@ const NewTable = <T,>({
               return (
                 <Fragment key={rowIndex}>
                   <tr
-                    style={{
-                      backgroundColor:
-                        rowIndex % 2 === 1 ? "#FCFDFF" : "#FFFFFF",
-                    }}
+                    className={
+                      rowIndex % 2 === 1 ? "bg-surface-muted" : "bg-surface-1"
+                    }
                   >
                     {columns.map((column, index) => (
                       <td

@@ -40,9 +40,9 @@ const TablePagination = ({
 
   return (
     <div className="flex items-center justify-between text-sm">
-      <div className="flex items-center gap-2 text-[#86858A]">
+      <div className="flex items-center gap-2 text-muted">
         <span>Lines per page</span>
-        <div className="relative inline-flex items-center gap-[5px] rounded-full bg-white border border-[#E1E1E1] py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
+        <div className="relative inline-flex items-center gap-[5px] rounded-full bg-surface-1 border border-border-strong py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
           <span>{pageSize}</span>
           <ChevronDownIcon className="pointer-events-none shrink-0" />
           <select
@@ -64,7 +64,7 @@ const TablePagination = ({
             type="button"
             onClick={() => onPageChange(pageIndex - 1)}
             aria-label="Previous page"
-            className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-[#69737C] hover:bg-[#F1F6F9]"
+            className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-muted hover:bg-surface-faint"
           >
             <ChevronLeftIcon />
           </button>
@@ -73,7 +73,7 @@ const TablePagination = ({
           item === "ellipsis" ? (
             <span
               key={`ellipsis-${idx}`}
-              className="inline-flex items-center justify-center h-7 min-w-7 text-[#69737C]"
+              className="inline-flex items-center justify-center h-7 min-w-7 text-muted"
             >
               …
             </span>
@@ -84,8 +84,8 @@ const TablePagination = ({
               onClick={() => onPageChange(item - 1)}
               className={`inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full ${
                 item - 1 === pageIndex
-                  ? "bg-[#F1F6F9] text-[#222526]"
-                  : "text-[#69737C] hover:bg-[#F1F6F9]"
+                  ? "bg-surface-faint text-content"
+                  : "text-muted hover:bg-surface-faint"
               }`}
             >
               {item}
@@ -97,7 +97,7 @@ const TablePagination = ({
           onClick={() => onPageChange(pageIndex + 1)}
           disabled={!canNext}
           aria-label="Next page"
-          className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-[#69737C] hover:bg-[#F1F6F9] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-muted hover:bg-surface-faint disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <ChevronRightIcon />
         </button>

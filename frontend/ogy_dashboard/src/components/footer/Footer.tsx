@@ -3,7 +3,7 @@ import BrandLogo from "@components/brand/BrandLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-charcoal via-[#2F2F2D] via-40% to-[#2F2F2D] text-white -mt-4">
+    <footer className="bg-gradient-to-b from-charcoal via-charcoal2 via-40% to-charcoal2 text-white -mt-4">
       <div className="max-w-[1440px] mx-auto py-16 px-4">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-10 text-center xl:text-left">
           <div className="mx-auto xl:mx-0">
@@ -148,7 +148,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="rounded-2xl bg-[#222526] mt-10 py-4 px-10 text-[#E1E1E1] text-[10px] font-light leading-none text-center">
+        <div className="rounded-2xl bg-content mt-10 py-4 px-10 text-border-strong text-[10px] font-light leading-none text-center">
           *ORIGYN Foundation shall not be held liable for any loss, theft, or
           misappropriation of OGY Tokens occurring in connection with the swap
           process.

@@ -39,12 +39,12 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
   return (
     <>
       <nav
-        className={`bg-white sticky top-0 border-b border-[#E1E1E1] z-40 transition-[transform,border-radius] duration-300 ease-in-out ${
+        className={`bg-surface-1 sticky top-0 border-b border-border-strong z-40 transition-[transform,border-radius] duration-300 ease-in-out ${
           showRounded ? "rounded-t-2xl" : "rounded-t-none"
         } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-[1440px] mx-auto px-6">
-          <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center text-[#222526]">
+          <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center text-content">
             <BrandLogo labelClassName="hidden sm:block" />
           </div>
           <div className="hidden xl:block justify-self-center col-start-2 col-end-5 h-full">
@@ -66,7 +66,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                     <>
                       {title}
                       {isActive && (
-                        <span className="absolute left-0 right-0 bottom-[-1px] h-[2px] bg-[#222526]" />
+                        <span className="absolute left-0 right-0 bottom-[-1px] h-[2px] bg-content" />
                       )}
                     </>
                   )}

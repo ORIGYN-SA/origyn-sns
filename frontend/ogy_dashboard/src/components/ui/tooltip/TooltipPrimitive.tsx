@@ -20,7 +20,7 @@ export const TooltipContent = forwardRef<
       side={side}
       sideOffset={sideOffset}
       className={clsx(
-        "z-50 max-w-[312px] overflow-hidden rounded-[10px] border border-[#E1E1E1] bg-[#F9FAFE] text-muted shadow-md",
+        "z-50 max-w-[312px] overflow-hidden rounded-[10px] border border-border-strong bg-surface-1 text-muted shadow-md",
         "data-[state=delayed-open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=delayed-open]:fade-in-0",
         "data-[state=closed]:zoom-out-95 data-[state=delayed-open]:zoom-in-95",

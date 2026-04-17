@@ -91,16 +91,16 @@ export const Governance = () => {
         {governanceFeatures.map(({ title, description, icon }) => (
           <div
             key={title}
-            className="flex items-center gap-[10px] bg-white/50 border border-[#E9EAF1] rounded-[16px] p-2 h-[88px]"
+            className="flex items-center gap-[10px] bg-surface-1/50 border border-border-faint rounded-[16px] p-2 h-[88px]"
           >
-            <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-[#F1F6F9] rounded-[16px] text-[#69737C] opacity-70">
+            <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-surface-faint rounded-[16px] text-muted opacity-70">
               {icon}
             </div>
             <div className="min-w-0">
-              <div className="font-medium text-[16px] leading-none text-[#69737C]">
+              <div className="font-medium text-[16px] leading-none text-muted">
                 {title}
               </div>
-              <div className="text-[#69737C] font-normal text-[13px] leading-none mt-1">
+              <div className="text-muted font-normal text-[13px] leading-none mt-1">
                 {description}
               </div>
             </div>

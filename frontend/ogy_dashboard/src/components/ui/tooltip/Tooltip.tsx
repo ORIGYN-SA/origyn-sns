@@ -14,8 +14,8 @@ interface TooltipProps
   }> {}
 
 const StyledTooltip = styled(ReactTooltip)`
-  background-color: #F9FAFE !important;
-  border: 1px solid #E1E1E1 !important;
+  background-color: rgb(var(--color-surface-1)) !important;
+  border: 1px solid rgb(var(--color-border-strong)) !important;
   opacity: 1 !important;
   color: rgb(var(--color-muted)) !important;
   z-index: 9;

@@ -12,7 +12,7 @@ type PeriodSelectProps = {
 const PeriodSelect = ({ options, value, onChange }: PeriodSelectProps) => {
   const selected = options.find((o) => o.value === value);
   return (
-    <div className="relative inline-flex items-center gap-2 rounded-full bg-white border border-[#E1E1E1] py-3 px-4 font-medium text-[13px] leading-none text-content">
+    <div className="relative inline-flex items-center gap-2 rounded-full bg-surface-1 border border-border-strong py-3 px-4 font-medium text-[13px] leading-none text-content">
       <span>{selected?.label ?? value}</span>
       <ChevronDownIcon className="pointer-events-none shrink-0" />
       <select

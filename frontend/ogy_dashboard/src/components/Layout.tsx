@@ -28,7 +28,7 @@ const Layout = () => {
         SHOW_LEDGER_SWITCH_WARNING
           ? {
               background:
-                "linear-gradient(to bottom, #222526 0, #222526 58px, rgb(var(--color-background)) 58px)",
+                "linear-gradient(to bottom, rgb(var(--color-content)) 0, rgb(var(--color-content)) 58px, rgb(var(--color-background)) 58px)",
             }
           : undefined
       }

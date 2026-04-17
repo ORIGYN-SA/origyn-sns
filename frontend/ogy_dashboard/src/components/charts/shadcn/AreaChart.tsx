@@ -13,6 +13,7 @@ import {
   ChartTooltipContent,
 } from "./chart";
 import { millify, formatValue } from "@helpers/numbers";
+import { colors } from "@theme/preset";
 
 type Datum = { name: string; value: number };
 
@@ -58,12 +59,15 @@ const AreaChart = ({ data = [], color, label, className }: Props) => {
               dx="0"
               dy="4"
               stdDeviation="5"
-              floodColor="#000000"
+              floodColor="black"
               floodOpacity="0.1"
             />
           </filter>
         </defs>
-        <CartesianGrid vertical={false} stroke="#E1E1E180" />
+        <CartesianGrid
+          vertical={false}
+          stroke="rgb(var(--color-border-strong) / 0.5)"
+        />
         <XAxis
           dataKey="name"
           tickLine={false}
@@ -80,7 +84,7 @@ const AreaChart = ({ data = [], color, label, className }: Props) => {
           tickFormatter={(v: number) => (v >= 1000 ? millify(v) : String(v))}
         />
         <ChartTooltip
-          cursor={{ stroke: "#69737C", strokeWidth: 2 }}
+          cursor={{ stroke: colors.muted, strokeWidth: 2 }}
           content={
             <ChartTooltipContent formatter={(v) => formatValue(v)} indicator="dot" />
           }
@@ -93,7 +97,7 @@ const AreaChart = ({ data = [], color, label, className }: Props) => {
           fill={`url(#${gradientId})`}
           activeDot={{
             r: 6,
-            stroke: "#FFFFFF",
+            stroke: colors.surface[1],
             strokeWidth: 3,
             filter: `url(#${dotShadowId})`,
           }}

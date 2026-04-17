@@ -44,7 +44,7 @@ const Area = ({
     { name: "27 jul", value: 500 },
     { name: "27 aug", value: 200 },
   ],
-  fill = "#00A2F7",
+  fill = colors.sky,
 }: AreaChart) => {
   const minValue = Math.min(...data.map((d) => d.value));
   const maxValue = Math.max(...data.map((d) => d.value));
@@ -83,7 +83,7 @@ const Area = ({
           axisLine={false}
           mirror
           width={1}
-          tick={{ fill: "#69737C", fontSize: 12, dy: -8 }}
+          tick={{ fill: colors.muted, fontSize: 12, dy: -8 }}
           domain={[
             Math.max(0, minValue - (maxValue - minValue) * 0.1),
             maxValue + (maxValue - minValue) * 0.1,

@@ -71,14 +71,14 @@ export const SearchIcon = (props: IconProps) => (
   >
     <path
       d="M7.66665 14.0007C11.1644 14.0007 14 11.1651 14 7.66732C14 4.16951 11.1644 1.33398 7.66665 1.33398C4.16884 1.33398 1.33331 4.16951 1.33331 7.66732C1.33331 11.1651 4.16884 14.0007 7.66665 14.0007Z"
-      stroke="#222526"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M14.6666 14.6673L13.3333 13.334"
-      stroke="#292D32"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -185,7 +185,7 @@ export const CloseIcon = (props: IconProps) => (
   >
     <path
       d="M4 4L12 12M12 4L4 12"
-      stroke="#222526"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

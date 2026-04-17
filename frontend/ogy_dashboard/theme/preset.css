@@ -11,7 +11,11 @@
     --color-surface-1: 255 255 255;
     --color-surface-2: 240 240 240;
     --color-surface-3: 208 211 224;
+    --color-surface-muted: 252 253 255;
+    --color-surface-faint: 241 246 249;
     --color-border: 243 243 243;
+    --color-border-strong: 225 225 225;
+    --color-border-faint: 233 234 241;
     /* candy floss baby! */
     --color-accent: 97 91 255;
     --color-charcoal: 34 37 38;
@@ -21,6 +25,7 @@
     --color-jade: 80 190 143;
     --color-muted: 105 115 124;
     --color-charcoal-light: 60 60 57;
+    --color-charcoal-2: 47 47 45;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -29,7 +34,11 @@
       --color-surface-1: 32 32 32;
       --color-surface-2: 40 40 40;
       --color-surface-3: 52 52 52;
+      --color-surface-muted: 36 36 36;
+      --color-surface-faint: 44 44 44;
       --color-border: 46 46 46;
+      --color-border-strong: 64 64 64;
+      --color-border-faint: 52 52 52;
       --color-accent: 97 91 255;
       --color-charcoal: 34 37 38;
       --color-space-purple: 97 91 255;
@@ -38,6 +47,7 @@
       --color-jade: 80 190 143;
       --color-muted: 105 115 124;
       --color-charcoal-light: 60 60 57;
+      --color-charcoal-2: 47 47 45;
     }
   }
 }

@@ -108,7 +108,7 @@ export const ChartTooltipContent = ({
   if (!active || !payload?.length) return null;
 
   return (
-    <div className="rounded-[100px] bg-white p-[15px] text-xs text-muted shadow-[0_4px_30px_0_#0000001A] flex flex-col gap-[5px]">
+    <div className="rounded-[100px] bg-surface-1 p-[15px] text-xs text-muted shadow-[0_4px_30px_0_rgb(0_0_0/0.1)] flex flex-col gap-[5px]">
       {!hideLabel && label !== undefined && (
         <div className="font-semibold text-[13px] leading-none text-muted">
           {labelFormatter ? labelFormatter(label) : label}
