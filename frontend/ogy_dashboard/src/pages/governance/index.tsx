@@ -56,48 +56,78 @@ export const Governance = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 2xl:gap-8">
-        <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left">
-          <h1 className="text-4xl sm:text-6xl font-bold">
-            Governance Overview
-          </h1>
-          <h2 className="mt-2 text-xl text-content/60">
-            Welcome to ORIGYN Governance!
-          </h2>
-          <p className="mt-6 text-content/60">
-            Holders of OGY tokens can directly influence the ORIGYN Network by
-            staking their OGY and voting on proposals. By participating in the
-            decision-making process, these staked token holders earn rewards.
-          </p>
-          <a
-            href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button className="mt-8">
-              <div className="flex items-center justify-center">
-                <div>Learn more</div>
-                <div>
-                  <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
-                </div>
-              </div>
-            </Button>
-          </a>
-        </div>
-        <EstimateRewards />
-      </div>
-      <div className="grid grid-cols-1 xl:grid-cols-3 mt-16 gap-8">
-        {governanceFeatures.map(({ title, description, icon }) => (
-          <FeatureCard
-            key={title}
-            title={title}
-            description={description}
-            icon={icon}
+    <div className="max-w-[1440px] mx-auto">
+      <section className="relative isolate overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <div
+            className="absolute -bottom-[55%] -left-[10%] w-[1400px] h-[1600px]"
+            style={{
+              background:
+                "radial-gradient(ellipse, rgba(80,190,143,0.55) 0%, transparent 60%)",
+            }}
           />
-        ))}
-      </div>
-      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-32 mb-12">
+          <div
+            className="absolute -top-[55%] -right-[10%] w-[1500px] h-[1700px]"
+            style={{
+              background:
+                "radial-gradient(ellipse, rgba(255,205,90,0.4) 0%, transparent 60%)",
+            }}
+          />
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-[75px]" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
+        </div>
+
+        <div className="max-w-[1125px] mx-auto px-4 py-16 flex flex-col gap-4">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 2xl:gap-8">
+            <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left flex flex-col items-center xl:items-start gap-[17px]">
+              <h1 className="text-[40px] font-bold leading-none text-content">
+                Governance Overview
+              </h1>
+              <h2 className="text-[22px] font-light leading-none text-muted">
+                Welcome to ORIGYN Governance!
+              </h2>
+              <p className="text-base font-light leading-6 text-muted">
+                Holders of OGY tokens can directly influence the ORIGYN Network
+                by staking their OGY and voting on proposals. By participating
+                in the decision-making process, these staked token holders earn
+                rewards.
+              </p>
+              <a
+                href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="!px-[25px] !py-0 text-[14px] leading-[48px]">
+                  <div className="flex items-center justify-center">
+                    <div>Learn more</div>
+                    <div>
+                      <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
+                    </div>
+                  </div>
+                </Button>
+              </a>
+            </div>
+            <EstimateRewards />
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            {governanceFeatures.map(({ title, description, icon }) => (
+              <FeatureCard
+                key={title}
+                title={title}
+                description={description}
+                icon={icon}
+                variant="glass"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="px-4 pb-16">
+        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-16 mb-12">
         <div className="text-center xl:text-left">
           <h2 className="text-3xl font-bold">Tokens in Governance</h2>
           <p className="mt-4">
@@ -138,6 +168,7 @@ export const Governance = () => {
       <div id="governance-neurons" ref={scrollRef}>
         <h2 className="text-3xl font-bold mb-8">Neurons</h2>
         <NeuronsList />
+      </div>
       </div>
     </div>
   );

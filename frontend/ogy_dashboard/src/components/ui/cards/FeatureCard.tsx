@@ -5,6 +5,7 @@ type FeatureCardProps = {
   title: string;
   description: string;
   icon?: ReactNode;
+  variant?: "default" | "glass";
   className?: string;
 };
 
@@ -12,11 +13,15 @@ const FeatureCard: FC<FeatureCardProps> = ({
   title,
   description,
   icon,
+  variant = "default",
   className,
 }) => (
   <div
     className={clsx(
-      "flex items-center gap-[10px] h-[88px] bg-surface-1/50 border border-border-faint rounded-[16px] p-2",
+      "flex items-center gap-[10px] h-[88px] border border-border-faint rounded-[16px] p-2",
+      variant === "glass"
+        ? "bg-surface/50 backdrop-blur-xl"
+        : "bg-surface-1/50",
       className
     )}
   >
