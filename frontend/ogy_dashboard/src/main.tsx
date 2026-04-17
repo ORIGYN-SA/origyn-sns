@@ -7,6 +7,13 @@ import { colors as themeColors } from "@theme/preset";
 import { Provider as AuthProvider } from "@amerej/artemis-react";
 import { TooltipProvider } from "@components/ui/tooltip/TooltipPrimitive";
 
+if (import.meta.env.DEV) {
+  const script = document.createElement("script");
+  script.src = "//unpkg.com/react-scan/dist/auto.global.js";
+  script.crossOrigin = "anonymous";
+  document.head.appendChild(script);
+}
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
