@@ -19,6 +19,9 @@ export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env
   .VITE_LEGACY_GOVERNANCE_CANISTER_ID;
 export const COLLECTION_INDEX_CANISTER_ID = import.meta.env
   .VITE_COLLECTION_INDEX_CANISTER_ID;
+export const MINTING_STUDIO_CANISTER_ID =
+  import.meta.env.VITE_MINTING_STUDIO_CANISTER_ID ??
+  "uasjq-dyaaa-aaaas-qdwka-cai";
 export const LEGACY_VESTING_CANISTER_ID = import.meta.env
   .VITE_LEGACY_VESTING_CANISTER_ID;
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
