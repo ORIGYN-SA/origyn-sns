@@ -12,6 +12,7 @@ import Badge from "@components/ui/Badge";
 import Search from "@components/ui/Search";
 import InputField from "@components/ui/InputField";
 import Skeleton from "@components/ui/Skeleton";
+import SkeletonOverlay from "@components/ui/SkeletonOverlay";
 import ExternalLink from "@components/ui/links/ExternalLink";
 import TablePagination from "@components/ui/TablePagination";
 
@@ -30,6 +31,7 @@ export {
   Search,
   InputField,
   Skeleton,
+  SkeletonOverlay,
   ExternalLink,
   TablePagination,
 };
