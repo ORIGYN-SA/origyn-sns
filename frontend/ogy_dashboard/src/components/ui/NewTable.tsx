@@ -1,4 +1,4 @@
-import { ReactNode, useState, useCallback } from "react";
+import { Fragment, ReactNode, useState, useCallback } from "react";
 
 export const SkeletonBar = ({ className = "" }: { className?: string }) => (
   <span
@@ -68,9 +68,8 @@ const NewTable = <T,>({
             {data.map((row, rowIndex) => {
               const isExpanded = expandedSet.has(rowIndex);
               return (
-                <>
+                <Fragment key={rowIndex}>
                   <tr
-                    key={rowIndex}
                     style={{
                       backgroundColor:
                         rowIndex % 2 === 1 ? "#FCFDFF" : "#FFFFFF",
@@ -93,7 +92,7 @@ const NewTable = <T,>({
                     ))}
                   </tr>
                   {renderExpanded && isExpanded && (
-                    <tr key={`${rowIndex}-expanded`}>
+                    <tr>
                       <td
                         colSpan={columns.length}
                         className="border-b border-border p-0"
@@ -102,7 +101,7 @@ const NewTable = <T,>({
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               );
             })}
           </tbody>
