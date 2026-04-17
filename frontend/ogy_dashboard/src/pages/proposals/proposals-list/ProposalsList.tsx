@@ -2,8 +2,9 @@ import { ReactNode, useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
-import { NewTable, TablePagination } from "@components/ui";
-import { NewTableColumn, TableSkeleton } from "@components/ui/NewTable";
+import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
+import { NewTableColumn } from "@components/ui/NewTable";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useProposals from "@hooks/proposals/useProposalsAll";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 
@@ -106,7 +107,7 @@ const FAKE_ROW: ProposalRow = {
 };
 
 const buildSkeletonRows = (count: number): ProposalRow[] =>
-  Array.from({ length: count }, () => ({ ...FAKE_ROW }));
+  buildFakeRows(FAKE_ROW, count);
 
 const ProposalExpandedRow = ({ row }: { row: ProposalRow }) => (
   <div className="grid grid-cols-1 xl:grid-cols-4 gap-0">
@@ -157,28 +158,29 @@ const ProposalsList = ({
     />
   );
 
+  const rows =
+    isLoading || !isSuccess || !data
+      ? buildSkeletonRows(pageSize)
+      : (data.list.rows as ProposalRow[]);
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+        <div>{error?.message}</div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {isLoading ? (
-        <TableSkeleton>
-          <NewTable
-            columns={columns}
-            data={buildSkeletonRows(pageSize)}
-            footer={paginationFooter}
-          />
-        </TableSkeleton>
-      ) : isSuccess && data ? (
+      <SkeletonOverlay loading={isLoading}>
         <NewTable
           columns={columns}
-          data={data.list.rows as ProposalRow[]}
+          data={rows}
           footer={paginationFooter}
           renderExpanded={(row) => <ProposalExpandedRow row={row} />}
         />
-      ) : isError ? (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{error?.message}</div>
-        </div>
-      ) : null}
+      </SkeletonOverlay>
     </div>
   );
 };

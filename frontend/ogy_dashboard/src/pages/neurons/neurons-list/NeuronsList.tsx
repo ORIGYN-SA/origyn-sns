@@ -3,8 +3,9 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { NewTable, TablePagination } from "@components/ui";
-import { NewTableColumn, TableSkeleton } from "@components/ui/NewTable";
+import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
+import { NewTableColumn } from "@components/ui/NewTable";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useNeurons from "@hooks/neurons/useNeuronsAll";
 
 type NeuronRow = {
@@ -103,7 +104,7 @@ const FAKE_ROW: NeuronRow = {
 };
 
 const buildSkeletonRows = (count: number): NeuronRow[] =>
-  Array.from({ length: count }, () => ({ ...FAKE_ROW }));
+  buildFakeRows(FAKE_ROW, count);
 
 const NeuronExpandedRow = ({ row }: { row: NeuronRow }) => (
   <div className="grid grid-cols-1 xl:grid-cols-3">
@@ -154,28 +155,29 @@ const NeuronsList = ({
     />
   );
 
+  const rows =
+    isLoading || !isSuccess || !data
+      ? buildSkeletonRows(pageSize)
+      : (data.list.rows as NeuronRow[]);
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+        <div>{error?.message}</div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {isLoading ? (
-        <TableSkeleton>
-          <NewTable
-            columns={columns}
-            data={buildSkeletonRows(pageSize)}
-            footer={paginationFooter}
-          />
-        </TableSkeleton>
-      ) : isSuccess && data ? (
+      <SkeletonOverlay loading={isLoading}>
         <NewTable
           columns={columns}
-          data={data.list.rows as NeuronRow[]}
+          data={rows}
           footer={paginationFooter}
           renderExpanded={(row) => <NeuronExpandedRow row={row} />}
         />
-      ) : isError ? (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{error?.message}</div>
-        </div>
-      ) : null}
+      </SkeletonOverlay>
     </div>
   );
 };

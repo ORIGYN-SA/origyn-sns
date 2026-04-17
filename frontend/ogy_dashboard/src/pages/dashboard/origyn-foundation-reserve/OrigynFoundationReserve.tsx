@@ -1,6 +1,7 @@
 import { useMemo } from "react";
-import { TooltipInfo } from "@components/ui";
+import { TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { PieStatsCard } from "@components/dashboard";
+import { FAKE_PIE_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useFoundationReserve from "@hooks/metrics/useFoundationReserve";
 
 type OrigynFoundationReserveProps = {
@@ -51,24 +52,27 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
   } = useFoundationReserve();
 
   return (
-    <PieStatsCard
-      className={className}
-      title="OGY Foundation Reserve"
-      titleTooltip={
-        <TooltipInfo id="tooltip-amount-foundation">
-          Total amount of OGY tokens owned by ORIGYN foundation across all
-          wallets.
-        </TooltipInfo>
-      }
-      data={foundationAssets?.dataPieChart}
-      colors={COLORS}
-      infos={infos}
-      totalLabel="Total Foundation Supply"
-      totalValue={foundationAssets?.string.totalSupply}
-      isLoading={isLoading}
-      isError={isError}
-      errorMessage={error?.message}
-    />
+    <SkeletonOverlay loading={isLoading}>
+      <PieStatsCard
+        className={className}
+        title="OGY Foundation Reserve"
+        titleTooltip={
+          <TooltipInfo id="tooltip-amount-foundation">
+            Total amount of OGY tokens owned by ORIGYN foundation across all
+            wallets.
+          </TooltipInfo>
+        }
+        data={isLoading ? FAKE_PIE_SERIES.slice(0, 2) : foundationAssets?.dataPieChart}
+        colors={COLORS}
+        infos={infos}
+        totalLabel="Total Foundation Supply"
+        totalValue={
+          isLoading ? FAKE_STAT_VALUE : foundationAssets?.string.totalSupply
+        }
+        isError={isError}
+        errorMessage={error?.message}
+      />
+    </SkeletonOverlay>
   );
 };
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NewTableColumn } from "@components/ui/NewTable";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import { DateTime } from "luxon";
 
 export type TransactionRow = {
@@ -26,7 +27,7 @@ const DateCell = ({ timestampRaw }: { timestampRaw: number }) => {
   return (
     <button
       onClick={() => setShowRelative((r) => !r)}
-      className="inline-block bg-[#ECEEF4] text-[#69737C] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-[#E1E5ED] transition-colors"
+      className="inline-block bg-border-faint text-muted text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-border-strong transition-colors"
     >
       {label}
     </button>
@@ -72,7 +73,7 @@ export const getTransactionColumns = (
     cell: (row) => (
       <div className="w-20">
         <span
-          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap capitalize ${KIND_COLORS[row.kind] ?? "bg-[#ECEEF4] text-[#69737C]"}`}
+          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap capitalize ${KIND_COLORS[row.kind] ?? "bg-border-faint text-muted"}`}
         >
           {row.kind}
         </span>
@@ -165,4 +166,4 @@ const FAKE_ROW: TransactionRow = {
 };
 
 export const buildSkeletonRows = (count: number): TransactionRow[] =>
-  Array.from({ length: count }, () => ({ ...FAKE_ROW }));
+  buildFakeRows(FAKE_ROW, count);

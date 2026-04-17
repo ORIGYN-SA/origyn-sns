@@ -2,8 +2,14 @@
 // @ts-nocheck
 import { useNavigate } from "react-router-dom";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { NewTable, NewTableColumn, TooltipInfo, TablePagination } from "@components/ui";
-import { TableSkeleton } from "@components/ui/NewTable";
+import {
+  NewTable,
+  NewTableColumn,
+  TooltipInfo,
+  TablePagination,
+  SkeletonOverlay,
+} from "@components/ui";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { TableProps } from "@helpers/table/useTable";
 
@@ -60,10 +66,7 @@ const TokenDistributionList = ({
     weight: "10.00%",
     tag: "",
   };
-  const skeletonRows = Array.from(
-    { length: expectedRowsOnThisPage },
-    (_, i) => ({ ...FAKE_TOKEN_ROW, id: i })
-  );
+  const skeletonRows = buildFakeRows(FAKE_TOKEN_ROW, expectedRowsOnThisPage);
 
   const columns: NewTableColumn<any>[] = [
     {
@@ -139,31 +142,24 @@ const TokenDistributionList = ({
     />
   ) : null;
 
+  const rows =
+    isFetchingFetchTokenHolders || !isSuccessFetchTokenHolders || !data
+      ? skeletonRows
+      : data.list.rows;
+
+  if (isErrorFetchTokenHolders) {
+    return (
+      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
+        <div>{errorFetchTokenHolders?.message}</div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {isFetchingFetchTokenHolders ? (
-        <TableSkeleton>
-          <NewTable
-            columns={columns}
-            data={skeletonRows}
-            footer={paginationFooter}
-          />
-        </TableSkeleton>
-      ) : (
-        isSuccessFetchTokenHolders &&
-        data && (
-          <NewTable
-            columns={columns}
-            data={data.list.rows}
-            footer={paginationFooter}
-          />
-        )
-      )}
-      {isErrorFetchTokenHolders && (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorFetchTokenHolders?.message}</div>
-        </div>
-      )}
+      <SkeletonOverlay loading={isFetchingFetchTokenHolders}>
+        <NewTable columns={columns} data={rows} footer={paginationFooter} />
+      </SkeletonOverlay>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Card, TooltipInfo } from "@components/ui";
-import Skeleton from "@components/ui/SkeletonShadcn";
 import { Error as ChartError } from "@components/charts";
 import AreaChart from "@components/charts/shadcn/AreaChart";
 import PeriodSelect from "./PeriodSelect";
@@ -28,7 +27,6 @@ type ChartStatsCardProps = {
     label: string;
   };
   legendLabel: string;
-  loading: boolean;
   isError?: boolean;
   errorMessage?: string;
   className?: string;
@@ -42,7 +40,6 @@ const ChartStatsCard = ({
   stats,
   chart,
   legendLabel,
-  loading,
   isError,
   errorMessage,
   className,
@@ -76,7 +73,7 @@ const ChartStatsCard = ({
                   index === stats.length - 1 ? "mb-12 xl:mb-0" : "mb-4 xl:mb-0"
                 }`}
               >
-                <Stat value={stat.value} unit={stat.unit} loading={loading} />
+                <Stat value={stat.value} unit={stat.unit} />
               </div>
             </div>
           ))}
@@ -91,17 +88,13 @@ const ChartStatsCard = ({
           </div>
         </div>
       </div>
-      <div className="col-span-3 h-72 rounded-xl">
-        {loading ? (
-          <Skeleton className="h-full w-full" />
-        ) : (
-          <AreaChart
-            data={chart.data}
-            color={chart.color}
-            label={chart.label}
-            className="h-full w-full"
-          />
-        )}
+      <div data-skel-block className="col-span-3 h-72 rounded-xl">
+        <AreaChart
+          data={chart.data}
+          color={chart.color}
+          label={chart.label}
+          className="h-full w-full"
+        />
       </div>
       <div className="flex items-center justify-end mt-2 mr-6 xl:hidden">
         <div

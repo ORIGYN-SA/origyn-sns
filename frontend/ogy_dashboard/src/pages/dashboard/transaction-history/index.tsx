@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useNavigate } from "react-router-dom";
-import { Card, Button, NewTable } from "@components/ui";
-import { TableSkeleton } from "@components/ui/NewTable";
+import { Card, Button, NewTable, SkeletonOverlay } from "@components/ui";
 import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
 import {
   getTransactionColumns,
@@ -25,6 +22,7 @@ const TransactionHistory = ({
   });
 
   const columns = getTransactionColumns(navigate);
+  const rows = isLoading || !isSuccess || !data ? SKELETON_ROWS : data.list.rows;
 
   return (
     <Card className={className} {...restProps}>
@@ -39,14 +37,9 @@ const TransactionHistory = ({
           Show all
         </Button>
       </div>
-      {isLoading && (
-        <TableSkeleton>
-          <NewTable columns={columns} data={SKELETON_ROWS} />
-        </TableSkeleton>
-      )}
-      {isSuccess && data && (
-        <NewTable columns={columns} data={data.list.rows} />
-      )}
+      <SkeletonOverlay loading={isLoading}>
+        <NewTable columns={columns} data={rows} />
+      </SkeletonOverlay>
     </Card>
   );
 };

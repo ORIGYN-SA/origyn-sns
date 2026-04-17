@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Card, TooltipInfo } from "@components/ui";
+import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { StatCard } from "@components/dashboard";
+import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
@@ -115,28 +116,29 @@ const OrigynTreasuryAccount = ({
         </div>
       )}
       {!isError && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
-          {data.map(({ value, token, className, logo, tooltip }) => (
-            <StatCard
-              key={token}
-              loading={isLoading}
-              title={`Network Revenue (${token})`}
-              value={value}
-              unit={token}
-              accessory={
-                <img
-                  src={logo}
-                  alt="Token logo"
-                  className="h-4 w-4 object-contain"
-                />
-              }
-              tooltip={
-                <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
-              }
-              underlineClassName={className}
-            />
-          ))}
-        </div>
+        <SkeletonOverlay loading={isLoading}>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
+            {data.map(({ value, token, className, logo, tooltip }) => (
+              <StatCard
+                key={token}
+                title={`Network Revenue (${token})`}
+                value={isLoading ? FAKE_STAT_VALUE : value}
+                unit={token}
+                accessory={
+                  <img
+                    src={logo}
+                    alt="Token logo"
+                    className="h-4 w-4 object-contain"
+                  />
+                }
+                tooltip={
+                  <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
+                }
+                underlineClassName={className}
+              />
+            ))}
+          </div>
+        </SkeletonOverlay>
       )}
     </Card>
   );

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import AreaChart from "@components/charts/shadcn/AreaChart";
 import { Card, TooltipInfo } from "@components/ui";
-import Skeleton from "@components/ui/SkeletonShadcn";
 import CardHeader from "./CardHeader";
 import PeriodSelect from "./PeriodSelect";
 import Stat from "./Stat";
@@ -22,7 +21,6 @@ type AreaStatCardProps = {
   chartData: { name: string; value: number }[] | undefined;
   chartColor: string;
   chartLabel: string;
-  loading: boolean;
   className?: string;
 };
 
@@ -40,7 +38,6 @@ const AreaStatCard = ({
   chartData,
   chartColor,
   chartLabel,
-  loading,
   className,
 }: AreaStatCardProps) => (
   <Card className={`flex flex-col ${className ?? ""}`}>
@@ -51,14 +48,7 @@ const AreaStatCard = ({
           {tooltipContent}
         </TooltipInfo>
       }
-      subtitle={
-        <Stat
-          iconSrc={iconSrc}
-          value={value}
-          unit={unit}
-          loading={loading}
-        />
-      }
+      subtitle={<Stat iconSrc={iconSrc} value={value} unit={unit} />}
       right={
         <PeriodSelect
           options={periodOptions}
@@ -67,17 +57,16 @@ const AreaStatCard = ({
         />
       }
     />
-    <div className="mt-4 flex-1 min-h-72 w-full rounded-xl">
-      {loading ? (
-        <Skeleton className="aspect-video w-full" />
-      ) : (
-        <AreaChart
-          data={chartData}
-          color={chartColor}
-          label={chartLabel}
-          className="h-full w-full"
-        />
-      )}
+    <div
+      data-skel-block
+      className="mt-4 flex-1 min-h-72 w-full rounded-xl"
+    >
+      <AreaChart
+        data={chartData}
+        color={chartColor}
+        label={chartLabel}
+        className="h-full w-full"
+      />
     </div>
   </Card>
 );

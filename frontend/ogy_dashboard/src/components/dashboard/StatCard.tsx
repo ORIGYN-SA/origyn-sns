@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 import clsx from "clsx";
 import { Card } from "@components/ui";
-import Skeleton from "@components/ui/SkeletonShadcn";
 import Stat from "./Stat";
 
 type StatCardProps = {
@@ -13,7 +12,6 @@ type StatCardProps = {
   underlineColor?: string;
   underlineClassName?: string;
   active?: boolean;
-  loading?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   className?: string;
@@ -28,23 +26,11 @@ const StatCard: FC<StatCardProps> = ({
   underlineColor,
   underlineClassName,
   active = false,
-  loading = false,
   onMouseEnter,
   onMouseLeave,
   className,
 }) => {
   const interactive = Boolean(onMouseEnter || onMouseLeave);
-
-  const renderedAccessory = loading && accessory ? (
-    <Skeleton className="h-4 w-4 rounded-full" />
-  ) : (
-    accessory
-  );
-  const renderedTitle = loading ? (
-    <Skeleton className="h-[16px] w-32 leading-none" />
-  ) : (
-    title
-  );
 
   return (
     <Card
@@ -60,21 +46,18 @@ const StatCard: FC<StatCardProps> = ({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center text-[16px] font-medium leading-none">
-          {renderedAccessory}
-          <span
-            className={clsx(renderedAccessory && "ml-2", "text-[#69737C]")}
-          >
-            {renderedTitle}
+          {accessory}
+          <span className={clsx(accessory && "ml-2", "text-muted")}>
+            {title}
           </span>
         </div>
-        {!loading && tooltip}
+        {tooltip}
       </div>
       <div className="mt-4">
         <Stat
           value={value}
           unit={unit}
           unitClassName="ml-1 font-light text-[16px] leading-6"
-          loading={loading}
         />
       </div>
       <Card.BorderBottom color={underlineColor} className={underlineClassName} />

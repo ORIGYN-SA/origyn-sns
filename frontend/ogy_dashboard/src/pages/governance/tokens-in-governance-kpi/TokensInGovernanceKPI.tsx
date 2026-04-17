@@ -1,5 +1,6 @@
-import { TooltipInfo } from "@components/ui";
+import { TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { StatCard } from "@components/dashboard";
+import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
 
 const COLORS = [
@@ -11,37 +12,38 @@ const COLORS = [
   "#f87171", // red-400
 ];
 
-const PLACEHOLDER_ITEMS = Array.from({ length: 6 }, (_, i) => ({ id: i }));
+const PLACEHOLDER_ITEMS = Array.from({ length: 6 }, (_, i) => ({
+  id: i,
+  name: `Metric ${i + 1}`,
+  value: FAKE_STAT_VALUE,
+  tooltip: "Loading…",
+}));
 
 const TokensInGovernanceKPI = ({ className }: { className?: string }) => {
   const { data, isLoading, isSuccess } = useProposalsMetrics();
 
+  const items =
+    isLoading || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
+
   return (
     <div className={className}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-        {isLoading
-          ? PLACEHOLDER_ITEMS.map((item) => (
-              <StatCard
-                key={item.id}
-                loading
-                underlineColor={COLORS[item.id]}
-              />
-            ))
-          : isSuccess &&
-            data.map(({ name, value, tooltip }, index) => (
-              <StatCard
-                key={name}
-                title={name}
-                value={value}
-                tooltip={
-                  <TooltipInfo id={name} clickable={true}>
-                    {tooltip}
-                  </TooltipInfo>
-                }
-                underlineColor={COLORS[index]}
-              />
-            ))}
-      </div>
+      <SkeletonOverlay loading={isLoading}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          {items.map(({ name, value, tooltip }, index) => (
+            <StatCard
+              key={name}
+              title={name}
+              value={value}
+              tooltip={
+                <TooltipInfo id={name} clickable={true}>
+                  {tooltip}
+                </TooltipInfo>
+              }
+              underlineColor={COLORS[index]}
+            />
+          ))}
+        </div>
+      </SkeletonOverlay>
     </div>
   );
 };

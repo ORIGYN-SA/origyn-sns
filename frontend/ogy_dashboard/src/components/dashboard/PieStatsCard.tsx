@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Card, TooltipInfo } from "@components/ui";
-import Skeleton from "@components/ui/SkeletonShadcn";
 import PieChart, { PieChartData } from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
 import Stat from "./Stat";
@@ -19,7 +18,6 @@ type PieStatsCardProps = {
   infos: SegmentInfo[];
   totalLabel: ReactNode;
   totalValue: string | undefined;
-  isLoading: boolean;
   isError: boolean;
   errorMessage?: string;
   className?: string;
@@ -33,7 +31,6 @@ const PieStatsCard = ({
   infos,
   totalLabel,
   totalValue,
-  isLoading,
   isError,
   errorMessage,
   className,
@@ -54,10 +51,8 @@ const PieStatsCard = ({
         </div>
         {titleTooltip}
       </div>
-      <div className="mt-6 h-72 rounded-xl">
-        {isLoading ? (
-          <Skeleton className="h-full w-full" />
-        ) : hasData ? (
+      <div data-skel-block className="mt-6 h-72 rounded-xl">
+        {hasData ? (
           <PieChart data={data} colors={colors} />
         ) : (
           <div className="flex justify-center items-center h-full text-content/60">
@@ -69,46 +64,33 @@ const PieStatsCard = ({
         <h2 className="font-semibold text-[16px] leading-none text-muted">
           {totalLabel}
         </h2>
-        <Stat
-          iconSrc="/ogy_logo.svg"
-          value={totalValue}
-          unit="OGY"
-          loading={isLoading}
-        />
+        <Stat iconSrc="/ogy_logo.svg" value={totalValue} unit="OGY" />
       </div>
       <div className="grid grid-cols-1 gap-4 mt-8">
-        {isLoading
-          ? infos.map((info, index) => (
-              <StatCard
-                key={info.id}
-                loading
-                underlineColor={colors[index]}
-              />
-            ))
-          : hasData &&
-            data.map(({ name, valueToString }, index) => (
-              <StatCard
-                key={name}
-                title={name}
-                value={valueToString}
-                unit="OGY"
-                accessory={
-                  <div
-                    className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: colors[index] }}
-                  />
-                }
-                tooltip={
-                  <TooltipInfo id={infos[index].id}>
-                    {infos[index].value}
-                  </TooltipInfo>
-                }
-                underlineColor={colors[index]}
-                active={activeIndex === index}
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-              />
-            ))}
+        {hasData &&
+          data.map(({ name, valueToString }, index) => (
+            <StatCard
+              key={name}
+              title={name}
+              value={valueToString}
+              unit="OGY"
+              accessory={
+                <div
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: colors[index] }}
+                />
+              }
+              tooltip={
+                <TooltipInfo id={infos[index].id}>
+                  {infos[index].value}
+                </TooltipInfo>
+              }
+              underlineColor={colors[index]}
+              active={activeIndex === index}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(null)}
+            />
+          ))}
       </div>
     </Card>
   );

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChartStatsCard } from "@components/dashboard";
+import { SkeletonOverlay } from "@components/ui";
+import { FAKE_AREA_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useTotalTokensStake from "@hooks/metrics/useTotalTokensStakes";
 
 const SELECT_PERIOD_OPTIONS = [
@@ -19,31 +21,32 @@ const ChartTotalTokensStakes = ({
   });
 
   return (
-    <ChartStatsCard
-      className={className}
-      title="Staking Overview"
-      periodOptions={SELECT_PERIOD_OPTIONS}
-      period={selectedDays}
-      onPeriodChange={setSelectedDays}
-      stats={[
-        {
-          id: "total-tokens-in-stakes",
-          label: "Total Tokens in Stakes",
-          tooltipContent: <p>Tokens that are locked in stakes.</p>,
-          value: data?.total,
-          unit: "OGY",
-        },
-      ]}
-      chart={{
-        data: data?.dataChart,
-        color: "#34d399",
-        label: "Staked Tokens",
-      }}
-      legendLabel="STAKED TOKENS"
-      loading={isLoading}
-      isError={isError}
-      errorMessage="Error while fetching governance staking data."
-    />
+    <SkeletonOverlay loading={isLoading}>
+      <ChartStatsCard
+        className={className}
+        title="Staking Overview"
+        periodOptions={SELECT_PERIOD_OPTIONS}
+        period={selectedDays}
+        onPeriodChange={setSelectedDays}
+        stats={[
+          {
+            id: "total-tokens-in-stakes",
+            label: "Total Tokens in Stakes",
+            tooltipContent: <p>Tokens that are locked in stakes.</p>,
+            value: isLoading ? FAKE_STAT_VALUE : data?.total,
+            unit: "OGY",
+          },
+        ]}
+        chart={{
+          data: isLoading ? FAKE_AREA_SERIES : data?.dataChart,
+          color: "#34d399",
+          label: "Staked Tokens",
+        }}
+        legendLabel="STAKED TOKENS"
+        isError={isError}
+        errorMessage="Error while fetching governance staking data."
+      />
+    </SkeletonOverlay>
   );
 };
 

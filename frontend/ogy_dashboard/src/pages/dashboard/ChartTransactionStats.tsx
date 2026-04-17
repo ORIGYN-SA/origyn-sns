@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Card } from "@components/ui";
+import { Card, SkeletonOverlay } from "@components/ui";
 import { PeriodSelect } from "@components/dashboard";
 import useGetTransactionStats from "@hooks/transactions/useGetTransactionStats";
 import {
-  Loader as ChartLoader,
   Error as ChartError,
   Area as ChartArea,
 } from "@components/charts";
+import { FAKE_AREA_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 
 const SELECT_PERIOD_OPTIONS = [
   { value: "weekly", label: "Weekly" },
@@ -20,13 +20,16 @@ const ChartTransactionStats = ({
   className?: string;
 }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("monthly");
-  const { data, isSuccess, isLoading, isError } = useGetTransactionStats({
+  const { data, isLoading, isError } = useGetTransactionStats({
     period: selectedPeriod,
   });
 
   const handleOnChangePeriod = (period: string) => {
     setSelectedPeriod(period);
   };
+
+  const total = isLoading || !data ? FAKE_STAT_VALUE : data.total;
+  const chartData = isLoading || !data ? FAKE_AREA_SERIES : data.dataChart;
 
   return (
     <Card className={className} {...restProps}>
@@ -38,24 +41,40 @@ const ChartTransactionStats = ({
           onChange={handleOnChangePeriod}
         />
       </div>
-      {isLoading && <ChartLoader />}
       {isError && !isLoading && !data && (
         <ChartError>Error while fetching transaction data.</ChartError>
       )}
-      {isSuccess && data && !isLoading && (
-        <div className="flex flex-col xl:flex-row mt-4">
-          <div className="xl:w-1/4 flex flex-col">
-            <div>
-              <div className="flex">
-                <span className="text-content/60 font-semibold mr-2">
-                  Total Transactions
-                </span>
+      {!(isError && !isLoading && !data) && (
+        <SkeletonOverlay loading={isLoading}>
+          <div className="flex flex-col xl:flex-row mt-4">
+            <div className="xl:w-1/4 flex flex-col">
+              <div>
+                <div className="flex">
+                  <span className="text-content/60 font-semibold mr-2">
+                    Total Transactions
+                  </span>
+                </div>
+                <div className="text-2xl font-semibold mt-2">
+                  <span className="mr-3">{total}</span>
+                </div>
               </div>
-              <div className="text-2xl font-semibold mt-2">
-                <span className="mr-3">{data.total}</span>
+              <div className="items-center justify-start mr-6 mt-auto mb-6 hidden md:flex">
+                <div
+                  className="h-2 w-4 rounded-lg"
+                  style={{ backgroundColor: "#645eff" }}
+                ></div>
+                <div className="text-xs text-content/60 font-semibold ml-2 uppercase">
+                  Total Transactions
+                </div>
               </div>
             </div>
-            <div className="items-center justify-start mr-6 mt-auto mb-6 hidden md:flex">
+            <div
+              data-skel-block
+              className="xl:w-3/4 h-72 rounded-xl my-6"
+            >
+              <ChartArea data={chartData} fill="#645eff" />
+            </div>
+            <div className="items- justify-end flex mr-6 md:hidden">
               <div
                 className="h-2 w-4 rounded-lg"
                 style={{ backgroundColor: "#645eff" }}
@@ -65,19 +84,7 @@ const ChartTransactionStats = ({
               </div>
             </div>
           </div>
-          <div className="xl:w-3/4 h-72 rounded-xl my-6">
-            <ChartArea data={data.dataChart} fill="#645eff" />
-          </div>
-          <div className="items- justify-end flex mr-6 md:hidden">
-            <div
-              className="h-2 w-4 rounded-lg"
-              style={{ backgroundColor: "#645eff" }}
-            ></div>
-            <div className="text-xs text-content/60 font-semibold ml-2 uppercase">
-              Total Transactions
-            </div>
-          </div>
-        </div>
+        </SkeletonOverlay>
       )}
     </Card>
   );

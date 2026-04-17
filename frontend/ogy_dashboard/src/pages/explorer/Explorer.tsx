@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { NewTable, TablePagination } from "@components/ui";
-import { TableSkeleton } from "@components/ui/NewTable";
+import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
 import { Search } from "@components/ui";
 import { ChevronRightIcon } from "@components/ui/icons";
 import { useSearchExplorer } from "@hooks/explorer";
@@ -10,6 +9,11 @@ import {
   getTransactionColumns,
   buildSkeletonRows,
 } from "@pages/transactions/transactionColumns";
+
+const FAKE_SEARCH_RESULT = {
+  type: "principalId" as const,
+  value: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa",
+};
 
 export const Explorer = () => {
   const navigate = useNavigate();
@@ -23,14 +27,20 @@ export const Explorer = () => {
 
   const searchForItems = useMemo(
     () => [
-      { title: "PrincipalID", bgColorCn: "bg-[#EDF8F4]", colorCn: "text-[#50BE8F]" },
-      { title: "AccountID", bgColorCn: "bg-[#DCF3FF]", colorCn: "text-[#00A2F7]" },
-      { title: "BlockIndex", bgColorCn: "bg-[#FFEBF8]", colorCn: "text-[#FF55C5]" },
+      { title: "PrincipalID", bgColorCn: "bg-jade/10", colorCn: "text-jade" },
+      { title: "AccountID", bgColorCn: "bg-sky/10", colorCn: "text-sky" },
+      {
+        title: "BlockIndex",
+        bgColorCn: "bg-candyFloss/10",
+        colorCn: "text-candyFloss",
+      },
     ],
     []
   );
 
   const search = useSearchExplorer({ searchterm });
+  const searchSettled = search.isSuccess || search.isError;
+  const hasSearchResult = searchSettled && !!search.data;
 
   const { data, isSuccess, isFetching } = useFetchAllTransactions({
     limit: pageSize,
@@ -39,8 +49,9 @@ export const Explorer = () => {
   });
 
   const columns = getTransactionColumns(navigate);
-
   const pageCount = data?.list.pageCount ?? 0;
+  const rows =
+    isFetching || !isSuccess || !data ? buildSkeletonRows(pageSize) : data.list.rows;
 
   const handleClickSearchResult = (
     searchType: "blockIndex" | "principalId",
@@ -69,6 +80,39 @@ export const Explorer = () => {
     />
   );
 
+  const searchResult = hasSearchResult ? search.data : FAKE_SEARCH_RESULT;
+
+  const searchDropdown =
+    searchSettled && !search.data ? (
+      <div className="h-10 flex items-center justify-center text-sm text-muted">
+        No results found
+      </div>
+    ) : (
+      <SkeletonOverlay loading={!searchSettled}>
+        <button
+          onClick={() =>
+            hasSearchResult &&
+            handleClickSearchResult(searchResult.type, searchResult.value)
+          }
+          className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-left hover:bg-surface-2 transition-colors"
+        >
+          <span
+            className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
+              searchResult.type === "blockIndex"
+                ? "bg-candyFloss/10 text-candyFloss"
+                : "bg-jade/10 text-jade"
+            }`}
+          >
+            {searchResult.type === "blockIndex" ? "Block" : "Principal"}
+          </span>
+          <span className="truncate text-sm font-medium text-content">
+            {searchResult.value}
+          </span>
+          <ChevronRightIcon className="shrink-0 ml-auto text-muted" />
+        </button>
+      </SkeletonOverlay>
+    );
+
   return (
     <div className="max-w-[1440px] mx-auto py-16 px-6">
       <div className="flex flex-col items-center">
@@ -76,12 +120,14 @@ export const Explorer = () => {
           <h1 className="text-4xl sm:text-6xl font-bold">
             Transaction History
           </h1>
-          <div className="flex items-center gap-2 mt-6 justify-center flex-wrap text-sm text-[#69737C]">
+          <div className="flex items-center gap-2 mt-6 justify-center flex-wrap text-sm text-muted">
             <span>Search for:</span>
             {searchForItems.map(({ title, bgColorCn, colorCn }, index) => (
               <div key={index} className="flex items-center gap-2">
                 {index === searchForItems.length - 1 && <span>or</span>}
-                <span className={`${bgColorCn} ${colorCn} text-xs font-semibold px-4 py-1 rounded-full`}>
+                <span
+                  className={`${bgColorCn} ${colorCn} text-xs font-semibold px-4 py-1 rounded-full`}
+                >
                   {title}
                 </span>
               </div>
@@ -94,68 +140,21 @@ export const Explorer = () => {
         id="search-explorer"
         placeholder="Search for an item"
         className="max-w-2xl m-auto mt-8"
-        dropdown={
-          (search.isSuccess || search.isError) ? (
-            search.data ? (
-              <button
-                onClick={() =>
-                  handleClickSearchResult(
-                    search.data.type,
-                    search.data.value
-                  )
-                }
-                className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-left hover:bg-[#F5F5F5] transition-colors"
-              >
-                <span
-                  className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
-                    search.data.type === "blockIndex"
-                      ? "bg-[#FFEBF8] text-[#FF55C5]"
-                      : "bg-[#EDF8F4] text-[#50BE8F]"
-                  }`}
-                >
-                  {search.data.type === "blockIndex" ? "Block" : "Principal"}
-                </span>
-                <span className="truncate text-sm font-medium text-[#222526]">
-                  {search.data.value}
-                </span>
-                <ChevronRightIcon className="shrink-0 ml-auto text-[#69737C]" />
-              </button>
-            ) : (
-              <div className="h-10 flex items-center justify-center text-sm text-[#69737C]">
-                No results found
-              </div>
-            )
-          ) : (
-            <div className="h-10 flex items-center gap-3 px-2 animate-pulse">
-              <span className="shrink-0 h-6 w-16 rounded-full bg-muted/20" />
-              <span className="h-4 w-full rounded bg-muted/20" />
-            </div>
-          )
-        }
+        dropdown={searchDropdown}
       />
 
       <div className="mt-16">
         <div className="flex items-center mb-4 gap-4">
           <button
             onClick={() => setSortDesc((d) => !d)}
-            className="text-sm text-[#69737C] hover:text-[#222526] flex items-center gap-1"
+            className="text-sm text-muted hover:text-content flex items-center gap-1"
           >
             Index {sortDesc ? "↓" : "↑"}
           </button>
         </div>
-        {isFetching ? (
-          <TableSkeleton>
-            <NewTable columns={columns} data={buildSkeletonRows(pageSize)} footer={paginationFooter} />
-          </TableSkeleton>
-        ) : (
-          isSuccess && data && (
-            <NewTable
-              columns={columns}
-              data={data.list.rows}
-              footer={paginationFooter}
-            />
-          )
-        )}
+        <SkeletonOverlay loading={isFetching}>
+          <NewTable columns={columns} data={rows} footer={paginationFooter} />
+        </SkeletonOverlay>
       </div>
     </div>
   );
