@@ -3,7 +3,7 @@ import { Card, SkeletonOverlay } from "@components/ui";
 import { CardHeader, PeriodSelect, Stat } from "@components/dashboard";
 import AreaChart from "@components/charts/area/Area";
 import ChartError from "@components/charts/utils/Error";
-import { FAKE_AREA_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
+import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
 import useTotalOGYTransferred from "@hooks/metrics/useTotalOGYTransferred";
 
 const SELECT_PERIOD_OPTIONS = [
@@ -24,7 +24,7 @@ const TotalOGYTransferred = ({ className }: { className?: string }) => {
     ? data
         .reduce((sum, item) => sum + item.transfer_count.number, 0)
         .toLocaleString()
-    : FAKE_STAT_VALUE;
+    : undefined;
 
   const timeSeriesData = data
     ? data.map((item) => ({
@@ -47,6 +47,7 @@ const TotalOGYTransferred = ({ className }: { className?: string }) => {
                 iconSrc="/ogy_logo.svg"
                 value={totalTransferred}
                 unit="OGY"
+                loading={isLoading}
               />
             }
             right={

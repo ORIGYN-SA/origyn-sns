@@ -2,7 +2,6 @@ import { Card, TooltipInfo, Button, SkeletonOverlay } from "@components/ui";
 import { StatCard } from "@components/dashboard";
 import useFetchOGYRewardAccount from "@hooks/accounts/useFetchOGYRewardAccount";
 import { RewardPool } from "@hooks/accounts/useFetchOGYRewardAccount";
-import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 
 const FAKE_ORA_ROWS: RewardPool[] = Array.from({ length: 6 }, (_, i) => ({
   year: `${2024 + i * 2}`,
@@ -52,7 +51,6 @@ const OrigynTreasuryAccount = ({
   const { data, isLoading, isError } = useFetchOGYRewardAccount();
 
   const rows = isLoading || !data ? FAKE_ORA_ROWS : data.rewardsPool.rows;
-  const balance = isLoading || !data ? FAKE_STAT_VALUE : data.rewardAccountBalance;
 
   return (
     <Card className={className}>
@@ -65,8 +63,9 @@ const OrigynTreasuryAccount = ({
             <StatCard
               className="xl:col-span-1"
               title="ORA Balance"
-              value={balance}
+              value={data?.rewardAccountBalance}
               unit="OGY"
+              loading={isLoading}
               tooltip={
                 <TooltipInfo id="tooltip-ora-ogy" clickable={true}>
                   <p>

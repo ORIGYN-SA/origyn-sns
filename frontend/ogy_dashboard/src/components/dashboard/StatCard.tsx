@@ -12,6 +12,7 @@ type StatCardProps = {
   underlineColor?: string;
   underlineClassName?: string;
   active?: boolean;
+  loading?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   className?: string;
@@ -26,6 +27,7 @@ const StatCard: FC<StatCardProps> = ({
   underlineColor,
   underlineClassName,
   active = false,
+  loading = false,
   onMouseEnter,
   onMouseLeave,
   className,
@@ -58,6 +60,7 @@ const StatCard: FC<StatCardProps> = ({
           value={value}
           unit={unit}
           unitClassName="ml-1 font-light text-[16px] leading-6"
+          loading={loading}
         />
       </div>
       <Card.BorderBottom color={underlineColor} className={underlineClassName} />

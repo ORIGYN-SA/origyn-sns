@@ -1,6 +1,5 @@
 import { TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { StatCard } from "@components/dashboard";
-import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
 
 const COLORS = [
@@ -15,15 +14,14 @@ const COLORS = [
 const PLACEHOLDER_ITEMS = Array.from({ length: 6 }, (_, i) => ({
   id: i,
   name: `Metric ${i + 1}`,
-  value: FAKE_STAT_VALUE,
+  value: undefined,
   tooltip: "Loading…",
 }));
 
 const TokensInGovernanceKPI = ({ className }: { className?: string }) => {
   const { data, isLoading, isSuccess } = useProposalsMetrics();
 
-  const items =
-    isLoading || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
+  const items = isLoading || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
 
   return (
     <div className={className}>
@@ -34,6 +32,7 @@ const TokensInGovernanceKPI = ({ className }: { className?: string }) => {
               key={name}
               title={name}
               value={value}
+              loading={isLoading}
               tooltip={
                 <TooltipInfo id={name} clickable={true}>
                   {tooltip}

@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { StatCard } from "@components/dashboard";
-import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
@@ -122,8 +121,9 @@ const OrigynTreasuryAccount = ({
               <StatCard
                 key={token}
                 title={`Network Revenue (${token})`}
-                value={isLoading ? FAKE_STAT_VALUE : value}
+                value={isLoading ? undefined : value}
                 unit={token}
+                loading={isLoading}
                 accessory={
                   <img
                     src={logo}

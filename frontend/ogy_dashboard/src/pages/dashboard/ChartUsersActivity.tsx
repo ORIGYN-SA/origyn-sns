@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { ChartStatsCard } from "@components/dashboard";
-import { SkeletonOverlay } from "@components/ui";
-import { FAKE_AREA_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import useGetActivityStats, {
   Period,
 } from "@hooks/super_stats_v3/useGetActivityStats";
@@ -33,52 +31,44 @@ const ChartUsersActivity = ({
 
   const loading = isLoading || isLoadingFetchActiveUsers;
 
-  const chartData = loading
-    ? FAKE_AREA_SERIES
-    : (data ?? []).map(({ total_unique_accounts, start_time }) => ({
-        name: start_time.datetime.toFormat("LLL dd"),
-        value: total_unique_accounts.number,
-      }));
-
   return (
-    <SkeletonOverlay loading={loading}>
-      <ChartStatsCard
-        className={className}
-        title="Users Overview"
-        periodOptions={SELECT_PERIOD_OPTIONS}
-        period={selectedPeriod}
-        onPeriodChange={(v) => setSelectedPeriod(v as Period)}
-        stats={[
-          {
-            id: "unique-token-holders",
-            label: "OGY Protocol Users",
-            tooltipContent: <p>Unique token holders of OGY tokens</p>,
-            value: loading
-              ? FAKE_STAT_VALUE
-              : data?.[data.length - 1]?.total_unique_accounts.string,
-          },
-          {
-            id: "active-users-account",
-            label: "OGY Active Wallets",
-            tooltipContent: <p>Active token holders of OGY tokens</p>,
-            value: loading
-              ? FAKE_STAT_VALUE
-              : activeUsers &&
-                roundAndFormatLocale({
-                  number: Number(activeUsers.active_accounts_count),
-                }),
-          },
-        ]}
-        chart={{
-          data: chartData,
-          color: "#34d399",
+    <ChartStatsCard
+      className={className}
+      title="Users Overview"
+      periodOptions={SELECT_PERIOD_OPTIONS}
+      period={selectedPeriod}
+      onPeriodChange={(v) => setSelectedPeriod(v as Period)}
+      stats={[
+        {
+          id: "unique-token-holders",
           label: "OGY Protocol Users",
-        }}
-        legendLabel="OGY PROTOCOL USERS"
-        isError={isError || isErrorFetchActiveUsers}
-        errorMessage="Error while fetching users account data."
-      />
-    </SkeletonOverlay>
+          tooltipContent: <p>Unique token holders of OGY tokens</p>,
+          value: data?.[data.length - 1]?.total_unique_accounts.string,
+        },
+        {
+          id: "active-users-account",
+          label: "OGY Active Wallets",
+          tooltipContent: <p>Active token holders of OGY tokens</p>,
+          value:
+            activeUsers &&
+            roundAndFormatLocale({
+              number: Number(activeUsers.active_accounts_count),
+            }),
+        },
+      ]}
+      chart={{
+        data: (data ?? []).map(({ total_unique_accounts, start_time }) => ({
+          name: start_time.datetime.toFormat("LLL dd"),
+          value: total_unique_accounts.number,
+        })),
+        color: "#34d399",
+        label: "OGY Protocol Users",
+      }}
+      legendLabel="OGY PROTOCOL USERS"
+      loading={loading}
+      isError={isError || isErrorFetchActiveUsers}
+      errorMessage="Error while fetching users account data."
+    />
   );
 };
 
