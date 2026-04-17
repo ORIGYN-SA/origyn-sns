@@ -81,7 +81,7 @@ export const Governance = () => {
         </div>
 
         <div className="max-w-[1125px] mx-auto px-4 py-16 flex flex-col gap-4">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 2xl:gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 items-start gap-8 xl:gap-0 2xl:gap-8">
             <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left flex flex-col items-center xl:items-start gap-[17px]">
               <h1 className="text-[40px] font-bold leading-none text-content">
                 Governance Overview
