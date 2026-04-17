@@ -13,7 +13,7 @@ import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/To
 import NeuronsList from "@pages/neurons/neurons-list/NeuronsList";
 import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { PieChartProvider } from "@components/charts/pie/context";
-import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
+import { StakingOverviewChart } from "@components/dashboard";
 import ChartVotingParticipation from "./ChartVotingParticipation";
 
 export const Governance = () => {
@@ -135,7 +135,7 @@ export const Governance = () => {
       <TokensInGovernanceKpi className="mb-16" />
 
       <div className="mb-16">
-        <ChartTotalTokensStakes />
+        <StakingOverviewChart />
       </div>
       <div className="mb-16">
         <ChartVotingParticipation />

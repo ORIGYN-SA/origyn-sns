@@ -12,7 +12,7 @@ import AuthButton from "@components/auth/Auth";
 import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
 import TransactionHistory from "@pages/dashboard/transaction-history";
-import ChartTotalTokensStakes from "./ChartTotalTokensStakes";
+import { StakingOverviewChart } from "@components/dashboard";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
 // import ChartActiveAccounts from "./ChartActiveAccounts";
@@ -94,7 +94,10 @@ const Dashboard = () => {
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="governance-tokens-stakes"
           >
-            <ChartTotalTokensStakes />
+            <StakingOverviewChart
+              title="Governance Staking Overview"
+              chartColor="#38bdf8"
+            />
           </section>
           {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
 
