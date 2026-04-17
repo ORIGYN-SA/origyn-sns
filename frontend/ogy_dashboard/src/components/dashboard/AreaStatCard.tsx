@@ -10,9 +10,9 @@ type PeriodOption = { value: string; label: string };
 
 type AreaStatCardProps = {
   title: string;
-  tooltipId: string;
+  tooltipId?: string;
   tooltipTitle?: string;
-  tooltipContent: ReactNode;
+  tooltipContent?: ReactNode;
   value: string | undefined;
   unit?: string;
   iconSrc?: string;
@@ -51,9 +51,11 @@ const AreaStatCard = ({
         <CardHeader
           title={title}
           tooltip={
-            <TooltipInfo id={tooltipId} title={tooltipTitle}>
-              {tooltipContent}
-            </TooltipInfo>
+            tooltipContent && tooltipId ? (
+              <TooltipInfo id={tooltipId} title={tooltipTitle}>
+                {tooltipContent}
+              </TooltipInfo>
+            ) : undefined
           }
           subtitle={
             <Stat
