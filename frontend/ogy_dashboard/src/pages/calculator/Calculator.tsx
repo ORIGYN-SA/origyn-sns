@@ -302,7 +302,8 @@ const Calculator = () => {
             Cost calculator
           </h1>
           <p className="font-light text-[22px] leading-none text-center text-muted">
-            See what it costs to mint before you commit.
+            Use the ORIGYN calculator to estimate the cost of your unique
+            certificate with all your data on chain
           </p>
         </div>
 
