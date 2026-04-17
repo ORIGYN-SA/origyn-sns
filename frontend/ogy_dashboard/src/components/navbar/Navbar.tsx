@@ -14,7 +14,6 @@ const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
   { title: "Dashboard", url: "/" },
   { title: "Governance", url: "/governance" },
   { title: "Calculator", url: "/calculator" },
-  { title: "Certificates", url: "/certificates" },
   { title: "My Account", url: "/account", requiresAuth: true },
 ];
 
