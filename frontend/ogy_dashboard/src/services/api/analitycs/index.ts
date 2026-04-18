@@ -1,11 +1,9 @@
-import axios from "axios";
 import { API_PLAUSIBLE_BASE_URL } from "@constants/index";
+import { createHttpClient } from "@services/api/httpClient";
 
-const instance = axios.create({
+const instance = createHttpClient({
   baseURL: API_PLAUSIBLE_BASE_URL,
   timeout: 1000,
-  // headers: { "Authorization": `Bearer ${PLAUSIBLE_API_KEY}` },
-  withCredentials: false,
 });
 
 export default instance;

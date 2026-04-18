@@ -1,9 +1,8 @@
-import axios from "axios";
 import { API_ROSETTA } from "@constants/index";
+import { createHttpClient } from "@services/api/httpClient";
 
-const instance = axios.create({
+const instance = createHttpClient({
   baseURL: API_ROSETTA,
-  withCredentials: false,
   timeout: 5000,
 });
 
