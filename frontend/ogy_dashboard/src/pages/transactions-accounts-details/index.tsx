@@ -12,8 +12,8 @@ import {
   SkeletonOverlay,
   TablePagination,
 } from "@components/ui";
+import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import {
-  StatCard,
   ChartStatsCard,
   PieStatsCard,
 } from "@components/dashboard";
@@ -35,7 +35,14 @@ const TransactionsChartFallback = () => (
   />
 );
 
-const BALANCE_PERIOD_OPTIONS = [{ value: "monthly", label: "Monthly" }];
+const BALANCE_PERIOD_OPTIONS = [
+  { value: "30", label: "Monthly" },
+  { value: "90", label: "Quarterly" },
+  { value: "365", label: "Yearly" },
+  { value: "lifetime", label: "Lifetime" },
+];
+
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const OVERVIEW_COLORS = ["#645eff", "#333089"];
 const OVERVIEW_INFOS = [
   {
@@ -54,18 +61,31 @@ const TransactionsAccountsDetails = () => {
   const params = useParams();
   const accountId = params.accountId as string;
 
-  const [balancePeriod, setBalancePeriod] = useState("monthly");
+  const [balancePeriod, setBalancePeriod] = useState("lifetime");
   const [txPageIndex, setTxPageIndex] = useState(0);
   const [txPageSize, setTxPageSize] = useState(10);
   const [txSortDesc, setTxSortDesc] = useState(true);
 
   const { data, isLoading } = useFecthOneAccount({ accountId });
 
+  const lifetimeDays = useMemo(() => {
+    if (!data?.created_timestamp) return 365;
+    const createdMillis = Number(data.created_timestamp) / 1_000_000;
+    const days = Math.ceil((Date.now() - createdMillis) / MS_PER_DAY);
+    return Math.max(days + 1, 30);
+  }, [data?.created_timestamp]);
+
+  const balanceDays =
+    balancePeriod === "lifetime" ? lifetimeDays : Number(balancePeriod);
+
   const {
     data: balanceHistory,
     isLoading: isLoadingBalance,
     isError: isBalanceError,
-  } = useAccountBalanceHistory({ account: accountId });
+  } = useAccountBalanceHistory({
+    account: accountId,
+    days: balanceDays,
+  });
 
   const {
     data: overview,
@@ -141,39 +161,66 @@ const TransactionsAccountsDetails = () => {
         </div>
       </div>
 
-      <div className="grid xl:grid-cols-3 gap-4 mt-8">
-        <Card className="xl:col-span-2">
-          <div className="mb-4">
-            <div className="text-content/60">ID</div>
-            <div className="font-bold break-all">{data?.id}</div>
+      <Card className="mt-8">
+        <div className="text-sm font-medium text-muted">Balance</div>
+        {isLoading ? (
+          <div className="mt-4 h-10 w-full max-w-[260px] rounded-md bg-muted/20" />
+        ) : (
+          <div className="mt-4 flex items-baseline min-w-0">
+            <img
+              src="/ogy_logo.svg"
+              alt=""
+              className="w-10 h-10 self-center mr-3 shrink-0"
+            />
+            <span className="font-bold text-[40px] leading-none text-content truncate min-w-0">
+              {data?.balance !== undefined
+                ? roundAndFormatLocale({
+                    number: divideBy1e8(Number(data.balance)),
+                  })
+                : "0"}
+            </span>
+            <span className="ml-3 text-muted font-semibold text-[20px] leading-none shrink-0">
+              OGY
+            </span>
           </div>
-          <div className="mb-4">
-            <div className="text-content/60">Owner</div>
-            <div className="font-bold break-all">{data?.owner}</div>
-          </div>
-          <div>
-            <div className="text-content/60">Subaccount</div>
-            <div className="font-bold break-all">
-              {data?.formatted.subaccount}
+        )}
+        <div className="mt-8 pt-6 border-t border-border">
+          <SkeletonOverlay loading={isLoading}>
+            <div className="divide-y divide-border">
+              <div className="flex items-start justify-between gap-6 py-4 first:pt-0">
+                <div className="text-sm font-medium text-muted shrink-0">
+                  ID
+                </div>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="font-semibold text-content break-all text-right">
+                    {data?.id}
+                  </span>
+                  {data?.id && <CopyToClipboard value={data.id} />}
+                </div>
+              </div>
+              <div className="flex items-start justify-between gap-6 py-4">
+                <div className="text-sm font-medium text-muted shrink-0">
+                  Owner
+                </div>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="font-semibold text-content break-all text-right">
+                    {data?.owner}
+                  </span>
+                  {data?.owner && <CopyToClipboard value={data.owner} />}
+                </div>
+              </div>
+              <div className="flex items-start justify-between gap-6 py-4 last:pb-0">
+                <div className="text-sm font-medium text-muted shrink-0">
+                  Subaccount
+                </div>
+                <span className="font-semibold text-content break-all text-right">
+                  {data?.formatted.subaccount}
+                </span>
+              </div>
             </div>
-          </div>
-        </Card>
-        <StatCard
-          accessory={
-            <img src="/ogy_logo.svg" alt="" className="w-6 h-6" />
-          }
-          title="Balance"
-          value={
-            data?.balance !== undefined
-              ? roundAndFormatLocale({
-                  number: divideBy1e8(Number(data.balance)),
-                })
-              : undefined
-          }
-          unit="OGY"
-          loading={isLoading}
-        />
-      </div>
+          </SkeletonOverlay>
+        </div>
+      </Card>
 
       <Suspense fallback={<TransactionsChartFallback />}>
         <TransactionsChart id={accountId} />

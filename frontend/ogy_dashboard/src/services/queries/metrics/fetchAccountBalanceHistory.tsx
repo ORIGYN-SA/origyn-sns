@@ -3,11 +3,13 @@ import { getActor } from "@amerej/artemis-react";
 
 const fetchAccountBalanceHistoryQuery = async ({
   account,
+  days = 30,
 }: {
   account: string;
+  days?: number;
 }): Promise<Array<[bigint, HistoryData]>> => {
   const actor = await getActor("tokenStats", { isAnon: true });
-  const data = await actor.get_principal_history({ days: 30, account });
+  const data = await actor.get_principal_history({ days, account });
   return data as Array<[bigint, HistoryData]>;
 };
 

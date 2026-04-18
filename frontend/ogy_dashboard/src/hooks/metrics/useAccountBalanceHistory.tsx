@@ -10,7 +10,13 @@ import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { ChartData } from "@services/types/charts.types";
 import { HistoryData } from "@services/types/token_metrics";
 
-const useAccountBalanceHistory = ({ account }: { account: string }) => {
+const useAccountBalanceHistory = ({
+  account,
+  days = 30,
+}: {
+  account: string;
+  days?: number;
+}) => {
   const [data, setData] = useState<
     { total: string; dataChart: ChartData[] } | undefined
   >(undefined);
@@ -21,8 +27,8 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
     isError,
     error,
   }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
-    queryKey: ["accountBalanceHistory", account],
-    queryFn: () => fetchAccountBalanceHistory({ account }),
+    queryKey: ["accountBalanceHistory", account, days],
+    queryFn: () => fetchAccountBalanceHistory({ account, days }),
     placeholderData: keepPreviousData,
   });
 
