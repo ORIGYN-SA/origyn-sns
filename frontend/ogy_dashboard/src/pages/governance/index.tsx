@@ -16,6 +16,30 @@ import { PieChartProvider } from "@components/charts/pie/context";
 import { StakingOverviewChart } from "@components/dashboard";
 import ChartVotingParticipation from "./ChartVotingParticipation";
 
+const HeroBackground = () => (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
+    <div
+      className="absolute -bottom-[55%] -left-[10%] w-[1400px] h-[1600px]"
+      style={{
+        background:
+          "radial-gradient(ellipse, rgba(80,190,143,0.55) 0%, transparent 60%)",
+      }}
+    />
+    <div
+      className="absolute -top-[55%] -right-[10%] w-[1500px] h-[1700px]"
+      style={{
+        background:
+          "radial-gradient(ellipse, rgba(255,205,90,0.4) 0%, transparent 60%)",
+      }}
+    />
+    <div className="absolute inset-0 bg-background/80 backdrop-blur-[75px]" />
+    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
+  </div>
+);
+
 export const Governance = () => {
   const location = useLocation();
   const scrollTarget = (location.state as { scrollTo?: string })?.scrollTo;
@@ -58,27 +82,7 @@ export const Governance = () => {
   return (
     <div className="max-w-[1440px] mx-auto">
       <section className="relative isolate overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-        >
-          <div
-            className="absolute -bottom-[55%] -left-[10%] w-[1400px] h-[1600px]"
-            style={{
-              background:
-                "radial-gradient(ellipse, rgba(80,190,143,0.55) 0%, transparent 60%)",
-            }}
-          />
-          <div
-            className="absolute -top-[55%] -right-[10%] w-[1500px] h-[1700px]"
-            style={{
-              background:
-                "radial-gradient(ellipse, rgba(255,205,90,0.4) 0%, transparent 60%)",
-            }}
-          />
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-[75px]" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
-        </div>
+        <HeroBackground />
 
         <div className="max-w-[1125px] mx-auto px-4 py-16 flex flex-col gap-4">
           <div className="grid grid-cols-1 xl:grid-cols-2 items-start gap-8 xl:gap-0 2xl:gap-8">

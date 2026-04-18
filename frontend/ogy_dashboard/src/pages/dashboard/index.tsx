@@ -18,6 +18,31 @@ import { PieChartProvider } from "@components/charts/pie/context";
 // import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
 // import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 
+const HERO_BG_MASK =
+  "radial-gradient(ellipse at center, black 10%, transparent 65%)";
+
+const HERO_BG_GRADIENTS = `
+  radial-gradient(ellipse at 70% 80%, rgba(80,190,143,0.32), transparent 50%),
+  radial-gradient(ellipse at 55% 65%, rgba(31,156,212,0.32), transparent 50%),
+  radial-gradient(ellipse at 30% 75%, rgba(123,63,160,0.22), transparent 50%)
+`;
+
+const HeroBackground = () => (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+  >
+    <div
+      className="w-[1238px] aspect-[41/20]"
+      style={{
+        background: HERO_BG_GRADIENTS,
+        maskImage: HERO_BG_MASK,
+        WebkitMaskImage: HERO_BG_MASK,
+      }}
+    />
+  </div>
+);
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const { isConnected } = useWallet();
@@ -40,30 +65,38 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto py-16 px-6">
-      <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center gap-2 px-16 py-8 max-w-[528px]">
-          <Badge className="bg-spacePurple !py-0 px-[9px] text-white font-extrabold text-[10px] leading-[22px] tracking-[2px] uppercase">
-            OGY ANALYTICS
-          </Badge>
-          <h1 className="font-extrabold text-[64px] leading-[60px] tracking-[-0.05em] text-center text-content">
-            Explore dashboard
-          </h1>
-          <p className="font-light text-[22px] leading-none text-center text-muted">
-            Interact trustlessly with web3 dApps, DAOs, NFTs, DeFi and much more.
-          </p>
-        </div>
+    <div className="max-w-[1440px] mx-auto">
+      <section className="relative isolate overflow-hidden">
+        <HeroBackground />
 
-        <div className="bg-ledger-switch bg-cover bg-center bg-black text-content p-12 rounded-[40px] shadow-[0px_10px_50px_0px_#06274926] my-16 w-full">
-          <LedgerSwitchBannerContent>
-            <div className="flex justify-center mt-8">
-              {!isConnected && <AuthButton label="Login to swap tokens" />}
-              {isConnected && (
-                <Button onClick={handleClickAccount}>My account</Button>
-              )}
-            </div>
-          </LedgerSwitchBannerContent>
+        <div className="flex flex-col items-center pt-16 pb-16 px-6">
+          <div className="flex flex-col items-center gap-2 px-16 py-8 max-w-[528px]">
+            <Badge className="bg-spacePurple !py-0 px-[9px] text-white font-extrabold text-[10px] leading-[22px] tracking-[2px] uppercase">
+              OGY ANALYTICS
+            </Badge>
+            <h1 className="font-extrabold text-[64px] leading-[60px] tracking-[-0.05em] text-center text-content">
+              Explore dashboard
+            </h1>
+            <p className="font-light text-[22px] leading-none text-center text-muted">
+              Interact trustlessly with web3 dApps, DAOs, NFTs, DeFi and much
+              more.
+            </p>
+          </div>
+
+          <div className="bg-ledger-switch bg-cover bg-center bg-black text-content p-12 rounded-[40px] shadow-[0px_10px_50px_0px_#06274926] mt-8 w-full">
+            <LedgerSwitchBannerContent>
+              <div className="flex justify-center mt-8">
+                {!isConnected && <AuthButton label="Login to swap tokens" />}
+                {isConnected && (
+                  <Button onClick={handleClickAccount}>My account</Button>
+                )}
+              </div>
+            </LedgerSwitchBannerContent>
+          </div>
         </div>
+      </section>
+
+      <div className="flex flex-col items-center pb-16 px-6">
 
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-x-6 gap-y-16 pb-16">
           <section className="w-full h-full" id="total-ogy-supply">
