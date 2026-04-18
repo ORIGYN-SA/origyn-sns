@@ -3,7 +3,7 @@ import { capitalize } from "@helpers/strings";
 import snsAPI from "@services/api/sns/v1";
 import { IProposalResult, IProposalData } from "@services/types";
 import { SNS_ROOT_CANISTER } from "@constants/index";
-import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
+import { roundAndFormatLocale, divideBy1e8, millify } from "@helpers/numbers";
 
 export const getOneProposal = async ({
   proposalId,
@@ -44,6 +44,7 @@ export const getOneProposal = async ({
       no,
       noToString: no.toFixed(3),
       total: roundAndFormatLocale({ number: divideBy1e8(votes.total) }),
+      totalCompact: millify(divideBy1e8(votes.total), 2),
     },
   } as IProposalData;
 };

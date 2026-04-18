@@ -4,6 +4,7 @@ export interface IProposalVotes {
   noToString: string;
   no: number;
   total: string;
+  totalCompact: string;
 }
 export interface IProposalResult {
   id: number;

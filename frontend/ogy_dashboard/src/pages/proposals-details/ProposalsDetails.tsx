@@ -1,77 +1,152 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { LoaderSpin, Badge } from "@components/ui";
+import {
+  CheckCircleIcon,
+  XCircleIcon,
+  ArrowTopRightOnSquareIcon,
+} from "@heroicons/react/20/solid";
+import {
+  PageHeader,
+  Card,
+  Button,
+  SkeletonOverlay,
+} from "@components/ui";
+import { Stat } from "@components/dashboard";
 import useProposal from "@hooks/proposals/useProposal";
-import Overview from "./overview/Overview";
-import Status from "./status/Status";
-import { IProposalData, IProposalVotes } from "@services/types";
+import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
+import ProgressBar from "@components/charts/progress-bar/ProgressBar";
+import { NNS_PLATFORM_URL, SNS_ROOT_CANISTER } from "@constants/index";
+
+const FAKE_TITLE = "Proposal title loading…";
+const FAKE_PAYLOAD = "Loading proposal details…";
 
 export const ProposalsDetails = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const proposalId = searchParams.get("id") as string;
 
   const {
     data: proposal,
-    isSuccess: isSuccessGetProposal,
-    isLoading: isLoadingGetProposal,
-    isError: isErrorGetProposal,
-    error: errorGetProposal,
-  } = useProposal({
-    proposalId: searchParams.get("id") as string,
-  });
+    isLoading,
+    isError,
+    error,
+  } = useProposal({ proposalId });
 
-  const handleOnClickBack = () => {
-    navigate(-1);
-  };
+  const handleOnClickBack = () => navigate(-1);
+
+  const status = proposal?.status ?? "Open";
+  const yesPct = proposal?.votes?.yesToString ?? "0";
+  const noPct = proposal?.votes?.noToString ?? "0";
 
   return (
-    <div className="container mx-auto py-16 px-4">
-      <div className="flex flex-col xl:flex-row items-center justify-between mb-8">
-        <div className="flex flex-col xl:flex-row xl:justify-center items-center gap-4 xl:gap-8">
-          <ArrowLeftIcon
-            className="h-8 w-8 hover:cursor-pointer"
-            onClick={handleOnClickBack}
-          />
-          <div className="flex flex-col items-center xl:items-start">
-            <Badge className="bg-spacePurple px-4">
-              <div className="text-white tracking-widest text-xs font-semibold uppercase">
-                PROPOSALS
-              </div>
-            </Badge>
-            <div className="text-3xl font-bold mb-4 xl:mb-0">Proposal</div>
-          </div>
-        </div>
-        {/* <div>Principal ID: 8329839839283982</div> */}
-      </div>
-      {isSuccessGetProposal && (
-        <div className="flex items-start justify-center gap-4">
-          <div className="flex flex-1 flex-col gap-4">
-            <Overview proposal={proposal as IProposalData} />
-            <div className="block xl:hidden">
-              <Status
-                proposalId={searchParams.get("id") as string}
-                votes={proposal.votes as IProposalVotes}
-              />
-            </div>
-          </div>
+    <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
+      <PageHeader
+        category="Governance"
+        title={proposalId ? `Proposal #${proposalId}` : "Proposal"}
+        onBack={handleOnClickBack}
+      />
 
-          <div className="hidden xl:block w-3/12">
-            <Status
-              proposalId={searchParams.get("id") as string}
-              votes={proposal.votes as IProposalVotes}
-            />
+      {isError ? (
+        <div className="flex items-center justify-center h-40 mt-16 text-red-500 font-semibold">
+          <div>{error?.message}</div>
+        </div>
+      ) : (
+        <SkeletonOverlay loading={isLoading}>
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 mt-8">
+            <Card className="xl:col-span-3">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <span
+                  className={`inline-block text-xs font-semibold px-3 py-1 rounded-full ${getColorByProposalStatus(status, "bg")} ${getColorByProposalStatus(status, "text")}`}
+                >
+                  {status}
+                </span>
+                <span className="text-sm text-muted">
+                  Posted {proposal?.proposed ?? "…"}
+                </span>
+              </div>
+
+              <h2 className="mt-6 text-2xl font-bold text-content break-words">
+                {proposal?.title || FAKE_TITLE}
+              </h2>
+
+              <div className="mt-3 flex items-center gap-3 flex-wrap text-sm">
+                <span className="text-muted">Topic</span>
+                <span className="inline-block bg-spacePurple/20 text-spacePurple text-xs font-semibold px-3 py-1 rounded-full">
+                  {proposal?.topic ?? "…"}
+                </span>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-border">
+                <div className="text-sm font-medium text-muted mb-3">
+                  More info
+                </div>
+                <div className="rounded-xl bg-surface-2/40 p-6">
+                  <pre className="whitespace-pre-wrap break-all text-sm text-content">
+                    {proposal?.payload || FAKE_PAYLOAD}
+                  </pre>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="xl:col-span-1 self-start flex flex-col gap-6">
+              <div>
+                <div className="text-sm font-medium text-muted mb-3">
+                  Total votes
+                </div>
+                <Stat
+                  iconSrc="/ogy_logo.svg"
+                  value={proposal?.votes?.totalCompact}
+                  unit="OGY"
+                  loading={isLoading}
+                />
+              </div>
+
+              <ProgressBar
+                yesCount={proposal?.votes?.yes ?? 0}
+                noCount={proposal?.votes?.no ?? 0}
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex items-center gap-2 min-w-0">
+                  <CheckCircleIcon className="w-8 h-8 text-jade shrink-0" />
+                  <div className="min-w-0">
+                    <div className="text-xl font-semibold text-content">
+                      {yesPct}%
+                    </div>
+                    <div className="text-xs tracking-widest font-light text-muted">
+                      ADOPT
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 min-w-0 justify-end">
+                  <div className="min-w-0 text-right">
+                    <div className="text-xl font-semibold text-content">
+                      {noPct}%
+                    </div>
+                    <div className="text-xs tracking-widest font-light text-muted">
+                      REJECT
+                    </div>
+                  </div>
+                  <XCircleIcon className="w-8 h-8 text-red-400 shrink-0" />
+                </div>
+              </div>
+
+              <a
+                data-skel-static
+                href={`${NNS_PLATFORM_URL}/proposal/?u=${SNS_ROOT_CANISTER}&proposal=${proposalId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Button className="w-full !px-[25px] !py-0 text-[14px] leading-[48px]">
+                  <span className="inline-flex items-center justify-center gap-2">
+                    Vote
+                    <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+                  </span>
+                </Button>
+              </a>
+            </Card>
           </div>
-        </div>
-      )}
-      {isLoadingGetProposal && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
-        </div>
-      )}
-      {isErrorGetProposal && (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorGetProposal?.message}</div>
-        </div>
+        </SkeletonOverlay>
       )}
     </div>
   );

@@ -47,6 +47,7 @@ export const getListProposalsAll = async ({
             no,
             noToString: no.toFixed(3),
             total: roundAndFormatLocale({ number: divideBy1e8(votes.total) }),
+            totalCompact: "",
           },
           riskedOGY: roundAndFormatLocale({ number: divideBy1e8(riskedOGY) }),
         } as IProposalData;
