@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Outlet, useNavigation } from "react-router-dom";
 
 import Navbar from "@components/navbar/Navbar";
@@ -38,13 +37,7 @@ const Layout = () => {
       <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
       <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
         <div className="max-w-[1440px] mx-auto">
-          {navigation.state !== "idle" ? (
-            <NavigationProgress />
-          ) : (
-            <Suspense fallback={null}>
-              <Outlet />
-            </Suspense>
-          )}
+          {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
         </div>
       </div>
       <Footer />

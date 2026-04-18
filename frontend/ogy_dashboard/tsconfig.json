@@ -32,7 +32,6 @@
       "@services/*": ["services/*"],
       "@providers/*": ["providers/*"],
       "@constants/*": ["constants/*"],
-      "@routes/*": ["routes/*"],
       "@theme/*": ["../theme/*"]
     }
   },

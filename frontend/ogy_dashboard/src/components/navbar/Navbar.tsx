@@ -9,7 +9,6 @@ import AccountOverview from "@components/account/overview/AccountOverview";
 import { Tile, Skeleton } from "@components/ui";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
 import useScrolledPast from "@hooks/useScrolledPast";
-import { preloadRoute } from "@routes/lazyRoutes";
 
 const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
   { title: "Dashboard", url: "/" },
@@ -53,8 +52,6 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                 <NavLink
                   to={url}
                   end={url === "/"}
-                  onMouseEnter={() => preloadRoute(url)}
-                  onFocus={() => preloadRoute(url)}
                   className={({ isActive }) =>
                     `relative flex items-center font-semibold text-[16px] leading-none ${
                       isActive
@@ -175,8 +172,6 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                         {visibleNavItems.map(({ title, url }) => (
                           <Link
                             onClick={handleOnHideMenu}
-                            onMouseEnter={() => preloadRoute(url)}
-                            onFocus={() => preloadRoute(url)}
                             to={url}
                             className="font-semibold text-muted hover:text-content px-3 py-2 rounded-md"
                             key={url}
