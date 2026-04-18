@@ -4,12 +4,11 @@ import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 // import { Principal } from "@dfinity/principal";
 // import { AccountIdentifier } from "@dfinity/ledger-icp";
-import Skeleton from "react-loading-skeleton";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import TransactionsAccountList from "@pages/transactions/transactions-account-list";
 import BalanceHistory from "./ChartBalanceHistory";
-import { Button } from "@components/ui";
+import { Button, Skeleton } from "@components/ui";
 import { PieChartProvider } from "@components/charts/pie/context";
 import PrincipalOverview from "@pages/account/principal-overview/PrincipalOverview";
 
