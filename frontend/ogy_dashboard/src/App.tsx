@@ -6,7 +6,7 @@ import {
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 import { useWalletInit } from "@amerej/artemis-react";
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 
 import {
   // APP_MODE,
@@ -31,24 +31,57 @@ import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
 import { idlFactory as collectionIndexIdl } from "@services/candid/collection_index";
 
 import Layout from "@components/Layout";
-import Dashboard from "@pages/dashboard";
 import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-import { Governance } from "@pages/governance";
-import { Neurons } from "@pages/neurons/Neurons";
-import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
-import { Proposals } from "@pages/proposals/Proposals";
-import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
-import { TokenDistribution } from "@pages/token-distribution";
-import { Explorer } from "@pages/explorer/Explorer";
-import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
-import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
-import TransactionsAccountHistory from "@pages/transactions-accounts-history";
-import { Account } from "@pages/account/index";
-import Recovery from "@pages/recovery/Recovery";
-import Support from "@pages/support";
-import Calculator from "@pages/calculator/Calculator";
-import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
+
+const Dashboard = lazy(() => import("@pages/dashboard"));
+const Governance = lazy(() =>
+  import("@pages/governance").then((m) => ({ default: m.Governance }))
+);
+const Neurons = lazy(() =>
+  import("@pages/neurons/Neurons").then((m) => ({ default: m.Neurons }))
+);
+const NeuronsDetails = lazy(() =>
+  import("@pages/neurons-details/NeuronsDetails").then((m) => ({
+    default: m.NeuronsDetails,
+  }))
+);
+const Proposals = lazy(() =>
+  import("@pages/proposals/Proposals").then((m) => ({ default: m.Proposals }))
+);
+const ProposalsDetails = lazy(() =>
+  import("@pages/proposals-details/ProposalsDetails").then((m) => ({
+    default: m.ProposalsDetails,
+  }))
+);
+const TokenDistribution = lazy(() =>
+  import("@pages/token-distribution").then((m) => ({
+    default: m.TokenDistribution,
+  }))
+);
+const Explorer = lazy(() =>
+  import("@pages/explorer/Explorer").then((m) => ({ default: m.Explorer }))
+);
+const TransactionsDetails = lazy(() =>
+  import("@pages/transactions-details/TransactionsDetails").then((m) => ({
+    default: m.TransactionsDetails,
+  }))
+);
+const TransactionsAccountsDetails = lazy(
+  () => import("@pages/transactions-accounts-details")
+);
+const TransactionsAccountHistory = lazy(
+  () => import("@pages/transactions-accounts-history")
+);
+const Account = lazy(() =>
+  import("@pages/account/index").then((m) => ({ default: m.Account }))
+);
+const Recovery = lazy(() => import("@pages/recovery/Recovery"));
+const Support = lazy(() => import("@pages/support"));
+const Calculator = lazy(() => import("@pages/calculator/Calculator"));
+const TopTransfersAndBurnsFull = lazy(
+  () => import("@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull")
+);
 
 const router = createBrowserRouter([
   {
