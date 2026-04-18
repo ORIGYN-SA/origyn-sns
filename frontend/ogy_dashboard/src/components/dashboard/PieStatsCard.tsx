@@ -23,6 +23,7 @@ type PieStatsCardProps = {
   isError: boolean;
   errorMessage?: string;
   className?: string;
+  layout?: "vertical" | "horizontal";
 };
 
 const PieStatsCard = ({
@@ -37,6 +38,7 @@ const PieStatsCard = ({
   isError,
   errorMessage,
   className,
+  layout = "vertical",
 }: PieStatsCardProps) => {
   const { activeIndex, setActiveIndex } = usePieChart();
   const displayData =
@@ -44,6 +46,59 @@ const PieStatsCard = ({
   const displayTotal =
     loading && totalValue == null ? FAKE_STAT_VALUE : totalValue;
   const hasData = !!displayData && displayData.length > 0;
+
+  const chartBlock = (
+    <div data-skel-block className="mt-6 h-72 rounded-xl">
+      {hasData ? (
+        <PieChart data={displayData} colors={colors} />
+      ) : (
+        <div className="flex justify-center items-center h-full text-content/60">
+          No data
+        </div>
+      )}
+    </div>
+  );
+
+  const totalBlock = (
+    <div className="flex flex-col items-center gap-4 my-4">
+      <h2 className="font-semibold text-[16px] leading-none text-muted">
+        {totalLabel}
+      </h2>
+      <Stat
+        iconSrc="/ogy_logo.svg"
+        value={displayTotal}
+        unit="OGY"
+        loading={loading}
+      />
+    </div>
+  );
+
+  const statCards = hasData
+    ? displayData.map(({ name, valueToString }, index) => (
+        <StatCard
+          key={name}
+          title={name}
+          value={valueToString}
+          unit="OGY"
+          loading={loading}
+          accessory={
+            <div
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: colors[index] }}
+            />
+          }
+          tooltip={
+            <TooltipInfo id={infos[index].id}>
+              {infos[index].value}
+            </TooltipInfo>
+          }
+          underlineColor={colors[index]}
+          active={activeIndex === index}
+          onMouseEnter={() => setActiveIndex(index)}
+          onMouseLeave={() => setActiveIndex(null)}
+        />
+      ))
+    : null;
 
   return (
     <SkeletonOverlay loading={loading}>
@@ -59,53 +114,21 @@ const PieStatsCard = ({
           </div>
           {titleTooltip}
         </div>
-        <div data-skel-block className="mt-6 h-72 rounded-xl">
-          {hasData ? (
-            <PieChart data={displayData} colors={colors} />
-          ) : (
-            <div className="flex justify-center items-center h-full text-content/60">
-              No data
+        {layout === "horizontal" ? (
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-6 items-center">
+            <div className="flex flex-col">
+              {chartBlock}
+              {totalBlock}
             </div>
-          )}
-        </div>
-        <div className="flex flex-col items-center gap-4 my-4">
-          <h2 className="font-semibold text-[16px] leading-none text-muted">
-            {totalLabel}
-          </h2>
-          <Stat
-            iconSrc="/ogy_logo.svg"
-            value={displayTotal}
-            unit="OGY"
-            loading={loading}
-          />
-        </div>
-        <div className="grid grid-cols-1 gap-4 mt-8">
-          {hasData &&
-            displayData.map(({ name, valueToString }, index) => (
-              <StatCard
-                key={name}
-                title={name}
-                value={valueToString}
-                unit="OGY"
-                loading={loading}
-                accessory={
-                  <div
-                    className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: colors[index] }}
-                  />
-                }
-                tooltip={
-                  <TooltipInfo id={infos[index].id}>
-                    {infos[index].value}
-                  </TooltipInfo>
-                }
-                underlineColor={colors[index]}
-                active={activeIndex === index}
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-              />
-            ))}
-        </div>
+            <div className="flex flex-col gap-4">{statCards}</div>
+          </div>
+        ) : (
+          <>
+            {chartBlock}
+            {totalBlock}
+            <div className="grid grid-cols-1 gap-4 mt-8">{statCards}</div>
+          </>
+        )}
       </Card>
     </SkeletonOverlay>
   );

@@ -131,27 +131,32 @@ export const Governance = () => {
       </section>
 
       <div className="px-4 pb-16">
-        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-start mt-16 mb-12">
-        <div className="text-center xl:text-left">
-          <h2 className="text-3xl font-bold">Tokens in Governance</h2>
-          <p className="mt-4">
-            Holders of OGY tokens can directly influence the ORIGYN Network by
-            staking their OGY and voting on proposals.{" "}
-          </p>
-          <p className="mb-2">
-            By participating in the decision-making process, these staked token
-            holders earn rewards and govern collectively and democratically.
-          </p>
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 mt-16 mb-12">
+          <div className="text-center xl:text-left">
+            <h2 className="text-[28px] font-bold leading-none text-content">
+              Tokens in Governance
+            </h2>
+            <p className="mt-4 text-base font-normal leading-6 text-muted">
+              Holders of OGY tokens can directly influence the ORIGYN Network
+              by staking their OGY and voting on proposals.
+            </p>
+            <p className="mb-2 text-base font-normal leading-6 text-muted">
+              By participating in the decision-making process, these staked
+              token holders earn rewards and govern collectively and
+              democratically.
+            </p>
+          </div>
           <a
             href="https://origyn.gitbook.io/origyn/tokenomics/tokenomics-3.0"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-accent"
+            className="shrink-0"
           >
-            Learn more about OGY
+            <Button className="!px-[25px] !py-0 text-[14px] leading-[48px]">
+              Learn more about OGY
+            </Button>
           </a>
         </div>
-      </div>
       <PieChartProvider>
         <TokensInGovernanceTotal className="mb-16" />
       </PieChartProvider>

@@ -35,6 +35,7 @@ const TokensInGovernanceTotal = ({ className }: { className?: string }) => {
   return (
     <PieStatsCard
       className={className}
+      layout="horizontal"
       title="Tokens in Governance"
       titleTooltip={
         <TooltipInfo id="tooltip-total-token-governance">
