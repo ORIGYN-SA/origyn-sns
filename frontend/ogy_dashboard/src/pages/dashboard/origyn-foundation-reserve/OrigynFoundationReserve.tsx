@@ -14,6 +14,7 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
     () => [
       {
         id: "tooltip-amount-locked",
+        name: "Locked",
         value: (
           <div>
             <p>ORIGYN foundation tokens locked in stakes or vestings.</p>
@@ -37,6 +38,7 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
       },
       {
         id: "tooltip-amount-unlocked",
+        name: "Unlocked",
         value: "Unlocked found owned by ORIGYN foundation.",
       },
     ],

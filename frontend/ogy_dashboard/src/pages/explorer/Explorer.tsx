@@ -42,16 +42,28 @@ export const Explorer = () => {
   const searchSettled = search.isSuccess || search.isError;
   const hasSearchResult = searchSettled && !!search.data;
 
-  const { data, isSuccess, isFetching } = useFetchAllTransactions({
+  const { data, isLoading, isFetching } = useFetchAllTransactions({
     limit: pageSize,
     offset: pageSize * pageIndex,
     sorting: [{ id: "index", desc: sortDesc }],
   });
 
-  const columns = getTransactionColumns(navigate);
+  const columns = useMemo(
+    () =>
+      getTransactionColumns(navigate, {
+        desc: sortDesc,
+        onToggle: () => {
+          setSortDesc((d) => !d);
+          setPageIndex(0);
+        },
+      }),
+    [navigate, sortDesc]
+  );
   const pageCount = data?.list.pageCount ?? 0;
   const rows =
-    isFetching || !isSuccess || !data ? buildSkeletonRows(pageSize) : data.list.rows;
+    isLoading || !data?.list.rows
+      ? buildSkeletonRows(pageSize)
+      : data.list.rows;
 
   const handleClickSearchResult = (
     searchType: "blockIndex" | "principalId",
@@ -144,14 +156,6 @@ export const Explorer = () => {
       />
 
       <div className="mt-16">
-        <div className="flex items-center mb-4 gap-4">
-          <button
-            onClick={() => setSortDesc((d) => !d)}
-            className="text-sm text-muted hover:text-content flex items-center gap-1"
-          >
-            Index {sortDesc ? "↓" : "↑"}
-          </button>
-        </div>
         <SkeletonOverlay loading={isFetching}>
           <NewTable columns={columns} data={rows} footer={paginationFooter} />
         </SkeletonOverlay>

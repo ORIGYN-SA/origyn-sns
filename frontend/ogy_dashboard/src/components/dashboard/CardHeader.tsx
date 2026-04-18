@@ -10,7 +10,7 @@ type CardHeaderProps = {
 const CardHeader = ({ title, tooltip, subtitle, right }: CardHeaderProps) => (
   <div className="flex items-start justify-between gap-4">
     <div className="flex flex-col gap-4 min-w-0">
-      <div className="flex items-center gap-2">
+      <div data-skel-static className="flex items-center gap-2">
         <h2 className="font-semibold text-[16px] leading-none text-muted">
           {title}
         </h2>
@@ -18,7 +18,7 @@ const CardHeader = ({ title, tooltip, subtitle, right }: CardHeaderProps) => (
       </div>
       {subtitle}
     </div>
-    {right}
+    {right && <div data-skel-static>{right}</div>}
   </div>
 );
 

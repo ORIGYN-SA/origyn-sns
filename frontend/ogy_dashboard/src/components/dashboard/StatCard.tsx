@@ -46,7 +46,7 @@ const StatCard: FC<StatCardProps> = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="flex items-center justify-between">
+      <div data-skel-static className="flex items-center justify-between">
         <div className="flex items-center text-[16px] font-medium leading-none">
           {accessory}
           <span className={clsx(accessory && "ml-2", "text-muted")}>

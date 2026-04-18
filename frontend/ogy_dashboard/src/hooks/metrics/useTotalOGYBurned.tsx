@@ -37,13 +37,13 @@ const useTotalOGYBurned = ({ period }: { period: string }) => {
         ? roundAndFormatLocale({
             number: divideBy1e8(dataTotalBurned.totalBurnedOGY) + BURN_OFFSET,
           })
-        : "0",
-      dataPieChart: (
-        dataTotalBurnedTimeSeries?.totalBurnedOGYTimeSeries ?? []
-      ).map((d: ChartData) => ({
-        value: d.value + BURN_OFFSET,
-        name: d.name,
-      })),
+        : undefined,
+      dataPieChart: dataTotalBurnedTimeSeries?.totalBurnedOGYTimeSeries?.map(
+        (d: ChartData) => ({
+          value: d.value + BURN_OFFSET,
+          name: d.name,
+        })
+      ),
     }),
     [dataTotalBurned, dataTotalBurnedTimeSeries]
   );

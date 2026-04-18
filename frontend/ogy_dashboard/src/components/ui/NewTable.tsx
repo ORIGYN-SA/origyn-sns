@@ -100,7 +100,11 @@ const NewTable = <T,>({
           </tbody>
         </table>
       </div>
-      {footer && <div className="px-[70px] py-5">{footer}</div>}
+      {footer && (
+        <div data-skel-static className="px-[70px] py-5">
+          {footer}
+        </div>
+      )}
     </div>
   );
 };

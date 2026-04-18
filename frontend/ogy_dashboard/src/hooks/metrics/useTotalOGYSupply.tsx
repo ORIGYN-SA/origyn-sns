@@ -26,8 +26,8 @@ const useTotalOGYSupply = ({ period }: { period: string }) => {
 
   const data = useMemo(
     () => ({
-      totalSupply: dataTotalSupply?.totalSupplyOGYToString ?? "0",
-      dataPieChart: dataTotalSupplyTimeSeries?.totalSupplyOGYTimeSeries ?? [],
+      totalSupply: dataTotalSupply?.totalSupplyOGYToString,
+      dataPieChart: dataTotalSupplyTimeSeries?.totalSupplyOGYTimeSeries,
     }),
     [dataTotalSupply, dataTotalSupplyTimeSeries]
   );

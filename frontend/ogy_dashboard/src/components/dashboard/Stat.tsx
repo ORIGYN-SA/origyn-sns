@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 
 type StatProps = {
   iconSrc?: string;
@@ -20,7 +19,8 @@ const Stat = ({
   loading = false,
   className = "",
 }: StatProps) => {
-  const displayValue = loading && value == null ? FAKE_STAT_VALUE : value;
+  const isLoadingValue = loading;
+
   return (
     <div className={`flex items-baseline min-w-0 h-[28px] ${className}`}>
       {iconSrc && (
@@ -30,11 +30,22 @@ const Stat = ({
           className="w-[25px] h-6 self-center mr-2 shrink-0"
         />
       )}
-      <span className="font-bold text-[28px] leading-none truncate min-w-0">
-        {displayValue}
-      </span>
-      {unit && (
-        <span className={`text-muted shrink-0 ${unitClassName}`}>{unit}</span>
+      {isLoadingValue ? (
+        <div
+          data-skel-block
+          className="h-7 w-[200px] shrink-0 self-center rounded-md"
+        />
+      ) : (
+        <>
+          <span className="font-bold text-[28px] leading-none truncate min-w-0">
+            {value}
+          </span>
+          {unit && (
+            <span className={`text-muted shrink-0 ${unitClassName}`}>
+              {unit}
+            </span>
+          )}
+        </>
       )}
     </div>
   );

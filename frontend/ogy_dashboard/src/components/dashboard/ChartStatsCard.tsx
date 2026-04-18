@@ -52,7 +52,7 @@ const ChartStatsCard = ({
   return (
     <SkeletonOverlay loading={loading}>
       <Card className={className}>
-        <div className="flex items-center justify-between">
+        <div data-skel-static className="flex items-center justify-between">
           <h2 className="text-charcoal text-[22px] font-semibold leading-none mr-2">
             {title}
           </h2>
@@ -67,7 +67,7 @@ const ChartStatsCard = ({
             <div>
               {stats.map((stat, index) => (
                 <div key={stat.id} className={index === 0 ? "" : "mt-6"}>
-                  <div className="flex">
+                  <div data-skel-static className="flex">
                     <span className="text-content/60 font-semibold mr-2">
                       {stat.label}
                     </span>

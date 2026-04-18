@@ -89,7 +89,7 @@ const TokenDistributionList = ({
                 {row.tag}
               </TooltipInfo>
             ) : (
-              <span className="inline-block w-4 h-4" aria-hidden="true" />
+              <div className="inline-block w-4 h-4" aria-hidden="true" />
             )}
           </div>
         </div>

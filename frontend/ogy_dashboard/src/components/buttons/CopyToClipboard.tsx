@@ -15,8 +15,9 @@ const CopyToClipboard = ({ value }: { value: string }) => {
 
   return (
     <button
+      data-skel-hide
       onClick={handleCopy}
-      className="inline-flex items-center justify-center shrink-0"
+      className="inline-flex items-center justify-center shrink-0 h-4 w-4 p-0 leading-none align-middle"
     >
       {copied ? (
           <svg

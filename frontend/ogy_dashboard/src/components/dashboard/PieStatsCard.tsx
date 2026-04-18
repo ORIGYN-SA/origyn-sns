@@ -8,6 +8,7 @@ import StatCard from "./StatCard";
 
 type SegmentInfo = {
   id: string;
+  name: string;
   value: ReactNode;
 };
 
@@ -74,10 +75,10 @@ const PieStatsCard = ({
   );
 
   const statCards = hasData
-    ? displayData.map(({ name, valueToString }, index) => (
+    ? displayData.map(({ valueToString }, index) => (
         <StatCard
-          key={name}
-          title={name}
+          key={infos[index].id}
+          title={infos[index].name}
           value={valueToString}
           unit="OGY"
           loading={loading}
@@ -108,7 +109,7 @@ const PieStatsCard = ({
             {errorMessage}
           </div>
         )}
-        <div className="flex items-center justify-between">
+        <div data-skel-static className="flex items-center justify-between">
           <div className="text-charcoal text-[22px] font-semibold leading-none">
             {title}
           </div>

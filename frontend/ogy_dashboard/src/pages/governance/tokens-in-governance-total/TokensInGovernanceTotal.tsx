@@ -17,15 +17,18 @@ const TokensInGovernanceTotal = ({ className }: { className?: string }) => {
     () => [
       {
         id: "tooltip-locked-governance",
+        name: "Locked",
         value: "Tokens that are locked in governance.",
       },
       {
         id: "tooltip-unlocked-governance",
+        name: "Unlocked",
         value:
           "Tokens that are unlocked in governance and could be withdrawn and traded at any time.",
       },
       {
         id: "tooltip-accumulated-rewards",
+        name: "Accumulated Rewards",
         value: "Rewards that are counted for users but are not claimed yet.",
       },
     ],

@@ -13,7 +13,10 @@ const ORATable = ({ rows }: { rows: RewardPool[] }) => (
     <table className="min-w-full h-full border-separate border-spacing-0">
       <tbody>
         <tr className="bg-charcoal text-white">
-          <td className="py-5 xl:py-3 pl-[70px] xl:pl-[35px] pr-4 font-semibold text-left whitespace-nowrap">
+          <td
+            data-skel-static
+            className="py-5 xl:py-3 pl-[70px] xl:pl-[35px] pr-4 font-semibold text-left whitespace-nowrap"
+          >
             <strong className="font-semibold">Year</strong>
           </td>
           {rows.map((item, i) => (
@@ -26,7 +29,10 @@ const ORATable = ({ rows }: { rows: RewardPool[] }) => (
           ))}
         </tr>
         <tr className="bg-white">
-          <td className="py-3 pl-[35px] pr-4 font-semibold text-left text-content whitespace-nowrap">
+          <td
+            data-skel-static
+            className="py-3 pl-[35px] pr-4 font-semibold text-left text-content whitespace-nowrap"
+          >
             <strong className="font-semibold">Reward Pool</strong>
           </td>
           {rows.map((item, i) => (

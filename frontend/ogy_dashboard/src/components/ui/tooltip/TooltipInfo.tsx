@@ -19,6 +19,7 @@ const TooltipInfo = ({ children, title, className }: TooltipInfoProps) => {
       <TooltipTrigger asChild>
         <button
           type="button"
+          data-skel-static
           className={`inline-flex items-center justify-center leading-none text-muted ${
             className ?? ""
           }`}

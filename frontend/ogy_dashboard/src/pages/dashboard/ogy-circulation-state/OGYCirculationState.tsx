@@ -14,10 +14,12 @@ const OGYCirculationState = ({ className }: OGYCirculationStateProps) => {
     () => [
       {
         id: "tooltip-amount-not-owned",
+        name: "OGY not in the hand of the Foundation",
         value: "Amount of circulated tokens not owned by ORIGYN foundation.",
       },
       {
         id: "tooltip-amount-owned",
+        name: "OGY locked in the hand of the Foundation",
         value: "Amount of locked tokens owned by ORIGYN foundation.",
       },
     ],

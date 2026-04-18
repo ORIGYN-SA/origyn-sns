@@ -41,12 +41,27 @@ const KIND_COLORS: Record<string, string> = {
   transfer: "bg-indigo-100 text-indigo-700",
 };
 
+type IndexSort = {
+  desc: boolean;
+  onToggle: () => void;
+};
+
 export const getTransactionColumns = (
-  navigate: (path: string) => void
+  navigate: (path: string) => void,
+  indexSort?: IndexSort
 ): NewTableColumn<TransactionRow>[] => [
   {
     id: "index",
-    header: "Index",
+    header: indexSort ? (
+      <button
+        onClick={indexSort.onToggle}
+        className="flex items-center gap-1 hover:text-white/80"
+      >
+        Index <span aria-hidden="true">{indexSort.desc ? "↓" : "↑"}</span>
+      </button>
+    ) : (
+      "Index"
+    ),
     cell: (row) => (
       <div className="w-20">
         <button
@@ -113,7 +128,7 @@ export const getTransactionColumns = (
             {isCopyable ? (
               <CopyToClipboard value={val} />
             ) : (
-              <span className="inline-block w-4 h-4" aria-hidden="true" />
+              <div className="inline-block w-4 h-4" aria-hidden="true" />
             )}
           </div>
         </div>
@@ -144,7 +159,7 @@ export const getTransactionColumns = (
             {isCopyable ? (
               <CopyToClipboard value={val} />
             ) : (
-              <span className="inline-block w-4 h-4" aria-hidden="true" />
+              <div className="inline-block w-4 h-4" aria-hidden="true" />
             )}
           </div>
         </div>
