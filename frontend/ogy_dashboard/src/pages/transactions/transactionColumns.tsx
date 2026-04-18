@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { NewTableColumn } from "@components/ui/NewTable";
+import { DatePill, TransactionKindPill } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
-import { DateTime } from "luxon";
 
 export type TransactionRow = {
   index: number;
@@ -15,30 +14,6 @@ export type TransactionRow = {
   fee: string;
   memo: string;
   kind: string;
-};
-
-const DateCell = ({ timestampRaw }: { timestampRaw: number }) => {
-  const [showRelative, setShowRelative] = useState(false);
-  if (!timestampRaw) return null;
-  const dt = DateTime.fromMillis(timestampRaw / 1_000_000);
-  const label = showRelative
-    ? dt.toRelative() ?? ""
-    : dt.toFormat("yyyy-LL-dd, HH:mm:ss");
-  return (
-    <button
-      onClick={() => setShowRelative((r) => !r)}
-      className="inline-block bg-border-faint text-muted text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-border-strong transition-colors"
-    >
-      {label}
-    </button>
-  );
-};
-
-const KIND_COLORS: Record<string, string> = {
-  mint: "bg-teal-100 text-teal-700",
-  approve: "bg-amber-100 text-amber-700",
-  burn: "bg-orange-100 text-orange-700",
-  transfer: "bg-indigo-100 text-indigo-700",
 };
 
 type IndexSort = {
@@ -87,11 +62,7 @@ export const getTransactionColumns = (
     header: "Type",
     cell: (row) => (
       <div className="w-20">
-        <span
-          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap capitalize ${KIND_COLORS[row.kind] ?? "bg-border-faint text-muted"}`}
-        >
-          {row.kind}
-        </span>
+        <TransactionKindPill kind={row.kind} />
       </div>
     ),
   },
@@ -100,7 +71,9 @@ export const getTransactionColumns = (
     header: "Date",
     cell: (row) => (
       <div className="w-44">
-        <DateCell timestampRaw={row.timestampRaw} />
+        {row.timestampRaw ? (
+          <DatePill millis={row.timestampRaw / 1_000_000} />
+        ) : null}
       </div>
     ),
   },

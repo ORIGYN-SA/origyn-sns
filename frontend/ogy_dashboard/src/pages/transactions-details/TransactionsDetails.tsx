@@ -1,46 +1,60 @@
-// import { useMemo, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftIcon, UserIcon } from "@heroicons/react/20/solid";
-import { Card, Tile, Tooltip, LoaderSpin } from "@components/ui";
+import {
+  PageHeader,
+  Card,
+  SkeletonOverlay,
+  DatePill,
+  DetailRow,
+  TransactionKindPill,
+} from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useFetchOneTransaction from "@hooks/transactions/useFetchOneTransaction";
-import getBadgeTransactionKind from "@helpers/badge/getBadgeTransactionKind";
+
+const FAKE_PRINCIPAL =
+  "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa";
+const FAKE_AMOUNT = "0,000,000.00";
+
+const PrincipalValue = ({
+  value,
+  isMinting,
+}: {
+  value: string | undefined;
+  isMinting: boolean;
+}) =>
+  isMinting ? (
+    <span className="font-semibold text-content">Minting account</span>
+  ) : (
+    <>
+      <span className="font-semibold text-content break-all min-w-0">
+        {value ?? FAKE_PRINCIPAL}
+      </span>
+      {value && <CopyToClipboard value={value} />}
+    </>
+  );
 
 export const TransactionsDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const { data, isLoading, isSuccess, isError, error } = useFetchOneTransaction(
-    {
-      transactionId: params.index as string,
-    }
-  );
+  const { data, isLoading, isError, error } = useFetchOneTransaction({
+    transactionId: params.index as string,
+  });
 
   const handleOnClickBack = () => navigate(-1);
 
+  const isMintFrom = data.kind === "mint";
+  const isBurnTo = data.kind === "burn";
+
   return (
-    <div className="container mx-auto pt-8 pb-16 px-4">
-      <div className="flex flex-col xl:flex-row items-center py-8">
-        <div className="flex flex-col xl:flex-row xl:justify-center items-center gap-4 xl:gap-8">
-          <ArrowLeftIcon
-            className="h-8 w-8 hover:cursor-pointer"
-            onClick={handleOnClickBack}
-          />
-          <div className="flex flex-col items-center xl:items-start">
-            <div className="text-sm">Explorer</div>
-            <div className="text-3xl font-bold mb-4 xl:mb-0">
-              Transaction Details
-            </div>
-          </div>
-        </div>
-      </div>
-      {isLoading && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin size="xl" />
-        </div>
-      )}
-      {isError && (
-        <div className="flex flex-col items-center">
+    <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
+      <PageHeader
+        category="Explorer"
+        title="Transaction Details"
+        onBack={handleOnClickBack}
+      />
+
+      {isError ? (
+        <div className="flex flex-col items-center mt-16">
           <div className="text-red-500 text-2xl font-semibold">
             Fetch one transaction error!
           </div>
@@ -48,126 +62,97 @@ export const TransactionsDetails = () => {
             {error?.message}
           </div>
         </div>
-      )}
-      {isSuccess && (
-        <>
-          <div className="flex justify-center">
-            <div className="max-w-2xl gap-4 mt-8">
-              <Card className="col-span-6 xl:col-start-2 xl:col-span-4 p-0">
-                <div className="grid grid-cols-1 gap-8 p-6">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span>Index: </span>
-                      <span className="font-semibold text-xl">
-                        {data.index}
-                      </span>
-                    </div>
-                    {getBadgeTransactionKind(data.kind as string)}
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    <div className="mt-12 flex items-center justify-between bg-surface-2 rounded-full py-1 px-1">
-                      <div className="flex items-center w-full pr-8">
-                        <Tile className="rounded-full h-8 w-8 bg-surface-3">
-                          <UserIcon className="p-1 text-white" />
-                        </Tile>
-                        <div className="flex justify-center w-full">
-                          <div className="flex items-center text-center truncate pr-4">
-                            <div className="flex ml-4 items-center truncate text-sm max-w-96">
-                              <div className="mr-2 shrink-0">From: </div>
-                              {data.kind && data.kind === "mint" && (
-                                <div> Minting account</div>
-                              )}
-                              {data.kind && data.kind !== "mint" && (
-                                <>
-                                  <Tooltip content={data.from_account}>
-                                    <div className="truncate">
-                                      {data.from_account}
-                                    </div>
-                                  </Tooltip>
-                                  <CopyToClipboard
-                                    value={data.from_account as string}
-                                  />
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {data.to_account && (
-                      <div className="flex items-center justify-between bg-surface-2 rounded-full py-1 px-1">
-                        <div className="flex items-center justify-between w-full pr-8">
-                          <Tile className="rounded-full h-8 w-8 bg-surface-3">
-                            <UserIcon className="p-1 text-white" />
-                          </Tile>
-                          <div className="flex justify-center w-full">
-                            <div className="flex items-center truncate pr-4">
-                              <div className="flex ml-4 items-center truncate text-sm max-w-96">
-                                <div className="mr-2 shrink-0">To: </div>
-                                {data.kind && data.kind === "burn" && (
-                                  <div> Minting account</div>
-                                )}
-                                {data.kind && data.kind !== "burn" && (
-                                  <>
-                                    <Tooltip content={data.to_account}>
-                                      <div className="truncate">
-                                        {data.to_account}
-                                      </div>
-                                    </Tooltip>
-                                    <CopyToClipboard
-                                      value={data.to_account as string}
-                                    />
-                                  </>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="h-0.5 bg-surface-2"></div>
-                  <div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-xl font-semibold">Amount</div>
-                      <div className="mt-4 flex items-center text-2xl font-semibold">
-                        <img src="/ogy_logo.svg" alt="OGY Logo" />
-                        <div className="ml-2">{data.formatted.amount} OGY</div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-content/60 text-sm">Fee</div>
-                      <div className="text-content/60 text-sm">
-                        {data.formatted.fee} OGY
-                      </div>
-                    </div>
-                  </div>
-                  <div className="h-0.5 bg-surface-2"></div>
-                  <div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-md font-semibold text-content/60">
-                        Memo
-                      </div>
-                      <Tooltip content={data.formatted.memo}>
-                        <div className="flex items-center text-md text-content/60 font-semibold truncate px-4 max-w-64">
-                          <div className="truncate">{data.formatted.memo}</div>
-                          {data.formatted.memo !== "-" && (
-                            <CopyToClipboard
-                              value={data.formatted.memo as string}
-                            />
-                          )}
-                        </div>
-                      </Tooltip>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-surface-2 flex justify-center py-4 rounded-b-lg border-t border-border/60">
-                  {data.formatted.updated_at}
-                </div>
-              </Card>
+      ) : (
+        <SkeletonOverlay loading={isLoading}>
+          <Card className="mt-8">
+            <div className="flex items-start justify-between gap-4">
+              <div className="text-sm font-medium text-muted">Amount</div>
+              <TransactionKindPill kind={data.kind} />
             </div>
-          </div>
-        </>
+
+            <div className="mt-4 flex items-baseline min-w-0">
+              <img
+                src="/ogy_logo.svg"
+                alt=""
+                className="w-12 h-12 self-center mr-3 shrink-0"
+              />
+              {isLoading ? (
+                <div className="h-12 w-full max-w-[320px] self-center rounded-md bg-muted/20" />
+              ) : (
+                <>
+                  <span className="font-bold text-[48px] leading-none text-content truncate min-w-0">
+                    {data.formatted.amount || FAKE_AMOUNT}
+                  </span>
+                  <span className="ml-3 text-muted font-semibold text-[22px] leading-none shrink-0">
+                    OGY
+                  </span>
+                </>
+              )}
+            </div>
+
+            <div className="mt-4 text-sm text-muted">
+              <span>+ {data.formatted.fee || "0"} OGY fee</span>
+              <span className="mx-2">·</span>
+              <span>Block {data.index ?? "0"}</span>
+            </div>
+          </Card>
+
+          <Card className="mt-4">
+            <div className="divide-y divide-border">
+              <DetailRow
+                label="From"
+                value={
+                  <PrincipalValue
+                    value={data.from_account}
+                    isMinting={isMintFrom}
+                  />
+                }
+              />
+              <DetailRow
+                label="To"
+                value={
+                  <PrincipalValue
+                    value={data.to_account}
+                    isMinting={isBurnTo}
+                  />
+                }
+              />
+            </div>
+          </Card>
+
+          <Card className="mt-4">
+            <div className="divide-y divide-border">
+              <DetailRow
+                label="Date"
+                value={
+                  data.updated_at ? (
+                    <DatePill iso={data.updated_at} />
+                  ) : (
+                    <div
+                      data-skel-static
+                      className="inline-block w-[180px] h-[26px] rounded-full bg-muted/20"
+                    />
+                  )
+                }
+              />
+              <DetailRow
+                label="Memo"
+                value={
+                  data.formatted.memo && data.formatted.memo !== "-" ? (
+                    <>
+                      <span className="font-semibold text-content break-all min-w-0">
+                        {data.formatted.memo}
+                      </span>
+                      <CopyToClipboard value={data.formatted.memo} />
+                    </>
+                  ) : (
+                    <span className="text-muted">None</span>
+                  )
+                }
+              />
+            </div>
+          </Card>
+        </SkeletonOverlay>
       )}
     </div>
   );

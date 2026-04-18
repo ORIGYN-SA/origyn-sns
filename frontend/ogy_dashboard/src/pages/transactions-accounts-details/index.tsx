@@ -1,6 +1,5 @@
 import { Suspense, lazy, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 import useAccountBalanceHistory from "@hooks/metrics/useAccountBalanceHistory";
 import usePrincipalOverview from "@hooks/accounts/usePrincipalOverview";
@@ -9,6 +8,7 @@ import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import {
   Card,
   NewTable,
+  PageHeader,
   SkeletonOverlay,
   TablePagination,
 } from "@components/ui";
@@ -43,6 +43,9 @@ const BALANCE_PERIOD_OPTIONS = [
 ];
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
+const FAKE_PRINCIPAL =
+  "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa";
+const FAKE_SUBACCOUNT = "None (default subaccount)";
 const OVERVIEW_COLORS = ["#645eff", "#333089"];
 const OVERVIEW_INFOS = [
   {
@@ -148,42 +151,37 @@ const TransactionsAccountsDetails = () => {
 
   return (
     <div className="container mx-auto pt-8 pb-16 px-4">
-      <div className="div div-col xl:div-row items-center justify-between py-8">
-        <div className="div div-col xl:div-row xl:justify-center items-center gap-4 xl:gap-8">
-          <ArrowLeftIcon
-            className="h-8 w-8 hover:cursor-pointer"
-            onClick={handleOnClickBack}
-          />
-          <div className="div div-col items-center xl:items-start">
-            <div className="text-sm">Explorer</div>
-            <div className="text-3xl font-bold mb-4 xl:mb-0">OGY account</div>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        category="Explorer"
+        title="OGY account"
+        onBack={handleOnClickBack}
+      />
 
       <Card className="mt-8">
         <div className="text-sm font-medium text-muted">Balance</div>
-        {isLoading ? (
-          <div className="mt-4 h-10 w-full max-w-[260px] rounded-md bg-muted/20" />
-        ) : (
-          <div className="mt-4 flex items-baseline min-w-0">
-            <img
-              src="/ogy_logo.svg"
-              alt=""
-              className="w-10 h-10 self-center mr-3 shrink-0"
-            />
-            <span className="font-bold text-[40px] leading-none text-content truncate min-w-0">
-              {data?.balance !== undefined
-                ? roundAndFormatLocale({
-                    number: divideBy1e8(Number(data.balance)),
-                  })
-                : "0"}
-            </span>
-            <span className="ml-3 text-muted font-semibold text-[20px] leading-none shrink-0">
-              OGY
-            </span>
-          </div>
-        )}
+        <div className="mt-4 flex items-baseline min-w-0">
+          <img
+            src="/ogy_logo.svg"
+            alt=""
+            className="w-10 h-10 self-center mr-3 shrink-0"
+          />
+          {isLoading ? (
+            <div className="h-10 w-full max-w-[260px] self-center rounded-md bg-muted/20" />
+          ) : (
+            <>
+              <span className="font-bold text-[40px] leading-none text-content truncate min-w-0">
+                {data?.balance !== undefined
+                  ? roundAndFormatLocale({
+                      number: divideBy1e8(Number(data.balance)),
+                    })
+                  : "0"}
+              </span>
+              <span className="ml-3 text-muted font-semibold text-[20px] leading-none shrink-0">
+                OGY
+              </span>
+            </>
+          )}
+        </div>
         <div className="mt-8 pt-6 border-t border-border">
           <SkeletonOverlay loading={isLoading}>
             <div className="divide-y divide-border">
@@ -193,7 +191,7 @@ const TransactionsAccountsDetails = () => {
                 </div>
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="font-semibold text-content break-all text-right">
-                    {data?.id}
+                    {data?.id ?? FAKE_PRINCIPAL}
                   </span>
                   {data?.id && <CopyToClipboard value={data.id} />}
                 </div>
@@ -204,7 +202,7 @@ const TransactionsAccountsDetails = () => {
                 </div>
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="font-semibold text-content break-all text-right">
-                    {data?.owner}
+                    {data?.owner ?? FAKE_PRINCIPAL}
                   </span>
                   {data?.owner && <CopyToClipboard value={data.owner} />}
                 </div>
@@ -214,7 +212,7 @@ const TransactionsAccountsDetails = () => {
                   Subaccount
                 </div>
                 <span className="font-semibold text-content break-all text-right">
-                  {data?.formatted.subaccount}
+                  {data?.formatted.subaccount ?? FAKE_SUBACCOUNT}
                 </span>
               </div>
             </div>

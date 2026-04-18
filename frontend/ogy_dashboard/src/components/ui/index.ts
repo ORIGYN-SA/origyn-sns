@@ -16,6 +16,10 @@ import Skeleton from "@components/ui/Skeleton";
 import SkeletonOverlay from "@components/ui/SkeletonOverlay";
 import ExternalLink from "@components/ui/links/ExternalLink";
 import TablePagination from "@components/ui/TablePagination";
+import PageHeader from "@components/ui/PageHeader";
+import DatePill from "@components/ui/DatePill";
+import DetailRow from "@components/ui/DetailRow";
+import TransactionKindPill from "@components/ui/TransactionKindPill";
 
 export {
   Card,
@@ -36,4 +40,8 @@ export {
   SkeletonOverlay,
   ExternalLink,
   TablePagination,
+  PageHeader,
+  DatePill,
+  DetailRow,
+  TransactionKindPill,
 };
