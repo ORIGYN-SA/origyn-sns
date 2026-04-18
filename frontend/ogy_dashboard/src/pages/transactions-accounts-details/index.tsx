@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
@@ -8,10 +9,21 @@ import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import { usePagination, useSorting } from "@helpers/table/useTable";
 import TransactionsAccountList from "@pages/transactions/transactions-account-list";
 import BalanceHistory from "./ChartBalanceHistory";
-import TransactionsChart from "./transactions-chart/TransactionsChart";
 import { Button } from "@components/ui";
 import { PieChartProvider } from "@components/charts/pie/context";
 import PrincipalOverview from "@pages/account/principal-overview/PrincipalOverview";
+
+const TransactionsChart = lazy(
+  () => import("./transactions-chart/TransactionsChart")
+);
+
+const TransactionsChartFallback = () => (
+  <div
+    aria-busy="true"
+    className="rounded-xl bg-muted/20 animate-pulse"
+    style={{ height: 800, width: "100%" }}
+  />
+);
 
 const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
@@ -116,7 +128,9 @@ const TransactionsAccountsDetails = () => {
             </div> */}
           </div>
         </div>
-        <TransactionsChart id={params.accountId || ""} />
+        <Suspense fallback={<TransactionsChartFallback />}>
+          <TransactionsChart id={params.accountId || ""} />
+        </Suspense>
         <BalanceHistory className="mt-16" account={params?.accountId || ""} />
         <div className="mt-16">
           <PieChartProvider>
