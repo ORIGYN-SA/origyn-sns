@@ -2,12 +2,21 @@ import { PointerEvent, useRef, useState } from "react";
 import clsx from "clsx";
 import { Card } from "@components/ui";
 import useEstimatedRewards from "@hooks/governance/useEstimatedRewards";
+import { millify } from "@helpers/numbers";
+
+const COMPACT_AMOUNT_THRESHOLD = 10_000;
+
+const formatAmountCompact = (formatted: string): string => {
+  const n = Number(formatted.replace(/,/g, ""));
+  if (!Number.isFinite(n) || n < COMPACT_AMOUNT_THRESHOLD) return formatted;
+  return millify(n, 3);
+};
 
 interface EstimateRewardsProps {
   className?: string;
 }
 
-const TRACK_INSET = 3;
+const THUMB_RADIUS = 15;
 
 type DiscreteSliderProps = {
   min: number;
@@ -34,8 +43,8 @@ const DiscreteSlider = ({
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const innerLeft = rect.left + TRACK_INSET;
-    const innerWidth = rect.width - TRACK_INSET * 2;
+    const innerLeft = rect.left + THUMB_RADIUS;
+    const innerWidth = rect.width - THUMB_RADIUS * 2;
     const raw = innerWidth <= 0 ? 0 : (clientX - innerLeft) / innerWidth;
     const clamped = Math.min(1, Math.max(0, raw));
     const next = Math.round(clamped * range) + min;
@@ -86,6 +95,8 @@ const DiscreteSlider = ({
             background: "linear-gradient(90deg, #0AB57F 0%, #F8B073 100%)",
           }}
         />
+      </div>
+      <div className="absolute inset-x-[15px] inset-y-0">
         <div
           className="absolute top-1/2 h-[30px] w-[30px] -translate-y-1/2 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.08)]"
           style={{
@@ -98,6 +109,35 @@ const DiscreteSlider = ({
     </div>
   );
 };
+
+type LockedStatProps = {
+  amount: string;
+  participants: number;
+  caption: string;
+};
+
+const LockedStat = ({ amount, participants, caption }: LockedStatProps) => (
+  <div className="min-w-0">
+    <div className="flex items-baseline leading-none">
+      <span className="inline-flex items-center">
+        <img
+          src="/ogy_logo.svg"
+          alt=""
+          className="mr-2 h-4 w-4 shrink-0 object-contain"
+        />
+        <span className="text-[22px] font-semibold text-content">{amount}</span>
+      </span>
+      <span className="ml-1 text-base font-semibold text-muted">OGY</span>
+    </div>
+    <div className="mt-2 text-[13px] font-normal leading-none text-muted">
+      <span className="font-semibold text-content">{participants}</span>{" "}
+      participants
+    </div>
+    <div className="mt-2 text-[13px] font-normal leading-none text-muted">
+      {caption}
+    </div>
+  </div>
+);
 
 const placeholderData = [
   { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
@@ -125,7 +165,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
       </h2>
 
       <div className="text-[40px] font-bold leading-none text-content">
-        {current?.rate || "N/A"}
+        {current?.rate?.replace(/\s+/g, "") || "N/A"}
       </div>
 
       <DiscreteSlider
@@ -138,52 +178,17 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {current?.lockedSum != null && (
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 leading-none">
-              <img
-                src="/ogy_logo.svg"
-                alt=""
-                className="h-4 w-4 shrink-0 object-contain"
-              />
-              <span className="text-[22px] font-semibold text-content">
-                {current.lockedSum}
-              </span>
-              <span className="text-base font-semibold text-muted">OGY</span>
-            </div>
-            <div className="mt-2 text-[13px] font-normal leading-none text-muted">
-              <span className="font-semibold text-content">
-                {current.countSum}
-              </span>{" "}
-              participants
-            </div>
-            <div className="mt-2 text-[13px] font-normal leading-none text-muted">
-              currently locked for at least {activeIndex} {yearLabel}
-            </div>
-          </div>
+          <LockedStat
+            amount={formatAmountCompact(current.lockedSum)}
+            participants={current.countSum}
+            caption={`currently locked for at least ${activeIndex} ${yearLabel}`}
+          />
         )}
-
-        <div className="min-w-0">
-          <div className="flex items-center gap-2 leading-none">
-            <img
-              src="/ogy_logo.svg"
-              alt=""
-              className="h-4 w-4 shrink-0 object-contain"
-            />
-            <span className="text-[22px] font-semibold text-content">
-              {current?.locked || "0"}
-            </span>
-            <span className="text-base font-semibold text-muted">OGY</span>
-          </div>
-          <div className="mt-2 text-[13px] font-normal leading-none text-muted">
-            <span className="font-semibold text-content">
-              {current?.count ?? 0}
-            </span>{" "}
-            participants
-          </div>
-          <div className="mt-2 text-[13px] font-normal leading-none text-muted">
-            currently locked for {activeIndex} {yearLabel}
-          </div>
-        </div>
+        <LockedStat
+          amount={formatAmountCompact(current?.locked || "0")}
+          participants={current?.count ?? 0}
+          caption={`currently locked for ${activeIndex} ${yearLabel}`}
+        />
       </div>
 
       {isError && (
@@ -194,9 +199,9 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         <>
           <div
             aria-busy="true"
-            className="pointer-events-none absolute inset-0 rounded-2xl bg-white"
+            className="pointer-events-none absolute inset-6 bg-white"
           />
-          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[#EAECF6] animate-pulse" />
+          <div className="pointer-events-none absolute inset-6 bg-muted/20 animate-pulse" />
         </>
       )}
     </Card>
