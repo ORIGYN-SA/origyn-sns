@@ -6,7 +6,7 @@ import {
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 import { useWalletInit } from "@amerej/artemis-react";
-import { lazy, useEffect } from "react";
+import { useEffect } from "react";
 
 import {
   // APP_MODE,
@@ -33,55 +33,24 @@ import { idlFactory as collectionIndexIdl } from "@services/candid/collection_in
 import Layout from "@components/Layout";
 import NotFound from "@components/NotFound";
 import ProtectedRoute from "@providers/ProtectedRoute";
-
-const Dashboard = lazy(() => import("@pages/dashboard"));
-const Governance = lazy(() =>
-  import("@pages/governance").then((m) => ({ default: m.Governance }))
-);
-const Neurons = lazy(() =>
-  import("@pages/neurons/Neurons").then((m) => ({ default: m.Neurons }))
-);
-const NeuronsDetails = lazy(() =>
-  import("@pages/neurons-details/NeuronsDetails").then((m) => ({
-    default: m.NeuronsDetails,
-  }))
-);
-const Proposals = lazy(() =>
-  import("@pages/proposals/Proposals").then((m) => ({ default: m.Proposals }))
-);
-const ProposalsDetails = lazy(() =>
-  import("@pages/proposals-details/ProposalsDetails").then((m) => ({
-    default: m.ProposalsDetails,
-  }))
-);
-const TokenDistribution = lazy(() =>
-  import("@pages/token-distribution").then((m) => ({
-    default: m.TokenDistribution,
-  }))
-);
-const Explorer = lazy(() =>
-  import("@pages/explorer/Explorer").then((m) => ({ default: m.Explorer }))
-);
-const TransactionsDetails = lazy(() =>
-  import("@pages/transactions-details/TransactionsDetails").then((m) => ({
-    default: m.TransactionsDetails,
-  }))
-);
-const TransactionsAccountsDetails = lazy(
-  () => import("@pages/transactions-accounts-details")
-);
-const TransactionsAccountHistory = lazy(
-  () => import("@pages/transactions-accounts-history")
-);
-const Account = lazy(() =>
-  import("@pages/account/index").then((m) => ({ default: m.Account }))
-);
-const Recovery = lazy(() => import("@pages/recovery/Recovery"));
-const Support = lazy(() => import("@pages/support"));
-const Calculator = lazy(() => import("@pages/calculator/Calculator"));
-const TopTransfersAndBurnsFull = lazy(
-  () => import("@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull")
-);
+import {
+  Dashboard,
+  Governance,
+  Neurons,
+  NeuronsDetails,
+  Proposals,
+  ProposalsDetails,
+  TokenDistribution,
+  Explorer,
+  TransactionsDetails,
+  TransactionsAccountsDetails,
+  TransactionsAccountHistory,
+  Account,
+  Recovery,
+  Support,
+  Calculator,
+  TopTransfersAndBurnsFull,
+} from "@routes/lazyRoutes";
 
 const router = createBrowserRouter([
   {

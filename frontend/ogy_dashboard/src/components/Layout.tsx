@@ -18,17 +18,6 @@ const NavigationProgress = () => {
   );
 };
 
-const RouteSkeleton = () => (
-  <div aria-busy="true" className="flex flex-col gap-6 p-6">
-    <div className="h-16 rounded-2xl bg-muted/20 animate-pulse" />
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-      <div className="h-72 rounded-2xl bg-muted/20 animate-pulse" />
-      <div className="h-72 rounded-2xl bg-muted/20 animate-pulse" />
-    </div>
-    <div className="h-96 rounded-2xl bg-muted/20 animate-pulse" />
-  </div>
-);
-
 const Layout = () => {
   const navigation = useNavigation();
   useScrollToTopOnNavigation();
@@ -52,7 +41,7 @@ const Layout = () => {
           {navigation.state !== "idle" ? (
             <NavigationProgress />
           ) : (
-            <Suspense fallback={<RouteSkeleton />}>
+            <Suspense fallback={null}>
               <Outlet />
             </Suspense>
           )}
