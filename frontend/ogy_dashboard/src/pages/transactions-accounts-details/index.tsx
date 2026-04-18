@@ -1,16 +1,27 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
-// import { Principal } from "@dfinity/principal";
-// import { AccountIdentifier } from "@dfinity/ledger-icp";
+import useAccountBalanceHistory from "@hooks/metrics/useAccountBalanceHistory";
+import usePrincipalOverview from "@hooks/accounts/usePrincipalOverview";
+import useFetchOneAccountTransactions from "@hooks/transactions/useFetchOneAccountTransactions";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import { usePagination, useSorting } from "@helpers/table/useTable";
-import TransactionsAccountList from "@pages/transactions/transactions-account-list";
-import BalanceHistory from "./ChartBalanceHistory";
-import { Button, Skeleton } from "@components/ui";
+import {
+  Card,
+  NewTable,
+  SkeletonOverlay,
+  TablePagination,
+} from "@components/ui";
+import {
+  StatCard,
+  ChartStatsCard,
+  PieStatsCard,
+} from "@components/dashboard";
 import { PieChartProvider } from "@components/charts/pie/context";
-import PrincipalOverview from "@pages/account/principal-overview/PrincipalOverview";
+import {
+  getTransactionColumns,
+  buildSkeletonRows,
+} from "@pages/transactions/transactionColumns";
 
 const TransactionsChart = lazy(
   () => import("./transactions-chart/TransactionsChart")
@@ -24,133 +35,220 @@ const TransactionsChartFallback = () => (
   />
 );
 
+const BALANCE_PERIOD_OPTIONS = [{ value: "monthly", label: "Monthly" }];
+const OVERVIEW_COLORS = ["#645eff", "#333089"];
+const OVERVIEW_INFOS = [
+  {
+    id: "tooltip-total-sent",
+    name: "Total Sent",
+    value: "Total amount sent by the principal.",
+  },
+  {
+    id: "tooltip-total-received",
+    name: "Total Received",
+    value: "Total amount received by the principal.",
+  },
+];
 const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
-  const handleOnClickBack = () => {
-    navigate(-1);
-  };
-  const [pagination] = usePagination({});
-  const [sorting] = useSorting({
-    id: "index",
-    desc: true,
-  });
-
   const params = useParams();
+  const accountId = params.accountId as string;
 
-  const { data, isError, isLoading, isSuccess } = useFecthOneAccount({
-    accountId: params.accountId as string,
+  const [balancePeriod, setBalancePeriod] = useState("monthly");
+  const [txPageIndex, setTxPageIndex] = useState(0);
+  const [txPageSize, setTxPageSize] = useState(10);
+  const [txSortDesc, setTxSortDesc] = useState(true);
+
+  const { data, isLoading } = useFecthOneAccount({ accountId });
+
+  const {
+    data: balanceHistory,
+    isLoading: isLoadingBalance,
+    isError: isBalanceError,
+  } = useAccountBalanceHistory({ account: accountId });
+
+  const {
+    data: overview,
+    isLoading: isLoadingOverview,
+    isError: isOverviewError,
+    error: overviewError,
+  } = usePrincipalOverview(accountId);
+
+  const {
+    data: transactions,
+    isLoading: isLoadingTx,
+    isFetching: isFetchingTx,
+  } = useFetchOneAccountTransactions({
+    limit: txPageSize,
+    offset: txPageSize * txPageIndex,
+    sorting: [{ id: "index", desc: txSortDesc }],
+    accountId,
   });
 
-  const handleShowAllTxHistory = () => {
-    navigate(
-      `/explorer/transactions/accounts/${params.accountId as string}/history`
-    );
+  const overviewChartData = useMemo(() => {
+    if (!overview) return undefined;
+    return [
+      {
+        name: "Total Sent",
+        value: overview.totalSend,
+        valueToString: roundAndFormatLocale({ number: overview.totalSend }),
+      },
+      {
+        name: "Total Received",
+        value: overview.totalReceive,
+        valueToString: roundAndFormatLocale({ number: overview.totalReceive }),
+      },
+    ];
+  }, [overview]);
+
+  const txColumns = useMemo(
+    () =>
+      getTransactionColumns(navigate, {
+        desc: txSortDesc,
+        onToggle: () => {
+          setTxSortDesc((d) => !d);
+          setTxPageIndex(0);
+        },
+      }),
+    [navigate, txSortDesc]
+  );
+  const txPageCount = transactions?.list.pageCount ?? 0;
+  const txRows =
+    isLoadingTx || !transactions?.list.rows
+      ? buildSkeletonRows(txPageSize)
+      : transactions.list.rows;
+
+  const handleTxPageChange = (next: number) => setTxPageIndex(next);
+  const handleTxPageSizeChange = (next: number) => {
+    setTxPageSize(next);
+    setTxPageIndex(0);
   };
+
+  const handleOnClickBack = () => navigate(-1);
 
   return (
-    <>
-      <div className="container mx-auto pt-8 pb-16 px-4">
-        <div className="div div-col xl:div-row items-center justify-between py-8">
-          <div className="div div-col xl:div-row xl:justify-center items-center gap-4 xl:gap-8">
-            <ArrowLeftIcon
-              className="h-8 w-8 hover:cursor-pointer"
-              onClick={handleOnClickBack}
-            />
-            <div className="div div-col items-center xl:items-start">
-              <div className="text-sm">Explorer</div>
-              <div className="text-3xl font-bold mb-4 xl:mb-0">OGY account</div>
-            </div>
-          </div>
-        </div>
-        <div className="grid xl:grid-cols-3 mt-8 bg-surface rounded-xl border border-border">
-          <div className="div div-col text-center xl:text-start xl:col-span-2 rounded-t-xl xl:rounded-tr-none xl:rounded-s-lg p-6 bg-surface">
-            <div className="mb-4">
-              <div className="text-content/60">ID</div>
-              <div className="font-bold break-all">{data?.id}</div>
-            </div>
-            <div className="mb-4">
-              <div className="text-content/60">Owner</div>
-              <div className="font-bold break-all">{data?.owner}</div>
-            </div>
-            <div className="mb-4">
-              <div className="text-content/60">Subaccount</div>
-              <div className="font-bold break-all">
-                {data?.formatted.subaccount}
-                {/* {data?.has_subaccount ||
-                  (data?.id &&
-                    AccountIdentifier.fromPrincipal({
-                      principal: Principal.fromText(data?.id || ""),
-                    }).toHex())} */}
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-flow-row xl:border-l border-border">
-            <div className="xl:col-span-1 rounded-tr-none xl:rounded-tr-lg p-6 bg-surface div items-center justify-center border-t border-border xl:border-none">
-              <div className="div div-col items-center">
-                <div className="font-semibold mb-4">Balance</div>
-                <div className="mt-4 flex items-center text-2xl font-semibold">
-                  {isSuccess && (
-                    <>
-                      <img src="/ogy_logo.svg" alt="OGY Logo" />
-                      <span className="ml-2 mr-3">
-                        {roundAndFormatLocale({
-                          number: divideBy1e8(data?.balance || 0),
-                        })}
-                      </span>
-                      <span className="text-content/60">OGY</span>
-                    </>
-                  )}
-                  {(isLoading || isError) && <Skeleton className="w-64" />}
-                </div>
-              </div>
-            </div>
-            {/* <div className="xl:col-span-1 rounded-b-lg xl:rounded-bl-none xl:rounded-br-lg border-t border-border p-6 bg-surface-2">
-              <div className="div div-col items-center">
-                <div className="mb-1">
-                  <span className="text-sm text-content/60">Historical max balance</span>
-                  <div className="mt-2 flex items-center text-md font-semibold">
-                    {isSuccess && (
-                      <>
-                        <img src="/ogy_logo.svg" style={{ width: 20 }} alt="OGY Logo" />
-                        <span className="ml-2 mr-3">{
-                          roundAndFormatLocale({
-                            number: divideBy1e8(data?.balance),
-                          })}</span>
-                        <span className="text-content/60">OGY</span>
-                      </>
-                    )}
-                    {(isLoading || isError) && <Skeleton className="w-64" />}
-                  </div>
-                </div>
-              </div>
-
-            </div> */}
-          </div>
-        </div>
-        <Suspense fallback={<TransactionsChartFallback />}>
-          <TransactionsChart id={params.accountId || ""} />
-        </Suspense>
-        <BalanceHistory className="mt-16" account={params?.accountId || ""} />
-        <div className="mt-16">
-          <PieChartProvider>
-            <PrincipalOverview />
-          </PieChartProvider>
-        </div>
-        <div>
-          <div className="flex items-center mt-16 mb-8 gap-8">
-            <h2 className="text-3xl font-bold">Transactions history</h2>
-            <Button onClick={handleShowAllTxHistory} className="min-w-fit">
-              Show all
-            </Button>
-          </div>
-          <TransactionsAccountList
-            accountId={params?.accountId}
-            pagination={pagination}
-            sorting={sorting}
+    <div className="container mx-auto pt-8 pb-16 px-4">
+      <div className="div div-col xl:div-row items-center justify-between py-8">
+        <div className="div div-col xl:div-row xl:justify-center items-center gap-4 xl:gap-8">
+          <ArrowLeftIcon
+            className="h-8 w-8 hover:cursor-pointer"
+            onClick={handleOnClickBack}
           />
+          <div className="div div-col items-center xl:items-start">
+            <div className="text-sm">Explorer</div>
+            <div className="text-3xl font-bold mb-4 xl:mb-0">OGY account</div>
+          </div>
         </div>
       </div>
-    </>
+
+      <div className="grid xl:grid-cols-3 gap-4 mt-8">
+        <Card className="xl:col-span-2">
+          <div className="mb-4">
+            <div className="text-content/60">ID</div>
+            <div className="font-bold break-all">{data?.id}</div>
+          </div>
+          <div className="mb-4">
+            <div className="text-content/60">Owner</div>
+            <div className="font-bold break-all">{data?.owner}</div>
+          </div>
+          <div>
+            <div className="text-content/60">Subaccount</div>
+            <div className="font-bold break-all">
+              {data?.formatted.subaccount}
+            </div>
+          </div>
+        </Card>
+        <StatCard
+          accessory={
+            <img src="/ogy_logo.svg" alt="" className="w-6 h-6" />
+          }
+          title="Balance"
+          value={
+            data?.balance !== undefined
+              ? roundAndFormatLocale({
+                  number: divideBy1e8(Number(data.balance)),
+                })
+              : undefined
+          }
+          unit="OGY"
+          loading={isLoading}
+        />
+      </div>
+
+      <Suspense fallback={<TransactionsChartFallback />}>
+        <TransactionsChart id={accountId} />
+      </Suspense>
+
+      <ChartStatsCard
+        className="mt-16"
+        title="Balance History"
+        periodOptions={BALANCE_PERIOD_OPTIONS}
+        period={balancePeriod}
+        onPeriodChange={setBalancePeriod}
+        stats={[
+          {
+            id: "current-balance",
+            label: "Current balance",
+            tooltipContent: <p>Current account balance.</p>,
+            value: balanceHistory?.total,
+            unit: "OGY",
+          },
+        ]}
+        chart={{
+          data: balanceHistory?.dataChart,
+          color: "#38bdf8",
+          label: "OGY Balance",
+        }}
+        legendLabel="OGY Balance"
+        loading={isLoadingBalance}
+        isError={isBalanceError}
+        errorMessage="Error while fetching account balance data."
+      />
+
+      <div className="mt-16">
+        <PieChartProvider>
+          <PieStatsCard
+            title="Transactions Overview"
+            data={overviewChartData}
+            colors={OVERVIEW_COLORS}
+            infos={OVERVIEW_INFOS}
+            totalLabel="Total amount"
+            totalValue={
+              overview
+                ? roundAndFormatLocale({ number: overview.totalVolume })
+                : undefined
+            }
+            loading={isLoadingOverview}
+            isError={isOverviewError}
+            errorMessage={overviewError?.message}
+            layout="horizontal"
+          />
+        </PieChartProvider>
+      </div>
+
+      <Card className="mt-16">
+        <div className="mb-8">
+          <div className="text-charcoal text-[22px] font-semibold leading-none">
+            Transaction History
+          </div>
+        </div>
+        <SkeletonOverlay loading={isFetchingTx}>
+          <NewTable
+            columns={txColumns}
+            data={txRows}
+            footer={
+              <TablePagination
+                pageIndex={txPageIndex}
+                pageSize={txPageSize}
+                pageCount={txPageCount}
+                onPageChange={handleTxPageChange}
+                onPageSizeChange={handleTxPageSizeChange}
+              />
+            }
+          />
+        </SkeletonOverlay>
+      </Card>
+    </div>
   );
 };
 
