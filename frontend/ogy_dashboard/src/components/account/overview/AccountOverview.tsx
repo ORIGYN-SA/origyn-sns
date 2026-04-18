@@ -73,14 +73,9 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                           <div className="mr-2 shrink-0">Principal ID: </div>
                           {principalId ? (
                             <>
-                              <div
-                                className="truncate"
-                                data-tooltip-id="tooltip_principal_id"
-                                data-tooltip-content={principalId}
-                              >
-                                {principalId}
-                              </div>
-                              <Tooltip id="tooltip_principal_id" />
+                              <Tooltip content={principalId}>
+                                <div className="truncate">{principalId}</div>
+                              </Tooltip>
                               <CopyToClipboard value={principalId as string} />
                             </>
                           ) : (

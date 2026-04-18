@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Badge, Button, Card, Skeleton, Tooltip } from "@components/ui";
+import { Badge, Button, Card, Skeleton } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import useTopTransfersAndBurns, {
@@ -127,7 +127,6 @@ const TopTransfersAndBurns = ({
           <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
             Show All
           </Button>
-          <Tooltip id="tooltip_address" />
         </div>
         {isLoading && <Skeleton count={limit} height={52} />}
         {isError && (
@@ -145,7 +144,6 @@ const TopTransfersAndBurns = ({
             <div className="text-center text-gray-500">No data available.</div>
           )
         )}
-        <Tooltip id="tooltip_address" />
       </Card>
     </>
   );

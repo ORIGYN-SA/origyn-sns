@@ -55,14 +55,9 @@ const useProposalsAll = ({
               label: "Proposer",
               value: (
                 <div className="flex items-center justify-center max-w-72 m-auto">
-                  <div
-                    data-tooltip-id="tooltip_title"
-                    data-tooltip-content={proposer}
-                    className="truncate"
-                  >
-                    {proposer}
-                  </div>
-                  <Tooltip id="tooltip_title" />
+                  <Tooltip content={proposer}>
+                    <div className="truncate">{proposer}</div>
+                  </Tooltip>
                   <CopyToClipboard value={proposer} />
                 </div>
               ) as ReactNode,

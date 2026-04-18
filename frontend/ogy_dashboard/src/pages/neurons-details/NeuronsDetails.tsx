@@ -37,13 +37,9 @@ export const NeuronsDetails = () => {
         </div>
         <div className="flex ml-4 items-center truncate text-sm max-w-96 bg-surface-2 rounded-full py-2 px-4">
           <div className="mr-2 shrink-0 font-semibold">Neuron ID: </div>
-          <div
-            className="truncate"
-            data-tooltip-id="tooltip"
-            data-tooltip-content={searchParams.get("id")}
-          >
-            {searchParams.get("id")}
-          </div>
+          <Tooltip content={searchParams.get("id")}>
+            <div className="truncate">{searchParams.get("id")}</div>
+          </Tooltip>
 
           <CopyToClipboard value={searchParams.get("id") as string} />
         </div>
@@ -90,7 +86,6 @@ export const NeuronsDetails = () => {
           <div>{errorGetNeuron?.message}</div>
         </div>
       )}
-      <Tooltip id="tooltip" />
     </div>
   );
 };

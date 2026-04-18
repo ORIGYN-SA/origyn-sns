@@ -43,14 +43,9 @@ const Form = () => {
             <div className="mr-2 shrink-0">Account ID: </div>
             {accountId ? (
               <>
-                <div
-                  className="truncate"
-                  data-tooltip-id="tooltip_account_id"
-                  data-tooltip-content={accountId}
-                >
-                  {accountId}
-                </div>
-                <Tooltip id="tooltip_account_id" />
+                <Tooltip content={accountId}>
+                  <div className="truncate">{accountId}</div>
+                </Tooltip>
                 <CopyToClipboard value={accountId as string} />
               </>
             ) : (

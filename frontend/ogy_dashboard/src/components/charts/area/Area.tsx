@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import styled from "styled-components";
 import { colors } from "@theme/preset";
 import CustomTooltip from "../utils/CustomTooltip";
 import { millify } from "@helpers/numbers";
@@ -21,18 +20,6 @@ type AreaChart = {
   data: Data[] | undefined;
   fill?: string;
 };
-
-const StyledAreaChart = styled(AreaChart)`
-  .recharts-cartesian-grid-vertical line {
-    stroke: ${colors.surface[3]} !important;
-  }
-  .recharts-cartesian-grid-horizontal line:first-child,
-  .recharts-cartesian-grid-horizontal line:last-child,
-  .recharts-cartesian-grid-vertical line:first-child,
-  .recharts-cartesian-grid-vertical line:last-child {
-    stroke-opacity: 0 !important;
-  }
-`;
 
 const Area = ({
   data = [
@@ -50,7 +37,7 @@ const Area = ({
   const maxValue = Math.max(...data.map((d) => d.value));
   return (
     <ResponsiveContainer>
-      <StyledAreaChart
+      <AreaChart
         width={500}
         height={400}
         data={data}
@@ -100,7 +87,7 @@ const Area = ({
           fillOpacity={1}
           fill={`url(#fill${fill})`}
         />
-      </StyledAreaChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 };

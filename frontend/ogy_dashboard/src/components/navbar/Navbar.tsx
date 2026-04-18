@@ -6,7 +6,7 @@ import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import BrandLogo from "@components/brand/BrandLogo";
 import AccountOverview from "@components/account/overview/AccountOverview";
-import { Tile, Skeleton } from "@components/ui";
+import { Tile, Skeleton, Tooltip } from "@components/ui";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
 import useScrolledPast from "@hooks/useScrolledPast";
 
@@ -89,15 +89,9 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                       <div className="flex ml-4 items-center truncate text-sm max-w-64">
                         <div className="mr-2 shrink-0">Principal ID: </div>
                         {principalId ? (
-                          <>
-                            <div
-                              className="truncate"
-                              data-tooltip-id="tooltip_principal_id"
-                              data-tooltip-content={principalId}
-                            >
-                              {principalId}
-                            </div>
-                          </>
+                          <Tooltip content={principalId}>
+                            <div className="truncate">{principalId}</div>
+                          </Tooltip>
                         ) : (
                           <Skeleton className="w-64" />
                         )}

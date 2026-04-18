@@ -7,7 +7,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import styled from "styled-components";
 import { millify } from "@helpers/numbers";
 import { colors } from "@theme/preset";
 
@@ -34,23 +33,18 @@ type BarChart = {
   legendValue?: string | undefined;
 };
 
-const StyledLegendIndicator = styled.div`
-  background-color: ${({ color }) => color};
-`;
-
 const renderLegend = (
   legendValue: string | undefined,
   color: string | undefined
-) => {
-  // const { payload } = props;
-
-  return (
-    <div className="flex items-center mt-4">
-      <StyledLegendIndicator color={color} className="h-4 w-4 rounded-full" />
-      <div className="ml-2">{legendValue}</div>
-    </div>
-  );
-};
+) => (
+  <div className="flex items-center mt-4">
+    <div
+      className="h-4 w-4 rounded-full"
+      style={{ backgroundColor: color }}
+    />
+    <div className="ml-2">{legendValue}</div>
+  </div>
+);
 
 const Bar = ({
   data = [

@@ -75,14 +75,14 @@ const TransactionsAccountList = ({
             )}
             {info.getValue() && info.getValue() !== "Minting account" && (
               <>
-                <button
-                  onClick={() => handleClickView(info)}
-                  data-tooltip-id="tooltip_from_account"
-                  data-tooltip-content={info.getValue()}
-                  className="mr-2 truncate"
-                >
-                  {info.getValue()}
-                </button>
+                <Tooltip content={info.getValue()}>
+                  <button
+                    onClick={() => handleClickView(info)}
+                    className="mr-2 truncate"
+                  >
+                    {info.getValue()}
+                  </button>
+                </Tooltip>
                 <CopyToClipboard value={info.getValue()} />
               </>
             )}
@@ -101,14 +101,14 @@ const TransactionsAccountList = ({
             )}
             {info.getValue() && info.getValue() !== "Minting account" && (
               <>
-                <button
-                  onClick={() => handleClickView(info)}
-                  data-tooltip-id="tooltip_to_account"
-                  data-tooltip-content={info.getValue()}
-                  className="truncate"
-                >
-                  {info.getValue()}
-                </button>
+                <Tooltip content={info.getValue()}>
+                  <button
+                    onClick={() => handleClickView(info)}
+                    className="truncate"
+                  >
+                    {info.getValue()}
+                  </button>
+                </Tooltip>
                 <CopyToClipboard value={info.getValue()} />
               </>
             )}
@@ -179,8 +179,6 @@ const TransactionsAccountList = ({
           <div>{error?.message}</div>
         </div>
       )}
-      <Tooltip id="tooltip_from_account" />
-      <Tooltip id="tooltip_to_account" />
     </>
   );
 };

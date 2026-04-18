@@ -79,14 +79,11 @@ export const TransactionsDetails = () => {
                               )}
                               {data.kind && data.kind !== "mint" && (
                                 <>
-                                  <div
-                                    className="truncate"
-                                    data-tooltip-id="tooltip_principal_id"
-                                    data-tooltip-content={data.from_account}
-                                  >
-                                    {data.from_account}
-                                  </div>
-                                  <Tooltip id="tooltip_principal_id" />
+                                  <Tooltip content={data.from_account}>
+                                    <div className="truncate">
+                                      {data.from_account}
+                                    </div>
+                                  </Tooltip>
                                   <CopyToClipboard
                                     value={data.from_account as string}
                                   />
@@ -112,13 +109,11 @@ export const TransactionsDetails = () => {
                                 )}
                                 {data.kind && data.kind !== "burn" && (
                                   <>
-                                    <div
-                                      className="truncate"
-                                      data-tooltip-id="tooltip"
-                                      data-tooltip-content={data.to_account}
-                                    >
-                                      {data.to_account}
-                                    </div>
+                                    <Tooltip content={data.to_account}>
+                                      <div className="truncate">
+                                        {data.to_account}
+                                      </div>
+                                    </Tooltip>
                                     <CopyToClipboard
                                       value={data.to_account as string}
                                     />
@@ -153,18 +148,16 @@ export const TransactionsDetails = () => {
                       <div className="text-md font-semibold text-content/60">
                         Memo
                       </div>
-                      <div
-                        className="flex items-center text-md text-content/60 font-semibold truncate px-4 max-w-64"
-                        data-tooltip-id="tooltip"
-                        data-tooltip-content={data.formatted.memo}
-                      >
-                        <div className="truncate">{data.formatted.memo}</div>
-                        {data.formatted.memo !== "-" && (
-                          <CopyToClipboard
-                            value={data.formatted.memo as string}
-                          />
-                        )}
-                      </div>
+                      <Tooltip content={data.formatted.memo}>
+                        <div className="flex items-center text-md text-content/60 font-semibold truncate px-4 max-w-64">
+                          <div className="truncate">{data.formatted.memo}</div>
+                          {data.formatted.memo !== "-" && (
+                            <CopyToClipboard
+                              value={data.formatted.memo as string}
+                            />
+                          )}
+                        </div>
+                      </Tooltip>
                     </div>
                   </div>
                 </div>
@@ -174,7 +167,6 @@ export const TransactionsDetails = () => {
               </Card>
             </div>
           </div>
-          <Tooltip id="tooltip" />
         </>
       )}
     </div>
