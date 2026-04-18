@@ -49,7 +49,7 @@ export default {
         sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
       },
       backgroundImage: {
-        'ledger-switch': "url('/bg_ledger_switch.jpg')",
+        'ledger-switch': "url('/bg_ledger_switch.webp')",
       }
     },
   },
