@@ -1,18 +1,24 @@
 import { useState, useCallback } from "react";
-import { CopyToClipboard as ReactCopyToClipboard } from "react-copy-to-clipboard";
 
 const CopyToClipboard = ({ value }: { value: string }) => {
   const [copied, setCopied] = useState(false);
 
-  const onCopy = useCallback(() => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  }, []);
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // clipboard write can fail in insecure contexts or if permission denied
+    }
+  }, [value]);
 
   return (
-    <ReactCopyToClipboard onCopy={onCopy} text={value}>
-      <button className="inline-flex items-center justify-center shrink-0">
-        {copied ? (
+    <button
+      onClick={handleCopy}
+      className="inline-flex items-center justify-center shrink-0"
+    >
+      {copied ? (
           <svg
             width="16"
             height="16"
@@ -53,9 +59,8 @@ const CopyToClipboard = ({ value }: { value: string }) => {
               strokeLinejoin="round"
             />
           </svg>
-        )}
-      </button>
-    </ReactCopyToClipboard>
+      )}
+    </button>
   );
 };
 

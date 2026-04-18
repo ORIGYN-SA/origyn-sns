@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import _capitalize from "lodash/capitalize";
+import { capitalize } from "@helpers/strings";
 import snsAPI from "@services/api/sns/v1";
 import { IProposalResult, IProposalData } from "@services/types";
 import { SNS_ROOT_CANISTER } from "@constants/index";
@@ -36,7 +36,7 @@ export const getOneProposal = async ({
     timeRemaining:
       DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
     topic,
-    status: _capitalize(status),
+    status: capitalize(status),
     payload,
     votes: {
       yes,

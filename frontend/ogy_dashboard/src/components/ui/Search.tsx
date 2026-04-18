@@ -1,7 +1,12 @@
-import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react";
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  useCallback,
+  useRef,
+} from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
-import _debounce from "lodash/debounce";
 import { SearchIcon, CloseIcon } from "@components/ui/icons";
 
 interface ISearch {
@@ -36,14 +41,18 @@ const Search = ({
     reset();
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const debouncedSetSearchParams = useCallback(
-    _debounce((value) => {
-      if (value !== "") {
-        searchParams.set("searchterm", value);
-        setSearchParams(searchParams);
-      }
-    }, 800),
+    (value: string) => {
+      if (debounceTimeoutRef.current) clearTimeout(debounceTimeoutRef.current);
+      debounceTimeoutRef.current = setTimeout(() => {
+        if (value !== "") {
+          searchParams.set("searchterm", value);
+          setSearchParams(searchParams);
+        }
+      }, 800);
+    },
     [searchParams, setSearchParams]
   );
 
