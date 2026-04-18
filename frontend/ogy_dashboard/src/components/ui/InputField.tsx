@@ -1,15 +1,10 @@
-import {
-  UseFormRegister,
-  FieldValues,
-  FieldError,
-  Path,
-} from "react-hook-form";
+import { UseFormRegisterReturn, FieldError } from "react-hook-form";
 
 interface InputFieldProps {
-  id: Path<FieldValues>;
+  id: string;
   type: string;
-  register: UseFormRegister<FieldValues>;
-  errors: FieldError;
+  register: UseFormRegisterReturn;
+  errors?: FieldError;
   placeholder?: string;
 }
 
