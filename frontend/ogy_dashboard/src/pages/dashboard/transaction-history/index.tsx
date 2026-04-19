@@ -31,7 +31,7 @@ const TransactionHistory = ({
           Transaction History
         </div>
         <Button
-          onClick={() => navigate("/explorer")}
+          onClick={() => navigate("/transaction-history")}
           className="min-w-fit ml-auto md:ml-0 !px-[25px] !py-0 text-[14px] leading-[40px]"
         >
           Show all

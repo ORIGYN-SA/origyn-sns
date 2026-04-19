@@ -26,7 +26,7 @@ const AvailableOGY = () => {
         <div className="font-bold text-content/60">Available OGY</div>
         <Link
           className="text-accent"
-          to={`/explorer/transactions/accounts/${principalId}/history`}
+          to={`/transaction-history/transactions/accounts/${principalId}/history`}
         >
           Transaction history
         </Link>

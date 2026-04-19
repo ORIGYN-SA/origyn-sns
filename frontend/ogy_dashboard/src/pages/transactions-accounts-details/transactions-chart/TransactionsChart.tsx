@@ -316,7 +316,7 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
         });
         if (accountId) {
           navigate(
-            `/explorer/transactions/accounts/${accountId.toString().slice(1)}`
+            `/transaction-history/transactions/accounts/${accountId.toString().slice(1)}`
           );
           return;
         }

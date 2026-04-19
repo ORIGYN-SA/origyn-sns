@@ -70,8 +70,8 @@ export const Explorer = () => {
     value: string
   ) => {
     const pathnames = {
-      blockIndex: `/explorer/transactions/${value}`,
-      principalId: `/explorer/transactions/accounts/${value}`,
+      blockIndex: `/transaction-history/transactions/${value}`,
+      principalId: `/transaction-history/transactions/accounts/${value}`,
     };
     navigate(pathnames[searchType]);
   };

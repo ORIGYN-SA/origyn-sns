@@ -43,7 +43,7 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
+                  navigate(`/transaction-history/transactions/accounts/${address}`)
                 }
               >
                 {address}
@@ -100,7 +100,7 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
+                  navigate(`/transaction-history/transactions/accounts/${address}`)
                 }
               >
                 {address}

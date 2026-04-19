@@ -34,7 +34,7 @@ const Footer = () => {
                 <Link to="/governance">OGY Governance Dashboard</Link>
               </li>
               <li>
-                <Link to="/explorer">OGY Transaction Explorer</Link>
+                <Link to="/transaction-history">OGY Transaction Explorer</Link>
               </li>
             </ul>
           </div>

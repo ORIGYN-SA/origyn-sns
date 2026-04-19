@@ -132,7 +132,7 @@ const router = createBrowserRouter([
         element: <TokenDistribution />,
       },
       {
-        path: "explorer",
+        path: "transaction-history",
         children: [
           {
             index: true,
@@ -142,15 +142,15 @@ const router = createBrowserRouter([
             path: "transactions",
             children: [
               {
-                path: "/explorer/transactions/:index",
+                path: "/transaction-history/transactions/:index",
                 element: <TransactionsDetails />,
               },
               {
-                path: "/explorer/transactions/accounts/:accountId",
+                path: "/transaction-history/transactions/accounts/:accountId",
                 element: <TransactionsAccountsDetails />,
               },
               {
-                path: "/explorer/transactions/accounts/:accountId/history",
+                path: "/transaction-history/transactions/accounts/:accountId/history",
                 element: <TransactionsAccountHistory />,
               },
             ],

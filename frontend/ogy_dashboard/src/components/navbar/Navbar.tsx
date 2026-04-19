@@ -13,6 +13,7 @@ import useScrolledPast from "@hooks/useScrolledPast";
 const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
   { title: "Dashboard", url: "/" },
   { title: "Governance", url: "/governance" },
+  { title: "Transaction History", url: "/transaction-history" },
   { title: "Calculator", url: "/calculator" },
   { title: "My Account", url: "/account", requiresAuth: true },
 ];

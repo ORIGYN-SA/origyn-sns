@@ -142,9 +142,9 @@ const TransactionsList = ({
     const columnId = cell.column?.id;
     const row = cell?.row?.original;
     const pathnames = {
-      index: `/explorer/transactions/${row?.index}`,
-      to_account: `/explorer/transactions/accounts/${row?.to_account}`,
-      from_account: `/explorer/transactions/accounts/${row?.from_account}`,
+      index: `/transaction-history/transactions/${row?.index}`,
+      to_account: `/transaction-history/transactions/accounts/${row?.to_account}`,
+      from_account: `/transaction-history/transactions/accounts/${row?.from_account}`,
     };
     navigate(pathnames[columnId]);
   };

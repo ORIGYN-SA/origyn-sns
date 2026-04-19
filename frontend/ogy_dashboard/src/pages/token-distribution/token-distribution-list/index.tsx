@@ -77,7 +77,7 @@ const TokenDistributionList = ({
           <button
             className="truncate min-w-0 hover:underline"
             onClick={() =>
-              navigate(`/explorer/transactions/accounts/${row.principal}`)
+              navigate(`/transaction-history/transactions/accounts/${row.principal}`)
             }
           >
             {row.principal}

@@ -41,7 +41,7 @@ export const getTransactionColumns = (
       <div className="w-20">
         <button
           className="hover:underline"
-          onClick={() => navigate(`/explorer/transactions/${row.index}`)}
+          onClick={() => navigate(`/transaction-history/transactions/${row.index}`)}
         >
           {row.index}
         </button>
@@ -89,7 +89,7 @@ export const getTransactionColumns = (
             <button
               className="truncate min-w-0 hover:underline"
               onClick={() =>
-                navigate(`/explorer/transactions/accounts/${val}`)
+                navigate(`/transaction-history/transactions/accounts/${val}`)
               }
             >
               {val}
@@ -120,7 +120,7 @@ export const getTransactionColumns = (
             <button
               className="truncate min-w-0 hover:underline"
               onClick={() =>
-                navigate(`/explorer/transactions/accounts/${val}`)
+                navigate(`/transaction-history/transactions/accounts/${val}`)
               }
             >
               {val}

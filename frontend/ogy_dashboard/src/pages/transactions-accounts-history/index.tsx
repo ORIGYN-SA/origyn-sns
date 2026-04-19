@@ -4,7 +4,7 @@ const TxHistory = () => {
   const params = useParams();
   return (
     <Navigate
-      to={`/explorer/transactions/accounts/${params.accountId}`}
+      to={`/transaction-history/transactions/accounts/${params.accountId}`}
       replace
     />
   );
