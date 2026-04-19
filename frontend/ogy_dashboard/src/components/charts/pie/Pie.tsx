@@ -106,7 +106,9 @@ const PieChart: React.FC<PieChartProps> = ({
                       textAnchor="middle"
                       verticalAnchor="middle"
                     >
-                      {((activeData.value / sumData) * 100).toFixed(1) + "%"}
+                      {parseFloat(
+                        ((activeData.value / sumData) * 100).toFixed(2)
+                      ) + "%"}
                     </Text>
                     <Text
                       dy={24}

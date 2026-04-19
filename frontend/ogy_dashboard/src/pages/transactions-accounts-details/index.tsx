@@ -4,7 +4,7 @@ import useFecthOneAccount from "@hooks/accounts/useFetchOneAccount";
 import useAccountBalanceHistory from "@hooks/metrics/useAccountBalanceHistory";
 import usePrincipalOverview from "@hooks/accounts/usePrincipalOverview";
 import useFetchOneAccountTransactions from "@hooks/transactions/useFetchOneAccountTransactions";
-import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
+import { divideBy1e8, millify, roundAndFormatLocale } from "@helpers/numbers";
 import {
   Card,
   NewTable,
@@ -16,6 +16,7 @@ import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import {
   ChartStatsCard,
   PieStatsCard,
+  Stat,
 } from "@components/dashboard";
 import { PieChartProvider } from "@components/charts/pie/context";
 import {
@@ -59,6 +60,62 @@ const OVERVIEW_INFOS = [
     value: "Total amount received by the principal.",
   },
 ];
+const InfoRow = ({
+  label,
+  value,
+  copyable,
+}: {
+  label: string;
+  value: string | undefined;
+  copyable?: boolean;
+}) => (
+  <div className="flex flex-col gap-2">
+    <div className="text-[12px] font-bold leading-none text-muted">{label}</div>
+    {value === undefined ? (
+      <div className="h-4 w-full max-w-[420px] rounded-md bg-muted/20" />
+    ) : (
+      <div className="flex items-center gap-2 min-w-0">
+        <span className="text-[16px] font-bold leading-none text-content break-all">
+          {value}
+        </span>
+        {copyable && <CopyToClipboard value={value} />}
+      </div>
+    )}
+  </div>
+);
+
+const BalanceStatRow = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | undefined;
+}) => {
+  if (value === undefined) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="h-3 w-[240px] rounded-md bg-muted/20" />
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-center justify-center gap-1">
+      <span className="text-[13px] font-normal leading-none text-muted">
+        {label}:
+      </span>
+      <span className="flex items-center gap-1">
+        <img src="/ogy_logo.svg" alt="" className="w-2 h-2 shrink-0" />
+        <span className="text-[12px] font-bold leading-none text-muted">
+          {value}
+        </span>
+        <span className="text-[12px] font-medium leading-none text-muted">
+          OGY
+        </span>
+      </span>
+    </div>
+  );
+};
+
 const TransactionsAccountsDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -89,6 +146,25 @@ const TransactionsAccountsDetails = () => {
     account: accountId,
     days: balanceDays,
   });
+
+  const { data: lifetimeBalance } = useAccountBalanceHistory({
+    account: accountId,
+    days: lifetimeDays,
+  });
+
+  const historicalMax = useMemo(() => {
+    if (!lifetimeBalance?.dataChart?.length) return undefined;
+    const max = Math.max(...lifetimeBalance.dataChart.map((d) => d.value));
+    return roundAndFormatLocale({ number: max });
+  }, [lifetimeBalance]);
+
+  const genesisBalance = useMemo(() => {
+    if (!lifetimeBalance?.dataChart?.length) return undefined;
+    return roundAndFormatLocale({
+      number: lifetimeBalance.dataChart[0].value,
+    });
+  }, [lifetimeBalance]);
+
 
   const {
     data: overview,
@@ -150,74 +226,69 @@ const TransactionsAccountsDetails = () => {
   const handleOnClickBack = () => navigate(-1);
 
   return (
-    <div className="container mx-auto pt-8 pb-16 px-4">
+    <div className="max-w-[1287px] mx-auto pt-8 pb-16 px-4">
       <PageHeader
-        category="Explorer"
+        category="Transaction History"
         title="OGY account"
         onBack={handleOnClickBack}
       />
 
-      <Card className="mt-8">
-        <div className="text-sm font-medium text-muted">Balance</div>
-        <div className="mt-4 flex items-baseline min-w-0">
-          <img
-            src="/ogy_logo.svg"
-            alt=""
-            className="w-10 h-10 self-center mr-3 shrink-0"
-          />
-          {isLoading ? (
-            <div className="h-10 w-full max-w-[260px] self-center rounded-md bg-muted/20" />
-          ) : (
-            <>
-              <span className="font-bold text-[40px] leading-none text-content truncate min-w-0">
-                {data?.balance !== undefined
-                  ? roundAndFormatLocale({
-                      number: divideBy1e8(Number(data.balance)),
-                    })
-                  : "0"}
-              </span>
-              <span className="ml-3 text-muted font-semibold text-[20px] leading-none shrink-0">
-                OGY
-              </span>
-            </>
-          )}
-        </div>
-        <div className="mt-8 pt-6 border-t border-border">
-          <SkeletonOverlay loading={isLoading}>
-            <div className="divide-y divide-border">
-              <div className="flex items-start justify-between gap-6 py-4 first:pt-0">
-                <div className="text-sm font-medium text-muted shrink-0">
-                  ID
-                </div>
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold text-content break-all text-right">
-                    {data?.id ?? FAKE_PRINCIPAL}
-                  </span>
-                  {data?.id && <CopyToClipboard value={data.id} />}
-                </div>
-              </div>
-              <div className="flex items-start justify-between gap-6 py-4">
-                <div className="text-sm font-medium text-muted shrink-0">
-                  Owner
-                </div>
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold text-content break-all text-right">
-                    {data?.owner ?? FAKE_PRINCIPAL}
-                  </span>
-                  {data?.owner && <CopyToClipboard value={data.owner} />}
-                </div>
-              </div>
-              <div className="flex items-start justify-between gap-6 py-4 last:pb-0">
-                <div className="text-sm font-medium text-muted shrink-0">
-                  Subaccount
-                </div>
-                <span className="font-semibold text-content break-all text-right">
-                  {data?.formatted.subaccount ?? FAKE_SUBACCOUNT}
-                </span>
-              </div>
+      <Card className="mt-8 !p-0 overflow-hidden">
+        <SkeletonOverlay loading={isLoading}>
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_1px_1fr]">
+            <div className="py-8 px-5 flex flex-col gap-8">
+              <InfoRow
+                label="ID"
+                value={data?.id ?? undefined}
+                copyable={!!data?.id}
+              />
+              <InfoRow
+                label="Owner"
+                value={data?.owner}
+                copyable={!!data?.owner}
+              />
+              <InfoRow
+                label="Subaccount"
+                value={data?.formatted.subaccount}
+              />
             </div>
-          </SkeletonOverlay>
-        </div>
+
+            <div className="hidden lg:block bg-border" />
+
+            <div className="flex flex-col lg:min-w-[422px]">
+            <div className="flex-1 flex flex-col items-center justify-center gap-2 py-8 px-5">
+              <span
+                data-skel-static
+                className="inline-block rounded-full bg-border-faint text-muted text-xs font-semibold px-3 py-1"
+              >
+                Balance
+              </span>
+              <Stat
+                iconSrc="/ogy_logo.svg"
+                value={
+                  data?.balance !== undefined
+                    ? millify(divideBy1e8(Number(data.balance)), 2)
+                    : undefined
+                }
+                unit="OGY"
+                loading={isLoading}
+                size="hero"
+              />
+            </div>
+
+            <div className="mt-auto border-t border-border bg-[#F9FAFE] py-4 px-5 space-y-2">
+              <BalanceStatRow
+                label="Historical max balance"
+                value={historicalMax}
+              />
+              <BalanceStatRow
+                label="Genesis balance"
+                value={genesisBalance}
+              />
+            </div>
+          </div>
+          </div>
+        </SkeletonOverlay>
       </Card>
 
       <Suspense fallback={<TransactionsChartFallback />}>

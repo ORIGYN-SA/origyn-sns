@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+type StatSize = "default" | "hero";
+
 type StatProps = {
   iconSrc?: string;
   value?: ReactNode;
@@ -7,41 +9,48 @@ type StatProps = {
   unitClassName?: string;
   loading?: boolean;
   className?: string;
+  size?: StatSize;
 };
-
-const DEFAULT_UNIT_CLASS = "ml-3 font-semibold text-[22px] leading-none";
 
 const Stat = ({
   iconSrc,
   value,
   unit,
-  unitClassName = DEFAULT_UNIT_CLASS,
+  unitClassName,
   loading = false,
   className = "",
+  size = "default",
 }: StatProps) => {
-  const isLoadingValue = loading;
+  const isHero = size === "hero";
+
+  const wrapperHeight = isHero ? "h-10" : "h-[28px]";
+  const iconClass = isHero
+    ? "h-8 w-8 self-center mr-3 shrink-0"
+    : "w-[25px] h-6 self-center mr-2 shrink-0";
+  const skelClass = isHero
+    ? "h-8 w-[180px] self-center shrink-0 rounded-md"
+    : "h-6 w-[200px] self-center shrink-0 rounded-md";
+  const valueClass = isHero
+    ? "font-bold leading-none truncate min-w-0 text-[40px]"
+    : "font-bold leading-none truncate min-w-0 text-[28px]";
+  const defaultUnitClass = isHero
+    ? "ml-2 font-bold text-[28px] leading-none"
+    : "ml-1 font-semibold text-[22px] leading-none";
 
   return (
-    <div className={`flex items-baseline min-w-0 h-[28px] ${className}`}>
-      {iconSrc && (
-        <img
-          src={iconSrc}
-          alt=""
-          className="w-[25px] h-6 self-center mr-2 shrink-0"
-        />
-      )}
-      {isLoadingValue ? (
-        <div
-          data-skel-block
-          className="h-7 w-[200px] shrink-0 self-center rounded-md"
-        />
+    <div
+      className={`flex ${loading ? "items-center" : "items-baseline"} min-w-0 ${wrapperHeight} ${className}`}
+    >
+      {iconSrc && <img src={iconSrc} alt="" className={iconClass} />}
+      {loading ? (
+        <div data-skel-block className={skelClass} />
       ) : (
         <>
-          <span className="font-bold text-[28px] leading-none truncate min-w-0">
-            {value}
-          </span>
+          <span className={valueClass}>{value}</span>
           {unit && (
-            <span className={`text-muted shrink-0 ${unitClassName}`}>
+            <span
+              className={`text-muted shrink-0 ${unitClassName ?? defaultUnitClass}`}
+            >
               {unit}
             </span>
           )}

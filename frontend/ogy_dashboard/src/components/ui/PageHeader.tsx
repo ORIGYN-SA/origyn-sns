@@ -29,14 +29,14 @@ const BackIcon = () => (
 );
 
 type PageHeaderProps = {
-  category: string;
+  category?: string;
   title: string;
   onBack?: () => void;
   right?: ReactNode;
 };
 
 const PageHeader = ({ category, title, onBack, right }: PageHeaderProps) => (
-  <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 py-8 border-b border-border-strong">
+  <div className="relative flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 py-8 after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:h-px after:w-screen after:bg-border-strong">
     <div className="flex items-center gap-6">
       {onBack && (
         <button
@@ -49,9 +49,11 @@ const PageHeader = ({ category, title, onBack, right }: PageHeaderProps) => (
         </button>
       )}
       <div className="flex flex-col gap-3">
-        <span className="inline-flex self-start items-center rounded-full bg-sky text-white px-4 text-[10px] font-extrabold uppercase leading-[22px] tracking-[2px]">
-          {category}
-        </span>
+        {category && (
+          <span className="inline-flex self-start items-center rounded-full bg-sky text-white px-4 text-[10px] font-extrabold uppercase leading-[22px] tracking-[2px]">
+            {category}
+          </span>
+        )}
         <h1 className="text-[40px] font-bold leading-none text-content">
           {title}
         </h1>

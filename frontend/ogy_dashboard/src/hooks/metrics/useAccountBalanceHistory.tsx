@@ -34,10 +34,13 @@ const useAccountBalanceHistory = ({
 
   useEffect(() => {
     if (isSuccess && response) {
-      const results = response.map((r) => {
+      const firstNonZero = response.findIndex((r) => r[1].balance > 0n);
+      const trimmed = firstNonZero > 0 ? response.slice(firstNonZero) : response;
+      const format = days > 90 ? "LLL yyyy" : "LLL dd";
+      const results = trimmed.map((r) => {
         const name = DateTime.fromMillis(0)
           .plus({ days: Number(r[0]) })
-          .toFormat("LLL dd");
+          .toFormat(format);
         const value = divideBy1e8(r[1].balance);
         return {
           name,
@@ -47,10 +50,10 @@ const useAccountBalanceHistory = ({
       });
       setData({
         dataChart: results,
-        total: results[results.length - 1].valueToString,
+        total: results[results.length - 1]?.valueToString ?? "0",
       });
     }
-  }, [isSuccess, response]);
+  }, [isSuccess, response, days]);
 
   return {
     data,

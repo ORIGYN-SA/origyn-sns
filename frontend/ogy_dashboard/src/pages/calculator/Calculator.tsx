@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactNode, useDeferredValue, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Card, SkeletonOverlay } from "@components/ui";
-import { CardHeader, StatCard } from "@components/dashboard";
+import { StatCard } from "@components/dashboard";
 import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import { millify } from "@helpers/numbers";
 import { useMintCostEstimate } from "../../hooks/calculator/useMintCostEstimate";
@@ -311,14 +311,14 @@ const Calculator = () => {
           <Card>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-0">
               <section className="lg:pr-8">
-                <CardHeader
-                  title="Plan your mint"
-                  subtitle={
-                    <p className="text-sm text-muted">
-                      Tell us how many items and what you&apos;re uploading.
-                    </p>
-                  }
-                />
+                <div className="flex flex-col gap-3">
+                  <h2 className="text-[22px] font-semibold leading-none text-charcoal">
+                    Plan your mint
+                  </h2>
+                  <p className="text-sm text-muted">
+                    Tell us how many items and what you&apos;re uploading.
+                  </p>
+                </div>
 
                 <div className="mt-6 flex flex-col gap-6">
                   <NumberInput
@@ -430,16 +430,16 @@ const Calculator = () => {
               </section>
 
               <section className="flex flex-col border-t border-border pt-8 lg:h-full lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-                <CardHeader
-                  title={isFetching && estimate ? "Refreshing estimate" : "Live estimate"}
-                  subtitle={
-                    <p className="text-sm text-muted">
-                      Updates automatically as you change your setup.
-                    </p>
-                  }
-                />
+                <div className="flex flex-col gap-3">
+                  <h2 className="text-[22px] font-semibold leading-none text-charcoal">
+                    {isFetching && estimate ? "Refreshing estimate" : "Live estimate"}
+                  </h2>
+                  <p className="text-sm text-muted">
+                    Updates automatically as you change your setup.
+                  </p>
+                </div>
 
-                <div className="mt-6 flex flex-1 flex-col gap-6">
+                <div className="mt-6 flex flex-1 flex-col gap-3">
                   <SkeletonOverlay loading={showSkeleton}>
                     {showError ? (
                       <div>
@@ -484,20 +484,16 @@ const Calculator = () => {
                       </div>
                     )}
                   </SkeletonOverlay>
-                  {numMints !== null &&
-                    numMints > 0n &&
-                    totalFileSizeBytes > 0n && (
-                      <div className="mt-auto grid grid-cols-2 gap-3 pt-2">
-                        <MiniStat
-                          title={numMints === 1n ? "Item" : "Items"}
-                          value={formatCount(numMints)}
-                        />
-                        <MiniStat
-                          title="Upload"
-                          value={formatBytes(totalFileSizeBytes)}
-                        />
-                      </div>
-                    )}
+                  <div className="grid grid-cols-2 gap-3">
+                    <MiniStat
+                      title={numMints === 1n ? "Item" : "Items"}
+                      value={formatCount(numMints ?? 0n)}
+                    />
+                    <MiniStat
+                      title="Upload"
+                      value={formatBytes(totalFileSizeBytes)}
+                    />
+                  </div>
                 </div>
               </section>
             </div>

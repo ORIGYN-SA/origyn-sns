@@ -5,6 +5,34 @@
     <link rel="icon" type="image/svg+xml" href="/ogy_logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNS OGY Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=block"
+    />
+    <style>
+      html.fonts-loading {
+        visibility: hidden;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add("fonts-loading");
+      var done = function () {
+        document.documentElement.classList.remove("fonts-loading");
+      };
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(done);
+      } else {
+        done();
+      }
+      // Safety net: never hide the page for more than 2s
+      setTimeout(done, 2000);
+    </script>
     <script
       defer
       data-domain="dashboard.origyn.com"
