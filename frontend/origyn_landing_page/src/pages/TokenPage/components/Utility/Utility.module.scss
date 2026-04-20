@@ -1,0 +1,15 @@
+@use "styles/variables" as *;
+@use "../../token-section" as *;
+
+.utility {
+  @include section-base($bg-light);
+  padding-top: calc($section-v-padding + 55px);
+
+  @media (max-width: $bp-lg) {
+    padding: $section-v-padding-mobile 16px;
+  }
+}
+
+.cards {
+  @include section-cards;
+}

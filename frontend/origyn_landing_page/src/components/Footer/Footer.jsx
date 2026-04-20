@@ -1,21 +1,10 @@
-import styles from "./Footer.module.css";
-import XIcon from "../../assets/icons/x-icon.svg?react";
-import TelegramIcon from "../../assets/icons/telegram-icon.svg?react";
-import MediumIcon from "../../assets/icons/medium-icon.svg?react";
-import LinkedInIcon from "../../assets/icons/linkedin-icon.svg?react";
+import styles from "./Footer.module.scss";
+
 const socialLinks = [
-  { name: "Twitter", url: "https://x.com/origyntech", Icon: XIcon },
-  {
-    name: "Telegram",
-    url: "https://t.me/origynfoundation",
-    Icon: TelegramIcon,
-  },
-  { name: "Medium", url: "https://origyn.medium.com/", Icon: MediumIcon },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/company/origyn-foundation/",
-    Icon: LinkedInIcon,
-  },
+  { name: "Twitter", url: "https://x.com/origyntech", icon: "/icons/x-icon.svg" },
+  { name: "Telegram", url: "https://t.me/origynfoundation", icon: "/icons/telegram-icon.svg" },
+  { name: "Medium", url: "https://origyn.medium.com/", icon: "/icons/medium-icon.svg" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/company/origyn-foundation/", icon: "/icons/linkedin-icon.svg" },
 ];
 
 const leftLinks = [
@@ -100,7 +89,10 @@ const Footer = () => {
               className={styles.socialLink}
               aria-label={link.name}
             >
-              <link.Icon className={styles.socialIcon} />
+              <span
+                className={styles.socialIcon}
+                style={{ maskImage: `url(${link.icon})`, WebkitMaskImage: `url(${link.icon})` }}
+              />
             </a>
           ))}
         </div>

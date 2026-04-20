@@ -1,0 +1,156 @@
+@use "styles/variables" as *;
+
+.container {
+  background: $bg-light;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: $bp-md) {
+    background: white;
+  }
+}
+
+.main {
+  width: 90%;
+  background: white;
+  margin: 0 auto;
+  margin-top: 110px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 57px;
+}
+
+.itemSection {
+  width: 100%;
+  display: flex;
+}
+
+.leftContainer {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 40px;
+}
+
+.rightContainer {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  @include type('display');
+  font-family: $font-italic;
+  font-weight: 300;
+  color: $color-text;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  @include type('body');
+  font-family: $font-sans;
+  color: $color-muted;
+  letter-spacing: 0.05em;
+  max-width: 90%;
+
+  a {
+    color: $color-muted;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.indicators {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  flex-direction: row;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0.5px solid #353535;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &.active {
+    background-color: $color-navy;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 800px;
+  object-fit: cover;
+}
+
+.error {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $color-text;
+}
+
+.mobileContainer {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 57px;
+  flex: 1;
+}
+
+.mobileItem {
+  background: white;
+}
+
+.mobileTitle {
+  @include type('display');
+  font-family: $font-italic;
+  font-weight: 300;
+  color: $color-text;
+  margin-bottom: 1.5rem;
+}
+
+.mobileDescription {
+  @include type('body');
+  font-family: $font-sans;
+  color: $color-muted;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+
+  a {
+    color: $color-muted;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.mobileImageContainer {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 1rem;
+}
+
+.mobileImage {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}

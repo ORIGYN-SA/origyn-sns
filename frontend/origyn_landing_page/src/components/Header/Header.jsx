@@ -1,7 +1,14 @@
 import { useState } from "react";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 
 const NAV_ITEMS = [
+  {
+    id: "token",
+    label: "TOKEN",
+    type: "internal",
+    href: "/token",
+    activeWhen: (path) => path.startsWith("/token"),
+  },
   {
     id: "certificates",
     label: "CERTIFICATES",

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import styles from "./OurPartners.module.css";
+import styles from "./OurPartners.module.scss";
 import { partners } from "./partnersData";
 import { testimonials } from "./testimonialsData";
 

@@ -1,0 +1,133 @@
+@use "styles/variables" as *;
+$color-link: #3b82f6;
+$color-link-hover: #1d4ed8;
+
+.accordionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.accordionItem {
+  background: $bg-white;
+  border-top: 1px solid $border-celeste;
+  transition: all 0.3s ease;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 50px 40px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover { background-color: #f9fafb; }
+
+  @media (max-width: $bp-lg) { padding: 20px; }
+}
+
+.accordionHeaderLeft {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+
+  @media (max-width: $bp-lg) { gap: 12px; }
+}
+
+.iconContainer {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 12px;
+  padding-top: 5px;
+
+  @media (max-width: $bp-lg) { width: 40px; height: 40px; padding: 10px; }
+  @media (max-width: $bp-xs) { align-self: flex-start; }
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  @include type('h5');
+  font-family: $font-sans;
+  color: $color-text;
+  font-weight: 500;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-16;
+    font-weight: 400;
+  }
+}
+
+.description {
+  @include type('h5');
+  font-family: $font-sans;
+  color: $color-muted;
+  margin: 0;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-14;
+  }
+}
+
+.expandIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: $color-muted;
+  margin-top: 4px;
+  transition: transform 0.3s ease, color 0.2s ease;
+
+  &.rotated { transform: rotate(180deg); }
+}
+
+.accordionContentWrapper {
+  overflow: hidden;
+  transition: height 0.3s ease;
+  padding-right: 40px;
+
+  @media (max-width: $bp-lg) {
+    padding-right: 10px;
+  }
+}
+
+.accordionContent {
+  padding-bottom: 24px;
+
+  @media (max-width: $bp-lg) {
+    padding-bottom: 0;
+  }
+
+  > div > a { color: $color-muted; }
+}
+
+.answer {
+  @include type('h5');
+  font-family: $font-sans;
+  padding: 0;
+  padding-top: 16px;
+  line-height: 1.6;
+  // color: $color-muted;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-14;
+  }
+
+  strong { font-weight: 600; }
+
+  a {
+    color: $color-link;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover { color: $color-link-hover; }
+  }
+}

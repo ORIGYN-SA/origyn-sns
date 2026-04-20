@@ -1,0 +1,54 @@
+@use "styles/variables" as *;
+
+.buttonWrapper {
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  background: $bg-white;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  height: 56px;
+  cursor: pointer;
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.15));
+  transition: transform 0.2s ease-in-out;
+  width: max-content;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: $bp-md) {
+    height: 40px;
+  }
+}
+
+.buttonText {
+  @include type('label');
+  font-family: $font-sans, sans-serif;
+  color: #0a0a0a;
+  padding: 0 24px;
+
+  @media (max-width: $bp-md) {
+    padding: 0 18px;
+  }
+}
+
+.circle {
+  width: 32px;
+  height: 32px;
+  background: #0a0a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+
+  @media (max-width: $bp-md) {
+    width: 24px;
+    height: 24px;
+  }
+}
