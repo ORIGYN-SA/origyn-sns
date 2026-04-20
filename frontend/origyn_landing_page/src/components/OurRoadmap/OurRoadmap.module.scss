@@ -1,0 +1,388 @@
+@use "styles/variables" as *;
+$color-cyan: #85f1ff;
+
+.container {
+  padding: 96px 20px;
+  background: $bg-light;
+  position: relative;
+
+  @media (max-width: $bp-md) {
+    padding: 48px 16px;
+  }
+}
+
+.header {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: $bp-md) {
+    width: 100%;
+    margin-bottom: 40px;
+    align-items: flex-start;
+  }
+}
+
+.title {
+  @include type('display');
+  font-weight: 200;
+  letter-spacing: 0%;
+  text-align: center;
+  color: $color-text;
+
+  span {
+    font-family: $font-italic;
+    font-weight: 200;
+    font-style: italic;
+    font-size: $fs-80;
+    line-height: 1.1;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-48;
+  }
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-44;
+    line-height: 1.35;
+  }
+}
+
+.description {
+  @include type('body-lg');
+  margin-top: 24px;
+  font-family: $font-sans;
+  color: $color-text;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  max-width: 808px;
+  text-align: center;
+
+  @media (max-width: $bp-md) {
+    text-align: left;
+    max-width: 100%;
+  }
+}
+
+.roadmapContainer {
+  position: relative;
+  width: 100vw;
+}
+
+.roadmapCardsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  overflow-x: auto;
+  padding: 40px 25px;
+  position: relative;
+  z-index: 1;
+  scroll-snap-type: x mandatory;
+  justify-content: flex-start;
+  margin: 0 auto;
+  cursor: grab;
+  scroll-behavior: smooth;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #000 #f0f0f0;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &::-webkit-scrollbar {
+    height: 3px;
+    display: block;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 3px;
+    width: 27px;
+    height: 3px;
+
+    &:hover {
+      background: #000;
+    }
+  }
+
+  @media (max-width: $bp-xl) {
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    overflow-x: unset;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    padding: 25px 0;
+    z-index: 1;
+    justify-content: center;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.roadmapTimeline {
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  background: black;
+  z-index: 0;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  width: 20476px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: black;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &::before { left: 0; }
+  &::after { right: 0; }
+
+  @media (max-width: $bp-xl) {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: black;
+    transform: translateX(-50%);
+    z-index: 0;
+
+    &::before,
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &::before { top: 0; }
+
+    &::after {
+      bottom: 0;
+      top: auto;
+    }
+  }
+}
+
+.yearIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0 0 0;
+  z-index: 2;
+
+  @media (max-width: $bp-xl) {
+    margin: 32px 0;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 0 16px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  @media (max-width: $bp-md) {
+    justify-content: flex-start;
+  }
+}
+
+.yearIndicatorBtn {
+  @include type('body');
+  font-weight: 500;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(to right, #1E2345, #254088, #1A5EA2, #1F9CD4) border-box;
+  color: $color-text;
+  font-family: $font-sans;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  border-radius: 24px;
+
+  &:hover,
+  &:focus {
+    background: $color-navy;
+    color: $color-cyan;
+    border-color: $color-navy;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: $bp-xl) {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+.yearIndicatorBtnSelected {
+  outline: none;
+  background: $color-navy !important;
+  color: $color-cyan;
+  border-color: $color-navy;
+  box-shadow: 0 2px 8px rgba(34, 37, 38, 0.08);
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.buttonsNavigator {
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.yearNavBtn {
+  flex: 1;
+  font-size: $fs-24;
+  background: $color-navy;
+  color: white;
+  border: none;
+  border-radius: 0;
+  padding: 16px 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border-top: 1px solid $color-cyan;
+  display: flex;
+  justify-content: start;
+  padding-left: 14px;
+  align-items: center;
+  gap: 3px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &.left {
+    border-right: 1px solid $color-cyan;
+  }
+
+  &.right {
+    border-left: 1px solid $color-cyan;
+    justify-content: end;
+    padding-right: 14px;
+  }
+}
+
+.sliderContainer {
+  padding: 0 25px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.yearSlider {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  background: #d8d8d8;
+  outline: none;
+  padding: 0;
+  margin: 13px 0;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 27px;
+    height: 27px;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 27px;
+    height: 27px;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: 3px;
+    background: #000;
+  }
+
+  &::-moz-range-track {
+    height: 3px;
+    background: #000;
+  }
+}
+
+%fade-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 180px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.fadeLeft {
+  @extend %fade-edge;
+  left: 0;
+  background: linear-gradient(to right, rgba(245, 244, 244, 1) 0%, rgba(245, 244, 244, 0) 100%);
+}
+
+.fadeRight {
+  @extend %fade-edge;
+  right: 0;
+  background: linear-gradient(to left, rgba(245, 244, 244, 1) 0%, rgba(245, 244, 244, 0) 100%);
+}
+
+.visible {
+  opacity: 1;
+}

@@ -1,0 +1,73 @@
+@use "styles/variables" as *;
+
+.copyToast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: $color-navy;
+  color: $bg-white;
+  @include type('small');
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+
+  &.copyToastVisible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.contractAddressPill {
+  @include gradient-border(20px);
+  position: relative;
+  text-align: center;
+  border-radius: 20px;
+  background: $bg-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px 8px 20px;
+  margin: 40px auto 0;
+  width: 337px;
+
+  @media (max-width: $bp-lg) {
+    display: none;
+  }
+
+  .contractAddressText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contractAddressLabel,
+  .contractAddressValue {
+    @include type('small');
+    color: $color-muted;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .contractAddressValue {
+    font-weight: 600;
+  }
+
+  .contractAddressCopy {
+    position: absolute;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import styles from "./UseCases.module.css";
+import styles from "./UseCases.module.scss";
 import UseCaseCard from "./UseCaseCard";
 
 const useCases = [

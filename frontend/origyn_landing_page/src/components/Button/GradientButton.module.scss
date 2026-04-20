@@ -1,0 +1,37 @@
+@use "styles/variables" as *;
+
+.gradientButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  @include gradient-button(100px);
+  width: fit-content;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px 0 rgba(31, 156, 212, 0.3);
+  }
+}
+
+.regular {
+  padding: 15px 48px;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-12;
+    padding: 12px 40px;
+  }
+}
+
+.large {
+  padding: 24px 80px;
+  font-size: $fs-24;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-12;
+    padding: 12px 40px;
+  }
+}

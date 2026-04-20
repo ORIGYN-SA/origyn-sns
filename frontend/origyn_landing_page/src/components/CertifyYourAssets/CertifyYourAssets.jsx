@@ -1,7 +1,7 @@
 import React from "react";
-import Calculator from "../Calculator/Calculator";
-import styles from "./CertifyYourAssets.module.css";
-import Button from "../Button/Button";
+import Calculator from "@components/Calculator/Calculator";
+import styles from "./CertifyYourAssets.module.scss";
+import Button from "@components/Button/Button";
 
 const CertifyYourAssets = ({ id }) => {
   return (

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import Button from "../Button/Button";
-import ButtonAnchor from "../Button/ButtonAnchor";
-import Stats from "../Stats/Stats";
-import styles from "./Hero.module.css";
+import Button from "@components/Button/Button";
+import Stats from "@components/Stats/Stats";
+import styles from "./Hero.module.scss";
 
 const Hero = ({ data }) => {
   const bgRef = useRef(null);
@@ -138,7 +137,7 @@ const Hero = ({ data }) => {
                   }
                 }}
               />
-              <div className="flex flex-col items-center gap-4">
+              <div className={styles.buyButtonWrapper}>
                 <Button
                   text="Buy $OGY"
                   url="https://www.mexc.com/exchange/OGY_USDT"

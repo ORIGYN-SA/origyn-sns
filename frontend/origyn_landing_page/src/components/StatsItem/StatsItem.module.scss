@@ -1,0 +1,86 @@
+@use "styles/variables" as *;
+$gradient-stats: linear-gradient(95deg, #263c85 3.74%, #1f9cd4 100.75%);
+
+.statsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 0 16px;
+
+  @media (max-width: 991px) {
+    padding: 10px 0;
+    align-items: center;
+  }
+
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  justify-content: center;
+}
+
+.value {
+  @include type('h3');
+  font-family: $font-sans, sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  background: $gradient-stats;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  min-width: 120px;
+  display: block;
+  margin: 0 auto;
+
+  @media (max-width: $bp-sm) {
+    font-size: $fs-32;
+  }
+}
+
+.skeleton {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(95deg, #50cbdb 3.74%, #306ce6 100.75%);
+  opacity: 0.1;
+  border-radius: 4px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @media (max-width: $bp-sm) {
+    width: 100px;
+    height: 36px;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  @include type('label');
+  font-family: $font-sans, sans-serif;
+  font-weight: 300;
+  letter-spacing: 1.4px;
+  color: $color-muted;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline;
+
+  @media (max-width: $bp-sm) {
+    margin-top: 8px;
+    display: inline;
+  }
+}

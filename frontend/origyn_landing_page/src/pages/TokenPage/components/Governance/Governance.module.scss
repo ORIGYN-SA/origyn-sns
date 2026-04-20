@@ -1,0 +1,122 @@
+@use "styles/variables" as *;
+@use "../../token-section" as *;
+
+.governance {
+  @include section-base($bg-light);
+}
+
+.ctaButton {
+  @include section-cta-button;
+}
+
+.governanceImgContainer, .governanceMobileSliderContainer {
+  max-width: $bp-xl;
+  margin: 90px auto 70px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  touch-action: pan-y pinch-zoom;
+
+  @media (max-width: $bp-xl) {
+    flex-direction: column;
+    margin: 40px auto 70px auto;
+  }
+
+  .governanceImg {
+    width: 100%;
+    object-fit: contain;
+
+    @media (min-width: $bp-lg) {
+      max-width: 500px;
+    }
+
+    @media (min-width: $bp-xl) {
+      max-width: 730px;
+    }
+  }
+
+  .governanceText {
+    position: absolute;
+    max-width: 333px;
+    margin: 0;
+    text-align: center;
+
+    @media (max-width: $bp-xl) {
+      position: static;
+      text-align: center !important;
+    }
+  }
+
+  .governanceTextOne {
+    @extend .governanceText;
+    left: 0;
+    top: -20px;
+    text-align: left;
+  }
+
+  .governanceTextTwo {
+    @extend .governanceText;
+    text-align: right;
+    top: -20px;
+    right: 0;
+  }
+
+  .governanceTextThree {
+    @extend .governanceText;
+    text-align: left;
+    left: 50px;
+    bottom: -20px;
+  }
+
+  .mobileGovernanceImg {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 35px auto;
+    display: block;
+
+    @media (max-width: $bp-sm) {
+      max-width: 226px;
+    }
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .sliderTrack {
+    display: flex;
+    will-change: transform;
+  }
+
+  .sliderSlide {
+    width: 100%;
+    flex-shrink: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .dotsContainer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.5px solid currentColor;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .activeDot {
+    background-color: currentColor;
+  }
+}

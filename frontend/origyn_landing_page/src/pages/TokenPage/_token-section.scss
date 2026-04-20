@@ -1,0 +1,106 @@
+@use "styles/variables" as *;
+
+$section-v-padding: 160px;
+$section-v-padding-mobile: 100px;
+
+@mixin section-base($bg: $bg-light) {
+  width: 100%;
+  background-color: $bg;
+  padding: $section-v-padding 0;
+
+  h1 {
+    @include type('display');
+    text-align: center;
+  }
+
+  i {
+    font-family: $font-italic;
+    font-weight: 400;
+  }
+
+  p {
+    @include type('body-lg');
+    text-transform: uppercase;
+    margin: 32px auto 0 auto;
+    letter-spacing: 5%;
+    text-align: center;
+    padding: 0 16px;
+    max-width: 1000px;
+
+    b {
+      font-weight: 500;
+    }
+  }
+
+  @media (max-width: $bp-lg) {
+    padding: $section-v-padding-mobile 16px;
+    box-sizing: border-box;
+
+    h1 {
+      font-size: $fs-40;
+    }
+
+    p {
+      font-size: $fs-12;
+      max-width: 480px;
+    }
+  }
+}
+
+@mixin section-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 46px;
+  max-width: 1120px;
+  margin: 64px auto 0;
+  padding: 0 24px;
+  text-align: center;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    padding: 0;
+    gap: 56px;
+  }
+}
+
+@mixin section-cta-button {
+  margin: 60px auto 0;
+}
+
+@mixin split-section-text {
+  h1 {
+    @include type('display');
+    font-family: $font-italic;
+    line-height: 70px;
+
+    @media (max-width: $bp-lg) {
+      font-size: $fs-40;
+      line-height: 46px;
+    }
+  }
+
+  p {
+    @include type('body-lg');
+    text-transform: uppercase;
+    letter-spacing: 5%;
+
+    @media (max-width: $bp-lg) {
+      font-size: $fs-12;
+    }
+  }
+}
+
+@mixin split-section {
+  display: flex;
+  max-width: $w-container-xl;
+  margin: 0 auto;
+  padding: $section-v-padding 16px;
+
+  @media (max-width: $bp-lg) {
+    flex-direction: column;
+    align-items: center;
+    max-width: 480px;
+    padding: $section-v-padding-mobile 25px;
+  }
+}

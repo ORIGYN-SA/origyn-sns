@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import styles from "./RoadmapCard.module.css";
+import styles from "./RoadmapCard.module.scss";
 
 const RoadmapCard = forwardRef(
   ({ title, titleSpan, image, description, when }, ref) => {
