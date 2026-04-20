@@ -8,6 +8,7 @@ import { divideBy1e8, millify, roundAndFormatLocale } from "@helpers/numbers";
 import {
   Card,
   NewTable,
+  PageContainer,
   PageHeader,
   SkeletonOverlay,
   TablePagination,
@@ -226,7 +227,7 @@ const TransactionsAccountsDetails = () => {
   const handleOnClickBack = () => navigate(-1);
 
   return (
-    <div className="max-w-[1287px] mx-auto pt-8 pb-16 px-4">
+    <PageContainer>
       <PageHeader
         category="Transaction History"
         title="OGY account"
@@ -364,7 +365,7 @@ const TransactionsAccountsDetails = () => {
           />
         </SkeletonOverlay>
       </Card>
-    </div>
+    </PageContainer>
   );
 };
 

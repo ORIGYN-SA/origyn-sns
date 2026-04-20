@@ -20,6 +20,7 @@ import PageHeader from "@components/ui/PageHeader";
 import DatePill from "@components/ui/DatePill";
 import DetailRow from "@components/ui/DetailRow";
 import TransactionKindPill from "@components/ui/TransactionKindPill";
+import PageContainer from "@components/ui/PageContainer";
 
 export {
   Card,
@@ -44,4 +45,5 @@ export {
   DatePill,
   DetailRow,
   TransactionKindPill,
+  PageContainer,
 };
