@@ -1,4 +1,4 @@
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import { Tooltip, Skeleton } from "@components/ui";

@@ -1,4 +1,4 @@
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { Buffer } from "buffer";
 
 const getNeuronsByOwner = async (): Promise<string[]> => {

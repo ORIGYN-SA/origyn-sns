@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { useWallet, getActor } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
+import { getActor } from "@services/actor";
 import { Principal } from "@dfinity/principal";
 import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE } from "@constants/index";

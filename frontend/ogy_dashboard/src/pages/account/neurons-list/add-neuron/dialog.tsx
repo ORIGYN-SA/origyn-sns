@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import { Button, Dialog } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NNS_PLATFORM_URL } from "@constants/index";

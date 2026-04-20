@@ -1,5 +1,5 @@
 import { TRANSACTION_FEE } from "@constants/index";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { decodeIcrcAccount } from "@dfinity/ledger-icrc";
 
 const transferOGY = async ({ amount, to }: { amount: bigint; to: string }) => {

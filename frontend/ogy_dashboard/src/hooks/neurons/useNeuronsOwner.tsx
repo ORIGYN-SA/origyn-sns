@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import { getNervousSystemParameters } from "@services/queries/governance/neurons/useGetNervousSystemParameters";
 import fetchBalanceOGY from "@services/queries/accounts/fetchBalanceOGY";
 import { getListNeuronsOwner } from "@services/queries/governance/neurons/getListNeuronsOwner";

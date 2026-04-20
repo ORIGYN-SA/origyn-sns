@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-query";
 import { ActivitySnapshot } from "./declarations";
 import { roundAndFormatLocale } from "@helpers/numbers";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import {
   hardcodedActivityData,
   HardcodedActivity,

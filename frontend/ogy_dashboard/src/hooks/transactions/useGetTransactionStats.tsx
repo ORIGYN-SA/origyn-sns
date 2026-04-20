@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { DateTime } from "luxon";
 
 interface TimeChunkStats {

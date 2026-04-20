@@ -45,9 +45,6 @@ const BALANCE_PERIOD_OPTIONS = [
 ];
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
-const FAKE_PRINCIPAL =
-  "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa";
-const FAKE_SUBACCOUNT = "None (default subaccount)";
 const OVERVIEW_COLORS = ["#645eff", "#333089"];
 const OVERVIEW_INFOS = [
   {

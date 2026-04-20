@@ -1,12 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
-// import { useWallet } from "@amerej/artemis-react";
-// import { Dialog, LoaderSpin } from "@components/ui";
+import { useWallet } from "@components/auth/useWallet";
 
 const ProtectedRoute = () => {
-  // const { isConnected, state, walletState } = useWallet();
-  const walletId = localStorage.getItem("dfinityWallet") || "";
+  const { isConnected, state, walletState } = useWallet();
 
-  if (!walletId) {
+  if (state === walletState.Connecting) {
+    return null;
+  }
+
+  if (!isConnected) {
     return <Navigate to="/" replace />;
   }
 

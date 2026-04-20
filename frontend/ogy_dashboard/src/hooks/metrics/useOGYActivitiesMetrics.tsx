@@ -5,7 +5,7 @@ import {
   keepPreviousData,
   UseQueryOptions,
 } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { TimeStats } from "@hooks/super_stats_v3/declarations";
 
 export interface OGYActivitiesMetricsData {

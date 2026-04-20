@@ -1,6 +1,6 @@
 import { Dialog, Button } from "@components/ui";
 import { useRemoveNeuron } from "./context";
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 
 const DialogRemoveNeuron = () => {

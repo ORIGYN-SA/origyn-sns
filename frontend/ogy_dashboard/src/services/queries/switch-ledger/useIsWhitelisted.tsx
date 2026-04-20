@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const isWhitelisted = async (): Promise<boolean> => {
   const actor = await getActor("OGYTokenSwap", { isAnon: false });

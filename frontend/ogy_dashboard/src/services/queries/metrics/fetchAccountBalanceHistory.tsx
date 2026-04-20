@@ -1,5 +1,5 @@
 import { HistoryData } from "@services/types/token_metrics";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const fetchAccountBalanceHistoryQuery = async ({
   account,

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import { Card, Button } from "@components/ui";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";

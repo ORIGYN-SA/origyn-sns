@@ -1,5 +1,5 @@
 import { ProposalsMetrics } from "@services/types/token_metrics";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const fetchProposalsMetrics = async () => {
   const actor = await getActor("tokenMetrics", { isAnon: true });

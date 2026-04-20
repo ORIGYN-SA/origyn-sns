@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { DateTime } from "luxon";
 import { TimeStats } from "@hooks/super_stats_v3/declarations";
 import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";

@@ -1,4 +1,4 @@
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { ProposalsMetrics } from "@services/types/token_metrics";
 
 export type VotingParticipationResponse = {

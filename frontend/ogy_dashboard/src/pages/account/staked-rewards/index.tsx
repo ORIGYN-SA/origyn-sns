@@ -1,4 +1,4 @@
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import { Card } from "@components/ui";
 import {
   ClaimAllRewardsProvider,

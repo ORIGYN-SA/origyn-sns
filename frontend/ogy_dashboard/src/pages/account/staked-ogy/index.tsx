@@ -1,4 +1,4 @@
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 import { Card } from "@components/ui";
 import StakeOGY from "./stake-ogy/StakeOGY";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";

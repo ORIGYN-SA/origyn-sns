@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import { ChartData } from "@services/types/charts.types";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { VotingParticipationHistory } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { ProposalsMetrics } from "@services/types/token_metrics";
 import { divideBy1e8 } from "@helpers/numbers";

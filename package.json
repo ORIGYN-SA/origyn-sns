@@ -8,5 +8,10 @@
   ],
   "license": "AGPL-3.0-only",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "overrides": {
+    "@dfinity/agent": "^2.4.0",
+    "@dfinity/candid": "^2.4.0",
+    "@dfinity/principal": "^2.4.0"
+  }
 }

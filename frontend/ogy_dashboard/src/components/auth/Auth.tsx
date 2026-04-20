@@ -1,7 +1,6 @@
-// import { useQueryClient } from "@tanstack/react-query";
-import { useRef } from "react";
-import { useWallet } from "@amerej/artemis-react";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
+import { useWallet } from "@components/auth/useWallet";
+import { isPlugInstalled, PLUG_INSTALL_URL } from "@components/auth/plug";
 
 const Auth = ({
   label = "Connect",
@@ -21,29 +20,12 @@ const Auth = ({
     walletList,
   } = useWallet();
 
-  // Track user-initiated connections via event handlers so the "Connecting..."
-  // dialog only shows when the user explicitly clicked Connect.
-  // Auto-connect on page load can hang due to artemis-react bugs, so we
-  // suppress its dialog by leaving this ref as false.
-  const userInitiated = useRef(false);
-
-  const onOpenWalletList = () => {
-    userInitiated.current = true;
-    handleOpenWalletList();
-  };
-
-  const onCloseWalletList = () => {
-    userInitiated.current = false;
-    handleCloseWalletList();
-  };
-
-  const showConnectingDialog =
-    state === walletState.Connecting && userInitiated.current;
+  const showConnectingDialog = state === walletState.Connecting;
 
   return (
     <>
       {!isConnected && (
-        <Button className={className} onClick={onOpenWalletList}>
+        <Button className={className} onClick={handleOpenWalletList}>
           {label}
         </Button>
       )}
@@ -51,37 +33,67 @@ const Auth = ({
         <Button onClick={handleDisconnectWallet}>Disconnect</Button>
       )}
       <Dialog
-        show={state == walletState.OpenWalletList}
-        handleClose={onCloseWalletList}
+        show={state === walletState.OpenWalletList}
+        handleClose={handleCloseWalletList}
       >
-        <div className="pt-6 pb-12 px-12">
-          <div className="mb-8 text-center text-lg font-semibold">
-            Connect Wallet
+        <div className="pt-2 pb-8 px-6 mx-auto w-full max-w-[343px]">
+          <div className="mb-6 text-center text-[18px] font-bold leading-none text-content">
+            Connect your wallet
           </div>
-          <div>
-            {walletList.map(
-              ({ id, icon, name }, i: number) =>
-                !["stoic", "metamask"].includes(id) && (
-                  <div
-                    onClick={() => handleSelectWallet(id)}
-                    key={i}
-                    className="mb-3 cursor-pointer border-border border rounded-full"
-                  >
-                    <div className="flex items-center">
-                      <div className="w-[48px] h-[48px] flex items-center bg-surface-2/40 dark:bg-surface-2 rounded-full p-2">
-                        <img src={icon} alt="" className="rounded-full" />
-                      </div>
-                      <div className="ml-8">{name}</div>
-                    </div>
+          <div className="flex flex-col gap-2">
+            {walletList.map(({ id, icon, name }) => {
+              const plugMissing = id === "plug" && !isPlugInstalled();
+              const className =
+                "flex items-center gap-3 w-full rounded-full bg-[#F9FAFE] border border-[#E1E1E1] py-1 pl-1 pr-4 hover:bg-[#F1F3F9] transition-colors";
+              const inner = (
+                <>
+                  <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-white border border-[#E1E1E1] shrink-0 overflow-hidden">
+                    <img
+                      src={icon}
+                      alt=""
+                      className="w-6 h-6 object-contain"
+                    />
                   </div>
-                )
-            )}
+                  <span className="text-[14px] font-semibold leading-none text-content">
+                    {name}
+                  </span>
+                  {plugMissing && (
+                    <span className="ml-auto text-[12px] font-medium text-muted">
+                      Install
+                    </span>
+                  )}
+                </>
+              );
+              if (plugMissing) {
+                return (
+                  <a
+                    key={id}
+                    href={PLUG_INSTALL_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={className}
+                  >
+                    {inner}
+                  </a>
+                );
+              }
+              return (
+                <button
+                  type="button"
+                  onClick={() => handleSelectWallet(id)}
+                  key={id}
+                  className={className}
+                >
+                  {inner}
+                </button>
+              );
+            })}
           </div>
         </div>
       </Dialog>
       <Dialog
         show={showConnectingDialog}
-        handleClose={onCloseWalletList}
+        handleClose={handleCloseWalletList}
       >
         <div className="pt-6 pb-12 px-4 text-center">
           <div className="mb-8 font-semibold text-lg">Connecting...</div>

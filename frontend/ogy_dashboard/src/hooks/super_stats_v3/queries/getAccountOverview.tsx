@@ -1,6 +1,6 @@
 import { Overview } from "../declarations";
 
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 export const getAccountOverview = async ({
   accountId,
