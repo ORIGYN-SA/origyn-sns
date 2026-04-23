@@ -5,36 +5,31 @@ const exchanges = [
   {
     name: "MEXC",
     logo: "/token/exchanges/mexc.svg",
-    href: "https://www.mexc.com/",
+    href: "https://www.mexc.com/price/OGY",
   },
   {
     name: "BitMart",
     logo: "/token/exchanges/bitmart.png",
-    href: "https://www.bitmart.com/",
+    href: "https://www.bitmart.com/en-US/trade/OGY_USDT",
     height: "32px",
   },
   {
     name: "LBank",
     logo: "/token/exchanges/lbank.svg",
-    href: "https://www.lbank.com/",
+    href: "https://www.lbank.com/trade/ogy_usdt",
     height: "25px",
   },
   {
     name: "ICPEx",
     logo: "/token/exchanges/icpex.png",
-    href: "https://icpex.org/",
+    href: "https://next.icpex.org/explore/lkwrt-vyaaa-aaaaq-aadhq-cai",
   },
   {
     name: "Bitrue",
     logo: "/token/exchanges/bitrue.png",
-    href: "https://www.bitrue.com/",
+    href: "https://www.bitrue.com/trade/ogy_usdt",
     height: "33px",
-  },
-  {
-    name: "Helix",
-    logo: "/token/exchanges/helix.png",
-    href: "https://helixmarkets.io/",
-  },
+  }
 ];
 
 const Buy = () => {
