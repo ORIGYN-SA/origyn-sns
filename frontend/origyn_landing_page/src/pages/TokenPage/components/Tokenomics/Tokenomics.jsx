@@ -1,18 +1,28 @@
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { OGYCirculationState, OrigynFoundationReserve } from "./components/Chart";
+import {
+  OGYCirculationState,
+  OrigynFoundationReserve,
+  TotalOGYBurned,
+  TotalOGYSupply,
+} from "./components/Chart";
 import GradientButton from "@components/Button/GradientButton";
 import styles from "./Tokenomics.module.scss";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
-import useFoundationReserve from "@/hooks/useFoundationReserve";
+import useTotalOGYSupply from "@/hooks/useTotalOGYSupply";
 
-const slides = [<OGYCirculationState />, <OrigynFoundationReserve />];
+const slides = [
+  OGYCirculationState,
+  OrigynFoundationReserve,
+  TotalOGYSupply,
+  TotalOGYBurned,
+];
 
 const Tokenomics = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const { data } = useFoundationReserve();
+  const { data } = useTotalOGYSupply();
 
   const handlers = useSwipeable({
     onSwiping: (e) => {
@@ -40,15 +50,16 @@ const Tokenomics = () => {
   return (
     <section className={styles.tokenomics}>
       <div className={styles.tokenomicsContent}>
-        <h1>
-          <ScrollReveal delay={0.15}>
-            Tokenomics Overview
-          </ScrollReveal>
-        </h1>
-
+        <ScrollReveal>
+          <h1>
+            Tokenomics
+            <br />
+            <i>Overview</i>
+          </h1>
+        </ScrollReveal>
         <ScrollReveal delay={0.25}>
           <p>
-            <b>Total Supply:</b> {data?.string.totalSupply} OGY
+            <b>Total Supply:</b> {data?.totalSupplyOGYToString ?? "..."} OGY
           </p>
         </ScrollReveal>
 
@@ -71,15 +82,15 @@ const Tokenomics = () => {
             </b>
           </p>
         </ScrollReveal>
-         <ScrollReveal delay={0.45}>
-            <GradientButton
-              href="https://dashboard.origyn.com/Tokenomics_V3.pdf"
-              text="TOKENOMIC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.tokenomicsButton}
-            />
-          </ScrollReveal>
+        <ScrollReveal delay={0.45}>
+          <GradientButton
+            href="https://dashboard.origyn.com/Tokenomics_V3.pdf"
+            text="TOKENOMICS"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.tokenomicsButton}
+          />
+        </ScrollReveal>
       </div>
       <div className={styles.tokenomicsChart}>
         <div {...handlers} className={styles.sliderWrapper}>
@@ -90,9 +101,9 @@ const Tokenomics = () => {
               transition: isDragging ? "none" : "transform 0.3s ease-out",
             }}
           >
-            {slides.map((slide, index) => (
-              <div key={index} className={styles.sliderSlide}>
-                {slide}
+            {slides.map((SlideComponent) => (
+              <div key={SlideComponent.name} className={styles.sliderSlide}>
+                <SlideComponent />
               </div>
             ))}
           </div>

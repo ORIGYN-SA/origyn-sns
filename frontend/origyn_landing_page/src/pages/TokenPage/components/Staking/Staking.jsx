@@ -61,7 +61,7 @@ const Staking = () => {
       </ScrollReveal>
       <ScrollReveal delay={0.45}>
         <GradientButton
-          href="https://nns.ic0.app/neurons/?u=leu43-oiaaa-aaaaq-aadgq-cai"
+          href="https://nns.ic0.app/neurons/?u=leu43-oiaaa-aaaaq-aadgq-cai "
           text="STAKE NOW"
           target="_blank"
           rel="noopener noreferrer"

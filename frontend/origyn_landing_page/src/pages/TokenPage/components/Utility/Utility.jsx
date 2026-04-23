@@ -30,7 +30,7 @@ const Utility = () => {
       </ScrollReveal>
       <ScrollReveal delay={0.15}>
         <p>
-          OGY is required to perform essential functions across the ORIGYN ecosystem:
+          You need OGY tokens to fully use the ORIGYN ecosystem:
         </p>
       </ScrollReveal>
       <div className={styles.cards}>

@@ -39,26 +39,21 @@ const exchanges = [
 
 const Buy = () => {
   return (
-    <section className={styles.buy}>
-      <ScrollReveal>
-        <h1>Buy OGY</h1>
-      </ScrollReveal>
-      <div className={styles.exchangeRow}>
-        {exchanges.map(({ name, logo, href, height }, index) => (
-          <ScrollReveal key={name} delay={index * 0.1}>
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.exchangeLink}
-              aria-label={name}
-            >
-              <img src={logo} alt={name} className={styles.exchangeLogo} style={{ height }} />
-            </a>
-          </ScrollReveal>
-        ))}
-      </div>
-    </section>
+    <div className={styles.exchangeRow}>
+      {exchanges.map(({ name, logo, href, height }, index) => (
+        <ScrollReveal key={name} delay={index * 0.1}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.exchangeLink}
+            aria-label={name}
+          >
+            <img src={logo} alt={name} className={styles.exchangeLogo} style={{ height }} />
+          </a>
+        </ScrollReveal>
+      ))}
+    </div>
   );
 };
 

@@ -30,6 +30,10 @@
   h1 {
     margin-bottom: 77px;
 
+    i {
+      font-weight: 400;
+    }
+
     @media (max-width: $bp-lg) {
       margin-bottom: 55px;
     }

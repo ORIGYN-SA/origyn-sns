@@ -1,6 +1,8 @@
 import styles from "./Hero.module.scss";
 import Stats from "@components/Stats/Stats";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
+import GradientButton from "@components/Button/GradientButton";
+
 
 const Hero = ({ data }) => {
     const statsData = [
@@ -9,8 +11,8 @@ const Hero = ({ data }) => {
       title: "$OGY Market Cap",
     },
     {
-      value: data?.tokenSupply,
-      title: "Token supply",
+      value: data?.totalBurned,
+      title: "Total OGY burned",
     },
     {
       value: data?.circulatingSupply,
@@ -21,8 +23,6 @@ const Hero = ({ data }) => {
       title: "Token holders",
     },
   ]
-
-  console.log(data)
 
   return (
     <section className={styles.hero}>
@@ -50,6 +50,15 @@ const Hero = ({ data }) => {
             <p>
               OGY enables a global system where <b>physical</b> assets are <b>digitally certified, tracked,</b> and <b>integrated into decentralized</b> applications and markets.
             </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.45}>
+            <GradientButton
+              href="https://www.mexc.com/price/OGY"
+              text="Buy OGY"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.heroButton}
+            />
           </ScrollReveal>
         </div>
         <div className={styles.heroContentBackground}>

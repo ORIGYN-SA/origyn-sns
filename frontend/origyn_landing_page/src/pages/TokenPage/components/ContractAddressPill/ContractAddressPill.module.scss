@@ -35,11 +35,11 @@
   justify-content: center;
   gap: 12px;
   padding: 8px 16px 8px 20px;
-  margin: 40px auto 0;
+  margin: 40px auto;
   width: 337px;
 
   @media (max-width: $bp-lg) {
-    display: none;
+    // display: none;
   }
 
   .contractAddressText {

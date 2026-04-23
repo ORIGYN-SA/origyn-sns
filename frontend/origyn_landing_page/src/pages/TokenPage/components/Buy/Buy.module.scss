@@ -1,22 +1,4 @@
 @use "styles/variables" as *;
-@use "../../token-section" as *;
-
-.buy {
-  @include section-base($bg-light);
-  text-align: center;
-  padding-bottom: 0;
-
-  h1 {
-    font-weight: 400;
-    font-family: $font-italic;
-    padding-bottom: 80px;
-
-    @media (max-width: $bp-lg) {
-      line-height: 1.2;
-      padding-bottom: 60px;
-    }
-  }
-}
 
 .exchangeRow {
   position: relative;
@@ -26,11 +8,8 @@
   justify-content: center;
   background-color: $bg-white;
   border-radius: 10px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
   margin: 0 auto;
-  padding: 0 40px;
-  min-height: 99px;
-  gap: 65px;
+  gap: 30px;
 
   @media (max-width: $bp-xl) {
     max-width: 100%;
@@ -38,7 +17,7 @@
 
   @media (max-width: $bp-lg) {
     flex-wrap: wrap;
-    padding: 32px 24px;
+    padding: 0 24px;
     min-height: unset;
     margin: 0;
   }
@@ -58,11 +37,11 @@
 
 .exchangeLogo {
   display: block;
-  height: 45px;
+  height: 30px;
   width: auto;
   object-fit: contain;
 
   @media (max-width: $bp-lg) {
-    max-height: 36px;
+    // max-height: 36px;
   }
 }
