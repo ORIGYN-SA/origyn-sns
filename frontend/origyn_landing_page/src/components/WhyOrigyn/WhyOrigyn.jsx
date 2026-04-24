@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./WhyOrigyn.module.css";
-import Benefits from "../Benefits/Benefits";
+import styles from "./WhyOrigyn.module.scss";
+import Benefits from "@components/Benefits/Benefits";
 
 const WhyOrigyn = () => {
   return (

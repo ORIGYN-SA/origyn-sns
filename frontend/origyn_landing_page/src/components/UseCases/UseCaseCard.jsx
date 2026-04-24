@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./UseCases.module.css";
+import styles from "./UseCases.module.scss";
 
 const UseCaseCard = ({ title, description, image, height, link }) => {
   const navigate = useNavigate();

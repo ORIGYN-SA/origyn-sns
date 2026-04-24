@@ -1,5 +1,5 @@
-import styles from "./IntegratorProgram.module.css";
-import Button from "../Button/Button";
+import styles from "./IntegratorProgram.module.scss";
+import Button from "@components/Button/Button";
 
 const IntegratorProgram = ({ id }) => {
   return (
