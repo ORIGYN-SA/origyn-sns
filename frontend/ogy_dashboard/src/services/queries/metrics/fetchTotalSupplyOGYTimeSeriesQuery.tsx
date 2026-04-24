@@ -12,7 +12,7 @@ import {
 import { ChartData } from "@services/types/charts.types";
 
 export interface TotalSupplyOGYTimeSeriesParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalSupplyOGYTimeSeries>;
   period: string;
 }
 
@@ -42,7 +42,7 @@ const fetchTotalSupplyOGYTimeSeriesQuery = ({
     queryFn: async () => fn({ period }),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalSupplyOGYTimeSeries>;
 };
 
 export default fetchTotalSupplyOGYTimeSeriesQuery;

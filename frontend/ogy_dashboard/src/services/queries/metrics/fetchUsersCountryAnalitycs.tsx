@@ -7,7 +7,7 @@ import analitycsAPI from "@services/api/analitycs";
 import { PLAUSIBLE_API_KEY } from "@constants/index";
 
 export interface UsersCountryAnalyticsParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<UserByCountry[]>;
   start?: string | null; // in timestamp
   end?: string | null; // in timestamp
   step?: string | null; // in seconds
@@ -40,7 +40,7 @@ const fetchUsersCountryAnalyticsQuery = ({
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<UserByCountry[]>;
 };
 
 export default fetchUsersCountryAnalyticsQuery;

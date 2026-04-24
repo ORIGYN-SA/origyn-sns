@@ -8,7 +8,7 @@ import { PieChart } from "@services/types/charts.types";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
 
 export interface FoundationAssetsOGYParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<FoundationAssetsOGY>;
 }
 
 export interface FoundationAssetsOGY {
@@ -105,7 +105,7 @@ const fetchFoundationAssetsOGY = ({ options }: FoundationAssetsOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<FoundationAssetsOGY>;
 };
 
 export default fetchFoundationAssetsOGY;

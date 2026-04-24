@@ -13,7 +13,7 @@ export interface TotalSupplyOGY {
 }
 
 export interface TotalSupplyOGYParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalSupplyOGY>;
 }
 
 const fn = async (): Promise<TotalSupplyOGY> => {
@@ -39,7 +39,7 @@ const fetchTotalSupplyOGYQuery = ({ options }: TotalSupplyOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalSupplyOGY>;
 };
 
 export default fetchTotalSupplyOGYQuery;

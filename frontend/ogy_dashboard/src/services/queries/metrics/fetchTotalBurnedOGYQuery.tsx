@@ -14,7 +14,7 @@ export interface TotalBurnedOGY {
 }
 
 export interface TotalBurnedOGYParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalBurnedOGY>;
 }
 
 const fn = async (): Promise<TotalBurnedOGY> => {
@@ -44,7 +44,7 @@ const fetchTotalBurnedOGYQuery = ({ options }: TotalBurnedOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalBurnedOGY>;
 };
 
 export default fetchTotalBurnedOGYQuery;
