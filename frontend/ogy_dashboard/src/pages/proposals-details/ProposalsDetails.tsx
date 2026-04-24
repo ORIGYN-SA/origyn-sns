@@ -19,6 +19,11 @@ import { NNS_PLATFORM_URL, SNS_ROOT_CANISTER } from "@constants/index";
 const FAKE_TITLE = "Proposal title loading…";
 const FAKE_PAYLOAD = "Loading proposal details…";
 
+const getNnsProposalUrl = (proposalId: string) => {
+  const { origin } = new URL(NNS_PLATFORM_URL);
+  return `${origin}/proposal/?u=${SNS_ROOT_CANISTER}&proposal=${proposalId}`;
+};
+
 export const ProposalsDetails = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -132,7 +137,7 @@ export const ProposalsDetails = () => {
 
               <a
                 data-skel-static
-                href={`${NNS_PLATFORM_URL}/proposal/?u=${SNS_ROOT_CANISTER}&proposal=${proposalId}`}
+                href={getNnsProposalUrl(proposalId)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
