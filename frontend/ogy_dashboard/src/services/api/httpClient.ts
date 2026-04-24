@@ -29,6 +29,11 @@ const parseBody = async (res: Response) => {
   return text === "" ? undefined : text;
 };
 
+const buildUrl = (baseURL: string, path: string) => {
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${baseURL.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+};
+
 export const createHttpClient = ({
   baseURL,
   timeout = 10_000,
@@ -40,8 +45,19 @@ export const createHttpClient = ({
     body?: unknown,
     options?: RequestOptions
   ): Promise<HttpResponse<T>> => {
-    const url = `${baseURL}${path}`;
-    const signal = options?.signal ?? AbortSignal.timeout(timeout);
+    const url = buildUrl(baseURL, path);
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let signal = options?.signal;
+
+    if (!signal) {
+      if (typeof AbortSignal.timeout === "function") {
+        signal = AbortSignal.timeout(timeout);
+      } else {
+        const controller = new AbortController();
+        timeoutId = setTimeout(() => controller.abort(), timeout);
+        signal = controller.signal;
+      }
+    }
 
     const res = await fetch(url, {
       method,
@@ -52,6 +68,8 @@ export const createHttpClient = ({
         ...options?.headers,
       },
       body: body !== undefined ? JSON.stringify(body) : undefined,
+    }).finally(() => {
+      if (timeoutId) clearTimeout(timeoutId);
     });
 
     const data = await parseBody(res);
