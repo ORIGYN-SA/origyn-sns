@@ -175,6 +175,7 @@ const NeuronsList = ({
           columns={columns}
           data={rows}
           footer={paginationFooter}
+          getRowId={(row) => row.id}
           renderExpanded={(row) => <NeuronExpandedRow row={row} />}
         />
       </SkeletonOverlay>

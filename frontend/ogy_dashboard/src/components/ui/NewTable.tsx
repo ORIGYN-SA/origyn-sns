@@ -1,4 +1,10 @@
-import { Fragment, ReactNode, useState, useCallback } from "react";
+import {
+  Fragment,
+  ReactNode,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 
 export type NewTableColumn<T> = {
   id: string;
@@ -14,6 +20,7 @@ type NewTableProps<T> = {
   className?: string;
   footer?: ReactNode;
   renderExpanded?: (row: T) => ReactNode;
+  getRowId?: (row: T, index: number) => string | number;
 };
 
 const NewTable = <T,>({
@@ -22,14 +29,25 @@ const NewTable = <T,>({
   className,
   footer,
   renderExpanded,
+  getRowId,
 }: NewTableProps<T>) => {
-  const [expandedSet, setExpandedSet] = useState<Set<number>>(new Set());
+  const [expandedSet, setExpandedSet] = useState<Set<string>>(new Set());
 
-  const toggleExpand = useCallback((index: number) => {
+  const getRowKey = useCallback(
+    (row: T, index: number) => String(getRowId ? getRowId(row, index) : index),
+    [getRowId]
+  );
+
+  const validIds = useMemo(
+    () => new Set(data.map((row, index) => getRowKey(row, index))),
+    [data, getRowKey]
+  );
+
+  const toggleExpand = useCallback((id: string) => {
     setExpandedSet((prev) => {
       const next = new Set(prev);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   }, []);
@@ -60,9 +78,11 @@ const NewTable = <T,>({
           </thead>
           <tbody>
             {data.map((row, rowIndex) => {
-              const isExpanded = expandedSet.has(rowIndex);
+              const rowId = getRowKey(row, rowIndex);
+              const isExpanded =
+                expandedSet.has(rowId) && validIds.has(rowId);
               return (
-                <Fragment key={rowIndex}>
+                <Fragment key={rowId}>
                   <tr
                     className={
                       rowIndex % 2 === 1 ? "bg-surface-muted" : "bg-surface-1"
@@ -79,7 +99,7 @@ const NewTable = <T,>({
                       >
                         {column.cell(row, {
                           isExpanded,
-                          toggleExpand: () => toggleExpand(rowIndex),
+                          toggleExpand: () => toggleExpand(rowId),
                         })}
                       </td>
                     ))}

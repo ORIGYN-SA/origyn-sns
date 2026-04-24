@@ -178,6 +178,7 @@ const ProposalsList = ({
           columns={columns}
           data={rows}
           footer={paginationFooter}
+          getRowId={(row) => row.id}
           renderExpanded={(row) => <ProposalExpandedRow row={row} />}
         />
       </SkeletonOverlay>
