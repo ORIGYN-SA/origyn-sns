@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useWallet } from "@components/auth/useWallet";
 import { getActor } from "@services/actor";
 import { Principal } from "@dfinity/principal";
-import { AccountIdentifier } from "@dfinity/ledger-icp";
+import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE } from "@constants/index";
 import { Response_1 } from "@services/types/ogy_token_swap";
 
@@ -18,10 +18,17 @@ interface IValueOGYBalance {
   e8s: bigint;
 }
 
-const sendTokens = async ({ owner }: { owner: string }) => {
+const sendTokens = async ({
+  owner,
+  subAccount,
+}: {
+  owner: string;
+  subAccount?: SubAccount;
+}) => {
   // for fetching OGY user balance
   const userAccountIdentifier = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
+    subAccount,
   });
   const actorLedgerLegacy = await getActor("ledgerLegacy", { isAnon: false });
   const actorOGYTokenSwap = await getActor("OGYTokenSwap", { isAnon: false });
@@ -45,7 +52,7 @@ const sendTokens = async ({ owner }: { owner: string }) => {
     to,
     fee,
     memo: 0,
-    from_subaccount: [],
+    from_subaccount: subAccount ? [subAccount.toUint8Array()] : [],
     created_at_time: [],
     amount: { e8s: amount },
   });
@@ -53,12 +60,13 @@ const sendTokens = async ({ owner }: { owner: string }) => {
 };
 
 const useSendTokens = () => {
-  const { principalId } = useWallet();
+  const { principalId, subAccount } = useWallet();
 
   return useMutation({
     mutationFn: () =>
       sendTokens({
         owner: principalId as string,
+        subAccount,
       }),
   });
 };

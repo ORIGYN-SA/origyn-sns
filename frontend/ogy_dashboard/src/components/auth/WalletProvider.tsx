@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import type { Agent } from "@dfinity/agent";
-import { AccountIdentifier } from "@dfinity/ledger-icp";
+import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { Principal } from "@dfinity/principal";
 import {
   useAuth,
@@ -67,6 +67,8 @@ type ContextValue = {
   isRestoring: boolean;
   principalId: string | undefined;
   accountId: string | undefined;
+  subAccount: SubAccount | undefined;
+  subAccountHex: string | undefined;
   walletSelected: WalletId | undefined;
   walletList: WalletListItem[];
   handleOpenWalletList: () => void;
@@ -93,13 +95,23 @@ const writeLastWallet = (id: WalletId | null) => {
   }
 };
 
-const principalToAccountId = (principal: Principal | undefined) => {
+const principalToAccountId = (
+  principal: Principal | undefined,
+  subAccount?: SubAccount
+) => {
   if (!principal) return undefined;
   try {
-    return AccountIdentifier.fromPrincipal({ principal }).toHex();
+    return AccountIdentifier.fromPrincipal({ principal, subAccount }).toHex();
   } catch {
     return undefined;
   }
+};
+
+const subAccountToHex = (subAccount?: SubAccount) => {
+  if (!subAccount) return undefined;
+  return Array.from(subAccount.toUint8Array())
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 };
 
 type PlugSession = { principal: Principal; agent: Agent } | null;
@@ -166,11 +178,13 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   }, [user, plugSession]);
 
   const principal = plugSession?.principal ?? user?.principal;
+  const subAccount = plugSession ? undefined : user?.subAccount;
   const principalId = principal ? principal.toText() : undefined;
   const accountId = useMemo(
-    () => principalToAccountId(principal),
-    [principal]
+    () => principalToAccountId(principal, subAccount),
+    [principal, subAccount]
   );
+  const subAccountHex = useMemo(() => subAccountToHex(subAccount), [subAccount]);
 
   const isConnected = !!principal && !!authedAgent;
   const isRestoring = isInitializing || isRestoringPlug;
@@ -240,6 +254,8 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     isRestoring,
     principalId,
     accountId,
+    subAccount,
+    subAccountHex,
     walletSelected: activeWallet,
     walletList: WALLET_LIST,
     handleOpenWalletList,
