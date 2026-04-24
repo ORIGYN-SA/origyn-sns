@@ -2,9 +2,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useWallet } from "@components/auth/useWallet";
 
 const ProtectedRoute = () => {
-  const { isConnected, state, walletState } = useWallet();
+  const { isConnected, isRestoring, state, walletState } = useWallet();
 
-  if (state === walletState.Connecting) {
+  if (isRestoring || state === walletState.Connecting) {
     return null;
   }
 

@@ -64,6 +64,7 @@ type ContextValue = {
   walletState: typeof WalletState;
   isConnected: boolean;
   isConnecting: boolean;
+  isRestoring: boolean;
   principalId: string | undefined;
   accountId: string | undefined;
   walletSelected: WalletId | undefined;
@@ -111,6 +112,9 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [listOpen, setListOpen] = useState(false);
   const [pending, setPending] = useState<WalletId | null>(null);
   const [plugSession, setPlugSession] = useState<PlugSession>(null);
+  const [isRestoringPlug, setIsRestoringPlug] = useState(
+    () => readLastWallet() === "plug"
+  );
 
   const didAttemptPlugResume = useRef(false);
 
@@ -141,14 +145,18 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     if (didAttemptPlugResume.current) return;
     if (isInitializing) return;
     didAttemptPlugResume.current = true;
-    if (readLastWallet() !== "plug") return;
+    if (readLastWallet() !== "plug") {
+      setIsRestoringPlug(false);
+      return;
+    }
+    setIsRestoringPlug(true);
     silentReconnectPlug({
       whitelist: whitelistedCanisterIds,
       host: IC_HOST,
     }).then((session) => {
       if (session) setPlugSession(session);
       else writeLastWallet(null);
-    });
+    }).finally(() => setIsRestoringPlug(false));
   }, [isInitializing]);
 
   useEffect(() => {
@@ -165,6 +173,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const isConnected = !!principal && !!authedAgent;
+  const isRestoring = isInitializing || isRestoringPlug;
 
   let state: WalletStateValue;
   if (isConnected) state = WalletState.Connected;
@@ -228,6 +237,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     walletState: WalletState,
     isConnected,
     isConnecting: state === WalletState.Connecting,
+    isRestoring,
     principalId,
     accountId,
     walletSelected: activeWallet,
