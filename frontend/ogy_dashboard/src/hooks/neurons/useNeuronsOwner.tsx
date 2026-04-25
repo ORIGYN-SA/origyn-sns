@@ -41,7 +41,7 @@ const useNeuronsOwner = ({
     isFetching: isFetchingFetchNeuronsByOwner,
     error: errorFetchNeuronsByOwner,
   } = useQuery({
-    queryKey: ["userGetNeuronsByOwner", isConnected, limit],
+    queryKey: ["userGetNeuronsByOwner", owner, isConnected, limit],
     queryFn: () =>
       getListNeuronsOwner({
         owner,

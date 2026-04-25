@@ -3,9 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import type { Agent } from "@dfinity/agent";
@@ -23,11 +21,12 @@ import {
   setAuthedAgent,
   whitelistedCanisterIds,
 } from "@services/actor";
+import { connectPlug, disconnectPlug } from "./plug";
 import {
-  connectPlug,
-  disconnectPlug,
-  silentReconnectPlug,
-} from "./plug";
+  usePlugSilentReconnect,
+  useRememberDfinityAsLastWallet,
+  useSyncAuthedAgent,
+} from "./walletHooks";
 
 export const WalletState = {
   Idle: "Idle",
@@ -124,11 +123,6 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [listOpen, setListOpen] = useState(false);
   const [pending, setPending] = useState<WalletId | null>(null);
   const [plugSession, setPlugSession] = useState<PlugSession>(null);
-  const [isRestoringPlug, setIsRestoringPlug] = useState(
-    () => readLastWallet() === "plug"
-  );
-
-  const didAttemptPlugResume = useRef(false);
 
   const identityKitWalletId: WalletId | null = useMemo(() => {
     if (!user) return null;
@@ -138,46 +132,32 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   }, [user]);
 
   const activeWallet: WalletId | undefined =
-    plugSession ? "plug" : identityKitWalletId ?? undefined;
+    plugSession ? "plug" : (identityKitWalletId ?? undefined);
 
   const authedAgent: Agent | undefined = plugSession
     ? plugSession.agent
     : identitykitAgent;
 
-  useEffect(() => {
-    setAuthedAgent(authedAgent);
-    return () => {
-      if (!plugSession && !identitykitAgent) {
-        setAuthedAgent(undefined);
-      }
-    };
-  }, [authedAgent, plugSession, identitykitAgent]);
+  useSyncAuthedAgent(authedAgent);
 
-  useEffect(() => {
-    if (didAttemptPlugResume.current) return;
-    if (isInitializing) return;
-    didAttemptPlugResume.current = true;
-    if (readLastWallet() !== "plug") {
-      setIsRestoringPlug(false);
-      return;
-    }
-    setIsRestoringPlug(true);
-    silentReconnectPlug({
-      whitelist: whitelistedCanisterIds,
-      host: IC_HOST,
-    }).then((session) => {
-      if (session) setPlugSession(session);
-      else writeLastWallet(null);
-    }).finally(() => setIsRestoringPlug(false));
-  }, [isInitializing]);
+  const { isRestoring: isRestoringPlug } = usePlugSilentReconnect({
+    enabled: !isInitializing,
+    shouldAttempt: () => readLastWallet() === "plug",
+    whitelist: whitelistedCanisterIds,
+    host: IC_HOST,
+    onSession: setPlugSession,
+    onMiss: () => writeLastWallet(null),
+  });
 
-  useEffect(() => {
-    if (user && !plugSession && !readLastWallet()) {
-      writeLastWallet("dfinity");
-    }
-  }, [user, plugSession]);
+  useRememberDfinityAsLastWallet({
+    user,
+    hasPlugSession: !!plugSession,
+    readLastWallet,
+    writeLastWallet,
+  });
 
   const principal = plugSession?.principal ?? user?.principal;
+  // Plug doesn't expose subaccount derivation; only IdentityKit signers (II/OISY) supply one.
   const subAccount = plugSession ? undefined : user?.subAccount;
   const principalId = principal ? principal.toText() : undefined;
   const accountId = useMemo(

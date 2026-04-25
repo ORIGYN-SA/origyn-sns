@@ -38,7 +38,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
   const sendTokens = useSendTokens();
   const requestSwap = useRequestSwap();
   const fetchBalanceLegacy = useFetchBalanceOGYLegacyOwner();
-  const { data: isWhitelisted } = useIsWhitelisted();
+  const { data: isWhitelisted } = useIsWhitelisted(principalId);
 
   const handleClose = () => {
     setShow(false);

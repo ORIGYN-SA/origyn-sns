@@ -91,7 +91,8 @@ export const silentReconnectPlug = async (args: {
     if (!plug.agent) return null;
     const principal = await plug.getPrincipal();
     return { principal, agent: plug.agent };
-  } catch {
+  } catch (err) {
+    console.error("Plug silent reconnect failed:", err);
     return null;
   }
 };

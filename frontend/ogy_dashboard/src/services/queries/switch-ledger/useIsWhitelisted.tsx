@@ -8,10 +8,11 @@ const isWhitelisted = async (): Promise<boolean> => {
   return isWhitelisted as boolean;
 };
 
-const useIsWhitelisted = () => {
+const useIsWhitelisted = (principalId: string | undefined) => {
   return useQuery<boolean>({
-    queryKey: ["isWhitelisted"],
+    queryKey: ["isWhitelisted", principalId],
     queryFn: () => isWhitelisted(),
+    enabled: !!principalId,
   });
 };
 
