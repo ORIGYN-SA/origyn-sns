@@ -1,0 +1,47 @@
+@use "styles/variables" as *;
+
+.exchangeRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-white;
+  border-radius: 10px;
+  margin: 0 auto;
+  gap: 30px;
+
+  @media (max-width: $bp-xl) {
+    max-width: 100%;
+  }
+
+  @media (max-width: $bp-lg) {
+    flex-wrap: wrap;
+    padding: 0 24px;
+    min-height: unset;
+    margin: 0;
+  }
+}
+
+.exchangeLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.exchangeLogo {
+  display: block;
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+
+  @media (max-width: $bp-lg) {
+    // max-height: 36px;
+  }
+}

@@ -1,0 +1,74 @@
+@use "styles/variables" as *;
+
+.container {
+  padding-top: 169px;
+  padding-bottom: 96px;
+  gap: 96px;
+  flex-direction: column;
+  display: flex;
+  background: $bg-light;
+
+  @media (max-width: $bp-md) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 24px;
+  }
+}
+
+.titleWithContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.why {
+  @include type('display');
+  color: $color-text;
+  text-align: center;
+  font-family: $font-sans;
+  font-style: normal;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-44;
+    line-height: 1.1;
+  }
+}
+
+.subtitle {
+  @include type('subtitle');
+  color: $color-text;
+  font-family: $font-sans;
+  font-weight: 600;
+  text-align: center;
+  font-style: normal;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  max-width: 968px;
+}
+
+.content {
+  @include type('body-lg');
+  color: $color-text;
+  text-align: center;
+  font-family: $font-sans;
+  font-style: normal;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  max-width: 900px;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-14;
+    line-height: 1.5;
+    padding: 0 16px;
+  }
+}

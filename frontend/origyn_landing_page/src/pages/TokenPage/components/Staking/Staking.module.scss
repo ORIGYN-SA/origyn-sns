@@ -1,0 +1,14 @@
+@use "styles/variables" as *;
+@use "../../token-section" as *;
+
+.staking {
+  @include section-base($bg-white);
+}
+
+.cards {
+  @include section-cards;
+}
+
+.ctaButton {
+  @include section-cta-button;
+}

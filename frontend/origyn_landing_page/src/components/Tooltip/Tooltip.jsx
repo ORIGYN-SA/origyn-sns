@@ -1,6 +1,6 @@
 import React from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import styles from "./Tooltip.module.css";
+import styles from "./Tooltip.module.scss";
 
 const Tooltip = ({
   className,

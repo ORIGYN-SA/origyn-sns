@@ -1,0 +1,107 @@
+@use "styles/variables" as *;
+@use "../../token-section" as *;
+
+.address {
+  @include split-section;
+  padding: 45px 0;
+
+  @media (max-width: $bp-lg) {
+    padding: $section-v-padding-mobile 16px;
+  }
+}
+
+.addressContent {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: $color-muted;
+  padding: 35px 95px 35px 0;
+
+  @include split-section-text;
+
+  @media (max-width: $bp-lg) {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  h1 {
+    color: $color-text;
+
+    b {
+      font-weight: 400;
+      white-space: nowrap;
+    }
+  }
+
+  .addressDescription {
+    margin-top: 65px;
+    line-height: 27px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    @media (max-width: $bp-lg) {
+      display: none;
+    }
+  }
+
+  .addressWarning {
+    @include type('body-lg');
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 44px;
+
+    @media (max-width: $bp-lg) {
+      font-size: $fs-12;
+    }
+  }
+
+  ul {
+    @include type('body-lg');
+    margin: 30px 0;
+    list-style-type: disc;
+    padding-left: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    line-height: 2.25;
+
+    @media (max-width: $bp-lg) {
+      font-size: $fs-12;
+    }
+  }
+
+  p {
+    letter-spacing: 1.3px;
+    line-height: 2.25;
+  }
+}
+
+.addressButtonContainer {
+  width: 50%;
+
+  @media (max-width: $bp-lg) {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+.adressButtonBg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 83px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $bp-lg) {
+    height: 400px;
+    margin-top: 60px;
+    border-radius: 37px;
+  }
+}

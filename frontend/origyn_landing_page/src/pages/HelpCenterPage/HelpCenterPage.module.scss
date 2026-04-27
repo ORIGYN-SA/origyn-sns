@@ -1,0 +1,96 @@
+@use "styles/variables" as *;
+
+.helpCenterContainer {
+  min-height: 100vh;
+  background: $bg-light;
+  padding: 80px 0;
+
+  @media (max-width: $bp-md) {
+    padding: 40px 0;
+  }
+}
+
+.content {
+  max-width: $bp-xl;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  @media (max-width: $bp-md) {
+    padding: 0 16px;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 97px;
+}
+
+.mainTitle {
+  @include type('display');
+  color: $color-text;
+  margin-bottom: 48px;
+
+  span {
+    font-family: $font-italic;
+    font-weight: 200;
+    font-style: italic;
+    font-size: $fs-80;
+    line-height: 1.1;
+    letter-spacing: 0%;
+
+    @media (max-width: $bp-lg) { font-size: $fs-48; }
+  }
+
+  @media (max-width: $bp-lg) { font-size: $fs-48; }
+}
+
+.searchContainer {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $bp-lg) { margin-top: 30px; }
+  @media (max-width: $bp-md) { width: calc(100% - 32px); margin-top: 24px; }
+}
+
+.searchInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  @include type('body');
+  width: calc(100% - 36px);
+  padding: 12px 12px 12px 24px;
+  font-family: $font-sans;
+  color: black;
+  background: $bg-white;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  box-shadow: 0px 4px 24px 0px #00000026;
+
+  &::placeholder {
+    color: $color-muted;
+    font-style: italic;
+  }
+
+  @media (max-width: $bp-md) {
+    padding: 14px 12px 14px 16px;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-37%);
+  color: gray;
+  pointer-events: none;
+}
+
+.accordionContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}

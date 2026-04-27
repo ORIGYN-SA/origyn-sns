@@ -1,5 +1,5 @@
-import Button from "../Button/Button";
-import styles from "./BePart.module.css";
+import Button from "@components/Button/Button";
+import styles from "./BePart.module.scss";
 const BePart = () => {
   return (
     <div className={styles.container}>
