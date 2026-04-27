@@ -154,6 +154,8 @@ pub async fn create_new_payment_rounds(flow: NeuronFlow) {
             token,
             neuron_data,
         );
+        mutate_state(|state| state.data.payment_processor.increment_next_key());
+
         match new_round {
             Ok(valid_round) => {
                 match transfer_funds_to_payment_round_account(flow, &valid_round).await {

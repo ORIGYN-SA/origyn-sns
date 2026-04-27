@@ -34,26 +34,17 @@ fn test_distribute_rewards_happy_path() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
     println!("1 Time now is {:?}", pic.get_time()); // Tue Jun 18 2024 08:01:50 GMT+0000
 
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
+    fund_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
 
     let neuron_id = neuron_data.get(&0usize).unwrap().id.clone().unwrap();
     // Tuesday Jun 18, 2024, 9:00:00 AM
@@ -71,17 +62,17 @@ fn test_distribute_rewards_happy_path() {
     // 2. Check Neuron account got paid correctly
     // ********************************
     let n = neuron_data.len() as u64;
-    let fees = n * 10_000 + 10_000;
+    let fees = n * 200_000 + 200_000;
     let pool = (100_000_000_000u64 - fees) as f64;
     let expected_reward = (pool / n as f64) as u64;
-    assert_eq!(expected_reward, 9_999_989_000);
+    assert_eq!(expected_reward, 9999780000);
 
     let neuron_account = Account {
         owner: rewards_id,
         subaccount: Some(neuron_id.clone().into()),
     };
     assert_eq!(
-        balance_of(&pic, icp_ledger_id, neuron_account),
+        balance_of(&pic, ogy_ledger_id, neuron_account),
         expected_reward
     );
 
@@ -92,72 +83,38 @@ fn test_distribute_rewards_happy_path() {
 
     let neuron = get_neuron_by_id(&pic, env.controller, rewards_id, &neuron_id).unwrap();
     assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::ICP),
-        Some(&100_000u64)
-    );
-    assert_eq!(
         neuron.rewarded_maturity.get(&TokenSymbol::OGY),
         Some(&100_000u64)
     );
-    assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::GOLDAO),
-        Some(&100_000u64)
-    );
 
-    let icp_history = get_historic_payment_round(
+    let ogy_history = get_historic_payment_round(
         &pic,
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::ICP,
+            token: TokenSymbol::OGY,
             round_id: 1,
         },
     );
-    println!("ICP History: {:?}", icp_history);
-    assert_eq!(icp_history.len(), 1);
+    println!("OGY History: {:?}", ogy_history);
+    assert_eq!(ogy_history.len(), 1);
 }
 
-/// When the ICP reward pool is empty, only OGY and GOLDAO rounds are created.
+/// When the OGY reward pool is empty, only OGY rounds are created.
 #[test]
-fn test_distribute_rewards_with_no_icp_rewards() {
+fn test_distribute_rewards_with_no_ogy_rewards() {
     let users = vec![Principal::from_slice(&[0, 0, 0, 1, 0, 1, 0, 1, 0, 1])];
     let (neuron_data, _) = generate_5y_neuron_data(0, 10, 1, &users);
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
-
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
-
-    // Drain ICP reward pool
-    transfer(
-        &pic,
-        rewards_id,
-        icp_ledger_id,
-        Some(REWARD_POOL_SUB_ACCOUNT),
-        Account {
-            owner: Principal::anonymous(),
-            subaccount: None,
-        },
-        100_000_000_000u128 - 10_000u128,
-    )
-    .unwrap();
-    tick_n_blocks(&pic, 10);
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
     // Tuesday Jun 18, 2024, 9:00:00 AM
     pic.advance_time(Duration::from_millis(HOUR_IN_MS));
@@ -177,28 +134,28 @@ fn test_distribute_rewards_with_no_icp_rewards() {
         subaccount: Some(neuron_id.clone().into()),
     };
     assert_eq!(
-        balance_of(&pic, icp_ledger_id, neuron_account),
+        balance_of(&pic, ogy_ledger_id, neuron_account),
         Nat::from(0u64)
     );
-    assert!(balance_of(&pic, ogy_ledger_id, neuron_account) > Nat::from(0u64));
+    assert_eq!(
+        balance_of(&pic, ogy_ledger_id, neuron_account),
+        Nat::from(0u64)
+    );
 
-    let icp_history = get_historic_payment_round(
+    let ogy_history = get_historic_payment_round(
         &pic,
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::ICP,
+            token: TokenSymbol::OGY,
             round_id: 1,
         },
     );
-    assert_eq!(icp_history.len(), 0);
+    assert_eq!(ogy_history.len(), 0);
 
     let neuron = get_neuron_by_id(&pic, Principal::anonymous(), rewards_id, &neuron_id).unwrap();
-    assert_eq!(neuron.rewarded_maturity.get(&TokenSymbol::ICP), None);
-    assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::OGY),
-        Some(&100_000u64)
-    );
+    assert_eq!(neuron.rewarded_maturity.get(&TokenSymbol::OGY), None);
+    assert_eq!(neuron.rewarded_maturity.get(&TokenSymbol::OGY), None);
 }
 
 /// When a pool balance is below the minimum fee threshold, that token's round is skipped.
@@ -209,37 +166,28 @@ fn test_distribute_rewards_with_not_enough_rewards() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
+    fund_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
 
-    // Leave ICP pool just below the minimum needed to cover fees
-    let min_required = 10_000u64 * neuron_data.len() as u64 + 10_000u64;
+    // Leave OGY pool just below the minimum needed to cover fees
+    let min_required = 200_000u64 * neuron_data.len() as u64 + 200_000u64;
     transfer(
         &pic,
         rewards_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         Some(REWARD_POOL_SUB_ACCOUNT),
         Account {
             owner: Principal::anonymous(),
             subaccount: None,
         },
-        100_000_000_000u128 - 10_000u128 - (min_required - 10_000) as u128,
+        100_000_000_000u128 - 200_000u128 - (min_required - 200_000) as u128,
     )
     .unwrap();
 
@@ -255,16 +203,16 @@ fn test_distribute_rewards_with_not_enough_rewards() {
     pic.advance_time(Duration::from_millis(HOUR_IN_MS * 5)); // → 14:00
     tick_n_blocks(&pic, 40);
 
-    let icp_history = get_historic_payment_round(
+    let ogy_history = get_historic_payment_round(
         &pic,
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::ICP,
+            token: TokenSymbol::OGY,
             round_id: 1,
         },
     );
-    assert_eq!(icp_history.len(), 0);
+    assert_eq!(ogy_history.len(), 0);
 
     let active = get_active_payment_rounds(&pic, Principal::anonymous(), rewards_id, &());
     assert_eq!(active.len(), 0);
@@ -278,18 +226,7 @@ fn test_distribute_rewards_with_not_enough_rewards() {
             round_id: 1,
         },
     );
-    assert_eq!(ogy_history.len(), 1);
-
-    let goldao_history = get_historic_payment_round(
-        &pic,
-        Principal::anonymous(),
-        rewards_id,
-        &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::GOLDAO,
-            round_id: 1,
-        },
-    );
-    assert_eq!(goldao_history.len(), 1);
+    assert_eq!(ogy_history.len(), 0);
 }
 
 pub fn wait_1_day(pic: &pocket_ic::PocketIc) {
@@ -322,26 +259,17 @@ fn test_distribute_5y_rewards_happy_path() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
     println!("1 Time now is {:?}", pic.get_time()); // Tue Jun 18 2024 08:01:50 GMT+0000
 
-    fund_5y_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
+    fund_5y_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
 
     let neuron_id = neuron_data.get(&0usize).unwrap().id.clone().unwrap();
     // Tuesday Jun 18, 2024, 9:00:00 AM
@@ -363,17 +291,17 @@ fn test_distribute_5y_rewards_happy_path() {
     // 2. Check Neuron account got paid correctly
     // ********************************
     let n = neuron_data.len() as u64;
-    let fees = n * 10_000 + 10_000;
+    let fees = n * 200_000 + 200_000;
     let pool = (100_000_000_000u64 - fees) as f64;
     let expected_reward = (pool / n as f64) as u64;
-    assert_eq!(expected_reward, 9_999_989_000);
+    assert_eq!(expected_reward, 9999780000);
 
     let neuron_account = Account {
         owner: rewards_id,
         subaccount: Some(neuron_id.clone().into()),
     };
     assert_eq!(
-        balance_of(&pic, icp_ledger_id, neuron_account),
+        balance_of(&pic, ogy_ledger_id, neuron_account),
         expected_reward
     );
 
@@ -384,15 +312,7 @@ fn test_distribute_5y_rewards_happy_path() {
 
     let neuron = get_5y_neuron_by_id(&pic, env.controller, rewards_id, &neuron_id).unwrap();
     assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::ICP),
-        Some(&100_000u64)
-    );
-    assert_eq!(
         neuron.rewarded_maturity.get(&TokenSymbol::OGY),
-        Some(&100_000u64)
-    );
-    assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::GOLDAO),
         Some(&100_000u64)
     );
 
@@ -400,7 +320,7 @@ fn test_distribute_5y_rewards_happy_path() {
     assert!(
         neuron
             .rewarded_maturity
-            .get(&TokenSymbol::ICP)
+            .get(&TokenSymbol::OGY)
             .copied()
             .unwrap_or(0)
             > 0,
@@ -419,32 +339,18 @@ fn test_mixed_neurons_both_receive_rewards() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
     println!("1 Time now is {:?}", pic.get_time()); // Tue Jun 18 2024 08:01:50 GMT+0000
 
-    fund_5y_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
+    fund_5y_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
+    fund_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
 
     let neuron_id = neuron_data.get(&0usize).unwrap().id.clone().unwrap();
     // Tuesday Jun 18, 2024, 9:00:00 AM
@@ -467,17 +373,17 @@ fn test_mixed_neurons_both_receive_rewards() {
     // ********************************
     let n = neuron_data.len() as u64;
     let fees =
-        n * TokenSymbol::ICP.get_token_info(true).fee + TokenSymbol::ICP.get_token_info(true).fee;
+        n * TokenSymbol::OGY.get_token_info(true).fee + TokenSymbol::OGY.get_token_info(true).fee;
     let pool = (100_000_000_000u64 - fees) as f64;
     let expected_reward = 2 * (pool / n as f64) as u64; // NOTE: we expect 2x rewards since we funded both pools
-    assert_eq!(expected_reward, 19_999_978_000);
+    assert_eq!(expected_reward, 19999560000);
 
     let neuron_account = Account {
         owner: rewards_id,
         subaccount: Some(neuron_id.clone().into()),
     };
     assert_eq!(
-        balance_of(&pic, icp_ledger_id, neuron_account),
+        balance_of(&pic, ogy_ledger_id, neuron_account),
         expected_reward
     );
 
@@ -488,29 +394,13 @@ fn test_mixed_neurons_both_receive_rewards() {
 
     let neuron = get_neuron_by_id(&pic, env.controller, rewards_id, &neuron_id).unwrap();
     assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::ICP),
-        Some(&100_000u64)
-    );
-    assert_eq!(
         neuron.rewarded_maturity.get(&TokenSymbol::OGY),
-        Some(&100_000u64)
-    );
-    assert_eq!(
-        neuron.rewarded_maturity.get(&TokenSymbol::GOLDAO),
         Some(&100_000u64)
     );
 
     let neuron_5y = get_5y_neuron_by_id(&pic, env.controller, rewards_id, &neuron_id).unwrap();
     assert_eq!(
-        neuron_5y.rewarded_maturity.get(&TokenSymbol::ICP),
-        Some(&100_000u64)
-    );
-    assert_eq!(
         neuron_5y.rewarded_maturity.get(&TokenSymbol::OGY),
-        Some(&100_000u64)
-    );
-    assert_eq!(
-        neuron_5y.rewarded_maturity.get(&TokenSymbol::GOLDAO),
         Some(&100_000u64)
     );
 }
@@ -528,24 +418,15 @@ fn test_mixed_neurons_standard_and_5y_rounds_are_independent() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(all_neurons.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
     let ogy_sns = env.get_sns(SnsProject::Ogy);
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
-    fund_reward_pools(
-        &pic,
-        rewards_id,
-        &[icp_ledger_id, ogy_ledger_id, goldao_ledger_id],
-        100_000_000_000,
-    );
+    fund_reward_pools(&pic, rewards_id, &[ogy_ledger_id], 100_000_000_000);
 
     let regular_id = regular_neurons.get(&0usize).unwrap().id.clone().unwrap();
     let five_y_id = five_y_neurons.get(&5usize).unwrap().id.clone().unwrap();
@@ -564,7 +445,7 @@ fn test_mixed_neurons_standard_and_5y_rounds_are_independent() {
 
     let regular_balance = balance_of(
         &pic,
-        icp_ledger_id,
+        ogy_ledger_id,
         Account {
             owner: rewards_id,
             subaccount: Some(regular_id.into()),
@@ -572,7 +453,7 @@ fn test_mixed_neurons_standard_and_5y_rounds_are_independent() {
     );
     let five_y_balance = balance_of(
         &pic,
-        icp_ledger_id,
+        ogy_ledger_id,
         Account {
             owner: rewards_id,
             subaccount: Some(five_y_id.into()),

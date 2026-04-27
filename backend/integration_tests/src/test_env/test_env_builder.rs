@@ -107,9 +107,26 @@ impl TestEnv {
         setup_rewards::setup(
             &self.pic.borrow(),
             canister_id,
-            self.get_ledger_canister_id(TokenSymbol::ICP).unwrap(),
             self.get_ledger_canister_id(TokenSymbol::OGY).unwrap(),
-            self.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap(),
+            sns_gov_canister_id,
+            &self.controller,
+        )
+    }
+
+    pub fn install_goldao_rewards(
+        &self,
+        canister_id: Principal,
+        sns_gov_canister_id: Principal,
+        icp_ledger_canister_id: Principal,
+        ogy_ledger_canister_id: Principal,
+        sns_ledger_canister_id: Principal,
+    ) -> Principal {
+        setup_rewards::setup_goldao(
+            &self.pic.borrow(),
+            canister_id,
+            icp_ledger_canister_id,
+            sns_ledger_canister_id,
+            ogy_ledger_canister_id,
             sns_gov_canister_id,
             &self.controller,
         )
@@ -120,8 +137,6 @@ impl TestEnv {
         canister_id: Principal,
         rewards_destination: Option<Principal>,
         ogy_sns_governance_canister_id: Principal,
-        ogy_sns_ledger_canister_id: Principal,
-        ogy_sns_rewards_canister_id: Principal,
         goldao_sns_governance_canister_id: Principal,
         goldao_sns_ledger_canister_id: Principal,
         goldao_sns_rewards_canister_id: Principal,
@@ -132,8 +147,6 @@ impl TestEnv {
             vec![self.controller],
             rewards_destination,
             ogy_sns_governance_canister_id,
-            ogy_sns_ledger_canister_id,
-            ogy_sns_rewards_canister_id,
             goldao_sns_governance_canister_id,
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,

@@ -7,8 +7,6 @@ pub struct InitArgs {
     pub test_mode: bool,
     pub version: BuildVersion,
     pub commit_hash: String,
-    pub icp_ledger_canister_id: Principal,
     pub sns_ledger_canister_id: Principal,
-    pub goldao_ledger_canister_id: Principal,
     pub sns_gov_canister_id: Principal,
 }

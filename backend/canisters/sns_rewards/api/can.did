@@ -123,4 +123,6 @@ service : (Args_4) -> {
   set_daily_ogy_burn_rate : (nat) -> (Response_1);
   set_reserve_transfer_amounts : (Args_2) -> (Response_1);
   set_reward_token_types : (Args_3) -> (Response_2);
+  trigger_run_distribution : () -> ();
+  trigger_sync_neurons : () -> ();
 }

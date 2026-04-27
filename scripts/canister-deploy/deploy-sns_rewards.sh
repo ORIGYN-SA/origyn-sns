@@ -7,18 +7,13 @@ DEPLOYMENT_VIA="proposal"
 
 if [[ $REINSTALL == "reinstall" ]]; then
 
+  SNS_GOVERNANCE_CANISTER_ID=$(dfx canister id sns_governance --network "$NETWORK")
+  SNS_LEDGER_CANISTER_ID=$(dfx canister id sns_ledger --network "$NETWORK")
+
   if [[ $NETWORK =~ ^(local|staging)$ ]]; then
     TESTMODE=true
-    ICP_LEDGER_CANISTER_ID=ete3q-rqaaa-aaaal-qdlva-cai
-    SNS_LEDGER_CANISTER_ID=irhm6-5yaaa-aaaap-ab24q-cai
-    GOLDAO_LEDGER_CANISTER_ID=j5naj-nqaaa-aaaal-ajc7q-cai
-    SNS_GOVERNANCE_CANISTER_ID=j3ioe-7iaaa-aaaap-ab23q-cai
   elif [[ $NETWORK =~ ^(ic)$ ]]; then
     TESTMODE=false
-    ICP_LEDGER_CANISTER_ID=ryjl3-tyaaa-aaaaa-aaaba-cai
-    SNS_LEDGER_CANISTER_ID=tyyy3-4aaaa-aaaaq-aab7a-cai
-    GOLDAO_LEDGER_CANISTER_ID=lkwrt-vyaaa-aaaaq-aadhq-cai
-    SNS_GOVERNANCE_CANISTER_ID=tr3th-kiaaa-aaaaq-aab6q-cai
   else
     echo "Error: unknown network for deployment. Found $NETWORK."
     exit 2
@@ -28,9 +23,7 @@ if [[ $REINSTALL == "reinstall" ]]; then
     test_mode = $TESTMODE;
     commit_hash = \"$COMMIT_SHA\";
     version = $BUILD_VERSION;
-    icp_ledger_canister_id = principal \"$ICP_LEDGER_CANISTER_ID\";
     sns_ledger_canister_id = principal \"$SNS_LEDGER_CANISTER_ID\";
-    goldao_ledger_canister_id = principal \"$GOLDAO_LEDGER_CANISTER_ID\";
     sns_gov_canister_id = principal \"$SNS_GOVERNANCE_CANISTER_ID\"
   }})"
 

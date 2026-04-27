@@ -22,8 +22,6 @@ fn test_distribute_rewards_adds_to_history_correctly() {
 
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(neuron_data.clone()))
-        .add_token_ledger(&TokenSymbol::ICP)
-        .add_token_ledger(&TokenSymbol::GOLDAO)
         .build();
 
     let pic = env.pic.borrow();
@@ -31,11 +29,9 @@ fn test_distribute_rewards_adds_to_history_correctly() {
 
     let rewards_id = env.install_rewards(rewards_canister_id(), ogy_sns.test_env.governance_id);
 
-    let icp_ledger_id = env.get_ledger_canister_id(TokenSymbol::ICP).unwrap();
-    let ogy_ledger_id = ogy_sns.test_env.ledger_id;
-    let goldao_ledger_id = env.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap();
+    let ogy_ledger_id = env.get_ledger_canister_id(TokenSymbol::OGY).unwrap();
 
-    let all_ledgers = vec![icp_ledger_id, ogy_ledger_id, goldao_ledger_id];
+    let all_ledgers = vec![ogy_ledger_id];
 
     // ================================
     // 1. Initial Funding + First Activity
@@ -57,7 +53,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
                 Principal::anonymous(),
                 rewards_id,
                 &GetHistoricPaymentRoundArgs {
-                    token: TokenSymbol::ICP,
+                    token: TokenSymbol::OGY,
                     round_id: 1,
                 },
             )
@@ -84,7 +80,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
                 Principal::anonymous(),
                 rewards_id,
                 &GetHistoricPaymentRoundArgs {
-                    token: TokenSymbol::ICP,
+                    token: TokenSymbol::OGY,
                     round_id: 2,
                 },
             )
@@ -104,7 +100,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::ICP,
+            token: TokenSymbol::OGY,
             round_id: 1,
         },
     );
@@ -115,7 +111,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::ICP,
+            token: TokenSymbol::OGY,
             round_id: 2,
         },
     );
@@ -131,7 +127,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
     ));
 
     // ================================
-    // 4. Third Round (GOLDAO)
+    // 4. Third Round (OGY)
     // ================================
     fund_reward_pools(&pic, rewards_id, &all_ledgers, 100_000_000_000);
     simulate_voting(&pic, &ogy_sns.test_env, &neuron_data, 40, &users);
@@ -146,7 +142,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
                 Principal::anonymous(),
                 rewards_id,
                 &GetHistoricPaymentRoundArgs {
-                    token: TokenSymbol::ICP,
+                    token: TokenSymbol::OGY,
                     round_id: 3,
                 },
             )
@@ -161,7 +157,7 @@ fn test_distribute_rewards_adds_to_history_correctly() {
         Principal::anonymous(),
         rewards_id,
         &GetHistoricPaymentRoundArgs {
-            token: TokenSymbol::GOLDAO,
+            token: TokenSymbol::OGY,
             round_id: 3,
         },
     );
@@ -171,5 +167,5 @@ fn test_distribute_rewards_adds_to_history_correctly() {
         third_dist_time
     ));
 
-    assert_eq!(res_3.len(), 1, "Failed to find GOLDAO Round 3");
+    assert_eq!(res_3.len(), 1, "Failed to find OGY Round 3");
 }

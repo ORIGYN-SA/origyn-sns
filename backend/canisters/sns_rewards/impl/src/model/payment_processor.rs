@@ -75,18 +75,18 @@ impl PaymentProcessor {
     }
 
     /// Increments the internal key counter and handles the u16 wrap-around logic.
-    fn increment_next_key(&mut self) {
+    pub fn increment_next_key(&mut self) {
         if self.next_key == u16::MAX {
             self.next_key = 1;
         } else {
             self.next_key += 1;
         }
     }
-    
+
     pub fn add_active_payment_round(&mut self, flow: NeuronFlow, round: PaymentRound) {
         // Insert into the appropriate active map
         self.rounds_mut(flow).insert(round.token, round);
-        
+
         // // Increment the key for the next round
         // self.increment_next_key();
     }
@@ -149,7 +149,11 @@ impl PaymentProcessor {
     pub fn add_to_history(&mut self, payment_round: PaymentRound) {
         // NOTE: Ensure that if we add something to history, the next_key stays ahead of the ID we just added
         if payment_round.id >= self.next_key {
-            self.next_key = if payment_round.id == u16::MAX { 1 } else { payment_round.id + 1 };
+            self.next_key = if payment_round.id == u16::MAX {
+                1
+            } else {
+                payment_round.id + 1
+            };
         }
 
         self.round_history
@@ -180,10 +184,10 @@ impl PaymentProcessor {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::state::{init_state, mutate_state, read_state, RuntimeState};
     use candid::{Nat, Principal};
     use std::collections::BTreeMap;
     use types::TokenSymbol;
-    use crate::state::{init_state, mutate_state, read_state, RuntimeState};
 
     fn init_runtime_state() {
         init_state(RuntimeState::default());
@@ -215,21 +219,27 @@ mod tests {
 
         // 2. Add round 1 (ICP). next_key should become 2.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(mock_round(1, TokenSymbol::ICP));
+            s.data
+                .payment_processor
+                .add_to_history(mock_round(1, TokenSymbol::ICP));
         });
         read_state(|s| assert_eq!(s.data.payment_processor.next_key, 2));
 
-        // 3. Add round 1 again (for a different token OGY). 
-        // Logic in add_to_history says if id >= next_key, update. 
+        // 3. Add round 1 again (for a different token OGY).
+        // Logic in add_to_history says if id >= next_key, update.
         // Here 1 is not >= 2, so next_key remains 2.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(mock_round(1, TokenSymbol::OGY));
+            s.data
+                .payment_processor
+                .add_to_history(mock_round(1, TokenSymbol::OGY));
         });
         read_state(|s| assert_eq!(s.data.payment_processor.next_key, 2));
 
         // 4. Add round 2 (ICP). next_key should become 3.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(mock_round(2, TokenSymbol::ICP));
+            s.data
+                .payment_processor
+                .add_to_history(mock_round(2, TokenSymbol::ICP));
         });
         read_state(|s| assert_eq!(s.data.payment_processor.next_key, 3));
     }
@@ -238,10 +248,12 @@ mod tests {
     fn test_next_key_jumps_on_skipped_ids() {
         init_runtime_state();
 
-        // If we manually insert a round with a much higher ID, 
+        // If we manually insert a round with a much higher ID,
         // next_key should jump to preserve uniqueness for future rounds.
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(mock_round(10, TokenSymbol::ICP));
+            s.data
+                .payment_processor
+                .add_to_history(mock_round(10, TokenSymbol::ICP));
         });
 
         read_state(|s| {
@@ -255,7 +267,9 @@ mod tests {
 
         // Simulate reaching the maximum value for u16
         mutate_state(|s| {
-            s.data.payment_processor.add_to_history(mock_round(u16::MAX, TokenSymbol::ICP));
+            s.data
+                .payment_processor
+                .add_to_history(mock_round(u16::MAX, TokenSymbol::ICP));
         });
 
         read_state(|s| {
@@ -268,7 +282,7 @@ mod tests {
     fn test_flow_selection() {
         let mut processor = PaymentProcessor::default();
         let icp = TokenSymbol::ICP;
-        
+
         // Ensure regular and 5y flows are separate
         processor.add_active_payment_round(NeuronFlow::Regular, mock_round(1, icp.clone()));
         processor.add_active_payment_round(NeuronFlow::FiveYear, mock_round(1, icp.clone()));

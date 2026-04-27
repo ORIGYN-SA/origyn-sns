@@ -26,9 +26,9 @@ fn test_reward_claim_happy_path() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
+    let ogy_ledger_id = test_env
         .token_ledgers
-        .get("icp_ledger_canister_id")
+        .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -54,7 +54,7 @@ fn test_reward_claim_happy_path() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         None,
         neuron_account_1,
         100_000_000_00u64,
@@ -72,7 +72,7 @@ fn test_reward_claim_happy_path() {
         &(ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         }),
     );
@@ -86,11 +86,11 @@ fn test_reward_claim_happy_path() {
         owner: user_1.clone(),
         subaccount: None,
     };
-    let user_1_icp_balance = balance_of(&pic, icp_ledger_id, user_1_account);
+    let user_1_ogy_balance = balance_of(&pic, ogy_ledger_id, user_1_account);
     tick_n_blocks(&pic, 10);
     assert_eq!(
-        user_1_icp_balance,
-        Nat::from(100_000_000_00u64) - Nat::from(10_000u64)
+        user_1_ogy_balance,
+        Nat::from(100_000_000_00u64) - Nat::from(200_000u64)
     );
     tick_n_blocks(&pic, 20);
 }
@@ -100,19 +100,9 @@ fn test_reward_batch_claim_happy_path() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
-        .token_ledgers
-        .get("icp_ledger_canister_id")
-        .unwrap()
-        .clone();
     let ogy_ledger_id = test_env
         .token_ledgers
         .get("ogy_ledger_canister_id")
-        .unwrap()
-        .clone();
-    let goldao_ledger_id = test_env
-        .token_ledgers
-        .get("goldao_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -135,30 +125,12 @@ fn test_reward_batch_claim_happy_path() {
         owner: rewards_canister_id,
         subaccount: Some(neuron_id_1.clone().into()),
     };
-    transfer(
-        &pic,
-        test_env.sns_gov_canister_id,
-        icp_ledger_id,
-        None,
-        neuron_account_1,
-        100_000_000_00u64,
-    )
-    .unwrap();
+
     tick_n_blocks(&pic, 10);
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
         ogy_ledger_id,
-        None,
-        neuron_account_1,
-        100_000_000_00u64,
-    )
-    .unwrap();
-    tick_n_blocks(&pic, 10);
-    transfer(
-        &pic,
-        test_env.sns_gov_canister_id,
-        goldao_ledger_id,
         None,
         neuron_account_1,
         100_000_000_00u64,
@@ -174,20 +146,10 @@ fn test_reward_batch_claim_happy_path() {
         user_1,
         rewards_canister_id,
         &ClaimRewardBatchArgs {
-            claim_reward_args: vec![
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::ICP,
-                },
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::OGY,
-                },
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::GOLDAO,
-                },
-            ],
+            claim_reward_args: vec![ClaimRewardArgs {
+                neuron_id: neuron_id_1.clone(),
+                token: types::TokenSymbol::OGY,
+            }],
         },
     );
 
@@ -201,21 +163,12 @@ fn test_reward_batch_claim_happy_path() {
         owner: user_1.clone(),
         subaccount: None,
     };
-    let user_1_icp_balance = balance_of(&pic, icp_ledger_id, user_1_account);
     let user_1_ogy_balance = balance_of(&pic, ogy_ledger_id, user_1_account);
-    let user_1_goldao_balance = balance_of(&pic, goldao_ledger_id, user_1_account);
     tick_n_blocks(&pic, 10);
-    assert_eq!(
-        user_1_icp_balance,
-        Nat::from(100_000_000_00u64) - Nat::from(10_000u64)
-    );
+
     assert_eq!(
         user_1_ogy_balance,
         Nat::from(100_000_000_00u64) - Nat::from(200_000u64)
-    );
-    assert_eq!(
-        user_1_goldao_balance,
-        Nat::from(100_000_000_00u64) - Nat::from(100_000u64)
     );
 }
 
@@ -224,21 +177,12 @@ fn test_reward_batch_claim_partial_tokens() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
-        .token_ledgers
-        .get("icp_ledger_canister_id")
-        .unwrap()
-        .clone();
     let ogy_ledger_id = test_env
         .token_ledgers
         .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
-    let goldao_ledger_id = test_env
-        .token_ledgers
-        .get("goldao_ledger_canister_id")
-        .unwrap()
-        .clone();
+
     let rewards_canister_id = test_env.rewards_canister_id;
 
     let user_1 = test_env.users.get(0).unwrap().clone();
@@ -253,22 +197,12 @@ fn test_reward_batch_claim_partial_tokens() {
     assert!(neuron_1.permissions.get(0).unwrap().principal == Some(user_1));
 
     // ********************************
-    // 1. simulate distribution - add reward to neuron (only ICP and OGY, no GOLDAO)
+    // 1. simulate distribution - add reward to neuron
     // ********************************
     let neuron_account_1 = Account {
         owner: rewards_canister_id,
         subaccount: Some(neuron_id_1.clone().into()),
     };
-    transfer(
-        &pic,
-        test_env.sns_gov_canister_id,
-        icp_ledger_id,
-        None,
-        neuron_account_1,
-        75_000_000_00u64,
-    )
-    .unwrap();
-    tick_n_blocks(&pic, 10);
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
@@ -281,23 +215,17 @@ fn test_reward_batch_claim_partial_tokens() {
     tick_n_blocks(&pic, 10);
 
     // ********************************
-    // 3. claim reward - as user_1 (request ICP and OGY only)
+    // 3. claim reward - as user_1
     // ********************************
     let res = claim_rewards_batch(
         &pic,
         user_1,
         rewards_canister_id,
         &ClaimRewardBatchArgs {
-            claim_reward_args: vec![
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::ICP,
-                },
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::OGY,
-                },
-            ],
+            claim_reward_args: vec![ClaimRewardArgs {
+                neuron_id: neuron_id_1.clone(),
+                token: types::TokenSymbol::OGY,
+            }],
         },
     );
     tick_n_blocks(&pic, 20);
@@ -310,20 +238,13 @@ fn test_reward_batch_claim_partial_tokens() {
         owner: user_1.clone(),
         subaccount: None,
     };
-    let user_1_icp_balance = balance_of(&pic, icp_ledger_id, user_1_account);
     let user_1_ogy_balance = balance_of(&pic, ogy_ledger_id, user_1_account);
-    let user_1_goldao_balance = balance_of(&pic, goldao_ledger_id, user_1_account);
     tick_n_blocks(&pic, 10);
-    assert_eq!(
-        user_1_icp_balance,
-        Nat::from(75_000_000_00u64) - Nat::from(10_000u64)
-    );
+
     assert_eq!(
         user_1_ogy_balance,
         Nat::from(125_000_000_00u64) - Nat::from(200_000u64)
     );
-    // GOLDAO balance should be 0 since no rewards were distributed
-    assert_eq!(user_1_goldao_balance, Nat::from(0u64));
 }
 
 #[test]
@@ -331,9 +252,9 @@ fn test_reward_batch_claim_empty_tokens_list() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
+    let ogy_ledger_id = test_env
         .token_ledgers
-        .get("icp_ledger_canister_id")
+        .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -359,7 +280,7 @@ fn test_reward_batch_claim_empty_tokens_list() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         None,
         neuron_account_1,
         100_000_000_00u64,
@@ -388,10 +309,10 @@ fn test_reward_batch_claim_empty_tokens_list() {
         owner: user_1.clone(),
         subaccount: None,
     };
-    let user_1_icp_balance = balance_of(&pic, icp_ledger_id, user_1_account);
+    let user_1_ogy_balance = balance_of(&pic, ogy_ledger_id, user_1_account);
     tick_n_blocks(&pic, 10);
     // Should be 0 or minimal since no tokens were claimed
-    assert_eq!(user_1_icp_balance, Nat::from(0u64));
+    assert_eq!(user_1_ogy_balance, Nat::from(0u64));
 }
 
 #[test]
@@ -399,19 +320,9 @@ fn test_reward_batch_claim_different_amounts() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
-        .token_ledgers
-        .get("icp_ledger_canister_id")
-        .unwrap()
-        .clone();
     let ogy_ledger_id = test_env
         .token_ledgers
         .get("ogy_ledger_canister_id")
-        .unwrap()
-        .clone();
-    let goldao_ledger_id = test_env
-        .token_ledgers
-        .get("goldao_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -439,30 +350,10 @@ fn test_reward_batch_claim_different_amounts() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
-        None,
-        neuron_account_1,
-        200_000_000_00u64,
-    )
-    .unwrap();
-    tick_n_blocks(&pic, 10);
-    transfer(
-        &pic,
-        test_env.sns_gov_canister_id,
         ogy_ledger_id,
         None,
         neuron_account_1,
         50_000_000_00u64,
-    )
-    .unwrap();
-    tick_n_blocks(&pic, 10);
-    transfer(
-        &pic,
-        test_env.sns_gov_canister_id,
-        goldao_ledger_id,
-        None,
-        neuron_account_1,
-        300_000_000_00u64,
     )
     .unwrap();
     tick_n_blocks(&pic, 10);
@@ -475,20 +366,10 @@ fn test_reward_batch_claim_different_amounts() {
         user_1,
         rewards_canister_id,
         &ClaimRewardBatchArgs {
-            claim_reward_args: vec![
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::ICP,
-                },
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::OGY,
-                },
-                ClaimRewardArgs {
-                    neuron_id: neuron_id_1.clone(),
-                    token: types::TokenSymbol::GOLDAO,
-                },
-            ],
+            claim_reward_args: vec![ClaimRewardArgs {
+                neuron_id: neuron_id_1.clone(),
+                token: types::TokenSymbol::OGY,
+            }],
         },
     );
     tick_n_blocks(&pic, 20);
@@ -501,21 +382,12 @@ fn test_reward_batch_claim_different_amounts() {
         owner: user_1.clone(),
         subaccount: None,
     };
-    let user_1_icp_balance = balance_of(&pic, icp_ledger_id, user_1_account);
     let user_1_ogy_balance = balance_of(&pic, ogy_ledger_id, user_1_account);
-    let user_1_goldao_balance = balance_of(&pic, goldao_ledger_id, user_1_account);
     tick_n_blocks(&pic, 10);
-    assert_eq!(
-        user_1_icp_balance,
-        Nat::from(200_000_000_00u64) - Nat::from(10_000u64)
-    );
+
     assert_eq!(
         user_1_ogy_balance,
         Nat::from(50_000_000_00u64) - Nat::from(200_000u64)
-    );
-    assert_eq!(
-        user_1_goldao_balance,
-        Nat::from(300_000_000_00u64) - Nat::from(100_000u64)
     );
 }
 
@@ -524,9 +396,9 @@ fn test_neuron_with_no_hotkey() {
     let test_env = test_setup_with_no_neuron_hotkeys(); // every neuron has no hotkey
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
+    let ogy_ledger_id = test_env
         .token_ledgers
-        .get("icp_ledger_canister_id")
+        .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -554,7 +426,7 @@ fn test_neuron_with_no_hotkey() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         None,
         neuron_account_1,
         100_000_000_00u64,
@@ -568,7 +440,7 @@ fn test_neuron_with_no_hotkey() {
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         },
     );
@@ -584,7 +456,7 @@ fn test_neuron_with_no_hotkey() {
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         },
     );
@@ -596,9 +468,9 @@ fn test_claim_rewards_batch_failures() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
+    let ogy_ledger_id = test_env
         .token_ledgers
-        .get("icp_ledger_canister_id")
+        .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -626,7 +498,7 @@ fn test_claim_rewards_batch_failures() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         None,
         neuron_account_1,
         100_000_000_00u64,
@@ -643,7 +515,7 @@ fn test_claim_rewards_batch_failures() {
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         },
     );
@@ -659,9 +531,9 @@ fn test_claim_rewards_batch_fails_if_there_are_no_rewards() {
     let test_env = default_test_setup();
     let pic = test_env.pic.borrow();
 
-    let icp_ledger_id = test_env
+    let ogy_ledger_id = test_env
         .token_ledgers
-        .get("icp_ledger_canister_id")
+        .get("ogy_ledger_canister_id")
         .unwrap()
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
@@ -693,7 +565,7 @@ fn test_claim_rewards_batch_fails_if_there_are_no_rewards() {
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         },
     );
@@ -705,7 +577,7 @@ fn test_claim_rewards_batch_fails_if_there_are_no_rewards() {
     transfer(
         &pic,
         test_env.sns_gov_canister_id,
-        icp_ledger_id,
+        ogy_ledger_id,
         None,
         neuron_account_1,
         5_000u64,
@@ -719,7 +591,7 @@ fn test_claim_rewards_batch_fails_if_there_are_no_rewards() {
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
                 neuron_id: neuron_id_1.clone(),
-                token: types::TokenSymbol::ICP,
+                token: types::TokenSymbol::OGY,
             }],
         },
     );
