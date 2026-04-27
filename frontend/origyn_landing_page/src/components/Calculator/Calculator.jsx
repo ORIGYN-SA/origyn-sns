@@ -11,7 +11,7 @@ const Calculator = () => {
   const [calculations, setCalculations] = useState({
     collections: 0,
     storage: 0,
-    certificates: 0,
+    certificates: 1,
     certificateUpdates: 0,
     storageSize: 0,
   });
