@@ -58,7 +58,7 @@ const fetchTotalBurnedOGYTimeSeriesQuery = ({
     queryFn: async () => fn({ period }),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalBurnedOGYTimeSeries>;
 };
 
 export default fetchTotalBurnedOGYTimeSeriesQuery;
