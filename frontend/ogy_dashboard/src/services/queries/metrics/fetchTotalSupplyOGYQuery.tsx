@@ -39,7 +39,7 @@ const fetchTotalSupplyOGYQuery = ({ options }: TotalSupplyOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalSupplyOGY>;
 };
 
 export default fetchTotalSupplyOGYQuery;
