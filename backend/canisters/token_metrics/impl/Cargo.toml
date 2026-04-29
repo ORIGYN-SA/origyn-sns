@@ -1,0 +1,45 @@
+[package]
+name = "token_metrics"
+version = "0.1.0"
+description = "Canister to expose metrics about the token."
+edition = "2021"
+
+[features]
+inttest = []
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+candid = { workspace = true }
+minicbor = { workspace = true }
+num-traits = { workspace = true }
+bity-ic-canister-logger = { workspace = true }
+bity-ic-canister-state-macros = { workspace = true }
+bity-ic-canister-time = { workspace = true }
+bity-ic-canister-tracing-macros = { workspace = true }
+futures = { workspace = true }
+hex = { workspace = true }
+http_request = { path = '../../../libraries/http_request' }
+ic-cdk = { workspace = true }
+ic-cdk-macros = { workspace = true }
+ic-cdk-timers = { workspace = true }
+ic-stable-structures = { workspace = true }
+icrc-ledger-types = { workspace = true }
+ic-ledger-types = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+bity-ic-serializer = { workspace = true }
+anyhow = { workspace = true }
+bity-ic-types = { workspace = true }
+sns_governance_canister = { path = '../../../external_canisters/sns_governance/api' }
+sns_governance_canister_c2c_client = { path = '../../../external_canisters/sns_governance/c2c_client' }
+icrc_ledger_canister_c2c_client = { path = "../../../external_canisters/icrc_ledger/c2c_client" }
+ledger_utils = { path = "../../../libraries/ledger_utils" }
+num-bigint = { workspace = true }
+serde_bytes = { workspace = true }
+bity-ic-stable-memory = { workspace = true }
+tracing = { workspace = true }
+types = { path = '../../../libraries/types' }
+utils = { path = '../../../libraries/utils' }
+token_metrics_api = { path = "../api" }

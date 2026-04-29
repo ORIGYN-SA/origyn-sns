@@ -30,7 +30,7 @@ const useGetTransactionStats = ({ period }: { period: string }) => {
     useQuery<TransactionStats, Error>({
       queryKey: ["TRANSACTION_STATS", period],
       queryFn: async (): Promise<TransactionStats> => {
-        const actor = await getActor("tokenStats", { isAnon: true });
+        const actor = await getActor("tokenMetrics", { isAnon: true });
         const results = await actor.get_daily_stats();
         const { count_over_time } = results as TimeStats;
 

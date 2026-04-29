@@ -30,7 +30,6 @@ export const idlFactory = ({ IDL }) => {
     total_unique_principals: IDL.Nat64,
   });
   const ProcessedTX = IDL.Record({
-    hash: IDL.Text,
     to_account: IDL.Text,
     tx_value: IDL.Nat,
     from_account: IDL.Text,
@@ -94,18 +93,12 @@ export const idlFactory = ({ IDL }) => {
     directory_count: IDL.Nat64,
     is_busy: IDL.Bool,
   });
-  const IndexerType = IDL.Variant({
-    DfinityIcrc2: IDL.Null,
-    DfinityIcrc3: IDL.Null,
-    DfinityIcp: IDL.Null,
-  });
   const TargetArgs = IDL.Record({
     daily_size: IDL.Nat8,
     target_ledger: IDL.Text,
     hourly_size: IDL.Nat8,
   });
   const InitLedgerArgs = IDL.Record({
-    index_type: IndexerType,
     target: TargetArgs,
   });
   return IDL.Service({

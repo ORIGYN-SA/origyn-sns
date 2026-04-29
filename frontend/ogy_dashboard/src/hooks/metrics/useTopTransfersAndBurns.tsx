@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getActor } from "@amerej/artemis-react";
 import { DateTime } from "luxon";
-import { TimeStats } from "@hooks/super_stats_v3/declarations";
+import { TimeStats } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 
@@ -51,7 +51,7 @@ const useTopTransfersAndBurns = ({
   }: UseQueryResult<TimeStats> = useQuery<TimeStats, Error>({
     queryKey: ["TOP_TRANSFERS_AND_BURNS", type],
     queryFn: async (): Promise<TimeStats> => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const stats = (await actor.get_daily_stats()) as TimeStats;
       return stats;
     },

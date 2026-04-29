@@ -3,7 +3,7 @@ import {
   keepPreviousData,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { Overview } from "./declarations";
+import { OverviewResponse as Overview } from "@hooks/token_metrics/declarations_files/token_metrics";
 
 import { getPrincipalOverview } from "./queries";
 
