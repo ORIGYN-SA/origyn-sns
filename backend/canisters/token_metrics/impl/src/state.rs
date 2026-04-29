@@ -291,7 +291,6 @@ pub struct SyncInfo {
     pub last_synced_start: TimestampMillis,
     pub last_synced_end: TimestampMillis,
     pub last_synced_number_of_neurons: usize,
-    pub last_synced_transaction: usize,
     pub last_synced_number_of_proposals: usize,
     pub last_synced_proposal_id: Option<ProposalId>,
     pub ongoing_proposals: Vec<ProposalId>,

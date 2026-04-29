@@ -62,14 +62,16 @@ pub async fn sync_proposals_metrics_data() {
                     }
                 }
 
+                let mut hit_already_synced = false;
                 for proposal in &response.proposals {
                     if let Some(last_from_state) = &last_synced_proposal_id {
                         match proposal.id {
                             Some(proposal_id) if proposal_id.id <= last_from_state.id => {
-                                // Stop if we reached a proposal we already scanned
+                                hit_already_synced = true;
                                 break;
                             }
                             None => {
+                                hit_already_synced = true;
                                 break;
                             }
                             _ => {}
@@ -81,6 +83,15 @@ pub async fn sync_proposals_metrics_data() {
                     }
                     analyze_proposal(proposal);
                     number_of_scanned_proposals += 1;
+                }
+
+                // Once we encounter an already-synced proposal, all older proposals
+                // are also synced — bail the outer loop. Without this, if the break
+                // happens on the first proposal of a full page, args.before_proposal
+                // is never advanced and the next iteration repeats the identical
+                // query, looping until the canister traps on instruction limit.
+                if hit_already_synced {
+                    break;
                 }
 
                 if number_of_received_proposals == (args.limit as usize) {
