@@ -1,0 +1,80 @@
+@use "styles/variables" as *;
+
+.container {
+  padding-top: 96px;
+  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 92px;
+  background-color: $bg-light;
+  align-items: center;
+
+  @media (max-width: $bp-md) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+.titleDesktop {
+  @include type('display');
+  letter-spacing: 0%;
+  text-align: center;
+  color: $color-text;
+  display: block;
+
+  @media (max-width: $bp-md) {
+    display: none;
+  }
+}
+
+.titleMobile {
+  display: none;
+
+  @media (max-width: $bp-md) {
+    display: block;
+    font-size: $fs-44;
+    line-height: 1.35;
+    font-family: $font-sans;
+    font-weight: 300;
+    letter-spacing: 0%;
+    text-align: center;
+    color: $color-text;
+  }
+}
+
+.italic {
+  font-family: $font-italic;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.origynWhiteLogoContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gradientBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -60%);
+  width: 500px;
+  height: 500px;
+  background-image: radial-gradient(circle at center, rgba(117, 255, 128, 0.15) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.origynWhiteLogo {
+  width: 250px;
+  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 1;
+}

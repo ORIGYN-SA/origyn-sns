@@ -1,0 +1,113 @@
+@use "styles/variables" as *;
+@use "../../token-section" as *;
+
+.tokenomics {
+  @include split-section;
+  padding: 45px 0;
+
+  @media (max-width: $bp-lg) {
+    padding: $section-v-padding-mobile 16px;
+  }
+}
+
+.tokenomicsContent {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: 95px;
+  padding-top: 35px;
+
+  @include split-section-text;
+
+
+  @media (max-width: $bp-lg) {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 77px;
+
+    i {
+      font-weight: 400;
+    }
+
+    @media (max-width: $bp-lg) {
+      margin-bottom: 55px;
+    }
+  }
+
+  p {
+    color: $color-muted;
+    margin-bottom: 16px;
+
+    b {
+      font-weight: 600;
+    }
+  }
+
+  .tokenomicsSupport {
+    margin-top: 35px;
+  }
+}
+
+.tokenomicsButton {
+  margin: 73px auto 0 auto;
+
+  @media (max-width: $bp-lg) {
+    margin: 50px auto 70px auto;
+  }
+}
+
+.tokenomicsChart {
+  width: 50%;
+
+  @media (max-width: $bp-lg) {
+    width: 100%;
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+    border-radius: 16px;
+    border: 1px solid $bg-light;
+  }
+
+  .sliderTrack {
+    display: flex;
+    will-change: transform;
+  }
+
+  .sliderSlide {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .dotsContainer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 42px;
+
+    @media (max-width: $bp-lg) {
+      margin-top: 92px;
+    }
+  }
+
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.5px solid currentColor;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .activeDot {
+    background-color: currentColor;
+  }
+}

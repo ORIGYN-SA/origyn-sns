@@ -88,7 +88,6 @@ impl From<DataV0> for Data {
             neuron_system: NeuronSystem {
                 sync_info: v0.sync_info,
                 neuron_maturity: neuron_maturity.clone(),
-                // FIXME: decide whether store the previous maturity rewarded or pay out one-time rewards bigger (like with goldao)
                 neuron_maturity_5y: neuron_maturity,
                 maturity_history: MaturityHistory::default(),
             },

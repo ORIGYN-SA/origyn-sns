@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import { ChartData } from "@services/types/charts.types";
 import { getActor } from "@amerej/artemis-react";
-import { VotingParticipationHistory } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { ProposalsMetrics } from "@services/types/token_metrics";
 import { divideBy1e8 } from "@helpers/numbers";
 
@@ -29,9 +28,9 @@ const useVotingPowerData = ({ period }: { period: string }) => {
         const days = period === "weekly" ? 7 : period === "monthly" ? 30 : 365;
         const history = (await actor.get_voting_power_ratio_history({
           days,
-        })) as VotingParticipationHistory;
+        })) as Array<[bigint, bigint]>;
 
-        const historyData = history.map(([day, balance]: [bigint, number]) => {
+        const historyData = history.map(([day, balance]: [bigint, bigint]) => {
           const dateName = DateTime.fromMillis(0)
             .plus({ days: Number(day) })
             .toFormat("MMM dd yyyy");

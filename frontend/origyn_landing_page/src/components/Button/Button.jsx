@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 const Button = ({ text, className, url, onClick, download }) => {
   const isInternal = typeof url === "string" && url.startsWith("/");

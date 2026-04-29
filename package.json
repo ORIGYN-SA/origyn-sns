@@ -8,5 +8,12 @@
   ],
   "license": "AGPL-3.0-only",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "gsap": "^3.14.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.40.1",
+    "@rollup/rollup-linux-arm64-gnu": "4.40.1"
+  }
 }

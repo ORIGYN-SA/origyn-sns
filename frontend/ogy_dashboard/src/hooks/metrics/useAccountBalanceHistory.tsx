@@ -41,7 +41,7 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
       });
       setData({
         dataChart: results,
-        total: results[results.length - 1].valueToString,
+        total: results[results.length - 1]?.valueToString ?? "0",
       });
     }
   }, [isSuccess, response]);

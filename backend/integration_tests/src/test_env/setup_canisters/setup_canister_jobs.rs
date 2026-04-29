@@ -3,6 +3,7 @@ use crate::client::pocket::install_canister;
 use crate::wasms;
 use candid::Principal;
 use canister_jobs_api::init::InitArgs as DailyJobsInitArgs;
+use canister_jobs_api::lifecycle::Args as DailyJobsArgs;
 use pocket_ic::PocketIc;
 use utils::consts::E8S_PER_OGY;
 
@@ -25,7 +26,7 @@ pub fn setup(
         daily_burn_amount: 1_000_000 * E8S_PER_OGY,
     };
 
-    install_canister(pic, controller, canister_id, wasm, canister_jobs_init_args);
+    install_canister(pic, controller, canister_id, wasm, DailyJobsArgs::Init(canister_jobs_init_args));
 
     canister_id
 }

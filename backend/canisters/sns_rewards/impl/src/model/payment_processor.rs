@@ -9,12 +9,7 @@ use types::TokenSymbol;
 
 use crate::memory::{get_payment_round_history_memory, VM};
 
-// ********************************
-//    Payment Processor
-// ********************************
 
-// NOTE: Stable structures don't need to be serialized, hence the #[serde(skip)].
-// FIXME: neuron round indexing should be accounted for both active_rounds and active_rounds_5y, because in history it won't be correct otherwise
 #[derive(Serialize, Deserialize)]
 pub struct PaymentProcessor {
     #[serde(skip, default = "init_map_v0")]
@@ -23,7 +18,6 @@ pub struct PaymentProcessor {
     #[serde(skip, default = "init_map")]
     pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
     /// Holds active PaymentRounds that are being processed
-    /// FIXME: make sure the history is ok with 5y and ususal neurons
     pub active_rounds: BTreeMap<TokenSymbol, PaymentRound>,
     /// Holds active 5y PaymentRounds that are being processed
     pub active_rounds_5y: BTreeMap<TokenSymbol, PaymentRound>,

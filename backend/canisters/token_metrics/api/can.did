@@ -1,0 +1,231 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
+type Account = record { owner : principal; subaccount : opt blob };
+// Active user counts (users with > 0 OGY balance).
+type ActiveUsers = record {
+  active_principals_count : nat64;
+  active_accounts_count : nat64;
+};
+type ActivitySnapshot = record {
+  principals_active_during_snapshot : nat64;
+  accounts_active_during_snapshot : nat64;
+  total_unique_accounts : nat64;
+  end_time : nat64;
+  start_time : nat64;
+  total_unique_principals : nat64;
+};
+type Args = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
+// 
+// # Examples
+// 
+// ```
+// use types::BuildVersion;
+// 
+// let version = BuildVersion::new(1, 2, 3);
+// assert_eq!(version.to_string(), "1.2.3");
+// 
+// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
+// assert_eq!(version, parsed);
+// ```
+type BuildVersion = record {
+  // Major version number, incremented for incompatible API changes
+  major : nat32;
+  // Minor version number, incremented for backwards-compatible functionality additions
+  minor : nat32;
+  // Patch version number, incremented for backwards-compatible bug fixes
+  patch : nat32;
+};
+type GetAccountHistoryArgs = record { days : nat64; account : text };
+type GetAccountHoldersArgs = record { offset : nat64; limit : nat64 };
+type GetHoldersArgs = record {
+  offset : nat64;
+  limit : nat64;
+  merge_accounts_to_principals : bool;
+};
+type GetHoldersResponse = record {
+  current_offset : nat64;
+  data : vec record { Account; WalletOverviewResponse };
+  limit : nat64;
+  total_count : nat64;
+};
+type GetVotingParticipationHistoryArgs = record { days : nat64 };
+type GetVotingPowerRatioHistory = record { days : nat64 };
+// Aggregate governance statistics for a principal or the whole canister.
+// All token amounts are in e8s (1 OGY = 10^8 e8s).
+type GovernanceStats = record {
+  // Accumulated rewards (staked maturity)
+  total_rewards : nat;
+  // Total tokens staked (locked + unlocked + restaked maturity)
+  total_staked : nat;
+  // Tokens in locked neurons (non-zero dissolve delay)
+  total_locked : nat;
+  // Tokens in unlocked neurons (zero dissolve delay or past dissolve timestamp)
+  total_unlocked : nat;
+};
+type HistoryData = record { balance : nat };
+// Candid-facing HolderBalanceResponse wrapping OverviewResponse.
+type HolderBalanceResponseCompat = record {
+  data : OverviewResponse;
+  holder : text;
+};
+type InitArgs = record {
+  test_mode : bool;
+  foundation_accounts : vec text;
+  treasury_account : text;
+  authorized_principals : vec principal;
+  version : BuildVersion;
+  sns_rewards_canister_id : principal;
+  ogy_new_ledger_canister_id : principal;
+  commit_hash : text;
+  sns_governance_canister_id : principal;
+};
+// Candid-facing LockedNeuronsAmount with u64 fields to match frontend IDL.
+type LockedNeuronsAmountResponse = record {
+  one_year : nat64;
+  two_years : nat64;
+  three_years : nat64;
+  four_years : nat64;
+  five_years : nat64;
+};
+type LockedNeuronsPeriodResponse = record {
+  count : LockedNeuronsAmountResponse;
+  amount : LockedNeuronsAmountResponse;
+};
+// Represents a single log entry with timestamp and message.
+// 
+// This struct is used to store individual log messages with their
+// associated timestamps.
+type LogEntry = record {
+  // The log message content
+  message : text;
+  // The timestamp when the log entry was created (in milliseconds)
+  timestamp : nat64;
+};
+// Stub metrics for WorkingStats (frontend super_stats IDL expects this field).
+type Metrics = record { total_errors : nat64; total_api_requests : nat64 };
+// Candid-facing Overview with `sent`/`received` as tuples to match frontend IDL.
+type OverviewResponse = record {
+  balance : nat;
+  sent : record { nat32; nat };
+  last_active : nat64;
+  first_active : nat64;
+  received : record { nat32; nat };
+  max_balance : nat;
+};
+type ProcessedTX = record {
+  hash : text;
+  to_account : text;
+  tx_value : nat;
+  from_account : text;
+  block : nat64;
+  tx_fee : opt nat;
+  tx_time : nat64;
+  tx_type : text;
+  spender : opt text;
+};
+// Candid-facing ProposalsMetrics with all u64 fields to match frontend IDL.
+type ProposalsMetricsResponse = record {
+  daily_voting_rewards : nat64;
+  reward_base_current_year : nat64;
+  average_voting_participation : nat64;
+  average_voting_power : nat64;
+  total_voting_power : nat64;
+  total_proposals : nat64;
+};
+type TimeChunkStats = record {
+  mint_count : nat64;
+  transfer_count : nat64;
+  end_time : nat64;
+  start_time : nat64;
+  burn_count : nat64;
+  approve_count : nat64;
+  total_count : nat64;
+};
+type TimeStats = record {
+  top_transfers : vec ProcessedTX;
+  total_unique_accounts : nat64;
+  top_burns : vec ProcessedTX;
+  mint_stats : TotCntAvg;
+  total_transaction_average : float64;
+  most_active_principals : vec record { text; nat64 };
+  transfer_stats : TotCntAvg;
+  top_mints : vec ProcessedTX;
+  total_transaction_value : nat;
+  most_active_accounts : vec record { text; nat64 };
+  count_over_time : vec TimeChunkStats;
+  total_transaction_count : nat;
+  total_unique_principals : nat64;
+  burn_stats : TotCntAvg;
+  approve_stats : TotCntAvg;
+};
+// Token supply data from the ledger (total and circulating).
+type TokenSupplyData = record { circulating_supply : nat; total_supply : nat };
+type TotCntAvg = record { count : nat; average : float64; total_value : nat };
+type TotalHolderResponse = record {
+  total_accounts : nat64;
+  total_principals : nat64;
+};
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+// Candid-facing WalletOverview with `total` as u64 to match frontend IDL.
+type WalletOverviewResponse = record {
+  total : nat64;
+  ledger : OverviewResponse;
+  governance : GovernanceStats;
+};
+// Candid-facing WorkingStats with `metrics` field to match frontend super_stats IDL.
+type WorkingStatsResponse = record {
+  metrics : Metrics;
+  next_block : nat64;
+  last_update_time : nat64;
+  ledger_tip_of_chain : nat64;
+  timer_active : bool;
+  is_upto_date : bool;
+  directory_count : nat64;
+  is_busy : bool;
+};
+service : (Args) -> {
+  get_account_history : (GetAccountHistoryArgs) -> (
+      vec record { nat64; HistoryData },
+    ) query;
+  get_account_holders : (GetAccountHoldersArgs) -> (
+      vec HolderBalanceResponseCompat,
+    ) query;
+  get_account_overview : (text) -> (opt OverviewResponse) query;
+  get_active_users_count : () -> (ActiveUsers) query;
+  get_activity_stats : (nat64) -> (vec ActivitySnapshot) query;
+  get_all_neuron_owners : () -> (vec principal) query;
+  get_daily_stats : () -> (TimeStats) query;
+  get_foundation_assets : () -> (
+      vec record { text; WalletOverviewResponse },
+    ) query;
+  get_holders : (GetHoldersArgs) -> (GetHoldersResponse) query;
+  get_hourly_stats : () -> (TimeStats) query;
+  get_locked_neurons_period : () -> (LockedNeuronsPeriodResponse) query;
+  get_logs : () -> (vec LogEntry) query;
+  get_neurons_stats : (opt principal) -> (GovernanceStats) query;
+  get_principal_history : (GetAccountHistoryArgs) -> (
+      vec record { nat64; HistoryData },
+    ) query;
+  get_principal_holders : (GetAccountHoldersArgs) -> (
+      vec HolderBalanceResponseCompat,
+    ) query;
+  get_principal_overview : (text) -> (opt OverviewResponse) query;
+  get_proposals_metrics : () -> (ProposalsMetricsResponse) query;
+  get_stake_history : (nat64) -> (vec record { nat64; HistoryData }) query;
+  get_supply_data : () -> (TokenSupplyData) query;
+  get_top_account_holders : (nat64) -> (vec HolderBalanceResponseCompat) query;
+  get_top_principal_holders : (nat64) -> (
+      vec HolderBalanceResponseCompat,
+    ) query;
+  get_total_holders : () -> (TotalHolderResponse) query;
+  get_voting_participation_history : (GetVotingParticipationHistoryArgs) -> (
+      vec record { nat64; nat64 },
+    ) query;
+  get_voting_power_ratio_history : (GetVotingPowerRatioHistory) -> (
+      vec record { nat64; nat64 },
+    ) query;
+  get_working_stats : () -> (WorkingStatsResponse) query;
+  start_processing_timer : (nat64) -> (text);
+  stop_all_timers : () -> (text);
+}

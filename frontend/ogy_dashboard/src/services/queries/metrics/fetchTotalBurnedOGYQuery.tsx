@@ -44,7 +44,7 @@ const fetchTotalBurnedOGYQuery = ({ options }: TotalBurnedOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalBurnedOGY>;
 };
 
 export default fetchTotalBurnedOGYQuery;
