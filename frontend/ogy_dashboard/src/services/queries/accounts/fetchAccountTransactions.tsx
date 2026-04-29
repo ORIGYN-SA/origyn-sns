@@ -62,7 +62,7 @@ const fetchAccountTransactions = ({
     queryFn: async () => fn({ accountPrincipal }),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TransactionsDetails>;
 };
 
 export default fetchAccountTransactions;

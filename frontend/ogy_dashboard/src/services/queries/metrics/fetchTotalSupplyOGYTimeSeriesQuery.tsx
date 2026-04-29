@@ -42,7 +42,7 @@ const fetchTotalSupplyOGYTimeSeriesQuery = ({
     queryFn: async () => fn({ period }),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<TotalSupplyOGYTimeSeries>;
 };
 
 export default fetchTotalSupplyOGYTimeSeriesQuery;
