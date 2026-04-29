@@ -77,11 +77,12 @@ $[[ inputs.src-folder ]] integration-test build:
       needs: ["integration tests trigger"]
   extends: .rust template
   script:
-    - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
-    - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
-    - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
+    - scripts/build-canister.sh -it $[[ inputs.src-folder ]]
+    - scripts/generate-did.sh $[[ inputs.src-folder ]]
   artifacts:
     name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
     paths:
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
+      - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 1 day
