@@ -3,7 +3,9 @@
 .node template:
   image: node:18
   cache:
-  - key: "node-$CI_COMMIT_REF_SLUG"
+  - key:
+      files:
+        - package-lock.json
     paths:
       - .npm/
       - node_modules/
