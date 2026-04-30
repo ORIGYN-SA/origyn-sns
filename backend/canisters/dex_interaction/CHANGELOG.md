@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.1] - 2026-04-13
+
+#### Changed
+- **Exchange jobs** : Adjusted the frequency of GOLDAO -> OGY swaps
+
 ### [1.0.0] - 2026-03-23
 
 #### Description

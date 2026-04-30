@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getActor } from "@amerej/artemis-react";
 import { divideBy1e8 } from "@helpers/numbers";
 
@@ -18,10 +18,10 @@ const usePrincipalOverview = (principal: string) => {
     isLoading,
     isError,
     error,
-  }: UseQueryResult<TransactionStats> = useQuery({
+  } = useQuery({
     queryKey: ["principalOverview", principal],
     queryFn: async () => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const result = await actor.get_principal_overview(principal);
       return result;
     },

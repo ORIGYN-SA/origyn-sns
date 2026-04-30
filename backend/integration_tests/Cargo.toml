@@ -14,7 +14,6 @@ lazy_static = { workspace = true }
 serde_bytes = { workspace = true }
 ledger_utils = { path = "../libraries/ledger_utils" }
 ogy_legacy_ledger_canister_c2c_client = { path = '../external_canisters/ogy_legacy_ledger/c2c_client' }
-
 pocket-ic = { workspace = true }
 rand = "0.8.5"
 slog = "2.7.0"

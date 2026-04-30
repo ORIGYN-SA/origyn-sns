@@ -10,7 +10,7 @@ spec:
           "dex_interaction",
           "token_metrics",
           "canister_jobs",
-          "collection_index"
+          "collection_index",
         ]
 ---
 # Rust canisters builds
@@ -35,7 +35,8 @@ $[[ inputs.src-folder ]] staging build:
   artifacts:
     name: "${CI_PROJECT_NAME}-$[[ inputs.src-folder ]]-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm-STAGING"
     paths:
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 1 day
 
@@ -52,7 +53,8 @@ $[[ inputs.src-folder ]] production build:
   artifacts:
     name: "${CI_PROJECT_NAME}-$[[ inputs.src-folder ]]-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}-wasm"
     paths:
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 6 months
 
@@ -66,7 +68,7 @@ $[[ inputs.src-folder ]] integration-test build:
       when: always
     # This will run on any MR to develop
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
       changes:
         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
@@ -80,5 +82,7 @@ $[[ inputs.src-folder ]] integration-test build:
   artifacts:
     name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
     paths:
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
+      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
+      - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 1 day

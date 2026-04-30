@@ -105,7 +105,7 @@ const fetchFoundationAssetsOGY = ({ options }: FoundationAssetsOGYParams) => {
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<FoundationAssetsOGY>;
 };
 
 export default fetchFoundationAssetsOGY;

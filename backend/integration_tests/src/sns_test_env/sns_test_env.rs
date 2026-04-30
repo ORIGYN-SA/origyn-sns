@@ -126,7 +126,7 @@ impl SnsTestEnvBuilder {
                 canister_ids.governance_id,
                 wasms::SNS_GOVERNANCE.clone(),
                 encode_one(init_args.governance_args.clone()).unwrap(),
-                Some(controller.clone()),
+                Some(canister_ids.root_id.clone()),
             );
             pic.install_canister(
                 canister_ids.root_id,
@@ -141,7 +141,7 @@ impl SnsTestEnvBuilder {
                     init_args.ledger_args.clone(),
                 ))
                 .unwrap(),
-                Some(controller.clone()),
+                Some(canister_ids.root_id.clone()),
             );
             pic.install_canister(
                 canister_ids.index_id,
@@ -150,13 +150,13 @@ impl SnsTestEnvBuilder {
                     init_args.index_args.clone(),
                 ))
                 .unwrap(),
-                Some(controller.clone()),
+                Some(canister_ids.root_id.clone()),
             );
             pic.install_canister(
                 canister_ids.swap_id,
                 wasms::SNS_SWAP.clone(),
                 encode_one(init_args.swap_args.clone()).unwrap(),
-                Some(controller.clone()),
+                Some(canister_ids.root_id.clone()),
             );
         }
 
@@ -440,18 +440,18 @@ impl SnsTestEnv {
         governance_canister_init_args.neurons = neuron_data_with_neuron_keys;
 
         let sns_gov_wasm = wasms::SNS_GOVERNANCE.clone();
-        pic.stop_canister(self.governance_id.clone(), Some(self.controller.clone()))
+        pic.stop_canister(self.governance_id.clone(), Some(self.root_id.clone()))
             .unwrap();
         pic.tick();
         pic.reinstall_canister(
             self.governance_id.clone(),
             sns_gov_wasm,
             encode_one(governance_canister_init_args).unwrap(),
-            Some(self.controller.clone()),
+            Some(self.root_id.clone()),
         )
         .unwrap();
         pic.tick();
-        pic.start_canister(self.governance_id.clone(), Some(self.controller.clone()))
+        pic.start_canister(self.governance_id.clone(), Some(self.root_id.clone()))
             .unwrap();
 
         pic.tick();

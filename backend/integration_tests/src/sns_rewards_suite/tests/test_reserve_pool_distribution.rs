@@ -18,7 +18,7 @@ use sns_rewards_api_canister::set_reserve_transfer_amounts_validate::{
 use crate::{
     client::{
         icrc1::client::{balance_of, transfer},
-        rewards::{
+        sns_rewards::{
             get_reserve_transfer_amounts, set_reserve_transfer_amounts,
             set_reserve_transfer_amounts_validate,
         },

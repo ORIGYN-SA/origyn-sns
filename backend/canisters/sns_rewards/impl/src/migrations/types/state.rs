@@ -29,7 +29,7 @@ pub struct DataV0 {
     pub neuron_maturity: BTreeMap<NeuronId, NeuronInfoV0>,
     pub sync_info: SyncInfo,
     pub maturity_history: MaturityHistory,
-    pub payment_processor: PaymentProcessor,
+    pub payment_processor: PaymentProcessorV0,
     pub tokens: TokenRewardTypesV0,
     pub authorized_principals: Vec<Principal>,
     pub is_synchronizing_neurons: bool,
@@ -77,15 +77,18 @@ impl From<DataV0> for Data {
             }
         }
 
+        let neuron_maturity: BTreeMap<_, _> = v0
+            .neuron_maturity
+            .into_iter()
+            .map(|(k, v)| (k, NeuronInfo::from(v)))
+            .collect();
+
         Data {
             sns_governance_canister: v0.sns_governance_canister,
             neuron_system: NeuronSystem {
                 sync_info: v0.sync_info,
-                neuron_maturity: v0
-                    .neuron_maturity
-                    .into_iter()
-                    .map(|(k, v)| (k, NeuronInfo::from(v)))
-                    .collect(),
+                neuron_maturity: neuron_maturity.clone(),
+                neuron_maturity_5y: neuron_maturity,
                 maturity_history: MaturityHistory::default(),
             },
             payment_processor: PaymentProcessor::from(v0.payment_processor),
@@ -140,3 +143,59 @@ impl From<NeuronInfoV0> for NeuronInfo {
 
 pub type ReserveTokenAmountsV0 = HashMap<TokenSymbolV0, Nat>;
 pub type TokenRewardTypesV0 = HashMap<TokenSymbolV0, TokenInfo>;
+
+use crate::memory::VM;
+use ic_stable_structures::StableBTreeMap;
+use sns_rewards_api_canister::payment_round::PaymentRound;
+#[derive(Serialize, Deserialize)]
+pub struct PaymentProcessorV0 {
+    #[serde(skip, default = "init_map_v0")]
+    pub round_history_v0: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    /// Holds only PaymentRounds that are FULLY completed.
+    #[serde(skip, default = "init_map")]
+    pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    /// Holds active PaymentRounds that are being processed
+    pub active_rounds: BTreeMap<TokenSymbol, PaymentRound>,
+}
+
+use crate::memory::get_payment_round_history_memory_v0;
+fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+    let memory = get_payment_round_history_memory_v0();
+    StableBTreeMap::init(memory)
+}
+
+use crate::memory::get_payment_round_history_memory;
+fn init_map() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+    let memory = get_payment_round_history_memory();
+    StableBTreeMap::init(memory)
+}
+
+impl From<PaymentProcessorV0> for PaymentProcessor {
+    fn from(v0: PaymentProcessorV0) -> Self {
+        let next_key = next_key(v0.round_history_v0);
+
+        PaymentProcessor {
+            active_rounds: v0.active_rounds,
+            active_rounds_5y: BTreeMap::new(),
+            round_history_v0: init_map_v0(),
+            round_history: init_map(),
+            next_key,
+        }
+    }
+}
+
+    pub fn next_key(round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>) -> u16 {
+        let mut max_key = 0;
+        for entry in round_history.iter() {
+            let (_, id) = entry.key();
+            if *id > max_key {
+                max_key = *id;
+            }
+        }
+
+        if max_key == u16::MAX {
+            1
+        } else {
+            max_key + 1
+        }
+    }

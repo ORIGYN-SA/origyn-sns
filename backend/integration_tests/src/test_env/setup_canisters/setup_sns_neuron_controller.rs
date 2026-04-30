@@ -12,8 +12,6 @@ pub fn setup(
     controllers: Vec<Principal>,
     rewards_destination: Option<Principal>,
     ogy_sns_governance_canister_id: Principal,
-    ogy_sns_ledger_canister_id: Principal,
-    ogy_sns_rewards_canister_id: Principal,
     goldao_sns_governance_canister_id: Principal,
     goldao_sns_ledger_canister_id: Principal,
     goldao_sns_rewards_canister_id: Principal,

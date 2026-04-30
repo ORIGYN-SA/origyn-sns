@@ -5,14 +5,14 @@
 transfers tokens from reserve pool to the reward pool on a daily basis.
 - currently this only happens for OGY
 - the daily amount to be transferred is decided via a proposal
-
 */
 
 use crate::{
     state::{mutate_state, read_state},
     utils::transfer_token,
 };
-use bity_ic_canister_time::{now_millis, start_job_daily_at, DAY_IN_MS};
+use bity_ic_canister_time::start_job_daily_at;
+use bity_ic_canister_time::{now_millis, DAY_IN_MS};
 use candid::{Nat, Principal};
 use icrc_ledger_types::icrc1::account::{Account, Subaccount};
 use sns_rewards_api_canister::subaccounts::{RESERVE_POOL_SUB_ACCOUNT, REWARD_POOL_SUB_ACCOUNT};

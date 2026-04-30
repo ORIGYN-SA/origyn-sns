@@ -40,7 +40,7 @@ const fetchUsersCountryAnalyticsQuery = ({
     queryFn: async () => fn(),
     placeholderData: keepPreviousData,
     ...options,
-  } as FetchQueryOptions;
+  } as FetchQueryOptions<UserByCountry[]>;
 };
 
 export default fetchUsersCountryAnalyticsQuery;
