@@ -23,33 +23,13 @@ fn init(args: Args) {
 
             // use staging canister ids
             if init_args.test_mode {
-                let icp_ledger_canister_id = init_args.icp_ledger_canister_id;
                 let ogy_ledger_canister_id = init_args.sns_ledger_canister_id;
-                let goldao_ledger_canister_id = init_args.goldao_ledger_canister_id;
-
-                data.tokens.insert(
-                    TokenSymbol::ICP,
-                    TokenInfo {
-                        ledger_id: icp_ledger_canister_id,
-                        fee: 10_000u64,
-                        decimals: 8u64,
-                    },
-                );
 
                 data.tokens.insert(
                     TokenSymbol::OGY,
                     TokenInfo {
                         ledger_id: ogy_ledger_canister_id,
                         fee: 200_000u64,
-                        decimals: 8u64,
-                    },
-                );
-
-                data.tokens.insert(
-                    TokenSymbol::GOLDAO,
-                    TokenInfo {
-                        ledger_id: goldao_ledger_canister_id,
-                        fee: 100_000u64,
                         decimals: 8u64,
                     },
                 );

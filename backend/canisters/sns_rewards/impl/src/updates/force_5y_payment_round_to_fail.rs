@@ -15,24 +15,24 @@ use sns_rewards_api_canister::updates::force_payment_round_to_fail::{
 // only to be used for integration testing
 #[cfg(feature = "inttest")]
 #[update(guard = "caller_is_governance_principal", hidden = true)]
-pub async fn force_payment_round_to_fail(
+pub async fn force_5y_payment_round_to_fail(
     args: ForcePaymentRoundToFailArgs,
 ) -> ForcePaymentRoundToFailResponse {
-    _force_payment_round_to_fail_impl(args).await
+    _force_5y_payment_round_to_fail_impl(args).await
 }
 
-async fn _force_payment_round_to_fail_impl(neurons: Vec<NeuronId>) {
-    create_new_payment_rounds(NeuronFlow::Regular).await;
+async fn _force_5y_payment_round_to_fail_impl(neurons: Vec<NeuronId>) {
+    create_new_payment_rounds(NeuronFlow::FiveYear).await;
     mutate_state(|s| {
         let rounds = s
             .data
             .payment_processor
-            .get_active_rounds(NeuronFlow::Regular);
+            .get_active_rounds(NeuronFlow::FiveYear);
         for payment_round in rounds {
             let symbol = payment_round.token;
             for neuron_id in neurons.clone() {
                 s.data.payment_processor.set_active_payment_status(
-                    NeuronFlow::Regular,
+                    NeuronFlow::FiveYear,
                     &symbol,
                     &neuron_id,
                     PaymentStatus::Failed("Fake testing failure".to_string()),

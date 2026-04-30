@@ -6,3 +6,7 @@ pub const RESERVE_POOL_SUB_ACCOUNT: Subaccount = [
 pub const REWARD_POOL_SUB_ACCOUNT: Subaccount = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
+
+pub const REWARD_POOL_SUB_ACCOUNT_5Y: Subaccount = [
+    2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];

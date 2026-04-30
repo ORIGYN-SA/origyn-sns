@@ -1,8 +1,8 @@
 use crate::memory::get_swap_history_memory;
 use crate::memory::VM;
 use crate::types::*;
-use dex_interaction_api::get_active_swaps::Response;
 use candid::CandidType;
+use dex_interaction_api::get_active_swaps::Response;
 use ic_stable_structures::StableBTreeMap;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
