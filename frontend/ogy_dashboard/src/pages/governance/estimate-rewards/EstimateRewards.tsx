@@ -1,6 +1,7 @@
 import { PointerEvent, useRef, useState } from "react";
 import clsx from "clsx";
 import { Card } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import useEstimatedRewards from "@hooks/governance/useEstimatedRewards";
 import { millify } from "@helpers/numbers";
 
@@ -151,6 +152,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
   const { data, isSuccess, isLoading, isError } = useEstimatedRewards();
   const [activeIndex, setActiveIndex] = useState(1);
 
+  const hasError = !isLoading && isError;
   const displayData = isSuccess && data ? data : placeholderData;
   const current = displayData[activeIndex - 1];
   const yearLabel = activeIndex === 1 ? "year" : "years";
@@ -191,10 +193,6 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         />
       </div>
 
-      {isError && (
-        <div className="text-red-500 text-sm italic">Failed to load data.</div>
-      )}
-
       {isLoading && (
         <>
           <div
@@ -204,6 +202,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
           <div className="pointer-events-none absolute inset-6 bg-muted/20 animate-pulse" />
         </>
       )}
+      {hasError && <CardErrorOverlay title="Estimate your rewards" />}
     </Card>
   );
 };

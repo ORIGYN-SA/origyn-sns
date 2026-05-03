@@ -67,7 +67,6 @@ const ChartUsersActivity = ({
       legendLabel="OGY PROTOCOL USERS"
       loading={loading}
       isError={isError || isErrorFetchActiveUsers}
-      errorMessage="Error while fetching users account data."
     />
   );
 };

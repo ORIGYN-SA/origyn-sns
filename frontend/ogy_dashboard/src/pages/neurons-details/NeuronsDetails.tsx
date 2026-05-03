@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageHeader } from "@components/ui";
 import { Card, LoaderSpin, Badge, Tooltip } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useNeuron from "@hooks/neurons/useNeuron";
 
@@ -13,7 +14,6 @@ export const NeuronsDetails = () => {
     isSuccess: isSuccessGetNeuron,
     isLoading: isLoadingGetNeuron,
     isError: isErrorGetNeuron,
-    error: errorGetNeuron,
   } = useNeuron({
     neuronId: searchParams.get("id") as string,
   });
@@ -76,8 +76,8 @@ export const NeuronsDetails = () => {
         </div>
       )}
       {isErrorGetNeuron && (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorGetNeuron?.message}</div>
+        <div className="relative h-40 rounded-xl">
+          <CardErrorOverlay title="OGY Neuron" />
         </div>
       )}
     </div>

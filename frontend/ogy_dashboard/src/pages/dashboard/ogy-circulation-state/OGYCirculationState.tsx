@@ -25,7 +25,7 @@ const OGYCirculationState = ({ className }: OGYCirculationStateProps) => {
     ],
     []
   );
-  const { data, isLoading, isError, error } = useCirculationStateOGY();
+  const { data, isLoading, isError } = useCirculationStateOGY();
 
   return (
     <PieStatsCard
@@ -47,7 +47,6 @@ const OGYCirculationState = ({ className }: OGYCirculationStateProps) => {
       totalValue={data?.string.circulatingSupply}
       loading={isLoading}
       isError={isError}
-      errorMessage={error?.message}
     />
   );
 };

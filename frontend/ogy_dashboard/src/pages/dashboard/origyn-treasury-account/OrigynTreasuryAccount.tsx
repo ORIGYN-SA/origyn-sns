@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
-import { StatCard } from "@components/dashboard";
+import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
@@ -103,44 +103,45 @@ const OrigynTreasuryAccount = ({
 
   const isLoading = isLoadingBalanceICP || isLoadingBalanceOGY;
   const isError = isErrorBalanceICP || isErrorBalanceOGY;
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
 
   return (
-    <Card className={`${className}`} {...restProps}>
-      <div className="text-charcoal text-[22px] font-semibold leading-none">
-        ORIGYN Treasury Account (OTA)
-      </div>
-      {isError && (
-        <div className="flex items-center justify-center h-36 text-red-500 font-semibold">
-          <div>Network error: Unable to fetch OGY treasury account data</div>
+    <SkeletonOverlay loading={showSkeleton}>
+      <Card className={`${className}`} {...restProps}>
+        {hasError && (
+          <CardErrorOverlay title="ORIGYN Treasury Account (OTA)" />
+        )}
+        <div
+          data-skel-static
+          className="text-charcoal text-[22px] font-semibold leading-none"
+        >
+          ORIGYN Treasury Account (OTA)
         </div>
-      )}
-      {!isError && (
-        <SkeletonOverlay loading={isLoading}>
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
-            {data.map(({ value, token, className, logo, tooltip }) => (
-              <StatCard
-                key={token}
-                title={`Network Revenue (${token})`}
-                value={isLoading ? undefined : value}
-                unit={token}
-                loading={isLoading}
-                accessory={
-                  <img
-                    src={logo}
-                    alt="Token logo"
-                    className="h-4 w-4 object-contain"
-                  />
-                }
-                tooltip={
-                  <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
-                }
-                underlineClassName={className}
-              />
-            ))}
-          </div>
-        </SkeletonOverlay>
-      )}
-    </Card>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
+          {data.map(({ value, token, className, logo, tooltip }) => (
+            <StatCard
+              key={token}
+              title={`Network Revenue (${token})`}
+              value={showSkeleton ? undefined : value}
+              unit={token}
+              loading={showSkeleton}
+              accessory={
+                <img
+                  src={logo}
+                  alt="Token logo"
+                  className="h-4 w-4 object-contain"
+                />
+              }
+              tooltip={
+                <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
+              }
+              underlineClassName={className}
+            />
+          ))}
+        </div>
+      </Card>
+    </SkeletonOverlay>
   );
 };
 

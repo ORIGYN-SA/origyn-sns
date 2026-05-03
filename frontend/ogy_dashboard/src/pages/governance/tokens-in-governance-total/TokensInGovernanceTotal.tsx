@@ -6,7 +6,7 @@ import useGovernanceStats from "@hooks/governance/useGovernanceStats";
 const FAKE_COLORS = ["#34d399", "#1d7555", "#7bf8ca"];
 
 const TokensInGovernanceTotal = ({ className }: { className?: string }) => {
-  const { data, isLoading, isError, error } = useGovernanceStats();
+  const { data, isLoading, isError } = useGovernanceStats();
 
   const colors = useMemo(
     () => data?.tokensInGovernance.map((d) => d.color) ?? FAKE_COLORS,
@@ -55,7 +55,6 @@ const TokensInGovernanceTotal = ({ className }: { className?: string }) => {
       totalValue={data?.tokensInGovernanceTotal}
       loading={isLoading}
       isError={isError}
-      errorMessage={error?.message}
     />
   );
 };

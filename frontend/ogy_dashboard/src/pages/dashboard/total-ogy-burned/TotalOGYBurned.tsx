@@ -10,7 +10,9 @@ const SELECT_PERIOD_OPTIONS = [
 
 const TotalOGYBurned = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("yearly");
-  const { data, isLoading } = useTotalOGYBurned({ period: selectedPeriod });
+  const { data, isLoading, error } = useTotalOGYBurned({
+    period: selectedPeriod,
+  });
 
   return (
     <AreaStatCard
@@ -38,6 +40,7 @@ const TotalOGYBurned = ({ className }: { className?: string }) => {
       chartColor="#34d399"
       chartLabel="Total Burned"
       loading={isLoading}
+      error={error}
     />
   );
 };

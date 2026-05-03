@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
 import { Search } from "@components/ui";
 import { ChevronRightIcon } from "@components/ui/icons";
+import { CardErrorOverlay } from "@components/dashboard";
 import { useSearchExplorer } from "@hooks/explorer";
 import useFetchAllTransactions from "@hooks/transactions/useFetchAllTransactions";
 import {
@@ -10,10 +11,12 @@ import {
   buildSkeletonRows,
 } from "@pages/transactions/transactionColumns";
 
-const FAKE_SEARCH_RESULT = {
-  type: "principalId" as const,
-  value: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa",
-};
+const SearchDropdownSkeleton = () => (
+  <div className="h-10 flex items-center gap-3 px-2" aria-busy="true">
+    <div className="h-5 w-20 rounded-full bg-muted/10 animate-pulse" />
+    <div className="h-4 flex-1 rounded-md bg-muted/10 animate-pulse" />
+  </div>
+);
 
 export const Explorer = () => {
   const navigate = useNavigate();
@@ -40,13 +43,15 @@ export const Explorer = () => {
 
   const search = useSearchExplorer({ searchterm });
   const searchSettled = search.isSuccess || search.isError;
-  const hasSearchResult = searchSettled && !!search.data;
 
-  const { data, isLoading, isFetching } = useFetchAllTransactions({
+  const { data, isLoading, isFetching, isError } = useFetchAllTransactions({
     limit: pageSize,
     offset: pageSize * pageIndex,
     sorting: [{ id: "index", desc: sortDesc }],
   });
+
+  const hasError = !isFetching && isError;
+  const showSkeleton = isFetching || hasError;
 
   const columns = useMemo(
     () =>
@@ -61,7 +66,7 @@ export const Explorer = () => {
   );
   const pageCount = data?.list.pageCount ?? 0;
   const rows =
-    isLoading || !data?.list.rows
+    showSkeleton || isLoading || !data?.list.rows
       ? buildSkeletonRows(pageSize)
       : data.list.rows;
 
@@ -92,38 +97,34 @@ export const Explorer = () => {
     />
   );
 
-  const searchResult = hasSearchResult ? search.data : FAKE_SEARCH_RESULT;
-
-  const searchDropdown =
-    searchSettled && !search.data ? (
-      <div className="h-10 flex items-center justify-center text-sm text-muted">
-        No results found
-      </div>
-    ) : (
-      <SkeletonOverlay loading={!searchSettled}>
-        <button
-          onClick={() =>
-            hasSearchResult &&
-            handleClickSearchResult(searchResult.type, searchResult.value)
-          }
-          className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-left hover:bg-surface-2 transition-colors"
-        >
-          <span
-            className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
-              searchResult.type === "blockIndex"
-                ? "bg-candyFloss/10 text-candyFloss"
-                : "bg-jade/10 text-jade"
-            }`}
-          >
-            {searchResult.type === "blockIndex" ? "Block" : "Principal"}
-          </span>
-          <span className="truncate text-sm font-medium text-content">
-            {searchResult.value}
-          </span>
-          <ChevronRightIcon className="shrink-0 ml-auto text-muted" />
-        </button>
-      </SkeletonOverlay>
-    );
+  const searchDropdown = !searchSettled ? (
+    <SearchDropdownSkeleton />
+  ) : !search.data ? (
+    <div className="h-10 flex items-center justify-center text-sm text-muted">
+      No results found
+    </div>
+  ) : (
+    <button
+      onClick={() =>
+        handleClickSearchResult(search.data.type, search.data.value)
+      }
+      className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-left hover:bg-surface-2 transition-colors"
+    >
+      <span
+        className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
+          search.data.type === "blockIndex"
+            ? "bg-candyFloss/10 text-candyFloss"
+            : "bg-jade/10 text-jade"
+        }`}
+      >
+        {search.data.type === "blockIndex" ? "Block" : "Principal"}
+      </span>
+      <span className="truncate text-sm font-medium text-content">
+        {search.data.value}
+      </span>
+      <ChevronRightIcon className="shrink-0 ml-auto text-muted" />
+    </button>
+  );
 
   return (
     <div className="max-w-[1440px] mx-auto py-16 px-6">
@@ -155,8 +156,9 @@ export const Explorer = () => {
         dropdown={searchDropdown}
       />
 
-      <div className="mt-16">
-        <SkeletonOverlay loading={isFetching}>
+      <div className="relative mt-16">
+        <SkeletonOverlay loading={showSkeleton}>
+          {hasError && <CardErrorOverlay title="Transaction History" />}
           <NewTable columns={columns} data={rows} footer={paginationFooter} />
         </SkeletonOverlay>
       </div>

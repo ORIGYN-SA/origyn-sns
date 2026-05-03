@@ -48,7 +48,6 @@ const StakingOverviewChart = ({
       legendLabel="STAKED TOKENS"
       loading={isLoading}
       isError={isError}
-      errorMessage="Error while fetching governance staking data."
     />
   );
 };

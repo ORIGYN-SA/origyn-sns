@@ -1,5 +1,5 @@
 import { TooltipInfo, SkeletonOverlay } from "@components/ui";
-import { StatCard } from "@components/dashboard";
+import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
 
 const COLORS = [
@@ -19,20 +19,23 @@ const PLACEHOLDER_ITEMS = Array.from({ length: 6 }, (_, i) => ({
 }));
 
 const TokensInGovernanceKPI = ({ className }: { className?: string }) => {
-  const { data, isLoading, isSuccess } = useProposalsMetrics();
+  const { data, isLoading, isSuccess, isError } = useProposalsMetrics();
 
-  const items = isLoading || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
+  const items = showSkeleton || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
 
   return (
-    <div className={className}>
-      <SkeletonOverlay loading={isLoading}>
+    <div className={`relative ${className ?? ""}`}>
+      <SkeletonOverlay loading={showSkeleton}>
+        {hasError && <CardErrorOverlay title="Tokens in Governance" />}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {items.map(({ name, value, tooltip }, index) => (
             <StatCard
               key={name}
               title={name}
               value={value}
-              loading={isLoading}
+              loading={showSkeleton}
               tooltip={
                 <TooltipInfo id={name} clickable={true}>
                   {tooltip}

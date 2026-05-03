@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import AreaChart from "@components/charts/shadcn/AreaChart";
 import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
+import CardErrorOverlay from "./CardErrorOverlay";
 import CardHeader from "./CardHeader";
 import PeriodSelect from "./PeriodSelect";
 import Stat from "./Stat";
@@ -23,6 +24,7 @@ type AreaStatCardProps = {
   chartColor: string;
   chartLabel: string;
   loading?: boolean;
+  error?: unknown;
   className?: string;
 };
 
@@ -41,12 +43,15 @@ const AreaStatCard = ({
   chartColor,
   chartLabel,
   loading = false,
+  error,
   className,
 }: AreaStatCardProps) => {
+  const hasError = !loading && !!error;
+  const showSkeleton = loading || hasError;
   const displayChartData =
-    loading && !chartData ? FAKE_AREA_SERIES : chartData;
+    showSkeleton && !chartData ? FAKE_AREA_SERIES : chartData;
   return (
-    <SkeletonOverlay loading={loading}>
+    <SkeletonOverlay loading={showSkeleton}>
       <Card className={`flex flex-col ${className ?? ""}`}>
         <CardHeader
           title={title}
@@ -62,7 +67,7 @@ const AreaStatCard = ({
               iconSrc={iconSrc}
               value={value}
               unit={unit}
-              loading={loading}
+              loading={showSkeleton}
             />
           }
           right={
@@ -84,6 +89,7 @@ const AreaStatCard = ({
             className="h-full w-full"
           />
         </div>
+        {hasError && <CardErrorOverlay title={title} />}
       </Card>
     </SkeletonOverlay>
   );

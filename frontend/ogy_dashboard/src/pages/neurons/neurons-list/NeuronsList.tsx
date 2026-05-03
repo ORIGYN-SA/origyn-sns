@@ -4,6 +4,7 @@ import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useNeurons from "@hooks/neurons/useNeuronsAll";
@@ -130,12 +131,13 @@ const NeuronsList = ({
   const [pageIndex, setPageIndex] = useState(pagination?.pageIndex ?? 0);
   const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
 
-  const { data, isSuccess, isLoading, isError, error } =
-    useNeurons({
-      limit: pageSize,
-      offset: pageSize * pageIndex,
-    });
+  const { data, isSuccess, isLoading, isError } = useNeurons({
+    limit: pageSize,
+    offset: pageSize * pageIndex,
+  });
 
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
   const columns = getColumns(navigate);
   const pageCount = data?.list.pageCount ?? 0;
 
@@ -156,21 +158,14 @@ const NeuronsList = ({
   );
 
   const rows =
-    isLoading || !isSuccess || !data
+    showSkeleton || !isSuccess || !data
       ? buildSkeletonRows(pageSize)
       : (data.list.rows as NeuronRow[]);
 
-  if (isError) {
-    return (
-      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-        <div>{error?.message}</div>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <SkeletonOverlay loading={isLoading}>
+    <div className="relative">
+      <SkeletonOverlay loading={showSkeleton}>
+        {hasError && <CardErrorOverlay title="Neurons" />}
         <NewTable
           columns={columns}
           data={rows}

@@ -10,7 +10,7 @@ import {
   Button,
   SkeletonOverlay,
 } from "@components/ui";
-import { Stat } from "@components/dashboard";
+import { CardErrorOverlay, Stat } from "@components/dashboard";
 import useProposal from "@hooks/proposals/useProposal";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 import ProgressBar from "@components/charts/progress-bar/ProgressBar";
@@ -29,12 +29,9 @@ export const ProposalsDetails = () => {
   const [searchParams] = useSearchParams();
   const proposalId = searchParams.get("id") as string;
 
-  const {
-    data: proposal,
-    isLoading,
-    isError,
-    error,
-  } = useProposal({ proposalId });
+  const { data: proposal, isLoading, isError } = useProposal({ proposalId });
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
 
   const handleOnClickBack = () => navigate(-1);
 
@@ -50,13 +47,14 @@ export const ProposalsDetails = () => {
         onBack={handleOnClickBack}
       />
 
-      {isError ? (
-        <div className="flex items-center justify-center h-40 mt-16 text-red-500 font-semibold">
-          <div>{error?.message}</div>
-        </div>
-      ) : (
-        <SkeletonOverlay loading={isLoading}>
-          <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 mt-8">
+      <div className="relative mt-8">
+        {hasError && (
+          <CardErrorOverlay
+            title={proposalId ? `Proposal #${proposalId}` : "Proposal"}
+          />
+        )}
+        <SkeletonOverlay loading={showSkeleton}>
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
             <Card className="xl:col-span-3">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <span
@@ -101,7 +99,7 @@ export const ProposalsDetails = () => {
                   iconSrc="/ogy_logo.svg"
                   value={proposal?.votes?.totalCompact}
                   unit="OGY"
-                  loading={isLoading}
+                  loading={showSkeleton}
                 />
               </div>
 
@@ -152,7 +150,7 @@ export const ProposalsDetails = () => {
             </Card>
           </div>
         </SkeletonOverlay>
-      )}
+      </div>
     </div>
   );
 };

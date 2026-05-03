@@ -49,7 +49,6 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
     data: foundationAssets,
     isLoading,
     isError,
-    error,
   } = useFoundationReserve();
 
   return (
@@ -69,7 +68,6 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
       totalValue={foundationAssets?.string.totalSupply}
       loading={isLoading}
       isError={isError}
-      errorMessage={error?.message}
     />
   );
 };

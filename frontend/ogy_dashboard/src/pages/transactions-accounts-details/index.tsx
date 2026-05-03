@@ -168,7 +168,6 @@ const TransactionsAccountsDetails = () => {
     data: overview,
     isLoading: isLoadingOverview,
     isError: isOverviewError,
-    error: overviewError,
   } = usePrincipalOverview(accountId);
 
   const {
@@ -316,7 +315,6 @@ const TransactionsAccountsDetails = () => {
         legendLabel="OGY Balance"
         loading={isLoadingBalance}
         isError={isBalanceError}
-        errorMessage="Error while fetching account balance data."
       />
 
       <div className="mt-16">
@@ -334,7 +332,6 @@ const TransactionsAccountsDetails = () => {
             }
             loading={isLoadingOverview}
             isError={isOverviewError}
-            errorMessage={overviewError?.message}
             layout="horizontal"
           />
         </PieChartProvider>

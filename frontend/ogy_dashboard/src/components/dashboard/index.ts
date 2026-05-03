@@ -5,4 +5,5 @@ export { default as StatCard } from "./StatCard";
 export { default as PieStatsCard } from "./PieStatsCard";
 export { default as ChartStatsCard } from "./ChartStatsCard";
 export { default as AreaStatCard } from "./AreaStatCard";
+export { default as CardErrorOverlay } from "./CardErrorOverlay";
 export { default as StakingOverviewChart } from "./StakingOverviewChart";

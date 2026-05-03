@@ -3,6 +3,7 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useProposals from "@hooks/proposals/useProposalsAll";
@@ -133,12 +134,13 @@ const ProposalsList = ({
   const [pageIndex, setPageIndex] = useState(pagination?.pageIndex ?? 0);
   const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
 
-  const { data, isSuccess, isLoading, isError, error } =
-    useProposals({
-      limit: pageSize,
-      offset: pageSize * pageIndex,
-    });
+  const { data, isSuccess, isLoading, isError } = useProposals({
+    limit: pageSize,
+    offset: pageSize * pageIndex,
+  });
 
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
   const columns = getColumns(navigate);
   const pageCount = data?.list.pageCount ?? 0;
 
@@ -159,21 +161,14 @@ const ProposalsList = ({
   );
 
   const rows =
-    isLoading || !isSuccess || !data
+    showSkeleton || !isSuccess || !data
       ? buildSkeletonRows(pageSize)
       : (data.list.rows as ProposalRow[]);
 
-  if (isError) {
-    return (
-      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-        <div>{error?.message}</div>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <SkeletonOverlay loading={isLoading}>
+    <div className="relative">
+      <SkeletonOverlay loading={showSkeleton}>
+        {hasError && <CardErrorOverlay title="Proposals" />}
         <NewTable
           columns={columns}
           data={rows}

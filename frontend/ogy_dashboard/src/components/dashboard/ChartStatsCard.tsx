@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
-import { Error as ChartError } from "@components/charts";
 import AreaChart from "@components/charts/shadcn/AreaChart";
 import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
+import CardErrorOverlay from "./CardErrorOverlay";
 import PeriodSelect from "./PeriodSelect";
 import Stat from "./Stat";
 
@@ -30,7 +30,6 @@ type ChartStatsCardProps = {
   legendLabel: string;
   loading?: boolean;
   isError?: boolean;
-  errorMessage?: string;
   className?: string;
 };
 
@@ -43,14 +42,15 @@ const ChartStatsCard = ({
   chart,
   legendLabel,
   loading = false,
-  isError,
-  errorMessage,
+  isError = false,
   className,
 }: ChartStatsCardProps) => {
+  const hasError = !loading && isError;
+  const showSkeleton = loading || hasError;
   const displayChartData =
-    loading && !chart.data ? FAKE_AREA_SERIES : chart.data;
+    showSkeleton && !chart.data ? FAKE_AREA_SERIES : chart.data;
   return (
-    <SkeletonOverlay loading={loading}>
+    <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>
         <div data-skel-static className="flex items-center justify-between">
           <h2 className="text-charcoal text-[22px] font-semibold leading-none mr-2">
@@ -85,7 +85,7 @@ const ChartStatsCard = ({
                     <Stat
                       value={stat.value}
                       unit={stat.unit}
-                      loading={loading}
+                      loading={showSkeleton}
                     />
                   </div>
                 </div>
@@ -119,7 +119,7 @@ const ChartStatsCard = ({
             </div>
           </div>
         </div>
-        {isError && <ChartError>{errorMessage}</ChartError>}
+        {hasError && <CardErrorOverlay title={title} />}
       </Card>
     </SkeletonOverlay>
   );

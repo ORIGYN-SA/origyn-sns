@@ -3,6 +3,7 @@ import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import PieChart, { PieChartData } from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
 import { FAKE_PIE_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
+import CardErrorOverlay from "./CardErrorOverlay";
 import Stat from "./Stat";
 import StatCard from "./StatCard";
 
@@ -21,8 +22,7 @@ type PieStatsCardProps = {
   totalLabel: ReactNode;
   totalValue: string | undefined;
   loading?: boolean;
-  isError: boolean;
-  errorMessage?: string;
+  isError?: boolean;
   className?: string;
   layout?: "vertical" | "horizontal";
 };
@@ -36,16 +36,17 @@ const PieStatsCard = ({
   totalLabel,
   totalValue,
   loading = false,
-  isError,
-  errorMessage,
+  isError = false,
   className,
   layout = "vertical",
 }: PieStatsCardProps) => {
   const { activeIndex, setActiveIndex } = usePieChart();
+  const hasError = !loading && isError;
+  const showSkeleton = loading || hasError;
   const displayData =
-    loading && !data ? FAKE_PIE_SERIES.slice(0, infos.length) : data;
+    showSkeleton && !data ? FAKE_PIE_SERIES.slice(0, infos.length) : data;
   const displayTotal =
-    loading && totalValue == null ? FAKE_STAT_VALUE : totalValue;
+    showSkeleton && totalValue == null ? FAKE_STAT_VALUE : totalValue;
   const hasData = !!displayData && displayData.length > 0;
 
   const chartBlock = (
@@ -69,7 +70,7 @@ const PieStatsCard = ({
         iconSrc="/ogy_logo.svg"
         value={displayTotal}
         unit="OGY"
-        loading={loading}
+        loading={showSkeleton}
       />
     </div>
   );
@@ -81,7 +82,7 @@ const PieStatsCard = ({
           title={infos[index].name}
           value={valueToString}
           unit="OGY"
-          loading={loading}
+          loading={showSkeleton}
           accessory={
             <div
               className="h-2 w-2 rounded-full"
@@ -102,13 +103,9 @@ const PieStatsCard = ({
     : null;
 
   return (
-    <SkeletonOverlay loading={loading}>
+    <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>
-        {isError && errorMessage && (
-          <div className="bg-rose-500 rounded-xl text-white font-bold mb-8 p-6">
-            {errorMessage}
-          </div>
-        )}
+        {hasError && <CardErrorOverlay title={title} />}
         <div data-skel-static className="flex items-center justify-between">
           <div className="text-charcoal text-[22px] font-semibold leading-none">
             {title}

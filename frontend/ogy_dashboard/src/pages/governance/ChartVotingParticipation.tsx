@@ -59,7 +59,6 @@ const ChartVotingParticipation = ({
       legendLabel="PARTICIPATION %"
       loading={isLoading}
       isError={isError}
-      errorMessage="Error while fetching voting participation data."
     />
   );
 };

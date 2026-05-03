@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useWallet } from "@components/auth/useWallet";
 import { Table, LoaderSpin, Card } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import { INeuronData } from "@services/types";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
 import NeuronsDetails from "./neuron-details";
@@ -109,10 +110,13 @@ const NeuronsList = () => {
         </AddNeuronProvider>
       </div>
 
-      {(isLoadingGetNeuronsList || isErrorGetNeuronsList) && (
+      {isLoadingGetNeuronsList && (
         <div className="flex items-center justify-center pt-4 pb-8">
           <LoaderSpin />
         </div>
+      )}
+      {isErrorGetNeuronsList && (
+        <div className="flex items-center justify-center pt-4 pb-8 min-h-32" />
       )}
       {isSuccessGetNeuronsList && neuronsList?.rows.length !== 0 && (
         <Table
@@ -127,6 +131,7 @@ const NeuronsList = () => {
           No neurons added yet.
         </div>
       )}
+      {isErrorGetNeuronsList && <CardErrorOverlay title="My OGY Neurons" />}
     </Card>
   );
 };

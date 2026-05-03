@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactNode, useDeferredValue, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Card, SkeletonOverlay } from "@components/ui";
-import { StatCard } from "@components/dashboard";
+import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import { FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import { millify } from "@helpers/numbers";
 import { useMintCostEstimate } from "../../hooks/calculator/useMintCostEstimate";
@@ -440,17 +440,8 @@ const Calculator = () => {
                 </div>
 
                 <div className="mt-6 flex flex-1 flex-col gap-3">
-                  <SkeletonOverlay loading={showSkeleton}>
-                    {showError ? (
-                      <div>
-                        <p className="text-sm font-medium text-content">
-                          Estimate unavailable
-                        </p>
-                        <p className="mt-2 text-sm text-red-500">
-                          {estimateError}
-                        </p>
-                      </div>
-                    ) : (
+                  <div className="relative">
+                    <SkeletonOverlay loading={showSkeleton}>
                       <div className="flex flex-col gap-6">
                         <HeroOgyStat
                           value={
@@ -482,8 +473,9 @@ const Calculator = () => {
                           />
                         </div>
                       </div>
-                    )}
-                  </SkeletonOverlay>
+                    </SkeletonOverlay>
+                    {showError && <CardErrorOverlay title="Live estimate" />}
+                  </div>
                   <div className="grid grid-cols-2 gap-3">
                     <MiniStat
                       title={numMints === 1n ? "Item" : "Items"}

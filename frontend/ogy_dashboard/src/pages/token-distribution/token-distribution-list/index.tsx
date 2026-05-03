@@ -7,7 +7,6 @@ import {
   NewTableColumn,
   TooltipInfo,
   TablePagination,
-  SkeletonOverlay,
 } from "@components/ui";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
@@ -30,8 +29,6 @@ const TokenDistributionList = ({
     data,
     isSuccess: isSuccessFetchTokenHolders,
     isFetching: isFetchingFetchTokenHolders,
-    isError: isErrorFetchTokenHolders,
-    error: errorFetchTokenHolders,
   } = useTokenDistribution({
     limit: pagination?.pageSize as number,
     offset: (pagination.pageSize * pagination.pageIndex) as number,
@@ -147,19 +144,9 @@ const TokenDistributionList = ({
       ? skeletonRows
       : data.list.rows;
 
-  if (isErrorFetchTokenHolders) {
-    return (
-      <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-        <div>{errorFetchTokenHolders?.message}</div>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <SkeletonOverlay loading={isFetchingFetchTokenHolders}>
-        <NewTable columns={columns} data={rows} footer={paginationFooter} />
-      </SkeletonOverlay>
+      <NewTable columns={columns} data={rows} footer={paginationFooter} />
     </div>
   );
 };

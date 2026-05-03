@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Badge, Skeleton } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import useTopTransfersAndBurns, {
   TransformedData,
 } from "@hooks/metrics/useTopTransfersAndBurns";
@@ -21,10 +22,12 @@ const TopTransfersAndBurnsFull = ({
   limit,
 }: TopTransfersAndBurnsFullProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useTopTransfersAndBurns({
+  const { data, isLoading, isError } = useTopTransfersAndBurns({
     type,
     limit,
   });
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -120,24 +123,19 @@ const TopTransfersAndBurnsFull = ({
       <h1 className="text-4xl sm:text-6xl font-bold text-center mt-16 mb-16">
         {title}
       </h1>
-      {isLoading && <Skeleton count={limit} height={52} />}
-      {isError && (
-        <div className="text-red-500">
-          An error occurred: {error?.message || "Unknown error"}
-        </div>
-      )}
-      {data && data.length > 0 ? (
-        <div className="w-10/12 mx-auto my-8">
+      <div className="relative w-10/12 mx-auto my-8">
+        {showSkeleton ? (
+          <Skeleton count={limit} height={52} />
+        ) : data && data.length > 0 ? (
           <Table
             columns={columns}
             data={data.map((item, index) => ({ ...item, index }))}
           />
-        </div>
-      ) : (
-        !isLoading && (
+        ) : (
           <div className="text-center text-gray-500">No data available.</div>
-        )
-      )}
+        )}
+        {hasError && <CardErrorOverlay title={title} />}
+      </div>
     </>
   );
 };

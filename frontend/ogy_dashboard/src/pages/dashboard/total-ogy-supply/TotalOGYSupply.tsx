@@ -11,7 +11,9 @@ const SELECT_PERIOD_OPTIONS = [
 
 const TotalOGYSupply = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
-  const { data, isLoading } = useTotalOGYSupply({ period: selectedPeriod });
+  const { data, isLoading, error } = useTotalOGYSupply({
+    period: selectedPeriod,
+  });
 
   return (
     <AreaStatCard
@@ -39,6 +41,7 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
       chartColor="#38bdf8"
       chartLabel="Total Supply"
       loading={isLoading}
+      error={error}
     />
   );
 };
