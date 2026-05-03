@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 import { useWallet } from "@components/auth/useWallet";
 import { isPlugInstalled, PLUG_INSTALL_URL } from "@components/auth/plug";
@@ -35,32 +36,44 @@ const Auth = ({
       <Dialog
         show={state === walletState.OpenWalletList}
         handleClose={handleCloseWalletList}
+        panelClassName="max-w-[360px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+        floatingClose
       >
-        <div className="pt-2 pb-8 px-6 mx-auto w-full max-w-[343px]">
-          <div className="mb-6 text-center text-[18px] font-bold leading-none text-content">
-            Connect your wallet
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[360px] flex flex-col gap-8">
+          <div className="flex flex-col items-center gap-4">
+            <img src="/ogy_logo.svg" alt="" className="h-9 w-auto" />
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="text-[22px] font-semibold leading-none text-content">
+                Connect your wallet
+              </div>
+              <div className="text-[13px] leading-none text-muted">
+                Choose how you'd like to sign in
+              </div>
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             {walletList.map(({ id, icon, name }) => {
               const plugMissing = id === "plug" && !isPlugInstalled();
               const className =
-                "flex items-center gap-3 w-full rounded-full bg-[#F9FAFE] border border-[#E1E1E1] py-1 pl-1 pr-4 hover:bg-[#F1F3F9] transition-colors";
+                "group flex items-center gap-4 w-full rounded-full bg-[#F9FAFE] border border-[#E1E1E1] p-2 pr-4 hover:bg-[#F1F3F9] hover:border-[#D6D9E2] transition-colors";
               const inner = (
                 <>
-                  <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-white border border-[#E1E1E1] shrink-0 overflow-hidden">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-[#E1E1E1] shrink-0 overflow-hidden">
                     <img
                       src={icon}
                       alt=""
                       className="w-6 h-6 object-contain"
                     />
                   </div>
-                  <span className="text-[14px] font-semibold leading-none text-content">
+                  <span className="flex-1 text-left text-[14px] font-semibold leading-none text-content">
                     {name}
                   </span>
-                  {plugMissing && (
-                    <span className="ml-auto text-[12px] font-medium text-muted">
+                  {plugMissing ? (
+                    <span className="text-[12px] font-medium text-muted">
                       Install
                     </span>
+                  ) : (
+                    <ChevronRightIcon className="h-4 w-4 text-muted shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:text-content" />
                   )}
                 </>
               );
@@ -89,16 +102,34 @@ const Auth = ({
               );
             })}
           </div>
+          <div className="text-center text-[12px] leading-none text-muted">
+            New to Internet Computer?{" "}
+            <a
+              href="https://internetcomputer.org/internet-identity"
+              target="_blank"
+              rel="noreferrer"
+              className="text-content font-medium hover:underline"
+            >
+              Learn more
+            </a>
+          </div>
         </div>
       </Dialog>
       <Dialog
         show={showConnectingDialog}
         handleClose={handleCloseWalletList}
+        panelClassName="max-w-[360px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+        floatingClose
       >
-        <div className="pt-6 pb-12 px-4 text-center">
-          <div className="mb-8 font-semibold text-lg">Connecting...</div>
-          <div className="flex items-center justify-center">
-            <LoaderSpin />
+        <div className="pt-10 pb-10 px-5 mx-auto w-full max-w-[360px] flex flex-col items-center gap-5">
+          <LoaderSpin />
+          <div className="flex flex-col items-center gap-1.5">
+            <div className="text-[18px] font-semibold leading-none text-content">
+              Connecting…
+            </div>
+            <div className="text-[13px] leading-none text-muted">
+              Approve the request in your wallet
+            </div>
           </div>
         </div>
       </Dialog>

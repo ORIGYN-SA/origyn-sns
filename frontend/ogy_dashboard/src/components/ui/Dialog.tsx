@@ -13,11 +13,15 @@ const DialogComponent = ({
   handleClose,
   enableClose = true,
   children,
+  panelClassName = "max-w-xl",
+  floatingClose = false,
 }: {
   show: boolean;
   handleClose: () => void;
   children?: ReactNode;
   enableClose?: boolean;
+  panelClassName?: string;
+  floatingClose?: boolean;
 }) => {
   return (
     <Transition show={show} as={Fragment}>
@@ -30,10 +34,10 @@ const DialogComponent = ({
           <div className="absolute z-50 inset-0 overflow-hidden">
             <TransitionChild
               as={Fragment}
-              enter="ease-in-out duration-500"
+              enter="ease-in-out duration-150"
               enterFrom="opacity-0"
               enterTo="opacity-100"
-              leave="ease-in-out duration-500"
+              leave="ease-in-out duration-150"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
@@ -42,25 +46,41 @@ const DialogComponent = ({
             <div className="fixed flex justify-center h-screen w-full p-4">
               <TransitionChild
                 as={Fragment}
-                enter="ease-out duration-300"
+                enter="ease-out duration-150"
                 enterFrom="opacity-0 scale-95"
                 enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
+                leave="ease-in duration-100"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
                 <DialogPanel
-                  className={`bg-surface rounded-xl w-full max-w-xl transform transition-all my-auto`}
+                  className={`bg-surface rounded-xl w-full ${panelClassName} transform transition-all my-auto relative`}
                 >
-                  <DialogTitle className="flex justify-end px-6 pt-6">
-                    {enableClose && (
-                      <button onClick={handleClose}>
-                        <div className="hover:bg-accent hover:text-white p-1 rounded-full">
-                          <XMarkIcon className="h-8 w-8" />
-                        </div>
+                  {floatingClose ? (
+                    enableClose && (
+                      <button
+                        type="button"
+                        onClick={handleClose}
+                        aria-label="Close"
+                        className="absolute right-3 top-3 z-10 text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
+                      >
+                        <XMarkIcon className="h-5 w-5" />
                       </button>
-                    )}
-                  </DialogTitle>
+                    )
+                  ) : (
+                    <DialogTitle className="flex justify-end px-4 pt-4">
+                      {enableClose && (
+                        <button
+                          type="button"
+                          onClick={handleClose}
+                          aria-label="Close"
+                          className="text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
+                        >
+                          <XMarkIcon className="h-5 w-5" />
+                        </button>
+                      )}
+                    </DialogTitle>
+                  )}
                   {children}
                 </DialogPanel>
               </TransitionChild>
