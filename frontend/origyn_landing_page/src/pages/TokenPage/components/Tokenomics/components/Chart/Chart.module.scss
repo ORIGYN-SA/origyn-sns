@@ -1,0 +1,234 @@
+@use "styles/variables" as *;
+
+.card {
+  position: relative;
+  padding: 24px;
+  font-family: "DM Sans", "Montserrat", system-ui, sans-serif;
+  color: #222526;
+  min-height: 750px;
+
+  @media (max-width: $bp-lg) {
+    min-height: auto;
+  }
+}
+
+.errorBanner {
+  background: #ef4444;
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 32px;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.infoIconWrapper {
+  cursor: pointer;
+  color: rgba(34, 37, 38, 0.6);
+}
+
+.infoIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.tooltip {
+  background-color: #d0d3e0 !important;
+  opacity: 1 !important;
+  color: #222526 !important;
+  border-radius: 10px !important;
+  font-size: 13px;
+  max-width: 256px;
+  z-index: 9;
+}
+
+.tooltipLink {
+  color: #615bff;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+
+  &:hover {
+    font-weight: 600;
+  }
+}
+
+.chartContainer {
+  margin-top: 24px;
+  border-radius: 12px;
+}
+
+.noData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: rgba(34, 37, 38, 0.6);
+}
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.spinner {
+  width: 96px;
+  height: 96px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(97, 91, 255, 0.2);
+  border-top-color: #615bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.totalSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.totalLabel {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(34, 37, 38, 0.6);
+  margin: 0;
+}
+
+.totalValue {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.totalNumber {
+  margin-left: 8px;
+  margin-right: 12px;
+}
+
+.totalUnit {
+  color: rgba(34, 37, 38, 0.6);
+}
+
+.skeleton {
+  height: 1.5em;
+  width: 256px;
+  background: linear-gradient(90deg,
+      rgba(97, 91, 255, 0.08) 25%,
+      rgba(97, 91, 255, 0.3) 50%,
+      rgba(97, 91, 255, 0.08) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.subCardList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.subCard {
+  position: relative;
+  background: rgba(240, 240, 240, 0.4);
+  border: 1px solid #f3f3f3;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 32px;
+  padding-bottom: 32px;
+  transition: background-color 300ms;
+  cursor: default;
+
+  &:hover,
+  &.subCardActive {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.subCardSkeleton {
+  height: 120px;
+  background: rgba(240, 240, 240, 0.4);
+  border: 1px solid #f3f3f3;
+  border-radius: 12px;
+  margin-top: 32px;
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.subCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subCardName {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.colorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.subCardLabel {
+  color: rgba(34, 37, 38, 0.6);
+}
+
+.subCardValue {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.subCardNumber {
+  margin-right: 12px;
+}
+
+.borderBottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 91.666%;
+  border-radius: 9999px;
+}

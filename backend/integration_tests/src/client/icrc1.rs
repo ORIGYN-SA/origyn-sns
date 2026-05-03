@@ -1,35 +1,19 @@
 use crate::{generate_pocket_query_call, generate_pocket_update_call};
 use candid::Nat;
+use icrc_ledger_canister::icrc1_balance_of;
+use icrc_ledger_canister::icrc1_minting_account;
+use icrc_ledger_canister::icrc1_total_supply;
+use icrc_ledger_canister::icrc1_transfer;
 use icrc_ledger_types::icrc1::account::Account;
-use icrc_ledger_types::icrc1::transfer::{TransferArg, TransferError};
+use icrc_ledger_types::icrc1::transfer::TransferArg;
 
 // Queries
 generate_pocket_query_call!(icrc1_balance_of);
 generate_pocket_query_call!(icrc1_total_supply);
+generate_pocket_query_call!(icrc1_minting_account);
 
 // Updates
 generate_pocket_update_call!(icrc1_transfer);
-
-pub mod icrc1_balance_of {
-    use super::*;
-
-    pub type Args = Account;
-    pub type Response = Nat;
-}
-
-pub mod icrc1_transfer {
-    use super::*;
-
-    pub type Args = TransferArg;
-    pub type Response = Result<Nat, TransferError>;
-}
-
-pub mod icrc1_total_supply {
-    use super::*;
-
-    pub type Args = ();
-    pub type Response = Nat;
-}
 
 pub mod client {
     use super::*;

@@ -3,7 +3,27 @@ type Args_1 = record { claim_reward_args : vec ClaimRewardArgs };
 type Args_2 = record { transfer_amounts : vec record { TokenSymbol; nat } };
 type Args_3 = record { token_list : vec record { TokenSymbol; TokenInfo } };
 type Args_4 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
-type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
+// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
+// 
+// # Examples
+// 
+// ```
+// use types::BuildVersion;
+// 
+// let version = BuildVersion::new(1, 2, 3);
+// assert_eq!(version.to_string(), "1.2.3");
+// 
+// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
+// assert_eq!(version, parsed);
+// ```
+type BuildVersion = record {
+  // Major version number, incremented for incompatible API changes
+  major : nat32;
+  // Minor version number, incremented for backwards-compatible functionality additions
+  minor : nat32;
+  // Patch version number, incremented for backwards-compatible bug fixes
+  patch : nat32;
+};
 type ClaimRewardArgs = record { token : TokenSymbol; neuron_id : NeuronId };
 type ClaimRewardError = record {
   token : opt TokenSymbol;
@@ -61,6 +81,8 @@ type InitArgs = record {
   commit_hash : text;
   goldao_ledger_canister_id : principal;
 };
+// The id of a specific neuron, which equals the neuron's subaccount on the ledger canister
+// (the account that holds the neuron's staked tokens).
 type NeuronId = record { id : blob };
 type Response = variant {
   Ok : bool;
@@ -82,6 +104,7 @@ type TokenInfo = record {
   decimals : nat64;
   ledger_id : principal;
 };
+// Compact enum for token identity (for keys, matching, etc.)
 type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
 type Value = variant {
@@ -100,4 +123,6 @@ service : (Args_4) -> {
   set_daily_ogy_burn_rate : (nat) -> (Response_1);
   set_reserve_transfer_amounts : (Args_2) -> (Response_1);
   set_reward_token_types : (Args_3) -> (Response_2);
+  trigger_run_distribution : () -> ();
+  trigger_sync_neurons : () -> ();
 }

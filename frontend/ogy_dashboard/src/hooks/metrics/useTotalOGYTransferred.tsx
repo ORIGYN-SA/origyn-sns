@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { getActor } from "@services/actor";
 import { roundAndFormatLocale } from "@helpers/numbers";
-import { TimeChunkStats, TimeStats } from "@hooks/super_stats_v3/declarations";
+import { TimeChunkStats, TimeStats } from "@hooks/token_metrics/declarations_files/token_metrics";
 
 export interface TransferredData {
   transfer_count: {
@@ -40,7 +40,7 @@ const useTotalOGYTransferred = ({
   }: UseQueryResult<Array<TimeChunkStats>> = useQuery({
     ...options,
     queryFn: async (): Promise<Array<TimeChunkStats>> => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const stats = (await actor.get_daily_stats()) as TimeStats;
       return stats.count_over_time;
     },

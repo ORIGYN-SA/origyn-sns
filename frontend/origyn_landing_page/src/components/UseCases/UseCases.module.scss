@@ -1,0 +1,247 @@
+@use "styles/variables" as *;
+
+.container {
+  padding: 96px 75px;
+  background: $bg-light;
+  overflow: hidden;
+
+  @media (max-width: $bp-md) {
+    padding: 48px 16px;
+    overflow: hidden;
+  }
+}
+
+.header {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: $bp-md) {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+.title {
+  @include type('display');
+  color: $color-text;
+  margin-bottom: 24px;
+
+  span {
+    font-family: $font-italic;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-44;
+    line-height: 1.35;
+  }
+}
+
+.description {
+  @include type('body-lg');
+  font-family: $font-sans;
+  color: $color-text;
+  letter-spacing: 5%;
+  text-transform: uppercase;
+  max-width: 710px;
+  text-align: center;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-14;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    text-align: left;
+  }
+}
+
+.grid {
+  margin-top: 83px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  overflow: visible;
+
+  @media (max-width: $bp-xl) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-md) {
+    display: flex;
+    overflow: hidden;
+    margin-top: 12px;
+    width: 100%;
+    gap: 0;
+  }
+}
+
+.cardWrapper {
+  width: 100%;
+  overflow: visible;
+
+  @media (max-width: $bp-md) {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(calc(-100% * var(--current-index, 0)));
+    transition: transform 0.3s ease-in-out;
+
+    &:hover .cardImage {
+      transform: scale(1.1);
+    }
+
+    &:hover .cardOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 16px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+
+  .cardWrapper:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.cardOverlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  .cardWrapper:hover & {
+    opacity: 1;
+  }
+
+  @media (max-width: $bp-md) {
+    opacity: 1;
+  }
+}
+
+.cardTitleBelow {
+  @include type('label');
+  font-family: $font-sans;
+  text-transform: uppercase;
+  color: $color-text;
+  margin: 12px 0 0 0;
+  letter-spacing: 1px;
+
+  @media (max-width: $bp-md) {
+    display: none;
+  }
+}
+
+.cardContent {
+  text-align: center;
+  color: white;
+  max-width: 280px;
+}
+
+.cardTitle {
+  @include type('h3');
+  font-family: $font-gestura;
+  font-weight: 200;
+  letter-spacing: 1px;
+  color: white;
+  margin: 0 0 24px 0;
+}
+
+.cardDescription {
+  @include type('body');
+  font-family: $font-sans;
+  color: white;
+  margin: 0 0 28px 0;
+  opacity: 0.9;
+}
+
+.discoverButton {
+  @include type('label-bold');
+  background: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 25px;
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "DM Sans Bold";
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
+}
+
+.indicators {
+  display: none;
+
+  @media (max-width: $bp-md) {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+}
+
+.mobileContent {
+  display: none;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #e5e5e5;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &.active {
+    background-color: #00e0ff;
+  }
+}
+
+.activeCard {
+  transform: translateX(0);
+  opacity: 1;
+}

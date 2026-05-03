@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 // use tracing::trace;
 use tracing::{error, info};
 use types::CanisterId;
-use utils::rand::generate_rand_nonce;
+use bity_ic_utils::rand::generate_rand_nonce;
 
 #[derive(CandidType, Serialize, Deserialize, Clone)]
 pub struct IcpManager {

@@ -5,7 +5,7 @@ use candid::{Nat, Principal};
 use types::{TokenInfo, TokenSymbol};
 
 use crate::{
-    client::rewards::{set_reward_token_types, set_reward_token_types_validate},
+    client::sns_rewards::{set_reward_token_types, set_reward_token_types_validate},
     sns_rewards_suite::setup::default_test_setup,
 };
 

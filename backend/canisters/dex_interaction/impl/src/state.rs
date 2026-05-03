@@ -3,15 +3,13 @@ use crate::types::token_swaps::TokenSwapsMetrics;
 use crate::types::ExchangeJobs;
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
-use dex_interaction_api::exchange_job_config::ExchangeJobConfig;
 use candid::{CandidType, Principal};
-use ic_ledger_types::Tokens;
+use dex_interaction_api::exchange_job_config::ExchangeJobConfig;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use types::{Cycles, TimestampMillis};
 use utils::env::{CanisterEnv, Environment};
 use utils::memory::MemorySize;
-use utils::numeric::Percentage;
 
 canister_state!(RuntimeState);
 

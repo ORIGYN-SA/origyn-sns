@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { usePricingData } from "../../hooks/calculator/usePricingData";
-import TooltipInfo from "../Tooltip/TooltipInfo";
+import { useState, useEffect } from "react";
+import { usePricingData } from "../../hooks/usePricingData";
+import TooltipInfo from "@components/Tooltip/TooltipInfo";
 import { Slider } from "@mui/material";
-import styles from "./Calculator.module.css";
+import styles from "./Calculator.module.scss";
 
 const Calculator = () => {
   const { data: pricing, loading, error } = usePricingData();
@@ -11,7 +11,7 @@ const Calculator = () => {
   const [calculations, setCalculations] = useState({
     collections: 0,
     storage: 0,
-    certificates: 0,
+    certificates: 1,
     certificateUpdates: 0,
     storageSize: 0,
   });

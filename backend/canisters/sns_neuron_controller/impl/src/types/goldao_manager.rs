@@ -29,7 +29,7 @@ impl Default for GoldaoManager {
             goldao_sns_rewards_canister_id: Principal::from_text("iyehc-lqaaa-aaaap-ab25a-cai")
                 .unwrap(),
             neurons: Neurons::default(),
-            goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64), // 30'000 GOLDAO // FIXME
+            goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64), // 30'000 GOLDAO
         }
     }
 }

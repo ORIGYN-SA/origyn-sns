@@ -13,5 +13,12 @@
     "@dfinity/agent": "^2.4.0",
     "@dfinity/candid": "^2.4.0",
     "@dfinity/principal": "^2.4.0"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.40.1",
+    "@rollup/rollup-linux-arm64-gnu": "4.40.1"
   }
 }

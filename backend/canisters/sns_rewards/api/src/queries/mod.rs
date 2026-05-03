@@ -1,3 +1,5 @@
+pub mod get_5y_neuron_by_id;
+pub mod get_active_5y_payment_rounds;
 pub mod get_active_payment_rounds;
 pub mod get_all_neurons;
 pub mod get_all_neurons_maturity;

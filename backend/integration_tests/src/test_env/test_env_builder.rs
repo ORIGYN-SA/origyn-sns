@@ -3,8 +3,8 @@ use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::test_env::setup_canisters::*;
 use crate::utils::{random_principal, tick_n_blocks};
 use bity_ic_types::Hash;
-use dex_interaction_api::Args as BuybackBurnArgs;
 use candid::{Nat, Principal};
+use dex_interaction_api::Args as BuybackBurnArgs;
 use pocket_ic::PocketIcBuilder;
 use sns_governance_canister::types::Neuron;
 use sns_ledger_canister::types::Account as LedgerAccount;
@@ -13,6 +13,7 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::time::Duration;
+use std::time::SystemTime;
 use types::TokenSymbol;
 
 /// Describes a single SNS to spin up, with optional neuron data and initial ledger balances.
@@ -85,7 +86,11 @@ impl TestEnv {
         }
     }
 
-    pub fn install_dex_interaction(&self, canister_id: Principal, args: BuybackBurnArgs) -> Principal {
+    pub fn install_dex_interaction(
+        &self,
+        canister_id: Principal,
+        args: BuybackBurnArgs,
+    ) -> Principal {
         setup_dex_interaction::setup(
             &mut self.pic.borrow_mut(),
             canister_id,
@@ -102,9 +107,26 @@ impl TestEnv {
         setup_rewards::setup(
             &self.pic.borrow(),
             canister_id,
-            self.get_ledger_canister_id(TokenSymbol::ICP).unwrap(),
             self.get_ledger_canister_id(TokenSymbol::OGY).unwrap(),
-            self.get_ledger_canister_id(TokenSymbol::GOLDAO).unwrap(),
+            sns_gov_canister_id,
+            &self.controller,
+        )
+    }
+
+    pub fn install_goldao_rewards(
+        &self,
+        canister_id: Principal,
+        sns_gov_canister_id: Principal,
+        icp_ledger_canister_id: Principal,
+        ogy_ledger_canister_id: Principal,
+        sns_ledger_canister_id: Principal,
+    ) -> Principal {
+        setup_rewards::setup_goldao(
+            &self.pic.borrow(),
+            canister_id,
+            icp_ledger_canister_id,
+            sns_ledger_canister_id,
+            ogy_ledger_canister_id,
             sns_gov_canister_id,
             &self.controller,
         )
@@ -115,8 +137,6 @@ impl TestEnv {
         canister_id: Principal,
         rewards_destination: Option<Principal>,
         ogy_sns_governance_canister_id: Principal,
-        ogy_sns_ledger_canister_id: Principal,
-        ogy_sns_rewards_canister_id: Principal,
         goldao_sns_governance_canister_id: Principal,
         goldao_sns_ledger_canister_id: Principal,
         goldao_sns_rewards_canister_id: Principal,
@@ -127,8 +147,6 @@ impl TestEnv {
             vec![self.controller],
             rewards_destination,
             ogy_sns_governance_canister_id,
-            ogy_sns_ledger_canister_id,
-            ogy_sns_rewards_canister_id,
             goldao_sns_governance_canister_id,
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,
@@ -231,6 +249,10 @@ impl TestEnvBuilder {
                 .with_application_subnet()
                 .build(),
         ));
+
+        pic_ref.borrow().set_time(
+            (SystemTime::UNIX_EPOCH + std::time::Duration::from_millis(1718697600000)).into(),
+        ); // Tue Jun 18 2024 08:00:00 GMT
 
         let mut sns_envs = HashMap::new();
         let mut tokens = vec![];

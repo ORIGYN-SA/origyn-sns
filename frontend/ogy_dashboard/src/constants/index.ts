@@ -11,8 +11,6 @@ export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env
 export const SNS_REWARDS_CANISTER_ID = import.meta.env
   .VITE_SNS_REWARDS_CANISTER_ID;
 export const SNS_ROOT_CANISTER = import.meta.env.VITE_SNS_ROOT_CANISTER;
-export const TOKEN_STATS_CANISTER_ID = import.meta.env
-  .VITE_TOKEN_STATS_CANISTER_ID;
 export const LEGACY_LEDGER_CANISTER_ID = import.meta.env
   .VITE_LEGACY_LEDGER_CANISTER_ID;
 export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env
@@ -204,12 +202,6 @@ if (!(APP_MODE === "production")) {
       "No LEGACY_VESTING_CANISTER_ID environment variable. Set LEGACY_VESTING_CANISTER_ID environment variable."
     );
   else console.log(`LEGACY_VESTING_CANISTER_ID=${LEGACY_VESTING_CANISTER_ID}`);
-
-  if (!TOKEN_STATS_CANISTER_ID)
-    console.log(
-      "No TOKEN_STATS_CANISTER_ID environment variable. Set TOKEN_STATS_CANISTER_ID environment variable."
-    );
-  else console.log(`TOKEN_STATS_CANISTER_ID=${TOKEN_STATS_CANISTER_ID}`);
 
   if (!API_ICRC_V1_BASE_URL)
     console.log(

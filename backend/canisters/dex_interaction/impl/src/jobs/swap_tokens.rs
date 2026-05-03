@@ -8,10 +8,8 @@ use bity_ic_canister_time::NANOS_PER_MILLISECOND;
 use bity_ic_canister_tracing_macros::trace;
 use candid::Nat;
 use icrc_ledger_types::icrc1::transfer::TransferArg;
-use tracing::debug;
 use tracing::{error, info};
 use utils::env::Environment;
-use utils::rand::generate_random_delay;
 
 const MAX_ATTEMPTS: u8 = 1;
 
@@ -57,9 +55,9 @@ async fn run_async_with_rand_delay(exchange_job_id: u128) {
     });
 
     if let Some(job_interval) = interval {
-        match generate_random_delay(job_interval).await {
+        match bity_ic_utils::rand::generate_random_delay(job_interval).await {
             Ok(random_delay) => {
-                debug!(
+                info!(
                     "Scheduling token swap job after random delay of {:?}",
                     random_delay
                 );

@@ -1,3 +1,5 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
 type Account = record { owner : principal; subaccount : opt blob };
 type Args = record {
   destination_account : opt opt Account;
@@ -9,7 +11,27 @@ type Args = record {
   max_amount : opt opt Tokens;
 };
 type Args_1 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
-type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
+// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
+// 
+// # Examples
+// 
+// ```
+// use types::BuildVersion;
+// 
+// let version = BuildVersion::new(1, 2, 3);
+// assert_eq!(version.to_string(), "1.2.3");
+// 
+// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
+// assert_eq!(version, parsed);
+// ```
+type BuildVersion = record {
+  // Major version number, incremented for incompatible API changes
+  major : nat32;
+  // Minor version number, incremented for backwards-compatible functionality additions
+  minor : nat32;
+  // Patch version number, incremented for backwards-compatible bug fixes
+  patch : nat32;
+};
 type ExchangeConfig = variant { ICPSwap : ICPSwapConfig };
 type ExchangeJobConfig = record {
   destination_account : opt Account;
@@ -53,7 +75,14 @@ type TokenSwap = record {
   success : opt bool;
   transfer : opt Result_4;
 };
+// Compact enum for token identity (for keys, matching, etc.)
 type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
+// A type for representing amounts of Tokens.
+// 
+// # Panics
+// 
+// * Arithmetics (addition, subtraction) on the Tokens type panics if the underlying type
+// overflows.
 type Tokens = record { e8s : nat64 };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
 service : (Args_1) -> {

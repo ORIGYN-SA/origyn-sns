@@ -7,7 +7,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { ActivitySnapshot } from "./declarations";
+import { ActivitySnapshot } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { roundAndFormatLocale } from "@helpers/numbers";
 import { getActor } from "@services/actor";
 import {
@@ -94,7 +94,7 @@ const useGetActivityStats = ({
     ...options,
     queryKey,
     queryFn: async (): Promise<Array<ActivitySnapshot>> => {
-      const actor = await getActor("tokenStats", { isAnon: true });
+      const actor = await getActor("tokenMetrics", { isAnon: true });
       const results = await actor.get_activity_stats(daysToFetch);
       return results as Array<ActivitySnapshot>;
     },

@@ -1,5 +1,5 @@
 use crate::client::icrc1::icrc1_total_supply;
-use crate::client::rewards::{set_daily_ogy_burn_rate, set_daily_ogy_burn_rate_validate};
+use crate::client::sns_rewards::{set_daily_ogy_burn_rate, set_daily_ogy_burn_rate_validate};
 use crate::sns_rewards_suite::setup::test_setup_with_no_reward_pool_mint;
 use crate::{
     client::icrc1::client::{balance_of, transfer},

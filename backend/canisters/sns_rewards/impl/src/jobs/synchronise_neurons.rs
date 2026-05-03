@@ -8,7 +8,8 @@ is eligible for.
 */
 
 use crate::state::{mutate_state, read_state};
-use bity_ic_canister_time::{start_job_daily_at, timestamp_millis};
+use bity_ic_canister_time::start_job_daily_at;
+use bity_ic_canister_time::timestamp_millis;
 use tracing::{debug, error, info};
 
 pub fn start_job() {
@@ -55,6 +56,7 @@ pub async fn synchronise_neuron_data() {
                     debug!("Updating neurons");
                     response.neurons.iter().for_each(|neuron| {
                         state.data.neuron_system.upsert_neuron(neuron);
+                        state.data.neuron_system.upsert_5y_neuron(neuron);
                     });
                 });
                 let number_of_received_neurons = response.neurons.len();

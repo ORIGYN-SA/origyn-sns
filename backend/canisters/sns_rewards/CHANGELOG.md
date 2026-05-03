@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 #### Added
 
 - **State**: Include versioning and commit info into CanisterInfo.
-- **Neuron dissolve delay**: Now rewards are only distributed to neurons with delay biger than 5 years.
+- **New rewards flow**: Rewards from neurons in external SNS/NNS are swapped to OGY and then distributed for tokens locked for more than 5 years.
 
 #### Updated
 

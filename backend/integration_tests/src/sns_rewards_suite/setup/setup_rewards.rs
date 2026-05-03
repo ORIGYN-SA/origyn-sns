@@ -46,9 +46,7 @@ pub fn setup_rewards_canister(
         test_mode: true,
         version: BuildVersion::min(),
         commit_hash: "Test".to_string(),
-        icp_ledger_canister_id,
         sns_ledger_canister_id,
-        goldao_ledger_canister_id,
         sns_gov_canister_id: sns_canister_id.clone(),
     });
     pic.install_canister(

@@ -1,0 +1,85 @@
+@use "styles/variables" as *;
+
+.benefitsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-family: $font-sans, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  max-width: 1350px;
+  margin: 0 auto;
+  border-top: 1px solid $border-celeste;
+  border-bottom: 1px solid $border-celeste;
+
+  @media (max-width: 991px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.benefitItem {
+  background-color: $bg-light;
+  display: flex;
+  padding: 24px 40px;
+  gap: 24px;
+  position: relative;
+
+  &:not(:nth-child(2n)) {
+    border-right: 1px solid $border-celeste;
+  }
+
+  &:nth-child(-n + 2) {
+    border-bottom: 1px solid $border-celeste;
+  }
+
+  @media (max-width: 991px) {
+    padding: 20px;
+
+    &:not(:nth-child(2n)) {
+      border-right: none;
+    }
+
+    &:nth-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-celeste;
+    }
+  }
+}
+
+.iconContainer {
+  display: flex;
+  width: 40px;
+  flex-shrink: 0;
+  height: 40px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+}
+
+.title {
+  @include type('h4');
+  color: $color-text;
+  letter-spacing: 1.2px;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-14;
+    line-height: 1.4;
+  }
+}
+
+.description {
+  @include type('body');
+  color: $color-muted;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-12;
+    line-height: 1.5;
+  }
+}

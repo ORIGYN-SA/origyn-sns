@@ -1,0 +1,158 @@
+@use "styles/variables" as *;
+
+.container {
+  background-color: $color-navy;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  color: white;
+
+  @media (max-width: $bp-md) {
+    padding: 48px 16px;
+    background-image: url("/cas-mobile-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.calculatorWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $bp-md) {
+    order: 1;
+    margin-top: 24px;
+  }
+}
+
+.calculatorInner {
+  position: relative;
+
+  @media (max-width: $bp-xl) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+.gradientBackground {
+  position: absolute;
+  top: -209px;
+  left: 50%;
+  transform: translateX(-41%);
+  width: 100%;
+  height: 95%;
+  background-image: radial-gradient(circle at 34%, #75ff8040 -7%, transparent 23%);
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: $bp-md) {
+    top: -283px;
+    left: 49%;
+    transform: translateX(-60%);
+    height: 100%;
+    background-image: radial-gradient(circle at 33%, #75ff8040 -7%, transparent 28%);
+  }
+}
+
+.titleDesktop {
+  @include type('display');
+  letter-spacing: 0;
+  text-align: center;
+
+  @media (max-width: $bp-lg) {
+    font-size: $fs-48;
+  }
+
+  @media (max-width: $bp-md) {
+    display: none;
+  }
+}
+
+.titleMobile {
+  display: none;
+
+  @media (max-width: $bp-md) {
+    display: block;
+    font-size: $fs-44;
+    line-height: 1.35;
+    font-family: $font-sans;
+    font-weight: 300;
+    letter-spacing: 0;
+    text-align: center;
+  }
+}
+
+.italic {
+  font-family: $font-italic-montserrat;
+  font-weight: 250;
+}
+
+.subtitle {
+  @include type('body-lg');
+  margin-top: 28px;
+  margin-bottom: 96px;
+  font-family: $font-sans;
+  letter-spacing: 5%;
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 806px;
+
+  @media (max-width: $bp-md) {
+    order: 2;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-size: $fs-14;
+    line-height: 1.5;
+    letter-spacing: 1.3px;
+  }
+}
+
+.contactBoxAbsolute {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-left: 40px;
+  transform: translateY(-50%);
+  padding: 16px 7px;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+  width: 190px;
+
+  @media (max-width: $bp-xl) {
+    position: static;
+    transform: none;
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media (max-width: $bp-md) {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+  }
+}
+
+.contactText {
+  @include type('subtitle');
+  font-family: $font-sans;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-12;
+    line-height: 1.5;
+  }
+}
