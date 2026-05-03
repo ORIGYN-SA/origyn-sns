@@ -21,7 +21,6 @@ export default defineConfig({
             "@dfinity/candid",
             "@dfinity/ledger-icp",
             "@dfinity/ledger-icrc",
-            "@dfinity/nns-proto",
             "@dfinity/principal",
             "@dfinity/utils",
           ],
