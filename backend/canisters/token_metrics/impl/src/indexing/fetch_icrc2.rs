@@ -76,10 +76,7 @@ pub async fn t2_download_and_process() -> Result<(), String> {
 
     let next_block = read_state(|s| s.data.ledger_indexer.working_stats.next_block);
     if chain_tip <= next_block {
-        info!(
-            "fetch_icrc2: already up to date (tip={}, next={})",
-            chain_tip, next_block
-        );
+        info!("fetch_icrc2: already up to date (tip={}, next={})", chain_tip, next_block);
         return Ok(());
     }
 
@@ -136,21 +133,10 @@ async fn download_and_process_chunks(
         }
         let length = remaining.min(MAX_TRANSACTION_BATCH_SIZE as u64);
 
-        info!(
-            "fetch_icrc2: chunk {}/{} — downloading blocks {}..{}",
-            i + 1,
-            chunks,
-            start,
-            start + length
-        );
+        info!("fetch_icrc2: chunk {}/{} — downloading blocks {}..{}", i + 1, chunks, start, start + length);
         let txns = icrc2_download_chunk(start, length, ledger).await?;
         let count = txns.len() as u64;
-        info!(
-            "fetch_icrc2: chunk {}/{} — got {} txns, processing",
-            i + 1,
-            chunks,
-            count
-        );
+        info!("fetch_icrc2: chunk {}/{} — got {} txns, processing", i + 1, chunks, count);
 
         if !txns.is_empty() {
             // Process + index + cache this chunk immediately (stays within instruction limit)
@@ -173,21 +159,13 @@ async fn download_and_process_chunks(
                 s.data.ledger_indexer.working_stats.is_upto_date = up_to_date;
             });
 
-            info!(
-                "fetch_icrc2: chunk {}/{} — indexed up to block {}",
-                i + 1,
-                chunks,
-                processed_tip
-            );
+            info!("fetch_icrc2: chunk {}/{} — indexed up to block {}", i + 1, chunks, processed_tip);
         }
 
         completed += count;
     }
 
-    info!(
-        "fetch_icrc2: download complete — {} total txns processed",
-        completed
-    );
+    info!("fetch_icrc2: download complete — {} total txns processed", completed);
     Ok(())
 }
 
@@ -217,10 +195,7 @@ async fn icrc2_download_chunk(
 
     match (has_ledger, has_archive) {
         (true, true) => {
-            info!(
-                "fetch_icrc2: fetching from {} archive range(s) + ledger",
-                resp.archived_transactions.len()
-            );
+            info!("fetch_icrc2: fetching from {} archive range(s) + ledger", resp.archived_transactions.len());
             let mut all_txs = fetch_all_archives(&resp.archived_transactions).await?;
             let next = all_txs.last().map(|tx| tx.block + 1).unwrap_or(start);
             let mut ledger_txs = process_ledger_blocks(resp.transactions, next)?;
@@ -228,17 +203,11 @@ async fn icrc2_download_chunk(
             Ok(all_txs)
         }
         (true, false) => {
-            info!(
-                "fetch_icrc2: processing {} ledger blocks (no archive)",
-                resp.transactions.len()
-            );
+            info!("fetch_icrc2: processing {} ledger blocks (no archive)", resp.transactions.len());
             process_ledger_blocks(resp.transactions, start)
         }
         (false, true) => {
-            info!(
-                "fetch_icrc2: fetching from {} archive range(s) (no ledger)",
-                resp.archived_transactions.len()
-            );
+            info!("fetch_icrc2: fetching from {} archive range(s) (no ledger)", resp.archived_transactions.len());
             fetch_all_archives(&resp.archived_transactions).await
         }
         (false, false) => {
@@ -262,12 +231,7 @@ async fn fetch_all_archives(archives: &[ArchivedRange1]) -> Result<Vec<Processed
             archive_len
         );
         let txs = get_transactions_from_archive(archived).await?;
-        info!(
-            "fetch_icrc2: archive {}/{} — got {} txns",
-            i + 1,
-            archives.len(),
-            txs.len()
-        );
+        info!("fetch_icrc2: archive {}/{} — got {} txns", i + 1, archives.len(), txs.len());
         all_txs.extend(txs);
     }
     Ok(all_txs)
