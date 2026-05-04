@@ -222,7 +222,7 @@ pub trait NeuronRewardsManager: NeuronManager {
         .await;
 
         match disburse_result {
-            Ok(_) => ClaimRewardResult::Succesfull,
+            Ok(_) => ClaimRewardResult::Successful,
             Err(error) => ClaimRewardResult::Partial(error.concat()),
         }
     }

@@ -9,6 +9,7 @@ use crate::{
 use candid::Nat;
 use candid::Principal;
 use icrc_ledger_types::icrc1::account::Account;
+use std::collections::HashMap;
 use std::time::Duration;
 use types::TokenSymbol;
 
@@ -32,6 +33,7 @@ fn test_process_goldao_neurons_happy_path() {
     let env = TestEnvBuilder::new()
         .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(ogy_neuron_data))
         .add_sns(SnsConfig::new(SnsProject::GoldDao).with_neurons(goldao_neuron_data))
+        .add_sns(SnsConfig::new(SnsProject::Wtn).with_neurons(HashMap::new()))
         .add_token_ledger(&types::TokenSymbol::GLDT)
         .add_token_ledger(&types::TokenSymbol::ICP)
         .add_token_ledger(&types::TokenSymbol::WTN)
