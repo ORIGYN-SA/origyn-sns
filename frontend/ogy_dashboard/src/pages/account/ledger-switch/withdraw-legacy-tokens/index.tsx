@@ -10,7 +10,7 @@ const WithdrawLegacyTokens = () => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Button className="w-full">
+      <Button className="h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2">
         <div className="flex items-center justify-center">
           <div>Go to Legacy OGY dashboard</div>
           <div>

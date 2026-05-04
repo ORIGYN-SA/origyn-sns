@@ -9,7 +9,7 @@ import OrigynTreasuryAccount from "@pages/dashboard/origyn-treasury-account/Orig
 import OrigynRewardAccount from "@pages/dashboard/origyn-reward-account";
 import { Badge, Button } from "@components/ui";
 import AuthButton from "@components/auth/Auth";
-import LedgerSwitchBannerContent from "@components/ledger-switch/banner-content";
+import LedgerSwitchBanner from "@components/ledger-switch/banner";
 import TokenDistributionList from "@pages/dashboard/token-distribution";
 import TransactionHistory from "@pages/dashboard/transaction-history";
 import { StakingOverviewChart } from "@components/dashboard";
@@ -26,6 +26,8 @@ const HERO_BG_GRADIENTS = `
   radial-gradient(ellipse at 55% 65%, rgba(31,156,212,0.32), transparent 50%),
   radial-gradient(ellipse at 30% 75%, rgba(123,63,160,0.22), transparent 50%)
 `;
+
+const LEDGER_SWITCH_CTA_CLASS = "!px-[25px] !py-0 text-[14px] leading-[48px]";
 
 const HeroBackground = () => (
   <div
@@ -83,21 +85,28 @@ const Dashboard = () => {
             </p>
           </div>
 
-          <div className="bg-ledger-switch bg-cover bg-center bg-black text-content p-12 rounded-[40px] shadow-[0px_10px_50px_0px_#06274926] mt-8 w-full">
-            <LedgerSwitchBannerContent>
-              <div className="flex justify-center mt-8">
-                {!isConnected && <AuthButton label="Login to swap tokens" />}
-                {isConnected && (
-                  <Button onClick={handleClickAccount}>My account</Button>
-                )}
-              </div>
-            </LedgerSwitchBannerContent>
-          </div>
+          <LedgerSwitchBanner className="mt-8 w-full">
+            <div className="flex justify-center mt-8">
+              {!isConnected && (
+                <AuthButton
+                  label="Login to swap tokens"
+                  className={LEDGER_SWITCH_CTA_CLASS}
+                />
+              )}
+              {isConnected && (
+                <Button
+                  className={LEDGER_SWITCH_CTA_CLASS}
+                  onClick={handleClickAccount}
+                >
+                  My account
+                </Button>
+              )}
+            </div>
+          </LedgerSwitchBanner>
         </div>
       </section>
 
       <div className="flex flex-col items-center pb-16 px-6">
-
         <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-x-6 gap-y-16 pb-16">
           <section className="w-full h-full" id="total-ogy-supply">
             <TotalOGYSupply className="h-full" />
