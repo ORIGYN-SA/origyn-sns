@@ -46,8 +46,8 @@ const getColumns = (
       <span
         className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${
           row.state === "Dissolved"
-            ? "bg-jade/20 text-jade"
-            : "bg-sky/20 text-sky"
+            ? "bg-sky/20 text-sky"
+            : "bg-jade/20 text-jade"
         }`}
       >
         {row.state}
@@ -97,7 +97,7 @@ const getColumns = (
 const FAKE_ROW: NeuronRow = {
   id: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa",
   stakedOGY: "1,000,000",
-  state: "Active",
+  state: "Not dissolving",
   votingPower: "1,250,000",
   dissolveDelay: "2 years",
   age: "6 months ago",

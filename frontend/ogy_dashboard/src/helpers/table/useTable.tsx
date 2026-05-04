@@ -3,17 +3,32 @@ import { PaginationState, SortingState } from "@tanstack/react-table";
 import { useSearchParams } from "react-router-dom";
 
 export interface TableProps {
-  pagination?: PaginationState | Dispatch<SetStateAction<PaginationState>>;
-  setPagination?: PaginationState | Dispatch<SetStateAction<PaginationState>>;
-  sorting?: SortingState | Dispatch<SetStateAction<SortingState>>;
-  setSorting?: SortingState | Dispatch<SetStateAction<SortingState>>;
+  pagination?: PaginationState;
+  setPagination?: Dispatch<SetStateAction<PaginationState>>;
+  sorting?: SortingState;
+  setSorting?: Dispatch<SetStateAction<SortingState>>;
 }
+
+type UsePaginationParams = {
+  pageSize?: number;
+  pageIndex?: number;
+  identifier?: string;
+};
+
+type UseSortingParams = {
+  id?: string;
+  desc?: boolean;
+  identifier?: string;
+};
 
 export const usePagination = ({
   pageSize = 10,
   pageIndex = 0,
   identifier = "",
-}) => {
+}: UsePaginationParams): [
+  PaginationState,
+  Dispatch<SetStateAction<PaginationState>>
+] => {
   const [searchParams] = useSearchParams();
   const _pageSize = Number(
     searchParams.get(`page_size${identifier ?? `_${identifier}`}`)
@@ -28,7 +43,14 @@ export const usePagination = ({
   return [pagination, setPagination];
 };
 
-export const useSorting = ({ id = "", desc = true, identifier = "" }) => {
+export const useSorting = ({
+  id = "",
+  desc = true,
+  identifier = "",
+}: UseSortingParams): [
+  SortingState,
+  Dispatch<SetStateAction<SortingState>>
+] => {
   const [searchParams] = useSearchParams();
   const _id = searchParams.get(`id${identifier ?? `_${identifier}`}`);
   const _desc = searchParams.get(`desc${identifier ?? `_${identifier}`}`);

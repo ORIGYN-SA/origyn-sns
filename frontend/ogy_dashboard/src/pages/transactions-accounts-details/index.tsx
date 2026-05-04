@@ -62,21 +62,25 @@ const InfoRow = ({
   label,
   value,
   copyable,
+  loading,
 }: {
   label: string;
   value: string | undefined;
   copyable?: boolean;
+  loading?: boolean;
 }) => (
-  <div className="flex flex-col gap-2">
-    <div className="text-[12px] font-bold leading-none text-muted">{label}</div>
-    {value === undefined ? (
+  <div className="flex flex-col gap-1.5">
+    <div className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted">
+      {label}
+    </div>
+    {loading ? (
       <div className="h-4 w-full max-w-[420px] rounded-md bg-muted/20" />
     ) : (
       <div className="flex items-center gap-2 min-w-0">
-        <span className="text-[16px] font-bold leading-none text-content break-all">
-          {value}
+        <span className="font-mono text-[13px] font-medium leading-tight text-content break-all tracking-tight">
+          {value ?? "—"}
         </span>
-        {copyable && <CopyToClipboard value={value} />}
+        {copyable && value && <CopyToClipboard value={value} />}
       </div>
     )}
   </div>
@@ -85,11 +89,13 @@ const InfoRow = ({
 const BalanceStatRow = ({
   label,
   value,
+  loading,
 }: {
   label: string;
   value: string | undefined;
+  loading?: boolean;
 }) => {
-  if (value === undefined) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center">
         <div className="h-3 w-[240px] rounded-md bg-muted/20" />
@@ -104,7 +110,7 @@ const BalanceStatRow = ({
       <span className="flex items-center gap-1">
         <img src="/ogy_logo.svg" alt="" className="w-2 h-2 shrink-0" />
         <span className="text-[12px] font-bold leading-none text-muted">
-          {value}
+          {value ?? "0"}
         </span>
         <span className="text-[12px] font-medium leading-none text-muted">
           OGY
@@ -124,7 +130,12 @@ const TransactionsAccountsDetails = () => {
   const [txPageSize, setTxPageSize] = useState(10);
   const [txSortDesc, setTxSortDesc] = useState(true);
 
-  const { data, isLoading } = useFecthOneAccount({ accountId });
+  const { data, isLoading, isError: isAccountError } = useFecthOneAccount({
+    accountId,
+  });
+  const accountNotIndexed = !isLoading && isAccountError;
+  const hasNoTransactions =
+    accountNotIndexed || (data?.total_transactions === 0 && !isLoading);
 
   const lifetimeDays = useMemo(() => {
     if (!data?.created_timestamp) return 365;
@@ -236,17 +247,25 @@ const TransactionsAccountsDetails = () => {
             <div className="py-8 px-5 flex flex-col gap-8">
               <InfoRow
                 label="ID"
-                value={data?.id ?? undefined}
-                copyable={!!data?.id}
+                value={data?.id ?? (accountNotIndexed ? accountId : undefined)}
+                copyable
+                loading={isLoading}
               />
               <InfoRow
                 label="Owner"
-                value={data?.owner}
-                copyable={!!data?.owner}
+                value={
+                  data?.owner ?? (accountNotIndexed ? accountId : undefined)
+                }
+                copyable
+                loading={isLoading}
               />
               <InfoRow
                 label="Subaccount"
-                value={data?.formatted.subaccount}
+                value={
+                  data?.formatted.subaccount ??
+                  (accountNotIndexed ? "None (default subaccount)" : undefined)
+                }
+                loading={isLoading}
               />
             </div>
 
@@ -265,7 +284,9 @@ const TransactionsAccountsDetails = () => {
                 value={
                   data?.balance !== undefined
                     ? millify(divideBy1e8(Number(data.balance)), 2)
-                    : undefined
+                    : accountNotIndexed
+                      ? "0"
+                      : undefined
                 }
                 unit="OGY"
                 loading={isLoading}
@@ -277,10 +298,12 @@ const TransactionsAccountsDetails = () => {
               <BalanceStatRow
                 label="Historical max balance"
                 value={historicalMax}
+                loading={isLoading}
               />
               <BalanceStatRow
                 label="Genesis balance"
                 value={genesisBalance}
+                loading={isLoading}
               />
             </div>
           </div>
@@ -288,77 +311,93 @@ const TransactionsAccountsDetails = () => {
         </SkeletonOverlay>
       </Card>
 
-      <Suspense fallback={<TransactionsChartFallback />}>
-        <TransactionsChart id={accountId} />
-      </Suspense>
-
-      <ChartStatsCard
-        className="mt-16"
-        title="Balance History"
-        periodOptions={BALANCE_PERIOD_OPTIONS}
-        period={balancePeriod}
-        onPeriodChange={setBalancePeriod}
-        stats={[
-          {
-            id: "current-balance",
-            label: "Current balance",
-            tooltipContent: <p>Current account balance.</p>,
-            value: balanceHistory?.total,
-            unit: "OGY",
-          },
-        ]}
-        chart={{
-          data: balanceHistory?.dataChart,
-          color: "#38bdf8",
-          label: "OGY Balance",
-        }}
-        legendLabel="OGY Balance"
-        loading={isLoadingBalance}
-        isError={isBalanceError}
-      />
-
-      <div className="mt-16">
-        <PieChartProvider>
-          <PieStatsCard
-            title="Transactions Overview"
-            data={overviewChartData}
-            colors={OVERVIEW_COLORS}
-            infos={OVERVIEW_INFOS}
-            totalLabel="Total amount"
-            totalValue={
-              overview
-                ? roundAndFormatLocale({ number: overview.totalVolume })
-                : undefined
-            }
-            loading={isLoadingOverview}
-            isError={isOverviewError}
-            layout="horizontal"
-          />
-        </PieChartProvider>
-      </div>
-
-      <Card className="mt-16">
-        <div className="mb-8">
-          <div className="text-charcoal text-[22px] font-semibold leading-none">
-            Transaction History
+      {hasNoTransactions ? (
+        <Card className="mt-16">
+          <div className="flex flex-col items-center gap-3 text-center py-16 px-6">
+            <h4 className="text-content text-base font-semibold">
+              No transactions yet
+            </h4>
+            <p className="text-sm text-muted max-w-[420px]">
+              This account has no transaction history. Once it sends or
+              receives OGY, activity will appear here.
+            </p>
           </div>
-        </div>
-        <SkeletonOverlay loading={isFetchingTx}>
-          <NewTable
-            columns={txColumns}
-            data={txRows}
-            footer={
-              <TablePagination
-                pageIndex={txPageIndex}
-                pageSize={txPageSize}
-                pageCount={txPageCount}
-                onPageChange={handleTxPageChange}
-                onPageSizeChange={handleTxPageSizeChange}
-              />
-            }
+        </Card>
+      ) : (
+        <>
+          <Suspense fallback={<TransactionsChartFallback />}>
+            <TransactionsChart id={accountId} />
+          </Suspense>
+
+          <ChartStatsCard
+            className="mt-16"
+            title="Balance History"
+            periodOptions={BALANCE_PERIOD_OPTIONS}
+            period={balancePeriod}
+            onPeriodChange={setBalancePeriod}
+            stats={[
+              {
+                id: "current-balance",
+                label: "Current balance",
+                tooltipContent: <p>Current account balance.</p>,
+                value: balanceHistory?.total,
+                unit: "OGY",
+              },
+            ]}
+            chart={{
+              data: balanceHistory?.dataChart,
+              color: "#38bdf8",
+              label: "OGY Balance",
+            }}
+            legendLabel="OGY Balance"
+            loading={isLoadingBalance}
+            isError={isBalanceError}
           />
-        </SkeletonOverlay>
-      </Card>
+
+          <div className="mt-16">
+            <PieChartProvider>
+              <PieStatsCard
+                title="Transactions Overview"
+                data={overviewChartData}
+                colors={OVERVIEW_COLORS}
+                infos={OVERVIEW_INFOS}
+                totalLabel="Total amount"
+                totalValue={
+                  overview
+                    ? roundAndFormatLocale({ number: overview.totalVolume })
+                    : undefined
+                }
+                loading={isLoadingOverview}
+                isError={isOverviewError}
+                layout="horizontal"
+              />
+            </PieChartProvider>
+          </div>
+
+          <Card id="transaction-history-table" className="mt-16 scroll-mt-24">
+            <div className="mb-8">
+              <div className="text-charcoal text-[22px] font-semibold leading-none">
+                Transaction History
+              </div>
+            </div>
+            <SkeletonOverlay loading={isFetchingTx}>
+              <NewTable
+                columns={txColumns}
+                data={txRows}
+                footer={
+                  <TablePagination
+                    pageIndex={txPageIndex}
+                    pageSize={txPageSize}
+                    pageCount={txPageCount}
+                    onPageChange={handleTxPageChange}
+                    onPageSizeChange={handleTxPageSizeChange}
+                  />
+                }
+              />
+            </SkeletonOverlay>
+          </Card>
+        </>
+      )}
     </PageContainer>
   );
 };
