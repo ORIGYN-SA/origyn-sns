@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import BrandLogo from "@components/brand/BrandLogo";
 
 type ExternalLinkItem = {
@@ -100,7 +100,7 @@ const Footer = () => {
                     className={linkClass}
                   >
                     {label}
-                    <ArrowUpRightIcon className="h-3.5 w-3.5 opacity-60" />
+                    <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 opacity-60" />
                   </a>
                 </li>
               ))}
@@ -119,7 +119,7 @@ const Footer = () => {
                     className={linkClass}
                   >
                     {label}
-                    <ArrowUpRightIcon className="h-3.5 w-3.5 opacity-60" />
+                    <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 opacity-60" />
                   </a>
                 </li>
               ))}
