@@ -26,7 +26,13 @@ pub fn setup(
         daily_burn_amount: 1_000_000 * E8S_PER_OGY,
     };
 
-    install_canister(pic, controller, canister_id, wasm, DailyJobsArgs::Init(canister_jobs_init_args));
+    install_canister(
+        pic,
+        controller,
+        canister_id,
+        wasm,
+        DailyJobsArgs::Init(canister_jobs_init_args),
+    );
 
     canister_id
 }

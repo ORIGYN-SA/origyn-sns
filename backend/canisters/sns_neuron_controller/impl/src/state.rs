@@ -4,6 +4,7 @@ use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
 use crate::types::GoldaoManager;
+use crate::types::WtnManager;
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Principal};
@@ -12,6 +13,7 @@ use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::Neuron;
 use sns_neuron_controller_api_canister::init::GoldaoManagerConfig;
 use sns_neuron_controller_api_canister::init::IcpManagerConfig;
+use sns_neuron_controller_api_canister::init::WtnManagerConfig;
 use sns_neuron_controller_api_canister::neuron_type::NeuronType;
 use types::TimestampMillis;
 use utils::{
@@ -44,6 +46,7 @@ impl RuntimeState {
             authorized_principals: self.data.authorized_principals.clone(),
             rewards_destination: self.data.rewards_destination,
             goldao_neuron_manager_metrics: self.data.neuron_managers.goldao.get_neuron_metrics(),
+            wtn_neuron_manager_metrics: self.data.neuron_managers.wtn.get_neuron_metrics(),
             icp_neuron_manager_metrics: self.data.neuron_managers.icp.get_neuron_metrics(),
         }
     }
@@ -60,6 +63,7 @@ pub struct Metrics {
     pub authorized_principals: Vec<Principal>,
     pub rewards_destination: Option<Principal>,
     pub goldao_neuron_manager_metrics: Vec<SnsNeuronWithMetric>,
+    pub wtn_neuron_manager_metrics: Vec<SnsNeuronWithMetric>,
     pub icp_neuron_manager_metrics: Vec<NnsNeuronWithMetric>,
 }
 
@@ -85,6 +89,7 @@ impl Data {
         authorized_principals: Vec<Principal>,
         goldao_manager_config: GoldaoManagerConfig,
         icp_manager_config: IcpManagerConfig,
+        wtn_manager_config: WtnManagerConfig,
         rewards_destination: Option<Principal>,
         now: TimestampMillis,
     ) -> Self {
@@ -93,6 +98,7 @@ impl Data {
             neuron_managers: NeuronManagers::init(
                 goldao_manager_config,
                 icp_manager_config,
+                wtn_manager_config,
                 now,
             ),
             rewards_destination,
@@ -105,18 +111,21 @@ pub struct NeuronManagers {
     pub now: TimestampMillis,
     pub goldao: GoldaoManager,
     pub icp: IcpManager,
+    pub wtn: WtnManager,
 }
 
 impl NeuronManagers {
     pub fn init(
         goldao_manager_config: GoldaoManagerConfig,
         icp_manager_config: IcpManagerConfig,
+        wtn_manager_config: WtnManagerConfig,
         now: TimestampMillis,
     ) -> Self {
         Self {
             now,
             goldao: goldao_manager_config.into(),
             icp: icp_manager_config.into(),
+            wtn: wtn_manager_config.into(),
         }
     }
 
@@ -130,6 +139,7 @@ impl NeuronManagers {
     pub fn get_neuron_manager(&self, neuron_type: NeuronType) -> NeuronManagerEnum {
         match neuron_type {
             NeuronType::GOLDAO => NeuronManagerEnum::GoldaoManager(self.goldao.clone()),
+            NeuronType::WTN => NeuronManagerEnum::WtnManager(self.wtn.clone()),
         }
     }
 }

@@ -116,6 +116,7 @@ impl RewardSumResult {
 #[derive(Debug, Clone)]
 pub enum ClaimRewardResult {
     Succesfull,
+    Partial(String),
     Failed(String),
 }
 

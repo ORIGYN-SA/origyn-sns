@@ -49,12 +49,34 @@ async fn run_async() {
         info!("Processing GOLDAO neurons were successful");
     }
 
+    // --- WTN NEURONS ---
+    if let Err(err) = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, || async {
+        let mut wtn_neuron_manager = read_state(|state| {
+            state
+                .data
+                .neuron_managers
+                .get_neuron_manager(NeuronType::WTN)
+        });
+        fetch_and_process_neurons(&mut wtn_neuron_manager).await
+    })
+    .await
+    {
+        let msg = format!(
+            "Failed to process WTN neurons after {} attempts: {:?}",
+            MAX_ATTEMPTS, err
+        );
+        error!("{}", msg);
+    } else {
+        info!("Processing WTN neurons were successful");
+    }
+
     info!("Finished processing SNS neurons");
 }
 
 async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Result<(), String> {
     let manager_type = match neuron_manager {
         NeuronManagerEnum::GoldaoManager(_) => "GOLDAO",
+        NeuronManagerEnum::WtnManager(_) => "WTN",
     };
 
     neuron_manager
@@ -68,15 +90,27 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
 
     let available_rewards = neuron_manager.get_available_rewards().await;
     let rewards_threshold = neuron_manager.get_rewards_threshold();
+    ic_cdk::println!(
+        "[{}] available_rewards: {:?}, rewards_threshold: {:?}",
+        manager_type,
+        available_rewards,
+        rewards_threshold
+    );
 
     if available_rewards >= rewards_threshold {
         if neuron_manager.claim_rewards().await.is_not_failed() {
+            ic_cdk::println!("[{}] Claim succeeded, distributing rewards.", manager_type);
             let _ = neuron_manager.distribute_rewards().await;
         } else {
             error!("[{}] Reward claim reported failure.", manager_type);
+            ic_cdk::println!("[{}] Reward claim reported failure.", manager_type);
         }
     } else {
         info!(
+            "[{}] Threshold not reached. Skipping rewards.",
+            manager_type
+        );
+        ic_cdk::println!(
             "[{}] Threshold not reached. Skipping rewards.",
             manager_type
         );
@@ -86,6 +120,11 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
         NeuronManagerEnum::GoldaoManager(goldao_manager) => {
             mutate_state(|s| {
                 s.data.neuron_managers.goldao = goldao_manager.clone();
+            });
+        }
+        NeuronManagerEnum::WtnManager(wtn_manager) => {
+            mutate_state(|s| {
+                s.data.neuron_managers.wtn = wtn_manager.clone();
             });
         }
     }

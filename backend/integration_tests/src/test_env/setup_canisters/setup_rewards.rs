@@ -64,7 +64,6 @@ pub enum GoldArgs {
     Upgrade(UpgradeArgs),
 }
 
-
 pub fn setup_goldao(
     pic: &PocketIc,
     canister_id: Principal,

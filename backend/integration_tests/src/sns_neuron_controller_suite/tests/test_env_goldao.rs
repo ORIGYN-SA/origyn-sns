@@ -9,8 +9,8 @@ use crate::{
 use candid::Nat;
 use candid::Principal;
 use icrc_ledger_types::icrc1::account::Account;
-use types::TokenSymbol;
 use std::time::Duration;
+use types::TokenSymbol;
 
 #[test]
 fn test_process_goldao_neurons_happy_path() {
@@ -40,16 +40,14 @@ fn test_process_goldao_neurons_happy_path() {
     let goldao_ledger_canister_id = env
         .get_ledger_canister_id(types::TokenSymbol::GOLDAO)
         .unwrap();
-    let ogy_ledger_canister_id = env
-        .get_ledger_canister_id(types::TokenSymbol::OGY)
-        .unwrap();
+    let ogy_ledger_canister_id = env.get_ledger_canister_id(types::TokenSymbol::OGY).unwrap();
 
     let goldao_rewards_canister_id = env.install_goldao_rewards(
         Principal::from_text("iyehc-lqaaa-aaaap-ab25a-cai").unwrap(),
         env.get_sns(SnsProject::GoldDao).test_env.governance_id,
         TokenSymbol::ICP.ledger_id(false),
         ogy_ledger_canister_id,
-        goldao_ledger_canister_id
+        goldao_ledger_canister_id,
     );
     let ogy_rewards_canister_id = env.install_rewards(
         Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap(),
@@ -93,7 +91,6 @@ fn test_process_goldao_neurons_happy_path() {
         owner: goldao_rewards_canister_id,
         subaccount: Some(neuron_id.clone().into()),
     };
-
 
     // Transfer "rewards" to the neuron
     transfer(

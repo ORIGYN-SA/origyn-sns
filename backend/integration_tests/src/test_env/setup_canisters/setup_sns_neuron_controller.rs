@@ -40,6 +40,11 @@ pub fn setup(
                 goldao_sns_rewards_canister_id,
                 goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64),
             },
+            wtn_manager_config: sns_neuron_controller_api_canister::init::WtnManagerConfig {
+                wtn_sns_governance_canister_id: Principal::anonymous(),
+                wtn_sns_ledger_canister_id: Principal::anonymous(),
+                wtn_rewards_threshold: Nat::from(5_000_000_000_000_u64),
+            },
             icp_manager_config: sns_neuron_controller_api_canister::init::IcpManagerConfig {
                 nns_governance_canister_id: Principal::anonymous(),
                 nns_ledger_canister_id: Principal::anonymous(),

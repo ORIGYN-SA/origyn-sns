@@ -1,10 +1,11 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::{GoldaoManager};
+use crate::types::{GoldaoManager, WtnManager};
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
+use bity_ic_utils::rand::generate_rand_nonce;
 use candid::{CandidType, Nat};
 use enum_dispatch::enum_dispatch;
 use icrc_ledger_types::icrc1::{account::Account, transfer::TransferArg};
@@ -18,13 +19,13 @@ use sns_governance_canister::types::{
 };
 use tracing::{error, trace};
 use types::CanisterId;
-use bity_ic_utils::rand::generate_rand_nonce;
 use utils::env::Environment;
 
 #[enum_dispatch]
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum NeuronManagerEnum {
     GoldaoManager(GoldaoManager),
+    WtnManager(WtnManager),
 }
 
 #[enum_dispatch(NeuronManagerEnum)]
@@ -181,6 +182,15 @@ pub trait NeuronManager: NeuronConfig {
             })
             .collect()
     }
+
+    async fn get_available_sns_rewards(&self) -> Nat {
+        self.get_neurons()
+            .all_neurons
+            .iter()
+            .fold(Nat::from(0_u64), |sum, neuron| {
+                sum + neuron.maturity_e8s_equivalent
+            })
+    }
 }
 
 #[async_trait]
@@ -189,7 +199,93 @@ pub trait NeuronRewardsManager: NeuronManager {
     fn get_rewards_threshold(&self) -> Nat;
     async fn get_available_rewards(&self) -> Nat;
     async fn claim_rewards(&self) -> ClaimRewardResult;
+    async fn claim_sns_rewards(
+        &self,
+        rewards_destination: sns_governance_canister::types::Account,
+    ) -> ClaimRewardResult {
+        let neurons = &self.get_neurons().all_neurons;
+
+        let mut neuron_ids = Vec::new();
+        for neuron in neurons {
+            if let Some(id) = &neuron.id {
+                if let Ok(array) = id.clone().id.try_into() {
+                    neuron_ids.push(array);
+                }
+            }
+        }
+
+        let disburse_result = disburse_neuron_maturity(
+            self.get_sns_governance_canister_id(),
+            neuron_ids,
+            Some(rewards_destination),
+        )
+        .await;
+
+        match disburse_result {
+            Ok(_) => ClaimRewardResult::Succesfull,
+            Err(error) => ClaimRewardResult::Partial(error.concat()),
+        }
+    }
     async fn distribute_rewards(&self) -> Result<(), String> {
         distribute_rewards(self.get_sns_ledger_canister_id()).await
+    }
+}
+
+use bity_ic_types::SnsNeuronId;
+use candid::Principal;
+use sns_governance_canister::types::manage_neuron::DisburseMaturity;
+// NOTE: those tokens transaction is a minting transfer, from the governance canister's
+// main account (which is also the minting account) to the provided account.
+pub async fn disburse_neuron_maturity(
+    sns_governance_canister_id: Principal,
+    neuron_ids: Vec<SnsNeuronId>,
+    to_account: Option<sns_governance_canister::types::Account>,
+) -> Result<(), Vec<String>> {
+    let mut errors = Vec::new();
+
+    for neuron_id in neuron_ids {
+        match sns_governance_canister_c2c_client::manage_neuron(
+            sns_governance_canister_id,
+            &ManageNeuron {
+                subaccount: neuron_id.into(),
+                command: Some(Command::DisburseMaturity(DisburseMaturity {
+                    percentage_to_disburse: 100,
+                    to_account: to_account.clone(),
+                })),
+            },
+        )
+        .await
+        {
+            Ok(manage_neuron_response) => match manage_neuron_response.command {
+                Some(manage_neuron_response::Command::DisburseMaturity(response)) => {
+                    trace!("Successfully disbursed maturity for neuron {:?}", response);
+                }
+                Some(response) => {
+                    let error_msg =
+                        format!("Unexpected response from manage_neuron: {:?}", response);
+                    error!("{}", error_msg);
+                    errors.push(error_msg);
+                }
+                None => {
+                    let error_msg = "manage_neuron response contained no command.".to_string();
+                    error!("{}", &error_msg);
+                    errors.push(error_msg);
+                }
+            },
+            Err(e) => {
+                let error_msg = format!(
+                    "Failed to disburse maturity for neuron {:?}: {:?}",
+                    neuron_id, e
+                );
+                error!("{}", &error_msg);
+                errors.push(error_msg);
+            }
+        }
+    }
+
+    if errors.is_empty() {
+        Ok(())
+    } else {
+        Err(errors)
     }
 }

@@ -28,6 +28,53 @@ if [[ $REINSTALL == "reinstall" ]]; then
 
   MIN_SWAP_AMOUNT=10_000_000
 
+  # WTN - ICP SWAP CONFIG
+  ICPSWAP_POOL_ID_WTN_ICP="oqn67-kaaaa-aaaag-qj72q-cai"
+
+  EXCHANGE_CONFIG_WTN_ICP="variant {
+    ICPSwap = record {
+      swap_canister_id = principal \"$ICPSWAP_POOL_ID_WTN_ICP\";
+      zero_for_one = true;
+    }
+  }"
+
+  EXCHANGE_JOB_CONFIG_WTN_ICP="record {
+    token_to_sell = variant { WTN };
+    token_to_buy = variant { ICP };
+    exchange = $EXCHANGE_CONFIG_WTN_ICP;
+    rate_per_interval = 2_380_950 : nat64;
+    job_interval_ms = 14400 : nat64;
+    source_subaccount = null;
+    min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
+    max_amount = null;
+    destination_account = null;
+  }"
+
+
+  # ICP - OGY SWAP CONFIG
+  ICPSWAP_POOL_ID_ICP_OGY="ttnzy-lyaaa-aaaag-qj2bq-cai"
+
+  EXCHANGE_CONFIG_ICP_OGY="variant {
+    ICPSwap = record {
+      swap_canister_id = principal \"$ICPSWAP_POOL_ID_ICP_OGY\";
+      zero_for_one = false;
+    }
+  }"
+
+  EXCHANGE_JOB_CONFIG_ICP_OGY="record {
+    token_to_sell = variant { ICP };
+    token_to_buy = variant { OGY };
+    exchange = $EXCHANGE_CONFIG_ICP_OGY;
+    rate_per_interval = 2_380_950 : nat64;
+    job_interval_ms = 14400 : nat64;
+    source_subaccount = null;
+    min_amount = record { e8s = $MIN_SWAP_AMOUNT : nat64 };
+    max_amount = null;
+    destination_account = null;
+  }"
+
+
+  # GOLDAO - OGY SWAP CONFIG
   ICPSWAP_POOL_ID_GOLDAO_OGY="tblob-hiaaa-aaaag-qj2cq-cai"
 
   EXCHANGE_CONFIG_GOLDAO_OGY="variant {
