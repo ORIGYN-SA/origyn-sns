@@ -28,8 +28,8 @@ const Stat = ({
     ? "h-8 w-8 self-center mr-3 shrink-0"
     : "w-[25px] h-6 self-center mr-2 shrink-0";
   const skelClass = isHero
-    ? "h-8 w-[180px] self-center shrink-0 rounded-md"
-    : "h-6 w-[200px] self-center shrink-0 rounded-md";
+    ? "h-8 w-[180px] self-center shrink-0 rounded-md bg-muted/20 animate-pulse"
+    : "h-6 w-[200px] self-center shrink-0 rounded-md bg-muted/20 animate-pulse";
   const valueClass = isHero
     ? "font-bold leading-none truncate min-w-0 text-[40px]"
     : "font-bold leading-none truncate min-w-0 text-[28px]";

@@ -2,11 +2,11 @@ import { useState, Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useWallet } from "@components/auth/useWallet";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
-import { XMarkIcon, Bars3Icon, UserIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon, Bars3Icon } from "@heroicons/react/20/solid";
 import Auth from "@components/auth/Auth";
 import BrandLogo from "@components/brand/BrandLogo";
 import AccountOverview from "@components/account/overview/AccountOverview";
-import { Tile, Skeleton, Tooltip } from "@components/ui";
+import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
 import useScrolledPast from "@hooks/useScrolledPast";
 
@@ -15,7 +15,6 @@ const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
   { title: "Governance", url: "/governance" },
   { title: "Transaction History", url: "/transaction-history" },
   { title: "Calculator", url: "/calculator" },
-  { title: "My Account", url: "/account", requiresAuth: true },
 ];
 
 const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
@@ -78,28 +77,10 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
             {!isConnected && <Auth />}
             {isConnected && (
               <button
-                className="flex items-center bg-surface-2 rounded-full py-1 px-1"
+                type="button"
                 onClick={() => handleOnClickShowAccountOverview(true)}
               >
-                <div className="flex items-center">
-                  <Tile className="rounded-full h-8 w-8 bg-surface-3">
-                    <UserIcon className="p-1 text-white" />
-                  </Tile>
-                  <div className="hidden sm:block">
-                    <div className="flex items-center truncate pr-4">
-                      <div className="flex ml-4 items-center truncate text-sm max-w-64">
-                        <div className="mr-2 shrink-0">Principal ID: </div>
-                        {principalId ? (
-                          <Tooltip content={principalId}>
-                            <div className="truncate">{principalId}</div>
-                          </Tooltip>
-                        ) : (
-                          <Skeleton className="w-64" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <PrincipalIdPill principalId={principalId} variant="short" />
               </button>
             )}
 
