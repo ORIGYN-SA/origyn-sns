@@ -15,17 +15,29 @@ const StakeOGY = () => {
 
   return (
     <>
-      <Button className="w-full" onClick={handleShow}>
+      <Button
+        className="h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2"
+        onClick={handleShow}
+      >
         Stake
       </Button>
-      <Dialog show={show} handleClose={handleClose}>
-        <div className="pt-6 pb-12 px-4 text-center">
-          <div className="font-bold text-lg">Stake OGY</div>
-          <div className="text-sm mb-6">
-            To stake OGY you need to go to our NNS platform.
+      <Dialog
+        show={show}
+        handleClose={handleClose}
+        panelClassName="max-w-[420px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+        floatingClose
+      >
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[420px] flex flex-col gap-7">
+          <div className="flex flex-col items-center gap-1.5 text-center">
+            <div className="text-[22px] font-semibold leading-none text-content">
+              Stake OGY
+            </div>
+            <div className="text-[13px] leading-snug text-muted max-w-[340px]">
+              To stake OGY you need to go to our NNS platform.
+            </div>
           </div>
           {walletSelected && walletSelected !== "dfinity" && (
-            <div className="w-full bg-yellow-400 p-4 rounded-xl text-center mb-6">
+            <div className="rounded-2xl border border-[#F4E5A1] bg-[#FFF8E1] p-4 text-center text-[13px] leading-snug text-content">
               It appears you are not connected with{" "}
               <span className="font-semibold">Internet Identity</span>.
               <br /> You need an{" "}
@@ -38,15 +50,10 @@ const StakeOGY = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClose}
-            className="mt-6"
           >
-            <Button>
-              <div className="flex items-center justify-center">
-                <div>Go to NNS</div>
-                <div>
-                  <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
-                </div>
-              </div>
+            <Button className="w-full !py-0 text-[14px] leading-[44px] flex items-center justify-center gap-2">
+              <span>Go to NNS</span>
+              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
             </Button>
           </Link>
         </div>

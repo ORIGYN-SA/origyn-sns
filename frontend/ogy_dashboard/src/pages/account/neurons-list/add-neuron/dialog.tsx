@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useWallet } from "@components/auth/useWallet";
 import { Button, Dialog } from "@components/ui";
-import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import { NNS_PLATFORM_URL } from "@constants/index";
 import { useAddNeuron } from "./context";
 
@@ -10,40 +10,42 @@ const DialogAddNeuron = () => {
   const { principalId } = useWallet();
 
   return (
-    <>
-      <Dialog show={show} handleClose={handleClose}>
-        <div className="px-12 pb-12">
-          <div className="text-center">
-            <div className="mb-4 text-xl font-semibold">Add neuron</div>
-            To successfully connect each neuron to the dashboard, you need to
-            add your principal
-            <span className="font-semibold ml-1">
-              <span>{principalId}</span>
-              <span>
-                <CopyToClipboard value={principalId as string} />
-              </span>
-            </span>
-            as a hotkey to your OGY neuron which you wish to include in this
-            dashboard. To do this, open the{" "}
-            <span>
-              <Link
-                to={NNS_PLATFORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent font-semibold"
-              >
-                NNS app
-              </Link>
-            </span>
-            , click into each neuron and add your principal as a hotkey.
+    <Dialog
+      show={show}
+      handleClose={handleClose}
+      panelClassName="max-w-[420px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+      floatingClose
+    >
+      <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[420px] flex flex-col gap-7">
+        <div className="flex flex-col items-center gap-1.5 text-center">
+          <div className="text-[22px] font-semibold leading-none text-content">
+            Add neuron
           </div>
-
-          <div className="flex justify-center items-center mt-8 gap-4">
-            <Button onClick={handleAddNeuron}>Confirm</Button>
+          <div className="text-[13px] leading-snug text-muted max-w-[340px]">
+            Add this principal as a hotkey on each OGY neuron you want to
+            manage here.
           </div>
         </div>
-      </Dialog>
-    </>
+        <PrincipalIdPill principalId={principalId} variant="long" showCopy />
+        <Button
+          onClick={handleAddNeuron}
+          className="w-full !py-0 text-[14px] leading-[44px]"
+        >
+          Confirm
+        </Button>
+        <div className="text-center text-[12px] leading-none text-muted">
+          Need to add a hotkey?{" "}
+          <Link
+            to={NNS_PLATFORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-content font-medium hover:underline"
+          >
+            Open the NNS app
+          </Link>
+        </div>
+      </div>
+    </Dialog>
   );
 };
 

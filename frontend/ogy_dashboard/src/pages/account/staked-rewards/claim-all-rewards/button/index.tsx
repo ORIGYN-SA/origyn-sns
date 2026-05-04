@@ -5,7 +5,7 @@ const BtnClaimAllRewards = () => {
   const { handleShow, claimAmount } = useClaimAllRewards();
   return (
     <Button
-      className="w-full"
+      className="h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2 disabled:hover:bg-content"
       onClick={handleShow}
       disabled={claimAmount === 0}
     >

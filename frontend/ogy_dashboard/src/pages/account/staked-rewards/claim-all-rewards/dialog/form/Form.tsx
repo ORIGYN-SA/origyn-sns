@@ -26,21 +26,25 @@ const Form = () => {
   };
 
   return (
-    <div className="text-center">
-      <div>
-        <span>
-          You're about to claim
-          <span className="font-semibold text-xl"> {claimAmount} OGY</span>
-        </span>
+    <>
+      <div className="flex flex-col items-center gap-1.5 text-center">
+        <div className="text-[22px] font-semibold leading-none text-content">
+          You're about to claim {claimAmount} OGY
+        </div>
+        <div className="text-[13px] leading-snug text-muted max-w-[340px]">
+          The rewards will be sent to your principal
+        </div>
       </div>
-      <div className="mt-4 text-sm text-content/60">
-        The rewards will be sent to your principal
+      <div className="rounded-2xl border border-[#E1E1E1] bg-surface-faint px-4 py-3 text-center text-[13px] leading-snug text-content break-all">
+        {principal}
       </div>
-      <div className="mt-1 text-sm font-semibold text-content">{principal}</div>
-      <Button onClick={handleClaimAllRewards} className="mt-8 w-full">
+      <Button
+        onClick={handleClaimAllRewards}
+        className="w-full !py-0 text-[14px] leading-[44px]"
+      >
         Confirm
       </Button>
-    </div>
+    </>
   );
 };
 

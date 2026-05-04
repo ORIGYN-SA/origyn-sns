@@ -15,18 +15,21 @@ const DialogClaimAllRewards = () => {
   } = mutation;
 
   return (
-    <>
-      <Dialog show={show} handleClose={handleClose}>
-        <div className="px-12 pt-6 pb-12">
-          {!isPendingClaimAllRewards &&
-            !isErrorClaimAllRewards &&
-            !isSuccessClaimAllRewards && <Form />}
-          {isPendingClaimAllRewards && <FormPending />}
-          {isSuccessClaimAllRewards && <FormSuccess />}
-          {isErrorClaimAllRewards && <FormError />}
-        </div>
-      </Dialog>
-    </>
+    <Dialog
+      show={show}
+      handleClose={handleClose}
+      panelClassName="max-w-[420px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+      floatingClose
+    >
+      <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[420px] flex flex-col gap-7">
+        {!isPendingClaimAllRewards &&
+          !isErrorClaimAllRewards &&
+          !isSuccessClaimAllRewards && <Form />}
+        {isPendingClaimAllRewards && <FormPending />}
+        {isSuccessClaimAllRewards && <FormSuccess />}
+        {isErrorClaimAllRewards && <FormError />}
+      </div>
+    </Dialog>
   );
 };
 
