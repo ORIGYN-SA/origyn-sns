@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.0] - 2026-05-04
+
+#### Added
+- **NNS Support** : Activated NNS neuron related jobs
+- **WTN Support** : Added neuron manager for management of WTN Neuron
+
 ### [1.0.0] - 2026-03-23
 
 #### Description
