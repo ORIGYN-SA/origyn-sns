@@ -86,7 +86,7 @@ export const setAuthedAgent = (agent: Agent | undefined): void => {
 
 export const getAuthedAgent = (): Agent | undefined => authedAgent;
 
-const getAnonAgent = (): HttpAgent => {
+export const getAnonAgent = (): HttpAgent => {
   if (!anonAgent) {
     anonAgent = new HttpAgent({ host: IC_HOST });
   }

@@ -22,6 +22,11 @@ export const MINTING_STUDIO_CANISTER_ID =
   "uasjq-dyaaa-aaaas-qdwka-cai";
 export const LEGACY_VESTING_CANISTER_ID = import.meta.env
   .VITE_LEGACY_VESTING_CANISTER_ID;
+
+// ICPSwap mainnet pool canisters (stable; do not vary per env)
+export const CKUSDC_LEDGER_CANISTER_ID = "xevnm-gaaaa-aaaar-qafnq-cai";
+export const ICPSWAP_OGY_ICP_POOL_CANISTER_ID = "ttnzy-lyaaa-aaaag-qj2bq-cai";
+export const ICPSWAP_ICP_CKUSDC_POOL_CANISTER_ID = "mohjv-bqaaa-aaaag-qjyia-cai";
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_PLAUSIBLE_BASE_URL = import.meta.env
   .VITE_API_PLAUSIBLE_BASE_URL;
