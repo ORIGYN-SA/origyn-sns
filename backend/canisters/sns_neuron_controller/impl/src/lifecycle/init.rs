@@ -24,6 +24,7 @@ fn init(args: Args) {
                 init_args.authorized_principals,
                 init_args.goldao_manager_config,
                 init_args.icp_manager_config,
+                init_args.wtn_manager_config,
                 init_args.rewards_destination,
                 env.now(),
             );

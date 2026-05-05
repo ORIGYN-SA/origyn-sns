@@ -115,7 +115,8 @@ impl RewardSumResult {
 
 #[derive(Debug, Clone)]
 pub enum ClaimRewardResult {
-    Succesfull,
+    Successful,
+    Partial(String),
     Failed(String),
 }
 
@@ -138,7 +139,8 @@ pub async fn distribute_rewards(sns_ledger_canister_id: Principal) -> Result<(),
 
             let fee = icrc_ledger_canister_c2c_client::icrc1_fee(sns_ledger_canister_id)
                 .await
-                .unwrap();
+                .map_err(|e| format!("Failed to fetch fee: {:?}", e))?;
+
             // Transfer all the tokens to sns_rewards to be distributed
             match icrc_ledger_canister_c2c_client::icrc1_balance_of(
                 sns_ledger_canister_id,
@@ -150,6 +152,14 @@ pub async fn distribute_rewards(sns_ledger_canister_id: Principal) -> Result<(),
             .await
             {
                 Ok(balance) => {
+                    if balance <= fee {
+                        info!(
+                            "Insufficient balance ({}) to cover ledger fee ({}). Skipping distribution.",
+                            balance, fee
+                        );
+                        return Ok(());
+                    }
+
                     match transfer_token(
                         [0; 32],
                         rewards_destination.into(),
@@ -160,7 +170,6 @@ pub async fn distribute_rewards(sns_ledger_canister_id: Principal) -> Result<(),
                     {
                         Ok(_) => {
                             info!("Successfully transferred rewards");
-
                             Ok(())
                         }
                         Err(error_message) => {
@@ -173,9 +182,9 @@ pub async fn distribute_rewards(sns_ledger_canister_id: Principal) -> Result<(),
                 }
                 Err(e) => {
                     let error_message = format!(
-                "Failed to fetch token balance of sns_neuron_controller from ledger canister id {} with ERROR : {:?}",
-                sns_ledger_canister_id, e
-            );
+                        "Failed to fetch token balance of sns_neuron_controller from ledger canister id {} with ERROR : {:?}",
+                        sns_ledger_canister_id, e
+                    );
                     error!("{}", error_message);
                     Err(error_message)
                 }
@@ -335,7 +344,7 @@ pub async fn sns_rewards_claim_rewards(
 
     if error_messages.is_empty() {
         info!("[sns_rewards_claim_rewards] Successfully claimed rewards for all neurons");
-        ClaimRewardResult::Succesfull
+        ClaimRewardResult::Successful
     } else {
         let error_message = error_messages.join("\n");
         error!("[sns_rewards_claim_rewards] Failed to claim rewards for neurons");

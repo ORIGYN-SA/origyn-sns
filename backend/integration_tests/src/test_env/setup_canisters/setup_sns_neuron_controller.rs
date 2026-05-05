@@ -15,6 +15,10 @@ pub fn setup(
     goldao_sns_governance_canister_id: Principal,
     goldao_sns_ledger_canister_id: Principal,
     goldao_sns_rewards_canister_id: Principal,
+    wtn_sns_governance_canister_id: Principal,
+    wtn_sns_ledger_canister_id: Principal,
+    nns_governance_canister_id: Principal,
+    nns_ledger_canister_id: Principal,
 ) -> Principal {
     let controller = controllers.first().unwrap();
     let canister_id = create_canister_with_id(pic, *controller, canister_id);
@@ -40,9 +44,14 @@ pub fn setup(
                 goldao_sns_rewards_canister_id,
                 goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64),
             },
+            wtn_manager_config: sns_neuron_controller_api_canister::init::WtnManagerConfig {
+                wtn_sns_governance_canister_id,
+                wtn_sns_ledger_canister_id,
+                wtn_rewards_threshold: Nat::from(5_000_000_000_000_u64),
+            },
             icp_manager_config: sns_neuron_controller_api_canister::init::IcpManagerConfig {
-                nns_governance_canister_id: Principal::anonymous(),
-                nns_ledger_canister_id: Principal::anonymous(),
+                nns_governance_canister_id,
+                nns_ledger_canister_id,
                 icp_rewards_threshold: Nat::from(10_000_u64),
             },
         },
