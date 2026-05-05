@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.0] - 2026-05-04
+
+#### Added
+- **Exchange jobs** : Added ICP -> OGY and WTN -> ICP exchange jobs
+
 ### [1.0.1] - 2026-04-13
 
 #### Changed

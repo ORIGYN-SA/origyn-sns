@@ -1,6 +1,6 @@
 use crate::lifecycle::init_canister;
 use crate::memory::get_upgrades_memory;
-use crate::migrations::types::state::RuntimeStateV0;
+// use crate::migrations::types::state::RuntimeStateV0;
 use crate::state::RuntimeState;
 use bity_ic_canister_logger::LogEntry;
 use bity_ic_canister_tracing_macros::trace;
@@ -50,8 +50,48 @@ fn post_upgrade(args: Args) {
                 Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap()
             };
 
+            let min_swap_amount = Tokens::from_e8s(10_000_000);
             let mut exchange_configs: Vec<ExchangeJobConfig> = Vec::new();
-            exchange_configs.push(ExchangeJobConfig{
+
+            // 1. WTN - ICP SWAP CONFIG
+            exchange_configs.push(ExchangeJobConfig {
+                token_to_sell: TokenSymbol::WTN,
+                token_to_buy: TokenSymbol::ICP,
+                exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
+                    swap_canister_id: Principal::from_text("oqn67-kaaaa-aaaag-qj72q-cai").unwrap(),
+                    zero_for_one: true,
+                }),
+                rate_per_interval: 2_380_950,
+                job_interval_ms: Duration::from_secs(14400).as_millis() as u64, // Derived from 14400s in script
+                source_subaccount: None,
+                min_amount: min_swap_amount,
+                max_amount: None,
+                destination_account: None,
+            });
+
+            // 2. ICP - OGY SWAP CONFIG
+            exchange_configs.push(ExchangeJobConfig {
+                token_to_sell: TokenSymbol::ICP,
+                token_to_buy: TokenSymbol::OGY,
+                exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
+                    swap_canister_id: Principal::from_text("ttnzy-lyaaa-aaaag-qj2bq-cai").unwrap(),
+                    zero_for_one: false,
+                }),
+                rate_per_interval: 2_380_950,
+                job_interval_ms: Duration::from_secs(14400).as_millis() as u64,
+                source_subaccount: None,
+                min_amount: min_swap_amount,
+                max_amount: None,
+                destination_account: Some(Account {
+                    owner: sns_rewards_id,
+                    subaccount: Some([
+                        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    ])
+                }),
+            });
+
+            // 3. GOLDAO - OGY SWAP CONFIG
+            exchange_configs.push(ExchangeJobConfig {
                 token_to_sell: TokenSymbol::GOLDAO,
                 token_to_buy: TokenSymbol::OGY,
                 exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
@@ -59,13 +99,16 @@ fn post_upgrade(args: Args) {
                     zero_for_one: false,
                 }),
                 rate_per_interval: 2_380_950,
-                job_interval_ms: Duration::from_secs(14400).as_millis() as u64, // 4 hours
-                source_subaccount: Default::default(),
-                min_amount: Tokens::from_e8s(10_000_000),
+                job_interval_ms: Duration::from_secs(14400).as_millis() as u64,
+                source_subaccount: None,
+                min_amount: min_swap_amount,
                 max_amount: None,
-                destination_account: Some(Account { owner: sns_rewards_id, subaccount: Some([
-                    2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                ]) }), // all the GOLDAO burned from the 0 subaccount
+                destination_account: Some(Account {
+                    owner: sns_rewards_id,
+                    subaccount: Some([
+                        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    ])
+                }),
             });
 
             // NOTE: uncomment this line to clear existing exchange jobs before adding new ones
