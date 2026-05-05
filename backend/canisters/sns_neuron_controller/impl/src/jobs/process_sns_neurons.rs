@@ -49,26 +49,27 @@ async fn run_async() {
         info!("Processing GOLDAO neurons were successful");
     }
 
-    // --- WTN NEURONS ---
-    if let Err(err) = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, || async {
-        let mut wtn_neuron_manager = read_state(|state| {
-            state
-                .data
-                .neuron_managers
-                .get_neuron_manager(NeuronType::WTN)
-        });
-        fetch_and_process_neurons(&mut wtn_neuron_manager).await
-    })
-    .await
-    {
-        let msg = format!(
-            "Failed to process WTN neurons after {} attempts: {:?}",
-            MAX_ATTEMPTS, err
-        );
-        error!("{}", msg);
-    } else {
-        info!("Processing WTN neurons were successful");
-    }
+    // NOTE: WTN job is commented out. To activate - uncomment
+    // // --- WTN NEURONS ---
+    // if let Err(err) = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, || async {
+    //     let mut wtn_neuron_manager = read_state(|state| {
+    //         state
+    //             .data
+    //             .neuron_managers
+    //             .get_neuron_manager(NeuronType::WTN)
+    //     });
+    //     fetch_and_process_neurons(&mut wtn_neuron_manager).await
+    // })
+    // .await
+    // {
+    //     let msg = format!(
+    //         "Failed to process WTN neurons after {} attempts: {:?}",
+    //         MAX_ATTEMPTS, err
+    //     );
+    //     error!("{}", msg);
+    // } else {
+    //     info!("Processing WTN neurons were successful");
+    // }
 
     info!("Finished processing SNS neurons");
 }
