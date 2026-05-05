@@ -82,7 +82,12 @@ fn post_upgrade(args: Args) {
                 source_subaccount: None,
                 min_amount: min_swap_amount,
                 max_amount: None,
-                destination_account: None,
+                destination_account: Some(Account {
+                    owner: sns_rewards_id,
+                    subaccount: Some([
+                        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    ])
+                }),
             });
 
             // 3. GOLDAO - OGY SWAP CONFIG
