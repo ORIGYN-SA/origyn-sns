@@ -154,6 +154,11 @@ export const Explorer = () => {
         placeholder="Search for an item"
         className="max-w-2xl m-auto mt-8"
         dropdown={searchDropdown}
+        onEnter={
+          search.data
+            ? () => handleClickSearchResult(search.data.type, search.data.value)
+            : undefined
+        }
       />
 
       <div className="relative mt-16">

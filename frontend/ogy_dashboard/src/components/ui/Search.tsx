@@ -14,6 +14,7 @@ interface ISearch {
   id?: string;
   placeholder?: string;
   dropdown?: React.ReactNode;
+  onEnter?: () => void;
 }
 
 const Search = ({
@@ -21,6 +22,7 @@ const Search = ({
   id = "search",
   placeholder = "Search for an items...",
   dropdown,
+  onEnter,
   ...restProps
 }: ISearch) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -66,8 +68,11 @@ const Search = ({
     debouncedSetSearchParams(value);
   };
 
-  const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === "Enter" && e.preventDefault();
+  const handleOnKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key !== "Enter") return;
+
+    e.preventDefault();
+    onEnter?.();
   };
 
   const hasDropdown = dropdown && searchterm !== "";
@@ -80,7 +85,7 @@ const Search = ({
         }`}
       >
         <form
-          onKeyDown={handleOnKeyDown as () => void}
+          onKeyDown={handleOnKeyDown}
           className="px-4 py-2 flex justify-between items-center w-full"
         >
           <input
@@ -101,6 +106,7 @@ const Search = ({
             </div>
           ) : (
             <button
+              type="button"
               onClick={handleResetSearch}
               className="mr-2 p-1"
             >
