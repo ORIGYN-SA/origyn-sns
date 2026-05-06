@@ -77,7 +77,7 @@ const InfoRow = ({
       <div className="h-4 w-full max-w-[420px] rounded-md bg-muted/20" />
     ) : (
       <div className="flex items-center gap-2 min-w-0">
-        <span className="font-mono text-[13px] font-medium leading-tight text-content break-all tracking-tight">
+        <span className="text-[13px] font-semibold leading-tight text-content break-all">
           {value ?? "—"}
         </span>
         {copyable && value && <CopyToClipboard value={value} />}
