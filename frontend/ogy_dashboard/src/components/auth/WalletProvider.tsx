@@ -53,7 +53,7 @@ export const WALLET_LIST: WalletListItem[] = [
   {
     id: "plug",
     name: "Plug",
-    icon: "https://plugwallet.ooo/images/plug-logo.png",
+    icon: "/plug_logo.png",
   },
   { id: "oisy", name: "OISY", icon: OISY.icon ?? "" },
 ];

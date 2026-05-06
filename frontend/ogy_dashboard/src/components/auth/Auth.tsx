@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 import { useWallet } from "@components/auth/useWallet";
@@ -20,13 +21,26 @@ const Auth = ({
     handleCloseWalletList,
     walletList,
   } = useWallet();
+  const [connectingDialogDismissed, setConnectingDialogDismissed] =
+    useState(false);
 
-  const showConnectingDialog = state === walletState.Connecting;
+  const showConnectingDialog =
+    state === walletState.Connecting && !connectingDialogDismissed;
+
+  const handleShowWalletList = () => {
+    setConnectingDialogDismissed(false);
+    handleOpenWalletList();
+  };
+
+  const handleCloseConnectingDialog = () => {
+    setConnectingDialogDismissed(true);
+    handleCloseWalletList();
+  };
 
   return (
     <>
       {!isConnected && (
-        <Button className={className} onClick={handleOpenWalletList}>
+        <Button className={className} onClick={handleShowWalletList}>
           {label}
         </Button>
       )}
@@ -93,7 +107,10 @@ const Auth = ({
               return (
                 <button
                   type="button"
-                  onClick={() => handleSelectWallet(id)}
+                  onClick={() => {
+                    setConnectingDialogDismissed(false);
+                    handleSelectWallet(id);
+                  }}
                   key={id}
                   className={className}
                 >
@@ -117,7 +134,7 @@ const Auth = ({
       </Dialog>
       <Dialog
         show={showConnectingDialog}
-        handleClose={handleCloseWalletList}
+        handleClose={handleCloseConnectingDialog}
         panelClassName="max-w-[360px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
         floatingClose
       >
