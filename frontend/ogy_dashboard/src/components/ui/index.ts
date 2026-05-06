@@ -19,6 +19,8 @@ import TablePagination from "@components/ui/TablePagination";
 import PageHeader from "@components/ui/PageHeader";
 import DatePill from "@components/ui/DatePill";
 import DetailRow from "@components/ui/DetailRow";
+import ExpandedDetailsPanel from "@components/ui/ExpandedDetailsPanel";
+import RowExpandToggle from "@components/ui/RowExpandToggle";
 import TransactionKindPill from "@components/ui/TransactionKindPill";
 import PageContainer from "@components/ui/PageContainer";
 
@@ -44,6 +46,8 @@ export {
   PageHeader,
   DatePill,
   DetailRow,
+  ExpandedDetailsPanel,
+  RowExpandToggle,
   TransactionKindPill,
   PageContainer,
 };

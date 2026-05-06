@@ -1,6 +1,11 @@
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useWallet } from "@components/auth/useWallet";
-import { Card, NewTable, SkeletonOverlay } from "@components/ui";
+import {
+  Card,
+  NewTable,
+  SkeletonOverlay,
+  ExpandedDetailsPanel,
+  RowExpandToggle,
+} from "@components/ui";
 import { NewTableColumn } from "@components/ui/NewTable";
 import { CardErrorOverlay } from "@components/dashboard";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
@@ -35,13 +40,11 @@ const columns: NewTableColumn<AccountNeuronRow>[] = [
     header: "ID",
     cell: (row, { isExpanded, toggleExpand }) => (
       <div className="flex items-center">
-        <button onClick={toggleExpand} className="cursor-pointer mr-2">
-          {isExpanded ? (
-            <ChevronUpIcon className="h-5 w-5" />
-          ) : (
-            <ChevronDownIcon className="h-5 w-5" />
-          )}
-        </button>
+        <RowExpandToggle
+          isExpanded={isExpanded}
+          onToggle={toggleExpand}
+          className="mr-2"
+        />
         <span className="truncate min-w-0 max-w-[200px]">{row.id}</span>
       </div>
     ),
@@ -85,20 +88,6 @@ const buildSkeletonRows = (count: number): AccountNeuronRow[] =>
     ...row,
     id: `${row.id}-${index}`,
   }));
-
-const AccountNeuronExpandedRow = ({ row }: { row: AccountNeuronRow }) => (
-  <div className="grid grid-cols-1 xl:grid-cols-4">
-    {row.tableAccountDetails.map(({ label, value }) => (
-      <div
-        key={label}
-        className="text-center p-4 border-r last:border-r-0 border-b border-border"
-      >
-        <div className="text-content/60">{label}</div>
-        <div className="font-semibold">{value}</div>
-      </div>
-    ))}
-  </div>
-);
 
 const NeuronsEmptyState = () => {
   const { handleShow } = useAddNeuron();
@@ -154,7 +143,12 @@ const NeuronsList = () => {
               columns={columns}
               data={rows}
               getRowId={(row) => row.id}
-              renderExpanded={(row) => <AccountNeuronExpandedRow row={row} />}
+              renderExpanded={(row) => (
+                <ExpandedDetailsPanel
+                  details={row.tableAccountDetails}
+                  columns={4}
+                />
+              )}
             />
           )}
           <DialogAddNeuron />

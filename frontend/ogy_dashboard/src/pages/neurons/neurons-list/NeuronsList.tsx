@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { NewTable, TablePagination, SkeletonOverlay } from "@components/ui";
+import {
+  NewTable,
+  TablePagination,
+  SkeletonOverlay,
+  DatePill,
+  ExpandedDetailsPanel,
+  RowExpandToggle,
+} from "@components/ui";
 import { CardErrorOverlay } from "@components/dashboard";
 import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
@@ -16,6 +22,8 @@ type NeuronRow = {
   votingPower: string;
   dissolveDelay: string;
   age: string;
+  createdAt: string;
+  createdAtRaw: number;
   details: { label: string; value: string }[];
 };
 
@@ -27,13 +35,11 @@ const getColumns = (
     header: "ID",
     cell: (row, { isExpanded, toggleExpand }) => (
       <div className="flex items-center">
-        <button onClick={toggleExpand} className="cursor-pointer mr-2">
-          {isExpanded ? (
-            <ChevronUpIcon className="h-5 w-5" />
-          ) : (
-            <ChevronDownIcon className="h-5 w-5" />
-          )}
-        </button>
+        <RowExpandToggle
+          isExpanded={isExpanded}
+          onToggle={toggleExpand}
+          className="mr-2"
+        />
         <span className="truncate min-w-0 max-w-[200px]">{row.id}</span>
         <CopyToClipboard value={row.id} />
       </div>
@@ -67,7 +73,12 @@ const getColumns = (
   {
     id: "age",
     header: "Age",
-    cell: (row) => <span>{row.age}</span>,
+    cell: (row) =>
+      row.createdAtRaw ? (
+        <DatePill millis={row.createdAtRaw * 1000} />
+      ) : (
+        <span>{row.age}</span>
+      ),
   },
   {
     id: "votingPower",
@@ -78,18 +89,19 @@ const getColumns = (
     id: "view",
     header: "View",
     cell: (row) => (
-      <div className="flex justify-center items-center shrink-0 rounded-full bg-surface border border-border hover:bg-surface-2 w-10 h-10">
-        <button
-          onClick={() =>
-            navigate({
-              pathname: "/governance/neurons/details",
-              search: createSearchParams({ id: row.id }).toString(),
-            })
-          }
-        >
-          <EyeIcon className="h-5 w-5" />
-        </button>
-      </div>
+      <button
+        type="button"
+        aria-label={`View neuron ${row.id}`}
+        onClick={() =>
+          navigate({
+            pathname: "/governance/neurons/details",
+            search: createSearchParams({ id: row.id }).toString(),
+          })
+        }
+        className="inline-flex justify-center items-center shrink-0 rounded-full bg-surface border border-border hover:bg-surface-2 w-10 h-10 cursor-pointer transition-colors"
+      >
+        <EyeIcon className="h-5 w-5" />
+      </button>
     ),
   },
 ];
@@ -101,25 +113,13 @@ const FAKE_ROW: NeuronRow = {
   votingPower: "1,250,000",
   dissolveDelay: "2 years",
   age: "6 months ago",
+  createdAt: "2024-01-01",
+  createdAtRaw: 0,
   details: [],
 };
 
 const buildSkeletonRows = (count: number): NeuronRow[] =>
   buildFakeRows(FAKE_ROW, count);
-
-const NeuronExpandedRow = ({ row }: { row: NeuronRow }) => (
-  <div className="grid grid-cols-1 xl:grid-cols-3">
-    {row.details.map(({ label, value }) => (
-      <div
-        key={label}
-        className="text-center p-4 border-r last:border-r-0 border-b border-border"
-      >
-        <div className="text-content/60">{label}</div>
-        <div className="font-semibold">{value}</div>
-      </div>
-    ))}
-  </div>
-);
 
 const NeuronsList = ({
   pagination,
@@ -171,7 +171,9 @@ const NeuronsList = ({
           data={rows}
           footer={paginationFooter}
           getRowId={(row) => row.id}
-          renderExpanded={(row) => <NeuronExpandedRow row={row} />}
+          renderExpanded={(row) => (
+            <ExpandedDetailsPanel details={row.details} columns={3} />
+          )}
         />
       </SkeletonOverlay>
     </div>
