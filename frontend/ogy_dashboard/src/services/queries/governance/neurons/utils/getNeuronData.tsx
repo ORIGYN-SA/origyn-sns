@@ -146,6 +146,7 @@ const getNeuronData = (
       : "-",
     dissolveDelay: dissolveDelay ? formatYearsDifference(dissolveDelay) : "-",
     createdAt: formatDate(createdAt, { fromSeconds: true }) ?? "-",
+    createdAtRaw: createdAt,
     maxNeuronAgeForAgeBonus,
     maxAgeBonusPercentage: `${dissolveDelayBonus.toFixed(0)}%`,
     ageBonus,

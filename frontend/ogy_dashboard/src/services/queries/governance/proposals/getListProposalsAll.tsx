@@ -37,8 +37,10 @@ export const getListProposalsAll = async ({
           proposer,
           title,
           proposed: formatDate(proposed, { fromSeconds: true }) ?? "",
+          proposedRaw: proposed,
           timeRemaining:
             DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
+          timeRemainingRaw: timeRemaining,
           topic,
           status: capitalize(status),
           votes: {

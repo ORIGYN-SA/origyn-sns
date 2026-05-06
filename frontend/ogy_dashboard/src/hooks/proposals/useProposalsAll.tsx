@@ -34,8 +34,10 @@ const useProposalsAll = ({
         const id = proposal.id;
         const proposer = proposal.proposer;
         const proposed = proposal.proposed;
+        const proposedRaw = proposal.proposedRaw;
         const title = proposal.title;
         const timeRemaining = proposal.timeRemaining;
+        const timeRemainingRaw = proposal.timeRemainingRaw;
         const topic = proposal.topic;
         const status = proposal.status;
         const votes = proposal.votes;
@@ -44,8 +46,10 @@ const useProposalsAll = ({
           id,
           proposer,
           proposed,
+          proposedRaw,
           title,
           timeRemaining,
+          timeRemainingRaw,
           topic,
           status,
           votes,
