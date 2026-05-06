@@ -48,7 +48,7 @@ export const Governance = () => {
     (node: HTMLElement | null) => {
       if (!node || !scrollTarget || node.id !== scrollTarget) return;
       setTimeout(() => {
-        node.scrollIntoView({ behavior: "smooth" });
+        node.scrollIntoView();
       }, 500);
       window.history.replaceState({}, "");
     },

@@ -39,7 +39,6 @@ export default function useScrollToTopOnNavigation() {
 
           window.scrollTo({
             top: Math.max(top - HASH_SCROLL_OFFSET_PX, 0),
-            behavior: "smooth",
           });
           return;
         }
@@ -66,7 +65,7 @@ export default function useScrollToTopOnNavigation() {
 
     const state = location.state as { scrollTo?: string } | null;
     if (navigationType !== "POP" && !state?.scrollTo) {
-      window.scrollTo({ top: 0, behavior: "instant" });
+      window.scrollTo({ top: 0 });
     }
   }, [location.pathname, location.hash, navigationType, location.state]);
 }
