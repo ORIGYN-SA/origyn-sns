@@ -43,7 +43,7 @@ const PageHeader = ({
   onBack,
   right,
 }: PageHeaderProps) => (
-  <div className="relative flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 py-8 after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:h-px after:w-screen after:bg-border-strong">
+  <div className="relative flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 py-8 after:absolute after:-left-6 after:-right-6 after:bottom-0 after:h-px after:bg-border-strong">
     <div className="flex items-center gap-6">
       {onBack && (
         <button

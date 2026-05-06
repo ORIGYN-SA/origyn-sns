@@ -48,7 +48,7 @@ const CardErrorOverlay = ({
     ref={adoptBorderRadius}
     data-skel-static
     role="alert"
-    className="absolute inset-0 z-10 flex items-center justify-center bg-surface/85 backdrop-blur-sm px-6 select-text"
+    className="absolute inset-0 z-10 flex items-center justify-center border border-border-strong bg-surface/85 backdrop-blur-sm px-6 select-text"
   >
     <div className="flex flex-col items-center gap-3 text-center">
       <div className="flex items-center justify-center w-12 h-12 rounded-full bg-surface-2 border border-border">

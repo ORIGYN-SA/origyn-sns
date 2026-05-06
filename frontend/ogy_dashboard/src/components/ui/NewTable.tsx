@@ -66,8 +66,8 @@ const NewTable = <T,>({
                 <th
                   key={column.id}
                   className={`py-5 text-left font-semibold whitespace-nowrap ${
-                    index === 0 ? "pl-[70px]" : "pl-4"
-                  } ${index === columns.length - 1 ? "pr-[70px]" : ""} ${
+                    index === 0 ? "pl-16" : "pl-4"
+                  } ${index === columns.length - 1 ? "pr-16" : ""} ${
                     column.headerClassName ?? ""
                   }`}
                 >
@@ -92,8 +92,8 @@ const NewTable = <T,>({
                       <td
                         key={column.id}
                         className={`py-4 text-left border-b border-border ${
-                          index === 0 ? "pl-[70px]" : "pl-4"
-                        } ${index === columns.length - 1 ? "pr-[70px]" : ""} ${
+                          index === 0 ? "pl-16" : "pl-4"
+                        } ${index === columns.length - 1 ? "pr-16" : ""} ${
                           column.cellClassName ?? ""
                         }`}
                       >
@@ -121,7 +121,7 @@ const NewTable = <T,>({
         </table>
       </div>
       {footer && (
-        <div data-skel-static className="px-[70px] py-5">
+        <div data-skel-static className="px-16 py-5">
           {footer}
         </div>
       )}

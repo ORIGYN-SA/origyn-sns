@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { useWallet } from "@components/auth/useWallet";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
@@ -150,12 +151,15 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                         >
                           My account
                         </Button>
-                        <button
-                          type="button"
-                          className="h-12 w-full rounded-full bg-white text-[14px] font-semibold leading-[48px] text-[#69737C]"
+                        <a
+                          href="https://app.icpswap.com/swap"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 self-center py-1 text-[14px] font-normal text-[#69737C]"
                         >
                           How to top up?
-                        </button>
+                          <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 opacity-60" />
+                        </a>
                       </div>
                     </div>
                   </div>
