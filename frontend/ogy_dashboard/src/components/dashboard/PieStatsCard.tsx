@@ -4,6 +4,7 @@ import PieChart, { PieChartData } from "@components/charts/pie/Pie";
 import { usePieChart } from "@components/charts/pie/context";
 import { FAKE_PIE_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
 import CardErrorOverlay from "./CardErrorOverlay";
+import ChartEmptyState from "./ChartEmptyState";
 import Stat from "./Stat";
 import StatCard from "./StatCard";
 
@@ -48,16 +49,13 @@ const PieStatsCard = ({
   const displayTotal =
     showSkeleton && totalValue == null ? FAKE_STAT_VALUE : totalValue;
   const hasData = !!displayData && displayData.length > 0;
+  const isEmpty =
+    !showSkeleton &&
+    (!data || data.length === 0 || data.every((d) => d.value === 0));
 
   const chartBlock = (
     <div data-skel-block className="mt-6 h-72 rounded-xl">
-      {hasData ? (
-        <PieChart data={displayData} colors={colors} />
-      ) : (
-        <div className="flex justify-center items-center h-full text-content/60">
-          No data
-        </div>
-      )}
+      {hasData ? <PieChart data={displayData} colors={colors} /> : null}
     </div>
   );
 
@@ -112,7 +110,11 @@ const PieStatsCard = ({
           </div>
           {titleTooltip}
         </div>
-        {layout === "horizontal" ? (
+        {isEmpty ? (
+          <div className="mt-6 h-72">
+            <ChartEmptyState title={title} />
+          </div>
+        ) : layout === "horizontal" ? (
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-6 items-center">
             <div className="flex flex-col">
               {chartBlock}

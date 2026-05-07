@@ -3,6 +3,7 @@ import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import AreaChart from "@components/charts/shadcn/AreaChart";
 import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
 import CardErrorOverlay from "./CardErrorOverlay";
+import ChartEmptyState from "./ChartEmptyState";
 import PeriodSelect from "./PeriodSelect";
 import Stat from "./Stat";
 
@@ -49,6 +50,8 @@ const ChartStatsCard = ({
   const showSkeleton = loading || hasError;
   const displayChartData =
     showSkeleton && !chart.data ? FAKE_AREA_SERIES : chart.data;
+  const isEmpty =
+    !showSkeleton && (!chart.data || chart.data.length === 0);
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>
@@ -102,12 +105,16 @@ const ChartStatsCard = ({
             </div>
           </div>
           <div data-skel-block className="col-span-3 h-72 rounded-xl">
-            <AreaChart
-              data={displayChartData}
-              color={chart.color}
-              label={chart.label}
-              className="h-full w-full"
-            />
+            {isEmpty ? (
+              <ChartEmptyState title={title} />
+            ) : (
+              <AreaChart
+                data={displayChartData}
+                color={chart.color}
+                label={chart.label}
+                className="h-full w-full"
+              />
+            )}
           </div>
           <div className="flex items-center justify-end mt-2 mr-6 xl:hidden">
             <div

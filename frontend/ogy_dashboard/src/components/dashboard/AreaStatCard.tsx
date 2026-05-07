@@ -4,6 +4,7 @@ import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
 import CardErrorOverlay from "./CardErrorOverlay";
 import CardHeader from "./CardHeader";
+import ChartEmptyState from "./ChartEmptyState";
 import PeriodSelect from "./PeriodSelect";
 import Stat from "./Stat";
 
@@ -50,6 +51,7 @@ const AreaStatCard = ({
   const showSkeleton = loading || hasError;
   const displayChartData =
     showSkeleton && !chartData ? FAKE_AREA_SERIES : chartData;
+  const isEmpty = !showSkeleton && (!chartData || chartData.length === 0);
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={`flex flex-col ${className ?? ""}`}>
@@ -82,12 +84,16 @@ const AreaStatCard = ({
           data-skel-block
           className="mt-4 flex-1 min-h-72 w-full rounded-xl"
         >
-          <AreaChart
-            data={displayChartData}
-            color={chartColor}
-            label={chartLabel}
-            className="h-full w-full"
-          />
+          {isEmpty ? (
+            <ChartEmptyState title={title} />
+          ) : (
+            <AreaChart
+              data={displayChartData}
+              color={chartColor}
+              label={chartLabel}
+              className="h-full w-full"
+            />
+          )}
         </div>
         {hasError && <CardErrorOverlay title={title} />}
       </Card>
