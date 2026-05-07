@@ -9,6 +9,7 @@ use types::TokenSymbol;
 
 use crate::memory::{get_payment_round_history_memory, VM};
 
+
 #[derive(Serialize, Deserialize)]
 pub struct PaymentProcessor {
     #[serde(skip, default = "init_map_v0")]

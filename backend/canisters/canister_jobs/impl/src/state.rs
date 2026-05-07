@@ -1,13 +1,10 @@
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
-use candid::{CandidType, Principal};
+use candid::{ CandidType, Principal };
 use canister_jobs_api::BurnJobResult;
-use serde::{Deserialize, Serialize};
-use types::{CanisterId, TimestampMillis};
-use utils::{
-    env::{CanisterEnv, Environment},
-    memory::MemorySize,
-};
+use serde::{ Deserialize, Serialize };
+use types::{ CanisterId, TimestampMillis };
+use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
 
 canister_state!(RuntimeState);
 
@@ -91,7 +88,7 @@ impl Data {
         ledger_canister_id: CanisterId,
         burn_principal_id: Principal,
         daily_burn_amount: u64,
-        authorized_principals: Vec<Principal>,
+        authorized_principals: Vec<Principal>
     ) -> Self {
         Self {
             authorized_principals,
