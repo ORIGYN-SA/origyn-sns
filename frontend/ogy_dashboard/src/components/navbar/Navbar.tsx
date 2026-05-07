@@ -1,12 +1,19 @@
 import { useState, Fragment } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useWallet } from "@components/auth/useWallet";
-import { Transition, TransitionChild, Dialog } from "@headlessui/react";
+import {
+  Transition,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+} from "@headlessui/react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/20/solid";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Auth from "@components/auth/Auth";
 import BrandLogo from "@components/brand/BrandLogo";
 import AccountOverview from "@components/account/overview/AccountOverview";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
+import { Button } from "@components/ui";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
 import useScrolledPast from "@hooks/useScrolledPast";
 
@@ -20,7 +27,12 @@ const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
 const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
-  const { isConnected, principalId } = useWallet();
+  const {
+    isConnected,
+    principalId,
+    handleOpenWalletList,
+    handleDisconnectWallet,
+  } = useWallet();
   const hidden = useHideOnScrollDown();
   const pastWarning = useScrolledPast(30);
   const showRounded = roundedTop && !pastWarning;
@@ -34,6 +46,21 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
     setShowAccountOverview(show);
 
   const handleOnHideMenu = () => setShowMenu(false);
+
+  const handleOnClickConnect = () => {
+    handleOnHideMenu();
+    handleOpenWalletList();
+  };
+
+  const handleOnClickDisconnect = async () => {
+    handleOnHideMenu();
+    await handleDisconnectWallet();
+  };
+
+  const handleOnClickViewAccount = () => {
+    handleOnHideMenu();
+    handleOnClickShowAccountOverview(true);
+  };
 
   return (
     <>
@@ -73,7 +100,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
               ))}
             </div>
           </div>
-          <div className="flex justify-self-end items-center col-start-5">
+          <div className="flex justify-self-end items-center gap-3 col-start-5">
             {!isConnected && <Auth />}
             {isConnected && (
               <button
@@ -88,80 +115,132 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
+                aria-label="Open main menu"
+                className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-[#E9EAF1] bg-[#F9FAFE] text-content hover:bg-[#F1F3F9] hover:border-[#D6D9E2] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
               >
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                <Bars3Icon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
           </div>
         </div>
         {/* Mobile menu */}
         <Transition show={showMenu} as={Fragment}>
-          <div className="fixed z-50 inset-0 overflow-hidden">
-            <Dialog
+          <Dialog
+            as="div"
+            static
+            open={showMenu}
+            onClose={handleOnHideMenu}
+            className="fixed inset-0 z-50"
+          >
+            <TransitionChild
               as={Fragment}
-              static
-              open={showMenu}
-              onClose={handleOnHideMenu}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
             >
               <div
-                className="absolute z-50 inset-0 overflow-hidden"
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm"
                 aria-hidden="true"
-                onClick={() => setShowMenu(false)}
-              >
-                <TransitionChild
-                  as={Fragment}
-                  enter="ease-in-out duration-500"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="ease-in-out duration-500"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <div className="fixed w-full inset-0 bg-black bg-opacity-50 transition-opacity" />
-                </TransitionChild>
-                <div className="fixed inset-x-0 top-0 w-full flex">
-                  <TransitionChild
-                    as={Fragment}
-                    enter="transform transition ease-in-out duration-500 sm:duration-700"
-                    enterFrom="-translate-y-full"
-                    enterTo="translate-y-0"
-                    leave="transform transition ease-in-out duration-500 sm:duration-700"
-                    leaveFrom="translate-y-0"
-                    leaveTo="-translate-y-full"
-                  >
-                    <div className="bg-background w-full px-8 py-5">
-                      <div className="flex flex-col items-center px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <div className="flex items-center justify-between w-full mb-4">
-                          <BrandLogo className="pr-4" />
-                          <button
-                            onClick={() => setShowMenu(!showMenu)}
-                            type="button"
-                            className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
-                          >
-                            <span className="sr-only">Open main menu</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
+              />
+            </TransitionChild>
 
-                        {visibleNavItems.map(({ title, url }) => (
-                          <Link
-                            onClick={handleOnHideMenu}
-                            to={url}
-                            className="font-semibold text-muted hover:text-content px-3 py-2 rounded-md"
-                            key={url}
-                          >
-                            {title}
-                          </Link>
-                        ))}
+            <div className="fixed inset-x-0 top-0 flex max-h-screen">
+              <TransitionChild
+                as={Fragment}
+                enter="transform transition ease-out duration-300"
+                enterFrom="-translate-y-4 opacity-0"
+                enterTo="translate-y-0 opacity-100"
+                leave="transform transition ease-in duration-200"
+                leaveFrom="translate-y-0 opacity-100"
+                leaveTo="-translate-y-4 opacity-0"
+              >
+                <DialogPanel className="relative w-full bg-background rounded-b-2xl shadow-2xl flex flex-col max-h-screen overflow-y-auto">
+                  <div className="flex items-center justify-between h-20 px-6 border-b border-border-strong shrink-0">
+                    <BrandLogo />
+                    <button
+                      onClick={handleOnHideMenu}
+                      type="button"
+                      aria-label="Close menu"
+                      className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
+                    >
+                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col gap-1 px-4 py-4">
+                    {visibleNavItems.map(({ title, url }) => (
+                      <NavLink
+                        key={url}
+                        to={url}
+                        end={url === "/"}
+                        onClick={handleOnHideMenu}
+                        className={({ isActive }) =>
+                          `flex items-center justify-between px-4 py-3.5 rounded-xl text-[16px] font-semibold transition-colors ${
+                            isActive
+                              ? "bg-surface-2 text-content"
+                              : "text-muted hover:bg-surface-2 hover:text-content"
+                          }`
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            <span>{title}</span>
+                            <ChevronRightIcon
+                              className={`h-4 w-4 shrink-0 ${
+                                isActive ? "text-content" : "text-muted"
+                              }`}
+                              aria-hidden="true"
+                            />
+                          </>
+                        )}
+                      </NavLink>
+                    ))}
+                  </div>
+
+                  <div className="border-t border-border-strong px-6 py-5 shrink-0">
+                    {!isConnected ? (
+                      <div className="flex flex-col gap-3">
+                        <p className="text-[13px] leading-snug text-muted">
+                          Connect your wallet to manage tokens, vote on
+                          proposals and view your transaction history.
+                        </p>
+                        <Button
+                          onClick={handleOnClickConnect}
+                          className="w-full !py-0 text-[14px] leading-[48px]"
+                        >
+                          Connect wallet
+                        </Button>
                       </div>
-                    </div>
-                  </TransitionChild>
-                </div>
-              </div>
-            </Dialog>
-          </div>
+                    ) : (
+                      <div className="flex flex-col gap-3">
+                        <button
+                          type="button"
+                          onClick={handleOnClickViewAccount}
+                          aria-label="View account overview"
+                          className="w-full text-left rounded-[100px] focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
+                        >
+                          <PrincipalIdPill
+                            principalId={principalId}
+                            variant="long"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleOnClickDisconnect}
+                          className="w-full h-12 rounded-full border border-border-strong text-[14px] font-semibold text-content hover:bg-surface-2 transition-colors"
+                        >
+                          Disconnect
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </Dialog>
         </Transition>
       </nav>
 
