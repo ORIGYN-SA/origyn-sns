@@ -216,17 +216,17 @@ const Table = <T extends object>({
 
       <div className="p-1 w-full">
         {pagination && setPagination && (
-          <div className="flex items-center justify-between p-6">
-            <div className="flex items-center">
-              <span>Lines per page</span>
+          <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div className="flex items-center justify-center whitespace-nowrap sm:justify-start">
+              <span className="shrink-0">Lines per page</span>
               <Select
                 options={linesPerPageOptions}
                 value={table.getState().pagination.pageSize}
                 handleOnChange={(value) => handleOnChangePageSize(value)}
-                className="ml-2 w-25"
+                className="ml-2 w-25 shrink-0"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
               <button
                 className="p-1"
                 onClick={handleOnClickFirstPage}

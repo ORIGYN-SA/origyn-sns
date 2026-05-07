@@ -7,7 +7,7 @@ interface TileProps extends PropsWithChildren<{
 const Tile = ({ className, children, ...restProps }: TileProps) => {
   return (
     <div
-      className={`flex justify-center items-center shrink-0 w-12 h-12 rounded-full ${className}`}
+      className={`flex justify-center items-center shrink-0 ${className ?? ""}`}
       {...restProps}
     >
       {children}

@@ -31,8 +31,9 @@ const queryClient = new QueryClient({
 
 const DERIVATION_ORIGIN = "https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io";
 const LOCAL_HOSTNAMES = new Set(["localhost", "127.0.0.1", "::1"]);
-const isLocalhost = LOCAL_HOSTNAMES.has(window.location.hostname);
-const signerClientOptions = isLocalhost
+const isLocalhostDev =
+  import.meta.env.DEV && LOCAL_HOSTNAMES.has(window.location.hostname);
+const signerClientOptions = isLocalhostDev
   ? { targets: whitelistedCanisterIds }
   : { targets: whitelistedCanisterIds, derivationOrigin: DERIVATION_ORIGIN };
 

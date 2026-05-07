@@ -63,7 +63,7 @@ const PageHeader = ({
             {category}
           </span>
         )}
-        <h1 className="text-[40px] font-bold leading-none text-content">
+        <h1 className="text-[28px] sm:text-[40px] font-bold leading-tight sm:leading-none text-content">
           {title}
         </h1>
       </div>

@@ -166,7 +166,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         Estimate your rewards
       </h2>
 
-      <div className="text-[40px] font-bold leading-none text-content">
+      <div className="text-[28px] sm:text-[40px] font-bold leading-none text-content">
         {current?.rate?.replace(/\s+/g, "") || "N/A"}
       </div>
 

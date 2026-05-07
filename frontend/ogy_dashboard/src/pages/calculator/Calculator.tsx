@@ -303,13 +303,13 @@ const Calculator = () => {
   const showError = !showSkeleton && !!estimateError && !estimate;
 
   return (
-    <div className="max-w-[1440px] mx-auto py-16 px-6">
+    <div className="max-w-[1440px] mx-auto py-8 px-6 sm:py-16">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center gap-2 px-16 py-8 max-w-[528px]">
-          <h1 className="font-extrabold text-[64px] leading-[60px] tracking-[-0.05em] text-center text-content">
+        <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
+          <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
             Cost calculator
           </h1>
-          <p className="font-light text-[22px] leading-none text-center text-muted">
+          <p className="font-light text-[16px] sm:text-[22px] leading-snug sm:leading-none text-center text-muted">
             Use the ORIGYN calculator to estimate the cost of your unique
             certificate with all your data on chain
           </p>

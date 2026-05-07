@@ -42,10 +42,10 @@ const TablePagination = ({
   const pageItems = buildPageItems(pageIndex, pageCount);
 
   return (
-    <div className="flex items-center justify-between text-sm">
-      <div className="flex items-center gap-2 text-muted">
-        <span>Lines per page</span>
-        <div className="relative inline-flex items-center gap-[5px] rounded-full bg-surface-1 border border-border-strong py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
+    <div className="flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-center gap-2 whitespace-nowrap text-muted sm:justify-start">
+        <span className="shrink-0">Lines per page</span>
+        <div className="relative inline-flex shrink-0 items-center gap-[5px] rounded-full bg-surface-1 border border-border-strong py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
           <span>{pageSize}</span>
           <ChevronDownIcon className="pointer-events-none shrink-0" />
           <select
@@ -61,7 +61,7 @@ const TablePagination = ({
           </select>
         </div>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center justify-center gap-1 sm:justify-end">
         {canPrev && (
           <button
             type="button"

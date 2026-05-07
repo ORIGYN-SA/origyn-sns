@@ -117,7 +117,7 @@ const NewTable = <T,>({
         </table>
       </div>
       {footer && (
-        <div data-skel-static className="px-16 py-5">
+        <div data-skel-static className="px-4 py-4 sm:px-16 sm:py-5">
           {footer}
         </div>
       )}

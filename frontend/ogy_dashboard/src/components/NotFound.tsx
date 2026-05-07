@@ -24,14 +24,14 @@ const NotFound = () => {
   return (
     <section className="relative isolate overflow-hidden">
       <HeroBackground />
-      <div className="flex flex-col items-center gap-4 text-center max-w-[640px] mx-auto pt-40 pb-32 px-6">
-        <h1 className="font-extrabold text-[180px] leading-none tracking-[-0.06em] text-content">
+      <div className="flex flex-col items-center gap-4 text-center max-w-[640px] mx-auto pt-24 pb-16 px-6 sm:pt-40 sm:pb-32">
+        <h1 className="font-extrabold text-[100px] sm:text-[180px] leading-none tracking-[-0.06em] text-content">
           404
         </h1>
-        <h2 className="font-extrabold text-[40px] leading-[44px] tracking-[-0.03em] text-content">
+        <h2 className="font-extrabold text-[28px] leading-[32px] sm:text-[40px] sm:leading-[44px] tracking-[-0.03em] text-content">
           Page not found
         </h2>
-        <p className="font-light text-[18px] leading-relaxed text-muted">
+        <p className="font-light text-[16px] sm:text-[18px] leading-relaxed text-muted">
           The page you&rsquo;re looking for doesn&rsquo;t exist or may have
           moved.
         </p>

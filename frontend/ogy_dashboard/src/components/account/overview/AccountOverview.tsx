@@ -4,6 +4,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { useWallet } from "@components/auth/useWallet";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { Button } from "@components/ui";
+import { CloseIcon } from "@components/ui/icons";
 import { Stat } from "@components/dashboard";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
@@ -63,27 +64,24 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                 leaveTo="translate-x-full"
               >
                 <div className="flex h-full w-[min(502px,100vw)] flex-col gap-12 overflow-y-auto bg-gradient-to-b from-surface-1 to-surface-2 p-6 shadow-[-10px_0px_50px_0px_#0000000D] sm:p-10">
-                  <div className="flex items-start justify-between gap-6">
-                    <div className="min-w-0 pt-1">
-                      <div className="text-[12px] font-bold uppercase tracking-[2px] text-muted">
-                        Account
-                      </div>
-                      <h2 className="mt-4 text-[32px] font-semibold leading-none text-content">
-                        Welcome back
-                      </h2>
-                      <p className="mt-4 max-w-[320px] text-[14px] leading-6 text-muted">
-                        Manage your OGY wallet, rewards, and staking activity.
-                      </p>
-                    </div>
+                  <div className="flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={handleClose}
+                      aria-label="Close"
+                      className="inline-flex h-[47px] w-[47px] items-center justify-center rounded-full border border-border-faint bg-surface-muted text-content transition-colors hover:bg-surface-2 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
+                    >
+                      <CloseIcon width={18} height={18} />
+                    </button>
                     <button
                       type="button"
                       onClick={handleDisconnectWallet}
                       aria-label="Disconnect wallet"
-                      className="shrink-0 rounded-full p-1 text-muted transition-colors hover:bg-surface-2 hover:text-content"
+                      className="inline-flex h-[47px] w-[47px] items-center justify-center rounded-full border border-border-faint bg-surface-muted text-content transition-colors hover:bg-surface-2 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                     >
                       <svg
-                        width="34"
-                        height="34"
+                        width="20"
+                        height="20"
                         viewBox="0 0 34 34"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -112,6 +110,19 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                         />
                       </svg>
                     </button>
+                  </div>
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="min-w-0 pt-1">
+                      <div className="text-[12px] font-bold uppercase tracking-[2px] text-muted">
+                        Account
+                      </div>
+                      <h2 className="mt-4 text-[24px] sm:text-[32px] font-semibold leading-tight sm:leading-none text-content">
+                        Welcome back
+                      </h2>
+                      <p className="mt-4 max-w-[320px] text-[14px] leading-6 text-muted">
+                        Manage your OGY wallet, rewards, and staking activity.
+                      </p>
+                    </div>
                   </div>
                   <div className="w-full text-center">
                     <div className="flex h-[61px] w-full items-center justify-center gap-2 rounded-t-[20px] border border-border-faint bg-surface-1 px-6 py-4 font-sans text-[22px] font-normal leading-none text-muted">

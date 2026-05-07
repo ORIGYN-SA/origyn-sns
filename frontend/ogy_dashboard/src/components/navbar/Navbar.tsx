@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useWallet } from "@components/auth/useWallet";
 import {
@@ -47,6 +47,15 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
 
   const handleOnHideMenu = () => setShowMenu(false);
 
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1280px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setShowMenu(false);
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
   const handleOnClickConnect = () => {
     handleOnHideMenu();
     handleOpenWalletList();
@@ -66,7 +75,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
     <>
       <nav
         className={`bg-surface-1 sticky top-0 border-b border-border-strong z-40 transition-[transform,border-radius] duration-300 ease-in-out ${
-          showRounded ? "rounded-t-2xl" : "rounded-t-none"
+          showRounded ? "rounded-t-none sm:rounded-t-2xl" : "rounded-t-none"
         } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-[1440px] mx-auto px-6">
@@ -100,12 +109,14 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
               ))}
             </div>
           </div>
-          <div className="flex justify-self-end items-center gap-3 col-start-5">
+          <div className="flex justify-self-end items-center gap-3 col-start-2 xl:col-start-5">
             {!isConnected && <Auth />}
             {isConnected && (
               <button
                 type="button"
                 onClick={() => handleOnClickShowAccountOverview(true)}
+                aria-label="Open account overview"
+                className="p-0 border-0 bg-transparent appearance-none rounded-[100px] focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
               >
                 <PrincipalIdPill principalId={principalId} variant="short" />
               </button>
@@ -164,9 +175,9 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                       onClick={handleOnHideMenu}
                       type="button"
                       aria-label="Close menu"
-                      className="inline-flex items-center justify-center p-2 rounded-full hover:bg-surface-2 focus:outline-none"
+                      className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-border-faint bg-surface-muted text-content hover:bg-surface-2 hover:border-border-strong transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                     >
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                     </button>
                   </div>
 
