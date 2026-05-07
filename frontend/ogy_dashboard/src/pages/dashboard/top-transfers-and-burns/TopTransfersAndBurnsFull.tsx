@@ -1,8 +1,9 @@
 import { useMemo } from "react";
-import { Badge, Skeleton } from "@components/ui";
+import { Badge, SkeletonOverlay } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
 import { CardErrorOverlay } from "@components/dashboard";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTopTransfersAndBurns, {
   TransformedData,
 } from "@hooks/metrics/useTopTransfersAndBurns";
@@ -16,18 +17,28 @@ interface TopTransfersAndBurnsFullProps {
   limit: number;
 }
 
+const FAKE_ROW: TransformedData = {
+  hash: "0000000000000000000000000000000000000000000000000000000000000000",
+  from: "0000000000000000000000000000000000000000000000000000000000000000",
+  to: "0000000000000000000000000000000000000000000000000000000000000000",
+  value: "0",
+  fee: "0",
+  time: "—",
+};
+
 const TopTransfersAndBurnsFull = ({
   type,
   title,
   limit,
 }: TopTransfersAndBurnsFullProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useTopTransfersAndBurns({
+  const { data, isSuccess, isLoading, isError } = useTopTransfersAndBurns({
     type,
     limit,
   });
   const hasError = !isLoading && isError;
   const showSkeleton = isLoading || hasError;
+  const hasData = isSuccess && data && data.length > 0;
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -118,21 +129,24 @@ const TopTransfersAndBurnsFull = ({
     return baseColumns;
   }, [type, navigate]);
 
+  const rows = showSkeleton || !hasData ? buildFakeRows(FAKE_ROW, limit) : data;
+  const showEmptyState = !showSkeleton && isSuccess && (!data || data.length === 0);
+
   return (
     <>
       <h1 className="text-4xl sm:text-6xl font-bold text-center mt-16 mb-16">
         {title}
       </h1>
       <div className="relative w-10/12 mx-auto my-8">
-        {showSkeleton ? (
-          <Skeleton count={limit} height={52} />
-        ) : data && data.length > 0 ? (
-          <Table
-            columns={columns}
-            data={data.map((item, index) => ({ ...item, index }))}
-          />
+        {showEmptyState ? (
+          <div className="text-center text-muted">No data available.</div>
         ) : (
-          <div className="text-center text-gray-500">No data available.</div>
+          <SkeletonOverlay loading={showSkeleton}>
+            <Table
+              columns={columns}
+              data={rows.map((item, index) => ({ ...item, index }))}
+            />
+          </SkeletonOverlay>
         )}
         {hasError && <CardErrorOverlay title={title} />}
       </div>

@@ -1,7 +1,9 @@
 import { useMemo } from "react";
-import { Badge, Button, Card, Skeleton } from "@components/ui";
+import { Badge, Button, Card, SkeletonOverlay } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTopTransfersAndBurns, {
   TransformedData,
 } from "@hooks/metrics/useTopTransfersAndBurns";
@@ -15,16 +17,28 @@ interface TopTransfersAndBurnsProps {
   limit: number;
 }
 
+const FAKE_ROW: TransformedData = {
+  hash: "0000000000000000000000000000000000000000000000000000000000000000",
+  from: "0000000000000000000000000000000000000000000000000000000000000000",
+  to: "0000000000000000000000000000000000000000000000000000000000000000",
+  value: "0",
+  fee: "0",
+  time: "—",
+};
+
 const TopTransfersAndBurns = ({
   type,
   title,
   limit,
 }: TopTransfersAndBurnsProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useTopTransfersAndBurns({
+  const { data, isSuccess, isLoading, isError } = useTopTransfersAndBurns({
     type,
     limit,
   });
+
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -119,33 +133,27 @@ const TopTransfersAndBurns = ({
     navigate(`/${type}`);
   };
 
+  const rows =
+    showSkeleton || !isSuccess || !data
+      ? buildFakeRows(FAKE_ROW, limit)
+      : data;
+
   return (
-    <>
-      <Card className="p-6 space-y-6">
-        <div className="flex flex-row items-center">
-          <div className="text-lg font-semibold">{title}</div>
-          <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
-            Show All
-          </Button>
-        </div>
-        {isLoading && <Skeleton count={limit} height={52} />}
-        {isError && (
-          <div className="text-red-500">
-            An error occurred: {error?.message || "Unknown error"}
-          </div>
-        )}
-        {data && data.length > 0 ? (
-          <Table
-            columns={columns}
-            data={data.map((item, index) => ({ ...item, index }))}
-          />
-        ) : (
-          !isLoading && (
-            <div className="text-center text-gray-500">No data available.</div>
-          )
-        )}
-      </Card>
-    </>
+    <Card className="p-6 space-y-6">
+      <div data-skel-static className="flex flex-row items-center">
+        <div className="text-lg font-semibold">{title}</div>
+        <Button onClick={() => handleClick()} className="ml-auto md:ml-6">
+          Show All
+        </Button>
+      </div>
+      {hasError && <CardErrorOverlay title={title} />}
+      <SkeletonOverlay loading={showSkeleton}>
+        <Table
+          columns={columns}
+          data={rows.map((item, index) => ({ ...item, index }))}
+        />
+      </SkeletonOverlay>
+    </Card>
   );
 };
 
