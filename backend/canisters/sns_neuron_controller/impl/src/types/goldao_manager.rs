@@ -51,6 +51,7 @@ impl GoldaoManager {
                         (TokenSymbol::OGY, "fpmqz-aaaaa-aaaag-qjvua-cai"),
                         (TokenSymbol::ICP, "jej56-sqaaa-aaaab-qgqkq-cai"),
                         (TokenSymbol::WTN, "jej56-sqaaa-aaaab-qgqkq-cai"),
+                        (TokenSymbol::GLDT, "jej56-sqaaa-aaaab-qgqkq-cai"),
                     ],
                 )
             };
