@@ -5,7 +5,6 @@ use crate::state::RuntimeState;
 use bity_ic_canister_logger::LogEntry;
 use bity_ic_canister_tracing_macros::trace;
 use bity_ic_stable_memory::get_reader;
-use candid::Principal;
 use ic_cdk_macros::post_upgrade;
 pub use sns_neuron_controller_api_canister::Args;
 use tracing::info;
