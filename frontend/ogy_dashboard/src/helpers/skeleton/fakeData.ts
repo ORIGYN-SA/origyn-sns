@@ -1,7 +1,6 @@
 import type { PieChartData } from "@components/charts/pie/Pie";
 
 export const FAKE_STAT_VALUE = "000,000,000,000";
-export const FAKE_STAT_VALUE_SMALL = "0.00";
 
 export const FAKE_AREA_SERIES: { name: string; value: number }[] = [
   { name: "Jan", value: 10 },

@@ -15,8 +15,6 @@ import TransactionHistory from "@pages/dashboard/transaction-history";
 import { StakingOverviewChart } from "@components/dashboard";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
-// import TopTransfersAndBurns from "./top-transfers-and-burns/TopTransfersAndBurns";
-// import OGYActivitiesMetrics from "./OGYActivitiesMetrics";
 
 const HERO_BG_MASK =
   "radial-gradient(ellipse at center, black 10%, transparent 65%)";
@@ -124,12 +122,6 @@ const Dashboard = () => {
               <OrigynFoundationReserve />
             </PieChartProvider>
           </section>
-          {/* <section
-            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="ogy-activities-metrics"
-          >
-            <OGYActivitiesMetrics />
-          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="governance-tokens-stakes"
@@ -139,7 +131,6 @@ const Dashboard = () => {
               chartColor="#38bdf8"
             />
           </section>
-          {/* <GovernanceStakingOverview className="w-full col-span-1 xl:col-span-2" /> */}
 
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
@@ -155,22 +146,6 @@ const Dashboard = () => {
             <OrigynRewardAccount />
           </section>
 
-          {/* <section
-            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="top-transfers"
-          >
-            <TopTransfersAndBurns
-              type="transfers"
-              title="Top 5 Transfers"
-              limit={5}
-            />
-          </section> */}
-          {/* <section
-            className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
-            id="top-burns"
-          >
-            <TopTransfersAndBurns type="burns" title="Top 5 Burns" limit={5} />
-          </section> */}
           <section
             className="w-full col-span-1 xl:col-span-2 pt-8 -mt-8"
             id="transaction-history"
