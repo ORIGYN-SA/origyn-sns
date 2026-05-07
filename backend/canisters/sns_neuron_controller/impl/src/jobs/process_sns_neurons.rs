@@ -93,20 +93,41 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
         let rewards_threshold = neuron_manager.get_rewards_threshold(token);
         ic_cdk::println!(
             "[{}][{:?}] available_rewards: {:?}, rewards_threshold: {:?}",
-            manager_type, token, available_rewards, rewards_threshold
+            manager_type,
+            token,
+            available_rewards,
+            rewards_threshold
         );
 
         if available_rewards >= rewards_threshold {
             if neuron_manager.claim_rewards(token).await.is_not_failed() {
-                ic_cdk::println!("[{}][{:?}] Claim succeeded, distributing rewards.", manager_type, token);
+                ic_cdk::println!(
+                    "[{}][{:?}] Claim succeeded, distributing rewards.",
+                    manager_type,
+                    token
+                );
                 let _ = neuron_manager.distribute_rewards(token, destination).await;
             } else {
-                error!("[{}][{:?}] Reward claim reported failure.", manager_type, token);
-                ic_cdk::println!("[{}][{:?}] Reward claim reported failure.", manager_type, token);
+                error!(
+                    "[{}][{:?}] Reward claim reported failure.",
+                    manager_type, token
+                );
+                ic_cdk::println!(
+                    "[{}][{:?}] Reward claim reported failure.",
+                    manager_type,
+                    token
+                );
             }
         } else {
-            info!("[{}][{:?}] Threshold not reached. Skipping rewards.", manager_type, token);
-            ic_cdk::println!("[{}][{:?}] Threshold not reached. Skipping rewards.", manager_type, token);
+            info!(
+                "[{}][{:?}] Threshold not reached. Skipping rewards.",
+                manager_type, token
+            );
+            ic_cdk::println!(
+                "[{}][{:?}] Threshold not reached. Skipping rewards.",
+                manager_type,
+                token
+            );
         }
     }
 

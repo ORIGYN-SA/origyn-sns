@@ -1,7 +1,7 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::{GoldaoManager};
+use crate::types::GoldaoManager;
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
@@ -17,8 +17,8 @@ use sns_governance_canister::types::{
     },
     manage_neuron_response, ManageNeuron,
 };
-use tracing::{error, trace};
 use std::collections::HashMap;
+use tracing::{error, trace};
 use types::{CanisterId, TokenSymbol};
 use utils::env::Environment;
 
@@ -227,9 +227,13 @@ pub trait NeuronRewardsManager: NeuronManager {
             Err(error) => ClaimRewardResult::Partial(error.concat()),
         }
     }
-    async fn distribute_rewards(&self, token: TokenSymbol, destination: Principal) -> Result<(), String> {
-        let is_test_mode = read_state(|s| s.env.is_test_mode());
-        distribute_rewards(token.ledger_id(is_test_mode), destination.into()).await
+
+    async fn distribute_rewards(
+        &self,
+        token: TokenSymbol,
+        destination: Principal,
+    ) -> Result<(), String> {
+        distribute_rewards(token.get_prod_token_info().ledger_id, destination.into()).await
     }
 }
 

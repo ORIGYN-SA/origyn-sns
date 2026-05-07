@@ -1,4 +1,3 @@
-
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
@@ -80,10 +79,7 @@ impl Data {
     ) -> Self {
         Self {
             authorized_principals,
-            neuron_managers: NeuronManagers::init(
-                goldao_manager_config,
-                now,
-            ),
+            neuron_managers: NeuronManagers::init(goldao_manager_config, now),
         }
     }
 }
@@ -96,10 +92,7 @@ pub struct NeuronManagers {
 }
 
 impl NeuronManagers {
-    pub fn init(
-        goldao_manager_config: GoldaoManagerConfig,
-        now: TimestampMillis,
-    ) -> Self {
+    pub fn init(goldao_manager_config: GoldaoManagerConfig, now: TimestampMillis) -> Self {
         Self {
             now,
             goldao: goldao_manager_config.into(),

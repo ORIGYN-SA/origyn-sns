@@ -12,15 +12,11 @@ pub fn setup(
     pic: &PocketIc,
     canister_id: Principal,
     controllers: Vec<Principal>,
-    rewards_destination: Option<Principal>,
     ogy_sns_governance_canister_id: Principal,
     goldao_sns_governance_canister_id: Principal,
     goldao_sns_ledger_canister_id: Principal,
     goldao_sns_rewards_canister_id: Principal,
-    wtn_sns_governance_canister_id: Principal,
-    wtn_sns_ledger_canister_id: Principal,
-    nns_governance_canister_id: Principal,
-    nns_ledger_canister_id: Principal,
+    reward_tokens: HashMap<TokenSymbol, Principal>,
 ) -> Principal {
     let controller = controllers.first().unwrap();
     let canister_id = create_canister_with_id(pic, *controller, canister_id);
@@ -44,14 +40,7 @@ pub fn setup(
                 goldao_sns_ledger_canister_id,
                 goldao_sns_rewards_canister_id,
                 goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64),
-                reward_tokens: {
-                    let dest = rewards_destination.unwrap_or(canister_id);
-                    let mut map = HashMap::new();
-                    map.insert(TokenSymbol::ICP, dest);
-                    map.insert(TokenSymbol::WTN, dest);
-                    map.insert(TokenSymbol::OGY, dest);
-                    map
-                },
+                reward_tokens,
             },
         },
     );

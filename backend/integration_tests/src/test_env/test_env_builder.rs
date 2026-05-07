@@ -5,6 +5,7 @@ use crate::utils::{random_principal, tick_n_blocks};
 use bity_ic_types::Hash;
 use candid::{Nat, Principal};
 use dex_interaction_api::Args as BuybackBurnArgs;
+use ic_nns_governance_api::reward_node_provider;
 use pocket_ic::PocketIcBuilder;
 use sns_governance_canister::types::Neuron;
 use sns_ledger_canister::types::Account as LedgerAccount;
@@ -135,29 +136,21 @@ impl TestEnv {
     pub fn install_sns_neuron_controller(
         &self,
         canister_id: Principal,
-        rewards_destination: Option<Principal>,
         ogy_sns_governance_canister_id: Principal,
         goldao_sns_governance_canister_id: Principal,
         goldao_sns_ledger_canister_id: Principal,
         goldao_sns_rewards_canister_id: Principal,
-        wtn_sns_governance_canister_id: Principal,
-        wtn_sns_ledger_canister_id: Principal,
-        nns_governance_canister_id: Principal,
-        nns_ledger_canister_id: Principal,
+        reward_tokens: HashMap<TokenSymbol, Principal>,
     ) -> Principal {
         setup_sns_neuron_controller::setup(
             &self.pic.borrow(),
             canister_id,
             vec![self.controller],
-            rewards_destination,
             ogy_sns_governance_canister_id,
             goldao_sns_governance_canister_id,
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,
-            wtn_sns_governance_canister_id,
-            wtn_sns_ledger_canister_id,
-            nns_governance_canister_id,
-            nns_ledger_canister_id,
+            reward_tokens,
         )
     }
 

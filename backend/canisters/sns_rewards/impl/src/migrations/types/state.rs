@@ -184,18 +184,18 @@ impl From<PaymentProcessorV0> for PaymentProcessor {
     }
 }
 
-    pub fn next_key(round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>) -> u16 {
-        let mut max_key = 0;
-        for entry in round_history.iter() {
-            let (_, id) = entry.key();
-            if *id > max_key {
-                max_key = *id;
-            }
-        }
-
-        if max_key == u16::MAX {
-            1
-        } else {
-            max_key + 1
+pub fn next_key(round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>) -> u16 {
+    let mut max_key = 0;
+    for entry in round_history.iter() {
+        let (_, id) = entry.key();
+        if *id > max_key {
+            max_key = *id;
         }
     }
+
+    if max_key == u16::MAX {
+        1
+    } else {
+        max_key + 1
+    }
+}

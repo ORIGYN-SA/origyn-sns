@@ -26,11 +26,23 @@ pub struct GoldaoManager {
 impl Default for GoldaoManager {
     fn default() -> Self {
         let mut reward_tokens = HashMap::new();
-        reward_tokens.insert(TokenSymbol::GOLDAO, Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap());
-        reward_tokens.insert(TokenSymbol::OGY, Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap());
-        reward_tokens.insert(TokenSymbol::ICP, Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap());
-        reward_tokens.insert(TokenSymbol::WTN, Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap());
-        
+        reward_tokens.insert(
+            TokenSymbol::GOLDAO,
+            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+        );
+        reward_tokens.insert(
+            TokenSymbol::OGY,
+            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+        );
+        reward_tokens.insert(
+            TokenSymbol::ICP,
+            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+        );
+        reward_tokens.insert(
+            TokenSymbol::WTN,
+            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+        );
+
         Self {
             goldao_sns_governance_canister_id: Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai")
                 .unwrap(),
@@ -82,11 +94,10 @@ impl NeuronRewardsManager for GoldaoManager {
     async fn get_available_rewards(&self, token: TokenSymbol) -> Nat {
         let neurons = self.get_neurons().as_ref();
         let sns_rewards_canister_id = self.get_sns_rewards_canister_id();
-        let is_test_mode = read_state(|s| s.env.is_test_mode());
         sns_rewards_calculate_available_rewards(
             neurons,
             sns_rewards_canister_id,
-            token.ledger_id(is_test_mode),
+            token.get_prod_token_info().ledger_id,
         )
         .await
         .get_internal()

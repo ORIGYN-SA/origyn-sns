@@ -2,11 +2,14 @@ use std::collections::HashSet;
 
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
-use candid::{ CandidType, Principal };
-use ic_ledger_types::{ AccountIdentifier, Subaccount };
-use serde::{ Deserialize, Serialize };
-use types::{ CanisterId, TimestampMillis };
-use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
+use candid::{CandidType, Principal};
+use ic_ledger_types::{AccountIdentifier, Subaccount};
+use serde::{Deserialize, Serialize};
+use types::{CanisterId, TimestampMillis};
+use utils::{
+    env::{CanisterEnv, Environment},
+    memory::MemorySize,
+};
 
 use crate::model::token_swap::TokenSwap;
 use ogy_token_swap_api::requesting_principals::RequestingPrincipals;
@@ -41,7 +44,9 @@ impl RuntimeState {
             },
             ogy_legacy_minting_account: self.data.minting_account.to_string(),
             authorized_principals: self.data.authorized_principals.clone(),
-            whitelisted_principals: self.data.whitelisted_principals
+            whitelisted_principals: self
+                .data
+                .whitelisted_principals
                 .clone()
                 .into_iter()
                 .map(|p| p.to_string())
@@ -64,7 +69,11 @@ impl RuntimeState {
     }
 
     pub fn get_whitelisted_principals(&self) -> Vec<Principal> {
-        self.data.whitelisted_principals.clone().into_iter().collect()
+        self.data
+            .whitelisted_principals
+            .clone()
+            .into_iter()
+            .collect()
     }
 }
 
@@ -109,7 +118,7 @@ impl Data {
         ogy_legacy_ledger: CanisterId,
         ogy_legacy_minting_account_principal: Principal,
         authorized_principals: Vec<Principal>,
-        whitelisted_principals: HashSet<Principal>
+        whitelisted_principals: HashSet<Principal>,
     ) -> Self {
         Self {
             authorized_principals,
@@ -120,7 +129,7 @@ impl Data {
             },
             minting_account: AccountIdentifier::new(
                 &ogy_legacy_minting_account_principal,
-                &Subaccount([0; 32])
+                &Subaccount([0; 32]),
             ),
             requesting_principals: RequestingPrincipals::default(),
             whitelisted_principals,

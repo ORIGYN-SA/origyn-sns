@@ -50,7 +50,12 @@ fn update_config_impl(
     }
 
     if let Some(reward_tokens) = args.reward_tokens {
-        state.data.neuron_managers.goldao.reward_tokens.extend(reward_tokens);
+        state
+            .data
+            .neuron_managers
+            .goldao
+            .reward_tokens
+            .extend(reward_tokens);
     }
 
     UpdateGoldaoConfigResponse::Success
