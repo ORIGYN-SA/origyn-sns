@@ -140,6 +140,10 @@ impl TestEnv {
         goldao_sns_governance_canister_id: Principal,
         goldao_sns_ledger_canister_id: Principal,
         goldao_sns_rewards_canister_id: Principal,
+        wtn_sns_governance_canister_id: Principal,
+        wtn_sns_ledger_canister_id: Principal,
+        nns_governance_canister_id: Principal,
+        nns_ledger_canister_id: Principal,
     ) -> Principal {
         setup_sns_neuron_controller::setup(
             &self.pic.borrow(),
@@ -150,6 +154,10 @@ impl TestEnv {
             goldao_sns_governance_canister_id,
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,
+            wtn_sns_governance_canister_id,
+            wtn_sns_ledger_canister_id,
+            nns_governance_canister_id,
+            nns_ledger_canister_id,
         )
     }
 

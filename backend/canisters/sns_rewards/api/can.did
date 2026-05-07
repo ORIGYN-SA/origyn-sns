@@ -76,10 +76,8 @@ type InitArgs = record {
   sns_gov_canister_id : principal;
   test_mode : bool;
   version : BuildVersion;
-  icp_ledger_canister_id : principal;
   sns_ledger_canister_id : principal;
   commit_hash : text;
-  goldao_ledger_canister_id : principal;
 };
 // The id of a specific neuron, which equals the neuron's subaccount on the ledger canister
 // (the account that holds the neuron's staked tokens).
@@ -123,6 +121,4 @@ service : (Args_4) -> {
   set_daily_ogy_burn_rate : (nat) -> (Response_1);
   set_reserve_transfer_amounts : (Args_2) -> (Response_1);
   set_reward_token_types : (Args_3) -> (Response_2);
-  trigger_run_distribution : () -> ();
-  trigger_sync_neurons : () -> ();
 }
