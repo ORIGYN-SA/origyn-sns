@@ -28,19 +28,19 @@ impl Default for GoldaoManager {
         let mut reward_tokens = HashMap::new();
         reward_tokens.insert(
             TokenSymbol::GOLDAO,
-            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
         );
         reward_tokens.insert(
             TokenSymbol::OGY,
-            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+            Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap(), // NOTE: prod sns_rewards
         );
         reward_tokens.insert(
             TokenSymbol::ICP,
-            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
         );
         reward_tokens.insert(
             TokenSymbol::WTN,
-            Principal::from_text("xevnm-giaaa-aaaaq-aab5q-cai").unwrap(),
+            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
         );
 
         Self {

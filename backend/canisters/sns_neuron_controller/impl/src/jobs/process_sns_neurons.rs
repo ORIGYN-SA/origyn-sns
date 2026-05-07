@@ -91,7 +91,7 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
     for (token, destination) in neuron_manager.get_reward_tokens() {
         let available_rewards = neuron_manager.get_available_rewards(token).await;
         let rewards_threshold = neuron_manager.get_rewards_threshold(token);
-        ic_cdk::println!(
+        info!(
             "[{}][{:?}] available_rewards: {:?}, rewards_threshold: {:?}",
             manager_type,
             token,
@@ -101,7 +101,7 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
 
         if available_rewards >= rewards_threshold {
             if neuron_manager.claim_rewards(token).await.is_not_failed() {
-                ic_cdk::println!(
+                info!(
                     "[{}][{:?}] Claim succeeded, distributing rewards.",
                     manager_type,
                     token
@@ -112,21 +112,11 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
                     "[{}][{:?}] Reward claim reported failure.",
                     manager_type, token
                 );
-                ic_cdk::println!(
-                    "[{}][{:?}] Reward claim reported failure.",
-                    manager_type,
-                    token
-                );
             }
         } else {
             info!(
                 "[{}][{:?}] Threshold not reached. Skipping rewards.",
                 manager_type, token
-            );
-            ic_cdk::println!(
-                "[{}][{:?}] Threshold not reached. Skipping rewards.",
-                manager_type,
-                token
             );
         }
     }
