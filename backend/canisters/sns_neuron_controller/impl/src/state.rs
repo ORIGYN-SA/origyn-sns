@@ -84,7 +84,7 @@ impl Data {
     }
 }
 
-#[derive(Serialize, Deserialize, Default)]
+#[derive(Serialize, Deserialize)]
 pub struct NeuronManagers {
     pub now: TimestampMillis,
     pub goldao: GoldaoManager,

@@ -14,6 +14,10 @@ use types::{CanisterId, TokenSymbol};
 
 const MIN_THRESHOLD_FEE_MULTIPLIER: u64 = 100;
 
+const PROD_DEX_INTERACTION: &str = "tss7g-syaaa-aaaai-axh4q-cai";
+const PROD_SNS_REWARDS: &str = "yuijc-oiaaa-aaaap-ahezq-cai";
+const PROD_GOVERNANCE: &str = "tr3th-kiaaa-aaaaq-aab6q-cai";
+
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct GoldaoManager {
     pub goldao_sns_governance_canister_id: CanisterId,
@@ -23,47 +27,46 @@ pub struct GoldaoManager {
     pub reward_tokens: HashMap<TokenSymbol, TokenParams>,
 }
 
-const PROD_DEX_INTERACTION: &str = "tss7g-syaaa-aaaai-axh4q-cai";
-const PROD_SNS_REWARDS: &str = "yuijc-oiaaa-aaaap-ahezq-cai";
-const PROD_GOVERNANCE: &str = "tr3th-kiaaa-aaaaq-aab6q-cai";
-
-impl Default for GoldaoManager {
-    fn default() -> Self {
-        let is_test_mode = read_state(|s| s.env.is_test_mode());
-
-        let (ledger_id, rewards_id, token_configs) = if !is_test_mode {
-            (
-                "tyyy3-4aaaa-aaaaq-aab7a-cai",
-                "iyehc-lqaaa-aaaap-ab25a-cai",
-                vec![
-                    (TokenSymbol::GOLDAO, PROD_DEX_INTERACTION),
-                    (TokenSymbol::OGY,    PROD_SNS_REWARDS),
-                    (TokenSymbol::ICP,    PROD_DEX_INTERACTION),
-                    (TokenSymbol::WTN,    PROD_DEX_INTERACTION),
-                    (TokenSymbol::GLDT,   PROD_DEX_INTERACTION),
-                ]
-            )
-        } else {
-            (
-                "irhm6-5yaaa-aaaap-ab24q-cai",
-                "rbv23-fqaaa-aaaam-qbfma-cai",
-                vec![
-                    (TokenSymbol::GOLDAO, "jej56-sqaaa-aaaab-qgqkq-cai"),
-                    (TokenSymbol::OGY,    "fpmqz-aaaaa-aaaag-qjvua-cai"),
-                    (TokenSymbol::ICP,    "jej56-sqaaa-aaaab-qgqkq-cai"),
-                    (TokenSymbol::WTN,    "jej56-sqaaa-aaaab-qgqkq-cai"),
-                ]
-            )
-        };
+impl GoldaoManager {
+    pub fn new(is_test_mode: bool) -> Self {
+        let (ledger_id, rewards_id, token_configs): (&str, &str, Vec<(TokenSymbol, &str)>) =
+            if !is_test_mode {
+                (
+                    "tyyy3-4aaaa-aaaaq-aab7a-cai",
+                    "iyehc-lqaaa-aaaap-ab25a-cai",
+                    vec![
+                        (TokenSymbol::GOLDAO, PROD_DEX_INTERACTION),
+                        (TokenSymbol::OGY, PROD_SNS_REWARDS),
+                        (TokenSymbol::ICP, PROD_DEX_INTERACTION),
+                        (TokenSymbol::WTN, PROD_DEX_INTERACTION),
+                        (TokenSymbol::GLDT, PROD_DEX_INTERACTION),
+                    ],
+                )
+            } else {
+                (
+                    "irhm6-5yaaa-aaaap-ab24q-cai",
+                    "rbv23-fqaaa-aaaam-qbfma-cai",
+                    vec![
+                        (TokenSymbol::GOLDAO, "jej56-sqaaa-aaaab-qgqkq-cai"),
+                        (TokenSymbol::OGY, "fpmqz-aaaaa-aaaag-qjvua-cai"),
+                        (TokenSymbol::ICP, "jej56-sqaaa-aaaab-qgqkq-cai"),
+                        (TokenSymbol::WTN, "jej56-sqaaa-aaaab-qgqkq-cai"),
+                    ],
+                )
+            };
 
         let reward_tokens = token_configs
             .into_iter()
             .map(|(symbol, dest)| {
-                let params = TokenParams {
-                    destination: Principal::from_text(dest).expect("Invalid Principal"),
-                    threshold: (symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER).into(),
+                let threshold = if is_test_mode {
+                    0
+                } else {
+                    symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER
                 };
-                (symbol, params)
+                (symbol, TokenParams {
+                    destination: Principal::from_text(dest).expect("Invalid Principal"),
+                    threshold: threshold.into(),
+                })
             })
             .collect();
 
@@ -74,6 +77,10 @@ impl Default for GoldaoManager {
             neurons: Neurons::default(),
             reward_tokens,
         }
+    }
+
+    fn get_sns_rewards_canister_id(&self) -> CanisterId {
+        self.goldao_sns_rewards_canister_id
     }
 }
 
@@ -89,12 +96,6 @@ impl NeuronConfig for GoldaoManager {
     }
     fn get_neurons_mut(&mut self) -> &mut Neurons {
         &mut self.neurons
-    }
-}
-
-impl GoldaoManager {
-    fn get_sns_rewards_canister_id(&self) -> CanisterId {
-        self.goldao_sns_rewards_canister_id
     }
 }
 

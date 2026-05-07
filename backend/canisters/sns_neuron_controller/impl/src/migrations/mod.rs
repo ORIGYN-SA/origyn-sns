@@ -22,7 +22,7 @@ impl From<RuntimeStateV0> for RuntimeState {
                 authorized_principals: old_state.data.authorized_principals,
                 neuron_managers: NeuronManagers {
                     now: old_state.data.neuron_managers.now,
-                    goldao: GoldaoManager::default(),
+                    goldao: GoldaoManager::new(old_state.env.is_test_mode()),
                 },
             },
         }
