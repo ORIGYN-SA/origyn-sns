@@ -61,7 +61,7 @@ const linkClass =
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-b from-charcoal via-charcoal2 via-40% to-charcoal2 text-white -mt-4">
+    <footer className="relative bg-charcoal text-white -mt-4">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
