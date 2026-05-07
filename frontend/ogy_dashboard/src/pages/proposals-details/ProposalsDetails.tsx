@@ -4,12 +4,7 @@ import {
   XCircleIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/20/solid";
-import {
-  PageHeader,
-  Card,
-  Button,
-  SkeletonOverlay,
-} from "@components/ui";
+import { PageHeader, Card, Button, SkeletonOverlay } from "@components/ui";
 import { CardErrorOverlay, Stat } from "@components/dashboard";
 import useProposal from "@hooks/proposals/useProposal";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";

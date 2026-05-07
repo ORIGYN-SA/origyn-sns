@@ -26,7 +26,8 @@ export const LEGACY_VESTING_CANISTER_ID = import.meta.env
 // ICPSwap mainnet pool canisters (stable; do not vary per env)
 export const CKUSDC_LEDGER_CANISTER_ID = "xevnm-gaaaa-aaaar-qafnq-cai";
 export const ICPSWAP_OGY_ICP_POOL_CANISTER_ID = "ttnzy-lyaaa-aaaag-qj2bq-cai";
-export const ICPSWAP_ICP_CKUSDC_POOL_CANISTER_ID = "mohjv-bqaaa-aaaag-qjyia-cai";
+export const ICPSWAP_ICP_CKUSDC_POOL_CANISTER_ID =
+  "mohjv-bqaaa-aaaag-qjyia-cai";
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
@@ -139,4 +140,3 @@ export const ORIGYN_ACCOUNTS = [
   { name: "Gold DAO", value: "54vkq-taaaa-aaaap-ahqra-cai" },
   // {name: "BFS", value: "3rzb3-4q77v-bkng4-khvjp-bf4aj-lvalh-ddend-svbfw-fhort-z64lm-3ae"},
 ];
-

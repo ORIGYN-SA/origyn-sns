@@ -9,7 +9,9 @@ type OrigynFoundationReserveProps = {
 
 const COLORS = ["#ff55c5", "#90306f"];
 
-const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) => {
+const OrigynFoundationReserve = ({
+  className,
+}: OrigynFoundationReserveProps) => {
   const infos = useMemo(
     () => [
       {
@@ -45,11 +47,7 @@ const OrigynFoundationReserve = ({ className }: OrigynFoundationReserveProps) =>
     []
   );
 
-  const {
-    data: foundationAssets,
-    isLoading,
-    isError,
-  } = useFoundationReserve();
+  const { data: foundationAssets, isLoading, isError } = useFoundationReserve();
 
   return (
     <PieStatsCard

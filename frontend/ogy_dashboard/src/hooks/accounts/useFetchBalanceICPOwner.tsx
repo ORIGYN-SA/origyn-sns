@@ -3,8 +3,12 @@ import { useWallet } from "@components/auth/useWallet";
 import fetchOwnerBalanceICP from "@services/queries/accounts/fetchOwnerBalanceICP";
 
 const useFetchBalanceICPOwner = () => {
-  const { principalId: owner, isConnected, subAccount, subAccountHex } =
-    useWallet();
+  const {
+    principalId: owner,
+    isConnected,
+    subAccount,
+    subAccountHex,
+  } = useWallet();
 
   return useQuery({
     queryKey: ["userFetchBalanceICP", owner, subAccountHex, isConnected],

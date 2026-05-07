@@ -19,9 +19,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
   <div
     className={clsx(
       "flex items-center gap-[10px] h-[88px] border border-border-faint rounded-[16px] p-2",
-      variant === "glass"
-        ? "bg-surface-1/85 backdrop-blur-xl"
-        : "bg-surface-1",
+      variant === "glass" ? "bg-surface-1/85 backdrop-blur-xl" : "bg-surface-1",
       className
     )}
   >

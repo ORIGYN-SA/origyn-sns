@@ -93,10 +93,7 @@ export const createHttpClient = ({
     get: <T = any>(path: string, options?: RequestOptions) =>
       request<T>("GET", path, undefined, options),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    post: <T = any>(
-      path: string,
-      body?: unknown,
-      options?: RequestOptions
-    ) => request<T>("POST", path, body, options),
+    post: <T = any>(path: string, body?: unknown, options?: RequestOptions) =>
+      request<T>("POST", path, body, options),
   };
 };

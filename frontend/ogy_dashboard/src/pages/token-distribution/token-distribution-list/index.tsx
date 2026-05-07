@@ -44,7 +44,6 @@ const TokenDistributionList = ({
   const pageSize = pagination.pageSize;
   const pageCount = data?.list.pageCount ?? 0;
 
-
   const goToPage = (next: number) => {
     setPagination((prev) => ({ ...prev, pageIndex: next }));
   };
@@ -78,7 +77,9 @@ const TokenDistributionList = ({
           <button
             className="truncate min-w-0 hover:underline"
             onClick={() =>
-              navigate(`/transaction-history/transactions/accounts/${row.principal}`)
+              navigate(
+                `/transaction-history/transactions/accounts/${row.principal}`
+              )
             }
           >
             {row.principal}
@@ -99,7 +100,11 @@ const TokenDistributionList = ({
     {
       id: "total",
       header: "Total",
-      cell: (row) => <div className="w-40"><span>{zeroOrDash(row.total)}</span></div>,
+      cell: (row) => (
+        <div className="w-40">
+          <span>{zeroOrDash(row.total)}</span>
+        </div>
+      ),
     },
     {
       id: "governanceBalance",
@@ -115,23 +120,30 @@ const TokenDistributionList = ({
         </div>
       ),
       cell: (row) => (
-        <div className="w-40"><span>{zeroOrDash(row.governanceBalance)}</span></div>
+        <div className="w-40">
+          <span>{zeroOrDash(row.governanceBalance)}</span>
+        </div>
       ),
     },
     {
       id: "ledgerBalance",
       header: "Ledger Balance",
       cell: (row) => (
-        <div className="w-40"><span>{zeroOrDash(row.ledgerBalance)}</span></div>
+        <div className="w-40">
+          <span>{zeroOrDash(row.ledgerBalance)}</span>
+        </div>
       ),
     },
     {
       id: "weight",
       header: "Weight In Total Supply",
-      cell: (row) => <div className="w-20"><span>{zeroOrDash(row.weight)}</span></div>,
+      cell: (row) => (
+        <div className="w-20">
+          <span>{zeroOrDash(row.weight)}</span>
+        </div>
+      ),
     },
   ];
-
 
   const paginationFooter = (
     <TablePagination

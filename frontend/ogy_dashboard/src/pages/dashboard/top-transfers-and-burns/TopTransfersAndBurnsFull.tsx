@@ -57,7 +57,9 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/transaction-history/transactions/accounts/${address}`)
+                  navigate(
+                    `/transaction-history/transactions/accounts/${address}`
+                  )
                 }
               >
                 {address}
@@ -114,7 +116,9 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/transaction-history/transactions/accounts/${address}`)
+                  navigate(
+                    `/transaction-history/transactions/accounts/${address}`
+                  )
                 }
               >
                 {address}
@@ -130,7 +134,8 @@ const TopTransfersAndBurnsFull = ({
   }, [type, navigate]);
 
   const rows = showSkeleton || !hasData ? buildFakeRows(FAKE_ROW, limit) : data;
-  const showEmptyState = !showSkeleton && isSuccess && (!data || data.length === 0);
+  const showEmptyState =
+    !showSkeleton && isSuccess && (!data || data.length === 0);
 
   return (
     <>

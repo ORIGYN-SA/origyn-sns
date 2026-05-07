@@ -24,12 +24,15 @@ const useVotingParticipationData = ({ period }: { period: string }) => {
     placeholderData: keepPreviousData,
   });
 
-  const data = useMemo<{
-    lastParticipation: string;
-    averageParticipation: string;
-    averagePower: string;
-    dataChart: ChartData[];
-  } | undefined>(() => {
+  const data = useMemo<
+    | {
+        lastParticipation: string;
+        averageParticipation: string;
+        averagePower: string;
+        dataChart: ChartData[];
+      }
+    | undefined
+  >(() => {
     if (!isSuccess || !response) return undefined;
 
     const dataChart = response.history.map(([day, participation]) => ({
@@ -42,9 +45,7 @@ const useVotingParticipationData = ({ period }: { period: string }) => {
     const lastParticipationRaw = dataChart[dataChart.length - 1]?.value ?? 0;
     const calcLastParticipation = lastParticipationRaw / 100;
     const lastParticipation =
-      calcLastParticipation > 0
-        ? calcLastParticipation.toFixed(2) + "%"
-        : "0%";
+      calcLastParticipation > 0 ? calcLastParticipation.toFixed(2) + "%" : "0%";
 
     const averageParticipation =
       response.metrics.average_voting_participation > 0

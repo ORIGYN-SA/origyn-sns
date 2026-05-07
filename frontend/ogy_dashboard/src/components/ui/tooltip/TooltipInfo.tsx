@@ -1,9 +1,5 @@
 import { PropsWithChildren } from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "./TooltipPrimitive";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./TooltipPrimitive";
 
 interface TooltipInfoProps extends PropsWithChildren {
   className?: string;

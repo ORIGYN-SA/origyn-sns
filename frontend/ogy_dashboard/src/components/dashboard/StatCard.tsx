@@ -63,7 +63,10 @@ const StatCard: FC<StatCardProps> = ({
           loading={loading}
         />
       </div>
-      <Card.BorderBottom color={underlineColor} className={underlineClassName} />
+      <Card.BorderBottom
+        color={underlineColor}
+        className={underlineClassName}
+      />
     </Card>
   );
 };

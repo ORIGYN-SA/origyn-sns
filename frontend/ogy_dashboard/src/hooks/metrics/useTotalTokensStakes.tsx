@@ -26,27 +26,26 @@ const useTotalTokensStakes = ({ start = 30 }: { start: number }) => {
     placeholderData: keepPreviousData,
   });
 
-  const data = useMemo<{ total: string; dataChart: ChartData[] } | undefined>(
-    () => {
-      if (!isSuccess || !response) return undefined;
-      const results = response.map((r) => {
-        const name = DateTime.fromMillis(0)
-          .plus({ days: Number(r[0]) })
-          .toFormat("LLL dd");
-        const value = divideBy1e8(r[1].balance);
-        return {
-          name,
-          value,
-          valueToString: roundAndFormatLocale({ number: value }),
-        };
-      });
+  const data = useMemo<
+    { total: string; dataChart: ChartData[] } | undefined
+  >(() => {
+    if (!isSuccess || !response) return undefined;
+    const results = response.map((r) => {
+      const name = DateTime.fromMillis(0)
+        .plus({ days: Number(r[0]) })
+        .toFormat("LLL dd");
+      const value = divideBy1e8(r[1].balance);
       return {
-        dataChart: results,
-        total: results[results.length - 1]?.valueToString ?? "0",
+        name,
+        value,
+        valueToString: roundAndFormatLocale({ number: value }),
       };
-    },
-    [isSuccess, response]
-  );
+    });
+    return {
+      dataChart: results,
+      total: results[results.length - 1]?.valueToString ?? "0",
+    };
+  }, [isSuccess, response]);
 
   return {
     data,

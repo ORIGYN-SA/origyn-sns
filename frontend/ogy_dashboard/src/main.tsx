@@ -2,11 +2,7 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { IdentityKitProvider } from "@nfid/identitykit/react";
-import {
-  IdentityKitAuthType,
-  InternetIdentity,
-  OISY,
-} from "@nfid/identitykit";
+import { IdentityKitAuthType, InternetIdentity, OISY } from "@nfid/identitykit";
 import "@nfid/identitykit/react/styles.css";
 
 import App from "./App.tsx";

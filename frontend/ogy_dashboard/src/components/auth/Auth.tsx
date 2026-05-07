@@ -73,11 +73,7 @@ const Auth = ({
               const inner = (
                 <>
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-surface-1 border border-border-strong shrink-0 overflow-hidden">
-                    <img
-                      src={icon}
-                      alt=""
-                      className="w-6 h-6 object-contain"
-                    />
+                    <img src={icon} alt="" className="w-6 h-6 object-contain" />
                   </div>
                   <span className="flex-1 text-left text-[14px] font-semibold leading-none text-content">
                     {name}

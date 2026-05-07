@@ -17,7 +17,9 @@ const PeriodSelect = ({ options, value, onChange }: PeriodSelectProps) => {
       <ChevronDownIcon className="pointer-events-none shrink-0" />
       <select
         value={value}
-        onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          onChange(e.target.value)
+        }
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer focus:outline-none"
       >
         {options.map((option) => (

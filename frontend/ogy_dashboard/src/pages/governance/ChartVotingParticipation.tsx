@@ -8,11 +8,7 @@ const SELECT_PERIOD_OPTIONS = [
   { value: "yearly", label: "Yearly" },
 ];
 
-const ChartVotingParticipation = ({
-  className,
-}: {
-  className?: string;
-}) => {
+const ChartVotingParticipation = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const { data, isLoading, isError } = useVotingParticipationData({
     period: selectedPeriod,
@@ -45,9 +41,7 @@ const ChartVotingParticipation = ({
         {
           id: "average-voting-power",
           label: "Average Voting Power",
-          tooltipContent: (
-            <p>Average voting power across all participants.</p>
-          ),
+          tooltipContent: <p>Average voting power across all participants.</p>,
           value: data?.averagePower,
         },
       ]}

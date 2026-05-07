@@ -50,10 +50,8 @@ const useTotalOGYBurned = ({ period }: { period: string }) => {
 
   return {
     data,
-    isSuccess:
-      isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries,
-    isLoading:
-      isLoadingFetchTotalBurned || isLoadingFetchTotalBurnedTimeSeries,
+    isSuccess: isSuccessFetchTotalBurned && isSuccessFetchTotalBurnedTimeSeries,
+    isLoading: isLoadingFetchTotalBurned || isLoadingFetchTotalBurnedTimeSeries,
     error: errorFetchTotalBurned || errorTotalBurnedTimeSeries,
   };
 };

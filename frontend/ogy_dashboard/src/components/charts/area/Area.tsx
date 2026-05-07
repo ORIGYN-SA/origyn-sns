@@ -54,10 +54,7 @@ const Area = ({
             <stop offset="100%" stopColor={fill} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid
-          vertical={false}
-          horizontal={false}
-        />
+        <CartesianGrid vertical={false} horizontal={false} />
         <XAxis
           dataKey="name"
           tickLine={false}

@@ -14,11 +14,7 @@ import {
   TablePagination,
 } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import {
-  ChartStatsCard,
-  PieStatsCard,
-  Stat,
-} from "@components/dashboard";
+import { ChartStatsCard, PieStatsCard, Stat } from "@components/dashboard";
 import { PieChartProvider } from "@components/charts/pie/context";
 import {
   getTransactionColumns,
@@ -130,7 +126,11 @@ const TransactionsAccountsDetails = () => {
   const [txPageSize, setTxPageSize] = useState(10);
   const [txSortDesc, setTxSortDesc] = useState(true);
 
-  const { data, isLoading, isError: isAccountError } = useFecthOneAccount({
+  const {
+    data,
+    isLoading,
+    isError: isAccountError,
+  } = useFecthOneAccount({
     accountId,
   });
   const accountNotIndexed = !isLoading && isAccountError;
@@ -173,7 +173,6 @@ const TransactionsAccountsDetails = () => {
       number: lifetimeBalance.dataChart[0].value,
     });
   }, [lifetimeBalance]);
-
 
   const {
     data: overview,
@@ -272,41 +271,41 @@ const TransactionsAccountsDetails = () => {
             <div className="hidden lg:block bg-border" />
 
             <div className="flex flex-col lg:min-w-[422px]">
-            <div className="flex-1 flex flex-col items-center justify-center gap-2 py-8 px-5">
-              <span
-                data-skel-static
-                className="inline-block rounded-full border border-border-strong bg-surface-2 px-3 py-1 text-xs font-semibold text-content/80"
-              >
-                Balance
-              </span>
-              <Stat
-                iconSrc="/ogy_logo.svg"
-                value={
-                  data?.balance !== undefined
-                    ? millify(divideBy1e8(Number(data.balance)), 2)
-                    : accountNotIndexed
-                      ? "0"
-                      : undefined
-                }
-                unit="OGY"
-                loading={isLoading}
-                size="hero"
-              />
-            </div>
+              <div className="flex-1 flex flex-col items-center justify-center gap-2 py-8 px-5">
+                <span
+                  data-skel-static
+                  className="inline-block rounded-full border border-border-strong bg-surface-2 px-3 py-1 text-xs font-semibold text-content/80"
+                >
+                  Balance
+                </span>
+                <Stat
+                  iconSrc="/ogy_logo.svg"
+                  value={
+                    data?.balance !== undefined
+                      ? millify(divideBy1e8(Number(data.balance)), 2)
+                      : accountNotIndexed
+                        ? "0"
+                        : undefined
+                  }
+                  unit="OGY"
+                  loading={isLoading}
+                  size="hero"
+                />
+              </div>
 
-            <div className="mt-auto border-t border-border bg-surface-muted py-4 px-5 space-y-2">
-              <BalanceStatRow
-                label="Historical max balance"
-                value={historicalMax}
-                loading={isLoading}
-              />
-              <BalanceStatRow
-                label="Genesis balance"
-                value={genesisBalance}
-                loading={isLoading}
-              />
+              <div className="mt-auto border-t border-border bg-surface-muted py-4 px-5 space-y-2">
+                <BalanceStatRow
+                  label="Historical max balance"
+                  value={historicalMax}
+                  loading={isLoading}
+                />
+                <BalanceStatRow
+                  label="Genesis balance"
+                  value={genesisBalance}
+                  loading={isLoading}
+                />
+              </div>
             </div>
-          </div>
           </div>
         </SkeletonOverlay>
       </Card>
@@ -318,8 +317,8 @@ const TransactionsAccountsDetails = () => {
               No transactions yet
             </h4>
             <p className="text-sm text-muted max-w-[420px]">
-              This account has no transaction history. Once it sends or
-              receives OGY, activity will appear here.
+              This account has no transaction history. Once it sends or receives
+              OGY, activity will appear here.
             </p>
           </div>
         </Card>

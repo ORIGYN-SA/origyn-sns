@@ -109,9 +109,7 @@ const OrigynTreasuryAccount = ({
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={`${className}`} {...restProps}>
-        {hasError && (
-          <CardErrorOverlay title="ORIGYN Treasury Account (OTA)" />
-        )}
+        {hasError && <CardErrorOverlay title="ORIGYN Treasury Account (OTA)" />}
         <div
           data-skel-static
           className="text-content text-[22px] font-semibold leading-none"

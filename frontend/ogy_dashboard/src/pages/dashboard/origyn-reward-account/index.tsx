@@ -49,11 +49,7 @@ const ORATable = ({ rows }: { rows: RewardPool[] }) => (
   </div>
 );
 
-const OrigynTreasuryAccount = ({
-  className,
-}: {
-  className?: string;
-}) => {
+const OrigynTreasuryAccount = ({ className }: { className?: string }) => {
   const { data, isLoading, isError } = useFetchOGYRewardAccount();
 
   const hasError = !isLoading && isError;
@@ -63,9 +59,7 @@ const OrigynTreasuryAccount = ({
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>
-        {hasError && (
-          <CardErrorOverlay title="ORIGYN Reward Account (ORA)" />
-        )}
+        {hasError && <CardErrorOverlay title="ORIGYN Reward Account (ORA)" />}
         <div
           data-skel-static
           className="text-content text-[22px] font-semibold leading-none"
@@ -111,10 +105,10 @@ const OrigynTreasuryAccount = ({
         </div>
         <p className="mt-6 font-light text-[13px] leading-none text-muted">
           ORIGYN will contribute one billion OGY to an ORIGYN Reward Account
-          (ORA) in benefit of staked and voting holders. The reward pool consists
-          of 250 million OGY in its first year and will halve every two years to
-          incentivize and reward early and long-term contributors of the
-          ecosystem.
+          (ORA) in benefit of staked and voting holders. The reward pool
+          consists of 250 million OGY in its first year and will halve every two
+          years to incentivize and reward early and long-term contributors of
+          the ecosystem.
         </p>
       </Card>
     </SkeletonOverlay>

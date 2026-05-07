@@ -26,7 +26,8 @@ const ChartContext = createContext<ChartContextValue | null>(null);
 
 const useChart = () => {
   const ctx = useContext(ChartContext);
-  if (!ctx) throw new Error("Chart components must be used inside <ChartContainer>");
+  if (!ctx)
+    throw new Error("Chart components must be used inside <ChartContainer>");
   return ctx;
 };
 

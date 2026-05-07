@@ -1,15 +1,12 @@
-import {
-  Fragment,
-  ReactNode,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import { Fragment, ReactNode, useState, useCallback, useMemo } from "react";
 
 export type NewTableColumn<T> = {
   id: string;
   header: ReactNode;
-  cell: (row: T, meta: { isExpanded: boolean; toggleExpand: () => void }) => ReactNode;
+  cell: (
+    row: T,
+    meta: { isExpanded: boolean; toggleExpand: () => void }
+  ) => ReactNode;
   headerClassName?: string;
   cellClassName?: string;
 };
@@ -79,8 +76,7 @@ const NewTable = <T,>({
           <tbody>
             {data.map((row, rowIndex) => {
               const rowId = getRowKey(row, rowIndex);
-              const isExpanded =
-                expandedSet.has(rowId) && validIds.has(rowId);
+              const isExpanded = expandedSet.has(rowId) && validIds.has(rowId);
               return (
                 <Fragment key={rowId}>
                   <tr

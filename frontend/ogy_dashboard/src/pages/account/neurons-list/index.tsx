@@ -122,8 +122,7 @@ const NeuronsList = () => {
   const showSkeleton = isLoading || hasError;
   const realRows = (neuronsList?.rows ?? []) as AccountNeuronRow[];
   const isEmpty = isSuccess && !hasError && realRows.length === 0;
-  const rows =
-    showSkeleton || !isSuccess ? buildSkeletonRows(3) : realRows;
+  const rows = showSkeleton || !isSuccess ? buildSkeletonRows(3) : realRows;
 
   return (
     <SkeletonOverlay loading={showSkeleton}>

@@ -1,4 +1,8 @@
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "@components/ui/icons";
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@components/ui/icons";
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 
@@ -6,8 +10,7 @@ type PageItem = number | "ellipsis";
 
 const buildPageItems = (pageIndex: number, pageCount: number): PageItem[] => {
   if (pageCount <= 0) return [];
-  if (pageCount <= 7)
-    return Array.from({ length: pageCount }, (_, i) => i + 1);
+  if (pageCount <= 7) return Array.from({ length: pageCount }, (_, i) => i + 1);
   const current = pageIndex + 1;
   const items: PageItem[] = [1];
   const start = Math.max(2, current - 1);

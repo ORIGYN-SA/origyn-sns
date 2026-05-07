@@ -137,8 +137,8 @@ export const Governance = () => {
               Tokens in Governance
             </h2>
             <p className="mt-4 text-base font-normal leading-6 text-muted">
-              Holders of OGY tokens can directly influence the ORIGYN Network
-              by staking their OGY and voting on proposals.
+              Holders of OGY tokens can directly influence the ORIGYN Network by
+              staking their OGY and voting on proposals.
             </p>
             <p className="mb-2 text-base font-normal leading-6 text-muted">
               By participating in the decision-making process, these staked
@@ -157,27 +157,27 @@ export const Governance = () => {
             </Button>
           </a>
         </div>
-      <PieChartProvider>
-        <TokensInGovernanceTotal className="mb-16" />
-      </PieChartProvider>
+        <PieChartProvider>
+          <TokensInGovernanceTotal className="mb-16" />
+        </PieChartProvider>
 
-      <TokensInGovernanceKpi className="mb-16" />
+        <TokensInGovernanceKpi className="mb-16" />
 
-      <div className="mb-16">
-        <StakingOverviewChart />
-      </div>
-      <div className="mb-16">
-        <ChartVotingParticipation />
-      </div>
+        <div className="mb-16">
+          <StakingOverviewChart />
+        </div>
+        <div className="mb-16">
+          <ChartVotingParticipation />
+        </div>
 
-      <div id="governance-proposals" ref={scrollRef} className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">Proposals</h2>
-        <ProposalsList />
-      </div>
-      <div id="governance-neurons" ref={scrollRef}>
-        <h2 className="text-3xl font-bold mb-8">Neurons</h2>
-        <NeuronsList />
-      </div>
+        <div id="governance-proposals" ref={scrollRef} className="mb-16">
+          <h2 className="text-3xl font-bold mb-8">Proposals</h2>
+          <ProposalsList />
+        </div>
+        <div id="governance-neurons" ref={scrollRef}>
+          <h2 className="text-3xl font-bold mb-8">Neurons</h2>
+          <NeuronsList />
+        </div>
       </div>
     </div>
   );

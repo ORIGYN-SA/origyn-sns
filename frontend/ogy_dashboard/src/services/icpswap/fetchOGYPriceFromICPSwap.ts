@@ -19,7 +19,7 @@ type SwapPoolActor = {
   }) => Promise<QuoteResult>;
 };
 
-const withTimeout = <T,>(p: Promise<T>, ms: number, label: string) =>
+const withTimeout = <T>(p: Promise<T>, ms: number, label: string) =>
   Promise.race<T>([
     p,
     new Promise<T>((_, reject) =>

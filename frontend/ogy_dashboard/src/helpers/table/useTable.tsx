@@ -27,7 +27,7 @@ export const usePagination = ({
   identifier = "",
 }: UsePaginationParams): [
   PaginationState,
-  Dispatch<SetStateAction<PaginationState>>
+  Dispatch<SetStateAction<PaginationState>>,
 ] => {
   const [searchParams] = useSearchParams();
   const _pageSize = Number(
@@ -49,7 +49,7 @@ export const useSorting = ({
   identifier = "",
 }: UseSortingParams): [
   SortingState,
-  Dispatch<SetStateAction<SortingState>>
+  Dispatch<SetStateAction<SortingState>>,
 ] => {
   const [searchParams] = useSearchParams();
   const _id = searchParams.get(`id${identifier ?? `_${identifier}`}`);

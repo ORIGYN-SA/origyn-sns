@@ -88,9 +88,7 @@ const PieStatsCard = ({
             />
           }
           tooltip={
-            <TooltipInfo id={infos[index].id}>
-              {infos[index].value}
-            </TooltipInfo>
+            <TooltipInfo id={infos[index].id}>{infos[index].value}</TooltipInfo>
           }
           underlineColor={colors[index]}
           active={activeIndex === index}

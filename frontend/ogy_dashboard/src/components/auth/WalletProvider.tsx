@@ -9,11 +9,7 @@ import {
 import type { Agent } from "@dfinity/agent";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { Principal } from "@dfinity/principal";
-import {
-  useAuth,
-  useAgent,
-  useIsInitializing,
-} from "@nfid/identitykit/react";
+import { useAuth, useAgent, useIsInitializing } from "@nfid/identitykit/react";
 import { InternetIdentity, OISY } from "@nfid/identitykit";
 
 import {
@@ -131,8 +127,9 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     return "dfinity";
   }, [user]);
 
-  const activeWallet: WalletId | undefined =
-    plugSession ? "plug" : (identityKitWalletId ?? undefined);
+  const activeWallet: WalletId | undefined = plugSession
+    ? "plug"
+    : (identityKitWalletId ?? undefined);
 
   const authedAgent: Agent | undefined = plugSession
     ? plugSession.agent
@@ -164,7 +161,10 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     () => principalToAccountId(principal, subAccount),
     [principal, subAccount]
   );
-  const subAccountHex = useMemo(() => subAccountToHex(subAccount), [subAccount]);
+  const subAccountHex = useMemo(
+    () => subAccountToHex(subAccount),
+    [subAccount]
+  );
 
   const isConnected = !!principal && !!authedAgent;
   const isRestoring = isInitializing || isRestoringPlug;
@@ -196,8 +196,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
           setPlugSession(session);
           writeLastWallet("plug");
         } else {
-          const signerId =
-            id === "dfinity" ? "InternetIdentity" : "OISY";
+          const signerId = id === "dfinity" ? "InternetIdentity" : "OISY";
           await connect(signerId);
           writeLastWallet(id);
         }

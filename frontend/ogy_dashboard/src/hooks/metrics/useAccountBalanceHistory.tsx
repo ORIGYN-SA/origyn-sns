@@ -35,7 +35,8 @@ const useAccountBalanceHistory = ({
   useEffect(() => {
     if (isSuccess && response) {
       const firstNonZero = response.findIndex((r) => r[1].balance > 0n);
-      const trimmed = firstNonZero > 0 ? response.slice(firstNonZero) : response;
+      const trimmed =
+        firstNonZero > 0 ? response.slice(firstNonZero) : response;
       const format = days > 90 ? "LLL yyyy" : "LLL dd";
       const results = trimmed.map((r) => {
         const name = DateTime.fromMillis(0)

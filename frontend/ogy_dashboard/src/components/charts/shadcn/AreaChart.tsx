@@ -45,7 +45,11 @@ const AreaChart = ({ data = [], color, label, className }: Props) => {
       >
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--color-value)" stopOpacity={0.4} />
+            <stop
+              offset="5%"
+              stopColor="var(--color-value)"
+              stopOpacity={0.4}
+            />
             <stop offset="95%" stopColor="var(--color-value)" stopOpacity={0} />
           </linearGradient>
           <filter
@@ -86,7 +90,10 @@ const AreaChart = ({ data = [], color, label, className }: Props) => {
         <ChartTooltip
           cursor={{ stroke: colors.muted, strokeWidth: 2 }}
           content={
-            <ChartTooltipContent formatter={(v) => formatValue(v)} indicator="dot" />
+            <ChartTooltipContent
+              formatter={(v) => formatValue(v)}
+              indicator="dot"
+            />
           }
         />
         <Area

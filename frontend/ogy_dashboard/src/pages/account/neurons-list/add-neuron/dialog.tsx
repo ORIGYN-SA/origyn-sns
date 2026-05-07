@@ -22,8 +22,8 @@ const DialogAddNeuron = () => {
             Add neuron
           </div>
           <div className="text-[13px] leading-snug text-muted max-w-[340px]">
-            Add this principal as a hotkey on each OGY neuron you want to
-            manage here.
+            Add this principal as a hotkey on each OGY neuron you want to manage
+            here.
           </div>
         </div>
         <PrincipalIdPill principalId={principalId} variant="long" showCopy />

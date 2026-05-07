@@ -1,4 +1,10 @@
-import { ChangeEvent, ReactNode, useDeferredValue, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  ReactNode,
+  useDeferredValue,
+  useMemo,
+  useState,
+} from "react";
 import clsx from "clsx";
 import { Card, SkeletonOverlay } from "@components/ui";
 import { CardErrorOverlay, StatCard } from "@components/dashboard";
@@ -54,7 +60,8 @@ const EB_SCALE = 1_000_000_000_000_000_000n;
 const COMPACT_E8S_THRESHOLD = 1_000_000_000_000n;
 const COMPACT_COUNT_THRESHOLD = 10_000n;
 
-const groupDigits = (value: string) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const groupDigits = (value: string) =>
+  value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const parseWholeBigInt = (value: string) => {
   if (!value) return null;
@@ -77,7 +84,7 @@ const parseDecimalBytes = (value: string, unitBytes: bigint): bigint | null => {
   if (!fractionPart) return whole * unitBytes;
 
   const scale = 10n ** BigInt(fractionPart.length);
-  return (whole * scale + BigInt(fractionPart)) * unitBytes / scale;
+  return ((whole * scale + BigInt(fractionPart)) * unitBytes) / scale;
 };
 
 const formatInteger = (value: bigint) => groupDigits(value.toString());
@@ -175,7 +182,11 @@ const NumberInput = ({
         value={value}
         placeholder="0"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          onChange(allowDecimal ? sanitizeDecimal(e.target.value) : sanitizeInteger(e.target.value))
+          onChange(
+            allowDecimal
+              ? sanitizeDecimal(e.target.value)
+              : sanitizeInteger(e.target.value)
+          )
         }
       />
       {trailing}
@@ -212,17 +223,13 @@ const HeroOgyStat = ({
 const MiniStat = ({ title, value }: { title: string; value: string }) => (
   <div className="rounded-xl border border-border bg-surface-2/40 px-4 py-3 dark:bg-surface-2">
     <p className="text-xs font-medium leading-none text-muted">{title}</p>
-    <p className="mt-2 text-base font-bold leading-none text-content">{value}</p>
+    <p className="mt-2 text-base font-bold leading-none text-content">
+      {value}
+    </p>
   </div>
 );
 
-const DetailRow = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: ReactNode;
-}) => (
+const DetailRow = ({ label, value }: { label: string; value: ReactNode }) => (
   <div className="flex items-center justify-between gap-4 py-3">
     <span className="text-sm text-muted">{label}</span>
     <div className="shrink-0 text-right text-sm text-content">{value}</div>
@@ -259,7 +266,8 @@ const Calculator = () => {
     [deferredNumMintsInput]
   );
   const deferredCustomSizeBytes = useMemo(
-    () => parseDecimalBytes(deferredCustomSizeInput, SIZE_UNIT_BYTES[customUnit]),
+    () =>
+      parseDecimalBytes(deferredCustomSizeInput, SIZE_UNIT_BYTES[customUnit]),
     [deferredCustomSizeInput, customUnit]
   );
   const deferredTotalBytes =
@@ -425,14 +433,15 @@ const Calculator = () => {
                       </p>
                     </div>
                   )}
-
                 </div>
               </section>
 
               <section className="flex flex-col border-t border-border pt-8 lg:h-full lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-[22px] font-semibold leading-none text-content">
-                    {isFetching && estimate ? "Refreshing estimate" : "Live estimate"}
+                    {isFetching && estimate
+                      ? "Refreshing estimate"
+                      : "Live estimate"}
                   </h2>
                   <p className="text-sm text-muted">
                     Updates automatically as you change your setup.
@@ -445,12 +454,16 @@ const Calculator = () => {
                       <div className="flex flex-col gap-6">
                         <HeroOgyStat
                           value={
-                            estimate ? formatOgyCompact(estimate.total_ogy_e8s) : "0.00"
+                            estimate
+                              ? formatOgyCompact(estimate.total_ogy_e8s)
+                              : "0.00"
                           }
                           loading={showSkeleton}
                         />
                         {estimateError && estimate && (
-                          <p className="text-sm text-red-500">{estimateError}</p>
+                          <p className="text-sm text-red-500">
+                            {estimateError}
+                          </p>
                         )}
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                           <StatCard
@@ -466,7 +479,9 @@ const Calculator = () => {
                             title="OGY spot rate"
                             value={
                               estimate
-                                ? formatUsdRateFromE8s(estimate.ogy_usd_price_e8s)
+                                ? formatUsdRateFromE8s(
+                                    estimate.ogy_usd_price_e8s
+                                  )
                                 : "$0.0000"
                             }
                             loading={showSkeleton}
@@ -508,7 +523,9 @@ const Calculator = () => {
                     label="Storage fee"
                     value={
                       estimate
-                        ? formatUsdCompact(estimate.breakdown.storage_fee_usd_e8s)
+                        ? formatUsdCompact(
+                            estimate.breakdown.storage_fee_usd_e8s
+                          )
                         : "$0.00"
                     }
                   />

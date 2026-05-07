@@ -80,10 +80,7 @@ const AreaStatCard = ({
             />
           }
         />
-        <div
-          data-skel-block
-          className="mt-4 flex-1 min-h-72 w-full rounded-xl"
-        >
+        <div data-skel-block className="mt-4 flex-1 min-h-72 w-full rounded-xl">
           {isEmpty ? (
             <ChartEmptyState title={title} />
           ) : (

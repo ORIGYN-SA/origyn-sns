@@ -11,8 +11,7 @@ type PrincipalIdPillProps = {
 };
 
 const variantClasses: Record<PrincipalIdPillVariant, string> = {
-  short:
-    "h-[47px] w-[47px] sm:w-[225px] py-2 pl-1 pr-1 sm:pr-4",
+  short: "h-[47px] w-[47px] sm:w-[225px] py-2 pl-1 pr-1 sm:pr-4",
   long: "h-[47px] w-full py-2 pl-1 pr-4",
 };
 

@@ -41,7 +41,9 @@ export const getTransactionColumns = (
       <div className="w-20">
         <button
           className="hover:underline"
-          onClick={() => navigate(`/transaction-history/transactions/${row.index}`)}
+          onClick={() =>
+            navigate(`/transaction-history/transactions/${row.index}`)
+          }
         >
           {row.index}
         </button>
@@ -53,7 +55,9 @@ export const getTransactionColumns = (
     header: "Amount",
     cell: (row) => (
       <div className="w-32 whitespace-nowrap">
-        <span>{roundAndFormatLocale({ number: divideBy1e8(parseInt(row.amount)) })}</span>
+        <span>
+          {roundAndFormatLocale({ number: divideBy1e8(parseInt(row.amount)) })}
+        </span>
       </div>
     ),
   },

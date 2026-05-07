@@ -9,8 +9,8 @@ const BannerContent = ({ children }: PropsWithChildren) => {
 
       <p className="max-w-[467px] mx-auto text-white/80 font-light text-[16px] leading-[24px] text-center">
         ORIGYN governance and ledger have been upgraded to an SNS. In order to
-        continue participating in ORIGYN governance and utilise OGY, you need
-        to migrate your OGY tokens.
+        continue participating in ORIGYN governance and utilise OGY, you need to
+        migrate your OGY tokens.
       </p>
       {children}
     </div>

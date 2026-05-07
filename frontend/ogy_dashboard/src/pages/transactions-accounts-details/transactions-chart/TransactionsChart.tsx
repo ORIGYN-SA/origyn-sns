@@ -338,7 +338,11 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
 
   useEffect(() => {
     if (ref.current && data) {
-      const instance = new Network(ref.current, data as Data, buildVisOptions());
+      const instance = new Network(
+        ref.current,
+        data as Data,
+        buildVisOptions()
+      );
       setNetwork(instance);
       return () => network?.destroy();
     }

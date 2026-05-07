@@ -3,8 +3,12 @@ import { useWallet } from "@components/auth/useWallet";
 import fetchBalanceOGYLegacy from "@services/queries/accounts/fetchBalanceOGYLegacy";
 
 const useFetchBalanceOGYOwner = () => {
-  const { principalId: owner, isConnected, subAccount, subAccountHex } =
-    useWallet();
+  const {
+    principalId: owner,
+    isConnected,
+    subAccount,
+    subAccountHex,
+  } = useWallet();
 
   return useQuery({
     queryKey: ["userFetchBalanceOGYLegacy", owner, subAccountHex, isConnected],

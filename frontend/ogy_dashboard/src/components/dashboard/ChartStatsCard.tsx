@@ -50,8 +50,7 @@ const ChartStatsCard = ({
   const showSkeleton = loading || hasError;
   const displayChartData =
     showSkeleton && !chart.data ? FAKE_AREA_SERIES : chart.data;
-  const isEmpty =
-    !showSkeleton && (!chart.data || chart.data.length === 0);
+  const isEmpty = !showSkeleton && (!chart.data || chart.data.length === 0);
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>

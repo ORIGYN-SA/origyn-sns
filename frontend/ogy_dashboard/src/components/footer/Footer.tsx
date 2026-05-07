@@ -139,10 +139,9 @@ const Footer = () => {
         <p className="mt-8 text-[11px] font-light leading-relaxed text-white/45 max-w-3xl text-center lg:text-left">
           *ORIGYN Foundation shall not be held liable for any loss, theft, or
           misappropriation of OGY Tokens occurring in connection with the swap
-          process. Furthermore, ORIGYN Foundation shall not be held
-          accountable for any failure to execute the swap if the involved
-          party does not strictly adhere to the conditions specified by ORIGYN
-          Foundation.
+          process. Furthermore, ORIGYN Foundation shall not be held accountable
+          for any failure to execute the swap if the involved party does not
+          strictly adhere to the conditions specified by ORIGYN Foundation.
         </p>
       </div>
     </footer>

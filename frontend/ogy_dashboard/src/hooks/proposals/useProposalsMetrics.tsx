@@ -39,8 +39,8 @@ const useProposalsMetrics = () => {
               governance system, made by the ORIGYN Foundation.
             </p>
             <p>
-              Anyone who staked their tokens can vote to approve or reject
-              given proposal.
+              Anyone who staked their tokens can vote to approve or reject given
+              proposal.
             </p>
           </>
         ),
@@ -53,8 +53,8 @@ const useProposalsMetrics = () => {
         tooltip: (
           <>
             <p>
-              In the first year (Sept 23-Sept 24) 250M are distributed among
-              all the stake holders.
+              In the first year (Sept 23-Sept 24) 250M are distributed among all
+              the stake holders.
             </p>
             <p>Depending how many people are staking the ration vary.</p>
             <p>It will halfling every second year.</p>

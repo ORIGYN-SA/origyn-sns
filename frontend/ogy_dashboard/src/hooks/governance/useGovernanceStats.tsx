@@ -14,13 +14,7 @@ interface IGovernanceStats {
 }
 
 const useGovernanceStats = () => {
-  const {
-    data,
-    isSuccess,
-    isError,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data, isSuccess, isError, isLoading, error } = useQuery({
     queryKey: ["governanceStats"],
     queryFn: () => fetchNeuronsStats(),
     placeholderData: keepPreviousData,

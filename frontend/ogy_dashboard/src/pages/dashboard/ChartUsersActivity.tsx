@@ -12,11 +12,7 @@ const SELECT_PERIOD_OPTIONS: { value: Period; label: string }[] = [
   { value: "all", label: "All" },
 ];
 
-const ChartUsersActivity = ({
-  className,
-}: {
-  className?: string;
-}) => {
+const ChartUsersActivity = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("monthly");
 
   const { data, isLoading, isError } = useGetActivityStats({

@@ -21,7 +21,9 @@ type EstimateMintCostArgs = {
 
 type EstimateMintCostResult =
   | { Ok: MintCostEstimate }
-  | { Err: { MintPricingNotConfigured: null } | { OgyPriceNotAvailable: null } };
+  | {
+      Err: { MintPricingNotConfigured: null } | { OgyPriceNotAvailable: null };
+    };
 
 type MintingStudioActor = {
   estimate_mint_cost: (args: {

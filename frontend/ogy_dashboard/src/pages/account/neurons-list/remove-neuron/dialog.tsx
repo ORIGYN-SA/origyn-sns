@@ -17,7 +17,11 @@ const DialogRemoveNeuron = () => {
             from the list of hotkeys of your neuron.
           </div>
           <div className="mt-6">
-            <PrincipalIdPill principalId={principalId} variant="long" showCopy />
+            <PrincipalIdPill
+              principalId={principalId}
+              variant="long"
+              showCopy
+            />
           </div>
           <div className="flex justify-center items-center mt-8 gap-4">
             <Button onClick={handleRemoveNeuron}>Confirm</Button>

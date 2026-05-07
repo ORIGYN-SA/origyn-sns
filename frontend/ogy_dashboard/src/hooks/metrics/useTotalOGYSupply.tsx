@@ -34,10 +34,8 @@ const useTotalOGYSupply = ({ period }: { period: string }) => {
 
   return {
     data,
-    isSuccess:
-      isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries,
-    isLoading:
-      isLoadingFetchTotalSupply || isLoadingFetchTotalSupplyTimeSeries,
+    isSuccess: isSuccessFetchTotalSupply && isSuccessFetchTotalSupplyTimeSeries,
+    isLoading: isLoadingFetchTotalSupply || isLoadingFetchTotalSupplyTimeSeries,
     error: errorFetchTotalSupply || errorTotalSupplyTimeSeries,
   };
 };

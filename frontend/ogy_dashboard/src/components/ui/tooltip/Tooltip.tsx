@@ -11,7 +11,12 @@ type TooltipProps = PropsWithChildren<{
   className?: string;
 }>;
 
-const Tooltip = ({ content, side = "bottom", className, children }: TooltipProps) => (
+const Tooltip = ({
+  content,
+  side = "bottom",
+  className,
+  children,
+}: TooltipProps) => (
   <TooltipRoot>
     <TooltipTrigger asChild>{children}</TooltipTrigger>
     <TooltipContent side={side} className={className}>

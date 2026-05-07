@@ -205,10 +205,7 @@ const Table = <T extends object>({
                       cell.column.columnDef.meta?.className ?? "text-center"
                     }`}
                   >
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
