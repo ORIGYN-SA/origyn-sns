@@ -11,7 +11,8 @@ type PrincipalIdPillProps = {
 };
 
 const variantClasses: Record<PrincipalIdPillVariant, string> = {
-  short: "h-[47px] w-[47px] sm:w-[225px] py-2 pl-1 pr-1 sm:pr-4",
+  short:
+    "h-[47px] w-[47px] justify-center sm:w-[225px] sm:justify-start sm:py-2 sm:pl-1 sm:pr-4",
   long: "h-[47px] w-full py-2 pl-1 pr-4",
 };
 
@@ -22,7 +23,7 @@ const textClasses: Record<PrincipalIdPillVariant, string> = {
 };
 
 const PrincipalIcon = () => (
-  <Tile className="rounded-full h-[39px] w-[39px] bg-surface-3">
+  <Tile className="h-[39px] w-[39px] rounded-full bg-surface-3">
     <svg
       width="16"
       height="16"

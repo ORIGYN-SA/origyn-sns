@@ -11,9 +11,9 @@ export const Account = () => {
   const { principalId } = useWallet();
 
   return (
-    <PageContainer className="container max-w-none py-16 px-4">
-      <div className="text-center mb-16">
-        <h1 className="mb-8 font-extrabold text-[64px] leading-[60px] tracking-[-0.05em] text-center text-content">
+    <PageContainer className="container max-w-none py-8 px-4 sm:py-16">
+      <div className="text-center mb-8 sm:mb-16">
+        <h1 className="mb-6 sm:mb-8 font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
           Welcome back
         </h1>
         <PrincipalIdPill

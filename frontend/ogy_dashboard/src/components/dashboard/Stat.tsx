@@ -31,11 +31,11 @@ const Stat = ({
     ? "h-8 w-[180px] self-center shrink-0 rounded-md bg-muted/20 animate-pulse"
     : "h-6 w-[200px] self-center shrink-0 rounded-md bg-muted/20 animate-pulse";
   const valueClass = isHero
-    ? "font-bold leading-none truncate min-w-0 text-[40px]"
-    : "font-bold leading-none truncate min-w-0 text-[28px]";
+    ? "font-bold leading-none truncate min-w-0 text-[28px] sm:text-[40px]"
+    : "font-bold leading-none truncate min-w-0 text-[24px] sm:text-[28px]";
   const defaultUnitClass = isHero
-    ? "ml-2 font-bold text-[28px] leading-none"
-    : "ml-1 font-semibold text-[22px] leading-none";
+    ? "ml-2 font-bold text-[20px] sm:text-[28px] leading-none"
+    : "ml-1 font-semibold text-[18px] sm:text-[22px] leading-none";
 
   return (
     <div

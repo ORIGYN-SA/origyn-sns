@@ -23,17 +23,15 @@ const Layout = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-background"
-      style={
-        SHOW_LEDGER_SWITCH_WARNING
-          ? {
-              background:
-                "linear-gradient(to bottom, rgb(var(--color-charcoal)) 0, rgb(var(--color-charcoal)) 58px, rgb(var(--color-background)) 58px)",
-            }
-          : undefined
-      }
+      className={`flex flex-col min-h-screen bg-background ${
+        SHOW_LEDGER_SWITCH_WARNING ? "ledger-warning-strip" : ""
+      }`}
     >
-      {SHOW_LEDGER_SWITCH_WARNING && <Warning />}
+      {SHOW_LEDGER_SWITCH_WARNING && (
+        <div className="hidden sm:block">
+          <Warning />
+        </div>
+      )}
       <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
       <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
         <div className="max-w-[1440px] mx-auto">
