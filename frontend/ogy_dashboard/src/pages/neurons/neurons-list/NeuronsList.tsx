@@ -52,8 +52,8 @@ const getColumns = (
       <span
         className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${
           row.state === "Dissolved"
-            ? "bg-sky/20 text-sky"
-            : "bg-jade/20 text-jade"
+            ? "border border-sky/25 bg-sky/10 text-sky-700 dark:text-sky-300"
+            : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300"
         }`}
       >
         {row.state}

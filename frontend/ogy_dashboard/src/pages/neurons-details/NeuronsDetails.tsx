@@ -49,7 +49,9 @@ const getDetailValue = (details: DetailItem[], name: string) =>
   formatDetailValue(details.find((detail) => detail.name === name)?.value);
 
 const getStateBadgeClasses = (state: DetailValue) =>
-  state === "Dissolved" ? "bg-sky/20 text-sky" : "bg-jade/20 text-jade";
+  state === "Dissolved"
+    ? "border border-sky/25 bg-sky/10 text-sky-700 dark:text-sky-300"
+    : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300";
 
 const DetailValueText = ({ value }: { value: DetailValue }) => (
   <strong className="text-base font-semibold text-content break-words">
@@ -102,7 +104,7 @@ export const NeuronsDetails = () => {
     <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
       <PageHeader
         category="Neuron"
-        categoryClassName="bg-[#FF55C5]"
+        categoryClassName="bg-candyFloss"
         title="OGY Neuron"
         onBack={handleOnClickBack}
       />

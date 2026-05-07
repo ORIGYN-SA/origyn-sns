@@ -275,7 +275,7 @@ const TransactionsAccountsDetails = () => {
             <div className="flex-1 flex flex-col items-center justify-center gap-2 py-8 px-5">
               <span
                 data-skel-static
-                className="inline-block rounded-full bg-border-faint text-muted text-xs font-semibold px-3 py-1"
+                className="inline-block rounded-full border border-border-strong bg-surface-2 px-3 py-1 text-xs font-semibold text-content/80"
               >
                 Balance
               </span>

@@ -58,7 +58,7 @@ const PageHeader = ({
       <div className="flex flex-col gap-3">
         {category && (
           <span
-            className={`inline-flex self-start items-center rounded-full text-white px-4 text-[10px] font-extrabold uppercase leading-[22px] tracking-[2px] ${categoryClassName ?? "bg-sky"}`}
+            className={`inline-flex self-start items-center rounded-full px-4 text-[10px] font-extrabold uppercase leading-[22px] tracking-[2px] text-charcoal ${categoryClassName ?? "bg-sky"}`}
           >
             {category}
           </span>

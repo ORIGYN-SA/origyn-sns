@@ -37,7 +37,7 @@ const StakeOGY = () => {
             </div>
           </div>
           {walletSelected && walletSelected !== "dfinity" && (
-            <div className="rounded-2xl border border-[#F4E5A1] bg-[#FFF8E1] p-4 text-center text-[13px] leading-snug text-content">
+            <div className="rounded-2xl border border-amber-300/60 bg-amber-100/60 dark:border-amber-400/30 dark:bg-amber-500/10 p-4 text-center text-[13px] leading-snug text-content">
               It appears you are not connected with{" "}
               <span className="font-semibold">Internet Identity</span>.
               <br /> You need an{" "}

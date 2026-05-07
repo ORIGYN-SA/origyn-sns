@@ -77,7 +77,7 @@ const getColumns = (
     id: "topic",
     header: "Topic",
     cell: (row) => (
-      <span className="inline-block bg-spacePurple/20 text-spacePurple text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+      <span className="inline-block rounded-full border border-spacePurple/25 bg-spacePurple/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300 whitespace-nowrap">
         {row.topic}
       </span>
     ),
@@ -87,7 +87,7 @@ const getColumns = (
     header: "Status",
     cell: (row) => (
       <span
-        className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${getColorByProposalStatus(row.status, "bg")} ${getColorByProposalStatus(row.status, "text")}`}
+        className={`inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap ${getColorByProposalStatus(row.status, "bg")} ${getColorByProposalStatus(row.status, "text")}`}
       >
         {row.status}
       </span>

@@ -4,14 +4,22 @@ export const getColorByProposalStatus = (
 ) => {
   switch (status) {
     case "Open":
-      return type === "bg" ? "bg-sky/20" : "text-sky";
+      return type === "bg"
+        ? "border border-sky/25 bg-sky/10"
+        : "text-sky-700 dark:text-sky-300";
     case "Executed":
     case "Adopted":
-      return type === "bg" ? "bg-jade/20" : "text-jade";
+      return type === "bg"
+        ? "border border-jade/25 bg-jade/10"
+        : "text-emerald-700 dark:text-emerald-300";
     case "Rejected":
     case "Failed":
-      return type === "bg" ? "bg-red-500/15" : "text-red-600";
+      return type === "bg"
+        ? "border border-red-500/25 bg-red-500/10"
+        : "text-red-600 dark:text-red-300";
     default:
-      return type === "bg" ? "bg-border-faint" : "text-muted";
+      return type === "bg"
+        ? "border border-border-strong bg-surface-2"
+        : "text-muted";
   }
 };

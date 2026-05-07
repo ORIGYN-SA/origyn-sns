@@ -73,7 +73,7 @@ export const ProposalsDetails = () => {
 
               <div className="mt-3 flex items-center gap-3 flex-wrap text-sm">
                 <span className="text-muted">Topic</span>
-                <span className="inline-block bg-spacePurple/20 text-spacePurple text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="inline-block rounded-full border border-spacePurple/25 bg-spacePurple/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300">
                   {proposal?.topic ?? "…"}
                 </span>
               </div>
@@ -83,7 +83,7 @@ export const ProposalsDetails = () => {
                   More info
                 </div>
                 <div className="rounded-xl bg-surface-2/40 p-6">
-                  <pre className="whitespace-pre-wrap break-all text-sm text-content">
+                  <pre className="overflow-x-auto whitespace-pre text-sm text-content">
                     {proposal?.payload || FAKE_PAYLOAD}
                   </pre>
                 </div>

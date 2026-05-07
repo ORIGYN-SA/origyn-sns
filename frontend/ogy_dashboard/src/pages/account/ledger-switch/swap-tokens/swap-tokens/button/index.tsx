@@ -23,7 +23,7 @@ const Btn = () => {
         Swap your tokens
       </Button>
 
-      <div className="mt-3 rounded-[16px] border border-yellow-500/20 bg-yellow-500/10 px-4 py-3 text-center text-sm leading-5 text-yellow-700">
+      <div className="mt-3 rounded-[16px] border border-yellow-500/20 bg-yellow-500/10 px-4 py-3 text-center text-sm leading-5 text-yellow-700 dark:text-yellow-300">
         Automatic swap has been disabled. You will need to get your swap request
         approved, min. amount is 50 000 OGY.
       </div>

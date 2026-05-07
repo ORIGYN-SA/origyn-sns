@@ -30,12 +30,20 @@ export const Explorer = () => {
 
   const searchForItems = useMemo(
     () => [
-      { title: "PrincipalID", bgColorCn: "bg-jade/10", colorCn: "text-jade" },
-      { title: "AccountID", bgColorCn: "bg-sky/10", colorCn: "text-sky" },
+      {
+        title: "PrincipalID",
+        className:
+          "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300",
+      },
+      {
+        title: "AccountID",
+        className:
+          "border border-sky/25 bg-sky/10 text-sky-700 dark:text-sky-300",
+      },
       {
         title: "BlockIndex",
-        bgColorCn: "bg-candyFloss/10",
-        colorCn: "text-candyFloss",
+        className:
+          "border border-candyFloss/25 bg-candyFloss/10 text-pink-700 dark:text-pink-300",
       },
     ],
     []
@@ -113,8 +121,8 @@ export const Explorer = () => {
       <span
         className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
           search.data.type === "blockIndex"
-            ? "bg-candyFloss/10 text-candyFloss"
-            : "bg-jade/10 text-jade"
+            ? "border border-candyFloss/25 bg-candyFloss/10 text-pink-700 dark:text-pink-300"
+            : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300"
         }`}
       >
         {search.data.type === "blockIndex" ? "Block" : "Principal"}
@@ -135,11 +143,11 @@ export const Explorer = () => {
           </h1>
           <div className="flex items-center gap-2 mt-6 justify-center flex-wrap text-sm text-muted">
             <span>Search for:</span>
-            {searchForItems.map(({ title, bgColorCn, colorCn }, index) => (
+            {searchForItems.map(({ title, className }, index) => (
               <div key={index} className="flex items-center gap-2">
                 {index === searchForItems.length - 1 && <span>or</span>}
                 <span
-                  className={`${bgColorCn} ${colorCn} text-xs font-semibold px-4 py-1 rounded-full`}
+                  className={`${className} text-xs font-semibold px-4 py-1 rounded-full`}
                 >
                   {title}
                 </span>

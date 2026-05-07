@@ -93,8 +93,8 @@ const TopTransfersAndBurnsFull = ({
         header: "Time",
         cell: ({ getValue }) => (
           <div>
-            <Badge className="bg-slate-500/20 px-2">
-              <div className="text-slate-500 text-xs font-semibold shrink-0">
+            <Badge className="border border-border-strong bg-surface-2 px-2">
+              <div className="text-xs font-semibold text-content/80 shrink-0">
                 {String(getValue())}
               </div>
             </Badge>
