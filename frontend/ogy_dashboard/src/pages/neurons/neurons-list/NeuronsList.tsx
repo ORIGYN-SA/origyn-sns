@@ -15,7 +15,7 @@ import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useNeurons from "@hooks/neurons/useNeuronsAll";
 
-type NeuronRow = {
+export type NeuronRow = {
   id: string;
   stakedOGY: string;
   state: string;
@@ -121,15 +121,10 @@ const FAKE_ROW: NeuronRow = {
 const buildSkeletonRows = (count: number): NeuronRow[] =>
   buildFakeRows(FAKE_ROW, count);
 
-const NeuronsList = ({
-  pagination,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pagination?: any;
-}) => {
+const NeuronsList = () => {
   const navigate = useNavigate();
-  const [pageIndex, setPageIndex] = useState(pagination?.pageIndex ?? 0);
-  const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   const { data, isSuccess, isLoading, isError } = useNeurons({
     limit: pageSize,

@@ -2,6 +2,7 @@ import {
   createContext,
   forwardRef,
   HTMLAttributes,
+  ReactElement,
   ReactNode,
   useContext,
   useId,
@@ -33,7 +34,7 @@ const useChart = () => {
 
 type ChartContainerProps = HTMLAttributes<HTMLDivElement> & {
   config: ChartConfig;
-  children: ReactNode;
+  children: ReactElement;
 };
 
 export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
@@ -70,7 +71,7 @@ export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
               }}
             />
           )}
-          <ResponsiveContainer>{children as any}</ResponsiveContainer>
+          <ResponsiveContainer>{children}</ResponsiveContainer>
         </div>
       </ChartContext.Provider>
     );

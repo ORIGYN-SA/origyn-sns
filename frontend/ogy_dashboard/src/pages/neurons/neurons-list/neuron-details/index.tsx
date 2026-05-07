@@ -1,7 +1,7 @@
 import { Row } from "@tanstack/react-table";
+import type { NeuronRow } from "../NeuronsList";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const NeuronDetails = ({ row }: { row: Row<any> }) => {
+const NeuronDetails = ({ row }: { row: Row<NeuronRow> }) => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-3">
       {row?.original?.details.map(

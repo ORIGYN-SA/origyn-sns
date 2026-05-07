@@ -15,7 +15,7 @@ import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useProposals from "@hooks/proposals/useProposalsAll";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 
-type ProposalRow = {
+export type ProposalRow = {
   id: number;
   title: string;
   proposed: string;
@@ -129,15 +129,10 @@ const FAKE_ROW: ProposalRow = {
 const buildSkeletonRows = (count: number): ProposalRow[] =>
   buildFakeRows(FAKE_ROW, count);
 
-const ProposalsList = ({
-  pagination,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pagination?: any;
-}) => {
+const ProposalsList = () => {
   const navigate = useNavigate();
-  const [pageIndex, setPageIndex] = useState(pagination?.pageIndex ?? 0);
-  const [pageSize, setPageSize] = useState(pagination?.pageSize ?? 10);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   const { data, isSuccess, isLoading, isError } = useProposals({
     limit: pageSize,
