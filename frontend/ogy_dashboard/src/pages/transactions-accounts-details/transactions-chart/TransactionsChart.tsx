@@ -59,7 +59,7 @@ const buildVisOptions = (): Options => ({
     chosen: false,
     font: {
       size: 18,
-      face: "DM sans, Montserrat, system-ui, sans-serif",
+      face: "DM sans, system-ui, sans-serif",
       background: "none",
       align: "center",
       multi: false,
@@ -72,7 +72,7 @@ const buildVisOptions = (): Options => ({
       multi: "markdown",
       size: 18,
       bold: "true",
-      face: "DM sans, Montserrat, system-ui, sans-serif",
+      face: "DM sans, system-ui, sans-serif",
     },
     smooth: false,
     width: 2,

@@ -46,7 +46,7 @@ export default {
     extend: {
       colors: tailwindcssColors(colors),
       fontFamily: {
-        sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
+        sans: ["DM sans", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         'ledger-switch': "url('/bg_ledger_switch.webp')",

@@ -24,6 +24,8 @@ const DatePill = ({ millis, iso }: DatePillProps) => {
 
   return (
     <button
+      type="button"
+      aria-label={`Toggle relative time. Current display: ${label}`}
       onClick={() => setShowRelative((r) => !r)}
       className="inline-block bg-border-faint text-muted text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-border-strong transition-colors"
     >

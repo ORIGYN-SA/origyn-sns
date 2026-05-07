@@ -71,28 +71,10 @@ const router = createBrowserRouter([
           {
             path: "neurons",
             element: <Neurons />,
-            // async lazy() {
-            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-            //     "@pages/governance/components/neurons/details/Details"
-            //   );
-            //   return {
-            //     loader: NeuronsDetailsLoader,
-            //     Component: NeuronsDetails,
-            //   };
-            // },
           },
           {
             path: "neurons/details",
             element: <NeuronsDetails />,
-            // async lazy() {
-            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-            //     "@pages/governance/components/neurons/details/Details"
-            //   );
-            //   return {
-            //     loader: NeuronsDetailsLoader,
-            //     Component: NeuronsDetails,
-            //   };
-            // },
           },
         ],
       },
@@ -185,7 +167,6 @@ const router = createBrowserRouter([
       },
       {
         path: "recovery",
-        // element: <ProtectedRoute />,
         children: [
           {
             index: true,
