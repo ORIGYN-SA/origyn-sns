@@ -312,7 +312,7 @@ const Calculator = () => {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-0">
               <section className="lg:pr-8">
                 <div className="flex flex-col gap-3">
-                  <h2 className="text-[22px] font-semibold leading-none text-charcoal">
+                  <h2 className="text-[22px] font-semibold leading-none text-content">
                     Plan your mint
                   </h2>
                   <p className="text-sm text-muted">
@@ -431,7 +431,7 @@ const Calculator = () => {
 
               <section className="flex flex-col border-t border-border pt-8 lg:h-full lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                 <div className="flex flex-col gap-3">
-                  <h2 className="text-[22px] font-semibold leading-none text-charcoal">
+                  <h2 className="text-[22px] font-semibold leading-none text-content">
                     {isFetching && estimate ? "Refreshing estimate" : "Live estimate"}
                   </h2>
                   <p className="text-sm text-muted">

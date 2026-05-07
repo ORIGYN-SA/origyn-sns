@@ -24,7 +24,7 @@ const UserAvatarIcon = () => (
   >
     <path
       d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM5 20a7 7 0 0 1 14 0"
-      stroke="#ffffff"
+      stroke="currentColor"
       strokeWidth="1.6"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -43,8 +43,8 @@ const PrincipalPill = ({
   isMinting: boolean;
   onNavigate?: (value: string) => void;
 }) => (
-  <div className="flex items-center gap-3 rounded-full bg-[#F9FAFE] border border-[#E9EAF1] py-1 pl-1 pr-4 min-w-0">
-    <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-[#D0D3E0] shrink-0">
+  <div className="flex items-center gap-3 rounded-full border border-border-strong bg-surface-1 py-1 pl-1 pr-4 min-w-0">
+    <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-surface-3 text-white shrink-0">
       <UserAvatarIcon />
     </div>
     <span className="text-[14px] font-normal leading-tight text-muted shrink-0">
@@ -149,7 +149,7 @@ export const TransactionsDetails = () => {
                 />
               </div>
 
-              <div className="border-t border-[#E1E1E1] pt-5 flex flex-col gap-3">
+              <div className="border-t border-border-strong pt-5 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-[16px] font-bold leading-none text-content">
                     Amount
@@ -175,7 +175,7 @@ export const TransactionsDetails = () => {
                 </div>
               </div>
 
-              <div className="border-t border-[#E1E1E1] pt-5 flex items-center justify-between gap-4">
+              <div className="border-t border-border-strong pt-5 flex items-center justify-between gap-4">
                 <span className="text-[12px] font-medium leading-none text-muted">
                   Memo
                 </span>
@@ -194,7 +194,7 @@ export const TransactionsDetails = () => {
               </div>
             </div>
 
-            <div className="border-r border-b border-l border-border-strong rounded-b-[16px] p-4 flex items-center justify-center gap-2 bg-[#F9FAFE]">
+            <div className="border-r border-b border-l border-border-strong rounded-b-[16px] p-4 flex items-center justify-center gap-2 bg-surface-muted">
               <span className="text-[13px] font-medium leading-none text-muted">
                 {data.updated_at
                   ? DateTime.fromISO(data.updated_at).toFormat(

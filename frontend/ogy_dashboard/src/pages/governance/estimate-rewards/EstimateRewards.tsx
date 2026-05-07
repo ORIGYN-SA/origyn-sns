@@ -87,7 +87,7 @@ const DiscreteSlider = ({
         className
       )}
     >
-      <div className="absolute inset-x-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-[#EAECF6]" />
+      <div className="absolute inset-x-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-surface-3" />
       <div className="absolute inset-x-[3px] inset-y-0">
         <div
           className="absolute left-0 top-1/2 h-[11px] -translate-y-1/2 rounded-full"
@@ -99,7 +99,7 @@ const DiscreteSlider = ({
       </div>
       <div className="absolute inset-x-[15px] inset-y-0">
         <div
-          className="absolute top-1/2 h-[30px] w-[30px] -translate-y-1/2 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.08)]"
+          className="absolute top-1/2 h-[30px] w-[30px] -translate-y-1/2 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
           style={{
             left: `calc(${pct}% - 15px)`,
             backgroundImage:
@@ -159,7 +159,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
 
   return (
     <Card
-      className={`flex flex-col gap-4 !rounded-2xl !bg-white !border-[#E1E1E1] ${className ?? ""}`}
+      className={`flex flex-col gap-4 !rounded-2xl !bg-surface-1 !border-border-strong ${className ?? ""}`}
       {...restProps}
     >
       <h2 className="text-base font-semibold leading-none text-muted">
@@ -197,9 +197,9 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         <>
           <div
             aria-busy="true"
-            className="pointer-events-none absolute inset-6 bg-white"
+            className="pointer-events-none absolute inset-4 rounded-xl bg-surface-1"
           />
-          <div className="pointer-events-none absolute inset-6 bg-muted/20 animate-pulse" />
+          <div className="pointer-events-none absolute inset-4 rounded-xl bg-muted/20 animate-pulse" />
         </>
       )}
       {hasError && <CardErrorOverlay title="Estimate your rewards" />}

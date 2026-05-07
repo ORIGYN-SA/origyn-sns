@@ -62,7 +62,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <div className="flex h-full w-[min(502px,100vw)] flex-col gap-12 overflow-y-auto bg-[linear-gradient(192.66deg,#FFFFFF_-3.07%,#F7F7F7_104.85%)] p-6 shadow-[-10px_0px_50px_0px_#0000000D] sm:p-10">
+                <div className="flex h-full w-[min(502px,100vw)] flex-col gap-12 overflow-y-auto bg-gradient-to-b from-surface-1 to-surface-2 p-6 shadow-[-10px_0px_50px_0px_#0000000D] sm:p-10">
                   <div className="flex items-start justify-between gap-6">
                     <div className="min-w-0 pt-1">
                       <div className="text-[12px] font-bold uppercase tracking-[2px] text-muted">
@@ -79,7 +79,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                       type="button"
                       onClick={handleDisconnectWallet}
                       aria-label="Disconnect wallet"
-                      className="shrink-0 rounded-full p-1 transition-colors hover:bg-[#E9EAF1]"
+                      className="shrink-0 rounded-full p-1 text-muted transition-colors hover:bg-surface-2 hover:text-content"
                     >
                       <svg
                         width="34"
@@ -91,21 +91,21 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                       >
                         <path
                           d="M25.456 25.4558C20.7721 30.1397 13.1693 30.1397 8.48542 25.4558C3.80155 20.772 3.80155 13.1692 8.48542 8.48528C13.1693 3.80141 20.7721 3.80141 25.456 8.48528"
-                          stroke="#69737C"
+                          stroke="currentColor"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M28.0972 21.1892L32.3148 16.9716L28.0972 12.7539"
-                          stroke="#69737C"
+                          stroke="currentColor"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M21.7709 16.9713H32.315"
-                          stroke="#69737C"
+                          stroke="currentColor"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -114,10 +114,10 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     </button>
                   </div>
                   <div className="w-full text-center">
-                    <div className="flex h-[61px] w-full items-center justify-center gap-2 rounded-t-[20px] border border-[#E9EAF1] bg-white px-6 py-4 font-sans text-[22px] font-normal leading-none text-[#69737C]">
+                    <div className="flex h-[61px] w-full items-center justify-center gap-2 rounded-t-[20px] border border-border-faint bg-surface-1 px-6 py-4 font-sans text-[22px] font-normal leading-none text-muted">
                       Wallet Balance
                     </div>
-                    <div className="flex min-h-[337px] w-full flex-col items-center gap-4 rounded-b-[20px] border-x border-b border-[#E9EAF1] bg-white px-5 py-8">
+                    <div className="flex min-h-[337px] w-full flex-col items-center gap-4 rounded-b-[20px] border-x border-b border-border-faint bg-surface-1 px-5 py-8">
                       <div className="flex h-[88px] flex-col items-center justify-center">
                         <Stat
                           iconSrc="/ogy_logo.svg"
@@ -155,7 +155,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                           href="https://app.icpswap.com/swap"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 self-center py-1 text-[14px] font-normal text-[#69737C]"
+                          className="inline-flex items-center justify-center gap-1.5 self-center py-1 text-[14px] font-normal text-muted"
                         >
                           How to top up?
                           <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 opacity-60" />

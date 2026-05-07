@@ -33,7 +33,7 @@ const TransactionHistory = ({
       <Card className={className} {...restProps}>
         {hasError && <CardErrorOverlay title="Transaction History" />}
         <div data-skel-static className="flex items-center mb-8 gap-4">
-          <div className="text-charcoal text-[22px] font-semibold leading-none">
+          <div className="text-content text-[22px] font-semibold leading-none">
             Transaction History
           </div>
           <Button

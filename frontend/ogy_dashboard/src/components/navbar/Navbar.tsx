@@ -116,7 +116,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
                 aria-label="Open main menu"
-                className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-[#E9EAF1] bg-[#F9FAFE] text-content hover:bg-[#F1F3F9] hover:border-[#D6D9E2] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
+                className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-border-faint bg-surface-muted text-content hover:bg-surface-2 hover:border-border-strong transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
               >
                 <Bars3Icon className="h-5 w-5" aria-hidden="true" />
               </button>

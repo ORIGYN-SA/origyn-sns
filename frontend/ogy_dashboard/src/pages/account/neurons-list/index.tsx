@@ -131,7 +131,7 @@ const NeuronsList = () => {
         <AddNeuronProvider>
           {hasError && <CardErrorOverlay title="My OGY Neurons" />}
           <div data-skel-static className="flex items-center mb-8 gap-4">
-            <div className="text-charcoal text-[22px] font-semibold leading-none">
+            <div className="text-content text-[22px] font-semibold leading-none">
               My OGY Neurons
             </div>
             <BtnAddNeuron />

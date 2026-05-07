@@ -23,7 +23,7 @@ const FormError = () => {
           Claim all rewards error!
         </div>
       </div>
-      <div className="rounded-2xl border border-[#E1E1E1] bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
+      <div className="rounded-2xl border border-border-strong bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
         {error?.message}
       </div>
       <div className="flex items-center gap-3">

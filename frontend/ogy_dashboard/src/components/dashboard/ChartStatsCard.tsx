@@ -53,7 +53,7 @@ const ChartStatsCard = ({
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={className}>
         <div data-skel-static className="flex items-center justify-between">
-          <h2 className="text-charcoal text-[22px] font-semibold leading-none mr-2">
+          <h2 className="text-content text-[22px] font-semibold leading-none mr-2">
             {title}
           </h2>
           <PeriodSelect

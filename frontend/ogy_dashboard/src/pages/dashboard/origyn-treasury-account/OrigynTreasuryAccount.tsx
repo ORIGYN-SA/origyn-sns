@@ -114,7 +114,7 @@ const OrigynTreasuryAccount = ({
         )}
         <div
           data-skel-static
-          className="text-charcoal text-[22px] font-semibold leading-none"
+          className="text-content text-[22px] font-semibold leading-none"
         >
           ORIGYN Treasury Account (OTA)
         </div>

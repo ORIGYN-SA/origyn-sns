@@ -294,7 +294,7 @@ const TransactionsAccountsDetails = () => {
               />
             </div>
 
-            <div className="mt-auto border-t border-border bg-[#F9FAFE] py-4 px-5 space-y-2">
+            <div className="mt-auto border-t border-border bg-surface-muted py-4 px-5 space-y-2">
               <BalanceStatRow
                 label="Historical max balance"
                 value={historicalMax}
@@ -376,7 +376,7 @@ const TransactionsAccountsDetails = () => {
 
           <Card id="transaction-history-table" className="mt-16 scroll-mt-24">
             <div className="mb-8">
-              <div className="text-charcoal text-[22px] font-semibold leading-none">
+              <div className="text-content text-[22px] font-semibold leading-none">
                 Transaction History
               </div>
             </div>

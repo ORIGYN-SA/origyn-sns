@@ -58,7 +58,7 @@ const PrincipalIdPill = ({
 }: PrincipalIdPillProps) => {
   return (
     <div
-      className={`flex items-center gap-2 rounded-[100px] border border-[#E9EAF1] bg-[#F9FAFE] opacity-100 ${variantClasses[variant]} ${className}`}
+      className={`flex items-center gap-2 rounded-[100px] border border-border-strong bg-surface-1 opacity-100 ${variantClasses[variant]} ${className}`}
     >
       <PrincipalIcon />
       <div className={textClasses[variant]}>

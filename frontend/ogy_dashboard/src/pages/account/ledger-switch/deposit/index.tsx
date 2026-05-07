@@ -15,7 +15,7 @@ const Deposit = () => {
   });
 
   return (
-    <div className="overflow-hidden rounded-[20px] border border-border bg-white">
+    <div className="overflow-hidden rounded-[20px] border border-border bg-surface-1">
       <div className="grid grid-cols-[1fr_auto] items-center gap-4 p-4">
         <div className="text-sm font-medium text-muted">Legacy OGY Balance</div>
         <div className="min-w-0 text-right">
@@ -39,7 +39,7 @@ const Deposit = () => {
           </div>
         </div>
       </div>
-      <div className="flex min-w-0 items-center border-t border-border bg-[#F9FAFE] p-4 text-sm text-muted">
+      <div className="flex min-w-0 items-center border-t border-border bg-surface-muted p-4 text-sm text-muted">
         <div className="mr-2 shrink-0 font-medium">Account ID: </div>
         {accountId ? (
           <>

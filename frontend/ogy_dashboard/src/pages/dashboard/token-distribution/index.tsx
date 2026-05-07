@@ -28,7 +28,7 @@ const TokenDistribution = ({
       <Card className={`${className}`} {...restProps}>
         {hasError && <CardErrorOverlay title="Token Distribution" />}
         <div data-skel-static className="mb-8">
-          <div className="text-charcoal text-[22px] font-semibold leading-none">
+          <div className="text-content text-[22px] font-semibold leading-none">
             Token Distribution
           </div>
         </div>

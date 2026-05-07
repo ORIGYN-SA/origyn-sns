@@ -370,7 +370,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
   return (
     <Card className="mt-16 !p-0 overflow-hidden">
       <header className="flex flex-col gap-4 px-6 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-charcoal text-[22px] font-semibold leading-none">
+        <h2 className="text-content text-[22px] font-semibold leading-none">
           Transaction Flow
         </h2>
         <form

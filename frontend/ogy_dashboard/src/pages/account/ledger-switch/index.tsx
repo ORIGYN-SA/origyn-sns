@@ -22,7 +22,7 @@ const WithdrawIcon = () => (
     <g opacity="0.7">
       <path
         d="M13.98 9.75016L17.82 5.91016L21.66 9.75016"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -30,7 +30,7 @@ const WithdrawIcon = () => (
       />
       <path
         d="M17.8198 21.2706V6.01562"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -38,7 +38,7 @@ const WithdrawIcon = () => (
       />
       <path
         d="M6 18C6 24.63 10.5 30 18 30C25.5 30 30 24.63 30 18"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -59,7 +59,7 @@ const DepositIcon = () => (
     <g opacity="0.7">
       <path
         d="M13.98 17.5195L17.82 21.3595L21.66 17.5195"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -67,7 +67,7 @@ const DepositIcon = () => (
       />
       <path
         d="M17.8198 6V21.255"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -75,7 +75,7 @@ const DepositIcon = () => (
       />
       <path
         d="M30 18.2695C30 24.8995 25.5 30.2695 18 30.2695C10.5 30.2695 6 24.8995 6 18.2695"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -96,7 +96,7 @@ const SwapIcon = () => (
     <g opacity="0.7">
       <path
         d="M33 18C33 26.28 26.28 33 18 33C9.72 33 4.665 24.66 4.665 24.66M4.665 24.66H11.445M4.665 24.66V32.16M3 18C3 9.72 9.66 3 18 3C28.005 3 33 11.34 33 11.34M33 11.34V3.84M33 11.34H26.34"
-        stroke="#69737C"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -155,7 +155,7 @@ const LedgerSwitch: FC<LedgerSwitchProps> = ({ className }) => {
           </div>
         </LedgerSwitchBanner>
 
-        <div className="rounded-b-[40px] border-x border-b border-border-strong bg-white transform-gpu">
+        <div className="rounded-b-[40px] border-x border-b border-border-strong bg-surface-1 transform-gpu">
           <Disclosure>
             {({ open }) => (
               <>
@@ -163,7 +163,7 @@ const LedgerSwitch: FC<LedgerSwitchProps> = ({ className }) => {
                   <span className="text-[16px] font-medium leading-tight text-content sm:text-[17px]">
                     Still have old OGY tokens? Swap now!
                   </span>
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border-strong bg-white text-muted transition-colors group-hover:border-content group-hover:text-content">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border-strong bg-surface-1 text-muted transition-colors group-hover:border-content group-hover:text-content">
                     <ChevronDownIcon
                       className={`h-5 w-5 ${open ? "rotate-180" : ""}`}
                     />
@@ -174,11 +174,11 @@ const LedgerSwitch: FC<LedgerSwitchProps> = ({ className }) => {
                     <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
                       {cards.map(({ title, subtitle, icon, children }) => (
                         <div
-                          className="flex h-full flex-col rounded-[20px] border border-border-strong bg-white p-4"
+                          className="flex h-full flex-col rounded-[20px] border border-border-strong bg-surface-1 p-4"
                           key={title}
                         >
                           <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
-                            <Tile className="mb-0 h-[72px] w-[72px] shrink-0 rounded-[16px] bg-[#F1F6F9] text-muted">
+                            <Tile className="mb-0 h-[72px] w-[72px] shrink-0 rounded-[16px] bg-surface-faint text-muted">
                               {icon as ReactNode}
                             </Tile>
                             <div className="min-w-0 text-center sm:text-left">

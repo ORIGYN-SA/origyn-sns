@@ -22,13 +22,13 @@ const ORATable = ({ rows }: { rows: RewardPool[] }) => (
           {rows.map((item, i) => (
             <td
               key={item.year ?? i}
-              className="py-5 xl:py-3 px-4 text-left text-border-strong whitespace-nowrap"
+              className="py-5 xl:py-3 px-4 text-left text-white/80 whitespace-nowrap"
             >
               <span>{item.year}</span>
             </td>
           ))}
         </tr>
-        <tr className="bg-white">
+        <tr className="bg-surface-1">
           <td
             data-skel-static
             className="py-3 pl-[35px] pr-4 font-semibold text-left text-content whitespace-nowrap"
@@ -68,7 +68,7 @@ const OrigynTreasuryAccount = ({
         )}
         <div
           data-skel-static
-          className="text-charcoal text-[22px] font-semibold leading-none"
+          className="text-content text-[22px] font-semibold leading-none"
         >
           ORIGYN Reward Account (ORA)
         </div>

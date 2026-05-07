@@ -143,7 +143,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
     <Dialog
       show={show}
       handleClose={handleClose}
-      panelClassName="max-w-[480px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+      panelClassName="max-w-[480px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
       floatingClose
     >
       {isSuccessFetchBalanceOGY && isIdleTransfer && (
@@ -223,7 +223,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
               />
             </div>
 
-            <div className="rounded-2xl border border-[#E1E1E1] bg-surface-faint p-4 flex flex-col gap-2">
+            <div className="rounded-2xl border border-border-strong bg-surface-faint p-4 flex flex-col gap-2">
               <div className="flex justify-between items-center text-[14px]">
                 <div className="text-content">Amount Received</div>
                 <div className="flex items-center font-medium text-content">
@@ -291,7 +291,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
           <div className="text-[22px] font-semibold leading-none text-content text-center">
             Transfer error !
           </div>
-          <div className="w-full rounded-2xl border border-[#E1E1E1] bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
+          <div className="w-full rounded-2xl border border-border-strong bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
             {errorTransfer?.message}
           </div>
           <Button

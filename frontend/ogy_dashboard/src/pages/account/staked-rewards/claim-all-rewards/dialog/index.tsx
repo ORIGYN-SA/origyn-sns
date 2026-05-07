@@ -18,7 +18,7 @@ const DialogClaimAllRewards = () => {
     <Dialog
       show={show}
       handleClose={handleClose}
-      panelClassName="max-w-[420px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+      panelClassName="max-w-[420px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
       floatingClose
     >
       <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[420px] flex flex-col gap-7">

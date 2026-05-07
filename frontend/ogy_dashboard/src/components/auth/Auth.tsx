@@ -50,7 +50,7 @@ const Auth = ({
       <Dialog
         show={state === walletState.OpenWalletList}
         handleClose={handleCloseWalletList}
-        panelClassName="max-w-[360px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+        panelClassName="max-w-[360px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
         floatingClose
       >
         <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[360px] flex flex-col gap-8">
@@ -69,10 +69,10 @@ const Auth = ({
             {walletList.map(({ id, icon, name }) => {
               const plugMissing = id === "plug" && !isPlugInstalled();
               const className =
-                "group flex items-center gap-4 w-full rounded-full bg-[#F9FAFE] border border-[#E1E1E1] p-2 pr-4 hover:bg-[#F1F3F9] hover:border-[#D6D9E2] transition-colors";
+                "group flex items-center gap-4 w-full rounded-full bg-surface-muted border border-border-strong p-2 pr-4 hover:bg-surface-2 hover:border-border-strong transition-colors";
               const inner = (
                 <>
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-[#E1E1E1] shrink-0 overflow-hidden">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-surface-1 border border-border-strong shrink-0 overflow-hidden">
                     <img
                       src={icon}
                       alt=""
@@ -135,7 +135,7 @@ const Auth = ({
       <Dialog
         show={showConnectingDialog}
         handleClose={handleCloseConnectingDialog}
-        panelClassName="max-w-[360px] rounded-[20px] bg-white border border-[#E1E1E1] shadow-2xl"
+        panelClassName="max-w-[360px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
         floatingClose
       >
         <div className="pt-10 pb-10 px-5 mx-auto w-full max-w-[360px] flex flex-col items-center gap-5">

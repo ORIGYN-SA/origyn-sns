@@ -35,7 +35,7 @@ const Form = () => {
           The rewards will be sent to your principal
         </div>
       </div>
-      <div className="rounded-2xl border border-[#E1E1E1] bg-surface-faint px-4 py-3 text-center text-[13px] leading-snug text-content break-all">
+      <div className="rounded-2xl border border-border-strong bg-surface-faint px-4 py-3 text-center text-[13px] leading-snug text-content break-all">
         {principal}
       </div>
       <Button

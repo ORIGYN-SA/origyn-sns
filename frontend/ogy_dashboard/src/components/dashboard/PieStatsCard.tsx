@@ -107,7 +107,7 @@ const PieStatsCard = ({
       <Card className={className}>
         {hasError && <CardErrorOverlay title={title} />}
         <div data-skel-static className="flex items-center justify-between">
-          <div className="text-charcoal text-[22px] font-semibold leading-none">
+          <div className="text-content text-[22px] font-semibold leading-none">
             {title}
           </div>
           {titleTooltip}
