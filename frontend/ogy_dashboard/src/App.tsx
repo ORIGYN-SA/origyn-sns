@@ -1,32 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import "./App.css";
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
-import { useWalletInit } from "@amerej/artemis-react";
-import { useEffect } from "react";
-
-import {
-  // APP_MODE,
-  SNS_LEDGER_CANISTER_ID,
-  ICP_LEDGER_CANISTER_ID,
-  SNS_GOVERNANCE_CANISTER_ID,
-  TOKEN_METRICS_CANISTER_ID,
-  LEGACY_LEDGER_CANISTER_ID,
-  OGY_TOKEN_SWAP_CANISTER_ID,
-  SNS_REWARDS_CANISTER_ID,
-  COLLECTION_INDEX_CANISTER_ID,
-} from "@constants/index";
-
-import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
-import { idlFactory as ledgerIdl } from "@services/candid/sns_ledger";
-import { idlFactory as ledgerLegacyIdl } from "@services/candid/ledger.legacy";
-import { idlFactory as tokenMetricsIdl } from "@services/candid/token_metrics";
-import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
-import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
-import { idlFactory as collectionIndexIdl } from "@services/candid/collection_index";
 
 import Layout from "@components/Layout";
 import Dashboard from "@pages/dashboard";
@@ -47,8 +24,11 @@ import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
-import Categories from "@pages/certificates/Categories";
-import Collections from "@pages/certificates/Collections";
+
+const redirectWithSearch = (request: Request, pathname: string) => {
+  const url = new URL(request.url);
+  return redirect(`${pathname}${url.search}`);
+};
 
 const router = createBrowserRouter([
   {
@@ -84,40 +64,15 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: Governance.loader,
             element: <Governance />,
-            // async lazy() {
-            //   const { GovernanceLoader, Governance } = await import(
-            //     "@pages/governance/Governance"
-            //   );
-            //   return { loader: GovernanceLoader, Component: Governance };
-            // },
           },
           {
             path: "neurons",
             element: <Neurons />,
-            // async lazy() {
-            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-            //     "@pages/governance/components/neurons/details/Details"
-            //   );
-            //   return {
-            //     loader: NeuronsDetailsLoader,
-            //     Component: NeuronsDetails,
-            //   };
-            // },
           },
           {
             path: "neurons/details",
             element: <NeuronsDetails />,
-            // async lazy() {
-            //   const { NeuronsDetailsLoader, NeuronsDetails } = await import(
-            //     "@pages/governance/components/neurons/details/Details"
-            //   );
-            //   return {
-            //     loader: NeuronsDetailsLoader,
-            //     Component: NeuronsDetails,
-            //   };
-            // },
           },
         ],
       },
@@ -136,15 +91,44 @@ const router = createBrowserRouter([
       },
       {
         path: "token-distribution",
+        element: <TokenDistribution />,
+      },
+      {
+        path: "explorer",
         children: [
           {
             index: true,
-            element: <TokenDistribution />,
+            loader: ({ request }) =>
+              redirectWithSearch(request, "/transaction-history"),
+          },
+          {
+            path: "transactions/:index",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/${params.index}`
+              ),
+          },
+          {
+            path: "transactions/accounts/:accountId",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/accounts/${params.accountId}`
+              ),
+          },
+          {
+            path: "transactions/accounts/:accountId/history",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/accounts/${params.accountId}/history`
+              ),
           },
         ],
       },
       {
-        path: "explorer",
+        path: "transaction-history",
         children: [
           {
             index: true,
@@ -154,15 +138,15 @@ const router = createBrowserRouter([
             path: "transactions",
             children: [
               {
-                path: "/explorer/transactions/:index",
+                path: "/transaction-history/transactions/:index",
                 element: <TransactionsDetails />,
               },
               {
-                path: "/explorer/transactions/accounts/:accountId",
+                path: "/transaction-history/transactions/accounts/:accountId",
                 element: <TransactionsAccountsDetails />,
               },
               {
-                path: "/explorer/transactions/accounts/:accountId/history",
+                path: "/transaction-history/transactions/accounts/:accountId/history",
                 element: <TransactionsAccountHistory />,
               },
             ],
@@ -181,7 +165,6 @@ const router = createBrowserRouter([
       },
       {
         path: "recovery",
-        // element: <ProtectedRoute />,
         children: [
           {
             index: true,
@@ -203,14 +186,6 @@ const router = createBrowserRouter([
         element: <Calculator />,
       },
       {
-        path: "certificates",
-        element: <Categories />,
-      },
-      {
-        path: "certificates/:category",
-        element: <Collections />,
-      },
-      {
         path: "*",
         element: <NotFound />,
       },
@@ -218,66 +193,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const clearPlugWalletSession = () => {
-  const key = "dfinityWallet";
-  if (localStorage.getItem(key) === "plug") {
-    localStorage.removeItem(key);
-  }
-};
-
 const App = () => {
-  useEffect(() => {
-    clearPlugWalletSession();
-  }, []);
-
-  useWalletInit({
-    host: "https://identity.ic0.app",
-    derivationOrigin: "https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io",
-    whitelist: [
-      SNS_GOVERNANCE_CANISTER_ID,
-      SNS_LEDGER_CANISTER_ID,
-      LEGACY_LEDGER_CANISTER_ID,
-      TOKEN_METRICS_CANISTER_ID,
-      OGY_TOKEN_SWAP_CANISTER_ID,
-      SNS_REWARDS_CANISTER_ID,
-      TOKEN_STATS_CANISTER_ID,
-      ICP_LEDGER_CANISTER_ID,
-    ],
-    canisters: {
-      governance: {
-        canisterId: SNS_GOVERNANCE_CANISTER_ID,
-        idlFactory: governanceIdl,
-      },
-      ledger: {
-        canisterId: SNS_LEDGER_CANISTER_ID,
-        idlFactory: ledgerIdl,
-      },
-      ledgerLegacy: {
-        canisterId: LEGACY_LEDGER_CANISTER_ID,
-        idlFactory: ledgerLegacyIdl,
-      },
-      ledgerICP: {
-        canisterId: ICP_LEDGER_CANISTER_ID,
-        idlFactory: ledgerLegacyIdl,
-      },
-      tokenMetrics: {
-        canisterId: TOKEN_METRICS_CANISTER_ID,
-        idlFactory: tokenMetricsIdl,
-      },
-      collectionIndex: {
-        canisterId: COLLECTION_INDEX_CANISTER_ID,
-        idlFactory: collectionIndexIdl,
-      },
-      OGYTokenSwap: {
-        canisterId: OGY_TOKEN_SWAP_CANISTER_ID,
-        idlFactory: OGYTokenSwapIdl,
-      },
-      SNSRewards: {
-        canisterId: SNS_REWARDS_CANISTER_ID,
-        idlFactory: SNSRewardsIdl,
-      },
-    },
-  });
   return (
     <ReactRouterProvider router={router} fallbackElement={<p>Loading...</p>} />
   );

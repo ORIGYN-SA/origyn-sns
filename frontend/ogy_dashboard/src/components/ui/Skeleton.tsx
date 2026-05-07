@@ -1,28 +1,22 @@
-import Skeleton from "react-loading-skeleton";
-import styled from "styled-components";
-import "react-loading-skeleton/dist/skeleton.css";
-
-const StyledSkeleton = styled.div`
-  .react-loading-skeleton {
-    --base-color: rgba(var(--color-accent) / 0.08);
-    --highlight-color: rgba(var(--color-accent) / 0.4);
-  }
-`;
-
-const SkeletonCmp = ({
-  className,
-  count = 1,
-  height = undefined,
-}: {
+interface SkeletonProps {
   className?: string;
   count?: number;
   height?: string | number;
-}) => {
+}
+
+const Skeleton = ({ className, count = 1, height }: SkeletonProps) => {
+  const style = height !== undefined ? { height } : undefined;
   return (
-    <StyledSkeleton className={className}>
-      <Skeleton count={count} height={height} />
-    </StyledSkeleton>
+    <div className={className}>
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className="block rounded animate-pulse bg-[rgb(var(--color-accent)/0.2)] my-1 h-4 last:mb-0 first:mt-0"
+          style={style}
+        />
+      ))}
+    </div>
   );
 };
 
-export default SkeletonCmp;
+export default Skeleton;

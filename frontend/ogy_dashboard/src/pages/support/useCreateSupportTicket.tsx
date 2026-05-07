@@ -14,21 +14,13 @@ const sendSupportRequest = async ({
   description,
   principal,
 }: supportRequestProps) => {
-  const result = (await ogyAPI.post(
-    `/contact`,
-    {
-      name,
-      email,
-      message: `${description} User Principal:${principal}`,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )) as Response;
+  const { data } = await ogyAPI.post(`/contact`, {
+    name,
+    email,
+    message: `${description} User Principal:${principal}`,
+  });
 
-  return result;
+  return data;
 };
 
 const useCreateSupportTicket = () => {

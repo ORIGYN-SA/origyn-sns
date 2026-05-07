@@ -10,7 +10,13 @@ import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { ChartData } from "@services/types/charts.types";
 import { HistoryData } from "@services/types/token_metrics";
 
-const useAccountBalanceHistory = ({ account }: { account: string }) => {
+const useAccountBalanceHistory = ({
+  account,
+  days = 30,
+}: {
+  account: string;
+  days?: number;
+}) => {
   const [data, setData] = useState<
     { total: string; dataChart: ChartData[] } | undefined
   >(undefined);
@@ -21,17 +27,21 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
     isError,
     error,
   }: UseQueryResult<Array<[bigint, HistoryData]>> = useQuery({
-    queryKey: ["accountBalanceHistory", account],
-    queryFn: () => fetchAccountBalanceHistory({ account }),
+    queryKey: ["accountBalanceHistory", account, days],
+    queryFn: () => fetchAccountBalanceHistory({ account, days }),
     placeholderData: keepPreviousData,
   });
 
   useEffect(() => {
     if (isSuccess && response) {
-      const results = response.map((r) => {
+      const firstNonZero = response.findIndex((r) => r[1].balance > 0n);
+      const trimmed =
+        firstNonZero > 0 ? response.slice(firstNonZero) : response;
+      const format = days > 90 ? "LLL yyyy" : "LLL dd";
+      const results = trimmed.map((r) => {
         const name = DateTime.fromMillis(0)
           .plus({ days: Number(r[0]) })
-          .toFormat("LLL dd");
+          .toFormat(format);
         const value = divideBy1e8(r[1].balance);
         return {
           name,
@@ -44,7 +54,7 @@ const useAccountBalanceHistory = ({ account }: { account: string }) => {
         total: results[results.length - 1]?.valueToString ?? "0",
       });
     }
-  }, [isSuccess, response]);
+  }, [isSuccess, response, days]);
 
   return {
     data,

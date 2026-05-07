@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   useQuery,
   keepPreviousData,
@@ -25,9 +24,6 @@ interface IFoundationReserve {
 }
 
 const useOGYCirculationState = () => {
-  const [foundationReserve, setFoundationReserve] =
-    useState<IFoundationReserve | null>(null);
-
   const {
     data,
     isSuccess,
@@ -45,49 +41,49 @@ const useOGYCirculationState = () => {
     placeholderData: keepPreviousData,
   });
 
-  useEffect(() => {
-    if (isSuccess && data) {
-      const totalSupply = data.total;
-      const totalSupplyLocked = data.total_locked;
-      const totalSupplyUnlocked = data.total - data.total_locked;
-      const totalStaked = data.total_staked;
-
-      setFoundationReserve({
-        number: {
-          totalSupply,
-          totalSupplyLocked,
-          totalSupplyUnlocked,
-          totalStaked,
-        },
-        string: {
-          totalSupply: roundAndFormatLocale({ number: totalSupply }),
-          totalSupplyLocked: roundAndFormatLocale({
-            number: totalSupplyLocked,
-          }),
-          totalSupplyUnlocked: roundAndFormatLocale({
-            number: totalSupplyUnlocked,
-          }),
-          totalStaked: roundAndFormatLocale({ number: totalStaked }),
-        },
-        dataPieChart: [
-          {
-            name: "Locked",
-            value: totalSupplyLocked,
-            valueToString: roundAndFormatLocale({
-              number: totalSupplyLocked,
-            }),
-          },
-          {
-            name: "Unlocked",
-            value: totalSupplyUnlocked,
-            valueToString: roundAndFormatLocale({
-              number: totalSupplyUnlocked,
-            }),
-          },
-        ],
-      });
-    }
-  }, [isSuccess, data]);
+  const foundationReserve: IFoundationReserve | null =
+    isSuccess && data
+      ? (() => {
+          const totalSupply = data.total;
+          const totalSupplyLocked = data.total_locked;
+          const totalSupplyUnlocked = data.total - data.total_locked;
+          const totalStaked = data.total_staked;
+          return {
+            number: {
+              totalSupply,
+              totalSupplyLocked,
+              totalSupplyUnlocked,
+              totalStaked,
+            },
+            string: {
+              totalSupply: roundAndFormatLocale({ number: totalSupply }),
+              totalSupplyLocked: roundAndFormatLocale({
+                number: totalSupplyLocked,
+              }),
+              totalSupplyUnlocked: roundAndFormatLocale({
+                number: totalSupplyUnlocked,
+              }),
+              totalStaked: roundAndFormatLocale({ number: totalStaked }),
+            },
+            dataPieChart: [
+              {
+                name: "Locked",
+                value: totalSupplyLocked,
+                valueToString: roundAndFormatLocale({
+                  number: totalSupplyLocked,
+                }),
+              },
+              {
+                name: "Unlocked",
+                value: totalSupplyUnlocked,
+                valueToString: roundAndFormatLocale({
+                  number: totalSupplyUnlocked,
+                }),
+              },
+            ],
+          };
+        })()
+      : null;
 
   return { data: foundationReserve, isSuccess, isError, isLoading, error };
 };

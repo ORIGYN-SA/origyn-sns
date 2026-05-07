@@ -14,6 +14,7 @@ const useFetchOneAccountTransactions = ({
     isSuccess: isSuccessFetchAllTransactions,
     isError: isErrorFetchAllTransactions,
     isLoading: isLoadingFetchAllTransactions,
+    isFetching: isFetchingFetchAllTransactions,
     error: errorFetchAllTransactions,
   } = useQuery({
     queryKey: [
@@ -41,6 +42,7 @@ const useFetchOneAccountTransactions = ({
 
         return {
           index,
+          timestampRaw: timestamp ? Number(timestamp) : 0,
           timestamp: timestamp
             ? formatDate(timestamp, { fromMillis: true })
             : "",
@@ -65,6 +67,7 @@ const useFetchOneAccountTransactions = ({
       },
     },
     isLoading: isLoadingFetchAllTransactions,
+    isFetching: isFetchingFetchAllTransactions,
     isSuccess: isSuccessFetchAllTransactions,
     isError: isErrorFetchAllTransactions,
     error: errorFetchAllTransactions,

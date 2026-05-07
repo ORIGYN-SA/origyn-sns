@@ -1,9 +1,5 @@
 @import "../theme/preset.css";
 
-html {
-  scroll-behavior: smooth;
-}
-
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;

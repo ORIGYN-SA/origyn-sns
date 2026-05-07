@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Card, LoaderSpin, TooltipInfo } from "@components/ui";
+import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
+import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
 
@@ -100,46 +101,45 @@ const OrigynTreasuryAccount = ({
     }
   }, [isSuccessBalanceICP, isSuccessBalanceOGY, balanceICP, balanceOGY]);
 
-  return (
-    <Card className={`${className}`} {...restProps}>
-      <div className="text-lg font-semibold">ORIGYN Treasury Account (OTA)</div>
-      {isSuccessBalanceICP && isSuccessBalanceOGY && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          {data.map(({ value, token, className, logo, tooltip }) => (
-            <Card
-              className="bg-surface-2/40 dark:bg-surface-2 mt-8 pb-8"
-              key={token}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center text-lg font-semibold">
-                  <img src={logo} height={32} width={32} alt="Token logo" />
-                  <h2 className="ml-2 text-content/60">
-                    Network Revenue ({token})
-                  </h2>
-                </div>
-                <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
-              </div>
+  const isLoading = isLoadingBalanceICP || isLoadingBalanceOGY;
+  const isError = isErrorBalanceICP || isErrorBalanceOGY;
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
 
-              <div className="flex items-center mt-4 text-2xl font-semibold">
-                <span className="mr-3">{value}</span>
-                <span className="text-content/60">{token}</span>
-              </div>
-              <Card.BorderBottom className={`${className}`} />
-            </Card>
+  return (
+    <SkeletonOverlay loading={showSkeleton}>
+      <Card className={`${className}`} {...restProps}>
+        {hasError && <CardErrorOverlay title="ORIGYN Treasury Account (OTA)" />}
+        <div
+          data-skel-static
+          className="text-content text-[22px] font-semibold leading-none"
+        >
+          ORIGYN Treasury Account (OTA)
+        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
+          {data.map(({ value, token, className, logo, tooltip }) => (
+            <StatCard
+              key={token}
+              title={`Network Revenue (${token})`}
+              value={showSkeleton ? undefined : value}
+              unit={token}
+              loading={showSkeleton}
+              accessory={
+                <img
+                  src={logo}
+                  alt="Token logo"
+                  className="h-4 w-4 object-contain"
+                />
+              }
+              tooltip={
+                <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
+              }
+              underlineClassName={className}
+            />
           ))}
         </div>
-      )}
-      {(isLoadingBalanceICP || isLoadingBalanceOGY) && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
-        </div>
-      )}
-      {(isErrorBalanceICP || isErrorBalanceOGY) && (
-        <div className="flex items-center justify-center h-36 text-red-500 font-semibold">
-          <div>Network error: Unable to fetch OGY treasury account data</div>
-        </div>
-      )}
-    </Card>
+      </Card>
+    </SkeletonOverlay>
   );
 };
 

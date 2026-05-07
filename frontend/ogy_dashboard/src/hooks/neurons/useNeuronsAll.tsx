@@ -51,6 +51,7 @@ const useNeuronsAll = ({
         const stakedOGY = neuron?.stakedAmountToString;
         const stakedMaturity = neuron?.stakedMaturityToString;
         const createdAt = neuron?.createdAt;
+        const createdAtRaw = neuron?.createdAtRaw;
         const maxAgeBonusPercentage = neuron?.maxAgeBonusPercentage;
         const dissolveDelayBonus = neuron?.dissolveDelayBonus;
         return {
@@ -63,6 +64,7 @@ const useNeuronsAll = ({
           stakedOGY,
           stakedMaturity,
           createdAt,
+          createdAtRaw,
           details: [
             { id: "", label: "Date Created", value: createdAt },
             {

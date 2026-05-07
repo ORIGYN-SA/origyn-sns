@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import styled from "styled-components";
 import { colors } from "@theme/preset";
 import CustomTooltip from "../utils/CustomTooltip";
 import { millify } from "@helpers/numbers";
@@ -22,18 +21,6 @@ type AreaChart = {
   fill?: string;
 };
 
-const StyledAreaChart = styled(AreaChart)`
-  .recharts-cartesian-grid-vertical line {
-    stroke: ${colors.surface[3]} !important;
-  }
-  .recharts-cartesian-grid-horizontal line:first-child,
-  .recharts-cartesian-grid-horizontal line:last-child,
-  .recharts-cartesian-grid-vertical line:first-child,
-  .recharts-cartesian-grid-vertical line:last-child {
-    stroke-opacity: 0 !important;
-  }
-`;
-
 const Area = ({
   data = [
     { name: "27 feb", value: 2000 },
@@ -44,20 +31,20 @@ const Area = ({
     { name: "27 jul", value: 500 },
     { name: "27 aug", value: 200 },
   ],
-  fill = "#00A2F7",
+  fill = colors.sky,
 }: AreaChart) => {
   const minValue = Math.min(...data.map((d) => d.value));
   const maxValue = Math.max(...data.map((d) => d.value));
   return (
     <ResponsiveContainer>
-      <StyledAreaChart
+      <AreaChart
         width={500}
         height={400}
         data={data}
         margin={{
           top: 10,
-          right: 30,
-          left: 25,
+          right: 0,
+          left: 0,
           bottom: 0,
         }}
       >
@@ -67,11 +54,7 @@ const Area = ({
             <stop offset="100%" stopColor={fill} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid
-          vertical={true}
-          strokeDasharray="5 5"
-          horizontal={false}
-        />
+        <CartesianGrid vertical={false} horizontal={false} />
         <XAxis
           dataKey="name"
           tickLine={false}
@@ -82,6 +65,9 @@ const Area = ({
           tickFormatter={(value) => (value >= 1000 ? millify(value) : value)}
           tickLine={false}
           axisLine={false}
+          mirror
+          width={1}
+          tick={{ fill: colors.muted, fontSize: 12, dy: -8 }}
           domain={[
             Math.max(0, minValue - (maxValue - minValue) * 0.1),
             maxValue + (maxValue - minValue) * 0.1,
@@ -98,7 +84,7 @@ const Area = ({
           fillOpacity={1}
           fill={`url(#fill${fill})`}
         />
-      </StyledAreaChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 };

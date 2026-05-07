@@ -13,6 +13,7 @@ const useFetchAllTransactions = ({
     isSuccess: isSuccessFetchAllTransactions,
     isError: isErrorFetchAllTransactions,
     isLoading: isLoadingFetchAllTransactions,
+    isFetching: isFetchingFetchAllTransactions,
     error: errorFetchAllTransactions,
   } = useQuery({
     queryKey: ["fetchAllTransactions", limit, offset, sorting],
@@ -33,6 +34,7 @@ const useFetchAllTransactions = ({
 
         return {
           index,
+          timestampRaw: timestamp ? Number(timestamp) : 0,
           timestamp: timestamp
             ? formatDate(timestamp, { fromMillis: true })
             : "",
@@ -57,6 +59,7 @@ const useFetchAllTransactions = ({
       },
     },
     isLoading: isLoadingFetchAllTransactions,
+    isFetching: isFetchingFetchAllTransactions,
     isSuccess: isSuccessFetchAllTransactions,
     isError: isErrorFetchAllTransactions,
     error: errorFetchAllTransactions,

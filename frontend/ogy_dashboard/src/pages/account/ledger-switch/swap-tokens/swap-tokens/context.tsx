@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { useWallet } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
 
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useSendTokens from "@services/queries/switch-ledger/useSendTokens";
@@ -38,7 +38,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
   const sendTokens = useSendTokens();
   const requestSwap = useRequestSwap();
   const fetchBalanceLegacy = useFetchBalanceOGYLegacyOwner();
-  const { data: isWhitelisted } = useIsWhitelisted();
+  const { data: isWhitelisted } = useIsWhitelisted(principalId);
 
   const handleClose = () => {
     setShow(false);

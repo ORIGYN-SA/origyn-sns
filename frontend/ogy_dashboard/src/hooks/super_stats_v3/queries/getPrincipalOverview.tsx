@@ -1,6 +1,6 @@
 import { OverviewResponse as Overview } from "@hooks/token_metrics/declarations_files/token_metrics";
 
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 export const getPrincipalOverview = async ({
   principalId,

@@ -1,11 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { useCallback } from "react";
-import type { Location, useMatches } from "react-router-dom";
-import { ScrollRestoration, Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 
 import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/footer/Footer";
+import Warning from "@components/warning/Warning";
+import useScrollToTopOnNavigation from "@hooks/useScrollToTopOnNavigation";
+
+const SHOW_LEDGER_SWITCH_WARNING = true;
 
 const NavigationProgress = () => {
   return (
@@ -19,25 +19,27 @@ const NavigationProgress = () => {
 
 const Layout = () => {
   const navigation = useNavigation();
-
-  const getKey = useCallback(
-    (location: Location, matches: ReturnType<typeof useMatches>) => {
-      const match = matches.find((m) => m.handle?.scrollMode);
-      if (match?.handle?.scrollMode === "pathname") {
-        return location.pathname;
-      }
-      return location.key;
-    },
-    []
-  );
+  useScrollToTopOnNavigation();
 
   return (
-    <div className="flex flex-col h-screen">
-      <Navbar />
-      <div className="flex-grow">
-        {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
+    <div
+      className="flex flex-col min-h-screen bg-background"
+      style={
+        SHOW_LEDGER_SWITCH_WARNING
+          ? {
+              background:
+                "linear-gradient(to bottom, rgb(var(--color-charcoal)) 0, rgb(var(--color-charcoal)) 58px, rgb(var(--color-background)) 58px)",
+            }
+          : undefined
+      }
+    >
+      {SHOW_LEDGER_SWITCH_WARNING && <Warning />}
+      <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
+      <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
+        <div className="max-w-[1440px] mx-auto">
+          {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
+        </div>
       </div>
-      <ScrollRestoration getKey={getKey} />
       <Footer />
     </div>
   );

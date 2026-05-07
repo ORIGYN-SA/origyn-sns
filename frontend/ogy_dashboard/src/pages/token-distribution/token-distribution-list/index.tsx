@@ -1,143 +1,168 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ColumnDef } from "@tanstack/react-table";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { Table, Tooltip, Skeleton, TooltipInfo } from "@components/ui";
+import { NewTable, TooltipInfo, TablePagination } from "@components/ui";
+import { NewTableColumn } from "@components/ui/NewTable";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
-import { IProposalData } from "@services/types";
 import { TableProps } from "@helpers/table/useTable";
+
+type TokenDistributionRow = {
+  principal: string;
+  tag?: string;
+  total: string;
+  governanceBalance: string;
+  ledgerBalance: string;
+  weight: string;
+};
+
+type TokenDistributionListProps = Required<
+  Pick<TableProps, "pagination" | "setPagination">
+>;
+
+const zeroOrDash = (value: string | undefined) => {
+  if (!value) return "-";
+  const numeric = parseFloat(value.replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(numeric) && numeric === 0 ? "-" : value;
+};
 
 const TokenDistributionList = ({
   pagination,
   setPagination,
-  sorting,
-  setSorting,
-}: TableProps) => {
+}: TokenDistributionListProps) => {
   const navigate = useNavigate();
-  const columns = useMemo<ColumnDef<IProposalData>[]>(
-    () => [
-      {
-        accessorKey: "principal",
-        id: "principal",
-        cell: ({ getValue, row }) => (
-          <div className="flex items-center md:max-w-sm max-w-64">
-            <>
-              <button
-                data-tooltip-id="tooltip_address"
-                data-tooltip-content={getValue()}
-                className="mr-2 truncate"
-                onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${getValue()}`)
-                }
-              >
-                {getValue()}
-              </button>
-            </>
-            <CopyToClipboard value={getValue()} />
-
-            {row?.original?.tag && (
-              <div className="ml-3">
-                <TooltipInfo
-                  id={`tooltip_${row?.original?.tag}`}
-                  clickable={false}
-                >
-                  {row?.original?.tag}
-                </TooltipInfo>
-              </div>
-            )}
-          </div>
-        ),
-        header: "Address",
-        meta: {
-          className: "text-left",
-        },
-      },
-      {
-        accessorKey: "total",
-        id: "total",
-        cell: ({ getValue }) => getValue(),
-        header: "Total",
-      },
-      {
-        accessorKey: "governanceBalance",
-        id: "governanceBalance",
-        cell: ({ getValue }) => <div className="">{getValue()}</div>,
-        header: (
-          <div className="flex items-center space-x-1">
-            <span>Governance Balance</span>
-            <TooltipInfo id="governance-balance-staked-tokens-tooltip">
-              Staked tokens
-            </TooltipInfo>
-          </div>
-        ),
-      },
-      {
-        accessorKey: "ledgerBalance",
-        id: "ledgerBalance",
-        cell: ({ getValue }) => <div className="">{getValue()}</div>,
-        header: "Ledger Balance",
-      },
-      {
-        accessorKey: "weight",
-        id: "weight",
-        cell: ({ getValue }) => <div className="">{getValue()}</div>,
-        header: "Weight In Total Supply",
-      },
-      // {
-      //   header: "View",
-      //   accessorKey: "view",
-      //   cell: (props) => (
-      //     <div className="flex justify-center items-center shrink-0 rounded-full bg-surface border border-border hover:bg-surface-2 w-10 h-10">
-      //       <button onClick={() => handleClickView(props)}>
-      //         <EyeIcon className="h-5 w-5" />
-      //       </button>
-      //     </div>
-      //   ),
-      // },
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   const {
     data,
     isSuccess: isSuccessFetchTokenHolders,
-    isLoading: isLoadingFetchTokenHolders,
-    isError: isErrorFetchTokenHolders,
-    error: errorFetchTokenHolders,
+    isFetching: isFetchingFetchTokenHolders,
   } = useTokenDistribution({
-    limit: pagination?.pageSize as number,
-    offset: (pagination.pageSize * pagination.pageIndex) as number,
+    limit: pagination.pageSize,
+    offset: pagination.pageSize * pagination.pageIndex,
   });
 
-  // const handleClickView = (cell) => {
-  //   navigate({
-  //     pathname: "/proposals/details",
-  //     search: createSearchParams({ id: cell?.row?.original?.id }).toString(),
-  //   });
-  // };
+  const pageIndex = pagination.pageIndex;
+  const pageSize = pagination.pageSize;
+  const pageCount = data?.list.pageCount ?? 0;
+
+  const goToPage = (next: number) => {
+    setPagination((prev) => ({ ...prev, pageIndex: next }));
+  };
+
+  const handlePageSizeChange = (next: number) => {
+    setPagination(() => ({ pageIndex: 0, pageSize: next }));
+  };
+
+  const rowCount = data?.list.rowCount ?? 0;
+  const expectedRowsOnThisPage =
+    rowCount > 0
+      ? Math.min(pageSize, Math.max(0, rowCount - pageIndex * pageSize))
+      : pageSize;
+
+  const FAKE_TOKEN_ROW = {
+    principal: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa",
+    total: "1,000,000.00",
+    governanceBalance: "500,000.00",
+    ledgerBalance: "500,000.00",
+    weight: "10.00%",
+    tag: "",
+  };
+  const skeletonRows = buildFakeRows(FAKE_TOKEN_ROW, expectedRowsOnThisPage);
+
+  const columns: NewTableColumn<TokenDistributionRow>[] = [
+    {
+      id: "principal",
+      header: "Address",
+      cell: (row) => (
+        <div className="flex items-center gap-2 md:w-96 w-64">
+          <button
+            className="truncate min-w-0 hover:underline"
+            onClick={() =>
+              navigate(
+                `/transaction-history/transactions/accounts/${row.principal}`
+              )
+            }
+          >
+            {row.principal}
+          </button>
+          <div className="ml-auto flex items-center gap-2 shrink-0">
+            <CopyToClipboard value={row.principal} />
+            {row?.tag ? (
+              <TooltipInfo id={`tooltip_${row.tag}`} clickable={false}>
+                {row.tag}
+              </TooltipInfo>
+            ) : (
+              <div className="inline-block w-4 h-4" aria-hidden="true" />
+            )}
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "total",
+      header: "Total",
+      cell: (row) => (
+        <div className="w-40">
+          <span>{zeroOrDash(row.total)}</span>
+        </div>
+      ),
+    },
+    {
+      id: "governanceBalance",
+      header: (
+        <div className="flex items-center gap-2 leading-none">
+          <span>Governance Balance</span>
+          <TooltipInfo
+            id="governance-balance-staked-tokens-tooltip"
+            className="!text-white/90 xl:translate-y-[1px]"
+          >
+            Staked tokens
+          </TooltipInfo>
+        </div>
+      ),
+      cell: (row) => (
+        <div className="w-40">
+          <span>{zeroOrDash(row.governanceBalance)}</span>
+        </div>
+      ),
+    },
+    {
+      id: "ledgerBalance",
+      header: "Ledger Balance",
+      cell: (row) => (
+        <div className="w-40">
+          <span>{zeroOrDash(row.ledgerBalance)}</span>
+        </div>
+      ),
+    },
+    {
+      id: "weight",
+      header: "Weight In Total Supply",
+      cell: (row) => (
+        <div className="w-20">
+          <span>{zeroOrDash(row.weight)}</span>
+        </div>
+      ),
+    },
+  ];
+
+  const paginationFooter = (
+    <TablePagination
+      pageIndex={pageIndex}
+      pageSize={pageSize}
+      pageCount={pageCount}
+      onPageChange={goToPage}
+      onPageSizeChange={handlePageSizeChange}
+    />
+  );
+
+  const rows =
+    isFetchingFetchTokenHolders || !isSuccessFetchTokenHolders || !data
+      ? skeletonRows
+      : data.list.rows;
 
   return (
     <div>
-      {isSuccessFetchTokenHolders && data && (
-        <Table
-          columns={columns}
-          data={data.list}
-          pagination={pagination}
-          setPagination={setPagination}
-          sorting={sorting}
-          setSorting={setSorting}
-        />
-      )}
-      {isLoadingFetchTokenHolders && <Skeleton count={10} height={52} />}
-      {isErrorFetchTokenHolders && (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorFetchTokenHolders?.message}</div>
-        </div>
-      )}
-      <Tooltip id="tooltip_address" />
+      <NewTable columns={columns} data={rows} footer={paginationFooter} />
     </div>
   );
 };

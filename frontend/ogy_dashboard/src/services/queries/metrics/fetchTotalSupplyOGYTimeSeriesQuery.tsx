@@ -12,7 +12,7 @@ import {
 import { ChartData } from "@services/types/charts.types";
 
 export interface TotalSupplyOGYTimeSeriesParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalSupplyOGYTimeSeries>;
   period: string;
 }
 

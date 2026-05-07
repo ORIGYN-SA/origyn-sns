@@ -8,7 +8,7 @@ import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { ChartData } from "@services/types/charts.types";
 
 export interface AccountTransactionsParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TransactionsDetails>;
   accountPrincipal?: string | null; // princiapal string
 }
 

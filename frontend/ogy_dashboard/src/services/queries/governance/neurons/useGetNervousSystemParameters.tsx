@@ -1,5 +1,6 @@
 import { keepPreviousData } from "@tanstack/react-query";
-import { useWallet, getActor } from "@amerej/artemis-react";
+import { useWallet } from "@components/auth/useWallet";
+import { getActor } from "@services/actor";
 
 interface ISystemNervousParametersResult {
   max_neuron_age_for_age_bonus: bigint[];

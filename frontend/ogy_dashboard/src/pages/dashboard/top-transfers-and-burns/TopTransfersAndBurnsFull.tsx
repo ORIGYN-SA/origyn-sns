@@ -1,7 +1,9 @@
 import { useMemo } from "react";
-import { Badge, Skeleton } from "@components/ui";
+import { Badge, SkeletonOverlay } from "@components/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table } from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTopTransfersAndBurns, {
   TransformedData,
 } from "@hooks/metrics/useTopTransfersAndBurns";
@@ -15,16 +17,28 @@ interface TopTransfersAndBurnsFullProps {
   limit: number;
 }
 
+const FAKE_ROW: TransformedData = {
+  hash: "0000000000000000000000000000000000000000000000000000000000000000",
+  from: "0000000000000000000000000000000000000000000000000000000000000000",
+  to: "0000000000000000000000000000000000000000000000000000000000000000",
+  value: "0",
+  fee: "0",
+  time: "—",
+};
+
 const TopTransfersAndBurnsFull = ({
   type,
   title,
   limit,
 }: TopTransfersAndBurnsFullProps) => {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useTopTransfersAndBurns({
+  const { data, isSuccess, isLoading, isError } = useTopTransfersAndBurns({
     type,
     limit,
   });
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
+  const hasData = isSuccess && data && data.length > 0;
 
   const columns: ColumnDef<TransformedData>[] = useMemo(() => {
     const baseColumns: ColumnDef<TransformedData>[] = [
@@ -43,7 +57,9 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
+                  navigate(
+                    `/transaction-history/transactions/accounts/${address}`
+                  )
                 }
               >
                 {address}
@@ -79,8 +95,8 @@ const TopTransfersAndBurnsFull = ({
         header: "Time",
         cell: ({ getValue }) => (
           <div>
-            <Badge className="bg-slate-500/20 px-2">
-              <div className="text-slate-500 text-xs font-semibold shrink-0">
+            <Badge className="border border-border-strong bg-surface-2 px-2">
+              <div className="text-xs font-semibold text-content/80 shrink-0">
                 {String(getValue())}
               </div>
             </Badge>
@@ -100,7 +116,9 @@ const TopTransfersAndBurnsFull = ({
               <button
                 className="mr-2 truncate"
                 onClick={() =>
-                  navigate(`/explorer/transactions/accounts/${address}`)
+                  navigate(
+                    `/transaction-history/transactions/accounts/${address}`
+                  )
                 }
               >
                 {address}
@@ -115,29 +133,28 @@ const TopTransfersAndBurnsFull = ({
     return baseColumns;
   }, [type, navigate]);
 
+  const rows = showSkeleton || !hasData ? buildFakeRows(FAKE_ROW, limit) : data;
+  const showEmptyState =
+    !showSkeleton && isSuccess && (!data || data.length === 0);
+
   return (
     <>
       <h1 className="text-4xl sm:text-6xl font-bold text-center mt-16 mb-16">
         {title}
       </h1>
-      {isLoading && <Skeleton count={limit} height={52} />}
-      {isError && (
-        <div className="text-red-500">
-          An error occurred: {error?.message || "Unknown error"}
-        </div>
-      )}
-      {data && data.length > 0 ? (
-        <div className="w-10/12 mx-auto my-8">
-          <Table
-            columns={columns}
-            data={data.map((item, index) => ({ ...item, index }))}
-          />
-        </div>
-      ) : (
-        !isLoading && (
-          <div className="text-center text-gray-500">No data available.</div>
-        )
-      )}
+      <div className="relative w-10/12 mx-auto my-8">
+        {showEmptyState ? (
+          <div className="text-center text-muted">No data available.</div>
+        ) : (
+          <SkeletonOverlay loading={showSkeleton}>
+            <Table
+              columns={columns}
+              data={rows.map((item, index) => ({ ...item, index }))}
+            />
+          </SkeletonOverlay>
+        )}
+        {hasError && <CardErrorOverlay title={title} />}
+      </div>
     </>
   );
 };
