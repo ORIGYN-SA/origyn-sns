@@ -1,20 +1,18 @@
 import { useMemo, useState } from "react";
 import { useWallet } from "@components/auth/useWallet";
 import Auth from "@components/auth/Auth";
-import { Card, Select } from "@components/ui";
+import { Card, PageContainer, Select } from "@components/ui";
 import TransferICP from "./transfer/TransferICP";
 
 const Recovery = () => {
-  //   const navigate = useNavigate();
   const { isConnected } = useWallet();
   const [token, setToken] = useState("");
   const selectOptions = useMemo(() => [{ value: "ICP" }], []);
 
-  //   const handleOnClick = () => null;
   const handleOnChangeSelect = (value: string) => setToken(value);
 
   return (
-    <div className="container mx-auto pt-8 pb-16 px-4">
+    <PageContainer className="container max-w-none pt-8 pb-16 px-4">
       <div className="flex flex-col items-center min-h-96 gap-4 mt-8">
         <div className="max-w-2xl">
           <div className="text-center mb-8">
@@ -58,7 +56,7 @@ const Recovery = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 
