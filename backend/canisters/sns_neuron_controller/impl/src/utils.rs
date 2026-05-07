@@ -127,68 +127,57 @@ impl ClaimRewardResult {
 }
 
 // TODO: think of outstanding payments struct in this context
-pub async fn distribute_rewards(sns_ledger_canister_id: Principal) -> Result<(), String> {
-    let rewards_destination = read_state(|state| state.data.rewards_destination);
-    match rewards_destination {
-        None => {
-            info!("No rewards destination found");
-            return Ok(());
-        }
-        Some(rewards_destination) => {
-            info!("Distributing rewards to {}", rewards_destination);
+pub async fn distribute_rewards(
+    sns_ledger_canister_id: Principal,
+    rewards_destination: Account,
+) -> Result<(), String> {
+    let fee = icrc_ledger_canister_c2c_client::icrc1_fee(sns_ledger_canister_id)
+        .await
+        .unwrap();
+    // Transfer all the tokens to sns_rewards to be distributed
+    match icrc_ledger_canister_c2c_client::icrc1_balance_of(
+        sns_ledger_canister_id,
+        &(Account {
+            owner: ic_cdk::api::canister_self(),
+            subaccount: None,
+        }),
+    )
+    .await
+    {
+        Ok(balance) => {
+            // Check if balance is sufficient to cover the fee
+            if balance <= fee {
+                info!("Balance is too low to cover the fee. Skipping transfer.");
+                return Ok(());
+            }
 
-            let fee = icrc_ledger_canister_c2c_client::icrc1_fee(sns_ledger_canister_id)
-                .await
-                .map_err(|e| format!("Failed to fetch fee: {:?}", e))?;
-
-            // Transfer all the tokens to sns_rewards to be distributed
-            match icrc_ledger_canister_c2c_client::icrc1_balance_of(
+            match transfer_token(
+                [0; 32],
+                rewards_destination,
                 sns_ledger_canister_id,
-                &(Account {
-                    owner: ic_cdk::api::canister_self(),
-                    subaccount: None,
-                }),
+                balance - fee,
             )
             .await
             {
-                Ok(balance) => {
-                    if balance <= fee {
-                        info!(
-                            "Insufficient balance ({}) to cover ledger fee ({}). Skipping distribution.",
-                            balance, fee
-                        );
-                        return Ok(());
-                    }
+                Ok(_) => {
+                    info!("Successfully transferred rewards");
 
-                    match transfer_token(
-                        [0; 32],
-                        rewards_destination.into(),
-                        sns_ledger_canister_id,
-                        balance - fee,
-                    )
-                    .await
-                    {
-                        Ok(_) => {
-                            info!("Successfully transferred rewards");
-                            Ok(())
-                        }
-                        Err(error_message) => {
-                            let error_message =
-                                format!("Error during transfer rewards: {}", error_message);
-                            error!(error_message);
-                            Err(error_message)
-                        }
-                    }
+                    Ok(())
                 }
-                Err(e) => {
-                    let error_message = format!(
-                        "Failed to fetch token balance of sns_neuron_controller from ledger canister id {} with ERROR : {:?}",
-                        sns_ledger_canister_id, e
-                    );
-                    error!("{}", error_message);
+                Err(error_message) => {
+                    let error_message = format!("Error during transfer rewards: {}", error_message);
+                    error!(error_message);
                     Err(error_message)
                 }
             }
+        }
+        Err(e) => {
+            let error_message = format!(
+                "Failed to fetch token balance of sns_neuron_controller from ledger canister id {} with ERROR : {:?}",
+                sns_ledger_canister_id, e
+            );
+            error!("{}", error_message);
+            Err(error_message)
         }
     }
 }

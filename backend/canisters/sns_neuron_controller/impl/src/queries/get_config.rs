@@ -4,7 +4,7 @@ use bity_ic_canister_tracing_macros::trace;
 use ic_cdk_macros::query;
 pub use sns_neuron_controller_api_canister::get_config::{
     GetConfigArgs, GetConfigResponse, GoldaoManagerConfig, IcpManagerConfig, ManagerConfig,
-    ManagerType, OgyManagerConfig,
+    ManagerType,
 };
 
 #[query]
@@ -20,14 +20,6 @@ fn get_config(args: GetConfigArgs) -> GetConfigResponse {
                     goldao_sns_ledger_canister_id: goldao_manager.goldao_sns_ledger_canister_id,
                     goldao_sns_rewards_canister_id: goldao_manager.goldao_sns_rewards_canister_id,
                     goldao_rewards_threshold: goldao_manager.goldao_rewards_threshold.clone(),
-                })
-            }
-            ManagerType::ICP => {
-                let icp_manager = &state.data.neuron_managers.icp;
-                ManagerConfig::IcpConfig(IcpManagerConfig {
-                    nns_governance_canister_id: icp_manager.nns_governance_canister_id,
-                    nns_ledger_canister_id: icp_manager.nns_ledger_canister_id,
-                    icp_rewards_threshold: icp_manager.icp_rewards_threshold.clone(),
                 })
             }
         };

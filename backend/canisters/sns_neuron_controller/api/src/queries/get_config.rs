@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum ManagerType {
     GOLDAO,
-    ICP,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]

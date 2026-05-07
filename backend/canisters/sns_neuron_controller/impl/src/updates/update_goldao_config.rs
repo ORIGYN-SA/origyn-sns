@@ -49,5 +49,9 @@ fn update_config_impl(
         state.data.neuron_managers.goldao.goldao_rewards_threshold = goldao_rewards_threshold;
     }
 
+    if let Some(reward_tokens) = args.reward_tokens {
+        state.data.neuron_managers.goldao.reward_tokens.extend(reward_tokens);
+    }
+
     UpdateGoldaoConfigResponse::Success
 }

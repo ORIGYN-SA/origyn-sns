@@ -7,7 +7,7 @@ use candid::Nat;
 use candid::Principal;
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::Account;
-use types::CanisterId;
+use types::{CanisterId, TokenSymbol};
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct WtnManager {
@@ -51,18 +51,22 @@ impl NeuronManager for WtnManager {}
 use crate::utils::ClaimRewardResult;
 #[async_trait]
 impl NeuronRewardsManager for WtnManager {
-    fn get_rewards_threshold(&self) -> Nat {
+    fn get_reward_tokens(&self) -> Vec<TokenSymbol> {
+        vec![TokenSymbol::WTN]
+    }
+
+    fn get_rewards_threshold(&self, _token: TokenSymbol) -> Nat {
         self.wtn_rewards_threshold.clone()
     }
 
     // NOTE: this method is not fetching the current available rewards.
     // It uses internal canister state (last fetched neurons) to do it,
     // so before calling it it's obligatory to fetch neurons
-    async fn get_available_rewards(&self) -> Nat {
+    async fn get_available_rewards(&self, _token: TokenSymbol) -> Nat {
         self.get_available_sns_rewards().await
     }
 
-    async fn claim_rewards(&self) -> ClaimRewardResult {
+    async fn claim_rewards(&self, _token: TokenSymbol) -> ClaimRewardResult {
         let sns_rewards_canister_id = read_state(|state| state.data.rewards_destination)
             .unwrap_or(ic_cdk::api::canister_self()); // NOTE: claim rewards to the destination principal if set, otherwise claim to itself
         self.claim_sns_rewards(Account {

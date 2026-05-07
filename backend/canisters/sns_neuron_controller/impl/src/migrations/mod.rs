@@ -3,9 +3,7 @@ use utils::env::CanisterEnv;
 
 use crate::state::NeuronManagers;
 use crate::state::RuntimeState;
-use crate::types::icp_neuron_manager::IcpManager;
 use crate::types::GoldaoManager;
-use crate::types::WtnManager;
 
 use self::types::state::RuntimeStateV0;
 use crate::state::Data;
@@ -22,12 +20,9 @@ impl From<RuntimeStateV0> for RuntimeState {
             ),
             data: Data {
                 authorized_principals: old_state.data.authorized_principals,
-                rewards_destination: old_state.data.rewards_destination,
                 neuron_managers: NeuronManagers {
                     now: old_state.data.neuron_managers.now,
                     goldao: GoldaoManager::default(),
-                    wtn: WtnManager::default(),
-                    icp: IcpManager::default(),
                 },
             },
         }

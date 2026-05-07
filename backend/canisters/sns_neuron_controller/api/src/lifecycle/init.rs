@@ -1,6 +1,8 @@
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Nat, Principal};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use types::TokenSymbol;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct InitArgs {
@@ -9,9 +11,6 @@ pub struct InitArgs {
     pub commit_hash: String,
     pub authorized_principals: Vec<Principal>,
     pub goldao_manager_config: GoldaoManagerConfig,
-    pub icp_manager_config: IcpManagerConfig,
-    pub wtn_manager_config: WtnManagerConfig,
-    pub rewards_destination: Option<Principal>,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
@@ -27,6 +26,8 @@ pub struct GoldaoManagerConfig {
     pub goldao_sns_ledger_canister_id: Principal,
     pub goldao_sns_rewards_canister_id: Principal,
     pub goldao_rewards_threshold: Nat,
+    /// Maps each reward token to its distribution destination
+    pub reward_tokens: HashMap<TokenSymbol, Principal>,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]

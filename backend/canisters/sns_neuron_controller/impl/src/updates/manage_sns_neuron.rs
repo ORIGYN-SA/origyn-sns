@@ -58,12 +58,5 @@ pub fn get_governance_canister_id(neuron_type: NeuronType) -> CanisterId {
                 .goldao
                 .goldao_sns_governance_canister_id
         }),
-        NeuronType::WTN => read_state(|state| {
-            state
-                .data
-                .neuron_managers
-                .wtn
-                .wtn_sns_governance_canister_id
-        }),
     }
 }

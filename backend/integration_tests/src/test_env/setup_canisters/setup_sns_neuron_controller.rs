@@ -5,6 +5,8 @@ use candid::encode_one;
 use candid::Nat;
 use candid::Principal;
 use pocket_ic::PocketIc;
+use std::collections::HashMap;
+use types::TokenSymbol;
 
 pub fn setup(
     pic: &PocketIc,
@@ -37,22 +39,19 @@ pub fn setup(
             version: BuildVersion::min(),
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![*controller, ogy_sns_governance_canister_id],
-            rewards_destination,
             goldao_manager_config: sns_neuron_controller_api_canister::init::GoldaoManagerConfig {
                 goldao_sns_governance_canister_id,
                 goldao_sns_ledger_canister_id,
                 goldao_sns_rewards_canister_id,
                 goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64),
-            },
-            wtn_manager_config: sns_neuron_controller_api_canister::init::WtnManagerConfig {
-                wtn_sns_governance_canister_id,
-                wtn_sns_ledger_canister_id,
-                wtn_rewards_threshold: Nat::from(5_000_000_000_000_u64),
-            },
-            icp_manager_config: sns_neuron_controller_api_canister::init::IcpManagerConfig {
-                nns_governance_canister_id,
-                nns_ledger_canister_id,
-                icp_rewards_threshold: Nat::from(10_000_u64),
+                reward_tokens: {
+                    let dest = rewards_destination.unwrap_or(canister_id);
+                    let mut map = HashMap::new();
+                    map.insert(TokenSymbol::ICP, dest);
+                    map.insert(TokenSymbol::WTN, dest);
+                    map.insert(TokenSymbol::OGY, dest);
+                    map
+                },
             },
         },
     );
