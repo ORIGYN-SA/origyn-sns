@@ -131,7 +131,7 @@ export const Governance = () => {
       </section>
 
       <div className="px-4 pb-16">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8 mt-16 mb-12">
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-8 mt-16 mb-12">
           <div className="text-center xl:text-left">
             <h2 className="text-[28px] font-bold leading-none text-content">
               Tokens in Governance

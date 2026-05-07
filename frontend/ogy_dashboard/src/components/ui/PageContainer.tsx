@@ -6,7 +6,7 @@ type PageContainerProps = {
 };
 
 const PageContainer = ({ children, className = "" }: PageContainerProps) => (
-  <div className={`max-w-[1287px] mx-auto pt-0 pb-16 px-6 ${className}`}>
+  <div className={`max-w-[1287px] mx-auto pb-16 px-6 ${className}`}>
     {children}
   </div>
 );

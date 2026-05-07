@@ -23,12 +23,12 @@ export const Account = () => {
         />
       </div>
       <LedgerSwitch className="mb-8" />
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <AvailableOGY />
         <StakedOGY />
         <StakedRewards />
       </div>
-      <div className="mt-16">
+      <div className="mt-8">
         <NeuronsList />
       </div>
     </PageContainer>
