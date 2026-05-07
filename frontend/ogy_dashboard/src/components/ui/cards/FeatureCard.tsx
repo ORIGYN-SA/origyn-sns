@@ -20,18 +20,18 @@ const FeatureCard: FC<FeatureCardProps> = ({
     className={clsx(
       "flex items-center gap-[10px] h-[88px] border border-border-faint rounded-[16px] p-2",
       variant === "glass"
-        ? "bg-surface/50 backdrop-blur-xl"
-        : "bg-surface-1/50",
+        ? "bg-surface-1/85 backdrop-blur-xl"
+        : "bg-surface-1",
       className
     )}
   >
     {icon && (
-      <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-surface-faint rounded-[16px] text-muted opacity-70">
+      <div className="shrink-0 w-[72px] h-[72px] flex items-center justify-center bg-surface-2 rounded-[16px] text-content">
         {icon}
       </div>
     )}
     <div className="min-w-0">
-      <div className="font-medium text-[16px] leading-none text-muted">
+      <div className="font-medium text-[16px] leading-none text-content">
         {title}
       </div>
       <div className="mt-1 font-normal text-[13px] leading-none text-muted">

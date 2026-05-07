@@ -30,7 +30,7 @@ const LEDGER_SWITCH_CTA_CLASS = "!px-[25px] !py-0 text-[14px] leading-[48px]";
 const HeroBackground = () => (
   <div
     aria-hidden
-    className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+    className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden dark:hidden"
   >
     <div
       className="w-[1238px] aspect-[41/20]"
