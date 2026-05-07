@@ -88,25 +88,21 @@ async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManagerEnum) -> Re
             err.to_string()
         })?;
 
-    for (token, destination) in neuron_manager.get_reward_tokens() {
+    for (token, params) in neuron_manager.get_reward_tokens() {
         let available_rewards = neuron_manager.get_available_rewards(token).await;
-        let rewards_threshold = neuron_manager.get_rewards_threshold(token);
+
         info!(
             "[{}][{:?}] available_rewards: {:?}, rewards_threshold: {:?}",
-            manager_type,
-            token,
-            available_rewards,
-            rewards_threshold
+            manager_type, token, available_rewards, params.threshold
         );
 
-        if available_rewards >= rewards_threshold {
+        if available_rewards >= params.threshold {
             if neuron_manager.claim_rewards(token).await.is_not_failed() {
                 info!(
                     "[{}][{:?}] Claim succeeded, distributing rewards.",
-                    manager_type,
-                    token
+                    manager_type, token
                 );
-                let _ = neuron_manager.distribute_rewards(token, destination).await;
+                let _ = neuron_manager.distribute_rewards(token, params).await;
             } else {
                 error!(
                     "[{}][{:?}] Reward claim reported failure.",

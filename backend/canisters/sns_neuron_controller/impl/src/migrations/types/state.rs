@@ -34,10 +34,10 @@ pub struct NeuronManagersV0 {
     pub icp: IcpManagerV0,
 }
 
-use candid::CandidType;
 use crate::types::neurons::sns_neurons::Neurons;
-use candid::Nat;
 use bity_ic_types::CanisterId;
+use candid::CandidType;
+use candid::Nat;
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct GoldaoManagerV0 {
     pub goldao_sns_governance_canister_id: CanisterId,

@@ -9,6 +9,7 @@ use crate::{
 use candid::Nat;
 use candid::Principal;
 use icrc_ledger_types::icrc1::account::Account;
+use sns_neuron_controller_api_canister::init::TokenParams;
 use std::collections::HashMap;
 use std::time::Duration;
 use types::TokenSymbol;
@@ -56,10 +57,34 @@ fn test_process_goldao_neurons_happy_path() {
     let ogy_rewards_destination = Principal::from_slice(&[1, 2, 3, 0, 0, 0, 0, 0, 0, 0]);
 
     let mut reward_tokens = HashMap::new();
-    reward_tokens.insert(TokenSymbol::ICP, rewards_destination);
-    reward_tokens.insert(TokenSymbol::WTN, rewards_destination);
-    reward_tokens.insert(TokenSymbol::OGY, ogy_rewards_destination);
-    reward_tokens.insert(TokenSymbol::GOLDAO, rewards_destination);
+    reward_tokens.insert(
+        TokenSymbol::ICP,
+        TokenParams {
+            destination: rewards_destination,
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::WTN,
+        TokenParams {
+            destination: rewards_destination,
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::OGY,
+        TokenParams {
+            destination: ogy_rewards_destination,
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::GOLDAO,
+        TokenParams {
+            destination: rewards_destination,
+            threshold: 0,
+        },
+    );
 
     let sns_neuron_controller_id = env.install_sns_neuron_controller(
         Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap(),

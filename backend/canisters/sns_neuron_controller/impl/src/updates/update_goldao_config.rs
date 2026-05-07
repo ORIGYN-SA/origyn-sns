@@ -45,10 +45,6 @@ fn update_config_impl(
             .goldao_sns_rewards_canister_id = goldao_sns_rewards_canister_id;
     }
 
-    if let Some(goldao_rewards_threshold) = args.goldao_rewards_threshold {
-        state.data.neuron_managers.goldao.goldao_rewards_threshold = goldao_rewards_threshold;
-    }
-
     if let Some(reward_tokens) = args.reward_tokens {
         state
             .data

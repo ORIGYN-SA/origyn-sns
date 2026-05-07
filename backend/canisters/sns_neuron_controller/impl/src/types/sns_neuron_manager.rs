@@ -17,6 +17,7 @@ use sns_governance_canister::types::{
     },
     manage_neuron_response, ManageNeuron,
 };
+use sns_neuron_controller_api_canister::init::TokenParams;
 use std::collections::HashMap;
 use tracing::{error, trace};
 use types::{CanisterId, TokenSymbol};
@@ -196,8 +197,7 @@ pub trait NeuronManager: NeuronConfig {
 #[async_trait]
 #[enum_dispatch(NeuronManagerEnum)]
 pub trait NeuronRewardsManager: NeuronManager {
-    fn get_reward_tokens(&self) -> HashMap<TokenSymbol, Principal>;
-    fn get_rewards_threshold(&self, token: TokenSymbol) -> Nat;
+    fn get_reward_tokens(&self) -> HashMap<TokenSymbol, TokenParams>;
     async fn get_available_rewards(&self, token: TokenSymbol) -> Nat;
     async fn claim_rewards(&self, token: TokenSymbol) -> ClaimRewardResult;
     async fn claim_sns_rewards(
@@ -231,9 +231,10 @@ pub trait NeuronRewardsManager: NeuronManager {
     async fn distribute_rewards(
         &self,
         token: TokenSymbol,
-        destination: Principal,
+        params: TokenParams,
     ) -> Result<(), String> {
-        distribute_rewards(token.get_prod_token_info().ledger_id, destination.into()).await
+        let is_test_mode = read_state(|s| s.env.is_test_mode());
+        distribute_rewards(token.ledger_id(is_test_mode), params.destination.into()).await
     }
 }
 

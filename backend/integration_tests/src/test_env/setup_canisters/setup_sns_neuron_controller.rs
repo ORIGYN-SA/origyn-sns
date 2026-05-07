@@ -2,11 +2,12 @@ use crate::client::pocket::create_canister_with_id;
 use crate::wasms::SNS_NEURON_CONTROLLER;
 use bity_ic_types::BuildVersion;
 use candid::encode_one;
-use candid::Nat;
 use candid::Principal;
 use pocket_ic::PocketIc;
 use std::collections::HashMap;
 use types::TokenSymbol;
+
+use sns_neuron_controller_api_canister::init::TokenParams;
 
 pub fn setup(
     pic: &PocketIc,
@@ -16,7 +17,7 @@ pub fn setup(
     goldao_sns_governance_canister_id: Principal,
     goldao_sns_ledger_canister_id: Principal,
     goldao_sns_rewards_canister_id: Principal,
-    reward_tokens: HashMap<TokenSymbol, Principal>,
+    reward_tokens: HashMap<TokenSymbol, TokenParams>,
 ) -> Principal {
     let controller = controllers.first().unwrap();
     let canister_id = create_canister_with_id(pic, *controller, canister_id);
@@ -31,7 +32,7 @@ pub fn setup(
 
     let snc_init_args = sns_neuron_controller_api_canister::Args::Init(
         sns_neuron_controller_api_canister::init::InitArgs {
-            test_mode: true,
+            test_mode: false,
             version: BuildVersion::min(),
             commit_hash: "integration_testing".to_string(),
             authorized_principals: vec![*controller, ogy_sns_governance_canister_id],
@@ -39,7 +40,6 @@ pub fn setup(
                 goldao_sns_governance_canister_id,
                 goldao_sns_ledger_canister_id,
                 goldao_sns_rewards_canister_id,
-                goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64),
                 reward_tokens,
             },
         },

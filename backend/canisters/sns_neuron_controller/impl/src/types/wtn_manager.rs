@@ -55,10 +55,6 @@ impl NeuronRewardsManager for WtnManager {
         vec![TokenSymbol::WTN]
     }
 
-    fn get_rewards_threshold(&self, _token: TokenSymbol) -> Nat {
-        self.wtn_rewards_threshold.clone()
-    }
-
     // NOTE: this method is not fetching the current available rewards.
     // It uses internal canister state (last fetched neurons) to do it,
     // so before calling it it's obligatory to fetch neurons

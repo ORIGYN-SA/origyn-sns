@@ -8,8 +8,11 @@ use async_trait::async_trait;
 use candid::CandidType;
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
+use sns_neuron_controller_api_canister::init::TokenParams;
 use std::collections::HashMap;
 use types::{CanisterId, TokenSymbol};
+
+const MIN_THRESHOLD_FEE_MULTIPLIER: u64 = 100;
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct GoldaoManager {
@@ -17,41 +20,58 @@ pub struct GoldaoManager {
     pub goldao_sns_ledger_canister_id: CanisterId,
     pub goldao_sns_rewards_canister_id: CanisterId,
     pub neurons: Neurons,
-    pub goldao_rewards_threshold: Nat,
-    /// Maps each reward token to its distribution destination
-    pub reward_tokens: HashMap<TokenSymbol, Principal>,
+    pub reward_tokens: HashMap<TokenSymbol, TokenParams>,
 }
 
-// NOTE: ic network parameters
+const PROD_DEX_INTERACTION: &str = "tss7g-syaaa-aaaai-axh4q-cai";
+const PROD_SNS_REWARDS: &str = "yuijc-oiaaa-aaaap-ahezq-cai";
+const PROD_GOVERNANCE: &str = "tr3th-kiaaa-aaaaq-aab6q-cai";
+
 impl Default for GoldaoManager {
     fn default() -> Self {
-        let mut reward_tokens = HashMap::new();
-        reward_tokens.insert(
-            TokenSymbol::GOLDAO,
-            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
-        );
-        reward_tokens.insert(
-            TokenSymbol::OGY,
-            Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap(), // NOTE: prod sns_rewards
-        );
-        reward_tokens.insert(
-            TokenSymbol::ICP,
-            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
-        );
-        reward_tokens.insert(
-            TokenSymbol::WTN,
-            Principal::from_text("tss7g-syaaa-aaaai-axh4q-cai").unwrap(), // NOTE: prod dex_interaction
-        );
+        let is_test_mode = read_state(|s| s.env.is_test_mode());
+
+        let (ledger_id, rewards_id, token_configs) = if !is_test_mode {
+            (
+                "tyyy3-4aaaa-aaaaq-aab7a-cai",
+                "iyehc-lqaaa-aaaap-ab25a-cai",
+                vec![
+                    (TokenSymbol::GOLDAO, PROD_DEX_INTERACTION),
+                    (TokenSymbol::OGY,    PROD_SNS_REWARDS),
+                    (TokenSymbol::ICP,    PROD_DEX_INTERACTION),
+                    (TokenSymbol::WTN,    PROD_DEX_INTERACTION),
+                    (TokenSymbol::GLDT,   PROD_DEX_INTERACTION),
+                ]
+            )
+        } else {
+            (
+                "irhm6-5yaaa-aaaap-ab24q-cai",
+                "rbv23-fqaaa-aaaam-qbfma-cai",
+                vec![
+                    (TokenSymbol::GOLDAO, "jej56-sqaaa-aaaab-qgqkq-cai"),
+                    (TokenSymbol::OGY,    "fpmqz-aaaaa-aaaag-qjvua-cai"),
+                    (TokenSymbol::ICP,    "jej56-sqaaa-aaaab-qgqkq-cai"),
+                    (TokenSymbol::WTN,    "jej56-sqaaa-aaaab-qgqkq-cai"),
+                ]
+            )
+        };
+
+        let reward_tokens = token_configs
+            .into_iter()
+            .map(|(symbol, dest)| {
+                let params = TokenParams {
+                    destination: Principal::from_text(dest).expect("Invalid Principal"),
+                    threshold: (symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER).into(),
+                };
+                (symbol, params)
+            })
+            .collect();
 
         Self {
-            goldao_sns_governance_canister_id: Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai")
-                .unwrap(),
-            goldao_sns_ledger_canister_id: Principal::from_text("tyyy3-4aaaa-aaaaq-aab7a-cai")
-                .unwrap(),
-            goldao_sns_rewards_canister_id: Principal::from_text("iyehc-lqaaa-aaaap-ab25a-cai")
-                .unwrap(),
+            goldao_sns_governance_canister_id: Principal::from_text(PROD_GOVERNANCE).unwrap(),
+            goldao_sns_ledger_canister_id: Principal::from_text(ledger_id).unwrap(),
+            goldao_sns_rewards_canister_id: Principal::from_text(rewards_id).unwrap(),
             neurons: Neurons::default(),
-            goldao_rewards_threshold: Nat::from(3_000_000_000_000_u64), // 30'000 GOLDAO
             reward_tokens,
         }
     }
@@ -83,21 +103,18 @@ impl NeuronManager for GoldaoManager {}
 
 #[async_trait]
 impl NeuronRewardsManager for GoldaoManager {
-    fn get_reward_tokens(&self) -> HashMap<TokenSymbol, Principal> {
+    fn get_reward_tokens(&self) -> HashMap<TokenSymbol, TokenParams> {
         self.reward_tokens.clone()
-    }
-
-    fn get_rewards_threshold(&self, _token: TokenSymbol) -> Nat {
-        self.goldao_rewards_threshold.clone()
     }
 
     async fn get_available_rewards(&self, token: TokenSymbol) -> Nat {
         let neurons = self.get_neurons().as_ref();
         let sns_rewards_canister_id = self.get_sns_rewards_canister_id();
+        let is_test_mode = read_state(|s| s.env.is_test_mode());
         sns_rewards_calculate_available_rewards(
             neurons,
             sns_rewards_canister_id,
-            token.get_prod_token_info().ledger_id,
+            token.ledger_id(is_test_mode),
         )
         .await
         .get_internal()
@@ -117,7 +134,6 @@ impl From<GoldaoManagerConfig> for GoldaoManager {
             goldao_sns_ledger_canister_id: config.goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id: config.goldao_sns_rewards_canister_id,
             neurons: Neurons::default(),
-            goldao_rewards_threshold: config.goldao_rewards_threshold,
             reward_tokens: config.reward_tokens,
         }
     }
