@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import "./App.css";
 import {
   createBrowserRouter,
@@ -27,7 +25,7 @@ import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
 
-const redirectWithSearch = (request, pathname) => {
+const redirectWithSearch = (request: Request, pathname: string) => {
   const url = new URL(request.url);
   return redirect(`${pathname}${url.search}`);
 };

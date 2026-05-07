@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,7 +13,17 @@ import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransferOGY from "@hooks/transfer/useTransferOGY";
 
-const Transfer = ({ show, handleClose }) => {
+type TransferFormValues = {
+  amount: string;
+  recipientAddress: string;
+};
+
+type TransferProps = {
+  show: boolean;
+  handleClose: () => void;
+};
+
+const Transfer = ({ show, handleClose }: TransferProps) => {
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
@@ -40,7 +48,7 @@ const Transfer = ({ show, handleClose }) => {
     setValue,
     setFocus,
     formState: { errors, isValid, dirtyFields },
-  } = useForm({
+  } = useForm<TransferFormValues>({
     mode: "onChange",
     shouldUnregister: true,
     shouldFocusError: false,
@@ -60,14 +68,18 @@ const Transfer = ({ show, handleClose }) => {
     const watchedAmount = useWatch({
       name: "amount",
       control,
-      defaultValue: 0,
+      defaultValue: "",
     });
+    const numericAmount = Number(watchedAmount);
     const total = divideBy1e8(
-      Number(watchedAmount) * 100000000 - Number(TRANSACTION_FEE)
+      numericAmount * 100000000 - Number(TRANSACTION_FEE)
     );
     return (
       <div>
-        {isNaN(watchedAmount) || watchedAmount === 0 || errors?.amount
+        {!watchedAmount ||
+        isNaN(numericAmount) ||
+        numericAmount === 0 ||
+        errors?.amount
           ? 0
           : total}{" "}
         OGY
@@ -75,7 +87,7 @@ const Transfer = ({ show, handleClose }) => {
     );
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: TransferFormValues) => {
     transfer(
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
@@ -92,7 +104,7 @@ const Transfer = ({ show, handleClose }) => {
     );
   };
 
-  const isAmountUnderBalance = (value) => {
+  const isAmountUnderBalance = (value: string) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
@@ -101,7 +113,7 @@ const Transfer = ({ show, handleClose }) => {
     return true;
   };
 
-  const isAmountUpperFee = (value) => {
+  const isAmountUpperFee = (value: string) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const amount = numberToE8s(value);
       if (amount < TRANSACTION_FEE) return false;
@@ -109,7 +121,7 @@ const Transfer = ({ show, handleClose }) => {
     return true;
   };
 
-  const isValidRecipientAddress = (value) => {
+  const isValidRecipientAddress = (value: string) => {
     try {
       decodeIcrcAccount(value);
       return true;
@@ -119,8 +131,9 @@ const Transfer = ({ show, handleClose }) => {
   };
 
   const handleSetAmountMaxBalance = () => {
+    if (!balanceOGY) return;
     const value = divideBy1e8(balanceOGY.balanceE8s);
-    setValue("amount", value > 0 ? value : 0, {
+    setValue("amount", value > 0 ? String(value) : "0", {
       shouldValidate: true,
     });
     setFocus("recipientAddress");
@@ -168,8 +181,6 @@ const Transfer = ({ show, handleClose }) => {
                 id="amount"
                 type="text"
                 register={register("amount", {
-                  pattern: /[0-9.]/,
-                  valueAsNumber: true,
                   required: "Amount is required.",
                   validate: {
                     isAmountUnderBalance: (v) =>
@@ -205,8 +216,9 @@ const Transfer = ({ show, handleClose }) => {
                   },
                 })}
                 errors={
-                  Object.keys(dirtyFields).length !== 0 &&
-                  errors?.recipientAddress
+                  Object.keys(dirtyFields).length !== 0
+                    ? errors?.recipientAddress
+                    : undefined
                 }
               />
             </div>

@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// @ts-nocheck
-import { ReactNode, useMemo, Fragment } from "react";
+import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
-  getExpandedRowModel,
   flexRender,
   ColumnDef,
   PaginationState,
   OnChangeFn,
   SortingState,
-  Row,
+  RowData,
 } from "@tanstack/react-table";
 import {
   ArrowDownIcon,
@@ -24,17 +20,30 @@ import {
 } from "@heroicons/react/20/solid";
 import { Select } from "@components/ui";
 
+declare module "@tanstack/react-table" {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    className?: string;
+  }
+}
+
+export type TableData<T> =
+  | T[]
+  | {
+      rows: T[];
+      rowCount?: number;
+      pageCount?: number;
+      isFetching?: boolean;
+    };
+
 interface ReactTableProps<T extends object> {
-  data: T[];
+  data: TableData<T>;
   columns: ColumnDef<T>[];
   pagination?: PaginationState;
   setPagination?: OnChangeFn<PaginationState>;
   sorting?: SortingState;
   setSorting?: OnChangeFn<SortingState>;
-  getRowCanExpand?: (row: Row<T>) => boolean;
-  subComponent?: ReactNode;
   identifier?: string;
-  serverSide?: boolean;
 }
 
 const linesPerPageOptions = [
@@ -51,19 +60,20 @@ const Table = <T extends object>({
   setPagination,
   sorting,
   setSorting,
-  getRowCanExpand,
   identifier = "",
-  serverSide = true,
-  subComponent,
 }: ReactTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageIndex = `page_index${identifier ?? `_${identifier}`}`;
-  const pageSize = `page_size${identifier ?? `_${identifier}`}`;
+  const pageIndex = `page_index${identifier ? `_${identifier}` : ""}`;
+  const pageSize = `page_size${identifier ? `_${identifier}` : ""}`;
 
-  const defaultData = useMemo(() => [], []);
+  const defaultData = useMemo<T[]>(() => [], []);
+
+  const rows = Array.isArray(data) ? data : (data?.rows ?? defaultData);
+  const rowCount = Array.isArray(data) ? data.length : (data?.rowCount ?? 0);
+  const isFetching = Array.isArray(data) ? false : (data?.isFetching ?? false);
 
   const table = useReactTable({
-    data: Array.isArray(data) ? data : (data?.rows ?? defaultData),
+    data: rows,
     columns,
     state: {
       pagination,
@@ -72,35 +82,19 @@ const Table = <T extends object>({
     onSortingChange: setSorting,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
-    getRowCanExpand,
-    getExpandedRowModel: getExpandedRowModel(),
-    ...(serverSide && {
-      rowCount: data?.rowCount ?? 0,
-      manualPagination: setPagination ? true : undefined,
-      manualSorting: setSorting ? true : undefined,
-    }),
-    ...(!serverSide && {
-      getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      onPaginationChange: setPagination,
-    }),
+    rowCount,
+    manualPagination: setPagination ? true : undefined,
+    manualSorting: setSorting ? true : undefined,
   });
 
-  const handleOnChangePageSize = (value: string) => {
-    table.setPageSize(Number(value));
+  const handleOnChangePageSize = (value: string | number) => {
+    const next = Number(value);
+    table.setPageSize(next);
     table.setPageIndex(0);
-    searchParams.set(pageSize, value);
+    searchParams.set(pageSize, String(next));
     searchParams.set(pageIndex, "1");
     setSearchParams(searchParams);
   };
-
-  // const handleOnChangePageIndex = (e) => {
-  //   const page = e.target.value ? Number(e.target.value) - 1 : 0;
-  //   table.setPageIndex(page);
-  //   searchParams.set("pageIndex", (page + 1).toString());
-  //   setSearchParams(searchParams);
-  // };
 
   const handleOnClickPreviousPage = () => {
     table.previousPage();
@@ -133,13 +127,15 @@ const Table = <T extends object>({
   };
 
   const handleOnChangeSorting = (columnId: string) => {
-    // Detect the current sorting state of the column
-    const currentSort = table.getColumn(columnId).getIsSorted();
+    if (!setSorting) return;
+    const column = table.getColumn(columnId);
+    if (!column) return;
+    const currentSort = column.getIsSorted();
     const newSortDirection =
       currentSort === "asc" ? "desc" : currentSort === "desc" ? null : "asc";
     setSorting([{ id: columnId, desc: newSortDirection === "desc" }]);
     searchParams.set("id", columnId);
-    searchParams.set("desc", newSortDirection === "desc");
+    searchParams.set("desc", String(newSortDirection === "desc"));
     setSearchParams(searchParams);
   };
 
@@ -196,32 +192,26 @@ const Table = <T extends object>({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <Fragment key={row.id}>
-                <tr className="bg-surface border-b last:border-none border-border">
-                  {row.getVisibleCells().map((cell, index) => (
-                    <td
-                      key={cell.id}
-                      className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
-                        index === 0 ? "" : "place-items-center"
-                      } ${
-                        cell.column.columnDef.meta?.className ?? "text-center"
-                      }`}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-                {row.getIsExpanded() && (
-                  <tr>
-                    <td colSpan={row.getVisibleCells().length}>
-                      {subComponent({ row })}
-                    </td>
-                  </tr>
-                )}
-              </Fragment>
+              <tr
+                key={row.id}
+                className="bg-surface border-b last:border-none border-border"
+              >
+                {row.getVisibleCells().map((cell, index) => (
+                  <td
+                    key={cell.id}
+                    className={`px-8 py-4 overflow-hidden text-ellipsis whitespace-nowrap ${
+                      index === 0 ? "" : "place-items-center"
+                    } ${
+                      cell.column.columnDef.meta?.className ?? "text-center"
+                    }`}
+                  >
+                    {flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )}
+                  </td>
+                ))}
+              </tr>
             ))}
           </tbody>
         </table>
@@ -275,31 +265,7 @@ const Table = <T extends object>({
                   {table.getPageCount().toLocaleString()}
                 </strong>
               </span>
-              {/* <span className="flex items-center gap-1">
-            | Go to page:
-            <input
-              type="number"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                handleOnChangePageIndex(e);
-              }}
-              className="border p-1 rounded w-16"
-            />
-          </span> */}
-
-              {/* <select
-        value={table.getState().pagination.pageSize}
-        onChange={(e) => {
-          table.setPageSize(Number(e.target.value));
-        }}
-      >
-        {[10, 20, 30, 40, 50].map((pageSize) => (
-          <option key={pageSize} value={pageSize}>
-            Show {pageSize}
-          </option>
-        ))}
-      </select> */}
-              {data?.isFetching ? "Loading..." : null}
+              {isFetching ? "Loading..." : null}
             </div>
           </div>
         )}

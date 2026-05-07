@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,6 +7,11 @@ import useFetchBalanceICPOwner from "@hooks/accounts/useFetchBalanceICPOwner";
 import { TRANSACTION_FEE_ICP, ICP_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransferICP from "@hooks/transfer/useTransferICP";
+
+type TransferICPFormValues = {
+  amount: string;
+  recipientAddress: string;
+};
 
 const TransferICP = () => {
   const [show, setShow] = useState(false);
@@ -39,7 +42,7 @@ const TransferICP = () => {
     control,
     reset: resetForm,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<TransferICPFormValues>({
     mode: "onChange",
     shouldUnregister: true,
   });
@@ -58,21 +61,23 @@ const TransferICP = () => {
     const watchedAmount = useWatch({
       name: "amount",
       control,
-      defaultValue: 0,
+      defaultValue: "",
     });
+    const numericAmount = Number(watchedAmount);
     return (
       <div>
-        {isNaN(watchedAmount) ||
-        watchedAmount === 0 ||
+        {!watchedAmount ||
+        isNaN(numericAmount) ||
+        numericAmount === 0 ||
         Object.keys(errors).length > 0
           ? 0
-          : watchedAmount}{" "}
+          : numericAmount}{" "}
         ICP
       </div>
     );
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: TransferICPFormValues) => {
     transfer(
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
@@ -85,7 +90,7 @@ const TransferICP = () => {
     );
   };
 
-  const isAmountUnderBalance = (value) => {
+  const isAmountUnderBalance = (value: string) => {
     if (balanceICP && Number(value) && Number(value) > 0) {
       const balance = balanceICP.balance.e8s;
       const amount = numberToE8s(value);
@@ -94,7 +99,7 @@ const TransferICP = () => {
     return true;
   };
 
-  const isValidRecipientAddress = (value) => {
+  const isValidRecipientAddress = (value: string) => {
     try {
       Principal.fromText(value);
       return true;
@@ -152,8 +157,6 @@ const TransferICP = () => {
                         id="amount"
                         type="text"
                         register={register("amount", {
-                          pattern: /[0-9.]/,
-                          valueAsNumber: true,
                           required: "Amount is required.",
                           validate: {
                             isAmountUnderBalance: (v) =>

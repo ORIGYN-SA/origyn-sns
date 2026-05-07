@@ -1,16 +1,23 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useNavigate } from "react-router-dom";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import {
-  NewTable,
-  NewTableColumn,
-  TooltipInfo,
-  TablePagination,
-} from "@components/ui";
+import { NewTable, TooltipInfo, TablePagination } from "@components/ui";
+import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { TableProps } from "@helpers/table/useTable";
+
+type TokenDistributionRow = {
+  principal: string;
+  tag?: string;
+  total: string;
+  governanceBalance: string;
+  ledgerBalance: string;
+  weight: string;
+};
+
+type TokenDistributionListProps = Required<
+  Pick<TableProps, "pagination" | "setPagination">
+>;
 
 const zeroOrDash = (value: string | undefined) => {
   if (!value) return "-";
@@ -18,11 +25,10 @@ const zeroOrDash = (value: string | undefined) => {
   return Number.isFinite(numeric) && numeric === 0 ? "-" : value;
 };
 
-
 const TokenDistributionList = ({
   pagination,
   setPagination,
-}: TableProps) => {
+}: TokenDistributionListProps) => {
   const navigate = useNavigate();
 
   const {
@@ -30,8 +36,8 @@ const TokenDistributionList = ({
     isSuccess: isSuccessFetchTokenHolders,
     isFetching: isFetchingFetchTokenHolders,
   } = useTokenDistribution({
-    limit: pagination?.pageSize as number,
-    offset: (pagination.pageSize * pagination.pageIndex) as number,
+    limit: pagination.pageSize,
+    offset: pagination.pageSize * pagination.pageIndex,
   });
 
   const pageIndex = pagination.pageIndex;
@@ -40,12 +46,10 @@ const TokenDistributionList = ({
 
 
   const goToPage = (next: number) => {
-    if (!setPagination) return;
     setPagination((prev) => ({ ...prev, pageIndex: next }));
   };
 
   const handlePageSizeChange = (next: number) => {
-    if (!setPagination) return;
     setPagination(() => ({ pageIndex: 0, pageSize: next }));
   };
 
@@ -65,7 +69,7 @@ const TokenDistributionList = ({
   };
   const skeletonRows = buildFakeRows(FAKE_TOKEN_ROW, expectedRowsOnThisPage);
 
-  const columns: NewTableColumn<any>[] = [
+  const columns: NewTableColumn<TokenDistributionRow>[] = [
     {
       id: "principal",
       header: "Address",
@@ -129,7 +133,7 @@ const TokenDistributionList = ({
   ];
 
 
-  const paginationFooter = setPagination ? (
+  const paginationFooter = (
     <TablePagination
       pageIndex={pageIndex}
       pageSize={pageSize}
@@ -137,7 +141,7 @@ const TokenDistributionList = ({
       onPageChange={goToPage}
       onPageSizeChange={handlePageSizeChange}
     />
-  ) : null;
+  );
 
   const rows =
     isFetchingFetchTokenHolders || !isSuccessFetchTokenHolders || !data
