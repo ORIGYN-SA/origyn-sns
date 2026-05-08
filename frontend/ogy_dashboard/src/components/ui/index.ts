@@ -23,6 +23,7 @@ import ExpandedDetailsPanel from "@components/ui/ExpandedDetailsPanel";
 import RowExpandToggle from "@components/ui/RowExpandToggle";
 import TransactionKindPill from "@components/ui/TransactionKindPill";
 import PageContainer from "@components/ui/PageContainer";
+import Carousel from "@components/ui/Carousel";
 
 export {
   Card,
@@ -50,4 +51,5 @@ export {
   RowExpandToggle,
   TransactionKindPill,
   PageContainer,
+  Carousel,
 };
