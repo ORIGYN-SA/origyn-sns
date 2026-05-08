@@ -1,7 +1,7 @@
 use crate::state::read_state;
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
-use crate::types::{GoldaoManager, WtnManager};
+use crate::types::GoldaoManager;
 use crate::utils::{distribute_rewards, fetch_neurons, ClaimRewardResult};
 use async_trait::async_trait;
 use bity_ic_ledger_utils::compute_neuron_staking_subaccount_bytes;
@@ -17,15 +17,16 @@ use sns_governance_canister::types::{
     },
     manage_neuron_response, ManageNeuron,
 };
+use sns_neuron_controller_api_canister::init::TokenParams;
+use std::collections::HashMap;
 use tracing::{error, trace};
-use types::CanisterId;
+use types::{CanisterId, TokenSymbol};
 use utils::env::Environment;
 
 #[enum_dispatch]
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum NeuronManagerEnum {
     GoldaoManager(GoldaoManager),
-    WtnManager(WtnManager),
 }
 
 #[enum_dispatch(NeuronManagerEnum)]
@@ -196,9 +197,9 @@ pub trait NeuronManager: NeuronConfig {
 #[async_trait]
 #[enum_dispatch(NeuronManagerEnum)]
 pub trait NeuronRewardsManager: NeuronManager {
-    fn get_rewards_threshold(&self) -> Nat;
-    async fn get_available_rewards(&self) -> Nat;
-    async fn claim_rewards(&self) -> ClaimRewardResult;
+    fn get_reward_tokens(&self) -> HashMap<TokenSymbol, TokenParams>;
+    async fn get_available_rewards(&self, token: TokenSymbol) -> Nat;
+    async fn claim_rewards(&self, token: TokenSymbol) -> ClaimRewardResult;
     async fn claim_sns_rewards(
         &self,
         rewards_destination: sns_governance_canister::types::Account,
@@ -226,8 +227,14 @@ pub trait NeuronRewardsManager: NeuronManager {
             Err(error) => ClaimRewardResult::Partial(error.concat()),
         }
     }
-    async fn distribute_rewards(&self) -> Result<(), String> {
-        distribute_rewards(self.get_sns_ledger_canister_id()).await
+
+    async fn distribute_rewards(
+        &self,
+        token: TokenSymbol,
+        params: TokenParams,
+    ) -> Result<(), String> {
+        let is_test_mode = read_state(|s| s.env.is_test_mode());
+        distribute_rewards(token.ledger_id(is_test_mode), params.destination.into()).await
     }
 }
 

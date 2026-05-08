@@ -1,10 +1,5 @@
-import { useMemo, useState } from "react";
-import { Card, TooltipInfo, Select } from "@components/ui";
-import {
-  Loader as ChartLoader,
-  Error as ChartError,
-  Area as ChartArea,
-} from "@components/charts";
+import { useState } from "react";
+import { ChartStatsCard } from "@components/dashboard";
 import useVotingParticipationData from "@hooks/metrics/useVotingParticipationData";
 
 const SELECT_PERIOD_OPTIONS = [
@@ -13,97 +8,52 @@ const SELECT_PERIOD_OPTIONS = [
   { value: "yearly", label: "Yearly" },
 ];
 
-const ChartVotingParticipation = ({
-  className,
-  ...restProps
-}: {
-  className?: string;
-}) => {
+const ChartVotingParticipation = ({ className }: { className?: string }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
-  const { data, isSuccess, isLoading, isError } = useVotingParticipationData({
+  const { data, isLoading, isError } = useVotingParticipationData({
     period: selectedPeriod,
   });
 
-  const handleOnChangePeriod = (period: string) => {
-    setSelectedPeriod(period);
-  };
-
-  const barFill = useMemo(() => "#34d399", []);
-
   return (
-    <Card className={`${className}`} {...restProps}>
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold mr-2">Voting Participation</h2>
-        <Select
-          options={SELECT_PERIOD_OPTIONS}
-          value={selectedPeriod}
-          handleOnChange={(value) => handleOnChangePeriod(value as string)}
-          className="w-25"
-        />
-      </div>
-      {isLoading && <ChartLoader />}
-      {isError && (
-        <ChartError>Error while fetching voting participation data.</ChartError>
-      )}
-      {isSuccess && !isLoading && (
-        <div className="flex flex-col xl:flex-row mt-4">
-          {/* Left Panel */}
-          <div className="xl:w-1/4 flex flex-col">
-            {/* Last Voting Participation */}
-            <div>
-              <div className="flex">
-                <span className="text-content/60 font-semibold mr-2">
-                  Last Voting Participation
-                </span>
-                <TooltipInfo id="tooltip-last-voting-participation">
-                  <p>Percentage of participation in the last voting event.</p>
-                </TooltipInfo>
-              </div>
-              <div className="text-2xl font-semibold mt-2">
-                <span>{data?.lastParticipation}</span>
-              </div>
-            </div>
-            <div className="border-b border-[#E1E1E1] my-4 w-3/4" />
-
-            {/* Average Voting Participation */}
-            <div>
-              <div className="flex">
-                <span className="text-content/60 font-semibold mr-2">
-                  Average Voting Participation
-                </span>
-                <TooltipInfo id="tooltip-average-voting-participation">
-                  <p>Average percentage of voting participation over time.</p>
-                </TooltipInfo>
-              </div>
-              <div className="text-2xl font-semibold mt-2">
-                <span>{data?.averageParticipation}</span>
-              </div>
-            </div>
-            <div className="border-b border-[#E1E1E1] my-4 w-3/4" />
-
-            {/* Average Voting Power */}
-            <div>
-              <div className="flex">
-                <span className="text-content/60 font-semibold mr-2">
-                  Average Voting Power
-                </span>
-                <TooltipInfo id="tooltip-average-voting-power">
-                  <p>Average voting power across all participants.</p>
-                </TooltipInfo>
-              </div>
-              <div className="text-2xl font-semibold mt-2">
-                <span>{data?.averagePower}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Chart */}
-          <div className="xl:w-3/4 h-72 rounded-xl mt-8 md:mt-0">
-            <ChartArea data={data?.dataChart} fill={barFill} />
-          </div>
-        </div>
-      )}
-    </Card>
+    <ChartStatsCard
+      className={className}
+      title="Voting Participation"
+      periodOptions={SELECT_PERIOD_OPTIONS}
+      period={selectedPeriod}
+      onPeriodChange={setSelectedPeriod}
+      stats={[
+        {
+          id: "last-voting-participation",
+          label: "Last Voting Participation",
+          tooltipContent: (
+            <p>Percentage of participation in the last voting event.</p>
+          ),
+          value: data?.lastParticipation,
+        },
+        {
+          id: "average-voting-participation",
+          label: "Average Voting Participation",
+          tooltipContent: (
+            <p>Average percentage of voting participation over time.</p>
+          ),
+          value: data?.averageParticipation,
+        },
+        {
+          id: "average-voting-power",
+          label: "Average Voting Power",
+          tooltipContent: <p>Average voting power across all participants.</p>,
+          value: data?.averagePower,
+        },
+      ]}
+      chart={{
+        data: data?.dataChart,
+        color: "#34d399",
+        label: "Participation %",
+      }}
+      legendLabel="PARTICIPATION %"
+      loading={isLoading}
+      isError={isError}
+    />
   );
 };
 

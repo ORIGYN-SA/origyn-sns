@@ -103,13 +103,7 @@ const getNeuronData = (
 
   const stakedAmount = divideBy1e8(Number(data.cached_neuron_stake_e8s || 0));
 
-  const stakedMaturity = divideBy1e8(
-    Number(
-      stakedMaturityEquivalent !== (null || undefined)
-        ? stakedMaturityEquivalent
-        : 0
-    )
-  );
+  const stakedMaturity = divideBy1e8(Number(stakedMaturityEquivalent ?? 0));
   const autoStakeMaturity = data.auto_stake_maturity ? "true" : "false";
 
   const votingPower =
@@ -150,10 +144,11 @@ const getNeuronData = (
       : "-",
     dissolveDelay: dissolveDelay ? formatYearsDifference(dissolveDelay) : "-",
     createdAt: formatDate(createdAt, { fromSeconds: true }) ?? "-",
+    createdAtRaw: createdAt,
     maxNeuronAgeForAgeBonus,
-    maxAgeBonusPercentage: `${dissolveDelayBonus.toFixed(0)} %`,
+    maxAgeBonusPercentage: `${dissolveDelayBonus.toFixed(0)}%`,
     ageBonus,
-    dissolveDelayBonus: `${dissolveDelayBonus.toFixed(0)} %`,
+    dissolveDelayBonus: `${dissolveDelayBonus.toFixed(0)}%`,
     autoStakeMaturity,
   } as INeuronData;
 };

@@ -13,7 +13,7 @@ export interface TotalSupplyOGY {
 }
 
 export interface TotalSupplyOGYParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalSupplyOGY>;
 }
 
 const fn = async (): Promise<TotalSupplyOGY> => {

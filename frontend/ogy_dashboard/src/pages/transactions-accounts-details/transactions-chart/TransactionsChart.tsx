@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState, KeyboardEvent, ChangeEvent } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Data, Network, Options } from "vis-network/standalone/esm/vis-network";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
 import useFetchAccountTransactions from "@hooks/accounts/useFetchAccountTransactions";
@@ -10,6 +15,8 @@ import {
   TransactionsDetails,
 } from "@services/queries/accounts/fetchAccountTransactions";
 import useThemeDetector from "@helpers/theme/useThemeDetector";
+import { Card } from "@components/ui";
+import { SearchIcon, CloseIcon } from "@components/ui/icons";
 
 type TransactionsChartProps = {
   className?: string;
@@ -29,12 +36,30 @@ type Node = {
   from: string;
 };
 
-const options: Options = {
+const EDGE = {
+  in: "#50BE8F",
+  out: "#E84C25",
+  inOut: "#00A2F7",
+} as const;
+
+const NODE_BG_LIGHT = {
+  in: "#EBFFF6",
+  out: "#FFE2DB",
+  inOut: "#E5F6FF",
+} as const;
+
+const ROOT_NODE = {
+  border: "#5D627B",
+  background: "#8A92B8",
+} as const;
+
+const buildVisOptions = (): Options => ({
   nodes: {
     borderWidth: 1,
+    chosen: false,
     font: {
       size: 18,
-      face: "Montserrat, arial",
+      face: "DM sans, system-ui, sans-serif",
       background: "none",
       align: "center",
       multi: false,
@@ -42,11 +67,12 @@ const options: Options = {
     },
   },
   edges: {
+    chosen: false,
     font: {
       multi: "markdown",
       size: 18,
       bold: "true",
-      face: "Montserrat, arial",
+      face: "DM sans, system-ui, sans-serif",
     },
     smooth: false,
     width: 2,
@@ -70,76 +96,70 @@ const options: Options = {
     minVelocity: 5,
     maxVelocity: 10,
   },
-};
+});
 
-const TransactionsChrart = ({ id }: TransactionsChartProps) => {
+const TransactionsChart = ({ id }: TransactionsChartProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const [mapAmount] = useState(10);
   const darkTheme = useThemeDetector();
-  // const [transactions, setTransactions] = useState<any>();
   const [data, setData] = useState<Data>();
   const [network, setNetwork] = useState<Network | null>(null);
-
-  const colors = {
-    in: {
-      border: "#50BE8F",
-      color: "#50BE8F",
-      background: darkTheme ? "#202020" : "#EBFFF6",
-      highlight: {
-        background: darkTheme ? "#202020" : "#EBFFF6",
-        border: "#50BE8F",
-      },
-      inherit: false,
-    },
-    out: {
-      border: "#E84C25",
-      color: "#E84C25",
-      background: darkTheme ? "#202020" : "#FFE2DB",
-      highlight: {
-        background: darkTheme ? "#202020" : "#FFE2DB",
-        border: "#E84C25",
-      },
-      inherit: false,
-    },
-    inOut: {
-      border: "#00A2F7",
-      color: "#00A2F7",
-      background: darkTheme ? "#202020" : "#E5F6FF",
-      highlight: {
-        background: darkTheme ? "#202020" : "#E5F6FF",
-        border: "#00A2F7",
-      },
-      inherit: false,
-    },
-  };
-
-  // TODO: add loading status
-  const { data: accountTxs, isError } = useFetchAccountTransactions(id);
-
-  const { register, reset } = useForm({
-    mode: "onChange",
-    shouldUnregister: true,
-  });
-
   const [searchterm, setSearchterm] = useState("");
 
-  const handleResetSearch = () => {
-    setSearchterm("");
-    reset();
+  const {
+    data: accountTxs,
+    isLoading,
+    isError,
+  } = useFetchAccountTransactions(id);
+
+  const surfaceColor = darkTheme ? "#202020" : "#FFFFFF";
+  const edgeLabelColor = darkTheme ? "#A0A0A0" : "#69737C";
+
+  const colors = useMemo(
+    () => ({
+      in: {
+        border: EDGE.in,
+        color: EDGE.in,
+        background: darkTheme ? surfaceColor : NODE_BG_LIGHT.in,
+        highlight: {
+          background: darkTheme ? surfaceColor : NODE_BG_LIGHT.in,
+          border: EDGE.in,
+        },
+        inherit: false,
+      },
+      out: {
+        border: EDGE.out,
+        color: EDGE.out,
+        background: darkTheme ? surfaceColor : NODE_BG_LIGHT.out,
+        highlight: {
+          background: darkTheme ? surfaceColor : NODE_BG_LIGHT.out,
+          border: EDGE.out,
+        },
+        inherit: false,
+      },
+      inOut: {
+        border: EDGE.inOut,
+        color: EDGE.inOut,
+        background: darkTheme ? surfaceColor : NODE_BG_LIGHT.inOut,
+        highlight: {
+          background: darkTheme ? surfaceColor : NODE_BG_LIGHT.inOut,
+          border: EDGE.inOut,
+        },
+        inherit: false,
+      },
+    }),
+    [darkTheme, surfaceColor]
+  );
+
+  const handleResetSearch = () => setSearchterm("");
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchterm(e.target.value);
   };
 
-  const handleOnChange = (e: ChangeEvent) => {
-    const value = (e?.target as HTMLTextAreaElement)?.value;
-    if (value === "") {
-      handleResetSearch();
-    } else {
-      setSearchterm(value);
-    }
-  };
-
-  const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === "Enter" && e.preventDefault();
+  const handleOnKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") e.preventDefault();
   };
 
   const generateData = (accountTxs: TransactionsDetails): Data => {
@@ -178,7 +198,6 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
               from: item.from_owner,
             };
             if (mapAmount > total && index === total - 1) {
-              //result[`f${item.from_owner}`] = { isInitialTrans: true, isFrom: true, fromAmount: amount, amount: amount, count: 1, to: item.to_owner, from: item.from_owner };
               result[`o${item.from_owner}`].isInitialTrans = true;
             }
           }
@@ -225,9 +244,12 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
           color: "#fff",
         },
         color: {
-          border: "#5D627B",
-          background: "#8A92B8",
-          highlight: { background: "#8A92B8", border: "#5D627B" },
+          border: ROOT_NODE.border,
+          background: ROOT_NODE.background,
+          highlight: {
+            background: ROOT_NODE.background,
+            border: ROOT_NODE.border,
+          },
           inherit: false,
         },
       },
@@ -239,9 +261,9 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
       to: node.id,
       dashes: [8, 16],
       font: {
-        color: darkTheme ? "#ffffff" : "#a6a6a6",
+        color: edgeLabelColor,
         strokeWidth: 10,
-        strokeColor: darkTheme ? "#202020" : "#fff",
+        strokeColor: surfaceColor,
       },
       label:
         node.count > 1
@@ -272,6 +294,22 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
     };
   };
 
+  const filteredCount = useMemo(() => {
+    if (!accountTxs?.data) return 0;
+    if (!searchterm) return accountTxs.data.length;
+    return accountTxs.data.filter((tx) => {
+      if (tx.to_account !== null && tx.from_account !== null) {
+        return (
+          tx.to_account.includes(searchterm) ||
+          tx.from_account.includes(searchterm)
+        );
+      }
+      return false;
+    }).length;
+  }, [accountTxs, searchterm]);
+
+  const showEmptyOverlay = !!searchterm && filteredCount === 0;
+
   useEffect(() => {
     if (accountTxs) {
       if (searchterm) {
@@ -300,7 +338,11 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
 
   useEffect(() => {
     if (ref.current && data) {
-      const instance = new Network(ref.current, data as Data, options);
+      const instance = new Network(
+        ref.current,
+        data as Data,
+        buildVisOptions()
+      );
       setNetwork(instance);
       return () => network?.destroy();
     }
@@ -316,19 +358,10 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
         });
         if (accountId) {
           navigate(
-            `/explorer/transactions/accounts/${accountId.toString().slice(1)}`
+            `/transaction-history/transactions/accounts/${accountId.toString().slice(1)}`
           );
           return;
         }
-        // if (properties.items.length && properties.items[0]?.edgeId) {
-        //   console.log(
-        //     data?.edges?.find(
-        //       ({ id }: { id: string }) => id === properties.items[0]?.edgeId
-        //     )
-        //   );
-        //   return;
-        //   // handleTransactionsOpen(data.edges.find(({ id }) => id === properties.items[0]?.edgeId));
-        // }
       });
 
       network.on("dragEnd", function () {
@@ -339,151 +372,139 @@ const TransactionsChrart = ({ id }: TransactionsChartProps) => {
   }, [network]);
 
   return (
-    <div className="relative mt-12 bg-surface text-content rounded-xl border border-border">
-      <div className="absolute top-10 left-10 z-10 w-96">
+    <Card className="mt-16 !p-0 overflow-hidden">
+      <header className="flex flex-col gap-4 px-6 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-content text-[22px] font-semibold leading-none">
+          Transaction Flow
+        </h2>
         <form
-          onKeyDown={handleOnKeyDown as () => void}
-          className="rounded-xl bg-surface-3 border border-border px-3 py-1 flex justify-between items-center w-full"
+          onKeyDown={handleOnKeyDown}
           autoComplete="off"
+          className="flex items-center gap-2 w-full sm:w-[300px] h-10 rounded-full border border-border-strong bg-surface-1 px-4"
         >
+          <SearchIcon className="text-muted shrink-0" />
           <input
             id={id}
             type="text"
-            placeholder="Search in transactions..."
-            {...(register(id),
-            {
-              onChange: (e) => handleOnChange(e),
-              value: searchterm,
-            })}
-            className="form-input bg-surface-3 w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
+            placeholder="Search transactions…"
+            value={searchterm}
+            onChange={handleOnChange}
+            className="flex-1 bg-transparent text-sm text-content placeholder:text-muted outline-none focus:outline-none focus:ring-0 border-0 p-0"
           />
-          {searchterm === "" ? (
-            <div
-              onClick={handleResetSearch}
-              className="rounded-full bg-surface-3 mr-2 p-1"
-            ></div>
-          ) : (
+          {searchterm && (
             <button
+              type="button"
               onClick={handleResetSearch}
-              className="rounded-full bg-surface-3 mr-2 p-1"
+              className="rounded-full p-1 text-muted hover:bg-border"
+              aria-label="Clear search"
             >
-              <XMarkIcon className="h-7 w-7" aria-hidden="true" />
+              <CloseIcon />
             </button>
           )}
         </form>
+      </header>
+
+      <div className="relative border-t border-border">
+        <div
+          ref={ref}
+          className="h-[560px] md:h-[680px] lg:h-[800px] w-full p-6"
+        />
+        {isLoading && (
+          <div
+            aria-busy="true"
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <div className="h-full w-full animate-pulse bg-muted/10" />
+          </div>
+        )}
+        {isError && !isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <p className="text-sm text-muted">
+              Couldn't load transaction data. Please try again.
+            </p>
+          </div>
+        )}
+        {showEmptyOverlay && !isLoading && !isError && (
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center pointer-events-none">
+            <p className="text-sm text-muted">
+              No transactions match this search.
+            </p>
+          </div>
+        )}
       </div>
-      <div style={{ height: 800, width: "100%", padding: "32px" }} ref={ref} />
-      <div>{isError && "Error occured when loading the data"}</div>
-      <div className="flex flex-col justify-between">
-        <div className="p-6 flex gap-12  border-border border-t border-b">
-          <div className="flex gap-4 items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="33"
-              height="16"
-              viewBox="0 0 33 16"
-              fill="none"
-            >
-              <path
-                d="M32.3536 8.35356C32.5488 8.1583 32.5488 7.84171 32.3536 7.64645L29.1716 4.46447C28.9763 4.26921 28.6597 4.26921 28.4645 4.46447C28.2692 4.65973 28.2692 4.97632 28.4645 5.17158L31.2929 8.00001L28.4645 10.8284C28.2692 11.0237 28.2692 11.3403 28.4645 11.5355C28.6597 11.7308 28.9763 11.7308 29.1716 11.5355L32.3536 8.35356ZM-8.74228e-08 8.5L2 8.5L2 7.5L8.74228e-08 7.5L-8.74228e-08 8.5ZM6 8.5L10 8.5L10 7.5L6 7.5L6 8.5ZM14 8.5L18 8.5L18 7.5L14 7.5L14 8.5ZM22 8.5L26 8.5L26 7.5L22 7.5L22 8.5ZM30 8.50001L32 8.50001L32 7.50001L30 7.50001L30 8.50001ZM32.7071 8.70711C33.0976 8.31659 33.0976 7.68342 32.7071 7.2929L26.3431 0.928937C25.9526 0.538412 25.3195 0.538412 24.9289 0.928937C24.5384 1.31946 24.5384 1.95263 24.9289 2.34315L30.5858 8.00001L24.9289 13.6569C24.5384 14.0474 24.5384 14.6805 24.9289 15.0711C25.3195 15.4616 25.9526 15.4616 26.3431 15.0711L32.7071 8.70711ZM-1.74846e-07 9L2 9L2 7L1.74846e-07 7L-1.74846e-07 9ZM6 9L10 9L10 7L6 7L6 9ZM14 9L18 9L18 7L14 7L14 9ZM22 9L26 9L26 7L22 7L22 9ZM30 9.00001L32 9.00001L32 7.00001L30 7.00001L30 9.00001Z"
-                fill="#E84C25"
-              />
-            </svg>
-            <p>Out Transaction</p>
-          </div>
-          <div className="flex gap-4 items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="33"
-              height="16"
-              viewBox="0 0 33 16"
-              fill="none"
-            >
-              <path
-                d="M32.3536 8.35356C32.5488 8.1583 32.5488 7.84171 32.3536 7.64645L29.1716 4.46447C28.9763 4.26921 28.6597 4.26921 28.4645 4.46447C28.2692 4.65973 28.2692 4.97632 28.4645 5.17158L31.2929 8.00001L28.4645 10.8284C28.2692 11.0237 28.2692 11.3403 28.4645 11.5355C28.6597 11.7308 28.9763 11.7308 29.1716 11.5355L32.3536 8.35356ZM-8.74228e-08 8.5L2 8.5L2 7.5L8.74228e-08 7.5L-8.74228e-08 8.5ZM6 8.5L10 8.5L10 7.5L6 7.5L6 8.5ZM14 8.5L18 8.5L18 7.5L14 7.5L14 8.5ZM22 8.5L26 8.5L26 7.5L22 7.5L22 8.5ZM30 8.50001L32 8.50001L32 7.50001L30 7.50001L30 8.50001ZM32.7071 8.70711C33.0976 8.31659 33.0976 7.68342 32.7071 7.2929L26.3431 0.928937C25.9526 0.538412 25.3195 0.538412 24.9289 0.928937C24.5384 1.31946 24.5384 1.95263 24.9289 2.34315L30.5858 8.00001L24.9289 13.6569C24.5384 14.0474 24.5384 14.6805 24.9289 15.0711C25.3195 15.4616 25.9526 15.4616 26.3431 15.0711L32.7071 8.70711ZM-1.74846e-07 9L2 9L2 7L1.74846e-07 7L-1.74846e-07 9ZM6 9L10 9L10 7L6 7L6 9ZM14 9L18 9L18 7L14 7L14 9ZM22 9L26 9L26 7L22 7L22 9ZM30 9.00001L32 9.00001L32 7.00001L30 7.00001L30 9.00001Z"
-                fill="#50BE8F"
-              />
-            </svg>
-            <p>In Transaction</p>
-          </div>
-          <div className="flex gap-4 items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="33"
-              height="16"
-              viewBox="0 0 33 16"
-              fill="none"
-            >
-              <path
-                d="M32.3536 8.35356C32.5488 8.1583 32.5488 7.84171 32.3536 7.64645L29.1716 4.46447C28.9763 4.26921 28.6597 4.26921 28.4645 4.46447C28.2692 4.65973 28.2692 4.97632 28.4645 5.17158L31.2929 8.00001L28.4645 10.8284C28.2692 11.0237 28.2692 11.3403 28.4645 11.5355C28.6597 11.7308 28.9763 11.7308 29.1716 11.5355L32.3536 8.35356ZM-8.74228e-08 8.5L2 8.5L2 7.5L8.74228e-08 7.5L-8.74228e-08 8.5ZM6 8.5L10 8.5L10 7.5L6 7.5L6 8.5ZM14 8.5L18 8.5L18 7.5L14 7.5L14 8.5ZM22 8.5L26 8.5L26 7.5L22 7.5L22 8.5ZM30 8.50001L32 8.50001L32 7.50001L30 7.50001L30 8.50001ZM32.7071 8.70711C33.0976 8.31659 33.0976 7.68342 32.7071 7.2929L26.3431 0.928937C25.9526 0.538412 25.3195 0.538412 24.9289 0.928937C24.5384 1.31946 24.5384 1.95263 24.9289 2.34315L30.5858 8.00001L24.9289 13.6569C24.5384 14.0474 24.5384 14.6805 24.9289 15.0711C25.3195 15.4616 25.9526 15.4616 26.3431 15.0711L32.7071 8.70711ZM-1.74846e-07 9L2 9L2 7L1.74846e-07 7L-1.74846e-07 9ZM6 9L10 9L10 7L6 7L6 9ZM14 9L18 9L18 7L14 7L14 9ZM22 9L26 9L26 7L22 7L22 9ZM30 9.00001L32 9.00001L32 7.00001L30 7.00001L30 9.00001Z"
-                fill="#00A2F7"
-              />
-            </svg>
-            <p>Includes Initial Transaction</p>
-          </div>
-        </div>
-        <div className="p-6 flex gap-16">
-          <div className="flex gap-4 items-center">
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                border: "1px solid #5D627B",
-                background: "#8A92B8",
-              }}
-            />
-            <p className="text-sm font-semibold">ROOT ACCOUNT</p>
-          </div>
-          <div className="flex gap-4 items-center">
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                border: "1px solid #E84C25",
-                background: "#FFE2DB",
-              }}
-            />
-            <div className="flex flex-col">
-              <p className="text-sm font-semibold">ACCOUNT</p>
-              <p className="text-xs">(with transactions from root account)</p>
-            </div>
-          </div>
-          <div className="flex gap-4 items-center">
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                border: "1px solid #50BE8F",
-                background: "#EBFFF6",
-              }}
-            />
-            <div className="flex flex-col">
-              <p className="text-sm font-semibold">ACCOUNT</p>
-              <p className="text-xs">(with transactions to root account)</p>
-            </div>
-          </div>
-          <div className="flex gap-4 items-center">
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                border: "1px solid #00A2F7",
-                background: "#E5F6FF",
-              }}
-            />
-            <div className="flex flex-col">
-              <p className="text-sm font-semibold">ACCOUNT</p>
-              <p className="text-xs">(that made initial transaction)</p>
-            </div>
-          </div>
-        </div>
+
+      <div className="border-t border-border px-6 py-5 grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-3">
+        <EdgeKey color={EDGE.out} label="Out transaction" />
+        <EdgeKey color={EDGE.in} label="In transaction" />
+        <EdgeKey color={EDGE.inOut} label="Includes initial transaction" />
       </div>
-    </div>
+
+      <div className="border-t border-border px-6 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-3">
+        <NodeKey
+          borderColor={ROOT_NODE.border}
+          fillColor={ROOT_NODE.background}
+          label="Root account"
+        />
+        <NodeKey
+          borderColor={EDGE.out}
+          fillColor={NODE_BG_LIGHT.out}
+          label="Account"
+          sub="With transactions from root"
+        />
+        <NodeKey
+          borderColor={EDGE.in}
+          fillColor={NODE_BG_LIGHT.in}
+          label="Account"
+          sub="With transactions to root"
+        />
+        <NodeKey
+          borderColor={EDGE.inOut}
+          fillColor={NODE_BG_LIGHT.inOut}
+          label="Account"
+          sub="Made initial transaction"
+        />
+      </div>
+    </Card>
   );
 };
 
-export default TransactionsChrart;
+const EdgeKey = ({ color, label }: { color: string; label: string }) => (
+  <div className="flex items-center gap-3">
+    <span
+      className="h-1 w-8 shrink-0 rounded-full"
+      style={{ backgroundColor: color }}
+    />
+    <span className="text-[12px] font-semibold uppercase tracking-wide text-muted">
+      {label}
+    </span>
+  </div>
+);
+
+const NodeKey = ({
+  borderColor,
+  fillColor,
+  label,
+  sub,
+}: {
+  borderColor: string;
+  fillColor: string;
+  label: string;
+  sub?: string;
+}) => (
+  <div className="flex items-start gap-3">
+    <span
+      className="mt-[3px] h-3 w-3 shrink-0 rounded-full border"
+      style={{ borderColor, backgroundColor: fillColor }}
+    />
+    <div className="flex flex-col gap-0.5">
+      <span className="text-[12px] font-semibold uppercase tracking-wide text-muted">
+        {label}
+      </span>
+      {sub && (
+        <span className="text-[11px] leading-tight text-muted/80">{sub}</span>
+      )}
+    </div>
+  </div>
+);
+
+export default TransactionsChart;

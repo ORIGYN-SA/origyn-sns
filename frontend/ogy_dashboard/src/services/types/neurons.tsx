@@ -30,6 +30,7 @@ export interface INeuronData {
   dissolveDelay: string;
   id: string;
   createdAt: string;
+  createdAtRaw: number;
   maxNeuronAgeForAgeBonus: number;
   maxAgeBonusPercentage: string;
   ageBonus: number;

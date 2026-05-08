@@ -1,4 +1,3 @@
-// src/components/charts/pie/Pie.tsx
 import React, { useMemo } from "react";
 import {
   PieChart as RechartsPieChart,
@@ -6,11 +5,10 @@ import {
   Label,
   Text,
   Pie as RechartsPie,
-  ResponsiveContainer,
   LabelProps,
 } from "recharts";
-import tc from "tinycolor2";
 import { colors as themeColors } from "@theme/preset";
+import { ChartContainer } from "@components/charts/shadcn/chart";
 import { usePieChart } from "./context";
 import { PolarViewBox } from "recharts/types/util/types";
 
@@ -62,7 +60,7 @@ const PieChart: React.FC<PieChartProps> = ({
   const handleOnMouseLeaveCell = () => setActiveIndex(null);
 
   return (
-    <ResponsiveContainer>
+    <ChartContainer config={{}} className="h-full w-full aspect-auto">
       <RechartsPieChart>
         <RechartsPie
           dataKey="value"
@@ -73,12 +71,9 @@ const PieChart: React.FC<PieChartProps> = ({
           {validData.map((_, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={
-                isActiveIndexValid && activeIndex !== index
-                  ? tc(colors[activeIndex % colors.length])
-                      .setAlpha(0.5)
-                      .toString()
-                  : colors[index % colors.length]
+              fill={colors[index % colors.length]}
+              fillOpacity={
+                isActiveIndexValid && activeIndex !== index ? 0.5 : 1
               }
               stroke={themeColors.surface.DEFAULT}
               strokeWidth={4}
@@ -111,7 +106,9 @@ const PieChart: React.FC<PieChartProps> = ({
                       textAnchor="middle"
                       verticalAnchor="middle"
                     >
-                      {((activeData.value / sumData) * 100).toFixed(1) + " %"}
+                      {parseFloat(
+                        ((activeData.value / sumData) * 100).toFixed(2)
+                      ) + "%"}
                     </Text>
                     <Text
                       dy={24}
@@ -132,7 +129,7 @@ const PieChart: React.FC<PieChartProps> = ({
           )}
         </RechartsPie>
       </RechartsPieChart>
-    </ResponsiveContainer>
+    </ChartContainer>
   );
 };
 

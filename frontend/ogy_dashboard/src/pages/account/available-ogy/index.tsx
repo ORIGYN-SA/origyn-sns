@@ -1,68 +1,56 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useWallet } from "@amerej/artemis-react";
-import { Card, Button } from "@components/ui";
+import { useWallet } from "@components/auth/useWallet";
+import { Button } from "@components/ui";
+import BalanceCard from "@components/account/BalanceCard";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
-import { Skeleton } from "@components/ui";
+
+const ACTION_BUTTON_CLASS =
+  "h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2";
 
 const AvailableOGY = () => {
   const { principalId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => {
-    setShow(false);
-  };
+  const handleClose = () => setShow(false);
 
   const { data: balanceOGY } = useFetchBalanceOGYOwner();
-  const { data: balanceOGYUSD } = useFetchBalanceOGYUSD({
-    balance: balanceOGY?.balance,
-  });
+  const {
+    data: balanceOGYUSD,
+    isLoading: isBalanceUsdLoading,
+    isError: isBalanceUsdError,
+  } = useFetchBalanceOGYUSD({ balance: balanceOGY?.balance });
+
+  const isBalanceLoading = balanceOGY?.balance === undefined;
+  const isUsdLoading = isBalanceLoading || isBalanceUsdLoading;
 
   return (
-    <Card>
-      <div className="flex justify-between mb-4">
-        <div className="font-bold text-content/60">Available OGY</div>
+    <BalanceCard
+      title="Available OGY"
+      headerAction={
         <Link
-          className="text-accent"
-          to={`/explorer/transactions/accounts/${principalId}/history`}
+          to={`/transaction-history/transactions/accounts/${principalId}#transaction-history-table`}
+          className="font-medium text-xs leading-none text-accent"
         >
           Transaction history
         </Link>
-      </div>
-      <div>
-        <div></div>
-        <div>
-          <div className="flex items-center text-2xl font-semibold">
-            <img className="h-6 w-6" src="/ogy_logo.svg" alt="OGY Logo" />
-            <div className="flex ml-2">
-              {balanceOGY?.balance !== undefined ? (
-                <div>
-                  {balanceOGY.string.balance}
-                  <span className="text-content/60 ml-2">OGY</span>
-                </div>
-              ) : (
-                <Skeleton className="w-32" />
-              )}
-            </div>
-          </div>
-          <div className="flex">
-            {balanceOGYUSD ? (
-              <div className="text-content/60">{balanceOGYUSD} USD</div>
-            ) : (
-              <Skeleton className="w-24" />
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="mt-8">
-        <Button className="w-full" onClick={handleShow}>
-          Transfer
-        </Button>
-        <Transfer show={show} handleClose={handleClose} />
-      </div>
-    </Card>
+      }
+      balance={balanceOGY?.string.balance}
+      isBalanceLoading={isBalanceLoading}
+      usd={balanceOGYUSD}
+      isUsdLoading={isUsdLoading}
+      isUsdError={isBalanceUsdError}
+      action={
+        <>
+          <Button className={ACTION_BUTTON_CLASS} onClick={handleShow}>
+            Transfer
+          </Button>
+          <Transfer show={show} handleClose={handleClose} />
+        </>
+      }
+    />
   );
 };
 

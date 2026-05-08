@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import _capitalize from "lodash/capitalize";
+import { capitalize } from "@helpers/strings";
 import snsAPI from "@services/api/sns/v1";
 import { SNS_ROOT_CANISTER } from "@constants/index";
 import { IListProps, IProposalResult, IProposalData } from "@services/types";
@@ -37,16 +37,19 @@ export const getListProposalsAll = async ({
           proposer,
           title,
           proposed: formatDate(proposed, { fromSeconds: true }) ?? "",
+          proposedRaw: proposed,
           timeRemaining:
             DateTime.fromSeconds(timeRemaining).toRelativeCalendar() ?? "",
+          timeRemainingRaw: timeRemaining,
           topic,
-          status: _capitalize(status),
+          status: capitalize(status),
           votes: {
             yes,
             yesToString: yes.toFixed(3),
             no,
             noToString: no.toFixed(3),
             total: roundAndFormatLocale({ number: divideBy1e8(votes.total) }),
+            totalCompact: "",
           },
           riskedOGY: roundAndFormatLocale({ number: divideBy1e8(riskedOGY) }),
         } as IProposalData;

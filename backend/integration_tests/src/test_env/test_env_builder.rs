@@ -1,14 +1,13 @@
-use crate::sns_test_env::sns_init_args::{generate_sns_neuron_data, SnsProject};
+use crate::sns_test_env::sns_init_args::SnsProject;
 use crate::sns_test_env::sns_test_env::SnsTestEnv;
 use crate::test_env::setup_canisters::*;
 use crate::utils::{random_principal, tick_n_blocks};
-use bity_ic_types::Hash;
 use candid::{Nat, Principal};
 use dex_interaction_api::Args as BuybackBurnArgs;
 use pocket_ic::PocketIcBuilder;
 use sns_governance_canister::types::Neuron;
 use sns_ledger_canister::types::Account as LedgerAccount;
-use sns_neuron_controller_api_canister::Args as SncArgs;
+use sns_neuron_controller_api_canister::init::TokenParams;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -135,29 +134,21 @@ impl TestEnv {
     pub fn install_sns_neuron_controller(
         &self,
         canister_id: Principal,
-        rewards_destination: Option<Principal>,
         ogy_sns_governance_canister_id: Principal,
         goldao_sns_governance_canister_id: Principal,
         goldao_sns_ledger_canister_id: Principal,
         goldao_sns_rewards_canister_id: Principal,
-        wtn_sns_governance_canister_id: Principal,
-        wtn_sns_ledger_canister_id: Principal,
-        nns_governance_canister_id: Principal,
-        nns_ledger_canister_id: Principal,
+        reward_tokens: HashMap<TokenSymbol, TokenParams>,
     ) -> Principal {
         setup_sns_neuron_controller::setup(
             &self.pic.borrow(),
             canister_id,
             vec![self.controller],
-            rewards_destination,
             ogy_sns_governance_canister_id,
             goldao_sns_governance_canister_id,
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,
-            wtn_sns_governance_canister_id,
-            wtn_sns_ledger_canister_id,
-            nns_governance_canister_id,
-            nns_ledger_canister_id,
+            reward_tokens,
         )
     }
 

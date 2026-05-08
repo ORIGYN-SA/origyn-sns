@@ -13,7 +13,7 @@ import { ChartData } from "@services/types/charts.types";
 import { getCurrentDateInSeconds } from "@helpers/dates/index";
 
 export interface TotalBurnedOGYTimeSeriesParams {
-  options?: UseQueryOptions;
+  options?: UseQueryOptions<TotalBurnedOGYTimeSeries>;
   period: string;
 }
 

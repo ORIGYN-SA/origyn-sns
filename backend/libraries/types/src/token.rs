@@ -115,6 +115,7 @@ impl TokenSymbol {
             "OGY" => Ok(TokenSymbol::OGY),
             "GOLDAO" | "GLDGov" => Ok(TokenSymbol::GOLDAO),
             "WTN" => Ok(TokenSymbol::WTN),
+            "GLDT" => Ok(TokenSymbol::GLDT),
             _ => Err(TokenSymbolParseError::InvalidTokenSymbol),
         }
     }

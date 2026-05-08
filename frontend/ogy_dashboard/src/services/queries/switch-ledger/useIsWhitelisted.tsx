@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const isWhitelisted = async (): Promise<boolean> => {
   const actor = await getActor("OGYTokenSwap", { isAnon: false });
@@ -8,10 +8,11 @@ const isWhitelisted = async (): Promise<boolean> => {
   return isWhitelisted as boolean;
 };
 
-const useIsWhitelisted = () => {
+const useIsWhitelisted = (principalId: string | undefined) => {
   return useQuery<boolean>({
-    queryKey: ["isWhitelisted"],
+    queryKey: ["isWhitelisted", principalId],
     queryFn: () => isWhitelisted(),
+    enabled: !!principalId,
   });
 };
 

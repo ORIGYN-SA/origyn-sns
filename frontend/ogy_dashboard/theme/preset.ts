@@ -5,15 +5,24 @@ export const colors = {
     1: "rgb(var(--color-surface-1))",
     2: "rgb(var(--color-surface-2))",
     3: "rgb(var(--color-surface-3))",
+    muted: "rgb(var(--color-surface-muted))",
+    faint: "rgb(var(--color-surface-faint))",
     DEFAULT: "rgb(var(--color-surface-1))",
   },
-  border: "rgb(var(--color-border))",
+  border: {
+    DEFAULT: "rgb(var(--color-border))",
+    strong: "rgb(var(--color-border-strong))",
+    faint: "rgb(var(--color-border-faint))",
+  },
   accent: "rgb(var(--color-accent))",
   charcoal: "rgb(var(--color-charcoal))",
+  charcoalLight: "rgb(var(--color-charcoal-light))",
+  charcoal2: "rgb(var(--color-charcoal-2))",
   spacePurple: "rgb(var(--color-space-purple))",
   jade: "rgb(var(--color-jade))",
   sky: "rgb(var(--color-sky))",
   mouse: "rgb(var(--color-mouse))",
+  muted: "rgb(var(--color-muted))",
   candyFloss: "rgb(var(--color-candy-floss))",
 };
 
@@ -37,10 +46,10 @@ export default {
     extend: {
       colors: tailwindcssColors(colors),
       fontFamily: {
-        sans: ["DM sans", "Montserrat", "system-ui", "sans-serif"],
+        sans: ["DM sans", "system-ui", "sans-serif"],
       },
       backgroundImage: {
-        'ledger-switch': "url('/bg_ledger_switch.jpg')",
+        'ledger-switch': "url('/bg_ledger_switch.webp')",
       }
     },
   },

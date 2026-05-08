@@ -34,8 +34,10 @@ const useProposalsAll = ({
         const id = proposal.id;
         const proposer = proposal.proposer;
         const proposed = proposal.proposed;
+        const proposedRaw = proposal.proposedRaw;
         const title = proposal.title;
         const timeRemaining = proposal.timeRemaining;
+        const timeRemainingRaw = proposal.timeRemainingRaw;
         const topic = proposal.topic;
         const status = proposal.status;
         const votes = proposal.votes;
@@ -44,8 +46,10 @@ const useProposalsAll = ({
           id,
           proposer,
           proposed,
+          proposedRaw,
           title,
           timeRemaining,
+          timeRemainingRaw,
           topic,
           status,
           votes,
@@ -55,14 +59,9 @@ const useProposalsAll = ({
               label: "Proposer",
               value: (
                 <div className="flex items-center justify-center max-w-72 m-auto">
-                  <div
-                    data-tooltip-id="tooltip_title"
-                    data-tooltip-content={proposer}
-                    className="truncate"
-                  >
-                    {proposer}
-                  </div>
-                  <Tooltip id="tooltip_title" />
+                  <Tooltip content={proposer}>
+                    <div className="truncate">{proposer}</div>
+                  </Tooltip>
                   <CopyToClipboard value={proposer} />
                 </div>
               ) as ReactNode,

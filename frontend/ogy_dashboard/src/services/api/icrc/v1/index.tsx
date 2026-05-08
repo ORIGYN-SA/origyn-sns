@@ -1,11 +1,9 @@
-import axios from "axios";
 import { API_ICRC_V1_BASE_URL } from "@constants/index";
+import { createHttpClient } from "@services/api/httpClient";
 
-const instance = axios.create({
+const instance = createHttpClient({
   baseURL: API_ICRC_V1_BASE_URL,
-  timeout: 1000,
-  //   headers: { "X-Custom-Header": "" },
-  withCredentials: false,
+  timeout: 10_000,
 });
 
 export default instance;

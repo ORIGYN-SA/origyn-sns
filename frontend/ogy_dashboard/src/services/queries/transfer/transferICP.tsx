@@ -1,9 +1,17 @@
 import { Principal } from "@dfinity/principal";
-import { AccountIdentifier } from "@dfinity/ledger-icp";
+import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE_ICP } from "@constants/index";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
-const transferICP = async ({ amount, to }: { amount: bigint; to: string }) => {
+const transferICP = async ({
+  amount,
+  to,
+  fromSubaccount,
+}: {
+  amount: bigint;
+  to: string;
+  fromSubaccount?: SubAccount;
+}) => {
   const accountId = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(to),
   }).toHex();
@@ -14,7 +22,7 @@ const transferICP = async ({ amount, to }: { amount: bigint; to: string }) => {
       e8s: BigInt(TRANSACTION_FEE_ICP),
     },
     memo: 0n,
-    from_subaccount: [],
+    from_subaccount: fromSubaccount ? [fromSubaccount.toUint8Array()] : [],
     created_at_time: [],
     amount: { e8s: amount },
   });

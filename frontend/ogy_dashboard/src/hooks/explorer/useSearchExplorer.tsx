@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import _isNumeric from "validator/lib/isNumeric";
 
 import {
   getAccountOverview,
@@ -10,8 +9,7 @@ import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTran
 
 export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
   const fetchSearch = async () => {
-    const isSearchtermNumber = () =>
-      _isNumeric(searchterm, { no_symbols: true });
+    const isSearchtermNumber = () => /^\d+$/.test(searchterm);
     if (!isSearchtermNumber()) {
       const resultsAccountOverview = await getAccountOverview({
         accountId: searchterm,

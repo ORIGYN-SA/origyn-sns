@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,7 +13,17 @@ import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransferOGY from "@hooks/transfer/useTransferOGY";
 
-const Transfer = ({ show, handleClose }) => {
+type TransferFormValues = {
+  amount: string;
+  recipientAddress: string;
+};
+
+type TransferProps = {
+  show: boolean;
+  handleClose: () => void;
+};
+
+const Transfer = ({ show, handleClose }: TransferProps) => {
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
@@ -30,7 +38,6 @@ const Transfer = ({ show, handleClose }) => {
     isPending: isPendingTransfer,
     isIdle: isIdleTransfer,
     error: errorTransfer,
-    // error: errorTransfer,
   } = useTransferOGY();
 
   const {
@@ -41,7 +48,7 @@ const Transfer = ({ show, handleClose }) => {
     setValue,
     setFocus,
     formState: { errors, isValid, dirtyFields },
-  } = useForm({
+  } = useForm<TransferFormValues>({
     mode: "onChange",
     shouldUnregister: true,
     shouldFocusError: false,
@@ -61,14 +68,18 @@ const Transfer = ({ show, handleClose }) => {
     const watchedAmount = useWatch({
       name: "amount",
       control,
-      defaultValue: 0,
+      defaultValue: "",
     });
+    const numericAmount = Number(watchedAmount);
     const total = divideBy1e8(
-      Number(watchedAmount) * 100000000 - Number(TRANSACTION_FEE)
+      numericAmount * 100000000 - Number(TRANSACTION_FEE)
     );
     return (
       <div>
-        {isNaN(watchedAmount) || watchedAmount === 0 || errors?.amount
+        {!watchedAmount ||
+        isNaN(numericAmount) ||
+        numericAmount === 0 ||
+        errors?.amount
           ? 0
           : total}{" "}
         OGY
@@ -76,7 +87,7 @@ const Transfer = ({ show, handleClose }) => {
     );
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: TransferFormValues) => {
     transfer(
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
@@ -93,7 +104,7 @@ const Transfer = ({ show, handleClose }) => {
     );
   };
 
-  const isAmountUnderBalance = (value) => {
+  const isAmountUnderBalance = (value: string) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const balance = BigInt(balanceOGY.balanceE8s);
       const amount = numberToE8s(value);
@@ -102,7 +113,7 @@ const Transfer = ({ show, handleClose }) => {
     return true;
   };
 
-  const isAmountUpperFee = (value) => {
+  const isAmountUpperFee = (value: string) => {
     if (balanceOGY && Number(value) && Number(value) > 0) {
       const amount = numberToE8s(value);
       if (amount < TRANSACTION_FEE) return false;
@@ -110,7 +121,7 @@ const Transfer = ({ show, handleClose }) => {
     return true;
   };
 
-  const isValidRecipientAddress = (value) => {
+  const isValidRecipientAddress = (value: string) => {
     try {
       decodeIcrcAccount(value);
       return true;
@@ -120,154 +131,182 @@ const Transfer = ({ show, handleClose }) => {
   };
 
   const handleSetAmountMaxBalance = () => {
+    if (!balanceOGY) return;
     const value = divideBy1e8(balanceOGY.balanceE8s);
-    setValue("amount", value > 0 ? value : 0, {
+    setValue("amount", value > 0 ? String(value) : "0", {
       shouldValidate: true,
     });
     setFocus("recipientAddress");
   };
 
   return (
-    <Dialog show={show} handleClose={handleClose}>
-      <div className="pt-6">
-        {isSuccessFetchBalanceOGY && isIdleTransfer && (
-          <div>
-            <div className="text-center px-12">
-              <div className="font-bold text-lg">Transfer OGY</div>
-              <div className="text-sm text-content/60 mb-12">
-                You can only send OGY from your available balance.
-              </div>
+    <Dialog
+      show={show}
+      handleClose={handleClose}
+      panelClassName="max-w-[480px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
+      floatingClose
+    >
+      {isSuccessFetchBalanceOGY && isIdleTransfer && (
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col gap-7">
+          <div className="flex flex-col items-center gap-1.5 text-center">
+            <div className="text-[22px] font-semibold leading-none text-content">
+              Transfer OGY
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="my-8 px-12">
-                <div className="flex justify-between items-center">
-                  <label htmlFor="amount">Amount</label>
-                  <button onClick={handleSetAmountMaxBalance} type="button">
-                    <div className="bg-accent px-4 py-1 rounded-full text-white flex items-center">
-                      <ArrowUpTrayIcon className="h-4 w-4 mr-2" />
-                      Max
-                    </div>
-                  </button>
-                </div>
-                <InputField
-                  id="amount"
-                  type="text"
-                  register={register("amount", {
-                    pattern: /[0-9.]/,
-                    valueAsNumber: true,
-                    required: "Amount is required.",
-                    validate: {
-                      isAmountUnderBalance: (v) =>
-                        isAmountUnderBalance(v) ||
-                        "Amount must not exceed your balance.",
-                      isAmountUpperFee: (v) =>
-                        isAmountUpperFee(v) ||
-                        "Amount must not be less than transaction fee.",
-                      isPositive: (v) =>
-                        Number(v) > 0 || "Amount must be a positive number.",
-                    },
-                  })}
-                  errors={errors?.amount}
-                />
-              </div>
-
-              <div className="mb-12 px-12">
-                <label htmlFor="recipientAddress">Recipient address</label>
-                <InputField
-                  id="recipientAddress"
-                  type="text"
-                  register={register("recipientAddress", {
-                    required: "Recipient address is required.",
-                    validate: {
-                      isValidRecipientAddress: (v) =>
-                        isValidRecipientAddress(v) ||
-                        "Invalid recipient address.",
-                    },
-                  })}
-                  // ? Object.keys(dirtyFields).length !== 0 fix form set errors when amount is setted via max button
-                  errors={
-                    Object.keys(dirtyFields).length !== 0 &&
-                    errors?.recipientAddress
-                  }
-                />
-              </div>
-
-              <div className="border-t border-border px-12 py-4">
-                <div className="flex justify-between items-center font-bold pt-4">
-                  <div>Amount Received</div>
-                  <div className="flex items-center font-semibold">
-                    <img
-                      className="mx-2 h-4 w-4"
-                      src="/ogy_logo.svg"
-                      alt="OGY Logo"
-                    />
-                    <Amount />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-content/60">
-                  <div>Transaction fee (billed to source)</div>
-                  <div>{transactionFee} OGY</div>
-                </div>
-              </div>
-
-              <div className="text-center mt-4 mb-8 px-12">
-                <Button type="submit" className="w-full" disabled={!isValid}>
-                  Transfer OGY
-                </Button>
-              </div>
-            </form>
-
-            <div className="bg-surface-2 rounded-b-xl border-t border-border flex justify-center items-center py-6 text-content/60">
-              <div>Current balance: </div>
-              <div className="flex items-center font-semibold">
-                <img
-                  className="mx-2 h-4 w-4"
-                  src="/ogy_logo.svg"
-                  alt="OGY Logo"
-                />
-                <span>{balanceOGY.balance} OGY</span>
-              </div>
+            <div className="text-[13px] leading-snug text-muted max-w-[340px]">
+              You can only send OGY from your available balance.
             </div>
           </div>
-        )}
-        {isSuccessFetchBalanceOGY && isPendingTransfer && (
-          <div className="px-4 pb-12 flex flex-col justify-center items-center">
-            <LoaderSpin />
-            <div className="font-semibold text-xl mt-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-5"
+          >
+            <div>
+              <div className="flex justify-between items-center">
+                <label
+                  htmlFor="amount"
+                  className="text-[13px] font-medium text-content"
+                >
+                  Amount
+                </label>
+                <button
+                  onClick={handleSetAmountMaxBalance}
+                  type="button"
+                  className="flex items-center gap-1 text-[12px] font-medium text-accent hover:underline"
+                >
+                  <ArrowUpTrayIcon className="h-3.5 w-3.5" />
+                  Max
+                </button>
+              </div>
+              <InputField
+                id="amount"
+                type="text"
+                register={register("amount", {
+                  required: "Amount is required.",
+                  validate: {
+                    isAmountUnderBalance: (v) =>
+                      isAmountUnderBalance(v) ||
+                      "Amount must not exceed your balance.",
+                    isAmountUpperFee: (v) =>
+                      isAmountUpperFee(v) ||
+                      "Amount must not be less than transaction fee.",
+                    isPositive: (v) =>
+                      Number(v) > 0 || "Amount must be a positive number.",
+                  },
+                })}
+                errors={errors?.amount}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="recipientAddress"
+                className="text-[13px] font-medium text-content"
+              >
+                Recipient address
+              </label>
+              <InputField
+                id="recipientAddress"
+                type="text"
+                register={register("recipientAddress", {
+                  required: "Recipient address is required.",
+                  validate: {
+                    isValidRecipientAddress: (v) =>
+                      isValidRecipientAddress(v) ||
+                      "Invalid recipient address.",
+                  },
+                })}
+                errors={
+                  Object.keys(dirtyFields).length !== 0
+                    ? errors?.recipientAddress
+                    : undefined
+                }
+              />
+            </div>
+
+            <div className="rounded-2xl border border-border-strong bg-surface-faint p-4 flex flex-col gap-2">
+              <div className="flex justify-between items-center text-[14px]">
+                <div className="text-content">Amount Received</div>
+                <div className="flex items-center font-medium text-content">
+                  <img
+                    className="mr-2 h-4 w-4"
+                    src="/ogy_logo.svg"
+                    alt="OGY Logo"
+                  />
+                  <Amount />
+                </div>
+              </div>
+              <div className="flex justify-between items-center text-[12px] text-muted">
+                <div>Transaction fee (billed to source)</div>
+                <div>{transactionFee} OGY</div>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              disabled={!isValid}
+              className="w-full !py-0 text-[14px] leading-[44px]"
+            >
+              Transfer OGY
+            </Button>
+          </form>
+
+          <div className="text-center text-[12px] leading-none text-muted">
+            Current balance:{" "}
+            <span className="font-medium text-content">
+              {balanceOGY.balance} OGY
+            </span>
+          </div>
+        </div>
+      )}
+      {isSuccessFetchBalanceOGY && isPendingTransfer && (
+        <div className="pt-10 pb-10 px-5 mx-auto w-full max-w-[480px] flex flex-col items-center gap-5">
+          <LoaderSpin />
+          <div className="flex flex-col items-center gap-1.5 text-center">
+            <div className="text-[18px] font-semibold leading-none text-content">
               Transfer is being processed
             </div>
-            <div className="text-content/60">This can take a few seconds</div>
-          </div>
-        )}
-        {isSuccessFetchBalanceOGY && isSuccessTransfer && (
-          <div className="px-4 pb-12 flex flex-col justify-center items-center">
-            <CheckCircleIcon className="h-24 w-24 text-jade mb-4" />
-            <div className="font-semibold text-xl mb-8">
-              Transfer was successful !
+            <div className="text-[13px] leading-snug text-muted">
+              This can take a few seconds
             </div>
-            <Button className="px-8" onClick={handleClose}>
-              Close
-            </Button>
           </div>
-        )}
-        {isSuccessFetchBalanceOGY && isErrorTransfer && (
-          <div className="px-4 pb-12 flex flex-col justify-center items-center">
-            <XCircleIcon className="h-24 w-24 text-red-400 mb-4" />
-            <div className="font-semibold text-xl mb-8">Transfer error !</div>
-            <div className="bg-surface-3 p-4 rounded-xl">
-              {errorTransfer?.message}
-            </div>
-            <Button className="mt-10 px-8" onClick={handleClose}>
-              Close
-            </Button>
+        </div>
+      )}
+      {isSuccessFetchBalanceOGY && isSuccessTransfer && (
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col items-center gap-5">
+          <CheckCircleIcon className="h-16 w-16 text-jade" />
+          <div className="text-[22px] font-semibold leading-none text-content text-center">
+            Transfer was successful !
           </div>
-        )}
-        {!isSuccessFetchBalanceOGY && (
-          <div className="flex justify-center items-center pb-12">
-            <LoaderSpin />
+          <Button
+            onClick={handleClose}
+            className="w-full !py-0 text-[14px] leading-[44px]"
+          >
+            Close
+          </Button>
+        </div>
+      )}
+      {isSuccessFetchBalanceOGY && isErrorTransfer && (
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col items-center gap-5">
+          <XCircleIcon className="h-16 w-16 text-red-400" />
+          <div className="text-[22px] font-semibold leading-none text-content text-center">
+            Transfer error !
           </div>
-        )}
-      </div>
+          <div className="w-full rounded-2xl border border-border-strong bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
+            {errorTransfer?.message}
+          </div>
+          <Button
+            onClick={handleClose}
+            className="w-full !py-0 text-[14px] leading-[44px]"
+          >
+            Close
+          </Button>
+        </div>
+      )}
+      {!isSuccessFetchBalanceOGY && (
+        <div className="pt-10 pb-10 px-5 flex justify-center items-center">
+          <LoaderSpin />
+        </div>
+      )}
     </Dialog>
   );
 };

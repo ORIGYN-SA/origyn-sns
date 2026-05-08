@@ -1,19 +1,54 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { Button, InputField, Card } from "@components/ui";
+import { ReactNode } from "react";
+import { Button, InputField, Card, PageHeader } from "@components/ui";
 import { toast } from "react-hot-toast";
 import { Principal } from "@dfinity/principal";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import useCreateSupportTicket, {
   supportRequestProps,
 } from "./useCreateSupportTicket";
 
+const Field = ({
+  label,
+  htmlFor,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  children: ReactNode;
+}) => (
+  <div className="flex flex-col gap-2">
+    <label htmlFor={htmlFor} className="text-sm font-medium text-content">
+      {label}
+    </label>
+    {children}
+  </div>
+);
+
 const Support = () => {
   const mutation = useCreateSupportTicket();
 
-  const { isSuccess, isPending } = mutation;
+  const { isSuccess, isPending, reset: resetMutation } = mutation;
 
-  const onSubmit = (data: supportRequestProps) => {
+  const isValidRecipientAddress = (value: string) => {
+    try {
+      Principal.fromText(value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<supportRequestProps>({
+    mode: "onChange",
+    shouldUnregister: true,
+  });
+
+  const onSubmit: SubmitHandler<supportRequestProps> = (data) => {
     mutation.mutate(data, {
       onSuccess: () => {
         toast.success("Support ticket was created");
@@ -24,59 +59,73 @@ const Support = () => {
     });
   };
 
-  const isValidRecipientAddress = (value: string) => {
-    try {
-      Principal.fromText(value);
-      return true;
-    } catch (err) {
-      return false;
-    }
+  const handleCreateAnother = () => {
+    reset();
+    resetMutation();
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onChange",
-    shouldUnregister: true,
-  });
-
   return (
-    <div className="container mx-auto py-16 px-4">
-      <div className="flex justify-center">
-        <Card className="max-w-4xl w-full">
+    <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
+      <PageHeader
+        category="Support"
+        title={isSuccess ? "Ticket submitted" : "Create a ticket"}
+      />
+
+      <div className="flex justify-center mt-8">
+        <Card className="w-full max-w-2xl">
           {isSuccess ? (
-            <>
-              <div className="text-center px-12 py-4">
-                <div className="text-2xl">Support ticket was created</div>
-                <br />
-                <div className="text-md text-content/60">
-                  Please wait for our responce to the email address you
-                  specified.
-                </div>
+            <div className="flex flex-col items-center text-center gap-4 py-4">
+              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-jade/15 text-jade">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 12.5L10 17.5L19 7.5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
-            </>
+              <div className="text-xl font-semibold text-content">
+                Support ticket created
+              </div>
+              <p className="text-sm text-muted max-w-sm">
+                We&apos;ll follow up at the email address you provided.
+              </p>
+              <Button
+                onClick={handleCreateAnother}
+                className="mt-2 !px-[25px] !py-0 text-[14px] leading-[48px]"
+              >
+                Submit another ticket
+              </Button>
+            </div>
           ) : (
             <>
-              <div className="text-center px-12 py-4">
-                <div className="text-2xl">Create a support ticket</div>
-                <div className="text-md text-content/60 mb-8">
-                  Describe your issue and provide your contacts.
-                </div>
-              </div>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="my-8 px-12">
-                  <label htmlFor="amount">Name</label>
+              <p className="text-sm text-muted">
+                Describe your issue and how we can reach you.
+              </p>
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="mt-6 flex flex-col gap-5"
+              >
+                <Field label="Name" htmlFor="name">
                   <InputField
                     id="name"
                     type="text"
-                    register={register("name", {})}
+                    register={register("name")}
                     errors={errors?.name}
                   />
-                </div>
-                <div className="my-8 px-12">
-                  <label htmlFor="amount">Contact Email</label>
+                </Field>
+
+                <Field label="Contact email" htmlFor="email">
                   <InputField
                     id="email"
                     type="text"
@@ -89,9 +138,9 @@ const Support = () => {
                     })}
                     errors={errors?.email}
                   />
-                </div>
-                <div className="my-8 px-12">
-                  <label htmlFor="amount">Wallet Principal</label>
+                </Field>
+
+                <Field label="Wallet principal" htmlFor="principal">
                   <InputField
                     id="principal"
                     type="text"
@@ -104,27 +153,32 @@ const Support = () => {
                     })}
                     errors={errors?.principal}
                   />
-                </div>
-                <div className="my-8 px-12">
-                  <label htmlFor="description">Description</label>
-                  <InputField
+                </Field>
+
+                <Field label="Description" htmlFor="description">
+                  <textarea
                     id="description"
-                    type="text"
-                    register={register("description", {
+                    rows={5}
+                    placeholder="Tell us what's going on…"
+                    {...register("description", {
                       required: "Please describe your issue",
                     })}
-                    errors={errors?.description}
+                    className="form-input px-4 py-3 bg-surface border border-border rounded-[20px] w-full outline-none focus:outline-none focus:border-border focus:ring-0 resize-y"
                   />
-                </div>
-                <div className="text-center mt-4 mb-8 px-12">
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={!isValid && isPending}
-                  >
-                    Submit
-                  </Button>
-                </div>
+                  {errors?.description && (
+                    <p className="text-red-500 text-sm font-semibold">
+                      {errors.description.message}
+                    </p>
+                  )}
+                </Field>
+
+                <Button
+                  type="submit"
+                  className="mt-2 w-full !px-[25px] !py-0 text-[14px] leading-[48px]"
+                  disabled={!isValid || isPending}
+                >
+                  {isPending ? "Submitting…" : "Submit"}
+                </Button>
               </form>
             </>
           )}

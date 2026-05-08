@@ -54,7 +54,11 @@ export const idlFactory = ({ IDL }) => {
     ),
 
     // Balance and ownership queries
-    icrc7_balance_of: IDL.Func([IDL.Vec(Account)], [IDL.Vec(IDL.Nat)], ["query"]),
+    icrc7_balance_of: IDL.Func(
+      [IDL.Vec(Account)],
+      [IDL.Vec(IDL.Nat)],
+      ["query"]
+    ),
     icrc7_owner_of: IDL.Func(
       [IDL.Vec(IDL.Nat)],
       [IDL.Vec(IDL.Opt(Account))],

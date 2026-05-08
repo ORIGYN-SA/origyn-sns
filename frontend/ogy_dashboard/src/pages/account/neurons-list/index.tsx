@@ -1,14 +1,21 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { useMemo } from "react";
-import { ColumnDef } from "@tanstack/react-table";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useWallet } from "@amerej/artemis-react";
-import { Table, LoaderSpin, Card } from "@components/ui";
-import { INeuronData } from "@services/types";
+import { useWallet } from "@components/auth/useWallet";
+import {
+  Card,
+  NewTable,
+  SkeletonOverlay,
+  ExpandedDetailsPanel,
+  RowExpandToggle,
+} from "@components/ui";
+import { NewTableColumn } from "@components/ui/NewTable";
+import { CardErrorOverlay } from "@components/dashboard";
+import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
-import NeuronsDetails from "./neuron-details";
-import { AddNeuronProvider, BtnAddNeuron, DialogAddNeuron } from "./add-neuron";
+import {
+  AddNeuronProvider,
+  BtnAddNeuron,
+  DialogAddNeuron,
+  useAddNeuron,
+} from "./add-neuron";
 import {
   ClaimRewardProvider,
   BtnClaimReward,
@@ -20,114 +27,133 @@ import {
   DialogRemoveNeuron,
 } from "./remove-neuron";
 
+type AccountNeuronRow = {
+  id: string;
+  stakedAmount: string;
+  claimAmount: number;
+  tableAccountDetails: { id: string; label: string; value: string }[];
+};
+
+const columns: NewTableColumn<AccountNeuronRow>[] = [
+  {
+    id: "id",
+    header: "ID",
+    cell: (row, { isExpanded, toggleExpand }) => (
+      <div className="flex items-center">
+        <RowExpandToggle
+          isExpanded={isExpanded}
+          onToggle={toggleExpand}
+          className="mr-2"
+        />
+        <span className="truncate min-w-0 max-w-[200px]">{row.id}</span>
+      </div>
+    ),
+  },
+  {
+    id: "stakedAmount",
+    header: "Staked amount",
+    cell: (row) => <span>{row.stakedAmount} OGY</span>,
+  },
+  {
+    id: "claimAmount",
+    header: "Claim amount",
+    cell: (row) => (
+      <ClaimRewardProvider neuronId={row.id} claimAmount={row.claimAmount}>
+        <BtnClaimReward />
+        <DialogClaimReward />
+      </ClaimRewardProvider>
+    ),
+  },
+  {
+    id: "removeNeuron",
+    header: "",
+    cell: () => (
+      <RemoveNeuronProvider>
+        <BtnRemoveNeuron />
+        <DialogRemoveNeuron />
+      </RemoveNeuronProvider>
+    ),
+  },
+];
+
+const FAKE_ROW: AccountNeuronRow = {
+  id: "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa",
+  stakedAmount: "1,000,000",
+  claimAmount: 0,
+  tableAccountDetails: [],
+};
+
+const buildSkeletonRows = (count: number): AccountNeuronRow[] =>
+  buildFakeRows(FAKE_ROW, count).map((row, index) => ({
+    ...row,
+    id: `${row.id}-${index}`,
+  }));
+
+const NeuronsEmptyState = () => {
+  const { handleShow } = useAddNeuron();
+  return (
+    <div className="flex flex-col items-center gap-4 text-center py-10 px-6 rounded-[20px] border border-dashed border-border bg-surface-1">
+      <div className="flex flex-col gap-1">
+        <h4 className="text-content text-base font-semibold">No neurons yet</h4>
+        <p className="text-sm text-muted max-w-[340px]">
+          Add an OGY neuron to start tracking stake, voting power, and rewards
+          here.
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={handleShow}
+        className="text-[13px] font-medium text-content hover:underline"
+      >
+        Add your first neuron
+      </button>
+    </div>
+  );
+};
+
 const NeuronsList = () => {
   const { principalId: owner } = useWallet();
-
-  const columns = useMemo<ColumnDef<INeuronData>[]>(
-    () => [
-      {
-        accessorKey: "id",
-        id: "id",
-        cell: ({ row, getValue }) => {
-          return row.getCanExpand() ? (
-            <div className="flex items-center">
-              <button
-                {...{
-                  onClick: row.getToggleExpandedHandler(),
-                }}
-                className="cursor-pointer mr-2"
-              >
-                {row.getIsExpanded() ? (
-                  <ChevronUpIcon className="h-5 w-5" />
-                ) : (
-                  <ChevronDownIcon className="h-5 w-5" />
-                )}
-              </button>
-              <div>{getValue()}</div>
-            </div>
-          ) : (
-            ""
-          );
-        },
-        header: "ID",
-        meta: {
-          className: "",
-        },
-      },
-      {
-        accessorKey: "stakedAmount",
-        id: "stakedAmount",
-        cell: (info) => <div>{info.getValue()} OGY</div>,
-        header: "Staked amount",
-      },
-      {
-        accessorKey: "claimAmount",
-        id: "claimAmount",
-        cell: ({ row, getValue }) => (
-          <ClaimRewardProvider
-            neuronId={row?.original?.id}
-            claimAmount={getValue()}
-          >
-            <BtnClaimReward />
-            <DialogClaimReward />
-          </ClaimRewardProvider>
-        ),
-        header: "Claim amount",
-      },
-      {
-        accessorKey: "removeNeuron",
-        id: "removeNeuron",
-        cell: () => (
-          <RemoveNeuronProvider>
-            <BtnRemoveNeuron />
-            <DialogRemoveNeuron />
-          </RemoveNeuronProvider>
-        ),
-        header: "",
-      },
-    ],
-    []
-  );
-
-  const {
-    neuronsList,
-    isSuccess: isSuccessGetNeuronsList,
-    isLoading: isLoadingGetNeuronsList,
-    isError: isErrorGetNeuronsList,
-  } = useNeurons({
+  const { neuronsList, isSuccess, isLoading, isError } = useNeurons({
     owner,
     limit: 0,
   });
 
+  const hasError = !isLoading && isError;
+  const showSkeleton = isLoading || hasError;
+  const realRows = (neuronsList?.rows ?? []) as AccountNeuronRow[];
+  const isEmpty = isSuccess && !hasError && realRows.length === 0;
+  const rows = showSkeleton || !isSuccess ? buildSkeletonRows(3) : realRows;
+
   return (
-    <Card>
-      <div className="flex items-center mb-8 gap-8">
-        <div className="text-lg font-semibold">My OGY Neurons</div>
+    <SkeletonOverlay loading={showSkeleton}>
+      <Card className="!rounded-2xl !border-border-strong">
         <AddNeuronProvider>
-          <BtnAddNeuron />
+          {hasError && <CardErrorOverlay title="My OGY Neurons" />}
+          <div data-skel-static className="flex items-center mb-8 gap-4">
+            <div className="text-content text-[22px] font-semibold leading-none">
+              My OGY Neurons
+            </div>
+            <BtnAddNeuron />
+          </div>
+          {isEmpty ? (
+            <NeuronsEmptyState />
+          ) : (
+            <NewTable
+              columns={columns}
+              data={rows}
+              getRowId={(row) => row.id}
+              renderExpanded={(row) => (
+                <ExpandedDetailsPanel
+                  details={row.tableAccountDetails}
+                  columns={4}
+                />
+              )}
+            />
+          )}
           <DialogAddNeuron />
         </AddNeuronProvider>
-      </div>
-
-      {(isLoadingGetNeuronsList || isErrorGetNeuronsList) && (
-        <div className="flex items-center justify-center pt-4 pb-8">
-          <LoaderSpin />
-        </div>
-      )}
-      {isSuccessGetNeuronsList && neuronsList?.rows.length !== 0 && (
-        <Table
-          columns={columns}
-          data={neuronsList}
-          getRowCanExpand={() => true}
-          subComponent={NeuronsDetails}
-        />
-      )}
-      {isSuccessGetNeuronsList && !neuronsList?.rows.length && (
-        <div className="flex items-center justify-center text-xl font-semibold pt-4 pb-8">
-          No neurons added yet.
-        </div>
-      )}
-    </Card>
+      </Card>
+    </SkeletonOverlay>
   );
 };
 

@@ -1,96 +1,213 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { Card, LoaderSpin, Badge, Tooltip } from "@components/ui";
-import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import {
+  PageHeader,
+  Card,
+  Badge,
+  DetailRow,
+  SkeletonOverlay,
+} from "@components/ui";
+import { CardErrorOverlay, Stat } from "@components/dashboard";
 import useNeuron from "@hooks/neurons/useNeuron";
+
+type DetailValue = string | number | null | undefined;
+
+type DetailItem = {
+  name: string;
+  value: DetailValue;
+};
+
+const BONUS_DETAIL_NAMES = [
+  "Staked Maturity",
+  "Total Maturity",
+  "Age Bonus",
+  "Total Bonus",
+  "Dissolve Delay Bonus",
+];
+
+// Drives the SkeletonOverlay so the layout matches the loaded state.
+const PLACEHOLDER_DETAILS: DetailItem[] = [
+  { name: "State", value: "Not dissolving" },
+  { name: "Staked OGY", value: "1,000,000" },
+  { name: "Voting Power", value: "1,250,000" },
+  { name: "Dissolve Delay", value: "2 years" },
+  { name: "Age", value: "6 months ago" },
+  { name: "Date Created", value: "Jan 1, 2024" },
+  { name: "Auto-Stake Maturity", value: "Enabled" },
+  { name: "Staked Maturity", value: "100" },
+  { name: "Total Maturity", value: "100" },
+  { name: "Age Bonus", value: "10%" },
+  { name: "Total Bonus", value: "25%" },
+  { name: "Dissolve Delay Bonus", value: "100%" },
+];
+
+const formatDetailValue = (value: DetailValue) => {
+  if (value === undefined || value === null || value === "") return "-";
+  return value;
+};
+
+const getDetailValue = (details: DetailItem[], name: string) =>
+  formatDetailValue(details.find((detail) => detail.name === name)?.value);
+
+const getStateBadgeClasses = (state: DetailValue) =>
+  state === "Dissolved"
+    ? "border border-sky/25 bg-sky/10 text-sky-700 dark:text-sky-300"
+    : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300";
+
+const DetailValueText = ({ value }: { value: DetailValue }) => (
+  <strong className="text-base font-semibold text-content break-words">
+    {formatDetailValue(value)}
+  </strong>
+);
+
+const SummaryTile = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: DetailValue;
+}) => (
+  <div className="rounded-xl bg-surface-2/40 p-5">
+    <div data-skel-static className="text-sm font-medium text-muted">
+      {label}
+    </div>
+    <div className="mt-3 text-2xl font-semibold text-content break-words">
+      <span>{formatDetailValue(value)}</span>
+    </div>
+  </div>
+);
 
 export const NeuronsDetails = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const neuronId = searchParams.get("id") ?? "";
 
   const {
     data: neuron,
-    isSuccess: isSuccessGetNeuron,
     isLoading: isLoadingGetNeuron,
     isError: isErrorGetNeuron,
-    error: errorGetNeuron,
-  } = useNeuron({
-    neuronId: searchParams.get("id") as string,
-  });
+    isSuccess: isSuccessGetNeuron,
+  } = useNeuron({ neuronId });
+
+  const hasError = !isLoadingGetNeuron && isErrorGetNeuron;
+  const showSkeleton = isLoadingGetNeuron || hasError;
+  const details =
+    showSkeleton || !isSuccessGetNeuron
+      ? PLACEHOLDER_DETAILS
+      : ((neuron?.details as DetailItem[] | undefined) ?? PLACEHOLDER_DETAILS);
+  const state = getDetailValue(details, "State");
 
   const handleOnClickBack = () => {
     navigate(-1);
   };
 
   return (
-    <div className="container mx-auto py-16">
-      <div className="flex flex-col xl:flex-row items-center xl:items-end justify-between mb-8">
-        <div className="flex flex-col xl:flex-row xl:justify-center items-center gap-4 xl:gap-8">
-          <ArrowLeftIcon
-            className="h-8 w-8 hover:cursor-pointer"
-            onClick={handleOnClickBack}
-          />
-          <div className="flex flex-col items-center xl:items-start">
-            <div className="text-sm">Governance</div>
-            <div className="text-3xl font-bold mb-4 xl:mb-0">OGY Neuron</div>
-          </div>
-        </div>
-        <div className="flex ml-4 items-center truncate text-sm max-w-96 bg-surface-2 rounded-full py-2 px-4">
-          <div className="mr-2 shrink-0 font-semibold">Neuron ID: </div>
-          <div
-            className="truncate"
-            data-tooltip-id="tooltip"
-            data-tooltip-content={searchParams.get("id")}
-          >
-            {searchParams.get("id")}
-          </div>
+    <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
+      <PageHeader
+        category="Neuron"
+        categoryClassName="bg-candyFloss"
+        title="OGY Neuron"
+        onBack={handleOnClickBack}
+      />
 
-          <CopyToClipboard value={searchParams.get("id") as string} />
-        </div>
-      </div>
-      {isSuccessGetNeuron && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-          {neuron.details.map(({ name, value }) => (
-            <Card className="bg-surface border border-border pb-8" key={name}>
-              <div className="flex items-center text-lg">
-                <span className="text-content/60">{name}</span>
+      <div className="relative mt-8">
+        <SkeletonOverlay loading={showSkeleton}>
+          {hasError && <CardErrorOverlay title="OGY Neuron" />}
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
+            <Card className="xl:col-span-3">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <Badge
+                  className={`inline-flex text-xs font-semibold px-3 ${getStateBadgeClasses(
+                    state
+                  )}`}
+                >
+                  <span>{state}</span>
+                </Badge>
+                <span className="text-sm text-muted">
+                  Created {getDetailValue(details, "Date Created")}
+                </span>
               </div>
-              {["State"].includes(name) ? (
-                <div className="flex items-center mt-2">
-                  <Badge
-                    className={`${
-                      value === "Dissolving" ? "bg-jade/20" : "bg-sky/20"
-                    } px-2`}
-                  >
-                    <div
-                      className={`${
-                        value === "Dissolving" ? "text-jade" : "text-sky"
-                      } text-xs font-semibold shrink-0`}
-                    >
-                      {value}
-                    </div>
-                  </Badge>
+
+              <div className="mt-8">
+                <div
+                  data-skel-static
+                  className="text-sm font-medium text-muted mb-3"
+                >
+                  Staked OGY
                 </div>
-              ) : (
-                <div className="flex items-center mt-2 text-2xl font-semibold">
-                  {value}
+                <Stat
+                  iconSrc="/ogy_logo.svg"
+                  value={getDetailValue(details, "Staked OGY")}
+                  unit="OGY"
+                  size="hero"
+                  loading={showSkeleton}
+                />
+              </div>
+
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                <SummaryTile
+                  label="Voting Power"
+                  value={getDetailValue(details, "Voting Power")}
+                />
+                <SummaryTile
+                  label="Dissolve Delay"
+                  value={getDetailValue(details, "Dissolve Delay")}
+                />
+                <SummaryTile
+                  label="Age"
+                  value={getDetailValue(details, "Age")}
+                />
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-border">
+                <h2
+                  data-skel-static
+                  className="text-lg font-semibold text-content"
+                >
+                  Neuron lifecycle
+                </h2>
+                <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                  <DetailRow
+                    label="Date Created"
+                    value={
+                      <DetailValueText
+                        value={getDetailValue(details, "Date Created")}
+                      />
+                    }
+                  />
+                  <DetailRow
+                    label="Auto-Stake Maturity"
+                    value={
+                      <DetailValueText
+                        value={getDetailValue(details, "Auto-Stake Maturity")}
+                      />
+                    }
+                  />
                 </div>
-              )}
+              </div>
             </Card>
-          ))}
-        </div>
-      )}
-      {isLoadingGetNeuron && (
-        <div className="flex items-center justify-center h-40">
-          <LoaderSpin />
-        </div>
-      )}
-      {isErrorGetNeuron && (
-        <div className="flex items-center justify-center h-40 text-red-500 font-semibold">
-          <div>{errorGetNeuron?.message}</div>
-        </div>
-      )}
-      <Tooltip id="tooltip" />
+
+            <Card className="xl:col-span-1 self-start">
+              <div
+                data-skel-static
+                className="text-sm font-medium text-muted mb-3"
+              >
+                Rewards & bonuses
+              </div>
+              <div className="divide-y divide-border">
+                {BONUS_DETAIL_NAMES.map((name) => (
+                  <DetailRow
+                    key={name}
+                    label={name}
+                    value={
+                      <DetailValueText value={getDetailValue(details, name)} />
+                    }
+                  />
+                ))}
+              </div>
+            </Card>
+          </div>
+        </SkeletonOverlay>
+      </div>
     </div>
   );
 };

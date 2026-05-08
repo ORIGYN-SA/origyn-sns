@@ -1,9 +1,5 @@
 @import "../theme/preset.css";
 
-html {
-  scroll-behavior: smooth;
-}
-
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,4 +13,15 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .ledger-warning-strip {
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--color-charcoal)) 0,
+      rgb(var(--color-charcoal)) 58px,
+      rgb(var(--color-background)) 58px
+    );
+  }
 }

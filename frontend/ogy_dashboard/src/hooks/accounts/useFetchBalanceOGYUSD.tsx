@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import fetchPriceOGY from "@services/queries/accounts/fetchPriceOGY";
 import { roundAndFormatLocale } from "@helpers/numbers/index";
@@ -8,27 +8,29 @@ const useFetchBalanceOGYUSD = ({
 }: {
   balance: number | undefined | null;
 }) => {
-  const [balanceUSD, setBalanceUSD] = useState<string | null | undefined>(null);
-
-  const { data, isSuccess, isLoading, isError, error } = useQuery({
+  const priceQuery = useQuery({
     queryKey: ["fetchPriceOGY"],
     queryFn: () => fetchPriceOGY(),
     placeholderData: keepPreviousData,
     enabled: balance !== undefined && balance !== null,
   });
 
-  useEffect(() => {
-    if (isSuccess && balance !== undefined && balance !== null) {
-      setBalanceUSD(roundAndFormatLocale({ number: balance * data.ogyPrice }));
+  const balanceUSD = useMemo(() => {
+    if (balance === undefined || balance === null || !priceQuery.data) {
+      return undefined;
     }
-  }, [isSuccess, data, balance]);
+    return roundAndFormatLocale({
+      number: balance * Number(priceQuery.data.ogyPrice),
+      decimals: 4,
+    });
+  }, [balance, priceQuery.data]);
 
   return {
     data: balanceUSD,
-    isSuccess,
-    isLoading,
-    isError,
-    error,
+    isSuccess: priceQuery.isSuccess,
+    isLoading: priceQuery.isLoading,
+    isError: priceQuery.isError,
+    error: priceQuery.error,
   };
 };
 

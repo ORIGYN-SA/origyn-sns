@@ -26,17 +26,15 @@ const ProgressBar = ({ yesCount, noCount }: IProgressBarProps) => {
   }
 
   return (
-    <div className="w-full h-4 flex rounded-full border border-border">
+    <div className="w-full h-4 flex rounded-full overflow-hidden">
       <div
         style={{ width: `${yesPercentage}%` }}
-        className="bg-jade transition-all ease-in-out duration-300 rounded-l-full"
-      ></div>
+        className="bg-jade transition-all ease-in-out duration-300"
+      />
       <div
         style={{ width: `${100 - yesPercentage}%` }}
-        className={`bg-red-400 transition-all ease-in-out duration-300 rounded-r-full ${
-          noPercentage > 0 ? "border-border border-l" : ""
-        }`}
-      ></div>
+        className="bg-red-400 transition-all ease-in-out duration-300"
+      />
     </div>
   );
 };

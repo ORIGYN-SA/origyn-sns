@@ -2,9 +2,11 @@ import { LoaderSpin } from "@components/ui";
 
 const FormPending = () => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="mb-4">Claiming all rewards...</div>
+    <div className="flex flex-col items-center gap-5 py-4">
       <LoaderSpin />
+      <div className="text-[18px] font-semibold leading-none text-content">
+        Claiming all rewards...
+      </div>
     </div>
   );
 };

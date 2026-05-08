@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 import { DateTime } from "luxon";
 import { TimeStats } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { codeAndDecodeAccount, encodeAccount } from "@helpers/charts";
@@ -63,41 +63,39 @@ const useTopTransfersAndBurns = ({
       const sourceData =
         type === "transfers" ? rawData.top_transfers : rawData.top_burns;
 
-      const transformedData = sourceData
-        .slice(0, limit)
-        .map((tx) => ({
-          hash: tx.hash !== "no-hash" ? tx.hash : "N/A",
-          from:
-            type === "burns"
-              ? codeAndDecodeAccount(tx.from_account)
-              : encodeAccount(tx.from_account),
-          to: tx.to_account ? encodeAccount(tx.to_account) : "Unknown",
-          value:
-            tx.tx_value && !isNaN(Number(tx.tx_value))
-              ? roundAndFormatLocale({number: divideBy1e8(tx.tx_value)})
-              : "N/A",
-          fee:
-            tx.tx_fee?.[0] && !isNaN(Number(tx.tx_fee[0]))
-              ? roundAndFormatLocale({number: divideBy1e8(tx.tx_fee[0])})
-              : "N/A",
-          time: tx.tx_time
-            ? DateTime.fromMillis(Number(tx.tx_time) / 1e6)
-                .setLocale("en-US")
-                .toLocaleString({
-                  month: "2-digit",
-                  day: "2-digit",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: true,
-                })
+      const transformedData = sourceData.slice(0, limit).map((tx) => ({
+        hash: tx.hash !== "no-hash" ? tx.hash : "N/A",
+        from:
+          type === "burns"
+            ? codeAndDecodeAccount(tx.from_account)
+            : encodeAccount(tx.from_account),
+        to: tx.to_account ? encodeAccount(tx.to_account) : "Unknown",
+        value:
+          tx.tx_value && !isNaN(Number(tx.tx_value))
+            ? roundAndFormatLocale({ number: divideBy1e8(tx.tx_value) })
             : "N/A",
-        }))
-        // .sort((a, b) => {
-        //   const valueA = parseFloat(a.value.replace(/,/g, "")) || 0;
-        //   const valueB = parseFloat(b.value.replace(/,/g, "")) || 0;
-        //   return valueB - valueA;
-        // });
+        fee:
+          tx.tx_fee?.[0] && !isNaN(Number(tx.tx_fee[0]))
+            ? roundAndFormatLocale({ number: divideBy1e8(tx.tx_fee[0]) })
+            : "N/A",
+        time: tx.tx_time
+          ? DateTime.fromMillis(Number(tx.tx_time) / 1e6)
+              .setLocale("en-US")
+              .toLocaleString({
+                month: "2-digit",
+                day: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })
+          : "N/A",
+      }));
+      // .sort((a, b) => {
+      //   const valueA = parseFloat(a.value.replace(/,/g, "")) || 0;
+      //   const valueB = parseFloat(b.value.replace(/,/g, "")) || 0;
+      //   return valueB - valueA;
+      // });
 
       setData(transformedData);
     }

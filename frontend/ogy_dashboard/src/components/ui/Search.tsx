@@ -1,19 +1,28 @@
-import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react";
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  useCallback,
+  useRef,
+} from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
-import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import _debounce from "lodash/debounce";
+import { SearchIcon, CloseIcon } from "@components/ui/icons";
 
 interface ISearch {
   className?: string;
   id?: string;
   placeholder?: string;
+  dropdown?: React.ReactNode;
+  onEnter?: () => void;
 }
 
 const Search = ({
   className,
   id = "search",
   placeholder = "Search for an items...",
+  dropdown,
+  onEnter,
   ...restProps
 }: ISearch) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,14 +43,18 @@ const Search = ({
     reset();
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const debouncedSetSearchParams = useCallback(
-    _debounce((value) => {
-      if (value !== "") {
-        searchParams.set("searchterm", value);
-        setSearchParams(searchParams);
-      }
-    }, 800),
+    (value: string) => {
+      if (debounceTimeoutRef.current) clearTimeout(debounceTimeoutRef.current);
+      debounceTimeoutRef.current = setTimeout(() => {
+        if (value !== "") {
+          searchParams.set("searchterm", value);
+          setSearchParams(searchParams);
+        }
+      }, 800);
+    },
     [searchParams, setSearchParams]
   );
 
@@ -55,44 +68,58 @@ const Search = ({
     debouncedSetSearchParams(value);
   };
 
-  const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === "Enter" && e.preventDefault();
+  const handleOnKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key !== "Enter") return;
+
+    e.preventDefault();
+    onEnter?.();
   };
 
+  const hasDropdown = dropdown && searchterm !== "";
+
   return (
-    <div className={`${className}`} {...restProps}>
-      <form
-        onKeyDown={handleOnKeyDown as () => void}
-        className="rounded-full bg-surface border border-border px-4 py-2 flex justify-between items-center w-full"
+    <div className={`relative ${className}`} {...restProps}>
+      <div
+        className={`bg-surface border border-border overflow-hidden ${
+          hasDropdown ? "rounded-3xl" : "rounded-full"
+        }`}
       >
-        <input
-          id={id}
-          type="text"
-          placeholder={placeholder}
-          autoComplete="off"
-          {...(register(id),
-          {
-            onChange: (e) => handleOnChange(e),
-            value: searchterm,
-          })}
-          className="form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
-        />
-        {searchterm === "" ? (
-          <div
-            onClick={handleResetSearch}
-            className="rounded-full bg-surface mr-2 p-1"
-          >
-            <MagnifyingGlassIcon className="h-7 w-7" aria-hidden="true" />
+        <form
+          onKeyDown={handleOnKeyDown}
+          className="px-4 py-2 flex justify-between items-center w-full"
+        >
+          <input
+            id={id}
+            type="text"
+            placeholder={placeholder}
+            autoComplete="off"
+            {...(register(id),
+            {
+              onChange: (e) => handleOnChange(e),
+              value: searchterm,
+            })}
+            className="form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
+          />
+          {searchterm === "" ? (
+            <div className="mr-2 p-1">
+              <SearchIcon />
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleResetSearch}
+              className="mr-2 p-1"
+            >
+              <CloseIcon />
+            </button>
+          )}
+        </form>
+        {hasDropdown && (
+          <div className="border-t border-border px-4 pt-2 pb-3">
+            {dropdown}
           </div>
-        ) : (
-          <button
-            onClick={handleResetSearch}
-            className="rounded-full bg-surface-2 mr-2 p-1"
-          >
-            <XMarkIcon className="h-7 w-7" aria-hidden="true" />
-          </button>
         )}
-      </form>
+      </div>
     </div>
   );
 };

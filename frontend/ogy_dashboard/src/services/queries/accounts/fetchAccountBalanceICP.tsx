@@ -1,5 +1,5 @@
 import { divideBy1e8 } from "@helpers/numbers/index";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const fetchAccountBalanceICP = async ({
   account,

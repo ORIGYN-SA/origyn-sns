@@ -1,14 +1,13 @@
 import { PropsWithChildren } from "react";
 
-interface TileProps
-  extends PropsWithChildren<{
-    className?: string;
-  }> {}
+interface TileProps extends PropsWithChildren<{
+  className?: string;
+}> {}
 
 const Tile = ({ className, children, ...restProps }: TileProps) => {
   return (
     <div
-      className={`flex justify-center items-center shrink-0 w-12 h-12 rounded-full ${className}`}
+      className={`flex justify-center items-center shrink-0 ${className ?? ""}`}
       {...restProps}
     >
       {children}

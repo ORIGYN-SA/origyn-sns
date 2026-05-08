@@ -1,5 +1,5 @@
 import { LockedNeuronsPeriodResponse } from "@services/types/token_metrics";
-import { getActor } from "@amerej/artemis-react";
+import { getActor } from "@services/actor";
 
 const fetchEstimatedRewards =
   async (): Promise<LockedNeuronsPeriodResponse> => {

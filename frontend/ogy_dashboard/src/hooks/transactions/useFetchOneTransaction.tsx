@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import _capitalize from "lodash/capitalize";
+import { capitalize } from "@helpers/strings";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
 import { fetchOneTransaction as fetchOneTransactionRosetta } from "@hooks/rosetta-api/queries";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
@@ -73,7 +73,7 @@ const useFetchOneTransaction = ({
             decimals: 3,
           })
         : "",
-      kind: _capitalize(kind),
+      kind: capitalize(kind),
       updated_at: updated_at ? formatDate(updated_at, { fromISO: true }) : "",
       memo: memo ? memo : "-",
     },
