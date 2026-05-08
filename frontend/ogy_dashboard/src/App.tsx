@@ -1,7 +1,6 @@
 import "./App.css";
 import {
   createBrowserRouter,
-  redirect,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 
@@ -16,6 +15,7 @@ import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
+import { TransactionHistory } from "@pages/transaction-history/TransactionHistory";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
 import TransactionsAccountHistory from "@pages/transactions-accounts-history";
@@ -24,11 +24,6 @@ import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
-
-const redirectWithSearch = (request: Request, pathname: string) => {
-  const url = new URL(request.url);
-  return redirect(`${pathname}${url.search}`);
-};
 
 const router = createBrowserRouter([
   {
@@ -95,44 +90,14 @@ const router = createBrowserRouter([
       },
       {
         path: "explorer",
-        children: [
-          {
-            index: true,
-            loader: ({ request }) =>
-              redirectWithSearch(request, "/transaction-history"),
-          },
-          {
-            path: "transactions/:index",
-            loader: ({ params, request }) =>
-              redirectWithSearch(
-                request,
-                `/transaction-history/transactions/${params.index}`
-              ),
-          },
-          {
-            path: "transactions/accounts/:accountId",
-            loader: ({ params, request }) =>
-              redirectWithSearch(
-                request,
-                `/transaction-history/transactions/accounts/${params.accountId}`
-              ),
-          },
-          {
-            path: "transactions/accounts/:accountId/history",
-            loader: ({ params, request }) =>
-              redirectWithSearch(
-                request,
-                `/transaction-history/transactions/accounts/${params.accountId}/history`
-              ),
-          },
-        ],
+        element: <Explorer />,
       },
       {
         path: "transaction-history",
         children: [
           {
             index: true,
-            element: <Explorer />,
+            element: <TransactionHistory />,
           },
           {
             path: "transactions",
