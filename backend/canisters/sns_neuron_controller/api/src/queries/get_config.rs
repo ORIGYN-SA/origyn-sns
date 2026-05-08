@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum ManagerType {
     GOLDAO,
-    ICP,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
@@ -38,7 +37,6 @@ pub struct GoldaoManagerConfig {
     pub goldao_sns_governance_canister_id: Principal,
     pub goldao_sns_ledger_canister_id: Principal,
     pub goldao_sns_rewards_canister_id: Principal,
-    pub goldao_rewards_threshold: Nat,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
