@@ -6,16 +6,16 @@ import svgr from "vite-plugin-svgr";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Dev-only: serve public/ai/index.html at /ai and /ai/ without changing the
-// URL. In production the IC asset canister already resolves dir/index.html.
+// Dev-only: serve public/x/ai/index.html at /x/ai and /x/ai/ without changing
+// the URL. In production the IC asset canister already resolves dir/index.html.
 const aiStaticRoute = {
   name: "ai-static-route",
   configureServer(server) {
     server.middlewares.use((req, _res, next) => {
       const url = req.url ?? "";
-      if (url === "/ai" || url === "/ai/") req.url = "/ai/index.html";
-      else if (url.startsWith("/ai?")) req.url = "/ai/index.html" + url.slice(3);
-      else if (url.startsWith("/ai/?")) req.url = "/ai/index.html" + url.slice(4);
+      if (url === "/x/ai" || url === "/x/ai/") req.url = "/x/ai/index.html";
+      else if (url.startsWith("/x/ai?")) req.url = "/x/ai/index.html" + url.slice(5);
+      else if (url.startsWith("/x/ai/?")) req.url = "/x/ai/index.html" + url.slice(6);
       next();
     });
   },

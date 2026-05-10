@@ -10,13 +10,6 @@ const NAV_ITEMS = [
     activeWhen: (path) => path.startsWith("/token"),
   },
   {
-    id: "ai",
-    label: "AI",
-    type: "internal",
-    href: "/ai",
-    activeWhen: (path) => path.startsWith("/ai"),
-  },
-  {
     id: "certificates",
     label: "CERTIFICATES",
     href: "https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity",
