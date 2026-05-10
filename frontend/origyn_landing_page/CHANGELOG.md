@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.4.2] - 2026-05-10
+
+#### Updated
+
+- Hide AI page from navigation and move it to /x/ai
+
 ### [1.4.1] - 2026-05-09
 
 #### Added
