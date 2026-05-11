@@ -3,6 +3,7 @@ use candid::{CandidType, Nat, Principal};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use types::TokenSymbol;
+use icrc_ledger_types::icrc1::account::Account;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct InitArgs {
@@ -38,6 +39,6 @@ pub struct IcpManagerConfig {
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct TokenParams {
-    pub destination: Principal,
+    pub destination: Account,
     pub threshold: u128,
 }

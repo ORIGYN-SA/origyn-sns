@@ -5609,6 +5609,7 @@ version = "0.1.0"
 dependencies = [
  "bity-ic-types 0.1.2",
  "candid",
+ "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "nns_governance_canister",
  "serde",
  "sns_governance_canister",

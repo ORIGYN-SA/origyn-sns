@@ -14,3 +14,4 @@ types = { path = "../../../libraries/types" }
 sns_governance_canister = { path = '../../../external_canisters/sns_governance/api' }
 nns_governance_canister = { path = '../../../external_canisters/nns_governance/api' }
 bity-ic-types = { workspace = true }
+icrc-ledger-types = { workspace = true }

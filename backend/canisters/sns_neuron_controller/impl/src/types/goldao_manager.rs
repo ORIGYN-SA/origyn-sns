@@ -5,12 +5,14 @@ use crate::utils::sns_rewards_calculate_available_rewards;
 use crate::utils::sns_rewards_claim_rewards;
 use crate::utils::ClaimRewardResult;
 use async_trait::async_trait;
+use icrc_ledger_types::icrc1::account::Account;
 use candid::CandidType;
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
 use sns_neuron_controller_api_canister::init::TokenParams;
 use std::collections::HashMap;
 use types::{CanisterId, TokenSymbol};
+use sns_rewards_api_canister::subaccounts::REWARD_POOL_SUB_ACCOUNT_5Y;
 
 const MIN_THRESHOLD_FEE_MULTIPLIER: u64 = 100;
 
@@ -59,14 +61,27 @@ impl GoldaoManager {
         let reward_tokens = token_configs
             .into_iter()
             .map(|(symbol, dest)| {
-                let threshold = if is_test_mode {
+                let threshold: u128 = if is_test_mode {
                     0
                 } else {
-                    symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER
+                    (symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER) as u128
                 };
+
+                // Determine the subaccount based on the token symbol
+                let subaccount = if symbol == TokenSymbol::OGY {
+                    Some(REWARD_POOL_SUB_ACCOUNT_5Y)
+                } else {
+                    None
+                };
+
+                let destination = Account {
+                    owner: Principal::from_text(dest).expect("Invalid Principal"),
+                    subaccount,
+                };
+
                 (symbol, TokenParams {
-                    destination: Principal::from_text(dest).expect("Invalid Principal"),
-                    threshold: threshold.into(),
+                    destination,
+                    threshold,
                 })
             })
             .collect();
