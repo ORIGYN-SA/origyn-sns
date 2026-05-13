@@ -7,7 +7,7 @@ import {
 } from "@components/ui/icons";
 
 const SECTIONS = [
-  { title: "Last minted Certificates", count: 8 },
+  { title: "Featured Certificates", count: 8 },
   { title: "Art Certificates", count: 8 },
   { title: "Gold Certificates", count: 8 },
 ];
@@ -93,6 +93,44 @@ const PlaceholderCard = ({ seed }: { seed: string }) => (
   </div>
 );
 
+const HeroCard = ({ seed }: { seed: string }) => (
+  <div className="relative w-[520px] sm:w-[640px] h-[360px] rounded-2xl overflow-hidden border border-border-strong bg-surface group">
+    <LazyImage
+      src={`https://cataas.com/cat?_=${encodeURIComponent(seed)}`}
+      className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.03]"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+    <div
+      aria-label="OGY"
+      className="absolute top-3 right-3 h-9 w-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
+    >
+      <img src="/ogy_logo.svg" alt="" className="h-[18px] w-[18px]" />
+    </div>
+
+    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-2">
+      <div className="flex items-center gap-1 text-white/80">
+        <span className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase">
+          Suzanne sys
+        </span>
+        <CheckmarkCircleIcon />
+      </div>
+      <h3 className="font-extrabold text-[26px] sm:text-[30px] leading-tight tracking-[-0.02em] text-white">
+        The Midsummer Night Dream
+      </h3>
+      <button
+        type="button"
+        className="mt-1 inline-flex items-center gap-1.5 self-start rounded-full bg-white/15 backdrop-blur-md px-3 py-1.5 text-white hover:bg-white/25 transition-colors"
+      >
+        <BlockchainIcon />
+        <span className="font-medium text-[11px] leading-none">
+          Check on blockchain
+        </span>
+      </button>
+    </div>
+  </div>
+);
+
 export const Explorer = () => {
   return (
     <div className="max-w-[1440px] mx-auto py-8 px-6 sm:py-16">
@@ -120,7 +158,7 @@ export const Explorer = () => {
       </div>
 
       <div className="mt-16 flex flex-col gap-16">
-        {SECTIONS.map(({ title, count }) => (
+        {SECTIONS.map(({ title, count }, index) => (
           <section key={title}>
             <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
               {title}
@@ -128,7 +166,11 @@ export const Explorer = () => {
             <Carousel>
               {Array.from({ length: count }).map((_, i) => (
                 <Carousel.Item key={i}>
-                  <PlaceholderCard seed={`${title}-${i}`} />
+                  {index === 0 ? (
+                    <HeroCard seed={`${title}-${i}`} />
+                  ) : (
+                    <PlaceholderCard seed={`${title}-${i}`} />
+                  )}
                 </Carousel.Item>
               ))}
             </Carousel>
