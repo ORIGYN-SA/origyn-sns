@@ -1,5 +1,6 @@
 import Eyebrow from "./Eyebrow";
 import Card from "./Card";
+import { ScrollReveal } from "./AnimatedText";
 import GavelIcon from "./icons/GavelIcon";
 import LayersIcon from "./icons/LayersIcon";
 import KeyIcon from "./icons/KeyIcon";
@@ -14,9 +15,12 @@ const VaultSection = () => (
     <div className="mx-auto flex max-w-6xl flex-col items-center">
       <Eyebrow>The vault</Eyebrow>
 
-      <h2 className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink">
+      <ScrollReveal
+        as="h2"
+        className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink"
+      >
         <span className="font-normal italic">Certified</span> by construction.
-      </h2>
+      </ScrollReveal>
 
       <p className="mt-8 max-w-[680px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
         Every fragility addressed at the root. Not a promise. A protocol.

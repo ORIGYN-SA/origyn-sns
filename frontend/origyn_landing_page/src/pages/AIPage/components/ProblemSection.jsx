@@ -1,4 +1,5 @@
 import Eyebrow from "./Eyebrow";
+import { ScrollReveal } from "./AnimatedText";
 
 const STEPS = [
   {
@@ -21,8 +22,12 @@ const ProblemSection = () => (
       <Eyebrow>The problem</Eyebrow>
 
       <h2 className="mt-8 m-0 text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink">
-        <span className="block">No one actually runs</span>
-        <span className="block font-normal italic">AI on-chain.</span>
+        <ScrollReveal as="span" className="block">
+          No one actually runs
+        </ScrollReveal>
+        <ScrollReveal as="span" className="block font-normal italic">
+          AI on-chain.
+        </ScrollReveal>
       </h2>
 
       <p className="mt-12 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">

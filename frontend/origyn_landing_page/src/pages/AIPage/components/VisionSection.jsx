@@ -1,4 +1,5 @@
 import Eyebrow from "./Eyebrow";
+import { ScrollReveal } from "./AnimatedText";
 import BadgeIcon from "./icons/BadgeIcon";
 import LayersIcon from "./icons/LayersIcon";
 import ShareIcon from "./icons/ShareIcon";
@@ -41,10 +42,12 @@ const VisionSection = () => (
         <Eyebrow>Vision</Eyebrow>
 
         <h2 className="mt-8 m-0 text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink">
-          <span className="block">Five pillars</span>
-          <span className="block">
+          <ScrollReveal as="span" className="block">
+            Five pillars
+          </ScrollReveal>
+          <ScrollReveal as="span" className="block">
             AI cannot <span className="font-normal italic">replace.</span>
-          </span>
+          </ScrollReveal>
         </h2>
 
         <p className="mt-10 max-w-[680px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">
