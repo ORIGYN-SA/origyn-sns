@@ -46,7 +46,7 @@
   --font-sans: "General Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 80s linear infinite;
 
   --breakpoint-lg: 990px;
 }

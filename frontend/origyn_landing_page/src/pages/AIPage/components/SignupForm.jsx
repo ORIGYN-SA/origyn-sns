@@ -20,11 +20,11 @@ const SignupForm = () => {
         placeholder="yourmail@gmail.com"
         aria-label="Email address"
         required
-        className="flex-1 border-0 bg-transparent py-3 text-[15px] font-light text-ink underline decoration-muted underline-offset-[6px] outline-none placeholder:text-muted focus:decoration-navy"
+        className="flex-1 rounded-full border-0 bg-transparent py-3 text-base font-normal text-ink underline decoration-muted underline-offset-[6px] outline-none placeholder:text-muted focus:decoration-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       />
       <button
         type="submit"
-        className="cursor-pointer whitespace-nowrap rounded-full bg-navy px-6 py-3 text-[13px] font-normal text-surface transition-opacity hover:opacity-90"
+        className="cursor-pointer whitespace-nowrap rounded-full bg-navy px-6 py-3 text-[0.8125rem] font-normal text-surface transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       >
         Get Notified
       </button>

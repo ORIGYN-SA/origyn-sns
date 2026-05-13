@@ -8,76 +8,72 @@ const ROWS = [
 ];
 
 const ResultsSection = () => (
-  <section className="px-6 py-32 md:py-40">
+  <section className="px-6 py-20 md:py-28">
     <div className="mx-auto flex max-w-6xl flex-col items-center">
       <Eyebrow>Our results</Eyebrow>
 
-      <h2 className="mt-8 m-0 text-center text-[clamp(40px,7vw,80px)] font-extralight leading-[1.125] tracking-normal text-ink">
-        <span className="font-normal italic">Faster</span>
-        <br />
-        than the existing.
+      <h2 className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink">
+        <span className="block font-normal italic">Faster</span>
+        <span className="block">than the existing.</span>
       </h2>
 
-      <p className="mt-10 max-w-[860px] text-center text-[15px] leading-[1.85] text-muted">
+      <p className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
         Same models, same conditions, production network. Our custom WASM SIMD
         kernels make the difference.
       </p>
 
       <div className="mt-12">
-        <MetricCard value="2.9" suffix="x" />
+        <MetricCard value="2.9" suffix="×" />
       </div>
 
-      <p className="mt-10 max-w-[760px] text-center text-[15px] leading-[1.85] text-muted">
+      <p className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
         For the same compute budget, a Second Brain powered by our fork does
         three times more work, or consumes three times fewer resources.
       </p>
 
-      <p className="mt-10 max-w-[860px] text-center text-[13px] leading-[1.85] text-muted">
-        We are not tied to any single model or architecture. Every new release
-        is an opportunity.
-        <br />
-        We continuously benchmark and integrate the latest models to push
-        speed, accuracy, and efficiency further.
+      <p className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+        <span className="block">
+          We are not tied to any single model or architecture. Every new release
+          is an opportunity.
+        </span>
+        <span className="block">
+          We continuously benchmark and integrate the latest models to push
+          speed, accuracy, and efficiency further.
+        </span>
       </p>
 
-      <table className="mt-16 w-full max-w-[1080px] border-collapse font-mono text-[13px]">
+      <table className="mt-12 w-full max-w-[1080px] border-collapse text-base">
         <thead>
-          <tr className="border-b border-hairline">
-            <th className="py-4 text-left font-normal">
+          <tr className="border-b border-[#ececec]">
+            <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
               <span className="text-gradient">Model</span>
             </th>
-            <th className="py-4 text-left font-normal">
+            <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
               <span className="text-gradient">Existing</span>
             </th>
-            <th className="py-4 text-left font-normal">
+            <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
               <span className="text-gradient">ORIGYN AI</span>
             </th>
-            <th className="py-4 text-right font-normal">
+            <th className="py-4 text-right text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
               <span className="text-gradient">Gain</span>
             </th>
           </tr>
         </thead>
         <tbody>
           {ROWS.map((row) => (
-            <tr key={row.model} className="border-b border-hairline">
-              <td className="py-6">
-                <span className="text-gradient">{row.model}</span>
-              </td>
-              <td className="py-6">
-                <span className="text-gradient">{row.existing}</span>
-              </td>
-              <td className="py-6">
-                <span className="text-gradient">{row.origyn}</span>
-              </td>
-              <td className="py-6 text-right font-bold">
-                <span className="text-gradient">{row.gain}</span>
+            <tr key={row.model} className="border-b border-[#ececec]">
+              <td className="py-6 text-ink">{row.model}</td>
+              <td className="py-6 text-muted">{row.existing}</td>
+              <td className="py-6 text-ink">{row.origyn}</td>
+              <td className="py-6 text-right font-medium text-ink">
+                {row.gain}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className="mt-16 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
         <Card align="left" title="Fleet of micro-experts">
           Instead of one slow large model, we deploy task-specific finetuned
           sub-1B parameter models: sorting emails, classifying documents,

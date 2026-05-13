@@ -1,5 +1,5 @@
 const Eyebrow = ({ children }) => (
-  <p className="font-mono text-[13px] uppercase tracking-[0.2em]">
+  <p className="font-mono text-[0.8125rem] uppercase tracking-[0.2em]">
     <span className="text-gradient">{children}</span>
   </p>
 );

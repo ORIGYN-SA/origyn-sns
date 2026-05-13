@@ -4,13 +4,13 @@ const LOREM =
 const REPEATED = LOREM.repeat(6);
 
 const MarqueeStrip = () => (
-  <div className="overflow-hidden py-16">
+  <div className="overflow-hidden py-10">
     <div className="flex w-max animate-marquee">
-      <span className="whitespace-nowrap font-mono text-[20px] text-muted">
+      <span className="whitespace-nowrap text-[clamp(2.5rem,6vw,4.5rem)] font-extralight tracking-tight text-ink/70">
         {REPEATED}
       </span>
       <span
-        className="whitespace-nowrap font-mono text-[20px] text-muted"
+        className="whitespace-nowrap text-[clamp(2.5rem,6vw,4.5rem)] font-extralight tracking-tight text-ink/70"
         aria-hidden="true"
       >
         {REPEATED}

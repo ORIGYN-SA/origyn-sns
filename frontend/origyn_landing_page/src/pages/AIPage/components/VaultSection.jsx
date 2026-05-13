@@ -10,19 +10,19 @@ import CheckIcon from "./icons/CheckIcon";
 import BadgeIcon from "./icons/BadgeIcon";
 
 const VaultSection = () => (
-  <section className="px-6 py-32 md:py-40">
+  <section className="px-6 py-20 md:py-28">
     <div className="mx-auto flex max-w-6xl flex-col items-center">
       <Eyebrow>The vault</Eyebrow>
 
-      <h2 className="mt-8 m-0 text-center text-[clamp(40px,7vw,80px)] font-extralight leading-[1.125] tracking-normal text-ink">
+      <h2 className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink">
         <span className="font-normal italic">Certified</span> by construction.
       </h2>
 
-      <p className="mt-8 max-w-[680px] text-center text-[15px] leading-[1.85] text-muted">
+      <p className="mt-8 max-w-[680px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
         Every fragility addressed at the root. Not a promise. A protocol.
       </p>
 
-      <div className="mt-16 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
         <Card
           align="left"
           icon={<GavelIcon />}

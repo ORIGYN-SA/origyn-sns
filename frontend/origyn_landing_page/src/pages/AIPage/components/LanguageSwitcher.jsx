@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
             type="button"
             onClick={() => setActive(lang.code)}
             aria-pressed={isActive}
-            className={`cursor-pointer rounded-full px-3 py-1 text-[13px] tracking-wide transition-colors ${
+            className={`cursor-pointer rounded-full px-3 py-1 text-[0.8125rem] tracking-wide transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
               isActive
                 ? "bg-black/[0.08] text-ink"
                 : "text-muted hover:text-ink"

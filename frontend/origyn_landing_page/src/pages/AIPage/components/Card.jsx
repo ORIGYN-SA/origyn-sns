@@ -2,7 +2,7 @@ const Card = ({ icon, title, subtitle, children, align = "center" }) => {
   const isLeft = align === "left";
   return (
     <article
-      className={`rounded-2xl border border-hairline bg-surface px-8 py-10 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ${
+      className={`rounded-3xl border border-[#ececec] bg-surface px-10 py-10 transition-colors duration-200 hover:border-ink/20 hover:bg-black/[0.015] ${
         isLeft ? "text-left" : "text-center"
       }`}
     >
@@ -15,13 +15,15 @@ const Card = ({ icon, title, subtitle, children, align = "center" }) => {
           {icon}
         </div>
       )}
-      <h3 className="font-mono text-[15px] tracking-[0.05em]">
-        <span className="text-gradient">{title}</span>
+      <h3 className="text-xl font-medium tracking-tight text-ink md:text-[1.375rem]">
+        {title}
       </h3>
       {subtitle && (
-        <p className="mt-3 text-[14px] font-medium text-navy">{subtitle}</p>
+        <p className="mt-2 text-[0.8125rem] uppercase tracking-[0.14em] text-muted">
+          {subtitle}
+        </p>
       )}
-      <p className="mt-6 text-[14px] leading-[1.6] text-muted">{children}</p>
+      <p className="mt-3 text-sm leading-[1.6] text-muted">{children}</p>
     </article>
   );
 };

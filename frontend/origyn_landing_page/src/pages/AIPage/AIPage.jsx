@@ -12,14 +12,14 @@ import NewsletterSection from "./components/NewsletterSection";
 
 const AIPage = () => (
   <div className="bg-white font-sans text-ink">
-    <section className="flex min-h-screen flex-col">
+    <section className="flex min-h-[70vh] flex-col">
       <header className="flex items-start justify-between px-8 pt-8 md:px-16 md:pt-12">
-        {/* Logo slot — intentionally empty */}
+        {/* TODO: wire up brand logo */}
         <div className="h-10 w-44" aria-hidden="true" />
         <LanguageSwitcher />
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center px-6 pb-32 text-center">
+      <div className="flex flex-1 flex-col items-center justify-center px-6 pb-20 text-center">
         <Hero />
         <SignupForm />
       </div>
