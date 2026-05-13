@@ -10,6 +10,7 @@ const HelpCenterPage = lazy(() => import("./pages/HelpCenterPage"));
 const IntegratorPage = lazy(() => import("./pages/IntegratorPage"));
 const IntegratorJoinPage = lazy(() => import("./pages/IntegratorJoinPage"));
 const TokenPage = lazy(() => import("./pages/TokenPage"));
+const AIPage = lazy(() => import("./pages/AIPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/integrator" element={<IntegratorPage />} />
             <Route path="/integrator/join" element={<IntegratorJoinPage />} />
             <Route path="/token" element={<TokenPage />} />
+            <Route path="/ai" element={<AIPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
