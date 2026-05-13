@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
+import "./styles/tailwind.css";
 import "./styles/main.scss";
 
 const UseCasesPage = lazy(() => import("./pages/UseCasesPage"));

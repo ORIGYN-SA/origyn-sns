@@ -1,0 +1,28 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Register the italic variable file under the same "General Sans" family so
+   `font-style: italic` resolves to it. The existing _fonts.scss only registers
+   the italic file under a separate "General Sans Italic" family name. */
+@font-face {
+  font-family: "General Sans";
+  src: url("/GeneralSans-VariableItalic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@theme {
+  --color-ink: #222526;
+  --color-muted: #69737c;
+  --color-navy: #061937;
+  --color-canvas: #f5f4f4;
+  --color-surface: #ffffff;
+  --color-hairline: #e8e8e8;
+
+  --font-sans: "General Sans", system-ui, sans-serif;
+
+  --breakpoint-lg: 990px;
+}
