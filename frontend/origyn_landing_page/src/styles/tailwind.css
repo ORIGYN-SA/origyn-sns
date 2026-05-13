@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -14,6 +15,26 @@
   font-display: swap;
 }
 
+.text-gradient {
+  background-image: linear-gradient(
+    270deg,
+    #1F9CD4 3%,
+    #1470B1 30%,
+    #1A5EA2 36%,
+    #214B92 44%,
+    #254088 53%,
+    #263C85 63%,
+    #25397E 69%,
+    #223169 79%,
+    #1E2448 90%,
+    #1E2345 91%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 @theme {
   --color-ink: #222526;
   --color-muted: #69737c;
@@ -23,6 +44,18 @@
   --color-hairline: #e8e8e8;
 
   --font-sans: "General Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
 
   --breakpoint-lg: 990px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

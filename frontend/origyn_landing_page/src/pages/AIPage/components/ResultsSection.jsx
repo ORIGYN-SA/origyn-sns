@@ -43,22 +43,34 @@ const ResultsSection = () => (
       <table className="mt-16 w-full max-w-[1080px] border-collapse font-mono text-[13px]">
         <thead>
           <tr className="border-b border-hairline">
-            <th className="py-4 text-left font-normal text-muted">Model</th>
-            <th className="py-4 text-left font-normal text-muted">Existing</th>
-            <th className="py-4 text-left font-normal text-muted">
-              ORIGYN AI
+            <th className="py-4 text-left font-normal">
+              <span className="text-gradient">Model</span>
             </th>
-            <th className="py-4 text-right font-normal text-muted">Gain</th>
+            <th className="py-4 text-left font-normal">
+              <span className="text-gradient">Existing</span>
+            </th>
+            <th className="py-4 text-left font-normal">
+              <span className="text-gradient">ORIGYN AI</span>
+            </th>
+            <th className="py-4 text-right font-normal">
+              <span className="text-gradient">Gain</span>
+            </th>
           </tr>
         </thead>
         <tbody>
           {ROWS.map((row) => (
             <tr key={row.model} className="border-b border-hairline">
-              <td className="py-6 text-muted">{row.model}</td>
-              <td className="py-6 text-muted">{row.existing}</td>
-              <td className="py-6 text-muted">{row.origyn}</td>
-              <td className="py-6 text-right font-bold text-navy">
-                {row.gain}
+              <td className="py-6">
+                <span className="text-gradient">{row.model}</span>
+              </td>
+              <td className="py-6">
+                <span className="text-gradient">{row.existing}</span>
+              </td>
+              <td className="py-6">
+                <span className="text-gradient">{row.origyn}</span>
+              </td>
+              <td className="py-6 text-right font-bold">
+                <span className="text-gradient">{row.gain}</span>
               </td>
             </tr>
           ))}

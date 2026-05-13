@@ -2,6 +2,7 @@ import Footer from "@components/Footer/Footer";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import Hero from "./components/Hero";
 import SignupForm from "./components/SignupForm";
+import MarqueeStrip from "./components/MarqueeStrip";
 import ProblemSection from "./components/ProblemSection";
 import AgentSection from "./components/AgentSection";
 import VaultSection from "./components/VaultSection";
@@ -10,7 +11,7 @@ import VisionSection from "./components/VisionSection";
 import NewsletterSection from "./components/NewsletterSection";
 
 const AIPage = () => (
-  <div className="bg-canvas font-sans text-ink">
+  <div className="bg-white font-sans text-ink">
     <section className="flex min-h-screen flex-col">
       <header className="flex items-start justify-between px-8 pt-8 md:px-16 md:pt-12">
         {/* Logo slot — intentionally empty */}
@@ -24,6 +25,7 @@ const AIPage = () => (
       </div>
     </section>
 
+    <MarqueeStrip />
     <ProblemSection />
     <AgentSection />
     <VaultSection />

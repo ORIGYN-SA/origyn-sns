@@ -15,8 +15,8 @@ const Card = ({ icon, title, subtitle, children, align = "center" }) => {
           {icon}
         </div>
       )}
-      <h3 className="font-mono text-[15px] tracking-[0.05em] text-navy">
-        {title}
+      <h3 className="font-mono text-[15px] tracking-[0.05em]">
+        <span className="text-gradient">{title}</span>
       </h3>
       {subtitle && (
         <p className="mt-3 text-[14px] font-medium text-navy">{subtitle}</p>

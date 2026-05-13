@@ -12,7 +12,7 @@ const NewsletterForm = () => {
     <div className="w-full max-w-[600px] rounded-full bg-gradient-to-r from-[#1F9CD4] to-[#1E2345] p-[1px]">
       <form
         onSubmit={handleSubmit}
-        className="flex w-full items-center gap-2 rounded-full bg-canvas py-1.5 pl-7 pr-1.5"
+        className="flex w-full items-center gap-2 rounded-full bg-white py-1.5 pl-7 pr-1.5"
       >
         <input
           type="email"
