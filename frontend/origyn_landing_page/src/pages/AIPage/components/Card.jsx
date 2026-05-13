@@ -2,13 +2,13 @@ const Card = ({ icon, title, subtitle, children, align = "center" }) => {
   const isLeft = align === "left";
   return (
     <article
-      className={`rounded-3xl border border-[#ececec] bg-surface px-10 py-10 transition-colors duration-200 hover:border-ink/20 hover:bg-black/[0.015] ${
+      className={`rounded-3xl border border-[#ececec] bg-surface px-10 py-10 ${
         isLeft ? "text-left" : "text-center"
       }`}
     >
       {icon && (
         <div
-          className={`mb-6 flex ${
+          className={`mb-6 flex h-11 items-center ${
             isLeft ? "justify-start" : "justify-center"
           }`}
         >

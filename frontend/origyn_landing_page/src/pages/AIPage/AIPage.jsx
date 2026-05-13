@@ -12,16 +12,48 @@ import NewsletterSection from "./components/NewsletterSection";
 
 const AIPage = () => (
   <div className="bg-white font-sans text-ink">
-    <section className="flex min-h-[70vh] flex-col">
-      <header className="flex items-start justify-between px-8 pt-8 md:px-16 md:pt-12">
-        {/* TODO: wire up brand logo */}
-        <div className="h-10 w-44" aria-hidden="true" />
+    <section className="flex min-h-screen flex-col">
+      <header className="flex items-center justify-between px-8 pt-8 md:px-16 md:pt-12">
+        <div className="flex items-start">
+          <img
+            src="/origyn-logo-blue.png"
+            alt="Origyn"
+            className="h-9 w-auto md:h-10"
+          />
+          <span className="ml-1 font-mono text-[12px] italic tracking-[0.08em] text-[#263C85]">
+            AI
+          </span>
+        </div>
         <LanguageSwitcher />
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center px-6 pb-20 text-center">
-        <Hero />
-        <SignupForm />
+      <div className="flex flex-1 flex-col items-center px-6 pb-10 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <Hero />
+          <div className="mt-14 w-full max-w-[600px]">
+            <SignupForm />
+          </div>
+        </div>
+        <div className="mt-12 flex flex-col items-center gap-2 text-muted">
+          <span className="text-[0.7rem] uppercase tracking-[0.18em]">
+            Scroll
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="animate-bounce"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </div>
       </div>
     </section>
 

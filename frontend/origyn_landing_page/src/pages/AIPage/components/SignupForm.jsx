@@ -11,7 +11,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-14 flex w-full max-w-[600px] flex-col items-stretch gap-2 rounded-3xl border border-hairline bg-surface p-2 sm:flex-row sm:items-center sm:rounded-full sm:py-1.5 sm:pl-7 sm:pr-1.5"
+      className="flex w-full max-w-[600px] flex-col items-stretch gap-2 rounded-3xl border border-hairline bg-surface p-2 sm:flex-row sm:items-center sm:rounded-full sm:py-1.5 sm:pl-7 sm:pr-1.5"
     >
       <input
         type="email"
@@ -20,7 +20,7 @@ const SignupForm = () => {
         placeholder="yourmail@gmail.com"
         aria-label="Email address"
         required
-        className="flex-1 rounded-full border-0 bg-transparent py-3 text-base font-normal text-ink underline decoration-muted underline-offset-[6px] outline-none placeholder:text-muted focus:decoration-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        className="flex-1 border-0 bg-transparent py-3 text-base font-normal text-ink underline decoration-muted underline-offset-[6px] outline-none placeholder:text-muted focus:decoration-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       />
       <button
         type="submit"

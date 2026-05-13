@@ -1,8 +1,8 @@
 import Eyebrow from "./Eyebrow";
-import NewsletterForm from "./NewsletterForm";
+import SignupForm from "./SignupForm";
 
 const NewsletterSection = () => (
-  <section className="px-6 py-20 md:py-28">
+  <section className="px-6 pt-20 pb-56 md:pt-28 md:pb-72">
     <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
       <Eyebrow>Stay close</Eyebrow>
 
@@ -15,13 +15,9 @@ const NewsletterSection = () => (
         Only substance.
       </p>
 
-      <div className="mt-12">
-        <NewsletterForm />
+      <div className="mt-12 flex w-full justify-center">
+        <SignupForm />
       </div>
-
-      <p className="mt-8 text-[0.8125rem] text-muted">
-        Research updates only. No spam.
-      </p>
     </div>
   </section>
 );
