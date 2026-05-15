@@ -35,15 +35,18 @@ const ResultsSection = () => (
         </ScrollReveal>
       </h2>
 
-      <p className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         Same models, same conditions, production network. Our custom WASM SIMD
         kernels make the difference.
-      </p>
+      </ScrollReveal>
     </div>
 
-    <div className="relative mt-12 h-[clamp(420px,60vh,640px)] w-full overflow-hidden">
+    <div className="relative mt-12 h-[clamp(420px,60vh,640px)] w-full overflow-hidden select-none [-webkit-touch-callout:none] [-webkit-user-select:none]">
       <Hyperspeed effectOptions={HYPERSPEED_OPTIONS} />
-      <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_55%_40%_at_center,rgba(255,255,255,0.92),rgba(255,255,255,0)_75%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_90%_65%_at_center,rgba(245,244,244,0.92),rgba(245,244,244,0)_70%)] md:bg-[radial-gradient(ellipse_55%_40%_at_center,rgba(245,244,244,0.95),rgba(245,244,244,0)_75%)]" />
       <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 px-6 text-center md:gap-8">
         <Eyebrow>Qwen 2.5 0.5B · production network</Eyebrow>
         <div className="flex flex-col items-center gap-3 text-[clamp(2rem,5.5vw,4rem)] font-extralight leading-none tracking-tight md:flex-row md:gap-8">
@@ -58,12 +61,18 @@ const ResultsSection = () => (
     </div>
 
     <div className="mx-auto flex max-w-6xl flex-col items-center px-6">
-      <p className="mt-12 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-12 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         For the same compute budget, a Second Brain powered by our fork does
         three times more work, or consumes three times fewer resources.
-      </p>
+      </ScrollReveal>
 
-      <p className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-10 max-w-[860px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         <span className="block">
           We are not tied to any single model or architecture. Every new release
           is an opportunity.
@@ -72,9 +81,12 @@ const ResultsSection = () => (
           We continuously benchmark and integrate the latest models to push
           speed, accuracy, and efficiency further.
         </span>
-      </p>
+      </ScrollReveal>
 
-      <table className="mt-12 w-full max-w-[1080px] border-collapse text-base">
+      <ScrollReveal
+        as="table"
+        className="mt-12 w-full max-w-[1080px] border-collapse text-base"
+      >
         <thead>
           <tr className="border-b border-[#ececec]">
             <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
@@ -103,19 +115,23 @@ const ResultsSection = () => (
             </tr>
           ))}
         </tbody>
-      </table>
+      </ScrollReveal>
 
       <div className="mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
-        <Card align="left" title="Fleet of micro-experts">
-          Instead of one slow large model, we deploy task-specific finetuned
-          sub-1B parameter models: sorting emails, classifying documents,
-          evaluating risk. Faster and more precise than a generalist.
-        </Card>
-        <Card align="left" title="On-chain distillation">
-          A large model teaches off-chain, a small model deploys on-chain.
-          Combined with 4-bit quantization and our custom WASM SIMD kernels,
-          this enables real AI within a canister’s instruction budget.
-        </Card>
+        <ScrollReveal>
+          <Card align="left" title="Fleet of micro-experts">
+            Instead of one slow large model, we deploy task-specific finetuned
+            sub-1B parameter models: sorting emails, classifying documents,
+            evaluating risk. Faster and more precise than a generalist.
+          </Card>
+        </ScrollReveal>
+        <ScrollReveal>
+          <Card align="left" title="On-chain distillation">
+            A large model teaches off-chain, a small model deploys on-chain.
+            Combined with 4-bit quantization and our custom WASM SIMD kernels,
+            this enables real AI within a canister’s instruction budget.
+          </Card>
+        </ScrollReveal>
       </div>
     </div>
   </section>

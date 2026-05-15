@@ -50,17 +50,21 @@ const VisionSection = () => (
           </ScrollReveal>
         </h2>
 
-        <p className="mt-10 max-w-[680px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+        <ScrollReveal
+          as="p"
+          className="mt-10 max-w-[680px] text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+        >
           AI commoditizes production. These five domains remain. Origyn is
           positioned on every one of them.
-        </p>
+        </ScrollReveal>
       </div>
 
       <ol className="mt-20 flex w-full flex-col border-t border-[#ececec]">
         {PILLARS.map((pillar, i) => {
           const padded = String(i + 1).padStart(2, "0");
           return (
-            <li
+            <ScrollReveal
+              as="li"
               key={pillar.title}
               className="grid grid-cols-[auto_1fr] items-start gap-x-8 gap-y-3 border-b border-[#ececec] py-10 md:grid-cols-[5rem_3.5rem_1fr] md:items-center md:gap-x-10 md:py-14"
             >
@@ -80,7 +84,7 @@ const VisionSection = () => (
                   {pillar.description}
                 </p>
               </div>
-            </li>
+            </ScrollReveal>
           );
         })}
       </ol>

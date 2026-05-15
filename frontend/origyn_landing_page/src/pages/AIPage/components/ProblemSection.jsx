@@ -30,7 +30,10 @@ const ProblemSection = () => (
         </ScrollReveal>
       </h2>
 
-      <p className="mt-12 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-12 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         Every project that claims to have an{" "}
         <strong className="font-normal text-ink">
           “on-chain AI agent”
@@ -39,17 +42,21 @@ const ProblemSection = () => (
         servers, and only the result is posted to the blockchain. The model
         never executes inside the network. The chain is used as a bulletin
         board, not as a compute layer.
-      </p>
+      </ScrollReveal>
 
-      <p className="mt-10 max-w-[860px] text-base leading-[1.75] text-ink md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-10 max-w-[860px] text-base leading-[1.75] text-ink md:text-[1.0625rem]"
+      >
         That is not an on-chain agent. That is an API call with a receipt.
-      </p>
+      </ScrollReveal>
 
       <div className="mt-12 grid w-full grid-cols-1 gap-4 md:grid-cols-3">
         {STEPS.map((step, i) => {
           const padded = String(i + 1).padStart(2, "0");
           return (
-            <article
+            <ScrollReveal
+              as="article"
               key={step.title}
               className="flex flex-col rounded-3xl border border-[#ececec] bg-surface px-10 py-10 text-left"
             >
@@ -62,12 +69,15 @@ const ProblemSection = () => (
               <p className="mt-3 text-sm leading-[1.6] text-muted">
                 {step.body}
               </p>
-            </article>
+            </ScrollReveal>
           );
         })}
       </div>
 
-      <p className="mt-12 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-12 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         We have already demonstrated this.{" "}
         <strong className="font-normal text-ink">Origyn</strong> runs real
         inference on-chain today. We are now in an active testing phase,
@@ -75,7 +85,7 @@ const ProblemSection = () => (
         our benchmarks already show : this is the most reliable{" "}
         <strong className="font-normal text-ink">on-chain AI</strong> inference
         stack that exists.
-      </p>
+      </ScrollReveal>
     </div>
   </section>
 );

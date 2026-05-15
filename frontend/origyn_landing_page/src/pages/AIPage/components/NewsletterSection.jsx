@@ -1,5 +1,6 @@
 import Eyebrow from "./Eyebrow";
 import SignupForm from "./SignupForm";
+import { ScrollReveal } from "./AnimatedText";
 
 const NewsletterSection = () => (
   <section className="px-6 pt-20 pb-56 md:pt-28 md:pb-72">
@@ -10,10 +11,13 @@ const NewsletterSection = () => (
         <span className="font-normal italic">Follow</span> the research
       </h2>
 
-      <p className="mt-10 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]">
+      <ScrollReveal
+        as="p"
+        className="mt-10 max-w-[860px] text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+      >
         Paper updates, technical milestones, project progress. No marketing.
         Only substance.
-      </p>
+      </ScrollReveal>
 
       <div className="mt-12 flex w-full justify-center">
         <SignupForm />

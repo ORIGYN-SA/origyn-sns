@@ -853,7 +853,7 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
         this.scene = new THREE.Scene();
         this.scene.background = null;
 
-        let fog = new THREE.Fog(options.colors.background, options.length * 0.2, options.length * 500);
+        let fog = new THREE.Fog(options.colors.fogColor ?? options.colors.roadColor ?? options.colors.background, options.length * 0.2, options.length * 500);
         this.scene.fog = fog;
         this.fogUniforms = {
           fogColor: { value: fog.color },
@@ -943,7 +943,6 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
         this.bloomPass.renderToScreen = false;
         smaaPass.renderToScreen = true;
         this.composer.addPass(this.renderPass);
-        this.composer.addPass(this.bloomPass);
         this.composer.addPass(smaaPass);
       }
 

@@ -12,15 +12,18 @@ import NewsletterSection from "./components/NewsletterSection";
 
 const AIPage = () => (
   <div className="bg-white font-sans text-ink">
+    <meta name="theme-color" content="#ffffff" />
+    <style>{`html,body{background:#ffffff;color-scheme:light}`}</style>
+
     <section className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between px-8 pt-8 md:px-16 md:pt-12">
+      <header className="flex items-center justify-between px-8 pt-8 pb-10 md:px-16 md:pt-12 md:pb-0">
         <div className="flex items-start">
           <img
             src="/origyn-logo-blue.png"
             alt="Origyn"
-            className="h-9 w-auto md:h-10"
+            className="h-7 w-auto md:h-10"
           />
-          <span className="ml-1 font-mono text-[12px] italic tracking-[0.08em] text-[#263C85]">
+          <span className="ml-1 font-mono text-[10px] italic tracking-[0.08em] text-[#263C85] md:text-[12px]">
             AI
           </span>
         </div>
