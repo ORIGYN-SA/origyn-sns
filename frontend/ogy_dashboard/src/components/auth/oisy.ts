@@ -2,7 +2,10 @@ import { HttpAgent, type Agent } from "@dfinity/agent";
 import { SubAccount } from "@dfinity/ledger-icp";
 import type { Principal } from "@dfinity/principal";
 import { Signer } from "@slide-computer/signer";
-import { SignerAgent } from "@slide-computer/signer-agent";
+import {
+  SignerAgent,
+  type SignerAgentOptions,
+} from "@slide-computer/signer-agent";
 import { PostMessageTransport } from "@slide-computer/signer-web";
 
 import { DERIVATION_ORIGIN } from "./constants";
@@ -20,6 +23,56 @@ export type OisySession = {
   agent: Agent;
   signer: Signer;
 };
+
+class OisyAgent implements Agent {
+  constructor(
+    private readonly signerAgent: Agent,
+    private readonly queryAgent: HttpAgent,
+    private readonly principal: Principal
+  ) {}
+
+  get rootKey() {
+    return this.queryAgent.rootKey;
+  }
+
+  getPrincipal() {
+    return Promise.resolve(this.principal);
+  }
+
+  call(...params: Parameters<Agent["call"]>) {
+    return this.signerAgent.call(...params);
+  }
+
+  query(...params: Parameters<Agent["query"]>) {
+    return this.queryAgent.query(...params);
+  }
+
+  readState(...params: Parameters<Agent["readState"]>) {
+    return this.signerAgent.readState(...params);
+  }
+
+  createReadStateRequest(
+    ...params: Parameters<NonNullable<Agent["createReadStateRequest"]>>
+  ) {
+    if (this.signerAgent.createReadStateRequest) {
+      return this.signerAgent.createReadStateRequest(...params);
+    }
+
+    if (this.queryAgent.createReadStateRequest) {
+      return this.queryAgent.createReadStateRequest(...params);
+    }
+
+    return Promise.resolve({ body: { content: {} } });
+  }
+
+  status() {
+    return this.queryAgent.status();
+  }
+
+  fetchRootKey() {
+    return this.queryAgent.fetchRootKey();
+  }
+}
 
 const createOisyTransport = () =>
   new PostMessageTransport({
@@ -80,15 +133,16 @@ export const connectOisy = async ({
   }
 
   const baseAgent = new HttpAgent({ host });
-  const signerAgent = await SignerAgent.create({
+  const signerAgentOptions: SignerAgentOptions<Signer> = {
     signer,
     account: account.principal,
     agent: baseAgent,
-  });
+  };
+  const signerAgent = await SignerAgent.create(signerAgentOptions);
 
   return {
     ...account,
-    agent: signerAgent,
+    agent: new OisyAgent(signerAgent, baseAgent, account.principal),
     signer,
   };
 };
