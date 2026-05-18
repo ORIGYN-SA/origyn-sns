@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.10] - 2026-05-18
+
+#### Fixed
+
+- **Payment Rounds history**: Old payment rounds history is now also accessible
+- **Canister migration**: Fixed the bug that prevented canister from upgrading
+
 ### [1.0.9] - 2026-04-02
 
 #### Added
