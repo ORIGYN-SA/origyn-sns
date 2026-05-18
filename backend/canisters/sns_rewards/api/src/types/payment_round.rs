@@ -269,6 +269,22 @@ impl Storable for PaymentRound {
     };
 }
 
+impl Storable for PaymentRoundV0 {
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(Encode!(self).unwrap())
+    }
+    fn into_bytes(self) -> std::vec::Vec<u8> {
+        Encode!(&self).unwrap()
+    }
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+    const BOUND: Bound = Bound::Bounded {
+        max_size: MAX_VALUE_SIZE,
+        is_fixed_size: false,
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use std::collections::{BTreeMap, HashMap};

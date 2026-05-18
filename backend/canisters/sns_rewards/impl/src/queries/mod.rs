@@ -17,6 +17,7 @@ pub mod icrc21;
 pub mod set_daily_ogy_burn_rate_validate;
 pub mod set_reserve_transfer_amounts_validate;
 pub mod set_reward_token_types_validate;
+pub mod get_historic_payment_round_v0;
 
 pub use get_active_5y_payment_rounds::*;
 pub use get_active_payment_rounds::*;
@@ -34,3 +35,4 @@ pub use icrc21::*;
 pub use set_daily_ogy_burn_rate_validate::*;
 pub use set_reserve_transfer_amounts_validate::*;
 pub use set_reward_token_types_validate::*;
+pub use get_historic_payment_round_v0::*;

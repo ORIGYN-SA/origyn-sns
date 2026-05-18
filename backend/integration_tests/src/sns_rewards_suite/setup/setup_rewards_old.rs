@@ -17,7 +17,7 @@ pub struct InitArgs {
 pub fn setup_old_rewards_canister(
     pic: &PocketIc,
     sns_rewards_id: Principal,
-    token_ledgers: &HashMap<String, Principal>,
+    sns_ledger_canister_id: Principal,
     sns_canister_id: Principal,
     controller: &Principal,
 ) -> Principal {
@@ -30,11 +30,6 @@ pub fn setup_old_rewards_canister(
     )
     .unwrap();
     pic.tick();
-
-    let sns_ledger_canister_id = token_ledgers
-        .get("goldao_ledger_canister_id")
-        .expect("couldn't find ledger with 'goldao_ledger_canister_id'")
-        .clone();
 
     let init_args = InitArgs {
         test_mode: true,
