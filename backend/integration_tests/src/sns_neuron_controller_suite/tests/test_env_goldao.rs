@@ -60,28 +60,28 @@ fn test_process_goldao_neurons_happy_path() {
     reward_tokens.insert(
         TokenSymbol::ICP,
         TokenParams {
-            destination: rewards_destination,
+            destination: rewards_destination.into(),
             threshold: 0,
         },
     );
     reward_tokens.insert(
         TokenSymbol::WTN,
         TokenParams {
-            destination: rewards_destination,
+            destination: rewards_destination.into(),
             threshold: 0,
         },
     );
     reward_tokens.insert(
         TokenSymbol::OGY,
         TokenParams {
-            destination: ogy_rewards_destination,
+            destination: ogy_rewards_destination.into(),
             threshold: 0,
         },
     );
     reward_tokens.insert(
         TokenSymbol::GOLDAO,
         TokenParams {
-            destination: rewards_destination,
+            destination: rewards_destination.into(),
             threshold: 0,
         },
     );

@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.1] - 2026-05-11
+
+#### Added
+- **OGY rewards destination** : Added the reward destination subaccount
+
 ### [1.1.0] - 2026-05-07
 
 #### Added

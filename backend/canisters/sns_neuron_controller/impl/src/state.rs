@@ -2,6 +2,9 @@ use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
 use crate::types::GoldaoManager;
+use std::collections::HashMap;
+use types::TokenSymbol;
+use sns_neuron_controller_api_canister::init::TokenParams;
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Principal};
@@ -39,6 +42,7 @@ impl RuntimeState {
             },
             authorized_principals: self.data.authorized_principals.clone(),
             goldao_neuron_manager_metrics: self.data.neuron_managers.goldao.get_neuron_metrics(),
+            goldao_manager_reward_tokens: self.data.neuron_managers.goldao.reward_tokens.clone(),
         }
     }
 
@@ -53,6 +57,7 @@ pub struct Metrics {
     pub canister_info: CanisterInfo,
     pub authorized_principals: Vec<Principal>,
     pub goldao_neuron_manager_metrics: Vec<SnsNeuronWithMetric>,
+    pub goldao_manager_reward_tokens: HashMap<TokenSymbol, TokenParams>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
