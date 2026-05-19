@@ -6,14 +6,15 @@ use sns_rewards_api_canister::payment_round::{PaymentRound, PaymentStatus};
 use std::collections::BTreeMap;
 use tracing::debug;
 use types::TokenSymbol;
+use types::TokenSymbolV0;
+use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 
 use crate::memory::{get_payment_round_history_memory, VM};
-
 
 #[derive(Serialize, Deserialize)]
 pub struct PaymentProcessor {
     #[serde(skip, default = "init_map_v0")]
-    pub round_history_v0: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    pub round_history_v0: StableBTreeMap<(TokenSymbolV0, u16), PaymentRoundV0, VM>,
     /// Holds only PaymentRounds that are FULLY completed.
     #[serde(skip, default = "init_map")]
     pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
@@ -25,7 +26,7 @@ pub struct PaymentProcessor {
     pub next_key: u16,
 }
 
-fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+fn init_map_v0() -> StableBTreeMap<(TokenSymbolV0, u16), PaymentRoundV0, VM> {
     let memory = get_payment_round_history_memory_v0();
     StableBTreeMap::init(memory)
 }
@@ -122,6 +123,21 @@ impl PaymentProcessor {
     ) -> Vec<(u16, PaymentRound)> {
         let rounds = self
             .round_history
+            .iter()
+            .filter(|entry| entry.key().1 == id && entry.value().token == token)
+            .map(|entry| (entry.key().1, entry.value().clone()))
+            .collect();
+
+        rounds
+    }
+
+    pub fn get_payment_round_history_v0(
+        &self,
+        token: TokenSymbolV0,
+        id: u16,
+    ) -> Vec<(u16, PaymentRoundV0)> {
+        let rounds = self
+            .round_history_v0
             .iter()
             .filter(|entry| entry.key().1 == id && entry.value().token == token)
             .map(|entry| (entry.key().1, entry.value().clone()))

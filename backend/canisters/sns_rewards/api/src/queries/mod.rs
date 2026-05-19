@@ -4,6 +4,7 @@ pub mod get_active_payment_rounds;
 pub mod get_all_neurons;
 pub mod get_all_neurons_maturity;
 pub mod get_historic_payment_round;
+pub mod get_historic_payment_round_v0;
 pub mod get_maturity_history_of_neuron;
 pub mod get_n_history;
 pub mod get_neuron_by_id;

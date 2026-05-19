@@ -16,6 +16,7 @@ use types::TokenSymbol;
 use types::TokenSymbolV0;
 use types::{NeuronInfo, TimestampMillis};
 use utils::env::CanisterEnvV0;
+use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeStateV0 {
@@ -150,7 +151,7 @@ use sns_rewards_api_canister::payment_round::PaymentRound;
 #[derive(Serialize, Deserialize)]
 pub struct PaymentProcessorV0 {
     #[serde(skip, default = "init_map_v0")]
-    pub round_history_v0: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
+    pub round_history_v0: StableBTreeMap<(TokenSymbolV0, u16), PaymentRoundV0, VM>,
     /// Holds only PaymentRounds that are FULLY completed.
     #[serde(skip, default = "init_map")]
     pub round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>,
@@ -159,7 +160,7 @@ pub struct PaymentProcessorV0 {
 }
 
 use crate::memory::get_payment_round_history_memory_v0;
-fn init_map_v0() -> StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM> {
+fn init_map_v0() -> StableBTreeMap<(TokenSymbolV0, u16), PaymentRoundV0, VM> {
     let memory = get_payment_round_history_memory_v0();
     StableBTreeMap::init(memory)
 }
@@ -184,18 +185,18 @@ impl From<PaymentProcessorV0> for PaymentProcessor {
     }
 }
 
-    pub fn next_key(round_history: StableBTreeMap<(TokenSymbol, u16), PaymentRound, VM>) -> u16 {
-        let mut max_key = 0;
-        for entry in round_history.iter() {
-            let (_, id) = entry.key();
-            if *id > max_key {
-                max_key = *id;
-            }
-        }
-
-        if max_key == u16::MAX {
-            1
-        } else {
-            max_key + 1
+pub fn next_key(round_history: StableBTreeMap<(TokenSymbolV0, u16), PaymentRoundV0, VM>) -> u16 {
+    let mut max_key = 0;
+    for entry in round_history.iter() {
+        let (_, id) = entry.key();
+        if *id > max_key {
+            max_key = *id;
         }
     }
+
+    if max_key == u16::MAX {
+        1
+    } else {
+        max_key + 1
+    }
+}
