@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
+import AILocaleGate from "./pages/AIPage/AILocaleGate";
 import "./styles/tailwind.css";
 import "./styles/main.scss";
 
@@ -33,7 +34,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="/integrator" element={<IntegratorPage />} />
             <Route path="/integrator/join" element={<IntegratorJoinPage />} />
             <Route path="/token" element={<TokenPage />} />
-            <Route path="/ai" element={<AIPage />} />
+            <Route path="/ai" element={<AILocaleGate />} />
+            <Route path="/ai/:locale" element={<AIPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

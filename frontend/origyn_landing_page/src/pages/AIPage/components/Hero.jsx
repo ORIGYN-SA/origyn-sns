@@ -1,4 +1,6 @@
 import { motion as Motion } from "motion/react";
+import { useT } from "@/i18n/LocaleContext";
+import RichText from "@/i18n/RichText";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -25,37 +27,40 @@ const subtitleVariants = {
   },
 };
 
-const Hero = () => (
-  <>
-    <Motion.h1
-      className="m-0 text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink"
-      initial="hidden"
-      animate="visible"
-      variants={titleContainer}
-    >
-      <Motion.span variants={lineVariants} className="block">
-        Advancing
-      </Motion.span>
-      <Motion.span variants={lineVariants} className="block">
-        on-chain <span className="font-normal italic">AI</span> inference.
-      </Motion.span>
-    </Motion.h1>
+const Hero = () => {
+  const t = useT();
+  const titleLines = t("hero.title").split("\n");
+  const subtitleLines = t.raw("hero.subtitle");
 
-    <Motion.p
-      className="mt-12 text-[0.75rem] uppercase tracking-[0.14em] leading-[1.7] text-muted md:text-[0.8125rem]"
-      initial="hidden"
-      animate="visible"
-      variants={subtitleVariants}
-    >
-      <span className="block">
-        Open R&amp;D on running fully autonomous AI agents on a public
-        blockchain.
-      </span>
-      <span className="block">
-        No off-chain shortcuts. Verifiable by design.
-      </span>
-    </Motion.p>
-  </>
-);
+  return (
+    <>
+      <Motion.h1
+        className="m-0 text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink"
+        initial="hidden"
+        animate="visible"
+        variants={titleContainer}
+      >
+        {titleLines.map((line, i) => (
+          <Motion.span key={i} variants={lineVariants} className="block">
+            <RichText text={line} />
+          </Motion.span>
+        ))}
+      </Motion.h1>
+
+      <Motion.p
+        className="mt-12 text-[0.75rem] uppercase tracking-[0.14em] leading-[1.7] text-muted md:text-[0.8125rem]"
+        initial="hidden"
+        animate="visible"
+        variants={subtitleVariants}
+      >
+        {subtitleLines.map((line, i) => (
+          <span key={i} className="block">
+            {line}
+          </span>
+        ))}
+      </Motion.p>
+    </>
+  );
+};
 
 export default Hero;

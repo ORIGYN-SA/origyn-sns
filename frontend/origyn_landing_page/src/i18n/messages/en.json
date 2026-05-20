@@ -1,0 +1,176 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Scroll",
+  "hero": {
+    "title": "Advancing\non-chain <i>AI</i> inference.",
+    "subtitle": [
+      "Open R&D on running fully autonomous AI agents on a public blockchain.",
+      "No off-chain shortcuts. Verifiable by design."
+    ]
+  },
+  "form": {
+    "label": "Get notified",
+    "emailLabel": "Email address",
+    "placeholder": "you@email.com",
+    "submit": "Get Notified",
+    "submitting": "Submitting",
+    "invalid": "Please enter a valid email.",
+    "success": "Subscribed. We'll be in touch.",
+    "error": "Something went wrong. Try again."
+  },
+  "marquee": {
+    "phrases": [
+      { "text": "You are what you know and remember." },
+      { "text": "Lose that, and you lose yourself.", "emphasis": true },
+      { "text": "AI works the same way." },
+      { "text": "Expertise means nothing if the agent has to relearn you every time." },
+      { "text": "Without memory, without context, without a relationship to your reality, it’s just noise." },
+      { "text": "The question isn’t whether AI is powerful. It’s whether your agent actually knows you.", "emphasis": true }
+    ]
+  },
+  "problem": {
+    "eyebrow": "The problem",
+    "title": "No one actually runs\n<i>AI on-chain.</i>",
+    "lead": "Every project that claims to have an <s>“on-chain AI agent”</s> follows the same pattern : inference runs off-chain, on centralized servers, and only the result is posted to the blockchain. The model never executes inside the network. The chain is used as a bulletin board, not as a compute layer.",
+    "leadStrong": "That is not an on-chain agent. That is an API call with a receipt.",
+    "steps": [
+      {
+        "title": "The claim",
+        "body": "“AI-powered on-chain agent.” Inference happens on AWS. The chain only stores the output."
+      },
+      {
+        "title": "The gap",
+        "body": "No verifiable execution. No deterministic replay. No way to audit what the model actually computed."
+      },
+      {
+        "title": "Our approach",
+        "body": "Full inference inside the canister. WASM SIMD, on the Swiss Subnet. Verifiable, reproducible, truly on-chain."
+      }
+    ],
+    "closing": "We have already demonstrated this. <s>Origyn</s> runs real inference on-chain today. We are now in an active testing phase, stress-testing robustness across models and workloads to confirm what our benchmarks already show : this is the most reliable <s>on-chain AI</s> inference stack that exists."
+  },
+  "agent": {
+    "eyebrow": "The agent",
+    "title": "Origyn.\nMinimal <i>agent,</i> maximal <i>memory.</i>",
+    "lead": "A sovereign AI agent running on-chain. Its first mission: the Sovereign Second Brain. A small model fed by decades of your structured context, certified on the Swiss blockchain. Not a giant model on-chain. A focused agent with a certified vault.",
+    "cards": [
+      {
+        "title": "User side",
+        "subtitle": "Local Bureau",
+        "body": "The user’s machine. Large language models, private files, offline work. Your intelligence stays with you."
+      },
+      {
+        "title": "Blockchain side",
+        "subtitle": "On-Chain Vault",
+        "body": "The canister. Certified vault, verifiable inference, deterministic replay. Your context becomes provable infrastructure."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "The vault",
+    "title": "<i>Certified</i> by construction.",
+    "lead": "Every fragility addressed at the root. Not a promise. A protocol.",
+    "cards": [
+      {
+        "title": "Legal proof of existence",
+        "body": "Blockchain-certified timestamping. Admissible in court, no notary required."
+      },
+      {
+        "title": "Full provenance",
+        "body": "Who created, modified, certified each document. Immutable traceability chain."
+      },
+      {
+        "title": "Versioning",
+        "body": "Every version preserved. Roll back at any time."
+      },
+      {
+        "title": "Controlled sharing",
+        "body": "Read-only, time-limited, revocable in one click. Works even when offline."
+      },
+      {
+        "title": "Dead man’s switch",
+        "body": "Designated heirs automatically recover access after a defined period of inactivity."
+      },
+      {
+        "title": "Immutable audit trail",
+        "body": "Who saw what, when, why. Full regulatory compliance built in."
+      },
+      {
+        "title": "24/7 monitoring",
+        "body": "The canister runs even when your PC is off. Automatic alerts for anomalies."
+      },
+      {
+        "title": "Certified assets",
+        "body": "Tokenized gold, real estate, collectibles. Provenance certificates alongside cognitive patrimony."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Our results",
+    "title": "<i>Faster</i>\nthan the existing.",
+    "lead": "Same models, same conditions, production network. Our custom WASM SIMD kernels make the difference.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · production network",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× faster than existing on-chain inference"
+    },
+    "body1": "For the same compute budget, a Second Brain powered by our fork does three times more work, or consumes three times fewer resources.",
+    "body2": [
+      "We are not tied to any single model or architecture. Every new release is an opportunity.",
+      "We continuously benchmark and integrate the latest models to push speed, accuracy, and efficiency further."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Existing",
+        "origyn": "ORIGYN AI",
+        "gain": "Gain"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Fleet of micro-experts",
+        "body": "Instead of one slow large model, we deploy task-specific finetuned sub-1B parameter models: sorting emails, classifying documents, evaluating risk. Faster and more precise than a generalist."
+      },
+      {
+        "title": "On-chain distillation",
+        "body": "A large model teaches off-chain, a small model deploys on-chain. Combined with 4-bit quantization and our custom WASM SIMD kernels, this enables real AI within a canister’s instruction budget."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vision",
+    "title": "Five pillars\nAI cannot <i>replace.</i>",
+    "lead": "AI commoditizes production. These five domains remain. Origyn is positioned on every one of them.",
+    "pillars": [
+      { "title": "Trust", "description": "Origyn certification — a verifiable trust signal." },
+      { "title": "Context", "description": "Decades of structured memory — a personal signal AI cannot match." },
+      { "title": "Distribution", "description": "Swiss Subnet — verifiable infrastructure for agents." },
+      { "title": "Taste", "description": "Auto-research pipeline — automation-assisted curation." },
+      { "title": "Liability", "description": "Audit trail and certificate — a real governance layer." }
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Stay close",
+    "title": "<i>Follow</i> the research",
+    "lead": "Paper updates, technical milestones, project progress. No marketing. Only substance."
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch to {language}",
+    "names": {
+      "en": "EN",
+      "fr": "FR",
+      "de": "DE",
+      "it": "IT",
+      "zh": "中文"
+    }
+  }
+}

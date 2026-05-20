@@ -1,6 +1,8 @@
 import Eyebrow from "./Eyebrow";
 import Card from "./Card";
 import { ScrollReveal } from "./AnimatedText";
+import { useT } from "@/i18n/LocaleContext";
+import RichText from "@/i18n/RichText";
 import GavelIcon from "./icons/GavelIcon";
 import LayersIcon from "./icons/LayersIcon";
 import KeyIcon from "./icons/KeyIcon";
@@ -10,79 +12,53 @@ import ShareIcon from "./icons/ShareIcon";
 import CheckIcon from "./icons/CheckIcon";
 import BadgeIcon from "./icons/BadgeIcon";
 
-const VaultSection = () => (
-  <section className="px-6 py-20 md:py-28">
-    <div className="mx-auto flex max-w-6xl flex-col items-center">
-      <Eyebrow>The vault</Eyebrow>
+// Icons are positional and parallel to vault.cards in the catalog.
+const CARD_ICONS = [
+  <GavelIcon />,
+  <GridIcon />,
+  <LayersIcon />,
+  <ShareIcon />,
+  <KeyIcon />,
+  <CheckIcon />,
+  <EyeIcon />,
+  <BadgeIcon />,
+];
 
-      <ScrollReveal
-        as="h2"
-        className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink"
-      >
-        <span className="font-normal italic">Certified</span> by construction.
-      </ScrollReveal>
+const VaultSection = () => {
+  const t = useT();
+  const cards = t.raw("vault.cards");
 
-      <ScrollReveal
-        as="p"
-        className="mt-8 max-w-[680px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]"
-      >
-        Every fragility addressed at the root. Not a promise. A protocol.
-      </ScrollReveal>
+  return (
+    <section className="px-6 py-20 md:py-28">
+      <div className="mx-auto flex max-w-6xl flex-col items-center">
+        <Eyebrow>{t("vault.eyebrow")}</Eyebrow>
 
-      <div className="mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
-        <ScrollReveal>
-          <Card
-            align="left"
-            icon={<GavelIcon />}
-            title="Legal proof of existence"
-          >
-            Blockchain-certified timestamping. Admissible in court, no notary
-            required.
-          </Card>
+        <ScrollReveal
+          as="h2"
+          className="mt-8 m-0 text-center text-[clamp(2.5rem,7vw,5rem)] font-extralight leading-[1.125] tracking-normal text-ink"
+        >
+          <RichText text={t("vault.title")} />
         </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<GridIcon />} title="Full provenance">
-            Who created, modified, certified each document. Immutable
-            traceability chain.
-          </Card>
+
+        <ScrollReveal
+          as="p"
+          className="mt-8 max-w-[680px] text-center text-base leading-[1.75] text-muted md:text-[1.0625rem]"
+        >
+          {t("vault.lead")}
         </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<LayersIcon />} title="Versioning">
-            Every version preserved. Roll back at any time.
-          </Card>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<ShareIcon />} title="Controlled sharing">
-            Read-only, time-limited, revocable in one click. Works even when
-            offline.
-          </Card>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<KeyIcon />} title="Dead man’s switch">
-            Designated heirs automatically recover access after a defined
-            period of inactivity.
-          </Card>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<CheckIcon />} title="Immutable audit trail">
-            Who saw what, when, why. Full regulatory compliance built in.
-          </Card>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<EyeIcon />} title="24/7 monitoring">
-            The canister runs even when your PC is off. Automatic alerts for
-            anomalies.
-          </Card>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Card align="left" icon={<BadgeIcon />} title="Certified assets">
-            Tokenized gold, real estate, collectibles. Provenance certificates
-            alongside cognitive patrimony.
-          </Card>
-        </ScrollReveal>
+
+        <div className="mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2">
+          {cards.map((card, i) => (
+            <ScrollReveal key={card.title}>
+              <Card align="left" icon={CARD_ICONS[i]} title={card.title}>
+                {card.body}
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default VaultSection;

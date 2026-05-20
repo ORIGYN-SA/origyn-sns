@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useT } from "@/i18n/LocaleContext";
 
 const EMAIL_ENDPOINT =
   "https://calm-whale-773.eu-west-1.convex.site/subscribe";
@@ -6,6 +7,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SUCCESS_FADE_MS = 8000;
 
 const SignupForm = () => {
+  const t = useT();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState({ type: "idle", text: "" });
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,7 @@ const SignupForm = () => {
     e.preventDefault();
     const trimmed = email.trim();
     if (!EMAIL_PATTERN.test(trimmed)) {
-      showStatus({ type: "error", text: "Please enter a valid email." });
+      showStatus({ type: "error", text: t("form.invalid") });
       return;
     }
     setLoading(true);
@@ -39,12 +41,9 @@ const SignupForm = () => {
       });
       if (!res.ok) throw new Error("Request failed");
       setEmail("");
-      showStatus(
-        { type: "success", text: "Subscribed. We'll be in touch." },
-        SUCCESS_FADE_MS,
-      );
+      showStatus({ type: "success", text: t("form.success") }, SUCCESS_FADE_MS);
     } catch {
-      showStatus({ type: "error", text: "Something went wrong. Try again." });
+      showStatus({ type: "error", text: t("form.error") });
     } finally {
       setLoading(false);
     }
@@ -65,7 +64,7 @@ const SignupForm = () => {
     <div className="mx-auto w-full max-w-[600px]">
       <form
         onSubmit={handleSubmit}
-        aria-label="Get notified"
+        aria-label={t("form.label")}
         noValidate
         className="flex w-full max-w-[600px] flex-col items-stretch gap-2 rounded-3xl border border-hairline bg-surface p-2 sm:flex-row sm:items-center sm:rounded-full sm:py-1.5 sm:pl-7 sm:pr-1.5"
       >
@@ -73,8 +72,8 @@ const SignupForm = () => {
           type="email"
           value={email}
           onChange={handleEmailChange}
-          placeholder="you@email.com"
-          aria-label="Email address"
+          placeholder={t("form.placeholder")}
+          aria-label={t("form.emailLabel")}
           aria-describedby="signup-msg"
           autoComplete="email"
           required
@@ -95,10 +94,10 @@ const SignupForm = () => {
                 aria-hidden="true"
                 className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white"
               />
-              <span className="sr-only">Submitting</span>
+              <span className="sr-only">{t("form.submitting")}</span>
             </>
           ) : (
-            "Get Notified"
+            t("form.submit")
           )}
         </button>
       </form>

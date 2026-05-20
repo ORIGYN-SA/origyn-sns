@@ -1,0 +1,176 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Scorri",
+  "hero": {
+    "title": "Far progredire\nl'inferenza <i>IA</i> on-chain.",
+    "subtitle": [
+      "R&S aperta sull'esecuzione di agenti IA completamente autonomi su una blockchain pubblica.",
+      "Nessuna scorciatoia off-chain. Verificabile per progettazione."
+    ]
+  },
+  "form": {
+    "label": "Essere avvisato",
+    "emailLabel": "Indirizzo e-mail",
+    "placeholder": "tu@email.com",
+    "submit": "Avvisami",
+    "submitting": "Invio in corso",
+    "invalid": "Inserisci un indirizzo e-mail valido.",
+    "success": "Iscrizione confermata. Ti ricontatteremo.",
+    "error": "Qualcosa è andato storto. Riprova."
+  },
+  "marquee": {
+    "phrases": [
+      { "text": "Sei ciò che sai e ricordi." },
+      { "text": "Perdi questo, e perdi te stesso.", "emphasis": true },
+      { "text": "L'IA funziona allo stesso modo." },
+      { "text": "La competenza non vale nulla se l'agente deve re-imparare chi sei ogni volta." },
+      { "text": "Senza memoria, senza contesto, senza un legame con la tua realtà, è solo rumore." },
+      { "text": "La domanda non è se l'IA sia potente. È se il tuo agente ti conosce davvero.", "emphasis": true }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Il problema",
+    "title": "Nessuno esegue davvero\nl'<i>IA on-chain.</i>",
+    "lead": "Ogni progetto che dichiara di avere un <s>«agente IA on-chain»</s> segue lo stesso schema: l'inferenza viene eseguita off-chain, su server centralizzati, e solo il risultato viene pubblicato sulla blockchain. Il modello non viene mai eseguito all'interno della rete. La chain viene usata come una bacheca, non come uno strato di calcolo.",
+    "leadStrong": "Questo non è un agente on-chain. È una chiamata API con una ricevuta.",
+    "steps": [
+      {
+        "title": "L'affermazione",
+        "body": "«Agente on-chain potenziato dall'IA.» L'inferenza avviene su AWS. La chain memorizza solo il risultato."
+      },
+      {
+        "title": "Il divario",
+        "body": "Nessuna esecuzione verificabile. Nessuna riproduzione deterministica. Nessun modo di verificare cosa abbia realmente calcolato il modello."
+      },
+      {
+        "title": "Il nostro approccio",
+        "body": "Inferenza completa all'interno del canister. WASM SIMD, sul Subnet svizzero. Verificabile, riproducibile, davvero on-chain."
+      }
+    ],
+    "closing": "Lo abbiamo già dimostrato. <s>Origyn</s> esegue oggi vera inferenza on-chain. Ora siamo in una fase di test attiva, mettendo alla prova la robustezza su modelli e carichi di lavoro diversi per confermare ciò che i nostri benchmark mostrano già: questo è lo stack di inferenza <s>IA on-chain</s> più affidabile che esista."
+  },
+  "agent": {
+    "eyebrow": "L'agente",
+    "title": "Origyn.\nAgente <i>minimo,</i> memoria <i>massima.</i>",
+    "lead": "Un agente IA sovrano che gira on-chain. La sua prima missione: il Sovereign Second Brain. Un piccolo modello alimentato da decenni del tuo contesto strutturato, certificato sulla blockchain svizzera. Non un modello gigante on-chain. Un agente mirato con un caveau certificato.",
+    "cards": [
+      {
+        "title": "Lato utente",
+        "subtitle": "Ufficio locale",
+        "body": "La macchina dell'utente. Grandi modelli linguistici, file privati, lavoro offline. La tua intelligenza resta con te."
+      },
+      {
+        "title": "Lato blockchain",
+        "subtitle": "Caveau on-chain",
+        "body": "Il canister. Caveau certificato, inferenza verificabile, riproduzione deterministica. Il tuo contesto diventa un'infrastruttura dimostrabile."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Il caveau",
+    "title": "<i>Certificato</i> per costruzione.",
+    "lead": "Ogni fragilità affrontata alla radice. Non una promessa. Un protocollo.",
+    "cards": [
+      {
+        "title": "Prova legale di esistenza",
+        "body": "Marcatura temporale certificata dalla blockchain. Ammissibile in tribunale, senza notaio."
+      },
+      {
+        "title": "Provenienza completa",
+        "body": "Chi ha creato, modificato, certificato ogni documento. Catena di tracciabilità immutabile."
+      },
+      {
+        "title": "Versionamento",
+        "body": "Ogni versione conservata. Torna indietro in qualsiasi momento."
+      },
+      {
+        "title": "Condivisione controllata",
+        "body": "Sola lettura, a tempo limitato, revocabile con un clic. Funziona anche offline."
+      },
+      {
+        "title": "Interruttore dell'uomo morto",
+        "body": "Gli eredi designati recuperano automaticamente l'accesso dopo un periodo di inattività definito."
+      },
+      {
+        "title": "Registro di audit immutabile",
+        "body": "Chi ha visto cosa, quando, perché. Piena conformità normativa integrata."
+      },
+      {
+        "title": "Monitoraggio 24/7",
+        "body": "Il canister funziona anche quando il tuo PC è spento. Avvisi automatici in caso di anomalie."
+      },
+      {
+        "title": "Asset certificati",
+        "body": "Oro tokenizzato, immobili, oggetti da collezione. Certificati di provenienza accanto al patrimonio cognitivo."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "I nostri risultati",
+    "title": "<i>Più veloce</i>\ndell'esistente.",
+    "lead": "Stessi modelli, stesse condizioni, rete di produzione. I nostri kernel WASM SIMD su misura fanno la differenza.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · rete di produzione",
+      "before": "10 tok/chiamata",
+      "after": "29 tok/chiamata",
+      "caption": "2,9× più veloce dell'inferenza on-chain esistente"
+    },
+    "body1": "A parità di budget di calcolo, un Second Brain alimentato dal nostro fork svolge tre volte più lavoro, o consuma tre volte meno risorse.",
+    "body2": [
+      "Non siamo legati ad alcun modello o architettura. Ogni nuova release è un'opportunità.",
+      "Valutiamo e integriamo continuamente i modelli più recenti per spingere oltre velocità, precisione ed efficienza."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modello",
+        "existing": "Esistente",
+        "origyn": "ORIGYN AI",
+        "gain": "Fattore"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/chiamata", "origyn": "29 tok/chiamata", "gain": "2,9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/chiamata", "origyn": "103 tok/chiamata", "gain": "2,9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flotta di micro-esperti",
+        "body": "Invece di un singolo grande modello lento, distribuiamo modelli con meno di un miliardo di parametri, ottimizzati per compiti specifici: ordinare e-mail, classificare documenti, valutare il rischio. Più veloci e più precisi di un generalista."
+      },
+      {
+        "title": "Distillazione on-chain",
+        "body": "Un grande modello insegna off-chain, un piccolo modello viene distribuito on-chain. Combinato con la quantizzazione a 4 bit e i nostri kernel WASM SIMD su misura, questo abilita una vera IA entro il budget di istruzioni di un canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visione",
+    "title": "Cinque pilastri\nche l'IA non può <i>sostituire.</i>",
+    "lead": "L'IA rende la produzione una commodity. Questi cinque ambiti restano. Origyn è posizionato su ciascuno di essi.",
+    "pillars": [
+      { "title": "Fiducia", "description": "Certificazione Origyn — un segnale di fiducia verificabile." },
+      { "title": "Contesto", "description": "Decenni di memoria strutturata — un segnale personale che l'IA non può eguagliare." },
+      { "title": "Distribuzione", "description": "Subnet svizzero — infrastruttura verificabile per gli agenti." },
+      { "title": "Gusto", "description": "Pipeline di auto-ricerca — curatela assistita dall'automazione." },
+      { "title": "Responsabilità", "description": "Registro di audit e certificato — un vero livello di governance." }
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Resta vicino",
+    "title": "<i>Segui</i> la ricerca",
+    "lead": "Aggiornamenti sui paper, traguardi tecnici, avanzamento del progetto. Niente marketing. Solo sostanza."
+  },
+  "language": {
+    "label": "Lingua",
+    "switchTo": "Passa a {language}",
+    "names": {
+      "en": "EN",
+      "fr": "FR",
+      "de": "DE",
+      "it": "IT",
+      "zh": "中文"
+    }
+  }
+}

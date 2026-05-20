@@ -1,27 +1,30 @@
-import { useState } from "react";
-
-const LANGUAGES = [
-  { code: "en", label: "EN" },
-  { code: "fr", label: "FR" },
-  { code: "de", label: "DE" },
-  { code: "it", label: "IT" },
-  { code: "zh", label: "中文" },
-];
+import { useNavigate } from "react-router-dom";
+import { locales } from "@/i18n";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { rememberLocale } from "@/i18n/negotiate";
 
 const LanguageSwitcher = () => {
-  const [active, setActive] = useState("en");
+  const navigate = useNavigate();
+  const { locale } = useLocale();
+  const t = useT();
+
+  const go = (code) => {
+    if (code === locale) return;
+    rememberLocale(code); // persist the explicit choice (event handler, not effect)
+    navigate(`/ai/${code}`);
+  };
 
   return (
     <div className="relative inline-flex items-center">
       <select
-        value={active}
-        onChange={(e) => setActive(e.target.value)}
-        aria-label="Language"
+        value={locale}
+        onChange={(e) => go(e.target.value)}
+        aria-label={t("language.label")}
         className="cursor-pointer appearance-none rounded-full bg-black/[0.04] py-1.5 pl-4 pr-9 text-[0.8125rem] tracking-wide text-ink outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       >
-        {LANGUAGES.map((lang) => (
-          <option key={lang.code} value={lang.code}>
-            {lang.label}
+        {locales.map((code) => (
+          <option key={code} value={code}>
+            {t(`language.names.${code}`)}
           </option>
         ))}
       </select>
@@ -40,6 +43,27 @@ const LanguageSwitcher = () => {
       >
         <path d="m6 9 6 6 6-6" />
       </svg>
+
+      {/*
+        Real, crawler-discoverable links to every localized route. Hidden from
+        the accessibility tree (the <select> above is the interactive control)
+        and not focusable, so they exist purely so crawlers can find the other
+        languages and persist the choice when followed directly.
+      */}
+      <nav className="sr-only" aria-hidden="true">
+        {locales.map((code) => (
+          <a
+            key={code}
+            href={`/ai/${code}`}
+            hrefLang={code}
+            lang={code}
+            tabIndex={-1}
+            onClick={() => rememberLocale(code)}
+          >
+            {t(`language.names.${code}`)}
+          </a>
+        ))}
+      </nav>
     </div>
   );
 };
