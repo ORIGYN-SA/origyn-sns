@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+#### Removed
+
+- Remove the old static AI page served at /x/ai (superseded by the React AI page at /ai)
+
 ### [1.4.2] - 2026-05-10
 
 #### Updated
