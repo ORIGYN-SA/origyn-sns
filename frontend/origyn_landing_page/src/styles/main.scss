@@ -2,6 +2,13 @@
 @use "./fonts";
 @use "./reset";
 
+// Tailwind directives live here (not in tailwind.css) so they share a single
+// PostCSS document with reset.scss's `@layer base`. Tailwind v3 resolves
+// `@layer` against `@tailwind` directives within the same compiled file.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   width: 100%;
