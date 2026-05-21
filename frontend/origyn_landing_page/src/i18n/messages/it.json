@@ -22,12 +22,17 @@
   },
   "marquee": {
     "phrases": [
-      { "text": "Sei ciò che sai e ricordi." },
-      { "text": "Perdi questo, e perdi te stesso.", "emphasis": true },
-      { "text": "L'IA funziona allo stesso modo." },
-      { "text": "La competenza non vale nulla se l'agente deve re-imparare chi sei ogni volta." },
-      { "text": "Senza memoria, senza contesto, senza un legame con la tua realtà, è solo rumore." },
-      { "text": "La domanda non è se l'IA sia potente. È se il tuo agente ti conosce davvero.", "emphasis": true }
+      "Sei ciò che sai e ricordi.",
+      "Perdi questo, e perdi te stesso.",
+      "L'IA funziona esattamente allo stesso modo.",
+      "Senza memoria persistente, anche l'agente più intelligente è solo rumore.",
+      "La vera intelligenza non sta nella potenza del modello, ma in quanto bene ti conosce.",
+      "Sei la tua memoria. Lo è anche il tuo agente.",
+      "Niente memoria. Niente identità. Niente fiducia.",
+      "Un'IA che ti dimentica ogni volta… non è il tuo agente.",
+      "La memoria è ciò che distingue uno strumento da un vero agente.",
+      "Memoria on-chain. Identità on-chain. Lealtà on-chain.",
+      "L'agente più potente è quello che non ti dimentica mai."
     ]
   },
   "problem": {

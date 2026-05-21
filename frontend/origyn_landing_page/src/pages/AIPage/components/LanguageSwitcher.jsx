@@ -15,12 +15,12 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="relative inline-flex items-center">
+    <div className="relative inline-flex items-center rounded-full border border-black/10 bg-white/70 text-ink shadow-sm backdrop-blur-sm transition-colors hover:border-black/20 hover:bg-white focus-within:border-navy focus-within:ring-2 focus-within:ring-navy/20">
       <select
         value={locale}
         onChange={(e) => go(e.target.value)}
         aria-label={t("language.label")}
-        className="cursor-pointer appearance-none rounded-full bg-black/[0.04] py-1.5 pl-4 pr-9 text-[0.8125rem] tracking-wide text-ink outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        className="w-full cursor-pointer appearance-none rounded-full bg-transparent py-1.5 pl-4 pr-8 text-[0.8125rem] font-medium tracking-wide text-ink outline-none"
       >
         {locales.map((code) => (
           <option key={code} value={code}>

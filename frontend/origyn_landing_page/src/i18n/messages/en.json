@@ -22,12 +22,17 @@
   },
   "marquee": {
     "phrases": [
-      { "text": "You are what you know and remember." },
-      { "text": "Lose that, and you lose yourself.", "emphasis": true },
-      { "text": "AI works the same way." },
-      { "text": "Expertise means nothing if the agent has to relearn you every time." },
-      { "text": "Without memory, without context, without a relationship to your reality, it’s just noise." },
-      { "text": "The question isn’t whether AI is powerful. It’s whether your agent actually knows you.", "emphasis": true }
+      "You are what you know and remember.",
+      "Lose that, and you lose yourself.",
+      "AI works exactly the same way.",
+      "Without persistent memory, even the smartest agent is just noise.",
+      "True intelligence isn’t how powerful the model is — it’s how well it knows you.",
+      "You are your memory. So is your Agent.",
+      "No memory. No identity. No trust.",
+      "An AI that forgets you every time… is not your agent.",
+      "Memory is the difference between a tool and a true agent.",
+      "On-chain memory. On-chain identity. On-chain loyalty.",
+      "The most powerful agent is the one that never forgets you."
     ]
   },
   "problem": {

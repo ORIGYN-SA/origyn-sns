@@ -22,12 +22,17 @@
   },
   "marquee": {
     "phrases": [
-      { "text": "Du bist, was du weißt und woran du dich erinnerst." },
-      { "text": "Verlierst du das, verlierst du dich selbst.", "emphasis": true },
-      { "text": "Mit KI ist es genauso." },
-      { "text": "Expertise zählt nichts, wenn der Agent dich jedes Mal neu lernen muss." },
-      { "text": "Ohne Gedächtnis, ohne Kontext, ohne Bezug zu deiner Realität ist es nur Rauschen." },
-      { "text": "Die Frage ist nicht, ob KI mächtig ist. Sondern ob dein Agent dich wirklich kennt.", "emphasis": true }
+      "Du bist, was du weißt und woran du dich erinnerst.",
+      "Verlierst du das, verlierst du dich selbst.",
+      "Mit KI ist es genau dasselbe.",
+      "Ohne dauerhaftes Gedächtnis ist selbst der klügste Agent nur Rauschen.",
+      "Wahre Intelligenz misst sich nicht an der Stärke des Modells, sondern daran, wie gut es dich kennt.",
+      "Du bist dein Gedächtnis. Dein Agent auch.",
+      "Kein Gedächtnis. Keine Identität. Kein Vertrauen.",
+      "Eine KI, die dich jedes Mal vergisst… ist nicht dein Agent.",
+      "Gedächtnis ist der Unterschied zwischen einem Werkzeug und einem echten Agenten.",
+      "On-Chain-Gedächtnis. On-Chain-Identität. On-Chain-Loyalität.",
+      "Der mächtigste Agent ist der, der dich nie vergisst."
     ]
   },
   "problem": {

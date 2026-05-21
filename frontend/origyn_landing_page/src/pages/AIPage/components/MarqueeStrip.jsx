@@ -5,10 +5,10 @@ const Run = ({ phrases, ariaHidden = false }) => (
     aria-hidden={ariaHidden || undefined}
     className="whitespace-nowrap text-[clamp(2.5rem,6vw,4.5rem)] font-extralight tracking-tight text-ink/70"
   >
-    {phrases.map((p, i) => (
+    {phrases.map((text, i) => (
       <span key={i}>
-        <span className={p.emphasis ? "font-normal text-ink" : undefined}>
-          {p.text}
+        <span className={i % 2 === 1 ? "font-normal text-ink" : undefined}>
+          {text}
         </span>
         <span aria-hidden="true" className="mx-8 text-ink/30">
           ◆

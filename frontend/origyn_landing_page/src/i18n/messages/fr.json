@@ -22,12 +22,17 @@
   },
   "marquee": {
     "phrases": [
-      { "text": "Vous êtes ce que vous savez et ce dont vous vous souvenez." },
-      { "text": "Perdez cela, et vous vous perdez vous-même.", "emphasis": true },
-      { "text": "L'IA fonctionne de la même manière." },
-      { "text": "L'expertise ne vaut rien si l'agent doit vous réapprendre à chaque fois." },
-      { "text": "Sans mémoire, sans contexte, sans lien avec votre réalité, ce n'est que du bruit." },
-      { "text": "La question n'est pas de savoir si l'IA est puissante. C'est de savoir si votre agent vous connaît vraiment.", "emphasis": true }
+      "Vous êtes ce que vous savez et ce dont vous vous souvenez.",
+      "Perdez cela, et vous vous perdez vous-même.",
+      "L'IA fonctionne exactement de la même manière.",
+      "Sans mémoire persistante, même l'agent le plus intelligent n'est que du bruit.",
+      "La vraie intelligence ne tient pas à la puissance du modèle, mais à quel point il vous connaît.",
+      "Vous êtes votre mémoire. Votre agent aussi.",
+      "Pas de mémoire. Pas d'identité. Pas de confiance.",
+      "Une IA qui vous oublie à chaque fois… n'est pas votre agent.",
+      "La mémoire est ce qui distingue un outil d'un véritable agent.",
+      "Mémoire on-chain. Identité on-chain. Loyauté on-chain.",
+      "L'agent le plus puissant est celui qui ne vous oublie jamais."
     ]
   },
   "problem": {
