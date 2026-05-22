@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Sogeza",
+  "hero": {
+    "title": "Kuendeleza utambuzi wa\n<i>AI</i> ndani ya mnyororo.",
+    "subtitle": [
+      "Utafiti na uendelezaji wa wazi kuhusu kuendesha mawakala wa AI walio huru kabisa kwenye blockchain ya umma.",
+      "Hakuna njia za mkato nje ya mnyororo. Inathibitishika kwa muundo."
+    ]
+  },
+  "form": {
+    "label": "Pata taarifa",
+    "emailLabel": "Anwani ya barua pepe",
+    "placeholder": "you@email.com",
+    "submit": "Pata Taarifa",
+    "submitting": "Inawasilisha",
+    "invalid": "Tafadhali weka barua pepe halali.",
+    "success": "Umejiandikisha. Tutawasiliana nawe.",
+    "error": "Kuna hitilafu imetokea. Jaribu tena."
+  },
+  "marquee": {
+    "phrases": [
+      "Wewe ni kile unachokijua na kukikumbuka.",
+      "Kipoteze hicho, nawe utajipoteza mwenyewe.",
+      "AI hufanya kazi kwa namna ileile kabisa.",
+      "Bila kumbukumbu ya kudumu, hata wakala mwerevu zaidi ni kelele tu.",
+      "Akili ya kweli si jinsi modeli ilivyo na nguvu — ni jinsi inavyokufahamu vyema.",
+      "Wewe ni kumbukumbu yako. Vivyo hivyo na Wakala wako.",
+      "Hakuna kumbukumbu. Hakuna utambulisho. Hakuna uaminifu.",
+      "AI inayokusahau kila mara… si wakala wako.",
+      "Kumbukumbu ndiyo tofauti kati ya kifaa na wakala wa kweli.",
+      "Kumbukumbu ndani ya mnyororo. Utambulisho ndani ya mnyororo. Uaminifu ndani ya mnyororo.",
+      "Wakala mwenye nguvu zaidi ni yule asiyekusahau kamwe."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Tatizo",
+    "title": "Hakuna anayeendesha kweli\n<i>AI ndani ya mnyororo.</i>",
+    "lead": "Kila mradi unaodai kuwa na <s>“wakala wa AI ndani ya mnyororo”</s> hufuata mtindo uleule: utambuzi huendeshwa nje ya mnyororo, kwenye seva za kati, na matokeo pekee ndiyo huchapishwa kwenye blockchain. Modeli haitekelezwi kamwe ndani ya mtandao. Mnyororo hutumika kama ubao wa matangazo, si kama tabaka la uchakataji.",
+    "leadStrong": "Huyo si wakala wa ndani ya mnyororo. Huo ni mwito wa API wenye risiti.",
+    "steps": [
+      {
+        "title": "Dai",
+        "body": "“Wakala wa ndani ya mnyororo unaoendeshwa na AI.” Utambuzi hutokea kwenye AWS. Mnyororo huhifadhi matokeo pekee."
+      },
+      {
+        "title": "Pengo",
+        "body": "Hakuna utekelezaji unaothibitishika. Hakuna urudufu wa uhakika. Hakuna njia ya kukagua kile modeli ilichokokotoa hasa."
+      },
+      {
+        "title": "Mbinu yetu",
+        "body": "Utambuzi kamili ndani ya canister. WASM SIMD, kwenye Swiss Subnet. Inathibitishika, inazalishika upya, ya ndani ya mnyororo kweli."
+      }
+    ],
+    "closing": "Tayari tumelionyesha hili. <s>Origyn</s> inaendesha utambuzi halisi ndani ya mnyororo leo. Sasa tuko katika awamu hai ya majaribio, tukijaribu uimara kwa kina katika modeli na mizigo kazi mbalimbali ili kuthibitisha kile vipimo vyetu vimeshakionyesha: huu ndio mfumo wa utambuzi wa <s>AI wa ndani ya mnyororo</s> wa kuaminika zaidi uliopo."
+  },
+  "agent": {
+    "eyebrow": "Wakala",
+    "title": "Origyn.\n<i>Wakala</i> mdogo, <i>kumbukumbu</i> kubwa.",
+    "lead": "Wakala wa AI huru anayeendeshwa ndani ya mnyororo. Dhamira yake ya kwanza: Ubongo wa Pili Huru. Modeli ndogo inayolishwa na muktadha wako uliopangwa wa miongo kadhaa, iliyothibitishwa kwenye blockchain ya Uswisi. Si modeli kubwa ndani ya mnyororo. Ni wakala makini mwenye hazina iliyothibitishwa.",
+    "cards": [
+      {
+        "title": "Upande wa mtumiaji",
+        "subtitle": "Ofisi ya Ndani",
+        "body": "Kifaa cha mtumiaji. Modeli kubwa za lugha, faili za faragha, kazi nje ya mtandao. Akili yako hubaki nawe."
+      },
+      {
+        "title": "Upande wa blockchain",
+        "subtitle": "Hazina ya Ndani ya Mnyororo",
+        "body": "Canister. Hazina iliyothibitishwa, utambuzi unaothibitishika, urudufu wa uhakika. Muktadha wako huwa miundombinu inayothibitishika."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Hazina",
+    "title": "<i>Imethibitishwa</i> kwa muundo wake.",
+    "lead": "Kila udhaifu hushughulikiwa kuanzia chanzo. Si ahadi. Ni itifaki.",
+    "cards": [
+      {
+        "title": "Uthibitisho wa kisheria wa uwepo",
+        "body": "Alama ya muda iliyothibitishwa na blockchain. Inakubalika mahakamani, bila kuhitaji mwanasheria wa hati."
+      },
+      {
+        "title": "Asili kamili",
+        "body": "Nani aliumba, alibadilisha, alithibitisha kila hati. Mnyororo wa ufuatiliaji usiobadilika."
+      },
+      {
+        "title": "Utunzaji wa matoleo",
+        "body": "Kila toleo huhifadhiwa. Rejea nyuma wakati wowote."
+      },
+      {
+        "title": "Ushirikishaji unaodhibitiwa",
+        "body": "Wa kusoma tu, wenye muda maalum, unaoweza kufutwa kwa mbofyo mmoja. Hufanya kazi hata nje ya mtandao."
+      },
+      {
+        "title": "Swichi ya dharura",
+        "body": "Warithi walioteuliwa hupata tena ufikiaji kiotomatiki baada ya kipindi maalum cha kutotumika."
+      },
+      {
+        "title": "Rekodi ya ukaguzi isiyobadilika",
+        "body": "Nani aliona nini, lini, kwa nini. Ufuasi kamili wa kanuni umejengwa ndani."
+      },
+      {
+        "title": "Ufuatiliaji wa saa 24/7",
+        "body": "Canister huendelea kufanya kazi hata kompyuta yako ikiwa imezimwa. Tahadhari za kiotomatiki kwa hitilafu."
+      },
+      {
+        "title": "Mali zilizothibitishwa",
+        "body": "Dhahabu, mali isiyohamishika, na vitu vya kukusanya vilivyowekwa tokeni. Vyeti vya asili sambamba na urithi wa kiakili."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Matokeo yetu",
+    "title": "<i>Haraka zaidi</i>\nkuliko yaliyopo.",
+    "lead": "Modeli zilezile, mazingira yaleyale, mtandao wa uzalishaji. Kerneli zetu maalum za WASM SIMD ndizo zinazoleta tofauti.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · mtandao wa uzalishaji",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "Haraka 2.9× kuliko utambuzi wa ndani ya mnyororo uliopo"
+    },
+    "body1": "Kwa bajeti ileile ya uchakataji, Ubongo wa Pili unaoendeshwa na fork yetu hufanya kazi mara tatu zaidi, au hutumia rasilimali mara tatu chache.",
+    "body2": [
+      "Hatufungwi na modeli au usanifu wowote mmoja. Kila toleo jipya ni fursa.",
+      "Tunaendelea kupima na kuunganisha modeli za hivi karibuni zaidi ili kusukuma kasi, usahihi na ufanisi mbali zaidi."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modeli",
+        "existing": "Iliyopo",
+        "origyn": "ORIGYN AI",
+        "gain": "Faida"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Kundi la wataalamu wadogo",
+        "body": "Badala ya modeli moja kubwa na ya polepole, tunaweka modeli zilizoboreshwa kwa kazi mahususi zenye paramita za sub-1B: kupanga barua pepe, kuainisha hati, kutathmini hatari. Haraka na sahihi zaidi kuliko modeli ya jumla."
+      },
+      {
+        "title": "Uchujaji wa ndani ya mnyororo",
+        "body": "Modeli kubwa hufundisha nje ya mnyororo, modeli ndogo huwekwa ndani ya mnyororo. Ikiunganishwa na uwekaji wa kidijitali wa 4-bit na kerneli zetu maalum za WASM SIMD, hili huwezesha AI halisi ndani ya bajeti ya maagizo ya canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Maono",
+    "title": "Nguzo tano ambazo AI\nhaiwezi <i>kuzibadilisha.</i>",
+    "lead": "AI hufanya uzalishaji kuwa wa kawaida. Nyanja hizi tano hubaki. Origyn imejiweka katika kila moja yake.",
+    "pillars": [
+      { "title": "Uaminifu", "description": "Uthibitisho wa Origyn — ishara ya uaminifu inayothibitishika." },
+      { "title": "Muktadha", "description": "Kumbukumbu iliyopangwa ya miongo kadhaa — ishara binafsi ambayo AI haiwezi kuilingana." },
+      { "title": "Usambazaji", "description": "Swiss Subnet — miundombinu inayothibitishika kwa mawakala." },
+      { "title": "Ladha", "description": "Mtiririko wa utafiti wa kiotomatiki — uteuzi unaosaidiwa na otomatiki." },
+      { "title": "Uwajibikaji", "description": "Rekodi ya ukaguzi na cheti — tabaka halisi la utawala." }
+    ]
+  },
+  "memory": {
+    "title": "Wewe ni kile\n<i>unachojua</i> na <i>kukumbuka.</i>",
+    "subtitle": [
+      "Kipoteze hicho, nawe utajipoteza mwenyewe. AI hufanya kazi vivyo hivyo.",
+      "Bila kumbukumbu ya kudumu ya ndani ya mnyororo, wakala wako hatakufahamu kweli kamwe."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Endelea kuwa karibu",
+    "title": "<i>Fuatilia</i> utafiti",
+    "lead": "Masasisho ya makala, hatua muhimu za kiufundi, maendeleo ya mradi. Hakuna masoko. Maudhui ya msingi pekee."
+  },
+  "language": {
+    "label": "Lugha",
+    "switchTo": "Badili hadi {language}"
+  }
+}

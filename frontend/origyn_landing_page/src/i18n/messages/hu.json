@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Görgessen",
+  "hero": {
+    "title": "A láncon futó\n<i>AI</i> következtetés fejlesztése.",
+    "subtitle": [
+      "Nyílt K+F a teljesen autonóm AI-ügynökök futtatásáról nyilvános blokkláncon.",
+      "Nincsenek láncon kívüli kerülőutak. Tervezetten ellenőrizhető."
+    ]
+  },
+  "form": {
+    "label": "Kérjen értesítést",
+    "emailLabel": "E-mail-cím",
+    "placeholder": "you@email.com",
+    "submit": "Kérjen értesítést",
+    "submitting": "Küldés",
+    "invalid": "Kérjük, adjon meg egy érvényes e-mail-címet.",
+    "success": "Feliratkozott. Hamarosan jelentkezünk.",
+    "error": "Valami hiba történt. Próbálja újra."
+  },
+  "marquee": {
+    "phrases": [
+      "Az vagy, amit tudsz és amire emlékszel.",
+      "Veszítsd el ezt, és elveszíted önmagad.",
+      "Az AI pontosan ugyanígy működik.",
+      "Tartós memória nélkül még a legokosabb ügynök is csak zaj.",
+      "Az igazi intelligencia nem az, hogy mennyire erős a modell — hanem az, hogy mennyire jól ismer téged.",
+      "Te vagy az emlékezeted. Ahogy az ügynököd is.",
+      "Nincs memória. Nincs identitás. Nincs bizalom.",
+      "Egy AI, amely minden alkalommal elfelejt téged… nem a te ügynököd.",
+      "A memória a különbség egy eszköz és egy igazi ügynök között.",
+      "Láncon tárolt memória. Láncon rögzített identitás. Láncon megőrzött hűség.",
+      "A legerősebb ügynök az, amelyik soha nem felejt el téged."
+    ]
+  },
+  "problem": {
+    "eyebrow": "A probléma",
+    "title": "Valójában senki sem futtat\n<i>AI-t a láncon.</i>",
+    "lead": "Minden projekt, amely azt állítja, hogy van <s>„láncon futó AI-ügynöke”</s>, ugyanazt a mintát követi: a következtetés a láncon kívül, központosított szervereken fut, és csak az eredmény kerül fel a blokkláncra. A modell soha nem fut a hálózaton belül. A láncot hirdetőtáblaként használják, nem számítási rétegként.",
+    "leadStrong": "Ez nem láncon futó ügynök. Ez egy API-hívás nyugtával.",
+    "steps": [
+      {
+        "title": "Az állítás",
+        "body": "„AI-vezérelt láncon futó ügynök.” A következtetés az AWS-en történik. A lánc csak a kimenetet tárolja."
+      },
+      {
+        "title": "A hiányosság",
+        "body": "Nincs ellenőrizhető végrehajtás. Nincs determinisztikus újrajátszás. Nincs mód auditálni, mit számolt ki valójában a modell."
+      },
+      {
+        "title": "A mi megközelítésünk",
+        "body": "Teljes következtetés a canisteren belül. WASM SIMD, a Swiss Subneten. Ellenőrizhető, reprodukálható, valóban a láncon."
+      }
+    ],
+    "closing": "Ezt már bizonyítottuk. Az <s>Origyn</s> ma valódi következtetést futtat a láncon. Most aktív tesztelési fázisban vagyunk, terheléses próbáknak vetjük alá a robusztusságot különféle modelleken és munkaterheléseken, hogy megerősítsük, amit a benchmarkjaink már mutatnak: ez a létező legmegbízhatóbb <s>láncon futó AI</s> következtetési verem."
+  },
+  "agent": {
+    "eyebrow": "Az ügynök",
+    "title": "Origyn.\nMinimális <i>ügynök,</i> maximális <i>memória.</i>",
+    "lead": "Egy szuverén, láncon futó AI-ügynök. Első küldetése: a Szuverén Második Agy. Egy kis modell, amelyet a strukturált kontextusod évtizedei táplálnak, hitelesítve a svájci blokkláncon. Nem egy óriási modell a láncon. Egy fókuszált ügynök egy hitelesített trezorral.",
+    "cards": [
+      {
+        "title": "Felhasználói oldal",
+        "subtitle": "Helyi Iroda",
+        "body": "A felhasználó gépe. Nagy nyelvi modellek, privát fájlok, offline munka. Az intelligenciád veled marad."
+      },
+      {
+        "title": "Blokklánc-oldal",
+        "subtitle": "Láncon futó Trezor",
+        "body": "A canister. Hitelesített trezor, ellenőrizhető következtetés, determinisztikus újrajátszás. A kontextusod bizonyítható infrastruktúrává válik."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "A trezor",
+    "title": "<i>Hitelesített</i> a felépítésénél fogva.",
+    "lead": "Minden gyengeség a gyökerénél kezelve. Nem ígéret. Egy protokoll.",
+    "cards": [
+      {
+        "title": "A létezés jogi bizonyítéka",
+        "body": "Blokklánccal hitelesített időbélyegzés. Bíróságon elfogadható, közjegyző nélkül."
+      },
+      {
+        "title": "Teljes eredetiség",
+        "body": "Ki hozta létre, módosította, hitelesítette az egyes dokumentumokat. Megváltoztathatatlan nyomonkövethetőségi lánc."
+      },
+      {
+        "title": "Verziókezelés",
+        "body": "Minden verzió megőrizve. Bármikor visszaállítható."
+      },
+      {
+        "title": "Ellenőrzött megosztás",
+        "body": "Csak olvasható, időkorlátos, egy kattintással visszavonható. Offline is működik."
+      },
+      {
+        "title": "Holtember-kapcsoló",
+        "body": "A kijelölt örökösök egy meghatározott inaktivitási időszak után automatikusan visszanyerik a hozzáférést."
+      },
+      {
+        "title": "Megváltoztathatatlan auditnapló",
+        "body": "Ki látott mit, mikor, miért. Teljes szabályozási megfelelőség beépítve."
+      },
+      {
+        "title": "24/7 felügyelet",
+        "body": "A canister akkor is fut, amikor a géped ki van kapcsolva. Automatikus riasztások az anomáliákról."
+      },
+      {
+        "title": "Hitelesített eszközök",
+        "body": "Tokenizált arany, ingatlan, gyűjthető tárgyak. Eredetiségigazolások a kognitív örökség mellett."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Eredményeink",
+    "title": "<i>Gyorsabb,</i>\nmint a meglévő.",
+    "lead": "Ugyanazok a modellek, ugyanazok a feltételek, éles hálózat. Egyedi WASM SIMD kerneljeink jelentik a különbséget.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · éles hálózat",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× gyorsabb a meglévő láncon futó következtetésnél"
+    },
+    "body1": "Ugyanazzal a számítási kerettel egy Második Agy, amelyet a forkunk hajt, háromszor annyi munkát végez el, vagy háromszor kevesebb erőforrást fogyaszt.",
+    "body2": [
+      "Nem kötődünk egyetlen modellhez vagy architektúrához sem. Minden új kiadás egy lehetőség.",
+      "Folyamatosan benchmarkoljuk és integráljuk a legújabb modelleket, hogy tovább növeljük a sebességet, a pontosságot és a hatékonyságot."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modell",
+        "existing": "Meglévő",
+        "origyn": "ORIGYN AI",
+        "gain": "Nyereség"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Mikroszakértők flottája",
+        "body": "Egyetlen lassú nagy modell helyett feladatspecifikus, finomhangolt, sub-1B paraméteres modelleket telepítünk: e-mailek rendezése, dokumentumok osztályozása, kockázatértékelés. Gyorsabb és pontosabb egy generalistánál."
+      },
+      {
+        "title": "Láncon történő desztilláció",
+        "body": "Egy nagy modell tanít a láncon kívül, egy kis modell települ a láncra. A 4-bit kvantálással és egyedi WASM SIMD kerneljeinkkel kombinálva ez valódi AI-t tesz lehetővé egy canister utasításkeretén belül."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Jövőkép",
+    "title": "Öt pillér, amelyet\naz AI nem tud <i>helyettesíteni.</i>",
+    "lead": "Az AI tömegcikké teszi a termelést. Ez az öt terület megmarad. Az Origyn mindegyikben pozícióban van.",
+    "pillars": [
+      { "title": "Bizalom", "description": "Origyn-hitelesítés — egy ellenőrizhető bizalmi jelzés." },
+      { "title": "Kontextus", "description": "A strukturált memória évtizedei — egy személyes jelzés, amelyet az AI nem tud utánozni." },
+      { "title": "Elosztás", "description": "Swiss Subnet — ellenőrizhető infrastruktúra ügynökök számára." },
+      { "title": "Ízlés", "description": "Automatikus kutatási folyamat — automatizálással segített kurálás." },
+      { "title": "Felelősség", "description": "Auditnapló és tanúsítvány — egy valódi kormányzási réteg." }
+    ]
+  },
+  "memory": {
+    "title": "Az vagy, amit\n<i>tudsz</i> és amire <i>emlékszel.</i>",
+    "subtitle": [
+      "Veszítsd el ezt, és elveszíted önmagad. Az AI ugyanígy működik.",
+      "Tartós, láncon tárolt memória nélkül az ügynököd soha nem ismer meg igazán."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Maradjon közel",
+    "title": "<i>Kövesse</i> a kutatást",
+    "lead": "Tanulmányfrissítések, technikai mérföldkövek, a projekt haladása. Semmi marketing. Csak a lényeg."
+  },
+  "language": {
+    "label": "Nyelv",
+    "switchTo": "Váltás erre: {language}"
+  }
+}

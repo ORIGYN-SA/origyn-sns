@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Gulir",
+  "hero": {
+    "title": "Memajukan inferensi\n<i>AI</i> on-chain.",
+    "subtitle": [
+      "Riset & pengembangan terbuka untuk menjalankan agen AI yang sepenuhnya otonom di blockchain publik.",
+      "Tanpa jalan pintas off-chain. Dapat diverifikasi sejak desain."
+    ]
+  },
+  "form": {
+    "label": "Dapatkan notifikasi",
+    "emailLabel": "Alamat email",
+    "placeholder": "you@email.com",
+    "submit": "Dapatkan Notifikasi",
+    "submitting": "Mengirim",
+    "invalid": "Masukkan email yang valid.",
+    "success": "Berlangganan berhasil. Kami akan menghubungi Anda.",
+    "error": "Terjadi kesalahan. Coba lagi."
+  },
+  "marquee": {
+    "phrases": [
+      "Anda adalah apa yang Anda ketahui dan ingat.",
+      "Kehilangan itu, dan Anda kehilangan diri Anda sendiri.",
+      "AI bekerja dengan cara yang persis sama.",
+      "Tanpa memori yang persisten, bahkan agen tercerdas sekalipun hanyalah kebisingan.",
+      "Kecerdasan sejati bukan soal seberapa kuat model itu — tapi seberapa baik ia mengenal Anda.",
+      "Anda adalah memori Anda. Begitu pula Agen Anda.",
+      "Tanpa memori. Tanpa identitas. Tanpa kepercayaan.",
+      "AI yang melupakan Anda setiap saat… bukanlah agen Anda.",
+      "Memori adalah pembeda antara sebuah alat dan agen sejati.",
+      "Memori on-chain. Identitas on-chain. Loyalitas on-chain.",
+      "Agen terkuat adalah yang tidak pernah melupakan Anda."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Masalahnya",
+    "title": "Tidak ada yang benar-benar\nmenjalankan <i>AI on-chain.</i>",
+    "lead": "Setiap proyek yang mengeklaim memiliki <s>“agen AI on-chain”</s> mengikuti pola yang sama: inferensi berjalan off-chain, di server terpusat, dan hanya hasilnya yang diposting ke blockchain. Model tidak pernah dieksekusi di dalam jaringan. Rantai itu digunakan sebagai papan pengumuman, bukan sebagai lapisan komputasi.",
+    "leadStrong": "Itu bukan agen on-chain. Itu panggilan API dengan tanda terima.",
+    "steps": [
+      {
+        "title": "Klaimnya",
+        "body": "“Agen on-chain bertenaga AI.” Inferensi terjadi di AWS. Rantai hanya menyimpan keluarannya."
+      },
+      {
+        "title": "Celahnya",
+        "body": "Tidak ada eksekusi yang dapat diverifikasi. Tidak ada replay deterministik. Tidak ada cara untuk mengaudit apa yang sebenarnya dihitung model."
+      },
+      {
+        "title": "Pendekatan kami",
+        "body": "Inferensi penuh di dalam canister. WASM SIMD, di Swiss Subnet. Dapat diverifikasi, dapat direproduksi, benar-benar on-chain."
+      }
+    ],
+    "closing": "Kami sudah membuktikannya. <s>Origyn</s> menjalankan inferensi nyata on-chain hari ini. Kami kini berada dalam fase pengujian aktif, menguji ketangguhan secara intensif di berbagai model dan beban kerja untuk memastikan apa yang sudah ditunjukkan benchmark kami: ini adalah tumpukan inferensi <s>AI on-chain</s> paling andal yang ada."
+  },
+  "agent": {
+    "eyebrow": "Agennya",
+    "title": "Origyn.\n<i>Agen</i> minimal, <i>memori</i> maksimal.",
+    "lead": "Agen AI berdaulat yang berjalan on-chain. Misi pertamanya: Otak Kedua yang Berdaulat. Sebuah model kecil yang ditenagai oleh konteks terstruktur Anda selama puluhan tahun, disertifikasi di blockchain Swiss. Bukan model raksasa di on-chain. Sebuah agen yang fokus dengan brankas tersertifikasi.",
+    "cards": [
+      {
+        "title": "Sisi pengguna",
+        "subtitle": "Biro Lokal",
+        "body": "Mesin pengguna. Model bahasa besar, berkas pribadi, kerja offline. Kecerdasan Anda tetap bersama Anda."
+      },
+      {
+        "title": "Sisi blockchain",
+        "subtitle": "Brankas On-Chain",
+        "body": "Canister. Brankas tersertifikasi, inferensi yang dapat diverifikasi, replay deterministik. Konteks Anda menjadi infrastruktur yang dapat dibuktikan."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Brankasnya",
+    "title": "<i>Tersertifikasi</i> secara bawaan.",
+    "lead": "Setiap kerapuhan diatasi dari akarnya. Bukan janji. Sebuah protokol.",
+    "cards": [
+      {
+        "title": "Bukti hukum atas keberadaan",
+        "body": "Penandaan waktu tersertifikasi blockchain. Dapat diterima di pengadilan, tanpa perlu notaris."
+      },
+      {
+        "title": "Provenans lengkap",
+        "body": "Siapa yang membuat, mengubah, menyertifikasi setiap dokumen. Rantai keterlacakan yang tak dapat diubah."
+      },
+      {
+        "title": "Pembuatan versi",
+        "body": "Setiap versi tersimpan. Kembalikan kapan saja."
+      },
+      {
+        "title": "Berbagi terkendali",
+        "body": "Hanya-baca, berbatas waktu, dapat dicabut dengan satu klik. Berfungsi bahkan saat offline."
+      },
+      {
+        "title": "Sakelar darurat",
+        "body": "Ahli waris yang ditunjuk secara otomatis memulihkan akses setelah periode tidak aktif yang ditentukan."
+      },
+      {
+        "title": "Jejak audit yang tak dapat diubah",
+        "body": "Siapa melihat apa, kapan, mengapa. Kepatuhan regulasi penuh sudah terpasang."
+      },
+      {
+        "title": "Pemantauan 24/7",
+        "body": "Canister tetap berjalan bahkan saat PC Anda mati. Peringatan otomatis untuk anomali."
+      },
+      {
+        "title": "Aset tersertifikasi",
+        "body": "Emas, properti, dan barang koleksi yang ditokenisasi. Sertifikat provenans berdampingan dengan warisan kognitif."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Hasil kami",
+    "title": "<i>Lebih cepat</i>\ndari yang ada.",
+    "lead": "Model sama, kondisi sama, jaringan produksi. Kernel WASM SIMD kustom kami yang membuat perbedaan.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · jaringan produksi",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× lebih cepat dari inferensi on-chain yang ada"
+    },
+    "body1": "Dengan anggaran komputasi yang sama, Otak Kedua yang ditenagai fork kami melakukan tiga kali lebih banyak pekerjaan, atau mengonsumsi tiga kali lebih sedikit sumber daya.",
+    "body2": [
+      "Kami tidak terikat pada satu model atau arsitektur pun. Setiap rilis baru adalah peluang.",
+      "Kami terus melakukan benchmark dan mengintegrasikan model terbaru untuk mendorong kecepatan, akurasi, dan efisiensi lebih jauh lagi."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Yang ada",
+        "origyn": "ORIGYN AI",
+        "gain": "Peningkatan"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Armada mikro-pakar",
+        "body": "Alih-alih satu model besar yang lambat, kami menerapkan model khusus tugas yang telah disetel halus dengan parameter sub-1B: menyortir email, mengklasifikasikan dokumen, menilai risiko. Lebih cepat dan lebih presisi daripada model generalis."
+      },
+      {
+        "title": "Distilasi on-chain",
+        "body": "Model besar mengajar off-chain, model kecil diterapkan on-chain. Dikombinasikan dengan kuantisasi 4-bit dan kernel WASM SIMD kustom kami, ini memungkinkan AI nyata dalam anggaran instruksi sebuah canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visi",
+    "title": "Lima pilar yang tak\ndapat <i>digantikan</i> AI.",
+    "lead": "AI menjadikan produksi sebagai komoditas. Lima ranah ini tetap bertahan. Origyn mengambil posisi di setiap salah satunya.",
+    "pillars": [
+      { "title": "Kepercayaan", "description": "Sertifikasi Origyn — sinyal kepercayaan yang dapat diverifikasi." },
+      { "title": "Konteks", "description": "Memori terstruktur selama puluhan tahun — sinyal pribadi yang tak tertandingi AI." },
+      { "title": "Distribusi", "description": "Swiss Subnet — infrastruktur yang dapat diverifikasi untuk para agen." },
+      { "title": "Selera", "description": "Pipeline riset otomatis — kurasi yang dibantu otomatisasi." },
+      { "title": "Tanggung jawab", "description": "Jejak audit dan sertifikat — lapisan tata kelola yang nyata." }
+    ]
+  },
+  "memory": {
+    "title": "Anda adalah apa yang Anda\n<i>ketahui</i> dan <i>ingat.</i>",
+    "subtitle": [
+      "Kehilangan itu, dan Anda kehilangan diri Anda. AI bekerja dengan cara yang sama.",
+      "Tanpa memori on-chain yang persisten, agen Anda tidak akan pernah benar-benar mengenal Anda."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Tetap terhubung",
+    "title": "<i>Ikuti</i> risetnya",
+    "lead": "Pembaruan makalah, tonggak teknis, kemajuan proyek. Tanpa pemasaran. Hanya substansi."
+  },
+  "language": {
+    "label": "Bahasa",
+    "switchTo": "Beralih ke {language}"
+  }
+}

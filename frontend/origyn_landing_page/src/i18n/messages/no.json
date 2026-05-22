@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Bla",
+  "hero": {
+    "title": "Driver\non-chain <i>AI</i>-inferens videre.",
+    "subtitle": [
+      "Åpen FoU på å kjøre fullstendig autonome AI-agenter på en offentlig blokkjede.",
+      "Ingen off-chain snarveier. Verifiserbar av design."
+    ]
+  },
+  "form": {
+    "label": "Få beskjed",
+    "emailLabel": "E-postadresse",
+    "placeholder": "deg@email.com",
+    "submit": "Få beskjed",
+    "submitting": "Sender",
+    "invalid": "Skriv inn en gyldig e-postadresse.",
+    "success": "Påmeldt. Vi tar kontakt.",
+    "error": "Noe gikk galt. Prøv igjen."
+  },
+  "marquee": {
+    "phrases": [
+      "Du er det du vet og husker.",
+      "Mist det, og du mister deg selv.",
+      "AI fungerer på nøyaktig samme måte.",
+      "Uten vedvarende hukommelse er selv den smarteste agenten bare støy.",
+      "Ekte intelligens handler ikke om hvor kraftig modellen er — men om hvor godt den kjenner deg.",
+      "Du er hukommelsen din. Det samme er agenten din.",
+      "Ingen hukommelse. Ingen identitet. Ingen tillit.",
+      "En AI som glemmer deg hver gang … er ikke agenten din.",
+      "Hukommelse er forskjellen mellom et verktøy og en ekte agent.",
+      "On-chain hukommelse. On-chain identitet. On-chain lojalitet.",
+      "Den kraftigste agenten er den som aldri glemmer deg."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problemet",
+    "title": "Ingen kjører egentlig\n<i>AI on-chain.</i>",
+    "lead": "Hvert prosjekt som hevder å ha en <s>“on-chain AI-agent”</s> følger samme mønster: inferensen kjører off-chain, på sentraliserte servere, og bare resultatet legges på blokkjeden. Modellen kjøres aldri inne i nettverket. Kjeden brukes som en oppslagstavle, ikke som et beregningslag.",
+    "leadStrong": "Det er ikke en on-chain agent. Det er et API-kall med en kvittering.",
+    "steps": [
+      {
+        "title": "Påstanden",
+        "body": "“AI-drevet on-chain agent.” Inferensen skjer på AWS. Kjeden lagrer kun resultatet."
+      },
+      {
+        "title": "Gapet",
+        "body": "Ingen verifiserbar utførelse. Ingen deterministisk reprise. Ingen måte å revidere hva modellen faktisk beregnet."
+      },
+      {
+        "title": "Vår tilnærming",
+        "body": "Full inferens inne i canisteren. WASM SIMD, på Swiss Subnet. Verifiserbar, reproduserbar, ekte on-chain."
+      }
+    ],
+    "closing": "Vi har allerede demonstrert dette. <s>Origyn</s> kjører ekte inferens on-chain i dag. Vi er nå i en aktiv testfase, der vi stresstester robustheten på tvers av modeller og arbeidslaster for å bekrefte det benchmarkene våre allerede viser: dette er den mest pålitelige <s>on-chain AI</s>-inferensstakken som finnes."
+  },
+  "agent": {
+    "eyebrow": "Agenten",
+    "title": "Origyn.\nMinimal <i>agent,</i> maksimal <i>hukommelse.</i>",
+    "lead": "En suveren AI-agent som kjører on-chain. Dens første oppdrag: den Suverene Andre Hjernen. En liten modell matet med tiår av din strukturerte kontekst, sertifisert på den sveitsiske blokkjeden. Ikke en gigantisk modell on-chain. En fokusert agent med et sertifisert hvelv.",
+    "cards": [
+      {
+        "title": "Brukersiden",
+        "subtitle": "Lokalt Kontor",
+        "body": "Brukerens maskin. Store språkmodeller, private filer, arbeid offline. Intelligensen din blir hos deg."
+      },
+      {
+        "title": "Blokkjede-siden",
+        "subtitle": "On-Chain Hvelv",
+        "body": "Canisteren. Sertifisert hvelv, verifiserbar inferens, deterministisk reprise. Konteksten din blir til beviselig infrastruktur."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Hvelvet",
+    "title": "<i>Sertifisert</i> av konstruksjon.",
+    "lead": "Hver sårbarhet adressert ved roten. Ikke et løfte. En protokoll.",
+    "cards": [
+      {
+        "title": "Juridisk bevis på eksistens",
+        "body": "Blokkjede-sertifisert tidsstempling. Gyldig i retten, ingen notarius nødvendig."
+      },
+      {
+        "title": "Full proveniens",
+        "body": "Hvem som opprettet, endret og sertifiserte hvert dokument. Uforanderlig sporbarhetskjede."
+      },
+      {
+        "title": "Versjonering",
+        "body": "Hver versjon bevart. Rull tilbake når som helst."
+      },
+      {
+        "title": "Kontrollert deling",
+        "body": "Skrivebeskyttet, tidsbegrenset, kan tilbakekalles med ett klikk. Fungerer selv offline."
+      },
+      {
+        "title": "Dødmannsknapp",
+        "body": "Utpekte arvinger gjenoppretter automatisk tilgang etter en definert periode med inaktivitet."
+      },
+      {
+        "title": "Uforanderlig revisjonsspor",
+        "body": "Hvem som så hva, når og hvorfor. Full regeletterlevelse innebygd."
+      },
+      {
+        "title": "24/7 overvåking",
+        "body": "Canisteren kjører selv når PC-en din er av. Automatiske varsler ved avvik."
+      },
+      {
+        "title": "Sertifiserte eiendeler",
+        "body": "Tokenisert gull, eiendom, samleobjekter. Proveniens-sertifikater side om side med kognitiv arv."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Våre resultater",
+    "title": "<i>Raskere</i>\nenn det eksisterende.",
+    "lead": "Samme modeller, samme forhold, produksjonsnettverk. Våre skreddersydde WASM SIMD-kjerner gjør forskjellen.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · produksjonsnettverk",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× raskere enn eksisterende on-chain inferens"
+    },
+    "body1": "Med samme beregningsbudsjett utfører en Andre Hjerne drevet av forken vår tre ganger så mye arbeid, eller bruker tre ganger færre ressurser.",
+    "body2": [
+      "Vi er ikke bundet til én enkelt modell eller arkitektur. Hver ny utgivelse er en mulighet.",
+      "Vi benchmarker og integrerer kontinuerlig de nyeste modellene for å presse hastighet, nøyaktighet og effektivitet enda lenger."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modell",
+        "existing": "Eksisterende",
+        "origyn": "ORIGYN AI",
+        "gain": "Gevinst"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flåte av mikro-eksperter",
+        "body": "I stedet for én treg, stor modell ruller vi ut oppgavespesifikke, finjusterte modeller med sub-1B parametere: sortere e-poster, klassifisere dokumenter, vurdere risiko. Raskere og mer presise enn en generalist."
+      },
+      {
+        "title": "On-chain destillasjon",
+        "body": "En stor modell underviser off-chain, en liten modell rulles ut on-chain. Kombinert med 4-bit kvantisering og våre skreddersydde WASM SIMD-kjerner muliggjør dette ekte AI innenfor en canisters instruksjonsbudsjett."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visjon",
+    "title": "Fem søyler\nAI ikke kan <i>erstatte.</i>",
+    "lead": "AI gjør produksjon til en handelsvare. Disse fem domenene består. Origyn er posisjonert på hvert eneste av dem.",
+    "pillars": [
+      { "title": "Tillit", "description": "Origyn-sertifisering — et verifiserbart tillitssignal." },
+      { "title": "Kontekst", "description": "Tiår med strukturert hukommelse — et personlig signal AI ikke kan matche." },
+      { "title": "Distribusjon", "description": "Swiss Subnet — verifiserbar infrastruktur for agenter." },
+      { "title": "Smak", "description": "Auto-research-pipeline — automatiseringsstøttet kuratering." },
+      { "title": "Ansvar", "description": "Revisjonsspor og sertifikat — et reelt styringslag." }
+    ]
+  },
+  "memory": {
+    "title": "Du er det du\n<i>vet</i> og <i>husker.</i>",
+    "subtitle": [
+      "Mist det, og du mister deg selv. AI fungerer på samme måte.",
+      "Uten vedvarende on-chain hukommelse vil agenten din aldri virkelig kjenne deg."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Hold deg nær",
+    "title": "<i>Følg</i> forskningen",
+    "lead": "Oppdateringer om papers, tekniske milepæler, fremdrift i prosjektet. Ingen markedsføring. Bare substans."
+  },
+  "language": {
+    "label": "Språk",
+    "switchTo": "Bytt til {language}"
+  }
+}

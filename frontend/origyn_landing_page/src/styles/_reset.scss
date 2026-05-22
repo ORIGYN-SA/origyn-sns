@@ -1,3 +1,4 @@
+@layer base {
 html,
 body,
 div,
@@ -81,7 +82,11 @@ audio,
 video {
   margin: 0;
   padding: 0;
-  border: 0;
+  /* Reset width only — not `border: 0` — so Tailwind's preflight
+     `border-style: solid` survives. These element selectors out-specify
+     preflight's `*` rule, and the `border` utility sets width but not style,
+     so `border: 0` here would leave bordered elements with style:none (invisible). */
+  border-width: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -131,4 +136,5 @@ table {
 
 a {
   text-decoration: none;
+}
 }

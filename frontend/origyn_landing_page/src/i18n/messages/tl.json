@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Mag-scroll",
+  "hero": {
+    "title": "Pagsusulong ng on-chain\nna inference ng <i>AI</i>.",
+    "subtitle": [
+      "Bukás na R&D sa pagpapatakbo ng ganap na awtonomong mga AI agent sa pampublikong blockchain.",
+      "Walang off-chain na shortcut. Beripikable ayon sa disenyo."
+    ]
+  },
+  "form": {
+    "label": "Magpaabiso",
+    "emailLabel": "Email address",
+    "placeholder": "you@email.com",
+    "submit": "Magpaabiso",
+    "submitting": "Isinusumite",
+    "invalid": "Mangyaring maglagay ng wastong email.",
+    "success": "Naka-subscribe na. Makikipag-ugnayan kami sa iyo.",
+    "error": "May naganap na mali. Subukan muli."
+  },
+  "marquee": {
+    "phrases": [
+      "Ikaw ang alam at naaalala mo.",
+      "Mawala iyon, at mawawala ka rin sa sarili mo.",
+      "Ganito rin gumagana ang AI.",
+      "Kapag walang patuloy na memorya, kahit ang pinakamatalinong agent ay ingay lamang.",
+      "Ang tunay na katalinuhan ay hindi kung gaano kalakas ang modelo — kundi kung gaano ka nito kakilala.",
+      "Ikaw ang iyong memorya. Gayundin ang iyong Agent.",
+      "Walang memorya. Walang pagkakakilanlan. Walang tiwala.",
+      "Ang AI na laging nakakalimot sa iyo… ay hindi mo agent.",
+      "Ang memorya ang pagkakaiba ng isang kasangkapan at isang tunay na agent.",
+      "On-chain na memorya. On-chain na pagkakakilanlan. On-chain na katapatan.",
+      "Ang pinakamalakas na agent ay ang hindi ka kailanman nililimutan."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Ang problema",
+    "title": "Walang talagang nagpapatakbo\nng <i>AI on-chain.</i>",
+    "lead": "Bawat proyektong nagsasabing may <s>“on-chain AI agent”</s> ay sumusunod sa parehong pattern: ang inference ay tumatakbo off-chain, sa sentralisadong mga server, at ang resulta lamang ang ipinapaskil sa blockchain. Hindi kailanman tumatakbo ang modelo sa loob ng network. Ginagamit ang chain bilang bulletin board, hindi bilang compute layer.",
+    "leadStrong": "Hindi iyon on-chain agent. Iyon ay isang API call na may resibo.",
+    "steps": [
+      {
+        "title": "Ang sinasabi",
+        "body": "“On-chain agent na pinapagana ng AI.” Nangyayari ang inference sa AWS. Ang output lang ang iniimbak ng chain."
+      },
+      {
+        "title": "Ang kakulangan",
+        "body": "Walang beripikableng execution. Walang deterministikong replay. Walang paraan upang i-audit kung ano talaga ang kinompute ng modelo."
+      },
+      {
+        "title": "Ang aming pamamaraan",
+        "body": "Buong inference sa loob ng canister. WASM SIMD, sa Swiss Subnet. Beripikable, naipapakita muli, tunay na on-chain."
+      }
+    ],
+    "closing": "Naipakita na namin ito. Ang <s>Origyn</s> ay nagpapatakbo ng tunay na inference on-chain ngayon. Kasalukuyan kaming nasa aktibong yugto ng pagsubok, sinusubok nang husto ang katatagan sa iba't ibang modelo at workload upang patunayan ang ipinapakita na ng aming mga benchmark: ito ang pinakamaaasahang <s>on-chain AI</s> inference stack na umiiral."
+  },
+  "agent": {
+    "eyebrow": "Ang agent",
+    "title": "Origyn.\nKaunting <i>agent,</i> labis na <i>memorya.</i>",
+    "lead": "Isang soberanong AI agent na tumatakbo on-chain. Ang unang misyon nito: ang Soberanong Pangalawang Utak. Isang maliit na modelong pinapagana ng dekada-dekadang nakaayos mong konteksto, sinertipikahan sa Swiss blockchain. Hindi isang higanteng modelo on-chain. Isang nakapokus na agent na may sertipikadong vault.",
+    "cards": [
+      {
+        "title": "Panig ng user",
+        "subtitle": "Lokal na Tanggapan",
+        "body": "Ang makina ng user. Malalaking language model, pribadong file, offline na trabaho. Nananatili sa iyo ang iyong katalinuhan."
+      },
+      {
+        "title": "Panig ng blockchain",
+        "subtitle": "On-Chain na Vault",
+        "body": "Ang canister. Sertipikadong vault, beripikableng inference, deterministikong replay. Nagiging napapatunayang imprastraktura ang iyong konteksto."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Ang vault",
+    "title": "<i>Sertipikado</i> mula sa pagkakabuo.",
+    "lead": "Bawat kahinaan ay tinutugunan sa ugat. Hindi pangako. Isang protokol.",
+    "cards": [
+      {
+        "title": "Legal na patunay ng pag-iral",
+        "body": "Timestamping na sertipikado ng blockchain. Tinatanggap sa korte, walang kailangang notaryo."
+      },
+      {
+        "title": "Buong provenance",
+        "body": "Sino ang lumikha, nagbago, nagsertipika sa bawat dokumento. Hindi mababagong tanikala ng traceability."
+      },
+      {
+        "title": "Versioning",
+        "body": "Nananatili ang bawat bersyon. Maaaring ibalik anumang oras."
+      },
+      {
+        "title": "Kontroladong pagbabahagi",
+        "body": "Read-only, may takdang oras, mababawi sa isang click. Gumagana kahit offline."
+      },
+      {
+        "title": "Dead man’s switch",
+        "body": "Awtomatikong nababawi ng itinalagang mga tagapagmana ang access pagkatapos ng tinukoy na panahon ng kawalang-aktibo."
+      },
+      {
+        "title": "Hindi mababagong audit trail",
+        "body": "Sino ang nakakita ng ano, kailan, bakit. Buong pagsunod sa regulasyon na nakapaloob na."
+      },
+      {
+        "title": "24/7 na pagmamanman",
+        "body": "Tumatakbo ang canister kahit naka-off ang iyong PC. Awtomatikong alerto para sa mga anomalya."
+      },
+      {
+        "title": "Sertipikadong mga asset",
+        "body": "Tokenized na ginto, real estate, mga collectible. Mga sertipiko ng provenance kasabay ng kognitibong pamana."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Ang aming mga resulta",
+    "title": "<i>Mas mabilis</i>\nkaysa sa umiiral.",
+    "lead": "Parehong modelo, parehong kondisyon, production network. Ang aming custom na WASM SIMD kernels ang gumagawa ng pagkakaiba.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · production network",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× na mas mabilis kaysa sa umiiral na on-chain inference"
+    },
+    "body1": "Sa parehong compute budget, ang isang Pangalawang Utak na pinapagana ng aming fork ay gumagawa ng tatlong beses na mas maraming trabaho, o kumokonsumo ng tatlong beses na mas kaunting resources.",
+    "body2": [
+      "Hindi kami nakatali sa anumang iisang modelo o arkitektura. Ang bawat bagong release ay isang oportunidad.",
+      "Tuloy-tuloy naming bina-benchmark at iniintegrate ang pinakabagong mga modelo upang itulak pa ang bilis, katumpakan, at kahusayan."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modelo",
+        "existing": "Umiiral",
+        "origyn": "ORIGYN AI",
+        "gain": "Pakinabang"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Pulutong ng mga micro-expert",
+        "body": "Sa halip na isang mabagal na malaking modelo, nagde-deploy kami ng mga finetuned na modelong sub-1B parameter na partikular sa gawain: pag-uuri ng email, pagklasipika ng dokumento, pagtatasa ng panganib. Mas mabilis at mas tumpak kaysa sa isang generalist."
+      },
+      {
+        "title": "On-chain na distillation",
+        "body": "Isang malaking modelo ang nagtuturo off-chain, isang maliit na modelo ang nadi-deploy on-chain. Kasama ng 4-bit quantization at ng aming custom na WASM SIMD kernels, pinapagana nito ang tunay na AI sa loob ng instruction budget ng isang canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Bisyon",
+    "title": "Limang haligi na hindi\nkayang <i>palitan</i> ng AI.",
+    "lead": "Ginagawang commodity ng AI ang produksyon. Nananatili ang limang larangang ito. Nakaposisyon ang Origyn sa bawat isa sa kanila.",
+    "pillars": [
+      { "title": "Tiwala", "description": "Sertipikasyon ng Origyn — isang beripikableng senyas ng tiwala." },
+      { "title": "Konteksto", "description": "Dekada-dekadang nakaayos na memorya — isang personal na senyas na hindi kayang tapatan ng AI." },
+      { "title": "Distribusyon", "description": "Swiss Subnet — beripikableng imprastraktura para sa mga agent." },
+      { "title": "Lasa", "description": "Awtomatikong research pipeline — kurasyon na tinutulungan ng automation." },
+      { "title": "Pananagutan", "description": "Audit trail at sertipiko — isang tunay na layer ng governance." }
+    ]
+  },
+  "memory": {
+    "title": "Ikaw ang iyong\n<i>alam</i> at <i>naaalala.</i>",
+    "subtitle": [
+      "Mawala iyon, at mawawala ka rin sa sarili mo. Ganito rin gumagana ang AI.",
+      "Kapag walang patuloy na on-chain na memorya, hindi ka kailanman tunay na makikilala ng iyong agent."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Manatiling malapit",
+    "title": "<i>Sundan</i> ang pananaliksik",
+    "lead": "Mga update sa papel, teknikal na milestone, pag-usad ng proyekto. Walang marketing. Sustansya lamang."
+  },
+  "language": {
+    "label": "Wika",
+    "switchTo": "Lumipat sa {language}"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Vieritä",
+  "hero": {
+    "title": "Edistämme\nlohkoketjun sisäistä <i>AI</i>-päättelyä.",
+    "subtitle": [
+      "Avointa tutkimusta ja kehitystä täysin autonomisten AI-agenttien ajamisesta julkisessa lohkoketjussa.",
+      "Ei ketjun ulkopuolisia oikoteitä. Todennettavissa jo lähtökohtaisesti."
+    ]
+  },
+  "form": {
+    "label": "Saa ilmoitus",
+    "emailLabel": "Sähköpostiosoite",
+    "placeholder": "sina@email.com",
+    "submit": "Saa ilmoitus",
+    "submitting": "Lähetetään",
+    "invalid": "Anna kelvollinen sähköpostiosoite.",
+    "success": "Tilattu. Olemme yhteydessä.",
+    "error": "Jokin meni pieleen. Yritä uudelleen."
+  },
+  "marquee": {
+    "phrases": [
+      "Olet sitä, mitä tiedät ja muistat.",
+      "Menetä se, ja menetät itsesi.",
+      "AI toimii täsmälleen samalla tavalla.",
+      "Ilman pysyvää muistia älykkäinkin agentti on pelkkää kohinaa.",
+      "Aito älykkyys ei ole sitä, kuinka tehokas malli on — vaan kuinka hyvin se tuntee sinut.",
+      "Olet muistisi. Niin on agenttisikin.",
+      "Ei muistia. Ei identiteettiä. Ei luottamusta.",
+      "AI, joka unohtaa sinut joka kerta… ei ole sinun agenttisi.",
+      "Muisti on ero työkalun ja aidon agentin välillä.",
+      "Lohkoketjun muisti. Lohkoketjun identiteetti. Lohkoketjun lojaalius.",
+      "Tehokkain agentti on se, joka ei koskaan unohda sinua."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Ongelma",
+    "title": "Kukaan ei oikeasti aja\n<i>AI:ta lohkoketjussa.</i>",
+    "lead": "Jokainen hanke, joka väittää omaavansa <s>“lohkoketjun sisäisen AI-agentin”</s>, noudattaa samaa kaavaa: päättely ajetaan ketjun ulkopuolella, keskitetyillä palvelimilla, ja vain tulos kirjataan lohkoketjuun. Mallia ei koskaan suoriteta verkon sisällä. Ketjua käytetään ilmoitustauluna, ei laskentakerroksena.",
+    "leadStrong": "Se ei ole lohkoketjun sisäinen agentti. Se on API-kutsu kuitin kera.",
+    "steps": [
+      {
+        "title": "Väite",
+        "body": "“AI-pohjainen lohkoketjun sisäinen agentti.” Päättely tapahtuu AWS:ssä. Ketju tallentaa vain lopputuloksen."
+      },
+      {
+        "title": "Kuilu",
+        "body": "Ei todennettavaa suoritusta. Ei deterministista toistoa. Ei keinoa tarkastaa, mitä malli todella laski."
+      },
+      {
+        "title": "Lähestymistapamme",
+        "body": "Täysi päättely canisterin sisällä. WASM SIMD, Swiss Subnetissä. Todennettava, toistettava, aidosti lohkoketjun sisäinen."
+      }
+    ],
+    "closing": "Olemme jo osoittaneet tämän. <s>Origyn</s> ajaa aitoa päättelyä lohkoketjussa jo tänään. Olemme nyt aktiivisessa testausvaiheessa, jossa rasitustestaamme kestävyyttä eri mallien ja kuormien yli vahvistaaksemme sen, mitä vertailutestimme jo osoittavat: tämä on luotettavin <s>lohkoketjun sisäinen AI</s>-päättelypino, mitä on olemassa."
+  },
+  "agent": {
+    "eyebrow": "Agentti",
+    "title": "Origyn.\nMinimaalinen <i>agentti,</i> maksimaalinen <i>muisti.</i>",
+    "lead": "Suvereeni AI-agentti, joka toimii lohkoketjussa. Sen ensimmäinen tehtävä: Suvereeni Toinen Aivo. Pieni malli, jota ruokkii vuosikymmenten verran jäsenneltyä kontekstiasi, sertifioituna Sveitsin lohkoketjussa. Ei jättimäistä mallia lohkoketjussa. Keskittynyt agentti sertifioidulla holvilla.",
+    "cards": [
+      {
+        "title": "Käyttäjän puoli",
+        "subtitle": "Paikallinen toimisto",
+        "body": "Käyttäjän kone. Suuret kielimallit, yksityiset tiedostot, työ offline-tilassa. Älykkyytesi pysyy luonasi."
+      },
+      {
+        "title": "Lohkoketjun puoli",
+        "subtitle": "Lohkoketjun holvi",
+        "body": "Canister. Sertifioitu holvi, todennettava päättely, deterministinen toisto. Kontekstistasi tulee todennettavaa infrastruktuuria."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Holvi",
+    "title": "<i>Sertifioitu</i> rakenteeltaan.",
+    "lead": "Jokainen heikkous korjattu juurelta. Ei lupaus. Protokolla.",
+    "cards": [
+      {
+        "title": "Oikeudellinen todiste olemassaolosta",
+        "body": "Lohkoketjun sertifioima aikaleimaus. Hyväksyttävissä tuomioistuimessa, ei notaaria tarvita."
+      },
+      {
+        "title": "Täysi alkuperä",
+        "body": "Kuka loi, muokkasi ja sertifioi kunkin asiakirjan. Muuttumaton jäljitettävyysketju."
+      },
+      {
+        "title": "Versiointi",
+        "body": "Jokainen versio säilytetty. Palaa takaisin milloin tahansa."
+      },
+      {
+        "title": "Hallittu jakaminen",
+        "body": "Vain luku, aikarajoitettu, peruutettavissa yhdellä napsautuksella. Toimii myös offline-tilassa."
+      },
+      {
+        "title": "Kuolleen miehen kytkin",
+        "body": "Nimetyt perilliset saavat pääsyn automaattisesti takaisin määritellyn käyttämättömyysjakson jälkeen."
+      },
+      {
+        "title": "Muuttumaton tarkastusketju",
+        "body": "Kuka näki mitä, milloin ja miksi. Täysi sääntelynmukaisuus sisäänrakennettuna."
+      },
+      {
+        "title": "24/7-valvonta",
+        "body": "Canister toimii, vaikka tietokoneesi olisi sammutettu. Automaattiset hälytykset poikkeamista."
+      },
+      {
+        "title": "Sertifioidut omaisuuserät",
+        "body": "Tokenisoitu kulta, kiinteistöt, keräilyesineet. Alkuperätodistukset kognitiivisen perinnön rinnalla."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Tuloksemme",
+    "title": "<i>Nopeampi</i>\nkuin olemassa oleva.",
+    "lead": "Samat mallit, samat olosuhteet, tuotantoverkko. Räätälöidyt WASM SIMD -ytimemme tekevät eron.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · tuotantoverkko",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× nopeampi kuin olemassa oleva lohkoketjun sisäinen päättely"
+    },
+    "body1": "Samalla laskentabudjetilla forkkimme käyttövoimainen Toinen Aivo tekee kolme kertaa enemmän työtä tai kuluttaa kolme kertaa vähemmän resursseja.",
+    "body2": [
+      "Emme ole sidottuja mihinkään yksittäiseen malliin tai arkkitehtuuriin. Jokainen uusi julkaisu on mahdollisuus.",
+      "Vertailutestaamme ja integroimme jatkuvasti uusimpia malleja vauhdittaaksemme nopeutta, tarkkuutta ja tehokkuutta entisestään."
+    ],
+    "table": {
+      "headers": {
+        "model": "Malli",
+        "existing": "Olemassa oleva",
+        "origyn": "ORIGYN AI",
+        "gain": "Hyöty"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Mikroasiantuntijoiden laivue",
+        "body": "Yhden hitaan suuren mallin sijaan otamme käyttöön tehtäväkohtaisia, hienosäädettyjä sub-1B-parametrin malleja: sähköpostien lajittelu, asiakirjojen luokittelu, riskin arviointi. Nopeampia ja tarkempia kuin yleismalli."
+      },
+      {
+        "title": "Lohkoketjun sisäinen distillaatio",
+        "body": "Suuri malli opettaa ketjun ulkopuolella, pieni malli otetaan käyttöön lohkoketjussa. Yhdistettynä 4-bit-kvantisointiin ja räätälöityihin WASM SIMD -ytimiimme tämä mahdollistaa aidon AI:n canisterin käskybudjetin puitteissa."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visio",
+    "title": "Viisi pilaria,\njoita AI ei voi <i>korvata.</i>",
+    "lead": "AI muuttaa tuotannon hyödykkeeksi. Nämä viisi aluetta jäävät jäljelle. Origyn on asemoitu jokaiseen niistä.",
+    "pillars": [
+      { "title": "Luottamus", "description": "Origyn-sertifiointi — todennettava luottamussignaali." },
+      { "title": "Konteksti", "description": "Vuosikymmenten jäsennelty muisti — henkilökohtainen signaali, jota AI ei voi vastata." },
+      { "title": "Jakelu", "description": "Swiss Subnet — todennettavaa infrastruktuuria agenteille." },
+      { "title": "Maku", "description": "Automaattinen tutkimusputki — automaatiotuettu kuratointi." },
+      { "title": "Vastuu", "description": "Tarkastusketju ja sertifikaatti — todellinen hallintakerros." }
+    ]
+  },
+  "memory": {
+    "title": "Olet sitä, mitä\n<i>tiedät</i> ja <i>muistat.</i>",
+    "subtitle": [
+      "Menetä se, ja menetät itsesi. AI toimii samalla tavalla.",
+      "Ilman pysyvää lohkoketjun muistia agenttisi ei koskaan todella tunne sinua."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Pysy lähellä",
+    "title": "<i>Seuraa</i> tutkimusta",
+    "lead": "Päivityksiä julkaisuista, teknisistä virstanpylväistä ja hankkeen edistymisestä. Ei markkinointia. Vain asiaa."
+  },
+  "language": {
+    "label": "Kieli",
+    "switchTo": "Vaihda kieleksi {language}"
+  }
+}

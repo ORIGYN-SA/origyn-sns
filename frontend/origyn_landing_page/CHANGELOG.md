@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.4.3] - 2026-05-22
+
+#### Added
+
+- Add new AI page
+
 ### [1.4.2] - 2026-05-10
 
 #### Updated
