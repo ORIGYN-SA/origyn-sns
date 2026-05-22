@@ -1,4 +1,5 @@
 import { useT } from "@/i18n/LocaleContext";
+import { useDraggableMarquee } from "./useDraggableMarquee";
 
 const Run = ({ phrases, ariaHidden = false }) => (
   <span
@@ -21,9 +22,16 @@ const Run = ({ phrases, ariaHidden = false }) => (
 const MarqueeStrip = () => {
   const t = useT();
   const phrases = t.raw("marquee.phrases");
+  const { trackRef, isDragging, handlers } = useDraggableMarquee();
+
   return (
-    <div className="overflow-hidden py-10">
-      <div className="flex w-max animate-marquee">
+    <div
+      {...handlers}
+      className={`select-none touch-pan-y overflow-hidden py-10 ${
+        isDragging ? "cursor-grabbing" : "cursor-grab"
+      }`}
+    >
+      <div ref={trackRef} className="flex w-max will-change-transform">
         <Run phrases={phrases} />
         <Run phrases={phrases} ariaHidden />
       </div>
