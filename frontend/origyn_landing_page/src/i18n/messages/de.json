@@ -162,6 +162,13 @@
       { "title": "Haftung", "description": "Audit-Trail und Zertifikat — eine echte Governance-Ebene." }
     ]
   },
+  "memory": {
+    "title": "Du bist dein <i>Wissen</i>\nund deine <i>Erinnerung.</i>",
+    "subtitle": [
+      "Verlierst du das, verlierst du dich selbst. Mit KI ist es genau dasselbe.",
+      "Ohne dauerhaftes On-Chain-Gedächtnis wird dein Agent dich nie wirklich kennen."
+    ]
+  },
   "newsletter": {
     "eyebrow": "Bleib in der Nähe",
     "title": "<i>Verfolge</i> die Forschung",

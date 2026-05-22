@@ -12,6 +12,7 @@ import AgentSection from "./components/AgentSection";
 import VaultSection from "./components/VaultSection";
 import ResultsSection from "./components/ResultsSection";
 import VisionSection from "./components/VisionSection";
+import MemorySection from "./components/MemorySection";
 import NewsletterSection from "./components/NewsletterSection";
 
 const AIPageBody = () => {
@@ -72,6 +73,7 @@ const AIPageBody = () => {
       <VaultSection />
       <ResultsSection />
       <VisionSection />
+      <MemorySection />
       <NewsletterSection />
       <Footer />
     </div>

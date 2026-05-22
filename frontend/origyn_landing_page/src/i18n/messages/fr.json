@@ -162,6 +162,13 @@
       { "title": "Responsabilité", "description": "Piste d'audit et certificat — une véritable couche de gouvernance." }
     ]
   },
+  "memory": {
+    "title": "Vous êtes ce que vous\n<i>savez</i> et <i>retenez.</i>",
+    "subtitle": [
+      "Perdez cela, et vous vous perdez vous-même. L'IA fonctionne exactement de la même façon.",
+      "Sans mémoire on-chain persistante, votre agent ne vous connaîtra jamais vraiment."
+    ]
+  },
   "newsletter": {
     "eyebrow": "Restez proche",
     "title": "<i>Suivez</i> la recherche",

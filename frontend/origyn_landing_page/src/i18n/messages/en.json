@@ -162,6 +162,13 @@
       { "title": "Liability", "description": "Audit trail and certificate — a real governance layer." }
     ]
   },
+  "memory": {
+    "title": "You are what you\n<i>know</i> and <i>remember.</i>",
+    "subtitle": [
+      "Lose that, and you lose yourself. AI works the same way.",
+      "Without persistent on-chain memory, your agent will never truly know you."
+    ]
+  },
   "newsletter": {
     "eyebrow": "Stay close",
     "title": "<i>Follow</i> the research",

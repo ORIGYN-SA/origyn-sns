@@ -162,6 +162,13 @@
       { "title": "Responsabilità", "description": "Registro di audit e certificato — un vero livello di governance." }
     ]
   },
+  "memory": {
+    "title": "Sei ciò che\n<i>sai</i> e <i>ricordi.</i>",
+    "subtitle": [
+      "Perdi quello, e perdi te stesso. L'IA funziona esattamente allo stesso modo.",
+      "Senza una memoria on-chain persistente, il tuo agente non ti conoscerà mai davvero."
+    ]
+  },
   "newsletter": {
     "eyebrow": "Resta vicino",
     "title": "<i>Segui</i> la ricerca",
