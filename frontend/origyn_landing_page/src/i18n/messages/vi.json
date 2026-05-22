@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Cuộn",
+  "hero": {
+    "title": "Thúc đẩy suy luận\n<i>AI</i> trên chuỗi.",
+    "subtitle": [
+      "Nghiên cứu và phát triển mở về việc vận hành các tác nhân AI hoàn toàn tự chủ trên một blockchain công khai.",
+      "Không có đường tắt ngoài chuỗi. Có thể kiểm chứng ngay từ thiết kế."
+    ]
+  },
+  "form": {
+    "label": "Nhận thông báo",
+    "emailLabel": "Địa chỉ email",
+    "placeholder": "you@email.com",
+    "submit": "Nhận thông báo",
+    "submitting": "Đang gửi",
+    "invalid": "Vui lòng nhập một email hợp lệ.",
+    "success": "Đã đăng ký. Chúng tôi sẽ liên hệ với bạn.",
+    "error": "Đã xảy ra lỗi. Vui lòng thử lại."
+  },
+  "marquee": {
+    "phrases": [
+      "Bạn chính là những gì bạn biết và ghi nhớ.",
+      "Đánh mất điều đó, bạn đánh mất chính mình.",
+      "AI vận hành theo đúng cách như vậy.",
+      "Không có ký ức bền vững, ngay cả tác nhân thông minh nhất cũng chỉ là tạp âm.",
+      "Trí tuệ thật sự không nằm ở việc mô hình mạnh đến đâu — mà ở việc nó hiểu bạn đến mức nào.",
+      "Bạn là ký ức của bạn. Tác nhân của bạn cũng vậy.",
+      "Không ký ức. Không danh tính. Không lòng tin.",
+      "Một AI quên bạn mỗi lần… không phải là tác nhân của bạn.",
+      "Ký ức là khác biệt giữa một công cụ và một tác nhân thật sự.",
+      "Ký ức trên chuỗi. Danh tính trên chuỗi. Lòng trung thành trên chuỗi.",
+      "Tác nhân mạnh nhất là tác nhân không bao giờ quên bạn."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Vấn đề",
+    "title": "Chẳng ai thực sự\n<i>chạy AI trên chuỗi.</i>",
+    "lead": "Mọi dự án tuyên bố có một <s>“tác nhân AI trên chuỗi”</s> đều theo cùng một khuôn mẫu: suy luận chạy ngoài chuỗi, trên các máy chủ tập trung, và chỉ kết quả mới được đăng lên blockchain. Mô hình không bao giờ thực thi bên trong mạng lưới. Chuỗi được dùng như một bảng tin, chứ không phải một lớp tính toán.",
+    "leadStrong": "Đó không phải là tác nhân trên chuỗi. Đó là một lệnh gọi API kèm biên lai.",
+    "steps": [
+      {
+        "title": "Lời tuyên bố",
+        "body": "“Tác nhân trên chuỗi được hỗ trợ bởi AI.” Suy luận diễn ra trên AWS. Chuỗi chỉ lưu trữ kết quả đầu ra."
+      },
+      {
+        "title": "Khoảng trống",
+        "body": "Không có thực thi kiểm chứng được. Không có tái lập tất định. Không có cách nào kiểm toán mô hình đã thực sự tính toán điều gì."
+      },
+      {
+        "title": "Cách tiếp cận của chúng tôi",
+        "body": "Suy luận đầy đủ ngay bên trong canister. WASM SIMD, trên Swiss Subnet. Kiểm chứng được, tái lập được, thật sự trên chuỗi."
+      }
+    ],
+    "closing": "Chúng tôi đã chứng minh điều này. <s>Origyn</s> hôm nay đang chạy suy luận thật sự trên chuỗi. Chúng tôi đang trong giai đoạn thử nghiệm tích cực, kiểm tra sức bền của độ vững chắc qua nhiều mô hình và khối lượng công việc để xác nhận điều mà các bài đo chuẩn của chúng tôi đã cho thấy: đây là ngăn xếp suy luận <s>AI trên chuỗi</s> đáng tin cậy nhất hiện có."
+  },
+  "agent": {
+    "eyebrow": "Tác nhân",
+    "title": "Origyn.\n<i>Tác nhân</i> tối giản, <i>ký ức</i> tối đa.",
+    "lead": "Một tác nhân AI có chủ quyền chạy trên chuỗi. Sứ mệnh đầu tiên của nó: Bộ Não Thứ Hai có chủ quyền. Một mô hình nhỏ được nuôi dưỡng bằng hàng thập kỷ ngữ cảnh có cấu trúc của bạn, được chứng thực trên blockchain Thụy Sĩ. Không phải một mô hình khổng lồ trên chuỗi. Một tác nhân tập trung với một kho lưu trữ đã chứng thực.",
+    "cards": [
+      {
+        "title": "Phía người dùng",
+        "subtitle": "Văn phòng cục bộ",
+        "body": "Máy của người dùng. Mô hình ngôn ngữ lớn, tệp riêng tư, làm việc ngoại tuyến. Trí tuệ của bạn ở lại bên bạn."
+      },
+      {
+        "title": "Phía blockchain",
+        "subtitle": "Kho lưu trữ trên chuỗi",
+        "body": "Canister. Kho lưu trữ đã chứng thực, suy luận kiểm chứng được, tái lập tất định. Ngữ cảnh của bạn trở thành hạ tầng có thể chứng minh."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Kho lưu trữ",
+    "title": "<i>Được chứng thực</i> ngay từ kiến trúc.",
+    "lead": "Mọi điểm yếu được xử lý từ gốc rễ. Không phải một lời hứa. Mà là một giao thức.",
+    "cards": [
+      {
+        "title": "Bằng chứng pháp lý về sự tồn tại",
+        "body": "Dấu thời gian được blockchain chứng thực. Được chấp nhận tại tòa án, không cần công chứng viên."
+      },
+      {
+        "title": "Nguồn gốc đầy đủ",
+        "body": "Ai đã tạo, sửa đổi, chứng thực từng tài liệu. Chuỗi truy vết bất biến."
+      },
+      {
+        "title": "Quản lý phiên bản",
+        "body": "Mọi phiên bản đều được lưu giữ. Khôi phục về bất cứ lúc nào."
+      },
+      {
+        "title": "Chia sẻ có kiểm soát",
+        "body": "Chỉ đọc, giới hạn thời gian, thu hồi chỉ với một cú nhấp. Hoạt động cả khi ngoại tuyến."
+      },
+      {
+        "title": "Công tắc người chết",
+        "body": "Những người thừa kế được chỉ định tự động lấy lại quyền truy cập sau một khoảng thời gian không hoạt động được xác định trước."
+      },
+      {
+        "title": "Nhật ký kiểm toán bất biến",
+        "body": "Ai đã xem gì, khi nào, vì sao. Tuân thủ quy định đầy đủ được tích hợp sẵn."
+      },
+      {
+        "title": "Giám sát 24/7",
+        "body": "Canister vẫn chạy ngay cả khi máy tính của bạn tắt. Tự động cảnh báo khi có bất thường."
+      },
+      {
+        "title": "Tài sản đã chứng thực",
+        "body": "Vàng, bất động sản, vật phẩm sưu tầm được mã hóa thành token. Chứng chỉ nguồn gốc song hành cùng di sản tri thức."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Kết quả của chúng tôi",
+    "title": "<i>Nhanh hơn</i>\ngiải pháp hiện có.",
+    "lead": "Cùng mô hình, cùng điều kiện, mạng lưới sản xuất. Các nhân WASM SIMD tùy chỉnh của chúng tôi tạo nên sự khác biệt.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · mạng lưới sản xuất",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "Nhanh hơn 2.9× so với suy luận trên chuỗi hiện có"
+    },
+    "body1": "Với cùng một ngân sách tính toán, một Bộ Não Thứ Hai do bản fork của chúng tôi vận hành làm được gấp ba lần khối lượng công việc, hoặc tiêu tốn ít hơn ba lần tài nguyên.",
+    "body2": [
+      "Chúng tôi không bị ràng buộc vào bất kỳ mô hình hay kiến trúc đơn lẻ nào. Mỗi bản phát hành mới là một cơ hội.",
+      "Chúng tôi liên tục đo chuẩn và tích hợp những mô hình mới nhất để đẩy tốc độ, độ chính xác và hiệu quả đi xa hơn nữa."
+    ],
+    "table": {
+      "headers": {
+        "model": "Mô hình",
+        "existing": "Hiện có",
+        "origyn": "ORIGYN AI",
+        "gain": "Mức tăng"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Đội ngũ chuyên gia vi mô",
+        "body": "Thay vì một mô hình lớn chậm chạp, chúng tôi triển khai các mô hình sub-1B tham số được tinh chỉnh theo từng tác vụ: sắp xếp email, phân loại tài liệu, đánh giá rủi ro. Nhanh hơn và chính xác hơn một mô hình tổng quát."
+      },
+      {
+        "title": "Chưng cất trên chuỗi",
+        "body": "Một mô hình lớn dạy ngoài chuỗi, một mô hình nhỏ triển khai trên chuỗi. Kết hợp với lượng tử hóa 4-bit và các nhân WASM SIMD tùy chỉnh của chúng tôi, điều này giúp hiện thực hóa AI thật sự trong giới hạn ngân sách lệnh của một canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Tầm nhìn",
+    "title": "Năm trụ cột\nAI không thể <i>thay thế.</i>",
+    "lead": "AI biến sản xuất thành hàng hóa phổ thông. Năm lĩnh vực này vẫn còn lại. Origyn đã định vị ở từng lĩnh vực một.",
+    "pillars": [
+      { "title": "Niềm tin", "description": "Chứng thực Origyn — một tín hiệu tin cậy kiểm chứng được." },
+      { "title": "Ngữ cảnh", "description": "Hàng thập kỷ ký ức có cấu trúc — một tín hiệu cá nhân mà AI không thể sánh được." },
+      { "title": "Phân phối", "description": "Swiss Subnet — hạ tầng kiểm chứng được cho các tác nhân." },
+      { "title": "Gu thẩm mỹ", "description": "Quy trình tự động nghiên cứu — sự tuyển chọn được tự động hóa hỗ trợ." },
+      { "title": "Trách nhiệm", "description": "Nhật ký kiểm toán và chứng chỉ — một lớp quản trị thật sự." }
+    ]
+  },
+  "memory": {
+    "title": "Bạn chính là những gì bạn\n<i>biết</i> và <i>ghi nhớ.</i>",
+    "subtitle": [
+      "Đánh mất điều đó, bạn đánh mất chính mình. AI cũng hoạt động như vậy.",
+      "Không có ký ức bền vững trên chuỗi, tác nhân của bạn sẽ không bao giờ thật sự hiểu bạn."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Luôn gần kề",
+    "title": "<i>Theo dõi</i> nghiên cứu",
+    "lead": "Cập nhật về các bài báo, các cột mốc kỹ thuật, tiến độ dự án. Không tiếp thị. Chỉ có thực chất."
+  },
+  "language": {
+    "label": "Ngôn ngữ",
+    "switchTo": "Chuyển sang {language}"
+  }
+}

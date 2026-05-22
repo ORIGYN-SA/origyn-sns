@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Pomakni",
+  "hero": {
+    "title": "Unapređujemo\n<i>AI</i> zaključivanje on-chain.",
+    "subtitle": [
+      "Otvoreni istraživanje i razvoj pokretanja potpuno autonomnih AI agenata na javnom blockchainu.",
+      "Bez prečaca izvan lanca. Provjerljivo po dizajnu."
+    ]
+  },
+  "form": {
+    "label": "Primaj obavijesti",
+    "emailLabel": "E-mail adresa",
+    "placeholder": "ti@email.com",
+    "submit": "Obavijesti me",
+    "submitting": "Slanje",
+    "invalid": "Unesite valjanu e-mail adresu.",
+    "success": "Pretplaćeni ste. Javit ćemo se.",
+    "error": "Nešto je pošlo po zlu. Pokušajte ponovno."
+  },
+  "marquee": {
+    "phrases": [
+      "Ti si ono što znaš i pamtiš.",
+      "Izgubi to i izgubit ćeš samog sebe.",
+      "S AI-jem je točno isto.",
+      "Bez trajnog pamćenja čak je i najpametniji agent samo šum.",
+      "Prava inteligencija nije u tome koliko je model moćan — nego koliko te dobro poznaje.",
+      "Ti si svoje pamćenje. Jednako tako i tvoj Agent.",
+      "Nema pamćenja. Nema identiteta. Nema povjerenja.",
+      "AI koji te svaki put zaboravi… nije tvoj agent.",
+      "Pamćenje je razlika između alata i pravog agenta.",
+      "Pamćenje on-chain. Identitet on-chain. Odanost on-chain.",
+      "Najmoćniji agent je onaj koji te nikada ne zaboravi."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problem",
+    "title": "Nitko zapravo ne pokreće\n<i>AI on-chain.</i>",
+    "lead": "Svaki projekt koji tvrdi da ima <s>„AI agenta on-chain”</s> slijedi isti obrazac: zaključivanje se odvija izvan lanca, na centraliziranim poslužiteljima, a na blockchain se objavljuje samo rezultat. Model se nikada ne izvršava unutar mreže. Lanac se koristi kao oglasna ploča, a ne kao sloj za izračun.",
+    "leadStrong": "To nije agent on-chain. To je API poziv s računom.",
+    "steps": [
+      {
+        "title": "Tvrdnja",
+        "body": "„On-chain agent pokretan AI-jem.” Zaključivanje se odvija na AWS-u. Lanac pohranjuje samo izlaz."
+      },
+      {
+        "title": "Praznina",
+        "body": "Nema provjerljivog izvršavanja. Nema determinističkog ponavljanja. Nema načina za reviziju onoga što je model zapravo izračunao."
+      },
+      {
+        "title": "Naš pristup",
+        "body": "Potpuno zaključivanje unutar kanistra. WASM SIMD, na Swiss Subnet. Provjerljivo, ponovljivo, uistinu on-chain."
+      }
+    ],
+    "closing": "To smo već dokazali. <s>Origyn</s> danas pokreće stvarno zaključivanje on-chain. Trenutno smo u aktivnoj fazi testiranja, provjeravamo robusnost kroz različite modele i opterećenja kako bismo potvrdili ono što naši benchmarci već pokazuju: ovo je najpouzdaniji stog za <s>on-chain AI</s> zaključivanje koji postoji."
+  },
+  "agent": {
+    "eyebrow": "Agent",
+    "title": "Origyn.\nMinimalan <i>agent,</i> maksimalno <i>pamćenje.</i>",
+    "lead": "Suvereni AI agent koji radi on-chain. Njegova prva misija: Suvereni Drugi Mozak. Mali model hranjen desetljećima tvoga strukturiranog konteksta, certificiran na švicarskom blockchainu. Ne golemi model on-chain. Fokusiran agent s certificiranim trezorom.",
+    "cards": [
+      {
+        "title": "Korisnička strana",
+        "subtitle": "Lokalni Ured",
+        "body": "Korisnikovo računalo. Veliki jezični modeli, privatne datoteke, rad izvan mreže. Tvoja inteligencija ostaje s tobom."
+      },
+      {
+        "title": "Strana blockchaina",
+        "subtitle": "Trezor On-Chain",
+        "body": "Kanistar. Certificirani trezor, provjerljivo zaključivanje, determinističko ponavljanje. Tvoj kontekst postaje dokaziva infrastruktura."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Trezor",
+    "title": "<i>Certificiran</i> po samoj svojoj naravi.",
+    "lead": "Svaka krhkost riješena u korijenu. Nije obećanje. Protokol je.",
+    "cards": [
+      {
+        "title": "Pravni dokaz postojanja",
+        "body": "Vremenski žig certificiran blockchainom. Prihvatljiv na sudu, bez potrebe za bilježnikom."
+      },
+      {
+        "title": "Potpuna provenijencija",
+        "body": "Tko je stvorio, izmijenio i certificirao svaki dokument. Nepromjenjiv lanac sljedivosti."
+      },
+      {
+        "title": "Verzioniranje",
+        "body": "Svaka verzija sačuvana. Vraćanje u bilo koji trenutak."
+      },
+      {
+        "title": "Kontrolirano dijeljenje",
+        "body": "Samo za čitanje, vremenski ograničeno, opozivo jednim klikom. Radi i izvan mreže."
+      },
+      {
+        "title": "Sigurnosni prekidač",
+        "body": "Određeni nasljednici automatski vraćaju pristup nakon definiranog razdoblja neaktivnosti."
+      },
+      {
+        "title": "Nepromjenjiv revizijski trag",
+        "body": "Tko je što vidio, kada i zašto. Potpuna regulatorna usklađenost ugrađena od temelja."
+      },
+      {
+        "title": "Nadzor 24/7",
+        "body": "Kanistar radi i kada je tvoje računalo isključeno. Automatska upozorenja na anomalije."
+      },
+      {
+        "title": "Certificirana imovina",
+        "body": "Tokenizirano zlato, nekretnine, kolekcionarski predmeti. Certifikati provenijencije uz kognitivnu baštinu."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Naši rezultati",
+    "title": "<i>Brže</i>\nod postojećeg.",
+    "lead": "Isti modeli, isti uvjeti, produkcijska mreža. Razliku čine naše prilagođene WASM SIMD jezgre.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · produkcijska mreža",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× brže od postojećeg on-chain zaključivanja"
+    },
+    "body1": "Uz isti proračun za izračun, Drugi Mozak pokretan našim forkom obavlja tri puta više posla ili troši tri puta manje resursa.",
+    "body2": [
+      "Nismo vezani ni za jedan model ili arhitekturu. Svako novo izdanje je prilika.",
+      "Neprestano uspoređujemo i integriramo najnovije modele kako bismo dalje gurali brzinu, točnost i učinkovitost."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Postojeće",
+        "origyn": "ORIGYN AI",
+        "gain": "Dobitak"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flota mikrostručnjaka",
+        "body": "Umjesto jednog sporog velikog modela, postavljamo modele sub-1B parametara fino podešene za pojedine zadatke: razvrstavanje e-pošte, klasifikaciju dokumenata, procjenu rizika. Brže i preciznije od generalista."
+      },
+      {
+        "title": "Destilacija on-chain",
+        "body": "Veliki model podučava izvan lanca, mali model se postavlja on-chain. U kombinaciji s 4-bit kvantizacijom i našim prilagođenim WASM SIMD jezgrama, to omogućuje pravi AI unutar proračuna instrukcija kanistra."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vizija",
+    "title": "Pet stupova\nkoje AI ne može <i>zamijeniti.</i>",
+    "lead": "AI pretvara proizvodnju u robu. Ovih pet područja ostaje. Origyn je pozicioniran u svakom od njih.",
+    "pillars": [
+      { "title": "Povjerenje", "description": "Origyn certifikacija — provjerljiv signal povjerenja." },
+      { "title": "Kontekst", "description": "Desetljeća strukturiranog pamćenja — osobni signal kojem AI nije ravan." },
+      { "title": "Distribucija", "description": "Swiss Subnet — provjerljiva infrastruktura za agente." },
+      { "title": "Ukus", "description": "Pipeline automatskog istraživanja — kuriranje potpomognuto automatizacijom." },
+      { "title": "Odgovornost", "description": "Revizijski trag i certifikat — stvarni sloj upravljanja." }
+    ]
+  },
+  "memory": {
+    "title": "Ti si ono što\n<i>znaš</i> i <i>pamtiš.</i>",
+    "subtitle": [
+      "Izgubi to i izgubit ćeš samog sebe. S AI-jem je isto.",
+      "Bez trajnog pamćenja on-chain tvoj te agent nikada neće uistinu upoznati."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Ostani blizu",
+    "title": "<i>Prati</i> istraživanje",
+    "lead": "Novosti o radovima, tehničke prekretnice, napredak projekta. Bez marketinga. Samo suština."
+  },
+  "language": {
+    "label": "Jezik",
+    "switchTo": "Prebaci na {language}"
+  }
+}

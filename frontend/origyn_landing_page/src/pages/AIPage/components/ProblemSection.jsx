@@ -42,7 +42,7 @@ const ProblemSection = () => {
               <ScrollReveal
                 as="article"
                 key={step.title}
-                className="flex flex-col rounded-3xl border border-[#ececec] bg-surface px-10 py-10 text-left"
+                className="flex flex-col rounded-3xl border border-[#ececec] bg-surface px-10 py-10 text-start"
               >
                 <div className="text-[clamp(2rem,4vw,2.5rem)] font-light leading-none tracking-[-0.04em]">
                   <span className="text-gradient">{padded}</span>

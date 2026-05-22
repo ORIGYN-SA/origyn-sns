@@ -20,7 +20,7 @@ const LanguageSwitcher = () => {
         value={locale}
         onChange={(e) => go(e.target.value)}
         aria-label={t("language.label")}
-        className="w-full cursor-pointer appearance-none rounded-full bg-transparent py-1.5 pl-4 pr-8 text-[0.8125rem] font-medium tracking-wide text-ink outline-none"
+        className="w-full cursor-pointer appearance-none rounded-full bg-transparent py-1.5 ps-4 pe-8 text-[0.8125rem] font-medium tracking-wide text-ink outline-none"
       >
         {locales.map((code) => (
           <option key={code} value={code}>
@@ -38,7 +38,7 @@ const LanguageSwitcher = () => {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted"
+        className="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-muted"
         aria-hidden="true"
       >
         <path d="m6 9 6 6 6-6" />

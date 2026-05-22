@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Przewiń",
+  "hero": {
+    "title": "Rozwijamy\nwnioskowanie <i>AI</i> on-chain.",
+    "subtitle": [
+      "Otwarte prace badawczo-rozwojowe nad uruchamianiem w pełni autonomicznych agentów AI na publicznym blockchainie.",
+      "Bez skrótów poza łańcuchem. Weryfikowalne z założenia."
+    ]
+  },
+  "form": {
+    "label": "Otrzymuj powiadomienia",
+    "emailLabel": "Adres e-mail",
+    "placeholder": "ty@email.com",
+    "submit": "Powiadom mnie",
+    "submitting": "Wysyłanie",
+    "invalid": "Podaj prawidłowy adres e-mail.",
+    "success": "Zapisano. Wkrótce się odezwiemy.",
+    "error": "Coś poszło nie tak. Spróbuj ponownie."
+  },
+  "marquee": {
+    "phrases": [
+      "Jesteś tym, co wiesz i pamiętasz.",
+      "Stracisz to — stracisz samego siebie.",
+      "Z AI jest dokładnie tak samo.",
+      "Bez trwałej pamięci nawet najinteligentniejszy agent to tylko szum.",
+      "Prawdziwa inteligencja to nie potęga modelu — to jak dobrze cię zna.",
+      "Jesteś swoją pamięcią. Twój Agent również.",
+      "Brak pamięci. Brak tożsamości. Brak zaufania.",
+      "AI, które za każdym razem cię zapomina… nie jest twoim agentem.",
+      "Pamięć to różnica między narzędziem a prawdziwym agentem.",
+      "Pamięć on-chain. Tożsamość on-chain. Lojalność on-chain.",
+      "Najpotężniejszy agent to ten, który nigdy o tobie nie zapomina."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problem",
+    "title": "Nikt naprawdę nie uruchamia\n<i>AI on-chain.</i>",
+    "lead": "Każdy projekt, który twierdzi, że ma <s>„agenta AI on-chain”</s>, działa według tego samego schematu: wnioskowanie odbywa się poza łańcuchem, na scentralizowanych serwerach, a do blockchaina trafia tylko wynik. Model nigdy nie wykonuje się wewnątrz sieci. Łańcuch służy jako tablica ogłoszeń, a nie warstwa obliczeniowa.",
+    "leadStrong": "To nie jest agent on-chain. To wywołanie API z paragonem.",
+    "steps": [
+      {
+        "title": "Deklaracja",
+        "body": "„Agent on-chain napędzany przez AI”. Wnioskowanie odbywa się na AWS. Łańcuch przechowuje tylko wynik."
+      },
+      {
+        "title": "Luka",
+        "body": "Brak weryfikowalnego wykonania. Brak deterministycznego odtworzenia. Brak możliwości audytu tego, co model faktycznie obliczył."
+      },
+      {
+        "title": "Nasze podejście",
+        "body": "Pełne wnioskowanie wewnątrz kanistra. WASM SIMD, na Swiss Subnet. Weryfikowalne, odtwarzalne, naprawdę on-chain."
+      }
+    ],
+    "closing": "Już to udowodniliśmy. <s>Origyn</s> uruchamia dziś prawdziwe wnioskowanie on-chain. Jesteśmy obecnie w aktywnej fazie testów, sprawdzając odporność na różnych modelach i obciążeniach, by potwierdzić to, co już pokazują nasze benchmarki: to najbardziej niezawodny stos wnioskowania <s>AI on-chain</s>, jaki istnieje."
+  },
+  "agent": {
+    "eyebrow": "Agent",
+    "title": "Origyn.\nMinimalny <i>agent,</i> maksymalna <i>pamięć.</i>",
+    "lead": "Suwerenny agent AI działający on-chain. Jego pierwsza misja: Suwerenny Drugi Mózg. Mały model zasilany dekadami twojego ustrukturyzowanego kontekstu, certyfikowany na szwajcarskim blockchainie. Nie gigantyczny model on-chain. Skupiony agent z certyfikowanym sejfem.",
+    "cards": [
+      {
+        "title": "Po stronie użytkownika",
+        "subtitle": "Lokalne Biuro",
+        "body": "Maszyna użytkownika. Duże modele językowe, prywatne pliki, praca offline. Twoja inteligencja zostaje przy tobie."
+      },
+      {
+        "title": "Po stronie blockchaina",
+        "subtitle": "Sejf On-Chain",
+        "body": "Kanister. Certyfikowany sejf, weryfikowalne wnioskowanie, deterministyczne odtworzenie. Twój kontekst staje się dowodliwą infrastrukturą."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Sejf",
+    "title": "<i>Certyfikowany</i> z założenia.",
+    "lead": "Każda słabość rozwiązana u źródła. Nie obietnica. Protokół.",
+    "cards": [
+      {
+        "title": "Prawny dowód istnienia",
+        "body": "Znakowanie czasem certyfikowane przez blockchain. Dopuszczalne w sądzie, bez potrzeby notariusza."
+      },
+      {
+        "title": "Pełna proweniencja",
+        "body": "Kto utworzył, zmodyfikował, certyfikował każdy dokument. Niezmienny łańcuch identyfikowalności."
+      },
+      {
+        "title": "Wersjonowanie",
+        "body": "Każda wersja zachowana. Powrót do dowolnego momentu."
+      },
+      {
+        "title": "Kontrolowane udostępnianie",
+        "body": "Tylko do odczytu, ograniczone czasowo, odwoływalne jednym kliknięciem. Działa nawet offline."
+      },
+      {
+        "title": "Wyłącznik bezpieczeństwa",
+        "body": "Wyznaczeni spadkobiercy automatycznie odzyskują dostęp po określonym okresie bezczynności."
+      },
+      {
+        "title": "Niezmienny ślad audytowy",
+        "body": "Kto co widział, kiedy i dlaczego. Pełna zgodność regulacyjna wbudowana od podstaw."
+      },
+      {
+        "title": "Monitorowanie 24/7",
+        "body": "Kanister działa nawet wtedy, gdy twój komputer jest wyłączony. Automatyczne alerty o anomaliach."
+      },
+      {
+        "title": "Certyfikowane aktywa",
+        "body": "Tokenizowane złoto, nieruchomości, kolekcje. Certyfikaty proweniencji obok dziedzictwa poznawczego."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Nasze wyniki",
+    "title": "<i>Szybciej</i>\nniż dotychczas.",
+    "lead": "Te same modele, te same warunki, sieć produkcyjna. Różnicę robią nasze autorskie jądra WASM SIMD.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · sieć produkcyjna",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× szybciej niż istniejące wnioskowanie on-chain"
+    },
+    "body1": "Przy tym samym budżecie obliczeniowym Drugi Mózg napędzany naszym forkiem wykonuje trzy razy więcej pracy lub zużywa trzy razy mniej zasobów.",
+    "body2": [
+      "Nie jesteśmy przywiązani do żadnego pojedynczego modelu ani architektury. Każda nowa premiera to szansa.",
+      "Nieustannie testujemy i integrujemy najnowsze modele, by jeszcze bardziej podnieść szybkość, dokładność i wydajność."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Dotychczasowy",
+        "origyn": "ORIGYN AI",
+        "gain": "Zysk"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flota mikroekspertów",
+        "body": "Zamiast jednego powolnego dużego modelu wdrażamy wyspecjalizowane, dostrojone modele sub-1B parametrów: sortowanie e-maili, klasyfikacja dokumentów, ocena ryzyka. Szybsze i precyzyjniejsze niż generalista."
+      },
+      {
+        "title": "Destylacja on-chain",
+        "body": "Duży model uczy poza łańcuchem, mały model wdraża się on-chain. W połączeniu z kwantyzacją 4-bit i naszymi autorskimi jądrami WASM SIMD umożliwia to prawdziwe AI w ramach budżetu instrukcji kanistra."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Wizja",
+    "title": "Pięć filarów,\nktórych AI nie <i>zastąpi.</i>",
+    "lead": "AI utowarawia produkcję. Te pięć obszarów pozostaje. Origyn jest obecny w każdym z nich.",
+    "pillars": [
+      { "title": "Zaufanie", "description": "Certyfikacja Origyn — weryfikowalny sygnał zaufania." },
+      { "title": "Kontekst", "description": "Dekady ustrukturyzowanej pamięci — osobisty sygnał, którego AI nie dorówna." },
+      { "title": "Dystrybucja", "description": "Swiss Subnet — weryfikowalna infrastruktura dla agentów." },
+      { "title": "Gust", "description": "Pipeline automatycznych badań — kuracja wspierana automatyzacją." },
+      { "title": "Odpowiedzialność", "description": "Ślad audytowy i certyfikat — realna warstwa zarządzania." }
+    ]
+  },
+  "memory": {
+    "title": "Jesteś tym, co\n<i>wiesz</i> i <i>pamiętasz.</i>",
+    "subtitle": [
+      "Stracisz to — stracisz samego siebie. Z AI jest tak samo.",
+      "Bez trwałej pamięci on-chain twój agent nigdy naprawdę cię nie pozna."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Bądź blisko",
+    "title": "<i>Śledź</i> badania",
+    "lead": "Aktualizacje publikacji, kamienie milowe techniczne, postępy projektu. Bez marketingu. Tylko treść."
+  },
+  "language": {
+    "label": "Język",
+    "switchTo": "Przełącz na {language}"
+  }
+}

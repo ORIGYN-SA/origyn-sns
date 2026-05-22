@@ -3,7 +3,7 @@ const Card = ({ icon, title, subtitle, children, align = "center" }) => {
   return (
     <article
       className={`rounded-3xl border border-[#ececec] bg-surface px-10 py-10 ${
-        isLeft ? "text-left" : "text-center"
+        isLeft ? "text-start" : "text-center"
       }`}
     >
       {icon && (

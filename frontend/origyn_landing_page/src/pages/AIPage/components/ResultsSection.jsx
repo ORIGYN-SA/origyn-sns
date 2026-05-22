@@ -52,9 +52,13 @@ const ResultsSection = () => {
         <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_90%_65%_at_center,rgba(245,244,244,0.92),rgba(245,244,244,0)_70%)] md:bg-[radial-gradient(ellipse_55%_40%_at_center,rgba(245,244,244,0.95),rgba(245,244,244,0)_75%)]" />
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 px-6 text-center md:gap-8">
           <Eyebrow>{t("results.overlay.eyebrow")}</Eyebrow>
+          {/* before → after benchmark. In RTL the row mirrors (the "before"
+              value leads on the right) and the arrow flips to point left, so it
+              still reads "before improves to after". Each value stays LTR via
+              bidi (numbers + Latin unit), so "10 tok/call" never reverses. */}
           <div className="flex flex-col items-center gap-3 text-[clamp(2rem,5.5vw,4rem)] font-extralight leading-none tracking-tight md:flex-row md:gap-8">
             <span className="text-muted">{t("results.overlay.before")}</span>
-            <span className="inline-block rotate-90 font-normal italic text-ink md:rotate-0">→</span>
+            <span className="inline-block rotate-90 font-normal italic text-ink rtl:-scale-x-100 md:rotate-0">→</span>
             <span className="text-ink">{t("results.overlay.after")}</span>
           </div>
           <p className="max-w-[640px] text-[0.9375rem] font-extralight italic leading-[1.5] text-ink md:text-[1.0625rem]">
@@ -88,16 +92,16 @@ const ResultsSection = () => {
         >
           <thead>
             <tr className="border-b border-[#ececec]">
-              <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
+              <th className="py-4 text-start text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
                 <span className="text-gradient">{headers.model}</span>
               </th>
-              <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
+              <th className="py-4 text-start text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
                 <span className="text-gradient">{headers.existing}</span>
               </th>
-              <th className="py-4 text-left text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
+              <th className="py-4 text-start text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
                 <span className="text-gradient">{headers.origyn}</span>
               </th>
-              <th className="py-4 text-right text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
+              <th className="py-4 text-end text-[0.8125rem] font-normal uppercase tracking-[0.14em]">
                 <span className="text-gradient">{headers.gain}</span>
               </th>
             </tr>
@@ -108,7 +112,7 @@ const ResultsSection = () => {
                 <td className="py-6 text-ink">{row.model}</td>
                 <td className="py-6 text-muted">{row.existing}</td>
                 <td className="py-6 text-ink">{row.origyn}</td>
-                <td className="py-6 text-right font-medium text-ink">
+                <td className="py-6 text-end font-medium text-ink">
                   {row.gain}
                 </td>
               </tr>

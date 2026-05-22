@@ -2,15 +2,22 @@ import { defaultLocale, isLocale, locales, type Locale } from "./config";
 
 export const LOCALE_STORAGE_KEY = "origyn-ai-locale";
 
-// Match a single BCP 47 tag against our supported locales by primary subtag:
-// "fr-CH" -> "fr", "zh-Hans-CN" -> "zh". Adequate for a 5-locale set and avoids
-// pulling in @formatjs/intl-localematcher.
+// Case-insensitive lookup of our (case-sensitive) locale tags: "pt-br" -> "pt-BR".
+const byLowerTag = new Map<string, Locale>(
+  locales.map((l) => [l.toLowerCase(), l]),
+);
+
+// Match a single BCP 47 tag against our supported locales, preferring the most
+// specific match: full tag first ("pt-BR", "zh-TW"), then primary subtag
+// ("fr-CH" -> "fr", "zh-Hans-CN" -> "zh"). Avoids pulling in a locale matcher.
 const matchTag = (tag: string): Locale | null => {
   const normalized = tag.trim().toLowerCase();
   if (!normalized) return null;
-  if (isLocale(normalized)) return normalized;
-  const base = normalized.split("-")[0];
-  return (locales as readonly string[]).includes(base) ? (base as Locale) : null;
+  return (
+    byLowerTag.get(normalized) ??
+    byLowerTag.get(normalized.split("-")[0]) ??
+    null
+  );
 };
 
 const readStored = (): Locale | null => {

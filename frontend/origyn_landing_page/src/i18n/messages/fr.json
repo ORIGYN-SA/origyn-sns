@@ -176,13 +176,6 @@
   },
   "language": {
     "label": "Langue",
-    "switchTo": "Passer en {language}",
-    "names": {
-      "en": "EN",
-      "fr": "FR",
-      "de": "DE",
-      "it": "IT",
-      "zh": "中文"
-    }
+    "switchTo": "Passer en {language}"
   }
 }

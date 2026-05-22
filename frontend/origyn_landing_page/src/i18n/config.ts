@@ -2,15 +2,56 @@
 // catalog, lookup, and negotiation stay explicit and dependency-light. Mirrors
 // the structure of the bity-landing-page reference, adapted to a React SPA.
 
-export const locales = ["en", "fr", "de", "it", "zh"] as const;
+// The full set the bity-landing-page reference ships, kept in sync with it.
+// English first (default + fallback), then alphabetical by tag. Region-tagged
+// entries ("pt-BR", "zh-TW") sit next to their base language.
+export const locales = [
+  "en",
+  "ar",
+  "bg",
+  "bn",
+  "cs",
+  "da",
+  "de",
+  "el",
+  "es",
+  "fi",
+  "fr",
+  "he",
+  "hi",
+  "hr",
+  "hu",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "nl",
+  "no",
+  "pl",
+  "pt",
+  "pt-BR",
+  "ro",
+  "ru",
+  "sv",
+  "sw",
+  "th",
+  "tl",
+  "tr",
+  "uk",
+  "ur",
+  "vi",
+  "zh",
+  "zh-TW",
+] as const;
 
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "en";
 
-// Right-to-left scripts. None of the current locales are RTL, but keeping the
-// plumbing means adding ar/he/ur later is a catalog change, not a code change.
-const rtlLocales = new Set<Locale>([]);
+// Right-to-left scripts. Adding a locale here flips <html dir> (see useHtmlLang)
+// so the whole AI page mirrors; the components use logical Tailwind utilities
+// (ms/me, ps/pe, start/end, text-start/end) so the flip needs no per-locale CSS.
+const rtlLocales = new Set<Locale>(["ar", "he", "ur"]);
 
 export const isLocale = (value: unknown): value is Locale =>
   typeof value === "string" && (locales as readonly string[]).includes(value);

@@ -66,10 +66,14 @@ const SignupForm = () => {
         onSubmit={handleSubmit}
         aria-label={t("form.label")}
         noValidate
-        className="flex w-full max-w-[600px] flex-col items-stretch gap-2 rounded-3xl border border-hairline bg-surface p-2 sm:flex-row sm:items-center sm:rounded-full sm:py-1.5 sm:pl-7 sm:pr-1.5"
+        className="flex w-full max-w-[600px] flex-col items-stretch gap-2 rounded-3xl border border-hairline bg-surface p-2 sm:flex-row sm:items-center sm:rounded-full sm:py-1.5 sm:ps-7 sm:pe-1.5"
       >
+        {/* dir="ltr" keeps editing LTR so mid-typing values like "you@" aren't
+            bidi-reordered to "@you"; rtl:text-right still anchors the field to
+            the leading (right) edge on RTL pages. */}
         <input
           type="email"
+          dir="ltr"
           value={email}
           onChange={handleEmailChange}
           placeholder={t("form.placeholder")}
@@ -77,7 +81,7 @@ const SignupForm = () => {
           aria-describedby="signup-msg"
           autoComplete="email"
           required
-          className={`flex-1 border-0 bg-transparent py-3 text-base font-normal underline underline-offset-[6px] outline-none placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
+          className={`flex-1 border-0 bg-transparent py-3 text-base font-normal underline underline-offset-[6px] outline-none rtl:text-right placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
             isError
               ? "text-red-500 decoration-red-300"
               : "text-ink decoration-muted focus:decoration-navy"

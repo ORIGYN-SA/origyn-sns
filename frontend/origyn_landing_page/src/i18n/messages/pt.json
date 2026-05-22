@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Deslizar",
+  "hero": {
+    "title": "A impulsionar a inferência\nde <i>IA</i> on-chain.",
+    "subtitle": [
+      "I&D aberta sobre a execução de agentes de IA totalmente autónomos numa blockchain pública.",
+      "Sem atalhos fora da cadeia. Verificável por conceção."
+    ]
+  },
+  "form": {
+    "label": "Receber avisos",
+    "emailLabel": "Endereço de e-mail",
+    "placeholder": "tu@email.com",
+    "submit": "Receber avisos",
+    "submitting": "A enviar",
+    "invalid": "Introduza um e-mail válido.",
+    "success": "Subscrição confirmada. Entraremos em contacto.",
+    "error": "Algo correu mal. Tente novamente."
+  },
+  "marquee": {
+    "phrases": [
+      "És aquilo que sabes e recordas.",
+      "Perde isso e perdes-te a ti próprio.",
+      "A IA funciona exatamente da mesma forma.",
+      "Sem memória persistente, até o agente mais inteligente é apenas ruído.",
+      "A verdadeira inteligência não está na potência do modelo — está em quão bem ele te conhece.",
+      "És a tua memória. O teu agente também.",
+      "Sem memória. Sem identidade. Sem confiança.",
+      "Uma IA que te esquece a cada vez… não é o teu agente.",
+      "A memória é o que distingue uma ferramenta de um verdadeiro agente.",
+      "Memória on-chain. Identidade on-chain. Lealdade on-chain.",
+      "O agente mais poderoso é aquele que nunca te esquece."
+    ]
+  },
+  "problem": {
+    "eyebrow": "O problema",
+    "title": "Ninguém executa realmente\n<i>IA on-chain.</i>",
+    "lead": "Todos os projetos que afirmam ter um <s>«agente de IA on-chain»</s> seguem o mesmo padrão: a inferência corre fora da cadeia, em servidores centralizados, e apenas o resultado é publicado na blockchain. O modelo nunca é executado dentro da rede. A cadeia é usada como um quadro de avisos, e não como camada de computação.",
+    "leadStrong": "Isso não é um agente on-chain. É uma chamada a uma API com um recibo.",
+    "steps": [
+      {
+        "title": "A promessa",
+        "body": "«Agente on-chain alimentado por IA.» A inferência acontece na AWS. A cadeia apenas guarda o resultado."
+      },
+      {
+        "title": "A lacuna",
+        "body": "Sem execução verificável. Sem repetição determinista. Sem forma de auditar o que o modelo realmente calculou."
+      },
+      {
+        "title": "A nossa abordagem",
+        "body": "Inferência completa dentro do canister. WASM SIMD, na Swiss Subnet. Verificável, reproduzível, verdadeiramente on-chain."
+      }
+    ],
+    "closing": "Já o demonstrámos. A <s>Origyn</s> executa inferência real on-chain hoje. Estamos agora numa fase ativa de testes, a forçar a robustez ao limite em vários modelos e cargas de trabalho para confirmar o que os nossos benchmarks já demonstram: este é o stack de inferência de <s>IA on-chain</s> mais fiável que existe."
+  },
+  "agent": {
+    "eyebrow": "O agente",
+    "title": "Origyn.\n<i>Agente</i> mínimo, <i>memória</i> máxima.",
+    "lead": "Um agente de IA soberano a correr on-chain. A sua primeira missão: o Segundo Cérebro Soberano. Um modelo pequeno alimentado por décadas do teu contexto estruturado, certificado na blockchain suíça. Não um modelo gigante on-chain. Um agente focado com um cofre certificado.",
+    "cards": [
+      {
+        "title": "Lado do utilizador",
+        "subtitle": "Gabinete Local",
+        "body": "A máquina do utilizador. Grandes modelos de linguagem, ficheiros privados, trabalho offline. A tua inteligência fica contigo."
+      },
+      {
+        "title": "Lado da blockchain",
+        "subtitle": "Cofre On-Chain",
+        "body": "O canister. Cofre certificado, inferência verificável, repetição determinista. O teu contexto torna-se infraestrutura comprovável."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "O cofre",
+    "title": "<i>Certificado</i> de raiz.",
+    "lead": "Cada fragilidade resolvida na origem. Não uma promessa. Um protocolo.",
+    "cards": [
+      {
+        "title": "Prova legal de existência",
+        "body": "Selagem temporal certificada em blockchain. Admissível em tribunal, sem necessidade de notário."
+      },
+      {
+        "title": "Proveniência completa",
+        "body": "Quem criou, modificou e certificou cada documento. Cadeia de rastreabilidade imutável."
+      },
+      {
+        "title": "Versionamento",
+        "body": "Cada versão preservada. Reverte a qualquer momento."
+      },
+      {
+        "title": "Partilha controlada",
+        "body": "Apenas leitura, com limite de tempo, revogável num clique. Funciona mesmo offline."
+      },
+      {
+        "title": "Interruptor de homem morto",
+        "body": "Os herdeiros designados recuperam o acesso automaticamente após um período definido de inatividade."
+      },
+      {
+        "title": "Registo de auditoria imutável",
+        "body": "Quem viu o quê, quando e porquê. Conformidade regulatória total integrada."
+      },
+      {
+        "title": "Monitorização 24/7",
+        "body": "O canister continua a correr mesmo com o teu PC desligado. Alertas automáticos para anomalias."
+      },
+      {
+        "title": "Ativos certificados",
+        "body": "Ouro, imóveis e colecionáveis tokenizados. Certificados de proveniência ao lado do património cognitivo."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Os nossos resultados",
+    "title": "<i>Mais rápido</i>\ndo que o existente.",
+    "lead": "Mesmos modelos, mesmas condições, rede de produção. Os nossos kernels WASM SIMD personalizados fazem a diferença.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · rede de produção",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× mais rápido do que a inferência on-chain existente"
+    },
+    "body1": "Para o mesmo orçamento de computação, um Segundo Cérebro alimentado pelo nosso fork faz três vezes mais trabalho, ou consome três vezes menos recursos.",
+    "body2": [
+      "Não estamos presos a nenhum modelo ou arquitetura em particular. Cada nova versão é uma oportunidade.",
+      "Avaliamos e integramos continuamente os modelos mais recentes para levar a velocidade, a precisão e a eficiência ainda mais longe."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modelo",
+        "existing": "Existente",
+        "origyn": "ORIGYN AI",
+        "gain": "Ganho"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Frota de microespecialistas",
+        "body": "Em vez de um único modelo grande e lento, implementamos modelos de menos de mil milhões de parâmetros afinados por tarefa: ordenar e-mails, classificar documentos, avaliar risco. Mais rápidos e precisos do que um generalista."
+      },
+      {
+        "title": "Destilação on-chain",
+        "body": "Um modelo grande ensina fora da cadeia, um modelo pequeno é implementado on-chain. Combinado com quantização de 4-bit e os nossos kernels WASM SIMD personalizados, isto permite IA real dentro do orçamento de instruções de um canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visão",
+    "title": "Cinco pilares\nque a IA não pode <i>substituir.</i>",
+    "lead": "A IA torna a produção um bem comum. Estes cinco domínios permanecem. A Origyn está posicionada em cada um deles.",
+    "pillars": [
+      { "title": "Confiança", "description": "Certificação Origyn — um sinal de confiança verificável." },
+      { "title": "Contexto", "description": "Décadas de memória estruturada — um sinal pessoal que a IA não consegue igualar." },
+      { "title": "Distribuição", "description": "Swiss Subnet — infraestrutura verificável para agentes." },
+      { "title": "Critério", "description": "Pipeline de auto-investigação — curadoria assistida por automatização." },
+      { "title": "Responsabilidade", "description": "Registo de auditoria e certificado — uma verdadeira camada de governação." }
+    ]
+  },
+  "memory": {
+    "title": "És aquilo que\n<i>sabes</i> e <i>recordas.</i>",
+    "subtitle": [
+      "Perde isso e perdes-te a ti próprio. A IA funciona da mesma forma.",
+      "Sem memória on-chain persistente, o teu agente nunca te conhecerá verdadeiramente."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Fica por perto",
+    "title": "<i>Acompanha</i> a investigação",
+    "lead": "Atualizações do paper, marcos técnicos, progresso do projeto. Sem marketing. Apenas substância."
+  },
+  "language": {
+    "label": "Idioma",
+    "switchTo": "Mudar para {language}"
+  }
+}

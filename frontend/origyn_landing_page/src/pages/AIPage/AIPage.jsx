@@ -24,13 +24,16 @@ const AIPageBody = () => {
 
       <section className="flex min-h-screen flex-col">
         <header className="flex items-center justify-between px-8 pt-8 pb-10 md:px-16 md:pt-12 md:pb-0">
-          <div className="flex items-start">
+          {/* Brand lockup stays LTR even in RTL: the logo + "AI" badge are a
+              fixed wordmark, not flowing text. The header itself still flips,
+              so the lockup sits on the leading (right) edge under dir=rtl. */}
+          <div dir="ltr" className="flex items-start">
             <img
               src="/origyn-logo-blue.png"
               alt="Origyn"
               className="h-7 w-auto md:h-10"
             />
-            <span className="ml-1 font-mono text-[10px] italic tracking-[0.08em] text-[#263C85] md:text-[12px]">
+            <span className="ms-1 font-mono text-[10px] italic tracking-[0.08em] text-[#263C85] md:text-[12px]">
               {t("header.badge")}
             </span>
           </div>

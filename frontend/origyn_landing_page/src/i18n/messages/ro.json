@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Derulează",
+  "hero": {
+    "title": "Avansăm inferența\n<i>AI</i> on-chain.",
+    "subtitle": [
+      "Cercetare și dezvoltare deschisă privind rularea agenților AI pe deplin autonomi pe un blockchain public.",
+      "Fără scurtături în afara lanțului. Verificabil prin concepție."
+    ]
+  },
+  "form": {
+    "label": "Primește notificări",
+    "emailLabel": "Adresă de e-mail",
+    "placeholder": "tu@email.com",
+    "submit": "Primește notificări",
+    "submitting": "Se trimite",
+    "invalid": "Introdu o adresă de e-mail validă.",
+    "success": "Abonare confirmată. Te vom contacta.",
+    "error": "Ceva nu a mers bine. Încearcă din nou."
+  },
+  "marquee": {
+    "phrases": [
+      "Ești ceea ce știi și îți amintești.",
+      "Pierde asta și te pierzi pe tine însuți.",
+      "AI funcționează exact la fel.",
+      "Fără memorie persistentă, până și cel mai inteligent agent este doar zgomot.",
+      "Inteligența adevărată nu stă în cât de puternic este modelul — ci în cât de bine te cunoaște.",
+      "Ești memoria ta. La fel și agentul tău.",
+      "Fără memorie. Fără identitate. Fără încredere.",
+      "O inteligență artificială care te uită de fiecare dată… nu este agentul tău.",
+      "Memoria este diferența dintre o unealtă și un agent adevărat.",
+      "Memorie on-chain. Identitate on-chain. Loialitate on-chain.",
+      "Cel mai puternic agent este cel care nu te uită niciodată."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problema",
+    "title": "Nimeni nu rulează cu adevărat\n<i>AI on-chain.</i>",
+    "lead": "Fiecare proiect care pretinde că are un <s>„agent AI on-chain”</s> urmează același tipar: inferența rulează în afara lanțului, pe servere centralizate, iar pe blockchain este publicat doar rezultatul. Modelul nu se execută niciodată în interiorul rețelei. Lanțul este folosit ca un avizier, nu ca un strat de calcul.",
+    "leadStrong": "Acela nu este un agent on-chain. Este un apel de API cu o chitanță.",
+    "steps": [
+      {
+        "title": "Promisiunea",
+        "body": "„Agent on-chain alimentat de AI.” Inferența se întâmplă pe AWS. Lanțul stochează doar rezultatul."
+      },
+      {
+        "title": "Lipsa",
+        "body": "Fără execuție verificabilă. Fără reluare deterministă. Fără vreo modalitate de a audita ce a calculat de fapt modelul."
+      },
+      {
+        "title": "Abordarea noastră",
+        "body": "Inferență completă în interiorul canister-ului. WASM SIMD, pe Swiss Subnet. Verificabilă, reproductibilă, cu adevărat on-chain."
+      }
+    ],
+    "closing": "Am demonstrat deja acest lucru. <s>Origyn</s> rulează inferență reală on-chain chiar astăzi. Suntem acum într-o fază activă de testare, supunând robustețea unor teste de stres pe diverse modele și volume de lucru pentru a confirma ceea ce benchmark-urile noastre arată deja: acesta este cel mai fiabil stack de inferență <s>AI on-chain</s> care există."
+  },
+  "agent": {
+    "eyebrow": "Agentul",
+    "title": "Origyn.\n<i>Agent</i> minim, <i>memorie</i> maximă.",
+    "lead": "Un agent AI suveran care rulează on-chain. Prima sa misiune: Al Doilea Creier Suveran. Un model mic alimentat de zeci de ani din contextul tău structurat, certificat pe blockchain-ul elvețian. Nu un model uriaș on-chain. Un agent concentrat, cu un seif certificat.",
+    "cards": [
+      {
+        "title": "Partea utilizatorului",
+        "subtitle": "Birou Local",
+        "body": "Mașina utilizatorului. Modele lingvistice mari, fișiere private, lucru offline. Inteligența ta rămâne cu tine."
+      },
+      {
+        "title": "Partea blockchain",
+        "subtitle": "Seif On-Chain",
+        "body": "Canister-ul. Seif certificat, inferență verificabilă, reluare deterministă. Contextul tău devine infrastructură demonstrabilă."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Seiful",
+    "title": "<i>Certificat</i> prin construcție.",
+    "lead": "Fiecare fragilitate rezolvată din rădăcină. Nu o promisiune. Un protocol.",
+    "cards": [
+      {
+        "title": "Dovadă legală a existenței",
+        "body": "Marcaj temporal certificat pe blockchain. Admisibil în instanță, fără notar."
+      },
+      {
+        "title": "Proveniență completă",
+        "body": "Cine a creat, modificat și certificat fiecare document. Lanț de trasabilitate imuabil."
+      },
+      {
+        "title": "Versionare",
+        "body": "Fiecare versiune este păstrată. Revino oricând la o versiune anterioară."
+      },
+      {
+        "title": "Partajare controlată",
+        "body": "Doar citire, limitată în timp, revocabilă dintr-un singur clic. Funcționează chiar și offline."
+      },
+      {
+        "title": "Comutator pentru om mort",
+        "body": "Moștenitorii desemnați recuperează accesul automat după o perioadă definită de inactivitate."
+      },
+      {
+        "title": "Jurnal de audit imuabil",
+        "body": "Cine a văzut ce, când și de ce. Conformitate de reglementare completă, integrată."
+      },
+      {
+        "title": "Monitorizare 24/7",
+        "body": "Canister-ul rulează chiar și când PC-ul tău este oprit. Alerte automate pentru anomalii."
+      },
+      {
+        "title": "Active certificate",
+        "body": "Aur, imobiliare și obiecte de colecție tokenizate. Certificate de proveniență alături de patrimoniul cognitiv."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Rezultatele noastre",
+    "title": "<i>Mai rapid</i>\ndecât ce există.",
+    "lead": "Aceleași modele, aceleași condiții, rețea de producție. Kernel-urile noastre WASM SIMD personalizate fac diferența.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · rețea de producție",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× mai rapid decât inferența on-chain existentă"
+    },
+    "body1": "Pentru același buget de calcul, un Al Doilea Creier alimentat de fork-ul nostru face de trei ori mai multă muncă sau consumă de trei ori mai puține resurse.",
+    "body2": [
+      "Nu suntem legați de niciun model sau arhitectură anume. Fiecare nouă lansare este o oportunitate.",
+      "Evaluăm și integrăm continuu cele mai recente modele pentru a împinge mai departe viteza, acuratețea și eficiența."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Existent",
+        "origyn": "ORIGYN AI",
+        "gain": "Câștig"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flotă de micro-experți",
+        "body": "În loc de un singur model mare și lent, implementăm modele cu sub un miliard de parametri, ajustate pe sarcini specifice: sortarea e-mailurilor, clasificarea documentelor, evaluarea riscului. Mai rapide și mai precise decât un generalist."
+      },
+      {
+        "title": "Distilare on-chain",
+        "body": "Un model mare predă în afara lanțului, un model mic este implementat on-chain. Combinat cu cuantizare 4-bit și kernel-urile noastre WASM SIMD personalizate, acest lucru permite AI reală în limita bugetului de instrucțiuni al unui canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Viziune",
+    "title": "Cinci piloni\npe care AI nu îi poate <i>înlocui.</i>",
+    "lead": "AI transformă producția într-un bun de larg consum. Aceste cinci domenii rămân. Origyn este poziționat pe fiecare dintre ele.",
+    "pillars": [
+      { "title": "Încredere", "description": "Certificare Origyn — un semnal de încredere verificabil." },
+      { "title": "Context", "description": "Zeci de ani de memorie structurată — un semnal personal pe care AI nu îl poate egala." },
+      { "title": "Distribuție", "description": "Swiss Subnet — infrastructură verificabilă pentru agenți." },
+      { "title": "Gust", "description": "Pipeline de auto-cercetare — curatoriere asistată de automatizare." },
+      { "title": "Răspundere", "description": "Jurnal de audit și certificat — un strat real de guvernanță." }
+    ]
+  },
+  "memory": {
+    "title": "Ești ceea ce\n<i>știi</i> și <i>îți amintești.</i>",
+    "subtitle": [
+      "Pierde asta și te pierzi pe tine însuți. AI funcționează la fel.",
+      "Fără memorie on-chain persistentă, agentul tău nu te va cunoaște cu adevărat niciodată."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Rămâi aproape",
+    "title": "<i>Urmărește</i> cercetarea",
+    "lead": "Actualizări ale lucrării, repere tehnice, progresul proiectului. Fără marketing. Doar substanță."
+  },
+  "language": {
+    "label": "Limbă",
+    "switchTo": "Schimbă în {language}"
+  }
+}

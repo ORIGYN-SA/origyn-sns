@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Skrolla",
+  "hero": {
+    "title": "Driver\non-chain <i>AI</i>-inferens framåt.",
+    "subtitle": [
+      "Öppen FoU kring att köra fullt autonoma AI-agenter på en publik blockkedja.",
+      "Inga off-chain genvägar. Verifierbar genom design."
+    ]
+  },
+  "form": {
+    "label": "Få besked",
+    "emailLabel": "E-postadress",
+    "placeholder": "du@email.com",
+    "submit": "Få besked",
+    "submitting": "Skickar",
+    "invalid": "Ange en giltig e-postadress.",
+    "success": "Anmäld. Vi hör av oss.",
+    "error": "Något gick fel. Försök igen."
+  },
+  "marquee": {
+    "phrases": [
+      "Du är vad du vet och minns.",
+      "Förlora det, och du förlorar dig själv.",
+      "AI fungerar på exakt samma sätt.",
+      "Utan beständigt minne är även den smartaste agenten bara brus.",
+      "Sann intelligens handlar inte om hur kraftfull modellen är — utan om hur väl den känner dig.",
+      "Du är ditt minne. Det är din agent också.",
+      "Inget minne. Ingen identitet. Ingen tillit.",
+      "En AI som glömmer dig varje gång … är inte din agent.",
+      "Minne är skillnaden mellan ett verktyg och en sann agent.",
+      "On-chain minne. On-chain identitet. On-chain lojalitet.",
+      "Den mäktigaste agenten är den som aldrig glömmer dig."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problemet",
+    "title": "Ingen kör faktiskt\n<i>AI on-chain.</i>",
+    "lead": "Varje projekt som påstår sig ha en <s>“on-chain AI-agent”</s> följer samma mönster: inferensen körs off-chain, på centraliserade servrar, och bara resultatet läggs upp på blockkedjan. Modellen körs aldrig inuti nätverket. Kedjan används som anslagstavla, inte som beräkningslager.",
+    "leadStrong": "Det är inte en on-chain agent. Det är ett API-anrop med ett kvitto.",
+    "steps": [
+      {
+        "title": "Påståendet",
+        "body": "“AI-driven on-chain agent.” Inferensen sker på AWS. Kedjan lagrar bara utdata."
+      },
+      {
+        "title": "Glappet",
+        "body": "Ingen verifierbar exekvering. Ingen deterministisk återuppspelning. Inget sätt att granska vad modellen faktiskt beräknade."
+      },
+      {
+        "title": "Vår ansats",
+        "body": "Full inferens inuti canistern. WASM SIMD, på Swiss Subnet. Verifierbar, reproducerbar, äkta on-chain."
+      }
+    ],
+    "closing": "Vi har redan visat detta. <s>Origyn</s> kör äkta inferens on-chain i dag. Vi befinner oss nu i en aktiv testfas, där vi stresstestar robustheten över modeller och arbetslaster för att bekräfta vad våra benchmarks redan visar: detta är den mest tillförlitliga <s>on-chain AI</s>-inferensstack som finns."
+  },
+  "agent": {
+    "eyebrow": "Agenten",
+    "title": "Origyn.\nMinimal <i>agent,</i> maximalt <i>minne.</i>",
+    "lead": "En suverän AI-agent som körs on-chain. Dess första uppdrag: den Suveräna Andra Hjärnan. En liten modell matad med decennier av din strukturerade kontext, certifierad på den schweiziska blockkedjan. Inte en jättemodell on-chain. En fokuserad agent med ett certifierat valv.",
+    "cards": [
+      {
+        "title": "Användarsidan",
+        "subtitle": "Lokalt Kontor",
+        "body": "Användarens maskin. Stora språkmodeller, privata filer, arbete offline. Din intelligens stannar hos dig."
+      },
+      {
+        "title": "Blockkedjesidan",
+        "subtitle": "On-Chain Valv",
+        "body": "Canistern. Certifierat valv, verifierbar inferens, deterministisk återuppspelning. Din kontext blir bevisbar infrastruktur."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Valvet",
+    "title": "<i>Certifierat</i> i grunden.",
+    "lead": "Varje svaghet åtgärdad vid roten. Inte ett löfte. Ett protokoll.",
+    "cards": [
+      {
+        "title": "Juridiskt bevis på existens",
+        "body": "Blockkedjecertifierad tidsstämpling. Giltigt i domstol, ingen notarie krävs."
+      },
+      {
+        "title": "Full proveniens",
+        "body": "Vem som skapade, ändrade och certifierade varje dokument. Oföränderlig spårbarhetskedja."
+      },
+      {
+        "title": "Versionshantering",
+        "body": "Varje version bevarad. Återgå när som helst."
+      },
+      {
+        "title": "Kontrollerad delning",
+        "body": "Skrivskyddad, tidsbegränsad, återkallningsbar med ett klick. Fungerar även offline."
+      },
+      {
+        "title": "Dödmansgrepp",
+        "body": "Utsedda arvingar återfår automatiskt åtkomst efter en bestämd period av inaktivitet."
+      },
+      {
+        "title": "Oföränderligt granskningsspår",
+        "body": "Vem som såg vad, när och varför. Full regelefterlevnad inbyggd."
+      },
+      {
+        "title": "24/7 övervakning",
+        "body": "Canistern körs även när din dator är avstängd. Automatiska varningar vid avvikelser."
+      },
+      {
+        "title": "Certifierade tillgångar",
+        "body": "Tokeniserat guld, fastigheter, samlarobjekt. Proveniensintyg sida vid sida med kognitivt arv."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Våra resultat",
+    "title": "<i>Snabbare</i>\nän det befintliga.",
+    "lead": "Samma modeller, samma förhållanden, produktionsnätverk. Våra skräddarsydda WASM SIMD-kärnor gör skillnaden.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · produktionsnätverk",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× snabbare än befintlig on-chain inferens"
+    },
+    "body1": "Med samma beräkningsbudget utför en Andra Hjärna driven av vår fork tre gånger så mycket arbete, eller förbrukar tre gånger mindre resurser.",
+    "body2": [
+      "Vi är inte bundna till någon enskild modell eller arkitektur. Varje ny lansering är en möjlighet.",
+      "Vi benchmarkar och integrerar löpande de senaste modellerna för att driva hastighet, precision och effektivitet ännu längre."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modell",
+        "existing": "Befintlig",
+        "origyn": "ORIGYN AI",
+        "gain": "Vinst"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flotta av mikroexperter",
+        "body": "I stället för en enda långsam stor modell driftsätter vi uppgiftsspecifika, finjusterade modeller med sub-1B parametrar: sortera e-post, klassificera dokument, bedöma risk. Snabbare och mer precisa än en generalist."
+      },
+      {
+        "title": "On-chain destillation",
+        "body": "En stor modell undervisar off-chain, en liten modell driftsätts on-chain. Kombinerat med 4-bit kvantisering och våra skräddarsydda WASM SIMD-kärnor möjliggör detta äkta AI inom en canisters instruktionsbudget."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vision",
+    "title": "Fem pelare\nAI inte kan <i>ersätta.</i>",
+    "lead": "AI gör produktion till en handelsvara. Dessa fem domäner består. Origyn är positionerat på var och en av dem.",
+    "pillars": [
+      { "title": "Tillit", "description": "Origyn-certifiering — en verifierbar tillitssignal." },
+      { "title": "Kontext", "description": "Decennier av strukturerat minne — en personlig signal AI inte kan matcha." },
+      { "title": "Distribution", "description": "Swiss Subnet — verifierbar infrastruktur för agenter." },
+      { "title": "Smak", "description": "Auto-research-pipeline — automationsstödd kuratering." },
+      { "title": "Ansvar", "description": "Granskningsspår och certifikat — ett verkligt styrningslager." }
+    ]
+  },
+  "memory": {
+    "title": "Du är vad du\n<i>vet</i> och <i>minns.</i>",
+    "subtitle": [
+      "Förlora det, och du förlorar dig själv. AI fungerar på samma sätt.",
+      "Utan beständigt on-chain minne kommer din agent aldrig att verkligen känna dig."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Håll dig nära",
+    "title": "<i>Följ</i> forskningen",
+    "lead": "Uppdateringar om papers, tekniska milstolpar, projektets framsteg. Ingen marknadsföring. Bara substans."
+  },
+  "language": {
+    "label": "Språk",
+    "switchTo": "Byt till {language}"
+  }
+}
