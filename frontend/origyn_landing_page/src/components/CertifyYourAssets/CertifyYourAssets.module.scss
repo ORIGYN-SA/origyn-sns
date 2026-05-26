@@ -114,9 +114,9 @@
   }
 }
 
-// The shared calculator is full-width, so the contact box now sits centered
-// below it (rather than floating to the right of the older, narrower one).
-.contactBoxAbsolute {
+// The calculator is full-width, so the contact box sits centered below it
+// rather than floating to its right.
+.contactBox {
   padding: 16px 7px;
   max-width: 420px;
   width: 100%;

@@ -6,11 +6,12 @@ import {
   useState,
 } from "react";
 import clsx from "clsx";
-import Card from "./components/Card";
-import SkeletonOverlay from "./components/SkeletonOverlay";
-import StatCard from "./components/StatCard";
-import CardErrorOverlay from "./components/CardErrorOverlay";
-import { FAKE_STAT_VALUE, millify } from "./lib/format";
+import Card from "../ui/Card";
+import SkeletonOverlay from "../ui/SkeletonOverlay";
+import StatCard from "../ui/StatCard";
+import CardErrorOverlay from "../ui/CardErrorOverlay";
+import { FAKE_STAT_VALUE, millify } from "../lib/format";
+import { FONT_FAMILY } from "../lib/fonts";
 import { useMintCostEstimate } from "./hooks/useMintCostEstimate";
 
 type AssetQuality = "pdf" | "iphone" | "dslr" | "video" | "video1hr";
@@ -196,7 +197,7 @@ const NumberInput = ({
   </div>
 );
 
-const HeroOgyStat = ({
+const HeroUsdStat = ({
   value,
   loading,
 }: {
@@ -206,16 +207,8 @@ const HeroOgyStat = ({
   const displayValue = loading && value == null ? FAKE_STAT_VALUE : value;
   return (
     <div className="flex items-baseline min-w-0">
-      <img
-        src="/ogy_logo.svg"
-        alt=""
-        className="mr-3 h-10 w-10 shrink-0 self-center sm:h-12 sm:w-12"
-      />
       <span className="font-bold text-[44px] leading-none text-content truncate min-w-0 sm:text-[56px]">
         {displayValue}
-      </span>
-      <span className="ml-3 font-semibold text-[20px] leading-none text-muted shrink-0 sm:text-[24px]">
-        OGY
       </span>
     </div>
   );
@@ -253,7 +246,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
   const [assetQuality, setAssetQuality] = useState<AssetQuality>("pdf");
   const [customUnit, setCustomUnit] = useState<SizeUnit>("MB");
   const [inputs, setInputs] = useState<Inputs>({
-    numMints: "",
+    numMints: "1",
     customSize: "",
   });
 
@@ -325,7 +318,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
         // (header hidden) the host section provides its own spacing.
         showHeader && "py-8 sm:py-16"
       )}
-      style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+      style={{ fontFamily: FONT_FAMILY }}
     >
       <div className="flex flex-col items-center">
         {showHeader && (
@@ -477,11 +470,11 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                   <div className="relative">
                     <SkeletonOverlay loading={showSkeleton}>
                       <div className="flex flex-col gap-6">
-                        <HeroOgyStat
+                        <HeroUsdStat
                           value={
                             estimate
-                              ? formatOgyCompact(estimate.total_ogy_e8s)
-                              : "0.00"
+                              ? formatUsdCompact(estimate.total_usd_e8s)
+                              : "$0.00"
                           }
                           loading={showSkeleton}
                         />
@@ -492,12 +485,20 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                         )}
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                           <StatCard
-                            title="USD equivalent"
+                            title="OGY equivalent"
+                            accessory={
+                              <img
+                                src="/ogy_logo.svg"
+                                alt=""
+                                className="h-5 w-5 shrink-0"
+                              />
+                            }
                             value={
                               estimate
-                                ? formatUsdCompact(estimate.total_usd_e8s)
-                                : "$0.00"
+                                ? formatOgyCompact(estimate.total_ogy_e8s)
+                                : "0.00"
                             }
+                            unit="OGY"
                             loading={showSkeleton}
                           />
                           <StatCard

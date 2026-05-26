@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import AreaChart from "@components/charts/shadcn/AreaChart";
-import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
-import { FAKE_AREA_SERIES } from "@helpers/skeleton/fakeData";
-import CardErrorOverlay from "./CardErrorOverlay";
+import { FONT_FAMILY } from "../lib/fonts";
+import { Card, TooltipInfo, SkeletonOverlay } from "../ui";
+import CardErrorOverlay from "../ui/CardErrorOverlay";
+import Stat from "../ui/Stat";
+import AreaChart from "./AreaChart";
 import CardHeader from "./CardHeader";
 import ChartEmptyState from "./ChartEmptyState";
 import PeriodSelect from "./PeriodSelect";
-import Stat from "./Stat";
+import { FAKE_AREA_SERIES } from "./fakeData";
 
 type PeriodOption = { value: string; label: string };
 
@@ -54,7 +55,10 @@ const AreaStatCard = ({
   const isEmpty = !showSkeleton && (!chartData || chartData.length === 0);
   return (
     <SkeletonOverlay loading={showSkeleton}>
-      <Card className={`flex flex-col ${className ?? ""}`}>
+      <Card
+        className={`flex flex-col ${className ?? ""}`}
+        style={{ fontFamily: FONT_FAMILY }}
+      >
         <CardHeader
           title={title}
           tooltip={

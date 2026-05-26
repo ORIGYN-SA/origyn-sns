@@ -27,7 +27,7 @@ const CertifyYourAssets = ({ id }) => {
         <div className={styles.gradientBackground} />
         <div className={styles.calculatorInner}>
           <Calculator showHeader={false} />
-          <div className={styles.contactBoxAbsolute}>
+          <div className={styles.contactBox}>
             <div className={styles.contactText}>
               To certify your assets get in touch with us:
             </div>

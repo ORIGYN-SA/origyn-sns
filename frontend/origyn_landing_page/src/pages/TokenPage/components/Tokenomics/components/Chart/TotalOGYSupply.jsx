@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { AreaStatCard } from "@origyn/shared/charts";
 import useTotalOGYSupply from "@/hooks/useTotalOGYSupply";
-import TimeSeriesChart from "./TimeSeriesChart";
 
 const PERIOD_OPTIONS = [
   { value: "daily", label: "Daily" },
@@ -9,39 +9,37 @@ const PERIOD_OPTIONS = [
   { value: "yearly", label: "Yearly" },
 ];
 
-const HEADER_TOOLTIP = {
-  id: "tooltip-total-ogy-supply",
-  content: (
-    <>
-      <p>
-        Total amount of OGY tokens available. This includes the circulating
-        supply and the supply under control of the ORIGYN Foundation.
-      </p>
-      <p>
-        As of 18 September, ORIGYN switched to a fully deflationary model,
-        which means no more new tokens are minted.
-      </p>
-    </>
-  ),
-};
-
 const TotalOGYSupply = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const { data, loading, error } = useTotalOGYSupply({ period: selectedPeriod });
 
   return (
-    <TimeSeriesChart
+    <AreaStatCard
+      className="w-full"
       title="Total OGY Supply"
-      headerTooltip={HEADER_TOOLTIP}
-      totalLabel="Current Total Supply"
-      totalValue={data?.totalSupplyOGYToString ?? null}
-      chartData={data?.totalSupplyOGYTimeSeries ?? null}
-      fill="#38bdf8"
+      tooltipId="tooltip-total-ogy-supply"
+      tooltipTitle="Total amount of OGY tokens available."
+      tooltipContent={
+        <>
+          <p>
+            This includes the circulating supply and the supply under control of
+            the ORIGYN Foundation.
+          </p>
+          <p>
+            As of 18th September, ORIGYN switched to fully deflationary model
+            which means no more new minted tokens.
+          </p>
+        </>
+      }
+      value={data?.totalSupplyOGYToString}
+      periodOptions={PERIOD_OPTIONS}
+      period={selectedPeriod}
+      onPeriodChange={setSelectedPeriod}
+      chartData={data?.totalSupplyOGYTimeSeries}
+      chartColor="#38bdf8"
+      chartLabel="Total Supply"
       loading={loading}
       error={error}
-      periodOptions={PERIOD_OPTIONS}
-      selectedPeriod={selectedPeriod}
-      onPeriodChange={setSelectedPeriod}
     />
   );
 };

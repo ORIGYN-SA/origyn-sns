@@ -1,4 +1,4 @@
-// Tailwind preset exposing the design tokens the shared calculator relies on.
+// Tailwind preset exposing the design tokens the shared components rely on.
 // The color values are driven by CSS variables (see tokens.css) so the same
 // utility classes (text-content, bg-surface, text-muted, etc.) resolve in
 // both the dashboard and the landing page. Mirrors ogy_dashboard/theme/preset.ts.
