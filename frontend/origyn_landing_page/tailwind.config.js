@@ -1,14 +1,24 @@
+import sharedPreset from "../shared/tailwind-preset";
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  // The shared calculator's design tokens (content/surface{,-2,-faint}/border/
+  // muted) come from this preset, backed by the CSS variables in
+  // shared/src/tokens.css (imported in main.jsx). Its light-mode values
+  // match the landing's previous `surface`/`muted` hex, so existing usages are
+  // unchanged while the calculator gains the extra surface/border shades.
+  presets: [sharedPreset],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "../shared/src/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
         ink: "#222526",
-        muted: "#69737c",
         navy: "#061937",
         canvas: "#f5f4f4",
-        surface: "#ffffff",
         hairline: "#e8e8e8",
       },
       fontFamily: {

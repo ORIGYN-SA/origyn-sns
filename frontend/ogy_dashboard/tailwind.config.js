@@ -8,6 +8,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "../shared/src/**/*.{ts,tsx}",
   ],
   plugins: [forms],
 };

@@ -16,9 +16,8 @@
   },
   "dependencies": {
     "@dfinity/agent": "^2.4.1",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/material": "^7.0.2",
+    "@dfinity/principal": "^2.4.1",
+    "@origyn/shared": "*",
     "@tanstack/react-query": "^5.74.4",
     "gsap": "^3.12.7",
     "motion": "^12.38.0",

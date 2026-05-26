@@ -3,6 +3,7 @@
   "description": "ORIGYN monorepo for canisters related to the SNS",
   "author": "ORIGYN",
   "workspaces": [
+    "frontend/shared",
     "frontend/ogy_dashboard",
     "frontend/origyn_landing_page"
   ],

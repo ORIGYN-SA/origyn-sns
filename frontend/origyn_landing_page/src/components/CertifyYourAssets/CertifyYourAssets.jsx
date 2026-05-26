@@ -1,5 +1,5 @@
 import React from "react";
-import Calculator from "@components/Calculator/Calculator";
+import { Calculator } from "@origyn/shared/calculator";
 import styles from "./CertifyYourAssets.module.scss";
 import Button from "@components/Button/Button";
 
@@ -26,7 +26,7 @@ const CertifyYourAssets = ({ id }) => {
       <div className={styles.calculatorWrapper}>
         <div className={styles.gradientBackground} />
         <div className={styles.calculatorInner}>
-          <Calculator />
+          <Calculator showHeader={false} />
           <div className={styles.contactBoxAbsolute}>
             <div className={styles.contactText}>
               To certify your assets get in touch with us:
