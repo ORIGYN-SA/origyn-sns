@@ -19,6 +19,13 @@ $[[ inputs.src-folder ]] staging deploy:
   stage: deploy
   resource_group: staging
   rules:
+    # Targeted reinstall: deploy only the canister named by REINSTALL_STAGING (or
+    # "all"), regardless of changed files. Guarded to non-tag pipelines so it can
+    # never run on a production release tag.
+    - if: ($REINSTALL_STAGING == "$[[ inputs.src-folder ]]" || $REINSTALL_STAGING == "all") && $CI_COMMIT_TAG == null
+    # A reinstall is targeted at a different canister: skip this deploy entirely.
+    - if: $REINSTALL_STAGING
+      when: never
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event" # deployment when merged to develop
       changes:
         - "backend/canisters/$[[ inputs.src-folder ]]/**/*.{rs,toml,lock,md,did,wasm,gz}"
@@ -35,8 +42,9 @@ $[[ inputs.src-folder ]] staging deploy:
     PEM_FILE: "${PEM_FILE_STAGING}"
     # To wipe state and reinstall instead of upgrade on staging, run a pipeline
     # with the CI/CD variable REINSTALL_STAGING set to this canister's name
-    # (e.g. "token_metrics") or to "all". This is ignored by the production (ic)
-    # deploy job, which only reinstalls via a "<canister>-vX.Y.Z-reinstall" tag.
+    # (e.g. "token_metrics") or to "all". Only the named canister(s) build and
+    # deploy; all other canisters are skipped (see the rules above). Production
+    # (ic) is never affected: it reinstalls only via a "<canister>-vX.Y.Z-reinstall" tag.
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
