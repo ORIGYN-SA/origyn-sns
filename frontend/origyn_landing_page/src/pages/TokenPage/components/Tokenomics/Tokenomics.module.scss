@@ -73,7 +73,6 @@
     overflow: hidden;
     touch-action: pan-y pinch-zoom;
     border-radius: 16px;
-    border: 1px solid $bg-light;
   }
 
   .sliderTrack {
@@ -81,9 +80,16 @@
     will-change: transform;
   }
 
+  // Slides share the height of the tallest card; center each card so shorter
+  // ones sit centered instead of stretched.
   .sliderSlide {
     width: 100%;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    box-sizing: border-box;
   }
 
   .dotsContainer {

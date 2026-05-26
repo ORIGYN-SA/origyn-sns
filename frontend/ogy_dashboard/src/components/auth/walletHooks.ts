@@ -61,12 +61,12 @@ export const usePlugSilentReconnect = ({
 
 export const useRememberDfinityAsLastWallet = ({
   user,
-  hasPlugSession,
+  hasExternalSession,
   readLastWallet,
   writeLastWallet,
 }: {
   user: unknown;
-  hasPlugSession: boolean;
+  hasExternalSession: boolean;
   readLastWallet: () => string | null;
   writeLastWallet: (id: "dfinity") => void;
 }) => {
@@ -76,8 +76,8 @@ export const useRememberDfinityAsLastWallet = ({
   writeRef.current = writeLastWallet;
 
   useEffect(() => {
-    if (user && !hasPlugSession && !readRef.current()) {
+    if (user && !hasExternalSession && !readRef.current()) {
       writeRef.current("dfinity");
     }
-  }, [user, hasPlugSession]);
+  }, [user, hasExternalSession]);
 };

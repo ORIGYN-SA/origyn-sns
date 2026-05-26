@@ -1,14 +1,15 @@
 spec:
   inputs:
     src-folder:
-      description: The NextJS project folder. Must be located in the /frontend/ folder
+      description: The frontend workspace folder. Must be located in the /frontend/ folder
       options:
         [
         "ogy_dashboard",
-        "origyn_landing_page"
+        "origyn_landing_page",
+        "shared"
         ]
 ---
-# Front-end (NextJS) linter job template
+# Front-end linter job template
 
 $[[ inputs.src-folder ]] linter:
   stage: lint
@@ -28,4 +29,6 @@ $[[ inputs.src-folder ]] linter:
         - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   extends: .node template
   script:
-    - npm run --workspace $[[ inputs.src-folder ]] lint
+    # Resolve by workspace path so it works regardless of the package name
+    # (e.g. the "shared" folder is the @origyn/shared package).
+    - npm run --workspace frontend/$[[ inputs.src-folder ]] lint

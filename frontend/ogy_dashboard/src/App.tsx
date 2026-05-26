@@ -15,7 +15,10 @@ import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
-import { Explorer } from "@pages/explorer/Explorer";
+// NOTE: NFT viewer (Explorer page) intentionally not routed yet — kept in the
+// codebase but disabled. Re-enable by importing `Explorer` from
+// "@pages/explorer/Explorer" and pointing the "explorer" route at it.
+import { TransactionHistory } from "@pages/transaction-history/TransactionHistory";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
 import TransactionsAccountHistory from "@pages/transactions-accounts-history";
@@ -132,7 +135,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Explorer />,
+            element: <TransactionHistory />,
           },
           {
             path: "transactions",

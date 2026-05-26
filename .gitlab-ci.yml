@@ -36,6 +36,9 @@ include:
   - local: scripts/ci-cd/.frontend_linter.yml
     inputs:
       src-folder: origyn_landing_page
+  - local: scripts/ci-cd/.frontend_linter.yml
+    inputs:
+      src-folder: shared
 
 ################################################################################
 # Unit Tests

@@ -1,8 +1,11 @@
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { MINTING_STUDIO_CANISTER_ID } from "@constants/index";
-import { idlFactory } from "@services/candid/minting_studio";
+import { idlFactory } from "../services/minting_studio";
+
+// Mainnet Minting Studio canister. Apps may override via the Calculator's
+// `canisterId` prop (e.g. the dashboard passes its env-configured value).
+export const DEFAULT_MINTING_STUDIO_CANISTER_ID = "uasjq-dyaaa-aaaas-qdwka-cai";
 
 export type MintCostEstimate = {
   breakdown: {
@@ -36,10 +39,20 @@ const agent = new HttpAgent({
   host: "https://icp-api.io",
 });
 
-const mintingStudioActor = Actor.createActor(idlFactory, {
-  agent,
-  canisterId: Principal.fromText(MINTING_STUDIO_CANISTER_ID),
-}) as unknown as MintingStudioActor;
+// Cache one actor per canister id so we don't rebuild it on every render.
+const actorCache = new Map<string, MintingStudioActor>();
+
+const getActor = (canisterId: string): MintingStudioActor => {
+  const cached = actorCache.get(canisterId);
+  if (cached) return cached;
+
+  const actor = Actor.createActor(idlFactory, {
+    agent,
+    canisterId: Principal.fromText(canisterId),
+  }) as unknown as MintingStudioActor;
+  actorCache.set(canisterId, actor);
+  return actor;
+};
 
 const describeEstimateError = (
   error: { MintPricingNotConfigured: null } | { OgyPriceNotAvailable: null }
@@ -51,10 +64,14 @@ const describeEstimateError = (
   return "OGY price is temporarily unavailable. Try again in a moment.";
 };
 
-export const useMintCostEstimate = (args: EstimateMintCostArgs | null) => {
+export const useMintCostEstimate = (
+  args: EstimateMintCostArgs | null,
+  canisterId: string = DEFAULT_MINTING_STUDIO_CANISTER_ID
+) => {
   return useQuery({
     queryKey: [
       "mint-cost-estimate",
+      canisterId,
       args?.numMints.toString() ?? "0",
       args?.totalFileSizeBytes.toString() ?? "0",
     ],
@@ -67,7 +84,7 @@ export const useMintCostEstimate = (args: EstimateMintCostArgs | null) => {
         throw new Error("Estimate arguments are required.");
       }
 
-      const result = await mintingStudioActor.estimate_mint_cost({
+      const result = await getActor(canisterId).estimate_mint_cost({
         num_mints: args.numMints,
         total_file_size_bytes: args.totalFileSizeBytes,
       });

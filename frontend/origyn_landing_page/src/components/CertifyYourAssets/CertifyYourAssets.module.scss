@@ -33,13 +33,12 @@
 
 .calculatorInner {
   position: relative;
-
-  @media (max-width: $bp-xl) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // Children stretch to full width (default) so the calculator fills the
+  // section like it does on the dashboard; the contact box centers itself.
+  gap: 24px;
 }
 
 .gradientBackground {
@@ -115,33 +114,21 @@
   }
 }
 
-.contactBoxAbsolute {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-left: 40px;
-  transform: translateY(-50%);
+// The calculator is full-width, so the contact box sits centered below it
+// rather than floating to its right.
+.contactBox {
   padding: 16px 7px;
-  min-width: 260px;
-  max-width: 320px;
+  max-width: 420px;
+  width: 100%;
+  align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   z-index: 2;
-  width: 190px;
-
-  @media (max-width: $bp-xl) {
-    position: static;
-    transform: none;
-    margin-left: 0;
-    width: 100%;
-    max-width: 100%;
-  }
 
   @media (max-width: $bp-md) {
     order: 3;
-    width: 100%;
     max-width: 100%;
     margin-top: 0;
   }

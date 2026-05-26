@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.36] - 2026-05-27
+
+#### Added
+
+- Add shared library
+
+### [1.0.35] - 2026-05-26
+
+#### Changed
+
+- Reworked the OISY wallet login to fix an upstream connection issue.
+- Removed the ledger switch warning banner.
+- Improved the support page.
+
 ### [1.0.34] - 2026-01-19
 
 #### Changed

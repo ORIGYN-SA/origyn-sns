@@ -33,6 +33,11 @@ if [[ $DEPLOYMENT_VIA == "direct" || $NETWORK != "ic" ]]; then
       --argument "$ARGUMENTS" \
       --wasm backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \
       -y
+
+    # install_code preserves the canister's running status, so ensure it is
+    # running afterwards (a previously stopped canister stays stopped otherwise).
+    echo "Attemping to start canister $CANISTER";
+    dfx canister start $CANISTER --network $NETWORK;
   else
     echo "Upgrading $CANISTER directly via dfx with arguments: $ARGUMENTS"
 
