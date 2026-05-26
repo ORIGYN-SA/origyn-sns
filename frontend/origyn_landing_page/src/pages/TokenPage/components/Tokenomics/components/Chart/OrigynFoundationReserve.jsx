@@ -1,18 +1,14 @@
+import { PieStatsCard } from "@origyn/shared/charts";
+import { TooltipInfo } from "@origyn/shared/ui";
 import useFoundationReserve from "@/hooks/useFoundationReserve";
-import Chart from "./Chart";
 
 const COLORS = ["#ff55c5", "#90306f"];
-
-const HEADER_TOOLTIP = {
-  id: "tooltip-amount-foundation",
-  content:
-    "Total amount of OGY tokens owned by ORIGYN foundation across all wallets.",
-};
 
 const INFOS = [
   {
     id: "tooltip-amount-locked",
-    content: (
+    name: "Locked",
+    value: (
       <div>
         <p>ORIGYN foundation tokens locked in stakes or vestings.</p>
         <br />
@@ -34,7 +30,8 @@ const INFOS = [
   },
   {
     id: "tooltip-amount-unlocked",
-    content: "Unlocked funds owned by ORIGYN foundation.",
+    name: "Unlocked",
+    value: "Unlocked funds owned by ORIGYN foundation.",
   },
 ];
 
@@ -42,16 +39,22 @@ const OrigynFoundationReserve = () => {
   const { data, loading, error } = useFoundationReserve();
 
   return (
-    <Chart
+    <PieStatsCard
+      className="w-full"
       title="OGY Foundation Reserve"
+      titleTooltip={
+        <TooltipInfo id="tooltip-amount-foundation">
+          Total amount of OGY tokens owned by ORIGYN foundation across all
+          wallets.
+        </TooltipInfo>
+      }
+      data={data?.dataPieChart}
       colors={COLORS}
-      headerTooltip={HEADER_TOOLTIP}
-      totalLabel="Total Foundation Supply"
-      totalValue={data?.string.totalSupply ?? null}
-      chartData={data?.dataPieChart ?? null}
       infos={INFOS}
+      totalLabel="Total Foundation Supply"
+      totalValue={data?.string.totalSupply}
       loading={loading}
-      error={error}
+      isError={!!error}
     />
   );
 };

@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
-import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
-import PieChart, { PieChartData } from "@components/charts/pie/Pie";
-import { usePieChart } from "@components/charts/pie/context";
-import { FAKE_PIE_SERIES, FAKE_STAT_VALUE } from "@helpers/skeleton/fakeData";
-import CardErrorOverlay from "./CardErrorOverlay";
+import { FONT_FAMILY } from "../lib/fonts";
+import { Card, TooltipInfo, SkeletonOverlay } from "../ui";
+import CardErrorOverlay from "../ui/CardErrorOverlay";
+import Stat from "../ui/Stat";
+import StatCard from "../ui/StatCard";
+import PieChart, { PieChartData } from "./Pie";
+import { PieChartProvider, usePieChart } from "./context";
+import { FAKE_PIE_SERIES } from "./fakeData";
+import { FAKE_STAT_VALUE } from "../lib/format";
 import ChartEmptyState from "./ChartEmptyState";
-import Stat from "./Stat";
-import StatCard from "./StatCard";
 
 type SegmentInfo = {
   id: string;
@@ -28,7 +30,7 @@ type PieStatsCardProps = {
   layout?: "vertical" | "horizontal";
 };
 
-const PieStatsCard = ({
+const PieStatsCardInner = ({
   title,
   titleTooltip,
   data,
@@ -100,7 +102,7 @@ const PieStatsCard = ({
 
   return (
     <SkeletonOverlay loading={showSkeleton}>
-      <Card className={className}>
+      <Card className={className} style={{ fontFamily: FONT_FAMILY }}>
         {hasError && <CardErrorOverlay title={title} />}
         <div data-skel-static className="flex items-center justify-between">
           <div className="text-content text-[22px] font-semibold leading-none">
@@ -131,5 +133,13 @@ const PieStatsCard = ({
     </SkeletonOverlay>
   );
 };
+
+// Self-wraps the pie hover-state provider so the card is drop-in anywhere
+// (the dashboard previously supplied PieChartProvider at the page level).
+const PieStatsCard = (props: PieStatsCardProps) => (
+  <PieChartProvider>
+    <PieStatsCardInner {...props} />
+  </PieChartProvider>
+);
 
 export default PieStatsCard;
