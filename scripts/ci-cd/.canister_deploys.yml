@@ -33,6 +33,10 @@ $[[ inputs.src-folder ]] staging deploy:
   variables:
     TARGET_NETWORK: staging
     PEM_FILE: "${PEM_FILE_STAGING}"
+    # To wipe state and reinstall instead of upgrade on staging, run a pipeline
+    # with the CI/CD variable REINSTALL_STAGING set to this canister's name
+    # (e.g. "token_metrics") or to "all". This is ignored by the production (ic)
+    # deploy job, which only reinstalls via a "<canister>-vX.Y.Z-reinstall" tag.
   before_script:
     - !reference [.import dfx identity, before_script]
   script:
