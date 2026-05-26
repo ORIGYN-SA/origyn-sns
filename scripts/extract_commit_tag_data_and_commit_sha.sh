@@ -32,6 +32,17 @@ if [[ -n $CI_COMMIT_TAG && $NETWORK == "ic" ]]; then
 else
 	VERSION="_STAGINGTEST_"
 	BUILD_VERSION="record { major = 0:nat32; minor = 0:nat32; patch = 0:nat32 }"
+
+	# Opt-in reinstall for non-production networks only (staging/local).
+	# Set the CI/CD variable REINSTALL_STAGING to this canister's name (e.g.
+	# "token_metrics") or to "all" to wipe state and reinstall instead of upgrade.
+	# Production (ic) takes the tagged branch above and never reaches here; the
+	# network guard is belt-and-suspenders so this can never apply to ic.
+	if [[ $NETWORK =~ ^(local|staging)$ && -n $REINSTALL_STAGING ]] &&
+		[[ $REINSTALL_STAGING == "$CANISTER_NAME" || $REINSTALL_STAGING == "all" ]]; then
+		REINSTALL="reinstall"
+		echo "REINSTALL_STAGING matched $CANISTER_NAME: deploying with --mode reinstall on $NETWORK (state will be wiped)."
+	fi
 fi
 
 if [[ -n $CI_COMMIT_SHORT_SHA ]]; then
