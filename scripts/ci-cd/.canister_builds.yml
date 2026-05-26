@@ -18,8 +18,8 @@ $[[ inputs.src-folder ]] staging build:
   extends: .rust template
   stage: build
   rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
-      when: never
+    # - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
+    #   when: never
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "backend/canisters/$[[ inputs.src-folder ]]/**/*.{rs,toml,lock,md,did,wasm,gz}"
