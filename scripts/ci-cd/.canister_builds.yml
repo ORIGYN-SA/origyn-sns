@@ -18,6 +18,13 @@ $[[ inputs.src-folder ]] staging build:
   extends: .rust template
   stage: build
   rules:
+    # Targeted reinstall: build only the canister named by REINSTALL_STAGING (or
+    # "all"), regardless of changed files, so a single canister can be reinstalled
+    # on staging without rebuilding everything. Guarded to non-tag pipelines.
+    - if: ($REINSTALL_STAGING == "$[[ inputs.src-folder ]]" || $REINSTALL_STAGING == "all") && $CI_COMMIT_TAG == null
+    # A reinstall is targeted at a different canister: skip this build entirely.
+    - if: $REINSTALL_STAGING
+      when: never
     # - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
     #   when: never
     - if: $CI_COMMIT_REF_NAME == "develop"
