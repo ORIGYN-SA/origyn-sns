@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Button, InputField, Card, PageHeader } from "@components/ui";
-import { toast } from "react-hot-toast";
 import { Principal } from "@dfinity/principal";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useCreateSupportTicket, {
@@ -27,7 +26,13 @@ const Field = ({
 const Support = () => {
   const mutation = useCreateSupportTicket();
 
-  const { isSuccess, isPending, reset: resetMutation } = mutation;
+  const {
+    isSuccess,
+    isPending,
+    isError,
+    error,
+    reset: resetMutation,
+  } = mutation;
 
   const isValidRecipientAddress = (value: string) => {
     try {
@@ -49,14 +54,7 @@ const Support = () => {
   });
 
   const onSubmit: SubmitHandler<supportRequestProps> = (data) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        toast.success("Support ticket was created");
-      },
-      onError: (error) => {
-        toast.error(error?.message || "Error");
-      },
-    });
+    mutation.mutate(data);
   };
 
   const handleCreateAnother = () => {
@@ -114,7 +112,7 @@ const Support = () => {
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="mt-6 flex flex-col gap-5"
+                className="mt-6 flex flex-col gap-4"
               >
                 <Field label="Name" htmlFor="name">
                   <InputField
@@ -172,13 +170,25 @@ const Support = () => {
                   )}
                 </Field>
 
-                <Button
-                  type="submit"
-                  className="mt-2 w-full !px-[25px] !py-0 text-[14px] leading-[48px]"
-                  disabled={!isValid || isPending}
-                >
-                  {isPending ? "Submitting…" : "Submit"}
-                </Button>
+                <div className="flex flex-col gap-2">
+                  {isError && (
+                    <p
+                      role="alert"
+                      className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400"
+                    >
+                      {error?.message ||
+                        "Something went wrong. Please try again."}
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    className="w-full !px-[25px] !py-0 text-[14px] leading-[48px]"
+                    disabled={!isValid || isPending}
+                  >
+                    {isPending ? "Submitting…" : "Submit"}
+                  </Button>
+                </div>
               </form>
             </>
           )}

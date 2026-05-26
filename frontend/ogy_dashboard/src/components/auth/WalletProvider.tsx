@@ -17,6 +17,7 @@ import {
   setAuthedAgent,
   whitelistedCanisterIds,
 } from "@services/actor";
+import { connectOisy, disconnectOisy, type OisySession } from "./oisy";
 import { connectPlug, disconnectPlug } from "./plug";
 import {
   usePlugSilentReconnect,
@@ -119,21 +120,24 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [listOpen, setListOpen] = useState(false);
   const [pending, setPending] = useState<WalletId | null>(null);
   const [plugSession, setPlugSession] = useState<PlugSession>(null);
+  const [oisySession, setOisySession] = useState<OisySession | null>(null);
 
   const identityKitWalletId: WalletId | null = useMemo(() => {
     if (!user) return null;
-    const last = readLastWallet();
-    if (last === "oisy" || last === "dfinity") return last;
     return "dfinity";
   }, [user]);
 
   const activeWallet: WalletId | undefined = plugSession
     ? "plug"
-    : (identityKitWalletId ?? undefined);
+    : oisySession
+      ? "oisy"
+      : (identityKitWalletId ?? undefined);
 
   const authedAgent: Agent | undefined = plugSession
     ? plugSession.agent
-    : identitykitAgent;
+    : oisySession
+      ? oisySession.agent
+      : identitykitAgent;
 
   useSyncAuthedAgent(authedAgent);
 
@@ -148,14 +152,19 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
 
   useRememberDfinityAsLastWallet({
     user,
-    hasPlugSession: !!plugSession,
+    hasExternalSession: !!plugSession || !!oisySession,
     readLastWallet,
     writeLastWallet,
   });
 
-  const principal = plugSession?.principal ?? user?.principal;
-  // Plug doesn't expose subaccount derivation; only IdentityKit signers (II/OISY) supply one.
-  const subAccount = plugSession ? undefined : user?.subAccount;
+  const principal =
+    plugSession?.principal ?? oisySession?.principal ?? user?.principal;
+  // Plug doesn't expose subaccount derivation; II and OISY can supply one.
+  const subAccount = plugSession
+    ? undefined
+    : oisySession
+      ? oisySession.subAccount
+      : user?.subAccount;
   const principalId = principal ? principal.toText() : undefined;
   const accountId = useMemo(
     () => principalToAccountId(principal, subAccount),
@@ -193,11 +202,29 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
             whitelist: whitelistedCanisterIds,
             host: IC_HOST,
           });
+          await disconnectOisy(oisySession);
           setPlugSession(session);
+          setOisySession(null);
           writeLastWallet("plug");
+        } else if (id === "oisy") {
+          if (user) {
+            await disconnect();
+          }
+          const session = await connectOisy({ host: IC_HOST });
+          if (plugSession) {
+            await disconnectPlug();
+          }
+          setOisySession(session);
+          setPlugSession(null);
+          writeLastWallet("oisy");
         } else {
-          const signerId = id === "dfinity" ? "InternetIdentity" : "OISY";
-          await connect(signerId);
+          await connect("InternetIdentity");
+          if (plugSession) {
+            await disconnectPlug();
+          }
+          await disconnectOisy(oisySession);
+          setPlugSession(null);
+          setOisySession(null);
           writeLastWallet(id);
         }
         setListOpen(false);
@@ -207,7 +234,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         setPending(null);
       }
     },
-    [connect]
+    [connect, disconnect, oisySession, plugSession, user]
   );
 
   const handleDisconnectWallet = useCallback(async () => {
@@ -216,6 +243,10 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         await disconnectPlug();
         setPlugSession(null);
       }
+      if (oisySession) {
+        await disconnectOisy(oisySession);
+        setOisySession(null);
+      }
       if (user) {
         await disconnect();
       }
@@ -223,7 +254,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
       writeLastWallet(null);
       setAuthedAgent(undefined);
     }
-  }, [disconnect, plugSession, user]);
+  }, [disconnect, oisySession, plugSession, user]);
 
   const value: ContextValue = {
     state,

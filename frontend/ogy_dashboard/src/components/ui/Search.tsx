@@ -14,6 +14,7 @@ interface ISearch {
   id?: string;
   placeholder?: string;
   dropdown?: React.ReactNode;
+  actions?: React.ReactNode;
   onEnter?: () => void;
 }
 
@@ -22,6 +23,7 @@ const Search = ({
   id = "search",
   placeholder = "Search for an items...",
   dropdown,
+  actions,
   onEnter,
   ...restProps
 }: ISearch) => {
@@ -100,19 +102,22 @@ const Search = ({
             })}
             className="form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
           />
-          {searchterm === "" ? (
-            <div className="mr-2 p-1">
-              <SearchIcon />
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={handleResetSearch}
-              className="mr-2 p-1"
-            >
-              <CloseIcon />
-            </button>
-          )}
+          <div className="flex items-center gap-1">
+            {actions}
+            {searchterm === "" ? (
+              <div className="mr-2 p-1">
+                <SearchIcon />
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleResetSearch}
+                className="mr-2 p-1"
+              >
+                <CloseIcon />
+              </button>
+            )}
+          </div>
         </form>
         {hasDropdown && (
           <div className="border-t border-border px-4 pt-2 pb-3">

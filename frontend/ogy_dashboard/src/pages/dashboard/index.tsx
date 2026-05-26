@@ -83,24 +83,6 @@ const Dashboard = () => {
             </p>
           </div>
 
-          <LedgerSwitchBanner className="mt-8 w-full">
-            <div className="flex justify-center mt-8">
-              {!isConnected && (
-                <AuthButton
-                  label="Login to swap tokens"
-                  className={LEDGER_SWITCH_CTA_CLASS}
-                />
-              )}
-              {isConnected && (
-                <Button
-                  className={LEDGER_SWITCH_CTA_CLASS}
-                  onClick={handleClickAccount}
-                >
-                  My account
-                </Button>
-              )}
-            </div>
-          </LedgerSwitchBanner>
         </div>
       </section>
 
@@ -166,6 +148,22 @@ const Dashboard = () => {
             <ChartUsersActivity />
           </section>
         </div>
+
+        <LedgerSwitchBanner className="w-full">
+          <div className="flex justify-center mt-8">
+            {!isConnected && (
+              <AuthButton
+                label="Login to swap tokens"
+                className={LEDGER_SWITCH_CTA_CLASS}
+              />
+            )}
+            {isConnected && (
+              <Button className={LEDGER_SWITCH_CTA_CLASS} onClick={handleClickAccount}>
+                My account
+              </Button>
+            )}
+          </div>
+        </LedgerSwitchBanner>
       </div>
     </div>
   );

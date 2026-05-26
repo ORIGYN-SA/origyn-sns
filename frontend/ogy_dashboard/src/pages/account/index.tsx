@@ -22,7 +22,6 @@ export const Account = () => {
           className="mx-auto max-w-[502px]"
         />
       </div>
-      <LedgerSwitch className="mb-8" />
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <AvailableOGY />
         <StakedOGY />
@@ -31,6 +30,7 @@ export const Account = () => {
       <div className="mt-8">
         <NeuronsList />
       </div>
+      <LedgerSwitch className="mt-8" />
     </PageContainer>
   );
 };

@@ -5,7 +5,7 @@ import Footer from "@components/footer/Footer";
 import Warning from "@components/warning/Warning";
 import useScrollToTopOnNavigation from "@hooks/useScrollToTopOnNavigation";
 
-const SHOW_LEDGER_SWITCH_WARNING = true;
+const SHOW_LEDGER_SWITCH_WARNING = false;
 
 const NavigationProgress = () => {
   return (
