@@ -3,16 +3,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.1.1] - 2026-05-11
-
-### Fixed
-- `get_local_principal_history` forward-fills per-subaccount balances across idle days (was summing only same-day-active subaccounts, hiding idle neurons in the stake total).
-- `balance_difference` forward-fills sparse treasury entries (was subtracting 0 on idle treasury days).
-- `sync_voting_stats_job` compared a day-number key to a Unix-seconds constant; renamed `SNS_LAUNCH_TIMESTAMP` → `SNS_LAUNCH_DAY` (19878) so `origyn_voting_power` is non-zero post-launch.
-
-### Added
-- Info log in `sync_governance_history` reporting `days_written`, `latest_day`, `latest_balance_e8s`.
-
 ## [2.1.0] - 2026-04-13
 
 ### Added

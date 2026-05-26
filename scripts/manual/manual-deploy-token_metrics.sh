@@ -37,28 +37,19 @@ fi
 # --- Version info ---
 COMMIT_SHA="$(git rev-parse --short HEAD)_local"
 
-# Extract version from the topmost release heading in CHANGELOG.md.
-# Format expected (Keep a Changelog): `## [X.Y.Z] - YYYY-MM-DD`.
-CHANGELOG="backend/canisters/${CANISTER}/CHANGELOG.md"
-if [[ ! -f "$CHANGELOG" ]]; then
-  echo "Error: CHANGELOG not found at $CHANGELOG"
-  exit 1
-fi
-
-LATEST_VERSION=$(grep -m1 -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' "$CHANGELOG" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || true)
-if [[ -z "$LATEST_VERSION" ]]; then
-  echo "Error: no versioned heading (## [X.Y.Z]) found in $CHANGELOG"
-  exit 1
-fi
-
-if [[ "$LATEST_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+# Try to extract version from the latest git tag for this canister
+LATEST_TAG=$(git tag --list "${CANISTER}-v*" --sort=-version:refname | head -n1 || true)
+if [[ -n "$LATEST_TAG" && "$LATEST_TAG" =~ ${CANISTER}-v([0-9]+)\.([0-9]+)\.([0-9]+) ]]; then
   VERSION_MAJOR="${BASH_REMATCH[1]}"
   VERSION_MINOR="${BASH_REMATCH[2]}"
   VERSION_PATCH="${BASH_REMATCH[3]}"
-  VERSION="$LATEST_VERSION"
+  VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
 else
-  echo "Error: failed to parse version '$LATEST_VERSION' from $CHANGELOG"
-  exit 1
+  echo "Warning: No version tag found for $CANISTER, using 0.0.0"
+  VERSION_MAJOR=0
+  VERSION_MINOR=0
+  VERSION_PATCH=0
+  VERSION="0.0.0"
 fi
 
 BUILD_VERSION="record { major = ${VERSION_MAJOR}:nat32; minor = ${VERSION_MINOR}:nat32; patch = ${VERSION_PATCH}:nat32 }"
