@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Scrollen",
+  "hero": {
+    "title": "On-Chain-<i>KI</i>-Inferenz\nvorantreiben.",
+    "subtitle": [
+      "Offene F&E zum Betrieb vollständig autonomer KI-Agenten auf einer öffentlichen Blockchain.",
+      "Keine Off-Chain-Abkürzungen. Verifizierbar von Grund auf."
+    ]
+  },
+  "form": {
+    "label": "Benachrichtigt werden",
+    "emailLabel": "E-Mail-Adresse",
+    "placeholder": "du@email.com",
+    "submit": "Benachrichtigen",
+    "submitting": "Wird gesendet",
+    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "success": "Angemeldet. Wir melden uns.",
+    "error": "Etwas ist schiefgelaufen. Versuch es erneut."
+  },
+  "marquee": {
+    "phrases": [
+      "Du bist, was du weißt und woran du dich erinnerst.",
+      "Verlierst du das, verlierst du dich selbst.",
+      "Mit KI ist es genau dasselbe.",
+      "Ohne dauerhaftes Gedächtnis ist selbst der klügste Agent nur Rauschen.",
+      "Wahre Intelligenz misst sich nicht an der Stärke des Modells, sondern daran, wie gut es dich kennt.",
+      "Du bist dein Gedächtnis. Dein Agent auch.",
+      "Kein Gedächtnis. Keine Identität. Kein Vertrauen.",
+      "Eine KI, die dich jedes Mal vergisst… ist nicht dein Agent.",
+      "Gedächtnis ist der Unterschied zwischen einem Werkzeug und einem echten Agenten.",
+      "On-Chain-Gedächtnis. On-Chain-Identität. On-Chain-Loyalität.",
+      "Der mächtigste Agent ist der, der dich nie vergisst."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Das Problem",
+    "title": "Niemand betreibt wirklich\n<i>KI on-chain.</i>",
+    "lead": "Jedes Projekt, das einen <s>„On-Chain-KI-Agenten“</s> für sich beansprucht, folgt demselben Muster: Die Inferenz läuft off-chain, auf zentralisierten Servern, und nur das Ergebnis wird auf der Blockchain veröffentlicht. Das Modell wird niemals innerhalb des Netzwerks ausgeführt. Die Chain dient als schwarzes Brett, nicht als Rechenebene.",
+    "leadStrong": "Das ist kein On-Chain-Agent. Das ist ein API-Aufruf mit Quittung.",
+    "steps": [
+      {
+        "title": "Die Behauptung",
+        "body": "„KI-gestützter On-Chain-Agent.“ Die Inferenz findet auf AWS statt. Die Chain speichert nur das Ergebnis."
+      },
+      {
+        "title": "Die Lücke",
+        "body": "Keine verifizierbare Ausführung. Keine deterministische Wiederholung. Keine Möglichkeit zu prüfen, was das Modell tatsächlich berechnet hat."
+      },
+      {
+        "title": "Unser Ansatz",
+        "body": "Vollständige Inferenz innerhalb des Canisters. WASM SIMD, auf dem Schweizer Subnet. Verifizierbar, reproduzierbar, wirklich on-chain."
+      }
+    ],
+    "closing": "Wir haben es bereits bewiesen. <s>Origyn</s> führt heute echte Inferenz on-chain aus. Wir befinden uns nun in einer aktiven Testphase und prüfen die Robustheit über Modelle und Lasten hinweg, um zu bestätigen, was unsere Benchmarks bereits zeigen: Dies ist der zuverlässigste <s>On-Chain-KI</s>-Inferenz-Stack, den es gibt."
+  },
+  "agent": {
+    "eyebrow": "Der Agent",
+    "title": "Origyn.\n<i>Minimaler</i> Agent, <i>maximales</i> Gedächtnis.",
+    "lead": "Ein souveräner KI-Agent, der on-chain läuft. Seine erste Mission: das Sovereign Second Brain. Ein kleines Modell, gespeist von jahrzehntelangem strukturiertem Kontext, zertifiziert auf der Schweizer Blockchain. Kein riesiges Modell on-chain. Ein fokussierter Agent mit einem zertifizierten Tresor.",
+    "cards": [
+      {
+        "title": "Nutzerseite",
+        "subtitle": "Lokales Büro",
+        "body": "Die Maschine des Nutzers. Große Sprachmodelle, private Dateien, Offline-Arbeit. Deine Intelligenz bleibt bei dir."
+      },
+      {
+        "title": "Blockchain-Seite",
+        "subtitle": "On-Chain-Tresor",
+        "body": "Der Canister. Zertifizierter Tresor, verifizierbare Inferenz, deterministische Wiederholung. Dein Kontext wird zu beweisbarer Infrastruktur."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Der Tresor",
+    "title": "<i>Zertifiziert</i> durch Konstruktion.",
+    "lead": "Jede Schwachstelle an der Wurzel behoben. Kein Versprechen. Ein Protokoll.",
+    "cards": [
+      {
+        "title": "Rechtlicher Existenznachweis",
+        "body": "Blockchain-zertifizierte Zeitstempelung. Vor Gericht zulässig, ohne Notar."
+      },
+      {
+        "title": "Vollständige Herkunft",
+        "body": "Wer jedes Dokument erstellt, geändert, zertifiziert hat. Unveränderliche Nachweiskette."
+      },
+      {
+        "title": "Versionierung",
+        "body": "Jede Version bleibt erhalten. Jederzeit zurücksetzbar."
+      },
+      {
+        "title": "Kontrollierte Freigabe",
+        "body": "Schreibgeschützt, zeitlich begrenzt, mit einem Klick widerrufbar. Funktioniert auch offline."
+      },
+      {
+        "title": "Totmannschalter",
+        "body": "Benannte Erben erhalten nach einer definierten Phase der Inaktivität automatisch wieder Zugriff."
+      },
+      {
+        "title": "Unveränderlicher Audit-Trail",
+        "body": "Wer hat was gesehen, wann, warum. Vollständige regulatorische Compliance integriert."
+      },
+      {
+        "title": "24/7-Überwachung",
+        "body": "Der Canister läuft, auch wenn dein PC aus ist. Automatische Warnungen bei Anomalien."
+      },
+      {
+        "title": "Zertifizierte Vermögenswerte",
+        "body": "Tokenisiertes Gold, Immobilien, Sammlerstücke. Herkunftszertifikate neben dem kognitiven Erbe."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Unsere Ergebnisse",
+    "title": "<i>Schneller</i>\nals das Bestehende.",
+    "lead": "Gleiche Modelle, gleiche Bedingungen, Produktionsnetzwerk. Unsere maßgeschneiderten WASM-SIMD-Kernel machen den Unterschied.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · Produktionsnetzwerk",
+      "before": "10 tok/Aufruf",
+      "after": "29 tok/Aufruf",
+      "caption": "2,9× schneller als bestehende On-Chain-Inferenz"
+    },
+    "body1": "Bei gleichem Rechenbudget leistet ein Second Brain mit unserem Fork dreimal mehr Arbeit oder verbraucht dreimal weniger Ressourcen.",
+    "body2": [
+      "Wir sind an kein einzelnes Modell und keine Architektur gebunden. Jede neue Version ist eine Chance.",
+      "Wir benchmarken und integrieren laufend die neuesten Modelle, um Geschwindigkeit, Genauigkeit und Effizienz weiter zu steigern."
+    ],
+    "table": {
+      "headers": {
+        "model": "Modell",
+        "existing": "Bestehend",
+        "origyn": "ORIGYN AI",
+        "gain": "Faktor"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/Aufruf", "origyn": "29 tok/Aufruf", "gain": "2,9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/Aufruf", "origyn": "103 tok/Aufruf", "gain": "2,9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flotte von Mikro-Experten",
+        "body": "Statt eines einzigen langsamen großen Modells setzen wir aufgabenspezifisch feinabgestimmte Modelle mit unter einer Milliarde Parametern ein: E-Mails sortieren, Dokumente klassifizieren, Risiken bewerten. Schneller und präziser als ein Generalist."
+      },
+      {
+        "title": "On-Chain-Distillation",
+        "body": "Ein großes Modell lehrt off-chain, ein kleines Modell wird on-chain bereitgestellt. Kombiniert mit 4-Bit-Quantisierung und unseren maßgeschneiderten WASM-SIMD-Kerneln ermöglicht das echte KI innerhalb des Instruktionsbudgets eines Canisters."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vision",
+    "title": "Fünf Säulen,\ndie KI nicht <i>ersetzen kann.</i>",
+    "lead": "KI macht Produktion zur Massenware. Diese fünf Bereiche bleiben. Origyn ist in jedem von ihnen positioniert.",
+    "pillars": [
+      { "title": "Vertrauen", "description": "Origyn-Zertifizierung — ein verifizierbares Vertrauenssignal." },
+      { "title": "Kontext", "description": "Jahrzehnte strukturierten Gedächtnisses — ein persönliches Signal, das KI nicht erreichen kann." },
+      { "title": "Verteilung", "description": "Schweizer Subnet — verifizierbare Infrastruktur für Agenten." },
+      { "title": "Geschmack", "description": "Auto-Recherche-Pipeline — automatisierungsgestützte Kuratierung." },
+      { "title": "Haftung", "description": "Audit-Trail und Zertifikat — eine echte Governance-Ebene." }
+    ]
+  },
+  "memory": {
+    "title": "Du bist dein <i>Wissen</i>\nund deine <i>Erinnerung.</i>",
+    "subtitle": [
+      "Verlierst du das, verlierst du dich selbst. Mit KI ist es genau dasselbe.",
+      "Ohne dauerhaftes On-Chain-Gedächtnis wird dein Agent dich nie wirklich kennen."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Bleib in der Nähe",
+    "title": "<i>Verfolge</i> die Forschung",
+    "lead": "Paper-Updates, technische Meilensteine, Projektfortschritt. Kein Marketing. Nur Substanz."
+  },
+  "language": {
+    "label": "Sprache",
+    "switchTo": "Zu {language} wechseln"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Posunout",
+  "hero": {
+    "title": "Posouváme\n<i>AI</i> inferenci on-chain.",
+    "subtitle": [
+      "Otevřený výzkum a vývoj plně autonomních AI agentů na veřejném blockchainu.",
+      "Žádné zkratky mimo řetězec. Ověřitelné už od základu."
+    ]
+  },
+  "form": {
+    "label": "Dostávat upozornění",
+    "emailLabel": "E-mailová adresa",
+    "placeholder": "vy@email.com",
+    "submit": "Upozornit mě",
+    "submitting": "Odesílání",
+    "invalid": "Zadejte prosím platný e-mail.",
+    "success": "Přihlášeno. Ozveme se vám.",
+    "error": "Něco se pokazilo. Zkuste to znovu."
+  },
+  "marquee": {
+    "phrases": [
+      "Jste tím, co víte a pamatujete si.",
+      "Ztraťte to a ztratíte sami sebe.",
+      "S AI to funguje úplně stejně.",
+      "Bez trvalé paměti je i ten nejchytřejší agent jen šum.",
+      "Skutečná inteligence není v tom, jak mocný je model — ale jak dobře vás zná.",
+      "Jste svou pamětí. A váš Agent také.",
+      "Žádná paměť. Žádná identita. Žádná důvěra.",
+      "AI, která vás pokaždé zapomene… není váš agent.",
+      "Paměť je rozdíl mezi nástrojem a skutečným agentem.",
+      "Paměť on-chain. Identita on-chain. Loajalita on-chain.",
+      "Nejmocnější agent je ten, který na vás nikdy nezapomene."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Problém",
+    "title": "Nikdo ve skutečnosti\nneprovozuje <i>AI on-chain.</i>",
+    "lead": "Každý projekt, který tvrdí, že má <s>„AI agenta on-chain“</s>, funguje podle stejného vzorce: inference běží mimo řetězec, na centralizovaných serverech, a na blockchain se odesílá jen výsledek. Model se nikdy nespustí uvnitř sítě. Řetězec slouží jako nástěnka, ne jako výpočetní vrstva.",
+    "leadStrong": "To není agent on-chain. To je volání API s účtenkou.",
+    "steps": [
+      {
+        "title": "Tvrzení",
+        "body": "„On-chain agent poháněný AI.“ Inference probíhá na AWS. Řetězec ukládá pouze výstup."
+      },
+      {
+        "title": "Mezera",
+        "body": "Žádné ověřitelné provedení. Žádné deterministické zopakování. Žádný způsob, jak auditovat, co model skutečně spočítal."
+      },
+      {
+        "title": "Náš přístup",
+        "body": "Plná inference uvnitř kanystru. WASM SIMD, na Swiss Subnet. Ověřitelná, reprodukovatelná, skutečně on-chain."
+      }
+    ],
+    "closing": "Už jsme to prokázali. <s>Origyn</s> dnes provozuje skutečnou inferenci on-chain. Nyní jsme v aktivní fázi testování, prověřujeme robustnost napříč modely i zátěžemi, abychom potvrdili to, co naše benchmarky už ukazují: tohle je nejspolehlivější stack <s>AI on-chain</s> inference, jaký existuje."
+  },
+  "agent": {
+    "eyebrow": "Agent",
+    "title": "Origyn.\nMinimální <i>agent,</i> maximální <i>paměť.</i>",
+    "lead": "Suverénní AI agent běžící on-chain. Jeho první misí je Suverénní Druhý Mozek. Malý model živený desetiletími vašeho strukturovaného kontextu, certifikovaný na švýcarském blockchainu. Ne obří model on-chain. Soustředěný agent s certifikovaným trezorem.",
+    "cards": [
+      {
+        "title": "Strana uživatele",
+        "subtitle": "Místní Kancelář",
+        "body": "Stroj uživatele. Velké jazykové modely, soukromé soubory, práce offline. Vaše inteligence zůstává s vámi."
+      },
+      {
+        "title": "Strana blockchainu",
+        "subtitle": "Trezor On-Chain",
+        "body": "Kanystr. Certifikovaný trezor, ověřitelná inference, deterministické zopakování. Váš kontext se stává prokazatelnou infrastrukturou."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Trezor",
+    "title": "<i>Certifikovaný</i> už ze své podstaty.",
+    "lead": "Každá křehkost vyřešena u kořene. Není to slib. Je to protokol.",
+    "cards": [
+      {
+        "title": "Právní důkaz existence",
+        "body": "Časové razítko certifikované blockchainem. Přípustné u soudu, bez potřeby notáře."
+      },
+      {
+        "title": "Úplná provenience",
+        "body": "Kdo každý dokument vytvořil, upravil a certifikoval. Neměnný řetězec sledovatelnosti."
+      },
+      {
+        "title": "Verzování",
+        "body": "Každá verze zachována. Návrat kdykoli."
+      },
+      {
+        "title": "Řízené sdílení",
+        "body": "Jen pro čtení, časově omezené, odvolatelné jedním kliknutím. Funguje i offline."
+      },
+      {
+        "title": "Pojistka pro případ úmrtí",
+        "body": "Určení dědicové automaticky získají přístup po stanovené době nečinnosti."
+      },
+      {
+        "title": "Neměnná auditní stopa",
+        "body": "Kdo co viděl, kdy a proč. Plná regulační shoda zabudovaná od základu."
+      },
+      {
+        "title": "Monitorování 24/7",
+        "body": "Kanystr běží, i když je váš počítač vypnutý. Automatická upozornění na anomálie."
+      },
+      {
+        "title": "Certifikovaná aktiva",
+        "body": "Tokenizované zlato, nemovitosti, sběratelské předměty. Certifikáty provenience vedle kognitivního dědictví."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Naše výsledky",
+    "title": "<i>Rychlejší</i>\nnež stávající.",
+    "lead": "Stejné modely, stejné podmínky, produkční síť. Rozdíl dělají naše vlastní WASM SIMD jádra.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · produkční síť",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× rychlejší než stávající on-chain inference"
+    },
+    "body1": "Při stejném výpočetním rozpočtu odvede Druhý Mozek poháněný naším forkem třikrát více práce, nebo spotřebuje třikrát méně zdrojů.",
+    "body2": [
+      "Nejsme vázáni na žádný jediný model ani architekturu. Každé nové vydání je příležitost.",
+      "Neustále porovnáváme a integrujeme nejnovější modely, abychom dále posouvali rychlost, přesnost a efektivitu."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Stávající",
+        "origyn": "ORIGYN AI",
+        "gain": "Zisk"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Flotila mikroexpertů",
+        "body": "Namísto jednoho pomalého velkého modelu nasazujeme doladěné modely sub-1B parametrů specializované na konkrétní úkoly: třídění e-mailů, klasifikaci dokumentů, hodnocení rizika. Rychlejší a přesnější než generalista."
+      },
+      {
+        "title": "Destilace on-chain",
+        "body": "Velký model učí mimo řetězec, malý model se nasazuje on-chain. V kombinaci s 4-bit kvantizací a našimi vlastními WASM SIMD jádry to umožňuje skutečnou AI v rámci rozpočtu instrukcí kanystru."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vize",
+    "title": "Pět pilířů,\nkteré AI nemůže <i>nahradit.</i>",
+    "lead": "AI mění produkci v komoditu. Těchto pět oblastí zůstává. Origyn je přítomen v každé z nich.",
+    "pillars": [
+      { "title": "Důvěra", "description": "Certifikace Origyn — ověřitelný signál důvěry." },
+      { "title": "Kontext", "description": "Desetiletí strukturované paměti — osobní signál, kterému se AI nevyrovná." },
+      { "title": "Distribuce", "description": "Swiss Subnet — ověřitelná infrastruktura pro agenty." },
+      { "title": "Vkus", "description": "Pipeline automatického výzkumu — kurátorství podpořené automatizací." },
+      { "title": "Odpovědnost", "description": "Auditní stopa a certifikát — skutečná vrstva správy." }
+    ]
+  },
+  "memory": {
+    "title": "Jste tím, co\n<i>víte</i> a <i>pamatujete si.</i>",
+    "subtitle": [
+      "Ztraťte to a ztratíte sami sebe. S AI je to stejné.",
+      "Bez trvalé paměti on-chain vás váš agent nikdy skutečně nepozná."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Zůstaňte nablízku",
+    "title": "<i>Sledujte</i> výzkum",
+    "lead": "Aktualizace studií, technické milníky, postup projektu. Žádný marketing. Jen podstata."
+  },
+  "language": {
+    "label": "Jazyk",
+    "switchTo": "Přepnout na {language}"
+  }
+}

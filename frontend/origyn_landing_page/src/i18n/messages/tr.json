@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Kaydır",
+  "hero": {
+    "title": "Zincir üstü\n<i>AI</i> çıkarımını ilerletiyoruz.",
+    "subtitle": [
+      "Tamamen otonom AI ajanlarını halka açık bir blok zincirinde çalıştırmaya yönelik açık Ar-Ge.",
+      "Zincir dışı kestirme yok. Tasarımı gereği doğrulanabilir."
+    ]
+  },
+  "form": {
+    "label": "Haberdar olun",
+    "emailLabel": "E-posta adresi",
+    "placeholder": "you@email.com",
+    "submit": "Haberdar Olun",
+    "submitting": "Gönderiliyor",
+    "invalid": "Lütfen geçerli bir e-posta girin.",
+    "success": "Abone oldunuz. Sizinle iletişime geçeceğiz.",
+    "error": "Bir şeyler ters gitti. Tekrar deneyin."
+  },
+  "marquee": {
+    "phrases": [
+      "Bildiğin ve hatırladığın şeysin.",
+      "Bunu kaybet, kendini kaybedersin.",
+      "AI da tam olarak böyle çalışır.",
+      "Kalıcı bellek olmadan en akıllı ajan bile yalnızca gürültüdür.",
+      "Gerçek zekâ, modelin ne kadar güçlü olduğu değil — seni ne kadar iyi tanıdığıdır.",
+      "Sen belleğinsin. Ajanın da öyle.",
+      "Bellek yok. Kimlik yok. Güven yok.",
+      "Seni her seferinde unutan bir AI… senin ajanın değildir.",
+      "Bellek, bir aletle gerçek bir ajan arasındaki farktır.",
+      "Zincir üstü bellek. Zincir üstü kimlik. Zincir üstü sadakat.",
+      "En güçlü ajan, seni asla unutmayandır."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Sorun",
+    "title": "Aslında kimse\n<i>AI'yı zincir üstünde</i> çalıştırmıyor.",
+    "lead": "<s>“Zincir üstü AI ajanı”</s> olduğunu iddia eden her proje aynı kalıbı izler: çıkarım zincir dışında, merkezi sunucularda çalışır ve yalnızca sonuç blok zincirine gönderilir. Model asla ağın içinde çalışmaz. Zincir, bir hesaplama katmanı olarak değil, bir ilan tahtası olarak kullanılır.",
+    "leadStrong": "Bu bir zincir üstü ajan değildir. Bu, makbuzlu bir API çağrısıdır.",
+    "steps": [
+      {
+        "title": "İddia",
+        "body": "“AI destekli zincir üstü ajan.” Çıkarım AWS'de gerçekleşir. Zincir yalnızca çıktıyı saklar."
+      },
+      {
+        "title": "Boşluk",
+        "body": "Doğrulanabilir yürütme yok. Belirleyici yeniden oynatma yok. Modelin gerçekte ne hesapladığını denetlemenin bir yolu yok."
+      },
+      {
+        "title": "Bizim yaklaşımımız",
+        "body": "Canister içinde tam çıkarım. Swiss Subnet üzerinde WASM SIMD. Doğrulanabilir, yeniden üretilebilir, gerçekten zincir üstü."
+      }
+    ],
+    "closing": "Bunu zaten gösterdik. <s>Origyn</s>, bugün zincir üstünde gerçek çıkarım çalıştırıyor. Şu anda etkin bir test aşamasındayız; sağlamlığı çeşitli model ve iş yüklerinde stres testine tabi tutarak, kıyaslamalarımızın çoktan gösterdiğini doğruluyoruz: bu, var olan en güvenilir <s>zincir üstü AI</s> çıkarım yığınıdır."
+  },
+  "agent": {
+    "eyebrow": "Ajan",
+    "title": "Origyn.\nAsgari <i>ajan,</i> azami <i>bellek.</i>",
+    "lead": "Zincir üstünde çalışan egemen bir AI ajanı. İlk görevi: Egemen İkinci Beyin. Onlarca yıllık yapılandırılmış bağlamınızla beslenen, İsviçre blok zincirinde sertifikalanmış küçük bir model. Zincir üstünde dev bir model değil. Sertifikalı bir kasaya sahip odaklanmış bir ajan.",
+    "cards": [
+      {
+        "title": "Kullanıcı tarafı",
+        "subtitle": "Yerel Büro",
+        "body": "Kullanıcının makinesi. Büyük dil modelleri, özel dosyalar, çevrimdışı çalışma. Zekânız sizinle kalır."
+      },
+      {
+        "title": "Blok zinciri tarafı",
+        "subtitle": "Zincir Üstü Kasa",
+        "body": "Canister. Sertifikalı kasa, doğrulanabilir çıkarım, belirleyici yeniden oynatma. Bağlamınız kanıtlanabilir altyapıya dönüşür."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "Kasa",
+    "title": "Yapısı gereği <i>sertifikalı.</i>",
+    "lead": "Her kırılganlık kökünden ele alındı. Bir vaat değil. Bir protokol.",
+    "cards": [
+      {
+        "title": "Yasal varlık kanıtı",
+        "body": "Blok zinciriyle sertifikalı zaman damgası. Mahkemede kabul edilebilir, notere gerek yok."
+      },
+      {
+        "title": "Tam köken kaydı",
+        "body": "Her belgeyi kimin oluşturduğu, değiştirdiği, sertifikaladığı. Değiştirilemez izlenebilirlik zinciri."
+      },
+      {
+        "title": "Sürüm yönetimi",
+        "body": "Her sürüm korunur. İstediğiniz zaman geri alın."
+      },
+      {
+        "title": "Denetimli paylaşım",
+        "body": "Salt okunur, süreli, tek tıkla iptal edilebilir. Çevrimdışıyken bile çalışır."
+      },
+      {
+        "title": "Ölü adam anahtarı",
+        "body": "Belirlenen mirasçılar, tanımlı bir hareketsizlik süresinin ardından erişimi otomatik olarak geri kazanır."
+      },
+      {
+        "title": "Değiştirilemez denetim izi",
+        "body": "Kim neyi, ne zaman, neden gördü. Tam mevzuat uyumluluğu yerleşik olarak gelir."
+      },
+      {
+        "title": "24/7 izleme",
+        "body": "Canister, bilgisayarınız kapalıyken bile çalışır. Anormallikler için otomatik uyarılar."
+      },
+      {
+        "title": "Sertifikalı varlıklar",
+        "body": "Tokenleştirilmiş altın, gayrimenkul, koleksiyon parçaları. Bilişsel mirasın yanında köken sertifikaları."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Sonuçlarımız",
+    "title": "Mevcut olandan\n<i>daha hızlı.</i>",
+    "lead": "Aynı modeller, aynı koşullar, üretim ağı. Farkı yaratan, özel WASM SIMD çekirdeklerimiz.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · üretim ağı",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "Mevcut zincir üstü çıkarımdan 2.9× daha hızlı"
+    },
+    "body1": "Aynı hesaplama bütçesiyle, fork'umuzla çalışan bir İkinci Beyin üç kat daha fazla iş yapar veya üç kat daha az kaynak tüketir.",
+    "body2": [
+      "Tek bir modele ya da mimariye bağlı değiliz. Her yeni sürüm bir fırsattır.",
+      "Hızı, doğruluğu ve verimliliği daha da ileriye taşımak için en yeni modelleri sürekli kıyaslıyor ve entegre ediyoruz."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Mevcut",
+        "origyn": "ORIGYN AI",
+        "gain": "Kazanç"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Mikro uzmanlar filosu",
+        "body": "Yavaş tek bir büyük model yerine, göreve özgü ince ayarlı sub-1B parametreli modeller dağıtıyoruz: e-postaları ayıklama, belgeleri sınıflandırma, riski değerlendirme. Bir genelciden daha hızlı ve daha kesin."
+      },
+      {
+        "title": "Zincir üstü damıtma",
+        "body": "Büyük bir model zincir dışında öğretir, küçük bir model zincir üstünde dağıtılır. 4-bit niceleme ve özel WASM SIMD çekirdeklerimizle birleştiğinde bu, bir canister'ın komut bütçesi içinde gerçek AI'yı mümkün kılar."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Vizyon",
+    "title": "AI'nın yerini <i>alamayacağı</i>\nbeş sütun.",
+    "lead": "AI, üretimi sıradanlaştırır. Bu beş alan ayakta kalır. Origyn bunların her birinde konumlanmıştır.",
+    "pillars": [
+      { "title": "Güven", "description": "Origyn sertifikasyonu — doğrulanabilir bir güven sinyali." },
+      { "title": "Bağlam", "description": "Onlarca yıllık yapılandırılmış bellek — AI'nın eşleyemeyeceği kişisel bir sinyal." },
+      { "title": "Dağıtım", "description": "Swiss Subnet — ajanlar için doğrulanabilir altyapı." },
+      { "title": "Zevk", "description": "Otomatik araştırma hattı — otomasyon destekli küratörlük." },
+      { "title": "Sorumluluk", "description": "Denetim izi ve sertifika — gerçek bir yönetişim katmanı." }
+    ]
+  },
+  "memory": {
+    "title": "<i>Bildiğin</i> ve\n<i>hatırladığın</i> şeysin.",
+    "subtitle": [
+      "Bunu kaybet, kendini kaybedersin. AI da aynı şekilde çalışır.",
+      "Kalıcı zincir üstü bellek olmadan ajanın seni asla gerçekten tanımayacak."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Yakın kalın",
+    "title": "Araştırmayı <i>takip edin</i>",
+    "lead": "Makale güncellemeleri, teknik dönüm noktaları, proje ilerlemesi. Pazarlama yok. Yalnızca öz."
+  },
+  "language": {
+    "label": "Dil",
+    "switchTo": "{language} diline geç"
+  }
+}

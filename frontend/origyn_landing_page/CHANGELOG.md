@@ -8,6 +8,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.4.4] - 2026-05-22
+
+#### Fixed
+
+- Fix the Response Verification Error on the bare `/ai` route by emitting a certified `ai/index.html` at build time
+
+### [1.4.3] - 2026-05-22
+
+#### Added
+
+- Add new AI page
+
+### [1.4.2] - 2026-05-10
+
+#### Updated
+
+- Hide AI page from navigation and move it to /x/ai
+
+### [1.4.1] - 2026-05-09
+
+#### Added
+
+- Add AI link to navigation bar
+
+### [1.4.0] - 2026-05-09
+
+#### Added
+
+- Add ORIGYN AI page
+
 ### [1.3.0] - 2026-04-24
 
 #### Added

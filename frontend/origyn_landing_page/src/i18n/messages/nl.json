@@ -1,0 +1,181 @@
+{
+  "header": {
+    "badge": "AI"
+  },
+  "scroll": "Scrollen",
+  "hero": {
+    "title": "Vooruitgang in\non-chain <i>AI</i>-inferentie.",
+    "subtitle": [
+      "Open R&D naar volledig autonome AI-agents op een publieke blockchain.",
+      "Geen off-chain omwegen. Verifieerbaar door ontwerp."
+    ]
+  },
+  "form": {
+    "label": "Blijf op de hoogte",
+    "emailLabel": "E-mailadres",
+    "placeholder": "jij@email.com",
+    "submit": "Houd me op de hoogte",
+    "submitting": "Bezig met verzenden",
+    "invalid": "Voer een geldig e-mailadres in.",
+    "success": "Aangemeld. We nemen contact op.",
+    "error": "Er ging iets mis. Probeer het opnieuw."
+  },
+  "marquee": {
+    "phrases": [
+      "Je bent wat je weet en onthoudt.",
+      "Verlies dat, en je verliest jezelf.",
+      "AI werkt op precies dezelfde manier.",
+      "Zonder blijvend geheugen is zelfs de slimste agent niets meer dan ruis.",
+      "Echte intelligentie draait niet om hoe krachtig het model is — maar om hoe goed het jou kent.",
+      "Jij bent je geheugen. Net als je agent.",
+      "Geen geheugen. Geen identiteit. Geen vertrouwen.",
+      "Een AI die je telkens vergeet… is niet jouw agent.",
+      "Geheugen is het verschil tussen een tool en een echte agent.",
+      "On-chain geheugen. On-chain identiteit. On-chain loyaliteit.",
+      "De krachtigste agent is degene die jou nooit vergeet."
+    ]
+  },
+  "problem": {
+    "eyebrow": "Het probleem",
+    "title": "Niemand draait\n<i>AI echt on-chain.</i>",
+    "lead": "Elk project dat beweert een <s>“on-chain AI-agent”</s> te hebben volgt hetzelfde patroon: de inferentie draait off-chain, op gecentraliseerde servers, en alleen het resultaat wordt op de blockchain geplaatst. Het model wordt nooit binnen het netwerk uitgevoerd. De keten dient als prikbord, niet als rekenlaag.",
+    "leadStrong": "Dat is geen on-chain agent. Dat is een API-aanroep met een ontvangstbewijs.",
+    "steps": [
+      {
+        "title": "De claim",
+        "body": "“AI-gedreven on-chain agent.” De inferentie gebeurt op AWS. De keten bewaart enkel de uitkomst."
+      },
+      {
+        "title": "Het hiaat",
+        "body": "Geen verifieerbare uitvoering. Geen deterministische replay. Geen manier om te controleren wat het model werkelijk berekende."
+      },
+      {
+        "title": "Onze aanpak",
+        "body": "Volledige inferentie binnen de canister. WASM SIMD, op het Swiss Subnet. Verifieerbaar, reproduceerbaar, echt on-chain."
+      }
+    ],
+    "closing": "We hebben dit al aangetoond. <s>Origyn</s> draait vandaag echte inferentie on-chain. We bevinden ons nu in een actieve testfase, waarin we de robuustheid stresstesten over modellen en workloads heen om te bevestigen wat onze benchmarks al aantonen: dit is de meest betrouwbare <s>on-chain AI</s>-inferentiestack die bestaat."
+  },
+  "agent": {
+    "eyebrow": "De agent",
+    "title": "Origyn.\nMinimale <i>agent,</i> maximaal <i>geheugen.</i>",
+    "lead": "Een soevereine AI-agent die on-chain draait. Zijn eerste missie: het Soevereine Tweede Brein. Een klein model gevoed door decennia van jouw gestructureerde context, gecertificeerd op de Zwitserse blockchain. Geen reusachtig model on-chain. Een gefocuste agent met een gecertificeerde kluis.",
+    "cards": [
+      {
+        "title": "Gebruikerszijde",
+        "subtitle": "Lokaal Bureau",
+        "body": "De machine van de gebruiker. Grote taalmodellen, privébestanden, offline werk. Jouw intelligentie blijft bij jou."
+      },
+      {
+        "title": "Blockchain-zijde",
+        "subtitle": "On-Chain Kluis",
+        "body": "De canister. Gecertificeerde kluis, verifieerbare inferentie, deterministische replay. Jouw context wordt bewijsbare infrastructuur."
+      }
+    ]
+  },
+  "vault": {
+    "eyebrow": "De kluis",
+    "title": "<i>Gecertificeerd</i> door constructie.",
+    "lead": "Elke kwetsbaarheid bij de wortel aangepakt. Geen belofte. Een protocol.",
+    "cards": [
+      {
+        "title": "Juridisch bewijs van bestaan",
+        "body": "Door blockchain gecertificeerde tijdstempels. Toelaatbaar in de rechtbank, geen notaris nodig."
+      },
+      {
+        "title": "Volledige herkomst",
+        "body": "Wie elk document heeft gecreëerd, gewijzigd en gecertificeerd. Onveranderlijke traceerbaarheidsketen."
+      },
+      {
+        "title": "Versiebeheer",
+        "body": "Elke versie bewaard. Op elk moment terugdraaien."
+      },
+      {
+        "title": "Gecontroleerd delen",
+        "body": "Alleen-lezen, tijdgebonden, met één klik intrekbaar. Werkt zelfs offline."
+      },
+      {
+        "title": "Dodemansknop",
+        "body": "Aangewezen erfgenamen herstellen automatisch de toegang na een bepaalde periode van inactiviteit."
+      },
+      {
+        "title": "Onveranderlijk auditspoor",
+        "body": "Wie wat zag, wanneer, waarom. Volledige naleving van regelgeving ingebouwd."
+      },
+      {
+        "title": "24/7 monitoring",
+        "body": "De canister draait zelfs als je pc uit staat. Automatische waarschuwingen bij anomalieën."
+      },
+      {
+        "title": "Gecertificeerde activa",
+        "body": "Getokeniseerd goud, vastgoed, verzamelobjecten. Herkomstcertificaten naast cognitief erfgoed."
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Onze resultaten",
+    "title": "<i>Sneller</i>\ndan het bestaande.",
+    "lead": "Dezelfde modellen, dezelfde omstandigheden, productienetwerk. Onze op maat gemaakte WASM SIMD-kernels maken het verschil.",
+    "overlay": {
+      "eyebrow": "Qwen 2.5 0.5B · productienetwerk",
+      "before": "10 tok/call",
+      "after": "29 tok/call",
+      "caption": "2.9× sneller dan bestaande on-chain inferentie"
+    },
+    "body1": "Met hetzelfde rekenbudget verricht een Tweede Brein op basis van onze fork drie keer zoveel werk, of verbruikt het drie keer minder middelen.",
+    "body2": [
+      "We zijn niet gebonden aan één model of architectuur. Elke nieuwe release is een kans.",
+      "We benchmarken en integreren continu de nieuwste modellen om snelheid, nauwkeurigheid en efficiëntie verder op te voeren."
+    ],
+    "table": {
+      "headers": {
+        "model": "Model",
+        "existing": "Bestaand",
+        "origyn": "ORIGYN AI",
+        "gain": "Winst"
+      },
+      "rows": [
+        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
+        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Vloot van micro-experts",
+        "body": "In plaats van één traag groot model zetten we taakspecifieke, fijnafgestelde modellen met sub-1B parameters in: e-mails sorteren, documenten classificeren, risico inschatten. Sneller en preciezer dan een generalist."
+      },
+      {
+        "title": "On-chain distillatie",
+        "body": "Een groot model onderwijst off-chain, een klein model wordt on-chain uitgerold. In combinatie met 4-bit kwantisatie en onze op maat gemaakte WASM SIMD-kernels maakt dit echte AI mogelijk binnen het instructiebudget van een canister."
+      }
+    ]
+  },
+  "vision": {
+    "eyebrow": "Visie",
+    "title": "Vijf pijlers\ndie AI niet kan <i>vervangen.</i>",
+    "lead": "AI maakt productie tot een commodity. Deze vijf domeinen blijven overeind. Origyn is op elk ervan gepositioneerd.",
+    "pillars": [
+      { "title": "Vertrouwen", "description": "Origyn-certificering — een verifieerbaar vertrouwenssignaal." },
+      { "title": "Context", "description": "Decennia aan gestructureerd geheugen — een persoonlijk signaal dat AI niet kan evenaren." },
+      { "title": "Distributie", "description": "Swiss Subnet — verifieerbare infrastructuur voor agents." },
+      { "title": "Smaak", "description": "Auto-research-pijplijn — door automatisering ondersteunde curatie." },
+      { "title": "Aansprakelijkheid", "description": "Auditspoor en certificaat — een echte governancelaag." }
+    ]
+  },
+  "memory": {
+    "title": "Je bent wat je\n<i>weet</i> en <i>onthoudt.</i>",
+    "subtitle": [
+      "Verlies dat, en je verliest jezelf. AI werkt op dezelfde manier.",
+      "Zonder blijvend on-chain geheugen zal je agent jou nooit echt kennen."
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Blijf dichtbij",
+    "title": "<i>Volg</i> het onderzoek",
+    "lead": "Updates over papers, technische mijlpalen, voortgang van het project. Geen marketing. Alleen inhoud."
+  },
+  "language": {
+    "label": "Taal",
+    "switchTo": "Wissel naar {language}"
+  }
+}
