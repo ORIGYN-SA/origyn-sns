@@ -1,6 +1,7 @@
 import "./App.css";
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 
@@ -14,7 +15,9 @@ import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
-import { Explorer } from "@pages/explorer/Explorer";
+// NOTE: NFT viewer (Explorer page) intentionally not routed yet — kept in the
+// codebase but disabled. Re-enable by importing `Explorer` from
+// "@pages/explorer/Explorer" and pointing the "explorer" route at it.
 import { TransactionHistory } from "@pages/transaction-history/TransactionHistory";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
@@ -24,6 +27,11 @@ import Recovery from "@pages/recovery/Recovery";
 import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
+
+const redirectWithSearch = (request: Request, pathname: string) => {
+  const url = new URL(request.url);
+  return redirect(`${pathname}${url.search}`);
+};
 
 const router = createBrowserRouter([
   {
@@ -90,7 +98,37 @@ const router = createBrowserRouter([
       },
       {
         path: "explorer",
-        element: <Explorer />,
+        children: [
+          {
+            index: true,
+            loader: ({ request }) =>
+              redirectWithSearch(request, "/transaction-history"),
+          },
+          {
+            path: "transactions/:index",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/${params.index}`
+              ),
+          },
+          {
+            path: "transactions/accounts/:accountId",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/accounts/${params.accountId}`
+              ),
+          },
+          {
+            path: "transactions/accounts/:accountId/history",
+            loader: ({ params, request }) =>
+              redirectWithSearch(
+                request,
+                `/transaction-history/transactions/accounts/${params.accountId}/history`
+              ),
+          },
+        ],
       },
       {
         path: "transaction-history",
