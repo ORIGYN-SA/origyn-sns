@@ -3,6 +3,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/footer/Footer";
 import Warning from "@components/warning/Warning";
+import { AuthDialogs } from "@components/auth/Auth";
 import useScrollToTopOnNavigation from "@hooks/useScrollToTopOnNavigation";
 
 const SHOW_LEDGER_SWITCH_WARNING = false;
@@ -33,6 +34,7 @@ const Layout = () => {
         </div>
       )}
       <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
+      <AuthDialogs />
       <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
         <div className="max-w-[1440px] mx-auto">
           {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}

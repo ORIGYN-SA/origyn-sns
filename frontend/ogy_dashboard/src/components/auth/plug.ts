@@ -102,6 +102,6 @@ export const disconnectPlug = async (): Promise<void> => {
   try {
     await getPlug().disconnect();
   } catch {
-    /* ignore — Plug sometimes throws on double-disconnect */
+    /* ignore, Plug sometimes throws on double-disconnect */
   }
 };

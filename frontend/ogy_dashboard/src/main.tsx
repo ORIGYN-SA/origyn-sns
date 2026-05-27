@@ -1,16 +1,13 @@
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { IdentityKitProvider } from "@nfid/identitykit/react";
-import { IdentityKitAuthType, InternetIdentity } from "@nfid/identitykit";
-import "@nfid/identitykit/react/styles.css";
+import { IdentityKitProvider } from "@amerej/identitykit/react";
+import { InternetIdentity, OISY } from "@amerej/identitykit";
+import "@amerej/identitykit/react/styles.css";
 
 import App from "./App.tsx";
 import { TooltipProvider } from "@components/ui/tooltip/TooltipPrimitive";
 import { WalletProvider } from "@components/auth/WalletProvider";
-import {
-  clearLegacyIdentityKitOisySession,
-  DERIVATION_ORIGIN,
-} from "@components/auth/constants";
+import { DERIVATION_ORIGIN } from "@components/auth/constants";
 import { whitelistedCanisterIds } from "@services/actor";
 
 if (import.meta.env.DEV) {
@@ -31,19 +28,33 @@ const queryClient = new QueryClient({
   },
 });
 
-const LOCAL_HOSTNAMES = new Set(["localhost", "127.0.0.1", "::1"]);
-const isLocalhostDev =
-  import.meta.env.DEV && LOCAL_HOSTNAMES.has(window.location.hostname);
-const signerClientOptions = isLocalhostDev
-  ? { targets: whitelistedCanisterIds }
-  : { targets: whitelistedCanisterIds, derivationOrigin: DERIVATION_ORIGIN };
+// No global authType: IdentityKit uses DELEGATION for Internet Identity and
+// ACCOUNTS for OISY. Forcing DELEGATION breaks OISY, which has no delegation.
+//
+// derivationOrigin keeps II principals stable on the prod-like origins listed
+// in the production canister's ii-alternative-origins. The amerej fork skips
+// it for OISY (whose principal is origin-independent), so no cross-origin issue.
+const usesDerivationOrigin = ["preprod", "production"].includes(
+  import.meta.env.MODE
+);
 
-clearLegacyIdentityKitOisySession();
+const signerClientOptions = {
+  targets: whitelistedCanisterIds,
+  maxTimeToLive: 604_800_000_000_000n, // 7 days, matching the other platform
+  idleOptions: { disableIdle: false },
+  ...(usesDerivationOrigin ? { derivationOrigin: DERIVATION_ORIGIN } : {}),
+};
+
+// @amerej/identitykit ships InternetIdentity with an empty providerUrl, which
+// makes auth-client fall back to a deprecated II frontend. Pin it to id.ai.
+const InternetIdentitySigner = {
+  ...InternetIdentity,
+  providerUrl: "https://id.ai/?feature_flag_guided_upgrade=true",
+};
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <IdentityKitProvider
-    authType={IdentityKitAuthType.DELEGATION}
-    signers={[InternetIdentity]}
+    signers={[InternetIdentitySigner, OISY]}
     signerClientOptions={signerClientOptions}
   >
     <WalletProvider>

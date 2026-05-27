@@ -18,8 +18,8 @@ const isRounded = (radius: string) =>
   !!radius && radius !== "0px" && radius !== "0%";
 
 // Copy the visual container's border-radius onto the overlay so it always
-// matches its surroundings — the parent if it's rounded, otherwise the first
-// rounded sibling (e.g., a NewTable rendered next to us inside a plain wrapper).
+// matches its surroundings: the parent if it's rounded, otherwise the first
+// rounded sibling (e.g. a NewTable rendered next to us inside a plain wrapper).
 const adoptBorderRadius = (node: HTMLDivElement | null) => {
   if (!node) return;
   const parent = node.parentElement;

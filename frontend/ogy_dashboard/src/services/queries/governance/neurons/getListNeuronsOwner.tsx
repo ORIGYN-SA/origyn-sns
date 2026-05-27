@@ -5,10 +5,6 @@ import { INeuronResult } from "@services/types";
 import { Buffer } from "buffer";
 import { getActor } from "@services/actor";
 
-// Buffer.from(data.id[0].id).toString("hex")
-// const dissolveState = data.dissolve_state[0];
-// data.staked_maturity_e8s_equivalent[0]
-
 export const getListNeuronsOwner = async ({
   owner,
   limit,
@@ -20,7 +16,8 @@ export const getListNeuronsOwner = async ({
   neuronId?: string;
   nervousSystemParameters?: ISystemNervousParametersResponse | undefined;
 }) => {
-  const actor = await getActor("governance", { isAnon: false });
+  // Anonymous read: list_neurons is keyed by of_principal, no caller needed.
+  const actor = await getActor("governance", { isAnon: true });
   const result = (await actor.list_neurons({
     of_principal: owner ? [Principal.fromText(owner)] : [],
     limit,

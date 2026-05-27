@@ -5,25 +5,24 @@ import {
   useContext,
   useMemo,
   useState,
+  useSyncExternalStore,
 } from "react";
 import type { Agent } from "@dfinity/agent";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { Principal } from "@dfinity/principal";
-import { useAuth, useAgent, useIsInitializing } from "@nfid/identitykit/react";
-import { InternetIdentity, OISY } from "@nfid/identitykit";
+import { useAuth, useAgent, useIsInitializing } from "@amerej/identitykit/react";
+import { InternetIdentity, OISY } from "@amerej/identitykit";
 
 import {
   IC_HOST,
   setAuthedAgent,
   whitelistedCanisterIds,
+  subscribeAuthExpiry,
+  getAuthExpiredSnapshot,
+  resetAuthExpiry,
 } from "@services/actor";
-import { connectOisy, disconnectOisy, type OisySession } from "./oisy";
 import { connectPlug, disconnectPlug } from "./plug";
-import {
-  usePlugSilentReconnect,
-  useRememberDfinityAsLastWallet,
-  useSyncAuthedAgent,
-} from "./walletHooks";
+import { usePlugSilentReconnect, useSyncAuthedAgent } from "./walletHooks";
 
 export const WalletState = {
   Idle: "Idle",
@@ -55,12 +54,29 @@ export const WALLET_LIST: WalletListItem[] = [
   { id: "oisy", name: "OISY", icon: OISY.icon ?? "" },
 ];
 
+// Wallet ids mapped to the signer ids IdentityKit's connect() expects.
+const IDENTITYKIT_SIGNER_ID: Record<"dfinity" | "oisy", string> = {
+  dfinity: InternetIdentity.id,
+  oisy: OISY.id,
+};
+
+// Key IdentityKit stores the connected signer under and restores on reload.
+const IDENTITYKIT_SIGNER_STORAGE_KEY = "signerId";
+
+const readIdentityKitWallet = (): "dfinity" | "oisy" => {
+  return localStorage.getItem(IDENTITYKIT_SIGNER_STORAGE_KEY) === OISY.id
+    ? "oisy"
+    : "dfinity";
+};
+
 type ContextValue = {
   state: WalletStateValue;
   walletState: typeof WalletState;
   isConnected: boolean;
   isConnecting: boolean;
   isRestoring: boolean;
+  sessionExpired: boolean;
+  connectError: string | undefined;
   principalId: string | undefined;
   accountId: string | undefined;
   subAccount: SubAccount | undefined;
@@ -71,10 +87,12 @@ type ContextValue = {
   handleCloseWalletList: () => void;
   handleSelectWallet: (id: WalletId) => Promise<void>;
   handleDisconnectWallet: () => Promise<void>;
+  handleReconnect: () => Promise<void>;
 };
 
 const WalletContext = createContext<ContextValue | undefined>(undefined);
 
+// Only Plug needs our own last-wallet tracking; IdentityKit tracks II and OISY.
 const LAST_WALLET_KEY = "dfinityWallet";
 
 const readLastWallet = (): WalletId | null => {
@@ -89,6 +107,14 @@ const writeLastWallet = (id: WalletId | null) => {
   } else {
     localStorage.removeItem(LAST_WALLET_KEY);
   }
+};
+
+const describeWalletError = (err: unknown): string => {
+  const message = err instanceof Error ? err.message : String(err);
+  if (/reject|cancel|denied|abort|user.?interrupt|closed/i.test(message)) {
+    return "Connection cancelled. Please try again.";
+  }
+  return message || "Wallet connection failed. Please try again.";
 };
 
 const principalToAccountId = (
@@ -120,24 +146,28 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [listOpen, setListOpen] = useState(false);
   const [pending, setPending] = useState<WalletId | null>(null);
   const [plugSession, setPlugSession] = useState<PlugSession>(null);
-  const [oisySession, setOisySession] = useState<OisySession | null>(null);
+  const [connectError, setConnectError] = useState<string | undefined>(
+    undefined
+  );
+
+  const sessionExpired = useSyncExternalStore(
+    subscribeAuthExpiry,
+    getAuthExpiredSnapshot,
+    getAuthExpiredSnapshot
+  );
 
   const identityKitWalletId: WalletId | null = useMemo(() => {
     if (!user) return null;
-    return "dfinity";
+    return readIdentityKitWallet();
   }, [user]);
 
   const activeWallet: WalletId | undefined = plugSession
     ? "plug"
-    : oisySession
-      ? "oisy"
-      : (identityKitWalletId ?? undefined);
+    : (identityKitWalletId ?? undefined);
 
   const authedAgent: Agent | undefined = plugSession
     ? plugSession.agent
-    : oisySession
-      ? oisySession.agent
-      : identitykitAgent;
+    : identitykitAgent;
 
   useSyncAuthedAgent(authedAgent);
 
@@ -150,21 +180,9 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     onMiss: () => writeLastWallet(null),
   });
 
-  useRememberDfinityAsLastWallet({
-    user,
-    hasExternalSession: !!plugSession || !!oisySession,
-    readLastWallet,
-    writeLastWallet,
-  });
-
-  const principal =
-    plugSession?.principal ?? oisySession?.principal ?? user?.principal;
-  // Plug doesn't expose subaccount derivation; II and OISY can supply one.
-  const subAccount = plugSession
-    ? undefined
-    : oisySession
-      ? oisySession.subAccount
-      : user?.subAccount;
+  const principal = plugSession?.principal ?? user?.principal;
+  // Plug has no subaccount; II and OISY can supply one.
+  const subAccount = plugSession ? undefined : user?.subAccount;
   const principalId = principal ? principal.toText() : undefined;
   const accountId = useMemo(
     () => principalToAccountId(principal, subAccount),
@@ -175,7 +193,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     [subAccount]
   );
 
-  const isConnected = !!principal && !!authedAgent;
+  const isConnected = !sessionExpired && !!principal && !!authedAgent;
   const isRestoring = isInitializing || isRestoringPlug;
 
   let state: WalletStateValue;
@@ -191,50 +209,43 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const handleCloseWalletList = useCallback(() => {
     setListOpen(false);
     setPending(null);
+    setConnectError(undefined);
   }, []);
 
   const handleSelectWallet = useCallback(
     async (id: WalletId) => {
       setPending(id);
+      setConnectError(undefined);
+      resetAuthExpiry();
       try {
         if (id === "plug") {
           const session = await connectPlug({
             whitelist: whitelistedCanisterIds,
             host: IC_HOST,
           });
-          await disconnectOisy(oisySession);
-          setPlugSession(session);
-          setOisySession(null);
-          writeLastWallet("plug");
-        } else if (id === "oisy") {
           if (user) {
             await disconnect();
           }
-          const session = await connectOisy({ host: IC_HOST });
-          if (plugSession) {
-            await disconnectPlug();
-          }
-          setOisySession(session);
-          setPlugSession(null);
-          writeLastWallet("oisy");
+          setPlugSession(session);
+          writeLastWallet("plug");
         } else {
-          await connect("InternetIdentity");
+          // II and OISY both connect through IdentityKit.
           if (plugSession) {
             await disconnectPlug();
           }
-          await disconnectOisy(oisySession);
+          await connect(IDENTITYKIT_SIGNER_ID[id]);
           setPlugSession(null);
-          setOisySession(null);
           writeLastWallet(id);
         }
         setListOpen(false);
       } catch (err) {
         console.error("Wallet connect failed:", err);
+        setConnectError(describeWalletError(err));
       } finally {
         setPending(null);
       }
     },
-    [connect, disconnect, oisySession, plugSession, user]
+    [connect, disconnect, plugSession, user]
   );
 
   const handleDisconnectWallet = useCallback(async () => {
@@ -243,18 +254,20 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         await disconnectPlug();
         setPlugSession(null);
       }
-      if (oisySession) {
-        await disconnectOisy(oisySession);
-        setOisySession(null);
-      }
       if (user) {
         await disconnect();
       }
     } finally {
       writeLastWallet(null);
       setAuthedAgent(undefined);
+      resetAuthExpiry();
     }
-  }, [disconnect, oisySession, plugSession, user]);
+  }, [disconnect, plugSession, user]);
+
+  const handleReconnect = useCallback(async () => {
+    await handleDisconnectWallet();
+    setListOpen(true);
+  }, [handleDisconnectWallet]);
 
   const value: ContextValue = {
     state,
@@ -262,6 +275,8 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     isConnected,
     isConnecting: state === WalletState.Connecting,
     isRestoring,
+    sessionExpired,
+    connectError,
     principalId,
     accountId,
     subAccount,
@@ -272,6 +287,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     handleCloseWalletList,
     handleSelectWallet,
     handleDisconnectWallet,
+    handleReconnect,
   };
 
   return (

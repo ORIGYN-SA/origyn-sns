@@ -15,7 +15,8 @@ const fetchBalanceOGYLegacy = async ({
     subAccount,
   }).toHex();
 
-  const actor = await getActor("ledgerLegacy", { isAnon: false });
+  // Anonymous read: account_balance_dfx is keyed by the account, no caller needed.
+  const actor = await getActor("ledgerLegacy", { isAnon: true });
   const result = (await actor.account_balance_dfx({
     account,
   })) as { e8s: bigint };
