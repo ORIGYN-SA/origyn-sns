@@ -46,7 +46,11 @@ export interface InitArgs {
   ogy_legacy_ledger_canister_id: Principal;
 }
 export type Response = { Success: SwapInfo } | { InternalError: string };
-export type Response_1 = { Success: Uint8Array | number[] };
+export type Response_1 =
+  | { NotAuthorized: string }
+  | { Success: Uint8Array | number[] }
+  | { MaxCapacityOfListReached: null }
+  | { MaxCapacityOfSwapsReached: null };
 export type Response_2 = { Success: bigint } | { InternalError: string };
 export type SwapError =
   | { BlockFailed: BlockFailReason }

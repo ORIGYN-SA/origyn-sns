@@ -80,8 +80,81 @@ export const whitelistedCanisterIds = Array.from(
 let authedAgent: Agent | undefined;
 let anonAgent: HttpAgent | undefined;
 
+// Detect a dead session (II delegation expired, OISY/Plug channel dropped) from
+// failed authed calls and expose it via an external store so the UI can prompt
+// a reconnect. Matching stays conservative so transient errors don't log out.
+const AUTH_EXPIRY_PATTERNS: RegExp[] = [
+  /delegation has expired/i,
+  /sender delegation/i,
+  /invalid delegation/i,
+  /delegation.*expir/i,
+  /signature could not be verified/i,
+  /channel (is|was) closed/i,
+  /transport (is|was) closed/i,
+  /signer has (been )?disconnected/i,
+];
+
+const isAuthExpiryError = (err: unknown): boolean => {
+  const message = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+  return AUTH_EXPIRY_PATTERNS.some((pattern) => pattern.test(message));
+};
+
+let authExpired = false;
+const authExpiryListeners = new Set<() => void>();
+
+export const subscribeAuthExpiry = (listener: () => void): (() => void) => {
+  authExpiryListeners.add(listener);
+  return () => {
+    authExpiryListeners.delete(listener);
+  };
+};
+
+export const getAuthExpiredSnapshot = (): boolean => authExpired;
+
+const markAuthExpired = (): void => {
+  if (authExpired) return;
+  authExpired = true;
+  authExpiryListeners.forEach((listener) => listener());
+};
+
+export const resetAuthExpiry = (): void => {
+  if (!authExpired) return;
+  authExpired = false;
+  authExpiryListeners.forEach((listener) => listener());
+};
+
+// Wrap call/query/readState to flag auth-expiry errors. receiver=target keeps
+// private-field getters (e.g. HttpAgent rootKey) working through the Proxy.
+const INTERCEPTED_METHODS = new Set(["call", "query", "readState"]);
+const wrapAgentWithAuthExpiry = (agent: Agent): Agent =>
+  new Proxy(agent, {
+    get(target, prop) {
+      const value = Reflect.get(target, prop, target);
+      if (typeof value !== "function") return value;
+      const fn = value as (...args: unknown[]) => unknown;
+      if (typeof prop !== "string" || !INTERCEPTED_METHODS.has(prop)) {
+        return fn.bind(target);
+      }
+      return (...args: unknown[]) => {
+        try {
+          const result = fn.apply(target, args);
+          if (result instanceof Promise) {
+            return result.catch((err) => {
+              if (isAuthExpiryError(err)) markAuthExpired();
+              throw err;
+            });
+          }
+          return result;
+        } catch (err) {
+          if (isAuthExpiryError(err)) markAuthExpired();
+          throw err;
+        }
+      };
+    },
+  });
+
 export const setAuthedAgent = (agent: Agent | undefined): void => {
-  authedAgent = agent;
+  authedAgent = agent ? wrapAgentWithAuthExpiry(agent) : undefined;
 };
 
 export const getAuthedAgent = (): Agent | undefined => authedAgent;

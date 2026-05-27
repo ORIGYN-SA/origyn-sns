@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Dialog } from "@components/ui";
 import { useSwapTokens } from "../context";
 import Form from "./form/Form";
@@ -8,7 +7,6 @@ import FormError from "./form/FormError";
 
 const DialogSwapTokens = () => {
   const { show, handleClose, sendTokens, requestSwap } = useSwapTokens();
-  const [enableClose, setEnableClose] = useState(true);
 
   const {
     isSuccess: isSuccessSendTokens,
@@ -22,21 +20,11 @@ const DialogSwapTokens = () => {
     isPending: isPendingRequestSwap,
   } = requestSwap;
 
-  useEffect(() => {
-    if (
-      isSuccessRequestSwap ||
-      isErrorSendTokens ||
-      isErrorRequestSwap ||
-      isIdleSendTokens
-    )
-      setEnableClose(true);
-    else setEnableClose(false);
-  }, [
-    isErrorRequestSwap,
-    isErrorSendTokens,
-    isIdleSendTokens,
-    isSuccessRequestSwap,
-  ]);
+  const enableClose =
+    isSuccessRequestSwap ||
+    isErrorSendTokens ||
+    isErrorRequestSwap ||
+    isIdleSendTokens;
 
   return (
     <>

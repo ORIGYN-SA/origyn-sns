@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useWallet } from "@components/auth/useWallet";
 import { getActor } from "@services/actor";
 import { Principal } from "@dfinity/principal";
+import { requireVariant } from "@services/queries/utils/variant";
 
 const requestSwap = async ({
   owner,
@@ -16,7 +17,11 @@ const requestSwap = async ({
     user: [Principal.fromText(owner)],
   });
 
-  return resultSwapTokens;
+  return requireVariant<bigint>(
+    resultSwapTokens,
+    "Success",
+    "Swap request failed"
+  );
 };
 
 const useRequestSwap = () => {

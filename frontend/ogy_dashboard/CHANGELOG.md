@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.37] - 2026-05-27
+
+#### Changed
+
+- Finalized wallet login for Internet Identity, OISY, and Plug.
+- Disabled the legacy OGY swap for OISY, which cannot sign those calls.
+
 ### [1.0.36] - 2026-05-27
 
 #### Added
