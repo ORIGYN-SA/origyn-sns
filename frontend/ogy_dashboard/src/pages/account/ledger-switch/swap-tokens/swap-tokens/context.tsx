@@ -16,6 +16,7 @@ interface SwapTokensContextType {
   principal: string | undefined;
   accountId: string | undefined;
   isWhitelisted: boolean | undefined;
+  swapDisabledReason: string | undefined;
 }
 
 const SwapTokensContext = createContext<SwapTokensContextType | undefined>(
@@ -32,13 +33,24 @@ export const useSwapTokens = () => {
 };
 
 export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
-  const { principalId, accountId } = useWallet();
+  const { principalId, accountId, subAccount, walletSelected } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const sendTokens = useSendTokens();
   const requestSwap = useRequestSwap();
   const fetchBalanceLegacy = useFetchBalanceOGYLegacyOwner();
-  const { data: isWhitelisted } = useIsWhitelisted(principalId);
+  // The swap canister has no ICRC-21 consent message, so OISY can't sign its
+  // calls. Disable swap for OISY (also skips the is_caller_whitelisted query).
+  const swapDisabledReason =
+    walletSelected === "oisy"
+      ? "Legacy OGY swap isn't available with OISY. Connect with Internet Identity or Plug to swap your legacy OGY."
+      : subAccount
+        ? "Legacy OGY swap is only supported from the principal default account."
+        : undefined;
+  const { data: isWhitelisted } = useIsWhitelisted(
+    principalId,
+    !swapDisabledReason
+  );
 
   const handleClose = () => {
     setShow(false);
@@ -58,6 +70,7 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
         principal: principalId,
         accountId,
         isWhitelisted,
+        swapDisabledReason,
       }}
     >
       {children}

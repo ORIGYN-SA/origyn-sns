@@ -9,6 +9,7 @@ import { Stat } from "@components/dashboard";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
+import AccountIdPill from "@components/account/AccountIdPill";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -17,7 +18,7 @@ interface AccountOverviewProps {
 
 const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const navigate = useNavigate();
-  const { principalId, handleDisconnectWallet } = useWallet();
+  const { principalId, accountId, handleDisconnectWallet } = useWallet();
 
   const { data: balanceOGY } = useFetchBalanceOGYOwner();
   const {
@@ -154,7 +155,10 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                           )}
                         </div>
                       </div>
-                      <PrincipalIdPill principalId={principalId} showCopy />
+                      <div className="flex w-full flex-col gap-2">
+                        <PrincipalIdPill principalId={principalId} showCopy />
+                        <AccountIdPill accountId={accountId} />
+                      </div>
                       <div className="mt-auto flex w-full flex-col gap-3">
                         <Button
                           className="h-12 w-full !py-0 text-[14px] leading-[48px]"

@@ -6,9 +6,10 @@ import StakedOGY from "@pages/account/staked-ogy";
 import StakedRewards from "@pages/account/staked-rewards";
 import NeuronsList from "./neurons-list/index";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
+import AccountIdPill from "@components/account/AccountIdPill";
 
 export const Account = () => {
-  const { principalId } = useWallet();
+  const { principalId, accountId } = useWallet();
 
   return (
     <PageContainer className="container max-w-none py-8 px-4 sm:py-16">
@@ -20,6 +21,10 @@ export const Account = () => {
           principalId={principalId}
           showCopy
           className="mx-auto max-w-[502px]"
+        />
+        <AccountIdPill
+          accountId={accountId}
+          className="mx-auto mt-3 max-w-[502px]"
         />
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">

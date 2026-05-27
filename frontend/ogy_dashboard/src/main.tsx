@@ -1,16 +1,13 @@
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { IdentityKitProvider } from "@nfid/identitykit/react";
-import { IdentityKitAuthType, InternetIdentity } from "@nfid/identitykit";
+import { InternetIdentity, OISY } from "@nfid/identitykit";
 import "@nfid/identitykit/react/styles.css";
 
 import App from "./App.tsx";
 import { TooltipProvider } from "@components/ui/tooltip/TooltipPrimitive";
 import { WalletProvider } from "@components/auth/WalletProvider";
-import {
-  clearLegacyIdentityKitOisySession,
-  DERIVATION_ORIGIN,
-} from "@components/auth/constants";
+import { DERIVATION_ORIGIN } from "@components/auth/constants";
 import { whitelistedCanisterIds } from "@services/actor";
 
 if (import.meta.env.DEV) {
@@ -34,16 +31,19 @@ const queryClient = new QueryClient({
 const LOCAL_HOSTNAMES = new Set(["localhost", "127.0.0.1", "::1"]);
 const isLocalhostDev =
   import.meta.env.DEV && LOCAL_HOSTNAMES.has(window.location.hostname);
-const signerClientOptions = isLocalhostDev
-  ? { targets: whitelistedCanisterIds }
-  : { targets: whitelistedCanisterIds, derivationOrigin: DERIVATION_ORIGIN };
 
-clearLegacyIdentityKitOisySession();
+// No global authType: IdentityKit uses DELEGATION for Internet Identity and
+// ACCOUNTS for OISY. Forcing DELEGATION breaks OISY, which has no delegation.
+const signerClientOptions = {
+  targets: whitelistedCanisterIds,
+  maxTimeToLive: 604_800_000_000_000n, // 7 days, matching the other platform
+  idleOptions: { disableIdle: false },
+  ...(isLocalhostDev ? {} : { derivationOrigin: DERIVATION_ORIGIN }),
+};
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <IdentityKitProvider
-    authType={IdentityKitAuthType.DELEGATION}
-    signers={[InternetIdentity]}
+    signers={[InternetIdentity, OISY]}
     signerClientOptions={signerClientOptions}
   >
     <WalletProvider>

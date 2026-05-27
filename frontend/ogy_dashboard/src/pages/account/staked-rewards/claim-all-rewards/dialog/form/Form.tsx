@@ -8,21 +8,21 @@ const Form = () => {
   const { principal, claimAmount, neuronIds, mutation } = useClaimAllRewards();
 
   const handleClaimAllRewards = () => {
-    neuronIds.forEach((neuronId) => {
-      mutation.mutate(
-        {
-          neuronId: { id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))] },
+    mutation.mutate(
+      {
+        neuronIds: neuronIds.map((neuronId) => ({
+          id: [...Uint8Array.from(Buffer.from(neuronId, "hex"))],
+        })),
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["userListNeuronsAll"] });
+          queryClient.invalidateQueries({
+            queryKey: ["getNeuronClaimBalance"],
+          });
         },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["userListNeuronsAll"] });
-            queryClient.invalidateQueries({
-              queryKey: ["getNeuronClaimBalance"],
-            });
-          },
-        }
-      );
-    });
+      }
+    );
   };
 
   return (

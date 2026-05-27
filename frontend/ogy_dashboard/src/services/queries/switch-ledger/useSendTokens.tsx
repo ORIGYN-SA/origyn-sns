@@ -5,14 +5,7 @@ import { Principal } from "@dfinity/principal";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE } from "@constants/index";
 import { Response_1 } from "@services/types/ogy_token_swap";
-
-// const isRejected = (
-//   input: PromiseSettledResult<unknown>
-// ): input is PromiseRejectedResult => input.status === "rejected";
-
-const isFulfilled = <T,>(
-  input: PromiseSettledResult<T>
-): input is PromiseFulfilledResult<T> => input.status === "fulfilled";
+import { requireVariant } from "@services/queries/utils/variant";
 
 interface IValueOGYBalance {
   e8s: bigint;
@@ -25,15 +18,24 @@ const sendTokens = async ({
   owner: string;
   subAccount?: SubAccount;
 }) => {
+  if (subAccount) {
+    throw new Error(
+      "Legacy OGY swap is only supported from the principal default account."
+    );
+  }
+
   // for fetching OGY user balance
   const userAccountIdentifier = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(owner),
-    subAccount,
   });
   const actorLedgerLegacy = await getActor("ledgerLegacy", { isAnon: false });
+  const actorLedgerLegacyAnon = await getActor("ledgerLegacy", {
+    isAnon: true,
+  });
   const actorOGYTokenSwap = await getActor("OGYTokenSwap", { isAnon: false });
-  const rawResult = await Promise.allSettled([
-    actorLedgerLegacy.account_balance_dfx({
+  const [balance, depositAccountResult] = await Promise.all([
+    // Account-keyed query, read anonymously (no wallet consent).
+    actorLedgerLegacyAnon.account_balance_dfx({
       account: userAccountIdentifier.toHex(),
     }),
     actorOGYTokenSwap.request_deposit_account({
@@ -41,18 +43,29 @@ const sendTokens = async ({
     }),
   ]);
 
-  const result = rawResult.filter(isFulfilled);
+  const balanceE8s = (balance as IValueOGYBalance).e8s;
+  if (balanceE8s <= TRANSACTION_FEE) {
+    throw new Error("Legacy OGY balance is too low to cover the transfer fee.");
+  }
+
+  const depositAccount = requireVariant<Uint8Array | number[]>(
+    depositAccountResult as Response_1,
+    "Success",
+    "Deposit account request failed"
+  );
   const to = Principal.fromUint8Array(
-    (result[1]?.value as Response_1).Success as Uint8Array
+    depositAccount instanceof Uint8Array
+      ? depositAccount
+      : Uint8Array.from(depositAccount)
   ).toHex();
   const fee = { e8s: TRANSACTION_FEE };
-  const amount = (result[0]?.value as IValueOGYBalance).e8s - TRANSACTION_FEE;
+  const amount = balanceE8s - TRANSACTION_FEE;
 
   const resultSendTokens = await actorLedgerLegacy.send_dfx({
     to,
     fee,
     memo: 0,
-    from_subaccount: subAccount ? [subAccount.toUint8Array()] : [],
+    from_subaccount: [],
     created_at_time: [],
     amount: { e8s: amount },
   });
