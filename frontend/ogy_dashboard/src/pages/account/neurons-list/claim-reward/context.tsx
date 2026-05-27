@@ -9,6 +9,7 @@ interface ClaimRewardContextType {
   neuronId: string;
   claimAmount: number;
   principal: string | undefined;
+  claimDisabledReason: string | undefined;
 }
 
 const ClaimRewardContext = createContext<ClaimRewardContextType | undefined>(
@@ -33,7 +34,10 @@ export const ClaimRewardProvider = ({
   neuronId: string;
   claimAmount: number;
 }) => {
-  const { principalId } = useWallet();
+  const { principalId, subAccount } = useWallet();
+  const claimDisabledReason = subAccount
+    ? "Reward claims are only supported for the principal default account."
+    : undefined;
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const mutation = useClaimRewardService();
@@ -53,6 +57,7 @@ export const ClaimRewardProvider = ({
         neuronId,
         claimAmount,
         principal: principalId,
+        claimDisabledReason,
       }}
     >
       {children}

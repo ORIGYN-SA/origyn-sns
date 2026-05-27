@@ -2,6 +2,7 @@ import { Principal } from "@dfinity/principal";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { TRANSACTION_FEE_ICP } from "@constants/index";
 import { getActor } from "@services/actor";
+import { requireVariant } from "@services/queries/utils/variant";
 
 const transferICP = async ({
   amount,
@@ -14,10 +15,12 @@ const transferICP = async ({
 }) => {
   const accountId = AccountIdentifier.fromPrincipal({
     principal: Principal.fromText(to),
-  }).toHex();
+  });
   const actor = await getActor("ledgerICP", { isAnon: false });
-  const result = await actor.send_dfx({
-    to: accountId,
+  // Use transfer, not the deprecated send_dfx: the ICP ledger only exposes an
+  // ICRC-21 consent message for transfer, which OISY needs to sign the call.
+  const result = await actor.transfer({
+    to: accountId.toUint8Array(),
     fee: {
       e8s: BigInt(TRANSACTION_FEE_ICP),
     },
@@ -26,7 +29,7 @@ const transferICP = async ({
     created_at_time: [],
     amount: { e8s: amount },
   });
-  return result;
+  return requireVariant<bigint>(result, "Ok", "ICP transfer failed");
 };
 
 export default transferICP;

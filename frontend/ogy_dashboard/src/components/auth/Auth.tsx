@@ -12,41 +12,64 @@ const Auth = ({
   className?: string;
 }) => {
   const {
-    state,
     isConnected,
+    isConnecting,
     handleOpenWalletList,
-    handleSelectWallet,
     handleDisconnectWallet,
-    walletState,
-    handleCloseWalletList,
-    walletList,
   } = useWallet();
-  const [connectingDialogDismissed, setConnectingDialogDismissed] =
-    useState(false);
-
-  const showConnectingDialog =
-    state === walletState.Connecting && !connectingDialogDismissed;
 
   const handleShowWalletList = () => {
-    setConnectingDialogDismissed(false);
     handleOpenWalletList();
-  };
-
-  const handleCloseConnectingDialog = () => {
-    setConnectingDialogDismissed(true);
-    handleCloseWalletList();
   };
 
   return (
     <>
       {!isConnected && (
-        <Button className={className} onClick={handleShowWalletList}>
+        <Button
+          className={className}
+          onClick={handleShowWalletList}
+          disabled={isConnecting}
+          aria-busy={isConnecting}
+        >
           {label}
         </Button>
       )}
       {isConnected && (
         <Button onClick={handleDisconnectWallet}>Disconnect</Button>
       )}
+    </>
+  );
+};
+
+export const AuthDialogs = () => {
+  const {
+    state,
+    handleSelectWallet,
+    walletState,
+    handleCloseWalletList,
+    walletList,
+    connectError,
+    sessionExpired,
+    isRestoring,
+    handleReconnect,
+    handleDisconnectWallet,
+  } = useWallet();
+  const [connectingDialogDismissed, setConnectingDialogDismissed] =
+    useState(false);
+
+  // Suppress during restore: IdentityKit reports "connecting" while it rehydrates
+  // a saved session, which isn't a user-initiated connect.
+  const showConnectingDialog =
+    state === walletState.Connecting &&
+    !isRestoring &&
+    !connectingDialogDismissed;
+
+  const handleCloseConnectingDialog = () => {
+    setConnectingDialogDismissed(true);
+  };
+
+  return (
+    <>
       <Dialog
         show={state === walletState.OpenWalletList}
         handleClose={handleCloseWalletList}
@@ -65,6 +88,14 @@ const Auth = ({
               </div>
             </div>
           </div>
+          {connectError && (
+            <div
+              role="alert"
+              className="rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-[13px] leading-snug text-red-400"
+            >
+              {connectError}
+            </div>
+          )}
           <div className="flex flex-col gap-2">
             {walletList.map(({ id, icon, name }) => {
               const plugMissing = id === "plug" && !isPlugInstalled();
@@ -138,12 +169,35 @@ const Auth = ({
           <LoaderSpin />
           <div className="flex flex-col items-center gap-1.5">
             <div className="text-[18px] font-semibold leading-none text-content">
-              Connecting…
+              Connecting...
             </div>
             <div className="text-[13px] leading-none text-muted">
               Approve the request in your wallet
             </div>
           </div>
+        </div>
+      </Dialog>
+      <Dialog
+        show={sessionExpired}
+        handleClose={handleDisconnectWallet}
+        panelClassName="max-w-[360px] rounded-[20px] bg-surface-1 border border-border-strong shadow-2xl"
+        floatingClose
+      >
+        <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[360px] flex flex-col gap-8">
+          <div className="flex flex-col items-center gap-4">
+            <img src="/ogy_logo.svg" alt="" className="h-9 w-auto" />
+            <div className="flex flex-col items-center gap-1.5 text-center">
+              <div className="text-[22px] font-semibold leading-none text-content">
+                Session expired
+              </div>
+              <div className="text-[13px] leading-snug text-muted">
+                Your wallet session is no longer valid. Reconnect to continue.
+              </div>
+            </div>
+          </div>
+          <Button className="w-full" onClick={handleReconnect}>
+            Reconnect
+          </Button>
         </div>
       </Dialog>
     </>

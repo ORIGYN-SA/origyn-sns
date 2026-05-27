@@ -11,7 +11,7 @@ const ACTION_BUTTON_CLASS =
   "h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2";
 
 const AvailableOGY = () => {
-  const { principalId } = useWallet();
+  const { accountId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -31,7 +31,7 @@ const AvailableOGY = () => {
       title="Available OGY"
       headerAction={
         <Link
-          to={`/transaction-history/transactions/accounts/${principalId}#transaction-history-table`}
+          to={`/transaction-history/transactions/accounts/${accountId}#transaction-history-table`}
           className="font-medium text-xs leading-none text-accent"
         >
           Transaction history
