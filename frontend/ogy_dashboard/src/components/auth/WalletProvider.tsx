@@ -10,8 +10,8 @@ import {
 import type { Agent } from "@dfinity/agent";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { Principal } from "@dfinity/principal";
-import { useAuth, useAgent, useIsInitializing } from "@nfid/identitykit/react";
-import { InternetIdentity, OISY } from "@nfid/identitykit";
+import { useAuth, useAgent, useIsInitializing } from "@amerej/identitykit/react";
+import { InternetIdentity, OISY } from "@amerej/identitykit";
 
 import {
   IC_HOST,
