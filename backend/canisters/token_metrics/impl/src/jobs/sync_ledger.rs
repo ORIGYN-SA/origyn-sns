@@ -47,6 +47,7 @@ pub fn run() {
 
 /// Main processing loop: download + process each chunk within the IC instruction limit.
 async fn process_ledger_sync() {
+    let next_block_before = read_state(|s| s.data.ledger_indexer.working_stats.next_block);
     mutate_state(|s| {
         s.data.ledger_indexer.working_stats.is_busy = true;
         s.data.ledger_indexer.working_stats.busy_since = ic_cdk::api::time();
@@ -55,13 +56,30 @@ async fn process_ledger_sync() {
 
     match t2_download_and_process().await {
         Ok(()) => {
-            let is_upto_date = read_state(|s| s.data.ledger_indexer.working_stats.is_upto_date);
+            let (is_upto_date, next_block_after) = read_state(|s| {
+                (
+                    s.data.ledger_indexer.working_stats.is_upto_date,
+                    s.data.ledger_indexer.working_stats.next_block,
+                )
+            });
+            let blocks_advanced = next_block_after > next_block_before;
+
             if is_upto_date {
                 // Stats calculation and dependent job triggering run in a separate
                 // spawned task so they don't share the instruction budget with the
                 // last chunk's processing (which already consumed most of it).
-                info!("sync_ledger: up to date, scheduling stats calculation");
-                schedule_post_sync_tasks();
+                //
+                // Stats are gated on actual block progress: if no new transactions
+                // were processed this tick, stats can't have changed, so recomputing
+                // them is pure waste. This avoids ~50 T cycles/day of wasted scans
+                // over the full StableBTreeMap<u64, ProcessedTX> when the chain is idle.
+                if blocks_advanced {
+                    info!("sync_ledger: up to date, scheduling stats recompute");
+                    schedule_stats_recompute();
+                } else {
+                    info!("sync_ledger: up to date, no new blocks — skipping stats");
+                }
+                schedule_initial_sync_hooks_if_needed();
             }
         }
         Err(e) => {
@@ -84,25 +102,35 @@ async fn process_ledger_sync() {
     }
 }
 
-/// Run stats calculation and dependent job triggers in a deferred timer callback
-/// so they get their own IC message with a full instruction budget.
-fn schedule_post_sync_tasks() {
+/// Recompute daily + hourly stats in a deferred timer callback so they get
+/// their own IC message with a full instruction budget. Caller is responsible
+/// for only invoking this when there is new data to reflect.
+fn schedule_stats_recompute() {
     ic_cdk_timers::set_timer(Duration::from_secs(0), async {
         info!("sync_ledger: calculating daily stats");
         calculate_daily_stats();
         info!("sync_ledger: calculating hourly stats");
         calculate_hourly_stats();
+    });
+}
 
-        let already_synced =
-            read_state(|s| s.data.ledger_indexer.working_stats.initial_sync_complete);
-        if !already_synced {
-            info!("sync_ledger: initial sync complete, triggering dependent jobs");
-            mutate_state(|s| {
-                s.data.ledger_indexer.working_stats.initial_sync_complete = true;
-            });
-            crate::jobs::sync_governance_history::run();
-            crate::jobs::update_balance_list::run();
-        }
+/// One-time post-initial-sync hook: triggers the dependent jobs once the ledger
+/// has caught up for the first time. Idempotent thereafter — gated on
+/// `initial_sync_complete`. Must NOT be gated on per-tick block progress, since
+/// a fresh upgrade where next_block already equals tip is still a valid
+/// "initial sync complete" trigger.
+fn schedule_initial_sync_hooks_if_needed() {
+    let already_synced = read_state(|s| s.data.ledger_indexer.working_stats.initial_sync_complete);
+    if already_synced {
+        return;
+    }
+    ic_cdk_timers::set_timer(Duration::from_secs(0), async {
+        info!("sync_ledger: initial sync complete, triggering dependent jobs");
+        mutate_state(|s| {
+            s.data.ledger_indexer.working_stats.initial_sync_complete = true;
+        });
+        crate::jobs::sync_governance_history::run();
+        crate::jobs::update_balance_list::run();
     });
 }
 
