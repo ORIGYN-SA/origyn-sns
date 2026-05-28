@@ -2,12 +2,17 @@ import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "@components/PageLayout";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
 import styles from "./IntegratorJoinPage.module.scss";
 
 const API_URL = import.meta.env.VITE_INTEGRATOR_JOIN_API_URL || "";
 
 export default function IntegratorJoinPage() {
   const navigate = useNavigate();
+  const t = useT();
+  const { locale } = useLocale();
+  const backToIntegrator = localePath(locale, "integrator");
   const [status, setStatus] = useState("idle");
   const [submitError, setSubmitError] = useState("");
   const logoRef = useRef(null);
@@ -71,7 +76,7 @@ export default function IntegratorJoinPage() {
   const handleFile = (file) => {
     if (!file) return;
     if (file.size > MAX_FILE_SIZE) {
-      setUploadError("File size must not exceed 1 MB");
+      setUploadError(t("integratorJoin.fileSizeError"));
       setUploadLabel("");
       setUploadPreview(null);
       if (logoRef.current) logoRef.current.value = "";
@@ -145,12 +150,14 @@ export default function IntegratorJoinPage() {
       setStatus("success");
     } catch (err) {
       console.error(err.message || "Unexpected error.");
-      setSubmitError("Send form error.");
+      setSubmitError(t("integratorJoin.errorSend"));
       setStatus("error");
     }
   };
 
-  const required = (msg) => ({ required: msg });
+  const required = () => ({ required: t("integratorJoin.requiredMessage") });
+  const objectiveTemplate = t("integratorJoin.sections.objectives.more");
+  const kpiTemplate = t("integratorJoin.sections.kpis.more");
 
   if (status === "success") {
     return (
@@ -159,16 +166,20 @@ export default function IntegratorJoinPage() {
           <div className={styles.content}>
             <div className={styles.statePanel}>
               <h1 className={styles.title}>
-                <span className={styles.titleItalic}>Thank you</span>
+                <span className={styles.titleItalic}>
+                  {t("integratorJoin.successTitle")}
+                </span>
               </h1>
-              <p className={styles.stateMessage}>We will get back to you</p>
+              <p className={styles.stateMessage}>
+                {t("integratorJoin.successMessage")}
+              </p>
               <button
                 type="button"
                 className={styles.sendBtn}
                 style={{ marginTop: 24 }}
-                onClick={() => navigate("/integrator")}
+                onClick={() => navigate(backToIntegrator)}
               >
-                BACK TO INTEGRATOR PAGE
+                {t("integratorJoin.backToIntegrator")}
               </button>
             </div>
           </div>
@@ -184,10 +195,12 @@ export default function IntegratorJoinPage() {
           <div className={styles.content}>
             <div className={styles.statePanel}>
               <h1 className={styles.title}>
-                <span className={styles.titleItalic}>Something went wrong</span>
+                <span className={styles.titleItalic}>
+                  {t("integratorJoin.errorTitle")}
+                </span>
               </h1>
               <p className={styles.stateMessage}>
-                {submitError || "Please try again or come back later"}
+                {submitError || t("integratorJoin.errorMessageDefault")}
               </p>
               <div className={styles.stateBtns}>
                 <button
@@ -198,14 +211,14 @@ export default function IntegratorJoinPage() {
                     setSubmitError("");
                   }}
                 >
-                  RETRY
+                  {t("integratorJoin.retry")}
                 </button>
                 <button
                   type="button"
                   className={styles.sendBtn}
-                  onClick={() => navigate("/integrator")}
+                  onClick={() => navigate(backToIntegrator)}
                 >
-                  BACK TO INTEGRATOR PAGE
+                  {t("integratorJoin.backToIntegrator")}
                 </button>
               </div>
             </div>
@@ -221,36 +234,38 @@ export default function IntegratorJoinPage() {
       <div className={`${styles.content} mx-auto px-4 pt-24 xl:pt-40 pb-24`}>
         <div>
           <h1 className={styles.title}>
-            Integrators Program
-            <span className={styles.titleItalic}>Application Form</span>
+            {t("integratorJoin.title")}
+            <span className={styles.titleItalic}>
+              {t("integratorJoin.titleItalic")}
+            </span>
           </h1>
         </div>
         <div className={styles.formWrapper}>
           <div className={styles.formTop}>
-            <p className={styles.requiredLabel}>REQUIRED *</p>
+            <p className={styles.requiredLabel}>{t("integratorJoin.requiredLabel")}</p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.fieldGroup}>
                 <div className={styles.sectionTitle}>
-                  INTEGRATOR REPRESENTATIVE
+                  {t("integratorJoin.sections.representative.title")}
                 </div>
                 <input
                   className={`${styles.input} ${errors.fullName ? styles.inputError : ""}`}
-                  placeholder="FULL NAME *"
-                  {...register("fullName", required("Required"))}
+                  placeholder={t("integratorJoin.sections.representative.fullName")}
+                  {...register("fullName", required())}
                 />
                 {errors.fullName && (
                   <p className={styles.errorText}>{errors.fullName.message}</p>
                 )}
                 <input
                   className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
-                  placeholder="EMAIL ADDRESS *"
+                  placeholder={t("integratorJoin.sections.representative.email")}
                   type="email"
                   {...register("email", {
-                    required: "Required",
+                    required: t("integratorJoin.requiredMessage"),
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Please enter a valid email address",
+                      message: t("integratorJoin.emailInvalid"),
                     },
                   })}
                 />
@@ -259,8 +274,8 @@ export default function IntegratorJoinPage() {
                 )}
                 <input
                   className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
-                  placeholder="PHONE NUMBER *"
-                  {...register("phone", required("Required"))}
+                  placeholder={t("integratorJoin.sections.representative.phone")}
+                  {...register("phone", required())}
                 />
                 {errors.phone && (
                   <p className={styles.errorText}>{errors.phone.message}</p>
@@ -268,23 +283,24 @@ export default function IntegratorJoinPage() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <div className={styles.sectionTitle}>OVERVIEW</div>
+                <div className={styles.sectionTitle}>
+                  {t("integratorJoin.sections.overview.title")}
+                </div>
                 <div className={styles.sectionDesc}>
-                  PLEASE WRITE A BRIEF OVERVIEW OF THE INTEGRATOR PROJECT,
-                  INCLUDING
+                  {t("integratorJoin.sections.overview.description")}
                 </div>
                 <input
                   className={`${styles.input} ${errors.vision ? styles.inputError : ""}`}
-                  placeholder="The vision of your Integrator in a sentence... *"
-                  {...register("vision", required("Required"))}
+                  placeholder={t("integratorJoin.sections.overview.vision")}
+                  {...register("vision", required())}
                 />
                 {errors.vision && (
                   <p className={styles.errorText}>{errors.vision.message}</p>
                 )}
                 <input
                   className={`${styles.input} ${errors.industryCategory ? styles.inputError : ""}`}
-                  placeholder="Industry category examples (art, music, luxury) or Specific assets (gold, diamonds) *"
-                  {...register("industryCategory", required("Required"))}
+                  placeholder={t("integratorJoin.sections.overview.industry")}
+                  {...register("industryCategory", required())}
                 />
                 {errors.industryCategory && (
                   <p className={styles.errorText}>
@@ -293,8 +309,8 @@ export default function IntegratorJoinPage() {
                 )}
                 <input
                   className={`${styles.input} ${errors.marketGeography ? styles.inputError : ""}`}
-                  placeholder="Market Geography (Global, Europe, Country specific) *"
-                  {...register("marketGeography", required("Required"))}
+                  placeholder={t("integratorJoin.sections.overview.geography")}
+                  {...register("marketGeography", required())}
                 />
                 {errors.marketGeography && (
                   <p className={styles.errorText}>
@@ -307,12 +323,12 @@ export default function IntegratorJoinPage() {
                     className={`${styles.input} ${i === 0 && errors.websiteSocialLinks ? styles.inputError : ""}`}
                     placeholder={
                       i === 0
-                        ? "Website and Social Media links *"
-                        : "Website and Social Media links"
+                        ? t("integratorJoin.sections.overview.socialFirst")
+                        : t("integratorJoin.sections.overview.social")
                     }
                     {...register(
                       `websiteSocialLinks.${i}`,
-                      i === 0 ? required("Required") : {},
+                      i === 0 ? required() : {},
                     )}
                   />
                 ))}
@@ -333,12 +349,12 @@ export default function IntegratorJoinPage() {
                       alt=""
                       className={styles.addBtnIcon}
                     />
-                    ADD A LINK
+                    {t("integratorJoin.addLink")}
                   </button>
                 </div>
                 <input
                   className={styles.input}
-                  placeholder="Link to project presentation (not mandatory, but helpful)"
+                  placeholder={t("integratorJoin.sections.overview.presentation")}
                   {...register("presentationLinks")}
                 />
                 <div
@@ -358,7 +374,7 @@ export default function IntegratorJoinPage() {
                   {uploadPreview ? (
                     <img
                       src={uploadPreview}
-                      alt="Logo preview"
+                      alt={t("integratorJoin.logoPreviewAlt")}
                       className={styles.uploadPreview}
                     />
                   ) : (
@@ -371,13 +387,15 @@ export default function IntegratorJoinPage() {
                   <div className={styles.uploadLabel}>
                     {uploadLabel || (
                       <>
-                        <span className={styles.uploadHighlight}>Upload</span>
-                        <span>{" your logo or drag it here (OPTIONAL)"}</span>
+                        <span className={styles.uploadHighlight}>
+                          {t("integratorJoin.uploadHighlight")}
+                        </span>
+                        <span>{t("integratorJoin.uploadSuffix")}</span>
                       </>
                     )}
                   </div>
                   <div className={styles.uploadHint}>
-                    JPEG, PNG, SVG, PDF — 1 MB max
+                    {t("integratorJoin.uploadHint")}
                   </div>
                 </div>
                 {uploadError && (
@@ -386,15 +404,16 @@ export default function IntegratorJoinPage() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <div className={styles.sectionTitle}>ACQUISITION</div>
+                <div className={styles.sectionTitle}>
+                  {t("integratorJoin.sections.acquisition.title")}
+                </div>
                 <div className={styles.sectionDesc}>
-                  CLEARLY DEFINE YOUR TARGET AUDIENCE AND HOW YOU ACQUIRE THEM
-                  OR WILL ACQUIRE THEM
+                  {t("integratorJoin.sections.acquisition.description")}
                 </div>
                 <input
                   className={`${styles.input} ${errors.whyProjectExists ? styles.inputError : ""}`}
-                  placeholder="Why does this project need to exist, and how is it different? *"
-                  {...register("whyProjectExists", required("Required"))}
+                  placeholder={t("integratorJoin.sections.acquisition.whyExists")}
+                  {...register("whyProjectExists", required())}
                 />
                 {errors.whyProjectExists && (
                   <p className={styles.errorText}>
@@ -403,8 +422,8 @@ export default function IntegratorJoinPage() {
                 )}
                 <input
                   className={`${styles.input} ${errors.whyBecomeIntegrator ? styles.inputError : ""}`}
-                  placeholder="Why is it important to you to become an Integrator? *"
-                  {...register("whyBecomeIntegrator", required("Required"))}
+                  placeholder={t("integratorJoin.sections.acquisition.whyIntegrator")}
+                  {...register("whyBecomeIntegrator", required())}
                 />
                 {errors.whyBecomeIntegrator && (
                   <p className={styles.errorText}>
@@ -415,12 +434,12 @@ export default function IntegratorJoinPage() {
 
               <div className={styles.fieldGroup}>
                 <div className={styles.sectionTitle}>
-                  KEY OBJECTIVES THAT YOU WANT TO ACHIEVE
+                  {t("integratorJoin.sections.objectives.title")}
                 </div>
                 <input
                   className={`${styles.input} ${errors.objectif01 ? styles.inputError : ""}`}
-                  placeholder="Objectif 01 *"
-                  {...register("objectif01", required("Required"))}
+                  placeholder={t("integratorJoin.sections.objectives.first")}
+                  {...register("objectif01", required())}
                 />
                 {errors.objectif01 && (
                   <p className={styles.errorText}>
@@ -429,14 +448,17 @@ export default function IntegratorJoinPage() {
                 )}
                 <input
                   className={styles.input}
-                  placeholder="Objectif 02"
+                  placeholder={t("integratorJoin.sections.objectives.second")}
                   {...register("objectif02")}
                 />
                 {objectives.map((_, i) => (
                   <input
                     key={i}
                     className={styles.input}
-                    placeholder={`Objectif ${String(i + 3).padStart(2, "0")}`}
+                    placeholder={objectiveTemplate.replace(
+                      "{n}",
+                      String(i + 3).padStart(2, "0"),
+                    )}
                     {...register(`objectives.${i}`)}
                   />
                 ))}
@@ -451,33 +473,36 @@ export default function IntegratorJoinPage() {
                       alt=""
                       className={styles.addBtnIcon}
                     />
-                    ADD A OBJECTIVE
+                    {t("integratorJoin.addObjective")}
                   </button>
                 </div>
               </div>
 
               <div className={styles.fieldGroup}>
                 <div className={styles.sectionTitle}>
-                  KEY METRICS YOU WANT TO MONITOR
+                  {t("integratorJoin.sections.kpis.title")}
                 </div>
                 <input
                   className={`${styles.input} ${errors.kpi01 ? styles.inputError : ""}`}
-                  placeholder="KPI 01 *"
-                  {...register("kpi01", required("Required"))}
+                  placeholder={t("integratorJoin.sections.kpis.first")}
+                  {...register("kpi01", required())}
                 />
                 {errors.kpi01 && (
                   <p className={styles.errorText}>{errors.kpi01.message}</p>
                 )}
                 <input
                   className={styles.input}
-                  placeholder="KPI 02"
+                  placeholder={t("integratorJoin.sections.kpis.second")}
                   {...register("kpi02")}
                 />
                 {kpis.map((_, i) => (
                   <input
                     key={i}
                     className={styles.input}
-                    placeholder={`KPI ${String(i + 3).padStart(2, "0")}`}
+                    placeholder={kpiTemplate.replace(
+                      "{n}",
+                      String(i + 3).padStart(2, "0"),
+                    )}
                     {...register(`kpis.${i}`)}
                   />
                 ))}
@@ -492,39 +517,38 @@ export default function IntegratorJoinPage() {
                       alt=""
                       className={styles.addBtnIcon}
                     />
-                    ADD A KPI
+                    {t("integratorJoin.addKpi")}
                   </button>
                 </div>
               </div>
 
               <div className={styles.fieldGroup}>
                 <div className={styles.sectionTitle}>
-                  WHAT AND HOW WILL YOU DO
+                  {t("integratorJoin.sections.plan.title")}
                 </div>
                 <textarea
                   className={styles.textarea}
-                  placeholder="Tell us in detail what you will focus on as an Integrator and how the success of this project looks like."
+                  placeholder={t("integratorJoin.sections.plan.focus")}
                   {...register("focusDetail")}
                 />
                 <textarea
                   className={styles.textarea}
-                  placeholder="Tell us how you plan to implement this project"
+                  placeholder={t("integratorJoin.sections.plan.implement")}
                   {...register("planImplement")}
                 />
               </div>
 
               <div className={styles.fieldGroup}>
                 <div className={styles.sectionTitle}>
-                  FIRST 3 MONTH AND 3 YEARS ROADMAPS
+                  {t("integratorJoin.sections.roadmaps.title")}
                 </div>
                 <div className={styles.sectionDesc}>
-                  You must indicate when you expect to start minting and an
-                  estimated number of certificates *
+                  {t("integratorJoin.sections.roadmaps.description")}
                 </div>
                 <textarea
                   className={`${styles.textarea} ${errors.roadmaps ? styles.inputError : ""}`}
                   placeholder=""
-                  {...register("roadmaps", required("Required"))}
+                  {...register("roadmaps", required())}
                 />
                 {errors.roadmaps && (
                   <p className={styles.errorText}>{errors.roadmaps.message}</p>
@@ -532,12 +556,14 @@ export default function IntegratorJoinPage() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <div className={styles.sectionTitle}>TEAM</div>
+                <div className={styles.sectionTitle}>
+                  {t("integratorJoin.sections.team.title")}
+                </div>
 
                 <textarea
                   className={`${styles.textarea} ${errors.team ? styles.inputError : ""}`}
-                  placeholder="Tell us about your current team, if any, or future team roles that you may require, along with links to LinkedIn *"
-                  {...register("team", required("Required"))}
+                  placeholder={t("integratorJoin.sections.team.placeholder")}
+                  {...register("team", required())}
                 />
                 {errors.team && (
                   <p className={styles.errorText}>{errors.team.message}</p>
@@ -545,21 +571,25 @@ export default function IntegratorJoinPage() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <div className={styles.sectionTitle}>RISK FACTORS</div>
+                <div className={styles.sectionTitle}>
+                  {t("integratorJoin.sections.risk.title")}
+                </div>
 
                 <textarea
                   className={styles.textarea}
-                  placeholder="Tell us the reasons and factors which will lead to failure."
+                  placeholder={t("integratorJoin.sections.risk.placeholder")}
                   {...register("riskFactors")}
                 />
               </div>
 
               <div className={styles.fieldGroup}>
-                <div className={styles.sectionTitle}>OPTIONAL</div>
+                <div className={styles.sectionTitle}>
+                  {t("integratorJoin.sections.optional.title")}
+                </div>
 
                 <textarea
                   className={styles.textarea}
-                  placeholder="Anything else you want to share that will increase your chances of selection?"
+                  placeholder={t("integratorJoin.sections.optional.placeholder")}
                   {...register("optional")}
                 />
               </div>
@@ -570,7 +600,9 @@ export default function IntegratorJoinPage() {
                   className={styles.sendBtn}
                   disabled={!isValid || status === "submitting"}
                 >
-                  {status === "submitting" ? "Envoi…" : "SEND"}
+                  {status === "submitting"
+                    ? t("integratorJoin.sending")
+                    : t("integratorJoin.send")}
                 </button>
               </div>
             </form>

@@ -4,43 +4,35 @@ import Iridescence from "../Iridescence/Iridescence";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
 import ContractAddressPill from "../ContractAddressPill/ContractAddressPill";
 import Buy from "../Buy";
+import { useT } from "@/i18n/LocaleContext";
 
 const Address = () => {
+  const t = useT();
   return (
     <section className={styles.address}>
       <div className={styles.addressContent}>
         <h1 className={styles.addressTitle}>
-          <ScrollReveal>
-            OGY Token
-          </ScrollReveal>
+          <ScrollReveal>{t("token.address.titleLineOne")}</ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <b>
-              Contract Address
-            </b>
+            <b>{t("token.address.titleLineTwo")}</b>
           </ScrollReveal>
         </h1>
 
         <ScrollReveal delay={0.25}>
           <p className={styles.addressDescription}>
-            The OGY token is deployed on the Internet Computer blockchain and operates as a native utility token within the ORIGYN Protocol.
+            {t("token.address.description")}
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
           <ul>
-            <li>
-              This contract governs OGY’s issuance, transfers, and interactions across the protocol, ensuring transparency and on-chain verification of all token activity.
-            </li>
-            <li>
-              You can view and interact with the OGY token directly through the ICP network.
-            </li>
+            <li>{t("token.address.bulletOne")}</li>
+            <li>{t("token.address.bulletTwo")}</li>
           </ul>
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
-          <b className={styles.addressWarning}>
-            Always verify the contract address before engaging with OGY.
-          </b>
+          <b className={styles.addressWarning}>{t("token.address.warning")}</b>
         </ScrollReveal>
 
         <ScrollReveal delay={0.45}>
@@ -60,7 +52,7 @@ const Address = () => {
             href="https://coinmarketcap.com/currencies/origyn-foundation/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View OGY on CoinMarketCap"
+            aria-label={t("token.address.cmcAria")}
           >
             <GlassSurface
               width={300}

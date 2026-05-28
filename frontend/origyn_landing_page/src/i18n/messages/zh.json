@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "宣称",
-        "body": "“AI 驱动的链上智能体。”推理发生在 AWS 上。链只存储输出。"
+        "body": "\"AI 驱动的链上智能体。\"推理发生在 AWS 上。链只存储输出。"
       },
       {
         "title": "差距",
@@ -135,8 +135,18 @@
         "gain": "提升"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/次", "origyn": "29 tok/次", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/次", "origyn": "103 tok/次", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/次",
+          "origyn": "29 tok/次",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/次",
+          "origyn": "103 tok/次",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "AI 无法<i>取代</i>的\n五大支柱。",
     "lead": "AI 让生产变得廉价普及。这五个领域依然存在。Origyn 在每一个上都占据位置。",
     "pillars": [
-      { "title": "信任", "description": "Origyn 认证——可验证的信任信号。" },
-      { "title": "上下文", "description": "数十年的结构化记忆——AI 无法匹敌的个人信号。" },
-      { "title": "分发", "description": "瑞士子网——面向智能体的可验证基础设施。" },
-      { "title": "品味", "description": "自动研究管线——由自动化辅助的策展。" },
-      { "title": "责任", "description": "审计轨迹与证书——真正的治理层。" }
+      {
+        "title": "信任",
+        "description": "Origyn 认证——可验证的信任信号。"
+      },
+      {
+        "title": "上下文",
+        "description": "数十年的结构化记忆——AI 无法匹敌的个人信号。"
+      },
+      {
+        "title": "分发",
+        "description": "瑞士子网——面向智能体的可验证基础设施。"
+      },
+      {
+        "title": "品味",
+        "description": "自动研究管线——由自动化辅助的策展。"
+      },
+      {
+        "title": "责任",
+        "description": "审计轨迹与证书——真正的治理层。"
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "语言",
-    "switchTo": "切换到 {language}"
+    "switchTo": "切换到 {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "代币",
+    "ai": "AI",
+    "certificates": "证书",
+    "integrators": "集成商",
+    "useCases": "应用场景",
+    "governance": "治理",
+    "help": "帮助",
+    "toggleMenu": "展开/收起菜单"
+  },
+  "footer": {
+    "certificates": "证书",
+    "integrators": "集成商",
+    "ecosystem": "生态系统",
+    "useCases": "应用场景",
+    "ogyToken": "OGY 代币",
+    "dashboard": "控制台",
+    "copyright": "©2026 版权所有 – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "将您的资产、知识产权\n及身份完全上链，安全可靠。",
+      "subtitleMobile": "将您的资产、\n知识产权\n及身份完全上链，安全可靠。",
+      "logoAlt": "ORIGYN 标志",
+      "certifyCta": "认证您的资产",
+      "buyCta": "购买 $OGY",
+      "marquee": "ORIGYN 让您将数据与资产完全安全地存储于链上"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY 市值",
+        "tooltip": "基于实时代币价格，当前所有流通 OGY 代币的总市场价值。"
+      },
+      "tvl": {
+        "title": "已认证资产的总锁定价值（TVL，美元）",
+        "tooltipTitle": "总锁定价值（TVL）",
+        "tooltip": "TVL 对应已签发证书所代表的资产价值；这并不意味着 ORIGYN 对这些资产进行托管。"
+      },
+      "users": {
+        "title": "用户数",
+        "tooltip": "积极使用 ORIGYN 签发、管理或持有认证资产的个人、品牌及机构总数。"
+      },
+      "assets": {
+        "title": "已认证资产总数",
+        "tooltip": "已获得 ORIGYN 官方证书的实物或数字资产数量。"
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "为何选择",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN——现实世界资产与区块链的交汇之处。",
+      "body": "ORIGYN 是全球最先进的 RWA 协议，致力于将现实世界资产完全上链，涵盖艺术精品、黄金、奢侈品及知识产权等领域。\n\n其提供无需信任的认证基础设施，确保高价值资产的真实性、来源可追溯性及所有权归属。"
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% 链上认证",
+          "description": "无中间商，无篡改。完全去中心化。"
+        },
+        {
+          "title": "$OGY 代币实用性",
+          "description": "通过治理与协议功能驱动 ORIGYN 生态系统。"
+        },
+        {
+          "title": "多资产支持",
+          "description": "认证艺术品、奢侈品、黄金、房地产等各类资产。"
+        },
+        {
+          "title": "行业领先的安全性",
+          "description": "不可篡改的区块链保护，守护您最宝贵的资产。"
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "运作",
+      "titleSuffix": "方式",
+      "steps": [
+        {
+          "description": "将现实世界资产上链应当简便易行。ORIGYN 的认证流程设计安全、去中心化，仅需三个步骤即可完成：<br /><br />提交资产的元数据及相关支撑文件。ORIGYN 将直接在区块链上生成唯一的防篡改数字证书，并将其关联至该资产及其合法所有者。",
+          "panelTitle": "铸造您的数字证书",
+          "panelDescription": "上传资产信息，铸造区块链证书。"
+        },
+        {
+          "description": "每份证书均可通过密码学方式进行验证。资产的真实性、来源及所有权通过 ORIGYN 的去中心化协议得到确认。",
+          "panelTitle": "验证与鉴真",
+          "panelDescription": "确保资产真实性与所有权透明度。"
+        },
+        {
+          "description": "完成认证后，您的资产可在数字生态系统中持有、转让、交易或应用，涵盖 DeFi 应用、NFT 市场、私人交易及机构记录等场景。",
+          "panelTitle": "转让与溯源",
+          "panelDescription": "将已认证资产用于 DeFi、转售或投资，并全程可追溯。"
+        }
+      ],
+      "goToStep": "前往第 {n} 步"
+    },
+    "useCases": {
+      "titlePrefix": "应用",
+      "titleSuffix": "场景",
+      "description": "ORIGYN 协议专为信任、来源可追溯性及真实性至关重要的广泛行业而构建。以下是已在应用 ORIGYN 认证基础设施的核心领域。",
+      "items": [
+        {
+          "title": "艺术",
+          "description": "在链上对实物及数字艺术品的来源进行鉴真与保护。"
+        },
+        {
+          "title": "黄金",
+          "description": "以不可篡改、可追溯的防伪数字证书认证黄金资产。"
+        },
+        {
+          "title": "钻石",
+          "description": "借助区块链精准追踪每颗钻石的产地、品级及所有权。"
+        },
+        {
+          "title": "原产地认证",
+          "description": "证明任何产品的产地、真实性与工艺，涵盖腕表至时尚品类。"
+        }
+      ],
+      "indicatorAria": "前往第 {n} 个应用场景",
+      "discover": "了解更多"
+    },
+    "certify": {
+      "titleLine": "认证",
+      "titleEmphasis": "您的资产",
+      "subtitle": "使用 ORIGYN 认证计算器，即时估算以完全链上数字证书保护您资产所需的费用。无论您认证的是艺术精品、奢侈品、黄金还是其他高价值资产，该工具均可提供清晰的基础设施与技术成本概览，无需凭空猜测。",
+      "contactPrompt": "如需认证您的资产，请与我们联系：",
+      "contactCta": "联系 ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "集成商",
+      "titleLineTwo": "计划",
+      "description": "ORIGYN 集成商计划面向希望将 ORIGYN 去中心化认证基础设施直接整合至其服务中的企业、平台及开发者。\n\n无论您是市场平台、供应链解决方案提供商还是奢侈品牌，均可提供安全的链上资产验证服务，无需从头构建。",
+      "cta": "加入集成商计划"
+    },
+    "roadmap": {
+      "title": "路线图",
+      "description": "从全新功能与治理特性，到对更多行业和开发者的扩展支持——每一个里程碑都体现了我们通过可扩展、可验证的去中心化基础设施，将现实世界资产完全上链的使命。"
+    },
+    "partners": {
+      "label": "合作伙伴"
+    },
+    "bePart": {
+      "titleLead": "参与",
+      "emphasisDesktop": "决策治理",
+      "emphasisMobileLineOne": "决策",
+      "emphasisMobileLineTwo": "治理",
+      "cta": "加入 ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "未找到该应用场景",
+    "cases": {
+      "gold": [
+        {
+          "title": "黄金",
+          "description": "作为全球规模最大、监管最为严格的资产与大宗商品，黄金对安全性有着极高要求。<br /><br />ORIGYN 完全满足这些要求，全球黄金精炼领域的领导者 <a href='https://www.metalor.com/' target='_blank'>Metalor</a> 选择 ORIGYN 协议来保护其数据，即为明证。这是史上首次将与金条相关的所有技术信息——包括高清图像及文件——记录于区块链上的单一证书中。"
+        },
+        {
+          "description": "此外，<a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> 和 <a href='https://bity.com' target='_blank'>Bity</a> 等多个项目也利用这些证书销售对应的实物金条或创建以实物黄金为背书的代币。"
+        }
+      ],
+      "art": [
+        {
+          "title": "艺术",
+          "description": "艺术专家对艺术品证书的信任度与可靠性高度关注。正因如此，已有多个案例率先采用了 ORIGYN 技术。<br /><br /><a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> 和 <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> 等知名艺术家已为自身作品创建了 ORIGYN 证书，以保护相关数据。这些证书完全上链，防篡改且无法复制，使艺术家能够有效打击仿冒行为，同时通过高清图像、视频及文件提升藏家体验。"
+        },
+        {
+          "description": "基金会、机构、家族、画廊及艺术顾问等需要为客户创建数字证书的主体，已开始借助 ORIGYN 维护最高级别的安全性与保密性。多家画廊已部署 ORIGYN 技术，其中包括为雷内·马格利特艺术作品出具证书的 Retelet 画廊。<br /><br />ORIGYN 技术还支持基于证书的销售，尤其是共同所有权销售。这允许将证书分割为多份，使多个所有者共同持有一件艺术品，每份均作为所有权证明。"
+        }
+      ],
+      "madein": [
+        {
+          "title": "原产地认证",
+          "description": "国家原产地不仅仅是一个标签，它是身份、品质与文化价值的宣言。随着仿冒现象的加剧，证明产品的产地与制造方式已成为各行业品牌的核心竞争力。<br /><br />为此，<a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> 创立了 100% 意大利制造认证。这一具有法律效力的标准通过严格文件审查、独立审计及政府层面的倡导，保护意大利卓越品质。ORIGYN 为该体系提供数字基础，将每件已认证产品记录于区块链上，作为可验证的产地证明。"
+        },
+        {
+          "description": "每份证书均成为一本安全、防篡改的数字护照，强化消费者信任，确保供应链全程透明，并支持那些以真实性引领市场的企业。"
+        }
+      ],
+      "luxury": [
+        {
+          "title": "奢侈品",
+          "description": "ORIGYN 技术助力奢侈品行业满足其自我革新的需求，提供更具个性化与透明度的产品体验。<br /><br />珠宝商 <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> 采用 ORIGYN 区块链技术为其全系列藏品创建证书，将所有数据完全安全地存储于链上，同时为尊贵客户提供下一代证书，保障保密性、真实性与所有权。"
+        },
+        {
+          "description": "<a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> 等其他奢侈品公司也利用 ORIGYN 记录其为知名腕表制造商供应的钻石全链路溯源信息。此外还有更多应用场景，包括在证书中添加个性化营销内容，或结合 AI 技术对二手市场进行实时真伪鉴定。"
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "帮助",
+    "titleSuffix": "中心",
+    "searchPlaceholder": "搜索..",
+    "faqs": [
+      {
+        "title": "OGY 代币",
+        "description": "驱动 Web 3.0 去中心化资产认证",
+        "answer": "<strong>OGY 代币</strong>是 ORIGYN 协议的核心功能组件。它将现实世界资产的认证与去中心化区块链基础设施相连接，使所有权归属、真实性验证及内容核实真正安全可靠。<br><br>OGY 构建了一个全球化体系，让实物资产实现数字认证、全程追踪，并接入去中心化应用与市场。"
+      },
+      {
+        "title": "协议实用性",
+        "description": "OGY 是执行 ORIGYN 生态系统核心功能的必要代币。",
+        "answer": "<strong>认证：</strong>在 ORIGYN 上认证的每项资产均需使用 OGY 铸造不可篡改的链上证书。<br><strong>交易层：</strong>促进已认证资产的转让、再认证及全生命周期事件处理。<br><strong>数据存储：</strong>支持资产元数据与来源信息的安全去中心化存储。<br>这一实用性确保 OGY 深度参与协议内的每一笔交易。"
+      },
+      {
+        "title": "OGY 代币合约地址",
+        "description": "OGY 代币部署于互联网计算机区块链。",
+        "answer": "OGY 代币部署于互联网计算机区块链，作为 ORIGYN 协议内的原生功能代币运行。<br><br>官方合约地址：</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>用户在调用时输入资产类型<br>在使用 OGY 前，请务必核实合约地址。<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[购买 OGY]</a>"
+      },
+      {
+        "title": "治理",
+        "description": "OGY 是赋予持有者以下权利的治理代币：",
+        "answer": "• 提议并投票决定协议升级、流动性规则及生态系统变更。<br>• 监督集成商与认证机构的入驻流程。<br>• 将财库资金分配至创新、增长及战略举措。<br><br>治理通过 ORIGYN DAO 实现完全去中心化，赋予社区对协议演进的直接影响力。"
+      },
+      {
+        "title": "质押与奖励",
+        "description": "OGY 质押在保障网络安全的同时实现激励对齐。",
+        "answer": "<strong>网络安全：</strong>质押者参与治理并协助验证协议运营。<br><br><strong>奖励：</strong>从认证费用及网络活动产生的协议收入中获取分成。<br><br><strong>长期对齐：</strong>质押机制鼓励长期参与并强化生态系统。<br><br>质押模型将代币实用性与协议采用率及成功程度直接挂钩。<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[立即质押]</strong></a>"
+      },
+      {
+        "title": "通缩机制 / 价值积累",
+        "description": "OGY 采用专为可持续增长设计的通缩模型。",
+        "answer": "<strong>认证销毁：</strong>用于认证的部分 OGY 将被永久从流通中移除。<br><br><strong>财库管理：</strong>协议收入支持开发工作、奖励分配及代币价值优化。<br><br>随着协议使用规模扩大，OGY 供应量持续减少，强化与生态系统采用率相匹配的价值创造。"
+      },
+      {
+        "title": "代币经济学概览",
+        "description": "总供应量：10.4 Billion OGY",
+        "answer": "<strong>分配：</strong>分配用于生态系统增长、质押奖励、社区建设及治理。<br><br><strong>收入模型：</strong>以 OGY 支付的协议费用持续产生需求，同时通过销毁机制减少供应。<br>该模型旨在支持协议的长期可持续性并实现前瞻性对齐。"
+      },
+      {
+        "title": "OGY 的未来",
+        "description": "OGY 是去中心化框架的基础。",
+        "answer": "OGY 是专为在链上认证、管理和释放现实世界资产价值而设计的去中心化框架的基石。随着 ORIGYN 持续发展，OGY 的角色也将不断扩大，成为驱动资产认证、治理与生态系统发展的经济引擎。"
+      },
+      {
+        "title": "探索实时代币数据",
+        "description": "在 ORIGYN 控制台中探索实时代币数据、质押选项及治理参与方式。",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN 控制台</span>：<a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>点击访问控制台</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "成为",
+      "titleConnector": "一名",
+      "titleEmphasis": "集成商",
+      "subtitle": "加入集成商计划，与 ORIGYN 区块链认证技术共同构建信任的未来",
+      "cta": "立即加入"
+    },
+    "program": {
+      "titleLineOne": "集成商",
+      "titleLineTwo": "计划",
+      "steps": [
+        {
+          "labelBold": "什么是",
+          "labelRest": "集成商计划？",
+          "description": "集成商计划是一项战略性举措，旨在推广 ORIGYN 协议、促进其广泛采用并扩展其生态系统。"
+        },
+        {
+          "labelBold": "谁是",
+          "labelRest": "集成商？",
+          "description": "<ul><li><strong>集成商是独立机构，</strong>以 ORIGYN 协议为基础构建产品，共同致力于铸造 ORIGYN 证书，并在特定行业、特定资产类别或跨多个领域推广 ORIGYN 协议。</li><li><strong>作为赋能者，</strong>集成商帮助企业采用 ORIGYN 区块链认证技术，无需具备深厚的区块链与 Web3 专业知识。</li><li><strong>经过 ORIGYN 基金会主导的审查流程后，</strong>集成商由 ORIGYN DAO 代币持有者选举和投票通过。</li></ul>"
+        },
+        {
+          "labelBold": "如何",
+          "labelRest": "成为集成商？",
+          "description": "要成为集成商，企业须证明其具备大规模交付服务的能力，同时满足服务特定或多个行业所需的全部要求与专业资质。"
+        }
+      ],
+      "goToStep": "前往第 {n} 步",
+      "joinNow": "立即加入"
+    },
+    "workflow": {
+      "titleLineOne": "申请",
+      "titleLineTwo": "流程",
+      "steps": [
+        {
+          "title": "申请表",
+          "content": "<p>在申请过程中，集成商须在线填写<strong><a href=\"/integrator/join\">项目申请表</a></strong>，并准备<strong>尽职调查文件</strong>，发送至 <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>尽职调查文件包括：</p>\n<ul>\n<li>公司注册证书副本</li>\n<li>最终受益所有人（UBO）说明</li>\n<li>公司章程及组织细则副本</li>\n<li>董事会决议，明确表达申请成为集成商及遵守质押规则的意愿，并附授权运营该集成商的官员名单</li>\n<li>授权签署人的身份证明应基于公司出具并经正式认证的照片及签名卡</li>\n<li>持有授权委托书代表公司处理业务的经理、高管或员工的身份证明及地址证明副本</li>\n<li>董事名单</li>\n<li>集成商项目申请表</li>\n</ul>"
+        },
+        {
+          "title": "ORIGYN 基金会审核",
+          "content": "<p>成为集成商的第一步是经过尽职调查流程后获得 ORIGYN 基金会的认可。集成商同意共享所有所需文件，以完成全部 KYC/KYB/AML 合规程序。</p>"
+        },
+        {
+          "title": "通过 ORIGYN DAO 进行治理投票",
+          "content": "<p>ORIGYN DAO 公开投票：</p>\n<p>基金会完成审查流程后，集成商将通过 SNS 平台上的公开提案接受 DAO 投票。所有 ORIGYN 提案可在以下地址查看：<strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>。</p>\n<p>法人地址、企业名称的任何变更或合作终止，均须在 SNS 平台上公开投票决定。</p>"
+        },
+        {
+          "title": "质押 50,000,000 OGY",
+          "content": "<p>若提案顺利通过，集成商须在 ORIGYN 治理中质押 50,000,000 OGY，锁定期为 1 year，不可提前解除。</p>\n<p>此步骤确保集成商的长期承诺，并赋予其积极参与 ORIGYN 治理的投票权。所有已质押的神经元将在控制台公开展示：<strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>已铸造证书数量、已认证资产 TVL 等各项统计数据将在 <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> 的集成商板块下公开展示。</p>"
+        },
+        {
+          "title": "绩效评估",
+          "content": "<p>根据各行业特点及承诺内容，最低证书铸造数量要求可能被纳入集成商协议。ORIGYN 基金会将定期对集成商进行里程碑核查与绩效评估。</p>\n<p>已铸造证书数量、已认证资产 TVL 等各项统计数据将在 <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> 的集成商板块下公开展示。</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "下载",
+      "titleLineTwo": "集成商合同",
+      "cta": "下载"
+    }
+  },
+  "integratorJoin": {
+    "title": "集成商计划",
+    "titleItalic": "申请表",
+    "requiredLabel": "必填 *",
+    "requiredMessage": "必填",
+    "emailInvalid": "请输入有效的电子邮箱地址",
+    "send": "提交",
+    "sending": "提交中……",
+    "errorSend": "表单提交失败。",
+    "fileSizeError": "文件大小不得超过 1 MB",
+    "addLink": "添加链接",
+    "addObjective": "添加目标",
+    "addKpi": "添加关键指标",
+    "uploadHighlight": "上传",
+    "uploadSuffix": "您的标志或拖拽至此处（可选）",
+    "uploadHint": "JPEG、PNG、SVG、PDF — 最大 1 MB",
+    "logoPreviewAlt": "标志预览",
+    "successTitle": "感谢您的提交",
+    "successMessage": "我们将尽快与您联系",
+    "backToIntegrator": "返回集成商页面",
+    "errorTitle": "操作失败",
+    "errorMessageDefault": "请稍后重试或再次访问",
+    "retry": "重试",
+    "sections": {
+      "representative": {
+        "title": "集成商代表",
+        "fullName": "姓名 *",
+        "email": "电子邮箱地址 *",
+        "phone": "联系电话 *"
+      },
+      "overview": {
+        "title": "项目概述",
+        "description": "请简要介绍集成商项目，包括以下内容",
+        "vision": "用一句话描述您的集成商愿景…… *",
+        "industry": "行业类别示例（艺术、音乐、奢侈品）或具体资产类型（黄金、钻石）*",
+        "geography": "目标市场地域（全球、欧洲、特定国家）*",
+        "socialFirst": "官网及社交媒体链接 *",
+        "social": "官网及社交媒体链接",
+        "presentation": "项目介绍链接（非必填，但有助于评估）"
+      },
+      "acquisition": {
+        "title": "用户获取",
+        "description": "请明确定义您的目标受众及您已有或将采用的获取方式",
+        "whyExists": "此项目为何有必要存在，其差异化之处在哪里？*",
+        "whyIntegrator": "成为集成商对您而言为何重要？*"
+      },
+      "objectives": {
+        "title": "核心目标",
+        "first": "目标 01 *",
+        "second": "目标 02",
+        "more": "目标 {n}"
+      },
+      "kpis": {
+        "title": "核心监控指标",
+        "first": "关键指标 01 *",
+        "second": "关键指标 02",
+        "more": "关键指标 {n}"
+      },
+      "plan": {
+        "title": "执行计划",
+        "focus": "请详细说明您作为集成商的工作重点，以及该项目成功的具体体现。",
+        "implement": "请说明您计划如何落地实施本项目"
+      },
+      "roadmaps": {
+        "title": "未来 3 个月及 3 年路线图",
+        "description": "您须说明预期开始铸造的时间及证书数量的估算 *"
+      },
+      "team": {
+        "title": "团队",
+        "placeholder": "请介绍您现有团队情况（如有）或未来所需的团队角色，并附 LinkedIn 链接 *"
+      },
+      "risk": {
+        "title": "风险因素",
+        "placeholder": "请说明可能导致项目失败的原因与因素。"
+      },
+      "optional": {
+        "title": "补充信息",
+        "placeholder": "是否有其他信息有助于提升您的入选机会？"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "代币",
+      "paragraphOne": "OGY 代币是 ORIGYN 协议的<b>核心功能组件</b>。",
+      "paragraphTwo": "它<b>连接</b>现实世界资产的认证与去中心化区块链基础设施，使所有权归属、身份验证与<b>转让实现可核实与安全保障。</b>",
+      "paragraphThree": "OGY 构建了一个全球化体系，让<b>实物</b>资产实现<b>数字认证、全程追踪，</b>并<b>接入去中心化</b>应用与市场。",
+      "cta": "购买 OGY",
+      "imageAlt": "OGY 代币"
+    },
+    "stats": {
+      "marketCap": "$OGY 市值",
+      "burned": "OGY 累计销毁量",
+      "circulating": "流通供应量",
+      "holders": "代币持有人数"
+    },
+    "utility": {
+      "titlePrefix": "协议",
+      "titleEmphasis": "实用性",
+      "lead": "完整使用 ORIGYN 生态系统需要持有 OGY 代币：",
+      "cards": [
+        {
+          "title": "认证",
+          "description": "在 ORIGYN 上认证的每项资产均需使用 OGY 铸造不可篡改的链上证书。"
+        },
+        {
+          "title": "交易层",
+          "description": "促进已认证资产的转让、再认证及全生命周期事件处理。"
+        },
+        {
+          "title": "数据存储",
+          "description": "支持资产元数据与来源信息的安全去中心化存储。"
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY 代币",
+      "titleLineTwo": "合约地址",
+      "description": "OGY 代币部署于互联网计算机区块链，作为 ORIGYN 协议内的原生功能代币运行。",
+      "bulletOne": "本合约管理 OGY 的发行、转让及跨协议交互，确保所有代币活动的透明性与链上可核实性。",
+      "bulletTwo": "您可通过 ICP 网络直接查看并操作 OGY 代币。",
+      "warning": "在使用 OGY 前，请务必核实合约地址。",
+      "contractLabel": "官方合约地址：",
+      "copyAria": "复制合约地址",
+      "copied": "已复制到剪贴板",
+      "cmcAria": "在 CoinMarketCap 查看 OGY"
+    },
+    "governance": {
+      "title": "治理",
+      "lead": "OGY 是赋予持有者以下权利的治理代币：",
+      "items": [
+        "<b>分配</b>财库资金至生态系统增长及战略举措。",
+        "<b>提议并投票</b>决定协议升级、认证规则及生态系统变更。",
+        "<b>监督</b>集成商与认证机构的入驻流程。"
+      ],
+      "closing": "治理通过 ORIGYN DAO 实现<b>完全去中心化</b>，赋予社区对<b>协议演进</b>的直接影响力。",
+      "cta": "了解更多"
+    },
+    "staking": {
+      "titleLineOne": "质押",
+      "titleLineTwoPrefix": "与",
+      "titleLineTwoEmphasis": "奖励",
+      "lead": "OGY 质押在保障网络安全的同时实现激励对齐：",
+      "cards": [
+        {
+          "title": "网络安全",
+          "description": "质押者参与治理并协助验证协议运营。"
+        },
+        {
+          "title": "奖励",
+          "description": "从认证费用及网络活动产生的协议收入中获取分成。"
+        },
+        {
+          "title": "长期对齐",
+          "description": "质押机制鼓励长期参与并强化生态系统。"
+        }
+      ],
+      "closing": "质押模型将代币实用性与协议采用率及成功程度直接挂钩。",
+      "cta": "立即质押"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>通缩</b>机制",
+      "titleLineTwo": "与<b>价值积累</b>",
+      "lead": "OGY 采用专为可持续增长设计的通缩模型：",
+      "items": [
+        {
+          "title": "OGY 为何是通缩代币？",
+          "answer": "OGY 采用通缩模型设计，随着协议的持续使用，其总供应量将随时间推移不断减少。"
+        },
+        {
+          "title": "代币销毁机制如何运作？",
+          "answer": "每次使用 OGY 进行认证时，一部分代币将被永久销毁，从而减少流通供应量。"
+        },
+        {
+          "title": "财库的作用是什么？",
+          "answer": "协议收入由财库统一管理，用于支持持续开发、激励参与者并维护生态系统的长期稳定。"
+        },
+        {
+          "title": "OGY 如何随时间创造价值？",
+          "answer": "随着更多用户采用 ORIGYN 协议、认证活动持续增加，OGY 的销毁量也随之增加。供应量的持续减少与使用量的增长相叠加，共同支撑长期价值创造。"
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "代币经济学",
+      "titleEmphasis": "概览",
+      "totalSupplyLabel": "总供应量：",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>分配：</b>分配用于生态系统增长、质押奖励、社区建设及治理。",
+      "revenue": "<b>收入模型：</b>以 OGY 支付的协议费用持续产生需求，同时通过销毁机制减少供应。",
+      "support": "该模型旨在支持协议的长期可持续性并实现代币持有者的利益对齐。",
+      "cta": "代币经济学"
+    }
   }
 }

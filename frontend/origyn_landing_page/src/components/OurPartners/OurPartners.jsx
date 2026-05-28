@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./OurPartners.module.scss";
 import { partners } from "./partnersData";
 import { testimonials } from "./testimonialsData";
+import { useT } from "@/i18n/LocaleContext";
 
 const OurPartners = ({ id }) => {
+  const t = useT();
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const currentTestimonial = testimonials[currentTestimonialIndex];
@@ -138,7 +140,7 @@ const OurPartners = ({ id }) => {
         </div>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.bottomOurPartners}>PARTNERS</div>
+        <div className={styles.bottomOurPartners}>{t("home.partners.label")}</div>
         <div className={styles.partnersContainer}>
           {[...partners, ...partners, ...partners].map((partner, index) => (
             <img

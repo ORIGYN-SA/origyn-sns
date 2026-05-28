@@ -38,12 +38,12 @@
   "problem": {
     "eyebrow": "Problema",
     "title": "Nimeni nu rulează cu adevărat\n<i>AI on-chain.</i>",
-    "lead": "Fiecare proiect care pretinde că are un <s>„agent AI on-chain”</s> urmează același tipar: inferența rulează în afara lanțului, pe servere centralizate, iar pe blockchain este publicat doar rezultatul. Modelul nu se execută niciodată în interiorul rețelei. Lanțul este folosit ca un avizier, nu ca un strat de calcul.",
+    "lead": "Fiecare proiect care pretinde că are un <s>„agent AI on-chain“</s> urmează același tipar: inferența rulează în afara lanțului, pe servere centralizate, iar pe blockchain este publicat doar rezultatul. Modelul nu se execută niciodată în interiorul rețelei. Lanțul este folosit ca un avizier, nu ca un strat de calcul.",
     "leadStrong": "Acela nu este un agent on-chain. Este un apel de API cu o chitanță.",
     "steps": [
       {
         "title": "Promisiunea",
-        "body": "„Agent on-chain alimentat de AI.” Inferența se întâmplă pe AWS. Lanțul stochează doar rezultatul."
+        "body": "„Agent on-chain alimentat de AI.\" Inferența se întâmplă pe AWS. Lanțul stochează doar rezultatul."
       },
       {
         "title": "Lipsa",
@@ -135,8 +135,18 @@
         "gain": "Câștig"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Cinci piloni\npe care AI nu îi poate <i>înlocui.</i>",
     "lead": "AI transformă producția într-un bun de larg consum. Aceste cinci domenii rămân. Origyn este poziționat pe fiecare dintre ele.",
     "pillars": [
-      { "title": "Încredere", "description": "Certificare Origyn — un semnal de încredere verificabil." },
-      { "title": "Context", "description": "Zeci de ani de memorie structurată — un semnal personal pe care AI nu îl poate egala." },
-      { "title": "Distribuție", "description": "Swiss Subnet — infrastructură verificabilă pentru agenți." },
-      { "title": "Gust", "description": "Pipeline de auto-cercetare — curatoriere asistată de automatizare." },
-      { "title": "Răspundere", "description": "Jurnal de audit și certificat — un strat real de guvernanță." }
+      {
+        "title": "Încredere",
+        "description": "Certificare Origyn — un semnal de încredere verificabil."
+      },
+      {
+        "title": "Context",
+        "description": "Zeci de ani de memorie structurată — un semnal personal pe care AI nu îl poate egala."
+      },
+      {
+        "title": "Distribuție",
+        "description": "Swiss Subnet — infrastructură verificabilă pentru agenți."
+      },
+      {
+        "title": "Gust",
+        "description": "Pipeline de auto-cercetare — curatoriere asistată de automatizare."
+      },
+      {
+        "title": "Răspundere",
+        "description": "Jurnal de audit și certificat — un strat real de guvernanță."
+      }
     ]
   },
   "memory": {
@@ -177,5 +202,505 @@
   "language": {
     "label": "Limbă",
     "switchTo": "Schimbă în {language}"
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFICATE",
+    "integrators": "INTEGRATORI",
+    "useCases": "CAZURI DE UTILIZARE",
+    "governance": "GUVERNANȚĂ",
+    "help": "AJUTOR",
+    "toggleMenu": "Comutați meniul"
+  },
+  "footer": {
+    "certificates": "CERTIFICATE",
+    "integrators": "INTEGRATORI",
+    "ecosystem": "ECOSISTEM",
+    "useCases": "CAZURI DE UTILIZARE",
+    "ogyToken": "TOKEN OGY",
+    "dashboard": "TABLOU DE BORD",
+    "copyright": "©2026 Toate drepturile rezervate – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Securizați-vă activele, proprietatea intelectuală\nși identitatea în totalitate on-chain.",
+      "subtitleMobile": "Securizați-vă activele,\nproprietatea intelectuală,\nși identitatea în totalitate on-chain.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Certificați-vă activele",
+      "buyCta": "Cumpărați $OGY",
+      "marquee": "ORIGYN vă permite să stocați în siguranță datele și activele dumneavoastră în totalitate on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Capitalizare de piață $OGY",
+        "tooltip": "Valoarea totală de piață a tuturor tokenurilor OGY aflate în prezent în circulație, calculată pe baza prețului live al tokenului."
+      },
+      "tvl": {
+        "title": "Valoarea totală blocată (TVL) a activelor certificate în USD",
+        "tooltipTitle": "Valoarea totală blocată (TVL)",
+        "tooltip": "TVL corespunde valorii certificatelor emise; aceasta nu înseamnă că ORIGYN deține aceste active în custodie."
+      },
+      "users": {
+        "title": "Utilizatori",
+        "tooltip": "Numărul total de persoane fizice, mărci și instituții care utilizează activ ORIGYN pentru a emite, gestiona sau deține active certificate."
+      },
+      "assets": {
+        "title": "Total active certificate",
+        "tooltip": "Numărul de articole fizice sau digitale care au primit un certificat oficial ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "De ce",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN, acolo unde activele din lumea reală întâlnesc blockchain-ul.",
+      "body": "ORIGYN este cel mai avansat protocol RWA din lume, conceput pentru a aduce activele din lumea reală în totalitate on-chain — de la artă de colecție și aur, până la bunuri de lux și proprietate intelectuală.\n\nOferi o infrastructură de certificare fără intermediari, care garantează autenticitatea, proveniența și proprietatea activelor de mare valoare."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Certificare 100% On-Chain",
+          "description": "Fără intermediari, fără manipulare. Complet descentralizat."
+        },
+        {
+          "title": "Utilitate token $OGY",
+          "description": "Alimentând ecosistemul ORIGYN prin guvernanță și utilitate de protocol."
+        },
+        {
+          "title": "Suport multi-activ",
+          "description": "Certificați artă, bunuri de lux, aur, imobiliare și altele."
+        },
+        {
+          "title": "Securitate de top în industrie",
+          "description": "Protecție blockchain imuabilă pentru cele mai valoroase active ale dumneavoastră."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Cum",
+      "titleSuffix": "funcționează",
+      "steps": [
+        {
+          "description": "Aducerea activelor din lumea reală on-chain ar trebui să fie simplă. Procesul de certificare ORIGYN este conceput să fie sigur, descentralizat și ușor de utilizat în doar trei pași: <br /><br />Transmiteți metadatele activului și documentația justificativă. ORIGYN generează un certificat digital unic, imposibil de falsificat, direct pe blockchain, atribuindu-l activului și asociindu-l cu proprietarul de drept.",
+          "panelTitle": "Emiteți certificatul dumneavoastră digital",
+          "panelDescription": "Încărcați detaliile activului și emiteți un certificat blockchain."
+        },
+        {
+          "description": "Fiecare certificat este verificabil din punct de vedere criptografic. Autenticitatea, proveniența și proprietatea activului sunt validate prin protocolul descentralizat ORIGYN.",
+          "panelTitle": "Verificați și autentificați",
+          "panelDescription": "Garantați autenticitatea activului și transparența proprietății."
+        },
+        {
+          "description": "Odată certificat, activul dumneavoastră poate fi deținut, transferat, tranzacționat sau utilizat în ecosisteme digitale — de la aplicații DeFi și piețe NFT, până la tranzacții private și înregistrări instituționale.",
+          "panelTitle": "Transferați și urmăriți",
+          "panelDescription": "Utilizați și urmăriți activul certificat pentru DeFi, revânzare sau investiții."
+        }
+      ],
+      "goToStep": "Mergeți la pasul {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Cazuri de",
+      "titleSuffix": "utilizare",
+      "description": "Protocolul ORIGYN este construit pentru a deservi o gamă largă de industrii în care încrederea, proveniența și autenticitatea sunt esențiale. Mai jos sunt prezentate câteva dintre sectoarele-cheie care utilizează deja infrastructura de certificare ORIGYN.",
+      "items": [
+        {
+          "title": "Artă",
+          "description": "Autentificați și protejați proveniența operelor de artă fizice și digitale on-chain."
+        },
+        {
+          "title": "Aur",
+          "description": "Certificați aurul cu certificate digitale imuabile, trasabile și imposibil de falsificat."
+        },
+        {
+          "title": "Diamante",
+          "description": "Urmăriți originea, clasificarea și proprietatea fiecărui diamant cu precizie blockchain."
+        },
+        {
+          "title": "Made In",
+          "description": "Dovediți originea, autenticitatea și meșteșugul oricărui produs — de la ceasuri la modă."
+        }
+      ],
+      "indicatorAria": "Mergeți la cazul de utilizare {n}",
+      "discover": "Descoperiți mai mult"
+    },
+    "certify": {
+      "titleLine": "Certificați",
+      "titleEmphasis": "activele dumneavoastră",
+      "subtitle": "Utilizați Calculatorul de Certificare ORIGYN pentru a estima instantaneu costurile securizării activelor dumneavoastră cu certificate digitale complet on-chain. Indiferent dacă certificați artă de colecție, bunuri de lux, aur sau alte active valoroase, acest instrument vă oferă o imagine clară a costurilor de infrastructură și tehnologie, fără nicio aproximare.",
+      "contactPrompt": "Pentru a vă certifica activele, contactați-ne:",
+      "contactCta": "Contactați ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Programul",
+      "titleLineTwo": "Integratorilor",
+      "description": "Programul de Integratori ORIGYN este destinat companiilor, platformelor și dezvoltatorilor care doresc să integreze infrastructura de certificare descentralizată ORIGYN direct în serviciile lor.\n\nIndiferent dacă sunteți o piață de desfacere, o soluție pentru lanțul de aprovizionare sau un brand de lux, puteți oferi verificarea securizată on-chain a activelor fără a reinventa roata.",
+      "cta": "Alăturați-vă Programului Integratorilor"
+    },
+    "roadmap": {
+      "title": "Foaie de parcurs",
+      "description": "De la noi utilități și funcții de guvernanță, până la suport extins pentru industrii și dezvoltatori. Fiecare etapă reflectă misiunea noastră de a aduce activele din lumea reală în totalitate on-chain printr-o infrastructură scalabilă, verificabilă și descentralizată."
+    },
+    "partners": {
+      "label": "PARTENERI"
+    },
+    "bePart": {
+      "titleLead": "Faceți parte din",
+      "emphasisDesktop": "procesul decizional",
+      "emphasisMobileLineOne": "Procesul",
+      "emphasisMobileLineTwo": "decizional",
+      "cta": "Alăturați-vă ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Cazul de utilizare nu a fost găsit",
+    "cases": {
+      "gold": [
+        {
+          "title": "Aur",
+          "description": "Ca cel mai mare activ din lume și cel mai atent monitorizat produs de bază, aurul necesită cele mai înalte niveluri de securitate. <br /><br />ORIGYN îndeplinește aceste cerințe, după cum demonstrează <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, liderul mondial în rafinarea aurului, care a ales protocolul ORIGYN pentru a-și securiza datele. Pentru prima dată, toate informațiile tehnice legate de lingouri de aur — inclusiv imagini de înaltă definiție și documente — sunt înregistrate într-un singur certificat pe blockchain."
+        },
+        {
+          "description": "În plus, mai multe proiecte precum <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> și <a href='https://bity.com' target='_blank'>Bity</a> utilizează aceste certificate pentru a vinde lingouri de aur corespunzătoare sau pentru a crea tokenuri susținute de aur fizic."
+        }
+      ],
+      "art": [
+        {
+          "title": "Artă",
+          "description": "Experții în artă sunt profund preocupați de încredere și de garanția certificatelor pentru opere de artă. Acesta este motivul pentru care mai multe cazuri au adoptat deja tehnologia ORIGYN.<br /><br />Artiști consacrați precum <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> și <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> și-au creat propriile certificate ORIGYN pentru a proteja datele legate de lucrările lor. Aceste certificate sunt complet on-chain, imposibil de falsificat și de copiat, permițând artiștilor să combată contrafacerea, îmbunătățind totodată experiența colecționarilor prin imagini de înaltă definiție, videoclipuri și documente."
+        },
+        {
+          "description": "Entități precum fundații, organizații, familii, galerii și consilieri în domeniul artei, care au nevoie să creeze certificate digitale pentru clienții lor, au început să utilizeze ORIGYN pentru a menține un nivel maxim de securitate și confidențialitate. Mai multe galerii au implementat deja tehnologia ORIGYN, inclusiv Galeria Retelet pentru certificatele operelor lui René Magritte.<br /><br />Tehnologia ORIGYN permite, de asemenea, vânzările prin certificate, în special vânzările în coproprietate. Aceasta permite ca operele de artă să fie împărțite între mai mulți proprietari prin divizarea certificatului în mai multe părți, fiecare servind ca dovadă de proprietate."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Originea națională este mai mult decât o etichetă. Este o declarație de identitate, calitate și valoare culturală. Pe măsură ce contrafacerea crește, dovedirea locului și modului în care este fabricat un produs a devenit un factor diferențiator esențial pentru branduri din toate industriile.<br /><br />Ca răspuns, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> a creat certificarea 100% Made in Italy. Acest standard recunoscut legal protejează excelența italiană prin documentație strictă, audituri independente și advocacy la nivel guvernamental. ORIGYN furnizează fundația digitală a acestui sistem, înregistrând fiecare produs certificat pe blockchain ca dovadă verificabilă a originii."
+        },
+        {
+          "description": "Fiecare certificat devine un pașaport digital securizat, imposibil de falsificat. Acesta consolidează încrederea consumatorilor, asigură transparența în lanțul de aprovizionare și sprijină companiile care aleg să se diferențieze prin autenticitate."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Lux",
+          "description": "Tehnologia ORIGYN răspunde nevoii sectorului de lux de a se reinventa și de a oferi experiențe de produs mai personalizate și mai transparente.<br /><br />Bijutiera <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> utilizează tehnologia blockchain ORIGYN pentru a crea certificate pentru întreaga colecție. Aceasta securizează toate datele complet on-chain, oferind totodată clienților de prestigiu certificate de ultimă generație care garantează confidențialitatea, autenticitatea și proprietatea."
+        },
+        {
+          "description": "Alte companii de lux precum <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> utilizează, de asemenea, ORIGYN pentru a înregistra lanțul complet de trasabilitate al diamantelor destinate ceasornicarilor de renume. Sunt posibile și multe alte aplicații, inclusiv adăugarea de conținut de marketing personalizat pe certificate sau combinarea tehnologiei cu AI pentru a determina autenticitatea în timp real pe piețele secundare."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Centrul de",
+    "titleSuffix": "asistență",
+    "searchPlaceholder": "Căutați..",
+    "faqs": [
+      {
+        "title": "Tokenul OGY",
+        "description": "Alimentând certificarea descentralizată a activelor în Web 3.0",
+        "answer": "Tokenul <strong>OGY</strong> reprezintă utilitatea de bază a Protocolului ORIGYN. Conectează certificarea activelor din lumea reală la infrastructura blockchain descentralizată, asigurând cu adevărat securitatea proprietății, autentificării și verificării conținutului.<br><br>OGY permite un sistem global în care activele fizice sunt certificate digital, urmărite și integrate în aplicații și piețe descentralizate."
+      },
+      {
+        "title": "Utilitate de protocol",
+        "description": "OGY este necesar pentru a îndeplini funcții esențiale în ecosistemul ORIGYN.",
+        "answer": "<strong>Certificare:</strong> Fiecare activ certificat pe ORIGYN necesită OGY pentru emiterea unui certificat on-chain imuabil.<br><strong>Strat de tranzacționare:</strong> Facilitează transferurile, re-certificările și evenimentele din ciclul de viață al activelor certificate.<br><strong>Stocare de date:</strong> Asigură stocarea securizată și descentralizată a metadatelor activelor și a provenienței.<br>Această utilitate garantează că OGY este parte integrantă a fiecărei tranzacții din cadrul protocolului."
+      },
+      {
+        "title": "Adresa contractului tokenului OGY",
+        "description": "Tokenul OGY este implementat pe blockchain-ul Internet Computer.",
+        "answer": "Tokenul OGY este implementat pe blockchain-ul Internet Computer și funcționează ca token nativ de utilitate în cadrul Protocolului ORIGYN.<br><br>Adresa oficială a contractului:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Utilizatorii introduc active în apel<br>Verificați întotdeauna adresa contractului înainte de a interacționa cu OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Guvernanță",
+        "description": "OGY este un token de guvernanță care îi împuternicește pe deținători să:",
+        "answer": "• Propună și voteze actualizări ale protocolului, reguli de lichiditate și modificări ale ecosistemului.<br>• Supravegheze integrarea integratorilor și certificatorilor.<br>• Aloce fondurile din trezorerie pentru inovație, creștere și inițiative strategice.<br><br>Guvernanța este complet descentralizată prin ORIGYN DAO, oferind comunității o influență directă asupra evoluției protocolului."
+      },
+      {
+        "title": "Staking și recompense",
+        "description": "Staking-ul OGY securizează rețeaua aliniind totodată stimulentele.",
+        "answer": "<strong>Securitatea rețelei:</strong> Participanții la staking iau parte la guvernanță și contribuie la validarea operațiunilor protocolului.<br><br><strong>Recompense:</strong> Obțineți o cotă din veniturile protocolului provenite din comisioanele de certificare și activitatea rețelei.<br><br><strong>Aliniere pe termen lung:</strong> Staking-ul încurajează participarea pe termen lung și consolidează ecosistemul.<br><br>Modelul de staking leagă utilitatea tokenului direct de adoptarea și succesul protocolului.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Mecanisme deflaționiste / Acumulare de valoare",
+        "description": "OGY integrează un model deflaționist conceput pentru o creștere durabilă.",
+        "answer": "<strong>Ardere prin certificare:</strong> O parte din OGY utilizat pentru certificare este eliminată permanent din circulație.<br><br><strong>Gestionarea trezoreriei:</strong> Veniturile protocolului susțin dezvoltarea, recompensele și optimizarea valorii tokenului.<br><br>Pe măsură ce utilizarea protocolului crește, oferta de OGY scade, consolidând crearea de valoare aliniată cu adoptarea."
+      },
+      {
+        "title": "Prezentare generală a tokenomicii",
+        "description": "Ofertă totală: 10.4 Billion OGY",
+        "answer": "<strong>Distribuție:</strong> Alocată pentru creșterea ecosistemului, recompense de staking, comunitate și guvernanță.<br><br><strong>Model de venituri:</strong> Comisioanele de protocol plătite în OGY generează cerere continuă, reducând totodată oferta prin mecanisme de ardere.<br>Modelul este conceput pentru a susține durabilitatea pe termen lung a protocolului și alinierea deținătorilor de tokenuri."
+      },
+      {
+        "title": "Viitorul OGY",
+        "description": "OGY este fundamentul unui cadru descentralizat.",
+        "answer": "OGY este fundamentul unui cadru descentralizat conceput pentru a certifica, gestiona și debloca valoarea activelor din lumea reală on-chain. Pe măsură ce ORIGYN crește, rolul OGY se extinde ca motor economic ce impulsionează certificarea activelor, guvernanța și dezvoltarea ecosistemului."
+      },
+      {
+        "title": "Explorați tokenul live",
+        "description": "Explorați datele live ale tokenului, opțiunile de staking și participarea la guvernanță în tabloul de bord ORIGYN.",
+        "answer": "<span style=\"text-decoration: underline;\">Tabloul de bord ORIGYN</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Accesați tabloul de bord</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Deveniți",
+      "titleConnector": "un",
+      "titleEmphasis": "Integrator",
+      "subtitle": "ALĂTURAȚI-VĂ PROGRAMULUI INTEGRATORILOR PENTRU A CONSTRUI VIITORUL ÎNCREDERII CU TEHNOLOGIA DE CERTIFICARE BLOCKCHAIN A ORIGYN",
+      "cta": "Alăturați-vă acum"
+    },
+    "program": {
+      "titleLineOne": "Programul",
+      "titleLineTwo": "Integratorilor",
+      "steps": [
+        {
+          "labelBold": "CE",
+          "labelRest": "ESTE PROGRAMUL INTEGRATORILOR ?",
+          "description": "Programul Integratorilor este o inițiativă strategică menită să promoveze protocolul ORIGYN, să încurajeze adoptarea acestuia și să extindă ecosistemul."
+        },
+        {
+          "labelBold": "CINE",
+          "labelRest": "SUNT INTEGRATORII ?",
+          "description": "<ul><li><strong>Integratorii sunt firme independente</strong> care construiesc produse bazate pe protocolul ORIGYN cu scopul comun de a emite certificate ORIGYN și de a promova protocolul ORIGYN într-o industrie specifică, într-o clasă de active sau în mai multe sectoare.</li><li><strong>Acționând ca facilitatori,</strong> aceștia ajută companiile să adopte tehnologia de certificare blockchain ORIGYN fără a necesita cunoștințe profunde de blockchain și Web3.</li><li><strong>În urma unui proces de verificare</strong> efectuat de Fundația ORIGYN, integratorii sunt aleși și votați de deținătorii de tokenuri ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "CUM",
+          "labelRest": "DEVENIȚI INTEGRATOR ?",
+          "description": "Pentru a deveni integrator, o companie trebuie să demonstreze că poate furniza servicii la scară largă, îndeplinind totodată toate cerințele și expertiza necesare pentru a deservi unul sau mai multe sectoare specifice."
+        }
+      ],
+      "goToStep": "Mergeți la pasul {n}",
+      "joinNow": "Alăturați-vă acum"
+    },
+    "workflow": {
+      "titleLineOne": "Fluxul de",
+      "titleLineTwo": "candidatură",
+      "steps": [
+        {
+          "title": "Formularul de candidatură",
+          "content": "<p>Ca parte a candidaturii, Integratorii trebuie să completeze <strong><a href=\"/integrator/join\">Formularul de candidatură al proiectului online</a></strong> și să pregătească <strong>Documentația de due diligence</strong> care urmează să fie trimisă la <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Documentația de due diligence include:</p>\n<ul>\n<li>Copie a certificatului de înmatriculare</li>\n<li>Descrierea UBO - Beneficiari efectivi unici</li>\n<li>Copie a Actului constitutiv și a Statutului</li>\n<li>Hotărârea Consiliului de Administrație care formalizează disponibilitatea de a candida ca Integrator și de a respecta regulile de staking, împreună cu lista funcționarilor autorizați să opereze Integratorul</li>\n<li>Identificarea semnatarilor autorizați trebuie să se bazeze pe fotografii și fișe de semnătură atestate în mod corespunzător de companie</li>\n<li>Copii ale dovezilor de identitate și ale dovezilor de adresă ale managerilor, funcționarilor sau angajaților care dețin Procură pentru a desfășura activități comerciale în numele companiei</li>\n<li>Lista administratorilor</li>\n<li>Formularul de candidatură al proiectului Integrator</li>\n</ul>"
+        },
+        {
+          "title": "Examinare de către Fundația ORIGYN",
+          "content": "<p>Primul pas pentru a deveni Integrator este validarea de către Fundația ORIGYN în urma unui proces de due diligence. Integratorul acceptă să partajeze toate documentele solicitate în scopul îndeplinirii tuturor procedurilor KYC/KYB/AML necesare.</p>"
+        },
+        {
+          "title": "Vot de guvernanță prin ORIGYN DAO",
+          "content": "<p>VOT PUBLIC PRIN ORIGYN DAO:</p>\n<p>Odată ce Fundația încheie procesul de verificare, Integratorul va face obiectul unui vot DAO printr-o propunere publică pe Platforma SNS. Toate propunerile ORIGYN pot fi vizualizate la <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Orice modificare a adresei persoanei juridice, a denumirii comerciale sau rezilierea cooperării este votată public pe Platforma SNS.</p>"
+        },
+        {
+          "title": "Staking de 50,000,000 OGY",
+          "content": "<p>Dacă propunerea este adoptată cu succes, Integratorul va trebui să procedeze la staking-ul a 50,000,000 OGY în Guvernanța ORIGYN pentru 1 year, fără posibilitate de dizolvare anticipată.</p>\n<p>Acest pas asigură angajamentul pe termen lung al Integratorului și puterea de vot pentru a participa activ la guvernanța ORIGYN. Toți Neuronii în staking vor fi afișați public în tabloul de bord la <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Toate statisticile, cum ar fi numărul de certificate emise, TVL al activelor certificate etc., vor fi afișate public în secțiunea integratorilor de pe <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Evaluarea performanței",
+          "content": "<p>În funcție de fiecare sector și angajament, cerințele minime privind numărul de certificate emise pot face parte din acordul cu Integratorul. Prin urmare, Fundația ORIGYN va efectua periodic evaluări ale etapelor și ale performanței Integratorilor.</p>\n<p>Toate statisticile, cum ar fi numărul de certificate emise, TVL al activelor certificate etc., vor fi afișate public în secțiunea integratorilor de pe <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Descărcați",
+      "titleLineTwo": "Contractul Integratorilor",
+      "cta": "Descărcați"
+    }
+  },
+  "integratorJoin": {
+    "title": "Programul Integratorilor",
+    "titleItalic": "Formular de candidatură",
+    "requiredLabel": "OBLIGATORIU *",
+    "requiredMessage": "Obligatoriu",
+    "emailInvalid": "Introduceți o adresă de e-mail validă",
+    "send": "TRIMITEȚI",
+    "sending": "Se trimite…",
+    "errorSend": "Eroare la trimiterea formularului.",
+    "fileSizeError": "Dimensiunea fișierului nu trebuie să depășească 1 MB",
+    "addLink": "ADĂUGAȚI UN LINK",
+    "addObjective": "ADĂUGAȚI UN OBIECTIV",
+    "addKpi": "ADĂUGAȚI UN KPI",
+    "uploadHighlight": "Încărcați",
+    "uploadSuffix": " logo-ul dumneavoastră sau trageți-l aici (OPȚIONAL)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — maximum 1 MB",
+    "logoPreviewAlt": "Previzualizare logo",
+    "successTitle": "Vă mulțumim",
+    "successMessage": "Vă vom contacta în curând",
+    "backToIntegrator": "ÎNAPOI LA PAGINA INTEGRATORILOR",
+    "errorTitle": "A apărut o eroare",
+    "errorMessageDefault": "Vă rugăm să încercați din nou sau să reveniți mai târziu",
+    "retry": "REÎNCERCAȚI",
+    "sections": {
+      "representative": {
+        "title": "REPREZENTANTUL INTEGRATORULUI",
+        "fullName": "NUME COMPLET *",
+        "email": "ADRESĂ DE E-MAIL *",
+        "phone": "NUMĂR DE TELEFON *"
+      },
+      "overview": {
+        "title": "PREZENTARE GENERALĂ",
+        "description": "VĂ RUGĂM SĂ SCRIEȚI O SCURTĂ PREZENTARE A PROIECTULUI INTEGRATORULUI, INCLUZÂND",
+        "vision": "Viziunea Integratorului dumneavoastră într-o singură propoziție... *",
+        "industry": "Exemple de categorii de industrie (artă, muzică, lux) sau active specifice (aur, diamante) *",
+        "geography": "Geografie de piață (Global, Europa, specifică unei țări) *",
+        "socialFirst": "Linkuri către site web și rețele sociale *",
+        "social": "Linkuri către site web și rețele sociale",
+        "presentation": "Link către prezentarea proiectului (nu este obligatoriu, dar util)"
+      },
+      "acquisition": {
+        "title": "ACHIZIȚIE",
+        "description": "DEFINIȚI CU CLARITATE PUBLICUL-ȚINTĂ ȘI MODUL ÎN CARE ÎL ACHIZIȚIONAȚI SAU ÎL VEȚI ACHIZIȚIONA",
+        "whyExists": "De ce trebuie să existe acest proiect și cu ce se diferențiază? *",
+        "whyIntegrator": "De ce este important pentru dumneavoastră să deveniți Integrator? *"
+      },
+      "objectives": {
+        "title": "OBIECTIVE-CHEIE PE CARE DORIȚI SĂ LE ATINGEȚI",
+        "first": "Obiectiv 01 *",
+        "second": "Obiectiv 02",
+        "more": "Obiectiv {n}"
+      },
+      "kpis": {
+        "title": "INDICATORI-CHEIE PE CARE DORIȚI SĂ ÎI MONITORIZAȚI",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "CE ȘI CUM VEȚI FACE",
+        "focus": "Spuneți-ne în detaliu pe ce vă veți concentra ca Integrator și cum arată succesul acestui proiect.",
+        "implement": "Spuneți-ne cum planificați să implementați acest proiect"
+      },
+      "roadmaps": {
+        "title": "FOILE DE PARCURS PENTRU PRIMELE 3 LUNI ȘI 3 ANI",
+        "description": "Trebuie să indicați când preconizați că veți începe să emitiți certificate și un număr estimat al acestora *"
+      },
+      "team": {
+        "title": "ECHIPĂ",
+        "placeholder": "Spuneți-ne despre echipa actuală, dacă există, sau despre rolurile viitoare din echipă de care ați putea avea nevoie, împreună cu linkuri către LinkedIn *"
+      },
+      "risk": {
+        "title": "FACTORI DE RISC",
+        "placeholder": "Spuneți-ne care sunt motivele și factorii care ar putea conduce la eșec."
+      },
+      "optional": {
+        "title": "OPȚIONAL",
+        "placeholder": "Orice altceva doriți să împărtășiți care v-ar crește șansele de selecție?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Tokenul",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Tokenul OGY reprezintă <b>utilitatea de bază</b> a Protocolului ORIGYN.",
+      "paragraphTwo": "<b>Conectează</b> certificarea activelor din lumea reală la infrastructura blockchain descentralizată, <b>asigurând verificabilitatea și securitatea proprietății, autentificării</b> și <b>transferului.</b>",
+      "paragraphThree": "OGY permite un sistem global în care activele <b>fizice</b> sunt <b>certificate digital, urmărite</b> și <b>integrate în</b> aplicații și piețe <b>descentralizate</b>.",
+      "cta": "Cumpărați OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "Capitalizare de piață $OGY",
+      "burned": "Total OGY ars",
+      "circulating": "Ofertă în circulație",
+      "holders": "Deținători de tokenuri"
+    },
+    "utility": {
+      "titlePrefix": "Utilitate de",
+      "titleEmphasis": "protocol",
+      "lead": "Aveți nevoie de tokenuri OGY pentru a utiliza complet ecosistemul ORIGYN:",
+      "cards": [
+        {
+          "title": "Certificare",
+          "description": "Fiecare activ certificat pe ORIGYN necesită OGY pentru emiterea unui certificat on-chain imuabil."
+        },
+        {
+          "title": "Strat de tranzacționare",
+          "description": "Facilitează transferurile, re-certificările și evenimentele din ciclul de viață al activelor certificate."
+        },
+        {
+          "title": "Stocare de date",
+          "description": "Asigură stocarea securizată și descentralizată a metadatelor activelor și a provenienței."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY",
+      "titleLineTwo": "Adresa contractului",
+      "description": "Tokenul OGY este implementat pe blockchain-ul Internet Computer și funcționează ca token nativ de utilitate în cadrul Protocolului ORIGYN.",
+      "bulletOne": "Acest contract guvernează emiterea, transferurile și interacțiunile OGY în cadrul protocolului, asigurând transparența și verificarea on-chain a întregii activități a tokenului.",
+      "bulletTwo": "Puteți vizualiza și interacționa cu tokenul OGY direct prin rețeaua ICP.",
+      "warning": "Verificați întotdeauna adresa contractului înainte de a interacționa cu OGY.",
+      "contractLabel": "Adresa oficială a contractului:",
+      "copyAria": "Copiați adresa contractului",
+      "copied": "Copiat în clipboard",
+      "cmcAria": "Vizualizați OGY pe CoinMarketCap"
+    },
+    "governance": {
+      "title": "Guvernanță",
+      "lead": "OGY este un token de guvernanță care îi împuternicește pe deținători să:",
+      "items": [
+        "<b>Aloce</b> fondurile din trezorerie pentru creșterea ecosistemului și inițiative strategice.",
+        "<b>Propună și voteze</b> actualizări ale protocolului, reguli de certificare și modificări ale ecosistemului.",
+        "<b>Supravegheze</b> integrarea integratorilor și certificatorilor."
+      ],
+      "closing": "Guvernanța este <b>complet descentralizată</b> prin ORIGYN DAO, oferind comunității o influență directă asupra <b>evoluției protocolului.</b>",
+      "cta": "AFLAȚI MAI MULT"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "și",
+      "titleLineTwoEmphasis": "recompense",
+      "lead": "Staking-ul OGY securizează rețeaua aliniind totodată stimulentele:",
+      "cards": [
+        {
+          "title": "Securitatea rețelei",
+          "description": "Participanții la staking iau parte la guvernanță și contribuie la validarea operațiunilor protocolului."
+        },
+        {
+          "title": "Recompense",
+          "description": "Obțineți o cotă din veniturile protocolului provenite din comisioanele de certificare și activitatea rețelei."
+        },
+        {
+          "title": "Aliniere pe termen lung",
+          "description": "Staking-ul încurajează participarea pe termen lung și consolidează ecosistemul."
+        }
+      ],
+      "closing": "Modelul de staking leagă utilitatea tokenului direct de adoptarea și succesul protocolului.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "Mecanisme <b>deflaționiste</b>",
+      "titleLineTwo": "și <b>acumulare de valoare</b>",
+      "lead": "OGY integrează un model deflaționist conceput pentru o creștere durabilă:",
+      "items": [
+        {
+          "title": "Ce face din OGY un token deflaționist?",
+          "answer": "OGY este conceput cu un model deflaționist, ceea ce înseamnă că oferta sa totală scade în timp pe măsură ce protocolul este utilizat."
+        },
+        {
+          "title": "Cum funcționează arderea tokenurilor?",
+          "answer": "De fiecare dată când OGY este utilizat pentru certificare, o parte din tokenuri este arsă permanent. Aceasta reduce oferta în circulație."
+        },
+        {
+          "title": "Care este rolul trezoreriei?",
+          "answer": "Veniturile protocolului sunt gestionate de trezorerie pentru a susține dezvoltarea continuă, a recompensa participanții și a menține stabilitatea pe termen lung a ecosistemului."
+        },
+        {
+          "title": "Cum creează OGY valoare în timp?",
+          "answer": "Pe măsură ce tot mai mulți utilizatori adoptă protocolul ORIGYN și activitatea de certificare crește, mai mult OGY este ars. Această ofertă în scădere, combinată cu utilizarea în creștere, susține crearea de valoare pe termen lung."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Prezentare generală a",
+      "titleEmphasis": "tokenomicii",
+      "totalSupplyLabel": "Ofertă totală:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribuție:</b> Alocată pentru creșterea ecosistemului, recompense de staking, comunitate și guvernanță.",
+      "revenue": "<b>Model de venituri:</b> Comisioanele de protocol plătite în OGY generează cerere continuă, reducând totodată oferta prin mecanisme de ardere.",
+      "support": "Modelul este conceput pentru a susține durabilitatea pe termen lung a protocolului și alinierea deținătorilor de tokenuri.",
+      "cta": "TOKENOMICS"
+    }
   }
 }

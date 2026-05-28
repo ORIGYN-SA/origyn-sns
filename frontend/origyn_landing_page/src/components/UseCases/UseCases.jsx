@@ -1,39 +1,28 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./UseCases.module.scss";
 import UseCaseCard from "./UseCaseCard";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
 
-const useCases = [
-  {
-    title: "Art",
-    description:
-      "Authenticate and protect the provenance of physical and digital artworks on-chain.",
-    image: "/use-cases/art.webp",
-    link: "/use-case/art",
-  },
-  {
-    title: "Gold",
-    description:
-      "Certify gold with immutable, traceable, and tamper-proof digital certificates.",
-    image: "/use-cases/gold.webp",
-    link: "/use-case/gold",
-  },
-  {
-    title: "Diamonds",
-    description:
-      "Track origin, grading, and ownership of each diamond with blockchain precision.",
-    image: "/use-cases/diamonds.webp",
-    link: "/use-case/luxury",
-  },
-  {
-    title: "Made In",
-    description:
-      "Prove the origin, authenticity, and craftsmanship of any product, from watches to fashion.",
-    image: "/use-cases/made_in.webp",
-    link: "/use-case/madein",
-  },
+// Visual + link metadata is static; titles and descriptions come from i18n.
+const USE_CASE_VISUALS = [
+  { image: "/use-cases/art.webp", slug: "art" },
+  { image: "/use-cases/gold.webp", slug: "gold" },
+  { image: "/use-cases/diamonds.webp", slug: "luxury" },
+  { image: "/use-cases/made_in.webp", slug: "madein" },
 ];
 
 const UseCases = ({ id }) => {
+  const t = useT();
+  const { locale } = useLocale();
+  const items = t.raw("home.useCases.items") ?? [];
+  const useCases = USE_CASE_VISUALS.map((visual, i) => ({
+    image: visual.image,
+    link: localePath(locale, `use-case/${visual.slug}`),
+    title: items[i]?.title,
+    description: items[i]?.description,
+  }));
+  const indicatorTemplate = t("home.useCases.indicatorAria");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -94,14 +83,9 @@ const UseCases = ({ id }) => {
     <section className={styles.container} id={id}>
       <div className={styles.header}>
         <h2 className={styles.title}>
-          Use <span>Cases</span>
+          {t("home.useCases.titlePrefix")} <span>{t("home.useCases.titleSuffix")}</span>
         </h2>
-        <p className={styles.description}>
-          ORIGYN's protocol is built to serve a wide range of industries where
-          trust, provenance, and authenticity are critical. Below are some of
-          the key sectors already leveraging ORIGYN's certification
-          infrastructure.
-        </p>
+        <p className={styles.description}>{t("home.useCases.description")}</p>
       </div>
 
       <div
@@ -132,7 +116,7 @@ const UseCases = ({ id }) => {
                 index === currentIndex ? styles.active : ""
               }`}
               onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to use case ${index + 1}`}
+              aria-label={indicatorTemplate.replace("{n}", String(index + 1))}
             />
           ))}
         </div>

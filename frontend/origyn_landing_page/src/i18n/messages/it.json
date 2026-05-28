@@ -135,8 +135,18 @@
         "gain": "Fattore"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/chiamata", "origyn": "29 tok/chiamata", "gain": "2,9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/chiamata", "origyn": "103 tok/chiamata", "gain": "2,9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/chiamata",
+          "origyn": "29 tok/chiamata",
+          "gain": "2,9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/chiamata",
+          "origyn": "103 tok/chiamata",
+          "gain": "2,9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Cinque pilastri\nche l'IA non può <i>sostituire.</i>",
     "lead": "L'IA rende la produzione una commodity. Questi cinque ambiti restano. Origyn è posizionato su ciascuno di essi.",
     "pillars": [
-      { "title": "Fiducia", "description": "Certificazione Origyn — un segnale di fiducia verificabile." },
-      { "title": "Contesto", "description": "Decenni di memoria strutturata — un segnale personale che l'IA non può eguagliare." },
-      { "title": "Distribuzione", "description": "Subnet svizzero — infrastruttura verificabile per gli agenti." },
-      { "title": "Gusto", "description": "Pipeline di auto-ricerca — curatela assistita dall'automazione." },
-      { "title": "Responsabilità", "description": "Registro di audit e certificato — un vero livello di governance." }
+      {
+        "title": "Fiducia",
+        "description": "Certificazione Origyn — un segnale di fiducia verificabile."
+      },
+      {
+        "title": "Contesto",
+        "description": "Decenni di memoria strutturata — un segnale personale che l'IA non può eguagliare."
+      },
+      {
+        "title": "Distribuzione",
+        "description": "Subnet svizzero — infrastruttura verificabile per gli agenti."
+      },
+      {
+        "title": "Gusto",
+        "description": "Pipeline di auto-ricerca — curatela assistita dall'automazione."
+      },
+      {
+        "title": "Responsabilità",
+        "description": "Registro di audit e certificato — un vero livello di governance."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "Lingua",
-    "switchTo": "Passa a {language}"
+    "switchTo": "Passa a {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFICATI",
+    "integrators": "INTEGRATORI",
+    "useCases": "CASI D'USO",
+    "governance": "GOVERNANCE",
+    "help": "ASSISTENZA",
+    "toggleMenu": "Apri/chiudi menu"
+  },
+  "footer": {
+    "certificates": "CERTIFICATI",
+    "integrators": "INTEGRATORI",
+    "ecosystem": "ECOSISTEMA",
+    "useCases": "CASI D'USO",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Tutti i diritti riservati – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Proteggete i vostri asset, la proprietà intellettuale\ne l'identità interamente on-chain.",
+      "subtitleMobile": "Proteggete i vostri asset,\nla proprietà intellettuale\ne l'identità interamente on-chain.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Certifica i tuoi asset",
+      "buyCta": "Acquista $OGY",
+      "marquee": "ORIGYN vi consente di archiviare in modo sicuro i vostri dati e asset interamente on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY Market Cap",
+        "tooltip": "Il valore di mercato totale di tutti i token OGY attualmente in circolazione, basato sul prezzo del token in tempo reale."
+      },
+      "tvl": {
+        "title": "Valore totale bloccato (TVL) degli asset certificati in USD",
+        "tooltipTitle": "Valore totale bloccato (TVL)",
+        "tooltip": "Il TVL corrisponde al valore dei certificati emessi; ciò non implica che ORIGYN detenga tali asset in custodia."
+      },
+      "users": {
+        "title": "Utenti",
+        "tooltip": "Il numero totale di privati, brand e istituzioni che utilizzano attivamente ORIGYN per emettere, gestire o detenere asset certificati."
+      },
+      "assets": {
+        "title": "Asset certificati totali",
+        "tooltip": "Il numero di beni fisici o digitali che hanno ricevuto un certificato ufficiale ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Perché",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN, dove gli asset del mondo reale incontrano la blockchain.",
+      "body": "ORIGYN è il protocollo RWA più avanzato al mondo, concepito per portare gli asset del mondo reale interamente on-chain: dall'arte fine all'oro, dai beni di lusso alla proprietà intellettuale.\n\nOffre un'infrastruttura di certificazione trustless che garantisce autenticità, provenienza e titolarità degli asset di alto valore."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Certificazione 100% On-Chain",
+          "description": "Nessun intermediario, nessuna manomissione. Completamente decentralizzato."
+        },
+        {
+          "title": "Utilità del token $OGY",
+          "description": "Il motore dell'ecosistema ORIGYN attraverso la governance e l'utilità del protocollo."
+        },
+        {
+          "title": "Supporto multi-asset",
+          "description": "Certifica arte, beni di lusso, oro, immobili e molto altro."
+        },
+        {
+          "title": "Sicurezza leader di settore",
+          "description": "Protezione blockchain immutabile per i vostri asset di maggior valore."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Come",
+      "titleSuffix": "funziona",
+      "steps": [
+        {
+          "description": "Portare gli asset del mondo reale on-chain dovrebbe essere semplice. Il processo di certificazione ORIGYN è progettato per essere sicuro, decentralizzato e facile da usare in soli tre passaggi: <br /><br />Caricate i metadati del vostro asset e la documentazione di supporto. ORIGYN genera un certificato digitale unico e a prova di manomissione direttamente sulla blockchain, associandolo all'asset e collegandolo al suo legittimo proprietario.",
+          "panelTitle": "Crea il tuo certificato digitale",
+          "panelDescription": "Carica i dettagli dell'asset, conia un certificato blockchain."
+        },
+        {
+          "description": "Ogni certificato è verificabile crittograficamente. Autenticità, provenienza e titolarità dell'asset sono validate attraverso il protocollo decentralizzato di ORIGYN.",
+          "panelTitle": "Verifica e autentica",
+          "panelDescription": "Garantisci l'autenticità dell'asset e la trasparenza sulla titolarità."
+        },
+        {
+          "description": "Una volta certificato, il vostro asset può essere detenuto, trasferito, scambiato o utilizzato all'interno di ecosistemi digitali: dalle applicazioni DeFi ai marketplace NFT, fino alle transazioni private e ai registri istituzionali.",
+          "panelTitle": "Trasferisci e traccia",
+          "panelDescription": "Utilizza e traccia il tuo asset certificato per DeFi, rivendita o investimento."
+        }
+      ],
+      "goToStep": "Vai al passaggio {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Casi",
+      "titleSuffix": "d'uso",
+      "description": "Il protocollo ORIGYN è concepito per servire un'ampia gamma di settori in cui fiducia, provenienza e autenticità sono fondamentali. Di seguito sono riportati alcuni dei principali ambiti che già sfruttano l'infrastruttura di certificazione ORIGYN.",
+      "items": [
+        {
+          "title": "Arte",
+          "description": "Autenticazione e protezione della provenienza di opere d'arte fisiche e digitali on-chain."
+        },
+        {
+          "title": "Oro",
+          "description": "Certifica l'oro con certificati digitali immutabili, tracciabili e a prova di manomissione."
+        },
+        {
+          "title": "Diamanti",
+          "description": "Traccia origine, classificazione e titolarità di ogni diamante con la precisione della blockchain."
+        },
+        {
+          "title": "Made In",
+          "description": "Dimostrate l'origine, l'autenticità e la maestria artigianale di qualsiasi prodotto, dagli orologi alla moda."
+        }
+      ],
+      "indicatorAria": "Vai al caso d'uso {n}",
+      "discover": "Scopri di più"
+    },
+    "certify": {
+      "titleLine": "Certifica",
+      "titleEmphasis": "i tuoi asset",
+      "subtitle": "Utilizzate il Calcolatore di Certificazione ORIGYN per stimare immediatamente i costi per proteggere i vostri asset con certificati digitali interamente on-chain. Che stiate certificando arte fine, beni di lusso, oro o altri asset di valore, questo strumento vi offre un quadro chiaro dei costi di infrastruttura e tecnologia, senza incertezze.",
+      "contactPrompt": "Per certificare i vostri asset, contattateci:",
+      "contactCta": "Contatta ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Programma",
+      "titleLineTwo": "Integratori",
+      "description": "Il Programma Integratori ORIGYN è pensato per aziende, piattaforme e sviluppatori che desiderano integrare direttamente l'infrastruttura di certificazione decentralizzata di ORIGYN nei propri servizi.\n\nChe siate un marketplace, una soluzione per la supply chain o un brand del lusso, potete offrire una verifica sicura degli asset on-chain senza dover ripartire da zero.",
+      "cta": "Aderisce al Programma Integratori"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "description": "Dalle nuove utilità e funzionalità di governance al supporto esteso per settori e sviluppatori. Ogni traguardo riflette la nostra missione di portare gli asset del mondo reale interamente on-chain attraverso un'infrastruttura scalabile, verificabile e decentralizzata."
+    },
+    "partners": {
+      "label": "PARTNER"
+    },
+    "bePart": {
+      "titleLead": "Fai parte del",
+      "emphasisDesktop": "processo decisionale",
+      "emphasisMobileLineOne": "Processo",
+      "emphasisMobileLineTwo": "Decisionale",
+      "cta": "Unisciti alla DAO di ORIGYN"
+    }
+  },
+  "useCase": {
+    "notFound": "Caso d'uso non trovato",
+    "cases": {
+      "gold": [
+        {
+          "title": "Oro",
+          "description": "In quanto asset più grande al mondo e materia prima più attentamente monitorata, l'oro richiede i massimi livelli di sicurezza. <br /><br />ORIGYN soddisfa questi requisiti, come dimostrato da <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, leader mondiale nella raffinazione dell'oro, che ha scelto il protocollo ORIGYN per proteggere i propri dati. Per la prima volta, tutte le informazioni tecniche relative ai lingotti d'oro — incluse immagini ad alta definizione e documenti — sono registrate in un unico certificato sulla blockchain."
+        },
+        {
+          "description": "Inoltre, diversi progetti come <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> e <a href='https://bity.com' target='_blank'>Bity</a> utilizzano questi certificati per vendere i corrispondenti lingotti d'oro o creare token garantiti da oro fisico."
+        }
+      ],
+      "art": [
+        {
+          "title": "Arte",
+          "description": "Gli esperti d'arte sono profondamente preoccupati per la fiducia e la garanzia dei certificati delle opere. Per questo motivo, diversi soggetti hanno già adottato la tecnologia ORIGYN.<br /><br />Artisti affermati come <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> e <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> hanno creato i propri certificati ORIGYN per proteggere i dati relativi alle loro opere. Questi certificati sono completamente on-chain, a prova di manomissione e impossibili da copiare, consentendo agli artisti di combattere la contraffazione e al contempo migliorare l'esperienza dei collezionisti grazie a immagini, video e documenti ad alta definizione."
+        },
+        {
+          "description": "Soggetti quali fondazioni, organizzazioni, famiglie, gallerie e consulenti d'arte che necessitano di creare certificati digitali per i propri clienti hanno iniziato a utilizzare ORIGYN per mantenere la massima sicurezza e riservatezza. Diverse gallerie hanno già implementato la tecnologia ORIGYN, tra cui la Galleria Retelet per i certificati delle opere di René Magritte.<br /><br />La tecnologia ORIGYN consente inoltre la vendita tramite certificati, in particolare le vendite in comproprietà. Ciò permette di condividere le opere tra più proprietari suddividendo il certificato in più parti, ciascuna delle quali funge da prova di titolarità."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "L'origine nazionale è più di un'etichetta. È una dichiarazione di identità, qualità e valore culturale. Con l'aumento della contraffazione, dimostrare dove e come viene realizzato un prodotto è diventato un elemento differenziante fondamentale per i brand di tutti i settori.<br /><br />In risposta a questa esigenza, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> ha creato la certificazione 100% Made in Italy. Questo standard riconosciuto a livello legale protegge l'eccellenza italiana attraverso una documentazione rigorosa, audit indipendenti e un'azione di advocacy a livello governativo. ORIGYN fornisce il fondamento digitale di questo sistema registrando ogni prodotto certificato sulla blockchain come prova verificabile dell'origine."
+        },
+        {
+          "description": "Ogni certificato diventa un passaporto digitale sicuro e a prova di manomissione. Rafforza la fiducia dei consumatori, garantisce la trasparenza lungo tutta la supply chain e supporta le aziende che scelgono di distinguersi per autenticità."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Lusso",
+          "description": "La tecnologia ORIGYN risponde all'esigenza del settore del lusso di reinventarsi e offrire esperienze di prodotto più personalizzate e trasparenti.<br /><br />La gioielliera <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> utilizza la tecnologia blockchain di ORIGYN per creare certificati per l'intera collezione. Questo garantisce la sicurezza di tutti i dati interamente on-chain, offrendo al contempo alla clientela esclusiva certificati di nuova generazione che assicurano riservatezza, autenticità e titolarità."
+        },
+        {
+          "description": "Altre aziende del lusso come <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> utilizzano anch'esse ORIGYN per registrare la catena completa di tracciabilità dei propri diamanti destinati a rinomati orologiai. Numerose altre applicazioni sono possibili, tra cui l'aggiunta di contenuti di marketing personalizzati ai certificati o la combinazione della tecnologia con l'IA per determinare l'autenticità in tempo reale per i mercati secondari."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Centro",
+    "titleSuffix": "assistenza",
+    "searchPlaceholder": "Cerca…",
+    "faqs": [
+      {
+        "title": "Il token OGY",
+        "description": "Il motore della certificazione decentralizzata degli asset nel Web 3.0",
+        "answer": "Il <strong>token OGY</strong> è l'utilità fondamentale del Protocollo ORIGYN. Collega la certificazione degli asset del mondo reale all'infrastruttura blockchain decentralizzata, rendendo la titolarità, l'autenticazione e la verifica dei contenuti davvero sicure.<br><br>OGY abilita un sistema globale in cui gli asset fisici vengono certificati digitalmente, tracciati e integrati in applicazioni e mercati decentralizzati."
+      },
+      {
+        "title": "Utilità del protocollo",
+        "description": "OGY è necessario per eseguire funzioni essenziali nell'intero ecosistema ORIGYN.",
+        "answer": "<strong>Certificazione:</strong> Ogni asset certificato su ORIGYN richiede OGY per coniare un certificato immutabile on-chain.<br><strong>Livello transazionale:</strong> Facilita i trasferimenti, le ri-certificazioni e gli eventi del ciclo di vita degli asset certificati.<br><strong>Archiviazione dei dati:</strong> Supporta l'archiviazione sicura e decentralizzata dei metadati e della provenienza degli asset.<br>Questa utilità garantisce che OGY sia parte integrante di ogni transazione all'interno del protocollo."
+      },
+      {
+        "title": "Indirizzo del contratto del token OGY",
+        "description": "Il token OGY è distribuito sulla blockchain Internet Computer.",
+        "answer": "Il token OGY è distribuito sulla blockchain Internet Computer e opera come token di utilità nativo all'interno del Protocollo ORIGYN.<br><br>Indirizzo ufficiale del contratto:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Gli utenti inseriscono i tipi di asset nella chiamata<br>Verificare sempre l'indirizzo del contratto prima di interagire con OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Governance",
+        "description": "OGY è un token di governance che consente ai suoi detentori di:",
+        "answer": "• Proporre e votare aggiornamenti del protocollo, regole di liquidità e modifiche all'ecosistema.<br>• Supervisionare l'accreditamento di integratori e certificatori.<br>• Allocare i fondi del treasury verso l'innovazione, la crescita e le iniziative strategiche.<br><br>La governance è completamente decentralizzata attraverso la DAO di ORIGYN, conferendo alla community un'influenza diretta sull'evoluzione del protocollo."
+      },
+      {
+        "title": "Staking e ricompense",
+        "description": "Lo staking di OGY protegge la rete allineando gli incentivi.",
+        "answer": "<strong>Sicurezza della rete:</strong> Gli staker partecipano alla governance e contribuiscono a validare le operazioni del protocollo.<br><br><strong>Ricompense:</strong> Percepiscono una quota dei ricavi del protocollo derivanti dalle commissioni di certificazione e dall'attività di rete.<br><br><strong>Allineamento a lungo termine:</strong> Lo staking incoraggia la partecipazione a lungo termine e rafforza l'ecosistema.<br><br>Il modello di staking lega l'utilità del token direttamente all'adozione e al successo del protocollo.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Meccaniche deflazionistiche / Accumulazione di valore",
+        "description": "OGY integra un modello deflazionistico progettato per una crescita sostenibile.",
+        "answer": "<strong>Burning per certificazione:</strong> Una parte di OGY utilizzata per la certificazione viene rimossa definitivamente dalla circolazione.<br><br><strong>Gestione del treasury:</strong> I ricavi del protocollo supportano lo sviluppo, le ricompense e l'ottimizzazione del valore del token.<br><br>Con l'aumento dell'utilizzo del protocollo, l'offerta di OGY diminuisce, rafforzando la creazione di valore in linea con l'adozione."
+      },
+      {
+        "title": "Panoramica della tokenomics",
+        "description": "Offerta totale: 10.4 Billion OGY",
+        "answer": "<strong>Distribuzione:</strong> Allocata alla crescita dell'ecosistema, alle ricompense di staking, alla community e alla governance.<br><br><strong>Modello di ricavi:</strong> Le commissioni del protocollo pagate in OGY generano domanda continuativa riducendo al contempo l'offerta attraverso i meccanismi di burning.<br>Il modello è progettato per supportare la sostenibilità a lungo termine del protocollo e l'allineamento degli interessi dei detentori di token."
+      },
+      {
+        "title": "Il futuro di OGY",
+        "description": "OGY è il fondamento di un framework decentralizzato.",
+        "answer": "OGY è il fondamento di un framework decentralizzato progettato per certificare, gestire e sbloccare il valore degli asset del mondo reale on-chain. Con la crescita di ORIGYN, il ruolo di OGY si espande come motore economico che guida la certificazione degli asset, la governance e lo sviluppo dell'ecosistema."
+      },
+      {
+        "title": "Esplora il token live",
+        "description": "Esplora i dati del token in tempo reale, le opzioni di staking e la partecipazione alla governance nella Dashboard ORIGYN.",
+        "answer": "<span style=\"text-decoration: underline;\">Dashboard ORIGYN</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Clicca per accedere alla Dashboard</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Diventa",
+      "titleConnector": "un",
+      "titleEmphasis": "Integratore",
+      "subtitle": "ADERISCA AL PROGRAMMA INTEGRATORI PER COSTRUIRE IL FUTURO DELLA FIDUCIA CON LA TECNOLOGIA DI CERTIFICAZIONE BLOCKCHAIN DI ORIGYN",
+      "cta": "Aderisci ora"
+    },
+    "program": {
+      "titleLineOne": "Programma",
+      "titleLineTwo": "Integratori",
+      "steps": [
+        {
+          "labelBold": "CHE COS'È",
+          "labelRest": "IL PROGRAMMA INTEGRATORI?",
+          "description": "Il Programma Integratori è un'iniziativa strategica volta a promuovere il protocollo ORIGYN, incoraggiarne l'adozione e ampliare il suo ecosistema."
+        },
+        {
+          "labelBold": "CHI",
+          "labelRest": "SONO GLI INTEGRATORI?",
+          "description": "<ul><li><strong>Gli integratori sono società indipendenti</strong> che sviluppano prodotti basati sul protocollo ORIGYN con l'obiettivo comune di coniare certificati ORIGYN e promuovere il protocollo ORIGYN in un settore specifico, in una classe di asset o in più ambiti.<br></li><li><strong>Agendo come abilitatori,</strong> aiutano le aziende ad adottare la tecnologia di certificazione blockchain di ORIGYN senza richiedere una profonda competenza in blockchain e Web3.</li><li><strong>In seguito a un processo di verifica</strong> condotto dalla Fondazione ORIGYN, gli integratori vengono eletti e votati dai detentori di token della DAO di ORIGYN.</li></ul>"
+        },
+        {
+          "labelBold": "COME",
+          "labelRest": "SI DIVENTA INTEGRATORI?",
+          "description": "Per diventare integratore, un'azienda deve dimostrare di poter erogare servizi su larga scala, soddisfacendo al contempo tutti i requisiti e le competenze necessari per servire uno o più settori specifici."
+        }
+      ],
+      "goToStep": "Vai al passaggio {n}",
+      "joinNow": "Aderisci ora"
+    },
+    "workflow": {
+      "titleLineOne": "Flusso della",
+      "titleLineTwo": "candidatura",
+      "steps": [
+        {
+          "title": "Modulo di candidatura",
+          "content": "<p>Nell'ambito della candidatura, gli Integratori devono compilare il <strong><a href=\"/integrator/join\">Modulo di candidatura al progetto online</a></strong> e predisporre la <strong>Documentazione di Due Diligence</strong> da inviare a <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>La documentazione di due diligence comprende:</p>\n<ul>\n<li>Copia del certificato di costituzione</li>\n<li>Descrizione degli UBO - Titolari effettivi unici</li>\n<li>Copia dello statuto e dell'atto costitutivo</li>\n<li>Delibera del Consiglio di Amministrazione che formalizza la volontà di candidarsi come Integratore e di conformarsi alle regole di staking, unitamente all'elenco dei funzionari autorizzati a gestire l'Integratore</li>\n<li>L'identificazione dei firmatari autorizzati deve essere basata su fotografie e schede firme debitamente attestate dall'azienda</li>\n<li>Copie del documento di identità e della prova di indirizzo dei dirigenti, funzionari o dipendenti titolari di procura per effettuare operazioni commerciali per conto dell'azienda</li>\n<li>Elenco degli amministratori</li>\n<li>Modulo di candidatura al progetto Integratore</li>\n</ul>"
+        },
+        {
+          "title": "Revisione da parte della Fondazione ORIGYN",
+          "content": "<p>Il primo passo per diventare Integratore è essere validati dalla Fondazione ORIGYN al termine di un processo di due diligence. L'Integratore accetta di condividere tutti i documenti richiesti al fine di adempiere a tutte le procedure KYC/KYB/AML necessarie.</p>"
+        },
+        {
+          "title": "Votazione di governance tramite la DAO di ORIGYN",
+          "content": "<p>VOTAZIONE PUBBLICA DA PARTE DELLA DAO DI ORIGYN:</p>\n<p>Una volta concluso il processo di verifica da parte della Fondazione, l'Integratore sarà soggetto a una votazione della DAO tramite una proposta pubblica sulla piattaforma SNS. Tutte le proposte ORIGYN possono essere visualizzate su <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Ogni modifica all'indirizzo dell'entità legale, alla ragione sociale o la cessazione della cooperazione è votata pubblicamente sulla piattaforma SNS.</p>"
+        },
+        {
+          "title": "Staking di 50,000,000 OGY",
+          "content": "<p>Se la proposta viene approvata con successo, l'Integratore dovrà procedere allo staking di 50,000,000 OGY nella Governance ORIGYN per 1 year senza possibilità di scioglimento anticipato.</p>\n<p>Questo passaggio garantisce l'impegno a lungo termine dell'Integratore e il potere di voto per partecipare attivamente alla governance di ORIGYN. Tutti i Neuron in staking saranno mostrati pubblicamente nella Dashboard su <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Tutte le statistiche, quali il numero di certificati coniati, il TVL degli asset certificati, ecc., saranno mostrate pubblicamente nella sezione integratori su <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Revisione delle performance",
+          "content": "<p>In funzione di ciascun settore e dell'impegno assunto, requisiti minimi per il numero di certificati coniati possono far parte dell'accordo con l'Integratore. La Fondazione ORIGYN condurrà pertanto periodicamente revisioni delle milestone e delle performance degli Integratori.</p>\n<p>Tutte le statistiche, quali il numero di certificati coniati, il TVL degli asset certificati, ecc., saranno mostrate pubblicamente nella sezione integratori su <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Scarica il",
+      "titleLineTwo": "Contratto Integratori",
+      "cta": "Scarica"
+    }
+  },
+  "integratorJoin": {
+    "title": "Programma Integratori",
+    "titleItalic": "Modulo di candidatura",
+    "requiredLabel": "OBBLIGATORIO *",
+    "requiredMessage": "Obbligatorio",
+    "emailInvalid": "Inserisca un indirizzo e-mail valido",
+    "send": "INVIA",
+    "sending": "Invio in corso…",
+    "errorSend": "Errore nell'invio del modulo.",
+    "fileSizeError": "Il file non deve superare 1 MB",
+    "addLink": "AGGIUNGI UN LINK",
+    "addObjective": "AGGIUNGI UN OBIETTIVO",
+    "addKpi": "AGGIUNGI UN KPI",
+    "uploadHighlight": "Carica",
+    "uploadSuffix": " il tuo logo o trascinalo qui (FACOLTATIVO)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — max 1 MB",
+    "logoPreviewAlt": "Anteprima logo",
+    "successTitle": "Grazie",
+    "successMessage": "La ricontatteremo a breve",
+    "backToIntegrator": "TORNA ALLA PAGINA INTEGRATORI",
+    "errorTitle": "Si è verificato un errore",
+    "errorMessageDefault": "La preghiamo di riprovare o di tornare più tardi",
+    "retry": "RIPROVA",
+    "sections": {
+      "representative": {
+        "title": "RAPPRESENTANTE DELL'INTEGRATORE",
+        "fullName": "NOME COMPLETO *",
+        "email": "INDIRIZZO E-MAIL *",
+        "phone": "NUMERO DI TELEFONO *"
+      },
+      "overview": {
+        "title": "PANORAMICA",
+        "description": "LA PREGHIAMO DI SCRIVERE UNA BREVE PANORAMICA DEL PROGETTO INTEGRATORE, INCLUDENDO",
+        "vision": "La vision del vostro progetto Integratore in una frase… *",
+        "industry": "Esempi di categoria di settore (arte, musica, lusso) o asset specifici (oro, diamanti) *",
+        "geography": "Area geografica di mercato (Globale, Europa, Paese specifico) *",
+        "socialFirst": "Sito web e link ai social media *",
+        "social": "Sito web e link ai social media",
+        "presentation": "Link alla presentazione del progetto (non obbligatorio, ma utile)"
+      },
+      "acquisition": {
+        "title": "ACQUISIZIONE",
+        "description": "DEFINISCA CHIARAMENTE IL PROPRIO PUBBLICO TARGET E LE MODALITÀ DI ACQUISIZIONE ATTUALI O PREVISTE",
+        "whyExists": "Perché questo progetto deve esistere e in cosa si differenzia? *",
+        "whyIntegrator": "Perché è importante per Lei diventare Integratore? *"
+      },
+      "objectives": {
+        "title": "OBIETTIVI CHIAVE CHE DESIDERA RAGGIUNGERE",
+        "first": "Obiettivo 01 *",
+        "second": "Obiettivo 02",
+        "more": "Obiettivo {n}"
+      },
+      "kpis": {
+        "title": "METRICHE CHIAVE CHE DESIDERA MONITORARE",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "COSA E COME REALIZZERÀ",
+        "focus": "Ci descriva in dettaglio su cosa si concentrerà come Integratore e come appare il successo di questo progetto.",
+        "implement": "Ci illustri come intende implementare questo progetto"
+      },
+      "roadmaps": {
+        "title": "ROADMAP DEI PRIMI 3 MESI E DEI PROSSIMI 3 ANNI",
+        "description": "È necessario indicare quando si prevede di iniziare il minting e un numero stimato di certificati *"
+      },
+      "team": {
+        "title": "TEAM",
+        "placeholder": "Ci parli del suo team attuale, se presente, o dei ruoli futuri che potrebbe richiedere, insieme ai link LinkedIn *"
+      },
+      "risk": {
+        "title": "FATTORI DI RISCHIO",
+        "placeholder": "Ci indichi le ragioni e i fattori che potrebbero portare all'insuccesso."
+      },
+      "optional": {
+        "title": "FACOLTATIVO",
+        "placeholder": "C'è qualcos'altro che desidera condividere e che potrebbe aumentare le sue possibilità di selezione?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Il",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Il token OGY è l'<b>utilità fondamentale</b> del Protocollo ORIGYN.",
+      "paragraphTwo": "<b>Collega</b> la certificazione degli asset del mondo reale all'infrastruttura blockchain decentralizzata, <b>rendendo la titolarità, l'autenticazione</b> e il <b>trasferimento verificabili e sicuri.</b>",
+      "paragraphThree": "OGY abilita un sistema globale in cui gli asset <b>fisici</b> vengono <b>certificati digitalmente, tracciati</b> e <b>integrati in applicazioni</b> e mercati decentralizzati.",
+      "cta": "Acquista OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "$OGY Market Cap",
+      "burned": "OGY totale bruciato",
+      "circulating": "Offerta circolante",
+      "holders": "Detentori di token"
+    },
+    "utility": {
+      "titlePrefix": "Utilità del",
+      "titleEmphasis": "protocollo",
+      "lead": "Sono necessari token OGY per utilizzare appieno l'ecosistema ORIGYN:",
+      "cards": [
+        {
+          "title": "Certificazione",
+          "description": "Ogni asset certificato su ORIGYN richiede OGY per coniare un certificato immutabile on-chain."
+        },
+        {
+          "title": "Livello transazionale",
+          "description": "Facilita i trasferimenti, le ri-certificazioni e gli eventi del ciclo di vita degli asset certificati."
+        },
+        {
+          "title": "Archiviazione dei dati",
+          "description": "Supporta l'archiviazione sicura e decentralizzata dei metadati e della provenienza degli asset."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY",
+      "titleLineTwo": "Indirizzo del contratto",
+      "description": "Il token OGY è distribuito sulla blockchain Internet Computer e opera come token di utilità nativo all'interno del Protocollo ORIGYN.",
+      "bulletOne": "Questo contratto regola l'emissione, i trasferimenti e le interazioni di OGY all'interno del protocollo, garantendo trasparenza e verifica on-chain di tutta l'attività del token.",
+      "bulletTwo": "È possibile visualizzare e interagire con il token OGY direttamente attraverso la rete ICP.",
+      "warning": "Verificare sempre l'indirizzo del contratto prima di interagire con OGY.",
+      "contractLabel": "Indirizzo ufficiale del contratto:",
+      "copyAria": "Copia l'indirizzo del contratto",
+      "copied": "Copiato negli appunti",
+      "cmcAria": "Visualizza OGY su CoinMarketCap"
+    },
+    "governance": {
+      "title": "Governance",
+      "lead": "OGY è un token di governance che consente ai detentori di:",
+      "items": [
+        "<b>Allocare</b> i fondi del treasury verso la crescita dell'ecosistema e le iniziative strategiche.",
+        "<b>Proporre e votare</b> aggiornamenti del protocollo, regole di certificazione e modifiche all'ecosistema.",
+        "<b>Supervisionare</b> l'accreditamento di integratori e certificatori."
+      ],
+      "closing": "La governance è <b>completamente decentralizzata</b> attraverso la DAO di ORIGYN, conferendo alla community un'influenza diretta sull'<b>evoluzione del protocollo.</b>",
+      "cta": "SCOPRI DI PIÙ"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "e",
+      "titleLineTwoEmphasis": "Ricompense",
+      "lead": "Lo staking di OGY protegge la rete allineando gli incentivi:",
+      "cards": [
+        {
+          "title": "Sicurezza della rete",
+          "description": "Gli staker partecipano alla governance e contribuiscono a validare le operazioni del protocollo."
+        },
+        {
+          "title": "Ricompense",
+          "description": "Percepiscono una quota dei ricavi del protocollo derivanti dalle commissioni di certificazione e dall'attività di rete."
+        },
+        {
+          "title": "Allineamento a lungo termine",
+          "description": "Lo staking incoraggia la partecipazione a lungo termine e rafforza l'ecosistema."
+        }
+      ],
+      "closing": "Il modello di staking lega l'utilità del token direttamente all'adozione e al successo del protocollo.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "Meccaniche <b>deflazionistiche</b>",
+      "titleLineTwo": "e <b>accumulazione di valore</b>",
+      "lead": "OGY integra un modello deflazionistico progettato per una crescita sostenibile:",
+      "items": [
+        {
+          "title": "Cosa rende OGY un token deflazionistico?",
+          "answer": "OGY è progettato con un modello deflazionistico, il che significa che la sua offerta totale diminuisce nel tempo con l'utilizzo del protocollo."
+        },
+        {
+          "title": "Come funziona il meccanismo di burning del token?",
+          "answer": "Ogni volta che OGY viene utilizzato per la certificazione, una parte dei token viene bruciata definitivamente. Ciò riduce l'offerta circolante."
+        },
+        {
+          "title": "Qual è il ruolo del treasury?",
+          "answer": "I ricavi del protocollo sono gestiti dal treasury per supportare lo sviluppo continuo, ricompensare i partecipanti e contribuire a mantenere la stabilità a lungo termine dell'ecosistema."
+        },
+        {
+          "title": "Come crea valore OGY nel tempo?",
+          "answer": "Con l'aumento degli utenti che adottano il protocollo ORIGYN e l'incremento dell'attività di certificazione, una quantità maggiore di OGY viene bruciata. Questa offerta decrescente, combinata con una crescente domanda d'uso, supporta la creazione di valore a lungo termine."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Panoramica della",
+      "titleEmphasis": "tokenomics",
+      "totalSupplyLabel": "Offerta totale:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribuzione:</b> Allocata alla crescita dell'ecosistema, alle ricompense di staking, alla community e alla governance.",
+      "revenue": "<b>Modello di ricavi:</b> Le commissioni del protocollo pagate in OGY generano domanda continuativa riducendo al contempo l'offerta attraverso i meccanismi di burning.",
+      "support": "Il modello è progettato per supportare la sostenibilità a lungo termine del protocollo e l'allineamento degli interessi dei detentori di token.",
+      "cta": "TOKENOMICS"
+    }
   }
 }

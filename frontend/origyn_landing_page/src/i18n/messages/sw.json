@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Dai",
-        "body": "“Wakala wa ndani ya mnyororo unaoendeshwa na AI.” Utambuzi hutokea kwenye AWS. Mnyororo huhifadhi matokeo pekee."
+        "body": "\"Wakala wa ndani ya mnyororo unaoendeshwa na AI.\" Utambuzi hutokea kwenye AWS. Mnyororo huhifadhi matokeo pekee."
       },
       {
         "title": "Pengo",
@@ -135,8 +135,18 @@
         "gain": "Faida"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Nguzo tano ambazo AI\nhaiwezi <i>kuzibadilisha.</i>",
     "lead": "AI hufanya uzalishaji kuwa wa kawaida. Nyanja hizi tano hubaki. Origyn imejiweka katika kila moja yake.",
     "pillars": [
-      { "title": "Uaminifu", "description": "Uthibitisho wa Origyn — ishara ya uaminifu inayothibitishika." },
-      { "title": "Muktadha", "description": "Kumbukumbu iliyopangwa ya miongo kadhaa — ishara binafsi ambayo AI haiwezi kuilingana." },
-      { "title": "Usambazaji", "description": "Swiss Subnet — miundombinu inayothibitishika kwa mawakala." },
-      { "title": "Ladha", "description": "Mtiririko wa utafiti wa kiotomatiki — uteuzi unaosaidiwa na otomatiki." },
-      { "title": "Uwajibikaji", "description": "Rekodi ya ukaguzi na cheti — tabaka halisi la utawala." }
+      {
+        "title": "Uaminifu",
+        "description": "Uthibitisho wa Origyn — ishara ya uaminifu inayothibitishika."
+      },
+      {
+        "title": "Muktadha",
+        "description": "Kumbukumbu iliyopangwa ya miongo kadhaa — ishara binafsi ambayo AI haiwezi kuilingana."
+      },
+      {
+        "title": "Usambazaji",
+        "description": "Swiss Subnet — miundombinu inayothibitishika kwa mawakala."
+      },
+      {
+        "title": "Ladha",
+        "description": "Mtiririko wa utafiti wa kiotomatiki — uteuzi unaosaidiwa na otomatiki."
+      },
+      {
+        "title": "Uwajibikaji",
+        "description": "Rekodi ya ukaguzi na cheti — tabaka halisi la utawala."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "Lugha",
-    "switchTo": "Badili hadi {language}"
+    "switchTo": "Badili hadi {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKENI",
+    "ai": "AI",
+    "certificates": "VYETI",
+    "integrators": "WACHANGIAJI",
+    "useCases": "MATUMIZI",
+    "governance": "UTAWALA",
+    "help": "MSAADA",
+    "toggleMenu": "Fungua/funga menyu"
+  },
+  "footer": {
+    "certificates": "VYETI",
+    "integrators": "WACHANGIAJI",
+    "ecosystem": "MFUMO WA IKOLOJIA",
+    "useCases": "MATUMIZI",
+    "ogyToken": "TOKENI YA OGY",
+    "dashboard": "DASHIBODI",
+    "copyright": "©2026 Haki zote zimehifadhiwa – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Linda mali zako, mali ya kiakili,\nna utambulisho wako kikamilifu kwenye mnyororo.",
+      "subtitleMobile": "Linda mali zako,\nmali ya kiakili,\nna utambulisho wako kikamilifu kwenye mnyororo.",
+      "logoAlt": "Nembo ya ORIGYN",
+      "certifyCta": "Thibitisha mali zako",
+      "buyCta": "Nunua $OGY",
+      "marquee": "ORIGYN inakuwezesha kuhifadhi data na mali zako kwa usalama kikamilifu kwenye mnyororo"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Thamani ya Soko ya $OGY",
+        "tooltip": "Jumla ya thamani ya soko ya tokeni zote za OGY zilizo katika mzunguko kwa sasa, kulingana na bei ya tokeni ya wakati halisi."
+      },
+      "tvl": {
+        "title": "Jumla ya Thamani Iliyofungwa (TVL) ya mali zilizothibitishwa kwa dola za Marekani",
+        "tooltipTitle": "Jumla ya Thamani Iliyofungwa (TVL)",
+        "tooltip": "TVL inawakilisha thamani ya vyeti vilivyotolewa; hii haimaanishi kwamba ORIGYN inashikilia mali hizi kwa ulinzi."
+      },
+      "users": {
+        "title": "Watumiaji",
+        "tooltip": "Jumla ya idadi ya watu binafsi, biashara, na taasisi ambazo hutumia ORIGYN kikamilifu kutoa, kusimamia, au kumiliki mali zilizothibitishwa."
+      },
+      "assets": {
+        "title": "Jumla ya Mali Zilizothibitishwa",
+        "tooltip": "Idadi ya vitu vya kimwili au kidijitali ambavyo vimepokea cheti rasmi cha ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Kwa nini",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN — Mahali ambapo mali za ulimwengu halisi hukutana na blockchain.",
+      "body": "ORIGYN ni itifaki ya hali ya juu zaidi duniani ya mali za ulimwengu halisi (RWA), iliyoundwa kuleta mali hizo kikamilifu kwenye mnyororo — kuanzia sanaa nzuri na dhahabu hadi bidhaa za kifahari na mali ya kiakili.\n\nInatoa miundombinu ya uthibitisho isiyo na utegemezi inayohakikisha uhalisi, asili, na umiliki wa mali zenye thamani kubwa."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Uthibitisho 100% kwenye Mnyororo",
+          "description": "Hakuna wasuluhishi, hakuna udanganyifu. Iliyogatuliwa kikamilifu."
+        },
+        {
+          "title": "Matumizi ya Tokeni ya $OGY",
+          "description": "Inasukuma mfumo wa ikolojia wa ORIGYN kupitia utawala na matumizi ya itifaki."
+        },
+        {
+          "title": "Msaada wa Mali Mbalimbali",
+          "description": "Thibitisha sanaa, bidhaa za kifahari, dhahabu, mali isiyohamishika, na zaidi."
+        },
+        {
+          "title": "Usalama wa Hali ya Juu Zaidi Tasnia",
+          "description": "Ulinzi usiobadilika wa blockchain kwa mali zako zenye thamani zaidi."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Jinsi inavyo",
+      "titleSuffix": "fanya kazi",
+      "steps": [
+        {
+          "description": "Kuleta mali za ulimwengu halisi kwenye mnyororo kunapaswa kuwa rahisi. Mchakato wa uthibitisho wa ORIGYN umeundwa kuwa salama, uliogatuliwa, na rahisi kutumia katika hatua tatu tu: <br /><br />Wasilisha metadata ya mali yako na nyaraka za msaada. ORIGYN inazalisha cheti cha kipekee, cha kidijitali kisicoweza kudanganyiwa moja kwa moja kwenye blockchain, kikipewa mali na kuunganishwa na mmiliki wake halali.",
+          "panelTitle": "Tengeneza Cheti Chako cha Kidijitali",
+          "panelDescription": "Pakia maelezo ya mali, tengeneza cheti cha blockchain."
+        },
+        {
+          "description": "Kila cheti kinathibitishwa kwa njia ya kriptografia. Uhalisi wa mali, asili, na umiliki vinathibitishwa kupitia itifaki iliyogatuliwa ya ORIGYN.",
+          "panelTitle": "Thibitisha na Hakiki",
+          "panelDescription": "Hakikisha uhalisi wa mali na uwazi wa umiliki."
+        },
+        {
+          "description": "Mara tu ikiwa imethibitishwa, mali yako inaweza kushikiliwa, kuhamishwa, kuuzwa, au kutumika ndani ya mifumo ya kidijitali — kuanzia maombi ya DeFi na masoko ya NFT hadi miamala ya kibinafsi na rekodi za kitaasisi.",
+          "panelTitle": "Hamisha na Fuatilia",
+          "panelDescription": "Tumia na ufuatilie mali yako iliyothibitishwa kwa DeFi, uuzaji, au uwekezaji."
+        }
+      ],
+      "goToStep": "Nenda hatua ya {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Matumizi",
+      "titleSuffix": "Halisi",
+      "description": "Itifaki ya ORIGYN imejengwa kuhudumia tasnia mbalimbali ambazo uaminifu, asili, na uhalisi ni muhimu. Hapa chini ni baadhi ya sekta kuu ambazo tayari zinatumia miundombinu ya uthibitisho ya ORIGYN.",
+      "items": [
+        {
+          "title": "Sanaa",
+          "description": "Hakiki na linda asili ya kazi za sanaa za kimwili na kidijitali kwenye mnyororo."
+        },
+        {
+          "title": "Dhahabu",
+          "description": "Thibitisha dhahabu kwa vyeti vya kidijitali visivyobadilika, vinavyofuatiliwa, na visivyoweza kudanganyiwa."
+        },
+        {
+          "title": "Almasi",
+          "description": "Fuatilia asili, daraja, na umiliki wa kila almasi kwa usahihi wa blockchain."
+        },
+        {
+          "title": "Kizalendo cha Uzalishaji",
+          "description": "Thibitisha asili, uhalisi, na ubora wa bidhaa yoyote — kuanzia saa hadi mavazi."
+        }
+      ],
+      "indicatorAria": "Nenda matumizi ya {n}",
+      "discover": "Gundua zaidi"
+    },
+    "certify": {
+      "titleLine": "Thibitisha",
+      "titleEmphasis": "mali zako",
+      "subtitle": "Tumia Kikokotoo cha Uthibitisho cha ORIGYN kupata tathmini ya haraka ya gharama za kulinda mali zako kwa vyeti vya kidijitali kikamilifu kwenye mnyororo. Iwe unathibitisha sanaa nzuri, bidhaa za kifahari, dhahabu, au mali nyingine zenye thamani, chombo hiki kinakupa picha wazi ya gharama za miundombinu na teknolojia bila mkanganyiko.",
+      "contactPrompt": "Ili kuthibitisha mali zako, wasiliana nasi:",
+      "contactCta": "Wasiliana na ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Programu ya",
+      "titleLineTwo": "Wachangiaji",
+      "description": "Programu ya Wachangiaji ya ORIGYN imeundwa kwa biashara, majukwaa, na waendelezaji wanaotafuta kuunganisha miundombinu ya uthibitisho iliyogatuliwa ya ORIGYN moja kwa moja katika huduma zao.\n\nIwe wewe ni soko, suluhisho la mnyororo wa ugavi, au chapa ya kifahari, unaweza kutoa uthibitisho salama wa mali kwenye mnyororo bila kujenga upya kutoka mwanzo.",
+      "cta": "Jiunge na Programu ya Wachangiaji"
+    },
+    "roadmap": {
+      "title": "Ramani ya Barabara",
+      "description": "Kuanzia matumizi mapya na vipengele vya utawala hadi msaada uliopanuliwa kwa tasnia na waendelezaji. Kila hatua muhimu inaakisi dhamira yetu ya kuleta mali za ulimwengu halisi kikamilifu kwenye mnyororo kupitia miundombinu inayoweza kupanuliwa, kuthibitishwa, na iliyogatuliwa."
+    },
+    "partners": {
+      "label": "WASHIRIKA"
+    },
+    "bePart": {
+      "titleLead": "Kuwa sehemu ya",
+      "emphasisDesktop": "maamuzi",
+      "emphasisMobileLineOne": "Maamuzi",
+      "emphasisMobileLineTwo": "ya Pamoja",
+      "cta": "Jiunge na ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Matumizi hayakupatikana",
+    "cases": {
+      "gold": [
+        {
+          "title": "Dhahabu",
+          "description": "Kama mali kubwa zaidi duniani na bidhaa inayofuatiliwa kwa makini zaidi, dhahabu inahitaji viwango vya juu zaidi vya usalama. <br /><br />ORIGYN inakidhi mahitaji hayo, kama inavyoonyeshwa na <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, kiongozi wa dunia katika usafishaji wa dhahabu, ambayo ilichagua itifaki ya ORIGYN kulinda data yake. Kwa mara ya kwanza, taarifa zote za kiufundi zinazohusiana na mabaa ya dhahabu — ikiwa ni pamoja na picha za ubora wa juu na nyaraka — zinarekodiwa katika cheti kimoja kwenye blockchain."
+        },
+        {
+          "description": "Zaidi ya hayo, miradi kadhaa kama vile <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> na <a href='https://bity.com' target='_blank'>Bity</a> hutumia vyeti hivi kuuza mabaa ya dhahabu yanayolingana au kuunda tokeni zinazosaidiwa na dhahabu halisi."
+        }
+      ],
+      "art": [
+        {
+          "title": "Sanaa",
+          "description": "Wataalam wa sanaa wana wasiwasi mkubwa kuhusu uaminifu na uhakika wa vyeti vya kazi za sanaa. Hii ndiyo sababu matukio kadhaa tayari yamechukua teknolojia ya ORIGYN.<br /><br />Wasanii walioimarishwa kama <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> na <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> wamefanya vyeti vyao wenyewe vya ORIGYN kulinda data inayohusiana na kazi zao. Vyeti hivi viko kikamilifu kwenye mnyororo, haviwezi kudanganyiwa na haiwezekani kunakiliwa, vikiruhusi wasanii kupambana na ughushi huku wakiboresha uzoefu wa wakusanyaji kupitia picha za ubora wa juu, video, na nyaraka."
+        },
+        {
+          "description": "Taasisi kama mashirika, makampuni, familia, majumba ya sanaa, na washauri wa sanaa wanaohitaji kuunda vyeti vya kidijitali kwa wateja wao walianza kutumia ORIGYN kudumisha usalama na usiri wa hali ya juu. Majumba kadhaa ya sanaa tayari yametekeleza teknolojia ya ORIGYN, ikiwa ni pamoja na Jumba la Sanaa la Retelet kwa vyeti vya kazi za sanaa za René Magritte.<br /><br />Teknolojia ya ORIGYN pia inaruhusu mauzo kupitia vyeti, hasa mauzo ya umiliki wa pamoja. Hii inaruhusu kazi za sanaa kushirikiwa kati ya wamiliki wengi kwa kugawanya cheti katika sehemu kadhaa, kila moja ikitumika kama uthibitisho wa umiliki."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Kizalendo cha Uzalishaji",
+          "description": "Asili ya kitaifa ni zaidi ya lebo. Ni tamko la utambulisho, ubora, na thamani ya kitamaduni. Kadri ughushi unavyoongezeka, kuthibitisha mahali na jinsi bidhaa inavyotengenezwa kumekuwa kigawanishi kikuu cha chapa katika tasnia mbalimbali.<br /><br />Katika kukabiliana na hali hii, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> iliunda uthibitisho wa 100% Made in Italy. Kiwango hiki kinachokubalika kisheria kilinalinda ubora wa Italia kupitia nyaraka kali, ukaguzi huru, na utetezi wa kiwango cha serikali. ORIGYN inatoa msingi wa kidijitali wa mfumo huu kwa kurekodia kila bidhaa iliyothibitishwa kwenye blockchain kama uthibitisho unaothibitishika wa asili."
+        },
+        {
+          "description": "Kila cheti kinakuwa pasipoti salama ya kidijitali isiyoweza kudanganyiwa. Inaimarisha uaminifu wa watumiaji, inahakikisha uwazi katika mnyororo wa ugavi, na inasaidia biashara zinazochagua kuongoza kwa uhalisi."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Bidhaa za Kifahari",
+          "description": "Teknolojia ya ORIGYN inashughulikia haja ya sekta ya bidhaa za kifahari ya kujibuni upya na kutoa uzoefu wa bidhaa unaobinafsishwa zaidi na wa uwazi zaidi.<br /><br />Mfua dhahabu <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> anatumia teknolojia ya blockchain ya ORIGYN kuunda vyeti kwa mkusanyo wao wote. Hii inalinda data yote kikamilifu kwenye mnyororo huku ikitoa kwa wateja wao wa heshima vyeti vya kizazi kipya vinavyohakikisha usiri, uhalisi, na umiliki."
+        },
+        {
+          "description": "Makampuni mengine ya bidhaa za kifahari kama <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> pia hutumia ORIGYN kurekodia mnyororo kamili wa ufuatiliaji wa almasi zao zinazokusudiwa kwa waundaji maarufu wa saa. Maombi mengi mengine yanawezekana, ikiwa ni pamoja na kuongeza maudhui ya masoko yaliyobinafsishwa kwenye vyeti au kuchanganya teknolojia na AI ili kubaini uhalisi katika wakati halisi kwa masoko ya pili."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Kituo cha",
+    "titleSuffix": "Msaada",
+    "searchPlaceholder": "Tafuta..",
+    "faqs": [
+      {
+        "title": "Tokeni ya OGY",
+        "description": "Inasukuma Uthibitisho wa Mali Uliogatuliwa wa Wavuti 3.0",
+        "answer": "Tokeni ya <strong>OGY</strong> ni matumizi ya msingi ya Itifaki ya ORIGYN. Inaunganisha uthibitisho wa mali za ulimwengu halisi na miundombinu ya blockchain iliyogatuliwa, na kufanya umiliki, uthibitisho, na uhakiki wa maudhui kuwa salama kweli kweli.<br><br>OGY inaruhusu mfumo wa kimataifa ambapo mali za kimwili zinathibitishwa kidijitali, kufuatiliwa, na kuunganishwa katika maombi na masoko ya kigatuzi."
+      },
+      {
+        "title": "Matumizi ya Itifaki",
+        "description": "OGY inahitajika kutekeleza kazi muhimu katika mfumo wote wa ikolojia wa ORIGYN.",
+        "answer": "<strong>Uthibitisho:</strong> Kila mali iliyothibitishwa kwenye ORIGYN inahitaji OGY kutengeneza cheti kisichobadilika kwenye mnyororo.<br><strong>Tabaka la Miamala:</strong> Inawezesha uhamishaji, uthibitisho upya, na matukio ya mzunguko wa maisha ya mali zilizothibitishwa.<br><strong>Uhifadhi wa Data:</strong> Inasaidia uhifadhi salama, uliogatuliwa wa metadata ya mali na asili yake.<br>Matumizi haya yanahakikisha kwamba OGY ni muhimu kwa kila muamala ndani ya itifaki."
+      },
+      {
+        "title": "Anwani ya Mkataba wa Tokeni ya OGY",
+        "description": "Tokeni ya OGY imewekwa kwenye blockchain ya Internet Computer.",
+        "answer": "Tokeni ya OGY imewekwa kwenye blockchain ya Internet Computer na inafanya kazi kama tokeni ya matumizi ya asili ndani ya Itifaki ya ORIGYN.<br><br>Anwani Rasmi ya Mkataba:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Watumiaji huingiza aina za mali ndani ya wito<br>Daima thibitisha anwani ya mkataba kabla ya kushirikiana na OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Utawala",
+        "description": "OGY ni tokeni ya utawala inayowawezesha wamiliki wake:",
+        "answer": "• Kupendekeza na kupiga kura kuhusu uboreshaji wa itifaki, kanuni za umiminiko, na mabadiliko ya mfumo wa ikolojia.<br>• Kusimamia uandikishaji wa wachangiaji na wathibitishaji.<br>• Kutenga fedha za hazina kuelekea ubunifu, ukuaji, na mipango ya kimkakati.<br><br>Utawala umegatuliwa kikamilifu kupitia ORIGYN DAO, ukiipa jamii ushawishi wa moja kwa moja juu ya mwelekeo wa maendeleo wa itifaki."
+      },
+      {
+        "title": "Kuweka Dhamana na Tuzo",
+        "description": "Kuweka dhamana ya OGY kunalinda mtandao huku ukioanisha motisha.",
+        "answer": "<strong>Usalama wa Mtandao:</strong> Wanaoweka dhamana wanashiriki katika utawala na kusaidia kuthibitisha shughuli za itifaki.<br><br><strong>Tuzo:</strong> Pata sehemu ya mapato ya itifaki kutoka kwa ada za uthibitisho na shughuli za mtandao.<br><br><strong>Muafaka wa Muda Mrefu:</strong> Kuweka dhamana kunakuza ushiriki wa muda mrefu na kuimarisha mfumo wa ikolojia.<br><br>Mfano wa kuweka dhamana unaunganisha matumizi ya tokeni moja kwa moja na upanuzi na mafanikio ya itifaki.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Mifumo ya Mfumuko / Uongezaji wa Thamani",
+        "description": "OGY inajumuisha mfano wa kupungua kwa usambazaji ulioundwa kwa ukuaji endelevu.",
+        "answer": "<strong>Kuchoma kwa Uthibitisho:</strong> Sehemu ya OGY inayotumiwa katika uthibitisho inaondolewa kabisa kutoka mzunguko.<br><br><strong>Usimamizi wa Hazina:</strong> Mapato ya itifaki yanasaidia uendelezaji, tuzo, na uboreshaji wa thamani ya tokeni.<br><br>Kadri matumizi ya itifaki yanavyopanuka, usambazaji wa OGY unapungua, ukiimarisha uundaji wa thamani unaooana na upanuzi."
+      },
+      {
+        "title": "Muhtasari wa Tokenomics",
+        "description": "Usambazaji Jumla: Bilioni 10.4 OGY",
+        "answer": "<strong>Usambazaji:</strong> Imegawiwa kwa ukuaji wa mfumo wa ikolojia, tuzo za kuweka dhamana, jamii, na utawala.<br><br><strong>Mfano wa Mapato:</strong> Ada za itifaki zinazolipwa kwa OGY zinaunda mahitaji yanayoendelea huku zikipunguza usambazaji kupitia mifumo ya kuchoma.<br>Mfano umeundwa kusaidia uendelevu wa muda mrefu wa itifaki na muafaka unaolenga mustakabali."
+      },
+      {
+        "title": "Mustakabali wa OGY",
+        "description": "OGY ni msingi wa mfumo uliogatuliwa.",
+        "answer": "OGY ni msingi wa mfumo uliogatuliwa uliobuniwa kuthibitisha, kusimamia, na kufungua thamani ya mali za ulimwengu halisi kwenye mnyororo. ORIGYN inavyokua, jukumu la OGY linapanuka kama injini ya kiuchumi inayosukuma uthibitisho wa mali, utawala, na maendeleo ya mfumo wa ikolojia."
+      },
+      {
+        "title": "Chunguza tokeni ya moja kwa moja",
+        "description": "Chunguza data ya tokeni ya moja kwa moja, chaguzi za kuweka dhamana, na ushiriki wa utawala katika Dashibodi ya ORIGYN.",
+        "answer": "<span style=\"text-decoration: underline;\">Dashibodi ya ORIGYN</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Bonyeza kufikia Dashibodi</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Kuwa",
+      "titleConnector": "Mchangiaji",
+      "titleEmphasis": "Mkuu",
+      "subtitle": "JIUNGE NA PROGRAMU YA WACHANGIAJI ILI KUJENGA MUSTAKABALI WA UAMINIFU KWA TEKNOLOJIA YA UTHIBITISHO WA BLOCKCHAIN YA ORIGYN",
+      "cta": "Jiunge Sasa"
+    },
+    "program": {
+      "titleLineOne": "Programu ya",
+      "titleLineTwo": "Wachangiaji",
+      "steps": [
+        {
+          "labelBold": "NI NINI",
+          "labelRest": "PROGRAMU YA WACHANGIAJI?",
+          "description": "Programu ya Wachangiaji ni mpango wa kimkakati unaolenga kukuza itifaki ya ORIGYN, kuhimiza upanuzi wake na kupanua mfumo wake wa ikolojia."
+        },
+        {
+          "labelBold": "NANI",
+          "labelRest": "NDIO WACHANGIAJI?",
+          "description": "<ul><li><strong>Wachangiaji ni makampuni huru</strong> yanayojenga bidhaa kulingana na itifaki ya ORIGYN kwa lengo la pamoja la kutengeneza vyeti vya ORIGYN na kukuza itifaki ya ORIGYN katika tasnia mahususi, katika darasa la mali au katika sekta mbalimbali.</li><li><strong>Wakifanya kazi kama wawezeshaji,</strong> wanasaidia biashara kupitisha teknolojia ya uthibitisho wa blockchain ya ORIGYN bila kuhitaji ujuzi wa kina wa blockchain na Web3.</li><li><strong>Kufuatia mchakato wa ukaguzi wa kina</strong> uliofanywa na Msingi wa ORIGYN, wachangiaji wanachaguliwa na kupigwa kura na wamiliki wa tokeni wa ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "JINSI GANI",
+          "labelRest": "UNAVYOKUWA MCHANGIAJI?",
+          "description": "Ili kuwa mchangiaji, kampuni lazima ionyeshe kwamba inaweza kutoa huduma kwa kiwango kikubwa, huku ikizingatia mahitaji yote na utaalamu wa kuhudumia sekta moja au nyingi."
+        }
+      ],
+      "goToStep": "Nenda hatua ya {n}",
+      "joinNow": "Jiunge sasa"
+    },
+    "workflow": {
+      "titleLineOne": "Mtiririko wa",
+      "titleLineTwo": "Maombi",
+      "steps": [
+        {
+          "title": "Fomu ya maombi",
+          "content": "<p>Kama sehemu ya maombi, Wachangiaji lazima wajaze <strong><a href=\"/integrator/join\">Fomu ya Maombi ya Mradi mtandaoni</a></strong> na kuandaa <strong>Nyaraka za Ukaguzi wa Kina</strong> zitakazotumwa kwa <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Nyaraka za ukaguzi wa kina ni pamoja na:</p>\n<ul>\n<li>Nakala ya Cheti cha Usajili</li>\n<li>Maelezo ya UBO - Wamiliki wa Faida Pekee</li>\n<li>Nakala ya Katiba na Kanuni za Msingi za Ushirika</li>\n<li>Azimio la Bodi ya Wakurugenzi linalorasimisha nia ya kuomba kuwa Mchangiaji na kuzingatia sheria za Kuweka Dhamana pamoja na orodha ya maafisa walioidhinishwa kuendesha Mchangiaji</li>\n<li>Utambulisho wa wasainiaji walioidhinishwa unapaswa kuzingatia picha na kadi za saini zilizothibitishwa ipasavyo na kampuni</li>\n<li>Nakala za uthibitisho wa utambulisho na uthibitisho wa anwani ya wasimamizi, maafisa au wafanyakazi wenye Nguvu ya Wakili wa kufanya biashara kwa niaba yake</li>\n<li>Orodha ya wakurugenzi</li>\n<li>Fomu ya Maombi ya Mradi wa Mchangiaji</li>\n</ul>"
+        },
+        {
+          "title": "Ukaguzi kutoka Msingi wa ORIGYN",
+          "content": "<p>Hatua ya kwanza ya kuwa Mchangiaji ni kuthibitishwa na Msingi wa ORIGYN baada ya mchakato wa ukaguzi wa kina. Mchangiaji anakubali kushiriki nyaraka zote zilizoombwa kwa madhumuni ya kutimiza taratibu zote zinazohitajika za KYC/KYB/AML.</p>"
+        },
+        {
+          "title": "Kura ya utawala kupitia ORIGYN DAO",
+          "content": "<p>KURA YA UMMA NA ORIGYN DAO:</p>\n<p>Msingi ukikamilisha mchakato wa ukaguzi wa kina, Mchangiaji atakuwa chini ya kura ya DAO kupitia pendekezo la umma kwenye Jukwaa la SNS. Mapendekezo yote ya ORIGYN yanaweza kuonekana katika <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Kila mabadiliko ya anwani ya shirika la kisheria, jina la biashara, au kukomesha ushirikiano yanapigwa kura hadharani kwenye Jukwaa la SNS.</p>"
+        },
+        {
+          "title": "Kuweka Dhamana ya 50,000,000 OGY",
+          "content": "<p>Pendekezo likipita kwa mafanikio, Mchangiaji atalazimika kuendelea kuweka dhamana ya 50,000,000 OGY katika Utawala wa ORIGYN kwa muda wa mwaka 1 usiovunjika.</p>\n<p>Hatua hii inahakikisha ahadi ya muda mrefu ya Mchangiaji na nguvu ya kupiga kura ili kushiriki kikamilifu katika utawala wa ORIGYN. Neurons zote Zilizowekwa Dhamana zitaonyeshwa kwenye Dashibodi hadharani katika <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Takwimu zote kama vile idadi ya vyeti vilivyotengenezwa, TVL ya mali zilizothibitishwa, n.k. zitaonyeshwa hadharani chini ya sehemu ya wachangiaji katika <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Ukaguzi wa utendaji",
+          "content": "<p>Kulingana na kila sekta na ahadi, mahitaji ya chini ya idadi ya vyeti vilivyotengenezwa yanaweza kuwa sehemu ya mkataba wa Mchangiaji. Hivyo Msingi wa ORIGYN utafanya mara kwa mara ukaguzi wa hatua muhimu na utendaji wa Wachangiaji.</p>\n<p>Takwimu zote kama vile idadi ya vyeti vilivyotengenezwa, TVL ya mali zilizothibitishwa, n.k. zitaonyeshwa hadharani chini ya sehemu ya wachangiaji katika <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Pakua",
+      "titleLineTwo": "Mkataba wa Wachangiaji",
+      "cta": "Pakua"
+    }
+  },
+  "integratorJoin": {
+    "title": "Programu ya Wachangiaji",
+    "titleItalic": "Fomu ya Maombi",
+    "requiredLabel": "INAHITAJIKA *",
+    "requiredMessage": "Inahitajika",
+    "emailInvalid": "Tafadhali ingiza anwani sahihi ya barua pepe",
+    "send": "TUMA",
+    "sending": "Inatuma…",
+    "errorSend": "Hitilafu ya kutuma fomu.",
+    "fileSizeError": "Ukubwa wa faili usizidi 1 MB",
+    "addLink": "ONGEZA KIUNGO",
+    "addObjective": "ONGEZA LENGO",
+    "addKpi": "ONGEZA KPI",
+    "uploadHighlight": "Pakia",
+    "uploadSuffix": " nembo yako au iburute hapa (HIARI)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — 1 MB upeo",
+    "logoPreviewAlt": "Mwonekano wa nembo",
+    "successTitle": "Asante",
+    "successMessage": "Tutawasiliana nawe hivi karibuni",
+    "backToIntegrator": "RUDI UKURASA WA WACHANGIAJI",
+    "errorTitle": "Kuna tatizo limetokea",
+    "errorMessageDefault": "Tafadhali jaribu tena au rudi baadaye",
+    "retry": "JARIBU TENA",
+    "sections": {
+      "representative": {
+        "title": "MWAKILISHI WA MCHANGIAJI",
+        "fullName": "JINA KAMILI *",
+        "email": "ANWANI YA BARUA PEPE *",
+        "phone": "NAMBARI YA SIMU *"
+      },
+      "overview": {
+        "title": "MUHTASARI",
+        "description": "TAFADHALI ANDIKA MUHTASARI MFUPI WA MRADI WA MCHANGIAJI, UKIJUMUISHA",
+        "vision": "Maono ya Mchangiaji wako kwa sentensi moja... *",
+        "industry": "Mifano ya kategoria ya tasnia (sanaa, muziki, bidhaa za kifahari) au Mali mahususi (dhahabu, almasi) *",
+        "geography": "Jiografia ya Soko (Kimataifa, Ulaya, Nchi mahususi) *",
+        "socialFirst": "Viungo vya Tovuti na Mitandao ya Kijamii *",
+        "social": "Viungo vya Tovuti na Mitandao ya Kijamii",
+        "presentation": "Kiungo cha uwasilishaji wa mradi (si lazima, lakini husaidia)"
+      },
+      "acquisition": {
+        "title": "UPATIKANAJI",
+        "description": "ELEZA WAZI HADHIRA YAKO LENGWA NA JINSI UNAVYOWAFIKIA AU UTAKAVYOWAFIKIA",
+        "whyExists": "Kwa nini mradi huu unahitaji kuwepo, na ni tofauti gani? *",
+        "whyIntegrator": "Kwa nini ni muhimu kwako kuwa Mchangiaji? *"
+      },
+      "objectives": {
+        "title": "MALENGO MAKUU UNAYOTAKA KUYAFIKIA",
+        "first": "Lengo la 01 *",
+        "second": "Lengo la 02",
+        "more": "Lengo la {n}"
+      },
+      "kpis": {
+        "title": "VIPIMO VIKUU UNAVYOTAKA KUFUATILIA",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "UTAFANYA NINI NA JINSI GANI",
+        "focus": "Tuambie kwa undani utajikita kwenye nini kama Mchangiaji na mafanikio ya mradi huu yanaonekana vipi.",
+        "implement": "Tuambie jinsi unavyopanga kutekeleza mradi huu"
+      },
+      "roadmaps": {
+        "title": "RAMANI ZA BARABARA ZA MIEZI 3 YA KWANZA NA MIAKA 3",
+        "description": "Lazima uonyeshe wakati unatarajia kuanza kutengeneza na idadi ya vyeti iliyokadiriwa *"
+      },
+      "team": {
+        "title": "TIMU",
+        "placeholder": "Tuambie kuhusu timu yako ya sasa, ikiwa ipo, au majukumu ya timu ya baadaye unayoweza kuhitaji, pamoja na viungo vya LinkedIn *"
+      },
+      "risk": {
+        "title": "MAMBO YA HATARI",
+        "placeholder": "Tuambie sababu na mambo ambayo yatasababisha kushindwa."
+      },
+      "optional": {
+        "title": "HIARI",
+        "placeholder": "Je, kuna jambo lingine lolote unalotaka kushiriki ambalo litaongeza nafasi zako za kuchaguliwa?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Tokeni",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Tokeni ya OGY ni <b>matumizi ya msingi</b> ya Itifaki ya ORIGYN.",
+      "paragraphTwo": "Ina<b>unganisha</b> uthibitisho wa mali za ulimwengu halisi na miundombinu ya blockchain iliyogatuliwa, <b>ikifanya umiliki, uthibitisho,</b> na <b>uhamishaji kuthibitishika na kuwa salama.</b>",
+      "paragraphThree": "OGY inaruhusu mfumo wa kimataifa ambapo mali za <b>kimwili</b> zinathibitishwa <b>kidijitali, kufuatiliwa,</b> na <b>kuunganishwa katika maombi ya kigatuzi</b> na masoko.",
+      "cta": "Nunua OGY",
+      "imageAlt": "Tokeni ya OGY"
+    },
+    "stats": {
+      "marketCap": "Thamani ya Soko ya $OGY",
+      "burned": "Jumla ya OGY iliyochomwa",
+      "circulating": "Usambazaji unaozunguka",
+      "holders": "Wamiliki wa tokeni"
+    },
+    "utility": {
+      "titlePrefix": "Matumizi ya",
+      "titleEmphasis": "Itifaki",
+      "lead": "Unahitaji tokeni za OGY ili kutumia kikamilifu mfumo wa ikolojia wa ORIGYN:",
+      "cards": [
+        {
+          "title": "Uthibitisho",
+          "description": "Kila mali iliyothibitishwa kwenye ORIGYN inahitaji OGY kutengeneza cheti kisichobadilika kwenye mnyororo."
+        },
+        {
+          "title": "Tabaka la Miamala",
+          "description": "Inawezesha uhamishaji, uthibitisho upya, na matukio ya mzunguko wa maisha ya mali zilizothibitishwa."
+        },
+        {
+          "title": "Uhifadhi wa Data",
+          "description": "Inasaidia uhifadhi salama, uliogatuliwa wa metadata ya mali na asili yake."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Tokeni ya OGY",
+      "titleLineTwo": "Anwani ya Mkataba",
+      "description": "Tokeni ya OGY imewekwa kwenye blockchain ya Internet Computer na inafanya kazi kama tokeni ya matumizi ya asili ndani ya Itifaki ya ORIGYN.",
+      "bulletOne": "Mkataba huu unasimamia utoaji wa OGY, uhamishaji, na mwingiliano katika itifaki yote, ukihakikisha uwazi na uthibitisho wa shughuli zote za tokeni kwenye mnyororo.",
+      "bulletTwo": "Unaweza kuona na kushirikiana na tokeni ya OGY moja kwa moja kupitia mtandao wa ICP.",
+      "warning": "Daima thibitisha anwani ya mkataba kabla ya kushirikiana na OGY.",
+      "contractLabel": "Anwani Rasmi ya Mkataba:",
+      "copyAria": "Nakili anwani ya mkataba",
+      "copied": "Imenakiliwa kwenye ubao wa kunakili",
+      "cmcAria": "Ona OGY kwenye CoinMarketCap"
+    },
+    "governance": {
+      "title": "Utawala",
+      "lead": "OGY ni tokeni ya utawala inayowawezesha wamiliki:",
+      "items": [
+        "<b>Kutenga</b> fedha za hazina kuelekea ukuaji wa mfumo wa ikolojia na mipango ya kimkakati.",
+        "<b>Kupendekeza na kupiga kura</b> kuhusu uboreshaji wa itifaki, kanuni za uthibitisho, na mabadiliko ya mfumo wa ikolojia.",
+        "<b>Kusimamia</b> uandikishaji wa wachangiaji na wathibitishaji."
+      ],
+      "closing": "Utawala <b>umegatuliwa kikamilifu</b> kupitia ORIGYN DAO, ukiipa jamii ushawishi wa moja kwa moja juu ya <b>mwelekeo wa maendeleo wa itifaki.</b>",
+      "cta": "ONA ZAIDI"
+    },
+    "staking": {
+      "titleLineOne": "Kuweka Dhamana",
+      "titleLineTwoPrefix": "na",
+      "titleLineTwoEmphasis": "Tuzo",
+      "lead": "Kuweka dhamana ya OGY kunalinda mtandao huku ukioanisha motisha:",
+      "cards": [
+        {
+          "title": "Usalama wa Mtandao",
+          "description": "Wanaoweka dhamana wanashiriki katika utawala na kusaidia kuthibitisha shughuli za itifaki."
+        },
+        {
+          "title": "Tuzo",
+          "description": "Pata sehemu ya mapato ya itifaki kutoka kwa ada za uthibitisho na shughuli za mtandao."
+        },
+        {
+          "title": "Muafaka wa Muda Mrefu",
+          "description": "Kuweka dhamana kunakuza ushiriki wa muda mrefu na kuimarisha mfumo wa ikolojia."
+        }
+      ],
+      "closing": "Mfano wa kuweka dhamana unaunganisha matumizi ya tokeni moja kwa moja na upanuzi na mafanikio ya itifaki.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "Mifumo ya <b>Kupungua</b>",
+      "titleLineTwo": "na <b>Uongezaji wa Thamani</b>",
+      "lead": "OGY inajumuisha mfano wa kupungua kwa usambazaji ulioundwa kwa ukuaji endelevu:",
+      "items": [
+        {
+          "title": "Ni nini kinachofanya OGY kuwa tokeni ya kupungua kwa usambazaji?",
+          "answer": "OGY imeundwa kwa mfano wa kupungua kwa usambazaji, kumaanisha kwamba usambazaji wake jumla unapungua kwa wakati itifaki inapotumika."
+        },
+        {
+          "title": "Mchakato wa kuchomwa kwa tokeni unafanya kazije?",
+          "answer": "Kila wakati OGY inapotumika kwa uthibitisho, sehemu ya tokeni inachomwa kabisa. Hii inapunguza usambazaji unaozunguka."
+        },
+        {
+          "title": "Ni nini jukumu la hazina?",
+          "answer": "Mapato ya itifaki yanasimamiwana hazina kusaidia uendelezaji unaoendelea, kuwatuza washiriki, na kusaidia kudumisha utulivu wa muda mrefu wa mfumo wa ikolojia."
+        },
+        {
+          "title": "OGY huunda thamani vipi kwa wakati?",
+          "answer": "Watumiaji wengi wanapochukua itifaki ya ORIGYN na shughuli za uthibitisho zinapoongezeka, OGY zaidi inachomwa. Usambazaji huu unaopungua, ukiunganishwa na matumizi yanayokua, unasaidia uundaji wa thamani wa muda mrefu."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Muhtasari wa",
+      "titleEmphasis": "Tokenomics",
+      "totalSupplyLabel": "Usambazaji Jumla:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Usambazaji:</b> Umegawiwa kwa ukuaji wa mfumo wa ikolojia, tuzo za kuweka dhamana, jamii, na utawala.",
+      "revenue": "<b>Mfano wa Mapato:</b> Ada za itifaki zinazolipwa kwa OGY zinaunda mahitaji yanayoendelea huku zikipunguza usambazaji kupitia mifumo ya kuchoma.",
+      "support": "Mfano umeundwa kusaidia uendelevu wa muda mrefu wa itifaki na muafaka wa wamiliki wa tokeni.",
+      "cta": "TOKENOMICS"
+    }
   }
 }

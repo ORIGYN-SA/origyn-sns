@@ -135,8 +135,18 @@
         "gain": "向上"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "AIに<i>置き換えられない</i>\n五つの柱。",
     "lead": "AIは生産をコモディティ化する。残るのはこの五つの領域だ。Origynはそのすべてに位置取っている。",
     "pillars": [
-      { "title": "信頼", "description": "Origynの認証 — 検証可能な信頼のシグナル。" },
-      { "title": "文脈", "description": "数十年にわたる構造化された記憶 — AIが真似できない個人のシグナル。" },
-      { "title": "流通", "description": "Swiss Subnet — エージェントのための検証可能なインフラ。" },
-      { "title": "審美眼", "description": "自動リサーチパイプライン — 自動化が支えるキュレーション。" },
-      { "title": "責任", "description": "監査証跡と証明書 — 本物のガバナンスレイヤー。" }
+      {
+        "title": "信頼",
+        "description": "Origynの認証 — 検証可能な信頼のシグナル。"
+      },
+      {
+        "title": "文脈",
+        "description": "数十年にわたる構造化された記憶 — AIが真似できない個人のシグナル。"
+      },
+      {
+        "title": "流通",
+        "description": "Swiss Subnet — エージェントのための検証可能なインフラ。"
+      },
+      {
+        "title": "審美眼",
+        "description": "自動リサーチパイプライン — 自動化が支えるキュレーション。"
+      },
+      {
+        "title": "責任",
+        "description": "監査証跡と証明書 — 本物のガバナンスレイヤー。"
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "言語",
-    "switchTo": "{language}に切り替える"
+    "switchTo": "{language}に切り替える",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "トークン",
+    "ai": "AI",
+    "certificates": "証明書",
+    "integrators": "インテグレーター",
+    "useCases": "ユースケース",
+    "governance": "ガバナンス",
+    "help": "ヘルプ",
+    "toggleMenu": "メニューを切り替える"
+  },
+  "footer": {
+    "certificates": "証明書",
+    "integrators": "インテグレーター",
+    "ecosystem": "エコシステム",
+    "useCases": "ユースケース",
+    "ogyToken": "OGY トークン",
+    "dashboard": "ダッシュボード",
+    "copyright": "©2026 全著作権所有 – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "資産、知的財産、そしてアイデンティティを、\n完全にオンチェーンで保護します。",
+      "subtitleMobile": "資産、知的財産、\nそしてアイデンティティを、\n完全にオンチェーンで保護します。",
+      "logoAlt": "ORIGYN ロゴ",
+      "certifyCta": "資産を認証する",
+      "buyCta": "$OGY を購入する",
+      "marquee": "ORIGYN により、データと資産を完全にオンチェーンで安全に保管できます"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY 時価総額",
+        "tooltip": "現在流通しているすべての OGY トークンの総市場価値。リアルタイムのトークン価格に基づいています。"
+      },
+      "tvl": {
+        "title": "認証済み資産の預かり総額（TVL）（米ドル建て）",
+        "tooltipTitle": "預かり総額（TVL）",
+        "tooltip": "TVL は発行された証明書の価値に相当します。ORIGYN がこれらの資産を保管・管理しているわけではありません。"
+      },
+      "users": {
+        "title": "ユーザー数",
+        "tooltip": "認証済み資産の発行、管理、または保有のために ORIGYN を積極的に利用している個人・ブランド・機関の総数です。"
+      },
+      "assets": {
+        "title": "認証済み資産総数",
+        "tooltip": "ORIGYN の公式証明書を取得した物理的または デジタルアイテムの数です。"
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "なぜ",
+      "titleLineTwo": "ORIGYN なのか",
+      "subtitle": "ORIGYN — 現実世界の資産とブロックチェーンが出会う場所。",
+      "body": "ORIGYN は、ファインアートや金から高級品、知的財産まで、現実世界の資産を完全にオンチェーンへ移行するために設計された、世界最先端の RWA プロトコルです。\n\n高価値資産の真正性、来歴、所有権を保証するトラストレスな認証インフラを提供しています。"
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% オンチェーン認証",
+          "description": "仲介者なし、改ざんなし。完全な分散型。"
+        },
+        {
+          "title": "$OGY トークンのユーティリティ",
+          "description": "ガバナンスとプロトコルユーティリティを通じて ORIGYN エコシステムを支えます。"
+        },
+        {
+          "title": "マルチアセット対応",
+          "description": "アート、高級品、金、不動産など、多様な資産を認証できます。"
+        },
+        {
+          "title": "業界最高水準のセキュリティ",
+          "description": "最も価値ある資産を守る、改ざん不能なブロックチェーン保護。"
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "仕組みを",
+      "titleSuffix": "理解する",
+      "steps": [
+        {
+          "description": "現実世界の資産をオンチェーンに移行するプロセスは、シンプルであるべきです。ORIGYN の認証プロセスは、安全で分散型かつ使いやすい、わずか 3 ステップで設計されています。<br /><br />資産のメタデータとサポート書類を提出すると、ORIGYN がブロックチェーン上に直接、唯一かつ改ざん不能なデジタル証明書を生成し、資産に割り当て、正当な所有者に紐付けます。",
+          "panelTitle": "デジタル証明書を発行する",
+          "panelDescription": "資産の詳細をアップロードし、ブロックチェーン証明書を発行します。"
+        },
+        {
+          "description": "各証明書は暗号学的に検証可能です。資産の真正性、来歴、所有権は ORIGYN の分散型プロトコルを通じて検証されます。",
+          "panelTitle": "検証・認証する",
+          "panelDescription": "資産の真正性と所有権の透明性を確保します。"
+        },
+        {
+          "description": "認証後、資産は保有・移転・売買のほか、DeFi アプリケーションや NFT マーケットプレイス、プライベートな取引、機関向け記録など、デジタルエコシステム内で活用できます。",
+          "panelTitle": "移転・追跡する",
+          "panelDescription": "DeFi、再販、または投資に向けて、認証済み資産を活用・追跡します。"
+        }
+      ],
+      "goToStep": "ステップ {n} へ"
+    },
+    "useCases": {
+      "titlePrefix": "ユース",
+      "titleSuffix": "ケース",
+      "description": "ORIGYN のプロトコルは、信頼性、来歴、真正性が重要なさまざまな業界に対応するよう構築されています。以下は、すでに ORIGYN の認証インフラを活用している主要セクターの一部です。",
+      "items": [
+        {
+          "title": "アート",
+          "description": "物理的・デジタルアートワークの来歴をオンチェーンで認証・保護します。"
+        },
+        {
+          "title": "金",
+          "description": "改ざん不能で追跡可能なデジタル証明書により、金を認証します。"
+        },
+        {
+          "title": "ダイヤモンド",
+          "description": "ブロックチェーンの精度で、各ダイヤモンドの産地、グレーディング、所有権を追跡します。"
+        },
+        {
+          "title": "産地証明",
+          "description": "時計からファッションまで、あらゆる製品の産地、真正性、職人技を証明します。"
+        }
+      ],
+      "indicatorAria": "ユースケース {n} へ",
+      "discover": "詳細を見る"
+    },
+    "certify": {
+      "titleLine": "資産を",
+      "titleEmphasis": "認証する",
+      "subtitle": "ORIGYN 認証コスト計算ツールを使用して、完全オンチェーンのデジタル証明書で資産を保護するコストを即座に見積もれます。ファインアート、高級品、金、その他の高価値資産の認証を問わず、このツールでインフラおよびテクノロジーのコストを明確に把握できます。推測は不要です。",
+      "contactPrompt": "資産の認証については、お問い合わせください：",
+      "contactCta": "ORIGYN に問い合わせる"
+    },
+    "integrator": {
+      "titleLineOne": "インテグレーター",
+      "titleLineTwo": "プログラム",
+      "description": "ORIGYN インテグレータープログラムは、ORIGYN の分散型認証インフラをサービスに直接組み込もうとしている企業、プラットフォーム、開発者を対象に設計されています。\n\nマーケットプレイス、サプライチェーンソリューション、高級ブランドを問わず、ゼロから構築することなく、安全なオンチェーン資産検証を提供できます。",
+      "cta": "インテグレータープログラムに参加する"
+    },
+    "roadmap": {
+      "title": "ロードマップ",
+      "description": "新しいユーティリティやガバナンス機能から、業界・開発者向けサポートの拡充まで。すべてのマイルストーンは、スケーラブルで検証可能かつ分散型のインフラを通じて、現実世界の資産を完全にオンチェーンへ移行するという私たちのミッションを体現しています。"
+    },
+    "partners": {
+      "label": "パートナー"
+    },
+    "bePart": {
+      "titleLead": "意思決定に",
+      "emphasisDesktop": "参加する",
+      "emphasisMobileLineOne": "意思",
+      "emphasisMobileLineTwo": "決定",
+      "cta": "ORIGYN DAO に参加する"
+    }
+  },
+  "useCase": {
+    "notFound": "ユースケースが見つかりません",
+    "cases": {
+      "gold": [
+        {
+          "title": "金",
+          "description": "世界最大の資産であり最も厳しく監視されるコモディティとして、金は最高水準のセキュリティを必要とします。<br /><br />ORIGYN はこの要件を満たしており、その実例として、金精製の世界的リーダーである <a href='https://www.metalor.com/' target='_blank'>Metalor</a> がデータ保護のために ORIGYN プロトコルを採用しました。金地金に関するすべての技術情報（高精細画像や書類を含む）が、初めてブロックチェーン上の単一の証明書に記録されます。"
+        },
+        {
+          "description": "さらに、<a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> や <a href='https://bity.com' target='_blank'>Bity</a> などのプロジェクトは、これらの証明書を活用して対応する金地金を販売したり、現物の金に裏付けられたトークンを発行したりしています。"
+        }
+      ],
+      "art": [
+        {
+          "title": "アート",
+          "description": "アートの専門家は、作品に対する信頼と証明書の保証を非常に重視しています。そのため、すでに複数の事例で ORIGYN テクノロジーが採用されています。<br /><br /><a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> や <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> といった著名なアーティストたちは、自身の作品に関するデータを保護するために独自の ORIGYN 証明書を作成しています。これらの証明書は完全オンチェーンで改ざん不能かつ複製不可能であり、アーティストが偽造に対抗しながら、高精細画像、動画、書類を通じてコレクター体験を向上させることを可能にします。"
+        },
+        {
+          "description": "クライアント向けにデジタル証明書を作成する必要がある財団、団体、家族、ギャラリー、アートアドバイザーなどは、最高水準のセキュリティと機密性を維持するために ORIGYN を活用し始めています。ルネ・マグリット作品の証明書を手がけるルテレ・ギャラリーを含む複数のギャラリーがすでに ORIGYN テクノロジーを導入しています。<br /><br />ORIGYN テクノロジーは、特に共同所有権の販売など、証明書を通じた売買も可能にします。これにより、証明書を複数のパートに分割し、それぞれを所有権の証明として活用することで、作品を複数の所有者が共有できます。"
+        }
+      ],
+      "madein": [
+        {
+          "title": "産地証明",
+          "description": "国家的な産地とは、単なるラベルではありません。アイデンティティ、品質、文化的価値の宣言です。偽造品が増加する中、製品がどこでどのように作られたかを証明することは、業界を問わずブランドにとって重要な差別化要素となっています。<br /><br />これに対応するため、<a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> は 100% Made in Italy 認証を創設しました。この法的に認められた規格は、厳格な書類審査、独立した監査、政府レベルのアドボカシーを通じてイタリアの優位性を保護しています。ORIGYN はすべての認証済み製品をブロックチェーンに記録し、検証可能な産地証明としてこのシステムのデジタル基盤を提供します。"
+        },
+        {
+          "description": "各証明書は安全で改ざん不能なデジタルパスポートとなります。消費者の信頼を強化し、サプライチェーン全体の透明性を確保し、真正性を軸に事業展開する企業を支援します。"
+        }
+      ],
+      "luxury": [
+        {
+          "title": "ラグジュアリー",
+          "description": "ORIGYN テクノロジーは、高級品セクターが自らを刷新し、よりパーソナライズされた透明性の高い製品体験を提供するというニーズに応えます。<br /><br />ジュエラーの <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> は ORIGYN ブロックチェーン技術を活用してコレクション全体の証明書を作成しています。これにより、すべてのデータを完全にオンチェーンで保護しながら、機密性、真正性、所有権を保証する次世代の証明書を顧客に提供しています。"
+        },
+        {
+          "description": "<a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> などの他の高級品企業も、著名な時計メーカー向けのダイヤモンドの完全なトレーサビリティチェーンを記録するために ORIGYN を活用しています。証明書へのパーソナライズされたマーケティングコンテンツの追加や、AI との組み合わせによるセカンダリーマーケットでのリアルタイム真正性判定など、さらに多くの応用が可能です。"
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "ヘルプ",
+    "titleSuffix": "センター",
+    "searchPlaceholder": "検索...",
+    "faqs": [
+      {
+        "title": "OGY トークンについて",
+        "description": "Web 3.0 の分散型資産認証を支える",
+        "answer": "<strong>OGY トークン</strong>は ORIGYN プロトコルのコアユーティリティです。現実世界の資産認証と分散型ブロックチェーンインフラを繋ぎ、所有権・認証・コンテンツ検証を真に安全なものにします。<br><br>OGY は、物理的資産がデジタルに認証・追跡され、分散型アプリケーションや市場に統合されるグローバルなシステムを可能にします。"
+      },
+      {
+        "title": "プロトコルのユーティリティ",
+        "description": "OGY は ORIGYN エコシステム全体の主要機能の実行に必要です。",
+        "answer": "<strong>認証：</strong>ORIGYN で認証されるすべての資産は、改ざん不能なオンチェーン証明書を発行するために OGY を必要とします。<br><strong>トランザクションレイヤー：</strong>認証済み資産の移転・再認証・ライフサイクルイベントを円滑に処理します。<br><strong>データストレージ：</strong>資産のメタデータと来歴の安全な分散型保管をサポートします。<br>このユーティリティにより、OGY はプロトコル内のあらゆる取引に不可欠な存在となっています。"
+      },
+      {
+        "title": "OGY トークンのコントラクトアドレス",
+        "description": "OGY トークンは Internet Computer ブロックチェーンにデプロイされています。",
+        "answer": "OGY トークンは Internet Computer ブロックチェーンにデプロイされており、ORIGYN プロトコル内でネイティブユーティリティトークンとして機能します。<br><br>公式コントラクトアドレス：</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>OGY を取り扱う前に、必ずコントラクトアドレスを確認してください。<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[OGY を購入する]</a>"
+      },
+      {
+        "title": "ガバナンス",
+        "description": "OGY はガバナンストークンであり、保有者に以下の権限を与えます：",
+        "answer": "• プロトコルのアップグレード、流動性ルール、エコシステムの変更に関する提案と投票。<br>• インテグレーターおよび認証者のオンボーディングの監督。<br>• イノベーション、成長、戦略的取り組みに向けた財務資金の配分。<br><br>ガバナンスは ORIGYN DAO を通じて完全に分散化されており、コミュニティがプロトコルの進化に直接影響力を持ちます。"
+      },
+      {
+        "title": "ステーキングとリワード",
+        "description": "OGY のステーキングはネットワークを保護しながらインセンティブを整合させます。",
+        "answer": "<strong>ネットワークセキュリティ：</strong>ステーカーはガバナンスに参加し、プロトコル運用の検証を支援します。<br><br><strong>リワード：</strong>認証手数料やネットワーク活動からのプロトコル収益の一部を獲得できます。<br><br><strong>長期的な整合：</strong>ステーキングは長期的な参加を促進し、エコシステムを強化します。<br><br>ステーキングモデルは、トークンのユーティリティをプロトコルの採用と成功に直結させます。<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[今すぐステーキング]</strong></a>"
+      },
+      {
+        "title": "デフレメカニズム／価値蓄積",
+        "description": "OGY は持続的な成長を目的としたデフレモデルを採用しています。",
+        "answer": "<strong>認証バーン：</strong>認証に使用された OGY の一部が永久に流通から除去されます。<br><br><strong>財務管理：</strong>プロトコル収益は開発支援、リワード提供、トークン価値の最適化に充てられます。<br><br>プロトコルの利用が拡大するにつれ、OGY の供給量は減少し、採用の拡大に連動した価値創出を強化します。"
+      },
+      {
+        "title": "トークノミクスの概要",
+        "description": "総供給量：10.4 Billion OGY",
+        "answer": "<strong>配分：</strong>エコシステムの成長、ステーキングリワード、コミュニティ、ガバナンスに配分されます。<br><br><strong>収益モデル：</strong>OGY で支払われるプロトコル手数料が継続的な需要を生み出すと同時に、バーンメカニズムにより供給量を削減します。<br>このモデルは、プロトコルの長期的な持続可能性と将来志向の整合性をサポートするよう設計されています。"
+      },
+      {
+        "title": "OGY の未来",
+        "description": "OGY は分散型フレームワークの基盤です。",
+        "answer": "OGY は、現実世界の資産をオンチェーンで認証・管理し、その価値を解放するために設計された分散型フレームワークの基盤です。ORIGYN の成長に伴い、OGY の役割は資産認証、ガバナンス、エコシステム開発を牽引する経済エンジンとして拡大していきます。"
+      },
+      {
+        "title": "ライブトークンを確認する",
+        "description": "ORIGYN ダッシュボードで、ライブトークンデータ、ステーキングオプション、ガバナンス参加を確認できます。",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN ダッシュボード</span>：<a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>ダッシュボードにアクセスする</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "インテグレーターに",
+      "titleConnector": "なる",
+      "titleEmphasis": "",
+      "subtitle": "ORIGYN のブロックチェーン認証技術で信頼の未来を構築するために、インテグレータープログラムにご参加ください",
+      "cta": "今すぐ参加する"
+    },
+    "program": {
+      "titleLineOne": "インテグレーター",
+      "titleLineTwo": "プログラム",
+      "steps": [
+        {
+          "labelBold": "インテグレーター",
+          "labelRest": "プログラムとは何ですか？",
+          "description": "インテグレータープログラムは、ORIGYN プロトコルの普及を促進し、採用を奨励し、エコシステムを拡大することを目的とした戦略的イニシアチブです。"
+        },
+        {
+          "labelBold": "インテグレーターと",
+          "labelRest": "はどのような存在ですか？",
+          "description": "<ul><li><strong>インテグレーターは独立した企業であり、</strong>ORIGYN 証明書の発行と特定の業界・資産クラス・複数セクターにわたる ORIGYN プロトコルの普及という共通の目標のもと、ORIGYN プロトコルに基づいた製品を構築します。</li><li><strong>イネーブラーとして機能し、</strong>ブロックチェーンおよび Web3 の深い専門知識を必要とせずに、企業が ORIGYN のブロックチェーン認証技術を採用できるよう支援します。</li><li><strong>ORIGYN Foundation による審査プロセスを経て、</strong>インテグレーターは ORIGYN DAO トークン保有者による選出・投票によって認定されます。</li></ul>"
+        },
+        {
+          "labelBold": "インテグレーターに",
+          "labelRest": "なるにはどうすればよいですか？",
+          "description": "インテグレーターになるには、特定のセクターまたは複数のセクターにサービスを提供するためのすべての要件と専門知識を満たしながら、大規模なサービス提供能力を示す必要があります。"
+        }
+      ],
+      "goToStep": "ステップ {n} へ",
+      "joinNow": "今すぐ参加する"
+    },
+    "workflow": {
+      "titleLineOne": "申請",
+      "titleLineTwo": "ワークフロー",
+      "steps": [
+        {
+          "title": "申請フォーム",
+          "content": "<p>申請の一環として、インテグレーターは <strong><a href=\"/integrator/join\">プロジェクト申請フォームをオンラインで記入</a></strong>し、<strong>デューデリジェンス書類</strong>を <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong> 宛に送付する必要があります。</p>\n<p>デューデリジェンス書類には以下が含まれます：</p>\n<ul>\n<li>設立証明書のコピー</li>\n<li>UBO（最終受益者）の説明</li>\n<li>定款および付属定款のコピー</li>\n<li>インテグレーターとして申請する意思およびステーキングルールへの遵守を正式化する取締役会決議書（インテグレーター運営権限者リストを含む）</li>\n<li>権限を持つ署名者の識別書類（会社が適切に証明した写真および署名カードに基づくもの）</li>\n<li>代理権限を持つ管理職員・役員・従業員の身分証明書および住所証明書のコピー</li>\n<li>取締役一覧</li>\n<li>インテグレータープロジェクト申請フォーム</li>\n</ul>"
+        },
+        {
+          "title": "ORIGYN Foundation による審査",
+          "content": "<p>インテグレーターになるための最初のステップは、デューデリジェンスプロセスを経て ORIGYN Foundation による承認を受けることです。インテグレーターは、KYC・KYB・AML に必要なすべての手続きを履行する目的で、要請されたすべての書類を共有することに同意します。</p>"
+        },
+        {
+          "title": "ORIGYN DAO によるガバナンス投票",
+          "content": "<p>ORIGYN DAO による公開投票：</p>\n<p>Foundation が審査プロセスを完了すると、インテグレーターは SNS プラットフォーム上の公開提案を通じた DAO 投票の対象となります。すべての ORIGYN 提案は <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong> で確認できます。</p>\n<p>法人住所、商号、または連携終了に関するすべての変更は、SNS プラットフォーム上で公開投票によって決定されます。</p>"
+        },
+        {
+          "title": "50,000,000 OGY のステーキング",
+          "content": "<p>提案が可決された場合、インテグレーターは 50,000,000 OGY を ORIGYN ガバナンスに 1 年間（非解除）ステーキングする必要があります。</p>\n<p>このステップにより、インテグレーターの長期的なコミットメントと、ORIGYN ガバナンスへの積極的な参加を通じた議決権が確保されます。すべてのステーク済みニューロンは、<strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> のダッシュボードで公開されます。</p>\n<p>発行済み証明書数、認証済み資産の TVL などの統計は、<strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> のインテグレーターセクションに公開されます。</p>"
+        },
+        {
+          "title": "パフォーマンスレビュー",
+          "content": "<p>セクターおよびコミットメントに応じて、発行する証明書の最低件数がインテグレーター契約に盛り込まれる場合があります。ORIGYN Foundation は定期的にインテグレーターのマイルストーンおよびパフォーマンスレビューを実施します。</p>\n<p>発行済み証明書数、認証済み資産の TVL などの統計は、<strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> のインテグレーターセクションに公開されます。</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "インテグレーター",
+      "titleLineTwo": "契約書をダウンロード",
+      "cta": "ダウンロード"
+    }
+  },
+  "integratorJoin": {
+    "title": "インテグレータープログラム",
+    "titleItalic": "申請フォーム",
+    "requiredLabel": "必須 *",
+    "requiredMessage": "必須項目です",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "send": "送信",
+    "sending": "送信中…",
+    "errorSend": "フォームの送信中にエラーが発生しました。",
+    "fileSizeError": "ファイルサイズは 1 MB 以内にしてください",
+    "addLink": "リンクを追加",
+    "addObjective": "目標を追加",
+    "addKpi": "KPI を追加",
+    "uploadHighlight": "アップロード",
+    "uploadSuffix": " またはロゴをここにドラッグしてください（任意）",
+    "uploadHint": "JPEG、PNG、SVG、PDF — 最大 1 MB",
+    "logoPreviewAlt": "ロゴのプレビュー",
+    "successTitle": "ありがとうございます",
+    "successMessage": "改めてご連絡いたします",
+    "backToIntegrator": "インテグレーターページに戻る",
+    "errorTitle": "エラーが発生しました",
+    "errorMessageDefault": "もう一度お試しいただくか、後ほど再度アクセスしてください",
+    "retry": "再試行",
+    "sections": {
+      "representative": {
+        "title": "インテグレーター担当者",
+        "fullName": "氏名 *",
+        "email": "メールアドレス *",
+        "phone": "電話番号 *"
+      },
+      "overview": {
+        "title": "概要",
+        "description": "インテグレータープロジェクトの概要を以下の内容を含めて簡潔にご記入ください",
+        "vision": "インテグレーターのビジョンを一文で表すと... *",
+        "industry": "業界カテゴリーの例（アート、音楽、高級品）または具体的な資産（金、ダイヤモンド）*",
+        "geography": "市場の地域（グローバル、ヨーロッパ、特定国）*",
+        "socialFirst": "ウェブサイトおよびソーシャルメディアのリンク *",
+        "social": "ウェブサイトおよびソーシャルメディアのリンク",
+        "presentation": "プロジェクトプレゼンテーションへのリンク（必須ではありませんが、参考になります）"
+      },
+      "acquisition": {
+        "title": "顧客獲得",
+        "description": "ターゲットオーディエンスと、その獲得方法または獲得予定の方法を明確にご説明ください",
+        "whyExists": "このプロジェクトはなぜ必要であり、何が異なりますか？*",
+        "whyIntegrator": "インテグレーターになることがあなたにとって重要な理由は何ですか？*"
+      },
+      "objectives": {
+        "title": "達成したい主要目標",
+        "first": "目標 01 *",
+        "second": "目標 02",
+        "more": "目標 {n}"
+      },
+      "kpis": {
+        "title": "モニタリングしたい主要指標",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "何を、どのように取り組みますか",
+        "focus": "インテグレーターとして何に注力するか、またこのプロジェクトの成功がどのような姿であるかを詳しくお聞かせください。",
+        "implement": "このプロジェクトをどのように実施する予定かをお聞かせください"
+      },
+      "roadmaps": {
+        "title": "最初の 3 ヶ月および 3 年間のロードマップ",
+        "description": "発行開始予定時期と証明書の見込み発行数をご記入ください *"
+      },
+      "team": {
+        "title": "チーム",
+        "placeholder": "現在のチームの状況（該当する場合）、または今後必要となるチームの役割と LinkedIn へのリンクをお聞かせください *"
+      },
+      "risk": {
+        "title": "リスク要因",
+        "placeholder": "失敗につながる可能性のある理由と要因をお聞かせください。"
+      },
+      "optional": {
+        "title": "任意記入",
+        "placeholder": "選考の可能性を高めるために共有したいことがあれば、ご自由にお書きください。"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "トークン",
+      "paragraphOne": "OGY トークンは ORIGYN プロトコルの<b>コアユーティリティ</b>です。",
+      "paragraphTwo": "現実世界の資産認証と分散型ブロックチェーンインフラを<b>繋ぎ</b>、<b>所有権・認証</b>、および<b>移転を検証可能かつ安全に</b>します。",
+      "paragraphThree": "OGY は、<b>物理的</b>資産が<b>デジタルに認証・追跡</b>され、分散型アプリケーションや市場に<b>統合される</b>グローバルなシステムを可能にします。",
+      "cta": "OGY を購入する",
+      "imageAlt": "OGY トークン"
+    },
+    "stats": {
+      "marketCap": "$OGY 時価総額",
+      "burned": "OGY 累計バーン量",
+      "circulating": "流通供給量",
+      "holders": "トークン保有者数"
+    },
+    "utility": {
+      "titlePrefix": "プロトコルの",
+      "titleEmphasis": "ユーティリティ",
+      "lead": "ORIGYN エコシステムを最大限に活用するには OGY トークンが必要です：",
+      "cards": [
+        {
+          "title": "認証",
+          "description": "ORIGYN で認証されるすべての資産は、改ざん不能なオンチェーン証明書を発行するために OGY を必要とします。"
+        },
+        {
+          "title": "トランザクションレイヤー",
+          "description": "認証済み資産の移転・再認証・ライフサイクルイベントを円滑に処理します。"
+        },
+        {
+          "title": "データストレージ",
+          "description": "資産のメタデータと来歴の安全な分散型保管をサポートします。"
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY トークン",
+      "titleLineTwo": "コントラクトアドレス",
+      "description": "OGY トークンは Internet Computer ブロックチェーンにデプロイされており、ORIGYN プロトコル内でネイティブユーティリティトークンとして機能します。",
+      "bulletOne": "このコントラクトは OGY の発行、移転、およびプロトコル全体におけるインタラクションを管理し、すべてのトークン活動の透明性とオンチェーン検証を確保します。",
+      "bulletTwo": "OGY トークンは ICP ネットワークを通じて直接確認・操作できます。",
+      "warning": "OGY を取り扱う前に、必ずコントラクトアドレスを確認してください。",
+      "contractLabel": "公式コントラクトアドレス：",
+      "copyAria": "コントラクトアドレスをコピーする",
+      "copied": "クリップボードにコピーしました",
+      "cmcAria": "CoinMarketCap で OGY を確認する"
+    },
+    "governance": {
+      "title": "ガバナンス",
+      "lead": "OGY はガバナンストークンであり、保有者に以下の権限を与えます：",
+      "items": [
+        "エコシステムの成長と戦略的取り組みに向けた財務資金の<b>配分</b>。",
+        "プロトコルのアップグレード、認証ルール、エコシステムの変更に関する<b>提案と投票</b>。",
+        "インテグレーターおよび認証者のオンボーディングの<b>監督</b>。"
+      ],
+      "closing": "ガバナンスは ORIGYN DAO を通じて<b>完全に分散化</b>されており、コミュニティが<b>プロトコルの進化</b>に直接影響力を持ちます。",
+      "cta": "詳細を見る"
+    },
+    "staking": {
+      "titleLineOne": "ステーキング",
+      "titleLineTwoPrefix": "と",
+      "titleLineTwoEmphasis": "リワード",
+      "lead": "OGY のステーキングはネットワークを保護しながらインセンティブを整合させます：",
+      "cards": [
+        {
+          "title": "ネットワークセキュリティ",
+          "description": "ステーカーはガバナンスに参加し、プロトコル運用の検証を支援します。"
+        },
+        {
+          "title": "リワード",
+          "description": "認証手数料やネットワーク活動からのプロトコル収益の一部を獲得できます。"
+        },
+        {
+          "title": "長期的な整合",
+          "description": "ステーキングは長期的な参加を促進し、エコシステムを強化します。"
+        }
+      ],
+      "closing": "ステーキングモデルは、トークンのユーティリティをプロトコルの採用と成功に直結させます。",
+      "cta": "今すぐステーキング"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>デフレ</b>メカニズム",
+      "titleLineTwo": "と<b>価値蓄積</b>",
+      "lead": "OGY は持続的な成長を目的としたデフレモデルを採用しています：",
+      "items": [
+        {
+          "title": "OGY がデフレトークンである理由は何ですか？",
+          "answer": "OGY はデフレモデルで設計されており、プロトコルが利用されるにつれて総供給量が時間とともに減少します。"
+        },
+        {
+          "title": "トークンバーンの仕組みはどうなっていますか？",
+          "answer": "OGY が認証に使用されるたびに、一部のトークンが永久にバーンされます。これにより流通供給量が減少します。"
+        },
+        {
+          "title": "財務の役割は何ですか？",
+          "answer": "プロトコル収益は財務によって管理され、継続的な開発の支援、参加者へのリワード提供、長期的なエコシステムの安定維持に充てられます。"
+        },
+        {
+          "title": "OGY はどのように時間をかけて価値を生み出しますか？",
+          "answer": "より多くのユーザーが ORIGYN プロトコルを採用し、認証活動が増加するにつれて、より多くの OGY がバーンされます。この供給量の減少と利用拡大の組み合わせが、長期的な価値創出を支えます。"
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "トークノミクス",
+      "titleEmphasis": "概要",
+      "totalSupplyLabel": "総供給量：",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>配分：</b>エコシステムの成長、ステーキングリワード、コミュニティ、ガバナンスに配分されます。",
+      "revenue": "<b>収益モデル：</b>OGY で支払われるプロトコル手数料が継続的な需要を生み出すと同時に、バーンメカニズムにより供給量を削減します。",
+      "support": "このモデルは、プロトコルの長期的な持続可能性とトークン保有者との整合性をサポートするよう設計されています。",
+      "cta": "トークノミクス"
+    }
   }
 }

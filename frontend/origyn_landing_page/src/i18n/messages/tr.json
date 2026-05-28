@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "İddia",
-        "body": "“AI destekli zincir üstü ajan.” Çıkarım AWS'de gerçekleşir. Zincir yalnızca çıktıyı saklar."
+        "body": "\"AI destekli zincir üstü ajan.\" Çıkarım AWS'de gerçekleşir. Zincir yalnızca çıktıyı saklar."
       },
       {
         "title": "Boşluk",
@@ -135,8 +135,18 @@
         "gain": "Kazanç"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "AI'nın yerini <i>alamayacağı</i>\nbeş sütun.",
     "lead": "AI, üretimi sıradanlaştırır. Bu beş alan ayakta kalır. Origyn bunların her birinde konumlanmıştır.",
     "pillars": [
-      { "title": "Güven", "description": "Origyn sertifikasyonu — doğrulanabilir bir güven sinyali." },
-      { "title": "Bağlam", "description": "Onlarca yıllık yapılandırılmış bellek — AI'nın eşleyemeyeceği kişisel bir sinyal." },
-      { "title": "Dağıtım", "description": "Swiss Subnet — ajanlar için doğrulanabilir altyapı." },
-      { "title": "Zevk", "description": "Otomatik araştırma hattı — otomasyon destekli küratörlük." },
-      { "title": "Sorumluluk", "description": "Denetim izi ve sertifika — gerçek bir yönetişim katmanı." }
+      {
+        "title": "Güven",
+        "description": "Origyn sertifikasyonu — doğrulanabilir bir güven sinyali."
+      },
+      {
+        "title": "Bağlam",
+        "description": "Onlarca yıllık yapılandırılmış bellek — AI'nın eşleyemeyeceği kişisel bir sinyal."
+      },
+      {
+        "title": "Dağıtım",
+        "description": "Swiss Subnet — ajanlar için doğrulanabilir altyapı."
+      },
+      {
+        "title": "Zevk",
+        "description": "Otomatik araştırma hattı — otomasyon destekli küratörlük."
+      },
+      {
+        "title": "Sorumluluk",
+        "description": "Denetim izi ve sertifika — gerçek bir yönetişim katmanı."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "Dil",
-    "switchTo": "{language} diline geç"
+    "switchTo": "{language} diline geç",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "SERTİFİKALAR",
+    "integrators": "ENTEGRATÖRLER",
+    "useCases": "KULLANIM ALANLARI",
+    "governance": "YÖNETİŞİM",
+    "help": "YARDIM",
+    "toggleMenu": "Menüyü aç/kapat"
+  },
+  "footer": {
+    "certificates": "SERTİFİKALAR",
+    "integrators": "ENTEGRATÖRLER",
+    "ecosystem": "EKOSİSTEM",
+    "useCases": "KULLANIM ALANLARI",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Tüm hakları saklıdır – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Varlıklarınızı, fikri mülkiyetinizi\nve kimliğinizi tamamen zincir üstünde güvence altına alın.",
+      "subtitleMobile": "Varlıklarınızı,\nfikri mülkiyetinizi,\nve kimliğinizi tamamen zincir üstünde güvence altına alın.",
+      "logoAlt": "ORIGYN Logosu",
+      "certifyCta": "Varlıklarınızı sertifikalayın",
+      "buyCta": "Buy $OGY",
+      "marquee": "ORIGYN, verilerinizi ve varlıklarınızı tamamen zincir üstünde güvenli biçimde saklamanıza olanak tanır"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY Piyasa Değeri",
+        "tooltip": "Anlık token fiyatına göre hesaplanan, dolaşımdaki tüm OGY tokenlarının toplam piyasa değeri."
+      },
+      "tvl": {
+        "title": "Sertifikalı varlıkların USD cinsinden Toplam Kilitli Değeri (TVL)",
+        "tooltipTitle": "Toplam Kilitli Değer (TVL)",
+        "tooltip": "TVL, ihraç edilen sertifikaların değerine karşılık gelir; bu durum, ORIGYN'in söz konusu varlıkları emanet olarak tuttuğu anlamına gelmez."
+      },
+      "users": {
+        "title": "Kullanıcılar",
+        "tooltip": "Sertifikalı varlıkları ihraç etmek, yönetmek veya sahip olmak amacıyla ORIGYN'i aktif olarak kullanan bireyler, markalar ve kurumların toplam sayısı."
+      },
+      "assets": {
+        "title": "Toplam Sertifikalı Varlık",
+        "tooltip": "Resmi ORIGYN sertifikası almış fiziksel veya dijital ürün sayısı."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Neden",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN: Gerçek dünya varlıklarının blok zinciriyle buluştuğu nokta.",
+      "body": "ORIGYN, gerçek dünya varlıklarını tamamen zincir üstüne taşımak için tasarlanmış, dünyanın en gelişmiş RWA protokolüdür. Güzel sanattan altına, lüks ürünlerden fikri mülkiyete kadar geniş bir yelpazede hizmet sunar.\n\nGüvensizliğe dayanmayan bir sertifikasyon altyapısı sağlayarak yüksek değerli varlıkların özgünlüğünü, kökenini ve sahipliğini güvence altına alır."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "%100 Zincir Üstü Sertifikasyon",
+          "description": "Aracı yok, müdahale yok. Tamamen merkeziyetsiz."
+        },
+        {
+          "title": "$OGY Token Faydası",
+          "description": "Yönetişim ve protokol işlevselliği aracılığıyla ORIGYN ekosistemini güçlendirir."
+        },
+        {
+          "title": "Çoklu Varlık Desteği",
+          "description": "Sanat, lüks ürünler, altın, gayrimenkul ve daha fazlasını sertifikalayın."
+        },
+        {
+          "title": "Sektör Lideri Güvenlik",
+          "description": "En değerli varlıklarınız için değiştirilemez blok zinciri koruması."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Nasıl",
+      "titleSuffix": "çalışır",
+      "steps": [
+        {
+          "description": "Gerçek dünya varlıklarını zincir üstüne taşımak basit olmalıdır. ORIGYN'in sertifikasyon süreci yalnızca üç adımda güvenli, merkeziyetsiz ve kullanımı kolay biçimde tasarlanmıştır: <br /><br />Varlığınızın meta verilerini ve destekleyici belgelerini gönderin. ORIGYN, doğrudan blok zinciri üzerinde benzersiz, kurcalanamaz bir dijital sertifika oluşturur; bu sertifikayı varlığa atar ve yasal sahibiyle ilişkilendirir.",
+          "panelTitle": "Dijital Sertifikanızı Basın",
+          "panelDescription": "Varlık ayrıntılarını yükleyin, blok zinciri sertifikası basın."
+        },
+        {
+          "description": "Her sertifika kriptografik olarak doğrulanabilir. Varlığın özgünlüğü, kökeni ve sahipliği ORIGYN'in merkeziyetsiz protokolü aracılığıyla onaylanır.",
+          "panelTitle": "Doğrula ve Onayla",
+          "panelDescription": "Varlık özgünlüğünü ve sahiplik şeffaflığını sağlayın."
+        },
+        {
+          "description": "Sertifikalandıktan sonra varlığınız; DeFi uygulamalarından NFT pazarlarına, özel işlemlerden kurumsal kayıtlara kadar dijital ekosistemlerde elde tutulabilir, devredilebilir, ticarete konu edilebilir veya kullanılabilir.",
+          "panelTitle": "Transfer Et ve İzle",
+          "panelDescription": "Sertifikalı varlığınızı DeFi, yeniden satış veya yatırım amacıyla kullanın ve takip edin."
+        }
+      ],
+      "goToStep": "{n}. adıma git"
+    },
+    "useCases": {
+      "titlePrefix": "Kullanım",
+      "titleSuffix": "Alanları",
+      "description": "ORIGYN protokolü; güven, köken ve özgünlüğün kritik önem taşıdığı geniş bir sektör yelpazesine hizmet etmek üzere inşa edilmiştir. Aşağıda ORIGYN'in sertifikasyon altyapısından halihazırda yararlanan temel sektörlerin bir kısmı yer almaktadır.",
+      "items": [
+        {
+          "title": "Sanat",
+          "description": "Fiziksel ve dijital sanat eserlerinin kökenini zincir üstünde doğrulayın ve koruyun."
+        },
+        {
+          "title": "Altın",
+          "description": "Altını değiştirilemez, izlenebilir ve kurcalanamaz dijital sertifikalarla belgelendirin."
+        },
+        {
+          "title": "Elmas",
+          "description": "Her elmasın kökenini, derecelendirmesini ve sahipliğini blok zinciri hassasiyetiyle takip edin."
+        },
+        {
+          "title": "Made In",
+          "description": "Saatlerden modaya her ürünün kökenini, özgünlüğünü ve işçiliğini kanıtlayın."
+        }
+      ],
+      "indicatorAria": "{n}. kullanım alanına git",
+      "discover": "Daha fazlasını keşfedin"
+    },
+    "certify": {
+      "titleLine": "Varlıklarınızı",
+      "titleEmphasis": "sertifikalayın",
+      "subtitle": "Varlıklarınızı tamamen zincir üstü dijital sertifikalarla güvence altına almanın maliyetini anında tahmin etmek için ORIGYN Sertifikasyon Hesaplayıcısı'nı kullanın. İster güzel sanat, ister lüks ürünler, ister altın ya da diğer değerli varlıkları sertifikalıyor olun; bu araç size altyapı ve teknoloji maliyetleri hakkında net bir tablo sunar — tahmin yapmaya gerek kalmaz.",
+      "contactPrompt": "Varlıklarınızı sertifikalamak için bizimle iletişime geçin:",
+      "contactCta": "ORIGYN ile İletişime Geçin"
+    },
+    "integrator": {
+      "titleLineOne": "Entegratör",
+      "titleLineTwo": "Programı",
+      "description": "ORIGYN Entegratör Programı; ORIGYN'in merkeziyetsiz sertifikasyon altyapısını doğrudan kendi hizmetlerine entegre etmek isteyen işletmeler, platformlar ve geliştiriciler için tasarlanmıştır.\n\nİster bir pazar yeri, ister bir tedarik zinciri çözümü, ister bir lüks marka olun; sıfırdan inşa etmek zorunda kalmadan güvenli, zincir üstü varlık doğrulaması sunabilirsiniz.",
+      "cta": "Entegratör Programına Katılın"
+    },
+    "roadmap": {
+      "title": "Yol Haritası",
+      "description": "Yeni işlevler ve yönetişim özelliklerinden sektörler ile geliştiriciler için genişletilmiş desteğe kadar her önemli adım, gerçek dünya varlıklarını ölçeklenebilir, doğrulanabilir ve merkeziyetsiz bir altyapıyla tamamen zincir üstüne taşıma misyonumuzu yansıtır."
+    },
+    "partners": {
+      "label": "ORTAKLAR"
+    },
+    "bePart": {
+      "titleLead": "Karar alma sürecinin",
+      "emphasisDesktop": "bir parçası olun",
+      "emphasisMobileLineOne": "Karar Alma",
+      "emphasisMobileLineTwo": "Sürecine Katılın",
+      "cta": "ORIGYN DAO'ya Katılın"
+    }
+  },
+  "useCase": {
+    "notFound": "Kullanım alanı bulunamadı",
+    "cases": {
+      "gold": [
+        {
+          "title": "Altın",
+          "description": "Dünyanın en büyük varlığı ve en yakından izlenen emtiası olarak altın, en üst düzey güvenliği zorunlu kılmaktadır. <br /><br />ORIGYN bu gereksinimleri karşılamaktadır; nitekim altın rafinasyonunun dünya lideri <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, verilerini güvence altına almak için ORIGYN protokolünü tercih etmiştir. İlk kez, altın barlarına ilişkin tüm teknik bilgiler — yüksek çözünürlüklü görüntüler ve belgeler dahil — blok zinciri üzerinde tek bir sertifikada kayıt altına alınmıştır."
+        },
+        {
+          "description": "Bunun yanı sıra <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> ve <a href='https://bity.com' target='_blank'>Bity</a> gibi çeşitli projeler, bu sertifikaları ilgili altın barlarını satmak veya fiziksel altınla desteklenen tokenlar oluşturmak amacıyla kullanmaktadır."
+        }
+      ],
+      "art": [
+        {
+          "title": "Sanat",
+          "description": "Sanat uzmanları, sanat eserleri için güven ve sertifika güvencesi konusunda derin kaygılar taşımaktadır. Bu nedenle pek çok durum ORIGYN teknolojisini benimsemiştir.<br /><br /><a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> ve <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> gibi köklü sanatçılar, çalışmalarına ait verileri korumak amacıyla kendi ORIGYN sertifikalarını oluşturmuştur. Bu sertifikalar tamamen zincir üstünde, kurcalanamaz ve kopyalanamaz özelliktedir; sanatçılara sahtecilikle mücadelede olanak tanırken yüksek çözünürlüklü görseller, videolar ve belgeler aracılığıyla koleksiyoncu deneyimini de iyileştirmektedir."
+        },
+        {
+          "description": "Müşterileri için dijital sertifika oluşturması gereken vakıflar, kuruluşlar, aileler, galeriler ve sanat danışmanları gibi yapılar, maksimum güvenlik ve gizliliği sağlamak amacıyla ORIGYN'i kullanmaya başlamıştır. Retelet Galerisi'nin René Magritte eserlerine yönelik sertifikalar da dahil olmak üzere pek çok galeri ORIGYN teknolojisini hayata geçirmiştir.<br /><br />ORIGYN teknolojisi ayrıca sertifikalar aracılığıyla satışı, özellikle ortak mülkiyet satışlarını mümkün kılmaktadır. Bu sayede sanat eserleri sertifika birden fazla parçaya bölünerek çok sayıda sahibi arasında paylaşılabilmekte; her parça sahiplik belgesi işlevi görmektedir."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Ulusal köken, bir etiketten çok daha fazlasıdır; kimlik, kalite ve kültürel değerin bir beyanıdır. Sahteciliğin artmasıyla birlikte, bir ürünün nerede ve nasıl üretildiğini kanıtlamak, sektörler genelinde markalar için temel bir farklılaştırıcı hâline gelmiştir.<br /><br />Bu gelişmeye yanıt olarak <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a>, %100 Made in Italy sertifikasyonunu oluşturmuştur. Yasal olarak tanınan bu standart; sıkı belgeler, bağımsız denetimler ve hükümet düzeyinde savunuculuk aracılığıyla İtalyan mükemmeliyetini korumaktadır. ORIGYN, sertifikalı her ürünü blok zincirinde doğrulanabilir bir menşe kanıtı olarak kaydederek bu sistemin dijital temelini oluşturmaktadır."
+        },
+        {
+          "description": "Her sertifika, güvenli ve kurcalanamaz bir dijital pasaporta dönüşür. Tüketici güvenini pekiştirir, tedarik zinciri genelinde şeffaflık sağlar ve özgünlüğü ön planda tutmayı tercih eden işletmeleri destekler."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Lüks",
+          "description": "ORIGYN teknolojisi, lüks sektörünün kendini yeniden tanımlama ve daha kişiselleştirilmiş, şeffaf ürün deneyimleri sunma ihtiyacını karşılamaktadır.<br /><br />Kuyumcu <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a>, tüm koleksiyonu için sertifika oluşturmak amacıyla ORIGYN blok zinciri teknolojisini kullanmaktadır. Bu yaklaşım tüm verileri tamamen zincir üstünde güvence altına alırken prestijli müşterilere gizlilik, özgünlük ve sahipliği garanti eden yeni nesil sertifikalar sunmaktadır."
+        },
+        {
+          "description": "<a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> gibi diğer lüks şirketler de ünlü saatçilere yönelik elmaslarının eksiksiz izlenebilirlik zincirini kaydetmek amacıyla ORIGYN'i kullanmaktadır. Sertifikalara kişiselleştirilmiş pazarlama içeriği eklenmesi veya ikincil piyasalarda gerçek zamanlı özgünlük tespiti için teknolojinin yapay zeka ile birleştirilmesi gibi pek çok farklı uygulama da mümkündür."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Yardım",
+    "titleSuffix": "merkezi",
+    "searchPlaceholder": "Arayın..",
+    "faqs": [
+      {
+        "title": "OGY Token",
+        "description": "Web 3.0'ın Merkeziyetsiz Varlık Sertifikasyonunu Güçlendiriyor",
+        "answer": "<strong>OGY token</strong>, ORIGYN Protokolü'nün temel fayda unsurudur. Gerçek dünya varlıklarının sertifikasyonunu merkeziyetsiz blok zinciri altyapısıyla ilişkilendirerek sahipliği, kimlik doğrulamayı ve içerik doğrulamayı gerçek anlamda güvenli kılar.<br><br>OGY, fiziksel varlıkların dijital olarak sertifikalandığı, takip edildiği ve merkeziyetsiz uygulama ile piyasalara entegre edildiği küresel bir sistemi mümkün kılar."
+      },
+      {
+        "title": "Protokol Faydası",
+        "description": "OGY, ORIGYN ekosistemi genelinde temel işlevleri yerine getirmek için zorunludur.",
+        "answer": "<strong>Sertifikasyon:</strong> ORIGYN'de sertifikalanan her varlık, değiştirilemez bir zincir üstü sertifika basmak için OGY gerektirir.<br><strong>İşlem Katmanı:</strong> Sertifikalı varlıkların transferlerini, yeniden sertifikasyonlarını ve yaşam döngüsü olaylarını kolaylaştırır.<br><strong>Veri Depolama:</strong> Varlık meta verilerinin ve kökeninin güvenli, merkeziyetsiz biçimde saklanmasını destekler.<br>Bu fayda, OGY'nin protokol içindeki her işlem için vazgeçilmez olmasını sağlar."
+      },
+      {
+        "title": "OGY Token Sözleşme Adresi",
+        "description": "OGY Token, Internet Computer blok zincirinde konuşlandırılmıştır.",
+        "answer": "OGY token, Internet Computer blok zincirinde konuşlandırılmış olup ORIGYN Protokolü içinde yerel bir fayda token'ı olarak işlev görmektedir.<br><br>Resmi Sözleşme Adresi:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Kullanıcılar varlık türlerini çağrı içinde belirtir.<br>OGY ile etkileşime geçmeden önce sözleşme adresini her zaman doğrulayın.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Yönetişim",
+        "description": "OGY, sahiplerine aşağıdaki yetkileri veren bir yönetişim token'ıdır:",
+        "answer": "• Protokol yükseltmeleri, likidite kuralları ve ekosistem değişikliklerini önerme ve oylama.<br>• Entegratörlerin ve sertifikatörlerin sisteme alınmasını denetleme.<br>• Hazine fonlarını yenilik, büyüme ve stratejik girişimlere yönlendirme.<br><br>Yönetişim, ORIGYN DAO aracılığıyla tamamen merkeziyetsizleştirilmiş olup topluluğa protokolün gelişimi üzerinde doğrudan etki sağlar."
+      },
+      {
+        "title": "Staking ve Ödüller",
+        "description": "OGY staking, ağı güvence altına alırken teşvikleri uyumlu hâle getirir.",
+        "answer": "<strong>Ağ Güvenliği:</strong> Staker'lar yönetişime katılır ve protokol operasyonlarının doğrulanmasına yardımcı olur.<br><br><strong>Ödüller:</strong> Sertifikasyon ücretleri ve ağ aktivitesinden elde edilen protokol gelirinin bir payını kazanın.<br><br><strong>Uzun Vadeli Uyum:</strong> Staking, uzun vadeli katılımı teşvik eder ve ekosistemi güçlendirir.<br><br>Staking modeli, token faydasını doğrudan protokol benimsenmesi ve başarısıyla ilişkilendirir.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflasyonist Mekanikler / Değer Birikimi",
+        "description": "OGY, sürdürülebilir büyüme için tasarlanmış deflasyonist bir model entegre eder.",
+        "answer": "<strong>Sertifikasyon Yakımı:</strong> Sertifikasyonda kullanılan OGY'nin bir kısmı kalıcı olarak dolaşımdan çıkarılır.<br><br><strong>Hazine Yönetimi:</strong> Protokol geliri geliştirme faaliyetlerini, ödülleri ve token değeri optimizasyonunu destekler.<br><br>Protokol kullanımı arttıkça OGY arzı azalır; bu da benimsemeyle paralel değer yaratımını pekiştirir."
+      },
+      {
+        "title": "Tokenomics Genel Bakış",
+        "description": "Toplam Arz: 10.4 Billion OGY",
+        "answer": "<strong>Dağıtım:</strong> Ekosistem büyümesi, staking ödülleri, topluluk ve yönetişime tahsis edilmiştir.<br><br><strong>Gelir Modeli:</strong> OGY cinsinden ödenen protokol ücretleri sürekli talep yaratırken yakım mekanizmaları aracılığıyla arzı azaltır.<br>Model, uzun vadeli protokol sürdürülebilirliğini ve geleceğe odaklı uyumu desteklemek üzere tasarlanmıştır."
+      },
+      {
+        "title": "OGY'nin Geleceği",
+        "description": "OGY, merkeziyetsiz bir çerçevenin temelidir.",
+        "answer": "OGY, gerçek dünya varlıklarının değerini zincir üstünde sertifikalamak, yönetmek ve açığa çıkarmak için tasarlanmış merkeziyetsiz bir çerçevenin temelidir. ORIGYN büyüdükçe OGY'nin rolü, varlık sertifikasyonu, yönetişim ve ekosistem geliştirmeyi yönlendiren ekonomik motor olarak genişler."
+      },
+      {
+        "title": "Canlı token verilerini keşfedin",
+        "description": "Canlı token verilerini, staking seçeneklerini ve yönetişim katılımını ORIGYN Dashboard'da keşfedin.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Dashboard'a erişmek için tıklayın</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Bir",
+      "titleConnector": "",
+      "titleEmphasis": "Entegratör Olun",
+      "subtitle": "ORIGYN'İN BLOK ZİNCİRİ SERTİFİKASYON TEKNOLOJİSİYLE GÜVENİN GELECEĞİNİ İNŞA ETMEK İÇİN ENTEGRATÖR PROGRAMINA KATILIN",
+      "cta": "Hemen Katılın"
+    },
+    "program": {
+      "titleLineOne": "Entegratör",
+      "titleLineTwo": "Programı",
+      "steps": [
+        {
+          "labelBold": "ENTEGRATÖR PROGRAMI",
+          "labelRest": "NEDİR?",
+          "description": "Entegratör Programı, ORIGYN protokolünü tanıtmayı, benimsenmesini teşvik etmeyi ve ekosistemini genişletmeyi amaçlayan stratejik bir girişimdir."
+        },
+        {
+          "labelBold": "ENTEGRATÖRLER",
+          "labelRest": "KİMLERDİR?",
+          "description": "<ul><li><strong>Entegratörler bağımsız şirketlerdir:</strong> ORIGYN sertifikası basmak ve ORIGYN protokolünü belirli bir sektörde, bir varlık sınıfında veya birden fazla alanda tanıtmak gibi ortak hedeflerle ORIGYN protokolüne dayalı ürünler geliştirirler.</li><li><strong>Kolaylaştırıcı olarak hareket ederek</strong> işletmelerin derin blok zinciri ve Web3 uzmanlığı gerektirmeksizin ORIGYN'in blok zinciri sertifikasyon teknolojisini benimsemelerine yardımcı olurlar.</li><li><strong>ORIGYN Vakfı tarafından yürütülen bir ön inceleme sürecinin ardından</strong> entegratörler, ORIGYN DAO token sahipleri tarafından seçilir ve oylanır.</li></ul>"
+        },
+        {
+          "labelBold": "ENTEGRATÖR",
+          "labelRest": "NASIL OLUNABİLİR?",
+          "description": "Entegratör olabilmek için bir şirketin, belirli veya birden fazla sektöre hizmet etme konusundaki tüm gereksinimleri ve uzmanlığı karşılarken hizmetleri ölçekte sunabildiğini kanıtlaması gerekmektedir."
+        }
+      ],
+      "goToStep": "{n}. adıma git",
+      "joinNow": "Hemen katılın"
+    },
+    "workflow": {
+      "titleLineOne": "Başvuru",
+      "titleLineTwo": "süreci",
+      "steps": [
+        {
+          "title": "Başvuru formu",
+          "content": "<p>Başvurunun bir parçası olarak Entegratörler, <strong><a href=\"/integrator/join\">Proje Başvuru Formu'nu çevrimiçi doldurmalı</a></strong> ve <strong>Durum Tespiti Belgelerini</strong> <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong> adresine göndermeye hazırlamalıdır.</p>\n<p>Durum tespiti belgeleri şunları kapsamaktadır:</p>\n<ul>\n<li>Kuruluş sertifikasının kopyası</li>\n<li>UBO (Nihai Gerçek Sahip) açıklaması</li>\n<li>Ana Sözleşme ve Şirket Sözleşmesi kopyası</li>\n<li>Entegratör olarak başvurma isteğini ve Staking kurallarına uyumu resmîleştiren Yönetim Kurulu kararı; Entegratörü yönetmeye yetkili yetkilililerin listesiyle birlikte</li>\n<li>Yetkili imzacıların kimliği, şirket tarafından usulüne uygun onaylanmış fotoğraf ve imza kartlarına dayandırılmalıdır</li>\n<li>Şirket adına işlem yapma yetkisine sahip yöneticilerin, yetkililerin ve Vekâletname sahibi çalışanların kimlik ve adres belgelerinin kopyaları</li>\n<li>Yönetim kurulu üyelerinin listesi</li>\n<li>Entegratör Proje Başvuru Formu</li>\n</ul>"
+        },
+        {
+          "title": "ORIGYN Vakfı incelemesi",
+          "content": "<p>Entegratör olmanın ilk adımı, bir durum tespiti sürecinin ardından ORIGYN Vakfı tarafından onaylanmaktır. Entegratör, gerekli tüm KYC/KYB/AML prosedürlerini yerine getirmek amacıyla talep edilen tüm belgeleri paylaşmayı kabul eder.</p>"
+        },
+        {
+          "title": "ORIGYN DAO aracılığıyla yönetişim oyu",
+          "content": "<p>ORIGYN DAO TARAFINDAN KAMUOYU OYLAMASI:</p>\n<p>Vakfın ön inceleme sürecini tamamlamasının ardından Entegratör, SNS Platformu'nda kamuya açık bir öneri aracılığıyla DAO oylamasına tabi tutulacaktır. Tüm ORIGYN önerileri şu adresten görüntülenebilir: <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Tüzel kişi adresi, ticaret unvanı veya iş birliğinin sona erdirilmesi gibi her türlü değişiklik SNS Platformu'nda kamuoyu oylamasına sunulur.</p>"
+        },
+        {
+          "title": "50,000,000 OGY Staking",
+          "content": "<p>Öneri başarıyla geçerse Entegratör, 1 yıl boyunca erken çözülme imkânı olmaksızın 50,000,000 OGY'yi ORIGYN Yönetişimi'nde stake etmek zorundadır.</p>\n<p>Bu adım, Entegratörün uzun vadeli bağlılığını ve ORIGYN yönetişimine aktif olarak katılma oy gücünü güvence altına alır. Stake edilmiş tüm Nöronlar Dashboard'da kamuya açık şekilde görüntülenebilir: <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Basılan sertifika sayısı, sertifikalı varlıkların TVL'si gibi tüm istatistikler, <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> adresinde entegratör bölümünde kamuya açık olarak yayımlanacaktır.</p>"
+        },
+        {
+          "title": "Performans değerlendirmesi",
+          "content": "<p>Her sektöre ve taahhüde bağlı olarak, basılan minimum sertifika sayısı gereksinimleri Entegratör sözleşmesinin bir parçası olabilir. Bu nedenle ORIGYN Vakfı, Entegratörlerin kilometre taşlarını ve performansını periyodik olarak değerlendirecektir.</p>\n<p>Basılan sertifika sayısı, sertifikalı varlıkların TVL'si gibi tüm istatistikler, <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> adresinde entegratör bölümünde kamuya açık olarak yayımlanacaktır.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "İndir",
+      "titleLineTwo": "Entegratör Sözleşmesi",
+      "cta": "İndir"
+    }
+  },
+  "integratorJoin": {
+    "title": "Entegratör Programı",
+    "titleItalic": "Başvuru Formu",
+    "requiredLabel": "ZORUNLU *",
+    "requiredMessage": "Zorunlu",
+    "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+    "send": "GÖNDER",
+    "sending": "Gönderiliyor…",
+    "errorSend": "Form gönderme hatası.",
+    "fileSizeError": "Dosya boyutu 1 MB'ı geçmemelidir",
+    "addLink": "BAĞLANTI EKLE",
+    "addObjective": "HEDEF EKLE",
+    "addKpi": "KPI EKLE",
+    "uploadHighlight": "Yükleyin",
+    "uploadSuffix": " logonuzu veya buraya sürükleyin (İSTEĞE BAĞLI)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — Maks. 1 MB",
+    "logoPreviewAlt": "Logo önizlemesi",
+    "successTitle": "Teşekkür ederiz",
+    "successMessage": "En kısa sürede sizinle iletişime geçeceğiz",
+    "backToIntegrator": "ENTEGRATÖR SAYFASINA DÖN",
+    "errorTitle": "Bir sorun oluştu",
+    "errorMessageDefault": "Lütfen tekrar deneyin veya daha sonra gelin",
+    "retry": "TEKRAR DENE",
+    "sections": {
+      "representative": {
+        "title": "ENTEGRATÖR TEMSİLCİSİ",
+        "fullName": "AD SOYAD *",
+        "email": "E-POSTA ADRESİ *",
+        "phone": "TELEFON NUMARASI *"
+      },
+      "overview": {
+        "title": "GENEL BAKIŞ",
+        "description": "LÜTFEN ENTEGRATÖR PROJESİNE İLİŞKİN KISA BİR GENEL BAKIŞ YAZIN; BUNA ŞUNLARı DAHİL EDİN",
+        "vision": "Entegratörünüzün vizyonunu bir cümleyle anlatın... *",
+        "industry": "Sektör kategorisi örnekleri (sanat, müzik, lüks) veya belirli varlıklar (altın, elmas) *",
+        "geography": "Pazar Coğrafyası (Küresel, Avrupa, Ülkeye özgü) *",
+        "socialFirst": "Web sitesi ve sosyal medya bağlantıları *",
+        "social": "Web sitesi ve sosyal medya bağlantıları",
+        "presentation": "Proje sunumuna bağlantı (zorunlu değil, ancak faydalı)"
+      },
+      "acquisition": {
+        "title": "EDİNİM",
+        "description": "HEDEF KİTLENİZİ VE ONLARA NASIL ULAŞTIĞINIZI VEYA ULAŞACAĞINIZI AÇIKÇA TANIMLAYINIZ",
+        "whyExists": "Bu projenin neden var olması gerekiyor ve farkı nedir? *",
+        "whyIntegrator": "Entegratör olmak sizin için neden önemli? *"
+      },
+      "objectives": {
+        "title": "ULAŞMAK İSTEDİĞİNİZ TEMEL HEDEFLER",
+        "first": "Hedef 01 *",
+        "second": "Hedef 02",
+        "more": "Hedef {n}"
+      },
+      "kpis": {
+        "title": "İZLEMEK İSTEDİĞİNİZ TEMEL METRİKLER",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "NE YAPACAKSINIZ VE NASIL YAPACAKSINIZ",
+        "focus": "Entegratör olarak neye odaklanacağınızı ve bu projenin başarısının nasıl göründüğünü ayrıntılı biçimde anlatın.",
+        "implement": "Bu projeyi nasıl hayata geçirmeyi planladığınızı anlatın"
+      },
+      "roadmaps": {
+        "title": "İLK 3 AY VE 3 YILLIK YOL HARİTALARI",
+        "description": "Sertifika basmaya ne zaman başlamayı beklediğinizi ve tahmini sertifika sayısını belirtmeniz zorunludur *"
+      },
+      "team": {
+        "title": "EKİP",
+        "placeholder": "Mevcut ekibiniz (varsa) veya ihtiyaç duyabileceğiniz gelecekteki ekip rolleri ve LinkedIn bağlantıları hakkında bilgi verin *"
+      },
+      "risk": {
+        "title": "RİSK FAKTÖRLERİ",
+        "placeholder": "Başarısızlığa yol açacak nedenleri ve faktörleri anlatın."
+      },
+      "optional": {
+        "title": "İSTEĞE BAĞLI",
+        "placeholder": "Seçilme şansınızı artıracak başka paylaşmak istediğiniz bir şey var mı?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "The",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "OGY token, ORIGYN Protokolü'nün <b>temel fayda unsurudur.</b>",
+      "paragraphTwo": "Gerçek dünya varlıklarının sertifikasyonunu merkeziyetsiz blok zinciri altyapısıyla <b>ilişkilendirerek</b> sahipliği, kimlik doğrulamayı ve <b>transferi doğrulanabilir ve güvenli kılar.</b>",
+      "paragraphThree": "OGY, <b>fiziksel</b> varlıkların <b>dijital olarak sertifikalandığı, takip edildiği</b> ve merkeziyetsiz uygulamalar ile piyasalara <b>entegre edildiği</b> küresel bir sistemi mümkün kılar.",
+      "cta": "Buy OGY",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "$OGY Piyasa Değeri",
+      "burned": "Toplam yakılan OGY",
+      "circulating": "Dolaşımdaki arz",
+      "holders": "Token sahipleri"
+    },
+    "utility": {
+      "titlePrefix": "Protokol",
+      "titleEmphasis": "Faydası",
+      "lead": "ORIGYN ekosistemini tam olarak kullanmak için OGY tokenlarına ihtiyacınız vardır:",
+      "cards": [
+        {
+          "title": "Sertifikasyon",
+          "description": "ORIGYN'de sertifikalanan her varlık, değiştirilemez bir zincir üstü sertifika basmak için OGY gerektirir."
+        },
+        {
+          "title": "İşlem Katmanı",
+          "description": "Sertifikalı varlıkların transferlerini, yeniden sertifikasyonlarını ve yaşam döngüsü olaylarını kolaylaştırır."
+        },
+        {
+          "title": "Veri Depolama",
+          "description": "Varlık meta verilerinin ve kökeninin güvenli, merkeziyetsiz biçimde saklanmasını destekler."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY Token",
+      "titleLineTwo": "Sözleşme Adresi",
+      "description": "OGY token, Internet Computer blok zincirinde konuşlandırılmış olup ORIGYN Protokolü içinde yerel bir fayda token'ı olarak işlev görmektedir.",
+      "bulletOne": "Bu sözleşme, OGY'nin ihraç edilmesini, transferlerini ve protokol genelindeki etkileşimlerini yönetir; tüm token aktivitesinin şeffaflığını ve zincir üstü doğrulanabilirliğini güvence altına alır.",
+      "bulletTwo": "OGY token'ı ile ICP ağı üzerinden doğrudan görüntüleyebilir ve etkileşime girebilirsiniz.",
+      "warning": "OGY ile etkileşime geçmeden önce sözleşme adresini her zaman doğrulayın.",
+      "contractLabel": "Resmi Sözleşme Adresi:",
+      "copyAria": "Sözleşme adresini kopyala",
+      "copied": "Panoya kopyalandı",
+      "cmcAria": "OGY'yi CoinMarketCap'te görüntüle"
+    },
+    "governance": {
+      "title": "Yönetişim",
+      "lead": "OGY, sahiplerine aşağıdaki yetkileri veren bir yönetişim token'ıdır:",
+      "items": [
+        "Hazine fonlarını ekosistem büyümesine ve stratejik girişimlere <b>yönlendirin.</b>",
+        "Protokol yükseltmelerini, sertifikasyon kurallarını ve ekosistem değişikliklerini <b>önerin ve oylayın.</b>",
+        "Entegratörlerin ve sertifikatörlerin sisteme alınmasını <b>denetleyin.</b>"
+      ],
+      "closing": "Yönetişim, ORIGYN DAO aracılığıyla <b>tamamen merkeziyetsizleştirilmiş</b> olup topluluğa <b>protokolün gelişimi</b> üzerinde doğrudan etki sağlar.",
+      "cta": "DAHA FAZLA GÖRÜN"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "ve",
+      "titleLineTwoEmphasis": "Ödüller",
+      "lead": "OGY staking, ağı güvence altına alırken teşvikleri uyumlu hâle getirir:",
+      "cards": [
+        {
+          "title": "Ağ Güvenliği",
+          "description": "Staker'lar yönetişime katılır ve protokol operasyonlarının doğrulanmasına yardımcı olur."
+        },
+        {
+          "title": "Ödüller",
+          "description": "Sertifikasyon ücretleri ve ağ aktivitesinden elde edilen protokol gelirinin bir payını kazanın."
+        },
+        {
+          "title": "Uzun Vadeli Uyum",
+          "description": "Staking, uzun vadeli katılımı teşvik eder ve ekosistemi güçlendirir."
+        }
+      ],
+      "closing": "Staking modeli, token faydasını doğrudan protokol benimsenmesi ve başarısıyla ilişkilendirir.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflasyonist</b> Mekanikler",
+      "titleLineTwo": "ve <b>Değer Birikimi</b>",
+      "lead": "OGY, sürdürülebilir büyüme için tasarlanmış deflasyonist bir model entegre eder:",
+      "items": [
+        {
+          "title": "OGY'yi deflasyonist bir token yapan nedir?",
+          "answer": "OGY, deflasyonist bir modelle tasarlanmıştır; bu, protokol kullanıldıkça toplam arzın zaman içinde azaldığı anlamına gelir."
+        },
+        {
+          "title": "Token yakımı nasıl işler?",
+          "answer": "OGY her sertifikasyon için kullanıldığında, tokenların bir kısmı kalıcı olarak yakılır. Bu, dolaşımdaki arzı azaltır."
+        },
+        {
+          "title": "Hazinenin rolü nedir?",
+          "answer": "Protokol geliri; süregelen geliştirme faaliyetlerini desteklemek, katılımcıları ödüllendirmek ve uzun vadeli ekosistem istikrarının korunmasına yardımcı olmak amacıyla hazine tarafından yönetilir."
+        },
+        {
+          "title": "OGY zaman içinde nasıl değer yaratır?",
+          "answer": "Daha fazla kullanıcı ORIGYN protokolünü benimseyip sertifikasyon aktivitesi arttıkça daha fazla OGY yakılır. Büyüyen kullanımla birleşen bu azalan arz, uzun vadeli değer yaratımını destekler."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomics",
+      "titleEmphasis": "Genel Bakış",
+      "totalSupplyLabel": "Toplam Arz:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Dağıtım:</b> Ekosistem büyümesi, staking ödülleri, topluluk ve yönetişime tahsis edilmiştir.",
+      "revenue": "<b>Gelir Modeli:</b> OGY cinsinden ödenen protokol ücretleri sürekli talep yaratırken yakım mekanizmaları aracılığıyla arzı azaltır.",
+      "support": "Model, uzun vadeli protokol sürdürülebilirliğini ve token sahibi uyumunu desteklemek üzere tasarlanmıştır.",
+      "cta": "TOKENOMICS"
+    }
   }
 }

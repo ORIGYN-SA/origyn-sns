@@ -17,7 +17,7 @@
     "submit": "Magpaabiso",
     "submitting": "Isinusumite",
     "invalid": "Mangyaring maglagay ng wastong email.",
-    "success": "Naka-subscribe na. Makikipag-ugnayan kami sa iyo.",
+    "success": "Naka-subscribe na. Makikipag-ugnayan kami sa inyo.",
     "error": "May naganap na mali. Subukan muli."
   },
   "marquee": {
@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Ang sinasabi",
-        "body": "“On-chain agent na pinapagana ng AI.” Nangyayari ang inference sa AWS. Ang output lang ang iniimbak ng chain."
+        "body": "\"On-chain agent na pinapagana ng AI.\" Nangyayari ang inference sa AWS. Ang output lang ang iniimbak ng chain."
       },
       {
         "title": "Ang kakulangan",
@@ -95,7 +95,7 @@
         "body": "Read-only, may takdang oras, mababawi sa isang click. Gumagana kahit offline."
       },
       {
-        "title": "Dead man’s switch",
+        "title": "Dead man's switch",
         "body": "Awtomatikong nababawi ng itinalagang mga tagapagmana ang access pagkatapos ng tinukoy na panahon ng kawalang-aktibo."
       },
       {
@@ -135,8 +135,18 @@
         "gain": "Pakinabang"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Limang haligi na hindi\nkayang <i>palitan</i> ng AI.",
     "lead": "Ginagawang commodity ng AI ang produksyon. Nananatili ang limang larangang ito. Nakaposisyon ang Origyn sa bawat isa sa kanila.",
     "pillars": [
-      { "title": "Tiwala", "description": "Sertipikasyon ng Origyn — isang beripikableng senyas ng tiwala." },
-      { "title": "Konteksto", "description": "Dekada-dekadang nakaayos na memorya — isang personal na senyas na hindi kayang tapatan ng AI." },
-      { "title": "Distribusyon", "description": "Swiss Subnet — beripikableng imprastraktura para sa mga agent." },
-      { "title": "Lasa", "description": "Awtomatikong research pipeline — kurasyon na tinutulungan ng automation." },
-      { "title": "Pananagutan", "description": "Audit trail at sertipiko — isang tunay na layer ng governance." }
+      {
+        "title": "Tiwala",
+        "description": "Sertipikasyon ng Origyn — isang beripikableng senyas ng tiwala."
+      },
+      {
+        "title": "Konteksto",
+        "description": "Dekada-dekadang nakaayos na memorya — isang personal na senyas na hindi kayang tapatan ng AI."
+      },
+      {
+        "title": "Distribusyon",
+        "description": "Swiss Subnet — beripikableng imprastraktura para sa mga agent."
+      },
+      {
+        "title": "Lasa",
+        "description": "Awtomatikong research pipeline — kurasyon na tinutulungan ng automation."
+      },
+      {
+        "title": "Pananagutan",
+        "description": "Audit trail at sertipiko — isang tunay na layer ng governance."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,544 @@
   },
   "language": {
     "label": "Wika",
-    "switchTo": "Lumipat sa {language}"
+    "switchTo": "Lumipat sa {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFICATES",
+    "integrators": "INTEGRATORS",
+    "useCases": "MGA GAMIT",
+    "governance": "GOVERNANCE",
+    "help": "TULONG",
+    "toggleMenu": "I-toggle ang menu"
+  },
+  "footer": {
+    "certificates": "CERTIFICATES",
+    "integrators": "INTEGRATORS",
+    "ecosystem": "ECOSYSTEM",
+    "useCases": "MGA GAMIT",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Lahat ng karapatan ay nakalaan – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Pangalagaan ang inyong mga asset, intelektwal na ari-arian,\nat pagkakakilanlan nang ganap on-chain.",
+      "subtitleMobile": "Pangalagaan ang inyong mga asset,\nintelektwal na ari-arian,\nat pagkakakilanlan nang ganap on-chain.",
+      "logoAlt": "Logo ng ORIGYN",
+      "certifyCta": "Isertipiko ang inyong mga asset",
+      "buyCta": "Bumili ng $OGY",
+      "marquee": "Binibigyan kayo ng ORIGYN ng kakayahang mag-imbak ng inyong data at mga asset nang ganap at ligtas on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Market Cap ng $OGY",
+        "tooltip": "Ang kabuuang halaga sa merkado ng lahat ng OGY token na kasalukuyang nasa sirkulasyon, batay sa kasalukuyang presyo ng token."
+      },
+      "tvl": {
+        "title": "Kabuuang Halagang Naka-lock (TVL) ng mga sertipikadong asset sa USD",
+        "tooltipTitle": "Kabuuang Halagang Naka-lock (TVL)",
+        "tooltip": "Ang TVL ay tumutugma sa halaga ng mga inisyuwang sertipiko; hindi ito nangangahulugang hawak ng ORIGYN ang mga asset na ito sa pangangalaga nito."
+      },
+      "users": {
+        "title": "Mga Gumagamit",
+        "tooltip": "Ang kabuuang bilang ng mga indibidwal, tatak, at institusyon na aktibong gumagamit ng ORIGYN upang mag-isyu, pamahalaan, o pagmamay-ari ng mga sertipikadong asset."
+      },
+      "assets": {
+        "title": "Kabuuang Mga Sertipikadong Asset",
+        "tooltip": "Ang bilang ng mga pisikal o digital na bagay na nakatanggap ng opisyal na sertipiko mula sa ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Bakit",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN — kung saan nagtatagpo ang mga real-world asset at blockchain.",
+      "body": "Ang ORIGYN ang pinaka-advanced na RWA protocol sa mundo, na idinisenyo upang dalhin ang mga real-world asset nang ganap on-chain — mula sa pinong sining at ginto hanggang sa mga luxury na kalakal at intelektwal na ari-arian.\n\nNagbibigay ito ng trustless na imprastraktura ng sertipikasyon na tinitiyak ang pagiging tunay, provenance, at pagmamay-ari ng mga asset na may mataas na halaga."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% On-Chain na Sertipikasyon",
+          "description": "Walang mga tagapamagitan, walang pakikialam. Ganap na desentralisado."
+        },
+        {
+          "title": "Utility ng $OGY Token",
+          "description": "Nagpapalakas ng ecosystem ng ORIGYN sa pamamagitan ng governance at utility ng protokol."
+        },
+        {
+          "title": "Suporta sa Maraming Uri ng Asset",
+          "description": "Isertipiko ang sining, mga luxury na kalakal, ginto, real estate, at marami pa."
+        },
+        {
+          "title": "Seguridad na Nangunguna sa Industriya",
+          "description": "Permanenteng proteksyon ng blockchain para sa inyong pinakamahahalagang asset."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Paano ito",
+      "titleSuffix": "gumagana",
+      "steps": [
+        {
+          "description": "Ang pagdadala ng mga real-world asset on-chain ay dapat maging simple. Ang proseso ng sertipikasyon ng ORIGYN ay idinisenyo upang maging ligtas, desentralisado, at madaling gamitin sa tatlong hakbang lamang: <br /><br />Isumite ang metadata ng inyong asset at mga sumusuportang dokumento. Ang ORIGYN ay bumubuo ng natatangi at tamper-proof na digital na sertipiko nang direkta sa blockchain, iniuugnay ito sa asset at iniuugnay sa tunay nitong may-ari.",
+          "panelTitle": "I-mint ang Inyong Digital na Sertipiko",
+          "panelDescription": "Mag-upload ng mga detalye ng asset, mag-mint ng sertipiko sa blockchain."
+        },
+        {
+          "description": "Ang bawat sertipiko ay mabe-beripika sa pamamagitan ng kriptograpiya. Ang pagiging tunay ng asset, provenance, at pagmamay-ari ay pinapatunayan sa pamamagitan ng desentralisadong protokol ng ORIGYN.",
+          "panelTitle": "Beripikahin at Patunayan",
+          "panelDescription": "Tiyakin ang pagiging tunay ng asset at transparency ng pagmamay-ari."
+        },
+        {
+          "description": "Kapag nasertipikahan na, ang inyong asset ay maaaring hawakan, ilipat, ipagpalit, o gamitin sa loob ng mga digital na ecosystem — mula sa mga DeFi application at NFT marketplace hanggang sa mga pribadong transaksyon at rekord ng institusyon.",
+          "panelTitle": "Ilipat at Subaybayan",
+          "panelDescription": "Gamitin at subaybayan ang inyong sertipikadong asset para sa DeFi, muling pagbebenta, o pamumuhunan."
+        }
+      ],
+      "goToStep": "Pumunta sa hakbang {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Mga",
+      "titleSuffix": "Gamit",
+      "description": "Ang protokol ng ORIGYN ay itinayo upang maglingkod sa malawak na hanay ng mga industriya kung saan kritikal ang tiwala, provenance, at pagiging tunay. Narito ang ilang pangunahing sektor na gumagamit na ng imprastraktura ng sertipikasyon ng ORIGYN.",
+      "items": [
+        {
+          "title": "Sining",
+          "description": "Patunayan at pangalagaan ang provenance ng mga pisikal at digital na obra ng sining on-chain."
+        },
+        {
+          "title": "Ginto",
+          "description": "Isertipiko ang ginto gamit ang permanente, masusubaybayan, at tamper-proof na mga digital na sertipiko."
+        },
+        {
+          "title": "Mga Diyamante",
+          "description": "Subaybayan ang pinagmulan, antas, at pagmamay-ari ng bawat diyamante sa pamamagitan ng katumpakan ng blockchain."
+        },
+        {
+          "title": "Gawa Sa",
+          "description": "Patunayan ang pinagmulan, pagiging tunay, at pagkakagawa ng anumang produkto — mula sa mga relo hanggang sa fashion."
+        }
+      ],
+      "indicatorAria": "Pumunta sa gamit {n}",
+      "discover": "Tuklasin pa"
+    },
+    "certify": {
+      "titleLine": "Isertipiko",
+      "titleEmphasis": "ang inyong mga asset",
+      "subtitle": "Gamitin ang ORIGYN Certification Calculator upang agad na matantya ang mga gastos ng pag-secure ng inyong mga asset gamit ang ganap na on-chain na mga digital na sertipiko. Ito man ay sining, luxury na kalakal, ginto, o iba pang mahahalagang asset, binibigyan kayo ng tool na ito ng malinaw na larawan ng mga gastos sa imprastraktura at teknolohiya nang walang hula-hula.",
+      "contactPrompt": "Upang masertipikahan ang inyong mga asset, makipag-ugnayan sa amin:",
+      "contactCta": "Makipag-ugnayan sa ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Programa para sa",
+      "titleLineTwo": "Integrator",
+      "description": "Ang ORIGYN Integrator Program ay idinisenyo para sa mga negosyo, platform, at developer na nagnanais na direktang isama ang desentralisadong imprastraktura ng sertipikasyon ng ORIGYN sa kanilang mga serbisyo.\n\nMaging marketplace man kayo, solusyon sa supply chain, o luxury brand, makapag-aalok kayo ng ligtas na on-chain na beripikasyon ng asset nang hindi kailangang magsimula mula sa simula.",
+      "cta": "Sumali sa Integrator Program"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "description": "Mula sa mga bagong utility at feature ng governance hanggang sa pinalawak na suporta para sa mga industriya at developer. Ang bawat milestone ay sumasalamin sa aming misyon na dalhin ang mga real-world asset nang ganap on-chain sa pamamagitan ng nasusukat, mabe-beripika, at desentralisadong imprastraktura."
+    },
+    "partners": {
+      "label": "MGA KASOSYO"
+    },
+    "bePart": {
+      "titleLead": "Maging bahagi ng",
+      "emphasisDesktop": "paggawa ng desisyon",
+      "emphasisMobileLineOne": "Paggawa",
+      "emphasisMobileLineTwo": "ng Desisyon",
+      "cta": "Sumali sa ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Hindi nahanap ang gamit",
+    "cases": {
+      "gold": [
+        {
+          "title": "Ginto",
+          "description": "Bilang pinakamalaking asset sa mundo at pinaka-mababantayang kalakal, nangangailangan ang ginto ng pinakamataas na antas ng seguridad. <br /><br />Tinutugunan ng ORIGYN ang mga kinakailangang ito, tulad ng ipinakita ng <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, ang pandaigdigang lider sa pagtutunaw ng ginto, na pumili ng protokol ng ORIGYN upang ma-secure ang kanilang data. Sa kauna-unahang pagkakataon, lahat ng teknikal na impormasyon tungkol sa mga gold bar — kabilang ang mga high-definition na larawan at dokumento — ay naitala sa isang sertipiko sa blockchain."
+        },
+        {
+          "description": "Bukod dito, maraming proyekto tulad ng <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> at <a href='https://bity.com' target='_blank'>Bity</a> ang gumagamit ng mga sertipikong ito upang ibenta ang mga kaukulang gold bar o lumikha ng mga token na sinusuportahan ng pisikal na ginto."
+        }
+      ],
+      "art": [
+        {
+          "title": "Sining",
+          "description": "Lubos na nag-aalala ang mga eksperto sa sining tungkol sa tiwala at garantiya ng mga sertipiko para sa mga obra. Ito ang dahilan kung bakit maraming kaso ang nag-adopt na ng teknolohiya ng ORIGYN.<br /><br />Ang mga kilalang artista tulad ng <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> at <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> ay lumikha ng kanilang sariling mga sertipiko ng ORIGYN upang protektahan ang data na kaugnay ng kanilang mga obra. Ang mga sertipikong ito ay ganap na on-chain, tamper-proof at imposibleng kopyahin, na nagbibigay-daan sa mga artista na labanan ang pandaraya habang pinapabuti ang karanasan ng mga kolektor sa pamamagitan ng mga high-definition na larawan, video, at dokumento."
+        },
+        {
+          "description": "Ang mga entidad tulad ng mga pundasyon, organisasyon, pamilya, galeri, at mga tagapayo sa sining na kailangang lumikha ng mga digital na sertipiko para sa kanilang mga kliyente ay nagsimulang gumamit ng ORIGYN upang mapanatili ang pinakamataas na seguridad at pagiging kumpidensyal. Maraming galeri ang nag-implement na ng teknolohiya ng ORIGYN, kabilang ang Retelet Gallery para sa mga sertipiko ng mga obra ni René Magritte.<br /><br />Ang teknolohiya ng ORIGYN ay nagbibigay-daan din sa mga benta sa pamamagitan ng mga sertipiko, lalo na ang mga benta ng co-ownership. Nagbibigay-daan ito sa mga obra ng sining na maibahagi sa maraming may-ari sa pamamagitan ng paghati ng sertipiko sa ilang bahagi, kung saan ang bawat isa ay nagsisilbing patunay ng pagmamay-ari."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Gawa Sa",
+          "description": "Ang pambansang pinagmulan ay higit pa sa isang label. Ito ay isang deklarasyon ng pagkakakilanlan, kalidad, at kultural na halaga. Habang tumataas ang pandaraya, ang pagpapatunay ng kung saan at paano ginawa ang isang produkto ay naging pangunahing katangian para sa mga tatak sa iba't ibang industriya.<br /><br />Bilang tugon, ang <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> ay lumikha ng 100% Made in Italy na sertipikasyon. Ang legal na kinikilalang pamantayang ito ay nagpoprotekta ng kahusayan ng Italya sa pamamagitan ng mahigpit na dokumentasyon, independyenteng pag-audit, at adbokasiya sa antas ng gobyerno. Ang ORIGYN ay nagbibigay ng digital na pundasyon ng sistemang ito sa pamamagitan ng pag-record ng bawat sertipikadong produkto sa blockchain bilang mabe-beripikang patunay ng pinagmulan."
+        },
+        {
+          "description": "Ang bawat sertipiko ay nagiging isang ligtas at tamper-proof na digital na pasaporte. Pinapalakas nito ang tiwala ng mga mamimili, tinitiyak ang transparency sa buong supply chain, at sinusuportahan ang mga negosyong pumipili na manguna sa pagiging tunay."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luxury",
+          "description": "Tinutugunan ng teknolohiya ng ORIGYN ang pangangailangan ng sektor ng luxury na mag-reinvent ng sarili at mag-alok ng mas personalisado at transparent na karanasan sa produkto.<br /><br />Ang alahas na <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> ay gumagamit ng blockchain technology ng ORIGYN upang lumikha ng mga sertipiko para sa kanilang buong koleksyon. Sine-secure nito ang lahat ng data nang ganap on-chain habang inaalok sa kanilang mga prestihiyosong customer ang mga sertipiko ng susunod na henerasyon na garantisadong may kumpidensyalidad, pagiging tunay, at pagmamay-ari."
+        },
+        {
+          "description": "Ang iba pang mga luxury na kumpanya tulad ng <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> ay gumagamit din ng ORIGYN upang i-record ang kumpletong tanikala ng traceability ng kanilang mga diyamante na nakatutok sa mga kilalang manggagawa ng relo. Marami pang ibang aplikasyon ang posible, kabilang ang pagdaragdag ng personalisadong marketing content sa mga sertipiko o pagsasama ng teknolohiya sa AI upang matukoy ang pagiging tunay sa real time para sa mga secondary market."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Sentro ng",
+    "titleSuffix": "Tulong",
+    "searchPlaceholder": "Maghanap..",
+    "faqs": [
+      {
+        "title": "Ang OGY Token",
+        "description": "Nagpapalakas ng Desentralisadong Sertipikasyon ng Asset ng Web 3.0",
+        "answer": "Ang <strong>OGY token</strong> ang pangunahing utility ng ORIGYN Protocol. Inuugnay nito ang sertipikasyon ng mga real-world asset sa desentralisadong imprastraktura ng blockchain, na ginagawang tunay na ligtas ang pagmamay-ari, pagpapatunay, at pag-verify ng nilalaman.<br><br>Binibigyan ng OGY ang isang pandaigdigang sistema kung saan ang mga pisikal na asset ay digital na nasertipikahan, natatala, at naIsama sa mga desentralisadong aplikasyon at merkado."
+      },
+      {
+        "title": "Utility ng Protokol",
+        "description": "Ang OGY ay kailangan upang magsagawa ng mga mahahalagang function sa buong ecosystem ng ORIGYN.",
+        "answer": "<strong>Sertipikasyon:</strong> Ang bawat asset na nasertipikahan sa ORIGYN ay nangangailangan ng OGY upang mag-mint ng permanenteng on-chain na sertipiko.<br><strong>Transaction Layer:</strong> Nagpapadali ng mga paglilipat, muling sertipikasyon, at mga lifecycle event ng mga sertipikadong asset.<br><strong>Imbakan ng Data:</strong> Sumusuporta sa ligtas at desentralisadong imbakan ng metadata ng asset at provenance.<br>Tinitiyak ng utility na ito na mahalaga ang OGY sa bawat transaksyon sa loob ng protokol."
+      },
+      {
+        "title": "Contract Address ng OGY Token",
+        "description": "Ang OGY Token ay naka-deploy sa Internet Computer blockchain.",
+        "answer": "Ang OGY token ay naka-deploy sa Internet Computer blockchain at gumaganap bilang native utility token sa loob ng ORIGYN Protocol.<br><br>Opisyal na Contract Address:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Mga uri ng asset na ginagamit ng mga gumagamit sa loob ng tawag<br>Palaging beripikahin ang contract address bago makipag-ugnayan sa OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Governance",
+        "description": "Ang OGY ay isang governance token na nagbibigay-kapangyarihan sa mga may-hawak nito na:",
+        "answer": "• Magmungkahi at bumoto sa mga pag-upgrade ng protokol, mga patakaran sa liquidity, at mga pagbabago sa ecosystem.<br>• Pangasiwaan ang onboarding ng mga integrator at certifier.<br>• Maglaan ng mga pondo ng treasury para sa inobasyon, paglago, at mga estratehikong inisyatibo.<br><br>Ang governance ay ganap na desentralisado sa pamamagitan ng ORIGYN DAO, na nagbibigay sa komunidad ng direktang impluwensya sa ebolusyon ng protokol."
+      },
+      {
+        "title": "Staking at Mga Gantimpala",
+        "description": "Sine-secure ng OGY staking ang network habang iniaayon ang mga insentibo.",
+        "answer": "<strong>Seguridad ng Network:</strong> Lumalahok ang mga staker sa governance at tumutulong na beripikahin ang mga operasyon ng protokol.<br><br><strong>Mga Gantimpala:</strong> Kumita ng bahagi ng kita ng protokol mula sa mga bayad sa sertipikasyon at aktibidad ng network.<br><br><strong>Pangmatagalang Pagkakatugma:</strong> Hinihikayat ng staking ang pangmatagalang pakikilahok at pinapalakas ang ecosystem.<br><br>Direktang inuugnay ng modelo ng staking ang utility ng token sa pag-adopt at tagumpay ng protokol.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Mga Mekanismo ng Deflationary / Pag-iipon ng Halaga",
+        "description": "Isinasama ng OGY ang isang deflationary na modelo na idinisenyo para sa napapanatiling paglago.",
+        "answer": "<strong>Certification Burn:</strong> Ang isang bahagi ng OGY na ginagamit sa sertipikasyon ay permanenteng tinatanggal mula sa sirkulasyon.<br><br><strong>Pamamahala ng Treasury:</strong> Sinusuportahan ng kita ng protokol ang pagpapaunlad, mga gantimpala, at pag-optimize ng halaga ng token.<br><br>Habang lumalaki ang paggamit ng protokol, bumababa ang supply ng OGY, na nagpapatibay ng paglikha ng halaga na naaayon sa pag-adopt."
+      },
+      {
+        "title": "Pangkalahatang-ideya ng Tokenomics",
+        "description": "Kabuuang Supply: 10.4 Billion OGY",
+        "answer": "<strong>Distribusyon:</strong> Inilaan para sa paglago ng ecosystem, mga gantimpala sa staking, komunidad, at governance.<br><br><strong>Modelo ng Kita:</strong> Ang mga bayad sa protokol na binabayaran sa OGY ay lumilikha ng patuloy na demand habang binabawasan ang supply sa pamamagitan ng mga mekanismo ng pagsusunog.<br>Ang modelo ay idinisenyo upang suportahan ang pangmatagalang sustainability ng protokol at hinaharap na pagkakatugma."
+      },
+      {
+        "title": "Ang Kinabukasan ng OGY",
+        "description": "Ang OGY ay pundasyon ng isang desentralisadong balangkas.",
+        "answer": "Ang OGY ay pundasyon ng isang desentralisadong balangkas na idinisenyo upang sertipikahan, pamahalaan, at i-unlock ang halaga ng mga real-world asset on-chain. Habang lumalaki ang ORIGYN, lumalawak din ang papel ng OGY bilang panlalabas na makina na nagpapatakbo ng sertipikasyon ng asset, governance, at pagpapaunlad ng ecosystem."
+      },
+      {
+        "title": "Tuklasin ang live token",
+        "description": "Tuklasin ang live na data ng token, mga opsyon sa staking, at pakikilahok sa governance sa ORIGYN Dashboard.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>I-click upang ma-access ang Dashboard</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Maging",
+      "titleConnector": "isang",
+      "titleEmphasis": "Integrator",
+      "subtitle": "SUMALI SA INTEGRATOR PROGRAM UPANG BUUIN ANG KINABUKASAN NG TIWALA GAMIT ANG BLOCKCHAIN CERTIFICATION TECHNOLOGY NG ORIGYN",
+      "cta": "Sumali Ngayon"
+    },
+    "program": {
+      "titleLineOne": "Programa para sa",
+      "titleLineTwo": "Integrator",
+      "steps": [
+        {
+          "labelBold": "ANO",
+          "labelRest": "ANG INTEGRATOR PROGRAM?",
+          "description": "Ang Integrator Program ay isang estratehikong inisyatibo na naglalayong itaguyod ang protokol ng ORIGYN, hikayatin ang pag-adopt nito at palawakin ang ecosystem nito."
+        },
+        {
+          "labelBold": "SINO",
+          "labelRest": "ANG MGA INTEGRATOR?",
+          "description": "<ul><li><strong>Ang mga Integrator ay mga independyenteng kumpanya</strong> na nagtatayo ng mga produkto batay sa protokol ng ORIGYN na may karaniwang layunin na mag-mint ng mga sertipiko ng ORIGYN at itaguyod ang protokol ng ORIGYN sa isang partikular na industriya, sa isang klase ng asset o sa iba't ibang sektor.</li><li><strong>Bilang mga tagapagpagana,</strong> tinutulungan nila ang mga negosyo na mag-adopt ng blockchain certification technology ng ORIGYN nang hindi nangangailangan ng malalim na kaalaman sa blockchain at Web3.</li><li><strong>Kasunod ng proseso ng pag-screen</strong> na isinasagawa ng ORIGYN Foundation, ang mga integrator ay pinipili at binoboto ng mga may-hawak ng token ng ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "PAANO",
+          "labelRest": "MAGIGING INTEGRATOR?",
+          "description": "Upang maging integrator, ang isang kumpanya ay dapat ipakita na kayang maghatid ng mga serbisyo sa malaking sukat, habang tinutupad ang lahat ng kinakailangan at kadalubhasaan upang maglingkod sa isang partikular o maraming sektor."
+        }
+      ],
+      "goToStep": "Pumunta sa hakbang {n}",
+      "joinNow": "Sumali ngayon"
+    },
+    "workflow": {
+      "titleLineOne": "Proseso ng",
+      "titleLineTwo": "Aplikasyon",
+      "steps": [
+        {
+          "title": "Form ng Aplikasyon",
+          "content": "<p>Bilang bahagi ng aplikasyon, ang mga Integrator ay dapat punan ang <strong><a href=\"/integrator/join\">Project Application form online</a></strong> at ihanda ang <strong>Due Diligence Documentation</strong> na ipapadala sa <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Ang due diligence documentation ay kinabibilangan ng:</p>\n<ul>\n<li>Kopya ng Sertipiko ng Inkorporasyon</li>\n<li>Paglalarawan ng UBO - Natatanging Kapaki-pakinabang na mga May-ari</li>\n<li>Kopya ng Memorandum at Mga Artikulo ng Asosasyon</li>\n<li>Resolusyon ng Lupon ng mga Direktor na pormal na nagpapahayag ng kagustuhang mag-apply bilang Integrator at sumunod sa mga patakaran ng Staking kasama ang listahan ng mga opisyal na awtorisadong mag-operate ng Integrator</li>\n<li>Ang pagkakakilanlan ng mga awtorisadong signatory ay dapat nakabatay sa mga litrato at mga card ng lagda na maayos na pinatunayan ng kumpanya</li>\n<li>Mga kopya ng patunay ng pagkakakilanlan at patunay ng tirahan ng mga tagapamahala, opisyal, o empleyado na may Kapangyarihang Pangabogado upang magsagawa ng negosyo sa ngalan nito</li>\n<li>Listahan ng mga direktor</li>\n<li>Integrator Project Application Form</li>\n</ul>"
+        },
+        {
+          "title": "Pagsusuri mula sa ORIGYN Foundation",
+          "content": "<p>Ang unang hakbang upang maging Integrator ay ang mapatunayan ng ORIGYN Foundation pagkatapos ng proseso ng due diligence. Tinatanggap ng Integrator na ibahagi ang lahat ng mga dokumentong hinihingi para sa layunin ng pagtupad sa lahat ng kinakailangang pamamaraan ng KYC/KYB/AML.</p>"
+        },
+        {
+          "title": "Boto ng Governance sa pamamagitan ng ORIGYN DAO",
+          "content": "<p>PAMPUBLIKONG BOTO NG ORIGYN DAO:</p>\n<p>Kapag natapos ng Foundation ang proseso ng pag-screen, ang Integrator ay mapapailalim sa DAO vote sa pamamagitan ng pampublikong panukala sa SNS Platform. Ang lahat ng panukala ng ORIGYN ay maaaring tingnan sa <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Ang bawat pagbabago ng address ng legal na entidad, pangalan ng negosyo, o pagwawakas ng kooperasyon ay pampublikong binoboto sa SNS Platform.</p>"
+        },
+        {
+          "title": "Staking ng 50,000,000 OGY",
+          "content": "<p>Kung matagumpay na maipasa ang panukala, ang Integrator ay kailangang mag-stake ng 50,000,000 OGY sa ORIGYN Governance nang 1 taon nang hindi natutunaw.</p>\n<p>Tinitiyak ng hakbang na ito ang pangmatagalang pangako ng Integrator at kapangyarihang bumoto upang aktibong makilahok sa governance ng ORIGYN. Ang lahat ng Staked Neuron ay pampublikong ipapakita sa Dashboard sa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Ang lahat ng istatistika tulad ng bilang ng mga sertipikong na-mint, TVL ng mga sertipikadong asset, atbp. ay pampublikong ipapakita sa ilalim ng bahagi ng integrator sa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Pagsusuri ng Pagganap",
+          "content": "<p>Depende sa bawat sektor at pangako, ang mga minimum na kinakailangan para sa bilang ng mga sertipikong na-mint ay maaaring maging bahagi ng kasunduan ng Integrator. Kaya naman, ang ORIGYN Foundation ay pana-panahong magsasagawa ng mga pagsusuri sa milestone at pagganap ng mga Integrator.</p>\n<p>Ang lahat ng istatistika tulad ng bilang ng mga sertipikong na-mint, TVL ng mga sertipikadong asset, atbp. ay pampublikong ipapakita sa ilalim ng bahagi ng integrator sa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "I-download ang",
+      "titleLineTwo": "Kontrata ng Integrator",
+      "cta": "I-download"
+    }
+  },
+  "integratorJoin": {
+    "title": "Programa ng mga Integrator",
+    "titleItalic": "Application Form",
+    "requiredLabel": "KINAKAILANGAN *",
+    "requiredMessage": "Kinakailangan",
+    "emailInvalid": "Mangyaring maglagay ng wastong email address",
+    "send": "IPADALA",
+    "sending": "Ipinapadala…",
+    "errorSend": "Error sa pagpapadala ng form.",
+    "fileSizeError": "Ang laki ng file ay hindi dapat lumampas sa 1 MB",
+    "addLink": "MAGDAGDAG NG LINK",
+    "addObjective": "MAGDAGDAG NG LAYUNIN",
+    "addKpi": "MAGDAGDAG NG KPI",
+    "uploadHighlight": "Mag-upload",
+    "uploadSuffix": " ng inyong logo o i-drag ito dito (OPSYONAL)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — 1 MB max",
+    "logoPreviewAlt": "Preview ng logo",
+    "successTitle": "Salamat",
+    "successMessage": "Makikipag-ugnayan kami sa inyo",
+    "backToIntegrator": "BUMALIK SA PAHINA NG INTEGRATOR",
+    "errorTitle": "May naganap na mali",
+    "errorMessageDefault": "Mangyaring subukan muli o bumalik sa ibang pagkakataon",
+    "retry": "SUBUKANG MULI",
+    "sections": {
+      "representative": {
+        "title": "KINATAWAN NG INTEGRATOR",
+        "fullName": "BUONG PANGALAN *",
+        "email": "EMAIL ADDRESS *",
+        "phone": "NUMERO NG TELEPONO *"
+      },
+      "overview": {
+        "title": "PANGKALAHATANG-IDEYA",
+        "description": "MANGYARING SUMULAT NG MAIKLING PANGKALAHATANG-IDEYA NG PROYEKTO NG INTEGRATOR, KABILANG ANG",
+        "vision": "Ang bisyon ng inyong Integrator sa isang pangungusap... *",
+        "industry": "Mga halimbawa ng kategorya ng industriya (sining, musika, luxury) o Mga partikular na asset (ginto, diyamante) *",
+        "geography": "Heograpiya ng Merkado (Pandaigdig, Europa, tukoy na bansa) *",
+        "socialFirst": "Mga link sa Website at Social Media *",
+        "social": "Mga link sa Website at Social Media",
+        "presentation": "Link sa presentasyon ng proyekto (hindi sapilitan, ngunit nakakatulong)"
+      },
+      "acquisition": {
+        "title": "PAGKUHA NG KLIYENTE",
+        "description": "MALINAW NA TUKUYIN ANG INYONG TARGET NA AUDIENCE AT KUNG PAANO NINYO SILA NAKUHA O KUKUHANIN",
+        "whyExists": "Bakit kailangang umiral ang proyektong ito, at paano ito naiiba? *",
+        "whyIntegrator": "Bakit mahalaga para sa inyo na maging Integrator? *"
+      },
+      "objectives": {
+        "title": "MGA PANGUNAHING LAYUNIN NA NAIS NINYONG MAKAMIT",
+        "first": "Layunin 01 *",
+        "second": "Layunin 02",
+        "more": "Layunin {n}"
+      },
+      "kpis": {
+        "title": "MGA PANGUNAHING SUKATAN NA NAIS NINYONG SUBAYBAYAN",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "ANO AT PAANO ANG GAGAWIN NINYO",
+        "focus": "Sabihin sa amin nang detalyado kung saan kayo magtutuon bilang Integrator at kung ano ang hitsura ng tagumpay ng proyektong ito.",
+        "implement": "Sabihin sa amin kung paano ninyo planong ipatupad ang proyektong ito"
+      },
+      "roadmaps": {
+        "title": "MGA ROADMAP PARA SA UNANG 3 BUWAN AT 3 TAON",
+        "description": "Dapat ninyong ipahiwatig kung kailan kayo inaasahang magsisimulang mag-mint at isang tinatantyang bilang ng mga sertipiko *"
+      },
+      "team": {
+        "title": "KOPONAN",
+        "placeholder": "Sabihin sa amin ang tungkol sa inyong kasalukuyang koponan, kung mayroon, o mga hinaharap na papel sa koponan na maaaring kailanganin ninyo, kasama ang mga link sa LinkedIn *"
+      },
+      "risk": {
+        "title": "MGA SALIK NG PANGANIB",
+        "placeholder": "Sabihin sa amin ang mga dahilan at salik na magiging sanhi ng kabiguan."
+      },
+      "optional": {
+        "title": "OPSYONAL",
+        "placeholder": "May iba pa bang nais ninyong ibahagi na magpapataas ng inyong pagkakataon sa pagpili?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Ang",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Ang OGY token ang <b>pangunahing utility</b> ng ORIGYN Protocol.",
+      "paragraphTwo": "<b>Inuugnay</b> nito ang sertipikasyon ng mga real-world asset sa desentralisadong imprastraktura ng blockchain, na ginagawang <b>mabe-beripika at ligtas ang pagmamay-ari, pagpapatunay,</b> at <b>paglilipat.</b>",
+      "paragraphThree": "Binibigyan ng OGY ang isang pandaigdigang sistema kung saan ang mga <b>pisikal</b> na asset ay <b>digital na nasertipikahan, natatala,</b> at <b>naIsama sa mga desentralisado</b> na aplikasyon at merkado.",
+      "cta": "Bumili ng OGY",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "Market Cap ng $OGY",
+      "burned": "Kabuuang OGY na nasunog",
+      "circulating": "Supply sa sirkulasyon",
+      "holders": "Mga may-hawak ng token"
+    },
+    "utility": {
+      "titlePrefix": "Utility ng",
+      "titleEmphasis": "Protokol",
+      "lead": "Kailangan ninyo ng mga OGY token upang ganap na magamit ang ecosystem ng ORIGYN:",
+      "cards": [
+        {
+          "title": "Sertipikasyon",
+          "description": "Ang bawat asset na nasertipikahan sa ORIGYN ay nangangailangan ng OGY upang mag-mint ng permanenteng on-chain na sertipiko."
+        },
+        {
+          "title": "Transaction Layer",
+          "description": "Nagpapadali ng mga paglilipat, muling sertipikasyon, at mga lifecycle event ng mga sertipikadong asset."
+        },
+        {
+          "title": "Imbakan ng Data",
+          "description": "Sumusuporta sa ligtas at desentralisadong imbakan ng metadata ng asset at provenance."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY Token",
+      "titleLineTwo": "Contract Address",
+      "description": "Ang OGY token ay naka-deploy sa Internet Computer blockchain at gumaganap bilang native utility token sa loob ng ORIGYN Protocol.",
+      "bulletOne": "Pinamamahalaan ng contract na ito ang pagpapalabas ng OGY, mga paglilipat, at mga interaksyon sa buong protokol, tinitiyak ang transparency at on-chain na pag-verify ng lahat ng aktibidad ng token.",
+      "bulletTwo": "Maaari ninyong tingnan at makipag-ugnayan sa OGY token nang direkta sa pamamagitan ng network ng ICP.",
+      "warning": "Palaging beripikahin ang contract address bago makipag-ugnayan sa OGY.",
+      "contractLabel": "Opisyal na Contract Address:",
+      "copyAria": "Kopyahin ang contract address",
+      "copied": "Nakopya sa clipboard",
+      "cmcAria": "Tingnan ang OGY sa CoinMarketCap"
+    },
+    "governance": {
+      "title": "Governance",
+      "lead": "Ang OGY ay isang governance token na nagbibigay-kapangyarihan sa mga may-hawak na:",
+      "items": [
+        "<b>Maglaan</b> ng mga pondo ng treasury para sa paglago ng ecosystem at mga estratehikong inisyatibo.",
+        "<b>Magmungkahi at bumoto</b> sa mga pag-upgrade ng protokol, mga patakaran sa sertipikasyon, at mga pagbabago sa ecosystem.",
+        "<b>Pangasiwaan</b> ang onboarding ng mga integrator at certifier."
+      ],
+      "closing": "Ang governance ay <b>ganap na desentralisado</b> sa pamamagitan ng ORIGYN DAO, na nagbibigay sa komunidad ng direktang impluwensya sa <b>ebolusyon ng protokol.</b>",
+      "cta": "TINGNAN PA"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "at",
+      "titleLineTwoEmphasis": "Mga Gantimpala",
+      "lead": "Sine-secure ng OGY staking ang network habang iniaayon ang mga insentibo:",
+      "cards": [
+        {
+          "title": "Seguridad ng Network",
+          "description": "Lumalahok ang mga staker sa governance at tumutulong na beripikahin ang mga operasyon ng protokol."
+        },
+        {
+          "title": "Mga Gantimpala",
+          "description": "Kumita ng bahagi ng kita ng protokol mula sa mga bayad sa sertipikasyon at aktibidad ng network."
+        },
+        {
+          "title": "Pangmatagalang Pagkakatugma",
+          "description": "Hinihikayat ng staking ang pangmatagalang pakikilahok at pinapalakas ang ecosystem."
+        }
+      ],
+      "closing": "Direktang inuugnay ng modelo ng staking ang utility ng token sa pag-adopt at tagumpay ng protokol.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflationary</b> na Mekanismo",
+      "titleLineTwo": "at <b>Pag-iipon ng Halaga</b>",
+      "lead": "Isinasama ng OGY ang isang deflationary na modelo na idinisenyo para sa napapanatiling paglago:",
+      "items": [
+        {
+          "title": "Ano ang nagpapadali sa OGY bilang deflationary token?",
+          "answer": "Ang OGY ay idinisenyo gamit ang isang deflationary na modelo, na nangangahulugang bumababa ang kabuuang supply nito sa paglipas ng panahon habang ginagamit ang protokol."
+        },
+        {
+          "title": "Paano gumagana ang pagsusunog ng token?",
+          "answer": "Sa tuwing ginagamit ang OGY para sa sertipikasyon, isang bahagi ng mga token ay permanenteng nasusunog. Binabawasan nito ang supply sa sirkulasyon."
+        },
+        {
+          "title": "Ano ang papel ng treasury?",
+          "answer": "Ang kita ng protokol ay pinamamahalaan ng treasury upang suportahan ang patuloy na pagpapaunlad, gantimpalaan ang mga kalahok, at tumulong na mapanatili ang pangmatagalang katatagan ng ecosystem."
+        },
+        {
+          "title": "Paano lumilikha ng halaga ang OGY sa paglipas ng panahon?",
+          "answer": "Habang maraming gumagamit ang nag-adopt ng protokol ng ORIGYN at tumataas ang aktibidad ng sertipikasyon, mas maraming OGY ang nasusunog. Ang bumababang supply na ito, kasama ang lumalaking paggamit, ay sumusuporta sa pangmatagalang paglikha ng halaga."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomics",
+      "titleEmphasis": "Pangkalahatang-ideya",
+      "totalSupplyLabel": "Kabuuang Supply:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribusyon:</b> Inilaan para sa paglago ng ecosystem, mga gantimpala sa staking, komunidad, at governance.",
+      "revenue": "<b>Modelo ng Kita:</b> Ang mga bayad sa protokol na binabayaran sa OGY ay lumilikha ng patuloy na demand habang binabawasan ang supply sa pamamagitan ng mga mekanismo ng pagsusunog.",
+      "support": "Ang modelo ay idinisenyo upang suportahan ang pangmatagalang sustainability ng protokol at pagkakatugma ng mga may-hawak ng token.",
+      "cta": "TOKENOMICS"
+    }
   }
 }

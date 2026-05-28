@@ -2,24 +2,15 @@ import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
 import GradientButton from "@components/Button/GradientButton";
+import { useT } from "@/i18n/LocaleContext";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
 import styles from "./Governance.module.scss";
 
-const governanceItems = [
-  <>
-    <b>Allocate</b> treasury funds toward ecosystem growth and strategic initiatives.
-  </>,
-  <>
-    <b>Propose and vote</b> on protocol upgrades, certification rules, and ecosystem changes.
-  </>,
-  <>
-    <b>Oversee</b> the onboarding of integrators and certifiers.
-  </>,
-];
-
 const Governance = () => {
+  const t = useT();
+  const governanceItems = t.raw("token.governance.items") ?? [];
   const { isMobile } = useIsMobile(1280);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
@@ -52,30 +43,29 @@ const Governance = () => {
     <section className={styles.governance}>
       <ScrollReveal>
         <h1>
-          <i>
-            Governance
-          </i>
+          <i>{t("token.governance.title")}</i>
         </h1>
       </ScrollReveal>
 
       <ScrollReveal delay={0.15}>
-        <p>
-          OGY is a governance token empowering holders to:
-        </p>
+        <p>{t("token.governance.lead")}</p>
       </ScrollReveal>
 
         {!isMobile ? (
           <ScrollReveal delay={0.25}>
             <div className={styles.governanceImgContainer}>
-              <p className={styles.governanceTextOne}>
-                {governanceItems[0]}
-              </p>
-              <p className={styles.governanceTextTwo}>
-                {governanceItems[1]}
-              </p>
-              <p className={styles.governanceTextThree}>
-                {governanceItems[2]}
-              </p>
+              <p
+                className={styles.governanceTextOne}
+                dangerouslySetInnerHTML={{ __html: governanceItems[0] ?? "" }}
+              />
+              <p
+                className={styles.governanceTextTwo}
+                dangerouslySetInnerHTML={{ __html: governanceItems[1] ?? "" }}
+              />
+              <p
+                className={styles.governanceTextThree}
+                dangerouslySetInnerHTML={{ __html: governanceItems[2] ?? "" }}
+              />
               <img src="/token/governance.png" className={styles.governanceImg} />
             </div>
           </ScrollReveal>
@@ -91,7 +81,10 @@ const Governance = () => {
               >
                 {governanceItems.map((item, index) => (
                   <div key={index} className={styles.sliderSlide}>
-                    <p className={styles.governanceText}>{item}</p>
+                    <p
+                      className={styles.governanceText}
+                      dangerouslySetInnerHTML={{ __html: item }}
+                    />
                   </div>
                 ))}
               </div>
@@ -110,15 +103,13 @@ const Governance = () => {
         )}
 
       <ScrollReveal delay={0.35}>
-        <p>
-          Governance is <b>fully decentralized</b> through the ORIGYN DAO, giving the community direct influence over the <b>protocol’s evolution.</b>
-        </p>
+        <p dangerouslySetInnerHTML={{ __html: t("token.governance.closing") }} />
       </ScrollReveal>
 
       <ScrollReveal delay={0.45}>
         <GradientButton
           href="https://dashboard.origyn.com/governance"
-          text="SEE MORE"
+          text={t("token.governance.cta")}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.ctaButton}
