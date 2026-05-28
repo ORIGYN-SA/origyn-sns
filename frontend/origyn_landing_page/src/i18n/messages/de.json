@@ -832,5 +832,61 @@
       "support": "Das Modell ist darauf ausgelegt, die langfristige Protokollnachhaltigkeit und die Ausrichtung der Token-Inhaber zu unterstützen.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostenrechner",
+      "description": "Nutzen Sie den ORIGYN-Rechner, um die Kosten Ihres einzigartigen Zertifikats mit allen Ihren Daten on-chain zu schätzen."
+    },
+    "plan": {
+      "title": "Ihren Mint planen",
+      "description": "Teilen Sie uns mit, wie viele Objekte Sie hochladen und was Sie übermitteln möchten.",
+      "itemsLabel": "Wie viele Objekte?",
+      "uploadingLabel": "Was laden Sie hoch?",
+      "knowExactSize": "Kennen Sie die genaue Größe?",
+      "totalUploadSize": "Gesamte Upload-Größe",
+      "usePreset": "Stattdessen eine Voreinstellung verwenden",
+      "combinedSize": "Kombinierte Größe aller Dateien über alle Objekte hinweg.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB pro Stück"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB pro Stück"
+        },
+        "dslr": {
+          "label": "Studio-Foto",
+          "hint": "20 MB pro Stück"
+        },
+        "video": {
+          "label": "Kurzvideo",
+          "hint": "1 GB pro Stück"
+        },
+        "video1hr": {
+          "label": "Langvideo",
+          "hint": "60 GB pro Stück"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live-Schätzung",
+      "titleRefreshing": "Schätzung wird aktualisiert",
+      "description": "Wird automatisch aktualisiert, wenn Sie Ihre Konfiguration ändern.",
+      "ogyEquivalent": "OGY-Äquivalent",
+      "ogySpotRate": "OGY-Spotkurs",
+      "itemSingular": "Objekt",
+      "itemPlural": "Objekte",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Kostenaufschlüsselung",
+      "baseFee": "Basis-Mint-Gebühr",
+      "storageFee": "Speichergebühr",
+      "items": "Objekte",
+      "uploadSize": "Upload-Größe"
+    },
+    "bytesUnit": "Bytes"
   }
 }

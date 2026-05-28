@@ -832,5 +832,61 @@
       "support": "이 모델은 장기적인 프로토콜 지속 가능성과 토큰 보유자 일치를 지원하도록 설계되었습니다.",
       "cta": "토크노믹스"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "비용 계산기",
+      "description": "ORIGYN 계산기를 사용하여 모든 데이터를 온체인에 저장하는 고유 인증서의 발행 비용을 추산하십시오."
+    },
+    "plan": {
+      "title": "발행 계획 수립",
+      "description": "항목 수와 업로드할 파일 유형을 알려 주십시오.",
+      "itemsLabel": "항목 수는 몇 개입니까?",
+      "uploadingLabel": "무엇을 업로드하십니까?",
+      "knowExactSize": "정확한 크기를 알고 계십니까?",
+      "totalUploadSize": "총 업로드 크기",
+      "usePreset": "프리셋을 사용하십시오",
+      "combinedSize": "모든 항목에 포함된 파일의 합산 크기입니다.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "각 250 KB"
+        },
+        "iphone": {
+          "label": "사진",
+          "hint": "각 3 MB"
+        },
+        "dslr": {
+          "label": "스튜디오 사진",
+          "hint": "각 20 MB"
+        },
+        "video": {
+          "label": "단편 영상",
+          "hint": "각 1 GB"
+        },
+        "video1hr": {
+          "label": "장편 영상",
+          "hint": "각 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "실시간 추산",
+      "titleRefreshing": "추산 갱신 중",
+      "description": "설정 변경 시 자동으로 업데이트됩니다.",
+      "ogyEquivalent": "OGY 환산액",
+      "ogySpotRate": "OGY 현물 환율",
+      "itemSingular": "항목",
+      "itemPlural": "항목",
+      "upload": "업로드"
+    },
+    "breakdown": {
+      "title": "비용 상세 내역",
+      "baseFee": "기본 발행 수수료",
+      "storageFee": "스토리지 수수료",
+      "items": "항목",
+      "uploadSize": "업로드 크기"
+    },
+    "bytesUnit": "바이트"
   }
 }

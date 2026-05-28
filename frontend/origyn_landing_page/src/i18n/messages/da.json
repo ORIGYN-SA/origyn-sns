@@ -870,5 +870,61 @@
       "support": "Modellen er designet til at understøtte langsigtet protokolbæredygtighed og tilpasning for tokenindehavere.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Prisberegner",
+      "description": "Brug ORIGYN-beregneren til at estimere omkostningen for dit unikke certifikat med alle dine data on-chain"
+    },
+    "plan": {
+      "title": "Planlæg din mint",
+      "description": "Fortæl os, hvor mange genstande du har, og hvad du uploader.",
+      "itemsLabel": "Hvor mange genstande?",
+      "uploadingLabel": "Hvad uploader du?",
+      "knowExactSize": "Kender du den præcise størrelse?",
+      "totalUploadSize": "Samlet uploadstørrelse",
+      "usePreset": "Brug en forudindstilling i stedet",
+      "combinedSize": "Samlet størrelse af alle filer på tværs af alle genstande.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB pr. stk."
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB pr. stk."
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB pr. stk."
+        },
+        "video": {
+          "label": "Kort video",
+          "hint": "1 GB pr. stk."
+        },
+        "video1hr": {
+          "label": "Lang video",
+          "hint": "60 GB pr. stk."
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live-estimat",
+      "titleRefreshing": "Opdaterer estimat",
+      "description": "Opdateres automatisk, når du ændrer dine indstillinger.",
+      "ogyEquivalent": "OGY-ækvivalent",
+      "ogySpotRate": "OGY-spotkurs",
+      "itemSingular": "Genstand",
+      "itemPlural": "Genstande",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Prisspecifikation",
+      "baseFee": "Grundlæggende mint-gebyr",
+      "storageFee": "Lagergebyr",
+      "items": "Genstande",
+      "uploadSize": "Uploadstørrelse"
+    },
+    "bytesUnit": "bytes"
   }
 }

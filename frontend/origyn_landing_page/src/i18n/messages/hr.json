@@ -870,5 +870,61 @@
       "support": "Model je osmišljen kako bi podržao dugoročnu održivost protokola i usklađenost nositelja tokena.",
       "cta": "TOKENOMIKA"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator troškova",
+      "description": "Koristite ORIGYN kalkulator kako biste procijenili trošak Vašeg jedinstvenog certifikata sa svim Vašim podacima on-chain"
+    },
+    "plan": {
+      "title": "Planirajte svoje iskivanje",
+      "description": "Recite nam koliko stavki imate i što učitavate.",
+      "itemsLabel": "Koliko stavki?",
+      "uploadingLabel": "Što učitavate?",
+      "knowExactSize": "Znate li točnu veličinu?",
+      "totalUploadSize": "Ukupna veličina učitavanja",
+      "usePreset": "Umjesto toga koristite predložak",
+      "combinedSize": "Ukupna veličina svih datoteka svih stavki.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB svaki"
+        },
+        "iphone": {
+          "label": "Fotografija",
+          "hint": "3 MB svaka"
+        },
+        "dslr": {
+          "label": "Studijska fotografija",
+          "hint": "20 MB svaka"
+        },
+        "video": {
+          "label": "Kratki video",
+          "hint": "1 GB svaki"
+        },
+        "video1hr": {
+          "label": "Dugi video",
+          "hint": "60 GB svaki"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Procjena uživo",
+      "titleRefreshing": "Osvježavanje procjene",
+      "description": "Automatski se ažurira dok mijenjate postavke.",
+      "ogyEquivalent": "OGY ekvivalent",
+      "ogySpotRate": "OGY promptna cijena",
+      "itemSingular": "Stavka",
+      "itemPlural": "Stavke",
+      "upload": "Učitavanje"
+    },
+    "breakdown": {
+      "title": "Razrada troškova",
+      "baseFee": "Osnovna naknada za iskivanje",
+      "storageFee": "Naknada za pohranu",
+      "items": "Stavke",
+      "uploadSize": "Veličina učitavanja"
+    },
+    "bytesUnit": "bajta"
   }
 }

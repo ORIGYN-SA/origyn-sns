@@ -870,5 +870,61 @@
       "support": "Malli on suunniteltu tukemaan protokollan pitkäaikaista kestävyyttä ja tokeninhaltijoiden yhdensuuntaisuutta.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kustannuslaskuri",
+      "description": "Käytä ORIGYN-laskuria arvioidaksesi ainutlaatuisen sertifikaattisi kustannukset, kun kaikki tietosi ovat lohkoketjussa"
+    },
+    "plan": {
+      "title": "Suunnittele luomisesi",
+      "description": "Kerro, kuinka monta kohdetta ja mitä olet lataamassa.",
+      "itemsLabel": "Kuinka monta kohdetta?",
+      "uploadingLabel": "Mitä olet lataamassa?",
+      "knowExactSize": "Tiedätkö tarkan koon?",
+      "totalUploadSize": "Latauksen kokonaiskoko",
+      "usePreset": "Käytä esiasetusta",
+      "combinedSize": "Kaikkien tiedostojen yhteenlaskettu koko kaikissa kohteissa.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB kappale"
+        },
+        "iphone": {
+          "label": "Valokuva",
+          "hint": "3 MB kappale"
+        },
+        "dslr": {
+          "label": "Studiokuva",
+          "hint": "20 MB kappale"
+        },
+        "video": {
+          "label": "Lyhyt video",
+          "hint": "1 GB kappale"
+        },
+        "video1hr": {
+          "label": "Pitkä video",
+          "hint": "60 GB kappale"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Reaaliaikainen arvio",
+      "titleRefreshing": "Päivitetään arviota",
+      "description": "Päivittyy automaattisesti asetusten muuttuessa.",
+      "ogyEquivalent": "OGY-vastaavuus",
+      "ogySpotRate": "OGY:n spot-kurssi",
+      "itemSingular": "Kohde",
+      "itemPlural": "Kohdetta",
+      "upload": "Lataus"
+    },
+    "breakdown": {
+      "title": "Kustannuserittely",
+      "baseFee": "Luomisen perusmaksu",
+      "storageFee": "Tallennusmaksu",
+      "items": "Kohteet",
+      "uploadSize": "Latauksen koko"
+    },
+    "bytesUnit": "tavua"
   }
 }

@@ -870,5 +870,61 @@
       "support": "Het model is ontworpen voor langdurige protocolhoudbaarheid en afstemming met tokenhouders.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostencalculator",
+      "description": "Gebruik de ORIGYN-calculator om de kosten van uw uniek certificaat met al uw gegevens on-chain te schatten"
+    },
+    "plan": {
+      "title": "Plan uw mint",
+      "description": "Geef ons aan hoeveel items u heeft en wat u uploadt.",
+      "itemsLabel": "Hoeveel items?",
+      "uploadingLabel": "Wat uploadt u?",
+      "knowExactSize": "Weet u de exacte grootte?",
+      "totalUploadSize": "Totale uploadgrootte",
+      "usePreset": "Gebruik in plaats daarvan een voorinstelling",
+      "combinedSize": "Gecombineerde grootte van alle bestanden over alle items.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per stuk"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per stuk"
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB per stuk"
+        },
+        "video": {
+          "label": "Korte video",
+          "hint": "1 GB per stuk"
+        },
+        "video1hr": {
+          "label": "Lange video",
+          "hint": "60 GB per stuk"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live schatting",
+      "titleRefreshing": "Schatting vernieuwen",
+      "description": "Wordt automatisch bijgewerkt naarmate u uw configuratie wijzigt.",
+      "ogyEquivalent": "OGY-equivalent",
+      "ogySpotRate": "OGY-spotrente",
+      "itemSingular": "Item",
+      "itemPlural": "Items",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Kostenspecificatie",
+      "baseFee": "Basis mint-tarief",
+      "storageFee": "Opslagtarief",
+      "items": "Items",
+      "uploadSize": "Uploadgrootte"
+    },
+    "bytesUnit": "bytes"
   }
 }

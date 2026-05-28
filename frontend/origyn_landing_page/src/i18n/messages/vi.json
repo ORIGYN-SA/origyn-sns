@@ -870,5 +870,61 @@
       "support": "Mô hình được thiết kế để hỗ trợ tính bền vững lâu dài của giao thức và sự liên kết với người nắm giữ token.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Máy tính chi phí",
+      "description": "Sử dụng máy tính ORIGYN để ước tính chi phí chứng chỉ độc nhất của Quý vị với toàn bộ dữ liệu trên chuỗi"
+    },
+    "plan": {
+      "title": "Lên kế hoạch đúc chứng chỉ",
+      "description": "Cho chúng tôi biết số lượng mục và nội dung Quý vị đang tải lên.",
+      "itemsLabel": "Bao nhiêu mục?",
+      "uploadingLabel": "Quý vị đang tải lên gì?",
+      "knowExactSize": "Quý vị biết kích thước chính xác?",
+      "totalUploadSize": "Tổng dung lượng tải lên",
+      "usePreset": "Sử dụng giá trị đặt sẵn",
+      "combinedSize": "Tổng dung lượng của tất cả tệp trong mọi mục.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB mỗi tệp"
+        },
+        "iphone": {
+          "label": "Ảnh",
+          "hint": "3 MB mỗi tệp"
+        },
+        "dslr": {
+          "label": "Ảnh studio",
+          "hint": "20 MB mỗi tệp"
+        },
+        "video": {
+          "label": "Video ngắn",
+          "hint": "1 GB mỗi tệp"
+        },
+        "video1hr": {
+          "label": "Video dài",
+          "hint": "60 GB mỗi tệp"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Ước tính theo thời gian thực",
+      "titleRefreshing": "Đang cập nhật ước tính",
+      "description": "Tự động cập nhật khi Quý vị thay đổi thiết lập.",
+      "ogyEquivalent": "Tương đương OGY",
+      "ogySpotRate": "Tỷ giá giao ngay OGY",
+      "itemSingular": "Mục",
+      "itemPlural": "Mục",
+      "upload": "Tải lên"
+    },
+    "breakdown": {
+      "title": "Chi tiết chi phí",
+      "baseFee": "Phí đúc cơ bản",
+      "storageFee": "Phí lưu trữ",
+      "items": "Mục",
+      "uploadSize": "Dung lượng tải lên"
+    },
+    "bytesUnit": "byte"
   }
 }

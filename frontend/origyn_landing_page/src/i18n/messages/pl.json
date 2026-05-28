@@ -870,5 +870,61 @@
       "support": "Model jest zaprojektowany w celu wspierania długoterminowej trwałości protokołu i zaangażowania posiadaczy tokenów.",
       "cta": "TOKENOMIKA"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator kosztów",
+      "description": "Użyj kalkulatora ORIGYN, aby oszacować koszt unikalnego certyfikatu z wszystkimi Państwa danymi on-chain"
+    },
+    "plan": {
+      "title": "Zaplanuj bicie certyfikatu",
+      "description": "Proszę podać liczbę elementów i rodzaj przesyłanych plików.",
+      "itemsLabel": "Ile elementów?",
+      "uploadingLabel": "Co Państwo przesyłają?",
+      "knowExactSize": "Znają Państwo dokładny rozmiar?",
+      "totalUploadSize": "Łączny rozmiar przesyłanych plików",
+      "usePreset": "Użyj gotowego ustawienia",
+      "combinedSize": "Łączny rozmiar wszystkich plików we wszystkich elementach.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB każdy"
+        },
+        "iphone": {
+          "label": "Zdjęcie",
+          "hint": "3 MB każde"
+        },
+        "dslr": {
+          "label": "Zdjęcie studyjne",
+          "hint": "20 MB każde"
+        },
+        "video": {
+          "label": "Krótki film",
+          "hint": "1 GB każdy"
+        },
+        "video1hr": {
+          "label": "Długi film",
+          "hint": "60 GB każdy"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Szacunek na żywo",
+      "titleRefreshing": "Aktualizowanie szacunku",
+      "description": "Aktualizuje się automatycznie wraz ze zmianą ustawień.",
+      "ogyEquivalent": "Odpowiednik w OGY",
+      "ogySpotRate": "Kurs spot OGY",
+      "itemSingular": "Element",
+      "itemPlural": "Elementy",
+      "upload": "Przesyłanie"
+    },
+    "breakdown": {
+      "title": "Szczegółowy podział kosztów",
+      "baseFee": "Podstawowa opłata za bicie",
+      "storageFee": "Opłata za przechowywanie",
+      "items": "Elementy",
+      "uploadSize": "Rozmiar przesyłanych plików"
+    },
+    "bytesUnit": "bajty"
   }
 }

@@ -870,5 +870,61 @@
       "support": "Model, uzun vadeli protokol sürdürülebilirliğini ve token sahibi uyumunu desteklemek üzere tasarlanmıştır.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Maliyet hesaplayıcısı",
+      "description": "Tüm verilerinizin zincir üstünde yer aldığı benzersiz sertifikanızın maliyetini tahmin etmek için ORIGYN hesaplayıcısını kullanın"
+    },
+    "plan": {
+      "title": "Basımınızı planlayın",
+      "description": "Kaç öğe yüklediğinizi ve ne yüklediğinizi bize bildirin.",
+      "itemsLabel": "Kaç öğe?",
+      "uploadingLabel": "Ne yüklüyorsunuz?",
+      "knowExactSize": "Tam boyutu biliyor musunuz?",
+      "totalUploadSize": "Toplam yükleme boyutu",
+      "usePreset": "Bunun yerine bir ön ayar kullanın",
+      "combinedSize": "Tüm öğelerdeki her dosyanın birleşik boyutu.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "her biri 250 KB"
+        },
+        "iphone": {
+          "label": "Fotoğraf",
+          "hint": "her biri 3 MB"
+        },
+        "dslr": {
+          "label": "Stüdyo fotoğrafı",
+          "hint": "her biri 20 MB"
+        },
+        "video": {
+          "label": "Kısa video",
+          "hint": "her biri 1 GB"
+        },
+        "video1hr": {
+          "label": "Uzun video",
+          "hint": "her biri 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Anlık tahmin",
+      "titleRefreshing": "Tahmin güncelleniyor",
+      "description": "Ayarlarınızı değiştirdikçe otomatik olarak güncellenir.",
+      "ogyEquivalent": "OGY karşılığı",
+      "ogySpotRate": "OGY anlık kuru",
+      "itemSingular": "Öğe",
+      "itemPlural": "Öğe",
+      "upload": "Yükleme"
+    },
+    "breakdown": {
+      "title": "Maliyet dökümü",
+      "baseFee": "Temel basım ücreti",
+      "storageFee": "Depolama ücreti",
+      "items": "Öğeler",
+      "uploadSize": "Yükleme boyutu"
+    },
+    "bytesUnit": "bayt"
   }
 }

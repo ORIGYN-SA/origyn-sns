@@ -870,5 +870,61 @@
       "support": "Model ini dirancang untuk mendukung keberlanjutan protokol jangka panjang dan keselarasan pemegang token.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator biaya",
+      "description": "Gunakan kalkulator ORIGYN untuk memperkirakan biaya sertifikat unik Anda dengan semua data Anda di rantai"
+    },
+    "plan": {
+      "title": "Rencanakan mint Anda",
+      "description": "Beri tahu kami berapa banyak item dan apa yang Anda unggah.",
+      "itemsLabel": "Berapa banyak item?",
+      "uploadingLabel": "Apa yang Anda unggah?",
+      "knowExactSize": "Tahu ukuran pastinya?",
+      "totalUploadSize": "Total ukuran unggahan",
+      "usePreset": "Gunakan preset sebagai gantinya",
+      "combinedSize": "Ukuran gabungan semua file di seluruh item.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per item"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per item"
+        },
+        "dslr": {
+          "label": "Foto studio",
+          "hint": "20 MB per item"
+        },
+        "video": {
+          "label": "Video pendek",
+          "hint": "1 GB per item"
+        },
+        "video1hr": {
+          "label": "Video panjang",
+          "hint": "60 GB per item"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimasi langsung",
+      "titleRefreshing": "Memperbarui estimasi",
+      "description": "Diperbarui secara otomatis saat Anda mengubah pengaturan.",
+      "ogyEquivalent": "Setara OGY",
+      "ogySpotRate": "Harga spot OGY",
+      "itemSingular": "Item",
+      "itemPlural": "Item",
+      "upload": "Unggahan"
+    },
+    "breakdown": {
+      "title": "Rincian biaya",
+      "baseFee": "Biaya mint dasar",
+      "storageFee": "Biaya penyimpanan",
+      "items": "Item",
+      "uploadSize": "Ukuran unggahan"
+    },
+    "bytesUnit": "bita"
   }
 }

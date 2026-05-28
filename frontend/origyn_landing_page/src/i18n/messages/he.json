@@ -498,7 +498,7 @@
       "label": "שותפים",
       "testimonials": [
         {
-          "title": "CEO of Metalor",
+          "title": "מנכ״ל Metalor",
           "description": "\"ORIGYN היא טכנולוגיית האימות הדיגיטלי המתקדמת והמקיפה ביותר בעולם. כל הנתונים מאוחסנים במלואם ב-blockchain כדי להבטיח שהתעודות יהיו בלתי ניתנות לשינוי ושקופות. Metalor שמחה לעבוד עם חברת Fintech שממוקמת ב-Neuchâtel כמו ORIGYN כדי להביא לשווקים פתרון חדשני.\""
         },
         {
@@ -870,5 +870,61 @@
       "support": "המודל נועד לתמוך בקיימות הפרוטוקול לטווח ארוך וביישור מחזיקי הטוקן.",
       "cta": "טוקנומיקס"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "מחשבון עלויות",
+      "description": "השתמש במחשבון ORIGYN להערכת עלות התעודה הייחודית שלך עם כל הנתונים על השרשרת"
+    },
+    "plan": {
+      "title": "תכנן את ההנפקה שלך",
+      "description": "ציין את מספר הפריטים ואת סוג התוכן שברצונך להעלות.",
+      "itemsLabel": "כמה פריטים?",
+      "uploadingLabel": "מה ברצונך להעלות?",
+      "knowExactSize": "ידוע לך הגודל המדויק?",
+      "totalUploadSize": "גודל העלאה כולל",
+      "usePreset": "השתמש בהגדרה קבועה במקום",
+      "combinedSize": "הגודל המצטבר של כל הקבצים בכלל הפריטים.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB לכל אחד"
+        },
+        "iphone": {
+          "label": "תמונה",
+          "hint": "3 MB לכל אחד"
+        },
+        "dslr": {
+          "label": "תמונת סטודיו",
+          "hint": "20 MB לכל אחד"
+        },
+        "video": {
+          "label": "סרטון קצר",
+          "hint": "1 GB לכל אחד"
+        },
+        "video1hr": {
+          "label": "סרטון ארוך",
+          "hint": "60 GB לכל אחד"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "הערכה בזמן אמת",
+      "titleRefreshing": "מעדכן הערכה",
+      "description": "מתעדכן אוטומטית בעת שינוי ההגדרות.",
+      "ogyEquivalent": "שווה ערך ב-OGY",
+      "ogySpotRate": "שער ספוט של OGY",
+      "itemSingular": "פריט",
+      "itemPlural": "פריטים",
+      "upload": "העלאה"
+    },
+    "breakdown": {
+      "title": "פירוט עלויות",
+      "baseFee": "דמי הנפקה בסיסיים",
+      "storageFee": "דמי אחסון",
+      "items": "פריטים",
+      "uploadSize": "גודל העלאה"
+    },
+    "bytesUnit": "בייטים"
   }
 }

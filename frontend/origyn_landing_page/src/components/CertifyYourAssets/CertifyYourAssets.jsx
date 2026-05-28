@@ -22,7 +22,7 @@ const CertifyYourAssets = ({ id }) => {
       <div className={styles.calculatorWrapper}>
         <div className={styles.gradientBackground} />
         <div className={styles.calculatorInner}>
-          <Calculator showHeader={false} />
+          <Calculator showHeader={false} messages={t.raw("calculator")} />
           <div className={styles.contactBox}>
             <div className={styles.contactText}>{t("home.certify.contactPrompt")}</div>
             <Button text={t("home.certify.contactCta")} url="mailto:techsupport@origyn.com" />

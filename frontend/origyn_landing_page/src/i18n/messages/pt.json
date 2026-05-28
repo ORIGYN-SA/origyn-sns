@@ -870,5 +870,61 @@
       "support": "O modelo foi concebido para suportar a sustentabilidade do protocolo a longo prazo e o alinhamento dos detentores de tokens.",
       "cta": "TOKENOMIA"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculadora de custos",
+      "description": "Utilize a calculadora ORIGYN para estimar o custo do seu certificado único com todos os seus dados on-chain"
+    },
+    "plan": {
+      "title": "Planeie a sua emissão",
+      "description": "Indique-nos quantos itens tem e o que vai carregar.",
+      "itemsLabel": "Quantos itens?",
+      "uploadingLabel": "O que vai carregar?",
+      "knowExactSize": "Conhece o tamanho exato?",
+      "totalUploadSize": "Tamanho total do carregamento",
+      "usePreset": "Utilizar uma predefinição",
+      "combinedSize": "Tamanho combinado de todos os ficheiros em todos os itens.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB cada"
+        },
+        "iphone": {
+          "label": "Fotografia",
+          "hint": "3 MB cada"
+        },
+        "dslr": {
+          "label": "Fotografia de estúdio",
+          "hint": "20 MB cada"
+        },
+        "video": {
+          "label": "Vídeo curto",
+          "hint": "1 GB cada"
+        },
+        "video1hr": {
+          "label": "Vídeo longo",
+          "hint": "60 GB cada"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimativa em tempo real",
+      "titleRefreshing": "A atualizar estimativa",
+      "description": "Atualiza automaticamente à medida que altera a sua configuração.",
+      "ogyEquivalent": "Equivalente em OGY",
+      "ogySpotRate": "Cotação spot do OGY",
+      "itemSingular": "Item",
+      "itemPlural": "Itens",
+      "upload": "Carregamento"
+    },
+    "breakdown": {
+      "title": "Discriminação de custos",
+      "baseFee": "Taxa base de emissão",
+      "storageFee": "Taxa de armazenamento",
+      "items": "Itens",
+      "uploadSize": "Tamanho do carregamento"
+    },
+    "bytesUnit": "bytes"
   }
 }

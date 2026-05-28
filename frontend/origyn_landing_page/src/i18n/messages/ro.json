@@ -832,5 +832,61 @@
       "support": "Modelul este conceput pentru a susține durabilitatea pe termen lung a protocolului și alinierea deținătorilor de tokenuri.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculator de costuri",
+      "description": "Utilizați calculatorul ORIGYN pentru a estima costul certificatului dumneavoastră unic cu toate datele on-chain"
+    },
+    "plan": {
+      "title": "Planificați emiterea",
+      "description": "Spuneți-ne câte articole aveți și ce încărcați.",
+      "itemsLabel": "Câte articole?",
+      "uploadingLabel": "Ce încărcați?",
+      "knowExactSize": "Cunoașteți dimensiunea exactă?",
+      "totalUploadSize": "Dimensiune totală de încărcare",
+      "usePreset": "Utilizați o configurație predefinită",
+      "combinedSize": "Dimensiunea combinată a tuturor fișierelor pentru toate articolele.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB fiecare"
+        },
+        "iphone": {
+          "label": "Fotografie",
+          "hint": "3 MB fiecare"
+        },
+        "dslr": {
+          "label": "Fotografie de studio",
+          "hint": "20 MB fiecare"
+        },
+        "video": {
+          "label": "Videoclip scurt",
+          "hint": "1 GB fiecare"
+        },
+        "video1hr": {
+          "label": "Videoclip lung",
+          "hint": "60 GB fiecare"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimare în timp real",
+      "titleRefreshing": "Se actualizează estimarea",
+      "description": "Se actualizează automat pe măsură ce modificați configurația.",
+      "ogyEquivalent": "Echivalent OGY",
+      "ogySpotRate": "Curs spot OGY",
+      "itemSingular": "Articol",
+      "itemPlural": "Articole",
+      "upload": "Încărcare"
+    },
+    "breakdown": {
+      "title": "Detaliere costuri",
+      "baseFee": "Taxă de bază pentru emitere",
+      "storageFee": "Taxă de stocare",
+      "items": "Articole",
+      "uploadSize": "Dimensiune încărcare"
+    },
+    "bytesUnit": "octeți"
   }
 }

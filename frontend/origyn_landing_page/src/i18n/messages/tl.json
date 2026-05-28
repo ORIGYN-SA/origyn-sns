@@ -870,5 +870,61 @@
       "support": "Ang modelo ay idinisenyo upang suportahan ang pangmatagalang sustainability ng protokol at pagkakatugma ng mga may-hawak ng token.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Tagakalkula ng gastos",
+      "description": "Gamitin ang tagakalkula ng ORIGYN upang matantya ang gastos ng inyong natatanging sertipiko kasama ang lahat ng inyong data on-chain"
+    },
+    "plan": {
+      "title": "Planuhin ang inyong mint",
+      "description": "Sabihin sa amin kung ilang aytem at ano ang inyong ia-upload.",
+      "itemsLabel": "Ilang aytem?",
+      "uploadingLabel": "Ano ang inyong ia-upload?",
+      "knowExactSize": "Alam ba ninyo ang eksaktong laki?",
+      "totalUploadSize": "Kabuuang laki ng upload",
+      "usePreset": "Gumamit ng preset sa halip",
+      "combinedSize": "Pinagsamang laki ng bawat file sa lahat ng aytem.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB bawat isa"
+        },
+        "iphone": {
+          "label": "Larawan",
+          "hint": "3 MB bawat isa"
+        },
+        "dslr": {
+          "label": "Larawang studio",
+          "hint": "20 MB bawat isa"
+        },
+        "video": {
+          "label": "Maikling video",
+          "hint": "1 GB bawat isa"
+        },
+        "video1hr": {
+          "label": "Mahabang video",
+          "hint": "60 GB bawat isa"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Kasalukuyang tantya",
+      "titleRefreshing": "Ina-update ang tantya",
+      "description": "Awtomatikong nag-a-update habang binabago ninyo ang inyong setup.",
+      "ogyEquivalent": "Katumbas sa OGY",
+      "ogySpotRate": "Kasalukuyang presyo ng OGY",
+      "itemSingular": "Aytem",
+      "itemPlural": "Mga Aytem",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Paghahati-hati ng gastos",
+      "baseFee": "Pangunahing bayad sa mint",
+      "storageFee": "Bayad sa imbakan",
+      "items": "Mga Aytem",
+      "uploadSize": "Laki ng upload"
+    },
+    "bytesUnit": "bytes"
   }
 }

@@ -31,16 +31,12 @@ const ASSET_QUALITY_BYTES: Record<AssetQuality, bigint> = {
   video1hr: 60_000_000_000n,
 };
 
-const ASSET_QUALITY_OPTIONS: {
-  value: AssetQuality;
-  label: string;
-  hint: string;
-}[] = [
-  { value: "pdf", label: "PDF", hint: "250 KB each" },
-  { value: "iphone", label: "Photo", hint: "3 MB each" },
-  { value: "dslr", label: "Studio photo", hint: "20 MB each" },
-  { value: "video", label: "Short video", hint: "1 GB each" },
-  { value: "video1hr", label: "Long video", hint: "60 GB each" },
+const ASSET_QUALITY_ORDER: AssetQuality[] = [
+  "pdf",
+  "iphone",
+  "dslr",
+  "video",
+  "video1hr",
 ];
 
 const SIZE_UNIT_BYTES: Record<SizeUnit, bigint> = {
@@ -61,6 +57,118 @@ const EB_SCALE = 1_000_000_000_000_000_000n;
 
 const COMPACT_E8S_THRESHOLD = 1_000_000_000_000n;
 const COMPACT_COUNT_THRESHOLD = 10_000n;
+
+type DeepPartial<T> = T extends object
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T;
+
+/**
+ * Translatable strings for the Calculator. Hosts pass a `messages` prop; any
+ * field omitted falls back to the English defaults exported below.
+ */
+export type CalculatorMessages = {
+  header: { title: string; description: string };
+  plan: {
+    title: string;
+    description: string;
+    itemsLabel: string;
+    uploadingLabel: string;
+    knowExactSize: string;
+    totalUploadSize: string;
+    usePreset: string;
+    combinedSize: string;
+    qualityOptions: Record<AssetQuality, { label: string; hint: string }>;
+  };
+  estimate: {
+    titleLive: string;
+    titleRefreshing: string;
+    description: string;
+    ogyEquivalent: string;
+    ogySpotRate: string;
+    itemSingular: string;
+    itemPlural: string;
+    upload: string;
+  };
+  breakdown: {
+    title: string;
+    baseFee: string;
+    storageFee: string;
+    items: string;
+    uploadSize: string;
+  };
+  /** Lowercase "bytes" word. KB/MB/GB/... stay as international units. */
+  bytesUnit: string;
+};
+
+export const DEFAULT_CALCULATOR_MESSAGES: CalculatorMessages = {
+  header: {
+    title: "Cost calculator",
+    description:
+      "Use the ORIGYN calculator to estimate the cost of your unique certificate with all your data on chain",
+  },
+  plan: {
+    title: "Plan your mint",
+    description: "Tell us how many items and what you're uploading.",
+    itemsLabel: "How many items?",
+    uploadingLabel: "What are you uploading?",
+    knowExactSize: "Know the exact size?",
+    totalUploadSize: "Total upload size",
+    usePreset: "Use a preset instead",
+    combinedSize: "Combined size of every file across all items.",
+    qualityOptions: {
+      pdf: { label: "PDF", hint: "250 KB each" },
+      iphone: { label: "Photo", hint: "3 MB each" },
+      dslr: { label: "Studio photo", hint: "20 MB each" },
+      video: { label: "Short video", hint: "1 GB each" },
+      video1hr: { label: "Long video", hint: "60 GB each" },
+    },
+  },
+  estimate: {
+    titleLive: "Live estimate",
+    titleRefreshing: "Refreshing estimate",
+    description: "Updates automatically as you change your setup.",
+    ogyEquivalent: "OGY equivalent",
+    ogySpotRate: "OGY spot rate",
+    itemSingular: "Item",
+    itemPlural: "Items",
+    upload: "Upload",
+  },
+  breakdown: {
+    title: "Cost breakdown",
+    baseFee: "Base mint fee",
+    storageFee: "Storage fee",
+    items: "Items",
+    uploadSize: "Upload size",
+  },
+  bytesUnit: "bytes",
+};
+
+// Section-level merge: each top-level subtree falls back to the default if the
+// caller didn't override it. `qualityOptions` is merged per-key so a partial
+// override (just one preset) still works.
+const mergeMessages = (
+  override?: DeepPartial<CalculatorMessages>,
+): CalculatorMessages => {
+  if (!override) return DEFAULT_CALCULATOR_MESSAGES;
+  const d = DEFAULT_CALCULATOR_MESSAGES;
+  return {
+    header: { ...d.header, ...override.header },
+    plan: {
+      ...d.plan,
+      ...override.plan,
+      qualityOptions: {
+        pdf: { ...d.plan.qualityOptions.pdf, ...override.plan?.qualityOptions?.pdf },
+        iphone: { ...d.plan.qualityOptions.iphone, ...override.plan?.qualityOptions?.iphone },
+        dslr: { ...d.plan.qualityOptions.dslr, ...override.plan?.qualityOptions?.dslr },
+        video: { ...d.plan.qualityOptions.video, ...override.plan?.qualityOptions?.video },
+        video1hr: { ...d.plan.qualityOptions.video1hr, ...override.plan?.qualityOptions?.video1hr },
+      },
+    },
+    estimate: { ...d.estimate, ...override.estimate },
+    breakdown: { ...d.breakdown, ...override.breakdown },
+    bytesUnit: override.bytesUnit ?? d.bytesUnit,
+  };
+};
 
 const groupDigits = (value: string) =>
   value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -116,9 +224,9 @@ const formatE8s = (value: bigint, fractionDigits: number) =>
 
 const formatUsdRateFromE8s = (value: bigint) => `$${formatE8s(value, 4)}`;
 
-const formatBytes = (bytes: bigint) => {
-  if (bytes === 0n) return "0 bytes";
-  if (bytes < KB_SCALE) return `${formatInteger(bytes)} bytes`;
+const makeFormatBytes = (bytesUnit: string) => (bytes: bigint) => {
+  if (bytes === 0n) return `0 ${bytesUnit}`;
+  if (bytes < KB_SCALE) return `${formatInteger(bytes)} ${bytesUnit}`;
   if (bytes < MB_SCALE) return `${formatQuotient(bytes, KB_SCALE, 2)} KB`;
   if (bytes < GB_SCALE) return `${formatQuotient(bytes, MB_SCALE, 2)} MB`;
   if (bytes < TB_SCALE) return `${formatQuotient(bytes, GB_SCALE, 2)} GB`;
@@ -172,7 +280,9 @@ const NumberInput = ({
     <div
       className={clsx(
         "flex h-12 items-center rounded-full border border-border bg-surface focus-within:border-border-strong",
-        trailing ? "pl-4 pr-1" : "px-4",
+        // Logical padding so the trailing slot stays on the input's trailing
+        // edge when the document flips to RTL.
+        trailing ? "ps-4 pe-1" : "px-4",
         label && "mt-2"
       )}
     >
@@ -226,7 +336,7 @@ const MiniStat = ({ title, value }: { title: string; value: string }) => (
 const DetailRow = ({ label, value }: { label: string; value: ReactNode }) => (
   <div className="flex items-center justify-between gap-4 py-3">
     <span className="text-sm text-muted">{label}</span>
-    <div className="shrink-0 text-right text-sm text-content">{value}</div>
+    <div className="shrink-0 text-end text-sm text-content">{value}</div>
   </div>
 );
 
@@ -239,9 +349,31 @@ export type CalculatorProps = {
    * (e.g. the landing page's "Certify your assets" section).
    */
   showHeader?: boolean;
+  /**
+   * Translated strings. Partial — anything missing falls back to the English
+   * defaults exported as `DEFAULT_CALCULATOR_MESSAGES`.
+   */
+  messages?: DeepPartial<CalculatorMessages>;
 };
 
-const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
+const Calculator = ({
+  canisterId,
+  showHeader = true,
+  messages: messagesOverride,
+}: CalculatorProps) => {
+  const messages = useMemo(
+    () => mergeMessages(messagesOverride),
+    [messagesOverride],
+  );
+  const formatBytes = useMemo(
+    () => makeFormatBytes(messages.bytesUnit),
+    [messages.bytesUnit],
+  );
+  const assetQualityOptions = ASSET_QUALITY_ORDER.map((value) => ({
+    value,
+    ...messages.plan.qualityOptions[value],
+  }));
+
   const [mode, setMode] = useState<SizeMode>("preset");
   const [assetQuality, setAssetQuality] = useState<AssetQuality>("pdf");
   const [customUnit, setCustomUnit] = useState<SizeUnit>("MB");
@@ -324,11 +456,10 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
         {showHeader && (
           <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
             <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
-              Cost calculator
+              {messages.header.title}
             </h1>
             <p className="font-light text-[16px] sm:text-[22px] leading-snug sm:leading-none text-center text-muted">
-              Use the ORIGYN calculator to estimate the cost of your unique
-              certificate with all your data on chain
+              {messages.header.description}
             </p>
           </div>
         )}
@@ -336,19 +467,17 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
         <div className={clsx("w-full max-w-6xl", showHeader && "mt-8")}>
           <Card>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-0">
-              <section className="lg:pr-8">
+              <section className="lg:pe-8">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-[22px] font-semibold leading-none text-content">
-                    Plan your mint
+                    {messages.plan.title}
                   </h2>
-                  <p className="text-sm text-muted">
-                    Tell us how many items and what you&apos;re uploading.
-                  </p>
+                  <p className="text-sm text-muted">{messages.plan.description}</p>
                 </div>
 
                 <div className="mt-6 flex flex-col gap-6">
                   <NumberInput
-                    label="How many items?"
+                    label={messages.plan.itemsLabel}
                     value={inputs.numMints}
                     onChange={(value) =>
                       setInputs((prev) => ({ ...prev, numMints: value }))
@@ -359,18 +488,18 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                     <div className="flex min-h-[232px] flex-col gap-3 sm:min-h-[168px]">
                       <div className="flex items-center justify-between gap-4">
                         <label className="text-sm font-medium text-content">
-                          What are you uploading?
+                          {messages.plan.uploadingLabel}
                         </label>
                         <button
                           type="button"
                           onClick={() => setMode("custom")}
                           className="text-xs font-medium text-muted underline underline-offset-2 hover:text-content"
                         >
-                          Know the exact size?
+                          {messages.plan.knowExactSize}
                         </button>
                       </div>
                       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                        {ASSET_QUALITY_OPTIONS.map((option) => {
+                        {assetQualityOptions.map((option) => {
                           const active = assetQuality === option.value;
                           return (
                             <button
@@ -379,7 +508,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                               aria-pressed={active}
                               onClick={() => setAssetQuality(option.value)}
                               className={clsx(
-                                "flex flex-col items-start gap-1 rounded-xl border px-3 py-3 text-left transition-colors",
+                                "flex flex-col items-start gap-1 rounded-xl border px-3 py-3 text-start transition-colors",
                                 active
                                   ? "border-content bg-content text-background"
                                   : "border-border-faint bg-surface-faint text-content hover:border-border-strong"
@@ -405,14 +534,14 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                     <div className="flex min-h-[232px] flex-col gap-3 sm:min-h-[168px]">
                       <div className="flex items-center justify-between gap-4">
                         <label className="text-sm font-medium text-content">
-                          Total upload size
+                          {messages.plan.totalUploadSize}
                         </label>
                         <button
                           type="button"
                           onClick={() => setMode("preset")}
                           className="text-xs font-medium text-muted underline underline-offset-2 hover:text-content"
                         >
-                          Use a preset instead
+                          {messages.plan.usePreset}
                         </button>
                       </div>
                       <NumberInput
@@ -423,7 +552,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                           setInputs((prev) => ({ ...prev, customSize: value }))
                         }
                         trailing={
-                          <div className="ml-2 flex h-10 shrink-0 items-center rounded-full bg-surface-faint p-0.5">
+                          <div className="ms-2 flex h-10 shrink-0 items-center rounded-full bg-surface-faint p-0.5">
                             {SIZE_UNITS.map((unit) => {
                               const active = customUnit === unit;
                               return (
@@ -447,22 +576,22 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                         }
                       />
                       <p className="text-xs text-muted">
-                        Combined size of every file across all items.
+                        {messages.plan.combinedSize}
                       </p>
                     </div>
                   )}
                 </div>
               </section>
 
-              <section className="flex flex-col border-t border-border pt-8 lg:h-full lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              <section className="flex flex-col border-t border-border pt-8 lg:h-full lg:border-s lg:border-t-0 lg:ps-8 lg:pt-0">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-[22px] font-semibold leading-none text-content">
                     {isFetching && estimate
-                      ? "Refreshing estimate"
-                      : "Live estimate"}
+                      ? messages.estimate.titleRefreshing
+                      : messages.estimate.titleLive}
                   </h2>
                   <p className="text-sm text-muted">
-                    Updates automatically as you change your setup.
+                    {messages.estimate.description}
                   </p>
                 </div>
 
@@ -485,7 +614,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                         )}
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                           <StatCard
-                            title="OGY equivalent"
+                            title={messages.estimate.ogyEquivalent}
                             accessory={
                               <img
                                 src="/ogy_logo.svg"
@@ -502,7 +631,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                             loading={showSkeleton}
                           />
                           <StatCard
-                            title="OGY spot rate"
+                            title={messages.estimate.ogySpotRate}
                             value={
                               estimate
                                 ? formatUsdRateFromE8s(
@@ -515,15 +644,21 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                         </div>
                       </div>
                     </SkeletonOverlay>
-                    {showError && <CardErrorOverlay title="Live estimate" />}
+                    {showError && (
+                      <CardErrorOverlay title={messages.estimate.titleLive} />
+                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <MiniStat
-                      title={numMints === 1n ? "Item" : "Items"}
+                      title={
+                        numMints === 1n
+                          ? messages.estimate.itemSingular
+                          : messages.estimate.itemPlural
+                      }
                       value={formatCount(numMints ?? 0n)}
                     />
                     <MiniStat
-                      title="Upload"
+                      title={messages.estimate.upload}
                       value={formatBytes(totalFileSizeBytes)}
                     />
                   </div>
@@ -533,12 +668,12 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
 
             <div className="mt-8 border-t border-border pt-6">
               <h3 className="font-semibold text-[16px] leading-none text-muted">
-                Cost breakdown
+                {messages.breakdown.title}
               </h3>
               <div className="mt-2 grid grid-cols-1 gap-x-8 md:grid-cols-2">
                 <div className="divide-y divide-border">
                   <DetailRow
-                    label="Base mint fee"
+                    label={messages.breakdown.baseFee}
                     value={
                       estimate
                         ? formatUsdCompact(estimate.breakdown.base_fee_usd_e8s)
@@ -546,7 +681,7 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                     }
                   />
                   <DetailRow
-                    label="Storage fee"
+                    label={messages.breakdown.storageFee}
                     value={
                       estimate
                         ? formatUsdCompact(
@@ -558,11 +693,11 @@ const Calculator = ({ canisterId, showHeader = true }: CalculatorProps) => {
                 </div>
                 <div className="divide-y divide-border border-t border-border md:border-t-0">
                   <DetailRow
-                    label="Items"
+                    label={messages.breakdown.items}
                     value={formatCount(numMints ?? 0n)}
                   />
                   <DetailRow
-                    label="Upload size"
+                    label={messages.breakdown.uploadSize}
                     value={formatBytes(totalFileSizeBytes)}
                   />
                 </div>

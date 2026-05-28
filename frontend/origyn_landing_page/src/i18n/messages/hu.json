@@ -870,5 +870,61 @@
       "support": "A modellt a hosszú távú protokoll-fenntarthatóság és a tokentulajdonosok érdekeivel való összhang támogatására tervezték.",
       "cta": "TOKENOMIKA"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Költségkalkulátor",
+      "description": "Használja az ORIGYN kalkulátort, hogy megbecsülje egyedi tanúsítványa költségét az összes láncon tárolt adatával együtt"
+    },
+    "plan": {
+      "title": "Tervezze meg a kibocsátást",
+      "description": "Adja meg, hány tételt tölt fel, és milyen fájlokból állnak.",
+      "itemsLabel": "Hány tétel?",
+      "uploadingLabel": "Mit tölt fel?",
+      "knowExactSize": "Ismeri a pontos méretet?",
+      "totalUploadSize": "Teljes feltöltési méret",
+      "usePreset": "Inkább használjon előre beállított értéket",
+      "combinedSize": "Az összes tétel összes fájljának együttes mérete.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB darabonként"
+        },
+        "iphone": {
+          "label": "Fotó",
+          "hint": "3 MB darabonként"
+        },
+        "dslr": {
+          "label": "Stúdiófotó",
+          "hint": "20 MB darabonként"
+        },
+        "video": {
+          "label": "Rövid videó",
+          "hint": "1 GB darabonként"
+        },
+        "video1hr": {
+          "label": "Hosszú videó",
+          "hint": "60 GB darabonként"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Élő becslés",
+      "titleRefreshing": "Becslés frissítése",
+      "description": "Automatikusan frissül, ahogy Ön módosítja a beállításokat.",
+      "ogyEquivalent": "OGY egyenérték",
+      "ogySpotRate": "OGY azonnali árfolyam",
+      "itemSingular": "Tétel",
+      "itemPlural": "Tétel",
+      "upload": "Feltöltés"
+    },
+    "breakdown": {
+      "title": "Költségbontás",
+      "baseFee": "Alap kibocsátási díj",
+      "storageFee": "Tárolási díj",
+      "items": "Tételek",
+      "uploadSize": "Feltöltési méret"
+    },
+    "bytesUnit": "bájt"
   }
 }

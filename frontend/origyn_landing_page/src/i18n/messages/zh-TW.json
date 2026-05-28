@@ -870,5 +870,61 @@
       "support": "此模型旨在支持協定的長期可持續性，並與代幣持有人的長期利益保持一致。",
       "cta": "代幣經濟學"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "費用計算器",
+      "description": "使用 ORIGYN 計算器，估算將您所有資料上鏈所生成之唯一認證書的費用"
+    },
+    "plan": {
+      "title": "規劃您的鑄造方案",
+      "description": "請告知項目數量及上傳內容類型。",
+      "itemsLabel": "項目數量為何？",
+      "uploadingLabel": "您打算上傳何種內容？",
+      "knowExactSize": "已知確切大小？",
+      "totalUploadSize": "上傳總容量",
+      "usePreset": "改用預設選項",
+      "combinedSize": "所有項目中每個檔案的合計容量。",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "每份 250 KB"
+        },
+        "iphone": {
+          "label": "相片",
+          "hint": "每張 3 MB"
+        },
+        "dslr": {
+          "label": "專業攝影照片",
+          "hint": "每張 20 MB"
+        },
+        "video": {
+          "label": "短片",
+          "hint": "每支 1 GB"
+        },
+        "video1hr": {
+          "label": "長片",
+          "hint": "每支 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "即時估算",
+      "titleRefreshing": "更新估算中",
+      "description": "隨您調整設定自動更新。",
+      "ogyEquivalent": "OGY 等值金額",
+      "ogySpotRate": "OGY 即時匯率",
+      "itemSingular": "項目",
+      "itemPlural": "項目",
+      "upload": "上傳"
+    },
+    "breakdown": {
+      "title": "費用明細",
+      "baseFee": "基本鑄造費",
+      "storageFee": "儲存費",
+      "items": "項目",
+      "uploadSize": "上傳容量"
+    },
+    "bytesUnit": "位元組"
   }
 }

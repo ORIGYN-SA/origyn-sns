@@ -45,10 +45,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 16px;
+  // Use a logical property so the gap stays on the button's outer edge in RTL.
+  margin-inline-end: 16px;
 
   @media (max-width: $bp-md) {
     width: 24px;
     height: 24px;
+  }
+
+  // The arrow glyph is direction-aware: it points outward (up-right in LTR,
+  // up-left in RTL). Flip horizontally when the document is RTL.
+  :global([dir="rtl"]) & svg {
+    transform: scaleX(-1);
   }
 }

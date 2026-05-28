@@ -870,5 +870,61 @@
       "support": "Il modello è progettato per supportare la sostenibilità a lungo termine del protocollo e l'allineamento degli interessi dei detentori di token.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Calcolatore dei costi",
+      "description": "Utilizzi il calcolatore ORIGYN per stimare il costo del Suo certificato unico con tutti i dati on-chain"
+    },
+    "plan": {
+      "title": "Pianifichi il minting",
+      "description": "Ci indichi quanti elementi intende caricare e di che tipo.",
+      "itemsLabel": "Quanti elementi?",
+      "uploadingLabel": "Cosa sta caricando?",
+      "knowExactSize": "Conosce la dimensione esatta?",
+      "totalUploadSize": "Dimensione totale del caricamento",
+      "usePreset": "Utilizzi un preset",
+      "combinedSize": "Dimensione combinata di tutti i file per tutti gli elementi.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB ciascuno"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB ciascuna"
+        },
+        "dslr": {
+          "label": "Foto in studio",
+          "hint": "20 MB ciascuna"
+        },
+        "video": {
+          "label": "Video breve",
+          "hint": "1 GB ciascuno"
+        },
+        "video1hr": {
+          "label": "Video lungo",
+          "hint": "60 GB ciascuno"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Stima in tempo reale",
+      "titleRefreshing": "Aggiornamento stima",
+      "description": "Si aggiorna automaticamente al variare della configurazione.",
+      "ogyEquivalent": "Equivalente OGY",
+      "ogySpotRate": "Prezzo spot OGY",
+      "itemSingular": "Elemento",
+      "itemPlural": "Elementi",
+      "upload": "Caricamento"
+    },
+    "breakdown": {
+      "title": "Dettaglio dei costi",
+      "baseFee": "Commissione base di minting",
+      "storageFee": "Commissione di archiviazione",
+      "items": "Elementi",
+      "uploadSize": "Dimensione caricamento"
+    },
+    "bytesUnit": "byte"
   }
 }

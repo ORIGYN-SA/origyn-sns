@@ -870,5 +870,61 @@
       "support": "该模型旨在支持协议的长期可持续性并实现代币持有者的利益对齐。",
       "cta": "代币经济学"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "费用计算器",
+      "description": "使用 ORIGYN 计算器估算将您的所有数据完全上链后，生成唯一证书所需的费用"
+    },
+    "plan": {
+      "title": "规划您的铸造方案",
+      "description": "请告知我们您的资产数量及上传内容类型。",
+      "itemsLabel": "资产数量是多少？",
+      "uploadingLabel": "您将上传哪类内容？",
+      "knowExactSize": "已知确切文件大小？",
+      "totalUploadSize": "上传总大小",
+      "usePreset": "改用预设选项",
+      "combinedSize": "所有资产中每个文件的合计大小。",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "每份 250 KB"
+        },
+        "iphone": {
+          "label": "照片",
+          "hint": "每张 3 MB"
+        },
+        "dslr": {
+          "label": "专业照片",
+          "hint": "每张 20 MB"
+        },
+        "video": {
+          "label": "短视频",
+          "hint": "每段 1 GB"
+        },
+        "video1hr": {
+          "label": "长视频",
+          "hint": "每段 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "实时估算",
+      "titleRefreshing": "正在刷新估算",
+      "description": "随您调整配置自动更新。",
+      "ogyEquivalent": "OGY 等值",
+      "ogySpotRate": "OGY 即期汇率",
+      "itemSingular": "项",
+      "itemPlural": "项",
+      "upload": "上传"
+    },
+    "breakdown": {
+      "title": "费用明细",
+      "baseFee": "基础铸造费",
+      "storageFee": "存储费",
+      "items": "资产数量",
+      "uploadSize": "上传大小"
+    },
+    "bytesUnit": "字节"
   }
 }

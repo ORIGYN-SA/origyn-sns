@@ -870,5 +870,61 @@
       "support": "このモデルは、プロトコルの長期的な持続可能性とトークン保有者との整合性をサポートするよう設計されています。",
       "cta": "トークノミクス"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "コスト計算ツール",
+      "description": "ORIGYN の計算ツールを使用して、すべてのデータをオンチェーンに保存した独自の証明書の発行コストを見積もります。"
+    },
+    "plan": {
+      "title": "発行内容を計画する",
+      "description": "アイテム数とアップロードするデータの種類をご入力ください。",
+      "itemsLabel": "アイテム数は？",
+      "uploadingLabel": "アップロードするデータの種類は？",
+      "knowExactSize": "正確なサイズをご存知ですか？",
+      "totalUploadSize": "アップロード合計サイズ",
+      "usePreset": "プリセットを使用する",
+      "combinedSize": "すべてのアイテムにわたる全ファイルの合計サイズ。",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB／件"
+        },
+        "iphone": {
+          "label": "写真",
+          "hint": "3 MB／件"
+        },
+        "dslr": {
+          "label": "スタジオ写真",
+          "hint": "20 MB／件"
+        },
+        "video": {
+          "label": "ショート動画",
+          "hint": "1 GB／件"
+        },
+        "video1hr": {
+          "label": "ロング動画",
+          "hint": "60 GB／件"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "リアルタイム見積もり",
+      "titleRefreshing": "見積もりを更新中",
+      "description": "設定を変更すると自動的に更新されます。",
+      "ogyEquivalent": "OGY 換算額",
+      "ogySpotRate": "OGY スポットレート",
+      "itemSingular": "アイテム",
+      "itemPlural": "アイテム",
+      "upload": "アップロード"
+    },
+    "breakdown": {
+      "title": "コスト内訳",
+      "baseFee": "基本発行手数料",
+      "storageFee": "ストレージ手数料",
+      "items": "アイテム数",
+      "uploadSize": "アップロードサイズ"
+    },
+    "bytesUnit": "バイト"
   }
 }

@@ -870,5 +870,61 @@
       "support": "El modelo está diseñado para respaldar la sostenibilidad a largo plazo del protocolo y la alineación con los titulares del token.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculadora de costes",
+      "description": "Utilice la calculadora de ORIGYN para estimar el coste de su certificado único con todos sus datos en la cadena"
+    },
+    "plan": {
+      "title": "Planifique su acuñación",
+      "description": "Indíquenos cuántos elementos va a subir y de qué tipo.",
+      "itemsLabel": "¿Cuántos elementos?",
+      "uploadingLabel": "¿Qué está subiendo?",
+      "knowExactSize": "¿Conoce el tamaño exacto?",
+      "totalUploadSize": "Tamaño total de subida",
+      "usePreset": "Usar una plantilla predefinida",
+      "combinedSize": "Tamaño combinado de todos los archivos de todos los elementos.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB cada uno"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB cada una"
+        },
+        "dslr": {
+          "label": "Foto de estudio",
+          "hint": "20 MB cada una"
+        },
+        "video": {
+          "label": "Vídeo corto",
+          "hint": "1 GB cada uno"
+        },
+        "video1hr": {
+          "label": "Vídeo largo",
+          "hint": "60 GB cada uno"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimación en tiempo real",
+      "titleRefreshing": "Actualizando estimación",
+      "description": "Se actualiza automáticamente al modificar su configuración.",
+      "ogyEquivalent": "Equivalente en OGY",
+      "ogySpotRate": "Precio al contado de OGY",
+      "itemSingular": "Elemento",
+      "itemPlural": "Elementos",
+      "upload": "Subida"
+    },
+    "breakdown": {
+      "title": "Desglose de costes",
+      "baseFee": "Tarifa base de acuñación",
+      "storageFee": "Tarifa de almacenamiento",
+      "items": "Elementos",
+      "uploadSize": "Tamaño de subida"
+    },
+    "bytesUnit": "bytes"
   }
 }

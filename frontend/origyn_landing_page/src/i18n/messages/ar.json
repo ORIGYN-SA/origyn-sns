@@ -498,7 +498,7 @@
       "label": "الشركاء",
       "testimonials": [
         {
-          "title": "CEO of Metalor",
+          "title": "الرئيس التنفيذي لشركة Metalor",
           "description": "\"ORIGYN هي تقنية التصديق الرقمي الأكثر تقدما وشمولا في العالم. يتم تخزين جميع البيانات بالكامل على blockchain لضمان أن تكون الشهادات غير قابلة للتغيير وشفافة. يسر Metalor العمل مع شركة Fintech مقرها Neuchâtel مثل ORIGYN لتقديم حل مبتكر إلى الأسواق.\""
         },
         {
@@ -870,5 +870,61 @@
       "support": "صُمّم النموذج لدعم استدامة البروتوكول على المدى البعيد وتوافق حاملي الرمز.",
       "cta": "اقتصاد الرمز"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "حاسبة التكلفة",
+      "description": "استخدم حاسبة ORIGYN لتقدير تكلفة شهادتك الفريدة مع جميع بياناتك على السلسلة"
+    },
+    "plan": {
+      "title": "خطّط لعملية السكّ",
+      "description": "أخبرنا بعدد العناصر وما تنوي رفعه.",
+      "itemsLabel": "كم عدد العناصر؟",
+      "uploadingLabel": "ما الذي تقوم برفعه؟",
+      "knowExactSize": "هل تعرف الحجم الدقيق؟",
+      "totalUploadSize": "إجمالي حجم الرفع",
+      "usePreset": "استخدم إعدادًا مسبقًا عوضًا عن ذلك",
+      "combinedSize": "الحجم الإجمالي لجميع الملفات عبر كافة العناصر.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB لكل عنصر"
+        },
+        "iphone": {
+          "label": "صورة",
+          "hint": "3 MB لكل عنصر"
+        },
+        "dslr": {
+          "label": "صورة استوديو",
+          "hint": "20 MB لكل عنصر"
+        },
+        "video": {
+          "label": "مقطع فيديو قصير",
+          "hint": "1 GB لكل عنصر"
+        },
+        "video1hr": {
+          "label": "مقطع فيديو طويل",
+          "hint": "60 GB لكل عنصر"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "تقدير فوري",
+      "titleRefreshing": "جارٍ تحديث التقدير",
+      "description": "يتحدث تلقائيًا عند تغيير إعداداتك.",
+      "ogyEquivalent": "ما يعادله بـ OGY",
+      "ogySpotRate": "سعر OGY الفوري",
+      "itemSingular": "عنصر",
+      "itemPlural": "عناصر",
+      "upload": "رفع"
+    },
+    "breakdown": {
+      "title": "تفصيل التكلفة",
+      "baseFee": "رسوم السكّ الأساسية",
+      "storageFee": "رسوم التخزين",
+      "items": "العناصر",
+      "uploadSize": "حجم الرفع"
+    },
+    "bytesUnit": "بايت"
   }
 }

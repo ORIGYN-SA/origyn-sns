@@ -870,5 +870,61 @@
       "support": "Le modèle est conçu pour soutenir la durabilité à long terme du protocole et l'alignement des détenteurs de tokens.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculateur de coûts",
+      "description": "Utilisez le calculateur ORIGYN pour estimer le coût de votre certificat unique avec l'ensemble de vos données entièrement on-chain."
+    },
+    "plan": {
+      "title": "Planifiez votre mint",
+      "description": "Indiquez-nous le nombre d'éléments et ce que vous téléversez.",
+      "itemsLabel": "Combien d'éléments ?",
+      "uploadingLabel": "Que téléversez-vous ?",
+      "knowExactSize": "Vous connaissez la taille exacte ?",
+      "totalUploadSize": "Taille totale du téléversement",
+      "usePreset": "Utiliser un préréglage",
+      "combinedSize": "Taille cumulée de tous les fichiers pour l'ensemble des éléments.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB chacun"
+        },
+        "iphone": {
+          "label": "Photo",
+          "hint": "3 MB chacune"
+        },
+        "dslr": {
+          "label": "Photo studio",
+          "hint": "20 MB chacune"
+        },
+        "video": {
+          "label": "Vidéo courte",
+          "hint": "1 GB chacune"
+        },
+        "video1hr": {
+          "label": "Vidéo longue",
+          "hint": "60 GB chacune"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimation en direct",
+      "titleRefreshing": "Actualisation de l'estimation",
+      "description": "Se met à jour automatiquement à mesure que vous modifiez votre configuration.",
+      "ogyEquivalent": "Équivalent OGY",
+      "ogySpotRate": "Cours spot OGY",
+      "itemSingular": "Élément",
+      "itemPlural": "Éléments",
+      "upload": "Téléversement"
+    },
+    "breakdown": {
+      "title": "Détail des coûts",
+      "baseFee": "Frais de mint de base",
+      "storageFee": "Frais de stockage",
+      "items": "Éléments",
+      "uploadSize": "Taille du téléversement"
+    },
+    "bytesUnit": "octets"
   }
 }

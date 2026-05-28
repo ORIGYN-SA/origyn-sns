@@ -870,5 +870,61 @@
       "support": "Mfano umeundwa kusaidia uendelevu wa muda mrefu wa itifaki na muafaka wa wamiliki wa tokeni.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kikokotoo cha gharama",
+      "description": "Tumia kikokotoo cha ORIGYN kukisia gharama ya cheti chako cha kipekee chenye data yako yote kwenye mnyororo"
+    },
+    "plan": {
+      "title": "Panga utengenezaji wako",
+      "description": "Tuambie idadi ya vitu na unachopakia.",
+      "itemsLabel": "Vitu vingapi?",
+      "uploadingLabel": "Unapakia nini?",
+      "knowExactSize": "Unajua ukubwa halisi?",
+      "totalUploadSize": "Jumla ya ukubwa wa upakiaji",
+      "usePreset": "Tumia mpangilio uliowekwa tayari",
+      "combinedSize": "Ukubwa wa jumla wa kila faili katika vitu vyote.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB kila moja"
+        },
+        "iphone": {
+          "label": "Picha",
+          "hint": "3 MB kila moja"
+        },
+        "dslr": {
+          "label": "Picha ya studio",
+          "hint": "20 MB kila moja"
+        },
+        "video": {
+          "label": "Video fupi",
+          "hint": "1 GB kila moja"
+        },
+        "video1hr": {
+          "label": "Video ndefu",
+          "hint": "60 GB kila moja"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Tathmini ya wakati halisi",
+      "titleRefreshing": "Inasasisha tathmini",
+      "description": "Inasasishwa kiotomatiki unapobadilisha mipangilio yako.",
+      "ogyEquivalent": "Sawa na OGY",
+      "ogySpotRate": "Bei ya OGY ya sasa",
+      "itemSingular": "Kitu",
+      "itemPlural": "Vitu",
+      "upload": "Upakiaji"
+    },
+    "breakdown": {
+      "title": "Muhtasari wa gharama",
+      "baseFee": "Ada ya msingi ya utengenezaji",
+      "storageFee": "Ada ya uhifadhi",
+      "items": "Vitu",
+      "uploadSize": "Ukubwa wa upakiaji"
+    },
+    "bytesUnit": "baiti"
   }
 }

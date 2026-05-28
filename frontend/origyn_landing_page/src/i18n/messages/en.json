@@ -1,4 +1,45 @@
 {
+  "calculator": {
+    "header": {
+      "title": "Cost calculator",
+      "description": "Use the ORIGYN calculator to estimate the cost of your unique certificate with all your data on chain"
+    },
+    "plan": {
+      "title": "Plan your mint",
+      "description": "Tell us how many items and what you're uploading.",
+      "itemsLabel": "How many items?",
+      "uploadingLabel": "What are you uploading?",
+      "knowExactSize": "Know the exact size?",
+      "totalUploadSize": "Total upload size",
+      "usePreset": "Use a preset instead",
+      "combinedSize": "Combined size of every file across all items.",
+      "qualityOptions": {
+        "pdf": { "label": "PDF", "hint": "250 KB each" },
+        "iphone": { "label": "Photo", "hint": "3 MB each" },
+        "dslr": { "label": "Studio photo", "hint": "20 MB each" },
+        "video": { "label": "Short video", "hint": "1 GB each" },
+        "video1hr": { "label": "Long video", "hint": "60 GB each" }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live estimate",
+      "titleRefreshing": "Refreshing estimate",
+      "description": "Updates automatically as you change your setup.",
+      "ogyEquivalent": "OGY equivalent",
+      "ogySpotRate": "OGY spot rate",
+      "itemSingular": "Item",
+      "itemPlural": "Items",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Cost breakdown",
+      "baseFee": "Base mint fee",
+      "storageFee": "Storage fee",
+      "items": "Items",
+      "uploadSize": "Upload size"
+    },
+    "bytesUnit": "bytes"
+  },
   "nav": {
     "token": "TOKEN",
     "ai": "AI",

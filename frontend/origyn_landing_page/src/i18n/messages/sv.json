@@ -870,5 +870,61 @@
       "support": "Modellen är utformad för att stödja långsiktig protokollhållbarhet och anpassning för tokeninnehavare.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostnadskalkylator",
+      "description": "Använd ORIGYN-kalkylatorn för att uppskatta kostnaden för ditt unika certifikat med samtliga data lagrade on-chain"
+    },
+    "plan": {
+      "title": "Planera din prägel",
+      "description": "Ange hur många objekt du har och vad du laddar upp.",
+      "itemsLabel": "Hur många objekt?",
+      "uploadingLabel": "Vad laddar du upp?",
+      "knowExactSize": "Känner du till den exakta storleken?",
+      "totalUploadSize": "Total uppladdningsstorlek",
+      "usePreset": "Använd en förinställning i stället",
+      "combinedSize": "Kombinerad storlek för samtliga filer över alla objekt.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB styck"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB styck"
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB styck"
+        },
+        "video": {
+          "label": "Kort video",
+          "hint": "1 GB styck"
+        },
+        "video1hr": {
+          "label": "Lång video",
+          "hint": "60 GB styck"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Aktuell uppskattning",
+      "titleRefreshing": "Uppdaterar uppskattning",
+      "description": "Uppdateras automatiskt när du ändrar dina inställningar.",
+      "ogyEquivalent": "OGY-motsvarighet",
+      "ogySpotRate": "OGY-spotkurs",
+      "itemSingular": "Objekt",
+      "itemPlural": "Objekt",
+      "upload": "Uppladdning"
+    },
+    "breakdown": {
+      "title": "Kostnadsspecifikation",
+      "baseFee": "Grundavgift för prägel",
+      "storageFee": "Lagringsavgift",
+      "items": "Objekt",
+      "uploadSize": "Uppladdningsstorlek"
+    },
+    "bytesUnit": "byte"
   }
 }

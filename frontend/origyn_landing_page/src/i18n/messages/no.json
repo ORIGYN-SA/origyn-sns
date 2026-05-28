@@ -870,5 +870,61 @@
       "support": "Modellen er utformet for å støtte langsiktig protokollbærekraft og tilpasning for tokenhavere.",
       "cta": "TOKENOMICS"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostnadskalkulator",
+      "description": "Bruk ORIGYN-kalkulatoren til å estimere kostnaden for ditt unike sertifikat med alle dataene dine on-chain"
+    },
+    "plan": {
+      "title": "Planlegg pregingen",
+      "description": "Fortell oss hvor mange elementer du har og hva du laster opp.",
+      "itemsLabel": "Hvor mange elementer?",
+      "uploadingLabel": "Hva laster du opp?",
+      "knowExactSize": "Kjenner du den eksakte størrelsen?",
+      "totalUploadSize": "Total opplastingsstørrelse",
+      "usePreset": "Bruk en forhåndsinnstilling i stedet",
+      "combinedSize": "Samlet størrelse på alle filer på tvers av samtlige elementer.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per stykk"
+        },
+        "iphone": {
+          "label": "Bilde",
+          "hint": "3 MB per stykk"
+        },
+        "dslr": {
+          "label": "Studiobilde",
+          "hint": "20 MB per stykk"
+        },
+        "video": {
+          "label": "Kort video",
+          "hint": "1 GB per stykk"
+        },
+        "video1hr": {
+          "label": "Lang video",
+          "hint": "60 GB per stykk"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Direkteestimat",
+      "titleRefreshing": "Oppdaterer estimat",
+      "description": "Oppdateres automatisk når du endrer oppsettet ditt.",
+      "ogyEquivalent": "OGY-ekvivalent",
+      "ogySpotRate": "OGY spotkurs",
+      "itemSingular": "Element",
+      "itemPlural": "Elementer",
+      "upload": "Opplasting"
+    },
+    "breakdown": {
+      "title": "Kostnadsfordeling",
+      "baseFee": "Grunnleggende pregingsgebyr",
+      "storageFee": "Lagringsgebyr",
+      "items": "Elementer",
+      "uploadSize": "Opplastingsstørrelse"
+    },
+    "bytesUnit": "byte"
   }
 }

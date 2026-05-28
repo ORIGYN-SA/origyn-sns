@@ -870,5 +870,61 @@
       "support": "Model je navržen tak, aby podporoval dlouhodobou udržitelnost protokolu a sladění s držiteli tokenů.",
       "cta": "TOKENOMIKA"
     }
+  },
+  "calculator": {
+    "header": {
+      "title": "Cenová kalkulačka",
+      "description": "Použijte kalkulačku ORIGYN k odhadu nákladů na Váš jedinečný certifikát se všemi daty on-chain"
+    },
+    "plan": {
+      "title": "Naplánujte si vydání certifikátu",
+      "description": "Sdělte nám, kolik položek máte a co nahráváte.",
+      "itemsLabel": "Kolik položek?",
+      "uploadingLabel": "Co nahráváte?",
+      "knowExactSize": "Znáte přesnou velikost?",
+      "totalUploadSize": "Celková velikost nahrávání",
+      "usePreset": "Použít přednastavenou hodnotu",
+      "combinedSize": "Kombinovaná velikost všech souborů napříč všemi položkami.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB každý"
+        },
+        "iphone": {
+          "label": "Fotografie",
+          "hint": "3 MB každá"
+        },
+        "dslr": {
+          "label": "Studiová fotografie",
+          "hint": "20 MB každá"
+        },
+        "video": {
+          "label": "Krátké video",
+          "hint": "1 GB každé"
+        },
+        "video1hr": {
+          "label": "Dlouhé video",
+          "hint": "60 GB každé"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Průběžný odhad",
+      "titleRefreshing": "Aktualizace odhadu",
+      "description": "Aktualizuje se automaticky při změně nastavení.",
+      "ogyEquivalent": "Ekvivalent v OGY",
+      "ogySpotRate": "Aktuální kurz OGY",
+      "itemSingular": "Položka",
+      "itemPlural": "Položky",
+      "upload": "Nahrávání"
+    },
+    "breakdown": {
+      "title": "Rozpis nákladů",
+      "baseFee": "Základní poplatek za vydání",
+      "storageFee": "Poplatek za úložiště",
+      "items": "Položky",
+      "uploadSize": "Velikost nahrávání"
+    },
+    "bytesUnit": "bajtů"
   }
 }
