@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "แผนงาน",
-      "description": "ตั้งแต่ยูทิลิตีใหม่และฟีเจอร์การกำกับดูแล ไปจนถึงการสนับสนุนที่ขยายออกสำหรับอุตสาหกรรมและนักพัฒนา ทุกหมุดหมายสะท้อนพันธกิจของเราในการนำสินทรัพย์โลกแห่งความเป็นจริงขึ้นสู่บนเชนอย่างสมบูรณ์ผ่านโครงสร้างพื้นฐานที่ปรับขนาดได้ ตรวจสอบได้ และกระจายอำนาจ"
+      "description": "ตั้งแต่ยูทิลิตีใหม่และฟีเจอร์การกำกับดูแล ไปจนถึงการสนับสนุนที่ขยายออกสำหรับอุตสาหกรรมและนักพัฒนา ทุกหมุดหมายสะท้อนพันธกิจของเราในการนำสินทรัพย์โลกแห่งความเป็นจริงขึ้นสู่บนเชนอย่างสมบูรณ์ผ่านโครงสร้างพื้นฐานที่ปรับขนาดได้ ตรวจสอบได้ และกระจายอำนาจ",
+      "items": [
+        {
+          "title": "ORIGYN Foundation ได้รับเงินทุน",
+          "description": "ORIGYN Foundation ก่อตั้งขึ้นที่ Neuchâtel ประเทศสวิตเซอร์แลนด์ เพื่อเริ่มพัฒนา ORIGYN Protocol"
+        },
+        {
+          "title": "OGY Token Launch",
+          "description": "Native utility token $OGY ถูกสร้างขึ้นเพื่อขับเคลื่อน protocol fees, governance และ staking"
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "เปิดตัวเวอร์ชันแรกของ NFT standard ของ ORIGYN ที่รองรับ on-chain certification"
+        },
+        {
+          "title": "Tokenomics 2.0 Update",
+          "description": "มีการ burn โทเคน $OGY จำนวน 200 million ที่เคย allocated ให้ Foundation ซึ่งเริ่มสร้างแรงกดดันแบบ deflationary"
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "เปิดตัว on-chain minting interface แรกสำหรับ digital certificates"
+        },
+        {
+          "title": "Strategic Partnerships",
+          "description": "ความร่วมมือเชิงกลยุทธ์กับ FederItaly และ METALOR เพื่อ certify products made in Italy และ tokenized gold"
+        },
+        {
+          "title": "First Gold Purchase",
+          "description": "ซื้อ physical gold จำนวน 3 kg และ tokenized โดยใช้ ORIGYN Protocol"
+        },
+        {
+          "title": "Acquisition of CanDB",
+          "description": "ORIGYN เข้าซื้อ CanDB ซึ่งเป็น decentralized, scalable database solution ที่ optimized สำหรับ NFT metadata"
+        },
+        {
+          "title": "Tokenomics 3.0 and Dashboard Launch",
+          "description": "มีการ introduce deflationary model ผ่าน Tokenomics 3.0 และ release เวอร์ชันแรกของ ORIGYN Dashboard"
+        },
+        {
+          "title": "10,000 Protocol Users",
+          "description": "ORIGYN มี unique protocol users เกิน 10,000 ราย"
+        },
+        {
+          "title": "Launch of Gold DAO",
+          "description": "Gold DAO กลายเป็น DAO แรกที่ built on ORIGYN เพื่อ tokenize และ certify physical gold on-chain"
+        },
+        {
+          "title": "500M OGY Donation to Gold DAO",
+          "description": "มีการ donate โทเคน $OGY จำนวน half a billion เพื่อ support long-term treasury ของ Gold DAO"
+        },
+        {
+          "title": "ORIGYN DAO Integrated with ICP SNS",
+          "description": "ORIGYN DAO กลายเป็นระบบที่ decentralized อย่างสมบูรณ์และ governed บน SNS framework ของ Internet Computer"
+        },
+        {
+          "title": "Dashboard V2 Release",
+          "description": "Dashboard เวอร์ชันใหม่มี live metrics, staking stats และ governance tools"
+        },
+        {
+          "title": "30,000 Users Milestone",
+          "description": "ORIGYN เติบโตเกิน 30,000 users เพิ่มขึ้น 300% ภายในหกเดือน"
+        },
+        {
+          "title": "Collaboration with Leo Caillard and Gil Sertissage",
+          "description": "ORIGYN certify physical artworks และ diamonds ผ่าน partnerships ระดับสูง"
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard ได้รับการ upgrade เพื่อ enable secure certificate transferability"
+        },
+        {
+          "title": "Integrator Framework Launched",
+          "description": "มีการสร้าง rules และ onboarding structure เพื่อ guide partners ใหม่ที่ integrate กับ ORIGYN"
+        },
+        {
+          "title": "Launch of Cecil DAO",
+          "description": "ORIGYN สนับสนุนการ launch Cecil DAO เพื่อ fund conservation และ humanitarian projects โดยใช้ blockchain transparency"
+        },
+        {
+          "title": "Acquisition of ClaimLink",
+          "description": "ORIGYN เข้าซื้อ ClaimLink ซึ่งเป็น decentralized NFT และ token distribution platform ที่ built on ICP"
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "มีการ introduce standard ใหม่เพื่อเพิ่ม certificate interoperability และ utility ทั่วทั้ง ecosystem"
+        },
+        {
+          "title": "Launch of a Public",
+          "titleSpan": "Minting Studio",
+          "description": "เปิดตัว self-service tool ที่ให้ทุกคน mint on-chain certificates ของ RWA บน ORIGYN infrastructure ได้"
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "ความลึกลับของ Runestone จะถูกเปิดเผยใน Q2 2026 ที่ Geneva"
+        },
+        {
+          "title": "Minting Lab",
+          "description": "เปิดตัว self-service tool ที่ให้ทุกคน mint on-chain โดยใช้ ORIGYN infrastructure ได้"
+        },
+        {
+          "title": "IP Protection Implementation",
+          "description": "Support สำหรับ on-chain certification ของ intellectual property rights ถูก integrate เข้ากับ protocol"
+        },
+        {
+          "title": "Cross-Chain Implementation",
+          "description": "Cross-chain compatibility ขยาย reach ของ ORIGYN ไปยัง major ecosystems อื่น ๆ"
+        },
+        {
+          "title": "Global Wallet and Marketplace Integration",
+          "description": "ORIGYN NFTs สามารถเข้าถึงได้ผ่าน leading wallets และ NFT marketplaces ทั่วโลก"
+        },
+        {
+          "title": "Becoming the Universal Certification Standard",
+          "description": "ORIGYN ตั้งเป้าที่จะสร้างตนเองเป็น global benchmark สำหรับ digital certification ในทุก asset classes"
+        }
+      ]
     },
     "partners": {
-      "label": "พันธมิตร"
+      "label": "พันธมิตร",
+      "testimonials": [
+        {
+          "title": "CEO ของ Metalor",
+          "description": "\"ORIGYN เป็นเทคโนโลยีการรับรองดิจิทัลที่ก้าวหน้าที่สุดและครอบคลุมที่สุดในโลก ข้อมูลทั้งหมดถูกจัดเก็บอย่างสมบูรณ์บน blockchain เพื่อให้มั่นใจว่า certificates ไม่สามารถแก้ไขได้และโปร่งใส Metalor ยินดีที่ได้ร่วมงานกับบริษัท fintech ที่ตั้งอยู่ใน Neuchâtel อย่าง ORIGYN เพื่อนำโซลูชันที่เป็นนวัตกรรมสู่ตลาด\""
+        },
+        {
+          "title": "ผู้เชี่ยวชาญด้านศิลปะ",
+          "description": "\"สำหรับ private collectors ของฉัน ความไว้วางใจและมรดกคือทุกสิ่ง เทคโนโลยีการรับรองของ ORIGYN กลายเป็นสิ่งจำเป็น ไม่เพียงแต่รับประกัน authenticity ของงานศิลปะแต่ละชิ้นเท่านั้น แต่ยังรับรอง traceability และ value ข้ามรุ่นอีกด้วย นี่ไม่ใช่เพียงเรื่องของการเป็นเจ้าของงานศิลปะอีกต่อไป แต่เป็นการรักษาเรื่องราวของมันไว้ on-chain ตลอดไป ORIGYN ทำให้สิ่งนี้เป็นไปได้\""
+        },
+        {
+          "title": "Co-Founder ของ Cyber",
+          "description": "\"เรามักพูดเสมอว่า diamonds จะคงอยู่ตลอดไป ซึ่งเป็นความจริง ดังนั้นข้อมูลที่คุณให้ก็ต้องถูกคิดในแบบเดียวกัน เพราะในอีก 100 ปี หรือ 200 ปี diamonds เหล่านั้นก็ยังคงอยู่ เราจึงต้องการ technology ที่ทำให้มั่นใจว่าเราจะยังสามารถให้ข้อมูลนั้นได้ โดยเฉพาะกับ product ที่มี value สูงและส่งต่อข้าม generations... เหตุผลหลักที่เราเป็น partnership กับ ORIGYN คือพวกเขาสามารถมอบสิ่งเหล่านี้ทั้งหมดได้\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "เป็นส่วนหนึ่งของ",

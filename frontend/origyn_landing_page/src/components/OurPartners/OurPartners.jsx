@@ -6,9 +6,13 @@ import { useT } from "@/i18n/LocaleContext";
 
 const OurPartners = ({ id }) => {
   const t = useT();
+  const testimonialCopy = t.raw("home.partners.testimonials") ?? [];
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const currentTestimonial = testimonials[currentTestimonialIndex];
+  const currentTestimonial = {
+    ...testimonials[currentTestimonialIndex],
+    ...(testimonialCopy[currentTestimonialIndex] ?? {}),
+  };
   const intervalRef = useRef(null);
   const imagesRef = useRef({});
   const touchStartX = useRef(null);

@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "रोडमैप",
-      "description": "नई उपयोगिताओं और अभिशासन सुविधाओं से लेकर उद्योगों और डेवलपर्स के लिए विस्तारित समर्थन तक — प्रत्येक मील का पत्थर हमारे उस मिशन को दर्शाता है जो वास्तविक-विश्व की संपत्तियों को स्केलेबल, सत्यापन योग्य और विकेंद्रीकृत अवसंरचना के माध्यम से पूरी तरह ऑन-चेन लाने की ओर है।"
+      "description": "नई उपयोगिताओं और अभिशासन सुविधाओं से लेकर उद्योगों और डेवलपर्स के लिए विस्तारित समर्थन तक — प्रत्येक मील का पत्थर हमारे उस मिशन को दर्शाता है जो वास्तविक-विश्व की संपत्तियों को स्केलेबल, सत्यापन योग्य और विकेंद्रीकृत अवसंरचना के माध्यम से पूरी तरह ऑन-चेन लाने की ओर है।",
+      "items": [
+        {
+          "title": "ORIGYN Foundation को funding मिली",
+          "description": "ORIGYN Protocol का development शुरू करने के लिए ORIGYN Foundation की स्थापना Neuchâtel, Switzerland में की गई।"
+        },
+        {
+          "title": "OGY Token Launch",
+          "description": "Native utility token $OGY को protocol fees, governance और staking को power करने के लिए बनाया गया।"
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "On-chain certification सक्षम करने वाले ORIGYN के NFT standard का पहला version launch हुआ।"
+        },
+        {
+          "title": "Tokenomics 2.0 Update",
+          "description": "Foundation को पहले allocated 200 million $OGY tokens burn किए गए, जिससे deflationary pressure शुरू हुआ।"
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Digital certificates के लिए पहला on-chain minting interface launch हुआ।"
+        },
+        {
+          "title": "Strategic Partnerships",
+          "description": "Italian-made products और tokenized gold को certify करने के लिए FederItaly और METALOR के साथ strategic collaborations।"
+        },
+        {
+          "title": "First Gold Purchase",
+          "description": "3 kg physical gold खरीदा गया और ORIGYN Protocol का उपयोग करके tokenized किया गया।"
+        },
+        {
+          "title": "CanDB का Acquisition",
+          "description": "ORIGYN ने CanDB का acquisition किया, जो NFT metadata के लिए optimized decentralized, scalable database solution है।"
+        },
+        {
+          "title": "Tokenomics 3.0 और Dashboard Launch",
+          "description": "Tokenomics 3.0 के साथ deflationary model introduce किया गया और ORIGYN Dashboard का पहला version release हुआ।"
+        },
+        {
+          "title": "10,000 Protocol Users",
+          "description": "ORIGYN ने 10,000 unique protocol users को पार किया।"
+        },
+        {
+          "title": "Gold DAO Launch",
+          "description": "Gold DAO, ORIGYN पर बना पहला DAO बना जो physical gold को on-chain tokenize और certify करता है।"
+        },
+        {
+          "title": "Gold DAO को 500M OGY Donation",
+          "description": "Gold DAO की long-term treasury को support करने के लिए half a billion $OGY tokens donate किए गए।"
+        },
+        {
+          "title": "ORIGYN DAO ICP SNS के साथ Integrated",
+          "description": "ORIGYN DAO पूरी तरह decentralized हो गया और Internet Computer के SNS framework द्वारा governed हुआ।"
+        },
+        {
+          "title": "Dashboard V2 Release",
+          "description": "Dashboard के नए version में live metrics, staking stats और governance tools शामिल हैं।"
+        },
+        {
+          "title": "30,000 Users Milestone",
+          "description": "ORIGYN 30,000 से अधिक users तक बढ़ा, छह महीनों में 300% increase।"
+        },
+        {
+          "title": "Leo Caillard और Gil Sertissage के साथ Collaboration",
+          "description": "ORIGYN high-profile partnerships में physical artworks और diamonds को certify करता है।"
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard को certificates की secure transferability enable करने के लिए upgrade किया गया।"
+        },
+        {
+          "title": "Integrator Framework Launched",
+          "description": "ORIGYN के साथ integrate करने वाले नए partners को guide करने के लिए rules और onboarding structure बनाए गए।"
+        },
+        {
+          "title": "Cecil DAO Launch",
+          "description": "ORIGYN blockchain transparency का उपयोग करके conservation और humanitarian projects को fund करने के लिए Cecil DAO के launch का support करता है।"
+        },
+        {
+          "title": "ClaimLink का Acquisition",
+          "description": "ORIGYN ने ClaimLink का acquisition किया, जो ICP पर बना decentralized NFT और token distribution platform है।"
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Certificate interoperability और ecosystem-wide utility बढ़ाने के लिए नया standard introduce किया गया।"
+        },
+        {
+          "title": "Public",
+          "titleSpan": "Minting Studio का Launch",
+          "description": "एक self-service tool launch किया गया जो किसी को भी ORIGYN infrastructure पर RWA के on-chain certificates mint करने देता है।"
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone mystery Q2 2026 में Geneva में reveal होगी।"
+        },
+        {
+          "title": "Minting Lab",
+          "description": "एक self-service tool launch किया गया जो किसी को भी ORIGYN infrastructure का उपयोग करके on-chain mint करने देता है।"
+        },
+        {
+          "title": "IP Protection Implementation",
+          "description": "Intellectual property rights की on-chain certification के लिए support protocol में integrate किया गया।"
+        },
+        {
+          "title": "Cross-Chain Implementation",
+          "description": "Cross-chain compatibility ORIGYN की reach को अन्य major ecosystems तक expand करती है।"
+        },
+        {
+          "title": "Global Wallet और Marketplace Integration",
+          "description": "ORIGYN NFTs दुनिया भर के leading wallets और NFT marketplaces के माध्यम से accessible हो जाते हैं।"
+        },
+        {
+          "title": "Universal Certification Standard बनना",
+          "description": "ORIGYN सभी asset classes में digital certification के global benchmark के रूप में स्थापित होने का लक्ष्य रखता है।"
+        }
+      ]
     },
     "partners": {
-      "label": "साझेदार"
+      "label": "साझेदार",
+      "testimonials": [
+        {
+          "title": "Metalor के CEO",
+          "description": "\"ORIGYN दुनिया की सबसे उन्नत और सबसे व्यापक डिजिटल सर्टिफिकेशन तकनीक है। सभी डेटा पूरी तरह blockchain में संग्रहीत होता है, ताकि certificates अपरिवर्तनीय और पारदर्शी रहें। Metalor, ORIGYN जैसी Neuchâtel आधारित fintech कंपनी के साथ काम करके बाजारों में एक अभिनव समाधान लाने पर प्रसन्न है।\""
+        },
+        {
+          "title": "कला विशेषज्ञ",
+          "description": "\"मेरे निजी collectors के लिए, विश्वास और विरासत ही सब कुछ हैं। ORIGYN की certification technology आवश्यक बन गई है; यह न केवल हर artwork की authenticity की गारंटी देती है, बल्कि पीढ़ियों तक उसकी traceability और value भी सुनिश्चित करती है। अब बात केवल कला का एक piece रखने की नहीं है, बल्कि उसकी कहानी को on-chain हमेशा के लिए सुरक्षित करने की है। ORIGYN इसे संभव बनाता है।\""
+        },
+        {
+          "title": "Cyber के Co-Founder",
+          "description": "\"हम हमेशा कहते हैं कि diamonds हमेशा रहेंगे, और यह सच है। इसलिए आपके द्वारा दी जाने वाली जानकारी के बारे में भी इसी तरह सोचना होगा, क्योंकि 100 साल, 200 साल बाद भी वे diamonds मौजूद होंगे। इसलिए हमें ऐसी technology चाहिए थी जिससे हम यह सुनिश्चित कर सकें कि हम वह जानकारी तब भी दे सकें। खासकर ऐसे product के लिए जिसका value बहुत अधिक है और जो पीढ़ियों से गुजरता है... ORIGYN के साथ partnership करने का मुख्य कारण यह था कि वे यह सब प्रदान कर सकते थे।\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "इसका हिस्सा बनें",

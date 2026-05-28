@@ -6,7 +6,7 @@ import { useT } from "@/i18n/LocaleContext";
 
 const yearRange = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027];
 
-const DesktopCards = () => {
+const DesktopCards = ({ cards }) => {
   const roadmapWrapperRef = useRef(null);
   const primaryCardRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);
@@ -16,7 +16,7 @@ const DesktopCards = () => {
   const firstCardIndexByYear = {};
 
   // Build index of first cards by year
-  roadmapCards.forEach((card, idx) => {
+  cards.forEach((card, idx) => {
     if (card.year && firstCardIndexByYear[card.year] === undefined) {
       firstCardIndexByYear[card.year] = idx;
       if (!yearRefs.current[card.year]) {
@@ -187,7 +187,7 @@ const DesktopCards = () => {
       <div className={styles.roadmapContainer}>
         <div className={styles.roadmapCardsWrapper} ref={roadmapWrapperRef}>
           <div className={styles.roadmapTimeline}></div>
-          {roadmapCards.map((card, idx) => {
+          {cards.map((card, idx) => {
             const ref =
               firstCardIndexByYear[card.year] === idx
                 ? yearRefs.current[card.year]
@@ -254,7 +254,7 @@ const DesktopCards = () => {
   );
 };
 
-const MobileCards = () => {
+const MobileCards = ({ cards }) => {
   const roadmapWrapperRef = useRef(null);
   const yearIndicatorsRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(2025);
@@ -318,7 +318,7 @@ const MobileCards = () => {
       </div>
       <div className={styles.roadmapCardsWrapper} ref={roadmapWrapperRef}>
         <div className={styles.roadmapTimeline}></div>
-        {roadmapCards
+        {cards
           .filter((card) => card.year === currentYear)
           .map((card, idx) => {
             return <RoadmapCard key={idx} {...card} />;
@@ -373,6 +373,11 @@ const MobileCards = () => {
 const OurRoadmap = () => {
   const t = useT();
   const [isDesktop, setIsDesktop] = useState(false);
+  const roadmapCopy = t.raw("home.roadmap.items") ?? [];
+  const localizedCards = roadmapCards.map((card, index) => ({
+    ...card,
+    ...(roadmapCopy[index] ?? {}),
+  }));
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -391,7 +396,11 @@ const OurRoadmap = () => {
         <h2 className={styles.title}>{t("home.roadmap.title")}</h2>
         <p className={styles.description}>{t("home.roadmap.description")}</p>
       </div>
-      {isDesktop ? <DesktopCards /> : <MobileCards />}
+      {isDesktop ? (
+        <DesktopCards cards={localizedCards} />
+      ) : (
+        <MobileCards cards={localizedCards} />
+      )}
     </section>
   );
 };

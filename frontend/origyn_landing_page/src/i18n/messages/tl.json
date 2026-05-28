@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Roadmap",
-      "description": "Mula sa mga bagong utility at feature ng governance hanggang sa pinalawak na suporta para sa mga industriya at developer. Ang bawat milestone ay sumasalamin sa aming misyon na dalhin ang mga real-world asset nang ganap on-chain sa pamamagitan ng nasusukat, mabe-beripika, at desentralisadong imprastraktura."
+      "description": "Mula sa mga bagong utility at feature ng governance hanggang sa pinalawak na suporta para sa mga industriya at developer. Ang bawat milestone ay sumasalamin sa aming misyon na dalhin ang mga real-world asset nang ganap on-chain sa pamamagitan ng nasusukat, mabe-beripika, at desentralisadong imprastraktura.",
+      "items": [
+        {
+          "title": "Pinondohan ang ORIGYN Foundation",
+          "description": "Itinatag ang ORIGYN Foundation sa Neuchâtel, Switzerland upang simulan ang pag-develop ng ORIGYN Protocol."
+        },
+        {
+          "title": "Paglulunsad ng OGY Token",
+          "description": "Ginawa ang native utility token na $OGY upang paganahin ang protocol fees, governance, at staking."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Paglulunsad ng unang bersyon ng NFT standard ng ORIGYN na nagpapahintulot ng on-chain certification."
+        },
+        {
+          "title": "Tokenomics 2.0 Update",
+          "description": "Sinunog ang 200 milyong $OGY token na dati nang inilaan sa Foundation, na nagpasimula ng deflationary pressure."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Paglulunsad ng unang on-chain minting interface para sa mga digital certificate."
+        },
+        {
+          "title": "Mga Strategic Partnership",
+          "description": "Mga strategic collaboration sa FederItaly at METALOR upang i-certify ang mga produktong gawa sa Italy at tokenized gold."
+        },
+        {
+          "title": "Unang Pagbili ng Ginto",
+          "description": "3 kg ng pisikal na ginto ang binili at ginawang token gamit ang ORIGYN Protocol."
+        },
+        {
+          "title": "Pagkuha sa CanDB",
+          "description": "Kinuha ng ORIGYN ang CanDB, isang decentralized at scalable database solution na optimized para sa NFT metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 at Dashboard Launch",
+          "description": "Ipinakilala ang isang deflationary model sa Tokenomics 3.0 at inilabas ang unang bersyon ng ORIGYN Dashboard."
+        },
+        {
+          "title": "10,000 Protocol Users",
+          "description": "Nalampasan ng ORIGYN ang 10,000 natatanging protocol users."
+        },
+        {
+          "title": "Paglulunsad ng Gold DAO",
+          "description": "Ang Gold DAO ang naging unang DAO na itinayo sa ORIGYN upang i-tokenize at i-certify ang pisikal na ginto on-chain."
+        },
+        {
+          "title": "500M OGY Donation sa Gold DAO",
+          "description": "Kalahating bilyong $OGY token ang ibinigay upang suportahan ang long-term treasury ng Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO Integrated with ICP SNS",
+          "description": "Ang ORIGYN DAO ay naging ganap na decentralized at pinamamahalaan sa SNS framework ng Internet Computer."
+        },
+        {
+          "title": "Dashboard V2 Release",
+          "description": "Kasama sa bagong bersyon ng dashboard ang live metrics, staking stats, at governance tools."
+        },
+        {
+          "title": "30,000 Users Milestone",
+          "description": "Lumago ang ORIGYN sa mahigit 30,000 users, isang 300% na pagtaas sa loob ng anim na buwan."
+        },
+        {
+          "title": "Collaboration with Leo Caillard and Gil Sertissage",
+          "description": "Nag-certify ang ORIGYN ng mga pisikal na artwork at brilyante sa mga high-profile partnership."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "In-upgrade ang NFT standard upang paganahin ang ligtas na transferability ng mga certificate."
+        },
+        {
+          "title": "Integrator Framework Launched",
+          "description": "Gumawa ng mga patakaran at onboarding structure upang gabayan ang mga bagong partner na nag-iintegrate sa ORIGYN."
+        },
+        {
+          "title": "Launch of Cecil DAO",
+          "description": "Sinuportahan ng ORIGYN ang paglulunsad ng Cecil DAO upang pondohan ang conservation at humanitarian projects gamit ang blockchain transparency."
+        },
+        {
+          "title": "Acquisition of ClaimLink",
+          "description": "Kinuha ng ORIGYN ang ClaimLink, isang decentralized NFT at token distribution platform na itinayo sa ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Ipinakilala ang isang bagong standard upang pataasin ang interoperability ng mga certificate at ecosystem-wide utility."
+        },
+        {
+          "title": "Paglulunsad ng isang Public",
+          "titleSpan": "Minting Studio",
+          "description": "Inilunsad ang isang self-service tool na nagpapahintulot sa sinuman na mag-mint ng on-chain certificates ng RWA sa ORIGYN infrastructure."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Ibubunyag ang misteryo ng Runestone sa Q2 2026 sa Geneva."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Inilunsad ang isang self-service tool na nagpapahintulot sa sinuman na mag-mint on-chain gamit ang ORIGYN infrastructure."
+        },
+        {
+          "title": "IP Protection Implementation",
+          "description": "Isinama sa protocol ang suporta para sa on-chain certification ng intellectual property rights."
+        },
+        {
+          "title": "Cross-Chain Implementation",
+          "description": "Pinalalawak ng cross-chain compatibility ang abot ng ORIGYN sa iba pang pangunahing ecosystem."
+        },
+        {
+          "title": "Global Wallet and Marketplace Integration",
+          "description": "Nagiging accessible ang ORIGYN NFT sa pamamagitan ng mga nangungunang wallet at NFT marketplace sa buong mundo."
+        },
+        {
+          "title": "Becoming the Universal Certification Standard",
+          "description": "Layunin ng ORIGYN na maitatag ang sarili bilang pandaigdigang benchmark para sa digital certification sa lahat ng asset class."
+        }
+      ]
     },
     "partners": {
-      "label": "MGA KASOSYO"
+      "label": "MGA KASOSYO",
+      "testimonials": [
+        {
+          "title": "CEO ng Metalor",
+          "description": "\"Ang ORIGYN ang pinaka-advanced at pinaka-komprehensibong teknolohiya sa digital certification sa buong mundo. Ang lahat ng data ay ganap na nakaimbak sa isang blockchain upang matiyak na ang mga certificate ay immutable at transparent. Ikinagagalak ng Metalor na makipagtulungan sa isang fintech company na nakabase sa Neuchâtel tulad ng ORIGYN upang magdala ng makabagong solusyon sa mga merkado.\""
+        },
+        {
+          "title": "Espesyalista sa Sining",
+          "description": "\"Para sa aking mga pribadong kolektor, tiwala at pamana ang lahat. Naging mahalaga ang certification technology ng ORIGYN; hindi lamang nito ginagarantiya ang pagiging tunay ng bawat artwork, kundi tinitiyak din ang traceability at halaga nito sa paglipas ng mga henerasyon. Hindi na ito basta tungkol sa pagmamay-ari ng isang obra, kundi tungkol sa pag-secure ng kuwento nito on-chain, magpakailanman. Ginagawa itong posible ng ORIGYN.\""
+        },
+        {
+          "title": "Co-Founder ng Cyber",
+          "description": "\"Lagi naming sinasabi na ang mga brilyante ay tatagal magpakailanman, at totoo iyon. Kaya ganoon din dapat isipin ang impormasyong ibinibigay ninyo, dahil pagkalipas ng 100 taon, 200 taon, umiiral pa rin ang mga brilyanteng iyon. Kailangan namin ng teknolohiya upang matiyak na maibibigay pa rin namin ang impormasyong iyon. Lalo na para sa produktong may mataas na halaga at dumaraan sa mga henerasyon... Ang pangunahing dahilan kung bakit kami nakipag-partner sa ORIGYN ay dahil kaya nilang ibigay ang lahat ng ito.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Maging bahagi ng",

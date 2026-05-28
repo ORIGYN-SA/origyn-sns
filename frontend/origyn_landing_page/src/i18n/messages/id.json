@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Peta Jalan",
-      "description": "Dari utilitas dan fitur tata kelola baru hingga dukungan yang diperluas untuk industri dan pengembang. Setiap pencapaian mencerminkan misi kami untuk membawa aset dunia nyata sepenuhnya ke on-chain melalui infrastruktur yang skalabel, dapat diverifikasi, dan terdesentralisasi."
+      "description": "Dari utilitas dan fitur tata kelola baru hingga dukungan yang diperluas untuk industri dan pengembang. Setiap pencapaian mencerminkan misi kami untuk membawa aset dunia nyata sepenuhnya ke on-chain melalui infrastruktur yang skalabel, dapat diverifikasi, dan terdesentralisasi.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation Didanai",
+          "description": "ORIGYN Foundation didirikan di Neuchâtel, Swiss untuk memulai pengembangan ORIGYN Protocol."
+        },
+        {
+          "title": "Peluncuran Token OGY",
+          "description": "Token utilitas asli $OGY dibuat untuk mendukung biaya protokol, tata kelola, dan staking."
+        },
+        {
+          "title": "Standar NFT ORIGYN v1.0",
+          "description": "Peluncuran versi pertama standar NFT ORIGYN yang memungkinkan sertifikasi on-chain."
+        },
+        {
+          "title": "Pembaruan Tokenomics 2.0",
+          "description": "200 juta token $OGY yang sebelumnya dialokasikan untuk Foundation dibakar, memulai tekanan deflasi."
+        },
+        {
+          "title": "Platform Minting 1.0",
+          "description": "Peluncuran antarmuka minting on-chain pertama untuk sertifikat digital."
+        },
+        {
+          "title": "Kemitraan Strategis",
+          "description": "Kolaborasi strategis dengan FederItaly dan METALOR untuk mensertifikasi produk buatan Italia dan emas yang ditokenisasi."
+        },
+        {
+          "title": "Pembelian Emas Pertama",
+          "description": "3 kg emas fisik dibeli dan ditokenisasi menggunakan ORIGYN Protocol."
+        },
+        {
+          "title": "Akuisisi CanDB",
+          "description": "ORIGYN mengakuisisi CanDB, solusi database terdesentralisasi dan skalabel yang dioptimalkan untuk metadata NFT."
+        },
+        {
+          "title": "Tokenomics 3.0 dan Peluncuran Dashboard",
+          "description": "Model deflasi diperkenalkan melalui Tokenomics 3.0 dan versi pertama ORIGYN Dashboard dirilis."
+        },
+        {
+          "title": "10.000 Pengguna Protokol",
+          "description": "ORIGYN melampaui 10.000 pengguna protokol unik."
+        },
+        {
+          "title": "Peluncuran Gold DAO",
+          "description": "Gold DAO menjadi DAO pertama yang dibangun di atas ORIGYN untuk menokenisasi dan mensertifikasi emas fisik secara on-chain."
+        },
+        {
+          "title": "Donasi 500M OGY ke Gold DAO",
+          "description": "Setengah miliar token $OGY didonasikan untuk mendukung treasury jangka panjang Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO Terintegrasi dengan ICP SNS",
+          "description": "ORIGYN DAO menjadi sepenuhnya terdesentralisasi dan dikelola melalui framework SNS Internet Computer."
+        },
+        {
+          "title": "Rilis Dashboard V2",
+          "description": "Versi baru dashboard mencakup metrik live, statistik staking, dan alat tata kelola."
+        },
+        {
+          "title": "Tonggak 30.000 Pengguna",
+          "description": "ORIGYN tumbuh menjadi lebih dari 30.000 pengguna, peningkatan 300% dalam enam bulan."
+        },
+        {
+          "title": "Kolaborasi dengan Leo Caillard dan Gil Sertissage",
+          "description": "ORIGYN mensertifikasi karya seni fisik dan berlian dalam kemitraan profil tinggi."
+        },
+        {
+          "title": "Standar NFT ORIGYN v2.0",
+          "description": "Standar NFT ditingkatkan untuk memungkinkan transfer sertifikat yang aman."
+        },
+        {
+          "title": "Framework Integrator Diluncurkan",
+          "description": "Aturan dan struktur onboarding dibuat untuk memandu mitra baru yang berintegrasi dengan ORIGYN."
+        },
+        {
+          "title": "Peluncuran Cecil DAO",
+          "description": "ORIGYN mendukung peluncuran Cecil DAO untuk mendanai proyek konservasi dan kemanusiaan menggunakan transparansi blockchain."
+        },
+        {
+          "title": "Akuisisi ClaimLink",
+          "description": "ORIGYN mengakuisisi ClaimLink, platform distribusi NFT dan token terdesentralisasi yang dibangun di ICP."
+        },
+        {
+          "title": "Standar NFT ICRC-7",
+          "description": "Standar baru diperkenalkan untuk meningkatkan interoperabilitas sertifikat dan utilitas di seluruh ekosistem."
+        },
+        {
+          "title": "Peluncuran",
+          "titleSpan": "Minting Studio Publik",
+          "description": "Alat self-service diluncurkan agar siapa pun dapat mint sertifikat RWA on-chain di infrastruktur ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Misteri Runestone akan diungkap pada Q2 2026 di Jenewa."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Alat self-service diluncurkan agar siapa pun dapat mint on-chain menggunakan infrastruktur ORIGYN."
+        },
+        {
+          "title": "Implementasi Perlindungan IP",
+          "description": "Dukungan untuk sertifikasi on-chain atas hak kekayaan intelektual diintegrasikan ke dalam protokol."
+        },
+        {
+          "title": "Implementasi Cross-Chain",
+          "description": "Kompatibilitas cross-chain memperluas jangkauan ORIGYN ke ekosistem besar lainnya."
+        },
+        {
+          "title": "Integrasi Wallet dan Marketplace Global",
+          "description": "ORIGYN NFT menjadi dapat diakses melalui wallet dan marketplace NFT terkemuka di seluruh dunia."
+        },
+        {
+          "title": "Menjadi Standar Sertifikasi Universal",
+          "description": "ORIGYN bertujuan menetapkan diri sebagai tolok ukur global untuk sertifikasi digital di semua kelas aset."
+        }
+      ]
     },
     "partners": {
-      "label": "MITRA"
+      "label": "MITRA",
+      "testimonials": [
+        {
+          "title": "CEO Metalor",
+          "description": "\"ORIGYN adalah teknologi sertifikasi digital paling canggih dan paling komprehensif di dunia. Semua data disimpan sepenuhnya di blockchain untuk memastikan sertifikat bersifat immutable dan transparan. Metalor senang bekerja sama dengan perusahaan fintech berbasis di Neuchâtel seperti ORIGYN untuk menghadirkan solusi inovatif ke pasar.\""
+        },
+        {
+          "title": "Spesialis Seni",
+          "description": "\"Bagi kolektor pribadi saya, kepercayaan dan warisan adalah segalanya. Teknologi sertifikasi ORIGYN telah menjadi esensial; tidak hanya menjamin keaslian setiap karya seni, tetapi juga memastikan keterlacakan dan nilainya lintas generasi. Ini bukan lagi sekadar memiliki karya seni, melainkan mengamankan kisahnya secara on-chain untuk selamanya. ORIGYN membuatnya mungkin.\""
+        },
+        {
+          "title": "Co-Founder Cyber",
+          "description": "\"Kami selalu mengatakan bahwa berlian akan bertahan selamanya, dan itu benar. Jadi hal yang sama harus dipikirkan tentang informasi yang Anda berikan, karena dalam 100 tahun, 200 tahun, berlian itu masih akan ada. Kami membutuhkan teknologi untuk memastikan kami tetap dapat menyediakan informasi tersebut. Terutama untuk produk yang sangat bernilai dan diwariskan lintas generasi... Alasan utama kami bermitra dengan ORIGYN adalah karena mereka dapat menyediakan semua ini.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Jadilah bagian dari",

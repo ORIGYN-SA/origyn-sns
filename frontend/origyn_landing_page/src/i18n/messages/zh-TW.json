@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "發展路線圖",
-      "description": "從新功能與治理特性，到擴展對各產業與開發者的支援。每一個里程碑都體現我們的使命：透過可擴展、可驗證的去中心化基礎設施，將現實世界資產完整上鏈。"
+      "description": "從新功能與治理特性，到擴展對各產業與開發者的支援。每一個里程碑都體現我們的使命：透過可擴展、可驗證的去中心化基礎設施，將現實世界資產完整上鏈。",
+      "items": [
+        {
+          "title": "ORIGYN Foundation 獲得資助",
+          "description": "ORIGYN Foundation 在瑞士 Neuchâtel 成立，開始開發 ORIGYN Protocol。"
+        },
+        {
+          "title": "OGY Token 發布",
+          "description": "原生實用型代幣 $OGY 被建立，用於支援協議費用、治理和 staking。"
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "ORIGYN 的 NFT 標準首個版本發布，支援鏈上認證。"
+        },
+        {
+          "title": "Tokenomics 2.0 更新",
+          "description": "此前分配給 Foundation 的 2 億枚 $OGY 代幣被銷毀，開啟通縮壓力。"
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "首個用於數位憑證的鏈上 minting 介面發布。"
+        },
+        {
+          "title": "策略合作夥伴關係",
+          "description": "與 FederItaly 和 METALOR 建立策略合作，用於認證義大利製造產品和 tokenized gold。"
+        },
+        {
+          "title": "首次黃金購買",
+          "description": "購買 3 公斤實體黃金，並使用 ORIGYN Protocol 進行 tokenization。"
+        },
+        {
+          "title": "收購 CanDB",
+          "description": "ORIGYN 收購 CanDB，這是一種去中心化、可擴展並針對 NFT metadata 最佳化的資料庫解決方案。"
+        },
+        {
+          "title": "Tokenomics 3.0 與 Dashboard 發布",
+          "description": "Tokenomics 3.0 引入通縮模型，並發布 ORIGYN Dashboard 的首個版本。"
+        },
+        {
+          "title": "10,000 名協議使用者",
+          "description": "ORIGYN 突破 10,000 名獨立協議使用者。"
+        },
+        {
+          "title": "Gold DAO 發布",
+          "description": "Gold DAO 成為首個建構在 ORIGYN 上、用於鏈上 tokenization 和認證實體黃金的 DAO。"
+        },
+        {
+          "title": "向 Gold DAO 捐贈 500M OGY",
+          "description": "5 億枚 $OGY 代幣被捐贈，用於支援 Gold DAO 的長期 treasury。"
+        },
+        {
+          "title": "ORIGYN DAO 整合 ICP SNS",
+          "description": "ORIGYN DAO 完全去中心化，並透過 Internet Computer 的 SNS 框架進行治理。"
+        },
+        {
+          "title": "Dashboard V2 發布",
+          "description": "新版 dashboard 包含即時指標、staking 統計和治理工具。"
+        },
+        {
+          "title": "30,000 使用者里程碑",
+          "description": "ORIGYN 使用者成長至 30,000 以上，六個月內成長 300%。"
+        },
+        {
+          "title": "與 Leo Caillard 和 Gil Sertissage 合作",
+          "description": "ORIGYN 在高規格合作中認證實體藝術品和鑽石。"
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT 標準升級，以支援憑證的安全可轉讓性。"
+        },
+        {
+          "title": "Integrator Framework 發布",
+          "description": "建立規則和 onboarding 結構，用於引導新合作夥伴與 ORIGYN 整合。"
+        },
+        {
+          "title": "Cecil DAO 發布",
+          "description": "ORIGYN 支援 Cecil DAO 的發布，透過區塊鏈透明度資助保育和人道主義專案。"
+        },
+        {
+          "title": "收購 ClaimLink",
+          "description": "ORIGYN 收購 ClaimLink，這是一個建構在 ICP 上的去中心化 NFT 和代幣分發平台。"
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "引入新標準，以提升憑證互操作性和整個生態系統的實用性。"
+        },
+        {
+          "title": "公開",
+          "titleSpan": "Minting Studio 發布",
+          "description": "推出自助工具，讓任何人都能在 ORIGYN 基礎設施上 mint RWA 鏈上憑證。"
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone 之謎將於 2026 年第二季在日內瓦揭曉。"
+        },
+        {
+          "title": "Minting Lab",
+          "description": "推出自助工具，讓任何人都能使用 ORIGYN 基礎設施進行鏈上 minting。"
+        },
+        {
+          "title": "IP 保護實施",
+          "description": "對智慧財產權鏈上認證的支援被整合到協議中。"
+        },
+        {
+          "title": "Cross-Chain 實施",
+          "description": "Cross-chain 相容性將 ORIGYN 的覆蓋範圍擴展到其他主要生態系統。"
+        },
+        {
+          "title": "全球 Wallet 與 Marketplace 整合",
+          "description": "ORIGYN NFTs 可透過全球領先的 wallets 和 NFT marketplaces 存取。"
+        },
+        {
+          "title": "成為通用認證標準",
+          "description": "ORIGYN 旨在成為所有資產類別數位認證的全球基準。"
+        }
+      ]
     },
     "partners": {
-      "label": "合作夥伴"
+      "label": "合作夥伴",
+      "testimonials": [
+        {
+          "title": "Metalor CEO",
+          "description": "\"ORIGYN 是全球最先進、最全面的數位認證技術。所有資料都完整儲存在區塊鏈上，以確保憑證不可竄改且透明。Metalor 很高興與 ORIGYN 這樣一家總部位於 Neuchâtel 的金融科技公司合作，為市場帶來創新解決方案。\""
+        },
+        {
+          "title": "藝術專家",
+          "description": "\"對我的私人收藏家而言，信任與傳承就是一切。ORIGYN 的認證技術已經變得不可或缺；它不僅保證每件藝術品的真實性，也確保其可追溯性與跨世代價值。如今，這不再只是擁有一件藝術品，而是將它的故事永久安全地保存在鏈上。ORIGYN 讓這一切成為可能。\""
+        },
+        {
+          "title": "Cyber 共同創辦人",
+          "description": "\"我們總是說鑽石恆久遠，這是真的。因此，對於你提供的資訊也必須用同樣的方式思考，因為在 100 年、200 年後，這些鑽石仍然會存在，所以我們需要一種技術，確保我們仍然能夠提供這些資訊。尤其是對於一種價值很高、會跨越世代傳承的產品……我們與 ORIGYN 建立合作關係的主要原因，是因為他們能夠提供這一切。\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "成為",

@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Roadmap",
-      "description": "Van nieuwe functies en governanceverbeteringen tot uitgebreide ondersteuning voor sectoren en ontwikkelaars. Elke mijlpaal weerspiegelt onze missie om reële activa volledig on-chain te brengen via schaalbare, verifieerbare en gedecentraliseerde infrastructuur."
+      "description": "Van nieuwe functies en governanceverbeteringen tot uitgebreide ondersteuning voor sectoren en ontwikkelaars. Elke mijlpaal weerspiegelt onze missie om reële activa volledig on-chain te brengen via schaalbare, verifieerbare en gedecentraliseerde infrastructuur.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation gefinancierd",
+          "description": "De ORIGYN Foundation werd opgericht in Neuchâtel, Zwitserland, om te beginnen met de ontwikkeling van het ORIGYN Protocol."
+        },
+        {
+          "title": "Lancering van OGY Token",
+          "description": "De native utility-token $OGY wordt gecreëerd om protocolkosten, governance en staking aan te drijven."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Lancering van de eerste versie van ORIGYN's NFT-standaard die on-chain certificering mogelijk maakt."
+        },
+        {
+          "title": "Tokenomics 2.0-update",
+          "description": "200 miljoen $OGY tokens die eerder aan de Foundation waren toegewezen, worden verbrand, waarmee deflatoire druk wordt ingezet."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Lancering van de eerste on-chain mintinginterface voor digitale certificaten."
+        },
+        {
+          "title": "Strategische partnerships",
+          "description": "Strategische samenwerkingen met FederItaly en METALOR om Italiaanse producten en getokeniseerd goud te certificeren."
+        },
+        {
+          "title": "Eerste goudaankoop",
+          "description": "3 kg fysiek goud wordt gekocht en getokeniseerd met het ORIGYN Protocol."
+        },
+        {
+          "title": "Overname van CanDB",
+          "description": "ORIGYN neemt CanDB over, een gedecentraliseerde, schaalbare databaseoplossing geoptimaliseerd voor NFT-metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 en lancering van Dashboard",
+          "description": "Met Tokenomics 3.0 wordt een deflatoir model geïntroduceerd en de eerste versie van het ORIGYN Dashboard wordt uitgebracht."
+        },
+        {
+          "title": "10.000 protocolgebruikers",
+          "description": "ORIGYN overschrijdt 10.000 unieke protocolgebruikers."
+        },
+        {
+          "title": "Lancering van Gold DAO",
+          "description": "Gold DAO wordt de eerste DAO gebouwd op ORIGYN om fysiek goud on-chain te tokeniseren en certificeren."
+        },
+        {
+          "title": "500M OGY-donatie aan Gold DAO",
+          "description": "Een half miljard $OGY tokens wordt gedoneerd ter ondersteuning van de langetermijntreasury van Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO geïntegreerd met ICP SNS",
+          "description": "De ORIGYN DAO wordt volledig gedecentraliseerd en bestuurd via het SNS-framework van Internet Computer."
+        },
+        {
+          "title": "Dashboard V2-release",
+          "description": "De nieuwe versie van het dashboard bevat live statistieken, stakingstatistieken en governance-tools."
+        },
+        {
+          "title": "Mijlpaal van 30.000 gebruikers",
+          "description": "ORIGYN groeit naar meer dan 30.000 gebruikers, een stijging van 300% in zes maanden."
+        },
+        {
+          "title": "Samenwerking met Leo Caillard en Gil Sertissage",
+          "description": "ORIGYN certificeert fysieke kunstwerken en diamanten in toonaangevende partnerships."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "De NFT-standaard wordt geüpgraded om veilige overdraagbaarheid van certificaten mogelijk te maken."
+        },
+        {
+          "title": "Integrator Framework gelanceerd",
+          "description": "Regels en een onboardingstructuur worden gecreëerd om nieuwe partners te begeleiden bij integratie met ORIGYN."
+        },
+        {
+          "title": "Lancering van Cecil DAO",
+          "description": "ORIGYN ondersteunt de lancering van Cecil DAO om natuurbeschermings- en humanitaire projecten te financieren met blockchaintransparantie."
+        },
+        {
+          "title": "Overname van ClaimLink",
+          "description": "ORIGYN neemt ClaimLink over, een gedecentraliseerd NFT- en tokendistributieplatform gebouwd op ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Een nieuwe standaard wordt geïntroduceerd om de interoperabiliteit van certificaten en het ecosysteembrede nut te vergroten."
+        },
+        {
+          "title": "Lancering van een publieke",
+          "titleSpan": "Minting Studio",
+          "description": "Een selfservicetool wordt gelanceerd waarmee iedereen on-chain RWA-certificaten kan minten op ORIGYN-infrastructuur."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Het Runestone-mysterie wordt in Q2 2026 in Genève onthuld."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Een selfservicetool wordt gelanceerd waarmee iedereen on-chain kan minten met ORIGYN-infrastructuur."
+        },
+        {
+          "title": "Implementatie van IP-bescherming",
+          "description": "Ondersteuning voor on-chain certificering van intellectuele-eigendomsrechten wordt geïntegreerd in het protocol."
+        },
+        {
+          "title": "Cross-chain implementatie",
+          "description": "Cross-chain compatibiliteit vergroot het bereik van ORIGYN naar andere grote ecosystemen."
+        },
+        {
+          "title": "Wereldwijde integratie van wallets en marketplaces",
+          "description": "ORIGYN NFTs worden wereldwijd toegankelijk via toonaangevende wallets en NFT marketplaces."
+        },
+        {
+          "title": "De universele certificeringsstandaard worden",
+          "description": "ORIGYN streeft ernaar zich te vestigen als de wereldwijde benchmark voor digitale certificering in alle activaklassen."
+        }
+      ]
     },
     "partners": {
-      "label": "PARTNERS"
+      "label": "PARTNERS",
+      "testimonials": [
+        {
+          "title": "CEO van Metalor",
+          "description": "\"ORIGYN is de meest geavanceerde en meest uitgebreide digitale certificeringstechnologie ter wereld. Alle gegevens worden volledig opgeslagen in een blockchain om te garanderen dat de certificaten onveranderlijk en transparant zijn. Metalor werkt graag samen met een in Neuchâtel gevestigd fintechbedrijf als ORIGYN om een innovatieve oplossing naar de markten te brengen.\""
+        },
+        {
+          "title": "Kunstspecialist",
+          "description": "\"Voor mijn particuliere verzamelaars zijn vertrouwen en nalatenschap alles. De certificeringstechnologie van ORIGYN is essentieel geworden: ze garandeert niet alleen de authenticiteit van elk kunstwerk, maar waarborgt ook de traceerbaarheid en waarde ervan over generaties heen. Het gaat niet langer alleen om het bezitten van een kunstwerk, maar om het voor altijd on-chain veiligstellen van zijn verhaal. ORIGYN maakt dat mogelijk.\""
+        },
+        {
+          "title": "Medeoprichter van Cyber",
+          "description": "\"We zeggen altijd dat diamanten voor altijd meegaan, en dat is waar. Dus hetzelfde moet worden gedacht over de informatie die je verstrekt, want over 100 of 200 jaar zullen die diamanten nog steeds bestaan. We hadden technologie nodig om ervoor te zorgen dat we die informatie nog steeds konden leveren, vooral voor een product met veel waarde dat generaties doorgaat... De belangrijkste reden waarom we een partnership met ORIGYN zijn aangegaan, is dat zij dit allemaal konden bieden.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Maak deel uit van de",

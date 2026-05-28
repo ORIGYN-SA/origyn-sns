@@ -134,10 +134,140 @@
     },
     "roadmap": {
       "title": "Roadmap",
-      "description": "From new utilities and governance features to expanded support for industries and developers. Every milestone reflects our mission to bring real-world assets fully on-chain through scalable, verifiable, and decentralized infrastructure."
+      "description": "From new utilities and governance features to expanded support for industries and developers. Every milestone reflects our mission to bring real-world assets fully on-chain through scalable, verifiable, and decentralized infrastructure.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation Funded",
+          "description": "The ORIGYN Foundation was established in Neuchâtel, Switzerland to begin development of the ORIGYN Protocol."
+        },
+        {
+          "title": "OGY Token Launch",
+          "description": "The native utility token $OGY is created to power protocol fees, governance, and staking."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Launch of the first version of ORIGYN's NFT standard enabling on-chain certification."
+        },
+        {
+          "title": "Tokenomics 2.0 Update",
+          "description": "200 million $OGY tokens previously allocated to the Foundation are burned, initiating deflationary pressure."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Launch of the first on-chain minting interface for digital certificates."
+        },
+        {
+          "title": "Strategic Partnerships",
+          "description": "Strategic collaborations with FederItaly and METALOR to certify Italian-made products and tokenized gold."
+        },
+        {
+          "title": "First Gold Purchase",
+          "description": "3 kg of physical gold bought and tokenized using the ORIGYN Protocol."
+        },
+        {
+          "title": "Acquisition of CanDB",
+          "description": "ORIGYN acquires CanDB, a decentralized, scalable database solution optimized for NFT metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 and Dashboard Launch",
+          "description": "A deflationary model is introduced with Tokenomics 3.0 and the first version of the ORIGYN Dashboard is released."
+        },
+        {
+          "title": "10,000 Protocol Users",
+          "description": "ORIGYN surpasses 10,000 unique protocol users."
+        },
+        {
+          "title": "Launch of Gold DAO",
+          "description": "Gold DAO becomes the first DAO built on ORIGYN to tokenize and certify physical gold on-chain."
+        },
+        {
+          "title": "500M OGY Donation to Gold DAO",
+          "description": "Half a billion $OGY tokens are donated to support Gold DAO's long-term treasury."
+        },
+        {
+          "title": "ORIGYN DAO Integrated with ICP SNS",
+          "description": "The ORIGYN DAO becomes fully decentralized and governed on the Internet Computer's SNS framework."
+        },
+        {
+          "title": "Dashboard V2 Release",
+          "description": "New version of the dashboard includes live metrics, staking stats, and governance tools."
+        },
+        {
+          "title": "30,000 Users Milestone",
+          "description": "ORIGYN grows to over 30,000 users, a 300% increase in six months."
+        },
+        {
+          "title": "Collaboration with Leo Caillard and Gil Sertissage",
+          "description": "ORIGYN certifies physical artworks and diamonds in high-profile partnerships."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard is upgraded to enable secure certificate transferability."
+        },
+        {
+          "title": "Integrator Framework Launched",
+          "description": "Rules and onboarding structure created to guide new partners integrating with ORIGYN."
+        },
+        {
+          "title": "Launch of Cecil DAO",
+          "description": "ORIGYN supports the launch of Cecil DAO to fund conservation and humanitarian projects using blockchain transparency."
+        },
+        {
+          "title": "Acquisition of ClaimLink",
+          "description": "ORIGYN acquires ClaimLink, a decentralized NFT and token distribution platform built on ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "A new standard is introduced to increase certificate interoperability and ecosystem-wide utility."
+        },
+        {
+          "title": "Launch of a Public",
+          "titleSpan": "Minting Studio",
+          "description": "A self-service tool is launched allowing anyone to mint on-chain certificates of RWA on ORIGYN infrastructure."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "The Runestone mystery will be revealed Q2 2026 in Geneva."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "A self-service tool is launched allowing anyone to mint on-chain, using ORIGYN infrastructure."
+        },
+        {
+          "title": "IP Protection Implementation",
+          "description": "Support for on-chain certification of intellectual property rights is integrated into the protocol."
+        },
+        {
+          "title": "Cross-Chain Implementation",
+          "description": "Cross-chain compatibility expands ORIGYN's reach to other major ecosystems."
+        },
+        {
+          "title": "Global Wallet and Marketplace Integration",
+          "description": "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide."
+        },
+        {
+          "title": "Becoming the Universal Certification Standard",
+          "description": "ORIGYN aims to establish itself as the global benchmark for digital certification across all asset classes."
+        }
+      ]
     },
     "partners": {
-      "label": "PARTNERS"
+      "label": "PARTNERS",
+      "testimonials": [
+        {
+          "title": "CEO of Metalor",
+          "description": "\"ORIGYN is the most advanced digital certification technology and the most comprehensive in the world. All data is fully stored in a blockchain to ensure that the certificates are immutable and transparent. Metalor is pleased to work with a Neuchâtel-based Fintech company like ORIGYN to bring an innovative solution to the markets.\""
+        },
+        {
+          "title": "Art Specialist",
+          "description": "\"For my private collectors, trust and legacy are everything. ORIGYN's certification technology has become essential and it doesn't only guarantee the authenticity of each artwork but ensures its traceability and value across generations. It's no longer just about owning a piece of art, it's about securing its story on-chain, forever. ORIGYN makes it possible.\""
+        },
+        {
+          "title": "Co-Founder of Cyber",
+          "description": "\"We always say that diamonds will last forever, which is true. So the same has to be thought about the information you provide because in 100 years, 200 years those diamonds will still exist so we needed something with the technology to make sure we could still provide that information. Mainly with a product that has a lot of value and goes through generations... The main reason we made a partnership with ORIGYN is because they could provide all of this\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Be part of",
@@ -635,8 +765,18 @@
         "gain": "Gain"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -655,11 +795,26 @@
     "title": "Five pillars\nAI cannot <i>replace.</i>",
     "lead": "AI commoditizes production. These five domains remain. Origyn is positioned on every one of them.",
     "pillars": [
-      { "title": "Trust", "description": "Origyn certification — a verifiable trust signal." },
-      { "title": "Context", "description": "Decades of structured memory — a personal signal AI cannot match." },
-      { "title": "Distribution", "description": "Swiss Subnet — verifiable infrastructure for agents." },
-      { "title": "Taste", "description": "Auto-research pipeline — automation-assisted curation." },
-      { "title": "Liability", "description": "Audit trail and certificate — a real governance layer." }
+      {
+        "title": "Trust",
+        "description": "Origyn certification — a verifiable trust signal."
+      },
+      {
+        "title": "Context",
+        "description": "Decades of structured memory — a personal signal AI cannot match."
+      },
+      {
+        "title": "Distribution",
+        "description": "Swiss Subnet — verifiable infrastructure for agents."
+      },
+      {
+        "title": "Taste",
+        "description": "Auto-research pipeline — automation-assisted curation."
+      },
+      {
+        "title": "Liability",
+        "description": "Audit trail and certificate — a real governance layer."
+      }
     ]
   },
   "memory": {

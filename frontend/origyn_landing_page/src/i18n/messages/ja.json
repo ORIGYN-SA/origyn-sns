@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "ロードマップ",
-      "description": "新しいユーティリティやガバナンス機能から、業界・開発者向けサポートの拡充まで。すべてのマイルストーンは、スケーラブルで検証可能かつ分散型のインフラを通じて、現実世界の資産を完全にオンチェーンへ移行するという私たちのミッションを体現しています。"
+      "description": "新しいユーティリティやガバナンス機能から、業界・開発者向けサポートの拡充まで。すべてのマイルストーンは、スケーラブルで検証可能かつ分散型のインフラを通じて、現実世界の資産を完全にオンチェーンへ移行するという私たちのミッションを体現しています。",
+      "items": [
+        {
+          "title": "ORIGYN Foundation の資金提供",
+          "description": "ORIGYN Foundation は、ORIGYN Protocol の開発を開始するためにスイスの Neuchâtel で設立されました。"
+        },
+        {
+          "title": "OGY Token ローンチ",
+          "description": "ネイティブユーティリティトークン $OGY は、プロトコル手数料、ガバナンス、staking を支えるために作成されました。"
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "オンチェーン認証を可能にする ORIGYN の NFT 標準の最初のバージョンがローンチされました。"
+        },
+        {
+          "title": "Tokenomics 2.0 アップデート",
+          "description": "Foundation に以前割り当てられていた 2 億枚の $OGY トークンがバーンされ、デフレ圧力が始まりました。"
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "デジタル証明書向けの最初のオンチェーン minting インターフェースがローンチされました。"
+        },
+        {
+          "title": "戦略的パートナーシップ",
+          "description": "FederItaly および METALOR との戦略的協業により、イタリア製品と tokenized gold を認証します。"
+        },
+        {
+          "title": "初の金購入",
+          "description": "3 kg の現物金が購入され、ORIGYN Protocol を使用して tokenization されました。"
+        },
+        {
+          "title": "CanDB の買収",
+          "description": "ORIGYN は、NFT metadata に最適化された分散型でスケーラブルなデータベースソリューションである CanDB を買収しました。"
+        },
+        {
+          "title": "Tokenomics 3.0 と Dashboard ローンチ",
+          "description": "Tokenomics 3.0 によりデフレモデルが導入され、ORIGYN Dashboard の最初のバージョンがリリースされました。"
+        },
+        {
+          "title": "10,000 プロトコルユーザー",
+          "description": "ORIGYN は 10,000 人のユニークなプロトコルユーザーを超えました。"
+        },
+        {
+          "title": "Gold DAO ローンチ",
+          "description": "Gold DAO は、現物金をオンチェーンで tokenization し認証するために ORIGYN 上に構築された最初の DAO となりました。"
+        },
+        {
+          "title": "Gold DAO への 500M OGY 寄付",
+          "description": "Gold DAO の長期 treasury を支援するため、5 億枚の $OGY トークンが寄付されました。"
+        },
+        {
+          "title": "ORIGYN DAO が ICP SNS と統合",
+          "description": "ORIGYN DAO は完全に分散化され、Internet Computer の SNS フレームワークでガバナンスされるようになりました。"
+        },
+        {
+          "title": "Dashboard V2 リリース",
+          "description": "新しい dashboard には、ライブ指標、staking 統計、ガバナンスツールが含まれます。"
+        },
+        {
+          "title": "30,000 ユーザー到達",
+          "description": "ORIGYN は 30,000 ユーザーを超え、6 か月で 300% 増加しました。"
+        },
+        {
+          "title": "Leo Caillard および Gil Sertissage との協業",
+          "description": "ORIGYN は、注目度の高いパートナーシップで現物アート作品とダイヤモンドを認証します。"
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT 標準は、証明書の安全な譲渡可能性を実現するためにアップグレードされました。"
+        },
+        {
+          "title": "Integrator Framework ローンチ",
+          "description": "ORIGYN と統合する新しいパートナーを導くためのルールと onboarding 構造が作成されました。"
+        },
+        {
+          "title": "Cecil DAO ローンチ",
+          "description": "ORIGYN は、ブロックチェーンの透明性を活用して保全および人道支援プロジェクトに資金提供する Cecil DAO のローンチを支援します。"
+        },
+        {
+          "title": "ClaimLink の買収",
+          "description": "ORIGYN は、ICP 上に構築された分散型 NFT およびトークン配布プラットフォーム ClaimLink を買収しました。"
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "証明書の相互運用性とエコシステム全体での有用性を高めるため、新しい標準が導入されました。"
+        },
+        {
+          "title": "公開",
+          "titleSpan": "Minting Studio のローンチ",
+          "description": "誰でも ORIGYN インフラ上で RWA のオンチェーン証明書を mint できるセルフサービスツールがローンチされました。"
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone の謎は 2026 年第 2 四半期にジュネーブで明らかになります。"
+        },
+        {
+          "title": "Minting Lab",
+          "description": "誰でも ORIGYN インフラを使用してオンチェーンで mint できるセルフサービスツールがローンチされました。"
+        },
+        {
+          "title": "IP 保護の実装",
+          "description": "知的財産権のオンチェーン認証サポートがプロトコルに統合されました。"
+        },
+        {
+          "title": "Cross-Chain 実装",
+          "description": "Cross-chain 互換性により、ORIGYN の到達範囲は他の主要エコシステムへ拡大します。"
+        },
+        {
+          "title": "グローバル Wallet および Marketplace 統合",
+          "description": "ORIGYN NFTs は、世界中の主要 wallets と NFT marketplaces からアクセス可能になります。"
+        },
+        {
+          "title": "ユニバーサル認証標準へ",
+          "description": "ORIGYN は、あらゆる資産クラスにおけるデジタル認証のグローバル基準となることを目指しています。"
+        }
+      ]
     },
     "partners": {
-      "label": "パートナー"
+      "label": "パートナー",
+      "testimonials": [
+        {
+          "title": "Metalor CEO",
+          "description": "\"ORIGYN は、世界で最も先進的かつ包括的なデジタル認証技術です。すべてのデータはブロックチェーン上に完全に保存され、証明書が不変で透明であることを保証します。Metalor は、ORIGYN のような Neuchâtel 拠点のフィンテック企業と協力し、市場に革新的なソリューションをもたらせることを嬉しく思います。\""
+        },
+        {
+          "title": "アートスペシャリスト",
+          "description": "\"私のプライベートコレクターにとって、信頼とレガシーがすべてです。ORIGYN の認証技術は不可欠なものになりました。それは各作品の真正性を保証するだけでなく、世代を超えたトレーサビリティと価値を確保します。もはや単にアート作品を所有することではなく、その物語をオンチェーンで永遠に守ることなのです。ORIGYN はそれを可能にします。\""
+        },
+        {
+          "title": "Cyber 共同創業者",
+          "description": "\"私たちはいつも、ダイヤモンドは永遠に残ると言っていますし、それは本当です。だからこそ、提供する情報についても同じように考える必要があります。100 年後、200 年後にもそのダイヤモンドは存在しているからです。そのため、私たちはその情報を引き続き提供できるようにする技術を必要としていました。特に、非常に価値が高く世代を超えて受け継がれる製品ではなおさらです……ORIGYN と提携した主な理由は、彼らがこれらすべてを提供できたからです。\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "意思決定に",

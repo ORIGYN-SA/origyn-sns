@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Tiekartta",
-      "description": "Uusista hyödyllisyyksistä ja hallintoominaisuuksista laajempaan toimiala- ja kehittäjätukeen. Jokainen välietappi heijastaa tehtäväämme tuoda reaalimaailman omaisuuserät täysin lohkoketjuun skaalautuvan, todennettavan ja hajautetun infrastruktuurin avulla."
+      "description": "Uusista hyödyllisyyksistä ja hallintoominaisuuksista laajempaan toimiala- ja kehittäjätukeen. Jokainen välietappi heijastaa tehtäväämme tuoda reaalimaailman omaisuuserät täysin lohkoketjuun skaalautuvan, todennettavan ja hajautetun infrastruktuurin avulla.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation rahoitettu",
+          "description": "ORIGYN Foundation perustettiin Neuchâtelissa, Sveitsissä, aloittamaan ORIGYN Protocolin kehitys."
+        },
+        {
+          "title": "OGY Tokenin lanseeraus",
+          "description": "Natiivi utility-token $OGY luodaan protokollamaksuja, governancea ja stakingia varten."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "ORIGYNin NFT-standardin ensimmäinen versio lanseerataan mahdollistamaan on-chain sertifiointi."
+        },
+        {
+          "title": "Tokenomics 2.0 -päivitys",
+          "description": "200 miljoonaa $OGY tokens, jotka oli aiemmin allokoitu Foundationille, poltetaan deflatorisen paineen käynnistämiseksi."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Ensimmäinen on-chain mintingkäyttöliittymä digitaalisille sertifikaateille lanseerataan."
+        },
+        {
+          "title": "Strategiset kumppanuudet",
+          "description": "Strategiset yhteistyöt FederItalyn ja METALORin kanssa italialaisten tuotteiden ja tokenisoidun kullan sertifioimiseksi."
+        },
+        {
+          "title": "Ensimmäinen kullan osto",
+          "description": "3 kg fyysistä kultaa ostetaan ja tokenisoidaan ORIGYN Protocolilla."
+        },
+        {
+          "title": "CanDB:n hankinta",
+          "description": "ORIGYN hankkii CanDB:n, hajautetun ja skaalautuvan tietokantaratkaisun, joka on optimoitu NFT-metadatalle."
+        },
+        {
+          "title": "Tokenomics 3.0 ja Dashboardin lanseeraus",
+          "description": "Tokenomics 3.0:n myötä otetaan käyttöön deflatorinen malli ja ORIGYN Dashboardin ensimmäinen versio julkaistaan."
+        },
+        {
+          "title": "10 000 protokollakäyttäjää",
+          "description": "ORIGYN ylittää 10 000 yksilöllistä protokollakäyttäjää."
+        },
+        {
+          "title": "Gold DAO:n lanseeraus",
+          "description": "Gold DAOsta tulee ensimmäinen ORIGYNin päälle rakennettu DAO, joka tokenisoi ja sertifioi fyysistä kultaa on-chain."
+        },
+        {
+          "title": "500M OGY -lahjoitus Gold DAOlle",
+          "description": "Puoli miljardia $OGY tokens lahjoitetaan tukemaan Gold DAOn pitkäaikaista treasuryä."
+        },
+        {
+          "title": "ORIGYN DAO integroitu ICP SNS:ään",
+          "description": "ORIGYN DAOsta tulee täysin hajautettu ja sitä hallitaan Internet Computerin SNS-kehyksen kautta."
+        },
+        {
+          "title": "Dashboard V2 -julkaisu",
+          "description": "Dashboardin uusi versio sisältää live-metriikat, stakingtilastot ja governance-työkalut."
+        },
+        {
+          "title": "30 000 käyttäjän virstanpylväs",
+          "description": "ORIGYN kasvaa yli 30 000 käyttäjään, mikä on 300% kasvu kuudessa kuukaudessa."
+        },
+        {
+          "title": "Yhteistyö Leo Caillardin ja Gil Sertissagen kanssa",
+          "description": "ORIGYN sertifioi fyysisiä taideteoksia ja timantteja korkean profiilin kumppanuuksissa."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT-standardi päivitetään mahdollistamaan sertifikaattien turvallinen siirrettävyys."
+        },
+        {
+          "title": "Integrator Framework lanseerattu",
+          "description": "Säännöt ja onboardingrakenne luodaan ohjaamaan uusia kumppaneita ORIGYN-integraatiossa."
+        },
+        {
+          "title": "Cecil DAO:n lanseeraus",
+          "description": "ORIGYN tukee Cecil DAOn lanseerausta rahoittaakseen luonnonsuojelu- ja humanitaarisia projekteja blockchainläpinäkyvyyden avulla."
+        },
+        {
+          "title": "ClaimLinkin hankinta",
+          "description": "ORIGYN hankkii ClaimLinkin, ICP:lle rakennetun hajautetun NFT- ja tokendistribuutioalustan."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Uusi standardi otetaan käyttöön sertifikaattien yhteentoimivuuden ja koko ekosysteemin hyödyn lisäämiseksi."
+        },
+        {
+          "title": "Julkisen",
+          "titleSpan": "Minting Studion lanseeraus",
+          "description": "Itsepalvelutyökalu lanseerataan, jotta kuka tahansa voi mintata on-chain RWA-sertifikaatteja ORIGYN-infrastruktuurissa."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone-mysteeri paljastetaan Q2 2026 Genevessä."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Itsepalvelutyökalu lanseerataan, jotta kuka tahansa voi mintata on-chain ORIGYN-infrastruktuuria käyttäen."
+        },
+        {
+          "title": "IP-suojauksen toteutus",
+          "description": "Tuki immateriaalioikeuksien on-chain sertifioinnille integroidaan protokollaan."
+        },
+        {
+          "title": "Cross-chain toteutus",
+          "description": "Cross-chain yhteensopivuus laajentaa ORIGYNin ulottuvuuden muihin suuriin ekosysteemeihin."
+        },
+        {
+          "title": "Globaali wallets- ja marketplaces-integraatio",
+          "description": "ORIGYN NFTs tulevat saataville johtavien wallets- ja NFT marketplaces -palveluiden kautta maailmanlaajuisesti."
+        },
+        {
+          "title": "Universaaliksi sertifiointistandardiksi tuleminen",
+          "description": "ORIGYN pyrkii vakiinnuttamaan asemansa digitaalisen sertifioinnin globaalina vertailukohtana kaikissa omaisuusluokissa."
+        }
+      ]
     },
     "partners": {
-      "label": "KUMPPANIT"
+      "label": "KUMPPANIT",
+      "testimonials": [
+        {
+          "title": "Metalorin CEO",
+          "description": "\"ORIGYN on maailman edistynein ja kattavin digitaalisen sertifioinnin teknologia. Kaikki data tallennetaan kokonaan blockchainiin, jotta sertifikaatit ovat muuttumattomia ja läpinäkyviä. Metalor tekee mielellään yhteistyötä Neuchâtelissa toimivan fintech-yhtiön, kuten ORIGYNin, kanssa tuodakseen innovatiivisen ratkaisun markkinoille.\""
+        },
+        {
+          "title": "Taideasiantuntija",
+          "description": "\"Yksityisille keräilijöilleni luottamus ja perintö ovat kaikki kaikessa. ORIGYNin sertifiointiteknologiasta on tullut välttämätön: se ei ainoastaan takaa jokaisen taideteoksen aitoutta, vaan varmistaa myös sen jäljitettävyyden ja arvon sukupolvien yli. Kyse ei ole enää vain taideteoksen omistamisesta, vaan sen tarinan turvaamisesta on-chain, ikuisesti. ORIGYN tekee sen mahdolliseksi.\""
+        },
+        {
+          "title": "Cyberin toinen perustaja",
+          "description": "\"Sanomme aina, että timantit kestävät ikuisesti, ja se on totta. Siksi samaa on ajateltava myös annettavasta tiedosta, sillä 100 tai 200 vuoden päästä nämä timantit ovat edelleen olemassa. Tarvitsimme teknologiaa, joka varmistaa, että voimme edelleen tarjota nämä tiedot, erityisesti tuotteelle, jolla on paljon arvoa ja joka siirtyy sukupolvelta toiselle... Tärkein syy kumppanuuteemme ORIGYNin kanssa oli se, että he pystyivät tarjoamaan kaiken tämän.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Ole osa",

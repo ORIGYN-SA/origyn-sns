@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Veikart",
-      "description": "Fra nye funksjoner og styringsmekanismer til utvidet støtte for bransjer og utviklere. Hver milepæl gjenspeiler vårt oppdrag om å bringe virkelige eiendeler fullt ut on-chain gjennom skalerbar, verifiserbar og desentralisert infrastruktur."
+      "description": "Fra nye funksjoner og styringsmekanismer til utvidet støtte for bransjer og utviklere. Hver milepæl gjenspeiler vårt oppdrag om å bringe virkelige eiendeler fullt ut on-chain gjennom skalerbar, verifiserbar og desentralisert infrastruktur.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation finansiert",
+          "description": "ORIGYN Foundation ble etablert i Neuchâtel i Sveits for å starte utviklingen av ORIGYN Protocol."
+        },
+        {
+          "title": "Lansering av OGY Token",
+          "description": "Den native utility-tokenen $OGY opprettes for å drive protokollgebyrer, governance og staking."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Lansering av den første versjonen av ORIGYNs NFT-standard som muliggjør on-chain sertifisering."
+        },
+        {
+          "title": "Tokenomics 2.0-oppdatering",
+          "description": "200 millioner $OGY tokens som tidligere var allokert til Foundation, brennes og starter deflatorisk press."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Lansering av det første on-chain mintinggrensesnittet for digitale sertifikater."
+        },
+        {
+          "title": "Strategiske partnerskap",
+          "description": "Strategiske samarbeid med FederItaly og METALOR for å sertifisere italienskproduserte produkter og tokenisert gull."
+        },
+        {
+          "title": "Første gullkjøp",
+          "description": "3 kg fysisk gull kjøpes og tokeniseres ved hjelp av ORIGYN Protocol."
+        },
+        {
+          "title": "Oppkjøp av CanDB",
+          "description": "ORIGYN kjøper CanDB, en desentralisert, skalerbar databaseløsning optimalisert for NFT-metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 og Dashboard-lansering",
+          "description": "En deflatorisk modell introduseres med Tokenomics 3.0, og den første versjonen av ORIGYN Dashboard lanseres."
+        },
+        {
+          "title": "10 000 protokollbrukere",
+          "description": "ORIGYN passerer 10 000 unike protokollbrukere."
+        },
+        {
+          "title": "Lansering av Gold DAO",
+          "description": "Gold DAO blir den første DAO bygget på ORIGYN for å tokenisere og sertifisere fysisk gull on-chain."
+        },
+        {
+          "title": "500M OGY-donasjon til Gold DAO",
+          "description": "En halv milliard $OGY tokens doneres for å støtte Gold DAOs langsiktige treasury."
+        },
+        {
+          "title": "ORIGYN DAO integrert med ICP SNS",
+          "description": "ORIGYN DAO blir fullt desentralisert og styrt gjennom SNS-rammeverket til Internet Computer."
+        },
+        {
+          "title": "Dashboard V2-lansering",
+          "description": "Den nye versjonen av dashboardet inkluderer sanntidsmålinger, stakingstatistikk og governance-verktøy."
+        },
+        {
+          "title": "Milepæl på 30 000 brukere",
+          "description": "ORIGYN vokser til over 30 000 brukere, en økning på 300% på seks måneder."
+        },
+        {
+          "title": "Samarbeid med Leo Caillard og Gil Sertissage",
+          "description": "ORIGYN sertifiserer fysiske kunstverk og diamanter i høyprofilerte partnerskap."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT-standarden oppgraderes for å muliggjøre sikker overførbarhet av sertifikater."
+        },
+        {
+          "title": "Integrator Framework lansert",
+          "description": "Regler og en onboardingstruktur opprettes for å veilede nye partnere som integrerer med ORIGYN."
+        },
+        {
+          "title": "Lansering av Cecil DAO",
+          "description": "ORIGYN støtter lanseringen av Cecil DAO for å finansiere bevarings- og humanitære prosjekter med blockchaintransparens."
+        },
+        {
+          "title": "Oppkjøp av ClaimLink",
+          "description": "ORIGYN kjøper ClaimLink, en desentralisert NFT- og tokendistribusjonsplattform bygget på ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "En ny standard introduseres for å øke sertifikatenes interoperabilitet og nytte i hele økosystemet."
+        },
+        {
+          "title": "Lansering av et offentlig",
+          "titleSpan": "Minting Studio",
+          "description": "Et selvbetjeningsverktøy lanseres som lar hvem som helst minte on-chain RWA-sertifikater på ORIGYN-infrastruktur."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone-mysteriet blir avslørt i Q2 2026 i Genève."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Et selvbetjeningsverktøy lanseres som lar hvem som helst minte on-chain ved hjelp av ORIGYN-infrastruktur."
+        },
+        {
+          "title": "Implementering av IP-beskyttelse",
+          "description": "Støtte for on-chain sertifisering av immaterielle rettigheter integreres i protokollen."
+        },
+        {
+          "title": "Cross-chain implementering",
+          "description": "Cross-chain kompatibilitet utvider ORIGYNs rekkevidde til andre store økosystemer."
+        },
+        {
+          "title": "Global integrasjon av wallets og marketplaces",
+          "description": "ORIGYN NFTs blir tilgjengelige gjennom ledende wallets og NFT marketplaces over hele verden."
+        },
+        {
+          "title": "Å bli den universelle sertifiseringsstandarden",
+          "description": "ORIGYN har som mål å etablere seg som den globale referansen for digital sertifisering på tvers av alle aktivaklasser."
+        }
+      ]
     },
     "partners": {
-      "label": "PARTNERE"
+      "label": "PARTNERE",
+      "testimonials": [
+        {
+          "title": "CEO i Metalor",
+          "description": "\"ORIGYN er den mest avanserte digitale sertifiseringsteknologien og den mest omfattende i verden. Alle data lagres fullt ut i en blockchain for å sikre at sertifikatene er uforanderlige og transparente. Metalor er glad for å samarbeide med et fintechselskap basert i Neuchâtel som ORIGYN for å bringe en innovativ løsning til markedene.\""
+        },
+        {
+          "title": "Kunstspesialist",
+          "description": "\"For mine private samlere er tillit og arv alt. ORIGYNs sertifiseringsteknologi har blitt avgjørende: den garanterer ikke bare ektheten til hvert kunstverk, men sikrer også sporbarheten og verdien gjennom generasjoner. Det handler ikke lenger bare om å eie et kunstverk, men om å sikre historien on-chain, for alltid. ORIGYN gjør det mulig.\""
+        },
+        {
+          "title": "Medgründer av Cyber",
+          "description": "\"Vi sier alltid at diamanter varer evig, og det er sant. Derfor må man tenke på samme måte om informasjonen man gir, for om 100 eller 200 år vil disse diamantene fortsatt eksistere. Vi trengte teknologi som kunne sikre at vi fortsatt kunne levere den informasjonen, særlig for et produkt med høy verdi som går gjennom generasjoner... Hovedgrunnen til at vi inngikk et partnerskap med ORIGYN, er at de kunne levere alt dette.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Vær del av",

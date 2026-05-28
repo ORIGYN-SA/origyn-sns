@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Menetrend",
-      "description": "Új segédprogramoktól és irányítási funkcióktól az iparágak és fejlesztők bővülő támogatásáig. Minden mérföldkő tükrözi küldetésünket: a valós eszközöket méretezhető, ellenőrizhető és decentralizált infrastruktúrán keresztül teljes mértékben a láncra hozni."
+      "description": "Új segédprogramoktól és irányítási funkcióktól az iparágak és fejlesztők bővülő támogatásáig. Minden mérföldkő tükrözi küldetésünket: a valós eszközöket méretezhető, ellenőrizhető és decentralizált infrastruktúrán keresztül teljes mértékben a láncra hozni.",
+      "items": [
+        {
+          "title": "Az ORIGYN Foundation finanszírozása",
+          "description": "Az ORIGYN Foundation a svájci Neuchâtelben jött létre az ORIGYN Protocol fejlesztésének megkezdésére."
+        },
+        {
+          "title": "Az OGY token elindítása",
+          "description": "A natív hasznossági token, a $OGY, a protokolldíjak, a governance és a staking működtetésére jön létre."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Elindul az ORIGYN NFT standard első verziója, amely lehetővé teszi az on-chain tanúsítást."
+        },
+        {
+          "title": "Tokenomics 2.0 frissítés",
+          "description": "A korábban a Foundation számára allokált 200 millió $OGY token elégetésre kerül, deflációs nyomást indítva el."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Elindul az első on-chain minting felület digitális tanúsítványokhoz."
+        },
+        {
+          "title": "Stratégiai partnerségek",
+          "description": "Stratégiai együttműködések a FederItaly és a METALOR vállalatokkal olasz gyártású termékek és tokenizált arany tanúsítására."
+        },
+        {
+          "title": "Első aranyvásárlás",
+          "description": "3 kg fizikai arany megvásárlása és tokenizálása az ORIGYN Protocol segítségével."
+        },
+        {
+          "title": "A CanDB felvásárlása",
+          "description": "Az ORIGYN felvásárolja a CanDB-t, egy decentralizált, skálázható, NFT metaadatokra optimalizált adatbázis-megoldást."
+        },
+        {
+          "title": "Tokenomics 3.0 és Dashboard indulás",
+          "description": "A Tokenomics 3.0-val deflációs modell kerül bevezetésre, és megjelenik az ORIGYN Dashboard első verziója."
+        },
+        {
+          "title": "10 000 protokollfelhasználó",
+          "description": "Az ORIGYN meghaladja a 10 000 egyedi protokollfelhasználót."
+        },
+        {
+          "title": "A Gold DAO elindítása",
+          "description": "A Gold DAO lesz az első ORIGYN-re épülő DAO, amely fizikai aranyat tokenizál és tanúsít on-chain."
+        },
+        {
+          "title": "500M OGY adomány a Gold DAO-nak",
+          "description": "Félmilliárd $OGY token kerül adományozásra a Gold DAO hosszú távú trezorjának támogatására."
+        },
+        {
+          "title": "ORIGYN DAO integrálva az ICP SNS-szel",
+          "description": "Az ORIGYN DAO teljesen decentralizálttá válik, és az Internet Computer SNS keretrendszere irányítja."
+        },
+        {
+          "title": "Dashboard V2 megjelenés",
+          "description": "A dashboard új verziója élő metrikákat, staking statisztikákat és governance eszközöket tartalmaz."
+        },
+        {
+          "title": "30 000 felhasználós mérföldkő",
+          "description": "Az ORIGYN több mint 30 000 felhasználóra nő, ami 300%-os növekedés hat hónap alatt."
+        },
+        {
+          "title": "Együttműködés Leo Caillarddal és Gil Sertissage-zsal",
+          "description": "Az ORIGYN fizikai műalkotásokat és gyémántokat tanúsít nagy presztízsű partnerségek keretében."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "Az NFT standard frissül, hogy lehetővé tegye a tanúsítványok biztonságos átruházhatóságát."
+        },
+        {
+          "title": "Integrator Framework elindítása",
+          "description": "Szabályok és onboarding struktúra jön létre az ORIGYN-nel integráló új partnerek támogatására."
+        },
+        {
+          "title": "A Cecil DAO elindítása",
+          "description": "Az ORIGYN támogatja a Cecil DAO elindítását, hogy természetvédelmi és humanitárius projekteket finanszírozzon blockchain átláthatósággal."
+        },
+        {
+          "title": "A ClaimLink felvásárlása",
+          "description": "Az ORIGYN felvásárolja a ClaimLinket, egy ICP-re épülő decentralizált NFT- és tokenelosztási platformot."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Új standard kerül bevezetésre a tanúsítványok interoperabilitásának és az egész ökoszisztémára kiterjedő hasznosságának növelésére."
+        },
+        {
+          "title": "Egy nyilvános",
+          "titleSpan": "Minting Studio elindítása",
+          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi RWA on-chain tanúsítványok mintelését az ORIGYN infrastruktúrán."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "A Runestone rejtélye 2026 második negyedévében, Genfben kerül felfedésre."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi az on-chain mintelést az ORIGYN infrastruktúra használatával."
+        },
+        {
+          "title": "IP-védelem bevezetése",
+          "description": "Az on-chain szellemi tulajdonjog-tanúsítás támogatása integrálásra kerül a protokollba."
+        },
+        {
+          "title": "Cross-chain megvalósítás",
+          "description": "A cross-chain kompatibilitás kiterjeszti az ORIGYN elérését más jelentős ökoszisztémákra."
+        },
+        {
+          "title": "Globális wallet- és marketplace-integráció",
+          "description": "Az ORIGYN NFTs világszerte elérhetővé válnak vezető walleteken és NFT marketplace-eken keresztül."
+        },
+        {
+          "title": "A univerzális tanúsítási standarddá válás",
+          "description": "Az ORIGYN célja, hogy globális mércévé váljon a digitális tanúsításban minden eszközosztály esetében."
+        }
+      ]
     },
     "partners": {
-      "label": "PARTNEREK"
+      "label": "PARTNEREK",
+      "testimonials": [
+        {
+          "title": "A Metalor vezérigazgatója",
+          "description": "\"Az ORIGYN a világ legfejlettebb és legátfogóbb digitális tanúsítási technológiája. Minden adat teljes egészében blockchainen van tárolva, hogy a tanúsítványok megváltoztathatatlanok és átláthatók legyenek. A Metalor örömmel dolgozik együtt egy Neuchâtel-i székhelyű fintech vállalattal, mint az ORIGYN, hogy innovatív megoldást vigyen a piacokra.\""
+        },
+        {
+          "title": "Művészeti szakértő",
+          "description": "\"Magángyűjtőim számára a bizalom és az örökség mindent jelent. Az ORIGYN tanúsítási technológiája nélkülözhetetlenné vált: nemcsak minden műalkotás eredetiségét garantálja, hanem biztosítja annak nyomon követhetőségét és értékét generációkon át. Már nem csupán egy műalkotás birtoklásáról van szó, hanem annak történetének örökre történő on-chain biztosításáról. Az ORIGYN ezt lehetővé teszi.\""
+        },
+        {
+          "title": "A Cyber társalapítója",
+          "description": "\"Mindig azt mondjuk, hogy a gyémántok örökké tartanak, és ez igaz. Ugyanígy kell gondolkodni az Ön által megadott információkról is, mert 100 vagy 200 év múlva ezek a gyémántok még mindig létezni fognak. Olyan technológiára volt szükségünk, amely biztosítja, hogy ezeket az információkat továbbra is rendelkezésre tudjuk bocsátani, különösen egy nagy értékű, generációkon átívelő termék esetében... Az ORIGYN-nel kötött partnerségünk fő oka az volt, hogy mindezt biztosítani tudták.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Vegyen részt a",

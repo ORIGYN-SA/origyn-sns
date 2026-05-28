@@ -376,10 +376,140 @@
     },
     "roadmap": {
       "title": "Roadmapa",
-      "description": "Od nových utilit a funkcí správy až po rozšířenou podporu pro odvětví a vývojáře. Každý milník odráží naši misi přinést reálná aktiva plně on-chain prostřednictvím škálovatelné, ověřitelné a decentralizované infrastruktury."
+      "description": "Od nových utilit a funkcí správy až po rozšířenou podporu pro odvětví a vývojáře. Každý milník odráží naši misi přinést reálná aktiva plně on-chain prostřednictvím škálovatelné, ověřitelné a decentralizované infrastruktury.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation financována",
+          "description": "ORIGYN Foundation byla založena ve švýcarském Neuchâtelu, aby zahájila vývoj ORIGYN Protocol."
+        },
+        {
+          "title": "Spuštění OGY Token",
+          "description": "Nativní utility token $OGY je vytvořen pro pohon protokolových poplatků, governance a stakingu."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Spuštění první verze NFT standardu ORIGYN umožňující on-chain certifikaci."
+        },
+        {
+          "title": "Aktualizace Tokenomics 2.0",
+          "description": "200 milionů $OGY tokens dříve přidělených Foundation je spáleno, čímž se spouští deflační tlak."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Spuštění prvního on-chain minting rozhraní pro digitální certifikáty."
+        },
+        {
+          "title": "Strategická partnerství",
+          "description": "Strategické spolupráce s FederItaly a METALOR za účelem certifikace italských produktů a tokenizovaného zlata."
+        },
+        {
+          "title": "První nákup zlata",
+          "description": "3 kg fyzického zlata jsou zakoupeny a tokenizovány pomocí ORIGYN Protocol."
+        },
+        {
+          "title": "Akvizice CanDB",
+          "description": "ORIGYN získává CanDB, decentralizované, škálovatelné databázové řešení optimalizované pro NFT metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 a spuštění Dashboardu",
+          "description": "S Tokenomics 3.0 je zaveden deflační model a vydána první verze ORIGYN Dashboard."
+        },
+        {
+          "title": "10 000 uživatelů protokolu",
+          "description": "ORIGYN překonává 10 000 unikátních uživatelů protokolu."
+        },
+        {
+          "title": "Spuštění Gold DAO",
+          "description": "Gold DAO se stává první DAO postavenou na ORIGYN pro tokenizaci a certifikaci fyzického zlata on-chain."
+        },
+        {
+          "title": "Dar 500M OGY pro Gold DAO",
+          "description": "Půl miliardy $OGY tokens je darováno na podporu dlouhodobé treasury Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO integrována s ICP SNS",
+          "description": "ORIGYN DAO se stává plně decentralizovanou a spravovanou prostřednictvím SNS frameworku Internet Computer."
+        },
+        {
+          "title": "Vydání Dashboard V2",
+          "description": "Nová verze dashboardu obsahuje živé metriky, statistiky stakingu a governance nástroje."
+        },
+        {
+          "title": "Milník 30 000 uživatelů",
+          "description": "ORIGYN roste na více než 30 000 uživatelů, což je 300% nárůst za šest měsíců."
+        },
+        {
+          "title": "Spolupráce s Leo Caillard a Gil Sertissage",
+          "description": "ORIGYN certifikuje fyzická umělecká díla a diamanty v prestižních partnerstvích."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard je upgradován tak, aby umožnil bezpečnou převoditelnost certifikátů."
+        },
+        {
+          "title": "Integrator Framework spuštěn",
+          "description": "Jsou vytvořena pravidla a onboardingová struktura, které mají vést nové partnery při integraci s ORIGYN."
+        },
+        {
+          "title": "Spuštění Cecil DAO",
+          "description": "ORIGYN podporuje spuštění Cecil DAO za účelem financování ochranářských a humanitárních projektů pomocí blockchainové transparentnosti."
+        },
+        {
+          "title": "Akvizice ClaimLink",
+          "description": "ORIGYN získává ClaimLink, decentralizovanou platformu pro distribuci NFT a tokenů postavenou na ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Je zaveden nový standard pro zvýšení interoperability certifikátů a užitku v celém ekosystému."
+        },
+        {
+          "title": "Spuštění veřejného",
+          "titleSpan": "Minting Studia",
+          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain RWA certifikáty na infrastruktuře ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Záhada Runestone bude odhalena v Q2 2026 v Ženevě."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain pomocí infrastruktury ORIGYN."
+        },
+        {
+          "title": "Implementace ochrany IP",
+          "description": "Do protokolu je integrována podpora on-chain certifikace práv duševního vlastnictví."
+        },
+        {
+          "title": "Cross-chain implementace",
+          "description": "Cross-chain kompatibilita rozšiřuje dosah ORIGYN do dalších významných ekosystémů."
+        },
+        {
+          "title": "Globální integrace wallets a marketplaces",
+          "description": "ORIGYN NFTs se stávají dostupnými prostřednictvím předních wallets a NFT marketplaces po celém světě."
+        },
+        {
+          "title": "Stát se univerzálním standardem certifikace",
+          "description": "ORIGYN usiluje o to, aby se stal globálním měřítkem digitální certifikace napříč všemi třídami aktiv."
+        }
+      ]
     },
     "partners": {
-      "label": "PARTNEŘI"
+      "label": "PARTNEŘI",
+      "testimonials": [
+        {
+          "title": "CEO společnosti Metalor",
+          "description": "\"ORIGYN je nejpokročilejší a nejkomplexnější technologie digitální certifikace na světě. Veškerá data jsou plně uložena v blockchainu, aby bylo zajištěno, že certifikáty jsou neměnné a transparentní. Metalor rád spolupracuje s fintech společností se sídlem v Neuchâtelu, jako je ORIGYN, aby přinesl na trhy inovativní řešení.\""
+        },
+        {
+          "title": "Specialista na umění",
+          "description": "\"Pro mé soukromé sběratele jsou důvěra a odkaz vším. Certifikační technologie ORIGYN se stala nezbytnou: nezaručuje pouze autenticitu každého uměleckého díla, ale také zajišťuje jeho dohledatelnost a hodnotu napříč generacemi. Už nejde jen o vlastnictví uměleckého díla, ale o trvalé zabezpečení jeho příběhu on-chain. ORIGYN to umožňuje.\""
+        },
+        {
+          "title": "Spoluzakladatel Cyber",
+          "description": "\"Vždy říkáme, že diamanty vydrží navždy, a je to pravda. Stejně je tedy třeba přemýšlet o informacích, které poskytujete, protože za 100 nebo 200 let budou tyto diamanty stále existovat. Potřebovali jsme technologii, která zajistí, že tyto informace budeme moci stále poskytovat, zejména u produktu s vysokou hodnotou, který prochází generacemi... Hlavním důvodem, proč jsme uzavřeli partnerství s ORIGYN, bylo, že toto všechno dokázali poskytnout.\""
+        }
+      ]
     },
     "bePart": {
       "titleLead": "Buďte součástí",
