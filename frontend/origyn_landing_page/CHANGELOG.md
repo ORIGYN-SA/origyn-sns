@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.4.7] - 2026-05-28
+
+#### Added
+
+- Add translations across all pages of the ORIGYN landing page
+
 ### [1.4.6] - 2026-05-28
 
 #### Fixed
