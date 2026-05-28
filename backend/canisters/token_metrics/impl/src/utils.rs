@@ -114,17 +114,6 @@ pub fn icrc_account_to_string(account: IcrcAccount) -> String {
     format!("{}.{}", pr, sa)
 }
 
-/// Parse "principal.subaccount_hex" into (principal_str, subaccount_hex_str).
-/// Used by time_stats for aggregating ProcessedTX strings.
-pub fn parse_icrc_account(input: &str) -> Option<(String, String)> {
-    let parts: Vec<&str> = input.split('.').collect();
-    if parts.len() == 2 {
-        Some((parts[0].to_string(), parts[1].to_string()))
-    } else {
-        None
-    }
-}
-
 pub fn nat_to_u128(nat: Nat) -> Result<u128, String> {
     let big: &BigUint = &nat.0;
     big.try_into()

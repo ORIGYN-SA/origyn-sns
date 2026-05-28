@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.1.2] - 2026-05-28
+
+### Fixed
+- `sync_ledger` no longer recomputes daily + hourly stats on every 60s tick. Stats now run only when new blocks were actually processed this tick. Eliminates a full `StableBTreeMap<u64, ProcessedTX>` scan twice per minute when the chain is idle (~50 T cycles/day reduction).
+
+### Changed
+- `calculate_time_stats` inner loops rewritten to be cheaper per scan: `HashSet` for unique account/principal counts (was `Vec<String>` + `sort_unstable` + `dedup`), top-N selection now sorts `(value, index)` tuples instead of cloning every `ProcessedTX`, and time-chunk aggregation is single-pass O(N) instead of nested O(chunks × N). Behavior preserved; covered by new unit tests.
+
 ## [2.1.1] - 2026-05-11
 
 ### Fixed
