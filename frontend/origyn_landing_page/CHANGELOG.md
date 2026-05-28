@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+#### Fixed
+
+- Fix footer anchor links not working outside the homepage
+
 ### [1.4.5] - 2026-05-27
 
 #### Fixed
