@@ -15,30 +15,15 @@ const leftLinks = [
     },
     {
       name: "INTEGRATORS",
-      onClick: () => {
-        const element = document.getElementById("integrator-program");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      },
+      anchorId: "integrator-program",
     },
     {
       name: "ECOSYSTEM",
-      onClick: () => {
-        const element = document.getElementById("our-partners");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      },
+      anchorId: "our-partners",
     },
     {
       name: "USE CASES",
-      onClick: () => {
-        const element = document.getElementById("use-cases");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      },
+      anchorId: "use-cases",
     },
   ],
   [
@@ -53,6 +38,16 @@ const leftLinks = [
   ],
 ];
 const Footer = () => {
+  const handleAnchorClick = (e, sectionId) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -69,8 +64,12 @@ const Footer = () => {
               {group.map((link, j) => (
                 <a
                   key={j}
-                  href={link.url}
-                  onClick={link.onClick}
+                  href={link.anchorId ? `/#${link.anchorId}` : link.url}
+                  onClick={
+                    link.anchorId
+                      ? (e) => handleAnchorClick(e, link.anchorId)
+                      : undefined
+                  }
                   className={styles.link}
                 >
                   {link.name}
