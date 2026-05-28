@@ -61,8 +61,12 @@
 
 .searchInput {
   @include type('body');
-  width: calc(100% - 36px);
-  padding: 12px 12px 12px 24px;
+  width: 100%;
+  // The icon sits inside the input on the leading edge; the start padding
+  // leaves room for it. The end padding is normal breathing room.
+  padding-block: 12px;
+  padding-inline-start: 52px;
+  padding-inline-end: 24px;
   font-family: $font-sans;
   color: black;
   background: $bg-white;
@@ -77,15 +81,20 @@
   }
 
   @media (max-width: $bp-md) {
-    padding: 14px 12px 14px 16px;
+    padding-block: 14px;
+    padding-inline-start: 44px;
+    padding-inline-end: 16px;
   }
 }
 
 .searchIcon {
   position: absolute;
-  right: 24px;
+  // Sits on the leading edge next to the placeholder/text. inset-inline-start
+  // resolves to left in LTR and right in RTL, flipping the icon with the
+  // direction of the document.
+  inset-inline-start: 24px;
   top: 50%;
-  transform: translateY(-37%);
+  transform: translateY(-50%);
   color: gray;
   pointer-events: none;
 }

@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Påståendet",
-        "body": "“AI-driven on-chain agent.” Inferensen sker på AWS. Kedjan lagrar bara utdata."
+        "body": "\"AI-driven on-chain agent.\" Inferensen sker på AWS. Kedjan lagrar bara utdata."
       },
       {
         "title": "Glappet",
@@ -135,8 +135,18 @@
         "gain": "Vinst"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Fem pelare\nAI inte kan <i>ersätta.</i>",
     "lead": "AI gör produktion till en handelsvara. Dessa fem domäner består. Origyn är positionerat på var och en av dem.",
     "pillars": [
-      { "title": "Tillit", "description": "Origyn-certifiering — en verifierbar tillitssignal." },
-      { "title": "Kontext", "description": "Decennier av strukturerat minne — en personlig signal AI inte kan matcha." },
-      { "title": "Distribution", "description": "Swiss Subnet — verifierbar infrastruktur för agenter." },
-      { "title": "Smak", "description": "Auto-research-pipeline — automationsstödd kuratering." },
-      { "title": "Ansvar", "description": "Granskningsspår och certifikat — ett verkligt styrningslager." }
+      {
+        "title": "Tillit",
+        "description": "Origyn-certifiering — en verifierbar tillitssignal."
+      },
+      {
+        "title": "Kontext",
+        "description": "Decennier av strukturerat minne — en personlig signal AI inte kan matcha."
+      },
+      {
+        "title": "Distribution",
+        "description": "Swiss Subnet — verifierbar infrastruktur för agenter."
+      },
+      {
+        "title": "Smak",
+        "description": "Auto-research-pipeline — automationsstödd kuratering."
+      },
+      {
+        "title": "Ansvar",
+        "description": "Granskningsspår och certifikat — ett verkligt styrningslager."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Språk",
-    "switchTo": "Byt till {language}"
+    "switchTo": "Byt till {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFIKAT",
+    "integrators": "INTEGRATÖRER",
+    "useCases": "ANVÄNDNINGSFALL",
+    "governance": "STYRNING",
+    "help": "HJÄLP",
+    "toggleMenu": "Växla meny"
+  },
+  "footer": {
+    "certificates": "CERTIFIKAT",
+    "integrators": "INTEGRATÖRER",
+    "ecosystem": "EKOSYSTEM",
+    "useCases": "ANVÄNDNINGSFALL",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Alla rättigheter förbehållna – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Säkra dina tillgångar, immateriella rättigheter\noch din identitet helt on-chain.",
+      "subtitleMobile": "Säkra dina tillgångar,\nimmateriella rättigheter,\noch din identitet helt on-chain.",
+      "logoAlt": "ORIGYN Logotyp",
+      "certifyCta": "Certifiera dina tillgångar",
+      "buyCta": "Köp $OGY",
+      "marquee": "ORIGYN låter dig lagra dina data och tillgångar säkert och helt on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY marknadsvärde",
+        "tooltip": "Det totala marknadsvärdet av alla OGY-tokens i cirkulation, baserat på det aktuella tokenpriset."
+      },
+      "tvl": {
+        "title": "Totalt låst värde (TVL) av certifierade tillgångar i USD",
+        "tooltipTitle": "Totalt låst värde (TVL)",
+        "tooltip": "TVL motsvarar värdet av de utfärdade certifikaten; detta innebär inte att ORIGYN förvaltar dessa tillgångar i förvar."
+      },
+      "users": {
+        "title": "Användare",
+        "tooltip": "Det totala antalet privatpersoner, varumärken och institutioner som aktivt använder ORIGYN för att utfärda, förvalta eller äga certifierade tillgångar."
+      },
+      "assets": {
+        "title": "Totalt certifierade tillgångar",
+        "tooltip": "Antalet fysiska eller digitala objekt som har erhållit ett officiellt ORIGYN-certifikat."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Varför",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN – där verkliga tillgångar möter blockkedjan.",
+      "body": "ORIGYN är världens mest avancerade RWA-protokoll, utformat för att föra verkliga tillgångar helt on-chain – från konst och guld till lyxvaror och immateriella rättigheter.\n\nProtokollet tillhandahåller en tillitsfri certifieringsinfrastruktur som garanterar äkthet, ursprung och äganderätt för högt värderade tillgångar."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100 % on-chain-certifiering",
+          "description": "Inga mellanhänder, ingen manipulation. Helt decentraliserat."
+        },
+        {
+          "title": "$OGY Token-nytta",
+          "description": "Driver ORIGYN-ekosystemet genom styrning och protokollnytta."
+        },
+        {
+          "title": "Stöd för flera tillgångstyper",
+          "description": "Certifiera konst, lyxvaror, guld, fastigheter och mycket mer."
+        },
+        {
+          "title": "Branschledande säkerhet",
+          "description": "Oföränderligt blockkedjeskydd för dina mest värdefulla tillgångar."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Så här",
+      "titleSuffix": "fungerar det",
+      "steps": [
+        {
+          "description": "Att föra verkliga tillgångar on-chain ska vara enkelt. ORIGYN:s certifieringsprocess är utformad för att vara säker, decentraliserad och enkel att använda i bara tre steg: <br /><br />Ladda upp din tillgångs metadata och stöddokumentation. ORIGYN genererar ett unikt, manipuleringssäkert digitalt certifikat direkt på blockkedjan, tilldelar det till tillgången och kopplar det till dess rättmätige ägare.",
+          "panelTitle": "Prägla ditt digitala certifikat",
+          "panelDescription": "Ladda upp tillgångsinformation och prägla ett blockkedjeintyg."
+        },
+        {
+          "description": "Varje certifikat är kryptografiskt verifierbart. Tillgångens äkthet, ursprung och äganderätt valideras genom ORIGYN:s decentraliserade protokoll.",
+          "panelTitle": "Verifiera och autentisera",
+          "panelDescription": "Säkerställ tillgångens äkthet och transparens kring äganderätten."
+        },
+        {
+          "description": "När tillgången väl är certifierad kan den innehas, överföras, handlas med eller användas inom digitala ekosystem – från DeFi-applikationer och NFT-marknadsplatser till privata transaktioner och institutionella register.",
+          "panelTitle": "Överför och spåra",
+          "panelDescription": "Utnyttja och spåra din certifierade tillgång för DeFi, återförsäljning eller investering."
+        }
+      ],
+      "goToStep": "Gå till steg {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Användnings-",
+      "titleSuffix": "fall",
+      "description": "ORIGYN:s protokoll är byggt för att betjäna ett brett spektrum av branscher där tillit, ursprung och äkthet är avgörande. Nedan visas några av de nyckelssektorer som redan utnyttjar ORIGYN:s certifieringsinfrastruktur.",
+      "items": [
+        {
+          "title": "Konst",
+          "description": "Autentisera och skydda ursprunget för fysiska och digitala konstverk on-chain."
+        },
+        {
+          "title": "Guld",
+          "description": "Certifiera guld med oföränderliga, spårbara och manipuleringssäkra digitala certifikat."
+        },
+        {
+          "title": "Diamanter",
+          "description": "Spåra ursprung, gradering och äganderätt för varje diamant med blockkedjeprecision."
+        },
+        {
+          "title": "Made In",
+          "description": "Bevisa ursprung, äkthet och hantverkskvalitet för varje produkt – från klockor till mode."
+        }
+      ],
+      "indicatorAria": "Gå till användningsfall {n}",
+      "discover": "Utforska mer"
+    },
+    "certify": {
+      "titleLine": "Certifiera",
+      "titleEmphasis": "dina tillgångar",
+      "subtitle": "Använd ORIGYN Certifieringskalkylator för att direkt uppskatta kostnaderna för att säkra dina tillgångar med helt on-chain digitala certifikat. Oavsett om du certifierar konst, lyxvaror, guld eller andra värdefulla tillgångar ger det här verktyget dig en tydlig bild av infrastruktur- och teknikkostnader utan gissningar.",
+      "contactPrompt": "För att certifiera dina tillgångar, kontakta oss:",
+      "contactCta": "Kontakta ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Integratörs-",
+      "titleLineTwo": "program",
+      "description": "ORIGYN Integratörsprogram är utformat för företag, plattformar och utvecklare som vill integrera ORIGYN:s decentraliserade certifieringsinfrastruktur direkt i sina tjänster.\n\nOavsett om du driver en marknadsplats, en leveranskedjelösning eller ett lyxvarumärke kan du erbjuda säker, on-chain-tillgångsverifiering utan att behöva bygga allt från grunden.",
+      "cta": "Gå med i integratörsprogrammet"
+    },
+    "roadmap": {
+      "title": "Färdplan",
+      "description": "Från nya verktyg och styrningsfunktioner till utökat stöd för branscher och utvecklare. Varje milstolpe speglar vårt uppdrag att föra verkliga tillgångar helt on-chain genom skalbar, verifierbar och decentraliserad infrastruktur.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation finansierad",
+          "description": "ORIGYN Foundation grundades i Neuchâtel, Schweiz, för att inleda utvecklingen av ORIGYN Protocol."
+        },
+        {
+          "title": "Lansering av OGY Token",
+          "description": "Den inbyggda utility-tokenen $OGY skapas för att driva protokollavgifter, governance och staking."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Lansering av den första versionen av ORIGYNs NFT-standard som möjliggör on-chain certifiering."
+        },
+        {
+          "title": "Tokenomics 2.0-uppdatering",
+          "description": "200 miljoner $OGY tokens som tidigare tilldelats Foundation bränns, vilket initierar deflationstryck."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Lansering av det första on-chain mintinggränssnittet för digitala certifikat."
+        },
+        {
+          "title": "Strategiska partnerskap",
+          "description": "Strategiska samarbeten med FederItaly och METALOR för att certifiera italiensktillverkade produkter och tokeniserat guld."
+        },
+        {
+          "title": "Första guldköpet",
+          "description": "3 kg fysiskt guld köps och tokeniseras med ORIGYN Protocol."
+        },
+        {
+          "title": "Förvärv av CanDB",
+          "description": "ORIGYN förvärvar CanDB, en decentraliserad, skalbar databaslösning optimerad för NFT-metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 och Dashboard-lansering",
+          "description": "En deflationär modell introduceras med Tokenomics 3.0 och den första versionen av ORIGYN Dashboard släpps."
+        },
+        {
+          "title": "10 000 protokollanvändare",
+          "description": "ORIGYN passerar 10 000 unika protokollanvändare."
+        },
+        {
+          "title": "Lansering av Gold DAO",
+          "description": "Gold DAO blir den första DAO byggd på ORIGYN för att tokenisera och certifiera fysiskt guld on-chain."
+        },
+        {
+          "title": "500M OGY-donation till Gold DAO",
+          "description": "En halv miljard $OGY tokens doneras för att stödja Gold DAOs långsiktiga treasury."
+        },
+        {
+          "title": "ORIGYN DAO integrerad med ICP SNS",
+          "description": "ORIGYN DAO blir helt decentraliserad och styrd genom Internet Computers SNS-ramverk."
+        },
+        {
+          "title": "Dashboard V2-release",
+          "description": "Den nya versionen av dashboarden innehåller live-mätvärden, stakingstatistik och governance-verktyg."
+        },
+        {
+          "title": "Milstolpe på 30 000 användare",
+          "description": "ORIGYN växer till över 30 000 användare, en ökning på 300% på sex månader."
+        },
+        {
+          "title": "Samarbete med Leo Caillard och Gil Sertissage",
+          "description": "ORIGYN certifierar fysiska konstverk och diamanter i uppmärksammade partnerskap."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT-standarden uppgraderas för att möjliggöra säker överförbarhet av certifikat."
+        },
+        {
+          "title": "Integrator Framework lanserat",
+          "description": "Regler och en onboardingstruktur skapas för att vägleda nya partner som integrerar med ORIGYN."
+        },
+        {
+          "title": "Lansering av Cecil DAO",
+          "description": "ORIGYN stöder lanseringen av Cecil DAO för att finansiera bevarande- och humanitära projekt med blockchaintransparens."
+        },
+        {
+          "title": "Förvärv av ClaimLink",
+          "description": "ORIGYN förvärvar ClaimLink, en decentraliserad NFT- och tokendistributionsplattform byggd på ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "En ny standard introduceras för att öka certifikatens interoperabilitet och nytta i hela ekosystemet."
+        },
+        {
+          "title": "Lansering av en offentlig",
+          "titleSpan": "Minting Studio",
+          "description": "Ett självbetjäningsverktyg lanseras som gör det möjligt för vem som helst att minta on-chain RWA-certifikat på ORIGYN-infrastruktur."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone-mysteriet kommer att avslöjas Q2 2026 i Genève."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Ett självbetjäningsverktyg lanseras som gör det möjligt för vem som helst att minta on-chain med ORIGYN-infrastruktur."
+        },
+        {
+          "title": "Implementering av IP-skydd",
+          "description": "Stöd för on-chain certifiering av immateriella rättigheter integreras i protokollet."
+        },
+        {
+          "title": "Cross-chain implementering",
+          "description": "Cross-chain kompatibilitet utökar ORIGYNs räckvidd till andra stora ekosystem."
+        },
+        {
+          "title": "Global integration av wallets och marketplaces",
+          "description": "ORIGYN NFTs blir tillgängliga via ledande wallets och NFT marketplaces över hela världen."
+        },
+        {
+          "title": "Att bli den universella certifieringsstandarden",
+          "description": "ORIGYN siktar på att etablera sig som den globala referensen för digital certifiering över alla tillgångsklasser."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNERS",
+      "testimonials": [
+        {
+          "title": "CEO för Metalor",
+          "description": "\"ORIGYN är den mest avancerade digitala certifieringstekniken och den mest heltäckande i världen. Alla data lagras helt i en blockchain för att säkerställa att certifikaten är oföränderliga och transparenta. Metalor är glada över att samarbeta med ett fintechbolag baserat i Neuchâtel som ORIGYN för att föra en innovativ lösning till marknaderna.\""
+        },
+        {
+          "title": "Konstspecialist",
+          "description": "\"För mina privata samlare är förtroende och arv allt. ORIGYNs certifieringsteknik har blivit avgörande: den garanterar inte bara äktheten hos varje konstverk utan säkerställer också dess spårbarhet och värde över generationer. Det handlar inte längre bara om att äga ett konstverk, utan om att säkra dess historia on-chain, för alltid. ORIGYN gör det möjligt.\""
+        },
+        {
+          "title": "Medgrundare av Cyber",
+          "description": "\"Vi säger alltid att diamanter varar för evigt, och det är sant. Därför måste man tänka likadant om informationen man tillhandahåller, för om 100 eller 200 år kommer dessa diamanter fortfarande att finnas. Vi behövde teknik som kunde säkerställa att vi fortfarande kunde tillhandahålla den informationen, särskilt för en produkt med högt värde som går genom generationer... Den främsta anledningen till att vi ingick ett partnerskap med ORIGYN är att de kunde tillhandahålla allt detta.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Ta del i",
+      "emphasisDesktop": "beslutsfattandet",
+      "emphasisMobileLineOne": "Besluts-",
+      "emphasisMobileLineTwo": "fattandet",
+      "cta": "Gå med i ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Användningsfall hittades inte",
+    "cases": {
+      "gold": [
+        {
+          "title": "Guld",
+          "description": "Som världens största tillgångsklass och mest noggrant övervakade råvara kräver guld de högsta nivåerna av säkerhet. <br /><br />ORIGYN uppfyller dessa krav, vilket demonstreras av <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, världsledaren inom guldraffinering, som valde ORIGYN-protokollet för att säkra sin data. För första gången registreras all teknisk information om guldtackor – inklusive högupplösta bilder och dokument – i ett enda certifikat på blockkedjan."
+        },
+        {
+          "description": "Dessutom använder flera projekt som <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> och <a href='https://bity.com' target='_blank'>Bity</a> dessa certifikat för att sälja motsvarande guldtackor eller skapa tokens som backas av fysiskt guld."
+        }
+      ],
+      "art": [
+        {
+          "title": "Konst",
+          "description": "Konstexperter är djupt angelägna om tillit och garantin för certifikat för konstverk. Det är därför flera fall redan har antagit ORIGYN-tekniken.<br /><br />Etablerade konstnärer som <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> och <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> har skapat egna ORIGYN-certifikat för att skydda data relaterad till deras verk. Dessa certifikat är helt on-chain, manipuleringssäkra och omöjliga att kopiera, vilket gör det möjligt för konstnärer att bekämpa förfalskning och samtidigt förbättra samlingsupplevelsen genom högupplösta bilder, videor och dokument."
+        },
+        {
+          "description": "Enheter som stiftelser, organisationer, familjer, gallerier och konstråd som behöver skapa digitala certifikat för sina klienter har börjat använda ORIGYN för att upprätthålla maximal säkerhet och konfidentialitet. Flera gallerier har redan implementerat ORIGYN-tekniken, bland annat Retelet Gallery för certifikat av René Magrittes konstverk.<br /><br />ORIGYN-tekniken möjliggör också försäljning via certifikat, särskilt samägandeförsäljning. Detta gör det möjligt att dela konstverk mellan flera ägare genom att dela upp certifikatet i flera delar, där varje del fungerar som ägandebevis."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Nationellt ursprung är mer än en etikett. Det är en deklaration om identitet, kvalitet och kulturellt värde. I takt med att förfalskningarna ökar har det blivit en viktig differentieringsfaktor för varumärken i alla branscher att bevisa var och hur en produkt tillverkas.<br /><br />Som svar skapade <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> certifieringen 100 % Made in Italy. Denna juridiskt erkända standard skyddar italiensk excellens genom rigorös dokumentation, oberoende revisioner och påverkan på myndighetsnivå. ORIGYN tillhandahåller det digitala fundamentet för detta system genom att registrera varje certifierad produkt på blockkedjan som ett verifierbart ursprungsbevis."
+        },
+        {
+          "description": "Varje certifikat blir ett säkert, manipuleringssäkert digitalt pass. Det stärker konsumenternas förtroende, säkerställer transparens i leveranskedjan och stödjer företag som väljer att leda med äkthet."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Lyx",
+          "description": "ORIGYN-tekniken tillgodoser lyxsektorns behov av att förnya sig och erbjuda mer personliga och transparenta produktupplevelser.<br /><br />Juveleraren <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> använder ORIGYN blockkedjeteknik för att skapa certifikat för hela sin kollektion. Detta säkrar all data helt on-chain och erbjuder deras prestigefulla kunder nästa generations certifikat som garanterar konfidentialitet, äkthet och äganderätt."
+        },
+        {
+          "description": "Andra lyxföretag som <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> använder också ORIGYN för att registrera den fullständiga spårbarhetskedjan för sina diamanter avsedda för kända urmakare. Många andra tillämpningar är möjliga, bland annat att lägga till personligt marknadsföringsinnehåll i certifikat eller kombinera tekniken med AI för att fastställa äkthet i realtid på andrahandsmarknader."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Hjälp-",
+    "titleSuffix": "center",
+    "searchPlaceholder": "Sök..",
+    "faqs": [
+      {
+        "title": "OGY-token",
+        "description": "Driver Web 3.0:s decentraliserade tillgångscertifiering",
+        "answer": "<strong>OGY-token</strong> är kärnnyttan i ORIGYN-protokollet. Den kopplar samman certifieringen av verkliga tillgångar med decentraliserad blockkedjeinfrastruktur, vilket gör äganderätt, autentisering och innehållsverifiering verkligt säkra.<br><br>OGY möjliggör ett globalt system där fysiska tillgångar certifieras digitalt, spåras och integreras i decentraliserade applikationer och marknader."
+      },
+      {
+        "title": "Protokollnytta",
+        "description": "OGY krävs för att utföra viktiga funktioner inom ORIGYN-ekosystemet.",
+        "answer": "<strong>Certifiering:</strong> Varje tillgång som certifieras på ORIGYN kräver OGY för att prägla ett oföränderligt on-chain-certifikat.<br><strong>Transaktionslager:</strong> Underlättar överföringar, omcertifieringar och livscykelhändelser för certifierade tillgångar.<br><strong>Datalagring:</strong> Stöder säker, decentraliserad lagring av tillgångsmetadata och ursprungsinformation.<br>Denna nytta säkerställer att OGY är en integrerad del av varje transaktion inom protokollet."
+      },
+      {
+        "title": "OGY-tokens kontraktsadress",
+        "description": "OGY-token är driftsatt på Internet Computer-blockkedjan.",
+        "answer": "OGY-token är driftsatt på Internet Computer-blockkedjan och fungerar som en inbyggd nyttotoken inom ORIGYN-protokollet.<br><br>Officiell kontraktsadress:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Användare anger tillgångar i anropet<br>Verifiera alltid kontraktsadressen innan du interagerar med OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[KÖP OGY]</a>"
+      },
+      {
+        "title": "Styrning",
+        "description": "OGY är en styrningstoken som ger innehavarna möjlighet att:",
+        "answer": "• Föreslå och rösta om protokolluppgraderingar, likviditetsregler och ekosystemförändringar.<br>• Övervaka onboardingen av integratörer och certifierare.<br>• Fördela kassafondsmedel mot innovation, tillväxt och strategiska initiativ.<br><br>Styrningen är helt decentraliserad via ORIGYN DAO, vilket ger communityt direkt inflytande över protokollets utveckling."
+      },
+      {
+        "title": "Staking och belöningar",
+        "description": "OGY-staking säkrar nätverket och anpassar incitamenten.",
+        "answer": "<strong>Nätverkssäkerhet:</strong> Stakers deltar i styrningen och hjälper till att validera protokolloperationer.<br><br><strong>Belöningar:</strong> Tjäna en andel av protokollets intäkter från certifieringsavgifter och nätverksaktivitet.<br><br><strong>Långsiktig anpassning:</strong> Staking uppmuntrar långsiktigt deltagande och stärker ekosystemet.<br><br>Stakingmodellen kopplar tokennytta direkt till protokolladoption och framgång.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflationär mekanism / värdeuppbyggnad",
+        "description": "OGY integrerar en deflationär modell utformad för hållbar tillväxt.",
+        "answer": "<strong>Certifieringsbränning:</strong> En del av OGY som används vid certifiering tas permanent bort från cirkulationen.<br><br><strong>Kassaförvaltning:</strong> Protokollets intäkter stöder utveckling, belöningar och tokenvärdesoptimering.<br><br>I takt med att protokollanvändningen ökar minskar OGY-utbudet, vilket förstärker värdeskapandet i linje med adoptionen."
+      },
+      {
+        "title": "Tokenomics – översikt",
+        "description": "Totalt utbud: 10.4 Billion OGY",
+        "answer": "<strong>Distribution:</strong> Fördelad till ekosystemtillväxt, stakingrebelöningar, community och styrning.<br><br><strong>Intäktsmodell:</strong> Protokollavgifter betalda i OGY skapar löpande efterfrågan och minskar utbudet genom bränningsmekanismer.<br>Modellen är utformad för att stödja långsiktig protokollhållbarhet och framtidsinriktad anpassning."
+      },
+      {
+        "title": "OGY:s framtid",
+        "description": "OGY är grunden för ett decentraliserat ramverk.",
+        "answer": "OGY är grunden för ett decentraliserat ramverk utformat för att certifiera, förvalta och frigöra värdet av verkliga tillgångar on-chain. I takt med att ORIGYN växer utvidgas OGY:s roll som den ekonomiska motorn som driver tillgångscertifiering, styrning och ekosystemutveckling."
+      },
+      {
+        "title": "Utforska live-token",
+        "description": "Utforska live-tokendata, stakingalternativ och styrningsdeltagande i ORIGYN Dashboard.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Klicka för att öppna Dashboard</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Bli",
+      "titleConnector": "en",
+      "titleEmphasis": "Integratör",
+      "subtitle": "GÅ MED I INTEGRATÖRSPROGRAMMET OCH BYGG FRAMTIDENS FÖRTROENDE MED ORIGYN:S BLOCKKEDJECERTIFIERINGSTEKNIK",
+      "cta": "Gå med nu"
+    },
+    "program": {
+      "titleLineOne": "Integratörs-",
+      "titleLineTwo": "program",
+      "steps": [
+        {
+          "labelBold": "VAD",
+          "labelRest": "ÄR INTEGRATÖRSPROGRAMMET?",
+          "description": "Integratörsprogrammet är ett strategiskt initiativ som syftar till att främja ORIGYN-protokollet, uppmuntra dess adoption och bredda ekosystemet."
+        },
+        {
+          "labelBold": "VILKA",
+          "labelRest": "ÄR INTEGRATÖRERNA?",
+          "description": "<ul><li><strong>Integratörer är oberoende företag</strong> som bygger produkter baserade på ORIGYN-protokollet med det gemensamma målet att prägla ORIGYN-certifikat och marknadsföra ORIGYN-protokollet inom en specifik bransch, tillgångsklass eller över flera sektorer.</li><li><strong>I rollen som möjliggörare</strong> hjälper de företag att ta till sig ORIGYN:s blockkedjecertifieringsteknik utan att kräva djup blockkedje- och Web3-kompetens.</li><li><strong>Efter en granskningsprocess</strong> genomförd av ORIGYN Foundation väljs integratörer ut och röstar av ORIGYN DAO-tokeninnehavarna.</li></ul>"
+        },
+        {
+          "labelBold": "HUR",
+          "labelRest": "BLIR DU INTEGRATÖR?",
+          "description": "För att bli integratör måste ett företag visa att det kan leverera tjänster i stor skala och uppfylla alla krav och den kompetens som krävs för att betjäna en eller flera sektorer."
+        }
+      ],
+      "goToStep": "Gå till steg {n}",
+      "joinNow": "Gå med nu"
+    },
+    "workflow": {
+      "titleLineOne": "Ansöknings-",
+      "titleLineTwo": "process",
+      "steps": [
+        {
+          "title": "Ansökningsformulär",
+          "content": "<p>Som en del av ansökan måste integratörer fylla i <strong><a href=\"/integrator/join\">projektansökningsformuläret online</a></strong> och förbereda <strong>Due Diligence-dokumentation</strong> som ska skickas till <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Due diligence-dokumentation inkluderar:</p>\n<ul>\n<li>Kopia av bolagsregistreringsbevis</li>\n<li>Beskrivning av UBO – verkliga huvudmän</li>\n<li>Kopia av bolagsordning och stadgar</li>\n<li>Styrelsebeslut som formaliserar viljan att ansöka som integratör och följa stakingreglerna, tillsammans med en lista över tjänstemän som är behöriga att driva integratörsverksamheten</li>\n<li>Identifiering av behöriga undertecknare ska baseras på fotografier och underskriftskort som är vederbörligen attesterade av bolaget</li>\n<li>Kopior av identitetsbevis och adressbevis för chefer, tjänstemän eller anställda som innehar fullmakt att utföra affärsverksamhet på bolagets vägnar</li>\n<li>Lista över styrelseledamöter</li>\n<li>Integratörsprojektets ansökningsformulär</li>\n</ul>"
+        },
+        {
+          "title": "Granskning av ORIGYN Foundation",
+          "content": "<p>Det första steget för att bli integratör är att valideras av ORIGYN Foundation efter en due diligence-process. Integratören accepterar att dela alla begärda dokument i syfte att uppfylla alla erforderliga KYC/KYB/AML-procedurer.</p>"
+        },
+        {
+          "title": "Styrningsomröstning via ORIGYN DAO",
+          "content": "<p>OFFENTLIG OMRÖSTNING AV ORIGYN DAO:</p>\n<p>När Foundation avslutar granskningsprocessen kommer integratören att bli föremål för en DAO-omröstning via ett offentligt förslag på SNS-plattformen. Alla ORIGYN-förslag kan ses på <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Varje ändring av juridisk adress, företagsnamn eller avslutande av samarbete röstats offentligt på SNS-plattformen.</p>"
+        },
+        {
+          "title": "Staking av 50,000,000 OGY",
+          "content": "<p>Om förslaget godkänns framgångsrikt måste integratören staka 50,000,000 OGY i ORIGYN Governance under 1 year utan upplösning.</p>\n<p>Detta steg säkerställer integratörens långsiktiga åtagande och rösträtt för att aktivt delta i styrningen av ORIGYN. Alla stakade neuroner visas offentligt i Dashboard på <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>All statistik, såsom antal präglade certifikat, TVL för certifierade tillgångar m.m., visas offentligt under integratörsdelen på <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Resultatuppföljning",
+          "content": "<p>Beroende på sektor och åtagande kan minimikrav på antal präglade certifikat ingå i integratörsavtalet. ORIGYN Foundation kommer därför periodiskt att genomföra milstolps- och resultatuppföljningar av integratörerna.</p>\n<p>All statistik, såsom antal präglade certifikat, TVL för certifierade tillgångar m.m., visas offentligt under integratörsdelen på <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Ladda ned",
+      "titleLineTwo": "integratörsavtal",
+      "cta": "Ladda ned"
+    }
+  },
+  "integratorJoin": {
+    "title": "Integratörsprogram",
+    "titleItalic": "Ansökningsformulär",
+    "requiredLabel": "OBLIGATORISKT *",
+    "requiredMessage": "Obligatoriskt",
+    "emailInvalid": "Ange en giltig e-postadress",
+    "send": "SKICKA",
+    "sending": "Skickar…",
+    "errorSend": "Fel vid formulärinlämning.",
+    "fileSizeError": "Filstorleken får inte överstiga 1 MB",
+    "addLink": "LÄGG TILL EN LÄNK",
+    "addObjective": "LÄGG TILL ETT MÅL",
+    "addKpi": "LÄGG TILL ETT KPI",
+    "uploadHighlight": "Ladda upp",
+    "uploadSuffix": " din logotyp eller dra den hit (VALFRITT)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — max 1 MB",
+    "logoPreviewAlt": "Förhandsvisning av logotyp",
+    "successTitle": "Tack",
+    "successMessage": "Vi återkommer till dig",
+    "backToIntegrator": "TILLBAKA TILL INTEGRATÖRSSIDAN",
+    "errorTitle": "Något gick fel",
+    "errorMessageDefault": "Försök igen eller kom tillbaka senare",
+    "retry": "FÖRSÖK IGEN",
+    "sections": {
+      "representative": {
+        "title": "INTEGRATÖRENS REPRESENTANT",
+        "fullName": "FULLSTÄNDIGT NAMN *",
+        "email": "E-POSTADRESS *",
+        "phone": "TELEFONNUMMER *"
+      },
+      "overview": {
+        "title": "ÖVERSIKT",
+        "description": "VÄNLIGEN GE EN KORT ÖVERSIKT AV INTEGRATÖRSPROJEKTET, INKLUSIVE",
+        "vision": "Din integratörs vision i en mening... *",
+        "industry": "Branschkategoriexempel (konst, musik, lyx) eller specifika tillgångar (guld, diamanter) *",
+        "geography": "Marknadernas geografi (globalt, Europa, landsspecifikt) *",
+        "socialFirst": "Webbplats och sociala medier-länkar *",
+        "social": "Webbplats och sociala medier-länkar",
+        "presentation": "Länk till projektpresentation (inte obligatoriskt, men välkommet)"
+      },
+      "acquisition": {
+        "title": "KUNDANSKAFFNING",
+        "description": "DEFINIERA TYDLIGT DIN MÅLGRUPP OCH HUR DU FÖRVÄRVAR DEM ELLER PLANERAR ATT FÖRVÄRVA DEM",
+        "whyExists": "Varför behöver det här projektet existera och vad skiljer det från andra? *",
+        "whyIntegrator": "Varför är det viktigt för dig att bli integratör? *"
+      },
+      "objectives": {
+        "title": "NYCKELSMÅL SOM DU VILL UPPNÅ",
+        "first": "Mål 01 *",
+        "second": "Mål 02",
+        "more": "Mål {n}"
+      },
+      "kpis": {
+        "title": "NYCKELTAL SOM DU VILL FÖLJA UPP",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "VAD OCH HUR PLANERAR DU ATT GENOMFÖRA",
+        "focus": "Berätta i detalj vad du kommer att fokusera på som integratör och hur framgång för det här projektet ser ut.",
+        "implement": "Berätta hur du planerar att genomföra projektet"
+      },
+      "roadmaps": {
+        "title": "FÄRDPLAN FÖR FÖRSTA 3 MÅNADER OCH 3 ÅR",
+        "description": "Du måste ange när du förväntar dig att börja prägla certifikat och ett uppskattat antal certifikat *"
+      },
+      "team": {
+        "title": "TEAM",
+        "placeholder": "Berätta om ditt nuvarande team, om det finns, eller framtida teamroller som du kan behöva, tillsammans med LinkedIn-länkar *"
+      },
+      "risk": {
+        "title": "RISKFAKTORER",
+        "placeholder": "Berätta om de skäl och faktorer som kan leda till misslyckande."
+      },
+      "optional": {
+        "title": "VALFRITT",
+        "placeholder": "Finns det något annat du vill dela som ökar dina chanser att bli utvald?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "The",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "OGY-token är <b>kärnnyttan</b> i ORIGYN-protokollet.",
+      "paragraphTwo": "Den <b>kopplar samman</b> certifieringen av verkliga tillgångar med decentraliserad blockkedjeinfrastruktur, <b>vilket gör äganderätt, autentisering</b> och <b>överlåtelse verifierbara och säkra.</b>",
+      "paragraphThree": "OGY möjliggör ett globalt system där <b>fysiska</b> tillgångar <b>certifieras digitalt, spåras</b> och <b>integreras i decentraliserade</b> applikationer och marknader.",
+      "cta": "Köp OGY",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "$OGY marknadsvärde",
+      "burned": "Totalt bränt OGY",
+      "circulating": "Cirkulerande utbud",
+      "holders": "Tokeninnehavare"
+    },
+    "utility": {
+      "titlePrefix": "Protokoll-",
+      "titleEmphasis": "nytta",
+      "lead": "Du behöver OGY-tokens för att fullt ut använda ORIGYN-ekosystemet:",
+      "cards": [
+        {
+          "title": "Certifiering",
+          "description": "Varje tillgång som certifieras på ORIGYN kräver OGY för att prägla ett oföränderligt on-chain-certifikat."
+        },
+        {
+          "title": "Transaktionslager",
+          "description": "Underlättar överföringar, omcertifieringar och livscykelhändelser för certifierade tillgångar."
+        },
+        {
+          "title": "Datalagring",
+          "description": "Stöder säker, decentraliserad lagring av tillgångsmetadata och ursprungsinformation."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY Token",
+      "titleLineTwo": "kontraktsadress",
+      "description": "OGY-token är driftsatt på Internet Computer-blockkedjan och fungerar som en inbyggd nyttotoken inom ORIGYN-protokollet.",
+      "bulletOne": "Detta kontrakt styr OGY:s utgivning, överföringar och interaktioner inom protokollet, vilket säkerställer transparens och on-chain-verifiering av all tokenaktivitet.",
+      "bulletTwo": "Du kan visa och interagera med OGY-token direkt via ICP-nätverket.",
+      "warning": "Verifiera alltid kontraktsadressen innan du interagerar med OGY.",
+      "contractLabel": "Officiell kontraktsadress:",
+      "copyAria": "Kopiera kontraktsadress",
+      "copied": "Kopierat till urklipp",
+      "cmcAria": "Visa OGY på CoinMarketCap"
+    },
+    "governance": {
+      "title": "Styrning",
+      "lead": "OGY är en styrningstoken som ger innehavarna möjlighet att:",
+      "items": [
+        "<b>Fördela</b> kassafondsmedel mot ekosystemtillväxt och strategiska initiativ.",
+        "<b>Föreslå och rösta</b> om protokolluppgraderingar, certifieringsregler och ekosystemförändringar.",
+        "<b>Övervaka</b> onboardingen av integratörer och certifierare."
+      ],
+      "closing": "Styrningen är <b>helt decentraliserad</b> via ORIGYN DAO, vilket ger communityt direkt inflytande över <b>protokollets utveckling.</b>",
+      "cta": "SE MER"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "och",
+      "titleLineTwoEmphasis": "belöningar",
+      "lead": "OGY-staking säkrar nätverket och anpassar incitamenten:",
+      "cards": [
+        {
+          "title": "Nätverkssäkerhet",
+          "description": "Stakers deltar i styrningen och hjälper till att validera protokolloperationer."
+        },
+        {
+          "title": "Belöningar",
+          "description": "Tjäna en andel av protokollets intäkter från certifieringsavgifter och nätverksaktivitet."
+        },
+        {
+          "title": "Långsiktig anpassning",
+          "description": "Staking uppmuntrar långsiktigt deltagande och stärker ekosystemet."
+        }
+      ],
+      "closing": "Stakingmodellen kopplar tokennytta direkt till protokolladoption och framgång.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflationär</b> mekanism",
+      "titleLineTwo": "och <b>värdeuppbyggnad</b>",
+      "lead": "OGY integrerar en deflationär modell utformad för hållbar tillväxt:",
+      "items": [
+        {
+          "title": "Vad gör OGY till en deflationär token?",
+          "answer": "OGY är utformad med en deflationär modell, vilket innebär att det totala utbudet minskar över tid i takt med att protokollet används."
+        },
+        {
+          "title": "Hur fungerar tokenbränningen?",
+          "answer": "Varje gång OGY används för certifiering bränns en del av tokens permanent. Detta minskar det cirkulerande utbudet."
+        },
+        {
+          "title": "Vilken roll spelar kassan?",
+          "answer": "Protokollets intäkter förvaltas av kassan för att stödja löpande utveckling, belöna deltagare och bidra till långsiktig ekosystemstabilitet."
+        },
+        {
+          "title": "Hur skapar OGY värde över tid?",
+          "answer": "I takt med att fler användare antar ORIGYN-protokollet och certifieringsaktiviteten ökar, bränns mer OGY. Detta minskande utbud, kombinerat med ökad användning, stöder långsiktigt värdeskapande."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomics",
+      "titleEmphasis": "Översikt",
+      "totalSupplyLabel": "Totalt utbud:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribution:</b> Fördelad till ekosystemtillväxt, stakingrebelöningar, community och styrning.",
+      "revenue": "<b>Intäktsmodell:</b> Protokollavgifter betalda i OGY skapar löpande efterfrågan och minskar utbudet genom bränningsmekanismer.",
+      "support": "Modellen är utformad för att stödja långsiktig protokollhållbarhet och anpassning för tokeninnehavare.",
+      "cta": "TOKENOMICS"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostnadskalkylator",
+      "description": "Använd ORIGYN-kalkylatorn för att uppskatta kostnaden för ditt unika certifikat med samtliga data lagrade on-chain"
+    },
+    "plan": {
+      "title": "Planera din prägel",
+      "description": "Ange hur många objekt du har och vad du laddar upp.",
+      "itemsLabel": "Hur många objekt?",
+      "uploadingLabel": "Vad laddar du upp?",
+      "knowExactSize": "Känner du till den exakta storleken?",
+      "totalUploadSize": "Total uppladdningsstorlek",
+      "usePreset": "Använd en förinställning i stället",
+      "combinedSize": "Kombinerad storlek för samtliga filer över alla objekt.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB styck"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB styck"
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB styck"
+        },
+        "video": {
+          "label": "Kort video",
+          "hint": "1 GB styck"
+        },
+        "video1hr": {
+          "label": "Lång video",
+          "hint": "60 GB styck"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Aktuell uppskattning",
+      "titleRefreshing": "Uppdaterar uppskattning",
+      "description": "Uppdateras automatiskt när du ändrar dina inställningar.",
+      "ogyEquivalent": "OGY-motsvarighet",
+      "ogySpotRate": "OGY-spotkurs",
+      "itemSingular": "Objekt",
+      "itemPlural": "Objekt",
+      "upload": "Uppladdning"
+    },
+    "breakdown": {
+      "title": "Kostnadsspecifikation",
+      "baseFee": "Grundavgift för prägel",
+      "storageFee": "Lagringsavgift",
+      "items": "Objekt",
+      "uploadSize": "Uppladdningsstorlek"
+    },
+    "bytesUnit": "byte"
   }
 }

@@ -10,6 +10,7 @@ import GradientButton from "@components/Button/GradientButton";
 import styles from "./Tokenomics.module.scss";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
 import useTotalOGYSupply from "@/hooks/useTotalOGYSupply";
+import { useT } from "@/i18n/LocaleContext";
 
 const slides = [
   OGYCirculationState,
@@ -19,6 +20,7 @@ const slides = [
 ];
 
 const Tokenomics = () => {
+  const t = useT();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -52,40 +54,35 @@ const Tokenomics = () => {
       <div className={styles.tokenomicsContent}>
         <ScrollReveal>
           <h1>
-            Tokenomics
+            {t("token.tokenomics.titleLineOne")}
             <br />
-            <i>Overview</i>
+            <i>{t("token.tokenomics.titleEmphasis")}</i>
           </h1>
         </ScrollReveal>
         <ScrollReveal delay={0.25}>
           <p>
-            <b>Total Supply:</b> {data?.totalSupplyOGYToString ?? "..."} OGY
+            <b>{t("token.tokenomics.totalSupplyLabel")}</b>{" "}
+            {data?.totalSupplyOGYToString ?? "..."} {t("token.tokenomics.totalSupplyUnit")}
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
-          <p>
-            <b>Distribution:</b> Allocated to ecosystem growth, staking rewards, community, and governance.
-          </p>
+          <p dangerouslySetInnerHTML={{ __html: t("token.tokenomics.distribution") }} />
         </ScrollReveal>
 
         <ScrollReveal delay={0.35}>
-          <p>
-           <b>Revenue Model:</b> Protocol fees paid in OGY create ongoing demand while reducing supply through burning mechanisms.
-          </p>
+          <p dangerouslySetInnerHTML={{ __html: t("token.tokenomics.revenue") }} />
         </ScrollReveal>
 
         <ScrollReveal delay={0.45}>
           <p className={styles.tokenomicsSupport}>
-           <b>
-              The model is designed to support long-term protocol sustainability and token holder alignment.
-            </b>
+            <b>{t("token.tokenomics.support")}</b>
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.45}>
           <GradientButton
             href="https://dashboard.origyn.com/Tokenomics_V3.pdf"
-            text="TOKENOMICS"
+            text={t("token.tokenomics.cta")}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.tokenomicsButton}

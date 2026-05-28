@@ -1,40 +1,33 @@
 import UtilityCard from "../UtilityCard/UtilityCard";
 import styles from "./Utility.module.scss";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
+import { useT } from "@/i18n/LocaleContext";
+
+const ICONS = [
+  "/token/certification.png",
+  "/token/transaction.png",
+  "/token/data.png",
+];
 
 const Utility = () => {
-  const utilityCards = [
-    {
-      title: "Certification",
-      description: "Every asset certified on ORIGYN requires OGY to mint an immutable on-chain certificate.",
-      icon: "/token/certification.png",
-    },
-    {
-      title: "Transaction Layer",
-      description: "Facilitates transfers, re-certifications, and lifecycle events of certified assets.",
-      icon: "/token/transaction.png",
-    },
-    {
-      title: "Data Storage",
-      description: "Supports secure, decentralized storage of asset metadata and provenance.",
-      icon: "/token/data.png",
-    },
-  ];
+  const t = useT();
+  const cards = (t.raw("token.utility.cards") ?? []).map((card, i) => ({
+    ...card,
+    icon: ICONS[i],
+  }));
 
   return (
     <section className={styles.utility}>
       <ScrollReveal>
         <h1>
-          Protocol <i>Utility</i>
+          {t("token.utility.titlePrefix")} <i>{t("token.utility.titleEmphasis")}</i>
         </h1>
       </ScrollReveal>
       <ScrollReveal delay={0.15}>
-        <p>
-          You need OGY tokens to fully use the ORIGYN ecosystem:
-        </p>
+        <p>{t("token.utility.lead")}</p>
       </ScrollReveal>
       <div className={styles.cards}>
-        {utilityCards.map((card, index) => (
+        {cards.map((card, index) => (
           <ScrollReveal key={card.title} delay={0.15 * (index + 1)}>
             <UtilityCard
               key={card.title}

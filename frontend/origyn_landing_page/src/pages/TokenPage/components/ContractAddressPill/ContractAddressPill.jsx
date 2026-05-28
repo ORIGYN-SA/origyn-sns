@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { useT } from "@/i18n/LocaleContext";
 import styles from "./ContractAddressPill.module.scss";
 
 const contractAddressValue = "lkwrt-vyaaa-aaaaq-aadhq-cai";
 
 const ContractAddressPill = () => {
+  const t = useT();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -18,19 +20,19 @@ const ContractAddressPill = () => {
     <>
       {createPortal(
         <div className={`${styles.copyToast} ${copied ? styles.copyToastVisible : ""}`}>
-          Copied to clipboard
+          {t("token.address.copied")}
         </div>,
         document.body
       )}
       <div className={styles.contractAddressPill}>
         <div className={styles.contractAddressText}>
-          <span className={styles.contractAddressLabel}>Official Contract Address:</span>
+          <span className={styles.contractAddressLabel}>{t("token.address.contractLabel")}</span>
           <span className={styles.contractAddressValue}>{contractAddressValue}</span>
         </div>
         <button
           onClick={handleCopy}
           className={styles.contractAddressCopy}
-          aria-label="Copy contract address"
+          aria-label={t("token.address.copyAria")}
         >
           <img src="/token/copy.svg" alt="" />
         </button>

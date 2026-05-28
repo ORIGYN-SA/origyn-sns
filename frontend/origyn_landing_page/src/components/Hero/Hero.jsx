@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "@components/Button/Button";
 import Stats from "@components/Stats/Stats";
+import { useT } from "@/i18n/LocaleContext";
 import styles from "./Hero.module.scss";
 
 const Hero = ({ data }) => {
+  const t = useT();
   const bgRef = useRef(null);
   const ipadRef = useRef(null);
   const initialIpadY = useRef(0);
@@ -14,28 +16,24 @@ const Hero = ({ data }) => {
   const statsData = [
     {
       value: data?.marketCap,
-      title: "$OGY Market Cap",
-      tooltip:
-        "The total market value of all OGY tokens currently in circulation, based on the live token price.",
+      title: t("home.stats.marketCap.title"),
+      tooltip: t("home.stats.marketCap.tooltip"),
     },
     {
       value: data?.tvl,
-      title: "Total Value Locked (TVL) of certified assets in usd",
-      tooltipTitle: "Total Value Locked (TVL)",
-      tooltip:
-        "TVL corresponds to the value of the issued certificates; this does not mean that ORIGYN holds these assets in custody.",
+      title: t("home.stats.tvl.title"),
+      tooltipTitle: t("home.stats.tvl.tooltipTitle"),
+      tooltip: t("home.stats.tvl.tooltip"),
     },
     {
       value: data?.users,
-      title: "Users",
-      tooltip:
-        "The total number of individuals, brands, and institutions who actively use ORIGYN to issue, manage, or own certified assets.",
+      title: t("home.stats.users.title"),
+      tooltip: t("home.stats.users.tooltip"),
     },
     {
       value: data?.assets,
-      title: "Total Certified Assets",
-      tooltip:
-        "The number of physical or digital items that have received an official ORIGYN certificate.",
+      title: t("home.stats.assets.title"),
+      tooltip: t("home.stats.assets.tooltip"),
     },
   ];
 
@@ -91,6 +89,21 @@ const Hero = ({ data }) => {
     };
   }, [ipadLoaded]); // Only run after image is loaded
 
+  // Render newline-separated translations as line-broken JSX. Translators can
+  // tweak where breaks fall without touching markup.
+  const renderLines = (text) =>
+    text.split("\n").map((line, i, all) => (
+      <span key={i}>
+        {line}
+        {i < all.length - 1 && <br />}
+      </span>
+    ));
+
+  const marqueeText = t("home.hero.marquee");
+  const marqueeLoop = Array.from({ length: 6 }, (_, i) => (
+    <span key={i}>{marqueeText} • </span>
+  ));
+
   return (
     <div className={styles.heroWithStats}>
       <div className={styles.heroContainer}>
@@ -111,23 +124,20 @@ const Hero = ({ data }) => {
         </video>
         <div className={styles.contentWrapper}>
           <div className={styles.subtitleDesktop}>
-            Secure your assets, intellectual property, <br />
-            and identity fully on-chain.
+            {renderLines(t("home.hero.subtitleDesktop"))}
           </div>
           <div className={styles.subtitleMobile}>
-            Secure your assets, <br />
-            intellectual property, <br />
-            and identity fully on-chain.
+            {renderLines(t("home.hero.subtitleMobile"))}
           </div>
           <div className={styles.titleWithButtons}>
             <img
               src="/origyn-logo-white-big.png"
-              alt="ORIGYN Logo"
+              alt={t("home.hero.logoAlt")}
               className={styles.logo}
             />
             <div className={styles.buttonGroup}>
               <Button
-                text="Certify your assets"
+                text={t("home.hero.certifyCta")}
                 onClick={() => {
                   const element = document.getElementById(
                     "certify-your-assets",
@@ -139,7 +149,7 @@ const Hero = ({ data }) => {
               />
               <div className={styles.buyButtonWrapper}>
                 <Button
-                  text="Buy $OGY"
+                  text={t("home.hero.buyCta")}
                   url="https://www.mexc.com/exchange/OGY_USDT"
                 />
               </div>
@@ -156,15 +166,7 @@ const Hero = ({ data }) => {
           onLoad={() => setIpadLoaded(true)}
         />
         <div className={styles.bottomText}>
-          <span>
-            ORIGYN allows you to securely store your data and assets fully
-            on-chain • ORIGYN allows you to securely store your data and assets
-            fully on-chain • ORIGYN allows you to securely store your data and
-            assets fully on-chain • ORIGYN allows you to securely store your
-            data and assets fully on-chain • ORIGYN allows you to securely store
-            your data and assets fully on-chain • ORIGYN allows you to securely
-            store your data and assets fully on-chain •
-          </span>
+          <span>{marqueeLoop}</span>
         </div>
       </div>
       <Stats items={statsData} />

@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "De claim",
-        "body": "“AI-gedreven on-chain agent.” De inferentie gebeurt op AWS. De keten bewaart enkel de uitkomst."
+        "body": "\"AI-gedreven on-chain agent.\" De inferentie gebeurt op AWS. De keten bewaart enkel de uitkomst."
       },
       {
         "title": "Het hiaat",
@@ -135,8 +135,18 @@
         "gain": "Winst"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Vijf pijlers\ndie AI niet kan <i>vervangen.</i>",
     "lead": "AI maakt productie tot een commodity. Deze vijf domeinen blijven overeind. Origyn is op elk ervan gepositioneerd.",
     "pillars": [
-      { "title": "Vertrouwen", "description": "Origyn-certificering — een verifieerbaar vertrouwenssignaal." },
-      { "title": "Context", "description": "Decennia aan gestructureerd geheugen — een persoonlijk signaal dat AI niet kan evenaren." },
-      { "title": "Distributie", "description": "Swiss Subnet — verifieerbare infrastructuur voor agents." },
-      { "title": "Smaak", "description": "Auto-research-pijplijn — door automatisering ondersteunde curatie." },
-      { "title": "Aansprakelijkheid", "description": "Auditspoor en certificaat — een echte governancelaag." }
+      {
+        "title": "Vertrouwen",
+        "description": "Origyn-certificering — een verifieerbaar vertrouwenssignaal."
+      },
+      {
+        "title": "Context",
+        "description": "Decennia aan gestructureerd geheugen — een persoonlijk signaal dat AI niet kan evenaren."
+      },
+      {
+        "title": "Distributie",
+        "description": "Swiss Subnet — verifieerbare infrastructuur voor agents."
+      },
+      {
+        "title": "Smaak",
+        "description": "Auto-research-pijplijn — door automatisering ondersteunde curatie."
+      },
+      {
+        "title": "Aansprakelijkheid",
+        "description": "Auditspoor en certificaat — een echte governancelaag."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Taal",
-    "switchTo": "Wissel naar {language}"
+    "switchTo": "Wissel naar {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFICATEN",
+    "integrators": "INTEGRATOREN",
+    "useCases": "TOEPASSINGEN",
+    "governance": "GOVERNANCE",
+    "help": "HULP",
+    "toggleMenu": "Menu in-/uitklappen"
+  },
+  "footer": {
+    "certificates": "CERTIFICATEN",
+    "integrators": "INTEGRATOREN",
+    "ecosystem": "ECOSYSTEEM",
+    "useCases": "TOEPASSINGEN",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Alle rechten voorbehouden – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Beveilig uw activa, intellectueel eigendom\nen identiteit volledig on-chain.",
+      "subtitleMobile": "Beveilig uw activa,\nintellectueel eigendom,\nen identiteit volledig on-chain.",
+      "logoAlt": "ORIGYN Logo",
+      "certifyCta": "Certificeer uw activa",
+      "buyCta": "Koop $OGY",
+      "marquee": "ORIGYN stelt u in staat uw gegevens en activa volledig on-chain veilig op te slaan"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY Marktkapitalisatie",
+        "tooltip": "De totale marktwaarde van alle OGY-tokens die momenteel in omloop zijn, op basis van de actuele tokenprijs."
+      },
+      "tvl": {
+        "title": "Total Value Locked (TVL) van gecertificeerde activa in USD",
+        "tooltipTitle": "Total Value Locked (TVL)",
+        "tooltip": "De TVL komt overeen met de waarde van de uitgegeven certificaten; dit betekent niet dat ORIGYN deze activa in bewaring houdt."
+      },
+      "users": {
+        "title": "Gebruikers",
+        "tooltip": "Het totale aantal personen, merken en instellingen dat ORIGYN actief gebruikt om gecertificeerde activa uit te geven, te beheren of in eigendom te hebben."
+      },
+      "assets": {
+        "title": "Totaal gecertificeerde activa",
+        "tooltip": "Het aantal fysieke of digitale objecten dat een officieel ORIGYN-certificaat heeft ontvangen."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Waarom",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN: waar reële activa en blockchain elkaar ontmoeten.",
+      "body": "ORIGYN is 's werelds meest geavanceerde RWA-protocol, ontworpen om reële activa volledig on-chain te brengen. Van beeldende kunst en goud tot luxegoederen en intellectueel eigendom.\n\nHet biedt een vertrouwensloze certificeringsinfrastructuur die de authenticiteit, herkomst en het eigendom van hoogwaardige activa garandeert."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% On-Chain Certificering",
+          "description": "Geen tussenpersonen, geen manipulatie. Volledig gedecentraliseerd."
+        },
+        {
+          "title": "$OGY Token Utiliteit",
+          "description": "Aandrijving van het ORIGYN-ecosysteem via governance en protocolnuttigheid."
+        },
+        {
+          "title": "Multi-Asset Ondersteuning",
+          "description": "Certificeer kunst, luxegoederen, goud, onroerend goed en meer."
+        },
+        {
+          "title": "Toonaangevende Beveiliging",
+          "description": "Onveranderlijke blockchainbescherming voor uw meest waardevolle activa."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Hoe het",
+      "titleSuffix": "werkt",
+      "steps": [
+        {
+          "description": "Reële activa on-chain brengen hoeft niet ingewikkeld te zijn. Het certificeringsproces van ORIGYN is ontworpen om veilig, gedecentraliseerd en eenvoudig te gebruiken te zijn in slechts drie stappen: <br /><br />Dien de metadata en ondersteunende documentatie van uw actief in. ORIGYN genereert een uniek, manipulatiebestendig digitaal certificaat rechtstreeks op de blockchain, koppelt het aan het actief en verbindt het aan de rechtmatige eigenaar.",
+          "panelTitle": "Mint uw digitaal certificaat",
+          "panelDescription": "Upload activagegevens, mint een blockchains certificaat."
+        },
+        {
+          "description": "Elk certificaat is cryptografisch verifieerbaar. Authenticiteit, herkomst en eigendom van het actief worden gevalideerd via het gedecentraliseerde protocol van ORIGYN.",
+          "panelTitle": "Verifieer & Authenticeer",
+          "panelDescription": "Garandeer de authenticiteit van activa en eigendomstransparantie."
+        },
+        {
+          "description": "Eenmaal gecertificeerd, kan uw actief worden bewaard, overgedragen, verhandeld of gebruikt binnen digitale ecosystemen — van DeFi-toepassingen en NFT-marktplaatsen tot privétransacties en institutionele registraties.",
+          "panelTitle": "Overdragen & Traceren",
+          "panelDescription": "Gebruik en traceer uw gecertificeerde actief voor DeFi, doorverkoop of investering."
+        }
+      ],
+      "goToStep": "Ga naar stap {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Toepassings-",
+      "titleSuffix": "gevallen",
+      "description": "Het protocol van ORIGYN is ontwikkeld om een breed scala aan sectoren te bedienen waar vertrouwen, herkomst en authenticiteit van cruciaal belang zijn. Hieronder volgen enkele van de belangrijkste sectoren die al gebruik maken van de certificeringsinfrastructuur van ORIGYN.",
+      "items": [
+        {
+          "title": "Kunst",
+          "description": "Authenticeer en bescherm de herkomst van fysieke en digitale kunstwerken on-chain."
+        },
+        {
+          "title": "Goud",
+          "description": "Certificeer goud met onveranderlijke, traceerbare en manipulatiebestendige digitale certificaten."
+        },
+        {
+          "title": "Diamanten",
+          "description": "Volg de oorsprong, classificatie en het eigendom van elke diamant met blockchainprecisie."
+        },
+        {
+          "title": "Made In",
+          "description": "Bewijs de herkomst, authenticiteit en vakmanschap van elk product, van horloges tot mode."
+        }
+      ],
+      "indicatorAria": "Ga naar toepassing {n}",
+      "discover": "Ontdek meer"
+    },
+    "certify": {
+      "titleLine": "Certificeer",
+      "titleEmphasis": "uw activa",
+      "subtitle": "Gebruik de ORIGYN Certificeringscalculator om direct de kosten te schatten voor het beveiligen van uw activa met volledig on-chain digitale certificaten. Of u nu beeldende kunst, luxegoederen, goud of andere waardevolle activa certificeert, dit instrument geeft u een helder beeld van de infrastructuur- en technologiekosten zonder giswerk.",
+      "contactPrompt": "Neem voor de certificering van uw activa contact met ons op:",
+      "contactCta": "Contact ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Integrator",
+      "titleLineTwo": "Programma",
+      "description": "Het ORIGYN Integrator Programma is bedoeld voor bedrijven, platforms en ontwikkelaars die de gedecentraliseerde certificeringsinfrastructuur van ORIGYN rechtstreeks in hun diensten willen integreren.\n\nOf u nu een marktplaats, een toeleveringsketenoplossing of een luxemerk bent, u kunt veilige on-chain activaverificatie aanbieden zonder opnieuw het wiel uit te vinden.",
+      "cta": "Sluit u aan bij het Integrator Programma"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "description": "Van nieuwe functies en governanceverbeteringen tot uitgebreide ondersteuning voor sectoren en ontwikkelaars. Elke mijlpaal weerspiegelt onze missie om reële activa volledig on-chain te brengen via schaalbare, verifieerbare en gedecentraliseerde infrastructuur.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation gefinancierd",
+          "description": "De ORIGYN Foundation werd opgericht in Neuchâtel, Zwitserland, om te beginnen met de ontwikkeling van het ORIGYN Protocol."
+        },
+        {
+          "title": "Lancering van OGY Token",
+          "description": "De native utility-token $OGY wordt gecreëerd om protocolkosten, governance en staking aan te drijven."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Lancering van de eerste versie van ORIGYN's NFT-standaard die on-chain certificering mogelijk maakt."
+        },
+        {
+          "title": "Tokenomics 2.0-update",
+          "description": "200 miljoen $OGY tokens die eerder aan de Foundation waren toegewezen, worden verbrand, waarmee deflatoire druk wordt ingezet."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Lancering van de eerste on-chain mintinginterface voor digitale certificaten."
+        },
+        {
+          "title": "Strategische partnerships",
+          "description": "Strategische samenwerkingen met FederItaly en METALOR om Italiaanse producten en getokeniseerd goud te certificeren."
+        },
+        {
+          "title": "Eerste goudaankoop",
+          "description": "3 kg fysiek goud wordt gekocht en getokeniseerd met het ORIGYN Protocol."
+        },
+        {
+          "title": "Overname van CanDB",
+          "description": "ORIGYN neemt CanDB over, een gedecentraliseerde, schaalbare databaseoplossing geoptimaliseerd voor NFT-metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 en lancering van Dashboard",
+          "description": "Met Tokenomics 3.0 wordt een deflatoir model geïntroduceerd en de eerste versie van het ORIGYN Dashboard wordt uitgebracht."
+        },
+        {
+          "title": "10.000 protocolgebruikers",
+          "description": "ORIGYN overschrijdt 10.000 unieke protocolgebruikers."
+        },
+        {
+          "title": "Lancering van Gold DAO",
+          "description": "Gold DAO wordt de eerste DAO gebouwd op ORIGYN om fysiek goud on-chain te tokeniseren en certificeren."
+        },
+        {
+          "title": "500M OGY-donatie aan Gold DAO",
+          "description": "Een half miljard $OGY tokens wordt gedoneerd ter ondersteuning van de langetermijntreasury van Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO geïntegreerd met ICP SNS",
+          "description": "De ORIGYN DAO wordt volledig gedecentraliseerd en bestuurd via het SNS-framework van Internet Computer."
+        },
+        {
+          "title": "Dashboard V2-release",
+          "description": "De nieuwe versie van het dashboard bevat live statistieken, stakingstatistieken en governance-tools."
+        },
+        {
+          "title": "Mijlpaal van 30.000 gebruikers",
+          "description": "ORIGYN groeit naar meer dan 30.000 gebruikers, een stijging van 300% in zes maanden."
+        },
+        {
+          "title": "Samenwerking met Leo Caillard en Gil Sertissage",
+          "description": "ORIGYN certificeert fysieke kunstwerken en diamanten in toonaangevende partnerships."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "De NFT-standaard wordt geüpgraded om veilige overdraagbaarheid van certificaten mogelijk te maken."
+        },
+        {
+          "title": "Integrator Framework gelanceerd",
+          "description": "Regels en een onboardingstructuur worden gecreëerd om nieuwe partners te begeleiden bij integratie met ORIGYN."
+        },
+        {
+          "title": "Lancering van Cecil DAO",
+          "description": "ORIGYN ondersteunt de lancering van Cecil DAO om natuurbeschermings- en humanitaire projecten te financieren met blockchaintransparantie."
+        },
+        {
+          "title": "Overname van ClaimLink",
+          "description": "ORIGYN neemt ClaimLink over, een gedecentraliseerd NFT- en tokendistributieplatform gebouwd op ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Een nieuwe standaard wordt geïntroduceerd om de interoperabiliteit van certificaten en het ecosysteembrede nut te vergroten."
+        },
+        {
+          "title": "Lancering van een publieke",
+          "titleSpan": "Minting Studio",
+          "description": "Een selfservicetool wordt gelanceerd waarmee iedereen on-chain RWA-certificaten kan minten op ORIGYN-infrastructuur."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Het Runestone-mysterie wordt in Q2 2026 in Genève onthuld."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Een selfservicetool wordt gelanceerd waarmee iedereen on-chain kan minten met ORIGYN-infrastructuur."
+        },
+        {
+          "title": "Implementatie van IP-bescherming",
+          "description": "Ondersteuning voor on-chain certificering van intellectuele-eigendomsrechten wordt geïntegreerd in het protocol."
+        },
+        {
+          "title": "Cross-chain implementatie",
+          "description": "Cross-chain compatibiliteit vergroot het bereik van ORIGYN naar andere grote ecosystemen."
+        },
+        {
+          "title": "Wereldwijde integratie van wallets en marketplaces",
+          "description": "ORIGYN NFTs worden wereldwijd toegankelijk via toonaangevende wallets en NFT marketplaces."
+        },
+        {
+          "title": "De universele certificeringsstandaard worden",
+          "description": "ORIGYN streeft ernaar zich te vestigen als de wereldwijde benchmark voor digitale certificering in alle activaklassen."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNERS",
+      "testimonials": [
+        {
+          "title": "CEO van Metalor",
+          "description": "\"ORIGYN is de meest geavanceerde en meest uitgebreide digitale certificeringstechnologie ter wereld. Alle gegevens worden volledig opgeslagen in een blockchain om te garanderen dat de certificaten onveranderlijk en transparant zijn. Metalor werkt graag samen met een in Neuchâtel gevestigd fintechbedrijf als ORIGYN om een innovatieve oplossing naar de markten te brengen.\""
+        },
+        {
+          "title": "Kunstspecialist",
+          "description": "\"Voor mijn particuliere verzamelaars zijn vertrouwen en nalatenschap alles. De certificeringstechnologie van ORIGYN is essentieel geworden: ze garandeert niet alleen de authenticiteit van elk kunstwerk, maar waarborgt ook de traceerbaarheid en waarde ervan over generaties heen. Het gaat niet langer alleen om het bezitten van een kunstwerk, maar om het voor altijd on-chain veiligstellen van zijn verhaal. ORIGYN maakt dat mogelijk.\""
+        },
+        {
+          "title": "Medeoprichter van Cyber",
+          "description": "\"We zeggen altijd dat diamanten voor altijd meegaan, en dat is waar. Dus hetzelfde moet worden gedacht over de informatie die je verstrekt, want over 100 of 200 jaar zullen die diamanten nog steeds bestaan. We hadden technologie nodig om ervoor te zorgen dat we die informatie nog steeds konden leveren, vooral voor een product met veel waarde dat generaties doorgaat... De belangrijkste reden waarom we een partnership met ORIGYN zijn aangegaan, is dat zij dit allemaal konden bieden.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Maak deel uit van de",
+      "emphasisDesktop": "besluitvorming",
+      "emphasisMobileLineOne": "Besluit-",
+      "emphasisMobileLineTwo": "vorming",
+      "cta": "Sluit u aan bij de ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Toepassing niet gevonden",
+    "cases": {
+      "gold": [
+        {
+          "title": "Goud",
+          "description": "Als 's werelds grootste activaklasse en meest nauwlettend gevolgde grondstof, vereist goud het hoogste niveau van beveiliging. <br /><br />ORIGYN voldoet aan deze vereisten, zoals aangetoond door <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, de wereldleider in goudraffinering, die het ORIGYN-protocol heeft gekozen om hun gegevens te beveiligen. Voor het eerst wordt alle technische informatie over goudstaven — inclusief hoogdefinitie-afbeeldingen en documenten — vastgelegd in één enkel certificaat op de blockchain."
+        },
+        {
+          "description": "Daarnaast gebruiken diverse projecten zoals <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> en <a href='https://bity.com' target='_blank'>Bity</a> deze certificaten om de bijbehorende goudstaven te verkopen of tokens te creëren die gedekt worden door fysiek goud."
+        }
+      ],
+      "art": [
+        {
+          "title": "Kunst",
+          "description": "Kunstexperts maken zich ernstig zorgen over de betrouwbaarheid en de garantie van certificaten voor kunstwerken. Daarom hebben diverse toepassingen al ORIGYN-technologie omarmd.<br /><br />Gevestigde kunstenaars zoals <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> en <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> hebben hun eigen ORIGYN-certificaten gecreëerd om de gegevens over hun werk te beschermen. Deze certificaten zijn volledig on-chain, manipulatiebestendig en onmogelijk te kopiëren, waardoor kunstenaars valsemunterij kunnen bestrijden en de collectiebeleving verbeteren via hoogdefinitie-afbeeldingen, video's en documenten."
+        },
+        {
+          "description": "Entiteiten zoals stichtingen, organisaties, families, galerieën en kunstadviseurs die digitale certificaten voor hun klanten moeten aanmaken, zijn ORIGYN gaan gebruiken om maximale veiligheid en vertrouwelijkheid te waarborgen. Verscheidene galerieën hebben de ORIGYN-technologie al geïmplementeerd, waaronder de Retelet Gallery voor certificaten van werken van René Magritte.<br /><br />ORIGYN-technologie maakt ook verkopen via certificaten mogelijk, met name co-eigendomsverkopen. Hierdoor kunnen kunstwerken worden gedeeld door meerdere eigenaren door het certificaat in meerdere delen te splitsen, waarbij elk deel dient als eigendomsbewijs."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Nationale herkomst is meer dan een label. Het is een verklaring van identiteit, kwaliteit en culturele waarde. Nu namaak toeneemt, is het bewijzen van waar en hoe een product gemaakt is een cruciale onderscheidende factor geworden voor merken in alle sectoren.<br /><br />Als antwoord hierop heeft <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> de 100% Made in Italy-certificering gecreëerd. Deze wettelijk erkende norm beschermt Italiaanse excellentie via strenge documentatie, onafhankelijke audits en belangenbehartiging op overheidsniveau. ORIGYN biedt de digitale basis van dit systeem door elk gecertificeerd product op de blockchain te registreren als verifieerbaar herkomstbewijs."
+        },
+        {
+          "description": "Elk certificaat wordt een veilig, manipulatiebestendig digitaal paspoort. Het versterkt het vertrouwen van de consument, garandeert transparantie in de toeleveringsketen en ondersteunt bedrijven die authenticiteit centraal stellen."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luxe",
+          "description": "ORIGYN-technologie speelt in op de behoefte van de luxesector om zichzelf opnieuw uit te vinden en meer gepersonaliseerde, transparante productervaringen te bieden.<br /><br />Juwelier <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> gebruikt ORIGYN-blockchaintechnologie om certificaten voor de gehele collectie te creëren. Dit beveiligt alle gegevens volledig on-chain en biedt hun prestigieuze klanten next-generation certificaten die vertrouwelijkheid, authenticiteit en eigendom garanderen."
+        },
+        {
+          "description": "Andere luxebedrijven zoals <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> gebruiken ORIGYN eveneens om de volledige traceerbaarheidsketen van hun diamanten bestemd voor gerenommeerde uurwerkmakers vast te leggen. Vele andere toepassingen zijn mogelijk, waaronder het toevoegen van gepersonaliseerde marketinginhoud aan certificaten of het combineren van de technologie met AI om authenticiteit in real time te bepalen voor secundaire markten."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Help",
+    "titleSuffix": "centrum",
+    "searchPlaceholder": "Zoeken..",
+    "faqs": [
+      {
+        "title": "De OGY Token",
+        "description": "Aandrijving van de gedecentraliseerde activacertificering van Web 3.0",
+        "answer": "De <strong>OGY-token</strong> is de kernfunctionaliteit van het ORIGYN Protocol. Het verbindt de certificering van reële activa met gedecentraliseerde blockchaininfrastructuur, waardoor eigendom, authenticatie en inhoudsverificatie werkelijk veilig worden.<br><br>OGY maakt een wereldwijd systeem mogelijk waarbij fysieke activa digitaal worden gecertificeerd, gevolgd en geïntegreerd in gedecentraliseerde toepassingen en markten."
+      },
+      {
+        "title": "Protocolnuttigheid",
+        "description": "OGY is vereist voor het uitvoeren van essentiële functies binnen het ORIGYN-ecosysteem.",
+        "answer": "<strong>Certificering:</strong> Voor elk actief dat op ORIGYN wordt gecertificeerd, is OGY vereist om een onveranderlijk on-chain certificaat te minten.<br><strong>Transactielaag:</strong> Vergemakkelijkt overdrachten, hercertificeringen en levenscyclusgebeurtenissen van gecertificeerde activa.<br><strong>Gegevensopslag:</strong> Ondersteunt veilige, gedecentraliseerde opslag van activametadata en herkomst.<br>Deze functionaliteit garandeert dat OGY onmisbaar is voor elke transactie binnen het protocol."
+      },
+      {
+        "title": "OGY Token Contractadres",
+        "description": "De OGY-token is ingezet op de Internet Computer-blockchain.",
+        "answer": "De OGY-token is ingezet op de Internet Computer-blockchain en functioneert als native nuttigheidstoken binnen het ORIGYN Protocol.<br><br>Officieel contractadres:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Gebruikers typen activa in de aanroep<br>Verifieer altijd het contractadres voordat u met OGY werkt.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Governance",
+        "description": "OGY is een governance-token die houders in staat stelt om:",
+        "answer": "• Protocolupgrades, liquiditeitsregels en ecosysteemwijzigingen voor te stellen en te beraadslagen.<br>• Toezicht te houden op de toelating van integratoren en certificeerders.<br>• Schatkistmiddelen toe te wijzen aan innovatie, groei en strategische initiatieven.<br><br>Governance is volledig gedecentraliseerd via de ORIGYN DAO, waarmee de gemeenschap directe invloed heeft op de evolutie van het protocol."
+      },
+      {
+        "title": "Staking en Beloningen",
+        "description": "OGY-staking beveiligt het netwerk en stemt prikkels op elkaar af.",
+        "answer": "<strong>Netwerkbeveiliging:</strong> Stakers nemen deel aan governance en helpen protocoltransacties te valideren.<br><br><strong>Beloningen:</strong> Ontvang een aandeel van de protocol­inkomsten uit certificeringskosten en netwerkactiviteit.<br><br><strong>Langetermijnbetrokkenheid:</strong> Staking stimuleert langdurige participatie en versterkt het ecosysteem.<br><br>Het stakingmodel koppelt tokennuttigheid direct aan protocoladoptie en -succes.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflationistische Mechanismen / Waarde-accumulatie",
+        "description": "OGY integreert een deflationistisch model voor duurzame groei.",
+        "answer": "<strong>Certificeringsverbranding:</strong> Een deel van de OGY die bij certificering wordt gebruikt, wordt permanent uit omloop genomen.<br><br><strong>Schatkistbeheer:</strong> Protocolomzet ondersteunt ontwikkeling, beloningen en tokenwaarde-optimalisatie.<br><br>Naarmate het protocolgebruik toeneemt, daalt het OGY-aanbod, wat waardecreatie versterkt in lijn met adoptie."
+      },
+      {
+        "title": "Tokenomics Overzicht",
+        "description": "Totale voorraad: 10.4 Billion OGY",
+        "answer": "<strong>Verdeling:</strong> Toegewezen aan ecosysteemgroei, stakingrebeloningen, gemeenschap en governance.<br><br><strong>Inkomstenmodel:</strong> Protocoltarieven betaald in OGY creëren aanhoudende vraag en verminderen het aanbod via verbrandingsmechanismen.<br>Het model is ontworpen voor langdurige protocolhoudbaarheid en toekomstgerichte afstemming."
+      },
+      {
+        "title": "De Toekomst van OGY",
+        "description": "OGY is de basis van een gedecentraliseerd raamwerk.",
+        "answer": "OGY is de basis van een gedecentraliseerd raamwerk dat is ontworpen om de waarde van reële activa on-chain te certificeren, beheren en ontsluiten. Naarmate ORIGYN groeit, breidt de rol van OGY zich uit als economische motor voor activacertificering, governance en ecosysteemontwikkeling."
+      },
+      {
+        "title": "Bekijk live tokendata",
+        "description": "Bekijk live tokendata, stakingopties en governanceparticipatie in het ORIGYN Dashboard.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Klik om het Dashboard te openen</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Word",
+      "titleConnector": "een",
+      "titleEmphasis": "Integrator",
+      "subtitle": "SLUIT U AAN BIJ HET INTEGRATOR PROGRAMMA OM DE TOEKOMST VAN VERTROUWEN TE BOUWEN MET DE BLOCKCHAINS CERTIFICERINGSTECHNOLOGIE VAN ORIGYN",
+      "cta": "Nu aanmelden"
+    },
+    "program": {
+      "titleLineOne": "Integrator",
+      "titleLineTwo": "Programma",
+      "steps": [
+        {
+          "labelBold": "WAT",
+          "labelRest": "IS HET INTEGRATOR PROGRAMMA ?",
+          "description": "Het Integrator Programma is een strategisch initiatief gericht op het bevorderen van het ORIGYN-protocol, het stimuleren van de adoptie ervan en het uitbreiden van het ecosysteem."
+        },
+        {
+          "labelBold": "WIE",
+          "labelRest": "ZIJN DE INTEGRATOREN ?",
+          "description": "<ul><li><strong>Integratoren zijn onafhankelijke bedrijven</strong> die producten bouwen op basis van het ORIGYN-protocol met als gemeenschappelijk doel het minten van ORIGYN-certificaten en het promoten van het ORIGYN-protocol in een specifieke sector, activaklasse of meerdere sectoren.</li><li><strong>Als enablers</strong> helpen zij bedrijven de blockchains certificeringstechnologie van ORIGYN te adopteren zonder diepgaande blockchain- en Web3-expertise te vereisen.</li><li><strong>Na een screeningproces</strong> uitgevoerd door de ORIGYN Foundation worden integratoren verkozen en gestemd door de ORIGYN DAO-tokenhouders.</li></ul>"
+        },
+        {
+          "labelBold": "HOE",
+          "labelRest": "WORDT U EEN INTEGRATOR ?",
+          "description": "Om integrator te worden, moet een bedrijf aantonen dat het diensten op schaal kan leveren en voldoet aan alle vereisten en expertise om een specifieke of meerdere sectoren te bedienen."
+        }
+      ],
+      "goToStep": "Ga naar stap {n}",
+      "joinNow": "Nu aanmelden"
+    },
+    "workflow": {
+      "titleLineOne": "Aanvraag-",
+      "titleLineTwo": "procedure",
+      "steps": [
+        {
+          "title": "Aanvraagformulier",
+          "content": "<p>Als onderdeel van de aanvraag moeten integratoren het <strong><a href=\"/integrator/join\">Projectaanvraagformulier online</a></strong> invullen en de <strong>Due Diligence Documentatie</strong> opsturen naar <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>De due diligence documentatie omvat:</p>\n<ul>\n<li>Kopie van het oprichtingscertificaat</li>\n<li>Beschrijving van UBO's - Uiteindelijk Belanghebbenden</li>\n<li>Kopie van de statuten en oprichtingsakte</li>\n<li>Besluit van de Raad van Bestuur tot formalisering van de bereidheid om als integrator aan te vragen en te voldoen aan de stakingregels, samen met een lijst van functionarissen die gemachtigd zijn de integrator te vertegenwoordigen</li>\n<li>Identificatie van gemachtigde ondertekenaars op basis van foto's en handtekeningkaarten, behoorlijk gewaarmerkt door het bedrijf</li>\n<li>Kopieën van identiteitsbewijs en adresbewijs van managers, functionarissen of werknemers die houder zijn van een volmacht om namens het bedrijf zaken te doen</li>\n<li>Lijst van bestuurders</li>\n<li>Integrator Project Aanvraagformulier</li>\n</ul>"
+        },
+        {
+          "title": "Beoordeling door de ORIGYN Foundation",
+          "content": "<p>De eerste stap om integrator te worden is gevalideerd te worden door de ORIGYN Foundation na een due diligence proces. De integrator stemt ermee in alle gevraagde documenten te delen ten behoeve van de vereiste KYC/KYB/AML-procedures.</p>"
+        },
+        {
+          "title": "Governance-stemming via de ORIGYN DAO",
+          "content": "<p>OPENBARE STEMMING DOOR DE ORIGYN DAO:</p>\n<p>Zodra de Foundation het screeningproces heeft afgerond, wordt de integrator onderworpen aan een DAO-stemming via een openbaar voorstel op het SNS-platform. Alle ORIGYN-voorstellen zijn te raadplegen op <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Elke wijziging van het adres van de rechtspersoon, de bedrijfsnaam of de beëindiging van de samenwerking wordt publiekelijk gestemd op het SNS-platform.</p>"
+        },
+        {
+          "title": "Staking van 50,000,000 OGY",
+          "content": "<p>Als het voorstel met succes wordt goedgekeurd, dient de integrator 50,000,000 OGY te staken in de ORIGYN Governance voor 1 year zonder ontbinding.</p>\n<p>Deze stap garandeert de langetermijnbetrokkenheid van de integrator en het stemgewicht om actief deel te nemen aan de governance van ORIGYN. Alle gestakede neurons worden publiekelijk weergegeven in het Dashboard op <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Alle statistieken zoals het aantal geminte certificaten, TVL van gecertificeerde activa, enz. worden publiekelijk weergegeven onder het integratordeel op <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Prestatiebeoordelingen",
+          "content": "<p>Afhankelijk van de sector en de gemaakte afspraken kunnen minimumvereisten voor het aantal geminte certificaten deel uitmaken van de integratorovereenkomst. De ORIGYN Foundation zal dan ook periodiek mijlpalen en prestaties van de integratoren evalueren.</p>\n<p>Alle statistieken zoals het aantal geminte certificaten, TVL van gecertificeerde activa, enz. worden publiekelijk weergegeven onder het integratordeel op <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Download",
+      "titleLineTwo": "Integratorcontract",
+      "cta": "Downloaden"
+    }
+  },
+  "integratorJoin": {
+    "title": "Integrator Programma",
+    "titleItalic": "Aanvraagformulier",
+    "requiredLabel": "VERPLICHT *",
+    "requiredMessage": "Verplicht",
+    "emailInvalid": "Voer een geldig e-mailadres in",
+    "send": "VERZENDEN",
+    "sending": "Verzenden…",
+    "errorSend": "Fout bij het verzenden van het formulier.",
+    "fileSizeError": "De bestandsgrootte mag niet groter zijn dan 1 MB",
+    "addLink": "LINK TOEVOEGEN",
+    "addObjective": "DOELSTELLING TOEVOEGEN",
+    "addKpi": "KPI TOEVOEGEN",
+    "uploadHighlight": "Upload",
+    "uploadSuffix": " uw logo of sleep het hier naartoe (OPTIONEEL)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — max. 1 MB",
+    "logoPreviewAlt": "Logovoorvertoning",
+    "successTitle": "Dank u",
+    "successMessage": "Wij nemen spoedig contact met u op",
+    "backToIntegrator": "TERUG NAAR DE INTEGRATORPAGINA",
+    "errorTitle": "Er is iets misgegaan",
+    "errorMessageDefault": "Probeer het opnieuw of kom later terug",
+    "retry": "OPNIEUW PROBEREN",
+    "sections": {
+      "representative": {
+        "title": "VERTEGENWOORDIGER VAN DE INTEGRATOR",
+        "fullName": "VOLLEDIGE NAAM *",
+        "email": "E-MAILADRES *",
+        "phone": "TELEFOONNUMMER *"
+      },
+      "overview": {
+        "title": "OVERZICHT",
+        "description": "GEEF EEN BEKNOPT OVERZICHT VAN HET INTEGRATORPROJECT, MET INBEGRIP VAN",
+        "vision": "De visie van uw integrator in één zin... *",
+        "industry": "Voorbeelden van sectorcategorieën (kunst, muziek, luxe) of specifieke activa (goud, diamanten) *",
+        "geography": "Marktgeografie (wereldwijd, Europa, landspecifiek) *",
+        "socialFirst": "Website- en sociale medialinks *",
+        "social": "Website- en sociale medialinks",
+        "presentation": "Link naar projectpresentatie (niet verplicht, maar nuttig)"
+      },
+      "acquisition": {
+        "title": "ACQUISITIE",
+        "description": "DEFINIEER DUIDELIJK UW DOELGROEP EN HOE U DEZE BEREIKT OF ZAL BEREIKEN",
+        "whyExists": "Waarom moet dit project bestaan en waarin onderscheidt het zich? *",
+        "whyIntegrator": "Waarom is het voor u belangrijk om integrator te worden? *"
+      },
+      "objectives": {
+        "title": "BELANGRIJKSTE DOELSTELLINGEN DIE U WILT BEREIKEN",
+        "first": "Doelstelling 01 *",
+        "second": "Doelstelling 02",
+        "more": "Doelstelling {n}"
+      },
+      "kpis": {
+        "title": "BELANGRIJKSTE MEETWAARDEN DIE U WILT BEWAKEN",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "WAT EN HOE GAAT U HET DOEN",
+        "focus": "Vertel ons in detail waarop u zich als integrator zult richten en hoe het succes van dit project eruitziet.",
+        "implement": "Vertel ons hoe u dit project wilt implementeren"
+      },
+      "roadmaps": {
+        "title": "ROADMAPS VOOR DE EERSTE 3 MAANDEN EN 3 JAAR",
+        "description": "U dient aan te geven wanneer u verwacht te beginnen met minten en een geschat aantal certificaten *"
+      },
+      "team": {
+        "title": "TEAM",
+        "placeholder": "Vertel ons over uw huidige team, indien aanwezig, of toekomstige teamrollen die u mogelijk nodig heeft, met links naar LinkedIn *"
+      },
+      "risk": {
+        "title": "RISICOFACTOREN",
+        "placeholder": "Vertel ons de redenen en factoren die tot mislukking kunnen leiden."
+      },
+      "optional": {
+        "title": "OPTIONEEL",
+        "placeholder": "Is er nog iets dat u wilt delen waarmee u uw kans op selectie vergroot?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "De",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "De OGY-token is de <b>kernfunctionaliteit</b> van het ORIGYN Protocol.",
+      "paragraphTwo": "Het <b>verbindt</b> de certificering van reële activa met gedecentraliseerde blockchaininfrastructuur, waardoor <b>eigendom, authenticatie</b> en <b>overdracht verifieerbaar en veilig worden.</b>",
+      "paragraphThree": "OGY maakt een wereldwijd systeem mogelijk waarbij <b>fysieke</b> activa <b>digitaal worden gecertificeerd, gevolgd</b> en <b>geïntegreerd in gedecentraliseerde</b> toepassingen en markten.",
+      "cta": "Koop OGY",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "$OGY Marktkapitalisatie",
+      "burned": "Totaal verbrande OGY",
+      "circulating": "Circulerende voorraad",
+      "holders": "Tokenhouders"
+    },
+    "utility": {
+      "titlePrefix": "Protocol",
+      "titleEmphasis": "Utiliteit",
+      "lead": "U heeft OGY-tokens nodig om het ORIGYN-ecosysteem volledig te gebruiken:",
+      "cards": [
+        {
+          "title": "Certificering",
+          "description": "Voor elk actief dat op ORIGYN wordt gecertificeerd, is OGY vereist om een onveranderlijk on-chain certificaat te minten."
+        },
+        {
+          "title": "Transactielaag",
+          "description": "Vergemakkelijkt overdrachten, hercertificeringen en levenscyclusgebeurtenissen van gecertificeerde activa."
+        },
+        {
+          "title": "Gegevensopslag",
+          "description": "Ondersteunt veilige, gedecentraliseerde opslag van activametadata en herkomst."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY Token",
+      "titleLineTwo": "Contractadres",
+      "description": "De OGY-token is ingezet op de Internet Computer-blockchain en functioneert als native nuttigheidstoken binnen het ORIGYN Protocol.",
+      "bulletOne": "Dit contract regelt de uitgifte, overdrachten en interacties van OGY binnen het protocol, waardoor transparantie en on-chain verificatie van alle tokenactiviteit worden gewaarborgd.",
+      "bulletTwo": "U kunt de OGY-token direct bekijken en ermee interacteren via het ICP-netwerk.",
+      "warning": "Verifieer altijd het contractadres voordat u met OGY werkt.",
+      "contractLabel": "Officieel contractadres:",
+      "copyAria": "Kopieer contractadres",
+      "copied": "Gekopieerd naar klembord",
+      "cmcAria": "Bekijk OGY op CoinMarketCap"
+    },
+    "governance": {
+      "title": "Governance",
+      "lead": "OGY is een governance-token die houders in staat stelt om:",
+      "items": [
+        "<b>Schatkistmiddelen toe te wijzen</b> aan ecosysteemgroei en strategische initiatieven.",
+        "<b>Protocolupgrades, certificeringsregels en ecosysteemwijzigingen voor te stellen en te beraadslagen.</b>",
+        "<b>Toezicht te houden</b> op de toelating van integratoren en certificeerders."
+      ],
+      "closing": "Governance is <b>volledig gedecentraliseerd</b> via de ORIGYN DAO, waarmee de gemeenschap directe invloed heeft op de <b>evolutie van het protocol.</b>",
+      "cta": "MEER INFORMATIE"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "en",
+      "titleLineTwoEmphasis": "Beloningen",
+      "lead": "OGY-staking beveiligt het netwerk en stemt prikkels op elkaar af:",
+      "cards": [
+        {
+          "title": "Netwerkbeveiliging",
+          "description": "Stakers nemen deel aan governance en helpen protocoltransacties te valideren."
+        },
+        {
+          "title": "Beloningen",
+          "description": "Ontvang een aandeel van de protocolinkomsten uit certificeringskosten en netwerkactiviteit."
+        },
+        {
+          "title": "Langetermijnbetrokkenheid",
+          "description": "Staking stimuleert langdurige participatie en versterkt het ecosysteem."
+        }
+      ],
+      "closing": "Het stakingmodel koppelt tokennuttigheid direct aan protocoladoptie en -succes.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflationistische</b> Mechanismen",
+      "titleLineTwo": "en <b>Waarde-accumulatie</b>",
+      "lead": "OGY integreert een deflationistisch model voor duurzame groei:",
+      "items": [
+        {
+          "title": "Wat maakt OGY tot een deflationistische token?",
+          "answer": "OGY is ontworpen met een deflationistisch model, wat betekent dat de totale voorraad afneemt naarmate het protocol wordt gebruikt."
+        },
+        {
+          "title": "Hoe werkt de tokenverbranding?",
+          "answer": "Elke keer dat OGY voor certificering wordt gebruikt, wordt een deel van de tokens permanent verbrand. Dit verkleint de circulerende voorraad."
+        },
+        {
+          "title": "Wat is de rol van de schatkist?",
+          "answer": "Protocolinkomsten worden beheerd door de schatkist om voortdurende ontwikkeling te ondersteunen, deelnemers te belonen en langdurige ecosysteemstabiliteit te helpen handhaven."
+        },
+        {
+          "title": "Hoe creëert OGY waarde in de loop van de tijd?",
+          "answer": "Naarmate meer gebruikers het ORIGYN-protocol adopteren en de certificeringsactiviteit toeneemt, wordt er meer OGY verbrand. Dit dalende aanbod, gecombineerd met toenemend gebruik, ondersteunt langdurige waardecreatie."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomics",
+      "titleEmphasis": "Overzicht",
+      "totalSupplyLabel": "Totale voorraad:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Verdeling:</b> Toegewezen aan ecosysteemgroei, stakingbeloningen, gemeenschap en governance.",
+      "revenue": "<b>Inkomstenmodel:</b> Protocoltarieven betaald in OGY creëren aanhoudende vraag en verminderen het aanbod via verbrandingsmechanismen.",
+      "support": "Het model is ontworpen voor langdurige protocolhoudbaarheid en afstemming met tokenhouders.",
+      "cta": "TOKENOMICS"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostencalculator",
+      "description": "Gebruik de ORIGYN-calculator om de kosten van uw uniek certificaat met al uw gegevens on-chain te schatten"
+    },
+    "plan": {
+      "title": "Plan uw mint",
+      "description": "Geef ons aan hoeveel items u heeft en wat u uploadt.",
+      "itemsLabel": "Hoeveel items?",
+      "uploadingLabel": "Wat uploadt u?",
+      "knowExactSize": "Weet u de exacte grootte?",
+      "totalUploadSize": "Totale uploadgrootte",
+      "usePreset": "Gebruik in plaats daarvan een voorinstelling",
+      "combinedSize": "Gecombineerde grootte van alle bestanden over alle items.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per stuk"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per stuk"
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB per stuk"
+        },
+        "video": {
+          "label": "Korte video",
+          "hint": "1 GB per stuk"
+        },
+        "video1hr": {
+          "label": "Lange video",
+          "hint": "60 GB per stuk"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live schatting",
+      "titleRefreshing": "Schatting vernieuwen",
+      "description": "Wordt automatisch bijgewerkt naarmate u uw configuratie wijzigt.",
+      "ogyEquivalent": "OGY-equivalent",
+      "ogySpotRate": "OGY-spotrente",
+      "itemSingular": "Item",
+      "itemPlural": "Items",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Kostenspecificatie",
+      "baseFee": "Basis mint-tarief",
+      "storageFee": "Opslagtarief",
+      "items": "Items",
+      "uploadSize": "Uploadgrootte"
+    },
+    "bytesUnit": "bytes"
   }
 }

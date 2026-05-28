@@ -38,12 +38,12 @@
   "problem": {
     "eyebrow": "Problem",
     "title": "Nikt naprawdę nie uruchamia\n<i>AI on-chain.</i>",
-    "lead": "Każdy projekt, który twierdzi, że ma <s>„agenta AI on-chain”</s>, działa według tego samego schematu: wnioskowanie odbywa się poza łańcuchem, na scentralizowanych serwerach, a do blockchaina trafia tylko wynik. Model nigdy nie wykonuje się wewnątrz sieci. Łańcuch służy jako tablica ogłoszeń, a nie warstwa obliczeniowa.",
+    "lead": "Każdy projekt, który twierdzi, że ma <s>„agenta AI on-chain“</s>, działa według tego samego schematu: wnioskowanie odbywa się poza łańcuchem, na scentralizowanych serwerach, a do blockchaina trafia tylko wynik. Model nigdy nie wykonuje się wewnątrz sieci. Łańcuch służy jako tablica ogłoszeń, a nie warstwa obliczeniowa.",
     "leadStrong": "To nie jest agent on-chain. To wywołanie API z paragonem.",
     "steps": [
       {
         "title": "Deklaracja",
-        "body": "„Agent on-chain napędzany przez AI”. Wnioskowanie odbywa się na AWS. Łańcuch przechowuje tylko wynik."
+        "body": "„Agent on-chain napędzany przez AI\". Wnioskowanie odbywa się na AWS. Łańcuch przechowuje tylko wynik."
       },
       {
         "title": "Luka",
@@ -135,8 +135,18 @@
         "gain": "Zysk"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Pięć filarów,\nktórych AI nie <i>zastąpi.</i>",
     "lead": "AI utowarawia produkcję. Te pięć obszarów pozostaje. Origyn jest obecny w każdym z nich.",
     "pillars": [
-      { "title": "Zaufanie", "description": "Certyfikacja Origyn — weryfikowalny sygnał zaufania." },
-      { "title": "Kontekst", "description": "Dekady ustrukturyzowanej pamięci — osobisty sygnał, którego AI nie dorówna." },
-      { "title": "Dystrybucja", "description": "Swiss Subnet — weryfikowalna infrastruktura dla agentów." },
-      { "title": "Gust", "description": "Pipeline automatycznych badań — kuracja wspierana automatyzacją." },
-      { "title": "Odpowiedzialność", "description": "Ślad audytowy i certyfikat — realna warstwa zarządzania." }
+      {
+        "title": "Zaufanie",
+        "description": "Certyfikacja Origyn — weryfikowalny sygnał zaufania."
+      },
+      {
+        "title": "Kontekst",
+        "description": "Dekady ustrukturyzowanej pamięci — osobisty sygnał, którego AI nie dorówna."
+      },
+      {
+        "title": "Dystrybucja",
+        "description": "Swiss Subnet — weryfikowalna infrastruktura dla agentów."
+      },
+      {
+        "title": "Gust",
+        "description": "Pipeline automatycznych badań — kuracja wspierana automatyzacją."
+      },
+      {
+        "title": "Odpowiedzialność",
+        "description": "Ślad audytowy i certyfikat — realna warstwa zarządzania."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Język",
-    "switchTo": "Przełącz na {language}"
+    "switchTo": "Przełącz na {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTYFIKATY",
+    "integrators": "INTEGRATORZY",
+    "useCases": "ZASTOSOWANIA",
+    "governance": "ZARZĄDZANIE",
+    "help": "POMOC",
+    "toggleMenu": "Przełącz menu"
+  },
+  "footer": {
+    "certificates": "CERTYFIKATY",
+    "integrators": "INTEGRATORZY",
+    "ecosystem": "EKOSYSTEM",
+    "useCases": "ZASTOSOWANIA",
+    "ogyToken": "TOKEN OGY",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Wszelkie prawa zastrzeżone – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Zabezpiecz swoje aktywa, własność intelektualną\ni tożsamość w pełni on-chain.",
+      "subtitleMobile": "Zabezpiecz swoje aktywa,\nwłasność intelektualną\ni tożsamość w pełni on-chain.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Certyfikuj swoje aktywa",
+      "buyCta": "Kup $OGY",
+      "marquee": "ORIGYN pozwala bezpiecznie przechowywać dane i aktywa w pełni on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Kapitalizacja rynkowa $OGY",
+        "tooltip": "Całkowita wartość rynkowa wszystkich tokenów OGY aktualnie w obiegu, obliczona na podstawie bieżącej ceny tokena."
+      },
+      "tvl": {
+        "title": "Całkowita wartość zablokowana (TVL) certyfikowanych aktywów w USD",
+        "tooltipTitle": "Całkowita wartość zablokowana (TVL)",
+        "tooltip": "TVL odpowiada wartości wystawionych certyfikatów; nie oznacza to, że ORIGYN przechowuje te aktywa w depozycie."
+      },
+      "users": {
+        "title": "Użytkownicy",
+        "tooltip": "Łączna liczba osób, marek i instytucji aktywnie korzystających z ORIGYN w celu wystawiania, zarządzania lub posiadania certyfikowanych aktywów."
+      },
+      "assets": {
+        "title": "Łączna liczba certyfikowanych aktywów",
+        "tooltip": "Liczba fizycznych lub cyfrowych przedmiotów, które otrzymały oficjalny certyfikat ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Dlaczego",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN — tam, gdzie aktywa ze świata rzeczywistego spotykają blockchain.",
+      "body": "ORIGYN to najbardziej zaawansowany na świecie protokół RWA, zaprojektowany w celu przeniesienia aktywów ze świata rzeczywistego w pełni on-chain — od dzieł sztuki i złota po dobra luksusowe i własność intelektualną.\n\nZapewnia infrastrukturę certyfikacji opartą na zaufaniu, która gwarantuje autentyczność, proweniencję i własność aktywów o wysokiej wartości."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Certyfikacja 100% On-Chain",
+          "description": "Bez pośredników, bez manipulacji. W pełni zdecentralizowane."
+        },
+        {
+          "title": "Użyteczność tokena $OGY",
+          "description": "Napędzanie ekosystemu ORIGYN poprzez zarządzanie i użyteczność protokołu."
+        },
+        {
+          "title": "Obsługa wielu klas aktywów",
+          "description": "Certyfikuj dzieła sztuki, dobra luksusowe, złoto, nieruchomości i wiele więcej."
+        },
+        {
+          "title": "Bezpieczeństwo na poziomie branżowym",
+          "description": "Niezmienne zabezpieczenie blockchain dla Państwa najcenniejszych aktywów."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Jak to",
+      "titleSuffix": "działa",
+      "steps": [
+        {
+          "description": "Przeniesienie aktywów ze świata rzeczywistego on-chain powinno być proste. Proces certyfikacji ORIGYN został zaprojektowany tak, aby był bezpieczny, zdecentralizowany i łatwy w użyciu — w zaledwie trzech krokach: <br /><br />Prześlij metadane aktywa oraz dokumentację pomocniczą. ORIGYN generuje unikalny, odporny na manipulacje certyfikat cyfrowy bezpośrednio na blockchainie, przypisując go do aktywa i łącząc z jego prawowitym właścicielem.",
+          "panelTitle": "Wybij swój certyfikat cyfrowy",
+          "panelDescription": "Prześlij dane aktywa i wybij certyfikat blockchain."
+        },
+        {
+          "description": "Każdy certyfikat jest kryptograficznie weryfikowalny. Autentyczność, proweniencja i własność aktywa są walidowane przez zdecentralizowany protokół ORIGYN.",
+          "panelTitle": "Weryfikacja i uwierzytelnianie",
+          "panelDescription": "Zapewnij autentyczność aktywa i przejrzystość własności."
+        },
+        {
+          "description": "Po certyfikacji aktywo może być przechowywane, przenoszone, handlowane lub wykorzystywane w ekosystemach cyfrowych — od aplikacji DeFi i rynków NFT po prywatne transakcje i dokumentację instytucjonalną.",
+          "panelTitle": "Transfer i śledzenie",
+          "panelDescription": "Korzystaj ze swojego certyfikowanego aktywa w DeFi, odsprzedaży lub inwestycjach i śledź jego historię."
+        }
+      ],
+      "goToStep": "Przejdź do kroku {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Przypadki",
+      "titleSuffix": "użycia",
+      "description": "Protokół ORIGYN został stworzony, aby obsługiwać szeroką gamę branż, w których zaufanie, proweniencja i autentyczność mają kluczowe znaczenie. Poniżej przedstawiono niektóre z głównych sektorów już korzystających z infrastruktury certyfikacji ORIGYN.",
+      "items": [
+        {
+          "title": "Sztuka",
+          "description": "Uwierzytelniaj i chroń proweniencję dzieł sztuki fizycznej i cyfrowej on-chain."
+        },
+        {
+          "title": "Złoto",
+          "description": "Certyfikuj złoto za pomocą niezmiennych, możliwych do śledzenia i odpornych na manipulacje certyfikatów cyfrowych."
+        },
+        {
+          "title": "Diamenty",
+          "description": "Śledź pochodzenie, klasyfikację i własność każdego diamentu z precyzją blockchain."
+        },
+        {
+          "title": "Made In",
+          "description": "Udowodnij pochodzenie, autentyczność i kunszt wykonania każdego produktu — od zegarków po modę."
+        }
+      ],
+      "indicatorAria": "Przejdź do przypadku użycia {n}",
+      "discover": "Dowiedz się więcej"
+    },
+    "certify": {
+      "titleLine": "Certyfikuj",
+      "titleEmphasis": "swoje aktywa",
+      "subtitle": "Skorzystaj z Kalkulatora Certyfikacji ORIGYN, aby natychmiast oszacować koszty zabezpieczenia swoich aktywów za pomocą w pełni on-chainowych certyfikatów cyfrowych. Bez względu na to, czy certyfikują Państwo dzieła sztuki, dobra luksusowe, złoto czy inne cenne aktywa, narzędzie to daje przejrzysty obraz kosztów infrastruktury i technologii — bez zgadywania.",
+      "contactPrompt": "Aby certyfikować swoje aktywa, skontaktuj się z nami:",
+      "contactCta": "Skontaktuj się z ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Program",
+      "titleLineTwo": "Integratorów",
+      "description": "Program Integratorów ORIGYN jest przeznaczony dla firm, platform i deweloperów, którzy chcą zintegrować zdecentralizowaną infrastrukturę certyfikacji ORIGYN bezpośrednio ze swoimi usługami.\n\nNiezależnie od tego, czy prowadzą Państwo marketplace, rozwiązanie dla łańcucha dostaw czy markę luksusową — mogą Państwo oferować bezpieczną, on-chainową weryfikację aktywów bez konieczności budowania wszystkiego od podstaw.",
+      "cta": "Dołącz do Programu Integratorów"
+    },
+    "roadmap": {
+      "title": "Plan działania",
+      "description": "Od nowych funkcji użyteczności i zarządzania po rozszerzone wsparcie dla branż i deweloperów. Każdy kamień milowy odzwierciedla naszą misję przeniesienia aktywów ze świata rzeczywistego w pełni on-chain poprzez skalowalną, weryfikowalną i zdecentralizowaną infrastrukturę.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation sfinansowana",
+          "description": "ORIGYN Foundation została założona w Neuchâtel w Szwajcarii, aby rozpocząć rozwój ORIGYN Protocol."
+        },
+        {
+          "title": "Uruchomienie OGY Token",
+          "description": "Natywny utility token $OGY zostaje utworzony, aby zasilać opłaty protokołu, governance i staking."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Uruchomienie pierwszej wersji standardu NFT ORIGYN umożliwiającego certyfikację on-chain."
+        },
+        {
+          "title": "Aktualizacja Tokenomics 2.0",
+          "description": "200 milionów $OGY tokens wcześniej przydzielonych Foundation zostaje spalonych, inicjując presję deflacyjną."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Uruchomienie pierwszego on-chain interfejsu mintingu dla certyfikatów cyfrowych."
+        },
+        {
+          "title": "Partnerstwa strategiczne",
+          "description": "Strategiczne współprace z FederItaly i METALOR w celu certyfikowania produktów wyprodukowanych we Włoszech oraz tokenizowanego złota."
+        },
+        {
+          "title": "Pierwszy zakup złota",
+          "description": "3 kg fizycznego złota zostaje kupione i stokenizowane przy użyciu ORIGYN Protocol."
+        },
+        {
+          "title": "Przejęcie CanDB",
+          "description": "ORIGYN przejmuje CanDB, zdecentralizowane, skalowalne rozwiązanie bazodanowe zoptymalizowane pod kątem metadanych NFT."
+        },
+        {
+          "title": "Tokenomics 3.0 i uruchomienie Dashboard",
+          "description": "Wraz z Tokenomics 3.0 zostaje wprowadzony model deflacyjny i wydana pierwsza wersja ORIGYN Dashboard."
+        },
+        {
+          "title": "10 000 użytkowników protokołu",
+          "description": "ORIGYN przekracza 10 000 unikalnych użytkowników protokołu."
+        },
+        {
+          "title": "Uruchomienie Gold DAO",
+          "description": "Gold DAO staje się pierwszą DAO zbudowaną na ORIGYN, aby tokenizować i certyfikować fizyczne złoto on-chain."
+        },
+        {
+          "title": "Darowizna 500M OGY dla Gold DAO",
+          "description": "Pół miliarda $OGY tokens zostaje przekazane, aby wesprzeć długoterminowy treasury Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO zintegrowana z ICP SNS",
+          "description": "ORIGYN DAO staje się w pełni zdecentralizowana i zarządzana przez framework SNS Internet Computer."
+        },
+        {
+          "title": "Wydanie Dashboard V2",
+          "description": "Nowa wersja dashboardu zawiera metryki na żywo, statystyki stakingu i narzędzia governance."
+        },
+        {
+          "title": "Kamień milowy 30 000 użytkowników",
+          "description": "ORIGYN rośnie do ponad 30 000 użytkowników, co oznacza wzrost o 300% w sześć miesięcy."
+        },
+        {
+          "title": "Współpraca z Leo Caillard i Gil Sertissage",
+          "description": "ORIGYN certyfikuje fizyczne dzieła sztuki i diamenty w ramach prestiżowych partnerstw."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "Standard NFT zostaje zaktualizowany, aby umożliwić bezpieczną przenoszalność certyfikatów."
+        },
+        {
+          "title": "Integrator Framework uruchomiony",
+          "description": "Tworzone są zasady i struktura onboardingu, aby prowadzić nowych partnerów integrujących się z ORIGYN."
+        },
+        {
+          "title": "Uruchomienie Cecil DAO",
+          "description": "ORIGYN wspiera uruchomienie Cecil DAO w celu finansowania projektów ochrony przyrody i humanitarnych dzięki przejrzystości blockchain."
+        },
+        {
+          "title": "Przejęcie ClaimLink",
+          "description": "ORIGYN przejmuje ClaimLink, zdecentralizowaną platformę dystrybucji NFT i tokenów zbudowaną na ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Wprowadzony zostaje nowy standard zwiększający interoperacyjność certyfikatów i użyteczność w całym ekosystemie."
+        },
+        {
+          "title": "Uruchomienie publicznego",
+          "titleSpan": "Minting Studio",
+          "description": "Uruchomione zostaje narzędzie samoobsługowe pozwalające każdemu mintować certyfikaty RWA on-chain na infrastrukturze ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Tajemnica Runestone zostanie ujawniona w Q2 2026 w Genewie."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Uruchomione zostaje narzędzie samoobsługowe pozwalające każdemu mintować on-chain przy użyciu infrastruktury ORIGYN."
+        },
+        {
+          "title": "Wdrożenie ochrony IP",
+          "description": "Obsługa on-chain certyfikacji praw własności intelektualnej zostaje zintegrowana z protokołem."
+        },
+        {
+          "title": "Wdrożenie cross-chain",
+          "description": "Kompatybilność cross-chain rozszerza zasięg ORIGYN na inne duże ekosystemy."
+        },
+        {
+          "title": "Globalna integracja wallets i marketplaces",
+          "description": "ORIGYN NFTs stają się dostępne poprzez wiodące wallets i NFT marketplaces na całym świecie."
+        },
+        {
+          "title": "Stanie się uniwersalnym standardem certyfikacji",
+          "description": "ORIGYN dąży do ustanowienia siebie jako globalnego punktu odniesienia dla certyfikacji cyfrowej we wszystkich klasach aktywów."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNERZY",
+      "testimonials": [
+        {
+          "title": "CEO Metalor",
+          "description": "\"ORIGYN to najbardziej zaawansowana i najbardziej kompleksowa technologia certyfikacji cyfrowej na świecie. Wszystkie dane są w pełni przechowywane w blockchainie, aby zapewnić niezmienność i przejrzystość certyfikatów. Metalor z przyjemnością współpracuje z firmą fintech z siedzibą w Neuchâtel, taką jak ORIGYN, aby wprowadzić na rynki innowacyjne rozwiązanie.\""
+        },
+        {
+          "title": "Specjalista ds. sztuki",
+          "description": "\"Dla moich prywatnych kolekcjonerów zaufanie i dziedzictwo są wszystkim. Technologia certyfikacji ORIGYN stała się niezbędna: nie tylko gwarantuje autentyczność każdego dzieła sztuki, ale także zapewnia jego identyfikowalność i wartość przez pokolenia. Nie chodzi już tylko o posiadanie dzieła sztuki, ale o zabezpieczenie jego historii on-chain, na zawsze. ORIGYN to umożliwia.\""
+        },
+        {
+          "title": "Współzałożyciel Cyber",
+          "description": "\"Zawsze mówimy, że diamenty są wieczne, i to prawda. Tak samo trzeba myśleć o informacjach, które się dostarcza, ponieważ za 100 czy 200 lat te diamenty nadal będą istnieć. Potrzebowaliśmy technologii, która zapewni, że wciąż będziemy mogli dostarczać te informacje, szczególnie w przypadku produktu o dużej wartości, który przechodzi przez pokolenia... Głównym powodem, dla którego nawiązaliśmy partnerstwo z ORIGYN, było to, że mogli zapewnić to wszystko.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Bądź częścią",
+      "emphasisDesktop": "procesu decyzyjnego",
+      "emphasisMobileLineOne": "Procesu",
+      "emphasisMobileLineTwo": "Decyzyjnego",
+      "cta": "Dołącz do ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Nie znaleziono przypadku użycia",
+    "cases": {
+      "gold": [
+        {
+          "title": "Złoto",
+          "description": "Jako największe na świecie aktywo i najściślej monitorowany surowiec, złoto wymaga najwyższego poziomu bezpieczeństwa. <br /><br />ORIGYN spełnia te wymagania, co potwierdziła firma <a href='https://www.metalor.com/' target='_blank'>Metalor</a> — światowy lider w rafinacji złota — która wybrała protokół ORIGYN do zabezpieczenia swoich danych. Po raz pierwszy wszystkie informacje techniczne dotyczące sztabek złota — w tym zdjęcia w wysokiej rozdzielczości i dokumenty — są zapisywane w jednym certyfikacie na blockchainie."
+        },
+        {
+          "description": "Ponadto kilka projektów, takich jak <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> i <a href='https://bity.com' target='_blank'>Bity</a>, wykorzystuje te certyfikaty do sprzedaży odpowiadających im sztabek złota lub tworzenia tokenów opartych na fizycznym złocie."
+        }
+      ],
+      "art": [
+        {
+          "title": "Sztuka",
+          "description": "Eksperci w dziedzinie sztuki przywiązują ogromną wagę do zaufania i gwarancji certyfikatów dla dzieł artystycznych. Dlatego kilka podmiotów przyjęło już technologię ORIGYN.<br /><br />Uznani artyści, tacy jak <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> i <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a>, stworzyli własne certyfikaty ORIGYN, aby chronić dane dotyczące swojej twórczości. Certyfikaty te są w pełni on-chain, odporne na manipulacje i niemożliwe do skopiowania — pozwalają artystom zwalczać fałszerstwa, jednocześnie poprawiając doświadczenia kolekcjonerów dzięki zdjęciom w wysokiej rozdzielczości, filmom i dokumentom."
+        },
+        {
+          "description": "Podmioty takie jak fundacje, organizacje, rodziny, galerie i doradcy artystyczni, które muszą tworzyć certyfikaty cyfrowe dla swoich klientów, zaczęły korzystać z ORIGYN w celu zachowania maksymalnego bezpieczeństwa i poufności. Kilka galerii wdrożyło już technologię ORIGYN, w tym Galeria Retelet w przypadku certyfikatów dzieł René Magritte'a.<br /><br />Technologia ORIGYN umożliwia również sprzedaż poprzez certyfikaty, w szczególności sprzedaż we współwłasności. Pozwala to na podział dzieł sztuki między wielu właścicieli poprzez podzielenie certyfikatu na kilka części, z których każda stanowi dowód własności."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Krajowe pochodzenie to coś więcej niż etykieta. To deklaracja tożsamości, jakości i wartości kulturowej. W obliczu rosnącego fałszerstwa udowodnienie, gdzie i jak produkt został wytworzony, stało się kluczowym wyróżnikiem dla marek w różnych branżach.<br /><br />W odpowiedzi na to wyzwanie <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> stworzyła certyfikację 100% Made in Italy. Ten prawnie uznany standard chroni włoską doskonałość poprzez rygorystyczną dokumentację, niezależne audyty i działania na poziomie rządowym. ORIGYN stanowi cyfrowy fundament tego systemu, rejestrując każdy certyfikowany produkt na blockchainie jako weryfikowalny dowód pochodzenia."
+        },
+        {
+          "description": "Każdy certyfikat staje się bezpiecznym, odpornym na manipulacje cyfrowym paszportem. Wzmacnia zaufanie konsumentów, zapewnia przejrzystość w całym łańcuchu dostaw i wspiera firmy, które stawiają na autentyczność."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luksus",
+          "description": "Technologia ORIGYN odpowiada na potrzebę reinwencji sektora dóbr luksusowych i oferowania bardziej spersonalizowanych, przejrzystych doświadczeń z produktami.<br /><br />Jubiler <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> wykorzystuje technologię blockchain ORIGYN do tworzenia certyfikatów dla całej swojej kolekcji. Zapewnia to bezpieczne przechowywanie wszystkich danych w pełni on-chain, oferując jednocześnie prestiżowym klientom certyfikaty nowej generacji gwarantujące poufność, autentyczność i własność."
+        },
+        {
+          "description": "Inne firmy z sektora luksusowego, takie jak <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a>, również korzystają z ORIGYN do rejestrowania pełnego łańcucha identyfikowalności swoich diamentów przeznaczonych dla renomowanych producentów zegarków. Możliwe są liczne inne zastosowania, w tym dodawanie spersonalizowanych treści marketingowych do certyfikatów lub łączenie technologii ze sztuczną inteligencją w celu określania autentyczności w czasie rzeczywistym na rynkach wtórnych."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Centrum",
+    "titleSuffix": "pomocy",
+    "searchPlaceholder": "Szukaj…",
+    "faqs": [
+      {
+        "title": "Token OGY",
+        "description": "Napędzanie zdecentralizowanej certyfikacji aktywów Web 3.0",
+        "answer": "Token <strong>OGY</strong> jest podstawowym elementem użyteczności Protokołu ORIGYN. Łączy certyfikację aktywów ze świata rzeczywistego ze zdecentralizowaną infrastrukturą blockchain, czyniąc własność, uwierzytelnianie i weryfikację treści naprawdę bezpiecznymi.<br><br>OGY umożliwia globalny system, w którym aktywa fizyczne są certyfikowane cyfrowo, śledzone i integrowane z aplikacjami oraz rynkami zdecentralizowanymi."
+      },
+      {
+        "title": "Użyteczność protokołu",
+        "description": "OGY jest wymagany do wykonywania podstawowych funkcji w ekosystemie ORIGYN.",
+        "answer": "<strong>Certyfikacja:</strong> Każde aktywo certyfikowane w ORIGYN wymaga OGY do wybicia niezmiennego certyfikatu on-chain.<br><strong>Warstwa transakcyjna:</strong> Ułatwia transfery, ponowne certyfikacje i zdarzenia cyklu życia certyfikowanych aktywów.<br><strong>Przechowywanie danych:</strong> Obsługuje bezpieczne, zdecentralizowane przechowywanie metadanych aktywów i proweniencji.<br>Ta użyteczność zapewnia, że OGY jest integralną częścią każdej transakcji w protokole."
+      },
+      {
+        "title": "Adres kontraktu tokena OGY",
+        "description": "Token OGY jest wdrożony na blockchainie Internet Computer.",
+        "answer": "Token OGY jest wdrożony na blockchainie Internet Computer i działa jako natywny token użyteczności w ramach Protokołu ORIGYN.<br><br>Oficjalny adres kontraktu:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Użytkownicy wpisują aktywa podczas wywołania<br>Zawsze weryfikuj adres kontraktu przed interakcją z OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[KUP OGY]</a>"
+      },
+      {
+        "title": "Zarządzanie",
+        "description": "OGY jest tokenem zarządzania, który umożliwia jego posiadaczom:",
+        "answer": "• Proponowanie i głosowanie nad aktualizacjami protokołu, zasadami płynności i zmianami w ekosystemie.<br>• Nadzorowanie procesu wprowadzania integratorów i certyfikatorów.<br>• Alokowanie środków skarbca na rzecz innowacji, wzrostu i inicjatyw strategicznych.<br><br>Zarządzanie jest w pełni zdecentralizowane poprzez ORIGYN DAO, dając społeczności bezpośredni wpływ na ewolucję protokołu."
+      },
+      {
+        "title": "Staking i nagrody",
+        "description": "Staking OGY zabezpiecza sieć, jednocześnie wyrównując zachęty.",
+        "answer": "<strong>Bezpieczeństwo sieci:</strong> Stakerzy uczestniczą w zarządzaniu i pomagają walidować operacje protokołu.<br><br><strong>Nagrody:</strong> Zdobywaj udział w przychodach protokołu z opłat za certyfikację i aktywności sieciowej.<br><br><strong>Długoterminowe zaangażowanie:</strong> Staking zachęca do długoterminowego uczestnictwa i wzmacnia ekosystem.<br><br>Model stakingu wiąże użyteczność tokena bezpośrednio z adopcją i sukcesem protokołu.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Mechanizm deflacyjny / akumulacja wartości",
+        "description": "OGY integruje model deflacyjny zaprojektowany z myślą o zrównoważonym wzroście.",
+        "answer": "<strong>Spalanie przy certyfikacji:</strong> Część OGY używanego do certyfikacji jest trwale usuwana z obiegu.<br><br><strong>Zarządzanie skarbcem:</strong> Przychody protokołu wspierają rozwój, nagrody i optymalizację wartości tokena.<br><br>Wraz ze skalowaniem użytkowania protokołu podaż OGY maleje, wzmacniając tworzenie wartości zgodne z adopcją."
+      },
+      {
+        "title": "Przegląd tokenomiki",
+        "description": "Całkowita podaż: 10.4 Billion OGY",
+        "answer": "<strong>Dystrybucja:</strong> Przeznaczona na rozwój ekosystemu, nagrody za staking, społeczność i zarządzanie.<br><br><strong>Model przychodów:</strong> Opłaty protokołu płacone w OGY generują stały popyt, jednocześnie zmniejszając podaż poprzez mechanizmy spalania.<br>Model jest zaprojektowany w celu wspierania długoterminowej trwałości protokołu i zorientowanego na przyszłość zaangażowania."
+      },
+      {
+        "title": "Przyszłość OGY",
+        "description": "OGY jest fundamentem zdecentralizowanego frameworka.",
+        "answer": "OGY jest fundamentem zdecentralizowanego frameworka zaprojektowanego do certyfikowania, zarządzania i odblokowywania wartości aktywów ze świata rzeczywistego on-chain. W miarę jak ORIGYN rośnie, rola OGY rozszerza się jako silnik ekonomiczny napędzający certyfikację aktywów, zarządzanie i rozwój ekosystemu."
+      },
+      {
+        "title": "Eksploruj token na żywo",
+        "description": "Eksploruj dane tokena na żywo, opcje stakingu i uczestnictwo w zarządzaniu w Dashboardzie ORIGYN.",
+        "answer": "<span style=\"text-decoration: underline;\">Dashboard ORIGYN</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Kliknij, aby uzyskać dostęp do Dashboardu</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Zostań",
+      "titleConnector": "",
+      "titleEmphasis": "Integratorem",
+      "subtitle": "DOŁĄCZ DO PROGRAMU INTEGRATORÓW I WSPÓŁTWÓRZ PRZYSZŁOŚĆ ZAUFANIA Z TECHNOLOGIĄ CERTYFIKACJI BLOCKCHAIN ORIGYN",
+      "cta": "Dołącz teraz"
+    },
+    "program": {
+      "titleLineOne": "Program",
+      "titleLineTwo": "Integratorów",
+      "steps": [
+        {
+          "labelBold": "CZYM",
+          "labelRest": "JEST PROGRAM INTEGRATORÓW?",
+          "description": "Program Integratorów to inicjatywa strategiczna mająca na celu promowanie protokołu ORIGYN, zachęcanie do jego adopcji oraz poszerzanie jego ekosystemu."
+        },
+        {
+          "labelBold": "KIM",
+          "labelRest": "SĄ INTEGRATORZY?",
+          "description": "<ul><li><strong>Integratorzy to niezależne firmy,</strong> które budują produkty oparte na protokole ORIGYN, dążąc do wspólnego celu, jakim jest wybijanie certyfikatów ORIGYN i promowanie protokołu ORIGYN w określonej branży, klasie aktywów lub w wielu sektorach.</li><li><strong>Działając jako katalizatorzy,</strong> pomagają firmom adoptować technologię certyfikacji blockchain ORIGYN bez konieczności posiadania dogłębnej wiedzy z zakresu blockchain i Web3.</li><li><strong>Po przeprowadzeniu procesu weryfikacji</strong> przez Fundację ORIGYN integratorzy są wybierani i głosowani przez posiadaczy tokenów ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "JAK",
+          "labelRest": "ZOSTAĆ INTEGRATOREM?",
+          "description": "Aby zostać integratorem, firma musi wykazać zdolność do świadczenia usług na dużą skalę, spełniając jednocześnie wszystkie wymagania i posiadając niezbędną wiedzę specjalistyczną do obsługi jednego lub wielu sektorów."
+        }
+      ],
+      "goToStep": "Przejdź do kroku {n}",
+      "joinNow": "Dołącz teraz"
+    },
+    "workflow": {
+      "titleLineOne": "Proces",
+      "titleLineTwo": "aplikacji",
+      "steps": [
+        {
+          "title": "Formularz aplikacyjny",
+          "content": "<p>W ramach aplikacji Integratorzy muszą wypełnić <strong><a href=\"/integrator/join\">Formularz aplikacyjny projektu online</a></strong> i przygotować <strong>Dokumentację Due Diligence</strong> do przesłania na adres <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Dokumentacja due diligence obejmuje:</p>\n<ul>\n<li>Kopię aktu założycielskiego spółki</li>\n<li>Opis UBO – rzeczywistych beneficjentów (Unique Beneficial Owners)</li>\n<li>Kopię umowy spółki i statutu (Memorandum &amp; Articles of Association)</li>\n<li>Uchwałę Zarządu formalizującą wolę ubiegania się o status Integratora i przestrzegania zasad stakingu wraz z listą urzędników upoważnionych do prowadzenia działalności Integratora</li>\n<li>Identyfikacja upoważnionych sygnatariuszy powinna być oparta na fotografiach i kartach podpisów poświadczonych przez spółkę</li>\n<li>Kopie dokumentów tożsamości i potwierdzenia adresu dla menedżerów, urzędników lub pracowników posiadających pełnomocnictwo do prowadzenia działalności w jej imieniu</li>\n<li>Lista dyrektorów</li>\n<li>Formularz aplikacyjny projektu Integratora</li>\n</ul>"
+        },
+        {
+          "title": "Weryfikacja przez Fundację ORIGYN",
+          "content": "<p>Pierwszym krokiem do zostania Integratorem jest uzyskanie walidacji przez Fundację ORIGYN po przeprowadzeniu procesu due diligence. Integrator wyraża zgodę na udostępnienie wszystkich wymaganych dokumentów w celu spełnienia wszystkich wymaganych procedur KYC/KYB/AML.</p>"
+        },
+        {
+          "title": "Głosowanie zarządcze przez ORIGYN DAO",
+          "content": "<p>PUBLICZNE GŁOSOWANIE PRZEZ ORIGYN DAO:</p>\n<p>Po zakończeniu przez Fundację procesu weryfikacji Integrator zostanie poddany głosowaniu DAO w formie publicznej propozycji na Platformie SNS. Wszystkie propozycje ORIGYN można przeglądać pod adresem <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Każda zmiana adresu osoby prawnej, nazwy firmy lub rozwiązanie współpracy jest głosowana publicznie na Platformie SNS.</p>"
+        },
+        {
+          "title": "Staking 50,000,000 OGY",
+          "content": "<p>Jeśli propozycja zostanie pomyślnie przyjęta, Integrator będzie zobowiązany do zablokowania 50,000,000 OGY w Zarządzaniu ORIGYN na 1 rok bez możliwości wcześniejszego rozwiązania.</p>\n<p>Ten krok zapewnia długoterminowe zaangażowanie Integratora oraz siłę głosu umożliwiającą aktywne uczestnictwo w zarządzaniu ORIGYN. Wszystkie zablokowane neurony będą publicznie widoczne w Dashboardzie pod adresem <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Wszystkie statystyki, takie jak liczba wybitych certyfikatów, TVL certyfikowanych aktywów itp., będą publicznie wyświetlane w sekcji integratora na stronie <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Przegląd wyników",
+          "content": "<p>W zależności od sektora i zobowiązań, minimalne wymagania dotyczące liczby wybitych certyfikatów mogą stanowić część umowy Integratora. Dlatego Fundacja ORIGYN będzie okresowo przeprowadzać przeglądy kamieni milowych i wyników Integratorów.</p>\n<p>Wszystkie statystyki, takie jak liczba wybitych certyfikatów, TVL certyfikowanych aktywów itp., będą publicznie wyświetlane w sekcji integratora na stronie <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Pobierz",
+      "titleLineTwo": "Kontrakt Integratorów",
+      "cta": "Pobierz"
+    }
+  },
+  "integratorJoin": {
+    "title": "Program Integratorów",
+    "titleItalic": "Formularz aplikacyjny",
+    "requiredLabel": "WYMAGANE *",
+    "requiredMessage": "Wymagane",
+    "emailInvalid": "Proszę podać prawidłowy adres e-mail",
+    "send": "WYŚLIJ",
+    "sending": "Wysyłanie…",
+    "errorSend": "Błąd wysyłania formularza.",
+    "fileSizeError": "Rozmiar pliku nie może przekraczać 1 MB",
+    "addLink": "DODAJ LINK",
+    "addObjective": "DODAJ CEL",
+    "addKpi": "DODAJ KPI",
+    "uploadHighlight": "Prześlij",
+    "uploadSuffix": " swoje logo lub przeciągnij je tutaj (OPCJONALNIE)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — maks. 1 MB",
+    "logoPreviewAlt": "Podgląd logo",
+    "successTitle": "Dziękujemy",
+    "successMessage": "Odezwiemy się wkrótce",
+    "backToIntegrator": "POWRÓT DO STRONY INTEGRATORA",
+    "errorTitle": "Coś poszło nie tak",
+    "errorMessageDefault": "Proszę spróbować ponownie lub wrócić później",
+    "retry": "SPRÓBUJ PONOWNIE",
+    "sections": {
+      "representative": {
+        "title": "PRZEDSTAWICIEL INTEGRATORA",
+        "fullName": "IMIĘ I NAZWISKO *",
+        "email": "ADRES E-MAIL *",
+        "phone": "NUMER TELEFONU *"
+      },
+      "overview": {
+        "title": "PRZEGLĄD",
+        "description": "PROSIMY O KRÓTKI PRZEGLĄD PROJEKTU INTEGRATORA, W TYM",
+        "vision": "Wizja Państwa Integratora w jednym zdaniu… *",
+        "industry": "Przykłady kategorii branżowych (sztuka, muzyka, luksus) lub konkretne aktywa (złoto, diamenty) *",
+        "geography": "Zasięg geograficzny rynku (globalny, Europa, kraj) *",
+        "socialFirst": "Strona internetowa i linki do mediów społecznościowych *",
+        "social": "Strona internetowa i linki do mediów społecznościowych",
+        "presentation": "Link do prezentacji projektu (nieobowiązkowe, ale pomocne)"
+      },
+      "acquisition": {
+        "title": "POZYSKIWANIE KLIENTÓW",
+        "description": "PROSIMY WYRAŹNIE OKREŚLIĆ GRUPĘ DOCELOWĄ ORAZ SPOSÓB JEJ POZYSKIWANIA LUB PLANOWANEGO POZYSKIWANIA",
+        "whyExists": "Dlaczego ten projekt musi istnieć i czym się wyróżnia? *",
+        "whyIntegrator": "Dlaczego zależy Państwu na zostaniu Integratorem? *"
+      },
+      "objectives": {
+        "title": "KLUCZOWE CELE DO OSIĄGNIĘCIA",
+        "first": "Cel 01 *",
+        "second": "Cel 02",
+        "more": "Cel {n}"
+      },
+      "kpis": {
+        "title": "KLUCZOWE WSKAŹNIKI DO MONITOROWANIA",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "CO I JAK PAŃSTWO ZROBIĄ",
+        "focus": "Proszę szczegółowo opisać, na czym skupią się Państwo jako Integrator i jak wygląda sukces tego projektu.",
+        "implement": "Proszę opisać, jak planują Państwo wdrożyć ten projekt"
+      },
+      "roadmaps": {
+        "title": "PLAN DZIAŁANIA NA PIERWSZE 3 MIESIĄCE I 3 LATA",
+        "description": "Należy podać, kiedy Państwo planują rozpocząć bicie certyfikatów oraz szacunkową ich liczbę *"
+      },
+      "team": {
+        "title": "ZESPÓŁ",
+        "placeholder": "Proszę opowiedzieć o obecnym zespole, jeśli istnieje, lub przyszłych rolach, które mogą być potrzebne, wraz z linkami do profili LinkedIn *"
+      },
+      "risk": {
+        "title": "CZYNNIKI RYZYKA",
+        "placeholder": "Proszę wskazać przyczyny i czynniki, które mogą doprowadzić do niepowodzenia."
+      },
+      "optional": {
+        "title": "OPCJONALNIE",
+        "placeholder": "Czy jest coś, co chcą Państwo dodać, co zwiększyłoby szanse na wybór?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Token",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Token OGY jest <b>podstawowym elementem użyteczności</b> Protokołu ORIGYN.",
+      "paragraphTwo": "<b>Łączy</b> certyfikację aktywów ze świata rzeczywistego ze zdecentralizowaną infrastrukturą blockchain, <b>czyniąc własność, uwierzytelnianie</b> i <b>transfer weryfikowalnymi i bezpiecznymi.</b>",
+      "paragraphThree": "OGY umożliwia globalny system, w którym aktywa <b>fizyczne</b> są <b>certyfikowane cyfrowo, śledzone</b> i <b>integrowane ze zdecentralizowanymi</b> aplikacjami i rynkami.",
+      "cta": "Kup OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "Kapitalizacja rynkowa $OGY",
+      "burned": "Łącznie spalonych OGY",
+      "circulating": "Podaż w obiegu",
+      "holders": "Posiadacze tokena"
+    },
+    "utility": {
+      "titlePrefix": "Użyteczność",
+      "titleEmphasis": "protokołu",
+      "lead": "Tokeny OGY są potrzebne do pełnego korzystania z ekosystemu ORIGYN:",
+      "cards": [
+        {
+          "title": "Certyfikacja",
+          "description": "Każde aktywo certyfikowane w ORIGYN wymaga OGY do wybicia niezmiennego certyfikatu on-chain."
+        },
+        {
+          "title": "Warstwa transakcyjna",
+          "description": "Ułatwia transfery, ponowne certyfikacje i zdarzenia cyklu życia certyfikowanych aktywów."
+        },
+        {
+          "title": "Przechowywanie danych",
+          "description": "Obsługuje bezpieczne, zdecentralizowane przechowywanie metadanych aktywów i proweniencji."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY",
+      "titleLineTwo": "Adres kontraktu",
+      "description": "Token OGY jest wdrożony na blockchainie Internet Computer i działa jako natywny token użyteczności w ramach Protokołu ORIGYN.",
+      "bulletOne": "Kontrakt ten reguluje emisję OGY, transfery i interakcje w całym protokole, zapewniając przejrzystość i weryfikację on-chain wszystkich aktywności tokenowych.",
+      "bulletTwo": "Mogą Państwo przeglądać token OGY i wchodzić z nim w interakcję bezpośrednio przez sieć ICP.",
+      "warning": "Zawsze weryfikuj adres kontraktu przed interakcją z OGY.",
+      "contractLabel": "Oficjalny adres kontraktu:",
+      "copyAria": "Skopiuj adres kontraktu",
+      "copied": "Skopiowano do schowka",
+      "cmcAria": "Zobacz OGY na CoinMarketCap"
+    },
+    "governance": {
+      "title": "Zarządzanie",
+      "lead": "OGY jest tokenem zarządzania, który umożliwia posiadaczom:",
+      "items": [
+        "<b>Alokowanie</b> środków skarbca na rzecz rozwoju ekosystemu i inicjatyw strategicznych.",
+        "<b>Proponowanie i głosowanie</b> nad aktualizacjami protokołu, zasadami certyfikacji i zmianami w ekosystemie.",
+        "<b>Nadzorowanie</b> procesu wprowadzania integratorów i certyfikatorów."
+      ],
+      "closing": "Zarządzanie jest <b>w pełni zdecentralizowane</b> poprzez ORIGYN DAO, dając społeczności bezpośredni wpływ na <b>ewolucję protokołu.</b>",
+      "cta": "DOWIEDZ SIĘ WIĘCEJ"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "i",
+      "titleLineTwoEmphasis": "nagrody",
+      "lead": "Staking OGY zabezpiecza sieć, jednocześnie wyrównując zachęty:",
+      "cards": [
+        {
+          "title": "Bezpieczeństwo sieci",
+          "description": "Stakerzy uczestniczą w zarządzaniu i pomagają walidować operacje protokołu."
+        },
+        {
+          "title": "Nagrody",
+          "description": "Zdobywaj udział w przychodach protokołu z opłat za certyfikację i aktywności sieciowej."
+        },
+        {
+          "title": "Długoterminowe zaangażowanie",
+          "description": "Staking zachęca do długoterminowego uczestnictwa i wzmacnia ekosystem."
+        }
+      ],
+      "closing": "Model stakingu wiąże użyteczność tokena bezpośrednio z adopcją i sukcesem protokołu.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflacyjna</b> mechanika",
+      "titleLineTwo": "i <b>akumulacja wartości</b>",
+      "lead": "OGY integruje model deflacyjny zaprojektowany z myślą o zrównoważonym wzroście:",
+      "items": [
+        {
+          "title": "Co sprawia, że OGY jest tokenem deflacyjnym?",
+          "answer": "OGY został zaprojektowany z modelem deflacyjnym, co oznacza, że jego całkowita podaż maleje z czasem w miarę korzystania z protokołu."
+        },
+        {
+          "title": "Jak działa spalanie tokenów?",
+          "answer": "Za każdym razem, gdy OGY jest używany do certyfikacji, część tokenów jest trwale spalana. Zmniejsza to podaż w obiegu."
+        },
+        {
+          "title": "Jaka jest rola skarbca?",
+          "answer": "Przychody protokołu są zarządzane przez skarbiec w celu wspierania bieżącego rozwoju, wynagradzania uczestników i utrzymania długoterminowej stabilności ekosystemu."
+        },
+        {
+          "title": "Jak OGY tworzy wartość w czasie?",
+          "answer": "W miarę jak więcej użytkowników adoptuje protokół ORIGYN i rośnie aktywność certyfikacyjna, więcej OGY jest spalane. Ta malejąca podaż, w połączeniu z rosnącym użytkowaniem, wspiera długoterminowe tworzenie wartości."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomika",
+      "titleEmphasis": "— przegląd",
+      "totalSupplyLabel": "Całkowita podaż:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Dystrybucja:</b> Przeznaczona na rozwój ekosystemu, nagrody za staking, społeczność i zarządzanie.",
+      "revenue": "<b>Model przychodów:</b> Opłaty protokołu płacone w OGY generują stały popyt, jednocześnie zmniejszając podaż poprzez mechanizmy spalania.",
+      "support": "Model jest zaprojektowany w celu wspierania długoterminowej trwałości protokołu i zaangażowania posiadaczy tokenów.",
+      "cta": "TOKENOMIKA"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator kosztów",
+      "description": "Użyj kalkulatora ORIGYN, aby oszacować koszt unikalnego certyfikatu z wszystkimi Państwa danymi on-chain"
+    },
+    "plan": {
+      "title": "Zaplanuj bicie certyfikatu",
+      "description": "Proszę podać liczbę elementów i rodzaj przesyłanych plików.",
+      "itemsLabel": "Ile elementów?",
+      "uploadingLabel": "Co Państwo przesyłają?",
+      "knowExactSize": "Znają Państwo dokładny rozmiar?",
+      "totalUploadSize": "Łączny rozmiar przesyłanych plików",
+      "usePreset": "Użyj gotowego ustawienia",
+      "combinedSize": "Łączny rozmiar wszystkich plików we wszystkich elementach.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB każdy"
+        },
+        "iphone": {
+          "label": "Zdjęcie",
+          "hint": "3 MB każde"
+        },
+        "dslr": {
+          "label": "Zdjęcie studyjne",
+          "hint": "20 MB każde"
+        },
+        "video": {
+          "label": "Krótki film",
+          "hint": "1 GB każdy"
+        },
+        "video1hr": {
+          "label": "Długi film",
+          "hint": "60 GB każdy"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Szacunek na żywo",
+      "titleRefreshing": "Aktualizowanie szacunku",
+      "description": "Aktualizuje się automatycznie wraz ze zmianą ustawień.",
+      "ogyEquivalent": "Odpowiednik w OGY",
+      "ogySpotRate": "Kurs spot OGY",
+      "itemSingular": "Element",
+      "itemPlural": "Elementy",
+      "upload": "Przesyłanie"
+    },
+    "breakdown": {
+      "title": "Szczegółowy podział kosztów",
+      "baseFee": "Podstawowa opłata za bicie",
+      "storageFee": "Opłata za przechowywanie",
+      "items": "Elementy",
+      "uploadSize": "Rozmiar przesyłanych plików"
+    },
+    "bytesUnit": "bajty"
   }
 }

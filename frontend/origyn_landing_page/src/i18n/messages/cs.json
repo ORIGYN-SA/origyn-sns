@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Tvrzení",
-        "body": "„On-chain agent poháněný AI.“ Inference probíhá na AWS. Řetězec ukládá pouze výstup."
+        "body": "„On-chain agent poháněný AI.\" Inference probíhá na AWS. Řetězec ukládá pouze výstup."
       },
       {
         "title": "Mezera",
@@ -135,8 +135,18 @@
         "gain": "Zisk"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Pět pilířů,\nkteré AI nemůže <i>nahradit.</i>",
     "lead": "AI mění produkci v komoditu. Těchto pět oblastí zůstává. Origyn je přítomen v každé z nich.",
     "pillars": [
-      { "title": "Důvěra", "description": "Certifikace Origyn — ověřitelný signál důvěry." },
-      { "title": "Kontext", "description": "Desetiletí strukturované paměti — osobní signál, kterému se AI nevyrovná." },
-      { "title": "Distribuce", "description": "Swiss Subnet — ověřitelná infrastruktura pro agenty." },
-      { "title": "Vkus", "description": "Pipeline automatického výzkumu — kurátorství podpořené automatizací." },
-      { "title": "Odpovědnost", "description": "Auditní stopa a certifikát — skutečná vrstva správy." }
+      {
+        "title": "Důvěra",
+        "description": "Certifikace Origyn — ověřitelný signál důvěry."
+      },
+      {
+        "title": "Kontext",
+        "description": "Desetiletí strukturované paměti — osobní signál, kterému se AI nevyrovná."
+      },
+      {
+        "title": "Distribuce",
+        "description": "Swiss Subnet — ověřitelná infrastruktura pro agenty."
+      },
+      {
+        "title": "Vkus",
+        "description": "Pipeline automatického výzkumu — kurátorství podpořené automatizací."
+      },
+      {
+        "title": "Odpovědnost",
+        "description": "Auditní stopa a certifikát — skutečná vrstva správy."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Jazyk",
-    "switchTo": "Přepnout na {language}"
+    "switchTo": "Přepnout na {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFIKÁTY",
+    "integrators": "INTEGRÁTOŘI",
+    "useCases": "PŘÍPADY POUŽITÍ",
+    "governance": "SPRÁVA",
+    "help": "NÁPOVĚDA",
+    "toggleMenu": "Přepnout nabídku"
+  },
+  "footer": {
+    "certificates": "CERTIFIKÁTY",
+    "integrators": "INTEGRÁTOŘI",
+    "ecosystem": "EKOSYSTÉM",
+    "useCases": "PŘÍPADY POUŽITÍ",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Všechna práva vyhrazena – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Zabezpečte svá aktiva, duševní vlastnictví\na identitu plně on-chain.",
+      "subtitleMobile": "Zabezpečte svá aktiva,\nduševní vlastnictví\na identitu plně on-chain.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Certifikujte svá aktiva",
+      "buyCta": "Koupit $OGY",
+      "marquee": "ORIGYN vám umožňuje bezpečně ukládat vaše data a aktiva plně on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Tržní kapitalizace $OGY",
+        "tooltip": "Celková tržní hodnota všech tokenů OGY aktuálně v oběhu, na základě aktuální ceny tokenu."
+      },
+      "tvl": {
+        "title": "Celková uzamčená hodnota (TVL) certifikovaných aktiv v USD",
+        "tooltipTitle": "Celková uzamčená hodnota (TVL)",
+        "tooltip": "TVL odpovídá hodnotě vydaných certifikátů; neznamená to, že ORIGYN tato aktiva drží v úschově."
+      },
+      "users": {
+        "title": "Uživatelé",
+        "tooltip": "Celkový počet osob, značek a institucí, které aktivně využívají ORIGYN k vydávání, správě nebo vlastnictví certifikovaných aktiv."
+      },
+      "assets": {
+        "title": "Celkem certifikovaných aktiv",
+        "tooltip": "Počet fyzických nebo digitálních položek, které obdržely oficiální certifikát ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Proč",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN – kde se reálná aktiva setkávají s blockchainem.",
+      "body": "ORIGYN je nejpokročilejší protokol pro reálná aktiva (RWA) na světě, navržený k přenesení fyzických aktiv plně on-chain – od výtvarného umění a zlata až po luxusní zboží a duševní vlastnictví.\n\nPoskytuje infrastrukturu pro certifikaci bez nutnosti důvěry, která zaručuje pravost, provenienci a vlastnictví aktiv vysoké hodnoty."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% certifikace on-chain",
+          "description": "Žádní zprostředkovatelé, žádná manipulace. Plně decentralizované."
+        },
+        {
+          "title": "Užitková hodnota tokenu $OGY",
+          "description": "Pohání ekosystém ORIGYN prostřednictvím správy a protokolové utility."
+        },
+        {
+          "title": "Podpora více tříd aktiv",
+          "description": "Certifikujte umění, luxusní zboží, zlato, nemovitosti a mnoho dalšího."
+        },
+        {
+          "title": "Bezpečnost na špičkové úrovni",
+          "description": "Neměnná ochrana blockchainem pro vaše nejcennější aktiva."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Jak to",
+      "titleSuffix": "funguje",
+      "steps": [
+        {
+          "description": "Přenesení reálných aktiv on-chain by mělo být jednoduché. Certifikační proces ORIGYN je navržen tak, aby byl bezpečný, decentralizovaný a snadno použitelný ve třech krocích: <br /><br />Odešlete metadata svého aktiva a podpůrnou dokumentaci. ORIGYN vygeneruje jedinečný, nemanipulovatelný digitální certifikát přímo na blockchainu, přiřadí jej k aktivu a propojí s jeho oprávněným vlastníkem.",
+          "panelTitle": "Vytvořte svůj digitální certifikát",
+          "panelDescription": "Nahrajte údaje o aktivu a vytvořte blockchainový certifikát."
+        },
+        {
+          "description": "Každý certifikát je kryptograficky ověřitelný. Pravost, provenience a vlastnictví aktiva jsou ověřeny prostřednictvím decentralizovaného protokolu ORIGYN.",
+          "panelTitle": "Ověřte a autentizujte",
+          "panelDescription": "Zajistěte pravost aktiva a transparentnost vlastnictví."
+        },
+        {
+          "description": "Po certifikaci lze vaše aktivum držet, převést, obchodovat s ním nebo jej využít v digitálních ekosystémech – od DeFi aplikací a NFT tržišť až po soukromé transakce a institucionální záznamy.",
+          "panelTitle": "Převeďte a sledujte",
+          "panelDescription": "Využívejte a sledujte svá certifikovaná aktiva pro DeFi, prodej nebo investice."
+        }
+      ],
+      "goToStep": "Přejít na krok {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Případy",
+      "titleSuffix": "použití",
+      "description": "Protokol ORIGYN je vytvořen pro širokou škálu odvětví, kde jsou důvěra, provenience a pravost klíčové. Níže jsou uvedena některá z klíčových sektorů, která již využívají certifikační infrastrukturu ORIGYN.",
+      "items": [
+        {
+          "title": "Umění",
+          "description": "Autentizujte a chraňte provenienci fyzických i digitálních uměleckých děl on-chain."
+        },
+        {
+          "title": "Zlato",
+          "description": "Certifikujte zlato pomocí neměnných, sledovatelných a nemanipulovatelných digitálních certifikátů."
+        },
+        {
+          "title": "Diamanty",
+          "description": "Sledujte původ, hodnocení a vlastnictví každého diamantu s přesností blockchainu."
+        },
+        {
+          "title": "Made In",
+          "description": "Prokažte původ, pravost a řemeslné zpracování jakéhokoli produktu – od hodinek po módu."
+        }
+      ],
+      "indicatorAria": "Přejít na případ použití {n}",
+      "discover": "Zjistit více"
+    },
+    "certify": {
+      "titleLine": "Certifikujte",
+      "titleEmphasis": "svá aktiva",
+      "subtitle": "Použijte Certifikační kalkulačku ORIGYN k okamžitému odhadu nákladů na zabezpečení vašich aktiv pomocí plně on-chain digitálních certifikátů. Ať certifikujete výtvarné umění, luxusní zboží, zlato nebo jiná cenná aktiva, tento nástroj vám poskytne jasný přehled nákladů na infrastrukturu a technologie bez dohadu.",
+      "contactPrompt": "Pro certifikaci vašich aktiv nás kontaktujte:",
+      "contactCta": "Kontaktovat ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Program pro",
+      "titleLineTwo": "integrátory",
+      "description": "Program ORIGYN pro integrátory je určen pro podniky, platformy a vývojáře, kteří chtějí integrovat decentralizovanou certifikační infrastrukturu ORIGYN přímo do svých služeb.\n\nAť jste tržiště, řešení pro dodavatelský řetězec nebo luxusní značka, můžete nabídnout bezpečné ověřování aktiv on-chain, aniž byste museli vynalézat kolo znovu.",
+      "cta": "Připojte se k programu pro integrátory"
+    },
+    "roadmap": {
+      "title": "Roadmapa",
+      "description": "Od nových utilit a funkcí správy až po rozšířenou podporu pro odvětví a vývojáře. Každý milník odráží naši misi přinést reálná aktiva plně on-chain prostřednictvím škálovatelné, ověřitelné a decentralizované infrastruktury.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation financována",
+          "description": "ORIGYN Foundation byla založena ve švýcarském Neuchâtelu, aby zahájila vývoj ORIGYN Protocol."
+        },
+        {
+          "title": "Spuštění OGY Token",
+          "description": "Nativní utility token $OGY je vytvořen pro pohon protokolových poplatků, governance a stakingu."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Spuštění první verze NFT standardu ORIGYN umožňující on-chain certifikaci."
+        },
+        {
+          "title": "Aktualizace Tokenomics 2.0",
+          "description": "200 milionů $OGY tokens dříve přidělených Foundation je spáleno, čímž se spouští deflační tlak."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Spuštění prvního on-chain minting rozhraní pro digitální certifikáty."
+        },
+        {
+          "title": "Strategická partnerství",
+          "description": "Strategické spolupráce s FederItaly a METALOR za účelem certifikace italských produktů a tokenizovaného zlata."
+        },
+        {
+          "title": "První nákup zlata",
+          "description": "3 kg fyzického zlata jsou zakoupeny a tokenizovány pomocí ORIGYN Protocol."
+        },
+        {
+          "title": "Akvizice CanDB",
+          "description": "ORIGYN získává CanDB, decentralizované, škálovatelné databázové řešení optimalizované pro NFT metadata."
+        },
+        {
+          "title": "Tokenomics 3.0 a spuštění Dashboardu",
+          "description": "S Tokenomics 3.0 je zaveden deflační model a vydána první verze ORIGYN Dashboard."
+        },
+        {
+          "title": "10 000 uživatelů protokolu",
+          "description": "ORIGYN překonává 10 000 unikátních uživatelů protokolu."
+        },
+        {
+          "title": "Spuštění Gold DAO",
+          "description": "Gold DAO se stává první DAO postavenou na ORIGYN pro tokenizaci a certifikaci fyzického zlata on-chain."
+        },
+        {
+          "title": "Dar 500M OGY pro Gold DAO",
+          "description": "Půl miliardy $OGY tokens je darováno na podporu dlouhodobé treasury Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO integrována s ICP SNS",
+          "description": "ORIGYN DAO se stává plně decentralizovanou a spravovanou prostřednictvím SNS frameworku Internet Computer."
+        },
+        {
+          "title": "Vydání Dashboard V2",
+          "description": "Nová verze dashboardu obsahuje živé metriky, statistiky stakingu a governance nástroje."
+        },
+        {
+          "title": "Milník 30 000 uživatelů",
+          "description": "ORIGYN roste na více než 30 000 uživatelů, což je 300% nárůst za šest měsíců."
+        },
+        {
+          "title": "Spolupráce s Leo Caillard a Gil Sertissage",
+          "description": "ORIGYN certifikuje fyzická umělecká díla a diamanty v prestižních partnerstvích."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard je upgradován tak, aby umožnil bezpečnou převoditelnost certifikátů."
+        },
+        {
+          "title": "Integrator Framework spuštěn",
+          "description": "Jsou vytvořena pravidla a onboardingová struktura, které mají vést nové partnery při integraci s ORIGYN."
+        },
+        {
+          "title": "Spuštění Cecil DAO",
+          "description": "ORIGYN podporuje spuštění Cecil DAO za účelem financování ochranářských a humanitárních projektů pomocí blockchainové transparentnosti."
+        },
+        {
+          "title": "Akvizice ClaimLink",
+          "description": "ORIGYN získává ClaimLink, decentralizovanou platformu pro distribuci NFT a tokenů postavenou na ICP."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Je zaveden nový standard pro zvýšení interoperability certifikátů a užitku v celém ekosystému."
+        },
+        {
+          "title": "Spuštění veřejného",
+          "titleSpan": "Minting Studia",
+          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain RWA certifikáty na infrastruktuře ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Záhada Runestone bude odhalena v Q2 2026 v Ženevě."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain pomocí infrastruktury ORIGYN."
+        },
+        {
+          "title": "Implementace ochrany IP",
+          "description": "Do protokolu je integrována podpora on-chain certifikace práv duševního vlastnictví."
+        },
+        {
+          "title": "Cross-chain implementace",
+          "description": "Cross-chain kompatibilita rozšiřuje dosah ORIGYN do dalších významných ekosystémů."
+        },
+        {
+          "title": "Globální integrace wallets a marketplaces",
+          "description": "ORIGYN NFTs se stávají dostupnými prostřednictvím předních wallets a NFT marketplaces po celém světě."
+        },
+        {
+          "title": "Stát se univerzálním standardem certifikace",
+          "description": "ORIGYN usiluje o to, aby se stal globálním měřítkem digitální certifikace napříč všemi třídami aktiv."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNEŘI",
+      "testimonials": [
+        {
+          "title": "CEO společnosti Metalor",
+          "description": "\"ORIGYN je nejpokročilejší a nejkomplexnější technologie digitální certifikace na světě. Veškerá data jsou plně uložena v blockchainu, aby bylo zajištěno, že certifikáty jsou neměnné a transparentní. Metalor rád spolupracuje s fintech společností se sídlem v Neuchâtelu, jako je ORIGYN, aby přinesl na trhy inovativní řešení.\""
+        },
+        {
+          "title": "Specialista na umění",
+          "description": "\"Pro mé soukromé sběratele jsou důvěra a odkaz vším. Certifikační technologie ORIGYN se stala nezbytnou: nezaručuje pouze autenticitu každého uměleckého díla, ale také zajišťuje jeho dohledatelnost a hodnotu napříč generacemi. Už nejde jen o vlastnictví uměleckého díla, ale o trvalé zabezpečení jeho příběhu on-chain. ORIGYN to umožňuje.\""
+        },
+        {
+          "title": "Spoluzakladatel Cyber",
+          "description": "\"Vždy říkáme, že diamanty vydrží navždy, a je to pravda. Stejně je tedy třeba přemýšlet o informacích, které poskytujete, protože za 100 nebo 200 let budou tyto diamanty stále existovat. Potřebovali jsme technologii, která zajistí, že tyto informace budeme moci stále poskytovat, zejména u produktu s vysokou hodnotou, který prochází generacemi... Hlavním důvodem, proč jsme uzavřeli partnerství s ORIGYN, bylo, že toto všechno dokázali poskytnout.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Buďte součástí",
+      "emphasisDesktop": "rozhodování",
+      "emphasisMobileLineOne": "Rozhodování",
+      "emphasisMobileLineTwo": "",
+      "cta": "Připojte se k ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Případ použití nenalezen",
+    "cases": {
+      "gold": [
+        {
+          "title": "Zlato",
+          "description": "Zlato, jako největší aktivum světa a nejpečlivěji sledovaná komodita, vyžaduje nejvyšší úroveň zabezpečení. <br /><br />ORIGYN tyto požadavky splňuje, jak dokázala společnost <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, světový lídr v rafinaci zlata, která si vybrala protokol ORIGYN k zabezpečení svých dat. Poprvé jsou všechny technické informace týkající se zlatých cihel – včetně snímků ve vysokém rozlišení a dokumentů – zaznamenány v jediném certifikátu na blockchainu."
+        },
+        {
+          "description": "Navíc několik projektů, jako například <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> a <a href='https://bity.com' target='_blank'>Bity</a>, tyto certifikáty využívá k prodeji odpovídajících zlatých cihel nebo k vytváření tokenů krytých fyzickým zlatem."
+        }
+      ],
+      "art": [
+        {
+          "title": "Umění",
+          "description": "Odborníci na umění se hluboce zabývají otázkou důvěry a záruky certifikátů pro umělecká díla. Proto již řada případů přijala technologii ORIGYN.<br /><br />Uznávaní umělci jako <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> a <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> si vytvořili vlastní certifikáty ORIGYN k ochraně dat souvisejících s jejich tvorbou. Tyto certifikáty jsou plně on-chain, nemanipulovatelné a nekopírovatelné, což umělcům umožňuje bojovat proti padělání a zároveň zlepšovat zážitek sběratelů prostřednictvím snímků ve vysokém rozlišení, videí a dokumentů."
+        },
+        {
+          "description": "Subjekty jako nadace, organizace, rodiny, galerie a umělečtí poradci, kteří potřebují vytvářet digitální certifikáty pro své klienty, začaly využívat ORIGYN k zajištění maximální bezpečnosti a důvěrnosti. Technologii ORIGYN již implementovalo několik galerií, včetně Galerie Retelet pro certifikáty uměleckých děl Reného Magritta.<br /><br />Technologie ORIGYN také umožňuje prodeje prostřednictvím certifikátů, zejména prodeje spoluvlastnictví. To umožňuje sdílet umělecká díla mezi více vlastníky rozdělením certifikátu na několik částí, z nichž každá slouží jako doklad vlastnictví."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Národní původ je více než jen etiketa. Je to deklarace identity, kvality a kulturní hodnoty. S rostoucím padělatelstvím se prokazování místa a způsobu výroby produktu stalo klíčovým diferenciátorem pro značky napříč odvětvími.<br /><br />V reakci na to vytvořila společnost <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> certifikaci 100% Made in Italy. Tento právně uznaný standard chrání italskou excelenci prostřednictvím přísné dokumentace, nezávislých auditů a vládní advokace. ORIGYN poskytuje digitální základ tohoto systému tím, že zaznamenává každý certifikovaný produkt na blockchain jako ověřitelný doklad původu."
+        },
+        {
+          "description": "Každý certifikát se stává bezpečným, nemanipulovatelným digitálním pasem. Posiluje důvěru spotřebitelů, zajišťuje transparentnost v celém dodavatelském řetězci a podporuje podniky, které se rozhodnou stavět na pravosti."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luxus",
+          "description": "Technologie ORIGYN řeší potřebu luxusního sektoru reinventovat se a nabízet personalizovanější a transparentnější zážitky z produktů.<br /><br />Klenotník <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> využívá blockchainovou technologii ORIGYN k vytváření certifikátů pro celou svou kolekci. To zabezpečuje veškerá data plně on-chain a zároveň nabízí prestižním zákazníkům certifikáty nové generace, které zaručují důvěrnost, pravost a vlastnictví."
+        },
+        {
+          "description": "Další luxusní společnosti, jako například <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a>, také využívají ORIGYN k záznamu úplného řetězce sledovatelnosti svých diamantů určených pro renomované výrobce hodinek. Možné jsou i mnohé další aplikace, včetně přidávání personalizovaného marketingového obsahu k certifikátům nebo kombinování technologie s AI pro určení pravosti v reálném čase na sekundárních trzích."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Centrum",
+    "titleSuffix": "nápovědy",
+    "searchPlaceholder": "Hledat…",
+    "faqs": [
+      {
+        "title": "Token OGY",
+        "description": "Pohání decentralizovanou certifikaci aktiv Web 3.0",
+        "answer": "Token <strong>OGY</strong> je základní utilitou protokolu ORIGYN. Propojuje certifikaci reálných aktiv s decentralizovanou blockchainovou infrastrukturou, čímž činí vlastnictví, autentizaci a ověřování obsahu skutečně bezpečnými.<br><br>OGY umožňuje globální systém, ve kterém jsou fyzická aktiva digitálně certifikována, sledována a integrována do decentralizovaných aplikací a trhů."
+      },
+      {
+        "title": "Protokolová utilita",
+        "description": "OGY je vyžadován pro výkon klíčových funkcí v ekosystému ORIGYN.",
+        "answer": "<strong>Certifikace:</strong> Každé aktivum certifikované v ORIGYN vyžaduje OGY k vytvoření neměnného on-chain certifikátu.<br><strong>Transakční vrstva:</strong> Usnadňuje převody, recertifikace a životní cyklus certifikovaných aktiv.<br><strong>Ukládání dat:</strong> Podporuje bezpečné, decentralizované ukládání metadat aktiv a provenience.<br>Tato utilita zajišťuje, že OGY je nedílnou součástí každé transakce v rámci protokolu."
+      },
+      {
+        "title": "Adresa kontraktu tokenu OGY",
+        "description": "Token OGY je nasazen na blockchainu Internet Computer.",
+        "answer": "Token OGY je nasazen na blockchainu Internet Computer a funguje jako nativní utility token v rámci protokolu ORIGYN.<br><br>Oficiální adresa kontraktu:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Uživatelé zadávají aktiva v rámci volání.<br>Vždy ověřte adresu kontraktu před jakýmkoli zapojením do OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Správa",
+        "description": "OGY je token správy, který dává držitelům pravomoc:",
+        "answer": "• Navrhovat a hlasovat o upgradech protokolu, pravidlech likvidity a změnách ekosystému.<br>• Dohlížet na onboarding integrátorů a certifikátorů.<br>• Alokovat prostředky z pokladnice na inovace, růst a strategické iniciativy.<br><br>Správa je plně decentralizována prostřednictvím ORIGYN DAO, čímž dává komunitě přímý vliv na vývoj protokolu."
+      },
+      {
+        "title": "Staking a odměny",
+        "description": "Staking OGY zabezpečuje síť a přitom slaďuje pobídky.",
+        "answer": "<strong>Bezpečnost sítě:</strong> Stakeři se účastní správy a pomáhají ověřovat provoz protokolu.<br><br><strong>Odměny:</strong> Získejte podíl na příjmech protokolu z certifikačních poplatků a aktivity sítě.<br><br><strong>Dlouhodobé sladění:</strong> Staking podporuje dlouhodobou participaci a posiluje ekosystém.<br><br>Model stakingu přímo spojuje utilizaci tokenu s adopcí a úspěchem protokolu.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflační mechanika / tvorba hodnoty",
+        "description": "OGY integruje deflační model navržený pro udržitelný růst.",
+        "answer": "<strong>Spalování při certifikaci:</strong> Část OGY použitá při certifikaci je trvale odstraněna z oběhu.<br><br><strong>Správa pokladnice:</strong> Příjmy protokolu podporují vývoj, odměny a optimalizaci hodnoty tokenu.<br><br>S rostoucím využíváním protokolu se nabídka OGY snižuje, čímž se posiluje tvorba hodnoty v souladu s adopcí."
+      },
+      {
+        "title": "Přehled tokenomiky",
+        "description": "Celková nabídka: 10.4 Billion OGY",
+        "answer": "<strong>Distribuce:</strong> Alokováno na růst ekosystému, odměny za staking, komunitu a správu.<br><br><strong>Model příjmů:</strong> Protokolové poplatky placené v OGY vytvářejí průběžnou poptávku a zároveň snižují nabídku prostřednictvím mechanismů spalování.<br>Model je navržen tak, aby podporoval dlouhodobou udržitelnost protokolu a sladění zaměřené na budoucnost."
+      },
+      {
+        "title": "Budoucnost OGY",
+        "description": "OGY je základem decentralizovaného rámce.",
+        "answer": "OGY je základem decentralizovaného rámce navrženého k certifikaci, správě a odemčení hodnoty reálných aktiv on-chain. S růstem ORIGYN se role OGY rozšiřuje jako ekonomický motor pohánějící certifikaci aktiv, správu a rozvoj ekosystému."
+      },
+      {
+        "title": "Prozkoumat živý token",
+        "description": "Prozkoumejte živá data tokenů, možnosti stakingu a účast na správě v ORIGYN Dashboard.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Klikněte pro přístup k dashboardu</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Staňte se",
+      "titleConnector": "",
+      "titleEmphasis": "integrátorem",
+      "subtitle": "PŘIPOJTE SE K PROGRAMU PRO INTEGRÁTORY A BUDUJTE BUDOUCNOST DŮVĚRY S BLOCKCHAINOVOU CERTIFIKAČNÍ TECHNOLOGIÍ ORIGYN",
+      "cta": "Připojit se"
+    },
+    "program": {
+      "titleLineOne": "Program pro",
+      "titleLineTwo": "integrátory",
+      "steps": [
+        {
+          "labelBold": "CO",
+          "labelRest": "JE PROGRAM PRO INTEGRÁTORY?",
+          "description": "Program pro integrátory je strategická iniciativa zaměřená na propagaci protokolu ORIGYN, podporu jeho adopce a rozšíření jeho ekosystému."
+        },
+        {
+          "labelBold": "KDO",
+          "labelRest": "JSOU INTEGRÁTOŘI?",
+          "description": "<ul><li><strong>Integrátoři jsou nezávislé firmy,</strong> které budují produkty na základě protokolu ORIGYN se společným cílem vydávat certifikáty ORIGYN a propagovat protokol ORIGYN v konkrétním odvětví, třídě aktiv nebo napříč více sektory.</li><li><strong>Vystupují jako facilitátoři</strong> a pomáhají podnikům přijmout blockchainovou certifikační technologii ORIGYN bez nutnosti hlubokých znalostí blockchainu a Web3.</li><li><strong>Po prověřovacím procesu</strong> provedeném nadací ORIGYN Foundation jsou integrátoři zvoleni a schváleni hlasováním držitelů tokenů ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "JAK",
+          "labelRest": "SE STÁT INTEGRÁTOREM?",
+          "description": "Aby se společnost mohla stát integrátorem, musí prokázat, že je schopna poskytovat služby ve velkém měřítku a splňovat všechny požadavky a odborné předpoklady pro obsluhu jednoho nebo více sektorů."
+        }
+      ],
+      "goToStep": "Přejít na krok {n}",
+      "joinNow": "Připojit se"
+    },
+    "workflow": {
+      "titleLineOne": "Průběh",
+      "titleLineTwo": "přihlášky",
+      "steps": [
+        {
+          "title": "Přihláška",
+          "content": "<p>V rámci přihlášky musí integrátoři vyplnit <strong><a href=\"/integrator/join\">projektový přihlašovací formulář online</a></strong> a připravit <strong>dokumentaci pro due diligence</strong>, která bude zaslána na adresu <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Dokumentace due diligence zahrnuje:</p>\n<ul>\n<li>Kopii výpisu z obchodního rejstříku</li>\n<li>Popis UBO – skutečných majitelů</li>\n<li>Kopii zakladatelské listiny a stanov</li>\n<li>Usnesení představenstva formalizující záměr přihlásit se jako integrátor a dodržovat pravidla stakingu spolu se seznamem oprávněných osob pověřených provozem integrátora</li>\n<li>Identifikace oprávněných signatářů musí být doložena fotografiemi a podpisovými kartami řádně ověřenými společností</li>\n<li>Kopie dokladů totožnosti a potvrzení adresy manažerů, vedoucích pracovníků nebo zaměstnanců s plnou mocí k obchodnímu jednání jménem společnosti</li>\n<li>Seznam členů představenstva</li>\n<li>Přihlašovací formulář projektu integrátora</li>\n</ul>"
+        },
+        {
+          "title": "Přezkum ze strany ORIGYN Foundation",
+          "content": "<p>Prvním krokem k získání statusu integrátora je schválení nadací ORIGYN Foundation po procesu due diligence. Integrátor souhlasí se sdílením všech požadovaných dokumentů za účelem splnění veškerých požadovaných postupů KYC/KYB/AML.</p>"
+        },
+        {
+          "title": "Hlasování správy prostřednictvím ORIGYN DAO",
+          "content": "<p>VEŘEJNÉ HLASOVÁNÍ ORIGYN DAO:</p>\n<p>Jakmile nadace dokončí prověřovací proces, bude integrátor podroben hlasování DAO prostřednictvím veřejného návrhu na platformě SNS. Všechny návrhy ORIGYN lze zobrazit na adrese <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Každá změna adresy právnické osoby, obchodního názvu nebo ukončení spolupráce je hlasována veřejně na platformě SNS.</p>"
+        },
+        {
+          "title": "Staking 50,000,000 OGY",
+          "content": "<p>V případě úspěšného schválení návrhu bude muset integrátor provést staking 50,000,000 OGY ve správě ORIGYN na dobu 1 year bez možnosti předčasného ukončení.</p>\n<p>Tento krok zajišťuje dlouhodobý závazek integrátora a hlasovací sílu k aktivní účasti na správě ORIGYN. Všechny stakované neurony budou veřejně zobrazeny v dashboardu na adrese <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Veškerá statistika, jako počet vydaných certifikátů, TVL certifikovaných aktiv atd., bude veřejně zobrazena v části integrátora na adrese <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Přezkum výkonnosti",
+          "content": "<p>V závislosti na sektoru a závazku mohou být minimální požadavky na počet vydaných certifikátů součástí dohody s integrátorem. ORIGYN Foundation bude proto pravidelně provádět přezkumy milníků a výkonnosti integrátorů.</p>\n<p>Veškerá statistika, jako počet vydaných certifikátů, TVL certifikovaných aktiv atd., bude veřejně zobrazena v části integrátora na adrese <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Stáhnout",
+      "titleLineTwo": "smlouvu integrátora",
+      "cta": "Stáhnout"
+    }
+  },
+  "integratorJoin": {
+    "title": "Program pro integrátory",
+    "titleItalic": "Přihlašovací formulář",
+    "requiredLabel": "POVINNÉ *",
+    "requiredMessage": "Povinné",
+    "emailInvalid": "Zadejte prosím platnou e-mailovou adresu",
+    "send": "ODESLAT",
+    "sending": "Odesílání…",
+    "errorSend": "Chyba při odeslání formuláře.",
+    "fileSizeError": "Velikost souboru nesmí překročit 1 MB",
+    "addLink": "PŘIDAT ODKAZ",
+    "addObjective": "PŘIDAT CÍL",
+    "addKpi": "PŘIDAT KPI",
+    "uploadHighlight": "Nahrajte",
+    "uploadSuffix": " své logo nebo ho přetáhněte sem (VOLITELNÉ)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — max. 1 MB",
+    "logoPreviewAlt": "Náhled loga",
+    "successTitle": "Děkujeme",
+    "successMessage": "Ozveme se Vám",
+    "backToIntegrator": "ZPĚT NA STRÁNKU INTEGRÁTORA",
+    "errorTitle": "Něco se pokazilo",
+    "errorMessageDefault": "Zkuste to prosím znovu nebo se vraťte později",
+    "retry": "ZKUSIT ZNOVU",
+    "sections": {
+      "representative": {
+        "title": "ZÁSTUPCE INTEGRÁTORA",
+        "fullName": "CELÉ JMÉNO *",
+        "email": "E-MAILOVÁ ADRESA *",
+        "phone": "TELEFONNÍ ČÍSLO *"
+      },
+      "overview": {
+        "title": "PŘEHLED",
+        "description": "NAPIŠTE PROSÍM STRUČNÝ PŘEHLED PROJEKTU INTEGRÁTORA, VČETNĚ",
+        "vision": "Vize Vašeho integrátora v jedné větě… *",
+        "industry": "Příklady kategorií odvětví (umění, hudba, luxus) nebo konkrétních aktiv (zlato, diamanty) *",
+        "geography": "Tržní geografie (globální, Evropa, konkrétní země) *",
+        "socialFirst": "Webové stránky a odkazy na sociální sítě *",
+        "social": "Webové stránky a odkazy na sociální sítě",
+        "presentation": "Odkaz na projektovou prezentaci (nepovinné, ale užitečné)"
+      },
+      "acquisition": {
+        "title": "AKVIZICE",
+        "description": "JASNĚ DEFINUJTE SVOU CÍLOVOU SKUPINU A JAK JI ZÍSKÁVÁTE NEBO PLÁNUJETE ZÍSKAT",
+        "whyExists": "Proč tento projekt musí existovat a čím se liší? *",
+        "whyIntegrator": "Proč je pro Vás důležité stát se integrátorem? *"
+      },
+      "objectives": {
+        "title": "KLÍČOVÉ CÍLE, KTERÝCH CHCETE DOSÁHNOUT",
+        "first": "Cíl 01 *",
+        "second": "Cíl 02",
+        "more": "Cíl {n}"
+      },
+      "kpis": {
+        "title": "KLÍČOVÉ METRIKY, KTERÉ CHCETE SLEDOVAT",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "CO A JAK BUDETE DĚLAT",
+        "focus": "Sdělte nám podrobně, na co se jako integrátor zaměříte a jak vypadá úspěch tohoto projektu.",
+        "implement": "Sdělte nám, jak plánujete tento projekt realizovat"
+      },
+      "roadmaps": {
+        "title": "ROADMAPY NA PRVNÍ 3 MĚSÍCE A 3 ROKY",
+        "description": "Musíte uvést, kdy očekáváte zahájení vydávání certifikátů a odhadovaný počet certifikátů *"
+      },
+      "team": {
+        "title": "TÝM",
+        "placeholder": "Sdělte nám informace o svém současném týmu (pokud existuje) nebo budoucích rolích, které budete potřebovat, spolu s odkazy na LinkedIn *"
+      },
+      "risk": {
+        "title": "RIZIKOVÉ FAKTORY",
+        "placeholder": "Sdělte nám důvody a faktory, které by mohly vést k neúspěchu."
+      },
+      "optional": {
+        "title": "VOLITELNÉ",
+        "placeholder": "Chcete sdílet cokoli dalšího, co zvýší Vaše šance na výběr?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Token",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Token OGY je <b>základní utilitou</b> protokolu ORIGYN.",
+      "paragraphTwo": "<b>Propojuje</b> certifikaci reálných aktiv s decentralizovanou blockchainovou infrastrukturou, čímž činí vlastnictví, autentizaci <b>a převod ověřitelnými a bezpečnými.</b>",
+      "paragraphThree": "OGY umožňuje globální systém, ve kterém jsou <b>fyzická</b> aktiva <b>digitálně certifikována, sledována</b> a <b>integrována do decentralizovaných</b> aplikací a trhů.",
+      "cta": "Koupit OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "Tržní kapitalizace $OGY",
+      "burned": "Celkem OGY spáleno",
+      "circulating": "Oběžná nabídka",
+      "holders": "Držitelé tokenu"
+    },
+    "utility": {
+      "titlePrefix": "Protokolová",
+      "titleEmphasis": "utilita",
+      "lead": "K plnému využití ekosystému ORIGYN potřebujete tokeny OGY:",
+      "cards": [
+        {
+          "title": "Certifikace",
+          "description": "Každé aktivum certifikované v ORIGYN vyžaduje OGY k vytvoření neměnného on-chain certifikátu."
+        },
+        {
+          "title": "Transakční vrstva",
+          "description": "Usnadňuje převody, recertifikace a životní cyklus certifikovaných aktiv."
+        },
+        {
+          "title": "Ukládání dat",
+          "description": "Podporuje bezpečné, decentralizované ukládání metadat aktiv a provenience."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY –",
+      "titleLineTwo": "adresa kontraktu",
+      "description": "Token OGY je nasazen na blockchainu Internet Computer a funguje jako nativní utility token v rámci protokolu ORIGYN.",
+      "bulletOne": "Tento kontrakt řídí vydávání, převody a interakce OGY v rámci protokolu, čímž zajišťuje transparentnost a on-chain ověřování veškeré aktivity tokenu.",
+      "bulletTwo": "Token OGY můžete zobrazit a interagovat s ním přímo prostřednictvím sítě ICP.",
+      "warning": "Vždy ověřte adresu kontraktu před jakýmkoli zapojením do OGY.",
+      "contractLabel": "Oficiální adresa kontraktu:",
+      "copyAria": "Kopírovat adresu kontraktu",
+      "copied": "Zkopírováno do schránky",
+      "cmcAria": "Zobrazit OGY na CoinMarketCap"
+    },
+    "governance": {
+      "title": "Správa",
+      "lead": "OGY je token správy, který dává držitelům pravomoc:",
+      "items": [
+        "<b>Alokovat</b> prostředky z pokladnice na růst ekosystému a strategické iniciativy.",
+        "<b>Navrhovat a hlasovat</b> o upgradech protokolu, certifikačních pravidlech a změnách ekosystému.",
+        "<b>Dohlížet</b> na onboarding integrátorů a certifikátorů."
+      ],
+      "closing": "Správa je <b>plně decentralizována</b> prostřednictvím ORIGYN DAO, čímž dává komunitě přímý vliv na <b>vývoj protokolu.</b>",
+      "cta": "ZOBRAZIT VÍCE"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "a",
+      "titleLineTwoEmphasis": "odměny",
+      "lead": "Staking OGY zabezpečuje síť a přitom slaďuje pobídky:",
+      "cards": [
+        {
+          "title": "Bezpečnost sítě",
+          "description": "Stakeři se účastní správy a pomáhají ověřovat provoz protokolu."
+        },
+        {
+          "title": "Odměny",
+          "description": "Získejte podíl na příjmech protokolu z certifikačních poplatků a aktivity sítě."
+        },
+        {
+          "title": "Dlouhodobé sladění",
+          "description": "Staking podporuje dlouhodobou participaci a posiluje ekosystém."
+        }
+      ],
+      "closing": "Model stakingu přímo spojuje utilizaci tokenu s adopcí a úspěchem protokolu.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflační</b> mechanika",
+      "titleLineTwo": "a <b>tvorba hodnoty</b>",
+      "lead": "OGY integruje deflační model navržený pro udržitelný růst:",
+      "items": [
+        {
+          "title": "Co dělá OGY deflačním tokenem?",
+          "answer": "OGY je navržen s deflačním modelem, což znamená, že jeho celková nabídka se v průběhu času snižuje s tím, jak je protokol využíván."
+        },
+        {
+          "title": "Jak funguje spalování tokenů?",
+          "answer": "Pokaždé, když je OGY použit při certifikaci, je část tokenů trvale spálena. Tím se snižuje oběžná nabídka."
+        },
+        {
+          "title": "Jaká je role pokladnice?",
+          "answer": "Příjmy protokolu jsou spravovány pokladnicí k podpoře průběžného vývoje, odměňování účastníků a udržení dlouhodobé stability ekosystému."
+        },
+        {
+          "title": "Jak OGY vytváří hodnotu v průběhu času?",
+          "answer": "S rostoucí adopcí protokolu ORIGYN a zvyšující se certifikační aktivitou se spaluje více OGY. Tato klesající nabídka v kombinaci s rostoucím využíváním podporuje dlouhodobou tvorbu hodnoty."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Přehled",
+      "titleEmphasis": "tokenomiky",
+      "totalSupplyLabel": "Celková nabídka:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribuce:</b> Alokováno na růst ekosystému, odměny za staking, komunitu a správu.",
+      "revenue": "<b>Model příjmů:</b> Protokolové poplatky placené v OGY vytvářejí průběžnou poptávku a zároveň snižují nabídku prostřednictvím mechanismů spalování.",
+      "support": "Model je navržen tak, aby podporoval dlouhodobou udržitelnost protokolu a sladění s držiteli tokenů.",
+      "cta": "TOKENOMIKA"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Cenová kalkulačka",
+      "description": "Použijte kalkulačku ORIGYN k odhadu nákladů na Váš jedinečný certifikát se všemi daty on-chain"
+    },
+    "plan": {
+      "title": "Naplánujte si vydání certifikátu",
+      "description": "Sdělte nám, kolik položek máte a co nahráváte.",
+      "itemsLabel": "Kolik položek?",
+      "uploadingLabel": "Co nahráváte?",
+      "knowExactSize": "Znáte přesnou velikost?",
+      "totalUploadSize": "Celková velikost nahrávání",
+      "usePreset": "Použít přednastavenou hodnotu",
+      "combinedSize": "Kombinovaná velikost všech souborů napříč všemi položkami.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB každý"
+        },
+        "iphone": {
+          "label": "Fotografie",
+          "hint": "3 MB každá"
+        },
+        "dslr": {
+          "label": "Studiová fotografie",
+          "hint": "20 MB každá"
+        },
+        "video": {
+          "label": "Krátké video",
+          "hint": "1 GB každé"
+        },
+        "video1hr": {
+          "label": "Dlouhé video",
+          "hint": "60 GB každé"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Průběžný odhad",
+      "titleRefreshing": "Aktualizace odhadu",
+      "description": "Aktualizuje se automaticky při změně nastavení.",
+      "ogyEquivalent": "Ekvivalent v OGY",
+      "ogySpotRate": "Aktuální kurz OGY",
+      "itemSingular": "Položka",
+      "itemPlural": "Položky",
+      "upload": "Nahrávání"
+    },
+    "breakdown": {
+      "title": "Rozpis nákladů",
+      "baseFee": "Základní poplatek za vydání",
+      "storageFee": "Poplatek za úložiště",
+      "items": "Položky",
+      "uploadSize": "Velikost nahrávání"
+    },
+    "bytesUnit": "bajtů"
   }
 }

@@ -1,17 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { locales } from "@/i18n";
 import { useLocale, useT } from "@/i18n/LocaleContext";
 import { rememberLocale } from "@/i18n/negotiate";
+import { withLocale } from "@/i18n/paths";
 
 const LanguageSwitcher = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { locale } = useLocale();
   const t = useT();
 
   const go = (code) => {
     if (code === locale) return;
     rememberLocale(code); // persist the explicit choice (event handler, not effect)
-    navigate(`/ai/${code}`);
+    navigate(`${withLocale(code, location.pathname)}${location.search}${location.hash}`);
   };
 
   return (
@@ -54,7 +56,7 @@ const LanguageSwitcher = () => {
         {locales.map((code) => (
           <a
             key={code}
-            href={`/ai/${code}`}
+            href={withLocale(code, location.pathname)}
             hrefLang={code}
             lang={code}
             tabIndex={-1}

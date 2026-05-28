@@ -1,25 +1,28 @@
 import Button from "@components/Button/Button";
+import { useT } from "@/i18n/LocaleContext";
 import styles from "./BePart.module.scss";
+
 const BePart = () => {
+  const t = useT();
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h2 className={styles.titleDesktop}>
-          Be part of
+          {t("home.bePart.titleLead")}
           <br />
-          <span className={styles.italic}>decision-making</span>
+          <span className={styles.italic}>{t("home.bePart.emphasisDesktop")}</span>
         </h2>
         <h2 className={styles.titleMobile}>
-          Be part of
+          {t("home.bePart.titleLead")}
           <br />
           <span className={styles.italic}>
-            Decision <br />
-            Making
+            {t("home.bePart.emphasisMobileLineOne")} <br />
+            {t("home.bePart.emphasisMobileLineTwo")}
           </span>
         </h2>
         <Button
           url="https://t.me/origynfoundation"
-          text="Join ORIGYN DAO"
+          text={t("home.bePart.cta")}
           target="_blank"
         />
       </div>

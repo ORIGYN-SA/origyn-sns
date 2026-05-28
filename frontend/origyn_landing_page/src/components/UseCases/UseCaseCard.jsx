@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./UseCases.module.scss";
+import { useT } from "@/i18n/LocaleContext";
 
 const UseCaseCard = ({ title, description, image, height, link }) => {
   const navigate = useNavigate();
+  const t = useT();
 
   return (
     <div className={styles.cardWrapper}>
@@ -20,7 +22,7 @@ const UseCaseCard = ({ title, description, image, height, link }) => {
                 navigate(link);
               }}
             >
-              Discover more
+              {t("home.useCases.discover")}
             </button>
           </div>
         </div>
@@ -36,7 +38,7 @@ const UseCaseCard = ({ title, description, image, height, link }) => {
             navigate(link);
           }}
         >
-          Discover more
+          {t("home.useCases.discover")}
         </button>
       </div>
     </div>

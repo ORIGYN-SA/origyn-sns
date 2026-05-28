@@ -38,12 +38,12 @@
   "problem": {
     "eyebrow": "Problem",
     "title": "Nitko zapravo ne pokreće\n<i>AI on-chain.</i>",
-    "lead": "Svaki projekt koji tvrdi da ima <s>„AI agenta on-chain”</s> slijedi isti obrazac: zaključivanje se odvija izvan lanca, na centraliziranim poslužiteljima, a na blockchain se objavljuje samo rezultat. Model se nikada ne izvršava unutar mreže. Lanac se koristi kao oglasna ploča, a ne kao sloj za izračun.",
+    "lead": "Svaki projekt koji tvrdi da ima <s>„AI agenta on-chain“</s> slijedi isti obrazac: zaključivanje se odvija izvan lanca, na centraliziranim poslužiteljima, a na blockchain se objavljuje samo rezultat. Model se nikada ne izvršava unutar mreže. Lanac se koristi kao oglasna ploča, a ne kao sloj za izračun.",
     "leadStrong": "To nije agent on-chain. To je API poziv s računom.",
     "steps": [
       {
         "title": "Tvrdnja",
-        "body": "„On-chain agent pokretan AI-jem.” Zaključivanje se odvija na AWS-u. Lanac pohranjuje samo izlaz."
+        "body": "„On-chain agent pokretan AI-jem.\" Zaključivanje se odvija na AWS-u. Lanac pohranjuje samo izlaz."
       },
       {
         "title": "Praznina",
@@ -135,8 +135,18 @@
         "gain": "Dobitak"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Pet stupova\nkoje AI ne može <i>zamijeniti.</i>",
     "lead": "AI pretvara proizvodnju u robu. Ovih pet područja ostaje. Origyn je pozicioniran u svakom od njih.",
     "pillars": [
-      { "title": "Povjerenje", "description": "Origyn certifikacija — provjerljiv signal povjerenja." },
-      { "title": "Kontekst", "description": "Desetljeća strukturiranog pamćenja — osobni signal kojem AI nije ravan." },
-      { "title": "Distribucija", "description": "Swiss Subnet — provjerljiva infrastruktura za agente." },
-      { "title": "Ukus", "description": "Pipeline automatskog istraživanja — kuriranje potpomognuto automatizacijom." },
-      { "title": "Odgovornost", "description": "Revizijski trag i certifikat — stvarni sloj upravljanja." }
+      {
+        "title": "Povjerenje",
+        "description": "Origyn certifikacija — provjerljiv signal povjerenja."
+      },
+      {
+        "title": "Kontekst",
+        "description": "Desetljeća strukturiranog pamćenja — osobni signal kojem AI nije ravan."
+      },
+      {
+        "title": "Distribucija",
+        "description": "Swiss Subnet — provjerljiva infrastruktura za agente."
+      },
+      {
+        "title": "Ukus",
+        "description": "Pipeline automatskog istraživanja — kuriranje potpomognuto automatizacijom."
+      },
+      {
+        "title": "Odgovornost",
+        "description": "Revizijski trag i certifikat — stvarni sloj upravljanja."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Jezik",
-    "switchTo": "Prebaci na {language}"
+    "switchTo": "Prebaci na {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CERTIFIKATI",
+    "integrators": "INTEGRATORI",
+    "useCases": "SLUČAJEVI PRIMJENE",
+    "governance": "UPRAVLJANJE",
+    "help": "POMOĆ",
+    "toggleMenu": "Otvori/zatvori izbornik"
+  },
+  "footer": {
+    "certificates": "CERTIFIKATI",
+    "integrators": "INTEGRATORI",
+    "ecosystem": "EKOSUSTAV",
+    "useCases": "SLUČAJEVI PRIMJENE",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "NADZORNA PLOČA",
+    "copyright": "©2026 Sva prava pridržana – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Zaštitite svoju imovinu, intelektualno vlasništvo\ni identitet potpuno on-chain.",
+      "subtitleMobile": "Zaštitite svoju imovinu,\nintelektualno vlasništvo\ni identitet potpuno on-chain.",
+      "logoAlt": "ORIGYN logotip",
+      "certifyCta": "Certificirajte svoju imovinu",
+      "buyCta": "Kupite $OGY",
+      "marquee": "ORIGYN Vam omogućuje sigurnu pohranu podataka i imovine potpuno on-chain"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY tržišna kapitalizacija",
+        "tooltip": "Ukupna tržišna vrijednost svih OGY tokena trenutno u optjecaju, temeljena na aktualnoj cijeni tokena."
+      },
+      "tvl": {
+        "title": "Ukupna zaključana vrijednost (TVL) certificirane imovine u USD",
+        "tooltipTitle": "Ukupna zaključana vrijednost (TVL)",
+        "tooltip": "TVL odgovara vrijednosti izdanih certifikata; to ne znači da ORIGYN čuva tu imovinu u skrbništvu."
+      },
+      "users": {
+        "title": "Korisnici",
+        "tooltip": "Ukupan broj pojedinaca, brandova i institucija koji aktivno koriste ORIGYN za izdavanje, upravljanje ili posjedovanje certificirane imovine."
+      },
+      "assets": {
+        "title": "Ukupno certificirana imovina",
+        "tooltip": "Broj fizičkih ili digitalnih predmeta koji su primili službeni ORIGYN certifikat."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Zašto",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN — gdje se imovina stvarnog svijeta susreće s blockchainom.",
+      "body": "ORIGYN je najnapredniji RWA protokol na svijetu, osmišljen kako bi imovinu stvarnog svijeta u potpunosti prenio on-chain — od likovne umjetnosti i zlata do luksuznih dobara i intelektualnog vlasništva.\n\nPruža infrastrukturu za certifikaciju bez posrednika koja jamči autentičnost, provenijenciju i vlasništvo nad visoko vrijednom imovinom."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100% certifikacija on-chain",
+          "description": "Bez posrednika, bez mogućnosti manipulacije. Potpuno decentralizirano."
+        },
+        {
+          "title": "Korisnost $OGY tokena",
+          "description": "Pokreće ORIGYN ekosustav kroz upravljanje i protokolnu korisnost."
+        },
+        {
+          "title": "Podrška za više vrsta imovine",
+          "description": "Certificirajte umjetnička djela, luksuzna dobra, zlato, nekretnine i još mnogo toga."
+        },
+        {
+          "title": "Sigurnost na razini industrije",
+          "description": "Nepromjenjiva blockchain zaštita za Vašu najvrjedniju imovinu."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Kako",
+      "titleSuffix": "funkcionira",
+      "steps": [
+        {
+          "description": "Prenošenje imovine stvarnog svijeta on-chain treba biti jednostavno. ORIGYN-ov postupak certifikacije osmišljen je kako bi bio siguran, decentraliziran i lak za korištenje u svega tri koraka: <br /><br />Dostavite metapodatke svoje imovine i prateću dokumentaciju. ORIGYN generira jedinstven, otporan na manipulacije digitalni certifikat izravno na blockchainu, dodjeljuje ga imovini i povezuje s njezinim zakonitim vlasnikom.",
+          "panelTitle": "Iskujte svoj digitalni certifikat",
+          "panelDescription": "Učitajte podatke o imovini, iskujte blockchain certifikat."
+        },
+        {
+          "description": "Svaki certifikat kriptografski je provjerljiv. Autentičnost imovine, provenijencija i vlasništvo potvrđuju se putem ORIGYN-ovog decentraliziranog protokola.",
+          "panelTitle": "Verificirajte i autentificirajte",
+          "panelDescription": "Osigurajte autentičnost imovine i transparentnost vlasništva."
+        },
+        {
+          "description": "Nakon certifikacije, Vašom imovinom možete upravljati, prenositi je, njome trgovati ili je koristiti unutar digitalnih ekosustava — od DeFi aplikacija i NFT tržišta do privatnih transakcija i institucionalnih zapisa.",
+          "panelTitle": "Prenosite i pratite",
+          "panelDescription": "Koristite i pratite svoju certificiranu imovinu u DeFi-ju, pri preprodaji ili ulaganju."
+        }
+      ],
+      "goToStep": "Idi na korak {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Slučajevi",
+      "titleSuffix": "primjene",
+      "description": "ORIGYN-ov protokol izgrađen je za širok spektar industrija u kojima su povjerenje, provenijencija i autentičnost ključni. U nastavku su navedeni neki od ključnih sektora koji već koriste ORIGYN-ovu infrastrukturu za certifikaciju.",
+      "items": [
+        {
+          "title": "Umjetnost",
+          "description": "Autentificirajte i zaštitite provenijenciju fizičkih i digitalnih umjetničkih djela on-chain."
+        },
+        {
+          "title": "Zlato",
+          "description": "Certificirajte zlato nepromjenjivim, sljedivim i otpornim na manipulacije digitalnim certifikatima."
+        },
+        {
+          "title": "Dijamanti",
+          "description": "Pratite podrijetlo, klasifikaciju i vlasništvo svakog dijamanta s preciznošću blockchaina."
+        },
+        {
+          "title": "Made In",
+          "description": "Dokažite podrijetlo, autentičnost i zanatsku vrsnoću svakog proizvoda — od satova do mode."
+        }
+      ],
+      "indicatorAria": "Idi na slučaj primjene {n}",
+      "discover": "Otkrijte više"
+    },
+    "certify": {
+      "titleLine": "Certificirajte",
+      "titleEmphasis": "svoju imovinu",
+      "subtitle": "Koristite ORIGYN-ov kalkulator certifikacije kako biste odmah procijenili troškove zaštite Vaše imovine potpuno on-chain digitalnim certifikatima. Bez obzira certificirate li likovnu umjetnost, luksuzna dobra, zlato ili drugu vrijednu imovinu, ovaj Vam alat pruža jasan uvid u infrastrukturne i tehnološke troškove bez nagađanja.",
+      "contactPrompt": "Za certifikaciju Vaše imovine kontaktirajte nas:",
+      "contactCta": "Kontaktirajte ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Program za",
+      "titleLineTwo": "integratore",
+      "description": "ORIGYN-ov program za integratore namijenjen je tvrtkama, platformama i programerima koji žele integrirati ORIGYN-ovu decentraliziranu infrastrukturu za certifikaciju izravno u svoje usluge.\n\nBilo da ste tržišnica, rješenje za upravljanje opskrbnim lancem ili luksuzni brand, možete ponuditi sigurnu verifikaciju imovine on-chain bez izgradnje od nule.",
+      "cta": "Pridružite se programu za integratore"
+    },
+    "roadmap": {
+      "title": "Plan razvoja",
+      "description": "Od novih korisnosti i funkcija upravljanja do proširene podrške za industrije i programere. Svaki je prekretnica odraz naše misije — potpunog prenošenja imovine stvarnog svijeta on-chain putem skalabilne, provjerljive i decentralizirane infrastrukture.",
+      "items": [
+        {
+          "title": "Financiranje ORIGYN Foundation",
+          "description": "ORIGYN Foundation osnovana je u Neuchâtelu u Švicarskoj kako bi započela razvoj ORIGYN Protocol."
+        },
+        {
+          "title": "Lansiranje OGY tokena",
+          "description": "Izvorni utility token $OGY stvoren je za pokretanje naknada protokola, governancea i stakinga."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Lansiranje prve verzije ORIGYN-ova NFT standarda koji omogućuje on-chain certifikaciju."
+        },
+        {
+          "title": "Ažuriranje Tokenomics 2.0",
+          "description": "200 milijuna $OGY tokena prethodno dodijeljenih Foundationu spaljeno je, čime se pokreće deflacijski pritisak."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Lansiranje prvog on-chain minting sučelja za digitalne certifikate."
+        },
+        {
+          "title": "Strateška partnerstva",
+          "description": "Strateške suradnje s FederItaly i METALOR za certifikaciju talijanskih proizvoda i tokeniziranog zlata."
+        },
+        {
+          "title": "Prva kupnja zlata",
+          "description": "3 kg fizičkog zlata kupljeno je i tokenizirano pomoću ORIGYN Protocol."
+        },
+        {
+          "title": "Akvizicija CanDB",
+          "description": "ORIGYN preuzima CanDB, decentralizirano, skalabilno rješenje baze podataka optimizirano za NFT metapodatke."
+        },
+        {
+          "title": "Tokenomics 3.0 i lansiranje Dashboarda",
+          "description": "Uvodi se deflacijski model s Tokenomics 3.0 i objavljuje se prva verzija ORIGYN Dashboarda."
+        },
+        {
+          "title": "10.000 korisnika protokola",
+          "description": "ORIGYN premašuje 10.000 jedinstvenih korisnika protokola."
+        },
+        {
+          "title": "Lansiranje Gold DAO",
+          "description": "Gold DAO postaje prvi DAO izgrađen na ORIGYN-u za tokenizaciju i certifikaciju fizičkog zlata on-chain."
+        },
+        {
+          "title": "Donacija 500M OGY Gold DAO-u",
+          "description": "Pola milijarde $OGY tokena donirano je za potporu dugoročnoj riznici Gold DAO-a."
+        },
+        {
+          "title": "ORIGYN DAO integriran s ICP SNS",
+          "description": "ORIGYN DAO postaje potpuno decentraliziran i upravljan putem SNS okvira Internet Computera."
+        },
+        {
+          "title": "Izdanje Dashboard V2",
+          "description": "Nova verzija dashboarda uključuje metrike uživo, statistike stakinga i alate za governance."
+        },
+        {
+          "title": "Prekretnica od 30.000 korisnika",
+          "description": "ORIGYN raste na više od 30.000 korisnika, što je povećanje od 300% u šest mjeseci."
+        },
+        {
+          "title": "Suradnja s Leo Caillardom i Gil Sertissage",
+          "description": "ORIGYN certificira fizička umjetnička djela i dijamante u partnerstvima visokog profila."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT standard nadograđen je kako bi omogućio sigurnu prenosivost certifikata."
+        },
+        {
+          "title": "Pokretanje Integrator Frameworka",
+          "description": "Stvorena su pravila i onboarding struktura za usmjeravanje novih partnera koji se integriraju s ORIGYN-om."
+        },
+        {
+          "title": "Lansiranje Cecil DAO",
+          "description": "ORIGYN podržava lansiranje Cecil DAO za financiranje projekata očuvanja i humanitarnih projekata uz blockchain transparentnost."
+        },
+        {
+          "title": "Akvizicija ClaimLink",
+          "description": "ORIGYN preuzima ClaimLink, decentraliziranu platformu za distribuciju NFT-ova i tokena izgrađenu na ICP-u."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Uvodi se novi standard za povećanje interoperabilnosti certifikata i korisnosti u cijelom ekosustavu."
+        },
+        {
+          "title": "Lansiranje javnog",
+          "titleSpan": "Minting Studija",
+          "description": "Pokreće se self-service alat koji svakome omogućuje mintanje on-chain certifikata za RWA na ORIGYN infrastrukturi."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Misterij Runestone bit će otkriven u Q2 2026. u Ženevi."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Pokreće se self-service alat koji svakome omogućuje on-chain mintanje koristeći ORIGYN infrastrukturu."
+        },
+        {
+          "title": "Implementacija IP zaštite",
+          "description": "Podrška za on-chain certifikaciju prava intelektualnog vlasništva integrirana je u protokol."
+        },
+        {
+          "title": "Cross-chain implementacija",
+          "description": "Cross-chain kompatibilnost širi doseg ORIGYN-a na druge velike ekosustave."
+        },
+        {
+          "title": "Globalna integracija walleta i marketplaceova",
+          "description": "ORIGYN NFTs postaju dostupni putem vodećih walleta i NFT marketplaceova diljem svijeta."
+        },
+        {
+          "title": "Postajanje univerzalnim standardom certifikacije",
+          "description": "ORIGYN nastoji postati globalno mjerilo za digitalnu certifikaciju svih klasa imovine."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNERI",
+      "testimonials": [
+        {
+          "title": "CEO Metalora",
+          "description": "\"ORIGYN je najnaprednija i najcjelovitija tehnologija digitalne certifikacije na svijetu. Svi podaci u potpunosti se pohranjuju na blockchain kako bi se osiguralo da su certifikati nepromjenjivi i transparentni. Metalor s veseljem surađuje s fintech tvrtkom sa sjedištem u Neuchâtelu poput ORIGYN-a kako bi tržištima donio inovativno rješenje.\""
+        },
+        {
+          "title": "Stručnjak za umjetnost",
+          "description": "\"Za moje privatne kolekcionare povjerenje i nasljeđe znače sve. ORIGYN-ova tehnologija certifikacije postala je ključna: ne jamči samo autentičnost svakog umjetničkog djela, nego osigurava njegovu sljedivost i vrijednost kroz generacije. Više nije riječ samo o posjedovanju umjetničkog djela, nego o trajnom osiguravanju njegove priče on-chain. ORIGYN to omogućuje.\""
+        },
+        {
+          "title": "Suosnivač Cybera",
+          "description": "\"Uvijek kažemo da dijamanti traju zauvijek, i to je istina. Zato se isto mora razmišljati i o informacijama koje pružate, jer će za 100 ili 200 godina ti dijamanti i dalje postojati. Trebala nam je tehnologija koja će osigurati da i dalje možemo pružati te informacije, osobito za proizvod velike vrijednosti koji prolazi kroz generacije... Glavni razlog zbog kojeg smo sklopili partnerstvo s ORIGYN-om jest taj što su mogli pružiti sve to.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Budite dio",
+      "emphasisDesktop": "odlučivanja",
+      "emphasisMobileLineOne": "Odluči-",
+      "emphasisMobileLineTwo": "vanja",
+      "cta": "Pridružite se ORIGYN DAO-u"
+    }
+  },
+  "useCase": {
+    "notFound": "Slučaj primjene nije pronađen",
+    "cases": {
+      "gold": [
+        {
+          "title": "Zlato",
+          "description": "Kao najveća svjetska imovina i najstrože nadzirana roba, zlato zahtijeva najviše razine sigurnosti. <br /><br />ORIGYN ispunjava te zahtjeve, što dokazuje <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, svjetski lider u rafinaciji zlata, koji je odabrao ORIGYN protokol za zaštitu svojih podataka. Po prvi put, sve tehničke informacije vezane uz zlatne poluge — uključujući visokodefinicijske slike i dokumente — bilježe se u jednom certifikatu na blockchainu."
+        },
+        {
+          "description": "Osim toga, nekoliko projekata poput <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> i <a href='https://bity.com' target='_blank'>Bity</a> koristi te certifikate za prodaju odgovarajućih zlatnih poluga ili kreiranje tokena potkrijepljenih fizičkim zlatom."
+        }
+      ],
+      "art": [
+        {
+          "title": "Umjetnost",
+          "description": "Stručnjaci za umjetnost duboko su zabrinuti zbog povjerenja i jamstva certifikata za umjetnička djela. Zbog toga je nekoliko slučajeva već prihvatilo ORIGYN tehnologiju.<br /><br />Etablirani umjetnici poput <a href='https://conormccreedy.com/' target='_blank'>Conora McCreedyja</a> i <a href='https://www.leocaillard.com/' target='_blank'>Lea Caillarda</a> kreirali su vlastite ORIGYN certifikate kako bi zaštitili podatke vezane uz svoje radove. Ti su certifikati potpuno on-chain, otporni na manipulacije i ne mogu se kopirati, što umjetnicima omogućuje borbu protiv krivotvorina uz istovremeno unapređenje iskustva kolekcionara putem visokodefinicijskih slika, videozapisa i dokumenata."
+        },
+        {
+          "description": "Subjekti poput zaklada, organizacija, obitelji, galerija i savjetnika za umjetnost koji trebaju kreirati digitalne certifikate za svoje klijente počeli su koristiti ORIGYN kako bi zadržali maksimalnu sigurnost i povjerljivost. Nekoliko je galerija već implementiralo ORIGYN tehnologiju, uključujući Galeriju Retelet za certifikate umjetničkih djela Renéa Magrittea.<br /><br />ORIGYN tehnologija također omogućuje prodaju putem certifikata, posebno prodaju suvlasništva. Time se omogućuje dijeljenje umjetničkih djela između više vlasnika podjelom certifikata na nekoliko dijelova, pri čemu svaki služi kao dokaz vlasništva."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Nacionalno podrijetlo više je od oznake. To je izjava o identitetu, kvaliteti i kulturnoj vrijednosti. Kako krivotvorine rastu, dokazivanje mjesta i načina izrade proizvoda postalo je ključna razlikovna prednost brendova u svim industrijama.<br /><br />Kao odgovor na to, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> je kreirao certifikaciju 100% Made in Italy. Ovaj pravno priznat standard štiti talijansku izvrsnost kroz strogu dokumentaciju, neovisne revizije i zagovaranje na razini vlade. ORIGYN pruža digitalni temelj ovog sustava bilježenjem svakog certificiranog proizvoda na blockchainu kao provjerljivog dokaza podrijetla."
+        },
+        {
+          "description": "Svaki certifikat postaje siguran, otporan na manipulacije digitalni putovnica. Jača povjerenje potrošača, osigurava transparentnost duž cijelog opskrbnog lanca i podržava tvrtke koje se odluče voditi autentičnošću."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luksuz",
+          "description": "ORIGYN tehnologija odgovara na potrebu luksuznog sektora da se reinventira i ponudi personaliziranije, transparentnije iskustvo s proizvodima.<br /><br />Draguljar <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> koristi ORIGYN blockchain tehnologiju za kreiranje certifikata za svoju cjelokupnu kolekciju. Time se svi podaci osiguravaju potpuno on-chain, a uglednim klijentima nude certifikati sljedeće generacije koji jamče povjerljivost, autentičnost i vlasništvo."
+        },
+        {
+          "description": "Druge luksuzne tvrtke poput <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> također koriste ORIGYN za bilježenje potpunog lanca sljedivosti svojih dijamanata namijenjenih renomiranim satničarima. Moguće su i mnoge druge primjene, uključujući dodavanje personaliziranog marketinškog sadržaja certifikatima ili kombiniranje tehnologije s AI-jem za utvrđivanje autentičnosti u stvarnom vremenu na sekundarnim tržištima."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Centar",
+    "titleSuffix": "za pomoć",
+    "searchPlaceholder": "Pretraži..",
+    "faqs": [
+      {
+        "title": "OGY token",
+        "description": "Pokreće decentraliziranu certifikaciju imovine Web 3.0",
+        "answer": "<strong>OGY token</strong> je temeljna korisnost ORIGYN Protokola. Povezuje certifikaciju imovine stvarnog svijeta s decentraliziranom blockchain infrastrukturom, čineći vlasništvo, autentifikaciju i verifikaciju sadržaja istinski sigurnima.<br><br>OGY omogućuje globalni sustav u kojem se fizička imovina digitalno certificira, prati i integrira u decentralizirane aplikacije i tržišta."
+      },
+      {
+        "title": "Protokolna korisnost",
+        "description": "OGY je potreban za obavljanje ključnih funkcija unutar ORIGYN ekosustava.",
+        "answer": "<strong>Certifikacija:</strong> Za svaku imovinu certificiranu na ORIGYN-u potreban je OGY za iskivanje nepromjenjivog on-chain certifikata.<br><strong>Transakcijski sloj:</strong> Olakšava prijenose, ponovne certifikacije i životne događaje certificirane imovine.<br><strong>Pohrana podataka:</strong> Podržava sigurnu, decentraliziranu pohranu metapodataka i provenijencije imovine.<br>Ova korisnost osigurava da je OGY sastavni dio svake transakcije unutar protokola."
+      },
+      {
+        "title": "Adresa ugovora OGY tokena",
+        "description": "OGY token je raspoređen na Internet Computer blockchainu.",
+        "answer": "OGY token je raspoređen na Internet Computer blockchainu i funkcionira kao izvorni token korisnosti unutar ORIGYN Protokola.<br><br>Službena adresa ugovora:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Korisnici unose imovinu unutar poziva<br>Uvijek verificirajte adresu ugovora prije interakcije s OGY-jem.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[KUPI OGY]</a>"
+      },
+      {
+        "title": "Upravljanje",
+        "description": "OGY je token za upravljanje koji osnažuje nositelje da:",
+        "answer": "• Predlažu i glasaju o nadogradnjama protokola, pravilima likvidnosti i promjenama ekosustava.<br>• Nadziru uključivanje integratora i certifikatora.<br>• Dodjeljuju sredstva riznice za inovacije, rast i strateške inicijative.<br><br>Upravljanje je potpuno decentralizirano putem ORIGYN DAO-a, dajući zajednici izravni utjecaj na razvoj protokola."
+      },
+      {
+        "title": "Staking i nagrade",
+        "description": "OGY staking osigurava mrežu uz usklađivanje poticaja.",
+        "answer": "<strong>Sigurnost mreže:</strong> Stakeri sudjeluju u upravljanju i pomažu pri validaciji operacija protokola.<br><br><strong>Nagrade:</strong> Zaradite udio u prihodima protokola od naknada za certifikaciju i aktivnosti na mreži.<br><br><strong>Dugoročna usklađenost:</strong> Staking potiče dugoročno sudjelovanje i jača ekosustav.<br><br>Model stakinga izravno vezuje korisnost tokena uz usvajanje i uspjeh protokola.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKAJTE ODMAH]</strong></a>"
+      },
+      {
+        "title": "Deflacijska mehanika / akumulacija vrijednosti",
+        "description": "OGY integrira deflacijski model osmišljen za održivi rast.",
+        "answer": "<strong>Spaljivanje certifikacijom:</strong> Dio OGY-ja iskorištenog za certifikaciju trajno se uklanja iz optjecaja.<br><br><strong>Upravljanje rizicom:</strong> Prihodi protokola podržavaju razvoj, nagrade i optimizaciju vrijednosti tokena.<br><br>Kako upotreba protokola raste, ponuda OGY-ja se smanjuje, jačajući stvaranje vrijednosti usklađeno s usvajanjem."
+      },
+      {
+        "title": "Pregled tokenomike",
+        "description": "Ukupna ponuda: 10.4 milijardi OGY",
+        "answer": "<strong>Raspodjela:</strong> Dodijeljena rastu ekosustava, nagradama za staking, zajednici i upravljanju.<br><br><strong>Model prihoda:</strong> Naknade protokola plaćene u OGY-ju stvaraju trajnu potražnju uz smanjenje ponude mehanizmima spaljivanja.<br>Model je osmišljen kako bi podržao dugoročnu održivost protokola i usklađenost s nositeljima tokena."
+      },
+      {
+        "title": "Budućnost OGY-ja",
+        "description": "OGY je temelj decentraliziranog okvira.",
+        "answer": "OGY je temelj decentraliziranog okvira osmišljenog za certifikaciju, upravljanje i oslobađanje vrijednosti imovine stvarnog svijeta on-chain. Kako ORIGYN raste, uloga OGY-ja širi se kao ekonomski motor koji pokreće certifikaciju imovine, upravljanje i razvoj ekosustava."
+      },
+      {
+        "title": "Istražite live token",
+        "description": "Istražite live podatke o tokenu, opcije stakinga i sudjelovanje u upravljanju u ORIGYN nadzornoj ploči.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN nadzorna ploča</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Kliknite za pristup nadzornoj ploči</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Postanite",
+      "titleConnector": "",
+      "titleEmphasis": "integrator",
+      "subtitle": "PRIDRUŽITE SE PROGRAMU ZA INTEGRATORE I IZGRADITE BUDUĆNOST POVJERENJA S ORIGYN-OVOM BLOCKCHAIN TEHNOLOGIJOM CERTIFIKACIJE",
+      "cta": "Prijavite se odmah"
+    },
+    "program": {
+      "titleLineOne": "Program za",
+      "titleLineTwo": "integratore",
+      "steps": [
+        {
+          "labelBold": "ŠTO",
+          "labelRest": "JE PROGRAM ZA INTEGRATORE?",
+          "description": "Program za integratore je strateška inicijativa s ciljem promicanja ORIGYN protokola, poticanja njegovog usvajanja i širenja ekosustava."
+        },
+        {
+          "labelBold": "TKO",
+          "labelRest": "SU INTEGRATORI?",
+          "description": "<ul><li><strong>Integratori su neovisne tvrtke</strong> koje grade proizvode temeljene na ORIGYN protokolu sa zajedničkim ciljem iskivanja ORIGYN certifikata i promicanja ORIGYN protokola u određenoj industriji, klasi imovine ili kroz više sektora.</li><li><strong>Djelujući kao omogućitelji,</strong> pomažu tvrtkama da usvoje ORIGYN-ovu blockchain tehnologiju certifikacije bez potrebe za dubokim blockchain i Web3 znanjem.</li><li><strong>Nakon procesa provjere</strong> koji provodi ORIGYN Fondacija, integratori se biraju i glasaju od strane nositelja tokena ORIGYN DAO-a.</li></ul>"
+        },
+        {
+          "labelBold": "KAKO",
+          "labelRest": "POSTATI INTEGRATOR?",
+          "description": "Kako bi postala integrator, tvrtka mora dokazati da može pružati usluge u velikom obimu, ispunjavajući sve zahtjeve i stručnost za posluživanje jednog ili više sektora."
+        }
+      ],
+      "goToStep": "Idi na korak {n}",
+      "joinNow": "Prijavite se odmah"
+    },
+    "workflow": {
+      "titleLineOne": "Tijek",
+      "titleLineTwo": "prijave",
+      "steps": [
+        {
+          "title": "Obrazac za prijavu",
+          "content": "<p>Kao dio prijave, integratori moraju ispuniti <strong><a href=\"/integrator/join\">Obrazac za prijavu projekta online</a></strong> i pripremiti <strong>Due Diligence dokumentaciju</strong> koju je potrebno poslati na <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Due diligence dokumentacija uključuje:</p>\n<ul>\n<li>Kopiju potvrde o osnivanju</li>\n<li>Opis UBO — stvarnih korisničkih vlasnika</li>\n<li>Kopiju Memoranduma i Statuta</li>\n<li>Odluku Uprave kojom se formalizira volja za prijavu kao integrator i usklađenost s pravilima stakinga, zajedno s popisom ovlaštenih djelatnika za upravljanje integratorom</li>\n<li>Identifikacija ovlaštenih potpisnika treba se temeljiti na fotografijama i karticama potpisa koje je tvrtka propisno ovjerila</li>\n<li>Kopije dokaza identiteta i adrese menadžera, rukovoditelja ili zaposlenika koji imaju punomoć za obavljanje poslova u njezino ime</li>\n<li>Popis direktora</li>\n<li>Obrazac za prijavu integratora</li>\n</ul>"
+        },
+        {
+          "title": "Pregled od strane ORIGYN Fondacije",
+          "content": "<p>Prvi korak za postati integrator jest biti validiran od strane ORIGYN Fondacije nakon due diligence procesa. Integrator pristaje dijeliti sve zatražene dokumente u svrhu ispunjavanja svih potrebnih KYC/KYB/AML postupaka.</p>"
+        },
+        {
+          "title": "Glasanje o upravljanju putem ORIGYN DAO-a",
+          "content": "<p>JAVNO GLASANJE ORIGYN DAO-a:</p>\n<p>Nakon što Fondacija zaključi proces provjere, integrator će biti podvrgnut DAO glasanju putem javnog prijedloga na SNS platformi. Svi ORIGYN prijedlozi mogu se pregledati na <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Svaka promjena adrese pravne osobe, poslovnog naziva ili raskid suradnje glasuje se javno na SNS platformi.</p>"
+        },
+        {
+          "title": "Staking od 50,000,000 OGY",
+          "content": "<p>Ako prijedlog uspješno prođe, integrator će morati provesti staking od 50,000,000 OGY u ORIGYN upravljanju na 1 godinu bez mogućnosti prijevremenog raskida.</p>\n<p>Ovaj korak osigurava dugoročnu predanost integratora i glasačku moć za aktivno sudjelovanje u upravljanju ORIGYN-om. Svi stakani neuroni bit će javno prikazani na nadzornoj ploči na <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Sve statistike, poput broja iskovanih certifikata, TVL certificirane imovine i sl., bit će javno prikazane u dijelu za integratore na <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Pregled uspješnosti",
+          "content": "<p>Ovisno o sektoru i preuzetim obvezama, minimalni zahtjevi za broj iskovanih certifikata mogu biti dio ugovora s integratorom. Stoga će ORIGYN Fondacija povremeno provoditi preglede prekretnica i uspješnosti integratora.</p>\n<p>Sve statistike, poput broja iskovanih certifikata, TVL certificirane imovine i sl., bit će javno prikazane u dijelu za integratore na <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Preuzmite",
+      "titleLineTwo": "ugovor za integratore",
+      "cta": "Preuzmi"
+    }
+  },
+  "integratorJoin": {
+    "title": "Program za integratore",
+    "titleItalic": "Obrazac za prijavu",
+    "requiredLabel": "OBAVEZNO *",
+    "requiredMessage": "Obavezno",
+    "emailInvalid": "Unesite valjanu e-mail adresu",
+    "send": "POŠALJI",
+    "sending": "Slanje…",
+    "errorSend": "Greška pri slanju obrasca.",
+    "fileSizeError": "Veličina datoteke ne smije prelaziti 1 MB",
+    "addLink": "DODAJ POVEZNICU",
+    "addObjective": "DODAJ CILJ",
+    "addKpi": "DODAJ KPI",
+    "uploadHighlight": "Učitajte",
+    "uploadSuffix": " svoj logotip ili ga povucite ovdje (NEOBAVEZNO)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — maks. 1 MB",
+    "logoPreviewAlt": "Pregled logotipa",
+    "successTitle": "Hvala Vam",
+    "successMessage": "Javit ćemo Vam se",
+    "backToIntegrator": "POVRATAK NA STRANICU ZA INTEGRATORE",
+    "errorTitle": "Nešto je pošlo po zlu",
+    "errorMessageDefault": "Pokušajte ponovno ili se vratite kasnije",
+    "retry": "POKUŠAJTE PONOVO",
+    "sections": {
+      "representative": {
+        "title": "PREDSTAVNIK INTEGRATORA",
+        "fullName": "PUNO IME *",
+        "email": "E-MAIL ADRESA *",
+        "phone": "BROJ TELEFONA *"
+      },
+      "overview": {
+        "title": "PREGLED",
+        "description": "MOLIMO NAPIŠITE KRATKI PREGLED PROJEKTA INTEGRATORA, UKLJUČUJUĆI",
+        "vision": "Vizija Vašeg integratora u jednoj rečenici... *",
+        "industry": "Primjeri industrijskih kategorija (umjetnost, glazba, luksuz) ili specifična imovina (zlato, dijamanti) *",
+        "geography": "Tržišna geografija (globalno, Europa, specifična zemlja) *",
+        "socialFirst": "Web stranica i poveznice na društvene mreže *",
+        "social": "Web stranica i poveznice na društvene mreže",
+        "presentation": "Poveznica na prezentaciju projekta (nije obavezno, ali korisno)"
+      },
+      "acquisition": {
+        "title": "AKVIZICIJA",
+        "description": "JASNO DEFINIRAJTE SVOJU CILJANU SKUPINU I KAKO JE PRIVLAČITE ILI PLANIRATE PRIVUĆI",
+        "whyExists": "Zašto ovaj projekt mora postojati i po čemu je drugačiji? *",
+        "whyIntegrator": "Zašto Vam je važno postati integrator? *"
+      },
+      "objectives": {
+        "title": "KLJUČNI CILJEVI KOJE ŽELITE POSTIĆI",
+        "first": "Cilj 01 *",
+        "second": "Cilj 02",
+        "more": "Cilj {n}"
+      },
+      "kpis": {
+        "title": "KLJUČNE METRIKE KOJE ŽELITE PRATITI",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "ŠTO I KAKO ĆETE RADITI",
+        "focus": "Recite nam detaljno na čemu ćete se fokusirati kao integrator i kako izgleda uspjeh ovog projekta.",
+        "implement": "Recite nam kako planirate implementirati ovaj projekt"
+      },
+      "roadmaps": {
+        "title": "PLANOVI RAZVOJA ZA PRVA 3 MJESECA I 3 GODINE",
+        "description": "Morate navesti kada očekujete početak iskivanja i procijenjeni broj certifikata *"
+      },
+      "team": {
+        "title": "TIM",
+        "placeholder": "Recite nam o svom trenutnom timu, ako postoji, ili o budućim ulogama u timu koje bi Vam mogle biti potrebne, zajedno s LinkedIn poveznicama *"
+      },
+      "risk": {
+        "title": "ČIMBENICI RIZIKA",
+        "placeholder": "Recite nam razloge i čimbenike koji mogu dovesti do neuspjeha."
+      },
+      "optional": {
+        "title": "NEOBAVEZNO",
+        "placeholder": "Ima li još nešto što želite podijeliti, a što bi povećalo Vaše šanse za selekciju?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "The",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "OGY token je <b>temeljna korisnost</b> ORIGYN Protokola.",
+      "paragraphTwo": "<b>Povezuje</b> certifikaciju imovine stvarnog svijeta s decentraliziranom blockchain infrastrukturom, <b>čineći vlasništvo, autentifikaciju</b> i <b>prijenos provjerljivima i sigurnima.</b>",
+      "paragraphThree": "OGY omogućuje globalni sustav u kojemu se <b>fizička</b> imovina <b>digitalno certificira, prati</b> i <b>integrira u decentralizirane</b> aplikacije i tržišta.",
+      "cta": "Kupite OGY",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "$OGY tržišna kapitalizacija",
+      "burned": "Ukupno spaljeni OGY",
+      "circulating": "Ponuda u optjecaju",
+      "holders": "Nositelji tokena"
+    },
+    "utility": {
+      "titlePrefix": "Protokolna",
+      "titleEmphasis": "korisnost",
+      "lead": "Trebate OGY tokene za puno korištenje ORIGYN ekosustava:",
+      "cards": [
+        {
+          "title": "Certifikacija",
+          "description": "Za svaku imovinu certificiranu na ORIGYN-u potreban je OGY za iskivanje nepromjenjivog on-chain certifikata."
+        },
+        {
+          "title": "Transakcijski sloj",
+          "description": "Olakšava prijenose, ponovne certifikacije i životne događaje certificirane imovine."
+        },
+        {
+          "title": "Pohrana podataka",
+          "description": "Podržava sigurnu, decentraliziranu pohranu metapodataka i provenijencije imovine."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY Token",
+      "titleLineTwo": "adresa ugovora",
+      "description": "OGY token je raspoređen na Internet Computer blockchainu i funkcionira kao izvorni token korisnosti unutar ORIGYN Protokola.",
+      "bulletOne": "Ovaj ugovor upravlja izdavanjem, prijenosima i interakcijama OGY-ja unutar protokola, osiguravajući transparentnost i on-chain verifikaciju sve aktivnosti tokena.",
+      "bulletTwo": "OGY token možete pregledati i s njim interagirati izravno putem ICP mreže.",
+      "warning": "Uvijek verificirajte adresu ugovora prije interakcije s OGY-jem.",
+      "contractLabel": "Službena adresa ugovora:",
+      "copyAria": "Kopiraj adresu ugovora",
+      "copied": "Kopirano u međuspremnik",
+      "cmcAria": "Pregledajte OGY na CoinMarketCap-u"
+    },
+    "governance": {
+      "title": "Upravljanje",
+      "lead": "OGY je token za upravljanje koji osnažuje nositelje da:",
+      "items": [
+        "<b>Dodjeljuju</b> sredstva riznice za rast ekosustava i strateške inicijative.",
+        "<b>Predlažu i glasaju</b> o nadogradnjama protokola, pravilima certifikacije i promjenama ekosustava.",
+        "<b>Nadziru</b> uključivanje integratora i certifikatora."
+      ],
+      "closing": "Upravljanje je <b>potpuno decentralizirano</b> putem ORIGYN DAO-a, dajući zajednici izravni utjecaj na <b>razvoj protokola.</b>",
+      "cta": "SAZNAJTE VIŠE"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "i",
+      "titleLineTwoEmphasis": "nagrade",
+      "lead": "OGY staking osigurava mrežu uz usklađivanje poticaja:",
+      "cards": [
+        {
+          "title": "Sigurnost mreže",
+          "description": "Stakeri sudjeluju u upravljanju i pomažu pri validaciji operacija protokola."
+        },
+        {
+          "title": "Nagrade",
+          "description": "Zaradite udio u prihodima protokola od naknada za certifikaciju i aktivnosti na mreži."
+        },
+        {
+          "title": "Dugoročna usklađenost",
+          "description": "Staking potiče dugoročno sudjelovanje i jača ekosustav."
+        }
+      ],
+      "closing": "Model stakinga izravno vezuje korisnost tokena uz usvajanje i uspjeh protokola.",
+      "cta": "STAKAJTE ODMAH"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflacijska</b> mehanika",
+      "titleLineTwo": "i <b>akumulacija vrijednosti</b>",
+      "lead": "OGY integrira deflacijski model osmišljen za održivi rast:",
+      "items": [
+        {
+          "title": "Što OGY čini deflacijskim tokenom?",
+          "answer": "OGY je osmišljen s deflacijskim modelom, što znači da se njegova ukupna ponuda smanjuje s vremenom kako se protokol koristi."
+        },
+        {
+          "title": "Kako funkcionira spaljivanje tokena?",
+          "answer": "Svaki put kada se OGY koristi za certifikaciju, dio tokena trajno se spaljuje. Time se smanjuje ponuda u optjecaju."
+        },
+        {
+          "title": "Koja je uloga riznice?",
+          "answer": "Prihodima protokola upravlja riznica kako bi podržala tekući razvoj, nagradila sudionike i pomogla u održavanju dugoročne stabilnosti ekosustava."
+        },
+        {
+          "title": "Kako OGY stvara vrijednost s vremenom?",
+          "answer": "Kako sve više korisnika usvaja ORIGYN protokol i raste aktivnost certifikacije, spaljuje se više OGY-ja. Ovo smanjenje ponude, u kombinaciji s rastućom upotrebom, podržava dugoročno stvaranje vrijednosti."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomika",
+      "titleEmphasis": "pregled",
+      "totalSupplyLabel": "Ukupna ponuda:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Raspodjela:</b> Dodijeljena rastu ekosustava, nagradama za staking, zajednici i upravljanju.",
+      "revenue": "<b>Model prihoda:</b> Naknade protokola plaćene u OGY-ju stvaraju trajnu potražnju uz smanjenje ponude mehanizmima spaljivanja.",
+      "support": "Model je osmišljen kako bi podržao dugoročnu održivost protokola i usklađenost nositelja tokena.",
+      "cta": "TOKENOMIKA"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator troškova",
+      "description": "Koristite ORIGYN kalkulator kako biste procijenili trošak Vašeg jedinstvenog certifikata sa svim Vašim podacima on-chain"
+    },
+    "plan": {
+      "title": "Planirajte svoje iskivanje",
+      "description": "Recite nam koliko stavki imate i što učitavate.",
+      "itemsLabel": "Koliko stavki?",
+      "uploadingLabel": "Što učitavate?",
+      "knowExactSize": "Znate li točnu veličinu?",
+      "totalUploadSize": "Ukupna veličina učitavanja",
+      "usePreset": "Umjesto toga koristite predložak",
+      "combinedSize": "Ukupna veličina svih datoteka svih stavki.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB svaki"
+        },
+        "iphone": {
+          "label": "Fotografija",
+          "hint": "3 MB svaka"
+        },
+        "dslr": {
+          "label": "Studijska fotografija",
+          "hint": "20 MB svaka"
+        },
+        "video": {
+          "label": "Kratki video",
+          "hint": "1 GB svaki"
+        },
+        "video1hr": {
+          "label": "Dugi video",
+          "hint": "60 GB svaki"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Procjena uživo",
+      "titleRefreshing": "Osvježavanje procjene",
+      "description": "Automatski se ažurira dok mijenjate postavke.",
+      "ogyEquivalent": "OGY ekvivalent",
+      "ogySpotRate": "OGY promptna cijena",
+      "itemSingular": "Stavka",
+      "itemPlural": "Stavke",
+      "upload": "Učitavanje"
+    },
+    "breakdown": {
+      "title": "Razrada troškova",
+      "baseFee": "Osnovna naknada za iskivanje",
+      "storageFee": "Naknada za pohranu",
+      "items": "Stavke",
+      "uploadSize": "Veličina učitavanja"
+    },
+    "bytesUnit": "bajta"
   }
 }
