@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Lời tuyên bố",
-        "body": "“Tác nhân trên chuỗi được hỗ trợ bởi AI.” Suy luận diễn ra trên AWS. Chuỗi chỉ lưu trữ kết quả đầu ra."
+        "body": "\"Tác nhân trên chuỗi được hỗ trợ bởi AI.\" Suy luận diễn ra trên AWS. Chuỗi chỉ lưu trữ kết quả đầu ra."
       },
       {
         "title": "Khoảng trống",
@@ -135,8 +135,18 @@
         "gain": "Mức tăng"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Năm trụ cột\nAI không thể <i>thay thế.</i>",
     "lead": "AI biến sản xuất thành hàng hóa phổ thông. Năm lĩnh vực này vẫn còn lại. Origyn đã định vị ở từng lĩnh vực một.",
     "pillars": [
-      { "title": "Niềm tin", "description": "Chứng thực Origyn — một tín hiệu tin cậy kiểm chứng được." },
-      { "title": "Ngữ cảnh", "description": "Hàng thập kỷ ký ức có cấu trúc — một tín hiệu cá nhân mà AI không thể sánh được." },
-      { "title": "Phân phối", "description": "Swiss Subnet — hạ tầng kiểm chứng được cho các tác nhân." },
-      { "title": "Gu thẩm mỹ", "description": "Quy trình tự động nghiên cứu — sự tuyển chọn được tự động hóa hỗ trợ." },
-      { "title": "Trách nhiệm", "description": "Nhật ký kiểm toán và chứng chỉ — một lớp quản trị thật sự." }
+      {
+        "title": "Niềm tin",
+        "description": "Chứng thực Origyn — một tín hiệu tin cậy kiểm chứng được."
+      },
+      {
+        "title": "Ngữ cảnh",
+        "description": "Hàng thập kỷ ký ức có cấu trúc — một tín hiệu cá nhân mà AI không thể sánh được."
+      },
+      {
+        "title": "Phân phối",
+        "description": "Swiss Subnet — hạ tầng kiểm chứng được cho các tác nhân."
+      },
+      {
+        "title": "Gu thẩm mỹ",
+        "description": "Quy trình tự động nghiên cứu — sự tuyển chọn được tự động hóa hỗ trợ."
+      },
+      {
+        "title": "Trách nhiệm",
+        "description": "Nhật ký kiểm toán và chứng chỉ — một lớp quản trị thật sự."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Ngôn ngữ",
-    "switchTo": "Chuyển sang {language}"
+    "switchTo": "Chuyển sang {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "CHỨNG CHỈ",
+    "integrators": "ĐỐI TÁC TÍCH HỢP",
+    "useCases": "TRƯỜNG HỢP SỬ DỤNG",
+    "governance": "QUẢN TRỊ",
+    "help": "TRỢ GIÚP",
+    "toggleMenu": "Mở/đóng menu"
+  },
+  "footer": {
+    "certificates": "CHỨNG CHỈ",
+    "integrators": "ĐỐI TÁC TÍCH HỢP",
+    "ecosystem": "HỆ SINH THÁI",
+    "useCases": "TRƯỜNG HỢP SỬ DỤNG",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Bảo lưu mọi quyền – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Bảo mật tài sản, sở hữu trí tuệ\nvà danh tính của Quý vị hoàn toàn trên chuỗi.",
+      "subtitleMobile": "Bảo mật tài sản,\nsở hữu trí tuệ,\nvà danh tính của Quý vị hoàn toàn trên chuỗi.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Chứng nhận tài sản của Quý vị",
+      "buyCta": "Mua $OGY",
+      "marquee": "ORIGYN cho phép Quý vị lưu trữ an toàn dữ liệu và tài sản hoàn toàn trên chuỗi"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Vốn hóa thị trường $OGY",
+        "tooltip": "Tổng giá trị thị trường của tất cả token OGY đang lưu hành, dựa trên giá token thực tế."
+      },
+      "tvl": {
+        "title": "Tổng giá trị bị khóa (TVL) của tài sản được chứng nhận tính bằng USD",
+        "tooltipTitle": "Tổng giá trị bị khóa (TVL)",
+        "tooltip": "TVL tương ứng với giá trị của các chứng chỉ đã phát hành; điều này không có nghĩa là ORIGYN giữ những tài sản này trong tài khoản ký thác."
+      },
+      "users": {
+        "title": "Người dùng",
+        "tooltip": "Tổng số cá nhân, thương hiệu và tổ chức đang tích cực sử dụng ORIGYN để phát hành, quản lý hoặc sở hữu tài sản được chứng nhận."
+      },
+      "assets": {
+        "title": "Tổng tài sản được chứng nhận",
+        "tooltip": "Số lượng tài sản vật lý hoặc kỹ thuật số đã nhận được chứng chỉ ORIGYN chính thức."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Tại sao chọn",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN — Nơi tài sản thực tế gặp gỡ blockchain.",
+      "body": "ORIGYN là giao thức RWA tiên tiến nhất thế giới, được thiết kế để đưa tài sản thực tế hoàn toàn lên chuỗi — từ nghệ thuật cao cấp và vàng cho đến hàng xa xỉ và sở hữu trí tuệ.\n\nGiao thức cung cấp hạ tầng chứng nhận phi tín nhiệm, đảm bảo tính xác thực, nguồn gốc và quyền sở hữu của các tài sản có giá trị cao."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Chứng nhận 100% Trên Chuỗi",
+          "description": "Không trung gian, không giả mạo. Phi tập trung hoàn toàn."
+        },
+        {
+          "title": "Tiện ích Token $OGY",
+          "description": "Cung cấp năng lượng cho hệ sinh thái ORIGYN thông qua quản trị và tiện ích giao thức."
+        },
+        {
+          "title": "Hỗ trợ Đa Tài Sản",
+          "description": "Chứng nhận nghệ thuật, hàng xa xỉ, vàng, bất động sản và nhiều loại tài sản khác."
+        },
+        {
+          "title": "Bảo Mật Hàng Đầu Ngành",
+          "description": "Bảo vệ blockchain bất biến cho những tài sản có giá trị nhất của Quý vị."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Cách",
+      "titleSuffix": "hoạt động",
+      "steps": [
+        {
+          "description": "Đưa tài sản thực tế lên chuỗi nên là điều đơn giản. Quy trình chứng nhận của ORIGYN được thiết kế để bảo mật, phi tập trung và dễ sử dụng chỉ trong ba bước: <br /><br />Gửi siêu dữ liệu và tài liệu chứng minh của tài sản. ORIGYN tạo một chứng chỉ kỹ thuật số độc nhất, chống giả mạo trực tiếp trên blockchain, gán nó cho tài sản và liên kết với chủ sở hữu hợp pháp.",
+          "panelTitle": "Đúc Chứng Chỉ Kỹ Thuật Số của Quý vị",
+          "panelDescription": "Tải lên thông tin tài sản, đúc chứng chỉ blockchain."
+        },
+        {
+          "description": "Mỗi chứng chỉ đều có thể xác minh bằng mật mã. Tính xác thực, nguồn gốc và quyền sở hữu tài sản được kiểm chứng thông qua giao thức phi tập trung của ORIGYN.",
+          "panelTitle": "Xác Minh & Xác Thực",
+          "panelDescription": "Đảm bảo tính xác thực của tài sản và minh bạch quyền sở hữu."
+        },
+        {
+          "description": "Sau khi được chứng nhận, tài sản của Quý vị có thể được nắm giữ, chuyển nhượng, giao dịch hoặc sử dụng trong các hệ sinh thái kỹ thuật số — từ ứng dụng DeFi và sàn giao dịch NFT cho đến giao dịch riêng tư và hồ sơ tổ chức.",
+          "panelTitle": "Chuyển Nhượng & Truy Vết",
+          "panelDescription": "Sử dụng và truy vết tài sản đã chứng nhận cho DeFi, bán lại hoặc đầu tư."
+        }
+      ],
+      "goToStep": "Chuyển đến bước {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Trường",
+      "titleSuffix": "Hợp Sử Dụng",
+      "description": "Giao thức của ORIGYN được xây dựng để phục vụ nhiều ngành công nghiệp khác nhau, nơi sự tin cậy, nguồn gốc và tính xác thực là yếu tố then chốt. Dưới đây là một số lĩnh vực trọng yếu đã tận dụng hạ tầng chứng nhận của ORIGYN.",
+      "items": [
+        {
+          "title": "Nghệ thuật",
+          "description": "Xác thực và bảo vệ nguồn gốc của các tác phẩm nghệ thuật vật lý và kỹ thuật số trên chuỗi."
+        },
+        {
+          "title": "Vàng",
+          "description": "Chứng nhận vàng bằng chứng chỉ kỹ thuật số bất biến, truy vết được và chống giả mạo."
+        },
+        {
+          "title": "Kim cương",
+          "description": "Theo dõi xuất xứ, phân loại và quyền sở hữu của từng viên kim cương với độ chính xác blockchain."
+        },
+        {
+          "title": "Xuất xứ",
+          "description": "Chứng minh nguồn gốc, tính xác thực và tay nghề của bất kỳ sản phẩm nào — từ đồng hồ đến thời trang."
+        }
+      ],
+      "indicatorAria": "Chuyển đến trường hợp sử dụng {n}",
+      "discover": "Khám phá thêm"
+    },
+    "certify": {
+      "titleLine": "Chứng nhận",
+      "titleEmphasis": "tài sản của Quý vị",
+      "subtitle": "Sử dụng Máy tính Chi phí Chứng nhận ORIGYN để ước tính ngay lập tức chi phí bảo mật tài sản của Quý vị bằng chứng chỉ kỹ thuật số hoàn toàn trên chuỗi. Dù Quý vị đang chứng nhận nghệ thuật cao cấp, hàng xa xỉ, vàng hay các tài sản có giá trị khác, công cụ này cung cấp bức tranh rõ ràng về chi phí hạ tầng và công nghệ mà không cần phỏng đoán.",
+      "contactPrompt": "Để chứng nhận tài sản của Quý vị, vui lòng liên hệ với chúng tôi:",
+      "contactCta": "Liên hệ ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Chương Trình",
+      "titleLineTwo": "Đối Tác Tích Hợp",
+      "description": "Chương Trình Đối Tác Tích Hợp ORIGYN được thiết kế cho các doanh nghiệp, nền tảng và nhà phát triển muốn tích hợp hạ tầng chứng nhận phi tập trung của ORIGYN trực tiếp vào dịch vụ của mình.\n\nDù Quý vị là một sàn giao dịch, giải pháp chuỗi cung ứng hay thương hiệu xa xỉ, Quý vị có thể cung cấp xác minh tài sản trên chuỗi an toàn mà không cần xây dựng lại từ đầu.",
+      "cta": "Tham gia Chương Trình Đối Tác Tích Hợp"
+    },
+    "roadmap": {
+      "title": "Lộ Trình",
+      "description": "Từ các tiện ích mới và tính năng quản trị cho đến mở rộng hỗ trợ cho các ngành và nhà phát triển. Mỗi cột mốc phản ánh sứ mệnh của chúng tôi trong việc đưa tài sản thực tế hoàn toàn lên chuỗi thông qua hạ tầng có khả năng mở rộng, kiểm chứng và phi tập trung.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation được tài trợ",
+          "description": "ORIGYN Foundation được thành lập tại Neuchâtel, Thụy Sĩ để bắt đầu phát triển ORIGYN Protocol."
+        },
+        {
+          "title": "Ra mắt token OGY",
+          "description": "Token tiện ích gốc $OGY được tạo ra để vận hành phí giao thức, quản trị và staking."
+        },
+        {
+          "title": "Tiêu chuẩn NFT ORIGYN v1.0",
+          "description": "Ra mắt phiên bản đầu tiên của tiêu chuẩn NFT của ORIGYN, cho phép chứng nhận on-chain."
+        },
+        {
+          "title": "Cập nhật Tokenomics 2.0",
+          "description": "200 triệu token $OGY trước đây được phân bổ cho Foundation đã bị đốt, khởi động áp lực giảm phát."
+        },
+        {
+          "title": "Nền tảng Minting 1.0",
+          "description": "Ra mắt giao diện minting on-chain đầu tiên cho chứng chỉ kỹ thuật số."
+        },
+        {
+          "title": "Quan hệ đối tác chiến lược",
+          "description": "Hợp tác chiến lược với FederItaly và METALOR để chứng nhận sản phẩm sản xuất tại Ý và vàng được token hóa."
+        },
+        {
+          "title": "Mua vàng đầu tiên",
+          "description": "3 kg vàng vật chất được mua và token hóa bằng ORIGYN Protocol."
+        },
+        {
+          "title": "Mua lại CanDB",
+          "description": "ORIGYN mua lại CanDB, một giải pháp cơ sở dữ liệu phi tập trung, có khả năng mở rộng và được tối ưu cho metadata NFT."
+        },
+        {
+          "title": "Tokenomics 3.0 và ra mắt Dashboard",
+          "description": "Mô hình giảm phát được giới thiệu với Tokenomics 3.0 và phiên bản đầu tiên của ORIGYN Dashboard được phát hành."
+        },
+        {
+          "title": "10.000 người dùng giao thức",
+          "description": "ORIGYN vượt mốc 10.000 người dùng giao thức duy nhất."
+        },
+        {
+          "title": "Ra mắt Gold DAO",
+          "description": "Gold DAO trở thành DAO đầu tiên được xây dựng trên ORIGYN để token hóa và chứng nhận vàng vật chất on-chain."
+        },
+        {
+          "title": "Quyên góp 500M OGY cho Gold DAO",
+          "description": "Nửa tỷ token $OGY được quyên góp để hỗ trợ treasury dài hạn của Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO tích hợp với ICP SNS",
+          "description": "ORIGYN DAO trở nên hoàn toàn phi tập trung và được quản trị trên framework SNS của Internet Computer."
+        },
+        {
+          "title": "Phát hành Dashboard V2",
+          "description": "Phiên bản dashboard mới bao gồm số liệu live, thống kê staking và công cụ quản trị."
+        },
+        {
+          "title": "Cột mốc 30.000 người dùng",
+          "description": "ORIGYN tăng lên hơn 30.000 người dùng, tăng 300% trong sáu tháng."
+        },
+        {
+          "title": "Hợp tác với Leo Caillard và Gil Sertissage",
+          "description": "ORIGYN chứng nhận tác phẩm nghệ thuật vật lý và kim cương trong các quan hệ đối tác nổi bật."
+        },
+        {
+          "title": "Tiêu chuẩn NFT ORIGYN v2.0",
+          "description": "Tiêu chuẩn NFT được nâng cấp để cho phép chuyển nhượng chứng chỉ một cách an toàn."
+        },
+        {
+          "title": "Ra mắt Integrator Framework",
+          "description": "Các quy tắc và cấu trúc onboarding được tạo ra để hướng dẫn đối tác mới tích hợp với ORIGYN."
+        },
+        {
+          "title": "Ra mắt Cecil DAO",
+          "description": "ORIGYN hỗ trợ ra mắt Cecil DAO để tài trợ các dự án bảo tồn và nhân đạo bằng tính minh bạch của blockchain."
+        },
+        {
+          "title": "Mua lại ClaimLink",
+          "description": "ORIGYN mua lại ClaimLink, một nền tảng phân phối NFT và token phi tập trung được xây dựng trên ICP."
+        },
+        {
+          "title": "Tiêu chuẩn NFT ICRC-7",
+          "description": "Một tiêu chuẩn mới được giới thiệu để tăng khả năng tương tác của chứng chỉ và tiện ích trên toàn hệ sinh thái."
+        },
+        {
+          "title": "Ra mắt một",
+          "titleSpan": "Minting Studio công khai",
+          "description": "Một công cụ self-service được ra mắt, cho phép bất kỳ ai mint chứng chỉ RWA on-chain trên hạ tầng ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Bí ẩn Runestone sẽ được tiết lộ vào Q2 2026 tại Geneva."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Một công cụ self-service được ra mắt, cho phép bất kỳ ai mint on-chain bằng hạ tầng ORIGYN."
+        },
+        {
+          "title": "Triển khai bảo vệ IP",
+          "description": "Hỗ trợ chứng nhận on-chain cho quyền sở hữu trí tuệ được tích hợp vào giao thức."
+        },
+        {
+          "title": "Triển khai cross-chain",
+          "description": "Khả năng tương thích cross-chain mở rộng phạm vi của ORIGYN tới các hệ sinh thái lớn khác."
+        },
+        {
+          "title": "Tích hợp wallet và marketplace toàn cầu",
+          "description": "ORIGYN NFT trở nên có thể truy cập thông qua các wallet và marketplace NFT hàng đầu trên toàn thế giới."
+        },
+        {
+          "title": "Trở thành tiêu chuẩn chứng nhận phổ quát",
+          "description": "ORIGYN hướng tới việc trở thành chuẩn mực toàn cầu cho chứng nhận kỹ thuật số trên mọi loại tài sản."
+        }
+      ]
+    },
+    "partners": {
+      "label": "ĐỐI TÁC",
+      "testimonials": [
+        {
+          "title": "CEO của Metalor",
+          "description": "\"ORIGYN là công nghệ chứng nhận kỹ thuật số tiên tiến nhất và toàn diện nhất thế giới. Tất cả dữ liệu được lưu trữ hoàn toàn trên blockchain để đảm bảo các chứng chỉ bất biến và minh bạch. Metalor rất vui được hợp tác với một công ty fintech đặt tại Neuchâtel như ORIGYN để mang một giải pháp đổi mới ra thị trường.\""
+        },
+        {
+          "title": "Chuyên gia nghệ thuật",
+          "description": "\"Đối với các nhà sưu tập tư nhân của tôi, niềm tin và di sản là tất cả. Công nghệ chứng nhận của ORIGYN đã trở nên thiết yếu; nó không chỉ đảm bảo tính xác thực của từng tác phẩm nghệ thuật mà còn bảo đảm khả năng truy xuất và giá trị của tác phẩm qua nhiều thế hệ. Vấn đề không còn chỉ là sở hữu một tác phẩm nghệ thuật, mà là bảo vệ câu chuyện của nó on-chain, mãi mãi. ORIGYN biến điều đó thành hiện thực.\""
+        },
+        {
+          "title": "Đồng sáng lập Cyber",
+          "description": "\"Chúng tôi luôn nói rằng kim cương sẽ tồn tại mãi mãi, điều đó là đúng. Vì vậy, thông tin bạn cung cấp cũng phải được nghĩ theo cách tương tự, bởi vì trong 100 năm, 200 năm nữa những viên kim cương đó vẫn sẽ tồn tại. Chúng tôi cần một công nghệ để đảm bảo vẫn có thể cung cấp thông tin đó. Đặc biệt với một sản phẩm có giá trị lớn và được truyền qua nhiều thế hệ... Lý do chính chúng tôi hợp tác với ORIGYN là vì họ có thể cung cấp tất cả những điều này.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Tham gia vào",
+      "emphasisDesktop": "quá trình ra quyết định",
+      "emphasisMobileLineOne": "Quá trình",
+      "emphasisMobileLineTwo": "Ra Quyết Định",
+      "cta": "Tham gia ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Không tìm thấy trường hợp sử dụng",
+    "cases": {
+      "gold": [
+        {
+          "title": "Vàng",
+          "description": "Là tài sản lớn nhất và hàng hóa được giám sát chặt chẽ nhất thế giới, vàng đòi hỏi mức độ bảo mật cao nhất. <br /><br />ORIGYN đáp ứng những yêu cầu này, như đã được chứng minh bởi <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, nhà lãnh đạo thế giới trong lĩnh vực tinh luyện vàng, đã chọn giao thức ORIGYN để bảo mật dữ liệu của mình. Lần đầu tiên, toàn bộ thông tin kỹ thuật liên quan đến thỏi vàng — bao gồm hình ảnh độ phân giải cao và tài liệu — được ghi lại trong một chứng chỉ duy nhất trên blockchain."
+        },
+        {
+          "description": "Ngoài ra, một số dự án như <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> và <a href='https://bity.com' target='_blank'>Bity</a> sử dụng các chứng chỉ này để bán thỏi vàng tương ứng hoặc tạo token được bảo chứng bằng vàng vật lý."
+        }
+      ],
+      "art": [
+        {
+          "title": "Nghệ thuật",
+          "description": "Các chuyên gia nghệ thuật đặc biệt quan tâm đến sự tin cậy và đảm bảo chứng chỉ cho các tác phẩm nghệ thuật. Đây là lý do nhiều trường hợp đã áp dụng công nghệ ORIGYN.<br /><br />Các nghệ sĩ có tên tuổi như <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> và <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> đã tạo chứng chỉ ORIGYN của riêng mình để bảo vệ dữ liệu liên quan đến tác phẩm của họ. Những chứng chỉ này hoàn toàn trên chuỗi, chống giả mạo và không thể sao chép, cho phép các nghệ sĩ chống hàng giả trong khi nâng cao trải nghiệm nhà sưu tập thông qua hình ảnh, video và tài liệu độ phân giải cao."
+        },
+        {
+          "description": "Các tổ chức như quỹ từ thiện, tổ chức phi lợi nhuận, gia đình, phòng trưng bày và cố vấn nghệ thuật có nhu cầu tạo chứng chỉ kỹ thuật số cho khách hàng của mình đã bắt đầu sử dụng ORIGYN để duy trì mức độ bảo mật và bảo mật tối đa. Một số phòng trưng bày đã triển khai công nghệ ORIGYN, bao gồm Phòng trưng bày Retelet cho các chứng chỉ tác phẩm của René Magritte.<br /><br />Công nghệ ORIGYN cũng cho phép giao dịch thông qua chứng chỉ, đặc biệt là giao dịch đồng sở hữu. Điều này cho phép chia sẻ tác phẩm nghệ thuật giữa nhiều chủ sở hữu bằng cách chia chứng chỉ thành nhiều phần, mỗi phần đóng vai trò bằng chứng sở hữu."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Xuất xứ",
+          "description": "Xuất xứ quốc gia không chỉ là một nhãn hiệu. Đó là một tuyên bố về danh tính, chất lượng và giá trị văn hóa. Khi nạn hàng giả gia tăng, việc chứng minh nơi và cách thức sản xuất một sản phẩm đã trở thành yếu tố khác biệt quan trọng cho các thương hiệu trong nhiều ngành.<br /><br />Để đáp lại, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> đã tạo ra chứng nhận 100% Made in Italy. Tiêu chuẩn được công nhận về mặt pháp lý này bảo vệ sự xuất sắc của Ý thông qua tài liệu nghiêm ngặt, kiểm toán độc lập và vận động ở cấp chính phủ. ORIGYN cung cấp nền tảng kỹ thuật số của hệ thống này bằng cách ghi lại mọi sản phẩm được chứng nhận lên blockchain như một bằng chứng nguồn gốc có thể xác minh."
+        },
+        {
+          "description": "Mỗi chứng chỉ trở thành một hộ chiếu kỹ thuật số an toàn, chống giả mạo. Nó củng cố niềm tin của người tiêu dùng, đảm bảo tính minh bạch trong toàn bộ chuỗi cung ứng và hỗ trợ các doanh nghiệp lựa chọn dẫn đầu bằng tính xác thực."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Hàng xa xỉ",
+          "description": "Công nghệ ORIGYN giải quyết nhu cầu của ngành xa xỉ trong việc tự đổi mới và cung cấp trải nghiệm sản phẩm cá nhân hóa, minh bạch hơn.<br /><br />Nhà kim hoàn <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> sử dụng công nghệ blockchain ORIGYN để tạo chứng chỉ cho toàn bộ bộ sưu tập của mình. Điều này bảo mật toàn bộ dữ liệu hoàn toàn trên chuỗi trong khi cung cấp cho khách hàng uy tín của họ chứng chỉ thế hệ tiếp theo đảm bảo tính bảo mật, xác thực và quyền sở hữu."
+        },
+        {
+          "description": "Các công ty xa xỉ khác như <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> cũng sử dụng ORIGYN để ghi lại chuỗi truy xuất nguồn gốc hoàn chỉnh của kim cương dành cho các nhà sản xuất đồng hồ danh tiếng. Nhiều ứng dụng khác cũng có thể thực hiện, bao gồm thêm nội dung tiếp thị cá nhân hóa vào chứng chỉ hoặc kết hợp công nghệ với AI để xác định tính xác thực trong thời gian thực cho thị trường thứ cấp."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Trung tâm",
+    "titleSuffix": "Trợ giúp",
+    "searchPlaceholder": "Tìm kiếm..",
+    "faqs": [
+      {
+        "title": "Token OGY",
+        "description": "Cung cấp năng lượng cho Chứng nhận Tài sản Phi tập trung của Web 3.0",
+        "answer": "Token <strong>OGY</strong> là tiện ích cốt lõi của Giao thức ORIGYN. Nó kết nối việc chứng nhận tài sản thực tế với hạ tầng blockchain phi tập trung, giúp quyền sở hữu, xác thực và kiểm chứng nội dung thực sự an toàn.<br><br>OGY tạo ra một hệ thống toàn cầu nơi tài sản vật lý được chứng nhận kỹ thuật số, theo dõi và tích hợp vào các ứng dụng và thị trường phi tập trung."
+      },
+      {
+        "title": "Tiện ích Giao thức",
+        "description": "OGY được yêu cầu để thực hiện các chức năng thiết yếu trong hệ sinh thái ORIGYN.",
+        "answer": "<strong>Chứng nhận:</strong> Mọi tài sản được chứng nhận trên ORIGYN đều yêu cầu OGY để đúc chứng chỉ trên chuỗi bất biến.<br><strong>Lớp Giao dịch:</strong> Tạo thuận lợi cho các giao dịch chuyển nhượng, tái chứng nhận và các sự kiện vòng đời của tài sản được chứng nhận.<br><strong>Lưu trữ Dữ liệu:</strong> Hỗ trợ lưu trữ phi tập trung, an toàn cho siêu dữ liệu và nguồn gốc tài sản.<br>Tiện ích này đảm bảo OGY là không thể thiếu trong mọi giao dịch trong giao thức."
+      },
+      {
+        "title": "Địa chỉ Hợp đồng Token OGY",
+        "description": "Token OGY được triển khai trên blockchain Internet Computer.",
+        "answer": "Token OGY được triển khai trên blockchain Internet Computer và hoạt động như một token tiện ích gốc trong Giao thức ORIGYN.<br><br>Địa chỉ Hợp đồng Chính thức:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Người dùng nhập tài sản trong lệnh gọi<br>Luôn xác minh địa chỉ hợp đồng trước khi tương tác với OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[MUA OGY]</a>"
+      },
+      {
+        "title": "Quản trị",
+        "description": "OGY là token quản trị trao quyền cho người nắm giữ để:",
+        "answer": "• Đề xuất và bỏ phiếu về các nâng cấp giao thức, quy tắc thanh khoản và thay đổi hệ sinh thái.<br>• Giám sát việc tiếp nhận các đối tác tích hợp và người chứng nhận.<br>• Phân bổ quỹ kho bạc cho đổi mới, tăng trưởng và các sáng kiến chiến lược.<br><br>Quản trị được phi tập trung hoàn toàn thông qua ORIGYN DAO, trao cho cộng đồng ảnh hưởng trực tiếp đến sự phát triển của giao thức."
+      },
+      {
+        "title": "Staking và Phần thưởng",
+        "description": "Staking OGY bảo mật mạng lưới đồng thời điều chỉnh các động cơ khuyến khích.",
+        "answer": "<strong>Bảo mật Mạng lưới:</strong> Người tham gia staking tham gia quản trị và giúp xác nhận các hoạt động giao thức.<br><br><strong>Phần thưởng:</strong> Nhận được một phần doanh thu giao thức từ phí chứng nhận và hoạt động mạng lưới.<br><br><strong>Cam kết Dài hạn:</strong> Staking khuyến khích sự tham gia dài hạn và củng cố hệ sinh thái.<br><br>Mô hình staking gắn tiện ích token trực tiếp với sự chấp nhận và thành công của giao thức.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NGAY]</strong></a>"
+      },
+      {
+        "title": "Cơ chế Giảm phát / Tích lũy Giá trị",
+        "description": "OGY tích hợp mô hình giảm phát được thiết kế cho tăng trưởng bền vững.",
+        "answer": "<strong>Đốt token Chứng nhận:</strong> Một phần OGY sử dụng trong chứng nhận được loại bỏ vĩnh viễn khỏi lưu thông.<br><br><strong>Quản lý Kho bạc:</strong> Doanh thu giao thức hỗ trợ phát triển, phần thưởng và tối ưu hóa giá trị token.<br><br>Khi việc sử dụng giao thức mở rộng, nguồn cung OGY giảm, củng cố việc tạo ra giá trị phù hợp với mức độ chấp nhận."
+      },
+      {
+        "title": "Tổng quan Tokenomics",
+        "description": "Tổng cung: 10.4 Billion OGY",
+        "answer": "<strong>Phân phối:</strong> Được phân bổ cho tăng trưởng hệ sinh thái, phần thưởng staking, cộng đồng và quản trị.<br><br><strong>Mô hình Doanh thu:</strong> Phí giao thức trả bằng OGY tạo ra nhu cầu liên tục trong khi giảm nguồn cung thông qua cơ chế đốt token.<br>Mô hình được thiết kế để hỗ trợ tính bền vững lâu dài của giao thức và sự liên kết định hướng tương lai."
+      },
+      {
+        "title": "Tương lai của OGY",
+        "description": "OGY là nền tảng của một khung phi tập trung.",
+        "answer": "OGY là nền tảng của một khung phi tập trung được thiết kế để chứng nhận, quản lý và mở khóa giá trị của tài sản thực tế trên chuỗi. Khi ORIGYN phát triển, vai trò của OGY mở rộng như là động cơ kinh tế thúc đẩy chứng nhận tài sản, quản trị và phát triển hệ sinh thái."
+      },
+      {
+        "title": "Khám phá token trực tiếp",
+        "description": "Khám phá dữ liệu token trực tiếp, các tùy chọn staking và tham gia quản trị trên ORIGYN Dashboard.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Nhấp để truy cập Dashboard</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Trở thành",
+      "titleConnector": "một",
+      "titleEmphasis": "Đối tác Tích hợp",
+      "subtitle": "THAM GIA CHƯƠNG TRÌNH ĐỐI TÁC TÍCH HỢP ĐỂ XÂY DỰNG TƯƠNG LAI CỦA NIỀM TIN VỚI CÔNG NGHỆ CHỨNG NHẬN BLOCKCHAIN CỦA ORIGYN",
+      "cta": "Tham gia ngay"
+    },
+    "program": {
+      "titleLineOne": "Chương Trình",
+      "titleLineTwo": "Đối Tác Tích Hợp",
+      "steps": [
+        {
+          "labelBold": "CHƯƠNG TRÌNH",
+          "labelRest": "ĐỐI TÁC TÍCH HỢP LÀ GÌ?",
+          "description": "Chương Trình Đối Tác Tích Hợp là một sáng kiến chiến lược nhằm thúc đẩy giao thức ORIGYN, khuyến khích việc áp dụng và mở rộng hệ sinh thái của nó."
+        },
+        {
+          "labelBold": "ĐỐI TÁC",
+          "labelRest": "TÍCH HỢP LÀ AI?",
+          "description": "<ul><li><strong>Các đối tác tích hợp là các công ty độc lập</strong> xây dựng sản phẩm dựa trên giao thức ORIGYN với mục tiêu chung là đúc chứng chỉ ORIGYN và thúc đẩy giao thức ORIGYN trong một ngành cụ thể, trong một lớp tài sản hoặc qua nhiều lĩnh vực.</li><li><strong>Đóng vai trò là người kích hoạt,</strong> họ giúp các doanh nghiệp áp dụng công nghệ chứng nhận blockchain của ORIGYN mà không đòi hỏi kiến thức sâu về blockchain và Web3.</li><li><strong>Sau quy trình thẩm định</strong> được thực hiện bởi Quỹ ORIGYN, các đối tác tích hợp được bầu chọn và bỏ phiếu bởi những người nắm giữ token ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "LÀM THẾ NÀO",
+          "labelRest": "ĐỂ TRỞ THÀNH ĐỐI TÁC TÍCH HỢP?",
+          "description": "Để trở thành đối tác tích hợp, một công ty phải chứng minh rằng mình có thể cung cấp dịch vụ ở quy mô lớn, đồng thời đáp ứng tất cả các yêu cầu và chuyên môn để phục vụ một hoặc nhiều lĩnh vực cụ thể."
+        }
+      ],
+      "goToStep": "Chuyển đến bước {n}",
+      "joinNow": "Tham gia ngay"
+    },
+    "workflow": {
+      "titleLineOne": "Quy trình",
+      "titleLineTwo": "Ứng tuyển",
+      "steps": [
+        {
+          "title": "Đơn đăng ký",
+          "content": "<p>Trong quá trình ứng tuyển, các Đối tác Tích hợp phải điền vào <strong><a href=\"/integrator/join\">Đơn Đăng ký Dự án trực tuyến</a></strong> và chuẩn bị <strong>Hồ sơ Thẩm định</strong> để gửi đến <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Hồ sơ thẩm định bao gồm:</p>\n<ul>\n<li>Bản sao Giấy chứng nhận đăng ký thành lập</li>\n<li>Mô tả về UBO — Chủ sở hữu hưởng lợi thực sự độc nhất</li>\n<li>Bản sao Điều lệ & Quy chế Hiệp hội</li>\n<li>Nghị quyết của Hội đồng Quản trị chính thức hóa sự sẵn sàng đăng ký làm Đối tác Tích hợp và tuân thủ các quy tắc Staking cùng danh sách các quan chức được ủy quyền vận hành Đối tác Tích hợp</li>\n<li>Xác minh người ký được ủy quyền phải dựa trên ảnh chụp và thẻ chữ ký được công ty chứng nhận hợp lệ</li>\n<li>Bản sao bằng chứng nhận dạng và bằng chứng địa chỉ của giám đốc, cán bộ hoặc nhân viên nắm giữ Giấy ủy quyền để giao dịch kinh doanh thay mặt</li>\n<li>Danh sách giám đốc</li>\n<li>Mẫu Đơn Đăng ký Dự án Đối tác Tích hợp</li>\n</ul>"
+        },
+        {
+          "title": "Xem xét từ Quỹ ORIGYN",
+          "content": "<p>Bước đầu tiên để trở thành Đối tác Tích hợp là được Quỹ ORIGYN xác nhận sau quy trình thẩm định. Đối tác Tích hợp chấp nhận chia sẻ tất cả các tài liệu được yêu cầu với mục đích hoàn thành tất cả các thủ tục KYC/KYB/AML cần thiết.</p>"
+        },
+        {
+          "title": "Bỏ phiếu quản trị qua ORIGYN DAO",
+          "content": "<p>BỎ PHIẾU CÔNG KHAI BỞI ORIGYN DAO:</p>\n<p>Sau khi Quỹ kết thúc quy trình thẩm định, Đối tác Tích hợp sẽ phải trải qua bỏ phiếu DAO qua đề xuất công khai trên Nền tảng SNS. Tất cả đề xuất ORIGYN có thể xem tại <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Mọi thay đổi về địa chỉ pháp nhân, tên doanh nghiệp hoặc chấm dứt hợp tác đều được bỏ phiếu công khai trên Nền tảng SNS.</p>"
+        },
+        {
+          "title": "Staking 50,000,000 OGY",
+          "content": "<p>Nếu đề xuất được thông qua thành công, Đối tác Tích hợp sẽ phải tiến hành stake 50,000,000 OGY trong Quản trị ORIGYN trong 1 year không hủy.</p>\n<p>Bước này đảm bảo cam kết dài hạn của Đối tác Tích hợp và quyền biểu quyết để tham gia tích cực vào quản trị ORIGYN. Tất cả Neuron đã Stake sẽ được hiển thị công khai trên Dashboard tại <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Tất cả thống kê như số chứng chỉ đã đúc, TVL của tài sản được chứng nhận, v.v. sẽ được hiển thị công khai trong phần đối tác tích hợp trên <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Đánh giá hiệu suất",
+          "content": "<p>Tùy thuộc vào từng lĩnh vực và cam kết, yêu cầu tối thiểu về số lượng chứng chỉ đã đúc có thể là một phần của thỏa thuận Đối tác Tích hợp. Do đó, Quỹ ORIGYN sẽ định kỳ tiến hành đánh giá các cột mốc và hiệu suất của các Đối tác Tích hợp.</p>\n<p>Tất cả thống kê như số chứng chỉ đã đúc, TVL của tài sản được chứng nhận, v.v. sẽ được hiển thị công khai trong phần đối tác tích hợp trên <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Tải xuống",
+      "titleLineTwo": "Hợp đồng Đối tác Tích hợp",
+      "cta": "Tải xuống"
+    }
+  },
+  "integratorJoin": {
+    "title": "Chương Trình Đối Tác Tích Hợp",
+    "titleItalic": "Đơn Đăng Ký",
+    "requiredLabel": "BẮT BUỘC *",
+    "requiredMessage": "Bắt buộc",
+    "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+    "send": "GỬI",
+    "sending": "Đang gửi…",
+    "errorSend": "Lỗi gửi biểu mẫu.",
+    "fileSizeError": "Kích thước tệp không được vượt quá 1 MB",
+    "addLink": "THÊM LIÊN KẾT",
+    "addObjective": "THÊM MỤC TIÊU",
+    "addKpi": "THÊM KPI",
+    "uploadHighlight": "Tải lên",
+    "uploadSuffix": " logo của Quý vị hoặc kéo vào đây (TÙY CHỌN)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — tối đa 1 MB",
+    "logoPreviewAlt": "Xem trước logo",
+    "successTitle": "Cảm ơn Quý vị",
+    "successMessage": "Chúng tôi sẽ liên hệ lại với Quý vị",
+    "backToIntegrator": "QUAY LẠI TRANG ĐỐI TÁC TÍCH HỢP",
+    "errorTitle": "Đã xảy ra lỗi",
+    "errorMessageDefault": "Vui lòng thử lại hoặc quay lại sau",
+    "retry": "THỬ LẠI",
+    "sections": {
+      "representative": {
+        "title": "ĐẠI DIỆN ĐỐI TÁC TÍCH HỢP",
+        "fullName": "HỌ VÀ TÊN *",
+        "email": "ĐỊA CHỈ EMAIL *",
+        "phone": "SỐ ĐIỆN THOẠI *"
+      },
+      "overview": {
+        "title": "TỔNG QUAN",
+        "description": "VUI LÒNG VIẾT MỘT TỔNG QUAN NGẮN GỌN VỀ DỰ ÁN ĐỐI TÁC TÍCH HỢP, BAO GỒM",
+        "vision": "Tầm nhìn của Đối tác Tích hợp của Quý vị trong một câu... *",
+        "industry": "Ví dụ danh mục ngành (nghệ thuật, âm nhạc, hàng xa xỉ) hoặc Tài sản cụ thể (vàng, kim cương) *",
+        "geography": "Địa lý Thị trường (Toàn cầu, Châu Âu, theo Quốc gia cụ thể) *",
+        "socialFirst": "Website và liên kết Mạng xã hội *",
+        "social": "Website và liên kết Mạng xã hội",
+        "presentation": "Liên kết đến bản trình bày dự án (không bắt buộc, nhưng hữu ích)"
+      },
+      "acquisition": {
+        "title": "THU HÚT KHÁCH HÀNG",
+        "description": "XÁC ĐỊNH RÕ RÀNG ĐỐI TƯỢNG MỤC TIÊU CỦA QUÝ VỊ VÀ CÁCH QUÝ VỊ THU HÚT HOẶC SẼ THU HÚT HỌ",
+        "whyExists": "Tại sao dự án này cần tồn tại và điểm khác biệt của nó là gì? *",
+        "whyIntegrator": "Tại sao việc trở thành Đối tác Tích hợp lại quan trọng với Quý vị? *"
+      },
+      "objectives": {
+        "title": "CÁC MỤC TIÊU CHÍNH QUÝ VỊ MUỐN ĐẠT ĐƯỢC",
+        "first": "Mục tiêu 01 *",
+        "second": "Mục tiêu 02",
+        "more": "Mục tiêu {n}"
+      },
+      "kpis": {
+        "title": "CÁC CHỈ SỐ CHÍNH QUÝ VỊ MUỐN THEO DÕI",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "QUÝ VỊ SẼ LÀM GÌ VÀ LÀM NHƯ THẾ NÀO",
+        "focus": "Hãy cho chúng tôi biết chi tiết Quý vị sẽ tập trung vào điều gì với tư cách là Đối tác Tích hợp và thành công của dự án này trông như thế nào.",
+        "implement": "Hãy cho chúng tôi biết Quý vị dự định triển khai dự án này như thế nào"
+      },
+      "roadmaps": {
+        "title": "LỘ TRÌNH 3 THÁNG ĐẦU VÀ 3 NĂM",
+        "description": "Quý vị phải chỉ rõ thời điểm dự kiến bắt đầu đúc chứng chỉ và số lượng chứng chỉ ước tính *"
+      },
+      "team": {
+        "title": "ĐỘI NGŨ",
+        "placeholder": "Hãy cho chúng tôi biết về đội ngũ hiện tại của Quý vị, nếu có, hoặc các vai trò đội ngũ trong tương lai mà Quý vị có thể cần, cùng các liên kết đến LinkedIn *"
+      },
+      "risk": {
+        "title": "CÁC YẾU TỐ RỦI RO",
+        "placeholder": "Hãy cho chúng tôi biết những lý do và yếu tố có thể dẫn đến thất bại."
+      },
+      "optional": {
+        "title": "TÙY CHỌN",
+        "placeholder": "Có điều gì khác Quý vị muốn chia sẻ để tăng cơ hội được lựa chọn không?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Token",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Token OGY là <b>tiện ích cốt lõi</b> của Giao thức ORIGYN.",
+      "paragraphTwo": "Nó <b>kết nối</b> việc chứng nhận tài sản thực tế với hạ tầng blockchain phi tập trung, <b>giúp quyền sở hữu, xác thực</b> và <b>chuyển nhượng có thể kiểm chứng và an toàn.</b>",
+      "paragraphThree": "OGY tạo ra một hệ thống toàn cầu nơi tài sản <b>vật lý</b> được <b>chứng nhận kỹ thuật số, theo dõi</b> và <b>tích hợp vào</b> các ứng dụng và thị trường <b>phi tập trung</b>.",
+      "cta": "Mua OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "Vốn hóa thị trường $OGY",
+      "burned": "Tổng OGY đã đốt",
+      "circulating": "Nguồn cung lưu hành",
+      "holders": "Người nắm giữ token"
+    },
+    "utility": {
+      "titlePrefix": "Tiện ích",
+      "titleEmphasis": "Giao thức",
+      "lead": "Quý vị cần token OGY để sử dụng đầy đủ hệ sinh thái ORIGYN:",
+      "cards": [
+        {
+          "title": "Chứng nhận",
+          "description": "Mọi tài sản được chứng nhận trên ORIGYN đều yêu cầu OGY để đúc chứng chỉ trên chuỗi bất biến."
+        },
+        {
+          "title": "Lớp Giao dịch",
+          "description": "Tạo thuận lợi cho các giao dịch chuyển nhượng, tái chứng nhận và các sự kiện vòng đời của tài sản được chứng nhận."
+        },
+        {
+          "title": "Lưu trữ Dữ liệu",
+          "description": "Hỗ trợ lưu trữ phi tập trung, an toàn cho siêu dữ liệu và nguồn gốc tài sản."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY",
+      "titleLineTwo": "Địa chỉ Hợp đồng",
+      "description": "Token OGY được triển khai trên blockchain Internet Computer và hoạt động như một token tiện ích gốc trong Giao thức ORIGYN.",
+      "bulletOne": "Hợp đồng này quản lý việc phát hành, chuyển nhượng và tương tác OGY trên toàn giao thức, đảm bảo tính minh bạch và xác minh trên chuỗi của mọi hoạt động token.",
+      "bulletTwo": "Quý vị có thể xem và tương tác với token OGY trực tiếp thông qua mạng ICP.",
+      "warning": "Luôn xác minh địa chỉ hợp đồng trước khi tương tác với OGY.",
+      "contractLabel": "Địa chỉ Hợp đồng Chính thức:",
+      "copyAria": "Sao chép địa chỉ hợp đồng",
+      "copied": "Đã sao chép vào bộ nhớ tạm",
+      "cmcAria": "Xem OGY trên CoinMarketCap"
+    },
+    "governance": {
+      "title": "Quản trị",
+      "lead": "OGY là token quản trị trao quyền cho người nắm giữ để:",
+      "items": [
+        "<b>Phân bổ</b> quỹ kho bạc cho tăng trưởng hệ sinh thái và các sáng kiến chiến lược.",
+        "<b>Đề xuất và bỏ phiếu</b> về các nâng cấp giao thức, quy tắc chứng nhận và thay đổi hệ sinh thái.",
+        "<b>Giám sát</b> việc tiếp nhận các đối tác tích hợp và người chứng nhận."
+      ],
+      "closing": "Quản trị được <b>phi tập trung hoàn toàn</b> thông qua ORIGYN DAO, trao cho cộng đồng ảnh hưởng trực tiếp đến <b>sự phát triển của giao thức.</b>",
+      "cta": "XEM THÊM"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "và",
+      "titleLineTwoEmphasis": "Phần thưởng",
+      "lead": "Staking OGY bảo mật mạng lưới đồng thời điều chỉnh các động cơ khuyến khích:",
+      "cards": [
+        {
+          "title": "Bảo mật Mạng lưới",
+          "description": "Người tham gia staking tham gia quản trị và giúp xác nhận các hoạt động giao thức."
+        },
+        {
+          "title": "Phần thưởng",
+          "description": "Nhận được một phần doanh thu giao thức từ phí chứng nhận và hoạt động mạng lưới."
+        },
+        {
+          "title": "Cam kết Dài hạn",
+          "description": "Staking khuyến khích sự tham gia dài hạn và củng cố hệ sinh thái."
+        }
+      ],
+      "closing": "Mô hình staking gắn tiện ích token trực tiếp với sự chấp nhận và thành công của giao thức.",
+      "cta": "STAKE NGAY"
+    },
+    "questions": {
+      "titleLineOnePrefix": "Cơ chế <b>Giảm phát</b>",
+      "titleLineTwo": "và <b>Tích lũy Giá trị</b>",
+      "lead": "OGY tích hợp mô hình giảm phát được thiết kế cho tăng trưởng bền vững:",
+      "items": [
+        {
+          "title": "Điều gì khiến OGY là một token giảm phát?",
+          "answer": "OGY được thiết kế với mô hình giảm phát, có nghĩa là tổng cung của nó giảm dần theo thời gian khi giao thức được sử dụng."
+        },
+        {
+          "title": "Cơ chế đốt token hoạt động như thế nào?",
+          "answer": "Mỗi lần OGY được sử dụng cho chứng nhận, một phần token sẽ bị đốt vĩnh viễn. Điều này làm giảm nguồn cung lưu hành."
+        },
+        {
+          "title": "Vai trò của kho bạc là gì?",
+          "answer": "Doanh thu giao thức được quản lý bởi kho bạc để hỗ trợ phát triển liên tục, tưởng thưởng người tham gia và giúp duy trì sự ổn định dài hạn của hệ sinh thái."
+        },
+        {
+          "title": "OGY tạo ra giá trị theo thời gian như thế nào?",
+          "answer": "Khi ngày càng nhiều người dùng áp dụng giao thức ORIGYN và hoạt động chứng nhận tăng lên, nhiều OGY hơn sẽ bị đốt. Nguồn cung giảm này, kết hợp với việc sử dụng ngày càng tăng, hỗ trợ tạo ra giá trị dài hạn."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomics",
+      "titleEmphasis": "Tổng quan",
+      "totalSupplyLabel": "Tổng cung:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Phân phối:</b> Được phân bổ cho tăng trưởng hệ sinh thái, phần thưởng staking, cộng đồng và quản trị.",
+      "revenue": "<b>Mô hình Doanh thu:</b> Phí giao thức trả bằng OGY tạo ra nhu cầu liên tục trong khi giảm nguồn cung thông qua cơ chế đốt token.",
+      "support": "Mô hình được thiết kế để hỗ trợ tính bền vững lâu dài của giao thức và sự liên kết với người nắm giữ token.",
+      "cta": "TOKENOMICS"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Máy tính chi phí",
+      "description": "Sử dụng máy tính ORIGYN để ước tính chi phí chứng chỉ độc nhất của Quý vị với toàn bộ dữ liệu trên chuỗi"
+    },
+    "plan": {
+      "title": "Lên kế hoạch đúc chứng chỉ",
+      "description": "Cho chúng tôi biết số lượng mục và nội dung Quý vị đang tải lên.",
+      "itemsLabel": "Bao nhiêu mục?",
+      "uploadingLabel": "Quý vị đang tải lên gì?",
+      "knowExactSize": "Quý vị biết kích thước chính xác?",
+      "totalUploadSize": "Tổng dung lượng tải lên",
+      "usePreset": "Sử dụng giá trị đặt sẵn",
+      "combinedSize": "Tổng dung lượng của tất cả tệp trong mọi mục.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB mỗi tệp"
+        },
+        "iphone": {
+          "label": "Ảnh",
+          "hint": "3 MB mỗi tệp"
+        },
+        "dslr": {
+          "label": "Ảnh studio",
+          "hint": "20 MB mỗi tệp"
+        },
+        "video": {
+          "label": "Video ngắn",
+          "hint": "1 GB mỗi tệp"
+        },
+        "video1hr": {
+          "label": "Video dài",
+          "hint": "60 GB mỗi tệp"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Ước tính theo thời gian thực",
+      "titleRefreshing": "Đang cập nhật ước tính",
+      "description": "Tự động cập nhật khi Quý vị thay đổi thiết lập.",
+      "ogyEquivalent": "Tương đương OGY",
+      "ogySpotRate": "Tỷ giá giao ngay OGY",
+      "itemSingular": "Mục",
+      "itemPlural": "Mục",
+      "upload": "Tải lên"
+    },
+    "breakdown": {
+      "title": "Chi tiết chi phí",
+      "baseFee": "Phí đúc cơ bản",
+      "storageFee": "Phí lưu trữ",
+      "items": "Mục",
+      "uploadSize": "Dung lượng tải lên"
+    },
+    "bytesUnit": "byte"
   }
 }

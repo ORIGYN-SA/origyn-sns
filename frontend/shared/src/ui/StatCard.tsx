@@ -49,7 +49,7 @@ const StatCard: FC<StatCardProps> = ({
       <div data-skel-static className="flex items-center justify-between">
         <div className="flex items-center text-[16px] font-medium leading-none">
           {accessory}
-          <span className={clsx(accessory && "ml-2", "text-muted")}>
+          <span className={clsx(accessory && "ms-2", "text-muted")}>
             {title}
           </span>
         </div>
@@ -59,7 +59,7 @@ const StatCard: FC<StatCardProps> = ({
         <Stat
           value={value}
           unit={unit}
-          unitClassName="ml-1 font-light text-[16px] leading-6"
+          unitClassName="ms-1 font-light text-[16px] leading-6"
           loading={loading}
         />
       </div>

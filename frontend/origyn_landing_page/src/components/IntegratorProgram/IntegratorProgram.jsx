@@ -1,26 +1,37 @@
+import React from "react";
 import styles from "./IntegratorProgram.module.scss";
 import Button from "@components/Button/Button";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
 
 const IntegratorProgram = ({ id }) => {
+  const t = useT();
+  const { locale } = useLocale();
+  const paragraphs = t("home.integrator.description").split("\n\n");
   return (
     <section className={styles.container} id={id}>
       <div className={styles.leftPanel}>
         <div className={styles.leftPanelContent}>
           <h2 className={styles.title}>
-            Integrator <br /> <span className={styles.program}>Program</span>
+            {t("home.integrator.titleLineOne")} <br />{" "}
+            <span className={styles.program}>{t("home.integrator.titleLineTwo")}</span>
           </h2>
           <p className={styles.description}>
-            The ORIGYN Integrator Program is designed for businesses, platforms,
-            and developers looking to integrate ORIGYN's decentralized
-            certification infrastructure directly into their services.
-            <br />
-            <br /> Whether you're a marketplace, supply chain solution, or
-            luxury brand, you can offer secure, on-chain asset verification
-            without rebuilding the wheel.
+            {paragraphs.map((para, i) => (
+              <React.Fragment key={i}>
+                {para}
+                {i < paragraphs.length - 1 && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
+              </React.Fragment>
+            ))}
           </p>
           <Button
-            url="/integrator"
-            text="Join the Integrator Program"
+            url={localePath(locale, "integrator")}
+            text={t("home.integrator.cta")}
             className={styles.gradientButton}
           />
         </div>
@@ -29,7 +40,7 @@ const IntegratorProgram = ({ id }) => {
       <div className={styles.rightPanelWrapper}>
         <img
           src="/integrator-program.jpg"
-          alt="Integrator Program"
+          alt={t("home.integrator.titleLineOne")}
           className={styles.rightPanelImage}
         />
       </div>

@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Väite",
-        "body": "“AI-pohjainen lohkoketjun sisäinen agentti.” Päättely tapahtuu AWS:ssä. Ketju tallentaa vain lopputuloksen."
+        "body": "\"AI-pohjainen lohkoketjun sisäinen agentti.\" Päättely tapahtuu AWS:ssä. Ketju tallentaa vain lopputuloksen."
       },
       {
         "title": "Kuilu",
@@ -135,8 +135,18 @@
         "gain": "Hyöty"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Viisi pilaria,\njoita AI ei voi <i>korvata.</i>",
     "lead": "AI muuttaa tuotannon hyödykkeeksi. Nämä viisi aluetta jäävät jäljelle. Origyn on asemoitu jokaiseen niistä.",
     "pillars": [
-      { "title": "Luottamus", "description": "Origyn-sertifiointi — todennettava luottamussignaali." },
-      { "title": "Konteksti", "description": "Vuosikymmenten jäsennelty muisti — henkilökohtainen signaali, jota AI ei voi vastata." },
-      { "title": "Jakelu", "description": "Swiss Subnet — todennettavaa infrastruktuuria agenteille." },
-      { "title": "Maku", "description": "Automaattinen tutkimusputki — automaatiotuettu kuratointi." },
-      { "title": "Vastuu", "description": "Tarkastusketju ja sertifikaatti — todellinen hallintakerros." }
+      {
+        "title": "Luottamus",
+        "description": "Origyn-sertifiointi — todennettava luottamussignaali."
+      },
+      {
+        "title": "Konteksti",
+        "description": "Vuosikymmenten jäsennelty muisti — henkilökohtainen signaali, jota AI ei voi vastata."
+      },
+      {
+        "title": "Jakelu",
+        "description": "Swiss Subnet — todennettavaa infrastruktuuria agenteille."
+      },
+      {
+        "title": "Maku",
+        "description": "Automaattinen tutkimusputki — automaatiotuettu kuratointi."
+      },
+      {
+        "title": "Vastuu",
+        "description": "Tarkastusketju ja sertifikaatti — todellinen hallintakerros."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Kieli",
-    "switchTo": "Vaihda kieleksi {language}"
+    "switchTo": "Vaihda kieleksi {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "SERTIFIKAATIT",
+    "integrators": "INTEGRAATTORIT",
+    "useCases": "KÄYTTÖTAPAUKSET",
+    "governance": "HALLINTO",
+    "help": "OHJE",
+    "toggleMenu": "Vaihda valikon tila"
+  },
+  "footer": {
+    "certificates": "SERTIFIKAATIT",
+    "integrators": "INTEGRAATTORIT",
+    "ecosystem": "EKOSYSTEEMI",
+    "useCases": "KÄYTTÖTAPAUKSET",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASHBOARD",
+    "copyright": "©2026 Kaikki oikeudet pidätetään – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Suojaa omaisuutesi, immateriaalioikeutesi\nja identiteettisi täysin lohkoketjussa.",
+      "subtitleMobile": "Suojaa omaisuutesi,\nimmateriaalioikeutesi\nja identiteettisi täysin lohkoketjussa.",
+      "logoAlt": "ORIGYN-logo",
+      "certifyCta": "Sertifioi omaisuutesi",
+      "buyCta": "Osta $OGY",
+      "marquee": "ORIGYN mahdollistaa tietojesi ja omaisuutesi turvallisen tallentamisen täysin lohkoketjussa"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY:n markkina-arvo",
+        "tooltip": "Kaikkien liikkeessä olevien OGY-tokenien kokonaismarkkina-arvo reaaliaikaiseen tokenihintaan perustuen."
+      },
+      "tvl": {
+        "title": "Sertifioitujen omaisuuserien kokonaisarvo lukittuna (TVL) USD:ssa",
+        "tooltipTitle": "Kokonaisarvo lukittuna (TVL)",
+        "tooltip": "TVL vastaa liikkeeseen laskettujen sertifikaattien arvoa; tämä ei tarkoita, että ORIGYN pitää näitä omaisuuseriä hallussaan."
+      },
+      "users": {
+        "title": "Käyttäjät",
+        "tooltip": "Niiden henkilöiden, brändien ja instituutioiden kokonaismäärä, jotka käyttävät aktiivisesti ORIGYNia sertifioitujen omaisuuserien liikkeeseen laskemiseen, hallinnointiin tai omistamiseen."
+      },
+      "assets": {
+        "title": "Sertifioitujen omaisuuserien kokonaismäärä",
+        "tooltip": "Niiden fyysisten tai digitaalisten kohteiden lukumäärä, jotka ovat saaneet virallisen ORIGYN-sertifikaatin."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Miksi",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN – missä reaalimaailman omaisuuserät kohtaavat lohkoketjun.",
+      "body": "ORIGYN on maailman edistynein RWA-protokolla, joka on suunniteltu tuomaan reaalimaailman omaisuuserät täysin lohkoketjuun – hienotaiteesta ja kullasta luksustavaroihin ja immateriaalioikeuteen.\n\nSe tarjoaa luottamuksettoman sertifiointiinfrastruktuurin, joka varmistaa arvokkaiden omaisuuserien aitouden, alkuperän ja omistajuuden."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100 % lohkoketjussa tapahtuva sertifiointi",
+          "description": "Ei välikäsiä, ei väärentämistä. Täysin hajautettu."
+        },
+        {
+          "title": "$OGY-tokenin hyödyllisyys",
+          "description": "ORIGYN-ekosysteemin käyttövoimana hallinnon ja protokollan hyödyllisyyden kautta."
+        },
+        {
+          "title": "Monipuolinen omaisuustuki",
+          "description": "Sertifioi taidetta, luksustavaroita, kultaa, kiinteistöjä ja paljon muuta."
+        },
+        {
+          "title": "Alan johtava tietoturva",
+          "description": "Muuttumaton lohkoketjusuoja arvokkaimille omaisuuserillesi."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Näin se",
+      "titleSuffix": "toimii",
+      "steps": [
+        {
+          "description": "Reaalimaailman omaisuuserien siirtämisen lohkoketjuun tulisi olla yksinkertaista. ORIGYNin sertifiointiprosessi on suunniteltu turvalliseksi, hajautetuksi ja helppokäyttöiseksi kolmessa vaiheessa: <br /><br />Lähetä omaisuuserasi metatiedot ja tukeva dokumentaatio. ORIGYN luo ainutlaatuisen, väärentämisenkestävän digitaalisen sertifikaatin suoraan lohkoketjuun, liittää sen omaisuuserään ja yhdistää sen oikeutettuun omistajaan.",
+          "panelTitle": "Luo digitaalinen sertifikaattisi",
+          "panelDescription": "Lataa omaisuuden tiedot ja luo lohkoketjusertifikaatti."
+        },
+        {
+          "description": "Jokainen sertifikaatti on kryptografisesti todennettavissa. Omaisuuserän aitous, alkuperä ja omistajuus vahvistetaan ORIGYNin hajautetun protokollan avulla.",
+          "panelTitle": "Vahvista ja todenna",
+          "panelDescription": "Varmista omaisuuden aitous ja omistajuuden läpinäkyvyys."
+        },
+        {
+          "description": "Sertifioinnin jälkeen omaisuuserääsi voidaan pitää hallussaan, siirtää, vaihtaa tai käyttää digitaalisissa ekosysteemeissä – DeFi-sovelluksista ja NFT-markkinapaikoista yksityisiin transaktioihin ja institutionaalisiin rekistereihin.",
+          "panelTitle": "Siirrä ja jäljitä",
+          "panelDescription": "Hyödynnä ja jäljitä sertifioitua omaisuuserääsi DeFissä, jälleenmyynnissä tai sijoitustoiminnassa."
+        }
+      ],
+      "goToStep": "Siirry vaiheeseen {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Käyttö",
+      "titleSuffix": "tapaukset",
+      "description": "ORIGYNin protokolla on rakennettu palvelemaan laajaa kirjoa toimialoja, joilla luottamus, alkuperä ja aitous ovat ratkaisevia. Alla on esitelty keskeisiä sektoreita, jotka jo hyödyntävät ORIGYNin sertifiointiinfrastruktuuria.",
+      "items": [
+        {
+          "title": "Taide",
+          "description": "Todenna ja suojaa fyysisten ja digitaalisten teosten alkuperä lohkoketjussa."
+        },
+        {
+          "title": "Kulta",
+          "description": "Sertifioi kulta muuttumattomilla, jäljitettävillä ja väärentämisenkestävillä digitaalisilla sertifikaateilla."
+        },
+        {
+          "title": "Timantit",
+          "description": "Jäljitä jokaisen timantin alkuperä, luokitus ja omistajuus lohkoketjun tarkkuudella."
+        },
+        {
+          "title": "Valmistusmaa",
+          "description": "Todista minkä tahansa tuotteen alkuperä, aitous ja käsityötaito – kelloista muotiin."
+        }
+      ],
+      "indicatorAria": "Siirry käyttötapaukseen {n}",
+      "discover": "Tutustu lisää"
+    },
+    "certify": {
+      "titleLine": "Sertifioi",
+      "titleEmphasis": "omaisuutesi",
+      "subtitle": "Käytä ORIGYNin sertifiointilaskuria arvioidaksesi välittömästi omaisuutesi suojaamisen kustannukset täysin lohkoketjussa olevilla digitaalisilla sertifikaateilla. Olitpa sertifioimassa hienoa taidetta, luksustavaroita, kultaa tai muita arvokkaita omaisuuseriä, tämä työkalu antaa selkeän kuvan infrastruktuurin ja teknologian kustannuksista ilman arvailua.",
+      "contactPrompt": "Ota yhteyttä omaisuutesi sertifioimiseksi:",
+      "contactCta": "Ota yhteyttä ORIGYNiin"
+    },
+    "integrator": {
+      "titleLineOne": "Integraattori-",
+      "titleLineTwo": "ohjelma",
+      "description": "ORIGYN-integraattoriohjelma on suunnattu yrityksille, alustoille ja kehittäjille, jotka haluavat integroida ORIGYNin hajautetun sertifiointiinfrastruktuurin suoraan palveluihinsa.\n\nOlipa kyseessä markkinapaikka, toimitusketjuratkaisu tai luksusbrändijuuri – voit tarjota turvallisen, lohkoketjupohjaisen omaisuuden vahvistamisen ilman, että sinun tarvitsee rakentaa kaikkea alusta alkaen.",
+      "cta": "Liity integraattoriohjelmaan"
+    },
+    "roadmap": {
+      "title": "Tiekartta",
+      "description": "Uusista hyödyllisyyksistä ja hallintoominaisuuksista laajempaan toimiala- ja kehittäjätukeen. Jokainen välietappi heijastaa tehtäväämme tuoda reaalimaailman omaisuuserät täysin lohkoketjuun skaalautuvan, todennettavan ja hajautetun infrastruktuurin avulla.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation rahoitettu",
+          "description": "ORIGYN Foundation perustettiin Neuchâtelissa, Sveitsissä, aloittamaan ORIGYN Protocolin kehitys."
+        },
+        {
+          "title": "OGY Tokenin lanseeraus",
+          "description": "Natiivi utility-token $OGY luodaan protokollamaksuja, governancea ja stakingia varten."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "ORIGYNin NFT-standardin ensimmäinen versio lanseerataan mahdollistamaan on-chain sertifiointi."
+        },
+        {
+          "title": "Tokenomics 2.0 -päivitys",
+          "description": "200 miljoonaa $OGY tokens, jotka oli aiemmin allokoitu Foundationille, poltetaan deflatorisen paineen käynnistämiseksi."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Ensimmäinen on-chain mintingkäyttöliittymä digitaalisille sertifikaateille lanseerataan."
+        },
+        {
+          "title": "Strategiset kumppanuudet",
+          "description": "Strategiset yhteistyöt FederItalyn ja METALORin kanssa italialaisten tuotteiden ja tokenisoidun kullan sertifioimiseksi."
+        },
+        {
+          "title": "Ensimmäinen kullan osto",
+          "description": "3 kg fyysistä kultaa ostetaan ja tokenisoidaan ORIGYN Protocolilla."
+        },
+        {
+          "title": "CanDB:n hankinta",
+          "description": "ORIGYN hankkii CanDB:n, hajautetun ja skaalautuvan tietokantaratkaisun, joka on optimoitu NFT-metadatalle."
+        },
+        {
+          "title": "Tokenomics 3.0 ja Dashboardin lanseeraus",
+          "description": "Tokenomics 3.0:n myötä otetaan käyttöön deflatorinen malli ja ORIGYN Dashboardin ensimmäinen versio julkaistaan."
+        },
+        {
+          "title": "10 000 protokollakäyttäjää",
+          "description": "ORIGYN ylittää 10 000 yksilöllistä protokollakäyttäjää."
+        },
+        {
+          "title": "Gold DAO:n lanseeraus",
+          "description": "Gold DAOsta tulee ensimmäinen ORIGYNin päälle rakennettu DAO, joka tokenisoi ja sertifioi fyysistä kultaa on-chain."
+        },
+        {
+          "title": "500M OGY -lahjoitus Gold DAOlle",
+          "description": "Puoli miljardia $OGY tokens lahjoitetaan tukemaan Gold DAOn pitkäaikaista treasuryä."
+        },
+        {
+          "title": "ORIGYN DAO integroitu ICP SNS:ään",
+          "description": "ORIGYN DAOsta tulee täysin hajautettu ja sitä hallitaan Internet Computerin SNS-kehyksen kautta."
+        },
+        {
+          "title": "Dashboard V2 -julkaisu",
+          "description": "Dashboardin uusi versio sisältää live-metriikat, stakingtilastot ja governance-työkalut."
+        },
+        {
+          "title": "30 000 käyttäjän virstanpylväs",
+          "description": "ORIGYN kasvaa yli 30 000 käyttäjään, mikä on 300% kasvu kuudessa kuukaudessa."
+        },
+        {
+          "title": "Yhteistyö Leo Caillardin ja Gil Sertissagen kanssa",
+          "description": "ORIGYN sertifioi fyysisiä taideteoksia ja timantteja korkean profiilin kumppanuuksissa."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "NFT-standardi päivitetään mahdollistamaan sertifikaattien turvallinen siirrettävyys."
+        },
+        {
+          "title": "Integrator Framework lanseerattu",
+          "description": "Säännöt ja onboardingrakenne luodaan ohjaamaan uusia kumppaneita ORIGYN-integraatiossa."
+        },
+        {
+          "title": "Cecil DAO:n lanseeraus",
+          "description": "ORIGYN tukee Cecil DAOn lanseerausta rahoittaakseen luonnonsuojelu- ja humanitaarisia projekteja blockchainläpinäkyvyyden avulla."
+        },
+        {
+          "title": "ClaimLinkin hankinta",
+          "description": "ORIGYN hankkii ClaimLinkin, ICP:lle rakennetun hajautetun NFT- ja tokendistribuutioalustan."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Uusi standardi otetaan käyttöön sertifikaattien yhteentoimivuuden ja koko ekosysteemin hyödyn lisäämiseksi."
+        },
+        {
+          "title": "Julkisen",
+          "titleSpan": "Minting Studion lanseeraus",
+          "description": "Itsepalvelutyökalu lanseerataan, jotta kuka tahansa voi mintata on-chain RWA-sertifikaatteja ORIGYN-infrastruktuurissa."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Runestone-mysteeri paljastetaan Q2 2026 Genevessä."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Itsepalvelutyökalu lanseerataan, jotta kuka tahansa voi mintata on-chain ORIGYN-infrastruktuuria käyttäen."
+        },
+        {
+          "title": "IP-suojauksen toteutus",
+          "description": "Tuki immateriaalioikeuksien on-chain sertifioinnille integroidaan protokollaan."
+        },
+        {
+          "title": "Cross-chain toteutus",
+          "description": "Cross-chain yhteensopivuus laajentaa ORIGYNin ulottuvuuden muihin suuriin ekosysteemeihin."
+        },
+        {
+          "title": "Globaali wallets- ja marketplaces-integraatio",
+          "description": "ORIGYN NFTs tulevat saataville johtavien wallets- ja NFT marketplaces -palveluiden kautta maailmanlaajuisesti."
+        },
+        {
+          "title": "Universaaliksi sertifiointistandardiksi tuleminen",
+          "description": "ORIGYN pyrkii vakiinnuttamaan asemansa digitaalisen sertifioinnin globaalina vertailukohtana kaikissa omaisuusluokissa."
+        }
+      ]
+    },
+    "partners": {
+      "label": "KUMPPANIT",
+      "testimonials": [
+        {
+          "title": "Metalorin CEO",
+          "description": "\"ORIGYN on maailman edistynein ja kattavin digitaalisen sertifioinnin teknologia. Kaikki data tallennetaan kokonaan blockchainiin, jotta sertifikaatit ovat muuttumattomia ja läpinäkyviä. Metalor tekee mielellään yhteistyötä Neuchâtelissa toimivan fintech-yhtiön, kuten ORIGYNin, kanssa tuodakseen innovatiivisen ratkaisun markkinoille.\""
+        },
+        {
+          "title": "Taideasiantuntija",
+          "description": "\"Yksityisille keräilijöilleni luottamus ja perintö ovat kaikki kaikessa. ORIGYNin sertifiointiteknologiasta on tullut välttämätön: se ei ainoastaan takaa jokaisen taideteoksen aitoutta, vaan varmistaa myös sen jäljitettävyyden ja arvon sukupolvien yli. Kyse ei ole enää vain taideteoksen omistamisesta, vaan sen tarinan turvaamisesta on-chain, ikuisesti. ORIGYN tekee sen mahdolliseksi.\""
+        },
+        {
+          "title": "Cyberin toinen perustaja",
+          "description": "\"Sanomme aina, että timantit kestävät ikuisesti, ja se on totta. Siksi samaa on ajateltava myös annettavasta tiedosta, sillä 100 tai 200 vuoden päästä nämä timantit ovat edelleen olemassa. Tarvitsimme teknologiaa, joka varmistaa, että voimme edelleen tarjota nämä tiedot, erityisesti tuotteelle, jolla on paljon arvoa ja joka siirtyy sukupolvelta toiselle... Tärkein syy kumppanuuteemme ORIGYNin kanssa oli se, että he pystyivät tarjoamaan kaiken tämän.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Ole osa",
+      "emphasisDesktop": "päätöksentekoa",
+      "emphasisMobileLineOne": "Päätöksen-",
+      "emphasisMobileLineTwo": "tekoa",
+      "cta": "Liity ORIGYN DAO:hon"
+    }
+  },
+  "useCase": {
+    "notFound": "Käyttötapausta ei löydy",
+    "cases": {
+      "gold": [
+        {
+          "title": "Kulta",
+          "description": "Maailman suurimpana omaisuuseränä ja tiukimmin valvottuna hyödykkeenä kulta vaatii korkeimman tason turvallisuutta. <br /><br />ORIGYN täyttää nämä vaatimukset, kuten osoittaa <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, maailman johtava kultanjalostaja, joka valitsi ORIGYN-protokollan tietojensa suojaamiseen. Ensimmäistä kertaa kaikki kultaharkoihin liittyvä tekninen tieto – mukaan lukien teräväpiirtokuvat ja asiakirjat – tallennetaan yhteen sertifikaattiin lohkoketjussa."
+        },
+        {
+          "description": "Lisäksi useat hankkeet, kuten <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> ja <a href='https://bity.com' target='_blank'>Bity</a>, käyttävät näitä sertifikaatteja vastaavien kultaharkkoja myyntiin tai fyysisellä kullalla tuettujen tokenien luomiseen."
+        }
+      ],
+      "art": [
+        {
+          "title": "Taide",
+          "description": "Taidealan asiantuntijat ovat syvästi huolissaan luottamuksesta ja taideteosten sertifikaattien takaamisesta. Tästä syystä useat toimijat ovat jo ottaneet ORIGYN-teknologian käyttöön.<br /><br />Tunnetut taiteilijat kuten <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> ja <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> ovat luoneet omat ORIGYN-sertifikaattinsa suojatakseen teoksiinsa liittyvät tiedot. Nämä sertifikaatit ovat täysin lohkoketjussa, väärentämisenkestäviä ja kopioimattomia, minkä ansiosta taiteilijat voivat torjua väärennöksiä samalla kun he parantavat keräilijäkokemusta teräväpiirtokuvien, videoiden ja asiakirjojen avulla."
+        },
+        {
+          "description": "Säätiöt, organisaatiot, perheet, galleriat ja taideneuvonantajat, jotka tarvitsevat digitaalisia sertifikaatteja asiakkailleen, ovat alkaneet käyttää ORIGYNia maksimaalisen turvallisuuden ja luottamuksellisuuden varmistamiseksi. Useat galleriat ovat jo ottaneet ORIGYN-teknologian käyttöön, mukaan lukien Retelet Gallery René Magritte -teosten sertifikaatteja varten.<br /><br />ORIGYN-teknologia mahdollistaa myös myynnin sertifikaattien kautta, erityisesti yhteisomistusmyynnin. Tämä mahdollistaa teosten jakamisen useiden omistajien kesken jakamalla sertifikaatti useaan osaan, joista jokainen toimii omistustodistuksena."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Valmistusmaa",
+          "description": "Kansallinen alkuperä on enemmän kuin etiketti. Se on identiteetin, laadun ja kulttuurisen arvon julistus. Väärennysten lisääntyessä todistaminen siitä, missä ja miten tuote on valmistettu, on tullut keskeiseksi kilpailutekijäksi brändeille eri toimialoilla.<br /><br />Vastauksena tähän <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> loi 100 % Made in Italy -sertifioinnin. Tämä laillisesti tunnustettu standardi suojaa italialaista osaamista tiukan dokumentoinnin, riippumattomien tarkastusten ja valtiotason edunvalvonnan avulla. ORIGYN tarjoaa tämän järjestelmän digitaalisen perustan tallentamalla jokaisen sertifioidun tuotteen lohkoketjuun todennettavana alkuperätodisteena."
+        },
+        {
+          "description": "Kustakin sertifikaatista tulee turvallinen, väärentämisenkestävä digitaalinen passi. Se vahvistaa kuluttajien luottamusta, varmistaa läpinäkyvyyden toimitusketjussa ja tukee yrityksiä, jotka valitsevat aitouden johtavaksi periaatteekseen."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luksus",
+          "description": "ORIGYN-teknologia vastaa luksussektorin tarpeeseen uudistua ja tarjota henkilökohtaisempia ja läpinäkyvämpiä tuotekokemuksia.<br /><br />Jalokivikko <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> käyttää ORIGYN-lohkoketjuteknologiaa koko kokoelmansa sertifikaattien luomiseen. Tämä suojaa kaiken datan täysin lohkoketjussa tarjoten arvostetuille asiakkailleen seuraavan sukupolven sertifikaatteja, jotka takaavat luottamuksellisuuden, aitouden ja omistajuuden."
+        },
+        {
+          "description": "Muut luksusyritykset, kuten <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a>, käyttävät myös ORIGYNia timanttien täydellisen jäljitettävyysketjun tallentamiseen tunnettujen kelloseppämestareiden tilauksiin. Monia muita sovelluksia on mahdollista toteuttaa, kuten henkilökohtaisen markkinointisisällön lisääminen sertifikaatteihin tai teknologian yhdistäminen AI:hin aitouden määrittämiseksi reaaliajassa jälkimarkkinoilla."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Ohje-",
+    "titleSuffix": "keskus",
+    "searchPlaceholder": "Hae..",
+    "faqs": [
+      {
+        "title": "OGY-token",
+        "description": "Web 3.0:n hajautetun omaisuussertifioinnin käyttövoima",
+        "answer": "<strong>OGY-token</strong> on ORIGYN-protokollan keskeinen hyödyke. Se yhdistää reaalimaailman omaisuuserien sertifioinnin hajautettuun lohkoketjuinfrastruktuuriin tehden omistajuuden, todennuksen ja sisältövarmenteen aidosti turvalliseksi.<br><br>OGY mahdollistaa globaalin järjestelmän, jossa fyysiset omaisuuserät sertifioidaan digitaalisesti, jäljitetään ja integroidaan hajautettuihin sovelluksiin ja markkinoihin."
+      },
+      {
+        "title": "Protokollan hyödyllisyys",
+        "description": "OGY tarvitaan välttämättömien toimintojen suorittamiseen koko ORIGYN-ekosysteemissä.",
+        "answer": "<strong>Sertifiointi:</strong> Jokainen ORIGYNissa sertifioitu omaisuuserä vaatii OGY:tä muuttumattoman lohkoketjusertifikaatin luomiseen.<br><strong>Transaktiokerros:</strong> Mahdollistaa sertifioitujen omaisuuserien siirrot, uudelleensertifioinnit ja elinkaartapahtumat.<br><strong>Datavarastointi:</strong> Tukee omaisuuden metatietojen ja alkuperän turvallista, hajautettua tallentamista.<br>Tämä hyödyllisyys varmistaa, että OGY on olennainen osa jokaista protokollan sisäistä transaktiota."
+      },
+      {
+        "title": "OGY-tokenin sopimusosoite",
+        "description": "OGY-token on otettu käyttöön Internet Computer -lohkoketjussa.",
+        "answer": "OGY-token on otettu käyttöön Internet Computer -lohkoketjussa ja toimii natiivin hyödyketokenina ORIGYN-protokollan sisällä.<br><br>Virallinen sopimusosoite:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Käyttäjät kirjaavat omaisuuserityyppejä kutsun sisällä<br>Tarkista sopimusosoite aina ennen OGY:n käyttöä.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Hallinto",
+        "description": "OGY on hallintotokeni, joka valtuuttaa haltijansa:",
+        "answer": "• Ehdottamaan ja äänestämään protokollapäivityksistä, likviditeettisäännöistä ja ekosysteemimuutoksista.<br>• Valvomaan integraattoreiden ja sertifioijien käyttöönottoa.<br>• Kohdentamaan kassavarat innovaatioihin, kasvuun ja strategisiin aloitteisiin.<br><br>Hallinto on täysin hajautettu ORIGYN DAO:n kautta, mikä antaa yhteisölle suoran vaikutusmahdollisuuden protokollan kehitykseen."
+      },
+      {
+        "title": "Panostaminen ja palkkiot",
+        "description": "OGY:n panostaminen turvaa verkon samalla kun se yhdenmukaistaa kannustimia.",
+        "answer": "<strong>Verkon turvallisuus:</strong> Panostajat osallistuvat hallintoon ja auttavat validoimaan protokollaoperaatioita.<br><br><strong>Palkkiot:</strong> Ansaitse osuus protokollan tuloista sertifiointimaksuista ja verkkotoiminnasta.<br><br><strong>Pitkäaikainen sitoutuminen:</strong> Panostaminen kannustaa pitkäaikaiseen osallistumiseen ja vahvistaa ekosysteemiä.<br><br>Panostusmalli sitoo tokenin hyödyllisyyden suoraan protokollan käyttöönottoon ja menestykseen.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflaatiorakenteet / arvon kertyminen",
+        "description": "OGY sisältää kestävään kasvuun suunnitellun deflaatiomallin.",
+        "answer": "<strong>Sertifioinnin poltto:</strong> Osa sertifioinnissa käytetystä OGY:stä poistetaan pysyvästi kierrosta.<br><br><strong>Kassanhallinta:</strong> Protokollan tulot tukevat kehitystä, palkkioita ja tokenin arvon optimointia.<br><br>Kun protokollan käyttö kasvaa, OGY:n tarjonta vähenee, mikä vahvistaa arvonluontia käyttöönoton myötä."
+      },
+      {
+        "title": "Tokenomiikan yleiskatsaus",
+        "description": "Kokonaistarjonta: 10.4 Billion OGY",
+        "answer": "<strong>Jakautuminen:</strong> Kohdistettu ekosysteemin kasvuun, panostuspalkkioihin, yhteisöön ja hallintoon.<br><br><strong>Tulomalli:</strong> OGY:ssä maksetut protokollamaksut luovat jatkuvaa kysyntää samalla kun ne vähentävät tarjontaa polttomekanismien kautta.<br>Malli on suunniteltu tukemaan protokollan pitkäaikaista kestävyyttä ja tulevaisuuteen suuntautunutta yhdensuuntaisuutta."
+      },
+      {
+        "title": "OGY:n tulevaisuus",
+        "description": "OGY on hajautetun viitekehyksen perusta.",
+        "answer": "OGY on hajautetun viitekehyksen perusta, joka on suunniteltu sertifioimaan, hallinnoimaan ja vapauttamaan reaalimaailman omaisuuserien arvo lohkoketjussa. ORIGYN:n kasvaessa OGY:n rooli laajenee taloudellisena moottorina, joka ohjaa omaisuuden sertifiointia, hallintoa ja ekosysteemin kehitystä."
+      },
+      {
+        "title": "Tutki live-tokenia",
+        "description": "Tutki reaaliaikaista tokentietoa, panostamisvaihtoehtoja ja hallintoosallistumista ORIGYN Dashboardissa.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN Dashboard</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Siirry Dashboardiin</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Ryhdy",
+      "titleConnector": "",
+      "titleEmphasis": "integraattoriksi",
+      "subtitle": "LIITY INTEGRAATTORIOHJELMAAN RAKENTAMAAN LUOTTAMUKSEN TULEVAISUUTTA ORIGYNIN LOHKOKETJUSERTIFIOINTITEKNOLOGIALLA",
+      "cta": "Liity nyt"
+    },
+    "program": {
+      "titleLineOne": "Integraattori-",
+      "titleLineTwo": "ohjelma",
+      "steps": [
+        {
+          "labelBold": "MITÄ",
+          "labelRest": "ON INTEGRAATTORIOHJELMA ?",
+          "description": "Integraattoriohjelma on strateginen aloite, jonka tavoitteena on edistää ORIGYN-protokollaa, kannustaa sen käyttöönottoon ja laajentaa sen ekosysteemiä."
+        },
+        {
+          "labelBold": "KETKÄ",
+          "labelRest": "OVAT INTEGRAATTORIT ?",
+          "description": "<ul><li><strong>Integraattorit ovat itsenäisiä yrityksiä,</strong> jotka rakentavat ORIGYN-protokollaan perustuvia tuotteita yhteisellä tavoitteella luoda ORIGYN-sertifikaatteja ja edistää ORIGYN-protokollaa tietyllä toimialalla, omaisuusluokassa tai useilla sektoreilla.</li><li><strong>Toimien mahdollistajina</strong> ne auttavat yrityksiä ottamaan käyttöön ORIGYNin lohkoketjusertifiointiteknologian ilman syvällistä lohkoketju- ja Web3-osaamista.</li><li><strong>ORIGYN-säätiön suorittaman vetting-prosessin jälkeen</strong> integraattorit valitaan ja äänestetään ORIGYN DAO:n tokeninhaltijoiden toimesta.</li></ul>"
+        },
+        {
+          "labelBold": "MITEN",
+          "labelRest": "RYHDYT INTEGRAATTORIKSI ?",
+          "description": "Tullakseen integraattoriksi yrityksen on osoitettava, että se pystyy toimittamaan palveluja laajassa mittakaavassa täyttäen samalla kaikki yhden tai useamman sektorin palvelemiseen tarvittavat vaatimukset ja osaamisen."
+        }
+      ],
+      "goToStep": "Siirry vaiheeseen {n}",
+      "joinNow": "Liity nyt"
+    },
+    "workflow": {
+      "titleLineOne": "Hakemuksen",
+      "titleLineTwo": "työnkulku",
+      "steps": [
+        {
+          "title": "Hakemuslomake",
+          "content": "<p>Hakemuksen osana integraattoreiden on täytettävä <strong><a href=\"/integrator/join\">projektin hakemuslomake verkossa</a></strong> ja valmisteltava <strong>due diligence -dokumentaatio</strong> lähetettäväksi osoitteeseen <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Due diligence -dokumentaatio sisältää:</p>\n<ul>\n<li>Kopio rekisteröintitodistuksesta</li>\n<li>Kuvaus UBO:ista – tosiasiallisista edunsaajista</li>\n<li>Kopio yhtiöjärjestyksestä ja perustamisasiakirjasta</li>\n<li>Hallituksen päätöslauselma, jossa formalisoidaan halu hakea integraattoriksi ja sitoutua panostamissääntöihin sekä luettelo virallisista henkilöistä, joilla on valtuudet toimia integraattorin puolesta</li>\n<li>Valtuutettujen allekirjoittajien tunnistaminen tulee perustua valokuviin ja yhtiön asianmukaisesti todistamiin allekirjoituskortteihin</li>\n<li>Kopiot henkilöllisyystodistuksista ja osoitetodistuksista johtajilta, toimihenkilöiltä tai työntekijöiltä, joilla on valtakirja liiketoimien harjoittamiseen yrityksen puolesta</li>\n<li>Hallituksen jäsenten luettelo</li>\n<li>Integraattorin projektin hakemuslomake</li>\n</ul>"
+        },
+        {
+          "title": "ORIGYN-säätiön arviointi",
+          "content": "<p>Ensimmäinen askel integraattoriksi ryhtymisessä on ORIGYN-säätiön validointi due diligence -prosessin jälkeen. Integraattori hyväksyy kaikkien pyydettyjen asiakirjojen jakamisen kaikkien KYC/KYB/AML-vaatimusten täyttämiseksi.</p>"
+        },
+        {
+          "title": "Hallintoäänestys ORIGYN DAO:n kautta",
+          "content": "<p>JULKINEN ÄÄNESTYS ORIGYN DAO:N KAUTTA:</p>\n<p>Kun säätiö on saattanut vetting-prosessin päätökseen, integraattori asetetaan DAO-äänestykseen julkisen ehdotuksen kautta SNS-alustalla. Kaikki ORIGYN-ehdotukset ovat nähtävissä osoitteessa <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Jokainen muutos oikeushenkilön osoitteeseen, toiminimeen tai yhteistyön päättymiseen äänestetään julkisesti SNS-alustalla.</p>"
+        },
+        {
+          "title": "50,000,000 OGY:n panostaminen",
+          "content": "<p>Jos ehdotus hyväksytään, integraattorin on panostettava 50,000,000 OGY ORIGYN-hallintoon 1 vuodeksi ilman purkamismahdollisuutta.</p>\n<p>Tämä vaihe varmistaa integraattorin pitkäaikaisen sitoutumisen ja äänestysvallan osallistua aktiivisesti ORIGYN:n hallintoon. Kaikki panostetut neuronit näkyvät julkisesti Dashboardissa osoitteessa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Kaikki tilastot, kuten luotujen sertifikaattien määrä, sertifioitujen omaisuuserien TVL jne., näkyvät julkisesti integraattoriosiossa osoitteessa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Suoritusarviointi",
+          "content": "<p>Sektorista ja sitoutumisesta riippuen luotujen sertifikaattien vähimmäisvaatimukset voivat olla osa integraattorisopimusta. Siksi ORIGYN-säätiö suorittaa säännöllisesti välietappeja ja integraattoreiden suoritusarviointeja.</p>\n<p>Kaikki tilastot, kuten luotujen sertifikaattien määrä, sertifioitujen omaisuuserien TVL jne., näkyvät julkisesti integraattoriosiossa osoitteessa <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Lataa",
+      "titleLineTwo": "integraattorisopimus",
+      "cta": "Lataa"
+    }
+  },
+  "integratorJoin": {
+    "title": "Integraattoriohjelma",
+    "titleItalic": "Hakemuslomake",
+    "requiredLabel": "PAKOLLINEN *",
+    "requiredMessage": "Pakollinen",
+    "emailInvalid": "Anna kelvollinen sähköpostiosoite",
+    "send": "LÄHETÄ",
+    "sending": "Lähetetään…",
+    "errorSend": "Lomakkeen lähetysvirhe.",
+    "fileSizeError": "Tiedostokoko ei saa ylittää 1 Mt",
+    "addLink": "LISÄÄ LINKKI",
+    "addObjective": "LISÄÄ TAVOITE",
+    "addKpi": "LISÄÄ KPI",
+    "uploadHighlight": "Lataa",
+    "uploadSuffix": " logosi tai vedä se tähän (VALINNAINEN)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — enintään 1 Mt",
+    "logoPreviewAlt": "Logon esikatselu",
+    "successTitle": "Kiitos",
+    "successMessage": "Palaamme asiaan pian",
+    "backToIntegrator": "TAKAISIN INTEGRAATTORISIVULLE",
+    "errorTitle": "Jokin meni pieleen",
+    "errorMessageDefault": "Yritä uudelleen tai palaa myöhemmin",
+    "retry": "YRITÄ UUDELLEEN",
+    "sections": {
+      "representative": {
+        "title": "INTEGRAATTORIN EDUSTAJA",
+        "fullName": "KOKO NIMI *",
+        "email": "SÄHKÖPOSTIOSOITE *",
+        "phone": "PUHELINNUMERO *"
+      },
+      "overview": {
+        "title": "YLEISKATSAUS",
+        "description": "KIRJOITA LYHYT YLEISKATSAUS INTEGRAATTORIPROJEKTISTA, SISÄLTÄEN",
+        "vision": "Integraattorisi visio yhdessä lauseessa... *",
+        "industry": "Toimialaesimerkkejä (taide, musiikki, luksus) tai erityisiä omaisuuseriä (kulta, timantit) *",
+        "geography": "Markkina-alue (globaali, Eurooppa, maakohtainen) *",
+        "socialFirst": "Verkkosivusto ja sosiaalisen median linkit *",
+        "social": "Verkkosivusto ja sosiaalisen median linkit",
+        "presentation": "Linkki projektin esitykseen (ei pakollinen, mutta hyödyllinen)"
+      },
+      "acquisition": {
+        "title": "HANKINTA",
+        "description": "MÄÄRITTELE SELKEÄSTI KOHDEYLEISÖSI JA MITEN HANKIT TAI AIOT HANKKIA SEN",
+        "whyExists": "Miksi tämä projekti tarvitaan, ja miten se eroaa muista? *",
+        "whyIntegrator": "Miksi sinulle on tärkeää ryhtyä integraattoriksi? *"
+      },
+      "objectives": {
+        "title": "KESKEISET TAVOITTEET, JOTKA HALUAT SAAVUTTAA",
+        "first": "Tavoite 01 *",
+        "second": "Tavoite 02",
+        "more": "Tavoite {n}"
+      },
+      "kpis": {
+        "title": "KESKEISET MITTARIT, JOITA HALUAT SEURATA",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "MITÄ JA MITEN TEET",
+        "focus": "Kerro yksityiskohtaisesti, mihin keskityt integraattorina ja miltä tämän projektin menestys näyttää.",
+        "implement": "Kerro, miten suunnittelet toteuttavasi tämän projektin"
+      },
+      "roadmaps": {
+        "title": "ENSIMMÄISTEN 3 KUUKAUDEN JA 3 VUODEN TIEKARTTAT",
+        "description": "Sinun on ilmoitettava, milloin odotat aloittavasi luomisen ja arvioitu sertifikaattien määrä *"
+      },
+      "team": {
+        "title": "TIIMI",
+        "placeholder": "Kerro nykyisestä tiimistäsi, jos sellainen on, tai tulevista tiimirooleista, joita saatat tarvita, sekä LinkedIn-linkeistä *"
+      },
+      "risk": {
+        "title": "RISKITEKIJÄT",
+        "placeholder": "Kerro syyt ja tekijät, jotka johtaisivat epäonnistumiseen."
+      },
+      "optional": {
+        "title": "VALINNAINEN",
+        "placeholder": "Onko jotain muuta, mitä haluat jakaa ja mikä lisäisi valintamahdollisuuksiasi?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "The",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "OGY-token on ORIGYN-protokollan <b>keskeinen hyödyke</b>.",
+      "paragraphTwo": "Se <b>yhdistää</b> reaalimaailman omaisuuserien sertifioinnin hajautettuun lohkoketjuinfrastruktuuriin <b>tehden omistajuuden, todennuksen</b> ja <b>siirron todennettavaksi ja turvalliseksi.</b>",
+      "paragraphThree": "OGY mahdollistaa globaalin järjestelmän, jossa <b>fyysiset</b> omaisuuserät <b>sertifioidaan digitaalisesti, jäljitetään</b> ja <b>integroidaan hajautettuihin</b> sovelluksiin ja markkinoihin.",
+      "cta": "Osta OGY",
+      "imageAlt": "OGY-token"
+    },
+    "stats": {
+      "marketCap": "$OGY:n markkina-arvo",
+      "burned": "OGY:tä poltettu yhteensä",
+      "circulating": "Kierrossa oleva tarjonta",
+      "holders": "Tokenin haltijat"
+    },
+    "utility": {
+      "titlePrefix": "Protokollan",
+      "titleEmphasis": "hyödyllisyys",
+      "lead": "Tarvitset OGY-tokeneja ORIGYN-ekosysteemin täysipainoiseen käyttöön:",
+      "cards": [
+        {
+          "title": "Sertifiointi",
+          "description": "Jokainen ORIGYNissa sertifioitu omaisuuserä vaatii OGY:tä muuttumattoman lohkoketjusertifikaatin luomiseen."
+        },
+        {
+          "title": "Transaktiokerros",
+          "description": "Mahdollistaa sertifioitujen omaisuuserien siirrot, uudelleensertifioinnit ja elinkaartapahtumat."
+        },
+        {
+          "title": "Datavarastointi",
+          "description": "Tukee omaisuuden metatietojen ja alkuperän turvallista, hajautettua tallentamista."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY-tokenin",
+      "titleLineTwo": "sopimusosoite",
+      "description": "OGY-token on otettu käyttöön Internet Computer -lohkoketjussa ja toimii natiivin hyödyketokenina ORIGYN-protokollan sisällä.",
+      "bulletOne": "Tämä sopimus hallinnoi OGY:n liikkeeseenlaskua, siirtoja ja vuorovaikutuksia koko protokollassa varmistaen läpinäkyvyyden ja kaiken tokentoiminnan lohkoketjuvarmenteen.",
+      "bulletTwo": "Voit tarkastella OGY-tokenia ja olla vuorovaikutuksessa sen kanssa suoraan ICP-verkon kautta.",
+      "warning": "Tarkista sopimusosoite aina ennen OGY:n käyttöä.",
+      "contractLabel": "Virallinen sopimusosoite:",
+      "copyAria": "Kopioi sopimusosoite",
+      "copied": "Kopioitu leikepöydälle",
+      "cmcAria": "Tarkastele OGY:tä CoinMarketCapissa"
+    },
+    "governance": {
+      "title": "Hallinto",
+      "lead": "OGY on hallintotokeni, joka valtuuttaa haltijat:",
+      "items": [
+        "<b>Kohdentamaan</b> kassavarat ekosysteemin kasvuun ja strategisiin aloitteisiin.",
+        "<b>Ehdottamaan ja äänestämään</b> protokollapäivityksistä, sertifiointisäännöistä ja ekosysteemimuutoksista.",
+        "<b>Valvomaan</b> integraattoreiden ja sertifioijien käyttöönottoa."
+      ],
+      "closing": "Hallinto on <b>täysin hajautettu</b> ORIGYN DAO:n kautta antaen yhteisölle suoran vaikutusmahdollisuuden <b>protokollan kehitykseen.</b>",
+      "cta": "KATSO LISÄÄ"
+    },
+    "staking": {
+      "titleLineOne": "Panostaminen",
+      "titleLineTwoPrefix": "ja",
+      "titleLineTwoEmphasis": "palkkiot",
+      "lead": "OGY:n panostaminen turvaa verkon samalla kun se yhdenmukaistaa kannustimia :",
+      "cards": [
+        {
+          "title": "Verkon turvallisuus",
+          "description": "Panostajat osallistuvat hallintoon ja auttavat validoimaan protokollaoperaatioita."
+        },
+        {
+          "title": "Palkkiot",
+          "description": "Ansaitse osuus protokollan tuloista sertifiointimaksuista ja verkkotoiminnasta."
+        },
+        {
+          "title": "Pitkäaikainen sitoutuminen",
+          "description": "Panostaminen kannustaa pitkäaikaiseen osallistumiseen ja vahvistaa ekosysteemiä."
+        }
+      ],
+      "closing": "Panostusmalli sitoo tokenin hyödyllisyyden suoraan protokollan käyttöönottoon ja menestykseen.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflaatio</b>rakenteet",
+      "titleLineTwo": "ja <b>arvon kertyminen</b>",
+      "lead": "OGY sisältää kestävään kasvuun suunnitellun deflaatiomallin:",
+      "items": [
+        {
+          "title": "Mikä tekee OGY:stä deflatoivan tokenin?",
+          "answer": "OGY on suunniteltu deflaatiomallilla, mikä tarkoittaa, että sen kokonaistarjonta vähenee ajan myötä protokollaa käytettäessä."
+        },
+        {
+          "title": "Miten tokenin poltto toimii?",
+          "answer": "Joka kerta kun OGY:tä käytetään sertifiointiin, osa tokeneista poltetaan pysyvästi. Tämä vähentää kierrossa olevaa tarjontaa."
+        },
+        {
+          "title": "Mikä on kassavarojen rooli?",
+          "answer": "Protokollan tuloja hallinnoidaan kassan kautta käynnissä olevan kehityksen tukemiseksi, osallistujien palkitsemiseksi ja ekosysteemin pitkäaikaisen vakauden ylläpitämiseksi."
+        },
+        {
+          "title": "Miten OGY luo arvoa ajan myötä?",
+          "answer": "Kun yhä useammat käyttäjät ottavat ORIGYN-protokollan käyttöön ja sertifiointitoiminta kasvaa, enemmän OGY:tä poltetaan. Tämä vähenevä tarjonta yhdistettynä kasvavaan käyttöön tukee pitkäaikaista arvonluontia."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomiikan",
+      "titleEmphasis": "yleiskatsaus",
+      "totalSupplyLabel": "Kokonaistarjonta:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Jakautuminen:</b> Kohdistettu ekosysteemin kasvuun, panostuspalkkioihin, yhteisöön ja hallintoon.",
+      "revenue": "<b>Tulomalli:</b> OGY:ssä maksetut protokollamaksut luovat jatkuvaa kysyntää samalla kun ne vähentävät tarjontaa polttomekanismien kautta.",
+      "support": "Malli on suunniteltu tukemaan protokollan pitkäaikaista kestävyyttä ja tokeninhaltijoiden yhdensuuntaisuutta.",
+      "cta": "TOKENOMICS"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kustannuslaskuri",
+      "description": "Käytä ORIGYN-laskuria arvioidaksesi ainutlaatuisen sertifikaattisi kustannukset, kun kaikki tietosi ovat lohkoketjussa"
+    },
+    "plan": {
+      "title": "Suunnittele luomisesi",
+      "description": "Kerro, kuinka monta kohdetta ja mitä olet lataamassa.",
+      "itemsLabel": "Kuinka monta kohdetta?",
+      "uploadingLabel": "Mitä olet lataamassa?",
+      "knowExactSize": "Tiedätkö tarkan koon?",
+      "totalUploadSize": "Latauksen kokonaiskoko",
+      "usePreset": "Käytä esiasetusta",
+      "combinedSize": "Kaikkien tiedostojen yhteenlaskettu koko kaikissa kohteissa.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB kappale"
+        },
+        "iphone": {
+          "label": "Valokuva",
+          "hint": "3 MB kappale"
+        },
+        "dslr": {
+          "label": "Studiokuva",
+          "hint": "20 MB kappale"
+        },
+        "video": {
+          "label": "Lyhyt video",
+          "hint": "1 GB kappale"
+        },
+        "video1hr": {
+          "label": "Pitkä video",
+          "hint": "60 GB kappale"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Reaaliaikainen arvio",
+      "titleRefreshing": "Päivitetään arviota",
+      "description": "Päivittyy automaattisesti asetusten muuttuessa.",
+      "ogyEquivalent": "OGY-vastaavuus",
+      "ogySpotRate": "OGY:n spot-kurssi",
+      "itemSingular": "Kohde",
+      "itemPlural": "Kohdetta",
+      "upload": "Lataus"
+    },
+    "breakdown": {
+      "title": "Kustannuserittely",
+      "baseFee": "Luomisen perusmaksu",
+      "storageFee": "Tallennusmaksu",
+      "items": "Kohteet",
+      "uploadSize": "Latauksen koko"
+    },
+    "bytesUnit": "tavua"
   }
 }

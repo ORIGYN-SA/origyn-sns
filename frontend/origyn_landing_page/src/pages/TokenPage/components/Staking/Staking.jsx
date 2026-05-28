@@ -1,44 +1,35 @@
 import UtilityCard from "../UtilityCard/UtilityCard";
 import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
 import GradientButton from "@components/Button/GradientButton";
+import { useT } from "@/i18n/LocaleContext";
 import styles from "./Staking.module.scss";
 
+const ICONS = [
+  "/token/security.png",
+  "/token/rewards.png",
+  "/token/alignement.png",
+];
+
 const Staking = () => {
-  const stakingCards = [
-    {
-      title: "Network Security",
-      description: "Stakers participate in governance and help validate protocol operations.",
-      icon: "/token/security.png",
-    },
-    {
-      title: "Rewards",
-      description: "Earn a share of protocol revenue from certification fees and network activity.",
-      icon: "/token/rewards.png",
-    },
-    {
-      title: "Long-Term Alignment",
-      description: "Staking encourages long-term participation and strengthens the ecosystem.",
-      icon: "/token/alignement.png",
-    },
-  ];
+  const t = useT();
+  const stakingCards = (t.raw("token.staking.cards") ?? []).map((card, i) => ({
+    ...card,
+    icon: ICONS[i],
+  }));
 
   return (
     <section className={styles.staking}>
       <ScrollReveal>
-        <h1>
-          Staking
-        </h1>
+        <h1>{t("token.staking.titleLineOne")}</h1>
       </ScrollReveal>
       <ScrollReveal delay={0.15}>
         <h1>
-          and<i> Rewards</i>
+          {t("token.staking.titleLineTwoPrefix")}<i> {t("token.staking.titleLineTwoEmphasis")}</i>
         </h1>
       </ScrollReveal>
 
       <ScrollReveal delay={0.25}>
-        <p>
-          OGY staking secures the network while aligning incentives :
-        </p>
+        <p>{t("token.staking.lead")}</p>
       </ScrollReveal>
       <div className={styles.cards}>
         {stakingCards.map((card, index) => (
@@ -55,14 +46,12 @@ const Staking = () => {
       </div>
 
       <ScrollReveal delay={0.35}>
-        <p>
-          The staking model ties token utility directly to protocol adoption and success.
-        </p>
+        <p>{t("token.staking.closing")}</p>
       </ScrollReveal>
       <ScrollReveal delay={0.45}>
         <GradientButton
           href="https://nns.ic0.app/neurons/?u=leu43-oiaaa-aaaaq-aadgq-cai "
-          text="STAKE NOW"
+          text={t("token.staking.cta")}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.ctaButton}

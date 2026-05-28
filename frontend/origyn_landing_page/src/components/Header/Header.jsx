@@ -1,73 +1,72 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
 import styles from "./Header.module.scss";
 
+// Internal items resolve to "/<locale>/<path>" at render time so navigation
+// stays inside the active locale. Anchor items target sections on the home
+// page; we still link to "/<locale>/#<section>" so cross-page nav works.
 const NAV_ITEMS = [
   {
     id: "token",
-    label: "TOKEN",
+    labelKey: "nav.token",
     type: "internal",
-    href: "/token",
-    activeWhen: (path) => path.startsWith("/token"),
+    path: "token",
+    activeWhen: (rest) => rest.startsWith("token"),
   },
   {
     id: "ai",
-    label: "AI",
+    labelKey: "nav.ai",
     type: "internal",
-    href: "/ai",
-    activeWhen: (path) => path.startsWith("/ai"),
+    path: "ai",
+    activeWhen: (rest) => rest.startsWith("ai"),
   },
   {
     id: "certificates",
-    label: "CERTIFICATES",
+    labelKey: "nav.certificates",
     href: "https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity",
     type: "external",
   },
   {
     id: "integrator-program",
-    label: "INTEGRATORS",
+    labelKey: "nav.integrators",
     type: "anchor",
-    activeWhen: (path) => path.startsWith("/integrator"),
+    activeWhen: (rest) => rest.startsWith("integrator"),
   },
-  // {
-  //   id: "our-partners",
-  //   label: "ECOSYSTEM",
-  //   type: "anchor",
-  // },
   {
     id: "use-cases",
-    label: "USE CASES",
+    labelKey: "nav.useCases",
     type: "anchor",
-    activeWhen: (path) => path.startsWith("/use-case/"),
+    activeWhen: (rest) => rest.startsWith("use-case/"),
   },
-  // {
-  //   id: "ogy-token",
-  //   label: "OGY TOKEN",
-  //   href: "https://coinmarketcap.com/currencies/origyn-foundation/",
-  //   type: "external",
-  // },
   {
     id: "governance",
-    label: "GOVERNANCE",
+    labelKey: "nav.governance",
     href: "https://dashboard.origyn.com",
     type: "external",
   },
   {
     id: "help-center",
-    label: "HELP",
-    href: "/help-center",
+    labelKey: "nav.help",
+    href: "help-center",
     type: "internal",
-    activeWhen: (path) => path.startsWith("/help-center"),
+    path: "help-center",
+    activeWhen: (rest) => rest.startsWith("help-center"),
   },
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const currentPath = window.location.pathname;
+  const { locale } = useLocale();
+  const t = useT();
+  const location = useLocation();
+  const rest = location.pathname.replace(/^\/[^/]+\/?/, "");
+  const isHome = rest === "";
 
   const handleAnchorClick = (e, sectionId) => {
     setIsMenuOpen(false);
-
-    if (currentPath === "/") {
+    if (isHome) {
       e.preventDefault();
       const element = document.getElementById(sectionId);
       if (element) {
@@ -77,13 +76,18 @@ const Header = () => {
   };
 
   const renderNavItem = (item) => {
-    const isActive = item.activeWhen?.(currentPath) ?? false;
+    const isActive = item.activeWhen?.(rest) ?? false;
     const isExternal = item.type === "external";
+    const href = (() => {
+      if (item.type === "anchor") return `${localePath(locale, "")}#${item.id}`;
+      if (item.type === "internal") return localePath(locale, item.path);
+      return item.href;
+    })();
 
     return (
       <a
         key={item.id}
-        href={item.href ?? `/#${item.id}`}
+        href={href}
         className={`${styles.navLink} ${isActive ? styles.active : ""}`}
         onClick={
           item.type === "anchor"
@@ -92,7 +96,7 @@ const Header = () => {
         }
         {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
       >
-        {item.label}
+        {t(item.labelKey)}
       </a>
     );
   };
@@ -101,10 +105,10 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <a
-          href="/"
+          href={localePath(locale, "")}
           className={styles.logoContainer}
           onClick={(e) => {
-            if (currentPath === "/") {
+            if (isHome) {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
@@ -119,7 +123,7 @@ const Header = () => {
         <button
           className={`${styles.burgerMenu} ${isMenuOpen ? styles.open : ""}`}
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
+          aria-label={t("nav.toggleMenu")}
         >
           <span></span>
           <span></span>

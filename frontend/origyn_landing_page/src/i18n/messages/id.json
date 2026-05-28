@@ -43,7 +43,7 @@
     "steps": [
       {
         "title": "Klaimnya",
-        "body": "“Agen on-chain bertenaga AI.” Inferensi terjadi di AWS. Rantai hanya menyimpan keluarannya."
+        "body": "\"Agen on-chain bertenaga AI.\" Inferensi terjadi di AWS. Rantai hanya menyimpan keluarannya."
       },
       {
         "title": "Celahnya",
@@ -135,8 +135,18 @@
         "gain": "Peningkatan"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Lima pilar yang tak\ndapat <i>digantikan</i> AI.",
     "lead": "AI menjadikan produksi sebagai komoditas. Lima ranah ini tetap bertahan. Origyn mengambil posisi di setiap salah satunya.",
     "pillars": [
-      { "title": "Kepercayaan", "description": "Sertifikasi Origyn — sinyal kepercayaan yang dapat diverifikasi." },
-      { "title": "Konteks", "description": "Memori terstruktur selama puluhan tahun — sinyal pribadi yang tak tertandingi AI." },
-      { "title": "Distribusi", "description": "Swiss Subnet — infrastruktur yang dapat diverifikasi untuk para agen." },
-      { "title": "Selera", "description": "Pipeline riset otomatis — kurasi yang dibantu otomatisasi." },
-      { "title": "Tanggung jawab", "description": "Jejak audit dan sertifikat — lapisan tata kelola yang nyata." }
+      {
+        "title": "Kepercayaan",
+        "description": "Sertifikasi Origyn — sinyal kepercayaan yang dapat diverifikasi."
+      },
+      {
+        "title": "Konteks",
+        "description": "Memori terstruktur selama puluhan tahun — sinyal pribadi yang tak tertandingi AI."
+      },
+      {
+        "title": "Distribusi",
+        "description": "Swiss Subnet — infrastruktur yang dapat diverifikasi untuk para agen."
+      },
+      {
+        "title": "Selera",
+        "description": "Pipeline riset otomatis — kurasi yang dibantu otomatisasi."
+      },
+      {
+        "title": "Tanggung jawab",
+        "description": "Jejak audit dan sertifikat — lapisan tata kelola yang nyata."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Bahasa",
-    "switchTo": "Beralih ke {language}"
+    "switchTo": "Beralih ke {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "SERTIFIKAT",
+    "integrators": "INTEGRATOR",
+    "useCases": "KASUS PENGGUNAAN",
+    "governance": "TATA KELOLA",
+    "help": "BANTUAN",
+    "toggleMenu": "Buka/tutup menu"
+  },
+  "footer": {
+    "certificates": "SERTIFIKAT",
+    "integrators": "INTEGRATOR",
+    "ecosystem": "EKOSISTEM",
+    "useCases": "KASUS PENGGUNAAN",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "DASBOR",
+    "copyright": "©2026 Hak cipta dilindungi – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Amankan aset, kekayaan intelektual,\ndan identitas Anda sepenuhnya on-chain.",
+      "subtitleMobile": "Amankan aset,\nkekayaan intelektual,\ndan identitas Anda sepenuhnya on-chain.",
+      "logoAlt": "Logo ORIGYN",
+      "certifyCta": "Sertifikasi aset Anda",
+      "buyCta": "Beli $OGY",
+      "marquee": "ORIGYN memungkinkan Anda menyimpan data dan aset sepenuhnya on-chain dengan aman"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "Kapitalisasi Pasar $OGY",
+        "tooltip": "Total nilai pasar seluruh token OGY yang saat ini beredar, berdasarkan harga token secara langsung."
+      },
+      "tvl": {
+        "title": "Total Nilai Terkunci (TVL) aset tersertifikasi dalam USD",
+        "tooltipTitle": "Total Nilai Terkunci (TVL)",
+        "tooltip": "TVL mencerminkan nilai sertifikat yang telah diterbitkan; hal ini tidak berarti bahwa ORIGYN menyimpan aset-aset tersebut dalam kustodi."
+      },
+      "users": {
+        "title": "Pengguna",
+        "tooltip": "Jumlah total individu, merek, dan institusi yang aktif menggunakan ORIGYN untuk menerbitkan, mengelola, atau memiliki aset tersertifikasi."
+      },
+      "assets": {
+        "title": "Total Aset Tersertifikasi",
+        "tooltip": "Jumlah item fisik atau digital yang telah menerima sertifikat resmi ORIGYN."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Mengapa",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "ORIGYN, tempat aset dunia nyata bertemu blockchain.",
+      "body": "ORIGYN adalah protokol RWA paling canggih di dunia yang dirancang untuk membawa aset dunia nyata sepenuhnya ke on-chain — mulai dari seni rupa dan emas hingga barang mewah dan kekayaan intelektual.\n\nORIGYN menyediakan infrastruktur sertifikasi tanpa perantara yang menjamin keaslian, provenance, dan kepemilikan aset bernilai tinggi."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "Sertifikasi 100% On-Chain",
+          "description": "Tanpa perantara, tanpa manipulasi. Sepenuhnya terdesentralisasi."
+        },
+        {
+          "title": "Kegunaan Token $OGY",
+          "description": "Menggerakkan ekosistem ORIGYN melalui tata kelola dan kegunaan protokol."
+        },
+        {
+          "title": "Dukungan Multi-Aset",
+          "description": "Sertifikasi seni, barang mewah, emas, properti, dan banyak lagi."
+        },
+        {
+          "title": "Keamanan Terdepan di Industri",
+          "description": "Perlindungan blockchain yang tidak dapat diubah untuk aset Anda yang paling berharga."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Cara",
+      "titleSuffix": "kerjanya",
+      "steps": [
+        {
+          "description": "Membawa aset dunia nyata ke on-chain seharusnya mudah. Proses sertifikasi ORIGYN dirancang agar aman, terdesentralisasi, dan mudah digunakan hanya dalam tiga langkah: <br /><br />Kirimkan metadata aset dan dokumentasi pendukung Anda. ORIGYN menghasilkan sertifikat digital unik yang tahan manipulasi langsung di blockchain, menetapkannya ke aset dan menghubungkannya ke pemilik yang sah.",
+          "panelTitle": "Cetak Sertifikat Digital Anda",
+          "panelDescription": "Unggah detail aset, cetak sertifikat blockchain."
+        },
+        {
+          "description": "Setiap sertifikat dapat diverifikasi secara kriptografis. Keaslian, provenance, dan kepemilikan aset divalidasi melalui protokol terdesentralisasi ORIGYN.",
+          "panelTitle": "Verifikasi & Autentikasi",
+          "panelDescription": "Pastikan keaslian aset dan transparansi kepemilikan."
+        },
+        {
+          "description": "Setelah tersertifikasi, aset Anda dapat disimpan, dipindahtangankan, diperdagangkan, atau digunakan dalam ekosistem digital — mulai dari aplikasi DeFi dan pasar NFT hingga transaksi pribadi dan catatan institusional.",
+          "panelTitle": "Transfer & Lacak",
+          "panelDescription": "Manfaatkan dan lacak aset tersertifikasi Anda untuk DeFi, penjualan kembali, atau investasi."
+        }
+      ],
+      "goToStep": "Pergi ke langkah {n}"
+    },
+    "useCases": {
+      "titlePrefix": "Kasus",
+      "titleSuffix": "Penggunaan",
+      "description": "Protokol ORIGYN dibangun untuk melayani berbagai industri di mana kepercayaan, provenance, dan keaslian sangat penting. Berikut adalah beberapa sektor utama yang telah memanfaatkan infrastruktur sertifikasi ORIGYN.",
+      "items": [
+        {
+          "title": "Seni",
+          "description": "Autentikasi dan lindungi provenance karya seni fisik maupun digital secara on-chain."
+        },
+        {
+          "title": "Emas",
+          "description": "Sertifikasi emas dengan sertifikat digital yang tidak dapat diubah, dapat dilacak, dan tahan manipulasi."
+        },
+        {
+          "title": "Berlian",
+          "description": "Lacak asal, penilaian kualitas, dan kepemilikan setiap berlian dengan presisi blockchain."
+        },
+        {
+          "title": "Made In",
+          "description": "Buktikan asal, keaslian, dan keahlian pembuatan produk apa pun — dari jam tangan hingga mode."
+        }
+      ],
+      "indicatorAria": "Pergi ke kasus penggunaan {n}",
+      "discover": "Temukan lebih lanjut"
+    },
+    "certify": {
+      "titleLine": "Sertifikasi",
+      "titleEmphasis": "aset Anda",
+      "subtitle": "Gunakan Kalkulator Sertifikasi ORIGYN untuk memperkirakan biaya pengamanan aset Anda dengan sertifikat digital sepenuhnya on-chain secara instan. Baik Anda menyertifikasi seni rupa, barang mewah, emas, atau aset berharga lainnya, alat ini memberikan gambaran jelas mengenai biaya infrastruktur dan teknologi tanpa perlu menebak-nebak.",
+      "contactPrompt": "Untuk menyertifikasi aset Anda, hubungi kami:",
+      "contactCta": "Hubungi ORIGYN"
+    },
+    "integrator": {
+      "titleLineOne": "Program",
+      "titleLineTwo": "Integrator",
+      "description": "Program Integrator ORIGYN dirancang untuk bisnis, platform, dan pengembang yang ingin mengintegrasikan infrastruktur sertifikasi terdesentralisasi ORIGYN langsung ke dalam layanan mereka.\n\nBaik Anda mengelola marketplace, solusi rantai pasokan, atau merek mewah, Anda dapat menawarkan verifikasi aset on-chain yang aman tanpa harus membangun ulang dari awal.",
+      "cta": "Bergabung dengan Program Integrator"
+    },
+    "roadmap": {
+      "title": "Peta Jalan",
+      "description": "Dari utilitas dan fitur tata kelola baru hingga dukungan yang diperluas untuk industri dan pengembang. Setiap pencapaian mencerminkan misi kami untuk membawa aset dunia nyata sepenuhnya ke on-chain melalui infrastruktur yang skalabel, dapat diverifikasi, dan terdesentralisasi.",
+      "items": [
+        {
+          "title": "ORIGYN Foundation Didanai",
+          "description": "ORIGYN Foundation didirikan di Neuchâtel, Swiss untuk memulai pengembangan ORIGYN Protocol."
+        },
+        {
+          "title": "Peluncuran Token OGY",
+          "description": "Token utilitas asli $OGY dibuat untuk mendukung biaya protokol, tata kelola, dan staking."
+        },
+        {
+          "title": "Standar NFT ORIGYN v1.0",
+          "description": "Peluncuran versi pertama standar NFT ORIGYN yang memungkinkan sertifikasi on-chain."
+        },
+        {
+          "title": "Pembaruan Tokenomics 2.0",
+          "description": "200 juta token $OGY yang sebelumnya dialokasikan untuk Foundation dibakar, memulai tekanan deflasi."
+        },
+        {
+          "title": "Platform Minting 1.0",
+          "description": "Peluncuran antarmuka minting on-chain pertama untuk sertifikat digital."
+        },
+        {
+          "title": "Kemitraan Strategis",
+          "description": "Kolaborasi strategis dengan FederItaly dan METALOR untuk mensertifikasi produk buatan Italia dan emas yang ditokenisasi."
+        },
+        {
+          "title": "Pembelian Emas Pertama",
+          "description": "3 kg emas fisik dibeli dan ditokenisasi menggunakan ORIGYN Protocol."
+        },
+        {
+          "title": "Akuisisi CanDB",
+          "description": "ORIGYN mengakuisisi CanDB, solusi database terdesentralisasi dan skalabel yang dioptimalkan untuk metadata NFT."
+        },
+        {
+          "title": "Tokenomics 3.0 dan Peluncuran Dashboard",
+          "description": "Model deflasi diperkenalkan melalui Tokenomics 3.0 dan versi pertama ORIGYN Dashboard dirilis."
+        },
+        {
+          "title": "10.000 Pengguna Protokol",
+          "description": "ORIGYN melampaui 10.000 pengguna protokol unik."
+        },
+        {
+          "title": "Peluncuran Gold DAO",
+          "description": "Gold DAO menjadi DAO pertama yang dibangun di atas ORIGYN untuk menokenisasi dan mensertifikasi emas fisik secara on-chain."
+        },
+        {
+          "title": "Donasi 500M OGY ke Gold DAO",
+          "description": "Setengah miliar token $OGY didonasikan untuk mendukung treasury jangka panjang Gold DAO."
+        },
+        {
+          "title": "ORIGYN DAO Terintegrasi dengan ICP SNS",
+          "description": "ORIGYN DAO menjadi sepenuhnya terdesentralisasi dan dikelola melalui framework SNS Internet Computer."
+        },
+        {
+          "title": "Rilis Dashboard V2",
+          "description": "Versi baru dashboard mencakup metrik live, statistik staking, dan alat tata kelola."
+        },
+        {
+          "title": "Tonggak 30.000 Pengguna",
+          "description": "ORIGYN tumbuh menjadi lebih dari 30.000 pengguna, peningkatan 300% dalam enam bulan."
+        },
+        {
+          "title": "Kolaborasi dengan Leo Caillard dan Gil Sertissage",
+          "description": "ORIGYN mensertifikasi karya seni fisik dan berlian dalam kemitraan profil tinggi."
+        },
+        {
+          "title": "Standar NFT ORIGYN v2.0",
+          "description": "Standar NFT ditingkatkan untuk memungkinkan transfer sertifikat yang aman."
+        },
+        {
+          "title": "Framework Integrator Diluncurkan",
+          "description": "Aturan dan struktur onboarding dibuat untuk memandu mitra baru yang berintegrasi dengan ORIGYN."
+        },
+        {
+          "title": "Peluncuran Cecil DAO",
+          "description": "ORIGYN mendukung peluncuran Cecil DAO untuk mendanai proyek konservasi dan kemanusiaan menggunakan transparansi blockchain."
+        },
+        {
+          "title": "Akuisisi ClaimLink",
+          "description": "ORIGYN mengakuisisi ClaimLink, platform distribusi NFT dan token terdesentralisasi yang dibangun di ICP."
+        },
+        {
+          "title": "Standar NFT ICRC-7",
+          "description": "Standar baru diperkenalkan untuk meningkatkan interoperabilitas sertifikat dan utilitas di seluruh ekosistem."
+        },
+        {
+          "title": "Peluncuran",
+          "titleSpan": "Minting Studio Publik",
+          "description": "Alat self-service diluncurkan agar siapa pun dapat mint sertifikat RWA on-chain di infrastruktur ORIGYN."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "Misteri Runestone akan diungkap pada Q2 2026 di Jenewa."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Alat self-service diluncurkan agar siapa pun dapat mint on-chain menggunakan infrastruktur ORIGYN."
+        },
+        {
+          "title": "Implementasi Perlindungan IP",
+          "description": "Dukungan untuk sertifikasi on-chain atas hak kekayaan intelektual diintegrasikan ke dalam protokol."
+        },
+        {
+          "title": "Implementasi Cross-Chain",
+          "description": "Kompatibilitas cross-chain memperluas jangkauan ORIGYN ke ekosistem besar lainnya."
+        },
+        {
+          "title": "Integrasi Wallet dan Marketplace Global",
+          "description": "ORIGYN NFT menjadi dapat diakses melalui wallet dan marketplace NFT terkemuka di seluruh dunia."
+        },
+        {
+          "title": "Menjadi Standar Sertifikasi Universal",
+          "description": "ORIGYN bertujuan menetapkan diri sebagai tolok ukur global untuk sertifikasi digital di semua kelas aset."
+        }
+      ]
+    },
+    "partners": {
+      "label": "MITRA",
+      "testimonials": [
+        {
+          "title": "CEO Metalor",
+          "description": "\"ORIGYN adalah teknologi sertifikasi digital paling canggih dan paling komprehensif di dunia. Semua data disimpan sepenuhnya di blockchain untuk memastikan sertifikat bersifat immutable dan transparan. Metalor senang bekerja sama dengan perusahaan fintech berbasis di Neuchâtel seperti ORIGYN untuk menghadirkan solusi inovatif ke pasar.\""
+        },
+        {
+          "title": "Spesialis Seni",
+          "description": "\"Bagi kolektor pribadi saya, kepercayaan dan warisan adalah segalanya. Teknologi sertifikasi ORIGYN telah menjadi esensial; tidak hanya menjamin keaslian setiap karya seni, tetapi juga memastikan keterlacakan dan nilainya lintas generasi. Ini bukan lagi sekadar memiliki karya seni, melainkan mengamankan kisahnya secara on-chain untuk selamanya. ORIGYN membuatnya mungkin.\""
+        },
+        {
+          "title": "Co-Founder Cyber",
+          "description": "\"Kami selalu mengatakan bahwa berlian akan bertahan selamanya, dan itu benar. Jadi hal yang sama harus dipikirkan tentang informasi yang Anda berikan, karena dalam 100 tahun, 200 tahun, berlian itu masih akan ada. Kami membutuhkan teknologi untuk memastikan kami tetap dapat menyediakan informasi tersebut. Terutama untuk produk yang sangat bernilai dan diwariskan lintas generasi... Alasan utama kami bermitra dengan ORIGYN adalah karena mereka dapat menyediakan semua ini.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Jadilah bagian dari",
+      "emphasisDesktop": "pengambilan keputusan",
+      "emphasisMobileLineOne": "Pengambilan",
+      "emphasisMobileLineTwo": "Keputusan",
+      "cta": "Bergabung dengan ORIGYN DAO"
+    }
+  },
+  "useCase": {
+    "notFound": "Kasus penggunaan tidak ditemukan",
+    "cases": {
+      "gold": [
+        {
+          "title": "Emas",
+          "description": "Sebagai aset terbesar di dunia dan komoditas yang paling ketat dipantau, emas memerlukan tingkat keamanan tertinggi. <br /><br />ORIGYN memenuhi persyaratan ini, sebagaimana dibuktikan oleh <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, pemimpin dunia dalam pemurnian emas, yang memilih protokol ORIGYN untuk mengamankan data mereka. Untuk pertama kalinya, semua informasi teknis terkait batangan emas — termasuk gambar definisi tinggi dan dokumen — dicatat dalam satu sertifikat di blockchain."
+        },
+        {
+          "description": "Selain itu, beberapa proyek seperti <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> dan <a href='https://bity.com' target='_blank'>Bity</a> menggunakan sertifikat ini untuk menjual batangan emas yang sesuai atau menciptakan token yang didukung oleh emas fisik."
+        }
+      ],
+      "art": [
+        {
+          "title": "Seni",
+          "description": "Para pakar seni sangat memperhatikan kepercayaan dan jaminan sertifikat untuk karya seni. Inilah mengapa beberapa kasus telah mengadopsi teknologi ORIGYN.<br /><br />Seniman ternama seperti <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> dan <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a> telah membuat sertifikat ORIGYN mereka sendiri untuk melindungi data terkait karya mereka. Sertifikat ini sepenuhnya on-chain, tahan manipulasi, dan tidak dapat digandakan — memungkinkan seniman memerangi pemalsuan sekaligus meningkatkan pengalaman kolektor melalui gambar definisi tinggi, video, dan dokumen."
+        },
+        {
+          "description": "Entitas seperti yayasan, organisasi, keluarga, galeri, dan konsultan seni yang perlu membuat sertifikat digital untuk klien mereka mulai menggunakan ORIGYN untuk menjaga keamanan dan kerahasiaan maksimal. Beberapa galeri telah mengimplementasikan teknologi ORIGYN, termasuk Galeri Retelet untuk sertifikat karya René Magritte.<br /><br />Teknologi ORIGYN juga memungkinkan penjualan melalui sertifikat, khususnya penjualan kepemilikan bersama. Hal ini memungkinkan karya seni dibagi di antara beberapa pemilik dengan membagi sertifikat menjadi beberapa bagian, masing-masing berfungsi sebagai bukti kepemilikan."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Made in",
+          "description": "Asal negara bukan sekadar label. Ini adalah deklarasi identitas, kualitas, dan nilai budaya. Seiring meningkatnya pemalsuan, membuktikan di mana dan bagaimana suatu produk dibuat telah menjadi pembeda utama bagi merek di berbagai industri.<br /><br />Sebagai respons, <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> menciptakan sertifikasi 100% Made in Italy. Standar yang diakui secara hukum ini melindungi keunggulan Italia melalui dokumentasi ketat, audit independen, dan advokasi tingkat pemerintah. ORIGYN menyediakan fondasi digital sistem ini dengan mencatat setiap produk tersertifikasi di blockchain sebagai bukti asal yang dapat diverifikasi."
+        },
+        {
+          "description": "Setiap sertifikat menjadi paspor digital yang aman dan tahan manipulasi. Ini memperkuat kepercayaan konsumen, memastikan transparansi di seluruh rantai pasokan, dan mendukung bisnis yang memilih untuk memimpin dengan keaslian."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Mewah",
+          "description": "Teknologi ORIGYN menjawab kebutuhan sektor mewah untuk memperbarui dirinya dan menawarkan pengalaman produk yang lebih personal dan transparan.<br /><br />Perhiasan <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> menggunakan teknologi blockchain ORIGYN untuk membuat sertifikat bagi seluruh koleksi mereka. Ini mengamankan semua data sepenuhnya on-chain sekaligus menawarkan kepada pelanggan mereka yang bergengsi sertifikat generasi berikutnya yang menjamin kerahasiaan, keaslian, dan kepemilikan."
+        },
+        {
+          "description": "Perusahaan mewah lainnya seperti <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a> juga menggunakan ORIGYN untuk mencatat rantai keterlacakan lengkap berlian mereka yang ditujukan untuk pembuat jam tangan ternama. Banyak aplikasi lain yang dimungkinkan, termasuk menambahkan konten pemasaran yang dipersonalisasi ke sertifikat atau menggabungkan teknologi dengan AI untuk menentukan keaslian secara real time bagi pasar sekunder."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Pusat",
+    "titleSuffix": "Bantuan",
+    "searchPlaceholder": "Cari..",
+    "faqs": [
+      {
+        "title": "Token OGY",
+        "description": "Menggerakkan Sertifikasi Aset Terdesentralisasi Web 3.0",
+        "answer": "Token <strong>OGY</strong> adalah utilitas inti Protokol ORIGYN. Token ini menghubungkan sertifikasi aset dunia nyata dengan infrastruktur blockchain terdesentralisasi, menjadikan kepemilikan, autentikasi, dan verifikasi konten benar-benar aman.<br><br>OGY memungkinkan sistem global di mana aset fisik tersertifikasi secara digital, dilacak, dan diintegrasikan ke dalam aplikasi dan pasar terdesentralisasi."
+      },
+      {
+        "title": "Kegunaan Protokol",
+        "description": "OGY diperlukan untuk menjalankan fungsi-fungsi penting di seluruh ekosistem ORIGYN.",
+        "answer": "<strong>Sertifikasi:</strong> Setiap aset yang disertifikasi di ORIGYN memerlukan OGY untuk mencetak sertifikat on-chain yang tidak dapat diubah.<br><strong>Lapisan Transaksi:</strong> Memfasilitasi transfer, sertifikasi ulang, dan peristiwa siklus hidup aset tersertifikasi.<br><strong>Penyimpanan Data:</strong> Mendukung penyimpanan metadata aset dan provenance yang aman dan terdesentralisasi.<br>Kegunaan ini memastikan bahwa OGY menjadi bagian integral dari setiap transaksi dalam protokol."
+      },
+      {
+        "title": "Alamat Kontrak Token OGY",
+        "description": "Token OGY digunakan pada blockchain Internet Computer.",
+        "answer": "Token OGY digunakan pada blockchain Internet Computer dan beroperasi sebagai token utilitas native dalam Protokol ORIGYN.<br><br>Alamat Kontrak Resmi:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>Pengguna berinteraksi dengan aset dalam panggilan tersebut<br>Selalu verifikasi alamat kontrak sebelum berinteraksi dengan OGY.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Tata Kelola",
+        "description": "OGY adalah token tata kelola yang memberdayakan pemegangnya untuk:",
+        "answer": "• Mengusulkan dan memilih peningkatan protokol, aturan likuiditas, dan perubahan ekosistem.<br>• Mengawasi orientasi integrator dan certifier.<br>• Mengalokasikan dana perbendaharaan untuk inovasi, pertumbuhan, dan inisiatif strategis.<br><br>Tata kelola sepenuhnya terdesentralisasi melalui ORIGYN DAO, memberikan komunitas pengaruh langsung atas evolusi protokol."
+      },
+      {
+        "title": "Staking dan Hadiah",
+        "description": "Staking OGY mengamankan jaringan sekaligus menyelaraskan insentif.",
+        "answer": "<strong>Keamanan Jaringan:</strong> Staker berpartisipasi dalam tata kelola dan membantu memvalidasi operasi protokol.<br><br><strong>Hadiah:</strong> Dapatkan bagian dari pendapatan protokol dari biaya sertifikasi dan aktivitas jaringan.<br><br><strong>Keselarasan Jangka Panjang:</strong> Staking mendorong partisipasi jangka panjang dan memperkuat ekosistem.<br><br>Model staking menghubungkan kegunaan token langsung dengan adopsi dan keberhasilan protokol.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Mekanisme Deflasi / Akumulasi Nilai",
+        "description": "OGY mengintegrasikan model deflasi yang dirancang untuk pertumbuhan berkelanjutan.",
+        "answer": "<strong>Pembakaran Sertifikasi:</strong> Sebagian OGY yang digunakan dalam sertifikasi dihapus secara permanen dari peredaran.<br><br><strong>Manajemen Perbendaharaan:</strong> Pendapatan protokol mendukung pengembangan, hadiah, dan optimasi nilai token.<br><br>Seiring skala penggunaan protokol meningkat, pasokan OGY berkurang, memperkuat penciptaan nilai yang selaras dengan adopsi."
+      },
+      {
+        "title": "Ikhtisar Tokenomics",
+        "description": "Total Pasokan: 10.4 Billion OGY",
+        "answer": "<strong>Distribusi:</strong> Dialokasikan untuk pertumbuhan ekosistem, hadiah staking, komunitas, dan tata kelola.<br><br><strong>Model Pendapatan:</strong> Biaya protokol yang dibayarkan dalam OGY menciptakan permintaan berkelanjutan sekaligus mengurangi pasokan melalui mekanisme pembakaran.<br>Model ini dirancang untuk mendukung keberlanjutan protokol jangka panjang dan keselarasan yang berorientasi ke depan."
+      },
+      {
+        "title": "Masa Depan OGY",
+        "description": "OGY adalah fondasi kerangka terdesentralisasi.",
+        "answer": "OGY adalah fondasi kerangka terdesentralisasi yang dirancang untuk menyertifikasi, mengelola, dan membuka nilai aset dunia nyata secara on-chain. Seiring pertumbuhan ORIGYN, peran OGY berkembang sebagai mesin ekonomi yang menggerakkan sertifikasi aset, tata kelola, dan pengembangan ekosistem."
+      },
+      {
+        "title": "Jelajahi token secara langsung",
+        "description": "Jelajahi data token secara langsung, opsi staking, dan partisipasi tata kelola di Dasbor ORIGYN.",
+        "answer": "<span style=\"text-decoration: underline;\">Dasbor ORIGYN</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Klik untuk mengakses Dasbor</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Jadilah",
+      "titleConnector": "seorang",
+      "titleEmphasis": "Integrator",
+      "subtitle": "BERGABUNGLAH DENGAN PROGRAM INTEGRATOR UNTUK MEMBANGUN MASA DEPAN KEPERCAYAAN BERSAMA TEKNOLOGI SERTIFIKASI BLOCKCHAIN ORIGYN",
+      "cta": "Bergabung Sekarang"
+    },
+    "program": {
+      "titleLineOne": "Program",
+      "titleLineTwo": "Integrator",
+      "steps": [
+        {
+          "labelBold": "APA",
+          "labelRest": "ITU PROGRAM INTEGRATOR?",
+          "description": "Program Integrator adalah inisiatif strategis yang bertujuan untuk mempromosikan protokol ORIGYN, mendorong adopsinya, dan memperluas ekosistemnya."
+        },
+        {
+          "labelBold": "SIAPA",
+          "labelRest": "PARA INTEGRATOR?",
+          "description": "<ul><li><strong>Integrator adalah perusahaan independen</strong> yang membangun produk berbasis protokol ORIGYN dengan tujuan bersama mencetak sertifikat ORIGYN dan mempromosikan protokol ORIGYN di industri tertentu, dalam kelas aset, atau lintas beberapa sektor.</li><li><strong>Bertindak sebagai enabler,</strong> mereka membantu bisnis mengadopsi teknologi sertifikasi blockchain ORIGYN tanpa memerlukan keahlian mendalam di bidang blockchain dan Web3.</li><li><strong>Setelah melalui proses vetting</strong> yang dilakukan oleh ORIGYN Foundation, integrator dipilih dan divotasi oleh pemegang token ORIGYN DAO.</li></ul>"
+        },
+        {
+          "labelBold": "BAGAIMANA",
+          "labelRest": "CARA MENJADI INTEGRATOR?",
+          "description": "Untuk menjadi integrator, sebuah perusahaan harus menunjukkan bahwa ia mampu memberikan layanan dalam skala besar, sekaligus memenuhi semua persyaratan dan keahlian untuk melayani satu atau beberapa sektor tertentu."
+        }
+      ],
+      "goToStep": "Pergi ke langkah {n}",
+      "joinNow": "Bergabung sekarang"
+    },
+    "workflow": {
+      "titleLineOne": "Alur kerja",
+      "titleLineTwo": "pendaftaran",
+      "steps": [
+        {
+          "title": "Formulir pendaftaran",
+          "content": "<p>Sebagai bagian dari pendaftaran, Integrator harus mengisi <strong><a href=\"/integrator/join\">Formulir Pendaftaran Proyek secara online</a></strong> dan menyiapkan <strong>Dokumentasi Uji Tuntas</strong> yang dikirimkan ke <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong></p>\n<p>Dokumentasi uji tuntas meliputi:</p>\n<ul>\n<li>Salinan Akta Pendirian Perusahaan</li>\n<li>Deskripsi UBO - Pemilik Manfaat Utama</li>\n<li>Salinan Anggaran Dasar & Anggaran Rumah Tangga</li>\n<li>Resolusi Dewan Direksi yang memformalkan kesediaan untuk mendaftar sebagai Integrator dan mematuhi aturan Staking beserta daftar pejabat yang berwenang mengoperasikan Integrator</li>\n<li>Identifikasi penandatangan yang berwenang harus didasarkan pada foto dan kartu tanda tangan yang diattestasi oleh perusahaan</li>\n<li>Salinan bukti identitas dan bukti alamat manajer, pejabat, atau karyawan yang memegang Surat Kuasa untuk bertransaksi atas nama perusahaan</li>\n<li>Daftar direktur</li>\n<li>Formulir Pendaftaran Proyek Integrator</li>\n</ul>"
+        },
+        {
+          "title": "Tinjauan dari ORIGYN Foundation",
+          "content": "<p>Langkah pertama untuk menjadi Integrator adalah divalidasi oleh ORIGYN Foundation setelah melalui proses uji tuntas. Integrator menyetujui untuk berbagi semua dokumen yang diminta dengan tujuan memenuhi semua prosedur KYC/KYB/AML yang dipersyaratkan.</p>"
+        },
+        {
+          "title": "Pemungutan suara tata kelola melalui ORIGYN DAO",
+          "content": "<p>PEMUNGUTAN SUARA PUBLIK OLEH ORIGYN DAO:</p>\n<p>Setelah Foundation menyelesaikan proses vetting, Integrator akan menjadi subjek votasi DAO melalui proposal publik di Platform SNS. Semua proposal ORIGYN dapat dilihat di <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong>.</p>\n<p>Setiap perubahan alamat entitas hukum, nama bisnis, atau penghentian kerja sama divotasi secara publik di Platform SNS.</p>"
+        },
+        {
+          "title": "Staking sebesar 50,000,000 OGY",
+          "content": "<p>Jika proposal berhasil lolos, Integrator harus melakukan staking sebesar 50,000,000 OGY di ORIGYN Governance selama 1 year tanpa pembubaran.</p>\n<p>Langkah ini memastikan komitmen jangka panjang Integrator dan kekuatan votasi untuk berpartisipasi aktif dalam tata kelola ORIGYN. Semua Neuron yang di-stake akan ditampilkan secara publik di Dasbor pada <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong></p>\n<p>Semua statistik seperti jumlah sertifikat yang dicetak, TVL aset tersertifikasi, dll. akan ditampilkan secara publik di bagian integrator pada <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        },
+        {
+          "title": "Tinjauan kinerja",
+          "content": "<p>Bergantung pada setiap sektor dan komitmen, persyaratan minimum jumlah sertifikat yang dicetak dapat menjadi bagian dari perjanjian Integrator. Oleh karena itu, ORIGYN Foundation akan secara berkala melakukan peninjauan pencapaian dan kinerja Integrator.</p>\n<p>Semua statistik seperti jumlah sertifikat yang dicetak, TVL aset tersertifikasi, dll. akan ditampilkan secara publik di bagian integrator pada <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong>.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Unduh",
+      "titleLineTwo": "Kontrak Integrator",
+      "cta": "Unduh"
+    }
+  },
+  "integratorJoin": {
+    "title": "Program Integrator",
+    "titleItalic": "Formulir Pendaftaran",
+    "requiredLabel": "WAJIB *",
+    "requiredMessage": "Wajib diisi",
+    "emailInvalid": "Masukkan alamat email yang valid",
+    "send": "KIRIM",
+    "sending": "Mengirim…",
+    "errorSend": "Kesalahan pengiriman formulir.",
+    "fileSizeError": "Ukuran file tidak boleh melebihi 1 MB",
+    "addLink": "TAMBAH TAUTAN",
+    "addObjective": "TAMBAH TUJUAN",
+    "addKpi": "TAMBAH KPI",
+    "uploadHighlight": "Unggah",
+    "uploadSuffix": " logo Anda atau seret ke sini (OPSIONAL)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — maks. 1 MB",
+    "logoPreviewAlt": "Pratinjau logo",
+    "successTitle": "Terima kasih",
+    "successMessage": "Kami akan segera menghubungi Anda",
+    "backToIntegrator": "KEMBALI KE HALAMAN INTEGRATOR",
+    "errorTitle": "Terjadi kesalahan",
+    "errorMessageDefault": "Silakan coba lagi atau kembali nanti",
+    "retry": "COBA LAGI",
+    "sections": {
+      "representative": {
+        "title": "PERWAKILAN INTEGRATOR",
+        "fullName": "NAMA LENGKAP *",
+        "email": "ALAMAT EMAIL *",
+        "phone": "NOMOR TELEPON *"
+      },
+      "overview": {
+        "title": "IKHTISAR",
+        "description": "MOHON TULIS IKHTISAR SINGKAT PROYEK INTEGRATOR, TERMASUK",
+        "vision": "Visi Integrator Anda dalam satu kalimat... *",
+        "industry": "Contoh kategori industri (seni, musik, mewah) atau aset spesifik (emas, berlian) *",
+        "geography": "Geografi Pasar (Global, Eropa, spesifik negara) *",
+        "socialFirst": "Tautan Situs Web dan Media Sosial *",
+        "social": "Tautan Situs Web dan Media Sosial",
+        "presentation": "Tautan ke presentasi proyek (tidak wajib, namun sangat membantu)"
+      },
+      "acquisition": {
+        "title": "AKUISISI",
+        "description": "TENTUKAN DENGAN JELAS TARGET AUDIENS ANDA DAN CARA ANDA MENDAPATKAN ATAU AKAN MENDAPATKAN MEREKA",
+        "whyExists": "Mengapa proyek ini perlu ada, dan apa yang membedakannya? *",
+        "whyIntegrator": "Mengapa menjadi Integrator penting bagi Anda? *"
+      },
+      "objectives": {
+        "title": "TUJUAN UTAMA YANG INGIN ANDA CAPAI",
+        "first": "Tujuan 01 *",
+        "second": "Tujuan 02",
+        "more": "Tujuan {n}"
+      },
+      "kpis": {
+        "title": "METRIK UTAMA YANG INGIN ANDA PANTAU",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "APA DAN BAGAIMANA YANG AKAN ANDA LAKUKAN",
+        "focus": "Ceritakan secara rinci apa yang akan Anda fokuskan sebagai Integrator dan bagaimana keberhasilan proyek ini terlihat.",
+        "implement": "Ceritakan bagaimana Anda berencana mengimplementasikan proyek ini"
+      },
+      "roadmaps": {
+        "title": "PETA JALAN 3 BULAN DAN 3 TAHUN PERTAMA",
+        "description": "Anda harus menunjukkan kapan Anda memperkirakan akan mulai mencetak dan perkiraan jumlah sertifikat *"
+      },
+      "team": {
+        "title": "TIM",
+        "placeholder": "Ceritakan tentang tim Anda saat ini, jika ada, atau peran tim di masa depan yang mungkin Anda butuhkan, beserta tautan ke LinkedIn *"
+      },
+      "risk": {
+        "title": "FAKTOR RISIKO",
+        "placeholder": "Ceritakan alasan dan faktor yang akan menyebabkan kegagalan."
+      },
+      "optional": {
+        "title": "OPSIONAL",
+        "placeholder": "Adakah hal lain yang ingin Anda bagikan untuk meningkatkan peluang Anda terpilih?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Token",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Token OGY adalah <b>utilitas inti</b> Protokol ORIGYN.",
+      "paragraphTwo": "Token ini <b>menghubungkan</b> sertifikasi aset dunia nyata dengan infrastruktur blockchain terdesentralisasi, <b>menjadikan kepemilikan, autentikasi,</b> dan <b>transfer dapat diverifikasi dan aman.</b>",
+      "paragraphThree": "OGY memungkinkan sistem global di mana aset <b>fisik</b> tersertifikasi secara digital, <b>dilacak,</b> dan <b>diintegrasikan ke dalam</b> aplikasi dan pasar <b>terdesentralisasi.</b>",
+      "cta": "Beli OGY",
+      "imageAlt": "Token OGY"
+    },
+    "stats": {
+      "marketCap": "Kapitalisasi Pasar $OGY",
+      "burned": "Total OGY yang dibakar",
+      "circulating": "Pasokan beredar",
+      "holders": "Pemegang token"
+    },
+    "utility": {
+      "titlePrefix": "Kegunaan",
+      "titleEmphasis": "Protokol",
+      "lead": "Anda memerlukan token OGY untuk menggunakan ekosistem ORIGYN sepenuhnya:",
+      "cards": [
+        {
+          "title": "Sertifikasi",
+          "description": "Setiap aset yang disertifikasi di ORIGYN memerlukan OGY untuk mencetak sertifikat on-chain yang tidak dapat diubah."
+        },
+        {
+          "title": "Lapisan Transaksi",
+          "description": "Memfasilitasi transfer, sertifikasi ulang, dan peristiwa siklus hidup aset tersertifikasi."
+        },
+        {
+          "title": "Penyimpanan Data",
+          "description": "Mendukung penyimpanan metadata aset dan provenance yang aman dan terdesentralisasi."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "Token OGY",
+      "titleLineTwo": "Alamat Kontrak",
+      "description": "Token OGY digunakan pada blockchain Internet Computer dan beroperasi sebagai token utilitas native dalam Protokol ORIGYN.",
+      "bulletOne": "Kontrak ini mengatur penerbitan, transfer, dan interaksi OGY di seluruh protokol, memastikan transparansi dan verifikasi on-chain atas semua aktivitas token.",
+      "bulletTwo": "Anda dapat melihat dan berinteraksi dengan token OGY langsung melalui jaringan ICP.",
+      "warning": "Selalu verifikasi alamat kontrak sebelum berinteraksi dengan OGY.",
+      "contractLabel": "Alamat Kontrak Resmi:",
+      "copyAria": "Salin alamat kontrak",
+      "copied": "Disalin ke clipboard",
+      "cmcAria": "Lihat OGY di CoinMarketCap"
+    },
+    "governance": {
+      "title": "Tata Kelola",
+      "lead": "OGY adalah token tata kelola yang memberdayakan pemegang untuk:",
+      "items": [
+        "<b>Mengalokasikan</b> dana perbendaharaan untuk pertumbuhan ekosistem dan inisiatif strategis.",
+        "<b>Mengusulkan dan memilih</b> peningkatan protokol, aturan sertifikasi, dan perubahan ekosistem.",
+        "<b>Mengawasi</b> orientasi integrator dan certifier."
+      ],
+      "closing": "Tata kelola <b>sepenuhnya terdesentralisasi</b> melalui ORIGYN DAO, memberikan komunitas pengaruh langsung atas <b>evolusi protokol.</b>",
+      "cta": "LIHAT SELENGKAPNYA"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "dan",
+      "titleLineTwoEmphasis": "Hadiah",
+      "lead": "Staking OGY mengamankan jaringan sekaligus menyelaraskan insentif:",
+      "cards": [
+        {
+          "title": "Keamanan Jaringan",
+          "description": "Staker berpartisipasi dalam tata kelola dan membantu memvalidasi operasi protokol."
+        },
+        {
+          "title": "Hadiah",
+          "description": "Dapatkan bagian dari pendapatan protokol dari biaya sertifikasi dan aktivitas jaringan."
+        },
+        {
+          "title": "Keselarasan Jangka Panjang",
+          "description": "Staking mendorong partisipasi jangka panjang dan memperkuat ekosistem."
+        }
+      ],
+      "closing": "Model staking menghubungkan kegunaan token langsung dengan adopsi dan keberhasilan protokol.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "Mekanisme <b>Deflasi</b>",
+      "titleLineTwo": "dan <b>Akumulasi Nilai</b>",
+      "lead": "OGY mengintegrasikan model deflasi yang dirancang untuk pertumbuhan berkelanjutan:",
+      "items": [
+        {
+          "title": "Apa yang menjadikan OGY token deflasi?",
+          "answer": "OGY dirancang dengan model deflasi, yang berarti total pasokannya berkurang seiring waktu seiring penggunaan protokol."
+        },
+        {
+          "title": "Bagaimana mekanisme pembakaran token bekerja?",
+          "answer": "Setiap kali OGY digunakan untuk sertifikasi, sebagian token dibakar secara permanen. Ini mengurangi pasokan yang beredar."
+        },
+        {
+          "title": "Apa peran perbendaharaan?",
+          "answer": "Pendapatan protokol dikelola oleh perbendaharaan untuk mendukung pengembangan berkelanjutan, memberikan hadiah kepada peserta, dan membantu menjaga stabilitas ekosistem jangka panjang."
+        },
+        {
+          "title": "Bagaimana OGY menciptakan nilai seiring waktu?",
+          "answer": "Seiring semakin banyak pengguna mengadopsi protokol ORIGYN dan aktivitas sertifikasi meningkat, semakin banyak OGY yang dibakar. Pasokan yang terus berkurang ini, dikombinasikan dengan pertumbuhan penggunaan, mendukung penciptaan nilai jangka panjang."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Ikhtisar",
+      "titleEmphasis": "Tokenomics",
+      "totalSupplyLabel": "Total Pasokan:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Distribusi:</b> Dialokasikan untuk pertumbuhan ekosistem, hadiah staking, komunitas, dan tata kelola.",
+      "revenue": "<b>Model Pendapatan:</b> Biaya protokol yang dibayarkan dalam OGY menciptakan permintaan berkelanjutan sekaligus mengurangi pasokan melalui mekanisme pembakaran.",
+      "support": "Model ini dirancang untuk mendukung keberlanjutan protokol jangka panjang dan keselarasan pemegang token.",
+      "cta": "TOKENOMICS"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator biaya",
+      "description": "Gunakan kalkulator ORIGYN untuk memperkirakan biaya sertifikat unik Anda dengan semua data Anda di rantai"
+    },
+    "plan": {
+      "title": "Rencanakan mint Anda",
+      "description": "Beri tahu kami berapa banyak item dan apa yang Anda unggah.",
+      "itemsLabel": "Berapa banyak item?",
+      "uploadingLabel": "Apa yang Anda unggah?",
+      "knowExactSize": "Tahu ukuran pastinya?",
+      "totalUploadSize": "Total ukuran unggahan",
+      "usePreset": "Gunakan preset sebagai gantinya",
+      "combinedSize": "Ukuran gabungan semua file di seluruh item.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per item"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per item"
+        },
+        "dslr": {
+          "label": "Foto studio",
+          "hint": "20 MB per item"
+        },
+        "video": {
+          "label": "Video pendek",
+          "hint": "1 GB per item"
+        },
+        "video1hr": {
+          "label": "Video panjang",
+          "hint": "60 GB per item"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimasi langsung",
+      "titleRefreshing": "Memperbarui estimasi",
+      "description": "Diperbarui secara otomatis saat Anda mengubah pengaturan.",
+      "ogyEquivalent": "Setara OGY",
+      "ogySpotRate": "Harga spot OGY",
+      "itemSingular": "Item",
+      "itemPlural": "Item",
+      "upload": "Unggahan"
+    },
+    "breakdown": {
+      "title": "Rincian biaya",
+      "baseFee": "Biaya mint dasar",
+      "storageFee": "Biaya penyimpanan",
+      "items": "Item",
+      "uploadSize": "Ukuran unggahan"
+    },
+    "bytesUnit": "bita"
   }
 }

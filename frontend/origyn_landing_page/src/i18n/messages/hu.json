@@ -38,12 +38,12 @@
   "problem": {
     "eyebrow": "A probléma",
     "title": "Valójában senki sem futtat\n<i>AI-t a láncon.</i>",
-    "lead": "Minden projekt, amely azt állítja, hogy van <s>„láncon futó AI-ügynöke”</s>, ugyanazt a mintát követi: a következtetés a láncon kívül, központosított szervereken fut, és csak az eredmény kerül fel a blokkláncra. A modell soha nem fut a hálózaton belül. A láncot hirdetőtáblaként használják, nem számítási rétegként.",
+    "lead": "Minden projekt, amely azt állítja, hogy van <s>„láncon futó AI-ügynöke“</s>, ugyanazt a mintát követi: a következtetés a láncon kívül, központosított szervereken fut, és csak az eredmény kerül fel a blokkláncra. A modell soha nem fut a hálózaton belül. A láncot hirdetőtáblaként használják, nem számítási rétegként.",
     "leadStrong": "Ez nem láncon futó ügynök. Ez egy API-hívás nyugtával.",
     "steps": [
       {
         "title": "Az állítás",
-        "body": "„AI-vezérelt láncon futó ügynök.” A következtetés az AWS-en történik. A lánc csak a kimenetet tárolja."
+        "body": "„AI-vezérelt láncon futó ügynök.\" A következtetés az AWS-en történik. A lánc csak a kimenetet tárolja."
       },
       {
         "title": "A hiányosság",
@@ -135,8 +135,18 @@
         "gain": "Nyereség"
       },
       "rows": [
-        { "model": "Qwen 2.5 0.5B", "existing": "10 tok/call", "origyn": "29 tok/call", "gain": "2.9×" },
-        { "model": "SmolLM2-135M", "existing": "36 tok/call", "origyn": "103 tok/call", "gain": "2.9×" }
+        {
+          "model": "Qwen 2.5 0.5B",
+          "existing": "10 tok/call",
+          "origyn": "29 tok/call",
+          "gain": "2.9×"
+        },
+        {
+          "model": "SmolLM2-135M",
+          "existing": "36 tok/call",
+          "origyn": "103 tok/call",
+          "gain": "2.9×"
+        }
       ]
     },
     "cards": [
@@ -155,11 +165,26 @@
     "title": "Öt pillér, amelyet\naz AI nem tud <i>helyettesíteni.</i>",
     "lead": "Az AI tömegcikké teszi a termelést. Ez az öt terület megmarad. Az Origyn mindegyikben pozícióban van.",
     "pillars": [
-      { "title": "Bizalom", "description": "Origyn-hitelesítés — egy ellenőrizhető bizalmi jelzés." },
-      { "title": "Kontextus", "description": "A strukturált memória évtizedei — egy személyes jelzés, amelyet az AI nem tud utánozni." },
-      { "title": "Elosztás", "description": "Swiss Subnet — ellenőrizhető infrastruktúra ügynökök számára." },
-      { "title": "Ízlés", "description": "Automatikus kutatási folyamat — automatizálással segített kurálás." },
-      { "title": "Felelősség", "description": "Auditnapló és tanúsítvány — egy valódi kormányzási réteg." }
+      {
+        "title": "Bizalom",
+        "description": "Origyn-hitelesítés — egy ellenőrizhető bizalmi jelzés."
+      },
+      {
+        "title": "Kontextus",
+        "description": "A strukturált memória évtizedei — egy személyes jelzés, amelyet az AI nem tud utánozni."
+      },
+      {
+        "title": "Elosztás",
+        "description": "Swiss Subnet — ellenőrizhető infrastruktúra ügynökök számára."
+      },
+      {
+        "title": "Ízlés",
+        "description": "Automatikus kutatási folyamat — automatizálással segített kurálás."
+      },
+      {
+        "title": "Felelősség",
+        "description": "Auditnapló és tanúsítvány — egy valódi kormányzási réteg."
+      }
     ]
   },
   "memory": {
@@ -176,6 +201,730 @@
   },
   "language": {
     "label": "Nyelv",
-    "switchTo": "Váltás erre: {language}"
+    "switchTo": "Váltás erre: {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "nav": {
+    "token": "TOKEN",
+    "ai": "AI",
+    "certificates": "TANÚSÍTVÁNYOK",
+    "integrators": "INTEGRÁLÓK",
+    "useCases": "FELHASZNÁLÁSI ESETEK",
+    "governance": "IRÁNYÍTÁS",
+    "help": "SÚGÓ",
+    "toggleMenu": "Menü megnyitása/bezárása"
+  },
+  "footer": {
+    "certificates": "TANÚSÍTVÁNYOK",
+    "integrators": "INTEGRÁLÓK",
+    "ecosystem": "ÖKOSZISZTÉMA",
+    "useCases": "FELHASZNÁLÁSI ESETEK",
+    "ogyToken": "OGY TOKEN",
+    "dashboard": "IRÁNYÍTÓPULT",
+    "copyright": "©2026 Minden jog fenntartva – origyn"
+  },
+  "home": {
+    "hero": {
+      "subtitleDesktop": "Biztosítsa eszközeit, szellemi tulajdonát\nés identitását teljes mértékben a láncon.",
+      "subtitleMobile": "Biztosítsa eszközeit,\nszellemi tulajdonát,\nés identitását teljes mértékben a láncon.",
+      "logoAlt": "ORIGYN logó",
+      "certifyCta": "Tanúsítsa eszközeit",
+      "buyCta": "Vásároljon $OGY-t",
+      "marquee": "Az ORIGYN lehetővé teszi, hogy adatait és eszközeit biztonságosan, teljes mértékben a láncon tárolja"
+    },
+    "stats": {
+      "marketCap": {
+        "title": "$OGY piaci kapitalizáció",
+        "tooltip": "Az összes forgalomban lévő OGY token teljes piaci értéke az aktuális tokenárfolyam alapján."
+      },
+      "tvl": {
+        "title": "Hitelesített eszközök teljes lekötött értéke (TVL) USD-ben",
+        "tooltipTitle": "Teljes lekötött érték (TVL)",
+        "tooltip": "A TVL a kibocsátott tanúsítványok értékének felel meg; ez nem jelenti azt, hogy az ORIGYN ezeket az eszközöket letétkezelőként tartja."
+      },
+      "users": {
+        "title": "Felhasználók",
+        "tooltip": "Azon magánszemélyek, márkák és intézmények összesített száma, akik aktívan használják az ORIGYN-t hitelesített eszközök kibocsátásához, kezeléséhez vagy tulajdonlásához."
+      },
+      "assets": {
+        "title": "Összes hitelesített eszköz",
+        "tooltip": "Azon fizikai vagy digitális tételek száma, amelyek hivatalos ORIGYN tanúsítványt kaptak."
+      }
+    },
+    "whyOrigyn": {
+      "titleLineOne": "Miért",
+      "titleLineTwo": "ORIGYN",
+      "subtitle": "Az ORIGYN: ahol a valós eszközök találkoznak a blokklánccal.",
+      "body": "Az ORIGYN a világ legfejlettebb RWA-protokollja, amelyet arra terveztek, hogy a valós eszközöket – a képzőművészettől és az aranytól a luxuscikkekig és a szellemi tulajdonig – teljes mértékben a láncra hozza.\n\nBizalom nélküli tanúsítási infrastruktúrát biztosít, amely garantálja a nagy értékű eszközök hitelességét, eredetét és tulajdonjogát."
+    },
+    "benefits": {
+      "items": [
+        {
+          "title": "100%-os láncon belüli tanúsítás",
+          "description": "Közvetítők nélkül, hamisítás nélkül. Teljes mértékben decentralizált."
+        },
+        {
+          "title": "$OGY token hasznosság",
+          "description": "Az ORIGYN ökoszisztémát irányítás és protokoll-hasznosság révén hajtja."
+        },
+        {
+          "title": "Többeszközös támogatás",
+          "description": "Tanúsítsa a művészeti alkotásokat, luxuscikkeket, aranyat, ingatlanokat és egyebeket."
+        },
+        {
+          "title": "Iparágvezető biztonság",
+          "description": "Megváltoztathatatlan blokklánc-védelem legértékesebb eszközei számára."
+        }
+      ]
+    },
+    "howItWorks": {
+      "titlePrefix": "Hogyan",
+      "titleSuffix": "működik",
+      "steps": [
+        {
+          "description": "A valós eszközök láncon való elhelyezésének egyszerűnek kell lennie. Az ORIGYN tanúsítási folyamata biztonságos, decentralizált és mindössze három lépésben könnyen elvégezhető: <br /><br />Töltse fel az eszköz metaadatait és a vonatkozó dokumentációt. Az ORIGYN egyedi, hamisíthatatlan digitális tanúsítványt állít ki közvetlenül a blokkláncon, hozzárendeli azt az eszközhöz, és összekapcsolja a jogos tulajdonossal.",
+          "panelTitle": "Digitális tanúsítvány kibocsátása",
+          "panelDescription": "Töltse fel az eszköz adatait, és bocsásson ki blokklánc-tanúsítványt."
+        },
+        {
+          "description": "Minden tanúsítvány kriptográfiailag ellenőrizhető. Az eszköz hitelességét, eredetét és tulajdonjogát az ORIGYN decentralizált protokollja validálja.",
+          "panelTitle": "Ellenőrzés és hitelesítés",
+          "panelDescription": "Garantálja az eszköz hitelességét és a tulajdonjog átláthatóságát."
+        },
+        {
+          "description": "A tanúsítás után eszköze tartható, átruházható, kereskedhető, vagy felhasználható digitális ökoszisztémákban – DeFi alkalmazásoktól és NFT-piacoktól a privát tranzakciókig és intézményi nyilvántartásokig.",
+          "panelTitle": "Átruházás és nyomon követés",
+          "panelDescription": "Használja és kövesse nyomon hitelesített eszközét DeFi, viszonteladás vagy befektetés céljából."
+        }
+      ],
+      "goToStep": "{n}. lépésre ugrás"
+    },
+    "useCases": {
+      "titlePrefix": "Felhasználási",
+      "titleSuffix": "esetek",
+      "description": "Az ORIGYN protokollja széles iparági körök kiszolgálására készült, ahol a bizalom, az eredet és a hitelesség kiemelt fontosságú. Az alábbiakban bemutatjuk azokat a kulcságazatokat, amelyek már most az ORIGYN tanúsítási infrastruktúráját alkalmazzák.",
+      "items": [
+        {
+          "title": "Művészet",
+          "description": "Hitelesítse és védje a fizikai és digitális alkotások eredetét a láncon."
+        },
+        {
+          "title": "Arany",
+          "description": "Tanúsítsa az aranyat megváltoztathatatlan, nyomon követhető és hamisíthatatlan digitális tanúsítványokkal."
+        },
+        {
+          "title": "Gyémánt",
+          "description": "Kövesse nyomon minden gyémánt eredetét, minősítését és tulajdonjogát blokklánc-pontossággal."
+        },
+        {
+          "title": "Gyártási eredet",
+          "description": "Igazolja bármely termék – az óráktól a divattermékekig – eredetét, hitelességét és kézművességét."
+        }
+      ],
+      "indicatorAria": "{n}. felhasználási esetre ugrás",
+      "discover": "Fedezzen fel többet"
+    },
+    "certify": {
+      "titleLine": "Tanúsítsa",
+      "titleEmphasis": "eszközeit",
+      "subtitle": "Használja az ORIGYN Tanúsítási Kalkulátort, hogy azonnal megbecsülje eszközei láncon tárolt digitális tanúsítványokkal történő biztosításának költségeit. Akár képzőművészeti alkotásokat, luxuscikkeket, aranyat vagy más értékes eszközöket tanúsít, ez az eszköz világos képet ad az infrastruktúra- és technológiai költségekről – minden találgatás nélkül.",
+      "contactPrompt": "Eszközei tanúsításához vegye fel velünk a kapcsolatot:",
+      "contactCta": "Kapcsolatfelvétel az ORIGYN-nel"
+    },
+    "integrator": {
+      "titleLineOne": "Integrálói",
+      "titleLineTwo": "Program",
+      "description": "Az ORIGYN Integrálói Program azoknak a vállalkozásoknak, platformoknak és fejlesztőknek szól, akik az ORIGYN decentralizált tanúsítási infrastruktúráját közvetlenül kívánják beépíteni szolgáltatásaikba.\n\nAkár piacteret, ellátási lánc megoldást vagy luxusmárkát képvisel, biztonságos, láncon alapuló eszközellenőrzést kínálhat anélkül, hogy mindent elölről kellene felépítenie.",
+      "cta": "Csatlakozás az Integrálói Programhoz"
+    },
+    "roadmap": {
+      "title": "Menetrend",
+      "description": "Új segédprogramoktól és irányítási funkcióktól az iparágak és fejlesztők bővülő támogatásáig. Minden mérföldkő tükrözi küldetésünket: a valós eszközöket méretezhető, ellenőrizhető és decentralizált infrastruktúrán keresztül teljes mértékben a láncra hozni.",
+      "items": [
+        {
+          "title": "Az ORIGYN Foundation finanszírozása",
+          "description": "Az ORIGYN Foundation a svájci Neuchâtelben jött létre az ORIGYN Protocol fejlesztésének megkezdésére."
+        },
+        {
+          "title": "Az OGY token elindítása",
+          "description": "A natív hasznossági token, a $OGY, a protokolldíjak, a governance és a staking működtetésére jön létre."
+        },
+        {
+          "title": "ORIGYN NFT Standard v1.0",
+          "description": "Elindul az ORIGYN NFT standard első verziója, amely lehetővé teszi az on-chain tanúsítást."
+        },
+        {
+          "title": "Tokenomics 2.0 frissítés",
+          "description": "A korábban a Foundation számára allokált 200 millió $OGY token elégetésre kerül, deflációs nyomást indítva el."
+        },
+        {
+          "title": "Minting Platform 1.0",
+          "description": "Elindul az első on-chain minting felület digitális tanúsítványokhoz."
+        },
+        {
+          "title": "Stratégiai partnerségek",
+          "description": "Stratégiai együttműködések a FederItaly és a METALOR vállalatokkal olasz gyártású termékek és tokenizált arany tanúsítására."
+        },
+        {
+          "title": "Első aranyvásárlás",
+          "description": "3 kg fizikai arany megvásárlása és tokenizálása az ORIGYN Protocol segítségével."
+        },
+        {
+          "title": "A CanDB felvásárlása",
+          "description": "Az ORIGYN felvásárolja a CanDB-t, egy decentralizált, skálázható, NFT metaadatokra optimalizált adatbázis-megoldást."
+        },
+        {
+          "title": "Tokenomics 3.0 és Dashboard indulás",
+          "description": "A Tokenomics 3.0-val deflációs modell kerül bevezetésre, és megjelenik az ORIGYN Dashboard első verziója."
+        },
+        {
+          "title": "10 000 protokollfelhasználó",
+          "description": "Az ORIGYN meghaladja a 10 000 egyedi protokollfelhasználót."
+        },
+        {
+          "title": "A Gold DAO elindítása",
+          "description": "A Gold DAO lesz az első ORIGYN-re épülő DAO, amely fizikai aranyat tokenizál és tanúsít on-chain."
+        },
+        {
+          "title": "500M OGY adomány a Gold DAO-nak",
+          "description": "Félmilliárd $OGY token kerül adományozásra a Gold DAO hosszú távú trezorjának támogatására."
+        },
+        {
+          "title": "ORIGYN DAO integrálva az ICP SNS-szel",
+          "description": "Az ORIGYN DAO teljesen decentralizálttá válik, és az Internet Computer SNS keretrendszere irányítja."
+        },
+        {
+          "title": "Dashboard V2 megjelenés",
+          "description": "A dashboard új verziója élő metrikákat, staking statisztikákat és governance eszközöket tartalmaz."
+        },
+        {
+          "title": "30 000 felhasználós mérföldkő",
+          "description": "Az ORIGYN több mint 30 000 felhasználóra nő, ami 300%-os növekedés hat hónap alatt."
+        },
+        {
+          "title": "Együttműködés Leo Caillarddal és Gil Sertissage-zsal",
+          "description": "Az ORIGYN fizikai műalkotásokat és gyémántokat tanúsít nagy presztízsű partnerségek keretében."
+        },
+        {
+          "title": "ORIGYN NFT Standard v2.0",
+          "description": "Az NFT standard frissül, hogy lehetővé tegye a tanúsítványok biztonságos átruházhatóságát."
+        },
+        {
+          "title": "Integrator Framework elindítása",
+          "description": "Szabályok és onboarding struktúra jön létre az ORIGYN-nel integráló új partnerek támogatására."
+        },
+        {
+          "title": "A Cecil DAO elindítása",
+          "description": "Az ORIGYN támogatja a Cecil DAO elindítását, hogy természetvédelmi és humanitárius projekteket finanszírozzon blockchain átláthatósággal."
+        },
+        {
+          "title": "A ClaimLink felvásárlása",
+          "description": "Az ORIGYN felvásárolja a ClaimLinket, egy ICP-re épülő decentralizált NFT- és tokenelosztási platformot."
+        },
+        {
+          "title": "ICRC-7 NFT Standard",
+          "description": "Új standard kerül bevezetésre a tanúsítványok interoperabilitásának és az egész ökoszisztémára kiterjedő hasznosságának növelésére."
+        },
+        {
+          "title": "Egy nyilvános",
+          "titleSpan": "Minting Studio elindítása",
+          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi RWA on-chain tanúsítványok mintelését az ORIGYN infrastruktúrán."
+        },
+        {
+          "title": "",
+          "titleSpan": "Runestone",
+          "description": "A Runestone rejtélye 2026 második negyedévében, Genfben kerül felfedésre."
+        },
+        {
+          "title": "Minting Lab",
+          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi az on-chain mintelést az ORIGYN infrastruktúra használatával."
+        },
+        {
+          "title": "IP-védelem bevezetése",
+          "description": "Az on-chain szellemi tulajdonjog-tanúsítás támogatása integrálásra kerül a protokollba."
+        },
+        {
+          "title": "Cross-chain megvalósítás",
+          "description": "A cross-chain kompatibilitás kiterjeszti az ORIGYN elérését más jelentős ökoszisztémákra."
+        },
+        {
+          "title": "Globális wallet- és marketplace-integráció",
+          "description": "Az ORIGYN NFTs világszerte elérhetővé válnak vezető walleteken és NFT marketplace-eken keresztül."
+        },
+        {
+          "title": "A univerzális tanúsítási standarddá válás",
+          "description": "Az ORIGYN célja, hogy globális mércévé váljon a digitális tanúsításban minden eszközosztály esetében."
+        }
+      ]
+    },
+    "partners": {
+      "label": "PARTNEREK",
+      "testimonials": [
+        {
+          "title": "A Metalor vezérigazgatója",
+          "description": "\"Az ORIGYN a világ legfejlettebb és legátfogóbb digitális tanúsítási technológiája. Minden adat teljes egészében blockchainen van tárolva, hogy a tanúsítványok megváltoztathatatlanok és átláthatók legyenek. A Metalor örömmel dolgozik együtt egy Neuchâtel-i székhelyű fintech vállalattal, mint az ORIGYN, hogy innovatív megoldást vigyen a piacokra.\""
+        },
+        {
+          "title": "Művészeti szakértő",
+          "description": "\"Magángyűjtőim számára a bizalom és az örökség mindent jelent. Az ORIGYN tanúsítási technológiája nélkülözhetetlenné vált: nemcsak minden műalkotás eredetiségét garantálja, hanem biztosítja annak nyomon követhetőségét és értékét generációkon át. Már nem csupán egy műalkotás birtoklásáról van szó, hanem annak történetének örökre történő on-chain biztosításáról. Az ORIGYN ezt lehetővé teszi.\""
+        },
+        {
+          "title": "A Cyber társalapítója",
+          "description": "\"Mindig azt mondjuk, hogy a gyémántok örökké tartanak, és ez igaz. Ugyanígy kell gondolkodni az Ön által megadott információkról is, mert 100 vagy 200 év múlva ezek a gyémántok még mindig létezni fognak. Olyan technológiára volt szükségünk, amely biztosítja, hogy ezeket az információkat továbbra is rendelkezésre tudjuk bocsátani, különösen egy nagy értékű, generációkon átívelő termék esetében... Az ORIGYN-nel kötött partnerségünk fő oka az volt, hogy mindezt biztosítani tudták.\""
+        }
+      ]
+    },
+    "bePart": {
+      "titleLead": "Vegyen részt a",
+      "emphasisDesktop": "döntéshozatalban",
+      "emphasisMobileLineOne": "Döntés-",
+      "emphasisMobileLineTwo": "hozatalban",
+      "cta": "Csatlakozzon az ORIGYN DAO-hoz"
+    }
+  },
+  "useCase": {
+    "notFound": "A felhasználási eset nem található",
+    "cases": {
+      "gold": [
+        {
+          "title": "Arany",
+          "description": "A világ legnagyobb eszközeként és legszorosabban felügyelt nyersanyagaként az arany a legmagasabb szintű biztonságot igényli. <br /><br />Az ORIGYN megfelel ezeknek a követelményeknek, amint azt a <a href='https://www.metalor.com/' target='_blank'>Metalor</a>, az aranyfinomítás világvezetője is bizonyítja, amely az ORIGYN protokollt választotta adatai biztosítására. Először fordult elő, hogy az aranyrúdakhoz kapcsolódó összes műszaki információ – beleértve a nagyfelbontású képeket és dokumentumokat – egyetlen tanúsítványban kerül rögzítésre a blokkláncon."
+        },
+        {
+          "description": "Emellett számos projekt, mint például a <a href='https://www.gold-dao.org/' target='_blank'>GoldDAO</a> és a <a href='https://bity.com' target='_blank'>Bity</a>, ezeket a tanúsítványokat használja a megfelelő aranyrúdak értékesítéséhez vagy fizikai arannyal fedezett tokenek létrehozásához."
+        }
+      ],
+      "art": [
+        {
+          "title": "Művészet",
+          "description": "A művészeti szakértőket mélyen foglalkoztatja a bizalom és a műalkotások tanúsítványainak garantálása. Ezért számos esetben már bevezették az ORIGYN technológiát.<br /><br />Elismert művészek, mint például <a href='https://conormccreedy.com/' target='_blank'>Conor McCreedy</a> és <a href='https://www.leocaillard.com/' target='_blank'>Leo Caillard</a>, saját ORIGYN tanúsítványokat hoztak létre munkájukhoz kapcsolódó adatok védelmére. Ezek a tanúsítványok teljes mértékben láncon vannak, hamisíthatatlanok és másolhatatlanok, lehetővé téve a művészek számára a hamisítás elleni küzdelmet, miközben nagyfelbontású képekkel, videókkal és dokumentumokkal gazdagítják a gyűjtői élményt."
+        },
+        {
+          "description": "Olyan szervezetek, mint alapítványok, szervezetek, családok, galériák és művészeti tanácsadók, amelyeknek digitális tanúsítványokat kell létrehozniuk ügyfeleik számára, az ORIGYN-t alkalmazzák a maximális biztonság és titoktartás megőrzése érdekében. Számos galéria már bevezette az ORIGYN technológiát, köztük a Retelet Galéria René Magritte-alkotások tanúsítványaihoz.<br /><br />Az ORIGYN technológia lehetővé teszi a tanúsítványokon keresztüli értékesítést is, különösen a társtulajdonosi értékesítést. Ez lehetővé teszi, hogy a műalkotásokat több tulajdonos között osszák meg úgy, hogy a tanúsítványt több részre osztják, amelyek mindegyike tulajdonjog-igazolásként szolgál."
+        }
+      ],
+      "madein": [
+        {
+          "title": "Gyártási eredet",
+          "description": "A nemzeti eredet több mint egy felirat. Identitás, minőség és kulturális érték deklarációja. Ahogy a hamisítás növekszik, annak bizonyítása, hogy egy terméket hol és hogyan gyártottak, kulcsfontosságú megkülönböztető tényezővé vált az iparágak márkái számára.<br /><br />Erre válaszul a <a href='https://www.federitalyweb.it/' target='_blank'>Federitaly</a> létrehozta a 100% Made in Italy tanúsítást. Ez a jogilag elismert szabvány szigorú dokumentáción, független auditáláson és kormányzati szintű érdekképviseleten keresztül védi az olasz kiválóságot. Az ORIGYN a rendszer digitális alapját biztosítja azáltal, hogy minden hitelesített terméket ellenőrizhető eredetigazolásként rögzít a blokkláncon."
+        },
+        {
+          "description": "Minden tanúsítvány biztonságos, hamisíthatatlan digitális útlevéllé válik. Erősíti a fogyasztói bizalmat, átláthatóságot biztosít az ellátási lánc mentén, és támogatja azokat a vállalkozásokat, amelyek a hitelesség jegyében tevékenykednek."
+        }
+      ],
+      "luxury": [
+        {
+          "title": "Luxus",
+          "description": "Az ORIGYN technológia választ ad a luxuságazat igényére, hogy megújítsa önmagát, és személyre szabottabb, átláthatóbb termékélményeket kínáljon.<br /><br />A <a href='http://www.suzannesyz.ch/' target='_blank'>Suzanne Syz</a> ékszerész az ORIGYN blokklánc-technológiát alkalmazza teljes kollekciójához tanúsítványok létrehozására. Ez az összes adatot teljes mértékben a láncon biztosítja, miközben presztízsvásárlóik számára következő generációs tanúsítványokat kínál, amelyek garantálják a titoktartást, a hitelességet és a tulajdonjogot."
+        },
+        {
+          "description": "Más luxusmárkák, mint például a <a href='https://gil-sertissage.ch/' target='_blank'>Gil Sertissage</a>, szintén az ORIGYN-t használják neves órásmestereknek szánt gyémántjaik teljes nyomonkövethetőségi láncának rögzítésére. Számos más alkalmazás is lehetséges, beleértve személyre szabott marketingtartalmak hozzáadását a tanúsítványokhoz, vagy a technológia mesterséges intelligenciával való kombinálását a másodlagos piacok valós idejű hitelességmeghatározásához."
+        }
+      ]
+    }
+  },
+  "helpCenter": {
+    "titlePrefix": "Súgó-",
+    "titleSuffix": "központ",
+    "searchPlaceholder": "Keresés…",
+    "faqs": [
+      {
+        "title": "Az OGY token",
+        "description": "A Web 3.0 decentralizált eszköztanúsításának hajtóereje",
+        "answer": "Az <strong>OGY token</strong> az ORIGYN Protocol alapvető hasznosítási eleme. Összekapcsolja a valós eszközök tanúsítását a decentralizált blokklánc-infrastruktúrával, valóban biztonságossá téve a tulajdonjogot, a hitelesítést és a tartalomverifikációt.<br><br>Az OGY olyan globális rendszert tesz lehetővé, amelyben a fizikai eszközök digitálisan tanúsítottak, nyomon követhetők és integráltak decentralizált alkalmazásokba és piacokba."
+      },
+      {
+        "title": "Protokoll-hasznosság",
+        "description": "Az OGY az ORIGYN ökoszisztéma alapvető funkcióinak elvégzéséhez szükséges.",
+        "answer": "<strong>Tanúsítás:</strong> Az ORIGYN-en hitelesített minden eszközhöz OGY szükséges egy megváltoztathatatlan láncon belüli tanúsítvány kibocsátásához.<br><strong>Tranzakciós réteg:</strong> Megkönnyíti a hitelesített eszközök átruházását, újratanúsítását és életciklus-eseményeit.<br><strong>Adattárolás:</strong> Támogatja az eszközmetaadatok és az eredet biztonságos, decentralizált tárolását.<br>Ez a hasznosság biztosítja, hogy az OGY szerves részét képezze a protokollon belüli minden tranzakciónak."
+      },
+      {
+        "title": "Az OGY token szerződéscíme",
+        "description": "Az OGY token az Internet Computer blokkláncon van telepítve.",
+        "answer": "Az OGY token az Internet Computer blokkláncon van telepítve, és natív hasznosítási tokenként működik az ORIGYN Protocolon belül.<br><br>Hivatalos szerződéscím:</strong><br><strong>lkwrt-vyaaa-aaaaq-aadhq-cai</strong><br><br>A felhasználók eszközöket adnak meg a híváson belül<br>A hívással való foglalkozás előtt mindig ellenőrizze a szerződéscímet.<br><br><a href=\"https://coinmarketcap.com/currencies/origyn-foundation/#Markets\" target=\"_blank\" rel=\"noopener noreferrer\">[BUY OGY]</a>"
+      },
+      {
+        "title": "Irányítás",
+        "description": "Az OGY irányítási token, amely feljogosítja tulajdonosait, hogy:",
+        "answer": "• Javaslatot tegyenek és szavazzanak a protokollfrissítésekről, likviditási szabályokról és ökoszisztéma-változásokról.<br>• Felügyelik az integrálók és hitelesítők felvételét.<br>• A kincstári alapokat innováció, növekedés és stratégiai kezdeményezések felé allokálják.<br><br>Az irányítás teljes mértékben decentralizált az ORIGYN DAO-n keresztül, közvetlen befolyást adva a közösségnek a protokoll fejlődése felett."
+      },
+      {
+        "title": "Staking és jutalmak",
+        "description": "Az OGY staking biztosítja a hálózatot, miközben összehangolja az ösztönzőket.",
+        "answer": "<strong>Hálózatbiztonság:</strong> A stakerek részt vesznek az irányításban és segítenek a protokoll működésének validálásában.<br><br><strong>Jutalmak:</strong> Részesedjen a protokoll bevételéből, amelyet tanúsítási díjak és hálózati aktivitás generál.<br><br><strong>Hosszú távú elkötelezettség:</strong> A staking hosszú távú részvételt ösztönöz és erősíti az ökoszisztémát.<br><br>A staking-modell közvetlenül összeköti a token-hasznosságot a protokoll elfogadásával és sikerével.<br><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>[STAKE NOW]</strong></a>"
+      },
+      {
+        "title": "Deflációs mechanika / értékfelhalmozás",
+        "description": "Az OGY fenntartható növekedésre tervezett deflációs modellt integrál.",
+        "answer": "<strong>Tanúsítási égetés:</strong> A tanúsításban felhasznált OGY egy része véglegesen kivonásra kerül a forgalomból.<br><br><strong>Kincstárkezelés:</strong> A protokoll bevétele támogatja a fejlesztést, a jutalmakat és a token-érték optimalizálását.<br><br>Ahogy a protokoll-használat növekszik, az OGY kínálata csökken, erősítve az elfogadással összhangban lévő értékteremtést."
+      },
+      {
+        "title": "Tokenomika áttekintés",
+        "description": "Teljes kínálat: 10.4 Billion OGY",
+        "answer": "<strong>Elosztás:</strong> Az ökoszisztéma növekedésére, staking-jutalmakra, közösségre és irányításra allokálva.<br><br><strong>Bevételi modell:</strong> Az OGY-ban fizetett protokolldíjak folyamatos keresletet teremtenek, miközben égetési mechanizmusokon keresztül csökkentik a kínálatot.<br>A modellt a hosszú távú protokoll-fenntarthatóság és a jövőorientált összhang támogatására tervezték."
+      },
+      {
+        "title": "Az OGY jövője",
+        "description": "Az OGY egy decentralizált keretrendszer alapköve.",
+        "answer": "Az OGY egy decentralizált keretrendszer alapköve, amelyet arra terveztek, hogy a láncon tanúsítsa, kezelje és felszabadítsa a valós eszközök értékét. Ahogy az ORIGYN növekszik, az OGY szerepe is bővül: az eszköztanúsítást, az irányítást és az ökoszisztéma fejlesztését hajtó gazdasági motorként funkcionál."
+      },
+      {
+        "title": "Élő token adatok megtekintése",
+        "description": "Tekintse meg az élő token adatokat, a staking lehetőségeket és az irányításban való részvételt az ORIGYN irányítópulton.",
+        "answer": "<span style=\"text-decoration: underline;\">ORIGYN irányítópult</span>: <a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Kattintson az irányítópult eléréséhez</strong></a>"
+      }
+    ]
+  },
+  "integratorPage": {
+    "hero": {
+      "titleLead": "Váljon",
+      "titleConnector": "",
+      "titleEmphasis": "Integrálóvá",
+      "subtitle": "CSATLAKOZZON AZ INTEGRÁLÓI PROGRAMHOZ, ÉS ÉPÍTSE A BIZALOM JÖVŐJÉT AZ ORIGYN BLOKKLÁNC-TANÚSÍTÁSI TECHNOLÓGIÁJÁVAL",
+      "cta": "Csatlakozzon most"
+    },
+    "program": {
+      "titleLineOne": "Integrálói",
+      "titleLineTwo": "Program",
+      "steps": [
+        {
+          "labelBold": "MI",
+          "labelRest": "AZ INTEGRÁLÓI PROGRAM?",
+          "description": "Az Integrálói Program egy stratégiai kezdeményezés, amelynek célja az ORIGYN protokoll népszerűsítése, elfogadásának ösztönzése és ökoszisztémájának bővítése."
+        },
+        {
+          "labelBold": "KIK",
+          "labelRest": "AZ INTEGRÁLÓK?",
+          "description": "<ul><li><strong>Az integrálók független cégek,</strong> amelyek az ORIGYN protokoll alapján fejlesztenek termékeket azzal a közös céllal, hogy ORIGYN tanúsítványokat bocsássanak ki és népszerűsítsék az ORIGYN protokollt egy adott iparágban, eszközosztályban vagy több ágazatban.</li><li><strong>Lehetővé tevőként működve</strong> segítik a vállalkozásokat abban, hogy elfogadják az ORIGYN blokklánc-tanúsítási technológiáját anélkül, hogy mélyreható blokklánc- és Web3-szakértelemre lenne szükségük.</li><li><strong>Az ORIGYN Alapítvány által végzett átvilágítási folyamatot követően</strong> az integrálókat az ORIGYN DAO tokenbirtokosokai megválasztják és megszavazzák.</li></ul>"
+        },
+        {
+          "labelBold": "HOGYAN",
+          "labelRest": "VÁLHAT INTEGRÁLÓVÁ?",
+          "description": "Az integrálóvá váláshoz egy vállalatnak igazolnia kell, hogy nagy léptékben képes szolgáltatásokat nyújtani, miközben teljesíti az összes követelményt és rendelkezik a szükséges szakértelemmel egy vagy több ágazat kiszolgálásához."
+        }
+      ],
+      "goToStep": "{n}. lépésre ugrás",
+      "joinNow": "Csatlakozzon most"
+    },
+    "workflow": {
+      "titleLineOne": "Jelentkezési",
+      "titleLineTwo": "folyamat",
+      "steps": [
+        {
+          "title": "Jelentkezési lap",
+          "content": "<p>A jelentkezés részeként az integrálóknak ki kell tölteniük a <strong><a href=\"/integrator/join\">Projekt-jelentkezési lapot online</a></strong>, és elő kell készíteniük az <strong>Átvilágítási dokumentációt</strong>, amelyet a <strong><a href=\"mailto:admin@origyn.ch\">admin@origyn.ch</a></strong> e-mail-címre kell elküldeni.</p>\n<p>Az átvilágítási dokumentáció tartalmazza:</p>\n<ul>\n<li>Bejegyzési igazolás másolata</li>\n<li>UBO – Tényleges Kedvezményezettek leírása</li>\n<li>Alapszabály és Létesítő okirat másolata</li>\n<li>Az Igazgatótanács határozata, amely formalizálja az integrálóként való jelentkezési szándékot és a staking-szabályok betartását, valamint az integrálót üzemeltetni jogosult tisztviselők listájával</li>\n<li>A felhatalmazott aláírók azonosítása a vállalat által megfelelően igazolt fényképek és aláírási kártyák alapján</li>\n<li>A vállalat nevében eljárni jogosult meghatalmazással rendelkező ügyvezetők, tisztviselők vagy alkalmazottak személyazonossági és lakcímigazolásainak másolatai</li>\n<li>Igazgatók listája</li>\n<li>Integrálói Projekt-jelentkezési lap</li>\n</ul>"
+        },
+        {
+          "title": "Az ORIGYN Alapítvány általi felülvizsgálat",
+          "content": "<p>Az integrálóvá válás első lépése az, hogy az ORIGYN Alapítvány átvilágítási folyamatot követően validálja a jelöltet. Az integráló elfogadja, hogy megosztja az összes kért dokumentumot az összes szükséges KYC/KYB/AML eljárás teljesítése céljából.</p>"
+        },
+        {
+          "title": "Irányítási szavazás az ORIGYN DAO útján",
+          "content": "<p>NYILVÁNOS SZAVAZÁS AZ ORIGYN DAO ÁLTAL:</p>\n<p>Miután az Alapítvány lezárja az átvilágítási folyamatot, az integráló egy DAO-szavazás tárgyává válik az SNS Platformon közzétett nyilvános javaslat útján. Az összes ORIGYN-javaslat megtekinthető a <strong><a href=\"https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai\" target=\"_blank\" rel=\"noopener noreferrer\">https://nns.ic0.app/proposals/?u=leu43-oiaaa-aaaaq-aadgq-cai</a></strong> oldalon.</p>\n<p>A jogi személy székhelyének, üzleti nevének bármilyen változtatása vagy az együttműködés megszüntetése nyilvánosan kerül megszavazásra az SNS Platformon.</p>"
+        },
+        {
+          "title": "50 000 000 OGY zárolása (staking)",
+          "content": "<p>Ha a javaslat sikeresen elfogadásra kerül, az integrálónak 50,000,000 OGY-t kell zárolnia az ORIGYN Irányításban 1 évre, nem feloldható módon.</p>\n<p>Ez a lépés biztosítja az integráló hosszú távú elkötelezettségét és szavazati jogát az ORIGYN irányításában való aktív részvételhez. Az összes zárolt neuron nyilvánosan megjelenik az irányítópulton a <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> oldalon.</p>\n<p>Az összes statisztika, mint például a kibocsátott tanúsítványok száma, a hitelesített eszközök TVL-je stb., nyilvánosan megjelenik az integráló részben a <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> oldalon.</p>"
+        },
+        {
+          "title": "Teljesítményértékelés",
+          "content": "<p>Az egyes ágazatoktól és vállalatoktól függően a kibocsátott tanúsítványok minimális száma az integrálói megállapodás részét képezheti. Az ORIGYN Alapítvány ezért rendszeresen elvégzi az integrálók mérföldkő- és teljesítményértékelését.</p>\n<p>Az összes statisztika, mint például a kibocsátott tanúsítványok száma, a hitelesített eszközök TVL-je stb., nyilvánosan megjelenik az integráló részben a <strong><a href=\"https://dashboard.origyn.com\" target=\"_blank\" rel=\"noopener noreferrer\">https://dashboard.origyn.com</a></strong> oldalon.</p>"
+        }
+      ]
+    },
+    "download": {
+      "titleLineOne": "Letöltés:",
+      "titleLineTwo": "Integrálói szerződés",
+      "cta": "Letöltés"
+    }
+  },
+  "integratorJoin": {
+    "title": "Integrálói Program",
+    "titleItalic": "Jelentkezési lap",
+    "requiredLabel": "KÖTELEZŐ *",
+    "requiredMessage": "Kötelező",
+    "emailInvalid": "Kérjük, adjon meg érvényes e-mail-címet",
+    "send": "KÜLDÉS",
+    "sending": "Küldés folyamatban…",
+    "errorSend": "Űrlapküldési hiba.",
+    "fileSizeError": "A fájlméret nem haladhatja meg az 1 MB-ot",
+    "addLink": "HIVATKOZÁS HOZZÁADÁSA",
+    "addObjective": "CÉLKITŰZÉS HOZZÁADÁSA",
+    "addKpi": "KPI HOZZÁADÁSA",
+    "uploadHighlight": "Töltse fel",
+    "uploadSuffix": " logóját, vagy húzza ide (OPCIONÁLIS)",
+    "uploadHint": "JPEG, PNG, SVG, PDF — legfeljebb 1 MB",
+    "logoPreviewAlt": "Logó előnézet",
+    "successTitle": "Köszönjük",
+    "successMessage": "Hamarosan felvesszük Önnel a kapcsolatot",
+    "backToIntegrator": "VISSZA AZ INTEGRÁLÓI OLDALRA",
+    "errorTitle": "Hiba történt",
+    "errorMessageDefault": "Kérjük, próbálja újra, vagy térjen vissza később",
+    "retry": "ÚJRAPRÓBÁLÁS",
+    "sections": {
+      "representative": {
+        "title": "INTEGRÁLÓI KÉPVISELŐ",
+        "fullName": "TELJES NÉV *",
+        "email": "E-MAIL-CÍM *",
+        "phone": "TELEFONSZÁM *"
+      },
+      "overview": {
+        "title": "ÁTTEKINTÉS",
+        "description": "KÉRJÜK, ÍRJON RÖVID ÁTTEKINTÉST AZ INTEGRÁLÓI PROJEKTRŐL, BELEÉRTVE",
+        "vision": "Az integráló víziója egy mondatban… *",
+        "industry": "Iparági kategória példák (art, zene, luxus) vagy specifikus eszközök (arany, gyémánt) *",
+        "geography": "Piaci geográfia (globális, európai, országspecifikus) *",
+        "socialFirst": "Weboldal és közösségi média linkek *",
+        "social": "Weboldal és közösségi média linkek",
+        "presentation": "Hivatkozás a projekt bemutatójára (nem kötelező, de hasznos)"
+      },
+      "acquisition": {
+        "title": "ÜGYFÉLSZERZÉS",
+        "description": "HATÁROZZA MEG EGYÉRTELMŰEN CÉLKÖZÖNSÉGÉT ÉS AZT, HOGYAN SZERZI MEG VAGY FOGJA MEGSZEREZNI ŐKET",
+        "whyExists": "Miért kell ennek a projektnek létezni, és miben különbözik? *",
+        "whyIntegrator": "Miért fontos Önnek, hogy integrálóvá váljon? *"
+      },
+      "objectives": {
+        "title": "ELÉRNI KÍVÁNT KULCSCÉLKITŰZÉSEK",
+        "first": "Célkitűzés 01 *",
+        "second": "Célkitűzés 02",
+        "more": "Célkitűzés {n}"
+      },
+      "kpis": {
+        "title": "NYOMON KÖVETNI KÍVÁNT KULCSMUTATÓK",
+        "first": "KPI 01 *",
+        "second": "KPI 02",
+        "more": "KPI {n}"
+      },
+      "plan": {
+        "title": "MIT ÉS HOGYAN FOG TENNI",
+        "focus": "Mondja el részletesen, mire fog összpontosítani integrálóként, és hogyan néz ki a projekt sikere.",
+        "implement": "Mondja el, hogyan tervezi megvalósítani ezt a projektet"
+      },
+      "roadmaps": {
+        "title": "AZ ELSŐ 3 HÓNAP ÉS A 3 ÉVES MENETREND",
+        "description": "Meg kell jelölnie, mikor várja a kibocsátás megkezdését és a tanúsítványok becsült számát *"
+      },
+      "team": {
+        "title": "CSAPAT",
+        "placeholder": "Meséljen jelenlegi csapatáról (ha van), vagy a jövőbeli csapatszerepekről, amelyekre szüksége lehet, LinkedIn-profilok linkjeivel együtt *"
+      },
+      "risk": {
+        "title": "KOCKÁZATI TÉNYEZŐK",
+        "placeholder": "Mondja el, milyen okok és tényezők vezetnének kudarchoz."
+      },
+      "optional": {
+        "title": "OPCIONÁLIS",
+        "placeholder": "Van-e valami más, amit meg szeretne osztani, ami növeli kiválasztásának esélyét?"
+      }
+    }
+  },
+  "token": {
+    "hero": {
+      "titleLead": "Az",
+      "titleEmphasis": "OGY",
+      "titleSuffix": "TOKEN",
+      "paragraphOne": "Az OGY token az ORIGYN Protocol <b>alapvető hasznosítási eleme.</b>",
+      "paragraphTwo": "<b>Összekapcsolja</b> a valós eszközök tanúsítását a decentralizált blokklánc-infrastruktúrával, <b>ellenőrizhetővé és biztonságossá téve a tulajdonjogot, a hitelesítést</b> és az <b>átruházást.</b>",
+      "paragraphThree": "Az OGY olyan globális rendszert tesz lehetővé, ahol a <b>fizikai</b> eszközök <b>digitálisan tanúsítottak, nyomon követhetők</b> és <b>integráltak decentralizált</b> alkalmazásokba és piacokba.",
+      "cta": "Vásároljon OGY-t",
+      "imageAlt": "OGY token"
+    },
+    "stats": {
+      "marketCap": "$OGY piaci kapitalizáció",
+      "burned": "Összesen elégetett OGY",
+      "circulating": "Forgalomban lévő kínálat",
+      "holders": "Tokentulajdonosok"
+    },
+    "utility": {
+      "titlePrefix": "Protokoll-",
+      "titleEmphasis": "hasznosság",
+      "lead": "OGY tokenekre van szüksége az ORIGYN ökoszisztéma teljes körű használatához:",
+      "cards": [
+        {
+          "title": "Tanúsítás",
+          "description": "Az ORIGYN-en hitelesített minden eszközhöz OGY szükséges egy megváltoztathatatlan láncon belüli tanúsítvány kibocsátásához."
+        },
+        {
+          "title": "Tranzakciós réteg",
+          "description": "Megkönnyíti a hitelesített eszközök átruházását, újratanúsítását és életciklus-eseményeit."
+        },
+        {
+          "title": "Adattárolás",
+          "description": "Támogatja az eszközmetaadatok és az eredet biztonságos, decentralizált tárolását."
+        }
+      ]
+    },
+    "address": {
+      "titleLineOne": "OGY token",
+      "titleLineTwo": "szerződéscíme",
+      "description": "Az OGY token az Internet Computer blokkláncon van telepítve, és natív hasznosítási tokenként működik az ORIGYN Protocolon belül.",
+      "bulletOne": "Ez a szerződés szabályozza az OGY kibocsátását, átruházásait és a protokollon belüli interakcióit, biztosítva az összes tokenaktivitás átláthatóságát és láncon belüli verifikálhatóságát.",
+      "bulletTwo": "Az OGY tokent közvetlenül az ICP hálózaton keresztül tekintheti meg és kezelheti.",
+      "warning": "Az OGY-vel való bármilyen interakció előtt mindig ellenőrizze a szerződéscímet.",
+      "contractLabel": "Hivatalos szerződéscím:",
+      "copyAria": "Szerződéscím másolása",
+      "copied": "Vágólapra másolva",
+      "cmcAria": "OGY megtekintése a CoinMarketCap-en"
+    },
+    "governance": {
+      "title": "Irányítás",
+      "lead": "Az OGY irányítási token, amely feljogosítja a tokenbirtokosokt, hogy:",
+      "items": [
+        "<b>Allokálják</b> a kincstári alapokat az ökoszisztéma növekedése és stratégiai kezdeményezések felé.",
+        "<b>Javaslatot tegyenek és szavazzanak</b> a protokollfrissítésekről, tanúsítási szabályokról és ökoszisztéma-változásokról.",
+        "<b>Felügyelik</b> az integrálók és hitelesítők felvételét."
+      ],
+      "closing": "Az irányítás <b>teljes mértékben decentralizált</b> az ORIGYN DAO-n keresztül, közvetlen befolyást adva a közösségnek a <b>protokoll fejlődése</b> felett.",
+      "cta": "TOVÁBBI RÉSZLETEK"
+    },
+    "staking": {
+      "titleLineOne": "Staking",
+      "titleLineTwoPrefix": "és",
+      "titleLineTwoEmphasis": "jutalmak",
+      "lead": "Az OGY staking biztosítja a hálózatot, miközben összehangolja az ösztönzőket:",
+      "cards": [
+        {
+          "title": "Hálózatbiztonság",
+          "description": "A stakerek részt vesznek az irányításban és segítenek a protokoll működésének validálásában."
+        },
+        {
+          "title": "Jutalmak",
+          "description": "Részesedjen a protokoll bevételéből, amelyet tanúsítási díjak és hálózati aktivitás generál."
+        },
+        {
+          "title": "Hosszú távú elkötelezettség",
+          "description": "A staking hosszú távú részvételt ösztönöz és erősíti az ökoszisztémát."
+        }
+      ],
+      "closing": "A staking-modell közvetlenül összeköti a token-hasznosságot a protokoll elfogadásával és sikerével.",
+      "cta": "STAKE NOW"
+    },
+    "questions": {
+      "titleLineOnePrefix": "<b>Deflációs</b> mechanika",
+      "titleLineTwo": "és <b>értékfelhalmozás</b>",
+      "lead": "Az OGY fenntartható növekedésre tervezett deflációs modellt integrál:",
+      "items": [
+        {
+          "title": "Mitől deflációs token az OGY?",
+          "answer": "Az OGY deflációs modellel rendelkezik, ami azt jelenti, hogy teljes kínálata idővel csökken, ahogy a protokollt használják."
+        },
+        {
+          "title": "Hogyan működik a token égetése?",
+          "answer": "Minden alkalommal, amikor az OGY-t tanúsításra használják, a tokenek egy része véglegesen elégetésre kerül. Ez csökkenti a forgalomban lévő kínálatot."
+        },
+        {
+          "title": "Mi a kincstár szerepe?",
+          "answer": "A protokoll bevételét a kincstár kezeli a folyamatos fejlesztés támogatása, a résztvevők jutalmazása és az ökoszisztéma hosszú távú stabilitásának fenntartása érdekében."
+        },
+        {
+          "title": "Hogyan teremt értéket az OGY idővel?",
+          "answer": "Ahogy egyre több felhasználó fogadja el az ORIGYN protokollt és növekszik a tanúsítási aktivitás, több OGY kerül elégetésre. Ez a csökkenő kínálat a növekvő használattal kombinálva támogatja a hosszú távú értékteremtést."
+        }
+      ]
+    },
+    "tokenomics": {
+      "titleLineOne": "Tokenomika",
+      "titleEmphasis": "áttekintés",
+      "totalSupplyLabel": "Teljes kínálat:",
+      "totalSupplyUnit": "OGY",
+      "distribution": "<b>Elosztás:</b> Az ökoszisztéma növekedésére, staking-jutalmakra, közösségre és irányításra allokálva.",
+      "revenue": "<b>Bevételi modell:</b> Az OGY-ban fizetett protokolldíjak folyamatos keresletet teremtenek, miközben égetési mechanizmusokon keresztül csökkentik a kínálatot.",
+      "support": "A modellt a hosszú távú protokoll-fenntarthatóság és a tokentulajdonosok érdekeivel való összhang támogatására tervezték.",
+      "cta": "TOKENOMIKA"
+    }
+  },
+  "calculator": {
+    "header": {
+      "title": "Költségkalkulátor",
+      "description": "Használja az ORIGYN kalkulátort, hogy megbecsülje egyedi tanúsítványa költségét az összes láncon tárolt adatával együtt"
+    },
+    "plan": {
+      "title": "Tervezze meg a kibocsátást",
+      "description": "Adja meg, hány tételt tölt fel, és milyen fájlokból állnak.",
+      "itemsLabel": "Hány tétel?",
+      "uploadingLabel": "Mit tölt fel?",
+      "knowExactSize": "Ismeri a pontos méretet?",
+      "totalUploadSize": "Teljes feltöltési méret",
+      "usePreset": "Inkább használjon előre beállított értéket",
+      "combinedSize": "Az összes tétel összes fájljának együttes mérete.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB darabonként"
+        },
+        "iphone": {
+          "label": "Fotó",
+          "hint": "3 MB darabonként"
+        },
+        "dslr": {
+          "label": "Stúdiófotó",
+          "hint": "20 MB darabonként"
+        },
+        "video": {
+          "label": "Rövid videó",
+          "hint": "1 GB darabonként"
+        },
+        "video1hr": {
+          "label": "Hosszú videó",
+          "hint": "60 GB darabonként"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Élő becslés",
+      "titleRefreshing": "Becslés frissítése",
+      "description": "Automatikusan frissül, ahogy Ön módosítja a beállításokat.",
+      "ogyEquivalent": "OGY egyenérték",
+      "ogySpotRate": "OGY azonnali árfolyam",
+      "itemSingular": "Tétel",
+      "itemPlural": "Tétel",
+      "upload": "Feltöltés"
+    },
+    "breakdown": {
+      "title": "Költségbontás",
+      "baseFee": "Alap kibocsátási díj",
+      "storageFee": "Tárolási díj",
+      "items": "Tételek",
+      "uploadSize": "Feltöltési méret"
+    },
+    "bytesUnit": "bájt"
   }
 }

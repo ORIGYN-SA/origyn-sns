@@ -1,3 +1,7 @@
+import { useLocation } from "react-router-dom";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
+import LanguagePicker from "@components/LanguagePicker";
 import styles from "./Footer.module.scss";
 
 const socialLinks = [
@@ -10,36 +14,43 @@ const socialLinks = [
 const leftLinks = [
   [
     {
-      name: "CERTIFICATES",
+      labelKey: "footer.certificates",
       url: "https://origyn.gitbook.io/origyn/use-cases/certificates-of-authenticity",
     },
     {
-      name: "INTEGRATORS",
+      labelKey: "footer.integrators",
       anchorId: "integrator-program",
     },
     {
-      name: "ECOSYSTEM",
+      labelKey: "footer.ecosystem",
       anchorId: "our-partners",
     },
     {
-      name: "USE CASES",
+      labelKey: "footer.useCases",
       anchorId: "use-cases",
     },
   ],
   [
     {
-      name: "OGY TOKEN",
+      labelKey: "footer.ogyToken",
       url: "https://coinmarketcap.com/currencies/origyn-foundation/",
     },
     {
-      name: "DASHBOARD",
+      labelKey: "footer.dashboard",
       url: "https://dashboard.origyn.com",
     },
   ],
 ];
+
 const Footer = () => {
+  const { locale } = useLocale();
+  const t = useT();
+  const location = useLocation();
+  const rest = location.pathname.replace(/^\/[^/]+\/?/, "");
+  const isHome = rest === "";
+
   const handleAnchorClick = (e, sectionId) => {
-    if (window.location.pathname === "/") {
+    if (isHome) {
       e.preventDefault();
       const element = document.getElementById(sectionId);
       if (element) {
@@ -64,7 +75,11 @@ const Footer = () => {
               {group.map((link, j) => (
                 <a
                   key={j}
-                  href={link.anchorId ? `/#${link.anchorId}` : link.url}
+                  href={
+                    link.anchorId
+                      ? `${localePath(locale, "")}#${link.anchorId}`
+                      : link.url
+                  }
                   onClick={
                     link.anchorId
                       ? (e) => handleAnchorClick(e, link.anchorId)
@@ -72,7 +87,7 @@ const Footer = () => {
                   }
                   className={styles.link}
                 >
-                  {link.name}
+                  {t(link.labelKey)}
                 </a>
               ))}
             </div>
@@ -96,7 +111,10 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className={styles.bottom}>©2026 All rights reserved – origyn</div>
+      <div className={styles.bottom}>
+        <span className={styles.copyright}>{t("footer.copyright")}</span>
+        <LanguagePicker className={styles.picker} />
+      </div>
     </>
   );
 };

@@ -1,8 +1,5 @@
-import { Navigate, useParams } from "react-router-dom";
 import Footer from "@components/Footer/Footer";
-import { defaultLocale, isLocale } from "@/i18n";
-import { LocaleProvider, useT } from "@/i18n/LocaleContext";
-import { useHtmlLang } from "@/i18n/useHtmlLang";
+import { useT } from "@/i18n/LocaleContext";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import Hero from "./components/Hero";
 import SignupForm from "./components/SignupForm";
@@ -15,7 +12,7 @@ import VisionSection from "./components/VisionSection";
 import MemorySection from "./components/MemorySection";
 import NewsletterSection from "./components/NewsletterSection";
 
-const AIPageBody = () => {
+const AIPage = () => {
   const t = useT();
   return (
     <div className="bg-white font-sans text-ink">
@@ -80,23 +77,6 @@ const AIPageBody = () => {
       <NewsletterSection />
       <Footer />
     </div>
-  );
-};
-
-const AIPage = () => {
-  const { locale: param } = useParams();
-  const valid = isLocale(param);
-  const locale = valid ? param : defaultLocale;
-
-  // Called unconditionally (before any early return) to respect rules of hooks.
-  useHtmlLang(locale);
-
-  if (!valid) return <Navigate to={`/ai/${defaultLocale}`} replace />;
-
-  return (
-    <LocaleProvider locale={locale}>
-      <AIPageBody />
-    </LocaleProvider>
   );
 };
 
