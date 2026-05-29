@@ -36,6 +36,8 @@ const Area = ({
   const minValue = Math.min(...data.map((d) => d.value));
   const maxValue = Math.max(...data.map((d) => d.value));
   return (
+    // Pin the plot to LTR even under RTL locales — numeric/time axes read LTR.
+    <div dir="ltr" className="w-full h-full">
     <ResponsiveContainer>
       <AreaChart
         width={500}
@@ -86,6 +88,7 @@ const Area = ({
         />
       </AreaChart>
     </ResponsiveContainer>
+    </div>
   );
 };
 

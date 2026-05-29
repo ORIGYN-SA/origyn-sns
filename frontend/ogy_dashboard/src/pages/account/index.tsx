@@ -7,15 +7,17 @@ import StakedRewards from "@pages/account/staked-rewards";
 import NeuronsList from "./neurons-list/index";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import AccountIdPill from "@components/account/AccountIdPill";
+import { useT } from "@i18n/LocaleContext";
 
 export const Account = () => {
+  const t = useT();
   const { principalId, accountId } = useWallet();
 
   return (
     <PageContainer className="container max-w-none py-8 px-4 sm:py-16">
       <div className="text-center mb-8 sm:mb-16">
         <h1 className="mb-6 sm:mb-8 font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
-          Welcome back
+          {t("account.overview.welcomeBack")}
         </h1>
         <PrincipalIdPill
           principalId={principalId}

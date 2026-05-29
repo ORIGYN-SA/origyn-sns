@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Sprog",
+    "switchTo": "Skift til {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Indlæser...",
+    "error": "Noget gik galt",
+    "retry": "Prøv igen",
+    "cancel": "Annuller",
+    "confirm": "Bekræft",
+    "close": "Luk",
+    "back": "Tilbage",
+    "next": "Næste",
+    "previous": "Forrige",
+    "save": "Gem",
+    "submit": "Indsend",
+    "copy": "Kopiér",
+    "copied": "Kopieret",
+    "search": "Søg",
+    "viewAll": "Vis alle",
+    "showMore": "Vis mere",
+    "showLess": "Vis mindre",
+    "amount": "Beløb",
+    "date": "Dato",
+    "type": "Type",
+    "from": "Fra",
+    "to": "Til",
+    "index": "Indeks",
+    "status": "Status",
+    "total": "I alt",
+    "balance": "Saldo",
+    "yes": "Ja",
+    "no": "Nej",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "governance": "Styring",
+    "transactionHistory": "Transaktionshistorik",
+    "calculator": "Beregner",
+    "openMainMenu": "Åbn hovedmenu",
+    "closeMenu": "Luk menu",
+    "openAccountOverview": "Åbn kontooversigt",
+    "viewAccountOverview": "Se kontooversigt",
+    "connectPrompt": "Forbind din wallet for at administrere tokens, stemme om forslag og se din transaktionshistorik.",
+    "connectWallet": "Forbind wallet",
+    "disconnect": "Afbryd forbindelse"
+  },
+  "notFound": {
+    "title": "Side ikke fundet",
+    "description": "Beklager, vi kunne ikke finde den side, du leder efter.",
+    "backHome": "Gå tilbage til forsiden"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Dashboard",
+      "home": "Hjem",
+      "circulation": "Cirkulation",
+      "governance": "Styring",
+      "revenue": "Indtægter",
+      "rewards": "Belønninger",
+      "distribution": "Fordeling",
+      "governanceDashboard": "OGY Styringsdashboard",
+      "transactionExplorer": "OGY Transaktionsudforsker"
+    },
+    "learn": {
+      "heading": "Lær mere om OGY Tokenomics og ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT Standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Websted",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Support",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Kontakt"
+    },
+    "support": {
+      "contactSupport": "Kontakt support",
+      "recoverTokens": "Gendan dine tokens"
+    },
+    "disclaimer": "*ORIGYN Foundation kan ikke holdes ansvarlig for tab, tyveri eller misbrug af OGY Tokens, der opstår i forbindelse med swap-processen. Desuden kan ORIGYN Foundation ikke holdes ansvarlig for manglende gennemførelse af swappet, hvis den involverede part ikke nøje overholder de betingelser, der er angivet af ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Udforsk dashboard",
+      "subtitle": "Interager tillidsløst med web3 dApps, DAOs, NFTs, DeFi og meget mere."
+    },
+    "cta": {
+      "loginToSwap": "Log ind for at swappe tokens",
+      "myAccount": "Min konto"
+    },
+    "governanceStaking": {
+      "title": "Oversigt over styringsstaking"
+    },
+    "cardError": {
+      "couldNotLoad": "Kunne ikke indlæse",
+      "descriptionLine1": "Vi stødte på et problem ved hentning af denne måling.",
+      "descriptionLine2": "Prøv venligst igen om et øjeblik."
+    },
+    "emptyState": {
+      "noDataFor": "Ingen data for",
+      "description": "Der er intet at vise lige nu."
+    },
+    "circulationState": {
+      "title": "OGY Cirkulationsstatus",
+      "tooltip": "Den cirkulerende forsyning er alle tokens undtagen oplåste tokens ejet af ORIGYN Foundation.",
+      "nnsProposal": "NNS Forslag",
+      "totalLabel": "Samlet OGY Cirkulation",
+      "notOwnedName": "OGY ikke i Foundations besiddelse",
+      "notOwnedValue": "Mængde af cirkulerede tokens, der ikke ejes af ORIGYN foundation.",
+      "ownedName": "OGY låst i Foundations besiddelse",
+      "ownedValue": "Mængde af låste tokens ejet af ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation Reserve",
+      "tooltip": "Samlet mængde af OGY-tokens ejet af ORIGYN foundation på tværs af alle wallets.",
+      "totalLabel": "Samlet Foundation-forsyning",
+      "lockedName": "Låst",
+      "lockedIntro": "ORIGYN foundation-tokens låst i stakes eller vestings.",
+      "lockedStakes": "1) Stakes- tokens, der genererer belønninger takket være deltagelse i styringsafstemningen.",
+      "lockedStakesNote": "Disse tokens blev låst frivilligt.",
+      "lockedVestings": "2) Vestings- tokens, der ikke modtager nogen belønninger, og som ikke kan deltage i afstemninger.",
+      "lockedVestingsNote": "Disse tokens blev låst af din kontrakt med ORIGYN Foundation.",
+      "unlockedName": "Oplåst",
+      "unlockedValue": "Oplåste midler ejet af ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Netværksindtægter",
+      "tokenLogoAlt": "Token-logo",
+      "tooltipOgy": "Netværksnytteindtægter genereret gennem gebyrer for brug af ORIGYN-netværket (f.eks. til udstedelse eller overførsel af digitale certifikater, minting af NFTs osv.) og akkumuleret i OGY.",
+      "tooltipIcp": "Netværksnytteindtægter genereret gennem gebyrer for brug af ORIGYN-netværket (f.eks. til udstedelse eller overførsel af digitale certifikater, minting af NFTs osv.) og akkumuleret i ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "ORA Saldo",
+      "year": "År",
+      "rewardPool": "Belønningspulje",
+      "moreDetails": "Flere detaljer",
+      "tooltipStake": "Token-indehavere kan stake deres OGY og opnå belønninger ved at deltage i styringen.",
+      "tooltipSeed": "Belønninger kommer fra ORIGYN Reward Account, som ORIGYN vil tilføre en milliard OGY.",
+      "tooltipPool": "Belønningspuljen består af 250 millioner OGY i det første år og halveres hvert andet år for at motivere og belønne tidlige og langsigtede bidragydere til økosystemet.",
+      "description": "ORIGYN vil bidrage med en milliard OGY til en ORIGYN Reward Account (ORA) til fordel for stakede og stemmende indehavere. Belønningspuljen består af 250 millioner OGY i det første år og halveres hvert andet år for at motivere og belønne tidlige og langsigtede bidragydere til økosystemet."
+    },
+    "tokenDistribution": {
+      "title": "Token-fordeling"
+    },
+    "transactionHistory": {
+      "title": "Transaktionshistorik",
+      "showAll": "Vis alle"
+    },
+    "topTransfers": {
+      "value": "Værdi",
+      "time": "Tidspunkt",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Ingen data tilgængelige."
+    },
+    "totalSupply": {
+      "title": "Samlet OGY-forsyning",
+      "tooltipTitle": "Samlet mængde af tilgængelige OGY-tokens.",
+      "tooltipLine1": "Dette omfatter den cirkulerende forsyning og forsyningen under ORIGYN Foundations kontrol.",
+      "tooltipLine2": "Pr. 18. september skiftede ORIGYN til en fuldt deflationær model, hvilket betyder ingen flere nyligt mintede tokens.",
+      "chartLabel": "Samlet forsyning"
+    },
+    "totalBurned": {
+      "title": "Samlet OGY brændt",
+      "tooltipTitle": "Samlet mængde af brændte OGY-tokens.",
+      "tooltipLine1": "Disse tokens er fuldstændigt brændt og er ikke længere tilgængelige.",
+      "tooltipLine2": "Tokens kan brændes af forskellige årsager, for eksempel gebyrer for minting af certifikater, netværksnyttegebyrer eller netværkstransaktionsgebyrer.",
+      "chartLabel": "Samlet brændt"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Dagligt",
+      "weekly": "Ugentligt",
+      "monthly": "Månedligt",
+      "yearly": "Årligt",
+      "all": "Alle"
+    },
+    "stakingOverview": {
+      "title": "Staking-oversigt",
+      "totalTokensInStakes": "Samlede tokens i stakes",
+      "tooltip": "Tokens, der er låst i stakes.",
+      "stakedTokens": "Stakede tokens",
+      "stakedTokensLegend": "STAKED TOKENS"
+    },
+    "usersActivity": {
+      "title": "Brugeroversigt",
+      "protocolUsers": "OGY Protokolbrugere",
+      "protocolUsersTooltip": "Unikke token-indehavere af OGY-tokens",
+      "protocolUsersLegend": "OGY PROTOCOL USERS",
+      "activeWallets": "OGY Aktive wallets",
+      "activeWalletsTooltip": "Aktive token-indehavere af OGY-tokens"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Styringsoversigt",
+      "welcome": "Velkommen til ORIGYN Styring!",
+      "description": "Indehavere af OGY-tokens kan direkte påvirke ORIGYN Network ved at stake deres OGY og stemme om forslag. Ved at deltage i beslutningsprocessen tjener disse stakede token-indehavere belønninger.",
+      "learnMore": "Lær mere"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake og stem",
+        "description": "Påvirk ORIGYN Network ved at stake OGY og stemme om forslag."
+      },
+      "earnRewards": {
+        "title": "Tjen belønninger",
+        "description": "Deltag i beslutningsprocessen for at tjene belønninger."
+      },
+      "governCollectively": {
+        "title": "Styr i fællesskab",
+        "description": "Engager dig i og påvirk netværket som et samarbejdende økosystem."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokens i styring",
+      "paragraph1": "Indehavere af OGY-tokens kan direkte påvirke ORIGYN Network ved at stake deres OGY og stemme om forslag.",
+      "paragraph2": "Ved at deltage i beslutningsprocessen tjener disse stakede token-indehavere belønninger og styrer i fællesskab og demokratisk.",
+      "learnMoreOgy": "Lær mere om OGY"
+    },
+    "sections": {
+      "proposals": "Forslag",
+      "neurons": "Neuroner"
+    },
+    "votingParticipation": {
+      "title": "Stemmedeltagelse",
+      "chartLabel": "Deltagelse %",
+      "legendLabel": "PARTICIPATION %",
+      "period": {
+        "weekly": "Ugentligt",
+        "monthly": "Månedligt",
+        "yearly": "Årligt"
+      },
+      "lastParticipation": {
+        "label": "Seneste stemmedeltagelse",
+        "tooltip": "Procentdel af deltagelse i den seneste afstemning."
+      },
+      "averageParticipation": {
+        "label": "Gennemsnitlig stemmedeltagelse",
+        "tooltip": "Gennemsnitlig procentdel af stemmedeltagelse over tid."
+      },
+      "averagePower": {
+        "label": "Gennemsnitlig stemmestyrke",
+        "tooltip": "Gennemsnitlig stemmestyrke på tværs af alle deltagere."
+      }
+    },
+    "estimateRewards": {
+      "title": "Estimer dine belønninger",
+      "lockDuration": "Låsevarighed",
+      "participants": "deltagere",
+      "lockedForAtLeast": "i øjeblikket låst i mindst",
+      "lockedFor": "i øjeblikket låst i",
+      "year": "år",
+      "years": "år"
+    },
+    "kpi": {
+      "metric": "Måling",
+      "rewardBaseCurrentYear": "Belønningsgrundlag for indeværende år",
+      "dailyVotingRewards": "Daglige stemmebelønninger",
+      "totalVotingPower": "Samlet stemmekraft",
+      "overallVotingParticipation": "Samlet stemmedeltagelse"
+    },
+    "total": {
+      "titleTooltip": "Alle tokens, der er i styringskanisteret. Disse tokens kan være i vesting-tilstand, staking-tilstand, ustakede eller ikke-krævede.",
+      "totalLabel": "Samlede tokens i styring",
+      "locked": {
+        "name": "Låst",
+        "tooltip": "Tokens, der er låst i styringen."
+      },
+      "unlocked": {
+        "name": "Oplåst",
+        "tooltip": "Tokens, der er oplåst i styringen og kan hæves og handles til enhver tid."
+      },
+      "accumulatedRewards": {
+        "name": "Akkumulerede belønninger",
+        "tooltip": "Belønninger, der er optalt for brugere, men endnu ikke er krævet."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Forslag",
+      "viewProposal": "Se forslag",
+      "columns": {
+        "id": "ID",
+        "title": "Titel",
+        "proposed": "Foreslået",
+        "timeRemaining": "Resterende tid",
+        "topic": "Emne",
+        "status": "Status",
+        "view": "Se"
+      }
+    },
+    "details": {
+      "category": "Styring",
+      "proposalNumber": "Forslag #",
+      "proposal": "Forslag",
+      "titleLoading": "Indlæser forslagstitel…",
+      "payloadLoading": "Indlæser forslagsdetaljer…",
+      "posted": "Offentliggjort",
+      "topic": "Emne",
+      "moreInfo": "Mere info",
+      "totalVotes": "Samlede stemmer",
+      "adopt": "ADOPT",
+      "reject": "REJECT",
+      "vote": "Stem"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuroner",
+      "viewNeuron": "Se neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Tilstand",
+        "stakedOgy": "Staket OGY",
+        "dissolveDelay": "Opløsningsforsinkelse",
+        "age": "Alder",
+        "votingPower": "Stemmestyrke",
+        "view": "Se"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Oprettet",
+      "stakedOgy": "Staket OGY",
+      "votingPower": "Stemmestyrke",
+      "dissolveDelay": "Opløsningsforsinkelse",
+      "age": "Alder",
+      "lifecycle": "Neuronens livscyklus",
+      "dateCreated": "Oprettelsesdato",
+      "autoStakeMaturity": "Auto-stake modenhed",
+      "rewardsAndBonuses": "Belønninger og bonusser",
+      "stakedMaturity": "Staket modenhed",
+      "totalMaturity": "Samlet modenhed",
+      "ageBonus": "Aldersbonus",
+      "totalBonus": "Samlet bonus",
+      "dissolveDelayBonus": "Bonus for opløsningsforsinkelse"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Transaktionshistorik",
+      "searchFor": "Søg efter:",
+      "or": "eller",
+      "searchPlaceholder": "Søg efter et element",
+      "noResults": "Ingen resultater fundet",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Transaktionsdetaljer",
+      "hash": "Hash",
+      "fetchError": "Fejl ved hentning af én transaktion!",
+      "mintingAccount": "Minting-konto",
+      "fee": "Gebyr",
+      "memo": "Notat",
+      "none": "Ingen"
+    },
+    "accountDetails": {
+      "title": "OGY konto",
+      "id": "ID",
+      "owner": "Ejer",
+      "subaccount": "Underkonto",
+      "defaultSubaccount": "Ingen (standardunderkonto)",
+      "historicalMaxBalance": "Historisk maksimal saldo",
+      "genesisBalance": "Genesis-saldo",
+      "period": {
+        "monthly": "Månedligt",
+        "quarterly": "Kvartalsvis",
+        "yearly": "Årligt",
+        "lifetime": "Livstid"
+      },
+      "empty": {
+        "title": "Ingen transaktioner endnu",
+        "description": "Denne konto har ingen transaktionshistorik. Når den sender eller modtager OGY, vil aktiviteten vises her."
+      },
+      "balanceHistory": {
+        "title": "Saldohistorik",
+        "currentBalance": "Aktuel saldo",
+        "currentBalanceInfo": "Aktuel kontosaldo.",
+        "legend": "OGY Saldo"
+      },
+      "overview": {
+        "title": "Transaktionsoversigt",
+        "totalLabel": "Samlet beløb",
+        "totalSent": "Samlet sendt",
+        "totalSentInfo": "Samlet beløb sendt af principalen.",
+        "totalReceived": "Samlet modtaget",
+        "totalReceivedInfo": "Samlet beløb modtaget af principalen."
+      }
+    },
+    "flow": {
+      "title": "Transaktionsflow",
+      "searchPlaceholder": "Søg i transaktioner…",
+      "clearSearch": "Ryd søgning",
+      "loadError": "Kunne ikke indlæse transaktionsdata. Prøv venligst igen.",
+      "noMatch": "Ingen transaktioner matcher denne søgning.",
+      "transactions": "transaktioner",
+      "out": "Ud",
+      "in": "Ind",
+      "total": "I alt",
+      "legend": {
+        "outTransaction": "Udgående transaktion",
+        "inTransaction": "Indgående transaktion",
+        "includesInitial": "Inkluderer indledende transaktion",
+        "rootAccount": "Rodkonto",
+        "account": "Konto",
+        "fromRoot": "Med transaktioner fra roden",
+        "toRoot": "Med transaktioner til roden",
+        "madeInitial": "Foretog indledende transaktion"
+      }
+    },
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Overførsel",
+      "burn": "Brænd",
+      "approve": "Godkend"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Velkommen tilbage",
+      "value": "Værdi:",
+      "disconnectWallet": "Afbryd wallet-forbindelse",
+      "accountLabel": "Konto",
+      "manageDescription": "Administrer din OGY-wallet, belønninger og staking-aktivitet.",
+      "walletBalance": "Wallet-saldo",
+      "myAccount": "Min konto",
+      "howToTopUp": "Hvordan optankes der?"
+    },
+    "principal": {
+      "accountIdLabel": "Konto-ID:",
+      "principalIdLabel": "Principal-ID:"
+    },
+    "available": {
+      "title": "Tilgængelig OGY",
+      "transactionHistory": "Transaktionshistorik",
+      "transfer": "Overfør",
+      "transferOgy": "Overfør OGY",
+      "transferDescription": "Du kan kun sende OGY fra din tilgængelige saldo.",
+      "max": "Maks",
+      "recipientAddress": "Modtageradresse",
+      "amountReceived": "Modtaget beløb",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Transaktionsgebyr (opkræves fra kilden)",
+      "currentBalance": "Aktuel saldo:",
+      "transferProcessing": "Overførslen behandles",
+      "transferProcessingHint": "Dette kan tage et par sekunder",
+      "transferSuccess": "Overførslen lykkedes !",
+      "transferError": "Overførselsfejl !",
+      "errors": {
+        "amountRequired": "Beløb er påkrævet.",
+        "amountExceedsBalance": "Beløbet må ikke overstige din saldo.",
+        "amountBelowFee": "Beløbet må ikke være mindre end transaktionsgebyret.",
+        "amountNotPositive": "Beløbet skal være et positivt tal.",
+        "recipientRequired": "Modtageradresse er påkrævet.",
+        "recipientInvalid": "Ugyldig modtageradresse."
+      }
+    },
+    "staked": {
+      "title": "Staket OGY",
+      "stake": "Stake",
+      "stakeOgy": "Stake OGY",
+      "stakeDescription": "For at stake OGY skal du gå til vores NNS-platform.",
+      "warningNotConnected": "Det ser ud til, at du ikke er forbundet med",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Du har brug for en",
+      "warningToConnect": "for at oprette forbindelse til NNS-platformen.",
+      "goToNns": "Gå til NNS"
+    },
+    "rewards": {
+      "title": "Stakede belønninger",
+      "claimAll": "Kræv alle",
+      "claimDisabledReason": "Belønningskrav understøttes kun for principalens standardkonto.",
+      "aboutToClaim": "Du er ved at kræve",
+      "sentToPrincipal": "Belønningerne sendes til din principal",
+      "pending": "Kræver alle belønninger...",
+      "successTitle": "Krav om alle belønninger lykkedes!",
+      "errorTitle": "Fejl ved krav om alle belønninger!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Vi skifter ledger og styring",
+        "description": "ORIGYN-styring og -ledger er blevet opgraderet til en SNS. For at fortsætte med at deltage i ORIGYN-styring og bruge OGY skal du migrere dine OGY-tokens."
+      },
+      "howToSwap": "Sådan swapper du tokens",
+      "disclosureToggle": "Har du stadig gamle OGY-tokens? Swap nu!",
+      "accountId": "Konto-ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Trin 1: Hæv fra gammel styring",
+          "subtitle": "Hvis du tidligere deltog i OGY-styring, skal du hæve disse tokens, før du kan swappe dem."
+        },
+        "deposit": {
+          "title": "Trin 2: Indsæt på din konto",
+          "subtitle": "Hvis du har tokens uden for OGY-dashboardet, skal du indsætte dem på din account-id, før du kan begynde at swappe dem."
+        },
+        "swap": {
+          "title": "Trin 3: Swap tokens",
+          "subtitle": "Swap den ældre OGY-token til den nye ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Ældre OGY-saldo"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Gå til ældre OGY-dashboard"
+      },
+      "swap": {
+        "disabledOisy": "Swap af ældre OGY er ikke tilgængelig med OISY. Forbind med Internet Identity eller Plug for at swappe din ældre OGY.",
+        "disabledSubAccount": "Swap af ældre OGY understøttes kun fra principalens standardkonto.",
+        "swapYourTokens": "Swap dine tokens",
+        "automaticDisabled": "Automatisk swap er blevet deaktiveret. Du skal have din swap-anmodning godkendt, min. beløb er 50 000 OGY.",
+        "form": {
+          "title": "Swap din OGY til den nye ledger",
+          "description": "Indsæt eventuelle OGY-tokens, du ønsker at swappe, på din account id",
+          "tokensAvailable": "Tokens tilgængelige til swap",
+          "youWillReceivePrefix": "Du vil modtage",
+          "youWillReceiveSuffix": "OGY-tokens på den nye ledger.",
+          "swapPrefix": "Swap",
+          "swapSuffix": "OGY-tokens"
+        },
+        "pending": {
+          "takesTime": "Swap-processen kan tage lidt tid.",
+          "doNotRefresh": "Opdater ikke siden !",
+          "swapping": "Swapper tokens..."
+        },
+        "success": {
+          "title": "Swappet lykkedes!",
+          "walletBalance": "Wallet-saldo på ny ledger",
+          "myAccount": "Min konto"
+        },
+        "error": {
+          "title": "Fejl ved swap af tokens!",
+          "retry": "Prøv igen"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Mine OGY Neuroner",
+        "idHeader": "ID",
+        "stakedAmount": "Staket beløb",
+        "claimAmount": "Kravbeløb",
+        "emptyTitle": "Ingen neuroner endnu",
+        "emptyDescription": "Tilføj en OGY-neuron for at begynde at spore stake, stemmestyrke og belønninger her.",
+        "addFirstNeuron": "Tilføj din første neuron"
+      },
+      "add": {
+        "button": "Tilføj neuron",
+        "title": "Tilføj neuron",
+        "description": "Tilføj denne principal som en hotkey på hver OGY-neuron, du vil administrere her.",
+        "needHotkey": "Skal du tilføje en hotkey?",
+        "openNns": "Åbn NNS-appen"
+      },
+      "claim": {
+        "button": "Kræv",
+        "disabledReason": "Belønningskrav understøttes kun for principalens standardkonto.",
+        "aboutToClaim": "Du er ved at kræve",
+        "sentToPrincipal": "Belønningerne sendes til din principal",
+        "pending": "Kræver belønning...",
+        "successTitle": "Krav om belønning lykkedes!",
+        "errorTitle": "Fejl ved krav om belønning!",
+        "retry": "Prøv igen"
+      },
+      "remove": {
+        "title": "Fjern neuron",
+        "description": "For at fjerne denne neuron skal du fjerne din principal fra listen over hotkeys på din neuron."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adresse",
+      "governanceBalance": "Styringssaldo",
+      "stakedTokens": "Stakede tokens",
+      "ledgerBalance": "Ledger-saldo",
+      "weightInTotalSupply": "Vægt i samlet forsyning"
+    }
+  },
+  "recovery": {
+    "title": "Gendan dine tokens",
+    "description": "OGY-dashboardet understøtter kun OGY-tokenet. Hvis du ved en fejl har sendt andre tokens hertil, kan du gendanne dem ved at følge nedenstående trin.",
+    "chooseToken": "Vælg token",
+    "loginRequired": "For at indsamle dine tokens skal du være logget ind.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger-kanister:",
+      "transferIcp": "Overfør ICP",
+      "availableBalanceNote": "Du kan kun sende ICP fra din tilgængelige saldo.",
+      "amountRequired": "Beløb er påkrævet.",
+      "amountExceedsBalance": "Beløbet må ikke overstige din saldo.",
+      "amountPositive": "Beløbet skal være et positivt tal.",
+      "amountBelowFee": "Beløbet skal være større end eller lig med transaktionsgebyrerne.",
+      "recipientAddress": "Modtageradresse",
+      "recipientAddressRequired": "Modtageradresse er påkrævet.",
+      "invalidRecipientAddress": "Ugyldig modtageradresse.",
+      "amountReceived": "Modtaget beløb",
+      "transactionFee": "Transaktionsgebyr",
+      "currentBalance": "Aktuel saldo:",
+      "processing": "Overførslen behandles",
+      "processingNote": "Dette kan tage et par sekunder",
+      "success": "Overførslen lykkedes!",
+      "error": "Overførselsfejl!"
+    }
+  },
+  "support": {
+    "category": "Support",
+    "title": "Opret en sag",
+    "titleSubmitted": "Sag indsendt",
+    "successTitle": "Supportsag oprettet",
+    "successMessage": "Vi følger op på den e-mailadresse, du har angivet.",
+    "submitAnother": "Indsend en ny sag",
+    "intro": "Beskriv dit problem, og hvordan vi kan kontakte dig.",
+    "form": {
+      "name": "Navn",
+      "email": "Kontakt-e-mail",
+      "emailRequired": "E-mailadresse er påkrævet",
+      "emailInvalid": "Ugyldig e-mailadresse",
+      "principal": "Wallet-principal",
+      "invalidPrincipal": "Ugyldig modtageradresse.",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Fortæl os, hvad der foregår…",
+      "descriptionRequired": "Beskriv venligst dit problem"
+    },
+    "submitError": "Noget gik galt. Prøv venligst igen.",
+    "submitting": "Indsender…"
+  },
+  "explorer": {
+    "title": "Udforsker",
+    "searchPlaceholder": "Søg efter titel, udsteder, principal eller token-ID",
+    "openFilters": "Åbn filtre",
+    "checkOnBlockchain": "Tjek på blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Fremhævede certifikater",
+      "art": "Kunstcertifikater",
+      "gold": "Guldcertifikater"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopiér til udklipsholder",
+    "toggleRelativeTime": "Skift relativ tid. Aktuel visning:",
+    "collapseRow": "Skjul række",
+    "expandRow": "Udvid række",
+    "searchPlaceholder": "Søg efter elementer...",
+    "sortAscending": "Sortér stigende",
+    "sortDescending": "Sortér faldende",
+    "linesPerPage": "Linjer pr. side",
+    "page": "Side",
+    "pageOf": "af",
+    "previousPage": "Forrige side",
+    "nextPage": "Næste side"
+  },
+  "auth": {
+    "connect": "Forbind",
+    "disconnect": "Afbryd forbindelse",
+    "connectWallet": {
+      "title": "Forbind din wallet",
+      "subtitle": "Vælg, hvordan du vil logge ind"
+    },
+    "install": "Installer",
+    "newToIc": "Ny på Internet Computer?",
+    "learnMore": "Lær mere",
+    "connecting": {
+      "title": "Forbinder...",
+      "subtitle": "Godkend anmodningen i din wallet"
+    },
+    "sessionExpired": {
+      "title": "Sessionen udløb",
+      "description": "Din wallet-session er ikke længere gyldig. Genopret forbindelse for at fortsætte."
+    },
+    "reconnect": "Genopret forbindelse",
+    "error": {
+      "connectionCancelled": "Forbindelse annulleret. Prøv venligst igen.",
+      "connectionFailed": "Wallet-forbindelse mislykkedes. Prøv venligst igen."
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "vi skifter ledger, du skal swappe din OGY til den nye"
+  },
+  "calculator": {
+    "header": {
+      "title": "Prisberegner",
+      "description": "Brug ORIGYN-beregneren til at estimere omkostningen for dit unikke certifikat med alle dine data on-chain"
+    },
+    "plan": {
+      "title": "Planlæg din mint",
+      "description": "Fortæl os, hvor mange genstande du har, og hvad du uploader.",
+      "itemsLabel": "Hvor mange genstande?",
+      "uploadingLabel": "Hvad uploader du?",
+      "knowExactSize": "Kender du den præcise størrelse?",
+      "totalUploadSize": "Samlet uploadstørrelse",
+      "usePreset": "Brug en forudindstilling i stedet",
+      "combinedSize": "Samlet størrelse af alle filer på tværs af alle genstande.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB pr. stk."
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB pr. stk."
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB pr. stk."
+        },
+        "video": {
+          "label": "Kort video",
+          "hint": "1 GB pr. stk."
+        },
+        "video1hr": {
+          "label": "Lang video",
+          "hint": "60 GB pr. stk."
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live-estimat",
+      "titleRefreshing": "Opdaterer estimat",
+      "description": "Opdateres automatisk, når du ændrer dine indstillinger.",
+      "ogyEquivalent": "OGY-ækvivalent",
+      "ogySpotRate": "OGY-spotkurs",
+      "itemSingular": "Genstand",
+      "itemPlural": "Genstande",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Prisspecifikation",
+      "baseFee": "Grundlæggende mint-gebyr",
+      "storageFee": "Lagergebyr",
+      "items": "Genstande",
+      "uploadSize": "Uploadstørrelse"
+    },
+    "bytesUnit": "bytes"
+  }
+}

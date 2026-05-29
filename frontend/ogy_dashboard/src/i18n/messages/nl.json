@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Taal",
+    "switchTo": "Overschakelen naar {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Er is iets misgegaan",
+    "retry": "Opnieuw proberen",
+    "cancel": "Annuleren",
+    "confirm": "Bevestigen",
+    "close": "Sluiten",
+    "back": "Terug",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "save": "Opslaan",
+    "submit": "Verzenden",
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd",
+    "search": "Zoeken",
+    "viewAll": "Alles bekijken",
+    "showMore": "Meer tonen",
+    "showLess": "Minder tonen",
+    "amount": "Bedrag",
+    "date": "Datum",
+    "type": "Type",
+    "from": "Van",
+    "to": "Naar",
+    "index": "Index",
+    "status": "Status",
+    "total": "Totaal",
+    "balance": "Saldo",
+    "yes": "Ja",
+    "no": "Nee",
+    "notAvailable": "N.v.t."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "governance": "Governance",
+    "transactionHistory": "Transactiegeschiedenis",
+    "calculator": "Calculator",
+    "openMainMenu": "Hoofdmenu openen",
+    "closeMenu": "Menu sluiten",
+    "openAccountOverview": "Accountoverzicht openen",
+    "viewAccountOverview": "Accountoverzicht bekijken",
+    "connectPrompt": "Verbind je wallet om tokens te beheren, op voorstellen te stemmen en je transactiegeschiedenis te bekijken.",
+    "connectWallet": "Wallet verbinden",
+    "disconnect": "Verbinding verbreken"
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "description": "Sorry, we konden de pagina die je zoekt niet vinden.",
+    "backHome": "Terug naar home"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Dashboard",
+      "home": "Home",
+      "circulation": "Circulatie",
+      "governance": "Governance",
+      "revenue": "Inkomsten",
+      "rewards": "Beloningen",
+      "distribution": "Distributie",
+      "governanceDashboard": "OGY Governance Dashboard",
+      "transactionExplorer": "OGY Transaction Explorer"
+    },
+    "learn": {
+      "heading": "Meer informatie over OGY Tokenomics & ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT-standaard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Website",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Ondersteuning",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Contact"
+    },
+    "support": {
+      "contactSupport": "Contact opnemen met support",
+      "recoverTokens": "Je tokens herstellen"
+    },
+    "disclaimer": "*ORIGYN Foundation kan niet aansprakelijk worden gesteld voor verlies, diefstal of verduistering van OGY-tokens die in verband met het swapproces plaatsvindt. Bovendien kan ORIGYN Foundation niet verantwoordelijk worden gehouden voor het niet uitvoeren van de swap als de betrokken partij zich niet strikt houdt aan de door ORIGYN Foundation gespecificeerde voorwaarden."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Dashboard verkennen",
+      "subtitle": "Werk trustless samen met web3 dApps, DAOs, NFT, DeFi en nog veel meer."
+    },
+    "cta": {
+      "loginToSwap": "Inloggen om tokens te swappen",
+      "myAccount": "Mijn account"
+    },
+    "governanceStaking": {
+      "title": "Overzicht Governance Staking"
+    },
+    "cardError": {
+      "couldNotLoad": "Kon niet laden",
+      "descriptionLine1": "Er is een probleem opgetreden bij het ophalen van deze metric.",
+      "descriptionLine2": "Probeer het over een moment opnieuw."
+    },
+    "emptyState": {
+      "noDataFor": "Geen gegevens voor",
+      "description": "Er is op dit moment niets om weer te geven."
+    },
+    "circulationState": {
+      "title": "OGY-circulatiestatus",
+      "tooltip": "De circulerende voorraad bestaat uit alle tokens behalve ontgrendelde tokens in het bezit van de ORIGYN Foundation.",
+      "nnsProposal": "NNS-voorstel",
+      "totalLabel": "Totale OGY-circulatie",
+      "notOwnedName": "OGY niet in handen van de Foundation",
+      "notOwnedValue": "Aantal circulerende tokens dat niet in het bezit is van de ORIGYN foundation.",
+      "ownedName": "OGY vergrendeld in handen van de Foundation",
+      "ownedValue": "Aantal vergrendelde tokens in het bezit van de ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation-reserve",
+      "tooltip": "Totaal aantal OGY-tokens in het bezit van de ORIGYN foundation over alle wallets.",
+      "totalLabel": "Totale Foundation-voorraad",
+      "lockedName": "Vergrendeld",
+      "lockedIntro": "ORIGYN foundation-tokens vergrendeld in stakes of vestings.",
+      "lockedStakes": "1) Stakes- tokens die beloningen genereren dankzij deelname aan het stemmen voor governance.",
+      "lockedStakesNote": "Deze tokens zijn vrijwillig vergrendeld.",
+      "lockedVestings": "2) Vestings- Tokens die geen beloningen ontvangen en niet kunnen deelnemen aan het stemmen.",
+      "lockedVestingsNote": "Deze tokens zijn vergrendeld door je contract met de ORIGYN Foundation.",
+      "unlockedName": "Ontgrendeld",
+      "unlockedValue": "Ontgrendeld vermogen in het bezit van de ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Netwerkinkomsten",
+      "tokenLogoAlt": "Tokenlogo",
+      "tooltipOgy": "Netwerk-utiliteitsinkomsten gegenereerd via vergoedingen voor het gebruik van het ORIGYN-netwerk (bijv. voor het uitgeven of overdragen van digitale certificaten, het minten van NFT, enz.) en geaccumuleerd in OGY.",
+      "tooltipIcp": "Netwerk-utiliteitsinkomsten gegenereerd via vergoedingen voor het gebruik van het ORIGYN-netwerk (bijv. voor het uitgeven of overdragen van digitale certificaten, het minten van NFT, enz.) en geaccumuleerd in ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "ORA-saldo",
+      "year": "Jaar",
+      "rewardPool": "Beloningspool",
+      "moreDetails": "Meer details",
+      "tooltipStake": "Tokenhouders kunnen hun OGY staken en beloningen verdienen door deel te nemen aan governance.",
+      "tooltipSeed": "Beloningen komen uit het ORIGYN Reward Account, dat ORIGYN zal vullen met één miljard OGY.",
+      "tooltipPool": "De beloningspool bestaat in het eerste jaar uit 250 miljoen OGY en wordt om de twee jaar gehalveerd om vroege en langetermijnbijdragers aan het ecosysteem te stimuleren en te belonen.",
+      "description": "ORIGYN draagt één miljard OGY bij aan een ORIGYN Reward Account (ORA) ten gunste van houders die staken en stemmen. De beloningspool bestaat in het eerste jaar uit 250 miljoen OGY en wordt om de twee jaar gehalveerd om vroege en langetermijnbijdragers aan het ecosysteem te stimuleren en te belonen."
+    },
+    "tokenDistribution": {
+      "title": "Tokendistributie"
+    },
+    "transactionHistory": {
+      "title": "Transactiegeschiedenis",
+      "showAll": "Alles tonen"
+    },
+    "topTransfers": {
+      "value": "Waarde",
+      "time": "Tijd",
+      "ogyLogoAlt": "OGY-logo",
+      "noDataAvailable": "Geen gegevens beschikbaar."
+    },
+    "totalSupply": {
+      "title": "Totale OGY-voorraad",
+      "tooltipTitle": "Totaal aantal beschikbare OGY-tokens.",
+      "tooltipLine1": "Dit omvat de circulerende voorraad en de voorraad onder controle van de ORIGYN Foundation.",
+      "tooltipLine2": "Sinds 18 september is ORIGYN overgestapt op een volledig deflatoir model, wat betekent dat er geen nieuwe tokens meer worden gemint.",
+      "chartLabel": "Totale voorraad"
+    },
+    "totalBurned": {
+      "title": "Totaal aan verbrande OGY",
+      "tooltipTitle": "Totaal aantal verbrande OGY-tokens.",
+      "tooltipLine1": "Deze tokens zijn volledig verbrand en zijn niet meer beschikbaar.",
+      "tooltipLine2": "Tokens kunnen om verschillende redenen worden verbrand, bijvoorbeeld kosten voor het minten van certificaten, netwerk-utiliteitskosten of netwerktransactiekosten.",
+      "chartLabel": "Totaal verbrand"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Dagelijks",
+      "weekly": "Wekelijks",
+      "monthly": "Maandelijks",
+      "yearly": "Jaarlijks",
+      "all": "Alles"
+    },
+    "stakingOverview": {
+      "title": "Staking-overzicht",
+      "totalTokensInStakes": "Totaal aan tokens in stakes",
+      "tooltip": "Tokens die vergrendeld zijn in stakes.",
+      "stakedTokens": "Gestakete tokens",
+      "stakedTokensLegend": "GESTAKETE TOKENS"
+    },
+    "usersActivity": {
+      "title": "Gebruikersoverzicht",
+      "protocolUsers": "OGY-protocolgebruikers",
+      "protocolUsersTooltip": "Unieke tokenhouders van OGY-tokens",
+      "protocolUsersLegend": "OGY-PROTOCOLGEBRUIKERS",
+      "activeWallets": "OGY actieve wallets",
+      "activeWalletsTooltip": "Actieve tokenhouders van OGY-tokens"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Governance-overzicht",
+      "welcome": "Welkom bij ORIGYN Governance!",
+      "description": "Houders van OGY-tokens kunnen het ORIGYN-netwerk rechtstreeks beïnvloeden door hun OGY te staken en op voorstellen te stemmen. Door deel te nemen aan het besluitvormingsproces verdienen deze tokenhouders die staken beloningen.",
+      "learnMore": "Meer informatie"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Staken & stemmen",
+        "description": "Beïnvloed het ORIGYN-netwerk door OGY te staken & op voorstellen te stemmen."
+      },
+      "earnRewards": {
+        "title": "Beloningen verdienen",
+        "description": "Neem deel aan het besluitvormingsproces om beloningen te verdienen."
+      },
+      "governCollectively": {
+        "title": "Collectief besturen",
+        "description": "Betrek & beïnvloed het netwerk als een samenwerkend ecosysteem."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokens in governance",
+      "paragraph1": "Houders van OGY-tokens kunnen het ORIGYN-netwerk rechtstreeks beïnvloeden door hun OGY te staken en op voorstellen te stemmen.",
+      "paragraph2": "Door deel te nemen aan het besluitvormingsproces verdienen deze tokenhouders die staken beloningen en besturen ze collectief en democratisch.",
+      "learnMoreOgy": "Meer informatie over OGY"
+    },
+    "sections": {
+      "proposals": "Voorstellen",
+      "neurons": "Neuronen"
+    },
+    "votingParticipation": {
+      "title": "Stemdeelname",
+      "chartLabel": "Deelname %",
+      "legendLabel": "DEELNAME %",
+      "period": {
+        "weekly": "Wekelijks",
+        "monthly": "Maandelijks",
+        "yearly": "Jaarlijks"
+      },
+      "lastParticipation": {
+        "label": "Laatste stemdeelname",
+        "tooltip": "Percentage deelname aan de laatste stemming."
+      },
+      "averageParticipation": {
+        "label": "Gemiddelde stemdeelname",
+        "tooltip": "Gemiddeld percentage stemdeelname in de loop van de tijd."
+      },
+      "averagePower": {
+        "label": "Gemiddelde stemkracht",
+        "tooltip": "Gemiddelde stemkracht over alle deelnemers."
+      }
+    },
+    "estimateRewards": {
+      "title": "Schat je beloningen",
+      "lockDuration": "Vergrendelingsduur",
+      "participants": "deelnemers",
+      "lockedForAtLeast": "momenteel vergrendeld voor minstens",
+      "lockedFor": "momenteel vergrendeld voor",
+      "year": "jaar",
+      "years": "jaar"
+    },
+    "kpi": {
+      "metric": "Metric",
+      "rewardBaseCurrentYear": "Beloningsbasis voor het huidige jaar",
+      "dailyVotingRewards": "Dagelijkse stembeloningen",
+      "totalVotingPower": "Totale stemkracht",
+      "overallVotingParticipation": "Totale stemdeelname"
+    },
+    "total": {
+      "titleTooltip": "Alle tokens die zich in de governance-canister bevinden. Deze tokens kunnen zich in vesting-status, staking-status, ongestaket of niet-geclaimd bevinden.",
+      "totalLabel": "Totaal aan tokens in governance",
+      "locked": {
+        "name": "Vergrendeld",
+        "tooltip": "Tokens die vergrendeld zijn in governance."
+      },
+      "unlocked": {
+        "name": "Ontgrendeld",
+        "tooltip": "Tokens die ontgrendeld zijn in governance en op elk moment kunnen worden opgenomen en verhandeld."
+      },
+      "accumulatedRewards": {
+        "name": "Geaccumuleerde beloningen",
+        "tooltip": "Beloningen die voor gebruikers worden geteld maar nog niet zijn geclaimd."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Voorstellen",
+      "viewProposal": "Voorstel bekijken",
+      "columns": {
+        "id": "ID",
+        "title": "Titel",
+        "proposed": "Voorgesteld",
+        "timeRemaining": "Resterende tijd",
+        "topic": "Onderwerp",
+        "status": "Status",
+        "view": "Bekijken"
+      }
+    },
+    "details": {
+      "category": "Governance",
+      "proposalNumber": "Voorstel #",
+      "proposal": "Voorstel",
+      "titleLoading": "Voorsteltitel wordt geladen…",
+      "payloadLoading": "Voorsteldetails worden geladen…",
+      "posted": "Geplaatst",
+      "topic": "Onderwerp",
+      "moreInfo": "Meer info",
+      "totalVotes": "Totaal aantal stemmen",
+      "adopt": "AANNEMEN",
+      "reject": "AFWIJZEN",
+      "vote": "Stemmen"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuronen",
+      "viewNeuron": "Neuron bekijken",
+      "columns": {
+        "id": "ID",
+        "state": "Status",
+        "stakedOgy": "Gestakete OGY",
+        "dissolveDelay": "Ontbindingsvertraging",
+        "age": "Leeftijd",
+        "votingPower": "Stemkracht",
+        "view": "Bekijken"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY-neuron",
+      "created": "Aangemaakt",
+      "stakedOgy": "Gestakete OGY",
+      "votingPower": "Stemkracht",
+      "dissolveDelay": "Ontbindingsvertraging",
+      "age": "Leeftijd",
+      "lifecycle": "Levenscyclus van neuron",
+      "dateCreated": "Aanmaakdatum",
+      "autoStakeMaturity": "Maturity automatisch staken",
+      "rewardsAndBonuses": "Beloningen & bonussen",
+      "stakedMaturity": "Gestakete maturity",
+      "totalMaturity": "Totale maturity",
+      "ageBonus": "Leeftijdsbonus",
+      "totalBonus": "Totale bonus",
+      "dissolveDelayBonus": "Ontbindingsvertragingsbonus"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Transactiegeschiedenis",
+      "searchFor": "Zoeken naar:",
+      "or": "of",
+      "searchPlaceholder": "Zoek naar een item",
+      "noResults": "Geen resultaten gevonden",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Transactiedetails",
+      "hash": "Hash",
+      "fetchError": "Fout bij het ophalen van één transactie!",
+      "mintingAccount": "Minting-account",
+      "fee": "Vergoeding",
+      "memo": "Memo",
+      "none": "Geen"
+    },
+    "accountDetails": {
+      "title": "OGY-account",
+      "id": "ID",
+      "owner": "Eigenaar",
+      "subaccount": "Subaccount",
+      "defaultSubaccount": "Geen (standaard subaccount)",
+      "historicalMaxBalance": "Historisch maximumsaldo",
+      "genesisBalance": "Genesis-saldo",
+      "period": {
+        "monthly": "Maandelijks",
+        "quarterly": "Per kwartaal",
+        "yearly": "Jaarlijks",
+        "lifetime": "Levenslang"
+      },
+      "empty": {
+        "title": "Nog geen transacties",
+        "description": "Dit account heeft geen transactiegeschiedenis. Zodra het OGY verzendt of ontvangt, verschijnt de activiteit hier."
+      },
+      "balanceHistory": {
+        "title": "Saldogeschiedenis",
+        "currentBalance": "Huidig saldo",
+        "currentBalanceInfo": "Huidig accountsaldo.",
+        "legend": "OGY-saldo"
+      },
+      "overview": {
+        "title": "Transactieoverzicht",
+        "totalLabel": "Totaalbedrag",
+        "totalSent": "Totaal verzonden",
+        "totalSentInfo": "Totaalbedrag verzonden door de principal.",
+        "totalReceived": "Totaal ontvangen",
+        "totalReceivedInfo": "Totaalbedrag ontvangen door de principal."
+      }
+    },
+    "flow": {
+      "title": "Transactieflow",
+      "searchPlaceholder": "Transacties zoeken…",
+      "clearSearch": "Zoekopdracht wissen",
+      "loadError": "Kon transactiegegevens niet laden. Probeer het opnieuw.",
+      "noMatch": "Geen transacties komen overeen met deze zoekopdracht.",
+      "transactions": "transacties",
+      "out": "Uit",
+      "in": "In",
+      "total": "Totaal",
+      "legend": {
+        "outTransaction": "Uitgaande transactie",
+        "inTransaction": "Inkomende transactie",
+        "includesInitial": "Inclusief initiële transactie",
+        "rootAccount": "Root-account",
+        "account": "Account",
+        "fromRoot": "Met transacties vanaf root",
+        "toRoot": "Met transacties naar root",
+        "madeInitial": "Heeft initiële transactie uitgevoerd"
+      }
+    },
+    "kind": {
+      "mint": "Aanmaken",
+      "transfer": "Overdracht",
+      "burn": "Verbranden",
+      "approve": "Goedkeuren"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Welkom terug",
+      "value": "Waarde:",
+      "disconnectWallet": "Wallet ontkoppelen",
+      "accountLabel": "Account",
+      "manageDescription": "Beheer je OGY-wallet, beloningen en staking-activiteit.",
+      "walletBalance": "Wallet-saldo",
+      "myAccount": "Mijn account",
+      "howToTopUp": "Hoe opwaarderen?"
+    },
+    "principal": {
+      "accountIdLabel": "Account-ID:",
+      "principalIdLabel": "Principal-ID:"
+    },
+    "available": {
+      "title": "Beschikbare OGY",
+      "transactionHistory": "Transactiegeschiedenis",
+      "transfer": "Overdragen",
+      "transferOgy": "OGY overdragen",
+      "transferDescription": "Je kunt alleen OGY verzenden vanaf je beschikbare saldo.",
+      "max": "Max",
+      "recipientAddress": "Ontvangeradres",
+      "amountReceived": "Ontvangen bedrag",
+      "ogyLogoAlt": "OGY-logo",
+      "transactionFee": "Transactiekosten (in rekening gebracht bij de bron)",
+      "currentBalance": "Huidig saldo:",
+      "transferProcessing": "De overdracht wordt verwerkt",
+      "transferProcessingHint": "Dit kan een paar seconden duren",
+      "transferSuccess": "Overdracht is geslaagd!",
+      "transferError": "Overdrachtsfout!",
+      "errors": {
+        "amountRequired": "Bedrag is vereist.",
+        "amountExceedsBalance": "Bedrag mag je saldo niet overschrijden.",
+        "amountBelowFee": "Bedrag mag niet lager zijn dan de transactiekosten.",
+        "amountNotPositive": "Bedrag moet een positief getal zijn.",
+        "recipientRequired": "Ontvangeradres is vereist.",
+        "recipientInvalid": "Ongeldig ontvangeradres."
+      }
+    },
+    "staked": {
+      "title": "Gestakete OGY",
+      "stake": "Staken",
+      "stakeOgy": "OGY staken",
+      "stakeDescription": "Om OGY te staken moet je naar ons NNS-platform gaan.",
+      "warningNotConnected": "Het lijkt erop dat je niet verbonden bent met",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Je hebt een",
+      "warningToConnect": "nodig om verbinding te maken met het NNS-platform.",
+      "goToNns": "Ga naar NNS"
+    },
+    "rewards": {
+      "title": "Gestakete beloningen",
+      "claimAll": "Alles claimen",
+      "claimDisabledReason": "Het claimen van beloningen wordt alleen ondersteund voor het standaardaccount van de principal.",
+      "aboutToClaim": "Je staat op het punt te claimen",
+      "sentToPrincipal": "De beloningen worden naar je principal verzonden",
+      "pending": "Alle beloningen claimen...",
+      "successTitle": "Alle beloningen claimen geslaagd!",
+      "errorTitle": "Fout bij het claimen van alle beloningen!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "We schakelen over op een nieuwe ledger en governance",
+        "description": "De ORIGYN governance en ledger zijn geüpgraded naar een SNS. Om te blijven deelnemen aan ORIGYN governance en OGY te gebruiken, moet je je OGY-tokens migreren."
+      },
+      "howToSwap": "Hoe tokens swappen",
+      "disclosureToggle": "Heb je nog oude OGY-tokens? Swap nu!",
+      "accountId": "Account-ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Stap 1: Opnemen uit oude governance",
+          "subtitle": "Als je eerder deelnam aan OGY governance, moet je die tokens opnemen voordat je ze kunt swappen."
+        },
+        "deposit": {
+          "title": "Stap 2: Storten op je account",
+          "subtitle": "Als je tokens hebt buiten het OGY-dashboard, stort ze dan op je account-id voordat je ze kunt swappen."
+        },
+        "swap": {
+          "title": "Stap 3: Tokens swappen",
+          "subtitle": "Swap de oude OGY-token naar de nieuwe ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Oud OGY-saldo"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Ga naar het oude OGY-dashboard"
+      },
+      "swap": {
+        "disabledOisy": "Het swappen van oude OGY is niet beschikbaar met OISY. Maak verbinding met Internet Identity of Plug om je oude OGY te swappen.",
+        "disabledSubAccount": "Het swappen van oude OGY wordt alleen ondersteund vanaf het standaardaccount van de principal.",
+        "swapYourTokens": "Swap je tokens",
+        "automaticDisabled": "Automatisch swappen is uitgeschakeld. Je moet je swapverzoek laten goedkeuren, het min. bedrag is 50 000 OGY.",
+        "form": {
+          "title": "Swap je OGY naar de nieuwe ledger",
+          "description": "Stort alle OGY-tokens die je wilt swappen op je account-id",
+          "tokensAvailable": "Beschikbare tokens om te swappen",
+          "youWillReceivePrefix": "Je ontvangt",
+          "youWillReceiveSuffix": "OGY-tokens op de nieuwe ledger.",
+          "swapPrefix": "Swap",
+          "swapSuffix": "OGY-tokens"
+        },
+        "pending": {
+          "takesTime": "Het swapproces kan enige tijd duren.",
+          "doNotRefresh": "Ververs de pagina niet!",
+          "swapping": "Tokens swappen..."
+        },
+        "success": {
+          "title": "Swap is geslaagd!",
+          "walletBalance": "Wallet-saldo op de nieuwe ledger",
+          "myAccount": "Mijn account"
+        },
+        "error": {
+          "title": "Fout bij het swappen van tokens!",
+          "retry": "Opnieuw proberen"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Mijn OGY-neuronen",
+        "idHeader": "ID",
+        "stakedAmount": "Gestaket bedrag",
+        "claimAmount": "Te claimen bedrag",
+        "emptyTitle": "Nog geen neuronen",
+        "emptyDescription": "Voeg een OGY-neuron toe om hier stake, stemkracht en beloningen te volgen.",
+        "addFirstNeuron": "Voeg je eerste neuron toe"
+      },
+      "add": {
+        "button": "Neuron toevoegen",
+        "title": "Neuron toevoegen",
+        "description": "Voeg deze principal toe als hotkey aan elke OGY-neuron die je hier wilt beheren.",
+        "needHotkey": "Een hotkey toevoegen?",
+        "openNns": "Open de NNS-app"
+      },
+      "claim": {
+        "button": "Claimen",
+        "disabledReason": "Het claimen van beloningen wordt alleen ondersteund voor het standaardaccount van de principal.",
+        "aboutToClaim": "Je staat op het punt te claimen",
+        "sentToPrincipal": "De beloningen worden naar je principal verzonden",
+        "pending": "Beloning claimen...",
+        "successTitle": "Beloning claimen geslaagd!",
+        "errorTitle": "Fout bij het claimen van beloning!",
+        "retry": "Opnieuw proberen"
+      },
+      "remove": {
+        "title": "Neuron verwijderen",
+        "description": "Om deze neuron te verwijderen, moet je je principal verwijderen uit de lijst met hotkeys van je neuron."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adres",
+      "governanceBalance": "Governance-saldo",
+      "stakedTokens": "Gestakete tokens",
+      "ledgerBalance": "Ledger-saldo",
+      "weightInTotalSupply": "Gewicht in totale voorraad"
+    }
+  },
+  "recovery": {
+    "title": "Je tokens herstellen",
+    "description": "Het OGY-dashboard ondersteunt alleen de OGY-token. Als je per ongeluk andere tokens hierheen hebt gestuurd, kun je die herstellen door de onderstaande stappen te volgen.",
+    "chooseToken": "Kies token",
+    "loginRequired": "Om je tokens te verzamelen, moet je ingelogd zijn.",
+    "transfer": {
+      "icpLogoAlt": "ICP-logo",
+      "ledgerCanister": "Ledger-canister:",
+      "transferIcp": "ICP overdragen",
+      "availableBalanceNote": "Je kunt alleen ICP verzenden vanaf je beschikbare saldo.",
+      "amountRequired": "Bedrag is vereist.",
+      "amountExceedsBalance": "Bedrag mag je saldo niet overschrijden.",
+      "amountPositive": "Bedrag moet een positief getal zijn.",
+      "amountBelowFee": "Bedrag moet groter dan of gelijk zijn aan de transactiekosten.",
+      "recipientAddress": "Ontvangeradres",
+      "recipientAddressRequired": "Ontvangeradres is vereist.",
+      "invalidRecipientAddress": "Ongeldig ontvangeradres.",
+      "amountReceived": "Ontvangen bedrag",
+      "transactionFee": "Transactiekosten",
+      "currentBalance": "Huidig saldo:",
+      "processing": "De overdracht wordt verwerkt",
+      "processingNote": "Dit kan een paar seconden duren",
+      "success": "Overdracht is geslaagd!",
+      "error": "Overdrachtsfout!"
+    }
+  },
+  "support": {
+    "category": "Ondersteuning",
+    "title": "Een ticket aanmaken",
+    "titleSubmitted": "Ticket verzonden",
+    "successTitle": "Supportticket aangemaakt",
+    "successMessage": "We nemen contact met je op via het opgegeven e-mailadres.",
+    "submitAnother": "Nog een ticket indienen",
+    "intro": "Beschrijf je probleem en hoe we je kunnen bereiken.",
+    "form": {
+      "name": "Naam",
+      "email": "Contact-e-mail",
+      "emailRequired": "E-mailadres is vereist",
+      "emailInvalid": "Ongeldig e-mailadres",
+      "principal": "Wallet-principal",
+      "invalidPrincipal": "Ongeldig ontvangeradres.",
+      "description": "Beschrijving",
+      "descriptionPlaceholder": "Vertel ons wat er aan de hand is…",
+      "descriptionRequired": "Beschrijf je probleem"
+    },
+    "submitError": "Er is iets misgegaan. Probeer het opnieuw.",
+    "submitting": "Verzenden…"
+  },
+  "explorer": {
+    "title": "Explorer",
+    "searchPlaceholder": "Zoek op titel, uitgever, principal of token-ID",
+    "openFilters": "Filters openen",
+    "checkOnBlockchain": "Controleer op de blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Uitgelichte certificaten",
+      "art": "Kunstcertificaten",
+      "gold": "Goudcertificaten"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopiëren naar klembord",
+    "toggleRelativeTime": "Relatieve tijd schakelen. Huidige weergave:",
+    "collapseRow": "Rij samenvouwen",
+    "expandRow": "Rij uitvouwen",
+    "searchPlaceholder": "Zoek naar items...",
+    "sortAscending": "Oplopend sorteren",
+    "sortDescending": "Aflopend sorteren",
+    "linesPerPage": "Regels per pagina",
+    "page": "Pagina",
+    "pageOf": "van",
+    "previousPage": "Vorige pagina",
+    "nextPage": "Volgende pagina"
+  },
+  "auth": {
+    "connect": "Verbinden",
+    "disconnect": "Verbinding verbreken",
+    "connectWallet": {
+      "title": "Verbind je wallet",
+      "subtitle": "Kies hoe je wilt inloggen"
+    },
+    "install": "Installeren",
+    "newToIc": "Nieuw bij Internet Computer?",
+    "learnMore": "Meer informatie",
+    "connecting": {
+      "title": "Verbinden...",
+      "subtitle": "Keur het verzoek in je wallet goed"
+    },
+    "sessionExpired": {
+      "title": "Sessie verlopen",
+      "description": "Je wallet-sessie is niet meer geldig. Maak opnieuw verbinding om door te gaan."
+    },
+    "reconnect": "Opnieuw verbinden",
+    "error": {
+      "connectionCancelled": "Verbinding geannuleerd. Probeer het opnieuw.",
+      "connectionFailed": "Wallet-verbinding mislukt. Probeer het opnieuw."
+    }
+  },
+  "warning": {
+    "badge": "NIEUW",
+    "ledgerSwitch": "we schakelen over op een nieuwe ledger, je moet je OGY swappen naar de nieuwe"
+  },
+  "calculator": {
+    "header": {
+      "title": "Kostencalculator",
+      "description": "Gebruik de ORIGYN-calculator om de kosten van uw uniek certificaat met al uw gegevens on-chain te schatten"
+    },
+    "plan": {
+      "title": "Plan uw mint",
+      "description": "Geef ons aan hoeveel items u heeft en wat u uploadt.",
+      "itemsLabel": "Hoeveel items?",
+      "uploadingLabel": "Wat uploadt u?",
+      "knowExactSize": "Weet u de exacte grootte?",
+      "totalUploadSize": "Totale uploadgrootte",
+      "usePreset": "Gebruik in plaats daarvan een voorinstelling",
+      "combinedSize": "Gecombineerde grootte van alle bestanden over alle items.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per stuk"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per stuk"
+        },
+        "dslr": {
+          "label": "Studiofoto",
+          "hint": "20 MB per stuk"
+        },
+        "video": {
+          "label": "Korte video",
+          "hint": "1 GB per stuk"
+        },
+        "video1hr": {
+          "label": "Lange video",
+          "hint": "60 GB per stuk"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Live schatting",
+      "titleRefreshing": "Schatting vernieuwen",
+      "description": "Wordt automatisch bijgewerkt naarmate u uw configuratie wijzigt.",
+      "ogyEquivalent": "OGY-equivalent",
+      "ogySpotRate": "OGY-spotrente",
+      "itemSingular": "Item",
+      "itemPlural": "Items",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Kostenspecificatie",
+      "baseFee": "Basis mint-tarief",
+      "storageFee": "Opslagtarief",
+      "items": "Items",
+      "uploadSize": "Uploadgrootte"
+    },
+    "bytesUnit": "bytes"
+  }
+}

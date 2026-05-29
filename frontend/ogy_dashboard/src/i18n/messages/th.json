@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "ภาษา",
+    "switchTo": "เปลี่ยนเป็น {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาดบางอย่าง",
+    "retry": "ลองใหม่",
+    "cancel": "ยกเลิก",
+    "confirm": "ยืนยัน",
+    "close": "ปิด",
+    "back": "ย้อนกลับ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "save": "บันทึก",
+    "submit": "ส่ง",
+    "copy": "คัดลอก",
+    "copied": "คัดลอกแล้ว",
+    "search": "ค้นหา",
+    "viewAll": "ดูทั้งหมด",
+    "showMore": "แสดงเพิ่มเติม",
+    "showLess": "แสดงน้อยลง",
+    "amount": "จำนวน",
+    "date": "วันที่",
+    "type": "ประเภท",
+    "from": "จาก",
+    "to": "ถึง",
+    "index": "ดัชนี",
+    "status": "สถานะ",
+    "total": "รวม",
+    "balance": "ยอดคงเหลือ",
+    "yes": "ใช่",
+    "no": "ไม่",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "แดชบอร์ด",
+    "governance": "การกำกับดูแล",
+    "transactionHistory": "ประวัติธุรกรรม",
+    "calculator": "เครื่องคำนวณ",
+    "openMainMenu": "เปิดเมนูหลัก",
+    "closeMenu": "ปิดเมนู",
+    "openAccountOverview": "เปิดภาพรวมบัญชี",
+    "viewAccountOverview": "ดูภาพรวมบัญชี",
+    "connectPrompt": "เชื่อมต่อกระเป๋าเงินของคุณเพื่อจัดการโทเคน ลงคะแนนข้อเสนอ และดูประวัติธุรกรรมของคุณ",
+    "connectWallet": "เชื่อมต่อกระเป๋าเงิน",
+    "disconnect": "ตัดการเชื่อมต่อ"
+  },
+  "notFound": {
+    "title": "ไม่พบหน้านี้",
+    "description": "ขออภัย เราไม่พบหน้าที่คุณกำลังมองหา",
+    "backHome": "กลับสู่หน้าแรก"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "แดชบอร์ด OGY",
+      "home": "หน้าแรก",
+      "circulation": "การหมุนเวียน",
+      "governance": "การกำกับดูแล",
+      "revenue": "รายได้",
+      "rewards": "รางวัล",
+      "distribution": "การกระจาย",
+      "governanceDashboard": "แดชบอร์ดการกำกับดูแล OGY",
+      "transactionExplorer": "ตัวสำรวจธุรกรรม OGY"
+    },
+    "learn": {
+      "heading": "เรียนรู้เพิ่มเติมเกี่ยวกับ OGY Tokenomics และ ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "มาตรฐาน NFT ของ ORIGYN",
+      "tokenomicsFaq": "คำถามที่พบบ่อยเกี่ยวกับ ORIGYN Tokenomics",
+      "website": "เว็บไซต์ ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "การสนับสนุน",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "ติดต่อ"
+    },
+    "support": {
+      "contactSupport": "ติดต่อฝ่ายสนับสนุน",
+      "recoverTokens": "กู้คืนโทเคนของคุณ"
+    },
+    "disclaimer": "*ORIGYN Foundation จะไม่รับผิดชอบต่อความสูญเสีย การโจรกรรม หรือการนำไปใช้โดยมิชอบของโทเคน OGY ที่เกิดขึ้นเกี่ยวเนื่องกับกระบวนการสว็อป นอกจากนี้ ORIGYN Foundation จะไม่รับผิดชอบต่อความล้มเหลวในการดำเนินการสว็อป หากฝ่ายที่เกี่ยวข้องไม่ปฏิบัติตามเงื่อนไขที่ ORIGYN Foundation กำหนดอย่างเคร่งครัด"
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "สำรวจแดชบอร์ด",
+      "subtitle": "โต้ตอบกับ web3 dApps, DAOs, NFTs, DeFi และอื่น ๆ อีกมากมายได้อย่างไร้ความเชื่อใจ"
+    },
+    "cta": {
+      "loginToSwap": "เข้าสู่ระบบเพื่อสว็อปโทเคน",
+      "myAccount": "บัญชีของฉัน"
+    },
+    "governanceStaking": {
+      "title": "ภาพรวมการสเตกการกำกับดูแล"
+    },
+    "cardError": {
+      "couldNotLoad": "โหลดไม่ได้",
+      "descriptionLine1": "เราพบปัญหาในการดึงข้อมูลเมตริกนี้",
+      "descriptionLine2": "โปรดลองอีกครั้งในอีกสักครู่"
+    },
+    "emptyState": {
+      "noDataFor": "ไม่มีข้อมูลสำหรับ",
+      "description": "ไม่มีอะไรให้แสดงในขณะนี้"
+    },
+    "circulationState": {
+      "title": "สถานะการหมุนเวียน OGY",
+      "tooltip": "อุปทานหมุนเวียนคือโทเคนทั้งหมด ยกเว้นโทเคนที่ปลดล็อกแล้วซึ่ง ORIGYN Foundation เป็นเจ้าของ",
+      "nnsProposal": "ข้อเสนอ NNS",
+      "totalLabel": "การหมุนเวียน OGY ทั้งหมด",
+      "notOwnedName": "OGY ที่ไม่อยู่ในมือของ Foundation",
+      "notOwnedValue": "จำนวนโทเคนหมุนเวียนที่ไม่ได้เป็นของ ORIGYN foundation",
+      "ownedName": "OGY ที่ล็อกอยู่ในมือของ Foundation",
+      "ownedValue": "จำนวนโทเคนที่ล็อกซึ่ง ORIGYN foundation เป็นเจ้าของ"
+    },
+    "foundationReserve": {
+      "title": "เงินสำรอง OGY Foundation",
+      "tooltip": "จำนวนโทเคน OGY ทั้งหมดที่ ORIGYN foundation เป็นเจ้าของในทุกกระเป๋าเงิน",
+      "totalLabel": "อุปทาน Foundation ทั้งหมด",
+      "lockedName": "ล็อก",
+      "lockedIntro": "โทเคนของ ORIGYN foundation ที่ล็อกในสเตกหรือการได้รับสิทธิ์ตามกำหนดเวลา",
+      "lockedStakes": "1) สเตก- โทเคนที่สร้างรางวัลด้วยการเข้าร่วมในการลงคะแนนการกำกับดูแล",
+      "lockedStakesNote": "โทเคนเหล่านั้นถูกล็อกโดยสมัครใจ",
+      "lockedVestings": "2) การได้รับสิทธิ์ตามกำหนดเวลา- โทเคนที่ไม่ได้รับรางวัลใด ๆ และไม่สามารถเข้าร่วมการลงคะแนนได้",
+      "lockedVestingsNote": "โทเคนเหล่านั้นถูกล็อกโดยสัญญาของคุณกับ ORIGYN Foundation",
+      "unlockedName": "ปลดล็อก",
+      "unlockedValue": "เงินที่ปลดล็อกแล้วซึ่ง ORIGYN foundation เป็นเจ้าของ"
+    },
+    "treasuryAccount": {
+      "title": "บัญชีคลัง ORIGYN (OTA)",
+      "networkRevenue": "รายได้เครือข่าย",
+      "tokenLogoAlt": "โลโก้โทเคน",
+      "tooltipOgy": "รายได้จากการใช้งานเครือข่ายที่เกิดจากค่าธรรมเนียมในการใช้เครือข่าย ORIGYN (เช่น สำหรับการออกหรือโอนใบรับรองดิจิทัล การมินต์ NFT ฯลฯ) และสะสมเป็น OGY",
+      "tooltipIcp": "รายได้จากการใช้งานเครือข่ายที่เกิดจากค่าธรรมเนียมในการใช้เครือข่าย ORIGYN (เช่น สำหรับการออกหรือโอนใบรับรองดิจิทัล การมินต์ NFT ฯลฯ) และสะสมเป็น ICP"
+    },
+    "rewardAccount": {
+      "title": "บัญชีรางวัล ORIGYN (ORA)",
+      "balance": "ยอดคงเหลือ ORA",
+      "year": "ปี",
+      "rewardPool": "พูลรางวัล",
+      "moreDetails": "รายละเอียดเพิ่มเติม",
+      "tooltipStake": "ผู้ถือโทเคนสามารถสเตก OGY ของตนและรับรางวัลด้วยการเข้าร่วมการกำกับดูแล",
+      "tooltipSeed": "รางวัลจะมาจากบัญชีรางวัล ORIGYN ซึ่ง ORIGYN จะใส่เริ่มต้นด้วย OGY หนึ่งพันล้านโทเคน",
+      "tooltipPool": "พูลรางวัลประกอบด้วย OGY 250 ล้านโทเคนในปีแรก และจะลดลงครึ่งหนึ่งทุกสองปีเพื่อจูงใจและตอบแทนผู้มีส่วนร่วมในช่วงแรกและระยะยาวของระบบนิเวศ",
+      "description": "ORIGYN จะใส่ OGY หนึ่งพันล้านโทเคนเข้าสู่บัญชีรางวัล ORIGYN (ORA) เพื่อประโยชน์ของผู้ถือที่สเตกและลงคะแนน พูลรางวัลประกอบด้วย OGY 250 ล้านโทเคนในปีแรก และจะลดลงครึ่งหนึ่งทุกสองปีเพื่อจูงใจและตอบแทนผู้มีส่วนร่วมในช่วงแรกและระยะยาวของระบบนิเวศ"
+    },
+    "tokenDistribution": {
+      "title": "การกระจายโทเคน"
+    },
+    "transactionHistory": {
+      "title": "ประวัติธุรกรรม",
+      "showAll": "แสดงทั้งหมด"
+    },
+    "topTransfers": {
+      "value": "มูลค่า",
+      "time": "เวลา",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "ไม่มีข้อมูล"
+    },
+    "totalSupply": {
+      "title": "อุปทาน OGY ทั้งหมด",
+      "tooltipTitle": "จำนวนโทเคน OGY ทั้งหมดที่มีอยู่",
+      "tooltipLine1": "ซึ่งรวมถึงอุปทานหมุนเวียนและอุปทานภายใต้การควบคุมของ ORIGYN Foundation",
+      "tooltipLine2": "ตั้งแต่วันที่ 18 กันยายน ORIGYN ได้เปลี่ยนเป็นโมเดลลดอุปทานเต็มรูปแบบ ซึ่งหมายความว่าจะไม่มีการมินต์โทเคนใหม่อีก",
+      "chartLabel": "อุปทานทั้งหมด"
+    },
+    "totalBurned": {
+      "title": "OGY ที่ถูกเผาทั้งหมด",
+      "tooltipTitle": "จำนวนโทเคน OGY ที่ถูกเผาทั้งหมด",
+      "tooltipLine1": "โทเคนเหล่านี้ถูกเผาทิ้งโดยสมบูรณ์และไม่มีอยู่อีกต่อไป",
+      "tooltipLine2": "โทเคนสามารถถูกเผาได้ด้วยเหตุผลต่าง ๆ เช่น ค่าธรรมเนียมการมินต์ใบรับรอง ค่าธรรมเนียมการใช้งานเครือข่าย หรือค่าธรรมเนียมธุรกรรมเครือข่าย",
+      "chartLabel": "เผาทั้งหมด"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "รายวัน",
+      "weekly": "รายสัปดาห์",
+      "monthly": "รายเดือน",
+      "yearly": "รายปี",
+      "all": "ทั้งหมด"
+    },
+    "stakingOverview": {
+      "title": "ภาพรวมการสเตก",
+      "totalTokensInStakes": "โทเคนทั้งหมดในสเตก",
+      "tooltip": "โทเคนที่ล็อกอยู่ในสเตก",
+      "stakedTokens": "โทเคนที่สเตก",
+      "stakedTokensLegend": "โทเคนที่สเตก"
+    },
+    "usersActivity": {
+      "title": "ภาพรวมผู้ใช้",
+      "protocolUsers": "ผู้ใช้โปรโตคอล OGY",
+      "protocolUsersTooltip": "ผู้ถือโทเคน OGY ที่ไม่ซ้ำกัน",
+      "protocolUsersLegend": "ผู้ใช้โปรโตคอล OGY",
+      "activeWallets": "กระเป๋าเงิน OGY ที่ใช้งานอยู่",
+      "activeWalletsTooltip": "ผู้ถือโทเคน OGY ที่ใช้งานอยู่"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "ภาพรวมการกำกับดูแล",
+      "welcome": "ยินดีต้อนรับสู่การกำกับดูแล ORIGYN!",
+      "description": "ผู้ถือโทเคน OGY สามารถมีอิทธิพลโดยตรงต่อเครือข่าย ORIGYN ด้วยการสเตก OGY และลงคะแนนข้อเสนอ ด้วยการเข้าร่วมในกระบวนการตัดสินใจ ผู้ถือโทเคนที่สเตกเหล่านี้จะได้รับรางวัล",
+      "learnMore": "เรียนรู้เพิ่มเติม"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "สเตกและลงคะแนน",
+        "description": "มีอิทธิพลต่อเครือข่าย ORIGYN ด้วยการสเตก OGY และลงคะแนนข้อเสนอ"
+      },
+      "earnRewards": {
+        "title": "รับรางวัล",
+        "description": "เข้าร่วมในกระบวนการตัดสินใจเพื่อรับรางวัล"
+      },
+      "governCollectively": {
+        "title": "กำกับดูแลร่วมกัน",
+        "description": "มีส่วนร่วมและมีอิทธิพลต่อเครือข่ายในฐานะระบบนิเวศที่ทำงานร่วมกัน"
+      }
+    },
+    "tokensSection": {
+      "title": "โทเคนในการกำกับดูแล",
+      "paragraph1": "ผู้ถือโทเคน OGY สามารถมีอิทธิพลโดยตรงต่อเครือข่าย ORIGYN ด้วยการสเตก OGY และลงคะแนนข้อเสนอ",
+      "paragraph2": "ด้วยการเข้าร่วมในกระบวนการตัดสินใจ ผู้ถือโทเคนที่สเตกเหล่านี้จะได้รับรางวัลและกำกับดูแลร่วมกันอย่างเป็นประชาธิปไตย",
+      "learnMoreOgy": "เรียนรู้เพิ่มเติมเกี่ยวกับ OGY"
+    },
+    "sections": {
+      "proposals": "ข้อเสนอ",
+      "neurons": "นิวรอน"
+    },
+    "votingParticipation": {
+      "title": "การมีส่วนร่วมในการลงคะแนน",
+      "chartLabel": "การมีส่วนร่วม %",
+      "legendLabel": "การมีส่วนร่วม %",
+      "period": {
+        "weekly": "รายสัปดาห์",
+        "monthly": "รายเดือน",
+        "yearly": "รายปี"
+      },
+      "lastParticipation": {
+        "label": "การมีส่วนร่วมในการลงคะแนนครั้งล่าสุด",
+        "tooltip": "เปอร์เซ็นต์การมีส่วนร่วมในเหตุการณ์การลงคะแนนครั้งล่าสุด"
+      },
+      "averageParticipation": {
+        "label": "การมีส่วนร่วมในการลงคะแนนเฉลี่ย",
+        "tooltip": "เปอร์เซ็นต์เฉลี่ยของการมีส่วนร่วมในการลงคะแนนตลอดช่วงเวลา"
+      },
+      "averagePower": {
+        "label": "พลังการลงคะแนนเฉลี่ย",
+        "tooltip": "พลังการลงคะแนนเฉลี่ยของผู้เข้าร่วมทั้งหมด"
+      }
+    },
+    "estimateRewards": {
+      "title": "ประมาณการรางวัลของคุณ",
+      "lockDuration": "ระยะเวลาล็อก",
+      "participants": "ผู้เข้าร่วม",
+      "lockedForAtLeast": "ปัจจุบันล็อกอย่างน้อย",
+      "lockedFor": "ปัจจุบันล็อกเป็นเวลา",
+      "year": "ปี",
+      "years": "ปี"
+    },
+    "kpi": {
+      "metric": "เมตริก",
+      "rewardBaseCurrentYear": "ฐานรางวัลสำหรับปีปัจจุบัน",
+      "dailyVotingRewards": "รางวัลการโหวตรายวัน",
+      "totalVotingPower": "พลังโหวตรวม",
+      "overallVotingParticipation": "การมีส่วนร่วมในการโหวตโดยรวม"
+    },
+    "total": {
+      "titleTooltip": "โทเคนทั้งหมดที่อยู่ใน canister การกำกับดูแล โทเคนเหล่านี้อาจอยู่ในสถานะการได้รับสิทธิ์ตามกำหนดเวลา สถานะสเตก ยกเลิกการสเตก หรือยังไม่ได้เคลม",
+      "totalLabel": "โทเคนทั้งหมดในการกำกับดูแล",
+      "locked": {
+        "name": "ล็อก",
+        "tooltip": "โทเคนที่ล็อกในการกำกับดูแล"
+      },
+      "unlocked": {
+        "name": "ปลดล็อก",
+        "tooltip": "โทเคนที่ปลดล็อกในการกำกับดูแลและสามารถถอนและซื้อขายได้ทุกเมื่อ"
+      },
+      "accumulatedRewards": {
+        "name": "รางวัลสะสม",
+        "tooltip": "รางวัลที่นับให้ผู้ใช้แล้วแต่ยังไม่ได้เคลม"
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "ข้อเสนอ",
+      "viewProposal": "ดูข้อเสนอ",
+      "columns": {
+        "id": "ID",
+        "title": "ชื่อเรื่อง",
+        "proposed": "เสนอเมื่อ",
+        "timeRemaining": "เวลาที่เหลือ",
+        "topic": "หัวข้อ",
+        "status": "สถานะ",
+        "view": "ดู"
+      }
+    },
+    "details": {
+      "category": "การกำกับดูแล",
+      "proposalNumber": "ข้อเสนอ #",
+      "proposal": "ข้อเสนอ",
+      "titleLoading": "กำลังโหลดชื่อข้อเสนอ…",
+      "payloadLoading": "กำลังโหลดรายละเอียดข้อเสนอ…",
+      "posted": "โพสต์เมื่อ",
+      "topic": "หัวข้อ",
+      "moreInfo": "ข้อมูลเพิ่มเติม",
+      "totalVotes": "คะแนนรวม",
+      "adopt": "รับรอง",
+      "reject": "ปฏิเสธ",
+      "vote": "ลงคะแนน"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "นิวรอน",
+      "viewNeuron": "ดูนิวรอน",
+      "columns": {
+        "id": "ID",
+        "state": "สถานะ",
+        "stakedOgy": "OGY ที่สเตก",
+        "dissolveDelay": "ระยะเวลาการสลาย",
+        "age": "อายุ",
+        "votingPower": "พลังการลงคะแนน",
+        "view": "ดู"
+      }
+    },
+    "details": {
+      "category": "นิวรอน",
+      "title": "นิวรอน OGY",
+      "created": "สร้างเมื่อ",
+      "stakedOgy": "OGY ที่สเตก",
+      "votingPower": "พลังการลงคะแนน",
+      "dissolveDelay": "ระยะเวลาการสลาย",
+      "age": "อายุ",
+      "lifecycle": "วงจรชีวิตนิวรอน",
+      "dateCreated": "วันที่สร้าง",
+      "autoStakeMaturity": "สเตกความสมบูรณ์อัตโนมัติ",
+      "rewardsAndBonuses": "รางวัลและโบนัส",
+      "stakedMaturity": "ความสมบูรณ์ที่สเตก",
+      "totalMaturity": "ความสมบูรณ์ทั้งหมด",
+      "ageBonus": "โบนัสอายุ",
+      "totalBonus": "โบนัสทั้งหมด",
+      "dissolveDelayBonus": "โบนัสระยะเวลาการสลาย"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "ประวัติธุรกรรม",
+      "searchFor": "ค้นหา:",
+      "or": "หรือ",
+      "searchPlaceholder": "ค้นหารายการ",
+      "noResults": "ไม่พบผลลัพธ์",
+      "resultBlock": "บล็อก",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "รายละเอียดธุรกรรม",
+      "hash": "แฮช",
+      "fetchError": "เกิดข้อผิดพลาดในการดึงธุรกรรมหนึ่งรายการ!",
+      "mintingAccount": "บัญชีมินต์",
+      "fee": "ค่าธรรมเนียม",
+      "memo": "บันทึกย่อ",
+      "none": "ไม่มี"
+    },
+    "accountDetails": {
+      "title": "บัญชี OGY",
+      "id": "ID",
+      "owner": "เจ้าของ",
+      "subaccount": "บัญชีย่อย",
+      "defaultSubaccount": "ไม่มี (บัญชีย่อยเริ่มต้น)",
+      "historicalMaxBalance": "ยอดคงเหลือสูงสุดในอดีต",
+      "genesisBalance": "ยอดคงเหลือเริ่มต้น",
+      "period": {
+        "monthly": "รายเดือน",
+        "quarterly": "รายไตรมาส",
+        "yearly": "รายปี",
+        "lifetime": "ตลอดอายุ"
+      },
+      "empty": {
+        "title": "ยังไม่มีธุรกรรม",
+        "description": "บัญชีนี้ยังไม่มีประวัติธุรกรรม เมื่อมีการส่งหรือรับ OGY กิจกรรมจะปรากฏที่นี่"
+      },
+      "balanceHistory": {
+        "title": "ประวัติยอดคงเหลือ",
+        "currentBalance": "ยอดคงเหลือปัจจุบัน",
+        "currentBalanceInfo": "ยอดคงเหลือบัญชีปัจจุบัน",
+        "legend": "ยอดคงเหลือ OGY"
+      },
+      "overview": {
+        "title": "ภาพรวมธุรกรรม",
+        "totalLabel": "จำนวนรวม",
+        "totalSent": "ส่งทั้งหมด",
+        "totalSentInfo": "จำนวนทั้งหมดที่ส่งโดย principal",
+        "totalReceived": "รับทั้งหมด",
+        "totalReceivedInfo": "จำนวนทั้งหมดที่ได้รับโดย principal"
+      }
+    },
+    "flow": {
+      "title": "การไหลของธุรกรรม",
+      "searchPlaceholder": "ค้นหาธุรกรรม…",
+      "clearSearch": "ล้างการค้นหา",
+      "loadError": "โหลดข้อมูลธุรกรรมไม่ได้ โปรดลองอีกครั้ง",
+      "noMatch": "ไม่มีธุรกรรมที่ตรงกับการค้นหานี้",
+      "transactions": "ธุรกรรม",
+      "out": "ออก",
+      "in": "เข้า",
+      "total": "รวม",
+      "legend": {
+        "outTransaction": "ธุรกรรมขาออก",
+        "inTransaction": "ธุรกรรมขาเข้า",
+        "includesInitial": "รวมธุรกรรมเริ่มต้น",
+        "rootAccount": "บัญชีราก",
+        "account": "บัญชี",
+        "fromRoot": "พร้อมธุรกรรมจากราก",
+        "toRoot": "พร้อมธุรกรรมไปยังราก",
+        "madeInitial": "ทำธุรกรรมเริ่มต้น"
+      }
+    },
+    "kind": {
+      "mint": "สร้าง",
+      "transfer": "โอน",
+      "burn": "เผา",
+      "approve": "อนุมัติ"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "ยินดีต้อนรับกลับ",
+      "value": "มูลค่า:",
+      "disconnectWallet": "ตัดการเชื่อมต่อกระเป๋าเงิน",
+      "accountLabel": "บัญชี",
+      "manageDescription": "จัดการกระเป๋าเงิน OGY รางวัล และกิจกรรมการสเตกของคุณ",
+      "walletBalance": "ยอดคงเหลือกระเป๋าเงิน",
+      "myAccount": "บัญชีของฉัน",
+      "howToTopUp": "เติมเงินอย่างไร?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "OGY ที่ใช้ได้",
+      "transactionHistory": "ประวัติธุรกรรม",
+      "transfer": "โอน",
+      "transferOgy": "โอน OGY",
+      "transferDescription": "คุณสามารถส่ง OGY ได้จากยอดคงเหลือที่ใช้ได้เท่านั้น",
+      "max": "สูงสุด",
+      "recipientAddress": "ที่อยู่ผู้รับ",
+      "amountReceived": "จำนวนที่ได้รับ",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "ค่าธรรมเนียมธุรกรรม (เรียกเก็บจากต้นทาง)",
+      "currentBalance": "ยอดคงเหลือปัจจุบัน:",
+      "transferProcessing": "กำลังดำเนินการโอน",
+      "transferProcessingHint": "อาจใช้เวลาสักครู่",
+      "transferSuccess": "การโอนสำเร็จ !",
+      "transferError": "การโอนผิดพลาด !",
+      "errors": {
+        "amountRequired": "ต้องระบุจำนวน",
+        "amountExceedsBalance": "จำนวนต้องไม่เกินยอดคงเหลือของคุณ",
+        "amountBelowFee": "จำนวนต้องไม่น้อยกว่าค่าธรรมเนียมธุรกรรม",
+        "amountNotPositive": "จำนวนต้องเป็นตัวเลขบวก",
+        "recipientRequired": "ต้องระบุที่อยู่ผู้รับ",
+        "recipientInvalid": "ที่อยู่ผู้รับไม่ถูกต้อง"
+      }
+    },
+    "staked": {
+      "title": "OGY ที่สเตก",
+      "stake": "สเตก",
+      "stakeOgy": "สเตก OGY",
+      "stakeDescription": "หากต้องการสเตก OGY คุณต้องไปที่แพลตฟอร์ม NNS ของเรา",
+      "warningNotConnected": "ดูเหมือนว่าคุณยังไม่ได้เชื่อมต่อกับ",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "คุณต้องมี",
+      "warningToConnect": "เพื่อเชื่อมต่อกับแพลตฟอร์ม NNS",
+      "goToNns": "ไปที่ NNS"
+    },
+    "rewards": {
+      "title": "รางวัลที่สเตก",
+      "claimAll": "เคลมทั้งหมด",
+      "claimDisabledReason": "การเคลมรางวัลรองรับเฉพาะบัญชีเริ่มต้นของ principal เท่านั้น",
+      "aboutToClaim": "คุณกำลังจะเคลม",
+      "sentToPrincipal": "รางวัลจะถูกส่งไปยัง principal ของคุณ",
+      "pending": "กำลังเคลมรางวัลทั้งหมด...",
+      "successTitle": "เคลมรางวัลทั้งหมดสำเร็จ!",
+      "errorTitle": "เคลมรางวัลทั้งหมดผิดพลาด!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "เรากำลังเปลี่ยน ledger และการกำกับดูแล",
+        "description": "การกำกับดูแลและ ledger ของ ORIGYN ได้รับการอัปเกรดเป็น SNS หากต้องการเข้าร่วมการกำกับดูแล ORIGYN ต่อไปและใช้งาน OGY คุณต้องย้ายโทเคน OGY ของคุณ"
+      },
+      "howToSwap": "วิธีสว็อปโทเคน",
+      "disclosureToggle": "ยังมีโทเคน OGY เก่าอยู่ใช่ไหม? สว็อปเลย!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "ขั้นตอนที่ 1: ถอนจากการกำกับดูแลเก่า",
+          "subtitle": "หากคุณเคยเข้าร่วมการกำกับดูแล OGY มาก่อน คุณต้องถอนโทเคนเหล่านั้นก่อนจึงจะสามารถสว็อปได้"
+        },
+        "deposit": {
+          "title": "ขั้นตอนที่ 2: ฝากเข้าบัญชีของคุณ",
+          "subtitle": "หากคุณมีโทเคนใด ๆ นอกแดชบอร์ด OGY ให้ฝากเข้า account-id ของคุณก่อนจึงจะเริ่มสว็อปได้"
+        },
+        "swap": {
+          "title": "ขั้นตอนที่ 3: สว็อปโทเคน",
+          "subtitle": "สว็อปโทเคน OGY แบบเดิมเป็น ledger ใหม่"
+        }
+      },
+      "deposit": {
+        "legacyBalance": "ยอดคงเหลือ OGY แบบเดิม"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "ไปที่แดชบอร์ด OGY แบบเดิม"
+      },
+      "swap": {
+        "disabledOisy": "การสว็อป OGY แบบเดิมไม่สามารถใช้กับ OISY ได้ เชื่อมต่อด้วย Internet Identity หรือ Plug เพื่อสว็อป OGY แบบเดิมของคุณ",
+        "disabledSubAccount": "การสว็อป OGY แบบเดิมรองรับเฉพาะจากบัญชีเริ่มต้นของ principal เท่านั้น",
+        "swapYourTokens": "สว็อปโทเคนของคุณ",
+        "automaticDisabled": "การสว็อปอัตโนมัติถูกปิดใช้งาน คุณจะต้องได้รับการอนุมัติคำขอสว็อปของคุณ จำนวนขั้นต่ำคือ 50 000 OGY",
+        "form": {
+          "title": "สว็อป OGY ของคุณเป็น ledger ใหม่",
+          "description": "ฝากโทเคน OGY ใด ๆ ที่คุณต้องการสว็อปเข้า account id ของคุณ",
+          "tokensAvailable": "โทเคนที่ใช้สว็อปได้",
+          "youWillReceivePrefix": "คุณจะได้รับ",
+          "youWillReceiveSuffix": "โทเคน OGY บน ledger ใหม่",
+          "swapPrefix": "สว็อป",
+          "swapSuffix": "โทเคน OGY"
+        },
+        "pending": {
+          "takesTime": "กระบวนการสว็อปอาจใช้เวลาเล็กน้อย",
+          "doNotRefresh": "อย่ารีเฟรชหน้านี้ !",
+          "swapping": "กำลังสว็อปโทเคน..."
+        },
+        "success": {
+          "title": "การสว็อปสำเร็จ!",
+          "walletBalance": "ยอดคงเหลือกระเป๋าเงินบน ledger ใหม่",
+          "myAccount": "บัญชีของฉัน"
+        },
+        "error": {
+          "title": "การสว็อปโทเคนผิดพลาด!",
+          "retry": "ลองใหม่"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "นิวรอน OGY ของฉัน",
+        "idHeader": "ID",
+        "stakedAmount": "จำนวนที่สเตก",
+        "claimAmount": "จำนวนที่เคลม",
+        "emptyTitle": "ยังไม่มีนิวรอน",
+        "emptyDescription": "เพิ่มนิวรอน OGY เพื่อเริ่มติดตามสเตก พลังการลงคะแนน และรางวัลที่นี่",
+        "addFirstNeuron": "เพิ่มนิวรอนแรกของคุณ"
+      },
+      "add": {
+        "button": "เพิ่มนิวรอน",
+        "title": "เพิ่มนิวรอน",
+        "description": "เพิ่ม principal นี้เป็นฮอตคีย์ในแต่ละนิวรอน OGY ที่คุณต้องการจัดการที่นี่",
+        "needHotkey": "ต้องเพิ่มฮอตคีย์ใช่ไหม?",
+        "openNns": "เปิดแอป NNS"
+      },
+      "claim": {
+        "button": "เคลม",
+        "disabledReason": "การเคลมรางวัลรองรับเฉพาะบัญชีเริ่มต้นของ principal เท่านั้น",
+        "aboutToClaim": "คุณกำลังจะเคลม",
+        "sentToPrincipal": "รางวัลจะถูกส่งไปยัง principal ของคุณ",
+        "pending": "กำลังเคลมรางวัล...",
+        "successTitle": "เคลมรางวัลสำเร็จ!",
+        "errorTitle": "เคลมรางวัลผิดพลาด!",
+        "retry": "ลองใหม่"
+      },
+      "remove": {
+        "title": "ลบนิวรอน",
+        "description": "หากต้องการลบนิวรอนนี้ คุณต้องลบ principal ของคุณออกจากรายการฮอตคีย์ของนิวรอน"
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "ที่อยู่",
+      "governanceBalance": "ยอดคงเหลือการกำกับดูแล",
+      "stakedTokens": "โทเคนที่สเตก",
+      "ledgerBalance": "ยอดคงเหลือ Ledger",
+      "weightInTotalSupply": "น้ำหนักในอุปทานทั้งหมด"
+    }
+  },
+  "recovery": {
+    "title": "กู้คืนโทเคนของคุณ",
+    "description": "แดชบอร์ด OGY รองรับเฉพาะโทเคน OGY เท่านั้น ในกรณีที่คุณส่งโทเคนอื่นมาที่นี่โดยไม่ตั้งใจ คุณสามารถกู้คืนได้โดยทำตามขั้นตอนด้านล่าง",
+    "chooseToken": "เลือกโทเคน",
+    "loginRequired": "หากต้องการรวบรวมโทเคนของคุณ คุณต้องเข้าสู่ระบบ",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "โอน ICP",
+      "availableBalanceNote": "คุณสามารถส่ง ICP ได้จากยอดคงเหลือที่ใช้ได้เท่านั้น",
+      "amountRequired": "ต้องระบุจำนวน",
+      "amountExceedsBalance": "จำนวนต้องไม่เกินยอดคงเหลือของคุณ",
+      "amountPositive": "จำนวนต้องเป็นตัวเลขบวก",
+      "amountBelowFee": "จำนวนต้องมากกว่าหรือเท่ากับค่าธรรมเนียมธุรกรรม",
+      "recipientAddress": "ที่อยู่ผู้รับ",
+      "recipientAddressRequired": "ต้องระบุที่อยู่ผู้รับ",
+      "invalidRecipientAddress": "ที่อยู่ผู้รับไม่ถูกต้อง",
+      "amountReceived": "จำนวนที่ได้รับ",
+      "transactionFee": "ค่าธรรมเนียมธุรกรรม",
+      "currentBalance": "ยอดคงเหลือปัจจุบัน:",
+      "processing": "กำลังดำเนินการโอน",
+      "processingNote": "อาจใช้เวลาสักครู่",
+      "success": "การโอนสำเร็จ!",
+      "error": "การโอนผิดพลาด!"
+    }
+  },
+  "support": {
+    "category": "การสนับสนุน",
+    "title": "สร้างทิกเก็ต",
+    "titleSubmitted": "ส่งทิกเก็ตแล้ว",
+    "successTitle": "สร้างทิกเก็ตสนับสนุนแล้ว",
+    "successMessage": "เราจะติดต่อกลับทางอีเมลที่คุณให้ไว้",
+    "submitAnother": "ส่งทิกเก็ตอีกใบ",
+    "intro": "อธิบายปัญหาของคุณและวิธีที่เราจะติดต่อคุณได้",
+    "form": {
+      "name": "ชื่อ",
+      "email": "อีเมลติดต่อ",
+      "emailRequired": "ต้องระบุที่อยู่อีเมล",
+      "emailInvalid": "ที่อยู่อีเมลไม่ถูกต้อง",
+      "principal": "principal ของกระเป๋าเงิน",
+      "invalidPrincipal": "ที่อยู่ผู้รับไม่ถูกต้อง",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "บอกเราว่าเกิดอะไรขึ้น…",
+      "descriptionRequired": "โปรดอธิบายปัญหาของคุณ"
+    },
+    "submitError": "เกิดข้อผิดพลาดบางอย่าง โปรดลองอีกครั้ง",
+    "submitting": "กำลังส่ง…"
+  },
+  "explorer": {
+    "title": "ตัวสำรวจ",
+    "searchPlaceholder": "ค้นหาตามชื่อเรื่อง ผู้ออก principal หรือ token ID",
+    "openFilters": "เปิดตัวกรอง",
+    "checkOnBlockchain": "ตรวจสอบบนบล็อกเชน",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "ใบรับรองแนะนำ",
+      "art": "ใบรับรองงานศิลปะ",
+      "gold": "ใบรับรองทองคำ"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "คัดลอกไปยังคลิปบอร์ด",
+    "toggleRelativeTime": "สลับเวลาแบบสัมพัทธ์ การแสดงผลปัจจุบัน:",
+    "collapseRow": "ยุบแถว",
+    "expandRow": "ขยายแถว",
+    "searchPlaceholder": "ค้นหารายการ...",
+    "sortAscending": "เรียงจากน้อยไปมาก",
+    "sortDescending": "เรียงจากมากไปน้อย",
+    "linesPerPage": "บรรทัดต่อหน้า",
+    "page": "หน้า",
+    "pageOf": "จาก",
+    "previousPage": "หน้าก่อนหน้า",
+    "nextPage": "หน้าถัดไป"
+  },
+  "auth": {
+    "connect": "เชื่อมต่อ",
+    "disconnect": "ตัดการเชื่อมต่อ",
+    "connectWallet": {
+      "title": "เชื่อมต่อกระเป๋าเงินของคุณ",
+      "subtitle": "เลือกวิธีที่คุณต้องการเข้าสู่ระบบ"
+    },
+    "install": "ติดตั้ง",
+    "newToIc": "เพิ่งเริ่มใช้ Internet Computer?",
+    "learnMore": "เรียนรู้เพิ่มเติม",
+    "connecting": {
+      "title": "กำลังเชื่อมต่อ...",
+      "subtitle": "อนุมัติคำขอในกระเป๋าเงินของคุณ"
+    },
+    "sessionExpired": {
+      "title": "เซสชันหมดอายุ",
+      "description": "เซสชันกระเป๋าเงินของคุณไม่ถูกต้องอีกต่อไป เชื่อมต่อใหม่เพื่อดำเนินการต่อ"
+    },
+    "reconnect": "เชื่อมต่อใหม่",
+    "error": {
+      "connectionCancelled": "การเชื่อมต่อถูกยกเลิก โปรดลองอีกครั้ง",
+      "connectionFailed": "การเชื่อมต่อกระเป๋าเงินล้มเหลว โปรดลองอีกครั้ง"
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "เรากำลังเปลี่ยน ledger คุณต้องสว็อป OGY ของคุณเป็นอันใหม่"
+  },
+  "calculator": {
+    "header": {
+      "title": "เครื่องคำนวณค่าใช้จ่าย",
+      "description": "ใช้เครื่องคำนวณของ ORIGYN เพื่อประมาณค่าใช้จ่ายสำหรับใบรับรองเฉพาะของคุณพร้อมข้อมูลทั้งหมดบนเชน"
+    },
+    "plan": {
+      "title": "วางแผนการสร้างใบรับรอง",
+      "description": "โปรดระบุจำนวนรายการและประเภทไฟล์ที่ท่านต้องการอัปโหลด",
+      "itemsLabel": "จำนวนรายการเท่าใด",
+      "uploadingLabel": "ท่านกำลังอัปโหลดอะไร",
+      "knowExactSize": "ทราบขนาดที่แน่นอนหรือไม่",
+      "totalUploadSize": "ขนาดการอัปโหลดรวม",
+      "usePreset": "ใช้ค่าที่กำหนดไว้ล่วงหน้าแทน",
+      "combinedSize": "ขนาดรวมของทุกไฟล์ในทุกรายการ",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB ต่อรายการ"
+        },
+        "iphone": {
+          "label": "รูปภาพ",
+          "hint": "3 MB ต่อรายการ"
+        },
+        "dslr": {
+          "label": "รูปภาพสตูดิโอ",
+          "hint": "20 MB ต่อรายการ"
+        },
+        "video": {
+          "label": "วิดีโอสั้น",
+          "hint": "1 GB ต่อรายการ"
+        },
+        "video1hr": {
+          "label": "วิดีโอยาว",
+          "hint": "60 GB ต่อรายการ"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "ประมาณการแบบเรียลไทม์",
+      "titleRefreshing": "กำลังอัปเดตประมาณการ",
+      "description": "อัปเดตโดยอัตโนมัติเมื่อท่านเปลี่ยนการตั้งค่า",
+      "ogyEquivalent": "มูลค่าเทียบเท่า OGY",
+      "ogySpotRate": "ราคา OGY ณ ปัจจุบัน",
+      "itemSingular": "รายการ",
+      "itemPlural": "รายการ",
+      "upload": "การอัปโหลด"
+    },
+    "breakdown": {
+      "title": "รายละเอียดค่าใช้จ่าย",
+      "baseFee": "ค่าธรรมเนียมพื้นฐานในการสร้างใบรับรอง",
+      "storageFee": "ค่าธรรมเนียมการจัดเก็บข้อมูล",
+      "items": "รายการ",
+      "uploadSize": "ขนาดการอัปโหลด"
+    },
+    "bytesUnit": "ไบต์"
+  }
+}

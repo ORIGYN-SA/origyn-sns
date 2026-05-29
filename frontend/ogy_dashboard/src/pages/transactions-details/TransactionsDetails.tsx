@@ -8,6 +8,7 @@ import {
 } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useFetchOneTransaction from "@hooks/transactions/useFetchOneTransaction";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 const FAKE_PRINCIPAL =
   "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa";
@@ -36,14 +37,16 @@ const PrincipalPill = ({
   label,
   value,
   isMinting,
+  mintingLabel,
   onNavigate,
 }: {
   label: string;
   value: string | undefined;
   isMinting: boolean;
+  mintingLabel: string;
   onNavigate?: (value: string) => void;
 }) => (
-  <div className="flex items-center gap-3 rounded-full border border-border-strong bg-surface-1 py-1 pl-1 pr-4 min-w-0">
+  <div className="flex items-center gap-3 rounded-full border border-border-strong bg-surface-1 py-1 ps-1 pe-4 min-w-0">
     <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-surface-3 text-white shrink-0">
       <UserAvatarIcon />
     </div>
@@ -52,23 +55,27 @@ const PrincipalPill = ({
     </span>
     {isMinting ? (
       <span className="text-[14px] font-semibold leading-tight text-content truncate">
-        Minting account
+        {mintingLabel}
       </span>
     ) : value && onNavigate ? (
       <>
         <button
           type="button"
           onClick={() => onNavigate(value)}
-          className="text-[14px] font-semibold leading-tight text-content truncate min-w-0 hover:underline text-left cursor-pointer"
+          dir="ltr"
+          className="text-[14px] font-semibold leading-tight text-content truncate min-w-0 hover:underline text-start cursor-pointer"
         >
           {value}
         </button>
-        <span className="ml-auto shrink-0">
+        <span className="ms-auto shrink-0">
           <CopyToClipboard value={value} />
         </span>
       </>
     ) : (
-      <span className="text-[14px] font-semibold leading-tight text-content truncate min-w-0">
+      <span
+        dir="ltr"
+        className="text-[14px] font-semibold leading-tight text-content truncate min-w-0"
+      >
         {value ?? FAKE_PRINCIPAL}
       </span>
     )}
@@ -76,6 +83,8 @@ const PrincipalPill = ({
 );
 
 export const TransactionsDetails = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -85,7 +94,8 @@ export const TransactionsDetails = () => {
 
   const handleOnClickBack = () => navigate(-1);
   const handleNavigateToAccount = (accountId: string) =>
-    navigate(`/transaction-history/transactions/accounts/${accountId}`);
+    navigate(lp(`/transaction-history/transactions/accounts/${accountId}`));
+  const mintingLabel = t("transactions.details.mintingAccount");
 
   const isMintFrom = data.kind === "mint";
   const isBurnTo = data.kind === "burn";
@@ -93,15 +103,18 @@ export const TransactionsDetails = () => {
   return (
     <PageContainer>
       <PageHeader
-        category="Transaction History"
-        title="Transaction Details"
+        category={t("transactions.history.title")}
+        title={t("transactions.details.title")}
         onBack={handleOnClickBack}
         right={
           <div className="inline-flex items-center gap-2 rounded-full border border-border-strong py-2 px-4">
             <span className="text-[14px] font-normal leading-none text-content">
-              Hash:
+              {t("transactions.details.hash")}:
             </span>
-            <span className="text-[14px] font-semibold leading-none text-content truncate">
+            <span
+              dir="ltr"
+              className="text-[14px] font-semibold leading-none text-content truncate"
+            >
               {params.index}
             </span>
             <CopyToClipboard value={params.index as string} />
@@ -112,7 +125,7 @@ export const TransactionsDetails = () => {
       {isError ? (
         <div className="flex flex-col items-center mt-16">
           <div className="text-red-500 text-2xl font-semibold">
-            Fetch one transaction error!
+            {t("transactions.details.fetchError")}
           </div>
           <div className="mt-4 p-4 mb-8 rounded-xl max-w-md overflow-auto bg-surface-2">
             {error?.message}
@@ -125,9 +138,12 @@ export const TransactionsDetails = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3 min-w-0">
                   <span className="text-[16px] font-medium leading-none text-muted">
-                    Index:
+                    {t("common.index")}:
                   </span>
-                  <span className="text-[22px] font-extrabold leading-none text-content truncate">
+                  <span
+                    dir="ltr"
+                    className="text-[22px] font-extrabold leading-none text-content truncate"
+                  >
                     {data.index ?? "—"}
                   </span>
                 </div>
@@ -136,15 +152,17 @@ export const TransactionsDetails = () => {
 
               <div className="flex flex-col gap-4">
                 <PrincipalPill
-                  label="From"
+                  label={t("common.from")}
                   value={data.from_account}
                   isMinting={isMintFrom}
+                  mintingLabel={mintingLabel}
                   onNavigate={handleNavigateToAccount}
                 />
                 <PrincipalPill
-                  label="To"
+                  label={t("common.to")}
                   value={data.to_account}
                   isMinting={isBurnTo}
+                  mintingLabel={mintingLabel}
                   onNavigate={handleNavigateToAccount}
                 />
               </div>
@@ -152,24 +170,28 @@ export const TransactionsDetails = () => {
               <div className="border-t border-border-strong pt-5 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-[16px] font-bold leading-none text-content">
-                    Amount
+                    {t("common.amount")}
                   </span>
-                  <div className="flex items-center gap-2 min-w-0">
+                  {/* Currency cluster (logo + amount + OGY) stays LTR. */}
+                  <div dir="ltr" className="flex items-center gap-2 min-w-0">
                     <img
                       src="/ogy_logo.svg"
                       alt=""
                       className="w-4 h-4 shrink-0"
                     />
-                    <span className="text-[16px] font-bold leading-none text-content text-right truncate">
+                    <span className="text-[16px] font-bold leading-none text-content text-end truncate">
                       {data.formatted.amount || FAKE_AMOUNT} OGY
                     </span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-[12px] font-medium leading-none text-muted">
-                    Fee
+                    {t("transactions.details.fee")}
                   </span>
-                  <span className="text-[12px] font-medium leading-none text-muted text-right truncate">
+                  <span
+                    dir="ltr"
+                    className="text-[12px] font-medium leading-none text-muted text-end truncate"
+                  >
                     {data.formatted.fee || "0"} OGY
                   </span>
                 </div>
@@ -177,10 +199,11 @@ export const TransactionsDetails = () => {
 
               <div className="border-t border-border-strong pt-5 flex items-center justify-between gap-4">
                 <span className="text-[12px] font-medium leading-none text-muted">
-                  Memo
+                  {t("transactions.details.memo")}
                 </span>
                 {data.formatted.memo && data.formatted.memo !== "-" ? (
-                  <div className="flex items-center gap-2 min-w-0">
+                  // Memo is a hash/number + copy icon: keep LTR.
+                  <div dir="ltr" className="flex items-center gap-2 min-w-0">
                     <span className="text-[12px] font-medium leading-none text-muted truncate">
                       {data.formatted.memo}
                     </span>
@@ -188,14 +211,17 @@ export const TransactionsDetails = () => {
                   </div>
                 ) : (
                   <span className="text-[12px] font-medium leading-none text-muted">
-                    None
+                    {t("transactions.details.none")}
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="border-r border-b border-l border-border-strong rounded-b-[16px] p-4 flex items-center justify-center gap-2 bg-surface-muted">
-              <span className="text-[13px] font-medium leading-none text-muted">
+            <div className="border-e border-b border-s border-border-strong rounded-b-[16px] p-4 flex items-center justify-center gap-2 bg-surface-muted">
+              <span
+                dir="ltr"
+                className="text-[13px] font-medium leading-none text-muted"
+              >
                 {data.updated_at
                   ? DateTime.fromISO(data.updated_at).toFormat(
                       "dd/LL/yyyy HH:mm"

@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "言語",
+    "switchTo": "{language}に切り替え",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "問題が発生しました",
+    "retry": "再試行",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "close": "閉じる",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "save": "保存",
+    "submit": "送信",
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "search": "検索",
+    "viewAll": "すべて表示",
+    "showMore": "もっと見る",
+    "showLess": "表示を減らす",
+    "amount": "金額",
+    "date": "日付",
+    "type": "種類",
+    "from": "送信元",
+    "to": "送信先",
+    "index": "インデックス",
+    "status": "ステータス",
+    "total": "合計",
+    "balance": "残高",
+    "yes": "はい",
+    "no": "いいえ",
+    "notAvailable": "該当なし"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "governance": "ガバナンス",
+    "transactionHistory": "取引履歴",
+    "calculator": "計算ツール",
+    "openMainMenu": "メインメニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "openAccountOverview": "アカウント概要を開く",
+    "viewAccountOverview": "アカウント概要を表示",
+    "connectPrompt": "ウォレットを接続して、トークンの管理、提案への投票、取引履歴の閲覧を行いましょう。",
+    "connectWallet": "ウォレットを接続",
+    "disconnect": "切断"
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "description": "申し訳ありません。お探しのページが見つかりませんでした。",
+    "backHome": "ホームに戻る"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY ダッシュボード",
+      "home": "ホーム",
+      "circulation": "流通",
+      "governance": "ガバナンス",
+      "revenue": "収益",
+      "rewards": "報酬",
+      "distribution": "分配",
+      "governanceDashboard": "OGY ガバナンスダッシュボード",
+      "transactionExplorer": "OGY トランザクションエクスプローラー"
+    },
+    "learn": {
+      "heading": "OGY Tokenomics と ORIGYN について詳しく知る",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT スタンダード",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN ウェブサイト",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "サポート",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "お問い合わせ"
+    },
+    "support": {
+      "contactSupport": "サポートに問い合わせる",
+      "recoverTokens": "トークンを回収する"
+    },
+    "disclaimer": "*ORIGYN Foundation は、スワッププロセスに関連して発生する OGY トークンの損失、盗難、または不正使用について一切の責任を負いません。さらに、ORIGYN Foundation は、関係者が ORIGYN Foundation が指定する条件を厳格に遵守しない場合、スワップの実行ができなかったことについても責任を負いません。"
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "ダッシュボードを見る",
+      "subtitle": "web3 の dApps、DAOs、NFT、DeFi などとトラストレスに連携しましょう。"
+    },
+    "cta": {
+      "loginToSwap": "ログインしてトークンをスワップ",
+      "myAccount": "マイアカウント"
+    },
+    "governanceStaking": {
+      "title": "ガバナンスステーキング概要"
+    },
+    "cardError": {
+      "couldNotLoad": "読み込めませんでした",
+      "descriptionLine1": "このメトリクスの取得中に問題が発生しました。",
+      "descriptionLine2": "しばらくしてからもう一度お試しください。"
+    },
+    "emptyState": {
+      "noDataFor": "データがありません:",
+      "description": "現在表示するものがありません。"
+    },
+    "circulationState": {
+      "title": "OGY 流通状況",
+      "tooltip": "循環供給量とは、ORIGYN Foundation が保有するアンロック済みトークンを除くすべてのトークンです。",
+      "nnsProposal": "NNS 提案",
+      "totalLabel": "OGY 総流通量",
+      "notOwnedName": "Foundation が保有していない OGY",
+      "notOwnedValue": "ORIGYN foundation が保有していない流通トークンの量。",
+      "ownedName": "Foundation がロックして保有する OGY",
+      "ownedValue": "ORIGYN foundation が保有するロックされたトークンの量。"
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation 準備金",
+      "tooltip": "すべてのウォレットにわたって ORIGYN foundation が保有する OGY トークンの総量。",
+      "totalLabel": "Foundation 総供給量",
+      "lockedName": "ロック済み",
+      "lockedIntro": "ステークまたはベスティングでロックされた ORIGYN foundation のトークン。",
+      "lockedStakes": "1) ステーク - ガバナンス投票への参加により報酬を生み出すトークン。",
+      "lockedStakesNote": "これらのトークンは自発的にロックされました。",
+      "lockedVestings": "2) ベスティング - 報酬を受け取らず、投票にも参加できないトークン。",
+      "lockedVestingsNote": "これらのトークンは ORIGYN Foundation との契約によりロックされました。",
+      "unlockedName": "アンロック済み",
+      "unlockedValue": "ORIGYN foundation が保有するアンロック済みの資金。"
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN トレジャリーアカウント (OTA)",
+      "networkRevenue": "ネットワーク収益",
+      "tokenLogoAlt": "トークンロゴ",
+      "tooltipOgy": "ORIGYN ネットワークの利用（例：デジタル証明書の発行・移転、NFT のミンティングなど）に対する手数料を通じて生成され、OGY で蓄積されるネットワークユーティリティ収益。",
+      "tooltipIcp": "ORIGYN ネットワークの利用（例：デジタル証明書の発行・移転、NFT のミンティングなど）に対する手数料を通じて生成され、ICP で蓄積されるネットワークユーティリティ収益。"
+    },
+    "rewardAccount": {
+      "title": "ORIGYN リワードアカウント (ORA)",
+      "balance": "ORA 残高",
+      "year": "年",
+      "rewardPool": "報酬プール",
+      "moreDetails": "詳細",
+      "tooltipStake": "トークン保有者は OGY をステークし、ガバナンスに参加することで報酬を得ることができます。",
+      "tooltipSeed": "報酬は ORIGYN リワードアカウントから支払われ、ORIGYN はこれに10億 OGY を投入します。",
+      "tooltipPool": "報酬プールは初年度に2億5000万 OGY で構成され、エコシステムの初期および長期の貢献者を奨励・報奨するために2年ごとに半減します。",
+      "description": "ORIGYN は、ステークおよび投票を行う保有者の利益のために、ORIGYN リワードアカウント (ORA) に10億 OGY を拠出します。報酬プールは初年度に2億5000万 OGY で構成され、エコシステムの初期および長期の貢献者を奨励・報奨するために2年ごとに半減します。"
+    },
+    "tokenDistribution": {
+      "title": "トークン分配"
+    },
+    "transactionHistory": {
+      "title": "取引履歴",
+      "showAll": "すべて表示"
+    },
+    "topTransfers": {
+      "value": "価値",
+      "time": "時刻",
+      "ogyLogoAlt": "OGY ロゴ",
+      "noDataAvailable": "利用可能なデータがありません。"
+    },
+    "totalSupply": {
+      "title": "OGY 総供給量",
+      "tooltipTitle": "利用可能な OGY トークンの総量。",
+      "tooltipLine1": "これには循環供給量と ORIGYN Foundation の管理下にある供給量が含まれます。",
+      "tooltipLine2": "9月18日より、ORIGYN は完全なデフレモデルに移行しました。つまり、新たにミントされるトークンはありません。",
+      "chartLabel": "総供給量"
+    },
+    "totalBurned": {
+      "title": "OGY 総バーン量",
+      "tooltipTitle": "バーンされた OGY トークンの総量。",
+      "tooltipLine1": "これらのトークンは完全にバーンされ、もはや利用できません。",
+      "tooltipLine2": "トークンは、証明書のミンティング手数料、ネットワークユーティリティ手数料、ネットワーク取引手数料など、さまざまな理由でバーンされることがあります。",
+      "chartLabel": "総バーン量"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "日次",
+      "weekly": "週次",
+      "monthly": "月次",
+      "yearly": "年次",
+      "all": "すべて"
+    },
+    "stakingOverview": {
+      "title": "ステーキング概要",
+      "totalTokensInStakes": "ステーク中の総トークン数",
+      "tooltip": "ステークでロックされているトークン。",
+      "stakedTokens": "ステーク済みトークン",
+      "stakedTokensLegend": "ステーク済みトークン"
+    },
+    "usersActivity": {
+      "title": "ユーザー概要",
+      "protocolUsers": "OGY プロトコルユーザー",
+      "protocolUsersTooltip": "OGY トークンのユニーク保有者",
+      "protocolUsersLegend": "OGY プロトコルユーザー",
+      "activeWallets": "OGY アクティブウォレット",
+      "activeWalletsTooltip": "OGY トークンのアクティブな保有者"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "ガバナンス概要",
+      "welcome": "ORIGYN ガバナンスへようこそ！",
+      "description": "OGY トークンの保有者は、OGY をステークし提案に投票することで、ORIGYN ネットワークに直接影響を与えることができます。意思決定プロセスに参加することで、これらのステーク保有者は報酬を獲得します。",
+      "learnMore": "詳しく見る"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "ステーク＆投票",
+        "description": "OGY をステークし提案に投票することで ORIGYN ネットワークに影響を与えましょう。"
+      },
+      "earnRewards": {
+        "title": "報酬を獲得",
+        "description": "意思決定プロセスに参加して報酬を獲得しましょう。"
+      },
+      "governCollectively": {
+        "title": "共同で統治",
+        "description": "協働するエコシステムとしてネットワークに参加し影響を与えましょう。"
+      }
+    },
+    "tokensSection": {
+      "title": "ガバナンス内のトークン",
+      "paragraph1": "OGY トークンの保有者は、OGY をステークし提案に投票することで、ORIGYN ネットワークに直接影響を与えることができます。",
+      "paragraph2": "意思決定プロセスに参加することで、これらのステーク保有者は報酬を獲得し、共同かつ民主的に統治します。",
+      "learnMoreOgy": "OGY について詳しく見る"
+    },
+    "sections": {
+      "proposals": "提案",
+      "neurons": "ニューロン"
+    },
+    "votingParticipation": {
+      "title": "投票参加率",
+      "chartLabel": "参加率 %",
+      "legendLabel": "参加率 %",
+      "period": {
+        "weekly": "週次",
+        "monthly": "月次",
+        "yearly": "年次"
+      },
+      "lastParticipation": {
+        "label": "直近の投票参加率",
+        "tooltip": "直近の投票イベントにおける参加率。"
+      },
+      "averageParticipation": {
+        "label": "平均投票参加率",
+        "tooltip": "期間を通じた投票参加率の平均。"
+      },
+      "averagePower": {
+        "label": "平均投票力",
+        "tooltip": "全参加者にわたる平均投票力。"
+      }
+    },
+    "estimateRewards": {
+      "title": "報酬を見積もる",
+      "lockDuration": "ロック期間",
+      "participants": "参加者",
+      "lockedForAtLeast": "現在少なくとも次の期間ロック中",
+      "lockedFor": "現在次の期間ロック中",
+      "year": "年",
+      "years": "年"
+    },
+    "kpi": {
+      "metric": "指標",
+      "rewardBaseCurrentYear": "今年度の報酬ベース",
+      "dailyVotingRewards": "日次投票報酬",
+      "totalVotingPower": "総投票力",
+      "overallVotingParticipation": "全体の投票参加率"
+    },
+    "total": {
+      "titleTooltip": "ガバナンスキャニスター内のすべてのトークン。これらのトークンは、ベスティング状態、ステーキング状態、ステーク解除済み、または未請求の状態にあります。",
+      "totalLabel": "ガバナンス内の総トークン数",
+      "locked": {
+        "name": "ロック済み",
+        "tooltip": "ガバナンスでロックされているトークン。"
+      },
+      "unlocked": {
+        "name": "アンロック済み",
+        "tooltip": "ガバナンスでアンロックされており、いつでも引き出して取引できるトークン。"
+      },
+      "accumulatedRewards": {
+        "name": "累積報酬",
+        "tooltip": "ユーザーに計上されているがまだ請求されていない報酬。"
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "提案",
+      "viewProposal": "提案を表示",
+      "columns": {
+        "id": "ID",
+        "title": "タイトル",
+        "proposed": "提出日",
+        "timeRemaining": "残り時間",
+        "topic": "トピック",
+        "status": "ステータス",
+        "view": "表示"
+      }
+    },
+    "details": {
+      "category": "ガバナンス",
+      "proposalNumber": "提案 #",
+      "proposal": "提案",
+      "titleLoading": "提案タイトルを読み込み中…",
+      "payloadLoading": "提案の詳細を読み込み中…",
+      "posted": "投稿日",
+      "topic": "トピック",
+      "moreInfo": "詳細情報",
+      "totalVotes": "総投票数",
+      "adopt": "採択",
+      "reject": "却下",
+      "vote": "投票"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "ニューロン",
+      "viewNeuron": "ニューロンを表示",
+      "columns": {
+        "id": "ID",
+        "state": "状態",
+        "stakedOgy": "ステーク済み OGY",
+        "dissolveDelay": "解除遅延",
+        "age": "経過期間",
+        "votingPower": "投票力",
+        "view": "表示"
+      }
+    },
+    "details": {
+      "category": "ニューロン",
+      "title": "OGY ニューロン",
+      "created": "作成日",
+      "stakedOgy": "ステーク済み OGY",
+      "votingPower": "投票力",
+      "dissolveDelay": "解除遅延",
+      "age": "経過期間",
+      "lifecycle": "ニューロンのライフサイクル",
+      "dateCreated": "作成日",
+      "autoStakeMaturity": "自動ステーク成熟度",
+      "rewardsAndBonuses": "報酬とボーナス",
+      "stakedMaturity": "ステーク済み成熟度",
+      "totalMaturity": "総成熟度",
+      "ageBonus": "経過期間ボーナス",
+      "totalBonus": "総ボーナス",
+      "dissolveDelayBonus": "解除遅延ボーナス"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "取引履歴",
+      "searchFor": "検索:",
+      "or": "または",
+      "searchPlaceholder": "アイテムを検索",
+      "noResults": "結果が見つかりませんでした",
+      "resultBlock": "ブロック",
+      "resultPrincipal": "プリンシパル",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "取引の詳細",
+      "hash": "ハッシュ",
+      "fetchError": "取引の取得中にエラーが発生しました！",
+      "mintingAccount": "ミンティングアカウント",
+      "fee": "手数料",
+      "memo": "メモ",
+      "none": "なし"
+    },
+    "accountDetails": {
+      "title": "OGY アカウント",
+      "id": "ID",
+      "owner": "所有者",
+      "subaccount": "サブアカウント",
+      "defaultSubaccount": "なし（デフォルトのサブアカウント）",
+      "historicalMaxBalance": "過去の最大残高",
+      "genesisBalance": "ジェネシス残高",
+      "period": {
+        "monthly": "月次",
+        "quarterly": "四半期",
+        "yearly": "年次",
+        "lifetime": "全期間"
+      },
+      "empty": {
+        "title": "まだ取引がありません",
+        "description": "このアカウントには取引履歴がありません。OGY を送受信すると、アクティビティがここに表示されます。"
+      },
+      "balanceHistory": {
+        "title": "残高履歴",
+        "currentBalance": "現在の残高",
+        "currentBalanceInfo": "現在のアカウント残高。",
+        "legend": "OGY 残高"
+      },
+      "overview": {
+        "title": "取引の概要",
+        "totalLabel": "合計金額",
+        "totalSent": "送信合計",
+        "totalSentInfo": "プリンシパルが送信した合計金額。",
+        "totalReceived": "受信合計",
+        "totalReceivedInfo": "プリンシパルが受信した合計金額。"
+      }
+    },
+    "flow": {
+      "title": "取引フロー",
+      "searchPlaceholder": "取引を検索…",
+      "clearSearch": "検索をクリア",
+      "loadError": "取引データを読み込めませんでした。もう一度お試しください。",
+      "noMatch": "この検索に一致する取引はありません。",
+      "transactions": "件の取引",
+      "out": "送出",
+      "in": "受入",
+      "total": "合計",
+      "legend": {
+        "outTransaction": "送出取引",
+        "inTransaction": "受入取引",
+        "includesInitial": "初回取引を含む",
+        "rootAccount": "ルートアカウント",
+        "account": "アカウント",
+        "fromRoot": "ルートからの取引あり",
+        "toRoot": "ルートへの取引あり",
+        "madeInitial": "初回取引を実行"
+      }
+    },
+    "kind": {
+      "mint": "発行",
+      "transfer": "送金",
+      "burn": "バーン",
+      "approve": "承認"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "おかえりなさい",
+      "value": "価値:",
+      "disconnectWallet": "ウォレットを切断",
+      "accountLabel": "アカウント",
+      "manageDescription": "OGY ウォレット、報酬、ステーキングアクティビティを管理しましょう。",
+      "walletBalance": "ウォレット残高",
+      "myAccount": "マイアカウント",
+      "howToTopUp": "チャージ方法は？"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "利用可能な OGY",
+      "transactionHistory": "取引履歴",
+      "transfer": "送金",
+      "transferOgy": "OGY を送金",
+      "transferDescription": "OGY は利用可能な残高からのみ送金できます。",
+      "max": "最大",
+      "recipientAddress": "受取人アドレス",
+      "amountReceived": "受取金額",
+      "ogyLogoAlt": "OGY ロゴ",
+      "transactionFee": "取引手数料（送信元に請求）",
+      "currentBalance": "現在の残高:",
+      "transferProcessing": "送金を処理中です",
+      "transferProcessingHint": "数秒かかる場合があります",
+      "transferSuccess": "送金が完了しました！",
+      "transferError": "送金エラー！",
+      "errors": {
+        "amountRequired": "金額は必須です。",
+        "amountExceedsBalance": "金額は残高を超えてはなりません。",
+        "amountBelowFee": "金額は取引手数料を下回ってはなりません。",
+        "amountNotPositive": "金額は正の数でなければなりません。",
+        "recipientRequired": "受取人アドレスは必須です。",
+        "recipientInvalid": "受取人アドレスが無効です。"
+      }
+    },
+    "staked": {
+      "title": "ステーク済み OGY",
+      "stake": "ステーク",
+      "stakeOgy": "OGY をステーク",
+      "stakeDescription": "OGY をステークするには NNS プラットフォームにアクセスする必要があります。",
+      "warningNotConnected": "次に接続されていないようです:",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "次が必要です:",
+      "warningToConnect": "NNS プラットフォームに接続するため。",
+      "goToNns": "NNS へ移動"
+    },
+    "rewards": {
+      "title": "ステーク報酬",
+      "claimAll": "すべて請求",
+      "claimDisabledReason": "報酬の請求はプリンシパルのデフォルトアカウントでのみサポートされています。",
+      "aboutToClaim": "次を請求しようとしています",
+      "sentToPrincipal": "報酬はあなたのプリンシパルに送信されます",
+      "pending": "すべての報酬を請求中...",
+      "successTitle": "すべての報酬の請求に成功しました！",
+      "errorTitle": "すべての報酬の請求でエラーが発生しました！"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "レジャーとガバナンスを移行中です",
+        "description": "ORIGYN のガバナンスとレジャーは SNS にアップグレードされました。ORIGYN ガバナンスへの参加を継続し OGY を利用するには、OGY トークンを移行する必要があります。"
+      },
+      "howToSwap": "トークンのスワップ方法",
+      "disclosureToggle": "まだ古い OGY トークンをお持ちですか？今すぐスワップ！",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "ステップ1: 旧ガバナンスから引き出す",
+          "subtitle": "以前 OGY ガバナンスに参加していた場合、スワップする前にそれらのトークンを引き出す必要があります。"
+        },
+        "deposit": {
+          "title": "ステップ2: アカウントに入金する",
+          "subtitle": "OGY ダッシュボード外にトークンがある場合は、スワップを開始する前にあなたの account-id に入金してください。"
+        },
+        "swap": {
+          "title": "ステップ3: トークンをスワップ",
+          "subtitle": "レガシー OGY トークンを新しいレジャーにスワップします。"
+        }
+      },
+      "deposit": {
+        "legacyBalance": "レガシー OGY 残高"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "レガシー OGY ダッシュボードへ移動"
+      },
+      "swap": {
+        "disabledOisy": "レガシー OGY のスワップは OISY では利用できません。レガシー OGY をスワップするには Internet Identity または Plug で接続してください。",
+        "disabledSubAccount": "レガシー OGY のスワップはプリンシパルのデフォルトアカウントからのみサポートされています。",
+        "swapYourTokens": "トークンをスワップ",
+        "automaticDisabled": "自動スワップは無効になっています。スワップリクエストの承認を得る必要があり、最小金額は 50 000 OGY です。",
+        "form": {
+          "title": "OGY を新しいレジャーにスワップ",
+          "description": "スワップしたい OGY トークンをあなたの account id に入金してください",
+          "tokensAvailable": "スワップ可能なトークン",
+          "youWillReceivePrefix": "受け取るのは",
+          "youWillReceiveSuffix": "新しいレジャー上の OGY トークンです。",
+          "swapPrefix": "スワップ",
+          "swapSuffix": "OGY トークン"
+        },
+        "pending": {
+          "takesTime": "スワッププロセスには少し時間がかかる場合があります。",
+          "doNotRefresh": "ページを更新しないでください！",
+          "swapping": "トークンをスワップ中..."
+        },
+        "success": {
+          "title": "スワップが完了しました！",
+          "walletBalance": "新しいレジャー上のウォレット残高",
+          "myAccount": "マイアカウント"
+        },
+        "error": {
+          "title": "トークンのスワップエラー！",
+          "retry": "再試行"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "マイ OGY ニューロン",
+        "idHeader": "ID",
+        "stakedAmount": "ステーク額",
+        "claimAmount": "請求額",
+        "emptyTitle": "まだニューロンがありません",
+        "emptyDescription": "OGY ニューロンを追加して、ここでステーク、投票力、報酬の追跡を始めましょう。",
+        "addFirstNeuron": "最初のニューロンを追加"
+      },
+      "add": {
+        "button": "ニューロンを追加",
+        "title": "ニューロンを追加",
+        "description": "このプリンシパルを、ここで管理したい各 OGY ニューロンのホットキーとして追加します。",
+        "needHotkey": "ホットキーを追加する必要がありますか？",
+        "openNns": "NNS アプリを開く"
+      },
+      "claim": {
+        "button": "請求",
+        "disabledReason": "報酬の請求はプリンシパルのデフォルトアカウントでのみサポートされています。",
+        "aboutToClaim": "次を請求しようとしています",
+        "sentToPrincipal": "報酬はあなたのプリンシパルに送信されます",
+        "pending": "報酬を請求中...",
+        "successTitle": "報酬の請求に成功しました！",
+        "errorTitle": "報酬の請求でエラーが発生しました！",
+        "retry": "再試行"
+      },
+      "remove": {
+        "title": "ニューロンを削除",
+        "description": "このニューロンを削除するには、ニューロンのホットキーリストからあなたのプリンシパルを削除する必要があります。"
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "アドレス",
+      "governanceBalance": "ガバナンス残高",
+      "stakedTokens": "ステーク済みトークン",
+      "ledgerBalance": "レジャー残高",
+      "weightInTotalSupply": "総供給量に占める割合"
+    }
+  },
+  "recovery": {
+    "title": "トークンを回収する",
+    "description": "OGY ダッシュボードは OGY トークンのみをサポートしています。誤って他のトークンをここに送信した場合は、以下の手順に従って回収できます。",
+    "chooseToken": "トークンを選択",
+    "loginRequired": "トークンを回収するにはログインする必要があります。",
+    "transfer": {
+      "icpLogoAlt": "ICP ロゴ",
+      "ledgerCanister": "レジャーキャニスター:",
+      "transferIcp": "ICP を送金",
+      "availableBalanceNote": "ICP は利用可能な残高からのみ送金できます。",
+      "amountRequired": "金額は必須です。",
+      "amountExceedsBalance": "金額は残高を超えてはなりません。",
+      "amountPositive": "金額は正の数でなければなりません。",
+      "amountBelowFee": "金額は取引手数料以上でなければなりません。",
+      "recipientAddress": "受取人アドレス",
+      "recipientAddressRequired": "受取人アドレスは必須です。",
+      "invalidRecipientAddress": "受取人アドレスが無効です。",
+      "amountReceived": "受取金額",
+      "transactionFee": "取引手数料",
+      "currentBalance": "現在の残高:",
+      "processing": "送金を処理中です",
+      "processingNote": "数秒かかる場合があります",
+      "success": "送金が完了しました！",
+      "error": "送金エラー！"
+    }
+  },
+  "support": {
+    "category": "サポート",
+    "title": "チケットを作成",
+    "titleSubmitted": "チケットを送信しました",
+    "successTitle": "サポートチケットを作成しました",
+    "successMessage": "ご提供いただいたメールアドレスにご連絡いたします。",
+    "submitAnother": "別のチケットを送信",
+    "intro": "問題の内容と連絡方法をご記入ください。",
+    "form": {
+      "name": "名前",
+      "email": "連絡先メールアドレス",
+      "emailRequired": "メールアドレスは必須です",
+      "emailInvalid": "メールアドレスが無効です",
+      "principal": "ウォレットのプリンシパル",
+      "invalidPrincipal": "受取人アドレスが無効です。",
+      "description": "説明",
+      "descriptionPlaceholder": "何が起きているか教えてください…",
+      "descriptionRequired": "問題の内容をご記入ください"
+    },
+    "submitError": "問題が発生しました。もう一度お試しください。",
+    "submitting": "送信中…"
+  },
+  "explorer": {
+    "title": "エクスプローラー",
+    "searchPlaceholder": "タイトル、発行者、プリンシパル、トークン ID で検索",
+    "openFilters": "フィルターを開く",
+    "checkOnBlockchain": "ブロックチェーンで確認",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "注目の証明書",
+      "art": "アート証明書",
+      "gold": "ゴールド証明書"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "クリップボードにコピー",
+    "toggleRelativeTime": "相対時間を切り替え。現在の表示:",
+    "collapseRow": "行を折りたたむ",
+    "expandRow": "行を展開",
+    "searchPlaceholder": "アイテムを検索...",
+    "sortAscending": "昇順に並べ替え",
+    "sortDescending": "降順に並べ替え",
+    "linesPerPage": "1ページあたりの行数",
+    "page": "ページ",
+    "pageOf": "/",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ"
+  },
+  "auth": {
+    "connect": "接続",
+    "disconnect": "切断",
+    "connectWallet": {
+      "title": "ウォレットを接続",
+      "subtitle": "サインイン方法を選択してください"
+    },
+    "install": "インストール",
+    "newToIc": "Internet Computer は初めてですか？",
+    "learnMore": "詳しく見る",
+    "connecting": {
+      "title": "接続中...",
+      "subtitle": "ウォレットでリクエストを承認してください"
+    },
+    "sessionExpired": {
+      "title": "セッションの有効期限が切れました",
+      "description": "ウォレットセッションが無効になりました。続行するには再接続してください。"
+    },
+    "reconnect": "再接続",
+    "error": {
+      "connectionCancelled": "接続がキャンセルされました。もう一度お試しください。",
+      "connectionFailed": "ウォレットの接続に失敗しました。もう一度お試しください。"
+    }
+  },
+  "warning": {
+    "badge": "新着",
+    "ledgerSwitch": "レジャーを移行中です。OGY を新しいものにスワップする必要があります"
+  },
+  "calculator": {
+    "header": {
+      "title": "コスト計算ツール",
+      "description": "ORIGYN の計算ツールを使用して、すべてのデータをオンチェーンに保存した独自の証明書の発行コストを見積もります。"
+    },
+    "plan": {
+      "title": "発行内容を計画する",
+      "description": "アイテム数とアップロードするデータの種類をご入力ください。",
+      "itemsLabel": "アイテム数は？",
+      "uploadingLabel": "アップロードするデータの種類は？",
+      "knowExactSize": "正確なサイズをご存知ですか？",
+      "totalUploadSize": "アップロード合計サイズ",
+      "usePreset": "プリセットを使用する",
+      "combinedSize": "すべてのアイテムにわたる全ファイルの合計サイズ。",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB／件"
+        },
+        "iphone": {
+          "label": "写真",
+          "hint": "3 MB／件"
+        },
+        "dslr": {
+          "label": "スタジオ写真",
+          "hint": "20 MB／件"
+        },
+        "video": {
+          "label": "ショート動画",
+          "hint": "1 GB／件"
+        },
+        "video1hr": {
+          "label": "ロング動画",
+          "hint": "60 GB／件"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "リアルタイム見積もり",
+      "titleRefreshing": "見積もりを更新中",
+      "description": "設定を変更すると自動的に更新されます。",
+      "ogyEquivalent": "OGY 換算額",
+      "ogySpotRate": "OGY スポットレート",
+      "itemSingular": "アイテム",
+      "itemPlural": "アイテム",
+      "upload": "アップロード"
+    },
+    "breakdown": {
+      "title": "コスト内訳",
+      "baseFee": "基本発行手数料",
+      "storageFee": "ストレージ手数料",
+      "items": "アイテム数",
+      "uploadSize": "アップロードサイズ"
+    },
+    "bytesUnit": "バイト"
+  }
+}

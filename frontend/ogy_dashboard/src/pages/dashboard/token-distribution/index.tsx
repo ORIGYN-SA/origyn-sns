@@ -3,6 +3,7 @@ import { CardErrorOverlay } from "@components/dashboard";
 import TokenDistributionList from "@pages/token-distribution/token-distribution-list";
 import { usePagination } from "@helpers/table/useTable";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
+import { useT } from "@i18n/LocaleContext";
 
 const TokenDistribution = ({
   className,
@@ -10,6 +11,7 @@ const TokenDistribution = ({
 }: {
   className?: string;
 }) => {
+  const t = useT();
   const [pagination, setPagination] = usePagination({
     pageIndex: 0,
     pageSize: 10,
@@ -26,10 +28,12 @@ const TokenDistribution = ({
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={`${className}`} {...restProps}>
-        {hasError && <CardErrorOverlay title="Token Distribution" />}
+        {hasError && (
+          <CardErrorOverlay title={t("dashboard.tokenDistribution.title")} />
+        )}
         <div data-skel-static className="mb-8">
           <div className="text-content text-[22px] font-semibold leading-none">
-            Token Distribution
+            {t("dashboard.tokenDistribution.title")}
           </div>
         </div>
         <TokenDistributionList

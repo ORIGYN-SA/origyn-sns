@@ -1,7 +1,9 @@
 import { Button } from "@components/ui";
 import { useClaimAllRewards } from "../context";
+import { useT } from "@i18n/LocaleContext";
 
 const BtnClaimAllRewards = () => {
+  const t = useT();
   const { handleShow, claimAmount, claimDisabledReason } = useClaimAllRewards();
   return (
     <Button
@@ -10,7 +12,7 @@ const BtnClaimAllRewards = () => {
       disabled={claimAmount === 0 || !!claimDisabledReason}
       title={claimDisabledReason}
     >
-      Claim all
+      {t("account.rewards.claimAll")}
     </Button>
   );
 };

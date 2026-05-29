@@ -23,6 +23,8 @@ import {
 } from "@services/actor";
 import { connectPlug, disconnectPlug } from "./plug";
 import { usePlugSilentReconnect, useSyncAuthedAgent } from "./walletHooks";
+import { getT, type Translate } from "@i18n";
+import { negotiateLocale } from "@i18n/negotiate";
 
 export const WalletState = {
   Idle: "Idle",
@@ -109,12 +111,12 @@ const writeLastWallet = (id: WalletId | null) => {
   }
 };
 
-const describeWalletError = (err: unknown): string => {
+const describeWalletError = (err: unknown, t: Translate): string => {
   const message = err instanceof Error ? err.message : String(err);
   if (/reject|cancel|denied|abort|user.?interrupt|closed/i.test(message)) {
-    return "Connection cancelled. Please try again.";
+    return t("auth.error.connectionCancelled");
   }
-  return message || "Wallet connection failed. Please try again.";
+  return message || t("auth.error.connectionFailed");
 };
 
 const principalToAccountId = (
@@ -139,6 +141,10 @@ const subAccountToHex = (subAccount?: SubAccount) => {
 type PlugSession = { principal: Principal; agent: Agent } | null;
 
 export const WalletProvider = ({ children }: { children: ReactNode }) => {
+  // WalletProvider mounts above the router (and thus above LocaleProvider), so
+  // it can't use the useT() context hook. Resolve a translator from the stored/
+  // negotiated locale instead — only used for wallet error toasts.
+  const t = getT(negotiateLocale());
   const { user, isConnecting, connect, disconnect } = useAuth();
   const identitykitAgent = useAgent({ host: IC_HOST });
   const isInitializing = useIsInitializing();
@@ -240,12 +246,12 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         setListOpen(false);
       } catch (err) {
         console.error("Wallet connect failed:", err);
-        setConnectError(describeWalletError(err));
+        setConnectError(describeWalletError(err, t));
       } finally {
         setPending(null);
       }
     },
-    [connect, disconnect, plugSession, user]
+    [connect, disconnect, plugSession, user, t]
   );
 
   const handleDisconnectWallet = useCallback(async () => {

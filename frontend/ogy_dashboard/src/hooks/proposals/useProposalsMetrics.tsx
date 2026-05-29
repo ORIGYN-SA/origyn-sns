@@ -1,7 +1,8 @@
-import { useMemo, ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import fetchProposalsMetrics from "@services/queries/governance/proposals/fetchProposalsMetrics";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
+import { useT } from "@i18n/LocaleContext";
 
 type MetricItem = {
   name: string;
@@ -10,6 +11,7 @@ type MetricItem = {
 };
 
 const useProposalsMetrics = () => {
+  const t = useT();
   const proposalsMetrics = useQuery({
     queryKey: ["proposalsMetrics"],
     queryFn: () => fetchProposalsMetrics(),
@@ -30,7 +32,7 @@ const useProposalsMetrics = () => {
 
     return [
       {
-        name: "Proposals",
+        name: t("governance.sections.proposals"),
         value: Number(total_proposals).toString(),
         tooltip: (
           <>
@@ -46,7 +48,7 @@ const useProposalsMetrics = () => {
         ),
       },
       {
-        name: "Reward Base for the current year",
+        name: t("governance.kpi.rewardBaseCurrentYear"),
         value: roundAndFormatLocale({
           number: divideBy1e8(reward_base_current_year),
         }),
@@ -72,7 +74,7 @@ const useProposalsMetrics = () => {
         ),
       },
       {
-        name: "Daily Voting Rewards",
+        name: t("governance.kpi.dailyVotingRewards"),
         value: roundAndFormatLocale({
           number: divideBy1e8(daily_voting_rewards),
         }),
@@ -86,7 +88,7 @@ const useProposalsMetrics = () => {
         ),
       },
       {
-        name: "Average Voting Power",
+        name: t("governance.votingParticipation.averagePower.label"),
         value: roundAndFormatLocale({
           number: divideBy1e8(average_voting_power),
         }),
@@ -102,7 +104,7 @@ const useProposalsMetrics = () => {
         ),
       },
       {
-        name: "Total Voting Power",
+        name: t("governance.kpi.totalVotingPower"),
         value: roundAndFormatLocale({
           number: divideBy1e8(total_voting_power),
         }),
@@ -115,7 +117,7 @@ const useProposalsMetrics = () => {
         ),
       },
       {
-        name: "Overall Voting Participation",
+        name: t("governance.kpi.overallVotingParticipation"),
         value: `${roundAndFormatLocale({
           number: Number(average_voting_participation) / 100,
         })} %`,
@@ -129,7 +131,7 @@ const useProposalsMetrics = () => {
         ),
       },
     ];
-  }, [proposalsMetrics.isSuccess, proposalsMetrics.data]);
+  }, [proposalsMetrics.isSuccess, proposalsMetrics.data, t]);
 
   return {
     data,

@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { AreaStatCard } from "@components/dashboard";
 import useTotalOGYSupply from "@hooks/metrics/useTotalOGYSupply";
-
-const SELECT_PERIOD_OPTIONS = [
-  { value: "daily", label: "Daily" },
-  { value: "weekly", label: "Weekly" },
-  { value: "monthly", label: "Monthly" },
-  { value: "yearly", label: "Yearly" },
-];
+import { useT } from "@i18n/LocaleContext";
 
 const TotalOGYSupply = ({ className }: { className?: string }) => {
+  const t = useT();
+  const selectPeriodOptions = [
+    { value: "daily", label: t("charts.period.daily") },
+    { value: "weekly", label: t("charts.period.weekly") },
+    { value: "monthly", label: t("charts.period.monthly") },
+    { value: "yearly", label: t("charts.period.yearly") },
+  ];
   const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const { data, isLoading, error } = useTotalOGYSupply({
     period: selectedPeriod,
@@ -18,28 +19,22 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
   return (
     <AreaStatCard
       className={className}
-      title="Total OGY Supply"
+      title={t("dashboard.totalSupply.title")}
       tooltipId="tooltip-total-ogy-supply"
-      tooltipTitle="Total amount of OGY tokens available."
+      tooltipTitle={t("dashboard.totalSupply.tooltipTitle")}
       tooltipContent={
         <>
-          <p>
-            This includes the circulating supply and the supply under control of
-            the ORIGYN Foundation.
-          </p>
-          <p>
-            As of 18th September, ORIGYN switched to fully deflationary model
-            which means no more new minted tokens.
-          </p>
+          <p>{t("dashboard.totalSupply.tooltipLine1")}</p>
+          <p>{t("dashboard.totalSupply.tooltipLine2")}</p>
         </>
       }
       value={data.totalSupply}
-      periodOptions={SELECT_PERIOD_OPTIONS}
+      periodOptions={selectPeriodOptions}
       period={selectedPeriod}
       onPeriodChange={setSelectedPeriod}
       chartData={data.dataPieChart}
       chartColor="#38bdf8"
-      chartLabel="Total Supply"
+      chartLabel={t("dashboard.totalSupply.chartLabel")}
       loading={isLoading}
       error={error}
     />

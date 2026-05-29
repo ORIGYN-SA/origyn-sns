@@ -1,12 +1,7 @@
 import { useState } from "react";
 import ChartStatsCard from "./ChartStatsCard";
 import useTotalTokensStake from "@hooks/metrics/useTotalTokensStakes";
-
-const SELECT_PERIOD_OPTIONS = [
-  { value: "7", label: "Weekly" },
-  { value: "30", label: "Monthly" },
-  { value: "365", label: "Yearly" },
-];
+import { useT } from "@i18n/LocaleContext";
 
 type StakingOverviewChartProps = {
   title?: string;
@@ -15,10 +10,16 @@ type StakingOverviewChartProps = {
 };
 
 const StakingOverviewChart = ({
-  title = "Staking Overview",
+  title,
   chartColor = "#34d399",
   className,
 }: StakingOverviewChartProps) => {
+  const t = useT();
+  const selectPeriodOptions = [
+    { value: "7", label: t("charts.period.weekly") },
+    { value: "30", label: t("charts.period.monthly") },
+    { value: "365", label: t("charts.period.yearly") },
+  ];
   const [selectedDays, setSelectedDays] = useState("30");
   const { data, isLoading, isError } = useTotalTokensStake({
     start: Number(selectedDays),
@@ -27,15 +28,15 @@ const StakingOverviewChart = ({
   return (
     <ChartStatsCard
       className={className}
-      title={title}
-      periodOptions={SELECT_PERIOD_OPTIONS}
+      title={title ?? t("charts.stakingOverview.title")}
+      periodOptions={selectPeriodOptions}
       period={selectedDays}
       onPeriodChange={setSelectedDays}
       stats={[
         {
           id: "total-tokens-in-stakes",
-          label: "Total Tokens in Stakes",
-          tooltipContent: <p>Tokens that are locked in stakes.</p>,
+          label: t("charts.stakingOverview.totalTokensInStakes"),
+          tooltipContent: <p>{t("charts.stakingOverview.tooltip")}</p>,
           value: data?.total,
           unit: "OGY",
         },
@@ -43,9 +44,9 @@ const StakingOverviewChart = ({
       chart={{
         data: data?.dataChart,
         color: chartColor,
-        label: "Staked Tokens",
+        label: t("charts.stakingOverview.stakedTokens"),
       }}
-      legendLabel="STAKED TOKENS"
+      legendLabel={t("charts.stakingOverview.stakedTokensLegend")}
       loading={isLoading}
       isError={isError}
     />

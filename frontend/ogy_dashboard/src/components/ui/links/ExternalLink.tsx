@@ -18,7 +18,7 @@ const ExternalLink = ({
       className={`flex items-center hover:font-semibold text-accent ${className}`}
     >
       <div>{children}</div>
-      <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
+      <ArrowTopRightOnSquareIcon className="ms-2 h-5 w-5" />
     </a>
   );
 };

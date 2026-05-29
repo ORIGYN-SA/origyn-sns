@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useT } from "@i18n/LocaleContext";
 
 const DialogComponent = ({
   show = true,
@@ -23,6 +24,7 @@ const DialogComponent = ({
   panelClassName?: string;
   floatingClose?: boolean;
 }) => {
+  const t = useT();
   return (
     <Transition show={show} as={Fragment}>
       <div className="fixed z-50 inset-0 overflow-hidden">
@@ -61,8 +63,8 @@ const DialogComponent = ({
                       <button
                         type="button"
                         onClick={handleClose}
-                        aria-label="Close"
-                        className="absolute right-3 top-3 z-10 text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
+                        aria-label={t("common.close")}
+                        className="absolute end-3 top-3 z-10 text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
                       >
                         <XMarkIcon className="h-5 w-5" />
                       </button>
@@ -73,7 +75,7 @@ const DialogComponent = ({
                         <button
                           type="button"
                           onClick={handleClose}
-                          aria-label="Close"
+                          aria-label={t("common.close")}
                           className="text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
                         >
                           <XMarkIcon className="h-5 w-5" />

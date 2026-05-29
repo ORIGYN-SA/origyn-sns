@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Lugha",
+    "switchTo": "Badilisha kwenda {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Inapakia...",
+    "error": "Hitilafu fulani imetokea",
+    "retry": "Jaribu tena",
+    "cancel": "Ghairi",
+    "confirm": "Thibitisha",
+    "close": "Funga",
+    "back": "Nyuma",
+    "next": "Ifuatayo",
+    "previous": "Iliyotangulia",
+    "save": "Hifadhi",
+    "submit": "Wasilisha",
+    "copy": "Nakili",
+    "copied": "Imenakiliwa",
+    "search": "Tafuta",
+    "viewAll": "Tazama zote",
+    "showMore": "Onyesha zaidi",
+    "showLess": "Onyesha kidogo",
+    "amount": "Kiasi",
+    "date": "Tarehe",
+    "type": "Aina",
+    "from": "Kutoka",
+    "to": "Kwenda",
+    "index": "Faharasa",
+    "status": "Hali",
+    "total": "Jumla",
+    "balance": "Salio",
+    "yes": "Ndio",
+    "no": "Hapana",
+    "notAvailable": "Haipatikani"
+  },
+  "nav": {
+    "dashboard": "Dashibodi",
+    "governance": "Utawala",
+    "transactionHistory": "Historia ya Miamala",
+    "calculator": "Kikokotoo",
+    "openMainMenu": "Fungua menyu kuu",
+    "closeMenu": "Funga menyu",
+    "openAccountOverview": "Fungua muhtasari wa akaunti",
+    "viewAccountOverview": "Tazama muhtasari wa akaunti",
+    "connectPrompt": "Unganisha pochi yako ili kudhibiti tokeni, kupiga kura kwenye mapendekezo na kutazama historia yako ya miamala.",
+    "connectWallet": "Unganisha pochi",
+    "disconnect": "Tenganisha"
+  },
+  "notFound": {
+    "title": "Ukurasa haukupatikana",
+    "description": "Samahani, hatukuweza kupata ukurasa unaoutafuta.",
+    "backHome": "Rudi nyumbani"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Dashibodi ya OGY",
+      "home": "Nyumbani",
+      "circulation": "Mzunguko",
+      "governance": "Utawala",
+      "revenue": "Mapato",
+      "rewards": "Zawadi",
+      "distribution": "Usambazaji",
+      "governanceDashboard": "Dashibodi ya Utawala wa OGY",
+      "transactionExplorer": "Kichunguzi cha Miamala ya OGY"
+    },
+    "learn": {
+      "heading": "Jifunze zaidi kuhusu OGY Tokenomics & ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Kiwango cha NFT cha ORIGYN",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "Tovuti ya ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Msaada",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Wasiliana"
+    },
+    "support": {
+      "contactSupport": "Wasiliana na msaada",
+      "recoverTokens": "Rejesha tokeni zako"
+    },
+    "disclaimer": "*ORIGYN Foundation haitawajibika kwa hasara, wizi, au matumizi mabaya ya Tokeni za OGY yanayotokea kuhusiana na mchakato wa kubadilishana. Aidha, ORIGYN Foundation haitawajibika kwa kutofanikiwa kutekeleza ubadilishanaji ikiwa upande unaohusika hautazingatia kwa makini masharti yaliyoainishwa na ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "UCHANGANUZI WA OGY",
+      "title": "Chunguza dashibodi",
+      "subtitle": "Shirikiana bila kuamini na web3 dApps, DAOs, NFTs, DeFi na mengi zaidi."
+    },
+    "cta": {
+      "loginToSwap": "Ingia ili kubadilisha tokeni",
+      "myAccount": "Akaunti yangu"
+    },
+    "governanceStaking": {
+      "title": "Muhtasari wa Uwekaji Dau wa Utawala"
+    },
+    "cardError": {
+      "couldNotLoad": "Haikuweza kupakia",
+      "descriptionLine1": "Tumekumbana na tatizo wakati wa kupakua kipimo hiki.",
+      "descriptionLine2": "Tafadhali jaribu tena baada ya muda mfupi."
+    },
+    "emptyState": {
+      "noDataFor": "Hakuna data kwa",
+      "description": "Hakuna kitu cha kuonyesha kwa sasa."
+    },
+    "circulationState": {
+      "title": "Hali ya Mzunguko wa OGY",
+      "tooltip": "Usambazaji unaozunguka ni tokeni zote isipokuwa tokeni zilizofunguliwa zinazomilikiwa na ORIGYN Foundation.",
+      "nnsProposal": "Pendekezo la NNS",
+      "totalLabel": "Jumla ya Mzunguko wa OGY",
+      "notOwnedName": "OGY isiyo mikononi mwa Foundation",
+      "notOwnedValue": "Kiasi cha tokeni zinazozunguka zisizomilikiwa na ORIGYN foundation.",
+      "ownedName": "OGY iliyofungwa mikononi mwa Foundation",
+      "ownedValue": "Kiasi cha tokeni zilizofungwa zinazomilikiwa na ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Akiba ya OGY Foundation",
+      "tooltip": "Jumla ya kiasi cha tokeni za OGY zinazomilikiwa na ORIGYN foundation katika pochi zote.",
+      "totalLabel": "Jumla ya Usambazaji wa Foundation",
+      "lockedName": "Imefungwa",
+      "lockedIntro": "Tokeni za ORIGYN foundation zilizofungwa katika dau au vesting.",
+      "lockedStakes": "1) Dau - tokeni zinazozalisha zawadi kutokana na ushiriki katika upigaji kura wa utawala.",
+      "lockedStakesNote": "Tokeni hizo zilifungwa kwa hiari.",
+      "lockedVestings": "2) Vesting - Tokeni ambazo hazipokei zawadi yoyote na haziwezi kushiriki katika upigaji kura.",
+      "lockedVestingsNote": "Tokeni hizo zilifungwa kwa mkataba wako na ORIGYN Foundation.",
+      "unlockedName": "Imefunguliwa",
+      "unlockedValue": "Fedha zilizofunguliwa zinazomilikiwa na ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "Akaunti ya Hazina ya ORIGYN (OTA)",
+      "networkRevenue": "Mapato ya Mtandao",
+      "tokenLogoAlt": "Nembo ya tokeni",
+      "tooltipOgy": "Mapato ya Manufaa ya Mtandao yanayozalishwa kupitia ada za kutumia mtandao wa ORIGYN (k.m., kwa kutoa au kuhamisha vyeti vya kidijitali, kuunda NFTs, n.k.) na kukusanywa katika OGY.",
+      "tooltipIcp": "Mapato ya Manufaa ya Mtandao yanayozalishwa kupitia ada za kutumia mtandao wa ORIGYN (k.m., kwa kutoa au kuhamisha vyeti vya kidijitali, kuunda NFTs, n.k.) na kukusanywa katika ICP."
+    },
+    "rewardAccount": {
+      "title": "Akaunti ya Zawadi ya ORIGYN (ORA)",
+      "balance": "Salio la ORA",
+      "year": "Mwaka",
+      "rewardPool": "Bwawa la Zawadi",
+      "moreDetails": "Maelezo zaidi",
+      "tooltipStake": "Wamiliki wa tokeni wanaweza kuweka dau OGY zao na kupata zawadi kwa kushiriki katika utawala.",
+      "tooltipSeed": "Zawadi zitatoka kwenye Akaunti ya Zawadi ya ORIGYN, ambayo ORIGYN itaijaza na bilioni moja ya OGY.",
+      "tooltipPool": "Bwawa la zawadi linajumuisha milioni 250 za OGY katika mwaka wake wa kwanza na litapungua nusu kila baada ya miaka miwili ili kuhamasisha na kuwazawadi wachangiaji wa awali na wa muda mrefu wa mfumo ikolojia.",
+      "description": "ORIGYN itachangia bilioni moja ya OGY kwenye Akaunti ya Zawadi ya ORIGYN (ORA) kwa manufaa ya wamiliki waliowekea dau na wanaopiga kura. Bwawa la zawadi linajumuisha milioni 250 za OGY katika mwaka wake wa kwanza na litapungua nusu kila baada ya miaka miwili ili kuhamasisha na kuwazawadi wachangiaji wa awali na wa muda mrefu wa mfumo ikolojia."
+    },
+    "tokenDistribution": {
+      "title": "Usambazaji wa Tokeni"
+    },
+    "transactionHistory": {
+      "title": "Historia ya Miamala",
+      "showAll": "Onyesha zote"
+    },
+    "topTransfers": {
+      "value": "Thamani",
+      "time": "Wakati",
+      "ogyLogoAlt": "Nembo ya OGY",
+      "noDataAvailable": "Hakuna data inayopatikana."
+    },
+    "totalSupply": {
+      "title": "Jumla ya Usambazaji wa OGY",
+      "tooltipTitle": "Jumla ya kiasi cha tokeni za OGY zinazopatikana.",
+      "tooltipLine1": "Hii inajumuisha usambazaji unaozunguka na usambazaji ulio chini ya udhibiti wa ORIGYN Foundation.",
+      "tooltipLine2": "Kuanzia tarehe 18 Septemba, ORIGYN ilibadilika kuwa muundo wa kupunguza kabisa ambao unamaanisha hakuna tokeni mpya zinazoundwa.",
+      "chartLabel": "Jumla ya Usambazaji"
+    },
+    "totalBurned": {
+      "title": "Jumla ya OGY Iliyochomwa",
+      "tooltipTitle": "Jumla ya kiasi cha tokeni za OGY zilizochomwa.",
+      "tooltipLine1": "Tokeni hizi zimechomwa kabisa na hazipatikani tena.",
+      "tooltipLine2": "Tokeni zinaweza kuchomwa kwa sababu tofauti kwa mfano ada za kuunda vyeti, ada za manufaa ya mtandao au ada za miamala ya mtandao.",
+      "chartLabel": "Jumla Iliyochomwa"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Kila siku",
+      "weekly": "Kila wiki",
+      "monthly": "Kila mwezi",
+      "yearly": "Kila mwaka",
+      "all": "Zote"
+    },
+    "stakingOverview": {
+      "title": "Muhtasari wa Uwekaji Dau",
+      "totalTokensInStakes": "Jumla ya Tokeni katika Dau",
+      "tooltip": "Tokeni zilizofungwa katika dau.",
+      "stakedTokens": "Tokeni Zilizowekewa Dau",
+      "stakedTokensLegend": "TOKENI ZILIZOWEKEWA DAU"
+    },
+    "usersActivity": {
+      "title": "Muhtasari wa Watumiaji",
+      "protocolUsers": "Watumiaji wa Itifaki ya OGY",
+      "protocolUsersTooltip": "Wamiliki wa kipekee wa tokeni za OGY",
+      "protocolUsersLegend": "WATUMIAJI WA ITIFAKI YA OGY",
+      "activeWallets": "Pochi Tendaji za OGY",
+      "activeWalletsTooltip": "Wamiliki tendaji wa tokeni za OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Muhtasari wa Utawala",
+      "welcome": "Karibu kwenye Utawala wa ORIGYN!",
+      "description": "Wamiliki wa tokeni za OGY wanaweza kuathiri moja kwa moja Mtandao wa ORIGYN kwa kuweka dau OGY zao na kupiga kura kwenye mapendekezo. Kwa kushiriki katika mchakato wa kufanya maamuzi, wamiliki hawa wa tokeni waliowekea dau hupata zawadi.",
+      "learnMore": "Jifunze zaidi"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Weka Dau & Piga Kura",
+        "description": "Athiri Mtandao wa ORIGYN kwa kuweka dau OGY & kupiga kura kwenye mapendekezo."
+      },
+      "earnRewards": {
+        "title": "Pata Zawadi",
+        "description": "Shiriki katika mchakato wa kufanya maamuzi ili kupata zawadi."
+      },
+      "governCollectively": {
+        "title": "Tawala kwa Pamoja",
+        "description": "Shiriki & athiri mtandao kama mfumo ikolojia wa ushirikiano."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokeni katika Utawala",
+      "paragraph1": "Wamiliki wa tokeni za OGY wanaweza kuathiri moja kwa moja Mtandao wa ORIGYN kwa kuweka dau OGY zao na kupiga kura kwenye mapendekezo.",
+      "paragraph2": "Kwa kushiriki katika mchakato wa kufanya maamuzi, wamiliki hawa wa tokeni waliowekea dau hupata zawadi na kutawala kwa pamoja na kidemokrasia.",
+      "learnMoreOgy": "Jifunze zaidi kuhusu OGY"
+    },
+    "sections": {
+      "proposals": "Mapendekezo",
+      "neurons": "Neuroni"
+    },
+    "votingParticipation": {
+      "title": "Ushiriki wa Upigaji Kura",
+      "chartLabel": "Ushiriki %",
+      "legendLabel": "USHIRIKI %",
+      "period": {
+        "weekly": "Kila wiki",
+        "monthly": "Kila mwezi",
+        "yearly": "Kila mwaka"
+      },
+      "lastParticipation": {
+        "label": "Ushiriki wa Hivi Karibuni wa Upigaji Kura",
+        "tooltip": "Asilimia ya ushiriki katika tukio la upigaji kura la hivi karibuni."
+      },
+      "averageParticipation": {
+        "label": "Wastani wa Ushiriki wa Upigaji Kura",
+        "tooltip": "Wastani wa asilimia ya ushiriki wa upigaji kura kwa wakati."
+      },
+      "averagePower": {
+        "label": "Wastani wa Nguvu ya Upigaji Kura",
+        "tooltip": "Wastani wa nguvu ya upigaji kura kwa washiriki wote."
+      }
+    },
+    "estimateRewards": {
+      "title": "Kadiria zawadi zako",
+      "lockDuration": "Muda wa kufunga",
+      "participants": "washiriki",
+      "lockedForAtLeast": "kwa sasa imefungwa kwa angalau",
+      "lockedFor": "kwa sasa imefungwa kwa",
+      "year": "mwaka",
+      "years": "miaka"
+    },
+    "kpi": {
+      "metric": "Kipimo",
+      "rewardBaseCurrentYear": "Msingi wa zawadi kwa mwaka wa sasa",
+      "dailyVotingRewards": "Zawadi za kila siku za kupiga kura",
+      "totalVotingPower": "Nguvu ya jumla ya kupiga kura",
+      "overallVotingParticipation": "Ushiriki wa jumla katika kupiga kura"
+    },
+    "total": {
+      "titleTooltip": "Tokeni zote zilizo kwenye kanista la utawala. Tokeni hizi zinaweza kuwa katika hali ya vesting, hali ya kuwekea dau, zisizowekewa dau au zisizodaiwa.",
+      "totalLabel": "Jumla ya Tokeni katika Utawala",
+      "locked": {
+        "name": "Imefungwa",
+        "tooltip": "Tokeni zilizofungwa katika utawala."
+      },
+      "unlocked": {
+        "name": "Imefunguliwa",
+        "tooltip": "Tokeni zilizofunguliwa katika utawala na zinaweza kutolewa na kufanyiwa biashara wakati wowote."
+      },
+      "accumulatedRewards": {
+        "name": "Zawadi Zilizokusanywa",
+        "tooltip": "Zawadi zinazohesabiwa kwa watumiaji lakini bado hazijadaiwa."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Mapendekezo",
+      "viewProposal": "Tazama pendekezo",
+      "columns": {
+        "id": "ID",
+        "title": "Kichwa",
+        "proposed": "Lilipendekezwa",
+        "timeRemaining": "Muda Uliosalia",
+        "topic": "Mada",
+        "status": "Hali",
+        "view": "Tazama"
+      }
+    },
+    "details": {
+      "category": "Utawala",
+      "proposalNumber": "Pendekezo #",
+      "proposal": "Pendekezo",
+      "titleLoading": "Kichwa cha pendekezo kinapakia…",
+      "payloadLoading": "Inapakia maelezo ya pendekezo…",
+      "posted": "Lilichapishwa",
+      "topic": "Mada",
+      "moreInfo": "Maelezo zaidi",
+      "totalVotes": "Jumla ya kura",
+      "adopt": "KUBALI",
+      "reject": "KATAA",
+      "vote": "Piga Kura"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuroni",
+      "viewNeuron": "Tazama neuroni",
+      "columns": {
+        "id": "ID",
+        "state": "Hali",
+        "stakedOgy": "OGY Iliyowekewa Dau",
+        "dissolveDelay": "Ucheleweshaji wa Kuyeyusha",
+        "age": "Umri",
+        "votingPower": "Nguvu ya Kura",
+        "view": "Tazama"
+      }
+    },
+    "details": {
+      "category": "Neuroni",
+      "title": "Neuroni ya OGY",
+      "created": "Iliundwa",
+      "stakedOgy": "OGY Iliyowekewa Dau",
+      "votingPower": "Nguvu ya Kura",
+      "dissolveDelay": "Ucheleweshaji wa Kuyeyusha",
+      "age": "Umri",
+      "lifecycle": "Mzunguko wa maisha wa neuroni",
+      "dateCreated": "Tarehe Iliyoundwa",
+      "autoStakeMaturity": "Ukomavu wa Dau Otomatiki",
+      "rewardsAndBonuses": "Zawadi & bonasi",
+      "stakedMaturity": "Ukomavu Uliowekewa Dau",
+      "totalMaturity": "Jumla ya Ukomavu",
+      "ageBonus": "Bonasi ya Umri",
+      "totalBonus": "Jumla ya Bonasi",
+      "dissolveDelayBonus": "Bonasi ya Ucheleweshaji wa Kuyeyusha"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Historia ya Miamala",
+      "searchFor": "Tafuta:",
+      "or": "au",
+      "searchPlaceholder": "Tafuta kipengee",
+      "noResults": "Hakuna matokeo yaliyopatikana",
+      "resultBlock": "Block",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Maelezo ya Muamala",
+      "hash": "Hash",
+      "fetchError": "Hitilafu ya kupata muamala mmoja!",
+      "mintingAccount": "Akaunti ya kuunda",
+      "fee": "Ada",
+      "memo": "Memo",
+      "none": "Hakuna"
+    },
+    "accountDetails": {
+      "title": "Akaunti ya OGY",
+      "id": "ID",
+      "owner": "Mmiliki",
+      "subaccount": "Akaunti ndogo",
+      "defaultSubaccount": "Hakuna (akaunti ndogo chaguo-msingi)",
+      "historicalMaxBalance": "Salio la juu la kihistoria",
+      "genesisBalance": "Salio la mwanzo",
+      "period": {
+        "monthly": "Kila mwezi",
+        "quarterly": "Kila robo mwaka",
+        "yearly": "Kila mwaka",
+        "lifetime": "Maisha yote"
+      },
+      "empty": {
+        "title": "Hakuna miamala bado",
+        "description": "Akaunti hii haina historia ya miamala. Mara itakapotuma au kupokea OGY, shughuli zitaonekana hapa."
+      },
+      "balanceHistory": {
+        "title": "Historia ya Salio",
+        "currentBalance": "Salio la sasa",
+        "currentBalanceInfo": "Salio la sasa la akaunti.",
+        "legend": "Salio la OGY"
+      },
+      "overview": {
+        "title": "Muhtasari wa Miamala",
+        "totalLabel": "Jumla ya kiasi",
+        "totalSent": "Jumla Iliyotumwa",
+        "totalSentInfo": "Jumla ya kiasi kilichotumwa na principal.",
+        "totalReceived": "Jumla Iliyopokewa",
+        "totalReceivedInfo": "Jumla ya kiasi kilichopokewa na principal."
+      }
+    },
+    "flow": {
+      "title": "Mtiririko wa Miamala",
+      "searchPlaceholder": "Tafuta miamala…",
+      "clearSearch": "Futa utafutaji",
+      "loadError": "Haikuweza kupakia data ya miamala. Tafadhali jaribu tena.",
+      "noMatch": "Hakuna miamala inayolingana na utafutaji huu.",
+      "transactions": "miamala",
+      "out": "Nje",
+      "in": "Ndani",
+      "total": "Jumla",
+      "legend": {
+        "outTransaction": "Muamala wa nje",
+        "inTransaction": "Muamala wa ndani",
+        "includesInitial": "Inajumuisha muamala wa awali",
+        "rootAccount": "Akaunti ya mzizi",
+        "account": "Akaunti",
+        "fromRoot": "Pamoja na miamala kutoka mzizi",
+        "toRoot": "Pamoja na miamala kwenda mzizi",
+        "madeInitial": "Ilifanya muamala wa awali"
+      }
+    },
+    "kind": {
+      "mint": "Tengeneza",
+      "transfer": "Hamisha",
+      "burn": "Choma",
+      "approve": "Idhinisha"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Karibu tena",
+      "value": "Thamani:",
+      "disconnectWallet": "Tenganisha pochi",
+      "accountLabel": "Akaunti",
+      "manageDescription": "Dhibiti pochi yako ya OGY, zawadi na shughuli za uwekaji dau.",
+      "walletBalance": "Salio la Pochi",
+      "myAccount": "Akaunti yangu",
+      "howToTopUp": "Jinsi ya kuongeza?"
+    },
+    "principal": {
+      "accountIdLabel": "Kitambulisho cha Akaunti:",
+      "principalIdLabel": "Kitambulisho cha Principal:"
+    },
+    "available": {
+      "title": "OGY Inayopatikana",
+      "transactionHistory": "Historia ya miamala",
+      "transfer": "Hamisha",
+      "transferOgy": "Hamisha OGY",
+      "transferDescription": "Unaweza kutuma OGY kutoka kwenye salio lako linalopatikana tu.",
+      "max": "Kiwango cha juu",
+      "recipientAddress": "Anwani ya mpokeaji",
+      "amountReceived": "Kiasi Kilichopokewa",
+      "ogyLogoAlt": "Nembo ya OGY",
+      "transactionFee": "Ada ya muamala (inatozwa chanzo)",
+      "currentBalance": "Salio la sasa:",
+      "transferProcessing": "Uhamishaji unachakatwa",
+      "transferProcessingHint": "Hii inaweza kuchukua sekunde chache",
+      "transferSuccess": "Uhamishaji umefanikiwa!",
+      "transferError": "Hitilafu ya uhamishaji!",
+      "errors": {
+        "amountRequired": "Kiasi kinahitajika.",
+        "amountExceedsBalance": "Kiasi hakipaswi kuzidi salio lako.",
+        "amountBelowFee": "Kiasi hakipaswi kuwa chini ya ada ya muamala.",
+        "amountNotPositive": "Kiasi lazima kiwe namba chanya.",
+        "recipientRequired": "Anwani ya mpokeaji inahitajika.",
+        "recipientInvalid": "Anwani ya mpokeaji si sahihi."
+      }
+    },
+    "staked": {
+      "title": "OGY Iliyowekewa Dau",
+      "stake": "Weka Dau",
+      "stakeOgy": "Weka Dau OGY",
+      "stakeDescription": "Ili kuweka dau OGY unahitaji kwenda kwenye jukwaa letu la NNS.",
+      "warningNotConnected": "Inaonekana huujaungana na",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Unahitaji",
+      "warningToConnect": "ili kuungana na jukwaa la NNS.",
+      "goToNns": "Nenda kwa NNS"
+    },
+    "rewards": {
+      "title": "Zawadi Zilizowekewa Dau",
+      "claimAll": "Dai zote",
+      "claimDisabledReason": "Madai ya zawadi yanasaidiwa tu kwa akaunti chaguo-msingi ya principal.",
+      "aboutToClaim": "Unakaribia kudai",
+      "sentToPrincipal": "Zawadi zitatumwa kwa principal wako",
+      "pending": "Inadai zawadi zote...",
+      "successTitle": "Kudai zawadi zote kumefanikiwa!",
+      "errorTitle": "Hitilafu ya kudai zawadi zote!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Tunabadilisha ledger na utawala",
+        "description": "Utawala na ledger ya ORIGYN vimeboreshwa kuwa SNS. Ili kuendelea kushiriki katika utawala wa ORIGYN na kutumia OGY, unahitaji kuhamisha tokeni zako za OGY."
+      },
+      "howToSwap": "Jinsi ya kubadilisha tokeni",
+      "disclosureToggle": "Bado una tokeni za zamani za OGY? Badilisha sasa!",
+      "accountId": "Kitambulisho cha Akaunti:",
+      "steps": {
+        "withdraw": {
+          "title": "Hatua ya 1: Toa kutoka utawala wa zamani",
+          "subtitle": "Ikiwa hapo awali ulikuwa ukishiriki katika utawala wa OGY, unahitaji kutoa tokeni hizo kabla ya kuweza kuzibadilisha."
+        },
+        "deposit": {
+          "title": "Hatua ya 2: Weka kwenye akaunti yako",
+          "subtitle": "Ikiwa una tokeni zozote nje ya dashibodi ya OGY, ziweke kwenye kitambulisho-cha-akaunti yako kabla ya kuanza kuzibadilisha."
+        },
+        "swap": {
+          "title": "Hatua ya 3: Badilisha tokeni",
+          "subtitle": "Badilisha tokeni ya zamani ya OGY kwenda ledger mpya."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Salio la Zamani la OGY"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Nenda kwa dashibodi ya zamani ya OGY"
+      },
+      "swap": {
+        "disabledOisy": "Ubadilishaji wa OGY ya zamani haupatikani na OISY. Ungana na Internet Identity au Plug ili kubadilisha OGY yako ya zamani.",
+        "disabledSubAccount": "Ubadilishaji wa OGY ya zamani unasaidiwa tu kutoka akaunti chaguo-msingi ya principal.",
+        "swapYourTokens": "Badilisha tokeni zako",
+        "automaticDisabled": "Ubadilishaji otomatiki umezimwa. Utahitaji kuidhinishwa ombi lako la kubadilisha, kiasi cha chini ni 50 000 OGY.",
+        "form": {
+          "title": "Badilisha OGY yako kwenda ledger mpya",
+          "description": "Weka tokeni zozote za OGY unazotaka kubadilisha kwenye kitambulisho cha akaunti yako",
+          "tokensAvailable": "Tokeni zinazopatikana kubadilisha",
+          "youWillReceivePrefix": "Utapokea",
+          "youWillReceiveSuffix": "tokeni za OGY kwenye ledger mpya.",
+          "swapPrefix": "Badilisha",
+          "swapSuffix": "tokeni za OGY"
+        },
+        "pending": {
+          "takesTime": "Mchakato wa kubadilisha unaweza kuchukua muda kidogo.",
+          "doNotRefresh": "Usisasishe ukurasa!",
+          "swapping": "Inabadilisha tokeni..."
+        },
+        "success": {
+          "title": "Ubadilishaji umefanikiwa!",
+          "walletBalance": "Salio la pochi kwenye ledger mpya",
+          "myAccount": "Akaunti yangu"
+        },
+        "error": {
+          "title": "Hitilafu ya kubadilisha tokeni!",
+          "retry": "Jaribu tena"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Neuroni Zangu za OGY",
+        "idHeader": "ID",
+        "stakedAmount": "Kiasi kilichowekewa dau",
+        "claimAmount": "Kiasi cha kudai",
+        "emptyTitle": "Hakuna neuroni bado",
+        "emptyDescription": "Ongeza neuroni ya OGY ili kuanza kufuatilia dau, nguvu ya kura, na zawadi hapa.",
+        "addFirstNeuron": "Ongeza neuroni yako ya kwanza"
+      },
+      "add": {
+        "button": "Ongeza neuroni",
+        "title": "Ongeza neuroni",
+        "description": "Ongeza principal hii kama hotkey kwenye kila neuroni ya OGY unayotaka kudhibiti hapa.",
+        "needHotkey": "Unahitaji kuongeza hotkey?",
+        "openNns": "Fungua programu ya NNS"
+      },
+      "claim": {
+        "button": "Dai",
+        "disabledReason": "Madai ya zawadi yanasaidiwa tu kwa akaunti chaguo-msingi ya principal.",
+        "aboutToClaim": "Unakaribia kudai",
+        "sentToPrincipal": "Zawadi zitatumwa kwa principal wako",
+        "pending": "Inadai zawadi...",
+        "successTitle": "Kudai zawadi kumefanikiwa!",
+        "errorTitle": "Hitilafu ya kudai zawadi!",
+        "retry": "Jaribu tena"
+      },
+      "remove": {
+        "title": "Ondoa neuroni",
+        "description": "Ili kuondoa neuroni hii, unahitaji kuondoa principal wako kutoka kwenye orodha ya hotkeys za neuroni yako."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Anwani",
+      "governanceBalance": "Salio la Utawala",
+      "stakedTokens": "Tokeni zilizowekewa dau",
+      "ledgerBalance": "Salio la Ledger",
+      "weightInTotalSupply": "Uzito katika Jumla ya Usambazaji"
+    }
+  },
+  "recovery": {
+    "title": "Rejesha tokeni zako",
+    "description": "Dashibodi ya OGY inasaidia tokeni ya OGY tu. Iwapo ulituma tokeni nyingine hapa kwa bahati mbaya, unaweza kuzirejesha kwa kufuata hatua zilizo hapa chini.",
+    "chooseToken": "Chagua tokeni",
+    "loginRequired": "Ili kukusanya tokeni zako lazima uwe umeingia.",
+    "transfer": {
+      "icpLogoAlt": "Nembo ya ICP",
+      "ledgerCanister": "Kanista la ledger:",
+      "transferIcp": "Hamisha ICP",
+      "availableBalanceNote": "Unaweza kutuma ICP kutoka kwenye salio lako linalopatikana tu.",
+      "amountRequired": "Kiasi kinahitajika.",
+      "amountExceedsBalance": "Kiasi hakipaswi kuzidi salio lako.",
+      "amountPositive": "Kiasi lazima kiwe namba chanya.",
+      "amountBelowFee": "Kiasi lazima kiwe kikubwa au sawa na ada za muamala.",
+      "recipientAddress": "Anwani ya mpokeaji",
+      "recipientAddressRequired": "Anwani ya mpokeaji inahitajika.",
+      "invalidRecipientAddress": "Anwani ya mpokeaji si sahihi.",
+      "amountReceived": "Kiasi Kilichopokewa",
+      "transactionFee": "Ada ya muamala",
+      "currentBalance": "Salio la sasa:",
+      "processing": "Uhamishaji unachakatwa",
+      "processingNote": "Hii inaweza kuchukua sekunde chache",
+      "success": "Uhamishaji umefanikiwa!",
+      "error": "Hitilafu ya uhamishaji!"
+    }
+  },
+  "support": {
+    "category": "Msaada",
+    "title": "Fungua tiketi",
+    "titleSubmitted": "Tiketi imewasilishwa",
+    "successTitle": "Tiketi ya msaada imeundwa",
+    "successMessage": "Tutafuatilia kupitia anwani ya barua pepe uliyotoa.",
+    "submitAnother": "Wasilisha tiketi nyingine",
+    "intro": "Eleza tatizo lako na jinsi tunavyoweza kukufikia.",
+    "form": {
+      "name": "Jina",
+      "email": "Barua pepe ya mawasiliano",
+      "emailRequired": "Anwani ya barua pepe inahitajika",
+      "emailInvalid": "Anwani ya barua pepe si sahihi",
+      "principal": "Principal ya pochi",
+      "invalidPrincipal": "Anwani ya mpokeaji si sahihi.",
+      "description": "Maelezo",
+      "descriptionPlaceholder": "Tuambie kinachoendelea…",
+      "descriptionRequired": "Tafadhali eleza tatizo lako"
+    },
+    "submitError": "Hitilafu fulani imetokea. Tafadhali jaribu tena.",
+    "submitting": "Inawasilisha…"
+  },
+  "explorer": {
+    "title": "Kichunguzi",
+    "searchPlaceholder": "Tafuta kwa kichwa, mtoaji, principal au kitambulisho cha tokeni",
+    "openFilters": "Fungua vichujio",
+    "checkOnBlockchain": "Angalia kwenye blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Vyeti Vilivyoangaziwa",
+      "art": "Vyeti vya Sanaa",
+      "gold": "Vyeti vya Dhahabu"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Nakili kwenye ubao wa kunakili",
+    "toggleRelativeTime": "Geuza muda linganifu. Onyesho la sasa:",
+    "collapseRow": "Kunja safu",
+    "expandRow": "Panua safu",
+    "searchPlaceholder": "Tafuta vipengee...",
+    "sortAscending": "Panga kwa kupanda",
+    "sortDescending": "Panga kwa kushuka",
+    "linesPerPage": "Mistari kwa ukurasa",
+    "page": "Ukurasa",
+    "pageOf": "kati ya",
+    "previousPage": "Ukurasa uliotangulia",
+    "nextPage": "Ukurasa unaofuata"
+  },
+  "auth": {
+    "connect": "Unganisha",
+    "disconnect": "Tenganisha",
+    "connectWallet": {
+      "title": "Unganisha pochi yako",
+      "subtitle": "Chagua jinsi ungependa kuingia"
+    },
+    "install": "Sakinisha",
+    "newToIc": "Mpya kwa Internet Computer?",
+    "learnMore": "Jifunze zaidi",
+    "connecting": {
+      "title": "Inaunganisha...",
+      "subtitle": "Idhinisha ombi kwenye pochi yako"
+    },
+    "sessionExpired": {
+      "title": "Kipindi kimeisha",
+      "description": "Kipindi cha pochi yako hakitumiki tena. Unganisha tena ili kuendelea."
+    },
+    "reconnect": "Unganisha tena",
+    "error": {
+      "connectionCancelled": "Muunganisho umeghairiwa. Tafadhali jaribu tena.",
+      "connectionFailed": "Muunganisho wa pochi umeshindwa. Tafadhali jaribu tena."
+    }
+  },
+  "warning": {
+    "badge": "MPYA",
+    "ledgerSwitch": "tunabadilisha ledger, unahitaji kubadilisha OGY yako kwenda mpya"
+  },
+  "calculator": {
+    "header": {
+      "title": "Kikokotoo cha gharama",
+      "description": "Tumia kikokotoo cha ORIGYN kukisia gharama ya cheti chako cha kipekee chenye data yako yote kwenye mnyororo"
+    },
+    "plan": {
+      "title": "Panga utengenezaji wako",
+      "description": "Tuambie idadi ya vitu na unachopakia.",
+      "itemsLabel": "Vitu vingapi?",
+      "uploadingLabel": "Unapakia nini?",
+      "knowExactSize": "Unajua ukubwa halisi?",
+      "totalUploadSize": "Jumla ya ukubwa wa upakiaji",
+      "usePreset": "Tumia mpangilio uliowekwa tayari",
+      "combinedSize": "Ukubwa wa jumla wa kila faili katika vitu vyote.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB kila moja"
+        },
+        "iphone": {
+          "label": "Picha",
+          "hint": "3 MB kila moja"
+        },
+        "dslr": {
+          "label": "Picha ya studio",
+          "hint": "20 MB kila moja"
+        },
+        "video": {
+          "label": "Video fupi",
+          "hint": "1 GB kila moja"
+        },
+        "video1hr": {
+          "label": "Video ndefu",
+          "hint": "60 GB kila moja"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Tathmini ya wakati halisi",
+      "titleRefreshing": "Inasasisha tathmini",
+      "description": "Inasasishwa kiotomatiki unapobadilisha mipangilio yako.",
+      "ogyEquivalent": "Sawa na OGY",
+      "ogySpotRate": "Bei ya OGY ya sasa",
+      "itemSingular": "Kitu",
+      "itemPlural": "Vitu",
+      "upload": "Upakiaji"
+    },
+    "breakdown": {
+      "title": "Muhtasari wa gharama",
+      "baseFee": "Ada ya msingi ya utengenezaji",
+      "storageFee": "Ada ya uhifadhi",
+      "items": "Vitu",
+      "uploadSize": "Ukubwa wa upakiaji"
+    },
+    "bytesUnit": "baiti"
+  }
+}

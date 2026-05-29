@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Wika",
+    "switchTo": "Lumipat sa {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Naglo-load...",
+    "error": "May nangyaring mali",
+    "retry": "Subukan muli",
+    "cancel": "Kanselahin",
+    "confirm": "Kumpirmahin",
+    "close": "Isara",
+    "back": "Bumalik",
+    "next": "Susunod",
+    "previous": "Nakaraan",
+    "save": "I-save",
+    "submit": "Isumite",
+    "copy": "Kopyahin",
+    "copied": "Nakopya na",
+    "search": "Maghanap",
+    "viewAll": "Tingnan lahat",
+    "showMore": "Magpakita ng higit pa",
+    "showLess": "Magpakita ng mas kaunti",
+    "amount": "Halaga",
+    "date": "Petsa",
+    "type": "Uri",
+    "from": "Mula",
+    "to": "Patungo",
+    "index": "Index",
+    "status": "Katayuan",
+    "total": "Kabuuan",
+    "balance": "Balanse",
+    "yes": "Oo",
+    "no": "Hindi",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "governance": "Pamamahala",
+    "transactionHistory": "Kasaysayan ng Transaksyon",
+    "calculator": "Calculator",
+    "openMainMenu": "Buksan ang pangunahing menu",
+    "closeMenu": "Isara ang menu",
+    "openAccountOverview": "Buksan ang pangkalahatang-tanaw ng account",
+    "viewAccountOverview": "Tingnan ang pangkalahatang-tanaw ng account",
+    "connectPrompt": "Ikonekta ang iyong wallet para pamahalaan ang mga token, bumoto sa mga panukala at tingnan ang iyong kasaysayan ng transaksyon.",
+    "connectWallet": "Ikonekta ang wallet",
+    "disconnect": "Idiskonekta"
+  },
+  "notFound": {
+    "title": "Hindi nahanap ang pahina",
+    "description": "Paumanhin, hindi namin mahanap ang pahinang hinahanap mo.",
+    "backHome": "Bumalik sa home"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Dashboard",
+      "home": "Home",
+      "circulation": "Sirkulasyon",
+      "governance": "Pamamahala",
+      "revenue": "Kita",
+      "rewards": "Mga Reward",
+      "distribution": "Pamamahagi",
+      "governanceDashboard": "OGY Governance Dashboard",
+      "transactionExplorer": "OGY Transaction Explorer"
+    },
+    "learn": {
+      "heading": "Matuto pa tungkol sa OGY Tokenomics at ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT Standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Website",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Suporta",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Makipag-ugnayan"
+    },
+    "support": {
+      "contactSupport": "Makipag-ugnayan sa suporta",
+      "recoverTokens": "Bawiin ang iyong mga token"
+    },
+    "disclaimer": "*Ang ORIGYN Foundation ay hindi mananagot sa anumang pagkawala, pagnanakaw, o maling paggamit ng mga OGY Token na naganap kaugnay ng proseso ng swap. Bukod dito, ang ORIGYN Foundation ay hindi mananagot sa anumang pagkabigong maisagawa ang swap kung ang kasangkot na partido ay hindi mahigpit na sumunod sa mga kondisyong itinakda ng ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Tuklasin ang dashboard",
+      "subtitle": "Makipag-ugnayan nang trustless sa web3 dApps, DAOs, NFTs, DeFi at marami pang iba."
+    },
+    "cta": {
+      "loginToSwap": "Mag-login para mag-swap ng mga token",
+      "myAccount": "Aking account"
+    },
+    "governanceStaking": {
+      "title": "Pangkalahatang-tanaw ng Governance Staking"
+    },
+    "cardError": {
+      "couldNotLoad": "Hindi ma-load",
+      "descriptionLine1": "May problema kami sa pagkuha ng metric na ito.",
+      "descriptionLine2": "Pakisubukan muli mamaya."
+    },
+    "emptyState": {
+      "noDataFor": "Walang data para sa",
+      "description": "Wala munang ipapakita sa ngayon."
+    },
+    "circulationState": {
+      "title": "Estado ng Sirkulasyon ng OGY",
+      "tooltip": "Ang circulating supply ay lahat ng token maliban sa mga na-unlock na token na pag-aari ng ORIGYN Foundation.",
+      "nnsProposal": "Panukala ng NNS",
+      "totalLabel": "Kabuuang Sirkulasyon ng OGY",
+      "notOwnedName": "OGY na hindi nasa kamay ng Foundation",
+      "notOwnedValue": "Dami ng mga token sa sirkulasyon na hindi pag-aari ng ORIGYN foundation.",
+      "ownedName": "OGY na naka-lock sa kamay ng Foundation",
+      "ownedValue": "Dami ng mga naka-lock na token na pag-aari ng ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation Reserve",
+      "tooltip": "Kabuuang dami ng mga OGY token na pag-aari ng ORIGYN foundation sa lahat ng wallet.",
+      "totalLabel": "Kabuuang Foundation Supply",
+      "lockedName": "Naka-lock",
+      "lockedIntro": "Mga token ng ORIGYN foundation na naka-lock sa mga stake o vesting.",
+      "lockedStakes": "1) Stakes- mga token na bumubuo ng mga reward dahil sa pakikilahok sa governance voting.",
+      "lockedStakesNote": "Ang mga token na iyon ay kusang-loob na na-lock.",
+      "lockedVestings": "2) Vestings- Mga token na hindi tumatanggap ng anumang reward at hindi makakalahok sa pagboto.",
+      "lockedVestingsNote": "Ang mga token na iyon ay na-lock ng iyong kontrata sa ORIGYN Foundation.",
+      "unlockedName": "Na-unlock",
+      "unlockedValue": "Na-unlock na pondong pag-aari ng ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Kita ng Network",
+      "tokenLogoAlt": "Logo ng token",
+      "tooltipOgy": "Network Utility Revenue na nalikha sa pamamagitan ng mga bayarin para sa paggamit ng ORIGYN network (hal., para sa pag-isyu o paglilipat ng mga digital na sertipiko, pag-mint ng mga NFT, atbp.) at naipon sa OGY.",
+      "tooltipIcp": "Network Utility Revenue na nalikha sa pamamagitan ng mga bayarin para sa paggamit ng ORIGYN network (hal., para sa pag-isyu o paglilipat ng mga digital na sertipiko, pag-mint ng mga NFT, atbp.) at naipon sa ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "Balanse ng ORA",
+      "year": "Taon",
+      "rewardPool": "Reward Pool",
+      "moreDetails": "Higit pang detalye",
+      "tooltipStake": "Ang mga may hawak ng token ay maaaring mag-stake ng kanilang OGY at kumita ng reward sa pamamagitan ng pakikilahok sa pamamahala.",
+      "tooltipSeed": "Ang mga reward ay magmumula sa ORIGYN Reward Account, na pupunan ng ORIGYN ng isang bilyong OGY.",
+      "tooltipPool": "Ang reward pool ay binubuo ng 250 milyong OGY sa unang taon nito at mahahati sa kalahati kada dalawang taon para hikayatin at gantimpalaan ang mga naunang at pangmatagalang kontribyutor ng ekosistema.",
+      "description": "Mag-aambag ang ORIGYN ng isang bilyong OGY sa isang ORIGYN Reward Account (ORA) para sa kapakinabangan ng mga staked at bumotong may hawak. Ang reward pool ay binubuo ng 250 milyong OGY sa unang taon nito at mahahati sa kalahati kada dalawang taon para hikayatin at gantimpalaan ang mga naunang at pangmatagalang kontribyutor ng ekosistema."
+    },
+    "tokenDistribution": {
+      "title": "Pamamahagi ng Token"
+    },
+    "transactionHistory": {
+      "title": "Kasaysayan ng Transaksyon",
+      "showAll": "Ipakita lahat"
+    },
+    "topTransfers": {
+      "value": "Halaga",
+      "time": "Oras",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Walang available na data."
+    },
+    "totalSupply": {
+      "title": "Kabuuang OGY Supply",
+      "tooltipTitle": "Kabuuang dami ng mga available na OGY token.",
+      "tooltipLine1": "Kabilang dito ang circulating supply at ang supply na nasa ilalim ng kontrol ng ORIGYN Foundation.",
+      "tooltipLine2": "Simula ika-18 ng Setyembre, lumipat ang ORIGYN sa ganap na deflationary na modelo na nangangahulugang wala nang bagong na-mint na token.",
+      "chartLabel": "Kabuuang Supply"
+    },
+    "totalBurned": {
+      "title": "Kabuuang OGY na Nasunog",
+      "tooltipTitle": "Kabuuang dami ng mga OGY token na nasunog.",
+      "tooltipLine1": "Ang mga token na ito ay ganap nang nasunog at hindi na available.",
+      "tooltipLine2": "Ang mga token ay maaaring sunugin sa iba't ibang dahilan halimbawa mga bayarin sa pag-mint ng sertipiko, mga bayarin sa network utility o mga bayarin sa transaksyon ng network.",
+      "chartLabel": "Kabuuang Nasunog"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Araw-araw",
+      "weekly": "Lingguhan",
+      "monthly": "Buwanan",
+      "yearly": "Taunan",
+      "all": "Lahat"
+    },
+    "stakingOverview": {
+      "title": "Pangkalahatang-tanaw ng Staking",
+      "totalTokensInStakes": "Kabuuang Token sa Mga Stake",
+      "tooltip": "Mga token na naka-lock sa mga stake.",
+      "stakedTokens": "Mga Staked na Token",
+      "stakedTokensLegend": "MGA STAKED NA TOKEN"
+    },
+    "usersActivity": {
+      "title": "Pangkalahatang-tanaw ng Mga User",
+      "protocolUsers": "Mga User ng OGY Protocol",
+      "protocolUsersTooltip": "Mga natatanging may hawak ng mga OGY token",
+      "protocolUsersLegend": "MGA USER NG OGY PROTOCOL",
+      "activeWallets": "Mga Aktibong OGY Wallet",
+      "activeWalletsTooltip": "Mga aktibong may hawak ng mga OGY token"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Pangkalahatang-tanaw ng Pamamahala",
+      "welcome": "Maligayang pagdating sa ORIGYN Governance!",
+      "description": "Ang mga may hawak ng OGY token ay maaaring direktang makaimpluwensya sa ORIGYN Network sa pamamagitan ng pag-stake ng kanilang OGY at pagboto sa mga panukala. Sa pakikilahok sa proseso ng pagdedesisyon, ang mga staked na may hawak ng token na ito ay kumikita ng mga reward.",
+      "learnMore": "Matuto pa"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Mag-stake at Bumoto",
+        "description": "Impluwensyahan ang ORIGYN Network sa pamamagitan ng pag-stake ng OGY at pagboto sa mga panukala."
+      },
+      "earnRewards": {
+        "title": "Kumita ng Mga Reward",
+        "description": "Makilahok sa proseso ng pagdedesisyon para kumita ng mga reward."
+      },
+      "governCollectively": {
+        "title": "Mamahala nang Sama-sama",
+        "description": "Makibahagi at impluwensyahan ang network bilang isang kolaboratibong ekosistema."
+      }
+    },
+    "tokensSection": {
+      "title": "Mga Token sa Pamamahala",
+      "paragraph1": "Ang mga may hawak ng OGY token ay maaaring direktang makaimpluwensya sa ORIGYN Network sa pamamagitan ng pag-stake ng kanilang OGY at pagboto sa mga panukala.",
+      "paragraph2": "Sa pakikilahok sa proseso ng pagdedesisyon, ang mga staked na may hawak ng token na ito ay kumikita ng mga reward at namamahala nang sama-sama at demokratiko.",
+      "learnMoreOgy": "Matuto pa tungkol sa OGY"
+    },
+    "sections": {
+      "proposals": "Mga Panukala",
+      "neurons": "Mga Neuron"
+    },
+    "votingParticipation": {
+      "title": "Partisipasyon sa Pagboto",
+      "chartLabel": "Partisipasyon %",
+      "legendLabel": "PARTISIPASYON %",
+      "period": {
+        "weekly": "Lingguhan",
+        "monthly": "Buwanan",
+        "yearly": "Taunan"
+      },
+      "lastParticipation": {
+        "label": "Huling Partisipasyon sa Pagboto",
+        "tooltip": "Porsyento ng partisipasyon sa huling kaganapan ng pagboto."
+      },
+      "averageParticipation": {
+        "label": "Karaniwang Partisipasyon sa Pagboto",
+        "tooltip": "Karaniwang porsyento ng partisipasyon sa pagboto sa paglipas ng panahon."
+      },
+      "averagePower": {
+        "label": "Karaniwang Voting Power",
+        "tooltip": "Karaniwang voting power sa lahat ng kalahok."
+      }
+    },
+    "estimateRewards": {
+      "title": "Tantyahin ang iyong mga reward",
+      "lockDuration": "Tagal ng lock",
+      "participants": "mga kalahok",
+      "lockedForAtLeast": "kasalukuyang naka-lock nang hindi bababa sa",
+      "lockedFor": "kasalukuyang naka-lock nang",
+      "year": "taon",
+      "years": "taon"
+    },
+    "kpi": {
+      "metric": "Metric",
+      "rewardBaseCurrentYear": "Batayan ng gantimpala para sa kasalukuyang taon",
+      "dailyVotingRewards": "Pang-araw-araw na gantimpala sa pagboto",
+      "totalVotingPower": "Kabuuang lakas ng boto",
+      "overallVotingParticipation": "Kabuuang pakikilahok sa pagboto"
+    },
+    "total": {
+      "titleTooltip": "Lahat ng token na nasa governance canister. Ang mga token na ito ay maaaring nasa estado ng vesting, estado ng staking, hindi naka-stake o hindi pa naka-claim.",
+      "totalLabel": "Kabuuang Token sa Pamamahala",
+      "locked": {
+        "name": "Naka-lock",
+        "tooltip": "Mga token na naka-lock sa pamamahala."
+      },
+      "unlocked": {
+        "name": "Na-unlock",
+        "tooltip": "Mga token na na-unlock sa pamamahala at maaaring i-withdraw at i-trade anumang oras."
+      },
+      "accumulatedRewards": {
+        "name": "Mga Naipong Reward",
+        "tooltip": "Mga reward na nabibilang para sa mga user ngunit hindi pa naka-claim."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Mga Panukala",
+      "viewProposal": "Tingnan ang panukala",
+      "columns": {
+        "id": "ID",
+        "title": "Pamagat",
+        "proposed": "Iminungkahi",
+        "timeRemaining": "Natitirang Oras",
+        "topic": "Paksa",
+        "status": "Katayuan",
+        "view": "Tingnan"
+      }
+    },
+    "details": {
+      "category": "Pamamahala",
+      "proposalNumber": "Panukala #",
+      "proposal": "Panukala",
+      "titleLoading": "Naglo-load ang pamagat ng panukala…",
+      "payloadLoading": "Naglo-load ang mga detalye ng panukala…",
+      "posted": "Na-post",
+      "topic": "Paksa",
+      "moreInfo": "Higit pang impormasyon",
+      "totalVotes": "Kabuuang boto",
+      "adopt": "AYUNAN",
+      "reject": "TANGGIHAN",
+      "vote": "Bumoto"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Mga Neuron",
+      "viewNeuron": "Tingnan ang neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Estado",
+        "stakedOgy": "Staked na OGY",
+        "dissolveDelay": "Dissolve Delay",
+        "age": "Edad",
+        "votingPower": "Voting Power",
+        "view": "Tingnan"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Nilikha",
+      "stakedOgy": "Staked na OGY",
+      "votingPower": "Voting Power",
+      "dissolveDelay": "Dissolve Delay",
+      "age": "Edad",
+      "lifecycle": "Lifecycle ng neuron",
+      "dateCreated": "Petsa ng Paglikha",
+      "autoStakeMaturity": "Auto-Stake Maturity",
+      "rewardsAndBonuses": "Mga reward at bonus",
+      "stakedMaturity": "Staked Maturity",
+      "totalMaturity": "Kabuuang Maturity",
+      "ageBonus": "Bonus sa Edad",
+      "totalBonus": "Kabuuang Bonus",
+      "dissolveDelayBonus": "Bonus sa Dissolve Delay"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Kasaysayan ng Transaksyon",
+      "searchFor": "Maghanap ng:",
+      "or": "o",
+      "searchPlaceholder": "Maghanap ng item",
+      "noResults": "Walang nahanap na resulta",
+      "resultBlock": "Block",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Mga Detalye ng Transaksyon",
+      "hash": "Hash",
+      "fetchError": "Error sa pagkuha ng isang transaksyon!",
+      "mintingAccount": "Minting account",
+      "fee": "Bayarin",
+      "memo": "Memo",
+      "none": "Wala"
+    },
+    "accountDetails": {
+      "title": "OGY account",
+      "id": "ID",
+      "owner": "May-ari",
+      "subaccount": "Subaccount",
+      "defaultSubaccount": "Wala (default na subaccount)",
+      "historicalMaxBalance": "Makasaysayang pinakamataas na balanse",
+      "genesisBalance": "Genesis na balanse",
+      "period": {
+        "monthly": "Buwanan",
+        "quarterly": "Kada quarter",
+        "yearly": "Taunan",
+        "lifetime": "Habambuhay"
+      },
+      "empty": {
+        "title": "Wala pang transaksyon",
+        "description": "Wala pang kasaysayan ng transaksyon ang account na ito. Kapag nagpadala o nakatanggap ito ng OGY, lalabas dito ang aktibidad."
+      },
+      "balanceHistory": {
+        "title": "Kasaysayan ng Balanse",
+        "currentBalance": "Kasalukuyang balanse",
+        "currentBalanceInfo": "Kasalukuyang balanse ng account.",
+        "legend": "Balanse ng OGY"
+      },
+      "overview": {
+        "title": "Pangkalahatang-tanaw ng Mga Transaksyon",
+        "totalLabel": "Kabuuang halaga",
+        "totalSent": "Kabuuang Naipadala",
+        "totalSentInfo": "Kabuuang halagang ipinadala ng principal.",
+        "totalReceived": "Kabuuang Natanggap",
+        "totalReceivedInfo": "Kabuuang halagang natanggap ng principal."
+      }
+    },
+    "flow": {
+      "title": "Daloy ng Transaksyon",
+      "searchPlaceholder": "Maghanap ng mga transaksyon…",
+      "clearSearch": "I-clear ang paghahanap",
+      "loadError": "Hindi ma-load ang data ng transaksyon. Pakisubukan muli.",
+      "noMatch": "Walang transaksyong tumutugma sa paghahanap na ito.",
+      "transactions": "mga transaksyon",
+      "out": "Palabas",
+      "in": "Papasok",
+      "total": "Kabuuan",
+      "legend": {
+        "outTransaction": "Palabas na transaksyon",
+        "inTransaction": "Papasok na transaksyon",
+        "includesInitial": "Kasama ang paunang transaksyon",
+        "rootAccount": "Root account",
+        "account": "Account",
+        "fromRoot": "May mga transaksyon mula sa root",
+        "toRoot": "May mga transaksyon patungo sa root",
+        "madeInitial": "Gumawa ng paunang transaksyon"
+      }
+    },
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Paglilipat",
+      "burn": "Burn",
+      "approve": "Aprubahan"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Maligayang pagbabalik",
+      "value": "Halaga:",
+      "disconnectWallet": "Idiskonekta ang wallet",
+      "accountLabel": "Account",
+      "manageDescription": "Pamahalaan ang iyong OGY wallet, mga reward, at aktibidad ng staking.",
+      "walletBalance": "Balanse ng Wallet",
+      "myAccount": "Aking account",
+      "howToTopUp": "Paano mag-top up?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "Available na OGY",
+      "transactionHistory": "Kasaysayan ng transaksyon",
+      "transfer": "Ilipat",
+      "transferOgy": "Ilipat ang OGY",
+      "transferDescription": "Maaari ka lang magpadala ng OGY mula sa iyong available na balanse.",
+      "max": "Max",
+      "recipientAddress": "Address ng tatanggap",
+      "amountReceived": "Halagang Natanggap",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Bayarin sa transaksyon (sinisingil sa pinagmulan)",
+      "currentBalance": "Kasalukuyang balanse:",
+      "transferProcessing": "Pinoproseso ang paglipat",
+      "transferProcessingHint": "Maaaring tumagal ito ng ilang segundo",
+      "transferSuccess": "Matagumpay ang paglipat !",
+      "transferError": "Error sa paglipat !",
+      "errors": {
+        "amountRequired": "Kailangan ang halaga.",
+        "amountExceedsBalance": "Hindi dapat lumampas ang halaga sa iyong balanse.",
+        "amountBelowFee": "Hindi dapat mas mababa ang halaga sa bayarin sa transaksyon.",
+        "amountNotPositive": "Ang halaga ay dapat positibong numero.",
+        "recipientRequired": "Kailangan ang address ng tatanggap.",
+        "recipientInvalid": "Hindi wastong address ng tatanggap."
+      }
+    },
+    "staked": {
+      "title": "Staked na OGY",
+      "stake": "Mag-stake",
+      "stakeOgy": "Mag-stake ng OGY",
+      "stakeDescription": "Para mag-stake ng OGY kailangan mong pumunta sa aming NNS platform.",
+      "warningNotConnected": "Mukhang hindi ka nakakonekta sa",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Kailangan mo ng",
+      "warningToConnect": "para kumonekta sa NNS platform.",
+      "goToNns": "Pumunta sa NNS"
+    },
+    "rewards": {
+      "title": "Mga Staked na Reward",
+      "claimAll": "I-claim lahat",
+      "claimDisabledReason": "Ang mga pag-claim ng reward ay sinusuportahan lamang para sa principal default account.",
+      "aboutToClaim": "Mag-cclaim ka na ng",
+      "sentToPrincipal": "Ipapadala ang mga reward sa iyong principal",
+      "pending": "Kine-claim ang lahat ng reward...",
+      "successTitle": "Matagumpay ang pag-claim ng lahat ng reward!",
+      "errorTitle": "Error sa pag-claim ng lahat ng reward!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Nililipat namin ang ledger at pamamahala",
+        "description": "Ang pamamahala at ledger ng ORIGYN ay na-upgrade na sa isang SNS. Para makapagpatuloy sa pakikilahok sa pamamahala ng ORIGYN at gamitin ang OGY, kailangan mong i-migrate ang iyong mga OGY token."
+      },
+      "howToSwap": "Paano mag-swap ng mga token",
+      "disclosureToggle": "May mga lumang OGY token ka pa? Mag-swap na!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Hakbang 1: Mag-withdraw mula sa lumang pamamahala",
+          "subtitle": "Kung dati kang nakikilahok sa OGY governance, kailangan mong i-withdraw ang mga token na iyon bago mo sila ma-swap."
+        },
+        "deposit": {
+          "title": "Hakbang 2: Mag-deposit sa iyong account",
+          "subtitle": "Kung mayroon kang anumang token sa labas ng OGY dashboard, i-deposit ang mga ito sa iyong account-id bago ka magsimulang mag-swap ng mga ito."
+        },
+        "swap": {
+          "title": "Hakbang 3: Mag-swap ng mga token",
+          "subtitle": "I-swap ang legacy na OGY token sa bagong ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Balanse ng Legacy na OGY"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Pumunta sa Legacy na OGY dashboard"
+      },
+      "swap": {
+        "disabledOisy": "Ang legacy na OGY swap ay hindi available sa OISY. Kumonekta gamit ang Internet Identity o Plug para i-swap ang iyong legacy na OGY.",
+        "disabledSubAccount": "Ang legacy na OGY swap ay sinusuportahan lamang mula sa principal default account.",
+        "swapYourTokens": "I-swap ang iyong mga token",
+        "automaticDisabled": "Ang awtomatikong swap ay na-disable. Kailangan mong maaprubahan ang iyong kahilingan sa swap, ang min. na halaga ay 50 000 OGY.",
+        "form": {
+          "title": "I-swap ang iyong OGY sa bagong ledger",
+          "description": "I-deposit ang anumang OGY token na nais mong i-swap sa iyong account id",
+          "tokensAvailable": "Mga token na available para i-swap",
+          "youWillReceivePrefix": "Matatanggap mo ang",
+          "youWillReceiveSuffix": "OGY token sa bagong ledger.",
+          "swapPrefix": "Mag-swap ng",
+          "swapSuffix": "OGY token"
+        },
+        "pending": {
+          "takesTime": "Ang proseso ng pag-swap ay maaaring tumagal nang kaunti.",
+          "doNotRefresh": "Huwag i-refresh ang pahina !",
+          "swapping": "Nagsa-swap ng mga token..."
+        },
+        "success": {
+          "title": "Matagumpay ang swap!",
+          "walletBalance": "Balanse ng wallet sa bagong ledger",
+          "myAccount": "Aking account"
+        },
+        "error": {
+          "title": "Error sa pag-swap ng mga token!",
+          "retry": "Subukan muli"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Aking Mga OGY Neuron",
+        "idHeader": "ID",
+        "stakedAmount": "Halagang naka-stake",
+        "claimAmount": "Halagang ic-claim",
+        "emptyTitle": "Wala pang neuron",
+        "emptyDescription": "Magdagdag ng OGY neuron para simulang subaybayan ang stake, voting power, at mga reward dito.",
+        "addFirstNeuron": "Idagdag ang iyong unang neuron"
+      },
+      "add": {
+        "button": "Magdagdag ng neuron",
+        "title": "Magdagdag ng neuron",
+        "description": "Idagdag ang principal na ito bilang hotkey sa bawat OGY neuron na nais mong pamahalaan dito.",
+        "needHotkey": "Kailangang magdagdag ng hotkey?",
+        "openNns": "Buksan ang NNS app"
+      },
+      "claim": {
+        "button": "I-claim",
+        "disabledReason": "Ang mga pag-claim ng reward ay sinusuportahan lamang para sa principal default account.",
+        "aboutToClaim": "Mag-cclaim ka na ng",
+        "sentToPrincipal": "Ipapadala ang mga reward sa iyong principal",
+        "pending": "Kine-claim ang reward...",
+        "successTitle": "Matagumpay ang pag-claim ng reward!",
+        "errorTitle": "Error sa pag-claim ng reward!",
+        "retry": "Subukan muli"
+      },
+      "remove": {
+        "title": "Alisin ang neuron",
+        "description": "Para maalis ang neuron na ito, kailangan mong alisin ang iyong principal mula sa listahan ng mga hotkey ng iyong neuron."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Address",
+      "governanceBalance": "Balanse sa Pamamahala",
+      "stakedTokens": "Mga staked na token",
+      "ledgerBalance": "Balanse sa Ledger",
+      "weightInTotalSupply": "Timbang sa Kabuuang Supply"
+    }
+  },
+  "recovery": {
+    "title": "Bawiin ang iyong mga token",
+    "description": "Ang OGY dashboard ay sumusuporta lamang sa OGY token. Kung sakaling hindi sinasadyang nagpadala ka ng ibang token dito, maaari mong bawiin ang mga ito sa pamamagitan ng pagsunod sa mga hakbang sa ibaba.",
+    "chooseToken": "Pumili ng token",
+    "loginRequired": "Para makolekta ang iyong mga token kailangan mong naka-login.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "Ilipat ang ICP",
+      "availableBalanceNote": "Maaari ka lang magpadala ng ICP mula sa iyong available na balanse.",
+      "amountRequired": "Kailangan ang halaga.",
+      "amountExceedsBalance": "Hindi dapat lumampas ang halaga sa iyong balanse.",
+      "amountPositive": "Ang halaga ay dapat positibong numero.",
+      "amountBelowFee": "Ang halaga ay dapat mas malaki o katumbas ng mga bayarin sa transaksyon.",
+      "recipientAddress": "Address ng tatanggap",
+      "recipientAddressRequired": "Kailangan ang address ng tatanggap.",
+      "invalidRecipientAddress": "Hindi wastong address ng tatanggap.",
+      "amountReceived": "Halagang Natanggap",
+      "transactionFee": "Bayarin sa transaksyon",
+      "currentBalance": "Kasalukuyang balanse:",
+      "processing": "Pinoproseso ang paglipat",
+      "processingNote": "Maaaring tumagal ito ng ilang segundo",
+      "success": "Matagumpay ang paglipat!",
+      "error": "Error sa paglipat!"
+    }
+  },
+  "support": {
+    "category": "Suporta",
+    "title": "Gumawa ng ticket",
+    "titleSubmitted": "Naisumite ang ticket",
+    "successTitle": "Nagawa ang support ticket",
+    "successMessage": "Susundan namin ito sa email address na ibinigay mo.",
+    "submitAnother": "Magsumite ng isa pang ticket",
+    "intro": "Ilarawan ang iyong isyu at kung paano ka namin maaabot.",
+    "form": {
+      "name": "Pangalan",
+      "email": "Email ng kontak",
+      "emailRequired": "Kailangan ang email address",
+      "emailInvalid": "Hindi wastong email address",
+      "principal": "Wallet principal",
+      "invalidPrincipal": "Hindi wastong address ng tatanggap.",
+      "description": "Paglalarawan",
+      "descriptionPlaceholder": "Sabihin sa amin kung ano ang nangyayari…",
+      "descriptionRequired": "Pakilarawan ang iyong isyu"
+    },
+    "submitError": "May nangyaring mali. Pakisubukan muli.",
+    "submitting": "Isinusumite…"
+  },
+  "explorer": {
+    "title": "Explorer",
+    "searchPlaceholder": "Maghanap ayon sa pamagat, issuer, principal o token ID",
+    "openFilters": "Buksan ang mga filter",
+    "checkOnBlockchain": "Tingnan sa blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Mga Itinatampok na Sertipiko",
+      "art": "Mga Sertipiko ng Sining",
+      "gold": "Mga Sertipiko ng Ginto"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopyahin sa clipboard",
+    "toggleRelativeTime": "I-toggle ang relatibong oras. Kasalukuyang display:",
+    "collapseRow": "I-collapse ang row",
+    "expandRow": "I-expand ang row",
+    "searchPlaceholder": "Maghanap ng mga item...",
+    "sortAscending": "Pagsunud-sunurin nang pataas",
+    "sortDescending": "Pagsunud-sunurin nang pababa",
+    "linesPerPage": "Mga linya bawat pahina",
+    "page": "Pahina",
+    "pageOf": "ng",
+    "previousPage": "Nakaraang pahina",
+    "nextPage": "Susunod na pahina"
+  },
+  "auth": {
+    "connect": "Kumonekta",
+    "disconnect": "Idiskonekta",
+    "connectWallet": {
+      "title": "Ikonekta ang iyong wallet",
+      "subtitle": "Piliin kung paano mo gustong mag-sign in"
+    },
+    "install": "I-install",
+    "newToIc": "Bago sa Internet Computer?",
+    "learnMore": "Matuto pa",
+    "connecting": {
+      "title": "Kumokonekta...",
+      "subtitle": "Aprubahan ang kahilingan sa iyong wallet"
+    },
+    "sessionExpired": {
+      "title": "Nag-expire ang session",
+      "description": "Hindi na wasto ang session ng iyong wallet. Kumonekta muli para magpatuloy."
+    },
+    "reconnect": "Kumonekta muli",
+    "error": {
+      "connectionCancelled": "Kinansela ang koneksyon. Pakisubukan muli.",
+      "connectionFailed": "Nabigo ang koneksyon ng wallet. Pakisubukan muli."
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "nililipat namin ang ledger, kailangan mong i-swap ang iyong OGY sa bago"
+  },
+  "calculator": {
+    "header": {
+      "title": "Tagakalkula ng gastos",
+      "description": "Gamitin ang tagakalkula ng ORIGYN upang matantya ang gastos ng inyong natatanging sertipiko kasama ang lahat ng inyong data on-chain"
+    },
+    "plan": {
+      "title": "Planuhin ang inyong mint",
+      "description": "Sabihin sa amin kung ilang aytem at ano ang inyong ia-upload.",
+      "itemsLabel": "Ilang aytem?",
+      "uploadingLabel": "Ano ang inyong ia-upload?",
+      "knowExactSize": "Alam ba ninyo ang eksaktong laki?",
+      "totalUploadSize": "Kabuuang laki ng upload",
+      "usePreset": "Gumamit ng preset sa halip",
+      "combinedSize": "Pinagsamang laki ng bawat file sa lahat ng aytem.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB bawat isa"
+        },
+        "iphone": {
+          "label": "Larawan",
+          "hint": "3 MB bawat isa"
+        },
+        "dslr": {
+          "label": "Larawang studio",
+          "hint": "20 MB bawat isa"
+        },
+        "video": {
+          "label": "Maikling video",
+          "hint": "1 GB bawat isa"
+        },
+        "video1hr": {
+          "label": "Mahabang video",
+          "hint": "60 GB bawat isa"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Kasalukuyang tantya",
+      "titleRefreshing": "Ina-update ang tantya",
+      "description": "Awtomatikong nag-a-update habang binabago ninyo ang inyong setup.",
+      "ogyEquivalent": "Katumbas sa OGY",
+      "ogySpotRate": "Kasalukuyang presyo ng OGY",
+      "itemSingular": "Aytem",
+      "itemPlural": "Mga Aytem",
+      "upload": "Upload"
+    },
+    "breakdown": {
+      "title": "Paghahati-hati ng gastos",
+      "baseFee": "Pangunahing bayad sa mint",
+      "storageFee": "Bayad sa imbakan",
+      "items": "Mga Aytem",
+      "uploadSize": "Laki ng upload"
+    },
+    "bytesUnit": "bytes"
+  }
+}

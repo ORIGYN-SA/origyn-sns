@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
+
 const HeroBackground = () => (
   <div
     aria-hidden
@@ -21,6 +24,8 @@ const HeroBackground = () => (
 );
 
 const NotFound = () => {
+  const t = useT();
+  const lp = useLocalePath();
   return (
     <section className="relative isolate overflow-hidden">
       <HeroBackground />
@@ -29,12 +34,17 @@ const NotFound = () => {
           404
         </h1>
         <h2 className="font-extrabold text-[28px] leading-[32px] sm:text-[40px] sm:leading-[44px] tracking-[-0.03em] text-content">
-          Page not found
+          {t("notFound.title")}
         </h2>
         <p className="font-light text-[16px] sm:text-[18px] leading-relaxed text-muted">
-          The page you&rsquo;re looking for doesn&rsquo;t exist or may have
-          moved.
+          {t("notFound.description")}
         </p>
+        <Link
+          to={lp("/")}
+          className="mt-2 inline-flex items-center rounded-full bg-content text-background font-semibold px-6 py-3 text-[14px] leading-none hover:opacity-90 transition-opacity"
+        >
+          {t("notFound.backHome")}
+        </Link>
       </div>
     </section>
   );

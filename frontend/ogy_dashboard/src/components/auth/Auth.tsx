@@ -3,14 +3,16 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button, Dialog, LoaderSpin } from "@components/ui";
 import { useWallet } from "@components/auth/useWallet";
 import { isPlugInstalled, PLUG_INSTALL_URL } from "@components/auth/plug";
+import { useT } from "@i18n/LocaleContext";
 
 const Auth = ({
-  label = "Connect",
+  label,
   className = "!px-[25px] !py-0 text-[14px] leading-[48px]",
 }: {
   label?: string;
   className?: string;
 }) => {
+  const t = useT();
   const {
     isConnected,
     isConnecting,
@@ -31,17 +33,18 @@ const Auth = ({
           disabled={isConnecting}
           aria-busy={isConnecting}
         >
-          {label}
+          {label ?? t("auth.connect")}
         </Button>
       )}
       {isConnected && (
-        <Button onClick={handleDisconnectWallet}>Disconnect</Button>
+        <Button onClick={handleDisconnectWallet}>{t("auth.disconnect")}</Button>
       )}
     </>
   );
 };
 
 export const AuthDialogs = () => {
+  const t = useT();
   const {
     state,
     handleSelectWallet,
@@ -81,10 +84,10 @@ export const AuthDialogs = () => {
             <img src="/ogy_logo.svg" alt="" className="h-9 w-auto" />
             <div className="flex flex-col items-center gap-1.5">
               <div className="text-[22px] font-semibold leading-none text-content">
-                Connect your wallet
+                {t("auth.connectWallet.title")}
               </div>
               <div className="text-[13px] leading-none text-muted">
-                Choose how you'd like to sign in
+                {t("auth.connectWallet.subtitle")}
               </div>
             </div>
           </div>
@@ -106,15 +109,15 @@ export const AuthDialogs = () => {
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-surface-1 border border-border-strong shrink-0 overflow-hidden">
                     <img src={icon} alt="" className="w-6 h-6 object-contain" />
                   </div>
-                  <span className="flex-1 text-left text-[14px] font-semibold leading-none text-content">
+                  <span className="flex-1 text-start text-[14px] font-semibold leading-none text-content">
                     {name}
                   </span>
                   {plugMissing ? (
                     <span className="text-[12px] font-medium text-muted">
-                      Install
+                      {t("auth.install")}
                     </span>
                   ) : (
-                    <ChevronRightIcon className="h-4 w-4 text-muted shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:text-content" />
+                    <ChevronRightIcon className="h-4 w-4 text-muted shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:text-content rtl:-scale-x-100" />
                   )}
                 </>
               );
@@ -147,14 +150,14 @@ export const AuthDialogs = () => {
             })}
           </div>
           <div className="text-center text-[12px] leading-none text-muted">
-            New to Internet Computer?{" "}
+            {t("auth.newToIc")}{" "}
             <a
               href="https://internetcomputer.org/internet-identity"
               target="_blank"
               rel="noreferrer"
               className="text-content font-medium hover:underline"
             >
-              Learn more
+              {t("auth.learnMore")}
             </a>
           </div>
         </div>
@@ -169,10 +172,10 @@ export const AuthDialogs = () => {
           <LoaderSpin />
           <div className="flex flex-col items-center gap-1.5">
             <div className="text-[18px] font-semibold leading-none text-content">
-              Connecting...
+              {t("auth.connecting.title")}
             </div>
             <div className="text-[13px] leading-none text-muted">
-              Approve the request in your wallet
+              {t("auth.connecting.subtitle")}
             </div>
           </div>
         </div>
@@ -188,15 +191,15 @@ export const AuthDialogs = () => {
             <img src="/ogy_logo.svg" alt="" className="h-9 w-auto" />
             <div className="flex flex-col items-center gap-1.5 text-center">
               <div className="text-[22px] font-semibold leading-none text-content">
-                Session expired
+                {t("auth.sessionExpired.title")}
               </div>
               <div className="text-[13px] leading-snug text-muted">
-                Your wallet session is no longer valid. Reconnect to continue.
+                {t("auth.sessionExpired.description")}
               </div>
             </div>
           </div>
           <Button className="w-full" onClick={handleReconnect}>
-            Reconnect
+            {t("auth.reconnect")}
           </Button>
         </div>
       </Dialog>

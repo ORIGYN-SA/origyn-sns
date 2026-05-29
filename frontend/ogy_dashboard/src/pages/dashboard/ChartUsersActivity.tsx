@@ -5,14 +5,15 @@ import useGetActivityStats, {
 } from "@hooks/super_stats_v3/useGetActivityStats";
 import useGetActiveUsersCount from "@hooks/token_metrics/useGetActiveUsersCount";
 import { roundAndFormatLocale } from "@helpers/numbers";
-
-const SELECT_PERIOD_OPTIONS: { value: Period; label: string }[] = [
-  { value: "monthly", label: "Monthly" },
-  { value: "yearly", label: "Yearly" },
-  { value: "all", label: "All" },
-];
+import { useT } from "@i18n/LocaleContext";
 
 const ChartUsersActivity = ({ className }: { className?: string }) => {
+  const t = useT();
+  const selectPeriodOptions: { value: Period; label: string }[] = [
+    { value: "monthly", label: t("charts.period.monthly") },
+    { value: "yearly", label: t("charts.period.yearly") },
+    { value: "all", label: t("charts.period.all") },
+  ];
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("monthly");
 
   const { data, isLoading, isError } = useGetActivityStats({
@@ -30,21 +31,21 @@ const ChartUsersActivity = ({ className }: { className?: string }) => {
   return (
     <ChartStatsCard
       className={className}
-      title="Users Overview"
-      periodOptions={SELECT_PERIOD_OPTIONS}
+      title={t("charts.usersActivity.title")}
+      periodOptions={selectPeriodOptions}
       period={selectedPeriod}
       onPeriodChange={(v) => setSelectedPeriod(v as Period)}
       stats={[
         {
           id: "unique-token-holders",
-          label: "OGY Protocol Users",
-          tooltipContent: <p>Unique token holders of OGY tokens</p>,
+          label: t("charts.usersActivity.protocolUsers"),
+          tooltipContent: <p>{t("charts.usersActivity.protocolUsersTooltip")}</p>,
           value: data?.[data.length - 1]?.total_unique_accounts.string,
         },
         {
           id: "active-users-account",
-          label: "OGY Active Wallets",
-          tooltipContent: <p>Active token holders of OGY tokens</p>,
+          label: t("charts.usersActivity.activeWallets"),
+          tooltipContent: <p>{t("charts.usersActivity.activeWalletsTooltip")}</p>,
           value:
             activeUsers &&
             roundAndFormatLocale({
@@ -58,9 +59,9 @@ const ChartUsersActivity = ({ className }: { className?: string }) => {
           value: total_unique_accounts.number,
         })),
         color: "#34d399",
-        label: "OGY Protocol Users",
+        label: t("charts.usersActivity.protocolUsers"),
       }}
-      legendLabel="OGY PROTOCOL USERS"
+      legendLabel={t("charts.usersActivity.protocolUsersLegend")}
       loading={loading}
       isError={isError || isErrorFetchActiveUsers}
     />

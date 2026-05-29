@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { TooltipInfo } from "@components/ui";
 import { PieStatsCard } from "@components/dashboard";
 import useFoundationReserve from "@hooks/metrics/useFoundationReserve";
+import { useT } from "@i18n/LocaleContext";
 
 type OrigynFoundationReserveProps = {
   className?: string;
@@ -12,39 +13,31 @@ const COLORS = ["#ff55c5", "#90306f"];
 const OrigynFoundationReserve = ({
   className,
 }: OrigynFoundationReserveProps) => {
+  const t = useT();
   const infos = useMemo(
     () => [
       {
         id: "tooltip-amount-locked",
-        name: "Locked",
+        name: t("dashboard.foundationReserve.lockedName"),
         value: (
           <div>
-            <p>ORIGYN foundation tokens locked in stakes or vestings.</p>
+            <p>{t("dashboard.foundationReserve.lockedIntro")}</p>
             <br />
-            <p>
-              1) Stakes- tokens that are generating the rewards thanks to
-              participation in the governance voting.
-            </p>
-            <p>Those tokens were locked voluntarily.</p>
+            <p>{t("dashboard.foundationReserve.lockedStakes")}</p>
+            <p>{t("dashboard.foundationReserve.lockedStakesNote")}</p>
             <br />
-            <p>
-              2) Vestings- Tokens that are not receiving any rewards and they
-              cant participate in voting.
-            </p>
-            <p>
-              Those tokens were locked by your contract with the ORIGYN
-              Foundation.
-            </p>
+            <p>{t("dashboard.foundationReserve.lockedVestings")}</p>
+            <p>{t("dashboard.foundationReserve.lockedVestingsNote")}</p>
           </div>
         ),
       },
       {
         id: "tooltip-amount-unlocked",
-        name: "Unlocked",
-        value: "Unlocked found owned by ORIGYN foundation.",
+        name: t("dashboard.foundationReserve.unlockedName"),
+        value: t("dashboard.foundationReserve.unlockedValue"),
       },
     ],
-    []
+    [t]
   );
 
   const { data: foundationAssets, isLoading, isError } = useFoundationReserve();
@@ -52,17 +45,16 @@ const OrigynFoundationReserve = ({
   return (
     <PieStatsCard
       className={className}
-      title="OGY Foundation Reserve"
+      title={t("dashboard.foundationReserve.title")}
       titleTooltip={
         <TooltipInfo id="tooltip-amount-foundation">
-          Total amount of OGY tokens owned by ORIGYN foundation across all
-          wallets.
+          {t("dashboard.foundationReserve.tooltip")}
         </TooltipInfo>
       }
       data={foundationAssets?.dataPieChart}
       colors={COLORS}
       infos={infos}
-      totalLabel="Total Foundation Supply"
+      totalLabel={t("dashboard.foundationReserve.totalLabel")}
       totalValue={foundationAssets?.string.totalSupply}
       loading={isLoading}
       isError={isError}

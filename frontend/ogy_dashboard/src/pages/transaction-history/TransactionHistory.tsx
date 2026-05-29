@@ -10,6 +10,7 @@ import {
   getTransactionColumns,
   buildSkeletonRows,
 } from "@pages/transactions/transactionColumns";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 const SearchDropdownSkeleton = () => (
   <div className="h-10 flex items-center gap-3 px-2" aria-busy="true">
@@ -19,7 +20,10 @@ const SearchDropdownSkeleton = () => (
 );
 
 export const TransactionHistory = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
+  const navTo = (path: string) => navigate(lp(path));
   const [searchParams] = useSearchParams();
 
   const [pageIndex, setPageIndex] = useState(0);
@@ -31,22 +35,22 @@ export const TransactionHistory = () => {
   const searchForItems = useMemo(
     () => [
       {
-        title: "PrincipalID",
+        title: t("transactions.history.searchTypes.principalId"),
         className:
           "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300",
       },
       {
-        title: "AccountID",
+        title: t("transactions.history.searchTypes.accountId"),
         className:
           "border border-sky/25 bg-sky/10 text-sky-700 dark:text-sky-300",
       },
       {
-        title: "BlockIndex",
+        title: t("transactions.history.searchTypes.blockIndex"),
         className:
           "border border-candyFloss/25 bg-candyFloss/10 text-pink-700 dark:text-pink-300",
       },
     ],
-    []
+    [t]
   );
 
   const search = useSearchExplorer({ searchterm });
@@ -63,14 +67,15 @@ export const TransactionHistory = () => {
 
   const columns = useMemo(
     () =>
-      getTransactionColumns(navigate, {
+      getTransactionColumns(navTo, t, {
         desc: sortDesc,
         onToggle: () => {
           setSortDesc((d) => !d);
           setPageIndex(0);
         },
       }),
-    [navigate, sortDesc]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [navigate, lp, t, sortDesc]
   );
   const pageCount = data?.list.pageCount ?? 0;
   const rows =
@@ -86,7 +91,7 @@ export const TransactionHistory = () => {
       blockIndex: `/transaction-history/transactions/${value}`,
       principalId: `/transaction-history/transactions/accounts/${value}`,
     };
-    navigate(pathnames[searchType]);
+    navTo(pathnames[searchType]);
   };
 
   const goToPage = (next: number) => setPageIndex(next);
@@ -109,14 +114,14 @@ export const TransactionHistory = () => {
     <SearchDropdownSkeleton />
   ) : !search.data ? (
     <div className="h-10 flex items-center justify-center text-sm text-muted">
-      No results found
+      {t("transactions.history.noResults")}
     </div>
   ) : (
     <button
       onClick={() =>
         handleClickSearchResult(search.data.type, search.data.value)
       }
-      className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-left hover:bg-surface-2 transition-colors"
+      className="w-full h-10 flex items-center gap-3 px-2 rounded-xl text-start hover:bg-surface-2 transition-colors"
     >
       <span
         className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full ${
@@ -125,12 +130,14 @@ export const TransactionHistory = () => {
             : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300"
         }`}
       >
-        {search.data.type === "blockIndex" ? "Block" : "Principal"}
+        {search.data.type === "blockIndex"
+          ? t("transactions.history.resultBlock")
+          : t("transactions.history.resultPrincipal")}
       </span>
-      <span className="truncate text-sm font-medium text-content">
+      <span dir="ltr" className="truncate text-sm font-medium text-content">
         {search.data.value}
       </span>
-      <ChevronRightIcon className="shrink-0 ml-auto text-muted" />
+      <ChevronRightIcon className="shrink-0 ms-auto text-muted" />
     </button>
   );
 
@@ -139,13 +146,15 @@ export const TransactionHistory = () => {
       <div className="flex flex-col items-center">
         <div className="max-w-4xl text-center">
           <h1 className="text-4xl sm:text-6xl font-bold">
-            Transaction History
+            {t("transactions.history.title")}
           </h1>
           <div className="flex items-center gap-2 mt-6 justify-center flex-wrap text-sm text-muted">
-            <span>Search for:</span>
+            <span>{t("transactions.history.searchFor")}</span>
             {searchForItems.map(({ title, className }, index) => (
               <div key={index} className="flex items-center gap-2">
-                {index === searchForItems.length - 1 && <span>or</span>}
+                {index === searchForItems.length - 1 && (
+                  <span>{t("transactions.history.or")}</span>
+                )}
                 <span
                   className={`${className} text-xs font-semibold px-4 py-1 rounded-full`}
                 >
@@ -159,7 +168,7 @@ export const TransactionHistory = () => {
 
       <Search
         id="search-explorer"
-        placeholder="Search for an item"
+        placeholder={t("transactions.history.searchPlaceholder")}
         className="max-w-2xl m-auto mt-8"
         dropdown={searchDropdown}
         onEnter={
@@ -171,7 +180,9 @@ export const TransactionHistory = () => {
 
       <div className="relative mt-16">
         <SkeletonOverlay loading={showSkeleton}>
-          {hasError && <CardErrorOverlay title="Transaction History" />}
+          {hasError && (
+            <CardErrorOverlay title={t("transactions.history.title")} />
+          )}
           <NewTable columns={columns} data={rows} footer={paginationFooter} />
         </SkeletonOverlay>
       </div>

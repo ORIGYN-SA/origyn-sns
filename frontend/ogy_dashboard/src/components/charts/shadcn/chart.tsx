@@ -56,6 +56,11 @@ export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
         <div
           ref={ref}
           data-chart={chartId}
+          // Data plots stay left-to-right even under RTL locales: numeric axes
+          // and time progression read LTR universally, and recharts' HTML bits
+          // (legend/tooltip) mis-position under an RTL ancestor. The page chrome
+          // still mirrors; only the chart area is pinned.
+          dir="ltr"
           className={clsx(
             "flex aspect-video justify-center text-xs",
             "[&_.recharts-cartesian-axis-tick_text]:fill-content/60",
@@ -135,7 +140,7 @@ export const ChartTooltipContent = ({
                 />
               )}
               <span>{cfg?.label ?? item.name}</span>
-              <span className="ml-auto font-mono font-medium tabular-nums">
+              <span className="ms-auto font-mono font-medium tabular-nums">
                 {formatter ? formatter(item.value) : item.value}
               </span>
             </div>

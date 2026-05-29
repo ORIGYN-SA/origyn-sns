@@ -3,6 +3,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Principal } from "@dfinity/principal";
 import { Button, Dialog, InputField, LoaderSpin } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import useFetchBalanceICPOwner from "@hooks/accounts/useFetchBalanceICPOwner";
 import { TRANSACTION_FEE_ICP, ICP_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
@@ -14,6 +15,7 @@ type TransferICPFormValues = {
 };
 
 const TransferICP = () => {
+  const t = useT();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => {
@@ -119,15 +121,18 @@ const TransferICP = () => {
         <>
           <div className="bg-surface border border-border rounded-xl">
             <div className="p-6">
-              Ledger canister: <span>{ICP_LEDGER_CANISTER_ID}</span>
+              {t("recovery.transfer.ledgerCanister")}{" "}
+              <span dir="ltr" className="inline-block">
+                {ICP_LEDGER_CANISTER_ID}
+              </span>
             </div>
             <div className="flex justify-between text-2xl p-6">
-              <div className="font-semibold">Balance</div>
-              <div className="flex items-center font-semibold">
+              <div className="font-semibold">{t("common.balance")}</div>
+              <div dir="ltr" className="flex items-center font-semibold">
                 <img
                   className="mx-2 h-4 w-4"
                   src="/icp_logo.svg"
-                  alt="ICP Logo"
+                  alt={t("recovery.transfer.icpLogoAlt")}
                 />
                 <span>{balanceICP.number.balance} ICP</span>
               </div>
@@ -138,37 +143,37 @@ const TransferICP = () => {
             onClick={handleShow}
             disabled={!balanceICP?.number.balance}
           >
-            Transfer ICP
+            {t("recovery.transfer.transferIcp")}
           </Button>
           <Dialog show={show} handleClose={handleClose}>
             <div className="pt-12">
               {isSuccessFetchBalanceICP && isIdleTransfer && (
                 <div>
                   <div className="text-center px-12">
-                    <div>Transfer ICP</div>
+                    <div>{t("recovery.transfer.transferIcp")}</div>
                     <div className="text-sm text-content/60 mb-8">
-                      You can only send ICP from your available balance.
+                      {t("recovery.transfer.availableBalanceNote")}
                     </div>
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="my-8 px-12">
-                      <label htmlFor="amount">Amount</label>
+                      <label htmlFor="amount">{t("common.amount")}</label>
                       <InputField
                         id="amount"
                         type="text"
                         register={register("amount", {
-                          required: "Amount is required.",
+                          required: t("recovery.transfer.amountRequired"),
                           validate: {
                             isAmountUnderBalance: (v) =>
                               isAmountUnderBalance(v) ||
-                              "Amount must not exceed your balance.",
+                              t("recovery.transfer.amountExceedsBalance"),
                             isPositive: (v) =>
                               Number(v) > 0 ||
-                              "Amount must be a positive number.",
+                              t("recovery.transfer.amountPositive"),
                             isAmountUpperBalance: (v) =>
                               Number(v) >=
                                 divideBy1e8(Number(TRANSACTION_FEE_ICP)) ||
-                              "Amount must be greater the or equal to transaction fees.",
+                              t("recovery.transfer.amountBelowFee"),
                           },
                         })}
                         errors={errors?.amount}
@@ -177,17 +182,19 @@ const TransferICP = () => {
 
                     <div className="mb-12 px-12">
                       <label htmlFor="recipientAddress">
-                        Recipient address
+                        {t("recovery.transfer.recipientAddress")}
                       </label>
                       <InputField
                         id="recipientAddress"
                         type="text"
                         register={register("recipientAddress", {
-                          required: "Recipient address is required.",
+                          required: t(
+                            "recovery.transfer.recipientAddressRequired"
+                          ),
                           validate: {
                             isValidRecipientAddress: (v) =>
                               isValidRecipientAddress(v) ||
-                              "Invalid recipient address.",
+                              t("recovery.transfer.invalidRecipientAddress"),
                           },
                         })}
                         errors={errors?.recipientAddress}
@@ -196,19 +203,19 @@ const TransferICP = () => {
 
                     <div className="border-t border-border px-12 py-4">
                       <div className="flex justify-between items-center font-bold pt-4">
-                        <div>Amount Received</div>
-                        <div className="flex items-center font-semibold">
+                        <div>{t("recovery.transfer.amountReceived")}</div>
+                        <div dir="ltr" className="flex items-center font-semibold">
                           <img
                             className="mx-2 h-4 w-4"
                             src="/icp_logo.svg"
-                            alt="ICP Logo"
+                            alt={t("recovery.transfer.icpLogoAlt")}
                           />
                           <Amount />
                         </div>
                       </div>
                       <div className="flex justify-between items-center text-content/60">
-                        <div>Transaction fee</div>
-                        <div>{transactionFee} ICP</div>
+                        <div>{t("recovery.transfer.transactionFee")}</div>
+                        <div dir="ltr">{transactionFee} ICP</div>
                       </div>
                     </div>
 
@@ -218,18 +225,18 @@ const TransferICP = () => {
                         className="w-full"
                         disabled={!isValid}
                       >
-                        Transfer ICP
+                        {t("recovery.transfer.transferIcp")}
                       </Button>
                     </div>
                   </form>
 
                   <div className="bg-surface-2 rounded-b-xl border-t border-border flex justify-center items-center py-6 text-content/60">
-                    <div>Current balance: </div>
-                    <div className="flex items-center font-semibold">
+                    <div>{t("recovery.transfer.currentBalance")} </div>
+                    <div dir="ltr" className="flex items-center font-semibold">
                       <img
                         className="mx-2 h-4 w-4"
                         src="/icp_logo.svg"
-                        alt="ICP Logo"
+                        alt={t("recovery.transfer.icpLogoAlt")}
                       />
                       <span>{balanceICP.number.balance} ICP</span>
                     </div>
@@ -240,30 +247,30 @@ const TransferICP = () => {
                 <div className="p-8 flex flex-col justify-center items-center">
                   <LoaderSpin />
                   <div className="mt-8 font-semibold text-xl">
-                    Transfer is being processed
+                    {t("recovery.transfer.processing")}
                   </div>
                   <div className="text-content/60">
-                    This can take a few seconds
+                    {t("recovery.transfer.processingNote")}
                   </div>
                 </div>
               )}
               {isSuccessFetchBalanceICP && isSuccessTransfer && (
                 <div className="p-8 flex flex-col justify-center items-center">
                   <div className="font-semibold text-xl text-jade mb-8">
-                    Transfer was successful!
+                    {t("recovery.transfer.success")}
                   </div>
                   <Button className="mt-8 w-full" onClick={handleClose}>
-                    Close
+                    {t("common.close")}
                   </Button>
                 </div>
               )}
               {isSuccessFetchBalanceICP && isErrorTransfer && (
                 <div className="p-8 flex flex-col justify-center items-center">
                   <div className="font-semibold text-xl text-red-500 mb-8">
-                    Transfer error!
+                    {t("recovery.transfer.error")}
                   </div>
                   <Button className="mt-8 w-full" onClick={handleClose}>
-                    Close
+                    {t("common.close")}
                   </Button>
                 </div>
               )}

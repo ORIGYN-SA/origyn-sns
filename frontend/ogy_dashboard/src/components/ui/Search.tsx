@@ -8,6 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { SearchIcon, CloseIcon } from "@components/ui/icons";
+import { useT } from "@i18n/LocaleContext";
 
 interface ISearch {
   className?: string;
@@ -21,12 +22,13 @@ interface ISearch {
 const Search = ({
   className,
   id = "search",
-  placeholder = "Search for an items...",
+  placeholder,
   dropdown,
   actions,
   onEnter,
   ...restProps
 }: ISearch) => {
+  const t = useT();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { register, reset } = useForm({
@@ -77,7 +79,8 @@ const Search = ({
     onEnter?.();
   };
 
-  const hasDropdown = dropdown && searchterm !== "";
+  const hasSearchTerm = searchterm !== "";
+  const hasDropdown = dropdown && hasSearchTerm;
 
   return (
     <div className={`relative ${className}`} {...restProps}>
@@ -93,26 +96,32 @@ const Search = ({
           <input
             id={id}
             type="text"
-            placeholder={placeholder}
+            placeholder={placeholder ?? t("ui.searchPlaceholder")}
             autoComplete="off"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            dir={hasSearchTerm ? "ltr" : undefined}
             {...(register(id),
             {
               onChange: (e) => handleOnChange(e),
               value: searchterm,
             })}
-            className="form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0"
+            className={`form-input bg-surface w-full outline-none focus:outline-none focus:border-none border-0 focus:ring-0 ${
+              hasSearchTerm ? "text-left" : "text-start"
+            }`}
           />
           <div className="flex items-center gap-1">
             {actions}
             {searchterm === "" ? (
-              <div className="mr-2 p-1">
+              <div className="me-2 p-1">
                 <SearchIcon />
               </div>
             ) : (
               <button
                 type="button"
                 onClick={handleResetSearch}
-                className="mr-2 p-1"
+                className="me-2 p-1"
               >
                 <CloseIcon />
               </button>

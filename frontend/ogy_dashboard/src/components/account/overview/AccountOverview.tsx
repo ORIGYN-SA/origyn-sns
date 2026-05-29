@@ -10,6 +10,7 @@ import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import AccountIdPill from "@components/account/AccountIdPill";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 interface AccountOverviewProps {
   show: boolean;
@@ -17,6 +18,8 @@ interface AccountOverviewProps {
 }
 
 const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const { principalId, accountId, handleDisconnectWallet } = useWallet();
 
@@ -30,7 +33,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
   const isUsdLoading = isBalanceLoading || isBalanceUsdLoading;
 
   const handleClickAccount = () => {
-    navigate("account");
+    navigate(lp("/account"));
     handleClose();
   };
 
@@ -69,7 +72,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     <button
                       type="button"
                       onClick={handleClose}
-                      aria-label="Close"
+                      aria-label={t("common.close")}
                       className="inline-flex h-[47px] w-[47px] items-center justify-center rounded-full border border-border-faint bg-surface-muted text-content transition-colors hover:bg-surface-2 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                     >
                       <CloseIcon width={18} height={18} />
@@ -77,7 +80,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                     <button
                       type="button"
                       onClick={handleDisconnectWallet}
-                      aria-label="Disconnect wallet"
+                      aria-label={t("account.overview.disconnectWallet")}
                       className="inline-flex h-[47px] w-[47px] items-center justify-center rounded-full border border-border-faint bg-surface-muted text-content transition-colors hover:bg-surface-2 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                     >
                       <svg
@@ -115,19 +118,19 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                   <div className="flex items-start justify-between gap-6">
                     <div className="min-w-0 pt-1">
                       <div className="text-[12px] font-bold uppercase tracking-[2px] text-muted">
-                        Account
+                        {t("account.overview.accountLabel")}
                       </div>
                       <h2 className="mt-4 text-[24px] sm:text-[32px] font-semibold leading-tight sm:leading-none text-content">
-                        Welcome back
+                        {t("account.overview.welcomeBack")}
                       </h2>
                       <p className="mt-4 max-w-[320px] text-[14px] leading-6 text-muted">
-                        Manage your OGY wallet, rewards, and staking activity.
+                        {t("account.overview.manageDescription")}
                       </p>
                     </div>
                   </div>
                   <div className="w-full text-center">
                     <div className="flex h-[61px] w-full items-center justify-center gap-2 rounded-t-[20px] border border-border-faint bg-surface-1 px-6 py-4 font-sans text-[22px] font-normal leading-none text-muted">
-                      Wallet Balance
+                      {t("account.overview.walletBalance")}
                     </div>
                     <div className="flex min-h-[337px] w-full flex-col items-center gap-4 rounded-b-[20px] border-x border-b border-border-faint bg-surface-1 px-5 py-8">
                       <div className="flex h-[88px] flex-col items-center justify-center">
@@ -164,7 +167,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                           className="h-12 w-full !py-0 text-[14px] leading-[48px]"
                           onClick={handleClickAccount}
                         >
-                          My account
+                          {t("account.overview.myAccount")}
                         </Button>
                         <a
                           href="https://app.icpswap.com/swap"
@@ -172,7 +175,7 @@ const AccountOverview = ({ show, handleClose }: AccountOverviewProps) => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-1.5 self-center py-1 text-[14px] font-normal text-muted"
                         >
-                          How to top up?
+                          {t("account.overview.howToTopUp")}
                           <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 opacity-60" />
                         </a>
                       </div>

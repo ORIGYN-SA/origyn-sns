@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Jazyk",
+    "switchTo": "Přepnout na {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Načítání...",
+    "error": "Něco se pokazilo",
+    "retry": "Zkusit znovu",
+    "cancel": "Zrušit",
+    "confirm": "Potvrdit",
+    "close": "Zavřít",
+    "back": "Zpět",
+    "next": "Další",
+    "previous": "Předchozí",
+    "save": "Uložit",
+    "submit": "Odeslat",
+    "copy": "Kopírovat",
+    "copied": "Zkopírováno",
+    "search": "Hledat",
+    "viewAll": "Zobrazit vše",
+    "showMore": "Zobrazit více",
+    "showLess": "Zobrazit méně",
+    "amount": "Částka",
+    "date": "Datum",
+    "type": "Typ",
+    "from": "Od",
+    "to": "Komu",
+    "index": "Index",
+    "status": "Stav",
+    "total": "Celkem",
+    "balance": "Zůstatek",
+    "yes": "Ano",
+    "no": "Ne",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Přehled",
+    "governance": "Správa",
+    "transactionHistory": "Historie transakcí",
+    "calculator": "Kalkulačka",
+    "openMainMenu": "Otevřít hlavní nabídku",
+    "closeMenu": "Zavřít nabídku",
+    "openAccountOverview": "Otevřít přehled účtu",
+    "viewAccountOverview": "Zobrazit přehled účtu",
+    "connectPrompt": "Připojte peněženku pro správu tokenů, hlasování o návrzích a zobrazení historie transakcí.",
+    "connectWallet": "Připojit peněženku",
+    "disconnect": "Odpojit"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "description": "Omlouváme se, hledanou stránku se nepodařilo najít.",
+    "backHome": "Zpět na úvod"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Přehled",
+      "home": "Domů",
+      "circulation": "Oběh",
+      "governance": "Správa",
+      "revenue": "Výnosy",
+      "rewards": "Odměny",
+      "distribution": "Distribuce",
+      "governanceDashboard": "OGY Přehled správy",
+      "transactionExplorer": "OGY Prohlížeč transakcí"
+    },
+    "learn": {
+      "heading": "Dozvědět se více o OGY Tokenomics a ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT Standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Web",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Podpora",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Kontakt"
+    },
+    "support": {
+      "contactSupport": "Kontaktovat podporu",
+      "recoverTokens": "Obnovit své tokeny"
+    },
+    "disclaimer": "*ORIGYN Foundation nenese odpovědnost za jakoukoli ztrátu, krádež nebo zneužití OGY Tokens, k nimž dojde v souvislosti s procesem výměny. Dále ORIGYN Foundation nenese odpovědnost za jakékoli neprovedení výměny, pokud zúčastněná strana striktně nedodrží podmínky stanovené ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Prozkoumat přehled",
+      "subtitle": "Komunikujte bez nutnosti důvěry s web3 dApps, DAOs, NFTs, DeFi a mnohem více."
+    },
+    "cta": {
+      "loginToSwap": "Přihlaste se pro výměnu tokenů",
+      "myAccount": "Můj účet"
+    },
+    "governanceStaking": {
+      "title": "Přehled stakingu ve správě"
+    },
+    "cardError": {
+      "couldNotLoad": "Nelze načíst",
+      "descriptionLine1": "Při načítání této metriky došlo k chybě.",
+      "descriptionLine2": "Zkuste to prosím za okamžik znovu."
+    },
+    "emptyState": {
+      "noDataFor": "Žádná data pro",
+      "description": "Momentálně není co zobrazit."
+    },
+    "circulationState": {
+      "title": "Stav oběhu OGY",
+      "tooltip": "Oběžné množství zahrnuje všechny tokeny kromě odemčených tokenů vlastněných ORIGYN Foundation.",
+      "nnsProposal": "NNS Návrh",
+      "totalLabel": "Celkový oběh OGY",
+      "notOwnedName": "OGY mimo držení Foundation",
+      "notOwnedValue": "Množství oběžných tokenů, které nevlastní ORIGYN foundation.",
+      "ownedName": "OGY uzamčené v držení Foundation",
+      "ownedValue": "Množství uzamčených tokenů vlastněných ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation Rezerva",
+      "tooltip": "Celkové množství tokenů OGY vlastněných ORIGYN foundation napříč všemi peněženkami.",
+      "totalLabel": "Celkové množství Foundation",
+      "lockedName": "Uzamčeno",
+      "lockedIntro": "Tokeny ORIGYN foundation uzamčené ve stakech nebo vestingech.",
+      "lockedStakes": "1) Stakes- tokeny, které generují odměny díky účasti v hlasování o správě.",
+      "lockedStakesNote": "Tyto tokeny byly uzamčeny dobrovolně.",
+      "lockedVestings": "2) Vestings- tokeny, které nedostávají žádné odměny a nemohou se účastnit hlasování.",
+      "lockedVestingsNote": "Tyto tokeny byly uzamčeny vaší smlouvou s ORIGYN Foundation.",
+      "unlockedName": "Odemčeno",
+      "unlockedValue": "Odemčené prostředky vlastněné ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Výnosy sítě",
+      "tokenLogoAlt": "Logo tokenu",
+      "tooltipOgy": "Výnosy z užitku sítě generované prostřednictvím poplatků za využívání sítě ORIGYN (např. za vydávání nebo převod digitálních certifikátů, mintování NFTs atd.) a akumulované v OGY.",
+      "tooltipIcp": "Výnosy z užitku sítě generované prostřednictvím poplatků za využívání sítě ORIGYN (např. za vydávání nebo převod digitálních certifikátů, mintování NFTs atd.) a akumulované v ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "ORA Zůstatek",
+      "year": "Rok",
+      "rewardPool": "Fond odměn",
+      "moreDetails": "Více podrobností",
+      "tooltipStake": "Držitelé tokenů mohou stakovat své OGY a získávat odměny účastí ve správě.",
+      "tooltipSeed": "Odměny budou pocházet z ORIGYN Reward Account, který ORIGYN naplní jednou miliardou OGY.",
+      "tooltipPool": "Fond odměn obsahuje v prvním roce 250 milionů OGY a každé dva roky se sníží na polovinu, aby motivoval a odměňoval rané a dlouhodobé přispěvatele ekosystému.",
+      "description": "ORIGYN přispěje jednou miliardou OGY do ORIGYN Reward Account (ORA) ve prospěch stakujících a hlasujících držitelů. Fond odměn obsahuje v prvním roce 250 milionů OGY a každé dva roky se sníží na polovinu, aby motivoval a odměňoval rané a dlouhodobé přispěvatele ekosystému."
+    },
+    "tokenDistribution": {
+      "title": "Distribuce tokenů"
+    },
+    "transactionHistory": {
+      "title": "Historie transakcí",
+      "showAll": "Zobrazit vše"
+    },
+    "topTransfers": {
+      "value": "Hodnota",
+      "time": "Čas",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Žádná dostupná data."
+    },
+    "totalSupply": {
+      "title": "Celková zásoba OGY",
+      "tooltipTitle": "Celkové množství dostupných tokenů OGY.",
+      "tooltipLine1": "To zahrnuje oběžné množství a množství pod kontrolou ORIGYN Foundation.",
+      "tooltipLine2": "Od 18. září ORIGYN přešel na plně deflační model, což znamená žádné další nově mintované tokeny.",
+      "chartLabel": "Celková zásoba"
+    },
+    "totalBurned": {
+      "title": "Celkem spálených OGY",
+      "tooltipTitle": "Celkové množství spálených tokenů OGY.",
+      "tooltipLine1": "Tyto tokeny byly zcela spáleny a již nejsou dostupné.",
+      "tooltipLine2": "Tokeny mohou být spáleny z různých důvodů, například poplatky za mintování certifikátů, poplatky za užitek sítě nebo poplatky za síťové transakce.",
+      "chartLabel": "Celkem spáleno"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Denně",
+      "weekly": "Týdně",
+      "monthly": "Měsíčně",
+      "yearly": "Ročně",
+      "all": "Vše"
+    },
+    "stakingOverview": {
+      "title": "Přehled stakingu",
+      "totalTokensInStakes": "Celkem tokenů ve stakech",
+      "tooltip": "Tokeny, které jsou uzamčené ve stakech.",
+      "stakedTokens": "Stakované tokeny",
+      "stakedTokensLegend": "STAKED TOKENS"
+    },
+    "usersActivity": {
+      "title": "Přehled uživatelů",
+      "protocolUsers": "Uživatelé protokolu OGY",
+      "protocolUsersTooltip": "Jedineční držitelé tokenů OGY",
+      "protocolUsersLegend": "OGY PROTOCOL USERS",
+      "activeWallets": "Aktivní peněženky OGY",
+      "activeWalletsTooltip": "Aktivní držitelé tokenů OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Přehled správy",
+      "welcome": "Vítejte ve správě ORIGYN!",
+      "description": "Držitelé tokenů OGY mohou přímo ovlivňovat ORIGYN Network stakováním svých OGY a hlasováním o návrzích. Účastí na rozhodovacím procesu tito stakující držitelé tokenů získávají odměny.",
+      "learnMore": "Dozvědět se více"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stakovat a hlasovat",
+        "description": "Ovlivňujte ORIGYN Network stakováním OGY a hlasováním o návrzích."
+      },
+      "earnRewards": {
+        "title": "Získávat odměny",
+        "description": "Účastněte se rozhodovacího procesu a získávejte odměny."
+      },
+      "governCollectively": {
+        "title": "Spravovat společně",
+        "description": "Zapojte se a ovlivňujte síť jako spolupracující ekosystém."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokeny ve správě",
+      "paragraph1": "Držitelé tokenů OGY mohou přímo ovlivňovat ORIGYN Network stakováním svých OGY a hlasováním o návrzích.",
+      "paragraph2": "Účastí na rozhodovacím procesu tito stakující držitelé tokenů získávají odměny a spravují společně a demokraticky.",
+      "learnMoreOgy": "Dozvědět se více o OGY"
+    },
+    "sections": {
+      "proposals": "Návrhy",
+      "neurons": "Neurony"
+    },
+    "votingParticipation": {
+      "title": "Účast v hlasování",
+      "chartLabel": "Účast %",
+      "legendLabel": "PARTICIPATION %",
+      "period": {
+        "weekly": "Týdně",
+        "monthly": "Měsíčně",
+        "yearly": "Ročně"
+      },
+      "lastParticipation": {
+        "label": "Poslední účast v hlasování",
+        "tooltip": "Procento účasti v posledním hlasování."
+      },
+      "averageParticipation": {
+        "label": "Průměrná účast v hlasování",
+        "tooltip": "Průměrné procento účasti v hlasování v průběhu času."
+      },
+      "averagePower": {
+        "label": "Průměrná hlasovací síla",
+        "tooltip": "Průměrná hlasovací síla napříč všemi účastníky."
+      }
+    },
+    "estimateRewards": {
+      "title": "Odhadněte své odměny",
+      "lockDuration": "Doba uzamčení",
+      "participants": "účastníků",
+      "lockedForAtLeast": "aktuálně uzamčeno na nejméně",
+      "lockedFor": "aktuálně uzamčeno na",
+      "year": "rok",
+      "years": "let"
+    },
+    "kpi": {
+      "metric": "Metrika",
+      "rewardBaseCurrentYear": "Základ odměn pro aktuální rok",
+      "dailyVotingRewards": "Denní odměny za hlasování",
+      "totalVotingPower": "Celková hlasovací síla",
+      "overallVotingParticipation": "Celková účast na hlasování"
+    },
+    "total": {
+      "titleTooltip": "Všechny tokeny, které jsou v kanisteru správy. Tyto tokeny mohou být ve stavu vestingu, stakingu, nestakované nebo nenárokované.",
+      "totalLabel": "Celkem tokenů ve správě",
+      "locked": {
+        "name": "Uzamčeno",
+        "tooltip": "Tokeny, které jsou uzamčené ve správě."
+      },
+      "unlocked": {
+        "name": "Odemčeno",
+        "tooltip": "Tokeny, které jsou odemčené ve správě a mohou být kdykoli vybrány a obchodovány."
+      },
+      "accumulatedRewards": {
+        "name": "Nahromaděné odměny",
+        "tooltip": "Odměny, které jsou připsány uživatelům, ale dosud nebyly nárokovány."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Návrhy",
+      "viewProposal": "Zobrazit návrh",
+      "columns": {
+        "id": "ID",
+        "title": "Název",
+        "proposed": "Navrženo",
+        "timeRemaining": "Zbývající čas",
+        "topic": "Téma",
+        "status": "Stav",
+        "view": "Zobrazit"
+      }
+    },
+    "details": {
+      "category": "Správa",
+      "proposalNumber": "Návrh #",
+      "proposal": "Návrh",
+      "titleLoading": "Načítání názvu návrhu…",
+      "payloadLoading": "Načítání podrobností návrhu…",
+      "posted": "Zveřejněno",
+      "topic": "Téma",
+      "moreInfo": "Více informací",
+      "totalVotes": "Celkem hlasů",
+      "adopt": "ADOPT",
+      "reject": "REJECT",
+      "vote": "Hlasovat"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neurony",
+      "viewNeuron": "Zobrazit neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Stav",
+        "stakedOgy": "Stakované OGY",
+        "dissolveDelay": "Prodleva rozpouštění",
+        "age": "Stáří",
+        "votingPower": "Hlasovací síla",
+        "view": "Zobrazit"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Vytvořeno",
+      "stakedOgy": "Stakované OGY",
+      "votingPower": "Hlasovací síla",
+      "dissolveDelay": "Prodleva rozpouštění",
+      "age": "Stáří",
+      "lifecycle": "Životní cyklus neuronu",
+      "dateCreated": "Datum vytvoření",
+      "autoStakeMaturity": "Automatický staking zralosti",
+      "rewardsAndBonuses": "Odměny a bonusy",
+      "stakedMaturity": "Stakovaná zralost",
+      "totalMaturity": "Celková zralost",
+      "ageBonus": "Bonus za stáří",
+      "totalBonus": "Celkový bonus",
+      "dissolveDelayBonus": "Bonus za prodlevu rozpouštění"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Historie transakcí",
+      "searchFor": "Hledat:",
+      "or": "nebo",
+      "searchPlaceholder": "Hledat položku",
+      "noResults": "Nebyly nalezeny žádné výsledky",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Podrobnosti transakce",
+      "hash": "Hash",
+      "fetchError": "Chyba při načítání jedné transakce!",
+      "mintingAccount": "Mintovací účet",
+      "fee": "Poplatek",
+      "memo": "Poznámka",
+      "none": "Žádný"
+    },
+    "accountDetails": {
+      "title": "OGY účet",
+      "id": "ID",
+      "owner": "Vlastník",
+      "subaccount": "Podúčet",
+      "defaultSubaccount": "Žádný (výchozí podúčet)",
+      "historicalMaxBalance": "Historický maximální zůstatek",
+      "genesisBalance": "Počáteční zůstatek",
+      "period": {
+        "monthly": "Měsíčně",
+        "quarterly": "Čtvrtletně",
+        "yearly": "Ročně",
+        "lifetime": "Za celou dobu"
+      },
+      "empty": {
+        "title": "Zatím žádné transakce",
+        "description": "Tento účet nemá žádnou historii transakcí. Jakmile odešle nebo přijme OGY, aktivita se zobrazí zde."
+      },
+      "balanceHistory": {
+        "title": "Historie zůstatku",
+        "currentBalance": "Aktuální zůstatek",
+        "currentBalanceInfo": "Aktuální zůstatek účtu.",
+        "legend": "OGY Zůstatek"
+      },
+      "overview": {
+        "title": "Přehled transakcí",
+        "totalLabel": "Celková částka",
+        "totalSent": "Celkem odesláno",
+        "totalSentInfo": "Celková částka odeslaná principalem.",
+        "totalReceived": "Celkem přijato",
+        "totalReceivedInfo": "Celková částka přijatá principalem."
+      }
+    },
+    "flow": {
+      "title": "Tok transakcí",
+      "searchPlaceholder": "Hledat transakce…",
+      "clearSearch": "Vymazat hledání",
+      "loadError": "Nepodařilo se načíst data transakcí. Zkuste to prosím znovu.",
+      "noMatch": "Tomuto hledání neodpovídají žádné transakce.",
+      "transactions": "transakcí",
+      "out": "Odchozí",
+      "in": "Příchozí",
+      "total": "Celkem",
+      "legend": {
+        "outTransaction": "Odchozí transakce",
+        "inTransaction": "Příchozí transakce",
+        "includesInitial": "Zahrnuje počáteční transakci",
+        "rootAccount": "Kořenový účet",
+        "account": "Účet",
+        "fromRoot": "S transakcemi z kořene",
+        "toRoot": "S transakcemi do kořene",
+        "madeInitial": "Provedl počáteční transakci"
+      }
+    },
+    "kind": {
+      "mint": "Vytvoření",
+      "transfer": "Převod",
+      "burn": "Spálení",
+      "approve": "Schválení"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Vítejte zpět",
+      "value": "Hodnota:",
+      "disconnectWallet": "Odpojit peněženku",
+      "accountLabel": "Účet",
+      "manageDescription": "Spravujte svou peněženku OGY, odměny a aktivitu stakingu.",
+      "walletBalance": "Zůstatek peněženky",
+      "myAccount": "Můj účet",
+      "howToTopUp": "Jak dobít?"
+    },
+    "principal": {
+      "accountIdLabel": "ID účtu:",
+      "principalIdLabel": "ID principalu:"
+    },
+    "available": {
+      "title": "Dostupné OGY",
+      "transactionHistory": "Historie transakcí",
+      "transfer": "Převod",
+      "transferOgy": "Převést OGY",
+      "transferDescription": "OGY můžete odeslat pouze ze svého dostupného zůstatku.",
+      "max": "Max",
+      "recipientAddress": "Adresa příjemce",
+      "amountReceived": "Přijatá částka",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Transakční poplatek (účtován zdroji)",
+      "currentBalance": "Aktuální zůstatek:",
+      "transferProcessing": "Převod se zpracovává",
+      "transferProcessingHint": "Může to trvat několik sekund",
+      "transferSuccess": "Převod byl úspěšný !",
+      "transferError": "Chyba převodu !",
+      "errors": {
+        "amountRequired": "Částka je povinná.",
+        "amountExceedsBalance": "Částka nesmí překročit váš zůstatek.",
+        "amountBelowFee": "Částka nesmí být nižší než transakční poplatek.",
+        "amountNotPositive": "Částka musí být kladné číslo.",
+        "recipientRequired": "Adresa příjemce je povinná.",
+        "recipientInvalid": "Neplatná adresa příjemce."
+      }
+    },
+    "staked": {
+      "title": "Stakované OGY",
+      "stake": "Stakovat",
+      "stakeOgy": "Stakovat OGY",
+      "stakeDescription": "Pro stakování OGY je třeba přejít na naši platformu NNS.",
+      "warningNotConnected": "Zdá se, že nejste připojeni přes",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Potřebujete",
+      "warningToConnect": "pro připojení k platformě NNS.",
+      "goToNns": "Přejít na NNS"
+    },
+    "rewards": {
+      "title": "Stakované odměny",
+      "claimAll": "Nárokovat vše",
+      "claimDisabledReason": "Nárokování odměn je podporováno pouze pro výchozí účet principalu.",
+      "aboutToClaim": "Chystáte se nárokovat",
+      "sentToPrincipal": "Odměny budou odeslány na váš principal",
+      "pending": "Nárokování všech odměn...",
+      "successTitle": "Nárokování všech odměn úspěšné!",
+      "errorTitle": "Chyba nárokování všech odměn!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Přepínáme ledger a správu",
+        "description": "Správa a ledger ORIGYN byly upgradovány na SNS. Abyste mohli pokračovat v účasti ve správě ORIGYN a využívat OGY, musíte migrovat své tokeny OGY."
+      },
+      "howToSwap": "Jak vyměnit tokeny",
+      "disclosureToggle": "Máte stále staré tokeny OGY? Vyměňte je nyní!",
+      "accountId": "ID účtu:",
+      "steps": {
+        "withdraw": {
+          "title": "Krok 1: Výběr ze staré správy",
+          "subtitle": "Pokud jste se dříve účastnili správy OGY, musíte tyto tokeny vybrat, než je budete moci vyměnit."
+        },
+        "deposit": {
+          "title": "Krok 2: Vklad na váš účet",
+          "subtitle": "Pokud máte jakékoli tokeny mimo OGY přehled, vložte je na své account-id, než je začnete vyměňovat."
+        },
+        "swap": {
+          "title": "Krok 3: Výměna tokenů",
+          "subtitle": "Vyměňte starší token OGY na nový ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Zůstatek starších OGY"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Přejít na starší OGY přehled"
+      },
+      "swap": {
+        "disabledOisy": "Výměna starších OGY není dostupná s OISY. Připojte se přes Internet Identity nebo Plug pro výměnu svých starších OGY.",
+        "disabledSubAccount": "Výměna starších OGY je podporována pouze z výchozího účtu principalu.",
+        "swapYourTokens": "Vyměňte své tokeny",
+        "automaticDisabled": "Automatická výměna byla zakázána. Budete potřebovat schválení vaší žádosti o výměnu, min. částka je 50 000 OGY.",
+        "form": {
+          "title": "Vyměňte své OGY na nový ledger",
+          "description": "Vložte jakékoli tokeny OGY, které chcete vyměnit, na své account id",
+          "tokensAvailable": "Tokeny dostupné k výměně",
+          "youWillReceivePrefix": "Obdržíte",
+          "youWillReceiveSuffix": "tokenů OGY na novém ledgeru.",
+          "swapPrefix": "Vyměnit",
+          "swapSuffix": "tokenů OGY"
+        },
+        "pending": {
+          "takesTime": "Proces výměny může chvíli trvat.",
+          "doNotRefresh": "Neobnovujte stránku !",
+          "swapping": "Výměna tokenů..."
+        },
+        "success": {
+          "title": "Výměna byla úspěšná!",
+          "walletBalance": "Zůstatek peněženky na novém ledgeru",
+          "myAccount": "Můj účet"
+        },
+        "error": {
+          "title": "Chyba výměny tokenů!",
+          "retry": "Zkusit znovu"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Moje OGY Neurony",
+        "idHeader": "ID",
+        "stakedAmount": "Stakovaná částka",
+        "claimAmount": "Částka k nárokování",
+        "emptyTitle": "Zatím žádné neurony",
+        "emptyDescription": "Přidejte OGY neuron, abyste zde mohli začít sledovat stake, hlasovací sílu a odměny.",
+        "addFirstNeuron": "Přidat svůj první neuron"
+      },
+      "add": {
+        "button": "Přidat neuron",
+        "title": "Přidat neuron",
+        "description": "Přidejte tento principal jako hotkey ke každému OGY neuronu, který zde chcete spravovat.",
+        "needHotkey": "Potřebujete přidat hotkey?",
+        "openNns": "Otevřít aplikaci NNS"
+      },
+      "claim": {
+        "button": "Nárokovat",
+        "disabledReason": "Nárokování odměn je podporováno pouze pro výchozí účet principalu.",
+        "aboutToClaim": "Chystáte se nárokovat",
+        "sentToPrincipal": "Odměny budou odeslány na váš principal",
+        "pending": "Nárokování odměny...",
+        "successTitle": "Nárokování odměny úspěšné!",
+        "errorTitle": "Chyba nárokování odměny!",
+        "retry": "Zkusit znovu"
+      },
+      "remove": {
+        "title": "Odebrat neuron",
+        "description": "Abyste odebrali tento neuron, musíte odebrat svůj principal ze seznamu hotkeys vašeho neuronu."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adresa",
+      "governanceBalance": "Zůstatek ve správě",
+      "stakedTokens": "Stakované tokeny",
+      "ledgerBalance": "Zůstatek na ledgeru",
+      "weightInTotalSupply": "Podíl na celkové zásobě"
+    }
+  },
+  "recovery": {
+    "title": "Obnovit své tokeny",
+    "description": "OGY přehled podporuje pouze token OGY. Pokud jste sem omylem odeslali jiné tokeny, můžete je obnovit podle níže uvedených kroků.",
+    "chooseToken": "Vyberte token",
+    "loginRequired": "Abyste mohli vyzvednout své tokeny, musíte být přihlášeni.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger kanister:",
+      "transferIcp": "Převést ICP",
+      "availableBalanceNote": "ICP můžete odeslat pouze ze svého dostupného zůstatku.",
+      "amountRequired": "Částka je povinná.",
+      "amountExceedsBalance": "Částka nesmí překročit váš zůstatek.",
+      "amountPositive": "Částka musí být kladné číslo.",
+      "amountBelowFee": "Částka musí být větší nebo rovna transakčním poplatkům.",
+      "recipientAddress": "Adresa příjemce",
+      "recipientAddressRequired": "Adresa příjemce je povinná.",
+      "invalidRecipientAddress": "Neplatná adresa příjemce.",
+      "amountReceived": "Přijatá částka",
+      "transactionFee": "Transakční poplatek",
+      "currentBalance": "Aktuální zůstatek:",
+      "processing": "Převod se zpracovává",
+      "processingNote": "Může to trvat několik sekund",
+      "success": "Převod byl úspěšný!",
+      "error": "Chyba převodu!"
+    }
+  },
+  "support": {
+    "category": "Podpora",
+    "title": "Vytvořit požadavek",
+    "titleSubmitted": "Požadavek odeslán",
+    "successTitle": "Požadavek na podporu vytvořen",
+    "successMessage": "Ozveme se vám na e-mailovou adresu, kterou jste uvedli.",
+    "submitAnother": "Odeslat další požadavek",
+    "intro": "Popište svůj problém a jak vás můžeme kontaktovat.",
+    "form": {
+      "name": "Jméno",
+      "email": "Kontaktní e-mail",
+      "emailRequired": "E-mailová adresa je povinná",
+      "emailInvalid": "Neplatná e-mailová adresa",
+      "principal": "Principal peněženky",
+      "invalidPrincipal": "Neplatná adresa příjemce.",
+      "description": "Popis",
+      "descriptionPlaceholder": "Řekněte nám, co se děje…",
+      "descriptionRequired": "Popište prosím svůj problém"
+    },
+    "submitError": "Něco se pokazilo. Zkuste to prosím znovu.",
+    "submitting": "Odesílání…"
+  },
+  "explorer": {
+    "title": "Prohlížeč",
+    "searchPlaceholder": "Hledat podle názvu, vydavatele, principalu nebo ID tokenu",
+    "openFilters": "Otevřít filtry",
+    "checkOnBlockchain": "Ověřit na blockchainu",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Doporučené certifikáty",
+      "art": "Umělecké certifikáty",
+      "gold": "Zlaté certifikáty"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopírovat do schránky",
+    "toggleRelativeTime": "Přepnout relativní čas. Aktuální zobrazení:",
+    "collapseRow": "Sbalit řádek",
+    "expandRow": "Rozbalit řádek",
+    "searchPlaceholder": "Hledat položky...",
+    "sortAscending": "Seřadit vzestupně",
+    "sortDescending": "Seřadit sestupně",
+    "linesPerPage": "Řádků na stránku",
+    "page": "Stránka",
+    "pageOf": "z",
+    "previousPage": "Předchozí stránka",
+    "nextPage": "Další stránka"
+  },
+  "auth": {
+    "connect": "Připojit",
+    "disconnect": "Odpojit",
+    "connectWallet": {
+      "title": "Připojte svou peněženku",
+      "subtitle": "Vyberte způsob přihlášení"
+    },
+    "install": "Instalovat",
+    "newToIc": "Nováček na Internet Computer?",
+    "learnMore": "Dozvědět se více",
+    "connecting": {
+      "title": "Připojování...",
+      "subtitle": "Schvalte požadavek ve své peněžence"
+    },
+    "sessionExpired": {
+      "title": "Relace vypršela",
+      "description": "Relace vaší peněženky již není platná. Pro pokračování se znovu připojte."
+    },
+    "reconnect": "Znovu připojit",
+    "error": {
+      "connectionCancelled": "Připojení zrušeno. Zkuste to prosím znovu.",
+      "connectionFailed": "Připojení peněženky se nezdařilo. Zkuste to prosím znovu."
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "přepínáme ledger, musíte vyměnit své OGY za nové"
+  },
+  "calculator": {
+    "header": {
+      "title": "Cenová kalkulačka",
+      "description": "Použijte kalkulačku ORIGYN k odhadu nákladů na Váš jedinečný certifikát se všemi daty on-chain"
+    },
+    "plan": {
+      "title": "Naplánujte si vydání certifikátu",
+      "description": "Sdělte nám, kolik položek máte a co nahráváte.",
+      "itemsLabel": "Kolik položek?",
+      "uploadingLabel": "Co nahráváte?",
+      "knowExactSize": "Znáte přesnou velikost?",
+      "totalUploadSize": "Celková velikost nahrávání",
+      "usePreset": "Použít přednastavenou hodnotu",
+      "combinedSize": "Kombinovaná velikost všech souborů napříč všemi položkami.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB každý"
+        },
+        "iphone": {
+          "label": "Fotografie",
+          "hint": "3 MB každá"
+        },
+        "dslr": {
+          "label": "Studiová fotografie",
+          "hint": "20 MB každá"
+        },
+        "video": {
+          "label": "Krátké video",
+          "hint": "1 GB každé"
+        },
+        "video1hr": {
+          "label": "Dlouhé video",
+          "hint": "60 GB každé"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Průběžný odhad",
+      "titleRefreshing": "Aktualizace odhadu",
+      "description": "Aktualizuje se automaticky při změně nastavení.",
+      "ogyEquivalent": "Ekvivalent v OGY",
+      "ogySpotRate": "Aktuální kurz OGY",
+      "itemSingular": "Položka",
+      "itemPlural": "Položky",
+      "upload": "Nahrávání"
+    },
+    "breakdown": {
+      "title": "Rozpis nákladů",
+      "baseFee": "Základní poplatek za vydání",
+      "storageFee": "Poplatek za úložiště",
+      "items": "Položky",
+      "uploadSize": "Velikost nahrávání"
+    },
+    "bytesUnit": "bajtů"
+  }
+}
