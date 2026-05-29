@@ -21,8 +21,23 @@ type IndexSort = {
   onToggle: () => void;
 };
 
+type TranslateFn = (key: string) => string;
+
+const defaultT: TranslateFn = (key) => {
+  const fallbacks: Record<string, string> = {
+    "common.index": "Index",
+    "common.amount": "Amount",
+    "common.type": "Type",
+    "common.date": "Date",
+    "common.from": "From",
+    "common.to": "To",
+  };
+  return fallbacks[key] ?? key;
+};
+
 export const getTransactionColumns = (
   navigate: (path: string) => void,
+  t: TranslateFn = defaultT,
   indexSort?: IndexSort
 ): NewTableColumn<TransactionRow>[] => [
   {
@@ -32,10 +47,11 @@ export const getTransactionColumns = (
         onClick={indexSort.onToggle}
         className="flex items-center gap-1 hover:text-white/80"
       >
-        Index <span aria-hidden="true">{indexSort.desc ? "↓" : "↑"}</span>
+        {t("common.index")}{" "}
+        <span aria-hidden="true">{indexSort.desc ? "↓" : "↑"}</span>
       </button>
     ) : (
-      "Index"
+      t("common.index")
     ),
     cell: (row) => (
       <div className="w-20">
@@ -52,9 +68,10 @@ export const getTransactionColumns = (
   },
   {
     id: "amount",
-    header: "Amount",
+    header: t("common.amount"),
     cell: (row) => (
-      <div className="w-32 whitespace-nowrap">
+      // Numeric amount: keep LTR so RTL bidi doesn't reorder digits/grouping.
+      <div dir="ltr" className="w-32 whitespace-nowrap">
         <span>
           {roundAndFormatLocale({ number: divideBy1e8(parseInt(row.amount)) })}
         </span>
@@ -63,7 +80,7 @@ export const getTransactionColumns = (
   },
   {
     id: "kind",
-    header: "Type",
+    header: t("common.type"),
     cell: (row) => (
       <div className="w-20">
         <TransactionKindPill kind={row.kind} />
@@ -72,7 +89,7 @@ export const getTransactionColumns = (
   },
   {
     id: "timestamp",
-    header: "Date",
+    header: t("common.date"),
     cell: (row) => (
       <div className="w-44">
         {row.timestampRaw ? (
@@ -83,12 +100,14 @@ export const getTransactionColumns = (
   },
   {
     id: "from_account",
-    header: "From",
+    header: t("common.from"),
     cell: (row) => {
       const val = row.from_account;
       const isCopyable = val && val !== "Minting account";
       return (
-        <div className="flex items-center gap-2 w-64">
+        // Account/principal ID + copy icon: an inherently-LTR cluster; pin dir
+        // so the truncation ellipsis and copy button don't scramble under RTL.
+        <div dir="ltr" className="flex items-center gap-2 w-64">
           {isCopyable ? (
             <button
               className="truncate min-w-0 hover:underline"
@@ -114,12 +133,14 @@ export const getTransactionColumns = (
   },
   {
     id: "to_account",
-    header: "To",
+    header: t("common.to"),
     cell: (row) => {
       const val = row.to_account;
       const isCopyable = val && val !== "Minting account";
       return (
-        <div className="flex items-center gap-2 w-64">
+        // Account/principal ID + copy icon: an inherently-LTR cluster; pin dir
+        // so the truncation ellipsis and copy button don't scramble under RTL.
+        <div dir="ltr" className="flex items-center gap-2 w-64">
           {isCopyable ? (
             <button
               className="truncate min-w-0 hover:underline"

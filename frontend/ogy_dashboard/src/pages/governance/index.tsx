@@ -7,6 +7,7 @@ import {
   EarnRewardsIcon,
   GovernCollectivelyIcon,
 } from "@components/ui/icons";
+import { useT } from "@i18n/LocaleContext";
 import EstimateRewards from "@pages/governance/estimate-rewards/EstimateRewards";
 import TokensInGovernanceTotal from "@pages/governance/tokens-in-governance-total/TokensInGovernanceTotal";
 import TokensInGovernanceKpi from "@pages/governance/tokens-in-governance-kpi/TokensInGovernanceKPI";
@@ -22,14 +23,14 @@ const HeroBackground = () => (
     className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
   >
     <div
-      className="absolute -bottom-[55%] -left-[10%] w-[1400px] h-[1600px]"
+      className="absolute -bottom-[55%] -start-[10%] w-[1400px] h-[1600px]"
       style={{
         background:
           "radial-gradient(ellipse, rgba(80,190,143,0.55) 0%, transparent 60%)",
       }}
     />
     <div
-      className="absolute -top-[55%] -right-[10%] w-[1500px] h-[1700px]"
+      className="absolute -top-[55%] -end-[10%] w-[1500px] h-[1700px]"
       style={{
         background:
           "radial-gradient(ellipse, rgba(255,205,90,0.4) 0%, transparent 60%)",
@@ -41,6 +42,7 @@ const HeroBackground = () => (
 );
 
 export const Governance = () => {
+  const t = useT();
   const location = useLocation();
   const scrollTarget = (location.state as { scrollTo?: string })?.scrollTo;
 
@@ -58,25 +60,22 @@ export const Governance = () => {
   const governanceFeatures = useMemo(
     () => [
       {
-        title: "Stake & Vote",
-        description:
-          "Influence the ORIGYN Network by staking OGY & voting on proposals.",
+        title: t("governance.features.stakeVote.title"),
+        description: t("governance.features.stakeVote.description"),
         icon: <StakeVoteIcon />,
       },
       {
-        title: "Earn Rewards",
-        description:
-          "Participate in the decision-making process to earn rewards.",
+        title: t("governance.features.earnRewards.title"),
+        description: t("governance.features.earnRewards.description"),
         icon: <EarnRewardsIcon />,
       },
       {
-        title: "Govern Collectively",
-        description:
-          "Engage & influence the network as a collaborative ecosystem.",
+        title: t("governance.features.governCollectively.title"),
+        description: t("governance.features.governCollectively.description"),
         icon: <GovernCollectivelyIcon />,
       },
     ],
-    []
+    [t]
   );
 
   return (
@@ -86,18 +85,15 @@ export const Governance = () => {
 
         <div className="max-w-[1125px] mx-auto px-4 py-8 sm:py-16 flex flex-col gap-4">
           <div className="grid grid-cols-1 xl:grid-cols-2 items-start gap-8 xl:gap-0 2xl:gap-8">
-            <div className="pr-0 xl:pr-16 pb-8 xl:pb-0 text-center xl:text-left flex flex-col items-center xl:items-start gap-[17px]">
+            <div className="pe-0 xl:pe-16 pb-8 xl:pb-0 text-center xl:text-start flex flex-col items-center xl:items-start gap-[17px]">
               <h1 className="text-[28px] sm:text-[40px] font-bold leading-tight sm:leading-none text-content">
-                Governance Overview
+                {t("governance.overview.title")}
               </h1>
               <h2 className="text-[18px] sm:text-[22px] font-light leading-snug sm:leading-none text-muted">
-                Welcome to ORIGYN Governance!
+                {t("governance.overview.welcome")}
               </h2>
               <p className="text-base font-light leading-6 text-muted">
-                Holders of OGY tokens can directly influence the ORIGYN Network
-                by staking their OGY and voting on proposals. By participating
-                in the decision-making process, these staked token holders earn
-                rewards.
+                {t("governance.overview.description")}
               </p>
               <a
                 href="https://origyn.gitbook.io/origyn/tokenomics/staking-and-rewards"
@@ -106,9 +102,9 @@ export const Governance = () => {
               >
                 <Button className="!px-[25px] !py-0 text-[14px] leading-[48px]">
                   <div className="flex items-center justify-center">
-                    <div>Learn more</div>
+                    <div>{t("governance.overview.learnMore")}</div>
                     <div>
-                      <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 text-background" />
+                      <ArrowTopRightOnSquareIcon className="ms-2 h-5 w-5 text-background" />
                     </div>
                   </div>
                 </Button>
@@ -132,18 +128,15 @@ export const Governance = () => {
 
       <div className="px-4 pb-16">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-8 mt-16 mb-12">
-          <div className="text-center xl:text-left">
+          <div className="text-center xl:text-start">
             <h2 className="text-[28px] font-bold leading-none text-content">
-              Tokens in Governance
+              {t("governance.tokensSection.title")}
             </h2>
             <p className="mt-4 text-base font-normal leading-6 text-muted">
-              Holders of OGY tokens can directly influence the ORIGYN Network by
-              staking their OGY and voting on proposals.
+              {t("governance.tokensSection.paragraph1")}
             </p>
             <p className="mb-2 text-base font-normal leading-6 text-muted">
-              By participating in the decision-making process, these staked
-              token holders earn rewards and govern collectively and
-              democratically.
+              {t("governance.tokensSection.paragraph2")}
             </p>
           </div>
           <a
@@ -153,7 +146,7 @@ export const Governance = () => {
             className="shrink-0"
           >
             <Button className="!px-[25px] !py-0 text-[14px] leading-[48px]">
-              Learn more about OGY
+              {t("governance.tokensSection.learnMoreOgy")}
             </Button>
           </a>
         </div>
@@ -171,11 +164,15 @@ export const Governance = () => {
         </div>
 
         <div id="governance-proposals" ref={scrollRef} className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Proposals</h2>
+          <h2 className="text-3xl font-bold mb-8">
+            {t("governance.sections.proposals")}
+          </h2>
           <ProposalsList />
         </div>
         <div id="governance-neurons" ref={scrollRef}>
-          <h2 className="text-3xl font-bold mb-8">Neurons</h2>
+          <h2 className="text-3xl font-bold mb-8">
+            {t("governance.sections.neurons")}
+          </h2>
           <NeuronsList />
         </div>
       </div>

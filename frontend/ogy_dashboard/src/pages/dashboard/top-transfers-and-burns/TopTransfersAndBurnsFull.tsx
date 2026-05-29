@@ -10,6 +10,7 @@ import useTopTransfersAndBurns, {
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { useNavigate } from "react-router-dom";
 import { roundAndFormatLocale } from "@helpers/numbers";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 interface TopTransfersAndBurnsFullProps {
   type: "transfers" | "burns";
@@ -31,6 +32,8 @@ const TopTransfersAndBurnsFull = ({
   title,
   limit,
 }: TopTransfersAndBurnsFullProps) => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const { data, isSuccess, isLoading, isError } = useTopTransfersAndBurns({
     type,
@@ -49,16 +52,16 @@ const TopTransfersAndBurnsFull = ({
       },
       {
         accessorKey: "from",
-        header: "From",
+        header: t("common.from"),
         cell: ({ getValue }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-sm truncate">
+            <div dir="ltr" className="flex items-center max-w-sm truncate">
               <button
-                className="mr-2 truncate"
+                className="me-2 truncate"
                 onClick={() =>
                   navigate(
-                    `/transaction-history/transactions/accounts/${address}`
+                    lp(`/transaction-history/transactions/accounts/${address}`)
                   )
                 }
               >
@@ -71,20 +74,23 @@ const TopTransfersAndBurnsFull = ({
       },
       {
         accessorKey: "value",
-        header: "Value",
+        header: t("dashboard.topTransfers.value"),
         cell: ({ getValue }) => {
           const rawValue = parseFloat(
             String(getValue()).replace(/[^\d.-]/g, "")
           );
           return isNaN(rawValue) ? (
-            <span>N/A</span>
+            <span>{t("common.notAvailable")}</span>
           ) : (
-            <span className="flex flex-row items-center justify-center">
+            <span
+              dir="ltr"
+              className="flex flex-row items-center justify-center"
+            >
               {roundAndFormatLocale({ number: rawValue })}{" "}
               <img
                 src="/ogy_logo.svg"
-                alt="OGY Logo"
-                className="w-5 h-5 ml-2"
+                alt={t("dashboard.topTransfers.ogyLogoAlt")}
+                className="w-5 h-5 ms-2"
               />
             </span>
           );
@@ -92,7 +98,7 @@ const TopTransfersAndBurnsFull = ({
       },
       {
         accessorKey: "time",
-        header: "Time",
+        header: t("dashboard.topTransfers.time"),
         cell: ({ getValue }) => (
           <div>
             <Badge className="border border-border-strong bg-surface-2 px-2">
@@ -108,16 +114,16 @@ const TopTransfersAndBurnsFull = ({
     if (type !== "burns") {
       baseColumns.splice(2, 0, {
         accessorKey: "to",
-        header: "To",
+        header: t("common.to"),
         cell: ({ getValue }) => {
           const address = String(getValue());
           return (
-            <div className="flex items-center max-w-xs truncate justify-center">
+            <div dir="ltr" className="flex items-center max-w-xs truncate justify-center">
               <button
-                className="mr-2 truncate"
+                className="me-2 truncate"
                 onClick={() =>
                   navigate(
-                    `/transaction-history/transactions/accounts/${address}`
+                    lp(`/transaction-history/transactions/accounts/${address}`)
                   )
                 }
               >
@@ -131,7 +137,7 @@ const TopTransfersAndBurnsFull = ({
     }
 
     return baseColumns;
-  }, [type, navigate]);
+  }, [type, navigate, lp, t]);
 
   const rows = showSkeleton || !hasData ? buildFakeRows(FAKE_ROW, limit) : data;
   const showEmptyState =
@@ -144,7 +150,9 @@ const TopTransfersAndBurnsFull = ({
       </h1>
       <div className="relative w-10/12 mx-auto my-8">
         {showEmptyState ? (
-          <div className="text-center text-muted">No data available.</div>
+          <div className="text-center text-muted">
+            {t("dashboard.topTransfers.noDataAvailable")}
+          </div>
         ) : (
           <SkeletonOverlay loading={showSkeleton}>
             <Table

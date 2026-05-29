@@ -15,6 +15,7 @@ import TransactionHistory from "@pages/dashboard/transaction-history";
 import { StakingOverviewChart } from "@components/dashboard";
 import ChartUsersActivity from "./ChartUsersActivity";
 import { PieChartProvider } from "@components/charts/pie/context";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 const HERO_BG_MASK =
   "radial-gradient(ellipse at center, black 10%, transparent 65%)";
@@ -44,6 +45,8 @@ const HeroBackground = () => (
 );
 
 const Dashboard = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const { isConnected } = useWallet();
   const location = useLocation();
@@ -61,7 +64,7 @@ const Dashboard = () => {
   );
 
   const handleClickAccount = () => {
-    navigate("account");
+    navigate(lp("account"));
   };
 
   return (
@@ -72,14 +75,13 @@ const Dashboard = () => {
         <div className="flex flex-col items-center pt-8 pb-8 px-6 sm:pt-16 sm:pb-16">
           <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
             <Badge className="bg-spacePurple !py-0 px-[9px] text-white font-extrabold text-[10px] leading-[22px] tracking-[2px] uppercase">
-              OGY ANALYTICS
+              {t("dashboard.hero.badge")}
             </Badge>
             <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
-              Explore dashboard
+              {t("dashboard.hero.title")}
             </h1>
             <p className="font-light text-[16px] sm:text-[22px] leading-snug sm:leading-none text-center text-muted">
-              Interact trustlessly with web3 dApps, DAOs, NFTs, DeFi and much
-              more.
+              {t("dashboard.hero.subtitle")}
             </p>
           </div>
 
@@ -109,7 +111,7 @@ const Dashboard = () => {
             id="governance-tokens-stakes"
           >
             <StakingOverviewChart
-              title="Governance Staking Overview"
+              title={t("dashboard.governanceStaking.title")}
               chartColor="#38bdf8"
             />
           </section>
@@ -153,13 +155,13 @@ const Dashboard = () => {
           <div className="flex justify-center mt-8">
             {!isConnected && (
               <AuthButton
-                label="Login to swap tokens"
+                label={t("dashboard.cta.loginToSwap")}
                 className={LEDGER_SWITCH_CTA_CLASS}
               />
             )}
             {isConnected && (
               <Button className={LEDGER_SWITCH_CTA_CLASS} onClick={handleClickAccount}>
-                My account
+                {t("dashboard.cta.myAccount")}
               </Button>
             )}
           </div>

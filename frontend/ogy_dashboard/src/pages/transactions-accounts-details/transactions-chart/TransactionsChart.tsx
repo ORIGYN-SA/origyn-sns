@@ -17,6 +17,7 @@ import {
 import useThemeDetector from "@helpers/theme/useThemeDetector";
 import { Card } from "@components/ui";
 import { SearchIcon, CloseIcon } from "@components/ui/icons";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 type TransactionsChartProps = {
   className?: string;
@@ -99,6 +100,8 @@ const buildVisOptions = (): Options => ({
 });
 
 const TransactionsChart = ({ id }: TransactionsChartProps) => {
+  const t = useT();
+  const lp = useLocalePath();
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const [mapAmount] = useState(10);
@@ -267,7 +270,9 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
       },
       label:
         node.count > 1
-          ? `     ${node.count} transactions \n ${roundAndFormatLocale({
+          ? `     ${node.count} ${t(
+              "transactions.flow.transactions"
+            )} \n ${roundAndFormatLocale({
               number: divideBy1e8(node.amount),
             })} OGY   `
           : `     ${roundAndFormatLocale({
@@ -275,14 +280,16 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
             })} OGY     `,
       title:
         node.isTo && node.isFrom
-          ? `Out: ${roundAndFormatLocale({
+          ? `${t("transactions.flow.out")}: ${roundAndFormatLocale({
               number: divideBy1e8(node.toAmount),
-            })} \nIn: ${roundAndFormatLocale({
+            })} \n${t("transactions.flow.in")}: ${roundAndFormatLocale({
               number: divideBy1e8(node.fromAmount),
-            })} \n Total: ${roundAndFormatLocale({
+            })} \n ${t("transactions.flow.total")}: ${roundAndFormatLocale({
               number: divideBy1e8(Math.abs(node.amount)),
             })} OGY`
-          : `Total: ${Math.abs(node.amount).toFixed(2)} OGY`,
+          : `${t("transactions.flow.total")}: ${Math.abs(node.amount).toFixed(
+              2
+            )} OGY`,
       arrows: node.isTo && node.isFrom ? "to, from" : node.isTo ? "to" : "from",
       color:
         colors[node.isInitialTrans ? "inOut" : node.isTo ? "out" : "in"].border,
@@ -358,7 +365,9 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
         });
         if (accountId) {
           navigate(
-            `/transaction-history/transactions/accounts/${accountId.toString().slice(1)}`
+            lp(
+              `/transaction-history/transactions/accounts/${accountId.toString().slice(1)}`
+            )
           );
           return;
         }
@@ -375,7 +384,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
     <Card className="mt-16 !p-0 overflow-hidden">
       <header className="flex flex-col gap-4 px-6 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-content text-[22px] font-semibold leading-none">
-          Transaction Flow
+          {t("transactions.flow.title")}
         </h2>
         <form
           onKeyDown={handleOnKeyDown}
@@ -386,7 +395,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
           <input
             id={id}
             type="text"
-            placeholder="Search transactions…"
+            placeholder={t("transactions.flow.searchPlaceholder")}
             value={searchterm}
             onChange={handleOnChange}
             className="flex-1 bg-transparent text-sm text-content placeholder:text-muted outline-none focus:outline-none focus:ring-0 border-0 p-0"
@@ -396,7 +405,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
               type="button"
               onClick={handleResetSearch}
               className="rounded-full p-1 text-muted hover:bg-border"
-              aria-label="Clear search"
+              aria-label={t("transactions.flow.clearSearch")}
             >
               <CloseIcon />
             </button>
@@ -407,6 +416,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
       <div className="relative border-t border-border">
         <div
           ref={ref}
+          dir="ltr"
           className="h-[560px] md:h-[680px] lg:h-[800px] w-full p-6"
         />
         {isLoading && (
@@ -420,48 +430,57 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
         {isError && !isLoading && (
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
             <p className="text-sm text-muted">
-              Couldn't load transaction data. Please try again.
+              {t("transactions.flow.loadError")}
             </p>
           </div>
         )}
         {showEmptyOverlay && !isLoading && !isError && (
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center pointer-events-none">
             <p className="text-sm text-muted">
-              No transactions match this search.
+              {t("transactions.flow.noMatch")}
             </p>
           </div>
         )}
       </div>
 
       <div className="border-t border-border px-6 py-5 grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-3">
-        <EdgeKey color={EDGE.out} label="Out transaction" />
-        <EdgeKey color={EDGE.in} label="In transaction" />
-        <EdgeKey color={EDGE.inOut} label="Includes initial transaction" />
+        <EdgeKey
+          color={EDGE.out}
+          label={t("transactions.flow.legend.outTransaction")}
+        />
+        <EdgeKey
+          color={EDGE.in}
+          label={t("transactions.flow.legend.inTransaction")}
+        />
+        <EdgeKey
+          color={EDGE.inOut}
+          label={t("transactions.flow.legend.includesInitial")}
+        />
       </div>
 
       <div className="border-t border-border px-6 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-3">
         <NodeKey
           borderColor={ROOT_NODE.border}
           fillColor={ROOT_NODE.background}
-          label="Root account"
+          label={t("transactions.flow.legend.rootAccount")}
         />
         <NodeKey
           borderColor={EDGE.out}
           fillColor={NODE_BG_LIGHT.out}
-          label="Account"
-          sub="With transactions from root"
+          label={t("transactions.flow.legend.account")}
+          sub={t("transactions.flow.legend.fromRoot")}
         />
         <NodeKey
           borderColor={EDGE.in}
           fillColor={NODE_BG_LIGHT.in}
-          label="Account"
-          sub="With transactions to root"
+          label={t("transactions.flow.legend.account")}
+          sub={t("transactions.flow.legend.toRoot")}
         />
         <NodeKey
           borderColor={EDGE.inOut}
           fillColor={NODE_BG_LIGHT.inOut}
-          label="Account"
-          sub="Made initial transaction"
+          label={t("transactions.flow.legend.account")}
+          sub={t("transactions.flow.legend.madeInitial")}
         />
       </div>
     </Card>

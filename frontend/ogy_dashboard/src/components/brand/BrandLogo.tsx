@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useLocalePath } from "@i18n/LocaleContext";
 
 type BrandLogoProps = {
   className?: string;
@@ -6,8 +7,15 @@ type BrandLogoProps = {
 };
 
 const BrandLogo = ({ className = "", labelClassName = "" }: BrandLogoProps) => {
+  const lp = useLocalePath();
   return (
-    <Link to="/" className={`flex items-center space-x-2 ${className}`}>
+    <Link
+      to={lp("/")}
+      // Fixed latin brand lockup — keep logo-then-wordmark order in every
+      // locale (don't let RTL flip the wordmark to the icon's left).
+      dir="ltr"
+      className={`flex items-center gap-2 ${className}`}
+    >
       <img
         src="/ogy_logo.svg"
         alt=""

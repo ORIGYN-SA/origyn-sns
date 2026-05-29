@@ -1,5 +1,6 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useWallet } from "@components/auth/useWallet";
+import { useT } from "@i18n/LocaleContext";
 import useClaimRewardService from "@services/queries/sns-rewards/useClaimReward";
 interface ClaimRewardContextType {
   mutation: ReturnType<typeof useClaimRewardService>;
@@ -34,9 +35,10 @@ export const ClaimRewardProvider = ({
   neuronId: string;
   claimAmount: number;
 }) => {
+  const t = useT();
   const { principalId, subAccount } = useWallet();
   const claimDisabledReason = subAccount
-    ? "Reward claims are only supported for the principal default account."
+    ? t("account.neurons.claim.disabledReason")
     : undefined;
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);

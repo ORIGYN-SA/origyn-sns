@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "언어",
+    "switchTo": "{language}(으)로 전환",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "문제가 발생했습니다",
+    "retry": "다시 시도",
+    "cancel": "취소",
+    "confirm": "확인",
+    "close": "닫기",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "save": "저장",
+    "submit": "제출",
+    "copy": "복사",
+    "copied": "복사됨",
+    "search": "검색",
+    "viewAll": "전체 보기",
+    "showMore": "더 보기",
+    "showLess": "간략히 보기",
+    "amount": "금액",
+    "date": "날짜",
+    "type": "유형",
+    "from": "보낸 사람",
+    "to": "받는 사람",
+    "index": "인덱스",
+    "status": "상태",
+    "total": "총계",
+    "balance": "잔액",
+    "yes": "예",
+    "no": "아니요",
+    "notAvailable": "해당 없음"
+  },
+  "nav": {
+    "dashboard": "대시보드",
+    "governance": "거버넌스",
+    "transactionHistory": "거래 내역",
+    "calculator": "계산기",
+    "openMainMenu": "메인 메뉴 열기",
+    "closeMenu": "메뉴 닫기",
+    "openAccountOverview": "계정 개요 열기",
+    "viewAccountOverview": "계정 개요 보기",
+    "connectPrompt": "지갑을 연결하여 토큰을 관리하고, 제안에 투표하고, 거래 내역을 확인하세요.",
+    "connectWallet": "지갑 연결",
+    "disconnect": "연결 해제"
+  },
+  "notFound": {
+    "title": "페이지를 찾을 수 없습니다",
+    "description": "죄송합니다. 찾으시는 페이지를 찾을 수 없습니다.",
+    "backHome": "홈으로 돌아가기"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY 대시보드",
+      "home": "홈",
+      "circulation": "유통",
+      "governance": "거버넌스",
+      "revenue": "수익",
+      "rewards": "보상",
+      "distribution": "분배",
+      "governanceDashboard": "OGY 거버넌스 대시보드",
+      "transactionExplorer": "OGY 트랜잭션 익스플로러"
+    },
+    "learn": {
+      "heading": "OGY Tokenomics 및 ORIGYN에 대해 자세히 알아보기",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT 표준",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN 웹사이트",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "지원",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "문의하기"
+    },
+    "support": {
+      "contactSupport": "지원팀에 문의",
+      "recoverTokens": "토큰 복구하기"
+    },
+    "disclaimer": "*ORIGYN Foundation은 스왑 과정과 관련하여 발생하는 OGY 토큰의 손실, 도난 또는 부정 사용에 대해 책임을 지지 않습니다. 또한 ORIGYN Foundation은 관련 당사자가 ORIGYN Foundation이 명시한 조건을 엄격히 준수하지 않을 경우 스왑을 실행하지 못한 데 대해 책임을 지지 않습니다."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "대시보드 살펴보기",
+      "subtitle": "web3 dApps, DAOs, NFT, DeFi 등과 신뢰 없이도 상호작용하세요."
+    },
+    "cta": {
+      "loginToSwap": "로그인하여 토큰 스왑",
+      "myAccount": "내 계정"
+    },
+    "governanceStaking": {
+      "title": "거버넌스 스테이킹 개요"
+    },
+    "cardError": {
+      "couldNotLoad": "불러오지 못했습니다",
+      "descriptionLine1": "이 지표를 가져오는 중 문제가 발생했습니다.",
+      "descriptionLine2": "잠시 후 다시 시도해 주세요."
+    },
+    "emptyState": {
+      "noDataFor": "데이터 없음:",
+      "description": "지금 표시할 내용이 없습니다."
+    },
+    "circulationState": {
+      "title": "OGY 유통 현황",
+      "tooltip": "유통 공급량은 ORIGYN Foundation이 보유한 잠금 해제된 토큰을 제외한 모든 토큰입니다.",
+      "nnsProposal": "NNS 제안",
+      "totalLabel": "OGY 총 유통량",
+      "notOwnedName": "Foundation이 보유하지 않은 OGY",
+      "notOwnedValue": "ORIGYN foundation이 보유하지 않은 유통 토큰의 양.",
+      "ownedName": "Foundation이 잠금 보유한 OGY",
+      "ownedValue": "ORIGYN foundation이 보유한 잠긴 토큰의 양."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation 준비금",
+      "tooltip": "모든 지갑에 걸쳐 ORIGYN foundation이 보유한 OGY 토큰의 총량.",
+      "totalLabel": "Foundation 총 공급량",
+      "lockedName": "잠김",
+      "lockedIntro": "스테이크 또는 베스팅으로 잠긴 ORIGYN foundation 토큰.",
+      "lockedStakes": "1) 스테이크 - 거버넌스 투표 참여를 통해 보상을 생성하는 토큰.",
+      "lockedStakesNote": "이 토큰들은 자발적으로 잠겼습니다.",
+      "lockedVestings": "2) 베스팅 - 보상을 받지 않으며 투표에 참여할 수 없는 토큰.",
+      "lockedVestingsNote": "이 토큰들은 ORIGYN Foundation과의 계약에 의해 잠겼습니다.",
+      "unlockedName": "잠금 해제됨",
+      "unlockedValue": "ORIGYN foundation이 보유한 잠금 해제된 자금."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN 재무 계정 (OTA)",
+      "networkRevenue": "네트워크 수익",
+      "tokenLogoAlt": "토큰 로고",
+      "tooltipOgy": "ORIGYN 네트워크 이용(예: 디지털 인증서 발행 또는 전송, NFT 민팅 등)에 대한 수수료를 통해 생성되어 OGY로 누적된 네트워크 유틸리티 수익.",
+      "tooltipIcp": "ORIGYN 네트워크 이용(예: 디지털 인증서 발행 또는 전송, NFT 민팅 등)에 대한 수수료를 통해 생성되어 ICP로 누적된 네트워크 유틸리티 수익."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN 보상 계정 (ORA)",
+      "balance": "ORA 잔액",
+      "year": "연도",
+      "rewardPool": "보상 풀",
+      "moreDetails": "자세히 보기",
+      "tooltipStake": "토큰 보유자는 OGY를 스테이킹하고 거버넌스에 참여하여 보상을 얻을 수 있습니다.",
+      "tooltipSeed": "보상은 ORIGYN 보상 계정에서 지급되며, ORIGYN은 여기에 10억 OGY를 투입합니다.",
+      "tooltipPool": "보상 풀은 첫해에 2억 5천만 OGY로 구성되며, 생태계의 초기 및 장기 기여자를 장려하고 보상하기 위해 2년마다 절반으로 줄어듭니다.",
+      "description": "ORIGYN은 스테이킹 및 투표하는 보유자의 이익을 위해 ORIGYN 보상 계정(ORA)에 10억 OGY를 기여합니다. 보상 풀은 첫해에 2억 5천만 OGY로 구성되며, 생태계의 초기 및 장기 기여자를 장려하고 보상하기 위해 2년마다 절반으로 줄어듭니다."
+    },
+    "tokenDistribution": {
+      "title": "토큰 분배"
+    },
+    "transactionHistory": {
+      "title": "거래 내역",
+      "showAll": "전체 표시"
+    },
+    "topTransfers": {
+      "value": "가치",
+      "time": "시간",
+      "ogyLogoAlt": "OGY 로고",
+      "noDataAvailable": "사용 가능한 데이터가 없습니다."
+    },
+    "totalSupply": {
+      "title": "OGY 총 공급량",
+      "tooltipTitle": "사용 가능한 OGY 토큰의 총량.",
+      "tooltipLine1": "여기에는 유통 공급량과 ORIGYN Foundation의 통제 하에 있는 공급량이 포함됩니다.",
+      "tooltipLine2": "9월 18일부터 ORIGYN은 완전 디플레이션 모델로 전환했으며, 이는 더 이상 새로 발행되는 토큰이 없음을 의미합니다.",
+      "chartLabel": "총 공급량"
+    },
+    "totalBurned": {
+      "title": "OGY 총 소각량",
+      "tooltipTitle": "소각된 OGY 토큰의 총량.",
+      "tooltipLine1": "이 토큰들은 완전히 소각되어 더 이상 사용할 수 없습니다.",
+      "tooltipLine2": "토큰은 인증서 민팅 수수료, 네트워크 유틸리티 수수료 또는 네트워크 거래 수수료 등 다양한 이유로 소각될 수 있습니다.",
+      "chartLabel": "총 소각량"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "일간",
+      "weekly": "주간",
+      "monthly": "월간",
+      "yearly": "연간",
+      "all": "전체"
+    },
+    "stakingOverview": {
+      "title": "스테이킹 개요",
+      "totalTokensInStakes": "스테이크 중인 총 토큰",
+      "tooltip": "스테이크에 잠긴 토큰.",
+      "stakedTokens": "스테이크된 토큰",
+      "stakedTokensLegend": "스테이크된 토큰"
+    },
+    "usersActivity": {
+      "title": "사용자 개요",
+      "protocolUsers": "OGY 프로토콜 사용자",
+      "protocolUsersTooltip": "OGY 토큰의 고유 보유자",
+      "protocolUsersLegend": "OGY 프로토콜 사용자",
+      "activeWallets": "OGY 활성 지갑",
+      "activeWalletsTooltip": "OGY 토큰의 활성 보유자"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "거버넌스 개요",
+      "welcome": "ORIGYN 거버넌스에 오신 것을 환영합니다!",
+      "description": "OGY 토큰 보유자는 OGY를 스테이킹하고 제안에 투표함으로써 ORIGYN 네트워크에 직접 영향을 미칠 수 있습니다. 의사결정 과정에 참여함으로써 이러한 스테이킹 토큰 보유자는 보상을 받습니다.",
+      "learnMore": "자세히 알아보기"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "스테이킹 및 투표",
+        "description": "OGY를 스테이킹하고 제안에 투표하여 ORIGYN 네트워크에 영향을 미치세요."
+      },
+      "earnRewards": {
+        "title": "보상 획득",
+        "description": "의사결정 과정에 참여하여 보상을 획득하세요."
+      },
+      "governCollectively": {
+        "title": "공동 거버넌스",
+        "description": "협력하는 생태계로서 네트워크에 참여하고 영향을 미치세요."
+      }
+    },
+    "tokensSection": {
+      "title": "거버넌스 내 토큰",
+      "paragraph1": "OGY 토큰 보유자는 OGY를 스테이킹하고 제안에 투표함으로써 ORIGYN 네트워크에 직접 영향을 미칠 수 있습니다.",
+      "paragraph2": "의사결정 과정에 참여함으로써 이러한 스테이킹 토큰 보유자는 보상을 받고 공동으로 민주적으로 거버넌스를 수행합니다.",
+      "learnMoreOgy": "OGY에 대해 자세히 알아보기"
+    },
+    "sections": {
+      "proposals": "제안",
+      "neurons": "뉴런"
+    },
+    "votingParticipation": {
+      "title": "투표 참여율",
+      "chartLabel": "참여율 %",
+      "legendLabel": "참여율 %",
+      "period": {
+        "weekly": "주간",
+        "monthly": "월간",
+        "yearly": "연간"
+      },
+      "lastParticipation": {
+        "label": "최근 투표 참여율",
+        "tooltip": "최근 투표 이벤트의 참여 비율."
+      },
+      "averageParticipation": {
+        "label": "평균 투표 참여율",
+        "tooltip": "기간에 걸친 평균 투표 참여 비율."
+      },
+      "averagePower": {
+        "label": "평균 투표력",
+        "tooltip": "모든 참여자에 걸친 평균 투표력."
+      }
+    },
+    "estimateRewards": {
+      "title": "보상 추정하기",
+      "lockDuration": "잠금 기간",
+      "participants": "참여자",
+      "lockedForAtLeast": "현재 최소 다음 기간 동안 잠김",
+      "lockedFor": "현재 다음 기간 동안 잠김",
+      "year": "년",
+      "years": "년"
+    },
+    "kpi": {
+      "metric": "지표",
+      "rewardBaseCurrentYear": "현재 연도의 보상 기준",
+      "dailyVotingRewards": "일일 투표 보상",
+      "totalVotingPower": "총 투표력",
+      "overallVotingParticipation": "전체 투표 참여율"
+    },
+    "total": {
+      "titleTooltip": "거버넌스 캐니스터에 있는 모든 토큰. 이 토큰들은 베스팅 상태, 스테이킹 상태, 스테이크 해제 또는 미청구 상태일 수 있습니다.",
+      "totalLabel": "거버넌스 내 총 토큰",
+      "locked": {
+        "name": "잠김",
+        "tooltip": "거버넌스에 잠긴 토큰."
+      },
+      "unlocked": {
+        "name": "잠금 해제됨",
+        "tooltip": "거버넌스에서 잠금 해제되어 언제든지 인출하고 거래할 수 있는 토큰."
+      },
+      "accumulatedRewards": {
+        "name": "누적 보상",
+        "tooltip": "사용자에게 계산되었지만 아직 청구되지 않은 보상."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "제안",
+      "viewProposal": "제안 보기",
+      "columns": {
+        "id": "ID",
+        "title": "제목",
+        "proposed": "제안일",
+        "timeRemaining": "남은 시간",
+        "topic": "주제",
+        "status": "상태",
+        "view": "보기"
+      }
+    },
+    "details": {
+      "category": "거버넌스",
+      "proposalNumber": "제안 #",
+      "proposal": "제안",
+      "titleLoading": "제안 제목 로딩 중…",
+      "payloadLoading": "제안 세부 정보 로딩 중…",
+      "posted": "게시일",
+      "topic": "주제",
+      "moreInfo": "추가 정보",
+      "totalVotes": "총 투표수",
+      "adopt": "채택",
+      "reject": "거부",
+      "vote": "투표"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "뉴런",
+      "viewNeuron": "뉴런 보기",
+      "columns": {
+        "id": "ID",
+        "state": "상태",
+        "stakedOgy": "스테이크된 OGY",
+        "dissolveDelay": "해제 지연",
+        "age": "기간",
+        "votingPower": "투표력",
+        "view": "보기"
+      }
+    },
+    "details": {
+      "category": "뉴런",
+      "title": "OGY 뉴런",
+      "created": "생성일",
+      "stakedOgy": "스테이크된 OGY",
+      "votingPower": "투표력",
+      "dissolveDelay": "해제 지연",
+      "age": "기간",
+      "lifecycle": "뉴런 수명 주기",
+      "dateCreated": "생성 날짜",
+      "autoStakeMaturity": "자동 스테이크 성숙도",
+      "rewardsAndBonuses": "보상 및 보너스",
+      "stakedMaturity": "스테이크된 성숙도",
+      "totalMaturity": "총 성숙도",
+      "ageBonus": "기간 보너스",
+      "totalBonus": "총 보너스",
+      "dissolveDelayBonus": "해제 지연 보너스"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "거래 내역",
+      "searchFor": "검색:",
+      "or": "또는",
+      "searchPlaceholder": "항목 검색",
+      "noResults": "결과를 찾을 수 없습니다",
+      "resultBlock": "블록",
+      "resultPrincipal": "프린시펄",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "거래 세부 정보",
+      "hash": "해시",
+      "fetchError": "거래 하나를 가져오는 중 오류가 발생했습니다!",
+      "mintingAccount": "민팅 계정",
+      "fee": "수수료",
+      "memo": "메모",
+      "none": "없음"
+    },
+    "accountDetails": {
+      "title": "OGY 계정",
+      "id": "ID",
+      "owner": "소유자",
+      "subaccount": "하위 계정",
+      "defaultSubaccount": "없음 (기본 하위 계정)",
+      "historicalMaxBalance": "역대 최대 잔액",
+      "genesisBalance": "제네시스 잔액",
+      "period": {
+        "monthly": "월간",
+        "quarterly": "분기별",
+        "yearly": "연간",
+        "lifetime": "전체 기간"
+      },
+      "empty": {
+        "title": "아직 거래가 없습니다",
+        "description": "이 계정에는 거래 내역이 없습니다. OGY를 보내거나 받으면 여기에 활동이 표시됩니다."
+      },
+      "balanceHistory": {
+        "title": "잔액 내역",
+        "currentBalance": "현재 잔액",
+        "currentBalanceInfo": "현재 계정 잔액.",
+        "legend": "OGY 잔액"
+      },
+      "overview": {
+        "title": "거래 개요",
+        "totalLabel": "총 금액",
+        "totalSent": "총 발신",
+        "totalSentInfo": "프린시펄이 보낸 총 금액.",
+        "totalReceived": "총 수신",
+        "totalReceivedInfo": "프린시펄이 받은 총 금액."
+      }
+    },
+    "flow": {
+      "title": "거래 흐름",
+      "searchPlaceholder": "거래 검색…",
+      "clearSearch": "검색 지우기",
+      "loadError": "거래 데이터를 불러올 수 없습니다. 다시 시도해 주세요.",
+      "noMatch": "이 검색과 일치하는 거래가 없습니다.",
+      "transactions": "건의 거래",
+      "out": "출금",
+      "in": "입금",
+      "total": "총계",
+      "legend": {
+        "outTransaction": "출금 거래",
+        "inTransaction": "입금 거래",
+        "includesInitial": "최초 거래 포함",
+        "rootAccount": "루트 계정",
+        "account": "계정",
+        "fromRoot": "루트로부터의 거래 포함",
+        "toRoot": "루트로의 거래 포함",
+        "madeInitial": "최초 거래 수행"
+      }
+    },
+    "kind": {
+      "mint": "발행",
+      "transfer": "전송",
+      "burn": "소각",
+      "approve": "승인"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "다시 오신 것을 환영합니다",
+      "value": "가치:",
+      "disconnectWallet": "지갑 연결 해제",
+      "accountLabel": "계정",
+      "manageDescription": "OGY 지갑, 보상 및 스테이킹 활동을 관리하세요.",
+      "walletBalance": "지갑 잔액",
+      "myAccount": "내 계정",
+      "howToTopUp": "충전 방법은?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "사용 가능한 OGY",
+      "transactionHistory": "거래 내역",
+      "transfer": "전송",
+      "transferOgy": "OGY 전송",
+      "transferDescription": "OGY는 사용 가능한 잔액에서만 보낼 수 있습니다.",
+      "max": "최대",
+      "recipientAddress": "받는 사람 주소",
+      "amountReceived": "받은 금액",
+      "ogyLogoAlt": "OGY 로고",
+      "transactionFee": "거래 수수료 (출처에 청구)",
+      "currentBalance": "현재 잔액:",
+      "transferProcessing": "전송을 처리 중입니다",
+      "transferProcessingHint": "몇 초 정도 걸릴 수 있습니다",
+      "transferSuccess": "전송이 완료되었습니다!",
+      "transferError": "전송 오류!",
+      "errors": {
+        "amountRequired": "금액은 필수입니다.",
+        "amountExceedsBalance": "금액은 잔액을 초과할 수 없습니다.",
+        "amountBelowFee": "금액은 거래 수수료보다 적을 수 없습니다.",
+        "amountNotPositive": "금액은 양수여야 합니다.",
+        "recipientRequired": "받는 사람 주소는 필수입니다.",
+        "recipientInvalid": "유효하지 않은 받는 사람 주소입니다."
+      }
+    },
+    "staked": {
+      "title": "스테이크된 OGY",
+      "stake": "스테이크",
+      "stakeOgy": "OGY 스테이크",
+      "stakeDescription": "OGY를 스테이크하려면 NNS 플랫폼으로 이동해야 합니다.",
+      "warningNotConnected": "다음에 연결되어 있지 않은 것 같습니다:",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "다음이 필요합니다:",
+      "warningToConnect": "NNS 플랫폼에 연결하려면.",
+      "goToNns": "NNS로 이동"
+    },
+    "rewards": {
+      "title": "스테이킹 보상",
+      "claimAll": "모두 청구",
+      "claimDisabledReason": "보상 청구는 프린시펄 기본 계정에서만 지원됩니다.",
+      "aboutToClaim": "다음을 청구하려고 합니다",
+      "sentToPrincipal": "보상은 귀하의 프린시펄로 전송됩니다",
+      "pending": "모든 보상 청구 중...",
+      "successTitle": "모든 보상 청구 성공!",
+      "errorTitle": "모든 보상 청구 오류!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "레저와 거버넌스를 전환하고 있습니다",
+        "description": "ORIGYN 거버넌스와 레저가 SNS로 업그레이드되었습니다. ORIGYN 거버넌스에 계속 참여하고 OGY를 사용하려면 OGY 토큰을 마이그레이션해야 합니다."
+      },
+      "howToSwap": "토큰 스왑 방법",
+      "disclosureToggle": "아직 이전 OGY 토큰을 가지고 계신가요? 지금 스왑하세요!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "1단계: 이전 거버넌스에서 인출",
+          "subtitle": "이전에 OGY 거버넌스에 참여하셨다면, 스왑하기 전에 해당 토큰을 인출해야 합니다."
+        },
+        "deposit": {
+          "title": "2단계: 계정에 입금",
+          "subtitle": "OGY 대시보드 외부에 토큰이 있다면, 스왑을 시작하기 전에 귀하의 account-id로 입금하세요."
+        },
+        "swap": {
+          "title": "3단계: 토큰 스왑",
+          "subtitle": "레거시 OGY 토큰을 새 레저로 스왑합니다."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "레거시 OGY 잔액"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "레거시 OGY 대시보드로 이동"
+      },
+      "swap": {
+        "disabledOisy": "레거시 OGY 스왑은 OISY에서 사용할 수 없습니다. 레거시 OGY를 스왑하려면 Internet Identity 또는 Plug로 연결하세요.",
+        "disabledSubAccount": "레거시 OGY 스왑은 프린시펄 기본 계정에서만 지원됩니다.",
+        "swapYourTokens": "토큰 스왑하기",
+        "automaticDisabled": "자동 스왑이 비활성화되었습니다. 스왑 요청에 대한 승인을 받아야 하며, 최소 금액은 50 000 OGY입니다.",
+        "form": {
+          "title": "OGY를 새 레저로 스왑",
+          "description": "스왑하려는 OGY 토큰을 귀하의 account id로 입금하세요",
+          "tokensAvailable": "스왑 가능한 토큰",
+          "youWillReceivePrefix": "받게 될 금액:",
+          "youWillReceiveSuffix": "새 레저의 OGY 토큰.",
+          "swapPrefix": "스왑",
+          "swapSuffix": "OGY 토큰"
+        },
+        "pending": {
+          "takesTime": "스왑 과정은 약간의 시간이 걸릴 수 있습니다.",
+          "doNotRefresh": "페이지를 새로고침하지 마세요!",
+          "swapping": "토큰 스왑 중..."
+        },
+        "success": {
+          "title": "스왑이 완료되었습니다!",
+          "walletBalance": "새 레저의 지갑 잔액",
+          "myAccount": "내 계정"
+        },
+        "error": {
+          "title": "토큰 스왑 오류!",
+          "retry": "다시 시도"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "내 OGY 뉴런",
+        "idHeader": "ID",
+        "stakedAmount": "스테이크 금액",
+        "claimAmount": "청구 금액",
+        "emptyTitle": "아직 뉴런이 없습니다",
+        "emptyDescription": "OGY 뉴런을 추가하여 여기에서 스테이크, 투표력 및 보상 추적을 시작하세요.",
+        "addFirstNeuron": "첫 번째 뉴런 추가"
+      },
+      "add": {
+        "button": "뉴런 추가",
+        "title": "뉴런 추가",
+        "description": "여기에서 관리하려는 각 OGY 뉴런에 이 프린시펄을 핫키로 추가하세요.",
+        "needHotkey": "핫키를 추가해야 하나요?",
+        "openNns": "NNS 앱 열기"
+      },
+      "claim": {
+        "button": "청구",
+        "disabledReason": "보상 청구는 프린시펄 기본 계정에서만 지원됩니다.",
+        "aboutToClaim": "다음을 청구하려고 합니다",
+        "sentToPrincipal": "보상은 귀하의 프린시펄로 전송됩니다",
+        "pending": "보상 청구 중...",
+        "successTitle": "보상 청구 성공!",
+        "errorTitle": "보상 청구 오류!",
+        "retry": "다시 시도"
+      },
+      "remove": {
+        "title": "뉴런 제거",
+        "description": "이 뉴런을 제거하려면, 뉴런의 핫키 목록에서 귀하의 프린시펄을 제거해야 합니다."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "주소",
+      "governanceBalance": "거버넌스 잔액",
+      "stakedTokens": "스테이크된 토큰",
+      "ledgerBalance": "레저 잔액",
+      "weightInTotalSupply": "총 공급량 내 비중"
+    }
+  },
+  "recovery": {
+    "title": "토큰 복구하기",
+    "description": "OGY 대시보드는 OGY 토큰만 지원합니다. 실수로 다른 토큰을 이곳에 보낸 경우, 아래 단계를 따라 복구할 수 있습니다.",
+    "chooseToken": "토큰 선택",
+    "loginRequired": "토큰을 회수하려면 로그인되어 있어야 합니다.",
+    "transfer": {
+      "icpLogoAlt": "ICP 로고",
+      "ledgerCanister": "레저 캐니스터:",
+      "transferIcp": "ICP 전송",
+      "availableBalanceNote": "ICP는 사용 가능한 잔액에서만 보낼 수 있습니다.",
+      "amountRequired": "금액은 필수입니다.",
+      "amountExceedsBalance": "금액은 잔액을 초과할 수 없습니다.",
+      "amountPositive": "금액은 양수여야 합니다.",
+      "amountBelowFee": "금액은 거래 수수료보다 크거나 같아야 합니다.",
+      "recipientAddress": "받는 사람 주소",
+      "recipientAddressRequired": "받는 사람 주소는 필수입니다.",
+      "invalidRecipientAddress": "유효하지 않은 받는 사람 주소입니다.",
+      "amountReceived": "받은 금액",
+      "transactionFee": "거래 수수료",
+      "currentBalance": "현재 잔액:",
+      "processing": "전송을 처리 중입니다",
+      "processingNote": "몇 초 정도 걸릴 수 있습니다",
+      "success": "전송이 완료되었습니다!",
+      "error": "전송 오류!"
+    }
+  },
+  "support": {
+    "category": "지원",
+    "title": "티켓 생성",
+    "titleSubmitted": "티켓이 제출되었습니다",
+    "successTitle": "지원 티켓이 생성되었습니다",
+    "successMessage": "제공해 주신 이메일 주소로 후속 연락을 드리겠습니다.",
+    "submitAnother": "다른 티켓 제출",
+    "intro": "문제 내용과 연락 방법을 설명해 주세요.",
+    "form": {
+      "name": "이름",
+      "email": "연락처 이메일",
+      "emailRequired": "이메일 주소는 필수입니다",
+      "emailInvalid": "유효하지 않은 이메일 주소입니다",
+      "principal": "지갑 프린시펄",
+      "invalidPrincipal": "유효하지 않은 받는 사람 주소입니다.",
+      "description": "설명",
+      "descriptionPlaceholder": "무슨 일이 있는지 알려주세요…",
+      "descriptionRequired": "문제를 설명해 주세요"
+    },
+    "submitError": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "submitting": "제출 중…"
+  },
+  "explorer": {
+    "title": "익스플로러",
+    "searchPlaceholder": "제목, 발행자, 프린시펄 또는 토큰 ID로 검색",
+    "openFilters": "필터 열기",
+    "checkOnBlockchain": "블록체인에서 확인",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "추천 인증서",
+      "art": "예술 인증서",
+      "gold": "골드 인증서"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "클립보드에 복사",
+    "toggleRelativeTime": "상대 시간 전환. 현재 표시:",
+    "collapseRow": "행 접기",
+    "expandRow": "행 펼치기",
+    "searchPlaceholder": "항목 검색...",
+    "sortAscending": "오름차순 정렬",
+    "sortDescending": "내림차순 정렬",
+    "linesPerPage": "페이지당 행 수",
+    "page": "페이지",
+    "pageOf": "/",
+    "previousPage": "이전 페이지",
+    "nextPage": "다음 페이지"
+  },
+  "auth": {
+    "connect": "연결",
+    "disconnect": "연결 해제",
+    "connectWallet": {
+      "title": "지갑 연결",
+      "subtitle": "로그인 방법을 선택하세요"
+    },
+    "install": "설치",
+    "newToIc": "Internet Computer가 처음이신가요?",
+    "learnMore": "자세히 알아보기",
+    "connecting": {
+      "title": "연결 중...",
+      "subtitle": "지갑에서 요청을 승인하세요"
+    },
+    "sessionExpired": {
+      "title": "세션이 만료되었습니다",
+      "description": "지갑 세션이 더 이상 유효하지 않습니다. 계속하려면 다시 연결하세요."
+    },
+    "reconnect": "다시 연결",
+    "error": {
+      "connectionCancelled": "연결이 취소되었습니다. 다시 시도해 주세요.",
+      "connectionFailed": "지갑 연결에 실패했습니다. 다시 시도해 주세요."
+    }
+  },
+  "warning": {
+    "badge": "신규",
+    "ledgerSwitch": "레저를 전환하고 있습니다. OGY를 새 것으로 스왑해야 합니다"
+  },
+  "calculator": {
+    "header": {
+      "title": "비용 계산기",
+      "description": "ORIGYN 계산기를 사용하여 모든 데이터를 온체인에 저장하는 고유 인증서의 발행 비용을 추산하십시오."
+    },
+    "plan": {
+      "title": "발행 계획 수립",
+      "description": "항목 수와 업로드할 파일 유형을 알려 주십시오.",
+      "itemsLabel": "항목 수는 몇 개입니까?",
+      "uploadingLabel": "무엇을 업로드하십니까?",
+      "knowExactSize": "정확한 크기를 알고 계십니까?",
+      "totalUploadSize": "총 업로드 크기",
+      "usePreset": "프리셋을 사용하십시오",
+      "combinedSize": "모든 항목에 포함된 파일의 합산 크기입니다.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "각 250 KB"
+        },
+        "iphone": {
+          "label": "사진",
+          "hint": "각 3 MB"
+        },
+        "dslr": {
+          "label": "스튜디오 사진",
+          "hint": "각 20 MB"
+        },
+        "video": {
+          "label": "단편 영상",
+          "hint": "각 1 GB"
+        },
+        "video1hr": {
+          "label": "장편 영상",
+          "hint": "각 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "실시간 추산",
+      "titleRefreshing": "추산 갱신 중",
+      "description": "설정 변경 시 자동으로 업데이트됩니다.",
+      "ogyEquivalent": "OGY 환산액",
+      "ogySpotRate": "OGY 현물 환율",
+      "itemSingular": "항목",
+      "itemPlural": "항목",
+      "upload": "업로드"
+    },
+    "breakdown": {
+      "title": "비용 상세 내역",
+      "baseFee": "기본 발행 수수료",
+      "storageFee": "스토리지 수수료",
+      "items": "항목",
+      "uploadSize": "업로드 크기"
+    },
+    "bytesUnit": "바이트"
+  }
+}

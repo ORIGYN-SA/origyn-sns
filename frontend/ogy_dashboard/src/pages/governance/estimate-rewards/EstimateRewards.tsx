@@ -4,6 +4,7 @@ import { Card } from "@components/ui";
 import { CardErrorOverlay } from "@components/dashboard";
 import useEstimatedRewards from "@hooks/governance/useEstimatedRewards";
 import { millify } from "@helpers/numbers";
+import { useT } from "@i18n/LocaleContext";
 
 const COMPACT_AMOUNT_THRESHOLD = 10_000;
 
@@ -66,6 +67,9 @@ const DiscreteSlider = ({
     <div
       ref={ref}
       role="slider"
+      // Range slider math/fill are left-based; keep it LTR so the track and
+      // thumb don't desync from the pointer math under RTL locales.
+      dir="ltr"
       tabIndex={0}
       aria-label={ariaLabel}
       aria-valuemin={min}
@@ -114,12 +118,19 @@ const DiscreteSlider = ({
 type LockedStatProps = {
   amount: string;
   participants: number;
+  participantsLabel: string;
   caption: string;
 };
 
-const LockedStat = ({ amount, participants, caption }: LockedStatProps) => (
+const LockedStat = ({
+  amount,
+  participants,
+  participantsLabel,
+  caption,
+}: LockedStatProps) => (
   <div className="min-w-0">
-    <div className="flex items-baseline leading-none">
+    {/* Numeric/currency cluster stays LTR in every locale (logo + digits + OGY). */}
+    <div dir="ltr" className="flex items-baseline leading-none">
       <span className="inline-flex items-center">
         <img
           src="/ogy_logo.svg"
@@ -132,7 +143,7 @@ const LockedStat = ({ amount, participants, caption }: LockedStatProps) => (
     </div>
     <div className="mt-2 text-[13px] font-normal leading-none text-muted">
       <span className="font-semibold text-content">{participants}</span>{" "}
-      participants
+      {participantsLabel}
     </div>
     <div className="mt-2 text-[13px] font-normal leading-none text-muted">
       {caption}
@@ -149,13 +160,17 @@ const placeholderData = [
 ];
 
 const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
+  const t = useT();
   const { data, isSuccess, isLoading, isError } = useEstimatedRewards();
   const [activeIndex, setActiveIndex] = useState(1);
 
   const hasError = !isLoading && isError;
   const displayData = isSuccess && data ? data : placeholderData;
   const current = displayData[activeIndex - 1];
-  const yearLabel = activeIndex === 1 ? "year" : "years";
+  const yearLabel =
+    activeIndex === 1
+      ? t("governance.estimateRewards.year")
+      : t("governance.estimateRewards.years");
 
   return (
     <Card
@@ -163,11 +178,11 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
       {...restProps}
     >
       <h2 className="text-base font-semibold leading-none text-muted">
-        Estimate your rewards
+        {t("governance.estimateRewards.title")}
       </h2>
 
       <div className="text-[28px] sm:text-[40px] font-bold leading-none text-content">
-        {current?.rate?.replace(/\s+/g, "") || "N/A"}
+        {current?.rate?.replace(/\s+/g, "") || t("common.notAvailable")}
       </div>
 
       <DiscreteSlider
@@ -175,7 +190,7 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         max={5}
         value={activeIndex}
         onChange={setActiveIndex}
-        ariaLabel="Lock duration"
+        ariaLabel={t("governance.estimateRewards.lockDuration")}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -183,13 +198,15 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
           <LockedStat
             amount={formatAmountCompact(current.lockedSum)}
             participants={current.countSum}
-            caption={`currently locked for at least ${activeIndex} ${yearLabel}`}
+            participantsLabel={t("governance.estimateRewards.participants")}
+            caption={`${t("governance.estimateRewards.lockedForAtLeast")} ${activeIndex} ${yearLabel}`}
           />
         )}
         <LockedStat
           amount={formatAmountCompact(current?.locked || "0")}
           participants={current?.count ?? 0}
-          caption={`currently locked for ${activeIndex} ${yearLabel}`}
+          participantsLabel={t("governance.estimateRewards.participants")}
+          caption={`${t("governance.estimateRewards.lockedFor")} ${activeIndex} ${yearLabel}`}
         />
       </div>
 
@@ -202,7 +219,9 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
           <div className="pointer-events-none absolute inset-4 rounded-xl bg-muted/20 animate-pulse" />
         </>
       )}
-      {hasError && <CardErrorOverlay title="Estimate your rewards" />}
+      {hasError && (
+        <CardErrorOverlay title={t("governance.estimateRewards.title")} />
+      )}
     </Card>
   );
 };

@@ -14,6 +14,8 @@ import { CardErrorOverlay } from "@components/dashboard";
 import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useNeurons from "@hooks/neurons/useNeuronsAll";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
+import type { Translate } from "@i18n";
 
 export type NeuronRow = {
   id: string;
@@ -28,26 +30,31 @@ export type NeuronRow = {
 };
 
 const getColumns = (
-  navigate: (opts: { pathname: string; search: string }) => void
+  navigate: (opts: { pathname: string; search: string }) => void,
+  lp: (target: string) => string,
+  t: Translate
 ): NewTableColumn<NeuronRow>[] => [
   {
     id: "id",
-    header: "ID",
+    header: t("neurons.list.columns.id"),
     cell: (row, { isExpanded, toggleExpand }) => (
       <div className="flex items-center">
         <RowExpandToggle
           isExpanded={isExpanded}
           onToggle={toggleExpand}
-          className="mr-2"
+          className="me-2"
         />
-        <span className="truncate min-w-0 max-w-[200px]">{row.id}</span>
+        {/* Raw neuron ID stays LTR so RTL bidi doesn't reorder the value. */}
+        <span dir="ltr" className="truncate min-w-0 max-w-[200px]">
+          {row.id}
+        </span>
         <CopyToClipboard value={row.id} />
       </div>
     ),
   },
   {
     id: "state",
-    header: "State",
+    header: t("neurons.list.columns.state"),
     cell: (row) => (
       <span
         className={`inline-block text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${
@@ -62,17 +69,17 @@ const getColumns = (
   },
   {
     id: "stakedOGY",
-    header: "Staked OGY",
+    header: t("neurons.list.columns.stakedOgy"),
     cell: (row) => <span>{row.stakedOGY}</span>,
   },
   {
     id: "dissolveDelay",
-    header: "Dissolve Delay",
+    header: t("neurons.list.columns.dissolveDelay"),
     cell: (row) => <span>{row.dissolveDelay}</span>,
   },
   {
     id: "age",
-    header: "Age",
+    header: t("neurons.list.columns.age"),
     cell: (row) =>
       row.createdAtRaw ? (
         <DatePill millis={row.createdAtRaw * 1000} />
@@ -82,19 +89,19 @@ const getColumns = (
   },
   {
     id: "votingPower",
-    header: "Voting Power",
+    header: t("neurons.list.columns.votingPower"),
     cell: (row) => <span>{row.votingPower}</span>,
   },
   {
     id: "view",
-    header: "View",
+    header: t("neurons.list.columns.view"),
     cell: (row) => (
       <button
         type="button"
-        aria-label={`View neuron ${row.id}`}
+        aria-label={`${t("neurons.list.viewNeuron")} ${row.id}`}
         onClick={() =>
           navigate({
-            pathname: "/governance/neurons/details",
+            pathname: lp("/governance/neurons/details"),
             search: createSearchParams({ id: row.id }).toString(),
           })
         }
@@ -122,6 +129,8 @@ const buildSkeletonRows = (count: number): NeuronRow[] =>
   buildFakeRows(FAKE_ROW, count);
 
 const NeuronsList = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -133,7 +142,7 @@ const NeuronsList = () => {
 
   const hasError = !isLoading && isError;
   const showSkeleton = isLoading || hasError;
-  const columns = getColumns(navigate);
+  const columns = getColumns(navigate, lp, t);
   const pageCount = data?.list.pageCount ?? 0;
 
   const goToPage = (next: number) => setPageIndex(next);
@@ -160,7 +169,7 @@ const NeuronsList = () => {
   return (
     <div className="relative">
       <SkeletonOverlay loading={showSkeleton}>
-        {hasError && <CardErrorOverlay title="Neurons" />}
+        {hasError && <CardErrorOverlay title={t("neurons.list.title")} />}
         <NewTable
           columns={columns}
           data={rows}

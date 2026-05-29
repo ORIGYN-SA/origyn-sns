@@ -14,6 +14,8 @@ import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useProposals from "@hooks/proposals/useProposalsAll";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
+import type { Translate } from "@i18n";
 
 export type ProposalRow = {
   id: number;
@@ -28,25 +30,30 @@ export type ProposalRow = {
 };
 
 const getColumns = (
-  navigate: (opts: { pathname: string; search: string }) => void
+  navigate: (opts: { pathname: string; search: string }) => void,
+  lp: (target: string) => string,
+  t: Translate
 ): NewTableColumn<ProposalRow>[] => [
   {
     id: "id",
-    header: "ID",
+    header: t("proposals.list.columns.id"),
     cell: (row, { isExpanded, toggleExpand }) => (
       <div className="flex items-center">
         <RowExpandToggle
           isExpanded={isExpanded}
           onToggle={toggleExpand}
-          className="mr-2"
+          className="me-2"
         />
-        <div className="truncate">{row.id}</div>
+        {/* Raw proposal ID stays LTR so RTL bidi doesn't reorder digits. */}
+        <div dir="ltr" className="truncate">
+          {row.id}
+        </div>
       </div>
     ),
   },
   {
     id: "title",
-    header: "Title",
+    header: t("proposals.list.columns.title"),
     cell: (row) => (
       <div className="max-w-64 truncate">
         <span className="font-medium">{row.title}</span>
@@ -55,7 +62,7 @@ const getColumns = (
   },
   {
     id: "proposed",
-    header: "Proposed",
+    header: t("proposals.list.columns.proposed"),
     cell: (row) =>
       row.proposedRaw ? (
         <DatePill millis={row.proposedRaw * 1000} />
@@ -65,7 +72,7 @@ const getColumns = (
   },
   {
     id: "timeRemaining",
-    header: "Time Remaining",
+    header: t("proposals.list.columns.timeRemaining"),
     cell: (row) =>
       row.timeRemainingRaw ? (
         <DatePill millis={row.timeRemainingRaw * 1000} />
@@ -75,7 +82,7 @@ const getColumns = (
   },
   {
     id: "topic",
-    header: "Topic",
+    header: t("proposals.list.columns.topic"),
     cell: (row) => (
       <span className="inline-block rounded-full border border-spacePurple/25 bg-spacePurple/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300 whitespace-nowrap">
         {row.topic}
@@ -84,7 +91,7 @@ const getColumns = (
   },
   {
     id: "status",
-    header: "Status",
+    header: t("proposals.list.columns.status"),
     cell: (row) => (
       <span
         className={`inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap ${getColorByProposalStatus(row.status, "bg")} ${getColorByProposalStatus(row.status, "text")}`}
@@ -95,14 +102,14 @@ const getColumns = (
   },
   {
     id: "view",
-    header: "View",
+    header: t("proposals.list.columns.view"),
     cell: (row) => (
       <button
         type="button"
-        aria-label={`View proposal ${row.id}`}
+        aria-label={`${t("proposals.list.viewProposal")} ${row.id}`}
         onClick={() =>
           navigate({
-            pathname: "/proposals/details",
+            pathname: lp("/proposals/details"),
             search: createSearchParams({ id: String(row.id) }).toString(),
           })
         }
@@ -130,6 +137,8 @@ const buildSkeletonRows = (count: number): ProposalRow[] =>
   buildFakeRows(FAKE_ROW, count);
 
 const ProposalsList = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const navigate = useNavigate();
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -141,7 +150,7 @@ const ProposalsList = () => {
 
   const hasError = !isLoading && isError;
   const showSkeleton = isLoading || hasError;
-  const columns = getColumns(navigate);
+  const columns = getColumns(navigate, lp, t);
   const pageCount = data?.list.pageCount ?? 0;
 
   const goToPage = (next: number) => setPageIndex(next);
@@ -168,7 +177,7 @@ const ProposalsList = () => {
   return (
     <div className="relative">
       <SkeletonOverlay loading={showSkeleton}>
-        {hasError && <CardErrorOverlay title="Proposals" />}
+        {hasError && <CardErrorOverlay title={t("proposals.list.title")} />}
         <NewTable
           columns={columns}
           data={rows}

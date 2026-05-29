@@ -1,5 +1,6 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useWallet } from "@components/auth/useWallet";
+import { useT } from "@i18n/LocaleContext";
 
 import useFetchBalanceOGYLegacyOwner from "@hooks/accounts/useFetchBalanceOGYLegacyOwner";
 import useSendTokens from "@services/queries/switch-ledger/useSendTokens";
@@ -33,6 +34,7 @@ export const useSwapTokens = () => {
 };
 
 export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
+  const t = useT();
   const { principalId, accountId, subAccount, walletSelected } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -43,9 +45,9 @@ export const SwapTokensProvider = ({ children }: { children: ReactNode }) => {
   // calls. Disable swap for OISY (also skips the is_caller_whitelisted query).
   const swapDisabledReason =
     walletSelected === "oisy"
-      ? "Legacy OGY swap isn't available with OISY. Connect with Internet Identity or Plug to swap your legacy OGY."
+      ? t("account.ledgerSwitch.swap.disabledOisy")
       : subAccount
-        ? "Legacy OGY swap is only supported from the principal default account."
+        ? t("account.ledgerSwitch.swap.disabledSubAccount")
         : undefined;
   const { data: isWhitelisted } = useIsWhitelisted(
     principalId,

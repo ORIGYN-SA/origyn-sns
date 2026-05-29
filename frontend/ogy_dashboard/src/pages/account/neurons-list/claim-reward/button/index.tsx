@@ -1,7 +1,9 @@
 import { Button } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import { useClaimReward } from "../context";
 
 const BtnClaimReward = () => {
+  const t = useT();
   const { handleShow, claimAmount, claimDisabledReason } = useClaimReward();
   return (
     <Button
@@ -9,7 +11,7 @@ const BtnClaimReward = () => {
       disabled={claimAmount === 0 || !!claimDisabledReason}
       title={claimDisabledReason}
     >
-      Claim {claimAmount} OGY
+      {t("account.neurons.claim.button")} {claimAmount} OGY
     </Button>
   );
 };

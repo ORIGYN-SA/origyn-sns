@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useT } from "@i18n/LocaleContext";
 
 const BackIcon = () => (
   <svg
@@ -8,6 +9,7 @@ const BackIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
+    className="rtl:-scale-x-100"
   >
     <path
       d="M9.57 5.92969L3.5 11.9997L9.57 18.0697"
@@ -42,14 +44,16 @@ const PageHeader = ({
   title,
   onBack,
   right,
-}: PageHeaderProps) => (
+}: PageHeaderProps) => {
+  const t = useT();
+  return (
   <div className="relative flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 py-8 after:absolute after:-left-6 after:-right-6 after:bottom-0 after:h-px after:bg-border-strong">
     <div className="flex items-center gap-6">
       {onBack && (
         <button
           type="button"
           onClick={onBack}
-          aria-label="Back"
+          aria-label={t("common.back")}
           className="shrink-0 text-content hover:opacity-70 transition-opacity"
         >
           <BackIcon />
@@ -74,6 +78,7 @@ const PageHeader = ({
     </div>
     {right}
   </div>
-);
+  );
+};
 
 export default PageHeader;

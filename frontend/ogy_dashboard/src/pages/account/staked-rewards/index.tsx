@@ -7,8 +7,10 @@ import {
 } from "@pages/account/staked-rewards/claim-all-rewards";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
+import { useT } from "@i18n/LocaleContext";
 
 const StakedRewards = () => {
+  const t = useT();
   const { principalId: owner } = useWallet();
   const { stakedRewardsOGY } = useNeurons({ owner, limit: 0 });
   const {
@@ -25,7 +27,7 @@ const StakedRewards = () => {
 
   return (
     <BalanceCard
-      title="Staked Rewards"
+      title={t("account.rewards.title")}
       balance={stakedRewardsOGY.string.totalStakedRewardsOGY ?? undefined}
       isBalanceLoading={isBalanceLoading}
       usd={stakedRewardOGYUSD}

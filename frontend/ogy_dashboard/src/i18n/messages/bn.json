@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "ভাষা",
+    "switchTo": "{language}-এ পরিবর্তন করুন",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "লোড হচ্ছে...",
+    "error": "কিছু একটা সমস্যা হয়েছে",
+    "retry": "আবার চেষ্টা করুন",
+    "cancel": "বাতিল করুন",
+    "confirm": "নিশ্চিত করুন",
+    "close": "বন্ধ করুন",
+    "back": "পেছনে",
+    "next": "পরবর্তী",
+    "previous": "পূর্ববর্তী",
+    "save": "সংরক্ষণ করুন",
+    "submit": "জমা দিন",
+    "copy": "কপি করুন",
+    "copied": "কপি হয়েছে",
+    "search": "অনুসন্ধান",
+    "viewAll": "সব দেখুন",
+    "showMore": "আরও দেখুন",
+    "showLess": "কম দেখুন",
+    "amount": "পরিমাণ",
+    "date": "তারিখ",
+    "type": "ধরন",
+    "from": "থেকে",
+    "to": "প্রতি",
+    "index": "ইনডেক্স",
+    "status": "অবস্থা",
+    "total": "মোট",
+    "balance": "ব্যালেন্স",
+    "yes": "হ্যাঁ",
+    "no": "না",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "governance": "গভর্ন্যান্স",
+    "transactionHistory": "লেনদেনের ইতিহাস",
+    "calculator": "ক্যালকুলেটর",
+    "openMainMenu": "প্রধান মেনু খুলুন",
+    "closeMenu": "মেনু বন্ধ করুন",
+    "openAccountOverview": "অ্যাকাউন্ট সংক্ষিপ্তসার খুলুন",
+    "viewAccountOverview": "অ্যাকাউন্ট সংক্ষিপ্তসার দেখুন",
+    "connectPrompt": "টোকেন পরিচালনা করতে, প্রস্তাবে ভোট দিতে এবং আপনার লেনদেনের ইতিহাস দেখতে আপনার ওয়ালেট সংযুক্ত করুন।",
+    "connectWallet": "ওয়ালেট সংযুক্ত করুন",
+    "disconnect": "সংযোগ বিচ্ছিন্ন করুন"
+  },
+  "notFound": {
+    "title": "পৃষ্ঠা পাওয়া যায়নি",
+    "description": "দুঃখিত, আপনি যে পৃষ্ঠাটি খুঁজছেন তা আমরা খুঁজে পাইনি।",
+    "backHome": "হোমে ফিরে যান"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY ড্যাশবোর্ড",
+      "home": "হোম",
+      "circulation": "প্রচলন",
+      "governance": "গভর্ন্যান্স",
+      "revenue": "রাজস্ব",
+      "rewards": "পুরস্কার",
+      "distribution": "বণ্টন",
+      "governanceDashboard": "OGY গভর্ন্যান্স ড্যাশবোর্ড",
+      "transactionExplorer": "OGY ট্রানজ্যাকশন এক্সপ্লোরার"
+    },
+    "learn": {
+      "heading": "OGY Tokenomics ও ORIGYN সম্পর্কে আরও জানুন",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT স্ট্যান্ডার্ড",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN ওয়েবসাইট",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "সহায়তা",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "যোগাযোগ"
+    },
+    "support": {
+      "contactSupport": "সহায়তায় যোগাযোগ করুন",
+      "recoverTokens": "আপনার টোকেন পুনরুদ্ধার করুন"
+    },
+    "disclaimer": "*সোয়াপ প্রক্রিয়ার সাথে সম্পর্কিত OGY Tokens-এর কোনো ক্ষতি, চুরি বা অপব্যবহারের জন্য ORIGYN Foundation দায়ী থাকবে না। উপরন্তু, সংশ্লিষ্ট পক্ষ ORIGYN Foundation দ্বারা নির্দিষ্ট করা শর্তাবলী কঠোরভাবে মেনে না চললে সোয়াপ সম্পাদন করতে কোনো ব্যর্থতার জন্য ORIGYN Foundation দায়বদ্ধ থাকবে না।"
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "ড্যাশবোর্ড অন্বেষণ করুন",
+      "subtitle": "web3 dApps, DAOs, NFTs, DeFi এবং আরও অনেক কিছুর সাথে নির্ভরহীনভাবে যোগাযোগ করুন।"
+    },
+    "cta": {
+      "loginToSwap": "টোকেন সোয়াপ করতে লগইন করুন",
+      "myAccount": "আমার অ্যাকাউন্ট"
+    },
+    "governanceStaking": {
+      "title": "গভর্ন্যান্স স্টেকিং সংক্ষিপ্তসার"
+    },
+    "cardError": {
+      "couldNotLoad": "লোড করা যায়নি",
+      "descriptionLine1": "এই মেট্রিকটি আনার সময় আমরা একটি সমস্যায় পড়েছি।",
+      "descriptionLine2": "অনুগ্রহ করে কিছুক্ষণ পরে আবার চেষ্টা করুন।"
+    },
+    "emptyState": {
+      "noDataFor": "এর জন্য কোনো ডেটা নেই",
+      "description": "এখন প্রদর্শন করার মতো কিছু নেই।"
+    },
+    "circulationState": {
+      "title": "OGY প্রচলন অবস্থা",
+      "tooltip": "প্রচলিত সরবরাহ হলো ORIGYN Foundation-এর মালিকানাধীন আনলকড টোকেন ছাড়া সমস্ত টোকেন।",
+      "nnsProposal": "NNS প্রস্তাব",
+      "totalLabel": "মোট OGY প্রচলন",
+      "notOwnedName": "Foundation-এর হাতে নেই এমন OGY",
+      "notOwnedValue": "ORIGYN foundation-এর মালিকানাধীন নয় এমন প্রচলিত টোকেনের পরিমাণ।",
+      "ownedName": "Foundation-এর হাতে লক করা OGY",
+      "ownedValue": "ORIGYN foundation-এর মালিকানাধীন লক করা টোকেনের পরিমাণ।"
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation রিজার্ভ",
+      "tooltip": "সমস্ত ওয়ালেট জুড়ে ORIGYN foundation-এর মালিকানাধীন OGY টোকেনের মোট পরিমাণ।",
+      "totalLabel": "মোট Foundation সরবরাহ",
+      "lockedName": "লক করা",
+      "lockedIntro": "স্টেক বা ভেস্টিং-এ লক করা ORIGYN foundation টোকেন।",
+      "lockedStakes": "1) Stakes- যে টোকেনগুলি গভর্ন্যান্স ভোটিং-এ অংশগ্রহণের ফলে পুরস্কার তৈরি করছে।",
+      "lockedStakesNote": "সেই টোকেনগুলি স্বেচ্ছায় লক করা হয়েছিল।",
+      "lockedVestings": "2) Vestings- যে টোকেনগুলি কোনো পুরস্কার পাচ্ছে না এবং ভোটিং-এ অংশ নিতে পারে না।",
+      "lockedVestingsNote": "সেই টোকেনগুলি ORIGYN Foundation-এর সাথে আপনার চুক্তির মাধ্যমে লক করা হয়েছিল।",
+      "unlockedName": "আনলকড",
+      "unlockedValue": "ORIGYN foundation-এর মালিকানাধীন আনলকড তহবিল।"
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "নেটওয়ার্ক রাজস্ব",
+      "tokenLogoAlt": "টোকেন লোগো",
+      "tooltipOgy": "ORIGYN নেটওয়ার্ক ব্যবহারের জন্য ফি-এর মাধ্যমে উৎপন্ন নেটওয়ার্ক ইউটিলিটি রাজস্ব (যেমন, ডিজিটাল সার্টিফিকেট ইস্যু বা স্থানান্তর, NFTs মিন্টিং ইত্যাদির জন্য) এবং OGY-তে সঞ্চিত।",
+      "tooltipIcp": "ORIGYN নেটওয়ার্ক ব্যবহারের জন্য ফি-এর মাধ্যমে উৎপন্ন নেটওয়ার্ক ইউটিলিটি রাজস্ব (যেমন, ডিজিটাল সার্টিফিকেট ইস্যু বা স্থানান্তর, NFTs মিন্টিং ইত্যাদির জন্য) এবং ICP-তে সঞ্চিত।"
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "ORA ব্যালেন্স",
+      "year": "বছর",
+      "rewardPool": "পুরস্কার পুল",
+      "moreDetails": "আরও বিস্তারিত",
+      "tooltipStake": "টোকেন হোল্ডাররা তাদের OGY স্টেক করে গভর্ন্যান্সে অংশগ্রহণের মাধ্যমে পুরস্কার অর্জন করতে পারেন।",
+      "tooltipSeed": "পুরস্কার ORIGYN Reward Account থেকে আসবে, যা ORIGYN এক বিলিয়ন OGY দিয়ে সিড করবে।",
+      "tooltipPool": "পুরস্কার পুল-এর প্রথম বছরে 250 মিলিয়ন OGY থাকে এবং বাস্তুতন্ত্রের প্রাথমিক ও দীর্ঘমেয়াদী অবদানকারীদের উৎসাহিত ও পুরস্কৃত করতে প্রতি দুই বছরে অর্ধেক হবে।",
+      "description": "ORIGYN স্টেকড এবং ভোটিং হোল্ডারদের সুবিধার্থে একটি ORIGYN Reward Account (ORA)-তে এক বিলিয়ন OGY অবদান রাখবে। পুরস্কার পুল-এর প্রথম বছরে 250 মিলিয়ন OGY থাকে এবং বাস্তুতন্ত্রের প্রাথমিক ও দীর্ঘমেয়াদী অবদানকারীদের উৎসাহিত ও পুরস্কৃত করতে প্রতি দুই বছরে অর্ধেক হবে।"
+    },
+    "tokenDistribution": {
+      "title": "টোকেন বণ্টন"
+    },
+    "transactionHistory": {
+      "title": "লেনদেনের ইতিহাস",
+      "showAll": "সব দেখান"
+    },
+    "topTransfers": {
+      "value": "মূল্য",
+      "time": "সময়",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "কোনো ডেটা পাওয়া যায়নি।"
+    },
+    "totalSupply": {
+      "title": "মোট OGY সরবরাহ",
+      "tooltipTitle": "উপলব্ধ OGY টোকেনের মোট পরিমাণ।",
+      "tooltipLine1": "এর মধ্যে প্রচলিত সরবরাহ এবং ORIGYN Foundation-এর নিয়ন্ত্রণাধীন সরবরাহ অন্তর্ভুক্ত।",
+      "tooltipLine2": "18 সেপ্টেম্বর থেকে, ORIGYN সম্পূর্ণ ডিফ্লেশনারি মডেলে পরিবর্তিত হয়েছে যার অর্থ আর কোনো নতুন মিন্ট করা টোকেন নেই।",
+      "chartLabel": "মোট সরবরাহ"
+    },
+    "totalBurned": {
+      "title": "মোট OGY বার্ন করা",
+      "tooltipTitle": "বার্ন করা OGY টোকেনের মোট পরিমাণ।",
+      "tooltipLine1": "এই টোকেনগুলি সম্পূর্ণভাবে বার্ন করা হয়েছে এবং আর উপলব্ধ নেই।",
+      "tooltipLine2": "টোকেন বিভিন্ন কারণে বার্ন করা যেতে পারে, যেমন সার্টিফিকেট মিন্টিং ফি, নেটওয়ার্ক ইউটিলিটি ফি বা নেটওয়ার্ক লেনদেন ফি।",
+      "chartLabel": "মোট বার্ন করা"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "দৈনিক",
+      "weekly": "সাপ্তাহিক",
+      "monthly": "মাসিক",
+      "yearly": "বার্ষিক",
+      "all": "সব"
+    },
+    "stakingOverview": {
+      "title": "স্টেকিং সংক্ষিপ্তসার",
+      "totalTokensInStakes": "স্টেকে মোট টোকেন",
+      "tooltip": "যে টোকেনগুলি স্টেকে লক করা আছে।",
+      "stakedTokens": "স্টেক করা টোকেন",
+      "stakedTokensLegend": "STAKED TOKENS"
+    },
+    "usersActivity": {
+      "title": "ব্যবহারকারী সংক্ষিপ্তসার",
+      "protocolUsers": "OGY প্রোটোকল ব্যবহারকারী",
+      "protocolUsersTooltip": "OGY টোকেনের অনন্য টোকেন হোল্ডার",
+      "protocolUsersLegend": "OGY PROTOCOL USERS",
+      "activeWallets": "OGY সক্রিয় ওয়ালেট",
+      "activeWalletsTooltip": "OGY টোকেনের সক্রিয় টোকেন হোল্ডার"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "গভর্ন্যান্স সংক্ষিপ্তসার",
+      "welcome": "ORIGYN গভর্ন্যান্সে স্বাগতম!",
+      "description": "OGY টোকেনের হোল্ডাররা তাদের OGY স্টেক করে এবং প্রস্তাবে ভোট দিয়ে সরাসরি ORIGYN Network-কে প্রভাবিত করতে পারেন। সিদ্ধান্ত গ্রহণ প্রক্রিয়ায় অংশগ্রহণ করে, এই স্টেক করা টোকেন হোল্ডাররা পুরস্কার অর্জন করেন।",
+      "learnMore": "আরও জানুন"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "স্টেক ও ভোট",
+        "description": "OGY স্টেক করে ও প্রস্তাবে ভোট দিয়ে ORIGYN Network-কে প্রভাবিত করুন।"
+      },
+      "earnRewards": {
+        "title": "পুরস্কার অর্জন করুন",
+        "description": "পুরস্কার অর্জন করতে সিদ্ধান্ত গ্রহণ প্রক্রিয়ায় অংশগ্রহণ করুন।"
+      },
+      "governCollectively": {
+        "title": "সম্মিলিতভাবে পরিচালনা করুন",
+        "description": "একটি সহযোগিতামূলক বাস্তুতন্ত্র হিসেবে নেটওয়ার্কে যুক্ত হন ও প্রভাবিত করুন।"
+      }
+    },
+    "tokensSection": {
+      "title": "গভর্ন্যান্সে টোকেন",
+      "paragraph1": "OGY টোকেনের হোল্ডাররা তাদের OGY স্টেক করে এবং প্রস্তাবে ভোট দিয়ে সরাসরি ORIGYN Network-কে প্রভাবিত করতে পারেন।",
+      "paragraph2": "সিদ্ধান্ত গ্রহণ প্রক্রিয়ায় অংশগ্রহণ করে, এই স্টেক করা টোকেন হোল্ডাররা পুরস্কার অর্জন করেন এবং সম্মিলিত ও গণতান্ত্রিকভাবে পরিচালনা করেন।",
+      "learnMoreOgy": "OGY সম্পর্কে আরও জানুন"
+    },
+    "sections": {
+      "proposals": "প্রস্তাব",
+      "neurons": "নিউরন"
+    },
+    "votingParticipation": {
+      "title": "ভোটিং অংশগ্রহণ",
+      "chartLabel": "অংশগ্রহণ %",
+      "legendLabel": "PARTICIPATION %",
+      "period": {
+        "weekly": "সাপ্তাহিক",
+        "monthly": "মাসিক",
+        "yearly": "বার্ষিক"
+      },
+      "lastParticipation": {
+        "label": "সর্বশেষ ভোটিং অংশগ্রহণ",
+        "tooltip": "সর্বশেষ ভোটিং ইভেন্টে অংশগ্রহণের শতাংশ।"
+      },
+      "averageParticipation": {
+        "label": "গড় ভোটিং অংশগ্রহণ",
+        "tooltip": "সময়ের সাথে গড় ভোটিং অংশগ্রহণের শতাংশ।"
+      },
+      "averagePower": {
+        "label": "গড় ভোটিং ক্ষমতা",
+        "tooltip": "সমস্ত অংশগ্রহণকারীর গড় ভোটিং ক্ষমতা।"
+      }
+    },
+    "estimateRewards": {
+      "title": "আপনার পুরস্কার অনুমান করুন",
+      "lockDuration": "লক করার সময়কাল",
+      "participants": "অংশগ্রহণকারী",
+      "lockedForAtLeast": "বর্তমানে অন্তত যতদিনের জন্য লক করা",
+      "lockedFor": "বর্তমানে যতদিনের জন্য লক করা",
+      "year": "বছর",
+      "years": "বছর"
+    },
+    "kpi": {
+      "metric": "মেট্রিক",
+      "rewardBaseCurrentYear": "বর্তমান বছরের পুরস্কার ভিত্তি",
+      "dailyVotingRewards": "দৈনিক ভোটিং পুরস্কার",
+      "totalVotingPower": "মোট ভোটিং শক্তি",
+      "overallVotingParticipation": "সামগ্রিক ভোটিং অংশগ্রহণ"
+    },
+    "total": {
+      "titleTooltip": "গভর্ন্যান্স ক্যানিস্টারে থাকা সমস্ত টোকেন। এই টোকেনগুলি ভেস্টিং অবস্থা, স্টেকিং অবস্থা, আনস্টেক করা বা দাবি না করা অবস্থায় থাকতে পারে।",
+      "totalLabel": "গভর্ন্যান্সে মোট টোকেন",
+      "locked": {
+        "name": "লক করা",
+        "tooltip": "যে টোকেনগুলি গভর্ন্যান্সে লক করা আছে।"
+      },
+      "unlocked": {
+        "name": "আনলকড",
+        "tooltip": "যে টোকেনগুলি গভর্ন্যান্সে আনলকড এবং যেকোনো সময় উত্তোলন ও লেনদেন করা যেতে পারে।"
+      },
+      "accumulatedRewards": {
+        "name": "সঞ্চিত পুরস্কার",
+        "tooltip": "যে পুরস্কারগুলি ব্যবহারকারীদের জন্য গণনা করা হয়েছে কিন্তু এখনও দাবি করা হয়নি।"
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "প্রস্তাব",
+      "viewProposal": "প্রস্তাব দেখুন",
+      "columns": {
+        "id": "ID",
+        "title": "শিরোনাম",
+        "proposed": "প্রস্তাবিত",
+        "timeRemaining": "অবশিষ্ট সময়",
+        "topic": "বিষয়",
+        "status": "অবস্থা",
+        "view": "দেখুন"
+      }
+    },
+    "details": {
+      "category": "গভর্ন্যান্স",
+      "proposalNumber": "প্রস্তাব #",
+      "proposal": "প্রস্তাব",
+      "titleLoading": "প্রস্তাবের শিরোনাম লোড হচ্ছে…",
+      "payloadLoading": "প্রস্তাবের বিবরণ লোড হচ্ছে…",
+      "posted": "পোস্ট করা হয়েছে",
+      "topic": "বিষয়",
+      "moreInfo": "আরও তথ্য",
+      "totalVotes": "মোট ভোট",
+      "adopt": "ADOPT",
+      "reject": "REJECT",
+      "vote": "ভোট"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "নিউরন",
+      "viewNeuron": "নিউরন দেখুন",
+      "columns": {
+        "id": "ID",
+        "state": "অবস্থা",
+        "stakedOgy": "স্টেক করা OGY",
+        "dissolveDelay": "ডিসলভ বিলম্ব",
+        "age": "বয়স",
+        "votingPower": "ভোটিং ক্ষমতা",
+        "view": "দেখুন"
+      }
+    },
+    "details": {
+      "category": "নিউরন",
+      "title": "OGY নিউরন",
+      "created": "তৈরি করা হয়েছে",
+      "stakedOgy": "স্টেক করা OGY",
+      "votingPower": "ভোটিং ক্ষমতা",
+      "dissolveDelay": "ডিসলভ বিলম্ব",
+      "age": "বয়স",
+      "lifecycle": "নিউরন জীবনচক্র",
+      "dateCreated": "তৈরির তারিখ",
+      "autoStakeMaturity": "অটো-স্টেক ম্যাচুরিটি",
+      "rewardsAndBonuses": "পুরস্কার ও বোনাস",
+      "stakedMaturity": "স্টেক করা ম্যাচুরিটি",
+      "totalMaturity": "মোট ম্যাচুরিটি",
+      "ageBonus": "বয়স বোনাস",
+      "totalBonus": "মোট বোনাস",
+      "dissolveDelayBonus": "ডিসলভ বিলম্ব বোনাস"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "লেনদেনের ইতিহাস",
+      "searchFor": "অনুসন্ধান করুন:",
+      "or": "অথবা",
+      "searchPlaceholder": "একটি আইটেম অনুসন্ধান করুন",
+      "noResults": "কোনো ফলাফল পাওয়া যায়নি",
+      "resultBlock": "ব্লক",
+      "resultPrincipal": "প্রিন্সিপাল",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "লেনদেনের বিবরণ",
+      "hash": "হ্যাশ",
+      "fetchError": "একটি লেনদেন আনতে ত্রুটি!",
+      "mintingAccount": "মিন্টিং অ্যাকাউন্ট",
+      "fee": "ফি",
+      "memo": "মেমো",
+      "none": "কোনোটিই নয়"
+    },
+    "accountDetails": {
+      "title": "OGY অ্যাকাউন্ট",
+      "id": "ID",
+      "owner": "মালিক",
+      "subaccount": "সাবঅ্যাকাউন্ট",
+      "defaultSubaccount": "কোনোটিই নয় (ডিফল্ট সাবঅ্যাকাউন্ট)",
+      "historicalMaxBalance": "ঐতিহাসিক সর্বোচ্চ ব্যালেন্স",
+      "genesisBalance": "জেনেসিস ব্যালেন্স",
+      "period": {
+        "monthly": "মাসিক",
+        "quarterly": "ত্রৈমাসিক",
+        "yearly": "বার্ষিক",
+        "lifetime": "আজীবন"
+      },
+      "empty": {
+        "title": "এখনও কোনো লেনদেন নেই",
+        "description": "এই অ্যাকাউন্টের কোনো লেনদেনের ইতিহাস নেই। একবার এটি OGY পাঠালে বা গ্রহণ করলে, কার্যকলাপ এখানে প্রদর্শিত হবে।"
+      },
+      "balanceHistory": {
+        "title": "ব্যালেন্সের ইতিহাস",
+        "currentBalance": "বর্তমান ব্যালেন্স",
+        "currentBalanceInfo": "বর্তমান অ্যাকাউন্ট ব্যালেন্স।",
+        "legend": "OGY ব্যালেন্স"
+      },
+      "overview": {
+        "title": "লেনদেনের সংক্ষিপ্তসার",
+        "totalLabel": "মোট পরিমাণ",
+        "totalSent": "মোট পাঠানো হয়েছে",
+        "totalSentInfo": "প্রিন্সিপাল দ্বারা পাঠানো মোট পরিমাণ।",
+        "totalReceived": "মোট গ্রহণ করা হয়েছে",
+        "totalReceivedInfo": "প্রিন্সিপাল দ্বারা গৃহীত মোট পরিমাণ।"
+      }
+    },
+    "flow": {
+      "title": "লেনদেনের প্রবাহ",
+      "searchPlaceholder": "লেনদেন অনুসন্ধান করুন…",
+      "clearSearch": "অনুসন্ধান মুছুন",
+      "loadError": "লেনদেনের ডেটা লোড করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+      "noMatch": "এই অনুসন্ধানের সাথে কোনো লেনদেন মেলে না।",
+      "transactions": "লেনদেন",
+      "out": "বাইরে",
+      "in": "ভিতরে",
+      "total": "মোট",
+      "legend": {
+        "outTransaction": "বহির্গামী লেনদেন",
+        "inTransaction": "অন্তর্গামী লেনদেন",
+        "includesInitial": "প্রাথমিক লেনদেন অন্তর্ভুক্ত",
+        "rootAccount": "রুট অ্যাকাউন্ট",
+        "account": "অ্যাকাউন্ট",
+        "fromRoot": "রুট থেকে লেনদেন সহ",
+        "toRoot": "রুটে লেনদেন সহ",
+        "madeInitial": "প্রাথমিক লেনদেন করেছে"
+      }
+    },
+    "kind": {
+      "mint": "মিন্ট",
+      "transfer": "স্থানান্তর",
+      "burn": "বার্ন",
+      "approve": "অনুমোদন"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "আবার স্বাগতম",
+      "value": "মূল্য:",
+      "disconnectWallet": "ওয়ালেট সংযোগ বিচ্ছিন্ন করুন",
+      "accountLabel": "অ্যাকাউন্ট",
+      "manageDescription": "আপনার OGY ওয়ালেট, পুরস্কার এবং স্টেকিং কার্যকলাপ পরিচালনা করুন।",
+      "walletBalance": "ওয়ালেট ব্যালেন্স",
+      "myAccount": "আমার অ্যাকাউন্ট",
+      "howToTopUp": "কীভাবে টপ আপ করবেন?"
+    },
+    "principal": {
+      "accountIdLabel": "অ্যাকাউন্ট ID:",
+      "principalIdLabel": "প্রিন্সিপাল ID:"
+    },
+    "available": {
+      "title": "উপলব্ধ OGY",
+      "transactionHistory": "লেনদেনের ইতিহাস",
+      "transfer": "স্থানান্তর",
+      "transferOgy": "OGY স্থানান্তর করুন",
+      "transferDescription": "আপনি শুধুমাত্র আপনার উপলব্ধ ব্যালেন্স থেকে OGY পাঠাতে পারবেন।",
+      "max": "সর্বোচ্চ",
+      "recipientAddress": "প্রাপকের ঠিকানা",
+      "amountReceived": "গৃহীত পরিমাণ",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "লেনদেন ফি (উৎস থেকে বিল করা)",
+      "currentBalance": "বর্তমান ব্যালেন্স:",
+      "transferProcessing": "স্থানান্তর প্রক্রিয়া করা হচ্ছে",
+      "transferProcessingHint": "এতে কয়েক সেকেন্ড সময় লাগতে পারে",
+      "transferSuccess": "স্থানান্তর সফল হয়েছে !",
+      "transferError": "স্থানান্তর ত্রুটি !",
+      "errors": {
+        "amountRequired": "পরিমাণ প্রয়োজন।",
+        "amountExceedsBalance": "পরিমাণ আপনার ব্যালেন্সের বেশি হওয়া উচিত নয়।",
+        "amountBelowFee": "পরিমাণ লেনদেন ফি-এর চেয়ে কম হওয়া উচিত নয়।",
+        "amountNotPositive": "পরিমাণ একটি ধনাত্মক সংখ্যা হতে হবে।",
+        "recipientRequired": "প্রাপকের ঠিকানা প্রয়োজন।",
+        "recipientInvalid": "অবৈধ প্রাপকের ঠিকানা।"
+      }
+    },
+    "staked": {
+      "title": "স্টেক করা OGY",
+      "stake": "স্টেক করুন",
+      "stakeOgy": "OGY স্টেক করুন",
+      "stakeDescription": "OGY স্টেক করতে আপনাকে আমাদের NNS প্ল্যাটফর্মে যেতে হবে।",
+      "warningNotConnected": "মনে হচ্ছে আপনি এর সাথে সংযুক্ত নন",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "আপনার একটি প্রয়োজন",
+      "warningToConnect": "NNS প্ল্যাটফর্মে সংযুক্ত হতে।",
+      "goToNns": "NNS-এ যান"
+    },
+    "rewards": {
+      "title": "স্টেক করা পুরস্কার",
+      "claimAll": "সব দাবি করুন",
+      "claimDisabledReason": "পুরস্কার দাবি শুধুমাত্র প্রিন্সিপাল ডিফল্ট অ্যাকাউন্টের জন্য সমর্থিত।",
+      "aboutToClaim": "আপনি দাবি করতে চলেছেন",
+      "sentToPrincipal": "পুরস্কারগুলি আপনার প্রিন্সিপালে পাঠানো হবে",
+      "pending": "সমস্ত পুরস্কার দাবি করা হচ্ছে...",
+      "successTitle": "সমস্ত পুরস্কার দাবি সফল!",
+      "errorTitle": "সমস্ত পুরস্কার দাবি ত্রুটি!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "আমরা লেজার এবং গভর্ন্যান্স পরিবর্তন করছি",
+        "description": "ORIGYN গভর্ন্যান্স এবং লেজার একটি SNS-এ আপগ্রেড করা হয়েছে। ORIGYN গভর্ন্যান্সে অংশগ্রহণ চালিয়ে যেতে এবং OGY ব্যবহার করতে, আপনাকে আপনার OGY টোকেন মাইগ্রেট করতে হবে।"
+      },
+      "howToSwap": "কীভাবে টোকেন সোয়াপ করবেন",
+      "disclosureToggle": "এখনও পুরনো OGY টোকেন আছে? এখনই সোয়াপ করুন!",
+      "accountId": "অ্যাকাউন্ট ID:",
+      "steps": {
+        "withdraw": {
+          "title": "ধাপ 1: পুরনো গভর্ন্যান্স থেকে উত্তোলন করুন",
+          "subtitle": "আপনি যদি পূর্বে OGY গভর্ন্যান্সে অংশগ্রহণ করে থাকেন, তবে সোয়াপ করার আগে আপনাকে সেই টোকেনগুলি উত্তোলন করতে হবে।"
+        },
+        "deposit": {
+          "title": "ধাপ 2: আপনার অ্যাকাউন্টে জমা করুন",
+          "subtitle": "আপনার যদি OGY ড্যাশবোর্ডের বাইরে কোনো টোকেন থাকে, তবে সেগুলি সোয়াপ করা শুরু করার আগে আপনার অ্যাকাউন্ট-আইডিতে জমা করুন।"
+        },
+        "swap": {
+          "title": "ধাপ 3: টোকেন সোয়াপ করুন",
+          "subtitle": "লিগ্যাসি OGY টোকেনকে নতুন লেজারে সোয়াপ করুন।"
+        }
+      },
+      "deposit": {
+        "legacyBalance": "লিগ্যাসি OGY ব্যালেন্স"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "লিগ্যাসি OGY ড্যাশবোর্ডে যান"
+      },
+      "swap": {
+        "disabledOisy": "লিগ্যাসি OGY সোয়াপ OISY-এর সাথে উপলব্ধ নয়। আপনার লিগ্যাসি OGY সোয়াপ করতে Internet Identity বা Plug দিয়ে সংযুক্ত হন।",
+        "disabledSubAccount": "লিগ্যাসি OGY সোয়াপ শুধুমাত্র প্রিন্সিপাল ডিফল্ট অ্যাকাউন্ট থেকে সমর্থিত।",
+        "swapYourTokens": "আপনার টোকেন সোয়াপ করুন",
+        "automaticDisabled": "স্বয়ংক্রিয় সোয়াপ নিষ্ক্রিয় করা হয়েছে। আপনাকে আপনার সোয়াপ অনুরোধ অনুমোদন করাতে হবে, ন্যূনতম পরিমাণ 50 000 OGY।",
+        "form": {
+          "title": "আপনার OGY নতুন লেজারে সোয়াপ করুন",
+          "description": "আপনি যে OGY টোকেন সোয়াপ করতে চান তা আপনার অ্যাকাউন্ট আইডিতে জমা করুন",
+          "tokensAvailable": "সোয়াপ করার জন্য উপলব্ধ টোকেন",
+          "youWillReceivePrefix": "আপনি পাবেন",
+          "youWillReceiveSuffix": "নতুন লেজারে OGY টোকেন।",
+          "swapPrefix": "সোয়াপ করুন",
+          "swapSuffix": "OGY টোকেন"
+        },
+        "pending": {
+          "takesTime": "সোয়াপ প্রক্রিয়াটিতে কিছু সময় লাগতে পারে।",
+          "doNotRefresh": "পৃষ্ঠাটি রিফ্রেশ করবেন না !",
+          "swapping": "টোকেন সোয়াপ করা হচ্ছে..."
+        },
+        "success": {
+          "title": "সোয়াপ সফল হয়েছে!",
+          "walletBalance": "নতুন লেজারে ওয়ালেট ব্যালেন্স",
+          "myAccount": "আমার অ্যাকাউন্ট"
+        },
+        "error": {
+          "title": "টোকেন সোয়াপ ত্রুটি!",
+          "retry": "আবার চেষ্টা করুন"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "আমার OGY নিউরন",
+        "idHeader": "ID",
+        "stakedAmount": "স্টেক করা পরিমাণ",
+        "claimAmount": "দাবির পরিমাণ",
+        "emptyTitle": "এখনও কোনো নিউরন নেই",
+        "emptyDescription": "এখানে স্টেক, ভোটিং ক্ষমতা এবং পুরস্কার ট্র্যাক করা শুরু করতে একটি OGY নিউরন যোগ করুন।",
+        "addFirstNeuron": "আপনার প্রথম নিউরন যোগ করুন"
+      },
+      "add": {
+        "button": "নিউরন যোগ করুন",
+        "title": "নিউরন যোগ করুন",
+        "description": "এখানে আপনি যে প্রতিটি OGY নিউরন পরিচালনা করতে চান তাতে হটকি হিসেবে এই প্রিন্সিপাল যোগ করুন।",
+        "needHotkey": "একটি হটকি যোগ করতে হবে?",
+        "openNns": "NNS অ্যাপ খুলুন"
+      },
+      "claim": {
+        "button": "দাবি করুন",
+        "disabledReason": "পুরস্কার দাবি শুধুমাত্র প্রিন্সিপাল ডিফল্ট অ্যাকাউন্টের জন্য সমর্থিত।",
+        "aboutToClaim": "আপনি দাবি করতে চলেছেন",
+        "sentToPrincipal": "পুরস্কারগুলি আপনার প্রিন্সিপালে পাঠানো হবে",
+        "pending": "পুরস্কার দাবি করা হচ্ছে...",
+        "successTitle": "পুরস্কার দাবি সফল!",
+        "errorTitle": "পুরস্কার দাবি ত্রুটি!",
+        "retry": "আবার চেষ্টা করুন"
+      },
+      "remove": {
+        "title": "নিউরন সরান",
+        "description": "এই নিউরন সরাতে, আপনাকে আপনার নিউরনের হটকি তালিকা থেকে আপনার প্রিন্সিপাল সরাতে হবে।"
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "ঠিকানা",
+      "governanceBalance": "গভর্ন্যান্স ব্যালেন্স",
+      "stakedTokens": "স্টেক করা টোকেন",
+      "ledgerBalance": "লেজার ব্যালেন্স",
+      "weightInTotalSupply": "মোট সরবরাহে ওজন"
+    }
+  },
+  "recovery": {
+    "title": "আপনার টোকেন পুনরুদ্ধার করুন",
+    "description": "OGY ড্যাশবোর্ড শুধুমাত্র OGY টোকেন সমর্থন করে। যদি আপনি ভুলবশত এখানে অন্য টোকেন পাঠিয়ে থাকেন, তবে নিচের ধাপগুলি অনুসরণ করে সেগুলি পুনরুদ্ধার করতে পারেন।",
+    "chooseToken": "টোকেন নির্বাচন করুন",
+    "loginRequired": "আপনার টোকেন সংগ্রহ করতে আপনাকে অবশ্যই লগইন করতে হবে।",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "লেজার ক্যানিস্টার:",
+      "transferIcp": "ICP স্থানান্তর করুন",
+      "availableBalanceNote": "আপনি শুধুমাত্র আপনার উপলব্ধ ব্যালেন্স থেকে ICP পাঠাতে পারবেন।",
+      "amountRequired": "পরিমাণ প্রয়োজন।",
+      "amountExceedsBalance": "পরিমাণ আপনার ব্যালেন্সের বেশি হওয়া উচিত নয়।",
+      "amountPositive": "পরিমাণ একটি ধনাত্মক সংখ্যা হতে হবে।",
+      "amountBelowFee": "পরিমাণ লেনদেন ফি-এর চেয়ে বেশি বা সমান হতে হবে।",
+      "recipientAddress": "প্রাপকের ঠিকানা",
+      "recipientAddressRequired": "প্রাপকের ঠিকানা প্রয়োজন।",
+      "invalidRecipientAddress": "অবৈধ প্রাপকের ঠিকানা।",
+      "amountReceived": "গৃহীত পরিমাণ",
+      "transactionFee": "লেনদেন ফি",
+      "currentBalance": "বর্তমান ব্যালেন্স:",
+      "processing": "স্থানান্তর প্রক্রিয়া করা হচ্ছে",
+      "processingNote": "এতে কয়েক সেকেন্ড সময় লাগতে পারে",
+      "success": "স্থানান্তর সফল হয়েছে!",
+      "error": "স্থানান্তর ত্রুটি!"
+    }
+  },
+  "support": {
+    "category": "সহায়তা",
+    "title": "একটি টিকিট তৈরি করুন",
+    "titleSubmitted": "টিকিট জমা দেওয়া হয়েছে",
+    "successTitle": "সহায়তা টিকিট তৈরি হয়েছে",
+    "successMessage": "আপনি যে ইমেল ঠিকানা দিয়েছেন তাতে আমরা যোগাযোগ করব।",
+    "submitAnother": "আরেকটি টিকিট জমা দিন",
+    "intro": "আপনার সমস্যা এবং আমরা কীভাবে আপনার সাথে যোগাযোগ করতে পারি তা বর্ণনা করুন।",
+    "form": {
+      "name": "নাম",
+      "email": "যোগাযোগের ইমেল",
+      "emailRequired": "ইমেল ঠিকানা প্রয়োজন",
+      "emailInvalid": "অবৈধ ইমেল ঠিকানা",
+      "principal": "ওয়ালেট প্রিন্সিপাল",
+      "invalidPrincipal": "অবৈধ প্রাপকের ঠিকানা।",
+      "description": "বিবরণ",
+      "descriptionPlaceholder": "আমাদের জানান কী হচ্ছে…",
+      "descriptionRequired": "অনুগ্রহ করে আপনার সমস্যা বর্ণনা করুন"
+    },
+    "submitError": "কিছু একটা সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "submitting": "জমা দেওয়া হচ্ছে…"
+  },
+  "explorer": {
+    "title": "এক্সপ্লোরার",
+    "searchPlaceholder": "শিরোনাম, ইস্যুকারী, প্রিন্সিপাল বা টোকেন ID দিয়ে অনুসন্ধান করুন",
+    "openFilters": "ফিল্টার খুলুন",
+    "checkOnBlockchain": "ব্লকচেইনে পরীক্ষা করুন",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "বৈশিষ্ট্যযুক্ত সার্টিফিকেট",
+      "art": "আর্ট সার্টিফিকেট",
+      "gold": "গোল্ড সার্টিফিকেট"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "ক্লিপবোর্ডে কপি করুন",
+    "toggleRelativeTime": "আপেক্ষিক সময় টগল করুন। বর্তমান প্রদর্শন:",
+    "collapseRow": "সারি সংকুচিত করুন",
+    "expandRow": "সারি প্রসারিত করুন",
+    "searchPlaceholder": "আইটেম অনুসন্ধান করুন...",
+    "sortAscending": "ঊর্ধ্বক্রমে সাজান",
+    "sortDescending": "অধঃক্রমে সাজান",
+    "linesPerPage": "প্রতি পৃষ্ঠায় লাইন",
+    "page": "পৃষ্ঠা",
+    "pageOf": "এর",
+    "previousPage": "পূর্ববর্তী পৃষ্ঠা",
+    "nextPage": "পরবর্তী পৃষ্ঠা"
+  },
+  "auth": {
+    "connect": "সংযুক্ত করুন",
+    "disconnect": "সংযোগ বিচ্ছিন্ন করুন",
+    "connectWallet": {
+      "title": "আপনার ওয়ালেট সংযুক্ত করুন",
+      "subtitle": "আপনি কীভাবে সাইন ইন করতে চান তা চয়ন করুন"
+    },
+    "install": "ইনস্টল করুন",
+    "newToIc": "Internet Computer-এ নতুন?",
+    "learnMore": "আরও জানুন",
+    "connecting": {
+      "title": "সংযুক্ত হচ্ছে...",
+      "subtitle": "আপনার ওয়ালেটে অনুরোধটি অনুমোদন করুন"
+    },
+    "sessionExpired": {
+      "title": "সেশনের মেয়াদ শেষ হয়েছে",
+      "description": "আপনার ওয়ালেট সেশন আর বৈধ নয়। চালিয়ে যেতে পুনরায় সংযুক্ত হন।"
+    },
+    "reconnect": "পুনরায় সংযুক্ত হন",
+    "error": {
+      "connectionCancelled": "সংযোগ বাতিল করা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+      "connectionFailed": "ওয়ালেট সংযোগ ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।"
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "আমরা লেজার পরিবর্তন করছি, আপনাকে আপনার OGY নতুনটিতে সোয়াপ করতে হবে"
+  },
+  "calculator": {
+    "header": {
+      "title": "খরচ ক্যালকুলেটর",
+      "description": "আপনার সমস্ত ডেটা অন-চেইনে রেখে আপনার অনন্য সনদের খরচ অনুমান করতে ORIGYN ক্যালকুলেটর ব্যবহার করুন"
+    },
+    "plan": {
+      "title": "আপনার মিন্ট পরিকল্পনা করুন",
+      "description": "আপনি কতটি আইটেম এবং কী আপলোড করছেন তা আমাদের জানান।",
+      "itemsLabel": "কতটি আইটেম?",
+      "uploadingLabel": "আপনি কী আপলোড করছেন?",
+      "knowExactSize": "সঠিক আকার জানেন?",
+      "totalUploadSize": "মোট আপলোড আকার",
+      "usePreset": "পরিবর্তে একটি প্রিসেট ব্যবহার করুন",
+      "combinedSize": "সমস্ত আইটেম জুড়ে প্রতিটি ফাইলের মিলিত আকার।",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "প্রতিটি 250 KB"
+        },
+        "iphone": {
+          "label": "ছবি",
+          "hint": "প্রতিটি 3 MB"
+        },
+        "dslr": {
+          "label": "স্টুডিও ছবি",
+          "hint": "প্রতিটি 20 MB"
+        },
+        "video": {
+          "label": "সংক্ষিপ্ত ভিডিও",
+          "hint": "প্রতিটি 1 GB"
+        },
+        "video1hr": {
+          "label": "দীর্ঘ ভিডিও",
+          "hint": "প্রতিটি 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "তাৎক্ষণিক অনুমান",
+      "titleRefreshing": "অনুমান আপডেট হচ্ছে",
+      "description": "আপনি আপনার সেটআপ পরিবর্তন করলে স্বয়ংক্রিয়ভাবে আপডেট হয়।",
+      "ogyEquivalent": "OGY সমতুল্য",
+      "ogySpotRate": "OGY স্পট রেট",
+      "itemSingular": "আইটেম",
+      "itemPlural": "আইটেম",
+      "upload": "আপলোড"
+    },
+    "breakdown": {
+      "title": "খরচের বিভাজন",
+      "baseFee": "বেস মিন্ট ফি",
+      "storageFee": "স্টোরেজ ফি",
+      "items": "আইটেম",
+      "uploadSize": "আপলোড আকার"
+    },
+    "bytesUnit": "বাইট"
+  }
+}

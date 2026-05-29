@@ -26,7 +26,7 @@ const ProgressBar = ({ yesCount, noCount }: IProgressBarProps) => {
   }
 
   return (
-    <div className="w-full h-4 flex rounded-full overflow-hidden">
+    <div dir="ltr" className="w-full h-4 flex rounded-full overflow-hidden">
       <div
         style={{ width: `${yesPercentage}%` }}
         className="bg-jade transition-all ease-in-out duration-300"

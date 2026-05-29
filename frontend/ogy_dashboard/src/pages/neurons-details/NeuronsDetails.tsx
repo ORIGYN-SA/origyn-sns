@@ -8,6 +8,7 @@ import {
 } from "@components/ui";
 import { CardErrorOverlay, Stat } from "@components/dashboard";
 import useNeuron from "@hooks/neurons/useNeuron";
+import { useT } from "@i18n/LocaleContext";
 
 type DetailValue = string | number | null | undefined;
 
@@ -16,12 +17,17 @@ type DetailItem = {
   value: DetailValue;
 };
 
-const BONUS_DETAIL_NAMES = [
-  "Staked Maturity",
-  "Total Maturity",
-  "Age Bonus",
-  "Total Bonus",
-  "Dissolve Delay Bonus",
+// `name` is the lookup key matched against the neuron data; `labelKey` is the
+// translation key used for the visible label.
+const BONUS_DETAILS: { name: string; labelKey: string }[] = [
+  { name: "Staked Maturity", labelKey: "neurons.details.stakedMaturity" },
+  { name: "Total Maturity", labelKey: "neurons.details.totalMaturity" },
+  { name: "Age Bonus", labelKey: "neurons.details.ageBonus" },
+  { name: "Total Bonus", labelKey: "neurons.details.totalBonus" },
+  {
+    name: "Dissolve Delay Bonus",
+    labelKey: "neurons.details.dissolveDelayBonus",
+  },
 ];
 
 // Drives the SkeletonOverlay so the layout matches the loaded state.
@@ -54,7 +60,11 @@ const getStateBadgeClasses = (state: DetailValue) =>
     : "border border-jade/25 bg-jade/10 text-emerald-700 dark:text-emerald-300";
 
 const DetailValueText = ({ value }: { value: DetailValue }) => (
-  <strong className="text-base font-semibold text-content break-words">
+  // Numeric/maturity/date values stay LTR so RTL bidi doesn't reorder them.
+  <strong
+    dir="ltr"
+    className="inline-block text-base font-semibold text-content break-words"
+  >
     {formatDetailValue(value)}
   </strong>
 );
@@ -71,12 +81,16 @@ const SummaryTile = ({
       {label}
     </div>
     <div className="mt-3 text-2xl font-semibold text-content break-words">
-      <span>{formatDetailValue(value)}</span>
+      {/* Numeric stat (voting power / delay / age) stays LTR. */}
+      <span dir="ltr" className="inline-block">
+        {formatDetailValue(value)}
+      </span>
     </div>
   </div>
 );
 
 export const NeuronsDetails = () => {
+  const t = useT();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const neuronId = searchParams.get("id") ?? "";
@@ -103,15 +117,17 @@ export const NeuronsDetails = () => {
   return (
     <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
       <PageHeader
-        category="Neuron"
+        category={t("neurons.details.category")}
         categoryClassName="bg-candyFloss"
-        title="OGY Neuron"
+        title={t("neurons.details.title")}
         onBack={handleOnClickBack}
       />
 
       <div className="relative mt-8">
         <SkeletonOverlay loading={showSkeleton}>
-          {hasError && <CardErrorOverlay title="OGY Neuron" />}
+          {hasError && (
+            <CardErrorOverlay title={t("neurons.details.title")} />
+          )}
           <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
             <Card className="xl:col-span-3">
               <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -123,7 +139,8 @@ export const NeuronsDetails = () => {
                   <span>{state}</span>
                 </Badge>
                 <span className="text-sm text-muted">
-                  Created {getDetailValue(details, "Date Created")}
+                  {t("neurons.details.created")}{" "}
+                  {getDetailValue(details, "Date Created")}
                 </span>
               </div>
 
@@ -132,7 +149,7 @@ export const NeuronsDetails = () => {
                   data-skel-static
                   className="text-sm font-medium text-muted mb-3"
                 >
-                  Staked OGY
+                  {t("neurons.details.stakedOgy")}
                 </div>
                 <Stat
                   iconSrc="/ogy_logo.svg"
@@ -145,15 +162,15 @@ export const NeuronsDetails = () => {
 
               <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
                 <SummaryTile
-                  label="Voting Power"
+                  label={t("neurons.details.votingPower")}
                   value={getDetailValue(details, "Voting Power")}
                 />
                 <SummaryTile
-                  label="Dissolve Delay"
+                  label={t("neurons.details.dissolveDelay")}
                   value={getDetailValue(details, "Dissolve Delay")}
                 />
                 <SummaryTile
-                  label="Age"
+                  label={t("neurons.details.age")}
                   value={getDetailValue(details, "Age")}
                 />
               </div>
@@ -163,11 +180,11 @@ export const NeuronsDetails = () => {
                   data-skel-static
                   className="text-lg font-semibold text-content"
                 >
-                  Neuron lifecycle
+                  {t("neurons.details.lifecycle")}
                 </h2>
                 <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-x-6">
                   <DetailRow
-                    label="Date Created"
+                    label={t("neurons.details.dateCreated")}
                     value={
                       <DetailValueText
                         value={getDetailValue(details, "Date Created")}
@@ -175,7 +192,7 @@ export const NeuronsDetails = () => {
                     }
                   />
                   <DetailRow
-                    label="Auto-Stake Maturity"
+                    label={t("neurons.details.autoStakeMaturity")}
                     value={
                       <DetailValueText
                         value={getDetailValue(details, "Auto-Stake Maturity")}
@@ -191,13 +208,13 @@ export const NeuronsDetails = () => {
                 data-skel-static
                 className="text-sm font-medium text-muted mb-3"
               >
-                Rewards & bonuses
+                {t("neurons.details.rewardsAndBonuses")}
               </div>
               <div className="divide-y divide-border">
-                {BONUS_DETAIL_NAMES.map((name) => (
+                {BONUS_DETAILS.map(({ name, labelKey }) => (
                   <DetailRow
                     key={name}
-                    label={name}
+                    label={t(labelKey)}
                     value={
                       <DetailValueText value={getDetailValue(details, name)} />
                     }

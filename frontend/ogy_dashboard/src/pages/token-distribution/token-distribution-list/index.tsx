@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useLocalePath, useT } from "@i18n/LocaleContext";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { NewTable, TooltipInfo, TablePagination } from "@components/ui";
 import { NewTableColumn } from "@components/ui/NewTable";
@@ -30,6 +31,8 @@ const TokenDistributionList = ({
   setPagination,
 }: TokenDistributionListProps) => {
   const navigate = useNavigate();
+  const lp = useLocalePath();
+  const t = useT();
 
   const {
     data,
@@ -71,20 +74,23 @@ const TokenDistributionList = ({
   const columns: NewTableColumn<TokenDistributionRow>[] = [
     {
       id: "principal",
-      header: "Address",
+      header: t("tokenDistribution.list.address"),
       cell: (row) => (
         <div className="flex items-center gap-2 md:w-96 w-64">
           <button
-            className="truncate min-w-0 hover:underline"
+            dir="ltr"
+            className="truncate min-w-0 text-start hover:underline"
             onClick={() =>
               navigate(
-                `/transaction-history/transactions/accounts/${row.principal}`
+                lp(
+                  `/transaction-history/transactions/accounts/${row.principal}`
+                )
               )
             }
           >
             {row.principal}
           </button>
-          <div className="ml-auto flex items-center gap-2 shrink-0">
+          <div className="ms-auto flex items-center gap-2 shrink-0">
             <CopyToClipboard value={row.principal} />
             {row?.tag ? (
               <TooltipInfo id={`tooltip_${row.tag}`} clickable={false}>
@@ -99,9 +105,9 @@ const TokenDistributionList = ({
     },
     {
       id: "total",
-      header: "Total",
+      header: t("common.total"),
       cell: (row) => (
-        <div className="w-40">
+        <div dir="ltr" className="w-40 text-start">
           <span>{zeroOrDash(row.total)}</span>
         </div>
       ),
@@ -110,35 +116,35 @@ const TokenDistributionList = ({
       id: "governanceBalance",
       header: (
         <div className="flex items-center gap-2 leading-none">
-          <span>Governance Balance</span>
+          <span>{t("tokenDistribution.list.governanceBalance")}</span>
           <TooltipInfo
             id="governance-balance-staked-tokens-tooltip"
             className="!text-white/90 xl:translate-y-[1px]"
           >
-            Staked tokens
+            {t("tokenDistribution.list.stakedTokens")}
           </TooltipInfo>
         </div>
       ),
       cell: (row) => (
-        <div className="w-40">
+        <div dir="ltr" className="w-40 text-start">
           <span>{zeroOrDash(row.governanceBalance)}</span>
         </div>
       ),
     },
     {
       id: "ledgerBalance",
-      header: "Ledger Balance",
+      header: t("tokenDistribution.list.ledgerBalance"),
       cell: (row) => (
-        <div className="w-40">
+        <div dir="ltr" className="w-40 text-start">
           <span>{zeroOrDash(row.ledgerBalance)}</span>
         </div>
       ),
     },
     {
       id: "weight",
-      header: "Weight In Total Supply",
+      header: t("tokenDistribution.list.weightInTotalSupply"),
       cell: (row) => (
-        <div className="w-20">
+        <div dir="ltr" className="w-20 text-start">
           <span>{zeroOrDash(row.weight)}</span>
         </div>
       ),

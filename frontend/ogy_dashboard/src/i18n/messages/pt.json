@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Idioma",
+    "switchTo": "Mudar para {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "A carregar...",
+    "error": "Algo correu mal",
+    "retry": "Tentar novamente",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Seguinte",
+    "previous": "Anterior",
+    "save": "Guardar",
+    "submit": "Submeter",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "search": "Pesquisar",
+    "viewAll": "Ver tudo",
+    "showMore": "Mostrar mais",
+    "showLess": "Mostrar menos",
+    "amount": "Montante",
+    "date": "Data",
+    "type": "Tipo",
+    "from": "De",
+    "to": "Para",
+    "index": "Índice",
+    "status": "Estado",
+    "total": "Total",
+    "balance": "Saldo",
+    "yes": "Sim",
+    "no": "Não",
+    "notAvailable": "N/D"
+  },
+  "nav": {
+    "dashboard": "Painel",
+    "governance": "Governação",
+    "transactionHistory": "Histórico de transações",
+    "calculator": "Calculadora",
+    "openMainMenu": "Abrir menu principal",
+    "closeMenu": "Fechar menu",
+    "openAccountOverview": "Abrir vista geral da conta",
+    "viewAccountOverview": "Ver vista geral da conta",
+    "connectPrompt": "Ligue a sua carteira para gerir tokens, votar em propostas e ver o seu histórico de transações.",
+    "connectWallet": "Ligar carteira",
+    "disconnect": "Desligar"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "Lamentamos, não conseguimos encontrar a página que procura.",
+    "backHome": "Voltar ao início"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Painel OGY",
+      "home": "Início",
+      "circulation": "Circulação",
+      "governance": "Governação",
+      "revenue": "Receita",
+      "rewards": "Recompensas",
+      "distribution": "Distribuição",
+      "governanceDashboard": "Painel de Governação OGY",
+      "transactionExplorer": "Explorador de Transações OGY"
+    },
+    "learn": {
+      "heading": "Saiba mais sobre OGY Tokenomics e ORIGYN",
+      "tokenomicsDeck": "Apresentação OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Padrão NFT ORIGYN",
+      "tokenomicsFaq": "FAQ ORIGYN Tokenomics",
+      "website": "Site ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Suporte",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Contacto"
+    },
+    "support": {
+      "contactSupport": "Contactar o suporte",
+      "recoverTokens": "Recupere os seus tokens"
+    },
+    "disclaimer": "*A ORIGYN Foundation não será responsável por qualquer perda, roubo ou apropriação indevida de Tokens OGY ocorrida em conexão com o processo de troca. Além disso, a ORIGYN Foundation não será responsável por qualquer falha na execução da troca se a parte envolvida não cumprir rigorosamente as condições especificadas pela ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "ANÁLISE OGY",
+      "title": "Explorar painel",
+      "subtitle": "Interaja sem confiança com web3 dApps, DAOs, NFT, DeFi e muito mais."
+    },
+    "cta": {
+      "loginToSwap": "Inicie sessão para trocar tokens",
+      "myAccount": "A minha conta"
+    },
+    "governanceStaking": {
+      "title": "Vista geral do staking de governação"
+    },
+    "cardError": {
+      "couldNotLoad": "Não foi possível carregar",
+      "descriptionLine1": "Ocorreu um problema ao obter esta métrica.",
+      "descriptionLine2": "Tente novamente dentro de momentos."
+    },
+    "emptyState": {
+      "noDataFor": "Sem dados para",
+      "description": "Não há nada para mostrar neste momento."
+    },
+    "circulationState": {
+      "title": "Estado de Circulação OGY",
+      "tooltip": "A oferta em circulação são todos os tokens exceto os tokens desbloqueados detidos pela ORIGYN Foundation.",
+      "nnsProposal": "Proposta NNS",
+      "totalLabel": "Circulação Total de OGY",
+      "notOwnedName": "OGY fora das mãos da Fundação",
+      "notOwnedValue": "Quantidade de tokens em circulação não detidos pela ORIGYN foundation.",
+      "ownedName": "OGY bloqueados nas mãos da Fundação",
+      "ownedValue": "Quantidade de tokens bloqueados detidos pela ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Reserva da OGY Foundation",
+      "tooltip": "Quantidade total de tokens OGY detidos pela ORIGYN foundation em todas as carteiras.",
+      "totalLabel": "Oferta Total da Fundação",
+      "lockedName": "Bloqueado",
+      "lockedIntro": "Tokens da ORIGYN foundation bloqueados em stakes ou vestings.",
+      "lockedStakes": "1) Stakes- tokens que geram as recompensas graças à participação na votação de governação.",
+      "lockedStakesNote": "Esses tokens foram bloqueados voluntariamente.",
+      "lockedVestings": "2) Vestings- tokens que não recebem quaisquer recompensas e não podem participar na votação.",
+      "lockedVestingsNote": "Esses tokens foram bloqueados pelo seu contrato com a ORIGYN Foundation.",
+      "unlockedName": "Desbloqueado",
+      "unlockedValue": "Fundos desbloqueados detidos pela ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "Conta de Tesouraria ORIGYN (OTA)",
+      "networkRevenue": "Receita da Rede",
+      "tokenLogoAlt": "Logótipo do token",
+      "tooltipOgy": "Receita de Utilidade da Rede gerada através de taxas pela utilização da rede ORIGYN (por exemplo, para emitir ou transferir certificados digitais, cunhar NFT, etc.) e acumulada em OGY.",
+      "tooltipIcp": "Receita de Utilidade da Rede gerada através de taxas pela utilização da rede ORIGYN (por exemplo, para emitir ou transferir certificados digitais, cunhar NFT, etc.) e acumulada em ICP."
+    },
+    "rewardAccount": {
+      "title": "Conta de Recompensas ORIGYN (ORA)",
+      "balance": "Saldo ORA",
+      "year": "Ano",
+      "rewardPool": "Pool de Recompensas",
+      "moreDetails": "Mais detalhes",
+      "tooltipStake": "Os detentores de tokens podem fazer staking dos seus OGY e ganhar recompensas ao participar na governação.",
+      "tooltipSeed": "As recompensas virão da Conta de Recompensas ORIGYN, que a ORIGYN irá financiar com mil milhões de OGY.",
+      "tooltipPool": "A pool de recompensas consiste em 250 milhões de OGY no primeiro ano e reduzir-se-á para metade a cada dois anos para incentivar e recompensar os contribuidores iniciais e de longo prazo do ecossistema.",
+      "description": "A ORIGYN contribuirá com mil milhões de OGY para uma Conta de Recompensas ORIGYN (ORA) em benefício dos detentores com staking e votantes. A pool de recompensas consiste em 250 milhões de OGY no primeiro ano e reduzir-se-á para metade a cada dois anos para incentivar e recompensar os contribuidores iniciais e de longo prazo do ecossistema."
+    },
+    "tokenDistribution": {
+      "title": "Distribuição de Tokens"
+    },
+    "transactionHistory": {
+      "title": "Histórico de transações",
+      "showAll": "Mostrar tudo"
+    },
+    "topTransfers": {
+      "value": "Valor",
+      "time": "Hora",
+      "ogyLogoAlt": "Logótipo OGY",
+      "noDataAvailable": "Sem dados disponíveis."
+    },
+    "totalSupply": {
+      "title": "Oferta Total de OGY",
+      "tooltipTitle": "Quantidade total de tokens OGY disponíveis.",
+      "tooltipLine1": "Isto inclui a oferta em circulação e a oferta sob controlo da ORIGYN Foundation.",
+      "tooltipLine2": "Desde 18 de setembro, a ORIGYN passou para um modelo totalmente deflacionário, o que significa que não há mais novos tokens cunhados.",
+      "chartLabel": "Oferta Total"
+    },
+    "totalBurned": {
+      "title": "Total de OGY Queimados",
+      "tooltipTitle": "Quantidade total de tokens OGY queimados.",
+      "tooltipLine1": "Estes tokens foram completamente queimados e já não estão disponíveis.",
+      "tooltipLine2": "Os tokens podem ser queimados por diferentes razões, por exemplo taxas de cunhagem de certificados, taxas de utilidade da rede ou taxas de transações da rede.",
+      "chartLabel": "Total Queimado"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Diário",
+      "weekly": "Semanal",
+      "monthly": "Mensal",
+      "yearly": "Anual",
+      "all": "Tudo"
+    },
+    "stakingOverview": {
+      "title": "Vista geral do Staking",
+      "totalTokensInStakes": "Total de Tokens em Stakes",
+      "tooltip": "Tokens que estão bloqueados em stakes.",
+      "stakedTokens": "Tokens em Staking",
+      "stakedTokensLegend": "TOKENS EM STAKING"
+    },
+    "usersActivity": {
+      "title": "Vista geral dos Utilizadores",
+      "protocolUsers": "Utilizadores do Protocolo OGY",
+      "protocolUsersTooltip": "Detentores únicos de tokens OGY",
+      "protocolUsersLegend": "UTILIZADORES DO PROTOCOLO OGY",
+      "activeWallets": "Carteiras Ativas OGY",
+      "activeWalletsTooltip": "Detentores ativos de tokens OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Vista geral da Governação",
+      "welcome": "Bem-vindo à Governação ORIGYN!",
+      "description": "Os detentores de tokens OGY podem influenciar diretamente a Rede ORIGYN ao fazer staking dos seus OGY e votar em propostas. Ao participar no processo de tomada de decisão, estes detentores de tokens com staking ganham recompensas.",
+      "learnMore": "Saber mais"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Staking e Voto",
+        "description": "Influencie a Rede ORIGYN ao fazer staking de OGY e votar em propostas."
+      },
+      "earnRewards": {
+        "title": "Ganhar Recompensas",
+        "description": "Participe no processo de tomada de decisão para ganhar recompensas."
+      },
+      "governCollectively": {
+        "title": "Governar Coletivamente",
+        "description": "Envolva-se e influencie a rede como um ecossistema colaborativo."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokens em Governação",
+      "paragraph1": "Os detentores de tokens OGY podem influenciar diretamente a Rede ORIGYN ao fazer staking dos seus OGY e votar em propostas.",
+      "paragraph2": "Ao participar no processo de tomada de decisão, estes detentores de tokens com staking ganham recompensas e governam coletiva e democraticamente.",
+      "learnMoreOgy": "Saber mais sobre OGY"
+    },
+    "sections": {
+      "proposals": "Propostas",
+      "neurons": "Neurónios"
+    },
+    "votingParticipation": {
+      "title": "Participação na Votação",
+      "chartLabel": "Participação %",
+      "legendLabel": "PARTICIPAÇÃO %",
+      "period": {
+        "weekly": "Semanal",
+        "monthly": "Mensal",
+        "yearly": "Anual"
+      },
+      "lastParticipation": {
+        "label": "Última Participação na Votação",
+        "tooltip": "Percentagem de participação no último evento de votação."
+      },
+      "averageParticipation": {
+        "label": "Participação Média na Votação",
+        "tooltip": "Percentagem média de participação na votação ao longo do tempo."
+      },
+      "averagePower": {
+        "label": "Poder de Voto Médio",
+        "tooltip": "Poder de voto médio entre todos os participantes."
+      }
+    },
+    "estimateRewards": {
+      "title": "Estime as suas recompensas",
+      "lockDuration": "Duração do bloqueio",
+      "participants": "participantes",
+      "lockedForAtLeast": "atualmente bloqueado por pelo menos",
+      "lockedFor": "atualmente bloqueado por",
+      "year": "ano",
+      "years": "anos"
+    },
+    "kpi": {
+      "metric": "Métrica",
+      "rewardBaseCurrentYear": "Base de recompensas para o ano atual",
+      "dailyVotingRewards": "Recompensas diárias de votação",
+      "totalVotingPower": "Poder de voto total",
+      "overallVotingParticipation": "Participação geral na votação"
+    },
+    "total": {
+      "titleTooltip": "Todos os tokens que estão no canister de governação. Estes tokens podem estar em estado de vesting, staking, sem staking ou por reclamar.",
+      "totalLabel": "Total de Tokens em Governação",
+      "locked": {
+        "name": "Bloqueado",
+        "tooltip": "Tokens que estão bloqueados em governação."
+      },
+      "unlocked": {
+        "name": "Desbloqueado",
+        "tooltip": "Tokens que estão desbloqueados em governação e podem ser levantados e negociados a qualquer momento."
+      },
+      "accumulatedRewards": {
+        "name": "Recompensas Acumuladas",
+        "tooltip": "Recompensas contabilizadas para os utilizadores mas ainda não reclamadas."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Propostas",
+      "viewProposal": "Ver proposta",
+      "columns": {
+        "id": "ID",
+        "title": "Título",
+        "proposed": "Proposta",
+        "timeRemaining": "Tempo Restante",
+        "topic": "Tópico",
+        "status": "Estado",
+        "view": "Ver"
+      }
+    },
+    "details": {
+      "category": "Governação",
+      "proposalNumber": "Proposta #",
+      "proposal": "Proposta",
+      "titleLoading": "A carregar o título da proposta…",
+      "payloadLoading": "A carregar os detalhes da proposta…",
+      "posted": "Publicada",
+      "topic": "Tópico",
+      "moreInfo": "Mais informações",
+      "totalVotes": "Total de votos",
+      "adopt": "ADOTAR",
+      "reject": "REJEITAR",
+      "vote": "Votar"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neurónios",
+      "viewNeuron": "Ver neurónio",
+      "columns": {
+        "id": "ID",
+        "state": "Estado",
+        "stakedOgy": "OGY em Staking",
+        "dissolveDelay": "Atraso de Dissolução",
+        "age": "Idade",
+        "votingPower": "Poder de Voto",
+        "view": "Ver"
+      }
+    },
+    "details": {
+      "category": "Neurónio",
+      "title": "Neurónio OGY",
+      "created": "Criado",
+      "stakedOgy": "OGY em Staking",
+      "votingPower": "Poder de Voto",
+      "dissolveDelay": "Atraso de Dissolução",
+      "age": "Idade",
+      "lifecycle": "Ciclo de vida do neurónio",
+      "dateCreated": "Data de Criação",
+      "autoStakeMaturity": "Staking Automático de Maturidade",
+      "rewardsAndBonuses": "Recompensas e bónus",
+      "stakedMaturity": "Maturidade em Staking",
+      "totalMaturity": "Maturidade Total",
+      "ageBonus": "Bónus de Idade",
+      "totalBonus": "Bónus Total",
+      "dissolveDelayBonus": "Bónus de Atraso de Dissolução"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Histórico de transações",
+      "searchFor": "Pesquisar por:",
+      "or": "ou",
+      "searchPlaceholder": "Pesquisar um item",
+      "noResults": "Nenhum resultado encontrado",
+      "resultBlock": "Bloco",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Detalhes da Transação",
+      "hash": "Hash",
+      "fetchError": "Erro ao obter uma transação!",
+      "mintingAccount": "Conta de cunhagem",
+      "fee": "Taxa",
+      "memo": "Nota",
+      "none": "Nenhum"
+    },
+    "accountDetails": {
+      "title": "Conta OGY",
+      "id": "ID",
+      "owner": "Proprietário",
+      "subaccount": "Subconta",
+      "defaultSubaccount": "Nenhuma (subconta predefinida)",
+      "historicalMaxBalance": "Saldo máximo histórico",
+      "genesisBalance": "Saldo génese",
+      "period": {
+        "monthly": "Mensal",
+        "quarterly": "Trimestral",
+        "yearly": "Anual",
+        "lifetime": "Total"
+      },
+      "empty": {
+        "title": "Ainda sem transações",
+        "description": "Esta conta não tem histórico de transações. Assim que enviar ou receber OGY, a atividade aparecerá aqui."
+      },
+      "balanceHistory": {
+        "title": "Histórico de Saldo",
+        "currentBalance": "Saldo atual",
+        "currentBalanceInfo": "Saldo atual da conta.",
+        "legend": "Saldo OGY"
+      },
+      "overview": {
+        "title": "Vista geral das Transações",
+        "totalLabel": "Montante total",
+        "totalSent": "Total Enviado",
+        "totalSentInfo": "Montante total enviado pelo principal.",
+        "totalReceived": "Total Recebido",
+        "totalReceivedInfo": "Montante total recebido pelo principal."
+      }
+    },
+    "flow": {
+      "title": "Fluxo de Transações",
+      "searchPlaceholder": "Pesquisar transações…",
+      "clearSearch": "Limpar pesquisa",
+      "loadError": "Não foi possível carregar os dados das transações. Tente novamente.",
+      "noMatch": "Nenhuma transação corresponde a esta pesquisa.",
+      "transactions": "transações",
+      "out": "Saída",
+      "in": "Entrada",
+      "total": "Total",
+      "legend": {
+        "outTransaction": "Transação de saída",
+        "inTransaction": "Transação de entrada",
+        "includesInitial": "Inclui a transação inicial",
+        "rootAccount": "Conta raiz",
+        "account": "Conta",
+        "fromRoot": "Com transações da raiz",
+        "toRoot": "Com transações para a raiz",
+        "madeInitial": "Realizou a transação inicial"
+      }
+    },
+    "kind": {
+      "mint": "Cunhar",
+      "transfer": "Transferir",
+      "burn": "Queimar",
+      "approve": "Aprovar"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Bem-vindo de volta",
+      "value": "Valor:",
+      "disconnectWallet": "Desligar carteira",
+      "accountLabel": "Conta",
+      "manageDescription": "Faça a gestão da sua carteira OGY, recompensas e atividade de staking.",
+      "walletBalance": "Saldo da Carteira",
+      "myAccount": "A minha conta",
+      "howToTopUp": "Como carregar?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "OGY Disponíveis",
+      "transactionHistory": "Histórico de transações",
+      "transfer": "Transferir",
+      "transferOgy": "Transferir OGY",
+      "transferDescription": "Só pode enviar OGY do seu saldo disponível.",
+      "max": "Máx.",
+      "recipientAddress": "Endereço do destinatário",
+      "amountReceived": "Montante Recebido",
+      "ogyLogoAlt": "Logótipo OGY",
+      "transactionFee": "Taxa de transação (cobrada à origem)",
+      "currentBalance": "Saldo atual:",
+      "transferProcessing": "A transferência está a ser processada",
+      "transferProcessingHint": "Isto pode demorar alguns segundos",
+      "transferSuccess": "Transferência realizada com sucesso!",
+      "transferError": "Erro na transferência!",
+      "errors": {
+        "amountRequired": "O montante é obrigatório.",
+        "amountExceedsBalance": "O montante não pode exceder o seu saldo.",
+        "amountBelowFee": "O montante não pode ser inferior à taxa de transação.",
+        "amountNotPositive": "O montante deve ser um número positivo.",
+        "recipientRequired": "O endereço do destinatário é obrigatório.",
+        "recipientInvalid": "Endereço do destinatário inválido."
+      }
+    },
+    "staked": {
+      "title": "OGY em Staking",
+      "stake": "Staking",
+      "stakeOgy": "Fazer staking de OGY",
+      "stakeDescription": "Para fazer staking de OGY tem de ir à nossa plataforma NNS.",
+      "warningNotConnected": "Parece que não está ligado com",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Precisa de uma",
+      "warningToConnect": "para se ligar à plataforma NNS.",
+      "goToNns": "Ir para o NNS"
+    },
+    "rewards": {
+      "title": "Recompensas de Staking",
+      "claimAll": "Reclamar tudo",
+      "claimDisabledReason": "A reclamação de recompensas só é suportada para a conta predefinida do principal.",
+      "aboutToClaim": "Está prestes a reclamar",
+      "sentToPrincipal": "As recompensas serão enviadas para o seu principal",
+      "pending": "A reclamar todas as recompensas...",
+      "successTitle": "Todas as recompensas reclamadas com sucesso!",
+      "errorTitle": "Erro ao reclamar todas as recompensas!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Estamos a mudar de ledger e governação",
+        "description": "A governação e o ledger ORIGYN foram atualizados para uma SNS. Para continuar a participar na governação ORIGYN e utilizar OGY, precisa de migrar os seus tokens OGY."
+      },
+      "howToSwap": "Como trocar tokens",
+      "disclosureToggle": "Ainda tem tokens OGY antigos? Troque agora!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Passo 1: Levantar da governação antiga",
+          "subtitle": "Se anteriormente participava na governação OGY, precisa de levantar esses tokens antes de os poder trocar."
+        },
+        "deposit": {
+          "title": "Passo 2: Depositar na sua conta",
+          "subtitle": "Se tiver tokens fora do painel OGY, deposite-os no seu account-id antes de poder começar a trocá-los."
+        },
+        "swap": {
+          "title": "Passo 3: Trocar tokens",
+          "subtitle": "Troque o token OGY legado pelo novo ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Saldo OGY Legado"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Ir para o painel OGY Legado"
+      },
+      "swap": {
+        "disabledOisy": "A troca de OGY legado não está disponível com OISY. Ligue-se com Internet Identity ou Plug para trocar o seu OGY legado.",
+        "disabledSubAccount": "A troca de OGY legado só é suportada a partir da conta predefinida do principal.",
+        "swapYourTokens": "Troque os seus tokens",
+        "automaticDisabled": "A troca automática foi desativada. Terá de obter aprovação do seu pedido de troca, o montante mín. é 50 000 OGY.",
+        "form": {
+          "title": "Troque os seus OGY pelo novo ledger",
+          "description": "Deposite quaisquer tokens OGY que deseje trocar no seu account id",
+          "tokensAvailable": "Tokens disponíveis para trocar",
+          "youWillReceivePrefix": "Irá receber",
+          "youWillReceiveSuffix": "tokens OGY no novo ledger.",
+          "swapPrefix": "Trocar",
+          "swapSuffix": "tokens OGY"
+        },
+        "pending": {
+          "takesTime": "O processo de troca pode demorar algum tempo.",
+          "doNotRefresh": "Não atualize a página!",
+          "swapping": "A trocar tokens..."
+        },
+        "success": {
+          "title": "Troca realizada com sucesso!",
+          "walletBalance": "Saldo da carteira no novo ledger",
+          "myAccount": "A minha conta"
+        },
+        "error": {
+          "title": "Erro ao trocar tokens!",
+          "retry": "Tentar novamente"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Os meus Neurónios OGY",
+        "idHeader": "ID",
+        "stakedAmount": "Montante em staking",
+        "claimAmount": "Montante a reclamar",
+        "emptyTitle": "Ainda sem neurónios",
+        "emptyDescription": "Adicione um neurónio OGY para começar a acompanhar aqui o staking, o poder de voto e as recompensas.",
+        "addFirstNeuron": "Adicione o seu primeiro neurónio"
+      },
+      "add": {
+        "button": "Adicionar neurónio",
+        "title": "Adicionar neurónio",
+        "description": "Adicione este principal como hotkey em cada neurónio OGY que pretenda gerir aqui.",
+        "needHotkey": "Precisa de adicionar uma hotkey?",
+        "openNns": "Abrir a app NNS"
+      },
+      "claim": {
+        "button": "Reclamar",
+        "disabledReason": "A reclamação de recompensas só é suportada para a conta predefinida do principal.",
+        "aboutToClaim": "Está prestes a reclamar",
+        "sentToPrincipal": "As recompensas serão enviadas para o seu principal",
+        "pending": "A reclamar recompensa...",
+        "successTitle": "Recompensa reclamada com sucesso!",
+        "errorTitle": "Erro ao reclamar recompensa!",
+        "retry": "Tentar novamente"
+      },
+      "remove": {
+        "title": "Remover neurónio",
+        "description": "Para remover este neurónio, precisa de remover o seu principal da lista de hotkeys do seu neurónio."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Endereço",
+      "governanceBalance": "Saldo de Governação",
+      "stakedTokens": "Tokens em staking",
+      "ledgerBalance": "Saldo do Ledger",
+      "weightInTotalSupply": "Peso na Oferta Total"
+    }
+  },
+  "recovery": {
+    "title": "Recupere os seus tokens",
+    "description": "O painel OGY só suporta o token OGY. Caso tenha enviado acidentalmente outros tokens para aqui, pode recuperá-los seguindo os passos abaixo.",
+    "chooseToken": "Escolher token",
+    "loginRequired": "Para recolher os seus tokens tem de ter sessão iniciada.",
+    "transfer": {
+      "icpLogoAlt": "Logótipo ICP",
+      "ledgerCanister": "Canister do ledger:",
+      "transferIcp": "Transferir ICP",
+      "availableBalanceNote": "Só pode enviar ICP do seu saldo disponível.",
+      "amountRequired": "O montante é obrigatório.",
+      "amountExceedsBalance": "O montante não pode exceder o seu saldo.",
+      "amountPositive": "O montante deve ser um número positivo.",
+      "amountBelowFee": "O montante deve ser superior ou igual às taxas de transação.",
+      "recipientAddress": "Endereço do destinatário",
+      "recipientAddressRequired": "O endereço do destinatário é obrigatório.",
+      "invalidRecipientAddress": "Endereço do destinatário inválido.",
+      "amountReceived": "Montante Recebido",
+      "transactionFee": "Taxa de transação",
+      "currentBalance": "Saldo atual:",
+      "processing": "A transferência está a ser processada",
+      "processingNote": "Isto pode demorar alguns segundos",
+      "success": "Transferência realizada com sucesso!",
+      "error": "Erro na transferência!"
+    }
+  },
+  "support": {
+    "category": "Suporte",
+    "title": "Criar um ticket",
+    "titleSubmitted": "Ticket submetido",
+    "successTitle": "Ticket de suporte criado",
+    "successMessage": "Daremos seguimento no endereço de e-mail que indicou.",
+    "submitAnother": "Submeter outro ticket",
+    "intro": "Descreva o seu problema e como podemos contactá-lo.",
+    "form": {
+      "name": "Nome",
+      "email": "E-mail de contacto",
+      "emailRequired": "O endereço de e-mail é obrigatório",
+      "emailInvalid": "Endereço de e-mail inválido",
+      "principal": "Principal da carteira",
+      "invalidPrincipal": "Endereço do destinatário inválido.",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Diga-nos o que se passa…",
+      "descriptionRequired": "Descreva o seu problema, por favor"
+    },
+    "submitError": "Algo correu mal. Tente novamente.",
+    "submitting": "A submeter…"
+  },
+  "explorer": {
+    "title": "Explorador",
+    "searchPlaceholder": "Pesquisar por título, emissor, principal ou ID do token",
+    "openFilters": "Abrir filtros",
+    "checkOnBlockchain": "Verificar na blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Certificados em Destaque",
+      "art": "Certificados de Arte",
+      "gold": "Certificados de Ouro"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Copiar para a área de transferência",
+    "toggleRelativeTime": "Alternar tempo relativo. Visualização atual:",
+    "collapseRow": "Recolher linha",
+    "expandRow": "Expandir linha",
+    "searchPlaceholder": "Pesquisar itens...",
+    "sortAscending": "Ordenar ascendente",
+    "sortDescending": "Ordenar descendente",
+    "linesPerPage": "Linhas por página",
+    "page": "Página",
+    "pageOf": "de",
+    "previousPage": "Página anterior",
+    "nextPage": "Página seguinte"
+  },
+  "auth": {
+    "connect": "Ligar",
+    "disconnect": "Desligar",
+    "connectWallet": {
+      "title": "Ligue a sua carteira",
+      "subtitle": "Escolha como pretende iniciar sessão"
+    },
+    "install": "Instalar",
+    "newToIc": "Novo no Internet Computer?",
+    "learnMore": "Saber mais",
+    "connecting": {
+      "title": "A ligar...",
+      "subtitle": "Aprove o pedido na sua carteira"
+    },
+    "sessionExpired": {
+      "title": "Sessão expirada",
+      "description": "A sessão da sua carteira já não é válida. Ligue-se novamente para continuar."
+    },
+    "reconnect": "Ligar novamente",
+    "error": {
+      "connectionCancelled": "Ligação cancelada. Tente novamente.",
+      "connectionFailed": "Falha na ligação da carteira. Tente novamente."
+    }
+  },
+  "warning": {
+    "badge": "NOVO",
+    "ledgerSwitch": "estamos a mudar de ledger, precisa de trocar os seus OGY pelos novos"
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculadora de custos",
+      "description": "Utilize a calculadora ORIGYN para estimar o custo do seu certificado único com todos os seus dados on-chain"
+    },
+    "plan": {
+      "title": "Planeie a sua emissão",
+      "description": "Indique-nos quantos itens tem e o que vai carregar.",
+      "itemsLabel": "Quantos itens?",
+      "uploadingLabel": "O que vai carregar?",
+      "knowExactSize": "Conhece o tamanho exato?",
+      "totalUploadSize": "Tamanho total do carregamento",
+      "usePreset": "Utilizar uma predefinição",
+      "combinedSize": "Tamanho combinado de todos os ficheiros em todos os itens.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB cada"
+        },
+        "iphone": {
+          "label": "Fotografia",
+          "hint": "3 MB cada"
+        },
+        "dslr": {
+          "label": "Fotografia de estúdio",
+          "hint": "20 MB cada"
+        },
+        "video": {
+          "label": "Vídeo curto",
+          "hint": "1 GB cada"
+        },
+        "video1hr": {
+          "label": "Vídeo longo",
+          "hint": "60 GB cada"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimativa em tempo real",
+      "titleRefreshing": "A atualizar estimativa",
+      "description": "Atualiza automaticamente à medida que altera a sua configuração.",
+      "ogyEquivalent": "Equivalente em OGY",
+      "ogySpotRate": "Cotação spot do OGY",
+      "itemSingular": "Item",
+      "itemPlural": "Itens",
+      "upload": "Carregamento"
+    },
+    "breakdown": {
+      "title": "Discriminação de custos",
+      "baseFee": "Taxa base de emissão",
+      "storageFee": "Taxa de armazenamento",
+      "items": "Itens",
+      "uploadSize": "Tamanho do carregamento"
+    },
+    "bytesUnit": "bytes"
+  }
+}

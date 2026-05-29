@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Ngôn ngữ",
+    "switchTo": "Chuyển sang {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "retry": "Thử lại",
+    "cancel": "Hủy",
+    "confirm": "Xác nhận",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "previous": "Trước",
+    "save": "Lưu",
+    "submit": "Gửi",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "search": "Tìm kiếm",
+    "viewAll": "Xem tất cả",
+    "showMore": "Hiện thêm",
+    "showLess": "Thu gọn",
+    "amount": "Số lượng",
+    "date": "Ngày",
+    "type": "Loại",
+    "from": "Từ",
+    "to": "Đến",
+    "index": "Chỉ mục",
+    "status": "Trạng thái",
+    "total": "Tổng",
+    "balance": "Số dư",
+    "yes": "Có",
+    "no": "Không",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Bảng điều khiển",
+    "governance": "Quản trị",
+    "transactionHistory": "Lịch sử giao dịch",
+    "calculator": "Máy tính",
+    "openMainMenu": "Mở menu chính",
+    "closeMenu": "Đóng menu",
+    "openAccountOverview": "Mở tổng quan tài khoản",
+    "viewAccountOverview": "Xem tổng quan tài khoản",
+    "connectPrompt": "Kết nối ví của bạn để quản lý token, bỏ phiếu cho các đề xuất và xem lịch sử giao dịch.",
+    "connectWallet": "Kết nối ví",
+    "disconnect": "Ngắt kết nối"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Xin lỗi, chúng tôi không tìm thấy trang bạn đang tìm.",
+    "backHome": "Quay về trang chủ"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Bảng điều khiển OGY",
+      "home": "Trang chủ",
+      "circulation": "Lưu thông",
+      "governance": "Quản trị",
+      "revenue": "Doanh thu",
+      "rewards": "Phần thưởng",
+      "distribution": "Phân phối",
+      "governanceDashboard": "Bảng điều khiển quản trị OGY",
+      "transactionExplorer": "Trình khám phá giao dịch OGY"
+    },
+    "learn": {
+      "heading": "Tìm hiểu thêm về OGY Tokenomics & ORIGYN",
+      "tokenomicsDeck": "Bộ tài liệu OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Tiêu chuẩn NFT ORIGYN",
+      "tokenomicsFaq": "Câu hỏi thường gặp về ORIGYN Tokenomics",
+      "website": "Trang web ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Hỗ trợ",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Liên hệ"
+    },
+    "support": {
+      "contactSupport": "Liên hệ hỗ trợ",
+      "recoverTokens": "Khôi phục token của bạn"
+    },
+    "disclaimer": "*ORIGYN Foundation không chịu trách nhiệm về bất kỳ tổn thất, trộm cắp hay chiếm đoạt OGY Tokens nào xảy ra liên quan đến quá trình hoán đổi. Hơn nữa, ORIGYN Foundation không chịu trách nhiệm về việc không thực hiện được hoán đổi nếu bên liên quan không tuân thủ nghiêm ngặt các điều kiện do ORIGYN Foundation quy định."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "PHÂN TÍCH OGY",
+      "title": "Khám phá bảng điều khiển",
+      "subtitle": "Tương tác phi tín nhiệm với web3 dApps, DAOs, NFTs, DeFi và nhiều hơn nữa."
+    },
+    "cta": {
+      "loginToSwap": "Đăng nhập để hoán đổi token",
+      "myAccount": "Tài khoản của tôi"
+    },
+    "governanceStaking": {
+      "title": "Tổng quan staking quản trị"
+    },
+    "cardError": {
+      "couldNotLoad": "Không thể tải",
+      "descriptionLine1": "Chúng tôi gặp sự cố khi lấy chỉ số này.",
+      "descriptionLine2": "Vui lòng thử lại sau giây lát."
+    },
+    "emptyState": {
+      "noDataFor": "Không có dữ liệu cho",
+      "description": "Hiện không có gì để hiển thị."
+    },
+    "circulationState": {
+      "title": "Trạng thái lưu thông OGY",
+      "tooltip": "Nguồn cung lưu thông là tất cả token ngoại trừ các token đã mở khóa thuộc sở hữu của ORIGYN Foundation.",
+      "nnsProposal": "Đề xuất NNS",
+      "totalLabel": "Tổng lưu thông OGY",
+      "notOwnedName": "OGY không nằm trong tay Foundation",
+      "notOwnedValue": "Lượng token lưu thông không thuộc sở hữu của ORIGYN foundation.",
+      "ownedName": "OGY bị khóa trong tay Foundation",
+      "ownedValue": "Lượng token bị khóa thuộc sở hữu của ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Quỹ dự trữ ORIGYN Foundation OGY",
+      "tooltip": "Tổng lượng OGY tokens thuộc sở hữu của ORIGYN foundation trên tất cả các ví.",
+      "totalLabel": "Tổng nguồn cung của Foundation",
+      "lockedName": "Đã khóa",
+      "lockedIntro": "Token của ORIGYN foundation bị khóa trong stake hoặc vesting.",
+      "lockedStakes": "1) Stake - token tạo ra phần thưởng nhờ tham gia bỏ phiếu quản trị.",
+      "lockedStakesNote": "Những token này được khóa tự nguyện.",
+      "lockedVestings": "2) Vesting - Token không nhận bất kỳ phần thưởng nào và không thể tham gia bỏ phiếu.",
+      "lockedVestingsNote": "Những token này bị khóa theo hợp đồng của bạn với ORIGYN Foundation.",
+      "unlockedName": "Đã mở khóa",
+      "unlockedValue": "Quỹ đã mở khóa thuộc sở hữu của ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "Tài khoản ngân quỹ ORIGYN (OTA)",
+      "networkRevenue": "Doanh thu mạng lưới",
+      "tokenLogoAlt": "Logo token",
+      "tooltipOgy": "Doanh thu tiện ích mạng lưới được tạo ra thông qua phí sử dụng mạng ORIGYN (ví dụ: phát hành hoặc chuyển nhượng chứng chỉ số, đúc NFTs, v.v.) và tích lũy bằng OGY.",
+      "tooltipIcp": "Doanh thu tiện ích mạng lưới được tạo ra thông qua phí sử dụng mạng ORIGYN (ví dụ: phát hành hoặc chuyển nhượng chứng chỉ số, đúc NFTs, v.v.) và tích lũy bằng ICP."
+    },
+    "rewardAccount": {
+      "title": "Tài khoản phần thưởng ORIGYN (ORA)",
+      "balance": "Số dư ORA",
+      "year": "Năm",
+      "rewardPool": "Quỹ phần thưởng",
+      "moreDetails": "Thêm chi tiết",
+      "tooltipStake": "Người nắm giữ token có thể stake OGY của họ và nhận phần thưởng bằng cách tham gia quản trị.",
+      "tooltipSeed": "Phần thưởng sẽ đến từ Tài khoản phần thưởng ORIGYN, mà ORIGYN sẽ cấp một tỷ OGY.",
+      "tooltipPool": "Quỹ phần thưởng gồm 250 triệu OGY trong năm đầu tiên và sẽ giảm một nửa mỗi hai năm để khuyến khích và thưởng cho những người đóng góp sớm và lâu dài cho hệ sinh thái.",
+      "description": "ORIGYN sẽ đóng góp một tỷ OGY vào Tài khoản phần thưởng ORIGYN (ORA) vì lợi ích của những người nắm giữ đã stake và bỏ phiếu. Quỹ phần thưởng gồm 250 triệu OGY trong năm đầu tiên và sẽ giảm một nửa mỗi hai năm để khuyến khích và thưởng cho những người đóng góp sớm và lâu dài cho hệ sinh thái."
+    },
+    "tokenDistribution": {
+      "title": "Phân phối token"
+    },
+    "transactionHistory": {
+      "title": "Lịch sử giao dịch",
+      "showAll": "Hiện tất cả"
+    },
+    "topTransfers": {
+      "value": "Giá trị",
+      "time": "Thời gian",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Không có dữ liệu."
+    },
+    "totalSupply": {
+      "title": "Tổng nguồn cung OGY",
+      "tooltipTitle": "Tổng lượng OGY tokens hiện có.",
+      "tooltipLine1": "Bao gồm nguồn cung lưu thông và nguồn cung dưới sự kiểm soát của ORIGYN Foundation.",
+      "tooltipLine2": "Kể từ ngày 18 tháng 9, ORIGYN đã chuyển sang mô hình giảm phát hoàn toàn, nghĩa là không còn token mới được đúc.",
+      "chartLabel": "Tổng nguồn cung"
+    },
+    "totalBurned": {
+      "title": "Tổng OGY đã đốt",
+      "tooltipTitle": "Tổng lượng OGY tokens đã đốt.",
+      "tooltipLine1": "Những token này đã bị đốt hoàn toàn và không còn khả dụng.",
+      "tooltipLine2": "Token có thể bị đốt vì nhiều lý do, ví dụ phí đúc chứng chỉ, phí tiện ích mạng lưới hoặc phí giao dịch mạng lưới.",
+      "chartLabel": "Tổng đã đốt"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Hàng ngày",
+      "weekly": "Hàng tuần",
+      "monthly": "Hàng tháng",
+      "yearly": "Hàng năm",
+      "all": "Tất cả"
+    },
+    "stakingOverview": {
+      "title": "Tổng quan staking",
+      "totalTokensInStakes": "Tổng token trong stake",
+      "tooltip": "Token bị khóa trong stake.",
+      "stakedTokens": "Token đã stake",
+      "stakedTokensLegend": "TOKEN ĐÃ STAKE"
+    },
+    "usersActivity": {
+      "title": "Tổng quan người dùng",
+      "protocolUsers": "Người dùng giao thức OGY",
+      "protocolUsersTooltip": "Người nắm giữ token OGY duy nhất",
+      "protocolUsersLegend": "NGƯỜI DÙNG GIAO THỨC OGY",
+      "activeWallets": "Ví OGY hoạt động",
+      "activeWalletsTooltip": "Người nắm giữ token OGY đang hoạt động"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Tổng quan quản trị",
+      "welcome": "Chào mừng đến với ORIGYN Governance!",
+      "description": "Người nắm giữ token OGY có thể trực tiếp tác động đến mạng lưới ORIGYN bằng cách stake OGY và bỏ phiếu cho các đề xuất. Bằng việc tham gia vào quá trình ra quyết định, những người nắm giữ token đã stake này nhận được phần thưởng.",
+      "learnMore": "Tìm hiểu thêm"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake & Bỏ phiếu",
+        "description": "Tác động đến mạng lưới ORIGYN bằng cách stake OGY & bỏ phiếu cho các đề xuất."
+      },
+      "earnRewards": {
+        "title": "Nhận phần thưởng",
+        "description": "Tham gia vào quá trình ra quyết định để nhận phần thưởng."
+      },
+      "governCollectively": {
+        "title": "Quản trị tập thể",
+        "description": "Tham gia & tác động đến mạng lưới như một hệ sinh thái hợp tác."
+      }
+    },
+    "tokensSection": {
+      "title": "Token trong quản trị",
+      "paragraph1": "Người nắm giữ token OGY có thể trực tiếp tác động đến mạng lưới ORIGYN bằng cách stake OGY và bỏ phiếu cho các đề xuất.",
+      "paragraph2": "Bằng việc tham gia vào quá trình ra quyết định, những người nắm giữ token đã stake này nhận phần thưởng và quản trị một cách tập thể và dân chủ.",
+      "learnMoreOgy": "Tìm hiểu thêm về OGY"
+    },
+    "sections": {
+      "proposals": "Đề xuất",
+      "neurons": "Neuron"
+    },
+    "votingParticipation": {
+      "title": "Tỷ lệ tham gia bỏ phiếu",
+      "chartLabel": "Tham gia %",
+      "legendLabel": "THAM GIA %",
+      "period": {
+        "weekly": "Hàng tuần",
+        "monthly": "Hàng tháng",
+        "yearly": "Hàng năm"
+      },
+      "lastParticipation": {
+        "label": "Tham gia bỏ phiếu gần nhất",
+        "tooltip": "Phần trăm tham gia trong sự kiện bỏ phiếu gần nhất."
+      },
+      "averageParticipation": {
+        "label": "Tham gia bỏ phiếu trung bình",
+        "tooltip": "Phần trăm tham gia bỏ phiếu trung bình theo thời gian."
+      },
+      "averagePower": {
+        "label": "Quyền biểu quyết trung bình",
+        "tooltip": "Quyền biểu quyết trung bình trên tất cả người tham gia."
+      }
+    },
+    "estimateRewards": {
+      "title": "Ước tính phần thưởng của bạn",
+      "lockDuration": "Thời gian khóa",
+      "participants": "người tham gia",
+      "lockedForAtLeast": "hiện đang khóa ít nhất",
+      "lockedFor": "hiện đang khóa trong",
+      "year": "năm",
+      "years": "năm"
+    },
+    "kpi": {
+      "metric": "Chỉ số",
+      "rewardBaseCurrentYear": "Cơ sở phần thưởng cho năm hiện tại",
+      "dailyVotingRewards": "Phần thưởng bỏ phiếu hằng ngày",
+      "totalVotingPower": "Tổng quyền biểu quyết",
+      "overallVotingParticipation": "Mức tham gia bỏ phiếu tổng thể"
+    },
+    "total": {
+      "titleTooltip": "Tất cả token nằm trong canister quản trị. Những token này có thể ở trạng thái vesting, staking, chưa stake hoặc chưa nhận.",
+      "totalLabel": "Tổng token trong quản trị",
+      "locked": {
+        "name": "Đã khóa",
+        "tooltip": "Token bị khóa trong quản trị."
+      },
+      "unlocked": {
+        "name": "Đã mở khóa",
+        "tooltip": "Token đã được mở khóa trong quản trị và có thể rút ra và giao dịch bất cứ lúc nào."
+      },
+      "accumulatedRewards": {
+        "name": "Phần thưởng tích lũy",
+        "tooltip": "Phần thưởng được tính cho người dùng nhưng chưa được nhận."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Đề xuất",
+      "viewProposal": "Xem đề xuất",
+      "columns": {
+        "id": "ID",
+        "title": "Tiêu đề",
+        "proposed": "Đã đề xuất",
+        "timeRemaining": "Thời gian còn lại",
+        "topic": "Chủ đề",
+        "status": "Trạng thái",
+        "view": "Xem"
+      }
+    },
+    "details": {
+      "category": "Quản trị",
+      "proposalNumber": "Đề xuất #",
+      "proposal": "Đề xuất",
+      "titleLoading": "Đang tải tiêu đề đề xuất…",
+      "payloadLoading": "Đang tải chi tiết đề xuất…",
+      "posted": "Đã đăng",
+      "topic": "Chủ đề",
+      "moreInfo": "Thêm thông tin",
+      "totalVotes": "Tổng số phiếu",
+      "adopt": "CHẤP THUẬN",
+      "reject": "TỪ CHỐI",
+      "vote": "Bỏ phiếu"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuron",
+      "viewNeuron": "Xem neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Trạng thái",
+        "stakedOgy": "OGY đã stake",
+        "dissolveDelay": "Thời gian giải thể",
+        "age": "Tuổi",
+        "votingPower": "Quyền biểu quyết",
+        "view": "Xem"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Đã tạo",
+      "stakedOgy": "OGY đã stake",
+      "votingPower": "Quyền biểu quyết",
+      "dissolveDelay": "Thời gian giải thể",
+      "age": "Tuổi",
+      "lifecycle": "Vòng đời neuron",
+      "dateCreated": "Ngày tạo",
+      "autoStakeMaturity": "Tự động stake độ chín",
+      "rewardsAndBonuses": "Phần thưởng & tiền thưởng",
+      "stakedMaturity": "Độ chín đã stake",
+      "totalMaturity": "Tổng độ chín",
+      "ageBonus": "Thưởng theo tuổi",
+      "totalBonus": "Tổng tiền thưởng",
+      "dissolveDelayBonus": "Thưởng theo thời gian giải thể"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Lịch sử giao dịch",
+      "searchFor": "Tìm kiếm:",
+      "or": "hoặc",
+      "searchPlaceholder": "Tìm kiếm một mục",
+      "noResults": "Không tìm thấy kết quả",
+      "resultBlock": "Khối",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Chi tiết giao dịch",
+      "hash": "Hash",
+      "fetchError": "Lỗi khi lấy một giao dịch!",
+      "mintingAccount": "Tài khoản đúc",
+      "fee": "Phí",
+      "memo": "Ghi chú",
+      "none": "Không có"
+    },
+    "accountDetails": {
+      "title": "Tài khoản OGY",
+      "id": "ID",
+      "owner": "Chủ sở hữu",
+      "subaccount": "Tài khoản phụ",
+      "defaultSubaccount": "Không có (tài khoản phụ mặc định)",
+      "historicalMaxBalance": "Số dư tối đa trong lịch sử",
+      "genesisBalance": "Số dư khởi tạo",
+      "period": {
+        "monthly": "Hàng tháng",
+        "quarterly": "Hàng quý",
+        "yearly": "Hàng năm",
+        "lifetime": "Trọn đời"
+      },
+      "empty": {
+        "title": "Chưa có giao dịch",
+        "description": "Tài khoản này chưa có lịch sử giao dịch. Khi nó gửi hoặc nhận OGY, hoạt động sẽ xuất hiện ở đây."
+      },
+      "balanceHistory": {
+        "title": "Lịch sử số dư",
+        "currentBalance": "Số dư hiện tại",
+        "currentBalanceInfo": "Số dư tài khoản hiện tại.",
+        "legend": "Số dư OGY"
+      },
+      "overview": {
+        "title": "Tổng quan giao dịch",
+        "totalLabel": "Tổng số lượng",
+        "totalSent": "Tổng đã gửi",
+        "totalSentInfo": "Tổng số lượng đã gửi bởi principal.",
+        "totalReceived": "Tổng đã nhận",
+        "totalReceivedInfo": "Tổng số lượng đã nhận bởi principal."
+      }
+    },
+    "flow": {
+      "title": "Luồng giao dịch",
+      "searchPlaceholder": "Tìm kiếm giao dịch…",
+      "clearSearch": "Xóa tìm kiếm",
+      "loadError": "Không thể tải dữ liệu giao dịch. Vui lòng thử lại.",
+      "noMatch": "Không có giao dịch nào khớp với tìm kiếm này.",
+      "transactions": "giao dịch",
+      "out": "Ra",
+      "in": "Vào",
+      "total": "Tổng",
+      "legend": {
+        "outTransaction": "Giao dịch ra",
+        "inTransaction": "Giao dịch vào",
+        "includesInitial": "Bao gồm giao dịch ban đầu",
+        "rootAccount": "Tài khoản gốc",
+        "account": "Tài khoản",
+        "fromRoot": "Có giao dịch từ gốc",
+        "toRoot": "Có giao dịch đến gốc",
+        "madeInitial": "Đã thực hiện giao dịch ban đầu"
+      }
+    },
+    "kind": {
+      "mint": "Đúc",
+      "transfer": "Chuyển",
+      "burn": "Đốt",
+      "approve": "Phê duyệt"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Chào mừng trở lại",
+      "value": "Giá trị:",
+      "disconnectWallet": "Ngắt kết nối ví",
+      "accountLabel": "Tài khoản",
+      "manageDescription": "Quản lý ví OGY, phần thưởng và hoạt động staking của bạn.",
+      "walletBalance": "Số dư ví",
+      "myAccount": "Tài khoản của tôi",
+      "howToTopUp": "Cách nạp tiền?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "OGY khả dụng",
+      "transactionHistory": "Lịch sử giao dịch",
+      "transfer": "Chuyển",
+      "transferOgy": "Chuyển OGY",
+      "transferDescription": "Bạn chỉ có thể gửi OGY từ số dư khả dụng của mình.",
+      "max": "Tối đa",
+      "recipientAddress": "Địa chỉ người nhận",
+      "amountReceived": "Số lượng nhận được",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Phí giao dịch (tính cho nguồn)",
+      "currentBalance": "Số dư hiện tại:",
+      "transferProcessing": "Đang xử lý chuyển khoản",
+      "transferProcessingHint": "Việc này có thể mất vài giây",
+      "transferSuccess": "Chuyển khoản thành công !",
+      "transferError": "Lỗi chuyển khoản !",
+      "errors": {
+        "amountRequired": "Số lượng là bắt buộc.",
+        "amountExceedsBalance": "Số lượng không được vượt quá số dư của bạn.",
+        "amountBelowFee": "Số lượng không được nhỏ hơn phí giao dịch.",
+        "amountNotPositive": "Số lượng phải là số dương.",
+        "recipientRequired": "Địa chỉ người nhận là bắt buộc.",
+        "recipientInvalid": "Địa chỉ người nhận không hợp lệ."
+      }
+    },
+    "staked": {
+      "title": "OGY đã stake",
+      "stake": "Stake",
+      "stakeOgy": "Stake OGY",
+      "stakeDescription": "Để stake OGY bạn cần truy cập nền tảng NNS của chúng tôi.",
+      "warningNotConnected": "Có vẻ như bạn chưa kết nối với",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Bạn cần một",
+      "warningToConnect": "để kết nối với nền tảng NNS.",
+      "goToNns": "Đến NNS"
+    },
+    "rewards": {
+      "title": "Phần thưởng đã stake",
+      "claimAll": "Nhận tất cả",
+      "claimDisabledReason": "Việc nhận phần thưởng chỉ được hỗ trợ cho tài khoản mặc định của principal.",
+      "aboutToClaim": "Bạn sắp nhận",
+      "sentToPrincipal": "Phần thưởng sẽ được gửi đến principal của bạn",
+      "pending": "Đang nhận tất cả phần thưởng...",
+      "successTitle": "Nhận tất cả phần thưởng thành công!",
+      "errorTitle": "Lỗi nhận tất cả phần thưởng!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Chúng tôi đang chuyển đổi ledger và quản trị",
+        "description": "Quản trị và ledger của ORIGYN đã được nâng cấp lên SNS. Để tiếp tục tham gia quản trị ORIGYN và sử dụng OGY, bạn cần di chuyển các token OGY của mình."
+      },
+      "howToSwap": "Cách hoán đổi token",
+      "disclosureToggle": "Vẫn còn token OGY cũ? Hoán đổi ngay!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Bước 1: Rút khỏi quản trị cũ",
+          "subtitle": "Nếu trước đây bạn đã tham gia quản trị OGY, bạn cần rút những token đó trước khi có thể hoán đổi chúng."
+        },
+        "deposit": {
+          "title": "Bước 2: Nạp vào tài khoản của bạn",
+          "subtitle": "Nếu bạn có bất kỳ token nào bên ngoài bảng điều khiển OGY, hãy nạp chúng vào account-id của bạn trước khi có thể bắt đầu hoán đổi chúng."
+        },
+        "swap": {
+          "title": "Bước 3: Hoán đổi token",
+          "subtitle": "Hoán đổi token OGY cũ sang ledger mới."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Số dư OGY cũ"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Đến bảng điều khiển OGY cũ"
+      },
+      "swap": {
+        "disabledOisy": "Hoán đổi OGY cũ không khả dụng với OISY. Kết nối với Internet Identity hoặc Plug để hoán đổi OGY cũ của bạn.",
+        "disabledSubAccount": "Hoán đổi OGY cũ chỉ được hỗ trợ từ tài khoản mặc định của principal.",
+        "swapYourTokens": "Hoán đổi token của bạn",
+        "automaticDisabled": "Hoán đổi tự động đã bị tắt. Bạn sẽ cần được phê duyệt yêu cầu hoán đổi, số lượng tối thiểu là 50 000 OGY.",
+        "form": {
+          "title": "Hoán đổi OGY của bạn sang ledger mới",
+          "description": "Nạp bất kỳ token OGY nào bạn muốn hoán đổi vào account id của bạn",
+          "tokensAvailable": "Token khả dụng để hoán đổi",
+          "youWillReceivePrefix": "Bạn sẽ nhận được",
+          "youWillReceiveSuffix": "token OGY trên ledger mới.",
+          "swapPrefix": "Hoán đổi",
+          "swapSuffix": "token OGY"
+        },
+        "pending": {
+          "takesTime": "Quá trình hoán đổi có thể mất một chút thời gian.",
+          "doNotRefresh": "Không làm mới trang !",
+          "swapping": "Đang hoán đổi token..."
+        },
+        "success": {
+          "title": "Hoán đổi thành công!",
+          "walletBalance": "Số dư ví trên ledger mới",
+          "myAccount": "Tài khoản của tôi"
+        },
+        "error": {
+          "title": "Lỗi hoán đổi token!",
+          "retry": "Thử lại"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Neuron OGY của tôi",
+        "idHeader": "ID",
+        "stakedAmount": "Số lượng đã stake",
+        "claimAmount": "Số lượng nhận",
+        "emptyTitle": "Chưa có neuron",
+        "emptyDescription": "Thêm một neuron OGY để bắt đầu theo dõi stake, quyền biểu quyết và phần thưởng tại đây.",
+        "addFirstNeuron": "Thêm neuron đầu tiên của bạn"
+      },
+      "add": {
+        "button": "Thêm neuron",
+        "title": "Thêm neuron",
+        "description": "Thêm principal này làm hotkey trên mỗi neuron OGY bạn muốn quản lý tại đây.",
+        "needHotkey": "Cần thêm hotkey?",
+        "openNns": "Mở ứng dụng NNS"
+      },
+      "claim": {
+        "button": "Nhận",
+        "disabledReason": "Việc nhận phần thưởng chỉ được hỗ trợ cho tài khoản mặc định của principal.",
+        "aboutToClaim": "Bạn sắp nhận",
+        "sentToPrincipal": "Phần thưởng sẽ được gửi đến principal của bạn",
+        "pending": "Đang nhận phần thưởng...",
+        "successTitle": "Nhận phần thưởng thành công!",
+        "errorTitle": "Lỗi nhận phần thưởng!",
+        "retry": "Thử lại"
+      },
+      "remove": {
+        "title": "Xóa neuron",
+        "description": "Để xóa neuron này, bạn cần xóa principal của mình khỏi danh sách hotkey của neuron."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Địa chỉ",
+      "governanceBalance": "Số dư quản trị",
+      "stakedTokens": "Token đã stake",
+      "ledgerBalance": "Số dư ledger",
+      "weightInTotalSupply": "Trọng số trong tổng nguồn cung"
+    }
+  },
+  "recovery": {
+    "title": "Khôi phục token của bạn",
+    "description": "Bảng điều khiển OGY chỉ hỗ trợ token OGY. Trong trường hợp bạn vô tình gửi các token khác đến đây, bạn có thể khôi phục chúng bằng cách làm theo các bước dưới đây.",
+    "chooseToken": "Chọn token",
+    "loginRequired": "Để thu thập token của bạn, bạn phải đăng nhập.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "Chuyển ICP",
+      "availableBalanceNote": "Bạn chỉ có thể gửi ICP từ số dư khả dụng của mình.",
+      "amountRequired": "Số lượng là bắt buộc.",
+      "amountExceedsBalance": "Số lượng không được vượt quá số dư của bạn.",
+      "amountPositive": "Số lượng phải là số dương.",
+      "amountBelowFee": "Số lượng phải lớn hơn hoặc bằng phí giao dịch.",
+      "recipientAddress": "Địa chỉ người nhận",
+      "recipientAddressRequired": "Địa chỉ người nhận là bắt buộc.",
+      "invalidRecipientAddress": "Địa chỉ người nhận không hợp lệ.",
+      "amountReceived": "Số lượng nhận được",
+      "transactionFee": "Phí giao dịch",
+      "currentBalance": "Số dư hiện tại:",
+      "processing": "Đang xử lý chuyển khoản",
+      "processingNote": "Việc này có thể mất vài giây",
+      "success": "Chuyển khoản thành công!",
+      "error": "Lỗi chuyển khoản!"
+    }
+  },
+  "support": {
+    "category": "Hỗ trợ",
+    "title": "Tạo phiếu yêu cầu",
+    "titleSubmitted": "Đã gửi phiếu yêu cầu",
+    "successTitle": "Đã tạo phiếu hỗ trợ",
+    "successMessage": "Chúng tôi sẽ liên hệ lại qua địa chỉ email bạn đã cung cấp.",
+    "submitAnother": "Gửi phiếu khác",
+    "intro": "Mô tả vấn đề của bạn và cách chúng tôi có thể liên hệ với bạn.",
+    "form": {
+      "name": "Tên",
+      "email": "Email liên hệ",
+      "emailRequired": "Địa chỉ email là bắt buộc",
+      "emailInvalid": "Địa chỉ email không hợp lệ",
+      "principal": "Principal ví",
+      "invalidPrincipal": "Địa chỉ người nhận không hợp lệ.",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Cho chúng tôi biết chuyện gì đang xảy ra…",
+      "descriptionRequired": "Vui lòng mô tả vấn đề của bạn"
+    },
+    "submitError": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "submitting": "Đang gửi…"
+  },
+  "explorer": {
+    "title": "Trình khám phá",
+    "searchPlaceholder": "Tìm theo tiêu đề, nhà phát hành, principal hoặc token ID",
+    "openFilters": "Mở bộ lọc",
+    "checkOnBlockchain": "Kiểm tra trên blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Chứng chỉ nổi bật",
+      "art": "Chứng chỉ nghệ thuật",
+      "gold": "Chứng chỉ vàng"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Sao chép vào bộ nhớ tạm",
+    "toggleRelativeTime": "Bật/tắt thời gian tương đối. Hiển thị hiện tại:",
+    "collapseRow": "Thu gọn hàng",
+    "expandRow": "Mở rộng hàng",
+    "searchPlaceholder": "Tìm kiếm các mục...",
+    "sortAscending": "Sắp xếp tăng dần",
+    "sortDescending": "Sắp xếp giảm dần",
+    "linesPerPage": "Dòng mỗi trang",
+    "page": "Trang",
+    "pageOf": "trên",
+    "previousPage": "Trang trước",
+    "nextPage": "Trang sau"
+  },
+  "auth": {
+    "connect": "Kết nối",
+    "disconnect": "Ngắt kết nối",
+    "connectWallet": {
+      "title": "Kết nối ví của bạn",
+      "subtitle": "Chọn cách bạn muốn đăng nhập"
+    },
+    "install": "Cài đặt",
+    "newToIc": "Mới đến với Internet Computer?",
+    "learnMore": "Tìm hiểu thêm",
+    "connecting": {
+      "title": "Đang kết nối...",
+      "subtitle": "Phê duyệt yêu cầu trong ví của bạn"
+    },
+    "sessionExpired": {
+      "title": "Phiên đã hết hạn",
+      "description": "Phiên ví của bạn không còn hợp lệ. Kết nối lại để tiếp tục."
+    },
+    "reconnect": "Kết nối lại",
+    "error": {
+      "connectionCancelled": "Kết nối đã bị hủy. Vui lòng thử lại.",
+      "connectionFailed": "Kết nối ví thất bại. Vui lòng thử lại."
+    }
+  },
+  "warning": {
+    "badge": "MỚI",
+    "ledgerSwitch": "chúng tôi đang chuyển đổi ledger, bạn cần hoán đổi OGY của mình sang loại mới"
+  },
+  "calculator": {
+    "header": {
+      "title": "Máy tính chi phí",
+      "description": "Sử dụng máy tính ORIGYN để ước tính chi phí chứng chỉ độc nhất của Quý vị với toàn bộ dữ liệu trên chuỗi"
+    },
+    "plan": {
+      "title": "Lên kế hoạch đúc chứng chỉ",
+      "description": "Cho chúng tôi biết số lượng mục và nội dung Quý vị đang tải lên.",
+      "itemsLabel": "Bao nhiêu mục?",
+      "uploadingLabel": "Quý vị đang tải lên gì?",
+      "knowExactSize": "Quý vị biết kích thước chính xác?",
+      "totalUploadSize": "Tổng dung lượng tải lên",
+      "usePreset": "Sử dụng giá trị đặt sẵn",
+      "combinedSize": "Tổng dung lượng của tất cả tệp trong mọi mục.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB mỗi tệp"
+        },
+        "iphone": {
+          "label": "Ảnh",
+          "hint": "3 MB mỗi tệp"
+        },
+        "dslr": {
+          "label": "Ảnh studio",
+          "hint": "20 MB mỗi tệp"
+        },
+        "video": {
+          "label": "Video ngắn",
+          "hint": "1 GB mỗi tệp"
+        },
+        "video1hr": {
+          "label": "Video dài",
+          "hint": "60 GB mỗi tệp"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Ước tính theo thời gian thực",
+      "titleRefreshing": "Đang cập nhật ước tính",
+      "description": "Tự động cập nhật khi Quý vị thay đổi thiết lập.",
+      "ogyEquivalent": "Tương đương OGY",
+      "ogySpotRate": "Tỷ giá giao ngay OGY",
+      "itemSingular": "Mục",
+      "itemPlural": "Mục",
+      "upload": "Tải lên"
+    },
+    "breakdown": {
+      "title": "Chi tiết chi phí",
+      "baseFee": "Phí đúc cơ bản",
+      "storageFee": "Phí lưu trữ",
+      "items": "Mục",
+      "uploadSize": "Dung lượng tải lên"
+    },
+    "bytesUnit": "byte"
+  }
+}

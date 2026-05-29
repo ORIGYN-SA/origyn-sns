@@ -10,9 +10,7 @@ import useProposal from "@hooks/proposals/useProposal";
 import { getColorByProposalStatus } from "@helpers/colors/getColorByProposalStatus";
 import ProgressBar from "@components/charts/progress-bar/ProgressBar";
 import { NNS_PLATFORM_URL, SNS_ROOT_CANISTER } from "@constants/index";
-
-const FAKE_TITLE = "Proposal title loading…";
-const FAKE_PAYLOAD = "Loading proposal details…";
+import { useT } from "@i18n/LocaleContext";
 
 const getNnsProposalUrl = (proposalId: string) => {
   const { origin } = new URL(NNS_PLATFORM_URL);
@@ -20,6 +18,7 @@ const getNnsProposalUrl = (proposalId: string) => {
 };
 
 export const ProposalsDetails = () => {
+  const t = useT();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const proposalId = searchParams.get("id") as string;
@@ -33,19 +32,29 @@ export const ProposalsDetails = () => {
   const status = proposal?.status ?? "Open";
   const yesPct = proposal?.votes?.yesToString ?? "0";
   const noPct = proposal?.votes?.noToString ?? "0";
+  const fakeTitle = t("proposals.details.titleLoading");
+  const fakePayload = t("proposals.details.payloadLoading");
 
   return (
     <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
       <PageHeader
-        category="Governance"
-        title={proposalId ? `Proposal #${proposalId}` : "Proposal"}
+        category={t("proposals.details.category")}
+        title={
+          proposalId
+            ? `${t("proposals.details.proposalNumber")}${proposalId}`
+            : t("proposals.details.proposal")
+        }
         onBack={handleOnClickBack}
       />
 
       <div className="relative mt-8">
         {hasError && (
           <CardErrorOverlay
-            title={proposalId ? `Proposal #${proposalId}` : "Proposal"}
+            title={
+              proposalId
+                ? `${t("proposals.details.proposalNumber")}${proposalId}`
+                : t("proposals.details.proposal")
+            }
           />
         )}
         <SkeletonOverlay loading={showSkeleton}>
@@ -58,16 +67,18 @@ export const ProposalsDetails = () => {
                   {status}
                 </span>
                 <span className="text-sm text-muted">
-                  Posted {proposal?.proposed ?? "…"}
+                  {t("proposals.details.posted")} {proposal?.proposed ?? "…"}
                 </span>
               </div>
 
               <h2 className="mt-6 text-2xl font-bold text-content break-words">
-                {proposal?.title || FAKE_TITLE}
+                {proposal?.title || fakeTitle}
               </h2>
 
               <div className="mt-3 flex items-center gap-3 flex-wrap text-sm">
-                <span className="text-muted">Topic</span>
+                <span className="text-muted">
+                  {t("proposals.details.topic")}
+                </span>
                 <span className="inline-block rounded-full border border-spacePurple/25 bg-spacePurple/10 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-300">
                   {proposal?.topic ?? "…"}
                 </span>
@@ -75,11 +86,14 @@ export const ProposalsDetails = () => {
 
               <div className="mt-8 pt-6 border-t border-border">
                 <div className="text-sm font-medium text-muted mb-3">
-                  More info
+                  {t("proposals.details.moreInfo")}
                 </div>
                 <div className="rounded-xl bg-surface-2/40 p-6">
-                  <pre className="overflow-x-auto whitespace-pre text-sm text-content">
-                    {proposal?.payload || FAKE_PAYLOAD}
+                  <pre
+                    dir="ltr"
+                    className="overflow-x-auto whitespace-pre text-sm text-content"
+                  >
+                    {proposal?.payload || fakePayload}
                   </pre>
                 </div>
               </div>
@@ -88,7 +102,7 @@ export const ProposalsDetails = () => {
             <Card className="xl:col-span-1 self-start flex flex-col gap-6">
               <div>
                 <div className="text-sm font-medium text-muted mb-3">
-                  Total votes
+                  {t("proposals.details.totalVotes")}
                 </div>
                 <Stat
                   iconSrc="/ogy_logo.svg"
@@ -103,7 +117,9 @@ export const ProposalsDetails = () => {
                 noCount={proposal?.votes?.no ?? 0}
               />
 
-              <div className="grid grid-cols-2 gap-3">
+              {/* Adopt/reject row mirrors the LTR vote progress bar (yes left,
+                  no right) and shows numeric percentages; keep it LTR. */}
+              <div dir="ltr" className="grid grid-cols-2 gap-3">
                 <div className="flex items-center gap-2 min-w-0">
                   <CheckCircleIcon className="w-8 h-8 text-jade shrink-0" />
                   <div className="min-w-0">
@@ -111,17 +127,17 @@ export const ProposalsDetails = () => {
                       {yesPct}%
                     </div>
                     <div className="text-xs tracking-widest font-light text-muted">
-                      ADOPT
+                      {t("proposals.details.adopt")}
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 min-w-0 justify-end">
-                  <div className="min-w-0 text-right">
+                  <div className="min-w-0 text-end">
                     <div className="text-xl font-semibold text-content">
                       {noPct}%
                     </div>
                     <div className="text-xs tracking-widest font-light text-muted">
-                      REJECT
+                      {t("proposals.details.reject")}
                     </div>
                   </div>
                   <XCircleIcon className="w-8 h-8 text-red-400 shrink-0" />
@@ -137,7 +153,7 @@ export const ProposalsDetails = () => {
               >
                 <Button className="w-full !px-[25px] !py-0 text-[14px] leading-[48px]">
                   <span className="inline-flex items-center justify-center gap-2">
-                    Vote
+                    {t("proposals.details.vote")}
                     <ArrowTopRightOnSquareIcon className="w-4 h-4" />
                   </span>
                 </Button>

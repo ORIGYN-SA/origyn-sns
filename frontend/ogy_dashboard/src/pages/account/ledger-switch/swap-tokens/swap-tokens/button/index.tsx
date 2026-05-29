@@ -1,7 +1,9 @@
 import { Button } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import { useSwapTokens } from "../context";
 
 const Btn = () => {
+  const t = useT();
   const {
     handleShow,
     fetchBalanceLegacy,
@@ -28,12 +30,11 @@ const Btn = () => {
             !isWhitelisted)
         }
       >
-        Swap your tokens
+        {t("account.ledgerSwitch.swap.swapYourTokens")}
       </Button>
 
       <div className="mt-3 rounded-[16px] border border-yellow-500/20 bg-yellow-500/10 px-4 py-3 text-center text-sm leading-5 text-yellow-700 dark:text-yellow-300">
-        {swapDisabledReason ??
-          "Automatic swap has been disabled. You will need to get your swap request approved, min. amount is 50 000 OGY."}
+        {swapDisabledReason ?? t("account.ledgerSwitch.swap.automaticDisabled")}
       </div>
     </>
   );

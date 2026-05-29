@@ -5,8 +5,10 @@ import { Stat } from "@components/dashboard";
 import { roundAndFormatLocale } from "@helpers/numbers";
 import { Tooltip, Skeleton } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
+import { useT } from "@i18n/LocaleContext";
 
 const Deposit = () => {
+  const t = useT();
   const { accountId } = useWallet();
 
   const { data: balanceOGYLegacy } = useFetchBalanceOGYLegacyOwner();
@@ -17,8 +19,10 @@ const Deposit = () => {
   return (
     <div className="overflow-hidden rounded-[20px] border border-border bg-surface-1">
       <div className="grid grid-cols-[1fr_auto] items-center gap-4 p-4">
-        <div className="text-sm font-medium text-muted">Legacy OGY Balance</div>
-        <div className="min-w-0 text-right">
+        <div className="text-sm font-medium text-muted">
+          {t("account.ledgerSwitch.deposit.legacyBalance")}
+        </div>
+        <div className="min-w-0 text-end">
           <Stat
             iconSrc="/ogy_logo.svg"
             value={
@@ -40,11 +44,15 @@ const Deposit = () => {
         </div>
       </div>
       <div className="flex min-w-0 items-center border-t border-border bg-surface-muted p-4 text-sm text-muted">
-        <div className="mr-2 shrink-0 font-medium">Account ID: </div>
+        <div className="me-2 shrink-0 font-medium">
+          {t("account.ledgerSwitch.accountId")}{" "}
+        </div>
         {accountId ? (
           <>
+            {/* Account ID is an inherently-LTR identifier; keep it LTR so RTL
+                bidi doesn't reorder the truncated string. */}
             <Tooltip content={accountId}>
-              <div className="min-w-0 flex-1 truncate pr-3 font-mono text-xs">
+              <div dir="ltr" className="min-w-0 flex-1 truncate pe-3 font-mono text-xs text-start">
                 {accountId}
               </div>
             </Tooltip>

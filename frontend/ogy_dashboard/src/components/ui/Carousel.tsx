@@ -8,6 +8,7 @@ import {
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaOptionsType } from "embla-carousel";
 import { ChevronLeftIcon, ChevronRightIcon } from "@components/ui/icons";
+import { useT } from "@i18n/LocaleContext";
 
 interface CarouselProps extends PropsWithChildren {
   className?: string;
@@ -21,6 +22,7 @@ const Carousel = ({
   options,
   showControls = true,
 }: CarouselProps) => {
+  const t = useT();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -58,24 +60,24 @@ const Carousel = ({
       </div>
 
       {showControls && (
-        <div className="hidden sm:flex absolute -top-12 right-0 items-center gap-2">
+        <div className="hidden sm:flex absolute -top-12 end-0 items-center gap-2">
           <button
             type="button"
             onClick={scrollPrev}
             disabled={!canScrollPrev}
-            aria-label="Previous"
+            aria-label={t("common.previous")}
             className="h-9 w-9 rounded-full border border-border bg-surface flex items-center justify-center text-content transition-opacity hover:bg-surface-2 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronLeftIcon />
+            <ChevronLeftIcon className="rtl:-scale-x-100" />
           </button>
           <button
             type="button"
             onClick={scrollNext}
             disabled={!canScrollNext}
-            aria-label="Next"
+            aria-label={t("common.next")}
             className="h-9 w-9 rounded-full border border-border bg-surface flex items-center justify-center text-content transition-opacity hover:bg-surface-2 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronRightIcon />
+            <ChevronRightIcon className="rtl:-scale-x-100" />
           </button>
         </div>
       )}

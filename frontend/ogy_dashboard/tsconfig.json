@@ -27,6 +27,8 @@
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
+      "@i18n": ["i18n"],
+      "@i18n/*": ["i18n/*"],
       "@shared/*": ["shared/*"],
       "@helpers/*": ["helpers/*"],
       "@services/*": ["services/*"],
