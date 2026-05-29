@@ -1,6 +1,7 @@
 import { TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import useProposalsMetrics from "@hooks/proposals/useProposalsMetrics";
+import { useT } from "@i18n/LocaleContext";
 
 const COLORS = [
   "#a78bfa", // purple-400
@@ -11,24 +12,26 @@ const COLORS = [
   "#f87171", // red-400
 ];
 
-const PLACEHOLDER_ITEMS = Array.from({ length: 6 }, (_, i) => ({
-  id: i,
-  name: `Metric ${i + 1}`,
-  value: undefined,
-  tooltip: "Loading…",
-}));
-
 const TokensInGovernanceKPI = ({ className }: { className?: string }) => {
+  const t = useT();
   const { data, isLoading, isSuccess, isError } = useProposalsMetrics();
 
   const hasError = !isLoading && isError;
   const showSkeleton = isLoading || hasError;
-  const items = showSkeleton || !isSuccess || !data ? PLACEHOLDER_ITEMS : data;
+  const placeholderItems = Array.from({ length: 6 }, (_, i) => ({
+    id: i,
+    name: `${t("governance.kpi.metric")} ${i + 1}`,
+    value: undefined,
+    tooltip: t("common.loading"),
+  }));
+  const items = showSkeleton || !isSuccess || !data ? placeholderItems : data;
 
   return (
     <div className={`relative ${className ?? ""}`}>
       <SkeletonOverlay loading={showSkeleton}>
-        {hasError && <CardErrorOverlay title="Tokens in Governance" />}
+        {hasError && (
+          <CardErrorOverlay title={t("governance.tokensSection.title")} />
+        )}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {items.map(({ name, value, tooltip }, index) => (
             <StatCard

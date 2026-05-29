@@ -3,6 +3,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@components/ui/icons";
+import { useT } from "@i18n/LocaleContext";
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 
@@ -37,6 +38,7 @@ const TablePagination = ({
   onPageChange,
   onPageSizeChange,
 }: TablePaginationProps) => {
+  const t = useT();
   const canPrev = pageIndex > 0;
   const canNext = pageIndex < pageCount - 1;
   const pageItems = buildPageItems(pageIndex, pageCount);
@@ -44,7 +46,7 @@ const TablePagination = ({
   return (
     <div className="flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center justify-center gap-2 whitespace-nowrap text-muted sm:justify-start">
-        <span className="shrink-0">Lines per page</span>
+        <span className="shrink-0">{t("ui.linesPerPage")}</span>
         <div className="relative inline-flex shrink-0 items-center gap-[5px] rounded-full bg-surface-1 border border-border-strong py-[5px] px-[10px] font-medium text-[13px] leading-none text-content">
           <span>{pageSize}</span>
           <ChevronDownIcon className="pointer-events-none shrink-0" />
@@ -66,10 +68,10 @@ const TablePagination = ({
           <button
             type="button"
             onClick={() => onPageChange(pageIndex - 1)}
-            aria-label="Previous page"
+            aria-label={t("ui.previousPage")}
             className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-muted hover:bg-surface-faint"
           >
-            <ChevronLeftIcon />
+            <ChevronLeftIcon className="rtl:-scale-x-100" />
           </button>
         )}
         {pageItems.map((item, idx) =>
@@ -99,10 +101,10 @@ const TablePagination = ({
           type="button"
           onClick={() => onPageChange(pageIndex + 1)}
           disabled={!canNext}
-          aria-label="Next page"
+          aria-label={t("ui.nextPage")}
           className="inline-flex items-center justify-center h-7 min-w-7 px-2 rounded-full text-muted hover:bg-surface-faint disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <ChevronRightIcon />
+          <ChevronRightIcon className="rtl:-scale-x-100" />
         </button>
       </div>
     </div>

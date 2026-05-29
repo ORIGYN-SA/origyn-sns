@@ -19,6 +19,7 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/20/solid";
 import { Select } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -62,6 +63,7 @@ const Table = <T extends object>({
   setSorting,
   identifier = "",
 }: ReactTableProps<T>) => {
+  const t = useT();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndex = `page_index${identifier ? `_${identifier}` : ""}`;
   const pageSize = `page_size${identifier ? `_${identifier}` : ""}`;
@@ -170,8 +172,8 @@ const Table = <T extends object>({
                         title={
                           setSorting && header.column.getCanSort()
                             ? header.column.getNextSortingOrder() === "asc"
-                              ? "Sort ascending"
-                              : "Sort descending"
+                              ? t("ui.sortAscending")
+                              : t("ui.sortDescending")
                             : undefined
                         }
                       >
@@ -180,8 +182,8 @@ const Table = <T extends object>({
                           header.getContext()
                         )}
                         {{
-                          asc: <ArrowUpIcon className="h-5 w-5 ml-2" />,
-                          desc: <ArrowDownIcon className="h-5 w-5 ml-2" />,
+                          asc: <ArrowUpIcon className="h-5 w-5 ms-2" />,
+                          desc: <ArrowDownIcon className="h-5 w-5 ms-2" />,
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     )}
@@ -218,7 +220,7 @@ const Table = <T extends object>({
         {pagination && setPagination && (
           <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <div className="flex items-center justify-center whitespace-nowrap sm:justify-start">
-              <span className="shrink-0">Lines per page</span>
+              <span className="shrink-0">{t("ui.linesPerPage")}</span>
               <Select
                 options={linesPerPageOptions}
                 value={table.getState().pagination.pageSize}
@@ -256,13 +258,13 @@ const Table = <T extends object>({
                 <ChevronDoubleRightIcon className="h-5 w-5" />
               </button>
               <span className="flex items-center gap-1">
-                <div>Page</div>
+                <div>{t("ui.page")}</div>
                 <strong>
-                  {table.getState().pagination.pageIndex + 1} of{" "}
+                  {table.getState().pagination.pageIndex + 1} {t("ui.pageOf")}{" "}
                   {table.getPageCount().toLocaleString()}
                 </strong>
               </span>
-              {isFetching ? "Loading..." : null}
+              {isFetching ? t("common.loading") : null}
             </div>
           </div>
         )}

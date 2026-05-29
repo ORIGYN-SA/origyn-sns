@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Kieli",
+    "switchTo": "Vaihda kieleen {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Ladataan...",
+    "error": "Jokin meni vikaan",
+    "retry": "Yritä uudelleen",
+    "cancel": "Peruuta",
+    "confirm": "Vahvista",
+    "close": "Sulje",
+    "back": "Takaisin",
+    "next": "Seuraava",
+    "previous": "Edellinen",
+    "save": "Tallenna",
+    "submit": "Lähetä",
+    "copy": "Kopioi",
+    "copied": "Kopioitu",
+    "search": "Hae",
+    "viewAll": "Näytä kaikki",
+    "showMore": "Näytä lisää",
+    "showLess": "Näytä vähemmän",
+    "amount": "Määrä",
+    "date": "Päivämäärä",
+    "type": "Tyyppi",
+    "from": "Lähettäjä",
+    "to": "Vastaanottaja",
+    "index": "Indeksi",
+    "status": "Tila",
+    "total": "Yhteensä",
+    "balance": "Saldo",
+    "yes": "Kyllä",
+    "no": "Ei",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Hallintapaneeli",
+    "governance": "Hallinto",
+    "transactionHistory": "Tapahtumahistoria",
+    "calculator": "Laskuri",
+    "openMainMenu": "Avaa päävalikko",
+    "closeMenu": "Sulje valikko",
+    "openAccountOverview": "Avaa tilin yleisnäkymä",
+    "viewAccountOverview": "Näytä tilin yleisnäkymä",
+    "connectPrompt": "Yhdistä lompakkosi hallitaksesi tokeneita, äänestääksesi ehdotuksista ja tarkastellaksesi tapahtumahistoriaasi.",
+    "connectWallet": "Yhdistä lompakko",
+    "disconnect": "Katkaise yhteys"
+  },
+  "notFound": {
+    "title": "Sivua ei löytynyt",
+    "description": "Valitettavasti emme löytäneet etsimääsi sivua.",
+    "backHome": "Palaa etusivulle"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY-hallintapaneeli",
+      "home": "Etusivu",
+      "circulation": "Liikkeessä",
+      "governance": "Hallinto",
+      "revenue": "Tuotot",
+      "rewards": "Palkkiot",
+      "distribution": "Jakauma",
+      "governanceDashboard": "OGY-hallintopaneeli",
+      "transactionExplorer": "OGY-tapahtumaselain"
+    },
+    "learn": {
+      "heading": "Lue lisää OGY Tokenomics -mallista ja ORIGYN-projektista",
+      "tokenomicsDeck": "OGY Tokenomics -esitys",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT -standardi",
+      "tokenomicsFaq": "ORIGYN Tokenomics -UKK",
+      "website": "ORIGYN-verkkosivusto",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Tuki",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Yhteystiedot"
+    },
+    "support": {
+      "contactSupport": "Ota yhteyttä tukeen",
+      "recoverTokens": "Palauta tokenisi"
+    },
+    "disclaimer": "*ORIGYN Foundation ei ole vastuussa OGY-tokenien menetyksestä, varkaudesta tai väärinkäytöstä, joka tapahtuu vaihtoprosessin yhteydessä. Lisäksi ORIGYN Foundation ei ole vastuussa vaihdon toteuttamatta jäämisestä, jos osapuoli ei noudata tarkasti ORIGYN Foundationin määrittämiä ehtoja."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY-ANALYTIIKKA",
+      "title": "Tutustu hallintapaneeliin",
+      "subtitle": "Toimi luottamuksettomasti web3-dApps-, DAOs-, NFT-, DeFi-sovellusten ja paljon muun kanssa."
+    },
+    "cta": {
+      "loginToSwap": "Kirjaudu vaihtaaksesi tokeneita",
+      "myAccount": "Oma tili"
+    },
+    "governanceStaking": {
+      "title": "Hallinnon stakkauksen yleisnäkymä"
+    },
+    "cardError": {
+      "couldNotLoad": "Lataus epäonnistui",
+      "descriptionLine1": "Tämän mittarin haussa tapahtui virhe.",
+      "descriptionLine2": "Yritä hetken kuluttua uudelleen."
+    },
+    "emptyState": {
+      "noDataFor": "Ei tietoja kohteelle",
+      "description": "Tällä hetkellä ei ole mitään näytettävää."
+    },
+    "circulationState": {
+      "title": "OGY:n liikkeessä olevan määrän tila",
+      "tooltip": "Liikkeessä oleva tarjonta on kaikki tokenit lukuun ottamatta ORIGYN Foundationin omistamia avattuja tokeneita.",
+      "nnsProposal": "NNS-ehdotus",
+      "totalLabel": "OGY:tä liikkeessä yhteensä",
+      "notOwnedName": "OGY, joka ei ole Foundationin hallussa",
+      "notOwnedValue": "Liikkeessä olevien tokenien määrä, jota ORIGYN foundation ei omista.",
+      "ownedName": "OGY, joka on lukittuna Foundationin hallussa",
+      "ownedValue": "ORIGYN foundationin omistamien lukittujen tokenien määrä."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundationin reservi",
+      "tooltip": "ORIGYN foundationin kaikissa lompakoissa omistamien OGY-tokenien kokonaismäärä.",
+      "totalLabel": "Foundationin kokonaistarjonta",
+      "lockedName": "Lukittu",
+      "lockedIntro": "ORIGYN foundationin tokenit, jotka on lukittu stakkauksiin tai vestingeihin.",
+      "lockedStakes": "1) Stakkaukset – tokenit, jotka tuottavat palkkioita hallinnon äänestyksiin osallistumisen ansiosta.",
+      "lockedStakesNote": "Nämä tokenit lukittiin vapaaehtoisesti.",
+      "lockedVestings": "2) Vestingit – tokenit, jotka eivät saa palkkioita eivätkä voi osallistua äänestykseen.",
+      "lockedVestingsNote": "Nämä tokenit lukittiin sopimuksellasi ORIGYN Foundationin kanssa.",
+      "unlockedName": "Avattu",
+      "unlockedValue": "ORIGYN foundationin omistamat avatut varat."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury -tili (OTA)",
+      "networkRevenue": "Verkon tuotot",
+      "tokenLogoAlt": "Tokenin logo",
+      "tooltipOgy": "Verkon hyötytuotot, jotka syntyvät ORIGYN-verkon käytön maksuista (esim. digitaalisten sertifikaattien myöntämisestä tai siirtämisestä, NFT:iden luomisesta jne.) ja kertyvät OGY:nä.",
+      "tooltipIcp": "Verkon hyötytuotot, jotka syntyvät ORIGYN-verkon käytön maksuista (esim. digitaalisten sertifikaattien myöntämisestä tai siirtämisestä, NFT:iden luomisesta jne.) ja kertyvät ICP:nä."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward -tili (ORA)",
+      "balance": "ORA-saldo",
+      "year": "Vuosi",
+      "rewardPool": "Palkkiopooli",
+      "moreDetails": "Lisätietoja",
+      "tooltipStake": "Tokenien haltijat voivat stakata OGY:nsä ja ansaita palkkioita osallistumalla hallintoon.",
+      "tooltipSeed": "Palkkiot tulevat ORIGYN Reward -tililtä, jonka ORIGYN alustaa miljardilla OGY:llä.",
+      "tooltipPool": "Palkkiopooli koostuu 250 miljoonasta OGY:stä ensimmäisenä vuotenaan ja puolittuu joka toinen vuosi kannustaakseen ja palkitakseen ekosysteemin varhaisia ja pitkäaikaisia osallistujia.",
+      "description": "ORIGYN sijoittaa miljardi OGY:tä ORIGYN Reward -tilille (ORA) staattujen ja äänestävien haltijoiden hyväksi. Palkkiopooli koostuu 250 miljoonasta OGY:stä ensimmäisenä vuotenaan ja puolittuu joka toinen vuosi kannustaakseen ja palkitakseen ekosysteemin varhaisia ja pitkäaikaisia osallistujia."
+    },
+    "tokenDistribution": {
+      "title": "Tokenien jakauma"
+    },
+    "transactionHistory": {
+      "title": "Tapahtumahistoria",
+      "showAll": "Näytä kaikki"
+    },
+    "topTransfers": {
+      "value": "Arvo",
+      "time": "Aika",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Ei tietoja saatavilla."
+    },
+    "totalSupply": {
+      "title": "OGY:n kokonaistarjonta",
+      "tooltipTitle": "Saatavilla olevien OGY-tokenien kokonaismäärä.",
+      "tooltipLine1": "Tämä sisältää liikkeessä olevan tarjonnan ja ORIGYN Foundationin hallinnassa olevan tarjonnan.",
+      "tooltipLine2": "18. syyskuuta alkaen ORIGYN siirtyi täysin deflatoriseen malliin, mikä tarkoittaa, ettei uusia tokeneita enää luoda.",
+      "chartLabel": "Kokonaistarjonta"
+    },
+    "totalBurned": {
+      "title": "OGY:tä poltettu yhteensä",
+      "tooltipTitle": "Poltettujen OGY-tokenien kokonaismäärä.",
+      "tooltipLine1": "Nämä tokenit on poltettu kokonaan, eivätkä ne ole enää saatavilla.",
+      "tooltipLine2": "Tokeneita voidaan polttaa eri syistä, esimerkiksi sertifikaattien luontimaksuina, verkon hyötymaksuina tai verkon tapahtumamaksuina.",
+      "chartLabel": "Poltettu yhteensä"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Päivittäin",
+      "weekly": "Viikoittain",
+      "monthly": "Kuukausittain",
+      "yearly": "Vuosittain",
+      "all": "Kaikki"
+    },
+    "stakingOverview": {
+      "title": "Stakkauksen yleisnäkymä",
+      "totalTokensInStakes": "Tokeneita stakkauksissa yhteensä",
+      "tooltip": "Tokenit, jotka on lukittu stakkauksiin.",
+      "stakedTokens": "Staatut tokenit",
+      "stakedTokensLegend": "STAATUT TOKENIT"
+    },
+    "usersActivity": {
+      "title": "Käyttäjien yleisnäkymä",
+      "protocolUsers": "OGY-protokollan käyttäjät",
+      "protocolUsersTooltip": "OGY-tokenien yksilölliset haltijat",
+      "protocolUsersLegend": "OGY-PROTOKOLLAN KÄYTTÄJÄT",
+      "activeWallets": "OGY:n aktiiviset lompakot",
+      "activeWalletsTooltip": "OGY-tokenien aktiiviset haltijat"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Hallinnon yleisnäkymä",
+      "welcome": "Tervetuloa ORIGYN-hallintoon!",
+      "description": "OGY-tokenien haltijat voivat vaikuttaa suoraan ORIGYN-verkkoon stakkaamalla OGY:nsä ja äänestämällä ehdotuksista. Osallistumalla päätöksentekoprosessiin nämä staatut tokenien haltijat ansaitsevat palkkioita.",
+      "learnMore": "Lue lisää"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stakkaa ja äänestä",
+        "description": "Vaikuta ORIGYN-verkkoon stakkaamalla OGY:tä ja äänestämällä ehdotuksista."
+      },
+      "earnRewards": {
+        "title": "Ansaitse palkkioita",
+        "description": "Osallistu päätöksentekoprosessiin ansaitaksesi palkkioita."
+      },
+      "governCollectively": {
+        "title": "Hallinnoi yhdessä",
+        "description": "Osallistu ja vaikuta verkkoon yhteistyöhön perustuvana ekosysteeminä."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokenit hallinnossa",
+      "paragraph1": "OGY-tokenien haltijat voivat vaikuttaa suoraan ORIGYN-verkkoon stakkaamalla OGY:nsä ja äänestämällä ehdotuksista.",
+      "paragraph2": "Osallistumalla päätöksentekoprosessiin nämä staatut tokenien haltijat ansaitsevat palkkioita ja hallinnoivat yhdessä ja demokraattisesti.",
+      "learnMoreOgy": "Lue lisää OGY:stä"
+    },
+    "sections": {
+      "proposals": "Ehdotukset",
+      "neurons": "Neuronit"
+    },
+    "votingParticipation": {
+      "title": "Äänestysosallistuminen",
+      "chartLabel": "Osallistuminen %",
+      "legendLabel": "OSALLISTUMINEN %",
+      "period": {
+        "weekly": "Viikoittain",
+        "monthly": "Kuukausittain",
+        "yearly": "Vuosittain"
+      },
+      "lastParticipation": {
+        "label": "Viimeisin äänestysosallistuminen",
+        "tooltip": "Osallistumisprosentti viimeisimmässä äänestystapahtumassa."
+      },
+      "averageParticipation": {
+        "label": "Keskimääräinen äänestysosallistuminen",
+        "tooltip": "Keskimääräinen äänestysosallistumisprosentti ajan kuluessa."
+      },
+      "averagePower": {
+        "label": "Keskimääräinen äänivalta",
+        "tooltip": "Keskimääräinen äänivalta kaikkien osallistujien kesken."
+      }
+    },
+    "estimateRewards": {
+      "title": "Arvioi palkkiosi",
+      "lockDuration": "Lukituksen kesto",
+      "participants": "osallistujaa",
+      "lockedForAtLeast": "lukittuna tällä hetkellä vähintään",
+      "lockedFor": "lukittuna tällä hetkellä",
+      "year": "vuosi",
+      "years": "vuotta"
+    },
+    "kpi": {
+      "metric": "Mittari",
+      "rewardBaseCurrentYear": "Kuluvan vuoden palkkiopohja",
+      "dailyVotingRewards": "Päivittäiset äänestyspalkkiot",
+      "totalVotingPower": "Kokonaisäänivalta",
+      "overallVotingParticipation": "Kokonaisäänestysosallistuminen"
+    },
+    "total": {
+      "titleTooltip": "Kaikki tokenit, jotka ovat hallintokanisterissa. Nämä tokenit voivat olla vesting-tilassa, stakkaustilassa, stakkaamattomina tai lunastamattomina.",
+      "totalLabel": "Tokeneita hallinnossa yhteensä",
+      "locked": {
+        "name": "Lukittu",
+        "tooltip": "Tokenit, jotka on lukittu hallinnossa."
+      },
+      "unlocked": {
+        "name": "Avattu",
+        "tooltip": "Tokenit, jotka on avattu hallinnossa ja jotka voidaan nostaa ja vaihtaa milloin tahansa."
+      },
+      "accumulatedRewards": {
+        "name": "Kertyneet palkkiot",
+        "tooltip": "Palkkiot, jotka on laskettu käyttäjille mutta joita ei ole vielä lunastettu."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Ehdotukset",
+      "viewProposal": "Näytä ehdotus",
+      "columns": {
+        "id": "Tunnus",
+        "title": "Otsikko",
+        "proposed": "Ehdotettu",
+        "timeRemaining": "Aikaa jäljellä",
+        "topic": "Aihe",
+        "status": "Tila",
+        "view": "Näytä"
+      }
+    },
+    "details": {
+      "category": "Hallinto",
+      "proposalNumber": "Ehdotus #",
+      "proposal": "Ehdotus",
+      "titleLoading": "Ehdotuksen otsikkoa ladataan…",
+      "payloadLoading": "Ladataan ehdotuksen tietoja…",
+      "posted": "Julkaistu",
+      "topic": "Aihe",
+      "moreInfo": "Lisätietoja",
+      "totalVotes": "Ääniä yhteensä",
+      "adopt": "HYVÄKSY",
+      "reject": "HYLKÄÄ",
+      "vote": "Äänestä"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuronit",
+      "viewNeuron": "Näytä neuroni",
+      "columns": {
+        "id": "Tunnus",
+        "state": "Tila",
+        "stakedOgy": "Staattu OGY",
+        "dissolveDelay": "Purkuviive",
+        "age": "Ikä",
+        "votingPower": "Äänivalta",
+        "view": "Näytä"
+      }
+    },
+    "details": {
+      "category": "Neuroni",
+      "title": "OGY-neuroni",
+      "created": "Luotu",
+      "stakedOgy": "Staattu OGY",
+      "votingPower": "Äänivalta",
+      "dissolveDelay": "Purkuviive",
+      "age": "Ikä",
+      "lifecycle": "Neuronin elinkaari",
+      "dateCreated": "Luontipäivä",
+      "autoStakeMaturity": "Automaattinen kypsyyden stakkaus",
+      "rewardsAndBonuses": "Palkkiot ja bonukset",
+      "stakedMaturity": "Staattu kypsyys",
+      "totalMaturity": "Kokonaiskypsyys",
+      "ageBonus": "Ikäbonus",
+      "totalBonus": "Kokonaisbonus",
+      "dissolveDelayBonus": "Purkuviivebonus"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Tapahtumahistoria",
+      "searchFor": "Hae:",
+      "or": "tai",
+      "searchPlaceholder": "Hae kohdetta",
+      "noResults": "Tuloksia ei löytynyt",
+      "resultBlock": "Lohko",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Tapahtuman tiedot",
+      "hash": "Tiiviste",
+      "fetchError": "Virhe yhden tapahtuman haussa!",
+      "mintingAccount": "Luontitili",
+      "fee": "Maksu",
+      "memo": "Muistio",
+      "none": "Ei mitään"
+    },
+    "accountDetails": {
+      "title": "OGY-tili",
+      "id": "Tunnus",
+      "owner": "Omistaja",
+      "subaccount": "Alitili",
+      "defaultSubaccount": "Ei mitään (oletusalitili)",
+      "historicalMaxBalance": "Historiallinen enimmäissaldo",
+      "genesisBalance": "Alkusaldo",
+      "period": {
+        "monthly": "Kuukausittain",
+        "quarterly": "Neljännesvuosittain",
+        "yearly": "Vuosittain",
+        "lifetime": "Koko ajalta"
+      },
+      "empty": {
+        "title": "Ei vielä tapahtumia",
+        "description": "Tällä tilillä ei ole tapahtumahistoriaa. Kun se lähettää tai vastaanottaa OGY:tä, toiminta näkyy täällä."
+      },
+      "balanceHistory": {
+        "title": "Saldohistoria",
+        "currentBalance": "Nykyinen saldo",
+        "currentBalanceInfo": "Tilin nykyinen saldo.",
+        "legend": "OGY-saldo"
+      },
+      "overview": {
+        "title": "Tapahtumien yleisnäkymä",
+        "totalLabel": "Kokonaismäärä",
+        "totalSent": "Lähetetty yhteensä",
+        "totalSentInfo": "Principalin lähettämä kokonaismäärä.",
+        "totalReceived": "Vastaanotettu yhteensä",
+        "totalReceivedInfo": "Principalin vastaanottama kokonaismäärä."
+      }
+    },
+    "flow": {
+      "title": "Tapahtumavirta",
+      "searchPlaceholder": "Hae tapahtumia…",
+      "clearSearch": "Tyhjennä haku",
+      "loadError": "Tapahtumatietojen lataus epäonnistui. Yritä uudelleen.",
+      "noMatch": "Mikään tapahtuma ei vastaa tätä hakua.",
+      "transactions": "tapahtumaa",
+      "out": "Ulos",
+      "in": "Sisään",
+      "total": "Yhteensä",
+      "legend": {
+        "outTransaction": "Lähtevä tapahtuma",
+        "inTransaction": "Saapuva tapahtuma",
+        "includesInitial": "Sisältää alkuperäisen tapahtuman",
+        "rootAccount": "Juuritili",
+        "account": "Tili",
+        "fromRoot": "Tapahtumat juuresta",
+        "toRoot": "Tapahtumat juureen",
+        "madeInitial": "Teki alkuperäisen tapahtuman"
+      }
+    },
+    "kind": {
+      "mint": "Luonti",
+      "transfer": "Siirto",
+      "burn": "Poltto",
+      "approve": "Hyväksyntä"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Tervetuloa takaisin",
+      "value": "Arvo:",
+      "disconnectWallet": "Katkaise lompakon yhteys",
+      "accountLabel": "Tili",
+      "manageDescription": "Hallitse OGY-lompakkoasi, palkkioitasi ja stakkaustoimintaasi.",
+      "walletBalance": "Lompakon saldo",
+      "myAccount": "Oma tili",
+      "howToTopUp": "Miten lataan?"
+    },
+    "principal": {
+      "accountIdLabel": "Tilitunnus:",
+      "principalIdLabel": "Principal-tunnus:"
+    },
+    "available": {
+      "title": "Käytettävissä oleva OGY",
+      "transactionHistory": "Tapahtumahistoria",
+      "transfer": "Siirrä",
+      "transferOgy": "Siirrä OGY:tä",
+      "transferDescription": "Voit lähettää OGY:tä vain käytettävissä olevasta saldostasi.",
+      "max": "Maks.",
+      "recipientAddress": "Vastaanottajan osoite",
+      "amountReceived": "Vastaanotettu määrä",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Tapahtumamaksu (veloitetaan lähteestä)",
+      "currentBalance": "Nykyinen saldo:",
+      "transferProcessing": "Siirtoa käsitellään",
+      "transferProcessingHint": "Tämä voi kestää muutaman sekunnin",
+      "transferSuccess": "Siirto onnistui!",
+      "transferError": "Siirtovirhe!",
+      "errors": {
+        "amountRequired": "Määrä on pakollinen.",
+        "amountExceedsBalance": "Määrä ei saa ylittää saldoasi.",
+        "amountBelowFee": "Määrä ei saa olla pienempi kuin tapahtumamaksu.",
+        "amountNotPositive": "Määrän on oltava positiivinen luku.",
+        "recipientRequired": "Vastaanottajan osoite on pakollinen.",
+        "recipientInvalid": "Virheellinen vastaanottajan osoite."
+      }
+    },
+    "staked": {
+      "title": "Staattu OGY",
+      "stake": "Stakkaa",
+      "stakeOgy": "Stakkaa OGY:tä",
+      "stakeDescription": "OGY:n stakkaamiseksi sinun on siirryttävä NNS-alustallemme.",
+      "warningNotConnected": "Vaikuttaa siltä, ettet ole yhdistänyt palveluun",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Tarvitset",
+      "warningToConnect": "yhdistääksesi NNS-alustaan.",
+      "goToNns": "Siirry NNS:ään"
+    },
+    "rewards": {
+      "title": "Staatut palkkiot",
+      "claimAll": "Lunasta kaikki",
+      "claimDisabledReason": "Palkkioiden lunastus on tuettu vain principalin oletustilillä.",
+      "aboutToClaim": "Olet lunastamassa",
+      "sentToPrincipal": "Palkkiot lähetetään principaliisi",
+      "pending": "Lunastetaan kaikkia palkkioita...",
+      "successTitle": "Kaikkien palkkioiden lunastus onnistui!",
+      "errorTitle": "Kaikkien palkkioiden lunastusvirhe!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Vaihdamme ledgeriä ja hallintoa",
+        "description": "ORIGYN-hallinto ja -ledger on päivitetty SNS:ksi. Jatkaaksesi ORIGYN-hallintoon osallistumista ja OGY:n käyttöä sinun on migratoitava OGY-tokenisi."
+      },
+      "howToSwap": "Miten tokenit vaihdetaan",
+      "disclosureToggle": "Onko sinulla vielä vanhoja OGY-tokeneita? Vaihda nyt!",
+      "accountId": "Tilitunnus:",
+      "steps": {
+        "withdraw": {
+          "title": "Vaihe 1: Nosta vanhasta hallinnosta",
+          "subtitle": "Jos osallistuit aiemmin OGY-hallintoon, sinun on nostettava nämä tokenit ennen kuin voit vaihtaa ne."
+        },
+        "deposit": {
+          "title": "Vaihe 2: Talleta tilillesi",
+          "subtitle": "Jos sinulla on tokeneita OGY-hallintapaneelin ulkopuolella, talleta ne tilitunnuksellesi ennen kuin voit aloittaa niiden vaihtamisen."
+        },
+        "swap": {
+          "title": "Vaihe 3: Vaihda tokenit",
+          "subtitle": "Vaihda vanha OGY-token uuteen ledgeriin."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Vanha OGY-saldo"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Siirry vanhaan OGY-hallintapaneeliin"
+      },
+      "swap": {
+        "disabledOisy": "Vanhan OGY:n vaihto ei ole käytettävissä OISY:llä. Yhdistä Internet Identity- tai Plug-palvelulla vaihtaaksesi vanhan OGY:si.",
+        "disabledSubAccount": "Vanhan OGY:n vaihto on tuettu vain principalin oletustilillä.",
+        "swapYourTokens": "Vaihda tokenisi",
+        "automaticDisabled": "Automaattinen vaihto on poistettu käytöstä. Vaihtopyyntösi on hyväksyttävä, vähimmäismäärä on 50 000 OGY.",
+        "form": {
+          "title": "Vaihda OGY:si uuteen ledgeriin",
+          "description": "Talleta tilitunnuksellesi kaikki OGY-tokenit, jotka haluat vaihtaa",
+          "tokensAvailable": "Vaihdettavissa olevat tokenit",
+          "youWillReceivePrefix": "Saat",
+          "youWillReceiveSuffix": "OGY-tokenia uuteen ledgeriin.",
+          "swapPrefix": "Vaihda",
+          "swapSuffix": "OGY-tokenia"
+        },
+        "pending": {
+          "takesTime": "Vaihtoprosessi voi kestää hetken.",
+          "doNotRefresh": "Älä päivitä sivua!",
+          "swapping": "Vaihdetaan tokeneita..."
+        },
+        "success": {
+          "title": "Vaihto onnistui!",
+          "walletBalance": "Lompakon saldo uudessa ledgerissä",
+          "myAccount": "Oma tili"
+        },
+        "error": {
+          "title": "Tokenien vaihtovirhe!",
+          "retry": "Yritä uudelleen"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Omat OGY-neuronit",
+        "idHeader": "Tunnus",
+        "stakedAmount": "Staattu määrä",
+        "claimAmount": "Lunastusmäärä",
+        "emptyTitle": "Ei vielä neuroneita",
+        "emptyDescription": "Lisää OGY-neuroni alkaaksesi seurata stakkausta, äänivaltaa ja palkkioita täällä.",
+        "addFirstNeuron": "Lisää ensimmäinen neuronisi"
+      },
+      "add": {
+        "button": "Lisää neuroni",
+        "title": "Lisää neuroni",
+        "description": "Lisää tämä principal hotkey-näppäimeksi jokaiseen OGY-neuroniin, jota haluat hallita täällä.",
+        "needHotkey": "Pitääkö lisätä hotkey?",
+        "openNns": "Avaa NNS-sovellus"
+      },
+      "claim": {
+        "button": "Lunasta",
+        "disabledReason": "Palkkioiden lunastus on tuettu vain principalin oletustilillä.",
+        "aboutToClaim": "Olet lunastamassa",
+        "sentToPrincipal": "Palkkiot lähetetään principaliisi",
+        "pending": "Lunastetaan palkkiota...",
+        "successTitle": "Palkkion lunastus onnistui!",
+        "errorTitle": "Palkkion lunastusvirhe!",
+        "retry": "Yritä uudelleen"
+      },
+      "remove": {
+        "title": "Poista neuroni",
+        "description": "Poistaaksesi tämän neuronin sinun on poistettava principalisi neuronisi hotkey-luettelosta."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Osoite",
+      "governanceBalance": "Hallinnon saldo",
+      "stakedTokens": "Staatut tokenit",
+      "ledgerBalance": "Ledger-saldo",
+      "weightInTotalSupply": "Osuus kokonaistarjonnasta"
+    }
+  },
+  "recovery": {
+    "title": "Palauta tokenisi",
+    "description": "OGY-hallintapaneeli tukee vain OGY-tokenia. Jos lähetit vahingossa muita tokeneita tänne, voit palauttaa ne noudattamalla alla olevia ohjeita.",
+    "chooseToken": "Valitse token",
+    "loginRequired": "Tokeniesi keräämiseksi sinun on oltava kirjautuneena sisään.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger-kanisteri:",
+      "transferIcp": "Siirrä ICP:tä",
+      "availableBalanceNote": "Voit lähettää ICP:tä vain käytettävissä olevasta saldostasi.",
+      "amountRequired": "Määrä on pakollinen.",
+      "amountExceedsBalance": "Määrä ei saa ylittää saldoasi.",
+      "amountPositive": "Määrän on oltava positiivinen luku.",
+      "amountBelowFee": "Määrän on oltava suurempi tai yhtä suuri kuin tapahtumamaksut.",
+      "recipientAddress": "Vastaanottajan osoite",
+      "recipientAddressRequired": "Vastaanottajan osoite on pakollinen.",
+      "invalidRecipientAddress": "Virheellinen vastaanottajan osoite.",
+      "amountReceived": "Vastaanotettu määrä",
+      "transactionFee": "Tapahtumamaksu",
+      "currentBalance": "Nykyinen saldo:",
+      "processing": "Siirtoa käsitellään",
+      "processingNote": "Tämä voi kestää muutaman sekunnin",
+      "success": "Siirto onnistui!",
+      "error": "Siirtovirhe!"
+    }
+  },
+  "support": {
+    "category": "Tuki",
+    "title": "Luo tukipyyntö",
+    "titleSubmitted": "Tukipyyntö lähetetty",
+    "successTitle": "Tukipyyntö luotu",
+    "successMessage": "Otamme yhteyttä antamaasi sähköpostiosoitteeseen.",
+    "submitAnother": "Lähetä toinen tukipyyntö",
+    "intro": "Kuvaile ongelmasi ja miten voimme tavoittaa sinut.",
+    "form": {
+      "name": "Nimi",
+      "email": "Yhteyssähköposti",
+      "emailRequired": "Sähköpostiosoite on pakollinen",
+      "emailInvalid": "Virheellinen sähköpostiosoite",
+      "principal": "Lompakon principal",
+      "invalidPrincipal": "Virheellinen vastaanottajan osoite.",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Kerro meille, mistä on kyse…",
+      "descriptionRequired": "Kuvaile ongelmasi"
+    },
+    "submitError": "Jokin meni vikaan. Yritä uudelleen.",
+    "submitting": "Lähetetään…"
+  },
+  "explorer": {
+    "title": "Selain",
+    "searchPlaceholder": "Hae otsikon, myöntäjän, principalin tai tokenin tunnuksen mukaan",
+    "openFilters": "Avaa suodattimet",
+    "checkOnBlockchain": "Tarkista lohkoketjusta",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Esitellyt sertifikaatit",
+      "art": "Taidesertifikaatit",
+      "gold": "Kultasertifikaatit"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopioi leikepöydälle",
+    "toggleRelativeTime": "Vaihda suhteellinen aika. Nykyinen näyttö:",
+    "collapseRow": "Tiivistä rivi",
+    "expandRow": "Laajenna rivi",
+    "searchPlaceholder": "Hae kohteita...",
+    "sortAscending": "Lajittele nousevasti",
+    "sortDescending": "Lajittele laskevasti",
+    "linesPerPage": "Rivejä sivulla",
+    "page": "Sivu",
+    "pageOf": "/",
+    "previousPage": "Edellinen sivu",
+    "nextPage": "Seuraava sivu"
+  },
+  "auth": {
+    "connect": "Yhdistä",
+    "disconnect": "Katkaise yhteys",
+    "connectWallet": {
+      "title": "Yhdistä lompakkosi",
+      "subtitle": "Valitse, miten haluat kirjautua sisään"
+    },
+    "install": "Asenna",
+    "newToIc": "Uusi Internet Computer -käyttäjä?",
+    "learnMore": "Lue lisää",
+    "connecting": {
+      "title": "Yhdistetään...",
+      "subtitle": "Hyväksy pyyntö lompakossasi"
+    },
+    "sessionExpired": {
+      "title": "Istunto vanhentunut",
+      "description": "Lompakkoistuntosi ei ole enää voimassa. Yhdistä uudelleen jatkaaksesi."
+    },
+    "reconnect": "Yhdistä uudelleen",
+    "error": {
+      "connectionCancelled": "Yhteys peruutettu. Yritä uudelleen.",
+      "connectionFailed": "Lompakon yhdistäminen epäonnistui. Yritä uudelleen."
+    }
+  },
+  "warning": {
+    "badge": "UUSI",
+    "ledgerSwitch": "vaihdamme ledgeriä, sinun on vaihdettava OGY:si uuteen"
+  },
+  "calculator": {
+    "header": {
+      "title": "Kustannuslaskuri",
+      "description": "Käytä ORIGYN-laskuria arvioidaksesi ainutlaatuisen sertifikaattisi kustannukset, kun kaikki tietosi ovat lohkoketjussa"
+    },
+    "plan": {
+      "title": "Suunnittele luomisesi",
+      "description": "Kerro, kuinka monta kohdetta ja mitä olet lataamassa.",
+      "itemsLabel": "Kuinka monta kohdetta?",
+      "uploadingLabel": "Mitä olet lataamassa?",
+      "knowExactSize": "Tiedätkö tarkan koon?",
+      "totalUploadSize": "Latauksen kokonaiskoko",
+      "usePreset": "Käytä esiasetusta",
+      "combinedSize": "Kaikkien tiedostojen yhteenlaskettu koko kaikissa kohteissa.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB kappale"
+        },
+        "iphone": {
+          "label": "Valokuva",
+          "hint": "3 MB kappale"
+        },
+        "dslr": {
+          "label": "Studiokuva",
+          "hint": "20 MB kappale"
+        },
+        "video": {
+          "label": "Lyhyt video",
+          "hint": "1 GB kappale"
+        },
+        "video1hr": {
+          "label": "Pitkä video",
+          "hint": "60 GB kappale"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Reaaliaikainen arvio",
+      "titleRefreshing": "Päivitetään arviota",
+      "description": "Päivittyy automaattisesti asetusten muuttuessa.",
+      "ogyEquivalent": "OGY-vastaavuus",
+      "ogySpotRate": "OGY:n spot-kurssi",
+      "itemSingular": "Kohde",
+      "itemPlural": "Kohdetta",
+      "upload": "Lataus"
+    },
+    "breakdown": {
+      "title": "Kustannuserittely",
+      "baseFee": "Luomisen perusmaksu",
+      "storageFee": "Tallennusmaksu",
+      "items": "Kohteet",
+      "uploadSize": "Latauksen koko"
+    },
+    "bytesUnit": "tavua"
+  }
+}

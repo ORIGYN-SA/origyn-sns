@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Γλώσσα",
+    "switchTo": "Αλλαγή σε {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Φόρτωση...",
+    "error": "Κάτι πήγε στραβά",
+    "retry": "Επανάληψη",
+    "cancel": "Ακύρωση",
+    "confirm": "Επιβεβαίωση",
+    "close": "Κλείσιμο",
+    "back": "Πίσω",
+    "next": "Επόμενο",
+    "previous": "Προηγούμενο",
+    "save": "Αποθήκευση",
+    "submit": "Υποβολή",
+    "copy": "Αντιγραφή",
+    "copied": "Αντιγράφηκε",
+    "search": "Αναζήτηση",
+    "viewAll": "Προβολή όλων",
+    "showMore": "Εμφάνιση περισσότερων",
+    "showLess": "Εμφάνιση λιγότερων",
+    "amount": "Ποσό",
+    "date": "Ημερομηνία",
+    "type": "Τύπος",
+    "from": "Από",
+    "to": "Προς",
+    "index": "Δείκτης",
+    "status": "Κατάσταση",
+    "total": "Σύνολο",
+    "balance": "Υπόλοιπο",
+    "yes": "Ναι",
+    "no": "Όχι",
+    "notAvailable": "Μ/Δ"
+  },
+  "nav": {
+    "dashboard": "Πίνακας ελέγχου",
+    "governance": "Διακυβέρνηση",
+    "transactionHistory": "Ιστορικό συναλλαγών",
+    "calculator": "Αριθμομηχανή",
+    "openMainMenu": "Άνοιγμα κύριου μενού",
+    "closeMenu": "Κλείσιμο μενού",
+    "openAccountOverview": "Άνοιγμα επισκόπησης λογαριασμού",
+    "viewAccountOverview": "Προβολή επισκόπησης λογαριασμού",
+    "connectPrompt": "Συνδέστε το πορτοφόλι σας για να διαχειριστείτε tokens, να ψηφίσετε σε προτάσεις και να δείτε το ιστορικό συναλλαγών σας.",
+    "connectWallet": "Σύνδεση πορτοφολιού",
+    "disconnect": "Αποσύνδεση"
+  },
+  "notFound": {
+    "title": "Η σελίδα δεν βρέθηκε",
+    "description": "Λυπούμαστε, δεν μπορέσαμε να βρούμε τη σελίδα που αναζητάτε.",
+    "backHome": "Επιστροφή στην αρχική"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Dashboard",
+      "home": "Αρχική",
+      "circulation": "Κυκλοφορία",
+      "governance": "Διακυβέρνηση",
+      "revenue": "Έσοδα",
+      "rewards": "Ανταμοιβές",
+      "distribution": "Κατανομή",
+      "governanceDashboard": "OGY Governance Dashboard",
+      "transactionExplorer": "OGY Transaction Explorer"
+    },
+    "learn": {
+      "heading": "Μάθετε περισσότερα για το OGY Tokenomics & ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT Standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Website",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Υποστήριξη",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Επικοινωνία"
+    },
+    "support": {
+      "contactSupport": "Επικοινωνία με την υποστήριξη",
+      "recoverTokens": "Ανακτήστε τα tokens σας"
+    },
+    "disclaimer": "*Το ORIGYN Foundation δεν φέρει ευθύνη για οποιαδήποτε απώλεια, κλοπή ή υπεξαίρεση OGY Tokens που σχετίζεται με τη διαδικασία swap. Επιπλέον, το ORIGYN Foundation δεν φέρει ευθύνη για οποιαδήποτε αποτυχία εκτέλεσης του swap εάν το εμπλεκόμενο μέρος δεν τηρεί αυστηρά τους όρους που καθορίζονται από το ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Εξερευνήστε τον πίνακα ελέγχου",
+      "subtitle": "Αλληλεπιδράστε με αξιόπιστο τρόπο με web3 dApps, DAOs, NFTs, DeFi και πολλά άλλα."
+    },
+    "cta": {
+      "loginToSwap": "Συνδεθείτε για να κάνετε swap tokens",
+      "myAccount": "Ο λογαριασμός μου"
+    },
+    "governanceStaking": {
+      "title": "Επισκόπηση Staking Διακυβέρνησης"
+    },
+    "cardError": {
+      "couldNotLoad": "Αδυναμία φόρτωσης",
+      "descriptionLine1": "Παρουσιάστηκε πρόβλημα κατά την ανάκτηση αυτής της μέτρησης.",
+      "descriptionLine2": "Παρακαλούμε δοκιμάστε ξανά σε λίγο."
+    },
+    "emptyState": {
+      "noDataFor": "Δεν υπάρχουν δεδομένα για",
+      "description": "Δεν υπάρχει τίποτα προς εμφάνιση αυτή τη στιγμή."
+    },
+    "circulationState": {
+      "title": "Κατάσταση Κυκλοφορίας OGY",
+      "tooltip": "Η κυκλοφορούσα προσφορά περιλαμβάνει όλα τα tokens εκτός από τα ξεκλειδωμένα tokens που ανήκουν στο ORIGYN Foundation.",
+      "nnsProposal": "NNS Proposal",
+      "totalLabel": "Συνολική Κυκλοφορία OGY",
+      "notOwnedName": "OGY που δεν κατέχει το Foundation",
+      "notOwnedValue": "Ποσότητα κυκλοφορούντων tokens που δεν ανήκουν στο ORIGYN foundation.",
+      "ownedName": "OGY κλειδωμένα στην κατοχή του Foundation",
+      "ownedValue": "Ποσότητα κλειδωμένων tokens που ανήκουν στο ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Αποθεματικό OGY Foundation",
+      "tooltip": "Συνολική ποσότητα OGY tokens που ανήκουν στο ORIGYN foundation σε όλα τα πορτοφόλια.",
+      "totalLabel": "Συνολική Προσφορά Foundation",
+      "lockedName": "Κλειδωμένα",
+      "lockedIntro": "Tokens του ORIGYN foundation κλειδωμένα σε stakes ή vestings.",
+      "lockedStakes": "1) Stakes - tokens που παράγουν τις ανταμοιβές χάρη στη συμμετοχή στην ψηφοφορία διακυβέρνησης.",
+      "lockedStakesNote": "Αυτά τα tokens κλειδώθηκαν εθελοντικά.",
+      "lockedVestings": "2) Vestings - Tokens που δεν λαμβάνουν καμία ανταμοιβή και δεν μπορούν να συμμετέχουν σε ψηφοφορίες.",
+      "lockedVestingsNote": "Αυτά τα tokens κλειδώθηκαν με βάση το συμβόλαιό σας με το ORIGYN Foundation.",
+      "unlockedName": "Ξεκλειδωμένα",
+      "unlockedValue": "Ξεκλειδωμένα κεφάλαια που ανήκουν στο ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "Λογαριασμός Treasury ORIGYN (OTA)",
+      "networkRevenue": "Έσοδα Δικτύου",
+      "tokenLogoAlt": "Λογότυπο token",
+      "tooltipOgy": "Έσοδα Χρησιμότητας Δικτύου που δημιουργούνται μέσω τελών για τη χρήση του δικτύου ORIGYN (π.χ. για την έκδοση ή μεταφορά ψηφιακών πιστοποιητικών, την κοπή NFTs κ.λπ.) και συσσωρεύονται σε OGY.",
+      "tooltipIcp": "Έσοδα Χρησιμότητας Δικτύου που δημιουργούνται μέσω τελών για τη χρήση του δικτύου ORIGYN (π.χ. για την έκδοση ή μεταφορά ψηφιακών πιστοποιητικών, την κοπή NFTs κ.λπ.) και συσσωρεύονται σε ICP."
+    },
+    "rewardAccount": {
+      "title": "Λογαριασμός Ανταμοιβών ORIGYN (ORA)",
+      "balance": "Υπόλοιπο ORA",
+      "year": "Έτος",
+      "rewardPool": "Δεξαμενή Ανταμοιβών",
+      "moreDetails": "Περισσότερες λεπτομέρειες",
+      "tooltipStake": "Οι κάτοχοι tokens μπορούν να κάνουν stake τα OGY τους και να κερδίζουν ανταμοιβές συμμετέχοντας στη διακυβέρνηση.",
+      "tooltipSeed": "Οι ανταμοιβές θα προέρχονται από τον Λογαριασμό Ανταμοιβών ORIGYN, τον οποίο το ORIGYN θα τροφοδοτήσει με ένα δισεκατομμύριο OGY.",
+      "tooltipPool": "Η δεξαμενή ανταμοιβών αποτελείται από 250 εκατομμύρια OGY κατά το πρώτο της έτος και θα υποδιπλασιάζεται κάθε δύο χρόνια για να ενθαρρύνει και να ανταμείβει τους πρώιμους και μακροπρόθεσμους συνεισφέροντες του οικοσυστήματος.",
+      "description": "Το ORIGYN θα συνεισφέρει ένα δισεκατομμύριο OGY σε έναν Λογαριασμό Ανταμοιβών ORIGYN (ORA) προς όφελος των κατόχων που κάνουν stake και ψηφίζουν. Η δεξαμενή ανταμοιβών αποτελείται από 250 εκατομμύρια OGY κατά το πρώτο της έτος και θα υποδιπλασιάζεται κάθε δύο χρόνια για να ενθαρρύνει και να ανταμείβει τους πρώιμους και μακροπρόθεσμους συνεισφέροντες του οικοσυστήματος."
+    },
+    "tokenDistribution": {
+      "title": "Κατανομή Token"
+    },
+    "transactionHistory": {
+      "title": "Ιστορικό Συναλλαγών",
+      "showAll": "Εμφάνιση όλων"
+    },
+    "topTransfers": {
+      "value": "Αξία",
+      "time": "Ώρα",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Δεν υπάρχουν διαθέσιμα δεδομένα."
+    },
+    "totalSupply": {
+      "title": "Συνολική Προσφορά OGY",
+      "tooltipTitle": "Συνολική ποσότητα διαθέσιμων OGY tokens.",
+      "tooltipLine1": "Αυτό περιλαμβάνει την κυκλοφορούσα προσφορά και την προσφορά υπό τον έλεγχο του ORIGYN Foundation.",
+      "tooltipLine2": "Από τις 18 Σεπτεμβρίου, το ORIGYN μετέβη σε ένα πλήρως αποπληθωριστικό μοντέλο, που σημαίνει ότι δεν κόβονται πλέον νέα tokens.",
+      "chartLabel": "Συνολική Προσφορά"
+    },
+    "totalBurned": {
+      "title": "Συνολικά Καμένα OGY",
+      "tooltipTitle": "Συνολική ποσότητα καμένων OGY tokens.",
+      "tooltipLine1": "Αυτά τα tokens έχουν καεί πλήρως και δεν είναι πλέον διαθέσιμα.",
+      "tooltipLine2": "Τα tokens μπορούν να καούν για διάφορους λόγους, για παράδειγμα τέλη κοπής πιστοποιητικών, τέλη χρησιμότητας δικτύου ή τέλη συναλλαγών δικτύου.",
+      "chartLabel": "Συνολικά Καμένα"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Ημερήσια",
+      "weekly": "Εβδομαδιαία",
+      "monthly": "Μηνιαία",
+      "yearly": "Ετήσια",
+      "all": "Όλα"
+    },
+    "stakingOverview": {
+      "title": "Επισκόπηση Staking",
+      "totalTokensInStakes": "Συνολικά Tokens σε Stakes",
+      "tooltip": "Tokens που είναι κλειδωμένα σε stakes.",
+      "stakedTokens": "Staked Tokens",
+      "stakedTokensLegend": "STAKED TOKENS"
+    },
+    "usersActivity": {
+      "title": "Επισκόπηση Χρηστών",
+      "protocolUsers": "Χρήστες Πρωτοκόλλου OGY",
+      "protocolUsersTooltip": "Μοναδικοί κάτοχοι OGY tokens",
+      "protocolUsersLegend": "ΧΡΗΣΤΕΣ ΠΡΩΤΟΚΟΛΛΟΥ OGY",
+      "activeWallets": "Ενεργά Πορτοφόλια OGY",
+      "activeWalletsTooltip": "Ενεργοί κάτοχοι OGY tokens"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Επισκόπηση Διακυβέρνησης",
+      "welcome": "Καλώς ήρθατε στη Διακυβέρνηση ORIGYN!",
+      "description": "Οι κάτοχοι OGY tokens μπορούν να επηρεάσουν άμεσα το Δίκτυο ORIGYN κάνοντας stake τα OGY τους και ψηφίζοντας σε προτάσεις. Συμμετέχοντας στη διαδικασία λήψης αποφάσεων, αυτοί οι κάτοχοι tokens που κάνουν stake κερδίζουν ανταμοιβές.",
+      "learnMore": "Μάθετε περισσότερα"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake & Ψηφοφορία",
+        "description": "Επηρεάστε το Δίκτυο ORIGYN κάνοντας stake OGY & ψηφίζοντας σε προτάσεις."
+      },
+      "earnRewards": {
+        "title": "Κερδίστε Ανταμοιβές",
+        "description": "Συμμετέχετε στη διαδικασία λήψης αποφάσεων για να κερδίσετε ανταμοιβές."
+      },
+      "governCollectively": {
+        "title": "Διακυβερνήστε Συλλογικά",
+        "description": "Συμμετέχετε & επηρεάστε το δίκτυο ως ένα συνεργατικό οικοσύστημα."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokens στη Διακυβέρνηση",
+      "paragraph1": "Οι κάτοχοι OGY tokens μπορούν να επηρεάσουν άμεσα το Δίκτυο ORIGYN κάνοντας stake τα OGY τους και ψηφίζοντας σε προτάσεις.",
+      "paragraph2": "Συμμετέχοντας στη διαδικασία λήψης αποφάσεων, αυτοί οι κάτοχοι tokens που κάνουν stake κερδίζουν ανταμοιβές και διακυβερνούν συλλογικά και δημοκρατικά.",
+      "learnMoreOgy": "Μάθετε περισσότερα για το OGY"
+    },
+    "sections": {
+      "proposals": "Προτάσεις",
+      "neurons": "Neurons"
+    },
+    "votingParticipation": {
+      "title": "Συμμετοχή στην Ψηφοφορία",
+      "chartLabel": "Συμμετοχή %",
+      "legendLabel": "ΣΥΜΜΕΤΟΧΗ %",
+      "period": {
+        "weekly": "Εβδομαδιαία",
+        "monthly": "Μηνιαία",
+        "yearly": "Ετήσια"
+      },
+      "lastParticipation": {
+        "label": "Τελευταία Συμμετοχή στην Ψηφοφορία",
+        "tooltip": "Ποσοστό συμμετοχής στην τελευταία ψηφοφορία."
+      },
+      "averageParticipation": {
+        "label": "Μέση Συμμετοχή στην Ψηφοφορία",
+        "tooltip": "Μέσο ποσοστό συμμετοχής στην ψηφοφορία με την πάροδο του χρόνου."
+      },
+      "averagePower": {
+        "label": "Μέση Δύναμη Ψήφου",
+        "tooltip": "Μέση δύναμη ψήφου σε όλους τους συμμετέχοντες."
+      }
+    },
+    "estimateRewards": {
+      "title": "Εκτιμήστε τις ανταμοιβές σας",
+      "lockDuration": "Διάρκεια κλειδώματος",
+      "participants": "συμμετέχοντες",
+      "lockedForAtLeast": "επί του παρόντος κλειδωμένα για τουλάχιστον",
+      "lockedFor": "επί του παρόντος κλειδωμένα για",
+      "year": "έτος",
+      "years": "έτη"
+    },
+    "kpi": {
+      "metric": "Μέτρηση",
+      "rewardBaseCurrentYear": "Βάση ανταμοιβών για το τρέχον έτος",
+      "dailyVotingRewards": "Ημερήσιες ανταμοιβές ψήφου",
+      "totalVotingPower": "Συνολική ισχύς ψήφου",
+      "overallVotingParticipation": "Συνολική συμμετοχή στην ψηφοφορία"
+    },
+    "total": {
+      "titleTooltip": "Όλα τα tokens που βρίσκονται στο canister διακυβέρνησης. Αυτά τα tokens μπορεί να είναι σε κατάσταση vesting, staking, μη staked ή μη διεκδικημένα.",
+      "totalLabel": "Συνολικά Tokens στη Διακυβέρνηση",
+      "locked": {
+        "name": "Κλειδωμένα",
+        "tooltip": "Tokens που είναι κλειδωμένα στη διακυβέρνηση."
+      },
+      "unlocked": {
+        "name": "Ξεκλειδωμένα",
+        "tooltip": "Tokens που είναι ξεκλειδωμένα στη διακυβέρνηση και μπορούν να αποσυρθούν και να διαπραγματευτούν ανά πάσα στιγμή."
+      },
+      "accumulatedRewards": {
+        "name": "Συσσωρευμένες Ανταμοιβές",
+        "tooltip": "Ανταμοιβές που υπολογίζονται για τους χρήστες αλλά δεν έχουν διεκδικηθεί ακόμη."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Προτάσεις",
+      "viewProposal": "Προβολή πρότασης",
+      "columns": {
+        "id": "ID",
+        "title": "Τίτλος",
+        "proposed": "Προτάθηκε",
+        "timeRemaining": "Υπολειπόμενος Χρόνος",
+        "topic": "Θέμα",
+        "status": "Κατάσταση",
+        "view": "Προβολή"
+      }
+    },
+    "details": {
+      "category": "Διακυβέρνηση",
+      "proposalNumber": "Πρόταση #",
+      "proposal": "Πρόταση",
+      "titleLoading": "Φόρτωση τίτλου πρότασης…",
+      "payloadLoading": "Φόρτωση λεπτομερειών πρότασης…",
+      "posted": "Δημοσιεύτηκε",
+      "topic": "Θέμα",
+      "moreInfo": "Περισσότερες πληροφορίες",
+      "totalVotes": "Συνολικές ψήφοι",
+      "adopt": "ΥΙΟΘΕΤΗΣΗ",
+      "reject": "ΑΠΟΡΡΙΨΗ",
+      "vote": "Ψήφος"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neurons",
+      "viewNeuron": "Προβολή neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Κατάσταση",
+        "stakedOgy": "Staked OGY",
+        "dissolveDelay": "Καθυστέρηση Διάλυσης",
+        "age": "Ηλικία",
+        "votingPower": "Δύναμη Ψήφου",
+        "view": "Προβολή"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Δημιουργήθηκε",
+      "stakedOgy": "Staked OGY",
+      "votingPower": "Δύναμη Ψήφου",
+      "dissolveDelay": "Καθυστέρηση Διάλυσης",
+      "age": "Ηλικία",
+      "lifecycle": "Κύκλος ζωής neuron",
+      "dateCreated": "Ημερομηνία Δημιουργίας",
+      "autoStakeMaturity": "Αυτόματο Stake Ωρίμανσης",
+      "rewardsAndBonuses": "Ανταμοιβές & μπόνους",
+      "stakedMaturity": "Staked Ωρίμανση",
+      "totalMaturity": "Συνολική Ωρίμανση",
+      "ageBonus": "Μπόνους Ηλικίας",
+      "totalBonus": "Συνολικό Μπόνους",
+      "dissolveDelayBonus": "Μπόνους Καθυστέρησης Διάλυσης"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Ιστορικό Συναλλαγών",
+      "searchFor": "Αναζήτηση για:",
+      "or": "ή",
+      "searchPlaceholder": "Αναζήτηση στοιχείου",
+      "noResults": "Δεν βρέθηκαν αποτελέσματα",
+      "resultBlock": "Block",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Λεπτομέρειες Συναλλαγής",
+      "hash": "Hash",
+      "fetchError": "Σφάλμα ανάκτησης μιας συναλλαγής!",
+      "mintingAccount": "Λογαριασμός minting",
+      "fee": "Τέλος",
+      "memo": "Memo",
+      "none": "Κανένα"
+    },
+    "accountDetails": {
+      "title": "Λογαριασμός OGY",
+      "id": "ID",
+      "owner": "Ιδιοκτήτης",
+      "subaccount": "Υπολογαριασμός",
+      "defaultSubaccount": "Κανένας (προεπιλεγμένος υπολογαριασμός)",
+      "historicalMaxBalance": "Ιστορικό μέγιστο υπόλοιπο",
+      "genesisBalance": "Υπόλοιπο genesis",
+      "period": {
+        "monthly": "Μηνιαία",
+        "quarterly": "Τριμηνιαία",
+        "yearly": "Ετήσια",
+        "lifetime": "Διάρκεια ζωής"
+      },
+      "empty": {
+        "title": "Δεν υπάρχουν ακόμη συναλλαγές",
+        "description": "Αυτός ο λογαριασμός δεν έχει ιστορικό συναλλαγών. Μόλις στείλει ή λάβει OGY, η δραστηριότητα θα εμφανιστεί εδώ."
+      },
+      "balanceHistory": {
+        "title": "Ιστορικό Υπολοίπου",
+        "currentBalance": "Τρέχον υπόλοιπο",
+        "currentBalanceInfo": "Τρέχον υπόλοιπο λογαριασμού.",
+        "legend": "Υπόλοιπο OGY"
+      },
+      "overview": {
+        "title": "Επισκόπηση Συναλλαγών",
+        "totalLabel": "Συνολικό ποσό",
+        "totalSent": "Συνολικά Απεσταλμένα",
+        "totalSentInfo": "Συνολικό ποσό που εστάλη από τον principal.",
+        "totalReceived": "Συνολικά Ληφθέντα",
+        "totalReceivedInfo": "Συνολικό ποσό που ελήφθη από τον principal."
+      }
+    },
+    "flow": {
+      "title": "Ροή Συναλλαγών",
+      "searchPlaceholder": "Αναζήτηση συναλλαγών…",
+      "clearSearch": "Καθαρισμός αναζήτησης",
+      "loadError": "Δεν ήταν δυνατή η φόρτωση δεδομένων συναλλαγών. Παρακαλούμε δοκιμάστε ξανά.",
+      "noMatch": "Καμία συναλλαγή δεν ταιριάζει με αυτή την αναζήτηση.",
+      "transactions": "συναλλαγές",
+      "out": "Εξερχόμενα",
+      "in": "Εισερχόμενα",
+      "total": "Σύνολο",
+      "legend": {
+        "outTransaction": "Εξερχόμενη συναλλαγή",
+        "inTransaction": "Εισερχόμενη συναλλαγή",
+        "includesInitial": "Περιλαμβάνει την αρχική συναλλαγή",
+        "rootAccount": "Ριζικός λογαριασμός",
+        "account": "Λογαριασμός",
+        "fromRoot": "Με συναλλαγές από τη ρίζα",
+        "toRoot": "Με συναλλαγές προς τη ρίζα",
+        "madeInitial": "Πραγματοποίησε την αρχική συναλλαγή"
+      }
+    },
+    "kind": {
+      "mint": "Έκδοση",
+      "transfer": "Μεταφορά",
+      "burn": "Καύση",
+      "approve": "Έγκριση"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Καλώς ήρθατε ξανά",
+      "value": "Αξία:",
+      "disconnectWallet": "Αποσύνδεση πορτοφολιού",
+      "accountLabel": "Λογαριασμός",
+      "manageDescription": "Διαχειριστείτε το πορτοφόλι OGY, τις ανταμοιβές και τη δραστηριότητα staking σας.",
+      "walletBalance": "Υπόλοιπο Πορτοφολιού",
+      "myAccount": "Ο λογαριασμός μου",
+      "howToTopUp": "Πώς να γεμίσω;"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "Διαθέσιμα OGY",
+      "transactionHistory": "Ιστορικό συναλλαγών",
+      "transfer": "Μεταφορά",
+      "transferOgy": "Μεταφορά OGY",
+      "transferDescription": "Μπορείτε να στείλετε OGY μόνο από το διαθέσιμο υπόλοιπό σας.",
+      "max": "Μέγιστο",
+      "recipientAddress": "Διεύθυνση παραλήπτη",
+      "amountReceived": "Ποσό που Ελήφθη",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Τέλος συναλλαγής (χρεώνεται στην πηγή)",
+      "currentBalance": "Τρέχον υπόλοιπο:",
+      "transferProcessing": "Η μεταφορά επεξεργάζεται",
+      "transferProcessingHint": "Αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα",
+      "transferSuccess": "Η μεταφορά ήταν επιτυχής!",
+      "transferError": "Σφάλμα μεταφοράς!",
+      "errors": {
+        "amountRequired": "Το ποσό είναι υποχρεωτικό.",
+        "amountExceedsBalance": "Το ποσό δεν πρέπει να υπερβαίνει το υπόλοιπό σας.",
+        "amountBelowFee": "Το ποσό δεν πρέπει να είναι μικρότερο από το τέλος συναλλαγής.",
+        "amountNotPositive": "Το ποσό πρέπει να είναι θετικός αριθμός.",
+        "recipientRequired": "Η διεύθυνση παραλήπτη είναι υποχρεωτική.",
+        "recipientInvalid": "Μη έγκυρη διεύθυνση παραλήπτη."
+      }
+    },
+    "staked": {
+      "title": "Staked OGY",
+      "stake": "Stake",
+      "stakeOgy": "Stake OGY",
+      "stakeDescription": "Για να κάνετε stake OGY πρέπει να μεταβείτε στην πλατφόρμα NNS μας.",
+      "warningNotConnected": "Φαίνεται ότι δεν είστε συνδεδεμένοι με",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Χρειάζεστε ένα",
+      "warningToConnect": "για να συνδεθείτε στην πλατφόρμα NNS.",
+      "goToNns": "Μετάβαση στο NNS"
+    },
+    "rewards": {
+      "title": "Staked Ανταμοιβές",
+      "claimAll": "Διεκδίκηση όλων",
+      "claimDisabledReason": "Οι διεκδικήσεις ανταμοιβών υποστηρίζονται μόνο για τον προεπιλεγμένο λογαριασμό του principal.",
+      "aboutToClaim": "Πρόκειται να διεκδικήσετε",
+      "sentToPrincipal": "Οι ανταμοιβές θα σταλούν στον principal σας",
+      "pending": "Διεκδίκηση όλων των ανταμοιβών...",
+      "successTitle": "Η διεκδίκηση όλων των ανταμοιβών ήταν επιτυχής!",
+      "errorTitle": "Σφάλμα διεκδίκησης όλων των ανταμοιβών!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Αλλάζουμε ledger και διακυβέρνηση",
+        "description": "Η διακυβέρνηση και το ledger του ORIGYN αναβαθμίστηκαν σε SNS. Για να συνεχίσετε να συμμετέχετε στη διακυβέρνηση ORIGYN και να χρησιμοποιείτε OGY, πρέπει να μεταφέρετε τα OGY tokens σας."
+      },
+      "howToSwap": "Πώς να κάνετε swap tokens",
+      "disclosureToggle": "Έχετε ακόμη παλιά OGY tokens; Κάντε swap τώρα!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Βήμα 1: Απόσυρση από την παλιά διακυβέρνηση",
+          "subtitle": "Εάν συμμετείχατε προηγουμένως στη διακυβέρνηση OGY, πρέπει να αποσύρετε αυτά τα tokens προτού μπορέσετε να τα κάνετε swap."
+        },
+        "deposit": {
+          "title": "Βήμα 2: Κατάθεση στον λογαριασμό σας",
+          "subtitle": "Εάν έχετε tokens εκτός του OGY dashboard, καταθέστε τα στο account-id σας προτού αρχίσετε να τα κάνετε swap."
+        },
+        "swap": {
+          "title": "Βήμα 3: Swap tokens",
+          "subtitle": "Κάντε swap το παλιό OGY token στο νέο ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Υπόλοιπο Παλιού OGY"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Μετάβαση στο παλιό OGY dashboard"
+      },
+      "swap": {
+        "disabledOisy": "Το swap παλιού OGY δεν είναι διαθέσιμο με το OISY. Συνδεθείτε με Internet Identity ή Plug για να κάνετε swap το παλιό OGY σας.",
+        "disabledSubAccount": "Το swap παλιού OGY υποστηρίζεται μόνο από τον προεπιλεγμένο λογαριασμό του principal.",
+        "swapYourTokens": "Κάντε swap τα tokens σας",
+        "automaticDisabled": "Το αυτόματο swap έχει απενεργοποιηθεί. Θα πρέπει να εγκριθεί το αίτημα swap σας, το ελάχιστο ποσό είναι 50 000 OGY.",
+        "form": {
+          "title": "Κάντε swap τα OGY σας στο νέο ledger",
+          "description": "Καταθέστε όσα OGY tokens επιθυμείτε να κάνετε swap στο account id σας",
+          "tokensAvailable": "Tokens διαθέσιμα για swap",
+          "youWillReceivePrefix": "Θα λάβετε",
+          "youWillReceiveSuffix": "OGY tokens στο νέο ledger.",
+          "swapPrefix": "Swap",
+          "swapSuffix": "OGY tokens"
+        },
+        "pending": {
+          "takesTime": "Η διαδικασία swapping μπορεί να διαρκέσει λίγο χρόνο.",
+          "doNotRefresh": "Μην ανανεώνετε τη σελίδα!",
+          "swapping": "Swapping tokens..."
+        },
+        "success": {
+          "title": "Το swap ήταν επιτυχές!",
+          "walletBalance": "Υπόλοιπο πορτοφολιού στο νέο ledger",
+          "myAccount": "Ο λογαριασμός μου"
+        },
+        "error": {
+          "title": "Σφάλμα swap tokens!",
+          "retry": "Επανάληψη"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Τα OGY Neurons μου",
+        "idHeader": "ID",
+        "stakedAmount": "Staked ποσό",
+        "claimAmount": "Ποσό διεκδίκησης",
+        "emptyTitle": "Δεν υπάρχουν ακόμη neurons",
+        "emptyDescription": "Προσθέστε ένα OGY neuron για να αρχίσετε να παρακολουθείτε εδώ stake, δύναμη ψήφου και ανταμοιβές.",
+        "addFirstNeuron": "Προσθέστε το πρώτο σας neuron"
+      },
+      "add": {
+        "button": "Προσθήκη neuron",
+        "title": "Προσθήκη neuron",
+        "description": "Προσθέστε αυτόν τον principal ως hotkey σε κάθε OGY neuron που θέλετε να διαχειριστείτε εδώ.",
+        "needHotkey": "Χρειάζεται να προσθέσετε ένα hotkey;",
+        "openNns": "Άνοιγμα της εφαρμογής NNS"
+      },
+      "claim": {
+        "button": "Διεκδίκηση",
+        "disabledReason": "Οι διεκδικήσεις ανταμοιβών υποστηρίζονται μόνο για τον προεπιλεγμένο λογαριασμό του principal.",
+        "aboutToClaim": "Πρόκειται να διεκδικήσετε",
+        "sentToPrincipal": "Οι ανταμοιβές θα σταλούν στον principal σας",
+        "pending": "Διεκδίκηση ανταμοιβής...",
+        "successTitle": "Η διεκδίκηση ανταμοιβής ήταν επιτυχής!",
+        "errorTitle": "Σφάλμα διεκδίκησης ανταμοιβής!",
+        "retry": "Επανάληψη"
+      },
+      "remove": {
+        "title": "Αφαίρεση neuron",
+        "description": "Για να αφαιρέσετε αυτό το neuron, πρέπει να αφαιρέσετε τον principal σας από τη λίστα των hotkeys του neuron σας."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Διεύθυνση",
+      "governanceBalance": "Υπόλοιπο Διακυβέρνησης",
+      "stakedTokens": "Staked tokens",
+      "ledgerBalance": "Υπόλοιπο Ledger",
+      "weightInTotalSupply": "Βάρος στη Συνολική Προσφορά"
+    }
+  },
+  "recovery": {
+    "title": "Ανακτήστε τα tokens σας",
+    "description": "Το OGY dashboard υποστηρίζει μόνο το OGY token. Σε περίπτωση που στείλατε κατά λάθος άλλα tokens εδώ, μπορείτε να τα ανακτήσετε ακολουθώντας τα παρακάτω βήματα.",
+    "chooseToken": "Επιλογή token",
+    "loginRequired": "Για να συλλέξετε τα tokens σας πρέπει να είστε συνδεδεμένοι.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "Μεταφορά ICP",
+      "availableBalanceNote": "Μπορείτε να στείλετε ICP μόνο από το διαθέσιμο υπόλοιπό σας.",
+      "amountRequired": "Το ποσό είναι υποχρεωτικό.",
+      "amountExceedsBalance": "Το ποσό δεν πρέπει να υπερβαίνει το υπόλοιπό σας.",
+      "amountPositive": "Το ποσό πρέπει να είναι θετικός αριθμός.",
+      "amountBelowFee": "Το ποσό πρέπει να είναι μεγαλύτερο ή ίσο με τα τέλη συναλλαγής.",
+      "recipientAddress": "Διεύθυνση παραλήπτη",
+      "recipientAddressRequired": "Η διεύθυνση παραλήπτη είναι υποχρεωτική.",
+      "invalidRecipientAddress": "Μη έγκυρη διεύθυνση παραλήπτη.",
+      "amountReceived": "Ποσό που Ελήφθη",
+      "transactionFee": "Τέλος συναλλαγής",
+      "currentBalance": "Τρέχον υπόλοιπο:",
+      "processing": "Η μεταφορά επεξεργάζεται",
+      "processingNote": "Αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα",
+      "success": "Η μεταφορά ήταν επιτυχής!",
+      "error": "Σφάλμα μεταφοράς!"
+    }
+  },
+  "support": {
+    "category": "Υποστήριξη",
+    "title": "Δημιουργία αιτήματος",
+    "titleSubmitted": "Το αίτημα υποβλήθηκε",
+    "successTitle": "Το αίτημα υποστήριξης δημιουργήθηκε",
+    "successMessage": "Θα επικοινωνήσουμε στη διεύθυνση email που δώσατε.",
+    "submitAnother": "Υποβολή άλλου αιτήματος",
+    "intro": "Περιγράψτε το πρόβλημά σας και πώς μπορούμε να επικοινωνήσουμε μαζί σας.",
+    "form": {
+      "name": "Όνομα",
+      "email": "Email επικοινωνίας",
+      "emailRequired": "Η διεύθυνση email είναι υποχρεωτική",
+      "emailInvalid": "Μη έγκυρη διεύθυνση email",
+      "principal": "Principal πορτοφολιού",
+      "invalidPrincipal": "Μη έγκυρη διεύθυνση παραλήπτη.",
+      "description": "Περιγραφή",
+      "descriptionPlaceholder": "Πείτε μας τι συμβαίνει…",
+      "descriptionRequired": "Παρακαλούμε περιγράψτε το πρόβλημά σας"
+    },
+    "submitError": "Κάτι πήγε στραβά. Παρακαλούμε δοκιμάστε ξανά.",
+    "submitting": "Υποβολή…"
+  },
+  "explorer": {
+    "title": "Explorer",
+    "searchPlaceholder": "Αναζήτηση με τίτλο, εκδότη, principal ή token ID",
+    "openFilters": "Άνοιγμα φίλτρων",
+    "checkOnBlockchain": "Έλεγχος στο blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Προτεινόμενα Πιστοποιητικά",
+      "art": "Πιστοποιητικά Τέχνης",
+      "gold": "Πιστοποιητικά Χρυσού"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Αντιγραφή στο πρόχειρο",
+    "toggleRelativeTime": "Εναλλαγή σχετικού χρόνου. Τρέχουσα εμφάνιση:",
+    "collapseRow": "Σύμπτυξη γραμμής",
+    "expandRow": "Ανάπτυξη γραμμής",
+    "searchPlaceholder": "Αναζήτηση στοιχείων...",
+    "sortAscending": "Αύξουσα ταξινόμηση",
+    "sortDescending": "Φθίνουσα ταξινόμηση",
+    "linesPerPage": "Γραμμές ανά σελίδα",
+    "page": "Σελίδα",
+    "pageOf": "από",
+    "previousPage": "Προηγούμενη σελίδα",
+    "nextPage": "Επόμενη σελίδα"
+  },
+  "auth": {
+    "connect": "Σύνδεση",
+    "disconnect": "Αποσύνδεση",
+    "connectWallet": {
+      "title": "Συνδέστε το πορτοφόλι σας",
+      "subtitle": "Επιλέξτε πώς θέλετε να συνδεθείτε"
+    },
+    "install": "Εγκατάσταση",
+    "newToIc": "Νέοι στο Internet Computer;",
+    "learnMore": "Μάθετε περισσότερα",
+    "connecting": {
+      "title": "Σύνδεση...",
+      "subtitle": "Εγκρίνετε το αίτημα στο πορτοφόλι σας"
+    },
+    "sessionExpired": {
+      "title": "Η συνεδρία έληξε",
+      "description": "Η συνεδρία του πορτοφολιού σας δεν είναι πλέον έγκυρη. Επανασυνδεθείτε για να συνεχίσετε."
+    },
+    "reconnect": "Επανασύνδεση",
+    "error": {
+      "connectionCancelled": "Η σύνδεση ακυρώθηκε. Παρακαλούμε δοκιμάστε ξανά.",
+      "connectionFailed": "Η σύνδεση πορτοφολιού απέτυχε. Παρακαλούμε δοκιμάστε ξανά."
+    }
+  },
+  "warning": {
+    "badge": "ΝΕΟ",
+    "ledgerSwitch": "αλλάζουμε ledger, πρέπει να κάνετε swap τα OGY σας στο νέο"
+  },
+  "calculator": {
+    "header": {
+      "title": "Αριθμομηχανή κόστους",
+      "description": "Χρησιμοποιήστε την αριθμομηχανή ORIGYN για να εκτιμήσετε το κόστος του μοναδικού σας πιστοποιητικού με όλα τα δεδομένα σας on-chain"
+    },
+    "plan": {
+      "title": "Σχεδιάστε τη δημιουργία σας",
+      "description": "Πείτε μας πόσα αντικείμενα έχετε και τι ανεβάζετε.",
+      "itemsLabel": "Πόσα αντικείμενα;",
+      "uploadingLabel": "Τι ανεβάζετε;",
+      "knowExactSize": "Γνωρίζετε το ακριβές μέγεθος;",
+      "totalUploadSize": "Συνολικό μέγεθος αναφόρτωσης",
+      "usePreset": "Χρησιμοποιήστε μια προεπιλογή",
+      "combinedSize": "Συνδυασμένο μέγεθος κάθε αρχείου σε όλα τα αντικείμενα.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB το καθένα"
+        },
+        "iphone": {
+          "label": "Φωτογραφία",
+          "hint": "3 MB το καθένα"
+        },
+        "dslr": {
+          "label": "Φωτογραφία στούντιο",
+          "hint": "20 MB το καθένα"
+        },
+        "video": {
+          "label": "Σύντομο βίντεο",
+          "hint": "1 GB το καθένα"
+        },
+        "video1hr": {
+          "label": "Μακρύ βίντεο",
+          "hint": "60 GB το καθένα"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Εκτίμηση σε πραγματικό χρόνο",
+      "titleRefreshing": "Ανανέωση εκτίμησης",
+      "description": "Ενημερώνεται αυτόματα καθώς αλλάζετε τις ρυθμίσεις σας.",
+      "ogyEquivalent": "Ισοδύναμο OGY",
+      "ogySpotRate": "Τρέχουσα τιμή OGY",
+      "itemSingular": "Αντικείμενο",
+      "itemPlural": "Αντικείμενα",
+      "upload": "Αναφόρτωση"
+    },
+    "breakdown": {
+      "title": "Ανάλυση κόστους",
+      "baseFee": "Βασικό τέλος δημιουργίας",
+      "storageFee": "Τέλος αποθήκευσης",
+      "items": "Αντικείμενα",
+      "uploadSize": "Μέγεθος αναφόρτωσης"
+    },
+    "bytesUnit": "byte"
+  }
+}

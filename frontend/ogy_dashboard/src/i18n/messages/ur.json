@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "زبان",
+    "switchTo": "{language} پر سوئچ کریں",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "لوڈ ہو رہا ہے...",
+    "error": "کچھ غلط ہو گیا",
+    "retry": "دوبارہ کوشش کریں",
+    "cancel": "منسوخ کریں",
+    "confirm": "تصدیق کریں",
+    "close": "بند کریں",
+    "back": "واپس",
+    "next": "اگلا",
+    "previous": "پچھلا",
+    "save": "محفوظ کریں",
+    "submit": "جمع کرائیں",
+    "copy": "کاپی کریں",
+    "copied": "کاپی ہو گیا",
+    "search": "تلاش کریں",
+    "viewAll": "سب دیکھیں",
+    "showMore": "مزید دکھائیں",
+    "showLess": "کم دکھائیں",
+    "amount": "رقم",
+    "date": "تاریخ",
+    "type": "قسم",
+    "from": "سے",
+    "to": "تک",
+    "index": "انڈیکس",
+    "status": "حیثیت",
+    "total": "کل",
+    "balance": "بیلنس",
+    "yes": "ہاں",
+    "no": "نہیں",
+    "notAvailable": "دستیاب نہیں"
+  },
+  "nav": {
+    "dashboard": "ڈیش بورڈ",
+    "governance": "گورننس",
+    "transactionHistory": "لین دین کی تاریخ",
+    "calculator": "کیلکولیٹر",
+    "openMainMenu": "مرکزی مینو کھولیں",
+    "closeMenu": "مینو بند کریں",
+    "openAccountOverview": "اکاؤنٹ کا جائزہ کھولیں",
+    "viewAccountOverview": "اکاؤنٹ کا جائزہ دیکھیں",
+    "connectPrompt": "ٹوکنز کا انتظام کرنے، تجاویز پر ووٹ دینے اور اپنی لین دین کی تاریخ دیکھنے کے لیے اپنا والیٹ جوڑیں۔",
+    "connectWallet": "والیٹ جوڑیں",
+    "disconnect": "منقطع کریں"
+  },
+  "notFound": {
+    "title": "صفحہ نہیں ملا",
+    "description": "معذرت، ہم وہ صفحہ نہیں ڈھونڈ سکے جس کی آپ تلاش کر رہے ہیں۔",
+    "backHome": "واپس ہوم پر جائیں"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY ڈیش بورڈ",
+      "home": "ہوم",
+      "circulation": "گردش",
+      "governance": "گورننس",
+      "revenue": "آمدنی",
+      "rewards": "انعامات",
+      "distribution": "تقسیم",
+      "governanceDashboard": "OGY گورننس ڈیش بورڈ",
+      "transactionExplorer": "OGY ٹرانزیکشن ایکسپلورر"
+    },
+    "learn": {
+      "heading": "OGY Tokenomics اور ORIGYN کے بارے میں مزید جانیں",
+      "tokenomicsDeck": "OGY Tokenomics ڈیک",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT اسٹینڈرڈ",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN ویب سائٹ",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "سپورٹ",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "رابطہ"
+    },
+    "support": {
+      "contactSupport": "سپورٹ سے رابطہ کریں",
+      "recoverTokens": "اپنے ٹوکنز بازیافت کریں"
+    },
+    "disclaimer": "*ORIGYN Foundation سواپ کے عمل کے سلسلے میں OGY ٹوکنز کے کسی بھی نقصان، چوری یا غبن کے لیے ذمہ دار نہیں ہوگی۔ مزید برآں، اگر شامل فریق ORIGYN Foundation کی بیان کردہ شرائط پر سختی سے عمل نہیں کرتا تو ORIGYN Foundation سواپ کو انجام دینے میں کسی ناکامی کے لیے جوابدہ نہیں ہوگی۔"
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY اینالیٹکس",
+      "title": "ڈیش بورڈ دریافت کریں",
+      "subtitle": "web3 dApps، DAOs، NFT، DeFi اور بہت کچھ کے ساتھ بھروسے کے بغیر تعامل کریں۔"
+    },
+    "cta": {
+      "loginToSwap": "ٹوکنز سواپ کرنے کے لیے لاگ ان کریں",
+      "myAccount": "میرا اکاؤنٹ"
+    },
+    "governanceStaking": {
+      "title": "گورننس اسٹیکنگ کا جائزہ"
+    },
+    "cardError": {
+      "couldNotLoad": "لوڈ نہیں ہو سکا",
+      "descriptionLine1": "اس میٹرک کو حاصل کرنے میں ہمیں ایک مسئلہ پیش آیا۔",
+      "descriptionLine2": "براہ کرم کچھ دیر بعد دوبارہ کوشش کریں۔"
+    },
+    "emptyState": {
+      "noDataFor": "اس کے لیے کوئی ڈیٹا نہیں",
+      "description": "ابھی دکھانے کے لیے کچھ نہیں ہے۔"
+    },
+    "circulationState": {
+      "title": "OGY گردش کی حالت",
+      "tooltip": "گردش میں موجود سپلائی ORIGYN Foundation کے ملکیتی ان لاک شدہ ٹوکنز کے علاوہ تمام ٹوکنز ہیں۔",
+      "nnsProposal": "NNS تجویز",
+      "totalLabel": "کل OGY گردش",
+      "notOwnedName": "Foundation کے ہاتھ میں نہ ہونے والے OGY",
+      "notOwnedValue": "گردش میں موجود ان ٹوکنز کی مقدار جو ORIGYN foundation کی ملکیت نہیں۔",
+      "ownedName": "Foundation کے ہاتھ میں مقفل OGY",
+      "ownedValue": "ORIGYN foundation کے ملکیتی مقفل ٹوکنز کی مقدار۔"
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation ریزرو",
+      "tooltip": "تمام والیٹس میں ORIGYN foundation کے ملکیتی OGY ٹوکنز کی کل مقدار۔",
+      "totalLabel": "کل Foundation سپلائی",
+      "lockedName": "مقفل",
+      "lockedIntro": "ORIGYN foundation کے ٹوکنز جو اسٹیکس یا ویسٹنگز میں مقفل ہیں۔",
+      "lockedStakes": "1) اسٹیکس- وہ ٹوکنز جو گورننس ووٹنگ میں شرکت کی بدولت انعامات پیدا کر رہے ہیں۔",
+      "lockedStakesNote": "وہ ٹوکنز رضاکارانہ طور پر مقفل کیے گئے تھے۔",
+      "lockedVestings": "2) ویسٹنگز- وہ ٹوکنز جو کوئی انعام حاصل نہیں کر رہے اور ووٹنگ میں حصہ نہیں لے سکتے۔",
+      "lockedVestingsNote": "وہ ٹوکنز ORIGYN Foundation کے ساتھ آپ کے معاہدے کے ذریعے مقفل کیے گئے تھے۔",
+      "unlockedName": "ان لاک شدہ",
+      "unlockedValue": "ORIGYN foundation کے ملکیتی ان لاک شدہ فنڈز۔"
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN ٹریژری اکاؤنٹ (OTA)",
+      "networkRevenue": "نیٹ ورک آمدنی",
+      "tokenLogoAlt": "ٹوکن لوگو",
+      "tooltipOgy": "ORIGYN نیٹ ورک استعمال کرنے کی فیسوں کے ذریعے پیدا ہونے والی نیٹ ورک یوٹیلیٹی آمدنی (مثلاً، ڈیجیٹل سرٹیفکیٹس جاری کرنے یا منتقل کرنے، NFT بنانے وغیرہ کے لیے) اور OGY میں جمع ہوتی ہے۔",
+      "tooltipIcp": "ORIGYN نیٹ ورک استعمال کرنے کی فیسوں کے ذریعے پیدا ہونے والی نیٹ ورک یوٹیلیٹی آمدنی (مثلاً، ڈیجیٹل سرٹیفکیٹس جاری کرنے یا منتقل کرنے، NFT بنانے وغیرہ کے لیے) اور ICP میں جمع ہوتی ہے۔"
+    },
+    "rewardAccount": {
+      "title": "ORIGYN ریوارڈ اکاؤنٹ (ORA)",
+      "balance": "ORA بیلنس",
+      "year": "سال",
+      "rewardPool": "ریوارڈ پول",
+      "moreDetails": "مزید تفصیلات",
+      "tooltipStake": "ٹوکن ہولڈرز اپنے OGY کو اسٹیک کر کے اور گورننس میں شرکت کر کے انعامات حاصل کر سکتے ہیں۔",
+      "tooltipSeed": "انعامات ORIGYN ریوارڈ اکاؤنٹ سے آئیں گے، جسے ORIGYN ایک ارب OGY سے بھرے گی۔",
+      "tooltipPool": "ریوارڈ پول اپنے پہلے سال میں 250 ملین OGY پر مشتمل ہے اور ماحولیاتی نظام کے ابتدائی اور طویل مدتی شراکت داروں کی حوصلہ افزائی اور انعام کے لیے ہر دو سال بعد آدھا ہو جائے گا۔",
+      "description": "ORIGYN اسٹیک شدہ اور ووٹ دینے والے ہولڈرز کے فائدے کے لیے ایک ORIGYN ریوارڈ اکاؤنٹ (ORA) میں ایک ارب OGY کا حصہ ڈالے گی۔ ریوارڈ پول اپنے پہلے سال میں 250 ملین OGY پر مشتمل ہے اور ماحولیاتی نظام کے ابتدائی اور طویل مدتی شراکت داروں کی حوصلہ افزائی اور انعام کے لیے ہر دو سال بعد آدھا ہو جائے گا۔"
+    },
+    "tokenDistribution": {
+      "title": "ٹوکن تقسیم"
+    },
+    "transactionHistory": {
+      "title": "لین دین کی تاریخ",
+      "showAll": "سب دکھائیں"
+    },
+    "topTransfers": {
+      "value": "قدر",
+      "time": "وقت",
+      "ogyLogoAlt": "OGY لوگو",
+      "noDataAvailable": "کوئی ڈیٹا دستیاب نہیں۔"
+    },
+    "totalSupply": {
+      "title": "کل OGY سپلائی",
+      "tooltipTitle": "دستیاب OGY ٹوکنز کی کل مقدار۔",
+      "tooltipLine1": "اس میں گردش میں موجود سپلائی اور ORIGYN Foundation کے کنٹرول میں موجود سپلائی شامل ہے۔",
+      "tooltipLine2": "18 ستمبر تک، ORIGYN مکمل طور پر افراط زر مخالف ماڈل پر تبدیل ہو گئی جس کا مطلب ہے کہ مزید کوئی نئے ٹوکنز نہیں بنائے جائیں گے۔",
+      "chartLabel": "کل سپلائی"
+    },
+    "totalBurned": {
+      "title": "کل جلائے گئے OGY",
+      "tooltipTitle": "جلائے گئے OGY ٹوکنز کی کل مقدار۔",
+      "tooltipLine1": "یہ ٹوکنز مکمل طور پر جلا دیے گئے ہیں اور اب دستیاب نہیں۔",
+      "tooltipLine2": "ٹوکنز مختلف وجوہات کی بنا پر جلائے جا سکتے ہیں مثلاً سرٹیفکیٹ بنانے کی فیس، نیٹ ورک یوٹیلیٹی فیس یا نیٹ ورک ٹرانزیکشن فیس۔",
+      "chartLabel": "کل جلائے گئے"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "روزانہ",
+      "weekly": "ہفتہ وار",
+      "monthly": "ماہانہ",
+      "yearly": "سالانہ",
+      "all": "تمام"
+    },
+    "stakingOverview": {
+      "title": "اسٹیکنگ کا جائزہ",
+      "totalTokensInStakes": "اسٹیکس میں کل ٹوکنز",
+      "tooltip": "وہ ٹوکنز جو اسٹیکس میں مقفل ہیں۔",
+      "stakedTokens": "اسٹیک شدہ ٹوکنز",
+      "stakedTokensLegend": "اسٹیک شدہ ٹوکنز"
+    },
+    "usersActivity": {
+      "title": "صارفین کا جائزہ",
+      "protocolUsers": "OGY پروٹوکول صارفین",
+      "protocolUsersTooltip": "OGY ٹوکنز کے منفرد ٹوکن ہولڈرز",
+      "protocolUsersLegend": "OGY پروٹوکول صارفین",
+      "activeWallets": "OGY فعال والیٹس",
+      "activeWalletsTooltip": "OGY ٹوکنز کے فعال ٹوکن ہولڈرز"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "گورننس کا جائزہ",
+      "welcome": "ORIGYN گورننس میں خوش آمدید!",
+      "description": "OGY ٹوکنز کے ہولڈرز اپنے OGY کو اسٹیک کر کے اور تجاویز پر ووٹ دے کر ORIGYN نیٹ ورک پر براہ راست اثر انداز ہو سکتے ہیں۔ فیصلہ سازی کے عمل میں حصہ لے کر، یہ اسٹیک شدہ ٹوکن ہولڈرز انعامات کماتے ہیں۔",
+      "learnMore": "مزید جانیں"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "اسٹیک اور ووٹ",
+        "description": "OGY اسٹیک کر کے اور تجاویز پر ووٹ دے کر ORIGYN نیٹ ورک پر اثر انداز ہوں۔"
+      },
+      "earnRewards": {
+        "title": "انعامات کمائیں",
+        "description": "انعامات کمانے کے لیے فیصلہ سازی کے عمل میں حصہ لیں۔"
+      },
+      "governCollectively": {
+        "title": "اجتماعی طور پر حکومت کریں",
+        "description": "ایک باہمی تعاون والے ماحولیاتی نظام کے طور پر نیٹ ورک سے جڑیں اور اثر انداز ہوں۔"
+      }
+    },
+    "tokensSection": {
+      "title": "گورننس میں ٹوکنز",
+      "paragraph1": "OGY ٹوکنز کے ہولڈرز اپنے OGY کو اسٹیک کر کے اور تجاویز پر ووٹ دے کر ORIGYN نیٹ ورک پر براہ راست اثر انداز ہو سکتے ہیں۔",
+      "paragraph2": "فیصلہ سازی کے عمل میں حصہ لے کر، یہ اسٹیک شدہ ٹوکن ہولڈرز انعامات کماتے ہیں اور اجتماعی اور جمہوری طور پر حکومت کرتے ہیں۔",
+      "learnMoreOgy": "OGY کے بارے میں مزید جانیں"
+    },
+    "sections": {
+      "proposals": "تجاویز",
+      "neurons": "نیورونز"
+    },
+    "votingParticipation": {
+      "title": "ووٹنگ شرکت",
+      "chartLabel": "شرکت %",
+      "legendLabel": "شرکت %",
+      "period": {
+        "weekly": "ہفتہ وار",
+        "monthly": "ماہانہ",
+        "yearly": "سالانہ"
+      },
+      "lastParticipation": {
+        "label": "آخری ووٹنگ شرکت",
+        "tooltip": "آخری ووٹنگ ایونٹ میں شرکت کا فیصد۔"
+      },
+      "averageParticipation": {
+        "label": "اوسط ووٹنگ شرکت",
+        "tooltip": "وقت کے ساتھ ووٹنگ شرکت کا اوسط فیصد۔"
+      },
+      "averagePower": {
+        "label": "اوسط ووٹنگ پاور",
+        "tooltip": "تمام شرکاء میں اوسط ووٹنگ پاور۔"
+      }
+    },
+    "estimateRewards": {
+      "title": "اپنے انعامات کا اندازہ لگائیں",
+      "lockDuration": "لاک کا دورانیہ",
+      "participants": "شرکاء",
+      "lockedForAtLeast": "فی الحال کم از کم اتنے عرصے کے لیے مقفل",
+      "lockedFor": "فی الحال اتنے عرصے کے لیے مقفل",
+      "year": "سال",
+      "years": "سال"
+    },
+    "kpi": {
+      "metric": "میٹرک",
+      "rewardBaseCurrentYear": "موجودہ سال کے لیے انعامی بنیاد",
+      "dailyVotingRewards": "روزانہ ووٹنگ انعامات",
+      "totalVotingPower": "کل ووٹنگ پاور",
+      "overallVotingParticipation": "مجموعی ووٹنگ شرکت"
+    },
+    "total": {
+      "titleTooltip": "وہ تمام ٹوکنز جو گورننس کنستر میں ہیں۔ یہ ٹوکنز ویسٹنگ، اسٹیکنگ، ان اسٹیکڈ یا ان کلیمڈ حالت میں ہو سکتے ہیں۔",
+      "totalLabel": "گورننس میں کل ٹوکنز",
+      "locked": {
+        "name": "مقفل",
+        "tooltip": "وہ ٹوکنز جو گورننس میں مقفل ہیں۔"
+      },
+      "unlocked": {
+        "name": "ان لاک شدہ",
+        "tooltip": "وہ ٹوکنز جو گورننس میں ان لاک ہیں اور کسی بھی وقت نکالے اور تجارت کیے جا سکتے ہیں۔"
+      },
+      "accumulatedRewards": {
+        "name": "جمع شدہ انعامات",
+        "tooltip": "وہ انعامات جو صارفین کے لیے شمار کیے گئے ہیں لیکن ابھی تک کلیم نہیں کیے گئے۔"
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "تجاویز",
+      "viewProposal": "تجویز دیکھیں",
+      "columns": {
+        "id": "ID",
+        "title": "عنوان",
+        "proposed": "تجویز کردہ",
+        "timeRemaining": "باقی وقت",
+        "topic": "موضوع",
+        "status": "حیثیت",
+        "view": "دیکھیں"
+      }
+    },
+    "details": {
+      "category": "گورننس",
+      "proposalNumber": "تجویز #",
+      "proposal": "تجویز",
+      "titleLoading": "تجویز کا عنوان لوڈ ہو رہا ہے…",
+      "payloadLoading": "تجویز کی تفصیلات لوڈ ہو رہی ہیں…",
+      "posted": "پوسٹ کیا گیا",
+      "topic": "موضوع",
+      "moreInfo": "مزید معلومات",
+      "totalVotes": "کل ووٹ",
+      "adopt": "اپنائیں",
+      "reject": "مسترد کریں",
+      "vote": "ووٹ دیں"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "نیورونز",
+      "viewNeuron": "نیورون دیکھیں",
+      "columns": {
+        "id": "ID",
+        "state": "حالت",
+        "stakedOgy": "اسٹیک شدہ OGY",
+        "dissolveDelay": "تحلیل تاخیر",
+        "age": "عمر",
+        "votingPower": "ووٹنگ پاور",
+        "view": "دیکھیں"
+      }
+    },
+    "details": {
+      "category": "نیورون",
+      "title": "OGY نیورون",
+      "created": "بنایا گیا",
+      "stakedOgy": "اسٹیک شدہ OGY",
+      "votingPower": "ووٹنگ پاور",
+      "dissolveDelay": "تحلیل تاخیر",
+      "age": "عمر",
+      "lifecycle": "نیورون لائف سائیکل",
+      "dateCreated": "بنانے کی تاریخ",
+      "autoStakeMaturity": "آٹو اسٹیک میچورٹی",
+      "rewardsAndBonuses": "انعامات اور بونس",
+      "stakedMaturity": "اسٹیک شدہ میچورٹی",
+      "totalMaturity": "کل میچورٹی",
+      "ageBonus": "عمر بونس",
+      "totalBonus": "کل بونس",
+      "dissolveDelayBonus": "تحلیل تاخیر بونس"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "لین دین کی تاریخ",
+      "searchFor": "تلاش کریں:",
+      "or": "یا",
+      "searchPlaceholder": "کوئی آئٹم تلاش کریں",
+      "noResults": "کوئی نتیجہ نہیں ملا",
+      "resultBlock": "بلاک",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "لین دین کی تفصیلات",
+      "hash": "ہیش",
+      "fetchError": "ایک لین دین حاصل کرنے میں خرابی!",
+      "mintingAccount": "منٹنگ اکاؤنٹ",
+      "fee": "فیس",
+      "memo": "میمو",
+      "none": "کوئی نہیں"
+    },
+    "accountDetails": {
+      "title": "OGY اکاؤنٹ",
+      "id": "ID",
+      "owner": "مالک",
+      "subaccount": "ذیلی اکاؤنٹ",
+      "defaultSubaccount": "کوئی نہیں (ڈیفالٹ ذیلی اکاؤنٹ)",
+      "historicalMaxBalance": "تاریخی زیادہ سے زیادہ بیلنس",
+      "genesisBalance": "ابتدائی بیلنس",
+      "period": {
+        "monthly": "ماہانہ",
+        "quarterly": "سہ ماہی",
+        "yearly": "سالانہ",
+        "lifetime": "تاحیات"
+      },
+      "empty": {
+        "title": "ابھی تک کوئی لین دین نہیں",
+        "description": "اس اکاؤنٹ کی کوئی لین دین کی تاریخ نہیں۔ جیسے ہی یہ OGY بھیجے یا وصول کرے گا، سرگرمی یہاں ظاہر ہوگی۔"
+      },
+      "balanceHistory": {
+        "title": "بیلنس کی تاریخ",
+        "currentBalance": "موجودہ بیلنس",
+        "currentBalanceInfo": "موجودہ اکاؤنٹ بیلنس۔",
+        "legend": "OGY بیلنس"
+      },
+      "overview": {
+        "title": "لین دین کا جائزہ",
+        "totalLabel": "کل رقم",
+        "totalSent": "کل بھیجا گیا",
+        "totalSentInfo": "principal کے ذریعے بھیجی گئی کل رقم۔",
+        "totalReceived": "کل وصول کیا گیا",
+        "totalReceivedInfo": "principal کے ذریعے وصول کی گئی کل رقم۔"
+      }
+    },
+    "flow": {
+      "title": "لین دین کا بہاؤ",
+      "searchPlaceholder": "لین دین تلاش کریں…",
+      "clearSearch": "تلاش صاف کریں",
+      "loadError": "لین دین کا ڈیٹا لوڈ نہیں ہو سکا۔ براہ کرم دوبارہ کوشش کریں۔",
+      "noMatch": "کوئی لین دین اس تلاش سے میل نہیں کھاتا۔",
+      "transactions": "لین دین",
+      "out": "باہر",
+      "in": "اندر",
+      "total": "کل",
+      "legend": {
+        "outTransaction": "باہر جانے والا لین دین",
+        "inTransaction": "اندر آنے والا لین دین",
+        "includesInitial": "ابتدائی لین دین شامل ہے",
+        "rootAccount": "روٹ اکاؤنٹ",
+        "account": "اکاؤنٹ",
+        "fromRoot": "روٹ سے لین دین کے ساتھ",
+        "toRoot": "روٹ کی طرف لین دین کے ساتھ",
+        "madeInitial": "ابتدائی لین دین کیا"
+      }
+    },
+    "kind": {
+      "mint": "منٹ",
+      "transfer": "منتقلی",
+      "burn": "برن",
+      "approve": "منظوری"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "خوش آمدید واپس",
+      "value": "قدر:",
+      "disconnectWallet": "والیٹ منقطع کریں",
+      "accountLabel": "اکاؤنٹ",
+      "manageDescription": "اپنے OGY والیٹ، انعامات اور اسٹیکنگ سرگرمی کا انتظام کریں۔",
+      "walletBalance": "والیٹ بیلنس",
+      "myAccount": "میرا اکاؤنٹ",
+      "howToTopUp": "ٹاپ اپ کیسے کریں؟"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "دستیاب OGY",
+      "transactionHistory": "لین دین کی تاریخ",
+      "transfer": "منتقلی",
+      "transferOgy": "OGY منتقل کریں",
+      "transferDescription": "آپ صرف اپنے دستیاب بیلنس سے OGY بھیج سکتے ہیں۔",
+      "max": "زیادہ سے زیادہ",
+      "recipientAddress": "وصول کنندہ کا پتہ",
+      "amountReceived": "وصول کردہ رقم",
+      "ogyLogoAlt": "OGY لوگو",
+      "transactionFee": "لین دین فیس (ذریعہ پر چارج)",
+      "currentBalance": "موجودہ بیلنس:",
+      "transferProcessing": "منتقلی پر کارروائی ہو رہی ہے",
+      "transferProcessingHint": "اس میں چند سیکنڈ لگ سکتے ہیں",
+      "transferSuccess": "منتقلی کامیاب رہی!",
+      "transferError": "منتقلی میں خرابی!",
+      "errors": {
+        "amountRequired": "رقم درکار ہے۔",
+        "amountExceedsBalance": "رقم آپ کے بیلنس سے زیادہ نہیں ہونی چاہیے۔",
+        "amountBelowFee": "رقم لین دین فیس سے کم نہیں ہونی چاہیے۔",
+        "amountNotPositive": "رقم ایک مثبت عدد ہونی چاہیے۔",
+        "recipientRequired": "وصول کنندہ کا پتہ درکار ہے۔",
+        "recipientInvalid": "غلط وصول کنندہ کا پتہ۔"
+      }
+    },
+    "staked": {
+      "title": "اسٹیک شدہ OGY",
+      "stake": "اسٹیک",
+      "stakeOgy": "OGY اسٹیک کریں",
+      "stakeDescription": "OGY اسٹیک کرنے کے لیے آپ کو ہمارے NNS پلیٹ فارم پر جانا ہوگا۔",
+      "warningNotConnected": "ایسا لگتا ہے کہ آپ جڑے ہوئے نہیں ہیں",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "آپ کو ایک",
+      "warningToConnect": "NNS پلیٹ فارم سے جڑنے کے لیے چاہیے۔",
+      "goToNns": "NNS پر جائیں"
+    },
+    "rewards": {
+      "title": "اسٹیک شدہ انعامات",
+      "claimAll": "تمام کلیم کریں",
+      "claimDisabledReason": "انعام کے دعوے صرف principal کے ڈیفالٹ اکاؤنٹ کے لیے معاون ہیں۔",
+      "aboutToClaim": "آپ کلیم کرنے والے ہیں",
+      "sentToPrincipal": "انعامات آپ کے principal کو بھیجے جائیں گے",
+      "pending": "تمام انعامات کلیم ہو رہے ہیں...",
+      "successTitle": "تمام انعامات کا دعویٰ کامیاب رہا!",
+      "errorTitle": "تمام انعامات کے دعوے میں خرابی!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "ہم لیجر اور گورننس تبدیل کر رہے ہیں",
+        "description": "ORIGYN گورننس اور لیجر کو ایک SNS میں اپ گریڈ کر دیا گیا ہے۔ ORIGYN گورننس میں شرکت جاری رکھنے اور OGY استعمال کرنے کے لیے، آپ کو اپنے OGY ٹوکنز منتقل کرنے کی ضرورت ہے۔"
+      },
+      "howToSwap": "ٹوکنز کیسے سواپ کریں",
+      "disclosureToggle": "اب بھی پرانے OGY ٹوکنز ہیں؟ ابھی سواپ کریں!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "مرحلہ 1: پرانی گورننس سے نکالیں",
+          "subtitle": "اگر آپ پہلے OGY گورننس میں حصہ لے رہے تھے، تو آپ کو ان ٹوکنز کو سواپ کرنے سے پہلے نکالنا ہوگا۔"
+        },
+        "deposit": {
+          "title": "مرحلہ 2: اپنے اکاؤنٹ میں جمع کریں",
+          "subtitle": "اگر آپ کے پاس OGY ڈیش بورڈ سے باہر کوئی ٹوکنز ہیں، تو انہیں سواپ شروع کرنے سے پہلے اپنے account-id میں جمع کریں۔"
+        },
+        "swap": {
+          "title": "مرحلہ 3: ٹوکنز سواپ کریں",
+          "subtitle": "پرانے OGY ٹوکن کو نئے لیجر میں سواپ کریں۔"
+        }
+      },
+      "deposit": {
+        "legacyBalance": "پرانا OGY بیلنس"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "پرانے OGY ڈیش بورڈ پر جائیں"
+      },
+      "swap": {
+        "disabledOisy": "پرانا OGY سواپ OISY کے ساتھ دستیاب نہیں۔ اپنے پرانے OGY کو سواپ کرنے کے لیے Internet Identity یا Plug سے جڑیں۔",
+        "disabledSubAccount": "پرانا OGY سواپ صرف principal کے ڈیفالٹ اکاؤنٹ سے معاون ہے۔",
+        "swapYourTokens": "اپنے ٹوکنز سواپ کریں",
+        "automaticDisabled": "خودکار سواپ غیر فعال کر دیا گیا ہے۔ آپ کو اپنی سواپ درخواست منظور کرانی ہوگی، کم از کم رقم 50 000 OGY ہے۔",
+        "form": {
+          "title": "اپنے OGY کو نئے لیجر میں سواپ کریں",
+          "description": "جو بھی OGY ٹوکنز آپ سواپ کرنا چاہتے ہیں انہیں اپنے account id میں جمع کریں",
+          "tokensAvailable": "سواپ کے لیے دستیاب ٹوکنز",
+          "youWillReceivePrefix": "آپ وصول کریں گے",
+          "youWillReceiveSuffix": "نئے لیجر پر OGY ٹوکنز۔",
+          "swapPrefix": "سواپ",
+          "swapSuffix": "OGY ٹوکنز"
+        },
+        "pending": {
+          "takesTime": "سواپنگ کے عمل میں تھوڑا وقت لگ سکتا ہے۔",
+          "doNotRefresh": "صفحہ ریفریش نہ کریں!",
+          "swapping": "ٹوکنز سواپ ہو رہے ہیں..."
+        },
+        "success": {
+          "title": "سواپ کامیاب رہا!",
+          "walletBalance": "نئے لیجر پر والیٹ بیلنس",
+          "myAccount": "میرا اکاؤنٹ"
+        },
+        "error": {
+          "title": "ٹوکنز سواپ میں خرابی!",
+          "retry": "دوبارہ کوشش کریں"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "میرے OGY نیورونز",
+        "idHeader": "ID",
+        "stakedAmount": "اسٹیک شدہ رقم",
+        "claimAmount": "کلیم رقم",
+        "emptyTitle": "ابھی تک کوئی نیورون نہیں",
+        "emptyDescription": "یہاں اسٹیک، ووٹنگ پاور اور انعامات کو ٹریک کرنا شروع کرنے کے لیے ایک OGY نیورون شامل کریں۔",
+        "addFirstNeuron": "اپنا پہلا نیورون شامل کریں"
+      },
+      "add": {
+        "button": "نیورون شامل کریں",
+        "title": "نیورون شامل کریں",
+        "description": "اس principal کو ہر اس OGY نیورون پر ہاٹ کی کے طور پر شامل کریں جسے آپ یہاں منظم کرنا چاہتے ہیں۔",
+        "needHotkey": "ہاٹ کی شامل کرنے کی ضرورت ہے؟",
+        "openNns": "NNS ایپ کھولیں"
+      },
+      "claim": {
+        "button": "کلیم کریں",
+        "disabledReason": "انعام کے دعوے صرف principal کے ڈیفالٹ اکاؤنٹ کے لیے معاون ہیں۔",
+        "aboutToClaim": "آپ کلیم کرنے والے ہیں",
+        "sentToPrincipal": "انعامات آپ کے principal کو بھیجے جائیں گے",
+        "pending": "انعام کلیم ہو رہا ہے...",
+        "successTitle": "انعام کا دعویٰ کامیاب رہا!",
+        "errorTitle": "انعام کے دعوے میں خرابی!",
+        "retry": "دوبارہ کوشش کریں"
+      },
+      "remove": {
+        "title": "نیورون ہٹائیں",
+        "description": "اس نیورون کو ہٹانے کے لیے، آپ کو اپنے نیورون کی ہاٹ کیز کی فہرست سے اپنا principal ہٹانا ہوگا۔"
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "پتہ",
+      "governanceBalance": "گورننس بیلنس",
+      "stakedTokens": "اسٹیک شدہ ٹوکنز",
+      "ledgerBalance": "لیجر بیلنس",
+      "weightInTotalSupply": "کل سپلائی میں وزن"
+    }
+  },
+  "recovery": {
+    "title": "اپنے ٹوکنز بازیافت کریں",
+    "description": "OGY ڈیش بورڈ صرف OGY ٹوکن کو سپورٹ کرتا ہے۔ اگر آپ نے غلطی سے یہاں دیگر ٹوکنز بھیج دیے، تو آپ نیچے دیے گئے مراحل پر عمل کر کے انہیں بازیافت کر سکتے ہیں۔",
+    "chooseToken": "ٹوکن منتخب کریں",
+    "loginRequired": "اپنے ٹوکنز جمع کرنے کے لیے آپ کو لاگ ان ہونا ضروری ہے۔",
+    "transfer": {
+      "icpLogoAlt": "ICP لوگو",
+      "ledgerCanister": "لیجر کنستر:",
+      "transferIcp": "ICP منتقل کریں",
+      "availableBalanceNote": "آپ صرف اپنے دستیاب بیلنس سے ICP بھیج سکتے ہیں۔",
+      "amountRequired": "رقم درکار ہے۔",
+      "amountExceedsBalance": "رقم آپ کے بیلنس سے زیادہ نہیں ہونی چاہیے۔",
+      "amountPositive": "رقم ایک مثبت عدد ہونی چاہیے۔",
+      "amountBelowFee": "رقم لین دین فیس سے زیادہ یا اس کے برابر ہونی چاہیے۔",
+      "recipientAddress": "وصول کنندہ کا پتہ",
+      "recipientAddressRequired": "وصول کنندہ کا پتہ درکار ہے۔",
+      "invalidRecipientAddress": "غلط وصول کنندہ کا پتہ۔",
+      "amountReceived": "وصول کردہ رقم",
+      "transactionFee": "لین دین فیس",
+      "currentBalance": "موجودہ بیلنس:",
+      "processing": "منتقلی پر کارروائی ہو رہی ہے",
+      "processingNote": "اس میں چند سیکنڈ لگ سکتے ہیں",
+      "success": "منتقلی کامیاب رہی!",
+      "error": "منتقلی میں خرابی!"
+    }
+  },
+  "support": {
+    "category": "سپورٹ",
+    "title": "ٹکٹ بنائیں",
+    "titleSubmitted": "ٹکٹ جمع کرا دیا گیا",
+    "successTitle": "سپورٹ ٹکٹ بنا دیا گیا",
+    "successMessage": "ہم آپ کے فراہم کردہ ای میل ایڈریس پر رابطہ کریں گے۔",
+    "submitAnother": "ایک اور ٹکٹ جمع کرائیں",
+    "intro": "اپنے مسئلے کی وضاحت کریں اور ہم آپ تک کیسے پہنچ سکتے ہیں۔",
+    "form": {
+      "name": "نام",
+      "email": "رابطہ ای میل",
+      "emailRequired": "ای میل ایڈریس درکار ہے",
+      "emailInvalid": "غلط ای میل ایڈریس",
+      "principal": "والیٹ principal",
+      "invalidPrincipal": "غلط وصول کنندہ کا پتہ۔",
+      "description": "تفصیل",
+      "descriptionPlaceholder": "ہمیں بتائیں کہ کیا ہو رہا ہے…",
+      "descriptionRequired": "براہ کرم اپنے مسئلے کی وضاحت کریں"
+    },
+    "submitError": "کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔",
+    "submitting": "جمع کرایا جا رہا ہے…"
+  },
+  "explorer": {
+    "title": "ایکسپلورر",
+    "searchPlaceholder": "عنوان، جاری کنندہ، principal یا ٹوکن ID کے ذریعے تلاش کریں",
+    "openFilters": "فلٹرز کھولیں",
+    "checkOnBlockchain": "بلاک چین پر چیک کریں",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "نمایاں سرٹیفکیٹس",
+      "art": "آرٹ سرٹیفکیٹس",
+      "gold": "گولڈ سرٹیفکیٹس"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "کلپ بورڈ پر کاپی کریں",
+    "toggleRelativeTime": "متعلقہ وقت ٹوگل کریں۔ موجودہ ڈسپلے:",
+    "collapseRow": "قطار سکیڑیں",
+    "expandRow": "قطار پھیلائیں",
+    "searchPlaceholder": "آئٹمز تلاش کریں...",
+    "sortAscending": "بڑھتے ترتیب سے ترتیب دیں",
+    "sortDescending": "گھٹتے ترتیب سے ترتیب دیں",
+    "linesPerPage": "فی صفحہ لائنیں",
+    "page": "صفحہ",
+    "pageOf": "میں سے",
+    "previousPage": "پچھلا صفحہ",
+    "nextPage": "اگلا صفحہ"
+  },
+  "auth": {
+    "connect": "جوڑیں",
+    "disconnect": "منقطع کریں",
+    "connectWallet": {
+      "title": "اپنا والیٹ جوڑیں",
+      "subtitle": "منتخب کریں کہ آپ کیسے سائن ان کرنا چاہتے ہیں"
+    },
+    "install": "انسٹال کریں",
+    "newToIc": "Internet Computer میں نئے ہیں؟",
+    "learnMore": "مزید جانیں",
+    "connecting": {
+      "title": "جڑ رہا ہے...",
+      "subtitle": "اپنے والیٹ میں درخواست کی منظوری دیں"
+    },
+    "sessionExpired": {
+      "title": "سیشن ختم ہو گیا",
+      "description": "آپ کا والیٹ سیشن اب درست نہیں۔ جاری رکھنے کے لیے دوبارہ جڑیں۔"
+    },
+    "reconnect": "دوبارہ جڑیں",
+    "error": {
+      "connectionCancelled": "کنکشن منسوخ ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔",
+      "connectionFailed": "والیٹ کنکشن ناکام ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔"
+    }
+  },
+  "warning": {
+    "badge": "نیا",
+    "ledgerSwitch": "ہم لیجر تبدیل کر رہے ہیں، آپ کو اپنے OGY کو نئے والے میں سواپ کرنا ہوگا"
+  },
+  "calculator": {
+    "header": {
+      "title": "لاگت کیلکولیٹر",
+      "description": "اپنے تمام ڈیٹا کے ساتھ آن چین منفرد سرٹیفکیٹ کی لاگت کا اندازہ لگانے کے لیے ORIGYN کیلکولیٹر استعمال کریں"
+    },
+    "plan": {
+      "title": "اپنا منٹ منصوبہ بنائیں",
+      "description": "ہمیں بتائیں کہ آپ کتنی اشیاء اور کیا اپلوڈ کر رہے ہیں۔",
+      "itemsLabel": "کتنی اشیاء؟",
+      "uploadingLabel": "آپ کیا اپلوڈ کر رہے ہیں؟",
+      "knowExactSize": "درست حجم معلوم ہے؟",
+      "totalUploadSize": "کل اپلوڈ حجم",
+      "usePreset": "اس کے بجائے پیش سیٹ استعمال کریں",
+      "combinedSize": "تمام اشیاء میں ہر فائل کا مجموعی حجم۔",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB فی آئٹم"
+        },
+        "iphone": {
+          "label": "تصویر",
+          "hint": "3 MB فی آئٹم"
+        },
+        "dslr": {
+          "label": "اسٹوڈیو تصویر",
+          "hint": "20 MB فی آئٹم"
+        },
+        "video": {
+          "label": "مختصر ویڈیو",
+          "hint": "1 GB فی آئٹم"
+        },
+        "video1hr": {
+          "label": "طویل ویڈیو",
+          "hint": "60 GB فی آئٹم"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "براہِ راست تخمینہ",
+      "titleRefreshing": "تخمینہ تازہ ہو رہا ہے",
+      "description": "آپ کے سیٹ اپ میں تبدیلی کے ساتھ خودکار طور پر اپ ڈیٹ ہوتا ہے۔",
+      "ogyEquivalent": "OGY مساوی",
+      "ogySpotRate": "OGY اسپاٹ ریٹ",
+      "itemSingular": "آئٹم",
+      "itemPlural": "اشیاء",
+      "upload": "اپلوڈ"
+    },
+    "breakdown": {
+      "title": "لاگت کی تفصیل",
+      "baseFee": "بنیادی منٹ فیس",
+      "storageFee": "اسٹوریج فیس",
+      "items": "اشیاء",
+      "uploadSize": "اپلوڈ حجم"
+    },
+    "bytesUnit": "بائٹس"
+  }
+}

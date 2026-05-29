@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Мова",
+    "switchTo": "Перемкнути на {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "error": "Щось пішло не так",
+    "retry": "Повторити",
+    "cancel": "Скасувати",
+    "confirm": "Підтвердити",
+    "close": "Закрити",
+    "back": "Назад",
+    "next": "Далі",
+    "previous": "Попередній",
+    "save": "Зберегти",
+    "submit": "Надіслати",
+    "copy": "Копіювати",
+    "copied": "Скопійовано",
+    "search": "Пошук",
+    "viewAll": "Переглянути все",
+    "showMore": "Показати більше",
+    "showLess": "Показати менше",
+    "amount": "Сума",
+    "date": "Дата",
+    "type": "Тип",
+    "from": "Від",
+    "to": "До",
+    "index": "Індекс",
+    "status": "Статус",
+    "total": "Усього",
+    "balance": "Баланс",
+    "yes": "Так",
+    "no": "Ні",
+    "notAvailable": "Н/Д"
+  },
+  "nav": {
+    "dashboard": "Панель",
+    "governance": "Управління",
+    "transactionHistory": "Історія транзакцій",
+    "calculator": "Калькулятор",
+    "openMainMenu": "Відкрити головне меню",
+    "closeMenu": "Закрити меню",
+    "openAccountOverview": "Відкрити огляд рахунку",
+    "viewAccountOverview": "Переглянути огляд рахунку",
+    "connectPrompt": "Підключіть гаманець, щоб керувати токенами, голосувати за пропозиції та переглядати історію транзакцій.",
+    "connectWallet": "Підключити гаманець",
+    "disconnect": "Відключити"
+  },
+  "notFound": {
+    "title": "Сторінку не знайдено",
+    "description": "На жаль, ми не змогли знайти сторінку, яку ви шукаєте.",
+    "backHome": "Повернутися на головну"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Панель OGY",
+      "home": "Головна",
+      "circulation": "Обіг",
+      "governance": "Управління",
+      "revenue": "Дохід",
+      "rewards": "Винагороди",
+      "distribution": "Розподіл",
+      "governanceDashboard": "Панель управління OGY",
+      "transactionExplorer": "Оглядач транзакцій OGY"
+    },
+    "learn": {
+      "heading": "Дізнайтеся більше про OGY Tokenomics та ORIGYN",
+      "tokenomicsDeck": "Презентація OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Стандарт ORIGYN NFT",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "Вебсайт ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Підтримка",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Контакти"
+    },
+    "support": {
+      "contactSupport": "Звернутися до підтримки",
+      "recoverTokens": "Відновити ваші токени"
+    },
+    "disclaimer": "*ORIGYN Foundation не несе відповідальності за будь-яку втрату, крадіжку чи незаконне привласнення токенів OGY, що виникають у зв’язку з процесом обміну. Крім того, ORIGYN Foundation не несе відповідальності за невиконання обміну, якщо залучена сторона не дотримується суворо умов, зазначених ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY АНАЛІТИКА",
+      "title": "Дослідіть панель",
+      "subtitle": "Взаємодійте без посередників із web3 dApps, DAOs, NFT, DeFi та багатьом іншим."
+    },
+    "cta": {
+      "loginToSwap": "Увійдіть, щоб обміняти токени",
+      "myAccount": "Мій рахунок"
+    },
+    "governanceStaking": {
+      "title": "Огляд стейкінгу в управлінні"
+    },
+    "cardError": {
+      "couldNotLoad": "Не вдалося завантажити",
+      "descriptionLine1": "Сталася помилка під час отримання цього показника.",
+      "descriptionLine2": "Будь ласка, спробуйте ще раз за мить."
+    },
+    "emptyState": {
+      "noDataFor": "Немає даних для",
+      "description": "Зараз немає нічого для відображення."
+    },
+    "circulationState": {
+      "title": "Стан обігу OGY",
+      "tooltip": "Обігова пропозиція — це всі токени, крім розблокованих токенів, що належать ORIGYN Foundation.",
+      "nnsProposal": "Пропозиція NNS",
+      "totalLabel": "Загальний обіг OGY",
+      "notOwnedName": "OGY не в руках Foundation",
+      "notOwnedValue": "Кількість токенів в обігу, що не належать ORIGYN foundation.",
+      "ownedName": "OGY заблоковані в руках Foundation",
+      "ownedValue": "Кількість заблокованих токенів, що належать ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Резерв OGY Foundation",
+      "tooltip": "Загальна кількість токенів OGY, що належать ORIGYN foundation на всіх гаманцях.",
+      "totalLabel": "Загальна пропозиція Foundation",
+      "lockedName": "Заблоковано",
+      "lockedIntro": "Токени ORIGYN foundation, заблоковані у стейках або вестингах.",
+      "lockedStakes": "1) Стейки — токени, що генерують винагороди завдяки участі у голосуванні в управлінні.",
+      "lockedStakesNote": "Ці токени були заблоковані добровільно.",
+      "lockedVestings": "2) Вестинги — токени, що не отримують винагород і не можуть брати участь у голосуванні.",
+      "lockedVestingsNote": "Ці токени були заблоковані згідно з вашим контрактом з ORIGYN Foundation.",
+      "unlockedName": "Розблоковано",
+      "unlockedValue": "Розблоковані кошти, що належать ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "Казначейський рахунок ORIGYN (OTA)",
+      "networkRevenue": "Дохід мережі",
+      "tokenLogoAlt": "Логотип токена",
+      "tooltipOgy": "Дохід від мережевих послуг, що генерується через комісії за використання мережі ORIGYN (наприклад, за випуск чи передачу цифрових сертифікатів, карбування NFT тощо) та накопичується в OGY.",
+      "tooltipIcp": "Дохід від мережевих послуг, що генерується через комісії за використання мережі ORIGYN (наприклад, за випуск чи передачу цифрових сертифікатів, карбування NFT тощо) та накопичується в ICP."
+    },
+    "rewardAccount": {
+      "title": "Рахунок винагород ORIGYN (ORA)",
+      "balance": "Баланс ORA",
+      "year": "Рік",
+      "rewardPool": "Пул винагород",
+      "moreDetails": "Докладніше",
+      "tooltipStake": "Власники токенів можуть стейкати свої OGY та отримувати винагороди, беручи участь в управлінні.",
+      "tooltipSeed": "Винагороди надходитимуть з рахунку винагород ORIGYN, який ORIGYN наповнить одним мільярдом OGY.",
+      "tooltipPool": "Пул винагород складається з 250 мільйонів OGY у перший рік і зменшуватиметься вдвічі кожні два роки, щоб заохочувати та винагороджувати ранніх і довгострокових учасників екосистеми.",
+      "description": "ORIGYN внесе один мільярд OGY на рахунок винагород ORIGYN (ORA) на користь власників, що стейкають і голосують. Пул винагород складається з 250 мільйонів OGY у перший рік і зменшуватиметься вдвічі кожні два роки, щоб заохочувати та винагороджувати ранніх і довгострокових учасників екосистеми."
+    },
+    "tokenDistribution": {
+      "title": "Розподіл токенів"
+    },
+    "transactionHistory": {
+      "title": "Історія транзакцій",
+      "showAll": "Показати все"
+    },
+    "topTransfers": {
+      "value": "Вартість",
+      "time": "Час",
+      "ogyLogoAlt": "Логотип OGY",
+      "noDataAvailable": "Немає доступних даних."
+    },
+    "totalSupply": {
+      "title": "Загальна пропозиція OGY",
+      "tooltipTitle": "Загальна кількість доступних токенів OGY.",
+      "tooltipLine1": "Це включає обігову пропозицію та пропозицію під контролем ORIGYN Foundation.",
+      "tooltipLine2": "Станом на 18 вересня ORIGYN перейшов на повністю дефляційну модель, що означає відсутність нових карбованих токенів.",
+      "chartLabel": "Загальна пропозиція"
+    },
+    "totalBurned": {
+      "title": "Усього спалено OGY",
+      "tooltipTitle": "Загальна кількість спалених токенів OGY.",
+      "tooltipLine1": "Ці токени були повністю спалені та більше недоступні.",
+      "tooltipLine2": "Токени можуть бути спалені з різних причин, наприклад, через комісії за карбування сертифікатів, комісії за мережеві послуги чи комісії за мережеві транзакції.",
+      "chartLabel": "Усього спалено"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Щоденно",
+      "weekly": "Щотижня",
+      "monthly": "Щомісяця",
+      "yearly": "Щороку",
+      "all": "Усе"
+    },
+    "stakingOverview": {
+      "title": "Огляд стейкінгу",
+      "totalTokensInStakes": "Усього токенів у стейках",
+      "tooltip": "Токени, заблоковані у стейках.",
+      "stakedTokens": "Застейкані токени",
+      "stakedTokensLegend": "ЗАСТЕЙКАНІ ТОКЕНИ"
+    },
+    "usersActivity": {
+      "title": "Огляд користувачів",
+      "protocolUsers": "Користувачі протоколу OGY",
+      "protocolUsersTooltip": "Унікальні власники токенів OGY",
+      "protocolUsersLegend": "КОРИСТУВАЧІ ПРОТОКОЛУ OGY",
+      "activeWallets": "Активні гаманці OGY",
+      "activeWalletsTooltip": "Активні власники токенів OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Огляд управління",
+      "welcome": "Ласкаво просимо до управління ORIGYN!",
+      "description": "Власники токенів OGY можуть безпосередньо впливати на мережу ORIGYN, стейкаючи свої OGY та голосуючи за пропозиції. Беручи участь у процесі прийняття рішень, ці власники застейканих токенів отримують винагороди.",
+      "learnMore": "Дізнатися більше"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Стейк і голосування",
+        "description": "Впливайте на мережу ORIGYN, стейкаючи OGY та голосуючи за пропозиції."
+      },
+      "earnRewards": {
+        "title": "Отримуйте винагороди",
+        "description": "Беріть участь у процесі прийняття рішень, щоб отримувати винагороди."
+      },
+      "governCollectively": {
+        "title": "Керуйте спільно",
+        "description": "Залучайтеся та впливайте на мережу як спільну екосистему."
+      }
+    },
+    "tokensSection": {
+      "title": "Токени в управлінні",
+      "paragraph1": "Власники токенів OGY можуть безпосередньо впливати на мережу ORIGYN, стейкаючи свої OGY та голосуючи за пропозиції.",
+      "paragraph2": "Беручи участь у процесі прийняття рішень, ці власники застейканих токенів отримують винагороди та керують спільно й демократично.",
+      "learnMoreOgy": "Дізнатися більше про OGY"
+    },
+    "sections": {
+      "proposals": "Пропозиції",
+      "neurons": "Нейрони"
+    },
+    "votingParticipation": {
+      "title": "Участь у голосуванні",
+      "chartLabel": "Участь %",
+      "legendLabel": "УЧАСТЬ %",
+      "period": {
+        "weekly": "Щотижня",
+        "monthly": "Щомісяця",
+        "yearly": "Щороку"
+      },
+      "lastParticipation": {
+        "label": "Остання участь у голосуванні",
+        "tooltip": "Відсоток участі в останньому голосуванні."
+      },
+      "averageParticipation": {
+        "label": "Середня участь у голосуванні",
+        "tooltip": "Середній відсоток участі в голосуванні з часом."
+      },
+      "averagePower": {
+        "label": "Середня сила голосу",
+        "tooltip": "Середня сила голосу серед усіх учасників."
+      }
+    },
+    "estimateRewards": {
+      "title": "Оцініть ваші винагороди",
+      "lockDuration": "Тривалість блокування",
+      "participants": "учасників",
+      "lockedForAtLeast": "наразі заблоковано щонайменше на",
+      "lockedFor": "наразі заблоковано на",
+      "year": "рік",
+      "years": "років"
+    },
+    "kpi": {
+      "metric": "Показник",
+      "rewardBaseCurrentYear": "База винагород за поточний рік",
+      "dailyVotingRewards": "Щоденні винагороди за голосування",
+      "totalVotingPower": "Загальна сила голосу",
+      "overallVotingParticipation": "Загальна участь у голосуванні"
+    },
+    "total": {
+      "titleTooltip": "Усі токени, що знаходяться в канистрі управління. Ці токени можуть бути у стані вестингу, стейкінгу, незастейкані або незатребувані.",
+      "totalLabel": "Усього токенів в управлінні",
+      "locked": {
+        "name": "Заблоковано",
+        "tooltip": "Токени, заблоковані в управлінні."
+      },
+      "unlocked": {
+        "name": "Розблоковано",
+        "tooltip": "Токени, розблоковані в управлінні, які можна вивести та торгувати в будь-який час."
+      },
+      "accumulatedRewards": {
+        "name": "Накопичені винагороди",
+        "tooltip": "Винагороди, що зараховані користувачам, але ще не затребувані."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Пропозиції",
+      "viewProposal": "Переглянути пропозицію",
+      "columns": {
+        "id": "ID",
+        "title": "Заголовок",
+        "proposed": "Запропоновано",
+        "timeRemaining": "Залишилось часу",
+        "topic": "Тема",
+        "status": "Статус",
+        "view": "Переглянути"
+      }
+    },
+    "details": {
+      "category": "Управління",
+      "proposalNumber": "Пропозиція №",
+      "proposal": "Пропозиція",
+      "titleLoading": "Завантаження заголовка пропозиції…",
+      "payloadLoading": "Завантаження деталей пропозиції…",
+      "posted": "Опубліковано",
+      "topic": "Тема",
+      "moreInfo": "Докладніше",
+      "totalVotes": "Усього голосів",
+      "adopt": "ПРИЙНЯТИ",
+      "reject": "ВІДХИЛИТИ",
+      "vote": "Голосувати"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Нейрони",
+      "viewNeuron": "Переглянути нейрон",
+      "columns": {
+        "id": "ID",
+        "state": "Стан",
+        "stakedOgy": "Застейкані OGY",
+        "dissolveDelay": "Затримка розпуску",
+        "age": "Вік",
+        "votingPower": "Сила голосу",
+        "view": "Переглянути"
+      }
+    },
+    "details": {
+      "category": "Нейрон",
+      "title": "Нейрон OGY",
+      "created": "Створено",
+      "stakedOgy": "Застейкані OGY",
+      "votingPower": "Сила голосу",
+      "dissolveDelay": "Затримка розпуску",
+      "age": "Вік",
+      "lifecycle": "Життєвий цикл нейрона",
+      "dateCreated": "Дата створення",
+      "autoStakeMaturity": "Авто-стейкінг зрілості",
+      "rewardsAndBonuses": "Винагороди та бонуси",
+      "stakedMaturity": "Застейкана зрілість",
+      "totalMaturity": "Загальна зрілість",
+      "ageBonus": "Бонус за вік",
+      "totalBonus": "Загальний бонус",
+      "dissolveDelayBonus": "Бонус за затримку розпуску"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Історія транзакцій",
+      "searchFor": "Шукати:",
+      "or": "або",
+      "searchPlaceholder": "Пошук елемента",
+      "noResults": "Результатів не знайдено",
+      "resultBlock": "Блок",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Деталі транзакції",
+      "hash": "Хеш",
+      "fetchError": "Помилка отримання однієї транзакції!",
+      "mintingAccount": "Рахунок карбування",
+      "fee": "Комісія",
+      "memo": "Примітка",
+      "none": "Немає"
+    },
+    "accountDetails": {
+      "title": "Рахунок OGY",
+      "id": "ID",
+      "owner": "Власник",
+      "subaccount": "Субрахунок",
+      "defaultSubaccount": "Немає (типовий субрахунок)",
+      "historicalMaxBalance": "Історичний максимальний баланс",
+      "genesisBalance": "Початковий баланс",
+      "period": {
+        "monthly": "Щомісяця",
+        "quarterly": "Щокварталу",
+        "yearly": "Щороку",
+        "lifetime": "За весь час"
+      },
+      "empty": {
+        "title": "Поки що немає транзакцій",
+        "description": "Цей рахунок не має історії транзакцій. Щойно він надішле або отримає OGY, активність з’явиться тут."
+      },
+      "balanceHistory": {
+        "title": "Історія балансу",
+        "currentBalance": "Поточний баланс",
+        "currentBalanceInfo": "Поточний баланс рахунку.",
+        "legend": "Баланс OGY"
+      },
+      "overview": {
+        "title": "Огляд транзакцій",
+        "totalLabel": "Загальна сума",
+        "totalSent": "Усього надіслано",
+        "totalSentInfo": "Загальна сума, надіслана principal.",
+        "totalReceived": "Усього отримано",
+        "totalReceivedInfo": "Загальна сума, отримана principal."
+      }
+    },
+    "flow": {
+      "title": "Потік транзакцій",
+      "searchPlaceholder": "Пошук транзакцій…",
+      "clearSearch": "Очистити пошук",
+      "loadError": "Не вдалося завантажити дані транзакцій. Будь ласка, спробуйте ще раз.",
+      "noMatch": "Жодна транзакція не відповідає цьому пошуку.",
+      "transactions": "транзакцій",
+      "out": "Вихідні",
+      "in": "Вхідні",
+      "total": "Усього",
+      "legend": {
+        "outTransaction": "Вихідна транзакція",
+        "inTransaction": "Вхідна транзакція",
+        "includesInitial": "Включає початкову транзакцію",
+        "rootAccount": "Кореневий рахунок",
+        "account": "Рахунок",
+        "fromRoot": "З транзакціями від кореня",
+        "toRoot": "З транзакціями до кореня",
+        "madeInitial": "Здійснив початкову транзакцію"
+      }
+    },
+    "kind": {
+      "mint": "Емісія",
+      "transfer": "Переказ",
+      "burn": "Спалення",
+      "approve": "Схвалення"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "З поверненням",
+      "value": "Вартість:",
+      "disconnectWallet": "Відключити гаманець",
+      "accountLabel": "Рахунок",
+      "manageDescription": "Керуйте своїм гаманцем OGY, винагородами та активністю стейкінгу.",
+      "walletBalance": "Баланс гаманця",
+      "myAccount": "Мій рахунок",
+      "howToTopUp": "Як поповнити?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "Доступні OGY",
+      "transactionHistory": "Історія транзакцій",
+      "transfer": "Переказ",
+      "transferOgy": "Переказати OGY",
+      "transferDescription": "Ви можете надсилати OGY лише з доступного балансу.",
+      "max": "Макс",
+      "recipientAddress": "Адреса отримувача",
+      "amountReceived": "Отримана сума",
+      "ogyLogoAlt": "Логотип OGY",
+      "transactionFee": "Комісія за транзакцію (стягується з джерела)",
+      "currentBalance": "Поточний баланс:",
+      "transferProcessing": "Переказ обробляється",
+      "transferProcessingHint": "Це може зайняти кілька секунд",
+      "transferSuccess": "Переказ виконано успішно!",
+      "transferError": "Помилка переказу!",
+      "errors": {
+        "amountRequired": "Сума обов’язкова.",
+        "amountExceedsBalance": "Сума не повинна перевищувати ваш баланс.",
+        "amountBelowFee": "Сума не повинна бути меншою за комісію за транзакцію.",
+        "amountNotPositive": "Сума має бути додатнім числом.",
+        "recipientRequired": "Адреса отримувача обов’язкова.",
+        "recipientInvalid": "Недійсна адреса отримувача."
+      }
+    },
+    "staked": {
+      "title": "Застейкані OGY",
+      "stake": "Стейк",
+      "stakeOgy": "Застейкати OGY",
+      "stakeDescription": "Щоб застейкати OGY, вам потрібно перейти на нашу платформу NNS.",
+      "warningNotConnected": "Схоже, ви не підключені до",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Вам потрібен",
+      "warningToConnect": "для підключення до платформи NNS.",
+      "goToNns": "Перейти до NNS"
+    },
+    "rewards": {
+      "title": "Винагороди за стейкінг",
+      "claimAll": "Отримати всі",
+      "claimDisabledReason": "Отримання винагород підтримується лише для типового рахунку principal.",
+      "aboutToClaim": "Ви збираєтеся отримати",
+      "sentToPrincipal": "Винагороди буде надіслано на ваш principal",
+      "pending": "Отримання всіх винагород...",
+      "successTitle": "Усі винагороди успішно отримано!",
+      "errorTitle": "Помилка отримання всіх винагород!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Ми перемикаємо реєстр та управління",
+        "description": "Управління та реєстр ORIGYN були оновлені до SNS. Щоб продовжувати брати участь в управлінні ORIGYN та використовувати OGY, вам потрібно мігрувати свої токени OGY."
+      },
+      "howToSwap": "Як обміняти токени",
+      "disclosureToggle": "Усе ще маєте старі токени OGY? Обміняйте зараз!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Крок 1: Вивести зі старого управління",
+          "subtitle": "Якщо ви раніше брали участь в управлінні OGY, вам потрібно вивести ці токени, перш ніж ви зможете їх обміняти."
+        },
+        "deposit": {
+          "title": "Крок 2: Внести на ваш рахунок",
+          "subtitle": "Якщо у вас є токени поза панеллю OGY, внесіть їх на ваш account-id, перш ніж почати їх обмінювати."
+        },
+        "swap": {
+          "title": "Крок 3: Обміняти токени",
+          "subtitle": "Обміняйте застарілий токен OGY на новий реєстр."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Баланс застарілих OGY"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Перейти до застарілої панелі OGY"
+      },
+      "swap": {
+        "disabledOisy": "Обмін застарілих OGY недоступний з OISY. Підключіться через Internet Identity або Plug, щоб обміняти ваші застарілі OGY.",
+        "disabledSubAccount": "Обмін застарілих OGY підтримується лише з типового рахунку principal.",
+        "swapYourTokens": "Обміняйте ваші токени",
+        "automaticDisabled": "Автоматичний обмін вимкнено. Вам потрібно отримати схвалення запиту на обмін, мін. сума — 50 000 OGY.",
+        "form": {
+          "title": "Обміняйте ваші OGY на новий реєстр",
+          "description": "Внесіть будь-які токени OGY, які ви бажаєте обміняти, на ваш account id",
+          "tokensAvailable": "Токени, доступні для обміну",
+          "youWillReceivePrefix": "Ви отримаєте",
+          "youWillReceiveSuffix": "токенів OGY на новому реєстрі.",
+          "swapPrefix": "Обміняти",
+          "swapSuffix": "токенів OGY"
+        },
+        "pending": {
+          "takesTime": "Процес обміну може зайняти трохи часу.",
+          "doNotRefresh": "Не оновлюйте сторінку!",
+          "swapping": "Обмін токенів..."
+        },
+        "success": {
+          "title": "Обмін виконано успішно!",
+          "walletBalance": "Баланс гаманця на новому реєстрі",
+          "myAccount": "Мій рахунок"
+        },
+        "error": {
+          "title": "Помилка обміну токенів!",
+          "retry": "Повторити"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Мої нейрони OGY",
+        "idHeader": "ID",
+        "stakedAmount": "Застейкана сума",
+        "claimAmount": "Сума до отримання",
+        "emptyTitle": "Поки що немає нейронів",
+        "emptyDescription": "Додайте нейрон OGY, щоб почати відстежувати стейк, силу голосу та винагороди тут.",
+        "addFirstNeuron": "Додайте ваш перший нейрон"
+      },
+      "add": {
+        "button": "Додати нейрон",
+        "title": "Додати нейрон",
+        "description": "Додайте цей principal як гарячу клавішу на кожному нейроні OGY, яким ви хочете тут керувати.",
+        "needHotkey": "Потрібно додати гарячу клавішу?",
+        "openNns": "Відкрити додаток NNS"
+      },
+      "claim": {
+        "button": "Отримати",
+        "disabledReason": "Отримання винагород підтримується лише для типового рахунку principal.",
+        "aboutToClaim": "Ви збираєтеся отримати",
+        "sentToPrincipal": "Винагороди буде надіслано на ваш principal",
+        "pending": "Отримання винагороди...",
+        "successTitle": "Винагороду успішно отримано!",
+        "errorTitle": "Помилка отримання винагороди!",
+        "retry": "Повторити"
+      },
+      "remove": {
+        "title": "Видалити нейрон",
+        "description": "Щоб видалити цей нейрон, вам потрібно видалити ваш principal зі списку гарячих клавіш вашого нейрона."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Адреса",
+      "governanceBalance": "Баланс управління",
+      "stakedTokens": "Застейкані токени",
+      "ledgerBalance": "Баланс реєстру",
+      "weightInTotalSupply": "Вага в загальній пропозиції"
+    }
+  },
+  "recovery": {
+    "title": "Відновити ваші токени",
+    "description": "Панель OGY підтримує лише токен OGY. Якщо ви випадково надіслали сюди інші токени, ви можете відновити їх, виконавши наведені нижче кроки.",
+    "chooseToken": "Виберіть токен",
+    "loginRequired": "Щоб зібрати ваші токени, ви маєте увійти в систему.",
+    "transfer": {
+      "icpLogoAlt": "Логотип ICP",
+      "ledgerCanister": "Канистра реєстру:",
+      "transferIcp": "Переказати ICP",
+      "availableBalanceNote": "Ви можете надсилати ICP лише з доступного балансу.",
+      "amountRequired": "Сума обов’язкова.",
+      "amountExceedsBalance": "Сума не повинна перевищувати ваш баланс.",
+      "amountPositive": "Сума має бути додатнім числом.",
+      "amountBelowFee": "Сума має бути більшою або дорівнювати комісіям за транзакцію.",
+      "recipientAddress": "Адреса отримувача",
+      "recipientAddressRequired": "Адреса отримувача обов’язкова.",
+      "invalidRecipientAddress": "Недійсна адреса отримувача.",
+      "amountReceived": "Отримана сума",
+      "transactionFee": "Комісія за транзакцію",
+      "currentBalance": "Поточний баланс:",
+      "processing": "Переказ обробляється",
+      "processingNote": "Це може зайняти кілька секунд",
+      "success": "Переказ виконано успішно!",
+      "error": "Помилка переказу!"
+    }
+  },
+  "support": {
+    "category": "Підтримка",
+    "title": "Створити запит",
+    "titleSubmitted": "Запит надіслано",
+    "successTitle": "Запит до підтримки створено",
+    "successMessage": "Ми зв’яжемося з вами за наданою адресою електронної пошти.",
+    "submitAnother": "Надіслати інший запит",
+    "intro": "Опишіть вашу проблему та як ми можемо з вами зв’язатися.",
+    "form": {
+      "name": "Ім’я",
+      "email": "Контактна електронна пошта",
+      "emailRequired": "Адреса електронної пошти обов’язкова",
+      "emailInvalid": "Недійсна адреса електронної пошти",
+      "principal": "Principal гаманця",
+      "invalidPrincipal": "Недійсна адреса отримувача.",
+      "description": "Опис",
+      "descriptionPlaceholder": "Розкажіть нам, що відбувається…",
+      "descriptionRequired": "Будь ласка, опишіть вашу проблему"
+    },
+    "submitError": "Щось пішло не так. Будь ласка, спробуйте ще раз.",
+    "submitting": "Надсилання…"
+  },
+  "explorer": {
+    "title": "Оглядач",
+    "searchPlaceholder": "Пошук за заголовком, емітентом, principal або ID токена",
+    "openFilters": "Відкрити фільтри",
+    "checkOnBlockchain": "Перевірити в блокчейні",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Рекомендовані сертифікати",
+      "art": "Сертифікати мистецтва",
+      "gold": "Золоті сертифікати"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Копіювати в буфер обміну",
+    "toggleRelativeTime": "Перемкнути відносний час. Поточне відображення:",
+    "collapseRow": "Згорнути рядок",
+    "expandRow": "Розгорнути рядок",
+    "searchPlaceholder": "Пошук елементів...",
+    "sortAscending": "Сортувати за зростанням",
+    "sortDescending": "Сортувати за спаданням",
+    "linesPerPage": "Рядків на сторінці",
+    "page": "Сторінка",
+    "pageOf": "з",
+    "previousPage": "Попередня сторінка",
+    "nextPage": "Наступна сторінка"
+  },
+  "auth": {
+    "connect": "Підключити",
+    "disconnect": "Відключити",
+    "connectWallet": {
+      "title": "Підключіть ваш гаманець",
+      "subtitle": "Виберіть, як ви хочете увійти"
+    },
+    "install": "Встановити",
+    "newToIc": "Новачок в Internet Computer?",
+    "learnMore": "Дізнатися більше",
+    "connecting": {
+      "title": "Підключення...",
+      "subtitle": "Схваліть запит у вашому гаманці"
+    },
+    "sessionExpired": {
+      "title": "Сесія завершена",
+      "description": "Сесія вашого гаманця більше недійсна. Підключіться знову, щоб продовжити."
+    },
+    "reconnect": "Підключитися знову",
+    "error": {
+      "connectionCancelled": "Підключення скасовано. Будь ласка, спробуйте ще раз.",
+      "connectionFailed": "Не вдалося підключити гаманець. Будь ласка, спробуйте ще раз."
+    }
+  },
+  "warning": {
+    "badge": "НОВЕ",
+    "ledgerSwitch": "ми перемикаємо реєстр, вам потрібно обміняти ваші OGY на нові"
+  },
+  "calculator": {
+    "header": {
+      "title": "Калькулятор вартості",
+      "description": "Скористайтеся калькулятором ORIGYN, щоб оцінити вартість Вашого унікального сертифіката з усіма даними on-chain"
+    },
+    "plan": {
+      "title": "Сплануйте карбування",
+      "description": "Вкажіть, скільки об'єктів Ви завантажуєте і що саме.",
+      "itemsLabel": "Скільки об'єктів?",
+      "uploadingLabel": "Що Ви завантажуєте?",
+      "knowExactSize": "Знаєте точний розмір?",
+      "totalUploadSize": "Загальний розмір завантаження",
+      "usePreset": "Використати попередньо задане значення",
+      "combinedSize": "Сукупний розмір усіх файлів по всіх об'єктах.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB кожен"
+        },
+        "iphone": {
+          "label": "Фото",
+          "hint": "3 MB кожне"
+        },
+        "dslr": {
+          "label": "Студійне фото",
+          "hint": "20 MB кожне"
+        },
+        "video": {
+          "label": "Коротке відео",
+          "hint": "1 GB кожне"
+        },
+        "video1hr": {
+          "label": "Довге відео",
+          "hint": "60 GB кожне"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Оцінка в реальному часі",
+      "titleRefreshing": "Оновлення оцінки",
+      "description": "Оновлюється автоматично під час зміни налаштувань.",
+      "ogyEquivalent": "Еквівалент OGY",
+      "ogySpotRate": "Поточний курс OGY",
+      "itemSingular": "Об'єкт",
+      "itemPlural": "Об'єктів",
+      "upload": "Завантаження"
+    },
+    "breakdown": {
+      "title": "Деталізація вартості",
+      "baseFee": "Базова комісія за карбування",
+      "storageFee": "Комісія за зберігання",
+      "items": "Об'єкти",
+      "uploadSize": "Розмір завантаження"
+    },
+    "bytesUnit": "байтів"
+  }
+}

@@ -6,11 +6,14 @@ import BalanceCard from "@components/account/BalanceCard";
 import Transfer from "./transfer/Transfer";
 import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 const ACTION_BUTTON_CLASS =
   "h-12 w-full !px-[25px] !py-0 text-[14px] leading-[48px] transition-colors hover:bg-charcoal2";
 
 const AvailableOGY = () => {
+  const t = useT();
+  const lp = useLocalePath();
   const { accountId } = useWallet();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -28,13 +31,15 @@ const AvailableOGY = () => {
 
   return (
     <BalanceCard
-      title="Available OGY"
+      title={t("account.available.title")}
       headerAction={
         <Link
-          to={`/transaction-history/transactions/accounts/${accountId}#transaction-history-table`}
+          to={lp(
+            `/transaction-history/transactions/accounts/${accountId}#transaction-history-table`
+          )}
           className="font-medium text-xs leading-none text-accent"
         >
-          Transaction history
+          {t("account.available.transactionHistory")}
         </Link>
       }
       balance={balanceOGY?.string.balance}
@@ -45,7 +50,7 @@ const AvailableOGY = () => {
       action={
         <>
           <Button className={ACTION_BUTTON_CLASS} onClick={handleShow}>
-            Transfer
+            {t("account.available.transfer")}
           </Button>
           <Transfer show={show} handleClose={handleClose} />
         </>

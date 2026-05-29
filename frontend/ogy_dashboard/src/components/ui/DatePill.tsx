@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DateTime } from "luxon";
+import { useT } from "@i18n/LocaleContext";
 
 type DatePillProps = {
   millis?: number;
@@ -7,6 +8,7 @@ type DatePillProps = {
 };
 
 const DatePill = ({ millis, iso }: DatePillProps) => {
+  const t = useT();
   const [showRelative, setShowRelative] = useState(false);
 
   const dt =
@@ -25,7 +27,10 @@ const DatePill = ({ millis, iso }: DatePillProps) => {
   return (
     <button
       type="button"
-      aria-label={`Toggle relative time. Current display: ${label}`}
+      // Formatted date/time is a numeric cluster — keep it LTR so RTL bidi
+      // doesn't reorder the segments or float the comma.
+      dir="ltr"
+      aria-label={`${t("ui.toggleRelativeTime")} ${label}`}
       onClick={() => setShowRelative((r) => !r)}
       className="inline-flex rounded-full border border-border-strong bg-surface-2 px-3 py-1 text-xs font-semibold text-content/80 whitespace-nowrap cursor-pointer transition-colors hover:bg-surface-3 hover:text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
     >

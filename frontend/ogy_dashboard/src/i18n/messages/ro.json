@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Limbă",
+    "switchTo": "Comută la {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Se încarcă...",
+    "error": "Ceva nu a mers bine",
+    "retry": "Reîncearcă",
+    "cancel": "Anulează",
+    "confirm": "Confirmă",
+    "close": "Închide",
+    "back": "Înapoi",
+    "next": "Următorul",
+    "previous": "Anteriorul",
+    "save": "Salvează",
+    "submit": "Trimite",
+    "copy": "Copiază",
+    "copied": "Copiat",
+    "search": "Caută",
+    "viewAll": "Vezi tot",
+    "showMore": "Arată mai mult",
+    "showLess": "Arată mai puțin",
+    "amount": "Sumă",
+    "date": "Dată",
+    "type": "Tip",
+    "from": "De la",
+    "to": "Către",
+    "index": "Index",
+    "status": "Stare",
+    "total": "Total",
+    "balance": "Sold",
+    "yes": "Da",
+    "no": "Nu",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Panou de control",
+    "governance": "Guvernanță",
+    "transactionHistory": "Istoric tranzacții",
+    "calculator": "Calculator",
+    "openMainMenu": "Deschide meniul principal",
+    "closeMenu": "Închide meniul",
+    "openAccountOverview": "Deschide prezentarea contului",
+    "viewAccountOverview": "Vezi prezentarea contului",
+    "connectPrompt": "Conectează-ți portofelul pentru a gestiona tokenuri, a vota propuneri și a vedea istoricul tranzacțiilor.",
+    "connectWallet": "Conectează portofelul",
+    "disconnect": "Deconectează"
+  },
+  "notFound": {
+    "title": "Pagina nu a fost găsită",
+    "description": "Ne pare rău, nu am putut găsi pagina pe care o cauți.",
+    "backHome": "Înapoi la pagina principală"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Panou OGY",
+      "home": "Acasă",
+      "circulation": "Circulație",
+      "governance": "Guvernanță",
+      "revenue": "Venituri",
+      "rewards": "Recompense",
+      "distribution": "Distribuție",
+      "governanceDashboard": "Panou de guvernanță OGY",
+      "transactionExplorer": "Explorator de tranzacții OGY"
+    },
+    "learn": {
+      "heading": "Află mai multe despre OGY Tokenomics și ORIGYN",
+      "tokenomicsDeck": "Prezentare OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Standardul NFT ORIGYN",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "Site-ul ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Suport",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Contact"
+    },
+    "support": {
+      "contactSupport": "Contactează suportul",
+      "recoverTokens": "Recuperează-ți tokenurile"
+    },
+    "disclaimer": "*ORIGYN Foundation nu poate fi trasă la răspundere pentru nicio pierdere, furt sau însușire ilegală a tokenurilor OGY care apare în legătură cu procesul de schimb. În plus, ORIGYN Foundation nu poate fi trasă la răspundere pentru neexecutarea schimbului dacă partea implicată nu respectă cu strictețe condițiile specificate de ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "ANALIZĂ OGY",
+      "title": "Explorează panoul",
+      "subtitle": "Interacționează fără încredere cu web3 dApps, DAOs, NFTs, DeFi și multe altele."
+    },
+    "cta": {
+      "loginToSwap": "Autentifică-te pentru a schimba tokenuri",
+      "myAccount": "Contul meu"
+    },
+    "governanceStaking": {
+      "title": "Prezentare generală a staking-ului de guvernanță"
+    },
+    "cardError": {
+      "couldNotLoad": "Nu s-a putut încărca",
+      "descriptionLine1": "Am întâmpinat o problemă la preluarea acestei valori.",
+      "descriptionLine2": "Te rugăm să încerci din nou într-o clipă."
+    },
+    "emptyState": {
+      "noDataFor": "Nicio dată pentru",
+      "description": "Nu există nimic de afișat în acest moment."
+    },
+    "circulationState": {
+      "title": "Starea de circulație a OGY",
+      "tooltip": "Oferta în circulație reprezintă toate tokenurile, cu excepția tokenurilor deblocate deținute de ORIGYN Foundation.",
+      "nnsProposal": "Propunere NNS",
+      "totalLabel": "Total circulație OGY",
+      "notOwnedName": "OGY care nu se află în posesia Fundației",
+      "notOwnedValue": "Cantitatea de tokenuri în circulație care nu sunt deținute de ORIGYN foundation.",
+      "ownedName": "OGY blocate în posesia Fundației",
+      "ownedValue": "Cantitatea de tokenuri blocate deținute de ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Rezerva ORIGYN Foundation OGY",
+      "tooltip": "Cantitatea totală de tokenuri OGY deținute de ORIGYN foundation în toate portofelele.",
+      "totalLabel": "Total ofertă a Fundației",
+      "lockedName": "Blocate",
+      "lockedIntro": "Tokenuri ORIGYN foundation blocate în staking sau vesting.",
+      "lockedStakes": "1) Staking - tokenuri care generează recompense datorită participării la votul de guvernanță.",
+      "lockedStakesNote": "Aceste tokenuri au fost blocate voluntar.",
+      "lockedVestings": "2) Vesting - tokenuri care nu primesc nicio recompensă și nu pot participa la vot.",
+      "lockedVestingsNote": "Aceste tokenuri au fost blocate prin contractul tău cu ORIGYN Foundation.",
+      "unlockedName": "Deblocate",
+      "unlockedValue": "Fonduri deblocate deținute de ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Venituri din rețea",
+      "tokenLogoAlt": "Logo token",
+      "tooltipOgy": "Venituri din utilitatea rețelei generate prin comisioane pentru utilizarea rețelei ORIGYN (de ex., pentru emiterea sau transferul de certificate digitale, mintarea de NFTs etc.) și acumulate în OGY.",
+      "tooltipIcp": "Venituri din utilitatea rețelei generate prin comisioane pentru utilizarea rețelei ORIGYN (de ex., pentru emiterea sau transferul de certificate digitale, mintarea de NFTs etc.) și acumulate în ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "Sold ORA",
+      "year": "An",
+      "rewardPool": "Fond de recompense",
+      "moreDetails": "Mai multe detalii",
+      "tooltipStake": "Deținătorii de tokenuri pot face staking cu OGY-ul lor și pot câștiga recompense participând la guvernanță.",
+      "tooltipSeed": "Recompensele vor proveni din ORIGYN Reward Account, pe care ORIGYN îl va alimenta cu un miliard de OGY.",
+      "tooltipPool": "Fondul de recompense constă din 250 de milioane de OGY în primul an și se va înjumătăți la fiecare doi ani pentru a stimula și recompensa contribuitorii timpurii și pe termen lung ai ecosistemului.",
+      "description": "ORIGYN va contribui cu un miliard de OGY către un ORIGYN Reward Account (ORA) în beneficiul deținătorilor care fac staking și votează. Fondul de recompense constă din 250 de milioane de OGY în primul an și se va înjumătăți la fiecare doi ani pentru a stimula și recompensa contribuitorii timpurii și pe termen lung ai ecosistemului."
+    },
+    "tokenDistribution": {
+      "title": "Distribuția tokenurilor"
+    },
+    "transactionHistory": {
+      "title": "Istoric tranzacții",
+      "showAll": "Arată tot"
+    },
+    "topTransfers": {
+      "value": "Valoare",
+      "time": "Timp",
+      "ogyLogoAlt": "Logo OGY",
+      "noDataAvailable": "Nu există date disponibile."
+    },
+    "totalSupply": {
+      "title": "Ofertă totală OGY",
+      "tooltipTitle": "Cantitatea totală de tokenuri OGY disponibile.",
+      "tooltipLine1": "Aceasta include oferta în circulație și oferta aflată sub controlul ORIGYN Foundation.",
+      "tooltipLine2": "Începând cu 18 septembrie, ORIGYN a trecut la un model complet deflaționist, ceea ce înseamnă că nu se mai mintează tokenuri noi.",
+      "chartLabel": "Ofertă totală"
+    },
+    "totalBurned": {
+      "title": "Total OGY ars",
+      "tooltipTitle": "Cantitatea totală de tokenuri OGY arse.",
+      "tooltipLine1": "Aceste tokenuri au fost arse complet și nu mai sunt disponibile.",
+      "tooltipLine2": "Tokenurile pot fi arse din diferite motive, de exemplu comisioane de mintare a certificatelor, comisioane pentru utilitatea rețelei sau comisioane pentru tranzacțiile din rețea.",
+      "chartLabel": "Total ars"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Zilnic",
+      "weekly": "Săptămânal",
+      "monthly": "Lunar",
+      "yearly": "Anual",
+      "all": "Tot"
+    },
+    "stakingOverview": {
+      "title": "Prezentare generală staking",
+      "totalTokensInStakes": "Total tokenuri în staking",
+      "tooltip": "Tokenuri care sunt blocate în staking.",
+      "stakedTokens": "Tokenuri în staking",
+      "stakedTokensLegend": "TOKENURI ÎN STAKING"
+    },
+    "usersActivity": {
+      "title": "Prezentare generală utilizatori",
+      "protocolUsers": "Utilizatori ai protocolului OGY",
+      "protocolUsersTooltip": "Deținători unici de tokenuri OGY",
+      "protocolUsersLegend": "UTILIZATORI AI PROTOCOLULUI OGY",
+      "activeWallets": "Portofele OGY active",
+      "activeWalletsTooltip": "Deținători activi de tokenuri OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Prezentare generală guvernanță",
+      "welcome": "Bine ai venit la guvernanța ORIGYN!",
+      "description": "Deținătorii de tokenuri OGY pot influența direct rețeaua ORIGYN prin staking-ul OGY-ului lor și votarea propunerilor. Participând la procesul decizional, acești deținători de tokenuri în staking câștigă recompense.",
+      "learnMore": "Află mai multe"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Staking și vot",
+        "description": "Influențează rețeaua ORIGYN prin staking-ul OGY și votarea propunerilor."
+      },
+      "earnRewards": {
+        "title": "Câștigă recompense",
+        "description": "Participă la procesul decizional pentru a câștiga recompense."
+      },
+      "governCollectively": {
+        "title": "Guvernează colectiv",
+        "description": "Implică-te și influențează rețeaua ca un ecosistem colaborativ."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokenuri în guvernanță",
+      "paragraph1": "Deținătorii de tokenuri OGY pot influența direct rețeaua ORIGYN prin staking-ul OGY-ului lor și votarea propunerilor.",
+      "paragraph2": "Participând la procesul decizional, acești deținători de tokenuri în staking câștigă recompense și guvernează colectiv și democratic.",
+      "learnMoreOgy": "Află mai multe despre OGY"
+    },
+    "sections": {
+      "proposals": "Propuneri",
+      "neurons": "Neuroni"
+    },
+    "votingParticipation": {
+      "title": "Participare la vot",
+      "chartLabel": "Participare %",
+      "legendLabel": "PARTICIPARE %",
+      "period": {
+        "weekly": "Săptămânal",
+        "monthly": "Lunar",
+        "yearly": "Anual"
+      },
+      "lastParticipation": {
+        "label": "Ultima participare la vot",
+        "tooltip": "Procentul de participare la ultimul eveniment de vot."
+      },
+      "averageParticipation": {
+        "label": "Participare medie la vot",
+        "tooltip": "Procentul mediu de participare la vot în timp."
+      },
+      "averagePower": {
+        "label": "Putere medie de vot",
+        "tooltip": "Puterea medie de vot a tuturor participanților."
+      }
+    },
+    "estimateRewards": {
+      "title": "Estimează-ți recompensele",
+      "lockDuration": "Durată de blocare",
+      "participants": "participanți",
+      "lockedForAtLeast": "blocat în prezent pentru cel puțin",
+      "lockedFor": "blocat în prezent pentru",
+      "year": "an",
+      "years": "ani"
+    },
+    "kpi": {
+      "metric": "Indicator",
+      "rewardBaseCurrentYear": "Baza recompenselor pentru anul curent",
+      "dailyVotingRewards": "Recompense zilnice pentru vot",
+      "totalVotingPower": "Putere totală de vot",
+      "overallVotingParticipation": "Participare totală la vot"
+    },
+    "total": {
+      "titleTooltip": "Toate tokenurile care se află în canisterul de guvernanță. Aceste tokenuri pot fi în stare de vesting, staking, fără staking sau nerevendicate.",
+      "totalLabel": "Total tokenuri în guvernanță",
+      "locked": {
+        "name": "Blocate",
+        "tooltip": "Tokenuri care sunt blocate în guvernanță."
+      },
+      "unlocked": {
+        "name": "Deblocate",
+        "tooltip": "Tokenuri care sunt deblocate în guvernanță și pot fi retrase și tranzacționate în orice moment."
+      },
+      "accumulatedRewards": {
+        "name": "Recompense acumulate",
+        "tooltip": "Recompense care sunt contabilizate pentru utilizatori, dar care nu au fost încă revendicate."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Propuneri",
+      "viewProposal": "Vezi propunerea",
+      "columns": {
+        "id": "ID",
+        "title": "Titlu",
+        "proposed": "Propusă",
+        "timeRemaining": "Timp rămas",
+        "topic": "Subiect",
+        "status": "Stare",
+        "view": "Vezi"
+      }
+    },
+    "details": {
+      "category": "Guvernanță",
+      "proposalNumber": "Propunerea #",
+      "proposal": "Propunere",
+      "titleLoading": "Se încarcă titlul propunerii…",
+      "payloadLoading": "Se încarcă detaliile propunerii…",
+      "posted": "Postată",
+      "topic": "Subiect",
+      "moreInfo": "Mai multe informații",
+      "totalVotes": "Total voturi",
+      "adopt": "ADOPTĂ",
+      "reject": "RESPINGE",
+      "vote": "Votează"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuroni",
+      "viewNeuron": "Vezi neuronul",
+      "columns": {
+        "id": "ID",
+        "state": "Stare",
+        "stakedOgy": "OGY în staking",
+        "dissolveDelay": "Întârziere de dizolvare",
+        "age": "Vârstă",
+        "votingPower": "Putere de vot",
+        "view": "Vezi"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "Neuron OGY",
+      "created": "Creat",
+      "stakedOgy": "OGY în staking",
+      "votingPower": "Putere de vot",
+      "dissolveDelay": "Întârziere de dizolvare",
+      "age": "Vârstă",
+      "lifecycle": "Ciclul de viață al neuronului",
+      "dateCreated": "Data creării",
+      "autoStakeMaturity": "Staking automat al maturității",
+      "rewardsAndBonuses": "Recompense și bonusuri",
+      "stakedMaturity": "Maturitate în staking",
+      "totalMaturity": "Maturitate totală",
+      "ageBonus": "Bonus de vârstă",
+      "totalBonus": "Bonus total",
+      "dissolveDelayBonus": "Bonus pentru întârzierea de dizolvare"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Istoric tranzacții",
+      "searchFor": "Caută:",
+      "or": "sau",
+      "searchPlaceholder": "Caută un element",
+      "noResults": "Niciun rezultat găsit",
+      "resultBlock": "Bloc",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Detalii tranzacție",
+      "hash": "Hash",
+      "fetchError": "Eroare la preluarea unei tranzacții!",
+      "mintingAccount": "Cont de mintare",
+      "fee": "Comision",
+      "memo": "Notă",
+      "none": "Niciunul"
+    },
+    "accountDetails": {
+      "title": "Cont OGY",
+      "id": "ID",
+      "owner": "Proprietar",
+      "subaccount": "Subcont",
+      "defaultSubaccount": "Niciunul (subcont implicit)",
+      "historicalMaxBalance": "Sold maxim istoric",
+      "genesisBalance": "Sold genesis",
+      "period": {
+        "monthly": "Lunar",
+        "quarterly": "Trimestrial",
+        "yearly": "Anual",
+        "lifetime": "Pe toată durata"
+      },
+      "empty": {
+        "title": "Încă nu există tranzacții",
+        "description": "Acest cont nu are istoric de tranzacții. Odată ce trimite sau primește OGY, activitatea va apărea aici."
+      },
+      "balanceHistory": {
+        "title": "Istoric sold",
+        "currentBalance": "Sold curent",
+        "currentBalanceInfo": "Soldul curent al contului.",
+        "legend": "Sold OGY"
+      },
+      "overview": {
+        "title": "Prezentare generală tranzacții",
+        "totalLabel": "Sumă totală",
+        "totalSent": "Total trimis",
+        "totalSentInfo": "Suma totală trimisă de principal.",
+        "totalReceived": "Total primit",
+        "totalReceivedInfo": "Suma totală primită de principal."
+      }
+    },
+    "flow": {
+      "title": "Fluxul tranzacțiilor",
+      "searchPlaceholder": "Caută tranzacții…",
+      "clearSearch": "Șterge căutarea",
+      "loadError": "Nu s-au putut încărca datele tranzacției. Te rugăm să încerci din nou.",
+      "noMatch": "Nicio tranzacție nu se potrivește cu această căutare.",
+      "transactions": "tranzacții",
+      "out": "Ieșire",
+      "in": "Intrare",
+      "total": "Total",
+      "legend": {
+        "outTransaction": "Tranzacție de ieșire",
+        "inTransaction": "Tranzacție de intrare",
+        "includesInitial": "Include tranzacția inițială",
+        "rootAccount": "Cont rădăcină",
+        "account": "Cont",
+        "fromRoot": "Cu tranzacții de la rădăcină",
+        "toRoot": "Cu tranzacții către rădăcină",
+        "madeInitial": "A efectuat tranzacția inițială"
+      }
+    },
+    "kind": {
+      "mint": "Emitere",
+      "transfer": "Transfer",
+      "burn": "Ardere",
+      "approve": "Aprobare"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Bine ai revenit",
+      "value": "Valoare:",
+      "disconnectWallet": "Deconectează portofelul",
+      "accountLabel": "Cont",
+      "manageDescription": "Gestionează-ți portofelul OGY, recompensele și activitatea de staking.",
+      "walletBalance": "Sold portofel",
+      "myAccount": "Contul meu",
+      "howToTopUp": "Cum alimentez?"
+    },
+    "principal": {
+      "accountIdLabel": "ID cont:",
+      "principalIdLabel": "ID principal:"
+    },
+    "available": {
+      "title": "OGY disponibil",
+      "transactionHistory": "Istoric tranzacții",
+      "transfer": "Transferă",
+      "transferOgy": "Transferă OGY",
+      "transferDescription": "Poți trimite OGY doar din soldul tău disponibil.",
+      "max": "Max",
+      "recipientAddress": "Adresa destinatarului",
+      "amountReceived": "Sumă primită",
+      "ogyLogoAlt": "Logo OGY",
+      "transactionFee": "Comision de tranzacție (facturat la sursă)",
+      "currentBalance": "Sold curent:",
+      "transferProcessing": "Transferul este în curs de procesare",
+      "transferProcessingHint": "Acest lucru poate dura câteva secunde",
+      "transferSuccess": "Transferul a reușit!",
+      "transferError": "Eroare la transfer!",
+      "errors": {
+        "amountRequired": "Suma este obligatorie.",
+        "amountExceedsBalance": "Suma nu trebuie să depășească soldul tău.",
+        "amountBelowFee": "Suma nu trebuie să fie mai mică decât comisionul de tranzacție.",
+        "amountNotPositive": "Suma trebuie să fie un număr pozitiv.",
+        "recipientRequired": "Adresa destinatarului este obligatorie.",
+        "recipientInvalid": "Adresă de destinatar nevalidă."
+      }
+    },
+    "staked": {
+      "title": "OGY în staking",
+      "stake": "Staking",
+      "stakeOgy": "Staking OGY",
+      "stakeDescription": "Pentru a face staking cu OGY trebuie să accesezi platforma noastră NNS.",
+      "warningNotConnected": "Se pare că nu ești conectat cu",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Ai nevoie de un",
+      "warningToConnect": "pentru a te conecta la platforma NNS.",
+      "goToNns": "Mergi la NNS"
+    },
+    "rewards": {
+      "title": "Recompense din staking",
+      "claimAll": "Revendică tot",
+      "claimDisabledReason": "Revendicarea recompenselor este acceptată doar pentru contul implicit al principalului.",
+      "aboutToClaim": "Ești pe cale să revendici",
+      "sentToPrincipal": "Recompensele vor fi trimise către principalul tău",
+      "pending": "Se revendică toate recompensele...",
+      "successTitle": "Revendicarea tuturor recompenselor a reușit!",
+      "errorTitle": "Eroare la revendicarea tuturor recompenselor!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Schimbăm ledgerul și guvernanța",
+        "description": "Guvernanța și ledgerul ORIGYN au fost actualizate la un SNS. Pentru a continua să participi la guvernanța ORIGYN și să utilizezi OGY, trebuie să îți migrezi tokenurile OGY."
+      },
+      "howToSwap": "Cum schimb tokenurile",
+      "disclosureToggle": "Mai ai tokenuri OGY vechi? Schimbă-le acum!",
+      "accountId": "ID cont:",
+      "steps": {
+        "withdraw": {
+          "title": "Pasul 1: Retrage din vechea guvernanță",
+          "subtitle": "Dacă ai participat anterior la guvernanța OGY, trebuie să retragi acele tokenuri înainte de a le putea schimba."
+        },
+        "deposit": {
+          "title": "Pasul 2: Depune în contul tău",
+          "subtitle": "Dacă ai tokenuri în afara panoului OGY, depune-le în account-id-ul tău înainte de a începe să le schimbi."
+        },
+        "swap": {
+          "title": "Pasul 3: Schimbă tokenurile",
+          "subtitle": "Schimbă vechiul token OGY cu noul ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Sold OGY vechi"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Mergi la vechiul panou OGY"
+      },
+      "swap": {
+        "disabledOisy": "Schimbul de OGY vechi nu este disponibil cu OISY. Conectează-te cu Internet Identity sau Plug pentru a-ți schimba OGY-ul vechi.",
+        "disabledSubAccount": "Schimbul de OGY vechi este acceptat doar din contul implicit al principalului.",
+        "swapYourTokens": "Schimbă-ți tokenurile",
+        "automaticDisabled": "Schimbul automat a fost dezactivat. Va trebui să îți obții aprobarea cererii de schimb, suma minimă fiind de 50 000 OGY.",
+        "form": {
+          "title": "Schimbă-ți OGY-ul cu noul ledger",
+          "description": "Depune tokenurile OGY pe care dorești să le schimbi în account-id-ul tău",
+          "tokensAvailable": "Tokenuri disponibile pentru schimb",
+          "youWillReceivePrefix": "Vei primi",
+          "youWillReceiveSuffix": "tokenuri OGY pe noul ledger.",
+          "swapPrefix": "Schimbă",
+          "swapSuffix": "tokenuri OGY"
+        },
+        "pending": {
+          "takesTime": "Procesul de schimb poate dura puțin.",
+          "doNotRefresh": "Nu reîmprospăta pagina!",
+          "swapping": "Se schimbă tokenurile..."
+        },
+        "success": {
+          "title": "Schimbul a reușit!",
+          "walletBalance": "Sold portofel pe noul ledger",
+          "myAccount": "Contul meu"
+        },
+        "error": {
+          "title": "Eroare la schimbul tokenurilor!",
+          "retry": "Reîncearcă"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Neuronii mei OGY",
+        "idHeader": "ID",
+        "stakedAmount": "Sumă în staking",
+        "claimAmount": "Sumă de revendicat",
+        "emptyTitle": "Încă nu există neuroni",
+        "emptyDescription": "Adaugă un neuron OGY pentru a începe să urmărești aici staking-ul, puterea de vot și recompensele.",
+        "addFirstNeuron": "Adaugă primul tău neuron"
+      },
+      "add": {
+        "button": "Adaugă neuron",
+        "title": "Adaugă neuron",
+        "description": "Adaugă acest principal ca hotkey pe fiecare neuron OGY pe care vrei să îl gestionezi aici.",
+        "needHotkey": "Trebuie să adaugi un hotkey?",
+        "openNns": "Deschide aplicația NNS"
+      },
+      "claim": {
+        "button": "Revendică",
+        "disabledReason": "Revendicarea recompenselor este acceptată doar pentru contul implicit al principalului.",
+        "aboutToClaim": "Ești pe cale să revendici",
+        "sentToPrincipal": "Recompensele vor fi trimise către principalul tău",
+        "pending": "Se revendică recompensa...",
+        "successTitle": "Revendicarea recompensei a reușit!",
+        "errorTitle": "Eroare la revendicarea recompensei!",
+        "retry": "Reîncearcă"
+      },
+      "remove": {
+        "title": "Elimină neuronul",
+        "description": "Pentru a elimina acest neuron, trebuie să îți elimini principalul din lista de hotkey-uri ale neuronului tău."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adresă",
+      "governanceBalance": "Sold guvernanță",
+      "stakedTokens": "Tokenuri în staking",
+      "ledgerBalance": "Sold ledger",
+      "weightInTotalSupply": "Pondere în oferta totală"
+    }
+  },
+  "recovery": {
+    "title": "Recuperează-ți tokenurile",
+    "description": "Panoul OGY acceptă doar tokenul OGY. În cazul în care ai trimis din greșeală alte tokenuri aici, le poți recupera urmând pașii de mai jos.",
+    "chooseToken": "Alege token",
+    "loginRequired": "Pentru a-ți colecta tokenurile trebuie să fii autentificat.",
+    "transfer": {
+      "icpLogoAlt": "Logo ICP",
+      "ledgerCanister": "Canister ledger:",
+      "transferIcp": "Transferă ICP",
+      "availableBalanceNote": "Poți trimite ICP doar din soldul tău disponibil.",
+      "amountRequired": "Suma este obligatorie.",
+      "amountExceedsBalance": "Suma nu trebuie să depășească soldul tău.",
+      "amountPositive": "Suma trebuie să fie un număr pozitiv.",
+      "amountBelowFee": "Suma trebuie să fie mai mare sau egală cu comisioanele de tranzacție.",
+      "recipientAddress": "Adresa destinatarului",
+      "recipientAddressRequired": "Adresa destinatarului este obligatorie.",
+      "invalidRecipientAddress": "Adresă de destinatar nevalidă.",
+      "amountReceived": "Sumă primită",
+      "transactionFee": "Comision de tranzacție",
+      "currentBalance": "Sold curent:",
+      "processing": "Transferul este în curs de procesare",
+      "processingNote": "Acest lucru poate dura câteva secunde",
+      "success": "Transferul a reușit!",
+      "error": "Eroare la transfer!"
+    }
+  },
+  "support": {
+    "category": "Suport",
+    "title": "Creează un tichet",
+    "titleSubmitted": "Tichet trimis",
+    "successTitle": "Tichet de suport creat",
+    "successMessage": "Te vom contacta la adresa de e-mail furnizată.",
+    "submitAnother": "Trimite alt tichet",
+    "intro": "Descrie problema ta și cum te putem contacta.",
+    "form": {
+      "name": "Nume",
+      "email": "E-mail de contact",
+      "emailRequired": "Adresa de e-mail este obligatorie",
+      "emailInvalid": "Adresă de e-mail nevalidă",
+      "principal": "Principal portofel",
+      "invalidPrincipal": "Adresă de destinatar nevalidă.",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Spune-ne ce se întâmplă…",
+      "descriptionRequired": "Te rugăm să îți descrii problema"
+    },
+    "submitError": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
+    "submitting": "Se trimite…"
+  },
+  "explorer": {
+    "title": "Explorator",
+    "searchPlaceholder": "Caută după titlu, emitent, principal sau ID token",
+    "openFilters": "Deschide filtrele",
+    "checkOnBlockchain": "Verifică pe blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Certificate recomandate",
+      "art": "Certificate de artă",
+      "gold": "Certificate de aur"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Copiază în clipboard",
+    "toggleRelativeTime": "Comută timpul relativ. Afișaj curent:",
+    "collapseRow": "Restrânge rândul",
+    "expandRow": "Extinde rândul",
+    "searchPlaceholder": "Caută elemente...",
+    "sortAscending": "Sortează crescător",
+    "sortDescending": "Sortează descrescător",
+    "linesPerPage": "Linii pe pagină",
+    "page": "Pagină",
+    "pageOf": "din",
+    "previousPage": "Pagina anterioară",
+    "nextPage": "Pagina următoare"
+  },
+  "auth": {
+    "connect": "Conectează",
+    "disconnect": "Deconectează",
+    "connectWallet": {
+      "title": "Conectează-ți portofelul",
+      "subtitle": "Alege cum dorești să te autentifici"
+    },
+    "install": "Instalează",
+    "newToIc": "Nou pe Internet Computer?",
+    "learnMore": "Află mai multe",
+    "connecting": {
+      "title": "Se conectează...",
+      "subtitle": "Aprobă cererea în portofelul tău"
+    },
+    "sessionExpired": {
+      "title": "Sesiune expirată",
+      "description": "Sesiunea portofelului tău nu mai este validă. Reconectează-te pentru a continua."
+    },
+    "reconnect": "Reconectează",
+    "error": {
+      "connectionCancelled": "Conectare anulată. Te rugăm să încerci din nou.",
+      "connectionFailed": "Conectarea portofelului a eșuat. Te rugăm să încerci din nou."
+    }
+  },
+  "warning": {
+    "badge": "NOU",
+    "ledgerSwitch": "schimbăm ledgerul, trebuie să îți schimbi OGY-ul cu cel nou"
+  },
+  "calculator": {
+    "header": {
+      "title": "Calculator de costuri",
+      "description": "Utilizați calculatorul ORIGYN pentru a estima costul certificatului dumneavoastră unic cu toate datele on-chain"
+    },
+    "plan": {
+      "title": "Planificați emiterea",
+      "description": "Spuneți-ne câte articole aveți și ce încărcați.",
+      "itemsLabel": "Câte articole?",
+      "uploadingLabel": "Ce încărcați?",
+      "knowExactSize": "Cunoașteți dimensiunea exactă?",
+      "totalUploadSize": "Dimensiune totală de încărcare",
+      "usePreset": "Utilizați o configurație predefinită",
+      "combinedSize": "Dimensiunea combinată a tuturor fișierelor pentru toate articolele.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB fiecare"
+        },
+        "iphone": {
+          "label": "Fotografie",
+          "hint": "3 MB fiecare"
+        },
+        "dslr": {
+          "label": "Fotografie de studio",
+          "hint": "20 MB fiecare"
+        },
+        "video": {
+          "label": "Videoclip scurt",
+          "hint": "1 GB fiecare"
+        },
+        "video1hr": {
+          "label": "Videoclip lung",
+          "hint": "60 GB fiecare"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimare în timp real",
+      "titleRefreshing": "Se actualizează estimarea",
+      "description": "Se actualizează automat pe măsură ce modificați configurația.",
+      "ogyEquivalent": "Echivalent OGY",
+      "ogySpotRate": "Curs spot OGY",
+      "itemSingular": "Articol",
+      "itemPlural": "Articole",
+      "upload": "Încărcare"
+    },
+    "breakdown": {
+      "title": "Detaliere costuri",
+      "baseFee": "Taxă de bază pentru emitere",
+      "storageFee": "Taxă de stocare",
+      "items": "Articole",
+      "uploadSize": "Dimensiune încărcare"
+    },
+    "bytesUnit": "octeți"
+  }
+}

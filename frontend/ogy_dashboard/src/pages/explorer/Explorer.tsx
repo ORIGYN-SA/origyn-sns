@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Carousel, Search } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import {
   BlockchainIcon,
   CheckmarkCircleIcon,
@@ -7,9 +8,9 @@ import {
 } from "@components/ui/icons";
 
 const SECTIONS = [
-  { title: "Featured Certificates", count: 8 },
-  { title: "Art Certificates", count: 8 },
-  { title: "Gold Certificates", count: 8 },
+  { id: "featured", titleKey: "explorer.sections.featured", count: 8 },
+  { id: "art", titleKey: "explorer.sections.art", count: 8 },
+  { id: "gold", titleKey: "explorer.sections.gold", count: 8 },
 ];
 
 const LazyImage = ({
@@ -54,8 +55,10 @@ const LazyImage = ({
   );
 };
 
-const PlaceholderCard = ({ seed }: { seed: string }) => (
-  <div className="w-[253px] h-[343px] rounded-xl border border-border-strong bg-surface pt-2 pr-2 pb-4 pl-2 flex flex-col gap-2.5">
+const PlaceholderCard = ({ seed }: { seed: string }) => {
+  const t = useT();
+  return (
+  <div className="w-[253px] h-[343px] rounded-xl border border-border-strong bg-surface pt-2 pe-2 pb-4 ps-2 flex flex-col gap-2.5">
     <div className="relative h-[229px] w-full">
       <LazyImage
         src={`https://cataas.com/cat?_=${encodeURIComponent(seed)}`}
@@ -63,7 +66,7 @@ const PlaceholderCard = ({ seed }: { seed: string }) => (
       />
       <div
         aria-label="OGY"
-        className="absolute top-2 right-2 h-[30px] w-[30px] rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
+        className="absolute top-2 end-2 h-[30px] w-[30px] rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
       >
         <img src="/ogy_logo.svg" alt="" className="h-[15px] w-[15px]" />
       </div>
@@ -72,12 +75,12 @@ const PlaceholderCard = ({ seed }: { seed: string }) => (
       <div className="flex flex-col gap-0.5">
         <div className="flex items-center gap-1 text-muted">
           <span className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase">
-            Suzanne sys
+            {t("explorer.sampleIssuer")}
           </span>
           <CheckmarkCircleIcon />
         </div>
         <h3 className="font-semibold text-[15px] leading-snug text-content">
-          The Midsummer Night Dream
+          {t("explorer.sampleTitle")}
         </h3>
       </div>
       <button
@@ -86,14 +89,17 @@ const PlaceholderCard = ({ seed }: { seed: string }) => (
       >
         <BlockchainIcon />
         <span className="font-normal text-[10px] leading-none">
-          Check on blockchain
+          {t("explorer.checkOnBlockchain")}
         </span>
       </button>
     </div>
   </div>
-);
+  );
+};
 
-const HeroCard = ({ seed }: { seed: string }) => (
+const HeroCard = ({ seed }: { seed: string }) => {
+  const t = useT();
+  return (
   <div className="relative w-[520px] sm:w-[640px] h-[360px] rounded-2xl overflow-hidden border border-border-strong bg-surface group">
     <LazyImage
       src={`https://cataas.com/cat?_=${encodeURIComponent(seed)}`}
@@ -103,20 +109,20 @@ const HeroCard = ({ seed }: { seed: string }) => (
 
     <div
       aria-label="OGY"
-      className="absolute top-3 right-3 h-9 w-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
+      className="absolute top-3 end-3 h-9 w-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
     >
       <img src="/ogy_logo.svg" alt="" className="h-[18px] w-[18px]" />
     </div>
 
-    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-2">
+    <div className="absolute bottom-0 start-0 end-0 p-5 flex flex-col gap-2">
       <div className="flex items-center gap-1 text-white/80">
         <span className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase">
-          Suzanne sys
+          {t("explorer.sampleIssuer")}
         </span>
         <CheckmarkCircleIcon />
       </div>
       <h3 className="font-extrabold text-[26px] sm:text-[30px] leading-tight tracking-[-0.02em] text-white">
-        The Midsummer Night Dream
+        {t("explorer.sampleTitle")}
       </h3>
       <button
         type="button"
@@ -124,32 +130,34 @@ const HeroCard = ({ seed }: { seed: string }) => (
       >
         <BlockchainIcon />
         <span className="font-medium text-[11px] leading-none">
-          Check on blockchain
+          {t("explorer.checkOnBlockchain")}
         </span>
       </button>
     </div>
   </div>
-);
+  );
+};
 
 export const Explorer = () => {
+  const t = useT();
   return (
     <div className="max-w-[1440px] mx-auto py-8 px-6 sm:py-16">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
           <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
-            Explorer
+            {t("explorer.title")}
           </h1>
         </div>
 
         <Search
           id="search-explorer"
-          placeholder="Search by title, issuer, principal or token ID"
+          placeholder={t("explorer.searchPlaceholder")}
           className="w-full max-w-2xl mt-4"
           actions={
             <button
               type="button"
-              aria-label="Open filters"
-              className="mr-1 p-1 text-content hover:text-muted transition-colors"
+              aria-label={t("explorer.openFilters")}
+              className="me-1 p-1 text-content hover:text-muted transition-colors"
             >
               <FilterIcon />
             </button>
@@ -158,18 +166,18 @@ export const Explorer = () => {
       </div>
 
       <div className="mt-16 flex flex-col gap-16">
-        {SECTIONS.map(({ title, count }, index) => (
-          <section key={title}>
+        {SECTIONS.map(({ id, titleKey, count }, index) => (
+          <section key={id}>
             <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
-              {title}
+              {t(titleKey)}
             </h2>
             <Carousel>
               {Array.from({ length: count }).map((_, i) => (
                 <Carousel.Item key={i}>
                   {index === 0 ? (
-                    <HeroCard seed={`${title}-${i}`} />
+                    <HeroCard seed={`${id}-${i}`} />
                   ) : (
-                    <PlaceholderCard seed={`${title}-${i}`} />
+                    <PlaceholderCard seed={`${id}-${i}`} />
                   )}
                 </Carousel.Item>
               ))}

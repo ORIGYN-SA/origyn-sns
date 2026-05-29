@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.38] - 2026-05-29
+
+#### Added
+
+- Added dashboard translations and locale-aware routing.
+
 ### [1.0.37] - 2026-05-27
 
 #### Changed

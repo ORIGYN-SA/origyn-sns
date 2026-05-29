@@ -3,8 +3,10 @@ import BalanceCard from "@components/account/BalanceCard";
 import StakeOGY from "./stake-ogy/StakeOGY";
 import useNeurons from "@hooks/neurons/useNeuronsOwner";
 import useFetchBalanceOGYUSD from "@hooks/accounts/useFetchBalanceOGYUSD";
+import { useT } from "@i18n/LocaleContext";
 
 const StakedOGY = () => {
+  const t = useT();
   const { principalId: owner } = useWallet();
   const { stakedOGY } = useNeurons({ owner, limit: 0 });
   const {
@@ -18,7 +20,7 @@ const StakedOGY = () => {
 
   return (
     <BalanceCard
-      title="Staked OGY"
+      title={t("account.staked.title")}
       balance={stakedOGY.string.totalStakedOGY ?? undefined}
       isBalanceLoading={isBalanceLoading}
       usd={stakedOGYUSD}

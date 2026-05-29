@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "语言",
+    "switchTo": "切换到 {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "出现错误",
+    "retry": "重试",
+    "cancel": "取消",
+    "confirm": "确认",
+    "close": "关闭",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "save": "保存",
+    "submit": "提交",
+    "copy": "复制",
+    "copied": "已复制",
+    "search": "搜索",
+    "viewAll": "查看全部",
+    "showMore": "显示更多",
+    "showLess": "收起",
+    "amount": "金额",
+    "date": "日期",
+    "type": "类型",
+    "from": "从",
+    "to": "至",
+    "index": "索引",
+    "status": "状态",
+    "total": "总计",
+    "balance": "余额",
+    "yes": "是",
+    "no": "否",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "仪表盘",
+    "governance": "治理",
+    "transactionHistory": "交易历史",
+    "calculator": "计算器",
+    "openMainMenu": "打开主菜单",
+    "closeMenu": "关闭菜单",
+    "openAccountOverview": "打开账户概览",
+    "viewAccountOverview": "查看账户概览",
+    "connectPrompt": "连接您的钱包以管理代币、对提案投票并查看您的交易历史。",
+    "connectWallet": "连接钱包",
+    "disconnect": "断开连接"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "抱歉，我们找不到您要查找的页面。",
+    "backHome": "返回首页"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY 仪表盘",
+      "home": "首页",
+      "circulation": "流通",
+      "governance": "治理",
+      "revenue": "收入",
+      "rewards": "奖励",
+      "distribution": "分配",
+      "governanceDashboard": "OGY 治理仪表盘",
+      "transactionExplorer": "OGY 交易浏览器"
+    },
+    "learn": {
+      "heading": "了解更多关于 OGY Tokenomics 和 ORIGYN 的信息",
+      "tokenomicsDeck": "OGY Tokenomics 演示文稿",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT 标准",
+      "tokenomicsFaq": "ORIGYN Tokenomics 常见问题",
+      "website": "ORIGYN 官网",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "支持",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "联系"
+    },
+    "support": {
+      "contactSupport": "联系支持",
+      "recoverTokens": "找回您的代币"
+    },
+    "disclaimer": "*对于在兑换过程中发生的任何 OGY Tokens 损失、被盗或被挪用，ORIGYN Foundation 概不负责。此外，如果相关方未严格遵守 ORIGYN Foundation 规定的条件，导致兑换无法执行，ORIGYN Foundation 亦不承担任何责任。"
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY 分析",
+      "title": "探索仪表盘",
+      "subtitle": "以无需信任的方式与 web3 dApps、DAOs、NFTs、DeFi 等进行交互。"
+    },
+    "cta": {
+      "loginToSwap": "登录以兑换代币",
+      "myAccount": "我的账户"
+    },
+    "governanceStaking": {
+      "title": "治理质押概览"
+    },
+    "cardError": {
+      "couldNotLoad": "无法加载",
+      "descriptionLine1": "获取此指标时遇到问题。",
+      "descriptionLine2": "请稍后重试。"
+    },
+    "emptyState": {
+      "noDataFor": "暂无数据",
+      "description": "目前没有可显示的内容。"
+    },
+    "circulationState": {
+      "title": "OGY 流通状态",
+      "tooltip": "流通供应量是指除 ORIGYN Foundation 持有的已解锁代币之外的所有代币。",
+      "nnsProposal": "NNS 提案",
+      "totalLabel": "OGY 总流通量",
+      "notOwnedName": "不在 Foundation 手中的 OGY",
+      "notOwnedValue": "不归 ORIGYN foundation 所有的流通代币数量。",
+      "ownedName": "锁定在 Foundation 手中的 OGY",
+      "ownedValue": "归 ORIGYN foundation 所有的锁定代币数量。"
+    },
+    "foundationReserve": {
+      "title": "OGY ORIGYN Foundation 储备",
+      "tooltip": "ORIGYN foundation 在所有钱包中持有的 OGY 代币总量。",
+      "totalLabel": "Foundation 总供应量",
+      "lockedName": "已锁定",
+      "lockedIntro": "ORIGYN foundation 锁定在质押或归属中的代币。",
+      "lockedStakes": "1) 质押 - 通过参与治理投票而产生奖励的代币。",
+      "lockedStakesNote": "这些代币是自愿锁定的。",
+      "lockedVestings": "2) 归属 - 不接收任何奖励且无法参与投票的代币。",
+      "lockedVestingsNote": "这些代币根据您与 ORIGYN Foundation 的合同被锁定。",
+      "unlockedName": "已解锁",
+      "unlockedValue": "ORIGYN foundation 持有的已解锁资金。"
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN 国库账户 (OTA)",
+      "networkRevenue": "网络收入",
+      "tokenLogoAlt": "代币标志",
+      "tooltipOgy": "通过使用 ORIGYN 网络（例如发行或转移数字证书、铸造 NFTs 等）的费用所产生并以 OGY 累积的网络实用收入。",
+      "tooltipIcp": "通过使用 ORIGYN 网络（例如发行或转移数字证书、铸造 NFTs 等）的费用所产生并以 ICP 累积的网络实用收入。"
+    },
+    "rewardAccount": {
+      "title": "ORIGYN 奖励账户 (ORA)",
+      "balance": "ORA 余额",
+      "year": "年",
+      "rewardPool": "奖励池",
+      "moreDetails": "更多详情",
+      "tooltipStake": "代币持有者可以质押其 OGY 并通过参与治理获得奖励。",
+      "tooltipSeed": "奖励将来自 ORIGYN 奖励账户，ORIGYN 将向其注入十亿 OGY。",
+      "tooltipPool": "奖励池在第一年由 2.5 亿 OGY 组成，此后每两年减半一次，以激励和奖励生态系统的早期及长期贡献者。",
+      "description": "ORIGYN 将向 ORIGYN 奖励账户 (ORA) 注入十亿 OGY，以惠及质押和投票的持有者。奖励池在第一年由 2.5 亿 OGY 组成，此后每两年减半一次，以激励和奖励生态系统的早期及长期贡献者。"
+    },
+    "tokenDistribution": {
+      "title": "代币分配"
+    },
+    "transactionHistory": {
+      "title": "交易历史",
+      "showAll": "显示全部"
+    },
+    "topTransfers": {
+      "value": "价值",
+      "time": "时间",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "暂无数据。"
+    },
+    "totalSupply": {
+      "title": "OGY 总供应量",
+      "tooltipTitle": "可用 OGY 代币的总量。",
+      "tooltipLine1": "这包括流通供应量以及 ORIGYN Foundation 控制下的供应量。",
+      "tooltipLine2": "自 9 月 18 日起，ORIGYN 切换为完全通缩模式，这意味着不再有新铸造的代币。",
+      "chartLabel": "总供应量"
+    },
+    "totalBurned": {
+      "title": "OGY 总销毁量",
+      "tooltipTitle": "已销毁 OGY 代币的总量。",
+      "tooltipLine1": "这些代币已被完全销毁，不再可用。",
+      "tooltipLine2": "代币可能因不同原因被销毁，例如证书铸造费、网络实用费或网络交易费。",
+      "chartLabel": "总销毁量"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "每日",
+      "weekly": "每周",
+      "monthly": "每月",
+      "yearly": "每年",
+      "all": "全部"
+    },
+    "stakingOverview": {
+      "title": "质押概览",
+      "totalTokensInStakes": "质押中的代币总量",
+      "tooltip": "锁定在质押中的代币。",
+      "stakedTokens": "已质押代币",
+      "stakedTokensLegend": "已质押代币"
+    },
+    "usersActivity": {
+      "title": "用户概览",
+      "protocolUsers": "OGY 协议用户",
+      "protocolUsersTooltip": "OGY 代币的独立持有者",
+      "protocolUsersLegend": "OGY 协议用户",
+      "activeWallets": "OGY 活跃钱包",
+      "activeWalletsTooltip": "OGY 代币的活跃持有者"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "治理概览",
+      "welcome": "欢迎来到 ORIGYN Governance！",
+      "description": "OGY 代币持有者可以通过质押其 OGY 并对提案投票来直接影响 ORIGYN Network。通过参与决策过程，这些质押代币持有者可获得奖励。",
+      "learnMore": "了解更多"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "质押与投票",
+        "description": "通过质押 OGY 并对提案投票来影响 ORIGYN Network。"
+      },
+      "earnRewards": {
+        "title": "赚取奖励",
+        "description": "参与决策过程以赚取奖励。"
+      },
+      "governCollectively": {
+        "title": "共同治理",
+        "description": "作为协作生态系统参与并影响网络。"
+      }
+    },
+    "tokensSection": {
+      "title": "治理中的代币",
+      "paragraph1": "OGY 代币持有者可以通过质押其 OGY 并对提案投票来直接影响 ORIGYN Network。",
+      "paragraph2": "通过参与决策过程，这些质押代币持有者可获得奖励，并以集体和民主的方式进行治理。",
+      "learnMoreOgy": "了解更多关于 OGY 的信息"
+    },
+    "sections": {
+      "proposals": "提案",
+      "neurons": "神经元"
+    },
+    "votingParticipation": {
+      "title": "投票参与度",
+      "chartLabel": "参与度 %",
+      "legendLabel": "参与度 %",
+      "period": {
+        "weekly": "每周",
+        "monthly": "每月",
+        "yearly": "每年"
+      },
+      "lastParticipation": {
+        "label": "最近一次投票参与度",
+        "tooltip": "最近一次投票活动的参与百分比。"
+      },
+      "averageParticipation": {
+        "label": "平均投票参与度",
+        "tooltip": "一段时间内的平均投票参与百分比。"
+      },
+      "averagePower": {
+        "label": "平均投票权重",
+        "tooltip": "所有参与者的平均投票权重。"
+      }
+    },
+    "estimateRewards": {
+      "title": "估算您的奖励",
+      "lockDuration": "锁定期",
+      "participants": "参与者",
+      "lockedForAtLeast": "当前至少锁定",
+      "lockedFor": "当前锁定",
+      "year": "年",
+      "years": "年"
+    },
+    "kpi": {
+      "metric": "指标",
+      "rewardBaseCurrentYear": "当前年度奖励基数",
+      "dailyVotingRewards": "每日投票奖励",
+      "totalVotingPower": "总投票权",
+      "overallVotingParticipation": "总体投票参与度"
+    },
+    "total": {
+      "titleTooltip": "治理容器中的所有代币。这些代币可能处于归属状态、质押状态、未质押或未领取状态。",
+      "totalLabel": "治理中的代币总量",
+      "locked": {
+        "name": "已锁定",
+        "tooltip": "锁定在治理中的代币。"
+      },
+      "unlocked": {
+        "name": "已解锁",
+        "tooltip": "在治理中已解锁的代币，可随时提取和交易。"
+      },
+      "accumulatedRewards": {
+        "name": "累积奖励",
+        "tooltip": "已为用户计算但尚未领取的奖励。"
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "提案",
+      "viewProposal": "查看提案",
+      "columns": {
+        "id": "ID",
+        "title": "标题",
+        "proposed": "提出时间",
+        "timeRemaining": "剩余时间",
+        "topic": "主题",
+        "status": "状态",
+        "view": "查看"
+      }
+    },
+    "details": {
+      "category": "治理",
+      "proposalNumber": "提案 #",
+      "proposal": "提案",
+      "titleLoading": "提案标题加载中…",
+      "payloadLoading": "正在加载提案详情…",
+      "posted": "发布时间",
+      "topic": "主题",
+      "moreInfo": "更多信息",
+      "totalVotes": "总票数",
+      "adopt": "采纳",
+      "reject": "拒绝",
+      "vote": "投票"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "神经元",
+      "viewNeuron": "查看神经元",
+      "columns": {
+        "id": "ID",
+        "state": "状态",
+        "stakedOgy": "已质押 OGY",
+        "dissolveDelay": "解散延迟",
+        "age": "年龄",
+        "votingPower": "投票权重",
+        "view": "查看"
+      }
+    },
+    "details": {
+      "category": "神经元",
+      "title": "OGY 神经元",
+      "created": "创建时间",
+      "stakedOgy": "已质押 OGY",
+      "votingPower": "投票权重",
+      "dissolveDelay": "解散延迟",
+      "age": "年龄",
+      "lifecycle": "神经元生命周期",
+      "dateCreated": "创建日期",
+      "autoStakeMaturity": "自动质押成熟度",
+      "rewardsAndBonuses": "奖励与加成",
+      "stakedMaturity": "已质押成熟度",
+      "totalMaturity": "总成熟度",
+      "ageBonus": "年龄加成",
+      "totalBonus": "总加成",
+      "dissolveDelayBonus": "解散延迟加成"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "交易历史",
+      "searchFor": "搜索：",
+      "or": "或",
+      "searchPlaceholder": "搜索项目",
+      "noResults": "未找到结果",
+      "resultBlock": "区块",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "交易详情",
+      "hash": "Hash",
+      "fetchError": "获取单笔交易出错！",
+      "mintingAccount": "铸造账户",
+      "fee": "手续费",
+      "memo": "备注",
+      "none": "无"
+    },
+    "accountDetails": {
+      "title": "OGY 账户",
+      "id": "ID",
+      "owner": "所有者",
+      "subaccount": "子账户",
+      "defaultSubaccount": "无（默认子账户）",
+      "historicalMaxBalance": "历史最高余额",
+      "genesisBalance": "创世余额",
+      "period": {
+        "monthly": "每月",
+        "quarterly": "每季度",
+        "yearly": "每年",
+        "lifetime": "全部时间"
+      },
+      "empty": {
+        "title": "暂无交易",
+        "description": "此账户没有交易历史。一旦它发送或接收 OGY，活动将显示在此处。"
+      },
+      "balanceHistory": {
+        "title": "余额历史",
+        "currentBalance": "当前余额",
+        "currentBalanceInfo": "当前账户余额。",
+        "legend": "OGY 余额"
+      },
+      "overview": {
+        "title": "交易概览",
+        "totalLabel": "总金额",
+        "totalSent": "发送总额",
+        "totalSentInfo": "该 principal 发送的总金额。",
+        "totalReceived": "接收总额",
+        "totalReceivedInfo": "该 principal 接收的总金额。"
+      }
+    },
+    "flow": {
+      "title": "交易流向",
+      "searchPlaceholder": "搜索交易…",
+      "clearSearch": "清除搜索",
+      "loadError": "无法加载交易数据。请重试。",
+      "noMatch": "没有交易与此搜索匹配。",
+      "transactions": "笔交易",
+      "out": "转出",
+      "in": "转入",
+      "total": "总计",
+      "legend": {
+        "outTransaction": "转出交易",
+        "inTransaction": "转入交易",
+        "includesInitial": "包含初始交易",
+        "rootAccount": "根账户",
+        "account": "账户",
+        "fromRoot": "包含来自根的交易",
+        "toRoot": "包含发往根的交易",
+        "madeInitial": "进行了初始交易"
+      }
+    },
+    "kind": {
+      "mint": "铸造",
+      "transfer": "转账",
+      "burn": "销毁",
+      "approve": "授权"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "欢迎回来",
+      "value": "价值：",
+      "disconnectWallet": "断开钱包连接",
+      "accountLabel": "账户",
+      "manageDescription": "管理您的 OGY 钱包、奖励和质押活动。",
+      "walletBalance": "钱包余额",
+      "myAccount": "我的账户",
+      "howToTopUp": "如何充值？"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "可用 OGY",
+      "transactionHistory": "交易历史",
+      "transfer": "转账",
+      "transferOgy": "转账 OGY",
+      "transferDescription": "您只能从可用余额中发送 OGY。",
+      "max": "最大",
+      "recipientAddress": "收款地址",
+      "amountReceived": "收到金额",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "交易手续费（由来源方支付）",
+      "currentBalance": "当前余额：",
+      "transferProcessing": "正在处理转账",
+      "transferProcessingHint": "这可能需要几秒钟",
+      "transferSuccess": "转账成功！",
+      "transferError": "转账出错！",
+      "errors": {
+        "amountRequired": "金额为必填项。",
+        "amountExceedsBalance": "金额不得超过您的余额。",
+        "amountBelowFee": "金额不得低于交易手续费。",
+        "amountNotPositive": "金额必须为正数。",
+        "recipientRequired": "收款地址为必填项。",
+        "recipientInvalid": "收款地址无效。"
+      }
+    },
+    "staked": {
+      "title": "已质押 OGY",
+      "stake": "质押",
+      "stakeOgy": "质押 OGY",
+      "stakeDescription": "要质押 OGY，您需要前往我们的 NNS 平台。",
+      "warningNotConnected": "您似乎尚未连接到",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "您需要一个",
+      "warningToConnect": "才能连接到 NNS 平台。",
+      "goToNns": "前往 NNS"
+    },
+    "rewards": {
+      "title": "质押奖励",
+      "claimAll": "领取全部",
+      "claimDisabledReason": "奖励领取仅支持 principal 默认账户。",
+      "aboutToClaim": "您即将领取",
+      "sentToPrincipal": "奖励将发送至您的 principal",
+      "pending": "正在领取所有奖励...",
+      "successTitle": "领取所有奖励成功！",
+      "errorTitle": "领取所有奖励出错！"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "我们正在切换账本和治理",
+        "description": "ORIGYN 治理和账本已升级为 SNS。为了继续参与 ORIGYN 治理并使用 OGY，您需要迁移您的 OGY 代币。"
+      },
+      "howToSwap": "如何兑换代币",
+      "disclosureToggle": "仍持有旧的 OGY 代币？立即兑换！",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "第 1 步：从旧治理中提取",
+          "subtitle": "如果您之前参与过 OGY 治理，您需要先提取这些代币才能兑换它们。"
+        },
+        "deposit": {
+          "title": "第 2 步：存入您的账户",
+          "subtitle": "如果您在 OGY 仪表盘之外持有任何代币，请先将它们存入您的 account-id，然后才能开始兑换它们。"
+        },
+        "swap": {
+          "title": "第 3 步：兑换代币",
+          "subtitle": "将旧版 OGY 代币兑换至新账本。"
+        }
+      },
+      "deposit": {
+        "legacyBalance": "旧版 OGY 余额"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "前往旧版 OGY 仪表盘"
+      },
+      "swap": {
+        "disabledOisy": "旧版 OGY 兑换无法通过 OISY 进行。请使用 Internet Identity 或 Plug 连接以兑换您的旧版 OGY。",
+        "disabledSubAccount": "旧版 OGY 兑换仅支持 principal 默认账户。",
+        "swapYourTokens": "兑换您的代币",
+        "automaticDisabled": "自动兑换已被禁用。您需要让兑换请求获得批准，最低金额为 50 000 OGY。",
+        "form": {
+          "title": "将您的 OGY 兑换至新账本",
+          "description": "将您希望兑换的任何 OGY 代币存入您的 account id",
+          "tokensAvailable": "可兑换的代币",
+          "youWillReceivePrefix": "您将收到",
+          "youWillReceiveSuffix": "新账本上的 OGY 代币。",
+          "swapPrefix": "兑换",
+          "swapSuffix": "OGY 代币"
+        },
+        "pending": {
+          "takesTime": "兑换过程可能需要一些时间。",
+          "doNotRefresh": "请勿刷新页面！",
+          "swapping": "正在兑换代币..."
+        },
+        "success": {
+          "title": "兑换成功！",
+          "walletBalance": "新账本上的钱包余额",
+          "myAccount": "我的账户"
+        },
+        "error": {
+          "title": "兑换代币出错！",
+          "retry": "重试"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "我的 OGY 神经元",
+        "idHeader": "ID",
+        "stakedAmount": "已质押金额",
+        "claimAmount": "领取金额",
+        "emptyTitle": "暂无神经元",
+        "emptyDescription": "添加一个 OGY 神经元，即可在此开始跟踪质押、投票权重和奖励。",
+        "addFirstNeuron": "添加您的第一个神经元"
+      },
+      "add": {
+        "button": "添加神经元",
+        "title": "添加神经元",
+        "description": "将此 principal 添加为您希望在此管理的每个 OGY 神经元的热键。",
+        "needHotkey": "需要添加热键？",
+        "openNns": "打开 NNS 应用"
+      },
+      "claim": {
+        "button": "领取",
+        "disabledReason": "奖励领取仅支持 principal 默认账户。",
+        "aboutToClaim": "您即将领取",
+        "sentToPrincipal": "奖励将发送至您的 principal",
+        "pending": "正在领取奖励...",
+        "successTitle": "领取奖励成功！",
+        "errorTitle": "领取奖励出错！",
+        "retry": "重试"
+      },
+      "remove": {
+        "title": "移除神经元",
+        "description": "为了移除此神经元，您需要从神经元的热键列表中移除您的 principal。"
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "地址",
+      "governanceBalance": "治理余额",
+      "stakedTokens": "已质押代币",
+      "ledgerBalance": "账本余额",
+      "weightInTotalSupply": "在总供应量中的权重"
+    }
+  },
+  "recovery": {
+    "title": "找回您的代币",
+    "description": "OGY 仪表盘仅支持 OGY 代币。如果您不小心将其他代币发送到此处，您可以按照以下步骤找回它们。",
+    "chooseToken": "选择代币",
+    "loginRequired": "为了领取您的代币，您必须登录。",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "账本容器：",
+      "transferIcp": "转账 ICP",
+      "availableBalanceNote": "您只能从可用余额中发送 ICP。",
+      "amountRequired": "金额为必填项。",
+      "amountExceedsBalance": "金额不得超过您的余额。",
+      "amountPositive": "金额必须为正数。",
+      "amountBelowFee": "金额必须大于或等于交易手续费。",
+      "recipientAddress": "收款地址",
+      "recipientAddressRequired": "收款地址为必填项。",
+      "invalidRecipientAddress": "收款地址无效。",
+      "amountReceived": "收到金额",
+      "transactionFee": "交易手续费",
+      "currentBalance": "当前余额：",
+      "processing": "正在处理转账",
+      "processingNote": "这可能需要几秒钟",
+      "success": "转账成功！",
+      "error": "转账出错！"
+    }
+  },
+  "support": {
+    "category": "支持",
+    "title": "创建工单",
+    "titleSubmitted": "工单已提交",
+    "successTitle": "支持工单已创建",
+    "successMessage": "我们将通过您提供的电子邮件地址跟进。",
+    "submitAnother": "提交另一张工单",
+    "intro": "描述您的问题以及我们可以如何联系您。",
+    "form": {
+      "name": "姓名",
+      "email": "联系电子邮件",
+      "emailRequired": "电子邮件地址为必填项",
+      "emailInvalid": "电子邮件地址无效",
+      "principal": "钱包 principal",
+      "invalidPrincipal": "收款地址无效。",
+      "description": "描述",
+      "descriptionPlaceholder": "告诉我们发生了什么…",
+      "descriptionRequired": "请描述您的问题"
+    },
+    "submitError": "出现错误。请重试。",
+    "submitting": "正在提交…"
+  },
+  "explorer": {
+    "title": "浏览器",
+    "searchPlaceholder": "按标题、发行方、principal 或 token ID 搜索",
+    "openFilters": "打开筛选器",
+    "checkOnBlockchain": "在区块链上查看",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "精选证书",
+      "art": "艺术证书",
+      "gold": "黄金证书"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "复制到剪贴板",
+    "toggleRelativeTime": "切换相对时间。当前显示：",
+    "collapseRow": "折叠行",
+    "expandRow": "展开行",
+    "searchPlaceholder": "搜索项目...",
+    "sortAscending": "升序排序",
+    "sortDescending": "降序排序",
+    "linesPerPage": "每页行数",
+    "page": "页",
+    "pageOf": "共",
+    "previousPage": "上一页",
+    "nextPage": "下一页"
+  },
+  "auth": {
+    "connect": "连接",
+    "disconnect": "断开连接",
+    "connectWallet": {
+      "title": "连接您的钱包",
+      "subtitle": "选择您希望的登录方式"
+    },
+    "install": "安装",
+    "newToIc": "初次接触 Internet Computer？",
+    "learnMore": "了解更多",
+    "connecting": {
+      "title": "正在连接...",
+      "subtitle": "请在您的钱包中批准请求"
+    },
+    "sessionExpired": {
+      "title": "会话已过期",
+      "description": "您的钱包会话已失效。请重新连接以继续。"
+    },
+    "reconnect": "重新连接",
+    "error": {
+      "connectionCancelled": "连接已取消。请重试。",
+      "connectionFailed": "钱包连接失败。请重试。"
+    }
+  },
+  "warning": {
+    "badge": "新",
+    "ledgerSwitch": "我们正在切换账本，您需要将您的 OGY 兑换为新的"
+  },
+  "calculator": {
+    "header": {
+      "title": "费用计算器",
+      "description": "使用 ORIGYN 计算器估算将您的所有数据完全上链后，生成唯一证书所需的费用"
+    },
+    "plan": {
+      "title": "规划您的铸造方案",
+      "description": "请告知我们您的资产数量及上传内容类型。",
+      "itemsLabel": "资产数量是多少？",
+      "uploadingLabel": "您将上传哪类内容？",
+      "knowExactSize": "已知确切文件大小？",
+      "totalUploadSize": "上传总大小",
+      "usePreset": "改用预设选项",
+      "combinedSize": "所有资产中每个文件的合计大小。",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "每份 250 KB"
+        },
+        "iphone": {
+          "label": "照片",
+          "hint": "每张 3 MB"
+        },
+        "dslr": {
+          "label": "专业照片",
+          "hint": "每张 20 MB"
+        },
+        "video": {
+          "label": "短视频",
+          "hint": "每段 1 GB"
+        },
+        "video1hr": {
+          "label": "长视频",
+          "hint": "每段 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "实时估算",
+      "titleRefreshing": "正在刷新估算",
+      "description": "随您调整配置自动更新。",
+      "ogyEquivalent": "OGY 等值",
+      "ogySpotRate": "OGY 即期汇率",
+      "itemSingular": "项",
+      "itemPlural": "项",
+      "upload": "上传"
+    },
+    "breakdown": {
+      "title": "费用明细",
+      "baseFee": "基础铸造费",
+      "storageFee": "存储费",
+      "items": "资产数量",
+      "uploadSize": "上传大小"
+    },
+    "bytesUnit": "字节"
+  }
+}

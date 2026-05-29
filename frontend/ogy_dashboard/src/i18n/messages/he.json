@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "שפה",
+    "switchTo": "החלף ל-{language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "טוען...",
+    "error": "משהו השתבש",
+    "retry": "נסה שוב",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "close": "סגירה",
+    "back": "חזרה",
+    "next": "הבא",
+    "previous": "הקודם",
+    "save": "שמירה",
+    "submit": "שליחה",
+    "copy": "העתקה",
+    "copied": "הועתק",
+    "search": "חיפוש",
+    "viewAll": "הצג הכול",
+    "showMore": "הצג עוד",
+    "showLess": "הצג פחות",
+    "amount": "סכום",
+    "date": "תאריך",
+    "type": "סוג",
+    "from": "מאת",
+    "to": "אל",
+    "index": "אינדקס",
+    "status": "סטטוס",
+    "total": "סך הכול",
+    "balance": "יתרה",
+    "yes": "כן",
+    "no": "לא",
+    "notAvailable": "לא זמין"
+  },
+  "nav": {
+    "dashboard": "לוח בקרה",
+    "governance": "ממשל",
+    "transactionHistory": "היסטוריית עסקאות",
+    "calculator": "מחשבון",
+    "openMainMenu": "פתח תפריט ראשי",
+    "closeMenu": "סגור תפריט",
+    "openAccountOverview": "פתח סקירת חשבון",
+    "viewAccountOverview": "הצג סקירת חשבון",
+    "connectPrompt": "חבר את הארנק שלך כדי לנהל אסימונים, להצביע על הצעות ולצפות בהיסטוריית העסקאות שלך.",
+    "connectWallet": "חבר ארנק",
+    "disconnect": "התנתק"
+  },
+  "notFound": {
+    "title": "הדף לא נמצא",
+    "description": "מצטערים, לא הצלחנו למצוא את הדף שחיפשת.",
+    "backHome": "חזרה לדף הבית"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "לוח בקרה OGY",
+      "home": "בית",
+      "circulation": "מחזור",
+      "governance": "ממשל",
+      "revenue": "הכנסות",
+      "rewards": "תגמולים",
+      "distribution": "חלוקה",
+      "governanceDashboard": "לוח בקרת ממשל OGY",
+      "transactionExplorer": "סייר עסקאות OGY"
+    },
+    "learn": {
+      "heading": "למד עוד על Tokenomics של OGY ועל ORIGYN",
+      "tokenomicsDeck": "מצגת Tokenomics של OGY",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "תקן ה-NFT של ORIGYN",
+      "tokenomicsFaq": "שאלות נפוצות על Tokenomics של ORIGYN",
+      "website": "אתר ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "תמיכה",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "צור קשר"
+    },
+    "support": {
+      "contactSupport": "צור קשר עם התמיכה",
+      "recoverTokens": "שחזר את האסימונים שלך"
+    },
+    "disclaimer": "*קרן ORIGYN לא תישא באחריות לכל אובדן, גניבה או שימוש לרעה באסימוני OGY המתרחשים בקשר לתהליך ההחלפה. יתרה מכך, קרן ORIGYN לא תישא באחריות לכל כשל בביצוע ההחלפה אם הצד המעורב אינו עומד בקפדנות בתנאים שנקבעו על ידי קרן ORIGYN."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "חקור את לוח הבקרה",
+      "subtitle": "צור אינטראקציה ללא צורך באמון עם dApps של web3, DAOs, NFTs, DeFi ועוד הרבה יותר."
+    },
+    "cta": {
+      "loginToSwap": "התחבר כדי להחליף אסימונים",
+      "myAccount": "החשבון שלי"
+    },
+    "governanceStaking": {
+      "title": "סקירת סטייקינג בממשל"
+    },
+    "cardError": {
+      "couldNotLoad": "טעינה נכשלה",
+      "descriptionLine1": "נתקלנו בבעיה בטעינת מדד זה.",
+      "descriptionLine2": "אנא נסה שוב בעוד רגע."
+    },
+    "emptyState": {
+      "noDataFor": "אין נתונים עבור",
+      "description": "אין כרגע מה להציג."
+    },
+    "circulationState": {
+      "title": "מצב מחזור OGY",
+      "tooltip": "ההיצע במחזור הוא כל האסימונים למעט אסימונים נעולים שבבעלות קרן ORIGYN.",
+      "nnsProposal": "הצעת NNS",
+      "totalLabel": "סך מחזור OGY",
+      "notOwnedName": "OGY שאינם בידי הקרן",
+      "notOwnedValue": "כמות האסימונים במחזור שאינם בבעלות קרן ORIGYN.",
+      "ownedName": "OGY נעולים בידי הקרן",
+      "ownedValue": "כמות האסימונים הנעולים שבבעלות קרן ORIGYN."
+    },
+    "foundationReserve": {
+      "title": "עתודת קרן OGY",
+      "tooltip": "סך כל אסימוני OGY שבבעלות קרן ORIGYN בכל הארנקים.",
+      "totalLabel": "סך היצע הקרן",
+      "lockedName": "נעול",
+      "lockedIntro": "אסימוני קרן ORIGYN הנעולים בסטייקים או בהבשלות.",
+      "lockedStakes": "1) סטייקים- אסימונים שמייצרים את התגמולים הודות להשתתפות בהצבעת הממשל.",
+      "lockedStakesNote": "אסימונים אלו ננעלו מרצון.",
+      "lockedVestings": "2) הבשלות- אסימונים שאינם מקבלים תגמולים ואינם יכולים להשתתף בהצבעה.",
+      "lockedVestingsNote": "אסימונים אלו ננעלו על פי החוזה שלך עם קרן ORIGYN.",
+      "unlockedName": "משוחרר",
+      "unlockedValue": "כספים משוחררים שבבעלות קרן ORIGYN."
+    },
+    "treasuryAccount": {
+      "title": "חשבון האוצר של ORIGYN (OTA)",
+      "networkRevenue": "הכנסות הרשת",
+      "tokenLogoAlt": "לוגו אסימון",
+      "tooltipOgy": "הכנסות מתועלת הרשת שנוצרות באמצעות עמלות עבור שימוש ברשת ORIGYN (למשל, להנפקה או העברה של תעודות דיגיטליות, יצירת NFTs וכו') ונצברות ב-OGY.",
+      "tooltipIcp": "הכנסות מתועלת הרשת שנוצרות באמצעות עמלות עבור שימוש ברשת ORIGYN (למשל, להנפקה או העברה של תעודות דיגיטליות, יצירת NFTs וכו') ונצברות ב-ICP."
+    },
+    "rewardAccount": {
+      "title": "חשבון התגמולים של ORIGYN (ORA)",
+      "balance": "יתרת ORA",
+      "year": "שנה",
+      "rewardPool": "מאגר תגמולים",
+      "moreDetails": "פרטים נוספים",
+      "tooltipStake": "מחזיקי אסימונים יכולים לבצע סטייקינג ל-OGY שלהם ולהרוויח תגמולים על ידי השתתפות בממשל.",
+      "tooltipSeed": "התגמולים יגיעו מחשבון התגמולים של ORIGYN, ש-ORIGYN תזרע במיליארד OGY.",
+      "tooltipPool": "מאגר התגמולים מורכב מ-250 מיליון OGY בשנתו הראשונה ויחצה את עצמו כל שנתיים כדי לעודד ולתגמל תורמים מוקדמים וארוכי טווח של האקוסיסטם.",
+      "description": "ORIGYN תתרום מיליארד OGY לחשבון התגמולים של ORIGYN (ORA) לטובת המחזיקים שביצעו סטייקינג והצבעה. מאגר התגמולים מורכב מ-250 מיליון OGY בשנתו הראשונה ויחצה את עצמו כל שנתיים כדי לעודד ולתגמל תורמים מוקדמים וארוכי טווח של האקוסיסטם."
+    },
+    "tokenDistribution": {
+      "title": "חלוקת אסימונים"
+    },
+    "transactionHistory": {
+      "title": "היסטוריית עסקאות",
+      "showAll": "הצג הכול"
+    },
+    "topTransfers": {
+      "value": "ערך",
+      "time": "זמן",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "אין נתונים זמינים."
+    },
+    "totalSupply": {
+      "title": "סך היצע OGY",
+      "tooltipTitle": "סך כל אסימוני OGY הזמינים.",
+      "tooltipLine1": "זה כולל את ההיצע במחזור ואת ההיצע שבשליטת קרן ORIGYN.",
+      "tooltipLine2": "החל מ-18 בספטמבר, ORIGYN עברה למודל דפלציוני מלא, כלומר אין יותר אסימונים חדשים שנוצרים.",
+      "chartLabel": "סך ההיצע"
+    },
+    "totalBurned": {
+      "title": "סך OGY שנשרפו",
+      "tooltipTitle": "סך כל אסימוני OGY שנשרפו.",
+      "tooltipLine1": "אסימונים אלו נשרפו לחלוטין ואינם זמינים עוד.",
+      "tooltipLine2": "ניתן לשרוף אסימונים מסיבות שונות, למשל עמלות הנפקת תעודות, עמלות תועלת רשת או עמלות עסקאות רשת.",
+      "chartLabel": "סך הנשרפים"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "יומי",
+      "weekly": "שבועי",
+      "monthly": "חודשי",
+      "yearly": "שנתי",
+      "all": "הכול"
+    },
+    "stakingOverview": {
+      "title": "סקירת סטייקינג",
+      "totalTokensInStakes": "סך האסימונים בסטייקים",
+      "tooltip": "אסימונים הנעולים בסטייקים.",
+      "stakedTokens": "אסימונים בסטייקינג",
+      "stakedTokensLegend": "אסימונים בסטייקינג"
+    },
+    "usersActivity": {
+      "title": "סקירת משתמשים",
+      "protocolUsers": "משתמשי פרוטוקול OGY",
+      "protocolUsersTooltip": "מחזיקים ייחודיים של אסימוני OGY",
+      "protocolUsersLegend": "משתמשי פרוטוקול OGY",
+      "activeWallets": "ארנקים פעילים של OGY",
+      "activeWalletsTooltip": "מחזיקי אסימונים פעילים של אסימוני OGY"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "סקירת ממשל",
+      "welcome": "ברוכים הבאים לממשל ORIGYN!",
+      "description": "מחזיקי אסימוני OGY יכולים להשפיע ישירות על רשת ORIGYN על ידי ביצוע סטייקינג ל-OGY שלהם והצבעה על הצעות. באמצעות השתתפות בתהליך קבלת ההחלטות, מחזיקי האסימונים שביצעו סטייקינג מרוויחים תגמולים.",
+      "learnMore": "למד עוד"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "סטייקינג והצבעה",
+        "description": "השפע על רשת ORIGYN על ידי ביצוע סטייקינג ל-OGY והצבעה על הצעות."
+      },
+      "earnRewards": {
+        "title": "הרווח תגמולים",
+        "description": "השתתף בתהליך קבלת ההחלטות כדי להרוויח תגמולים."
+      },
+      "governCollectively": {
+        "title": "נהל במשותף",
+        "description": "השתתף והשפע על הרשת כאקוסיסטם שיתופי."
+      }
+    },
+    "tokensSection": {
+      "title": "אסימונים בממשל",
+      "paragraph1": "מחזיקי אסימוני OGY יכולים להשפיע ישירות על רשת ORIGYN על ידי ביצוע סטייקינג ל-OGY שלהם והצבעה על הצעות.",
+      "paragraph2": "באמצעות השתתפות בתהליך קבלת ההחלטות, מחזיקי האסימונים שביצעו סטייקינג מרוויחים תגמולים ומנהלים במשותף ובאופן דמוקרטי.",
+      "learnMoreOgy": "למד עוד על OGY"
+    },
+    "sections": {
+      "proposals": "הצעות",
+      "neurons": "נוירונים"
+    },
+    "votingParticipation": {
+      "title": "השתתפות בהצבעה",
+      "chartLabel": "השתתפות %",
+      "legendLabel": "השתתפות %",
+      "period": {
+        "weekly": "שבועי",
+        "monthly": "חודשי",
+        "yearly": "שנתי"
+      },
+      "lastParticipation": {
+        "label": "השתתפות בהצבעה האחרונה",
+        "tooltip": "אחוז ההשתתפות באירוע ההצבעה האחרון."
+      },
+      "averageParticipation": {
+        "label": "השתתפות ממוצעת בהצבעה",
+        "tooltip": "אחוז ממוצע של השתתפות בהצבעה לאורך זמן."
+      },
+      "averagePower": {
+        "label": "כוח הצבעה ממוצע",
+        "tooltip": "כוח הצבעה ממוצע בקרב כל המשתתפים."
+      }
+    },
+    "estimateRewards": {
+      "title": "העריך את התגמולים שלך",
+      "lockDuration": "משך הנעילה",
+      "participants": "משתתפים",
+      "lockedForAtLeast": "כעת נעול לפחות למשך",
+      "lockedFor": "כעת נעול למשך",
+      "year": "שנה",
+      "years": "שנים"
+    },
+    "kpi": {
+      "metric": "מדד",
+      "rewardBaseCurrentYear": "בסיס התגמולים לשנה הנוכחית",
+      "dailyVotingRewards": "תגמולי הצבעה יומיים",
+      "totalVotingPower": "כוח הצבעה כולל",
+      "overallVotingParticipation": "השתתפות כוללת בהצבעה"
+    },
+    "total": {
+      "titleTooltip": "כל האסימונים הנמצאים בקניסטר הממשל. אסימונים אלו יכולים להיות במצב הבשלה, סטייקינג, ללא סטייקינג או לא נתבעו.",
+      "totalLabel": "סך האסימונים בממשל",
+      "locked": {
+        "name": "נעול",
+        "tooltip": "אסימונים הנעולים בממשל."
+      },
+      "unlocked": {
+        "name": "משוחרר",
+        "tooltip": "אסימונים המשוחררים בממשל וניתנים למשיכה ומסחר בכל עת."
+      },
+      "accumulatedRewards": {
+        "name": "תגמולים שנצברו",
+        "tooltip": "תגמולים הנספרים עבור משתמשים אך טרם נתבעו."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "הצעות",
+      "viewProposal": "הצג הצעה",
+      "columns": {
+        "id": "מזהה",
+        "title": "כותרת",
+        "proposed": "הוצע",
+        "timeRemaining": "זמן שנותר",
+        "topic": "נושא",
+        "status": "סטטוס",
+        "view": "הצג"
+      }
+    },
+    "details": {
+      "category": "ממשל",
+      "proposalNumber": "הצעה מס׳ ",
+      "proposal": "הצעה",
+      "titleLoading": "כותרת ההצעה נטענת…",
+      "payloadLoading": "טוען פרטי הצעה…",
+      "posted": "פורסם",
+      "topic": "נושא",
+      "moreInfo": "מידע נוסף",
+      "totalVotes": "סך הקולות",
+      "adopt": "אמץ",
+      "reject": "דחה",
+      "vote": "הצבעה"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "נוירונים",
+      "viewNeuron": "הצג נוירון",
+      "columns": {
+        "id": "מזהה",
+        "state": "מצב",
+        "stakedOgy": "OGY בסטייקינג",
+        "dissolveDelay": "השהיית פירוק",
+        "age": "גיל",
+        "votingPower": "כוח הצבעה",
+        "view": "הצג"
+      }
+    },
+    "details": {
+      "category": "נוירון",
+      "title": "נוירון OGY",
+      "created": "נוצר",
+      "stakedOgy": "OGY בסטייקינג",
+      "votingPower": "כוח הצבעה",
+      "dissolveDelay": "השהיית פירוק",
+      "age": "גיל",
+      "lifecycle": "מחזור חיי הנוירון",
+      "dateCreated": "תאריך יצירה",
+      "autoStakeMaturity": "סטייקינג אוטומטי של הבשלה",
+      "rewardsAndBonuses": "תגמולים ובונוסים",
+      "stakedMaturity": "הבשלה בסטייקינג",
+      "totalMaturity": "סך ההבשלה",
+      "ageBonus": "בונוס גיל",
+      "totalBonus": "סך הבונוס",
+      "dissolveDelayBonus": "בונוס השהיית פירוק"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "היסטוריית עסקאות",
+      "searchFor": "חפש:",
+      "or": "או",
+      "searchPlaceholder": "חפש פריט",
+      "noResults": "לא נמצאו תוצאות",
+      "resultBlock": "בלוק",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "פרטי עסקה",
+      "hash": "Hash",
+      "fetchError": "שגיאה בטעינת עסקה!",
+      "mintingAccount": "חשבון יצירה",
+      "fee": "עמלה",
+      "memo": "תזכורת",
+      "none": "אין"
+    },
+    "accountDetails": {
+      "title": "חשבון OGY",
+      "id": "מזהה",
+      "owner": "בעלים",
+      "subaccount": "תת-חשבון",
+      "defaultSubaccount": "אין (תת-חשבון ברירת מחדל)",
+      "historicalMaxBalance": "יתרה מרבית היסטורית",
+      "genesisBalance": "יתרת בראשית",
+      "period": {
+        "monthly": "חודשי",
+        "quarterly": "רבעוני",
+        "yearly": "שנתי",
+        "lifetime": "לכל החיים"
+      },
+      "empty": {
+        "title": "אין עדיין עסקאות",
+        "description": "לחשבון זה אין היסטוריית עסקאות. ברגע שישלח או יקבל OGY, הפעילות תופיע כאן."
+      },
+      "balanceHistory": {
+        "title": "היסטוריית יתרה",
+        "currentBalance": "יתרה נוכחית",
+        "currentBalanceInfo": "יתרת החשבון הנוכחית.",
+        "legend": "יתרת OGY"
+      },
+      "overview": {
+        "title": "סקירת עסקאות",
+        "totalLabel": "סכום כולל",
+        "totalSent": "סך שנשלח",
+        "totalSentInfo": "הסכום הכולל שנשלח על ידי ה-principal.",
+        "totalReceived": "סך שהתקבל",
+        "totalReceivedInfo": "הסכום הכולל שהתקבל על ידי ה-principal."
+      }
+    },
+    "flow": {
+      "title": "זרימת עסקאות",
+      "searchPlaceholder": "חפש עסקאות…",
+      "clearSearch": "נקה חיפוש",
+      "loadError": "טעינת נתוני העסקה נכשלה. אנא נסה שוב.",
+      "noMatch": "אין עסקאות התואמות לחיפוש זה.",
+      "transactions": "עסקאות",
+      "out": "יוצא",
+      "in": "נכנס",
+      "total": "סך הכול",
+      "legend": {
+        "outTransaction": "עסקה יוצאת",
+        "inTransaction": "עסקה נכנסת",
+        "includesInitial": "כולל עסקה ראשונית",
+        "rootAccount": "חשבון שורש",
+        "account": "חשבון",
+        "fromRoot": "עם עסקאות מהשורש",
+        "toRoot": "עם עסקאות אל השורש",
+        "madeInitial": "ביצע עסקה ראשונית"
+      }
+    },
+    "kind": {
+      "mint": "הנפקה",
+      "transfer": "העברה",
+      "burn": "שריפה",
+      "approve": "אישור"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "ברוך שובך",
+      "value": "ערך:",
+      "disconnectWallet": "נתק ארנק",
+      "accountLabel": "חשבון",
+      "manageDescription": "נהל את ארנק ה-OGY, התגמולים ופעילות הסטייקינג שלך.",
+      "walletBalance": "יתרת הארנק",
+      "myAccount": "החשבון שלי",
+      "howToTopUp": "כיצד להטעין?"
+    },
+    "principal": {
+      "accountIdLabel": "מזהה חשבון:",
+      "principalIdLabel": "מזהה Principal:"
+    },
+    "available": {
+      "title": "OGY זמין",
+      "transactionHistory": "היסטוריית עסקאות",
+      "transfer": "העברה",
+      "transferOgy": "העבר OGY",
+      "transferDescription": "ניתן לשלוח OGY רק מהיתרה הזמינה שלך.",
+      "max": "מקסימום",
+      "recipientAddress": "כתובת הנמען",
+      "amountReceived": "סכום שהתקבל",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "עמלת עסקה (מחויבת מהמקור)",
+      "currentBalance": "יתרה נוכחית:",
+      "transferProcessing": "ההעברה מעובדת",
+      "transferProcessingHint": "זה עשוי לקחת מספר שניות",
+      "transferSuccess": "ההעברה בוצעה בהצלחה!",
+      "transferError": "שגיאת העברה!",
+      "errors": {
+        "amountRequired": "יש להזין סכום.",
+        "amountExceedsBalance": "הסכום לא יכול לעלות על היתרה שלך.",
+        "amountBelowFee": "הסכום לא יכול להיות נמוך מעמלת העסקה.",
+        "amountNotPositive": "הסכום חייב להיות מספר חיובי.",
+        "recipientRequired": "יש להזין כתובת נמען.",
+        "recipientInvalid": "כתובת נמען לא תקינה."
+      }
+    },
+    "staked": {
+      "title": "OGY בסטייקינג",
+      "stake": "סטייקינג",
+      "stakeOgy": "בצע סטייקינג ל-OGY",
+      "stakeDescription": "כדי לבצע סטייקינג ל-OGY עליך לגשת לפלטפורמת ה-NNS שלנו.",
+      "warningNotConnected": "נראה שאינך מחובר עם",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "אתה צריך",
+      "warningToConnect": "כדי להתחבר לפלטפורמת NNS.",
+      "goToNns": "עבור ל-NNS"
+    },
+    "rewards": {
+      "title": "תגמולי סטייקינג",
+      "claimAll": "תבע הכול",
+      "claimDisabledReason": "תביעת תגמולים נתמכת רק עבור חשבון ברירת המחדל של ה-principal.",
+      "aboutToClaim": "אתה עומד לתבוע",
+      "sentToPrincipal": "התגמולים יישלחו ל-principal שלך",
+      "pending": "תובע את כל התגמולים...",
+      "successTitle": "תביעת כל התגמולים בוצעה בהצלחה!",
+      "errorTitle": "שגיאה בתביעת כל התגמולים!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "אנו מחליפים ledger וממשל",
+        "description": "הממשל וה-ledger של ORIGYN שודרגו ל-SNS. כדי להמשיך להשתתף בממשל ORIGYN ולהשתמש ב-OGY, עליך להעביר את אסימוני ה-OGY שלך."
+      },
+      "howToSwap": "כיצד להחליף אסימונים",
+      "disclosureToggle": "עדיין יש לך אסימוני OGY ישנים? החלף עכשיו!",
+      "accountId": "מזהה חשבון:",
+      "steps": {
+        "withdraw": {
+          "title": "שלב 1: משוך מהממשל הישן",
+          "subtitle": "אם השתתפת בעבר בממשל OGY, עליך למשוך את האסימונים האלו לפני שתוכל להחליף אותם."
+        },
+        "deposit": {
+          "title": "שלב 2: הפקד לחשבון שלך",
+          "subtitle": "אם יש לך אסימונים מחוץ ללוח הבקרה של OGY, הפקד אותם ל-account-id שלך לפני שתוכל להתחיל להחליף אותם."
+        },
+        "swap": {
+          "title": "שלב 3: החלף אסימונים",
+          "subtitle": "החלף את אסימון ה-OGY הישן ל-ledger החדש."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "יתרת OGY ישנה"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "עבור ללוח הבקרה הישן של OGY"
+      },
+      "swap": {
+        "disabledOisy": "החלפת OGY ישן אינה זמינה עם OISY. התחבר עם Internet Identity או Plug כדי להחליף את ה-OGY הישן שלך.",
+        "disabledSubAccount": "החלפת OGY ישן נתמכת רק מחשבון ברירת המחדל של ה-principal.",
+        "swapYourTokens": "החלף את האסימונים שלך",
+        "automaticDisabled": "החלפה אוטומטית הושבתה. תצטרך לקבל אישור לבקשת ההחלפה שלך, הסכום המינימלי הוא 50 000 OGY.",
+        "form": {
+          "title": "החלף את ה-OGY שלך ל-ledger החדש",
+          "description": "הפקד כל אסימוני OGY שברצונך להחליף ל-account id שלך",
+          "tokensAvailable": "אסימונים זמינים להחלפה",
+          "youWillReceivePrefix": "תקבל",
+          "youWillReceiveSuffix": "אסימוני OGY ב-ledger החדש.",
+          "swapPrefix": "החלף",
+          "swapSuffix": "אסימוני OGY"
+        },
+        "pending": {
+          "takesTime": "תהליך ההחלפה עשוי לקחת מעט זמן.",
+          "doNotRefresh": "אל תרענן את הדף!",
+          "swapping": "מחליף אסימונים..."
+        },
+        "success": {
+          "title": "ההחלפה בוצעה בהצלחה!",
+          "walletBalance": "יתרת הארנק ב-ledger החדש",
+          "myAccount": "החשבון שלי"
+        },
+        "error": {
+          "title": "שגיאה בהחלפת אסימונים!",
+          "retry": "נסה שוב"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "הנוירונים שלי ב-OGY",
+        "idHeader": "מזהה",
+        "stakedAmount": "סכום בסטייקינג",
+        "claimAmount": "סכום לתביעה",
+        "emptyTitle": "אין עדיין נוירונים",
+        "emptyDescription": "הוסף נוירון OGY כדי להתחיל לעקוב כאן אחר סטייקינג, כוח הצבעה ותגמולים.",
+        "addFirstNeuron": "הוסף את הנוירון הראשון שלך"
+      },
+      "add": {
+        "button": "הוסף נוירון",
+        "title": "הוסף נוירון",
+        "description": "הוסף principal זה כ-hotkey בכל נוירון OGY שברצונך לנהל כאן.",
+        "needHotkey": "צריך להוסיף hotkey?",
+        "openNns": "פתח את אפליקציית NNS"
+      },
+      "claim": {
+        "button": "תבע",
+        "disabledReason": "תביעת תגמולים נתמכת רק עבור חשבון ברירת המחדל של ה-principal.",
+        "aboutToClaim": "אתה עומד לתבוע",
+        "sentToPrincipal": "התגמולים יישלחו ל-principal שלך",
+        "pending": "תובע תגמול...",
+        "successTitle": "תביעת התגמול בוצעה בהצלחה!",
+        "errorTitle": "שגיאה בתביעת תגמול!",
+        "retry": "נסה שוב"
+      },
+      "remove": {
+        "title": "הסר נוירון",
+        "description": "כדי להסיר נוירון זה, עליך להסיר את ה-principal שלך מרשימת ה-hotkeys של הנוירון."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "כתובת",
+      "governanceBalance": "יתרת ממשל",
+      "stakedTokens": "אסימונים בסטייקינג",
+      "ledgerBalance": "יתרת Ledger",
+      "weightInTotalSupply": "משקל בסך ההיצע"
+    }
+  },
+  "recovery": {
+    "title": "שחזר את האסימונים שלך",
+    "description": "לוח הבקרה של OGY תומך רק באסימון OGY. במקרה ששלחת בטעות אסימונים אחרים לכאן, תוכל לשחזר אותם על ידי ביצוע השלבים הבאים.",
+    "chooseToken": "בחר אסימון",
+    "loginRequired": "כדי לאסוף את האסימונים שלך עליך להיות מחובר.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "קניסטר Ledger:",
+      "transferIcp": "העבר ICP",
+      "availableBalanceNote": "ניתן לשלוח ICP רק מהיתרה הזמינה שלך.",
+      "amountRequired": "יש להזין סכום.",
+      "amountExceedsBalance": "הסכום לא יכול לעלות על היתרה שלך.",
+      "amountPositive": "הסכום חייב להיות מספר חיובי.",
+      "amountBelowFee": "הסכום חייב להיות גדול או שווה לעמלות העסקה.",
+      "recipientAddress": "כתובת הנמען",
+      "recipientAddressRequired": "יש להזין כתובת נמען.",
+      "invalidRecipientAddress": "כתובת נמען לא תקינה.",
+      "amountReceived": "סכום שהתקבל",
+      "transactionFee": "עמלת עסקה",
+      "currentBalance": "יתרה נוכחית:",
+      "processing": "ההעברה מעובדת",
+      "processingNote": "זה עשוי לקחת מספר שניות",
+      "success": "ההעברה בוצעה בהצלחה!",
+      "error": "שגיאת העברה!"
+    }
+  },
+  "support": {
+    "category": "תמיכה",
+    "title": "צור פנייה",
+    "titleSubmitted": "הפנייה נשלחה",
+    "successTitle": "פניית תמיכה נוצרה",
+    "successMessage": "ניצור איתך קשר בכתובת האימייל שסיפקת.",
+    "submitAnother": "שלח פנייה נוספת",
+    "intro": "תאר את הבעיה שלך וכיצד נוכל ליצור איתך קשר.",
+    "form": {
+      "name": "שם",
+      "email": "אימייל ליצירת קשר",
+      "emailRequired": "כתובת אימייל היא שדה חובה",
+      "emailInvalid": "כתובת אימייל לא תקינה",
+      "principal": "Principal של הארנק",
+      "invalidPrincipal": "כתובת נמען לא תקינה.",
+      "description": "תיאור",
+      "descriptionPlaceholder": "ספר לנו מה קורה…",
+      "descriptionRequired": "אנא תאר את הבעיה שלך"
+    },
+    "submitError": "משהו השתבש. אנא נסה שוב.",
+    "submitting": "שולח…"
+  },
+  "explorer": {
+    "title": "סייר",
+    "searchPlaceholder": "חפש לפי כותרת, מנפיק, principal או מזהה אסימון",
+    "openFilters": "פתח מסננים",
+    "checkOnBlockchain": "בדוק בבלוקצ׳יין",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "תעודות מומלצות",
+      "art": "תעודות אמנות",
+      "gold": "תעודות זהב"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "העתק ללוח",
+    "toggleRelativeTime": "החלף זמן יחסי. תצוגה נוכחית:",
+    "collapseRow": "כווץ שורה",
+    "expandRow": "הרחב שורה",
+    "searchPlaceholder": "חפש פריטים...",
+    "sortAscending": "מיין בסדר עולה",
+    "sortDescending": "מיין בסדר יורד",
+    "linesPerPage": "שורות לעמוד",
+    "page": "עמוד",
+    "pageOf": "מתוך",
+    "previousPage": "העמוד הקודם",
+    "nextPage": "העמוד הבא"
+  },
+  "auth": {
+    "connect": "התחבר",
+    "disconnect": "התנתק",
+    "connectWallet": {
+      "title": "חבר את הארנק שלך",
+      "subtitle": "בחר כיצד תרצה להתחבר"
+    },
+    "install": "התקן",
+    "newToIc": "חדש ב-Internet Computer?",
+    "learnMore": "למד עוד",
+    "connecting": {
+      "title": "מתחבר...",
+      "subtitle": "אשר את הבקשה בארנק שלך"
+    },
+    "sessionExpired": {
+      "title": "פג תוקף ההפעלה",
+      "description": "הפעלת הארנק שלך אינה תקפה עוד. התחבר מחדש כדי להמשיך."
+    },
+    "reconnect": "התחבר מחדש",
+    "error": {
+      "connectionCancelled": "החיבור בוטל. אנא נסה שוב.",
+      "connectionFailed": "חיבור הארנק נכשל. אנא נסה שוב."
+    }
+  },
+  "warning": {
+    "badge": "חדש",
+    "ledgerSwitch": "אנו מחליפים ledger, עליך להחליף את ה-OGY שלך לחדש"
+  },
+  "calculator": {
+    "header": {
+      "title": "מחשבון עלויות",
+      "description": "השתמש במחשבון ORIGYN להערכת עלות התעודה הייחודית שלך עם כל הנתונים על השרשרת"
+    },
+    "plan": {
+      "title": "תכנן את ההנפקה שלך",
+      "description": "ציין את מספר הפריטים ואת סוג התוכן שברצונך להעלות.",
+      "itemsLabel": "כמה פריטים?",
+      "uploadingLabel": "מה ברצונך להעלות?",
+      "knowExactSize": "ידוע לך הגודל המדויק?",
+      "totalUploadSize": "גודל העלאה כולל",
+      "usePreset": "השתמש בהגדרה קבועה במקום",
+      "combinedSize": "הגודל המצטבר של כל הקבצים בכלל הפריטים.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB לכל אחד"
+        },
+        "iphone": {
+          "label": "תמונה",
+          "hint": "3 MB לכל אחד"
+        },
+        "dslr": {
+          "label": "תמונת סטודיו",
+          "hint": "20 MB לכל אחד"
+        },
+        "video": {
+          "label": "סרטון קצר",
+          "hint": "1 GB לכל אחד"
+        },
+        "video1hr": {
+          "label": "סרטון ארוך",
+          "hint": "60 GB לכל אחד"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "הערכה בזמן אמת",
+      "titleRefreshing": "מעדכן הערכה",
+      "description": "מתעדכן אוטומטית בעת שינוי ההגדרות.",
+      "ogyEquivalent": "שווה ערך ב-OGY",
+      "ogySpotRate": "שער ספוט של OGY",
+      "itemSingular": "פריט",
+      "itemPlural": "פריטים",
+      "upload": "העלאה"
+    },
+    "breakdown": {
+      "title": "פירוט עלויות",
+      "baseFee": "דמי הנפקה בסיסיים",
+      "storageFee": "דמי אחסון",
+      "items": "פריטים",
+      "uploadSize": "גודל העלאה"
+    },
+    "bytesUnit": "בייטים"
+  }
+}

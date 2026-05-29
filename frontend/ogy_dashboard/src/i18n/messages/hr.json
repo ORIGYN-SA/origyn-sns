@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Jezik",
+    "switchTo": "Prebaci na {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Učitavanje...",
+    "error": "Nešto je pošlo po zlu",
+    "retry": "Pokušaj ponovno",
+    "cancel": "Odustani",
+    "confirm": "Potvrdi",
+    "close": "Zatvori",
+    "back": "Natrag",
+    "next": "Dalje",
+    "previous": "Prethodno",
+    "save": "Spremi",
+    "submit": "Pošalji",
+    "copy": "Kopiraj",
+    "copied": "Kopirano",
+    "search": "Pretraži",
+    "viewAll": "Prikaži sve",
+    "showMore": "Prikaži više",
+    "showLess": "Prikaži manje",
+    "amount": "Iznos",
+    "date": "Datum",
+    "type": "Vrsta",
+    "from": "Od",
+    "to": "Za",
+    "index": "Indeks",
+    "status": "Status",
+    "total": "Ukupno",
+    "balance": "Stanje",
+    "yes": "Da",
+    "no": "Ne",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Nadzorna ploča",
+    "governance": "Upravljanje",
+    "transactionHistory": "Povijest transakcija",
+    "calculator": "Kalkulator",
+    "openMainMenu": "Otvori glavni izbornik",
+    "closeMenu": "Zatvori izbornik",
+    "openAccountOverview": "Otvori pregled računa",
+    "viewAccountOverview": "Prikaži pregled računa",
+    "connectPrompt": "Povežite svoj novčanik za upravljanje tokenima, glasovanje o prijedlozima i pregled povijesti transakcija.",
+    "connectWallet": "Poveži novčanik",
+    "disconnect": "Odspoji"
+  },
+  "notFound": {
+    "title": "Stranica nije pronađena",
+    "description": "Nažalost, nismo pronašli stranicu koju tražite.",
+    "backHome": "Povratak na početnu"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY nadzorna ploča",
+      "home": "Početna",
+      "circulation": "Optjecaj",
+      "governance": "Upravljanje",
+      "revenue": "Prihod",
+      "rewards": "Nagrade",
+      "distribution": "Distribucija",
+      "governanceDashboard": "OGY nadzorna ploča upravljanja",
+      "transactionExplorer": "OGY preglednik transakcija"
+    },
+    "learn": {
+      "heading": "Saznajte više o OGY Tokenomics i ORIGYN",
+      "tokenomicsDeck": "OGY Tokenomics prezentacija",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN web stranica",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Podrška",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Kontakt"
+    },
+    "support": {
+      "contactSupport": "Kontaktirajte podršku",
+      "recoverTokens": "Vratite svoje tokene"
+    },
+    "disclaimer": "*ORIGYN Foundation neće biti odgovorna za bilo kakav gubitak, krađu ili zlouporabu OGY tokena koji nastanu u vezi s postupkom zamjene. Nadalje, ORIGYN Foundation neće biti odgovorna za neizvršenje zamjene ako uključena strana ne poštuje strogo uvjete koje je odredila ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALITIKA",
+      "title": "Istražite nadzornu ploču",
+      "subtitle": "Komunicirajte bez potrebe za povjerenjem s web3 dApps, DAOs, NFT, DeFi i još mnogo toga."
+    },
+    "cta": {
+      "loginToSwap": "Prijavite se za zamjenu tokena",
+      "myAccount": "Moj račun"
+    },
+    "governanceStaking": {
+      "title": "Pregled stakanja u upravljanju"
+    },
+    "cardError": {
+      "couldNotLoad": "Učitavanje nije uspjelo",
+      "descriptionLine1": "Naišli smo na problem pri dohvaćanju ove metrike.",
+      "descriptionLine2": "Molimo pokušajte ponovno za trenutak."
+    },
+    "emptyState": {
+      "noDataFor": "Nema podataka za",
+      "description": "Trenutno nema ničega za prikaz."
+    },
+    "circulationState": {
+      "title": "Stanje optjecaja OGY-ja",
+      "tooltip": "Optjecajna ponuda su svi tokeni osim otključanih tokena u vlasništvu ORIGYN Foundation.",
+      "nnsProposal": "NNS prijedlog",
+      "totalLabel": "Ukupni optjecaj OGY-ja",
+      "notOwnedName": "OGY koji nije u rukama Foundation",
+      "notOwnedValue": "Količina optjecajnih tokena koji nisu u vlasništvu ORIGYN foundation.",
+      "ownedName": "OGY zaključan u rukama Foundation",
+      "ownedValue": "Količina zaključanih tokena u vlasništvu ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "OGY rezerva Foundation",
+      "tooltip": "Ukupna količina OGY tokena u vlasništvu ORIGYN foundation u svim novčanicima.",
+      "totalLabel": "Ukupna ponuda Foundation",
+      "lockedName": "Zaključano",
+      "lockedIntro": "Tokeni ORIGYN foundation zaključani u stakeovima ili vestingima.",
+      "lockedStakes": "1) Stakeovi - tokeni koji generiraju nagrade zahvaljujući sudjelovanju u glasovanju o upravljanju.",
+      "lockedStakesNote": "Ti su tokeni zaključani dobrovoljno.",
+      "lockedVestings": "2) Vestingi - tokeni koji ne primaju nikakve nagrade i ne mogu sudjelovati u glasovanju.",
+      "lockedVestingsNote": "Ti su tokeni zaključani vašim ugovorom s ORIGYN Foundation.",
+      "unlockedName": "Otključano",
+      "unlockedValue": "Otključana sredstva u vlasništvu ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury račun (OTA)",
+      "networkRevenue": "Prihod mreže",
+      "tokenLogoAlt": "Logo tokena",
+      "tooltipOgy": "Prihod od korisnosti mreže ostvaren naknadama za korištenje ORIGYN mreže (npr. za izdavanje ili prijenos digitalnih certifikata, kovanje NFT-ova itd.) i akumuliran u OGY.",
+      "tooltipIcp": "Prihod od korisnosti mreže ostvaren naknadama za korištenje ORIGYN mreže (npr. za izdavanje ili prijenos digitalnih certifikata, kovanje NFT-ova itd.) i akumuliran u ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward račun (ORA)",
+      "balance": "ORA stanje",
+      "year": "Godina",
+      "rewardPool": "Fond nagrada",
+      "moreDetails": "Više detalja",
+      "tooltipStake": "Vlasnici tokena mogu stakati svoj OGY i zarađivati nagrade sudjelovanjem u upravljanju.",
+      "tooltipSeed": "Nagrade će dolaziti s ORIGYN Reward računa, koji će ORIGYN napuniti s milijardu OGY-ja.",
+      "tooltipPool": "Fond nagrada čini 250 milijuna OGY-ja u prvoj godini i prepolovit će se svake dvije godine kako bi se potaknuli i nagradili rani i dugoročni doprinositelji ekosustava.",
+      "description": "ORIGYN će uplatiti milijardu OGY-ja na ORIGYN Reward račun (ORA) u korist vlasnika koji su stakali i glasuju. Fond nagrada čini 250 milijuna OGY-ja u prvoj godini i prepolovit će se svake dvije godine kako bi se potaknuli i nagradili rani i dugoročni doprinositelji ekosustava."
+    },
+    "tokenDistribution": {
+      "title": "Distribucija tokena"
+    },
+    "transactionHistory": {
+      "title": "Povijest transakcija",
+      "showAll": "Prikaži sve"
+    },
+    "topTransfers": {
+      "value": "Vrijednost",
+      "time": "Vrijeme",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Nema dostupnih podataka."
+    },
+    "totalSupply": {
+      "title": "Ukupna ponuda OGY-ja",
+      "tooltipTitle": "Ukupna količina dostupnih OGY tokena.",
+      "tooltipLine1": "To uključuje optjecajnu ponudu i ponudu pod kontrolom ORIGYN Foundation.",
+      "tooltipLine2": "Od 18. rujna ORIGYN je prešao na potpuno deflacijski model, što znači da se više ne kuju novi tokeni.",
+      "chartLabel": "Ukupna ponuda"
+    },
+    "totalBurned": {
+      "title": "Ukupno spaljeno OGY-ja",
+      "tooltipTitle": "Ukupna količina spaljenih OGY tokena.",
+      "tooltipLine1": "Ti su tokeni potpuno spaljeni i više nisu dostupni.",
+      "tooltipLine2": "Tokeni se mogu spaliti iz različitih razloga, primjerice naknade za kovanje certifikata, naknade za korisnost mreže ili naknade za mrežne transakcije.",
+      "chartLabel": "Ukupno spaljeno"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Dnevno",
+      "weekly": "Tjedno",
+      "monthly": "Mjesečno",
+      "yearly": "Godišnje",
+      "all": "Sve"
+    },
+    "stakingOverview": {
+      "title": "Pregled stakanja",
+      "totalTokensInStakes": "Ukupno tokena u stakeovima",
+      "tooltip": "Tokeni zaključani u stakeovima.",
+      "stakedTokens": "Stakani tokeni",
+      "stakedTokensLegend": "STAKANI TOKENI"
+    },
+    "usersActivity": {
+      "title": "Pregled korisnika",
+      "protocolUsers": "Korisnici OGY protokola",
+      "protocolUsersTooltip": "Jedinstveni vlasnici OGY tokena",
+      "protocolUsersLegend": "KORISNICI OGY PROTOKOLA",
+      "activeWallets": "Aktivni OGY novčanici",
+      "activeWalletsTooltip": "Aktivni vlasnici OGY tokena"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Pregled upravljanja",
+      "welcome": "Dobrodošli u ORIGYN upravljanje!",
+      "description": "Vlasnici OGY tokena mogu izravno utjecati na ORIGYN mrežu stakanjem svog OGY-ja i glasovanjem o prijedlozima. Sudjelovanjem u procesu donošenja odluka ti vlasnici stakanih tokena zarađuju nagrade.",
+      "learnMore": "Saznajte više"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stakajte i glasujte",
+        "description": "Utječite na ORIGYN mrežu stakanjem OGY-ja i glasovanjem o prijedlozima."
+      },
+      "earnRewards": {
+        "title": "Zarađujte nagrade",
+        "description": "Sudjelujte u procesu donošenja odluka kako biste zaradili nagrade."
+      },
+      "governCollectively": {
+        "title": "Upravljajte zajednički",
+        "description": "Sudjelujte i utječite na mrežu kao suradnički ekosustav."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokeni u upravljanju",
+      "paragraph1": "Vlasnici OGY tokena mogu izravno utjecati na ORIGYN mrežu stakanjem svog OGY-ja i glasovanjem o prijedlozima.",
+      "paragraph2": "Sudjelovanjem u procesu donošenja odluka ti vlasnici stakanih tokena zarađuju nagrade te upravljaju zajednički i demokratski.",
+      "learnMoreOgy": "Saznajte više o OGY"
+    },
+    "sections": {
+      "proposals": "Prijedlozi",
+      "neurons": "Neuroni"
+    },
+    "votingParticipation": {
+      "title": "Sudjelovanje u glasovanju",
+      "chartLabel": "Sudjelovanje %",
+      "legendLabel": "SUDJELOVANJE %",
+      "period": {
+        "weekly": "Tjedno",
+        "monthly": "Mjesečno",
+        "yearly": "Godišnje"
+      },
+      "lastParticipation": {
+        "label": "Posljednje sudjelovanje u glasovanju",
+        "tooltip": "Postotak sudjelovanja u posljednjem glasovanju."
+      },
+      "averageParticipation": {
+        "label": "Prosječno sudjelovanje u glasovanju",
+        "tooltip": "Prosječni postotak sudjelovanja u glasovanju tijekom vremena."
+      },
+      "averagePower": {
+        "label": "Prosječna glasačka moć",
+        "tooltip": "Prosječna glasačka moć svih sudionika."
+      }
+    },
+    "estimateRewards": {
+      "title": "Procijenite svoje nagrade",
+      "lockDuration": "Trajanje zaključavanja",
+      "participants": "sudionika",
+      "lockedForAtLeast": "trenutno zaključano na najmanje",
+      "lockedFor": "trenutno zaključano na",
+      "year": "godina",
+      "years": "godina"
+    },
+    "kpi": {
+      "metric": "Metrika",
+      "rewardBaseCurrentYear": "Osnova nagrada za tekuću godinu",
+      "dailyVotingRewards": "Dnevne nagrade za glasovanje",
+      "totalVotingPower": "Ukupna glasačka moć",
+      "overallVotingParticipation": "Ukupno sudjelovanje u glasovanju"
+    },
+    "total": {
+      "titleTooltip": "Svi tokeni koji se nalaze u kanisteru za upravljanje. Ti tokeni mogu biti u stanju vestinga, stakanja, nestakani ili nezatraženi.",
+      "totalLabel": "Ukupno tokena u upravljanju",
+      "locked": {
+        "name": "Zaključano",
+        "tooltip": "Tokeni zaključani u upravljanju."
+      },
+      "unlocked": {
+        "name": "Otključano",
+        "tooltip": "Tokeni otključani u upravljanju koji se mogu povući i trgovati u bilo kojem trenutku."
+      },
+      "accumulatedRewards": {
+        "name": "Akumulirane nagrade",
+        "tooltip": "Nagrade koje su obračunate korisnicima, ali još nisu zatražene."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Prijedlozi",
+      "viewProposal": "Prikaži prijedlog",
+      "columns": {
+        "id": "ID",
+        "title": "Naslov",
+        "proposed": "Predloženo",
+        "timeRemaining": "Preostalo vrijeme",
+        "topic": "Tema",
+        "status": "Status",
+        "view": "Prikaži"
+      }
+    },
+    "details": {
+      "category": "Upravljanje",
+      "proposalNumber": "Prijedlog #",
+      "proposal": "Prijedlog",
+      "titleLoading": "Učitavanje naslova prijedloga…",
+      "payloadLoading": "Učitavanje detalja prijedloga…",
+      "posted": "Objavljeno",
+      "topic": "Tema",
+      "moreInfo": "Više informacija",
+      "totalVotes": "Ukupno glasova",
+      "adopt": "PRIHVATI",
+      "reject": "ODBIJ",
+      "vote": "Glasuj"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuroni",
+      "viewNeuron": "Prikaži neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Stanje",
+        "stakedOgy": "Stakani OGY",
+        "dissolveDelay": "Odgoda raspuštanja",
+        "age": "Starost",
+        "votingPower": "Glasačka moć",
+        "view": "Prikaži"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY neuron",
+      "created": "Stvoreno",
+      "stakedOgy": "Stakani OGY",
+      "votingPower": "Glasačka moć",
+      "dissolveDelay": "Odgoda raspuštanja",
+      "age": "Starost",
+      "lifecycle": "Životni ciklus neurona",
+      "dateCreated": "Datum stvaranja",
+      "autoStakeMaturity": "Automatsko stakanje zrelosti",
+      "rewardsAndBonuses": "Nagrade i bonusi",
+      "stakedMaturity": "Stakana zrelost",
+      "totalMaturity": "Ukupna zrelost",
+      "ageBonus": "Bonus za starost",
+      "totalBonus": "Ukupni bonus",
+      "dissolveDelayBonus": "Bonus za odgodu raspuštanja"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Povijest transakcija",
+      "searchFor": "Pretraži:",
+      "or": "ili",
+      "searchPlaceholder": "Pretraži stavku",
+      "noResults": "Nema pronađenih rezultata",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Detalji transakcije",
+      "hash": "Hash",
+      "fetchError": "Pogreška pri dohvaćanju jedne transakcije!",
+      "mintingAccount": "Račun za kovanje",
+      "fee": "Naknada",
+      "memo": "Bilješka",
+      "none": "Nema"
+    },
+    "accountDetails": {
+      "title": "OGY račun",
+      "id": "ID",
+      "owner": "Vlasnik",
+      "subaccount": "Podračun",
+      "defaultSubaccount": "Nema (zadani podračun)",
+      "historicalMaxBalance": "Povijesno najveće stanje",
+      "genesisBalance": "Početno stanje",
+      "period": {
+        "monthly": "Mjesečno",
+        "quarterly": "Tromjesečno",
+        "yearly": "Godišnje",
+        "lifetime": "Od početka"
+      },
+      "empty": {
+        "title": "Još nema transakcija",
+        "description": "Ovaj račun nema povijest transakcija. Čim pošalje ili primi OGY, aktivnost će se pojaviti ovdje."
+      },
+      "balanceHistory": {
+        "title": "Povijest stanja",
+        "currentBalance": "Trenutno stanje",
+        "currentBalanceInfo": "Trenutno stanje računa.",
+        "legend": "OGY stanje"
+      },
+      "overview": {
+        "title": "Pregled transakcija",
+        "totalLabel": "Ukupni iznos",
+        "totalSent": "Ukupno poslano",
+        "totalSentInfo": "Ukupni iznos koji je poslao principal.",
+        "totalReceived": "Ukupno primljeno",
+        "totalReceivedInfo": "Ukupni iznos koji je primio principal."
+      }
+    },
+    "flow": {
+      "title": "Tijek transakcija",
+      "searchPlaceholder": "Pretraži transakcije…",
+      "clearSearch": "Očisti pretragu",
+      "loadError": "Učitavanje podataka o transakcijama nije uspjelo. Molimo pokušajte ponovno.",
+      "noMatch": "Nijedna transakcija ne odgovara ovoj pretrazi.",
+      "transactions": "transakcija",
+      "out": "Izlazno",
+      "in": "Ulazno",
+      "total": "Ukupno",
+      "legend": {
+        "outTransaction": "Izlazna transakcija",
+        "inTransaction": "Ulazna transakcija",
+        "includesInitial": "Uključuje početnu transakciju",
+        "rootAccount": "Korijenski račun",
+        "account": "Račun",
+        "fromRoot": "S transakcijama od korijena",
+        "toRoot": "S transakcijama prema korijenu",
+        "madeInitial": "Izvršio početnu transakciju"
+      }
+    },
+    "kind": {
+      "mint": "Kovanje",
+      "transfer": "Prijenos",
+      "burn": "Spaljivanje",
+      "approve": "Odobrenje"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Dobrodošli natrag",
+      "value": "Vrijednost:",
+      "disconnectWallet": "Odspoji novčanik",
+      "accountLabel": "Račun",
+      "manageDescription": "Upravljajte svojim OGY novčanikom, nagradama i aktivnošću stakanja.",
+      "walletBalance": "Stanje novčanika",
+      "myAccount": "Moj račun",
+      "howToTopUp": "Kako nadopuniti?"
+    },
+    "principal": {
+      "accountIdLabel": "ID računa:",
+      "principalIdLabel": "ID principala:"
+    },
+    "available": {
+      "title": "Dostupni OGY",
+      "transactionHistory": "Povijest transakcija",
+      "transfer": "Prenesi",
+      "transferOgy": "Prenesi OGY",
+      "transferDescription": "OGY možete slati samo iz svog dostupnog stanja.",
+      "max": "Maks.",
+      "recipientAddress": "Adresa primatelja",
+      "amountReceived": "Primljeni iznos",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "Naknada za transakciju (naplaćuje se izvoru)",
+      "currentBalance": "Trenutno stanje:",
+      "transferProcessing": "Prijenos se obrađuje",
+      "transferProcessingHint": "Ovo može potrajati nekoliko sekundi",
+      "transferSuccess": "Prijenos je uspješan!",
+      "transferError": "Pogreška pri prijenosu!",
+      "errors": {
+        "amountRequired": "Iznos je obavezan.",
+        "amountExceedsBalance": "Iznos ne smije premašiti vaše stanje.",
+        "amountBelowFee": "Iznos ne smije biti manji od naknade za transakciju.",
+        "amountNotPositive": "Iznos mora biti pozitivan broj.",
+        "recipientRequired": "Adresa primatelja je obavezna.",
+        "recipientInvalid": "Nevažeća adresa primatelja."
+      }
+    },
+    "staked": {
+      "title": "Stakani OGY",
+      "stake": "Stakaj",
+      "stakeOgy": "Stakaj OGY",
+      "stakeDescription": "Za stakanje OGY-ja morate otići na našu NNS platformu.",
+      "warningNotConnected": "Čini se da niste povezani s",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Trebate",
+      "warningToConnect": "za povezivanje s NNS platformom.",
+      "goToNns": "Idi na NNS"
+    },
+    "rewards": {
+      "title": "Stakane nagrade",
+      "claimAll": "Zatraži sve",
+      "claimDisabledReason": "Zahtjevi za nagrade podržani su samo za zadani račun principala.",
+      "aboutToClaim": "Spremate se zatražiti",
+      "sentToPrincipal": "Nagrade će biti poslane vašem principalu",
+      "pending": "Zahtijevanje svih nagrada...",
+      "successTitle": "Zahtijevanje svih nagrada uspješno!",
+      "errorTitle": "Pogreška pri zahtijevanju svih nagrada!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Mijenjamo ledger i upravljanje",
+        "description": "ORIGYN upravljanje i ledger nadograđeni su na SNS. Kako biste nastavili sudjelovati u ORIGYN upravljanju i koristiti OGY, morate migrirati svoje OGY tokene."
+      },
+      "howToSwap": "Kako zamijeniti tokene",
+      "disclosureToggle": "Još imate stare OGY tokene? Zamijenite sada!",
+      "accountId": "ID računa:",
+      "steps": {
+        "withdraw": {
+          "title": "Korak 1: Povucite iz starog upravljanja",
+          "subtitle": "Ako ste prethodno sudjelovali u OGY upravljanju, te tokene morate povući prije nego ih možete zamijeniti."
+        },
+        "deposit": {
+          "title": "Korak 2: Položite na svoj račun",
+          "subtitle": "Ako imate tokena izvan OGY nadzorne ploče, položite ih na svoj account-id prije nego ih počnete zamjenjivati."
+        },
+        "swap": {
+          "title": "Korak 3: Zamijenite tokene",
+          "subtitle": "Zamijenite stari OGY token za novi ledger."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Stanje starog OGY-ja"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Idi na staru OGY nadzornu ploču"
+      },
+      "swap": {
+        "disabledOisy": "Zamjena starog OGY-ja nije dostupna s OISY. Povežite se putem Internet Identity ili Plug kako biste zamijenili svoj stari OGY.",
+        "disabledSubAccount": "Zamjena starog OGY-ja podržana je samo sa zadanog računa principala.",
+        "swapYourTokens": "Zamijenite svoje tokene",
+        "automaticDisabled": "Automatska zamjena je onemogućena. Vaš zahtjev za zamjenu morat će biti odobren, min. iznos je 50 000 OGY.",
+        "form": {
+          "title": "Zamijenite svoj OGY za novi ledger",
+          "description": "Položite na svoj account id sve OGY tokene koje želite zamijeniti",
+          "tokensAvailable": "Tokeni dostupni za zamjenu",
+          "youWillReceivePrefix": "Primit ćete",
+          "youWillReceiveSuffix": "OGY tokena na novom ledgeru.",
+          "swapPrefix": "Zamijeni",
+          "swapSuffix": "OGY tokena"
+        },
+        "pending": {
+          "takesTime": "Postupak zamjene može potrajati neko vrijeme.",
+          "doNotRefresh": "Ne osvježavajte stranicu!",
+          "swapping": "Zamjena tokena..."
+        },
+        "success": {
+          "title": "Zamjena je uspješna!",
+          "walletBalance": "Stanje novčanika na novom ledgeru",
+          "myAccount": "Moj račun"
+        },
+        "error": {
+          "title": "Pogreška pri zamjeni tokena!",
+          "retry": "Pokušaj ponovno"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Moji OGY neuroni",
+        "idHeader": "ID",
+        "stakedAmount": "Stakani iznos",
+        "claimAmount": "Iznos za zatražiti",
+        "emptyTitle": "Još nema neurona",
+        "emptyDescription": "Dodajte OGY neuron kako biste ovdje počeli pratiti stake, glasačku moć i nagrade.",
+        "addFirstNeuron": "Dodajte svoj prvi neuron"
+      },
+      "add": {
+        "button": "Dodaj neuron",
+        "title": "Dodaj neuron",
+        "description": "Dodajte ovaj principal kao hotkey na svaki OGY neuron kojim želite ovdje upravljati.",
+        "needHotkey": "Trebate dodati hotkey?",
+        "openNns": "Otvori NNS aplikaciju"
+      },
+      "claim": {
+        "button": "Zatraži",
+        "disabledReason": "Zahtjevi za nagrade podržani su samo za zadani račun principala.",
+        "aboutToClaim": "Spremate se zatražiti",
+        "sentToPrincipal": "Nagrade će biti poslane vašem principalu",
+        "pending": "Zahtijevanje nagrade...",
+        "successTitle": "Zahtijevanje nagrade uspješno!",
+        "errorTitle": "Pogreška pri zahtijevanju nagrade!",
+        "retry": "Pokušaj ponovno"
+      },
+      "remove": {
+        "title": "Ukloni neuron",
+        "description": "Kako biste uklonili ovaj neuron, morate ukloniti svoj principal s popisa hotkeyeva vašeg neurona."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adresa",
+      "governanceBalance": "Stanje upravljanja",
+      "stakedTokens": "Stakani tokeni",
+      "ledgerBalance": "Stanje ledgera",
+      "weightInTotalSupply": "Udio u ukupnoj ponudi"
+    }
+  },
+  "recovery": {
+    "title": "Vratite svoje tokene",
+    "description": "OGY nadzorna ploča podržava samo OGY token. U slučaju da ste ovamo slučajno poslali druge tokene, možete ih vratiti slijedeći korake u nastavku.",
+    "chooseToken": "Odaberite token",
+    "loginRequired": "Kako biste prikupili svoje tokene, morate biti prijavljeni.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger kanister:",
+      "transferIcp": "Prenesi ICP",
+      "availableBalanceNote": "ICP možete slati samo iz svog dostupnog stanja.",
+      "amountRequired": "Iznos je obavezan.",
+      "amountExceedsBalance": "Iznos ne smije premašiti vaše stanje.",
+      "amountPositive": "Iznos mora biti pozitivan broj.",
+      "amountBelowFee": "Iznos mora biti veći ili jednak naknadama za transakciju.",
+      "recipientAddress": "Adresa primatelja",
+      "recipientAddressRequired": "Adresa primatelja je obavezna.",
+      "invalidRecipientAddress": "Nevažeća adresa primatelja.",
+      "amountReceived": "Primljeni iznos",
+      "transactionFee": "Naknada za transakciju",
+      "currentBalance": "Trenutno stanje:",
+      "processing": "Prijenos se obrađuje",
+      "processingNote": "Ovo može potrajati nekoliko sekundi",
+      "success": "Prijenos je uspješan!",
+      "error": "Pogreška pri prijenosu!"
+    }
+  },
+  "support": {
+    "category": "Podrška",
+    "title": "Stvori prijavu",
+    "titleSubmitted": "Prijava poslana",
+    "successTitle": "Prijava podršci stvorena",
+    "successMessage": "Javit ćemo vam se na e-mail adresu koju ste naveli.",
+    "submitAnother": "Pošalji još jednu prijavu",
+    "intro": "Opišite svoj problem i kako vas možemo kontaktirati.",
+    "form": {
+      "name": "Ime",
+      "email": "Kontaktni e-mail",
+      "emailRequired": "E-mail adresa je obavezna",
+      "emailInvalid": "Nevažeća e-mail adresa",
+      "principal": "Principal novčanika",
+      "invalidPrincipal": "Nevažeća adresa primatelja.",
+      "description": "Opis",
+      "descriptionPlaceholder": "Recite nam što se događa…",
+      "descriptionRequired": "Molimo opišite svoj problem"
+    },
+    "submitError": "Nešto je pošlo po zlu. Molimo pokušajte ponovno.",
+    "submitting": "Slanje…"
+  },
+  "explorer": {
+    "title": "Preglednik",
+    "searchPlaceholder": "Pretraži po naslovu, izdavatelju, principalu ili ID-u tokena",
+    "openFilters": "Otvori filtre",
+    "checkOnBlockchain": "Provjeri na blockchainu",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Istaknuti certifikati",
+      "art": "Umjetnički certifikati",
+      "gold": "Zlatni certifikati"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Kopiraj u međuspremnik",
+    "toggleRelativeTime": "Prebaci relativno vrijeme. Trenutni prikaz:",
+    "collapseRow": "Sažmi redak",
+    "expandRow": "Proširi redak",
+    "searchPlaceholder": "Pretraži stavke...",
+    "sortAscending": "Sortiraj uzlazno",
+    "sortDescending": "Sortiraj silazno",
+    "linesPerPage": "Redaka po stranici",
+    "page": "Stranica",
+    "pageOf": "od",
+    "previousPage": "Prethodna stranica",
+    "nextPage": "Sljedeća stranica"
+  },
+  "auth": {
+    "connect": "Poveži",
+    "disconnect": "Odspoji",
+    "connectWallet": {
+      "title": "Povežite svoj novčanik",
+      "subtitle": "Odaberite kako se želite prijaviti"
+    },
+    "install": "Instaliraj",
+    "newToIc": "Novi ste na Internet Computer?",
+    "learnMore": "Saznajte više",
+    "connecting": {
+      "title": "Povezivanje...",
+      "subtitle": "Odobrite zahtjev u svom novčaniku"
+    },
+    "sessionExpired": {
+      "title": "Sesija je istekla",
+      "description": "Vaša sesija novčanika više nije važeća. Ponovno se povežite za nastavak."
+    },
+    "reconnect": "Ponovno poveži",
+    "error": {
+      "connectionCancelled": "Povezivanje otkazano. Molimo pokušajte ponovno.",
+      "connectionFailed": "Povezivanje novčanika nije uspjelo. Molimo pokušajte ponovno."
+    }
+  },
+  "warning": {
+    "badge": "NOVO",
+    "ledgerSwitch": "mijenjamo ledger, morate zamijeniti svoj OGY za novi"
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator troškova",
+      "description": "Koristite ORIGYN kalkulator kako biste procijenili trošak Vašeg jedinstvenog certifikata sa svim Vašim podacima on-chain"
+    },
+    "plan": {
+      "title": "Planirajte svoje iskivanje",
+      "description": "Recite nam koliko stavki imate i što učitavate.",
+      "itemsLabel": "Koliko stavki?",
+      "uploadingLabel": "Što učitavate?",
+      "knowExactSize": "Znate li točnu veličinu?",
+      "totalUploadSize": "Ukupna veličina učitavanja",
+      "usePreset": "Umjesto toga koristite predložak",
+      "combinedSize": "Ukupna veličina svih datoteka svih stavki.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB svaki"
+        },
+        "iphone": {
+          "label": "Fotografija",
+          "hint": "3 MB svaka"
+        },
+        "dslr": {
+          "label": "Studijska fotografija",
+          "hint": "20 MB svaka"
+        },
+        "video": {
+          "label": "Kratki video",
+          "hint": "1 GB svaki"
+        },
+        "video1hr": {
+          "label": "Dugi video",
+          "hint": "60 GB svaki"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Procjena uživo",
+      "titleRefreshing": "Osvježavanje procjene",
+      "description": "Automatski se ažurira dok mijenjate postavke.",
+      "ogyEquivalent": "OGY ekvivalent",
+      "ogySpotRate": "OGY promptna cijena",
+      "itemSingular": "Stavka",
+      "itemPlural": "Stavke",
+      "upload": "Učitavanje"
+    },
+    "breakdown": {
+      "title": "Razrada troškova",
+      "baseFee": "Osnovna naknada za iskivanje",
+      "storageFee": "Naknada za pohranu",
+      "items": "Stavke",
+      "uploadSize": "Veličina učitavanja"
+    },
+    "bytesUnit": "bajta"
+  }
+}

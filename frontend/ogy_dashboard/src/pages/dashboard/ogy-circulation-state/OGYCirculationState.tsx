@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { TooltipInfo, ExternalLink } from "@components/ui";
 import { PieStatsCard } from "@components/dashboard";
 import useCirculationStateOGY from "@hooks/metrics/useCirculationStateOGY";
+import { useT } from "@i18n/LocaleContext";
 
 type OGYCirculationStateProps = {
   className?: string;
@@ -10,40 +11,40 @@ type OGYCirculationStateProps = {
 const COLORS = ["#645eff", "#333089"];
 
 const OGYCirculationState = ({ className }: OGYCirculationStateProps) => {
+  const t = useT();
   const infos = useMemo(
     () => [
       {
         id: "tooltip-amount-not-owned",
-        name: "OGY not in the hand of the Foundation",
-        value: "Amount of circulated tokens not owned by ORIGYN foundation.",
+        name: t("dashboard.circulationState.notOwnedName"),
+        value: t("dashboard.circulationState.notOwnedValue"),
       },
       {
         id: "tooltip-amount-owned",
-        name: "OGY locked in the hand of the Foundation",
-        value: "Amount of locked tokens owned by ORIGYN foundation.",
+        name: t("dashboard.circulationState.ownedName"),
+        value: t("dashboard.circulationState.ownedValue"),
       },
     ],
-    []
+    [t]
   );
   const { data, isLoading, isError } = useCirculationStateOGY();
 
   return (
     <PieStatsCard
       className={className}
-      title="OGY Circulation State"
+      title={t("dashboard.circulationState.title")}
       titleTooltip={
         <TooltipInfo id="tooltip-circulation-state" clickable={true}>
-          The circulating supply is all tokens except unlocked tokens owned by
-          the ORIGYN Foundation.
+          {t("dashboard.circulationState.tooltip")}
           <ExternalLink href="https://dashboard.internetcomputer.org/proposal/117360">
-            NNS Proposal
+            {t("dashboard.circulationState.nnsProposal")}
           </ExternalLink>
         </TooltipInfo>
       }
       data={data?.dataPieChart}
       colors={COLORS}
       infos={infos}
-      totalLabel="Total OGY Circulation"
+      totalLabel={t("dashboard.circulationState.totalLabel")}
       totalValue={data?.string.circulatingSupply}
       loading={isLoading}
       isError={isError}

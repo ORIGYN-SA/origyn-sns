@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Nyelv",
+    "switchTo": "Váltás erre: {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Betöltés...",
+    "error": "Valami hiba történt",
+    "retry": "Újra",
+    "cancel": "Mégse",
+    "confirm": "Megerősítés",
+    "close": "Bezárás",
+    "back": "Vissza",
+    "next": "Tovább",
+    "previous": "Előző",
+    "save": "Mentés",
+    "submit": "Küldés",
+    "copy": "Másolás",
+    "copied": "Másolva",
+    "search": "Keresés",
+    "viewAll": "Összes megtekintése",
+    "showMore": "Több megjelenítése",
+    "showLess": "Kevesebb megjelenítése",
+    "amount": "Összeg",
+    "date": "Dátum",
+    "type": "Típus",
+    "from": "Feladó",
+    "to": "Címzett",
+    "index": "Index",
+    "status": "Állapot",
+    "total": "Összesen",
+    "balance": "Egyenleg",
+    "yes": "Igen",
+    "no": "Nem",
+    "notAvailable": "N/A"
+  },
+  "nav": {
+    "dashboard": "Irányítópult",
+    "governance": "Kormányzás",
+    "transactionHistory": "Tranzakciós előzmények",
+    "calculator": "Kalkulátor",
+    "openMainMenu": "Főmenü megnyitása",
+    "closeMenu": "Menü bezárása",
+    "openAccountOverview": "Fiókáttekintés megnyitása",
+    "viewAccountOverview": "Fiókáttekintés megtekintése",
+    "connectPrompt": "Csatlakoztasd a tárcádat a tokenek kezeléséhez, a javaslatokra való szavazáshoz és a tranzakciós előzményeid megtekintéséhez.",
+    "connectWallet": "Tárca csatlakoztatása",
+    "disconnect": "Leválasztás"
+  },
+  "notFound": {
+    "title": "Az oldal nem található",
+    "description": "Sajnáljuk, nem találtuk a keresett oldalt.",
+    "backHome": "Vissza a kezdőlapra"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY irányítópult",
+      "home": "Kezdőlap",
+      "circulation": "Forgalom",
+      "governance": "Kormányzás",
+      "revenue": "Bevétel",
+      "rewards": "Jutalmak",
+      "distribution": "Elosztás",
+      "governanceDashboard": "OGY kormányzási irányítópult",
+      "transactionExplorer": "OGY tranzakciós böngésző"
+    },
+    "learn": {
+      "heading": "Tudj meg többet az OGY Tokenomics és az ORIGYN témakörökről",
+      "tokenomicsDeck": "OGY Tokenomics prezentáció",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT szabvány",
+      "tokenomicsFaq": "ORIGYN Tokenomics GYIK",
+      "website": "ORIGYN weboldal",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Támogatás",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Kapcsolat"
+    },
+    "support": {
+      "contactSupport": "Ügyfélszolgálat",
+      "recoverTokens": "Tokenek visszaszerzése"
+    },
+    "disclaimer": "*Az ORIGYN Foundation nem vállal felelősséget az OGY tokenek a csere folyamattal összefüggésben bekövetkező elvesztéséért, ellopásáért vagy jogtalan eltulajdonításáért. Továbbá az ORIGYN Foundation nem vonható felelősségre a csere végrehajtásának elmaradásáért, ha az érintett fél nem tartja be szigorúan az ORIGYN Foundation által meghatározott feltételeket."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALITIKA",
+      "title": "Irányítópult felfedezése",
+      "subtitle": "Lépj kapcsolatba bizalom nélkül a web3 dApps, DAOs, NFT, DeFi alkalmazásokkal és még sok mással."
+    },
+    "cta": {
+      "loginToSwap": "Bejelentkezés a tokenek cseréjéhez",
+      "myAccount": "Fiókom"
+    },
+    "governanceStaking": {
+      "title": "Kormányzási staking áttekintés"
+    },
+    "cardError": {
+      "couldNotLoad": "Nem sikerült betölteni",
+      "descriptionLine1": "Hiba történt a metrika lekérése közben.",
+      "descriptionLine2": "Kérjük, próbáld újra egy pillanat múlva."
+    },
+    "emptyState": {
+      "noDataFor": "Nincs adat ehhez:",
+      "description": "Jelenleg nincs megjeleníthető tartalom."
+    },
+    "circulationState": {
+      "title": "OGY forgalmi állapot",
+      "tooltip": "A forgalomban lévő kínálat minden token, kivéve az ORIGYN Foundation tulajdonában lévő feloldott tokeneket.",
+      "nnsProposal": "NNS javaslat",
+      "totalLabel": "Teljes OGY forgalom",
+      "notOwnedName": "OGY, amely nincs a Foundation kezében",
+      "notOwnedValue": "Az ORIGYN foundation tulajdonában nem lévő, forgalomban lévő tokenek mennyisége.",
+      "ownedName": "OGY, amely a Foundation kezében zárolt",
+      "ownedValue": "Az ORIGYN foundation tulajdonában lévő zárolt tokenek mennyisége."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation tartalék",
+      "tooltip": "Az ORIGYN foundation tulajdonában lévő OGY tokenek teljes mennyisége minden tárcában.",
+      "totalLabel": "Teljes Foundation kínálat",
+      "lockedName": "Zárolt",
+      "lockedIntro": "Az ORIGYN foundation stake-ekben vagy vestingekben zárolt tokenjei.",
+      "lockedStakes": "1) Stake-ek – tokenek, amelyek a kormányzási szavazásban való részvételnek köszönhetően jutalmakat termelnek.",
+      "lockedStakesNote": "Ezeket a tokeneket önkéntesen zárolták.",
+      "lockedVestings": "2) Vestingek – tokenek, amelyek nem kapnak jutalmat és nem vehetnek részt a szavazásban.",
+      "lockedVestingsNote": "Ezeket a tokeneket az ORIGYN Foundationnel kötött szerződésed zárolta.",
+      "unlockedName": "Feloldott",
+      "unlockedValue": "Az ORIGYN foundation tulajdonában lévő feloldott eszköz."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Hálózati bevétel",
+      "tokenLogoAlt": "Token logó",
+      "tooltipOgy": "Az ORIGYN hálózat használatáért (pl. digitális tanúsítványok kibocsátásáért vagy átviteléért, NFT-k mintázásáért stb.) felszámított díjakból származó hálózati hasznosítási bevétel, OGY-ben felhalmozva.",
+      "tooltipIcp": "Az ORIGYN hálózat használatáért (pl. digitális tanúsítványok kibocsátásáért vagy átviteléért, NFT-k mintázásáért stb.) felszámított díjakból származó hálózati hasznosítási bevétel, ICP-ben felhalmozva."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "ORA egyenleg",
+      "year": "Év",
+      "rewardPool": "Jutalmazási alap",
+      "moreDetails": "További részletek",
+      "tooltipStake": "A token tulajdonosok stake-elhetik az OGY-jukat, és a kormányzásban való részvétellel jutalmakat szerezhetnek.",
+      "tooltipSeed": "A jutalmak az ORIGYN Reward Accountból érkeznek, amelyet az ORIGYN egymilliárd OGY-vel tölt fel.",
+      "tooltipPool": "A jutalmazási alap az első évben 250 millió OGY-t tartalmaz, és kétévente megfeleződik, hogy ösztönözze és jutalmazza az ökoszisztéma korai és hosszú távú résztvevőit.",
+      "description": "Az ORIGYN egymilliárd OGY-t bocsát egy ORIGYN Reward Accountba (ORA) a stake-elő és szavazó tulajdonosok javára. A jutalmazási alap az első évben 250 millió OGY-t tartalmaz, és kétévente megfeleződik, hogy ösztönözze és jutalmazza az ökoszisztéma korai és hosszú távú résztvevőit."
+    },
+    "tokenDistribution": {
+      "title": "Token elosztás"
+    },
+    "transactionHistory": {
+      "title": "Tranzakciós előzmények",
+      "showAll": "Összes megjelenítése"
+    },
+    "topTransfers": {
+      "value": "Érték",
+      "time": "Idő",
+      "ogyLogoAlt": "OGY logó",
+      "noDataAvailable": "Nincs elérhető adat."
+    },
+    "totalSupply": {
+      "title": "Teljes OGY kínálat",
+      "tooltipTitle": "Az elérhető OGY tokenek teljes mennyisége.",
+      "tooltipLine1": "Ez magában foglalja a forgalomban lévő kínálatot és az ORIGYN Foundation ellenőrzése alatt álló kínálatot.",
+      "tooltipLine2": "Szeptember 18-tól az ORIGYN teljesen deflációs modellre váltott, ami azt jelenti, hogy nem mintáznak több új tokent.",
+      "chartLabel": "Teljes kínálat"
+    },
+    "totalBurned": {
+      "title": "Összesen elégetett OGY",
+      "tooltipTitle": "Az elégetett OGY tokenek teljes mennyisége.",
+      "tooltipLine1": "Ezeket a tokeneket teljesen elégették, és többé nem elérhetők.",
+      "tooltipLine2": "A tokenek különböző okokból égethetők el, például tanúsítvány-mintázási díjak, hálózati hasznosítási díjak vagy hálózati tranzakciós díjak miatt.",
+      "chartLabel": "Összesen elégetett"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Napi",
+      "weekly": "Heti",
+      "monthly": "Havi",
+      "yearly": "Éves",
+      "all": "Összes"
+    },
+    "stakingOverview": {
+      "title": "Staking áttekintés",
+      "totalTokensInStakes": "Stake-ekben lévő tokenek összesen",
+      "tooltip": "Stake-ekben zárolt tokenek.",
+      "stakedTokens": "Stake-elt tokenek",
+      "stakedTokensLegend": "STAKE-ELT TOKENEK"
+    },
+    "usersActivity": {
+      "title": "Felhasználói áttekintés",
+      "protocolUsers": "OGY protokoll felhasználók",
+      "protocolUsersTooltip": "Az OGY tokenek egyedi tulajdonosai",
+      "protocolUsersLegend": "OGY PROTOKOLL FELHASZNÁLÓK",
+      "activeWallets": "OGY aktív tárcák",
+      "activeWalletsTooltip": "Az OGY tokenek aktív tulajdonosai"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Kormányzási áttekintés",
+      "welcome": "Üdvözlünk az ORIGYN kormányzásban!",
+      "description": "Az OGY tokenek tulajdonosai közvetlenül befolyásolhatják az ORIGYN hálózatot az OGY-juk stake-elésével és a javaslatokra való szavazással. A döntéshozatali folyamatban való részvétellel ezek a stake-elő token tulajdonosok jutalmakat szereznek.",
+      "learnMore": "Tudj meg többet"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake-elj és szavazz",
+        "description": "Befolyásold az ORIGYN hálózatot az OGY stake-elésével és a javaslatokra való szavazással."
+      },
+      "earnRewards": {
+        "title": "Szerezz jutalmakat",
+        "description": "Vegyél részt a döntéshozatali folyamatban, hogy jutalmakat szerezz."
+      },
+      "governCollectively": {
+        "title": "Irányíts közösen",
+        "description": "Vegyél részt a hálózat alakításában együttműködő ökoszisztémaként."
+      }
+    },
+    "tokensSection": {
+      "title": "Tokenek a kormányzásban",
+      "paragraph1": "Az OGY tokenek tulajdonosai közvetlenül befolyásolhatják az ORIGYN hálózatot az OGY-juk stake-elésével és a javaslatokra való szavazással.",
+      "paragraph2": "A döntéshozatali folyamatban való részvétellel ezek a stake-elő token tulajdonosok jutalmakat szereznek, és közösen, demokratikusan irányítanak.",
+      "learnMoreOgy": "Tudj meg többet az OGY-ról"
+    },
+    "sections": {
+      "proposals": "Javaslatok",
+      "neurons": "Neuronok"
+    },
+    "votingParticipation": {
+      "title": "Szavazási részvétel",
+      "chartLabel": "Részvétel %",
+      "legendLabel": "RÉSZVÉTEL %",
+      "period": {
+        "weekly": "Heti",
+        "monthly": "Havi",
+        "yearly": "Éves"
+      },
+      "lastParticipation": {
+        "label": "Utolsó szavazási részvétel",
+        "tooltip": "A részvétel százaléka az utolsó szavazási eseményen."
+      },
+      "averageParticipation": {
+        "label": "Átlagos szavazási részvétel",
+        "tooltip": "A szavazási részvétel átlagos százaléka idővel."
+      },
+      "averagePower": {
+        "label": "Átlagos szavazati erő",
+        "tooltip": "Átlagos szavazati erő az összes résztvevő között."
+      }
+    },
+    "estimateRewards": {
+      "title": "Becsüld meg a jutalmaidat",
+      "lockDuration": "Zárolás időtartama",
+      "participants": "résztvevő",
+      "lockedForAtLeast": "jelenleg legalább erre zárolva",
+      "lockedFor": "jelenleg erre zárolva",
+      "year": "év",
+      "years": "év"
+    },
+    "kpi": {
+      "metric": "Metrika",
+      "rewardBaseCurrentYear": "Jutalomalap az aktuális évre",
+      "dailyVotingRewards": "Napi szavazási jutalmak",
+      "totalVotingPower": "Teljes szavazati erő",
+      "overallVotingParticipation": "Összesített szavazási részvétel"
+    },
+    "total": {
+      "titleTooltip": "Az összes token, amely a kormányzási canisterben van. Ezek a tokenek lehetnek vesting állapotban, staking állapotban, unstake-elve vagy nem igényelve.",
+      "totalLabel": "Tokenek a kormányzásban összesen",
+      "locked": {
+        "name": "Zárolt",
+        "tooltip": "A kormányzásban zárolt tokenek."
+      },
+      "unlocked": {
+        "name": "Feloldott",
+        "tooltip": "A kormányzásban feloldott tokenek, amelyek bármikor kivehetők és kereskedhetők."
+      },
+      "accumulatedRewards": {
+        "name": "Felhalmozott jutalmak",
+        "tooltip": "A felhasználók javára számolt, de még nem igényelt jutalmak."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Javaslatok",
+      "viewProposal": "Javaslat megtekintése",
+      "columns": {
+        "id": "Azonosító",
+        "title": "Cím",
+        "proposed": "Javasolva",
+        "timeRemaining": "Hátralévő idő",
+        "topic": "Téma",
+        "status": "Állapot",
+        "view": "Megtekintés"
+      }
+    },
+    "details": {
+      "category": "Kormányzás",
+      "proposalNumber": "Javaslat #",
+      "proposal": "Javaslat",
+      "titleLoading": "Javaslat címének betöltése…",
+      "payloadLoading": "Javaslat részleteinek betöltése…",
+      "posted": "Közzétéve",
+      "topic": "Téma",
+      "moreInfo": "További információ",
+      "totalVotes": "Összes szavazat",
+      "adopt": "ELFOGADÁS",
+      "reject": "ELUTASÍTÁS",
+      "vote": "Szavazás"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuronok",
+      "viewNeuron": "Neuron megtekintése",
+      "columns": {
+        "id": "Azonosító",
+        "state": "Állapot",
+        "stakedOgy": "Stake-elt OGY",
+        "dissolveDelay": "Feloldási késleltetés",
+        "age": "Életkor",
+        "votingPower": "Szavazati erő",
+        "view": "Megtekintés"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY neuron",
+      "created": "Létrehozva",
+      "stakedOgy": "Stake-elt OGY",
+      "votingPower": "Szavazati erő",
+      "dissolveDelay": "Feloldási késleltetés",
+      "age": "Életkor",
+      "lifecycle": "Neuron életciklus",
+      "dateCreated": "Létrehozás dátuma",
+      "autoStakeMaturity": "Érettség automatikus stake-elése",
+      "rewardsAndBonuses": "Jutalmak és bónuszok",
+      "stakedMaturity": "Stake-elt érettség",
+      "totalMaturity": "Teljes érettség",
+      "ageBonus": "Életkor bónusz",
+      "totalBonus": "Teljes bónusz",
+      "dissolveDelayBonus": "Feloldási késleltetés bónusz"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Tranzakciós előzmények",
+      "searchFor": "Keresés:",
+      "or": "vagy",
+      "searchPlaceholder": "Elem keresése",
+      "noResults": "Nincs találat",
+      "resultBlock": "Blokk",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Tranzakció részletei",
+      "hash": "Hash",
+      "fetchError": "Hiba egy tranzakció lekérésekor!",
+      "mintingAccount": "Mintázási fiók",
+      "fee": "Díj",
+      "memo": "Megjegyzés",
+      "none": "Nincs"
+    },
+    "accountDetails": {
+      "title": "OGY fiók",
+      "id": "Azonosító",
+      "owner": "Tulajdonos",
+      "subaccount": "Alfiók",
+      "defaultSubaccount": "Nincs (alapértelmezett alfiók)",
+      "historicalMaxBalance": "Történelmi maximális egyenleg",
+      "genesisBalance": "Kezdeti egyenleg",
+      "period": {
+        "monthly": "Havi",
+        "quarterly": "Negyedéves",
+        "yearly": "Éves",
+        "lifetime": "Teljes időtartam"
+      },
+      "empty": {
+        "title": "Még nincsenek tranzakciók",
+        "description": "Ennek a fióknak nincs tranzakciós előzménye. Amint OGY-t küld vagy fogad, a tevékenység itt jelenik meg."
+      },
+      "balanceHistory": {
+        "title": "Egyenleg előzmények",
+        "currentBalance": "Aktuális egyenleg",
+        "currentBalanceInfo": "Aktuális fiókegyenleg.",
+        "legend": "OGY egyenleg"
+      },
+      "overview": {
+        "title": "Tranzakciók áttekintése",
+        "totalLabel": "Teljes összeg",
+        "totalSent": "Összesen küldött",
+        "totalSentInfo": "A principal által küldött teljes összeg.",
+        "totalReceived": "Összesen fogadott",
+        "totalReceivedInfo": "A principal által fogadott teljes összeg."
+      }
+    },
+    "flow": {
+      "title": "Tranzakciós folyamat",
+      "searchPlaceholder": "Tranzakciók keresése…",
+      "clearSearch": "Keresés törlése",
+      "loadError": "Nem sikerült betölteni a tranzakciós adatokat. Kérjük, próbáld újra.",
+      "noMatch": "Egyetlen tranzakció sem felel meg ennek a keresésnek.",
+      "transactions": "tranzakció",
+      "out": "Ki",
+      "in": "Be",
+      "total": "Összesen",
+      "legend": {
+        "outTransaction": "Kimenő tranzakció",
+        "inTransaction": "Bejövő tranzakció",
+        "includesInitial": "Tartalmazza a kezdeti tranzakciót",
+        "rootAccount": "Gyökérfiók",
+        "account": "Fiók",
+        "fromRoot": "A gyökérből érkező tranzakciókkal",
+        "toRoot": "A gyökérbe küldött tranzakciókkal",
+        "madeInitial": "Végrehajtotta a kezdeti tranzakciót"
+      }
+    },
+    "kind": {
+      "mint": "Kibocsátás",
+      "transfer": "Átutalás",
+      "burn": "Égetés",
+      "approve": "Jóváhagyás"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Üdv újra",
+      "value": "Érték:",
+      "disconnectWallet": "Tárca leválasztása",
+      "accountLabel": "Fiók",
+      "manageDescription": "Kezeld az OGY tárcádat, jutalmaidat és staking tevékenységedet.",
+      "walletBalance": "Tárca egyenleg",
+      "myAccount": "Fiókom",
+      "howToTopUp": "Hogyan tölthető fel?"
+    },
+    "principal": {
+      "accountIdLabel": "Fiókazonosító:",
+      "principalIdLabel": "Principal azonosító:"
+    },
+    "available": {
+      "title": "Elérhető OGY",
+      "transactionHistory": "Tranzakciós előzmények",
+      "transfer": "Átutalás",
+      "transferOgy": "OGY átutalása",
+      "transferDescription": "Csak az elérhető egyenlegedből küldhetsz OGY-t.",
+      "max": "Max",
+      "recipientAddress": "Címzett címe",
+      "amountReceived": "Fogadott összeg",
+      "ogyLogoAlt": "OGY logó",
+      "transactionFee": "Tranzakciós díj (a forrásra terhelve)",
+      "currentBalance": "Aktuális egyenleg:",
+      "transferProcessing": "Az átutalás feldolgozás alatt áll",
+      "transferProcessingHint": "Ez néhány másodpercet vehet igénybe",
+      "transferSuccess": "Az átutalás sikeres volt!",
+      "transferError": "Átutalási hiba!",
+      "errors": {
+        "amountRequired": "Az összeg megadása kötelező.",
+        "amountExceedsBalance": "Az összeg nem haladhatja meg az egyenlegedet.",
+        "amountBelowFee": "Az összeg nem lehet kevesebb a tranzakciós díjnál.",
+        "amountNotPositive": "Az összegnek pozitív számnak kell lennie.",
+        "recipientRequired": "A címzett címe kötelező.",
+        "recipientInvalid": "Érvénytelen címzett cím."
+      }
+    },
+    "staked": {
+      "title": "Stake-elt OGY",
+      "stake": "Stake-elés",
+      "stakeOgy": "OGY stake-elése",
+      "stakeDescription": "Az OGY stake-eléséhez az NNS platformunkra kell menned.",
+      "warningNotConnected": "Úgy tűnik, nem vagy csatlakozva ezzel:",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Szükséged van egy",
+      "warningToConnect": "az NNS platformhoz való csatlakozáshoz.",
+      "goToNns": "Ugrás az NNS-hez"
+    },
+    "rewards": {
+      "title": "Stake-elt jutalmak",
+      "claimAll": "Összes igénylése",
+      "claimDisabledReason": "A jutalmak igénylése csak a principal alapértelmezett fiókjához támogatott.",
+      "aboutToClaim": "A következő igénylésére készülsz:",
+      "sentToPrincipal": "A jutalmak a principal-odra lesznek elküldve",
+      "pending": "Összes jutalom igénylése...",
+      "successTitle": "Az összes jutalom igénylése sikeres!",
+      "errorTitle": "Hiba az összes jutalom igénylésekor!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Ledgert és kormányzást váltunk",
+        "description": "Az ORIGYN kormányzás és ledger SNS-re lett frissítve. Ahhoz, hogy továbbra is részt vehess az ORIGYN kormányzásban és használhasd az OGY-t, migrálnod kell az OGY tokenjeidet."
+      },
+      "howToSwap": "Hogyan cseréld a tokeneket",
+      "disclosureToggle": "Még mindig vannak régi OGY tokenjeid? Cseréld most!",
+      "accountId": "Fiókazonosító:",
+      "steps": {
+        "withdraw": {
+          "title": "1. lépés: Kivonás a régi kormányzásból",
+          "subtitle": "Ha korábban részt vettél az OGY kormányzásban, ki kell vonnod azokat a tokeneket, mielőtt kicserélheted őket."
+        },
+        "deposit": {
+          "title": "2. lépés: Befizetés a fiókodba",
+          "subtitle": "Ha vannak az OGY irányítópulton kívüli tokenjeid, fizesd be őket a fiókazonosítódra, mielőtt elkezdheted cserélni őket."
+        },
+        "swap": {
+          "title": "3. lépés: Tokenek cseréje",
+          "subtitle": "Cseréld a régi OGY tokent az új ledgerre."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Régi OGY egyenleg"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Ugrás a régi OGY irányítópultra"
+      },
+      "swap": {
+        "disabledOisy": "A régi OGY csere nem érhető el OISY-vel. Csatlakozz Internet Identity-vel vagy Plug-gal a régi OGY-d cseréjéhez.",
+        "disabledSubAccount": "A régi OGY csere csak a principal alapértelmezett fiókjából támogatott.",
+        "swapYourTokens": "Cseréld a tokenjeidet",
+        "automaticDisabled": "Az automatikus csere le van tiltva. A cserekérelmedet jóvá kell hagyatnod, a minimális összeg 50 000 OGY.",
+        "form": {
+          "title": "Cseréld az OGY-d az új ledgerre",
+          "description": "Fizess be bármilyen OGY tokent, amelyet cserélni szeretnél, a fiókazonosítódra",
+          "tokensAvailable": "Cserére elérhető tokenek",
+          "youWillReceivePrefix": "Kapni fogsz",
+          "youWillReceiveSuffix": "OGY tokent az új ledgeren.",
+          "swapPrefix": "Csere",
+          "swapSuffix": "OGY token"
+        },
+        "pending": {
+          "takesTime": "A csere folyamata egy kis időt vehet igénybe.",
+          "doNotRefresh": "Ne frissítsd az oldalt!",
+          "swapping": "Tokenek cseréje..."
+        },
+        "success": {
+          "title": "A csere sikeres volt!",
+          "walletBalance": "Tárca egyenleg az új ledgeren",
+          "myAccount": "Fiókom"
+        },
+        "error": {
+          "title": "Hiba a tokenek cseréjekor!",
+          "retry": "Újra"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Az OGY neuronjaim",
+        "idHeader": "Azonosító",
+        "stakedAmount": "Stake-elt összeg",
+        "claimAmount": "Igénylendő összeg",
+        "emptyTitle": "Még nincsenek neuronok",
+        "emptyDescription": "Adj hozzá egy OGY neuront, hogy itt nyomon követhesd a stake-et, a szavazati erőt és a jutalmakat.",
+        "addFirstNeuron": "Add hozzá az első neuronodat"
+      },
+      "add": {
+        "button": "Neuron hozzáadása",
+        "title": "Neuron hozzáadása",
+        "description": "Add hozzá ezt a principalt hotkey-ként minden OGY neuronhoz, amelyet itt szeretnél kezelni.",
+        "needHotkey": "Hotkey hozzáadására van szükséged?",
+        "openNns": "NNS alkalmazás megnyitása"
+      },
+      "claim": {
+        "button": "Igénylés",
+        "disabledReason": "A jutalmak igénylése csak a principal alapértelmezett fiókjához támogatott.",
+        "aboutToClaim": "A következő igénylésére készülsz:",
+        "sentToPrincipal": "A jutalmak a principal-odra lesznek elküldve",
+        "pending": "Jutalom igénylése...",
+        "successTitle": "A jutalom igénylése sikeres!",
+        "errorTitle": "Hiba a jutalom igénylésekor!",
+        "retry": "Újra"
+      },
+      "remove": {
+        "title": "Neuron eltávolítása",
+        "description": "A neuron eltávolításához el kell távolítanod a principalodat a neuron hotkey-listájáról."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Cím",
+      "governanceBalance": "Kormányzási egyenleg",
+      "stakedTokens": "Stake-elt tokenek",
+      "ledgerBalance": "Ledger egyenleg",
+      "weightInTotalSupply": "Súly a teljes kínálatban"
+    }
+  },
+  "recovery": {
+    "title": "Tokenek visszaszerzése",
+    "description": "Az OGY irányítópult csak az OGY tokent támogatja. Ha véletlenül más tokeneket küldtél ide, az alábbi lépéseket követve visszaszerezheted őket.",
+    "chooseToken": "Token kiválasztása",
+    "loginRequired": "A tokenek begyűjtéséhez be kell jelentkezned.",
+    "transfer": {
+      "icpLogoAlt": "ICP logó",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "ICP átutalása",
+      "availableBalanceNote": "Csak az elérhető egyenlegedből küldhetsz ICP-t.",
+      "amountRequired": "Az összeg megadása kötelező.",
+      "amountExceedsBalance": "Az összeg nem haladhatja meg az egyenlegedet.",
+      "amountPositive": "Az összegnek pozitív számnak kell lennie.",
+      "amountBelowFee": "Az összegnek nagyobbnak vagy egyenlőnek kell lennie a tranzakciós díjakkal.",
+      "recipientAddress": "Címzett címe",
+      "recipientAddressRequired": "A címzett címe kötelező.",
+      "invalidRecipientAddress": "Érvénytelen címzett cím.",
+      "amountReceived": "Fogadott összeg",
+      "transactionFee": "Tranzakciós díj",
+      "currentBalance": "Aktuális egyenleg:",
+      "processing": "Az átutalás feldolgozás alatt áll",
+      "processingNote": "Ez néhány másodpercet vehet igénybe",
+      "success": "Az átutalás sikeres volt!",
+      "error": "Átutalási hiba!"
+    }
+  },
+  "support": {
+    "category": "Támogatás",
+    "title": "Jegy létrehozása",
+    "titleSubmitted": "Jegy elküldve",
+    "successTitle": "Támogatási jegy létrehozva",
+    "successMessage": "Felvesszük veled a kapcsolatot a megadott e-mail-címen.",
+    "submitAnother": "Másik jegy beküldése",
+    "intro": "Írd le a problémádat és azt, hogyan érhetünk el.",
+    "form": {
+      "name": "Név",
+      "email": "Kapcsolattartási e-mail",
+      "emailRequired": "Az e-mail-cím megadása kötelező",
+      "emailInvalid": "Érvénytelen e-mail-cím",
+      "principal": "Tárca principal",
+      "invalidPrincipal": "Érvénytelen címzett cím.",
+      "description": "Leírás",
+      "descriptionPlaceholder": "Mondd el, mi a probléma…",
+      "descriptionRequired": "Kérjük, írd le a problémádat"
+    },
+    "submitError": "Valami hiba történt. Kérjük, próbáld újra.",
+    "submitting": "Küldés…"
+  },
+  "explorer": {
+    "title": "Böngésző",
+    "searchPlaceholder": "Keresés cím, kibocsátó, principal vagy token azonosító szerint",
+    "openFilters": "Szűrők megnyitása",
+    "checkOnBlockchain": "Ellenőrzés a blokkláncon",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Kiemelt tanúsítványok",
+      "art": "Művészeti tanúsítványok",
+      "gold": "Arany tanúsítványok"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Másolás a vágólapra",
+    "toggleRelativeTime": "Relatív idő váltása. Jelenlegi megjelenítés:",
+    "collapseRow": "Sor összecsukása",
+    "expandRow": "Sor kibontása",
+    "searchPlaceholder": "Elemek keresése...",
+    "sortAscending": "Növekvő rendezés",
+    "sortDescending": "Csökkenő rendezés",
+    "linesPerPage": "Sorok oldalanként",
+    "page": "Oldal",
+    "pageOf": "/",
+    "previousPage": "Előző oldal",
+    "nextPage": "Következő oldal"
+  },
+  "auth": {
+    "connect": "Csatlakozás",
+    "disconnect": "Leválasztás",
+    "connectWallet": {
+      "title": "Csatlakoztasd a tárcádat",
+      "subtitle": "Válaszd ki, hogyan szeretnél bejelentkezni"
+    },
+    "install": "Telepítés",
+    "newToIc": "Új vagy az Internet Computer világában?",
+    "learnMore": "Tudj meg többet",
+    "connecting": {
+      "title": "Csatlakozás...",
+      "subtitle": "Hagyd jóvá a kérést a tárcádban"
+    },
+    "sessionExpired": {
+      "title": "A munkamenet lejárt",
+      "description": "A tárcád munkamenete már nem érvényes. Csatlakozz újra a folytatáshoz."
+    },
+    "reconnect": "Újracsatlakozás",
+    "error": {
+      "connectionCancelled": "A csatlakozás megszakítva. Kérjük, próbáld újra.",
+      "connectionFailed": "A tárca csatlakoztatása sikertelen. Kérjük, próbáld újra."
+    }
+  },
+  "warning": {
+    "badge": "ÚJ",
+    "ledgerSwitch": "ledgert váltunk, az OGY-d át kell cserélned az újra"
+  },
+  "calculator": {
+    "header": {
+      "title": "Költségkalkulátor",
+      "description": "Használja az ORIGYN kalkulátort, hogy megbecsülje egyedi tanúsítványa költségét az összes láncon tárolt adatával együtt"
+    },
+    "plan": {
+      "title": "Tervezze meg a kibocsátást",
+      "description": "Adja meg, hány tételt tölt fel, és milyen fájlokból állnak.",
+      "itemsLabel": "Hány tétel?",
+      "uploadingLabel": "Mit tölt fel?",
+      "knowExactSize": "Ismeri a pontos méretet?",
+      "totalUploadSize": "Teljes feltöltési méret",
+      "usePreset": "Inkább használjon előre beállított értéket",
+      "combinedSize": "Az összes tétel összes fájljának együttes mérete.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB darabonként"
+        },
+        "iphone": {
+          "label": "Fotó",
+          "hint": "3 MB darabonként"
+        },
+        "dslr": {
+          "label": "Stúdiófotó",
+          "hint": "20 MB darabonként"
+        },
+        "video": {
+          "label": "Rövid videó",
+          "hint": "1 GB darabonként"
+        },
+        "video1hr": {
+          "label": "Hosszú videó",
+          "hint": "60 GB darabonként"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Élő becslés",
+      "titleRefreshing": "Becslés frissítése",
+      "description": "Automatikusan frissül, ahogy Ön módosítja a beállításokat.",
+      "ogyEquivalent": "OGY egyenérték",
+      "ogySpotRate": "OGY azonnali árfolyam",
+      "itemSingular": "Tétel",
+      "itemPlural": "Tétel",
+      "upload": "Feltöltés"
+    },
+    "breakdown": {
+      "title": "Költségbontás",
+      "baseFee": "Alap kibocsátási díj",
+      "storageFee": "Tárolási díj",
+      "items": "Tételek",
+      "uploadSize": "Feltöltési méret"
+    },
+    "bytesUnit": "bájt"
+  }
+}

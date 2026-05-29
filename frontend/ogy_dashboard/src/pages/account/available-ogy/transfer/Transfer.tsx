@@ -12,6 +12,7 @@ import useFetchBalanceOGYOwner from "@hooks/accounts/useFetchBalanceOGYOwner";
 import { TRANSACTION_FEE } from "@constants/index";
 import { divideBy1e8, numberToE8s } from "@helpers/numbers";
 import useTransferOGY from "@hooks/transfer/useTransferOGY";
+import { useT } from "@i18n/LocaleContext";
 
 type TransferFormValues = {
   amount: string;
@@ -24,6 +25,7 @@ type TransferProps = {
 };
 
 const Transfer = ({ show, handleClose }: TransferProps) => {
+  const t = useT();
   const queryClient = useQueryClient();
   const [transactionFee] = useState(divideBy1e8(TRANSACTION_FEE));
 
@@ -150,10 +152,10 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
         <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col gap-7">
           <div className="flex flex-col items-center gap-1.5 text-center">
             <div className="text-[22px] font-semibold leading-none text-content">
-              Transfer OGY
+              {t("account.available.transferOgy")}
             </div>
             <div className="text-[13px] leading-snug text-muted max-w-[340px]">
-              You can only send OGY from your available balance.
+              {t("account.available.transferDescription")}
             </div>
           </div>
           <form
@@ -166,7 +168,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
                   htmlFor="amount"
                   className="text-[13px] font-medium text-content"
                 >
-                  Amount
+                  {t("common.amount")}
                 </label>
                 <button
                   onClick={handleSetAmountMaxBalance}
@@ -174,23 +176,24 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
                   className="flex items-center gap-1 text-[12px] font-medium text-accent hover:underline"
                 >
                   <ArrowUpTrayIcon className="h-3.5 w-3.5" />
-                  Max
+                  {t("account.available.max")}
                 </button>
               </div>
               <InputField
                 id="amount"
                 type="text"
                 register={register("amount", {
-                  required: "Amount is required.",
+                  required: t("account.available.errors.amountRequired"),
                   validate: {
                     isAmountUnderBalance: (v) =>
                       isAmountUnderBalance(v) ||
-                      "Amount must not exceed your balance.",
+                      t("account.available.errors.amountExceedsBalance"),
                     isAmountUpperFee: (v) =>
                       isAmountUpperFee(v) ||
-                      "Amount must not be less than transaction fee.",
+                      t("account.available.errors.amountBelowFee"),
                     isPositive: (v) =>
-                      Number(v) > 0 || "Amount must be a positive number.",
+                      Number(v) > 0 ||
+                      t("account.available.errors.amountNotPositive"),
                   },
                 })}
                 errors={errors?.amount}
@@ -202,17 +205,17 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
                 htmlFor="recipientAddress"
                 className="text-[13px] font-medium text-content"
               >
-                Recipient address
+                {t("account.available.recipientAddress")}
               </label>
               <InputField
                 id="recipientAddress"
                 type="text"
                 register={register("recipientAddress", {
-                  required: "Recipient address is required.",
+                  required: t("account.available.errors.recipientRequired"),
                   validate: {
                     isValidRecipientAddress: (v) =>
                       isValidRecipientAddress(v) ||
-                      "Invalid recipient address.",
+                      t("account.available.errors.recipientInvalid"),
                   },
                 })}
                 errors={
@@ -225,19 +228,22 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
 
             <div className="rounded-2xl border border-border-strong bg-surface-faint p-4 flex flex-col gap-2">
               <div className="flex justify-between items-center text-[14px]">
-                <div className="text-content">Amount Received</div>
-                <div className="flex items-center font-medium text-content">
+                <div className="text-content">
+                  {t("account.available.amountReceived")}
+                </div>
+                {/* Numeric/currency cluster (logo + digits + OGY) stays LTR. */}
+                <div dir="ltr" className="flex items-center font-medium text-content">
                   <img
-                    className="mr-2 h-4 w-4"
+                    className="me-2 h-4 w-4"
                     src="/ogy_logo.svg"
-                    alt="OGY Logo"
+                    alt={t("account.available.ogyLogoAlt")}
                   />
                   <Amount />
                 </div>
               </div>
               <div className="flex justify-between items-center text-[12px] text-muted">
-                <div>Transaction fee (billed to source)</div>
-                <div>{transactionFee} OGY</div>
+                <div>{t("account.available.transactionFee")}</div>
+                <div dir="ltr">{transactionFee} OGY</div>
               </div>
             </div>
 
@@ -246,13 +252,13 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
               disabled={!isValid}
               className="w-full !py-0 text-[14px] leading-[44px]"
             >
-              Transfer OGY
+              {t("account.available.transferOgy")}
             </Button>
           </form>
 
           <div className="text-center text-[12px] leading-none text-muted">
-            Current balance:{" "}
-            <span className="font-medium text-content">
+            {t("account.available.currentBalance")}{" "}
+            <span dir="ltr" className="inline-block font-medium text-content">
               {balanceOGY.balance} OGY
             </span>
           </div>
@@ -263,10 +269,10 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
           <LoaderSpin />
           <div className="flex flex-col items-center gap-1.5 text-center">
             <div className="text-[18px] font-semibold leading-none text-content">
-              Transfer is being processed
+              {t("account.available.transferProcessing")}
             </div>
             <div className="text-[13px] leading-snug text-muted">
-              This can take a few seconds
+              {t("account.available.transferProcessingHint")}
             </div>
           </div>
         </div>
@@ -275,13 +281,13 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
         <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col items-center gap-5">
           <CheckCircleIcon className="h-16 w-16 text-jade" />
           <div className="text-[22px] font-semibold leading-none text-content text-center">
-            Transfer was successful !
+            {t("account.available.transferSuccess")}
           </div>
           <Button
             onClick={handleClose}
             className="w-full !py-0 text-[14px] leading-[44px]"
           >
-            Close
+            {t("common.close")}
           </Button>
         </div>
       )}
@@ -289,7 +295,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
         <div className="pt-10 pb-6 px-5 mx-auto w-full max-w-[480px] flex flex-col items-center gap-5">
           <XCircleIcon className="h-16 w-16 text-red-400" />
           <div className="text-[22px] font-semibold leading-none text-content text-center">
-            Transfer error !
+            {t("account.available.transferError")}
           </div>
           <div className="w-full rounded-2xl border border-border-strong bg-surface-faint px-4 py-3 text-[13px] leading-snug text-content max-h-40 overflow-auto break-words">
             {errorTransfer?.message}
@@ -298,7 +304,7 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
             onClick={handleClose}
             className="w-full !py-0 text-[14px] leading-[44px]"
           >
-            Close
+            {t("common.close")}
           </Button>
         </div>
       )}

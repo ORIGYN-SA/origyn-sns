@@ -9,7 +9,7 @@ const ProposalDetails = ({ row }: { row: Row<ProposalRow> }) => {
         ({ label, value }: { label: string; value: ReactNode }) => (
           <div
             key={label}
-            className="text-center p-4 border-r last:border-r-0 border-b border-border"
+            className="text-center p-4 border-e last:border-e-0 border-b border-border"
           >
             <div className="text-content/60">{label}</div>
             <div className="font-semibold">{value}</div>

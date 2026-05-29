@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "اللغة",
+    "switchTo": "التبديل إلى {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ ما",
+    "retry": "إعادة المحاولة",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "save": "حفظ",
+    "submit": "إرسال",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "search": "بحث",
+    "viewAll": "عرض الكل",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
+    "amount": "المبلغ",
+    "date": "التاريخ",
+    "type": "النوع",
+    "from": "من",
+    "to": "إلى",
+    "index": "الفهرس",
+    "status": "الحالة",
+    "total": "الإجمالي",
+    "balance": "الرصيد",
+    "yes": "نعم",
+    "no": "لا",
+    "notAvailable": "غير متاح"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "governance": "الحوكمة",
+    "transactionHistory": "سجل المعاملات",
+    "calculator": "الآلة الحاسبة",
+    "openMainMenu": "فتح القائمة الرئيسية",
+    "closeMenu": "إغلاق القائمة",
+    "openAccountOverview": "فتح نظرة عامة على الحساب",
+    "viewAccountOverview": "عرض نظرة عامة على الحساب",
+    "connectPrompt": "اربط محفظتك لإدارة الرموز والتصويت على المقترحات وعرض سجل معاملاتك.",
+    "connectWallet": "ربط المحفظة",
+    "disconnect": "قطع الاتصال"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "عذرًا، لم نتمكن من العثور على الصفحة التي تبحث عنها.",
+    "backHome": "العودة إلى الصفحة الرئيسية"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "لوحة تحكم OGY",
+      "home": "الرئيسية",
+      "circulation": "التداول",
+      "governance": "الحوكمة",
+      "revenue": "الإيرادات",
+      "rewards": "المكافآت",
+      "distribution": "التوزيع",
+      "governanceDashboard": "لوحة حوكمة OGY",
+      "transactionExplorer": "مستكشف معاملات OGY"
+    },
+    "learn": {
+      "heading": "تعرّف على المزيد حول OGY Tokenomics و ORIGYN",
+      "tokenomicsDeck": "عرض OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "معيار ORIGYN NFT",
+      "tokenomicsFaq": "الأسئلة الشائعة حول ORIGYN Tokenomics",
+      "website": "موقع ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "الدعم",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "تواصل معنا"
+    },
+    "support": {
+      "contactSupport": "التواصل مع الدعم",
+      "recoverTokens": "استرداد رموزك"
+    },
+    "disclaimer": "*لن تتحمل مؤسسة ORIGYN أي مسؤولية عن أي خسارة أو سرقة أو اختلاس لرموز OGY يحدث فيما يتعلق بعملية المبادلة. علاوة على ذلك، لن تتحمل مؤسسة ORIGYN أي مسؤولية عن أي إخفاق في تنفيذ المبادلة إذا لم يلتزم الطرف المعني بدقة بالشروط التي تحددها مؤسسة ORIGYN."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "تحليلات OGY",
+      "title": "استكشف لوحة التحكم",
+      "subtitle": "تفاعل دون الحاجة إلى ثقة مع تطبيقات web3 dApps و DAOs و NFTs و DeFi وأكثر من ذلك بكثير."
+    },
+    "cta": {
+      "loginToSwap": "تسجيل الدخول لمبادلة الرموز",
+      "myAccount": "حسابي"
+    },
+    "governanceStaking": {
+      "title": "نظرة عامة على الرهن في الحوكمة"
+    },
+    "cardError": {
+      "couldNotLoad": "تعذّر التحميل",
+      "descriptionLine1": "واجهنا مشكلة في جلب هذا المقياس.",
+      "descriptionLine2": "يرجى المحاولة مرة أخرى بعد قليل."
+    },
+    "emptyState": {
+      "noDataFor": "لا توجد بيانات لـ",
+      "description": "لا يوجد شيء لعرضه الآن."
+    },
+    "circulationState": {
+      "title": "حالة تداول OGY",
+      "tooltip": "المعروض المتداول هو جميع الرموز باستثناء الرموز غير المقفلة المملوكة لمؤسسة ORIGYN.",
+      "nnsProposal": "مقترح NNS",
+      "totalLabel": "إجمالي تداول OGY",
+      "notOwnedName": "OGY غير المملوكة للمؤسسة",
+      "notOwnedValue": "كمية الرموز المتداولة غير المملوكة لمؤسسة ORIGYN.",
+      "ownedName": "OGY المقفلة في حوزة المؤسسة",
+      "ownedValue": "كمية الرموز المقفلة المملوكة لمؤسسة ORIGYN."
+    },
+    "foundationReserve": {
+      "title": "احتياطي مؤسسة OGY",
+      "tooltip": "إجمالي كمية رموز OGY المملوكة لمؤسسة ORIGYN عبر جميع المحافظ.",
+      "totalLabel": "إجمالي معروض المؤسسة",
+      "lockedName": "مقفل",
+      "lockedIntro": "رموز مؤسسة ORIGYN المقفلة في عمليات الرهن أو الاستحقاق.",
+      "lockedStakes": "1) عمليات الرهن - الرموز التي تولّد المكافآت بفضل المشاركة في التصويت على الحوكمة.",
+      "lockedStakesNote": "تم قفل تلك الرموز طوعًا.",
+      "lockedVestings": "2) عمليات الاستحقاق - الرموز التي لا تتلقى أي مكافآت ولا يمكنها المشاركة في التصويت.",
+      "lockedVestingsNote": "تم قفل تلك الرموز بموجب عقدك مع مؤسسة ORIGYN.",
+      "unlockedName": "غير مقفل",
+      "unlockedValue": "الأموال غير المقفلة المملوكة لمؤسسة ORIGYN."
+    },
+    "treasuryAccount": {
+      "title": "حساب خزينة ORIGYN (OTA)",
+      "networkRevenue": "إيرادات الشبكة",
+      "tokenLogoAlt": "شعار الرمز",
+      "tooltipOgy": "إيرادات منفعة الشبكة المُولّدة من خلال الرسوم مقابل استخدام شبكة ORIGYN (مثل إصدار أو نقل الشهادات الرقمية، وسك NFTs، وما إلى ذلك) والمتراكمة بـ OGY.",
+      "tooltipIcp": "إيرادات منفعة الشبكة المُولّدة من خلال الرسوم مقابل استخدام شبكة ORIGYN (مثل إصدار أو نقل الشهادات الرقمية، وسك NFTs، وما إلى ذلك) والمتراكمة بـ ICP."
+    },
+    "rewardAccount": {
+      "title": "حساب مكافآت ORIGYN (ORA)",
+      "balance": "رصيد ORA",
+      "year": "السنة",
+      "rewardPool": "مجمع المكافآت",
+      "moreDetails": "المزيد من التفاصيل",
+      "tooltipStake": "يمكن لحاملي الرموز رهن رموز OGY الخاصة بهم وكسب المكافآت من خلال المشاركة في الحوكمة.",
+      "tooltipSeed": "ستأتي المكافآت من حساب مكافآت ORIGYN، الذي ستزوّده ORIGYN بمليار OGY.",
+      "tooltipPool": "يتكون مجمع المكافآت من 250 مليون OGY في عامه الأول وسينخفض إلى النصف كل عامين لتحفيز ومكافأة المساهمين المبكرين وطويلي الأمد في النظام البيئي.",
+      "description": "ستساهم ORIGYN بمليار OGY في حساب مكافآت ORIGYN (ORA) لصالح الحاملين المساهمين بالرهن والتصويت. يتكون مجمع المكافآت من 250 مليون OGY في عامه الأول وسينخفض إلى النصف كل عامين لتحفيز ومكافأة المساهمين المبكرين وطويلي الأمد في النظام البيئي."
+    },
+    "tokenDistribution": {
+      "title": "توزيع الرموز"
+    },
+    "transactionHistory": {
+      "title": "سجل المعاملات",
+      "showAll": "عرض الكل"
+    },
+    "topTransfers": {
+      "value": "القيمة",
+      "time": "الوقت",
+      "ogyLogoAlt": "شعار OGY",
+      "noDataAvailable": "لا توجد بيانات متاحة."
+    },
+    "totalSupply": {
+      "title": "إجمالي معروض OGY",
+      "tooltipTitle": "إجمالي كمية رموز OGY المتاحة.",
+      "tooltipLine1": "يشمل هذا المعروض المتداول والمعروض الخاضع لسيطرة مؤسسة ORIGYN.",
+      "tooltipLine2": "اعتبارًا من 18 سبتمبر، تحولت ORIGYN إلى نموذج انكماشي بالكامل مما يعني عدم سك رموز جديدة.",
+      "chartLabel": "إجمالي المعروض"
+    },
+    "totalBurned": {
+      "title": "إجمالي OGY المحروقة",
+      "tooltipTitle": "إجمالي كمية رموز OGY المحروقة.",
+      "tooltipLine1": "تم حرق هذه الرموز بالكامل ولم تعد متاحة.",
+      "tooltipLine2": "يمكن حرق الرموز لأسباب مختلفة على سبيل المثال رسوم سك الشهادات، أو رسوم منفعة الشبكة، أو رسوم معاملات الشبكة.",
+      "chartLabel": "إجمالي المحروق"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "يومي",
+      "weekly": "أسبوعي",
+      "monthly": "شهري",
+      "yearly": "سنوي",
+      "all": "الكل"
+    },
+    "stakingOverview": {
+      "title": "نظرة عامة على الرهن",
+      "totalTokensInStakes": "إجمالي الرموز في الرهن",
+      "tooltip": "الرموز المقفلة في عمليات الرهن.",
+      "stakedTokens": "الرموز المرهونة",
+      "stakedTokensLegend": "الرموز المرهونة"
+    },
+    "usersActivity": {
+      "title": "نظرة عامة على المستخدمين",
+      "protocolUsers": "مستخدمو بروتوكول OGY",
+      "protocolUsersTooltip": "حاملو رموز OGY الفريدون",
+      "protocolUsersLegend": "مستخدمو بروتوكول OGY",
+      "activeWallets": "محافظ OGY النشطة",
+      "activeWalletsTooltip": "حاملو رموز OGY النشطون"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "نظرة عامة على الحوكمة",
+      "welcome": "مرحبًا بك في حوكمة ORIGYN!",
+      "description": "يمكن لحاملي رموز OGY التأثير مباشرة على شبكة ORIGYN من خلال رهن رموز OGY الخاصة بهم والتصويت على المقترحات. ومن خلال المشاركة في عملية اتخاذ القرار، يكسب حاملو الرموز المرهونة هؤلاء المكافآت.",
+      "learnMore": "اعرف المزيد"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "الرهن والتصويت",
+        "description": "أثّر على شبكة ORIGYN من خلال رهن OGY والتصويت على المقترحات."
+      },
+      "earnRewards": {
+        "title": "اكسب المكافآت",
+        "description": "شارك في عملية اتخاذ القرار لكسب المكافآت."
+      },
+      "governCollectively": {
+        "title": "الحوكمة الجماعية",
+        "description": "شارك وأثّر على الشبكة كنظام بيئي تعاوني."
+      }
+    },
+    "tokensSection": {
+      "title": "الرموز في الحوكمة",
+      "paragraph1": "يمكن لحاملي رموز OGY التأثير مباشرة على شبكة ORIGYN من خلال رهن رموز OGY الخاصة بهم والتصويت على المقترحات.",
+      "paragraph2": "ومن خلال المشاركة في عملية اتخاذ القرار، يكسب حاملو الرموز المرهونة هؤلاء المكافآت ويحكمون بشكل جماعي وديمقراطي.",
+      "learnMoreOgy": "تعرّف على المزيد حول OGY"
+    },
+    "sections": {
+      "proposals": "المقترحات",
+      "neurons": "الخلايا العصبية"
+    },
+    "votingParticipation": {
+      "title": "المشاركة في التصويت",
+      "chartLabel": "نسبة المشاركة %",
+      "legendLabel": "نسبة المشاركة %",
+      "period": {
+        "weekly": "أسبوعي",
+        "monthly": "شهري",
+        "yearly": "سنوي"
+      },
+      "lastParticipation": {
+        "label": "آخر مشاركة في التصويت",
+        "tooltip": "نسبة المشاركة في حدث التصويت الأخير."
+      },
+      "averageParticipation": {
+        "label": "متوسط المشاركة في التصويت",
+        "tooltip": "متوسط نسبة المشاركة في التصويت بمرور الوقت."
+      },
+      "averagePower": {
+        "label": "متوسط قوة التصويت",
+        "tooltip": "متوسط قوة التصويت عبر جميع المشاركين."
+      }
+    },
+    "estimateRewards": {
+      "title": "قدّر مكافآتك",
+      "lockDuration": "مدة القفل",
+      "participants": "مشاركون",
+      "lockedForAtLeast": "مقفل حاليًا لمدة لا تقل عن",
+      "lockedFor": "مقفل حاليًا لمدة",
+      "year": "سنة",
+      "years": "سنوات"
+    },
+    "kpi": {
+      "metric": "المقياس",
+      "rewardBaseCurrentYear": "أساس المكافآت للسنة الحالية",
+      "dailyVotingRewards": "مكافآت التصويت اليومية",
+      "totalVotingPower": "إجمالي قوة التصويت",
+      "overallVotingParticipation": "المشاركة الإجمالية في التصويت"
+    },
+    "total": {
+      "titleTooltip": "جميع الرموز الموجودة في كانستر الحوكمة. يمكن أن تكون هذه الرموز في حالة استحقاق أو رهن أو غير مرهونة أو غير مُطالَب بها.",
+      "totalLabel": "إجمالي الرموز في الحوكمة",
+      "locked": {
+        "name": "مقفل",
+        "tooltip": "الرموز المقفلة في الحوكمة."
+      },
+      "unlocked": {
+        "name": "غير مقفل",
+        "tooltip": "الرموز غير المقفلة في الحوكمة والتي يمكن سحبها وتداولها في أي وقت."
+      },
+      "accumulatedRewards": {
+        "name": "المكافآت المتراكمة",
+        "tooltip": "المكافآت المحتسبة للمستخدمين ولكن لم تتم المطالبة بها بعد."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "المقترحات",
+      "viewProposal": "عرض المقترح",
+      "columns": {
+        "id": "المعرّف",
+        "title": "العنوان",
+        "proposed": "تم اقتراحه",
+        "timeRemaining": "الوقت المتبقي",
+        "topic": "الموضوع",
+        "status": "الحالة",
+        "view": "عرض"
+      }
+    },
+    "details": {
+      "category": "الحوكمة",
+      "proposalNumber": "المقترح #",
+      "proposal": "المقترح",
+      "titleLoading": "جارٍ تحميل عنوان المقترح…",
+      "payloadLoading": "جارٍ تحميل تفاصيل المقترح…",
+      "posted": "تم النشر",
+      "topic": "الموضوع",
+      "moreInfo": "مزيد من المعلومات",
+      "totalVotes": "إجمالي الأصوات",
+      "adopt": "اعتماد",
+      "reject": "رفض",
+      "vote": "تصويت"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "الخلايا العصبية",
+      "viewNeuron": "عرض الخلية العصبية",
+      "columns": {
+        "id": "المعرّف",
+        "state": "الحالة",
+        "stakedOgy": "OGY المرهونة",
+        "dissolveDelay": "مهلة التفكيك",
+        "age": "العمر",
+        "votingPower": "قوة التصويت",
+        "view": "عرض"
+      }
+    },
+    "details": {
+      "category": "الخلية العصبية",
+      "title": "خلية OGY العصبية",
+      "created": "تم الإنشاء",
+      "stakedOgy": "OGY المرهونة",
+      "votingPower": "قوة التصويت",
+      "dissolveDelay": "مهلة التفكيك",
+      "age": "العمر",
+      "lifecycle": "دورة حياة الخلية العصبية",
+      "dateCreated": "تاريخ الإنشاء",
+      "autoStakeMaturity": "الرهن التلقائي للاستحقاق",
+      "rewardsAndBonuses": "المكافآت والعلاوات",
+      "stakedMaturity": "الاستحقاق المرهون",
+      "totalMaturity": "إجمالي الاستحقاق",
+      "ageBonus": "علاوة العمر",
+      "totalBonus": "إجمالي العلاوة",
+      "dissolveDelayBonus": "علاوة مهلة التفكيك"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "سجل المعاملات",
+      "searchFor": "ابحث عن:",
+      "or": "أو",
+      "searchPlaceholder": "ابحث عن عنصر",
+      "noResults": "لم يتم العثور على نتائج",
+      "resultBlock": "كتلة",
+      "resultPrincipal": "الحساب الرئيسي",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "تفاصيل المعاملة",
+      "hash": "التجزئة",
+      "fetchError": "خطأ في جلب معاملة واحدة!",
+      "mintingAccount": "حساب السك",
+      "fee": "الرسوم",
+      "memo": "ملاحظة",
+      "none": "لا شيء"
+    },
+    "accountDetails": {
+      "title": "حساب OGY",
+      "id": "المعرّف",
+      "owner": "المالك",
+      "subaccount": "الحساب الفرعي",
+      "defaultSubaccount": "لا شيء (الحساب الفرعي الافتراضي)",
+      "historicalMaxBalance": "أقصى رصيد تاريخي",
+      "genesisBalance": "الرصيد الأولي",
+      "period": {
+        "monthly": "شهري",
+        "quarterly": "ربع سنوي",
+        "yearly": "سنوي",
+        "lifetime": "مدى الحياة"
+      },
+      "empty": {
+        "title": "لا توجد معاملات بعد",
+        "description": "ليس لهذا الحساب أي سجل معاملات. بمجرد إرساله أو استقباله OGY، سيظهر النشاط هنا."
+      },
+      "balanceHistory": {
+        "title": "سجل الرصيد",
+        "currentBalance": "الرصيد الحالي",
+        "currentBalanceInfo": "رصيد الحساب الحالي.",
+        "legend": "رصيد OGY"
+      },
+      "overview": {
+        "title": "نظرة عامة على المعاملات",
+        "totalLabel": "المبلغ الإجمالي",
+        "totalSent": "إجمالي المرسل",
+        "totalSentInfo": "إجمالي المبلغ المُرسل من قبل الحساب الرئيسي.",
+        "totalReceived": "إجمالي المستلم",
+        "totalReceivedInfo": "إجمالي المبلغ المُستلم من قبل الحساب الرئيسي."
+      }
+    },
+    "flow": {
+      "title": "تدفق المعاملات",
+      "searchPlaceholder": "ابحث في المعاملات…",
+      "clearSearch": "مسح البحث",
+      "loadError": "تعذّر تحميل بيانات المعاملة. يرجى المحاولة مرة أخرى.",
+      "noMatch": "لا توجد معاملات تطابق هذا البحث.",
+      "transactions": "معاملات",
+      "out": "صادر",
+      "in": "وارد",
+      "total": "الإجمالي",
+      "legend": {
+        "outTransaction": "معاملة صادرة",
+        "inTransaction": "معاملة واردة",
+        "includesInitial": "يشمل المعاملة الأولية",
+        "rootAccount": "الحساب الجذر",
+        "account": "الحساب",
+        "fromRoot": "مع معاملات من الجذر",
+        "toRoot": "مع معاملات إلى الجذر",
+        "madeInitial": "أجرى المعاملة الأولية"
+      }
+    },
+    "kind": {
+      "mint": "سَكّ",
+      "transfer": "تحويل",
+      "burn": "حرق",
+      "approve": "موافقة"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "مرحبًا بعودتك",
+      "value": "القيمة:",
+      "disconnectWallet": "قطع اتصال المحفظة",
+      "accountLabel": "الحساب",
+      "manageDescription": "أدِر محفظة OGY الخاصة بك ومكافآتك ونشاط الرهن.",
+      "walletBalance": "رصيد المحفظة",
+      "myAccount": "حسابي",
+      "howToTopUp": "كيفية إعادة الشحن؟"
+    },
+    "principal": {
+      "accountIdLabel": "معرّف الحساب:",
+      "principalIdLabel": "معرّف الحساب الرئيسي:"
+    },
+    "available": {
+      "title": "OGY المتاحة",
+      "transactionHistory": "سجل المعاملات",
+      "transfer": "تحويل",
+      "transferOgy": "تحويل OGY",
+      "transferDescription": "يمكنك إرسال OGY فقط من رصيدك المتاح.",
+      "max": "الأقصى",
+      "recipientAddress": "عنوان المستلم",
+      "amountReceived": "المبلغ المستلم",
+      "ogyLogoAlt": "شعار OGY",
+      "transactionFee": "رسوم المعاملة (تُحتسب على المصدر)",
+      "currentBalance": "الرصيد الحالي:",
+      "transferProcessing": "جارٍ معالجة التحويل",
+      "transferProcessingHint": "قد يستغرق هذا بضع ثوانٍ",
+      "transferSuccess": "تم التحويل بنجاح!",
+      "transferError": "خطأ في التحويل!",
+      "errors": {
+        "amountRequired": "المبلغ مطلوب.",
+        "amountExceedsBalance": "يجب ألا يتجاوز المبلغ رصيدك.",
+        "amountBelowFee": "يجب ألا يقل المبلغ عن رسوم المعاملة.",
+        "amountNotPositive": "يجب أن يكون المبلغ رقمًا موجبًا.",
+        "recipientRequired": "عنوان المستلم مطلوب.",
+        "recipientInvalid": "عنوان المستلم غير صالح."
+      }
+    },
+    "staked": {
+      "title": "OGY المرهونة",
+      "stake": "رهن",
+      "stakeOgy": "رهن OGY",
+      "stakeDescription": "لرهن OGY تحتاج إلى الانتقال إلى منصة NNS الخاصة بنا.",
+      "warningNotConnected": "يبدو أنك غير متصل بـ",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "أنت بحاجة إلى",
+      "warningToConnect": "للاتصال بمنصة NNS.",
+      "goToNns": "الانتقال إلى NNS"
+    },
+    "rewards": {
+      "title": "مكافآت الرهن",
+      "claimAll": "المطالبة بالكل",
+      "claimDisabledReason": "المطالبة بالمكافآت مدعومة فقط للحساب الرئيسي الافتراضي.",
+      "aboutToClaim": "أنت على وشك المطالبة بـ",
+      "sentToPrincipal": "سيتم إرسال المكافآت إلى حسابك الرئيسي",
+      "pending": "جارٍ المطالبة بجميع المكافآت...",
+      "successTitle": "تمت المطالبة بجميع المكافآت بنجاح!",
+      "errorTitle": "خطأ في المطالبة بجميع المكافآت!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "نحن نقوم بتبديل دفتر الأستاذ والحوكمة",
+        "description": "تمت ترقية حوكمة ORIGYN ودفتر الأستاذ إلى SNS. لمواصلة المشاركة في حوكمة ORIGYN واستخدام OGY، تحتاج إلى ترحيل رموز OGY الخاصة بك."
+      },
+      "howToSwap": "كيفية مبادلة الرموز",
+      "disclosureToggle": "هل ما زلت تمتلك رموز OGY القديمة؟ بادل الآن!",
+      "accountId": "معرّف الحساب:",
+      "steps": {
+        "withdraw": {
+          "title": "الخطوة 1: السحب من الحوكمة القديمة",
+          "subtitle": "إذا كنت تشارك سابقًا في حوكمة OGY، فأنت بحاجة إلى سحب تلك الرموز قبل أن تتمكن من مبادلتها."
+        },
+        "deposit": {
+          "title": "الخطوة 2: الإيداع في حسابك",
+          "subtitle": "إذا كان لديك أي رموز خارج لوحة تحكم OGY، فأودعها في معرّف حسابك قبل أن تتمكن من البدء في مبادلتها."
+        },
+        "swap": {
+          "title": "الخطوة 3: مبادلة الرموز",
+          "subtitle": "بادل رمز OGY القديم بدفتر الأستاذ الجديد."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "رصيد OGY القديم"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "الانتقال إلى لوحة تحكم OGY القديمة"
+      },
+      "swap": {
+        "disabledOisy": "مبادلة OGY القديم غير متاحة مع OISY. اتصل عبر Internet Identity أو Plug لمبادلة OGY القديم الخاص بك.",
+        "disabledSubAccount": "مبادلة OGY القديم مدعومة فقط من الحساب الرئيسي الافتراضي.",
+        "swapYourTokens": "بادل رموزك",
+        "automaticDisabled": "تم تعطيل المبادلة التلقائية. ستحتاج إلى الموافقة على طلب المبادلة الخاص بك، الحد الأدنى للمبلغ هو 50 000 OGY.",
+        "form": {
+          "title": "بادل OGY الخاص بك بدفتر الأستاذ الجديد",
+          "description": "أودع أي رموز OGY ترغب في مبادلتها إلى معرّف حسابك",
+          "tokensAvailable": "الرموز المتاحة للمبادلة",
+          "youWillReceivePrefix": "ستستلم",
+          "youWillReceiveSuffix": "رموز OGY على دفتر الأستاذ الجديد.",
+          "swapPrefix": "بادل",
+          "swapSuffix": "رموز OGY"
+        },
+        "pending": {
+          "takesTime": "قد تستغرق عملية المبادلة بعض الوقت.",
+          "doNotRefresh": "لا تقم بتحديث الصفحة!",
+          "swapping": "جارٍ مبادلة الرموز..."
+        },
+        "success": {
+          "title": "تمت المبادلة بنجاح!",
+          "walletBalance": "رصيد المحفظة على دفتر الأستاذ الجديد",
+          "myAccount": "حسابي"
+        },
+        "error": {
+          "title": "خطأ في مبادلة الرموز!",
+          "retry": "إعادة المحاولة"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "خلايا OGY العصبية الخاصة بي",
+        "idHeader": "المعرّف",
+        "stakedAmount": "المبلغ المرهون",
+        "claimAmount": "مبلغ المطالبة",
+        "emptyTitle": "لا توجد خلايا عصبية بعد",
+        "emptyDescription": "أضف خلية OGY عصبية لبدء تتبّع الرهن وقوة التصويت والمكافآت هنا.",
+        "addFirstNeuron": "أضف خليتك العصبية الأولى"
+      },
+      "add": {
+        "button": "إضافة خلية عصبية",
+        "title": "إضافة خلية عصبية",
+        "description": "أضف هذا الحساب الرئيسي كمفتاح وصول على كل خلية OGY عصبية تريد إدارتها هنا.",
+        "needHotkey": "هل تحتاج إلى إضافة مفتاح وصول؟",
+        "openNns": "افتح تطبيق NNS"
+      },
+      "claim": {
+        "button": "مطالبة",
+        "disabledReason": "المطالبة بالمكافآت مدعومة فقط للحساب الرئيسي الافتراضي.",
+        "aboutToClaim": "أنت على وشك المطالبة بـ",
+        "sentToPrincipal": "سيتم إرسال المكافآت إلى حسابك الرئيسي",
+        "pending": "جارٍ المطالبة بالمكافأة...",
+        "successTitle": "تمت المطالبة بالمكافأة بنجاح!",
+        "errorTitle": "خطأ في المطالبة بالمكافأة!",
+        "retry": "إعادة المحاولة"
+      },
+      "remove": {
+        "title": "إزالة الخلية العصبية",
+        "description": "لإزالة هذه الخلية العصبية، تحتاج إلى إزالة حسابك الرئيسي من قائمة مفاتيح الوصول للخلية العصبية الخاصة بك."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "العنوان",
+      "governanceBalance": "رصيد الحوكمة",
+      "stakedTokens": "الرموز المرهونة",
+      "ledgerBalance": "رصيد دفتر الأستاذ",
+      "weightInTotalSupply": "الوزن في إجمالي المعروض"
+    }
+  },
+  "recovery": {
+    "title": "استرداد رموزك",
+    "description": "تدعم لوحة تحكم OGY رمز OGY فقط. في حال أرسلت رموزًا أخرى هنا عن طريق الخطأ، يمكنك استردادها باتباع الخطوات أدناه.",
+    "chooseToken": "اختر الرمز",
+    "loginRequired": "لجمع رموزك، يجب أن تكون مسجّل الدخول.",
+    "transfer": {
+      "icpLogoAlt": "شعار ICP",
+      "ledgerCanister": "كانستر دفتر الأستاذ:",
+      "transferIcp": "تحويل ICP",
+      "availableBalanceNote": "يمكنك إرسال ICP فقط من رصيدك المتاح.",
+      "amountRequired": "المبلغ مطلوب.",
+      "amountExceedsBalance": "يجب ألا يتجاوز المبلغ رصيدك.",
+      "amountPositive": "يجب أن يكون المبلغ رقمًا موجبًا.",
+      "amountBelowFee": "يجب أن يكون المبلغ أكبر من أو يساوي رسوم المعاملة.",
+      "recipientAddress": "عنوان المستلم",
+      "recipientAddressRequired": "عنوان المستلم مطلوب.",
+      "invalidRecipientAddress": "عنوان المستلم غير صالح.",
+      "amountReceived": "المبلغ المستلم",
+      "transactionFee": "رسوم المعاملة",
+      "currentBalance": "الرصيد الحالي:",
+      "processing": "جارٍ معالجة التحويل",
+      "processingNote": "قد يستغرق هذا بضع ثوانٍ",
+      "success": "تم التحويل بنجاح!",
+      "error": "خطأ في التحويل!"
+    }
+  },
+  "support": {
+    "category": "الدعم",
+    "title": "إنشاء تذكرة",
+    "titleSubmitted": "تم إرسال التذكرة",
+    "successTitle": "تم إنشاء تذكرة الدعم",
+    "successMessage": "سنتواصل معك عبر عنوان البريد الإلكتروني الذي قدّمته.",
+    "submitAnother": "إرسال تذكرة أخرى",
+    "intro": "صِف مشكلتك وكيف يمكننا الوصول إليك.",
+    "form": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني للتواصل",
+      "emailRequired": "عنوان البريد الإلكتروني مطلوب",
+      "emailInvalid": "عنوان البريد الإلكتروني غير صالح",
+      "principal": "الحساب الرئيسي للمحفظة",
+      "invalidPrincipal": "عنوان المستلم غير صالح.",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أخبرنا بما يحدث…",
+      "descriptionRequired": "يرجى وصف مشكلتك"
+    },
+    "submitError": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "submitting": "جارٍ الإرسال…"
+  },
+  "explorer": {
+    "title": "المستكشف",
+    "searchPlaceholder": "ابحث بالعنوان أو المُصدِر أو الحساب الرئيسي أو معرّف الرمز",
+    "openFilters": "فتح عوامل التصفية",
+    "checkOnBlockchain": "تحقق على البلوكتشين",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "الشهادات المميزة",
+      "art": "شهادات الفن",
+      "gold": "شهادات الذهب"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "النسخ إلى الحافظة",
+    "toggleRelativeTime": "تبديل الوقت النسبي. العرض الحالي:",
+    "collapseRow": "طي الصف",
+    "expandRow": "توسيع الصف",
+    "searchPlaceholder": "ابحث عن عناصر...",
+    "sortAscending": "ترتيب تصاعدي",
+    "sortDescending": "ترتيب تنازلي",
+    "linesPerPage": "أسطر لكل صفحة",
+    "page": "الصفحة",
+    "pageOf": "من",
+    "previousPage": "الصفحة السابقة",
+    "nextPage": "الصفحة التالية"
+  },
+  "auth": {
+    "connect": "اتصال",
+    "disconnect": "قطع الاتصال",
+    "connectWallet": {
+      "title": "اربط محفظتك",
+      "subtitle": "اختر كيف تريد تسجيل الدخول"
+    },
+    "install": "تثبيت",
+    "newToIc": "جديد على Internet Computer؟",
+    "learnMore": "اعرف المزيد",
+    "connecting": {
+      "title": "جارٍ الاتصال...",
+      "subtitle": "وافق على الطلب في محفظتك"
+    },
+    "sessionExpired": {
+      "title": "انتهت صلاحية الجلسة",
+      "description": "لم تعد جلسة محفظتك صالحة. أعد الاتصال للمتابعة."
+    },
+    "reconnect": "إعادة الاتصال",
+    "error": {
+      "connectionCancelled": "تم إلغاء الاتصال. يرجى المحاولة مرة أخرى.",
+      "connectionFailed": "فشل الاتصال بالمحفظة. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "warning": {
+    "badge": "جديد",
+    "ledgerSwitch": "نحن نقوم بتبديل دفتر الأستاذ، تحتاج إلى مبادلة OGY الخاص بك بالجديد"
+  },
+  "calculator": {
+    "header": {
+      "title": "حاسبة التكلفة",
+      "description": "استخدم حاسبة ORIGYN لتقدير تكلفة شهادتك الفريدة مع جميع بياناتك على السلسلة"
+    },
+    "plan": {
+      "title": "خطّط لعملية السكّ",
+      "description": "أخبرنا بعدد العناصر وما تنوي رفعه.",
+      "itemsLabel": "كم عدد العناصر؟",
+      "uploadingLabel": "ما الذي تقوم برفعه؟",
+      "knowExactSize": "هل تعرف الحجم الدقيق؟",
+      "totalUploadSize": "إجمالي حجم الرفع",
+      "usePreset": "استخدم إعدادًا مسبقًا عوضًا عن ذلك",
+      "combinedSize": "الحجم الإجمالي لجميع الملفات عبر كافة العناصر.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB لكل عنصر"
+        },
+        "iphone": {
+          "label": "صورة",
+          "hint": "3 MB لكل عنصر"
+        },
+        "dslr": {
+          "label": "صورة استوديو",
+          "hint": "20 MB لكل عنصر"
+        },
+        "video": {
+          "label": "مقطع فيديو قصير",
+          "hint": "1 GB لكل عنصر"
+        },
+        "video1hr": {
+          "label": "مقطع فيديو طويل",
+          "hint": "60 GB لكل عنصر"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "تقدير فوري",
+      "titleRefreshing": "جارٍ تحديث التقدير",
+      "description": "يتحدث تلقائيًا عند تغيير إعداداتك.",
+      "ogyEquivalent": "ما يعادله بـ OGY",
+      "ogySpotRate": "سعر OGY الفوري",
+      "itemSingular": "عنصر",
+      "itemPlural": "عناصر",
+      "upload": "رفع"
+    },
+    "breakdown": {
+      "title": "تفصيل التكلفة",
+      "baseFee": "رسوم السكّ الأساسية",
+      "storageFee": "رسوم التخزين",
+      "items": "العناصر",
+      "uploadSize": "حجم الرفع"
+    },
+    "bytesUnit": "بايت"
+  }
+}

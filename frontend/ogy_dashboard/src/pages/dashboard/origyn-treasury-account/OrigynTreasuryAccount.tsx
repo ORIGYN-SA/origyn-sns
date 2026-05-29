@@ -3,6 +3,7 @@ import { Card, TooltipInfo, SkeletonOverlay } from "@components/ui";
 import { CardErrorOverlay, StatCard } from "@components/dashboard";
 import useFetchTreasuryAccountICP from "@hooks/accounts/useFetchTreasuryAccountICP";
 import useFetchTreasuryAccountOGY from "@hooks/accounts/useFetchTreasuryAccountOGY";
+import { useT } from "@i18n/LocaleContext";
 
 interface DataItem {
   value: string;
@@ -23,6 +24,7 @@ const OrigynTreasuryAccount = ({
   className,
   ...restProps
 }: OrigynTreasuryAccount) => {
+  const t = useT();
   const [data, setData] = useState<DataItem[]>([
     {
       value: "0",
@@ -31,15 +33,7 @@ const OrigynTreasuryAccount = ({
       className: "bg-purple-500",
       tooltip: {
         id: "tooltip-ota-ogy",
-        content: (
-          <>
-            <p>
-              Network Utility Revenue generated through fees for utilizing the
-              ORIGYN network (e.g., for issuing or transferring digital
-              certificates, minting NFTs, etc.) and accumulated in OGY.
-            </p>
-          </>
-        ),
+        content: null,
       },
     },
     {
@@ -49,18 +43,15 @@ const OrigynTreasuryAccount = ({
       className: "bg-pink-500",
       tooltip: {
         id: "tooltip-ota-icp",
-        content: (
-          <>
-            <p>
-              Network Utility Revenue generated through fees for utilizing the
-              ORIGYN network (e.g., for issuing or transferring digital
-              certificates, minting NFTs, etc.) and accumulated in ICP.
-            </p>
-          </>
-        ),
+        content: null,
       },
     },
   ]);
+
+  const tooltipContentByToken: Record<string, ReactNode> = {
+    OGY: <p>{t("dashboard.treasuryAccount.tooltipOgy")}</p>,
+    ICP: <p>{t("dashboard.treasuryAccount.tooltipIcp")}</p>,
+  };
 
   const {
     data: balanceICP,
@@ -109,30 +100,34 @@ const OrigynTreasuryAccount = ({
   return (
     <SkeletonOverlay loading={showSkeleton}>
       <Card className={`${className}`} {...restProps}>
-        {hasError && <CardErrorOverlay title="ORIGYN Treasury Account (OTA)" />}
+        {hasError && (
+          <CardErrorOverlay title={t("dashboard.treasuryAccount.title")} />
+        )}
         <div
           data-skel-static
           className="text-content text-[22px] font-semibold leading-none"
         >
-          ORIGYN Treasury Account (OTA)
+          {t("dashboard.treasuryAccount.title")}
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
           {data.map(({ value, token, className, logo, tooltip }) => (
             <StatCard
               key={token}
-              title={`Network Revenue (${token})`}
+              title={`${t("dashboard.treasuryAccount.networkRevenue")} (${token})`}
               value={showSkeleton ? undefined : value}
               unit={token}
               loading={showSkeleton}
               accessory={
                 <img
                   src={logo}
-                  alt="Token logo"
+                  alt={t("dashboard.treasuryAccount.tokenLogoAlt")}
                   className="h-4 w-4 object-contain"
                 />
               }
               tooltip={
-                <TooltipInfo id={tooltip.id}>{tooltip.content}</TooltipInfo>
+                <TooltipInfo id={tooltip.id}>
+                  {tooltipContentByToken[token]}
+                </TooltipInfo>
               }
               underlineClassName={className}
             />

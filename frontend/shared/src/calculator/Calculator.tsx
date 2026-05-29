@@ -157,11 +157,26 @@ const mergeMessages = (
       ...d.plan,
       ...override.plan,
       qualityOptions: {
-        pdf: { ...d.plan.qualityOptions.pdf, ...override.plan?.qualityOptions?.pdf },
-        iphone: { ...d.plan.qualityOptions.iphone, ...override.plan?.qualityOptions?.iphone },
-        dslr: { ...d.plan.qualityOptions.dslr, ...override.plan?.qualityOptions?.dslr },
-        video: { ...d.plan.qualityOptions.video, ...override.plan?.qualityOptions?.video },
-        video1hr: { ...d.plan.qualityOptions.video1hr, ...override.plan?.qualityOptions?.video1hr },
+        pdf: {
+          ...d.plan.qualityOptions.pdf,
+          ...override.plan?.qualityOptions?.pdf,
+        },
+        iphone: {
+          ...d.plan.qualityOptions.iphone,
+          ...override.plan?.qualityOptions?.iphone,
+        },
+        dslr: {
+          ...d.plan.qualityOptions.dslr,
+          ...override.plan?.qualityOptions?.dslr,
+        },
+        video: {
+          ...d.plan.qualityOptions.video,
+          ...override.plan?.qualityOptions?.video,
+        },
+        video1hr: {
+          ...d.plan.qualityOptions.video1hr,
+          ...override.plan?.qualityOptions?.video1hr,
+        },
       },
     },
     estimate: { ...d.estimate, ...override.estimate },
@@ -202,7 +217,7 @@ const formatInteger = (value: bigint) => groupDigits(value.toString());
 const formatQuotient = (
   value: bigint,
   divisor: bigint,
-  fractionDigits: number
+  fractionDigits: number,
 ) => {
   const fractionScale = 10n ** BigInt(fractionDigits);
   const rounded = (value * fractionScale + divisor / 2n) / divisor;
@@ -278,26 +293,28 @@ const NumberInput = ({
       <label className="block text-sm font-medium text-content">{label}</label>
     )}
     <div
+      dir="ltr"
       className={clsx(
         "flex h-12 items-center rounded-full border border-border bg-surface focus-within:border-border-strong",
-        // Logical padding so the trailing slot stays on the input's trailing
-        // edge when the document flips to RTL.
+        // Numeric controls stay LTR so cursor movement, decimals, and unit
+        // suffixes behave consistently inside RTL pages.
         trailing ? "ps-4 pe-1" : "px-4",
-        label && "mt-2"
+        label && "mt-2",
       )}
     >
       <input
         type="text"
         inputMode={allowDecimal ? "decimal" : "numeric"}
         pattern={allowDecimal ? "[0-9.]*" : "[0-9]*"}
-        className="h-full w-full border-0 bg-transparent p-0 text-content outline-none focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        dir="ltr"
+        className="h-full w-full border-0 bg-transparent p-0 text-left text-content outline-none focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         value={value}
         placeholder="0"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           onChange(
             allowDecimal
               ? sanitizeDecimal(e.target.value)
-              : sanitizeInteger(e.target.value)
+              : sanitizeInteger(e.target.value),
           )
         }
       />
@@ -317,7 +334,10 @@ const HeroUsdStat = ({
   const displayValue = loading && value == null ? FAKE_STAT_VALUE : value;
   return (
     <div className="flex items-baseline min-w-0">
-      <span className="font-bold text-[44px] leading-none text-content truncate min-w-0 sm:text-[56px]">
+      <span
+        dir="ltr"
+        className="font-bold text-[44px] leading-none text-content truncate min-w-0 sm:text-[56px]"
+      >
         {displayValue}
       </span>
     </div>
@@ -327,7 +347,7 @@ const HeroUsdStat = ({
 const MiniStat = ({ title, value }: { title: string; value: string }) => (
   <div className="rounded-xl border border-border bg-surface-2/40 px-4 py-3 dark:bg-surface-2">
     <p className="text-xs font-medium leading-none text-muted">{title}</p>
-    <p className="mt-2 text-base font-bold leading-none text-content">
+    <p dir="ltr" className="mt-2 text-base font-bold leading-none text-content">
       {value}
     </p>
   </div>
@@ -336,7 +356,9 @@ const MiniStat = ({ title, value }: { title: string; value: string }) => (
 const DetailRow = ({ label, value }: { label: string; value: ReactNode }) => (
   <div className="flex items-center justify-between gap-4 py-3">
     <span className="text-sm text-muted">{label}</span>
-    <div className="shrink-0 text-end text-sm text-content">{value}</div>
+    <div dir="ltr" className="shrink-0 text-end text-sm text-content">
+      {value}
+    </div>
   </div>
 );
 
@@ -384,11 +406,11 @@ const Calculator = ({
 
   const numMints = useMemo(
     () => parseWholeBigInt(inputs.numMints),
-    [inputs.numMints]
+    [inputs.numMints],
   );
   const customSizeBytes = useMemo(
     () => parseDecimalBytes(inputs.customSize, SIZE_UNIT_BYTES[customUnit]),
-    [inputs.customSize, customUnit]
+    [inputs.customSize, customUnit],
   );
 
   const presetTotalBytes = (numMints ?? 0n) * ASSET_QUALITY_BYTES[assetQuality];
@@ -400,12 +422,12 @@ const Calculator = ({
   const deferredCustomSizeInput = useDeferredValue(inputs.customSize);
   const deferredNumMints = useMemo(
     () => parseWholeBigInt(deferredNumMintsInput),
-    [deferredNumMintsInput]
+    [deferredNumMintsInput],
   );
   const deferredCustomSizeBytes = useMemo(
     () =>
       parseDecimalBytes(deferredCustomSizeInput, SIZE_UNIT_BYTES[customUnit]),
-    [deferredCustomSizeInput, customUnit]
+    [deferredCustomSizeInput, customUnit],
   );
   const deferredTotalBytes =
     deferredMode === "custom"
@@ -448,7 +470,7 @@ const Calculator = ({
         "w-full max-w-[1440px] mx-auto px-6 text-content",
         // The tall vertical padding is for the standalone page; when embedded
         // (header hidden) the host section provides its own spacing.
-        showHeader && "py-8 sm:py-16"
+        showHeader && "py-8 sm:py-16",
       )}
       style={{ fontFamily: FONT_FAMILY }}
     >
@@ -472,7 +494,9 @@ const Calculator = ({
                   <h2 className="text-[22px] font-semibold leading-none text-content">
                     {messages.plan.title}
                   </h2>
-                  <p className="text-sm text-muted">{messages.plan.description}</p>
+                  <p className="text-sm text-muted">
+                    {messages.plan.description}
+                  </p>
                 </div>
 
                 <div className="mt-6 flex flex-col gap-6">
@@ -511,7 +535,7 @@ const Calculator = ({
                                 "flex flex-col items-start gap-1 rounded-xl border px-3 py-3 text-start transition-colors",
                                 active
                                   ? "border-content bg-content text-background"
-                                  : "border-border-faint bg-surface-faint text-content hover:border-border-strong"
+                                  : "border-border-faint bg-surface-faint text-content hover:border-border-strong",
                               )}
                             >
                               <span className="text-sm font-semibold leading-none">
@@ -520,7 +544,7 @@ const Calculator = ({
                               <span
                                 className={clsx(
                                   "text-xs leading-none",
-                                  active ? "opacity-70" : "text-muted"
+                                  active ? "opacity-70" : "text-muted",
                                 )}
                               >
                                 {option.hint}
@@ -565,7 +589,7 @@ const Calculator = ({
                                     "h-full rounded-full px-3 text-xs font-semibold transition-colors",
                                     active
                                       ? "bg-content text-background"
-                                      : "text-muted hover:text-content"
+                                      : "text-muted hover:text-content",
                                   )}
                                 >
                                   {unit}
@@ -635,7 +659,7 @@ const Calculator = ({
                             value={
                               estimate
                                 ? formatUsdRateFromE8s(
-                                    estimate.ogy_usd_price_e8s
+                                    estimate.ogy_usd_price_e8s,
                                   )
                                 : "$0.0000"
                             }
@@ -685,7 +709,7 @@ const Calculator = ({
                     value={
                       estimate
                         ? formatUsdCompact(
-                            estimate.breakdown.storage_fee_usd_e8s
+                            estimate.breakdown.storage_fee_usd_e8s,
                           )
                         : "$0.00"
                     }

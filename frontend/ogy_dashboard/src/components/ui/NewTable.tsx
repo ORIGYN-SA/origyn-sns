@@ -62,9 +62,9 @@ const NewTable = <T,>({
               {columns.map((column, index) => (
                 <th
                   key={column.id}
-                  className={`py-5 text-left font-semibold whitespace-nowrap ${
-                    index === 0 ? "pl-16" : "pl-4"
-                  } ${index === columns.length - 1 ? "pr-16" : ""} ${
+                  className={`py-5 text-start font-semibold whitespace-nowrap ${
+                    index === 0 ? "ps-16" : "ps-4"
+                  } ${index === columns.length - 1 ? "pe-16" : ""} ${
                     column.headerClassName ?? ""
                   }`}
                 >
@@ -87,9 +87,9 @@ const NewTable = <T,>({
                     {columns.map((column, index) => (
                       <td
                         key={column.id}
-                        className={`py-4 text-left border-b border-border ${
-                          index === 0 ? "pl-16" : "pl-4"
-                        } ${index === columns.length - 1 ? "pr-16" : ""} ${
+                        className={`py-4 text-start border-b border-border ${
+                          index === 0 ? "ps-16" : "ps-4"
+                        } ${index === columns.length - 1 ? "pe-16" : ""} ${
                           column.cellClassName ?? ""
                         }`}
                       >

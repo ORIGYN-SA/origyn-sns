@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Card } from "@components/ui";
 import { Stat } from "@components/dashboard";
+import { useT } from "@i18n/LocaleContext";
 
 type BalanceCardProps = {
   title: string;
@@ -23,6 +24,7 @@ const BalanceCard = ({
   isUsdError = false,
   action,
 }: BalanceCardProps) => {
+  const t = useT();
   return (
     <Card className="!rounded-2xl !border-border-strong flex flex-col gap-4 h-full">
       <div className="flex items-center justify-between gap-4">
@@ -46,7 +48,8 @@ const BalanceCard = ({
             />
           ) : (
             <span>
-              Value: {isUsdError || usd === undefined ? "--" : `${usd} USD`}
+              {t("account.overview.value")}{" "}
+              {isUsdError || usd === undefined ? "--" : `${usd} USD`}
             </span>
           )}
         </div>

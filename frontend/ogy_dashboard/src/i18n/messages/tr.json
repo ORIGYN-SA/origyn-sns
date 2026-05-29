@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Dil",
+    "switchTo": "{language} diline geç",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir şeyler ters gitti",
+    "retry": "Yeniden dene",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "close": "Kapat",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "save": "Kaydet",
+    "submit": "Gönder",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "search": "Ara",
+    "viewAll": "Tümünü gör",
+    "showMore": "Daha fazla göster",
+    "showLess": "Daha az göster",
+    "amount": "Miktar",
+    "date": "Tarih",
+    "type": "Tür",
+    "from": "Kaynak",
+    "to": "Hedef",
+    "index": "Dizin",
+    "status": "Durum",
+    "total": "Toplam",
+    "balance": "Bakiye",
+    "yes": "Evet",
+    "no": "Hayır",
+    "notAvailable": "Yok"
+  },
+  "nav": {
+    "dashboard": "Kontrol Paneli",
+    "governance": "Yönetişim",
+    "transactionHistory": "İşlem Geçmişi",
+    "calculator": "Hesaplayıcı",
+    "openMainMenu": "Ana menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "openAccountOverview": "Hesap genel bakışını aç",
+    "viewAccountOverview": "Hesap genel bakışını görüntüle",
+    "connectPrompt": "Token'ları yönetmek, önerilere oy vermek ve işlem geçmişinizi görüntülemek için cüzdanınızı bağlayın.",
+    "connectWallet": "Cüzdan bağla",
+    "disconnect": "Bağlantıyı kes"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "description": "Üzgünüz, aradığınız sayfayı bulamadık.",
+    "backHome": "Ana sayfaya dön"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "OGY Kontrol Paneli",
+      "home": "Ana Sayfa",
+      "circulation": "Dolaşım",
+      "governance": "Yönetişim",
+      "revenue": "Gelir",
+      "rewards": "Ödüller",
+      "distribution": "Dağıtım",
+      "governanceDashboard": "OGY Governance Dashboard",
+      "transactionExplorer": "OGY Transaction Explorer"
+    },
+    "learn": {
+      "heading": "OGY Tokenomics ve ORIGYN hakkında daha fazla bilgi edinin",
+      "tokenomicsDeck": "OGY Tokenomics Deck",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "ORIGYN NFT Standard",
+      "tokenomicsFaq": "ORIGYN Tokenomics FAQ",
+      "website": "ORIGYN Website",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Destek",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "İletişim"
+    },
+    "support": {
+      "contactSupport": "Destekle iletişime geç",
+      "recoverTokens": "Token'larınızı kurtarın"
+    },
+    "disclaimer": "*ORIGYN Foundation, swap süreciyle bağlantılı olarak meydana gelen OGY Token'larının herhangi bir kaybından, çalınmasından veya kötüye kullanılmasından sorumlu tutulamaz. Ayrıca, ilgili tarafın ORIGYN Foundation tarafından belirtilen koşullara kesinlikle uymaması durumunda, ORIGYN Foundation swap işleminin gerçekleştirilememesinden sorumlu tutulamaz."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "OGY ANALYTICS",
+      "title": "Kontrol panelini keşfedin",
+      "subtitle": "web3 dApps, DAOs, NFTs, DeFi ve çok daha fazlasıyla güvensiz şekilde etkileşim kurun."
+    },
+    "cta": {
+      "loginToSwap": "Token swap için giriş yap",
+      "myAccount": "Hesabım"
+    },
+    "governanceStaking": {
+      "title": "Yönetişim Staking Genel Bakışı"
+    },
+    "cardError": {
+      "couldNotLoad": "Yüklenemedi",
+      "descriptionLine1": "Bu metriği alırken bir sorunla karşılaştık.",
+      "descriptionLine2": "Lütfen birazdan tekrar deneyin."
+    },
+    "emptyState": {
+      "noDataFor": "Şunun için veri yok",
+      "description": "Şu anda gösterilecek bir şey yok."
+    },
+    "circulationState": {
+      "title": "OGY Dolaşım Durumu",
+      "tooltip": "Dolaşımdaki arz, ORIGYN Foundation'a ait kilidi açılmış token'lar hariç tüm token'lardır.",
+      "nnsProposal": "NNS Önerisi",
+      "totalLabel": "Toplam OGY Dolaşımı",
+      "notOwnedName": "Foundation'ın elinde olmayan OGY",
+      "notOwnedValue": "ORIGYN foundation'a ait olmayan dolaşımdaki token miktarı.",
+      "ownedName": "Foundation'ın elinde kilitli olan OGY",
+      "ownedValue": "ORIGYN foundation'a ait kilitli token miktarı."
+    },
+    "foundationReserve": {
+      "title": "OGY Foundation Rezervi",
+      "tooltip": "Tüm cüzdanlarda ORIGYN foundation'a ait toplam OGY token miktarı.",
+      "totalLabel": "Toplam Foundation Arzı",
+      "lockedName": "Kilitli",
+      "lockedIntro": "ORIGYN foundation token'ları stake'lerde veya vesting'lerde kilitli.",
+      "lockedStakes": "1) Stake'ler- yönetişim oylamasına katılım sayesinde ödül üreten token'lar.",
+      "lockedStakesNote": "Bu token'lar gönüllü olarak kilitlenmiştir.",
+      "lockedVestings": "2) Vesting'ler- Herhangi bir ödül almayan ve oylamaya katılamayan token'lar.",
+      "lockedVestingsNote": "Bu token'lar ORIGYN Foundation ile sözleşmeniz tarafından kilitlenmiştir.",
+      "unlockedName": "Kilidi açılmış",
+      "unlockedValue": "ORIGYN foundation'a ait kilidi açılmış fon."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Hazine Hesabı (OTA)",
+      "networkRevenue": "Ağ Geliri",
+      "tokenLogoAlt": "Token logosu",
+      "tooltipOgy": "ORIGYN ağının kullanımından (örneğin dijital sertifikaların düzenlenmesi veya aktarılması, NFT mint edilmesi vb.) kaynaklanan ücretler aracılığıyla oluşturulan ve OGY olarak biriken Ağ Faydası Geliri.",
+      "tooltipIcp": "ORIGYN ağının kullanımından (örneğin dijital sertifikaların düzenlenmesi veya aktarılması, NFT mint edilmesi vb.) kaynaklanan ücretler aracılığıyla oluşturulan ve ICP olarak biriken Ağ Faydası Geliri."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Ödül Hesabı (ORA)",
+      "balance": "ORA Bakiyesi",
+      "year": "Yıl",
+      "rewardPool": "Ödül Havuzu",
+      "moreDetails": "Daha fazla ayrıntı",
+      "tooltipStake": "Token sahipleri, OGY'lerini stake ederek ve yönetişime katılarak ödül kazanabilir.",
+      "tooltipSeed": "Ödüller, ORIGYN'in bir milyar OGY ile tohumlayacağı ORIGYN Ödül Hesabından gelecektir.",
+      "tooltipPool": "Ödül havuzu ilk yılında 250 milyon OGY'den oluşur ve ekosistemin erken ve uzun vadeli katkıda bulunanlarını teşvik etmek ve ödüllendirmek için her iki yılda bir yarıya iner.",
+      "description": "ORIGYN, stake eden ve oy veren sahiplerin yararına bir ORIGYN Ödül Hesabına (ORA) bir milyar OGY katkıda bulunacaktır. Ödül havuzu ilk yılında 250 milyon OGY'den oluşur ve ekosistemin erken ve uzun vadeli katkıda bulunanlarını teşvik etmek ve ödüllendirmek için her iki yılda bir yarıya iner."
+    },
+    "tokenDistribution": {
+      "title": "Token Dağıtımı"
+    },
+    "transactionHistory": {
+      "title": "İşlem Geçmişi",
+      "showAll": "Tümünü göster"
+    },
+    "topTransfers": {
+      "value": "Değer",
+      "time": "Zaman",
+      "ogyLogoAlt": "OGY Logo",
+      "noDataAvailable": "Kullanılabilir veri yok."
+    },
+    "totalSupply": {
+      "title": "Toplam OGY Arzı",
+      "tooltipTitle": "Kullanılabilir toplam OGY token miktarı.",
+      "tooltipLine1": "Buna dolaşımdaki arz ve ORIGYN Foundation kontrolündeki arz dahildir.",
+      "tooltipLine2": "18 Eylül itibarıyla ORIGYN tam deflasyonist modele geçti; bu da artık yeni mint edilen token olmayacağı anlamına gelir.",
+      "chartLabel": "Toplam Arz"
+    },
+    "totalBurned": {
+      "title": "Toplam Yakılan OGY",
+      "tooltipTitle": "Yakılan toplam OGY token miktarı.",
+      "tooltipLine1": "Bu token'lar tamamen yakılmıştır ve artık kullanılamaz.",
+      "tooltipLine2": "Token'lar farklı nedenlerle yakılabilir; örneğin sertifika mint ücretleri, ağ faydası ücretleri veya ağ işlem ücretleri.",
+      "chartLabel": "Toplam Yakılan"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Günlük",
+      "weekly": "Haftalık",
+      "monthly": "Aylık",
+      "yearly": "Yıllık",
+      "all": "Tümü"
+    },
+    "stakingOverview": {
+      "title": "Staking Genel Bakışı",
+      "totalTokensInStakes": "Stake'lerdeki Toplam Token",
+      "tooltip": "Stake'lerde kilitli token'lar.",
+      "stakedTokens": "Stake Edilen Token'lar",
+      "stakedTokensLegend": "STAKE EDİLEN TOKEN'LAR"
+    },
+    "usersActivity": {
+      "title": "Kullanıcı Genel Bakışı",
+      "protocolUsers": "OGY Protokol Kullanıcıları",
+      "protocolUsersTooltip": "OGY token'larının benzersiz sahipleri",
+      "protocolUsersLegend": "OGY PROTOKOL KULLANICILARI",
+      "activeWallets": "Aktif OGY Cüzdanları",
+      "activeWalletsTooltip": "OGY token'larının aktif sahipleri"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Yönetişim Genel Bakışı",
+      "welcome": "ORIGYN Yönetişimine hoş geldiniz!",
+      "description": "OGY token sahipleri, OGY'lerini stake ederek ve önerilere oy vererek ORIGYN Ağını doğrudan etkileyebilir. Karar alma sürecine katılarak, bu stake eden token sahipleri ödül kazanır.",
+      "learnMore": "Daha fazla bilgi"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake Et ve Oy Ver",
+        "description": "OGY stake ederek ve önerilere oy vererek ORIGYN Ağını etkileyin."
+      },
+      "earnRewards": {
+        "title": "Ödül Kazan",
+        "description": "Ödül kazanmak için karar alma sürecine katılın."
+      },
+      "governCollectively": {
+        "title": "Birlikte Yönet",
+        "description": "İşbirlikçi bir ekosistem olarak ağa katılın ve onu etkileyin."
+      }
+    },
+    "tokensSection": {
+      "title": "Yönetişimdeki Token'lar",
+      "paragraph1": "OGY token sahipleri, OGY'lerini stake ederek ve önerilere oy vererek ORIGYN Ağını doğrudan etkileyebilir.",
+      "paragraph2": "Karar alma sürecine katılarak, bu stake eden token sahipleri ödül kazanır ve toplu olarak ve demokratik şekilde yönetir.",
+      "learnMoreOgy": "OGY hakkında daha fazla bilgi"
+    },
+    "sections": {
+      "proposals": "Öneriler",
+      "neurons": "Neuron'lar"
+    },
+    "votingParticipation": {
+      "title": "Oylama Katılımı",
+      "chartLabel": "Katılım %",
+      "legendLabel": "KATILIM %",
+      "period": {
+        "weekly": "Haftalık",
+        "monthly": "Aylık",
+        "yearly": "Yıllık"
+      },
+      "lastParticipation": {
+        "label": "Son Oylama Katılımı",
+        "tooltip": "Son oylama etkinliğindeki katılım yüzdesi."
+      },
+      "averageParticipation": {
+        "label": "Ortalama Oylama Katılımı",
+        "tooltip": "Zaman içindeki ortalama oylama katılım yüzdesi."
+      },
+      "averagePower": {
+        "label": "Ortalama Oy Gücü",
+        "tooltip": "Tüm katılımcılar arasındaki ortalama oy gücü."
+      }
+    },
+    "estimateRewards": {
+      "title": "Ödüllerinizi tahmin edin",
+      "lockDuration": "Kilit süresi",
+      "participants": "katılımcı",
+      "lockedForAtLeast": "şu anda en az şu süre boyunca kilitli",
+      "lockedFor": "şu anda şu süre boyunca kilitli",
+      "year": "yıl",
+      "years": "yıl"
+    },
+    "kpi": {
+      "metric": "Metrik",
+      "rewardBaseCurrentYear": "Geçerli yıl için ödül tabanı",
+      "dailyVotingRewards": "Günlük oylama ödülleri",
+      "totalVotingPower": "Toplam oy gücü",
+      "overallVotingParticipation": "Genel oylama katılımı"
+    },
+    "total": {
+      "titleTooltip": "Yönetişim canister'ındaki tüm token'lar. Bu token'lar vesting durumunda, staking durumunda, stake edilmemiş veya talep edilmemiş olabilir.",
+      "totalLabel": "Yönetişimdeki Toplam Token",
+      "locked": {
+        "name": "Kilitli",
+        "tooltip": "Yönetişimde kilitli token'lar."
+      },
+      "unlocked": {
+        "name": "Kilidi açılmış",
+        "tooltip": "Yönetişimde kilidi açılmış ve istenildiği zaman çekilip işlem yapılabilen token'lar."
+      },
+      "accumulatedRewards": {
+        "name": "Biriken Ödüller",
+        "tooltip": "Kullanıcılar için sayılan ancak henüz talep edilmemiş ödüller."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Öneriler",
+      "viewProposal": "Öneriyi görüntüle",
+      "columns": {
+        "id": "ID",
+        "title": "Başlık",
+        "proposed": "Önerildi",
+        "timeRemaining": "Kalan Süre",
+        "topic": "Konu",
+        "status": "Durum",
+        "view": "Görüntüle"
+      }
+    },
+    "details": {
+      "category": "Yönetişim",
+      "proposalNumber": "Öneri #",
+      "proposal": "Öneri",
+      "titleLoading": "Öneri başlığı yükleniyor…",
+      "payloadLoading": "Öneri ayrıntıları yükleniyor…",
+      "posted": "Yayınlandı",
+      "topic": "Konu",
+      "moreInfo": "Daha fazla bilgi",
+      "totalVotes": "Toplam oy",
+      "adopt": "KABUL ET",
+      "reject": "REDDET",
+      "vote": "Oy ver"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuron'lar",
+      "viewNeuron": "Neuron'u görüntüle",
+      "columns": {
+        "id": "ID",
+        "state": "Durum",
+        "stakedOgy": "Stake Edilen OGY",
+        "dissolveDelay": "Çözülme Gecikmesi",
+        "age": "Yaş",
+        "votingPower": "Oy Gücü",
+        "view": "Görüntüle"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "OGY Neuron",
+      "created": "Oluşturuldu",
+      "stakedOgy": "Stake Edilen OGY",
+      "votingPower": "Oy Gücü",
+      "dissolveDelay": "Çözülme Gecikmesi",
+      "age": "Yaş",
+      "lifecycle": "Neuron yaşam döngüsü",
+      "dateCreated": "Oluşturulma Tarihi",
+      "autoStakeMaturity": "Otomatik Stake Olgunluğu",
+      "rewardsAndBonuses": "Ödüller ve bonuslar",
+      "stakedMaturity": "Stake Edilen Olgunluk",
+      "totalMaturity": "Toplam Olgunluk",
+      "ageBonus": "Yaş Bonusu",
+      "totalBonus": "Toplam Bonus",
+      "dissolveDelayBonus": "Çözülme Gecikmesi Bonusu"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "İşlem Geçmişi",
+      "searchFor": "Şunu ara:",
+      "or": "veya",
+      "searchPlaceholder": "Bir öğe ara",
+      "noResults": "Sonuç bulunamadı",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "İşlem Ayrıntıları",
+      "hash": "Hash",
+      "fetchError": "Bir işlem alınırken hata oluştu!",
+      "mintingAccount": "Mint hesabı",
+      "fee": "Ücret",
+      "memo": "Not",
+      "none": "Yok"
+    },
+    "accountDetails": {
+      "title": "OGY hesabı",
+      "id": "ID",
+      "owner": "Sahip",
+      "subaccount": "Alt hesap",
+      "defaultSubaccount": "Yok (varsayılan alt hesap)",
+      "historicalMaxBalance": "Geçmiş maksimum bakiye",
+      "genesisBalance": "Genesis bakiyesi",
+      "period": {
+        "monthly": "Aylık",
+        "quarterly": "Üç aylık",
+        "yearly": "Yıllık",
+        "lifetime": "Ömür boyu"
+      },
+      "empty": {
+        "title": "Henüz işlem yok",
+        "description": "Bu hesabın işlem geçmişi yok. OGY gönderdiğinde veya aldığında, etkinlik burada görünecektir."
+      },
+      "balanceHistory": {
+        "title": "Bakiye Geçmişi",
+        "currentBalance": "Mevcut bakiye",
+        "currentBalanceInfo": "Mevcut hesap bakiyesi.",
+        "legend": "OGY Bakiyesi"
+      },
+      "overview": {
+        "title": "İşlem Genel Bakışı",
+        "totalLabel": "Toplam miktar",
+        "totalSent": "Toplam Gönderilen",
+        "totalSentInfo": "Principal tarafından gönderilen toplam miktar.",
+        "totalReceived": "Toplam Alınan",
+        "totalReceivedInfo": "Principal tarafından alınan toplam miktar."
+      }
+    },
+    "flow": {
+      "title": "İşlem Akışı",
+      "searchPlaceholder": "İşlemleri ara…",
+      "clearSearch": "Aramayı temizle",
+      "loadError": "İşlem verileri yüklenemedi. Lütfen tekrar deneyin.",
+      "noMatch": "Bu aramayla eşleşen işlem yok.",
+      "transactions": "işlem",
+      "out": "Çıkış",
+      "in": "Giriş",
+      "total": "Toplam",
+      "legend": {
+        "outTransaction": "Çıkış işlemi",
+        "inTransaction": "Giriş işlemi",
+        "includesInitial": "İlk işlem dahil",
+        "rootAccount": "Kök hesap",
+        "account": "Hesap",
+        "fromRoot": "Kökten gelen işlemlerle",
+        "toRoot": "Köke giden işlemlerle",
+        "madeInitial": "İlk işlemi yaptı"
+      }
+    },
+    "kind": {
+      "mint": "Basım",
+      "transfer": "Transfer",
+      "burn": "Yakma",
+      "approve": "Onayla"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Tekrar hoş geldiniz",
+      "value": "Değer:",
+      "disconnectWallet": "Cüzdan bağlantısını kes",
+      "accountLabel": "Hesap",
+      "manageDescription": "OGY cüzdanınızı, ödüllerinizi ve staking etkinliğinizi yönetin.",
+      "walletBalance": "Cüzdan Bakiyesi",
+      "myAccount": "Hesabım",
+      "howToTopUp": "Nasıl yüklenir?"
+    },
+    "principal": {
+      "accountIdLabel": "Account ID:",
+      "principalIdLabel": "Principal ID:"
+    },
+    "available": {
+      "title": "Kullanılabilir OGY",
+      "transactionHistory": "İşlem geçmişi",
+      "transfer": "Aktar",
+      "transferOgy": "OGY Aktar",
+      "transferDescription": "Yalnızca kullanılabilir bakiyenizden OGY gönderebilirsiniz.",
+      "max": "Maks",
+      "recipientAddress": "Alıcı adresi",
+      "amountReceived": "Alınan Miktar",
+      "ogyLogoAlt": "OGY Logo",
+      "transactionFee": "İşlem ücreti (kaynağa fatura edilir)",
+      "currentBalance": "Mevcut bakiye:",
+      "transferProcessing": "Aktarım işleniyor",
+      "transferProcessingHint": "Bu birkaç saniye sürebilir",
+      "transferSuccess": "Aktarım başarılı oldu !",
+      "transferError": "Aktarım hatası !",
+      "errors": {
+        "amountRequired": "Miktar gereklidir.",
+        "amountExceedsBalance": "Miktar bakiyenizi aşmamalıdır.",
+        "amountBelowFee": "Miktar işlem ücretinden az olmamalıdır.",
+        "amountNotPositive": "Miktar pozitif bir sayı olmalıdır.",
+        "recipientRequired": "Alıcı adresi gereklidir.",
+        "recipientInvalid": "Geçersiz alıcı adresi."
+      }
+    },
+    "staked": {
+      "title": "Stake Edilen OGY",
+      "stake": "Stake et",
+      "stakeOgy": "OGY Stake Et",
+      "stakeDescription": "OGY stake etmek için NNS platformumuza gitmeniz gerekir.",
+      "warningNotConnected": "Şununla bağlı görünmüyorsunuz:",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Şuna ihtiyacınız var:",
+      "warningToConnect": "NNS platformuna bağlanmak için.",
+      "goToNns": "NNS'ye git"
+    },
+    "rewards": {
+      "title": "Stake Edilen Ödüller",
+      "claimAll": "Tümünü talep et",
+      "claimDisabledReason": "Ödül talepleri yalnızca principal varsayılan hesabı için desteklenir.",
+      "aboutToClaim": "Şunu talep etmek üzeresiniz:",
+      "sentToPrincipal": "Ödüller principal'ınıza gönderilecek",
+      "pending": "Tüm ödüller talep ediliyor...",
+      "successTitle": "Tüm ödülleri talep etme başarılı!",
+      "errorTitle": "Tüm ödülleri talep etme hatası!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Ledger ve yönetişimi değiştiriyoruz",
+        "description": "ORIGYN yönetişimi ve ledger'ı bir SNS'ye yükseltildi. ORIGYN yönetişimine katılmaya devam etmek ve OGY'yi kullanmak için OGY token'larınızı taşımanız gerekir."
+      },
+      "howToSwap": "Token'lar nasıl swap edilir",
+      "disclosureToggle": "Hâlâ eski OGY token'larınız mı var? Şimdi swap edin!",
+      "accountId": "Account ID:",
+      "steps": {
+        "withdraw": {
+          "title": "Adım 1: Eski yönetişimden çekin",
+          "subtitle": "Daha önce OGY yönetişimine katılıyorduysanız, swap edebilmek için önce bu token'ları çekmeniz gerekir."
+        },
+        "deposit": {
+          "title": "Adım 2: Hesabınıza yatırın",
+          "subtitle": "OGY kontrol panelinin dışında herhangi bir token'ınız varsa, swap etmeye başlayabilmek için önce bunları account-id'nize yatırın."
+        },
+        "swap": {
+          "title": "Adım 3: Token'ları swap edin",
+          "subtitle": "Eski OGY token'ını yeni ledger'a swap edin."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Eski OGY Bakiyesi"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Eski OGY kontrol paneline git"
+      },
+      "swap": {
+        "disabledOisy": "Eski OGY swap işlemi OISY ile kullanılamaz. Eski OGY'nizi swap etmek için Internet Identity veya Plug ile bağlanın.",
+        "disabledSubAccount": "Eski OGY swap işlemi yalnızca principal varsayılan hesabından desteklenir.",
+        "swapYourTokens": "Token'larınızı swap edin",
+        "automaticDisabled": "Otomatik swap devre dışı bırakıldı. Swap isteğinizin onaylanması gerekecek, min. miktar 50 000 OGY'dir.",
+        "form": {
+          "title": "OGY'nizi yeni ledger'a swap edin",
+          "description": "Swap etmek istediğiniz OGY token'larını account id'nize yatırın",
+          "tokensAvailable": "Swap için kullanılabilir token'lar",
+          "youWillReceivePrefix": "Şunu alacaksınız:",
+          "youWillReceiveSuffix": "yeni ledger'da OGY token'ı.",
+          "swapPrefix": "Swap et:",
+          "swapSuffix": "OGY token'ı"
+        },
+        "pending": {
+          "takesTime": "Swap işlemi biraz zaman alabilir.",
+          "doNotRefresh": "Sayfayı yenilemeyin !",
+          "swapping": "Token'lar swap ediliyor..."
+        },
+        "success": {
+          "title": "Swap başarılı oldu!",
+          "walletBalance": "Yeni ledger'daki cüzdan bakiyesi",
+          "myAccount": "Hesabım"
+        },
+        "error": {
+          "title": "Token swap hatası!",
+          "retry": "Yeniden dene"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "OGY Neuron'larım",
+        "idHeader": "ID",
+        "stakedAmount": "Stake edilen miktar",
+        "claimAmount": "Talep miktarı",
+        "emptyTitle": "Henüz neuron yok",
+        "emptyDescription": "Stake'i, oy gücünü ve ödülleri burada izlemeye başlamak için bir OGY neuron ekleyin.",
+        "addFirstNeuron": "İlk neuron'unuzu ekleyin"
+      },
+      "add": {
+        "button": "Neuron ekle",
+        "title": "Neuron ekle",
+        "description": "Burada yönetmek istediğiniz her OGY neuron'una bu principal'ı hotkey olarak ekleyin.",
+        "needHotkey": "Hotkey eklemeniz mi gerekiyor?",
+        "openNns": "NNS uygulamasını aç"
+      },
+      "claim": {
+        "button": "Talep et",
+        "disabledReason": "Ödül talepleri yalnızca principal varsayılan hesabı için desteklenir.",
+        "aboutToClaim": "Şunu talep etmek üzeresiniz:",
+        "sentToPrincipal": "Ödüller principal'ınıza gönderilecek",
+        "pending": "Ödül talep ediliyor...",
+        "successTitle": "Ödül talep etme başarılı!",
+        "errorTitle": "Ödül talep etme hatası!",
+        "retry": "Yeniden dene"
+      },
+      "remove": {
+        "title": "Neuron'u kaldır",
+        "description": "Bu neuron'u kaldırmak için, principal'ınızı neuron'unuzun hotkey listesinden kaldırmanız gerekir."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Adres",
+      "governanceBalance": "Yönetişim Bakiyesi",
+      "stakedTokens": "Stake edilen token'lar",
+      "ledgerBalance": "Ledger Bakiyesi",
+      "weightInTotalSupply": "Toplam Arzdaki Ağırlık"
+    }
+  },
+  "recovery": {
+    "title": "Token'larınızı kurtarın",
+    "description": "OGY kontrol paneli yalnızca OGY token'ını destekler. Yanlışlıkla buraya başka token'lar gönderdiyseniz, aşağıdaki adımları izleyerek bunları kurtarabilirsiniz.",
+    "chooseToken": "Token seç",
+    "loginRequired": "Token'larınızı toplamak için giriş yapmış olmanız gerekir.",
+    "transfer": {
+      "icpLogoAlt": "ICP Logo",
+      "ledgerCanister": "Ledger canister:",
+      "transferIcp": "ICP Aktar",
+      "availableBalanceNote": "Yalnızca kullanılabilir bakiyenizden ICP gönderebilirsiniz.",
+      "amountRequired": "Miktar gereklidir.",
+      "amountExceedsBalance": "Miktar bakiyenizi aşmamalıdır.",
+      "amountPositive": "Miktar pozitif bir sayı olmalıdır.",
+      "amountBelowFee": "Miktar işlem ücretlerinden büyük veya eşit olmalıdır.",
+      "recipientAddress": "Alıcı adresi",
+      "recipientAddressRequired": "Alıcı adresi gereklidir.",
+      "invalidRecipientAddress": "Geçersiz alıcı adresi.",
+      "amountReceived": "Alınan Miktar",
+      "transactionFee": "İşlem ücreti",
+      "currentBalance": "Mevcut bakiye:",
+      "processing": "Aktarım işleniyor",
+      "processingNote": "Bu birkaç saniye sürebilir",
+      "success": "Aktarım başarılı oldu!",
+      "error": "Aktarım hatası!"
+    }
+  },
+  "support": {
+    "category": "Destek",
+    "title": "Talep oluştur",
+    "titleSubmitted": "Talep gönderildi",
+    "successTitle": "Destek talebi oluşturuldu",
+    "successMessage": "Verdiğiniz e-posta adresinden sizinle iletişime geçeceğiz.",
+    "submitAnother": "Başka bir talep gönder",
+    "intro": "Sorununuzu ve size nasıl ulaşabileceğimizi açıklayın.",
+    "form": {
+      "name": "Ad",
+      "email": "İletişim e-postası",
+      "emailRequired": "E-posta adresi gereklidir",
+      "emailInvalid": "Geçersiz e-posta adresi",
+      "principal": "Cüzdan principal'ı",
+      "invalidPrincipal": "Geçersiz alıcı adresi.",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Bize neler olduğunu anlatın…",
+      "descriptionRequired": "Lütfen sorununuzu açıklayın"
+    },
+    "submitError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "submitting": "Gönderiliyor…"
+  },
+  "explorer": {
+    "title": "Gezgin",
+    "searchPlaceholder": "Başlık, ihraç eden, principal veya token ID ile ara",
+    "openFilters": "Filtreleri aç",
+    "checkOnBlockchain": "Blok zincirinde kontrol et",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Öne Çıkan Sertifikalar",
+      "art": "Sanat Sertifikaları",
+      "gold": "Altın Sertifikaları"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Panoya kopyala",
+    "toggleRelativeTime": "Göreceli zamanı değiştir. Mevcut görünüm:",
+    "collapseRow": "Satırı daralt",
+    "expandRow": "Satırı genişlet",
+    "searchPlaceholder": "Öğe ara...",
+    "sortAscending": "Artan sırala",
+    "sortDescending": "Azalan sırala",
+    "linesPerPage": "Sayfa başına satır",
+    "page": "Sayfa",
+    "pageOf": "/",
+    "previousPage": "Önceki sayfa",
+    "nextPage": "Sonraki sayfa"
+  },
+  "auth": {
+    "connect": "Bağlan",
+    "disconnect": "Bağlantıyı kes",
+    "connectWallet": {
+      "title": "Cüzdanınızı bağlayın",
+      "subtitle": "Nasıl giriş yapmak istediğinizi seçin"
+    },
+    "install": "Yükle",
+    "newToIc": "Internet Computer'da yeni misiniz?",
+    "learnMore": "Daha fazla bilgi",
+    "connecting": {
+      "title": "Bağlanıyor...",
+      "subtitle": "Cüzdanınızdaki isteği onaylayın"
+    },
+    "sessionExpired": {
+      "title": "Oturum süresi doldu",
+      "description": "Cüzdan oturumunuz artık geçerli değil. Devam etmek için yeniden bağlanın."
+    },
+    "reconnect": "Yeniden bağlan",
+    "error": {
+      "connectionCancelled": "Bağlantı iptal edildi. Lütfen tekrar deneyin.",
+      "connectionFailed": "Cüzdan bağlantısı başarısız oldu. Lütfen tekrar deneyin."
+    }
+  },
+  "warning": {
+    "badge": "NEW",
+    "ledgerSwitch": "ledger'ı değiştiriyoruz, OGY'nizi yenisiyle swap etmeniz gerekiyor"
+  },
+  "calculator": {
+    "header": {
+      "title": "Maliyet hesaplayıcısı",
+      "description": "Tüm verilerinizin zincir üstünde yer aldığı benzersiz sertifikanızın maliyetini tahmin etmek için ORIGYN hesaplayıcısını kullanın"
+    },
+    "plan": {
+      "title": "Basımınızı planlayın",
+      "description": "Kaç öğe yüklediğinizi ve ne yüklediğinizi bize bildirin.",
+      "itemsLabel": "Kaç öğe?",
+      "uploadingLabel": "Ne yüklüyorsunuz?",
+      "knowExactSize": "Tam boyutu biliyor musunuz?",
+      "totalUploadSize": "Toplam yükleme boyutu",
+      "usePreset": "Bunun yerine bir ön ayar kullanın",
+      "combinedSize": "Tüm öğelerdeki her dosyanın birleşik boyutu.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "her biri 250 KB"
+        },
+        "iphone": {
+          "label": "Fotoğraf",
+          "hint": "her biri 3 MB"
+        },
+        "dslr": {
+          "label": "Stüdyo fotoğrafı",
+          "hint": "her biri 20 MB"
+        },
+        "video": {
+          "label": "Kısa video",
+          "hint": "her biri 1 GB"
+        },
+        "video1hr": {
+          "label": "Uzun video",
+          "hint": "her biri 60 GB"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Anlık tahmin",
+      "titleRefreshing": "Tahmin güncelleniyor",
+      "description": "Ayarlarınızı değiştirdikçe otomatik olarak güncellenir.",
+      "ogyEquivalent": "OGY karşılığı",
+      "ogySpotRate": "OGY anlık kuru",
+      "itemSingular": "Öğe",
+      "itemPlural": "Öğe",
+      "upload": "Yükleme"
+    },
+    "breakdown": {
+      "title": "Maliyet dökümü",
+      "baseFee": "Temel basım ücreti",
+      "storageFee": "Depolama ücreti",
+      "items": "Öğeler",
+      "uploadSize": "Yükleme boyutu"
+    },
+    "bytesUnit": "bayt"
+  }
+}

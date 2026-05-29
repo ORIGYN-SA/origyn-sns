@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
+import { useT } from "@i18n/LocaleContext";
 
 const CopyToClipboard = ({ value }: { value: string }) => {
+  const t = useT();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
@@ -18,7 +20,7 @@ const CopyToClipboard = ({ value }: { value: string }) => {
       type="button"
       data-skel-hide
       onClick={handleCopy}
-      aria-label="Copy to clipboard"
+      aria-label={t("ui.copyToClipboard")}
       className="inline-flex items-center justify-center shrink-0 h-4 w-4 p-0 leading-none align-middle"
     >
       {copied ? (

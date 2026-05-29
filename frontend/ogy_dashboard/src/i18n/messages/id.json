@@ -1,0 +1,795 @@
+{
+  "language": {
+    "label": "Bahasa",
+    "switchTo": "Beralih ke {language}",
+    "names": {
+      "en": "English",
+      "ar": "العربية",
+      "bg": "Български",
+      "bn": "বাংলা",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "es": "Español",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt": "Português",
+      "pt-BR": "Português (Brasil)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "sw": "Kiswahili",
+      "th": "ไทย",
+      "tl": "Tagalog",
+      "tr": "Türkçe",
+      "uk": "Українська",
+      "ur": "اردو",
+      "vi": "Tiếng Việt",
+      "zh": "简体中文",
+      "zh-TW": "繁體中文"
+    }
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi",
+    "cancel": "Batal",
+    "confirm": "Konfirmasi",
+    "close": "Tutup",
+    "back": "Kembali",
+    "next": "Berikutnya",
+    "previous": "Sebelumnya",
+    "save": "Simpan",
+    "submit": "Kirim",
+    "copy": "Salin",
+    "copied": "Tersalin",
+    "search": "Cari",
+    "viewAll": "Lihat semua",
+    "showMore": "Tampilkan lebih banyak",
+    "showLess": "Tampilkan lebih sedikit",
+    "amount": "Jumlah",
+    "date": "Tanggal",
+    "type": "Jenis",
+    "from": "Dari",
+    "to": "Ke",
+    "index": "Indeks",
+    "status": "Status",
+    "total": "Total",
+    "balance": "Saldo",
+    "yes": "Ya",
+    "no": "Tidak",
+    "notAvailable": "T/A"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "governance": "Tata Kelola",
+    "transactionHistory": "Riwayat Transaksi",
+    "calculator": "Kalkulator",
+    "openMainMenu": "Buka menu utama",
+    "closeMenu": "Tutup menu",
+    "openAccountOverview": "Buka ikhtisar akun",
+    "viewAccountOverview": "Lihat ikhtisar akun",
+    "connectPrompt": "Hubungkan dompet Anda untuk mengelola token, memberikan suara pada proposal, dan melihat riwayat transaksi Anda.",
+    "connectWallet": "Hubungkan dompet",
+    "disconnect": "Putuskan"
+  },
+  "notFound": {
+    "title": "Halaman tidak ditemukan",
+    "description": "Maaf, kami tidak dapat menemukan halaman yang Anda cari.",
+    "backHome": "Kembali ke beranda"
+  },
+  "footer": {
+    "dashboard": {
+      "heading": "Dasbor OGY",
+      "home": "Beranda",
+      "circulation": "Sirkulasi",
+      "governance": "Tata Kelola",
+      "revenue": "Pendapatan",
+      "rewards": "Imbalan",
+      "distribution": "Distribusi",
+      "governanceDashboard": "Dasbor Tata Kelola OGY",
+      "transactionExplorer": "Penjelajah Transaksi OGY"
+    },
+    "learn": {
+      "heading": "Pelajari lebih lanjut tentang OGY Tokenomics & ORIGYN",
+      "tokenomicsDeck": "Deck OGY Tokenomics",
+      "litepaper": "Tokenomics Litepaper",
+      "nftStandard": "Standar NFT ORIGYN",
+      "tokenomicsFaq": "FAQ ORIGYN Tokenomics",
+      "website": "Situs Web ORIGYN",
+      "gitbook": "ORIGYN Gitbook"
+    },
+    "social": {
+      "heading": "Dukungan",
+      "twitter": "Twitter",
+      "telegram": "Telegram",
+      "medium": "Medium",
+      "contact": "Kontak"
+    },
+    "support": {
+      "contactSupport": "Hubungi dukungan",
+      "recoverTokens": "Pulihkan token Anda"
+    },
+    "disclaimer": "*ORIGYN Foundation tidak bertanggung jawab atas kehilangan, pencurian, atau penyalahgunaan Token OGY yang terjadi sehubungan dengan proses swap. Selanjutnya, ORIGYN Foundation tidak bertanggung jawab atas kegagalan untuk melakukan swap jika pihak yang terlibat tidak mematuhi secara ketat ketentuan yang ditetapkan oleh ORIGYN Foundation."
+  },
+  "dashboard": {
+    "hero": {
+      "badge": "ANALITIK OGY",
+      "title": "Jelajahi dasbor",
+      "subtitle": "Berinteraksi secara trustless dengan web3 dApps, DAOs, NFT, DeFi, dan banyak lagi."
+    },
+    "cta": {
+      "loginToSwap": "Masuk untuk swap token",
+      "myAccount": "Akun saya"
+    },
+    "governanceStaking": {
+      "title": "Ikhtisar Staking Tata Kelola"
+    },
+    "cardError": {
+      "couldNotLoad": "Tidak dapat dimuat",
+      "descriptionLine1": "Kami mengalami masalah saat mengambil metrik ini.",
+      "descriptionLine2": "Silakan coba lagi sebentar."
+    },
+    "emptyState": {
+      "noDataFor": "Tidak ada data untuk",
+      "description": "Tidak ada yang dapat ditampilkan saat ini."
+    },
+    "circulationState": {
+      "title": "Status Sirkulasi OGY",
+      "tooltip": "Pasokan yang beredar adalah semua token kecuali token yang tidak terkunci yang dimiliki oleh ORIGYN Foundation.",
+      "nnsProposal": "Proposal NNS",
+      "totalLabel": "Total Sirkulasi OGY",
+      "notOwnedName": "OGY yang tidak berada di tangan Foundation",
+      "notOwnedValue": "Jumlah token beredar yang tidak dimiliki oleh ORIGYN foundation.",
+      "ownedName": "OGY yang terkunci di tangan Foundation",
+      "ownedValue": "Jumlah token terkunci yang dimiliki oleh ORIGYN foundation."
+    },
+    "foundationReserve": {
+      "title": "Cadangan ORIGYN Foundation OGY",
+      "tooltip": "Total jumlah token OGY yang dimiliki oleh ORIGYN foundation di seluruh dompet.",
+      "totalLabel": "Total Pasokan Foundation",
+      "lockedName": "Terkunci",
+      "lockedIntro": "Token ORIGYN foundation yang terkunci dalam stake atau vesting.",
+      "lockedStakes": "1) Stake- token yang menghasilkan imbalan berkat partisipasi dalam pemungutan suara tata kelola.",
+      "lockedStakesNote": "Token tersebut dikunci secara sukarela.",
+      "lockedVestings": "2) Vesting- Token yang tidak menerima imbalan apa pun dan tidak dapat berpartisipasi dalam pemungutan suara.",
+      "lockedVestingsNote": "Token tersebut dikunci berdasarkan kontrak Anda dengan ORIGYN Foundation.",
+      "unlockedName": "Tidak terkunci",
+      "unlockedValue": "Dana tidak terkunci yang dimiliki oleh ORIGYN foundation."
+    },
+    "treasuryAccount": {
+      "title": "ORIGYN Treasury Account (OTA)",
+      "networkRevenue": "Pendapatan Jaringan",
+      "tokenLogoAlt": "Logo token",
+      "tooltipOgy": "Pendapatan Utilitas Jaringan yang dihasilkan melalui biaya penggunaan jaringan ORIGYN (mis., untuk menerbitkan atau mentransfer sertifikat digital, mencetak NFT, dll.) dan terkumpul dalam OGY.",
+      "tooltipIcp": "Pendapatan Utilitas Jaringan yang dihasilkan melalui biaya penggunaan jaringan ORIGYN (mis., untuk menerbitkan atau mentransfer sertifikat digital, mencetak NFT, dll.) dan terkumpul dalam ICP."
+    },
+    "rewardAccount": {
+      "title": "ORIGYN Reward Account (ORA)",
+      "balance": "Saldo ORA",
+      "year": "Tahun",
+      "rewardPool": "Kumpulan Imbalan",
+      "moreDetails": "Detail selengkapnya",
+      "tooltipStake": "Pemegang token dapat melakukan staking OGY mereka dan memperoleh imbalan dengan berpartisipasi dalam tata kelola.",
+      "tooltipSeed": "Imbalan akan berasal dari ORIGYN Reward Account, yang akan diisi oleh ORIGYN dengan satu miliar OGY.",
+      "tooltipPool": "Kumpulan imbalan terdiri dari 250 juta OGY pada tahun pertama dan akan berkurang setengahnya setiap dua tahun untuk mendorong dan memberi imbalan kepada kontributor awal dan jangka panjang ekosistem.",
+      "description": "ORIGYN akan menyumbangkan satu miliar OGY ke ORIGYN Reward Account (ORA) untuk kepentingan pemegang yang melakukan staking dan memberikan suara. Kumpulan imbalan terdiri dari 250 juta OGY pada tahun pertama dan akan berkurang setengahnya setiap dua tahun untuk mendorong dan memberi imbalan kepada kontributor awal dan jangka panjang ekosistem."
+    },
+    "tokenDistribution": {
+      "title": "Distribusi Token"
+    },
+    "transactionHistory": {
+      "title": "Riwayat Transaksi",
+      "showAll": "Tampilkan semua"
+    },
+    "topTransfers": {
+      "value": "Nilai",
+      "time": "Waktu",
+      "ogyLogoAlt": "Logo OGY",
+      "noDataAvailable": "Tidak ada data tersedia."
+    },
+    "totalSupply": {
+      "title": "Total Pasokan OGY",
+      "tooltipTitle": "Total jumlah token OGY yang tersedia.",
+      "tooltipLine1": "Ini mencakup pasokan yang beredar dan pasokan di bawah kendali ORIGYN Foundation.",
+      "tooltipLine2": "Sejak 18 September, ORIGYN beralih ke model deflasi penuh yang berarti tidak ada lagi token baru yang dicetak.",
+      "chartLabel": "Total Pasokan"
+    },
+    "totalBurned": {
+      "title": "Total OGY yang Dibakar",
+      "tooltipTitle": "Total jumlah token OGY yang dibakar.",
+      "tooltipLine1": "Token-token ini telah sepenuhnya dibakar dan tidak lagi tersedia.",
+      "tooltipLine2": "Token dapat dibakar karena berbagai alasan, misalnya biaya pencetakan sertifikat, biaya utilitas jaringan, atau biaya transaksi jaringan.",
+      "chartLabel": "Total Dibakar"
+    }
+  },
+  "charts": {
+    "period": {
+      "daily": "Harian",
+      "weekly": "Mingguan",
+      "monthly": "Bulanan",
+      "yearly": "Tahunan",
+      "all": "Semua"
+    },
+    "stakingOverview": {
+      "title": "Ikhtisar Staking",
+      "totalTokensInStakes": "Total Token dalam Stake",
+      "tooltip": "Token yang terkunci dalam stake.",
+      "stakedTokens": "Token yang Di-stake",
+      "stakedTokensLegend": "TOKEN YANG DI-STAKE"
+    },
+    "usersActivity": {
+      "title": "Ikhtisar Pengguna",
+      "protocolUsers": "Pengguna Protokol OGY",
+      "protocolUsersTooltip": "Pemegang token OGY yang unik",
+      "protocolUsersLegend": "PENGGUNA PROTOKOL OGY",
+      "activeWallets": "Dompet Aktif OGY",
+      "activeWalletsTooltip": "Pemegang token OGY yang aktif"
+    }
+  },
+  "governance": {
+    "overview": {
+      "title": "Ikhtisar Tata Kelola",
+      "welcome": "Selamat datang di Tata Kelola ORIGYN!",
+      "description": "Pemegang token OGY dapat secara langsung memengaruhi Jaringan ORIGYN dengan melakukan staking OGY mereka dan memberikan suara pada proposal. Dengan berpartisipasi dalam proses pengambilan keputusan, pemegang token yang melakukan staking ini memperoleh imbalan.",
+      "learnMore": "Pelajari lebih lanjut"
+    },
+    "features": {
+      "stakeVote": {
+        "title": "Stake & Pilih",
+        "description": "Pengaruhi Jaringan ORIGYN dengan melakukan staking OGY & memberikan suara pada proposal."
+      },
+      "earnRewards": {
+        "title": "Dapatkan Imbalan",
+        "description": "Berpartisipasilah dalam proses pengambilan keputusan untuk mendapatkan imbalan."
+      },
+      "governCollectively": {
+        "title": "Mengatur Secara Kolektif",
+        "description": "Terlibat & pengaruhi jaringan sebagai ekosistem kolaboratif."
+      }
+    },
+    "tokensSection": {
+      "title": "Token dalam Tata Kelola",
+      "paragraph1": "Pemegang token OGY dapat secara langsung memengaruhi Jaringan ORIGYN dengan melakukan staking OGY mereka dan memberikan suara pada proposal.",
+      "paragraph2": "Dengan berpartisipasi dalam proses pengambilan keputusan, pemegang token yang melakukan staking ini memperoleh imbalan serta mengatur secara kolektif dan demokratis.",
+      "learnMoreOgy": "Pelajari lebih lanjut tentang OGY"
+    },
+    "sections": {
+      "proposals": "Proposal",
+      "neurons": "Neuron"
+    },
+    "votingParticipation": {
+      "title": "Partisipasi Pemungutan Suara",
+      "chartLabel": "Partisipasi %",
+      "legendLabel": "PARTISIPASI %",
+      "period": {
+        "weekly": "Mingguan",
+        "monthly": "Bulanan",
+        "yearly": "Tahunan"
+      },
+      "lastParticipation": {
+        "label": "Partisipasi Pemungutan Suara Terakhir",
+        "tooltip": "Persentase partisipasi dalam acara pemungutan suara terakhir."
+      },
+      "averageParticipation": {
+        "label": "Partisipasi Pemungutan Suara Rata-rata",
+        "tooltip": "Persentase rata-rata partisipasi pemungutan suara dari waktu ke waktu."
+      },
+      "averagePower": {
+        "label": "Kekuatan Suara Rata-rata",
+        "tooltip": "Kekuatan suara rata-rata di antara semua peserta."
+      }
+    },
+    "estimateRewards": {
+      "title": "Perkirakan imbalan Anda",
+      "lockDuration": "Durasi penguncian",
+      "participants": "peserta",
+      "lockedForAtLeast": "saat ini terkunci setidaknya selama",
+      "lockedFor": "saat ini terkunci selama",
+      "year": "tahun",
+      "years": "tahun"
+    },
+    "kpi": {
+      "metric": "Metrik",
+      "rewardBaseCurrentYear": "Dasar imbalan untuk tahun berjalan",
+      "dailyVotingRewards": "Imbalan voting harian",
+      "totalVotingPower": "Total kekuatan voting",
+      "overallVotingParticipation": "Partisipasi voting keseluruhan"
+    },
+    "total": {
+      "titleTooltip": "Semua token yang ada di canister tata kelola. Token-token ini dapat berada dalam status vesting, status staking, tidak di-stake, atau belum diklaim.",
+      "totalLabel": "Total Token dalam Tata Kelola",
+      "locked": {
+        "name": "Terkunci",
+        "tooltip": "Token yang terkunci dalam tata kelola."
+      },
+      "unlocked": {
+        "name": "Tidak terkunci",
+        "tooltip": "Token yang tidak terkunci dalam tata kelola dan dapat ditarik serta diperdagangkan kapan saja."
+      },
+      "accumulatedRewards": {
+        "name": "Imbalan Terakumulasi",
+        "tooltip": "Imbalan yang dihitung untuk pengguna tetapi belum diklaim."
+      }
+    }
+  },
+  "proposals": {
+    "list": {
+      "title": "Proposal",
+      "viewProposal": "Lihat proposal",
+      "columns": {
+        "id": "ID",
+        "title": "Judul",
+        "proposed": "Diajukan",
+        "timeRemaining": "Sisa Waktu",
+        "topic": "Topik",
+        "status": "Status",
+        "view": "Lihat"
+      }
+    },
+    "details": {
+      "category": "Tata Kelola",
+      "proposalNumber": "Proposal #",
+      "proposal": "Proposal",
+      "titleLoading": "Memuat judul proposal…",
+      "payloadLoading": "Memuat detail proposal…",
+      "posted": "Diposting",
+      "topic": "Topik",
+      "moreInfo": "Info selengkapnya",
+      "totalVotes": "Total suara",
+      "adopt": "TERIMA",
+      "reject": "TOLAK",
+      "vote": "Pilih"
+    }
+  },
+  "neurons": {
+    "list": {
+      "title": "Neuron",
+      "viewNeuron": "Lihat neuron",
+      "columns": {
+        "id": "ID",
+        "state": "Status",
+        "stakedOgy": "OGY yang Di-stake",
+        "dissolveDelay": "Penundaan Pembubaran",
+        "age": "Usia",
+        "votingPower": "Kekuatan Suara",
+        "view": "Lihat"
+      }
+    },
+    "details": {
+      "category": "Neuron",
+      "title": "Neuron OGY",
+      "created": "Dibuat",
+      "stakedOgy": "OGY yang Di-stake",
+      "votingPower": "Kekuatan Suara",
+      "dissolveDelay": "Penundaan Pembubaran",
+      "age": "Usia",
+      "lifecycle": "Siklus hidup neuron",
+      "dateCreated": "Tanggal Dibuat",
+      "autoStakeMaturity": "Staking Otomatis Maturity",
+      "rewardsAndBonuses": "Imbalan & bonus",
+      "stakedMaturity": "Maturity yang Di-stake",
+      "totalMaturity": "Total Maturity",
+      "ageBonus": "Bonus Usia",
+      "totalBonus": "Total Bonus",
+      "dissolveDelayBonus": "Bonus Penundaan Pembubaran"
+    }
+  },
+  "transactions": {
+    "history": {
+      "title": "Riwayat Transaksi",
+      "searchFor": "Cari:",
+      "or": "atau",
+      "searchPlaceholder": "Cari item",
+      "noResults": "Tidak ada hasil yang ditemukan",
+      "resultBlock": "Blok",
+      "resultPrincipal": "Principal",
+      "searchTypes": {
+        "principalId": "PrincipalID",
+        "accountId": "AccountID",
+        "blockIndex": "BlockIndex"
+      }
+    },
+    "details": {
+      "title": "Detail Transaksi",
+      "hash": "Hash",
+      "fetchError": "Kesalahan saat mengambil satu transaksi!",
+      "mintingAccount": "Akun pencetakan",
+      "fee": "Biaya",
+      "memo": "Memo",
+      "none": "Tidak ada"
+    },
+    "accountDetails": {
+      "title": "Akun OGY",
+      "id": "ID",
+      "owner": "Pemilik",
+      "subaccount": "Subakun",
+      "defaultSubaccount": "Tidak ada (subakun default)",
+      "historicalMaxBalance": "Saldo maksimum historis",
+      "genesisBalance": "Saldo genesis",
+      "period": {
+        "monthly": "Bulanan",
+        "quarterly": "Triwulanan",
+        "yearly": "Tahunan",
+        "lifetime": "Sepanjang waktu"
+      },
+      "empty": {
+        "title": "Belum ada transaksi",
+        "description": "Akun ini tidak memiliki riwayat transaksi. Setelah mengirim atau menerima OGY, aktivitas akan muncul di sini."
+      },
+      "balanceHistory": {
+        "title": "Riwayat Saldo",
+        "currentBalance": "Saldo saat ini",
+        "currentBalanceInfo": "Saldo akun saat ini.",
+        "legend": "Saldo OGY"
+      },
+      "overview": {
+        "title": "Ikhtisar Transaksi",
+        "totalLabel": "Jumlah total",
+        "totalSent": "Total Terkirim",
+        "totalSentInfo": "Jumlah total yang dikirim oleh principal.",
+        "totalReceived": "Total Diterima",
+        "totalReceivedInfo": "Jumlah total yang diterima oleh principal."
+      }
+    },
+    "flow": {
+      "title": "Alur Transaksi",
+      "searchPlaceholder": "Cari transaksi…",
+      "clearSearch": "Hapus pencarian",
+      "loadError": "Tidak dapat memuat data transaksi. Silakan coba lagi.",
+      "noMatch": "Tidak ada transaksi yang cocok dengan pencarian ini.",
+      "transactions": "transaksi",
+      "out": "Keluar",
+      "in": "Masuk",
+      "total": "Total",
+      "legend": {
+        "outTransaction": "Transaksi keluar",
+        "inTransaction": "Transaksi masuk",
+        "includesInitial": "Termasuk transaksi awal",
+        "rootAccount": "Akun root",
+        "account": "Akun",
+        "fromRoot": "Dengan transaksi dari root",
+        "toRoot": "Dengan transaksi ke root",
+        "madeInitial": "Melakukan transaksi awal"
+      }
+    },
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Transfer",
+      "burn": "Burn",
+      "approve": "Setujui"
+    }
+  },
+  "account": {
+    "overview": {
+      "welcomeBack": "Selamat datang kembali",
+      "value": "Nilai:",
+      "disconnectWallet": "Putuskan dompet",
+      "accountLabel": "Akun",
+      "manageDescription": "Kelola dompet OGY, imbalan, dan aktivitas staking Anda.",
+      "walletBalance": "Saldo Dompet",
+      "myAccount": "Akun saya",
+      "howToTopUp": "Cara mengisi saldo?"
+    },
+    "principal": {
+      "accountIdLabel": "ID Akun:",
+      "principalIdLabel": "ID Principal:"
+    },
+    "available": {
+      "title": "OGY Tersedia",
+      "transactionHistory": "Riwayat transaksi",
+      "transfer": "Transfer",
+      "transferOgy": "Transfer OGY",
+      "transferDescription": "Anda hanya dapat mengirim OGY dari saldo yang tersedia.",
+      "max": "Maks",
+      "recipientAddress": "Alamat penerima",
+      "amountReceived": "Jumlah Diterima",
+      "ogyLogoAlt": "Logo OGY",
+      "transactionFee": "Biaya transaksi (ditagihkan ke sumber)",
+      "currentBalance": "Saldo saat ini:",
+      "transferProcessing": "Transfer sedang diproses",
+      "transferProcessingHint": "Ini dapat memakan waktu beberapa detik",
+      "transferSuccess": "Transfer berhasil!",
+      "transferError": "Kesalahan transfer!",
+      "errors": {
+        "amountRequired": "Jumlah wajib diisi.",
+        "amountExceedsBalance": "Jumlah tidak boleh melebihi saldo Anda.",
+        "amountBelowFee": "Jumlah tidak boleh kurang dari biaya transaksi.",
+        "amountNotPositive": "Jumlah harus berupa angka positif.",
+        "recipientRequired": "Alamat penerima wajib diisi.",
+        "recipientInvalid": "Alamat penerima tidak valid."
+      }
+    },
+    "staked": {
+      "title": "OGY yang Di-stake",
+      "stake": "Stake",
+      "stakeOgy": "Stake OGY",
+      "stakeDescription": "Untuk melakukan staking OGY, Anda perlu pergi ke platform NNS kami.",
+      "warningNotConnected": "Sepertinya Anda tidak terhubung dengan",
+      "internetIdentity": "Internet Identity",
+      "warningNeedIdentity": "Anda memerlukan",
+      "warningToConnect": "untuk terhubung ke platform NNS.",
+      "goToNns": "Pergi ke NNS"
+    },
+    "rewards": {
+      "title": "Imbalan yang Di-stake",
+      "claimAll": "Klaim semua",
+      "claimDisabledReason": "Klaim imbalan hanya didukung untuk akun default principal.",
+      "aboutToClaim": "Anda akan mengklaim",
+      "sentToPrincipal": "Imbalan akan dikirim ke principal Anda",
+      "pending": "Mengklaim semua imbalan...",
+      "successTitle": "Klaim semua imbalan berhasil!",
+      "errorTitle": "Kesalahan klaim semua imbalan!"
+    },
+    "ledgerSwitch": {
+      "banner": {
+        "title": "Kami sedang beralih ledger dan tata kelola",
+        "description": "Tata kelola dan ledger ORIGYN telah ditingkatkan ke SNS. Untuk terus berpartisipasi dalam tata kelola ORIGYN dan memanfaatkan OGY, Anda perlu memigrasikan token OGY Anda."
+      },
+      "howToSwap": "Cara swap token",
+      "disclosureToggle": "Masih punya token OGY lama? Swap sekarang!",
+      "accountId": "ID Akun:",
+      "steps": {
+        "withdraw": {
+          "title": "Langkah 1: Tarik dari tata kelola lama",
+          "subtitle": "Jika Anda sebelumnya berpartisipasi dalam tata kelola OGY, Anda perlu menarik token tersebut sebelum dapat menukarnya."
+        },
+        "deposit": {
+          "title": "Langkah 2: Setor ke akun Anda",
+          "subtitle": "Jika Anda memiliki token di luar dasbor OGY, setorkan ke ID akun Anda sebelum Anda dapat mulai menukarnya."
+        },
+        "swap": {
+          "title": "Langkah 3: Swap token",
+          "subtitle": "Swap token OGY lama ke ledger baru."
+        }
+      },
+      "deposit": {
+        "legacyBalance": "Saldo OGY Lama"
+      },
+      "withdraw": {
+        "goToLegacyDashboard": "Pergi ke dasbor OGY lama"
+      },
+      "swap": {
+        "disabledOisy": "Swap OGY lama tidak tersedia dengan OISY. Hubungkan dengan Internet Identity atau Plug untuk menukar OGY lama Anda.",
+        "disabledSubAccount": "Swap OGY lama hanya didukung dari akun default principal.",
+        "swapYourTokens": "Swap token Anda",
+        "automaticDisabled": "Swap otomatis telah dinonaktifkan. Anda perlu menyetujui permintaan swap Anda, jumlah minimum adalah 50 000 OGY.",
+        "form": {
+          "title": "Swap OGY Anda ke ledger baru",
+          "description": "Setorkan token OGY apa pun yang ingin Anda tukar ke ID akun Anda",
+          "tokensAvailable": "Token tersedia untuk swap",
+          "youWillReceivePrefix": "Anda akan menerima",
+          "youWillReceiveSuffix": "token OGY di ledger baru.",
+          "swapPrefix": "Swap",
+          "swapSuffix": "token OGY"
+        },
+        "pending": {
+          "takesTime": "Proses swap dapat memakan sedikit waktu.",
+          "doNotRefresh": "Jangan menyegarkan halaman!",
+          "swapping": "Menukar token..."
+        },
+        "success": {
+          "title": "Swap berhasil!",
+          "walletBalance": "Saldo dompet di ledger baru",
+          "myAccount": "Akun saya"
+        },
+        "error": {
+          "title": "Kesalahan swap token!",
+          "retry": "Coba lagi"
+        }
+      }
+    },
+    "neurons": {
+      "list": {
+        "title": "Neuron OGY Saya",
+        "idHeader": "ID",
+        "stakedAmount": "Jumlah yang di-stake",
+        "claimAmount": "Jumlah klaim",
+        "emptyTitle": "Belum ada neuron",
+        "emptyDescription": "Tambahkan neuron OGY untuk mulai melacak stake, kekuatan suara, dan imbalan di sini.",
+        "addFirstNeuron": "Tambahkan neuron pertama Anda"
+      },
+      "add": {
+        "button": "Tambah neuron",
+        "title": "Tambah neuron",
+        "description": "Tambahkan principal ini sebagai hotkey di setiap neuron OGY yang ingin Anda kelola di sini.",
+        "needHotkey": "Perlu menambahkan hotkey?",
+        "openNns": "Buka aplikasi NNS"
+      },
+      "claim": {
+        "button": "Klaim",
+        "disabledReason": "Klaim imbalan hanya didukung untuk akun default principal.",
+        "aboutToClaim": "Anda akan mengklaim",
+        "sentToPrincipal": "Imbalan akan dikirim ke principal Anda",
+        "pending": "Mengklaim imbalan...",
+        "successTitle": "Klaim imbalan berhasil!",
+        "errorTitle": "Kesalahan klaim imbalan!",
+        "retry": "Coba lagi"
+      },
+      "remove": {
+        "title": "Hapus neuron",
+        "description": "Untuk menghapus neuron ini, Anda perlu menghapus principal Anda dari daftar hotkey neuron Anda."
+      }
+    }
+  },
+  "tokenDistribution": {
+    "list": {
+      "address": "Alamat",
+      "governanceBalance": "Saldo Tata Kelola",
+      "stakedTokens": "Token yang di-stake",
+      "ledgerBalance": "Saldo Ledger",
+      "weightInTotalSupply": "Bobot Dalam Total Pasokan"
+    }
+  },
+  "recovery": {
+    "title": "Pulihkan token Anda",
+    "description": "Dasbor OGY hanya mendukung token OGY. Jika Anda secara tidak sengaja mengirim token lain ke sini, Anda dapat memulihkannya dengan mengikuti langkah-langkah di bawah ini.",
+    "chooseToken": "Pilih token",
+    "loginRequired": "Untuk mengumpulkan token Anda, Anda harus masuk.",
+    "transfer": {
+      "icpLogoAlt": "Logo ICP",
+      "ledgerCanister": "Canister ledger:",
+      "transferIcp": "Transfer ICP",
+      "availableBalanceNote": "Anda hanya dapat mengirim ICP dari saldo yang tersedia.",
+      "amountRequired": "Jumlah wajib diisi.",
+      "amountExceedsBalance": "Jumlah tidak boleh melebihi saldo Anda.",
+      "amountPositive": "Jumlah harus berupa angka positif.",
+      "amountBelowFee": "Jumlah harus lebih besar dari atau sama dengan biaya transaksi.",
+      "recipientAddress": "Alamat penerima",
+      "recipientAddressRequired": "Alamat penerima wajib diisi.",
+      "invalidRecipientAddress": "Alamat penerima tidak valid.",
+      "amountReceived": "Jumlah Diterima",
+      "transactionFee": "Biaya transaksi",
+      "currentBalance": "Saldo saat ini:",
+      "processing": "Transfer sedang diproses",
+      "processingNote": "Ini dapat memakan waktu beberapa detik",
+      "success": "Transfer berhasil!",
+      "error": "Kesalahan transfer!"
+    }
+  },
+  "support": {
+    "category": "Dukungan",
+    "title": "Buat tiket",
+    "titleSubmitted": "Tiket terkirim",
+    "successTitle": "Tiket dukungan dibuat",
+    "successMessage": "Kami akan menindaklanjuti melalui alamat email yang Anda berikan.",
+    "submitAnother": "Kirim tiket lain",
+    "intro": "Jelaskan masalah Anda dan cara kami dapat menghubungi Anda.",
+    "form": {
+      "name": "Nama",
+      "email": "Email kontak",
+      "emailRequired": "Alamat email wajib diisi",
+      "emailInvalid": "Alamat email tidak valid",
+      "principal": "Principal dompet",
+      "invalidPrincipal": "Alamat penerima tidak valid.",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Beri tahu kami apa yang terjadi…",
+      "descriptionRequired": "Silakan jelaskan masalah Anda"
+    },
+    "submitError": "Terjadi kesalahan. Silakan coba lagi.",
+    "submitting": "Mengirim…"
+  },
+  "explorer": {
+    "title": "Penjelajah",
+    "searchPlaceholder": "Cari berdasarkan judul, penerbit, principal, atau ID token",
+    "openFilters": "Buka filter",
+    "checkOnBlockchain": "Periksa di blockchain",
+    "sampleIssuer": "Suzanne sys",
+    "sampleTitle": "The Midsummer Night Dream",
+    "sections": {
+      "featured": "Sertifikat Unggulan",
+      "art": "Sertifikat Seni",
+      "gold": "Sertifikat Emas"
+    }
+  },
+  "ui": {
+    "copyToClipboard": "Salin ke papan klip",
+    "toggleRelativeTime": "Alihkan waktu relatif. Tampilan saat ini:",
+    "collapseRow": "Ciutkan baris",
+    "expandRow": "Perluas baris",
+    "searchPlaceholder": "Cari item...",
+    "sortAscending": "Urutkan menaik",
+    "sortDescending": "Urutkan menurun",
+    "linesPerPage": "Baris per halaman",
+    "page": "Halaman",
+    "pageOf": "dari",
+    "previousPage": "Halaman sebelumnya",
+    "nextPage": "Halaman berikutnya"
+  },
+  "auth": {
+    "connect": "Hubungkan",
+    "disconnect": "Putuskan",
+    "connectWallet": {
+      "title": "Hubungkan dompet Anda",
+      "subtitle": "Pilih cara Anda ingin masuk"
+    },
+    "install": "Instal",
+    "newToIc": "Baru mengenal Internet Computer?",
+    "learnMore": "Pelajari lebih lanjut",
+    "connecting": {
+      "title": "Menghubungkan...",
+      "subtitle": "Setujui permintaan di dompet Anda"
+    },
+    "sessionExpired": {
+      "title": "Sesi kedaluwarsa",
+      "description": "Sesi dompet Anda sudah tidak valid. Hubungkan kembali untuk melanjutkan."
+    },
+    "reconnect": "Hubungkan kembali",
+    "error": {
+      "connectionCancelled": "Koneksi dibatalkan. Silakan coba lagi.",
+      "connectionFailed": "Koneksi dompet gagal. Silakan coba lagi."
+    }
+  },
+  "warning": {
+    "badge": "BARU",
+    "ledgerSwitch": "kami sedang beralih ledger, Anda perlu menukar OGY Anda ke yang baru"
+  },
+  "calculator": {
+    "header": {
+      "title": "Kalkulator biaya",
+      "description": "Gunakan kalkulator ORIGYN untuk memperkirakan biaya sertifikat unik Anda dengan semua data Anda di rantai"
+    },
+    "plan": {
+      "title": "Rencanakan mint Anda",
+      "description": "Beri tahu kami berapa banyak item dan apa yang Anda unggah.",
+      "itemsLabel": "Berapa banyak item?",
+      "uploadingLabel": "Apa yang Anda unggah?",
+      "knowExactSize": "Tahu ukuran pastinya?",
+      "totalUploadSize": "Total ukuran unggahan",
+      "usePreset": "Gunakan preset sebagai gantinya",
+      "combinedSize": "Ukuran gabungan semua file di seluruh item.",
+      "qualityOptions": {
+        "pdf": {
+          "label": "PDF",
+          "hint": "250 KB per item"
+        },
+        "iphone": {
+          "label": "Foto",
+          "hint": "3 MB per item"
+        },
+        "dslr": {
+          "label": "Foto studio",
+          "hint": "20 MB per item"
+        },
+        "video": {
+          "label": "Video pendek",
+          "hint": "1 GB per item"
+        },
+        "video1hr": {
+          "label": "Video panjang",
+          "hint": "60 GB per item"
+        }
+      }
+    },
+    "estimate": {
+      "titleLive": "Estimasi langsung",
+      "titleRefreshing": "Memperbarui estimasi",
+      "description": "Diperbarui secara otomatis saat Anda mengubah pengaturan.",
+      "ogyEquivalent": "Setara OGY",
+      "ogySpotRate": "Harga spot OGY",
+      "itemSingular": "Item",
+      "itemPlural": "Item",
+      "upload": "Unggahan"
+    },
+    "breakdown": {
+      "title": "Rincian biaya",
+      "baseFee": "Biaya mint dasar",
+      "storageFee": "Biaya penyimpanan",
+      "items": "Item",
+      "uploadSize": "Ukuran unggahan"
+    },
+    "bytesUnit": "bita"
+  }
+}

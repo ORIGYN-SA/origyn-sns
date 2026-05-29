@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import { useWallet } from "@components/auth/useWallet";
 import Auth from "@components/auth/Auth";
 import { Card, PageContainer, Select } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import TransferICP from "./transfer/TransferICP";
 
 const Recovery = () => {
+  const t = useT();
   const { isConnected } = useWallet();
   const [token, setToken] = useState("");
   const selectOptions = useMemo(() => [{ value: "ICP" }], []);
@@ -17,12 +19,10 @@ const Recovery = () => {
         <div className="max-w-2xl">
           <div className="text-center mb-8">
             <div className="text-xl sm:text-6xl font-bold">
-              Recover your tokens
+              {t("recovery.title")}
             </div>
             <p className="text-content/60 mt-4">
-              The OGY dashboard only supports the OGY token. In case you
-              accidentally sent other tokens here, you can recover those by
-              following the steps below.
+              {t("recovery.description")}
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ const Recovery = () => {
                   handleOnChange={(value) =>
                     handleOnChangeSelect(value as string)
                   }
-                  placeholder="Choose token"
+                  placeholder={t("recovery.chooseToken")}
                 />
                 {token === "ICP" && (
                   <div className="mt-8">
@@ -48,7 +48,7 @@ const Recovery = () => {
             {!isConnected && (
               <div className="flex flex-col items-center py-8">
                 <div className="font-semibold text-center mb-8">
-                  In order to collect your tokens you must be logged in.
+                  {t("recovery.loginRequired")}
                 </div>
                 <Auth />
               </div>

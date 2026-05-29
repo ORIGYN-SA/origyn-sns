@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Button, InputField, Card, PageHeader } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 import { Principal } from "@dfinity/principal";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useCreateSupportTicket, {
@@ -24,6 +25,7 @@ const Field = ({
 );
 
 const Support = () => {
+  const t = useT();
   const mutation = useCreateSupportTicket();
 
   const {
@@ -65,8 +67,8 @@ const Support = () => {
   return (
     <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
       <PageHeader
-        category="Support"
-        title={isSuccess ? "Ticket submitted" : "Create a ticket"}
+        category={t("support.category")}
+        title={isSuccess ? t("support.titleSubmitted") : t("support.title")}
       />
 
       <div className="flex justify-center mt-8">
@@ -92,29 +94,29 @@ const Support = () => {
                 </svg>
               </div>
               <div className="text-xl font-semibold text-content">
-                Support ticket created
+                {t("support.successTitle")}
               </div>
               <p className="text-sm text-muted max-w-sm">
-                We&apos;ll follow up at the email address you provided.
+                {t("support.successMessage")}
               </p>
               <Button
                 onClick={handleCreateAnother}
                 className="mt-2 !px-[25px] !py-0 text-[14px] leading-[48px]"
               >
-                Submit another ticket
+                {t("support.submitAnother")}
               </Button>
             </div>
           ) : (
             <>
               <p className="text-sm text-muted">
-                Describe your issue and how we can reach you.
+                {t("support.intro")}
               </p>
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="mt-6 flex flex-col gap-4"
               >
-                <Field label="Name" htmlFor="name">
+                <Field label={t("support.form.name")} htmlFor="name">
                   <InputField
                     id="name"
                     type="text"
@@ -123,22 +125,22 @@ const Support = () => {
                   />
                 </Field>
 
-                <Field label="Contact email" htmlFor="email">
+                <Field label={t("support.form.email")} htmlFor="email">
                   <InputField
                     id="email"
                     type="text"
                     register={register("email", {
-                      required: "Email address is required",
+                      required: t("support.form.emailRequired"),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
+                        message: t("support.form.emailInvalid"),
                       },
                     })}
                     errors={errors?.email}
                   />
                 </Field>
 
-                <Field label="Wallet principal" htmlFor="principal">
+                <Field label={t("support.form.principal")} htmlFor="principal">
                   <InputField
                     id="principal"
                     type="text"
@@ -146,20 +148,20 @@ const Support = () => {
                       validate: {
                         isValidRecipientAddress: (v) =>
                           isValidRecipientAddress(v) ||
-                          "Invalid recipient address.",
+                          t("support.form.invalidPrincipal"),
                       },
                     })}
                     errors={errors?.principal}
                   />
                 </Field>
 
-                <Field label="Description" htmlFor="description">
+                <Field label={t("support.form.description")} htmlFor="description">
                   <textarea
                     id="description"
                     rows={5}
-                    placeholder="Tell us what's going on…"
+                    placeholder={t("support.form.descriptionPlaceholder")}
                     {...register("description", {
-                      required: "Please describe your issue",
+                      required: t("support.form.descriptionRequired"),
                     })}
                     className="form-input px-4 py-3 bg-surface border border-border rounded-[20px] w-full outline-none focus:outline-none focus:border-border focus:ring-0 resize-y"
                   />
@@ -176,8 +178,7 @@ const Support = () => {
                       role="alert"
                       className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400"
                     >
-                      {error?.message ||
-                        "Something went wrong. Please try again."}
+                      {error?.message || t("support.submitError")}
                     </p>
                   )}
 
@@ -186,7 +187,7 @@ const Support = () => {
                     className="w-full !px-[25px] !py-0 text-[14px] leading-[48px]"
                     disabled={!isValid || isPending}
                   >
-                    {isPending ? "Submitting…" : "Submit"}
+                    {isPending ? t("support.submitting") : t("common.submit")}
                   </Button>
                 </div>
               </form>

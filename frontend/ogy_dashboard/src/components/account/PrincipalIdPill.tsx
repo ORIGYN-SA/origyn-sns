@@ -1,5 +1,6 @@
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { Skeleton, Tile, Tooltip } from "@components/ui";
+import { useT } from "@i18n/LocaleContext";
 
 type PrincipalIdPillVariant = "short" | "long";
 
@@ -12,14 +13,14 @@ type PrincipalIdPillProps = {
 
 const variantClasses: Record<PrincipalIdPillVariant, string> = {
   short:
-    "h-[47px] w-[47px] justify-center sm:w-[225px] sm:justify-start sm:py-2 sm:pl-1 sm:pr-4",
-  long: "h-[47px] w-full py-2 pl-1 pr-4",
+    "h-[47px] w-[47px] justify-center sm:w-[225px] sm:justify-start sm:py-2 sm:ps-1 sm:pe-4",
+  long: "h-[47px] w-full py-2 ps-1 pe-4",
 };
 
 const textClasses: Record<PrincipalIdPillVariant, string> = {
   short:
-    "hidden min-w-0 flex-1 items-center font-sans text-[14px] leading-[48px] text-right sm:flex",
-  long: "flex min-w-0 flex-1 items-center font-sans text-[14px] leading-[48px] text-right",
+    "hidden min-w-0 flex-1 items-center font-sans text-[14px] leading-[48px] text-end sm:flex",
+  long: "flex min-w-0 flex-1 items-center font-sans text-[14px] leading-[48px] text-end",
 };
 
 const PrincipalIcon = () => (
@@ -56,17 +57,20 @@ const PrincipalIdPill = ({
   showCopy = false,
   className = "",
 }: PrincipalIdPillProps) => {
+  const t = useT();
   return (
     <div
       className={`flex items-center gap-2 rounded-[100px] border border-border-strong bg-surface-1 opacity-100 ${variantClasses[variant]} ${className}`}
     >
       <PrincipalIcon />
       <div className={textClasses[variant]}>
-        <div className="mr-2 shrink-0 font-semibold">Principal ID:</div>
+        <div className="me-2 shrink-0 font-semibold">{t("account.principal.principalIdLabel")}</div>
         {principalId ? (
           <>
+            {/* Principal ID is an inherently-LTR identifier; keep it LTR so RTL
+                bidi doesn't reorder the truncated string. */}
             <Tooltip content={principalId}>
-              <div className="min-w-0 flex-1 truncate font-normal">
+              <div dir="ltr" className="min-w-0 flex-1 truncate font-normal text-start">
                 {principalId}
               </div>
             </Tooltip>

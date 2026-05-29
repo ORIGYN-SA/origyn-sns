@@ -38,7 +38,12 @@ const Stat = ({
     : "ml-1 font-semibold text-[18px] sm:text-[22px] leading-none";
 
   return (
+    // Numeric/currency value cluster (logo + digits + unit code) stays LTR in
+    // every locale: digits read LTR universally, and the icon/unit physical
+    // margins are authored for LTR order. Pinning dir avoids the cluster
+    // flipping (and its margins collapsing) under RTL locales.
     <div
+      dir="ltr"
       className={`flex ${loading ? "items-center" : "items-baseline"} min-w-0 ${wrapperHeight} ${className}`}
     >
       {iconSrc && <img src={iconSrc} alt="" className={iconClass} />}

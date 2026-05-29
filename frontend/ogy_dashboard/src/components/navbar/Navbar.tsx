@@ -16,15 +16,18 @@ import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import { Button } from "@components/ui";
 import useHideOnScrollDown from "@hooks/useHideOnScrollDown";
 import useScrolledPast from "@hooks/useScrolledPast";
+import { useT, useLocalePath } from "@i18n/LocaleContext";
 
-const navItems: { title: string; url: string; requiresAuth?: boolean }[] = [
-  { title: "Dashboard", url: "/" },
-  { title: "Governance", url: "/governance" },
-  { title: "Transaction History", url: "/transaction-history" },
-  { title: "Calculator", url: "/calculator" },
+const navItems: { titleKey: string; url: string; requiresAuth?: boolean }[] = [
+  { titleKey: "nav.dashboard", url: "/" },
+  { titleKey: "nav.governance", url: "/governance" },
+  { titleKey: "nav.transactionHistory", url: "/transaction-history" },
+  { titleKey: "nav.calculator", url: "/calculator" },
 ];
 
 const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
+  const t = useT();
+  const lp = useLocalePath();
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountOverview, setShowAccountOverview] = useState(false);
   const {
@@ -83,10 +86,10 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
             <BrandLogo labelClassName="hidden sm:block" />
           </div>
           <div className="hidden xl:block justify-self-center col-start-2 col-end-5 h-full">
-            <div className="flex items-stretch space-x-12 h-full">
-              {visibleNavItems.map(({ title, url }) => (
+            <div className="flex items-stretch gap-12 h-full">
+              {visibleNavItems.map(({ titleKey, url }) => (
                 <NavLink
-                  to={url}
+                  to={lp(url)}
                   end={url === "/"}
                   className={({ isActive }) =>
                     `relative flex items-center font-semibold text-[16px] leading-none ${
@@ -99,7 +102,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                 >
                   {({ isActive }) => (
                     <>
-                      {title}
+                      {t(titleKey)}
                       {isActive && (
                         <span className="absolute left-0 right-0 bottom-[-1px] h-[2px] bg-content" />
                       )}
@@ -115,7 +118,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
               <button
                 type="button"
                 onClick={() => handleOnClickShowAccountOverview(true)}
-                aria-label="Open account overview"
+                aria-label={t("nav.openAccountOverview")}
                 className="p-0 border-0 bg-transparent appearance-none rounded-[100px] focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
               >
                 <PrincipalIdPill principalId={principalId} variant="short" />
@@ -126,7 +129,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 type="button"
-                aria-label="Open main menu"
+                aria-label={t("nav.openMainMenu")}
                 className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-border-faint bg-surface-muted text-content hover:bg-surface-2 hover:border-border-strong transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
               >
                 <Bars3Icon className="h-5 w-5" aria-hidden="true" />
@@ -174,7 +177,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                     <button
                       onClick={handleOnHideMenu}
                       type="button"
-                      aria-label="Close menu"
+                      aria-label={t("nav.closeMenu")}
                       className="inline-flex items-center justify-center h-[47px] w-[47px] rounded-full border border-border-faint bg-surface-muted text-content hover:bg-surface-2 hover:border-border-strong transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                     >
                       <XMarkIcon className="h-5 w-5" aria-hidden="true" />
@@ -182,10 +185,10 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                   </div>
 
                   <div className="flex flex-col gap-1 px-4 py-4">
-                    {visibleNavItems.map(({ title, url }) => (
+                    {visibleNavItems.map(({ titleKey, url }) => (
                       <NavLink
                         key={url}
-                        to={url}
+                        to={lp(url)}
                         end={url === "/"}
                         onClick={handleOnHideMenu}
                         className={({ isActive }) =>
@@ -198,9 +201,9 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                       >
                         {({ isActive }) => (
                           <>
-                            <span>{title}</span>
+                            <span>{t(titleKey)}</span>
                             <ChevronRightIcon
-                              className={`h-4 w-4 shrink-0 ${
+                              className={`h-4 w-4 shrink-0 rtl:-scale-x-100 ${
                                 isActive ? "text-content" : "text-muted"
                               }`}
                               aria-hidden="true"
@@ -215,14 +218,13 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                     {!isConnected ? (
                       <div className="flex flex-col gap-3">
                         <p className="text-[13px] leading-snug text-muted">
-                          Connect your wallet to manage tokens, vote on
-                          proposals and view your transaction history.
+                          {t("nav.connectPrompt")}
                         </p>
                         <Button
                           onClick={handleOnClickConnect}
                           className="w-full !py-0 text-[14px] leading-[48px]"
                         >
-                          Connect wallet
+                          {t("nav.connectWallet")}
                         </Button>
                       </div>
                     ) : (
@@ -230,8 +232,8 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                         <button
                           type="button"
                           onClick={handleOnClickViewAccount}
-                          aria-label="View account overview"
-                          className="w-full text-left rounded-[100px] focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
+                          aria-label={t("nav.viewAccountOverview")}
+                          className="w-full text-start rounded-[100px] focus:outline-none focus-visible:ring-2 focus-visible:ring-content/30"
                         >
                           <PrincipalIdPill
                             principalId={principalId}
@@ -243,7 +245,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
                           onClick={handleOnClickDisconnect}
                           className="w-full h-12 rounded-full border border-border-strong text-[14px] font-semibold text-content hover:bg-surface-2 transition-colors"
                         >
-                          Disconnect
+                          {t("nav.disconnect")}
                         </button>
                       </div>
                     )}
