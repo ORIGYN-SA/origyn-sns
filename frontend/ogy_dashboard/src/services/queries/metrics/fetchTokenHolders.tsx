@@ -1,7 +1,7 @@
-import { Principal } from "@dfinity/principal";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
-import { GetHoldersResponse } from "@services/types/token_metrics";
-import { getActor } from "@services/actor";
+import gldtAPI from "@services/api/gldt/v1";
+import { ApiHoldersListResponse } from "@services/api/gldt/v1/types";
+import { gldtTokenPath } from "@services/api/gldt/v1/utils";
 
 interface ITokenHolderData {
   principal: string;
@@ -15,6 +15,8 @@ interface ITokenHolderData {
   };
 }
 
+const principalFromAccount = (account: string) => account.split(".")[0];
+
 const fetchTokenHolders = async ({
   offset = 0,
   limit = 10,
@@ -24,17 +26,18 @@ const fetchTokenHolders = async ({
   limit?: number;
   mergeAccountsToPrincipals?: boolean;
 }) => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const results = (await actor.get_holders({
-    limit,
-    offset,
-    merge_accounts_to_principals: mergeAccountsToPrincipals,
-  })) as GetHoldersResponse;
+  const { data: results } = await gldtAPI.get<ApiHoldersListResponse>(
+    gldtTokenPath("holders/list", {
+      limit,
+      offset,
+      merge: mergeAccountsToPrincipals,
+    })
+  );
 
   const data = results.data.map((result) => {
-    const principal = Principal.from(result[0].owner).toText();
-    const total = Number(result[1].total);
-    const ledgerBalance = Number(result[1].ledger.balance);
+    const principal = principalFromAccount(result.account);
+    const total = Number(result.overview.total);
+    const ledgerBalance = Number(result.overview.ledger.balance);
     const governanceBalance = total - ledgerBalance;
 
     return {

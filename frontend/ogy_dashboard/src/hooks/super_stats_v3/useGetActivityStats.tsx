@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { DateTime } from "luxon";
 import {
   useQuery,
@@ -9,11 +8,17 @@ import {
 } from "@tanstack/react-query";
 import { ActivitySnapshot } from "@hooks/token_metrics/declarations_files/token_metrics";
 import { roundAndFormatLocale } from "@helpers/numbers";
-import { getActor } from "@services/actor";
+import fetchActivityStats from "@services/queries/metrics/fetchActivityStats";
 import {
   hardcodedActivityData,
   HardcodedActivity,
 } from "./hardcodedActivityData";
+
+const HARDCODED_START_DATE = DateTime.fromISO("2021-11-01");
+const HARDCODED_END_DATE = DateTime.fromISO("2024-05-26");
+const DYNAMIC_START_DATE = HARDCODED_END_DATE.plus({ days: 1 });
+const LEGACY_ACTIVITY_OFFSET = 26_000;
+const NS_PER_MS = 1_000_000n;
 
 export type Period = "all" | "yearly" | "monthly" | "weekly" | "daily";
 
@@ -29,6 +34,30 @@ interface MappedActivityData {
   };
 }
 
+const mapActivitySnapshot = (
+  snapshot: ActivitySnapshot,
+  includeLegacyOffset = false
+): MappedActivityData => {
+  const datetime = DateTime.fromMillis(Number(snapshot.start_time / NS_PER_MS));
+  const baseNumber = Number(snapshot.total_unique_accounts);
+  const number =
+    includeLegacyOffset && datetime >= DYNAMIC_START_DATE.startOf("day")
+      ? baseNumber + LEGACY_ACTIVITY_OFFSET
+      : baseNumber;
+
+  return {
+    total_unique_accounts: {
+      e8s: snapshot.total_unique_accounts,
+      number,
+      string: roundAndFormatLocale({ number }),
+    },
+    start_time: {
+      e8s: snapshot.start_time,
+      datetime,
+    },
+  };
+};
+
 const useGetActivityStats = ({
   period = "monthly",
   options = {
@@ -39,16 +68,12 @@ const useGetActivityStats = ({
   period?: Period;
   options?: Omit<UseQueryOptions<Array<ActivitySnapshot>, Error>, "queryFn">;
 }) => {
-  const [data, setData] = useState<MappedActivityData[]>([]);
-
-  const hardcodedEndDate = DateTime.fromISO("2024-05-26");
-
   const today = useMemo(() => DateTime.local(), []);
 
   const periodStartDate = useMemo(() => {
     switch (period) {
       case "all":
-        return DateTime.fromISO("2021-11-01");
+        return HARDCODED_START_DATE;
       case "yearly":
         return today.minus({ years: 1 });
       case "monthly":
@@ -61,14 +86,13 @@ const useGetActivityStats = ({
   }, [period, today]);
 
   const fetchStartDate = useMemo(() => {
-    const dynamicStartDate = hardcodedEndDate.plus({ days: 1 });
     if (period === "all" || period === "yearly") {
-      return dynamicStartDate;
+      return DYNAMIC_START_DATE;
     }
-    return periodStartDate > dynamicStartDate
+    return periodStartDate > DYNAMIC_START_DATE
       ? periodStartDate
-      : dynamicStartDate;
-  }, [period, periodStartDate, hardcodedEndDate]);
+      : DYNAMIC_START_DATE;
+  }, [period, periodStartDate]);
 
   const daysToFetch = useMemo(() => {
     return Math.ceil(today.diff(fetchStartDate, "days").days);
@@ -93,124 +117,69 @@ const useGetActivityStats = ({
   >({
     ...options,
     queryKey,
-    queryFn: async (): Promise<Array<ActivitySnapshot>> => {
-      const actor = await getActor("tokenMetrics", { isAnon: true });
-      const results = await actor.get_activity_stats(daysToFetch);
-      return results as Array<ActivitySnapshot>;
-    },
+    queryFn: (): Promise<Array<ActivitySnapshot>> =>
+      fetchActivityStats(daysToFetch),
     enabled: shouldFetchDynamicData,
   });
 
-  useEffect(() => {
-    const filteredHardcodedData: ActivitySnapshot[] = hardcodedActivityData
+  const mappedHardcodedData = useMemo(() => {
+    return hardcodedActivityData
       .filter((item: HardcodedActivity) => {
         const itemDate = DateTime.fromISO(item.date);
-        return itemDate >= periodStartDate && itemDate <= hardcodedEndDate;
+        return itemDate >= periodStartDate && itemDate <= HARDCODED_END_DATE;
       })
-      .map((item: HardcodedActivity) => ({
-        principals_active_during_snapshot: BigInt(0),
-        accounts_active_during_snapshot: BigInt(0),
-        total_unique_accounts: BigInt(item.count),
-        end_time: BigInt(DateTime.fromISO(item.date).toMillis() * 1_000_000),
-        start_time: BigInt(DateTime.fromISO(item.date).toMillis() * 1_000_000),
-        total_unique_principals: BigInt(0),
-      }));
-
-    if (isSuccess && dynamicResponse) {
-      const mappedDynamicData: MappedActivityData[] = dynamicResponse.map(
-        (r) => {
-          const baseNumber = Number(r.total_unique_accounts);
-          const datetime = DateTime.fromMillis(
-            Number(r.start_time) / 1_000_000
-          );
-
-          const number =
-            datetime >= hardcodedEndDate.plus({ days: 1 }).startOf("day")
-              ? baseNumber + 26000
-              : baseNumber;
-
-          return {
-            total_unique_accounts: {
-              e8s: r.total_unique_accounts,
-              number,
-              string: roundAndFormatLocale({ number }),
-            },
-            start_time: {
-              e8s: r.start_time,
-              datetime,
-            },
-          };
-        }
+      .map((item: HardcodedActivity) =>
+        mapActivitySnapshot({
+          principals_active_during_snapshot: BigInt(0),
+          accounts_active_during_snapshot: BigInt(0),
+          total_unique_accounts: BigInt(item.count),
+          end_time: BigInt(DateTime.fromISO(item.date).toMillis()) * NS_PER_MS,
+          start_time:
+            BigInt(DateTime.fromISO(item.date).toMillis()) * NS_PER_MS,
+          total_unique_principals: BigInt(0),
+        })
       );
+  }, [periodStartDate]);
 
-      let combinedData: MappedActivityData[] = [];
-
-      if (period === "monthly") {
-        combinedData = mappedDynamicData;
-      } else {
-        const mappedHardcodedData: MappedActivityData[] =
-          filteredHardcodedData.map((r) => {
-            const number = Number(r.total_unique_accounts);
-            const datetime = DateTime.fromMillis(
-              Number(r.start_time) / 1_000_000
-            );
-            return {
-              total_unique_accounts: {
-                e8s: r.total_unique_accounts,
-                number,
-                string: roundAndFormatLocale({ number }),
-              },
-              start_time: {
-                e8s: r.start_time,
-                datetime,
-              },
-            };
-          });
-
-        combinedData = [...mappedHardcodedData, ...mappedDynamicData];
-      }
+  const data = useMemo(() => {
+    if (isSuccess && dynamicResponse) {
+      const mappedDynamicData = dynamicResponse.map((snapshot) =>
+        mapActivitySnapshot(snapshot, true)
+      );
+      const combinedData =
+        period === "monthly"
+          ? [...mappedDynamicData]
+          : [...mappedHardcodedData, ...mappedDynamicData];
 
       combinedData.sort(
         (a, b) =>
           a.start_time.datetime.toMillis() - b.start_time.datetime.toMillis()
       );
 
-      setData(combinedData);
-    } else if (!shouldFetchDynamicData) {
-      const mappedHardcodedData: MappedActivityData[] =
-        filteredHardcodedData.map((r) => {
-          const number = Number(r.total_unique_accounts);
-          const datetime = DateTime.fromMillis(
-            Number(r.start_time) / 1_000_000
-          );
-          return {
-            total_unique_accounts: {
-              e8s: r.total_unique_accounts,
-              number,
-              string: roundAndFormatLocale({ number }),
-            },
-            start_time: {
-              e8s: r.start_time,
-              datetime,
-            },
-          };
-        });
-
-      setData(mappedHardcodedData);
+      return combinedData;
     }
+
+    if (!shouldFetchDynamicData) {
+      return mappedHardcodedData;
+    }
+
+    return [];
   }, [
     isSuccess,
     dynamicResponse,
-    periodStartDate,
     period,
     shouldFetchDynamicData,
+    mappedHardcodedData,
   ]);
+
+  const hasData = data.length > 0;
+  const hasLoadedData = (shouldFetchDynamicData ? isSuccess : true) && hasData;
 
   return {
     data,
-    isSuccess: isSuccess && data.length > 0,
+    isSuccess: hasLoadedData,
     isError,
-    isLoading: isLoading || (shouldFetchDynamicData && !data),
+    isLoading,
     error,
   };
 };
