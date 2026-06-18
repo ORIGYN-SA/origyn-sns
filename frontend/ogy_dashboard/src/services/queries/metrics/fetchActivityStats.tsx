@@ -3,7 +3,6 @@ import gldtAPI from "@services/api/gldt/v1";
 import { ApiActivityItem } from "@services/api/gldt/v1/types";
 import { gldtTokenPath, toBigInt } from "@services/api/gldt/v1/utils";
 
-const MAX_ACTIVITY_DAYS = 365;
 const MS_TO_NS = 1_000_000n;
 
 const toActivitySnapshot = (item: ApiActivityItem): ActivitySnapshot => ({
@@ -18,9 +17,9 @@ const toActivitySnapshot = (item: ApiActivityItem): ActivitySnapshot => ({
 const fetchActivityStats = async (
   days: number
 ): Promise<Array<ActivitySnapshot>> => {
-  const cappedDays = Math.min(Math.max(days, 1), MAX_ACTIVITY_DAYS);
+  const safeDays = Math.max(days, 1);
   const { data } = await gldtAPI.get<ApiActivityItem[]>(
-    gldtTokenPath("activity", { days: cappedDays })
+    gldtTokenPath("activity", { days: safeDays })
   );
   return data.map(toActivitySnapshot);
 };

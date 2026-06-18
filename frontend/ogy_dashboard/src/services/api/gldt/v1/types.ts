@@ -99,3 +99,24 @@ export interface ApiAccountTimeseriesItem {
   volume_in: string | number;
   volume_out: string | number;
 }
+
+export interface ApiTransaction {
+  block: number;
+  hash: string;
+  tx_type: string;
+  from_account: string;
+  to_account: string;
+  value: string;
+  tx_time: number;
+  fee: string | null;
+  spender: string | null;
+}
+
+export interface ApiTransactionsResponse {
+  total_count: number;
+  offset: number;
+  limit: number;
+  data: ApiTransaction[];
+}
+
+export type ApiAccountOverviewResponse = ApiHolderRow;
