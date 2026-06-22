@@ -3,8 +3,9 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import icrcAPI from "@services/api/icrc/v1";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
+import gldtAPI from "@services/api/gldt/v1";
+import { gldtTokenPath } from "@services/api/gldt/v1/utils";
+import { ApiSupplySummary } from "@services/api/gldt/v1/types";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
 
 export interface TotalSupplyOGY {
@@ -17,12 +18,10 @@ export interface TotalSupplyOGYParams {
 }
 
 const fn = async (): Promise<TotalSupplyOGY> => {
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply`
+  const { data } = await gldtAPI.get<ApiSupplySummary>(
+    gldtTokenPath("supply/summary")
   );
-
-  const totalSupplyOGY =
-    data?.data[0] && data?.data[0][1] ? Number(data?.data[0][1]) : 0;
+  const totalSupplyOGY = Number(data.total_supply);
 
   return {
     totalSupplyOGY,

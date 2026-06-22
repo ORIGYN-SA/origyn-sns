@@ -3,13 +3,11 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import icrcAPI from "@services/api/icrc/v1";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
-import {
-  transformTimeSeriesToBarChartData,
-  timeseriesPeriodOptions,
-} from "@helpers/charts/index";
 import { ChartData } from "@services/types/charts.types";
+import {
+  fetchSupplyHistory,
+  toSupplySeries,
+} from "@services/queries/metrics/supplyHistory";
 
 export interface TotalSupplyOGYTimeSeriesParams {
   options?: UseQueryOptions<TotalSupplyOGYTimeSeries>;
@@ -23,13 +21,9 @@ export interface TotalSupplyOGYTimeSeries {
 const fn = async ({
   period,
 }: TotalSupplyOGYTimeSeriesParams): Promise<TotalSupplyOGYTimeSeries> => {
-  const p = timeseriesPeriodOptions(period);
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-supply?start=${p.start}&step=${p.step}`
-  );
+  const { items, config } = await fetchSupplyHistory(period);
   return {
-    totalSupplyOGYTimeSeries:
-      transformTimeSeriesToBarChartData(data.data) ?? null,
+    totalSupplyOGYTimeSeries: toSupplySeries(items, "total_supply", config),
   };
 };
 

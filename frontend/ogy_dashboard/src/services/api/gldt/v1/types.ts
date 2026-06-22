@@ -120,3 +120,14 @@ export interface ApiTransactionsResponse {
 }
 
 export type ApiAccountOverviewResponse = ApiHolderRow;
+
+export type ApiSupplyHistoryGroup = "day" | "month" | "year";
+
+export interface ApiSupplyHistoryItem {
+  date: string;
+  total_supply: string;
+  total_minted: string;
+  total_burned: string;
+  minted: string;
+  burned: string;
+}
