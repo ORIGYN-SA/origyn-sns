@@ -121,7 +121,7 @@ export interface ApiTransactionsResponse {
 
 export type ApiAccountOverviewResponse = ApiHolderRow;
 
-export type ApiSupplyHistoryGroup = "day" | "month" | "year";
+export type ApiSupplyHistoryGroup = "day" | "week" | "month" | "year";
 
 export interface ApiSupplyHistoryItem {
   date: string;
