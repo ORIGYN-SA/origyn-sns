@@ -8,6 +8,7 @@ use crate::{
 use candid::{Nat, Principal};
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::NeuronId;
+use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 use sns_rewards_api_canister::{ReserveTokenAmounts, TokenRewardTypes};
 use std::collections::BTreeMap;
 use std::collections::HashMap;
@@ -16,7 +17,6 @@ use types::TokenSymbol;
 use types::TokenSymbolV0;
 use types::{NeuronInfo, TimestampMillis};
 use utils::env::CanisterEnvV0;
-use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 
 #[derive(Serialize, Deserialize)]
 pub struct RuntimeStateV0 {

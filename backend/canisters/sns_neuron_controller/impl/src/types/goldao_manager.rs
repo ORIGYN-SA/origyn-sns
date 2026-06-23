@@ -5,14 +5,14 @@ use crate::utils::sns_rewards_calculate_available_rewards;
 use crate::utils::sns_rewards_claim_rewards;
 use crate::utils::ClaimRewardResult;
 use async_trait::async_trait;
-use icrc_ledger_types::icrc1::account::Account;
 use candid::CandidType;
 use candid::{Nat, Principal};
+use icrc_ledger_types::icrc1::account::Account;
 use serde::{Deserialize, Serialize};
 use sns_neuron_controller_api_canister::init::TokenParams;
+use sns_rewards_api_canister::subaccounts::REWARD_POOL_SUB_ACCOUNT_5Y;
 use std::collections::HashMap;
 use types::{CanisterId, TokenSymbol};
-use sns_rewards_api_canister::subaccounts::REWARD_POOL_SUB_ACCOUNT_5Y;
 
 const MIN_THRESHOLD_FEE_MULTIPLIER: u64 = 100;
 
@@ -79,10 +79,13 @@ impl GoldaoManager {
                     subaccount,
                 };
 
-                (symbol, TokenParams {
-                    destination,
-                    threshold,
-                })
+                (
+                    symbol,
+                    TokenParams {
+                        destination,
+                        threshold,
+                    },
+                )
             })
             .collect();
 

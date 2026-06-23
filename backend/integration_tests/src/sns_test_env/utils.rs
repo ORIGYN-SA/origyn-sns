@@ -138,7 +138,7 @@ pub fn create_neuron_permissions(user_hotkey: Option<&Principal>) -> Vec<NeuronP
     } else {
         // If no user_hotkey, add anonymous permissions
         perms.push(NeuronPermission {
-            principal: Some(Principal::anonymous()),
+            principal: Some(Principal::from_text("ttnzy-lyaaa-aaaag-qj2bq-cai").unwrap()),
             permission_type: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
         });
     }

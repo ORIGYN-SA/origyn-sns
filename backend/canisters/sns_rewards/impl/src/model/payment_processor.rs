@@ -2,12 +2,12 @@ use crate::memory::get_payment_round_history_memory_v0;
 use ic_stable_structures::StableBTreeMap;
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::NeuronId;
+use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 use sns_rewards_api_canister::payment_round::{PaymentRound, PaymentStatus};
 use std::collections::BTreeMap;
 use tracing::debug;
 use types::TokenSymbol;
 use types::TokenSymbolV0;
-use sns_rewards_api_canister::payment_round::PaymentRoundV0;
 
 use crate::memory::{get_payment_round_history_memory, VM};
 

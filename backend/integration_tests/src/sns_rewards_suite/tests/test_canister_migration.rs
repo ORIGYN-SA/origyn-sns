@@ -10,11 +10,8 @@ use types::{TokenSymbol, TokenSymbolV0};
 use super::utils::{fund_reward_pools, rewards_canister_id, simulate_voting};
 use crate::sns_test_env::utils::generate_neuron_data;
 use crate::{
-    client::{
-        icrc1::client::{balance_of},
-        sns_rewards::{get_active_payment_rounds},
-    },
-    sns_test_env::{sns_init_args::SnsProject},
+    client::{icrc1::client::balance_of, sns_rewards::get_active_payment_rounds},
+    sns_test_env::sns_init_args::SnsProject,
     test_env::test_env_builder::{SnsConfig, TestEnvBuilder},
 };
 
@@ -113,7 +110,6 @@ fn test_migration_with_popelated_data() {
 
     let active = get_active_payment_rounds(&pic, env.controller, rewards_id, &());
     assert_eq!(active.len(), 0);
-
 
     let p: GetHistoricPaymentRoundResponseV0 = execute_update(
         &pic,
