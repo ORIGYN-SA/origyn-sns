@@ -1,19 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { Actor } from "@dfinity/agent";
-import { idlFactory } from "../services/candid/token_metrics";
-import { agent } from "../services/icpAgent";
+import { gldtClient, gldtTokenPath } from "../services/gldt";
 
 const divideBy1e8 = (n) => n / 1e8;
 const roundAndFormatLocale = (n) => Math.round(n).toLocaleString("en-US");
 
 const fetchFoundationReserve = async () => {
-  const canisterId = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
-  const actor = Actor.createActor(idlFactory, { agent, canisterId });
-
-  const foundationData = await actor.get_foundation_assets();
+  const { data: foundationData } = await gldtClient.get(
+    gldtTokenPath("foundation/assets")
+  );
 
   const result = foundationData.reduce(
-    (acc, [, { governance, total }]) => {
+    (acc, { overview: { governance, total } }) => {
       acc.total_locked += divideBy1e8(Number(governance.total_locked));
       acc.total_rewards += divideBy1e8(Number(governance.total_rewards));
       acc.total_staked += divideBy1e8(Number(governance.total_staked));

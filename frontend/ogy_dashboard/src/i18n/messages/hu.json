@@ -122,7 +122,7 @@
       "contactSupport": "Ügyfélszolgálat",
       "recoverTokens": "Tokenek visszaszerzése"
     },
-    "disclaimer": "*Az ORIGYN Foundation nem vállal felelősséget az OGY tokenek a csere folyamattal összefüggésben bekövetkező elvesztéséért, ellopásáért vagy jogtalan eltulajdonításáért. Továbbá az ORIGYN Foundation nem vonható felelősségre a csere végrehajtásának elmaradásáért, ha az érintett fél nem tartja be szigorúan az ORIGYN Foundation által meghatározott feltételeket."
+    "disclaimer": "Az ORIGYN Foundation nem vállal felelősséget az OGY tokenek a csere folyamattal összefüggésben bekövetkező elvesztéséért, ellopásáért vagy jogtalan eltulajdonításáért. Továbbá az ORIGYN Foundation nem vonható felelősségre a csere végrehajtásának elmaradásáért, ha az érintett fél nem tartja be szigorúan az ORIGYN Foundation által meghatározott feltételeket."
   },
   "dashboard": {
     "hero": {

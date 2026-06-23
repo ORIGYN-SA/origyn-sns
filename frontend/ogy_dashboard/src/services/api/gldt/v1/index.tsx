@@ -1,9 +1,6 @@
+import { createGldtClient } from "@origyn/shared/gldt";
 import { API_GLDT_BASE_URL } from "@constants/index";
-import { createHttpClient } from "@services/api/httpClient";
 
-const instance = createHttpClient({
-  baseURL: API_GLDT_BASE_URL,
-  timeout: 15_000,
-});
+const instance = createGldtClient(API_GLDT_BASE_URL);
 
 export default instance;

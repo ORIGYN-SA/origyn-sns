@@ -1,26 +1,15 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   divideBy1e8,
-  getIcrcApiConfig,
-  getTimeSeriesPeriod,
   roundAndFormatLocale,
-  transformTimeSeriesData,
-} from "./tokenMetricsUtils";
+  fetchSupplySummary,
+  fetchSupplyHistory,
+  toSupplySeries,
+} from "../services/gldtSupplyHistory";
 
 export const fetchTotalOGYSupply = async () => {
-  const { apiBaseUrl, snsLedgerCanisterId } = getIcrcApiConfig();
-
-  const response = await fetch(
-    `${apiBaseUrl}/ledgers/${snsLedgerCanisterId}/total-supply`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch total OGY supply");
-  }
-
-  const payload = await response.json();
-  const totalSupplyRaw = Number(payload?.data?.[0]?.[1] ?? 0);
-  const totalSupplyOGY = divideBy1e8(totalSupplyRaw);
+  const summary = await fetchSupplySummary();
+  const totalSupplyOGY = divideBy1e8(summary.total_supply);
 
   return {
     totalSupplyOGY,
@@ -29,20 +18,8 @@ export const fetchTotalOGYSupply = async () => {
 };
 
 export const fetchTotalOGYSupplyTimeSeries = async (period = "weekly") => {
-  const { apiBaseUrl, snsLedgerCanisterId } = getIcrcApiConfig();
-  const selectedPeriod = getTimeSeriesPeriod(period);
-
-  const response = await fetch(
-    `${apiBaseUrl}/ledgers/${snsLedgerCanisterId}/total-supply?start=${selectedPeriod.start}&step=${selectedPeriod.step}`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch total OGY supply time series");
-  }
-
-  const payload = await response.json();
-
-  return transformTimeSeriesData(payload?.data ?? [], selectedPeriod.step);
+  const { items, config } = await fetchSupplyHistory(period);
+  return toSupplySeries(items, "total_supply", config);
 };
 
 const useTotalOGYSupply = ({ period } = {}) => {

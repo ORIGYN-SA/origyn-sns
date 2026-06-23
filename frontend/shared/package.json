@@ -6,6 +6,8 @@
   "exports": {
     "./calculator": "./src/calculator/index.ts",
     "./charts": "./src/charts/index.ts",
+    "./gldt": "./src/gldt/index.ts",
+    "./http": "./src/http/index.ts",
     "./ui": "./src/ui/index.ts",
     "./tailwind-preset": "./tailwind-preset.ts",
     "./tokens.css": "./src/tokens.css"

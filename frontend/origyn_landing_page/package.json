@@ -15,8 +15,6 @@
     "deploy:preprod": "npm run build:preprod && dfx deploy origyn_landing_page --network=preprod"
   },
   "dependencies": {
-    "@dfinity/agent": "^2.4.1",
-    "@dfinity/principal": "^2.4.1",
     "@origyn/shared": "*",
     "@tanstack/react-query": "^5.74.4",
     "gsap": "^3.12.7",

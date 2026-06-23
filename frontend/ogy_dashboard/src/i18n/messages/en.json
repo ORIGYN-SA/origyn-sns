@@ -122,7 +122,7 @@
       "contactSupport": "Contact support",
       "recoverTokens": "Recover your tokens"
     },
-    "disclaimer": "*ORIGYN Foundation shall not be held liable for any loss, theft, or misappropriation of OGY Tokens occurring in connection with the swap process. Furthermore, ORIGYN Foundation shall not be held accountable for any failure to execute the swap if the involved party does not strictly adhere to the conditions specified by ORIGYN Foundation."
+    "disclaimer": "ORIGYN Foundation shall not be held liable for any loss, theft, or misappropriation of OGY Tokens occurring in connection with the swap process. Furthermore, ORIGYN Foundation shall not be held accountable for any failure to execute the swap if the involved party does not strictly adhere to the conditions specified by ORIGYN Foundation."
   },
   "dashboard": {
     "hero": {

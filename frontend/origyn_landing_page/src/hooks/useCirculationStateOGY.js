@@ -1,28 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import { Actor } from "@dfinity/agent";
-import { idlFactory } from "../services/candid/token_metrics";
-import { agent } from "../services/icpAgent";
+import { gldtClient, gldtTokenPath } from "../services/gldt";
 
 const divideBy1e8 = (n) => n / 1e8;
 const roundAndFormatLocale = (n) => Math.round(n).toLocaleString("en-US");
 
 const fetchCirculationState = async () => {
-  const canisterId = import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID;
-  const actor = Actor.createActor(idlFactory, { agent, canisterId });
-
-  const [supplyData, foundationData, holderData] = await Promise.all([
-    actor.get_supply_data(),
-    actor.get_foundation_assets(),
-    actor.get_holders({ offset: 0, limit: 0, merge_accounts_to_principals: false })
+  const [supply, foundation, holders] = await Promise.all([
+    gldtClient.get(gldtTokenPath("supply/summary")),
+    gldtClient.get(gldtTokenPath("foundation/assets")),
+    gldtClient.get(gldtTokenPath("holders/list", { limit: 1, merge: false })),
   ]);
+
+  const supplyData = supply.data;
+  const foundationData = foundation.data;
 
   const totalSupply = divideBy1e8(Number(supplyData.total_supply));
   const circulatingSupply = divideBy1e8(Number(supplyData.circulating_supply));
-  const totalHolders = Number(holderData.total_count);
+  const totalHolders = Number(holders.data.total_count);
 
-  const totalLocked = foundationData.reduce((acc, [, { governance }]) => {
-    return acc + divideBy1e8(Number(governance.total_locked));
-  }, 0);
+  const totalLocked = foundationData.reduce(
+    (acc, { overview: { governance } }) =>
+      acc + divideBy1e8(Number(governance.total_locked)),
+    0
+  );
 
   return {
     number: {
