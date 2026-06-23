@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.11] - 2026-06-23
+
+#### Fixed
+
+- **Add guard on claim_rewards**: Added rejection on the claim_rewards and claim_rewards_batch calls
+
 ### [1.0.10] - 2026-05-18
 
 #### Fixed
