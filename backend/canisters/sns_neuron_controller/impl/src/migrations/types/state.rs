@@ -36,8 +36,8 @@ use crate::types::neurons::sns_neurons::Neurons;
 use bity_ic_types::CanisterId;
 use candid::CandidType;
 use candid::Nat;
-use types::TokenSymbol;
 use std::collections::HashMap;
+use types::TokenSymbol;
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct GoldaoManagerV0 {

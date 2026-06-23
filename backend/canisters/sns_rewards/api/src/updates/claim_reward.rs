@@ -10,6 +10,7 @@ pub struct Args {
 
 #[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum Response {
+    AnonymousCaller,
     NeuronHotKeyInvalid, // Hotkeys exist but they don't match the caller's principal
     NeuronOwnerInvalid(Option<Principal>), // Neuron has a hotkey owned by a different caller
     NeuronNotClaimed,    // Nobody has claimed this neuron yet.
