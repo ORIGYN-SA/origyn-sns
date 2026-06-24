@@ -8,7 +8,7 @@ use bity_ic_canister_time::NANOS_PER_MILLISECOND;
 use bity_ic_canister_tracing_macros::trace;
 use candid::Nat;
 use icrc_ledger_types::icrc1::transfer::TransferArg;
-use tracing::{error, debug, info};
+use tracing::{debug, error, info};
 use utils::env::Environment;
 
 const MAX_ATTEMPTS: u8 = 1;

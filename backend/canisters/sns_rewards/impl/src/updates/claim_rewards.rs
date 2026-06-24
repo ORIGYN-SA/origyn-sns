@@ -1,3 +1,4 @@
+use crate::guards::reject_anonymous_caller;
 use candid::{Nat, Principal};
 use ic_cdk::update;
 use icrc_ledger_types::icrc1::account::{Account, Subaccount};
@@ -20,6 +21,11 @@ use utils::env::Environment;
 #[update]
 async fn claim_reward(args: ClaimRewardArgs) -> ClaimRewardResponse {
     let caller = read_state(|s| s.env.caller());
+
+    if reject_anonymous_caller().is_err() {
+        return ClaimRewardResponse::AnonymousCaller;
+    }
+
     claim_reward_impl(args.neuron_id, args.token, caller).await
 }
 

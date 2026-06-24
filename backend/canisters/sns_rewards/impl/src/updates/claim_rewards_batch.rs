@@ -1,3 +1,4 @@
+use crate::guards::reject_anonymous_caller;
 use crate::transfer_rewards;
 use ic_cdk::update;
 pub use sns_rewards_api_canister::claim_rewards_batch::{
@@ -18,6 +19,18 @@ use utils::env::Environment;
 #[update]
 async fn claim_rewards_batch(args: ClaimRewardsBatchArgs) -> ClaimRewardsBatchResponse {
     let caller = read_state(|s| s.env.caller());
+
+    reject_anonymous_caller().map_err(|_| {
+        args.clone()
+            .claim_reward_args
+            .into_iter()
+            .map(|arg| ClaimRewardError {
+                neuron_id: arg.neuron_id,
+                token: Some(arg.token),
+                error: ClaimRewardErrorType::AnonymousCaller,
+            })
+            .collect::<Vec<_>>()
+    })?;
 
     // 0. fetch all neurons in parallel
     let fetch_futures = args

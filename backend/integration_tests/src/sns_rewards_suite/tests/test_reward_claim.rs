@@ -1,4 +1,5 @@
 use candid::Nat;
+use candid::Principal;
 use icrc_ledger_types::icrc1::account::Account;
 use sns_rewards_api_canister::claim_rewards_batch::ClaimRewardArgs;
 use sns_rewards_api_canister::claim_rewards_batch::ClaimRewardErrorType;
@@ -403,7 +404,6 @@ fn test_neuron_with_no_hotkey() {
         .clone();
     let rewards_canister_id = test_env.rewards_canister_id;
 
-    // let random_principal = Principal::anonymous();
     let neuron_1 = test_env.neuron_data.get(&0usize).unwrap().clone(); // has no hotkey
     let neuron_id_1 = test_env
         .neuron_data
@@ -448,10 +448,10 @@ fn test_neuron_with_no_hotkey() {
     // ********************************
     // 4. Claim reward as neuron_1 owner principal - SHOULD PASS ( as it does own the neuron and is a hotkey )
     // ********************************
-
+    println!("sender: {:?}", neuron_1.permissions.get(0).unwrap().principal.unwrap().to_text());
     let res = claim_rewards_batch(
         &pic,
-        neuron_1.permissions.get(0).unwrap().principal.unwrap(),
+        Principal::from_text("ttnzy-lyaaa-aaaag-qj2bq-cai").unwrap(),
         rewards_canister_id,
         &ClaimRewardBatchArgs {
             claim_reward_args: vec![ClaimRewardArgs {
