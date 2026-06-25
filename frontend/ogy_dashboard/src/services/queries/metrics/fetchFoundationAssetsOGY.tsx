@@ -1,14 +1,14 @@
 import { divideBy1e8 } from "@helpers/numbers";
-import { WalletOverview } from "@services/types/token_metrics";
-import { getActor } from "@services/actor";
+import gldtAPI from "@services/api/gldt/v1";
+import { ApiHolderRow } from "@services/api/gldt/v1/types";
+import { gldtTokenPath } from "@services/api/gldt/v1/utils";
 
 const fetchFoundationAssetsOGY = async () => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const results = (await actor.get_foundation_assets()) as Array<
-    [string, WalletOverview]
-  >;
+  const { data: results } = await gldtAPI.get<ApiHolderRow[]>(
+    gldtTokenPath("foundation/assets")
+  );
   const result = results.reduce(
-    (acc, [, { governance, total }]) => {
+    (acc, { overview: { governance, total } }) => {
       acc.total_locked += divideBy1e8(Number(governance.total_locked));
       acc.total_rewards += divideBy1e8(Number(governance.total_rewards));
       acc.total_staked += divideBy1e8(Number(governance.total_staked));

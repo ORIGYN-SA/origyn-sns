@@ -1,37 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {
-  getAccountOverview,
-  getPrincipalOverview,
-} from "@hooks/super_stats_v3/queries";
-import { fetchOneTransaction as fetchOneTransactionRosetta } from "@hooks/rosetta-api/queries";
+import { getPrincipalOverview } from "@hooks/super_stats_v3/queries";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
 
 export const useSearchExplorer = ({ searchterm }: { searchterm: string }) => {
   const fetchSearch = async () => {
-    const isSearchtermNumber = () => /^\d+$/.test(searchterm);
-    if (!isSearchtermNumber()) {
-      const resultsAccountOverview = await getAccountOverview({
-        accountId: searchterm,
-      });
-      const resultsPrincipalOverview = await getPrincipalOverview({
-        principalId: searchterm,
-      });
-      if (resultsAccountOverview || resultsPrincipalOverview) {
+    const isBlockIndexSearch = /^\d+$/.test(searchterm);
+    if (!isBlockIndexSearch) {
+      const overview = await getPrincipalOverview({ principalId: searchterm });
+      if (overview) {
         return { type: "principalId", value: searchterm };
       }
       return null;
     } else {
-      const resultsRosettaApi = await fetchOneTransactionRosetta({
-        transactionId: searchterm,
-      });
-      const resultsLedgerApi = await fetchOneTransaction({
-        transactionId: searchterm,
-      });
-      if (resultsRosettaApi || resultsLedgerApi) {
+      try {
+        await fetchOneTransaction({ transactionId: searchterm });
         return { type: "blockIndex", value: searchterm };
+      } catch {
+        return null;
       }
-      return null;
     }
   };
 

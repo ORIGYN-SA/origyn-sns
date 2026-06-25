@@ -122,7 +122,7 @@
       "contactSupport": "サポートに問い合わせる",
       "recoverTokens": "トークンを回収する"
     },
-    "disclaimer": "*ORIGYN Foundation は、スワッププロセスに関連して発生する OGY トークンの損失、盗難、または不正使用について一切の責任を負いません。さらに、ORIGYN Foundation は、関係者が ORIGYN Foundation が指定する条件を厳格に遵守しない場合、スワップの実行ができなかったことについても責任を負いません。"
+    "disclaimer": "ORIGYN Foundation は、スワッププロセスに関連して発生する OGY トークンの損失、盗難、または不正使用について一切の責任を負いません。さらに、ORIGYN Foundation は、関係者が ORIGYN Foundation が指定する条件を厳格に遵守しない場合、スワップの実行ができなかったことについても責任を負いません。"
   },
   "dashboard": {
     "hero": {

@@ -1,14 +1,20 @@
 import { HistoryData } from "@services/types/token_metrics";
-import { getActor } from "@services/actor";
+import gldtAPI from "@services/api/gldt/v1";
+import { ApiStakeHistoryItem } from "@services/api/gldt/v1/types";
+import { gldtTokenPath, toBigInt } from "@services/api/gldt/v1/utils";
 
-const fetchTokenHolders = async ({
+const fetchStakeHistory = async ({
   start = 30,
 }: {
   start: number;
 }): Promise<Array<[bigint, HistoryData]>> => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const results = await actor.get_stake_history(start);
-  return results as Array<[bigint, HistoryData]>;
+  const { data } = await gldtAPI.get<ApiStakeHistoryItem[]>(
+    gldtTokenPath("governance/stake-history", { days: start })
+  );
+  return data.map(
+    ({ day, balance }) =>
+      [toBigInt(day), { balance: toBigInt(balance) }] as [bigint, HistoryData]
+  );
 };
 
-export default fetchTokenHolders;
+export default fetchStakeHistory;

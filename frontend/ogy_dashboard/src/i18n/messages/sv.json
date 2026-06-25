@@ -122,7 +122,7 @@
       "contactSupport": "Kontakta support",
       "recoverTokens": "Återställ dina tokens"
     },
-    "disclaimer": "*ORIGYN Foundation ska inte hållas ansvarig för någon förlust, stöld eller missbruk av OGY-tokens som inträffar i samband med swap-processen. Vidare ska ORIGYN Foundation inte hållas ansvarig för någon underlåtenhet att genomföra swappen om den inblandade parten inte strikt följer de villkor som anges av ORIGYN Foundation."
+    "disclaimer": "ORIGYN Foundation ska inte hållas ansvarig för någon förlust, stöld eller missbruk av OGY-tokens som inträffar i samband med swap-processen. Vidare ska ORIGYN Foundation inte hållas ansvarig för någon underlåtenhet att genomföra swappen om den inblandade parten inte strikt följer de villkor som anges av ORIGYN Foundation."
   },
   "dashboard": {
     "hero": {

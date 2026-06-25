@@ -122,7 +122,7 @@
       "contactSupport": "Destekle iletişime geç",
       "recoverTokens": "Token'larınızı kurtarın"
     },
-    "disclaimer": "*ORIGYN Foundation, swap süreciyle bağlantılı olarak meydana gelen OGY Token'larının herhangi bir kaybından, çalınmasından veya kötüye kullanılmasından sorumlu tutulamaz. Ayrıca, ilgili tarafın ORIGYN Foundation tarafından belirtilen koşullara kesinlikle uymaması durumunda, ORIGYN Foundation swap işleminin gerçekleştirilememesinden sorumlu tutulamaz."
+    "disclaimer": "ORIGYN Foundation, swap süreciyle bağlantılı olarak meydana gelen OGY Token'larının herhangi bir kaybından, çalınmasından veya kötüye kullanılmasından sorumlu tutulamaz. Ayrıca, ilgili tarafın ORIGYN Foundation tarafından belirtilen koşullara kesinlikle uymaması durumunda, ORIGYN Foundation swap işleminin gerçekleştirilememesinden sorumlu tutulamaz."
   },
   "dashboard": {
     "hero": {

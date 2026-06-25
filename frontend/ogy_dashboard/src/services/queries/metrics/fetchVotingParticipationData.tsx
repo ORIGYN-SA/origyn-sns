@@ -1,5 +1,8 @@
-import { getActor } from "@services/actor";
 import { ProposalsMetrics } from "@services/types/token_metrics";
+import gldtAPI from "@services/api/gldt/v1";
+import { ApiParticipationHistoryItem } from "@services/api/gldt/v1/types";
+import { gldtTokenPath, toBigInt } from "@services/api/gldt/v1/utils";
+import fetchProposalsMetrics from "@services/queries/governance/proposals/fetchProposalsMetrics";
 
 export type VotingParticipationResponse = {
   metrics: ProposalsMetrics;
@@ -14,14 +17,21 @@ const fetchVotingParticipationData = async ({
 }: {
   period: string;
 }): Promise<VotingParticipationResponse> => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const [metrics, history] = await Promise.all([
-    actor.get_proposals_metrics() as Promise<ProposalsMetrics>,
-    actor.get_voting_participation_history({
-      days: periodToDays(period),
-    }) as Promise<Array<[bigint, bigint]>>,
+  const [metrics, { data: history }] = await Promise.all([
+    fetchProposalsMetrics(),
+    gldtAPI.get<ApiParticipationHistoryItem[]>(
+      gldtTokenPath("governance/voting/participation-history", {
+        days: periodToDays(period),
+      })
+    ),
   ]);
-  return { metrics, history };
+  return {
+    metrics,
+    history: history.map(
+      ({ day, participation }) =>
+        [toBigInt(day), toBigInt(participation)] as [bigint, bigint]
+    ),
+  };
 };
 
 export default fetchVotingParticipationData;

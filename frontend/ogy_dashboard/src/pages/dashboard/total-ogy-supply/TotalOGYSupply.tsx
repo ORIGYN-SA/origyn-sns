@@ -11,7 +11,7 @@ const TotalOGYSupply = ({ className }: { className?: string }) => {
     { value: "monthly", label: t("charts.period.monthly") },
     { value: "yearly", label: t("charts.period.yearly") },
   ];
-  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
+  const [selectedPeriod, setSelectedPeriod] = useState("monthly");
   const { data, isLoading, error } = useTotalOGYSupply({
     period: selectedPeriod,
   });

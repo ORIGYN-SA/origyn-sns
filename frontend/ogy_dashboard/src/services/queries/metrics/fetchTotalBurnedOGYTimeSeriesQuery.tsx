@@ -3,14 +3,11 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import icrcAPI from "@services/api/icrc/v1";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
-import {
-  transformTimeSeriesToBarChartData,
-  timeseriesPeriodOptions,
-} from "@helpers/charts/index";
 import { ChartData } from "@services/types/charts.types";
-import { getCurrentDateInSeconds } from "@helpers/dates/index";
+import {
+  fetchSupplyHistory,
+  toSupplySeries,
+} from "@services/queries/metrics/supplyHistory";
 
 export interface TotalBurnedOGYTimeSeriesParams {
   options?: UseQueryOptions<TotalBurnedOGYTimeSeries>;
@@ -24,28 +21,9 @@ export interface TotalBurnedOGYTimeSeries {
 const fn = async ({
   period,
 }: TotalBurnedOGYTimeSeriesParams): Promise<TotalBurnedOGYTimeSeries> => {
-  const p = timeseriesPeriodOptions(period);
-  const TIMESTAMP_REFERENCE_LAUNCH_SNS = 1717545600;
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-burned-per-day?start=${TIMESTAMP_REFERENCE_LAUNCH_SNS}&end=${getCurrentDateInSeconds()}`
-  );
-  const _data = transformTimeSeriesToBarChartData(data.data) ?? null;
-  const cumulativeData = _data.reduce(
-    (
-      accumulator: Array<{ name: string; value: number }>,
-      current: { name: string; value: number },
-      index
-    ) => {
-      const previousValue = index === 0 ? 0 : accumulator[index - 1].value;
-      const cumulativeValue = previousValue + current.value;
-      accumulator.push({ name: current.name, value: cumulativeValue });
-      return accumulator;
-    },
-    []
-  );
-
+  const { items, config } = await fetchSupplyHistory(period);
   return {
-    totalBurnedOGYTimeSeries: cumulativeData.slice(-p.days) ?? null,
+    totalBurnedOGYTimeSeries: toSupplySeries(items, "total_burned", config),
   };
 };
 

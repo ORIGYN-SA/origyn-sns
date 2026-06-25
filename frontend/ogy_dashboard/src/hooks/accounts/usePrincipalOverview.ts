@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getActor } from "@services/actor";
+import { getPrincipalOverview } from "@hooks/super_stats_v3/queries";
 import { divideBy1e8 } from "@helpers/numbers";
 
 interface TransactionStats {
@@ -10,8 +10,6 @@ interface TransactionStats {
 }
 
 const usePrincipalOverview = (principal: string) => {
-  const [data, setData] = useState<TransactionStats | null>(null);
-
   const {
     data: response,
     isSuccess,
@@ -20,46 +18,21 @@ const usePrincipalOverview = (principal: string) => {
     error,
   } = useQuery({
     queryKey: ["principalOverview", principal],
-    queryFn: async () => {
-      const actor = await getActor("tokenMetrics", { isAnon: true });
-      const result = await actor.get_principal_overview(principal);
-      return result;
-    },
+    queryFn: () => getPrincipalOverview({ principalId: principal }),
     enabled: !!principal,
   });
 
-  useEffect(() => {
-    if (isLoading) {
-      setData(null);
-    } else if (isSuccess) {
-      if (Array.isArray(response) && response.length > 0) {
-        const principalData = response[0];
-        if (
-          principalData.sent.length === 2 &&
-          principalData.received.length === 2
-        ) {
-          const totalSendRaw = principalData.sent[1];
-          const totalReceiveRaw = principalData.received[1];
+  const data = useMemo<TransactionStats | null>(() => {
+    if (isLoading || !isSuccess || !response) return null;
 
-          const totalSend = divideBy1e8(totalSendRaw);
-          const totalReceive = divideBy1e8(totalReceiveRaw);
-          const totalVolume =
-            totalSend && totalReceive ? totalSend + totalReceive : 0;
+    const totalSend = divideBy1e8(response.sent[1]);
+    const totalReceive = divideBy1e8(response.received[1]);
 
-          setData({
-            totalSend,
-            totalReceive,
-            totalVolume,
-          });
-        } else {
-          setData(null);
-        }
-      } else {
-        setData(null);
-      }
-    } else {
-      setData(null);
-    }
+    return {
+      totalSend,
+      totalReceive,
+      totalVolume: totalSend + totalReceive,
+    };
   }, [isLoading, isSuccess, response]);
 
   return {
