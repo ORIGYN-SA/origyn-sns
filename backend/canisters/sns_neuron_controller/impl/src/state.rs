@@ -2,17 +2,17 @@ use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
 use crate::types::GoldaoManager;
-use std::collections::HashMap;
-use types::TokenSymbol;
-use sns_neuron_controller_api_canister::init::TokenParams;
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Principal};
 use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::Neuron;
 use sns_neuron_controller_api_canister::init::GoldaoManagerConfig;
+use sns_neuron_controller_api_canister::init::TokenParams;
 use sns_neuron_controller_api_canister::neuron_type::NeuronType;
+use std::collections::HashMap;
 use types::TimestampMillis;
+use types::TokenSymbol;
 use utils::{
     env::{CanisterEnv, Environment},
     memory::MemorySize,

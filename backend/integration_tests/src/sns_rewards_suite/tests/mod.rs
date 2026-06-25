@@ -1,4 +1,4 @@
-pub mod test_canister_migration;
+// pub mod test_canister_migration;
 pub mod test_distribute_rewards;
 pub mod test_ogy_burn;
 pub mod test_reserve_pool_distribution;

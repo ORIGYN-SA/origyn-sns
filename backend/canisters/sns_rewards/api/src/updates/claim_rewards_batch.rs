@@ -3,12 +3,12 @@ use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::NeuronId;
 use types::TokenSymbol;
 
-#[derive(CandidType, Serialize, Deserialize, Debug)]
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct Args {
     pub claim_reward_args: Vec<ClaimRewardArgs>,
 }
 
-#[derive(CandidType, Serialize, Deserialize, Debug)]
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub struct ClaimRewardArgs {
     pub neuron_id: NeuronId,
     pub token: TokenSymbol,
@@ -25,6 +25,7 @@ pub struct ClaimRewardError {
 
 #[derive(CandidType, Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum ClaimRewardErrorType {
+    AnonymousCaller,
     NeuronHotKeyInvalid, // Hotkeys exist but they don't match the caller's principal
     NeuronOwnerInvalid(Option<Principal>), // Neuron has a hotkey owned by a different caller
     NeuronNotClaimed,    // Nobody has claimed this neuron yet.

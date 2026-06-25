@@ -1,11 +1,14 @@
 use bity_ic_canister_state_macros::canister_state;
 use bity_ic_types::BuildVersion;
-use candid::{ CandidType, Principal };
+use candid::{CandidType, Principal};
 use collection_index_api::stats::OverallStats;
 use ic_cdk::api::is_controller;
-use serde::{ Deserialize as SerdeDeserialize, Serialize };
+use serde::{Deserialize as SerdeDeserialize, Serialize};
 use types::TimestampMillis;
-use utils::{ env::{ CanisterEnv, Environment }, memory::MemorySize };
+use utils::{
+    env::{CanisterEnv, Environment},
+    memory::MemorySize,
+};
 
 use crate::model::collection::CollectionModel;
 

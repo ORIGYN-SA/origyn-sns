@@ -1,9 +1,9 @@
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Nat, Principal};
+use icrc_ledger_types::icrc1::account::Account;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use types::TokenSymbol;
-use icrc_ledger_types::icrc1::account::Account;
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]
 pub struct InitArgs {
