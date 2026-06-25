@@ -122,7 +122,7 @@
       "contactSupport": "聯絡支援",
       "recoverTokens": "找回您的代幣"
     },
-    "disclaimer": "*對於在兌換過程中發生的任何 OGY Tokens 損失、被竊或被挪用，ORIGYN Foundation 概不負責。此外，若相關方未嚴格遵守 ORIGYN Foundation 規定的條件，導致兌換無法執行，ORIGYN Foundation 亦不承擔任何責任。"
+    "disclaimer": "對於在兌換過程中發生的任何 OGY Tokens 損失、被竊或被挪用，ORIGYN Foundation 概不負責。此外，若相關方未嚴格遵守 ORIGYN Foundation 規定的條件，導致兌換無法執行，ORIGYN Foundation 亦不承擔任何責任。"
   },
   "dashboard": {
     "hero": {

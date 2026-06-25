@@ -122,7 +122,7 @@
       "contactSupport": "Ota yhteyttä tukeen",
       "recoverTokens": "Palauta tokenisi"
     },
-    "disclaimer": "*ORIGYN Foundation ei ole vastuussa OGY-tokenien menetyksestä, varkaudesta tai väärinkäytöstä, joka tapahtuu vaihtoprosessin yhteydessä. Lisäksi ORIGYN Foundation ei ole vastuussa vaihdon toteuttamatta jäämisestä, jos osapuoli ei noudata tarkasti ORIGYN Foundationin määrittämiä ehtoja."
+    "disclaimer": "ORIGYN Foundation ei ole vastuussa OGY-tokenien menetyksestä, varkaudesta tai väärinkäytöstä, joka tapahtuu vaihtoprosessin yhteydessä. Lisäksi ORIGYN Foundation ei ole vastuussa vaihdon toteuttamatta jäämisestä, jos osapuoli ei noudata tarkasti ORIGYN Foundationin määrittämiä ehtoja."
   },
   "dashboard": {
     "hero": {

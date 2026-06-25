@@ -1,7 +1,6 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { capitalize } from "@helpers/strings";
 import { fetchOneTransaction } from "@services/queries/transactions/fetchOneTransaction";
-import { fetchOneTransaction as fetchOneTransactionRosetta } from "@hooks/rosetta-api/queries";
 import { roundAndFormatLocale, divideBy1e8 } from "@helpers/numbers/index";
 import { formatDate } from "@helpers/dates";
 
@@ -11,22 +10,6 @@ const useFetchOneTransaction = ({
   transactionId: string;
 }) => {
   const {
-    data: transactionRosetta,
-    isLoading: isLoadingFetchOneTransactionRosetta,
-    isSuccess: isSuccessFetchOneTransactionRosetta,
-    isError: isErrorFetchOneTransactionRosetta,
-  } = useQuery({
-    queryKey: ["fetchOneTransactionRosetta", transactionId],
-    queryFn: () =>
-      fetchOneTransactionRosetta({
-        transactionId,
-      }),
-    enabled: !!transactionId,
-    placeholderData: keepPreviousData,
-    retry: 0,
-  });
-
-  const {
     data: transaction,
     isSuccess: isSuccessFetchOneTransaction,
     isError: isErrorFetchOneTransaction,
@@ -34,14 +17,8 @@ const useFetchOneTransaction = ({
     error: errorFetchOneTransaction,
   } = useQuery({
     queryKey: ["fetchOneTransaction", transactionId],
-    queryFn: () =>
-      fetchOneTransaction({
-        transactionId: transactionRosetta || transactionId,
-      }),
-    enabled:
-      !!transactionId &&
-      (!!isSuccessFetchOneTransactionRosetta ||
-        !!isErrorFetchOneTransactionRosetta),
+    queryFn: () => fetchOneTransaction({ transactionId }),
+    enabled: !!transactionId,
     placeholderData: keepPreviousData,
   });
 
@@ -81,10 +58,8 @@ const useFetchOneTransaction = ({
 
   return {
     data,
-    isLoading:
-      isLoadingFetchOneTransaction || isLoadingFetchOneTransactionRosetta,
-    isSuccess:
-      isSuccessFetchOneTransaction && !isLoadingFetchOneTransactionRosetta,
+    isLoading: isLoadingFetchOneTransaction,
+    isSuccess: isSuccessFetchOneTransaction,
     isError: isErrorFetchOneTransaction,
     error: errorFetchOneTransaction,
   };

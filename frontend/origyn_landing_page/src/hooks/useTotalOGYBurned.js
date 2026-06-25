@@ -1,36 +1,18 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
-  DAY_IN_SECONDS,
   divideBy1e8,
-  getCurrentDateInSeconds,
-  getIcrcApiConfig,
-  getTimeSeriesPeriod,
   roundAndFormatLocale,
-  transformTimeSeriesData,
-} from "./tokenMetricsUtils";
+  fetchSupplyHistory,
+  fetchLatestSupplyHistory,
+  toSupplySeries,
+} from "../services/gldtSupplyHistory";
 
-const TIMESTAMP_REFERENCE_LAUNCH_SNS = 1717545600;
 const PRE_SNS_BURNED_OGY = 202420405.1;
 
 export const fetchTotalBurnedOGY = async () => {
-  const { apiBaseUrl, snsLedgerCanisterId } = getIcrcApiConfig();
-
-  const response = await fetch(
-    `${apiBaseUrl}/ledgers/${snsLedgerCanisterId}/total-burned-per-day?start=${TIMESTAMP_REFERENCE_LAUNCH_SNS}&end=${getCurrentDateInSeconds()}`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch total burned OGY");
-  }
-
-  const payload = await response.json();
-  const totalBurnedSinceSnsLaunch = (payload?.data ?? [])
-    .map((entry) => Number(entry?.[1] ?? 0))
-    .reduce((total, value) => total + value, 0);
-
-  // Preserve the dashboard's historical pre-SNS burn adjustment.
+  const latest = await fetchLatestSupplyHistory("year");
   const totalBurnedOGY =
-    divideBy1e8(totalBurnedSinceSnsLaunch) + PRE_SNS_BURNED_OGY;
+    divideBy1e8(latest?.total_burned ?? 0) + PRE_SNS_BURNED_OGY;
 
   return {
     totalBurnedOGY,
@@ -39,31 +21,11 @@ export const fetchTotalBurnedOGY = async () => {
 };
 
 export const fetchTotalBurnedOGYTimeSeries = async (period = "weekly") => {
-  const { apiBaseUrl, snsLedgerCanisterId } = getIcrcApiConfig();
-  const selectedPeriod = getTimeSeriesPeriod(period);
-
-  const response = await fetch(
-    `${apiBaseUrl}/ledgers/${snsLedgerCanisterId}/total-burned-per-day?start=${TIMESTAMP_REFERENCE_LAUNCH_SNS}&end=${getCurrentDateInSeconds()}`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch total burned OGY time series");
-  }
-
-  const payload = await response.json();
-  const transformedData = transformTimeSeriesData(payload?.data ?? [], DAY_IN_SECONDS);
-  let runningTotal = PRE_SNS_BURNED_OGY;
-
-  return transformedData
-    .map((entry) => {
-      runningTotal += entry.value;
-
-      return {
-        ...entry,
-        value: runningTotal,
-      };
-    })
-    .slice(-selectedPeriod.sliceSize);
+  const { items, config } = await fetchSupplyHistory(period);
+  return toSupplySeries(items, "total_burned", config).map((entry) => ({
+    ...entry,
+    value: entry.value + PRE_SNS_BURNED_OGY,
+  }));
 };
 
 const useTotalOGYBurned = ({ period } = {}) => {
@@ -87,7 +49,8 @@ const useTotalOGYBurned = ({ period } = {}) => {
       }
     : undefined;
 
-  const loading = totalQuery.isLoading || (period ? timeSeriesQuery.isLoading : false);
+  const loading =
+    totalQuery.isLoading || (period ? timeSeriesQuery.isLoading : false);
   const error = totalQuery.error ?? timeSeriesQuery.error;
 
   return { data, loading, error: error?.message ?? null };

@@ -1,14 +1,16 @@
-import icrcAPI from "@services/api/icrc/v1";
+import gldtAPI from "@services/api/gldt/v1";
+import { gldtTokenPath } from "@services/api/gldt/v1/utils";
+import { ApiTransaction } from "@services/api/gldt/v1/types";
 import { Transaction } from "@services/types/transactions.types";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
+import { mapApiTransaction } from "@services/queries/transactions/utils";
 
 export const fetchOneTransaction = async ({
   transactionId,
 }: {
   transactionId: string;
 }): Promise<Transaction> => {
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/transactions/${transactionId}`
+  const { data } = await gldtAPI.get<ApiTransaction>(
+    gldtTokenPath(`transactions/${encodeURIComponent(transactionId)}`)
   );
-  return data;
+  return mapApiTransaction(data);
 };

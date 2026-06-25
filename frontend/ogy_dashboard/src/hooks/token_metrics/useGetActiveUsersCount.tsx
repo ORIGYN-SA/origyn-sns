@@ -4,8 +4,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import { ActiveUsers } from "./declarations_files/token_metrics";
-
-import { getActor } from "@services/actor";
+import fetchActiveUsersCount from "@services/queries/metrics/fetchActiveUsersCount";
 
 const useGetActiveUsersCount = () => {
   const {
@@ -15,11 +14,7 @@ const useGetActiveUsersCount = () => {
     isError,
     error,
   }: UseQueryResult<ActiveUsers> = useQuery({
-    queryFn: async (): Promise<ActiveUsers> => {
-      const actor = await getActor("tokenMetrics", { isAnon: true });
-      const results = await actor.get_active_users_count();
-      return results as ActiveUsers;
-    },
+    queryFn: fetchActiveUsersCount,
     placeholderData: keepPreviousData,
     queryKey: ["GET_ACTIVE_USERS_COUNT"],
   });

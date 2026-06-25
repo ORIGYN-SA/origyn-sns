@@ -1,7 +1,12 @@
-import icrcAPI from "@services/api/icrc/v1";
+import gldtAPI from "@services/api/gldt/v1";
+import { gldtTokenPath } from "@services/api/gldt/v1/utils";
+import { ApiTransactionsResponse } from "@services/api/gldt/v1/types";
 import { ListParams } from "@services/types/list.params.types";
 import { Transaction } from "@services/types/transactions.types";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
+import {
+  buildTransactionsSort,
+  mapApiTransaction,
+} from "@services/queries/transactions/utils";
 
 const fetchOneAccountTransactions = async ({
   limit,
@@ -12,16 +17,18 @@ const fetchOneAccountTransactions = async ({
   data: Transaction[];
   total_transactions: number;
 }> => {
-  const { id, desc } = sorting[0];
-  const indexSort =
-    id === "kind" || id === "timestamp" || id === "amount" ? ",-index" : "";
-  const sort = desc
-    ? `&sort_by=-${id}${indexSort}`
-    : `&sort_by=${id}${indexSort}`;
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}${sort}`
+  const { data } = await gldtAPI.get<ApiTransactionsResponse>(
+    gldtTokenPath("transactions", {
+      limit,
+      offset,
+      account: accountId,
+      sort_by: buildTransactionsSort(sorting) || undefined,
+    })
   );
-  return data;
+  return {
+    data: data.data.map(mapApiTransaction),
+    total_transactions: data.total_count,
+  };
 };
 
 export default fetchOneAccountTransactions;

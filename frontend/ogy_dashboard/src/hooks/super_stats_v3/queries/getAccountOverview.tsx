@@ -1,13 +1,9 @@
 import { OverviewResponse as Overview } from "@hooks/token_metrics/declarations_files/token_metrics";
+import { getPrincipalOverview } from "./getPrincipalOverview";
 
-import { getActor } from "@services/actor";
-
-export const getAccountOverview = async ({
+export const getAccountOverview = ({
   accountId,
 }: {
   accountId: string;
-}): Promise<Overview | null> => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const results = (await actor.get_account_overview(accountId)) as Overview[];
-  return results && results.length ? (results[0] as Overview) : null;
-};
+}): Promise<Overview | null> =>
+  getPrincipalOverview({ principalId: accountId });

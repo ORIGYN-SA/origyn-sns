@@ -3,10 +3,8 @@ import {
   FetchQueryOptions,
   keepPreviousData,
 } from "@tanstack/react-query";
-import icrcAPI from "@services/api/icrc/v1";
-import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
-import { getCurrentDateInSeconds } from "@helpers/dates/index";
+import { fetchSupplyHistoryByGroup } from "@services/queries/metrics/supplyHistory";
 
 export interface TotalBurnedOGY {
   totalBurnedOGY: number;
@@ -18,17 +16,10 @@ export interface TotalBurnedOGYParams {
 }
 
 const fn = async (): Promise<TotalBurnedOGY> => {
-  const TIMESTAMP_REFERENCE_LAUNCH_SNS = 1717545600;
-  const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/total-burned-per-day?start=${TIMESTAMP_REFERENCE_LAUNCH_SNS}&end=${getCurrentDateInSeconds()}`
-  );
-  const total = data.data
-    .map((d: Array<number>) => Number(d[1]))
-    .reduce((accumulator: number, value: number) => {
-      return accumulator + value;
-    }, 0);
+  const data = await fetchSupplyHistoryByGroup("year");
+  const latest = data[data.length - 1];
+  const totalBurnedOGY = latest ? Number(latest.total_burned) : 0;
 
-  const totalBurnedOGY = total ?? 0;
   return {
     totalBurnedOGY,
     totalBurnedOGYToString:

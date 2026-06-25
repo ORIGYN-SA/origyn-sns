@@ -1,44 +1,47 @@
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers/index";
-import { GovernanceStats } from "@services/types/token_metrics";
-import { getActor } from "@services/actor";
+import gldtAPI from "@services/api/gldt/v1";
+import { ApiGovernanceStats } from "@services/api/gldt/v1/types";
+import { gldtTokenPath, toBigInt } from "@services/api/gldt/v1/utils";
 
 const fetchNeuronsStats = async () => {
-  const actor = await getActor("tokenMetrics", { isAnon: true });
-  const result = (await actor.get_neurons_stats([])) as GovernanceStats;
+  const { data } = await gldtAPI.get<ApiGovernanceStats>(
+    gldtTokenPath("governance/stats")
+  );
 
-  const total =
-    result.total_locked +
-    result.total_rewards +
-    result.total_staked +
-    result.total_unlocked;
+  const totalLocked = toBigInt(data.total_locked);
+  const totalRewards = toBigInt(data.total_rewards);
+  const totalStaked = toBigInt(data.total_staked);
+  const totalUnlocked = toBigInt(data.total_unlocked);
+  const total = totalLocked + totalRewards + totalStaked + totalUnlocked;
+
   return {
-    totalLocked: result.total_locked,
-    totalRewards: result.total_rewards,
-    totalStaked: result.total_staked,
-    totalUnlocked: result.total_unlocked,
+    totalLocked,
+    totalRewards,
+    totalStaked,
+    totalUnlocked,
     total,
     string: {
       totalLocked: roundAndFormatLocale({
-        number: divideBy1e8(result.total_locked),
+        number: divideBy1e8(totalLocked),
       }),
       totalRewards: roundAndFormatLocale({
-        number: divideBy1e8(result.total_rewards),
+        number: divideBy1e8(totalRewards),
       }),
       totalStaked: roundAndFormatLocale({
-        number: divideBy1e8(result.total_staked),
+        number: divideBy1e8(totalStaked),
       }),
       totalUnlocked: roundAndFormatLocale({
-        number: divideBy1e8(result.total_unlocked),
+        number: divideBy1e8(totalUnlocked),
       }),
       total: roundAndFormatLocale({
         number: divideBy1e8(total),
       }),
     },
     number: {
-      totalLocked: divideBy1e8(result.total_locked),
-      totalRewards: divideBy1e8(result.total_rewards),
-      totalStaked: divideBy1e8(result.total_staked),
-      totalUnlocked: divideBy1e8(result.total_unlocked),
+      totalLocked: divideBy1e8(totalLocked),
+      totalRewards: divideBy1e8(totalRewards),
+      totalStaked: divideBy1e8(totalStaked),
+      totalUnlocked: divideBy1e8(totalUnlocked),
       total: divideBy1e8(total),
     },
   };
