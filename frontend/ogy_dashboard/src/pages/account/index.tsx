@@ -5,6 +5,7 @@ import AvailableOGY from "@pages/account/available-ogy";
 import StakedOGY from "@pages/account/staked-ogy";
 import StakedRewards from "@pages/account/staked-rewards";
 import NeuronsList from "./neurons-list/index";
+import MyCertificates from "./my-certificates";
 import PrincipalIdPill from "@components/account/PrincipalIdPill";
 import AccountIdPill from "@components/account/AccountIdPill";
 import { useT } from "@i18n/LocaleContext";
@@ -37,6 +38,7 @@ export const Account = () => {
       <div className="mt-8">
         <NeuronsList />
       </div>
+      <MyCertificates className="mt-8" />
       <LedgerSwitch className="mt-8" />
     </PageContainer>
   );
