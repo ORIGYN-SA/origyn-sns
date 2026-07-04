@@ -1,17 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { divideBy1e8, fetchSupplySummary } from "../services/gldtSupplyHistory";
 
 const fetchMarketCap = async () => {
-  const supplyResponse = await fetch(
-    `https://${import.meta.env.VITE_TOKEN_METRICS_CANISTER_ID}.raw.icp0.io/circulating-supply`
-  );
-  if (!supplyResponse.ok) throw new Error("Failed to fetch circulating supply");
-  const circulatingSupply = await supplyResponse.json();
+  const summary = await fetchSupplySummary();
+  const circulatingSupply = divideBy1e8(summary.circulating_supply);
 
   const priceResponse = await fetch("https://api.origyn.com/ogy/price");
   if (!priceResponse.ok) throw new Error("Failed to fetch OGY price");
   const priceData = await priceResponse.json();
 
-  const marketCap = parseInt(circulatingSupply) * priceData.ogyPrice;
+  const marketCap = circulatingSupply * priceData.ogyPrice;
   return { marketCap, circulatingSupply, price: priceData.ogyPrice };
 };
 

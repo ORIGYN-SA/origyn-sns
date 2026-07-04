@@ -131,3 +131,303 @@ export interface ApiSupplyHistoryItem {
   minted: string;
   burned: string;
 }
+
+export interface ApiBurnSource {
+  gldt: number;
+  icp: number;
+  other: number;
+}
+
+export interface ApiBurnsHistoryItem {
+  date: string;
+  source: ApiBurnSource;
+  total_burned: number;
+}
+
+export interface ApiDeflationHistoryItem {
+  date: string;
+  burned: number;
+  deflation_rate: number;
+}
+
+export interface ApiFoundationSummary {
+  locked: string;
+  unlocked: string;
+  total_foundation_supply: string;
+}
+
+export interface ApiPowerRatioItem {
+  day: number;
+  ratio: number;
+}
+
+export interface ApiActiveHoldersItem {
+  date: string;
+  active_holders: number;
+}
+
+export interface ApiHoldersCount {
+  count: number;
+}
+
+export interface ApiHoldersTotals {
+  accounts: number;
+  principals: number;
+}
+
+export interface ApiRichListRow {
+  account: string;
+  balance: number;
+}
+
+export interface ApiRichListResponse {
+  data: ApiRichListRow[];
+  total: number;
+}
+
+export interface ApiPriceHistoryItem {
+  date: string;
+  price: number;
+}
+
+export interface ApiOraBalance {
+  ora_balance: string;
+  reserve: string;
+  default_pool: string;
+  five_year: string;
+}
+
+export interface ApiOtaBalance {
+  ogy_total_burned: string;
+  icp_network_revenue: string;
+}
+
+export interface ApiTxBucket {
+  start_time: number;
+  end_time: number;
+  total_count: number;
+  transfer_count: number;
+  mint_count: number;
+  burn_count: number;
+  approve_count: number;
+}
+
+export interface ApiTxStats {
+  count: string;
+  total_value: string;
+  average: string;
+}
+
+export interface ApiMostActiveAccount {
+  account: string;
+  count: number;
+}
+
+export interface ApiMostActivePrincipal {
+  principal: string;
+  count: number;
+}
+
+export interface ApiStatsSummary {
+  total_transaction_count: string;
+  total_transaction_value: string;
+  total_transaction_average: string;
+  total_unique_accounts: number;
+  total_unique_principals: number;
+  transfer_stats: ApiTxStats;
+  mint_stats: ApiTxStats;
+  burn_stats: ApiTxStats;
+  approve_stats: ApiTxStats;
+  count_over_time: ApiTxBucket[];
+  most_active_accounts: ApiMostActiveAccount[];
+  most_active_principals: ApiMostActivePrincipal[];
+  top_transfers: ApiTransaction[];
+  top_mints: ApiTransaction[];
+  top_burns: ApiTransaction[];
+}
+
+export interface ApiSupplyDistributionItem {
+  date: string;
+  liquid: number;
+  staked: number;
+  treasury: number;
+  reward_pool: number;
+  unclaimed_rewards: number;
+  total_supply: number;
+}
+
+export type ApiStatsPeriod = "day" | "week" | "month";
+
+// The endpoint has no OGY data yet, so row fields beyond account are unverified.
+export interface ApiVolumeTopAccountRow {
+  account: string;
+  [key: string]: unknown;
+}
+
+export interface ApiVolumeTopAccountsResponse {
+  data: ApiVolumeTopAccountRow[];
+  total: number;
+}
+
+// --- NFT (ORIGYN certificate) API -----------------------------------------
+
+export interface ApiNftPage<T> {
+  items: T[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+export interface ApiNftCollection {
+  canister_id: string;
+  categories: string[];
+  distinct_holders: number;
+  indexable: boolean;
+  total_tokens: number;
+  description: string | null;
+  logo: string | null;
+  name: string | null;
+  owner: string | null;
+  symbol: string | null;
+}
+
+// Raw certificate JSON; shape varies per collection.
+export type ApiNftMetadata = Record<string, unknown>;
+
+export interface ApiNftItem {
+  collection: string;
+  token_id: string;
+  owner_account: string;
+  minted_at_ms: number;
+  name: string | null;
+  description: string | null;
+  image_url: string | null;
+  // Present only when requested with metadata=true.
+  metadata?: ApiNftMetadata | null;
+}
+
+export interface ApiNftCategoriesResponse {
+  categories: string[];
+}
+
+export type ApiNftCollectionsResponse = ApiNftPage<ApiNftCollection>;
+export type ApiNftItemsResponse = ApiNftPage<ApiNftItem>;
+
+export interface ApiNftHit {
+  collection: string;
+  token_id: string;
+  owner_account: string;
+  rank: number;
+  name: string | null;
+  description: string | null;
+  image_url: string | null;
+  metadata?: ApiNftMetadata | null;
+}
+
+export interface ApiNftCollectionHit {
+  canister_id: string;
+  categories: string[];
+  total_tokens: number;
+  rank: number;
+  logo: string | null;
+  name: string | null;
+  owner: string | null;
+  symbol: string | null;
+}
+
+export interface ApiNftAccountHit {
+  principal: string;
+  created_collections: number;
+  held_tokens: number;
+}
+
+export interface ApiNftSearchResults {
+  collections: ApiNftCollectionHit[];
+  nfts: ApiNftHit[];
+  accounts: ApiNftAccountHit[];
+}
+
+export interface ApiNftCount {
+  count: number;
+}
+
+export interface ApiNftCollectionStats {
+  canister_id: string;
+  distinct_holders: number;
+  total_tokens: number;
+  next_block_id: number;
+}
+
+export interface ApiNftTokenIds {
+  token_ids: string[];
+}
+
+export interface ApiNftTokenWithMetadata {
+  token_id: string;
+  owner: string;
+  metadata: ApiNftMetadata | null;
+}
+
+// Token row on collection holder pages; the collection is implied by the path.
+export type ApiNftHolderEntry = Omit<ApiNftItem, "collection">;
+
+// NFT owned by the account in the path; owner_account is implied.
+export type ApiNftAccountItem = Omit<ApiNftItem, "owner_account">;
+
+export interface ApiNftOwnedItem {
+  collection: string;
+  token_id: string;
+  status: string;
+  current_owner: string;
+  name: string | null;
+  description: string | null;
+  image_url: string | null;
+  metadata?: ApiNftMetadata | null;
+}
+
+export interface ApiNftHeldCollection {
+  canister_id: string;
+  categories: string[];
+  indexable: boolean;
+  held_count: number;
+  logo: string | null;
+  name: string | null;
+  owner: string | null;
+  symbol: string | null;
+}
+
+export interface ApiNftAccountStats {
+  principal: string;
+  owned_count: number;
+  distinct_collections: number;
+  first_activity_ms: number;
+  last_activity_ms: number;
+}
+
+export interface ApiNftSyncCounts {
+  collections: number | null;
+  current_tokens: number | null;
+  distinct_holders: number | null;
+  events: number | null;
+  indexable_collections: number | null;
+  metadata_rows: number | null;
+  tokens_missing_metadata: number | null;
+}
+
+export interface ApiNftSyncRun {
+  service: string;
+  status: string;
+  started_at_ms: number;
+  finished_at_ms: number | null;
+  duration_ms: number | null;
+  items: number | null;
+  error: string | null;
+}
+
+export interface ApiNftSyncStatus {
+  env: string;
+  schema: string;
+  schema_ready: boolean;
+  counts: ApiNftSyncCounts;
+  latest_runs: ApiNftSyncRun[];
+}

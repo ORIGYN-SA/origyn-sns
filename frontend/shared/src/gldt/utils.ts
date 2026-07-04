@@ -1,21 +1,33 @@
 type QueryValue = string | number | boolean | undefined;
 
+const withQuery = (
+  basePath: string,
+  query?: Record<string, QueryValue>,
+): string => {
+  const params = new URLSearchParams();
+
+  Object.entries(query ?? {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      params.set(key, String(value));
+    }
+  });
+
+  const queryString = params.toString();
+  return queryString ? `${basePath}?${queryString}` : basePath;
+};
+
 export const makeTokenPath =
   (tokenSymbol: string) =>
   (path: string, query?: Record<string, QueryValue>) => {
     const normalizedPath = path.replace(/^\/+/, "");
-    const params = new URLSearchParams();
+    return withQuery(`/tokens/${tokenSymbol}/${normalizedPath}`, query);
+  };
 
-    Object.entries(query ?? {}).forEach(([key, value]) => {
-      if (value !== undefined) {
-        params.set(key, String(value));
-      }
-    });
-
-    const queryString = params.toString();
-    const tokenPath = `/tokens/${tokenSymbol}/${normalizedPath}`;
-
-    return queryString ? `${tokenPath}?${queryString}` : tokenPath;
+// Builds /nft/{env} paths for the GLDT NFT API.
+export const makeNftPath =
+  (env: string) => (path: string, query?: Record<string, QueryValue>) => {
+    const normalizedPath = path.replace(/^\/+/, "");
+    return withQuery(`/nft/${env}/${normalizedPath}`, query);
   };
 
 export const toBigInt = (value: string | number | bigint) => BigInt(value);

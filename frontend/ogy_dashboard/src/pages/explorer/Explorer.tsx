@@ -1,150 +1,241 @@
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Carousel, Search } from "@components/ui";
-import { useT } from "@i18n/LocaleContext";
-import {
-  BlockchainIcon,
-  CheckmarkCircleIcon,
-  FilterIcon,
-} from "@components/ui/icons";
+import { useLocalePath, useT } from "@i18n/LocaleContext";
+import { shortenId } from "@helpers/strings";
+import useNftCategories from "@hooks/nft/useNftCategories";
+import useNftCollections from "@hooks/nft/useNftCollections";
+import useNfts from "@hooks/nft/useNfts";
+import useNftSearch from "@hooks/nft/useNftSearch";
+import { NftCard } from "@hooks/nft/mapNft";
+import { NftHeroTile, NftTile, OnSelectNft, SkeletonTile } from "./NftCards";
+import CollectionCard from "./CollectionCard";
+import CertificateDialog from "./CertificateDialog";
 
-const SECTIONS = [
-  { id: "featured", titleKey: "explorer.sections.featured", count: 8 },
-  { id: "art", titleKey: "explorer.sections.art", count: 8 },
-  { id: "gold", titleKey: "explorer.sections.gold", count: 8 },
-];
+const FEATURED_LIMIT = 12;
+const CATEGORY_LIMIT = 12;
+const COLLECTIONS_LIMIT = 12;
+const SKELETON_COUNT = 6;
 
-const LazyImage = ({
-  src,
-  alt = "",
-  className,
+const Section = ({
+  title,
+  action,
+  children,
 }: {
-  src: string;
-  alt?: string;
-  className?: string;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node || inView) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [inView]);
-
-  return (
-    <div ref={ref} className={`bg-surface-2 ${className ?? ""}`}>
-      {inView && (
-        <img
-          src={src}
-          alt={alt}
-          decoding="async"
-          className="h-full w-full object-cover"
-        />
-      )}
+  title: string;
+  action?: ReactNode;
+  children: ReactNode;
+}) => (
+  <section>
+    <div className="flex items-center justify-between h-9 mb-3">
+      <h2 className="text-explorer-section font-semibold leading-none text-content">
+        {title}
+      </h2>
+      {action && <div className="flex items-center sm:me-24">{action}</div>}
     </div>
-  );
-};
+    <Carousel>{children}</Carousel>
+  </section>
+);
 
-const PlaceholderCard = ({ seed }: { seed: string }) => {
+const ViewAllLink = ({ to }: { to: string }) => {
   const t = useT();
+  const lp = useLocalePath();
   return (
-  <div className="w-[253px] h-[343px] rounded-xl border border-border-strong bg-surface pt-2 pe-2 pb-4 ps-2 flex flex-col gap-2.5">
-    <div className="relative h-[229px] w-full">
-      <LazyImage
-        src={`https://cataas.com/cat?_=${encodeURIComponent(seed)}`}
-        className="h-full w-full rounded-t-2xl overflow-hidden"
-      />
-      <div
-        aria-label="OGY"
-        className="absolute top-2 end-2 h-[30px] w-[30px] rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
-      >
-        <img src="/ogy_logo.svg" alt="" className="h-[15px] w-[15px]" />
-      </div>
-    </div>
-    <div className="flex-1 flex flex-col justify-between px-1">
-      <div className="flex flex-col gap-0.5">
-        <div className="flex items-center gap-1 text-muted">
-          <span className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase">
-            {t("explorer.sampleIssuer")}
-          </span>
-          <CheckmarkCircleIcon />
-        </div>
-        <h3 className="font-semibold text-[15px] leading-snug text-content">
-          {t("explorer.sampleTitle")}
-        </h3>
-      </div>
-      <button
-        type="button"
-        className="inline-flex items-center gap-1 self-start rounded-full border border-border-faint bg-surface-muted px-2 py-1 text-muted hover:bg-surface-2 transition-colors"
-      >
-        <BlockchainIcon />
-        <span className="font-normal text-[10px] leading-none">
-          {t("explorer.checkOnBlockchain")}
-        </span>
-      </button>
-    </div>
-  </div>
-  );
-};
-
-const HeroCard = ({ seed }: { seed: string }) => {
-  const t = useT();
-  return (
-  <div className="relative w-[520px] sm:w-[640px] h-[360px] rounded-2xl overflow-hidden border border-border-strong bg-surface group">
-    <LazyImage
-      src={`https://cataas.com/cat?_=${encodeURIComponent(seed)}`}
-      className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.03]"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-    <div
-      aria-label="OGY"
-      className="absolute top-3 end-3 h-9 w-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-[inset_0.75px_0.75px_0_rgba(255,255,255,0.45),inset_-0.75px_-0.75px_0_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.18)] pointer-events-none"
+    <Link
+      to={lp(to)}
+      className="text-sm text-muted hover:text-content transition-colors"
     >
-      <img src="/ogy_logo.svg" alt="" className="h-[18px] w-[18px]" />
-    </div>
+      {t("explorer.viewAll")}
+    </Link>
+  );
+};
 
-    <div className="absolute bottom-0 start-0 end-0 p-5 flex flex-col gap-2">
-      <div className="flex items-center gap-1 text-white/80">
-        <span className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase">
-          {t("explorer.sampleIssuer")}
-        </span>
-        <CheckmarkCircleIcon />
-      </div>
-      <h3 className="font-extrabold text-[26px] sm:text-[30px] leading-tight tracking-[-0.02em] text-white">
-        {t("explorer.sampleTitle")}
-      </h3>
-      <button
-        type="button"
-        className="mt-1 inline-flex items-center gap-1.5 self-start rounded-full bg-white/15 backdrop-blur-md px-3 py-1.5 text-white hover:bg-white/25 transition-colors"
-      >
-        <BlockchainIcon />
-        <span className="font-medium text-[11px] leading-none">
-          {t("explorer.checkOnBlockchain")}
-        </span>
-      </button>
-    </div>
-  </div>
+const CardCarouselItems = ({
+  cards,
+  onSelect,
+  hero = false,
+}: {
+  cards: NftCard[];
+  onSelect: OnSelectNft;
+  hero?: boolean;
+}) => (
+  <>
+    {cards.map((nft) => (
+      <Carousel.Item key={nft.id}>
+        {hero ? (
+          <NftHeroTile nft={nft} onSelect={onSelect} />
+        ) : (
+          <NftTile nft={nft} onSelect={onSelect} />
+        )}
+      </Carousel.Item>
+    ))}
+  </>
+);
+
+const SkeletonCarouselItems = ({ hero = false }: { hero?: boolean }) => (
+  <>
+    {Array.from({ length: hero ? 2 : SKELETON_COUNT }).map((_, i) => (
+      <Carousel.Item key={i}>
+        <SkeletonTile hero={hero} />
+      </Carousel.Item>
+    ))}
+  </>
+);
+
+const FeaturedSection = ({ onSelect }: { onSelect: OnSelectNft }) => {
+  const t = useT();
+  const { cards, isLoading } = useNfts({ limit: FEATURED_LIMIT });
+
+  if (!isLoading && cards.length === 0) return null;
+
+  return (
+    <Section
+      title={t("explorer.sections.featured")}
+      action={<ViewAllLink to="/explorer/certificates" />}
+    >
+      {isLoading ? (
+        <SkeletonCarouselItems hero />
+      ) : (
+        <CardCarouselItems cards={cards} onSelect={onSelect} hero />
+      )}
+    </Section>
+  );
+};
+
+const CollectionsSection = () => {
+  const t = useT();
+  const { data, isLoading } = useNftCollections({ limit: COLLECTIONS_LIMIT });
+  const collections = data?.items ?? [];
+
+  if (!isLoading && collections.length === 0) return null;
+
+  return (
+    <Section
+      title={t("explorer.sections.collections")}
+      action={<ViewAllLink to="/explorer/collections" />}
+    >
+      {isLoading ? (
+        <SkeletonCarouselItems />
+      ) : (
+        <>
+          {collections.map((collection) => (
+            <Carousel.Item key={collection.canister_id}>
+              <CollectionCard collection={collection} />
+            </Carousel.Item>
+          ))}
+        </>
+      )}
+    </Section>
+  );
+};
+
+const CategorySection = ({
+  category,
+  onSelect,
+}: {
+  category: string;
+  onSelect: OnSelectNft;
+}) => {
+  const { cards, isLoading } = useNfts({ category, limit: CATEGORY_LIMIT });
+
+  if (!isLoading && cards.length === 0) return null;
+
+  return (
+    <Section title={category}>
+      {isLoading ? (
+        <SkeletonCarouselItems />
+      ) : (
+        <CardCarouselItems cards={cards} onSelect={onSelect} />
+      )}
+    </Section>
+  );
+};
+
+const SearchResults = ({
+  query,
+  onSelect,
+}: {
+  query: string;
+  onSelect: OnSelectNft;
+}) => {
+  const t = useT();
+  const lp = useLocalePath();
+  const { cards, collections, accounts, isLoading, isError } =
+    useNftSearch(query);
+
+  const isEmpty =
+    cards.length === 0 && collections.length === 0 && accounts.length === 0;
+
+  return (
+    <>
+      <Section title={`${t("explorer.searchResults")} "${query}"`}>
+        {isLoading ? (
+          <SkeletonCarouselItems />
+        ) : isError ? (
+          <p className="text-muted">{t("explorer.loadError")}</p>
+        ) : isEmpty ? (
+          <p className="text-muted">{t("explorer.noResults")}</p>
+        ) : cards.length === 0 ? (
+          <p className="text-muted">{t("explorer.search.noCertificates")}</p>
+        ) : (
+          <CardCarouselItems cards={cards} onSelect={onSelect} />
+        )}
+      </Section>
+
+      {collections.length > 0 && (
+        <Section title={t("explorer.search.collections")}>
+          {collections.map((collection) => (
+            <Carousel.Item key={collection.canister_id}>
+              <CollectionCard collection={collection} />
+            </Carousel.Item>
+          ))}
+        </Section>
+      )}
+
+      {accounts.length > 0 && (
+        <section>
+          <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
+            {t("explorer.search.collectors")}
+          </h2>
+          <div className="flex flex-col gap-2">
+            {accounts.map((account) => (
+              <Link
+                key={account.principal}
+                to={lp(`/explorer/collectors/${account.principal}`)}
+                className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3 transition-colors hover:border-content/40"
+              >
+                <span
+                  className="text-sm text-content"
+                  title={account.principal}
+                >
+                  {shortenId(account.principal)}
+                </span>
+                <span className="text-xs text-muted">
+                  {account.held_tokens} {t("explorer.collections.items")}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
 export const Explorer = () => {
   const t = useT();
+  const [searchParams] = useSearchParams();
+  const searchTerm = (searchParams.get("searchterm") ?? "").trim();
+  const isSearching = searchTerm.length > 0;
+  const [selectedNft, setSelectedNft] = useState<NftCard | null>(null);
+
+  const categories = useNftCategories().data ?? [];
+
   return (
-    <div className="max-w-[1440px] mx-auto py-8 px-6 sm:py-16">
+    <div className="max-w-page mx-auto py-8 px-6 sm:py-16">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
-          <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
+        <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-explorer-heading sm:px-16 sm:py-8">
+          <h1 className="font-extrabold text-explorer-heading sm:text-explorer-heading-sm tracking-explorer-heading text-center text-content">
             {t("explorer.title")}
           </h1>
         </div>
@@ -153,38 +244,31 @@ export const Explorer = () => {
           id="search-explorer"
           placeholder={t("explorer.searchPlaceholder")}
           className="w-full max-w-2xl mt-4"
-          actions={
-            <button
-              type="button"
-              aria-label={t("explorer.openFilters")}
-              className="me-1 p-1 text-content hover:text-muted transition-colors"
-            >
-              <FilterIcon />
-            </button>
-          }
         />
       </div>
 
       <div className="mt-16 flex flex-col gap-16">
-        {SECTIONS.map(({ id, titleKey, count }, index) => (
-          <section key={id}>
-            <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
-              {t(titleKey)}
-            </h2>
-            <Carousel>
-              {Array.from({ length: count }).map((_, i) => (
-                <Carousel.Item key={i}>
-                  {index === 0 ? (
-                    <HeroCard seed={`${id}-${i}`} />
-                  ) : (
-                    <PlaceholderCard seed={`${id}-${i}`} />
-                  )}
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </section>
-        ))}
+        {isSearching ? (
+          <SearchResults query={searchTerm} onSelect={setSelectedNft} />
+        ) : (
+          <>
+            <FeaturedSection onSelect={setSelectedNft} />
+            <CollectionsSection />
+            {categories.map((category) => (
+              <CategorySection
+                key={category}
+                category={category}
+                onSelect={setSelectedNft}
+              />
+            ))}
+          </>
+        )}
       </div>
+
+      <CertificateDialog
+        nft={selectedNft}
+        onClose={() => setSelectedNft(null)}
+      />
     </div>
   );
 };

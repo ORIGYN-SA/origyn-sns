@@ -4,8 +4,6 @@ export const ICP_LEDGER_CANISTER_ID = import.meta.env
   .VITE_ICP_LEDGER_CANISTER_ID;
 export const SNS_GOVERNANCE_CANISTER_ID = import.meta.env
   .VITE_SNS_GOVERNANCE_CANISTER_ID;
-export const TOKEN_METRICS_CANISTER_ID = import.meta.env
-  .VITE_TOKEN_METRICS_CANISTER_ID;
 export const OGY_TOKEN_SWAP_CANISTER_ID = import.meta.env
   .VITE_OGY_TOKEN_SWAP_CANISTER_ID;
 export const SNS_REWARDS_CANISTER_ID = import.meta.env
@@ -13,29 +11,22 @@ export const SNS_REWARDS_CANISTER_ID = import.meta.env
 export const SNS_ROOT_CANISTER = import.meta.env.VITE_SNS_ROOT_CANISTER;
 export const LEGACY_LEDGER_CANISTER_ID = import.meta.env
   .VITE_LEGACY_LEDGER_CANISTER_ID;
-export const LEGACY_GOVERNANCE_CANISTER_ID = import.meta.env
-  .VITE_LEGACY_GOVERNANCE_CANISTER_ID;
-export const COLLECTION_INDEX_CANISTER_ID = import.meta.env
-  .VITE_COLLECTION_INDEX_CANISTER_ID;
 export const MINTING_STUDIO_CANISTER_ID =
   import.meta.env.VITE_MINTING_STUDIO_CANISTER_ID ??
   "uasjq-dyaaa-aaaas-qdwka-cai";
-export const LEGACY_VESTING_CANISTER_ID = import.meta.env
-  .VITE_LEGACY_VESTING_CANISTER_ID;
 
 // ICPSwap mainnet pool canisters (stable; do not vary per env)
-export const CKUSDC_LEDGER_CANISTER_ID = "xevnm-gaaaa-aaaar-qafnq-cai";
 export const ICPSWAP_OGY_ICP_POOL_CANISTER_ID = "ttnzy-lyaaa-aaaag-qj2bq-cai";
 export const ICPSWAP_ICP_CKUSDC_POOL_CANISTER_ID =
   "mohjv-bqaaa-aaaag-qjyia-cai";
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
 export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
-export const API_LEDGER_BASE_URL = import.meta.env.VITE_API_LEDGER_BASE_URL;
 export const API_ROSETTA = import.meta.env.VITE_API_ROSETTA;
 export const API_GLDT_BASE_URL = import.meta.env.VITE_API_GLDT_BASE_URL;
 export const GLDT_API_TOKEN_SYMBOL = "OGY";
-export const PLAUSIBLE_API_KEY = import.meta.env.VITE_PLAUSIBLE_API_KEY;
+// Dataset segment for the GLDT NFT API. Mainnet data lives under "production".
+export const GLDT_NFT_ENV = import.meta.env.VITE_GLDT_NFT_ENV ?? "production";
 export const ACCOUNT_ID_LEDGER_ICP = import.meta.env.VITE_ACCOUNT_ID_LEDGER_ICP;
 export const ACCOUNT_ID_LEDGER_ICP_OLD = import.meta.env
   .VITE_ACCOUNT_ID_LEDGER_ICP_OLD;
@@ -46,41 +37,6 @@ export const LEGACY_OGY_DASHBOARD_URL = import.meta.env
 export const APP_MODE = import.meta.env.MODE;
 export const TRANSACTION_FEE = BigInt(import.meta.env.VITE_TRANSACTION_FEE);
 export const TRANSACTION_FEE_ICP = import.meta.env.VITE_TRANSACTION_FEE_ICP;
-
-/**
- * Legacy ORIGYN NFT Standard Collection IDs
- * These collections use the old ORIGYN NFT standard (collection_nft_origyn method)
- * All other collections default to ICRC-7 standard
- * This list will shrink as collections are deprecated
- */
-export const LEGACY_ORIGYN_COLLECTION_IDS = new Set([
-  // Precious Metals
-  "rsvpl-kiaaa-aaaap-abhea-cai",
-  "vnuik-tyaaa-aaaap-abyyq-cai",
-  "vrhlk-mqaaa-aaaap-ahw3q-cai",
-  "u3ijq-oaaaa-aaaap-ahw4q-cai",
-  "b6zbl-pqaaa-aaaap-ahzaq-cai",
-  "bx2kx-zyaaa-aaaap-ahzba-cai",
-  "bq3md-uaaaa-aaaap-ahzbq-cai",
-  "qtmba-dyaaa-aaaap-akhgq-cai",
-  "qo7hj-fqaaa-aaaap-akmvq-cai",
-  "of6pp-2iaaa-aaaap-akoza-cai",
-  "45oqu-5qaaa-aaaap-anvwq-cai",
-  // Certification
-  "nszbk-7iaaa-aaaap-abczq-cai",
-  "ql47b-5iaaa-aaaap-ahcqa-cai",
-  "7ilpe-waaaa-aaaap-ahq7a-cai",
-  // Jewelry
-  "4clim-pyaaa-aaaap-abkaa-cai",
-  // Art
-  "fu7xh-xiaaa-aaaap-ahg7q-cai",
-  "gq4qu-3iaaa-aaaap-ahnfa-cai", // Suzanne Syz collection
-  "2gaw2-xyaaa-aaaap-ahpga-cai",
-]);
-
-export const isLegacyOrigynCollection = (canisterId: string): boolean => {
-  return LEGACY_ORIGYN_COLLECTION_IDS.has(canisterId);
-};
 
 export const ORIGYN_ACCOUNTS = [
   {

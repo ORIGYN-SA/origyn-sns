@@ -36,7 +36,7 @@ export const ProposalsDetails = () => {
   const fakePayload = t("proposals.details.payloadLoading");
 
   return (
-    <div className="max-w-[1440px] mx-auto pt-8 pb-16 px-6">
+    <div className="max-w-page mx-auto pt-8 pb-16 px-6">
       <PageHeader
         category={t("proposals.details.category")}
         title={
