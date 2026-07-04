@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Governance",
+    "explorer": "Explorer",
     "transactionHistory": "Transaction History",
     "calculator": "Calculator",
     "openMainMenu": "Open main menu",
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "My Certificates"
+    },
     "neurons": {
       "list": {
         "title": "My OGY Neurons",
@@ -684,14 +688,53 @@
   "explorer": {
     "title": "Explorer",
     "searchPlaceholder": "Search by title, issuer, principal or token ID",
-    "openFilters": "Open filters",
     "checkOnBlockchain": "Check on blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Unknown issuer",
+    "searchResults": "Results for",
+    "noResults": "No matching certificates found.",
+    "loadError": "Couldn't load certificates. Please try again.",
+    "viewAll": "View all",
     "sections": {
       "featured": "Featured Certificates",
-      "art": "Art Certificates",
-      "gold": "Gold Certificates"
+      "collections": "Collections"
+    },
+    "search": {
+      "noCertificates": "No certificates matched. See collections and collectors below.",
+      "collections": "Matching collections",
+      "collectors": "Matching collectors"
+    },
+    "collections": {
+      "items": "items",
+      "holders": "holders"
+    },
+    "collectionsPage": {
+      "title": "Collections"
+    },
+    "certificatesPage": {
+      "title": "Certificates",
+      "all": "All"
+    },
+    "certificatePage": {
+      "notFound": "Certificate not found."
+    },
+    "collector": {
+      "title": "Collector",
+      "owned": "Certificates",
+      "collections": "Collections",
+      "firstActivity": "First activity",
+      "lastActivity": "Last activity",
+      "collectionsTitle": "Collections",
+      "certificatesTitle": "Certificates",
+      "pastTitle": "Previously owned"
+    },
+    "detail": {
+      "certificate": "Certificate",
+      "tokenId": "Token ID",
+      "mintedOn": "Minted on",
+      "collection": "Collection",
+      "owner": "Owner",
+      "poweredBy": "Powered by ORIGYN",
+      "openPage": "Open certificate page"
     }
   },
   "ui": {

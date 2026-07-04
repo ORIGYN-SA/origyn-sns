@@ -21,7 +21,7 @@ import { useT, useLocalePath } from "@i18n/LocaleContext";
 const navItems: { titleKey: string; url: string; requiresAuth?: boolean }[] = [
   { titleKey: "nav.dashboard", url: "/" },
   { titleKey: "nav.governance", url: "/governance" },
-  { titleKey: "nav.transactionHistory", url: "/transaction-history" },
+  { titleKey: "nav.explorer", url: "/explorer" },
   { titleKey: "nav.calculator", url: "/calculator" },
 ];
 
