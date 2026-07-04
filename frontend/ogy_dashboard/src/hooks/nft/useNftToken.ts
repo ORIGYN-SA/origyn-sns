@@ -6,8 +6,20 @@ import { toNftCard, NftCard } from "./mapNft";
 const useNftToken = (canisterId: string | null, tokenId: string | null) => {
   const query = useQuery({
     queryKey: ["NFT_TOKEN", canisterId, tokenId],
-    queryFn: () =>
-      gldtEndpoints.getNftToken(canisterId as string, tokenId as string),
+    queryFn: async () => {
+      const [token, tokenWithMetadata] = await Promise.all([
+        gldtEndpoints.getNftToken(canisterId as string, tokenId as string),
+        gldtEndpoints.getNftTokenMetadata(
+          canisterId as string,
+          tokenId as string
+        ),
+      ]);
+
+      return {
+        ...token,
+        metadata: tokenWithMetadata.metadata ?? token.metadata ?? null,
+      };
+    },
     enabled: canisterId !== null && tokenId !== null,
   });
 

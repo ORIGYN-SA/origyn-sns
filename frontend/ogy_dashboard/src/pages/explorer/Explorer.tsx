@@ -27,11 +27,8 @@ const Section = ({
   children: ReactNode;
 }) => (
   <section>
-    {/* h-9 + mb-3 matches the carousel arrows (h-9 at -top-12), so the title
-        and action share their vertical center; sm:me-24 keeps the action
-        clear of them. */}
     <div className="flex items-center justify-between h-9 mb-3">
-      <h2 className="text-[22px] font-semibold leading-none text-content">
+      <h2 className="text-explorer-section font-semibold leading-none text-content">
         {title}
       </h2>
       {action && <div className="flex items-center sm:me-24">{action}</div>}
@@ -197,7 +194,7 @@ const SearchResults = ({
 
       {accounts.length > 0 && (
         <section>
-          <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
+          <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
             {t("explorer.search.collectors")}
           </h2>
           <div className="flex flex-col gap-2">
@@ -235,10 +232,10 @@ export const Explorer = () => {
   const categories = useNftCategories().data ?? [];
 
   return (
-    <div className="max-w-[1440px] mx-auto py-8 px-6 sm:py-16">
+    <div className="max-w-page mx-auto py-8 px-6 sm:py-16">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-[528px] sm:px-16 sm:py-8">
-          <h1 className="font-extrabold text-[40px] leading-[44px] sm:text-[64px] sm:leading-[60px] tracking-[-0.05em] text-center text-content">
+        <div className="flex flex-col items-center gap-2 px-6 py-6 max-w-explorer-heading sm:px-16 sm:py-8">
+          <h1 className="font-extrabold text-explorer-heading sm:text-explorer-heading-sm tracking-explorer-heading text-center text-content">
             {t("explorer.title")}
           </h1>
         </div>

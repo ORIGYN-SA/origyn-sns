@@ -2,7 +2,7 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalePath, useT } from "@i18n/LocaleContext";
 import useCollectionCover from "@hooks/nft/useCollectionCover";
-import { NftImage, OgyBadge } from "./NftCards";
+import { EXPLORER_TILE_CLASSES, NftImage, OgyBadge } from "./NftCards";
 
 export interface CollectionCardData {
   canister_id: string;
@@ -14,13 +14,11 @@ export interface CollectionCardData {
 }
 
 const CountPill = ({ value, label }: { value: number; label: string }) => (
-  <span className="inline-flex items-center rounded-full border border-border-faint bg-surface-muted px-2 py-1 text-muted font-normal text-[10px] leading-none">
+  <span className="inline-flex items-center rounded-full border border-border-faint bg-surface-muted px-2 py-1 text-muted font-normal text-explorer-label leading-none">
     {value} {label}
   </span>
 );
 
-// Follows the NftTile anatomy so collection and certificate cards read as one
-// family: same frame, image area, badge and typography.
 const CollectionCard = memo(function CollectionCard({
   collection,
 }: {
@@ -33,13 +31,13 @@ const CollectionCard = memo(function CollectionCard({
   return (
     <Link
       to={lp(`/explorer/collections/${collection.canister_id}`)}
-      className="w-[253px] h-[343px] rounded-xl border border-border-strong bg-surface pt-2 pe-2 pb-4 ps-2 flex flex-col gap-2.5 cursor-pointer transition-colors hover:border-content/40"
+      className={EXPLORER_TILE_CLASSES.frame}
     >
-      <div className="relative h-[229px] w-full">
+      <div className={EXPLORER_TILE_CLASSES.image}>
         <NftImage
           src={cover}
           alt={collection.name ?? collection.canister_id}
-          className="h-full w-full rounded-t-2xl overflow-hidden"
+          className={EXPLORER_TILE_CLASSES.imageMedia}
         />
         <div className="absolute top-2 end-2">
           <OgyBadge />
@@ -47,10 +45,10 @@ const CollectionCard = memo(function CollectionCard({
       </div>
       <div className="flex-1 flex flex-col justify-between px-1">
         <div className="flex flex-col gap-0.5">
-          <div className="font-medium text-[11px] leading-4 tracking-[1.6px] uppercase truncate text-muted">
+          <div className={`${EXPLORER_TILE_CLASSES.meta} text-muted`}>
             {collection.symbol ?? t("explorer.sections.collections")}
           </div>
-          <h3 className="font-semibold text-[15px] leading-snug text-content truncate">
+          <h3 className="font-semibold text-explorer-card-title leading-snug text-content truncate">
             {collection.name ?? collection.canister_id}
           </h3>
         </div>

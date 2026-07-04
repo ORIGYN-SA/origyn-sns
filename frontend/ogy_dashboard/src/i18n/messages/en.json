@@ -690,6 +690,7 @@
     "searchPlaceholder": "Search by title, issuer, principal or token ID",
     "checkOnBlockchain": "Check on blockchain",
     "unknownIssuer": "Unknown issuer",
+    "noImage": "No image",
     "searchResults": "Results for",
     "noResults": "No matching certificates found.",
     "loadError": "Couldn't load certificates. Please try again.",

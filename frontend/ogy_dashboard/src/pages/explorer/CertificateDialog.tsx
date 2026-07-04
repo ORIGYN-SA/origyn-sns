@@ -28,8 +28,8 @@ const CertificateDialog = ({
       handleClose={onClose}
       panelClassName={
         hasTemplate
-          ? "max-w-[1200px] max-h-[92vh] overflow-y-auto"
-          : "max-w-2xl max-h-[90vh] overflow-y-auto"
+          ? "max-w-certificate max-h-dialog-template overflow-y-auto"
+          : "max-w-2xl max-h-dialog overflow-y-auto"
       }
       floatingClose={!hasTemplate && !templateQuery.isLoading}
     >

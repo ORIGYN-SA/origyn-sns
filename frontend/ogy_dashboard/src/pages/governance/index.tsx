@@ -79,7 +79,7 @@ export const Governance = () => {
   );
 
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <div className="max-w-page mx-auto">
       <section className="relative isolate overflow-hidden">
         <HeroBackground />
 

@@ -6,7 +6,6 @@ import { toNftCard, NftCard } from "./mapNft";
 
 const ONE_MINUTE = 60 * 1000;
 
-// Paginated variant of useNfts: exposes the page total for grid pagination.
 const useNftsPage = (params: NftListParams = {}) => {
   const query = useQuery({
     queryKey: ["NFTS_PAGE", params],

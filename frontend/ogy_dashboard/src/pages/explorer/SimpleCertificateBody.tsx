@@ -7,7 +7,7 @@ import { BlockchainLink, IssuerLine, NftImage, OgyBadge } from "./NftCards";
 
 const DetailItem = ({ label, value }: { label: string; value: string }) => (
   <div className="flex flex-col gap-1 min-w-0">
-    <div className="text-[10px] font-medium tracking-[1.6px] uppercase text-muted">
+    <div className="text-explorer-label font-medium tracking-explorer-meta uppercase text-muted">
       {label}
     </div>
     <div className="text-sm text-content truncate" title={value}>
@@ -16,7 +16,6 @@ const DetailItem = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
-// Fallback certificate view for collections without a Minting Studio template.
 const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
   const t = useT();
   const [activeImage, setActiveImage] = useState<string | null>(null);
@@ -35,7 +34,7 @@ const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
         <NftImage
           src={mainImage}
           alt={nft.name}
-          className="w-full h-[320px] sm:h-[380px] rounded-t-xl"
+          className="w-full h-explorer-certificate-image sm:h-explorer-certificate-image-sm rounded-t-xl"
         />
         <div className="absolute top-3 start-3">
           <OgyBadge size={36} />
@@ -69,7 +68,7 @@ const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
       <div className="flex flex-col gap-4 p-6">
         <div className="flex flex-col gap-1">
           <IssuerLine issuer={nft.issuer} className="text-muted" />
-          <h2 className="font-extrabold text-2xl sm:text-3xl leading-tight tracking-[-0.02em] text-content">
+          <h2 className="font-extrabold text-2xl sm:text-3xl leading-tight tracking-explorer-hero text-content">
             {nft.name}
           </h2>
         </div>
@@ -105,7 +104,7 @@ const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
 
         <div className="flex items-center justify-between border-t border-border pt-4">
           <BlockchainLink canisterId={nft.canisterId} variant="detail" />
-          <span className="text-[10px] font-light tracking-[2px] uppercase text-muted">
+          <span className="text-explorer-label font-light tracking-explorer-fine uppercase text-muted">
             {t("explorer.detail.poweredBy")}
           </span>
         </div>

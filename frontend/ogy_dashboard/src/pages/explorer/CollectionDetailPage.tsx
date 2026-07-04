@@ -5,7 +5,11 @@ import { useT } from "@i18n/LocaleContext";
 import useNftCollectionDetail from "@hooks/nft/useNftCollectionDetail";
 import useNftsPage from "@hooks/nft/useNftsPage";
 import { NftCard } from "@hooks/nft/mapNft";
-import { NftImage, BlockchainLink } from "./NftCards";
+import {
+  EXPLORER_SKELETON_CLASSES,
+  NftImage,
+  BlockchainLink,
+} from "./NftCards";
 import NftGrid from "./NftGrid";
 import CertificateDialog from "./CertificateDialog";
 
@@ -13,7 +17,7 @@ const DEFAULT_PAGE_SIZE = 20;
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
   <div className="flex flex-col gap-1">
-    <div className="text-[10px] font-medium tracking-[1.6px] uppercase text-muted">
+    <div className="text-explorer-label font-medium tracking-explorer-meta uppercase text-muted">
       {label}
     </div>
     <div className="text-lg font-semibold text-content">{value}</div>
@@ -46,7 +50,7 @@ export const CollectionDetailPage = () => {
       />
       <div className="pt-8">
         {collection.isLoading ? (
-          <div className="h-[140px] rounded-xl bg-surface-2 animate-pulse mb-12" />
+          <div className={EXPLORER_SKELETON_CLASSES.collectionSummary} />
         ) : collection.isError || !info ? (
           <p className="text-muted mb-12">{t("explorer.loadError")}</p>
         ) : (
@@ -54,7 +58,7 @@ export const CollectionDetailPage = () => {
             <NftImage
               src={info.logo ?? cards[0]?.imageUrl ?? null}
               alt={info.name ?? info.canister_id}
-              className="h-[120px] w-[120px] shrink-0 rounded-xl overflow-hidden"
+              className="h-collection-logo w-collection-logo shrink-0 rounded-xl overflow-hidden"
             />
             <div className="flex flex-col gap-3 min-w-0">
               {info.description && (

@@ -36,7 +36,7 @@ const Layout = () => {
       <Navbar roundedTop={SHOW_LEDGER_SWITCH_WARNING} />
       <AuthDialogs />
       <div className="flex-grow w-full bg-background rounded-b-2xl relative z-10">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-page mx-auto">
           {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
         </div>
       </div>

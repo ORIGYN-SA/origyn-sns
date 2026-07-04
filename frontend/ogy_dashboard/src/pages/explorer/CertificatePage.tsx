@@ -4,7 +4,6 @@ import { useT } from "@i18n/LocaleContext";
 import useNftToken from "@hooks/nft/useNftToken";
 import CertificateContent, { CertificateSkeleton } from "./CertificateContent";
 
-// Deep-linkable certificate view: /explorer/certificate/:canisterId/:tokenId
 export const CertificatePage = () => {
   const t = useT();
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ export const CertificatePage = () => {
       />
       <div className="pt-8">
         {isLoading ? (
-          <div className="max-w-[1200px] mx-auto">
+          <div className="max-w-certificate mx-auto">
             <CertificateSkeleton />
           </div>
         ) : isError || !card ? (
@@ -28,7 +27,7 @@ export const CertificatePage = () => {
             {t("explorer.certificatePage.notFound")}
           </p>
         ) : (
-          <div className="max-w-[1200px] mx-auto rounded-xl bg-surface">
+          <div className="max-w-certificate mx-auto rounded-xl bg-surface">
             <CertificateContent nft={card} />
           </div>
         )}

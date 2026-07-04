@@ -28,12 +28,13 @@ export const CertificatesPage = () => {
 
   const handleCategoryChange = (next: string | undefined) => {
     setPageIndex(0);
+    const nextParams = new URLSearchParams(searchParams);
     if (next) {
-      searchParams.set("category", next);
+      nextParams.set("category", next);
     } else {
-      searchParams.delete("category");
+      nextParams.delete("category");
     }
-    setSearchParams(searchParams);
+    setSearchParams(nextParams, { replace: true });
   };
 
   const categoryPillClass = (active: boolean) =>

@@ -6,9 +6,7 @@ type PageContainerProps = {
 };
 
 const PageContainer = ({ children, className = "" }: PageContainerProps) => (
-  <div className={`max-w-[1287px] mx-auto pb-16 px-6 ${className}`}>
-    {children}
-  </div>
+  <div className={`max-w-page mx-auto pb-16 px-6 ${className}`}>{children}</div>
 );
 
 export default PageContainer;

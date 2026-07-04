@@ -97,7 +97,7 @@ const Footer = () => {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
       />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 pt-20 pb-10">
+      <div className="max-w-page mx-auto px-6 sm:px-10 pt-20 pb-10">
         <div
           dir="ltr"
           className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-10 xl:gap-8 text-center md:text-start"

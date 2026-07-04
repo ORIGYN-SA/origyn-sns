@@ -13,7 +13,7 @@ import {
 import { NftCard } from "@hooks/nft/mapNft";
 import NftGrid from "./NftGrid";
 import CollectionCard from "./CollectionCard";
-import { NftTile, SkeletonTile } from "./NftCards";
+import { EXPLORER_SKELETON_CLASSES, NftTile, SkeletonTile } from "./NftCards";
 import CertificateDialog from "./CertificateDialog";
 
 const DEFAULT_PAGE_SIZE = 20;
@@ -21,7 +21,7 @@ const PAST_LIMIT = 12;
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
   <div className="flex flex-col gap-1">
-    <div className="text-[10px] font-medium tracking-[1.6px] uppercase text-muted">
+    <div className="text-explorer-label font-medium tracking-explorer-meta uppercase text-muted">
       {label}
     </div>
     <div className="text-lg font-semibold text-content">{value}</div>
@@ -64,7 +64,7 @@ export const CollectorPage = () => {
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className="h-12 w-32 rounded-lg bg-surface-2 animate-pulse"
+                className={EXPLORER_SKELETON_CLASSES.stat}
               />
             ))}
           </div>
@@ -92,7 +92,7 @@ export const CollectorPage = () => {
 
         {(collections.isLoading || heldCollections.length > 0) && (
           <section className="mb-12">
-            <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
+            <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
               {t("explorer.collector.collectionsTitle")}
             </h2>
             <Carousel>
@@ -117,7 +117,7 @@ export const CollectorPage = () => {
         )}
 
         <section className="mb-12">
-          <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
+          <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
             {t("explorer.collector.certificatesTitle")}
           </h2>
           <NftGrid
@@ -137,7 +137,7 @@ export const CollectorPage = () => {
 
         {pastNfts.cards.length > 0 && (
           <section>
-            <h2 className="text-[22px] font-semibold leading-none text-content mb-6">
+            <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
               {t("explorer.collector.pastTitle")}
             </h2>
             <Carousel>

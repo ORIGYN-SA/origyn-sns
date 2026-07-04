@@ -10,7 +10,6 @@ import CertificateDialog from "@pages/explorer/CertificateDialog";
 
 const PREVIEW_LIMIT = 12;
 
-// Certificates held by the connected wallet. Hidden when the account owns none.
 const MyCertificates = ({ className = "" }: { className?: string }) => {
   const t = useT();
   const lp = useLocalePath();
@@ -26,7 +25,7 @@ const MyCertificates = ({ className = "" }: { className?: string }) => {
   return (
     <section className={className}>
       <div className="flex items-baseline justify-between mb-6">
-        <h2 className="text-[22px] font-semibold leading-none text-content">
+        <h2 className="text-explorer-section font-semibold leading-none text-content">
           {t("account.myCertificates.title")}
         </h2>
         {total > PREVIEW_LIMIT && principalId && (
