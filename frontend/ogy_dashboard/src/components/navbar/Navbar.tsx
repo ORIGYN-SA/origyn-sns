@@ -21,7 +21,7 @@ import { useT, useLocalePath } from "@i18n/LocaleContext";
 const navItems: { titleKey: string; url: string; requiresAuth?: boolean }[] = [
   { titleKey: "nav.dashboard", url: "/" },
   { titleKey: "nav.governance", url: "/governance" },
-  { titleKey: "nav.transactionHistory", url: "/transaction-history" },
+  { titleKey: "nav.explorer", url: "/explorer" },
   { titleKey: "nav.calculator", url: "/calculator" },
 ];
 
@@ -81,7 +81,7 @@ const Navbar = ({ roundedTop = false }: { roundedTop?: boolean }) => {
           showRounded ? "rounded-t-none sm:rounded-t-2xl" : "rounded-t-none"
         } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
       >
-        <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-[1440px] mx-auto px-6">
+        <div className="grid grid-cols-2 xl:grid-cols-5 items-stretch h-20 max-w-page mx-auto px-6">
           <div className="col-start-1 col-end-1 flex-shrink-0 flex items-center text-content">
             <BrandLogo labelClassName="hidden sm:block" />
           </div>

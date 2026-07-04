@@ -6,30 +6,27 @@ import {
   SNS_LEDGER_CANISTER_ID,
   ICP_LEDGER_CANISTER_ID,
   SNS_GOVERNANCE_CANISTER_ID,
-  TOKEN_METRICS_CANISTER_ID,
   LEGACY_LEDGER_CANISTER_ID,
   OGY_TOKEN_SWAP_CANISTER_ID,
   SNS_REWARDS_CANISTER_ID,
-  COLLECTION_INDEX_CANISTER_ID,
+  MINTING_STUDIO_CANISTER_ID,
 } from "@constants/index";
 
 import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
 import { idlFactory as ledgerIdl } from "@services/candid/sns_ledger";
 import { idlFactory as ledgerLegacyIdl } from "@services/candid/ledger.legacy";
-import { idlFactory as tokenMetricsIdl } from "@services/candid/token_metrics";
 import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
-import { idlFactory as collectionIndexIdl } from "@services/candid/collection_index";
+import { idlFactory as mintingStudioIdl } from "@services/candid/minting_studio";
 
 type CanisterKey =
   | "governance"
   | "ledger"
   | "ledgerLegacy"
   | "ledgerICP"
-  | "tokenMetrics"
-  | "collectionIndex"
   | "OGYTokenSwap"
-  | "SNSRewards";
+  | "SNSRewards"
+  | "mintingStudio";
 
 type CanisterConfig = {
   canisterId: string;
@@ -53,14 +50,6 @@ export const canisters: Record<CanisterKey, CanisterConfig> = {
     canisterId: ICP_LEDGER_CANISTER_ID,
     idlFactory: ledgerLegacyIdl,
   },
-  tokenMetrics: {
-    canisterId: TOKEN_METRICS_CANISTER_ID,
-    idlFactory: tokenMetricsIdl,
-  },
-  collectionIndex: {
-    canisterId: COLLECTION_INDEX_CANISTER_ID,
-    idlFactory: collectionIndexIdl,
-  },
   OGYTokenSwap: {
     canisterId: OGY_TOKEN_SWAP_CANISTER_ID,
     idlFactory: OGYTokenSwapIdl,
@@ -68,6 +57,10 @@ export const canisters: Record<CanisterKey, CanisterConfig> = {
   SNSRewards: {
     canisterId: SNS_REWARDS_CANISTER_ID,
     idlFactory: SNSRewardsIdl,
+  },
+  mintingStudio: {
+    canisterId: MINTING_STUDIO_CANISTER_ID,
+    idlFactory: mintingStudioIdl,
   },
 };
 
@@ -95,7 +88,8 @@ const AUTH_EXPIRY_PATTERNS: RegExp[] = [
 ];
 
 const isAuthExpiryError = (err: unknown): boolean => {
-  const message = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+  const message =
+    err instanceof Error ? `${err.name}: ${err.message}` : String(err);
   return AUTH_EXPIRY_PATTERNS.some((pattern) => pattern.test(message));
 };
 

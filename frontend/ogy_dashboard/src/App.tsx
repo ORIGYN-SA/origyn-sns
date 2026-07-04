@@ -1,9 +1,11 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   redirect,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
+import { LoaderSpin } from "@components/ui";
 
 import Layout from "@components/Layout";
 import Dashboard from "@pages/dashboard";
@@ -15,8 +17,7 @@ import { NeuronsDetails } from "@pages/neurons-details/NeuronsDetails";
 import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
-// NFT viewer (Explorer page) not routed yet. Re-enable by importing Explorer
-// from "@pages/explorer/Explorer" and pointing the "explorer" route at it.
+import { Explorer } from "@pages/explorer/Explorer";
 import { TransactionHistory } from "@pages/transaction-history/TransactionHistory";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
@@ -28,6 +29,46 @@ import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
 import LocaleGate, { LocaleRedirect } from "@i18n/LocaleGate";
 import { splitLocalePath } from "@i18n/paths";
+
+// Explorer subpages are code-split: they pull in the certificate viewer and
+// grid components, which the initial bundle does not need.
+const CertificatesPage = lazy(() =>
+  import("@pages/explorer/CertificatesPage").then((m) => ({
+    default: m.CertificatesPage,
+  }))
+);
+const CertificatePage = lazy(() =>
+  import("@pages/explorer/CertificatePage").then((m) => ({
+    default: m.CertificatePage,
+  }))
+);
+const CollectionsPage = lazy(() =>
+  import("@pages/explorer/CollectionsPage").then((m) => ({
+    default: m.CollectionsPage,
+  }))
+);
+const CollectionDetailPage = lazy(() =>
+  import("@pages/explorer/CollectionDetailPage").then((m) => ({
+    default: m.CollectionDetailPage,
+  }))
+);
+const CollectorPage = lazy(() =>
+  import("@pages/explorer/CollectorPage").then((m) => ({
+    default: m.CollectorPage,
+  }))
+);
+
+const LazyPage = ({ children }: { children: React.ReactNode }) => (
+  <Suspense
+    fallback={
+      <div className="flex items-center justify-center py-32">
+        <LoaderSpin size="md" />
+      </div>
+    }
+  >
+    {children}
+  </Suspense>
+);
 
 // Redirect to an in-app path while preserving the active locale prefix and the
 // inbound query string. Loaders run outside React context, so the locale is
@@ -112,9 +153,50 @@ const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                loader: ({ request }) =>
-                  redirectWithSearch(request, "/transaction-history"),
+                element: <Explorer />,
               },
+              {
+                path: "certificates",
+                element: (
+                  <LazyPage>
+                    <CertificatesPage />
+                  </LazyPage>
+                ),
+              },
+              {
+                path: "certificate/:canisterId/:tokenId",
+                element: (
+                  <LazyPage>
+                    <CertificatePage />
+                  </LazyPage>
+                ),
+              },
+              {
+                path: "collections",
+                element: (
+                  <LazyPage>
+                    <CollectionsPage />
+                  </LazyPage>
+                ),
+              },
+              {
+                path: "collections/:canisterId",
+                element: (
+                  <LazyPage>
+                    <CollectionDetailPage />
+                  </LazyPage>
+                ),
+              },
+              {
+                path: "collectors/:principal",
+                element: (
+                  <LazyPage>
+                    <CollectorPage />
+                  </LazyPage>
+                ),
+              },
+              // Legacy /explorer/transactions/* deep links still resolve to the
+              // transaction history page.
               {
                 path: "transactions/:index",
                 loader: ({ params, request }) =>
