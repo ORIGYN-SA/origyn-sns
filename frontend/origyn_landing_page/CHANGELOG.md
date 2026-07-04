@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
-### unreleased
+### [1.4.8] - 2026-07-04
+
+#### Added
+
+- Link new internal APIs
 
 ### [1.4.7] - 2026-05-28
 
