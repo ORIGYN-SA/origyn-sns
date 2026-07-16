@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.41] - 2026-07-16
+
+#### Changed
+
+- Renamed the NFT explorer to Viewer, including its URL.
+- Show each certificate's collection on cards and detail pages, linked to the collection.
+
 ### [1.0.40] - 2026-07-04
 
 #### Added
