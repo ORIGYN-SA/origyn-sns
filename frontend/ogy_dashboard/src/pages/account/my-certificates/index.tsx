@@ -30,7 +30,7 @@ const MyCertificates = ({ className = "" }: { className?: string }) => {
         </h2>
         {total > PREVIEW_LIMIT && principalId && (
           <Link
-            to={lp(`/explorer/collectors/${principalId}`)}
+            to={lp(`/viewer/collectors/${principalId}`)}
             className="text-sm text-muted hover:text-content transition-colors"
           >
             {t("explorer.viewAll")}

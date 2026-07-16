@@ -9,11 +9,17 @@ import { Certificate } from "@components/certificate/types";
 
 type NftLike = ApiNftItem | ApiNftHit | ApiNftAccountItem | ApiNftOwnedItem;
 
+interface NftCollectionRef {
+  canister_id: string;
+  name: string | null;
+}
+
 export interface NftCard {
   id: string;
   canisterId: string;
   tokenId: string;
   name: string;
+  collectionName: string | null;
   imageUrl: string | null;
   issuer: string | null;
   description: string | null;
@@ -59,7 +65,21 @@ const extractGallery = (
   return [...new Set(paths)].filter((path) => path !== mainImageUrl);
 };
 
-export const toNftCard = (nft: NftLike): NftCard => {
+export const collectionNamesById = (
+  collections?: NftCollectionRef[]
+): Map<string, string> => {
+  const names = new Map<string, string>();
+  for (const collection of collections ?? []) {
+    const name = readString(collection.name);
+    if (name) names.set(collection.canister_id, name);
+  }
+  return names;
+};
+
+export const toNftCard = (
+  nft: NftLike,
+  collectionNames?: Map<string, string>
+): NftCard => {
   const imageUrl = readString(nft.image_url);
   const ownerAccount =
     "owner_account" in nft
@@ -73,6 +93,7 @@ export const toNftCard = (nft: NftLike): NftCard => {
     canisterId: nft.collection,
     tokenId: nft.token_id,
     name: readString(nft.name) ?? `#${nft.token_id}`,
+    collectionName: collectionNames?.get(nft.collection) ?? null,
     imageUrl,
     issuer: extractIssuer(nft.metadata),
     description: readString(nft.description),

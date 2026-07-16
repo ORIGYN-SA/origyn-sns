@@ -682,7 +682,7 @@
     "submitting": "Gönderiliyor…"
   },
   "explorer": {
-    "title": "Gezgin",
+    "title": "Görüntüleyici",
     "searchPlaceholder": "Başlık, ihraç eden, principal veya token ID ile ara",
     "openFilters": "Filtreleri aç",
     "checkOnBlockchain": "Blok zincirinde kontrol et",

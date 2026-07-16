@@ -682,7 +682,7 @@
     "submitting": "Lähetetään…"
   },
   "explorer": {
-    "title": "Selain",
+    "title": "Katselin",
     "searchPlaceholder": "Hae otsikon, myöntäjän, principalin tai tokenin tunnuksen mukaan",
     "openFilters": "Avaa suodattimet",
     "checkOnBlockchain": "Tarkista lohkoketjusta",

@@ -682,7 +682,7 @@
     "submitting": "Verzenden…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Viewer",
     "searchPlaceholder": "Zoek op titel, uitgever, principal of token-ID",
     "openFilters": "Filters openen",
     "checkOnBlockchain": "Controleer op de blockchain",

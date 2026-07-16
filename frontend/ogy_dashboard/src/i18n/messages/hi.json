@@ -682,7 +682,7 @@
     "submitting": "सबमिट किया जा रहा है…"
   },
   "explorer": {
-    "title": "एक्सप्लोरर",
+    "title": "व्यूअर",
     "searchPlaceholder": "शीर्षक, जारीकर्ता, principal या टोकन ID द्वारा खोजें",
     "openFilters": "फ़िल्टर खोलें",
     "checkOnBlockchain": "ब्लॉकचेन पर जांचें",

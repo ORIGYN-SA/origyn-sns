@@ -682,7 +682,7 @@
     "submitting": "제출 중…"
   },
   "explorer": {
-    "title": "익스플로러",
+    "title": "뷰어",
     "searchPlaceholder": "제목, 발행자, 프린시펄 또는 토큰 ID로 검색",
     "openFilters": "필터 열기",
     "checkOnBlockchain": "블록체인에서 확인",

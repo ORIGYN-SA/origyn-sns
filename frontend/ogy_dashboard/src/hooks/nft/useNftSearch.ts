@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import fetchNftSearch from "@services/queries/nft/fetchNftSearch";
-import { toNftCard, NftCard } from "./mapNft";
+import { collectionNamesById, toNftCard, NftCard } from "./mapNft";
 
 const useNftSearch = (query: string) => {
   const q = query.trim();
@@ -15,10 +15,12 @@ const useNftSearch = (query: string) => {
     staleTime: 30 * 1000,
   });
 
-  const cards: NftCard[] = useMemo(
-    () => (result.data?.nfts ?? []).map(toNftCard),
-    [result.data]
-  );
+  // Search returns collection hits for the query, not a join table for the
+  // nft hits, so names only resolve when the nft's collection also matched.
+  const cards: NftCard[] = useMemo(() => {
+    const names = collectionNamesById(result.data?.collections);
+    return (result.data?.nfts ?? []).map((nft) => toNftCard(nft, names));
+  }, [result.data]);
 
   return {
     ...result,

@@ -682,7 +682,7 @@
     "submitting": "Отправка…"
   },
   "explorer": {
-    "title": "Обозреватель",
+    "title": "Просмотр",
     "searchPlaceholder": "Поиск по заголовку, эмитенту, principal или ID токена",
     "openFilters": "Открыть фильтры",
     "checkOnBlockchain": "Проверить в блокчейне",

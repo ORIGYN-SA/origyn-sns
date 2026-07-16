@@ -682,7 +682,7 @@
     "submitting": "Isinusumite…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Viewer",
     "searchPlaceholder": "Maghanap ayon sa pamagat, issuer, principal o token ID",
     "openFilters": "Buksan ang mga filter",
     "checkOnBlockchain": "Tingnan sa blockchain",

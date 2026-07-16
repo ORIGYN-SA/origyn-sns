@@ -682,7 +682,7 @@
     "submitting": "Wird übermittelt…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Viewer",
     "searchPlaceholder": "Nach Titel, Aussteller, Principal oder Token-ID suchen",
     "openFilters": "Filter öffnen",
     "checkOnBlockchain": "Auf der Blockchain prüfen",

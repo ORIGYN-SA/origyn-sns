@@ -682,7 +682,7 @@
     "submitting": "Đang gửi…"
   },
   "explorer": {
-    "title": "Trình khám phá",
+    "title": "Trình xem",
     "searchPlaceholder": "Tìm theo tiêu đề, nhà phát hành, principal hoặc token ID",
     "openFilters": "Mở bộ lọc",
     "checkOnBlockchain": "Kiểm tra trên blockchain",

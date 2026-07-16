@@ -54,6 +54,7 @@ export default {
       },
       height: {
         "explorer-tile": "343px",
+        "explorer-collection-tile": "326px",
         "explorer-tile-image": "229px",
         "explorer-hero": "360px",
         "explorer-certificate-image": "320px",

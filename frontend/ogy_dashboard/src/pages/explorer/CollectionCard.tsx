@@ -30,8 +30,8 @@ const CollectionCard = memo(function CollectionCard({
 
   return (
     <Link
-      to={lp(`/explorer/collections/${collection.canister_id}`)}
-      className={EXPLORER_TILE_CLASSES.frame}
+      to={lp(`/viewer/collections/${collection.canister_id}`)}
+      className={EXPLORER_TILE_CLASSES.collectionFrame}
     >
       <div className={EXPLORER_TILE_CLASSES.image}>
         <NftImage
@@ -55,12 +55,18 @@ const CollectionCard = memo(function CollectionCard({
         <div className="flex items-center gap-1.5">
           <CountPill
             value={collection.total_tokens}
-            label={t("explorer.collections.items")}
+            label={t.plural(
+              "explorer.collections.items",
+              collection.total_tokens
+            )}
           />
           {collection.distinct_holders !== undefined && (
             <CountPill
               value={collection.distinct_holders}
-              label={t("explorer.collections.holders")}
+              label={t.plural(
+                "explorer.collections.holders",
+                collection.distinct_holders
+              )}
             />
           )}
         </div>

@@ -149,7 +149,7 @@ const router = createBrowserRouter([
             element: <TokenDistribution />,
           },
           {
-            path: "explorer",
+            path: "viewer",
             children: [
               {
                 index: true,
@@ -195,8 +195,17 @@ const router = createBrowserRouter([
                   </LazyPage>
                 ),
               },
-              // Legacy /explorer/transactions/* deep links still resolve to the
-              // transaction history page.
+            ],
+          },
+          {
+            // Legacy /explorer/* deep links: transactions still resolve to
+            // the transaction history page, everything else to /viewer.
+            path: "explorer",
+            children: [
+              {
+                index: true,
+                loader: ({ request }) => redirectWithSearch(request, "/viewer"),
+              },
               {
                 path: "transactions/:index",
                 loader: ({ params, request }) =>
@@ -220,6 +229,11 @@ const router = createBrowserRouter([
                     request,
                     `/transaction-history/transactions/accounts/${params.accountId}/history`
                   ),
+              },
+              {
+                path: "*",
+                loader: ({ params, request }) =>
+                  redirectWithSearch(request, `/viewer/${params["*"]}`),
               },
             ],
           },
