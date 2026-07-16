@@ -682,7 +682,7 @@
     "submitting": "שולח…"
   },
   "explorer": {
-    "title": "סייר",
+    "title": "מציג",
     "searchPlaceholder": "חפש לפי כותרת, מנפיק, principal או מזהה אסימון",
     "openFilters": "פתח מסננים",
     "checkOnBlockchain": "בדוק בבלוקצ׳יין",

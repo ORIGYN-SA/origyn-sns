@@ -682,7 +682,7 @@
     "submitting": "Υποβολή…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Viewer",
     "searchPlaceholder": "Αναζήτηση με τίτλο, εκδότη, principal ή token ID",
     "openFilters": "Άνοιγμα φίλτρων",
     "checkOnBlockchain": "Έλεγχος στο blockchain",

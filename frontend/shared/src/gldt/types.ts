@@ -311,7 +311,14 @@ export interface ApiNftCategoriesResponse {
 }
 
 export type ApiNftCollectionsResponse = ApiNftPage<ApiNftCollection>;
-export type ApiNftItemsResponse = ApiNftPage<ApiNftItem>;
+
+// NFT list endpoints also return the collections referenced by the page's
+// items, so cards can show collection info without extra requests.
+export type ApiNftListPage<T> = ApiNftPage<T> & {
+  collections?: ApiNftCollection[];
+};
+
+export type ApiNftItemsResponse = ApiNftListPage<ApiNftItem>;
 
 export interface ApiNftHit {
   collection: string;

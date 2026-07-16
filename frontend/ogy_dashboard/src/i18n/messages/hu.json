@@ -682,7 +682,7 @@
     "submitting": "Küldés…"
   },
   "explorer": {
-    "title": "Böngésző",
+    "title": "Megtekintő",
     "searchPlaceholder": "Keresés cím, kibocsátó, principal vagy token azonosító szerint",
     "openFilters": "Szűrők megnyitása",
     "checkOnBlockchain": "Ellenőrzés a blokkláncon",

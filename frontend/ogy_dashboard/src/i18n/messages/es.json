@@ -682,7 +682,7 @@
     "submitting": "Enviando…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Visor",
     "searchPlaceholder": "Buscar por título, emisor, principal o ID de token",
     "openFilters": "Abrir filtros",
     "checkOnBlockchain": "Comprobar en la blockchain",

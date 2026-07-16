@@ -682,7 +682,7 @@
     "submitting": "Изпращане…"
   },
   "explorer": {
-    "title": "Изследовател",
+    "title": "Визуализатор",
     "searchPlaceholder": "Търсене по заглавие, издател, принципал или ID на токен",
     "openFilters": "Отвори филтри",
     "checkOnBlockchain": "Провери в блокчейна",

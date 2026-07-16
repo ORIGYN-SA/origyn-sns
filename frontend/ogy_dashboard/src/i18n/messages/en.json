@@ -75,7 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Governance",
-    "explorer": "Explorer",
+    "explorer": "Viewer",
     "transactionHistory": "Transaction History",
     "calculator": "Calculator",
     "openMainMenu": "Open main menu",
@@ -686,7 +686,7 @@
     "submitting": "Submitting…"
   },
   "explorer": {
-    "title": "Explorer",
+    "title": "Viewer",
     "searchPlaceholder": "Search by title, issuer, principal or token ID",
     "checkOnBlockchain": "Check on blockchain",
     "unknownIssuer": "Unknown issuer",
@@ -705,8 +705,14 @@
       "collectors": "Matching collectors"
     },
     "collections": {
-      "items": "items",
-      "holders": "holders"
+      "items": {
+        "one": "item",
+        "other": "items"
+      },
+      "holders": {
+        "one": "holder",
+        "other": "holders"
+      }
     },
     "collectionsPage": {
       "title": "Collections"

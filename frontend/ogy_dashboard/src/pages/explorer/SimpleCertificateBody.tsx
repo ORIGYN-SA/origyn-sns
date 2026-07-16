@@ -1,23 +1,49 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
-import { useT } from "@i18n/LocaleContext";
+import { useLocalePath, useT } from "@i18n/LocaleContext";
 import { shortenId } from "@helpers/strings";
 import { NftCard } from "@hooks/nft/mapNft";
 import { BlockchainLink, IssuerLine, NftImage, OgyBadge } from "./NftCards";
 
-const DetailItem = ({ label, value }: { label: string; value: string }) => (
+export const DetailItem = ({
+  label,
+  value,
+  to,
+}: {
+  label: string;
+  value: string;
+  to?: string;
+}) => (
   <div className="flex flex-col gap-1 min-w-0">
     <div className="text-explorer-label font-medium tracking-explorer-meta uppercase text-muted">
       {label}
     </div>
-    <div className="text-sm text-content truncate" title={value}>
-      {value}
-    </div>
+    {to ? (
+      <Link
+        to={to}
+        className="text-sm text-content truncate hover:underline"
+        title={value}
+      >
+        {value}
+      </Link>
+    ) : (
+      <div className="text-sm text-content truncate" title={value}>
+        {value}
+      </div>
+    )}
   </div>
 );
 
-const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
+const SimpleCertificateBody = ({
+  nft,
+  collectionName,
+}: {
+  nft: NftCard;
+  collectionName?: string | null;
+}) => {
   const t = useT();
+  const lp = useLocalePath();
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
   const images = [nft.imageUrl, ...nft.gallery].filter(
@@ -92,12 +118,14 @@ const SimpleCertificateBody = ({ nft }: { nft: NftCard }) => {
           )}
           <DetailItem
             label={t("explorer.detail.collection")}
-            value={shortenId(nft.canisterId)}
+            value={collectionName ?? shortenId(nft.canisterId)}
+            to={lp(`/viewer/collections/${nft.canisterId}`)}
           />
           {nft.ownerAccount && (
             <DetailItem
               label={t("explorer.detail.owner")}
               value={shortenId(nft.ownerAccount)}
+              to={lp(`/viewer/collectors/${nft.ownerAccount}`)}
             />
           )}
         </div>

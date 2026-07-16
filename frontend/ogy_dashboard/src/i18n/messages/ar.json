@@ -682,7 +682,7 @@
     "submitting": "جارٍ الإرسال…"
   },
   "explorer": {
-    "title": "المستكشف",
+    "title": "العارض",
     "searchPlaceholder": "ابحث بالعنوان أو المُصدِر أو الحساب الرئيسي أو معرّف الرمز",
     "openFilters": "فتح عوامل التصفية",
     "checkOnBlockchain": "تحقق على البلوكتشين",

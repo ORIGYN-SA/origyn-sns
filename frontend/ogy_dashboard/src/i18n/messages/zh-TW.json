@@ -682,7 +682,7 @@
     "submitting": "正在提交…"
   },
   "explorer": {
-    "title": "瀏覽器",
+    "title": "檢視器",
     "searchPlaceholder": "按標題、發行方、principal 或 token ID 搜尋",
     "openFilters": "開啟篩選器",
     "checkOnBlockchain": "在區塊鏈上查看",

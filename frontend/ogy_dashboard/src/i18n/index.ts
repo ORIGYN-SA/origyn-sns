@@ -20,6 +20,11 @@ export type Translate = {
   (key: string): string;
   /** Resolve a dot-path to its raw value (array/object/string). */
   raw: <T>(key: string) => T;
+  /**
+   * Resolve a count-dependent label. The key must point to an object with
+   * `one`/`other` variants; locales without a `one` variant use `other`.
+   */
+  plural: (key: string, count: number) => string;
 };
 
 // Build the translator for a locale. Missing keys fall back to the default
@@ -38,7 +43,14 @@ export const getT = (locale: Locale | string | undefined): Translate => {
     return typeof value === "string" ? value : key;
   }) as Translate;
 
-  t.raw = <T,>(key: string) => lookup(key) as T;
+  t.raw = <T>(key: string) => lookup(key) as T;
+
+  const pluralRules = new Intl.PluralRules(active);
+  t.plural = (key: string, count: number) => {
+    const form = pluralRules.select(count) === "one" ? "one" : "other";
+    const value = lookup(`${key}.${form}`) ?? lookup(`${key}.other`);
+    return typeof value === "string" ? value : key;
+  };
 
   return t;
 };
