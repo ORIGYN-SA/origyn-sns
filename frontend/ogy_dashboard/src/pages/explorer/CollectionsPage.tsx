@@ -4,7 +4,7 @@ import { PageContainer, PageHeader, TablePagination } from "@components/ui";
 import { useT } from "@i18n/LocaleContext";
 import useNftCollections from "@hooks/nft/useNftCollections";
 import CollectionCard from "./CollectionCard";
-import { EXPLORER_TILE_CLASSES } from "./NftCards";
+import { EXPLORER_SKELETON_CLASSES } from "./NftCards";
 
 const DEFAULT_PAGE_SIZE = 20;
 
@@ -37,7 +37,10 @@ export const CollectionsPage = () => {
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
               {isLoading
                 ? Array.from({ length: 8 }).map((_, i) => (
-                    <div key={i} className={EXPLORER_TILE_CLASSES.skeleton} />
+                    <div
+                      key={i}
+                      className={EXPLORER_SKELETON_CLASSES.collectionTile}
+                    />
                   ))
                 : collections.map((collection) => (
                     <CollectionCard

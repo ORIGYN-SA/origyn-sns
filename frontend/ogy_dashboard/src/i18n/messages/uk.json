@@ -682,7 +682,7 @@
     "submitting": "Надсилання…"
   },
   "explorer": {
-    "title": "Оглядач",
+    "title": "Переглядач",
     "searchPlaceholder": "Пошук за заголовком, емітентом, principal або ID токена",
     "openFilters": "Відкрити фільтри",
     "checkOnBlockchain": "Перевірити в блокчейні",

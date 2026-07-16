@@ -91,7 +91,7 @@ const FeaturedSection = ({ onSelect }: { onSelect: OnSelectNft }) => {
   return (
     <Section
       title={t("explorer.sections.featured")}
-      action={<ViewAllLink to="/explorer/certificates" />}
+      action={<ViewAllLink to="/viewer/certificates" />}
     >
       {isLoading ? (
         <SkeletonCarouselItems hero />
@@ -112,7 +112,7 @@ const CollectionsSection = () => {
   return (
     <Section
       title={t("explorer.sections.collections")}
-      action={<ViewAllLink to="/explorer/collections" />}
+      action={<ViewAllLink to="/viewer/collections" />}
     >
       {isLoading ? (
         <SkeletonCarouselItems />
@@ -201,7 +201,7 @@ const SearchResults = ({
             {accounts.map((account) => (
               <Link
                 key={account.principal}
-                to={lp(`/explorer/collectors/${account.principal}`)}
+                to={lp(`/viewer/collectors/${account.principal}`)}
                 className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3 transition-colors hover:border-content/40"
               >
                 <span
@@ -211,7 +211,8 @@ const SearchResults = ({
                   {shortenId(account.principal)}
                 </span>
                 <span className="text-xs text-muted">
-                  {account.held_tokens} {t("explorer.collections.items")}
+                  {account.held_tokens}{" "}
+                  {t.plural("explorer.collections.items", account.held_tokens)}
                 </span>
               </Link>
             ))}

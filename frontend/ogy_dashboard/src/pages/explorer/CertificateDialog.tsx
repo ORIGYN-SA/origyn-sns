@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ChevronRightIcon } from "@components/ui/icons";
 import { Dialog } from "@components/ui";
 import { useLocalePath, useT } from "@i18n/LocaleContext";
 import useCollectionTemplate from "@hooks/nft/useCollectionTemplate";
@@ -34,12 +35,13 @@ const CertificateDialog = ({
       floatingClose={!hasTemplate && !templateQuery.isLoading}
     >
       <CertificateContent nft={nft} />
-      <div className="flex justify-center pb-4">
+      <div className="flex justify-center pb-6">
         <Link
-          to={lp(`/explorer/certificate/${nft.canisterId}/${nft.tokenId}`)}
-          className="text-xs text-muted hover:text-content transition-colors"
+          to={lp(`/viewer/certificate/${nft.canisterId}/${nft.tokenId}`)}
+          className="inline-flex items-center gap-2 rounded-full bg-content px-5 py-2.5 text-explorer-link-detail font-medium text-surface transition-opacity hover:opacity-80"
         >
           {t("explorer.detail.openPage")}
+          <ChevronRightIcon className="rtl:-scale-x-100" aria-hidden />
         </Link>
       </div>
     </Dialog>

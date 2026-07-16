@@ -682,7 +682,7 @@
     "submitting": "Se trimite…"
   },
   "explorer": {
-    "title": "Explorator",
+    "title": "Vizualizator",
     "searchPlaceholder": "Caută după titlu, emitent, principal sau ID token",
     "openFilters": "Deschide filtrele",
     "checkOnBlockchain": "Verifică pe blockchain",

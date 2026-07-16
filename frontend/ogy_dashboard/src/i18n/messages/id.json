@@ -682,7 +682,7 @@
     "submitting": "Mengirim…"
   },
   "explorer": {
-    "title": "Penjelajah",
+    "title": "Penampil",
     "searchPlaceholder": "Cari berdasarkan judul, penerbit, principal, atau ID token",
     "openFilters": "Buka filter",
     "checkOnBlockchain": "Periksa di blockchain",

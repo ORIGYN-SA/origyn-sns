@@ -1,5 +1,6 @@
 import { KeyboardEvent, memo, useEffect, useState } from "react";
-import { useT } from "@i18n/LocaleContext";
+import { Link } from "react-router-dom";
+import { useLocalePath, useT } from "@i18n/LocaleContext";
 import { BlockchainIcon, CheckmarkCircleIcon } from "@components/ui/icons";
 import { NftCard, nftBlockchainUrl } from "@hooks/nft/mapNft";
 
@@ -7,6 +8,8 @@ export type OnSelectNft = (nft: NftCard) => void;
 
 export const EXPLORER_SKELETON_CLASSES = {
   tile: "w-explorer-tile h-explorer-tile rounded-xl bg-muted/20 animate-pulse",
+  collectionTile:
+    "w-explorer-tile h-explorer-collection-tile rounded-xl bg-muted/20 animate-pulse",
   heroTile:
     "w-explorer-hero sm:w-explorer-hero-sm h-explorer-hero rounded-2xl bg-muted/20 animate-pulse",
   image:
@@ -20,9 +23,12 @@ export const EXPLORER_SKELETON_CLASSES = {
     "h-certificate-skeleton sm:h-certificate-skeleton-sm rounded-3xl bg-muted/20 animate-pulse",
 } as const;
 
+const TILE_FRAME_BASE =
+  "group w-explorer-tile overflow-hidden rounded-xl border border-border-strong bg-surface pt-2 pe-2 pb-3 ps-2 flex flex-col gap-2.5 cursor-pointer focus:outline-none focus-visible:border-content/60 focus-visible:ring-2 focus-visible:ring-content/30";
+
 export const EXPLORER_TILE_CLASSES = {
-  frame:
-    "group w-explorer-tile h-explorer-tile overflow-hidden rounded-xl border border-border-strong bg-surface pt-2 pe-2 pb-4 ps-2 flex flex-col gap-2.5 cursor-pointer focus:outline-none focus-visible:border-content/60 focus-visible:ring-2 focus-visible:ring-content/30",
+  frame: `${TILE_FRAME_BASE} h-explorer-tile`,
+  collectionFrame: `${TILE_FRAME_BASE} h-explorer-collection-tile`,
   heroFrame:
     "relative w-explorer-hero sm:w-explorer-hero-sm h-explorer-hero overflow-hidden rounded-2xl border border-border-strong bg-surface group cursor-pointer focus:outline-none focus-visible:border-content/60 focus-visible:ring-2 focus-visible:ring-content/30",
   image: "relative h-explorer-tile-image w-full overflow-hidden rounded-t-2xl",
@@ -230,6 +236,27 @@ export const IssuerLine = ({
   );
 };
 
+const CollectionLink = ({
+  nft,
+  className,
+}: {
+  nft: NftCard;
+  className: string;
+}) => {
+  const lp = useLocalePath();
+  if (!nft.collectionName) return null;
+  return (
+    <Link
+      to={lp(`/viewer/collections/${nft.canisterId}`)}
+      onClick={(e) => e.stopPropagation()}
+      onKeyDown={(e) => e.stopPropagation()}
+      className={`self-start max-w-full truncate hover:underline ${className}`}
+    >
+      {nft.collectionName}
+    </Link>
+  );
+};
+
 export const NftTile = memo(function NftTile({
   nft,
   onSelect,
@@ -255,9 +282,13 @@ export const NftTile = memo(function NftTile({
       <div className="flex-1 flex flex-col justify-between px-1">
         <div className="flex flex-col gap-0.5">
           <IssuerLine issuer={nft.issuer} className="text-muted" />
-          <h3 className="font-semibold text-explorer-card-title leading-snug text-content truncate">
+          <h3 className="font-semibold text-explorer-card-title leading-tight text-content truncate">
             {nft.name}
           </h3>
+          <CollectionLink
+            nft={nft}
+            className="text-explorer-label leading-4 text-muted"
+          />
         </div>
         <BlockchainLink canisterId={nft.canisterId} variant="tile" />
       </div>
@@ -292,6 +323,7 @@ export const NftHeroTile = memo(function NftHeroTile({
         <h3 className="font-extrabold text-explorer-hero-title sm:text-explorer-hero-title-sm leading-tight tracking-explorer-hero text-white line-clamp-2">
           {nft.name}
         </h3>
+        <CollectionLink nft={nft} className="text-explorer-meta text-white/70" />
         <div className="mt-1">
           <BlockchainLink canisterId={nft.canisterId} variant="hero" />
         </div>

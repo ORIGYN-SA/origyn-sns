@@ -17,6 +17,7 @@ import {
   ApiNftHolderEntry,
   ApiNftItem,
   ApiNftItemsResponse,
+  ApiNftListPage,
   ApiNftOwnedItem,
   ApiNftPage,
   ApiNftSearchResults,
@@ -266,7 +267,7 @@ export const createGldtEndpoints = (
         offset = 0,
       }: PageParams & { collection?: string; metadata?: boolean } = {},
     ) =>
-      get<ApiNftPage<ApiNftAccountItem>>(
+      get<ApiNftListPage<ApiNftAccountItem>>(
         nftPath(`accounts/${encodeURIComponent(principal)}/nfts`, {
           collection,
           metadata,
@@ -285,7 +286,7 @@ export const createGldtEndpoints = (
         metadata?: boolean;
       } = {},
     ) =>
-      get<ApiNftPage<ApiNftAccountItem>>(
+      get<ApiNftListPage<ApiNftAccountItem>>(
         nftPath(`accounts/${encodeURIComponent(principal)}/past-nfts`, {
           metadata,
           limit,
@@ -314,7 +315,7 @@ export const createGldtEndpoints = (
         metadata?: boolean;
       } = {},
     ) =>
-      get<ApiNftPage<ApiNftOwnedItem>>(
+      get<ApiNftListPage<ApiNftOwnedItem>>(
         nftPath(`owners/${encodeURIComponent(principal)}/nfts`, {
           metadata,
           limit,

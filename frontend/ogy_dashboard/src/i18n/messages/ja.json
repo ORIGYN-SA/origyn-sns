@@ -682,7 +682,7 @@
     "submitting": "送信中…"
   },
   "explorer": {
-    "title": "エクスプローラー",
+    "title": "ビューア",
     "searchPlaceholder": "タイトル、発行者、プリンシパル、トークン ID で検索",
     "openFilters": "フィルターを開く",
     "checkOnBlockchain": "ブロックチェーンで確認",

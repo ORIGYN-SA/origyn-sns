@@ -682,7 +682,7 @@
     "submitting": "กำลังส่ง…"
   },
   "explorer": {
-    "title": "ตัวสำรวจ",
+    "title": "ตัวแสดง",
     "searchPlaceholder": "ค้นหาตามชื่อเรื่อง ผู้ออก principal หรือ token ID",
     "openFilters": "เปิดตัวกรอง",
     "checkOnBlockchain": "ตรวจสอบบนบล็อกเชน",

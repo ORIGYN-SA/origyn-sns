@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import fetchNfts, { FetchNftsParams } from "@services/queries/nft/fetchNfts";
-import { toNftCard, NftCard } from "./mapNft";
+import { collectionNamesById, toNftCard, NftCard } from "./mapNft";
 
 const ONE_MINUTE = 60 * 1000;
 
@@ -13,10 +13,10 @@ const useNfts = (params: FetchNftsParams = {}) => {
     staleTime: ONE_MINUTE,
   });
 
-  const cards: NftCard[] = useMemo(
-    () => (query.data ?? []).map(toNftCard),
-    [query.data]
-  );
+  const cards: NftCard[] = useMemo(() => {
+    const names = collectionNamesById(query.data?.collections);
+    return (query.data?.items ?? []).map((nft) => toNftCard(nft, names));
+  }, [query.data]);
 
   return { ...query, cards };
 };

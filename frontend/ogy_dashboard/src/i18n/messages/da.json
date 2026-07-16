@@ -682,7 +682,7 @@
     "submitting": "Indsender…"
   },
   "explorer": {
-    "title": "Udforsker",
+    "title": "Fremviser",
     "searchPlaceholder": "Søg efter titel, udsteder, principal eller token-ID",
     "openFilters": "Åbn filtre",
     "checkOnBlockchain": "Tjek på blockchain",

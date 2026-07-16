@@ -682,7 +682,7 @@
     "submitting": "Skickar…"
   },
   "explorer": {
-    "title": "Utforskare",
+    "title": "Visare",
     "searchPlaceholder": "Sök efter titel, utgivare, principal eller token-ID",
     "openFilters": "Öppna filter",
     "checkOnBlockchain": "Kontrollera på blockkedjan",

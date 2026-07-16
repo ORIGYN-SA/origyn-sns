@@ -68,11 +68,17 @@ export const CollectionDetailPage = () => {
               )}
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-2">
                 <Stat
-                  label={t("explorer.collections.items")}
+                  label={t.plural(
+                    "explorer.collections.items",
+                    info.total_tokens
+                  )}
                   value={String(info.total_tokens)}
                 />
                 <Stat
-                  label={t("explorer.collections.holders")}
+                  label={t.plural(
+                    "explorer.collections.holders",
+                    info.distinct_holders
+                  )}
                   value={String(info.distinct_holders)}
                 />
                 <BlockchainLink
