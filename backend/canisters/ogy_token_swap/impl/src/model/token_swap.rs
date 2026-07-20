@@ -12,7 +12,7 @@ use ogy_token_swap_api::{
 };
 use serde::{Deserialize, Serialize};
 use tracing::error;
-use types::{SwapStatistics, UserSwap};
+use types::{StuckStage, StuckSwap, SwapStatistics, UserSwap};
 
 use crate::{
     compute_deposit_account,
@@ -294,16 +294,23 @@ impl TokenSwap {
         let mut stats = SwapStatistics::default();
         self.history
             .iter()
-            .for_each(|entry| Self::analyse_swap_block(&mut stats, &entry.value()));
+            .for_each(|entry| Self::analyse_swap_block(&mut stats, *entry.key(), &entry.value()));
         self.swap
             .iter()
-            .for_each(|(_, info)| Self::analyse_swap_block(&mut stats, &info));
+            .for_each(|(block_index, info)| Self::analyse_swap_block(&mut stats, *block_index, info));
         stats
     }
 
-    fn analyse_swap_block(statistics: &mut SwapStatistics, info: &SwapInfo) {
+    fn analyse_swap_block(
+        statistics: &mut SwapStatistics,
+        block_index: BlockIndex,
+        info: &SwapInfo,
+    ) {
         statistics.number_of_attempted_swaps += 1;
-        match info.status {
+        // Terminal states are counted; every in-progress state is a stuck swap and gets recorded
+        // with its block index so an operator can feed it to the recovery endpoints. The match is
+        // exhaustive so a new SwapStatus variant forces a decision here instead of being dropped.
+        let stage = match info.status {
             SwapStatus::Complete(_) => {
                 statistics.total_amount_swapped += info.amount;
                 statistics.number_of_completed_swaps += 1;
@@ -323,11 +330,26 @@ impl TokenSwap {
                         );
                     }
                 }
+                return;
             }
             SwapStatus::Failed(_) => {
                 statistics.number_of_failed_swaps += 1;
+                return;
             }
-            _ => {}
-        }
+            SwapStatus::Init => StuckStage::Init,
+            SwapStatus::BlockRequest(_) => StuckStage::BlockRequest,
+            SwapStatus::BlockValid => StuckStage::BlockValid,
+            SwapStatus::BurnRequest(_) => StuckStage::BurnRequest,
+            SwapStatus::BurnSuccess => StuckStage::BurnSuccess,
+            SwapStatus::TransferRequest(_) => StuckStage::TransferRequest,
+        };
+        statistics.number_of_stuck_swaps += 1;
+        statistics.stuck_swaps.push(StuckSwap {
+            block_index,
+            principal: info.principal,
+            stage,
+            last_request: info.last_request,
+            amount: info.amount,
+        });
     }
 }

@@ -19,7 +19,7 @@ use ogy_token_swap_api::{
     },
 };
 use pocket_ic::PocketIc;
-use types::{CanisterId, SwapStatistics, UserSwap};
+use types::{CanisterId, StuckStage, StuckSwap, SwapStatistics, UserSwap};
 use utils::consts::{E8S_FEE_OGY, E8S_PER_OGY};
 
 use crate::{
@@ -1480,9 +1480,58 @@ fn test_swap_statistics_single_swap() {
         number_of_attempted_swaps: 1,
         number_of_completed_swaps: 1,
         number_of_failed_swaps: 0,
+        number_of_stuck_swaps: 0,
         user_swaps: swaps,
+        stuck_swaps: vec![],
     };
     assert_eq!(res, expected_res);
+}
+
+#[test]
+fn test_swap_statistics_stuck_swap() {
+    let mut env = init();
+
+    let amount = Nat::from(1_000_000_000u64);
+
+    let user = user_init(&mut env, amount.clone());
+
+    init_swap_pool(&mut env, Nat::from(9_400_000_000 * E8S_PER_OGY));
+
+    user_token_swap_valid(&mut env, user, Nat::from(1u8));
+
+    // Force the (now completed + archived) swap back into a non-terminal state so it is stuck.
+    manipulate_swap_status(
+        &mut env.pic,
+        env.controller,
+        env.canister_ids.ogy_swap,
+        1u64,
+        SwapStatus::TransferRequest(TransferRequestArgs {
+            created_at_time: None,
+            to: Account {
+                owner: user,
+                subaccount: None,
+            },
+            amount: amount.clone(),
+            memo: None,
+        }),
+    );
+
+    let res = swapping_statistics(&env.pic, Principal::anonymous(), env.canister_ids.ogy_swap);
+
+    // The manipulated entry was moved out of history, so nothing counts as completed anymore.
+    assert_eq!(res.number_of_completed_swaps, 0);
+    assert_eq!(res.number_of_attempted_swaps, 1);
+    assert_eq!(res.number_of_stuck_swaps, 1);
+
+    // last_request is set by the canister clock, so copy the observed value into the expectation.
+    let expected_stuck = StuckSwap {
+        block_index: 1,
+        principal: user,
+        stage: StuckStage::TransferRequest,
+        last_request: res.stuck_swaps.first().map(|s| s.last_request).unwrap_or(0),
+        amount: 1_000_000_000u64 - E8S_FEE_OGY,
+    };
+    assert_eq!(res.stuck_swaps, vec![expected_stuck]);
 }
 
 #[test]
@@ -1518,7 +1567,9 @@ fn test_swap_statistics_many_swap() {
         number_of_attempted_swaps: num_holders,
         number_of_completed_swaps: num_holders,
         number_of_failed_swaps: 0,
+        number_of_stuck_swaps: 0,
         user_swaps: HashMap::new(),
+        stuck_swaps: vec![],
     };
 
     assert_eq!(res, expected_res);
