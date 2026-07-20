@@ -6,7 +6,7 @@ use ic_cdk::post_upgrade;
 pub use ogy_token_swap_api::Args;
 use tracing::info;
 
-use crate::{memory::get_upgrades_memory, state::RuntimeState};
+use crate::{ memory::get_upgrades_memory, state::RuntimeState };
 
 use super::init_canister;
 
@@ -24,17 +24,19 @@ fn post_upgrade(args: Args) {
             let reader = get_reader(&memory);
 
             // NOTE: uncomment these lines if you want to do a normal upgrade
-            // let (mut state, logs, traces): (RuntimeState, Vec<LogEntry>, Vec<LogEntry>) = serializer
-            //     ::deserialize(reader)
-            //     .unwrap();
-
-            // NOTE: uncomment these lines if you want to do an upgrade with migration
-            let (runtime_state_v0, logs, traces): (
-                RuntimeStateV0,
+            let (mut state, logs, traces): (
+                RuntimeState,
                 Vec<LogEntry>,
                 Vec<LogEntry>,
             ) = bity_ic_serializer::deserialize(reader).unwrap();
-            let mut state = RuntimeState::from(runtime_state_v0);
+
+            // NOTE: uncomment these lines if you want to do an upgrade with migration
+            // let (runtime_state_v0, logs, traces): (
+            //     RuntimeStateV0,
+            //     Vec<LogEntry>,
+            //     Vec<LogEntry>,
+            // ) = bity_ic_serializer::deserialize(reader).unwrap();
+            // let mut state = RuntimeState::from(runtime_state_v0);
 
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
