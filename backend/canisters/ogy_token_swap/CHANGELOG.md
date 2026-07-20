@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.7] - 2026-07-20
+
+#### Added
+
+- **Swap statistics**: Include info about stuck swaps in swapping statistics.
+
+#### Updated
+
+- **Whitelist**: Remove whitelist for swaps.
+
 ### [1.0.6] - 2026-03-23
 
 #### Added
