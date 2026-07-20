@@ -72,6 +72,25 @@ type Response_3 = variant {
   Success : nat64;
   InternalError : text;
 };
+// The stage a non-terminal swap is stuck in. Mirrors the in-progress variants of
+// `ogy_token_swap_api::token_swap::SwapStatus` (which the `types` crate can't depend on).
+type StuckStage = variant {
+  BurnSuccess;
+  Init;
+  BlockRequest;
+  TransferRequest;
+  BurnRequest;
+  BlockValid;
+};
+type StuckSwap = record {
+  // Timestamp in ms of the last swap request for this block, to judge staleness.
+  last_request : nat64;
+  "principal" : principal;
+  // Legacy-ledger block index; the key of the swap map, used by the recovery endpoints.
+  block_index : nat64;
+  stage : StuckStage;
+  amount : nat64;
+};
 type SwapError = variant {
   BlockFailed : BlockFailReason;
   BurnFailed : BurnFailReason;
@@ -89,9 +108,11 @@ type SwapInfo = record {
   amount : nat64;
 };
 type SwapStatistics = record {
+  number_of_stuck_swaps : nat64;
   number_of_completed_swaps : nat64;
   user_swaps : vec record { principal; UserSwap };
   number_of_failed_swaps : nat64;
+  stuck_swaps : vec StuckSwap;
   total_amount_swapped : nat64;
   number_of_attempted_swaps : nat64;
 };
