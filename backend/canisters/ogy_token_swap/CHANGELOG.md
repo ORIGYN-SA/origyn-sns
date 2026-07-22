@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.8] - 2026-07-22
+
 #### Updated
 
 - **Whitelist**: Reinstate the whitelist for swaps. `swap_tokens` is again restricted to whitelisted or authorised principals, and `is_caller_whitelisted` reports the caller's actual whitelist status.
