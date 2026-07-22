@@ -32,6 +32,12 @@ pub use ogy_token_swap_api::{
 #[update]
 #[trace]
 pub async fn swap_tokens(args: SwapTokensArgs) -> SwapTokensResponse {
+    if !is_caller_allowed_to_swap() {
+        return SwapTokensResponse::InternalError(
+            "Can't perform the swap. Caller principal is neither in the whitelist of principals allowed to currently swap nor an authorised principal to perform the swap".to_string()
+        );
+    }
+
     let caller = read_state(|s| s.env.caller());
     let user = match args.user {
         Some(p) => p,
@@ -680,4 +686,8 @@ mod tests {
     fn init_swap(block_index: BlockIndex, principal: Principal) {
         let _ = mutate_state(|s| s.data.token_swap.init_swap(block_index, principal));
     }
+}
+
+pub fn is_caller_allowed_to_swap() -> bool {
+    read_state(|s| s.is_caller_whitelisted_principal() || s.is_caller_authorised_principal())
 }
