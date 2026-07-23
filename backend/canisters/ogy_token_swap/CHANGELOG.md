@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.9] - 2026-07-23
+
+#### Updated
+
+- **Minimum swap amount**: Lower the minimum swap amount from 1 OGY to 0.004 OGY (400,000 e8s), the lowest threshold at which the legacy ledger burn still succeeds. The effective minimum deposit is 0.002 OGY after the transfer fee.
+
 ### [1.0.8] - 2026-07-22
 
 #### Updated
