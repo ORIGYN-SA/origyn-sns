@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.2] - 2026-07-23
+
+#### Fixed
+- **Rewards transfer** : Decoupled the rewards transfer logic from the claim rewards result
+
 ### [1.1.1] - 2026-05-11
 
 #### Added

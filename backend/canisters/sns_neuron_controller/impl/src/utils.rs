@@ -321,6 +321,7 @@ pub async fn sns_rewards_claim_rewards(
         })
         .collect();
 
+    let total_neurons = neurons.iter().filter(|n| n.id.is_some()).count();
     let results = join_all(futures).await;
 
     let mut error_messages = Vec::new();
@@ -336,8 +337,13 @@ pub async fn sns_rewards_claim_rewards(
         ClaimRewardResult::Successful
     } else {
         let error_message = error_messages.join("\n");
-        error!("[sns_rewards_claim_rewards] Failed to claim rewards for neurons");
-        ClaimRewardResult::Failed(error_message)
+        if error_messages.len() >= total_neurons {
+            error!("[sns_rewards_claim_rewards] Failed to claim rewards for all neurons");
+            ClaimRewardResult::Failed(error_message)
+        } else {
+            info!("[sns_rewards_claim_rewards] Partially claimed rewards for neurons");
+            ClaimRewardResult::Partial(error_message)
+        }
     }
 }
 
