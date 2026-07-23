@@ -10,6 +10,7 @@ import {
   ApiTransactionsResponse,
 } from "@services/api/gldt/v1/types";
 import { Transaction as DashboardTransaction } from "@services/types/transactions.types";
+import { toOracleAccount } from "@helpers/principal";
 
 export interface AccountTransactionsParams {
   options?: UseQueryOptions<TransactionsDetails>;
@@ -84,7 +85,10 @@ const fn = async ({
   if (!account) return { data: [], total_transactions: 0 };
 
   const { data } = await gldtAPI.get<ApiTransactionsResponse>(
-    gldtTokenPath("transactions", { account, limit: 100 })
+    gldtTokenPath("transactions", {
+      account: toOracleAccount(account),
+      limit: 100,
+    })
   );
 
   return {

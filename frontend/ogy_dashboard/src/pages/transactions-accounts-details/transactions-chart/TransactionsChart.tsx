@@ -1,19 +1,17 @@
 import {
   ChangeEvent,
   KeyboardEvent,
+  useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { Data, Network, Options } from "vis-network/standalone/esm/vis-network";
 import { divideBy1e8, roundAndFormatLocale } from "@helpers/numbers";
+import { accountOwner } from "@helpers/principal";
 import useFetchAccountTransactions from "@hooks/accounts/useFetchAccountTransactions";
-import {
-  Transaction,
-  TransactionsDetails,
-} from "@services/queries/accounts/fetchAccountTransactions";
+import { TransactionsDetails } from "@services/queries/accounts/fetchAccountTransactions";
 import useThemeDetector from "@helpers/theme/useThemeDetector";
 import { Card } from "@components/ui";
 import { SearchIcon, CloseIcon } from "@components/ui/icons";
@@ -53,6 +51,8 @@ const ROOT_NODE = {
   border: "#5D627B",
   background: "#8A92B8",
 } as const;
+
+const MAP_AMOUNT = 10;
 
 const buildVisOptions = (): Options => ({
   nodes: {
@@ -99,22 +99,46 @@ const buildVisOptions = (): Options => ({
   },
 });
 
-const TransactionsChart = ({ id }: TransactionsChartProps) => {
+const useTransactionNetwork = ({
+  container,
+  data,
+  onSelect,
+}: {
+  container: HTMLDivElement | null;
+  data: Data | undefined;
+  onSelect: (nodeId: string) => void;
+}) => {
+  useEffect(() => {
+    if (!container || !data) return;
+
+    const network = new Network(container, data, buildVisOptions());
+    network.on("click", (properties) => {
+      const nodeId = network.getNodeAt({
+        x: properties.event.srcEvent.offsetX,
+        y: properties.event.srcEvent.offsetY,
+      });
+      if (nodeId !== undefined) onSelect(String(nodeId));
+    });
+    network.on("dragEnd", () => network.unselectAll());
+
+    return () => network.destroy();
+  }, [container, data, onSelect]);
+};
+
+const TransactionsChart = ({ id: rawId }: TransactionsChartProps) => {
   const t = useT();
   const lp = useLocalePath();
-  const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const [mapAmount] = useState(10);
+  const id = accountOwner(rawId);
   const darkTheme = useThemeDetector();
-  const [data, setData] = useState<Data>();
-  const [network, setNetwork] = useState<Network | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [searchterm, setSearchterm] = useState("");
 
   const {
     data: accountTxs,
     isLoading,
     isError,
-  } = useFetchAccountTransactions(id);
+  } = useFetchAccountTransactions(rawId);
 
   const surfaceColor = darkTheme ? "#202020" : "#FFFFFF";
   const edgeLabelColor = darkTheme ? "#A0A0A0" : "#69737C";
@@ -165,145 +189,138 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
     if (e.key === "Enter") e.preventDefault();
   };
 
-  const generateData = (accountTxs: TransactionsDetails): Data => {
-    const data = accountTxs.data;
-    const total = accountTxs.total_transactions;
+  const generateData = useCallback(
+    (transactions: TransactionsDetails): Data => {
+      const data = transactions.data;
+      const total = transactions.total_transactions;
 
-    const accounts = data
-      ? data.reduce((res: { [key: string]: Node }, item, index) => {
-          const result = res;
-          const amount = parseFloat(item.amount.replace(/,/g, ""));
+      const accounts = data
+        ? data.reduce((res: { [key: string]: Node }, item, index) => {
+            const result = res;
+            const amount = parseFloat(item.amount.replace(/,/g, ""));
 
-          if (item.from_owner === id && item.to_owner !== id) {
-            result[`i${item.to_owner}`] = {
-              ...result[`i${item.to_owner}`],
-              isTo: true,
-              toAmount: (res[`i${item.to_owner}`]?.toAmount || 0) + amount,
-              amount: (res[`i${item.to_owner}`]?.amount || 0) + amount,
-              count: (res[`i${item.to_owner}`]?.count || 0) + 1,
-              to: item.to_owner,
-              from: item.from_owner,
-            };
+            if (item.from_owner === id && item.to_owner !== id) {
+              result[item.to_owner] = {
+                ...result[item.to_owner],
+                isTo: true,
+                toAmount: (result[item.to_owner]?.toAmount || 0) + amount,
+                amount: (result[item.to_owner]?.amount || 0) + amount,
+                count: (result[item.to_owner]?.count || 0) + 1,
+                to: item.to_owner,
+                from: item.from_owner,
+              };
 
-            if (mapAmount > total && index === total - 1) {
-              result[`i${item.to_owner}`].isInitialTrans = true;
+              if (MAP_AMOUNT > total && index === total - 1) {
+                result[item.to_owner].isInitialTrans = true;
+              }
             }
-          }
-          if (item.to_owner === id && item.from_owner !== id) {
-            result[`o${item.from_owner}`] = {
-              ...result[`o${item.from_owner}`],
-              isFrom: true,
-              fromAmount:
-                (res[`o${item.from_owner}`]?.fromAmount || 0) + amount,
-              amount: (res[`o${item.from_owner}`]?.amount || 0) + amount,
-              count: (res[`o${item.from_owner}`]?.count || 0) + 1,
-              to: item.to_owner,
-              from: item.from_owner,
-            };
-            if (mapAmount > total && index === total - 1) {
-              result[`o${item.from_owner}`].isInitialTrans = true;
+            if (item.to_owner === id && item.from_owner !== id) {
+              result[item.from_owner] = {
+                ...result[item.from_owner],
+                isFrom: true,
+                fromAmount: (result[item.from_owner]?.fromAmount || 0) + amount,
+                amount: (result[item.from_owner]?.amount || 0) + amount,
+                count: (result[item.from_owner]?.count || 0) + 1,
+                to: item.to_owner,
+                from: item.from_owner,
+              };
+              if (MAP_AMOUNT > total && index === total - 1) {
+                result[item.from_owner].isInitialTrans = true;
+              }
             }
-          }
 
-          return result;
-        }, {})
-      : {};
+            return result;
+          }, {})
+        : {};
 
-    const _nodes = [
-      ...Object.keys(accounts).map((k) => ({
-        ...accounts[k],
-        id: k,
-        label: `${k.substring(1, 4)}...${k.substring(k.length - 3)}`,
+      const relatedNodes = Object.entries(accounts).map(([owner, account]) => ({
+        ...account,
+        id: `a${owner}`,
+        label: `${owner.substring(0, 3)}...${owner.substring(owner.length - 3)}`,
         font: {
           color:
             colors[
-              accounts[k].isInitialTrans
-                ? "inOut"
-                : accounts[k].isTo
-                  ? "out"
-                  : "in"
+              account.isInitialTrans ? "inOut" : account.isTo ? "out" : "in"
             ].border,
         },
         margin: 25,
         shape: "circle",
         color:
           colors[
-            accounts[k].isInitialTrans
-              ? "inOut"
-              : accounts[k].isTo
-                ? "out"
-                : "in"
+            account.isInitialTrans ? "inOut" : account.isTo ? "out" : "in"
           ],
-      })),
-    ];
+      }));
 
-    const nodes = [
-      {
-        id: id,
-        shape: "circle",
-        label: `${id?.substring(0, 4)}...${id?.substring(id.length - 4)}`,
-        margin: 25,
-        font: {
-          color: "#fff",
-        },
-        color: {
-          border: ROOT_NODE.border,
-          background: ROOT_NODE.background,
-          highlight: {
-            background: ROOT_NODE.background,
-            border: ROOT_NODE.border,
+      const nodes = [
+        {
+          id,
+          shape: "circle",
+          label: `${id.substring(0, 4)}...${id.substring(id.length - 4)}`,
+          margin: 25,
+          font: {
+            color: "#fff",
           },
-          inherit: false,
+          color: {
+            border: ROOT_NODE.border,
+            background: ROOT_NODE.background,
+            highlight: {
+              background: ROOT_NODE.background,
+              border: ROOT_NODE.border,
+            },
+            inherit: false,
+          },
         },
-      },
-      ..._nodes,
-    ];
+        ...relatedNodes,
+      ];
 
-    const edges = _nodes.map((node) => ({
-      from: id,
-      to: node.id,
-      dashes: [8, 16],
-      font: {
-        color: edgeLabelColor,
-        strokeWidth: 10,
-        strokeColor: surfaceColor,
-      },
-      label:
-        node.count > 1
-          ? `     ${node.count} ${t(
-              "transactions.flow.transactions"
-            )} \n ${roundAndFormatLocale({
-              number: divideBy1e8(node.amount),
-            })} OGY   `
-          : `     ${roundAndFormatLocale({
-              number: divideBy1e8(node.amount),
-            })} OGY     `,
-      title:
-        node.isTo && node.isFrom
-          ? `${t("transactions.flow.out")}: ${roundAndFormatLocale({
-              number: divideBy1e8(node.toAmount),
-            })} \n${t("transactions.flow.in")}: ${roundAndFormatLocale({
-              number: divideBy1e8(node.fromAmount),
-            })} \n ${t("transactions.flow.total")}: ${roundAndFormatLocale({
-              number: divideBy1e8(Math.abs(node.amount)),
-            })} OGY`
-          : `${t("transactions.flow.total")}: ${Math.abs(node.amount).toFixed(
-              2
-            )} OGY`,
-      arrows: node.isTo && node.isFrom ? "to, from" : node.isTo ? "to" : "from",
-      color:
-        colors[node.isInitialTrans ? "inOut" : node.isTo ? "out" : "in"].border,
-    }));
+      const edges = relatedNodes.map((node) => ({
+        from: id,
+        to: node.id,
+        dashes: [8, 16],
+        font: {
+          color: edgeLabelColor,
+          strokeWidth: 10,
+          strokeColor: surfaceColor,
+        },
+        label:
+          node.count > 1
+            ? `     ${node.count} ${t(
+                "transactions.flow.transactions"
+              )} \n ${roundAndFormatLocale({
+                number: divideBy1e8(node.amount),
+              })} OGY   `
+            : `     ${roundAndFormatLocale({
+                number: divideBy1e8(node.amount),
+              })} OGY     `,
+        title:
+          node.isTo && node.isFrom
+            ? `${t("transactions.flow.out")}: ${roundAndFormatLocale({
+                number: divideBy1e8(node.toAmount),
+              })} \n${t("transactions.flow.in")}: ${roundAndFormatLocale({
+                number: divideBy1e8(node.fromAmount),
+              })} \n ${t("transactions.flow.total")}: ${roundAndFormatLocale({
+                number: divideBy1e8(Math.abs(node.amount)),
+              })} OGY`
+            : `${t("transactions.flow.total")}: ${roundAndFormatLocale({
+                number: divideBy1e8(Math.abs(node.amount)),
+              })} OGY`,
+        arrows:
+          node.isTo && node.isFrom ? "to, from" : node.isTo ? "to" : "from",
+        color:
+          colors[node.isInitialTrans ? "inOut" : node.isTo ? "out" : "in"]
+            .border,
+      }));
 
-    return {
-      nodes: nodes as Node[],
-      edges,
-    };
-  };
+      return {
+        nodes: nodes as Node[],
+        edges,
+      };
+    },
+    [colors, edgeLabelColor, id, surfaceColor, t]
+  );
 
-  const filteredCount = useMemo(() => {
-    if (!accountTxs?.data) return 0;
-    if (!searchterm) return accountTxs.data.length;
+  const filteredTransactions = useMemo(() => {
+    if (!accountTxs?.data || !searchterm) return accountTxs?.data ?? [];
     return accountTxs.data.filter((tx) => {
       if (tx.to_account !== null && tx.from_account !== null) {
         return (
@@ -312,73 +329,31 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
         );
       }
       return false;
-    }).length;
+    });
   }, [accountTxs, searchterm]);
 
-  const showEmptyOverlay = !!searchterm && filteredCount === 0;
+  const data = useMemo(
+    () =>
+      accountTxs
+        ? generateData({
+            data: filteredTransactions,
+            total_transactions: accountTxs.total_transactions,
+          })
+        : undefined,
+    [accountTxs, filteredTransactions, generateData]
+  );
+  const showEmptyOverlay = !!searchterm && filteredTransactions.length === 0;
 
-  useEffect(() => {
-    if (accountTxs) {
-      if (searchterm) {
-        const searchedData = accountTxs?.data.filter((tx) => {
-          if (tx.to_account !== null && tx.from_account !== null) {
-            return (
-              tx.to_account.includes(searchterm) ||
-              tx.from_account.includes(searchterm)
-            );
-          }
-        });
-        setTimeout(() => {
-          setData(
-            generateData({
-              data: searchedData as Transaction[],
-              total_transactions: accountTxs?.total_transactions as number,
-            })
-          );
-        }, 300);
-      } else {
-        setData(generateData(accountTxs));
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accountTxs, id, darkTheme, searchterm]);
-
-  useEffect(() => {
-    if (ref.current && data) {
-      const instance = new Network(
-        ref.current,
-        data as Data,
-        buildVisOptions()
+  const handleNodeSelect = useCallback(
+    (nodeId: string) => {
+      if (nodeId === id) return;
+      navigate(
+        lp(`/transaction-history/transactions/accounts/${nodeId.slice(1)}`)
       );
-      setNetwork(instance);
-      return () => network?.destroy();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, id, mapAmount]);
-
-  useEffect(() => {
-    if (network) {
-      network.on("click", function (properties) {
-        const accountId = network.getNodeAt({
-          x: properties.event.srcEvent.offsetX,
-          y: properties.event.srcEvent.offsetY,
-        });
-        if (accountId) {
-          navigate(
-            lp(
-              `/transaction-history/transactions/accounts/${accountId.toString().slice(1)}`
-            )
-          );
-          return;
-        }
-      });
-
-      network.on("dragEnd", function () {
-        network.unselectAll();
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [network]);
+    },
+    [id, lp, navigate]
+  );
+  useTransactionNetwork({ container, data, onSelect: handleNodeSelect });
 
   return (
     <Card className="mt-16 !p-0 overflow-hidden">
@@ -415,7 +390,7 @@ const TransactionsChart = ({ id }: TransactionsChartProps) => {
 
       <div className="relative border-t border-border">
         <div
-          ref={ref}
+          ref={setContainer}
           dir="ltr"
           className="h-[560px] md:h-[680px] lg:h-[800px] w-full p-6"
         />
