@@ -575,16 +575,14 @@ mod tests {
 
         let mut block = dummy_block();
         if let Some(Operation::Transfer { ref mut amount, .. }) = block.transaction.operation {
-            *amount = Tokens::from_e8s(90_000_000u64);
+            *amount = Tokens::from_e8s(100_000u64);
         }
 
         let result = verify_block_data(&block, block_index, principal);
 
-        let expected_result = Err(
-            format!(
-                "Number of tokens in block is too small. Needs to be at least 100000000, found: 90200000."
-            )
-        );
+        let expected_result = Err(format!(
+            "Number of tokens in block is too small. Needs to be at least 400000, found: 300000."
+        ));
 
         assert_eq!(expected_result, result)
     }

@@ -403,7 +403,7 @@ fn test_swap_amount_too_small() {
     let ogy_new_ledger_minting_account = controller;
 
     let user = random_principal();
-    let amount = 1_000_000;
+    let amount = 300_000;
     // add user to whitelist
     let _ = update_whitelist_call(
         &mut pic,
@@ -453,11 +453,9 @@ fn test_swap_amount_too_small() {
 
     assert_eq!(
         result,
-        SwapTokensResponse::InternalError(
-            format!(
-                "Number of tokens in block is too small. Needs to be at least 100000000, found: 1000000."
-            )
-        )
+        SwapTokensResponse::InternalError(format!(
+            "Number of tokens in block is too small. Needs to be at least 400000, found: 300000."
+        ))
     );
 
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), 0u64);
