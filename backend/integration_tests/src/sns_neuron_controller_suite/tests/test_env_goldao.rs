@@ -238,3 +238,159 @@ fn test_process_goldao_neurons_happy_path() {
         initial_neuron_rewards_balance - Nat::from(2u32 * 100_000u32)
     );
 }
+
+#[test]
+fn test_process_goldao_neurons_partial_failure() {
+    let (ogy_neuron_data, _) = generate_neuron_data(
+        0,
+        1,
+        1,
+        &vec![Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap()],
+    );
+
+    // Generate 2 goldao neurons. Neuron 0 will have rewards, Neuron 1 will have 0 rewards (causing it to fail).
+    let (goldao_neuron_data, _) = generate_neuron_data(
+        0,
+        2,
+        1,
+        &vec![Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap()],
+    );
+
+    let env = TestEnvBuilder::new()
+        .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(ogy_neuron_data))
+        .add_sns(SnsConfig::new(SnsProject::GoldDao).with_neurons(goldao_neuron_data))
+        .add_token_ledger(&types::TokenSymbol::GLDT)
+        .add_token_ledger(&types::TokenSymbol::ICP)
+        .add_token_ledger(&types::TokenSymbol::WTN)
+        .build();
+    let pic = env.pic.borrow();
+    let goldao_ledger_canister_id = env
+        .get_ledger_canister_id(types::TokenSymbol::GOLDAO)
+        .unwrap();
+    let ogy_ledger_canister_id = env.get_ledger_canister_id(types::TokenSymbol::OGY).unwrap();
+
+    let goldao_rewards_canister_id = env.install_goldao_rewards(
+        Principal::from_text("iyehc-lqaaa-aaaap-ab25a-cai").unwrap(),
+        env.get_sns(SnsProject::GoldDao).test_env.governance_id,
+        TokenSymbol::ICP.ledger_id(false),
+        ogy_ledger_canister_id,
+        goldao_ledger_canister_id,
+    );
+
+    let rewards_destination = Principal::from_slice(&[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    let ogy_rewards_destination = Principal::from_slice(&[1, 2, 3, 0, 0, 0, 0, 0, 0, 0]);
+
+    let mut reward_tokens = HashMap::new();
+    reward_tokens.insert(
+        TokenSymbol::ICP,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::WTN,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::OGY,
+        TokenParams {
+            destination: ogy_rewards_destination.into(),
+            threshold: 0,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::GOLDAO,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 0,
+        },
+    );
+
+    let sns_neuron_controller_id = env.install_sns_neuron_controller(
+        Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap(),
+        env.get_sns(SnsProject::Ogy).test_env.governance_id,
+        env.get_sns(SnsProject::GoldDao).test_env.governance_id,
+        env.get_sns(SnsProject::GoldDao).test_env.ledger_id,
+        goldao_rewards_canister_id,
+        reward_tokens,
+    );
+
+    let initial_sns_rewards_balance = balance_of(
+        &pic,
+        goldao_ledger_canister_id,
+        Account {
+            owner: rewards_destination,
+            subaccount: None,
+        },
+    );
+
+    // Setup Neuron 0 with rewards (it should succeed to claim and distribute)
+    let neuron_0 = env
+        .get_sns(SnsProject::GoldDao)
+        .neuron_data
+        .get(&0usize)
+        .unwrap()
+        .clone();
+    let neuron_id_0 = neuron_0.id.unwrap();
+    assert!(neuron_0.permissions.get(0).unwrap().principal == Some(sns_neuron_controller_id));
+
+    let neuron_0_account = Account {
+        owner: goldao_rewards_canister_id,
+        subaccount: Some(neuron_id_0.clone().into()),
+    };
+
+    // Transfer "rewards" to Neuron 0
+    transfer(
+        &pic,
+        env.get_sns(SnsProject::GoldDao).test_env.governance_id,
+        goldao_ledger_canister_id,
+        None,
+        neuron_0_account,
+        300_000_000_000_000_u64,
+    )
+    .unwrap();
+    tick_n_blocks(&pic, 1);
+
+    // Neuron 1 will have 0 rewards (it will fail to claim because reward balance is <= fee)
+    let neuron_1 = env
+        .get_sns(SnsProject::GoldDao)
+        .neuron_data
+        .get(&1usize)
+        .unwrap()
+        .clone();
+    let neuron_id_1 = neuron_1.id.unwrap();
+    assert!(neuron_1.permissions.get(0).unwrap().principal == Some(sns_neuron_controller_id));
+
+    let neuron_1_account = Account {
+        owner: goldao_rewards_canister_id,
+        subaccount: Some(neuron_id_1.clone().into()),
+    };
+
+    // Check Neuron 1 balance is 0
+    let neuron_1_balance = balance_of(&pic, goldao_ledger_canister_id, neuron_1_account);
+    assert_eq!(neuron_1_balance, Nat::from(0u8));
+
+    // Advance time to trigger the daily cron job processing
+    pic.advance_time(Duration::from_secs(24 * 60 * 60));
+    tick_n_blocks(&pic, 100);
+
+    // Assert that the rewards from Neuron 0 were successfully claimed and distributed,
+    // even though claiming from Neuron 1 failed.
+    let current_sns_rewards_balance = balance_of(
+        &pic,
+        goldao_ledger_canister_id,
+        Account {
+            owner: rewards_destination,
+            subaccount: None,
+        },
+    );
+
+    let current_neuron_0_balance = balance_of(&pic, goldao_ledger_canister_id, neuron_0_account);
+    assert_eq!(current_neuron_0_balance, Nat::from(0u8));
+
+    assert!(initial_sns_rewards_balance < current_sns_rewards_balance);
+}
