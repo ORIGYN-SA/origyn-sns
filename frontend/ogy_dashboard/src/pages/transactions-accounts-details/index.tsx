@@ -14,7 +14,13 @@ import {
   TablePagination,
 } from "@components/ui";
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
-import { ChartStatsCard, PieStatsCard, Stat } from "@components/dashboard";
+import {
+  CardErrorOverlay,
+  ChartStatsCard,
+  PieStatsCard,
+  Stat,
+} from "@components/dashboard";
+import { HttpError } from "@services/api/httpClient";
 import { PieChartProvider } from "@components/charts/pie/context";
 import {
   getTransactionColumns,
@@ -147,10 +153,20 @@ const TransactionsAccountsDetails = () => {
     data,
     isLoading,
     isError: isAccountError,
+    error: accountError,
   } = useFecthOneAccount({
     accountId,
   });
-  const accountNotIndexed = !isLoading && isAccountError;
+  // Only a definitive "this account doesn't exist" answer (404, or 422 for a
+  // malformed id) counts as not indexed; any other failure is an API error
+  // and must not masquerade as an empty account.
+  const accountErrorStatus = (accountError as HttpError | null)?.status;
+  const accountNotIndexed =
+    !isLoading &&
+    isAccountError &&
+    (accountErrorStatus === 404 || accountErrorStatus === 422);
+  const isAccountLookupError =
+    !isLoading && isAccountError && !accountNotIndexed;
   const hasNoTransactions =
     accountNotIndexed || (data?.total_transactions === 0 && !isLoading);
 
@@ -259,6 +275,9 @@ const TransactionsAccountsDetails = () => {
       />
 
       <Card className="mt-8 !p-0 overflow-hidden">
+        {isAccountLookupError && (
+          <CardErrorOverlay title={t("transactions.accountDetails.title")} />
+        )}
         <SkeletonOverlay loading={isLoading}>
           <div className="grid grid-cols-1 lg:grid-cols-[3fr_1px_1fr]">
             <div className="py-8 px-5 flex flex-col gap-8">
@@ -330,7 +349,7 @@ const TransactionsAccountsDetails = () => {
         </SkeletonOverlay>
       </Card>
 
-      {hasNoTransactions ? (
+      {isAccountLookupError ? null : hasNoTransactions ? (
         <Card className="mt-16">
           <div className="flex flex-col items-center gap-3 text-center py-16 px-6">
             <h4 className="text-content text-base font-semibold">
@@ -375,9 +394,7 @@ const TransactionsAccountsDetails = () => {
               color: "#38bdf8",
               label: t("transactions.accountDetails.balanceHistory.legend"),
             }}
-            legendLabel={t(
-              "transactions.accountDetails.balanceHistory.legend"
-            )}
+            legendLabel={t("transactions.accountDetails.balanceHistory.legend")}
             loading={isLoadingBalance}
             isError={isBalanceError}
           />
@@ -389,7 +406,9 @@ const TransactionsAccountsDetails = () => {
                 data={overviewChartData}
                 colors={OVERVIEW_COLORS}
                 infos={overviewInfos}
-                totalLabel={t("transactions.accountDetails.overview.totalLabel")}
+                totalLabel={t(
+                  "transactions.accountDetails.overview.totalLabel"
+                )}
                 totalValue={
                   overview
                     ? roundAndFormatLocale({ number: overview.totalVolume })
