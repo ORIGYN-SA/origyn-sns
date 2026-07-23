@@ -458,6 +458,23 @@ fn test_swap_amount_too_small() {
         ))
     );
 
+    // a retry re-validates the block against the current minimum instead of
+    // permanently skipping a block that once failed with AmountTooSmall
+    pic.advance_time(Duration::from_secs(60));
+    let result = swap_tokens_authenticated_call(
+        &mut pic,
+        user,
+        ogy_token_swap_canister_id,
+        block_index_deposit,
+    );
+
+    assert_eq!(
+        result,
+        SwapTokensResponse::InternalError(format!(
+            "Number of tokens in block is too small. Needs to be at least 400000, found: 300000."
+        ))
+    );
+
     assert_eq!(balance_of(&pic, ogy_new_ledger_canister, user), 0u64);
 }
 

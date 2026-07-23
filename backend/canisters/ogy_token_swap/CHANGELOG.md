@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.10] - 2026-07-23
+
+#### Fixed
+
+- **Retry after AmountTooSmall**: Blocks that previously failed validation with `AmountTooSmall` are no longer skipped permanently. A retry re-validates the block against the current minimum, so deposits rejected under the old 1 OGY limit can be swapped after the upgrade.
+
 ### [1.0.9] - 2026-07-23
 
 #### Updated
