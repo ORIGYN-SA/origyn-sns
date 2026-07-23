@@ -112,11 +112,11 @@ impl TokenSwap {
                                         )
                                     }
                                     BlockFailReason::AmountTooSmall => {
-                                        // If the token amount in the block is was too small, there is no need for a swap.
-                                        // So there is no reason to retry checking this block.
-                                        Err(
-                                            "Amount of tokens in the block was too small. Skipping swap.".to_string()
-                                        )
+                                        // The amount in the block never changes, but the minimum swap
+                                        // amount can be lowered by an upgrade, so the block is
+                                        // re-validated against the current limit.
+                                        self.swap.insert(block_index, SwapInfo::new(principal));
+                                        Ok(Some(RecoverMode::RetryBlockValidation))
                                     }
                                 }
                             }
