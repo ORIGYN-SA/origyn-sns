@@ -15,7 +15,7 @@
     "deploy:preprod": "npm run build:preprod && dfx deploy origyn_landing_page --network=preprod"
   },
   "dependencies": {
-    "@origyn/shared-ui": "^0.1.1",
+    "@origyn/shared-ui": "^0.1.2",
     "@tanstack/react-query": "^5.74.4",
     "gsap": "^3.12.7",
     "motion": "^12.38.0",
