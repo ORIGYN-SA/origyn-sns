@@ -2,7 +2,7 @@ import {
   createGldtClient,
   createGldtEndpoints,
   makeTokenPath,
-} from "@origyn/shared/gldt";
+} from "@origyn/shared-ui/gldt";
 
 export const gldtClient = createGldtClient(
   import.meta.env.VITE_API_GLDT_BASE_URL,

@@ -1,1 +1,1 @@
-export type * from "@origyn/shared/gldt";
+export type * from "@origyn/shared-ui/gldt";

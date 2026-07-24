@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AreaStatCard } from "@origyn/shared/charts";
+import { AreaStatCard } from "@origyn/shared-ui/charts";
 import useTotalOGYBurned from "@/hooks/useTotalOGYBurned";
 
 const PERIOD_OPTIONS = [

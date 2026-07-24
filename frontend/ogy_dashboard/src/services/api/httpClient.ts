@@ -1,1 +1,1 @@
-export { createHttpClient, type HttpError } from "@origyn/shared/http";
+export { createHttpClient, type HttpError } from "@origyn/shared-ui/http";

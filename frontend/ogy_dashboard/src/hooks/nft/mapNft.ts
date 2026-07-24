@@ -5,7 +5,7 @@ import {
   ApiNftMetadata,
   ApiNftOwnedItem,
 } from "@services/api/gldt/v1/types";
-import { Certificate } from "@components/certificate/types";
+import { Certificate } from "@origyn/shared-ui/certificate";
 
 type NftLike = ApiNftItem | ApiNftHit | ApiNftAccountItem | ApiNftOwnedItem;
 

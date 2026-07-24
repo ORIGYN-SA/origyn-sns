@@ -1,4 +1,4 @@
-import { createGldtEndpoints } from "@origyn/shared/gldt";
+import { createGldtEndpoints } from "@origyn/shared-ui/gldt";
 import { GLDT_API_TOKEN_SYMBOL, GLDT_NFT_ENV } from "@constants/index";
 import gldtAPI from "./index";
 

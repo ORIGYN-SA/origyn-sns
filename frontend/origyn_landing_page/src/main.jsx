@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import LocaleGate, { LocaleRedirect } from "./i18n/LocaleGate";
-import "@origyn/shared/tokens.css";
+import "@origyn/shared-ui/tokens.css";
 import "./styles/tailwind.css";
 import "./styles/main.scss";
 
