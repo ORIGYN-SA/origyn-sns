@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Governance",
+    "explorer": "Viewer",
     "transactionHistory": "Transactiegeschiedenis",
     "calculator": "Calculator",
     "openMainMenu": "Hoofdmenu openen",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Aanmaken",
+      "transfer": "Overdracht",
+      "burn": "Verbranden",
+      "approve": "Goedkeuren"
+    },
     "history": {
       "title": "Transactiegeschiedenis",
       "searchFor": "Zoeken naar:",
@@ -464,12 +471,6 @@
         "toRoot": "Met transacties naar root",
         "madeInitial": "Heeft initiële transactie uitgevoerd"
       }
-    },
-    "kind": {
-      "mint": "Aanmaken",
-      "transfer": "Overdracht",
-      "burn": "Verbranden",
-      "approve": "Goedkeuren"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mijn certificaten"
+    },
     "neurons": {
       "list": {
         "title": "Mijn OGY-neuronen",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Viewer",
+    "subtitle": "Bekijk en verifieer ORIGYN-certificaten, collecties en verzamelaars op de blockchain.",
     "searchPlaceholder": "Zoek op titel, uitgever, principal of token-ID",
-    "openFilters": "Filters openen",
     "checkOnBlockchain": "Controleer op de blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Onbekende uitgever",
+    "noImage": "Geen afbeelding",
+    "searchResults": "Resultaten voor",
+    "noResults": "Geen overeenkomende certificaten gevonden.",
+    "loadError": "Certificaten konden niet worden geladen. Probeer het opnieuw.",
+    "viewAll": "Alles bekijken",
     "sections": {
       "featured": "Uitgelichte certificaten",
-      "art": "Kunstcertificaten",
-      "gold": "Goudcertificaten"
+      "collections": "Collecties"
+    },
+    "search": {
+      "noCertificates": "Geen certificaten gevonden. Bekijk hieronder collecties en verzamelaars.",
+      "collections": "Overeenkomende collecties",
+      "collectors": "Overeenkomende verzamelaars"
+    },
+    "collections": {
+      "items": {
+        "one": "item",
+        "other": "items"
+      },
+      "holders": {
+        "one": "houder",
+        "other": "houders"
+      }
+    },
+    "collectionsPage": {
+      "title": "Collecties"
+    },
+    "certificatesPage": {
+      "title": "Certificaten",
+      "all": "Alle"
+    },
+    "certificatePage": {
+      "notFound": "Certificaat niet gevonden."
+    },
+    "collector": {
+      "title": "Verzamelaar",
+      "owned": "Certificaten",
+      "collections": "Collecties",
+      "firstActivity": "Eerste activiteit",
+      "lastActivity": "Laatste activiteit",
+      "collectionsTitle": "Collecties",
+      "certificatesTitle": "Certificaten",
+      "pastTitle": "Eerder in bezit"
+    },
+    "detail": {
+      "certificate": "Certificaat",
+      "tokenId": "Token-ID",
+      "mintedOn": "Uitgegeven op",
+      "collection": "Collectie",
+      "owner": "Eigenaar",
+      "poweredBy": "Mogelijk gemaakt door ORIGYN",
+      "openPage": "Certificaatpagina openen"
     }
   },
   "ui": {

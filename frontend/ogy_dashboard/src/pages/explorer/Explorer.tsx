@@ -1,12 +1,18 @@
 import { ReactNode, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { Carousel, Search } from "@components/ui";
 import { useLocalePath, useT } from "@i18n/LocaleContext";
 import { shortenId } from "@helpers/strings";
+import { asValidPrincipal } from "@helpers/principal";
 import useNftCategories from "@hooks/nft/useNftCategories";
+import useNftCollection, {
+  collectionQueryOptions,
+} from "@hooks/nft/useNftCollection";
 import useNftCollections from "@hooks/nft/useNftCollections";
 import useNfts from "@hooks/nft/useNfts";
 import useNftSearch from "@hooks/nft/useNftSearch";
+import { useNftAccountStats } from "@hooks/nft/useNftAccount";
 import { NftCard } from "@hooks/nft/mapNft";
 import { NftHeroTile, NftTile, OnSelectNft, SkeletonTile } from "./NftCards";
 import CollectionCard from "./CollectionCard";
@@ -163,15 +169,49 @@ const SearchResults = ({
   const { cards, collections, accounts, isLoading, isError } =
     useNftSearch(query);
 
+  const queryPrincipal = asValidPrincipal(query);
+  const collectionQuery = useNftCollection(queryPrincipal);
+  const queryCollection = collectionQuery.data;
+  const collectionRows =
+    queryCollection &&
+    !collections.some(
+      (collection) => collection.canister_id === queryCollection.canister_id
+    )
+      ? [queryCollection, ...collections]
+      : collections;
+
+  const principalStats = useNftAccountStats(
+    collectionQuery.isSuccess && !queryCollection ? queryPrincipal : null
+  );
+  const showQueryPrincipalRow =
+    queryPrincipal !== null &&
+    collectionQuery.isSuccess &&
+    queryCollection === null &&
+    !accounts.some((account) => account.principal === queryPrincipal);
+  const accountRows = showQueryPrincipalRow
+    ? [
+        {
+          principal: queryPrincipal,
+          held_tokens: principalStats.data?.owned_count ?? 0,
+          created_collections: 0,
+        },
+        ...accounts,
+      ]
+    : accounts;
+
+  const isLoadingResults = isLoading || collectionQuery.isLoading;
+  const isErrorResults = isError || collectionQuery.isError;
   const isEmpty =
-    cards.length === 0 && collections.length === 0 && accounts.length === 0;
+    cards.length === 0 &&
+    collectionRows.length === 0 &&
+    accountRows.length === 0;
 
   return (
     <>
       <Section title={`${t("explorer.searchResults")} "${query}"`}>
-        {isLoading ? (
+        {isLoadingResults ? (
           <SkeletonCarouselItems />
-        ) : isError ? (
+        ) : isErrorResults ? (
           <p className="text-muted">{t("explorer.loadError")}</p>
         ) : isEmpty ? (
           <p className="text-muted">{t("explorer.noResults")}</p>
@@ -182,9 +222,9 @@ const SearchResults = ({
         )}
       </Section>
 
-      {collections.length > 0 && (
+      {collectionRows.length > 0 && (
         <Section title={t("explorer.search.collections")}>
-          {collections.map((collection) => (
+          {collectionRows.map((collection) => (
             <Carousel.Item key={collection.canister_id}>
               <CollectionCard collection={collection} />
             </Carousel.Item>
@@ -192,13 +232,13 @@ const SearchResults = ({
         </Section>
       )}
 
-      {accounts.length > 0 && (
+      {accountRows.length > 0 && (
         <section>
           <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
             {t("explorer.search.collectors")}
           </h2>
           <div className="flex flex-col gap-2">
-            {accounts.map((account) => (
+            {accountRows.map((account) => (
               <Link
                 key={account.principal}
                 to={lp(`/viewer/collectors/${account.principal}`)}
@@ -225,12 +265,37 @@ const SearchResults = ({
 
 export const Explorer = () => {
   const t = useT();
+  const lp = useLocalePath();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const searchTerm = (searchParams.get("searchterm") ?? "").trim();
   const isSearching = searchTerm.length > 0;
   const [selectedNft, setSelectedNft] = useState<NftCard | null>(null);
 
   const categories = useNftCategories().data ?? [];
+
+  const handleSearchEnter = async (value: string) => {
+    const principal = asValidPrincipal(value);
+    if (!principal) return;
+
+    let collection;
+    try {
+      collection = await queryClient.fetchQuery(
+        collectionQueryOptions(principal)
+      );
+    } catch {
+      return;
+    }
+
+    navigate(
+      lp(
+        collection
+          ? `/viewer/collections/${principal}`
+          : `/viewer/collectors/${principal}`
+      )
+    );
+  };
 
   return (
     <div className="max-w-page mx-auto py-8 px-6 sm:py-16">
@@ -239,12 +304,16 @@ export const Explorer = () => {
           <h1 className="font-extrabold text-explorer-heading sm:text-explorer-heading-sm tracking-explorer-heading text-center text-content">
             {t("explorer.title")}
           </h1>
+          <p className="font-light text-[16px] sm:text-[22px] leading-snug sm:leading-none text-center text-muted">
+            {t("explorer.subtitle")}
+          </p>
         </div>
 
         <Search
           id="search-explorer"
           placeholder={t("explorer.searchPlaceholder")}
           className="w-full max-w-2xl mt-4"
+          onEnter={handleSearchEnter}
         />
       </div>
 

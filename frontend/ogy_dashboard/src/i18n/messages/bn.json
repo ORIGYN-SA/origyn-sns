@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "ড্যাশবোর্ড",
     "governance": "গভর্ন্যান্স",
+    "explorer": "ভিউয়ার",
     "transactionHistory": "লেনদেনের ইতিহাস",
     "calculator": "ক্যালকুলেটর",
     "openMainMenu": "প্রধান মেনু খুলুন",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "মিন্ট",
+      "transfer": "স্থানান্তর",
+      "burn": "বার্ন",
+      "approve": "অনুমোদন"
+    },
     "history": {
       "title": "লেনদেনের ইতিহাস",
       "searchFor": "অনুসন্ধান করুন:",
@@ -464,12 +471,6 @@
         "toRoot": "রুটে লেনদেন সহ",
         "madeInitial": "প্রাথমিক লেনদেন করেছে"
       }
-    },
-    "kind": {
-      "mint": "মিন্ট",
-      "transfer": "স্থানান্তর",
-      "burn": "বার্ন",
-      "approve": "অনুমোদন"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "আমার সার্টিফিকেট"
+    },
     "neurons": {
       "list": {
         "title": "আমার OGY নিউরন",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "ভিউয়ার",
+    "subtitle": "ব্লকচেইনে ORIGYN সার্টিফিকেট, কালেকশন ও সংগ্রাহকদের ব্রাউজ ও যাচাই করুন।",
     "searchPlaceholder": "শিরোনাম, ইস্যুকারী, প্রিন্সিপাল বা টোকেন ID দিয়ে অনুসন্ধান করুন",
-    "openFilters": "ফিল্টার খুলুন",
     "checkOnBlockchain": "ব্লকচেইনে পরীক্ষা করুন",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "অজানা ইস্যুকারী",
+    "noImage": "কোনো ছবি নেই",
+    "searchResults": "অনুসন্ধানের ফলাফল",
+    "noResults": "কোনো মিলে যাওয়া সার্টিফিকেট পাওয়া যায়নি।",
+    "loadError": "সার্টিফিকেট লোড করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "viewAll": "সব দেখুন",
     "sections": {
       "featured": "বৈশিষ্ট্যযুক্ত সার্টিফিকেট",
-      "art": "আর্ট সার্টিফিকেট",
-      "gold": "গোল্ড সার্টিফিকেট"
+      "collections": "কালেকশন"
+    },
+    "search": {
+      "noCertificates": "কোনো সার্টিফিকেট মেলেনি। নিচে কালেকশন ও সংগ্রাহক দেখুন।",
+      "collections": "মিলে যাওয়া কালেকশন",
+      "collectors": "মিলে যাওয়া সংগ্রাহক"
+    },
+    "collections": {
+      "items": {
+        "one": "আইটেম",
+        "other": "আইটেম"
+      },
+      "holders": {
+        "one": "ধারক",
+        "other": "ধারক"
+      }
+    },
+    "collectionsPage": {
+      "title": "কালেকশন"
+    },
+    "certificatesPage": {
+      "title": "সার্টিফিকেট",
+      "all": "সব"
+    },
+    "certificatePage": {
+      "notFound": "সার্টিফিকেট পাওয়া যায়নি।"
+    },
+    "collector": {
+      "title": "সংগ্রাহক",
+      "owned": "সার্টিফিকেট",
+      "collections": "কালেকশন",
+      "firstActivity": "প্রথম কার্যকলাপ",
+      "lastActivity": "সর্বশেষ কার্যকলাপ",
+      "collectionsTitle": "কালেকশন",
+      "certificatesTitle": "সার্টিফিকেট",
+      "pastTitle": "পূর্বে মালিকানাধীন"
+    },
+    "detail": {
+      "certificate": "সার্টিফিকেট",
+      "tokenId": "টোকেন আইডি",
+      "mintedOn": "মিন্ট করা হয়েছে",
+      "collection": "কালেকশন",
+      "owner": "মালিক",
+      "poweredBy": "ORIGYN দ্বারা চালিত",
+      "openPage": "সার্টিফিকেট পৃষ্ঠা খুলুন"
     }
   },
   "ui": {

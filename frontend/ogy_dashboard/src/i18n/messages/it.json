@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Governance",
+    "explorer": "Visualizzatore",
     "transactionHistory": "Cronologia transazioni",
     "calculator": "Calcolatrice",
     "openMainMenu": "Apri il menu principale",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Conio",
+      "transfer": "Trasferimento",
+      "burn": "Bruciatura",
+      "approve": "Approvazione"
+    },
     "history": {
       "title": "Cronologia transazioni",
       "searchFor": "Cerca:",
@@ -464,12 +471,6 @@
         "toRoot": "Con transazioni verso la radice",
         "madeInitial": "Ha effettuato la transazione iniziale"
       }
-    },
-    "kind": {
-      "mint": "Conio",
-      "transfer": "Trasferimento",
-      "burn": "Bruciatura",
-      "approve": "Approvazione"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "I miei certificati"
+    },
     "neurons": {
       "list": {
         "title": "I miei neuroni OGY",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Visualizzatore",
+    "subtitle": "Esplora e verifica certificati, collezioni e collezionisti ORIGYN sulla blockchain.",
     "searchPlaceholder": "Cerca per titolo, emittente, principal o ID token",
-    "openFilters": "Apri filtri",
     "checkOnBlockchain": "Verifica sulla blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Emittente sconosciuto",
+    "noImage": "Nessuna immagine",
+    "searchResults": "Risultati per",
+    "noResults": "Nessun certificato corrispondente trovato.",
+    "loadError": "Impossibile caricare i certificati. Riprova.",
+    "viewAll": "Vedi tutto",
     "sections": {
       "featured": "Certificati in evidenza",
-      "art": "Certificati d'arte",
-      "gold": "Certificati oro"
+      "collections": "Collezioni"
+    },
+    "search": {
+      "noCertificates": "Nessun certificato corrisponde. Vedi collezioni e collezionisti qui sotto.",
+      "collections": "Collezioni corrispondenti",
+      "collectors": "Collezionisti corrispondenti"
+    },
+    "collections": {
+      "items": {
+        "one": "elemento",
+        "other": "elementi"
+      },
+      "holders": {
+        "one": "possessore",
+        "other": "possessori"
+      }
+    },
+    "collectionsPage": {
+      "title": "Collezioni"
+    },
+    "certificatesPage": {
+      "title": "Certificati",
+      "all": "Tutti"
+    },
+    "certificatePage": {
+      "notFound": "Certificato non trovato."
+    },
+    "collector": {
+      "title": "Collezionista",
+      "owned": "Certificati",
+      "collections": "Collezioni",
+      "firstActivity": "Prima attività",
+      "lastActivity": "Ultima attività",
+      "collectionsTitle": "Collezioni",
+      "certificatesTitle": "Certificati",
+      "pastTitle": "Posseduti in precedenza"
+    },
+    "detail": {
+      "certificate": "Certificato",
+      "tokenId": "ID token",
+      "mintedOn": "Coniato il",
+      "collection": "Collezione",
+      "owner": "Proprietario",
+      "poweredBy": "Con tecnologia ORIGYN",
+      "openPage": "Apri la pagina del certificato"
     }
   },
   "ui": {

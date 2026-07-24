@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Styring",
+    "explorer": "Fremviser",
     "transactionHistory": "Transaktionshistorik",
     "calculator": "Beregner",
     "openMainMenu": "Åbn hovedmenu",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Overførsel",
+      "burn": "Brænd",
+      "approve": "Godkend"
+    },
     "history": {
       "title": "Transaktionshistorik",
       "searchFor": "Søg efter:",
@@ -464,12 +471,6 @@
         "toRoot": "Med transaktioner til roden",
         "madeInitial": "Foretog indledende transaktion"
       }
-    },
-    "kind": {
-      "mint": "Mint",
-      "transfer": "Overførsel",
-      "burn": "Brænd",
-      "approve": "Godkend"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mine certifikater"
+    },
     "neurons": {
       "list": {
         "title": "Mine OGY Neuroner",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Fremviser",
+    "subtitle": "Gennemse og verificér ORIGYN-certifikater, samlinger og samlere på blockchainen.",
     "searchPlaceholder": "Søg efter titel, udsteder, principal eller token-ID",
-    "openFilters": "Åbn filtre",
     "checkOnBlockchain": "Tjek på blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Ukendt udsteder",
+    "noImage": "Intet billede",
+    "searchResults": "Resultater for",
+    "noResults": "Ingen matchende certifikater fundet.",
+    "loadError": "Certifikaterne kunne ikke indlæses. Prøv venligst igen.",
+    "viewAll": "Vis alle",
     "sections": {
       "featured": "Fremhævede certifikater",
-      "art": "Kunstcertifikater",
-      "gold": "Guldcertifikater"
+      "collections": "Samlinger"
+    },
+    "search": {
+      "noCertificates": "Ingen certifikater matchede. Se samlinger og samlere nedenfor.",
+      "collections": "Matchende samlinger",
+      "collectors": "Matchende samlere"
+    },
+    "collections": {
+      "items": {
+        "one": "genstand",
+        "other": "genstande"
+      },
+      "holders": {
+        "one": "indehaver",
+        "other": "indehavere"
+      }
+    },
+    "collectionsPage": {
+      "title": "Samlinger"
+    },
+    "certificatesPage": {
+      "title": "Certifikater",
+      "all": "Alle"
+    },
+    "certificatePage": {
+      "notFound": "Certifikatet blev ikke fundet."
+    },
+    "collector": {
+      "title": "Samler",
+      "owned": "Certifikater",
+      "collections": "Samlinger",
+      "firstActivity": "Første aktivitet",
+      "lastActivity": "Seneste aktivitet",
+      "collectionsTitle": "Samlinger",
+      "certificatesTitle": "Certifikater",
+      "pastTitle": "Tidligere ejet"
+    },
+    "detail": {
+      "certificate": "Certifikat",
+      "tokenId": "Token-ID",
+      "mintedOn": "Udstedt den",
+      "collection": "Samling",
+      "owner": "Ejer",
+      "poweredBy": "Drevet af ORIGYN",
+      "openPage": "Åbn certifikatside"
     }
   },
   "ui": {

@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Nadzorna ploča",
     "governance": "Upravljanje",
+    "explorer": "Preglednik",
     "transactionHistory": "Povijest transakcija",
     "calculator": "Kalkulator",
     "openMainMenu": "Otvori glavni izbornik",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Kovanje",
+      "transfer": "Prijenos",
+      "burn": "Spaljivanje",
+      "approve": "Odobrenje"
+    },
     "history": {
       "title": "Povijest transakcija",
       "searchFor": "Pretraži:",
@@ -464,12 +471,6 @@
         "toRoot": "S transakcijama prema korijenu",
         "madeInitial": "Izvršio početnu transakciju"
       }
-    },
-    "kind": {
-      "mint": "Kovanje",
-      "transfer": "Prijenos",
-      "burn": "Spaljivanje",
-      "approve": "Odobrenje"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Moji certifikati"
+    },
     "neurons": {
       "list": {
         "title": "Moji OGY neuroni",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Preglednik",
+    "subtitle": "Pregledajte i provjerite ORIGYN certifikate, kolekcije i kolekcionare na blockchainu.",
     "searchPlaceholder": "Pretraži po naslovu, izdavatelju, principalu ili ID-u tokena",
-    "openFilters": "Otvori filtre",
     "checkOnBlockchain": "Provjeri na blockchainu",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Nepoznat izdavatelj",
+    "noImage": "Nema slike",
+    "searchResults": "Rezultati za",
+    "noResults": "Nisu pronađeni odgovarajući certifikati.",
+    "loadError": "Certifikate nije moguće učitati. Pokušajte ponovno.",
+    "viewAll": "Prikaži sve",
     "sections": {
       "featured": "Istaknuti certifikati",
-      "art": "Umjetnički certifikati",
-      "gold": "Zlatni certifikati"
+      "collections": "Kolekcije"
+    },
+    "search": {
+      "noCertificates": "Nijedan certifikat ne odgovara. Pogledajte kolekcije i kolekcionare u nastavku.",
+      "collections": "Odgovarajuće kolekcije",
+      "collectors": "Odgovarajući kolekcionari"
+    },
+    "collections": {
+      "items": {
+        "one": "stavka",
+        "other": "stavki"
+      },
+      "holders": {
+        "one": "imatelj",
+        "other": "imatelja"
+      }
+    },
+    "collectionsPage": {
+      "title": "Kolekcije"
+    },
+    "certificatesPage": {
+      "title": "Certifikati",
+      "all": "Svi"
+    },
+    "certificatePage": {
+      "notFound": "Certifikat nije pronađen."
+    },
+    "collector": {
+      "title": "Kolekcionar",
+      "owned": "Certifikati",
+      "collections": "Kolekcije",
+      "firstActivity": "Prva aktivnost",
+      "lastActivity": "Posljednja aktivnost",
+      "collectionsTitle": "Kolekcije",
+      "certificatesTitle": "Certifikati",
+      "pastTitle": "Prethodno u vlasništvu"
+    },
+    "detail": {
+      "certificate": "Certifikat",
+      "tokenId": "ID tokena",
+      "mintedOn": "Izdano dana",
+      "collection": "Kolekcija",
+      "owner": "Vlasnik",
+      "poweredBy": "Pokreće ORIGYN",
+      "openPage": "Otvori stranicu certifikata"
     }
   },
   "ui": {

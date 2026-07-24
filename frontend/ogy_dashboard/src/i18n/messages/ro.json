@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Panou de control",
     "governance": "Guvernanță",
+    "explorer": "Vizualizator",
     "transactionHistory": "Istoric tranzacții",
     "calculator": "Calculator",
     "openMainMenu": "Deschide meniul principal",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Emitere",
+      "transfer": "Transfer",
+      "burn": "Ardere",
+      "approve": "Aprobare"
+    },
     "history": {
       "title": "Istoric tranzacții",
       "searchFor": "Caută:",
@@ -464,12 +471,6 @@
         "toRoot": "Cu tranzacții către rădăcină",
         "madeInitial": "A efectuat tranzacția inițială"
       }
-    },
-    "kind": {
-      "mint": "Emitere",
-      "transfer": "Transfer",
-      "burn": "Ardere",
-      "approve": "Aprobare"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Certificatele mele"
+    },
     "neurons": {
       "list": {
         "title": "Neuronii mei OGY",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Vizualizator",
+    "subtitle": "Explorați și verificați certificatele, colecțiile și colecționarii ORIGYN pe blockchain.",
     "searchPlaceholder": "Caută după titlu, emitent, principal sau ID token",
-    "openFilters": "Deschide filtrele",
     "checkOnBlockchain": "Verifică pe blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Emitent necunoscut",
+    "noImage": "Fără imagine",
+    "searchResults": "Rezultate pentru",
+    "noResults": "Nu s-au găsit certificate care să corespundă.",
+    "loadError": "Certificatele nu au putut fi încărcate. Vă rugăm să încercați din nou.",
+    "viewAll": "Vezi toate",
     "sections": {
       "featured": "Certificate recomandate",
-      "art": "Certificate de artă",
-      "gold": "Certificate de aur"
+      "collections": "Colecții"
+    },
+    "search": {
+      "noCertificates": "Niciun certificat nu corespunde. Vedeți colecțiile și colecționarii de mai jos.",
+      "collections": "Colecții care corespund",
+      "collectors": "Colecționari care corespund"
+    },
+    "collections": {
+      "items": {
+        "one": "articol",
+        "other": "articole"
+      },
+      "holders": {
+        "one": "deținător",
+        "other": "deținători"
+      }
+    },
+    "collectionsPage": {
+      "title": "Colecții"
+    },
+    "certificatesPage": {
+      "title": "Certificate",
+      "all": "Toate"
+    },
+    "certificatePage": {
+      "notFound": "Certificatul nu a fost găsit."
+    },
+    "collector": {
+      "title": "Colecționar",
+      "owned": "Certificate",
+      "collections": "Colecții",
+      "firstActivity": "Prima activitate",
+      "lastActivity": "Ultima activitate",
+      "collectionsTitle": "Colecții",
+      "certificatesTitle": "Certificate",
+      "pastTitle": "Deținute anterior"
+    },
+    "detail": {
+      "certificate": "Certificat",
+      "tokenId": "ID token",
+      "mintedOn": "Emis la",
+      "collection": "Colecție",
+      "owner": "Proprietar",
+      "poweredBy": "Susținut de ORIGYN",
+      "openPage": "Deschide pagina certificatului"
     }
   },
   "ui": {

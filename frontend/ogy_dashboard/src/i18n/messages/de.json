@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Governance",
+    "explorer": "Viewer",
     "transactionHistory": "Transaktionsverlauf",
     "calculator": "Rechner",
     "openMainMenu": "Hauptmenü öffnen",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Prägen",
+      "transfer": "Übertragen",
+      "burn": "Verbrennen",
+      "approve": "Genehmigen"
+    },
     "history": {
       "title": "Transaktionsverlauf",
       "searchFor": "Suchen nach:",
@@ -464,12 +471,6 @@
         "toRoot": "Mit Transaktionen zum Wurzelkonto",
         "madeInitial": "Erste Transaktion durchgeführt"
       }
-    },
-    "kind": {
-      "mint": "Prägen",
-      "transfer": "Übertragen",
-      "burn": "Verbrennen",
-      "approve": "Genehmigen"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Meine Zertifikate"
+    },
     "neurons": {
       "list": {
         "title": "Meine OGY-Neuronen",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Viewer",
+    "subtitle": "Entdecke und verifiziere ORIGYN-Zertifikate, Sammlungen und Sammler auf der Blockchain.",
     "searchPlaceholder": "Nach Titel, Aussteller, Principal oder Token-ID suchen",
-    "openFilters": "Filter öffnen",
     "checkOnBlockchain": "Auf der Blockchain prüfen",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Unbekannter Aussteller",
+    "noImage": "Kein Bild",
+    "searchResults": "Ergebnisse für",
+    "noResults": "Keine passenden Zertifikate gefunden.",
+    "loadError": "Zertifikate konnten nicht geladen werden. Bitte versuche es erneut.",
+    "viewAll": "Alle anzeigen",
     "sections": {
       "featured": "Empfohlene Zertifikate",
-      "art": "Kunst-Zertifikate",
-      "gold": "Gold-Zertifikate"
+      "collections": "Sammlungen"
+    },
+    "search": {
+      "noCertificates": "Keine Zertifikate gefunden. Sieh dir unten Sammlungen und Sammler an.",
+      "collections": "Passende Sammlungen",
+      "collectors": "Passende Sammler"
+    },
+    "collections": {
+      "items": {
+        "one": "Objekt",
+        "other": "Objekte"
+      },
+      "holders": {
+        "one": "Inhaber",
+        "other": "Inhaber"
+      }
+    },
+    "collectionsPage": {
+      "title": "Sammlungen"
+    },
+    "certificatesPage": {
+      "title": "Zertifikate",
+      "all": "Alle"
+    },
+    "certificatePage": {
+      "notFound": "Zertifikat nicht gefunden."
+    },
+    "collector": {
+      "title": "Sammler",
+      "owned": "Zertifikate",
+      "collections": "Sammlungen",
+      "firstActivity": "Erste Aktivität",
+      "lastActivity": "Letzte Aktivität",
+      "collectionsTitle": "Sammlungen",
+      "certificatesTitle": "Zertifikate",
+      "pastTitle": "Früher im Besitz"
+    },
+    "detail": {
+      "certificate": "Zertifikat",
+      "tokenId": "Token-ID",
+      "mintedOn": "Geprägt am",
+      "collection": "Sammlung",
+      "owner": "Eigentümer",
+      "poweredBy": "Powered by ORIGYN",
+      "openPage": "Zertifikatseite öffnen"
     }
   },
   "ui": {

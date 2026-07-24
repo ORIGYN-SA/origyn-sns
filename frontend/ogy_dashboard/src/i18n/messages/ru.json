@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Панель",
     "governance": "Управление",
+    "explorer": "Просмотр",
     "transactionHistory": "История транзакций",
     "calculator": "Калькулятор",
     "openMainMenu": "Открыть главное меню",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Эмиссия",
+      "transfer": "Перевод",
+      "burn": "Сжигание",
+      "approve": "Одобрение"
+    },
     "history": {
       "title": "История транзакций",
       "searchFor": "Искать:",
@@ -464,12 +471,6 @@
         "toRoot": "С транзакциями в корень",
         "madeInitial": "Совершил начальную транзакцию"
       }
-    },
-    "kind": {
-      "mint": "Эмиссия",
-      "transfer": "Перевод",
-      "burn": "Сжигание",
-      "approve": "Одобрение"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Мои сертификаты"
+    },
     "neurons": {
       "list": {
         "title": "Мои нейроны OGY",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Просмотр",
+    "subtitle": "Просматривайте и проверяйте сертификаты, коллекции и коллекционеров ORIGYN в блокчейне.",
     "searchPlaceholder": "Поиск по заголовку, эмитенту, principal или ID токена",
-    "openFilters": "Открыть фильтры",
     "checkOnBlockchain": "Проверить в блокчейне",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Неизвестный эмитент",
+    "noImage": "Нет изображения",
+    "searchResults": "Результаты по запросу",
+    "noResults": "Подходящие сертификаты не найдены.",
+    "loadError": "Не удалось загрузить сертификаты. Пожалуйста, попробуйте ещё раз.",
+    "viewAll": "Смотреть все",
     "sections": {
       "featured": "Избранные сертификаты",
-      "art": "Художественные сертификаты",
-      "gold": "Золотые сертификаты"
+      "collections": "Коллекции"
+    },
+    "search": {
+      "noCertificates": "Сертификаты не найдены. Смотрите коллекции и коллекционеров ниже.",
+      "collections": "Подходящие коллекции",
+      "collectors": "Подходящие коллекционеры"
+    },
+    "collections": {
+      "items": {
+        "one": "предмет",
+        "other": "предметов"
+      },
+      "holders": {
+        "one": "владелец",
+        "other": "владельцев"
+      }
+    },
+    "collectionsPage": {
+      "title": "Коллекции"
+    },
+    "certificatesPage": {
+      "title": "Сертификаты",
+      "all": "Все"
+    },
+    "certificatePage": {
+      "notFound": "Сертификат не найден."
+    },
+    "collector": {
+      "title": "Коллекционер",
+      "owned": "Сертификаты",
+      "collections": "Коллекции",
+      "firstActivity": "Первая активность",
+      "lastActivity": "Последняя активность",
+      "collectionsTitle": "Коллекции",
+      "certificatesTitle": "Сертификаты",
+      "pastTitle": "Ранее во владении"
+    },
+    "detail": {
+      "certificate": "Сертификат",
+      "tokenId": "ID токена",
+      "mintedOn": "Выпущен",
+      "collection": "Коллекция",
+      "owner": "Владелец",
+      "poweredBy": "На технологии ORIGYN",
+      "openPage": "Открыть страницу сертификата"
     }
   },
   "ui": {

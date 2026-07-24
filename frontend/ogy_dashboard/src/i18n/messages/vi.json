@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Bảng điều khiển",
     "governance": "Quản trị",
+    "explorer": "Trình xem",
     "transactionHistory": "Lịch sử giao dịch",
     "calculator": "Máy tính",
     "openMainMenu": "Mở menu chính",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Đúc",
+      "transfer": "Chuyển",
+      "burn": "Đốt",
+      "approve": "Phê duyệt"
+    },
     "history": {
       "title": "Lịch sử giao dịch",
       "searchFor": "Tìm kiếm:",
@@ -464,12 +471,6 @@
         "toRoot": "Có giao dịch đến gốc",
         "madeInitial": "Đã thực hiện giao dịch ban đầu"
       }
-    },
-    "kind": {
-      "mint": "Đúc",
-      "transfer": "Chuyển",
-      "burn": "Đốt",
-      "approve": "Phê duyệt"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Chứng chỉ của tôi"
+    },
     "neurons": {
       "list": {
         "title": "Neuron OGY của tôi",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Trình xem",
+    "subtitle": "Duyệt và xác minh chứng chỉ, bộ sưu tập và nhà sưu tầm ORIGYN trên blockchain.",
     "searchPlaceholder": "Tìm theo tiêu đề, nhà phát hành, principal hoặc token ID",
-    "openFilters": "Mở bộ lọc",
     "checkOnBlockchain": "Kiểm tra trên blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Đơn vị phát hành không xác định",
+    "noImage": "Không có hình ảnh",
+    "searchResults": "Kết quả cho",
+    "noResults": "Không tìm thấy chứng chỉ phù hợp.",
+    "loadError": "Không thể tải chứng chỉ. Vui lòng thử lại.",
+    "viewAll": "Xem tất cả",
     "sections": {
       "featured": "Chứng chỉ nổi bật",
-      "art": "Chứng chỉ nghệ thuật",
-      "gold": "Chứng chỉ vàng"
+      "collections": "Bộ sưu tập"
+    },
+    "search": {
+      "noCertificates": "Không có chứng chỉ nào phù hợp. Xem bộ sưu tập và nhà sưu tầm bên dưới.",
+      "collections": "Bộ sưu tập phù hợp",
+      "collectors": "Nhà sưu tầm phù hợp"
+    },
+    "collections": {
+      "items": {
+        "one": "mục",
+        "other": "mục"
+      },
+      "holders": {
+        "one": "người nắm giữ",
+        "other": "người nắm giữ"
+      }
+    },
+    "collectionsPage": {
+      "title": "Bộ sưu tập"
+    },
+    "certificatesPage": {
+      "title": "Chứng chỉ",
+      "all": "Tất cả"
+    },
+    "certificatePage": {
+      "notFound": "Không tìm thấy chứng chỉ."
+    },
+    "collector": {
+      "title": "Nhà sưu tầm",
+      "owned": "Chứng chỉ",
+      "collections": "Bộ sưu tập",
+      "firstActivity": "Hoạt động đầu tiên",
+      "lastActivity": "Hoạt động gần nhất",
+      "collectionsTitle": "Bộ sưu tập",
+      "certificatesTitle": "Chứng chỉ",
+      "pastTitle": "Từng sở hữu"
+    },
+    "detail": {
+      "certificate": "Chứng chỉ",
+      "tokenId": "ID token",
+      "mintedOn": "Phát hành ngày",
+      "collection": "Bộ sưu tập",
+      "owner": "Chủ sở hữu",
+      "poweredBy": "Được hỗ trợ bởi ORIGYN",
+      "openPage": "Mở trang chứng chỉ"
     }
   },
   "ui": {

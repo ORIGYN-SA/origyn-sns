@@ -2,6 +2,7 @@ import { OverviewResponse as Overview } from "@hooks/token_metrics/declarations_
 import gldtAPI from "@services/api/gldt/v1";
 import { gldtTokenPath, toBigInt } from "@services/api/gldt/v1/utils";
 import { ApiAccountOverviewResponse } from "@services/api/gldt/v1/types";
+import { toOracleAccount } from "@helpers/principal";
 
 const hasLedgerActivity = (
   ledger: ApiAccountOverviewResponse["overview"]["ledger"]
@@ -14,7 +15,9 @@ export const getPrincipalOverview = async ({
 }): Promise<Overview | null> => {
   try {
     const { data } = await gldtAPI.get<ApiAccountOverviewResponse>(
-      gldtTokenPath(`accounts/${encodeURIComponent(principalId)}/overview`)
+      gldtTokenPath(
+        `accounts/${encodeURIComponent(toOracleAccount(principalId))}/overview`
+      )
     );
     const { ledger } = data.overview;
     if (!hasLedgerActivity(ledger)) return null;

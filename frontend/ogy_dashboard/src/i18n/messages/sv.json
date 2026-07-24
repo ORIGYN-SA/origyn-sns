@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Instrumentpanel",
     "governance": "Styrning",
+    "explorer": "Visare",
     "transactionHistory": "Transaktionshistorik",
     "calculator": "Kalkylator",
     "openMainMenu": "Öppna huvudmenyn",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Skapa",
+      "transfer": "Överföring",
+      "burn": "Bränn",
+      "approve": "Godkänn"
+    },
     "history": {
       "title": "Transaktionshistorik",
       "searchFor": "Sök efter:",
@@ -464,12 +471,6 @@
         "toRoot": "Med transaktioner till roten",
         "madeInitial": "Gjorde initial transaktion"
       }
-    },
-    "kind": {
-      "mint": "Skapa",
-      "transfer": "Överföring",
-      "burn": "Bränn",
-      "approve": "Godkänn"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mina certifikat"
+    },
     "neurons": {
       "list": {
         "title": "Mina OGY-neuroner",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Visare",
+    "subtitle": "Bläddra bland och verifiera ORIGYN-certifikat, samlingar och samlare på blockkedjan.",
     "searchPlaceholder": "Sök efter titel, utgivare, principal eller token-ID",
-    "openFilters": "Öppna filter",
     "checkOnBlockchain": "Kontrollera på blockkedjan",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Okänd utfärdare",
+    "noImage": "Ingen bild",
+    "searchResults": "Resultat för",
+    "noResults": "Inga matchande certifikat hittades.",
+    "loadError": "Certifikaten kunde inte läsas in. Försök igen.",
+    "viewAll": "Visa alla",
     "sections": {
       "featured": "Utvalda certifikat",
-      "art": "Konstcertifikat",
-      "gold": "Guldcertifikat"
+      "collections": "Samlingar"
+    },
+    "search": {
+      "noCertificates": "Inga certifikat matchade. Se samlingar och samlare nedan.",
+      "collections": "Matchande samlingar",
+      "collectors": "Matchande samlare"
+    },
+    "collections": {
+      "items": {
+        "one": "objekt",
+        "other": "objekt"
+      },
+      "holders": {
+        "one": "innehavare",
+        "other": "innehavare"
+      }
+    },
+    "collectionsPage": {
+      "title": "Samlingar"
+    },
+    "certificatesPage": {
+      "title": "Certifikat",
+      "all": "Alla"
+    },
+    "certificatePage": {
+      "notFound": "Certifikatet hittades inte."
+    },
+    "collector": {
+      "title": "Samlare",
+      "owned": "Certifikat",
+      "collections": "Samlingar",
+      "firstActivity": "Första aktivitet",
+      "lastActivity": "Senaste aktivitet",
+      "collectionsTitle": "Samlingar",
+      "certificatesTitle": "Certifikat",
+      "pastTitle": "Tidigare ägda"
+    },
+    "detail": {
+      "certificate": "Certifikat",
+      "tokenId": "Token-ID",
+      "mintedOn": "Utfärdat den",
+      "collection": "Samling",
+      "owner": "Ägare",
+      "poweredBy": "Drivs av ORIGYN",
+      "openPage": "Öppna certifikatsidan"
     }
   },
   "ui": {

@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Tableau de bord",
     "governance": "Gouvernance",
+    "explorer": "Visionneuse",
     "transactionHistory": "Historique des transactions",
     "calculator": "Calculateur",
     "openMainMenu": "Ouvrir le menu principal",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Émission",
+      "transfer": "Transfert",
+      "burn": "Destruction",
+      "approve": "Approbation"
+    },
     "history": {
       "title": "Historique des transactions",
       "searchFor": "Rechercher :",
@@ -464,12 +471,6 @@
         "toRoot": "Avec transactions vers la racine",
         "madeInitial": "A effectué la transaction initiale"
       }
-    },
-    "kind": {
-      "mint": "Émission",
-      "transfer": "Transfert",
-      "burn": "Destruction",
-      "approve": "Approbation"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mes certificats"
+    },
     "neurons": {
       "list": {
         "title": "Mes neurones OGY",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Visionneuse",
+    "subtitle": "Parcourez et vérifiez les certificats, collections et collectionneurs ORIGYN sur la blockchain.",
     "searchPlaceholder": "Rechercher par titre, émetteur, principal ou ID de token",
-    "openFilters": "Ouvrir les filtres",
     "checkOnBlockchain": "Vérifier sur la blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Émetteur inconnu",
+    "noImage": "Aucune image",
+    "searchResults": "Résultats pour",
+    "noResults": "Aucun certificat correspondant trouvé.",
+    "loadError": "Impossible de charger les certificats. Veuillez réessayer.",
+    "viewAll": "Tout voir",
     "sections": {
       "featured": "Certificats à la une",
-      "art": "Certificats d'art",
-      "gold": "Certificats d'or"
+      "collections": "Collections"
+    },
+    "search": {
+      "noCertificates": "Aucun certificat ne correspond. Consultez les collections et collectionneurs ci-dessous.",
+      "collections": "Collections correspondantes",
+      "collectors": "Collectionneurs correspondants"
+    },
+    "collections": {
+      "items": {
+        "one": "élément",
+        "other": "éléments"
+      },
+      "holders": {
+        "one": "détenteur",
+        "other": "détenteurs"
+      }
+    },
+    "collectionsPage": {
+      "title": "Collections"
+    },
+    "certificatesPage": {
+      "title": "Certificats",
+      "all": "Tous"
+    },
+    "certificatePage": {
+      "notFound": "Certificat introuvable."
+    },
+    "collector": {
+      "title": "Collectionneur",
+      "owned": "Certificats",
+      "collections": "Collections",
+      "firstActivity": "Première activité",
+      "lastActivity": "Dernière activité",
+      "collectionsTitle": "Collections",
+      "certificatesTitle": "Certificats",
+      "pastTitle": "Précédemment détenus"
+    },
+    "detail": {
+      "certificate": "Certificat",
+      "tokenId": "ID du token",
+      "mintedOn": "Émis le",
+      "collection": "Collection",
+      "owner": "Propriétaire",
+      "poweredBy": "Propulsé par ORIGYN",
+      "openPage": "Ouvrir la page du certificat"
     }
   },
   "ui": {

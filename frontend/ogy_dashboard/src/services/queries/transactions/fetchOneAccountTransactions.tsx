@@ -7,6 +7,7 @@ import {
   buildTransactionsSort,
   mapApiTransaction,
 } from "@services/queries/transactions/utils";
+import { toOracleAccount } from "@helpers/principal";
 
 const fetchOneAccountTransactions = async ({
   limit,
@@ -21,7 +22,7 @@ const fetchOneAccountTransactions = async ({
     gldtTokenPath("transactions", {
       limit,
       offset,
-      account: accountId,
+      account: toOracleAccount(accountId),
       sort_by: buildTransactionsSort(sorting) || undefined,
     })
   );

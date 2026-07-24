@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Panel",
     "governance": "Gobernanza",
+    "explorer": "Visor",
     "transactionHistory": "Historial de transacciones",
     "calculator": "Calculadora",
     "openMainMenu": "Abrir menú principal",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Acuñar",
+      "transfer": "Transferir",
+      "burn": "Quemar",
+      "approve": "Aprobar"
+    },
     "history": {
       "title": "Historial de Transacciones",
       "searchFor": "Buscar por:",
@@ -464,12 +471,6 @@
         "toRoot": "Con transacciones hacia la raíz",
         "madeInitial": "Realizó la transacción inicial"
       }
-    },
-    "kind": {
-      "mint": "Acuñar",
-      "transfer": "Transferir",
-      "burn": "Quemar",
-      "approve": "Aprobar"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mis certificados"
+    },
     "neurons": {
       "list": {
         "title": "Mis Neuronas OGY",
@@ -684,15 +688,62 @@
   },
   "explorer": {
     "title": "Visor",
+    "subtitle": "Explora y verifica certificados, colecciones y coleccionistas de ORIGYN en la blockchain.",
     "searchPlaceholder": "Buscar por título, emisor, principal o ID de token",
-    "openFilters": "Abrir filtros",
     "checkOnBlockchain": "Comprobar en la blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Emisor desconocido",
+    "noImage": "Sin imagen",
+    "searchResults": "Resultados de",
+    "noResults": "No se encontraron certificados coincidentes.",
+    "loadError": "No se pudieron cargar los certificados. Inténtalo de nuevo.",
+    "viewAll": "Ver todo",
     "sections": {
       "featured": "Certificados Destacados",
-      "art": "Certificados de Arte",
-      "gold": "Certificados de Oro"
+      "collections": "Colecciones"
+    },
+    "search": {
+      "noCertificates": "Ningún certificado coincidió. Consulta las colecciones y coleccionistas a continuación.",
+      "collections": "Colecciones coincidentes",
+      "collectors": "Coleccionistas coincidentes"
+    },
+    "collections": {
+      "items": {
+        "one": "elemento",
+        "other": "elementos"
+      },
+      "holders": {
+        "one": "titular",
+        "other": "titulares"
+      }
+    },
+    "collectionsPage": {
+      "title": "Colecciones"
+    },
+    "certificatesPage": {
+      "title": "Certificados",
+      "all": "Todos"
+    },
+    "certificatePage": {
+      "notFound": "Certificado no encontrado."
+    },
+    "collector": {
+      "title": "Coleccionista",
+      "owned": "Certificados",
+      "collections": "Colecciones",
+      "firstActivity": "Primera actividad",
+      "lastActivity": "Última actividad",
+      "collectionsTitle": "Colecciones",
+      "certificatesTitle": "Certificados",
+      "pastTitle": "Poseídos anteriormente"
+    },
+    "detail": {
+      "certificate": "Certificado",
+      "tokenId": "ID del token",
+      "mintedOn": "Acuñado el",
+      "collection": "Colección",
+      "owner": "Propietario",
+      "poweredBy": "Con tecnología de ORIGYN",
+      "openPage": "Abrir la página del certificado"
     }
   },
   "ui": {
