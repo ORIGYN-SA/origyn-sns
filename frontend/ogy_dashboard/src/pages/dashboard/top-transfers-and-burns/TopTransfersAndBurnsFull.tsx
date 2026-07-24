@@ -10,6 +10,7 @@ import useTopTransfersAndBurns, {
 import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import { useNavigate } from "react-router-dom";
 import { roundAndFormatLocale } from "@helpers/numbers";
+import { stripDefaultSubaccount } from "@helpers/principal";
 import { useT, useLocalePath } from "@i18n/LocaleContext";
 
 interface TopTransfersAndBurnsFullProps {
@@ -61,7 +62,9 @@ const TopTransfersAndBurnsFull = ({
                 className="me-2 truncate"
                 onClick={() =>
                   navigate(
-                    lp(`/transaction-history/transactions/accounts/${address}`)
+                    lp(
+                      `/transaction-history/transactions/accounts/${stripDefaultSubaccount(address)}`
+                    )
                   )
                 }
               >
@@ -118,12 +121,17 @@ const TopTransfersAndBurnsFull = ({
         cell: ({ getValue }) => {
           const address = String(getValue());
           return (
-            <div dir="ltr" className="flex items-center max-w-xs truncate justify-center">
+            <div
+              dir="ltr"
+              className="flex items-center max-w-xs truncate justify-center"
+            >
               <button
                 className="me-2 truncate"
                 onClick={() =>
                   navigate(
-                    lp(`/transaction-history/transactions/accounts/${address}`)
+                    lp(
+                      `/transaction-history/transactions/accounts/${stripDefaultSubaccount(address)}`
+                    )
                   )
                 }
               >

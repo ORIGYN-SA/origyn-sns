@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Табло",
     "governance": "Управление",
+    "explorer": "Визуализатор",
     "transactionHistory": "История на транзакциите",
     "calculator": "Калкулатор",
     "openMainMenu": "Отвори главното меню",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Емитиране",
+      "transfer": "Прехвърляне",
+      "burn": "Изгаряне",
+      "approve": "Одобряване"
+    },
     "history": {
       "title": "История на транзакциите",
       "searchFor": "Търсене за:",
@@ -464,12 +471,6 @@
         "toRoot": "С транзакции към главния",
         "madeInitial": "Извърши първоначална транзакция"
       }
-    },
-    "kind": {
-      "mint": "Емитиране",
-      "transfer": "Прехвърляне",
-      "burn": "Изгаряне",
-      "approve": "Одобряване"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Моите сертификати"
+    },
     "neurons": {
       "list": {
         "title": "Моите OGY неврони",
@@ -630,7 +634,8 @@
       "governanceBalance": "Баланс в управлението",
       "stakedTokens": "Стейкнати токени",
       "ledgerBalance": "Баланс в регистъра",
-      "weightInTotalSupply": "Тегло в общото предлагане"
+      "weightInTotalSupply": "Тегло в общото предлагане",
+      "governanceCanisterTag": "Канистър на управлението, съхранява всички споделени токени"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Визуализатор",
+    "subtitle": "Разглеждайте и проверявайте сертификати, колекции и колекционери на ORIGYN в блокчейна.",
     "searchPlaceholder": "Търсене по заглавие, издател, принципал или ID на токен",
-    "openFilters": "Отвори филтри",
     "checkOnBlockchain": "Провери в блокчейна",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Неизвестен издател",
+    "noImage": "Няма изображение",
+    "searchResults": "Резултати за",
+    "noResults": "Няма намерени съответстващи сертификати.",
+    "loadError": "Сертификатите не можаха да бъдат заредени. Моля, опитайте отново.",
+    "viewAll": "Виж всички",
     "sections": {
       "featured": "Препоръчани сертификати",
-      "art": "Арт сертификати",
-      "gold": "Златни сертификати"
+      "collections": "Колекции"
+    },
+    "search": {
+      "noCertificates": "Няма съответстващи сертификати. Вижте колекциите и колекционерите по-долу.",
+      "collections": "Съответстващи колекции",
+      "collectors": "Съответстващи колекционери"
+    },
+    "collections": {
+      "items": {
+        "one": "елемент",
+        "other": "елемента"
+      },
+      "holders": {
+        "one": "притежател",
+        "other": "притежатели"
+      }
+    },
+    "collectionsPage": {
+      "title": "Колекции"
+    },
+    "certificatesPage": {
+      "title": "Сертификати",
+      "all": "Всички"
+    },
+    "certificatePage": {
+      "notFound": "Сертификатът не е намерен."
+    },
+    "collector": {
+      "title": "Колекционер",
+      "owned": "Сертификати",
+      "collections": "Колекции",
+      "firstActivity": "Първа активност",
+      "lastActivity": "Последна активност",
+      "collectionsTitle": "Колекции",
+      "certificatesTitle": "Сертификати",
+      "pastTitle": "Притежавани преди"
+    },
+    "detail": {
+      "certificate": "Сертификат",
+      "tokenId": "ID на токена",
+      "mintedOn": "Издаден на",
+      "collection": "Колекция",
+      "owner": "Собственик",
+      "poweredBy": "Задвижвано от ORIGYN",
+      "openPage": "Отвори страницата на сертификата"
     }
   },
   "ui": {

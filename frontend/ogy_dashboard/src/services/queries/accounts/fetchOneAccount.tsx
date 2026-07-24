@@ -1,5 +1,6 @@
 import icrcAPI from "@services/api/icrc/v1";
 import { SNS_LEDGER_CANISTER_ID } from "@constants/index";
+import { toIcrcAccountText } from "@helpers/principal";
 
 export interface Account {
   id: string | null;
@@ -18,7 +19,7 @@ export const fetchOneAccount = async ({
   accountId: string;
 }): Promise<Account> => {
   const { data } = await icrcAPI.get(
-    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${accountId}`
+    `/ledgers/${SNS_LEDGER_CANISTER_ID}/accounts/${toIcrcAccountText(accountId)}`
   );
   return data;
 };

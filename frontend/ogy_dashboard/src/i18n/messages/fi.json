@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Hallintapaneeli",
     "governance": "Hallinto",
+    "explorer": "Katselin",
     "transactionHistory": "Tapahtumahistoria",
     "calculator": "Laskuri",
     "openMainMenu": "Avaa päävalikko",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Luonti",
+      "transfer": "Siirto",
+      "burn": "Poltto",
+      "approve": "Hyväksyntä"
+    },
     "history": {
       "title": "Tapahtumahistoria",
       "searchFor": "Hae:",
@@ -464,12 +471,6 @@
         "toRoot": "Tapahtumat juureen",
         "madeInitial": "Teki alkuperäisen tapahtuman"
       }
-    },
-    "kind": {
-      "mint": "Luonti",
-      "transfer": "Siirto",
-      "burn": "Poltto",
-      "approve": "Hyväksyntä"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Omat sertifikaatit"
+    },
     "neurons": {
       "list": {
         "title": "Omat OGY-neuronit",
@@ -631,6 +635,7 @@
       "stakedTokens": "Staatut tokenit",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Osuus kokonaistarjonnasta"
+      ,"governanceCanisterTag": "Hallintokanisteri, sisältää kaikki jaetut tokenit"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Katselin",
+    "subtitle": "Selaa ja vahvista ORIGYN-sertifikaatteja, kokoelmia ja keräilijöitä lohkoketjussa.",
     "searchPlaceholder": "Hae otsikon, myöntäjän, principalin tai tokenin tunnuksen mukaan",
-    "openFilters": "Avaa suodattimet",
     "checkOnBlockchain": "Tarkista lohkoketjusta",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Tuntematon myöntäjä",
+    "noImage": "Ei kuvaa",
+    "searchResults": "Tulokset haulle",
+    "noResults": "Vastaavia sertifikaatteja ei löytynyt.",
+    "loadError": "Sertifikaattien lataus epäonnistui. Yritä uudelleen.",
+    "viewAll": "Näytä kaikki",
     "sections": {
       "featured": "Esitellyt sertifikaatit",
-      "art": "Taidesertifikaatit",
-      "gold": "Kultasertifikaatit"
+      "collections": "Kokoelmat"
+    },
+    "search": {
+      "noCertificates": "Yksikään sertifikaatti ei vastannut hakua. Katso kokoelmat ja keräilijät alta.",
+      "collections": "Vastaavat kokoelmat",
+      "collectors": "Vastaavat keräilijät"
+    },
+    "collections": {
+      "items": {
+        "one": "kohde",
+        "other": "kohdetta"
+      },
+      "holders": {
+        "one": "haltija",
+        "other": "haltijaa"
+      }
+    },
+    "collectionsPage": {
+      "title": "Kokoelmat"
+    },
+    "certificatesPage": {
+      "title": "Sertifikaatit",
+      "all": "Kaikki"
+    },
+    "certificatePage": {
+      "notFound": "Sertifikaattia ei löytynyt."
+    },
+    "collector": {
+      "title": "Keräilijä",
+      "owned": "Sertifikaatit",
+      "collections": "Kokoelmat",
+      "firstActivity": "Ensimmäinen tapahtuma",
+      "lastActivity": "Viimeisin tapahtuma",
+      "collectionsTitle": "Kokoelmat",
+      "certificatesTitle": "Sertifikaatit",
+      "pastTitle": "Aiemmin omistetut"
+    },
+    "detail": {
+      "certificate": "Sertifikaatti",
+      "tokenId": "Tokenin tunnus",
+      "mintedOn": "Luotu",
+      "collection": "Kokoelma",
+      "owner": "Omistaja",
+      "poweredBy": "Palvelun tarjoaa ORIGYN",
+      "openPage": "Avaa sertifikaatin sivu"
     }
   },
   "ui": {

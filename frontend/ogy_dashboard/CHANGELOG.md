@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.42] - 2026-07-24
+
+#### Added
+
+- Added a tooltip identifying the governance canister wallet in the token distribution list.
+
 ### [1.0.41] - 2026-07-16
 
 #### Changed

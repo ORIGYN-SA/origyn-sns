@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Панель",
     "governance": "Управління",
+    "explorer": "Переглядач",
     "transactionHistory": "Історія транзакцій",
     "calculator": "Калькулятор",
     "openMainMenu": "Відкрити головне меню",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Емісія",
+      "transfer": "Переказ",
+      "burn": "Спалення",
+      "approve": "Схвалення"
+    },
     "history": {
       "title": "Історія транзакцій",
       "searchFor": "Шукати:",
@@ -464,12 +471,6 @@
         "toRoot": "З транзакціями до кореня",
         "madeInitial": "Здійснив початкову транзакцію"
       }
-    },
-    "kind": {
-      "mint": "Емісія",
-      "transfer": "Переказ",
-      "burn": "Спалення",
-      "approve": "Схвалення"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Мої сертифікати"
+    },
     "neurons": {
       "list": {
         "title": "Мої нейрони OGY",
@@ -631,6 +635,7 @@
       "stakedTokens": "Застейкані токени",
       "ledgerBalance": "Баланс реєстру",
       "weightInTotalSupply": "Вага в загальній пропозиції"
+      ,"governanceCanisterTag": "Каністер управління, зберігає всі спільні токени"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Переглядач",
+    "subtitle": "Переглядайте та перевіряйте сертифікати, колекції та колекціонерів ORIGYN у блокчейні.",
     "searchPlaceholder": "Пошук за заголовком, емітентом, principal або ID токена",
-    "openFilters": "Відкрити фільтри",
     "checkOnBlockchain": "Перевірити в блокчейні",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Невідомий емітент",
+    "noImage": "Немає зображення",
+    "searchResults": "Результати за запитом",
+    "noResults": "Відповідних сертифікатів не знайдено.",
+    "loadError": "Не вдалося завантажити сертифікати. Будь ласка, спробуйте ще раз.",
+    "viewAll": "Переглянути всі",
     "sections": {
       "featured": "Рекомендовані сертифікати",
-      "art": "Сертифікати мистецтва",
-      "gold": "Золоті сертифікати"
+      "collections": "Колекції"
+    },
+    "search": {
+      "noCertificates": "Жоден сертифікат не відповідає запиту. Перегляньте колекції та колекціонерів нижче.",
+      "collections": "Відповідні колекції",
+      "collectors": "Відповідні колекціонери"
+    },
+    "collections": {
+      "items": {
+        "one": "предмет",
+        "other": "предметів"
+      },
+      "holders": {
+        "one": "власник",
+        "other": "власників"
+      }
+    },
+    "collectionsPage": {
+      "title": "Колекції"
+    },
+    "certificatesPage": {
+      "title": "Сертифікати",
+      "all": "Усі"
+    },
+    "certificatePage": {
+      "notFound": "Сертифікат не знайдено."
+    },
+    "collector": {
+      "title": "Колекціонер",
+      "owned": "Сертифікати",
+      "collections": "Колекції",
+      "firstActivity": "Перша активність",
+      "lastActivity": "Остання активність",
+      "collectionsTitle": "Колекції",
+      "certificatesTitle": "Сертифікати",
+      "pastTitle": "Раніше у власності"
+    },
+    "detail": {
+      "certificate": "Сертифікат",
+      "tokenId": "ID токена",
+      "mintedOn": "Випущено",
+      "collection": "Колекція",
+      "owner": "Власник",
+      "poweredBy": "На технології ORIGYN",
+      "openPage": "Відкрити сторінку сертифіката"
     }
   },
   "ui": {

@@ -10,13 +10,6 @@ import { WalletProvider } from "@components/auth/WalletProvider";
 import { DERIVATION_ORIGIN } from "@components/auth/constants";
 import { whitelistedCanisterIds } from "@services/actor";
 
-if (import.meta.env.DEV) {
-  const script = document.createElement("script");
-  script.src = "//unpkg.com/react-scan/dist/auto.global.js";
-  script.crossOrigin = "anonymous";
-  document.head.appendChild(script);
-}
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "governance": "Pamamahala",
+    "explorer": "Viewer",
     "transactionHistory": "Kasaysayan ng Transaksyon",
     "calculator": "Calculator",
     "openMainMenu": "Buksan ang pangunahing menu",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Paglilipat",
+      "burn": "Burn",
+      "approve": "Aprubahan"
+    },
     "history": {
       "title": "Kasaysayan ng Transaksyon",
       "searchFor": "Maghanap ng:",
@@ -464,12 +471,6 @@
         "toRoot": "May mga transaksyon patungo sa root",
         "madeInitial": "Gumawa ng paunang transaksyon"
       }
-    },
-    "kind": {
-      "mint": "Mint",
-      "transfer": "Paglilipat",
-      "burn": "Burn",
-      "approve": "Aprubahan"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Aking Mga Sertipiko"
+    },
     "neurons": {
       "list": {
         "title": "Aking Mga OGY Neuron",
@@ -631,6 +635,7 @@
       "stakedTokens": "Mga staked na token",
       "ledgerBalance": "Balanse sa Ledger",
       "weightInTotalSupply": "Timbang sa Kabuuang Supply"
+      ,"governanceCanisterTag": "Governance canister, naglalaman ng lahat ng nakabahaging token"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Viewer",
+    "subtitle": "I-browse at i-verify ang mga sertipiko, koleksyon, at kolektor ng ORIGYN sa blockchain.",
     "searchPlaceholder": "Maghanap ayon sa pamagat, issuer, principal o token ID",
-    "openFilters": "Buksan ang mga filter",
     "checkOnBlockchain": "Tingnan sa blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Hindi kilalang nagbigay",
+    "noImage": "Walang larawan",
+    "searchResults": "Mga resulta para sa",
+    "noResults": "Walang natagpuang katugmang sertipiko.",
+    "loadError": "Hindi ma-load ang mga sertipiko. Pakisubukang muli.",
+    "viewAll": "Tingnan lahat",
     "sections": {
       "featured": "Mga Itinatampok na Sertipiko",
-      "art": "Mga Sertipiko ng Sining",
-      "gold": "Mga Sertipiko ng Ginto"
+      "collections": "Mga Koleksyon"
+    },
+    "search": {
+      "noCertificates": "Walang tumugmang sertipiko. Tingnan ang mga koleksyon at kolektor sa ibaba.",
+      "collections": "Mga katugmang koleksyon",
+      "collectors": "Mga katugmang kolektor"
+    },
+    "collections": {
+      "items": {
+        "one": "item",
+        "other": "mga item"
+      },
+      "holders": {
+        "one": "may-hawak",
+        "other": "mga may-hawak"
+      }
+    },
+    "collectionsPage": {
+      "title": "Mga Koleksyon"
+    },
+    "certificatesPage": {
+      "title": "Mga Sertipiko",
+      "all": "Lahat"
+    },
+    "certificatePage": {
+      "notFound": "Hindi natagpuan ang sertipiko."
+    },
+    "collector": {
+      "title": "Kolektor",
+      "owned": "Mga Sertipiko",
+      "collections": "Mga Koleksyon",
+      "firstActivity": "Unang aktibidad",
+      "lastActivity": "Huling aktibidad",
+      "collectionsTitle": "Mga Koleksyon",
+      "certificatesTitle": "Mga Sertipiko",
+      "pastTitle": "Dating pag-aari"
+    },
+    "detail": {
+      "certificate": "Sertipiko",
+      "tokenId": "Token ID",
+      "mintedOn": "Na-mint noong",
+      "collection": "Koleksyon",
+      "owner": "May-ari",
+      "poweredBy": "Pinapagana ng ORIGYN",
+      "openPage": "Buksan ang pahina ng sertipiko"
     }
   },
   "ui": {

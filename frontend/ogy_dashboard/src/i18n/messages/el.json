@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Πίνακας ελέγχου",
     "governance": "Διακυβέρνηση",
+    "explorer": "Viewer",
     "transactionHistory": "Ιστορικό συναλλαγών",
     "calculator": "Αριθμομηχανή",
     "openMainMenu": "Άνοιγμα κύριου μενού",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Έκδοση",
+      "transfer": "Μεταφορά",
+      "burn": "Καύση",
+      "approve": "Έγκριση"
+    },
     "history": {
       "title": "Ιστορικό Συναλλαγών",
       "searchFor": "Αναζήτηση για:",
@@ -464,12 +471,6 @@
         "toRoot": "Με συναλλαγές προς τη ρίζα",
         "madeInitial": "Πραγματοποίησε την αρχική συναλλαγή"
       }
-    },
-    "kind": {
-      "mint": "Έκδοση",
-      "transfer": "Μεταφορά",
-      "burn": "Καύση",
-      "approve": "Έγκριση"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Τα πιστοποιητικά μου"
+    },
     "neurons": {
       "list": {
         "title": "Τα OGY Neurons μου",
@@ -631,6 +635,7 @@
       "stakedTokens": "Staked tokens",
       "ledgerBalance": "Υπόλοιπο Ledger",
       "weightInTotalSupply": "Βάρος στη Συνολική Προσφορά"
+      ,"governanceCanisterTag": "Canister διακυβέρνησης, περιέχει όλα τα κοινόχρηστα token"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Viewer",
+    "subtitle": "Περιηγηθείτε και επαληθεύστε πιστοποιητικά, συλλογές και συλλέκτες ORIGYN στο blockchain.",
     "searchPlaceholder": "Αναζήτηση με τίτλο, εκδότη, principal ή token ID",
-    "openFilters": "Άνοιγμα φίλτρων",
     "checkOnBlockchain": "Έλεγχος στο blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Άγνωστος εκδότης",
+    "noImage": "Χωρίς εικόνα",
+    "searchResults": "Αποτελέσματα για",
+    "noResults": "Δεν βρέθηκαν πιστοποιητικά που να ταιριάζουν.",
+    "loadError": "Δεν ήταν δυνατή η φόρτωση των πιστοποιητικών. Δοκιμάστε ξανά.",
+    "viewAll": "Προβολή όλων",
     "sections": {
       "featured": "Προτεινόμενα Πιστοποιητικά",
-      "art": "Πιστοποιητικά Τέχνης",
-      "gold": "Πιστοποιητικά Χρυσού"
+      "collections": "Συλλογές"
+    },
+    "search": {
+      "noCertificates": "Κανένα πιστοποιητικό δεν ταιριάζει. Δείτε συλλογές και συλλέκτες παρακάτω.",
+      "collections": "Συλλογές που ταιριάζουν",
+      "collectors": "Συλλέκτες που ταιριάζουν"
+    },
+    "collections": {
+      "items": {
+        "one": "αντικείμενο",
+        "other": "αντικείμενα"
+      },
+      "holders": {
+        "one": "κάτοχος",
+        "other": "κάτοχοι"
+      }
+    },
+    "collectionsPage": {
+      "title": "Συλλογές"
+    },
+    "certificatesPage": {
+      "title": "Πιστοποιητικά",
+      "all": "Όλα"
+    },
+    "certificatePage": {
+      "notFound": "Το πιστοποιητικό δεν βρέθηκε."
+    },
+    "collector": {
+      "title": "Συλλέκτης",
+      "owned": "Πιστοποιητικά",
+      "collections": "Συλλογές",
+      "firstActivity": "Πρώτη δραστηριότητα",
+      "lastActivity": "Τελευταία δραστηριότητα",
+      "collectionsTitle": "Συλλογές",
+      "certificatesTitle": "Πιστοποιητικά",
+      "pastTitle": "Προηγουμένως στην κατοχή"
+    },
+    "detail": {
+      "certificate": "Πιστοποιητικό",
+      "tokenId": "ID token",
+      "mintedOn": "Εκδόθηκε στις",
+      "collection": "Συλλογή",
+      "owner": "Ιδιοκτήτης",
+      "poweredBy": "Με την υποστήριξη του ORIGYN",
+      "openPage": "Άνοιγμα σελίδας πιστοποιητικού"
     }
   },
   "ui": {

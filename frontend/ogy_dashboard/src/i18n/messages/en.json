@@ -634,7 +634,8 @@
       "governanceBalance": "Governance Balance",
       "stakedTokens": "Staked tokens",
       "ledgerBalance": "Ledger Balance",
-      "weightInTotalSupply": "Weight In Total Supply"
+      "weightInTotalSupply": "Weight In Total Supply",
+      "governanceCanisterTag": "Governance Canister, holds all the shared tokens"
     }
   },
   "recovery": {
@@ -687,6 +688,7 @@
   },
   "explorer": {
     "title": "Viewer",
+    "subtitle": "Browse and verify ORIGYN certificates, collections and collectors on the blockchain.",
     "searchPlaceholder": "Search by title, issuer, principal or token ID",
     "checkOnBlockchain": "Check on blockchain",
     "unknownIssuer": "Unknown issuer",

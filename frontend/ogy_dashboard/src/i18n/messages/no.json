@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashbord",
     "governance": "Styring",
+    "explorer": "Fremviser",
     "transactionHistory": "Transaksjonshistorikk",
     "calculator": "Kalkulator",
     "openMainMenu": "Åpne hovedmeny",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Overføring",
+      "burn": "Brenn",
+      "approve": "Godkjenn"
+    },
     "history": {
       "title": "Transaksjonshistorikk",
       "searchFor": "Søk etter:",
@@ -464,12 +471,6 @@
         "toRoot": "Med transaksjoner til rot",
         "madeInitial": "Foretok innledende transaksjon"
       }
-    },
-    "kind": {
-      "mint": "Mint",
-      "transfer": "Overføring",
-      "burn": "Brenn",
-      "approve": "Godkjenn"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Mine sertifikater"
+    },
     "neurons": {
       "list": {
         "title": "Mine OGY-nevroner",
@@ -631,6 +635,7 @@
       "stakedTokens": "Stakede tokens",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Vekt i total tilførsel"
+      ,"governanceCanisterTag": "Styringskanister, inneholder alle delte tokens"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "Fremviser",
+    "subtitle": "Bla gjennom og verifiser ORIGYN-sertifikater, samlinger og samlere på blokkjeden.",
     "searchPlaceholder": "Søk etter tittel, utsteder, principal eller token-ID",
-    "openFilters": "Åpne filtre",
     "checkOnBlockchain": "Sjekk på blokkjeden",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Ukjent utsteder",
+    "noImage": "Intet bilde",
+    "searchResults": "Resultater for",
+    "noResults": "Fant ingen samsvarende sertifikater.",
+    "loadError": "Kunne ikke laste sertifikatene. Prøv igjen.",
+    "viewAll": "Vis alle",
     "sections": {
       "featured": "Fremhevede sertifikater",
-      "art": "Kunstsertifikater",
-      "gold": "Gullsertifikater"
+      "collections": "Samlinger"
+    },
+    "search": {
+      "noCertificates": "Ingen sertifikater samsvarte. Se samlinger og samlere nedenfor.",
+      "collections": "Samsvarende samlinger",
+      "collectors": "Samsvarende samlere"
+    },
+    "collections": {
+      "items": {
+        "one": "gjenstand",
+        "other": "gjenstander"
+      },
+      "holders": {
+        "one": "innehaver",
+        "other": "innehavere"
+      }
+    },
+    "collectionsPage": {
+      "title": "Samlinger"
+    },
+    "certificatesPage": {
+      "title": "Sertifikater",
+      "all": "Alle"
+    },
+    "certificatePage": {
+      "notFound": "Sertifikatet ble ikke funnet."
+    },
+    "collector": {
+      "title": "Samler",
+      "owned": "Sertifikater",
+      "collections": "Samlinger",
+      "firstActivity": "Første aktivitet",
+      "lastActivity": "Siste aktivitet",
+      "collectionsTitle": "Samlinger",
+      "certificatesTitle": "Sertifikater",
+      "pastTitle": "Tidligere eid"
+    },
+    "detail": {
+      "certificate": "Sertifikat",
+      "tokenId": "Token-ID",
+      "mintedOn": "Utstedt den",
+      "collection": "Samling",
+      "owner": "Eier",
+      "poweredBy": "Drevet av ORIGYN",
+      "openPage": "Åpne sertifikatsiden"
     }
   },
   "ui": {

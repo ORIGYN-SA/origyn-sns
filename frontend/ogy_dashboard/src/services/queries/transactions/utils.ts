@@ -1,6 +1,7 @@
 import { SortingState } from "@tanstack/react-table";
 import { Transaction } from "@services/types/transactions.types";
 import { ApiTransaction } from "@services/api/gldt/v1/types";
+import { stripDefaultSubaccount } from "@helpers/principal";
 
 const MS_TO_NS = 1_000_000n;
 const SORT_FIELD_BY_COLUMN_ID: Record<string, string | undefined> = {
@@ -26,8 +27,8 @@ export const mapApiTransaction = (tx: ApiTransaction): Transaction => ({
   index: tx.block,
   timestamp: toDashboardTimestamp(tx.tx_time),
   updated_at: toIsoTimestamp(tx.tx_time),
-  from_account: tx.from_account,
-  to_account: tx.to_account,
+  from_account: stripDefaultSubaccount(tx.from_account),
+  to_account: stripDefaultSubaccount(tx.to_account),
   amount: tx.value,
   fee: tx.fee ?? "",
   memo: "",

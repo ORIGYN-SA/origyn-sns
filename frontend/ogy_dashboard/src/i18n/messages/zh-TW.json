@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "儀表板",
     "governance": "治理",
+    "explorer": "檢視器",
     "transactionHistory": "交易歷史",
     "calculator": "計算機",
     "openMainMenu": "開啟主選單",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "鑄造",
+      "transfer": "轉帳",
+      "burn": "銷毀",
+      "approve": "授權"
+    },
     "history": {
       "title": "交易歷史",
       "searchFor": "搜尋：",
@@ -464,12 +471,6 @@
         "toRoot": "包含發往根的交易",
         "madeInitial": "進行了初始交易"
       }
-    },
-    "kind": {
-      "mint": "鑄造",
-      "transfer": "轉帳",
-      "burn": "銷毀",
-      "approve": "授權"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "我的憑證"
+    },
     "neurons": {
       "list": {
         "title": "我的 OGY 神經元",
@@ -631,6 +635,7 @@
       "stakedTokens": "已質押代幣",
       "ledgerBalance": "帳本餘額",
       "weightInTotalSupply": "在總供應量中的權重"
+      ,"governanceCanisterTag": "治理 Canister，持有所有共享代幣"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "檢視器",
+    "subtitle": "在區塊鏈上瀏覽並驗證 ORIGYN 證書、收藏系列與收藏家。",
     "searchPlaceholder": "按標題、發行方、principal 或 token ID 搜尋",
-    "openFilters": "開啟篩選器",
     "checkOnBlockchain": "在區塊鏈上查看",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "未知發行方",
+    "noImage": "暫無圖片",
+    "searchResults": "搜尋結果",
+    "noResults": "找不到相符的憑證。",
+    "loadError": "無法載入憑證，請再試一次。",
+    "viewAll": "查看全部",
     "sections": {
       "featured": "精選憑證",
-      "art": "藝術憑證",
-      "gold": "黃金憑證"
+      "collections": "收藏系列"
+    },
+    "search": {
+      "noCertificates": "沒有相符的憑證。請查看下方的收藏系列與收藏家。",
+      "collections": "相符的收藏系列",
+      "collectors": "相符的收藏家"
+    },
+    "collections": {
+      "items": {
+        "one": "件藏品",
+        "other": "件藏品"
+      },
+      "holders": {
+        "one": "位持有者",
+        "other": "位持有者"
+      }
+    },
+    "collectionsPage": {
+      "title": "收藏系列"
+    },
+    "certificatesPage": {
+      "title": "憑證",
+      "all": "全部"
+    },
+    "certificatePage": {
+      "notFound": "找不到憑證。"
+    },
+    "collector": {
+      "title": "收藏家",
+      "owned": "憑證",
+      "collections": "收藏系列",
+      "firstActivity": "首次活動",
+      "lastActivity": "最近活動",
+      "collectionsTitle": "收藏系列",
+      "certificatesTitle": "憑證",
+      "pastTitle": "曾經持有"
+    },
+    "detail": {
+      "certificate": "憑證",
+      "tokenId": "代幣 ID",
+      "mintedOn": "鑄造於",
+      "collection": "收藏系列",
+      "owner": "所有者",
+      "poweredBy": "由 ORIGYN 提供技術支援",
+      "openPage": "開啟憑證頁面"
     }
   },
   "ui": {

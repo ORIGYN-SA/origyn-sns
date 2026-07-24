@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "แดชบอร์ด",
     "governance": "การกำกับดูแล",
+    "explorer": "ตัวแสดง",
     "transactionHistory": "ประวัติธุรกรรม",
     "calculator": "เครื่องคำนวณ",
     "openMainMenu": "เปิดเมนูหลัก",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "สร้าง",
+      "transfer": "โอน",
+      "burn": "เผา",
+      "approve": "อนุมัติ"
+    },
     "history": {
       "title": "ประวัติธุรกรรม",
       "searchFor": "ค้นหา:",
@@ -464,12 +471,6 @@
         "toRoot": "พร้อมธุรกรรมไปยังราก",
         "madeInitial": "ทำธุรกรรมเริ่มต้น"
       }
-    },
-    "kind": {
-      "mint": "สร้าง",
-      "transfer": "โอน",
-      "burn": "เผา",
-      "approve": "อนุมัติ"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "ใบรับรองของฉัน"
+    },
     "neurons": {
       "list": {
         "title": "นิวรอน OGY ของฉัน",
@@ -631,6 +635,7 @@
       "stakedTokens": "โทเคนที่สเตก",
       "ledgerBalance": "ยอดคงเหลือ Ledger",
       "weightInTotalSupply": "น้ำหนักในอุปทานทั้งหมด"
+      ,"governanceCanisterTag": "แคนิสเตอร์การกำกับดูแล ถือโทเค็นที่ใช้ร่วมกันทั้งหมด"
     }
   },
   "recovery": {
@@ -683,15 +688,62 @@
   },
   "explorer": {
     "title": "ตัวแสดง",
+    "subtitle": "เรียกดูและตรวจสอบใบรับรอง คอลเลกชัน และนักสะสมของ ORIGYN บนบล็อกเชน",
     "searchPlaceholder": "ค้นหาตามชื่อเรื่อง ผู้ออก principal หรือ token ID",
-    "openFilters": "เปิดตัวกรอง",
     "checkOnBlockchain": "ตรวจสอบบนบล็อกเชน",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "ไม่ทราบผู้ออก",
+    "noImage": "ไม่มีรูปภาพ",
+    "searchResults": "ผลลัพธ์สำหรับ",
+    "noResults": "ไม่พบใบรับรองที่ตรงกัน",
+    "loadError": "ไม่สามารถโหลดใบรับรองได้ กรุณาลองอีกครั้ง",
+    "viewAll": "ดูทั้งหมด",
     "sections": {
       "featured": "ใบรับรองแนะนำ",
-      "art": "ใบรับรองงานศิลปะ",
-      "gold": "ใบรับรองทองคำ"
+      "collections": "คอลเลกชัน"
+    },
+    "search": {
+      "noCertificates": "ไม่มีใบรับรองที่ตรงกัน ดูคอลเลกชันและนักสะสมด้านล่าง",
+      "collections": "คอลเลกชันที่ตรงกัน",
+      "collectors": "นักสะสมที่ตรงกัน"
+    },
+    "collections": {
+      "items": {
+        "one": "รายการ",
+        "other": "รายการ"
+      },
+      "holders": {
+        "one": "ผู้ถือครอง",
+        "other": "ผู้ถือครอง"
+      }
+    },
+    "collectionsPage": {
+      "title": "คอลเลกชัน"
+    },
+    "certificatesPage": {
+      "title": "ใบรับรอง",
+      "all": "ทั้งหมด"
+    },
+    "certificatePage": {
+      "notFound": "ไม่พบใบรับรอง"
+    },
+    "collector": {
+      "title": "นักสะสม",
+      "owned": "ใบรับรอง",
+      "collections": "คอลเลกชัน",
+      "firstActivity": "กิจกรรมแรก",
+      "lastActivity": "กิจกรรมล่าสุด",
+      "collectionsTitle": "คอลเลกชัน",
+      "certificatesTitle": "ใบรับรอง",
+      "pastTitle": "เคยถือครอง"
+    },
+    "detail": {
+      "certificate": "ใบรับรอง",
+      "tokenId": "รหัสโทเคน",
+      "mintedOn": "ออกเมื่อ",
+      "collection": "คอลเลกชัน",
+      "owner": "เจ้าของ",
+      "poweredBy": "ขับเคลื่อนโดย ORIGYN",
+      "openPage": "เปิดหน้าใบรับรอง"
     }
   },
   "ui": {
