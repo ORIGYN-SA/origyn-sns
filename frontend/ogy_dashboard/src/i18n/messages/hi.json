@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "डैशबोर्ड",
     "governance": "गवर्नेंस",
+    "explorer": "व्यूअर",
     "transactionHistory": "लेनदेन इतिहास",
     "calculator": "कैलकुलेटर",
     "openMainMenu": "मुख्य मेनू खोलें",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "मिंट",
+      "transfer": "स्थानांतरण",
+      "burn": "बर्न",
+      "approve": "स्वीकृति"
+    },
     "history": {
       "title": "लेनदेन इतिहास",
       "searchFor": "इसके लिए खोजें:",
@@ -464,12 +471,6 @@
         "toRoot": "रूट तक लेनदेन के साथ",
         "madeInitial": "प्रारंभिक लेनदेन किया"
       }
-    },
-    "kind": {
-      "mint": "मिंट",
-      "transfer": "स्थानांतरण",
-      "burn": "बर्न",
-      "approve": "स्वीकृति"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "मेरे प्रमाणपत्र"
+    },
     "neurons": {
       "list": {
         "title": "मेरे OGY न्यूरॉन्स",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "व्यूअर",
+    "subtitle": "ब्लॉकचेन पर ORIGYN प्रमाणपत्र, संग्रह और संग्राहकों को ब्राउज़ और सत्यापित करें।",
     "searchPlaceholder": "शीर्षक, जारीकर्ता, principal या टोकन ID द्वारा खोजें",
-    "openFilters": "फ़िल्टर खोलें",
     "checkOnBlockchain": "ब्लॉकचेन पर जांचें",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "अज्ञात जारीकर्ता",
+    "noImage": "कोई छवि नहीं",
+    "searchResults": "खोज परिणाम",
+    "noResults": "कोई मेल खाता प्रमाणपत्र नहीं मिला।",
+    "loadError": "प्रमाणपत्र लोड नहीं हो सके। कृपया पुनः प्रयास करें।",
+    "viewAll": "सभी देखें",
     "sections": {
       "featured": "विशेष प्रमाणपत्र",
-      "art": "कला प्रमाणपत्र",
-      "gold": "स्वर्ण प्रमाणपत्र"
+      "collections": "संग्रह"
+    },
+    "search": {
+      "noCertificates": "कोई प्रमाणपत्र मेल नहीं खाया। नीचे संग्रह और संग्राहक देखें।",
+      "collections": "मेल खाते संग्रह",
+      "collectors": "मेल खाते संग्राहक"
+    },
+    "collections": {
+      "items": {
+        "one": "आइटम",
+        "other": "आइटम"
+      },
+      "holders": {
+        "one": "धारक",
+        "other": "धारक"
+      }
+    },
+    "collectionsPage": {
+      "title": "संग्रह"
+    },
+    "certificatesPage": {
+      "title": "प्रमाणपत्र",
+      "all": "सभी"
+    },
+    "certificatePage": {
+      "notFound": "प्रमाणपत्र नहीं मिला।"
+    },
+    "collector": {
+      "title": "संग्राहक",
+      "owned": "प्रमाणपत्र",
+      "collections": "संग्रह",
+      "firstActivity": "पहली गतिविधि",
+      "lastActivity": "अंतिम गतिविधि",
+      "collectionsTitle": "संग्रह",
+      "certificatesTitle": "प्रमाणपत्र",
+      "pastTitle": "पहले स्वामित्व में"
+    },
+    "detail": {
+      "certificate": "प्रमाणपत्र",
+      "tokenId": "टोकन आईडी",
+      "mintedOn": "मिंट किया गया",
+      "collection": "संग्रह",
+      "owner": "स्वामी",
+      "poweredBy": "ORIGYN द्वारा संचालित",
+      "openPage": "प्रमाणपत्र पृष्ठ खोलें"
     }
   },
   "ui": {

@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.42] - 2026-07-24
+
+#### Changed
+
+- Improved Viewer searches for principal IDs, with direct navigation to matching collections or collectors.
+- Completed Viewer translations across all supported languages.
+
+#### Fixed
+
+- Fixed account and subaccount handling across transaction history, account overviews, balance history, and dashboard links.
+- Fixed transaction flow graph filtering and account navigation.
+- Fixed balance history coverage for longer time ranges.
+- Distinguished account lookup failures from accounts without transactions.
+
 ### [1.0.41] - 2026-07-16
 
 #### Changed

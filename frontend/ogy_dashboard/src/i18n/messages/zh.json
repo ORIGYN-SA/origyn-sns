@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "仪表盘",
     "governance": "治理",
+    "explorer": "查看器",
     "transactionHistory": "交易历史",
     "calculator": "计算器",
     "openMainMenu": "打开主菜单",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "铸造",
+      "transfer": "转账",
+      "burn": "销毁",
+      "approve": "授权"
+    },
     "history": {
       "title": "交易历史",
       "searchFor": "搜索：",
@@ -464,12 +471,6 @@
         "toRoot": "包含发往根的交易",
         "madeInitial": "进行了初始交易"
       }
-    },
-    "kind": {
-      "mint": "铸造",
-      "transfer": "转账",
-      "burn": "销毁",
-      "approve": "授权"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "我的证书"
+    },
     "neurons": {
       "list": {
         "title": "我的 OGY 神经元",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "查看器",
+    "subtitle": "在区块链上浏览并验证 ORIGYN 证书、收藏系列和收藏家。",
     "searchPlaceholder": "按标题、发行方、principal 或 token ID 搜索",
-    "openFilters": "打开筛选器",
     "checkOnBlockchain": "在区块链上查看",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "未知发行方",
+    "noImage": "暂无图片",
+    "searchResults": "搜索结果",
+    "noResults": "未找到匹配的证书。",
+    "loadError": "无法加载证书，请重试。",
+    "viewAll": "查看全部",
     "sections": {
       "featured": "精选证书",
-      "art": "艺术证书",
-      "gold": "黄金证书"
+      "collections": "收藏系列"
+    },
+    "search": {
+      "noCertificates": "没有匹配的证书。请查看下方的收藏系列和收藏家。",
+      "collections": "匹配的收藏系列",
+      "collectors": "匹配的收藏家"
+    },
+    "collections": {
+      "items": {
+        "one": "件藏品",
+        "other": "件藏品"
+      },
+      "holders": {
+        "one": "位持有者",
+        "other": "位持有者"
+      }
+    },
+    "collectionsPage": {
+      "title": "收藏系列"
+    },
+    "certificatesPage": {
+      "title": "证书",
+      "all": "全部"
+    },
+    "certificatePage": {
+      "notFound": "未找到证书。"
+    },
+    "collector": {
+      "title": "收藏家",
+      "owned": "证书",
+      "collections": "收藏系列",
+      "firstActivity": "首次活动",
+      "lastActivity": "最近活动",
+      "collectionsTitle": "收藏系列",
+      "certificatesTitle": "证书",
+      "pastTitle": "曾经持有"
+    },
+    "detail": {
+      "certificate": "证书",
+      "tokenId": "代币 ID",
+      "mintedOn": "铸造于",
+      "collection": "收藏系列",
+      "owner": "所有者",
+      "poweredBy": "由 ORIGYN 提供技术支持",
+      "openPage": "打开证书页面"
     }
   },
   "ui": {

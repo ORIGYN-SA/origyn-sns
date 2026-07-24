@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "ڈیش بورڈ",
     "governance": "گورننس",
+    "explorer": "ویور",
     "transactionHistory": "لین دین کی تاریخ",
     "calculator": "کیلکولیٹر",
     "openMainMenu": "مرکزی مینو کھولیں",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "منٹ",
+      "transfer": "منتقلی",
+      "burn": "برن",
+      "approve": "منظوری"
+    },
     "history": {
       "title": "لین دین کی تاریخ",
       "searchFor": "تلاش کریں:",
@@ -464,12 +471,6 @@
         "toRoot": "روٹ کی طرف لین دین کے ساتھ",
         "madeInitial": "ابتدائی لین دین کیا"
       }
-    },
-    "kind": {
-      "mint": "منٹ",
-      "transfer": "منتقلی",
-      "burn": "برن",
-      "approve": "منظوری"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "میرے سرٹیفکیٹس"
+    },
     "neurons": {
       "list": {
         "title": "میرے OGY نیورونز",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "ویور",
+    "subtitle": "بلاک چین پر ORIGYN سرٹیفکیٹس، کلیکشنز اور کلیکٹرز کو براؤز اور تصدیق کریں۔",
     "searchPlaceholder": "عنوان، جاری کنندہ، principal یا ٹوکن ID کے ذریعے تلاش کریں",
-    "openFilters": "فلٹرز کھولیں",
     "checkOnBlockchain": "بلاک چین پر چیک کریں",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "نامعلوم جاری کنندہ",
+    "noImage": "کوئی تصویر نہیں",
+    "searchResults": "نتائج برائے",
+    "noResults": "کوئی مماثل سرٹیفکیٹ نہیں ملا۔",
+    "loadError": "سرٹیفکیٹس لوڈ نہیں ہو سکے۔ براہ کرم دوبارہ کوشش کریں۔",
+    "viewAll": "سب دیکھیں",
     "sections": {
       "featured": "نمایاں سرٹیفکیٹس",
-      "art": "آرٹ سرٹیفکیٹس",
-      "gold": "گولڈ سرٹیفکیٹس"
+      "collections": "کلیکشنز"
+    },
+    "search": {
+      "noCertificates": "کوئی سرٹیفکیٹ مماثل نہیں۔ نیچے کلیکشنز اور کلیکٹرز دیکھیں۔",
+      "collections": "مماثل کلیکشنز",
+      "collectors": "مماثل کلیکٹرز"
+    },
+    "collections": {
+      "items": {
+        "one": "آئٹم",
+        "other": "آئٹمز"
+      },
+      "holders": {
+        "one": "حامل",
+        "other": "حاملین"
+      }
+    },
+    "collectionsPage": {
+      "title": "کلیکشنز"
+    },
+    "certificatesPage": {
+      "title": "سرٹیفکیٹس",
+      "all": "سبھی"
+    },
+    "certificatePage": {
+      "notFound": "سرٹیفکیٹ نہیں ملا۔"
+    },
+    "collector": {
+      "title": "کلیکٹر",
+      "owned": "سرٹیفکیٹس",
+      "collections": "کلیکشنز",
+      "firstActivity": "پہلی سرگرمی",
+      "lastActivity": "آخری سرگرمی",
+      "collectionsTitle": "کلیکشنز",
+      "certificatesTitle": "سرٹیفکیٹس",
+      "pastTitle": "پہلے ملکیت میں"
+    },
+    "detail": {
+      "certificate": "سرٹیفکیٹ",
+      "tokenId": "ٹوکن آئی ڈی",
+      "mintedOn": "منٹ کیا گیا",
+      "collection": "کلیکشن",
+      "owner": "مالک",
+      "poweredBy": "ORIGYN کے تعاون سے",
+      "openPage": "سرٹیفکیٹ صفحہ کھولیں"
     }
   },
   "ui": {

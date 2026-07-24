@@ -16,7 +16,7 @@ interface ISearch {
   placeholder?: string;
   dropdown?: React.ReactNode;
   actions?: React.ReactNode;
-  onEnter?: () => void;
+  onEnter?: (value: string) => void;
 }
 
 const Search = ({
@@ -76,7 +76,7 @@ const Search = ({
     if (e.key !== "Enter") return;
 
     e.preventDefault();
-    onEnter?.();
+    onEnter?.(searchterm);
   };
 
   const hasSearchTerm = searchterm !== "";

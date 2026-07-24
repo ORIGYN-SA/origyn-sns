@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Painel",
     "governance": "Governança",
+    "explorer": "Visualizador",
     "transactionHistory": "Histórico de transações",
     "calculator": "Calculadora",
     "openMainMenu": "Abrir menu principal",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Cunhar",
+      "transfer": "Transferir",
+      "burn": "Queimar",
+      "approve": "Aprovar"
+    },
     "history": {
       "title": "Histórico de transações",
       "searchFor": "Pesquisar por:",
@@ -464,12 +471,6 @@
         "toRoot": "Com transações para a raiz",
         "madeInitial": "Realizou a transação inicial"
       }
-    },
-    "kind": {
-      "mint": "Cunhar",
-      "transfer": "Transferir",
-      "burn": "Queimar",
-      "approve": "Aprovar"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Meus certificados"
+    },
     "neurons": {
       "list": {
         "title": "Meus Neurônios OGY",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Visualizador",
+    "subtitle": "Explore e verifique certificados, coleções e colecionadores ORIGYN na blockchain.",
     "searchPlaceholder": "Pesquisar por título, emissor, principal ou ID do token",
-    "openFilters": "Abrir filtros",
     "checkOnBlockchain": "Verificar na blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Emissor desconhecido",
+    "noImage": "Sem imagem",
+    "searchResults": "Resultados para",
+    "noResults": "Nenhum certificado correspondente encontrado.",
+    "loadError": "Não foi possível carregar os certificados. Tente novamente.",
+    "viewAll": "Ver tudo",
     "sections": {
       "featured": "Certificados em Destaque",
-      "art": "Certificados de Arte",
-      "gold": "Certificados de Ouro"
+      "collections": "Coleções"
+    },
+    "search": {
+      "noCertificates": "Nenhum certificado corresponde. Veja coleções e colecionadores abaixo.",
+      "collections": "Coleções correspondentes",
+      "collectors": "Colecionadores correspondentes"
+    },
+    "collections": {
+      "items": {
+        "one": "item",
+        "other": "itens"
+      },
+      "holders": {
+        "one": "detentor",
+        "other": "detentores"
+      }
+    },
+    "collectionsPage": {
+      "title": "Coleções"
+    },
+    "certificatesPage": {
+      "title": "Certificados",
+      "all": "Todos"
+    },
+    "certificatePage": {
+      "notFound": "Certificado não encontrado."
+    },
+    "collector": {
+      "title": "Colecionador",
+      "owned": "Certificados",
+      "collections": "Coleções",
+      "firstActivity": "Primeira atividade",
+      "lastActivity": "Última atividade",
+      "collectionsTitle": "Coleções",
+      "certificatesTitle": "Certificados",
+      "pastTitle": "Possuídos anteriormente"
+    },
+    "detail": {
+      "certificate": "Certificado",
+      "tokenId": "ID do token",
+      "mintedOn": "Cunhado em",
+      "collection": "Coleção",
+      "owner": "Proprietário",
+      "poweredBy": "Desenvolvido pela ORIGYN",
+      "openPage": "Abrir página do certificado"
     }
   },
   "ui": {

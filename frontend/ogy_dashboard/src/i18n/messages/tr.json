@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Kontrol Paneli",
     "governance": "Yönetişim",
+    "explorer": "Görüntüleyici",
     "transactionHistory": "İşlem Geçmişi",
     "calculator": "Hesaplayıcı",
     "openMainMenu": "Ana menüyü aç",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Basım",
+      "transfer": "Transfer",
+      "burn": "Yakma",
+      "approve": "Onayla"
+    },
     "history": {
       "title": "İşlem Geçmişi",
       "searchFor": "Şunu ara:",
@@ -464,12 +471,6 @@
         "toRoot": "Köke giden işlemlerle",
         "madeInitial": "İlk işlemi yaptı"
       }
-    },
-    "kind": {
-      "mint": "Basım",
-      "transfer": "Transfer",
-      "burn": "Yakma",
-      "approve": "Onayla"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Sertifikalarım"
+    },
     "neurons": {
       "list": {
         "title": "OGY Neuron'larım",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Görüntüleyici",
+    "subtitle": "ORIGYN sertifikalarını, koleksiyonlarını ve koleksiyonerlerini blokzincirde inceleyin ve doğrulayın.",
     "searchPlaceholder": "Başlık, ihraç eden, principal veya token ID ile ara",
-    "openFilters": "Filtreleri aç",
     "checkOnBlockchain": "Blok zincirinde kontrol et",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Bilinmeyen düzenleyici",
+    "noImage": "Görsel yok",
+    "searchResults": "Şunun için sonuçlar:",
+    "noResults": "Eşleşen sertifika bulunamadı.",
+    "loadError": "Sertifikalar yüklenemedi. Lütfen tekrar deneyin.",
+    "viewAll": "Tümünü gör",
     "sections": {
       "featured": "Öne Çıkan Sertifikalar",
-      "art": "Sanat Sertifikaları",
-      "gold": "Altın Sertifikaları"
+      "collections": "Koleksiyonlar"
+    },
+    "search": {
+      "noCertificates": "Hiçbir sertifika eşleşmedi. Aşağıdaki koleksiyonlara ve koleksiyonerlere göz atın.",
+      "collections": "Eşleşen koleksiyonlar",
+      "collectors": "Eşleşen koleksiyonerler"
+    },
+    "collections": {
+      "items": {
+        "one": "öğe",
+        "other": "öğe"
+      },
+      "holders": {
+        "one": "sahip",
+        "other": "sahip"
+      }
+    },
+    "collectionsPage": {
+      "title": "Koleksiyonlar"
+    },
+    "certificatesPage": {
+      "title": "Sertifikalar",
+      "all": "Tümü"
+    },
+    "certificatePage": {
+      "notFound": "Sertifika bulunamadı."
+    },
+    "collector": {
+      "title": "Koleksiyoner",
+      "owned": "Sertifikalar",
+      "collections": "Koleksiyonlar",
+      "firstActivity": "İlk etkinlik",
+      "lastActivity": "Son etkinlik",
+      "collectionsTitle": "Koleksiyonlar",
+      "certificatesTitle": "Sertifikalar",
+      "pastTitle": "Daha önce sahip olunanlar"
+    },
+    "detail": {
+      "certificate": "Sertifika",
+      "tokenId": "Token kimliği",
+      "mintedOn": "Basım tarihi",
+      "collection": "Koleksiyon",
+      "owner": "Sahip",
+      "poweredBy": "ORIGYN altyapısıyla",
+      "openPage": "Sertifika sayfasını aç"
     }
   },
   "ui": {
