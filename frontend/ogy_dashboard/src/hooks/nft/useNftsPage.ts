@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import gldtEndpoints from "@services/api/gldt/v1/endpoints";
-import { NftListParams } from "@origyn/shared/gldt";
+import { NftListParams } from "@origyn/shared-ui/gldt";
 import { collectionNamesById, toNftCard, NftCard } from "./mapNft";
 
 const ONE_MINUTE = 60 * 1000;

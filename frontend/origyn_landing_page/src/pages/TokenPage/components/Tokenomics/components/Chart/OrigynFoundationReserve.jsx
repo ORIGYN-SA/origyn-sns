@@ -1,5 +1,5 @@
-import { PieStatsCard } from "@origyn/shared/charts";
-import { TooltipInfo } from "@origyn/shared/ui";
+import { PieStatsCard } from "@origyn/shared-ui/charts";
+import { TooltipInfo } from "@origyn/shared-ui/ui";
 import useFoundationReserve from "@/hooks/useFoundationReserve";
 
 const COLORS = ["#ff55c5", "#90306f"];

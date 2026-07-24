@@ -1,5 +1,5 @@
-import { PieStatsCard } from "@origyn/shared/charts";
-import { TooltipInfo, ExternalLink } from "@origyn/shared/ui";
+import { PieStatsCard } from "@origyn/shared-ui/charts";
+import { TooltipInfo, ExternalLink } from "@origyn/shared-ui/ui";
 import useCirculationStateOGY from "@/hooks/useCirculationStateOGY";
 
 const COLORS = ["#645eff", "#333089"];

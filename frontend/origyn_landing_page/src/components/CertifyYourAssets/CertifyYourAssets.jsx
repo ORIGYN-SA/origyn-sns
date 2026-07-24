@@ -1,5 +1,5 @@
 import React from "react";
-import { Calculator } from "@origyn/shared/calculator";
+import { Calculator } from "@origyn/shared-ui/calculator";
 import styles from "./CertifyYourAssets.module.scss";
 import Button from "@components/Button/Button";
 import { useT } from "@/i18n/LocaleContext";

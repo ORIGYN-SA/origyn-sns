@@ -12,6 +12,8 @@
       - frontend/**/.npm/
       - frontend/**/node_modules/
   before_script:
+    # .npmrc resolves @origyn/shared-ui from the shared-ui GitLab package
+    # registry (anonymous pull — no token needed).
     - npm ci --cache .npm --prefer-offline
   variables:
     KUBERNETES_MEMORY_LIMIT: "5Gi"
