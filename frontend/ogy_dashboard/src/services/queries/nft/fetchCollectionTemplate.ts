@@ -3,7 +3,7 @@ import { getActor } from "@services/actor";
 import {
   TemplateJsonPayload,
   TemplateStructure,
-} from "@components/certificate/types";
+} from "@origyn/shared-ui/certificate";
 
 interface CollectionInfo {
   owner: Principal;

@@ -10,8 +10,10 @@ import SimpleCertificateBody, { DetailItem } from "./SimpleCertificateBody";
 
 // The template viewer is the largest part of the explorer; load it only when
 // a templated certificate is actually opened.
-const CertificateViewer = lazy(
-  () => import("@components/certificate/CertificateViewer")
+const CertificateViewer = lazy(() =>
+  import("@origyn/shared-ui/certificate").then((m) => ({
+    default: m.CertificateViewer,
+  }))
 );
 
 export const CertificateSkeleton = () => (
