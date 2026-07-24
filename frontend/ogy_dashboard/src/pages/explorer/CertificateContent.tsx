@@ -46,6 +46,9 @@ const CertificateContent = ({ nft }: { nft: NftCard }) => {
           template={template}
           selectedLanguage={locale}
           certificateTabLabel={t("explorer.detail.certificate")}
+          // The Minting Studio default renders a "Custom stamp" placeholder;
+          // the dashboard shows the actual minted stamp image.
+          showCustomStampImage
         />
       </Suspense>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-2">
