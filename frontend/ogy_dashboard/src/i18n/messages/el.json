@@ -631,6 +631,7 @@
       "stakedTokens": "Staked tokens",
       "ledgerBalance": "Υπόλοιπο Ledger",
       "weightInTotalSupply": "Βάρος στη Συνολική Προσφορά"
+      ,"governanceCanisterTag": "Canister διακυβέρνησης, περιέχει όλα τα κοινόχρηστα token"
     }
   },
   "recovery": {

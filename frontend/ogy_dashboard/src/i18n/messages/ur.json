@@ -631,6 +631,7 @@
       "stakedTokens": "اسٹیک شدہ ٹوکنز",
       "ledgerBalance": "لیجر بیلنس",
       "weightInTotalSupply": "کل سپلائی میں وزن"
+      ,"governanceCanisterTag": "گورننس کینسٹر، تمام مشترکہ ٹوکن رکھتا ہے"
     }
   },
   "recovery": {

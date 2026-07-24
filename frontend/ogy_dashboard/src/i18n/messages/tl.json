@@ -631,6 +631,7 @@
       "stakedTokens": "Mga staked na token",
       "ledgerBalance": "Balanse sa Ledger",
       "weightInTotalSupply": "Timbang sa Kabuuang Supply"
+      ,"governanceCanisterTag": "Governance canister, naglalaman ng lahat ng nakabahaging token"
     }
   },
   "recovery": {

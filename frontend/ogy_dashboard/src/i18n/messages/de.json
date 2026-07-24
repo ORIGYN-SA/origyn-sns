@@ -631,6 +631,7 @@
       "stakedTokens": "Gestakte Token",
       "ledgerBalance": "Ledger-Guthaben",
       "weightInTotalSupply": "Gewicht am Gesamtbestand"
+      ,"governanceCanisterTag": "Governance-Canister, enthält alle gemeinsam genutzten Token"
     }
   },
   "recovery": {

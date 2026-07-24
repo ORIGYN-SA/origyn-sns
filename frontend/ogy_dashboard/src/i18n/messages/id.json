@@ -631,6 +631,7 @@
       "stakedTokens": "Token yang di-stake",
       "ledgerBalance": "Saldo Ledger",
       "weightInTotalSupply": "Bobot Dalam Total Pasokan"
+      ,"governanceCanisterTag": "Canister tata kelola, menyimpan semua token bersama"
     }
   },
   "recovery": {

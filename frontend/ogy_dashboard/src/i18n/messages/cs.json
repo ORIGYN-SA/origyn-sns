@@ -630,7 +630,8 @@
       "governanceBalance": "Zůstatek ve správě",
       "stakedTokens": "Stakované tokeny",
       "ledgerBalance": "Zůstatek na ledgeru",
-      "weightInTotalSupply": "Podíl na celkové zásobě"
+      "weightInTotalSupply": "Podíl na celkové zásobě",
+      "governanceCanisterTag": "Governance canister, uchovává všechny sdílené tokeny"
     }
   },
   "recovery": {

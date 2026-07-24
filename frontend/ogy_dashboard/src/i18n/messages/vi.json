@@ -631,6 +631,7 @@
       "stakedTokens": "Token đã stake",
       "ledgerBalance": "Số dư ledger",
       "weightInTotalSupply": "Trọng số trong tổng nguồn cung"
+      ,"governanceCanisterTag": "Canister quản trị, chứa tất cả token dùng chung"
     }
   },
   "recovery": {

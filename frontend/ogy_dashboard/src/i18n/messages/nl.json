@@ -631,6 +631,7 @@
       "stakedTokens": "Gestakete tokens",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Gewicht in totale voorraad"
+      ,"governanceCanisterTag": "Governance-canister, bevat alle gedeelde tokens"
     }
   },
   "recovery": {

@@ -631,6 +631,7 @@
       "stakedTokens": "Stake-elt tokenek",
       "ledgerBalance": "Ledger egyenleg",
       "weightInTotalSupply": "Súly a teljes kínálatban"
+      ,"governanceCanisterTag": "Governance-canister, az összes megosztott tokent tárolja"
     }
   },
   "recovery": {

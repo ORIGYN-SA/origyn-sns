@@ -631,6 +631,7 @@
       "stakedTokens": "Tokenuri în staking",
       "ledgerBalance": "Sold ledger",
       "weightInTotalSupply": "Pondere în oferta totală"
+      ,"governanceCanisterTag": "Canisterul de guvernanță, deține toate tokenurile partajate"
     }
   },
   "recovery": {

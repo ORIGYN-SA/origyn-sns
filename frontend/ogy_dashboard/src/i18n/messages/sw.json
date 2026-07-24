@@ -631,6 +631,7 @@
       "stakedTokens": "Tokeni zilizowekewa dau",
       "ledgerBalance": "Salio la Ledger",
       "weightInTotalSupply": "Uzito katika Jumla ya Usambazaji"
+      ,"governanceCanisterTag": "Canister ya utawala, ina tokeni zote zinazoshirikiwa"
     }
   },
   "recovery": {

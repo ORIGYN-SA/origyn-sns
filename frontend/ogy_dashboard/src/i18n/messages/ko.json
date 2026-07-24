@@ -631,6 +631,7 @@
       "stakedTokens": "스테이크된 토큰",
       "ledgerBalance": "레저 잔액",
       "weightInTotalSupply": "총 공급량 내 비중"
+      ,"governanceCanisterTag": "거버넌스 캐니스터, 모든 공유 토큰을 보유합니다"
     }
   },
   "recovery": {
