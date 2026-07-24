@@ -635,6 +635,7 @@
       "stakedTokens": "Stakade tokens",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Vikt i totalt utbud"
+      ,"governanceCanisterTag": "Governance-canister, innehåller alla delade tokens"
     }
   },
   "recovery": {

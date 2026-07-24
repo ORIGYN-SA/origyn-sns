@@ -635,6 +635,7 @@
       "stakedTokens": "Staatut tokenit",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Osuus kokonaistarjonnasta"
+      ,"governanceCanisterTag": "Hallintokanisteri, sisältää kaikki jaetut tokenit"
     }
   },
   "recovery": {

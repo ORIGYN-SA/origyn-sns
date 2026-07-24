@@ -6,6 +6,7 @@ import { NewTableColumn } from "@components/ui/NewTable";
 import { buildFakeRows } from "@helpers/skeleton/fakeData";
 import useTokenDistribution from "@hooks/metrics/useTokenDistribution";
 import { TableProps } from "@helpers/table/useTable";
+import { SNS_GOVERNANCE_CANISTER_ID } from "@constants/index";
 
 type TokenDistributionRow = {
   principal: string;
@@ -75,33 +76,39 @@ const TokenDistributionList = ({
     {
       id: "principal",
       header: t("tokenDistribution.list.address"),
-      cell: (row) => (
-        <div className="flex items-center gap-2 md:w-96 w-64">
-          <button
-            dir="ltr"
-            className="truncate min-w-0 text-start hover:underline"
-            onClick={() =>
-              navigate(
-                lp(
-                  `/transaction-history/transactions/accounts/${row.principal}`
+      cell: (row) => {
+        const tag =
+          row.principal === SNS_GOVERNANCE_CANISTER_ID
+            ? t("tokenDistribution.list.governanceCanisterTag")
+            : row.tag;
+        return (
+          <div className="flex items-center gap-2 md:w-96 w-64">
+            <button
+              dir="ltr"
+              className="truncate min-w-0 text-start hover:underline"
+              onClick={() =>
+                navigate(
+                  lp(
+                    `/transaction-history/transactions/accounts/${row.principal}`
+                  )
                 )
-              )
-            }
-          >
-            {row.principal}
-          </button>
-          <div className="ms-auto flex items-center gap-2 shrink-0">
-            <CopyToClipboard value={row.principal} />
-            {row?.tag ? (
-              <TooltipInfo id={`tooltip_${row.tag}`} clickable={false}>
-                {row.tag}
-              </TooltipInfo>
-            ) : (
-              <div className="inline-block w-4 h-4" aria-hidden="true" />
-            )}
+              }
+            >
+              {row.principal}
+            </button>
+            <div className="ms-auto flex items-center gap-2 shrink-0">
+              <CopyToClipboard value={row.principal} />
+              {tag ? (
+                <TooltipInfo id={`tooltip_${tag}`} clickable={false}>
+                  {tag}
+                </TooltipInfo>
+              ) : (
+                <div className="inline-block w-4 h-4" aria-hidden="true" />
+              )}
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       id: "total",

@@ -635,6 +635,7 @@
       "stakedTokens": "Tokens en staking",
       "ledgerBalance": "Saldo del Ledger",
       "weightInTotalSupply": "Peso en el Suministro Total"
+      ,"governanceCanisterTag": "Canister de gobernanza, contiene todos los tokens compartidos"
     }
   },
   "recovery": {

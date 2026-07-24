@@ -634,7 +634,8 @@
       "governanceBalance": "رصيد الحوكمة",
       "stakedTokens": "الرموز المرهونة",
       "ledgerBalance": "رصيد دفتر الأستاذ",
-      "weightInTotalSupply": "الوزن في إجمالي المعروض"
+      "weightInTotalSupply": "الوزن في إجمالي المعروض",
+      "governanceCanisterTag": "حاوية الحوكمة، تحتفظ بجميع الرموز المشتركة"
     }
   },
   "recovery": {

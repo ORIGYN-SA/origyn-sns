@@ -635,6 +635,7 @@
       "stakedTokens": "Застейкані токени",
       "ledgerBalance": "Баланс реєстру",
       "weightInTotalSupply": "Вага в загальній пропозиції"
+      ,"governanceCanisterTag": "Каністер управління, зберігає всі спільні токени"
     }
   },
   "recovery": {

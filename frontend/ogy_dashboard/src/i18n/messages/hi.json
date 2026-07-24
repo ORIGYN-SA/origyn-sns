@@ -635,6 +635,7 @@
       "stakedTokens": "स्टेक किए गए टोकन",
       "ledgerBalance": "Ledger बैलेंस",
       "weightInTotalSupply": "कुल सप्लाई में भार"
+      ,"governanceCanisterTag": "गवर्नेंस कैनिस्टर, सभी साझा टोकन रखता है"
     }
   },
   "recovery": {

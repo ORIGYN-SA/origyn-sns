@@ -635,6 +635,7 @@
       "stakedTokens": "Stake edilen token'lar",
       "ledgerBalance": "Ledger Bakiyesi",
       "weightInTotalSupply": "Toplam Arzdaki Ağırlık"
+      ,"governanceCanisterTag": "Yönetişim canister'ı, paylaşılan tüm tokenları tutar"
     }
   },
   "recovery": {

@@ -635,6 +635,7 @@
       "stakedTokens": "אסימונים בסטייקינג",
       "ledgerBalance": "יתרת Ledger",
       "weightInTotalSupply": "משקל בסך ההיצע"
+      ,"governanceCanisterTag": "קניסטר ממשל, מחזיק את כל האסימונים המשותפים"
     }
   },
   "recovery": {

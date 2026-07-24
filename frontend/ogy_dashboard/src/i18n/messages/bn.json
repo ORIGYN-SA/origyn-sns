@@ -634,7 +634,8 @@
       "governanceBalance": "গভর্ন্যান্স ব্যালেন্স",
       "stakedTokens": "স্টেক করা টোকেন",
       "ledgerBalance": "লেজার ব্যালেন্স",
-      "weightInTotalSupply": "মোট সরবরাহে ওজন"
+      "weightInTotalSupply": "মোট সরবরাহে ওজন",
+      "governanceCanisterTag": "গভর্ন্যান্স ক্যানিস্টার, সমস্ত শেয়ার করা টোকেন ধারণ করে"
     }
   },
   "recovery": {

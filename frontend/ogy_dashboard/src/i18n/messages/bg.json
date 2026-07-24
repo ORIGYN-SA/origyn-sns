@@ -634,7 +634,8 @@
       "governanceBalance": "Баланс в управлението",
       "stakedTokens": "Стейкнати токени",
       "ledgerBalance": "Баланс в регистъра",
-      "weightInTotalSupply": "Тегло в общото предлагане"
+      "weightInTotalSupply": "Тегло в общото предлагане",
+      "governanceCanisterTag": "Канистър на управлението, съхранява всички споделени токени"
     }
   },
   "recovery": {

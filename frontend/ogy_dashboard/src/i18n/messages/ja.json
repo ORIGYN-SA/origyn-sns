@@ -635,6 +635,7 @@
       "stakedTokens": "ステーク済みトークン",
       "ledgerBalance": "レジャー残高",
       "weightInTotalSupply": "総供給量に占める割合"
+      ,"governanceCanisterTag": "ガバナンスキャニスター。共有トークンをすべて保有"
     }
   },
   "recovery": {

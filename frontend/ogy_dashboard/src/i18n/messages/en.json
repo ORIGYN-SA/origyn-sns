@@ -634,7 +634,8 @@
       "governanceBalance": "Governance Balance",
       "stakedTokens": "Staked tokens",
       "ledgerBalance": "Ledger Balance",
-      "weightInTotalSupply": "Weight In Total Supply"
+      "weightInTotalSupply": "Weight In Total Supply",
+      "governanceCanisterTag": "Governance Canister, holds all the shared tokens"
     }
   },
   "recovery": {

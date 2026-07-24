@@ -635,6 +635,7 @@
       "stakedTokens": "Stakede tokens",
       "ledgerBalance": "Ledger-saldo",
       "weightInTotalSupply": "Vægt i samlet forsyning"
+      ,"governanceCanisterTag": "Governance-canister, indeholder alle delte tokens"
     }
   },
   "recovery": {

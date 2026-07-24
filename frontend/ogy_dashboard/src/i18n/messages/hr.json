@@ -635,6 +635,7 @@
       "stakedTokens": "Stakani tokeni",
       "ledgerBalance": "Stanje ledgera",
       "weightInTotalSupply": "Udio u ukupnoj ponudi"
+      ,"governanceCanisterTag": "Canister upravljanja, sadrži sve zajedničke tokene"
     }
   },
   "recovery": {

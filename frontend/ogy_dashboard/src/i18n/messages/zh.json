@@ -635,6 +635,7 @@
       "stakedTokens": "已质押代币",
       "ledgerBalance": "账本余额",
       "weightInTotalSupply": "在总供应量中的权重"
+      ,"governanceCanisterTag": "治理 Canister，持有所有共享代币"
     }
   },
   "recovery": {

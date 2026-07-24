@@ -635,6 +635,7 @@
       "stakedTokens": "Stakowane tokeny",
       "ledgerBalance": "Saldo ledgera",
       "weightInTotalSupply": "Udział w łącznej podaży"
+      ,"governanceCanisterTag": "Kanister zarządzania, przechowuje wszystkie współdzielone tokeny"
     }
   },
   "recovery": {

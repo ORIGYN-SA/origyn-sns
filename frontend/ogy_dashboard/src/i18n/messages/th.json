@@ -635,6 +635,7 @@
       "stakedTokens": "โทเคนที่สเตก",
       "ledgerBalance": "ยอดคงเหลือ Ledger",
       "weightInTotalSupply": "น้ำหนักในอุปทานทั้งหมด"
+      ,"governanceCanisterTag": "แคนิสเตอร์การกำกับดูแล ถือโทเค็นที่ใช้ร่วมกันทั้งหมด"
     }
   },
   "recovery": {
