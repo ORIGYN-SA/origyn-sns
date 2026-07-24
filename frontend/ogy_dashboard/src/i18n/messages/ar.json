@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "لوحة التحكم",
     "governance": "الحوكمة",
+    "explorer": "العارض",
     "transactionHistory": "سجل المعاملات",
     "calculator": "الآلة الحاسبة",
     "openMainMenu": "فتح القائمة الرئيسية",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "سَكّ",
+      "transfer": "تحويل",
+      "burn": "حرق",
+      "approve": "موافقة"
+    },
     "history": {
       "title": "سجل المعاملات",
       "searchFor": "ابحث عن:",
@@ -464,12 +471,6 @@
         "toRoot": "مع معاملات إلى الجذر",
         "madeInitial": "أجرى المعاملة الأولية"
       }
-    },
-    "kind": {
-      "mint": "سَكّ",
-      "transfer": "تحويل",
-      "burn": "حرق",
-      "approve": "موافقة"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "شهاداتي"
+    },
     "neurons": {
       "list": {
         "title": "خلايا OGY العصبية الخاصة بي",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "العارض",
+    "subtitle": "تصفّح وتحقّق من شهادات ORIGYN والمجموعات وهواة الاقتناء على البلوكتشين.",
     "searchPlaceholder": "ابحث بالعنوان أو المُصدِر أو الحساب الرئيسي أو معرّف الرمز",
-    "openFilters": "فتح عوامل التصفية",
     "checkOnBlockchain": "تحقق على البلوكتشين",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "جهة إصدار غير معروفة",
+    "noImage": "لا توجد صورة",
+    "searchResults": "نتائج البحث عن",
+    "noResults": "لم يتم العثور على شهادات مطابقة.",
+    "loadError": "تعذّر تحميل الشهادات. يرجى المحاولة مرة أخرى.",
+    "viewAll": "عرض الكل",
     "sections": {
       "featured": "الشهادات المميزة",
-      "art": "شهادات الفن",
-      "gold": "شهادات الذهب"
+      "collections": "المجموعات"
+    },
+    "search": {
+      "noCertificates": "لا توجد شهادات مطابقة. انظر المجموعات والمقتنين أدناه.",
+      "collections": "مجموعات مطابقة",
+      "collectors": "مقتنون مطابقون"
+    },
+    "collections": {
+      "items": {
+        "one": "عنصر",
+        "other": "عناصر"
+      },
+      "holders": {
+        "one": "مالك",
+        "other": "مالكون"
+      }
+    },
+    "collectionsPage": {
+      "title": "المجموعات"
+    },
+    "certificatesPage": {
+      "title": "الشهادات",
+      "all": "الكل"
+    },
+    "certificatePage": {
+      "notFound": "لم يتم العثور على الشهادة."
+    },
+    "collector": {
+      "title": "المقتني",
+      "owned": "الشهادات",
+      "collections": "المجموعات",
+      "firstActivity": "أول نشاط",
+      "lastActivity": "آخر نشاط",
+      "collectionsTitle": "المجموعات",
+      "certificatesTitle": "الشهادات",
+      "pastTitle": "مملوكة سابقًا"
+    },
+    "detail": {
+      "certificate": "الشهادة",
+      "tokenId": "معرّف الرمز",
+      "mintedOn": "تاريخ السكّ",
+      "collection": "المجموعة",
+      "owner": "المالك",
+      "poweredBy": "مدعوم من ORIGYN",
+      "openPage": "فتح صفحة الشهادة"
     }
   },
   "ui": {

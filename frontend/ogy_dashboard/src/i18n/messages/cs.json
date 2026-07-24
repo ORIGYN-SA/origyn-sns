@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Přehled",
     "governance": "Správa",
+    "explorer": "Prohlížeč",
     "transactionHistory": "Historie transakcí",
     "calculator": "Kalkulačka",
     "openMainMenu": "Otevřít hlavní nabídku",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Vytvoření",
+      "transfer": "Převod",
+      "burn": "Spálení",
+      "approve": "Schválení"
+    },
     "history": {
       "title": "Historie transakcí",
       "searchFor": "Hledat:",
@@ -464,12 +471,6 @@
         "toRoot": "S transakcemi do kořene",
         "madeInitial": "Provedl počáteční transakci"
       }
-    },
-    "kind": {
-      "mint": "Vytvoření",
-      "transfer": "Převod",
-      "burn": "Spálení",
-      "approve": "Schválení"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Moje certifikáty"
+    },
     "neurons": {
       "list": {
         "title": "Moje OGY Neurony",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Prohlížeč",
+    "subtitle": "Procházejte a ověřujte certifikáty, kolekce a sběratele ORIGYN na blockchainu.",
     "searchPlaceholder": "Hledat podle názvu, vydavatele, principalu nebo ID tokenu",
-    "openFilters": "Otevřít filtry",
     "checkOnBlockchain": "Ověřit na blockchainu",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Neznámý vydavatel",
+    "noImage": "Žádný obrázek",
+    "searchResults": "Výsledky pro",
+    "noResults": "Nebyly nalezeny žádné odpovídající certifikáty.",
+    "loadError": "Certifikáty se nepodařilo načíst. Zkuste to prosím znovu.",
+    "viewAll": "Zobrazit vše",
     "sections": {
       "featured": "Doporučené certifikáty",
-      "art": "Umělecké certifikáty",
-      "gold": "Zlaté certifikáty"
+      "collections": "Kolekce"
+    },
+    "search": {
+      "noCertificates": "Žádné certifikáty neodpovídají. Níže najdete kolekce a sběratele.",
+      "collections": "Odpovídající kolekce",
+      "collectors": "Odpovídající sběratelé"
+    },
+    "collections": {
+      "items": {
+        "one": "položka",
+        "other": "položek"
+      },
+      "holders": {
+        "one": "držitel",
+        "other": "držitelů"
+      }
+    },
+    "collectionsPage": {
+      "title": "Kolekce"
+    },
+    "certificatesPage": {
+      "title": "Certifikáty",
+      "all": "Vše"
+    },
+    "certificatePage": {
+      "notFound": "Certifikát nebyl nalezen."
+    },
+    "collector": {
+      "title": "Sběratel",
+      "owned": "Certifikáty",
+      "collections": "Kolekce",
+      "firstActivity": "První aktivita",
+      "lastActivity": "Poslední aktivita",
+      "collectionsTitle": "Kolekce",
+      "certificatesTitle": "Certifikáty",
+      "pastTitle": "Dříve vlastněné"
+    },
+    "detail": {
+      "certificate": "Certifikát",
+      "tokenId": "ID tokenu",
+      "mintedOn": "Vydáno dne",
+      "collection": "Kolekce",
+      "owner": "Vlastník",
+      "poweredBy": "Využívá technologii ORIGYN",
+      "openPage": "Otevřít stránku certifikátu"
     }
   },
   "ui": {

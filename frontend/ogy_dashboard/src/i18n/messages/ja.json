@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "ダッシュボード",
     "governance": "ガバナンス",
+    "explorer": "ビューア",
     "transactionHistory": "取引履歴",
     "calculator": "計算ツール",
     "openMainMenu": "メインメニューを開く",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "発行",
+      "transfer": "送金",
+      "burn": "バーン",
+      "approve": "承認"
+    },
     "history": {
       "title": "取引履歴",
       "searchFor": "検索:",
@@ -464,12 +471,6 @@
         "toRoot": "ルートへの取引あり",
         "madeInitial": "初回取引を実行"
       }
-    },
-    "kind": {
-      "mint": "発行",
-      "transfer": "送金",
-      "burn": "バーン",
-      "approve": "承認"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "マイ証明書"
+    },
     "neurons": {
       "list": {
         "title": "マイ OGY ニューロン",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "ビューア",
+    "subtitle": "ブロックチェーン上で ORIGYN の証明書、コレクション、コレクターを閲覧・検証できます。",
     "searchPlaceholder": "タイトル、発行者、プリンシパル、トークン ID で検索",
-    "openFilters": "フィルターを開く",
     "checkOnBlockchain": "ブロックチェーンで確認",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "発行者不明",
+    "noImage": "画像なし",
+    "searchResults": "検索結果",
+    "noResults": "一致する証明書が見つかりませんでした。",
+    "loadError": "証明書を読み込めませんでした。もう一度お試しください。",
+    "viewAll": "すべて表示",
     "sections": {
       "featured": "注目の証明書",
-      "art": "アート証明書",
-      "gold": "ゴールド証明書"
+      "collections": "コレクション"
+    },
+    "search": {
+      "noCertificates": "一致する証明書はありません。以下のコレクションとコレクターをご覧ください。",
+      "collections": "一致するコレクション",
+      "collectors": "一致するコレクター"
+    },
+    "collections": {
+      "items": {
+        "one": "アイテム",
+        "other": "アイテム"
+      },
+      "holders": {
+        "one": "保有者",
+        "other": "保有者"
+      }
+    },
+    "collectionsPage": {
+      "title": "コレクション"
+    },
+    "certificatesPage": {
+      "title": "証明書",
+      "all": "すべて"
+    },
+    "certificatePage": {
+      "notFound": "証明書が見つかりません。"
+    },
+    "collector": {
+      "title": "コレクター",
+      "owned": "証明書",
+      "collections": "コレクション",
+      "firstActivity": "最初のアクティビティ",
+      "lastActivity": "最新のアクティビティ",
+      "collectionsTitle": "コレクション",
+      "certificatesTitle": "証明書",
+      "pastTitle": "過去に保有"
+    },
+    "detail": {
+      "certificate": "証明書",
+      "tokenId": "トークンID",
+      "mintedOn": "発行日",
+      "collection": "コレクション",
+      "owner": "所有者",
+      "poweredBy": "Powered by ORIGYN",
+      "openPage": "証明書ページを開く"
     }
   },
   "ui": {

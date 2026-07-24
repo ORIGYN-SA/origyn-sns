@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Irányítópult",
     "governance": "Kormányzás",
+    "explorer": "Megtekintő",
     "transactionHistory": "Tranzakciós előzmények",
     "calculator": "Kalkulátor",
     "openMainMenu": "Főmenü megnyitása",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Kibocsátás",
+      "transfer": "Átutalás",
+      "burn": "Égetés",
+      "approve": "Jóváhagyás"
+    },
     "history": {
       "title": "Tranzakciós előzmények",
       "searchFor": "Keresés:",
@@ -464,12 +471,6 @@
         "toRoot": "A gyökérbe küldött tranzakciókkal",
         "madeInitial": "Végrehajtotta a kezdeti tranzakciót"
       }
-    },
-    "kind": {
-      "mint": "Kibocsátás",
-      "transfer": "Átutalás",
-      "burn": "Égetés",
-      "approve": "Jóváhagyás"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Saját tanúsítványok"
+    },
     "neurons": {
       "list": {
         "title": "Az OGY neuronjaim",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Megtekintő",
+    "subtitle": "Böngésszen és ellenőrizzen ORIGYN-tanúsítványokat, gyűjteményeket és gyűjtőket a blokkláncon.",
     "searchPlaceholder": "Keresés cím, kibocsátó, principal vagy token azonosító szerint",
-    "openFilters": "Szűrők megnyitása",
     "checkOnBlockchain": "Ellenőrzés a blokkláncon",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Ismeretlen kibocsátó",
+    "noImage": "Nincs kép",
+    "searchResults": "Találatok erre:",
+    "noResults": "Nem található egyező tanúsítvány.",
+    "loadError": "A tanúsítványokat nem sikerült betölteni. Kérjük, próbálja újra.",
+    "viewAll": "Összes megtekintése",
     "sections": {
       "featured": "Kiemelt tanúsítványok",
-      "art": "Művészeti tanúsítványok",
-      "gold": "Arany tanúsítványok"
+      "collections": "Gyűjtemények"
+    },
+    "search": {
+      "noCertificates": "Egyetlen tanúsítvány sem egyezett. Lásd alább a gyűjteményeket és gyűjtőket.",
+      "collections": "Egyező gyűjtemények",
+      "collectors": "Egyező gyűjtők"
+    },
+    "collections": {
+      "items": {
+        "one": "elem",
+        "other": "elem"
+      },
+      "holders": {
+        "one": "tulajdonos",
+        "other": "tulajdonos"
+      }
+    },
+    "collectionsPage": {
+      "title": "Gyűjtemények"
+    },
+    "certificatesPage": {
+      "title": "Tanúsítványok",
+      "all": "Összes"
+    },
+    "certificatePage": {
+      "notFound": "A tanúsítvány nem található."
+    },
+    "collector": {
+      "title": "Gyűjtő",
+      "owned": "Tanúsítványok",
+      "collections": "Gyűjtemények",
+      "firstActivity": "Első aktivitás",
+      "lastActivity": "Utolsó aktivitás",
+      "collectionsTitle": "Gyűjtemények",
+      "certificatesTitle": "Tanúsítványok",
+      "pastTitle": "Korábbi tulajdon"
+    },
+    "detail": {
+      "certificate": "Tanúsítvány",
+      "tokenId": "Token-azonosító",
+      "mintedOn": "Kibocsátva",
+      "collection": "Gyűjtemény",
+      "owner": "Tulajdonos",
+      "poweredBy": "Az ORIGYN technológiájával",
+      "openPage": "Tanúsítványoldal megnyitása"
     }
   },
   "ui": {

@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dasbor",
     "governance": "Tata Kelola",
+    "explorer": "Penampil",
     "transactionHistory": "Riwayat Transaksi",
     "calculator": "Kalkulator",
     "openMainMenu": "Buka menu utama",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Mint",
+      "transfer": "Transfer",
+      "burn": "Burn",
+      "approve": "Setujui"
+    },
     "history": {
       "title": "Riwayat Transaksi",
       "searchFor": "Cari:",
@@ -464,12 +471,6 @@
         "toRoot": "Dengan transaksi ke root",
         "madeInitial": "Melakukan transaksi awal"
       }
-    },
-    "kind": {
-      "mint": "Mint",
-      "transfer": "Transfer",
-      "burn": "Burn",
-      "approve": "Setujui"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Sertifikat Saya"
+    },
     "neurons": {
       "list": {
         "title": "Neuron OGY Saya",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Penampil",
+    "subtitle": "Jelajahi dan verifikasi sertifikat, koleksi, dan kolektor ORIGYN di blockchain.",
     "searchPlaceholder": "Cari berdasarkan judul, penerbit, principal, atau ID token",
-    "openFilters": "Buka filter",
     "checkOnBlockchain": "Periksa di blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Penerbit tidak dikenal",
+    "noImage": "Tidak ada gambar",
+    "searchResults": "Hasil untuk",
+    "noResults": "Tidak ditemukan sertifikat yang cocok.",
+    "loadError": "Tidak dapat memuat sertifikat. Silakan coba lagi.",
+    "viewAll": "Lihat semua",
     "sections": {
       "featured": "Sertifikat Unggulan",
-      "art": "Sertifikat Seni",
-      "gold": "Sertifikat Emas"
+      "collections": "Koleksi"
+    },
+    "search": {
+      "noCertificates": "Tidak ada sertifikat yang cocok. Lihat koleksi dan kolektor di bawah.",
+      "collections": "Koleksi yang cocok",
+      "collectors": "Kolektor yang cocok"
+    },
+    "collections": {
+      "items": {
+        "one": "item",
+        "other": "item"
+      },
+      "holders": {
+        "one": "pemegang",
+        "other": "pemegang"
+      }
+    },
+    "collectionsPage": {
+      "title": "Koleksi"
+    },
+    "certificatesPage": {
+      "title": "Sertifikat",
+      "all": "Semua"
+    },
+    "certificatePage": {
+      "notFound": "Sertifikat tidak ditemukan."
+    },
+    "collector": {
+      "title": "Kolektor",
+      "owned": "Sertifikat",
+      "collections": "Koleksi",
+      "firstActivity": "Aktivitas pertama",
+      "lastActivity": "Aktivitas terakhir",
+      "collectionsTitle": "Koleksi",
+      "certificatesTitle": "Sertifikat",
+      "pastTitle": "Pernah dimiliki"
+    },
+    "detail": {
+      "certificate": "Sertifikat",
+      "tokenId": "ID Token",
+      "mintedOn": "Dicetak pada",
+      "collection": "Koleksi",
+      "owner": "Pemilik",
+      "poweredBy": "Didukung oleh ORIGYN",
+      "openPage": "Buka halaman sertifikat"
     }
   },
   "ui": {

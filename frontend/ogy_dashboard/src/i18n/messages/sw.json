@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "Dashibodi",
     "governance": "Utawala",
+    "explorer": "Kitazamaji",
     "transactionHistory": "Historia ya Miamala",
     "calculator": "Kikokotoo",
     "openMainMenu": "Fungua menyu kuu",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "Tengeneza",
+      "transfer": "Hamisha",
+      "burn": "Choma",
+      "approve": "Idhinisha"
+    },
     "history": {
       "title": "Historia ya Miamala",
       "searchFor": "Tafuta:",
@@ -464,12 +471,6 @@
         "toRoot": "Pamoja na miamala kwenda mzizi",
         "madeInitial": "Ilifanya muamala wa awali"
       }
-    },
-    "kind": {
-      "mint": "Tengeneza",
-      "transfer": "Hamisha",
-      "burn": "Choma",
-      "approve": "Idhinisha"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "Vyeti Vyangu"
+    },
     "neurons": {
       "list": {
         "title": "Neuroni Zangu za OGY",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "Kitazamaji",
+    "subtitle": "Vinjari na uthibitishe vyeti, makusanyo na wakusanyaji wa ORIGYN kwenye blockchain.",
     "searchPlaceholder": "Tafuta kwa kichwa, mtoaji, principal au kitambulisho cha tokeni",
-    "openFilters": "Fungua vichujio",
     "checkOnBlockchain": "Angalia kwenye blockchain",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "Mtoaji asiyejulikana",
+    "noImage": "Hakuna picha",
+    "searchResults": "Matokeo ya",
+    "noResults": "Hakuna vyeti vinavyolingana vilivyopatikana.",
+    "loadError": "Imeshindikana kupakia vyeti. Tafadhali jaribu tena.",
+    "viewAll": "Tazama zote",
     "sections": {
       "featured": "Vyeti Vilivyoangaziwa",
-      "art": "Vyeti vya Sanaa",
-      "gold": "Vyeti vya Dhahabu"
+      "collections": "Makusanyo"
+    },
+    "search": {
+      "noCertificates": "Hakuna cheti kilicholingana. Tazama makusanyo na wakusanyaji hapa chini.",
+      "collections": "Makusanyo yanayolingana",
+      "collectors": "Wakusanyaji wanaolingana"
+    },
+    "collections": {
+      "items": {
+        "one": "kipengee",
+        "other": "vipengee"
+      },
+      "holders": {
+        "one": "mmiliki",
+        "other": "wamiliki"
+      }
+    },
+    "collectionsPage": {
+      "title": "Makusanyo"
+    },
+    "certificatesPage": {
+      "title": "Vyeti",
+      "all": "Zote"
+    },
+    "certificatePage": {
+      "notFound": "Cheti hakikupatikana."
+    },
+    "collector": {
+      "title": "Mkusanyaji",
+      "owned": "Vyeti",
+      "collections": "Makusanyo",
+      "firstActivity": "Shughuli ya kwanza",
+      "lastActivity": "Shughuli ya mwisho",
+      "collectionsTitle": "Makusanyo",
+      "certificatesTitle": "Vyeti",
+      "pastTitle": "Vilivyomilikiwa awali"
+    },
+    "detail": {
+      "certificate": "Cheti",
+      "tokenId": "Kitambulisho cha tokeni",
+      "mintedOn": "Kilitolewa tarehe",
+      "collection": "Mkusanyo",
+      "owner": "Mmiliki",
+      "poweredBy": "Inaendeshwa na ORIGYN",
+      "openPage": "Fungua ukurasa wa cheti"
     }
   },
   "ui": {

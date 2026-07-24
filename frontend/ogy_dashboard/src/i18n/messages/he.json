@@ -75,6 +75,7 @@
   "nav": {
     "dashboard": "לוח בקרה",
     "governance": "ממשל",
+    "explorer": "מציג",
     "transactionHistory": "היסטוריית עסקאות",
     "calculator": "מחשבון",
     "openMainMenu": "פתח תפריט ראשי",
@@ -388,6 +389,12 @@
     }
   },
   "transactions": {
+    "kind": {
+      "mint": "הנפקה",
+      "transfer": "העברה",
+      "burn": "שריפה",
+      "approve": "אישור"
+    },
     "history": {
       "title": "היסטוריית עסקאות",
       "searchFor": "חפש:",
@@ -464,12 +471,6 @@
         "toRoot": "עם עסקאות אל השורש",
         "madeInitial": "ביצע עסקה ראשונית"
       }
-    },
-    "kind": {
-      "mint": "הנפקה",
-      "transfer": "העברה",
-      "burn": "שריפה",
-      "approve": "אישור"
     }
   },
   "account": {
@@ -591,6 +592,9 @@
         }
       }
     },
+    "myCertificates": {
+      "title": "התעודות שלי"
+    },
     "neurons": {
       "list": {
         "title": "הנוירונים שלי ב-OGY",
@@ -683,15 +687,62 @@
   },
   "explorer": {
     "title": "מציג",
+    "subtitle": "עיינו ואמתו תעודות, אוספים ואספנים של ORIGYN על הבלוקצ'יין.",
     "searchPlaceholder": "חפש לפי כותרת, מנפיק, principal או מזהה אסימון",
-    "openFilters": "פתח מסננים",
     "checkOnBlockchain": "בדוק בבלוקצ׳יין",
-    "sampleIssuer": "Suzanne sys",
-    "sampleTitle": "The Midsummer Night Dream",
+    "unknownIssuer": "מנפיק לא ידוע",
+    "noImage": "אין תמונה",
+    "searchResults": "תוצאות עבור",
+    "noResults": "לא נמצאו תעודות תואמות.",
+    "loadError": "לא ניתן היה לטעון את התעודות. נסו שוב.",
+    "viewAll": "הצגת הכול",
     "sections": {
       "featured": "תעודות מומלצות",
-      "art": "תעודות אמנות",
-      "gold": "תעודות זהב"
+      "collections": "אוספים"
+    },
+    "search": {
+      "noCertificates": "אף תעודה לא תאמה. ראו אוספים ואספנים בהמשך.",
+      "collections": "אוספים תואמים",
+      "collectors": "אספנים תואמים"
+    },
+    "collections": {
+      "items": {
+        "one": "פריט",
+        "other": "פריטים"
+      },
+      "holders": {
+        "one": "מחזיק",
+        "other": "מחזיקים"
+      }
+    },
+    "collectionsPage": {
+      "title": "אוספים"
+    },
+    "certificatesPage": {
+      "title": "תעודות",
+      "all": "הכול"
+    },
+    "certificatePage": {
+      "notFound": "התעודה לא נמצאה."
+    },
+    "collector": {
+      "title": "אספן",
+      "owned": "תעודות",
+      "collections": "אוספים",
+      "firstActivity": "פעילות ראשונה",
+      "lastActivity": "פעילות אחרונה",
+      "collectionsTitle": "אוספים",
+      "certificatesTitle": "תעודות",
+      "pastTitle": "בבעלות קודמת"
+    },
+    "detail": {
+      "certificate": "תעודה",
+      "tokenId": "מזהה טוקן",
+      "mintedOn": "הונפק בתאריך",
+      "collection": "אוסף",
+      "owner": "בעלים",
+      "poweredBy": "מופעל על ידי ORIGYN",
+      "openPage": "פתיחת עמוד התעודה"
     }
   },
   "ui": {
