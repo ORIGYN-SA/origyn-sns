@@ -147,7 +147,14 @@ const CategorySection = ({
   if (!isLoading && cards.length === 0) return null;
 
   return (
-    <Section title={category}>
+    <Section
+      title={category}
+      action={
+        <ViewAllLink
+          to={`/viewer/certificates?category=${encodeURIComponent(category)}`}
+        />
+      }
+    >
       {isLoading ? (
         <SkeletonCarouselItems />
       ) : (
