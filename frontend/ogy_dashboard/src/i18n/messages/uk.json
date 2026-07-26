@@ -707,6 +707,7 @@
       "collectors": "Відповідні колекціонери"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "предмет",
         "other": "предметів"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Колекції"
     },
+    "collectionPage": {
+      "certificates": "Сертифікати",
+      "holders": "Власників"
+    },
     "certificatesPage": {
       "title": "Сертифікати",
-      "all": "Усі"
+      "all": "Усі",
+      "sortBy": "Сортувати за",
+      "newest": "Спочатку нові",
+      "oldest": "Спочатку старі"
     },
     "certificatePage": {
       "notFound": "Сертифікат не знайдено."
@@ -734,7 +742,14 @@
       "lastActivity": "Остання активність",
       "collectionsTitle": "Колекції",
       "certificatesTitle": "Сертифікати",
-      "pastTitle": "Раніше у власності"
+      "pastTitle": "Раніше у власності",
+      "historyTitle": "Історія володіння",
+      "status": {
+        "all": "Усі",
+        "Minted": "Викарбувано",
+        "Received": "Отримано",
+        "Transferred": "Передано"
+      }
     },
     "detail": {
       "certificate": "Сертифікат",

@@ -707,6 +707,7 @@
       "collectors": "Odpovídající sběratelé"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "položka",
         "other": "položek"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Kolekce"
     },
+    "collectionPage": {
+      "certificates": "Certifikáty",
+      "holders": "Držitelů"
+    },
     "certificatesPage": {
       "title": "Certifikáty",
-      "all": "Vše"
+      "all": "Vše",
+      "sortBy": "Seřadit podle",
+      "newest": "Nejnovější první",
+      "oldest": "Nejstarší první"
     },
     "certificatePage": {
       "notFound": "Certifikát nebyl nalezen."
@@ -734,7 +742,14 @@
       "lastActivity": "Poslední aktivita",
       "collectionsTitle": "Kolekce",
       "certificatesTitle": "Certifikáty",
-      "pastTitle": "Dříve vlastněné"
+      "pastTitle": "Dříve vlastněné",
+      "historyTitle": "Historie vlastnictví",
+      "status": {
+        "all": "Vše",
+        "Minted": "Vyraženo",
+        "Received": "Přijato",
+        "Transferred": "Převedeno"
+      }
     },
     "detail": {
       "certificate": "Certifikát",

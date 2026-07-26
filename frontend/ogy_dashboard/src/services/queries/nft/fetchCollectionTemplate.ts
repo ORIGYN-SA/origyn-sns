@@ -1,20 +1,16 @@
-import {
-  TemplateJsonPayload,
-  TemplateStructure,
-} from "@origyn/shared-ui/certificate";
+import { TemplateStructure } from "@origyn/shared-ui/certificate";
+import gldtEndpoints from "@services/api/gldt/v1/endpoints";
+import { HttpError } from "@services/api/httpClient";
 
 const fetchCollectionTemplate = async (
-  templateUrl: string
+  canisterId: string
 ): Promise<TemplateStructure | null> => {
-  const response = await fetch(templateUrl);
-
-  if (!response.ok) return null;
-
   try {
-    const payload: TemplateJsonPayload = await response.json();
-    return payload.structure ?? null;
-  } catch {
-    return null;
+    const template = await gldtEndpoints.getNftCollectionTemplate(canisterId);
+    return template.structure ?? null;
+  } catch (error) {
+    if ((error as HttpError | null)?.status === 404) return null;
+    throw error;
   }
 };
 

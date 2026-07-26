@@ -707,6 +707,7 @@
       "collectors": "مقتنون مطابقون"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "عنصر",
         "other": "عناصر"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "المجموعات"
     },
+    "collectionPage": {
+      "certificates": "الشهادات",
+      "holders": "مالكون"
+    },
     "certificatesPage": {
       "title": "الشهادات",
-      "all": "الكل"
+      "all": "الكل",
+      "sortBy": "ترتيب حسب",
+      "newest": "الأحدث أولاً",
+      "oldest": "الأقدم أولاً"
     },
     "certificatePage": {
       "notFound": "لم يتم العثور على الشهادة."
@@ -734,7 +742,14 @@
       "lastActivity": "آخر نشاط",
       "collectionsTitle": "المجموعات",
       "certificatesTitle": "الشهادات",
-      "pastTitle": "مملوكة سابقًا"
+      "pastTitle": "مملوكة سابقًا",
+      "historyTitle": "سجل الملكية",
+      "status": {
+        "all": "الكل",
+        "Minted": "مسكوك",
+        "Received": "مستلم",
+        "Transferred": "محوّل"
+      }
     },
     "detail": {
       "certificate": "الشهادة",

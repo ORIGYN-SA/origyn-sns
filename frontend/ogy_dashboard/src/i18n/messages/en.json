@@ -707,6 +707,7 @@
       "collectors": "Matching collectors"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "item",
         "other": "items"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Collections"
     },
+    "collectionPage": {
+      "certificates": "Certificates",
+      "holders": "Holders"
+    },
     "certificatesPage": {
       "title": "Certificates",
-      "all": "All"
+      "all": "All",
+      "sortBy": "Sort by",
+      "newest": "Newest first",
+      "oldest": "Oldest first"
     },
     "certificatePage": {
       "notFound": "Certificate not found."
@@ -734,7 +742,14 @@
       "lastActivity": "Last activity",
       "collectionsTitle": "Collections",
       "certificatesTitle": "Certificates",
-      "pastTitle": "Previously owned"
+      "pastTitle": "Previously owned",
+      "historyTitle": "Ownership history",
+      "status": {
+        "all": "All",
+        "Minted": "Minted",
+        "Received": "Received",
+        "Transferred": "Transferred"
+      }
     },
     "detail": {
       "certificate": "Certificate",

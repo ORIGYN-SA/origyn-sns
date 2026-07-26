@@ -707,6 +707,7 @@
       "collectors": "นักสะสมที่ตรงกัน"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "รายการ",
         "other": "รายการ"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "คอลเลกชัน"
     },
+    "collectionPage": {
+      "certificates": "ใบรับรอง",
+      "holders": "ผู้ถือครอง"
+    },
     "certificatesPage": {
       "title": "ใบรับรอง",
-      "all": "ทั้งหมด"
+      "all": "ทั้งหมด",
+      "sortBy": "เรียงตาม",
+      "newest": "ใหม่ที่สุดก่อน",
+      "oldest": "เก่าที่สุดก่อน"
     },
     "certificatePage": {
       "notFound": "ไม่พบใบรับรอง"
@@ -734,7 +742,14 @@
       "lastActivity": "กิจกรรมล่าสุด",
       "collectionsTitle": "คอลเลกชัน",
       "certificatesTitle": "ใบรับรอง",
-      "pastTitle": "เคยถือครอง"
+      "pastTitle": "เคยถือครอง",
+      "historyTitle": "ประวัติการเป็นเจ้าของ",
+      "status": {
+        "all": "ทั้งหมด",
+        "Minted": "สร้างแล้ว",
+        "Received": "ได้รับ",
+        "Transferred": "โอนแล้ว"
+      }
     },
     "detail": {
       "certificate": "ใบรับรอง",

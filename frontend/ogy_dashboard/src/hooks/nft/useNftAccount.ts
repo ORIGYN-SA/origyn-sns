@@ -1,6 +1,12 @@
 import { useMemo } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import gldtEndpoints from "@services/api/gldt/v1/endpoints";
+import {
+  ApiNftAccountItem,
+  ApiNftCollection,
+  ApiNftOwnedItem,
+  NftOwnedStatus,
+} from "@services/api/gldt/v1/types";
 import { collectionNamesById, toNftCard, NftCard } from "./mapNft";
 
 interface PageParams {
@@ -9,6 +15,17 @@ interface PageParams {
 }
 
 const ONE_MINUTE = 60 * 1000;
+
+type AccountNft = ApiNftAccountItem | ApiNftOwnedItem;
+
+const useNftCards = (data?: {
+  items?: AccountNft[];
+  collections?: ApiNftCollection[];
+}) =>
+  useMemo(() => {
+    const names = collectionNamesById(data?.collections);
+    return (data?.items ?? []).map((nft) => toNftCard(nft, names));
+  }, [data]);
 
 export const useNftAccountStats = (principal: string | null) =>
   useQuery({
@@ -39,10 +56,24 @@ export const useNftAccountNfts = (
     staleTime: ONE_MINUTE,
   });
 
-  const cards: NftCard[] = useMemo(() => {
-    const names = collectionNamesById(query.data?.collections);
-    return (query.data?.items ?? []).map((nft) => toNftCard(nft, names));
-  }, [query.data]);
+  const cards: NftCard[] = useNftCards(query.data);
+
+  return { ...query, cards, total: query.data?.total ?? 0 };
+};
+
+export const useNftOwnerNfts = (
+  principal: string | null,
+  params: PageParams & { status?: NftOwnedStatus } = {}
+) => {
+  const query = useQuery({
+    queryKey: ["NFT_OWNER_NFTS", principal, params],
+    queryFn: () => gldtEndpoints.getNftOwnerNfts(principal as string, params),
+    enabled: principal !== null,
+    placeholderData: keepPreviousData,
+    staleTime: ONE_MINUTE,
+  });
+
+  const cards: NftCard[] = useNftCards(query.data);
 
   return { ...query, cards, total: query.data?.total ?? 0 };
 };
@@ -60,10 +91,7 @@ export const useNftAccountPastNfts = (
     staleTime: ONE_MINUTE,
   });
 
-  const cards: NftCard[] = useMemo(() => {
-    const names = collectionNamesById(query.data?.collections);
-    return (query.data?.items ?? []).map((nft) => toNftCard(nft, names));
-  }, [query.data]);
+  const cards: NftCard[] = useNftCards(query.data);
 
   return { ...query, cards, total: query.data?.total ?? 0 };
 };

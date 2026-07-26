@@ -707,6 +707,7 @@
       "collectors": "Vastaavat keräilijät"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "kohde",
         "other": "kohdetta"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Kokoelmat"
     },
+    "collectionPage": {
+      "certificates": "Sertifikaatit",
+      "holders": "Haltijaa"
+    },
     "certificatesPage": {
       "title": "Sertifikaatit",
-      "all": "Kaikki"
+      "all": "Kaikki",
+      "sortBy": "Järjestä",
+      "newest": "Uusimmat ensin",
+      "oldest": "Vanhimmat ensin"
     },
     "certificatePage": {
       "notFound": "Sertifikaattia ei löytynyt."
@@ -734,7 +742,14 @@
       "lastActivity": "Viimeisin tapahtuma",
       "collectionsTitle": "Kokoelmat",
       "certificatesTitle": "Sertifikaatit",
-      "pastTitle": "Aiemmin omistetut"
+      "pastTitle": "Aiemmin omistetut",
+      "historyTitle": "Omistushistoria",
+      "status": {
+        "all": "Kaikki",
+        "Minted": "Luotu",
+        "Received": "Vastaanotettu",
+        "Transferred": "Siirretty"
+      }
     },
     "detail": {
       "certificate": "Sertifikaatti",

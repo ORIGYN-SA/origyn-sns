@@ -707,6 +707,7 @@
       "collectors": "মিলে যাওয়া সংগ্রাহক"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "আইটেম",
         "other": "আইটেম"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "কালেকশন"
     },
+    "collectionPage": {
+      "certificates": "সার্টিফিকেট",
+      "holders": "ধারক"
+    },
     "certificatesPage": {
       "title": "সার্টিফিকেট",
-      "all": "সব"
+      "all": "সব",
+      "sortBy": "সাজান",
+      "newest": "নতুন আগে",
+      "oldest": "পুরনো আগে"
     },
     "certificatePage": {
       "notFound": "সার্টিফিকেট পাওয়া যায়নি।"
@@ -734,7 +742,14 @@
       "lastActivity": "সর্বশেষ কার্যকলাপ",
       "collectionsTitle": "কালেকশন",
       "certificatesTitle": "সার্টিফিকেট",
-      "pastTitle": "পূর্বে মালিকানাধীন"
+      "pastTitle": "পূর্বে মালিকানাধীন",
+      "historyTitle": "মালিকানার ইতিহাস",
+      "status": {
+        "all": "সব",
+        "Minted": "মিন্ট করা",
+        "Received": "প্রাপ্ত",
+        "Transferred": "স্থানান্তরিত"
+      }
     },
     "detail": {
       "certificate": "সার্টিফিকেট",

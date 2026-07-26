@@ -707,6 +707,7 @@
       "collectors": "Odgovarajući kolekcionari"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "stavka",
         "other": "stavki"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Kolekcije"
     },
+    "collectionPage": {
+      "certificates": "Certifikati",
+      "holders": "Imatelja"
+    },
     "certificatesPage": {
       "title": "Certifikati",
-      "all": "Svi"
+      "all": "Svi",
+      "sortBy": "Poredaj po",
+      "newest": "Najnovije prvo",
+      "oldest": "Najstarije prvo"
     },
     "certificatePage": {
       "notFound": "Certifikat nije pronađen."
@@ -734,7 +742,14 @@
       "lastActivity": "Posljednja aktivnost",
       "collectionsTitle": "Kolekcije",
       "certificatesTitle": "Certifikati",
-      "pastTitle": "Prethodno u vlasništvu"
+      "pastTitle": "Prethodno u vlasništvu",
+      "historyTitle": "Povijest vlasništva",
+      "status": {
+        "all": "Svi",
+        "Minted": "Iskovano",
+        "Received": "Primljeno",
+        "Transferred": "Preneseno"
+      }
     },
     "detail": {
       "certificate": "Certifikat",

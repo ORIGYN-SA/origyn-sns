@@ -25,19 +25,32 @@ const SKELETON_COUNT = 6;
 
 const Section = ({
   title,
+  description,
   action,
   children,
 }: {
   title: string;
+  description?: string | null;
   action?: ReactNode;
   children: ReactNode;
 }) => (
   <section>
-    <div className="flex items-center justify-between h-9 mb-3">
-      <h2 className="text-explorer-section font-semibold leading-none text-content">
-        {title}
-      </h2>
-      {action && <div className="flex items-center sm:me-24">{action}</div>}
+    <div className="flex items-start justify-between gap-4 mb-3">
+      <div className="flex flex-col gap-1 min-w-0">
+        <h2 className="text-explorer-section font-semibold leading-none text-content">
+          {title}
+        </h2>
+        {description && (
+          <p className="text-sm text-muted leading-snug max-w-2xl">
+            {description}
+          </p>
+        )}
+      </div>
+      {action && (
+        <div className="flex items-center h-9 self-end shrink-0 sm:me-24">
+          {action}
+        </div>
+      )}
     </div>
     <Carousel>{children}</Carousel>
   </section>
@@ -137,9 +150,11 @@ const CollectionsSection = () => {
 
 const CategorySection = ({
   category,
+  description,
   onSelect,
 }: {
   category: string;
+  description?: string | null;
   onSelect: OnSelectNft;
 }) => {
   const { cards, isLoading } = useNfts({ category, limit: CATEGORY_LIMIT });
@@ -149,6 +164,7 @@ const CategorySection = ({
   return (
     <Section
       title={category}
+      description={description}
       action={
         <ViewAllLink
           to={`/viewer/certificates?category=${encodeURIComponent(category)}`}
@@ -333,8 +349,9 @@ export const Explorer = () => {
             <CollectionsSection />
             {categories.map((category) => (
               <CategorySection
-                key={category}
-                category={category}
+                key={category.name}
+                category={category.name}
+                description={category.description}
                 onSelect={setSelectedNft}
               />
             ))}

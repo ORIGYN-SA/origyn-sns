@@ -707,6 +707,7 @@
       "collectors": "Подходящие коллекционеры"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "предмет",
         "other": "предметов"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Коллекции"
     },
+    "collectionPage": {
+      "certificates": "Сертификаты",
+      "holders": "Владельцев"
+    },
     "certificatesPage": {
       "title": "Сертификаты",
-      "all": "Все"
+      "all": "Все",
+      "sortBy": "Сортировать по",
+      "newest": "Сначала новые",
+      "oldest": "Сначала старые"
     },
     "certificatePage": {
       "notFound": "Сертификат не найден."
@@ -734,7 +742,14 @@
       "lastActivity": "Последняя активность",
       "collectionsTitle": "Коллекции",
       "certificatesTitle": "Сертификаты",
-      "pastTitle": "Ранее во владении"
+      "pastTitle": "Ранее во владении",
+      "historyTitle": "История владения",
+      "status": {
+        "all": "Все",
+        "Minted": "Выпущен",
+        "Received": "Получен",
+        "Transferred": "Передан"
+      }
     },
     "detail": {
       "certificate": "Сертификат",

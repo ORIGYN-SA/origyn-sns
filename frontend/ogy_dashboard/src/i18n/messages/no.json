@@ -707,6 +707,7 @@
       "collectors": "Samsvarende samlere"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "gjenstand",
         "other": "gjenstander"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Samlinger"
     },
+    "collectionPage": {
+      "certificates": "Sertifikater",
+      "holders": "Innehavere"
+    },
     "certificatesPage": {
       "title": "Sertifikater",
-      "all": "Alle"
+      "all": "Alle",
+      "sortBy": "Sorter etter",
+      "newest": "Nyeste først",
+      "oldest": "Eldste først"
     },
     "certificatePage": {
       "notFound": "Sertifikatet ble ikke funnet."
@@ -734,7 +742,14 @@
       "lastActivity": "Siste aktivitet",
       "collectionsTitle": "Samlinger",
       "certificatesTitle": "Sertifikater",
-      "pastTitle": "Tidligere eid"
+      "pastTitle": "Tidligere eid",
+      "historyTitle": "Eierhistorikk",
+      "status": {
+        "all": "Alle",
+        "Minted": "Mintet",
+        "Received": "Mottatt",
+        "Transferred": "Overført"
+      }
     },
     "detail": {
       "certificate": "Sertifikat",

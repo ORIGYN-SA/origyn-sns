@@ -707,6 +707,7 @@
       "collectors": "匹配的收藏家"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "件藏品",
         "other": "件藏品"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "收藏系列"
     },
+    "collectionPage": {
+      "certificates": "证书",
+      "holders": "位持有者"
+    },
     "certificatesPage": {
       "title": "证书",
-      "all": "全部"
+      "all": "全部",
+      "sortBy": "排序方式",
+      "newest": "最新优先",
+      "oldest": "最早优先"
     },
     "certificatePage": {
       "notFound": "未找到证书。"
@@ -734,7 +742,14 @@
       "lastActivity": "最近活动",
       "collectionsTitle": "收藏系列",
       "certificatesTitle": "证书",
-      "pastTitle": "曾经持有"
+      "pastTitle": "曾经持有",
+      "historyTitle": "所有权历史",
+      "status": {
+        "all": "全部",
+        "Minted": "已铸造",
+        "Received": "已接收",
+        "Transferred": "已转出"
+      }
     },
     "detail": {
       "certificate": "证书",

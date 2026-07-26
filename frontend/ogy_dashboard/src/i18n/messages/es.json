@@ -707,6 +707,7 @@
       "collectors": "Coleccionistas coincidentes"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "elemento",
         "other": "elementos"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Colecciones"
     },
+    "collectionPage": {
+      "certificates": "Certificados",
+      "holders": "Titulares"
+    },
     "certificatesPage": {
       "title": "Certificados",
-      "all": "Todos"
+      "all": "Todos",
+      "sortBy": "Ordenar por",
+      "newest": "Más recientes primero",
+      "oldest": "Más antiguos primero"
     },
     "certificatePage": {
       "notFound": "Certificado no encontrado."
@@ -734,7 +742,14 @@
       "lastActivity": "Última actividad",
       "collectionsTitle": "Colecciones",
       "certificatesTitle": "Certificados",
-      "pastTitle": "Poseídos anteriormente"
+      "pastTitle": "Poseídos anteriormente",
+      "historyTitle": "Historial de propiedad",
+      "status": {
+        "all": "Todos",
+        "Minted": "Acuñado",
+        "Received": "Recibido",
+        "Transferred": "Transferido"
+      }
     },
     "detail": {
       "certificate": "Certificado",

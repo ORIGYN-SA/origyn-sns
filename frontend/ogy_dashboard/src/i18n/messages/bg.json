@@ -707,6 +707,7 @@
       "collectors": "Съответстващи колекционери"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "елемент",
         "other": "елемента"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Колекции"
     },
+    "collectionPage": {
+      "certificates": "Сертификати",
+      "holders": "Притежатели"
+    },
     "certificatesPage": {
       "title": "Сертификати",
-      "all": "Всички"
+      "all": "Всички",
+      "sortBy": "Подреждане по",
+      "newest": "Първо най-новите",
+      "oldest": "Първо най-старите"
     },
     "certificatePage": {
       "notFound": "Сертификатът не е намерен."
@@ -734,7 +742,14 @@
       "lastActivity": "Последна активност",
       "collectionsTitle": "Колекции",
       "certificatesTitle": "Сертификати",
-      "pastTitle": "Притежавани преди"
+      "pastTitle": "Притежавани преди",
+      "historyTitle": "История на собствеността",
+      "status": {
+        "all": "Всички",
+        "Minted": "Емитиран",
+        "Received": "Получен",
+        "Transferred": "Прехвърлен"
+      }
     },
     "detail": {
       "certificate": "Сертификат",

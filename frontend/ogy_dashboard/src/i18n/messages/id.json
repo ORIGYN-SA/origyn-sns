@@ -707,6 +707,7 @@
       "collectors": "Kolektor yang cocok"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "item",
         "other": "item"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Koleksi"
     },
+    "collectionPage": {
+      "certificates": "Sertifikat",
+      "holders": "Pemegang"
+    },
     "certificatesPage": {
       "title": "Sertifikat",
-      "all": "Semua"
+      "all": "Semua",
+      "sortBy": "Urutkan berdasarkan",
+      "newest": "Terbaru dulu",
+      "oldest": "Terlama dulu"
     },
     "certificatePage": {
       "notFound": "Sertifikat tidak ditemukan."
@@ -734,7 +742,14 @@
       "lastActivity": "Aktivitas terakhir",
       "collectionsTitle": "Koleksi",
       "certificatesTitle": "Sertifikat",
-      "pastTitle": "Pernah dimiliki"
+      "pastTitle": "Pernah dimiliki",
+      "historyTitle": "Riwayat kepemilikan",
+      "status": {
+        "all": "Semua",
+        "Minted": "Dicetak",
+        "Received": "Diterima",
+        "Transferred": "Ditransfer"
+      }
     },
     "detail": {
       "certificate": "Sertifikat",

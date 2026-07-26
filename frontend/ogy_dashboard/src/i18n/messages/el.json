@@ -707,6 +707,7 @@
       "collectors": "Συλλέκτες που ταιριάζουν"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "αντικείμενο",
         "other": "αντικείμενα"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Συλλογές"
     },
+    "collectionPage": {
+      "certificates": "Πιστοποιητικά",
+      "holders": "Κάτοχοι"
+    },
     "certificatesPage": {
       "title": "Πιστοποιητικά",
-      "all": "Όλα"
+      "all": "Όλα",
+      "sortBy": "Ταξινόμηση κατά",
+      "newest": "Νεότερα πρώτα",
+      "oldest": "Παλαιότερα πρώτα"
     },
     "certificatePage": {
       "notFound": "Το πιστοποιητικό δεν βρέθηκε."
@@ -734,7 +742,14 @@
       "lastActivity": "Τελευταία δραστηριότητα",
       "collectionsTitle": "Συλλογές",
       "certificatesTitle": "Πιστοποιητικά",
-      "pastTitle": "Προηγουμένως στην κατοχή"
+      "pastTitle": "Προηγουμένως στην κατοχή",
+      "historyTitle": "Ιστορικό ιδιοκτησίας",
+      "status": {
+        "all": "Όλα",
+        "Minted": "Κόπηκε",
+        "Received": "Ελήφθη",
+        "Transferred": "Μεταφέρθηκε"
+      }
     },
     "detail": {
       "certificate": "Πιστοποιητικό",

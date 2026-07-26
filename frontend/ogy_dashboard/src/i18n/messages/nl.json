@@ -707,6 +707,7 @@
       "collectors": "Overeenkomende verzamelaars"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "item",
         "other": "items"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Collecties"
     },
+    "collectionPage": {
+      "certificates": "Certificaten",
+      "holders": "Houders"
+    },
     "certificatesPage": {
       "title": "Certificaten",
-      "all": "Alle"
+      "all": "Alle",
+      "sortBy": "Sorteren op",
+      "newest": "Nieuwste eerst",
+      "oldest": "Oudste eerst"
     },
     "certificatePage": {
       "notFound": "Certificaat niet gevonden."
@@ -734,7 +742,14 @@
       "lastActivity": "Laatste activiteit",
       "collectionsTitle": "Collecties",
       "certificatesTitle": "Certificaten",
-      "pastTitle": "Eerder in bezit"
+      "pastTitle": "Eerder in bezit",
+      "historyTitle": "Eigendomsgeschiedenis",
+      "status": {
+        "all": "Alle",
+        "Minted": "Geslagen",
+        "Received": "Ontvangen",
+        "Transferred": "Overgedragen"
+      }
     },
     "detail": {
       "certificate": "Certificaat",
