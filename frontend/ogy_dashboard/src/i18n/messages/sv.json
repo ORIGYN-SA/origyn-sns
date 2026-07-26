@@ -743,7 +743,10 @@
       "collection": "Samling",
       "owner": "Ägare",
       "poweredBy": "Drivs av ORIGYN",
-      "openPage": "Öppna certifikatsidan"
+      "openPage": "Öppna certifikatsidan",
+      "symbol": "Symbol",
+      "canisterId": "Canister-ID",
+      "categories": "Kategorier"
     }
   },
   "ui": {

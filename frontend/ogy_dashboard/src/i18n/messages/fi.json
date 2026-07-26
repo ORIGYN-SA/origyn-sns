@@ -743,7 +743,10 @@
       "collection": "Kokoelma",
       "owner": "Omistaja",
       "poweredBy": "Palvelun tarjoaa ORIGYN",
-      "openPage": "Avaa sertifikaatin sivu"
+      "openPage": "Avaa sertifikaatin sivu",
+      "symbol": "Symboli",
+      "canisterId": "Canisterin tunnus",
+      "categories": "Kategoriat"
     }
   },
   "ui": {

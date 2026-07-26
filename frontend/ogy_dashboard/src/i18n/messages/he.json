@@ -743,7 +743,10 @@
       "collection": "אוסף",
       "owner": "בעלים",
       "poweredBy": "מופעל על ידי ORIGYN",
-      "openPage": "פתיחת עמוד התעודה"
+      "openPage": "פתיחת עמוד התעודה",
+      "symbol": "סמל",
+      "canisterId": "מזהה קניסטר",
+      "categories": "קטגוריות"
     }
   },
   "ui": {

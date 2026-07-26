@@ -743,7 +743,10 @@
       "collection": "Συλλογή",
       "owner": "Ιδιοκτήτης",
       "poweredBy": "Με την υποστήριξη του ORIGYN",
-      "openPage": "Άνοιγμα σελίδας πιστοποιητικού"
+      "openPage": "Άνοιγμα σελίδας πιστοποιητικού",
+      "symbol": "Σύμβολο",
+      "canisterId": "ID canister",
+      "categories": "Κατηγορίες"
     }
   },
   "ui": {

@@ -743,7 +743,10 @@
       "collection": "Gyűjtemény",
       "owner": "Tulajdonos",
       "poweredBy": "Az ORIGYN technológiájával",
-      "openPage": "Tanúsítványoldal megnyitása"
+      "openPage": "Tanúsítványoldal megnyitása",
+      "symbol": "Szimbólum",
+      "canisterId": "Canister-azonosító",
+      "categories": "Kategóriák"
     }
   },
   "ui": {

@@ -743,7 +743,10 @@
       "collection": "コレクション",
       "owner": "所有者",
       "poweredBy": "Powered by ORIGYN",
-      "openPage": "証明書ページを開く"
+      "openPage": "証明書ページを開く",
+      "symbol": "シンボル",
+      "canisterId": "キャニスターID",
+      "categories": "カテゴリ"
     }
   },
   "ui": {

@@ -743,7 +743,10 @@
       "collection": "Kolekcja",
       "owner": "Właściciel",
       "poweredBy": "Obsługiwane przez ORIGYN",
-      "openPage": "Otwórz stronę certyfikatu"
+      "openPage": "Otwórz stronę certyfikatu",
+      "symbol": "Symbol",
+      "canisterId": "ID canistera",
+      "categories": "Kategorie"
     }
   },
   "ui": {

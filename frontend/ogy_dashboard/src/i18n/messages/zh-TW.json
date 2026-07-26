@@ -743,7 +743,10 @@
       "collection": "收藏系列",
       "owner": "所有者",
       "poweredBy": "由 ORIGYN 提供技術支援",
-      "openPage": "開啟憑證頁面"
+      "openPage": "開啟憑證頁面",
+      "symbol": "代號",
+      "canisterId": "容器 ID",
+      "categories": "類別"
     }
   },
   "ui": {

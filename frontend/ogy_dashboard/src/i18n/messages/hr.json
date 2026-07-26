@@ -743,7 +743,10 @@
       "collection": "Kolekcija",
       "owner": "Vlasnik",
       "poweredBy": "Pokreće ORIGYN",
-      "openPage": "Otvori stranicu certifikata"
+      "openPage": "Otvori stranicu certifikata",
+      "symbol": "Simbol",
+      "canisterId": "ID canistera",
+      "categories": "Kategorije"
     }
   },
   "ui": {

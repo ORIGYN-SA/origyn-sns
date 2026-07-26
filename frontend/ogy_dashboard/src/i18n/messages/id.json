@@ -743,7 +743,10 @@
       "collection": "Koleksi",
       "owner": "Pemilik",
       "poweredBy": "Didukung oleh ORIGYN",
-      "openPage": "Buka halaman sertifikat"
+      "openPage": "Buka halaman sertifikat",
+      "symbol": "Simbol",
+      "canisterId": "ID Canister",
+      "categories": "Kategori"
     }
   },
   "ui": {

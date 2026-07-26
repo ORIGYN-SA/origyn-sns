@@ -743,7 +743,10 @@
       "collection": "Kolekce",
       "owner": "Vlastník",
       "poweredBy": "Využívá technologii ORIGYN",
-      "openPage": "Otevřít stránku certifikátu"
+      "openPage": "Otevřít stránku certifikátu",
+      "symbol": "Symbol",
+      "canisterId": "ID canisteru",
+      "categories": "Kategorie"
     }
   },
   "ui": {

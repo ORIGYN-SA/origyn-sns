@@ -743,7 +743,10 @@
       "collection": "Koleksiyon",
       "owner": "Sahip",
       "poweredBy": "ORIGYN altyapısıyla",
-      "openPage": "Sertifika sayfasını aç"
+      "openPage": "Sertifika sayfasını aç",
+      "symbol": "Sembol",
+      "canisterId": "Canister kimliği",
+      "categories": "Kategoriler"
     }
   },
   "ui": {

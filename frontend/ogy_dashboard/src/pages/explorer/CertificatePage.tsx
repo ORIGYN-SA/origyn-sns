@@ -29,7 +29,7 @@ export const CertificatePage = () => {
           <>
             <CertificateSummary nft={card} />
             <div className="rounded-xl bg-surface">
-              <CertificateContent nft={card} />
+              <CertificateContent nft={card} showFallbackMeta={false} />
             </div>
           </>
         )}

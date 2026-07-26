@@ -21,7 +21,13 @@ export const CertificateSkeleton = () => (
   </div>
 );
 
-const CertificateContent = ({ nft }: { nft: NftCard }) => {
+const CertificateContent = ({
+  nft,
+  showFallbackMeta = true,
+}: {
+  nft: NftCard;
+  showFallbackMeta?: boolean;
+}) => {
   const { locale, t } = useLocale();
   const templateQuery = useCollectionTemplate(nft.canisterId);
   const collectionQuery = useNftCollection(nft.canisterId);
@@ -32,7 +38,13 @@ const CertificateContent = ({ nft }: { nft: NftCard }) => {
   const template = templateQuery.data ?? null;
 
   if (!template) {
-    return <SimpleCertificateBody nft={nft} collectionName={collectionName} />;
+    return (
+      <SimpleCertificateBody
+        nft={nft}
+        collectionName={collectionName}
+        showMeta={showFallbackMeta}
+      />
+    );
   }
 
   return (

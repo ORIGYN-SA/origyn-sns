@@ -743,7 +743,10 @@
       "collection": "Collectie",
       "owner": "Eigenaar",
       "poweredBy": "Mogelijk gemaakt door ORIGYN",
-      "openPage": "Certificaatpagina openen"
+      "openPage": "Certificaatpagina openen",
+      "symbol": "Symbool",
+      "canisterId": "Canister-ID",
+      "categories": "Categorieën"
     }
   },
   "ui": {

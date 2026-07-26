@@ -743,7 +743,10 @@
       "collection": "کلیکشن",
       "owner": "مالک",
       "poweredBy": "ORIGYN کے تعاون سے",
-      "openPage": "سرٹیفکیٹ صفحہ کھولیں"
+      "openPage": "سرٹیفکیٹ صفحہ کھولیں",
+      "symbol": "علامت",
+      "canisterId": "کنستر آئی ڈی",
+      "categories": "زمرہ جات"
     }
   },
   "ui": {

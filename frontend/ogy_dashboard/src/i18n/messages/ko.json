@@ -743,7 +743,10 @@
       "collection": "컬렉션",
       "owner": "소유자",
       "poweredBy": "Powered by ORIGYN",
-      "openPage": "인증서 페이지 열기"
+      "openPage": "인증서 페이지 열기",
+      "symbol": "심볼",
+      "canisterId": "캐니스터 ID",
+      "categories": "카테고리"
     }
   },
   "ui": {

@@ -36,9 +36,11 @@ export const DetailItem = ({
 const SimpleCertificateBody = ({
   nft,
   collectionName,
+  showMeta = true,
 }: {
   nft: NftCard;
   collectionName?: string | null;
+  showMeta?: boolean;
 }) => {
   const t = useT();
   const [activeImage, setActiveImage] = useState<string | null>(null);
@@ -86,20 +88,24 @@ const SimpleCertificateBody = ({
       )}
 
       <div className="flex flex-col gap-4 p-6">
-        <div className="flex flex-col gap-1">
-          <IssuerLine issuer={nft.issuer} className="text-muted" />
-          <h2 className="font-extrabold text-2xl sm:text-3xl leading-tight tracking-explorer-hero text-content">
-            {nft.name}
-          </h2>
-          {collectionName && (
-            <p className="text-sm text-muted">{collectionName}</p>
-          )}
-        </div>
+        {showMeta && (
+          <>
+            <div className="flex flex-col gap-1">
+              <IssuerLine issuer={nft.issuer} className="text-muted" />
+              <h2 className="font-extrabold text-2xl sm:text-3xl leading-tight tracking-explorer-hero text-content">
+                {nft.name}
+              </h2>
+              {collectionName && (
+                <p className="text-sm text-muted">{collectionName}</p>
+              )}
+            </div>
 
-        {nft.description && (
-          <p className="text-sm text-muted leading-relaxed">
-            {nft.description}
-          </p>
+            {nft.description && (
+              <p className="text-sm text-muted leading-relaxed">
+                {nft.description}
+              </p>
+            )}
+          </>
         )}
 
         <span className="text-explorer-label font-light tracking-explorer-fine uppercase text-muted">

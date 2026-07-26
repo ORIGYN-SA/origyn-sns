@@ -743,7 +743,10 @@
       "collection": "คอลเลกชัน",
       "owner": "เจ้าของ",
       "poweredBy": "ขับเคลื่อนโดย ORIGYN",
-      "openPage": "เปิดหน้าใบรับรอง"
+      "openPage": "เปิดหน้าใบรับรอง",
+      "symbol": "สัญลักษณ์",
+      "canisterId": "รหัสแคนิสเตอร์",
+      "categories": "หมวดหมู่"
     }
   },
   "ui": {

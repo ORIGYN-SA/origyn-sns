@@ -743,7 +743,10 @@
       "collection": "Koleksyon",
       "owner": "May-ari",
       "poweredBy": "Pinapagana ng ORIGYN",
-      "openPage": "Buksan ang pahina ng sertipiko"
+      "openPage": "Buksan ang pahina ng sertipiko",
+      "symbol": "Simbolo",
+      "canisterId": "Canister ID",
+      "categories": "Mga kategorya"
     }
   },
   "ui": {

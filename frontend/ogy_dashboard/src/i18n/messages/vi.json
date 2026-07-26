@@ -743,7 +743,10 @@
       "collection": "Bộ sưu tập",
       "owner": "Chủ sở hữu",
       "poweredBy": "Được hỗ trợ bởi ORIGYN",
-      "openPage": "Mở trang chứng chỉ"
+      "openPage": "Mở trang chứng chỉ",
+      "symbol": "Ký hiệu",
+      "canisterId": "ID canister",
+      "categories": "Danh mục"
     }
   },
   "ui": {

@@ -743,7 +743,10 @@
       "collection": "Colecție",
       "owner": "Proprietar",
       "poweredBy": "Susținut de ORIGYN",
-      "openPage": "Deschide pagina certificatului"
+      "openPage": "Deschide pagina certificatului",
+      "symbol": "Simbol",
+      "canisterId": "ID canister",
+      "categories": "Categorii"
     }
   },
   "ui": {

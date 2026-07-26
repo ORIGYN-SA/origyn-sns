@@ -743,7 +743,10 @@
       "collection": "संग्रह",
       "owner": "स्वामी",
       "poweredBy": "ORIGYN द्वारा संचालित",
-      "openPage": "प्रमाणपत्र पृष्ठ खोलें"
+      "openPage": "प्रमाणपत्र पृष्ठ खोलें",
+      "symbol": "सिंबल",
+      "canisterId": "कैनिस्टर आईडी",
+      "categories": "श्रेणियाँ"
     }
   },
   "ui": {

@@ -743,7 +743,10 @@
       "collection": "المجموعة",
       "owner": "المالك",
       "poweredBy": "مدعوم من ORIGYN",
-      "openPage": "فتح صفحة الشهادة"
+      "openPage": "فتح صفحة الشهادة",
+      "symbol": "الرمز",
+      "canisterId": "معرّف الحاوية",
+      "categories": "الفئات"
     }
   },
   "ui": {

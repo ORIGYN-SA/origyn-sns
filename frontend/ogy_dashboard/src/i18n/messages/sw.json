@@ -743,7 +743,10 @@
       "collection": "Mkusanyo",
       "owner": "Mmiliki",
       "poweredBy": "Inaendeshwa na ORIGYN",
-      "openPage": "Fungua ukurasa wa cheti"
+      "openPage": "Fungua ukurasa wa cheti",
+      "symbol": "Alama",
+      "canisterId": "Kitambulisho cha canister",
+      "categories": "Kategoria"
     }
   },
   "ui": {
