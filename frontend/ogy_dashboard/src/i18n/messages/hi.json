@@ -707,6 +707,7 @@
       "collectors": "मेल खाते संग्राहक"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "आइटम",
         "other": "आइटम"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "संग्रह"
     },
+    "collectionPage": {
+      "certificates": "प्रमाणपत्र",
+      "holders": "धारक"
+    },
     "certificatesPage": {
       "title": "प्रमाणपत्र",
-      "all": "सभी"
+      "all": "सभी",
+      "sortBy": "क्रमबद्ध करें",
+      "newest": "नवीनतम पहले",
+      "oldest": "सबसे पुराने पहले"
     },
     "certificatePage": {
       "notFound": "प्रमाणपत्र नहीं मिला।"
@@ -734,7 +742,14 @@
       "lastActivity": "अंतिम गतिविधि",
       "collectionsTitle": "संग्रह",
       "certificatesTitle": "प्रमाणपत्र",
-      "pastTitle": "पहले स्वामित्व में"
+      "pastTitle": "पहले स्वामित्व में",
+      "historyTitle": "स्वामित्व इतिहास",
+      "status": {
+        "all": "सभी",
+        "Minted": "मिंट किया गया",
+        "Received": "प्राप्त",
+        "Transferred": "स्थानांतरित"
+      }
     },
     "detail": {
       "certificate": "प्रमाणपत्र",
@@ -743,7 +758,10 @@
       "collection": "संग्रह",
       "owner": "स्वामी",
       "poweredBy": "ORIGYN द्वारा संचालित",
-      "openPage": "प्रमाणपत्र पृष्ठ खोलें"
+      "openPage": "प्रमाणपत्र पृष्ठ खोलें",
+      "symbol": "सिंबल",
+      "canisterId": "कैनिस्टर आईडी",
+      "categories": "श्रेणियाँ"
     }
   },
   "ui": {

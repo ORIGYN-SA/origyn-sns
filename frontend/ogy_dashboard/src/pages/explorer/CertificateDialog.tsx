@@ -32,10 +32,7 @@ const CertificateDialog = ({
           ? "max-w-certificate max-h-dialog-template overflow-y-auto"
           : "max-w-2xl max-h-dialog overflow-y-auto"
       }
-      floatingClose={!hasTemplate && !templateQuery.isLoading}
-    >
-      <CertificateContent nft={nft} />
-      <div className="flex justify-center pb-6">
+      headerStart={
         <Link
           to={lp(`/viewer/certificate/${nft.canisterId}/${nft.tokenId}`)}
           className="inline-flex items-center gap-2 rounded-full bg-content px-5 py-2.5 text-explorer-link-detail font-medium text-surface transition-opacity hover:opacity-80"
@@ -43,7 +40,9 @@ const CertificateDialog = ({
           {t("explorer.detail.openPage")}
           <ChevronRightIcon className="rtl:-scale-x-100" aria-hidden />
         </Link>
-      </div>
+      }
+    >
+      <CertificateContent nft={nft} />
     </Dialog>
   );
 };

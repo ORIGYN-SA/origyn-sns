@@ -707,6 +707,7 @@
       "collectors": "일치하는 수집가"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "항목",
         "other": "항목"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "컬렉션"
     },
+    "collectionPage": {
+      "certificates": "인증서",
+      "holders": "보유자"
+    },
     "certificatesPage": {
       "title": "인증서",
-      "all": "전체"
+      "all": "전체",
+      "sortBy": "정렬 기준",
+      "newest": "최신순",
+      "oldest": "오래된순"
     },
     "certificatePage": {
       "notFound": "인증서를 찾을 수 없습니다."
@@ -734,7 +742,14 @@
       "lastActivity": "마지막 활동",
       "collectionsTitle": "컬렉션",
       "certificatesTitle": "인증서",
-      "pastTitle": "이전 보유"
+      "pastTitle": "이전 보유",
+      "historyTitle": "소유 이력",
+      "status": {
+        "all": "전체",
+        "Minted": "발행됨",
+        "Received": "수신됨",
+        "Transferred": "전송됨"
+      }
     },
     "detail": {
       "certificate": "인증서",
@@ -743,7 +758,10 @@
       "collection": "컬렉션",
       "owner": "소유자",
       "poweredBy": "Powered by ORIGYN",
-      "openPage": "인증서 페이지 열기"
+      "openPage": "인증서 페이지 열기",
+      "symbol": "심볼",
+      "canisterId": "캐니스터 ID",
+      "categories": "카테고리"
     }
   },
   "ui": {

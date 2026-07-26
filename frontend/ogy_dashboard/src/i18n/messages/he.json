@@ -707,6 +707,7 @@
       "collectors": "אספנים תואמים"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "פריט",
         "other": "פריטים"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "אוספים"
     },
+    "collectionPage": {
+      "certificates": "תעודות",
+      "holders": "מחזיקים"
+    },
     "certificatesPage": {
       "title": "תעודות",
-      "all": "הכול"
+      "all": "הכול",
+      "sortBy": "מיין לפי",
+      "newest": "החדשים ביותר תחילה",
+      "oldest": "הישנים ביותר תחילה"
     },
     "certificatePage": {
       "notFound": "התעודה לא נמצאה."
@@ -734,7 +742,14 @@
       "lastActivity": "פעילות אחרונה",
       "collectionsTitle": "אוספים",
       "certificatesTitle": "תעודות",
-      "pastTitle": "בבעלות קודמת"
+      "pastTitle": "בבעלות קודמת",
+      "historyTitle": "היסטוריית בעלות",
+      "status": {
+        "all": "הכול",
+        "Minted": "נטבע",
+        "Received": "התקבל",
+        "Transferred": "הועבר"
+      }
     },
     "detail": {
       "certificate": "תעודה",
@@ -743,7 +758,10 @@
       "collection": "אוסף",
       "owner": "בעלים",
       "poweredBy": "מופעל על ידי ORIGYN",
-      "openPage": "פתיחת עמוד התעודה"
+      "openPage": "פתיחת עמוד התעודה",
+      "symbol": "סמל",
+      "canisterId": "מזהה קניסטר",
+      "categories": "קטגוריות"
     }
   },
   "ui": {

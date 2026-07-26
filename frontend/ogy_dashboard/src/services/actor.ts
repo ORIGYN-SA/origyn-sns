@@ -9,7 +9,6 @@ import {
   LEGACY_LEDGER_CANISTER_ID,
   OGY_TOKEN_SWAP_CANISTER_ID,
   SNS_REWARDS_CANISTER_ID,
-  MINTING_STUDIO_CANISTER_ID,
 } from "@constants/index";
 
 import { idlFactory as governanceIdl } from "@services/candid/sns_governance";
@@ -17,7 +16,6 @@ import { idlFactory as ledgerIdl } from "@services/candid/sns_ledger";
 import { idlFactory as ledgerLegacyIdl } from "@services/candid/ledger.legacy";
 import { idlFactory as OGYTokenSwapIdl } from "@services/candid/ogy_token_swap";
 import { idlFactory as SNSRewardsIdl } from "@services/candid/sns_rewards";
-import { idlFactory as mintingStudioIdl } from "@services/candid/minting_studio";
 
 type CanisterKey =
   | "governance"
@@ -25,8 +23,7 @@ type CanisterKey =
   | "ledgerLegacy"
   | "ledgerICP"
   | "OGYTokenSwap"
-  | "SNSRewards"
-  | "mintingStudio";
+  | "SNSRewards";
 
 type CanisterConfig = {
   canisterId: string;
@@ -57,10 +54,6 @@ export const canisters: Record<CanisterKey, CanisterConfig> = {
   SNSRewards: {
     canisterId: SNS_REWARDS_CANISTER_ID,
     idlFactory: SNSRewardsIdl,
-  },
-  mintingStudio: {
-    canisterId: MINTING_STUDIO_CANISTER_ID,
-    idlFactory: mintingStudioIdl,
   },
 };
 

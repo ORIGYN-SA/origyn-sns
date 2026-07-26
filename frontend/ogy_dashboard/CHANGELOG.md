@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.45] - 2026-07-26
+
+#### Added
+
+- Add sorting to the certificates list.
+- Add a holders view to collection pages.
+- Add ownership history to collector pages.
+- Show category descriptions in the Viewer.
+
+#### Fixed
+
+- Hide categories that have no certificates.
+
+### [1.0.44] - 2026-07-26
+
+#### Fixed
+
+- Fix certificates not loading for gold collections.
+
+#### Added
+
+- Add "View all" links to the Viewer category carousels.
+- Show token and collection details on the certificate page.
+
+#### Changed
+
+- Simplify the certificate popup.
+
 ### [1.0.43] - 2026-07-24
 
 #### Changed
