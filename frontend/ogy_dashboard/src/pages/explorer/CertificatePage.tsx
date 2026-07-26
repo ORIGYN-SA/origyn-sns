@@ -3,6 +3,7 @@ import { PageContainer, PageHeader } from "@components/ui";
 import { useT } from "@i18n/LocaleContext";
 import useNftToken from "@hooks/nft/useNftToken";
 import CertificateContent, { CertificateSkeleton } from "./CertificateContent";
+import CertificateSummary from "./CertificateSummary";
 
 export const CertificatePage = () => {
   const t = useT();
@@ -19,17 +20,18 @@ export const CertificatePage = () => {
       />
       <div className="pt-8">
         {isLoading ? (
-          <div className="max-w-certificate mx-auto">
-            <CertificateSkeleton />
-          </div>
+          <CertificateSkeleton />
         ) : isError || !card ? (
           <p className="text-muted text-center">
             {t("explorer.certificatePage.notFound")}
           </p>
         ) : (
-          <div className="max-w-certificate mx-auto rounded-xl bg-surface">
-            <CertificateContent nft={card} />
-          </div>
+          <>
+            <CertificateSummary nft={card} />
+            <div className="rounded-xl bg-surface">
+              <CertificateContent nft={card} />
+            </div>
+          </>
         )}
       </div>
     </PageContainer>

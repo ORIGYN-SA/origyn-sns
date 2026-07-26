@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { DateTime } from "luxon";
-import { useLocalePath, useT } from "@i18n/LocaleContext";
-import { shortenId } from "@helpers/strings";
+import { useT } from "@i18n/LocaleContext";
 import { NftCard } from "@hooks/nft/mapNft";
-import { BlockchainLink, IssuerLine, NftImage, OgyBadge } from "./NftCards";
+import { IssuerLine, NftImage, OgyBadge } from "./NftCards";
 
 export const DetailItem = ({
   label,
@@ -43,16 +41,12 @@ const SimpleCertificateBody = ({
   collectionName?: string | null;
 }) => {
   const t = useT();
-  const lp = useLocalePath();
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
   const images = [nft.imageUrl, ...nft.gallery].filter(
     (src): src is string => src !== null
   );
   const mainImage = activeImage ?? images[0] ?? null;
-  const mintedOn = nft.mintedAtMs
-    ? DateTime.fromMillis(nft.mintedAtMs).toFormat("LLL dd, yyyy")
-    : null;
 
   return (
     <div className="flex flex-col">
@@ -60,7 +54,7 @@ const SimpleCertificateBody = ({
         <NftImage
           src={mainImage}
           alt={nft.name}
-          className="w-full h-explorer-certificate-image sm:h-explorer-certificate-image-sm rounded-t-xl"
+          className="w-full h-explorer-certificate-image sm:h-explorer-certificate-image-sm rounded-xl"
         />
         <div className="absolute top-3 start-3">
           <OgyBadge size={36} />
@@ -97,6 +91,9 @@ const SimpleCertificateBody = ({
           <h2 className="font-extrabold text-2xl sm:text-3xl leading-tight tracking-explorer-hero text-content">
             {nft.name}
           </h2>
+          {collectionName && (
+            <p className="text-sm text-muted">{collectionName}</p>
+          )}
         </div>
 
         {nft.description && (
@@ -105,37 +102,9 @@ const SimpleCertificateBody = ({
           </p>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-border pt-4">
-          <DetailItem
-            label={t("explorer.detail.tokenId")}
-            value={nft.tokenId}
-          />
-          {mintedOn && (
-            <DetailItem
-              label={t("explorer.detail.mintedOn")}
-              value={mintedOn}
-            />
-          )}
-          <DetailItem
-            label={t("explorer.detail.collection")}
-            value={collectionName ?? shortenId(nft.canisterId)}
-            to={lp(`/viewer/collections/${nft.canisterId}`)}
-          />
-          {nft.ownerAccount && (
-            <DetailItem
-              label={t("explorer.detail.owner")}
-              value={shortenId(nft.ownerAccount)}
-              to={lp(`/viewer/collectors/${nft.ownerAccount}`)}
-            />
-          )}
-        </div>
-
-        <div className="flex items-center justify-between border-t border-border pt-4">
-          <BlockchainLink canisterId={nft.canisterId} variant="detail" />
-          <span className="text-explorer-label font-light tracking-explorer-fine uppercase text-muted">
-            {t("explorer.detail.poweredBy")}
-          </span>
-        </div>
+        <span className="text-explorer-label font-light tracking-explorer-fine uppercase text-muted">
+          {t("explorer.detail.poweredBy")}
+        </span>
       </div>
     </div>
   );
