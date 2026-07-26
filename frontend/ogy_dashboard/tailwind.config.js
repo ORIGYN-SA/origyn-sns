@@ -8,7 +8,9 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "../shared/src/**/*.{ts,tsx}",
+    // @origyn/shared-ui is hoisted to the monorepo root node_modules
+    "../../node_modules/@origyn/shared-ui/dist/**/*.js",
+    "./node_modules/@origyn/shared-ui/dist/**/*.js",
   ],
   plugins: [forms],
 };

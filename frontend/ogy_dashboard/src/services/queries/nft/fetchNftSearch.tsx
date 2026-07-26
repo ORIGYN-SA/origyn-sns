@@ -1,6 +1,6 @@
 import gldtEndpoints from "@services/api/gldt/v1/endpoints";
 import { ApiNftSearchResults } from "@services/api/gldt/v1/types";
-import { NftSearchParams } from "@origyn/shared/gldt";
+import { NftSearchParams } from "@origyn/shared-ui/gldt";
 
 export type FetchNftSearchParams = NftSearchParams;
 

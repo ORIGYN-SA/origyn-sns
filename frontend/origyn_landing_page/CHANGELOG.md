@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.4.9] - 2026-07-24
+
+#### Changed
+
+- Moved the shared components to the @origyn/shared-ui library.
+
 ### [1.4.8] - 2026-07-04
 
 #### Added

@@ -10,8 +10,10 @@ import SimpleCertificateBody, { DetailItem } from "./SimpleCertificateBody";
 
 // The template viewer is the largest part of the explorer; load it only when
 // a templated certificate is actually opened.
-const CertificateViewer = lazy(
-  () => import("@components/certificate/CertificateViewer")
+const CertificateViewer = lazy(() =>
+  import("@origyn/shared-ui/certificate").then((m) => ({
+    default: m.CertificateViewer,
+  }))
 );
 
 export const CertificateSkeleton = () => (
@@ -44,6 +46,9 @@ const CertificateContent = ({ nft }: { nft: NftCard }) => {
           template={template}
           selectedLanguage={locale}
           certificateTabLabel={t("explorer.detail.certificate")}
+          // The Minting Studio default renders a "Custom stamp" placeholder;
+          // the dashboard shows the actual minted stamp image.
+          showCustomStampImage
         />
       </Suspense>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-2">

@@ -5,8 +5,7 @@ spec:
       options:
         [
         "ogy_dashboard",
-        "origyn_landing_page",
-        "shared"
+        "origyn_landing_page"
         ]
 ---
 # Front-end linter job template
@@ -30,5 +29,4 @@ $[[ inputs.src-folder ]] linter:
   extends: .node template
   script:
     # Resolve by workspace path so it works regardless of the package name
-    # (e.g. the "shared" folder is the @origyn/shared package).
     - npm run --workspace frontend/$[[ inputs.src-folder ]] lint
