@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { PageContainer, PageHeader } from "@components/ui";
-import { useT } from "@i18n/LocaleContext";
-import useNftCollectionDetail from "@hooks/nft/useNftCollectionDetail";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { DateTime } from "luxon";
+import { PageContainer, PageHeader, TablePagination } from "@components/ui";
+import { useLocalePath, useT } from "@i18n/LocaleContext";
+import { shortenId } from "@helpers/strings";
+import useNftCollectionDetail, {
+  useNftCollectionHolders,
+} from "@hooks/nft/useNftCollectionDetail";
 import useNftsPage from "@hooks/nft/useNftsPage";
 import { NftCard } from "@hooks/nft/mapNft";
 import {
@@ -24,6 +28,92 @@ const Stat = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
+const HoldersTable = ({ canisterId }: { canisterId: string }) => {
+  const t = useT();
+  const lp = useLocalePath();
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  const { items, total, isLoading } = useNftCollectionHolders(canisterId, {
+    limit: pageSize,
+    offset: pageIndex * pageSize,
+  });
+
+  if (isLoading && items.length === 0) {
+    return (
+      <div className="h-collection-summary rounded-xl bg-muted/20 animate-pulse" />
+    );
+  }
+
+  if (total === 0)
+    return <p className="text-muted">{t("explorer.noResults")}</p>;
+
+  const pageCount = Math.ceil(total / pageSize);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-explorer-label font-medium tracking-explorer-meta uppercase text-muted">
+              <th className="text-start font-medium pb-3">
+                {t("explorer.detail.certificate")}
+              </th>
+              <th className="text-start font-medium pb-3">
+                {t("explorer.detail.owner")}
+              </th>
+              <th className="text-start font-medium pb-3">
+                {t("explorer.detail.mintedOn")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.token_id} className="border-t border-border">
+                <td className="py-3 pe-4 text-content">
+                  <Link
+                    to={lp(
+                      `/viewer/certificate/${canisterId}/${encodeURIComponent(item.token_id)}`
+                    )}
+                    className="hover:underline"
+                  >
+                    {item.name ?? `#${item.token_id}`}
+                  </Link>
+                </td>
+                <td className="py-3 pe-4">
+                  <Link
+                    to={lp(`/viewer/collectors/${item.owner_account}`)}
+                    className="text-muted hover:text-content transition-colors"
+                    title={item.owner_account}
+                  >
+                    {shortenId(item.owner_account)}
+                  </Link>
+                </td>
+                <td className="py-3 text-muted">
+                  {DateTime.fromMillis(item.minted_at_ms).toFormat(
+                    "LLL dd, yyyy"
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {pageCount > 1 && (
+        <TablePagination
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          pageCount={pageCount}
+          onPageChange={setPageIndex}
+          onPageSizeChange={(size) => {
+            setPageSize(size);
+            setPageIndex(0);
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
 export const CollectionDetailPage = () => {
   const t = useT();
   const navigate = useNavigate();
@@ -31,6 +121,7 @@ export const CollectionDetailPage = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [selectedNft, setSelectedNft] = useState<NftCard | null>(null);
+  const [view, setView] = useState<"certificates" | "holders">("certificates");
 
   const { collection } = useNftCollectionDetail(canisterId);
   const { cards, total, isLoading } = useNftsPage({
@@ -90,19 +181,40 @@ export const CollectionDetailPage = () => {
           </div>
         )}
 
-        <NftGrid
-          cards={cards}
-          isLoading={isLoading}
-          onSelect={setSelectedNft}
-          total={total}
-          pageIndex={pageIndex}
-          pageSize={pageSize}
-          onPageChange={setPageIndex}
-          onPageSizeChange={(size) => {
-            setPageSize(size);
-            setPageIndex(0);
-          }}
-        />
+        <div className="flex flex-wrap gap-2 mb-8">
+          {(["certificates", "holders"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setView(tab)}
+              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                view === tab
+                  ? "border-content bg-surface-2 text-content"
+                  : "border-border text-muted hover:text-content"
+              }`}
+            >
+              {t(`explorer.collectionPage.${tab}`)}
+            </button>
+          ))}
+        </div>
+
+        {view === "certificates" ? (
+          <NftGrid
+            cards={cards}
+            isLoading={isLoading}
+            onSelect={setSelectedNft}
+            total={total}
+            pageIndex={pageIndex}
+            pageSize={pageSize}
+            onPageChange={setPageIndex}
+            onPageSizeChange={(size) => {
+              setPageSize(size);
+              setPageIndex(0);
+            }}
+          />
+        ) : (
+          <HoldersTable canisterId={canisterId} />
+        )}
       </div>
 
       <CertificateDialog

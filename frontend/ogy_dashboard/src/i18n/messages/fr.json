@@ -707,6 +707,7 @@
       "collectors": "Collectionneurs correspondants"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "élément",
         "other": "éléments"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Collections"
     },
+    "collectionPage": {
+      "certificates": "Certificats",
+      "holders": "Détenteurs"
+    },
     "certificatesPage": {
       "title": "Certificats",
-      "all": "Tous"
+      "all": "Tous",
+      "sortBy": "Trier par",
+      "newest": "Plus récents d'abord",
+      "oldest": "Plus anciens d'abord"
     },
     "certificatePage": {
       "notFound": "Certificat introuvable."
@@ -734,7 +742,14 @@
       "lastActivity": "Dernière activité",
       "collectionsTitle": "Collections",
       "certificatesTitle": "Certificats",
-      "pastTitle": "Précédemment détenus"
+      "pastTitle": "Précédemment détenus",
+      "historyTitle": "Historique de propriété",
+      "status": {
+        "all": "Tous",
+        "Minted": "Frappé",
+        "Received": "Reçu",
+        "Transferred": "Transféré"
+      }
     },
     "detail": {
       "certificate": "Certificat",
@@ -743,7 +758,10 @@
       "collection": "Collection",
       "owner": "Propriétaire",
       "poweredBy": "Propulsé par ORIGYN",
-      "openPage": "Ouvrir la page du certificat"
+      "openPage": "Ouvrir la page du certificat",
+      "symbol": "Symbole",
+      "canisterId": "ID du canister",
+      "categories": "Catégories"
     }
   },
   "ui": {

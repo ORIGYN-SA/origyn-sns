@@ -707,6 +707,7 @@
       "collectors": "Mga katugmang kolektor"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "item",
         "other": "mga item"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Mga Koleksyon"
     },
+    "collectionPage": {
+      "certificates": "Mga Sertipiko",
+      "holders": "Mga may-hawak"
+    },
     "certificatesPage": {
       "title": "Mga Sertipiko",
-      "all": "Lahat"
+      "all": "Lahat",
+      "sortBy": "Pagsunod-sunurin ayon sa",
+      "newest": "Pinakabago muna",
+      "oldest": "Pinakaluma muna"
     },
     "certificatePage": {
       "notFound": "Hindi natagpuan ang sertipiko."
@@ -734,7 +742,14 @@
       "lastActivity": "Huling aktibidad",
       "collectionsTitle": "Mga Koleksyon",
       "certificatesTitle": "Mga Sertipiko",
-      "pastTitle": "Dating pag-aari"
+      "pastTitle": "Dating pag-aari",
+      "historyTitle": "Kasaysayan ng pagmamay-ari",
+      "status": {
+        "all": "Lahat",
+        "Minted": "Minted",
+        "Received": "Natanggap",
+        "Transferred": "Nailipat"
+      }
     },
     "detail": {
       "certificate": "Sertipiko",
@@ -743,7 +758,10 @@
       "collection": "Koleksyon",
       "owner": "May-ari",
       "poweredBy": "Pinapagana ng ORIGYN",
-      "openPage": "Buksan ang pahina ng sertipiko"
+      "openPage": "Buksan ang pahina ng sertipiko",
+      "symbol": "Simbolo",
+      "canisterId": "Canister ID",
+      "categories": "Mga kategorya"
     }
   },
   "ui": {

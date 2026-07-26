@@ -707,6 +707,7 @@
       "collectors": "مماثل کلیکٹرز"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "آئٹم",
         "other": "آئٹمز"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "کلیکشنز"
     },
+    "collectionPage": {
+      "certificates": "سرٹیفکیٹس",
+      "holders": "حاملین"
+    },
     "certificatesPage": {
       "title": "سرٹیفکیٹس",
-      "all": "سبھی"
+      "all": "سبھی",
+      "sortBy": "ترتیب دیں",
+      "newest": "پہلے نئے",
+      "oldest": "پہلے پرانے"
     },
     "certificatePage": {
       "notFound": "سرٹیفکیٹ نہیں ملا۔"
@@ -734,7 +742,14 @@
       "lastActivity": "آخری سرگرمی",
       "collectionsTitle": "کلیکشنز",
       "certificatesTitle": "سرٹیفکیٹس",
-      "pastTitle": "پہلے ملکیت میں"
+      "pastTitle": "پہلے ملکیت میں",
+      "historyTitle": "ملکیت کی تاریخ",
+      "status": {
+        "all": "سبھی",
+        "Minted": "منٹ شدہ",
+        "Received": "موصول",
+        "Transferred": "منتقل"
+      }
     },
     "detail": {
       "certificate": "سرٹیفکیٹ",
@@ -743,7 +758,10 @@
       "collection": "کلیکشن",
       "owner": "مالک",
       "poweredBy": "ORIGYN کے تعاون سے",
-      "openPage": "سرٹیفکیٹ صفحہ کھولیں"
+      "openPage": "سرٹیفکیٹ صفحہ کھولیں",
+      "symbol": "علامت",
+      "canisterId": "کنستر آئی ڈی",
+      "categories": "زمرہ جات"
     }
   },
   "ui": {

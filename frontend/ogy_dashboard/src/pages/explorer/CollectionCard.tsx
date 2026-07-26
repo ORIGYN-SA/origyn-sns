@@ -11,6 +11,7 @@ export interface CollectionCardData {
   logo: string | null;
   total_tokens: number;
   distinct_holders?: number;
+  is_ai?: boolean;
 }
 
 const CountPill = ({ value, label }: { value: number; label: string }) => (
@@ -45,8 +46,17 @@ const CollectionCard = memo(function CollectionCard({
       </div>
       <div className="flex-1 flex flex-col justify-between px-1">
         <div className="flex flex-col gap-0.5">
-          <div className={`${EXPLORER_TILE_CLASSES.meta} text-muted`}>
-            {collection.symbol ?? t("explorer.sections.collections")}
+          <div className="flex items-center gap-1.5 min-w-0">
+            <div
+              className={`${EXPLORER_TILE_CLASSES.meta} text-muted truncate`}
+            >
+              {collection.symbol ?? t("explorer.sections.collections")}
+            </div>
+            {collection.is_ai && (
+              <span className="shrink-0 rounded-full border border-border-faint bg-surface-muted px-1.5 py-0.5 text-explorer-label font-medium uppercase leading-none text-muted">
+                {t("explorer.collections.ai")}
+              </span>
+            )}
           </div>
           <h3 className="font-semibold text-explorer-card-title leading-snug text-content truncate">
             {collection.name ?? collection.canister_id}

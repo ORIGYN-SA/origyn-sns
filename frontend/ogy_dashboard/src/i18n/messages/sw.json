@@ -707,6 +707,7 @@
       "collectors": "Wakusanyaji wanaolingana"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "kipengee",
         "other": "vipengee"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Makusanyo"
     },
+    "collectionPage": {
+      "certificates": "Vyeti",
+      "holders": "Wamiliki"
+    },
     "certificatesPage": {
       "title": "Vyeti",
-      "all": "Zote"
+      "all": "Zote",
+      "sortBy": "Panga kwa",
+      "newest": "Mpya kwanza",
+      "oldest": "Kongwe kwanza"
     },
     "certificatePage": {
       "notFound": "Cheti hakikupatikana."
@@ -734,7 +742,14 @@
       "lastActivity": "Shughuli ya mwisho",
       "collectionsTitle": "Makusanyo",
       "certificatesTitle": "Vyeti",
-      "pastTitle": "Vilivyomilikiwa awali"
+      "pastTitle": "Vilivyomilikiwa awali",
+      "historyTitle": "Historia ya umiliki",
+      "status": {
+        "all": "Zote",
+        "Minted": "Imetengenezwa",
+        "Received": "Imepokelewa",
+        "Transferred": "Imehamishwa"
+      }
     },
     "detail": {
       "certificate": "Cheti",
@@ -743,7 +758,10 @@
       "collection": "Mkusanyo",
       "owner": "Mmiliki",
       "poweredBy": "Inaendeshwa na ORIGYN",
-      "openPage": "Fungua ukurasa wa cheti"
+      "openPage": "Fungua ukurasa wa cheti",
+      "symbol": "Alama",
+      "canisterId": "Kitambulisho cha canister",
+      "categories": "Kategoria"
     }
   },
   "ui": {

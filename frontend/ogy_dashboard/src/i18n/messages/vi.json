@@ -707,6 +707,7 @@
       "collectors": "Nhà sưu tầm phù hợp"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "mục",
         "other": "mục"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Bộ sưu tập"
     },
+    "collectionPage": {
+      "certificates": "Chứng chỉ",
+      "holders": "Người nắm giữ"
+    },
     "certificatesPage": {
       "title": "Chứng chỉ",
-      "all": "Tất cả"
+      "all": "Tất cả",
+      "sortBy": "Sắp xếp theo",
+      "newest": "Mới nhất trước",
+      "oldest": "Cũ nhất trước"
     },
     "certificatePage": {
       "notFound": "Không tìm thấy chứng chỉ."
@@ -734,7 +742,14 @@
       "lastActivity": "Hoạt động gần nhất",
       "collectionsTitle": "Bộ sưu tập",
       "certificatesTitle": "Chứng chỉ",
-      "pastTitle": "Từng sở hữu"
+      "pastTitle": "Từng sở hữu",
+      "historyTitle": "Lịch sử sở hữu",
+      "status": {
+        "all": "Tất cả",
+        "Minted": "Đã đúc",
+        "Received": "Đã nhận",
+        "Transferred": "Đã chuyển"
+      }
     },
     "detail": {
       "certificate": "Chứng chỉ",
@@ -743,7 +758,10 @@
       "collection": "Bộ sưu tập",
       "owner": "Chủ sở hữu",
       "poweredBy": "Được hỗ trợ bởi ORIGYN",
-      "openPage": "Mở trang chứng chỉ"
+      "openPage": "Mở trang chứng chỉ",
+      "symbol": "Ký hiệu",
+      "canisterId": "ID canister",
+      "categories": "Danh mục"
     }
   },
   "ui": {

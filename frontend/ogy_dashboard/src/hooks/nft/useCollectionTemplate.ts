@@ -3,7 +3,6 @@ import fetchCollectionTemplate from "@services/queries/nft/fetchCollectionTempla
 
 const TEN_MINUTES = 10 * 60 * 1000;
 
-// Null results are cached so template-less collections are not refetched.
 const useCollectionTemplate = (collectionCanisterId: string | null) =>
   useQuery({
     queryKey: ["NFT_COLLECTION_TEMPLATE", collectionCanisterId],

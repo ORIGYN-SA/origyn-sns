@@ -707,6 +707,7 @@
       "collectors": "Egyező gyűjtők"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "elem",
         "other": "elem"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Gyűjtemények"
     },
+    "collectionPage": {
+      "certificates": "Tanúsítványok",
+      "holders": "Tulajdonos"
+    },
     "certificatesPage": {
       "title": "Tanúsítványok",
-      "all": "Összes"
+      "all": "Összes",
+      "sortBy": "Rendezés",
+      "newest": "Legújabb elöl",
+      "oldest": "Legrégebbi elöl"
     },
     "certificatePage": {
       "notFound": "A tanúsítvány nem található."
@@ -734,7 +742,14 @@
       "lastActivity": "Utolsó aktivitás",
       "collectionsTitle": "Gyűjtemények",
       "certificatesTitle": "Tanúsítványok",
-      "pastTitle": "Korábbi tulajdon"
+      "pastTitle": "Korábbi tulajdon",
+      "historyTitle": "Tulajdonlási előzmények",
+      "status": {
+        "all": "Összes",
+        "Minted": "Kibocsátva",
+        "Received": "Fogadva",
+        "Transferred": "Átutalva"
+      }
     },
     "detail": {
       "certificate": "Tanúsítvány",
@@ -743,7 +758,10 @@
       "collection": "Gyűjtemény",
       "owner": "Tulajdonos",
       "poweredBy": "Az ORIGYN technológiájával",
-      "openPage": "Tanúsítványoldal megnyitása"
+      "openPage": "Tanúsítványoldal megnyitása",
+      "symbol": "Szimbólum",
+      "canisterId": "Canister-azonosító",
+      "categories": "Kategóriák"
     }
   },
   "ui": {

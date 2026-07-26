@@ -707,6 +707,7 @@
       "collectors": "Pasujący kolekcjonerzy"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "przedmiot",
         "other": "przedmiotów"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Kolekcje"
     },
+    "collectionPage": {
+      "certificates": "Certyfikaty",
+      "holders": "Posiadaczy"
+    },
     "certificatesPage": {
       "title": "Certyfikaty",
-      "all": "Wszystkie"
+      "all": "Wszystkie",
+      "sortBy": "Sortuj według",
+      "newest": "Najnowsze najpierw",
+      "oldest": "Najstarsze najpierw"
     },
     "certificatePage": {
       "notFound": "Nie znaleziono certyfikatu."
@@ -734,7 +742,14 @@
       "lastActivity": "Ostatnia aktywność",
       "collectionsTitle": "Kolekcje",
       "certificatesTitle": "Certyfikaty",
-      "pastTitle": "Wcześniej posiadane"
+      "pastTitle": "Wcześniej posiadane",
+      "historyTitle": "Historia własności",
+      "status": {
+        "all": "Wszystkie",
+        "Minted": "Wybite",
+        "Received": "Otrzymane",
+        "Transferred": "Przekazane"
+      }
     },
     "detail": {
       "certificate": "Certyfikat",
@@ -743,7 +758,10 @@
       "collection": "Kolekcja",
       "owner": "Właściciel",
       "poweredBy": "Obsługiwane przez ORIGYN",
-      "openPage": "Otwórz stronę certyfikatu"
+      "openPage": "Otwórz stronę certyfikatu",
+      "symbol": "Symbol",
+      "canisterId": "ID canistera",
+      "categories": "Kategorie"
     }
   },
   "ui": {

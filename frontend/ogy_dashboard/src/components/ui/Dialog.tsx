@@ -9,6 +9,9 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useT } from "@i18n/LocaleContext";
 
+const CLOSE_BUTTON_CLASSES =
+  "h-9 w-9 rounded-full border border-border bg-surface flex items-center justify-center text-content transition-colors hover:bg-surface-2";
+
 const DialogComponent = ({
   show = true,
   handleClose,
@@ -16,6 +19,7 @@ const DialogComponent = ({
   children,
   panelClassName = "max-w-xl",
   floatingClose = false,
+  headerStart,
 }: {
   show: boolean;
   handleClose: () => void;
@@ -23,6 +27,7 @@ const DialogComponent = ({
   enableClose?: boolean;
   panelClassName?: string;
   floatingClose?: boolean;
+  headerStart?: ReactNode;
 }) => {
   const t = useT();
   return (
@@ -64,19 +69,20 @@ const DialogComponent = ({
                         type="button"
                         onClick={handleClose}
                         aria-label={t("common.close")}
-                        className="absolute end-3 top-3 z-10 text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
+                        className={`absolute end-3 top-3 z-10 ${CLOSE_BUTTON_CLASSES}`}
                       >
                         <XMarkIcon className="h-5 w-5" />
                       </button>
                     )
                   ) : (
-                    <DialogTitle className="flex justify-end px-4 pt-4">
+                    <DialogTitle className="flex items-center justify-between gap-3 px-4 pt-4">
+                      {headerStart ?? <span />}
                       {enableClose && (
                         <button
                           type="button"
                           onClick={handleClose}
                           aria-label={t("common.close")}
-                          className="text-muted hover:text-content hover:bg-surface-faint rounded-full p-1.5 transition-colors"
+                          className={CLOSE_BUTTON_CLASSES}
                         >
                           <XMarkIcon className="h-5 w-5" />
                         </button>

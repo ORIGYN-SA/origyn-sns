@@ -707,6 +707,7 @@
       "collectors": "Colecționari care corespund"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "articol",
         "other": "articole"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "Colecții"
     },
+    "collectionPage": {
+      "certificates": "Certificate",
+      "holders": "Deținători"
+    },
     "certificatesPage": {
       "title": "Certificate",
-      "all": "Toate"
+      "all": "Toate",
+      "sortBy": "Sortează după",
+      "newest": "Cele mai noi întâi",
+      "oldest": "Cele mai vechi întâi"
     },
     "certificatePage": {
       "notFound": "Certificatul nu a fost găsit."
@@ -734,7 +742,14 @@
       "lastActivity": "Ultima activitate",
       "collectionsTitle": "Colecții",
       "certificatesTitle": "Certificate",
-      "pastTitle": "Deținute anterior"
+      "pastTitle": "Deținute anterior",
+      "historyTitle": "Istoricul proprietății",
+      "status": {
+        "all": "Toate",
+        "Minted": "Emis",
+        "Received": "Primit",
+        "Transferred": "Transferat"
+      }
     },
     "detail": {
       "certificate": "Certificat",
@@ -743,7 +758,10 @@
       "collection": "Colecție",
       "owner": "Proprietar",
       "poweredBy": "Susținut de ORIGYN",
-      "openPage": "Deschide pagina certificatului"
+      "openPage": "Deschide pagina certificatului",
+      "symbol": "Simbol",
+      "canisterId": "ID canister",
+      "categories": "Categorii"
     }
   },
   "ui": {

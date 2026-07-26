@@ -707,6 +707,7 @@
       "collectors": "一致するコレクター"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "アイテム",
         "other": "アイテム"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "コレクション"
     },
+    "collectionPage": {
+      "certificates": "証明書",
+      "holders": "保有者"
+    },
     "certificatesPage": {
       "title": "証明書",
-      "all": "すべて"
+      "all": "すべて",
+      "sortBy": "並び替え",
+      "newest": "新しい順",
+      "oldest": "古い順"
     },
     "certificatePage": {
       "notFound": "証明書が見つかりません。"
@@ -734,7 +742,14 @@
       "lastActivity": "最新のアクティビティ",
       "collectionsTitle": "コレクション",
       "certificatesTitle": "証明書",
-      "pastTitle": "過去に保有"
+      "pastTitle": "過去に保有",
+      "historyTitle": "所有履歴",
+      "status": {
+        "all": "すべて",
+        "Minted": "ミント済み",
+        "Received": "受領",
+        "Transferred": "送付済み"
+      }
     },
     "detail": {
       "certificate": "証明書",
@@ -743,7 +758,10 @@
       "collection": "コレクション",
       "owner": "所有者",
       "poweredBy": "Powered by ORIGYN",
-      "openPage": "証明書ページを開く"
+      "openPage": "証明書ページを開く",
+      "symbol": "シンボル",
+      "canisterId": "キャニスターID",
+      "categories": "カテゴリ"
     }
   },
   "ui": {

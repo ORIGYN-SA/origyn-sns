@@ -707,6 +707,7 @@
       "collectors": "相符的收藏家"
     },
     "collections": {
+      "ai": "AI",
       "items": {
         "one": "件藏品",
         "other": "件藏品"
@@ -719,9 +720,16 @@
     "collectionsPage": {
       "title": "收藏系列"
     },
+    "collectionPage": {
+      "certificates": "憑證",
+      "holders": "位持有者"
+    },
     "certificatesPage": {
       "title": "憑證",
-      "all": "全部"
+      "all": "全部",
+      "sortBy": "排序方式",
+      "newest": "最新優先",
+      "oldest": "最早優先"
     },
     "certificatePage": {
       "notFound": "找不到憑證。"
@@ -734,7 +742,14 @@
       "lastActivity": "最近活動",
       "collectionsTitle": "收藏系列",
       "certificatesTitle": "憑證",
-      "pastTitle": "曾經持有"
+      "pastTitle": "曾經持有",
+      "historyTitle": "所有權歷史",
+      "status": {
+        "all": "全部",
+        "Minted": "已鑄造",
+        "Received": "已接收",
+        "Transferred": "已轉出"
+      }
     },
     "detail": {
       "certificate": "憑證",
@@ -743,7 +758,10 @@
       "collection": "收藏系列",
       "owner": "所有者",
       "poweredBy": "由 ORIGYN 提供技術支援",
-      "openPage": "開啟憑證頁面"
+      "openPage": "開啟憑證頁面",
+      "symbol": "代號",
+      "canisterId": "容器 ID",
+      "categories": "類別"
     }
   },
   "ui": {
