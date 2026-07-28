@@ -1,7 +1,8 @@
 // [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
 // representation of ledgers supporting the ICRC-1 standard.
 type Account = record { owner : principal; subaccount : opt blob };
-type Args = record {
+type Args = record { exchange_configs : vec ExchangeJobConfig };
+type Args_1 = record {
   destination_account : opt opt Account;
   source_subaccount : opt opt blob;
   min_amount : opt Tokens;
@@ -10,7 +11,7 @@ type Args = record {
   rate_per_interval : opt nat64;
   max_amount : opt opt Tokens;
 };
-type Args_1 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+type Args_2 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
 // Represents a semantic version number following the MAJOR.MINOR.PATCH format.
 // 
 // # Examples
@@ -56,7 +57,8 @@ type InitArgs = record {
   version : BuildVersion;
   commit_hash : text;
 };
-type Response = variant { Success; InvalidBurnRate };
+type Response = variant { Success };
+type Response_1 = variant { Success; InvalidBurnRate };
 type Result = variant { Ok : Account; Err : text };
 type Result_1 = variant { Ok; Err : text };
 type Result_2 = variant { Ok : nat; Err : text };
@@ -85,9 +87,10 @@ type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
 // overflows.
 type Tokens = record { e8s : nat64 };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
-service : (Args_1) -> {
+service : (Args_2) -> {
+  add_exchange_jobs : (Args) -> (Response);
   get_active_swaps : () -> (vec record { nat; TokenSwap }) query;
   get_swap : (nat) -> (opt TokenSwap) query;
   icrc10_supported_standards : () -> (vec SupportedStandard) query;
-  update_exchange_config : (Args) -> (Response);
+  update_exchange_config : (Args_1) -> (Response_1);
 }

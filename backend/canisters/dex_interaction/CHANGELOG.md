@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.1] - 2026-07-28
+
+#### Fixed
+- **Exchange jobs** : Add exchange job fix that allows timer to run immediately
+
 ### [1.1.0] - 2026-05-04
 
 #### Added
