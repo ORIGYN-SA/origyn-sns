@@ -1,21 +1,12 @@
 use crate::lifecycle::init_canister;
 use crate::memory::get_upgrades_memory;
-// use crate::migrations::types::state::RuntimeStateV0;
 use crate::state::RuntimeState;
 use bity_ic_canister_logger::LogEntry;
 use bity_ic_canister_tracing_macros::trace;
 use bity_ic_stable_memory::get_reader;
-use candid::Principal;
-use dex_interaction_api::exchange_job_config::ExchangeJobConfig;
-use dex_interaction_api::icpswap::ICPSwapConfig;
-use dex_interaction_api::swap_config::ExchangeConfig;
 pub use dex_interaction_api::Args;
 use ic_cdk_macros::post_upgrade;
-use ic_ledger_types::Tokens;
-use icrc_ledger_types::icrc1::account::Account;
-use std::time::Duration;
 use tracing::info;
-use types::TokenSymbol;
 
 #[post_upgrade]
 #[trace]
@@ -42,83 +33,6 @@ fn post_upgrade(args: Args) {
             //     Vec<LogEntry>,
             // ) = bity_ic_serializer::deserialize(reader).unwrap();
             // let mut state = RuntimeState::from(runtime_state_v0);
-
-            // NOTE: init exchange configs
-            let sns_rewards_id = if state.env.is_test_mode() {
-                Principal::from_text("fpmqz-aaaaa-aaaag-qjvua-cai").unwrap()
-            } else {
-                Principal::from_text("yuijc-oiaaa-aaaap-ahezq-cai").unwrap()
-            };
-
-            let min_swap_amount = Tokens::from_e8s(10_000_000);
-            let mut exchange_configs: Vec<ExchangeJobConfig> = Vec::new();
-
-            // 1. WTN - ICP SWAP CONFIG
-            exchange_configs.push(ExchangeJobConfig {
-                token_to_sell: TokenSymbol::WTN,
-                token_to_buy: TokenSymbol::ICP,
-                exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
-                    swap_canister_id: Principal::from_text("oqn67-kaaaa-aaaag-qj72q-cai").unwrap(),
-                    zero_for_one: true,
-                }),
-                rate_per_interval: 2_380_950,
-                job_interval_ms: Duration::from_secs(14400).as_millis() as u64, // Derived from 14400s in script
-                source_subaccount: None,
-                min_amount: min_swap_amount,
-                max_amount: None,
-                destination_account: None,
-            });
-
-            // 2. ICP - OGY SWAP CONFIG
-            exchange_configs.push(ExchangeJobConfig {
-                token_to_sell: TokenSymbol::ICP,
-                token_to_buy: TokenSymbol::OGY,
-                exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
-                    swap_canister_id: Principal::from_text("ttnzy-lyaaa-aaaag-qj2bq-cai").unwrap(),
-                    zero_for_one: false,
-                }),
-                rate_per_interval: 2_380_950,
-                job_interval_ms: Duration::from_secs(14400).as_millis() as u64,
-                source_subaccount: None,
-                min_amount: min_swap_amount,
-                max_amount: None,
-                destination_account: Some(Account {
-                    owner: sns_rewards_id,
-                    subaccount: Some([
-                        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    ])
-                }),
-            });
-
-            // 3. GOLDAO - OGY SWAP CONFIG
-            exchange_configs.push(ExchangeJobConfig {
-                token_to_sell: TokenSymbol::GOLDAO,
-                token_to_buy: TokenSymbol::OGY,
-                exchange: ExchangeConfig::ICPSwap(ICPSwapConfig {
-                    swap_canister_id: Principal::from_text("tblob-hiaaa-aaaag-qj2cq-cai").unwrap(),
-                    zero_for_one: false,
-                }),
-                rate_per_interval: 2_380_950,
-                job_interval_ms: Duration::from_secs(14400).as_millis() as u64,
-                source_subaccount: None,
-                min_amount: min_swap_amount,
-                max_amount: None,
-                destination_account: Some(Account {
-                    owner: sns_rewards_id,
-                    subaccount: Some([
-                        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    ])
-                }),
-            });
-
-            // NOTE: uncomment this line to clear existing exchange jobs before adding new ones
-            state.data.exchange_jobs.clear_exchange_jobs();
-
-            for exchange_job_config in exchange_configs {
-                let _ = state.data.exchange_jobs.add_exchange_job(exchange_job_config);
-            }
-
-            // end of migration code
 
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
