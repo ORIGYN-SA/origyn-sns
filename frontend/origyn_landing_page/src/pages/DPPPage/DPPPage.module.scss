@@ -1,0 +1,38 @@
+@use "styles/variables" as *;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 160px 20px 100px;
+  background: $color-navy;
+}
+
+.content {
+  max-width: 780px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  font-family: $font-sans;
+  font-size: $fs-12;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 24px;
+}
+
+.title {
+  @include type('h1');
+  font-family: $font-sans;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  @include type('body');
+  font-family: $font-sans;
+  color: rgba(255, 255, 255, 0.7);
+}

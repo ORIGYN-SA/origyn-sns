@@ -41,13 +41,21 @@
     "bytesUnit": "bytes"
   },
   "nav": {
-    "token": "TOKEN",
-    "ai": "AI",
+    "solutions": "SOLUTIONS",
+    "dpp": "DPP",
+    "dppDescription": "Digital Product Passports",
     "certificates": "CERTIFICATES",
-    "integrators": "INTEGRATORS",
+    "certificatesDescription": "Certificates of Authenticity",
+    "ai": "AI",
+    "aiDescription": "AI provenance",
     "useCases": "USE CASES",
-    "governance": "GOVERNANCE",
+    "useCasesDescription": "See it in the field",
+    "token": "TOKEN",
+    "integrators": "INTEGRATORS",
     "help": "HELP",
+    "dashboard": "DASHBOARD",
+    "opensInNewTab": "(opens in a new tab)",
+    "governance": "GOVERNANCE",
     "toggleMenu": "Toggle menu"
   },
   "footer": {
@@ -57,7 +65,12 @@
     "useCases": "USE CASES",
     "ogyToken": "OGY TOKEN",
     "dashboard": "DASHBOARD",
-    "copyright": "©2026 All rights reserved – origyn"
+    "copyright": "©2026 All rights reserved - origyn"
+  },
+  "dpp": {
+    "eyebrow": "Digital Product Passport",
+    "title": "Every product, its own verifiable history.",
+    "subtitle": "Placeholder copy - the DPP page content is still to be written."
   },
   "home": {
     "hero": {
@@ -481,7 +494,7 @@
     "requiredMessage": "Required",
     "emailInvalid": "Please enter a valid email address",
     "send": "SEND",
-    "sending": "Envoi…",
+    "sending": "Envoi...",
     "errorSend": "Send form error.",
     "fileSizeError": "File size must not exceed 1 MB",
     "addLink": "ADD A LINK",
@@ -489,7 +502,7 @@
     "addKpi": "ADD A KPI",
     "uploadHighlight": "Upload",
     "uploadSuffix": " your logo or drag it here (OPTIONAL)",
-    "uploadHint": "JPEG, PNG, SVG, PDF — 1 MB max",
+    "uploadHint": "JPEG, PNG, SVG, PDF - 1 MB max",
     "logoPreviewAlt": "Logo preview",
     "successTitle": "Thank you",
     "successMessage": "We will get back to you",
@@ -697,10 +710,10 @@
       "Lose that, and you lose yourself.",
       "AI works exactly the same way.",
       "Without persistent memory, even the smartest agent is just noise.",
-      "True intelligence isn’t how powerful the model is — it’s how well it knows you.",
+      "True intelligence isn't how powerful the model is - it's how well it knows you.",
       "You are your memory. So is your Agent.",
       "No memory. No identity. No trust.",
-      "An AI that forgets you every time… is not your agent.",
+      "An AI that forgets you every time... is not your agent.",
       "Memory is the difference between a tool and a true agent.",
       "On-chain memory. On-chain identity. On-chain loyalty.",
       "The most powerful agent is the one that never forgets you."
@@ -709,12 +722,12 @@
   "problem": {
     "eyebrow": "The problem",
     "title": "No one actually runs\n<i>AI on-chain.</i>",
-    "lead": "Every project that claims to have an <s>“on-chain AI agent”</s> follows the same pattern : inference runs off-chain, on centralized servers, and only the result is posted to the blockchain. The model never executes inside the network. The chain is used as a bulletin board, not as a compute layer.",
+    "lead": "Every project that claims to have an <s>\"on-chain AI agent\"</s> follows the same pattern : inference runs off-chain, on centralized servers, and only the result is posted to the blockchain. The model never executes inside the network. The chain is used as a bulletin board, not as a compute layer.",
     "leadStrong": "That is not an on-chain agent. That is an API call with a receipt.",
     "steps": [
       {
         "title": "The claim",
-        "body": "“AI-powered on-chain agent.” Inference happens on AWS. The chain only stores the output."
+        "body": "\"AI-powered on-chain agent.\" Inference happens on AWS. The chain only stores the output."
       },
       {
         "title": "The gap",
@@ -735,7 +748,7 @@
       {
         "title": "User side",
         "subtitle": "Local Bureau",
-        "body": "The user’s machine. Large language models, private files, offline work. Your intelligence stays with you."
+        "body": "The user's machine. Large language models, private files, offline work. Your intelligence stays with you."
       },
       {
         "title": "Blockchain side",
@@ -766,7 +779,7 @@
         "body": "Read-only, time-limited, revocable in one click. Works even when offline."
       },
       {
-        "title": "Dead man’s switch",
+        "title": "Dead man's switch",
         "body": "Designated heirs automatically recover access after a defined period of inactivity."
       },
       {
@@ -827,7 +840,7 @@
       },
       {
         "title": "On-chain distillation",
-        "body": "A large model teaches off-chain, a small model deploys on-chain. Combined with 4-bit quantization and our custom WASM SIMD kernels, this enables real AI within a canister’s instruction budget."
+        "body": "A large model teaches off-chain, a small model deploys on-chain. Combined with 4-bit quantization and our custom WASM SIMD kernels, this enables real AI within a canister's instruction budget."
       }
     ]
   },
@@ -838,23 +851,23 @@
     "pillars": [
       {
         "title": "Trust",
-        "description": "Origyn certification — a verifiable trust signal."
+        "description": "Origyn certification - a verifiable trust signal."
       },
       {
         "title": "Context",
-        "description": "Decades of structured memory — a personal signal AI cannot match."
+        "description": "Decades of structured memory - a personal signal AI cannot match."
       },
       {
         "title": "Distribution",
-        "description": "Swiss Subnet — verifiable infrastructure for agents."
+        "description": "Swiss Subnet - verifiable infrastructure for agents."
       },
       {
         "title": "Taste",
-        "description": "Auto-research pipeline — automation-assisted curation."
+        "description": "Auto-research pipeline - automation-assisted curation."
       },
       {
         "title": "Liability",
-        "description": "Audit trail and certificate — a real governance layer."
+        "description": "Audit trail and certificate - a real governance layer."
       }
     ]
   },

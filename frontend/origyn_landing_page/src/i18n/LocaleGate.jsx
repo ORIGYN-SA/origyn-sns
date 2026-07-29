@@ -9,6 +9,7 @@ import { localePath } from "./paths";
 // form (e.g. /ai/en, which existed before locale moved to the URL prefix).
 const KNOWN_PAGES = new Set([
   "ai",
+  "dpp",
   "token",
   "help-center",
   "integrator",
@@ -24,7 +25,7 @@ export const LocaleRedirect = () => {
   const { pathname, search, hash } = useLocation();
   const segments = pathname.split("/").filter(Boolean);
 
-  // Legacy: /<page>/<locale>[/<rest>] → /<locale>/<page>[/<rest>]. Preserves
+  // Legacy: /<page>/<locale>[/<rest>] -> /<locale>/<page>[/<rest>]. Preserves
   // inbound links from the previous /ai/<locale> URL scheme.
   if (
     segments.length >= 2 &&
@@ -40,7 +41,7 @@ export const LocaleRedirect = () => {
   }
 
   // Already-prefixed but unmatched paths (e.g. /en/foo/unknown) shouldn't
-  // pick up a second locale — send the user to the locale's home instead of
+  // pick up a second locale - send the user to the locale's home instead of
   // looping back through this redirect.
   if (segments.length >= 1 && isLocale(segments[0])) {
     return <Navigate to={`/${segments[0]}/${search}${hash}`} replace />;
@@ -55,8 +56,8 @@ export const LocaleRedirect = () => {
 
 // Wraps every /:locale/* route. Validates the segment, syncs <html lang/dir>,
 // and provides the active locale. When :locale isn't a known tag the path is
-// really a bare page like "/ai" or "/token" — negotiate a locale and prepend
-// it so the page is preserved (e.g. /ai → /<negotiated>/ai).
+// really a bare page like "/ai" or "/token" - negotiate a locale and prepend
+// it so the page is preserved (e.g. /ai -> /<negotiated>/ai).
 const LocaleGate = () => {
   const { locale } = useParams();
   const { pathname, search, hash } = useLocation();

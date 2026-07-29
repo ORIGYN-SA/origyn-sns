@@ -136,7 +136,7 @@ const SignupForm = () => {
             </svg>
           </span>
         )}
-        <span>{status.text || " "}</span>
+        <span>{status.text || " "}</span>
       </div>
     </div>
   );

@@ -23,8 +23,8 @@ type MarqueeControls = {
 // wherever they let go. All effect/rAF/pointer state lives here, isolated in a
 // hook, rather than in the component body.
 //
-// Every transform write happens once per frame inside the rAF loop — pointermove
-// only records the latest cursor X — so dragging stays in sync with the display
+// Every transform write happens once per frame inside the rAF loop - pointermove
+// only records the latest cursor X - so dragging stays in sync with the display
 // refresh instead of stuttering on the (irregular) pointer-event cadence.
 //
 // `durationSec` is the time the original CSS animation took to travel one content

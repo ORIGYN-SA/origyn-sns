@@ -3,8 +3,8 @@ import { Fragment, type ReactNode } from "react";
 // Inline emphasis tags allowed inside catalog strings. Keeping the markup in
 // the string (rather than splitting into separate keys) lets a translator move
 // the emphasized word to wherever the target language's grammar needs it.
-//   <i>…</i>  italic emphasis      <s>…</s>  strong (solid ink)
-//   <g>…</g>  brand gradient text
+//   <i>...</i>  italic emphasis      <s>...</s>  strong (solid ink)
+//   <g>...</g>  brand gradient text
 const TAG_CLASS: Record<string, string> = {
   i: "font-normal italic",
   s: "font-normal text-ink",
@@ -37,7 +37,7 @@ const parse = (text: string): ReactNode[] => {
 };
 
 // Renders a (possibly emphasized) catalog string as inline React nodes. Does
-// not handle line breaks — callers that need multi-line headings split on "\n"
+// not handle line breaks - callers that need multi-line headings split on "\n"
 // and render each line through their own element so animations stay per-line.
 export default function RichText({ text }: { text?: string }) {
   if (!text) return null;
