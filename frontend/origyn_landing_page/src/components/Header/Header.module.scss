@@ -52,9 +52,15 @@
     left: 0;
     background: rgba(0, 0, 0, 0.9);
     flex-direction: column;
+    // `safe center` centers only while the list fits. With plain `center`,
+    // overflow spills equally past both ends and the top items sit above the
+    // scroll origin, where scrollTop cannot reach them. The unprefixed
+    // declaration stays first as the fallback for engines without `safe`.
     justify-content: center;
+    justify-content: safe center;
     gap: 30px;
-    padding: 20px;
+    padding: 90px 20px 40px;
+    overflow-y: auto;
     transform: translateX(100%);
     transition: transform 0.3s ease;
 
@@ -66,20 +72,24 @@
 
 .navLink {
   @include type('body');
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: $font-sans;
-  color: white;
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 2px;
   text-align: center;
   text-transform: uppercase;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
   cursor: pointer;
 
   &:hover {
-    color: $color-muted;
+    color: #fff;
   }
 
   &.active {
     font-weight: 500;
+    color: #fff;
   }
 
   @media (max-width: $bp-lg) {
@@ -103,7 +113,7 @@
 }
 
 .groupTrigger[aria-expanded='true'] {
-  color: $color-muted;
+  color: #fff;
 }
 
 .chevron {
@@ -129,29 +139,39 @@
   flex-direction: column;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(6, 25, 55, 0.94);
+  /* Fully opaque: page content must not read through the open panel. That
+     also makes the backdrop blur a no-op, so it is gone. */
+  background: #061937;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
   transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
 
-  /* Transparent bridge across the gap, so moving the pointer from the trigger
-     to the panel never leaves the group. */
+  /* During the visibility transition a closing panel remains hit-testable,
+     which can retrigger mouseenter and oscillate the panel open and closed.
+     Disable pointer events immediately while the fade finishes. */
+  pointer-events: none;
+
+  /* Bridge only the trigger-to-panel gap. Using the panel width here blocks
+     pointer access to neighboring navigation links. */
   &::before {
     content: '';
     position: absolute;
-    inset: -18px 0 100% 0;
+    bottom: 100%;
+    left: 50%;
+    width: 150px;
+    height: 18px;
+    translate: -50% 0;
   }
 
   &.panelOpen {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto;
   }
 }
 
@@ -191,44 +211,6 @@
   color: rgba(255, 255, 255, 0.6);
   text-transform: none;
   letter-spacing: 0;
-}
-
-.mobileGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-.mobileGroupLabel {
-  font-family: $font-sans;
-  font-size: $fs-12;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.mobileGroupLink {
-  @include type('body');
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: $font-sans;
-  font-size: $fs-18;
-  color: white;
-  letter-spacing: 2px;
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $color-muted;
-  }
-
-  &.active {
-    font-weight: 500;
-  }
 }
 
 .dashboardLink {

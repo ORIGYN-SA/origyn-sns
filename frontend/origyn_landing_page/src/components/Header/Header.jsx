@@ -269,16 +269,11 @@ const Header = () => {
     );
   };
 
-  const renderMobileGroup = (item) => (
-    <div key={item.id} className={styles.mobileGroup}>
-      <span className={styles.mobileGroupLabel}>{t(item.labelKey)}</span>
-      {item.children.map((child) => renderLink(child, styles.mobileGroupLink))}
-    </div>
-  );
-
   const renderNavItem = (item) => {
     if (item.type !== "group") return renderLink(item, styles.navLink);
-    return isDesktop ? renderGroup(item) : renderMobileGroup(item);
+    if (!isDesktop)
+      return item.children.map((child) => renderLink(child, styles.navLink));
+    return renderGroup(item);
   };
 
   return (
