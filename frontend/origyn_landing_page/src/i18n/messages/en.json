@@ -68,9 +68,213 @@
     "copyright": "©2026 All rights reserved - origyn"
   },
   "dpp": {
-    "eyebrow": "Digital Product Passport",
-    "title": "Every product, its own verifiable history.",
-    "subtitle": "Placeholder copy - the DPP page content is still to be written."
+    "hero": {
+      "title": "The infrastructure layer of\nEU <i>Digital Product Passports</i>",
+      "lead": "ORIGYN turns EU DPP compliance from a multi-year engineering project into a plug & play rollout. Every passport is tamper-proof, traceable and always available.",
+      "chips": [
+        "Regulation-Ready",
+        "Plug-&-Play",
+        "Swiss Based"
+      ],
+      "badge": "Listed on <a:dppindex>dppindex.eu</a:dppindex> as an official EU DPP Provider",
+      "cta": "Book a free assessment call",
+      "imageAlt": "An ORIGYN digital product passport for a battery pack, open on a phone and a tablet."
+    },
+    "regulation": {
+      "title": "EU Ecodesign for Sustainable\nProducts Regulation (2024/1781)",
+      "lead": "An ORIGYN DPP carries origin & composition, material safety data, repair & recycling instructions and provenance proof, all accessible via QR or NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR in force",
+          "body": "Regulation (EU) 2024/1781 entered into force in July 2024."
+        },
+        {
+          "year": "2027",
+          "title": "First DPPs mandatory",
+          "body": "Batteries (February), textiles, iron & steel. The clock starts."
+        },
+        {
+          "year": "2028",
+          "title": "Electronics & furniture",
+          "body": "Durability, recyclability and recycled-content rules."
+        },
+        {
+          "year": "2030",
+          "title": "Full market coverage",
+          "body": "All product categories. Advanced DPP required."
+        }
+      ]
+    },
+    "what": {
+      "title": "The most advanced platform for\n<s>digital product passports</s>",
+      "lead": "Stored permanently on an immutable network. Tamper-proof, unfalsifiable and always accessible.",
+      "cards": [
+        {
+          "title": "Physical–Digital Bridge",
+          "body": "Every passport links to a physical product via QR or NFC. Full data, images, documents, materials and provenance are revealed on scan.",
+          "proof": "Listed on <a:dppindex>dppindex.eu</a:dppindex> as an official EU DPP Provider."
+        },
+        {
+          "title": "Customized Infrastructure",
+          "body": "No single point of failure. Choose Swiss, global or your own servers, ESPR-compliant and audit-ready by design.",
+          "proof": "Trusted alongside Siemens, DNV and Avery Dennison."
+        },
+        {
+          "title": "Plug & Play at Scale",
+          "body": "The ORIGYN platform plugs into your existing product data, so there is nothing to build. Issue passports in bulk, from a first pilot batch to your entire catalog.",
+          "proof": "From a few hundred to millions of DPPs in seconds."
+        }
+      ]
+    },
+    "why": {
+      "title": "The deadline is now.\n<s>February 2027</s> is approaching.",
+      "benefits": [
+        {
+          "title": "Deploy in weeks, not 18–36 months",
+          "body": "Meet the 2027 deadline with time to spare."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Assess, configure and be ready to roll out in days, fully automated."
+        },
+        {
+          "title": "We maintain & upgrade it",
+          "body": "You stay compliant as ESPR schemas evolve."
+        },
+        {
+          "title": "Higher savings",
+          "body": "A competitive price point versus competitors or building your own."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Why ORIGYN,\nnot build-your-own",
+      "buildTitle": "Build-Your-Own",
+      "origynTitle": "ORIGYN Protocol",
+      "rows": [
+        {
+          "build": "18–36 months development time",
+          "origyn": "Deploy in weeks, not years"
+        },
+        {
+          "build": "High costs and resources",
+          "origyn": "Plug-&-Play solution, higher savings"
+        },
+        {
+          "build": "Tech expertise hard to hire",
+          "origyn": "Battle-tested protocol"
+        },
+        {
+          "build": "Must maintain indefinitely",
+          "origyn": "We maintain and upgrade it"
+        },
+        {
+          "build": "ESPR compliance uncertain",
+          "origyn": "Listed EU DPP provider"
+        },
+        {
+          "build": "No availability after insolvency",
+          "origyn": "ESPR-aligned long-term guarantee"
+        },
+        {
+          "build": "Auditors can't independently verify",
+          "origyn": "Anyone can independently verify"
+        },
+        {
+          "build": "No ecosystem network effect",
+          "origyn": "Growing partner ecosystem"
+        }
+      ],
+      "buildLabel": "Not included",
+      "origynLabel": "Included"
+    },
+    "partner": {
+      "title": "The ORIGYN partner model",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Assessment",
+          "bullets": [
+            "Map your product catalog to relevant ESPR product categories and timelines. Identify data gaps and priority SKUs.",
+            "Get your ORIGYN DPP Readiness Document overview."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilot Program",
+          "bullets": [
+            "One product line pilot.",
+            "Map of data models and sources.",
+            "Data fields are configured to match your DPP data model.",
+            "ERP and API configuration evaluation.",
+            "Cost estimation and partnership agreement."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise Roll Out",
+          "bullets": [
+            "DPP template is defined.",
+            "Data mapping is completed.",
+            "DPPs are created with the ORIGYN Platform.",
+            "Physical products are tagged (QR / NFC).",
+            "DPPs go live at organizational level, scannable, verifiable and always available."
+          ]
+        }
+      ],
+      "imageAlt": "A live ORIGYN digital product passport on a phone, showing product information, images and compliance data.",
+      "getTitle": "What you get as an ORIGYN partner",
+      "get": [
+        "API + platform access",
+        "Dedicated integration team",
+        "Joint go-to-market support"
+      ]
+    },
+    "download": {
+      "title": "Take the whole picture\n<s>with you.</s>",
+      "lead": "The ORIGYN DPP one-pager: the regulation timeline, the platform, the partner model and the comparison, on a single sheet you can forward to your team.",
+      "label": "Work email",
+      "placeholder": "you@company.com",
+      "submit": "Get the one-pager",
+      "sending": "Sending…",
+      "invalid": "Please enter a valid email address",
+      "error": "Something went wrong. Please try again.",
+      "sentTitle": "Check your inbox",
+      "sentBody": "We've sent the one-pager to your address. It should arrive within a minute.",
+      "readyTitle": "Your one-pager is ready",
+      "readyBody": "Thanks! Here's the full ORIGYN DPP one-pager.",
+      "openPdf": "Download the PDF",
+      "perks": [
+        "ESPR timeline",
+        "Partner model",
+        "Build vs. buy"
+      ],
+      "privacy": "We'll only use your address to send the one-pager and follow up about DPP."
+    },
+    "cta": {
+      "title": "Get <i>a free assessment</i> now",
+      "lead": "The window is 2027. First-mover partners will have a structural advantage. Let's build your DPP together.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP readiness assessment",
+          "body": "We assess your product catalog against ESPR timelines and identify priority categories."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP program",
+          "body": "Launch a live ORIGYN DPP pilot on one product line. Fast, low-risk, tangible results."
+        },
+        {
+          "step": "3",
+          "title": "Partnership agreement",
+          "body": "Formalize the relationship: API access, co-development, go-to-market alignment."
+        }
+      ],
+      "button": "Book a free assessment call",
+      "emailPrompt": "Or email us at"
+    }
   },
   "home": {
     "hero": {
