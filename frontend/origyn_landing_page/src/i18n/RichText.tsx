@@ -1,52 +1,105 @@
 import { Fragment, type ReactNode } from "react";
 
-// Inline emphasis tags allowed inside catalog strings. Keeping the markup in
-// the string (rather than splitting into separate keys) lets a translator move
-// the emphasized word to wherever the target language's grammar needs it.
-//   <i>...</i>  italic emphasis      <s>...</s>  strong (solid ink)
-//   <g>...</g>  brand gradient text
+// Catalog markup keeps emphasis movable when translators reorder a sentence.
 const TAG_CLASS: Record<string, string> = {
   i: "font-normal italic",
   s: "font-normal text-ink",
   g: "text-gradient",
 };
 
-const TOKEN = /<(i|s|g)>([\s\S]*?)<\/\1>/g;
+// Resolve URLs outside catalogs so translators cannot alter link targets.
+const LINK_CLASS =
+  "rounded-sm font-medium underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current";
 
-const parse = (text: string): ReactNode[] => {
-  const nodes: ReactNode[] = [];
+const TOKEN = /<(\/)?(i|s|g|a:[a-zA-Z0-9_-]+)>/g;
+
+type Links = Record<string, string>;
+
+type TagNode = {
+  tag: string;
+  start: number;
+  children: ParsedNode[];
+  closed: boolean;
+};
+
+type ParsedNode = string | TagNode;
+
+const tokenize = (text: string): ParsedNode[] => {
+  const nodes: ParsedNode[] = [];
+  const stack: TagNode[] = [];
   let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  TOKEN.lastIndex = 0;
+  const append = (node: ParsedNode) => {
+    const target = stack.at(-1)?.children ?? nodes;
+    target.push(node);
+  };
 
-  while ((match = TOKEN.exec(text)) !== null) {
+  for (const match of text.matchAll(TOKEN)) {
     if (match.index > lastIndex) {
-      nodes.push(text.slice(lastIndex, match.index));
+      append(text.slice(lastIndex, match.index));
     }
-    const [, tag, inner] = match;
-    nodes.push(
-      <span key={match.index} className={TAG_CLASS[tag]}>
-        {inner}
-      </span>,
-    );
+
+    const [, slash, tag] = match;
+    if (!slash) {
+      const node = { tag, start: match.index, children: [], closed: false };
+      append(node);
+      stack.push(node);
+    } else if (stack.at(-1)?.tag === tag) {
+      stack.pop()!.closed = true;
+    } else {
+      append(match[0]);
+    }
+
     lastIndex = match.index + match[0].length;
   }
 
-  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  if (lastIndex < text.length) append(text.slice(lastIndex));
   return nodes;
 };
 
-// Renders a (possibly emphasized) catalog string as inline React nodes. Does
-// not handle line breaks - callers that need multi-line headings split on "\n"
-// and render each line through their own element so animations stay per-line.
-export default function RichText({ text }: { text?: string }) {
+const render = (
+  nodes: ParsedNode[],
+  text: string,
+  links?: Links,
+  keyPrefix = "",
+): ReactNode[] =>
+  nodes.map((node, index) => {
+    if (typeof node === "string") return node;
+    if (!node.closed) return text.slice(node.start);
+
+    const key = `${keyPrefix}${index}`;
+    const children = render(node.children, text, links, `${key}.`);
+    if (node.tag.startsWith("a:")) {
+      const href = links?.[node.tag.slice(2)];
+      return href ? (
+        <a
+          key={key}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={LINK_CLASS}
+        >
+          {children}
+        </a>
+      ) : (
+        <Fragment key={key}>{children}</Fragment>
+      );
+    }
+
+    return (
+      <span key={key} className={TAG_CLASS[node.tag]}>
+        {children}
+      </span>
+    );
+  });
+
+export default function RichText({
+  text,
+  links,
+}: {
+  text?: string;
+  links?: Links;
+}) {
   if (!text) return null;
   if (!text.includes("<")) return <>{text}</>;
-  return (
-    <>
-      {parse(text).map((node, i) => (
-        <Fragment key={i}>{node}</Fragment>
-      ))}
-    </>
-  );
+  return <>{render(tokenize(text), text, links)}</>;
 }
