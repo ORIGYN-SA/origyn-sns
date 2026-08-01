@@ -1,22 +1,26 @@
 import PageLayout from "@components/PageLayout";
-import { useT } from "@/i18n/LocaleContext";
-import styles from "./DPPPage.module.scss";
+import Hero from "./components/Hero";
+import WhatIsOrigyn from "./components/WhatIsOrigyn";
+import Regulation from "./components/Regulation";
+import WhyOrigyn from "./components/WhyOrigyn";
+import BuildVsBuy from "./components/BuildVsBuy";
+import PartnerModel from "./components/PartnerModel";
+import DownloadGate from "./components/DownloadGate";
+import CtaBand from "./components/CtaBand";
 
-// Placeholder: content still to be written.
-const DPPPage = () => {
-  const t = useT();
-
-  return (
-    <PageLayout>
-      <section className={styles.hero}>
-        <div className={styles.content}>
-          <span className={styles.eyebrow}>{t("dpp.eyebrow")}</span>
-          <h1 className={styles.title}>{t("dpp.title")}</h1>
-          <p className={styles.subtitle}>{t("dpp.subtitle")}</p>
-        </div>
-      </section>
-    </PageLayout>
-  );
-};
+const DPPPage = () => (
+  <PageLayout>
+    <main className="bg-white font-sans text-ink">
+      <Hero />
+      <WhatIsOrigyn />
+      <Regulation />
+      <WhyOrigyn />
+      <BuildVsBuy />
+      <PartnerModel />
+      <DownloadGate />
+      <CtaBand />
+    </main>
+  </PageLayout>
+);
 
 export default DPPPage;
