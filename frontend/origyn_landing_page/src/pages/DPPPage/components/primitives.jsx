@@ -35,6 +35,52 @@ export const GradientRule = ({ className = "" }) => (
   />
 );
 
+const CTA_SIZES = {
+  md: "px-7 py-3.5 text-[0.9375rem]",
+  lg: "px-8 py-4 text-[0.9375rem]",
+};
+
+// The gradient is reserved for the closing CTA band.
+const CTA_VARIANTS = {
+  gradient: "bg-brand-gradient-cta text-navy",
+  white: "bg-white text-navy",
+  navy: "bg-navy text-white",
+};
+
+export const CtaButton = ({
+  href,
+  children,
+  size = "md",
+  variant = "gradient",
+  outlineClassName = "focus-visible:outline-navy",
+  className = "",
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`group inline-flex w-fit items-center gap-3 rounded-full ${
+      CTA_VARIANTS[variant] ?? CTA_VARIANTS.gradient
+    } ${
+      CTA_SIZES[size] ?? CTA_SIZES.md
+    } font-medium tracking-tight transition-transform duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${outlineClassName} ${className}`}
+  >
+    {children}
+    <svg
+      viewBox="0 0 12 12"
+      className="h-3 w-3 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none rtl:motion-safe:group-hover:-translate-x-0.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M1 11 11 1M4 1h7v7" />
+    </svg>
+  </a>
+);
+
 // Use a named size because Tailwind emits .h-7 after .h-6. An appended h-6
 // loses the specificity tie, so each class string must contain one size.
 const MARK_SIZES = {

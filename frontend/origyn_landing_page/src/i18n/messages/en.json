@@ -151,7 +151,7 @@
     "compare": {
       "title": "Why ORIGYN,\nnot build-your-own",
       "buildTitle": "Build-Your-Own",
-      "origynTitle": "ORIGYN Protocol",
+      "origynTitle": "ORIGYN Platform",
       "rows": [
         {
           "build": "18–36 months development time",
@@ -163,7 +163,7 @@
         },
         {
           "build": "Tech expertise hard to hire",
-          "origyn": "Battle-tested protocol"
+          "origyn": "Battle-tested platform"
         },
         {
           "build": "Must maintain indefinitely",
@@ -172,10 +172,6 @@
         {
           "build": "ESPR compliance uncertain",
           "origyn": "Listed EU DPP provider"
-        },
-        {
-          "build": "No availability after insolvency",
-          "origyn": "ESPR-aligned long-term guarantee"
         },
         {
           "build": "Auditors can't independently verify",
@@ -229,7 +225,8 @@
         "API + platform access",
         "Dedicated integration team",
         "Joint go-to-market support"
-      ]
+      ],
+      "cta": "Get a free assessment now"
     },
     "download": {
       "title": "Take the whole picture\n<s>with you.</s>",

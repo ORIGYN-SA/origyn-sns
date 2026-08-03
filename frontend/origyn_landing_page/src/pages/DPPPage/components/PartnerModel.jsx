@@ -1,5 +1,12 @@
 import { useT } from "@/i18n/LocaleContext";
-import { CheckMark, RingNumber, Section, SectionHeader } from "./primitives";
+import { BOOK_A_CALL_URL } from "../links";
+import {
+  CheckMark,
+  CtaButton,
+  RingNumber,
+  Section,
+  SectionHeader,
+} from "./primitives";
 
 const PartnerModel = () => {
   const t = useT();
@@ -59,6 +66,10 @@ const PartnerModel = () => {
                 </li>
               ))}
             </ul>
+
+            <CtaButton href={BOOK_A_CALL_URL} variant="navy" className="mt-8">
+              {t("dpp.partner.cta")}
+            </CtaButton>
           </div>
         </div>
 

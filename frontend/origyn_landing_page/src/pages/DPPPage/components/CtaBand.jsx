@@ -5,7 +5,7 @@ import {
   PARTNERSHIPS_EMAIL,
   PARTNERSHIPS_MAILTO,
 } from "../links";
-import { RingNumber } from "./primitives";
+import { CtaButton, RingNumber } from "./primitives";
 
 const CtaBand = () => {
   const t = useT();
@@ -24,26 +24,13 @@ const CtaBand = () => {
             </p>
           </div>
           <div className="flex flex-col items-start gap-4 lg:items-end">
-            <a
+            <CtaButton
               href={BOOK_A_CALL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex w-fit items-center gap-3 rounded-full bg-white px-8 py-4 text-[0.9375rem] font-medium tracking-tight text-navy transition-transform duration-200 hover:-translate-y-0.5"
+              size="lg"
+              outlineClassName="focus-visible:outline-white"
             >
               {t("dpp.cta.button")}
-              <svg
-                viewBox="0 0 12 12"
-                className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M1 11 11 1M4 1h7v7" />
-              </svg>
-            </a>
+            </CtaButton>
             <p className="text-[0.8125rem] leading-[1.6] text-white/60">
               {t("dpp.cta.emailPrompt")}{" "}
               <a

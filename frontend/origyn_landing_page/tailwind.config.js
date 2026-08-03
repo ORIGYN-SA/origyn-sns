@@ -29,6 +29,10 @@ export default {
         // The main ramp ends at #1E2345, which is invisible against navy.
         "brand-gradient-bright":
           "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 45%, #2E7BC4 100%)",
+        // Stops at #1F9CD4 to keep navy label text at AA (5.6:1); the -bright
+        // tail drops to 4.2:1.
+        "brand-gradient-cta":
+          "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 100%)",
       },
       fontFamily: {
         sans: ['"General Sans"', "system-ui", "sans-serif"],

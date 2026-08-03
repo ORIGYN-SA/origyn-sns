@@ -2,7 +2,7 @@ import ScrollReveal from "@components/ScrollReveal/ScrollReveal";
 import { useT } from "@/i18n/LocaleContext";
 import RichText from "@/i18n/RichText";
 import { BOOK_A_CALL_URL, DPP_TEXT_LINKS } from "../links";
-import { CheckMark } from "./primitives";
+import { CheckMark, CtaButton } from "./primitives";
 
 const Hero = () => {
   const t = useT();
@@ -71,26 +71,13 @@ const Hero = () => {
 
           <ScrollReveal delay={0.35}>
             <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-7">
-              <a
+              <CtaButton
                 href={BOOK_A_CALL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-[0.9375rem] font-medium tracking-tight text-navy transition-transform duration-200 motion-safe:hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+                variant="white"
+                outlineClassName="focus-visible:outline-white"
               >
                 {t("dpp.hero.cta")}
-                <svg
-                  viewBox="0 0 12 12"
-                  className="h-3 w-3 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none rtl:motion-safe:group-hover:-translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M1 11 11 1M4 1h7v7" />
-                </svg>
-              </a>
+              </CtaButton>
               <p className="flex items-center gap-2.5 text-[0.8125rem] leading-[1.5] text-white/60">
                 <CheckMark
                   size="md"
