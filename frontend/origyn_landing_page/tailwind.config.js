@@ -23,6 +23,15 @@ export default {
         canvas: "#f5f4f4",
         hairline: "#e8e8e8",
       },
+      backgroundImage: {
+        "brand-gradient":
+          "linear-gradient(270deg, #1F9CD4 3%, #1470B1 30%, #1A5EA2 36%, #214B92 44%, #254088 53%, #263C85 63%, #25397E 69%, #223169 79%, #1E2448 90%, #1E2345 91%)",
+        // For navy backgrounds: the main ramp ends at #1E2345 and disappears.
+        "brand-gradient-bright":
+          "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 45%, #2E7BC4 100%)",
+        // Stops at #1F9CD4, where navy label text is still AA (5.6:1).
+        "brand-gradient-cta": "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 100%)",
+      },
       fontFamily: {
         sans: ['"General Sans"', "system-ui", "sans-serif"],
         mono: [

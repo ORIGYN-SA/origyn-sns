@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import styles from "./HowItWorks.module.scss";
 import { useT } from "@/i18n/LocaleContext";
 
-// Step visuals (number, background image, icon SVG) are static — text comes
+// Step visuals (number, background image, icon SVG) are static - text comes
 // from the i18n catalog and is merged at render time.
 const stepVisuals = [
   {

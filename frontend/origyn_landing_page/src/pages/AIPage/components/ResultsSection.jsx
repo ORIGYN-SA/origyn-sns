@@ -52,7 +52,7 @@ const ResultsSection = () => {
         <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_90%_65%_at_center,rgba(245,244,244,0.92),rgba(245,244,244,0)_70%)] md:bg-[radial-gradient(ellipse_55%_40%_at_center,rgba(245,244,244,0.95),rgba(245,244,244,0)_75%)]" />
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 px-6 text-center md:gap-8">
           <Eyebrow>{t("results.overlay.eyebrow")}</Eyebrow>
-          {/* before → after benchmark. In RTL the row mirrors (the "before"
+          {/* before -> after benchmark. In RTL the row mirrors (the "before"
               value leads on the right) and the arrow flips to point left, so it
               still reads "before improves to after". Each value stays LTR via
               bidi (numbers + Latin unit), so "10 tok/call" never reverses. */}

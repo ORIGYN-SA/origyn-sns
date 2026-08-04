@@ -14,7 +14,7 @@ export const testimonials = [
   //   nameTwo: "Caillard",
   //   title: "Artist",
   //   description:
-  //     "\"Inscribing on chain is something beautiful. It's exactly what we are doing with ORIGYN when we do the certification of the physical art piece. We are inscribing on chain something that exist for real… At the end of the day you need a technology that's going to push the boundaries a little bit further, a technology that can certify a physical art piece exactly with the details and with all the information needed to make it part of the blockchain, that's what you do with ORIGYN.\"",
+  //     "\"Inscribing on chain is something beautiful. It's exactly what we are doing with ORIGYN when we do the certification of the physical art piece. We are inscribing on chain something that exist for real... At the end of the day you need a technology that's going to push the boundaries a little bit further, a technology that can certify a physical art piece exactly with the details and with all the information needed to make it part of the blockchain, that's what you do with ORIGYN.\"",
   //   backgroundImage: "/t-leo-c.png",
   // },
   {
@@ -32,7 +32,7 @@ export const testimonials = [
     nameTwo: "Gil",
     title: "Co-Founder of Cyber",
     description:
-      '"We always say that diamonds will last forever, which is true. So the same has to be thought about the information you provide because in 100 years, 200 years those diamonds will still exist so we needed something with the technology to make sure we could still provide those informations. Mainly with a product that has a lot of value and goes through generations…The main reason we made a partnership with ORIGYN is because they could provide all of this"',
+      '"We always say that diamonds will last forever, which is true. So the same has to be thought about the information you provide because in 100 years, 200 years those diamonds will still exist so we needed something with the technology to make sure we could still provide those informations. Mainly with a product that has a lot of value and goes through generations...The main reason we made a partnership with ORIGYN is because they could provide all of this"',
     backgroundImage: "/t-gil.jpg",
   },
 ];
