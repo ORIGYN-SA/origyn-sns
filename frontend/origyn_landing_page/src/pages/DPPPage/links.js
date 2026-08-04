@@ -7,8 +7,6 @@ export const DPP_INDEX_URL = "https://dppindex.eu/dpp-providers/origyn";
 
 export const DPP_TEXT_LINKS = { dppindex: DPP_INDEX_URL };
 
-// Under public/ so the SPA fallback does not intercept the request.
-export const DPP_ONEPAGE_PDF = "/origyn-dpp-onepage.pdf";
-export const DPP_ONEPAGE_FILENAME = "ORIGYN-DPP-Onepage.pdf";
-
+// The one-pager itself lives in the shared-email-service repo, which bundles it
+// into the Worker. It is only ever delivered as an email attachment.
 export const LEAD_ENDPOINT = "https://email.origynfoundation.com/leads";

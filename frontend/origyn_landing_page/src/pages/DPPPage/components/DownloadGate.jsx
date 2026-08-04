@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocale } from "@/i18n/LocaleContext";
-import { DPP_ONEPAGE_FILENAME, DPP_ONEPAGE_PDF, LEAD_ENDPOINT } from "../links";
+import { LEAD_ENDPOINT } from "../links";
 import { CheckMark, GradientRule, Section, SectionHeader } from "./primitives";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,25 +67,6 @@ const DownloadGate = () => {
               <p className="mt-2 max-w-[440px] ps-10 text-[0.9375rem] leading-[1.65] text-ink/70">
                 {t("dpp.download.sentBody")}
               </p>
-              <a
-                href={DPP_ONEPAGE_PDF}
-                download={DPP_ONEPAGE_FILENAME}
-                className="group mt-6 inline-flex items-center gap-3 ps-10 text-[0.9375rem] font-medium tracking-tight text-ink underline underline-offset-4 transition-opacity hover:opacity-70"
-              >
-                {t("dpp.download.openPdf")}
-                <svg
-                  viewBox="0 0 12 12"
-                  className="h-3 w-3 transition-transform duration-200 group-hover:translate-y-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M6 1v9M2.5 6.5 6 10l3.5-3.5" />
-                </svg>
-              </a>
             </div>
           ) : (
             <form
