@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.0] - 2026-08-04
+
+#### Added
+
+- Add ORIGYN DPP page
+
 ### [1.4.9] - 2026-07-24
 
 #### Changed
