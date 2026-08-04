@@ -239,8 +239,6 @@
       "error": "Something went wrong. Please try again.",
       "sentTitle": "Check your inbox",
       "sentBody": "We've sent the one-pager to your address. It should arrive within a minute.",
-      "readyTitle": "Your one-pager is ready",
-      "readyBody": "Thanks! Here's the full ORIGYN DPP one-pager.",
       "openPdf": "Download the PDF",
       "perks": [
         "ESPR timeline",

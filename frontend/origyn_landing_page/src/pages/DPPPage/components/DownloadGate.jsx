@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { useT } from "@/i18n/LocaleContext";
+import { useLocale } from "@/i18n/LocaleContext";
 import { DPP_ONEPAGE_FILENAME, DPP_ONEPAGE_PDF, LEAD_ENDPOINT } from "../links";
 import { CheckMark, GradientRule, Section, SectionHeader } from "./primitives";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const DELIVERS_BY_EMAIL = Boolean(LEAD_ENDPOINT);
-
 const DownloadGate = () => {
-  const t = useT();
+  const { locale, t } = useLocale();
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -31,14 +30,17 @@ const DownloadGate = () => {
     setLoading(true);
     setError("");
     try {
-      if (DELIVERS_BY_EMAIL) {
-        const res = await fetch(LEAD_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: trimmed, source: "dpp-onepager" }),
-        });
-        if (!res.ok) throw new Error(`Lead request failed: ${res.status}`);
-      }
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: trimmed,
+          source: "dpp-onepager",
+          locale,
+          website,
+        }),
+      });
+      if (!res.ok) throw new Error(`Lead request failed: ${res.status}`);
       setDone(true);
     } catch {
       setError(t("dpp.download.error"));
@@ -60,14 +62,10 @@ const DownloadGate = () => {
             <div className="border-t border-hairline pt-8">
               <p className="flex items-start gap-3 text-[1.0625rem] font-medium tracking-tight text-ink">
                 <CheckMark size="md" className="mt-0.5" />
-                {DELIVERS_BY_EMAIL
-                  ? t("dpp.download.sentTitle")
-                  : t("dpp.download.readyTitle")}
+                {t("dpp.download.sentTitle")}
               </p>
               <p className="mt-2 max-w-[440px] ps-10 text-[0.9375rem] leading-[1.65] text-ink/70">
-                {DELIVERS_BY_EMAIL
-                  ? t("dpp.download.sentBody")
-                  : t("dpp.download.readyBody")}
+                {t("dpp.download.sentBody")}
               </p>
               <a
                 href={DPP_ONEPAGE_PDF}
@@ -101,6 +99,18 @@ const DownloadGate = () => {
               >
                 {t("dpp.download.label")}
               </label>
+
+              {/* Honeypot. The API drops any submission that fills this in. */}
+              <input
+                type="text"
+                name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
 
               <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end">
                 <input

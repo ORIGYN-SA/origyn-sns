@@ -11,5 +11,4 @@ export const DPP_TEXT_LINKS = { dppindex: DPP_INDEX_URL };
 export const DPP_ONEPAGE_PDF = "/origyn-dpp-onepage.pdf";
 export const DPP_ONEPAGE_FILENAME = "ORIGYN-DPP-Onepage.pdf";
 
-// While empty, DownloadGate skips the request and serves the PDF directly.
-export const LEAD_ENDPOINT = "";
+export const LEAD_ENDPOINT = "https://email.origynfoundation.com/leads";
