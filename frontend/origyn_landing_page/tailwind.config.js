@@ -26,13 +26,11 @@ export default {
       backgroundImage: {
         "brand-gradient":
           "linear-gradient(270deg, #1F9CD4 3%, #1470B1 30%, #1A5EA2 36%, #214B92 44%, #254088 53%, #263C85 63%, #25397E 69%, #223169 79%, #1E2448 90%, #1E2345 91%)",
-        // The main ramp ends at #1E2345, which is invisible against navy.
+        // For navy backgrounds: the main ramp ends at #1E2345 and disappears.
         "brand-gradient-bright":
           "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 45%, #2E7BC4 100%)",
-        // Stops at #1F9CD4 to keep navy label text at AA (5.6:1); the -bright
-        // tail drops to 4.2:1.
-        "brand-gradient-cta":
-          "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 100%)",
+        // Stops at #1F9CD4, where navy label text is still AA (5.6:1).
+        "brand-gradient-cta": "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 100%)",
       },
       fontFamily: {
         sans: ['"General Sans"', "system-ui", "sans-serif"],

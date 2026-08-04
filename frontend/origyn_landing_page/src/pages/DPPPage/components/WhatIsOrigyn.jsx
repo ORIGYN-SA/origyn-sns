@@ -52,14 +52,11 @@ const ICONS = [
   </svg>,
 ];
 
-// Avoid divide-x because its physical borders land on the wrong edge in RTL.
-// Columns start at lg, not md: three of them at 768px squeeze the headings
-// into mid-phrase breaks and wrap the proof pills onto four lines.
+// Logical borders instead of divide-x, which lands on the wrong edge in RTL.
 const columnClasses = (i, count) => {
-  const divider = i > 0 ? "lg:border-s lg:border-hairline" : "";
   if (i === 0) return "lg:pe-10";
-  if (i === count - 1) return `lg:ps-10 ${divider}`;
-  return `lg:px-10 ${divider}`;
+  const padding = i === count - 1 ? "lg:ps-10" : "lg:px-10";
+  return `${padding} lg:border-s lg:border-hairline`;
 };
 
 const WhatIsOrigyn = () => {
@@ -68,10 +65,7 @@ const WhatIsOrigyn = () => {
 
   return (
     <Section>
-      <SectionHeader
-        title={t("dpp.what.title")}
-        lead={t("dpp.what.lead")}
-      />
+      <SectionHeader title={t("dpp.what.title")} lead={t("dpp.what.lead")} />
 
       <div className="mt-14 grid gap-12 md:mt-16 lg:grid-cols-3 lg:gap-0">
         {cards.map((card, i) => (
@@ -92,8 +86,7 @@ const WhatIsOrigyn = () => {
             </p>
             <p className="mt-8 flex items-center gap-3 self-start rounded-xl border border-hairline px-4 py-3 text-[0.8125rem] leading-[1.5] text-ink/80">
               <CheckMark size="md" />
-              {/* One span so the inline link does not become its own flex
-                  item and inherit the row gap as word spacing. */}
+              {/* One span, or the inline link picks up the row gap. */}
               <span>
                 <RichText text={card.proof} links={DPP_TEXT_LINKS} />
               </span>

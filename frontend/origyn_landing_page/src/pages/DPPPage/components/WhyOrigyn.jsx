@@ -8,9 +8,7 @@ const WhyOrigyn = () => {
   return (
     <Section>
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <SectionHeader
-          title={t("dpp.why.title")}
-        />
+        <SectionHeader title={t("dpp.why.title")} />
 
         <ul className="border-t border-hairline">
           {benefits.map((b) => (

@@ -7,16 +7,13 @@ const Regulation = () => {
 
   return (
     <Section>
-      <SectionHeader
-        title={t("dpp.regulation.title")}
-      />
+      <SectionHeader title={t("dpp.regulation.title")} />
       <p className="mt-5 max-w-[620px] text-base font-medium leading-[1.7] text-ink md:text-[1.0625rem]">
         {t("dpp.regulation.lead")}
       </p>
 
       <ol className="mt-12 border-t border-hairline md:mt-14">
         {milestones.map((m) => {
-          // Years are locale-independent, so this comparison is catalog-safe.
           const isDeadline = m.year === "2027";
           return (
             <li

@@ -7,9 +7,7 @@ const BuildVsBuy = () => {
 
   return (
     <Section>
-      <SectionHeader
-        title={t("dpp.compare.title")}
-      />
+      <SectionHeader title={t("dpp.compare.title")} />
 
       <div className="mt-12 md:mt-14">
         <div className="grid grid-cols-2 gap-x-6 md:gap-x-16">

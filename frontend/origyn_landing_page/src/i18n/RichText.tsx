@@ -1,13 +1,13 @@
 import { Fragment, type ReactNode } from "react";
 
-// Catalog markup keeps emphasis movable when translators reorder a sentence.
 const TAG_CLASS: Record<string, string> = {
   i: "font-normal italic",
   s: "font-normal text-ink",
   g: "text-gradient",
 };
 
-// Resolve URLs outside catalogs so translators cannot alter link targets.
+// Hrefs come from the `links` map, never the catalog, so translators cannot
+// retarget them.
 const LINK_CLASS =
   "rounded-sm font-medium underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current";
 

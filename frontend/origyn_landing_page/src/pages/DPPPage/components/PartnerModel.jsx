@@ -78,7 +78,6 @@ const PartnerModel = () => {
           alt={t("dpp.partner.imageAlt")}
           width={1081}
           height={1200}
-          loading="lazy"
           decoding="async"
           className="mx-auto w-full max-w-[17rem] lg:max-w-none"
         />

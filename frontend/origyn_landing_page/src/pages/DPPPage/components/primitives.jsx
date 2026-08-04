@@ -1,12 +1,12 @@
 import RichText from "@/i18n/RichText";
 
-export const Section = ({ id, children, className = "" }) => (
-  <section id={id} className={`px-6 py-16 md:px-10 md:py-24 ${className}`}>
+export const Section = ({ children, className = "" }) => (
+  <section className={`px-6 py-16 md:px-10 md:py-24 ${className}`}>
     <div className="mx-auto w-full max-w-[1120px]">{children}</div>
   </section>
 );
 
-export const Lines = ({ text }) =>
+const Lines = ({ text }) =>
   String(text ?? "")
     .split("\n")
     .map((line, i) => (
@@ -15,8 +15,8 @@ export const Lines = ({ text }) =>
       </span>
     ));
 
-export const SectionHeader = ({ title, lead, className = "" }) => (
-  <div className={className}>
+export const SectionHeader = ({ title, lead }) => (
+  <div>
     <h2 className="max-w-[720px] text-balance text-[1.75rem] font-light leading-[1.2] tracking-tight text-ink md:text-[2.5rem]">
       <Lines text={title} />
     </h2>
@@ -40,7 +40,6 @@ const CTA_SIZES = {
   lg: "px-8 py-4 text-[0.9375rem]",
 };
 
-// The gradient is reserved for the closing CTA band.
 const CTA_VARIANTS = {
   gradient: "bg-brand-gradient-cta text-navy",
   white: "bg-white text-navy",
@@ -59,11 +58,7 @@ export const CtaButton = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className={`group inline-flex w-fit items-center gap-3 rounded-full ${
-      CTA_VARIANTS[variant] ?? CTA_VARIANTS.gradient
-    } ${
-      CTA_SIZES[size] ?? CTA_SIZES.md
-    } font-medium tracking-tight transition-transform duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${outlineClassName} ${className}`}
+    className={`group inline-flex w-fit items-center gap-3 rounded-full ${CTA_VARIANTS[variant]} ${CTA_SIZES[size]} font-medium tracking-tight transition-transform duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${outlineClassName} ${className}`}
   >
     {children}
     <svg
@@ -81,8 +76,8 @@ export const CtaButton = ({
   </a>
 );
 
-// Use a named size because Tailwind emits .h-7 after .h-6. An appended h-6
-// loses the specificity tie, so each class string must contain one size.
+// Sizes live here rather than in className: Tailwind emits .h-7 after .h-6, so
+// an appended override loses the specificity tie.
 const MARK_SIZES = {
   sm: { box: "h-5 w-5", icon: "h-2.5 w-2.5" },
   md: { box: "h-6 w-6", icon: "h-3 w-3" },
@@ -96,7 +91,7 @@ export const CheckMark = ({
   innerClassName = "bg-white",
   iconClassName = "text-ink",
 }) => {
-  const { box, icon } = MARK_SIZES[size] ?? MARK_SIZES.lg;
+  const { box, icon } = MARK_SIZES[size];
   return (
     <span
       className={`inline-flex ${box} shrink-0 rounded-full ${ring} p-px ${className}`}
@@ -122,7 +117,7 @@ export const CheckMark = ({
 };
 
 export const CrossMark = ({ size = "lg", className = "" }) => {
-  const { box, icon } = MARK_SIZES[size] ?? MARK_SIZES.lg;
+  const { box, icon } = MARK_SIZES[size];
   return (
     <span
       className={`inline-flex ${box} shrink-0 items-center justify-center rounded-full border border-hairline ${className}`}
@@ -155,7 +150,7 @@ export const RingNumber = ({
   textClassName = "text-ink",
   className = "",
 }) => {
-  const { box, text } = NUMBER_SIZES[size] ?? NUMBER_SIZES.lg;
+  const { box, text } = NUMBER_SIZES[size];
   return (
     <span
       className={`inline-flex ${box} shrink-0 rounded-full ${ringClassName} ${className}`}

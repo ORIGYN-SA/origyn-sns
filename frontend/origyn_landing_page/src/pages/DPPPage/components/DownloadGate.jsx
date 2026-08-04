@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useT } from "@/i18n/LocaleContext";
-import {
-  DPP_ONEPAGE_FILENAME,
-  DPP_ONEPAGE_PDF,
-  LEAD_ENDPOINT,
-} from "../links";
+import { DPP_ONEPAGE_FILENAME, DPP_ONEPAGE_PDF, LEAD_ENDPOINT } from "../links";
 import { CheckMark, GradientRule, Section, SectionHeader } from "./primitives";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,13 +31,13 @@ const DownloadGate = () => {
     setLoading(true);
     setError("");
     try {
-      if (LEAD_ENDPOINT) {
+      if (DELIVERS_BY_EMAIL) {
         const res = await fetch(LEAD_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: trimmed, asset: "dpp-onepage" }),
+          body: JSON.stringify({ email: trimmed, source: "dpp-onepager" }),
         });
-        if (!res.ok) throw new Error("Request failed");
+        if (!res.ok) throw new Error(`Lead request failed: ${res.status}`);
       }
       setDone(true);
     } catch {

@@ -6,8 +6,6 @@ import { CheckMark, CtaButton } from "./primitives";
 
 const Hero = () => {
   const t = useT();
-  // Do not use the shared Stats component here. StatsItem runs parseNumeric()
-  // and a count-up, so these non-numeric chip values would render as NaN.
   const chips = t.raw("dpp.hero.chips") ?? [];
   const titleLines = String(t("dpp.hero.title") ?? "").split("\n");
 
@@ -25,9 +23,6 @@ const Hero = () => {
       <div className="relative mx-auto grid w-full max-w-[1120px] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] xl:gap-16">
         <div>
           <ScrollReveal>
-            {/* Sizes are capped per breakpoint so the longest catalog line
-                still fits the copy column; a wider scale orphans its last
-                word. */}
             <h1 className="text-[2.25rem] font-light leading-[1.1] tracking-tight text-white sm:text-[2.5rem] lg:text-[2.25rem] xl:text-[2.75rem]">
               {titleLines.map((line, i) => (
                 <span
@@ -85,8 +80,7 @@ const Hero = () => {
                   innerClassName="bg-navy"
                   iconClassName="text-[#6FD6F5]"
                 />
-                {/* One span so the inline link does not become its own flex
-                    item and inherit the row gap as word spacing. */}
+                {/* One span, or the inline link picks up the row gap. */}
                 <span>
                   <RichText text={t("dpp.hero.badge")} links={DPP_TEXT_LINKS} />
                 </span>
@@ -96,9 +90,8 @@ const Hero = () => {
         </div>
 
         <ScrollReveal delay={0.45}>
-          {/* Own the positioning context here rather than on ScrollReveal:
-              its mobile/loading branch renders a bare <div> and drops
-              className, which would leave the halo anchored to the section. */}
+          {/* ScrollReveal drops className on mobile, so the halo needs its own
+              positioning context here. */}
           <div className="relative lg:-me-4 xl:-me-10">
             <div
               aria-hidden="true"
