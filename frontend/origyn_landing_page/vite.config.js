@@ -16,7 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // certified asset on every deploy, overwriting any stale node. The SPA still
 // negotiates the locale and redirects client-side from unprefixed paths to
 // /<locale>/<path> via LocaleRedirect.
-const PAGE_PATHS = ["ai", "token", "help-center", "integrator", "integrator/join"];
+const PAGE_PATHS = ["ai", "dpp", "token", "help-center", "integrator", "integrator/join"];
 
 const spaIndexFallback = () => {
   let outDir = "dist";
