@@ -49,9 +49,6 @@ const SOLUTIONS = [
   },
 ];
 
-// Internal items resolve to "/<locale>/<path>" at render time so navigation
-// stays inside the active locale. Anchor items target sections on the home
-// page with native fragment navigation.
 const NAV_ITEMS = [
   {
     id: "solutions",
@@ -105,8 +102,7 @@ const Header = () => {
     setOpenGroupId(null);
   }
 
-  // Crossing the breakpoint swaps which surface is rendered, so drop both
-  // open states rather than let one reappear on the way back.
+  // Desktop and mobile render different surfaces, so reset on the way across.
   const [wasDesktop, setWasDesktop] = useState(isDesktop);
   if (wasDesktop !== isDesktop) {
     setWasDesktop(isDesktop);
@@ -117,10 +113,6 @@ const Header = () => {
   const closeNav = () => {
     setIsMenuOpen(false);
     setOpenGroupId(null);
-  };
-
-  const handleInternalClick = () => {
-    closeNav();
   };
 
   const handleAnchorClick = (e, sectionId) => {
@@ -134,39 +126,34 @@ const Header = () => {
     }
   };
 
-  const hrefFor = (item) => {
-    if (item.type === "anchor") return `${localePath(locale, "")}#${item.id}`;
-    if (item.type === "internal") return localePath(locale, item.path);
-    return item.href;
-  };
+  const linkProps = (item) => {
+    if (item.type === "anchor") {
+      return {
+        href: `${localePath(locale, "")}#${item.id}`,
+        onClick: (e) => handleAnchorClick(e, item.id),
+      };
+    }
 
-  const linkProps = (item) => ({
-    ...(item.type === "internal"
-      ? { to: hrefFor(item) }
-      : { href: hrefFor(item) }),
-    onClick:
-      item.type === "anchor"
-        ? (e) => handleAnchorClick(e, item.id)
-        : item.type === "internal"
-          ? handleInternalClick
-          : closeNav,
-    ...(item.type === "internal" && {
-      onMouseEnter: () => {
+    if (item.type === "internal") {
+      const preload = () => {
         void item.preload();
-      },
-      onFocus: () => {
-        void item.preload();
-      },
-    }),
-    ...(item.type === "external" && {
+      };
+      return {
+        to: localePath(locale, item.path),
+        onClick: closeNav,
+        onMouseEnter: preload,
+        onFocus: preload,
+      };
+    }
+
+    return {
+      href: item.href,
+      onClick: closeNav,
       target: "_blank",
       rel: "noopener noreferrer",
-    }),
-  });
+    };
+  };
 
-  // The icon alone is invisible to screen readers, so it carries a
-  // visually-hidden label rather than relying on target="_blank" being
-  // announced.
   const outboundMark = (
     <>
       <svg
@@ -219,8 +206,7 @@ const Header = () => {
         onMouseEnter={() => setOpenGroupId(item.id)}
         onMouseLeave={() => setOpenGroupId(null)}
         onBlur={(e) => {
-          // onBlur is focusout, so it bubbles: only close once focus has left
-          // the group entirely.
+          // React's onBlur is focusout and bubbles, so check where focus went.
           if (!e.currentTarget.contains(e.relatedTarget)) setOpenGroupId(null);
         }}
         onKeyDown={(e) => {
@@ -239,13 +225,13 @@ const Header = () => {
           {t(item.labelKey)}
           <span className={styles.chevron} aria-hidden="true" />
         </button>
-        {/* Stays mounted so the panel can transition; `visibility: hidden`
-            keeps its links out of the tab order while closed. */}
+        {/* Always mounted so it can transition. `visibility: hidden` keeps the
+            links out of the tab order while closed. */}
         <div
           id={panelId}
           className={`${styles.panel} ${isOpen ? styles.panelOpen : ""}`}
         >
-          {item.children.map((child) => (
+          {item.children.map((child) =>
             renderLinkElement(
               child,
               child.id,
@@ -262,8 +248,8 @@ const Header = () => {
                   {t(child.descriptionKey)}
                 </span>
               </>,
-            )
-          ))}
+            ),
+          )}
         </div>
       </div>
     );
@@ -283,11 +269,10 @@ const Header = () => {
           to={localePath(locale, "")}
           className={styles.logoContainer}
           onClick={(e) => {
+            closeNav();
             if (isHome) {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-              handleInternalClick();
             }
           }}
         >

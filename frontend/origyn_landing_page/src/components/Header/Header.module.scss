@@ -52,10 +52,8 @@
     left: 0;
     background: rgba(0, 0, 0, 0.9);
     flex-direction: column;
-    // `safe center` centers only while the list fits. With plain `center`,
-    // overflow spills equally past both ends and the top items sit above the
-    // scroll origin, where scrollTop cannot reach them. The unprefixed
-    // declaration stays first as the fallback for engines without `safe`.
+    // Plain `center` puts the overflowing top items above the scroll origin,
+    // out of reach. Unprefixed first, as the fallback for engines without it.
     justify-content: center;
     justify-content: safe center;
     gap: 30px;
@@ -139,8 +137,7 @@
   flex-direction: column;
   padding: 12px;
   border-radius: 12px;
-  /* Fully opaque: page content must not read through the open panel. That
-     also makes the backdrop blur a no-op, so it is gone. */
+  /* Opaque: page content must not read through the open panel. */
   background: #061937;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
@@ -150,13 +147,12 @@
   transform: translateY(-6px);
   transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
 
-  /* During the visibility transition a closing panel remains hit-testable,
-     which can retrigger mouseenter and oscillate the panel open and closed.
-     Disable pointer events immediately while the fade finishes. */
+  /* A closing panel stays hit-testable through the fade, which retriggers
+     mouseenter and flickers it back open. */
   pointer-events: none;
 
-  /* Bridge only the trigger-to-panel gap. Using the panel width here blocks
-     pointer access to neighboring navigation links. */
+  /* Bridges the trigger-to-panel gap. Narrower than the panel, or it swallows
+     clicks on the neighbouring nav links. */
   &::before {
     content: '';
     position: absolute;
@@ -248,7 +244,7 @@
   fill: none;
 }
 
-// Absolute so it never opens a flex gap next to the icon it labels.
+// Absolute, or it opens a flex gap next to the icon it labels.
 .srOnly {
   position: absolute;
   width: 1px;
