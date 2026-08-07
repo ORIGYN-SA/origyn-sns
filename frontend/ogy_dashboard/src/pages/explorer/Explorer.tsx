@@ -1,7 +1,14 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { Carousel, Search } from "@components/ui";
+import {
+  Carousel,
+  NewTable,
+  Search,
+  SkeletonOverlay,
+  TablePagination,
+} from "@components/ui";
+import { CardErrorOverlay } from "@components/dashboard";
 import { useLocalePath, useT } from "@i18n/LocaleContext";
 import { shortenId } from "@helpers/strings";
 import { asValidPrincipal } from "@helpers/principal";
@@ -12,9 +19,14 @@ import useNftCollection, {
 import useNftCollections from "@hooks/nft/useNftCollections";
 import useNfts from "@hooks/nft/useNfts";
 import useNftSearch from "@hooks/nft/useNftSearch";
+import useNftTransactions from "@hooks/nft/useNftTransactions";
 import { useNftAccountStats } from "@hooks/nft/useNftAccount";
 import { NftCard } from "@hooks/nft/mapNft";
 import { NftHeroTile, NftTile, OnSelectNft, SkeletonTile } from "./NftCards";
+import {
+  buildNftTransactionSkeletonRows,
+  getNftTransactionColumns,
+} from "./nftTransactionColumns";
 import CollectionCard from "./CollectionCard";
 import CertificateDialog from "./CertificateDialog";
 
@@ -22,6 +34,7 @@ const FEATURED_LIMIT = 12;
 const CATEGORY_LIMIT = 12;
 const COLLECTIONS_LIMIT = 12;
 const SKELETON_COUNT = 6;
+const TRANSACTIONS_PAGE_SIZE = 10;
 
 const Section = ({
   title,
@@ -177,6 +190,65 @@ const CategorySection = ({
         <CardCarouselItems cards={cards} onSelect={onSelect} />
       )}
     </Section>
+  );
+};
+
+const TransactionsSection = () => {
+  const t = useT();
+  const lp = useLocalePath();
+  const navigate = useNavigate();
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(TRANSACTIONS_PAGE_SIZE);
+
+  const { items, total, isLoading, isPlaceholderData, isError } =
+    useNftTransactions({
+      limit: pageSize,
+      offset: pageSize * pageIndex,
+    });
+
+  const hasError = !isLoading && isError;
+  // isPlaceholderData covers page changes; a background refetch of the current
+  // page keeps its rows instead of flashing back to skeletons.
+  const showSkeleton = isLoading || isPlaceholderData || hasError;
+
+  const columns = useMemo(
+    () => getNftTransactionColumns((path) => navigate(lp(path)), t),
+    [navigate, lp, t]
+  );
+
+  const rows = showSkeleton ? buildNftTransactionSkeletonRows(pageSize) : items;
+
+  if (!showSkeleton && total === 0) return null;
+
+  return (
+    <section>
+      <h2 className="text-explorer-section font-semibold leading-none text-content mb-6">
+        {t("explorer.sections.transactions")}
+      </h2>
+      <div className="relative">
+        <SkeletonOverlay loading={showSkeleton}>
+          {hasError && (
+            <CardErrorOverlay title={t("explorer.sections.transactions")} />
+          )}
+          <NewTable
+            columns={columns}
+            data={rows}
+            footer={
+              <TablePagination
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                pageCount={Math.ceil(total / pageSize)}
+                onPageChange={setPageIndex}
+                onPageSizeChange={(size) => {
+                  setPageSize(size);
+                  setPageIndex(0);
+                }}
+              />
+            }
+          />
+        </SkeletonOverlay>
+      </div>
+    </section>
   );
 };
 
@@ -355,6 +427,7 @@ export const Explorer = () => {
                 onSelect={setSelectedNft}
               />
             ))}
+            <TransactionsSection />
           </>
         )}
       </div>

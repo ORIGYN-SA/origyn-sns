@@ -634,8 +634,8 @@
       "governanceBalance": "ยอดคงเหลือการกำกับดูแล",
       "stakedTokens": "โทเคนที่สเตก",
       "ledgerBalance": "ยอดคงเหลือ Ledger",
-      "weightInTotalSupply": "น้ำหนักในอุปทานทั้งหมด"
-      ,"governanceCanisterTag": "แคนิสเตอร์การกำกับดูแล ถือโทเค็นที่ใช้ร่วมกันทั้งหมด"
+      "weightInTotalSupply": "น้ำหนักในอุปทานทั้งหมด",
+      "governanceCanisterTag": "แคนิสเตอร์การกำกับดูแล ถือโทเค็นที่ใช้ร่วมกันทั้งหมด"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "ดูทั้งหมด",
     "sections": {
       "featured": "ใบรับรองแนะนำ",
-      "collections": "คอลเลกชัน"
+      "collections": "คอลเลกชัน",
+      "transactions": "ธุรกรรม"
     },
     "search": {
       "noCertificates": "ไม่มีใบรับรองที่ตรงกัน ดูคอลเลกชันและนักสะสมด้านล่าง",

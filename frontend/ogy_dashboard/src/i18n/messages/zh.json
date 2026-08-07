@@ -634,8 +634,8 @@
       "governanceBalance": "治理余额",
       "stakedTokens": "已质押代币",
       "ledgerBalance": "账本余额",
-      "weightInTotalSupply": "在总供应量中的权重"
-      ,"governanceCanisterTag": "治理 Canister，持有所有共享代币"
+      "weightInTotalSupply": "在总供应量中的权重",
+      "governanceCanisterTag": "治理 Canister，持有所有共享代币"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "查看全部",
     "sections": {
       "featured": "精选证书",
-      "collections": "收藏系列"
+      "collections": "收藏系列",
+      "transactions": "交易"
     },
     "search": {
       "noCertificates": "没有匹配的证书。请查看下方的收藏系列和收藏家。",

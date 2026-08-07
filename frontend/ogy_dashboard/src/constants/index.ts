@@ -27,10 +27,6 @@ export const API_GLDT_BASE_URL = import.meta.env.VITE_API_GLDT_BASE_URL;
 export const GLDT_API_TOKEN_SYMBOL = "OGY";
 // Dataset segment for the GLDT NFT API. Mainnet data lives under "production".
 export const GLDT_NFT_ENV = import.meta.env.VITE_GLDT_NFT_ENV ?? "production";
-export const ACCOUNT_ID_LEDGER_ICP = import.meta.env.VITE_ACCOUNT_ID_LEDGER_ICP;
-export const ACCOUNT_ID_LEDGER_ICP_OLD = import.meta.env
-  .VITE_ACCOUNT_ID_LEDGER_ICP_OLD;
-export const ACCOUNT_ID_LEDGER_OGY = import.meta.env.VITE_ACCOUNT_ID_LEDGER_OGY;
 export const NNS_PLATFORM_URL = import.meta.env.VITE_NNS_PLATFORM_URL;
 export const LEGACY_OGY_DASHBOARD_URL = import.meta.env
   .VITE_LEGACY_OGY_DASHBOARD_URL;

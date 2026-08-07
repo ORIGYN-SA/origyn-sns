@@ -699,7 +699,8 @@
     "viewAll": "View all",
     "sections": {
       "featured": "Featured Certificates",
-      "collections": "Collections"
+      "collections": "Collections",
+      "transactions": "Transactions"
     },
     "search": {
       "noCertificates": "No certificates matched. See collections and collectors below.",

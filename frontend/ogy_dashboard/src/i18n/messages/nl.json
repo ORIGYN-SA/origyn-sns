@@ -634,8 +634,8 @@
       "governanceBalance": "Governance-saldo",
       "stakedTokens": "Gestakete tokens",
       "ledgerBalance": "Ledger-saldo",
-      "weightInTotalSupply": "Gewicht in totale voorraad"
-      ,"governanceCanisterTag": "Governance-canister, bevat alle gedeelde tokens"
+      "weightInTotalSupply": "Gewicht in totale voorraad",
+      "governanceCanisterTag": "Governance-canister, bevat alle gedeelde tokens"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Alles bekijken",
     "sections": {
       "featured": "Uitgelichte certificaten",
-      "collections": "Collecties"
+      "collections": "Collecties",
+      "transactions": "Transacties"
     },
     "search": {
       "noCertificates": "Geen certificaten gevonden. Bekijk hieronder collecties en verzamelaars.",
