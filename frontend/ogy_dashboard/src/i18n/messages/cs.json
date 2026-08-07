@@ -699,7 +699,8 @@
     "viewAll": "Zobrazit vše",
     "sections": {
       "featured": "Doporučené certifikáty",
-      "collections": "Kolekce"
+      "collections": "Kolekce",
+      "transactions": "Transakce"
     },
     "search": {
       "noCertificates": "Žádné certifikáty neodpovídají. Níže najdete kolekce a sběratele.",

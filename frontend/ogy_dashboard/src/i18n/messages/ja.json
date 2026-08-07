@@ -634,8 +634,8 @@
       "governanceBalance": "ガバナンス残高",
       "stakedTokens": "ステーク済みトークン",
       "ledgerBalance": "レジャー残高",
-      "weightInTotalSupply": "総供給量に占める割合"
-      ,"governanceCanisterTag": "ガバナンスキャニスター。共有トークンをすべて保有"
+      "weightInTotalSupply": "総供給量に占める割合",
+      "governanceCanisterTag": "ガバナンスキャニスター。共有トークンをすべて保有"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "すべて表示",
     "sections": {
       "featured": "注目の証明書",
-      "collections": "コレクション"
+      "collections": "コレクション",
+      "transactions": "トランザクション"
     },
     "search": {
       "noCertificates": "一致する証明書はありません。以下のコレクションとコレクターをご覧ください。",

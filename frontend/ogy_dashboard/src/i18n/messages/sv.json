@@ -634,8 +634,8 @@
       "governanceBalance": "Styrningssaldo",
       "stakedTokens": "Stakade tokens",
       "ledgerBalance": "Ledger-saldo",
-      "weightInTotalSupply": "Vikt i totalt utbud"
-      ,"governanceCanisterTag": "Governance-canister, innehåller alla delade tokens"
+      "weightInTotalSupply": "Vikt i totalt utbud",
+      "governanceCanisterTag": "Governance-canister, innehåller alla delade tokens"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Visa alla",
     "sections": {
       "featured": "Utvalda certifikat",
-      "collections": "Samlingar"
+      "collections": "Samlingar",
+      "transactions": "Transaktioner"
     },
     "search": {
       "noCertificates": "Inga certifikat matchade. Se samlingar och samlare nedan.",

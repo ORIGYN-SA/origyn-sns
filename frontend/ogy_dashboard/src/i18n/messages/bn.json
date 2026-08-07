@@ -699,7 +699,8 @@
     "viewAll": "সব দেখুন",
     "sections": {
       "featured": "বৈশিষ্ট্যযুক্ত সার্টিফিকেট",
-      "collections": "কালেকশন"
+      "collections": "কালেকশন",
+      "transactions": "লেনদেন"
     },
     "search": {
       "noCertificates": "কোনো সার্টিফিকেট মেলেনি। নিচে কালেকশন ও সংগ্রাহক দেখুন।",

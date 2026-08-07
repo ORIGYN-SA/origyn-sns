@@ -634,8 +634,8 @@
       "governanceBalance": "Hallinnon saldo",
       "stakedTokens": "Staatut tokenit",
       "ledgerBalance": "Ledger-saldo",
-      "weightInTotalSupply": "Osuus kokonaistarjonnasta"
-      ,"governanceCanisterTag": "Hallintokanisteri, sisältää kaikki jaetut tokenit"
+      "weightInTotalSupply": "Osuus kokonaistarjonnasta",
+      "governanceCanisterTag": "Hallintokanisteri, sisältää kaikki jaetut tokenit"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Näytä kaikki",
     "sections": {
       "featured": "Esitellyt sertifikaatit",
-      "collections": "Kokoelmat"
+      "collections": "Kokoelmat",
+      "transactions": "Tapahtumat"
     },
     "search": {
       "noCertificates": "Yksikään sertifikaatti ei vastannut hakua. Katso kokoelmat ja keräilijät alta.",

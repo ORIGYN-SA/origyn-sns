@@ -634,8 +634,8 @@
       "governanceBalance": "Styringssaldo",
       "stakedTokens": "Stakede tokens",
       "ledgerBalance": "Ledger-saldo",
-      "weightInTotalSupply": "Vekt i total tilførsel"
-      ,"governanceCanisterTag": "Styringskanister, inneholder alle delte tokens"
+      "weightInTotalSupply": "Vekt i total tilførsel",
+      "governanceCanisterTag": "Styringskanister, inneholder alle delte tokens"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Vis alle",
     "sections": {
       "featured": "Fremhevede sertifikater",
-      "collections": "Samlinger"
+      "collections": "Samlinger",
+      "transactions": "Transaksjoner"
     },
     "search": {
       "noCertificates": "Ingen sertifikater samsvarte. Se samlinger og samlere nedenfor.",

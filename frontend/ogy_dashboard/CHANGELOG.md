@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.46] - 2026-08-07
+
+#### Added
+
+- Add a transactions table to the Viewer.
+
+#### Changed
+
+- Move OTA and ORA to the API.
+
 ### [1.0.45] - 2026-07-26
 
 #### Added

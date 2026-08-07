@@ -634,8 +634,8 @@
       "governanceBalance": "Solde de gouvernance",
       "stakedTokens": "Tokens stakés",
       "ledgerBalance": "Solde du ledger",
-      "weightInTotalSupply": "Poids dans l'offre totale"
-      ,"governanceCanisterTag": "Canister de gouvernance, contient tous les tokens partagés"
+      "weightInTotalSupply": "Poids dans l'offre totale",
+      "governanceCanisterTag": "Canister de gouvernance, contient tous les tokens partagés"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Tout voir",
     "sections": {
       "featured": "Certificats à la une",
-      "collections": "Collections"
+      "collections": "Collections",
+      "transactions": "Transactions"
     },
     "search": {
       "noCertificates": "Aucun certificat ne correspond. Consultez les collections et collectionneurs ci-dessous.",

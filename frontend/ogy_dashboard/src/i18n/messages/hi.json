@@ -634,8 +634,8 @@
       "governanceBalance": "गवर्नेंस बैलेंस",
       "stakedTokens": "स्टेक किए गए टोकन",
       "ledgerBalance": "Ledger बैलेंस",
-      "weightInTotalSupply": "कुल सप्लाई में भार"
-      ,"governanceCanisterTag": "गवर्नेंस कैनिस्टर, सभी साझा टोकन रखता है"
+      "weightInTotalSupply": "कुल सप्लाई में भार",
+      "governanceCanisterTag": "गवर्नेंस कैनिस्टर, सभी साझा टोकन रखता है"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "सभी देखें",
     "sections": {
       "featured": "विशेष प्रमाणपत्र",
-      "collections": "संग्रह"
+      "collections": "संग्रह",
+      "transactions": "लेनदेन"
     },
     "search": {
       "noCertificates": "कोई प्रमाणपत्र मेल नहीं खाया। नीचे संग्रह और संग्राहक देखें।",

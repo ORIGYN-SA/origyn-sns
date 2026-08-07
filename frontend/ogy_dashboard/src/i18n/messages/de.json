@@ -634,8 +634,8 @@
       "governanceBalance": "Governance-Guthaben",
       "stakedTokens": "Gestakte Token",
       "ledgerBalance": "Ledger-Guthaben",
-      "weightInTotalSupply": "Gewicht am Gesamtbestand"
-      ,"governanceCanisterTag": "Governance-Canister, enthält alle gemeinsam genutzten Token"
+      "weightInTotalSupply": "Gewicht am Gesamtbestand",
+      "governanceCanisterTag": "Governance-Canister, enthält alle gemeinsam genutzten Token"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Alle anzeigen",
     "sections": {
       "featured": "Empfohlene Zertifikate",
-      "collections": "Sammlungen"
+      "collections": "Sammlungen",
+      "transactions": "Transaktionen"
     },
     "search": {
       "noCertificates": "Keine Zertifikate gefunden. Sieh dir unten Sammlungen und Sammler an.",

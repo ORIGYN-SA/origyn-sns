@@ -634,8 +634,8 @@
       "governanceBalance": "거버넌스 잔액",
       "stakedTokens": "스테이크된 토큰",
       "ledgerBalance": "레저 잔액",
-      "weightInTotalSupply": "총 공급량 내 비중"
-      ,"governanceCanisterTag": "거버넌스 캐니스터, 모든 공유 토큰을 보유합니다"
+      "weightInTotalSupply": "총 공급량 내 비중",
+      "governanceCanisterTag": "거버넌스 캐니스터, 모든 공유 토큰을 보유합니다"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "전체 보기",
     "sections": {
       "featured": "추천 인증서",
-      "collections": "컬렉션"
+      "collections": "컬렉션",
+      "transactions": "거래"
     },
     "search": {
       "noCertificates": "일치하는 인증서가 없습니다. 아래의 컬렉션과 수집가를 확인해 주세요.",
