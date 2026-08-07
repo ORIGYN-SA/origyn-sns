@@ -634,8 +634,8 @@
       "governanceBalance": "Saldo Tata Kelola",
       "stakedTokens": "Token yang di-stake",
       "ledgerBalance": "Saldo Ledger",
-      "weightInTotalSupply": "Bobot Dalam Total Pasokan"
-      ,"governanceCanisterTag": "Canister tata kelola, menyimpan semua token bersama"
+      "weightInTotalSupply": "Bobot Dalam Total Pasokan",
+      "governanceCanisterTag": "Canister tata kelola, menyimpan semua token bersama"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Lihat semua",
     "sections": {
       "featured": "Sertifikat Unggulan",
-      "collections": "Koleksi"
+      "collections": "Koleksi",
+      "transactions": "Transaksi"
     },
     "search": {
       "noCertificates": "Tidak ada sertifikat yang cocok. Lihat koleksi dan kolektor di bawah.",

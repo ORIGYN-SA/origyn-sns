@@ -634,8 +634,8 @@
       "governanceBalance": "گورننس بیلنس",
       "stakedTokens": "اسٹیک شدہ ٹوکنز",
       "ledgerBalance": "لیجر بیلنس",
-      "weightInTotalSupply": "کل سپلائی میں وزن"
-      ,"governanceCanisterTag": "گورننس کینسٹر، تمام مشترکہ ٹوکن رکھتا ہے"
+      "weightInTotalSupply": "کل سپلائی میں وزن",
+      "governanceCanisterTag": "گورننس کینسٹر، تمام مشترکہ ٹوکن رکھتا ہے"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "سب دیکھیں",
     "sections": {
       "featured": "نمایاں سرٹیفکیٹس",
-      "collections": "کلیکشنز"
+      "collections": "کلیکشنز",
+      "transactions": "لین دین"
     },
     "search": {
       "noCertificates": "کوئی سرٹیفکیٹ مماثل نہیں۔ نیچے کلیکشنز اور کلیکٹرز دیکھیں۔",

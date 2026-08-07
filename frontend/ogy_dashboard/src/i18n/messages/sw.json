@@ -634,8 +634,8 @@
       "governanceBalance": "Salio la Utawala",
       "stakedTokens": "Tokeni zilizowekewa dau",
       "ledgerBalance": "Salio la Ledger",
-      "weightInTotalSupply": "Uzito katika Jumla ya Usambazaji"
-      ,"governanceCanisterTag": "Canister ya utawala, ina tokeni zote zinazoshirikiwa"
+      "weightInTotalSupply": "Uzito katika Jumla ya Usambazaji",
+      "governanceCanisterTag": "Canister ya utawala, ina tokeni zote zinazoshirikiwa"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Tazama zote",
     "sections": {
       "featured": "Vyeti Vilivyoangaziwa",
-      "collections": "Makusanyo"
+      "collections": "Makusanyo",
+      "transactions": "Miamala"
     },
     "search": {
       "noCertificates": "Hakuna cheti kilicholingana. Tazama makusanyo na wakusanyaji hapa chini.",

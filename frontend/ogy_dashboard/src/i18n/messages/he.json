@@ -634,8 +634,8 @@
       "governanceBalance": "יתרת ממשל",
       "stakedTokens": "אסימונים בסטייקינג",
       "ledgerBalance": "יתרת Ledger",
-      "weightInTotalSupply": "משקל בסך ההיצע"
-      ,"governanceCanisterTag": "קניסטר ממשל, מחזיק את כל האסימונים המשותפים"
+      "weightInTotalSupply": "משקל בסך ההיצע",
+      "governanceCanisterTag": "קניסטר ממשל, מחזיק את כל האסימונים המשותפים"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "הצגת הכול",
     "sections": {
       "featured": "תעודות מומלצות",
-      "collections": "אוספים"
+      "collections": "אוספים",
+      "transactions": "עסקאות"
     },
     "search": {
       "noCertificates": "אף תעודה לא תאמה. ראו אוספים ואספנים בהמשך.",

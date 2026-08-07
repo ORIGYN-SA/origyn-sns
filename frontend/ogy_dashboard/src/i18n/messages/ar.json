@@ -699,7 +699,8 @@
     "viewAll": "عرض الكل",
     "sections": {
       "featured": "الشهادات المميزة",
-      "collections": "المجموعات"
+      "collections": "المجموعات",
+      "transactions": "المعاملات"
     },
     "search": {
       "noCertificates": "لا توجد شهادات مطابقة. انظر المجموعات والمقتنين أدناه.",

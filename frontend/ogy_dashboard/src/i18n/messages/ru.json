@@ -634,8 +634,8 @@
       "governanceBalance": "Баланс в управлении",
       "stakedTokens": "Застейканные токены",
       "ledgerBalance": "Баланс ledger",
-      "weightInTotalSupply": "Доля в общем предложении"
-      ,"governanceCanisterTag": "Канистер управления, хранит все общие токены"
+      "weightInTotalSupply": "Доля в общем предложении",
+      "governanceCanisterTag": "Канистер управления, хранит все общие токены"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Смотреть все",
     "sections": {
       "featured": "Избранные сертификаты",
-      "collections": "Коллекции"
+      "collections": "Коллекции",
+      "transactions": "Транзакции"
     },
     "search": {
       "noCertificates": "Сертификаты не найдены. Смотрите коллекции и коллекционеров ниже.",

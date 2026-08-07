@@ -634,8 +634,8 @@
       "governanceBalance": "Saldo zarządzania",
       "stakedTokens": "Stakowane tokeny",
       "ledgerBalance": "Saldo ledgera",
-      "weightInTotalSupply": "Udział w łącznej podaży"
-      ,"governanceCanisterTag": "Kanister zarządzania, przechowuje wszystkie współdzielone tokeny"
+      "weightInTotalSupply": "Udział w łącznej podaży",
+      "governanceCanisterTag": "Kanister zarządzania, przechowuje wszystkie współdzielone tokeny"
     }
   },
   "recovery": {
@@ -699,7 +699,8 @@
     "viewAll": "Zobacz wszystkie",
     "sections": {
       "featured": "Wyróżnione certyfikaty",
-      "collections": "Kolekcje"
+      "collections": "Kolekcje",
+      "transactions": "Transakcje"
     },
     "search": {
       "noCertificates": "Żaden certyfikat nie pasuje. Zobacz kolekcje i kolekcjonerów poniżej.",
