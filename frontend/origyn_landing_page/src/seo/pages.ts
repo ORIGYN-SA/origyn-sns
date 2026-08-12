@@ -22,11 +22,11 @@ export const pages = [
     // og:image:alt, so the card is not a blank tile for screen readers.
     imageAlt:
       "An ORIGYN digital product passport for a battery pack, open on a phone and a tablet.",
+    // Mirrors the page hero (dpp.hero in src/i18n/messages/en.json).
     card: {
-      eyebrow: "Regulation (EU) 2024/1781",
       // "\n" splits lines; the last one renders in the brand gradient.
-      title: "EU Digital\nProduct Passports",
-      lead: "Compliance in weeks, not 18–36 months. Tamper-proof, traceable and always available.",
+      title: "The infrastructure layer of\nEU Digital Product Passports",
+      lead: "ORIGYN turns EU DPP compliance from a multi-year engineering project into a plug & play rollout. Every passport is tamper-proof, traceable and always available.",
       // PNG in ./assets, bleeding off the card's right edge.
       art: { file: "dpp-passport-devices.png", width: 600, top: 76, right: -56 },
     },

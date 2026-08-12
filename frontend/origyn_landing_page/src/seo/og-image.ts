@@ -16,7 +16,7 @@ import { CARD_HEIGHT, CARD_WIDTH, type PageSeo } from "./pages.ts";
 // Matches `brand-gradient-bright` in tailwind.config.js.
 const BRAND_GRADIENT = "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 45%, #2E7BC4 100%)";
 /** Width the text column has before it would run under the artwork. */
-const COLUMN_WIDTH = 540;
+const COLUMN_WIDTH = 560;
 
 const assetsDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "assets");
 
@@ -64,7 +64,7 @@ const glow = (position: Style, color: string, size: number): Element =>
     ...position,
   });
 
-const buildCard = ({ eyebrow, title, lead, art }: PageSeo["card"]): Element => {
+const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
   const lines = title.split("\n");
 
   return h(
@@ -107,24 +107,11 @@ const buildCard = ({ eyebrow, title, lead, art }: PageSeo["card"]): Element => {
           maxWidth: COLUMN_WIDTH,
         },
 
-        h(
-          "div",
-          {
-            marginBottom: 20,
-            fontSize: 17,
-            fontWeight: 500,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#6FD6F5",
-          },
-          eyebrow
-        ),
-
         ...lines.map((line, index) =>
           h(
             "div",
             {
-              fontSize: 54,
+              fontSize: 44,
               fontWeight: 300,
               lineHeight: 1.14,
               letterSpacing: "-0.02em",
