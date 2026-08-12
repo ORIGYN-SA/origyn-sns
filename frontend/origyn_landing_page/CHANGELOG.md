@@ -6,12 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
-### [1.5.2] - 2026-08-12
+### [1.5.4] - 2026-08-12
 
 #### Added
 
-- Translate the DPP page into every supported language, each with its own title, description and Open Graph card
+- Give each language its own DPP title, description and Open Graph card
 - Add hreflang alternates to the DPP page so each language points at the others
+
+### [1.5.3] - 2026-08-12
+
+#### Added
+
+- Translate the DPP page into every supported language
+
+### [1.5.2] - 2026-08-12
+
+#### Changed
+
+- Use the DPP page's own headline and intro on its Open Graph card
 
 ### [1.5.1] - 2026-08-12
 
