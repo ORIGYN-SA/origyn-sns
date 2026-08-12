@@ -260,6 +260,212 @@
     "dashboard": "IRÁNYÍTÓPULT",
     "copyright": "©2026 Minden jog fenntartva – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Európai Digitális Termékútlevél"
+    },
+    "hero": {
+      "title": "Az infrastruktúra réteg\naz EU <i>digitális termékútleveleihez</i>",
+      "lead": "Az ORIGYN a több éves EU DPP-megfelelőségi mérnöki projektből egy plug & play bevezetésbe alakítja. Minden útlevél hamisítás-biztos, nyomon követhető és mindig elérhető.",
+      "chips": [
+        "Szabályozásra kész",
+        "Plug-&-Play",
+        "Svájc alapú"
+      ],
+      "badge": "Felsorolt a <a:dppindex>dppindex.eu</a:dppindex> -n mint hivatalos EU DPP szolgáltató",
+      "cta": "Foglaljon egy ingyenes értékelő hívást",
+      "imageAlt": "Egy ORIGYN digitális termékútlevél akkumulátorcellához, nyitva egy telefonon és egy táblaszámítógépen."
+    },
+    "regulation": {
+      "title": "Az EU fenntartható termékek\nökodesign szabályozása (2024/1781)",
+      "lead": "Egy ORIGYN DPP-ből származó útlevél tartalmazza az eredetet és összetételét, anyagbiztonsági adatait, javítási és újrahasznosítási utasításait és a származási bizonyítékot, mindez QR vagy NFC-n keresztül elérhető.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR hatályban",
+          "body": "Az Regulation (EU) 2024/1781 2024 júliusában hatályba lépett."
+        },
+        {
+          "year": "2027",
+          "title": "Első DPP-k kötelező",
+          "body": "Akkumulátorok (február), textíliák, vas és acél. Az óra indul."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronika és bútorok",
+          "body": "Tartósság, újrahasznosíthatóság és újrahasznosított tartalomszabályok."
+        },
+        {
+          "year": "2030",
+          "title": "Teljes piaci lefedettség",
+          "body": "Minden termékkategória. Haladó DPP szükséges."
+        }
+      ]
+    },
+    "what": {
+      "title": "A legfejlettebb platform a\n<s>digitális termékútlevelekhez</s>",
+      "lead": "Tartósan tárolva egy megváltoztathatatlan hálózaton. Hamisítás-biztos, nem hamisítható és mindig elérhető.",
+      "cards": [
+        {
+          "title": "Fizikai–Digitális Híd",
+          "body": "Minden útlevél egy fizikai termékhez kapcsolódik QR vagy NFC útján. Teljes adatok, képek, dokumentumok, anyagok és származás jelennek meg a beolvasáskor.",
+          "proof": "Felsorolt a <a:dppindex>dppindex.eu</a:dppindex> -n mint hivatalos EU DPP szolgáltató."
+        },
+        {
+          "title": "Testreszabott Infrastruktúra",
+          "body": "Nincs egyetlen meghibásodási pont. Válasszon svájci, globális vagy saját szervereket, ESPR-kompatibilis és auditálásra kész terv szerint.",
+          "proof": "A Siemens, DNV és Avery Dennison mellett megbízható."
+        },
+        {
+          "title": "Plug & Play lépték szerint",
+          "body": "Az ORIGYN platform beépül a meglévő termékadatokba, így nincs mit felépíteni. Tömegesen kiadhat útleveleket, az első próbasorozattól a teljes katalógusig.",
+          "proof": "Száz főtől több millió DPP-ig másodpercek alatt."
+        }
+      ]
+    },
+    "why": {
+      "title": "A határidő most van.\n<s>2027 február</s> közeledik.",
+      "benefits": [
+        {
+          "title": "Hetekben telepítsen, nem 18–36 hónapban",
+          "body": "Teljesítse a 2027-es határidőt idővel a tartalékban."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Értékeljen, állítson be és legyen kész a bevezetésre napok alatt, teljesen automatizálva."
+        },
+        {
+          "title": "Mi karbantartjuk és frissítjük",
+          "body": "Az ESPR sémák fejlődésével marad megfelelő."
+        },
+        {
+          "title": "Magasabb megtakarítások",
+          "body": "Versenykompetitív árkategória a versenyzőkhöz vagy az önálló építéshez képest."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Miért az ORIGYN,\nnem önálló építés",
+      "buildTitle": "Önálló építés",
+      "origynTitle": "ORIGYN Platform",
+      "rows": [
+        {
+          "build": "18–36 hónapos fejlesztési idő",
+          "origyn": "Hetekben telepítsen, nem évek alatt"
+        },
+        {
+          "build": "Magas költségek és erőforrások",
+          "origyn": "Plug-&-Play megoldás, magasabb megtakarítások"
+        },
+        {
+          "build": "Technikai szaktudás nehéz alkalmazott",
+          "origyn": "Harcmegpróbált platform"
+        },
+        {
+          "build": "Határozatlanul kell karbantartani",
+          "origyn": "Mi karbantartjuk és frissítjük"
+        },
+        {
+          "build": "ESPR-megfelelőség bizonytalan",
+          "origyn": "Felsorolt EU DPP szolgáltató"
+        },
+        {
+          "build": "Az auditorok nem tudják függetlenül ellenőrizni",
+          "origyn": "Bárki képes függetlenül ellenőrizni"
+        },
+        {
+          "build": "Nincsen ökoszisztéma hálózati hatása",
+          "origyn": "Növekvő partnerökoszisztéma"
+        }
+      ],
+      "buildLabel": "Nem tartalmazza",
+      "origynLabel": "Tartalmazza"
+    },
+    "partner": {
+      "title": "Az ORIGYN partnermodell",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Értékelés",
+          "bullets": [
+            "Leképezze a termékkatalógust a releváns ESPR termékkategóriákra és ütemtervekre. Azonosítsa az adatrésekat és a prioritás SKU-kat.",
+            "Szerezze meg az ORIGYN DPP Készenléti Dokumentum áttekintéseit."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Próbaprogram",
+          "bullets": [
+            "Egy termékvonal próbaprogramja.",
+            "Az adatmodellek és adatforrások leképezése.",
+            "Az adatmezők a DPP adatmodellre vannak konfigurálva.",
+            "ERP és API konfiguráció értékelése.",
+            "Költségbecslés és partnerségi megállapodás."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Vállalati bevezetés",
+          "bullets": [
+            "DPP sablon meg van határozva.",
+            "Adatleképezés befejezve.",
+            "DPP-k készülnek az ORIGYN Platform segítségével.",
+            "Fizikai termékeket felcímkéznek (QR / NFC).",
+            "DPP-k szervezeti szinten jelennek meg, beolvashatók, ellenőrizhetők és mindig elérhetők."
+          ]
+        }
+      ],
+      "imageAlt": "Egy élő ORIGYN digitális termékútlevél egy telefonon, termékinformációkat, képeket és megfelelőségi adatokat mutatva.",
+      "getTitle": "Mit kap az ORIGYN partnerként",
+      "get": [
+        "API + platform hozzáférés",
+        "Dedikált integrációs csapat",
+        "Közös piacra lépés támogatása"
+      ],
+      "cta": "Ingyenes értékelést kapjon most"
+    },
+    "download": {
+      "title": "Vigye magával a teljes képet\n<s>veled.</s>",
+      "lead": "Az ORIGYN DPP egy-pager: a szabályozási ütemterv, a platform, a partnermodell és az összehasonlítás, egyetlen lapon, amelyet a csapathoz továbbíthat.",
+      "label": "Munka e-mail",
+      "placeholder": "you@company.com",
+      "submit": "Szerezze meg az egyik lapot",
+      "sending": "Küldés…",
+      "invalid": "Kérjük, adjon meg egy érvényes e-mail-címet",
+      "error": "Valami hiba történt. Próbálja újra.",
+      "sentTitle": "Ellenőrizze postafiókját",
+      "sentBody": "Elküldjük az egy-pagert az e-mail-címedre. Egy percen belül érkeznie kell.",
+      "perks": [
+        "ESPR ütemterv",
+        "Partnermodell",
+        "Építés vs. vásárlás"
+      ],
+      "privacy": "Csak az e-mail-címed használunk az egy-pager küldésére és a DPP-vel kapcsolatos követésre."
+    },
+    "cta": {
+      "title": "Szerezzen <i>ingyenes értékelést</i> most",
+      "lead": "Az ablak 2027. A korai partnerek strukturális előnyre tehetnek szert. Építsük meg az Ön DPP megoldását együtt.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP készenlét értékelés",
+          "body": "Értékelünk a termékkatalógus az ESPR ütemtervek alapján és azonosítjuk a prioritás kategóriákat."
+        },
+        {
+          "step": "2",
+          "title": "Próba DPP program",
+          "body": "Indítson egy élő ORIGYN DPP próbát egy termékvonalat. Gyors, alacsony kockázat, kézzelfogható eredmények."
+        },
+        {
+          "step": "3",
+          "title": "Partnerségi megállapodás",
+          "body": "Formalizálja a kapcsolatot: API hozzáférés, közös fejlesztés, piacra lépés összhangja."
+        }
+      ],
+      "button": "Foglaljon egy ingyenes értékelő hívást",
+      "emailPrompt": "Vagy írjon nekünk:"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Biztosítsa eszközeit, szellemi tulajdonát\nés identitását teljes mértékben a láncon.",

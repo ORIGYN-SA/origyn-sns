@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Tüm hakları saklıdır – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "AB Dijital Ürün Pasaportları"
+    },
+    "hero": {
+      "title": "Altyapı katmanı\nAB <i>Dijital Ürün Pasaportları</i>",
+      "lead": "ORIGYN, AB DPP uyumluluğunu çok yıllık bir mühendislik projesinden hazır çözüme dönüştürür. Her pasaport kurcalanamaz, izlenebilir ve her zaman erişilebilir.",
+      "chips": [
+        "Düzenlemeye Hazır",
+        "Hazır Çözüm",
+        "İsviçre Temelli"
+      ],
+      "badge": "<a:dppindex>dppindex.eu</a:dppindex> adresinde resmi AB DPP Sağlayıcısı olarak listelenmiş",
+      "cta": "Ücretsiz değerlendirme görüşmesi ayırt edin",
+      "imageAlt": "Telefon ve tabletde açılı bir pil paketi için ORIGYN dijital ürün pasaportı."
+    },
+    "regulation": {
+      "title": "AB Sürdürülebilir Ürünler için\nEcodizayn Yönetmeliği (2024/1781)",
+      "lead": "Bir ORIGYN DPP, köken ve bileşim, malzeme güvenlik verileri, onarım ve geri dönüştürme talimatları ve menşei kanıtı içerir; tümü QR veya NFC aracılığıyla erişilebilir.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR yürürlüğe girdi",
+          "body": "Regulation (EU) 2024/1781 Temmuz 2024'te yürürlüğe girdi."
+        },
+        {
+          "year": "2027",
+          "title": "İlk DPP'ler zorunlu",
+          "body": "Piller (Şubat), tekstiller, demir ve çelik. Geri sayım başladı."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronik ve mobilya",
+          "body": "Dayanıklılık, geri dönüştürülebilirlik ve geri dönüştürülmüş içerik kuralları."
+        },
+        {
+          "year": "2030",
+          "title": "Tam pazar kapsamı",
+          "body": "Tüm ürün kategorileri. Gelişmiş DPP gerekli."
+        }
+      ]
+    },
+    "what": {
+      "title": "En gelişmiş platform\n<s>dijital ürün pasaportları</s> için",
+      "lead": "Kalıcı olarak değişmez bir ağda depolanan. Kurcalanamaz, taklitlenemez ve her zaman erişilebilir.",
+      "cards": [
+        {
+          "title": "Fiziksel–Dijital Köprü",
+          "body": "Her pasaport, QR veya NFC aracılığıyla fiziksel bir ürüne bağlanır. Tarama yapıldığında tam veriler, görseller, belgeler, malzemeler ve menşei açığa çıkar.",
+          "proof": "<a:dppindex>dppindex.eu</a:dppindex> adresinde resmi AB DPP Sağlayıcısı olarak listelenmiş."
+        },
+        {
+          "title": "Özelleştirilmiş Altyapı",
+          "body": "Tek hata noktası yok. İsviçre, küresel veya kendi sunucularınızı seçin; ESPR uyumlu ve tasarımından itibaren denetim hazır.",
+          "proof": "Siemens, DNV ve Avery Dennison ile birlikte güvenilen."
+        },
+        {
+          "title": "Ölçekte Hazır Çözüm",
+          "body": "ORIGYN platformu mevcut ürün verilerinize takılır; oluşturmanız gereken bir şey yoktur. Pasaportları toplu halde yayınlayın; ilk pilot partiden tüm kataloğunuza kadar.",
+          "proof": "Yüzlercesinden milyonlarca DPP'ye saniyeler içinde."
+        }
+      ]
+    },
+    "why": {
+      "title": "Son tarih şimdi.\n<s>Şubat 2027</s> yaklaşıyor.",
+      "benefits": [
+        {
+          "title": "Haftalar içinde yayınlayın, 18–36 ay değil",
+          "body": "2027 son tarihine boş zaman kalarak cevap verin."
+        },
+        {
+          "title": "Hazır Çözüm",
+          "body": "Değerlendirin, yapılandırın ve günler içinde yayınlamaya hazır olun; tam otomatik."
+        },
+        {
+          "title": "Biz bunu yönetir ve yükseltir",
+          "body": "ESPR şemaları geliştikçe uyumlu kalın."
+        },
+        {
+          "title": "Daha yüksek tasarruflar",
+          "body": "Rakiplere karşı veya kendi başınıza oluşturmaya kıyasla rekabetçi bir fiyat noktası."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Neden ORIGYN,\ninşa-kendin değil",
+      "buildTitle": "İnşa-Kendin",
+      "origynTitle": "ORIGYN Platformu",
+      "rows": [
+        {
+          "build": "18–36 ay geliştirme süresi",
+          "origyn": "Haftalar içinde yayınlayın, yıllar değil"
+        },
+        {
+          "build": "Yüksek maliyetler ve kaynaklar",
+          "origyn": "Hazır çözüm, daha yüksek tasarruflar"
+        },
+        {
+          "build": "Teknik uzmanlık işe almak zor",
+          "origyn": "Kanıtlanmış platform"
+        },
+        {
+          "build": "Sonsuza kadar bakım yapmalı",
+          "origyn": "Biz bunu yönetir ve yükseltir"
+        },
+        {
+          "build": "ESPR uyumluluğu belirsiz",
+          "origyn": "Listelenen AB DPP sağlayıcısı"
+        },
+        {
+          "build": "Denetçiler bağımsız olarak doğrulayamaz",
+          "origyn": "Herkes bağımsız olarak doğrulayabilir"
+        },
+        {
+          "build": "Ekosistem ağ etkisi yok",
+          "origyn": "Büyüyen ortak ekosistemi"
+        }
+      ],
+      "buildLabel": "Dahil değil",
+      "origynLabel": "Dahil"
+    },
+    "partner": {
+      "title": "ORIGYN ortak modeli",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Değerlendirme",
+          "bullets": [
+            "Ürün kataloğunuzu ilgili ESPR ürün kategorilerine ve zaman çizelgelerine eşleyin. Veri boşluklarını ve öncelik SKU'larını belirleyin.",
+            "ORIGYN DPP Hazırlık Belgesi özeti alın."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilot Program",
+          "bullets": [
+            "Bir ürün hattı pilot.",
+            "Veri modelleri ve kaynakların haritası.",
+            "Veri alanları DPP veri modelinizle eşleşecek şekilde yapılandırılır.",
+            "ERP ve API yapılandırması değerlendirmesi.",
+            "Maliyet tahmini ve ortaklık anlaşması."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Kurumsal Yayın",
+          "bullets": [
+            "DPP şablonu tanımlı.",
+            "Veri eşleştirmesi tamamlandı.",
+            "DPP'ler ORIGYN Platformu ile oluşturulur.",
+            "Fiziksel ürünler etiketlendi (QR / NFC).",
+            "DPP'ler kuruluş düzeyinde canlı olur; taranabilir, doğrulanabilir ve her zaman erişilebilir."
+          ]
+        }
+      ],
+      "imageAlt": "Bir telefonda canlı bir ORIGYN dijital ürün pasaportı gösteriliyor; ürün bilgisi, görseller ve uyum verileri.",
+      "getTitle": "ORIGYN ortağı olarak ne alırsınız",
+      "get": [
+        "API + platform erişimi",
+        "Adanmış entegrasyon ekibi",
+        "Ortak pazar gidiş desteği"
+      ],
+      "cta": "Şimdi ücretsiz değerlendirme alın"
+    },
+    "download": {
+      "title": "Bütün resmi\n<s>beraberinizde alın.</s>",
+      "lead": "ORIGYN DPP bir sayfalık özeti: düzenleme zaman çizelgesi, platform, ortak modeli ve karşılaştırma; ekibinize iletebileceğiniz tek bir sayfada.",
+      "label": "İş e-postası",
+      "placeholder": "you@company.com",
+      "submit": "Bir sayfalık özeti al",
+      "sending": "Gönderiliyor…",
+      "invalid": "Lütfen geçerli bir e-posta adresi girin",
+      "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "sentTitle": "Gelen kutunuzu kontrol edin",
+      "sentBody": "Bir sayfalık özeti adresinize gönderdik. Bir dakika içinde gelmesi gerekir.",
+      "perks": [
+        "ESPR zaman çizelgesi",
+        "Ortak modeli",
+        "İnşa vs. satın al"
+      ],
+      "privacy": "Adresinizi yalnızca bir sayfalık özeti göndermek ve DPP hakkında takip etmek için kullanacağız."
+    },
+    "cta": {
+      "title": "<i>Ücretsiz bir değerlendirme</i> şimdi alın",
+      "lead": "Pencere 2027. İlk hareket ortakları yapısal bir avantaja sahip olacak. DPP'nizi birlikte oluşturalım.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP hazırlık değerlendirmesi",
+          "body": "Ürün kataloğunuzu ESPR zaman çizelgelerine karşı değerlendiririz ve öncelik kategorilerini belirleriz."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP programı",
+          "body": "Bir ürün hattında canlı bir ORIGYN DPP pilot başlatın. Hızlı, düşük riskli, somut sonuçlar."
+        },
+        {
+          "step": "3",
+          "title": "Ortaklık anlaşması",
+          "body": "İlişkiyi resmîleştirin: API erişimi, ortak geliştirme, pazar gidiş uyumu."
+        }
+      ],
+      "button": "Ücretsiz değerlendirme görüşmesi ayırt edin",
+      "emailPrompt": "Veya bize e-posta gönderin"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Varlıklarınızı, fikri mülkiyetinizi\nve kimliğinizi tamamen zincir üstünde güvence altına alın.",

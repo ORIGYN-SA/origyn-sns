@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Kaikki oikeudet pidätetään – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU:n digitaaliset tuotepassit"
+    },
+    "hero": {
+      "title": "Infrastruktuurikerros\nEU:n <i>digitaalisille tuotepasseille</i>",
+      "lead": "ORIGYN muuttaa EU DPP -noudattamisen monivuotisesta insinööriprojektista plug & play -toteutukseksi. Jokainen tuotepassi on väärentämisenkestävä, jäljitettävä ja aina saatavilla.",
+      "chips": [
+        "Säädösvalmis",
+        "Plug & Play",
+        "Sveitsin pohjainen"
+      ],
+      "badge": "Listattu osoitteessa <a:dppindex>dppindex.eu</a:dppindex> virallisena EU DPP -tarjoajana",
+      "cta": "Varaa ilmainen arviointikeskustelu",
+      "imageAlt": "ORIGYN-digitaalinen tuotepassi akupaketille, avoimena puhelimessa ja tabletissa."
+    },
+    "regulation": {
+      "title": "EU:n kestävien tuotteiden\nekosuunnitteluasetus (2024/1781)",
+      "lead": "ORIGYN DPP sisältää alkuperän ja koostumuksen, materiaalien turvallisuustiedot, korjaus- ja kierrätysohjeet sekä alkuperätodisteita, jotka ovat saatavilla QR-koodin tai NFC:n kautta.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR on voimassa",
+          "body": "Asetus (EU) 2024/1781 tuli voimaan heinäkuussa 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Ensimmäiset DPP:t pakolliset",
+          "body": "Akut (helmikuu), tekstiilit, rauta ja teräs. Aika alkaa kulua."
+        },
+        {
+          "year": "2028",
+          "title": "Elektroniikka ja huonekalut",
+          "body": "Kestävyys-, kierrätettävyys- ja kierrätetyn materiaalin säännöt."
+        },
+        {
+          "year": "2030",
+          "title": "Täysi markkinakattavuus",
+          "body": "Kaikki tuotekategoriat. Edistynyt DPP vaaditaan."
+        }
+      ]
+    },
+    "what": {
+      "title": "Kaikista kehittyneintä alustayhteiskuntaa\n<s>digitaalisille tuotepasseille</s>",
+      "lead": "Tallennettu pysyvästi muuttumattomaan verkkoon. Väärentämisenkestävä, väärennöskestävä ja aina saatavilla.",
+      "cards": [
+        {
+          "title": "Fyysinen–digitaalinen silta",
+          "body": "Jokainen passi linkitetään fyysiseen tuotteeseen QR-koodin tai NFC:n kautta. Täydelliset tiedot, kuvat, asiakirjat, materiaalit ja alkuperätieto paljastetaan skannauksen yhteydessä.",
+          "proof": "Listattu osoitteessa <a:dppindex>dppindex.eu</a:dppindex> virallisena EU DPP -tarjoajana."
+        },
+        {
+          "title": "Mukautettu infrastruktuuri",
+          "body": "Ei yksittäistä vikaantumispistettä. Valitse Sveitsi, globaali tai omat palvelimet, ESPR-säädösten mukainen ja auditointi-valmis rakentamisesta lähtien.",
+          "proof": "Luotettu Siemensin, DNV:n ja Avery Dennisonin rinnalla."
+        },
+        {
+          "title": "Plug & Play mittakaavassa",
+          "body": "ORIGYN-alusta liittyy nykyisiin tuotteen tietoihinne, joten ei ole mitään rakennettavaa. Julkaise tuotepassit joukkona, pienestä pilottierästä koko luetteloon.",
+          "proof": "Sadoista miljooniin DPP:hin sekunteissa."
+        }
+      ]
+    },
+    "why": {
+      "title": "Määräaika on nyt.\n<s>Helmikuu 2027</s> lähestyy.",
+      "benefits": [
+        {
+          "title": "Ota käyttöön viikkoissa, ei 18–36 kuukaudessa",
+          "body": "Täytä 2027 määräaika runsain aikavälein."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Arvioi, määritä ja ole valmis ottamaan käyttöön päivissä, täysin automatisoitu."
+        },
+        {
+          "title": "Me huollamme ja päivitämme sitä",
+          "body": "Pysy säädösten mukaisesti kun ESPR-kaaviot kehittyvät."
+        },
+        {
+          "title": "Suuremmat säästöt",
+          "body": "Kilpailukykyinen hintapiste kilpailijoihin tai omien rakentamisen kustannuksiin nähden."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Miksi ORIGYN,\neikä itse rakentaa",
+      "buildTitle": "Itse rakentaa",
+      "origynTitle": "ORIGYN-alusta",
+      "rows": [
+        {
+          "build": "18–36 kuukauden kehitysaika",
+          "origyn": "Ota käyttöön viikkoissa, ei vuosina"
+        },
+        {
+          "build": "Korkeat kustannukset ja resurssit",
+          "origyn": "Plug & Play -ratkaisu, suuremmat säästöt"
+        },
+        {
+          "build": "Tekniikan osaaminen on vaikea palkata",
+          "origyn": "Kokeiden testaama alusta"
+        },
+        {
+          "build": "On ylläpidettävä loputtomiin",
+          "origyn": "Me huollamme ja päivitämme sitä"
+        },
+        {
+          "build": "ESPR-säädösten noudattaminen epävarma",
+          "origyn": "Listattu EU DPP -tarjoaja"
+        },
+        {
+          "build": "Tilintarkastajat eivät voi itsenäisesti varmistaa",
+          "origyn": "Kuka tahansa voi itsenäisesti varmistaa"
+        },
+        {
+          "build": "Ei ekosysteemin verkon vaikutusta",
+          "origyn": "Kasvava kumppaniverkosto"
+        }
+      ],
+      "buildLabel": "Ei sisällytetty",
+      "origynLabel": "Sisällytetty"
+    },
+    "partner": {
+      "title": "ORIGYN-kumppanimalli",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Arviointi",
+          "bullets": [
+            "Kartoita tuotteiden luettelosi asiaankuuluviin ESPR-tuotekategorioihin ja aikarajoihin. Tunnista tietoaukot ja prioriteettiset tuotekoodit.",
+            "Hanki ORIGYN DPP -valmiusasiakirjan yleiskatsaus."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilottiohjelma",
+          "bullets": [
+            "Yksi tuotelinja pilotti.",
+            "Tietomallit ja lähteet.",
+            "Tietokentät määritetään vastaamaan DPP-tietomalliasi.",
+            "ERP- ja API-konfiguraation arviointi.",
+            "Kustannusarvio ja kumppanuussopimus."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise-käyttöönotto",
+          "bullets": [
+            "DPP-malli määritellään.",
+            "Tiedon kartoitus on valmis.",
+            "DPP:t luodaan ORIGYN-alustalla.",
+            "Fyysisiin tuotteisiin lisätään merkinnät (QR/NFC).",
+            "DPP:t menevät eläviksi organisaatiotasolla, skannaavaksi, todennettavaksi ja aina saataviksi."
+          ]
+        }
+      ],
+      "imageAlt": "Live-ORIGYN tuotepassi puhelimessa, joka näyttää tuotetiedot, kuvat ja säädöstietoja.",
+      "getTitle": "Mitä saat ORIGYN-kumppanina",
+      "get": [
+        "API + alustan käyttöoikeus",
+        "Dedikoinut integraatiotiimi",
+        "Yhteisesti markkinoille -tuki"
+      ],
+      "cta": "Hanki ilmainen arviointi nyt"
+    },
+    "download": {
+      "title": "Ota kokonaiskuva\n<s>mukaasi.</s>",
+      "lead": "ORIGYN DPP -yhden sivun yhteenveto: säädösaikataulu, alusta, kumppanimalli ja vertailu, yhdellä arkilla, jonka voit lähettää eteenpäin tiimeillesi.",
+      "label": "Työn sähköpostiosoite",
+      "placeholder": "sina@yritys.fi",
+      "submit": "Hanki yhden sivun yhteenveto",
+      "sending": "Lähetetään…",
+      "invalid": "Anna kelvollinen sähköpostiosoite",
+      "error": "Jokin meni pieleen. Yritä uudelleen.",
+      "sentTitle": "Tarkista saapuneet",
+      "sentBody": "Olemme lähettäneet yhden sivun yhteenvedon osoitteeseesi. Sen pitäisi saapua minuutissa.",
+      "perks": [
+        "ESPR-aikataulu",
+        "Kumppanimalli",
+        "Rakentaminen vs. ostaminen"
+      ],
+      "privacy": "Käytämme osoitettasi vain yhden sivun yhteenvedon lähettämiseen ja seuranta DPP:stä."
+    },
+    "cta": {
+      "title": "Hanki <i>ilmainen arviointi</i> nyt",
+      "lead": "Aikaikkuna on 2027. Ensimmäisten siirtäjien kumppanit saavat rakenteellisen edun. Rakennetaan DPP yhdessä.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP-valmiusarviointi",
+          "body": "Arvioimme tuotteiden luettelosi ESPR-aikataulujen perusteella ja tunnistamme prioriteettiset kategoriat."
+        },
+        {
+          "step": "2",
+          "title": "Pilotti-DPP-ohjelma",
+          "body": "Käynnistä live-ORIGYN-DPP pilotti yhdellä tuotelinjalla. Nopea, matala riski, konkreettiset tulokset."
+        },
+        {
+          "step": "3",
+          "title": "Kumppanuussopimus",
+          "body": "Virallistaa suhde: API-käyttöoikeus, yhteiskehitys, go-to-market-yhtenäisyys."
+        }
+      ],
+      "button": "Varaa ilmainen arviointikeskustelu",
+      "emailPrompt": "Tai lähetä meille sähköpostia osoitteeseen"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Suojaa omaisuutesi, immateriaalioikeutesi\nja identiteettisi täysin lohkoketjussa.",

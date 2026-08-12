@@ -260,6 +260,212 @@
     "dashboard": "DASBOR",
     "copyright": "©2026 Hak cipta dilindungi – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Paspor Produk Digital EU"
+    },
+    "hero": {
+      "title": "Lapisan infrastruktur\n<i>Paspor Produk Digital</i> EU",
+      "lead": "ORIGYN mengubah kepatuhan DPP EU dari proyek rekayasa bertahun-tahun menjadi peluncuran plug & play. Setiap paspor tahan manipulasi, dapat dilacak, dan selalu tersedia.",
+      "chips": [
+        "Siap Regulasi",
+        "Plug-&-Play",
+        "Berbasis Swiss"
+      ],
+      "badge": "Terdaftar di <a:dppindex>dppindex.eu</a:dppindex> sebagai Penyedia DPP EU resmi",
+      "cta": "Pesan panggilan penilaian gratis",
+      "imageAlt": "Paspor produk digital ORIGYN untuk paket baterai, terbuka di ponsel dan tablet."
+    },
+    "regulation": {
+      "title": "Peraturan Ekodesain EU untuk Produk\nBerkelanjutan (2024/1781)",
+      "lead": "DPP ORIGYN membawa asal & komposisi, data keselamatan material, instruksi perbaikan & daur ulang, dan bukti provenance, semuanya dapat diakses melalui QR atau NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR mulai berlaku",
+          "body": "Regulation (EU) 2024/1781 mulai berlaku pada Juli 2024."
+        },
+        {
+          "year": "2027",
+          "title": "DPP pertama wajib",
+          "body": "Baterai (Februari), tekstil, besi & baja. Hitungan mundur dimulai."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronik & furnitur",
+          "body": "Aturan ketahanan, daur ulang, dan kandungan daur ulang."
+        },
+        {
+          "year": "2030",
+          "title": "Jangkauan pasar penuh",
+          "body": "Semua kategori produk. DPP canggih diperlukan."
+        }
+      ]
+    },
+    "what": {
+      "title": "Platform paling canggih untuk\n<s>paspor produk digital</s>",
+      "lead": "Disimpan permanen di jaringan yang tak dapat diubah. Tahan manipulasi, tidak dapat dipalsukan, dan selalu dapat diakses.",
+      "cards": [
+        {
+          "title": "Jembatan Fisik–Digital",
+          "body": "Setiap paspor terhubung ke produk fisik melalui QR atau NFC. Data lengkap, gambar, dokumen, material, dan provenance terungkap saat discan.",
+          "proof": "Terdaftar di <a:dppindex>dppindex.eu</a:dppindex> sebagai Penyedia DPP EU resmi."
+        },
+        {
+          "title": "Infrastruktur yang Disesuaikan",
+          "body": "Tidak ada titik kegagalan tunggal. Pilih server Swiss, global, atau milik Anda sendiri, sesuai ESPR dan siap audit sesuai desain.",
+          "proof": "Dipercaya bersama Siemens, DNV, dan Avery Dennison."
+        },
+        {
+          "title": "Plug & Play Dalam Skala",
+          "body": "Platform ORIGYN terhubung ke data produk yang sudah ada, jadi tidak ada yang perlu dibangun. Terbitkan paspor massal, dari batch pilot pertama hingga seluruh katalog Anda.",
+          "proof": "Dari ratusan hingga jutaan DPP dalam hitungan detik."
+        }
+      ]
+    },
+    "why": {
+      "title": "Batas waktu ada sekarang.\n<s>Februari 2027</s> sudah dekat.",
+      "benefits": [
+        {
+          "title": "Terapkan dalam hitungan minggu, bukan 18–36 bulan",
+          "body": "Penuhi batas waktu 2027 dengan sisa waktu."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Nilai, konfigurasi, dan siap untuk peluncuran dalam hitungan hari, sepenuhnya otomatis."
+        },
+        {
+          "title": "Kami memelihara & meningkatkannya",
+          "body": "Anda tetap sesuai sambil skema ESPR berkembang."
+        },
+        {
+          "title": "Penghematan lebih tinggi",
+          "body": "Titik harga kompetitif versus pesaing atau membangun sendiri."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Mengapa ORIGYN,\nbukan bangun sendiri",
+      "buildTitle": "Bangun Sendiri",
+      "origynTitle": "Platform ORIGYN",
+      "rows": [
+        {
+          "build": "18–36 bulan waktu pengembangan",
+          "origyn": "Terapkan dalam hitungan minggu, bukan tahun"
+        },
+        {
+          "build": "Biaya tinggi dan sumber daya",
+          "origyn": "Solusi plug-&-play, penghematan lebih tinggi"
+        },
+        {
+          "build": "Keahlian teknis sulit dipekerjakan",
+          "origyn": "Platform yang telah teruji dan andal"
+        },
+        {
+          "build": "Harus dipelihara selamanya",
+          "origyn": "Kami memelihara dan meningkatkannya"
+        },
+        {
+          "build": "Kepatuhan ESPR tidak pasti",
+          "origyn": "Penyedia DPP EU yang terdaftar"
+        },
+        {
+          "build": "Auditor tidak dapat memverifikasi independen",
+          "origyn": "Siapa saja dapat memverifikasi independen"
+        },
+        {
+          "build": "Tidak ada efek jaringan ekosistem",
+          "origyn": "Ekosistem mitra yang berkembang"
+        }
+      ],
+      "buildLabel": "Tidak disertakan",
+      "origynLabel": "Disertakan"
+    },
+    "partner": {
+      "title": "Model mitra ORIGYN",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Penilaian",
+          "bullets": [
+            "Petakan katalog produk Anda ke kategori produk ESPR dan garis waktu yang relevan. Identifikasi kesenjangan data dan SKU prioritas.",
+            "Dapatkan ringkasan Dokumen Kesiapan DPP ORIGYN Anda."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Program Pilot",
+          "bullets": [
+            "Pilot lini produk tunggal.",
+            "Peta model dan sumber data.",
+            "Kolom data dikonfigurasi agar cocok dengan model data DPP Anda.",
+            "Evaluasi konfigurasi ERP dan API.",
+            "Estimasi biaya dan perjanjian kemitraan."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Peluncuran Perusahaan",
+          "bullets": [
+            "Template DPP didefinisikan.",
+            "Pemetaan data selesai.",
+            "DPP dibuat dengan Platform ORIGYN.",
+            "Produk fisik ditandai (QR / NFC).",
+            "DPP aktif di tingkat organisasi, dapat discan, dapat diverifikasi, dan selalu tersedia."
+          ]
+        }
+      ],
+      "imageAlt": "Paspor produk digital ORIGYN aktif di ponsel, menampilkan informasi produk, gambar, dan data kepatuhan.",
+      "getTitle": "Apa yang Anda dapatkan sebagai mitra ORIGYN",
+      "get": [
+        "Akses API + platform",
+        "Tim integrasi khusus",
+        "Dukungan go-to-market bersama"
+      ],
+      "cta": "Dapatkan penilaian gratis sekarang"
+    },
+    "download": {
+      "title": "Bawa gambaran lengkap\n<s>bersama Anda.</s>",
+      "lead": "Lembaran satu halaman DPP ORIGYN: garis waktu peraturan, platform, model mitra, dan perbandingan, di satu lembar yang dapat Anda teruskan ke tim Anda.",
+      "label": "Email kerja",
+      "placeholder": "you@company.com",
+      "submit": "Dapatkan lembaran satu halaman",
+      "sending": "Mengirim…",
+      "invalid": "Harap masukkan alamat email yang valid",
+      "error": "Terjadi kesalahan. Silakan coba lagi.",
+      "sentTitle": "Periksa inbox Anda",
+      "sentBody": "Kami telah mengirimkan lembaran satu halaman ke alamat Anda. Seharusnya tiba dalam semenit.",
+      "perks": [
+        "Garis waktu ESPR",
+        "Model mitra",
+        "Bangun vs. beli"
+      ],
+      "privacy": "Kami hanya akan menggunakan alamat Anda untuk mengirim lembaran satu halaman dan menindaklanjuti tentang DPP."
+    },
+    "cta": {
+      "title": "Dapatkan <i>penilaian gratis</i> sekarang",
+      "lead": "Jendela terbuka hingga 2027. Mitra early-mover akan memiliki keuntungan struktural. Mari kita bangun DPP Anda bersama.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Penilaian kesiapan DPP",
+          "body": "Kami menilai katalog produk Anda terhadap garis waktu ESPR dan mengidentifikasi kategori prioritas."
+        },
+        {
+          "step": "2",
+          "title": "Program DPP pilot",
+          "body": "Luncurkan pilot DPP ORIGYN aktif pada satu lini produk. Cepat, risiko rendah, hasil nyata."
+        },
+        {
+          "step": "3",
+          "title": "Perjanjian kemitraan",
+          "body": "Formalkan hubungan: akses API, co-development, keselarasan go-to-market."
+        }
+      ],
+      "button": "Pesan panggilan penilaian gratis",
+      "emailPrompt": "Atau kirim email kepada kami di"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Amankan aset, kekayaan intelektual,\ndan identitas Anda sepenuhnya on-chain.",

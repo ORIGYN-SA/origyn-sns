@@ -4,9 +4,9 @@ import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
-import { locales } from "./src/i18n/config.ts";
+import { defaultLocale, locales } from "./src/i18n/config.ts";
 import { injectHead } from "./src/seo/meta.ts";
-import { renderOgImage } from "./src/seo/og-image.ts";
+import { cardLocale, renderOgImage } from "./src/seo/og-image.ts";
 import { ogImagePath, pages } from "./src/seo/pages.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -43,13 +43,15 @@ const spaIndexFallback = () => {
 
       for (const page of PAGE_PATHS) {
         const seo = pages.find((entry) => entry.path === page);
-        const html = seo ? injectHead(baseHtml, seo, siteUrl) : baseHtml;
+        const head = (locale) => (seo ? injectHead(baseHtml, seo, locale, siteUrl) : baseHtml);
 
         // Unprefixed page path so inbound links keep resolving and the
-        // client-side LocaleRedirect can take over.
-        writeAt(page, html);
-        // Locale-prefixed paths — the canonical URLs after negotiation.
-        for (const locale of locales) writeAt(`${locale}/${page}`, html);
+        // client-side LocaleRedirect can take over. No locale to go on yet, so
+        // it carries the default one's tags.
+        writeAt(page, head(defaultLocale));
+        // Locale-prefixed paths — the canonical URLs after negotiation, each
+        // with its own translated tags and card.
+        for (const locale of locales) writeAt(`${locale}/${page}`, head(locale));
       }
 
       for (const locale of locales) writeAt(locale, baseHtml);
@@ -59,15 +61,20 @@ const spaIndexFallback = () => {
 
 // Crawlers fetch og:image as a plain asset, and the site is a static asset
 // canister, so the cards are emitted with the bundle rather than on request.
+// One per locale, minus the scripts satori cannot shape, which share the
+// English card (see cardLocale).
 const ogImages = () => ({
   name: "og-images",
   async generateBundle() {
+    const cardLocales = [...new Set(locales.map(cardLocale))];
     for (const page of pages) {
-      this.emitFile({
-        type: "asset",
-        fileName: ogImagePath(page).replace(/^\//, ""),
-        source: await renderOgImage(page),
-      });
+      for (const locale of cardLocales) {
+        this.emitFile({
+          type: "asset",
+          fileName: ogImagePath(page, locale).replace(/^\//, ""),
+          source: await renderOgImage(page, locale),
+        });
+      }
     }
   },
 });

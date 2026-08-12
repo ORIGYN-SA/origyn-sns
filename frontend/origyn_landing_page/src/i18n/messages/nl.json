@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alle rechten voorbehouden – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU Digitale Productpaspoorten"
+    },
+    "hero": {
+      "title": "De infrastructuurlaag van\nEU <i>Digitale Productpaspoorten</i>",
+      "lead": "ORIGYN transformeert EU DPP-compliance van een meerjarig engineeringproject in een plug & play rollout. Elk paspoort is manipulatiebestendig, traceerbaar en altijd beschikbaar.",
+      "chips": [
+        "Regelgeving-klaar",
+        "Plug-&-Play",
+        "Gebaseerd in Zwitserland"
+      ],
+      "badge": "Vermeld op <a:dppindex>dppindex.eu</a:dppindex> als officiële EU DPP-provider",
+      "cta": "Boek een gratis evaluatiegesprek",
+      "imageAlt": "Een ORIGYN digitaal productpaspoort voor een batterijpak, geopend op een telefoon en tablet."
+    },
+    "regulation": {
+      "title": "EU Ecodesign voor Duurzame\nProducten Verordening (2024/1781)",
+      "lead": "Een ORIGYN DPP bevat herkomst & samenstelling, veiligheidsinformatie van materialen, reparatie- & recyclinginstructies en herkomstbewijs, allemaal toegankelijk via QR of NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR van kracht",
+          "body": "Verordening (EU) 2024/1781 is in juli 2024 van kracht geworden."
+        },
+        {
+          "year": "2027",
+          "title": "Eerste DPP's verplicht",
+          "body": "Batterijen (februari), textiel, ijzer en staal. Het tellen is begonnen."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronica en meubilair",
+          "body": "Regels voor duurzaamheid, recycleerbaarheid en gerecycled materiaal."
+        },
+        {
+          "year": "2030",
+          "title": "Volledige marktdekking",
+          "body": "Alle productcategorieën. Geavanceerde DPP vereist."
+        }
+      ]
+    },
+    "what": {
+      "title": "Het meest geavanceerde platform voor\n<s>digitale productpaspoorten</s>",
+      "lead": "Permanent opgeslagen op een onveranderlijk netwerk. Manipulatiebestendig, onvervalsbaar en altijd toegankelijk.",
+      "cards": [
+        {
+          "title": "Fysiek–Digitaal Verbindingspunt",
+          "body": "Elk paspoort is gekoppeld aan een fysiek product via QR of NFC. Volledige gegevens, afbeeldingen, documenten, materialen en herkomst worden zichtbaar na scannen.",
+          "proof": "Vermeld op <a:dppindex>dppindex.eu</a:dppindex> als officiële EU DPP-provider."
+        },
+        {
+          "title": "Aangepaste Infrastructuur",
+          "body": "Geen enkel kritiek punt. Kies voor Zwitserse, wereldwijde of eigen servers, ESPR-conform en auditklaar door ontwerp.",
+          "proof": "Vertrouwd door partijen zoals Siemens, DNV en Avery Dennison."
+        },
+        {
+          "title": "Plug & Play op Schaal",
+          "body": "Het ORIGYN-platform integreert zich in uw bestaande productgegevens, dus er is niets om te bouwen. Geef paspoorten in bulk uit, van een eerste pilotbatch tot uw volledige catalogus.",
+          "proof": "Van enkele honderden tot miljoen DPP's in seconden."
+        }
+      ]
+    },
+    "why": {
+      "title": "De deadline is nu.\n<s>Februari 2027</s> komt naderbij.",
+      "benefits": [
+        {
+          "title": "Implementeer in weken, niet 18–36 maanden",
+          "body": "Voldoe aan de deadline van 2027 met ruimte over."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Evalueer, configureer en wees klaar om in dagen uit te rollen, volledig automatisch."
+        },
+        {
+          "title": "Wij onderhouden en upgraden het",
+          "body": "U blijft conform terwijl ESPR-schema's evolueren."
+        },
+        {
+          "title": "Hogere besparingen",
+          "body": "Een concurrerende prijs in vergelijking met concurrenten of zelf bouwen."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Waarom ORIGYN,\nniet zelf bouwen",
+      "buildTitle": "Zelf Bouwen",
+      "origynTitle": "ORIGYN Platform",
+      "rows": [
+        {
+          "build": "18–36 maanden ontwikkeling",
+          "origyn": "Implementeer in weken, niet jaren"
+        },
+        {
+          "build": "Hoge kosten en middelen",
+          "origyn": "Plug-&-Play-oplossing, hogere besparingen"
+        },
+        {
+          "build": "Technische expertise moeilijk in te huren",
+          "origyn": "Uitgebreid geteste platform"
+        },
+        {
+          "build": "Moet onbeperkt onderhouden",
+          "origyn": "Wij onderhouden en upgraden het"
+        },
+        {
+          "build": "ESPR-compliance onzeker",
+          "origyn": "Vermelde EU DPP-provider"
+        },
+        {
+          "build": "Auditors kunnen niet onafhankelijk verifiëren",
+          "origyn": "Iedereen kan onafhankelijk verifiëren"
+        },
+        {
+          "build": "Geen netwerkeffect van ecosysteem",
+          "origyn": "Groeiend partnerecosysteem"
+        }
+      ],
+      "buildLabel": "Niet inbegrepen",
+      "origynLabel": "Inbegrepen"
+    },
+    "partner": {
+      "title": "Het ORIGYN-partnermodel",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Evaluatie",
+          "bullets": [
+            "Wijs uw productcatalogus toe aan relevante ESPR-productcategorieën en tijdlijnen. Identificeer gegevensgaten en prioriteit-SKU's.",
+            "Krijg uw ORIGYN DPP Readiness Document overzicht."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilotprogramma",
+          "bullets": [
+            "Eén productlijn pilot.",
+            "Toewijzing van gegevensmodellen en bronnen.",
+            "Gegevensvelden zijn geconfigureerd zodat ze overeenkomen met uw DPP-gegevensmodel.",
+            "Evaluatie van ERP- en API-configuratie.",
+            "Kostenraming en partnerschapsakkoord."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise Uitrol",
+          "bullets": [
+            "DPP-sjabloon is gedefinieerd.",
+            "Gegevenstoewijzing is voltooid.",
+            "DPP's worden gemaakt met het ORIGYN Platform.",
+            "Fysieke producten zijn getagd (QR / NFC).",
+            "DPP's gaan live op organisatorisch niveau, scanbaar, verifieerbaar en altijd beschikbaar."
+          ]
+        }
+      ],
+      "imageAlt": "Een live ORIGYN digitaal productpaspoort op een telefoon, met productinformatie, afbeeldingen en compliancegegevens.",
+      "getTitle": "Wat u krijgt als ORIGYN-partner",
+      "get": [
+        "API + platformtoegang",
+        "Toegewijd integratietem",
+        "Gezamenlijke go-to-market-ondersteuning"
+      ],
+      "cta": "Krijg nu een gratis evaluatie"
+    },
+    "download": {
+      "title": "Neem het hele beeld\n<s>met u mee.</s>",
+      "lead": "De ORIGYN DPP one-pager: de regelgevingstijdlijn, het platform, het partnermodel en de vergelijking, op één blad dat u naar uw team kunt doorsturen.",
+      "label": "Werk-e-mailadres",
+      "placeholder": "you@company.com",
+      "submit": "Ontvang de one-pager",
+      "sending": "Verzenden…",
+      "invalid": "Voer een geldig e-mailadres in",
+      "error": "Er is iets misgegaan. Probeer het opnieuw.",
+      "sentTitle": "Controleer uw inbox",
+      "sentBody": "We hebben de one-pager naar uw adres verzonden. Het zou binnen een minuut moeten binnenkomen.",
+      "perks": [
+        "ESPR-tijdlijn",
+        "Partnermodel",
+        "Bouwen versus kopen"
+      ],
+      "privacy": "Wij gebruiken uw adres alleen om de one-pager te verzenden en vervolgacties met betrekking tot DPP af te handelen."
+    },
+    "cta": {
+      "title": "Ontvang <i>nu een gratis evaluatie</i>",
+      "lead": "Het moment is 2027. Eerste-movers hebben een structureel voordeel. Laten we samen uw DPP bouwen.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP-bereidheidsonderzoek",
+          "body": "We beoordelen uw productcatalogus tegen ESPR-tijdlijnen en identificeren prioriteitscategorieën."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP-programma",
+          "body": "Lanceer een live ORIGYN DPP-pilot op één productlijn. Snel, laag risico, tastbare resultaten."
+        },
+        {
+          "step": "3",
+          "title": "Partnerschapsakkoord",
+          "body": "Formaliseer de relatie: API-toegang, co-development, go-to-market uitlijning."
+        }
+      ],
+      "button": "Boek een gratis evaluatiegesprek",
+      "emailPrompt": "Of e-mail ons op"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Beveilig uw activa, intellectueel eigendom\nen identiteit volledig on-chain.",

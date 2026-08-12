@@ -222,6 +222,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alle Rechte vorbehalten – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU Digitale Produktpässe"
+    },
+    "hero": {
+      "title": "Die Infrastruktur für\nEU <i>Digitale Produktpässe</i>",
+      "lead": "ORIGYN verwandelt EU-DPP-Compliance von einem mehrjährigen Engineeringprojekt in eine plug & play Lösung. Jeder Pass ist manipulationssicher, rückverfolgbar und immer verfügbar.",
+      "chips": [
+        "Regulations-konform",
+        "Plug & Play",
+        "Schweiz-gestützt"
+      ],
+      "badge": "Aufgelistet auf <a:dppindex>dppindex.eu</a:dppindex> als offizieller EU-DPP-Provider",
+      "cta": "Kostenlose Bewertung vereinbaren",
+      "imageAlt": "Ein ORIGYN-Digitalpass für ein Batteriepaket, offen auf einem Telefon und Tablet angezeigt."
+    },
+    "regulation": {
+      "title": "EU-Ecodesign für nachhaltige\nProdukte Regulation (2024/1781)",
+      "lead": "Ein ORIGYN-DPP enthält Herkunft & Zusammensetzung, Materialssicherheitsdaten, Reparatur- & Recyclinganweisungen und Herkunftsnachweise, alle zugänglich über QR oder NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR in Kraft",
+          "body": "Regulation (EU) 2024/1781 trat im Juli 2024 in Kraft."
+        },
+        {
+          "year": "2027",
+          "title": "Erste DPPs verpflichtend",
+          "body": "Batterien (Februar), Textilien, Eisen & Stahl. Die Uhr läuft."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronik & Möbel",
+          "body": "Haltbarkeits-, Recycelbarkeits- und Recyclinggehalt-Regeln."
+        },
+        {
+          "year": "2030",
+          "title": "Vollständige Marktabdeckung",
+          "body": "Alle Produktkategorien. Erweiterter DPP erforderlich."
+        }
+      ]
+    },
+    "what": {
+      "title": "Die fortschrittlichste Plattform für\n<s>Digitale Produktpässe</s>",
+      "lead": "Dauerhaft auf einem unveränderlichen Netzwerk gespeichert. Manipulationssicher, nicht verfälschbar und immer zugänglich.",
+      "cards": [
+        {
+          "title": "Physisch-Digitale Brücke",
+          "body": "Jeder Pass verlinkt zu einem physischen Produkt via QR oder NFC. Alle Daten, Bilder, Dokumente, Materialien und Herkunftsnachweise werden beim Scan offengelegt.",
+          "proof": "Aufgelistet auf <a:dppindex>dppindex.eu</a:dppindex> als offizieller EU-DPP-Provider."
+        },
+        {
+          "title": "Angepasste Infrastruktur",
+          "body": "Kein Single Point of Failure. Wählen Sie Schweiz-, Global- oder eigene Server, ESPR-konform und standardmäßig audit-ready.",
+          "proof": "Vertraut neben Siemens, DNV und Avery Dennison."
+        },
+        {
+          "title": "Plug & Play im großen Maßstab",
+          "body": "Die ORIGYN-Plattform integriert sich in Ihre bestehenden Produktdaten, sodass nichts zu bauen ist. Geben Sie Pässe in Massen aus, von einem ersten Pilotlos bis zu Ihrem gesamten Katalog.",
+          "proof": "Von mehreren hundert bis zu Millionen von DPPs in Sekunden."
+        }
+      ]
+    },
+    "why": {
+      "title": "Die Frist ist jetzt.\n<s>Februar 2027</s> steht bevor.",
+      "benefits": [
+        {
+          "title": "Bereitstellung in Wochen, nicht 18–36 Monaten",
+          "body": "Erfüllen Sie die 2027-Frist mit Zeit zu sparen."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Bewerten, konfigurieren und bereit zum Rollout in Tagen, vollständig automatisiert."
+        },
+        {
+          "title": "Wir warten auf und aktualisieren es",
+          "body": "Sie bleiben konform, während sich ESPR-Schemas entwickeln."
+        },
+        {
+          "title": "Höhere Einsparungen",
+          "body": "Ein wettbewerbsfähiger Preis gegenüber Konkurrenten oder eigenem Aufbau."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Warum ORIGYN,\nnicht Eigenentwicklung",
+      "buildTitle": "Eigenentwicklung",
+      "origynTitle": "ORIGYN-Plattform",
+      "rows": [
+        {
+          "build": "18–36 Monate Entwicklungszeit",
+          "origyn": "Bereitstellung in Wochen, nicht Jahren"
+        },
+        {
+          "build": "Hohe Kosten und Ressourcen",
+          "origyn": "Plug-&-Play-Lösung, höhere Einsparungen"
+        },
+        {
+          "build": "Tech-Expertise schwer zu finden",
+          "origyn": "Bewährte Plattform"
+        },
+        {
+          "build": "Muss auf unbegrenzte Zeit gewartet werden",
+          "origyn": "Wir warten auf und aktualisieren es"
+        },
+        {
+          "build": "ESPR-Konformität unsicher",
+          "origyn": "Aufgelisteter EU-DPP-Provider"
+        },
+        {
+          "build": "Prüfer können nicht unabhängig verifizieren",
+          "origyn": "Jeder kann unabhängig verifizieren"
+        },
+        {
+          "build": "Kein Ökosystem-Netzwerkeffekt",
+          "origyn": "Wachsendes Partner-Ökosystem"
+        }
+      ],
+      "buildLabel": "Nicht enthalten",
+      "origynLabel": "Enthalten"
+    },
+    "partner": {
+      "title": "Das ORIGYN-Partnermodell",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Bewertung",
+          "bullets": [
+            "Mappen Sie Ihren Produktkatalog zu relevanten ESPR-Produktkategorien und Zeitplänen. Identifizieren Sie Datenlücken und Prioritäts-SKUs.",
+            "Holen Sie sich Ihre ORIGYN-DPP-Readiness-Übersicht."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilotprogramm",
+          "bullets": [
+            "Ein Produktlinienpilot.",
+            "Kartierung von Datenmodellen und Quellen.",
+            "Datenfelder sind konfiguriert, um Ihr DPP-Datenmodell abzugleichen.",
+            "ERP- und API-Konfigurationsbewertung.",
+            "Kostenschätzung und Partnerschaftsvereinbarung."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise-Rollout",
+          "bullets": [
+            "DPP-Vorlage ist definiert.",
+            "Datenzuordnung ist abgeschlossen.",
+            "DPPs werden mit der ORIGYN-Plattform erstellt.",
+            "Physische Produkte werden getaggt (QR / NFC).",
+            "DPPs gehen live auf Organisationsebene, scannbar, verifizierbar und immer verfügbar."
+          ]
+        }
+      ],
+      "imageAlt": "Ein aktiver ORIGYN-Digitalpass auf einem Telefon, mit Produktinformationen, Bildern und Konformitätsdaten.",
+      "getTitle": "Was Sie als ORIGYN-Partner erhalten",
+      "get": [
+        "API + Plattformzugriff",
+        "Dediziertes Integrationsteam",
+        "Gemeinsame Go-to-Market-Unterstützung"
+      ],
+      "cta": "Kostenlose Bewertung jetzt erhalten"
+    },
+    "download": {
+      "title": "Nehmen Sie das Gesamtbild\n<s>mit Ihnen.</s>",
+      "lead": "Das ORIGYN-DPP-One-Pager: Die Regulierungszeitlinie, die Plattform, das Partnermodell und der Vergleich auf einem einzelnen Blatt, das Sie an Ihr Team weitergeben können.",
+      "label": "Geschäfts-E-Mail",
+      "placeholder": "you@company.com",
+      "submit": "One-Pager erhalten",
+      "sending": "Wird gesendet…",
+      "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "error": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
+      "sentTitle": "Überprüfen Sie Ihren Posteingang",
+      "sentBody": "Wir haben Ihnen das One-Pager an Ihre Adresse gesendet. Es sollte innerhalb einer Minute ankommen.",
+      "perks": [
+        "ESPR-Zeitlinie",
+        "Partnermodell",
+        "Kauf vs. Eigenentwicklung"
+      ],
+      "privacy": "Wir verwenden Ihre Adresse nur, um Ihnen das One-Pager zu senden und um Sie über DPP zu kontaktieren."
+    },
+    "cta": {
+      "title": "Erhalten Sie <i>eine kostenlose Bewertung</i> jetzt",
+      "lead": "Das Fenster ist 2027. First-Mover-Partner werden einen strukturellen Vorteil haben. Lassen Sie uns Ihren DPP gemeinsam aufbauen.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP-Reife-Bewertung",
+          "body": "Wir bewerten Ihren Produktkatalog anhand von ESPR-Zeitplänen und identifizieren Prioritätskategorien."
+        },
+        {
+          "step": "2",
+          "title": "Pilot-DPP-Programm",
+          "body": "Starten Sie einen aktiven ORIGYN-DPP-Pilot auf einer Produktlinie. Schnell, risikoarm, greifbare Ergebnisse."
+        },
+        {
+          "step": "3",
+          "title": "Partnerschaftsvereinbarung",
+          "body": "Formalisieren Sie die Beziehung: API-Zugriff, Co-Entwicklung, Go-to-Market-Ausrichtung."
+        }
+      ],
+      "button": "Kostenlose Bewertung vereinbaren",
+      "emailPrompt": "Oder senden Sie uns eine E-Mail an"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Sichern Sie Ihre Vermögenswerte, Ihr geistiges Eigentum\nund Ihre Identität vollständig on-chain.",
