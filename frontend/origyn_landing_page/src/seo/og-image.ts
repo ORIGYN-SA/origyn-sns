@@ -10,7 +10,10 @@ import path from "path";
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
 import satori from "satori";
+import opentype, { type Font } from "@shuding/opentype.js";
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
+import type { Locale } from "../i18n/config.ts";
+import { copy } from "./copy.ts";
 import { CARD_HEIGHT, CARD_WIDTH, type PageSeo } from "./pages.ts";
 
 // Matches `brand-gradient-bright` in tailwind.config.js.
@@ -18,22 +21,110 @@ const BRAND_GRADIENT = "linear-gradient(90deg, #6FD6F5 0%, #1F9CD4 45%, #2E7BC4 
 /** Width the text column has before it would run under the artwork. */
 const COLUMN_WIDTH = 560;
 
+const TITLE_SIZE = 44;
+const MIN_TITLE_SIZE = 28;
+const LEAD_SIZE = 21;
+const MIN_LEAD_SIZE = 17;
+const MAX_LEAD_LINES = 4;
+
 const assetsDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "assets");
 
-// satori's font parser cannot read public/GeneralSans-Variable.ttf, so each
-// weight ships as a static Latin-subset instance of it. After a font update,
-// regenerate one per weight with fonttools:
-//
-//   python3 -m fontTools.varLib.instancer public/GeneralSans-Variable.ttf \
-//     wght=300 -o /tmp/gs.ttf
-//   python3 -m fontTools.subset /tmp/gs.ttf \
-//     --unicodes="U+0020-007E,U+00A0-00FF,U+0100-017F,U+2010-2027,U+20AC,U+2122" \
-//     --output-file=src/seo/assets/GeneralSans-Light.ttf
-const FONTS = [
-  { file: "GeneralSans-Light.ttf", weight: 300 },
-  { file: "GeneralSans-Regular.ttf", weight: 400 },
-  { file: "GeneralSans-Medium.ttf", weight: 500 },
-] as const;
+// satori shapes text one glyph at a time: no bidi reordering, no Arabic
+// joining, no Indic cluster reordering. Rendered against Chrome, those scripts
+// come out reversed or with vowel signs on the wrong side of their consonant,
+// so their pages point at the English card rather than at broken type.
+const UNSHAPED_SCRIPTS = new Set(["ar", "bn", "he", "hi", "ur"]);
+
+/** The locale whose card a page in `locale` should link to. */
+export const cardLocale = (locale: string): string =>
+  UNSHAPED_SCRIPTS.has(locale) ? "en" : locale;
+
+// General Sans is Latin-only, so every other script needs a Noto face behind
+// it. Order matters: satori takes the first font that has the glyph, which
+// keeps ORIGYN, DPP and ESPR in the brand face inside non-Latin copy.
+// Vietnamese is the exception — General Sans has the base letters but none of
+// the diacritics, and would split half the words across two faces.
+const FALLBACK_FONTS: Record<string, readonly string[]> = {
+  bg: ["GeneralSans", "NotoSans"],
+  el: ["GeneralSans", "NotoSans"],
+  ja: ["GeneralSans", "NotoSansJP"],
+  ko: ["GeneralSans", "NotoSansKR"],
+  ru: ["GeneralSans", "NotoSans"],
+  th: ["GeneralSans", "NotoSansThai"],
+  uk: ["GeneralSans", "NotoSans"],
+  vi: ["NotoSans"],
+  zh: ["GeneralSans", "NotoSansSC"],
+  "zh-TW": ["GeneralSans", "NotoSansTC"],
+};
+
+// Regenerate all of these with scripts/build-og-fonts.py after a font or copy
+// change; satori's parser cannot read the variable originals.
+const WEIGHTS = [300, 400] as const;
+type Weight = (typeof WEIGHTS)[number];
+const WEIGHT_FILES: Record<Weight, string> = { 300: "Light", 400: "Regular" };
+
+const files = new Map<string, Buffer>();
+const parsed = new Map<string, Font>();
+
+const fontFile = (family: string, weight: Weight): Buffer => {
+  const name = `${family}-${WEIGHT_FILES[weight]}.ttf`;
+  if (!files.has(name)) files.set(name, fs.readFileSync(path.join(assetsDir, name)));
+  return files.get(name)!;
+};
+
+const fontMetrics = (family: string, weight: Weight): Font => {
+  const name = `${family}-${weight}`;
+  if (!parsed.has(name)) {
+    const data = fontFile(family, weight);
+    parsed.set(name, opentype.parse(data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)));
+  }
+  return parsed.get(name)!;
+};
+
+const familiesFor = (locale: string): readonly string[] =>
+  FALLBACK_FONTS[locale] ?? ["GeneralSans"];
+
+/** Advance width of `text`, picking a font per character the way satori does. */
+const advance = (fonts: Font[], text: string, size: number, tracking = 0): number => {
+  let total = 0;
+  for (const char of text) {
+    const font = fonts.find((candidate) => candidate.charToGlyphIndex(char) > 0) ?? fonts[0];
+    total += (font.charToGlyph(char).advanceWidth ?? 0) / font.unitsPerEm * size;
+  }
+  return total + tracking * size * text.length;
+};
+
+/**
+ * Line count for `text` in a column, breaking on spaces where the script has
+ * them and anywhere otherwise, which is how CJK wraps.
+ */
+const lineCount = (fonts: Font[], text: string, size: number, width: number): number => {
+  const chunks = text.includes(" ") ? text.split(" ").map((w, i) => (i ? ` ${w}` : w)) : [...text];
+  let lines = 1;
+  let used = 0;
+  for (const chunk of chunks) {
+    const chunkWidth = advance(fonts, chunk, size);
+    if (used && used + chunkWidth > width) {
+      lines += 1;
+      used = advance(fonts, chunk.trimStart(), size);
+    } else {
+      used += chunkWidth;
+    }
+  }
+  return lines;
+};
+
+const assertRenderable = (fonts: Font[], locale: string, text: string): void => {
+  const missing = [...new Set(text)].filter(
+    (char) => !/\s/.test(char) && !fonts.some((font) => font.charToGlyphIndex(char) > 0)
+  );
+  if (missing.length) {
+    throw new Error(
+      `No card font covers ${missing.map((c) => `"${c}" (U+${c.codePointAt(0)!.toString(16).toUpperCase()})`).join(", ")} ` +
+        `for /${locale}. Re-run scripts/build-og-fonts.py, which subsets the fonts to the copy in use.`
+    );
+  }
+};
 
 type Style = Record<string, unknown>;
 type Element = { type: string; props: Record<string, unknown> };
@@ -45,14 +136,21 @@ const h = (type: string, style: Style, ...children: (Element | string)[]): Eleme
   props: { style, children: children.length < 2 ? children[0] : children },
 });
 
-const img = (file: string, width: number, style: Style = {}): Element => ({
-  type: "img",
-  props: {
-    src: `data:image/png;base64,${fs.readFileSync(path.join(assetsDir, file)).toString("base64")}`,
-    width,
-    style: { display: "flex", ...style },
-  },
-});
+const artwork = new Map<string, string>();
+
+const img = (file: string, width: number, style: Style = {}): Element => {
+  if (!artwork.has(file)) {
+    artwork.set(file, fs.readFileSync(path.join(assetsDir, file)).toString("base64"));
+  }
+  return {
+    type: "img",
+    props: {
+      src: `data:image/png;base64,${artwork.get(file)}`,
+      width,
+      style: { display: "flex", ...style },
+    },
+  };
+};
 
 const glow = (position: Style, color: string, size: number): Element =>
   h("div", {
@@ -64,8 +162,27 @@ const glow = (position: Style, color: string, size: number): Element =>
     ...position,
   });
 
-const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
-  const lines = title.split("\n");
+const buildCard = (page: PageSeo, locale: string): Element => {
+  const families = familiesFor(locale);
+  const light = families.map((family) => fontMetrics(family, 300));
+  const regular = families.map((family) => fontMetrics(family, 400));
+
+  const lines = copy(locale as Locale, page.keys.cardTitle).split("\n");
+  const lead = copy(locale as Locale, page.keys.cardLead);
+  assertRenderable(light, locale, lines.join(""));
+  assertRenderable(regular, locale, lead);
+
+  // Translations run to any length, so the headline scales down to the column
+  // instead of wrapping into the artwork, and the lead follows if it needs to.
+  const widest = Math.max(...lines.map((line) => advance(light, line, TITLE_SIZE, -0.02)));
+  const titleSize = Math.max(
+    MIN_TITLE_SIZE,
+    Math.min(TITLE_SIZE, Math.floor((TITLE_SIZE * COLUMN_WIDTH) / widest))
+  );
+  let leadSize = LEAD_SIZE;
+  while (leadSize > MIN_LEAD_SIZE && lineCount(regular, lead, leadSize, COLUMN_WIDTH) > MAX_LEAD_LINES) {
+    leadSize -= 1;
+  }
 
   return h(
     "div",
@@ -76,13 +193,17 @@ const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
       height: CARD_HEIGHT,
       overflow: "hidden",
       backgroundColor: "#061937",
-      fontFamily: "General Sans",
+      fontFamily: families.join(", "),
       color: "#FFFFFF",
     },
 
     glow({ top: -240, right: -180 }, "rgba(31, 156, 212, 0.34)", 780),
     glow({ bottom: -280, left: -140 }, "rgba(46, 123, 196, 0.24)", 640),
-    img(art.file, art.width, { position: "absolute", top: art.top, right: art.right }),
+    img(page.art.file, page.art.width, {
+      position: "absolute",
+      top: page.art.top,
+      right: page.art.right,
+    }),
 
     h(
       "div",
@@ -111,7 +232,7 @@ const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
           h(
             "div",
             {
-              fontSize: 44,
+              fontSize: titleSize,
               fontWeight: 300,
               lineHeight: 1.14,
               letterSpacing: "-0.02em",
@@ -134,7 +255,7 @@ const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
           {
             marginTop: 22,
             maxWidth: COLUMN_WIDTH,
-            fontSize: 21,
+            fontSize: leadSize,
             lineHeight: 1.5,
             color: "rgba(255, 255, 255, 0.68)",
           },
@@ -163,20 +284,22 @@ const buildCard = ({ title, lead, art }: PageSeo["card"]): Element => {
 
 let wasmReady: Promise<void> | null = null;
 
-export const renderOgImage = async (page: PageSeo): Promise<Buffer> => {
+export const renderOgImage = async (page: PageSeo, locale: string): Promise<Buffer> => {
   const svg = await satori(
     // satori types its input as a React node, but also accepts the plain
     // element tree buildCard returns, which those types do not describe.
-    buildCard(page.card) as unknown as Parameters<typeof satori>[0],
+    buildCard(page, locale) as unknown as Parameters<typeof satori>[0],
     {
       width: CARD_WIDTH,
       height: CARD_HEIGHT,
-      fonts: FONTS.map(({ file, weight }) => ({
-        name: "General Sans",
-        data: fs.readFileSync(path.join(assetsDir, file)),
-        weight,
-        style: "normal" as const,
-      })),
+      fonts: familiesFor(locale).flatMap((family) =>
+        WEIGHTS.map((weight) => ({
+          name: family,
+          data: fontFile(family, weight),
+          weight,
+          style: "normal" as const,
+        }))
+      ),
     }
   );
 

@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alla rättigheter förbehållna – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU digitala produktpass"
+    },
+    "hero": {
+      "title": "Infrastrukturlagret för\nEU <i>digitala produktpass</i>",
+      "lead": "ORIGYN gör EU DPP-efterlevnad från ett flerårs teknikprojekt till en plug & play-driftsättning. Varje pass är manipuleringssäkert, spårbart och alltid tillgängligt.",
+      "chips": [
+        "Regelförbered",
+        "Plug-&-Play",
+        "Schweiz-baserad"
+      ],
+      "badge": "Listad på <a:dppindex>dppindex.eu</a:dppindex> som en officiell EU DPP-leverantör",
+      "cta": "Boka en kostnadsfri bedömningssamtal",
+      "imageAlt": "Ett ORIGYN digitalt produktpass för ett batteripaket, öppet på en telefon och en surfplatta."
+    },
+    "regulation": {
+      "title": "EU Ecodesign för hållbara\nprodukter Regulation (2024/1781)",
+      "lead": "Ett ORIGYN DPP innehåller ursprung & sammansättning, material säkerhetsinformation, reparations- & återvinningsinstruktioner och ursprungsbevis, allt tillgängligt via QR eller NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR i kraft",
+          "body": "Regulation (EU) 2024/1781 trädde i kraft i juli 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Första DPP:er obligatoriska",
+          "body": "Batterier (februari), textilier, järn & stål. Klockan börjar ticka."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronik & möbler",
+          "body": "Hållbarhet, återvinningsbarhet och återvunnen innehållsregler."
+        },
+        {
+          "year": "2030",
+          "title": "Fullständig marknadstäckning",
+          "body": "Alla produktkategorier. Avancerad DPP krävs."
+        }
+      ]
+    },
+    "what": {
+      "title": "Den mest avancerade plattformen för\n<s>digitala produktpass</s>",
+      "lead": "Lagrad permanent på ett oföränderligt nätverk. Manipuleringssäker, oförfalskbar och alltid tillgänglig.",
+      "cards": [
+        {
+          "title": "Fysisk–Digital brygga",
+          "body": "Varje pass länkas till en fysisk produkt via QR eller NFC. Fullständiga data, bilder, dokument, material och ursprung avslöjas vid skanning.",
+          "proof": "Listad på <a:dppindex>dppindex.eu</a:dppindex> som en officiell EU DPP-leverantör."
+        },
+        {
+          "title": "Anpassad infrastruktur",
+          "body": "Ingen enskild felkälla. Välj schweiziska, globala eller dina egna servrar, ESPR-kompatibla och revisionsberedda per design.",
+          "proof": "Betrodd tillsammans med Siemens, DNV och Avery Dennison."
+        },
+        {
+          "title": "Plug & Play i skala",
+          "body": "ORIGYN-plattformen ansluts till din befintliga produktdata, så det finns inget att bygga. Ge ut pass i bulk, från en första pilotbatch till hela din katalog.",
+          "proof": "Från några hundra till miljoner DPP:er på sekunder."
+        }
+      ]
+    },
+    "why": {
+      "title": "Tidsfristen är nu.\n<s>Februari 2027</s> närmar sig.",
+      "benefits": [
+        {
+          "title": "Driftsätt på veckor, inte 18–36 månader",
+          "body": "Möt 2027-fristen med god marginal."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Bedöm, konfigurera och var redo att driftsätta på dagar, fullständigt automatiserat."
+        },
+        {
+          "title": "Vi sköter underhåll & uppgraderingar",
+          "body": "Du förblir kompatibel när ESPR-scheman utvecklas."
+        },
+        {
+          "title": "Högre besparingar",
+          "body": "Ett konkurrenskraftigt prispunkt jämfört med konkurrenter eller att bygga själv."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Varför ORIGYN,\nte bygga själv",
+      "buildTitle": "Bygga själv",
+      "origynTitle": "ORIGYN-plattformen",
+      "rows": [
+        {
+          "build": "18–36 månader utvecklingstid",
+          "origyn": "Driftsätt på veckor, inte år"
+        },
+        {
+          "build": "Höga kostnader och resurser",
+          "origyn": "Plug-&-Play-lösning, högre besparingar"
+        },
+        {
+          "build": "Teknikexpertis svårt att anställa",
+          "origyn": "Beprövad plattform"
+        },
+        {
+          "build": "Måste underhålla i oändlighet",
+          "origyn": "Vi sköter underhållet och uppgraderingarna"
+        },
+        {
+          "build": "ESPR-kompatibilitet osäker",
+          "origyn": "Listad EU DPP-leverantör"
+        },
+        {
+          "build": "Revisorer kan inte oberoende verifiera",
+          "origyn": "Vem som helst kan oberoende verifiera"
+        },
+        {
+          "build": "Inget ekosystemsnätverkseffekt",
+          "origyn": "Växande partnerekosystem"
+        }
+      ],
+      "buildLabel": "Inte inkluderat",
+      "origynLabel": "Inkluderat"
+    },
+    "partner": {
+      "title": "ORIGYN-partnermodellen",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Bedömning",
+          "bullets": [
+            "Kartlägg din produktkatalog till relevanta ESPR-produktkategorier och tidslinjer. Identifiera datahål och prioriterad SKU:er.",
+            "Få din ORIGYN DPP Readiness Document-översikt."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilotprogram",
+          "bullets": [
+            "En produktlinjepilot.",
+            "Karta över datamodeller och källor.",
+            "Datafält konfigureras för att matcha din DPP-datamodell.",
+            "ERP och API-konfigurationsbedömning.",
+            "Kostnadsuppskattning och partneravtal."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise-utrullning",
+          "bullets": [
+            "DPP-mallen är definierad.",
+            "Datamappning är slutförd.",
+            "DPP:er skapas med ORIGYN-plattformen.",
+            "Fysiska produkter taggas (QR / NFC).",
+            "DPP:er går live på organisationsnivå, skanningsbara, verifierbara och alltid tillgängliga."
+          ]
+        }
+      ],
+      "imageAlt": "Ett aktivt ORIGYN digitalt produktpass på en telefon, som visar produktinformation, bilder och efterlevnadsdata.",
+      "getTitle": "Vad du får som ORIGYN-partner",
+      "get": [
+        "API + plattformsåtkomst",
+        "Dedikerat integrationsteam",
+        "Gemensamt go-to-market-stöd"
+      ],
+      "cta": "Få en kostnadsfri bedömning nu"
+    },
+    "download": {
+      "title": "Ta med dig hela bilden\n<s>med dig.</s>",
+      "lead": "ORIGYN DPP one-pagern: regeltidslinjen, plattformen, partnermodellen och jämförelsen, på ett enda ark du kan vidarebefordra till ditt team.",
+      "label": "Arbetse-post",
+      "placeholder": "du@company.com",
+      "submit": "Få one-pagern",
+      "sending": "Skickar…",
+      "invalid": "Ange en giltig e-postadress",
+      "error": "Något gick fel. Försök igen.",
+      "sentTitle": "Kontrollera din inkorg",
+      "sentBody": "Vi har skickat one-pagern till din adress. Den borde komma inom en minut.",
+      "perks": [
+        "ESPR-tidslinje",
+        "Partnermodell",
+        "Bygga eller köpa"
+      ],
+      "privacy": "Vi använder din adress endast för att skicka one-pagern och följa upp om DPP."
+    },
+    "cta": {
+      "title": "Få <i>en kostnadsfri bedömning</i> nu",
+      "lead": "Tidsfönstret är 2027. Första-mover-partners får en strukturell fördel. Låt oss bygga din DPP tillsammans.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP-beredskapsbedömning",
+          "body": "Vi bedömer din produktkatalog mot ESPR-tidslinjer och identifierar prioriterade kategorier."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP-program",
+          "body": "Lansera en live ORIGYN DPP-pilot på en produktlinje. Snabb, låg risk, påtagliga resultat."
+        },
+        {
+          "step": "3",
+          "title": "Partneravtal",
+          "body": "Formalisera relationen: API-åtkomst, co-development, go-to-market-inriktning."
+        }
+      ],
+      "button": "Boka en kostnadsfri bedömningssamtal",
+      "emailPrompt": "Eller mejla oss på"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Säkra dina tillgångar, immateriella rättigheter\noch din identitet helt on-chain.",

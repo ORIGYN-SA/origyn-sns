@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Lahat ng karapatan ay nakalaan – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Mga Digital Product Passport ng EU"
+    },
+    "hero": {
+      "title": "Ang infrastructure layer ng\nDPP ng EU na <i>Sertipikasyon ng Produkto</i>",
+      "lead": "Ginagawang simple ng ORIGYN ang compliance sa EU DPP mula sa isang multi-taong proyekto sa engineering tungo sa isang plug & play rollout. Ang bawat pasaporte ay tamper-proof, masusubaybayan, at laging available.",
+      "chips": [
+        "Compliance-Ready",
+        "Plug-&-Play",
+        "Based sa Suiza"
+      ],
+      "badge": "Nakalista sa <a:dppindex>dppindex.eu</a:dppindex> bilang isang opisyal na EU DPP Provider",
+      "cta": "Mag-book ng free assessment call",
+      "imageAlt": "Isang ORIGYN digital product passport para sa isang battery pack, bukas sa isang phone at tablet."
+    },
+    "regulation": {
+      "title": "EU Ecodesign para sa Sustainable\nProducts Regulation (2024/1781)",
+      "lead": "Ang isang ORIGYN DPP ay nagdadala ng origin & composition, material safety data, repair & recycling instructions at provenance proof, lahat accessible via QR o NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR sa loob ng bisa",
+          "body": "Regulation (EU) 2024/1781 pumasok sa bisa noong Hulyo 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Unang DPP ay naging obligatorio",
+          "body": "Mga baterya (Pebrero), textiles, bakal at asero. Nagsisimula ang panahon."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronika & muwebles",
+          "body": "Durability, recyclability at recycled-content rules."
+        },
+        {
+          "year": "2030",
+          "title": "Buong market coverage",
+          "body": "Lahat ng product categories. Advanced DPP required."
+        }
+      ]
+    },
+    "what": {
+      "title": "Ang pinakamodernong platform para sa\n<s>digital product passports</s>",
+      "lead": "Nakaimbak nang permanente sa isang immutable network. Tamper-proof, unfalsifiable at laging accessible.",
+      "cards": [
+        {
+          "title": "Physical–Digital Bridge",
+          "body": "Ang bawat passport ay naka-link sa isang pisikal na produkto via QR o NFC. Kompletong data, larawan, mga dokumento, materials at provenance ay naihahayag sa scan.",
+          "proof": "Nakalista sa <a:dppindex>dppindex.eu</a:dppindex> bilang isang opisyal na EU DPP Provider."
+        },
+        {
+          "title": "Customized Infrastructure",
+          "body": "Walang single point of failure. Pumili ng Swiss, global o sariling servers, ESPR-compliant at audit-ready by design.",
+          "proof": "Pinagkakatiwalaan kasama ang Siemens, DNV at Avery Dennison."
+        },
+        {
+          "title": "Plug & Play sa Scale",
+          "body": "Ang ORIGYN platform ay sumasaklaw sa inyong existing product data, kaya walang kailangang i-build. I-issue ang passports in bulk, mula sa unang pilot batch hanggang sa buong catalog.",
+          "proof": "Mula sa ilang daang hanggang milyun-milyong DPP sa ilang segundo."
+        }
+      ]
+    },
+    "why": {
+      "title": "Ang deadline ay ngayon.\n<s>Pebrero 2027</s> ay papalapit.",
+      "benefits": [
+        {
+          "title": "I-deploy sa loob ng linggo, hindi 18–36 buwan",
+          "body": "Tuparin ang 2027 deadline na may pagkakataon na mag-iwan."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Assess, configure at handa nang mag-rollout sa loob ng ilang araw, fully automated."
+        },
+        {
+          "title": "Kami ang nag-aayos at nag-upgrade",
+          "body": "Manatili kayong compliant habang umuunlad ang ESPR schemas."
+        },
+        {
+          "title": "Mas mataas na savings",
+          "body": "Competitive price point laban sa competitors o pag-build ng sarili."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Bakit ORIGYN,\nhindi build-your-own",
+      "buildTitle": "Build-Your-Own",
+      "origynTitle": "ORIGYN Platform",
+      "rows": [
+        {
+          "build": "18–36 buwan development time",
+          "origyn": "I-deploy sa loob ng linggo, hindi taon"
+        },
+        {
+          "build": "Mataas na gastos at resources",
+          "origyn": "Plug-&-Play solution, mas mataas na savings"
+        },
+        {
+          "build": "Tech expertise ay mahirap hanapin",
+          "origyn": "Battle-tested na platform"
+        },
+        {
+          "build": "Dapat i-maintain nang walang hanggan",
+          "origyn": "Kami ang nag-aayos at nag-upgrade"
+        },
+        {
+          "build": "ESPR compliance ay hindi sigurado",
+          "origyn": "Listed EU DPP provider"
+        },
+        {
+          "build": "Ang auditors ay hindi makaka-verify nang independyente",
+          "origyn": "Sinumang makaka-verify nang independyente"
+        },
+        {
+          "build": "Walang ecosystem network effect",
+          "origyn": "Lumalaking partner ecosystem"
+        }
+      ],
+      "buildLabel": "Hindi kasama",
+      "origynLabel": "Kasama"
+    },
+    "partner": {
+      "title": "Ang ORIGYN partner model",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Pagtatasa",
+          "bullets": [
+            "I-map ang inyong product catalog sa relevant ESPR product categories at timelines. Kilalanin ang data gaps at priority SKU.",
+            "Makuha ang inyong ORIGYN DPP Readiness Document overview."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilot Program",
+          "bullets": [
+            "Isang product line pilot.",
+            "Map ng data models at sources.",
+            "Data fields ay configured para tumugma sa inyong DPP data model.",
+            "ERP at API configuration evaluation.",
+            "Cost estimation at partnership agreement."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Enterprise Roll Out",
+          "bullets": [
+            "DPP template ay defined.",
+            "Data mapping ay natapos.",
+            "Ang DPP ay ginawa gamit ang ORIGYN Platform.",
+            "Ang pisikal na mga produkto ay tagged (QR / NFC).",
+            "Ang DPP ay live sa organizational level, scannable, verifiable at laging available."
+          ]
+        }
+      ],
+      "imageAlt": "Isang live ORIGYN digital product passport sa isang phone, na nagpapakita ng product information, larawan at compliance data.",
+      "getTitle": "Ang makukuha ninyo bilang isang ORIGYN partner",
+      "get": [
+        "API + platform access",
+        "Dedicated na integration team",
+        "Joint na go-to-market support"
+      ],
+      "cta": "Makakuha ng free assessment ngayon"
+    },
+    "download": {
+      "title": "Dalhin ang buong larawan\n<s>kasama ninyo.</s>",
+      "lead": "Ang ORIGYN DPP one-pager: ang regulation timeline, ang platform, ang partner model at ang comparison, sa isang sheet na maaari ninyong ipadala sa inyong team.",
+      "label": "Email sa trabaho",
+      "placeholder": "you@company.com",
+      "submit": "Kunin ang one-pager",
+      "sending": "Ipinapadala…",
+      "invalid": "Mangyaring maglagay ng valid email address",
+      "error": "May naganap na mali. Subukan muli.",
+      "sentTitle": "Tingnan ang inyong inbox",
+      "sentBody": "Ipinadala namin ang one-pager sa inyong address. Dapat darating sa loob ng isang minuto.",
+      "perks": [
+        "ESPR timeline",
+        "Partner model",
+        "Build vs. buy"
+      ],
+      "privacy": "Gagamitin lang namin ang inyong address para ipadala ang one-pager at follow up tungkol sa DPP."
+    },
+    "cta": {
+      "title": "Makakuha ng <i>free assessment</i> ngayon",
+      "lead": "Ang window ay 2027. Ang first-mover partners ay magkakaroon ng structural advantage. Tayo ay bumuo ng inyong DPP nang magkasama.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP readiness assessment",
+          "body": "Sinusuri namin ang inyong product catalog laban sa ESPR timelines at tinutukoy ang priority categories."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP program",
+          "body": "Ilunsad ang isang live ORIGYN DPP pilot sa isang product line. Mabilis, low-risk, tangible results."
+        },
+        {
+          "step": "3",
+          "title": "Partnership agreement",
+          "body": "Gawing pormal ang relasyon: API access, co-development, go-to-market alignment."
+        }
+      ],
+      "button": "Mag-book ng free assessment call",
+      "emailPrompt": "O mag-email sa amin sa"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Pangalagaan ang inyong mga asset, intelektwal na ari-arian,\nat pagkakakilanlan nang ganap on-chain.",

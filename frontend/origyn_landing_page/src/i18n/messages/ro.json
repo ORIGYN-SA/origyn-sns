@@ -222,6 +222,212 @@
     "dashboard": "TABLOU DE BORD",
     "copyright": "©2026 Toate drepturile rezervate – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Pașapoarte Digitale pentru Produse din UE"
+    },
+    "hero": {
+      "title": "Stratul de infrastructură al\n<i>Pașapoartelor Digitale pentru Produse</i>",
+      "lead": "ORIGYN transformă conformarea DPP din UE dintr-un proiect de inginerie multianual într-o soluție plug & play. Fiecare pașaport este imposibil de manipulat, trasabil și mereu disponibil.",
+      "chips": [
+        "Conformă cu Reglementarea",
+        "Plug-&-Play",
+        "Cu sediul în Elveția"
+      ],
+      "badge": "Listat pe <a:dppindex>dppindex.eu</a:dppindex> ca furnizor oficial de DPP din UE",
+      "cta": "Rezervați un apel de evaluare gratuit",
+      "imageAlt": "Un pașaport digital ORIGYN pentru un pachet de baterie, deschis pe un telefon și o tablă."
+    },
+    "regulation": {
+      "title": "Reglementarea UE pentru Produse\nSustenabile din Ecodesign (2024/1781)",
+      "lead": "Un DPP ORIGYN poartă origine și compoziție, date de siguranță a materialelor, instrucțiuni de reparare și reciclare și dovada provenienței, toate accesibile prin QR sau NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR în vigoare",
+          "body": "Reglementarea (EU) 2024/1781 a intrat în vigoare în iulie 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Primele DPP obligatorii",
+          "body": "Baterii (februarie), textile, fier și oțel. Cronometrul a pornit."
+        },
+        {
+          "year": "2028",
+          "title": "Electronice și mobilă",
+          "body": "Reguli de durabilitate, reciclabilitate și conținut reciclat."
+        },
+        {
+          "year": "2030",
+          "title": "Acoperire completă a pieței",
+          "body": "Toate categoriile de produse. DPP avansat necesar."
+        }
+      ]
+    },
+    "what": {
+      "title": "Cea mai avansată platformă pentru\n<s>pașapoarte digitale ale produselor</s>",
+      "lead": "Stocată permanent pe o rețea imuabilă. Imposibil de manipulat, imposibil de falsificat și mereu accesibil.",
+      "cards": [
+        {
+          "title": "Pod Fizic–Digital",
+          "body": "Fiecare pașaport se conectează la un produs fizic prin QR sau NFC. Date complete, imagini, documente, materiale și proveniență sunt dezvăluite la scanare.",
+          "proof": "Listat pe <a:dppindex>dppindex.eu</a:dppindex> ca furnizor oficial de DPP din UE."
+        },
+        {
+          "title": "Infrastructură Personalizată",
+          "body": "Niciun punct de eșec unic. Alegeți servere din Elveția, globale sau ale dumneavoastră, conforme cu ESPR și gata de audit din construcție.",
+          "proof": "De încredere alături de Siemens, DNV și Avery Dennison."
+        },
+        {
+          "title": "Plug & Play la Scară",
+          "body": "Platforma ORIGYN se conectează la datele produsului dumneavoastră existente, deci nu trebuie să construiți nimic. Emitiți pașapoarte în masă, de la o primă serie pilot la întregul catalog.",
+          "proof": "De la câteva sute la milioane de DPP-uri în secunde."
+        }
+      ]
+    },
+    "why": {
+      "title": "Termenul limită este acum.\n<s>februarie 2027</s> se apropie.",
+      "benefits": [
+        {
+          "title": "Implementare în săptămâni, nu 18–36 de luni",
+          "body": "Îndepliniți termenul din 2027 cu timp de rezervă."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Evaluați, configurați și fiți gata de lansare în zile, complet automatizat."
+        },
+        {
+          "title": "Noi o menținem și o actualizăm",
+          "body": "Rămâneți conformă pe măsură ce schemele ESPR evoluează."
+        },
+        {
+          "title": "Economii mai mari",
+          "body": "Un punct de preț competitiv față de concurenți sau construirea propriului dumneavoastră."
+        }
+      ]
+    },
+    "compare": {
+      "title": "De ce ORIGYN,\nnu construcția proprie",
+      "buildTitle": "Construcție Proprie",
+      "origynTitle": "Platforma ORIGYN",
+      "rows": [
+        {
+          "build": "18–36 de luni timp de dezvoltare",
+          "origyn": "Implementare în săptămâni, nu ani"
+        },
+        {
+          "build": "Costuri și resurse înalte",
+          "origyn": "Soluție plug-&-play, economii mai mari"
+        },
+        {
+          "build": "Expertiza tehnică greu de găsit",
+          "origyn": "Platformă testate în luptă"
+        },
+        {
+          "build": "Trebuie să mențineți pe termen nelimitat",
+          "origyn": "Noi o menținem și o actualizăm"
+        },
+        {
+          "build": "Conformarea ESPR incertă",
+          "origyn": "Furnizor DPP din UE listat oficial"
+        },
+        {
+          "build": "Auditorii nu pot verifica independent",
+          "origyn": "Oricine poate verifica independent"
+        },
+        {
+          "build": "Niciun efect de rețea ecosistem",
+          "origyn": "Ecosistem de parteneri în creștere"
+        }
+      ],
+      "buildLabel": "Nu este inclus",
+      "origynLabel": "Inclus"
+    },
+    "partner": {
+      "title": "Modelul de parteneriat ORIGYN",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Evaluare",
+          "bullets": [
+            "Mapați catalogul produselor dumneavoastră pe categoriile de produse ESPR relevante și cronologiile. Identificați lacunele de date și SKU-urile prioritare.",
+            "Obțineți o prezentare generală a Documentului de Pregătire DPP ORIGYN."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Program Pilot",
+          "bullets": [
+            "Pilot unei linii de produse.",
+            "Hartă a modelelor de date și surselor.",
+            "Câmpurile de date sunt configurate pentru a se potrivi modelului dumneavoastră de date DPP.",
+            "Evaluarea configurației ERP și API.",
+            "Estimare costuri și acord de parteneriat."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Lansare Enterprise",
+          "bullets": [
+            "Șablonul DPP este definit.",
+            "Maparea datelor este finalizată.",
+            "DPP-urile sunt create cu Platforma ORIGYN.",
+            "Produsele fizice sunt etichetate (QR / NFC).",
+            "DPP-urile sunt lansate la nivel organizațional, scanabile, verificabile și mereu disponibile."
+          ]
+        }
+      ],
+      "imageAlt": "Un pașaport digital ORIGYN activ pe un telefon, afișând informații despre produs, imagini și date de conformare.",
+      "getTitle": "Ce obțineți ca partener ORIGYN",
+      "get": [
+        "Acces API + platformă",
+        "Echipă dedicată de integrare",
+        "Suport co-marketing"
+      ],
+      "cta": "Obțineți o evaluare gratuită acum"
+    },
+    "download": {
+      "title": "Luați imaginea completă\n<s>cu dumneavoastră.</s>",
+      "lead": "Pagina rezumată ORIGYN DPP: cronologia reglementării, platforma, modelul de parteneriat și comparația, pe o singură pagină pe care o puteți trimite echipei dumneavoastră.",
+      "label": "E-mail de lucru",
+      "placeholder": "you@company.com",
+      "submit": "Obțineți pagina rezumată",
+      "sending": "Se trimite…",
+      "invalid": "Vă rugăm să introduceți o adresă de e-mail validă",
+      "error": "Ceva nu a mers bine. Vă rugăm să încercați din nou.",
+      "sentTitle": "Verificați-vă inboxul",
+      "sentBody": "Am trimis pagina rezumată la adresa dumneavoastră. Ar trebui să sosească în decurs de un minut.",
+      "perks": [
+        "Cronologia ESPR",
+        "Model de parteneriat",
+        "Construcție versus cumpărare"
+      ],
+      "privacy": "Vom folosi adresa dumneavoastră doar pentru a trimite pagina rezumată și a vă contacta despre DPP."
+    },
+    "cta": {
+      "title": "Obțineți <i>o evaluare gratuită</i> acum",
+      "lead": "Fereastra este 2027. Partenerii care se mișcă primii vor avea un avantaj structural. Să construim DPP-ul dumneavoastră împreună.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Evaluarea pregătirii DPP",
+          "body": "Evaluăm catalogul dumneavoastră de produse în raport cu cronologiile ESPR și identificăm categoriile prioritare."
+        },
+        {
+          "step": "2",
+          "title": "Program pilot DPP",
+          "body": "Lansați un pilot DPP ORIGYN activ pe o linie de produse. Rapid, risc scăzut, rezultate tangibile."
+        },
+        {
+          "step": "3",
+          "title": "Acord de parteneriat",
+          "body": "Formalizați relația: acces API, co-dezvoltare, aliniere go-to-market."
+        }
+      ],
+      "button": "Rezervați un apel de evaluare gratuit",
+      "emailPrompt": "Sau trimiteți-ne un e-mail la"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Securizați-vă activele, proprietatea intelectuală\nși identitatea în totalitate on-chain.",

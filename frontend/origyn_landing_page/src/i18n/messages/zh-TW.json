@@ -260,6 +260,212 @@
     "dashboard": "儀表板",
     "copyright": "©2026 版權所有 – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU 數位產品護照"
+    },
+    "hero": {
+      "title": "EU 數位產品護照的\n基礎設施層",
+      "lead": "ORIGYN 將 EU DPP 合規要求從多年工程專案轉變為 plug & play 部署。每份護照防篡改、可追溯且永遠可用。",
+      "chips": [
+        "符合監管要求",
+        "Plug-&-Play",
+        "瑞士總部"
+      ],
+      "badge": "已列於 <a:dppindex>dppindex.eu</a:dppindex> 作為官方 EU DPP 供應商",
+      "cta": "預約免費評估諮詢",
+      "imageAlt": "ORIGYN 數位產品護照在手機和平板電腦上展示電池組相關資訊。"
+    },
+    "regulation": {
+      "title": "EU 永續產品生態設計\n規章 (2024/1781)",
+      "lead": "ORIGYN DPP 包含來源和成分、材料安全資料、維修和回收說明及來源證明，全部可透過 QR 或 NFC 存取。",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR 生效",
+          "body": "Regulation (EU) 2024/1781 已於 2024 年 7 月生效。"
+        },
+        {
+          "year": "2027",
+          "title": "首批 DPP 強制使用",
+          "body": "電池 (2月)、紡織品、鐵和鋼。倒計時開始。"
+        },
+        {
+          "year": "2028",
+          "title": "電子產品與傢具",
+          "body": "耐用性、可回收性和回收內容規則。"
+        },
+        {
+          "year": "2030",
+          "title": "全市場覆蓋",
+          "body": "所有產品類別。進階 DPP 必需。"
+        }
+      ]
+    },
+    "what": {
+      "title": "最先進的\n<s>數位產品護照</s>平台",
+      "lead": "永久儲存在不可變網路上。防篡改、無法偽造且始終可用。",
+      "cards": [
+        {
+          "title": "實體-數位橋樑",
+          "body": "每份護照透過 QR 或 NFC 連結實體產品。掃描後可查看完整資料、影像、文件、材料和來源証明。",
+          "proof": "已列於 <a:dppindex>dppindex.eu</a:dppindex> 作為官方 EU DPP 供應商。"
+        },
+        {
+          "title": "客製化基礎設施",
+          "body": "無單一故障點。選擇瑞士、全球或自有伺服器，ESPR 合規且按設計稽核就緒。",
+          "proof": "與 Siemens、DNV 和 Avery Dennison 共同信任。"
+        },
+        {
+          "title": "大規模 Plug & Play",
+          "body": "ORIGYN 平台連結您現有產品資料，無需構建任何東西。批量發行護照，從首次試點批次至整個目錄。",
+          "proof": "幾百份至數百萬份 DPP，數秒完成。"
+        }
+      ]
+    },
+    "why": {
+      "title": "期限迫在眉睫。\n<s>2027 年 2 月</s>即將到來。",
+      "benefits": [
+        {
+          "title": "數週內部署，而非 18–36 個月",
+          "body": "搶在 2027 年期限前完成。"
+        },
+        {
+          "title": "Plug & Play",
+          "body": "評估、配置並準備於數天內推出，完全自動化。"
+        },
+        {
+          "title": "我們負責維護和升級",
+          "body": "ESPR 綱要演進時，您保持合規。"
+        },
+        {
+          "title": "成本節省更高",
+          "body": "相較競爭對手或自行構建的競爭價位。"
+        }
+      ]
+    },
+    "compare": {
+      "title": "為何選擇 ORIGYN，\n而非自行構建",
+      "buildTitle": "自行構建",
+      "origynTitle": "ORIGYN 平台",
+      "rows": [
+        {
+          "build": "18–36 個月開發時間",
+          "origyn": "數週內部署，而非多年"
+        },
+        {
+          "build": "高成本及資源需求",
+          "origyn": "Plug-&-Play 解決方案，成本節省更高"
+        },
+        {
+          "build": "難以僱用技術人才",
+          "origyn": "久經考驗的平台"
+        },
+        {
+          "build": "須無限期維護",
+          "origyn": "我們負責維護和升級"
+        },
+        {
+          "build": "ESPR 合規性不確定",
+          "origyn": "已列 EU DPP 供應商"
+        },
+        {
+          "build": "稽核人員無法獨立驗證",
+          "origyn": "任何人都可獨立驗證"
+        },
+        {
+          "build": "無生態系統網路效應",
+          "origyn": "成長的合作夥伴生態系統"
+        }
+      ],
+      "buildLabel": "未包含",
+      "origynLabel": "已包含"
+    },
+    "partner": {
+      "title": "ORIGYN 合作夥伴模式",
+      "steps": [
+        {
+          "step": "01",
+          "title": "評估",
+          "bullets": [
+            "將產品目錄對應至相關 ESPR 產品類別和時程。識別資料缺口和優先級 SKU。",
+            "取得您的 ORIGYN DPP 整備程度文件概覽。"
+          ]
+        },
+        {
+          "step": "02",
+          "title": "試點計劃",
+          "bullets": [
+            "一條產品線試點。",
+            "資料模式和來源地圖。",
+            "資料欄位已設定以符合您的 DPP 資料模式。",
+            "ERP 和 API 配置評估。",
+            "成本估計和合作協議。"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "企業級推出",
+          "bullets": [
+            "DPP 範本已定義。",
+            "資料映射已完成。",
+            "使用 ORIGYN 平台建立 DPP。",
+            "實體產品已標記 (QR / NFC)。",
+            "DPP 於組織層級上線，可掃描、可驗證且永遠可用。"
+          ]
+        }
+      ],
+      "imageAlt": "在手機上顯示的即時 ORIGYN 數位產品護照，展示產品資訊、影像及合規資料。",
+      "getTitle": "作為 ORIGYN 合作夥伴，您將獲得",
+      "get": [
+        "API + 平台存取",
+        "專門整合團隊",
+        "聯合上市支援"
+      ],
+      "cta": "立即取得免費評估"
+    },
+    "download": {
+      "title": "將全景視圖\n<s>帶著走。</s>",
+      "lead": "ORIGYN DPP 單頁資料：監管時程表、平台、合作夥伴模式和比較，全部在您可轉發給團隊的單一頁面上。",
+      "label": "工作電子郵件",
+      "placeholder": "you@company.com",
+      "submit": "取得單頁資料",
+      "sending": "傳送中…",
+      "invalid": "請輸入有效的電子郵件地址",
+      "error": "發生了些問題。請重試。",
+      "sentTitle": "查收郵件",
+      "sentBody": "我們已將單頁資料傳送至您的地址。應該在一分鐘內送達。",
+      "perks": [
+        "ESPR 時程表",
+        "合作夥伴模式",
+        "構建 vs. 購買"
+      ],
+      "privacy": "我們只會使用您的地址傳送單頁資料及跟進 DPP 相關訊息。"
+    },
+    "cta": {
+      "title": "立即取得<i>免費評估</i>",
+      "lead": "時間視窗是 2027 年。搶先合作夥伴將具有結構性優勢。讓我們一起打造您的 DPP。",
+      "steps": [
+        {
+          "step": "1",
+          "title": "DPP 整備程度評估",
+          "body": "我們評估您的產品目錄是否符合 ESPR 時程表，並識別優先類別。"
+        },
+        {
+          "step": "2",
+          "title": "DPP 試點計劃",
+          "body": "在一條產品線上啟動即時 ORIGYN DPP 試點。快速、低風險、有形成果。"
+        },
+        {
+          "step": "3",
+          "title": "合作協議",
+          "body": "正式確立關係：API 存取、共同開發、上市對齊。"
+        }
+      ],
+      "button": "預約免費評估諮詢",
+      "emailPrompt": "或傳送郵件至"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "將您的資產、智慧財產\n與身分完整上鏈，確保萬無一失。",

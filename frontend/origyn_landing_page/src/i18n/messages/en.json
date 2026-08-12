@@ -68,6 +68,9 @@
     "copyright": "©2026 All rights reserved - origyn"
   },
   "dpp": {
+    "seo": {
+      "title": "EU Digital Product Passports"
+    },
     "hero": {
       "title": "The infrastructure layer of\nEU <i>Digital Product Passports</i>",
       "lead": "ORIGYN turns EU DPP compliance from a multi-year engineering project into a plug & play rollout. Every passport is tamper-proof, traceable and always available.",

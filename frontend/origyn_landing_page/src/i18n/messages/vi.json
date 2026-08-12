@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Bảo lưu mọi quyền – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Hộ chiếu Sản phẩm Kỹ thuật số EU"
+    },
+    "hero": {
+      "title": "Lớp hạ tầng của\nEU <i>Hộ chiếu Sản phẩm Kỹ thuật số</i>",
+      "lead": "ORIGYN biến tuân thủ DPP EU từ dự án kỹ thuật kéo dài nhiều năm thành triển khai plug & play. Mỗi hộ chiếu chống giả mạo, có thể truy vết và luôn sẵn sàng.",
+      "chips": [
+        "Tuân thủ Quy định",
+        "Plug-&-Play",
+        "Có trụ sở tại Thụy Sĩ"
+      ],
+      "badge": "Được liệt kê trên <a:dppindex>dppindex.eu</a:dppindex> là Nhà cung cấp DPP chính thức EU",
+      "cta": "Đặt lịch gọi đánh giá miễn phí",
+      "imageAlt": "Một hộ chiếu sản phẩm kỹ thuật số ORIGYN cho một gói pin, mở trên điện thoại thông minh và máy tính bảng."
+    },
+    "regulation": {
+      "title": "Quy định Thiết kế Bền vững\nCủa EU (2024/1781)",
+      "lead": "Một DPP từ ORIGYN mang nguồn gốc & thành phần, dữ liệu an toàn vật liệu, hướng dẫn sửa chữa & tái chế và bằng chứng nguồn gốc, tất cả đều có thể truy cập qua QR hoặc NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR có hiệu lực",
+          "body": "Regulation (EU) 2024/1781 có hiệu lực vào tháng 7 năm 2024."
+        },
+        {
+          "year": "2027",
+          "title": "DPP đầu tiên bắt buộc",
+          "body": "Pin (tháng 2), dệt may, sắt & thép. Đồng hồ bắt đầu."
+        },
+        {
+          "year": "2028",
+          "title": "Điện tử & nội thất",
+          "body": "Quy tắc độ bền, khả năng tái chế và nội dung tái chế."
+        },
+        {
+          "year": "2030",
+          "title": "Phạm vi thị trường đầy đủ",
+          "body": "Tất cả các loại sản phẩm. Yêu cầu DPP nâng cao."
+        }
+      ]
+    },
+    "what": {
+      "title": "Nền tảng tiên tiến nhất cho\n<s>hộ chiếu sản phẩm kỹ thuật số</s>",
+      "lead": "Được lưu trữ vĩnh viễn trên một mạng bất biến. Chống giả mạo, không thể làm giả và luôn có thể truy cập.",
+      "cards": [
+        {
+          "title": "Cầu nối Vật lý–Kỹ thuật số",
+          "body": "Mỗi hộ chiếu liên kết tới một sản phẩm vật lý qua QR hoặc NFC. Dữ liệu đầy đủ, hình ảnh, tài liệu, vật liệu và nguồn gốc được tiết lộ khi quét.",
+          "proof": "Được liệt kê trên <a:dppindex>dppindex.eu</a:dppindex> là Nhà cung cấp DPP chính thức EU."
+        },
+        {
+          "title": "Hạ tầng Tùy chỉnh",
+          "body": "Không có điểm lỗi duy nhất. Chọn máy chủ Thụy Sĩ, toàn cầu hoặc của riêng bạn, tuân thủ ESPR và sẵn sàng kiểm toán theo thiết kế.",
+          "proof": "Được tin cậy cùng Siemens, DNV và Avery Dennison."
+        },
+        {
+          "title": "Plug & Play ở Quy mô",
+          "body": "Nền tảng ORIGYN kết nối với dữ liệu sản phẩm hiện có của bạn, vì vậy không có gì để xây dựng. Phát hành hộ chiếu hàng loạt, từ một lô thí điểm đầu tiên đến toàn bộ danh mục của bạn.",
+          "proof": "Từ vài trăm đến hàng triệu DPP trong vài giây."
+        }
+      ]
+    },
+    "why": {
+      "title": "Thời hạn đã đến.\n<s>Tháng 2 năm 2027</s> đang đến gần.",
+      "benefits": [
+        {
+          "title": "Triển khai trong vài tuần, không phải 18–36 tháng",
+          "body": "Đáp ứng thời hạn 2027 với thời gian dư địa."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Đánh giá, cấu hình và sẵn sàng triển khai trong vài ngày, hoàn toàn tự động."
+        },
+        {
+          "title": "Chúng tôi duy trì & nâng cấp nó",
+          "body": "Bạn giữ tuân thủ khi lược đồ ESPR phát triển."
+        },
+        {
+          "title": "Tiết kiệm cao hơn",
+          "body": "Điểm giá cạnh tranh so với đối thủ hoặc xây dựng của riêng bạn."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Tại sao ORIGYN,\nkhông phải tự xây dựng",
+      "buildTitle": "Xây dựng của Riêng bạn",
+      "origynTitle": "Nền tảng ORIGYN",
+      "rows": [
+        {
+          "build": "Thời gian phát triển 18–36 tháng",
+          "origyn": "Triển khai trong vài tuần, không phải năm"
+        },
+        {
+          "build": "Chi phí cao và tài nguyên dồi dào",
+          "origyn": "Giải pháp Plug-&-Play, tiết kiệm cao hơn"
+        },
+        {
+          "build": "Chuyên môn kỹ thuật khó tuyển dụng",
+          "origyn": "Nền tảng được kiểm chứng thực tế"
+        },
+        {
+          "build": "Phải duy trì vô thời hạn",
+          "origyn": "Chúng tôi duy trì và nâng cấp nó"
+        },
+        {
+          "build": "Tuân thủ ESPR không chắc chắn",
+          "origyn": "Nhà cung cấp DPP EU được liệt kê"
+        },
+        {
+          "build": "Kiểm toán viên không thể xác minh độc lập",
+          "origyn": "Bất kỳ ai cũng có thể xác minh độc lập"
+        },
+        {
+          "build": "Không có tác dụng mạng hệ sinh thái",
+          "origyn": "Hệ sinh thái đối tác đang phát triển"
+        }
+      ],
+      "buildLabel": "Không bao gồm",
+      "origynLabel": "Bao gồm"
+    },
+    "partner": {
+      "title": "Mô hình đối tác ORIGYN",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Đánh giá",
+          "bullets": [
+            "Liên kết danh mục sản phẩm của bạn với các danh mục sản phẩm ESPR có liên quan và lộ trình thời gian. Xác định khoảng trống dữ liệu và SKU ưu tiên.",
+            "Nhận tổng quan Tài liệu Sẵn sàng DPP ORIGYN của bạn."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Chương trình Thí điểm",
+          "bullets": [
+            "Một dòng sản phẩm thí điểm.",
+            "Bản đồ các mô hình và nguồn dữ liệu.",
+            "Các trường dữ liệu được cấu hình để phù hợp với mô hình dữ liệu DPP của bạn.",
+            "Đánh giá cấu hình ERP và API.",
+            "Ước tính chi phí và thỏa thuận đối tác."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Triển khai Doanh nghiệp",
+          "bullets": [
+            "Mẫu DPP được xác định.",
+            "Liên kết dữ liệu hoàn tất.",
+            "DPP được tạo với Nền tảng ORIGYN.",
+            "Các sản phẩm vật lý được gắn thẻ (QR / NFC).",
+            "DPP hoạt động ở cấp độ tổ chức, có thể quét, xác minh và luôn sẵn sàng."
+          ]
+        }
+      ],
+      "imageAlt": "Một hộ chiếu sản phẩm kỹ thuật số ORIGYN hoạt động trên điện thoại thông minh, hiển thị thông tin sản phẩm, hình ảnh và dữ liệu tuân thủ.",
+      "getTitle": "Bạn nhận được gì với tư cách là đối tác ORIGYN",
+      "get": [
+        "Truy cập API + nền tảng",
+        "Đội tích hợp chuyên dụng",
+        "Hỗ trợ go-to-market chung"
+      ],
+      "cta": "Nhận đánh giá miễn phí ngay bây giờ"
+    },
+    "download": {
+      "title": "Mang theo toàn bộ nội dung\n<s>cùng bạn.</s>",
+      "lead": "Tài liệu tóm lược DPP ORIGYN: lộ trình quy định, nền tảng, mô hình đối tác và so sánh, tất cả trên một trang bạn có thể chuyển tiếp cho nhóm.",
+      "label": "Email công việc",
+      "placeholder": "you@company.com",
+      "submit": "Nhận tài liệu tóm lược",
+      "sending": "Đang gửi…",
+      "invalid": "Vui lòng nhập một địa chỉ email hợp lệ",
+      "error": "Đã xảy ra sự cố. Vui lòng thử lại.",
+      "sentTitle": "Kiểm tra hộp thư của bạn",
+      "sentBody": "Chúng tôi đã gửi tài liệu tóm lược đến địa chỉ của bạn. Nó sẽ đến trong vòng một phút.",
+      "perks": [
+        "Lộ trình ESPR",
+        "Mô hình đối tác",
+        "Xây dựng so với mua"
+      ],
+      "privacy": "Chúng tôi sẽ chỉ sử dụng địa chỉ của bạn để gửi tài liệu tóm lược và theo dõi về DPP."
+    },
+    "cta": {
+      "title": "Nhận <i>một đánh giá miễn phí</i> ngay bây giờ",
+      "lead": "Cửa sổ là 2027. Các đối tác đi trước sẽ có lợi thế cấu trúc. Hãy cùng nhau xây dựng DPP của bạn.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Đánh giá sẵn sàng DPP",
+          "body": "Chúng tôi đánh giá danh mục sản phẩm của bạn dựa trên lộ trình thời gian ESPR và xác định các danh mục ưu tiên."
+        },
+        {
+          "step": "2",
+          "title": "Chương trình thí điểm DPP",
+          "body": "Khởi chạy một thí điểm DPP ORIGYN trực tiếp trên một dòng sản phẩm. Nhanh chóng, rủi ro thấp, kết quả có tiếp."
+        },
+        {
+          "step": "3",
+          "title": "Thỏa thuận đối tác",
+          "body": "Chính thức hóa mối quan hệ: truy cập API, đồng phát triển, căn chỉnh go-to-market."
+        }
+      ],
+      "button": "Đặt lịch gọi đánh giá miễn phí",
+      "emailPrompt": "Hoặc gửi email cho chúng tôi tại"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Bảo mật tài sản, sở hữu trí tuệ\nvà danh tính của Quý vị hoàn toàn trên chuỗi.",

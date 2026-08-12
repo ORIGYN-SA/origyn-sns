@@ -260,6 +260,212 @@
     "dashboard": "DASHIBODI",
     "copyright": "©2026 Haki zote zimehifadhiwa – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Pasipoti za Bidhaa za Kidijitali za EU"
+    },
+    "hero": {
+      "title": "Tabaka la miundombinu la\nEU <i>Pasipoti za Bidhaa za Kidijitali</i>",
+      "lead": "ORIGYN inabadilisha kulingana na EU DPP kutoka mradi wa uhandisi wa miaka mingi kuwa uongezaji wa plug & play. Kila pasipoti haipatikani kuchanganywa, ina ufuatiliaji kamili na inapatikana kila wakati.",
+      "chips": [
+        "Inayolingana na Kanuni",
+        "Plug & Play",
+        "Yenye Msingi wa Uswisi"
+      ],
+      "badge": "Iliyoorodheshwa kwenye <a:dppindex>dppindex.eu</a:dppindex> kama Mtoa Huduma wa DPP wa EU rasmi",
+      "cta": "Kamatia simu ya tathmini ya bure",
+      "imageAlt": "Pasipoti ya bidhaa ya kidijitali ya ORIGYN kwa pakiti ya betri, iliyofunguliwa kwenye simu na taabeli."
+    },
+    "regulation": {
+      "title": "Kanuni ya Ecodesign ya EU ya Bidhaa\nEndelevu (2024/1781)",
+      "lead": "Pasipoti ya DPP ya ORIGYN ina asili na muundo, data ya usalama wa nyenzo, maagizo ya ukarabati na ufanyaji upya, na uthibitisho wa asili, yote ikiwa inapatikana kwa njia ya QR au NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR ilipoanziwa",
+          "body": "Kanuni (EU) 2024/1781 ilianziwa kwa nguvu mnamo Julai 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Pasipoti za DPP za Kwanza za Lazima",
+          "body": "Betri (Februari), mafungu, chuma na chuma cha bidhaa. Muda unaanza."
+        },
+        {
+          "year": "2028",
+          "title": "Elektroniki na Samani",
+          "body": "Kanuni za kudumu, ufanyaji upya, na maudhui ya ufanyaji upya."
+        },
+        {
+          "year": "2030",
+          "title": "Ajira Kamili ya Soko",
+          "body": "Kategoria zote za bidhaa. DPP iliyoboreshwa inahitajika."
+        }
+      ]
+    },
+    "what": {
+      "title": "Jukwaa la juu zaidi kwa\n<s>pasipoti za bidhaa za kidijitali</s>",
+      "lead": "Inahifadhiwa kwa muda wa kudumu kwenye mtandao isiyobadilika. Isiyoweza kudanganyiwa, haiwezi kuigiliwa, na inapatikana daima.",
+      "cards": [
+        {
+          "title": "Kiungo cha Kimwili–Kidijitali",
+          "body": "Kila pasipoti inawasiliana na bidhaa halisi kwa njia ya QR au NFC. Data kamili, picha, nyaraka, nyenzo na asili zinaonyeshwa wakati wa kupiga.",
+          "proof": "Iliyoorodheshwa kwenye <a:dppindex>dppindex.eu</a:dppindex> kama Mtoa Huduma wa DPP wa EU rasmi."
+        },
+        {
+          "title": "Miundombinu Iliyobuniwa",
+          "body": "Hakuna nukta moja ya kushindwa. Chagua seva za Uswisi, za kimataifa au za kufa yako, zenye ulingani wa ESPR na tayari kwa ukaguzi.",
+          "proof": "Inaaminiwa pamoja na Siemens, DNV na Avery Dennison."
+        },
+        {
+          "title": "Plug & Play kwa Kiwango",
+          "body": "Jukwaa la ORIGYN linaunganishwa na data ya bidhaa zako zilizopo, kwa hiyo hakuna cha kujenga. Toa pasipoti kwa wingi, kutoka kwa kundi la kwanza hadi katalogu yako yote.",
+          "proof": "Kutoka mamia machache hadi milioni za DPP kwa sekunde tu."
+        }
+      ]
+    },
+    "why": {
+      "title": "Muda wa kumalizia ni sasa.\n<s>Februari 2027</s> inakuja.",
+      "benefits": [
+        {
+          "title": "Anzisha kwa wiki, si miezi 18–36",
+          "body": "Kamilisha tarehe ya 2027 na muda unaobaki."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Tathmini, sanidi na kuwa tayari kwa kuanzisha kwa siku, kiotomatiki kabisa."
+        },
+        {
+          "title": "Tunasimamia na tunaboreshea",
+          "body": "Kubaki kulingana na ESPR inavyobadilika."
+        },
+        {
+          "title": "Akiba zaidi",
+          "body": "Thamani ya bei inayoweza kulingana na wasanidi au kujenga yako."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Kwa nini ORIGYN,\nsi kujenga yako",
+      "buildTitle": "Jenga Yako",
+      "origynTitle": "Jukwaa la ORIGYN",
+      "rows": [
+        {
+          "build": "Miezi 18–36 ya muda wa ukuzaji",
+          "origyn": "Zaliaza kwa wiki, si miaka"
+        },
+        {
+          "build": "Gharama na rasilimali kubwa",
+          "origyn": "Suluhisho la Plug & Play, akiba zaidi"
+        },
+        {
+          "build": "Utaalamu wa teknolojia mgumu kumkamatia",
+          "origyn": "Jukwaa limetibiwa kwa uzoefu"
+        },
+        {
+          "build": "Lazima kusimamia kwa muda wa kudumu",
+          "origyn": "Tunasimamia na tunaboreshea"
+        },
+        {
+          "build": "Ulingani wa ESPR haujakamatia",
+          "origyn": "Mtoa huduma wa DPP wa EU aliyeorodheshwa"
+        },
+        {
+          "build": "Wakaguzi hauwezi kutathmini wazimazimaini",
+          "origyn": "Mtu yeyote anaweza kutathmini wazimazimaini"
+        },
+        {
+          "build": "Hakuna athari ya mtandao wa mfumo wa ikolojia",
+          "origyn": "Mfumo wa ikolojia wa washirika unavyokua"
+        }
+      ],
+      "buildLabel": "Haijajumuishwa",
+      "origynLabel": "Jujumuishwa"
+    },
+    "partner": {
+      "title": "Mfano wa Washirika wa ORIGYN",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Tathmini",
+          "bullets": [
+            "Chora katalogu yako ya bidhaa kwa kategoria za bidhaa za ESPR husika na ratiba. Tambua njia za data na SKU za kawaida.",
+            "Pata muhtasari wa Nyaraka ya Utayari wa DPP wa ORIGYN."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Programu ya Matumizi",
+          "bullets": [
+            "Mtumizi mmoja wa mstari wa bidhaa.",
+            "Ramani ya mifumo ya data na vyanzo.",
+            "Sehemu za data zinasanidiwa kulingana na mfumo wako wa data wa DPP.",
+            "Tathmini ya sanidi ya ERP na API.",
+            "Tathmini ya gharama na makubaliano ya ushirika."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Kuanzisha Biashara",
+          "bullets": [
+            "Kiolezo cha DPP kinabainishwa.",
+            "Ramani ya data imekamilika.",
+            "DPP zinatengenezwa kwa Jukwaa la ORIGYN.",
+            "Bidhaa halisi zimewekewa lebo (QR / NFC).",
+            "DPP zinaziniwa kwa kiwango cha shirika, kinaweza kupigwa, kinaweza kutathmini, na inapatikana daima."
+          ]
+        }
+      ],
+      "imageAlt": "Pasipoti ya bidhaa ya kidijitali ya ORIGYN iliyobuka kwenye simu, ikionyesha maelezo ya bidhaa, picha, na data ya ulingani.",
+      "getTitle": "Kile unachopata kama washirika wa ORIGYN",
+      "get": [
+        "Ufikiaji wa API + jukwaa",
+        "Timu ya muunganisho inayotokusangilia",
+        "Msaada wa pamoja wa kwenda-soko"
+      ],
+      "cta": "Pata tathmini ya bure sasa"
+    },
+    "download": {
+      "title": "Chukua picha nzima\n<s>nawe.</s>",
+      "lead": "Karatasi moja ya ORIGYN DPP: ratiba ya kanuni, jukwaa, mfano wa washirika na mulinganisho, kwenye karatasi moja unaweza kutuma kwa timu yako.",
+      "label": "Barua pepe ya kazi",
+      "placeholder": "you@company.com",
+      "submit": "Pata karatasi moja",
+      "sending": "Inatuma…",
+      "invalid": "Tafadhali ingiza anwani sahihi ya barua pepe",
+      "error": "Kitu kimetokea. Tafadhali jaribu tena.",
+      "sentTitle": "Angalia barua pepe yako",
+      "sentBody": "Tumetuma karatasi moja kwa anwani yako. Inapaswa kufika ndani ya dakika moja.",
+      "perks": [
+        "Ratiba ya ESPR",
+        "Mfano wa washirika",
+        "Kujenga dhidi ya Kununua"
+      ],
+      "privacy": "Tutatumia anwani yako tu kumtuma karatasi moja na kufuatia DPP."
+    },
+    "cta": {
+      "title": "Pata <i>tathmini ya bure</i> sasa",
+      "lead": "Dirisha ni 2027. Washirika ambao wanakuja kwanza watakuwa na faida ya muundo. Tukajenga DPP yako pamoja.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Tathmini ya utayari wa DPP",
+          "body": "Tunakamatia katalogu yako ya bidhaa dhidi ya ratiba ya ESPR na kubaini kategoria za kawaida."
+        },
+        {
+          "step": "2",
+          "title": "Programu ya matumizi ya DPP",
+          "body": "Zaliaza matumizi ya DPP ya ORIGYN kwenye mstari mmoja wa bidhaa. Haraka, hatari chache, matokeo yanayoonekana."
+        },
+        {
+          "step": "3",
+          "title": "Makubaliano ya ushirika",
+          "body": "Rasmiisha uhusiano: ufikiaji wa API, ukuzaji wa pamoja, ulinganifu wa kwenda-soko."
+        }
+      ],
+      "button": "Kamatia simu ya tathmini ya bure",
+      "emailPrompt": "Au tutupigie barua pepe kwa"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Linda mali zako, mali ya kiakili,\nna utambulisho wako kikamilifu kwenye mnyororo.",
