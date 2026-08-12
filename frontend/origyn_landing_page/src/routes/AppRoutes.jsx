@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import useScrollToTopOnNavigate from "@/hooks/useScrollToTopOnNavigate";
+import { usePageTitle } from "@/hooks/usePageTitle";
 import LocaleGate, { LocaleRedirect } from "@/i18n/LocaleGate";
 import HomePage from "@/pages/HomePage";
 import {
@@ -14,6 +15,7 @@ import {
 
 const AppRoutes = () => {
   useScrollToTopOnNavigate();
+  usePageTitle();
 
   return (
     <Routes>

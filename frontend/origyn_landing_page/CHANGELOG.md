@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.1] - 2026-08-12
+
+#### Added
+
+- Add per-page SEO tags and a generated Open Graph card, so sharing the DPP page shows a title, description and image
+
 ### [1.5.0] - 2026-08-04
 
 #### Added
