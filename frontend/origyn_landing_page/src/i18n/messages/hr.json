@@ -260,6 +260,212 @@
     "dashboard": "NADZORNA PLOČA",
     "copyright": "©2026 Sva prava pridržana – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "EU Digitalni putovnice proizvoda"
+    },
+    "hero": {
+      "title": "Infrastrukturni sloj\nEU <i>digitalnih putovnica proizvoda</i>",
+      "lead": "ORIGYN pretvara EU DPP usklađenost iz projekta od nekoliko godina u plug & play implementaciju. Svaka putovnica je otporna na manipulaciju, prosljediva i uvijek dostupna.",
+      "chips": [
+        "Spreman za regulaciju",
+        "Plug-&-Play",
+        "Švicaraska lokacija"
+      ],
+      "badge": "Naveden na <a:dppindex>dppindex.eu</a:dppindex> kao službeni EU DPP davatelja",
+      "cta": "Rezervirajte besplatan ocjenjivački poziv",
+      "imageAlt": "ORIGYN digitalna putovnica proizvoda za bateriju, otvorena na telefonu i tabletu."
+    },
+    "regulation": {
+      "title": "EU Ekodesign za održive\nproizvode Uredba (2024/1781)",
+      "lead": "ORIGYN DPP sadrži podrijetlo i složenje, podatke o sigurnosti materijala, upute za popravku i reciklažu te dokaz porijekla, sve dostupno putem QR ili NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR na snazi",
+          "body": "Uredba (EU) 2024/1781 stupila je na snagu u srpnju 2024."
+        },
+        {
+          "year": "2027",
+          "title": "Prve DPP obavezne",
+          "body": "Baterije (veljača), tekstil, željezo i čelik. Brojač počinje."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronika i namještaj",
+          "body": "Trajnost, mogućnost recikliranja i pravila o recikliranom sadržaju."
+        },
+        {
+          "year": "2030",
+          "title": "Potpuno tržišno pokrivanje",
+          "body": "Sve kategorije proizvoda. Naprednjena DPP obavezna."
+        }
+      ]
+    },
+    "what": {
+      "title": "Naprednije platforme za\n<s>digitalne putovnice proizvoda</s>",
+      "lead": "Trajno pohranjena na nepromjenjivoj mreži. Otporna na manipulaciju, nepogrešiva i uvijek dostupna.",
+      "cards": [
+        {
+          "title": "Fizički–digitalni most",
+          "body": "Svaka putovnica povezuje se s fizičkim proizvodom putem QR ili NFC. Potpuni podaci, slike, dokumenti, materijali i porijeklo otkrivaju se na skeniranju.",
+          "proof": "Naveden na <a:dppindex>dppindex.eu</a:dppindex> kao službeni EU DPP davatelja."
+        },
+        {
+          "title": "Prilagođena infrastruktura",
+          "body": "Nema jedinstvene točke kvara. Odaberite švicarsku, globalnu ili vlastite poslužitelje, ESPR-kompatibilne i spremi za reviziju po dizajnu.",
+          "proof": "Pouzdani s Siemens, DNV i Avery Dennison."
+        },
+        {
+          "title": "Plug & Play skalabilno",
+          "body": "ORIGYN platforma se uklanja u Vaše postojeće podatke proizvoda, pa nema ništa za izgradnju. Izdajte putovnice skupno, od prve pilot grupe do cijelog kataloga.",
+          "proof": "Od nekoliko stotina do milijuna DPP-a u sekundama."
+        }
+      ]
+    },
+    "why": {
+      "title": "Rok je sada.\n<s>Veljača 2027</s> se bliži.",
+      "benefits": [
+        {
+          "title": "Implementacija u tjednima, ne 18–36 mjeseci",
+          "body": "Ispunite rok od 2027. s vremenom za rezervu."
+        },
+        {
+          "title": "Plug & Play",
+          "body": "Procijenite, konfigurujte i budite spremni za implementaciju u danima, potpuno automatizirano."
+        },
+        {
+          "title": "Mi održavamo i nadograđujemo",
+          "body": "Ostajete usklađeni s ESPR shemama koje se razvijaju."
+        },
+        {
+          "title": "Viša ušteda",
+          "body": "Konkurentna cijena nasuprot konkurentima ili vlastita izgradnja."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Zašto ORIGYN,\nne graditi vlastito",
+      "buildTitle": "Graditi vlastito",
+      "origynTitle": "ORIGYN platforma",
+      "rows": [
+        {
+          "build": "18–36 mjeseci vremena razvoja",
+          "origyn": "Implementacija u tjednima, ne godinama"
+        },
+        {
+          "build": "Visoki troškovi i resursi",
+          "origyn": "Plug-&-Play rješenje, viša ušteda"
+        },
+        {
+          "build": "Tehnička vještina teško za zaposliti",
+          "origyn": "Isprobana platforma"
+        },
+        {
+          "build": "Moraju održavati zauvijek",
+          "origyn": "Mi održavamo i nadograđujemo"
+        },
+        {
+          "build": "ESPR usklađenost neizvjesna",
+          "origyn": "Naveden EU DPP davatelja"
+        },
+        {
+          "build": "Revizori ne mogu neovisno verificirati",
+          "origyn": "Bilo tko može neovisno verificirati"
+        },
+        {
+          "build": "Nema učinka mrežnog ekosustava",
+          "origyn": "Rastući partnerski ekosustav"
+        }
+      ],
+      "buildLabel": "Nije uključeno",
+      "origynLabel": "Uključeno"
+    },
+    "partner": {
+      "title": "ORIGYN model partnerstva",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Procjena",
+          "bullets": [
+            "Mapirajte svoj katalog proizvoda na relevantne ESPR kategorije proizvoda i vremenske roce. Identificirajte nedostatke podataka i prioritete SKU.",
+            "Dobijte pregled Vašeg ORIGYN dokumenta o spremnosti za DPP."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilot program",
+          "bullets": [
+            "Pilot linije jednog proizvoda.",
+            "Karta modela podataka i izvora.",
+            "Polja podataka konfigurirana tako da se podudaraju s Vašim DPP modelom podataka.",
+            "Procjena konfiguracije ERP i API.",
+            "Procjena troškova i ugovor o partnerstvu."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Široka primjena",
+          "bullets": [
+            "Šablon DPP je definiran.",
+            "Mapiranje podataka je dovršeno.",
+            "DPP-ovi se kreiraju s ORIGYN platformom.",
+            "Fizički proizvodi su označeni (QR / NFC).",
+            "DPP-ovi su uživo na razini organizacije, skenabilni, verificirani i uvijek dostupni."
+          ]
+        }
+      ],
+      "imageAlt": "Direktna ORIGYN digitalna putovnica proizvoda na telefonu, prikazujući informacije o proizvodu, slike i podatke o usklađenosti.",
+      "getTitle": "Što dobijate kao ORIGYN partner",
+      "get": [
+        "API + pristup platformi",
+        "Namjenski integracijski tim",
+        "Zajednička podrška za ulazak na tržište"
+      ],
+      "cta": "Dobijte besplatnu procjenu sada"
+    },
+    "download": {
+      "title": "Uzmite cijelu sliku\n<s>sa sobom.</s>",
+      "lead": "ORIGYN DPP jednostraničnik: vremenski plan regulacije, platforma, model partnerstva i usporedba, na jednoj stranici koju možete proslijediti svom timu.",
+      "label": "Poslovni e-mail",
+      "placeholder": "vi@tvrtka.com",
+      "submit": "Dobijte jednostraničnik",
+      "sending": "Slanje…",
+      "invalid": "Unesite valjanu e-mail adresu",
+      "error": "Nešto je pošlo po zlu. Pokušajte ponovno.",
+      "sentTitle": "Provjerite ulaznu poštu",
+      "sentBody": "Jednostraničnik smo poslali Vašoj adresi. Trebao bi stignu kroz minutu.",
+      "perks": [
+        "ESPR vremenski plan",
+        "Model partnerstva",
+        "Graditi vs. kupiti"
+      ],
+      "privacy": "Vašu adresu ćemo koristiti samo za slanje jednostraničnika i praćenje DPP."
+    },
+    "cta": {
+      "title": "Dobijte <i>besplatnu procjenu</i> sada",
+      "lead": "Prozor je 2027. Partneri koji se prvi krenu imati strukturnu prednost. Izgradimo Vašu DPP zajedno.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Procjena DPP spremnosti",
+          "body": "Procijenimo Vaš katalog proizvoda u odnosu na ESPR vremenske roce i identificiramo prioritetne kategorije."
+        },
+        {
+          "step": "2",
+          "title": "Pilot DPP program",
+          "body": "Pokrenite pilot ORIGYN DPP uživo na jednoj liniji proizvoda. Brzo, nisko rizika, opipljivi rezultati."
+        },
+        {
+          "step": "3",
+          "title": "Ugovor o partnerstvu",
+          "body": "Formalizujte odnos: API pristup, zajednički razvoj, usklađenost ulaska na tržište."
+        }
+      ],
+      "button": "Rezervirajte besplatni poziv procjene",
+      "emailPrompt": "Ili nam pošaljite e-mail"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Zaštitite svoju imovinu, intelektualno vlasništvo\ni identitet potpuno on-chain.",

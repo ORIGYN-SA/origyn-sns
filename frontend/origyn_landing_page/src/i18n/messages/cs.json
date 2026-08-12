@@ -260,6 +260,212 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Všechna práva vyhrazena – origyn"
   },
+  "dpp": {
+    "seo": {
+      "title": "Digitální pasporty produktů EU"
+    },
+    "hero": {
+      "title": "Infrastrukturní vrstva\nEU <i>Digitálních pasportů produktů</i>",
+      "lead": "ORIGYN mění soulad s nařízením EU DPP z víceletého inženýrského projektu na plug & play nasazení. Každý pas je odolný vůči manipulaci, sledovatelný a vždy dostupný.",
+      "chips": [
+        "Připraven k regulaci",
+        "Plug & play",
+        "Sídlem ve Švýcarsku"
+      ],
+      "badge": "Zapsáno na <a:dppindex>dppindex.eu</a:dppindex> jako oficiální poskytovatel DPP EU",
+      "cta": "Zarezervovat si bezplatné posouzení",
+      "imageAlt": "Digitální pas produktu ORIGYN pro baterii, otevřený na telefonu a tabletu."
+    },
+    "regulation": {
+      "title": "Nařízení o ecodesigu EU\npro trvanlivé produkty (2024/1781)",
+      "lead": "Digitální pas ORIGYN DPP obsahuje údaje o původu a složení, bezpečnost materiálů, pokyny pro opravy a recyklaci a důkaz provenience, dostupné přes QR nebo NFC.",
+      "milestones": [
+        {
+          "year": "2024",
+          "title": "ESPR v účinnosti",
+          "body": "Nařízení (EU) 2024/1781 vstoupilo v platnost v červenci 2024."
+        },
+        {
+          "year": "2027",
+          "title": "První DPP povinné",
+          "body": "Baterie (únor), textilie, železo a ocel. Počítá se čas."
+        },
+        {
+          "year": "2028",
+          "title": "Elektronika a nábytek",
+          "body": "Pravidla pro trvanlivost, recyklabilitu a obsah recyklovaného materiálu."
+        },
+        {
+          "year": "2030",
+          "title": "Plné pokrytí trhu",
+          "body": "Všechny kategorie produktů. Vyžadován pokročilý DPP."
+        }
+      ]
+    },
+    "what": {
+      "title": "Nejpokročilejší platforma pro\n<s>Digitální pasporty produktů</s>",
+      "lead": "Ukládáno trvale v neměnné síti. Odolné vůči manipulaci, nefalšovatelné a vždy dostupné.",
+      "cards": [
+        {
+          "title": "Fyzicko-digitální most",
+          "body": "Každý pas se propojuje s fyzickým produktem přes QR nebo NFC. Kompletní data, obrázky, dokumenty, materiály a provenience se odhalí při skenování.",
+          "proof": "Zapsáno na <a:dppindex>dppindex.eu</a:dppindex> jako oficiální poskytovatel DPP EU."
+        },
+        {
+          "title": "Přizpůsobená infrastruktura",
+          "body": "Žádný jediný bod selhání. Vyberte si švýcarské, globální nebo vlastní servery, ESPR-kompatibilní a auditorsky připravené již od návrhu.",
+          "proof": "Důvěřeno po boku společností Siemens, DNV a Avery Dennison."
+        },
+        {
+          "title": "Plug & play v měřítku",
+          "body": "Platforma ORIGYN se zapojuje do vašich stávajících údajů o produktech, takže není co stavět. Vydávejte pasy v hromadném režimu, od prvního pilotního balíku až do celého katalogu.",
+          "proof": "Od několika set až po miliony DPP během sekund."
+        }
+      ]
+    },
+    "why": {
+      "title": "Deadline je teď.\n<s>Únor 2027</s> se blíží.",
+      "benefits": [
+        {
+          "title": "Nasaďte do týdnů, ne 18–36 měsíců",
+          "body": "Splňte deadline roku 2027 s časem na zbytek."
+        },
+        {
+          "title": "Plug & play",
+          "body": "Posouzení, konfigurace a připravenost k nasazení během dní, plně automatizováno."
+        },
+        {
+          "title": "My to udržujeme a upgradujeme",
+          "body": "Zůstanete v souladu, jak se budou vyvíjet schémata ESPR."
+        },
+        {
+          "title": "Vyšší úspory",
+          "body": "Konkurenční cena versus konkurence nebo vlastní vývoj."
+        }
+      ]
+    },
+    "compare": {
+      "title": "Proč ORIGYN,\na ne vlastní řešení",
+      "buildTitle": "Vlastní řešení",
+      "origynTitle": "Platforma ORIGYN",
+      "rows": [
+        {
+          "build": "18–36 měsíců vývoje",
+          "origyn": "Nasazení do týdnů, ne let"
+        },
+        {
+          "build": "Vysoké náklady a zdroje",
+          "origyn": "Plug & play řešení, vyšší úspory"
+        },
+        {
+          "build": "Technické znalosti se těžko sehánějí",
+          "origyn": "Ověřená platforma"
+        },
+        {
+          "build": "Musíte udržovat neomezeně",
+          "origyn": "My to udržujeme a upgradujeme"
+        },
+        {
+          "build": "Soulad ESPR nejistý",
+          "origyn": "Uvedený poskytovatel DPP EU"
+        },
+        {
+          "build": "Auditori nemohou nezávisle ověřit",
+          "origyn": "Kdokoli může nezávisle ověřit"
+        },
+        {
+          "build": "Žádný efekt ekosystémové sítě",
+          "origyn": "Rostoucí ekosystém partnerů"
+        }
+      ],
+      "buildLabel": "Není zahrnuto",
+      "origynLabel": "Zahrnuto"
+    },
+    "partner": {
+      "title": "Model partnerství ORIGYN",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Posouzení",
+          "bullets": [
+            "Zmapujte váš katalog produktů na příslušné kategorie produktů ESPR a časové osy. Identifikujte mezery v datech a prioritní SKU.",
+            "Získejte přehled dokumentu ORIGYN DPP Readiness."
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Pilotní program",
+          "bullets": [
+            "Pilot jedné produktové řady.",
+            "Mapa modelů dat a zdrojů.",
+            "Datová pole jsou konfigurována tak, aby odpovídala vašemu datovému modelu DPP.",
+            "Vyhodnocení konfigurace ERP a API.",
+            "Odhad nákladů a dohoda o partnerství."
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Nasazení v podniku",
+          "bullets": [
+            "Šablona DPP je definována.",
+            "Mapování dat je dokončeno.",
+            "DPP se vytvářejí s platformou ORIGYN.",
+            "Fyzické produkty jsou označeny (QR / NFC).",
+            "DPP jsou spuštěny na úrovni organizace, skenované, ověřitelné a vždy dostupné."
+          ]
+        }
+      ],
+      "imageAlt": "Živý digitální pas produktu ORIGYN na telefonu s informacemi o produktu, obrázky a údaji o souladu.",
+      "getTitle": "Co získáte jako partner ORIGYN",
+      "get": [
+        "Přístup k API a platformě",
+        "Vyhrazený integrační tým",
+        "Podpora společného go-to-market"
+      ],
+      "cta": "Získat bezplatné posouzení nyní"
+    },
+    "download": {
+      "title": "Vezměte si celý obrázek\n<s>s sebou.</s>",
+      "lead": "Jednostranu ORIGYN DPP: časový plán regulace, platforma, model partnerství a srovnání na jednom listu, který můžete předat svému týmu.",
+      "label": "Pracovní e-mail",
+      "placeholder": "you@company.com",
+      "submit": "Získat jednostranu",
+      "sending": "Odesílání…",
+      "invalid": "Zadejte prosím platnou e-mailovou adresu.",
+      "error": "Něco se pokazilo. Zkuste to znovu.",
+      "sentTitle": "Zkontrolujte si poštu",
+      "sentBody": "Poslali jsme vám jednostranu na vaši adresu. Měla by přijít do minuty.",
+      "perks": [
+        "Časový plán ESPR",
+        "Model partnerství",
+        "Vývoj versus nákup"
+      ],
+      "privacy": "Vaši adresu budeme používat pouze k odeslání jednostrany a následné komunikaci o DPP."
+    },
+    "cta": {
+      "title": "Získat <i>bezplatné posouzení</i> nyní",
+      "lead": "Okno je rok 2027. Partneři, kteří se přesunou jako první, budou mít strukturální výhodu. Budujme váš DPP společně.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Posouzení připravenosti na DPP",
+          "body": "Posuzujeme váš katalog produktů proti časovým osám ESPR a identifikujeme prioritní kategorie."
+        },
+        {
+          "step": "2",
+          "title": "Pilotní program DPP",
+          "body": "Spusťte živý pilot DPP ORIGYN na jedné produktové řadě. Rychle, nízkoriziková, hmatatelné výsledky."
+        },
+        {
+          "step": "3",
+          "title": "Dohoda o partnerství",
+          "body": "Formalizujte vztah: přístup k API, spolufinancování, sladění go-to-market."
+        }
+      ],
+      "button": "Zarezervovat si bezplatné posouzení",
+      "emailPrompt": "Nebo nám napište na"
+    }
+  },
   "home": {
     "hero": {
       "subtitleDesktop": "Zabezpečte svá aktiva, duševní vlastnictví\na identitu plně on-chain.",
