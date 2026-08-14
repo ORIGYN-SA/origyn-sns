@@ -2,8 +2,8 @@
 
 .cardWrapper {
   background-color: white;
-  width: 718px;
-  min-width: 718px;
+  width: $roadmap-card-width;
+  min-width: $roadmap-card-width;
   height: 356px;
   display: flex;
   transition: transform 0.4s ease-out, border 0.3s ease, box-shadow 0.4s ease-out;
@@ -75,12 +75,10 @@
 .leftTitle {
   @include type('h2');
   font-family: $font-sans;
+  // Tighter than the h2 default so multi-line titles stay inside the card.
+  line-height: 1;
   letter-spacing: 0%;
   margin-bottom: 8px;
-
-  span {
-    font-family: $font-italic;
-  }
 
   @media (max-width: $bp-md) {
     font-size: $fs-24;
@@ -97,6 +95,22 @@
   @media (max-width: $bp-md) {
     font-size: $fs-18;
     line-height: 1.5;
+  }
+}
+
+// Milestones that haven't shipped yet.
+.upcoming {
+  &,
+  span {
+    font-family: $font-italic;
+  }
+}
+
+.titleSmall {
+  font-size: $fs-32;
+
+  @media (max-width: $bp-md) {
+    font-size: $fs-20;
   }
 }
 

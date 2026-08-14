@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "發展路線圖",
       "description": "從新功能與治理特性，到擴展對各產業與開發者的支援。每一個里程碑都體現我們的使命：透過可擴展、可驗證的去中心化基礎設施，將現實世界資產完整上鏈。",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation 獲得資助",
           "description": "ORIGYN Foundation 在瑞士 Neuchâtel 成立，開始開發 ORIGYN Protocol。"
         },
-        {
+        "ogy-token-launch": {
           "title": "OGY Token 發布",
           "description": "原生實用型代幣 $OGY 被建立，用於支援協議費用、治理和 staking。"
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "ORIGYN 的 NFT 標準首個版本發布，支援鏈上認證。"
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 更新",
           "description": "此前分配給 Foundation 的 2 億枚 $OGY 代幣被銷毀，開啟通縮壓力。"
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "首個用於數位憑證的鏈上 minting 介面發布。"
         },
-        {
-          "title": "策略合作夥伴關係",
-          "description": "與 FederItaly 和 METALOR 建立策略合作，用於認證義大利製造產品和 tokenized gold。"
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "義大利產品認證",
+          "description": "與 Federitaly 合作的數位認證基礎設施，保護 Made in Italy 產品的真實性與來源。"
         },
-        {
+        "first-gold-purchase": {
           "title": "首次黃金購買",
           "description": "購買 3 公斤實體黃金，並使用 ORIGYN Protocol 進行 tokenization。"
         },
-        {
+        "acquisition-candb": {
           "title": "收購 CanDB",
           "description": "ORIGYN 收購 CanDB，這是一種去中心化、可擴展並針對 NFT metadata 最佳化的資料庫解決方案。"
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 與 Dashboard 發布",
           "description": "Tokenomics 3.0 引入通縮模型，並發布 ORIGYN Dashboard 的首個版本。"
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 名協議使用者",
           "description": "ORIGYN 突破 10,000 名獨立協議使用者。"
         },
-        {
+        "gold-dao-launch": {
           "title": "Gold DAO 發布",
           "description": "Gold DAO 成為首個建構在 ORIGYN 上、用於鏈上 tokenization 和認證實體黃金的 DAO。"
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "向 Gold DAO 捐贈 500M OGY",
           "description": "5 億枚 $OGY 代幣被捐贈，用於支援 Gold DAO 的長期 treasury。"
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO 整合 ICP SNS",
           "description": "ORIGYN DAO 完全去中心化，並透過 Internet Computer 的 SNS 框架進行治理。"
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 發布",
           "description": "新版 dashboard 包含即時指標、staking 統計和治理工具。"
         },
-        {
+        "users-30k": {
           "title": "30,000 使用者里程碑",
           "description": "ORIGYN 使用者成長至 30,000 以上，六個月內成長 300%。"
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "與 Leo Caillard 和 Gil Sertissage 合作",
           "description": "ORIGYN 在高規格合作中認證實體藝術品和鑽石。"
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "NFT 標準升級，以支援憑證的安全可轉讓性。"
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework 發布",
           "description": "建立規則和 onboarding 結構，用於引導新合作夥伴與 ORIGYN 整合。"
         },
-        {
-          "title": "Cecil DAO 發布",
-          "description": "ORIGYN 支援 Cecil DAO 的發布，透過區塊鏈透明度資助保育和人道主義專案。"
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "支持 Cecil DAO 上線",
+          "description": "透過區塊鏈技術推動自然保育與人道主義專案的去中心化資金支持。"
         },
-        {
+        "acquisition-claimlink": {
           "title": "收購 ClaimLink",
           "description": "ORIGYN 收購 ClaimLink，這是一個建構在 ICP 上的去中心化 NFT 和代幣分發平台。"
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "引入新標準，以提升憑證互操作性和整個生態系統的實用性。"
-        },
-        {
-          "title": "公開",
-          "titleSpan": "Minting Studio 發布",
-          "description": "推出自助工具，讓任何人都能在 ORIGYN 基礎設施上 mint RWA 鏈上憑證。"
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Runestone 之謎將於 2026 年第二季在日內瓦揭曉。"
+          "titleSpan": "全新 ICRC7 NFT 標準",
+          "description": "全新憑證標準，旨在提升 NFT 在整個 ORIGYN 生態系中的互通性、可追溯性與實用性。"
         },
-        {
-          "title": "Minting Lab",
-          "description": "推出自助工具，讓任何人都能使用 ORIGYN 基礎設施進行鏈上 minting。"
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "供授權存取",
+          "description": "ORIGYN Records 的私人存取權限，此平台會將你的照片轉為帶有創作者、時間與地點的鏈上紀錄。"
         },
-        {
-          "title": "IP 保護實施",
-          "description": "對智慧財產權鏈上認證的支援被整合到協議中。"
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "數位產品護照（DPP）",
+          "description": "對接歐盟即將實施的 DPP 標準的合規層，協助企業在鏈上簽發產品身分。"
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN AI 基礎設施",
+          "description": "針對實體資產的原生 AI 驗證與分析能力，進一步強化信任、驗證與認證。"
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "專業 Minting Studio",
+          "description": "自助式平台，任何人都能運用 ORIGYN 的基礎設施鑄造通過認證的數位資產。"
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "拓展精品市場",
+          "description": "與 CORUM 共同推出，面向高階製錶商的區塊鏈數位認證與延長保固基礎設施。"
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "ORIGYN Records 的公開存取權限，此平台會將你的照片轉為帶有創作者、時間與地點的鏈上紀錄。"
+        },
+        "cross-chain": {
           "title": "Cross-Chain 實施",
           "description": "Cross-chain 相容性將 ORIGYN 的覆蓋範圍擴展到其他主要生態系統。"
         },
-        {
+        "global-wallet-marketplace": {
           "title": "全球 Wallet 與 Marketplace 整合",
           "description": "ORIGYN NFTs 可透過全球領先的 wallets 和 NFT marketplaces 存取。"
         },
-        {
+        "universal-certification-standard": {
           "title": "成為通用認證標準",
           "description": "ORIGYN 旨在成為所有資產類別數位認證的全球基準。"
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "謎題即將揭曉",
+          "description": "謎題將透過與 Léo Caillard 的獨家合作很快揭曉。"
         }
-      ]
+      }
     },
     "partners": {
       "label": "合作夥伴",

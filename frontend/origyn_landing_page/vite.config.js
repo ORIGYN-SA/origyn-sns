@@ -51,6 +51,10 @@ const localeHtml = () => {
 
 export default defineConfig({
   plugins: [react(), svgr(), localeHtml()],
+  server: {
+    // Dev only: lets tunnels such as ngrok reach the dev server.
+    allowedHosts: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

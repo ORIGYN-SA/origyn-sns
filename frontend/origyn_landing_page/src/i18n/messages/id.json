@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Peta Jalan",
       "description": "Dari utilitas dan fitur tata kelola baru hingga dukungan yang diperluas untuk industri dan pengembang. Setiap pencapaian mencerminkan misi kami untuk membawa aset dunia nyata sepenuhnya ke on-chain melalui infrastruktur yang skalabel, dapat diverifikasi, dan terdesentralisasi.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation Didanai",
           "description": "ORIGYN Foundation didirikan di Neuchâtel, Swiss untuk memulai pengembangan ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Peluncuran Token OGY",
           "description": "Token utilitas asli $OGY dibuat untuk mendukung biaya protokol, tata kelola, dan staking."
         },
-        {
+        "nft-standard-v1": {
           "title": "Standar NFT ORIGYN v1.0",
           "description": "Peluncuran versi pertama standar NFT ORIGYN yang memungkinkan sertifikasi on-chain."
         },
-        {
+        "tokenomics-2": {
           "title": "Pembaruan Tokenomics 2.0",
           "description": "200 juta token $OGY yang sebelumnya dialokasikan untuk Foundation dibakar, memulai tekanan deflasi."
         },
-        {
+        "minting-platform-v1": {
           "title": "Platform Minting 1.0",
           "description": "Peluncuran antarmuka minting on-chain pertama untuk sertifikat digital."
         },
-        {
-          "title": "Kemitraan Strategis",
-          "description": "Kolaborasi strategis dengan FederItaly dan METALOR untuk mensertifikasi produk buatan Italia dan emas yang ditokenisasi."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Autentikasi produk Italia",
+          "description": "Infrastruktur sertifikasi digital yang melindungi keaslian dan asal produk Made in Italy, bersama Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "Pembelian Emas Pertama",
           "description": "3 kg emas fisik dibeli dan ditokenisasi menggunakan ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Akuisisi CanDB",
           "description": "ORIGYN mengakuisisi CanDB, solusi database terdesentralisasi dan skalabel yang dioptimalkan untuk metadata NFT."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 dan Peluncuran Dashboard",
           "description": "Model deflasi diperkenalkan melalui Tokenomics 3.0 dan versi pertama ORIGYN Dashboard dirilis."
         },
-        {
+        "protocol-users-10k": {
           "title": "10.000 Pengguna Protokol",
           "description": "ORIGYN melampaui 10.000 pengguna protokol unik."
         },
-        {
+        "gold-dao-launch": {
           "title": "Peluncuran Gold DAO",
           "description": "Gold DAO menjadi DAO pertama yang dibangun di atas ORIGYN untuk menokenisasi dan mensertifikasi emas fisik secara on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Donasi 500M OGY ke Gold DAO",
           "description": "Setengah miliar token $OGY didonasikan untuk mendukung treasury jangka panjang Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO Terintegrasi dengan ICP SNS",
           "description": "ORIGYN DAO menjadi sepenuhnya terdesentralisasi dan dikelola melalui framework SNS Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "Rilis Dashboard V2",
           "description": "Versi baru dashboard mencakup metrik live, statistik staking, dan alat tata kelola."
         },
-        {
+        "users-30k": {
           "title": "Tonggak 30.000 Pengguna",
           "description": "ORIGYN tumbuh menjadi lebih dari 30.000 pengguna, peningkatan 300% dalam enam bulan."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Kolaborasi dengan Leo Caillard dan Gil Sertissage",
           "description": "ORIGYN mensertifikasi karya seni fisik dan berlian dalam kemitraan profil tinggi."
         },
-        {
+        "nft-standard-v2": {
           "title": "Standar NFT ORIGYN v2.0",
           "description": "Standar NFT ditingkatkan untuk memungkinkan transfer sertifikat yang aman."
         },
-        {
+        "integrator-framework": {
           "title": "Framework Integrator Diluncurkan",
           "description": "Aturan dan struktur onboarding dibuat untuk memandu mitra baru yang berintegrasi dengan ORIGYN."
         },
-        {
-          "title": "Peluncuran Cecil DAO",
-          "description": "ORIGYN mendukung peluncuran Cecil DAO untuk mendanai proyek konservasi dan kemanusiaan menggunakan transparansi blockchain."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Dukungan peluncuran Cecil DAO",
+          "description": "Mendorong pendanaan terdesentralisasi untuk inisiatif konservasi dan kemanusiaan melalui teknologi blockchain."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Akuisisi ClaimLink",
           "description": "ORIGYN mengakuisisi ClaimLink, platform distribusi NFT dan token terdesentralisasi yang dibangun di ICP."
         },
-        {
-          "title": "Standar NFT ICRC-7",
-          "description": "Standar baru diperkenalkan untuk meningkatkan interoperabilitas sertifikat dan utilitas di seluruh ekosistem."
-        },
-        {
-          "title": "Peluncuran",
-          "titleSpan": "Minting Studio Publik",
-          "description": "Alat self-service diluncurkan agar siapa pun dapat mint sertifikat RWA on-chain di infrastruktur ORIGYN."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Misteri Runestone akan diungkap pada Q2 2026 di Jenewa."
+          "titleSpan": "Standar NFT ICRC7 baru",
+          "description": "Standar sertifikat baru yang dirancang untuk meningkatkan interoperabilitas, ketertelusuran, dan kegunaan NFT di seluruh ekosistem ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Alat self-service diluncurkan agar siapa pun dapat mint on-chain menggunakan infrastruktur ORIGYN."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "untuk akses resmi",
+          "description": "Akses privat ke ORIGYN Records, platform yang mengubah foto Anda menjadi catatan on-chain lengkap dengan pembuat, waktu, dan lokasi."
         },
-        {
-          "title": "Implementasi Perlindungan IP",
-          "description": "Dukungan untuk sertifikasi on-chain atas hak kekayaan intelektual diintegrasikan ke dalam protokol."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Paspor produk digital (DPP)",
+          "description": "Lapisan kepatuhan yang selaras dengan standar DPP Uni Eropa mendatang, agar bisnis dapat menerbitkan identitas produk on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "Infrastruktur AI ORIGYN",
+          "description": "Verifikasi dan analisis bawaan bertenaga AI untuk aset dunia nyata, yang memperkuat kepercayaan, autentikasi, dan sertifikasi."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Minting Studio profesional",
+          "description": "Platform swalayan yang memungkinkan siapa pun mencetak aset digital bersertifikat di atas infrastruktur ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Ekspansi ke pasar mewah",
+          "description": "Sertifikasi digital dan infrastruktur garansi diperpanjang berbasis blockchain untuk produsen jam tangan mewah, diluncurkan bersama CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Akses publik ke ORIGYN Records, platform yang mengubah foto Anda menjadi catatan on-chain lengkap dengan pembuat, waktu, dan lokasi."
+        },
+        "cross-chain": {
           "title": "Implementasi Cross-Chain",
           "description": "Kompatibilitas cross-chain memperluas jangkauan ORIGYN ke ekosistem besar lainnya."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Integrasi Wallet dan Marketplace Global",
           "description": "ORIGYN NFT menjadi dapat diakses melalui wallet dan marketplace NFT terkemuka di seluruh dunia."
         },
-        {
+        "universal-certification-standard": {
           "title": "Menjadi Standar Sertifikasi Universal",
           "description": "ORIGYN bertujuan menetapkan diri sebagai tolok ukur global untuk sertifikasi digital di semua kelas aset."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Misteri akan segera terungkap",
+          "description": "Misterinya akan segera terungkap melalui kolaborasi eksklusif dengan Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "MITRA",

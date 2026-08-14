@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "מפת דרכים",
       "description": "מכלים חדשים ותכונות ממשל ועד תמיכה מורחבת בתעשיות ומפתחים. כל אבן דרך משקפת את המשימה שלנו להביא נכסים מהעולם האמיתי לשרשרת במלואם באמצעות תשתית ניתנת להרחבה, ניתנת לאימות ומבוזרת.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "מימון ORIGYN Foundation",
           "description": "ORIGYN Foundation הוקמה ב-Neuchâtel, שווייץ, כדי להתחיל בפיתוח ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "השקת אסימון OGY",
           "description": "אסימון השירות המקומי $OGY נוצר כדי להפעיל עמלות פרוטוקול, ממשל ו-staking."
         },
-        {
+        "nft-standard-v1": {
           "title": "תקן ORIGYN NFT v1.0",
           "description": "השקת הגרסה הראשונה של תקן NFT של ORIGYN המאפשר אימות on-chain."
         },
-        {
+        "tokenomics-2": {
           "title": "עדכון Tokenomics 2.0",
           "description": "200 מיליון אסימוני $OGY שהוקצו בעבר ל-Foundation נשרפים, ובכך מתחיל לחץ דפלציוני."
         },
-        {
+        "minting-platform-v1": {
           "title": "פלטפורמת Minting 1.0",
           "description": "השקת ממשק ה-minting הראשון on-chain לתעודות דיגיטליות."
         },
-        {
-          "title": "שותפויות אסטרטגיות",
-          "description": "שיתופי פעולה אסטרטגיים עם FederItaly ו-METALOR לאימות מוצרים תוצרת איטליה וזהב מטוקן."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "אימות מוצרים איטלקיים",
+          "description": "תשתית הסמכה דיגיטלית המגנה על האותנטיות והמקור של מוצרי Made in Italy, יחד עם Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "רכישת הזהב הראשונה",
           "description": "3 ק\"ג זהב פיזי נרכשים ומטוקנים באמצעות ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "רכישת CanDB",
           "description": "ORIGYN רוכשת את CanDB, פתרון מסד נתונים מבוזר, ניתן להרחבה ומותאם למטא-דאטה של NFT."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "השקת Tokenomics 3.0 ו-Dashboard",
           "description": "מודל דפלציוני מוצג עם Tokenomics 3.0 והגרסה הראשונה של ORIGYN Dashboard משוחררת."
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 משתמשי פרוטוקול",
           "description": "ORIGYN חוצה 10,000 משתמשים ייחודיים בפרוטוקול."
         },
-        {
+        "gold-dao-launch": {
           "title": "השקת Gold DAO",
           "description": "Gold DAO הופכת ל-DAO הראשונה שנבנתה על ORIGYN כדי לטקן ולאמת זהב פיזי on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "תרומת 500M OGY ל-Gold DAO",
           "description": "חצי מיליארד אסימוני $OGY נתרמים לתמיכה באוצר ארוך הטווח של Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO משולבת עם ICP SNS",
           "description": "ORIGYN DAO הופכת למבוזרת לחלוטין ומנוהלת במסגרת SNS של Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "שחרור Dashboard V2",
           "description": "הגרסה החדשה של dashboard כוללת מדדים חיים, סטטיסטיקות staking וכלי ממשל."
         },
-        {
+        "users-30k": {
           "title": "אבן דרך של 30,000 משתמשים",
           "description": "ORIGYN גדלה ליותר מ-30,000 משתמשים, עלייה של 300% בשישה חודשים."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "שיתוף פעולה עם Leo Caillard ו-Gil Sertissage",
           "description": "ORIGYN מאמתת יצירות אמנות פיזיות ויהלומים בשותפויות בעלות פרופיל גבוה."
         },
-        {
+        "nft-standard-v2": {
           "title": "תקן ORIGYN NFT v2.0",
           "description": "תקן NFT משודרג כדי לאפשר העברה מאובטחת של תעודות."
         },
-        {
+        "integrator-framework": {
           "title": "השקת מסגרת האינטגרטורים",
           "description": "נוצרו כללים ומבנה onboarding כדי להנחות שותפים חדשים המשתלבים עם ORIGYN."
         },
-        {
-          "title": "השקת Cecil DAO",
-          "description": "ORIGYN תומכת בהשקת Cecil DAO למימון פרויקטים של שימור ופרויקטים הומניטריים באמצעות שקיפות blockchain."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "תמיכה בהשקת Cecil DAO",
+          "description": "קידום מימון מבוזר ליוזמות שימור טבע והומניטריות באמצעות טכנולוגיית בלוקצ'יין."
         },
-        {
+        "acquisition-claimlink": {
           "title": "רכישת ClaimLink",
           "description": "ORIGYN רוכשת את ClaimLink, פלטפורמה מבוזרת להפצת NFT ואסימונים הבנויה על ICP."
         },
-        {
-          "title": "תקן ICRC-7 NFT",
-          "description": "תקן חדש מוצג כדי להגדיל את יכולת הפעולה ההדדית של תעודות ואת התועלת בכל רחבי המערכת האקולוגית."
-        },
-        {
-          "title": "השקת",
-          "titleSpan": "Minting Studio ציבורי",
-          "description": "מושק כלי self-service המאפשר לכל אחד להנפיק תעודות RWA on-chain על תשתית ORIGYN."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "תעלומת Runestone תיחשף ב-Q2 2026 בז'נבה."
+          "titleSpan": "תקן NFT חדש ICRC7",
+          "description": "תקן תעודות חדש שנועד לשפר את יכולת הפעולה ההדדית, המעקב והשימושיות של NFT בכל המערכת של ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "מושק כלי self-service המאפשר לכל אחד לבצע minting on-chain באמצעות תשתית ORIGYN."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "לגישה מורשית",
+          "description": "גישה פרטית ל‑ORIGYN Records, הפלטפורמה שהופכת את התמונות שלך לרשומות on-chain עם היוצר, הזמן והמיקום."
         },
-        {
-          "title": "יישום הגנת IP",
-          "description": "תמיכה באימות on-chain של זכויות קניין רוחני משולבת בפרוטוקול."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "דרכוני מוצר דיגיטליים (DPP)",
+          "description": "שכבת ציות המותאמת לתקני ה‑DPP הקרובים של האיחוד האירופי, המאפשרת לעסקים להנפיק זהויות מוצר on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "תשתית ה‑AI של ORIGYN",
+          "description": "אימות וניתוח מובנים מבוססי בינה מלאכותית לנכסים מהעולם האמיתי, לחיזוק האמון, האימות וההסמכה."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Minting Studio מקצועי",
+          "description": "פלטפורמת שירות עצמי המאפשרת לכל אחד להנפיק נכסים דיגיטליים מוסמכים על התשתית של ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "התרחבות לשוק היוקרה",
+          "description": "הסמכה דיגיטלית ותשתית אחריות מורחבת מבוססות בלוקצ'יין ליצרני שעוני יוקרה, שהושקו יחד עם CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "גישה ציבורית ל‑ORIGYN Records, הפלטפורמה שהופכת את התמונות שלך לרשומות on-chain עם היוצר, הזמן והמיקום."
+        },
+        "cross-chain": {
           "title": "יישום Cross-Chain",
           "description": "תאימות cross-chain מרחיבה את ההגעה של ORIGYN למערכות אקולוגיות מרכזיות נוספות."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "שילוב גלובלי של wallets ו-marketplaces",
           "description": "ORIGYN NFTs הופכים לנגישים דרך wallets ו-NFT marketplaces מובילים ברחבי העולם."
         },
-        {
+        "universal-certification-standard": {
           "title": "להפוך לתקן האימות האוניברסלי",
           "description": "ORIGYN שואפת לבסס את עצמה כאמת המידה הגלובלית לאימות דיגיטלי בכל סוגי הנכסים."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "התעלומה תיחשף בקרוב",
+          "description": "התעלומה תיחשף בקרוב במסגרת שיתוף פעולה בלעדי עם Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "שותפים",

@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "রোডম্যাপ",
       "description": "নতুন ইউটিলিটি ও গভর্ন্যান্স ফিচার থেকে শিল্প ও ডেভেলপারদের জন্য বিস্তৃত সমর্থন পর্যন্ত। প্রতিটি মাইলফলক স্কেলযোগ্য, যাচাইযোগ্য ও বিকেন্দ্রীভূত পরিকাঠামোর মাধ্যমে বাস্তব-বিশ্বের সম্পদ সম্পূর্ণ অন-চেইনে আনার আমাদের লক্ষ্যকে প্রতিফলিত করে।",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation প্রতিষ্ঠিত",
           "description": "ORIGYN Protocol-এর development শুরু করার জন্য ORIGYN Foundation সুইজারল্যান্ডের Neuchâtel-এ প্রতিষ্ঠিত হয়।"
         },
-        {
+        "ogy-token-launch": {
           "title": "OGY Token Launch",
           "description": "Native utility token $OGY protocol fees, governance এবং staking power করার জন্য তৈরি করা হয়।"
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "On-chain certification সক্ষম করতে ORIGYN-এর NFT standard-এর প্রথম version launch করা হয়।"
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 Update",
           "description": "Foundation-এ আগে allocated 200 million $OGY tokens burn করা হয়, যা deflationary pressure শুরু করে।"
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "Digital certificates-এর জন্য প্রথম on-chain minting interface launch করা হয়।"
         },
-        {
-          "title": "Strategic Partnerships",
-          "description": "Italian-made products এবং tokenized gold certify করতে FederItaly এবং METALOR-এর সঙ্গে strategic collaborations।"
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "ইতালীয় পণ্যের প্রামাণ্যকরণ",
+          "description": "ডিজিটাল সার্টিফিকেশন অবকাঠামো যা Federitaly-র সঙ্গে মিলে Made in Italy পণ্যের সত্যতা ও উৎস রক্ষা করে।"
         },
-        {
+        "first-gold-purchase": {
           "title": "First Gold Purchase",
           "description": "3 kg physical gold কেনা হয় এবং ORIGYN Protocol ব্যবহার করে tokenized করা হয়।"
         },
-        {
+        "acquisition-candb": {
           "title": "CanDB Acquisition",
           "description": "ORIGYN CanDB acquire করে, যা NFT metadata-এর জন্য optimized decentralized, scalable database solution।"
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 and Dashboard Launch",
           "description": "Tokenomics 3.0-এর সঙ্গে deflationary model introduce করা হয় এবং ORIGYN Dashboard-এর প্রথম version release করা হয়।"
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 Protocol Users",
           "description": "ORIGYN 10,000 unique protocol users অতিক্রম করে।"
         },
-        {
+        "gold-dao-launch": {
           "title": "Gold DAO Launch",
           "description": "Gold DAO ORIGYN-এর উপর নির্মিত প্রথম DAO হয়, যা physical gold on-chain tokenize এবং certify করে।"
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "500M OGY Donation to Gold DAO",
           "description": "Gold DAO-এর long-term treasury support করতে half a billion $OGY tokens donate করা হয়।"
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO Integrated with ICP SNS",
           "description": "ORIGYN DAO সম্পূর্ণ decentralized হয় এবং Internet Computer-এর SNS framework দ্বারা governed হয়।"
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 Release",
           "description": "Dashboard-এর নতুন version-এ live metrics, staking stats এবং governance tools অন্তর্ভুক্ত থাকে।"
         },
-        {
+        "users-30k": {
           "title": "30,000 Users Milestone",
           "description": "ORIGYN 30,000-এর বেশি users-এ বৃদ্ধি পায়, ছয় মাসে 300% increase।"
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Leo Caillard এবং Gil Sertissage-এর সঙ্গে Collaboration",
           "description": "ORIGYN high-profile partnerships-এ physical artworks এবং diamonds certify করে।"
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "Certificates-এর secure transferability enable করতে NFT standard upgrade করা হয়।"
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework Launched",
           "description": "ORIGYN-এর সঙ্গে integrate করা new partners-দের guide করতে rules এবং onboarding structure তৈরি করা হয়।"
         },
-        {
-          "title": "Cecil DAO Launch",
-          "description": "ORIGYN blockchain transparency ব্যবহার করে conservation এবং humanitarian projects fund করতে Cecil DAO launch support করে।"
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Cecil DAO চালুতে সহায়তা",
+          "description": "ব্লকচেইন প্রযুক্তির মাধ্যমে সংরক্ষণ ও মানবিক উদ্যোগের জন্য বিকেন্দ্রীভূত অর্থায়নকে এগিয়ে নেওয়া।"
         },
-        {
+        "acquisition-claimlink": {
           "title": "ClaimLink Acquisition",
           "description": "ORIGYN ClaimLink acquire করে, যা ICP-তে নির্মিত decentralized NFT এবং token distribution platform।"
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "Certificate interoperability এবং ecosystem-wide utility বাড়াতে একটি new standard introduce করা হয়।"
-        },
-        {
-          "title": "Public",
-          "titleSpan": "Minting Studio Launch",
-          "description": "একটি self-service tool launch করা হয়, যাতে যে কেউ ORIGYN infrastructure-এ RWA on-chain certificates mint করতে পারে।"
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Runestone mystery Q2 2026-এ Geneva-তে reveal হবে।"
+          "titleSpan": "নতুন ICRC7 NFT মান",
+          "description": "একটি নতুন সার্টিফিকেট মান, যা সমগ্র ORIGYN ইকোসিস্টেমে NFT-র আন্তঃকার্যকারিতা, ট্রেসেবিলিটি ও উপযোগিতা বাড়ায়।"
         },
-        {
-          "title": "Minting Lab",
-          "description": "একটি self-service tool launch করা হয়, যাতে যে কেউ ORIGYN infrastructure ব্যবহার করে on-chain mint করতে পারে।"
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "অনুমোদিত অ্যাক্সেসের জন্য",
+          "description": "ORIGYN Records-এ ব্যক্তিগত অ্যাক্সেস, যে প্ল্যাটফর্ম আপনার ছবিকে নির্মাতা, সময় ও স্থানসহ on-chain রেকর্ডে রূপান্তর করে।"
         },
-        {
-          "title": "IP Protection Implementation",
-          "description": "Intellectual property rights-এর on-chain certification support protocol-এ integrate করা হয়।"
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "ডিজিটাল প্রোডাক্ট পাসপোর্ট (DPP)",
+          "description": "আসন্ন EU DPP মানের সঙ্গে সামঞ্জস্যপূর্ণ কমপ্লায়েন্স স্তর, যা ব্যবসাকে on-chain পণ্য পরিচয় ইস্যু করতে সহায়তা করে।"
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN এআই অবকাঠামো",
+          "description": "বাস্তব সম্পদের জন্য অন্তর্নির্মিত এআই-চালিত যাচাই ও বিশ্লেষণ, যা আস্থা, প্রমাণীকরণ ও সার্টিফিকেশন জোরদার করে।"
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "প্রফেশনাল Minting Studio",
+          "description": "একটি সেলফ-সার্ভিস প্ল্যাটফর্ম, যেখানে যে কেউ ORIGYN-এর অবকাঠামো ব্যবহার করে সার্টিফায়েড ডিজিটাল সম্পদ মিন্ট করতে পারেন।"
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "বিলাসবহুল বাজারে সম্প্রসারণ",
+          "description": "বিলাসবহুল ঘড়ি প্রস্তুতকারকদের জন্য ব্লকচেইনভিত্তিক ডিজিটাল সার্টিফিকেশন ও বর্ধিত ওয়ারেন্টি অবকাঠামো, CORUM-এর সঙ্গে চালু।"
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "ORIGYN Records-এ সর্বজনীন অ্যাক্সেস, যে প্ল্যাটফর্ম আপনার ছবিকে নির্মাতা, সময় ও স্থানসহ on-chain রেকর্ডে রূপান্তর করে।"
+        },
+        "cross-chain": {
           "title": "Cross-Chain Implementation",
           "description": "Cross-chain compatibility ORIGYN-এর reach অন্যান্য major ecosystems-এ expand করে।"
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Global Wallet and Marketplace Integration",
           "description": "ORIGYN NFTs বিশ্বজুড়ে leading wallets এবং NFT marketplaces-এর মাধ্যমে accessible হয়।"
         },
-        {
+        "universal-certification-standard": {
           "title": "Universal Certification Standard হওয়া",
           "description": "ORIGYN সব asset classes জুড়ে digital certification-এর global benchmark হিসেবে নিজেকে প্রতিষ্ঠা করার লক্ষ্য রাখে।"
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "রহস্য শীঘ্রই উন্মোচিত হবে",
+          "description": "রহস্যটি শীঘ্রই Léo Caillard-এর সঙ্গে এক বিশেষ সহযোগিতার মাধ্যমে উন্মোচিত হবে।"
         }
-      ]
+      }
     },
     "partners": {
       "label": "অংশীদার",

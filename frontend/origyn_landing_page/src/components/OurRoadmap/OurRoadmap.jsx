@@ -186,7 +186,10 @@ const DesktopCards = ({ cards }) => {
     <>
       <div className={styles.roadmapContainer}>
         <div className={styles.roadmapCardsWrapper} ref={roadmapWrapperRef}>
-          <div className={styles.roadmapTimeline}></div>
+          <div
+            className={styles.roadmapTimeline}
+            style={{ "--roadmap-cards": cards.length }}
+          ></div>
           {cards.map((card, idx) => {
             const ref =
               firstCardIndexByYear[card.year] === idx
@@ -373,10 +376,12 @@ const MobileCards = ({ cards }) => {
 const OurRoadmap = () => {
   const t = useT();
   const [isDesktop, setIsDesktop] = useState(false);
-  const roadmapCopy = t.raw("home.roadmap.items") ?? [];
-  const localizedCards = roadmapCards.map((card, index) => ({
+  // Keyed by card id, not position, so reordering the roadmap can't shift a
+  // locale's copy onto the wrong card. Missing keys fall back to roadmapData.
+  const roadmapCopy = t.raw("home.roadmap.items") ?? {};
+  const localizedCards = roadmapCards.map((card) => ({
     ...card,
-    ...(roadmapCopy[index] ?? {}),
+    ...(roadmapCopy[card.id] ?? {}),
   }));
 
   useEffect(() => {

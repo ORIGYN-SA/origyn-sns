@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "แผนงาน",
       "description": "ตั้งแต่ยูทิลิตีใหม่และฟีเจอร์การกำกับดูแล ไปจนถึงการสนับสนุนที่ขยายออกสำหรับอุตสาหกรรมและนักพัฒนา ทุกหมุดหมายสะท้อนพันธกิจของเราในการนำสินทรัพย์โลกแห่งความเป็นจริงขึ้นสู่บนเชนอย่างสมบูรณ์ผ่านโครงสร้างพื้นฐานที่ปรับขนาดได้ ตรวจสอบได้ และกระจายอำนาจ",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation ได้รับเงินทุน",
           "description": "ORIGYN Foundation ก่อตั้งขึ้นที่ Neuchâtel ประเทศสวิตเซอร์แลนด์ เพื่อเริ่มพัฒนา ORIGYN Protocol"
         },
-        {
+        "ogy-token-launch": {
           "title": "OGY Token Launch",
           "description": "Native utility token $OGY ถูกสร้างขึ้นเพื่อขับเคลื่อน protocol fees, governance และ staking"
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "เปิดตัวเวอร์ชันแรกของ NFT standard ของ ORIGYN ที่รองรับ on-chain certification"
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 Update",
           "description": "มีการ burn โทเคน $OGY จำนวน 200 million ที่เคย allocated ให้ Foundation ซึ่งเริ่มสร้างแรงกดดันแบบ deflationary"
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "เปิดตัว on-chain minting interface แรกสำหรับ digital certificates"
         },
-        {
-          "title": "Strategic Partnerships",
-          "description": "ความร่วมมือเชิงกลยุทธ์กับ FederItaly และ METALOR เพื่อ certify products made in Italy และ tokenized gold"
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "การพิสูจน์ความแท้ของสินค้าอิตาลี",
+          "description": "โครงสร้างพื้นฐานการรับรองดิจิทัลที่ปกป้องความแท้และแหล่งที่มาของสินค้า Made in Italy ร่วมกับ Federitaly"
         },
-        {
+        "first-gold-purchase": {
           "title": "First Gold Purchase",
           "description": "ซื้อ physical gold จำนวน 3 kg และ tokenized โดยใช้ ORIGYN Protocol"
         },
-        {
+        "acquisition-candb": {
           "title": "Acquisition of CanDB",
           "description": "ORIGYN เข้าซื้อ CanDB ซึ่งเป็น decentralized, scalable database solution ที่ optimized สำหรับ NFT metadata"
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 and Dashboard Launch",
           "description": "มีการ introduce deflationary model ผ่าน Tokenomics 3.0 และ release เวอร์ชันแรกของ ORIGYN Dashboard"
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 Protocol Users",
           "description": "ORIGYN มี unique protocol users เกิน 10,000 ราย"
         },
-        {
+        "gold-dao-launch": {
           "title": "Launch of Gold DAO",
           "description": "Gold DAO กลายเป็น DAO แรกที่ built on ORIGYN เพื่อ tokenize และ certify physical gold on-chain"
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "500M OGY Donation to Gold DAO",
           "description": "มีการ donate โทเคน $OGY จำนวน half a billion เพื่อ support long-term treasury ของ Gold DAO"
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO Integrated with ICP SNS",
           "description": "ORIGYN DAO กลายเป็นระบบที่ decentralized อย่างสมบูรณ์และ governed บน SNS framework ของ Internet Computer"
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 Release",
           "description": "Dashboard เวอร์ชันใหม่มี live metrics, staking stats และ governance tools"
         },
-        {
+        "users-30k": {
           "title": "30,000 Users Milestone",
           "description": "ORIGYN เติบโตเกิน 30,000 users เพิ่มขึ้น 300% ภายในหกเดือน"
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Collaboration with Leo Caillard and Gil Sertissage",
           "description": "ORIGYN certify physical artworks และ diamonds ผ่าน partnerships ระดับสูง"
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "NFT standard ได้รับการ upgrade เพื่อ enable secure certificate transferability"
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework Launched",
           "description": "มีการสร้าง rules และ onboarding structure เพื่อ guide partners ใหม่ที่ integrate กับ ORIGYN"
         },
-        {
-          "title": "Launch of Cecil DAO",
-          "description": "ORIGYN สนับสนุนการ launch Cecil DAO เพื่อ fund conservation และ humanitarian projects โดยใช้ blockchain transparency"
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "สนับสนุนการเปิดตัว Cecil DAO",
+          "description": "ผลักดันการระดมทุนแบบกระจายศูนย์เพื่อการอนุรักษ์และงานด้านมนุษยธรรมผ่านเทคโนโลยีบล็อกเชน"
         },
-        {
+        "acquisition-claimlink": {
           "title": "Acquisition of ClaimLink",
           "description": "ORIGYN เข้าซื้อ ClaimLink ซึ่งเป็น decentralized NFT และ token distribution platform ที่ built on ICP"
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "มีการ introduce standard ใหม่เพื่อเพิ่ม certificate interoperability และ utility ทั่วทั้ง ecosystem"
-        },
-        {
-          "title": "Launch of a Public",
-          "titleSpan": "Minting Studio",
-          "description": "เปิดตัว self-service tool ที่ให้ทุกคน mint on-chain certificates ของ RWA บน ORIGYN infrastructure ได้"
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "ความลึกลับของ Runestone จะถูกเปิดเผยใน Q2 2026 ที่ Geneva"
+          "titleSpan": "มาตรฐาน NFT ใหม่ ICRC7",
+          "description": "มาตรฐานใบรับรองใหม่ที่ออกแบบมาเพื่อยกระดับความเข้ากันได้ การตรวจสอบย้อนกลับ และประโยชน์ใช้สอยของ NFT ทั่วทั้งระบบนิเวศ ORIGYN"
         },
-        {
-          "title": "Minting Lab",
-          "description": "เปิดตัว self-service tool ที่ให้ทุกคน mint on-chain โดยใช้ ORIGYN infrastructure ได้"
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "สำหรับการเข้าถึงที่ได้รับอนุญาต",
+          "description": "การเข้าถึงแบบส่วนตัวสู่ ORIGYN Records แพลตฟอร์มที่เปลี่ยนภาพถ่ายของคุณให้เป็นบันทึกบนเชนพร้อมผู้สร้าง เวลา และสถานที่"
         },
-        {
-          "title": "IP Protection Implementation",
-          "description": "Support สำหรับ on-chain certification ของ intellectual property rights ถูก integrate เข้ากับ protocol"
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "พาสปอร์ตสินค้าดิจิทัล (DPP)",
+          "description": "ชั้นการปฏิบัติตามข้อกำหนดที่สอดคล้องกับมาตรฐาน DPP ของสหภาพยุโรปที่กำลังจะมาถึง เพื่อให้ธุรกิจออกอัตลักษณ์สินค้าบนเชนได้"
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "โครงสร้างพื้นฐาน AI ของ ORIGYN",
+          "description": "การตรวจสอบและวิเคราะห์ด้วย AI ในตัวสำหรับสินทรัพย์ในโลกจริง ช่วยเสริมความเชื่อมั่น การยืนยันตัวตน และการรับรอง"
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Minting Studio ระดับมืออาชีพ",
+          "description": "แพลตฟอร์มบริการตนเองที่ให้ทุกคนสร้างสินทรัพย์ดิจิทัลที่ได้รับการรับรองบนโครงสร้างพื้นฐานของ ORIGYN"
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "ขยายสู่ตลาดสินค้าหรู",
+          "description": "การรับรองดิจิทัลและโครงสร้างพื้นฐานการรับประกันแบบขยายบนบล็อกเชนสำหรับผู้ผลิตนาฬิกาหรู เปิดตัวร่วมกับ CORUM"
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "การเข้าถึงแบบสาธารณะสู่ ORIGYN Records แพลตฟอร์มที่เปลี่ยนภาพถ่ายของคุณให้เป็นบันทึกบนเชนพร้อมผู้สร้าง เวลา และสถานที่"
+        },
+        "cross-chain": {
           "title": "Cross-Chain Implementation",
           "description": "Cross-chain compatibility ขยาย reach ของ ORIGYN ไปยัง major ecosystems อื่น ๆ"
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Global Wallet and Marketplace Integration",
           "description": "ORIGYN NFTs สามารถเข้าถึงได้ผ่าน leading wallets และ NFT marketplaces ทั่วโลก"
         },
-        {
+        "universal-certification-standard": {
           "title": "Becoming the Universal Certification Standard",
           "description": "ORIGYN ตั้งเป้าที่จะสร้างตนเองเป็น global benchmark สำหรับ digital certification ในทุก asset classes"
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "ปริศนาที่รอการเปิดเผย",
+          "description": "ปริศนานี้จะถูกเปิดเผยเร็ว ๆ นี้ผ่านความร่วมมือสุดพิเศษกับ Léo Caillard"
         }
-      ]
+      }
     },
     "partners": {
       "label": "พันธมิตร",

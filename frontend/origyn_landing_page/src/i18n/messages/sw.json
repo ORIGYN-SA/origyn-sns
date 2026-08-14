@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Ramani ya Barabara",
       "description": "Kuanzia matumizi mapya na vipengele vya utawala hadi msaada uliopanuliwa kwa tasnia na waendelezaji. Kila hatua muhimu inaakisi dhamira yetu ya kuleta mali za ulimwengu halisi kikamilifu kwenye mnyororo kupitia miundombinu inayoweza kupanuliwa, kuthibitishwa, na iliyogatuliwa.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation Ilifadhiliwa",
           "description": "ORIGYN Foundation ilianzishwa Neuchâtel, Uswisi ili kuanza uendelezaji wa ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Uzinduzi wa Token ya OGY",
           "description": "Token asili ya matumizi $OGY iliundwa kuendesha ada za protokali, governance, na staking."
         },
-        {
+        "nft-standard-v1": {
           "title": "Kiwango cha ORIGYN NFT v1.0",
           "description": "Uzinduzi wa toleo la kwanza la kiwango cha NFT cha ORIGYN kinachowezesha uthibitishaji on-chain."
         },
-        {
+        "tokenomics-2": {
           "title": "Sasisho la Tokenomics 2.0",
           "description": "Token milioni 200 za $OGY zilizokuwa zimetengwa kwa Foundation zilichomwa, zikianzisha shinikizo la kupunguza mfumuko wa usambazaji."
         },
-        {
+        "minting-platform-v1": {
           "title": "Jukwaa la Minting 1.0",
           "description": "Uzinduzi wa kiolesura cha kwanza cha minting on-chain kwa vyeti vya kidijitali."
         },
-        {
-          "title": "Ushirikiano wa Kimkakati",
-          "description": "Ushirikiano wa kimkakati na FederItaly na METALOR kuthibitisha bidhaa zilizotengenezwa Italia na dhahabu iliyotokenishwa."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Uthibitishaji wa bidhaa za Italia",
+          "description": "Miundombinu ya uthibitishaji wa kidijitali inayolinda uhalisi na asili ya bidhaa za Made in Italy, pamoja na Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "Ununuzi wa Kwanza wa Dhahabu",
           "description": "Kilo 3 za dhahabu halisi zilinunuliwa na kutokenishwa kwa kutumia ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Ununuzi wa CanDB",
           "description": "ORIGYN ilinunua CanDB, suluhisho la database lililogatuliwa, linaloweza kupanuka na lililoboreshwa kwa metadata ya NFT."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 na Uzinduzi wa Dashboard",
           "description": "Mfumo wa deflation ulianzishwa kupitia Tokenomics 3.0 na toleo la kwanza la ORIGYN Dashboard lilitolewa."
         },
-        {
+        "protocol-users-10k": {
           "title": "Watumiaji 10,000 wa Protokali",
           "description": "ORIGYN ilizidi watumiaji 10,000 wa kipekee wa protokali."
         },
-        {
+        "gold-dao-launch": {
           "title": "Uzinduzi wa Gold DAO",
           "description": "Gold DAO ikawa DAO ya kwanza kujengwa juu ya ORIGYN ili kutokenisha na kuthibitisha dhahabu halisi on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Mchango wa 500M OGY kwa Gold DAO",
           "description": "Nusu bilioni ya token za $OGY zilitolewa kusaidia treasury ya muda mrefu ya Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO Iliunganishwa na ICP SNS",
           "description": "ORIGYN DAO ikawa imegatuliwa kikamilifu na kusimamiwa kupitia framework ya SNS ya Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "Kutolewa kwa Dashboard V2",
           "description": "Toleo jipya la dashboard linajumuisha metrics za live, takwimu za staking, na zana za governance."
         },
-        {
+        "users-30k": {
           "title": "Hatua ya Watumiaji 30,000",
           "description": "ORIGYN ilikua hadi zaidi ya watumiaji 30,000, ongezeko la 300% ndani ya miezi sita."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Ushirikiano na Leo Caillard na Gil Sertissage",
           "description": "ORIGYN ilithibitisha kazi za sanaa halisi na almasi kupitia ushirikiano wa hadhi ya juu."
         },
-        {
+        "nft-standard-v2": {
           "title": "Kiwango cha ORIGYN NFT v2.0",
           "description": "Kiwango cha NFT kiliboreshwa ili kuwezesha uhamishaji salama wa vyeti."
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework Ilizinduliwa",
           "description": "Kanuni na muundo wa onboarding uliundwa kuwaongoza washirika wapya wanaounganisha na ORIGYN."
         },
-        {
-          "title": "Uzinduzi wa Cecil DAO",
-          "description": "ORIGYN iliunga mkono uzinduzi wa Cecil DAO kufadhili miradi ya uhifadhi na kibinadamu kwa kutumia uwazi wa blockchain."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Kuunga mkono uzinduzi wa Cecil DAO",
+          "description": "Kukuza ufadhili usio na mamlaka kuu kwa miradi ya uhifadhi na misaada ya kibinadamu kupitia teknolojia ya blockchain."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Ununuzi wa ClaimLink",
           "description": "ORIGYN ilinunua ClaimLink, jukwaa lililogatuliwa la usambazaji wa NFT na token lililojengwa kwenye ICP."
         },
-        {
-          "title": "Kiwango cha ICRC-7 NFT",
-          "description": "Kiwango kipya kilianzishwa kuongeza interoperability ya vyeti na matumizi katika ekosistimu nzima."
-        },
-        {
-          "title": "Uzinduzi wa",
-          "titleSpan": "Minting Studio ya Umma",
-          "description": "Zana ya self-service ilizinduliwa kuruhusu mtu yeyote mint vyeti vya RWA on-chain kwenye miundombinu ya ORIGYN."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Fumbo la Runestone litafichuliwa Q2 2026 Geneva."
+          "titleSpan": "Kiwango kipya cha NFT cha ICRC7",
+          "description": "Kiwango kipya cha vyeti kilichoundwa kuboresha ushirikiano, ufuatiliaji na manufaa ya NFT katika mfumo mzima wa ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Zana ya self-service ilizinduliwa kuruhusu mtu yeyote mint on-chain kwa kutumia miundombinu ya ORIGYN."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "kwa ufikiaji ulioidhinishwa",
+          "description": "Ufikiaji binafsi wa ORIGYN Records, jukwaa linalogeuza picha zako kuwa kumbukumbu za on-chain zenye mtayarishaji, wakati na mahali."
         },
-        {
-          "title": "Utekelezaji wa Ulinzi wa IP",
-          "description": "Usaidizi wa uthibitishaji on-chain wa haki za mali miliki uliunganishwa kwenye protokali."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Pasipoti za kidijitali za bidhaa (DPP)",
+          "description": "Safu ya utiifu inayoendana na viwango vijavyo vya DPP vya EU, ili biashara ziweze kutoa utambulisho wa bidhaa on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "Miundombinu ya AI ya ORIGYN",
+          "description": "Uthibitishaji na uchambuzi asilia unaotumia AI kwa mali halisi, unaoimarisha uaminifu, uthibitishaji na utoaji wa vyeti."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Minting Studio ya kitaalamu",
+          "description": "Jukwaa la kujihudumia linalomwezesha mtu yeyote kuunda mali za kidijitali zilizothibitishwa kwa kutumia miundombinu ya ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Upanuzi katika soko la anasa",
+          "description": "Uthibitishaji wa kidijitali na miundombinu ya dhamana iliyopanuliwa kwenye blockchain kwa watengenezaji wa saa za anasa, iliyozinduliwa na CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Ufikiaji wa umma wa ORIGYN Records, jukwaa linalogeuza picha zako kuwa kumbukumbu za on-chain zenye mtayarishaji, wakati na mahali."
+        },
+        "cross-chain": {
           "title": "Utekelezaji wa Cross-Chain",
           "description": "Ulinganifu wa cross-chain unapanua ufikiaji wa ORIGYN kwa ekosistimu nyingine kuu."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Muunganisho wa Kimataifa wa Wallet na Marketplace",
           "description": "ORIGYN NFT zinapatikana kupitia wallet na marketplace kuu za NFT duniani kote."
         },
-        {
+        "universal-certification-standard": {
           "title": "Kuwa Kiwango cha Uthibitishaji cha Ulimwengu Wote",
           "description": "ORIGYN inalenga kujitambulisha kama kipimo cha kimataifa cha uthibitishaji wa kidijitali katika aina zote za mali."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Siri itafichuliwa hivi karibuni",
+          "description": "Siri hiyo itafichuliwa hivi karibuni kupitia ushirikiano wa kipekee na Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "WASHIRIKA",
