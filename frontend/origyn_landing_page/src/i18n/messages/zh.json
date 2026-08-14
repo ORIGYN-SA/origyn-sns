@@ -260,6 +260,64 @@
     "dashboard": "控制台",
     "copyright": "©2026 版权所有 – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "现实世界资产认证，完全链上",
+        "description": "ORIGYN 通过防篡改链上证书对黄金、艺术品、奢侈品等资产进行认证，确保真实性、来源和所有权始终对任何人可验证。",
+        "imageAlt": "ORIGYN 认证控制台在平板电脑上打开"
+      },
+      "ai": {
+        "title": "链上 AI 推理",
+        "description": "在公共区块链上运行完全自主 AI 智能体的开放研究。没有链下捷径，没有带收据的 API 调用，从设计上即可验证。",
+        "imageAlt": "一张卡片，写着”推进链上 AI 推理”，背景为 ORIGYN 深色配色"
+      },
+      "token": {
+        "title": "OGY 代币",
+        "cardTitle": "OGY，ORIGYN\n协议的实用性",
+        "description": "OGY 支付 ORIGYN 协议内的认证、转账和存储费用。查看其实用性、代币经济学、质押奖励和官方合约地址。",
+        "imageAlt": "OGY 代币符号悬浮在玻璃球内"
+      },
+      "helpCenter": {
+        "title": "帮助中心",
+        "cardTitle": "OGY 常见问题\n证书与 DAO",
+        "description": "OGY 代币、链上认证、质押奖励和 ORIGYN DAO 治理的工作原理，都在一处解答。",
+        "imageAlt": "一张卡片，写着”OGY、证书和 DAO 相关答案”"
+      },
+      "integrator": {
+        "title": "集成商计划",
+        "cardTitle": "加入 ORIGYN\n集成商计划",
+        "description": "基于 ORIGYN 协议构建，无需深厚的 Web3 专业知识，即可将区块链认证带给您的行业。了解计划如何运作。",
+        "imageAlt": "一部手机显示 ORIGYN 证书，放在深色沙滩上"
+      },
+      "integratorJoin": {
+        "title": "申请加入集成商计划",
+        "cardTitle": "申请加入\n集成商计划",
+        "description": "告诉我们您的项目、市场和目标。每份申请均由 ORIGYN 基金会审查，然后由 ORIGYN DAO 投票决定。",
+        "imageAlt": "一张卡片，写着”申请加入集成商计划”"
+      },
+      "useCase": {
+        "art": {
+          "title": "艺术品认证",
+          "description": "艺术家、画廊和基金会在 ORIGYN 上认证艺术品：防篡改来源、高清图像和文件，以及通过证书实现共同所有权。",
+          "imageAlt": "雕刻的青金石雕塑放在深色背景上"
+        },
+        "gold": {
+          "title": "黄金认证",
+          "description": "全球黄金精炼领导者 Metalor 将金条的每个细节记录在单一链上证书中。可追溯、防篡改且始终可用。",
+          "imageAlt": "四根逐渐缩小的已认证金条放在深色背景上"
+        },
+        "luxury": {
+          "title": "钻石和奢侈品认证",
+          "description": "在链上追踪每颗钻石和每件奢侈品的产地、等级和所有权，使买家能够验证他们的购买内容。",
+          "imageAlt": "用镊子夹着的切割钻石"
+        },
+        "madein": {
+          "title": "原产地认证",
+          "description": "国家原产地是值得证明的声明。认证产品的产地和制造方式，从手表到时尚，让任何人都能在链上验证。",
+          "imageAlt": "工匠在车间手工塑造鞋楦"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU 数字产品护照"

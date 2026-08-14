@@ -1,0 +1,15 @@
+name = "origyn-og"
+main = "src/index.ts"
+account_id = "c615f9ee2d4be698e99d439964dbe626"
+compatibility_date = "2025-06-01"
+# jpeg-js encodes through Buffer.
+compatibility_flags = ["nodejs_compat"]
+
+# Fonts and artwork are served through the binding rather than bundled, so they
+# do not count against the worker's script size. `run_worker_first` keeps the
+# worker in charge of every route: the binding is an implementation detail, not
+# a public file listing.
+[assets]
+directory = "./assets"
+binding = "ASSETS"
+run_worker_first = true

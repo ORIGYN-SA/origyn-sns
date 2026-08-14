@@ -222,6 +222,64 @@
     "dashboard": "TABLOU DE BORD",
     "copyright": "©2026 Toate drepturile rezervate – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Certificare activelor reale, 100% on-chain",
+        "description": "ORIGYN certifică aur, artă, bunuri de lux și altele cu certificate on-chain inviolabile, permițând oricui să verifice autenticitatea, proveniența și proprietatea.",
+        "imageAlt": "Tabloul de bord de certificare ORIGYN, deschis pe o tablă"
+      },
+      "ai": {
+        "title": "Inferență AI on-chain",
+        "description": "Cercetare deschisă privind agenți AI autonomi pe blockchain public. Fără scurtături în afara lanțului, fără apeluri API. Verificabil prin concepție.",
+        "imageAlt": "O card cu textul Avansarea inferenței AI on-chain, pe un fundal ORIGYN întunecat"
+      },
+      "token": {
+        "title": "Tokenul OGY",
+        "cardTitle": "OGY, utilitate a\nProtocolului ORIGYN",
+        "description": "OGY plătește certificarea, transferurile și stocarea în Protocolul ORIGYN. Aflați utilitatea, tokenomics-ul, recompensele de staking și adresa contractului.",
+        "imageAlt": "Simbolul tokenului OGY suspendat în interiorul unei sfere de sticlă"
+      },
+      "helpCenter": {
+        "title": "Centru de asistență",
+        "cardTitle": "Răspunsuri despre OGY,\ncertificate și DAO",
+        "description": "Cum funcționează tokenul OGY, certificarea on-chain, recompensele de staking și guvernanța ORIGYN DAO, toate răspunsurile într-un singur loc.",
+        "imageAlt": "O card cu textul Răspunsuri despre OGY, certificate și DAO"
+      },
+      "integrator": {
+        "title": "Programul Integratorilor",
+        "cardTitle": "Deveniți un\nIntegrator ORIGYN",
+        "description": "Construiți pe Protocolul ORIGYN și aduceți certificarea blockchain în industria dumneavoastră fără nevoie de Web3 avansată. Aflați cum funcționează programul.",
+        "imageAlt": "Un telefon afișând un certificat ORIGYN, sprijinit pe nisip întunecat"
+      },
+      "integratorJoin": {
+        "title": "Candidează la Programul Integratorilor",
+        "cardTitle": "Candidează la\nProgram Integrator",
+        "description": "Spuneți-ne despre proiectul dumneavoastră, piața și obiectivele. Fiecare aplicație este verificată de Fundația ORIGYN, apoi votată de ORIGYN DAO.",
+        "imageAlt": "O card cu textul Candidează la Programul Integratorilor"
+      },
+      "useCase": {
+        "art": {
+          "title": "Certificare de artă",
+          "description": "Artiști, galerii și fundații certifică opere de artă pe ORIGYN: proveniență inviolabilă, imagini și documente de înaltă definiție, coproprietate prin certificat.",
+          "imageAlt": "O sculptură de lapis lazuli sculptată pe un fundal întunecat"
+        },
+        "gold": {
+          "title": "Certificare de aur",
+          "description": "Metalor, liderul mondial în rafinarea aurului, înregistrează fiecare detaliu al aurului într-un certificat on-chain. Trasabil, inviolabil și mereu disponibil.",
+          "imageAlt": "Patru lingouri de aur certificate de dimensiuni în scădere pe un fundal întunecat"
+        },
+        "luxury": {
+          "title": "Certificare de diamante și lux",
+          "description": "Urmărești originea, clasificarea și proprietatea fiecărui diamant și fiecare bun de lux on-chain, permițând cumpărătorilor să verifice pentru ce plătesc.",
+          "imageAlt": "Un diamant tăiat ținut în mână cu o pincetă"
+        },
+        "madein": {
+          "title": "Certificare Made in",
+          "description": "Originea națională este o pretensie demn de dovedit. Certificați unde și cum este fabricat un produs, de la ceasuri la modă, permițând oricui să o verifice on-chain.",
+          "imageAlt": "Un meșter dând formă unui tipar de pantof în mână într-o atelieră"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Pașapoarte Digitale pentru Produse din UE"

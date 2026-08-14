@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Kaikki oikeudet pidätetään – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Omaisuuksien sertifiointi lohkoketjussa",
+        "description": "ORIGYN sertifioi kultaa, taidetta, luksustavaroita väärentämisenkestävillä sertifikaateilla, aitous, alkuperä ja omistajuus aina todennettavissa.",
+        "imageAlt": "ORIGYN-sertifiointidashboard, avoinna tabletilla"
+      },
+      "ai": {
+        "title": "Lohkoketjun sisäinen AI-päättely",
+        "description": "Avointa tutkimusta autonomisten AI-agenttien ajamisesta julkisessa lohkoketjussa. Ei ketjun ulkopuolisia oikoteitä, vain todennettavaa päättelyä.",
+        "imageAlt": "Kortti, jossa lukee 'Edistämme lohkoketjun sisäistä AI-päättelyä', tumman ORIGYN-taustan päällä"
+      },
+      "token": {
+        "title": "OGY-token",
+        "cardTitle": "OGY, ORIGYN Protokollan\nhyödyllisyys",
+        "description": "OGY maksaa sertifioinnista, siirroista ja varastoinnista ORIGYN Protokollan sisällä. Katso hyödyllisyys, tokenomiikka, panostuspalkkiot ja virallinen sopimusosoite.",
+        "imageAlt": "OGY-tokeni kiteytettynä lasipalloon"
+      },
+      "helpCenter": {
+        "title": "Ohjekeskus",
+        "cardTitle": "Vastauksia OGY:sta,\nsertifikaateista ja DAO",
+        "description": "Kuinka OGY-token, lohkoketjun sisäinen sertifiointi, panostuspalkkiot ja ORIGYN DAO:n hallinto toimivat — kaikki vastaukset yhdessä paikassa.",
+        "imageAlt": "Kortti, jossa lukee 'Vastauksia OGY:sta, sertifikaateista ja DAO:sta'"
+      },
+      "integrator": {
+        "title": "Integraattoriohjelma",
+        "cardTitle": "Tule ORIGYN\nIntegaattoriksi",
+        "description": "Rakenna ORIGYN-protokollan päälle ja tuo lohkoketjun sertifiointi omalle toimialallesi — ilman syvää Web3-osaamisen vaatimusta. Katso ohjelman toimintaa.",
+        "imageAlt": "Puhelin, jossa näkyy ORIGYN-sertifikaatti, tumman hiekan päällä"
+      },
+      "integratorJoin": {
+        "title": "Liity Integraattoriohjelmaan",
+        "cardTitle": "Liity\nIntegraattoriohjelmaan",
+        "description": "Kerro projektistasi, markkinastasi ja tavoitteistasi. Jokainen hakemus käydään läpi ORIGYN Foundationissa, jonka jälkeen ORIGYN DAO äänestää.",
+        "imageAlt": "Kortti, jossa lukee 'Liity Integraattoriohjelmaan'"
+      },
+      "useCase": {
+        "art": {
+          "title": "Taidesertifiointi",
+          "description": "Taiteilijat, galleriat ja säätiöt sertifioivat taideteoksia ORIGYNissa: väärentämisenkestävä alkuperä, korkealaatuiset kuvat ja asiakirjat, yhteisomistus.",
+          "imageAlt": "Lapis lazulin veistos tumman taustan päällä"
+        },
+        "gold": {
+          "title": "Kultasertifiointi",
+          "description": "Metalor, maailman johtava kultakiteyttäjä, tallentaa kultaharkon tiedot yhteen lohkoketjun sertifikaattiin. Jäljitettävä, väärentämisenkestävä, aina saatavilla.",
+          "imageAlt": "Neljä sertifioitua kultaharkoa, koko pienenemään, tumman taustan päällä"
+        },
+        "luxury": {
+          "title": "Timantti- ja luksussertifiointi",
+          "description": "Jäljitä jokaisen kiven ja jokaisen luksusesineen alkuperä, luokitus ja omistajuus lohkoketjussa, jotta ostajat voivat tarkistaa mistä maksavat.",
+          "imageAlt": "Katkaistu timantti pinseteissa"
+        },
+        "madein": {
+          "title": "Valmistusmaa-sertifiointi",
+          "description": "Kansallinen alkuperä on väite, joka kannattaa todistaa. Sertifioi missä ja miten tuote on valmistettu — kelloista muotiin — ja anna ketjulla todennetavaksi.",
+          "imageAlt": "Käsityöläinen muovaa jalkineen muottia käsin työpajassa"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU:n digitaaliset tuotepassit"

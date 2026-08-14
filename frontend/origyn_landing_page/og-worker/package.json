@@ -1,0 +1,9 @@
+{
+  "name": "origyn-og-worker",
+  "private": true,
+  "scripts": {
+    "copy": "node --experimental-strip-types scripts/build-copy.mjs",
+    "dev": "npm run copy && npx wrangler dev",
+    "deploy": "npm run copy && npx wrangler deploy"
+  }
+}

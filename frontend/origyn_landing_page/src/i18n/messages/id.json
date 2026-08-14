@@ -260,6 +260,64 @@
     "dashboard": "DASBOR",
     "copyright": "©2026 Hak cipta dilindungi – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Sertifikasi aset on-chain",
+        "description": "ORIGYN mensertifikasi emas, seni, barang mewah dengan sertifikat on-chain tahan manipulasi, menjaga keaslian, provenance dan kepemilikan dapat diverifikasi.",
+        "imageAlt": "Dasbor sertifikasi ORIGYN, terbuka di tablet"
+      },
+      "ai": {
+        "title": "Inferensi AI on-chain",
+        "description": "Riset terbuka untuk menjalankan agen AI otonom sepenuhnya di blockchain publik. Tanpa jalan pintas off-chain dan dapat diverifikasi sejak desain.",
+        "imageAlt": "Kartu bertuliskan Memajukan inferensi AI on-chain, di latar ORIGYN gelap"
+      },
+      "token": {
+        "title": "Token OGY",
+        "cardTitle": "OGY, utilitas\nProtokol ORIGYN",
+        "description": "OGY membayar sertifikasi, transfer, dan penyimpanan di Protokol ORIGYN. Lihat kegunaannya, tokenomik, hadiah staking, dan alamat kontrak resmi.",
+        "imageAlt": "Simbol token OGY tersuspensi di dalam bola kaca"
+      },
+      "helpCenter": {
+        "title": "Pusat Bantuan",
+        "cardTitle": "Jawaban tentang OGY,\nsertifikat dan DAO",
+        "description": "Cara kerja token OGY, sertifikasi on-chain, hadiah staking, dan tata kelola ORIGYN DAO, terjawab dalam satu tempat.",
+        "imageAlt": "Kartu bertuliskan Jawaban tentang OGY, sertifikat dan DAO"
+      },
+      "integrator": {
+        "title": "Program Integrator",
+        "cardTitle": "Jadilah\nIntegrator ORIGYN",
+        "description": "Bangun di protokol ORIGYN dan bawa sertifikasi blockchain ke industri Anda, tanpa perlu keahlian Web3 mendalam. Lihat cara kerjanya.",
+        "imageAlt": "Ponsel menampilkan sertifikat ORIGYN, bertumpu di pasir hitam"
+      },
+      "integratorJoin": {
+        "title": "Daftar Program Integrator",
+        "cardTitle": "Daftar ke\nProgram Integrator",
+        "description": "Ceritakan tentang proyek, pasar, dan tujuan Anda. Setiap aplikasi diverifikasi ORIGYN Foundation, lalu divotasi ORIGYN DAO.",
+        "imageAlt": "Kartu bertuliskan Daftar ke Program Integrator"
+      },
+      "useCase": {
+        "art": {
+          "title": "Sertifikasi Seni",
+          "description": "Seniman, galeri, dan yayasan mensertifikasi karya seni di ORIGYN: provenance tahan manipulasi, gambar definisi tinggi, dokumen, dan kepemilikan bersama.",
+          "imageAlt": "Patung lapis lazuli terukir di latar gelap"
+        },
+        "gold": {
+          "title": "Sertifikasi Emas",
+          "description": "Metalor, pemimpin dunia pemurnian emas, mencatat setiap detail batang emas dalam satu sertifikat on-chain. Dapat dilacak, tahan manipulasi, selalu tersedia.",
+          "imageAlt": "Empat batang emas tersertifikasi berukuran menurun di latar gelap"
+        },
+        "luxury": {
+          "title": "Sertifikasi Berlian & Mewah",
+          "description": "Lacak asal, penilaian, dan kepemilikan setiap berlian dan barang mewah on-chain, sehingga pembeli dapat memverifikasi apa yang mereka bayar.",
+          "imageAlt": "Berlian potong dipegang dengan pinset"
+        },
+        "madein": {
+          "title": "Sertifikasi Made In",
+          "description": "Asal negara adalah klaim yang layak dibuktikan. Sertifikasi tempat dan cara produksi dibuat, dari jam tangan hingga fashion, siapa pun bisa memverifikasi on-chain.",
+          "imageAlt": "Pengrajin membentuk last sepatu dengan tangan di bengkel"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Paspor Produk Digital EU"

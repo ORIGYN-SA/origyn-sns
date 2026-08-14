@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Bảo lưu mọi quyền – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Xác thực tài sản, hoàn toàn trên chuỗi",
+        "description": "ORIGYN xác thực vàng, nghệ thuật, hàng xa xỉ và tài sản khác bằng chứng chỉ bất biến trên chuỗi, đảm bảo xác thực, nguồn gốc và quyền sở hữu kiểm chứng được.",
+        "imageAlt": "Bảng điều khiển xác thực ORIGYN, mở trên máy tính bảng"
+      },
+      "ai": {
+        "title": "Suy luận AI trên chuỗi",
+        "description": "Nghiên cứu mở về chạy tác nhân AI tự chủ trên blockchain công khai. Không đường tắt ngoài chuỗi, không lệnh gọi API kèm biên lai kiểm chứng được từ thiết kế.",
+        "imageAlt": "Một thẻ ghi Thúc đẩy suy luận AI trên chuỗi, trên nền ORIGYN tối"
+      },
+      "token": {
+        "title": "Token OGY",
+        "cardTitle": "OGY, tiện ích của\nGiao thức ORIGYN",
+        "description": "OGY thanh toán cho chứng nhận, chuyển nhượng và lưu trữ trên Giao thức ORIGYN. Xem tiện ích, tokenomics, phần thưởng staking và địa chỉ hợp đồng chính thức.",
+        "imageAlt": "Biểu tượng token OGY lơ lửng trong một quả cầu thủy tinh"
+      },
+      "helpCenter": {
+        "title": "Trung tâm trợ giúp",
+        "cardTitle": "Câu trả lời về OGY,\nchứng chỉ và DAO",
+        "description": "Cách thức token OGY, chứng nhận trên chuỗi, phần thưởng staking và quản trị ORIGYN DAO hoạt động, tất cả ở một nơi.",
+        "imageAlt": "Một thẻ ghi Câu trả lời về OGY, chứng chỉ và DAO"
+      },
+      "integrator": {
+        "title": "Chương Trình Tích Hợp",
+        "cardTitle": "Trở thành một Đối Tác\nTích Hợp ORIGYN",
+        "description": "Xây dựng trên giao thức ORIGYN và mang chứng nhận blockchain tới ngành của bạn, không cần chuyên môn Web3 sâu. Tìm hiểu cách chương trình hoạt động.",
+        "imageAlt": "Một chiếc điện thoại hiển thị chứng chỉ ORIGYN, đặt trên cát tối"
+      },
+      "integratorJoin": {
+        "title": "Ứng tuyển Chương Trình Tích Hợp",
+        "cardTitle": "Ứng tuyển vào\nChương Trình Tích Hợp",
+        "description": "Kể cho chúng tôi về dự án, thị trường và mục tiêu của bạn. Mỗi đơn xin được kiểm duyệt bởi ORIGYN Foundation, rồi bỏ phiếu bởi ORIGYN DAO.",
+        "imageAlt": "Một thẻ ghi Ứng tuyển Chương Trình Tích Hợp"
+      },
+      "useCase": {
+        "art": {
+          "title": "Xác thực nghệ thuật",
+          "description": "Các nghệ sĩ, phòng trưng bày và quỹ xác thực tác phẩm trên ORIGYN: nguồn gốc bất biến, hình ảnh HD, tài liệu, và sở hữu chung qua chứng chỉ.",
+          "imageAlt": "Một bức tượng lapis lazuli được chạm khắc trên nền tối"
+        },
+        "gold": {
+          "title": "Xác thực vàng",
+          "description": "Metalor, nhà lãnh đạo tinh luyện vàng thế giới, ghi lại mọi chi tiết thỏi vàng trong chứng chỉ trên chuỗi duy nhất. Có thể truy vết, bất biến, luôn sẵn sàng.",
+          "imageAlt": "Bốn thỏi vàng được xác thực có kích thước giảm dần trên nền tối"
+        },
+        "luxury": {
+          "title": "Xác thực kim cương và xa xỉ",
+          "description": "Theo dõi xuất xứ, phân loại và quyền sở hữu từng viên đá và sản phẩm xa xỉ trên chuỗi, để người mua xác minh những gì họ thanh toán.",
+          "imageAlt": "Một viên kim cương cắt được giữ bằng một cặp nhíp"
+        },
+        "madein": {
+          "title": "Xác thực xuất xứ",
+          "description": "Xuất xứ quốc gia là yêu cầu đáng chứng minh. Xác thực nơi và cách sản xuất sản phẩm, từ đồng hồ tới thời trang, và cho phép ai cũng xác minh trên chuỗi.",
+          "imageAlt": "Một thợ thủ công định hình cái cuốc giày bằng tay trong xưởng"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Hộ chiếu Sản phẩm Kỹ thuật số EU"

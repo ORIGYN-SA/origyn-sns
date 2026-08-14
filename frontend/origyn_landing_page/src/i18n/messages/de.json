@@ -222,6 +222,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alle Rechte vorbehalten – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "On-Chain-Zertifikate für reale Vermögenswerte",
+        "description": "ORIGYN zertifiziert Gold, Kunst und Luxusgüter mit manipulationssicheren On-Chain-Zertifikaten. Authentizität, Herkunft und Eigentum bleiben überprüfbar.",
+        "imageAlt": "Das ORIGYN-Zertifizierungsdashboard, offen auf einem Tablet"
+      },
+      "ai": {
+        "title": "On-Chain-KI-Inferenz",
+        "description": "Offene Forschung zum Betrieb autonomer KI-Agenten auf öffentlicher Blockchain. Keine Off-Chain-Abkürzungen, keine API mit Quittung – verifizierbar von Grund auf.",
+        "imageAlt": "Eine Karte mit Text „KI-Inferenz voranbringen, on-chain“, auf dunklem ORIGYN-Hintergrund"
+      },
+      "token": {
+        "title": "Der OGY Token",
+        "cardTitle": "OGY – Utility des\nORIGYN-Protokolls",
+        "description": "OGY zahlt für Zertifizierung, Transfers und Speicherung im ORIGYN-Protokoll. Utility, Tokenomik, Staking-Rewards und offizielle Contract-Adresse.",
+        "imageAlt": "Das OGY-Token-Symbol, schwebend in einer Glaskugel"
+      },
+      "helpCenter": {
+        "title": "Hilfecenter",
+        "cardTitle": "Antworten zu OGY,\nZertifikaten und der DAO",
+        "description": "Wie der OGY-Token, On-Chain-Zertifizierung, Staking-Rewards und ORIGYN-DAO-Governance funktionieren – alles an einem Ort beantwortet.",
+        "imageAlt": "Eine Karte mit Text „Antworten zu OGY, Zertifikaten und der DAO“"
+      },
+      "integrator": {
+        "title": "Integrator-Programm",
+        "cardTitle": "Werde ein\nORIGYN-Integrator",
+        "description": "Bauen auf dem ORIGYN-Protokoll auf und bringen Sie Blockchain-Zertifizierung in Ihre Branche – ganz ohne Web3-Expertise. Erfahren Sie, wie das Programm funktioniert.",
+        "imageAlt": "Ein Telefon zeigt ein ORIGYN-Zertifikat, auf dunklem Sand ruhend"
+      },
+      "integratorJoin": {
+        "title": "Bewerbung zum Integrator-Programm",
+        "cardTitle": "Bewerbung beim\nIntegrator-Programm",
+        "description": "Erzählen Sie uns von Ihrem Projekt, Ihrem Markt und Ihren Zielen. Jede Bewerbung wird von der ORIGYN Foundation geprüft und dann von der ORIGYN DAO abgestimmt.",
+        "imageAlt": "Eine Karte mit Text „Bewerbung beim Integrator-Programm“"
+      },
+      "useCase": {
+        "art": {
+          "title": "Kunstzertifizierung",
+          "description": "Künstler, Galerien und Stiftungen zertifizieren Kunstwerke auf ORIGYN: manipulationssichere Provenienz, HD-Bilder und Dokumente, Miteigentum durch Zertifikat.",
+          "imageAlt": "Eine geschnitzte Lapislazuli-Skulptur auf dunklem Hintergrund"
+        },
+        "gold": {
+          "title": "Goldzertifizierung",
+          "description": "Metalor, Weltmarktführer in Goldraffinierung, erfasst Barren-Details in einem On-Chain-Zertifikat. Nachverfolgbar, manipulationssicher und immer zugänglich.",
+          "imageAlt": "Vier zertifizierte Goldbarren abnehmender Größe auf dunklem Hintergrund"
+        },
+        "luxury": {
+          "title": "Diamanten- und Luxuszertifizierung",
+          "description": "Verfolgung von Herkunft, Bewertung und Eigentümerschaft jedes Steins und jedes Luxusstücks auf der Kette, damit Käufer überprüfen können, wofür sie bezahlen.",
+          "imageAlt": "Ein geschliffener Diamant, gehalten mit einer Pinzette"
+        },
+        "madein": {
+          "title": "Made-In-Zertifizierung",
+          "description": "Nationale Herkunft ist beweisbar. Zertifizieren Sie, wo und wie Produkte hergestellt werden – von Uhren bis Mode – und ermöglichen Sie Verifikation on-chain.",
+          "imageAlt": "Ein Handwerker formt eine Schuhform mit der Hand in einer Werkstatt"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU Digitale Produktpässe"

@@ -1,14 +1,12 @@
-// Turns a `pages.ts` entry into the <head> tags of one emitted index.html.
-// Social crawlers do not run the SPA, so whatever the asset canister serves is
-// all they ever see, which makes these tags build-time output.
+// Turns a `pages.ts` entry into the <head> of one emitted index.html. Crawlers
+// never run the SPA, so these tags have to be build-time output.
 
 import { locales, type Locale } from "../i18n/config.ts";
+import { cardLocale } from "./card.ts";
 import { copy } from "./copy.ts";
-import { cardLocale } from "./og-image.ts";
-import { CARD_HEIGHT, CARD_WIDTH, ogImagePath, SITE_NAME, type PageSeo } from "./pages.ts";
+import { cardPath, CARD_HEIGHT, CARD_WIDTH, SITE_NAME, type PageSeo } from "./pages.ts";
 
-// og:locale wants language_TERRITORY, which does not follow from the locale tag
-// on its own, so the territories are spelled out.
+// og:locale wants language_TERRITORY, which the locale tag alone does not give.
 const OG_LOCALES: Record<Locale, string> = {
   en: "en_US", ar: "ar_AR", bg: "bg_BG", bn: "bn_BD", cs: "cs_CZ", da: "da_DK",
   de: "de_DE", el: "el_GR", es: "es_ES", fi: "fi_FI", fr: "fr_FR", he: "he_IL",
@@ -25,11 +23,13 @@ const escape = (value: string): string =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-const buildTags = (page: PageSeo, locale: Locale, siteUrl: string): string => {
-  const canonical = `${siteUrl}/${locale}/${page.path}`;
+const pageUrl = (siteUrl: string, locale: Locale, page: PageSeo): string =>
+  page.path ? `${siteUrl}/${locale}/${page.path}` : `${siteUrl}/${locale}`;
 
-  // X reads og:title, og:description and og:image, so twitter:card is the only
-  // tag it needs of its own.
+const buildTags = (page: PageSeo, locale: Locale, urls: SiteUrls): string => {
+  const canonical = pageUrl(urls.site, locale, page);
+
+  // X reads the og: tags, so twitter:card is the only one it needs of its own.
   const tags: Record<string, string> = {
     "og:type": "website",
     "og:site_name": SITE_NAME,
@@ -37,23 +37,22 @@ const buildTags = (page: PageSeo, locale: Locale, siteUrl: string): string => {
     "og:url": canonical,
     "og:title": copy(locale, page.keys.title),
     "og:description": copy(locale, page.keys.description),
-    "og:image": `${siteUrl}${ogImagePath(page, cardLocale(locale))}`,
-    "og:image:type": "image/png",
+    // Another origin: og-worker draws these rather than the canister storing them.
+    "og:image": `${urls.cards}${cardPath(page, cardLocale(locale))}`,
+    "og:image:type": "image/jpeg",
     "og:image:width": String(CARD_WIDTH),
     "og:image:height": String(CARD_HEIGHT),
     "og:image:alt": copy(locale, page.keys.imageAlt),
     "twitter:card": "summary_large_image",
   };
 
-  // Every locale serves the same page in its own language, so each one points
-  // at the others; x-default is the unprefixed path, which negotiates a locale
-  // client-side and redirects.
+  // x-default is the unprefixed path, which negotiates a locale client-side.
   const alternates = [
     ...locales.map(
       (alternate) =>
-        `<link rel="alternate" hreflang="${alternate}" href="${escape(`${siteUrl}/${alternate}/${page.path}`)}">`
+        `<link rel="alternate" hreflang="${alternate}" href="${escape(pageUrl(urls.site, alternate, page))}">`
     ),
-    `<link rel="alternate" hreflang="x-default" href="${escape(`${siteUrl}/${page.path}`)}">`,
+    `<link rel="alternate" hreflang="x-default" href="${escape(`${urls.site}/${page.path}`)}">`,
   ];
 
   return [
@@ -68,16 +67,14 @@ const buildTags = (page: PageSeo, locale: Locale, siteUrl: string): string => {
     .join("\n");
 };
 
-/**
- * Rewrite the site-wide title and description of a built index.html with the
- * page's own, then add its social tags. Throws rather than emitting a page that
- * silently keeps the generic tags, since nothing downstream would catch that.
- */
+export type SiteUrls = { site: string; cards: string };
+
+/** Throws rather than emitting a page that silently keeps the generic tags. */
 export const injectHead = (
   html: string,
   page: PageSeo,
   locale: Locale,
-  siteUrl: string
+  urls: SiteUrls
 ): string => {
   const title = `${copy(locale, page.keys.title)} | ${SITE_NAME}`;
   const edits: [RegExp, string][] = [
@@ -86,7 +83,7 @@ export const injectHead = (
       /<meta\s+name="description"[^>]*>/i,
       `<meta name="description" content="${escape(copy(locale, page.keys.description))}">`,
     ],
-    [/[ \t]*<\/head>/i, `${buildTags(page, locale, siteUrl)}\n  </head>`],
+    [/[ \t]*<\/head>/i, `${buildTags(page, locale, urls)}\n  </head>`],
   ];
 
   return edits.reduce((current, [pattern, replacement]) => {

@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Lahat ng karapatan ay nakalaan – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Sertipikasyon ng asset, ganap on-chain",
+        "description": "Ang ORIGYN ay nag-sertipika ng ginto, sining, luxury at higit pa. Ang authenticity, provenance at pagmamay-ari ay laging mabeberipika ng sinuman on-chain.",
+        "imageAlt": "Ang ORIGYN certification dashboard, bukas sa isang tablet"
+      },
+      "ai": {
+        "title": "On-chain AI inference",
+        "description": "Bukás na pananaliksik sa awtonomong AI agents sa blockchain. Walang off-chain shortcuts o API calls. Beripikable ayon sa disenyo.",
+        "imageAlt": "Isang card na nagpapakita ng advancing on-chain AI inference sa dark ORIGYN background"
+      },
+      "token": {
+        "title": "Ang OGY token",
+        "cardTitle": "OGY, ang utility ng\nORIGYN Protocol",
+        "description": "Ang OGY ay nagbabayad para sa certification, transfers at storage sa ORIGYN. Tuklasin ang utility, tokenomics, staking rewards at contract address.",
+        "imageAlt": "Ang OGY token symbol na nakalakay sa loob ng glass sphere"
+      },
+      "helpCenter": {
+        "title": "Sentro ng Tulong",
+        "cardTitle": "Mga sagot tungkol sa\nOGY, sertipiko at DAO",
+        "description": "Paano gumagana ang OGY token, on-chain certification, staking rewards at ORIGYN DAO governance, lahat nasagot sa isang lugar.",
+        "imageAlt": "Isang card na may sulat na Mga sagot tungkol sa OGY, sertipiko at DAO"
+      },
+      "integrator": {
+        "title": "Integrator Program",
+        "cardTitle": "Maging isang\nORIGYN Integrator",
+        "description": "Magbuo sa ORIGYN protocol at magdala ng blockchain certification sa inyong industriya nang walang Web3 expertise na kailangan. Tuklasin ang programa.",
+        "imageAlt": "Isang phone na nagpapakita ng ORIGYN certificate, nakalagay sa dark sand"
+      },
+      "integratorJoin": {
+        "title": "Mag-apply sa Integrator Program",
+        "cardTitle": "Mag-apply sa\nIntegrator Program",
+        "description": "Sabihin ang inyong proyekto, merkado at layunin. Bawat application ay sinusuri ng ORIGYN Foundation, pagkatapos ay binoboto ng ORIGYN DAO.",
+        "imageAlt": "Isang card na may sulat na Mag-apply sa Integrator Program"
+      },
+      "useCase": {
+        "art": {
+          "title": "Sertipikasyon ng Sining",
+          "description": "Mga artist, gallery at foundation ay nag-sertipika sa ORIGYN: tamper-proof provenance, HD images at dokumento, co-ownership sa sertipiko.",
+          "imageAlt": "Isang inukit na lapis lazuli sculpture sa dark background"
+        },
+        "gold": {
+          "title": "Sertipikasyon ng Ginto",
+          "description": "Ang Metalor ay nag-record ng bawat detalye ng gold bar sa isang on-chain certificate. Masusubaybayan, tamper-proof at laging available.",
+          "imageAlt": "Apat na sertipikadong gold bar na bumababa ang laki sa dark background"
+        },
+        "luxury": {
+          "title": "Luxury & Diyamante Sertipikasyon",
+          "description": "Subaybayan ang pinagmulan, grading at pagmamay-ari ng bawat bato at luxury piece, upang mabeberipika ang bayad nila on-chain.",
+          "imageAlt": "Isang nikhang diyamante na hawak ng tweezers"
+        },
+        "madein": {
+          "title": "Made In Sertipikasyon",
+          "description": "I-sertipika kung saan at paano ginawa ang produkto, mula relo hanggang fashion. Hayaan ang sinuman na ibeberipika ito on-chain.",
+          "imageAlt": "Isang craftsman na bumubuo ng shoe last sa pamamagitan ng kamay sa workshop"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Mga Digital Product Passport ng EU"

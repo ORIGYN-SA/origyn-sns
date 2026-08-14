@@ -6,32 +6,29 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import { defaultLocale, locales } from "./src/i18n/config.ts";
 import { injectHead } from "./src/seo/meta.ts";
-import { cardLocale, renderOgImage } from "./src/seo/og-image.ts";
-import { ogImagePath, pages } from "./src/seo/pages.ts";
+import { pages } from "./src/seo/pages.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// The IC asset canister serves a certified `index.html` fallback for unknown
-// SPA routes, but a bare directory path can be fragile: an orphaned
-// certification node (e.g. left by a removed page) makes the boundary node
-// reject the path with a "Response Verification Error" even though deeper
-// paths work. Emitting a real `<path>/index.html` makes the path a freshly
-// certified asset on every deploy, overwriting any stale node. The SPA still
-// negotiates the locale and redirects client-side from unprefixed paths to
-// /<locale>/<path> via LocaleRedirect.
-const PAGE_PATHS = ["ai", "dpp", "token", "help-center", "integrator", "integrator/join"];
-
-const spaIndexFallback = () => {
+// Crawlers never run the SPA, so per page, per locale <head> tags have to be
+// emitted here. Real `<path>/index.html` files rather than the canister's SPA
+// fallback: a stale certification node otherwise fails a bare directory path
+// with "Response Verification Error" even when deeper paths work.
+const localeHtml = () => {
   let outDir = "dist";
-  let siteUrl = "https://www.origyn.com";
+  const urls = { site: "https://www.origyn.com", cards: "" };
   return {
-    name: "spa-index-fallback",
+    name: "locale-html",
     apply: "build",
     configResolved(config) {
       outDir = config.build.outDir;
-      // og:image and canonical URLs have to be absolute, so the build needs to
-      // know which origin it is producing.
-      siteUrl = (config.env.VITE_SITE_URL ?? siteUrl).replace(/\/+$/, "");
+      // Canonical and og:image URLs are absolute, so both origins are needed.
+      const trim = (value, fallback) => (value ?? fallback).replace(/\/+$/, "");
+      urls.site = trim(config.env.VITE_SITE_URL, urls.site);
+      urls.cards = trim(config.env.VITE_OG_IMAGE_BASE_URL, "");
+      if (!urls.cards) {
+        throw new Error("VITE_OG_IMAGE_BASE_URL is unset, so og:image would point nowhere");
+      }
     },
     closeBundle() {
       const baseHtml = fs.readFileSync(path.resolve(__dirname, outDir, "index.html"), "utf8");
@@ -41,46 +38,19 @@ const spaIndexFallback = () => {
         fs.writeFileSync(path.join(dest, "index.html"), html);
       };
 
-      for (const page of PAGE_PATHS) {
-        const seo = pages.find((entry) => entry.path === page);
-        const head = (locale) => (seo ? injectHead(baseHtml, seo, locale, siteUrl) : baseHtml);
+      for (const page of pages) {
+        const head = (locale) => injectHead(baseHtml, page, locale, urls);
 
-        // Unprefixed page path so inbound links keep resolving and the
-        // client-side LocaleRedirect can take over. No locale to go on yet, so
-        // it carries the default one's tags.
-        writeAt(page, head(defaultLocale));
-        // Locale-prefixed paths — the canonical URLs after negotiation, each
-        // with its own translated tags and card.
-        for (const locale of locales) writeAt(`${locale}/${page}`, head(locale));
+        // Unprefixed: no locale to go on yet, so LocaleRedirect takes over.
+        writeAt(page.path, head(defaultLocale));
+        for (const locale of locales) writeAt(`${locale}/${page.path}`, head(locale));
       }
-
-      for (const locale of locales) writeAt(locale, baseHtml);
     },
   };
 };
 
-// Crawlers fetch og:image as a plain asset, and the site is a static asset
-// canister, so the cards are emitted with the bundle rather than on request.
-// One per locale, minus the scripts satori cannot shape, which share the
-// English card (see cardLocale).
-const ogImages = () => ({
-  name: "og-images",
-  async generateBundle() {
-    const cardLocales = [...new Set(locales.map(cardLocale))];
-    for (const page of pages) {
-      for (const locale of cardLocales) {
-        this.emitFile({
-          type: "asset",
-          fileName: ogImagePath(page, locale).replace(/^\//, ""),
-          source: await renderOgImage(page, locale),
-        });
-      }
-    }
-  },
-});
-
 export default defineConfig({
-  plugins: [react(), svgr(), ogImages(), spaIndexFallback()],
+  plugins: [react(), svgr(), localeHtml()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

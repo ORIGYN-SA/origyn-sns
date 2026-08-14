@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alle rettigheter forbeholdt – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Sertifisering av eiendeler, fullt on-chain",
+        "description": "ORIGYN sertifiserer gull, kunst og luksusvarer med manipuleringssikre on-chain sertifikater. Autentisitet, opprinnelse og eierskap blir verifiserbare av alle.",
+        "imageAlt": "ORIGYN sertifiseringsdashboardet, åpent på et nettbrett"
+      },
+      "ai": {
+        "title": "On-chain AI-inferens",
+        "description": "Åpen forskning på autonome AI-agenter på offentlig blokkjede. Ingen off-chain snarveier eller API-kall med kvittering. Verifiserbar av design.",
+        "imageAlt": "Et kort med teksten «Fremme on-chain AI-inferens» på mørk ORIGYN-bakgrunn"
+      },
+      "token": {
+        "title": "OGY-tokenet",
+        "cardTitle": "OGY, nytteverdien\ni ORIGYN-protokollen",
+        "description": "OGY betaler for sertifisering, overføringer og lagring i ORIGYN-protokollen. Se nytteverdien, tokenomikken, stakingbelønninger og kontraktsadresse.",
+        "imageAlt": "OGY-tokensymbolet suspendert inne i en glasssfære"
+      },
+      "helpCenter": {
+        "title": "Hjelpesenter",
+        "cardTitle": "Svar om OGY,\nsertifikater og DAO",
+        "description": "Få svar på hvordan OGY-tokenet, on-chain sertifisering, stakingbelønninger og ORIGYN DAO-styring fungerer – alt på ett sted.",
+        "imageAlt": "Et kort som viser «Svar om OGY, sertifikater og DAO»"
+      },
+      "integrator": {
+        "title": "Integrator-programmet",
+        "cardTitle": "Bli en\nORIGYN-integrator",
+        "description": "Bygg på ORIGYN-protokollen og ta blokkjedésertifisering til din bransje, uten behov for dyp Web3-ekspertise. Se hvordan programmet fungerer.",
+        "imageAlt": "En telefon som viser et ORIGYN-sertifikat, hvilende på mørk sand"
+      },
+      "integratorJoin": {
+        "title": "Søk om Integrator-programmet",
+        "cardTitle": "Søk til\nIntegrator-programmet",
+        "description": "Fortell oss om prosjektet, markedet og målene dine. Hver søknad blir vurdert av ORIGYN Foundation, deretter avgjøres av ORIGYN DAO.",
+        "imageAlt": "Et kort som viser «Søk om Integrator-programmet»"
+      },
+      "useCase": {
+        "art": {
+          "title": "Kunstsertifisering",
+          "description": "Kunstnere, gallerier og stiftelser sertifiserer kunstverk på ORIGYN med manipuleringssikker opprinnelse, høyoppløselige bilder og delt eierskap.",
+          "imageAlt": "En utskåret lapislazuli-skulptur på mørk bakgrunn"
+        },
+        "gold": {
+          "title": "Gullsertifisering",
+          "description": "Metalor registrerer hver detalj av gullbarer i on-chain sertifikater. Sporbar, manipuleringssikker og alltid tilgjengelig – infrastruktur for tokenisert gull.",
+          "imageAlt": "Fire sertifiserte gullbarer av synkende størrelse på mørk bakgrunn"
+        },
+        "luxury": {
+          "title": "Diamant- og luksussertifisering",
+          "description": "Spor opprinnelse, klassifisering og eierskap av hver diamant og luksusvare on-chain, slik at kjøpere kan verifisere hva de betaler for.",
+          "imageAlt": "En slipt diamant holdt i et par pinsett"
+        },
+        "madein": {
+          "title": "Made in-sertifisering",
+          "description": "Nasjonal opprinnelse er verdt å bevise. Sertifiser hvor og hvordan produktet er laget – fra klokker til mote – og la alle verifisere det on-chain.",
+          "imageAlt": "En håndverker som former en skoskapn for hånd på en verksted"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU Digitale Produktpass"
