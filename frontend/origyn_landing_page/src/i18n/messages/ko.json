@@ -603,122 +603,144 @@
     "roadmap": {
       "title": "로드맵",
       "description": "새로운 유틸리티와 거버넌스 기능부터 산업 및 개발자에 대한 확장 지원까지. 모든 이정표는 확장 가능하고 검증 가능하며 탈중앙화된 인프라를 통해 실물 자산을 완전히 온체인으로 연결한다는 우리의 사명을 반영합니다.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation 자금 지원",
           "description": "ORIGYN Foundation 은 ORIGYN Protocol 개발을 시작하기 위해 스위스 Neuchâtel 에 설립되었습니다."
         },
-        {
+        "ogy-token-launch": {
           "title": "OGY Token 출시",
           "description": "네이티브 유틸리티 토큰 $OGY 는 프로토콜 수수료, 거버넌스 및 staking 을 지원하기 위해 생성되었습니다."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "온체인 인증을 가능하게 하는 ORIGYN 의 NFT 표준 첫 번째 버전이 출시되었습니다."
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 업데이트",
           "description": "이전에 Foundation 에 할당되었던 2억 개의 $OGY 토큰이 소각되어 디플레이션 압력이 시작되었습니다."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "디지털 인증서를 위한 첫 번째 온체인 minting 인터페이스가 출시되었습니다."
         },
-        {
-          "title": "전략적 파트너십",
-          "description": "FederItaly 및 METALOR 와의 전략적 협력을 통해 이탈리아산 제품과 tokenized gold 를 인증합니다."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "이탈리아 제품 인증",
+          "description": "Federitaly와 함께 Made in Italy 제품의 진품성과 원산지를 보호하는 디지털 인증 인프라입니다."
         },
-        {
+        "first-gold-purchase": {
           "title": "첫 금 구매",
           "description": "실물 금 3 kg 을 구매하고 ORIGYN Protocol 을 사용해 tokenization 했습니다."
         },
-        {
+        "acquisition-candb": {
           "title": "CanDB 인수",
           "description": "ORIGYN 은 NFT metadata 에 최적화된 탈중앙화 확장형 데이터베이스 솔루션 CanDB 를 인수했습니다."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 및 Dashboard 출시",
           "description": "Tokenomics 3.0 과 함께 디플레이션 모델이 도입되고 ORIGYN Dashboard 의 첫 번째 버전이 출시되었습니다."
         },
-        {
+        "protocol-users-10k": {
           "title": "프로토콜 사용자 10,000명",
           "description": "ORIGYN 은 고유 프로토콜 사용자 10,000명을 돌파했습니다."
         },
-        {
+        "gold-dao-launch": {
           "title": "Gold DAO 출시",
           "description": "Gold DAO 는 실물 금을 온체인에서 tokenization 하고 인증하기 위해 ORIGYN 위에 구축된 첫 번째 DAO 가 되었습니다."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Gold DAO 에 500M OGY 기부",
           "description": "Gold DAO 의 장기 treasury 를 지원하기 위해 5억 개의 $OGY 토큰이 기부되었습니다."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO, ICP SNS 와 통합",
           "description": "ORIGYN DAO 는 완전히 탈중앙화되어 Internet Computer 의 SNS 프레임워크로 거버넌스됩니다."
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 출시",
           "description": "새 dashboard 버전에는 실시간 지표, staking 통계 및 거버넌스 도구가 포함됩니다."
         },
-        {
+        "users-30k": {
           "title": "30,000 사용자 마일스톤",
           "description": "ORIGYN 은 30,000명 이상의 사용자로 성장했으며, 6개월 만에 300% 증가했습니다."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Leo Caillard 및 Gil Sertissage 와의 협업",
           "description": "ORIGYN 은 주목도 높은 파트너십을 통해 실물 예술품과 다이아몬드를 인증합니다."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "NFT 표준은 인증서의 안전한 양도 가능성을 지원하도록 업그레이드되었습니다."
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework 출시",
           "description": "ORIGYN 과 통합하는 신규 파트너를 안내하기 위한 규칙과 onboarding 구조가 만들어졌습니다."
         },
-        {
-          "title": "Cecil DAO 출시",
-          "description": "ORIGYN 은 블록체인 투명성을 활용해 보존 및 인도주의 프로젝트에 자금을 지원하는 Cecil DAO 출시를 지원합니다."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Cecil DAO 출시 지원",
+          "description": "블록체인 기술을 통해 자연 보전과 인도주의 이니셔티브를 위한 탈중앙화 펀딩을 확대합니다."
         },
-        {
+        "acquisition-claimlink": {
           "title": "ClaimLink 인수",
           "description": "ORIGYN 은 ICP 기반의 탈중앙화 NFT 및 토큰 배포 플랫폼 ClaimLink 를 인수했습니다."
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "인증서 상호운용성과 생태계 전반의 유용성을 높이기 위해 새로운 표준이 도입되었습니다."
-        },
-        {
-          "title": "공개",
-          "titleSpan": "Minting Studio 출시",
-          "description": "누구나 ORIGYN 인프라에서 RWA 온체인 인증서를 mint 할 수 있는 셀프서비스 도구가 출시되었습니다."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Runestone 미스터리는 2026년 2분기 제네바에서 공개됩니다."
+          "titleSpan": "새로운 ICRC7 NFT 표준",
+          "description": "ORIGYN 생태계 전반에서 NFT의 상호운용성, 추적성, 활용성을 높이기 위해 설계된 새로운 인증서 표준입니다."
         },
-        {
-          "title": "Minting Lab",
-          "description": "누구나 ORIGYN 인프라를 사용해 온체인에서 mint 할 수 있는 셀프서비스 도구가 출시되었습니다."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "승인된 접근용",
+          "description": "사진을 제작자, 시간, 위치와 함께 온체인 기록으로 바꾸는 플랫폼 ORIGYN Records에 대한 비공개 액세스입니다."
         },
-        {
-          "title": "IP 보호 구현",
-          "description": "지식재산권 온체인 인증 지원이 프로토콜에 통합되었습니다."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "디지털 제품 여권(DPP)",
+          "description": "곧 시행될 EU DPP 표준에 맞춘 컴플라이언스 레이어로, 기업이 제품 신원을 온체인으로 발급할 수 있게 합니다."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN AI 인프라",
+          "description": "실물 자산을 위한 네이티브 AI 기반 검증 및 분석 인프라로, 신뢰와 인증, 증명을 강화합니다."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "프로페셔널 Minting Studio",
+          "description": "누구나 ORIGYN 인프라를 활용해 인증된 디지털 자산을 민팅할 수 있는 셀프서비스 플랫폼입니다."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "럭셔리 시장 확장",
+          "description": "럭셔리 시계 제조사를 위해 CORUM과 함께 시작한 블록체인 기반 디지털 인증 및 연장 보증 인프라입니다."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "사진을 제작자, 시간, 위치와 함께 온체인 기록으로 바꾸는 플랫폼 ORIGYN Records에 대한 공개 액세스입니다."
+        },
+        "cross-chain": {
           "title": "Cross-Chain 구현",
           "description": "Cross-chain 호환성은 ORIGYN 의 범위를 다른 주요 생태계로 확장합니다."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "글로벌 Wallet 및 Marketplace 통합",
           "description": "ORIGYN NFTs 는 전 세계 주요 wallets 및 NFT marketplaces 를 통해 접근할 수 있게 됩니다."
         },
-        {
+        "universal-certification-standard": {
           "title": "범용 인증 표준으로 도약",
           "description": "ORIGYN 은 모든 자산 클래스에 걸친 디지털 인증의 글로벌 기준으로 자리매김하는 것을 목표로 합니다."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "곧 밝혀질 미스터리",
+          "description": "이 미스터리는 Léo Caillard와의 독점 협업을 통해 곧 밝혀집니다."
         }
-      ]
+      }
     },
     "partners": {
       "label": "파트너",

@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Plan razvoja",
       "description": "Od novih korisnosti i funkcija upravljanja do proširene podrške za industrije i programere. Svaki je prekretnica odraz naše misije — potpunog prenošenja imovine stvarnog svijeta on-chain putem skalabilne, provjerljive i decentralizirane infrastrukture.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "Financiranje ORIGYN Foundation",
           "description": "ORIGYN Foundation osnovana je u Neuchâtelu u Švicarskoj kako bi započela razvoj ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Lansiranje OGY tokena",
           "description": "Izvorni utility token $OGY stvoren je za pokretanje naknada protokola, governancea i stakinga."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "Lansiranje prve verzije ORIGYN-ova NFT standarda koji omogućuje on-chain certifikaciju."
         },
-        {
+        "tokenomics-2": {
           "title": "Ažuriranje Tokenomics 2.0",
           "description": "200 milijuna $OGY tokena prethodno dodijeljenih Foundationu spaljeno je, čime se pokreće deflacijski pritisak."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "Lansiranje prvog on-chain minting sučelja za digitalne certifikate."
         },
-        {
-          "title": "Strateška partnerstva",
-          "description": "Strateške suradnje s FederItaly i METALOR za certifikaciju talijanskih proizvoda i tokeniziranog zlata."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Autentifikacija talijanskih proizvoda",
+          "description": "Infrastruktura digitalne certifikacije koja štiti izvornost i podrijetlo proizvoda Made in Italy, uz Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "Prva kupnja zlata",
           "description": "3 kg fizičkog zlata kupljeno je i tokenizirano pomoću ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Akvizicija CanDB",
           "description": "ORIGYN preuzima CanDB, decentralizirano, skalabilno rješenje baze podataka optimizirano za NFT metapodatke."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 i lansiranje Dashboarda",
           "description": "Uvodi se deflacijski model s Tokenomics 3.0 i objavljuje se prva verzija ORIGYN Dashboarda."
         },
-        {
+        "protocol-users-10k": {
           "title": "10.000 korisnika protokola",
           "description": "ORIGYN premašuje 10.000 jedinstvenih korisnika protokola."
         },
-        {
+        "gold-dao-launch": {
           "title": "Lansiranje Gold DAO",
           "description": "Gold DAO postaje prvi DAO izgrađen na ORIGYN-u za tokenizaciju i certifikaciju fizičkog zlata on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Donacija 500M OGY Gold DAO-u",
           "description": "Pola milijarde $OGY tokena donirano je za potporu dugoročnoj riznici Gold DAO-a."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO integriran s ICP SNS",
           "description": "ORIGYN DAO postaje potpuno decentraliziran i upravljan putem SNS okvira Internet Computera."
         },
-        {
+        "dashboard-v2": {
           "title": "Izdanje Dashboard V2",
           "description": "Nova verzija dashboarda uključuje metrike uživo, statistike stakinga i alate za governance."
         },
-        {
+        "users-30k": {
           "title": "Prekretnica od 30.000 korisnika",
           "description": "ORIGYN raste na više od 30.000 korisnika, što je povećanje od 300% u šest mjeseci."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Suradnja s Leo Caillardom i Gil Sertissage",
           "description": "ORIGYN certificira fizička umjetnička djela i dijamante u partnerstvima visokog profila."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "NFT standard nadograđen je kako bi omogućio sigurnu prenosivost certifikata."
         },
-        {
+        "integrator-framework": {
           "title": "Pokretanje Integrator Frameworka",
           "description": "Stvorena su pravila i onboarding struktura za usmjeravanje novih partnera koji se integriraju s ORIGYN-om."
         },
-        {
-          "title": "Lansiranje Cecil DAO",
-          "description": "ORIGYN podržava lansiranje Cecil DAO za financiranje projekata očuvanja i humanitarnih projekata uz blockchain transparentnost."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Podrška pokretanju Cecil DAO-a",
+          "description": "Unapređenje decentraliziranog financiranja projekata zaštite prirode i humanitarnih inicijativa pomoću blockchain tehnologije."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Akvizicija ClaimLink",
           "description": "ORIGYN preuzima ClaimLink, decentraliziranu platformu za distribuciju NFT-ova i tokena izgrađenu na ICP-u."
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "Uvodi se novi standard za povećanje interoperabilnosti certifikata i korisnosti u cijelom ekosustavu."
-        },
-        {
-          "title": "Lansiranje javnog",
-          "titleSpan": "Minting Studija",
-          "description": "Pokreće se self-service alat koji svakome omogućuje mintanje on-chain certifikata za RWA na ORIGYN infrastrukturi."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Misterij Runestone bit će otkriven u Q2 2026. u Ženevi."
+          "titleSpan": "Novi ICRC7 NFT standard",
+          "description": "Novi standard certifikata osmišljen za bolju interoperabilnost, sljedivost i korisnost NFT-ova u cijelom ORIGYN ekosustavu."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Pokreće se self-service alat koji svakome omogućuje on-chain mintanje koristeći ORIGYN infrastrukturu."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "za ovlašteni pristup",
+          "description": "Privatni pristup platformi ORIGYN Records koja vaše fotografije pretvara u on-chain zapise s autorom, vremenom i lokacijom."
         },
-        {
-          "title": "Implementacija IP zaštite",
-          "description": "Podrška za on-chain certifikaciju prava intelektualnog vlasništva integrirana je u protokol."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Digitalne putovnice proizvoda (DPP)",
+          "description": "Sloj usklađenosti s nadolazećim EU DPP standardima koji tvrtkama omogućuje izdavanje identiteta proizvoda on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN AI infrastruktura",
+          "description": "Izvorna provjera i analiza pokretana umjetnom inteligencijom za stvarnu imovinu, koja jača povjerenje, autentifikaciju i certifikaciju."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Profesionalni Minting Studio",
+          "description": "Samoposlužna platforma koja svakome omogućuje kovanje certificirane digitalne imovine na infrastrukturi ORIGYN-a."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Širenje na tržište luksuza",
+          "description": "Digitalna certifikacija i infrastruktura proširenog jamstva na blockchainu za proizvođače luksuznih satova, pokrenute s CORUM-om."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Javni pristup platformi ORIGYN Records koja vaše fotografije pretvara u on-chain zapise s autorom, vremenom i lokacijom."
+        },
+        "cross-chain": {
           "title": "Cross-chain implementacija",
           "description": "Cross-chain kompatibilnost širi doseg ORIGYN-a na druge velike ekosustave."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Globalna integracija walleta i marketplaceova",
           "description": "ORIGYN NFTs postaju dostupni putem vodećih walleta i NFT marketplaceova diljem svijeta."
         },
-        {
+        "universal-certification-standard": {
           "title": "Postajanje univerzalnim standardom certifikacije",
           "description": "ORIGYN nastoji postati globalno mjerilo za digitalnu certifikaciju svih klasa imovine."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Misterij će biti otkriven",
+          "description": "Misterij će uskoro biti otkriven kroz ekskluzivnu suradnju s Léom Caillardom."
         }
-      ]
+      }
     },
     "partners": {
       "label": "PARTNERI",

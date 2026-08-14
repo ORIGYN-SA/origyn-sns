@@ -75,9 +75,9 @@ $color-cyan: #85f1ff;
 .roadmapCardsWrapper {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: $roadmap-card-gap;
   overflow-x: auto;
-  padding: 40px 25px;
+  padding: 40px $roadmap-strip-padding;
   position: relative;
   z-index: 1;
   scroll-snap-type: x mandatory;
@@ -144,7 +144,12 @@ $color-cyan: #85f1ff;
   transform: translateY(-50%);
   left: 0;
   right: 0;
-  width: 20476px;
+  // The wrapper scrolls, so left/right only reach the visible box, not the
+  // full strip. Deriving the width keeps the line honest as cards are added.
+  width: calc(
+    var(--roadmap-cards, 0) * #{$roadmap-card-width} +
+      (var(--roadmap-cards, 0) - 1) * #{$roadmap-card-gap} + #{$roadmap-strip-padding * 2}
+  );
 
   &::before,
   &::after {

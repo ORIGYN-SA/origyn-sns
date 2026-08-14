@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Yol Haritası",
       "description": "Yeni işlevler ve yönetişim özelliklerinden sektörler ile geliştiriciler için genişletilmiş desteğe kadar her önemli adım, gerçek dünya varlıklarını ölçeklenebilir, doğrulanabilir ve merkeziyetsiz bir altyapıyla tamamen zincir üstüne taşıma misyonumuzu yansıtır.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Vakfı Finanse Edildi",
           "description": "ORIGYN Vakfı, ORIGYN Protocol geliştirmesini başlatmak üzere İsviçre'nin Neuchâtel kentinde kuruldu."
         },
-        {
+        "ogy-token-launch": {
           "title": "OGY Token Lansmanı",
           "description": "Yerel yardımcı token $OGY, protokol ücretlerini, yönetişimi ve staking'i desteklemek için oluşturuldu."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standardı v1.0",
           "description": "On-chain sertifikasyonu mümkün kılan ORIGYN'in NFT standardının ilk sürümü başlatıldı."
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 Güncellemesi",
           "description": "Daha önce Vakfa ayrılan 200 milyon $OGY token yakıldı ve deflasyonist baskı başlatıldı."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platformu 1.0",
           "description": "Dijital sertifikalar için ilk on-chain minting arayüzü başlatıldı."
         },
-        {
-          "title": "Stratejik Ortaklıklar",
-          "description": "İtalyan yapımı ürünleri ve tokenleştirilmiş altını sertifikalandırmak için FederItaly ve METALOR ile stratejik iş birlikleri yapıldı."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "İtalyan ürünlerinin doğrulanması",
+          "description": "Made in Italy ürünlerinin özgünlüğünü ve menşeini Federitaly ile birlikte koruyan dijital sertifikasyon altyapısı."
         },
-        {
+        "first-gold-purchase": {
           "title": "İlk Altın Alımı",
           "description": "3 kg fiziksel altın satın alındı ve ORIGYN Protocol kullanılarak tokenleştirildi."
         },
-        {
+        "acquisition-candb": {
           "title": "CanDB'nin Satın Alınması",
           "description": "ORIGYN, NFT metadatası için optimize edilmiş merkeziyetsiz ve ölçeklenebilir bir veritabanı çözümü olan CanDB'yi satın aldı."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 ve Dashboard Lansmanı",
           "description": "Tokenomics 3.0 ile deflasyonist bir model tanıtıldı ve ORIGYN Dashboard'un ilk sürümü yayımlandı."
         },
-        {
+        "protocol-users-10k": {
           "title": "10.000 Protokol Kullanıcısı",
           "description": "ORIGYN, 10.000 benzersiz protokol kullanıcısını aştı."
         },
-        {
+        "gold-dao-launch": {
           "title": "Gold DAO Lansmanı",
           "description": "Gold DAO, fiziksel altını on-chain olarak tokenleştirmek ve sertifikalandırmak için ORIGYN üzerine inşa edilen ilk DAO oldu."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Gold DAO'ya 500M OGY Bağışı",
           "description": "Gold DAO'nun uzun vadeli hazinesini desteklemek için yarım milyar $OGY token bağışlandı."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO, ICP SNS ile Entegre Edildi",
           "description": "ORIGYN DAO tamamen merkeziyetsiz hale geldi ve Internet Computer'ın SNS framework'ü üzerinden yönetilmeye başlandı."
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 Yayını",
           "description": "Dashboard'un yeni sürümü canlı metrikler, staking istatistikleri ve yönetişim araçları içerir."
         },
-        {
+        "users-30k": {
           "title": "30.000 Kullanıcı Kilometre Taşı",
           "description": "ORIGYN, altı ayda %300 artışla 30.000'den fazla kullanıcıya ulaştı."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Leo Caillard ve Gil Sertissage ile İş Birliği",
           "description": "ORIGYN, yüksek profilli ortaklıklarda fiziksel sanat eserlerini ve elmasları sertifikalandırdı."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standardı v2.0",
           "description": "NFT standardı, sertifikaların güvenli şekilde devredilebilirliğini sağlamak için yükseltildi."
         },
-        {
+        "integrator-framework": {
           "title": "Entegratör Framework'ü Başlatıldı",
           "description": "ORIGYN ile entegrasyon yapan yeni ortaklara rehberlik etmek için kurallar ve onboarding yapısı oluşturuldu."
         },
-        {
-          "title": "Cecil DAO Lansmanı",
-          "description": "ORIGYN, koruma ve insani yardım projelerini blockchain şeffaflığıyla finanse etmek için Cecil DAO'nun lansmanını destekledi."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Cecil DAO lansmanına destek",
+          "description": "Doğa koruma ve insani yardım girişimleri için merkeziyetsiz finansmanı blokzincir teknolojisiyle ileriye taşıyor."
         },
-        {
+        "acquisition-claimlink": {
           "title": "ClaimLink'in Satın Alınması",
           "description": "ORIGYN, ICP üzerinde inşa edilmiş merkeziyetsiz bir NFT ve token dağıtım platformu olan ClaimLink'i satın aldı."
         },
-        {
-          "title": "ICRC-7 NFT Standardı",
-          "description": "Sertifika birlikte çalışabilirliğini ve ekosistem genelindeki faydayı artırmak için yeni bir standart tanıtıldı."
-        },
-        {
-          "title": "Herkese Açık Bir",
-          "titleSpan": "Minting Studio Lansmanı",
-          "description": "Herkesin ORIGYN altyapısı üzerinde RWA on-chain sertifikaları mint etmesini sağlayan self-servis bir araç başlatıldı."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Runestone gizemi 2026 2. çeyrekte Cenevre'de açıklanacak."
+          "titleSpan": "Yeni ICRC7 NFT standardı",
+          "description": "NFT'lerin birlikte çalışabilirliğini, izlenebilirliğini ve kullanışlılığını tüm ORIGYN ekosisteminde geliştiren yeni bir sertifika standardı."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Herkesin ORIGYN altyapısını kullanarak on-chain mint etmesini sağlayan self-servis bir araç başlatıldı."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "yetkili erişim için",
+          "description": "Fotoğraflarınızı oluşturucu, zaman ve konum bilgisiyle zincir üstü kayıtlara dönüştüren ORIGYN Records platformuna özel erişim."
         },
-        {
-          "title": "IP Koruması Uygulaması",
-          "description": "Fikri mülkiyet haklarının on-chain sertifikasyonu için destek protokole entegre edildi."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Dijital ürün pasaportları (DPP)",
+          "description": "Yaklaşan AB DPP standartlarıyla uyumlu, işletmelerin ürün kimliklerini zincir üstünde çıkarmasını sağlayan uyumluluk katmanı."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN yapay zekâ altyapısı",
+          "description": "Gerçek dünya varlıkları için yerleşik yapay zekâ destekli doğrulama ve analiz; güveni, kimlik doğrulamayı ve sertifikasyonu güçlendirir."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Profesyonel Minting Studio",
+          "description": "Herkesin ORIGYN altyapısını kullanarak sertifikalı dijital varlıklar üretmesine olanak tanıyan self servis platform."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Lüks pazarında büyüme",
+          "description": "Lüks saat üreticileri için CORUM ile başlatılan, blokzincir tabanlı dijital sertifikasyon ve genişletilmiş garanti altyapısı."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Fotoğraflarınızı oluşturucu, zaman ve konum bilgisiyle zincir üstü kayıtlara dönüştüren ORIGYN Records platformuna herkese açık erişim."
+        },
+        "cross-chain": {
           "title": "Cross-Chain Uygulaması",
           "description": "Cross-chain uyumluluk, ORIGYN'in erişimini diğer büyük ekosistemlere genişletir."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Küresel Wallet ve Marketplace Entegrasyonu",
           "description": "ORIGYN NFT'leri dünya genelindeki önde gelen wallet'lar ve NFT marketplace'leri üzerinden erişilebilir hale gelir."
         },
-        {
+        "universal-certification-standard": {
           "title": "Evrensel Sertifikasyon Standardı Olmak",
           "description": "ORIGYN, tüm varlık sınıflarında dijital sertifikasyon için küresel ölçüt haline gelmeyi hedefler."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Gizem yakında açıklanacak",
+          "description": "Gizem, Léo Caillard ile özel bir iş birliğiyle yakında aydınlanacak."
         }
-      ]
+      }
     },
     "partners": {
       "label": "ORTAKLAR",
