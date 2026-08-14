@@ -260,6 +260,64 @@
     "dashboard": "IRÁNYÍTÓPULT",
     "copyright": "©2026 Minden jog fenntartva – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Valóságos eszköztanúsítás, teljesen láncon",
+        "description": "Az ORIGYN hamisíthatatlan láncon futó tanúsítványokkal certifikálja az eszközöket, így az eredet és tulajdonjog mindig ellenőrizhető.",
+        "imageAlt": "Az ORIGYN tanúsítási irányítópultja egy táblszámítógépen"
+      },
+      "ai": {
+        "title": "Láncon futó AI-következtetés",
+        "description": "Nyílt kutatás autonóm AI-ügynökök futtatásáról nyilvános blokkláncon. Nincsenek láncon kívüli kerülőutak, API-hívások nyugtával – tervezetten ellenőrizhető.",
+        "imageAlt": "Egy kártya az „Előrehaladó láncon futó AI-következtetés“ szöveggel, ORIGYN háttéren"
+      },
+      "token": {
+        "title": "Az OGY token",
+        "cardTitle": "OGY, az ORIGYN\nProtocol hasznossága",
+        "description": "Az OGY tanúsítást, átutalásokat és tárolást finanszíroz az ORIGYN Protokollon. Nézze meg hasznosságát, tokenomikáját, staking-jutalmait és szerződéscímét.",
+        "imageAlt": "Az OGY token szimbóluma üveggömbben felfüggesztve"
+      },
+      "helpCenter": {
+        "title": "Súgó-központ",
+        "cardTitle": "Válaszok az OGY,\ntanúsítványok és DAO-ról",
+        "description": "Hogyan működik az OGY token, a láncon futó tanúsítás, a staking-jutalmak és az ORIGYN DAO irányítása – minden válaszban egy helyen.",
+        "imageAlt": "Egy kártya a szöveggel: Válaszok az OGY-ról, tanúsítványokról és a DAO-ról"
+      },
+      "integrator": {
+        "title": "Integrálói Program",
+        "cardTitle": "Válj ORIGYN\nIntegrálóvá",
+        "description": "Építsen az ORIGYN protokollon és vigyen blockchain-tanúsítást az Ön iparágába, web3-szaktudás nélkül. Nézze meg, hogyan működik a program.",
+        "imageAlt": "Egy telefon egy ORIGYN tanúsítvánnyal, sötét homokra fektetve"
+      },
+      "integratorJoin": {
+        "title": "Csatlakozás az Integrálói Programhoz",
+        "cardTitle": "Csatlakozás az\nIntegrálói Programhoz",
+        "description": "Meséljen projektjéről, piacáról és céljairól. Minden jelentkezést az ORIGYN Alapítvány felülvizsgál, majd az ORIGYN DAO szavaz róla.",
+        "imageAlt": "Egy kártya a szöveggel: Csatlakozás az Integrálói Programhoz"
+      },
+      "useCase": {
+        "art": {
+          "title": "Műalkotás-tanúsítás",
+          "description": "Művészek, galériák és alapítványok tanúsítanak műalkotásokat az ORIGYN-en: hamisíthatatlan eredet, HD képek és tanúsítvánnyal közös tulajdonjog.",
+          "imageAlt": "Egy faragott lapis lazuli szobor sötét háttéren"
+        },
+        "gold": {
+          "title": "Arany tanúsítása",
+          "description": "Metalor, az aranyfinomítás világvezetője, egy láncon futó tanúsítványban rögzíti az aranyrúd minden részletét. Nyomon követhető, hamisíthatatlan és elérhető.",
+          "imageAlt": "Négy tanúsított aranyrúd csökkenő méretben, sötét háttéren"
+        },
+        "luxury": {
+          "title": "Gyémánt- és luxustanúsítás",
+          "description": "Nyomon követheti az egyes kövek és luxustárgyak eredetét, osztályozását és tulajdonjogát a láncon, így a vevők ellenőrizhetik, mit fizetnek.",
+          "imageAlt": "Egy csiszolt gyémánt egy pár csipesz által fogva tartva"
+        },
+        "madein": {
+          "title": "Eredet-tanúsítás",
+          "description": "Tanúsítson termékeket, honnan és hogyan készültek – az óráktól a divatcikkekig – és engedje bárkit ellenőrizni a láncon.",
+          "imageAlt": "Egy kézműves egy cipőlábat formáz kézzel műhelyben"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Európai Digitális Termékútlevél"

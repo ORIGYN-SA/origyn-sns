@@ -4,7 +4,9 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist', 'public'] },
+  // .og-preview and .wrangler hold generated output: rendered cards and the
+  // bundle wrangler builds to run the worker locally.
+  { ignores: ['dist', 'public', '.og-preview', '**/.wrangler'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {

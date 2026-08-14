@@ -12,7 +12,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy:staging": "npm run build:staging && dfx deploy origyn_landing_page --network=staging",
-    "deploy:preprod": "npm run build:preprod && dfx deploy origyn_landing_page --network=preprod"
+    "deploy:preprod": "npm run build:preprod && dfx deploy origyn_landing_page --network=preprod",
+    "og:cards": "node --experimental-strip-types scripts/render-cards.mjs",
+    "og:art": "python3 scripts/build-og-art.py",
+    "og:fonts": "python3 scripts/build-og-fonts.py"
   },
   "dependencies": {
     "@origyn/shared-ui": "^0.4.0",
@@ -41,6 +44,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "jpeg-js": "^0.4.4",
     "postcss": "^8.5.6",
     "sass": "^1.99.0",
     "satori": "^0.29.0",

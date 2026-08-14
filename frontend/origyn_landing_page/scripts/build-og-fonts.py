@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Regenerate the fonts src/seo/og-image.ts renders the social cards with.
+"""Regenerate the fonts og-worker draws the social cards with.
 
 The cards are drawn by satori, whose font parser cannot read variable fonts, so
 every weight has to ship as a static instance. General Sans covers Latin only,
-so each remaining script needs a Noto face; the CJK faces are subset down to the
-characters the DPP copy actually uses, which is why this has to be re-run when
-that copy changes (src/seo/og-image.ts fails the build if a glyph is missing).
+leaving every other script to a Noto face; the CJK faces carry tens of thousands
+of glyphs, and are subset down to the characters the card copy actually uses.
+
+Re-run this whenever that copy changes. Until you do, the worker falls back to
+the English card for the affected locale and says so in its log.
 
     python3 scripts/build-og-fonts.py
 
@@ -19,8 +21,11 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSETS = ROOT / "src" / "seo" / "assets"
-MESSAGES = ROOT / "src" / "i18n" / "messages"
+WORKER = ROOT / "og-worker"
+ASSETS = WORKER / "assets" / "fonts"
+# Every string the cards draw, per locale, written by the worker's own script so
+# the subset and the render can never disagree about what the copy is.
+CARD_COPY = WORKER / "src" / "copy.json"
 
 # The card uses two weights: 300 for the headline, 400 for everything else.
 WEIGHTS = {"Light": 300, "Regular": 400}
@@ -62,16 +67,22 @@ def instance(source, dest, weight):
     run("fontTools.varLib.instancer", str(source), f"wght={weight}", "-o", str(dest))
 
 
-def dpp_characters(locale):
-    """Every character the locale's DPP copy uses, plus ASCII for the mixed-in
-    Latin (ORIGYN, DPP, ESPR) and the digits in the regulation dates."""
-    catalog = json.loads((MESSAGES / f"{locale}.json").read_text(encoding="utf-8"))
-    used = set(json.dumps(catalog["dpp"], ensure_ascii=False))
+def card_characters(locale):
+    """Every character the locale's cards draw, plus ASCII for the mixed-in
+    Latin (ORIGYN, OGY, DPP) and any digits."""
+    copy = json.loads(CARD_COPY.read_text(encoding="utf-8"))
+    used = set(json.dumps(copy[locale], ensure_ascii=False))
     return "".join(sorted(used | set(map(chr, range(0x20, 0x7F)))))
 
 
 def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
+    # Regenerated rather than assumed: a stale copy table would silently subset
+    # the fonts to yesterday's copy.
+    subprocess.run(
+        ["node", "--experimental-strip-types", "scripts/build-copy.mjs"],
+        cwd=WORKER, check=True, capture_output=True,
+    )
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
 
@@ -89,10 +100,10 @@ def main():
                 subset(source, ASSETS / f"{family}-{name}.ttf", unicodes=unicodes)
 
         for family, (slug, locale) in CJK.items():
-            print(f"{family} ({locale} DPP copy)")
+            print(f"{family} ({locale} card copy)")
             variable = tmp / f"{family}.ttf"
             fetch(f"{GOOGLE}/{slug}/{family}%5Bwght%5D.ttf", variable)
-            text = dpp_characters(locale)
+            text = card_characters(locale)
             for name, weight in WEIGHTS.items():
                 instanced = tmp / f"{family}-{weight}.ttf"
                 instance(variable, instanced, weight)
