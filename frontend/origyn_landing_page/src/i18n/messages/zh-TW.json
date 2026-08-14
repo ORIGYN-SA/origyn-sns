@@ -260,6 +260,64 @@
     "dashboard": "儀表板",
     "copyright": "©2026 版權所有 – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "現實世界資產認證，完全鏈上",
+        "description": "ORIGYN 以防篡改的區塊鏈認證書為黃金、藝術品、奢侈品及其他高價值現實資產進行鑑真認證。每份認證書詳細記錄在不可變的區塊鏈上，包含該資產的真實性、完整來源履歷與所有權資訊，確保任何人都可以獨立驗證及確認資產的真實性與合法所有權。",
+        "imageAlt": "在平板電腦上開啟的 ORIGYN 認證儀表板"
+      },
+      "ai": {
+        "title": "鏈上 AI 推論",
+        "description": "在公有區塊鏈上運行完全自主 AI 代理的開放研發。沒有鏈下捷徑，也無 API 呼叫收據。從設計上即可驗證。",
+        "imageAlt": "卡片顯示「推進鏈上 AI 推論」，背景為深色 ORIGYN 背景"
+      },
+      "token": {
+        "title": "OGY 代幣",
+        "cardTitle": "OGY，ORIGYN\nProtocol 的效用",
+        "description": "OGY 是 ORIGYN Protocol 的核心效用代幣，用於支付認證費、轉移費及數據儲存費。探索 OGY 在協議中的效用、代幣經濟學設計、質押獎勵機制及官方合約地址。",
+        "imageAlt": "OGY 代幣符號懸浮在玻璃球內"
+      },
+      "helpCenter": {
+        "title": "說明中心",
+        "cardTitle": "OGY、認證書\n與 DAO 的解答",
+        "description": "在一個集中位置了解並解答關於 OGY 代幣的效用、鏈上認證的運作、質押獎勵機制及 ORIGYN DAO 治理投票等所有常見問題。",
+        "imageAlt": "卡片顯示「OGY、認證書與 DAO 的常見問題解答」"
+      },
+      "integrator": {
+        "title": "整合商計畫",
+        "cardTitle": "加入 ORIGYN\n整合商計畫",
+        "description": "在 ORIGYN Protocol 基礎上構建應用，為您的產業帶來區塊鏈認證技術。無需深厚的 Web3 專業知識，任何人都可以參與。了解整合商計畫的運作方式。",
+        "imageAlt": "手機螢幕顯示 ORIGYN 認證書，放在深色沙灘上"
+      },
+      "integratorJoin": {
+        "title": "申請整合商計畫",
+        "cardTitle": "申請加入\n整合商計畫",
+        "description": "分享您的專案願景、目標市場與長期目標。每份整合商申請都將由 ORIGYN Foundation 進行嚴格審查，隨後由 ORIGYN DAO 社群進行公開投票表決。",
+        "imageAlt": "卡片顯示「申請整合商計畫」"
+      },
+      "useCase": {
+        "art": {
+          "title": "藝術品認證",
+          "description": "藝術家、畫廊及基金會在 ORIGYN 上認證藝術作品。每份認證書都提供防篡改的完整來源履歷、高清影像及相關文件，並支援透過認證書進行共同所有權管理。",
+          "imageAlt": "深色背景上的雕琢青金石雕刻"
+        },
+        "gold": {
+          "title": "黃金認證",
+          "description": "全球黃金精煉業領導者 Metalor 在單份 ORIGYN 鏈上認證書中記錄每支金條的完整技術細節。這些認證完全可追蹤、防篡改，且永遠可在區塊鏈上存取。",
+          "imageAlt": "深色背景上四根尺寸遞減的認證金條"
+        },
+        "luxury": {
+          "title": "鑽石與奢侈品認證",
+          "description": "在 ORIGYN 區塊鏈上追蹤每顆寶石和每件奢侈品的完整產地履歷、鑑定等級及所有權，確保買家能夠獨立驗證其購買的商品真實性。",
+          "imageAlt": "鑷子夾著的切割鑽石"
+        },
+        "madein": {
+          "title": "產地認證",
+          "description": "國家產地不僅是身分宣示，更是品質保證，值得用技術手段證明。在 ORIGYN 上認證產品的製造國與製造方式，從腕錶到時尚配飾，讓任何人都能在區塊鏈上獨立驗證。",
+          "imageAlt": "工匠在工作室裡手工塑形鞋楦"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU 數位產品護照"

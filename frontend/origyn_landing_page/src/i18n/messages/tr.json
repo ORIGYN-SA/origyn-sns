@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Tüm hakları saklıdır – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Gerçek dünya varlık sertifikasyonu",
+        "description": "ORIGYN, kurcalanamaz blok zinciri sertifikalarıyla gerçek dünya varlıklarını güvence altına alır. Özgünlük, köken ve sahiplik herkese doğrulanabilir.",
+        "imageAlt": "Tablet üzerinde açık ORIGYN sertifikasyon panosu"
+      },
+      "ai": {
+        "title": "Zincir üstü AI çıkarımı",
+        "description": "Tamamen otonom AI ajanlarını halka açık blok zincirinde çalıştırmaya dair araştırma. Zincir dışı kestirmeler yok, API çağrıları yok; tasarımı gereği doğrulanabilir.",
+        "imageAlt": "Koyu ORIGYN arka planında zincir üstü AI çıkarımını ilerletme mesajı yazılı kart"
+      },
+      "token": {
+        "title": "OGY Token'ı",
+        "cardTitle": "OGY, ORIGYN Protokolünün\nfaydası",
+        "description": "OGY, ORIGYN Protokolü genelinde sertifikasyon, transfer ve depolama için ödeme yapar. Faydasını, tokenomiğini, staking ödüllerini ve resmi sözleşme adresini öğrenin.",
+        "imageAlt": "Cam bir küre içinde asılı OGY token sembolü"
+      },
+      "helpCenter": {
+        "title": "Yardım merkezi",
+        "cardTitle": "OGY, Sertifikalar ve\nDAO Hakkında Sorular",
+        "description": "OGY token'ı, zincir üstü sertifikasyon, staking ödülleri ve ORIGYN DAO yönetişiminin nasıl çalıştığı hakkında sorular bir yerde yanıtlandı.",
+        "imageAlt": "OGY, Sertifikalar ve DAO hakkında sorular yazılı kart"
+      },
+      "integrator": {
+        "title": "Entegratör Programı",
+        "cardTitle": "ORIGYN\nEntegratörü Olun",
+        "description": "ORIGYN protokolü üzerine inşa etmek ve blok zinciri sertifikasyonunu endüstrinize taşımak; derin Web3 uzmanlığına gerek yok. Programın nasıl çalıştığını öğrenin.",
+        "imageAlt": "ORIGYN sertifikası gösteren telefon, koyu kumda durma"
+      },
+      "integratorJoin": {
+        "title": "Entegratör Programına Başvur",
+        "cardTitle": "Entegratör\nProgramına Başvur",
+        "description": "Projeniz, pazarınız ve hedefleriniz hakkında bize anlatın. Her başvuru ORIGYN Vakfı tarafından incelenir, ardından ORIGYN DAO tarafından oylanır.",
+        "imageAlt": "Entegratör Programına Başvur yazılı kart"
+      },
+      "useCase": {
+        "art": {
+          "title": "Sanat Sertifikasyonu",
+          "description": "Sanatçılar, galeriler ve vakıflar sanat eserlerini ORIGYN'de sertifikalandırır: kurcalanamaz köken, yüksek çözünürlüklü görseller ve belgeler, ortak mülkiyet.",
+          "imageAlt": "Koyu arka planda oyulmuş lapis lazuli heykeli"
+        },
+        "gold": {
+          "title": "Altın Sertifikasyonu",
+          "description": "Altın rafinemasında Metalor, her altın barının tüm ayrıntılarını tek bir zincir üstü sertifikada kaydeder. İzlenebilir, kurcalanamaz ve her zaman erişilebilir.",
+          "imageAlt": "Koyu arka planda azalan boyutlarda dört sertifikalı altın barı"
+        },
+        "luxury": {
+          "title": "Elmas ve Lüks Sertifikasyonu",
+          "description": "Blok zincirinde her taşın ve lüks ürünün menşe, derecesi ve sahipliğini takip etmek; alıcılar neye ödeme yaptığını doğrulayabilir.",
+          "imageAlt": "Bir çift cımbız tarafından tutulan kesme elmas"
+        },
+        "madein": {
+          "title": "Made In Sertifikasyonu",
+          "description": "Ulusal köken kanıtlanmaya değer bir iddiedir. Saatlerden modaya ürünün nerede ve nasıl yapıldığını sertifikalayın; herkese blok zincirinde doğrulama imkânı verin.",
+          "imageAlt": "Atölyede ayakkabı kalıbını elle şekillendiren usta"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "AB Dijital Ürün Pasaportları"

@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Tous droits réservés – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Certification d'actifs, entièrement on-chain",
+        "description": "ORIGYN certifie l'or, l'art et le luxe avec des certificats on-chain inviolables. L'authenticité, la provenance et la propriété restent toujours vérifiables.",
+        "imageAlt": "Le tableau de bord de certification ORIGYN, ouvert sur une tablette"
+      },
+      "ai": {
+        "title": "Inférence IA on-chain",
+        "description": "Recherche ouverte sur l'exécution d'agents IA autonomes sur une blockchain publique. Aucun raccourci off-chain ni appel API factice. Vérifiable par conception.",
+        "imageAlt": "Une carte lisant Faire progresser l'inférence IA on-chain, sur un fond ORIGYN foncé"
+      },
+      "token": {
+        "title": "Le token OGY",
+        "cardTitle": "OGY, l'utilité du\nProtocole ORIGYN",
+        "description": "OGY finance la certification et les transferts dans le Protocole ORIGYN. Découvrez son utilité, les récompenses de staking et l'adresse officielle du contrat.",
+        "imageAlt": "Le symbole du token OGY suspendu à l'intérieur d'une sphère de verre"
+      },
+      "helpCenter": {
+        "title": "Centre d'aide",
+        "cardTitle": "Réponses sur l'OGY,\nles certificats et le DAO",
+        "description": "Comment fonctionnent le token OGY, la certification on-chain, les récompenses de staking et la gouvernance ORIGYN DAO, toutes les réponses en un seul endroit.",
+        "imageAlt": "Une carte lisant Réponses sur l'OGY, les certificats et le DAO"
+      },
+      "integrator": {
+        "title": "Programme Intégrateur",
+        "cardTitle": "Devenez un\nIntégrateur ORIGYN",
+        "description": "Bâtissez sur le Protocole ORIGYN et apportez la certification blockchain à votre secteur, sans expertise Web3 approfondie. Découvrez le fonctionnement du programme.",
+        "imageAlt": "Un téléphone affichant un certificat ORIGYN, reposant sur du sable foncé"
+      },
+      "integratorJoin": {
+        "title": "Candidater au Programme Intégrateur",
+        "cardTitle": "Candidater au\nProgramme Intégrateur",
+        "description": "Parlez-nous de votre projet, de votre marché et de vos objectifs. Chaque candidature est examinée par la Fondation ORIGYN, puis soumise au vote par l'ORIGYN DAO.",
+        "imageAlt": "Une carte lisant Candidater au Programme Intégrateur"
+      },
+      "useCase": {
+        "art": {
+          "title": "Certification d'art",
+          "description": "Artistes, galeries et fondations certifient des œuvres sur ORIGYN : provenance inviolable, images HD et documents, avec co-propriété par certificat.",
+          "imageAlt": "Une sculpture en lapis-lazuli taillée sur fond foncé"
+        },
+        "gold": {
+          "title": "Certification d'or",
+          "description": "Metalor, leader mondial du raffinage d'or, enregistre chaque détail d'un lingot dans un certificat on-chain. Traçable, inviolable et toujours disponible.",
+          "imageAlt": "Quatre lingots d'or certifiés de taille décroissante sur fond foncé"
+        },
+        "luxury": {
+          "title": "Certificat de diamants et de luxe",
+          "description": "Suivez l'origine, le classement et la propriété de chaque pierre et de chaque article de luxe on-chain, afin que les acheteurs vérifient ce qu'ils paient.",
+          "imageAlt": "Un diamant taillé tenu dans une paire de pinces"
+        },
+        "madein": {
+          "title": "Certification Made in",
+          "description": "L'origine nationale mérite la preuve. Certifiez où et comment un produit est fabriqué, des montres à la mode, et laissez tous le vérifier on-chain.",
+          "imageAlt": "Un artisan façonnant une forme de chaussure à la main dans un atelier"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Passeports Numériques de Produits UE"

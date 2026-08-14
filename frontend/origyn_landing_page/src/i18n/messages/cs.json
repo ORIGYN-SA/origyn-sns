@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Všechna práva vyhrazena – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Certifikace reálných aktiv plně on-chain",
+        "description": "ORIGYN certifikuje zlato, umění a luxusní zboží s certifikáty odolnými vůči manipulaci on-chain. Pravost, provenience a vlastnictví jsou ověřitelné pro všechny.",
+        "imageAlt": "Certifikační dashboard ORIGYN otevřený na tabletu"
+      },
+      "ai": {
+        "title": "Inference AI on-chain",
+        "description": "Otevřený výzkum na provozování autonomních AI agentů na veřejném blockchainu. Bez zkratek mimo řetězec, bez API s účtenkou. Ověřitelný od základu.",
+        "imageAlt": "Karta s textem Pokrok v inferenci AI on-chain na tmavém pozadí ORIGYN"
+      },
+      "token": {
+        "title": "Token OGY",
+        "cardTitle": "OGY, užitečnost\nprotokolu ORIGYN",
+        "description": "OGY financuje certifikaci, převody a ukládání v ORIGYN Protocol. Zjistěte jeho užitečnost, tokenomiku, odměny za staking a oficiální adresu smlouvy.",
+        "imageAlt": "Symbol tokenu OGY zavěšený uvnitř skleněné koule"
+      },
+      "helpCenter": {
+        "title": "Centrum nápovědy",
+        "cardTitle": "Odpovědi ohledně\nOGY, certifikátů a DAO",
+        "description": "Jak fungují token OGY, certifikace on-chain, odměny za staking a správa ORIGYN DAO – vše na jednom místě.",
+        "imageAlt": "Karta s textem Odpovědi ohledně OGY, certifikátů a DAO"
+      },
+      "integrator": {
+        "title": "Program integrátorů",
+        "cardTitle": "Staňte se\nintegrátorem ORIGYN",
+        "description": "Stavte na protokolu ORIGYN a přineste blockchainovou certifikaci do vašeho odvětví bez hluboké expertise Web3. Podívejte se, jak program funguje.",
+        "imageAlt": "Telefon zobrazující certifikát ORIGYN spočívající na tmavém písku"
+      },
+      "integratorJoin": {
+        "title": "Přihláška do Programu integrátorů",
+        "cardTitle": "Přihlašte se na\nProgram integrátorů",
+        "description": "Řekněte nám o vašem projektu, trhu a cílech. Každá přihláška je posouzena nadací ORIGYN Foundation, pak hlasována ORIGYN DAO.",
+        "imageAlt": "Karta s textem Přihlašte se na Program integrátorů"
+      },
+      "useCase": {
+        "art": {
+          "title": "Certifikace umění",
+          "description": "Umělci, galerie a nadace certifikují díla na ORIGYN: provenience odolná vůči manipulaci, HD obrázky, dokumenty a spoluvlastnictví certifikátem.",
+          "imageAlt": "Řezaná socha z lapis lazuli na tmavém pozadí"
+        },
+        "gold": {
+          "title": "Certifikace zlata",
+          "description": "Metalor zaznamenává každý detail zlatých cihel v jediném certifikátu on-chain. Sledovatelné, odolné vůči manipulaci, vždy dostupné. Světový lídr v rafinaci.",
+          "imageAlt": "Čtyři certifikované zlaté cihly zmenšující se na tmavém pozadí"
+        },
+        "luxury": {
+          "title": "Certifikace diamantů a luxusního zboží",
+          "description": "Sledujte původ, hodnocení a vlastnictví každého kamene a luxusního kusu on-chain, aby si kupující mohli ověřit, za co platí.",
+          "imageAlt": "Broušený diamant držený v kleštích"
+        },
+        "madein": {
+          "title": "Certifikace Made in",
+          "description": "Státní původ je tvrzení, které stojí za důkaz. Certifikujte, kde a jak je produkt vyroben, od hodinek po módu, a nechte kohokoliv ověřit on-chain.",
+          "imageAlt": "Řemeslník ručně tvarující střevíc v dílně"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Digitální pasporty produktů EU"

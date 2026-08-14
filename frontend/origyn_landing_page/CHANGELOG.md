@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.5] - 2026-08-14
+
+#### Added
+
+- Give every page its own title, description and Open Graph card, in every language
+
+#### Changed
+
+- Draw the Open Graph cards on request from a Cloudflare Worker, so the canister no longer carries one image per page and language
+
 ### [1.5.4] - 2026-08-12
 
 #### Added

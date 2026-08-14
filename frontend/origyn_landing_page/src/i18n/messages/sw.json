@@ -260,6 +260,64 @@
     "dashboard": "DASHIBODI",
     "copyright": "©2026 Haki zote zimehifadhiwa – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Mali halisi zithibitishwa ndani ya mnyororo",
+        "description": "ORIGYN inathibitisha dhahabu, sanaa na bidhaa za kifahari kwa vyeti vya kidijitali; uhalisi, asili na umiliki vinathibitishwa na mtu yeyote.",
+        "imageAlt": "Dashibodi ya uthibitisho wa ORIGYN, iliyofunguliwa kwenye kompyuta kibao"
+      },
+      "ai": {
+        "title": "Utambuzi wa AI ndani ya mnyororo",
+        "description": "Utafiti mwembamba juu ya kuendesha wakala wa AI kwenye blockchain ya umma, bila njia za nje na kwa thibiti kwa muundo.",
+        "imageAlt": "Karatasi inayosomeka 'Kuendeleza utambuzi wa AI ndani ya mnyororo,' kwenye mandhari nyeusi ya ORIGYN"
+      },
+      "token": {
+        "title": "Tokeni ya OGY",
+        "cardTitle": "OGY, matumizi ya\nORIGYN Protocol",
+        "description": "OGY hulipa ada za uthibitisho, uhamisho na uhifadhi katika ORIGYN Protocol. Jifunze matumizi yake, tokenomics, tuzo za kuweka dhamana na anwani rasmi ya mkataba.",
+        "imageAlt": "Alama ya tokeni ya OGY iliyosimamishwa ndani ya duara la glasi"
+      },
+      "helpCenter": {
+        "title": "Kituo cha Msaada",
+        "cardTitle": "Majibu kuhusu OGY,\nvyeti na DAO",
+        "description": "Jinsi tokeni ya OGY, uthibitisho wa ndani ya mnyororo, tuzo za kuweka dhamana na utawala wa ORIGYN DAO unavyofanya kazi, iliyojibu katika mahali pamoja.",
+        "imageAlt": "Karatasi inayosomeka 'Majibu kuhusu OGY, vyeti na DAO'"
+      },
+      "integrator": {
+        "title": "Programu ya Wachangiaji",
+        "cardTitle": "Kuwa ORIGYN\nMchangiaji",
+        "description": "Jenga juu ya ORIGYN Protocol na kamatia uthibitisho wa blockchain katika sekta yako, bila hitaji la kujua Web3 vizuri. Jifunze jinsi programu inavyofanya kazi.",
+        "imageAlt": "Simu ikionyesha cheti cha ORIGYN, kimekamatia kwenye ragas nyeusi"
+      },
+      "integratorJoin": {
+        "title": "Omba kuunganisha na Wachangiaji",
+        "cardTitle": "Omba kuunganisha\nna Wachangiaji",
+        "description": "Tuambie juu ya mradi wako, soko lako na lengo lako. Kila ombi linakaguliwa na ORIGYN Foundation, kisha kupigwa kura na ORIGYN DAO.",
+        "imageAlt": "Karatasi inayosomeka 'Omba kuunganisha na Wachangiaji'"
+      },
+      "useCase": {
+        "art": {
+          "title": "Uthibitisho wa Sanaa",
+          "description": "Wasanii, mahariri na taasisi zina uthibitisho wa kazi za sanaa kwenye ORIGYN: asili isiyobadilika, picha za juu na nyaraka, na umiliki wa pamoja kupitia cheti.",
+          "imageAlt": "Kamba iliyokamatwa ya lapis lazuli kwenye mandhari nyeusi"
+        },
+        "gold": {
+          "title": "Uthibitisho wa Dhahabu",
+          "description": "Metalor hurekodia kila maelezo ya mabaa ya dhahabu katika cheti kimoja kwenye mnyororo. Inaweza kufuatiliwa, isiyobadilika na daima inapatikana.",
+          "imageAlt": "Mabaa matano ya dhahabu yaliyothibitishwa, vikipungua kwa ukubwa, kwenye mandhari nyeusi"
+        },
+        "luxury": {
+          "title": "Uthibitisho wa Almasi na Kifahari",
+          "description": "Fuatilia asili, daraja na umiliki wa kila almasi na bidhaa ya kifahari kwenye mnyororo, ili wanunuzi waweze kutathmini kile wanachokililipa.",
+          "imageAlt": "Almasi iliyokatwa, iliyoshikiliwa kwa jorofu"
+        },
+        "madein": {
+          "title": "Uthibitisho wa Kizalendo cha Uzalishaji",
+          "description": "Asili ya kitaifa ni zaidi ya lebo. Thibitisha mahali na jinsi bidhaa inavyotengenezwa, kutoka kwa saa hadi mavazi, na wacha mtu yeyote kutathmini on-chain.",
+          "imageAlt": "Fundi anayobuni viatu kwa mikono katika kazi-mtu"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "Pasipoti za Bidhaa za Kidijitali za EU"

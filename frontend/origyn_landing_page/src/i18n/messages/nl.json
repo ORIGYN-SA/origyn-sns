@@ -260,6 +260,64 @@
     "dashboard": "DASHBOARD",
     "copyright": "©2026 Alle rechten voorbehouden – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Reële activacertificering, volledig on-chain",
+        "description": "ORIGYN certificeert goud, kunst en luxegoederen met manipulatiebestendige on-chain certificaten, zodat authenticiteit en eigenaarschap verifieerbaar blijven.",
+        "imageAlt": "Het ORIGYN-certificeringsdashboard, geopend op een tablet"
+      },
+      "ai": {
+        "title": "On-chain AI-inferentie",
+        "description": "Open R&D naar volledig autonome AI-agents op openbare blockchains. Geen off-chain omwegen en geen API-aanroepen met ontvangst — verifieerbaar door ontwerp.",
+        "imageAlt": "Een kaart met 'Vooruitgang in on-chain AI-inferentie', op een donkere ORIGYN-achtergrond"
+      },
+      "token": {
+        "title": "De OGY-token",
+        "cardTitle": "OGY, het nut van\nhet ORIGYN Protocol",
+        "description": "OGY betaalt voor certificering, overdrachten en opslag in het ORIGYN Protocol. Ontdek het nut ervan, tokenomics, staking rewards en officieel contractadres.",
+        "imageAlt": "Het OGY-tokensymbool in een glazen bol"
+      },
+      "helpCenter": {
+        "title": "Hulpcentrum",
+        "cardTitle": "Vragen over OGY,\ncertificaten en de DAO",
+        "description": "Hoe de OGY-token, on-chain certificering, staking rewards en ORIGYN DAO-governance werken, allemaal beantwoord op één plaats.",
+        "imageAlt": "Een kaart met 'Vragen over OGY, certificaten en de DAO'"
+      },
+      "integrator": {
+        "title": "Integrator Programma",
+        "cardTitle": "Word een\nORIGYN Integrator",
+        "description": "Bouw op het ORIGYN-protocol en breng blockchain-certificering naar uw branche, zonder diepgaande Web3-kennis. Zie hoe het programma werkt.",
+        "imageAlt": "Een telefoon met een ORIGYN-certificaat, rustend op donker zand"
+      },
+      "integratorJoin": {
+        "title": "Aanvraag voor het Integrator Programma",
+        "cardTitle": "Aanvraag voor het\nIntegrator Programma",
+        "description": "Vertel ons over uw project, uw markt en uw doelstellingen. Elke aanvraag wordt gescreend door de ORIGYN Foundation en vervolgens gestemd door de ORIGYN DAO.",
+        "imageAlt": "Een kaart met 'Aanvraag voor het Integrator Programma'"
+      },
+      "useCase": {
+        "art": {
+          "title": "Kunstcertificering",
+          "description": "Kunstenaars, galerijen en stichtingen certificeren kunstwerken op ORIGYN: manipulatiebestendige herkomst, HD-afbeeldingen en documenten, co-eigendom via certificaat.",
+          "imageAlt": "Een uitgehouwen lapislazuli sculptuur op donkere achtergrond"
+        },
+        "gold": {
+          "title": "Goudcertificering",
+          "description": "Metalor, wereldleider in goudraffinering, registreert goudstaven in on-chain certificaten. Traceerbaar, manipulatiebestendig en altijd beschikbaar.",
+          "imageAlt": "Vier gecertificeerde goudstaven van afnemende grootte op donkere achtergrond"
+        },
+        "luxury": {
+          "title": "Diamanten- en luxecertificering",
+          "description": "Volg de oorsprong, classificatie en eigendom van elke steen en elk luxeobject on-chain, zodat kopers kunnen verifiëren wat zij betalen.",
+          "imageAlt": "Een geslepen diamant in een paar pincetten gehouden"
+        },
+        "madein": {
+          "title": "Made in-certificering",
+          "description": "Nationale herkomst is een claim die bewijs verdient. Certificeer waar en hoe een product wordt gemaakt en laat iedereen het on-chain verifiëren.",
+          "imageAlt": "Een handwerksman die handmatig een schoenleest vormt in een werkplaats"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU Digitale Productpaspoorten"

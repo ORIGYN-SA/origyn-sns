@@ -260,6 +260,64 @@
     "dashboard": "NADZORNA PLOČA",
     "copyright": "©2026 Sva prava pridržana – origyn"
   },
+    "seo": {
+      "home": {
+        "title": "Certifikacija imovine, 100% on-chain",
+        "description": "ORIGYN certificira imovinu stvarnog svijeta s otpornim on-chain certifikatima. Autentičnost, porijeklo i vlasništvo ostaju provjerljivi za sve.",
+        "imageAlt": "Nadzorna ploča ORIGYN certifikacije, otvorena na tabletu"
+      },
+      "ai": {
+        "title": "Zaključivanje AI-ja on-chain",
+        "description": "Otvoreno istraživanje pokretanja potpuno autonomnih AI agenata na javnom blockchainu. Bez prečaca, bez API poziva s računom. Provjerljivo po dizajnu.",
+        "imageAlt": "Kartica s tekstom Unapređujemo zaključivanje AI-ja on-chain, na tamnoj pozadini ORIGYN-a"
+      },
+      "token": {
+        "title": "Token OGY",
+        "cardTitle": "OGY, korisnost\nORIGYN Protokola",
+        "description": "OGY financira certifikaciju, prijenose i pohranu u ORIGYN Protokolu. Korisnost, tokenomika, nagrade stakinga i službena adresa ugovora.",
+        "imageAlt": "Simbol OGY tokena suspendiran unutar staklene kugle"
+      },
+      "helpCenter": {
+        "title": "Centar za pomoć",
+        "cardTitle": "Odgovori o OGY-ju,\ncertifikatima i DAO-u",
+        "description": "Kako funkcionira OGY token, on-chain certifikacija, nagrade od stakinga i upravljanje ORIGYN DAO-om. Svi odgovori na jednom mjestu.",
+        "imageAlt": "Kartica s tekstom Odgovori o OGY-ju, certifikatima i DAO-u"
+      },
+      "integrator": {
+        "title": "Program za integratore",
+        "cardTitle": "Postanite\nORIGYN integrator",
+        "description": "Izgrađujte na ORIGYN protokolu i donesite blockchain certifikaciju vašoj industriji bez dubokog Web3 znanja. Pogledajte kako program radi.",
+        "imageAlt": "Telefon prikazuje ORIGYN certifikat, počiva na tamnom pijesku"
+      },
+      "integratorJoin": {
+        "title": "Prijavite se na Program za integratore",
+        "cardTitle": "Prijavite se\nProgram integratore",
+        "description": "Recite nam o Vašem projektu, tržištu i ciljevima. Svaka prijava se proverava od strane ORIGYN Fondacije, zatim je glasuje ORIGYN DAO.",
+        "imageAlt": "Kartica s tekstom Prijavite se na Program za integratore"
+      },
+      "useCase": {
+        "art": {
+          "title": "Certifikacija umjetnosti",
+          "description": "Umjetnici, galerije i ustanove certificiraju djela na ORIGYN-u: otporna provenijencija, slike HD i dokumenti, suvlasništvo certifikatom.",
+          "imageAlt": "Rezbarena skulptura od lazurita na tamnoj pozadini"
+        },
+        "gold": {
+          "title": "Certifikacija zlata",
+          "description": "Metalor, svjetski lider u rafinaciji zlata, bilježi svaki detalj zlatne poluge u jednom on-chain certifikatu. Sljedivo, otporno i uvijek dostupno.",
+          "imageAlt": "Četiri certificirane zlatne poluge opadajuće veličine na tamnoj pozadini"
+        },
+        "luxury": {
+          "title": "Certifikacija dijamanata i luksuznog dobra",
+          "description": "Pratite podrijetlo, ocjenu i vlasništvo svakog kamena i luksuznog predmeta na blockchainu kako bi kupci mogli verificirati što plaćaju.",
+          "imageAlt": "Ubrušeni dijamant držan u par pinceta"
+        },
+        "madein": {
+          "title": "Certifikacija Made In",
+          "description": "Nacionalno podrijetlo je tvrdnja koja zahtijeva dokaz. Certificirajte gdje i kako je proizvod napravljen, od satova do mode na blockchainu.",
+          "imageAlt": "Obrtnik radi na kopiti cipele rukom u radionici"
+        }
+      }
+    },
   "dpp": {
     "seo": {
       "title": "EU Digitalni putovnice proizvoda"
