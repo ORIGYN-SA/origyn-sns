@@ -70,6 +70,12 @@ $bp-md: 768px;
 $bp-lg: 990px;
 $bp-xl: 1280px;
 
+// Roadmap strip geometry, shared so the timeline can derive its length from
+// the card count instead of carrying a hardcoded total.
+$roadmap-card-width: 718px;
+$roadmap-card-gap: 40px;
+$roadmap-strip-padding: 25px;
+
 $fs-12: 12px;
 $fs-14: 14px;
 $fs-16: 16px;

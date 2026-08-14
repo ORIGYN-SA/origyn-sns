@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.6] - 2026-08-14
+
+#### Added
+
+- Add five roadmap milestones, translated into every language
+
+#### Changed
+
+- Update the roadmap milestones and their order
+- Set upcoming milestones in italic, shipped ones in roman
+- Serve the roadmap images as WebP
+
+#### Fixed
+
+- Draw the roadmap timeline across the whole strip
+- Keep long roadmap titles inside their card
+
 ### [1.5.5] - 2026-08-14
 
 #### Added

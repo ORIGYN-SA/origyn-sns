@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Roadmap",
       "description": "Mula sa mga bagong utility at feature ng governance hanggang sa pinalawak na suporta para sa mga industriya at developer. Ang bawat milestone ay sumasalamin sa aming misyon na dalhin ang mga real-world asset nang ganap on-chain sa pamamagitan ng nasusukat, mabe-beripika, at desentralisadong imprastraktura.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "Pinondohan ang ORIGYN Foundation",
           "description": "Itinatag ang ORIGYN Foundation sa Neuchâtel, Switzerland upang simulan ang pag-develop ng ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Paglulunsad ng OGY Token",
           "description": "Ginawa ang native utility token na $OGY upang paganahin ang protocol fees, governance, at staking."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "Paglulunsad ng unang bersyon ng NFT standard ng ORIGYN na nagpapahintulot ng on-chain certification."
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 Update",
           "description": "Sinunog ang 200 milyong $OGY token na dati nang inilaan sa Foundation, na nagpasimula ng deflationary pressure."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "Paglulunsad ng unang on-chain minting interface para sa mga digital certificate."
         },
-        {
-          "title": "Mga Strategic Partnership",
-          "description": "Mga strategic collaboration sa FederItaly at METALOR upang i-certify ang mga produktong gawa sa Italy at tokenized gold."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Pagpapatotoo ng mga produktong Italyano",
+          "description": "Digital certification infrastructure na nagpoprotekta sa pagiging tunay at pinagmulan ng mga produktong Made in Italy, kasama ang Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "Unang Pagbili ng Ginto",
           "description": "3 kg ng pisikal na ginto ang binili at ginawang token gamit ang ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Pagkuha sa CanDB",
           "description": "Kinuha ng ORIGYN ang CanDB, isang decentralized at scalable database solution na optimized para sa NFT metadata."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 at Dashboard Launch",
           "description": "Ipinakilala ang isang deflationary model sa Tokenomics 3.0 at inilabas ang unang bersyon ng ORIGYN Dashboard."
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 Protocol Users",
           "description": "Nalampasan ng ORIGYN ang 10,000 natatanging protocol users."
         },
-        {
+        "gold-dao-launch": {
           "title": "Paglulunsad ng Gold DAO",
           "description": "Ang Gold DAO ang naging unang DAO na itinayo sa ORIGYN upang i-tokenize at i-certify ang pisikal na ginto on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "500M OGY Donation sa Gold DAO",
           "description": "Kalahating bilyong $OGY token ang ibinigay upang suportahan ang long-term treasury ng Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO Integrated with ICP SNS",
           "description": "Ang ORIGYN DAO ay naging ganap na decentralized at pinamamahalaan sa SNS framework ng Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 Release",
           "description": "Kasama sa bagong bersyon ng dashboard ang live metrics, staking stats, at governance tools."
         },
-        {
+        "users-30k": {
           "title": "30,000 Users Milestone",
           "description": "Lumago ang ORIGYN sa mahigit 30,000 users, isang 300% na pagtaas sa loob ng anim na buwan."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Collaboration with Leo Caillard and Gil Sertissage",
           "description": "Nag-certify ang ORIGYN ng mga pisikal na artwork at brilyante sa mga high-profile partnership."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "In-upgrade ang NFT standard upang paganahin ang ligtas na transferability ng mga certificate."
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework Launched",
           "description": "Gumawa ng mga patakaran at onboarding structure upang gabayan ang mga bagong partner na nag-iintegrate sa ORIGYN."
         },
-        {
-          "title": "Launch of Cecil DAO",
-          "description": "Sinuportahan ng ORIGYN ang paglulunsad ng Cecil DAO upang pondohan ang conservation at humanitarian projects gamit ang blockchain transparency."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Suporta sa paglunsad ng Cecil DAO",
+          "description": "Pagsulong ng desentralisadong pondo para sa konserbasyon at makataong inisyatiba sa pamamagitan ng teknolohiyang blockchain."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Acquisition of ClaimLink",
           "description": "Kinuha ng ORIGYN ang ClaimLink, isang decentralized NFT at token distribution platform na itinayo sa ICP."
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "Ipinakilala ang isang bagong standard upang pataasin ang interoperability ng mga certificate at ecosystem-wide utility."
-        },
-        {
-          "title": "Paglulunsad ng isang Public",
-          "titleSpan": "Minting Studio",
-          "description": "Inilunsad ang isang self-service tool na nagpapahintulot sa sinuman na mag-mint ng on-chain certificates ng RWA sa ORIGYN infrastructure."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Ibubunyag ang misteryo ng Runestone sa Q2 2026 sa Geneva."
+          "titleSpan": "Bagong ICRC7 NFT standard",
+          "description": "Bagong pamantayan ng sertipiko na naglalayong pahusayin ang interoperability, traceability, at gamit ng NFT sa buong ekosistema ng ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Inilunsad ang isang self-service tool na nagpapahintulot sa sinuman na mag-mint on-chain gamit ang ORIGYN infrastructure."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "para sa awtorisadong access",
+          "description": "Pribadong access sa ORIGYN Records, ang platform na gagawing on-chain records ang iyong mga larawan kasama ang lumikha, oras, at lokasyon."
         },
-        {
-          "title": "IP Protection Implementation",
-          "description": "Isinama sa protocol ang suporta para sa on-chain certification ng intellectual property rights."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Digital product passports (DPP)",
+          "description": "Compliance layer na naaayon sa paparating na mga pamantayang DPP ng EU, para makapag-isyu ang mga negosyo ng on-chain na pagkakakilanlan ng produkto."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN AI infrastructure",
+          "description": "Likas na AI-powered na pagpapatunay at pagsusuri para sa mga totoong asset, na nagpapatibay ng tiwala, authentication, at sertipikasyon."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Propesyonal na Minting Studio",
+          "description": "Isang self-service platform na nagbibigay-daan sa kahit sino na mag-mint ng sertipikadong digital assets gamit ang imprastraktura ng ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Pagpapalawak sa luxury market",
+          "description": "Digital certification at extended warranty infrastructure sa blockchain para sa mga gumagawa ng luxury na relo, inilunsad kasama ang CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Pampublikong access sa ORIGYN Records, ang platform na gagawing on-chain records ang iyong mga larawan kasama ang lumikha, oras, at lokasyon."
+        },
+        "cross-chain": {
           "title": "Cross-Chain Implementation",
           "description": "Pinalalawak ng cross-chain compatibility ang abot ng ORIGYN sa iba pang pangunahing ecosystem."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Global Wallet and Marketplace Integration",
           "description": "Nagiging accessible ang ORIGYN NFT sa pamamagitan ng mga nangungunang wallet at NFT marketplace sa buong mundo."
         },
-        {
+        "universal-certification-standard": {
           "title": "Becoming the Universal Certification Standard",
           "description": "Layunin ng ORIGYN na maitatag ang sarili bilang pandaigdigang benchmark para sa digital certification sa lahat ng asset class."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Misteryong ibubunyag",
+          "description": "Malapit nang mabunyag ang misteryo sa pamamagitan ng eksklusibong kolaborasyon kay Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "MGA KASOSYO",

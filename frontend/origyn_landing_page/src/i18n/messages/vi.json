@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Lộ Trình",
       "description": "Từ các tiện ích mới và tính năng quản trị cho đến mở rộng hỗ trợ cho các ngành và nhà phát triển. Mỗi cột mốc phản ánh sứ mệnh của chúng tôi trong việc đưa tài sản thực tế hoàn toàn lên chuỗi thông qua hạ tầng có khả năng mở rộng, kiểm chứng và phi tập trung.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation được tài trợ",
           "description": "ORIGYN Foundation được thành lập tại Neuchâtel, Thụy Sĩ để bắt đầu phát triển ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Ra mắt token OGY",
           "description": "Token tiện ích gốc $OGY được tạo ra để vận hành phí giao thức, quản trị và staking."
         },
-        {
+        "nft-standard-v1": {
           "title": "Tiêu chuẩn NFT ORIGYN v1.0",
           "description": "Ra mắt phiên bản đầu tiên của tiêu chuẩn NFT của ORIGYN, cho phép chứng nhận on-chain."
         },
-        {
+        "tokenomics-2": {
           "title": "Cập nhật Tokenomics 2.0",
           "description": "200 triệu token $OGY trước đây được phân bổ cho Foundation đã bị đốt, khởi động áp lực giảm phát."
         },
-        {
+        "minting-platform-v1": {
           "title": "Nền tảng Minting 1.0",
           "description": "Ra mắt giao diện minting on-chain đầu tiên cho chứng chỉ kỹ thuật số."
         },
-        {
-          "title": "Quan hệ đối tác chiến lược",
-          "description": "Hợp tác chiến lược với FederItaly và METALOR để chứng nhận sản phẩm sản xuất tại Ý và vàng được token hóa."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Xác thực sản phẩm Ý",
+          "description": "Hạ tầng chứng nhận số bảo vệ tính xác thực và nguồn gốc của các sản phẩm Made in Italy, cùng với Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "Mua vàng đầu tiên",
           "description": "3 kg vàng vật chất được mua và token hóa bằng ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Mua lại CanDB",
           "description": "ORIGYN mua lại CanDB, một giải pháp cơ sở dữ liệu phi tập trung, có khả năng mở rộng và được tối ưu cho metadata NFT."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 và ra mắt Dashboard",
           "description": "Mô hình giảm phát được giới thiệu với Tokenomics 3.0 và phiên bản đầu tiên của ORIGYN Dashboard được phát hành."
         },
-        {
+        "protocol-users-10k": {
           "title": "10.000 người dùng giao thức",
           "description": "ORIGYN vượt mốc 10.000 người dùng giao thức duy nhất."
         },
-        {
+        "gold-dao-launch": {
           "title": "Ra mắt Gold DAO",
           "description": "Gold DAO trở thành DAO đầu tiên được xây dựng trên ORIGYN để token hóa và chứng nhận vàng vật chất on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Quyên góp 500M OGY cho Gold DAO",
           "description": "Nửa tỷ token $OGY được quyên góp để hỗ trợ treasury dài hạn của Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO tích hợp với ICP SNS",
           "description": "ORIGYN DAO trở nên hoàn toàn phi tập trung và được quản trị trên framework SNS của Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "Phát hành Dashboard V2",
           "description": "Phiên bản dashboard mới bao gồm số liệu live, thống kê staking và công cụ quản trị."
         },
-        {
+        "users-30k": {
           "title": "Cột mốc 30.000 người dùng",
           "description": "ORIGYN tăng lên hơn 30.000 người dùng, tăng 300% trong sáu tháng."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Hợp tác với Leo Caillard và Gil Sertissage",
           "description": "ORIGYN chứng nhận tác phẩm nghệ thuật vật lý và kim cương trong các quan hệ đối tác nổi bật."
         },
-        {
+        "nft-standard-v2": {
           "title": "Tiêu chuẩn NFT ORIGYN v2.0",
           "description": "Tiêu chuẩn NFT được nâng cấp để cho phép chuyển nhượng chứng chỉ một cách an toàn."
         },
-        {
+        "integrator-framework": {
           "title": "Ra mắt Integrator Framework",
           "description": "Các quy tắc và cấu trúc onboarding được tạo ra để hướng dẫn đối tác mới tích hợp với ORIGYN."
         },
-        {
-          "title": "Ra mắt Cecil DAO",
-          "description": "ORIGYN hỗ trợ ra mắt Cecil DAO để tài trợ các dự án bảo tồn và nhân đạo bằng tính minh bạch của blockchain."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Hỗ trợ ra mắt Cecil DAO",
+          "description": "Thúc đẩy tài trợ phi tập trung cho các sáng kiến bảo tồn và nhân đạo thông qua công nghệ blockchain."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Mua lại ClaimLink",
           "description": "ORIGYN mua lại ClaimLink, một nền tảng phân phối NFT và token phi tập trung được xây dựng trên ICP."
         },
-        {
-          "title": "Tiêu chuẩn NFT ICRC-7",
-          "description": "Một tiêu chuẩn mới được giới thiệu để tăng khả năng tương tác của chứng chỉ và tiện ích trên toàn hệ sinh thái."
-        },
-        {
-          "title": "Ra mắt một",
-          "titleSpan": "Minting Studio công khai",
-          "description": "Một công cụ self-service được ra mắt, cho phép bất kỳ ai mint chứng chỉ RWA on-chain trên hạ tầng ORIGYN."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Bí ẩn Runestone sẽ được tiết lộ vào Q2 2026 tại Geneva."
+          "titleSpan": "Tiêu chuẩn NFT ICRC7 mới",
+          "description": "Một tiêu chuẩn chứng nhận mới giúp cải thiện khả năng tương tác, truy xuất nguồn gốc và tính hữu dụng của NFT trong hệ sinh thái ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Một công cụ self-service được ra mắt, cho phép bất kỳ ai mint on-chain bằng hạ tầng ORIGYN."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "cho truy cập được ủy quyền",
+          "description": "Quyền truy cập riêng vào ORIGYN Records, nền tảng biến ảnh của bạn thành bản ghi on-chain kèm người tạo, thời gian và địa điểm."
         },
-        {
-          "title": "Triển khai bảo vệ IP",
-          "description": "Hỗ trợ chứng nhận on-chain cho quyền sở hữu trí tuệ được tích hợp vào giao thức."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Hộ chiếu sản phẩm số (DPP)",
+          "description": "Lớp tuân thủ phù hợp với các tiêu chuẩn DPP sắp tới của EU, giúp doanh nghiệp phát hành danh tính sản phẩm on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "Hạ tầng AI của ORIGYN",
+          "description": "Xác minh và phân tích tích hợp bằng AI cho tài sản thực, giúp củng cố niềm tin, xác thực và chứng nhận."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Minting Studio chuyên nghiệp",
+          "description": "Nền tảng tự phục vụ cho phép bất kỳ ai đúc tài sản số được chứng nhận trên hạ tầng của ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Mở rộng sang thị trường xa xỉ",
+          "description": "Chứng nhận số và hạ tầng bảo hành mở rộng trên blockchain cho các nhà sản xuất đồng hồ xa xỉ, ra mắt cùng CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Quyền truy cập công khai vào ORIGYN Records, nền tảng biến ảnh của bạn thành bản ghi on-chain kèm người tạo, thời gian và địa điểm."
+        },
+        "cross-chain": {
           "title": "Triển khai cross-chain",
           "description": "Khả năng tương thích cross-chain mở rộng phạm vi của ORIGYN tới các hệ sinh thái lớn khác."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Tích hợp wallet và marketplace toàn cầu",
           "description": "ORIGYN NFT trở nên có thể truy cập thông qua các wallet và marketplace NFT hàng đầu trên toàn thế giới."
         },
-        {
+        "universal-certification-standard": {
           "title": "Trở thành tiêu chuẩn chứng nhận phổ quát",
           "description": "ORIGYN hướng tới việc trở thành chuẩn mực toàn cầu cho chứng nhận kỹ thuật số trên mọi loại tài sản."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Bí ẩn sắp được hé lộ",
+          "description": "Bí ẩn sẽ sớm được hé lộ qua sự hợp tác độc quyền với Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "ĐỐI TÁC",

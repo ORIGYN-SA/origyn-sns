@@ -1,221 +1,292 @@
 [
   {
+    "id": "origyn-foundation-funded",
     "title": "ORIGYN Foundation Funded",
     "description": "The ORIGYN Foundation was established in Neuchâtel, Switzerland to begin development of the ORIGYN Protocol.",
     "when": "Q3 2020",
     "year": 2020,
-    "image": "/roadmap-1.png",
+    "image": "/roadmap-1.webp",
     "link": "https://fr.wikipedia.org/wiki/Origyn_Foundation"
   },
   {
+    "id": "ogy-token-launch",
     "title": "OGY Token Launch",
     "description": "The native utility token $OGY is created to power protocol fees, governance, and staking.",
     "when": "Q3 2021",
     "year": 2021,
-    "image": "/roadmap-ogy-launch.jpg",
+    "image": "/roadmap-ogy-launch.webp",
     "link": "https://origyn.medium.com/ogy-reserve-price-round-pre-registration-opening-soon-391187da3d7f"
   },
   {
+    "id": "nft-standard-v1",
     "title": "ORIGYN NFT Standard v1.0",
     "description": "Launch of the first version of ORIGYN's NFT standard enabling on-chain certification.",
     "when": "Q3 2022",
     "year": 2022,
-    "image": "/ogy-background-mobile.jpg",
+    "image": "/roadmap-nft-standard-v1.webp",
     "link": "https://origyn.medium.com/intro-to-the-origyn-nft-cd96e7f9e9c1"
   },
   {
+    "id": "tokenomics-2",
     "title": "Tokenomics 2.0 Update",
     "description": "200 million $OGY tokens previously allocated to the Foundation are burned, initiating deflationary pressure.",
     "when": "Q4 2022",
     "year": 2022,
-    "image": "/roadmap-tokenmoics.jpg",
+    "image": "/roadmap-tokenmoics.webp",
     "link": "https://origyn.medium.com/origyn-announces-important-updates-to-ogy-governance-d2133f88e077"
   },
   {
+    "id": "minting-platform-v1",
     "title": "Minting Platform 1.0",
     "description": "Launch of the first on-chain minting interface for digital certificates.",
     "when": "Q1 2023",
     "year": 2023,
-    "image": "/roadmap-floating.png",
+    "image": "/roadmap-floating.webp",
     "link": "https://origyn.medium.com/the-origyn-digital-certificate-9b33f9766c78"
   },
   {
-    "title": "Strategic Partnerships",
-    "description": "Strategic collaborations with FederItaly and METALOR to certify Italian-made products and tokenized gold.",
-    "when": "Q1 2023",
+    "id": "italian-products-authentication",
+    "title": "",
+    "titleSpan": "Italian Products Authentication",
+    "description": "Digital certification infrastructure protecting the authenticity and provenance of Made in Italy products with Federitaly.",
+    "when": "Q2 2023",
     "year": 2023,
-    "image": "/roadmap-3.png",
+    "image": "/roadmap-italian-products.webp",
     "link": "https://origyn.medium.com/tradition-meets-innovation-a-digital-certificate-for-authentic-italian-products-7f61c98e5687"
   },
   {
+    "id": "first-gold-purchase",
     "title": "First Gold Purchase",
     "description": "3 kg of physical gold bought and tokenized using the ORIGYN Protocol.",
     "when": "Q2 2023",
     "year": 2023,
-    "image": "/roadmap-first-gold.png",
+    "image": "/roadmap-first-gold.webp",
     "link": "https://origyn.medium.com/origyn-technology-empowers-creation-of-digital-certificates-for-metalor-gold-bars-be092befb3e5"
   },
   {
+    "id": "acquisition-candb",
     "title": "Acquisition of CanDB",
     "description": "ORIGYN acquires CanDB, a decentralized, scalable database solution optimized for NFT metadata.",
     "when": "Q2 2023",
     "year": 2023,
-    "image": "/roadmap-candb.jpg",
+    "image": "/roadmap-candb.webp",
     "link": "https://origyn.medium.com/origyn-foundation-acquires-candb-paves-the-way-for-new-decentralized-businesses-7a4a0481694f"
   },
   {
+    "id": "tokenomics-3-dashboard",
     "title": "Tokenomics 3.0 and Dashboard Launch",
     "description": "A deflationary model is introduced with Tokenomics 3.0 and the first version of the ORIGYN Dashboard is released.",
     "when": "Q3 2023",
     "year": 2023,
-    "image": "/roadmap-tokenomics-3.jpg",
+    "image": "/roadmap-tokenomics-3.webp",
     "link": "https://dashboard.origyn.com/"
   },
   {
+    "id": "protocol-users-10k",
     "title": "10,000 Protocol Users",
     "description": "ORIGYN surpasses 10,000 unique protocol users.",
     "when": "Q4 2023",
     "year": 2023,
-    "image": "/roadmap-4.png",
+    "image": "/roadmap-4.webp",
     "link": "https://origyn.medium.com/origyns-2024-year-in-review-milestones-and-achievements-09c629d5797c"
   },
   {
+    "id": "gold-dao-launch",
     "title": "Launch of Gold DAO",
     "description": "Gold DAO becomes the first DAO built on ORIGYN to tokenize and certify physical gold on-chain.",
     "when": "Q4 2023",
     "year": 2023,
-    "image": "/roadmap-golddao.png",
+    "image": "/roadmap-golddao.webp",
     "link": "https://origyn.medium.com/case-study-how-origyn-powers-gold-daos-decentralized-gold-asset-management-with-gld-nfts-5a87f21af247"
   },
   {
+    "id": "ogy-donation-gold-dao",
     "title": "500M OGY Donation to Gold DAO",
     "description": "Half a billion $OGY tokens are donated to support Gold DAO's long-term treasury.",
     "when": "Q1 2024",
     "year": 2024,
-    "image": "/roadmap-500m.png",
+    "image": "/roadmap-500m.webp",
     "link": "https://dashboard.origyn.com/explorer/transactions/accounts/54vkq-taaaa-aaaap-ahqra-cai"
   },
   {
+    "id": "dao-sns-integration",
     "title": "ORIGYN DAO Integrated with ICP SNS",
     "description": "The ORIGYN DAO becomes fully decentralized and governed on the Internet Computer's SNS framework.",
     "when": "Q2 2024",
     "year": 2024,
-    "image": "/roadmap-sns.jpg",
+    "image": "/roadmap-sns.webp",
     "link": "https://origyn.medium.com/migrating-to-the-sns-ogy-token-and-the-new-governance-framework-cd6311e8334e"
   },
   {
+    "id": "dashboard-v2",
     "title": "Dashboard V2 Release",
     "description": "New version of the dashboard includes live metrics, staking stats, and governance tools.",
     "when": "Q2 2024",
     "year": 2024,
-    "image": "/integrator-program.jpg",
+    "image": "/roadmap-dashboard-v2.webp",
     "link": "https://dashboard.origyn.com/"
   },
   {
+    "id": "users-30k",
     "title": "30,000 Users Milestone",
     "description": "ORIGYN grows to over 30,000 users, a 300% increase in six months.",
     "when": "Q3 2024",
     "year": 2024,
-    "image": "/roadmap-30k.jpg",
+    "image": "/roadmap-30k.webp",
     "link": "https://origyn.medium.com/origyns-2024-year-in-review-milestones-and-achievements-09c629d5797c"
   },
   {
+    "id": "leo-caillard-gil-sertissage",
     "title": "Collaboration with Leo Caillard and Gil Sertissage",
     "description": "ORIGYN certifies physical artworks and diamonds in high-profile partnerships.",
     "when": "Q3 2024",
     "year": 2024,
-    "image": "/roadmap-leo-gil.jpg",
+    "image": "/roadmap-leo-gil.webp",
     "link": "https://origyn.medium.com/preserving-leo-caillards-timeless-marble-art-with-origyn-36c904a99a7a"
   },
   {
+    "id": "nft-standard-v2",
     "title": "ORIGYN NFT Standard v2.0",
     "description": "NFT standard is upgraded to enable secure certificate transferability.",
     "when": "Q3 2024",
     "year": 2024,
-    "image": "/roadmap-standard-v2.jpg",
+    "image": "/roadmap-standard-v2.webp",
     "link": "https://origyn.medium.com/origyn-nft-standard-2-0-transferability-395d22d02b0b"
   },
   {
+    "id": "integrator-framework",
     "title": "Integrator Framework Launched",
     "description": "Rules and onboarding structure created to guide new partners integrating with ORIGYN.",
     "when": "Q4 2024",
     "year": 2024,
-    "image": "/roadmap-integrator.jpg",
+    "image": "/roadmap-integrator.webp",
     "link": "https://origyn.medium.com/origyn-foundation-unveils-strategy-to-service-increasing-industry-demand-via-the-introduction-of-60b2498508da"
   },
   {
-    "title": "Launch of Cecil DAO",
-    "description": "ORIGYN supports the launch of Cecil DAO to fund conservation and humanitarian projects using blockchain transparency.",
+    "id": "cecil-dao",
+    "title": "Support of the launch of",
+    "titleSpan": "Cecil DAO",
+    "description": "Advancing decentralized funding for conservation and humanitarian initiatives through blockchain technology.",
     "when": "Q1 2025",
     "year": 2025,
-    "image": "/roadmap-6.jpg",
+    "image": "/roadmap-6.webp",
     "link": "https://cecil-dao.gitbook.io/cecil-dao/cecil-dao"
   },
   {
+    "id": "acquisition-claimlink",
     "title": "Acquisition of ClaimLink",
     "description": "ORIGYN acquires ClaimLink, a decentralized NFT and token distribution platform built on ICP.",
     "when": "Q1 2025",
     "year": 2025,
-    "image": "/roadmap-claimlink.png",
+    "image": "/roadmap-claimlink.webp",
     "link": "https://origyn.medium.com/origyn-acquires-claimlink-ushering-in-a-new-era-of-frictionless-digital-asset-distribution-00e3a741f22e"
   },
   {
-    "title": "ICRC–7 NFT Standard",
-    "description": "A new standard is introduced to increase certificate interoperability and ecosystem-wide utility.",
+    "id": "icrc7-nft-standard",
+    "title": "New",
+    "titleSpan": "ICRC7 NFT Standard",
+    "description": "A new certificate standard designed to improve NFT interoperability, traceability, and utility across the ORIGYN ecosystem.",
     "when": "Q2 2025",
     "year": 2025,
-    "image": "/roadmap-7.png",
+    "image": "/roadmap-7.webp",
     "link": "https://origyn.medium.com/a-new-chapter-for-nfts-on-icp-origyn-launches-icrc7-icrc37-986a009ee641"
   },
   {
-    "title": "Launch of a Public",
-    "titleSpan": "Minting Studio",
-    "when": "Q1 2026",
-    "year": 2026,
-    "description": "A self-service tool is launched allowing anyone to mint on-chain, certificates of RWA on ORIGYN infrastructure.",
-    "image": "/minting_studio_roadmap.jpg"
-  },
-  {
+    "id": "origyn-records-v1",
+    "upcoming": true,
     "title": "",
-    "titleSpan": "Runestone",
+    "titleSpan": "ORIGYN Records v1.",
+    "titleSmall": "for authorised access",
+    "description": "Private access to ORIGYN Records, platform that will turn your photos into on-chain records with their creator, time, and location.",
     "when": "Q2 2026",
     "year": 2026,
-    "description": "The Runestone mystery will be revealed Q2 2026 in Geneva.",
-    "image": "/roadmap-9.png"
+    "image": "/roadmap-origyn-records-v1.webp"
   },
   {
-    "title": "Minting Lab",
-    "description": "A self-service tool is launched allowing anyone to mint on-chain, using ORIGYN infrastructure.",
-    "when": "Q2 2026",
-    "year": 2025,
-    "image": "/roadmap-8.png"
-  },
-  {
-    "title": "IP Protection Implementation",
-    "description": "Support for on-chain certification of intellectual property rights is integrated into the protocol.",
+    "id": "digital-product-passports",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "Digital Product Passports (DPP)",
+    "description": "Compliance layer to align with upcoming EU DPP standards and help businesses issue on-chain product identities.",
     "when": "Q3 2026",
     "year": 2026,
-    "image": "/roadmap-10.png"
+    "image": "/roadmap-dpp.webp"
   },
   {
-    "title": "Cross–Chain Implementation",
-    "description": "Cross-chain compatibility expands ORIGYN's reach to other major ecosystems.",
+    "id": "ai-infrastructure",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "ORIGYN AI Infrastructure",
+    "description": "Native AI powered verification and analysis infra for real world assets, enhancing trust, authentication, and certification.",
     "when": "Q3 2026",
     "year": 2026,
-    "image": "/roadmap-chain.jpg"
+    "image": "/roadmap-10.webp"
   },
   {
-    "title": "Global Wallet and Marketplace Integration",
-    "description": "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide.",
+    "id": "professional-minting-studio",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "Professional Minting Studio",
+    "description": "A self-service platform allowing anyone to mint certified, digital assets using ORIGYN's infrastructure.",
     "when": "Q4 2026",
     "year": 2026,
-    "image": "/roadmap-wallet-int.jpg"
+    "image": "/minting_studio_roadmap.webp"
   },
   {
+    "id": "luxury-market-expansion",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "Luxury Market Expansion",
+    "description": "Blockchain powered digital certification and extended warranty infrastructure for luxury watch manufacturers, launched with CORUM.",
+    "when": "Q4 2026",
+    "year": 2026,
+    "image": "/roadmap-corum.webp"
+  },
+  {
+    "id": "origyn-records",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "ORIGYN Records",
+    "description": "Public access to ORIGYN Records, platform that will turn your photos into on-chain records with their creator, time, and location.",
+    "when": "Q4 2026",
+    "year": 2026,
+    "image": "/roadmap-origyn-records.webp"
+  },
+  {
+    "id": "cross-chain",
+    "upcoming": true,
+    "title": "Cross–Chain Implementation",
+    "description": "Cross-chain compatibility expands ORIGYN's reach to other major ecosystems.",
+    "when": "Q4 2026",
+    "year": 2026,
+    "image": "/roadmap-chain.webp"
+  },
+  {
+    "id": "global-wallet-marketplace",
+    "upcoming": true,
+    "title": "Global Wallet and Marketplace Integration",
+    "description": "ORIGYN NFTs become accessible through leading wallets and NFT marketplaces worldwide.",
+    "when": "Q1 2027",
+    "year": 2027,
+    "image": "/roadmap-wallet-int.webp"
+  },
+  {
+    "id": "universal-certification-standard",
+    "upcoming": true,
     "title": "Becoming the Universal Certification Standard",
     "description": "ORIGYN aims to establish itself as the global benchmark for digital certification across all asset classes.",
     "when": "Q1 2027",
     "year": 2027,
-    "image": "/roadmap-last.png"
+    "image": "/roadmap-last.webp"
+  },
+  {
+    "id": "runestone",
+    "upcoming": true,
+    "title": "",
+    "titleSpan": "Runestone",
+    "description": "The mystery unfolds soon through an exclusive collaboration with Léo Caillard.",
+    "when": "Mystery to be revealed",
+    "year": 2026,
+    "image": "/roadmap-9.webp"
   }
 ]

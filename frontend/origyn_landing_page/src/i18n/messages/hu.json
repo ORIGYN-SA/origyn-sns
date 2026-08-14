@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Menetrend",
       "description": "Új segédprogramoktól és irányítási funkcióktól az iparágak és fejlesztők bővülő támogatásáig. Minden mérföldkő tükrözi küldetésünket: a valós eszközöket méretezhető, ellenőrizhető és decentralizált infrastruktúrán keresztül teljes mértékben a láncra hozni.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "Az ORIGYN Foundation finanszírozása",
           "description": "Az ORIGYN Foundation a svájci Neuchâtelben jött létre az ORIGYN Protocol fejlesztésének megkezdésére."
         },
-        {
+        "ogy-token-launch": {
           "title": "Az OGY token elindítása",
           "description": "A natív hasznossági token, a $OGY, a protokolldíjak, a governance és a staking működtetésére jön létre."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "Elindul az ORIGYN NFT standard első verziója, amely lehetővé teszi az on-chain tanúsítást."
         },
-        {
+        "tokenomics-2": {
           "title": "Tokenomics 2.0 frissítés",
           "description": "A korábban a Foundation számára allokált 200 millió $OGY token elégetésre kerül, deflációs nyomást indítva el."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "Elindul az első on-chain minting felület digitális tanúsítványokhoz."
         },
-        {
-          "title": "Stratégiai partnerségek",
-          "description": "Stratégiai együttműködések a FederItaly és a METALOR vállalatokkal olasz gyártású termékek és tokenizált arany tanúsítására."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Olasz termékek hitelesítése",
+          "description": "Digitális tanúsítási infrastruktúra, amely a Federitalyval együtt védi a Made in Italy termékek eredetiségét és származását."
         },
-        {
+        "first-gold-purchase": {
           "title": "Első aranyvásárlás",
           "description": "3 kg fizikai arany megvásárlása és tokenizálása az ORIGYN Protocol segítségével."
         },
-        {
+        "acquisition-candb": {
           "title": "A CanDB felvásárlása",
           "description": "Az ORIGYN felvásárolja a CanDB-t, egy decentralizált, skálázható, NFT metaadatokra optimalizált adatbázis-megoldást."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 és Dashboard indulás",
           "description": "A Tokenomics 3.0-val deflációs modell kerül bevezetésre, és megjelenik az ORIGYN Dashboard első verziója."
         },
-        {
+        "protocol-users-10k": {
           "title": "10 000 protokollfelhasználó",
           "description": "Az ORIGYN meghaladja a 10 000 egyedi protokollfelhasználót."
         },
-        {
+        "gold-dao-launch": {
           "title": "A Gold DAO elindítása",
           "description": "A Gold DAO lesz az első ORIGYN-re épülő DAO, amely fizikai aranyat tokenizál és tanúsít on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "500M OGY adomány a Gold DAO-nak",
           "description": "Félmilliárd $OGY token kerül adományozásra a Gold DAO hosszú távú trezorjának támogatására."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO integrálva az ICP SNS-szel",
           "description": "Az ORIGYN DAO teljesen decentralizálttá válik, és az Internet Computer SNS keretrendszere irányítja."
         },
-        {
+        "dashboard-v2": {
           "title": "Dashboard V2 megjelenés",
           "description": "A dashboard új verziója élő metrikákat, staking statisztikákat és governance eszközöket tartalmaz."
         },
-        {
+        "users-30k": {
           "title": "30 000 felhasználós mérföldkő",
           "description": "Az ORIGYN több mint 30 000 felhasználóra nő, ami 300%-os növekedés hat hónap alatt."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Együttműködés Leo Caillarddal és Gil Sertissage-zsal",
           "description": "Az ORIGYN fizikai műalkotásokat és gyémántokat tanúsít nagy presztízsű partnerségek keretében."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "Az NFT standard frissül, hogy lehetővé tegye a tanúsítványok biztonságos átruházhatóságát."
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework elindítása",
           "description": "Szabályok és onboarding struktúra jön létre az ORIGYN-nel integráló új partnerek támogatására."
         },
-        {
-          "title": "A Cecil DAO elindítása",
-          "description": "Az ORIGYN támogatja a Cecil DAO elindítását, hogy természetvédelmi és humanitárius projekteket finanszírozzon blockchain átláthatósággal."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "A Cecil DAO indulásának támogatása",
+          "description": "A természetvédelmi és humanitárius kezdeményezések decentralizált finanszírozásának előmozdítása blokklánc-technológiával."
         },
-        {
+        "acquisition-claimlink": {
           "title": "A ClaimLink felvásárlása",
           "description": "Az ORIGYN felvásárolja a ClaimLinket, egy ICP-re épülő decentralizált NFT- és tokenelosztási platformot."
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "Új standard kerül bevezetésre a tanúsítványok interoperabilitásának és az egész ökoszisztémára kiterjedő hasznosságának növelésére."
-        },
-        {
-          "title": "Egy nyilvános",
-          "titleSpan": "Minting Studio elindítása",
-          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi RWA on-chain tanúsítványok mintelését az ORIGYN infrastruktúrán."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "A Runestone rejtélye 2026 második negyedévében, Genfben kerül felfedésre."
+          "titleSpan": "Új ICRC7 NFT-szabvány",
+          "description": "Új tanúsítványszabvány, amely javítja az NFT-k átjárhatóságát, nyomon követhetőségét és hasznosságát az ORIGYN ökoszisztémában."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Elindul egy self-service eszköz, amely bárki számára lehetővé teszi az on-chain mintelést az ORIGYN infrastruktúra használatával."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "engedélyezett hozzáféréshez",
+          "description": "Privát hozzáférés az ORIGYN Recordshoz, a platformhoz, amely fotóidat on-chain bejegyzésekké alakítja alkotóval, idővel és helyszínnel."
         },
-        {
-          "title": "IP-védelem bevezetése",
-          "description": "Az on-chain szellemi tulajdonjog-tanúsítás támogatása integrálásra kerül a protokollba."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Digitális termékútlevelek (DPP)",
+          "description": "Megfelelőségi réteg a közelgő uniós DPP-szabványokhoz, amely lehetővé teszi a termékazonosítók on-chain kiadását."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "ORIGYN MI-infrastruktúra",
+          "description": "Beépített, mesterséges intelligenciára épülő ellenőrzés és elemzés valós eszközökhöz, amely erősíti a bizalmat, a hitelesítést és a tanúsítást."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Professzionális Minting Studio",
+          "description": "Önkiszolgáló platform, amelyen bárki tanúsított digitális eszközöket hozhat létre az ORIGYN infrastruktúráján."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Terjeszkedés a luxuspiacon",
+          "description": "Blokkláncalapú digitális tanúsítás és kiterjesztett garanciainfrastruktúra luxusóragyártóknak, a CORUM-mal közösen indítva."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Nyilvános hozzáférés az ORIGYN Recordshoz, a platformhoz, amely fotóidat on-chain bejegyzésekké alakítja alkotóval, idővel és helyszínnel."
+        },
+        "cross-chain": {
           "title": "Cross-chain megvalósítás",
           "description": "A cross-chain kompatibilitás kiterjeszti az ORIGYN elérését más jelentős ökoszisztémákra."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Globális wallet- és marketplace-integráció",
           "description": "Az ORIGYN NFTs világszerte elérhetővé válnak vezető walleteken és NFT marketplace-eken keresztül."
         },
-        {
+        "universal-certification-standard": {
           "title": "A univerzális tanúsítási standarddá válás",
           "description": "Az ORIGYN célja, hogy globális mércévé váljon a digitális tanúsításban minden eszközosztály esetében."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "A rejtély hamarosan lelepleződik",
+          "description": "A rejtély hamarosan lelepleződik egy exkluzív együttműködés keretében Léo Caillard-ral."
         }
-      ]
+      }
     },
     "partners": {
       "label": "PARTNEREK",

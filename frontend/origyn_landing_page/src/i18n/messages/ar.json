@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "خارطة الطريق",
       "description": "من الأدوات الجديدة ومزايا الحوكمة إلى التوسع في دعم القطاعات والمطورين. يعكس كل إنجاز مهمتنا في إدراج الأصول الواقعية بالكامل على السلسلة من خلال بنية تحتية قابلة للتوسع والتحقق واللامركزية.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "تمويل ORIGYN Foundation",
           "description": "تم تأسيس ORIGYN Foundation في Neuchâtel، سويسرا، لبدء تطوير ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "إطلاق رمز OGY",
           "description": "تم إنشاء رمز المنفعة الأصلي $OGY لتشغيل رسوم البروتوكول والحوكمة وstaking."
         },
-        {
+        "nft-standard-v1": {
           "title": "معيار ORIGYN NFT v1.0",
           "description": "إطلاق الإصدار الأول من معيار NFT الخاص بـ ORIGYN لتمكين التصديق on-chain."
         },
-        {
+        "tokenomics-2": {
           "title": "تحديث Tokenomics 2.0",
           "description": "تم حرق 200 مليون رمز $OGY كانت مخصصة سابقا للمؤسسة، مما أطلق ضغطا انكماشيا."
         },
-        {
+        "minting-platform-v1": {
           "title": "منصة Minting 1.0",
           "description": "إطلاق أول واجهة minting on-chain للشهادات الرقمية."
         },
-        {
-          "title": "شراكات استراتيجية",
-          "description": "تعاونات استراتيجية مع FederItaly وMETALOR لتصديق المنتجات الإيطالية الصنع والذهب المرمز."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "توثيق المنتجات الإيطالية",
+          "description": "بنية تحتية للتوثيق الرقمي تحمي أصالة ومصدر منتجات Made in Italy، بالتعاون مع Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "أول شراء للذهب",
           "description": "تم شراء 3 كغ من الذهب المادي وترميزها باستخدام ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "الاستحواذ على CanDB",
           "description": "تستحوذ ORIGYN على CanDB، وهي حل قاعدة بيانات لامركزي وقابل للتوسع ومحسن لبيانات NFT الوصفية."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "إطلاق Tokenomics 3.0 وDashboard",
           "description": "تم تقديم نموذج انكماشي مع Tokenomics 3.0 وإصدار النسخة الأولى من ORIGYN Dashboard."
         },
-        {
+        "protocol-users-10k": {
           "title": "10,000 مستخدم للبروتوكول",
           "description": "تتجاوز ORIGYN حاجز 10,000 مستخدم فريد للبروتوكول."
         },
-        {
+        "gold-dao-launch": {
           "title": "إطلاق Gold DAO",
           "description": "تصبح Gold DAO أول DAO مبنية على ORIGYN لترميز الذهب المادي وتصديقه on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "تبرع 500M OGY إلى Gold DAO",
           "description": "يتم التبرع بنصف مليار رمز $OGY لدعم خزينة Gold DAO طويلة الأجل."
         },
-        {
+        "dao-sns-integration": {
           "title": "دمج ORIGYN DAO مع ICP SNS",
           "description": "تصبح ORIGYN DAO لامركزية بالكامل ومحكومة عبر إطار SNS الخاص بـ Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "إصدار Dashboard V2",
           "description": "تتضمن النسخة الجديدة من dashboard مقاييس مباشرة وإحصاءات staking وأدوات حوكمة."
         },
-        {
+        "users-30k": {
           "title": "إنجاز 30,000 مستخدم",
           "description": "تنمو ORIGYN إلى أكثر من 30,000 مستخدم، بزيادة 300% خلال ستة أشهر."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "تعاون مع Leo Caillard وGil Sertissage",
           "description": "تصادق ORIGYN على أعمال فنية مادية وألماس ضمن شراكات بارزة."
         },
-        {
+        "nft-standard-v2": {
           "title": "معيار ORIGYN NFT v2.0",
           "description": "تمت ترقية معيار NFT لتمكين قابلية نقل الشهادات بأمان."
         },
-        {
+        "integrator-framework": {
           "title": "إطلاق إطار عمل المدمجين",
           "description": "تم إنشاء قواعد وهيكل onboarding لتوجيه الشركاء الجدد الذين يدمجون مع ORIGYN."
         },
-        {
-          "title": "إطلاق Cecil DAO",
-          "description": "تدعم ORIGYN إطلاق Cecil DAO لتمويل مشاريع الحفاظ على البيئة والمشاريع الإنسانية باستخدام شفافية blockchain."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "دعم إطلاق Cecil DAO",
+          "description": "تعزيز التمويل اللامركزي لمبادرات الحفاظ على الطبيعة والعمل الإنساني عبر تقنية البلوكشين."
         },
-        {
+        "acquisition-claimlink": {
           "title": "الاستحواذ على ClaimLink",
           "description": "تستحوذ ORIGYN على ClaimLink، وهي منصة لامركزية لتوزيع NFT والرموز مبنية على ICP."
         },
-        {
-          "title": "معيار ICRC-7 NFT",
-          "description": "يتم تقديم معيار جديد لزيادة قابلية تشغيل الشهادات بين الأنظمة وتعزيز فائدتها على مستوى المنظومة."
-        },
-        {
-          "title": "إطلاق",
-          "titleSpan": "Minting Studio عام",
-          "description": "تم إطلاق أداة self-service تسمح لأي شخص بإصدار شهادات RWA on-chain على بنية ORIGYN التحتية."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "سيتم الكشف عن لغز Runestone في Q2 2026 في جنيف."
+          "titleSpan": "معيار NFT الجديد ICRC7",
+          "description": "معيار شهادات جديد صُمم لتحسين قابلية التشغيل البيني وإمكانية التتبع والفائدة لرموز NFT في منظومة ORIGYN بأكملها."
         },
-        {
-          "title": "Minting Lab",
-          "description": "تم إطلاق أداة self-service تسمح لأي شخص بالـ minting on-chain باستخدام بنية ORIGYN التحتية."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "للوصول المصرّح به",
+          "description": "وصول خاص إلى ORIGYN Records، المنصة التي تحوّل صورك إلى سجلات on-chain مع منشئها ووقتها وموقعها."
         },
-        {
-          "title": "تنفيذ حماية IP",
-          "description": "تم دمج دعم التصديق on-chain لحقوق الملكية الفكرية في البروتوكول."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "جوازات المنتجات الرقمية (DPP)",
+          "description": "طبقة امتثال متوافقة مع معايير DPP الأوروبية القادمة، تتيح للشركات إصدار هويات المنتجات on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "بنية الذكاء الاصطناعي من ORIGYN",
+          "description": "تحقق وتحليل مدمجان يعملان بالذكاء الاصطناعي للأصول الواقعية، بما يعزز الثقة والمصادقة والتوثيق."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "استوديو Minting الاحترافي",
+          "description": "منصة ذاتية الخدمة تتيح للجميع سك أصول رقمية موثقة باستخدام بنية ORIGYN التحتية."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "التوسع في سوق الرفاهية",
+          "description": "توثيق رقمي وبنية ضمان ممتد قائمة على البلوكشين لمصنّعي الساعات الفاخرة، أُطلقت مع CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "وصول عام إلى ORIGYN Records، المنصة التي تحوّل صورك إلى سجلات on-chain مع منشئها ووقتها وموقعها."
+        },
+        "cross-chain": {
           "title": "تنفيذ Cross-Chain",
           "description": "توسع توافقية cross-chain نطاق ORIGYN إلى منظومات رئيسية أخرى."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "دمج المحافظ وmarketplaces العالمية",
           "description": "تصبح ORIGYN NFTs متاحة عبر المحافظ وNFT marketplaces الرائدة حول العالم."
         },
-        {
+        "universal-certification-standard": {
           "title": "أن تصبح معيار التصديق العالمي",
           "description": "تهدف ORIGYN إلى ترسيخ نفسها كمعيار عالمي للتصديق الرقمي عبر جميع فئات الأصول."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "سر سيُكشف قريبًا",
+          "description": "سيُكشف السر قريبًا من خلال تعاون حصري مع Léo Caillard."
         }
-      ]
+      }
     },
     "partners": {
       "label": "الشركاء",

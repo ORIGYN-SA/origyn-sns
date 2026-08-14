@@ -641,122 +641,144 @@
     "roadmap": {
       "title": "Roadmapa",
       "description": "Od nových utilit a funkcí správy až po rozšířenou podporu pro odvětví a vývojáře. Každý milník odráží naši misi přinést reálná aktiva plně on-chain prostřednictvím škálovatelné, ověřitelné a decentralizované infrastruktury.",
-      "items": [
-        {
+      "items": {
+        "origyn-foundation-funded": {
           "title": "ORIGYN Foundation financována",
           "description": "ORIGYN Foundation byla založena ve švýcarském Neuchâtelu, aby zahájila vývoj ORIGYN Protocol."
         },
-        {
+        "ogy-token-launch": {
           "title": "Spuštění OGY Token",
           "description": "Nativní utility token $OGY je vytvořen pro pohon protokolových poplatků, governance a stakingu."
         },
-        {
+        "nft-standard-v1": {
           "title": "ORIGYN NFT Standard v1.0",
           "description": "Spuštění první verze NFT standardu ORIGYN umožňující on-chain certifikaci."
         },
-        {
+        "tokenomics-2": {
           "title": "Aktualizace Tokenomics 2.0",
           "description": "200 milionů $OGY tokens dříve přidělených Foundation je spáleno, čímž se spouští deflační tlak."
         },
-        {
+        "minting-platform-v1": {
           "title": "Minting Platform 1.0",
           "description": "Spuštění prvního on-chain minting rozhraní pro digitální certifikáty."
         },
-        {
-          "title": "Strategická partnerství",
-          "description": "Strategické spolupráce s FederItaly a METALOR za účelem certifikace italských produktů a tokenizovaného zlata."
+        "italian-products-authentication": {
+          "title": "",
+          "titleSpan": "Ověřování italských výrobků",
+          "description": "Infrastruktura digitální certifikace chránící pravost a původ výrobků Made in Italy, ve spolupráci s Federitaly."
         },
-        {
+        "first-gold-purchase": {
           "title": "První nákup zlata",
           "description": "3 kg fyzického zlata jsou zakoupeny a tokenizovány pomocí ORIGYN Protocol."
         },
-        {
+        "acquisition-candb": {
           "title": "Akvizice CanDB",
           "description": "ORIGYN získává CanDB, decentralizované, škálovatelné databázové řešení optimalizované pro NFT metadata."
         },
-        {
+        "tokenomics-3-dashboard": {
           "title": "Tokenomics 3.0 a spuštění Dashboardu",
           "description": "S Tokenomics 3.0 je zaveden deflační model a vydána první verze ORIGYN Dashboard."
         },
-        {
+        "protocol-users-10k": {
           "title": "10 000 uživatelů protokolu",
           "description": "ORIGYN překonává 10 000 unikátních uživatelů protokolu."
         },
-        {
+        "gold-dao-launch": {
           "title": "Spuštění Gold DAO",
           "description": "Gold DAO se stává první DAO postavenou na ORIGYN pro tokenizaci a certifikaci fyzického zlata on-chain."
         },
-        {
+        "ogy-donation-gold-dao": {
           "title": "Dar 500M OGY pro Gold DAO",
           "description": "Půl miliardy $OGY tokens je darováno na podporu dlouhodobé treasury Gold DAO."
         },
-        {
+        "dao-sns-integration": {
           "title": "ORIGYN DAO integrována s ICP SNS",
           "description": "ORIGYN DAO se stává plně decentralizovanou a spravovanou prostřednictvím SNS frameworku Internet Computer."
         },
-        {
+        "dashboard-v2": {
           "title": "Vydání Dashboard V2",
           "description": "Nová verze dashboardu obsahuje živé metriky, statistiky stakingu a governance nástroje."
         },
-        {
+        "users-30k": {
           "title": "Milník 30 000 uživatelů",
           "description": "ORIGYN roste na více než 30 000 uživatelů, což je 300% nárůst za šest měsíců."
         },
-        {
+        "leo-caillard-gil-sertissage": {
           "title": "Spolupráce s Leo Caillard a Gil Sertissage",
           "description": "ORIGYN certifikuje fyzická umělecká díla a diamanty v prestižních partnerstvích."
         },
-        {
+        "nft-standard-v2": {
           "title": "ORIGYN NFT Standard v2.0",
           "description": "NFT standard je upgradován tak, aby umožnil bezpečnou převoditelnost certifikátů."
         },
-        {
+        "integrator-framework": {
           "title": "Integrator Framework spuštěn",
           "description": "Jsou vytvořena pravidla a onboardingová struktura, které mají vést nové partnery při integraci s ORIGYN."
         },
-        {
-          "title": "Spuštění Cecil DAO",
-          "description": "ORIGYN podporuje spuštění Cecil DAO za účelem financování ochranářských a humanitárních projektů pomocí blockchainové transparentnosti."
+        "cecil-dao": {
+          "title": "",
+          "titleSpan": "Podpora spuštění Cecil DAO",
+          "description": "Rozvoj decentralizovaného financování ochrany přírody a humanitárních iniciativ prostřednictvím blockchainu."
         },
-        {
+        "acquisition-claimlink": {
           "title": "Akvizice ClaimLink",
           "description": "ORIGYN získává ClaimLink, decentralizovanou platformu pro distribuci NFT a tokenů postavenou na ICP."
         },
-        {
-          "title": "ICRC-7 NFT Standard",
-          "description": "Je zaveden nový standard pro zvýšení interoperability certifikátů a užitku v celém ekosystému."
-        },
-        {
-          "title": "Spuštění veřejného",
-          "titleSpan": "Minting Studia",
-          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain RWA certifikáty na infrastruktuře ORIGYN."
-        },
-        {
+        "icrc7-nft-standard": {
           "title": "",
-          "titleSpan": "Runestone",
-          "description": "Záhada Runestone bude odhalena v Q2 2026 v Ženevě."
+          "titleSpan": "Nový standard NFT ICRC7",
+          "description": "Nový standard certifikátů zlepšující interoperabilitu, sledovatelnost a využitelnost NFT v celém ekosystému ORIGYN."
         },
-        {
-          "title": "Minting Lab",
-          "description": "Je spuštěn samoobslužný nástroj, který umožňuje komukoli mintovat on-chain pomocí infrastruktury ORIGYN."
+        "origyn-records-v1": {
+          "title": "",
+          "titleSpan": "ORIGYN Records v1.",
+          "titleSmall": "pro autorizovaný přístup",
+          "description": "Soukromý přístup k ORIGYN Records, platformě, která promění vaše fotografie v on-chain záznamy s autorem, časem a místem."
         },
-        {
-          "title": "Implementace ochrany IP",
-          "description": "Do protokolu je integrována podpora on-chain certifikace práv duševního vlastnictví."
+        "digital-product-passports": {
+          "title": "",
+          "titleSpan": "Digitální pasy výrobků (DPP)",
+          "description": "Vrstva compliance sladěná s připravovanými standardy DPP v EU, aby firmy mohly vydávat identity výrobků on-chain."
         },
-        {
+        "ai-infrastructure": {
+          "title": "",
+          "titleSpan": "Infrastruktura AI od ORIGYN",
+          "description": "Nativní ověřování a analýza s podporou AI pro reálná aktiva, které posilují důvěru, autentizaci a certifikaci."
+        },
+        "professional-minting-studio": {
+          "title": "",
+          "titleSpan": "Profesionální Minting Studio",
+          "description": "Samoobslužná platforma, na které může kdokoli mintovat certifikovaná digitální aktiva na infrastruktuře ORIGYN."
+        },
+        "luxury-market-expansion": {
+          "title": "",
+          "titleSpan": "Expanze na trh luxusního zboží",
+          "description": "Digitální certifikace a infrastruktura rozšířené záruky na blockchainu pro výrobce luxusních hodinek, spuštěné s CORUM."
+        },
+        "origyn-records": {
+          "title": "",
+          "titleSpan": "ORIGYN Records",
+          "description": "Veřejný přístup k ORIGYN Records, platformě, která promění vaše fotografie v on-chain záznamy s autorem, časem a místem."
+        },
+        "cross-chain": {
           "title": "Cross-chain implementace",
           "description": "Cross-chain kompatibilita rozšiřuje dosah ORIGYN do dalších významných ekosystémů."
         },
-        {
+        "global-wallet-marketplace": {
           "title": "Globální integrace wallets a marketplaces",
           "description": "ORIGYN NFTs se stávají dostupnými prostřednictvím předních wallets a NFT marketplaces po celém světě."
         },
-        {
+        "universal-certification-standard": {
           "title": "Stát se univerzálním standardem certifikace",
           "description": "ORIGYN usiluje o to, aby se stal globálním měřítkem digitální certifikace napříč všemi třídami aktiv."
+        },
+        "runestone": {
+          "title": "",
+          "titleSpan": "Runestone",
+          "when": "Tajemství bude odhaleno",
+          "description": "Tajemství se brzy odhalí prostřednictvím exkluzivní spolupráce s Léem Caillardem."
         }
-      ]
+      }
     },
     "partners": {
       "label": "PARTNEŘI",
