@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "प्रमाणपत्र",
-      "holders": "धारक"
+      "holders": "धारक",
+      "transactions": "लेनदेन"
     },
     "certificatesPage": {
       "title": "प्रमाणपत्र",
@@ -751,6 +752,12 @@
         "Received": "प्राप्त",
         "Transferred": "स्थानांतरित"
       }
+    },
+    "transactions": {
+      "empty": "अभी तक कोई लेनदेन नहीं।",
+      "direction": "दिशा",
+      "in": "आवक",
+      "out": "जावक"
     },
     "detail": {
       "certificate": "प्रमाणपत्र",

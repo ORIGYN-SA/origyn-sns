@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Sertifikat",
-      "holders": "Pemegang"
+      "holders": "Pemegang",
+      "transactions": "Transaksi"
     },
     "certificatesPage": {
       "title": "Sertifikat",
@@ -751,6 +752,12 @@
         "Received": "Diterima",
         "Transferred": "Ditransfer"
       }
+    },
+    "transactions": {
+      "empty": "Belum ada transaksi.",
+      "direction": "Arah",
+      "in": "Masuk",
+      "out": "Keluar"
     },
     "detail": {
       "certificate": "Sertifikat",

@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certificate",
-      "holders": "Deținători"
+      "holders": "Deținători",
+      "transactions": "Tranzacții"
     },
     "certificatesPage": {
       "title": "Certificate",
@@ -751,6 +752,12 @@
         "Received": "Primit",
         "Transferred": "Transferat"
       }
+    },
+    "transactions": {
+      "empty": "Încă nu există tranzacții.",
+      "direction": "Direcție",
+      "in": "Intrare",
+      "out": "Ieșire"
     },
     "detail": {
       "certificate": "Certificat",

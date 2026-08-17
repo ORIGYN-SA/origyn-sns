@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "الشهادات",
-      "holders": "مالكون"
+      "holders": "مالكون",
+      "transactions": "المعاملات"
     },
     "certificatesPage": {
       "title": "الشهادات",
@@ -751,6 +752,12 @@
         "Received": "مستلم",
         "Transferred": "محوّل"
       }
+    },
+    "transactions": {
+      "empty": "لا توجد معاملات بعد.",
+      "direction": "الاتجاه",
+      "in": "وارد",
+      "out": "صادر"
     },
     "detail": {
       "certificate": "الشهادة",

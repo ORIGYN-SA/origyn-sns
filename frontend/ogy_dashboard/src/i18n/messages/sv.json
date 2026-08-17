@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certifikat",
-      "holders": "Innehavare"
+      "holders": "Innehavare",
+      "transactions": "Transaktioner"
     },
     "certificatesPage": {
       "title": "Certifikat",
@@ -751,6 +752,12 @@
         "Received": "Mottagen",
         "Transferred": "Överförd"
       }
+    },
+    "transactions": {
+      "empty": "Inga transaktioner ännu.",
+      "direction": "Riktning",
+      "in": "In",
+      "out": "Ut"
     },
     "detail": {
       "certificate": "Certifikat",
