@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certificaten",
-      "holders": "Houders"
+      "holders": "Houders",
+      "transactions": "Transacties"
     },
     "certificatesPage": {
       "title": "Certificaten",
@@ -751,6 +752,12 @@
         "Received": "Ontvangen",
         "Transferred": "Overgedragen"
       }
+    },
+    "transactions": {
+      "empty": "Nog geen transacties.",
+      "direction": "Richting",
+      "in": "In",
+      "out": "Uit"
     },
     "detail": {
       "certificate": "Certificaat",

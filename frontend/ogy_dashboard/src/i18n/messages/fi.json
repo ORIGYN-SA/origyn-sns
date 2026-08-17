@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Sertifikaatit",
-      "holders": "Haltijaa"
+      "holders": "Haltijaa",
+      "transactions": "Tapahtumat"
     },
     "certificatesPage": {
       "title": "Sertifikaatit",
@@ -751,6 +752,12 @@
         "Received": "Vastaanotettu",
         "Transferred": "Siirretty"
       }
+    },
+    "transactions": {
+      "empty": "Ei vielä tapahtumia.",
+      "direction": "Suunta",
+      "in": "Sisään",
+      "out": "Ulos"
     },
     "detail": {
       "certificate": "Sertifikaatti",

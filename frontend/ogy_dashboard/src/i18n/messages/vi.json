@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Chứng chỉ",
-      "holders": "Người nắm giữ"
+      "holders": "Người nắm giữ",
+      "transactions": "Giao dịch"
     },
     "certificatesPage": {
       "title": "Chứng chỉ",
@@ -751,6 +752,12 @@
         "Received": "Đã nhận",
         "Transferred": "Đã chuyển"
       }
+    },
+    "transactions": {
+      "empty": "Chưa có giao dịch nào.",
+      "direction": "Hướng",
+      "in": "Vào",
+      "out": "Ra"
     },
     "detail": {
       "certificate": "Chứng chỉ",

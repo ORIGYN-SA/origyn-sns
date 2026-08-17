@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Zertifikate",
-      "holders": "Inhaber"
+      "holders": "Inhaber",
+      "transactions": "Transaktionen"
     },
     "certificatesPage": {
       "title": "Zertifikate",
@@ -751,6 +752,12 @@
         "Received": "Erhalten",
         "Transferred": "Übertragen"
       }
+    },
+    "transactions": {
+      "empty": "Noch keine Transaktionen.",
+      "direction": "Richtung",
+      "in": "Eingang",
+      "out": "Ausgang"
     },
     "detail": {
       "certificate": "Zertifikat",

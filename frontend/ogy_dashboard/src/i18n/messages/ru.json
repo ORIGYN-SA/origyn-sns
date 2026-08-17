@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Сертификаты",
-      "holders": "Владельцев"
+      "holders": "Владельцев",
+      "transactions": "Транзакции"
     },
     "certificatesPage": {
       "title": "Сертификаты",
@@ -751,6 +752,12 @@
         "Received": "Получен",
         "Transferred": "Передан"
       }
+    },
+    "transactions": {
+      "empty": "Транзакций пока нет.",
+      "direction": "Направление",
+      "in": "Входящая",
+      "out": "Исходящая"
     },
     "detail": {
       "certificate": "Сертификат",

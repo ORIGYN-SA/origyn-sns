@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "תעודות",
-      "holders": "מחזיקים"
+      "holders": "מחזיקים",
+      "transactions": "עסקאות"
     },
     "certificatesPage": {
       "title": "תעודות",
@@ -751,6 +752,12 @@
         "Received": "התקבל",
         "Transferred": "הועבר"
       }
+    },
+    "transactions": {
+      "empty": "אין עדיין עסקאות.",
+      "direction": "כיוון",
+      "in": "נכנס",
+      "out": "יוצא"
     },
     "detail": {
       "certificate": "תעודה",

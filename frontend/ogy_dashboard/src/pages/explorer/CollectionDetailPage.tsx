@@ -15,9 +15,11 @@ import {
   BlockchainLink,
 } from "./NftCards";
 import NftGrid from "./NftGrid";
+import NftTransactionsTable from "./NftTransactionsTable";
 import CertificateDialog from "./CertificateDialog";
 
 const DEFAULT_PAGE_SIZE = 20;
+const TABS = ["certificates", "holders", "transactions"] as const;
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
   <div className="flex flex-col gap-1">
@@ -121,7 +123,7 @@ export const CollectionDetailPage = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [selectedNft, setSelectedNft] = useState<NftCard | null>(null);
-  const [view, setView] = useState<"certificates" | "holders">("certificates");
+  const [view, setView] = useState<(typeof TABS)[number]>("certificates");
 
   const { collection } = useNftCollectionDetail(canisterId);
   const { cards, total, isLoading } = useNftsPage({
@@ -182,7 +184,7 @@ export const CollectionDetailPage = () => {
         )}
 
         <div className="flex flex-wrap gap-2 mb-8">
-          {(["certificates", "holders"] as const).map((tab) => (
+          {TABS.map((tab) => (
             <button
               key={tab}
               type="button"
@@ -198,7 +200,7 @@ export const CollectionDetailPage = () => {
           ))}
         </div>
 
-        {view === "certificates" ? (
+        {view === "certificates" && (
           <NftGrid
             cards={cards}
             isLoading={isLoading}
@@ -212,8 +214,13 @@ export const CollectionDetailPage = () => {
               setPageIndex(0);
             }}
           />
-        ) : (
-          <HoldersTable canisterId={canisterId} />
+        )}
+        {view === "holders" && <HoldersTable canisterId={canisterId} />}
+        {view === "transactions" && (
+          <NftTransactionsTable
+            collection={canisterId}
+            showCollection={false}
+          />
         )}
       </div>
 

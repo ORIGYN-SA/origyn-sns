@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "인증서",
-      "holders": "보유자"
+      "holders": "보유자",
+      "transactions": "거래"
     },
     "certificatesPage": {
       "title": "인증서",
@@ -751,6 +752,12 @@
         "Received": "수신됨",
         "Transferred": "전송됨"
       }
+    },
+    "transactions": {
+      "empty": "아직 거래가 없습니다.",
+      "direction": "방향",
+      "in": "수신",
+      "out": "발신"
     },
     "detail": {
       "certificate": "인증서",

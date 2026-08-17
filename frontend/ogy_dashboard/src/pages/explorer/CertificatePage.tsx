@@ -4,6 +4,7 @@ import { useT } from "@i18n/LocaleContext";
 import useNftToken from "@hooks/nft/useNftToken";
 import CertificateContent, { CertificateSkeleton } from "./CertificateContent";
 import CertificateSummary from "./CertificateSummary";
+import NftTransactionsTable from "./NftTransactionsTable";
 
 export const CertificatePage = () => {
   const t = useT();
@@ -31,6 +32,13 @@ export const CertificatePage = () => {
             <div className="rounded-xl bg-surface">
               <CertificateContent nft={card} showFallbackMeta={false} />
             </div>
+            <NftTransactionsTable
+              className="mt-12"
+              title={t("explorer.sections.transactions")}
+              collection={canisterId}
+              tokenId={tokenId}
+              showCertificate={false}
+            />
           </>
         )}
       </div>

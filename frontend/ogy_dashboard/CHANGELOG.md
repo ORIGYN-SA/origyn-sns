@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.47] - 2026-08-17
+
+#### Added
+
+- Add transaction history to certificate and collector pages.
+- Add a transactions tab to collection pages.
+- Show whether a transaction is incoming or outgoing on collector pages.
+
 ### [1.0.46] - 2026-08-07
 
 #### Added

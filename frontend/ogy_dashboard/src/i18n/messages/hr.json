@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certifikati",
-      "holders": "Imatelja"
+      "holders": "Imatelja",
+      "transactions": "Transakcije"
     },
     "certificatesPage": {
       "title": "Certifikati",
@@ -751,6 +752,12 @@
         "Received": "Primljeno",
         "Transferred": "Preneseno"
       }
+    },
+    "transactions": {
+      "empty": "Još nema transakcija.",
+      "direction": "Smjer",
+      "in": "Ulazna",
+      "out": "Izlazna"
     },
     "detail": {
       "certificate": "Certifikat",

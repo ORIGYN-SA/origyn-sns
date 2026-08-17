@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Sertifikater",
-      "holders": "Innehavere"
+      "holders": "Innehavere",
+      "transactions": "Transaksjoner"
     },
     "certificatesPage": {
       "title": "Sertifikater",
@@ -751,6 +752,12 @@
         "Received": "Mottatt",
         "Transferred": "Overført"
       }
+    },
+    "transactions": {
+      "empty": "Ingen transaksjoner ennå.",
+      "direction": "Retning",
+      "in": "Inn",
+      "out": "Ut"
     },
     "detail": {
       "certificate": "Sertifikat",

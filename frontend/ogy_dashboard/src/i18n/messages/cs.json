@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certifikáty",
-      "holders": "Držitelů"
+      "holders": "Držitelů",
+      "transactions": "Transakce"
     },
     "certificatesPage": {
       "title": "Certifikáty",
@@ -751,6 +752,12 @@
         "Received": "Přijato",
         "Transferred": "Převedeno"
       }
+    },
+    "transactions": {
+      "empty": "Zatím žádné transakce.",
+      "direction": "Směr",
+      "in": "Příchozí",
+      "out": "Odchozí"
     },
     "detail": {
       "certificate": "Certifikát",

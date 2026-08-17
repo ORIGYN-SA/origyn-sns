@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Certificados",
-      "holders": "Titulares"
+      "holders": "Titulares",
+      "transactions": "Transacciones"
     },
     "certificatesPage": {
       "title": "Certificados",
@@ -751,6 +752,12 @@
         "Received": "Recibido",
         "Transferred": "Transferido"
       }
+    },
+    "transactions": {
+      "empty": "Aún no hay transacciones.",
+      "direction": "Dirección",
+      "in": "Entrada",
+      "out": "Salida"
     },
     "detail": {
       "certificate": "Certificado",

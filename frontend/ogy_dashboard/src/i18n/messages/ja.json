@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "証明書",
-      "holders": "保有者"
+      "holders": "保有者",
+      "transactions": "トランザクション"
     },
     "certificatesPage": {
       "title": "証明書",
@@ -751,6 +752,12 @@
         "Received": "受領",
         "Transferred": "送付済み"
       }
+    },
+    "transactions": {
+      "empty": "取引はまだありません。",
+      "direction": "方向",
+      "in": "受取",
+      "out": "送付"
     },
     "detail": {
       "certificate": "証明書",

@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "সার্টিফিকেট",
-      "holders": "ধারক"
+      "holders": "ধারক",
+      "transactions": "লেনদেন"
     },
     "certificatesPage": {
       "title": "সার্টিফিকেট",
@@ -751,6 +752,12 @@
         "Received": "প্রাপ্ত",
         "Transferred": "স্থানান্তরিত"
       }
+    },
+    "transactions": {
+      "empty": "এখনও কোনো লেনদেন নেই।",
+      "direction": "দিক",
+      "in": "আগত",
+      "out": "নির্গত"
     },
     "detail": {
       "certificate": "সার্টিফিকেট",

@@ -14,6 +14,7 @@ import {
 import { NftOwnedStatus } from "@services/api/gldt/v1/types";
 import { NftCard } from "@hooks/nft/mapNft";
 import NftGrid from "./NftGrid";
+import NftTransactionsTable from "./NftTransactionsTable";
 import CollectionCard from "./CollectionCard";
 import { EXPLORER_SKELETON_CLASSES, NftTile, SkeletonTile } from "./NftCards";
 import CertificateDialog from "./CertificateDialog";
@@ -205,6 +206,13 @@ export const CollectorPage = () => {
         </section>
 
         <OwnerHistory principal={principal} onSelect={setSelectedNft} />
+
+        <NftTransactionsTable
+          className="mb-12"
+          title={t("explorer.sections.transactions")}
+          account={principal}
+          showDirection
+        />
 
         {pastNfts.cards.length > 0 && (
           <section>
