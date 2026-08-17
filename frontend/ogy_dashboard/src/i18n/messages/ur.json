@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "سرٹیفکیٹس",
-      "holders": "حاملین"
+      "holders": "حاملین",
+      "transactions": "لین دین"
     },
     "certificatesPage": {
       "title": "سرٹیفکیٹس",
@@ -751,6 +752,12 @@
         "Received": "موصول",
         "Transferred": "منتقل"
       }
+    },
+    "transactions": {
+      "empty": "ابھی تک کوئی لین دین نہیں۔",
+      "direction": "سمت",
+      "in": "آمد",
+      "out": "روانگی"
     },
     "detail": {
       "certificate": "سرٹیفکیٹ",

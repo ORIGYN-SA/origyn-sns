@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "ใบรับรอง",
-      "holders": "ผู้ถือครอง"
+      "holders": "ผู้ถือครอง",
+      "transactions": "ธุรกรรม"
     },
     "certificatesPage": {
       "title": "ใบรับรอง",
@@ -751,6 +752,12 @@
         "Received": "ได้รับ",
         "Transferred": "โอนแล้ว"
       }
+    },
+    "transactions": {
+      "empty": "ยังไม่มีธุรกรรม",
+      "direction": "ทิศทาง",
+      "in": "เข้า",
+      "out": "ออก"
     },
     "detail": {
       "certificate": "ใบรับรอง",

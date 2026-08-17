@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Vyeti",
-      "holders": "Wamiliki"
+      "holders": "Wamiliki",
+      "transactions": "Miamala"
     },
     "certificatesPage": {
       "title": "Vyeti",
@@ -751,6 +752,12 @@
         "Received": "Imepokelewa",
         "Transferred": "Imehamishwa"
       }
+    },
+    "transactions": {
+      "empty": "Bado hakuna miamala.",
+      "direction": "Mwelekeo",
+      "in": "Ndani",
+      "out": "Nje"
     },
     "detail": {
       "certificate": "Cheti",

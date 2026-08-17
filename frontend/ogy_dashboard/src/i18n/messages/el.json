@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Πιστοποιητικά",
-      "holders": "Κάτοχοι"
+      "holders": "Κάτοχοι",
+      "transactions": "Συναλλαγές"
     },
     "certificatesPage": {
       "title": "Πιστοποιητικά",
@@ -751,6 +752,12 @@
         "Received": "Ελήφθη",
         "Transferred": "Μεταφέρθηκε"
       }
+    },
+    "transactions": {
+      "empty": "Δεν υπάρχουν ακόμη συναλλαγές.",
+      "direction": "Κατεύθυνση",
+      "in": "Εισερχόμενη",
+      "out": "Εξερχόμενη"
     },
     "detail": {
       "certificate": "Πιστοποιητικό",

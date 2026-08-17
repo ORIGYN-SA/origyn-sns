@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Sertifikalar",
-      "holders": "Sahip"
+      "holders": "Sahip",
+      "transactions": "İşlemler"
     },
     "certificatesPage": {
       "title": "Sertifikalar",
@@ -751,6 +752,12 @@
         "Received": "Alındı",
         "Transferred": "Aktarıldı"
       }
+    },
+    "transactions": {
+      "empty": "Henüz işlem yok.",
+      "direction": "Yön",
+      "in": "Gelen",
+      "out": "Giden"
     },
     "detail": {
       "certificate": "Sertifika",

@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Tanúsítványok",
-      "holders": "Tulajdonos"
+      "holders": "Tulajdonos",
+      "transactions": "Tranzakciók"
     },
     "certificatesPage": {
       "title": "Tanúsítványok",
@@ -751,6 +752,12 @@
         "Received": "Fogadva",
         "Transferred": "Átutalva"
       }
+    },
+    "transactions": {
+      "empty": "Még nincsenek tranzakciók.",
+      "direction": "Irány",
+      "in": "Bejövő",
+      "out": "Kimenő"
     },
     "detail": {
       "certificate": "Tanúsítvány",

@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "证书",
-      "holders": "位持有者"
+      "holders": "位持有者",
+      "transactions": "交易"
     },
     "certificatesPage": {
       "title": "证书",
@@ -751,6 +752,12 @@
         "Received": "已接收",
         "Transferred": "已转出"
       }
+    },
+    "transactions": {
+      "empty": "暂无交易。",
+      "direction": "方向",
+      "in": "转入",
+      "out": "转出"
     },
     "detail": {
       "certificate": "证书",

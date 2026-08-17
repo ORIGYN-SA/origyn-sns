@@ -723,7 +723,8 @@
     },
     "collectionPage": {
       "certificates": "Mga Sertipiko",
-      "holders": "Mga may-hawak"
+      "holders": "Mga may-hawak",
+      "transactions": "Mga Transaksyon"
     },
     "certificatesPage": {
       "title": "Mga Sertipiko",
@@ -751,6 +752,12 @@
         "Received": "Natanggap",
         "Transferred": "Nailipat"
       }
+    },
+    "transactions": {
+      "empty": "Wala pang transaksyon.",
+      "direction": "Direksyon",
+      "in": "Papasok",
+      "out": "Palabas"
     },
     "detail": {
       "certificate": "Sertipiko",
