@@ -14,8 +14,6 @@ members = [
   "backend/canisters/sns_neuron_controller/impl",
   "backend/canisters/sns_rewards/impl",
   "backend/canisters/sns_rewards/api",
-  "backend/canisters/token_metrics/api",
-  "backend/canisters/token_metrics/impl",
   "backend/external_canisters/icrc_ledger/api",
   "backend/external_canisters/icrc_ledger/c2c_client",
   "backend/external_canisters/ogy_legacy_ledger/api",
