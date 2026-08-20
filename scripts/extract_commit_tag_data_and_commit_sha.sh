@@ -35,7 +35,7 @@ else
 
 	# Opt-in reinstall for non-production networks only (staging/local).
 	# Set the CI/CD variable REINSTALL_STAGING to this canister's name (e.g.
-	# "token_metrics") or to "all" to wipe state and reinstall instead of upgrade.
+	# "sns_rewards") or to "all" to wipe state and reinstall instead of upgrade.
 	# Production (ic) takes the tagged branch above and never reaches here; the
 	# network guard is belt-and-suspenders so this can never apply to ic.
 	if [[ $NETWORK =~ ^(local|staging)$ && -n $REINSTALL_STAGING ]] &&

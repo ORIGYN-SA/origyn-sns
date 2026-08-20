@@ -27,3 +27,12 @@ Go to the [official ORIGYN website](https://origyn.com) for more information abo
 ## Reproducible builds
 
 Refer to the documentation in the [build](/build/README.md) folder for the reproducible builds.
+
+## Deprecated canisters
+
+The following canisters were retired in August 2026. Their data is now served by the external GLDT/BITY stats API consumed directly by the frontends, and the on-chain canisters have been decommissioned. The source code was removed from this repository; it remains available in git history at the commits referenced below.
+
+| Canister | Mainnet ID | Staging ID | Last commit with source |
+| --- | --- | --- | --- |
+| `token_metrics` | `juolv-3yaaa-aaaal-ajc6a-cai` | `euyi3-3yaaa-aaaak-akoba-cai` | `48b244530b1a1c9e26ddc3d60f60c6e062783ddd` |
+| `super_stats_v3` | `ckyzl-aqaaa-aaaal-ajdbq-cai` | `4pjfx-eyaaa-aaaap-ahd5a-cai` | `48b244530b1a1c9e26ddc3d60f60c6e062783ddd` |

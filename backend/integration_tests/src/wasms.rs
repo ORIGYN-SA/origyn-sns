@@ -17,7 +17,6 @@ lazy_static! {
 
     // internal canisters
     pub static ref OGY_TOKEN_SWAP: CanisterWasm = get_internal_canister_wasm("ogy_token_swap");
-    pub static ref TOKEN_METRICS: CanisterWasm = get_internal_canister_wasm("token_metrics");
     pub static ref REWARDS: CanisterWasm = get_internal_canister_wasm("sns_rewards");
     pub static ref CANISTER_JOBS: CanisterWasm = get_internal_canister_wasm("canister_jobs");
     pub static ref COLLECTION_INDEX: CanisterWasm = get_internal_canister_wasm("collection_index");
