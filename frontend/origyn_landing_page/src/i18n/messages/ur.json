@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Gold DAO کا آغاز",
-          "description": "Gold DAO، ORIGYN پر بنایا گیا پہلا DAO بنتا ہے جو physical gold کو on-chain tokenize اور certify کرتا ہے۔"
+          "description": "Gold DAO، ORIGYN protocol پر بنایا گیا پہلا DAO بنتا ہے۔ یہ physical gold کو on-chain tokenize اور certify کرتا ہے۔"
         },
         "ogy-donation-gold-dao": {
           "title": "Gold DAO کو 500M OGY عطیہ",
@@ -729,6 +729,10 @@
           "titleSpan": "نیا ICRC7 NFT معیار",
           "description": "ایک نیا سرٹیفکیٹ معیار جو پورے ORIGYN ایکو سسٹم میں NFT کی باہمی مطابقت، قابلِ سراغ ہونے اور افادیت کو بہتر بناتا ہے۔"
         },
+        "professional-minting-studio": {
+          "title": "پیشہ ورانہ Minting Studio کا آغاز",
+          "description": "ORIGYN کے انفراسٹرکچر پر ڈیجیٹل سرٹیفکیٹ بنانے اور حقیقی دنیا کے اثاثوں کو ٹوکنائز کرنے کے لیے ایک خصوصی ادارہ جاتی پلیٹ فارم۔"
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN اے آئی انفراسٹرکچر",
           "description": "حقیقی اثاثوں کے لیے مربوط اے آئی پر مبنی تصدیق اور تجزیہ، جو اعتماد، توثیق اور سرٹیفکیشن کو مضبوط بناتا ہے۔"
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "پیشہ ورانہ Minting Studio",
-          "description": "ایک سیلف سروس پلیٹ فارم جو ہر کسی کو ORIGYN کے انفراسٹرکچر پر مصدقہ ڈیجیٹل اثاثے بنانے کی سہولت دیتا ہے۔"
+          "titleSpan": "پیشہ ورانہ Minting Studio اپ گریڈ",
+          "description": "ٹیم مینجمنٹ، نوٹیفکیشنز اور ایڈمن ٹولز کے ساتھ بہتر انٹرپرائز انفراسٹرکچر۔"
         },
         "luxury-market-expansion": {
           "title": "",

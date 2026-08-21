@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Lansering av Gold DAO",
-          "description": "Gold DAO blir den första DAO byggd på ORIGYN för att tokenisera och certifiera fysiskt guld on-chain."
+          "description": "Gold DAO blir den första DAO byggd på ORIGYN-protokollet. De tokeniserar och certifierar fysiskt guld on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "500M OGY-donation till Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Ny ICRC7 NFT-standard",
           "description": "En ny certifikatstandard som förbättrar NFT:ers interoperabilitet, spårbarhet och nytta i hela ORIGYN-ekosystemet."
         },
+        "professional-minting-studio": {
+          "title": "Lansering av Professionell Minting Studio",
+          "description": "En exklusiv institutionell plattform för att minta digitala certifikat och tokenisera verkliga tillgångar på ORIGYN:s infrastruktur."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN AI-infrastruktur",
           "description": "Inbyggd AI-driven verifiering och analys av fysiska tillgångar, som stärker förtroende, autentisering och certifiering."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Professionell Minting Studio",
-          "description": "En självbetjäningsplattform där vem som helst kan minta certifierade digitala tillgångar på ORIGYN:s infrastruktur."
+          "titleSpan": "Uppgradering av Professionell Minting Studio",
+          "description": "Förbättrad företagsinfrastruktur med teamhantering, aviseringar och adminverktyg."
         },
         "luxury-market-expansion": {
           "title": "",

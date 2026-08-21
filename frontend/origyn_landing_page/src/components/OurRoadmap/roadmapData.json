@@ -93,7 +93,7 @@
   {
     "id": "gold-dao-launch",
     "title": "Launch of Gold DAO",
-    "description": "Gold DAO becomes the first DAO built on ORIGYN to tokenize and certify physical gold on-chain.",
+    "description": "Gold DAO becomes the first DAO built on ORIGYN protocol. They tokenize and certify physical gold on-chain.",
     "when": "Q4 2023",
     "year": 2023,
     "image": "/roadmap-golddao.webp",
@@ -192,6 +192,14 @@
     "link": "https://origyn.medium.com/a-new-chapter-for-nfts-on-icp-origyn-launches-icrc7-icrc37-986a009ee641"
   },
   {
+    "id": "professional-minting-studio",
+    "title": "Launch of Professional Minting Studio",
+    "description": "An exclusive institutional platform for minting digital certificates and tokenizing real world assets on ORIGYN infrastructure.",
+    "when": "Q1 2026",
+    "year": 2026,
+    "image": "/minting_studio_roadmap.webp"
+  },
+  {
     "id": "origyn-records-v1",
     "upcoming": true,
     "title": "",
@@ -223,11 +231,11 @@
     "image": "/roadmap-10.webp"
   },
   {
-    "id": "professional-minting-studio",
+    "id": "professional-minting-studio-upgrade",
     "upcoming": true,
     "title": "",
-    "titleSpan": "Professional Minting Studio",
-    "description": "A self-service platform allowing anyone to mint certified, digital assets using ORIGYN's infrastructure.",
+    "titleSpan": "Professional Minting Studio Upgrade",
+    "description": "Improved enterprise infrastructure with team management, notifications, and admin tools.",
     "when": "Q4 2026",
     "year": 2026,
     "image": "/minting_studio_roadmap.webp"

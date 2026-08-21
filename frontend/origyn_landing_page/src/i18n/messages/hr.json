@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Lansiranje Gold DAO",
-          "description": "Gold DAO postaje prvi DAO izgrađen na ORIGYN-u za tokenizaciju i certifikaciju fizičkog zlata on-chain."
+          "description": "Gold DAO postaje prvi DAO izgrađen na protokolu ORIGYN. Tokenizira i certificira fizičko zlato on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "Donacija 500M OGY Gold DAO-u",
@@ -729,6 +729,10 @@
           "titleSpan": "Novi ICRC7 NFT standard",
           "description": "Novi standard certifikata osmišljen za bolju interoperabilnost, sljedivost i korisnost NFT-ova u cijelom ORIGYN ekosustavu."
         },
+        "professional-minting-studio": {
+          "title": "Lansiranje Profesionalnog Minting Studija",
+          "description": "Ekskluzivna institucionalna platforma za kovanje digitalnih certifikata i tokenizaciju stvarne imovine na infrastrukturi ORIGYN-a."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN AI infrastruktura",
           "description": "Izvorna provjera i analiza pokretana umjetnom inteligencijom za stvarnu imovinu, koja jača povjerenje, autentifikaciju i certifikaciju."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Profesionalni Minting Studio",
-          "description": "Samoposlužna platforma koja svakome omogućuje kovanje certificirane digitalne imovine na infrastrukturi ORIGYN-a."
+          "titleSpan": "Nadogradnja Profesionalnog Minting Studija",
+          "description": "Poboljšana poslovna infrastruktura s upravljanjem timovima, obavijestima i administratorskim alatima."
         },
         "luxury-market-expansion": {
           "title": "",

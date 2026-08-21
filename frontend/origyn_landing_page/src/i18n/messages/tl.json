@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Paglulunsad ng Gold DAO",
-          "description": "Ang Gold DAO ang naging unang DAO na itinayo sa ORIGYN upang i-tokenize at i-certify ang pisikal na ginto on-chain."
+          "description": "Ang Gold DAO ang naging unang DAO na itinayo sa ORIGYN protocol. Tinotokenize at sinesertipikahan nila ang pisikal na ginto on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "500M OGY Donation sa Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Bagong ICRC7 NFT standard",
           "description": "Bagong pamantayan ng sertipiko na naglalayong pahusayin ang interoperability, traceability, at gamit ng NFT sa buong ekosistema ng ORIGYN."
         },
+        "professional-minting-studio": {
+          "title": "Paglulunsad ng Propesyonal na Minting Studio",
+          "description": "Isang eksklusibong institutional platform para mag-mint ng mga digital certificate at i-tokenize ang mga real world asset sa imprastraktura ng ORIGYN."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN AI infrastructure",
           "description": "Likas na AI-powered na pagpapatunay at pagsusuri para sa mga totoong asset, na nagpapatibay ng tiwala, authentication, at sertipikasyon."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Propesyonal na Minting Studio",
-          "description": "Isang self-service platform na nagbibigay-daan sa kahit sino na mag-mint ng sertipikadong digital assets gamit ang imprastraktura ng ORIGYN."
+          "titleSpan": "Pag-upgrade ng Propesyonal na Minting Studio",
+          "description": "Pinahusay na enterprise infrastructure na may team management, notification, at admin tools."
         },
         "luxury-market-expansion": {
           "title": "",

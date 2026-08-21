@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "إطلاق Gold DAO",
-          "description": "تصبح Gold DAO أول DAO مبنية على ORIGYN لترميز الذهب المادي وتصديقه on-chain."
+          "description": "تصبح Gold DAO أول DAO مبنية على بروتوكول ORIGYN. وهي ترمّز الذهب المادي وتصدّقه on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "تبرع 500M OGY إلى Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "معيار NFT الجديد ICRC7",
           "description": "معيار شهادات جديد صُمم لتحسين قابلية التشغيل البيني وإمكانية التتبع والفائدة لرموز NFT في منظومة ORIGYN بأكملها."
         },
+        "professional-minting-studio": {
+          "title": "إطلاق استوديو Minting الاحترافي",
+          "description": "منصة مؤسسية حصرية لسك الشهادات الرقمية وترميز أصول العالم الحقيقي على بنية ORIGYN التحتية."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "بنية الذكاء الاصطناعي من ORIGYN",
           "description": "تحقق وتحليل مدمجان يعملان بالذكاء الاصطناعي للأصول الواقعية، بما يعزز الثقة والمصادقة والتوثيق."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "استوديو Minting الاحترافي",
-          "description": "منصة ذاتية الخدمة تتيح للجميع سك أصول رقمية موثقة باستخدام بنية ORIGYN التحتية."
+          "titleSpan": "تحديث استوديو Minting الاحترافي",
+          "description": "بنية تحتية مؤسسية محسّنة مع إدارة الفرق والإشعارات وأدوات المشرفين."
         },
         "luxury-market-expansion": {
           "title": "",

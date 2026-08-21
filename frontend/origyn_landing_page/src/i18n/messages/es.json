@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Lanzamiento de Gold DAO",
-          "description": "Gold DAO se convierte en la primera DAO construida sobre ORIGYN para tokenizar y certificar oro físico on-chain."
+          "description": "Gold DAO se convierte en la primera DAO construida sobre el protocolo ORIGYN. Tokeniza y certifica oro físico on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "Donación de 500M OGY a Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Nuevo estándar NFT ICRC7",
           "description": "Un nuevo estándar de certificado diseñado para mejorar la interoperabilidad, la trazabilidad y la utilidad de los NFT en todo el ecosistema ORIGYN."
         },
+        "professional-minting-studio": {
+          "title": "Lanzamiento del Estudio de minteo profesional",
+          "description": "Una plataforma institucional exclusiva para mintear certificados digitales y tokenizar activos del mundo real sobre la infraestructura de ORIGYN."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "Infraestructura de IA de ORIGYN",
           "description": "Verificación y análisis nativos con IA para activos del mundo real, que refuerzan la confianza, la autenticación y la certificación."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Estudio de minteo profesional",
-          "description": "Una plataforma de autoservicio que permite a cualquiera mintear activos digitales certificados con la infraestructura de ORIGYN."
+          "titleSpan": "Actualización del Estudio de minteo profesional",
+          "description": "Infraestructura empresarial mejorada con gestión de equipos, notificaciones y herramientas de administración."
         },
         "luxury-market-expansion": {
           "title": "",
