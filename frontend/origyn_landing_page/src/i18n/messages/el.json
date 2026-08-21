@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Κυκλοφορία του Gold DAO",
-          "description": "Το Gold DAO γίνεται το πρώτο DAO χτισμένο πάνω στην ORIGYN για tokenization και πιστοποίηση φυσικού χρυσού on-chain."
+          "description": "Το Gold DAO γίνεται το πρώτο DAO χτισμένο πάνω στο πρωτόκολλο ORIGYN. Κάνει tokenization και πιστοποίηση φυσικού χρυσού on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "Δωρεά 500M OGY στο Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Νέο πρότυπο NFT ICRC7",
           "description": "Ένα νέο πρότυπο πιστοποιητικών που βελτιώνει τη διαλειτουργικότητα, την ιχνηλασιμότητα και τη χρησιμότητα των NFT στο οικοσύστημα ORIGYN."
         },
+        "professional-minting-studio": {
+          "title": "Κυκλοφορία του Επαγγελματικού Minting Studio",
+          "description": "Μια αποκλειστική θεσμική πλατφόρμα για τη δημιουργία ψηφιακών πιστοποιητικών και το tokenization πραγματικών περιουσιακών στοιχείων στην υποδομή ORIGYN."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "Υποδομή AI της ORIGYN",
           "description": "Εγγενής επαλήθευση και ανάλυση με τεχνητή νοημοσύνη για πραγματικά περιουσιακά στοιχεία, που ενισχύει την εμπιστοσύνη και την πιστοποίηση."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Επαγγελματικό Minting Studio",
-          "description": "Μια πλατφόρμα αυτοεξυπηρέτησης που επιτρέπει σε οποιονδήποτε να δημιουργεί πιστοποιημένα ψηφιακά περιουσιακά στοιχεία στην υποδομή της ORIGYN."
+          "titleSpan": "Αναβάθμιση του Επαγγελματικού Minting Studio",
+          "description": "Βελτιωμένη εταιρική υποδομή με διαχείριση ομάδων, ειδοποιήσεις και εργαλεία διαχειριστή."
         },
         "luxury-market-expansion": {
           "title": "",

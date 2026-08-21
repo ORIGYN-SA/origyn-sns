@@ -41,7 +41,6 @@ integration tests:
       "sns_rewards integration-test build",
       "dex_interaction integration-test build",
       "sns_neuron_controller integration-test build",
-      "token_metrics integration-test build",
     ]
   extends: .rust template
   script:

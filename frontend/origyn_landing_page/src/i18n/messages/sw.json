@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Uzinduzi wa Gold DAO",
-          "description": "Gold DAO ikawa DAO ya kwanza kujengwa juu ya ORIGYN ili kutokenisha na kuthibitisha dhahabu halisi on-chain."
+          "description": "Gold DAO ikawa DAO ya kwanza kujengwa juu ya protokoli ya ORIGYN. Wanatokenisha na kuthibitisha dhahabu halisi on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "Mchango wa 500M OGY kwa Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Kiwango kipya cha NFT cha ICRC7",
           "description": "Kiwango kipya cha vyeti kilichoundwa kuboresha ushirikiano, ufuatiliaji na manufaa ya NFT katika mfumo mzima wa ORIGYN."
         },
+        "professional-minting-studio": {
+          "title": "Uzinduzi wa Minting Studio ya kitaalamu",
+          "description": "Jukwaa maalum la kitaasisi la kuunda vyeti vya kidijitali na kutokenisha mali za ulimwengu halisi kwa kutumia miundombinu ya ORIGYN."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "Miundombinu ya AI ya ORIGYN",
           "description": "Uthibitishaji na uchambuzi asilia unaotumia AI kwa mali halisi, unaoimarisha uaminifu, uthibitishaji na utoaji wa vyeti."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Minting Studio ya kitaalamu",
-          "description": "Jukwaa la kujihudumia linalomwezesha mtu yeyote kuunda mali za kidijitali zilizothibitishwa kwa kutumia miundombinu ya ORIGYN."
+          "titleSpan": "Uboreshaji wa Minting Studio ya kitaalamu",
+          "description": "Miundombinu bora ya kibiashara yenye usimamizi wa timu, arifa na zana za msimamizi."
         },
         "luxury-market-expansion": {
           "title": "",

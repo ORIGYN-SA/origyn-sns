@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Peluncuran Gold DAO",
-          "description": "Gold DAO menjadi DAO pertama yang dibangun di atas ORIGYN untuk menokenisasi dan mensertifikasi emas fisik secara on-chain."
+          "description": "Gold DAO menjadi DAO pertama yang dibangun di atas protokol ORIGYN. Mereka menokenisasi dan mensertifikasi emas fisik secara on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "Donasi 500M OGY ke Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "Standar NFT ICRC7 baru",
           "description": "Standar sertifikat baru yang dirancang untuk meningkatkan interoperabilitas, ketertelusuran, dan kegunaan NFT di seluruh ekosistem ORIGYN."
         },
+        "professional-minting-studio": {
+          "title": "Peluncuran Minting Studio profesional",
+          "description": "Platform institusional eksklusif untuk mencetak sertifikat digital dan menokenisasi aset dunia nyata di atas infrastruktur ORIGYN."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "Infrastruktur AI ORIGYN",
           "description": "Verifikasi dan analisis bawaan bertenaga AI untuk aset dunia nyata, yang memperkuat kepercayaan, autentikasi, dan sertifikasi."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Minting Studio profesional",
-          "description": "Platform swalayan yang memungkinkan siapa pun mencetak aset digital bersertifikat di atas infrastruktur ORIGYN."
+          "titleSpan": "Peningkatan Minting Studio profesional",
+          "description": "Infrastruktur enterprise yang ditingkatkan dengan manajemen tim, notifikasi, dan perkakas admin."
         },
         "luxury-market-expansion": {
           "title": "",

@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Gold DAO Launch",
-          "description": "Gold DAO ORIGYN-এর উপর নির্মিত প্রথম DAO হয়, যা physical gold on-chain tokenize এবং certify করে।"
+          "description": "Gold DAO, ORIGYN protocol-এর উপর নির্মিত প্রথম DAO হয়। তারা physical gold on-chain tokenize এবং certify করে।"
         },
         "ogy-donation-gold-dao": {
           "title": "500M OGY Donation to Gold DAO",
@@ -729,6 +729,10 @@
           "titleSpan": "নতুন ICRC7 NFT মান",
           "description": "একটি নতুন সার্টিফিকেট মান, যা সমগ্র ORIGYN ইকোসিস্টেমে NFT-র আন্তঃকার্যকারিতা, ট্রেসেবিলিটি ও উপযোগিতা বাড়ায়।"
         },
+        "professional-minting-studio": {
+          "title": "প্রফেশনাল Minting Studio-এর Launch",
+          "description": "ORIGYN-এর অবকাঠামোয় ডিজিটাল সার্টিফিকেট মিন্ট করা এবং বাস্তব জগতের সম্পদ টোকেনাইজ করার একটি এক্সক্লুসিভ ইনস্টিটিউশনাল প্ল্যাটফর্ম।"
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN এআই অবকাঠামো",
           "description": "বাস্তব সম্পদের জন্য অন্তর্নির্মিত এআই-চালিত যাচাই ও বিশ্লেষণ, যা আস্থা, প্রমাণীকরণ ও সার্টিফিকেশন জোরদার করে।"
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "প্রফেশনাল Minting Studio",
-          "description": "একটি সেলফ-সার্ভিস প্ল্যাটফর্ম, যেখানে যে কেউ ORIGYN-এর অবকাঠামো ব্যবহার করে সার্টিফায়েড ডিজিটাল সম্পদ মিন্ট করতে পারেন।"
+          "titleSpan": "প্রফেশনাল Minting Studio আপগ্রেড",
+          "description": "টিম ম্যানেজমেন্ট, নোটিফিকেশন এবং অ্যাডমিন টুলসহ উন্নত এন্টারপ্রাইজ অবকাঠামো।"
         },
         "luxury-market-expansion": {
           "title": "",
