@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Gold DAO Lansmanı",
-          "description": "Gold DAO, fiziksel altını on-chain olarak tokenleştirmek ve sertifikalandırmak için ORIGYN üzerine inşa edilen ilk DAO oldu."
+          "description": "Gold DAO, ORIGYN protokolü üzerine inşa edilen ilk DAO oldu. Fiziksel altını on-chain olarak tokenleştiriyor ve sertifikalandırıyor."
         },
         "ogy-donation-gold-dao": {
           "title": "Gold DAO'ya 500M OGY Bağışı",
@@ -729,6 +729,10 @@
           "titleSpan": "Yeni ICRC7 NFT standardı",
           "description": "NFT'lerin birlikte çalışabilirliğini, izlenebilirliğini ve kullanışlılığını tüm ORIGYN ekosisteminde geliştiren yeni bir sertifika standardı."
         },
+        "professional-minting-studio": {
+          "title": "Profesyonel Minting Studio Lansmanı",
+          "description": "Dijital sertifikalar üretmek ve gerçek dünya varlıklarını tokenleştirmek için ORIGYN altyapısı üzerinde kurumlara özel bir platform."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN yapay zekâ altyapısı",
           "description": "Gerçek dünya varlıkları için yerleşik yapay zekâ destekli doğrulama ve analiz; güveni, kimlik doğrulamayı ve sertifikasyonu güçlendirir."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Profesyonel Minting Studio",
-          "description": "Herkesin ORIGYN altyapısını kullanarak sertifikalı dijital varlıklar üretmesine olanak tanıyan self servis platform."
+          "titleSpan": "Profesyonel Minting Studio Yükseltmesi",
+          "description": "Ekip yönetimi, bildirimler ve yönetici araçlarıyla geliştirilmiş kurumsal altyapı."
         },
         "luxury-market-expansion": {
           "title": "",

@@ -11,6 +11,4 @@ pub mod pocket;
 pub mod sns_governance;
 pub mod sns_rewards;
 pub mod sns_root_canister;
-// pub mod super_stats;
-// pub mod token_metrics;
 pub mod sns_neuron_controller;

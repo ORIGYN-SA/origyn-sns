@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.7] - 2026-08-21
+
+#### Added
+
+- Add the Professional Minting Studio launch to the roadmap, translated into every language
+
+#### Changed
+
+- Turn the Q4 2026 Professional Minting Studio milestone into an upgrade milestone
+- Reword the Gold DAO launch milestone
+
 ### [1.5.6] - 2026-08-14
 
 #### Added

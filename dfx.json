@@ -1,17 +1,6 @@
 {
   "__0": "ORIGYN SNS monorepo",
   "canisters": {
-    "token_metrics": {
-      "type": "custom",
-      "candid": "backend/canisters/token_metrics/api/can.did",
-      "package": "token_metrics",
-      "wasm": "backend/canisters/token_metrics/target/wasm32-unknown-unknown/release/token_metrics_canister.wasm.gz",
-      "declarations": {
-        "bindings": ["js", "did", "ts"],
-        "env_override": null,
-        "output": "backend/canisters/token_metrics/api/declarations"
-      }
-    },
     "ogy_token_swap": {
       "type": "custom",
       "candid": "backend/canisters/ogy_token_swap/api/can.did",

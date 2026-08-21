@@ -24,7 +24,7 @@ scripts/build-all-canister.sh
 scripts/build-canister.sh --verify <CANISTER_NAME>
 ```
 
-Canister names: `ogy_token_swap`, `sns_rewards`, `super_stats_v3`, `token_metrics`, `canister_jobs`, `collection_index`
+Canister names: `ogy_token_swap`, `sns_rewards`, `canister_jobs`, `collection_index`, `dex_interaction`, `sns_neuron_controller`
 
 ### Frontend (React/Vite)
 

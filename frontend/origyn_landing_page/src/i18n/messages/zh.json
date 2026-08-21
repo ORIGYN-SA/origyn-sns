@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "Gold DAO 发布",
-          "description": "Gold DAO 成为首个构建在 ORIGYN 上、用于链上 tokenization 和认证实物黄金的 DAO。"
+          "description": "Gold DAO 成为首个构建在 ORIGYN 协议上的 DAO。他们在链上将实物黄金 tokenization 并进行认证。"
         },
         "ogy-donation-gold-dao": {
           "title": "向 Gold DAO 捐赠 500M OGY",
@@ -729,6 +729,10 @@
           "titleSpan": "全新 ICRC7 NFT 标准",
           "description": "全新证书标准，旨在提升 NFT 在整个 ORIGYN 生态中的互操作性、可追溯性与实用性。"
         },
+        "professional-minting-studio": {
+          "title": "专业 Minting Studio 发布",
+          "description": "专为机构打造的平台，在 ORIGYN 基础设施上铸造数字凭证并将实物资产代币化。"
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN AI 基础设施",
           "description": "面向实物资产的原生 AI 验证与分析能力，进一步增强信任、认证与证明。"
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "专业 Minting Studio",
-          "description": "自助式平台，任何人都可以基于 ORIGYN 的基础设施铸造获得认证的数字资产。"
+          "titleSpan": "专业 Minting Studio 升级",
+          "description": "增强的企业级基础设施，具备团队管理、通知和管理员工具。"
         },
         "luxury-market-expansion": {
           "title": "",

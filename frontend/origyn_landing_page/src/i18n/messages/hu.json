@@ -685,7 +685,7 @@
         },
         "gold-dao-launch": {
           "title": "A Gold DAO elindítása",
-          "description": "A Gold DAO lesz az első ORIGYN-re épülő DAO, amely fizikai aranyat tokenizál és tanúsít on-chain."
+          "description": "A Gold DAO lesz az első ORIGYN protokollra épülő DAO. Fizikai aranyat tokenizál és tanúsít on-chain."
         },
         "ogy-donation-gold-dao": {
           "title": "500M OGY adomány a Gold DAO-nak",
@@ -729,6 +729,10 @@
           "titleSpan": "Új ICRC7 NFT-szabvány",
           "description": "Új tanúsítványszabvány, amely javítja az NFT-k átjárhatóságát, nyomon követhetőségét és hasznosságát az ORIGYN ökoszisztémában."
         },
+        "professional-minting-studio": {
+          "title": "A Professzionális Minting Studio elindítása",
+          "description": "Exkluzív intézményi platform digitális tanúsítványok kibocsátásához és valós eszközök tokenizálásához az ORIGYN infrastruktúráján."
+        },
         "origyn-records-v1": {
           "title": "",
           "titleSpan": "ORIGYN Records v1.",
@@ -745,10 +749,10 @@
           "titleSpan": "ORIGYN MI-infrastruktúra",
           "description": "Beépített, mesterséges intelligenciára épülő ellenőrzés és elemzés valós eszközökhöz, amely erősíti a bizalmat, a hitelesítést és a tanúsítást."
         },
-        "professional-minting-studio": {
+        "professional-minting-studio-upgrade": {
           "title": "",
-          "titleSpan": "Professzionális Minting Studio",
-          "description": "Önkiszolgáló platform, amelyen bárki tanúsított digitális eszközöket hozhat létre az ORIGYN infrastruktúráján."
+          "titleSpan": "Professzionális Minting Studio frissítés",
+          "description": "Fejlettebb vállalati infrastruktúra csapatkezeléssel, értesítésekkel és adminisztrációs eszközökkel."
         },
         "luxury-market-expansion": {
           "title": "",
