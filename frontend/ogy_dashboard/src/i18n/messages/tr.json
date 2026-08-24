@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Sertifika bulunamadı."
     },
+    "transactionPage": {
+      "title": "İşlem Ayrıntıları",
+      "notFound": "İşlem bulunamadı.",
+      "minted": "Basıldı",
+      "burned": "Yakıldı"
+    },
     "collector": {
       "title": "Koleksiyoner",
       "owned": "Sertifikalar",

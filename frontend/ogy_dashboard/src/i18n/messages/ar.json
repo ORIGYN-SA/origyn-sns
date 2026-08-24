@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "لم يتم العثور على الشهادة."
     },
+    "transactionPage": {
+      "title": "تفاصيل المعاملة",
+      "notFound": "لم يتم العثور على المعاملة.",
+      "minted": "مسكوك",
+      "burned": "محروق"
+    },
     "collector": {
       "title": "المقتني",
       "owned": "الشهادات",

@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "인증서를 찾을 수 없습니다."
     },
+    "transactionPage": {
+      "title": "거래 세부 정보",
+      "notFound": "거래를 찾을 수 없습니다.",
+      "minted": "발행됨",
+      "burned": "소각됨"
+    },
     "collector": {
       "title": "수집가",
       "owned": "인증서",

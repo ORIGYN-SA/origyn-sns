@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "سرٹیفکیٹ نہیں ملا۔"
     },
+    "transactionPage": {
+      "title": "لین دین کی تفصیلات",
+      "notFound": "لین دین نہیں ملا۔",
+      "minted": "منٹ شدہ",
+      "burned": "برن کیا گیا"
+    },
     "collector": {
       "title": "کلیکٹر",
       "owned": "سرٹیفکیٹس",

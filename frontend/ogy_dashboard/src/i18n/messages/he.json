@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "התעודה לא נמצאה."
     },
+    "transactionPage": {
+      "title": "פרטי עסקה",
+      "notFound": "העסקה לא נמצאה.",
+      "minted": "נטבע",
+      "burned": "נשרף"
+    },
     "collector": {
       "title": "אספן",
       "owned": "תעודות",

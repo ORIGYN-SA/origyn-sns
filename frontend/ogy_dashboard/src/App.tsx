@@ -52,6 +52,11 @@ const CollectionDetailPage = lazy(() =>
     default: m.CollectionDetailPage,
   }))
 );
+const NftTransactionPage = lazy(() =>
+  import("@pages/explorer/NftTransactionPage").then((m) => ({
+    default: m.NftTransactionPage,
+  }))
+);
 const CollectorPage = lazy(() =>
   import("@pages/explorer/CollectorPage").then((m) => ({
     default: m.CollectorPage,
@@ -184,6 +189,14 @@ const router = createBrowserRouter([
                 element: (
                   <LazyPage>
                     <CollectionDetailPage />
+                  </LazyPage>
+                ),
+              },
+              {
+                path: "transaction/:canisterId/:tokenId/:blockId",
+                element: (
+                  <LazyPage>
+                    <NftTransactionPage />
                   </LazyPage>
                 ),
               },

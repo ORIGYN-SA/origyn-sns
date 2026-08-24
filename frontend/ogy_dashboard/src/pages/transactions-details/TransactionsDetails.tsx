@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import {
   PageHeader,
   PageContainer,
+  PrincipalPill,
   SkeletonOverlay,
   TransactionKindPill,
 } from "@components/ui";
@@ -10,77 +11,7 @@ import CopyToClipboard from "@components/buttons/CopyToClipboard";
 import useFetchOneTransaction from "@hooks/transactions/useFetchOneTransaction";
 import { useT, useLocalePath } from "@i18n/LocaleContext";
 
-const FAKE_PRINCIPAL =
-  "aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaaaa-aaa";
 const FAKE_AMOUNT = "0,000,000.00";
-
-const UserAvatarIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM5 20a7 7 0 0 1 14 0"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const PrincipalPill = ({
-  label,
-  value,
-  isMinting,
-  mintingLabel,
-  onNavigate,
-}: {
-  label: string;
-  value: string | undefined;
-  isMinting: boolean;
-  mintingLabel: string;
-  onNavigate?: (value: string) => void;
-}) => (
-  <div className="flex items-center gap-3 rounded-full border border-border-strong bg-surface-1 py-1 ps-1 pe-4 min-w-0">
-    <div className="flex items-center justify-center w-[39px] h-[39px] rounded-full bg-surface-3 text-white shrink-0">
-      <UserAvatarIcon />
-    </div>
-    <span className="text-[14px] font-normal leading-tight text-muted shrink-0">
-      {label}:
-    </span>
-    {isMinting ? (
-      <span className="text-[14px] font-semibold leading-tight text-content truncate">
-        {mintingLabel}
-      </span>
-    ) : value && onNavigate ? (
-      <>
-        <button
-          type="button"
-          onClick={() => onNavigate(value)}
-          dir="ltr"
-          className="text-[14px] font-semibold leading-tight text-content truncate min-w-0 hover:underline text-start cursor-pointer"
-        >
-          {value}
-        </button>
-        <span className="ms-auto shrink-0">
-          <CopyToClipboard value={value} />
-        </span>
-      </>
-    ) : (
-      <span
-        dir="ltr"
-        className="text-[14px] font-semibold leading-tight text-content truncate min-w-0"
-      >
-        {value ?? FAKE_PRINCIPAL}
-      </span>
-    )}
-  </div>
-);
 
 export const TransactionsDetails = () => {
   const t = useT();
@@ -154,15 +85,13 @@ export const TransactionsDetails = () => {
                 <PrincipalPill
                   label={t("common.from")}
                   value={data.from_account}
-                  isMinting={isMintFrom}
-                  mintingLabel={mintingLabel}
+                  emptyLabel={isMintFrom ? mintingLabel : undefined}
                   onNavigate={handleNavigateToAccount}
                 />
                 <PrincipalPill
                   label={t("common.to")}
                   value={data.to_account}
-                  isMinting={isBurnTo}
-                  mintingLabel={mintingLabel}
+                  emptyLabel={isBurnTo ? mintingLabel : undefined}
                   onNavigate={handleNavigateToAccount}
                 />
               </div>

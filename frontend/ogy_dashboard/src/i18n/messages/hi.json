@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "प्रमाणपत्र नहीं मिला।"
     },
+    "transactionPage": {
+      "title": "लेनदेन विवरण",
+      "notFound": "लेनदेन नहीं मिला।",
+      "minted": "मिंट किया गया",
+      "burned": "बर्न किया गया"
+    },
     "collector": {
       "title": "संग्राहक",
       "owned": "प्रमाणपत्र",
