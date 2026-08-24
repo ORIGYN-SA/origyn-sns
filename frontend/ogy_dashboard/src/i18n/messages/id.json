@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Sertifikat tidak ditemukan."
     },
+    "transactionPage": {
+      "title": "Detail Transaksi",
+      "notFound": "Transaksi tidak ditemukan.",
+      "minted": "Dicetak",
+      "burned": "Di-burn"
+    },
     "collector": {
       "title": "Kolektor",
       "owned": "Sertifikat",

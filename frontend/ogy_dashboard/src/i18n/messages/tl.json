@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Hindi natagpuan ang sertipiko."
     },
+    "transactionPage": {
+      "title": "Mga Detalye ng Transaksyon",
+      "notFound": "Hindi natagpuan ang transaksyon.",
+      "minted": "Minted",
+      "burned": "Na-burn"
+    },
     "collector": {
       "title": "Kolektor",
       "owned": "Mga Sertipiko",

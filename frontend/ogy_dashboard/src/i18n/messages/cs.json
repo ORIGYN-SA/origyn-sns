@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certifikát nebyl nalezen."
     },
+    "transactionPage": {
+      "title": "Podrobnosti transakce",
+      "notFound": "Transakce nebyla nalezena.",
+      "minted": "Vyraženo",
+      "burned": "Spáleno"
+    },
     "collector": {
       "title": "Sběratel",
       "owned": "Certifikáty",

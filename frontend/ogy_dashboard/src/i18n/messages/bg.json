@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Сертификатът не е намерен."
     },
+    "transactionPage": {
+      "title": "Детайли на транзакцията",
+      "notFound": "Транзакцията не е намерена.",
+      "minted": "Емитиран",
+      "burned": "Изгорен"
+    },
     "collector": {
       "title": "Колекционер",
       "owned": "Сертификати",

@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "ไม่พบใบรับรอง"
     },
+    "transactionPage": {
+      "title": "รายละเอียดธุรกรรม",
+      "notFound": "ไม่พบธุรกรรม",
+      "minted": "สร้างแล้ว",
+      "burned": "ถูกเผา"
+    },
     "collector": {
       "title": "นักสะสม",
       "owned": "ใบรับรอง",

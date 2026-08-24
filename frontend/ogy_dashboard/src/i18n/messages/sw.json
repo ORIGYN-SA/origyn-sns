@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Cheti hakikupatikana."
     },
+    "transactionPage": {
+      "title": "Maelezo ya Muamala",
+      "notFound": "Muamala haukupatikana.",
+      "minted": "Imetengenezwa",
+      "burned": "Imechomwa"
+    },
     "collector": {
       "title": "Mkusanyaji",
       "owned": "Vyeti",

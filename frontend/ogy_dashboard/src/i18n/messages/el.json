@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Το πιστοποιητικό δεν βρέθηκε."
     },
+    "transactionPage": {
+      "title": "Λεπτομέρειες Συναλλαγής",
+      "notFound": "Η συναλλαγή δεν βρέθηκε.",
+      "minted": "Κόπηκε",
+      "burned": "Κάηκε"
+    },
     "collector": {
       "title": "Συλλέκτης",
       "owned": "Πιστοποιητικά",

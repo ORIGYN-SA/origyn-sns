@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "A tanúsítvány nem található."
     },
+    "transactionPage": {
+      "title": "Tranzakció részletei",
+      "notFound": "A tranzakció nem található.",
+      "minted": "Kibocsátva",
+      "burned": "Elégetve"
+    },
     "collector": {
       "title": "Gyűjtő",
       "owned": "Tanúsítványok",

@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certifikatet hittades inte."
     },
+    "transactionPage": {
+      "title": "Transaktionsdetaljer",
+      "notFound": "Transaktionen hittades inte.",
+      "minted": "Mintad",
+      "burned": "Bränd"
+    },
     "collector": {
       "title": "Samlare",
       "owned": "Certifikat",

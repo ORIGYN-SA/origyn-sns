@@ -124,7 +124,18 @@ export const getNftTransactionColumns = (
       header: t("common.index"),
       cell: (row) => (
         <div dir="ltr" className="w-20">
-          {row.block_id}
+          <button
+            className="hover:underline"
+            onClick={() =>
+              navigate(
+                `/viewer/transaction/${row.collection}/${encodeURIComponent(
+                  row.token_id
+                )}/${row.block_id}`
+              )
+            }
+          >
+            {row.block_id}
+          </button>
         </div>
       ),
     },
