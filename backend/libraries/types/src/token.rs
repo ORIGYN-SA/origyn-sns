@@ -97,6 +97,58 @@ impl std::fmt::Display for TokenSymbol {
     }
 }
 
+use std::cell::RefCell;
+use std::collections::HashMap;
+
+thread_local! {
+    static __TOKENS: RefCell<HashMap<Principal, TokenInfo>> = RefCell::new(HashMap::new());
+}
+
+pub fn update_token_fee_cache(ledger_id: Principal, fee: u64) {
+    __TOKENS.with(|tokens| {
+        let mut tokens = tokens.borrow_mut();
+        if let Some(info) = tokens.get_mut(&ledger_id) {
+            info.fee = fee;
+        } else {
+            let symbols = [
+                TokenSymbol::ICP,
+                TokenSymbol::OGY,
+                TokenSymbol::GOLDAO,
+                TokenSymbol::WTN,
+                TokenSymbol::GLDT,
+            ];
+            for symbol in symbols {
+                if symbol.ledger_id(true) == ledger_id || symbol.ledger_id(false) == ledger_id {
+                    let is_test_mode = symbol.ledger_id(true) == ledger_id;
+                    let mut info = symbol.get_token_info(is_test_mode);
+                    info.fee = fee;
+                    tokens.insert(ledger_id, info);
+                    break;
+                }
+            }
+        }
+    });
+}
+
+pub async fn update_token_fee(ledger_id: Principal) -> Result<u64, String> {
+    let call_res = bity_ic_canister_client::make_c2c_call(
+        ledger_id,
+        "icrc1_fee",
+        &(),
+        candid::encode_one,
+        |r| candid::decode_one::<candid::Nat>(r),
+    )
+    .await;
+    match call_res {
+        Ok(fee_nat) => {
+            let fee_u64 = fee_nat.0.clone().try_into().unwrap_or(0);
+            update_token_fee_cache(ledger_id, fee_u64);
+            Ok(fee_u64)
+        }
+        Err(e) => Err(format!("Ledger call failed: {:?}", e)),
+    }
+}
+
 impl TokenSymbol {
     /// Return the display symbol for a token (can be renamed here)
     pub fn symbol(&self) -> &'static str {
@@ -121,8 +173,13 @@ impl TokenSymbol {
     }
 
     pub fn get_prod_token_info(self) -> TokenInfo {
+        let ledger_id = self.ledger_id(false);
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&ledger_id).cloned());
+        if let Some(info) = cached {
+            return info;
+        }
         TokenInfo {
-            ledger_id: self.ledger_id(false),
+            ledger_id,
             fee: match self {
                 TokenSymbol::ICP => 10_000,
                 TokenSymbol::OGY => 200_000,
@@ -135,8 +192,13 @@ impl TokenSymbol {
     }
 
     pub fn get_token_info(self, is_test_mode: bool) -> TokenInfo {
+        let ledger_id = self.ledger_id(is_test_mode);
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&ledger_id).cloned());
+        if let Some(info) = cached {
+            return info;
+        }
         TokenInfo {
-            ledger_id: self.ledger_id(is_test_mode),
+            ledger_id,
             fee: match self {
                 TokenSymbol::ICP => 10_000,
                 TokenSymbol::OGY => 200_000,

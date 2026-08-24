@@ -132,7 +132,7 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
     let amount_to_send = available_amount.clone() - output_token_info.fee.clone();
 
     let now = read_state(|state| state.env.now());
-    let transfer_result = match icrc_ledger_canister_c2c_client::icrc1_transfer(
+    let mut transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
         output_token_info.ledger_id,
         &(TransferArg {
             from_subaccount: Default::default(),
@@ -143,8 +143,33 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
             amount: amount_to_send,
         }),
     )
-    .await
-    {
+    .await;
+
+    if let Ok(Err(icrc_ledger_types::icrc1::transfer::TransferError::BadFee { expected_fee })) = &transfer_result {
+        let fee_u64 = expected_fee.0.clone().try_into().unwrap_or(0);
+        info!("Transfer failed with BadFee. Updating cached fee for ledger {:?} to {}", output_token_info.ledger_id, fee_u64);
+        types::update_token_fee_cache(output_token_info.ledger_id, fee_u64);
+
+        // Retry with the new fee if balance allows
+        if available_amount > fee_u64 {
+            let new_amount_to_send = available_amount - fee_u64;
+            info!("Retrying transfer to destination with new fee: {}", fee_u64);
+            transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
+                output_token_info.ledger_id,
+                &(TransferArg {
+                    from_subaccount: Default::default(),
+                    to: destination_account,
+                    fee: Some(expected_fee.clone()),
+                    created_at_time: Some(now * NANOS_PER_MILLISECOND),
+                    memo: Some(MEMO_SWAP.to_vec().into()),
+                    amount: new_amount_to_send,
+                }),
+            )
+            .await;
+        }
+    }
+
+    match transfer_result {
         Ok(Ok(index)) => Ok(index),
         Ok(Err(error)) => {
             error!("Ledger error transferring to destination: {:?}", error);
@@ -157,9 +182,7 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
             );
             Err(format!("{:?}", error))
         }
-    };
-
-    transfer_result
+    }
 }
 
 async fn create_token_swap_if_possible(
@@ -307,7 +330,7 @@ pub(crate) async fn process_token_swap(
     // Deposit tokens to the deposit account
     if extract_result(&token_swap.transfer).is_none() {
         let now = read_state(|state| state.env.now());
-        let transfer_result = match icrc_ledger_canister_c2c_client::icrc1_transfer(
+        let mut transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
             input_token_info.ledger_id,
             &(TransferArg {
                 from_subaccount: exchange_job.source_subaccount,
@@ -318,8 +341,30 @@ pub(crate) async fn process_token_swap(
                 amount: amount_to_dex.into(),
             }),
         )
-        .await
-        {
+        .await;
+
+        if let Ok(Err(icrc_ledger_types::icrc1::transfer::TransferError::BadFee { expected_fee })) = &transfer_result {
+            let fee_u64 = expected_fee.0.clone().try_into().unwrap_or(0);
+            info!("Deposit failed with BadFee. Updating cached fee for ledger {:?} to {}", input_token_info.ledger_id, fee_u64);
+            types::update_token_fee_cache(input_token_info.ledger_id, fee_u64);
+
+            // Retry with the new fee
+            info!("Retrying deposit with new fee: {}", fee_u64);
+            transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
+                input_token_info.ledger_id,
+                &(TransferArg {
+                    from_subaccount: exchange_job.source_subaccount,
+                    to: account,
+                    fee: Some(expected_fee.clone()),
+                    created_at_time: Some(now * NANOS_PER_MILLISECOND),
+                    memo: Some(MEMO_SWAP.to_vec().into()),
+                    amount: amount_to_dex.into(),
+                }),
+            )
+            .await;
+        }
+
+        let transfer_result_processed = match transfer_result {
             Ok(Ok(index)) => Ok(index),
             Ok(Err(error)) => {
                 error!("Failed to deposit tokens to deposit account: {:?}", error);
@@ -331,7 +376,7 @@ pub(crate) async fn process_token_swap(
             }
         };
 
-        match transfer_result {
+        match transfer_result_processed {
             Ok(index) => {
                 mutate_state(|state| {
                     token_swap.transfer = Some(Ok(index.0.try_into().unwrap()));
