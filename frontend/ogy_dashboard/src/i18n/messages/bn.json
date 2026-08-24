@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "সার্টিফিকেট পাওয়া যায়নি।"
     },
+    "transactionPage": {
+      "title": "লেনদেনের বিবরণ",
+      "notFound": "লেনদেন পাওয়া যায়নি।",
+      "minted": "মিন্ট করা",
+      "burned": "বার্ন করা হয়েছে"
+    },
     "collector": {
       "title": "সংগ্রাহক",
       "owned": "সার্টিফিকেট",

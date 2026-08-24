@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Không tìm thấy chứng chỉ."
     },
+    "transactionPage": {
+      "title": "Chi tiết giao dịch",
+      "notFound": "Không tìm thấy giao dịch.",
+      "minted": "Đã đúc",
+      "burned": "Đã đốt"
+    },
     "collector": {
       "title": "Nhà sưu tầm",
       "owned": "Chứng chỉ",

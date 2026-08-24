@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Sertifikaattia ei löytynyt."
     },
+    "transactionPage": {
+      "title": "Tapahtuman tiedot",
+      "notFound": "Tapahtumaa ei löytynyt.",
+      "minted": "Luotu",
+      "burned": "Poltettu"
+    },
     "collector": {
       "title": "Keräilijä",
       "owned": "Sertifikaatit",

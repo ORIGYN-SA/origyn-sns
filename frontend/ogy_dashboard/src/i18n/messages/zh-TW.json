@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "找不到憑證。"
     },
+    "transactionPage": {
+      "title": "交易詳情",
+      "notFound": "找不到交易。",
+      "minted": "已鑄造",
+      "burned": "已銷毀"
+    },
     "collector": {
       "title": "收藏家",
       "owned": "憑證",

@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certifikat nije pronađen."
     },
+    "transactionPage": {
+      "title": "Detalji transakcije",
+      "notFound": "Transakcija nije pronađena.",
+      "minted": "Iskovano",
+      "burned": "Spaljeno"
+    },
     "collector": {
       "title": "Kolekcionar",
       "owned": "Certifikati",

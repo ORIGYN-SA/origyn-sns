@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Сертифікат не знайдено."
     },
+    "transactionPage": {
+      "title": "Деталі транзакції",
+      "notFound": "Транзакцію не знайдено.",
+      "minted": "Викарбувано",
+      "burned": "Спалено"
+    },
     "collector": {
       "title": "Колекціонер",
       "owned": "Сертифікати",
