@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.3] - 2026-08-25
+
+#### Added
+- **Neuron maturity** : Added neuron maturity disbursement with the following rewards sending to the rewards destination
+
 ### [1.1.2] - 2026-07-23
 
 #### Fixed
