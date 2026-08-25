@@ -101,14 +101,35 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 
 thread_local! {
-    static __TOKENS: RefCell<HashMap<Principal, TokenInfo>> = RefCell::new(HashMap::new());
+    static __TOKENS: RefCell<HashMap<TokenSymbol, TokenInfo>> = RefCell::new(HashMap::new());
+}
+
+pub fn override_token_ledger(symbol: TokenSymbol, ledger_id: Principal, fee: u64) {
+    __TOKENS.with(|tokens| {
+        let mut tokens = tokens.borrow_mut();
+        tokens.insert(symbol, TokenInfo {
+            ledger_id,
+            fee,
+            decimals: 8,
+        });
+    });
 }
 
 pub fn update_token_fee_cache(ledger_id: Principal, fee: u64) {
     __TOKENS.with(|tokens| {
         let mut tokens = tokens.borrow_mut();
-        if let Some(info) = tokens.get_mut(&ledger_id) {
-            info.fee = fee;
+        let mut found_symbol = None;
+        for (symbol, info) in tokens.iter() {
+            if info.ledger_id == ledger_id {
+                found_symbol = Some(*symbol);
+                break;
+            }
+        }
+
+        if let Some(symbol) = found_symbol {
+            if let Some(info) = tokens.get_mut(&symbol) {
+                info.fee = fee;
+            }
         } else {
             let symbols = [
                 TokenSymbol::ICP,
@@ -119,10 +140,12 @@ pub fn update_token_fee_cache(ledger_id: Principal, fee: u64) {
             ];
             for symbol in symbols {
                 if symbol.ledger_id(true) == ledger_id || symbol.ledger_id(false) == ledger_id {
-                    let is_test_mode = symbol.ledger_id(true) == ledger_id;
-                    let mut info = symbol.get_token_info(is_test_mode);
-                    info.fee = fee;
-                    tokens.insert(ledger_id, info);
+                    let info = TokenInfo {
+                        ledger_id,
+                        fee,
+                        decimals: 8,
+                    };
+                    tokens.insert(symbol, info);
                     break;
                 }
             }
@@ -173,11 +196,11 @@ impl TokenSymbol {
     }
 
     pub fn get_prod_token_info(self) -> TokenInfo {
-        let ledger_id = self.ledger_id(false);
-        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&ledger_id).cloned());
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&self).cloned());
         if let Some(info) = cached {
             return info;
         }
+        let ledger_id = self.ledger_id(false);
         TokenInfo {
             ledger_id,
             fee: match self {
@@ -192,11 +215,11 @@ impl TokenSymbol {
     }
 
     pub fn get_token_info(self, is_test_mode: bool) -> TokenInfo {
-        let ledger_id = self.ledger_id(is_test_mode);
-        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&ledger_id).cloned());
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&self).cloned());
         if let Some(info) = cached {
             return info;
         }
+        let ledger_id = self.ledger_id(is_test_mode);
         TokenInfo {
             ledger_id,
             fee: match self {

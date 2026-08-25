@@ -1307,6 +1307,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
+ "bity-ic-canister-client",
  "bity-ic-canister-logger",
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",

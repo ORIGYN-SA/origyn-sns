@@ -225,8 +225,18 @@ async fn create_token_swap_if_possible(
         u128::try_from(exchange_job.rate_per_interval.apply_to(&available_amount).0)
             .expect("Failed to convert Nat");
 
+    info!(
+        "Swap check for job {}: ledger = {:?}, available_amount = {}, amount_to_dex = {}, input_token_fee = {}",
+        exchange_job.id, input_token_info.ledger_id, available_amount, amount_to_dex, input_token_info.fee
+    );
+
     let quote = get_swap_quote(&swap_client, amount_to_dex, input_token_info.fee).await;
     let min_required = (exchange_job.min_amount.e8s() as u128) + (output_token_info.fee as u128);
+
+    info!(
+        "Swap quote for job {}: quote = {}, min_required = {}",
+        exchange_job.id, quote, min_required
+    );
 
     if let Some(max_amount) = exchange_job.max_amount {
         let max_allowed = max_amount.e8s() as u128;
@@ -240,6 +250,7 @@ async fn create_token_swap_if_possible(
     }
 
     if quote >= min_required {
+        info!("Executing swap job {}: amount_to_dex = {}", exchange_job.id, amount_to_dex);
         let token_swap = mutate_state(|state| {
             state
                 .data
@@ -298,7 +309,7 @@ pub(crate) async fn process_token_swap(
 ) -> Result<(), String> {
     let swap_client = exchange_job.exchange.clone();
     let swap_config = swap_client.get_config();
-    let input_token_info = swap_config.input_token.get_prod_token_info();
+    let mut input_token_info = swap_config.input_token.get_prod_token_info();
     let output_token_info = swap_config.output_token.get_prod_token_info();
     let min_output_amount = exchange_job.min_amount.e8s() as u128;
 
@@ -338,7 +349,7 @@ pub(crate) async fn process_token_swap(
                 fee: Some(input_token_info.fee.into()),
                 created_at_time: Some(now * NANOS_PER_MILLISECOND),
                 memo: Some(MEMO_SWAP.to_vec().into()),
-                amount: amount_to_dex.into(),
+                amount: (amount_to_dex.saturating_sub(input_token_info.fee.into())).into(),
             }),
         )
         .await;
@@ -347,6 +358,7 @@ pub(crate) async fn process_token_swap(
             let fee_u64 = expected_fee.0.clone().try_into().unwrap_or(0);
             info!("Deposit failed with BadFee. Updating cached fee for ledger {:?} to {}", input_token_info.ledger_id, fee_u64);
             types::update_token_fee_cache(input_token_info.ledger_id, fee_u64);
+            input_token_info.fee = fee_u64;
 
             // Retry with the new fee
             info!("Retrying deposit with new fee: {}", fee_u64);
@@ -358,7 +370,7 @@ pub(crate) async fn process_token_swap(
                     fee: Some(expected_fee.clone()),
                     created_at_time: Some(now * NANOS_PER_MILLISECOND),
                     memo: Some(MEMO_SWAP.to_vec().into()),
-                    amount: amount_to_dex.into(),
+                    amount: (amount_to_dex.saturating_sub(fee_u64.into())).into(),
                 }),
             )
             .await;
@@ -397,7 +409,8 @@ pub(crate) async fn process_token_swap(
 
     // Notify DEX
     if extract_result(&token_swap.notified_dex_at).is_none() {
-        if let Err(error) = swap_client.deposit(amount_to_dex).await {
+        let deposit_amount = amount_to_dex.saturating_sub(2 * input_token_info.fee as u128);
+        if let Err(error) = swap_client.deposit(deposit_amount).await {
             let msg = format!("{error:?}");
             mutate_state(|state| {
                 token_swap.notified_dex_at = Some(Err(msg.clone()));
@@ -417,9 +430,10 @@ pub(crate) async fn process_token_swap(
     let swap_result = if let Some(a) = extract_result(&token_swap.amount_swapped).cloned() {
         a
     } else {
+        let swap_amount = amount_to_dex.saturating_sub(3 * input_token_info.fee as u128);
         match swap_client
             .swap(
-                amount_to_dex.saturating_sub(input_token_info.fee.into()),
+                swap_amount,
                 min_output_amount,
             )
             .await

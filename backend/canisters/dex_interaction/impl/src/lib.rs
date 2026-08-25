@@ -27,6 +27,7 @@ thereby reducing the token supply over time.
 [Switzerland]: https://www.zefix.ch/en/search/entity/list/firm/1264770
 */
 use ic_cdk::export_candid;
+use candid::Principal;
 
 use crate::state::take_state;
 use crate::state::RuntimeState;
