@@ -412,6 +412,59 @@ impl CollectionModel {
         self.collections.iter().map(|entry| entry.value()).collect()
     }
 
+    /// Sets `locked_value_usd` and `total_supply` for a collection, inserting a bare-bones record
+    /// keyed by `canister_id` if one doesn't exist yet.
+    pub fn upsert_collection_value(
+        &mut self,
+        canister_id: Principal,
+        name: Option<String>,
+        locked_value_usd: u64,
+        total_supply: Option<u64>,
+    ) {
+        if let Some(mut collection) = self.collections.get(&canister_id) {
+            collection.locked_value_usd = Some(locked_value_usd);
+            collection.total_supply = total_supply;
+            if collection.name.is_none() {
+                collection.name = name;
+            }
+            self.collections.insert(canister_id, collection);
+        } else {
+            self.collections.insert(
+                canister_id,
+                Collection {
+                    canister_id,
+                    name,
+                    category: None,
+                    is_promoted: false,
+                    locked_value_usd: Some(locked_value_usd),
+                    total_supply,
+                },
+            );
+        }
+    }
+
+    /// Register collection name/metadata from the sync list job, if not exists or name changed.
+    pub fn upsert_collection_metadata(&mut self, canister_id: Principal, name: Option<String>) {
+        if let Some(mut collection) = self.collections.get(&canister_id) {
+            if collection.name != name {
+                collection.name = name;
+                self.collections.insert(canister_id, collection);
+            }
+        } else {
+            self.collections.insert(
+                canister_id,
+                Collection {
+                    canister_id,
+                    name,
+                    category: None,
+                    is_promoted: false,
+                    locked_value_usd: None,
+                    total_supply: None,
+                },
+            );
+        }
+    }
+
     pub fn get_collection_by_key(
         &self,
         canister_id: Principal,

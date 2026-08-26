@@ -14,6 +14,7 @@ pub struct Collection {
     pub category: Option<String>,
     pub is_promoted: bool,
     pub locked_value_usd: Option<u64>,
+    pub total_supply: Option<u64>,
 }
 
 impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
@@ -24,6 +25,7 @@ impl From<crate::services::origyn_nft::GetCollectionInfoResult> for Collection {
             category: None,
             is_promoted: false,
             locked_value_usd: None,
+            total_supply: None,
         }
     }
 }

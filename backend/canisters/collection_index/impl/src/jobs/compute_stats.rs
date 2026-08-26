@@ -1,4 +1,5 @@
 use crate::state::{mutate_state, read_state};
+use bity_ic_canister_time::run_now_then_interval;
 use std::time::Duration;
 use tracing::debug;
 use types::Milliseconds;
@@ -7,10 +8,11 @@ const COMPUTE_STATS_JOB_INTERVAL: Milliseconds = 10 * 60 * 1000; // 10 minutes
 
 pub fn start_job() {
     debug!("Starting the job to compute total locked value of collections");
-    ic_cdk_timers::set_timer_interval(
-        Duration::from_millis(COMPUTE_STATS_JOB_INTERVAL),
-        async || compute_stats().await,
-    );
+    run_now_then_interval(Duration::from_millis(COMPUTE_STATS_JOB_INTERVAL), run);
+}
+
+pub fn run() {
+    ic_cdk::futures::spawn(compute_stats());
 }
 
 async fn compute_stats() {
@@ -25,8 +27,8 @@ async fn compute_stats() {
     });
 
     mutate_state(|state| {
-        state.data.overall_stats.total_value_locked = total_value_locked;
+        state.data.overall_stats.collections_total_value_locked = total_value_locked;
         state.data.overall_stats.total_collections =
-            state.data.collections.get_all_collections().len();
+            state.data.collections.total_collections() as usize;
     });
 }

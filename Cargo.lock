@@ -371,6 +371,70 @@ dependencies = [
 ]
 
 [[package]]
+name = "bity-ic-icrc3"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa948e264ac351d8248813002f0a57316b8291d3f3e4a4945a8b08d4b0a16c32"
+dependencies = [
+ "anyhow",
+ "bity-ic-canister-time",
+ "bity-ic-icrc3-archive-api",
+ "bity-ic-icrc3-archive-c2c-client",
+ "bity-ic-subcanister-manager",
+ "bity-ic-types 0.2.0",
+ "bity-ic-utils",
+ "candid",
+ "canfund",
+ "futures",
+ "hex",
+ "ic-cdk 0.19.0",
+ "ic-certification",
+ "ic-ledger-types",
+ "ic-stable-structures 0.7.2",
+ "ic0 1.0.1",
+ "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "leb128",
+ "serde",
+ "serde_bytes",
+ "serde_cbor",
+ "sha2",
+ "syn 2.0.117",
+ "tracing",
+]
+
+[[package]]
+name = "bity-ic-icrc3-archive-api"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41a19803e50ba994036c567ee3fa6a46d400164b9a19a070802aecc7c9522cad"
+dependencies = [
+ "bity-ic-types 0.2.0",
+ "candid",
+ "hex",
+ "ic-stable-structures 0.7.2",
+ "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "minicbor 1.1.0",
+ "serde",
+ "serde_bytes",
+ "serde_cbor",
+ "sha2",
+]
+
+[[package]]
+name = "bity-ic-icrc3-archive-c2c-client"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3924a1d82753fdfe663b122903628f769ffd0c6b5967d50248086bc03d48f48"
+dependencies = [
+ "bity-ic-canister-client",
+ "bity-ic-icrc3-archive-api",
+ "bity-ic-types 0.2.0",
+ "candid",
+ "ic-cdk 0.19.0",
+ "serde",
+]
+
+[[package]]
 name = "bity-ic-ledger-utils"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -401,6 +465,20 @@ checksum = "5a92316afb27a1f8694a45079700d86e5dca0e4ded0fe666d9d733792f3c32da"
 dependencies = [
  "ic-cdk 0.19.0",
  "ic-stable-structures 0.7.2",
+]
+
+[[package]]
+name = "bity-ic-subcanister-manager"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bb2eee2e8d7717777cd6d974ef48ae47bdfab52929fbd6b0ec0f32180032cf0e"
+dependencies = [
+ "bity-ic-utils",
+ "candid",
+ "canfund",
+ "ic-cdk 0.19.0",
+ "ic0 1.0.1",
+ "serde",
 ]
 
 [[package]]
@@ -677,6 +755,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "canfund"
+version = "0.8.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e091119870478f2530e86d76f38babe292eb2ee731e184613e02ab1a7ea95d10"
+dependencies = [
+ "async-trait",
+ "candid",
+ "futures",
+ "ic-cdk 0.19.0",
+ "ic-cdk-timers",
+ "ic-ledger-types",
+ "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num-bigint",
+ "serde",
+ "serde_bytes",
+ "thiserror 1.0.69",
+]
+
+[[package]]
 name = "canister_jobs"
 version = "0.1.0"
 dependencies = [
@@ -827,6 +924,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "claimlink"
+version = "0.1.0"
+dependencies = [
+ "candid",
+ "serde",
+]
+
+[[package]]
+name = "claimlink_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "bity-ic-canister-client",
+ "candid",
+ "claimlink",
+ "ic-cdk 0.20.0",
+ "types",
+]
+
+[[package]]
 name = "clap"
 version = "4.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -888,6 +1004,8 @@ dependencies = [
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
+ "claimlink",
+ "claimlink_c2c_client",
  "collection_index_api",
  "futures",
  "http_request",
@@ -898,6 +1016,7 @@ dependencies = [
  "ic0 0.23.0",
  "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-bigint",
+ "origyn_nft_canister_c2c_client",
  "origyn_nft_reference",
  "origyn_nft_reference_c2c_client",
  "serde",
@@ -4139,6 +4258,33 @@ name = "option-ext"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d"
+
+[[package]]
+name = "origyn_nft_canister"
+version = "0.1.0"
+dependencies = [
+ "bity-ic-canister-time",
+ "bity-ic-icrc3",
+ "bity-ic-types 0.1.2",
+ "candid",
+ "hex",
+ "ic-stable-structures 0.7.2",
+ "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde",
+ "serde_bytes",
+ "types",
+]
+
+[[package]]
+name = "origyn_nft_canister_c2c_client"
+version = "0.1.0"
+dependencies = [
+ "bity-ic-canister-client",
+ "candid",
+ "ic-cdk 0.20.0",
+ "origyn_nft_canister",
+ "types",
+]
 
 [[package]]
 name = "origyn_nft_reference"

@@ -4,6 +4,7 @@ use candid::{CandidType, Principal};
 use collection_index_api::stats::OverallStats;
 use ic_cdk::api::is_controller;
 use serde::{Deserialize as SerdeDeserialize, Serialize};
+use std::collections::HashMap;
 use types::TimestampMillis;
 use utils::{
     env::{CanisterEnv, Environment},
@@ -48,6 +49,22 @@ impl RuntimeState {
         }
         self.data.authorised_principals.contains(&caller)
     }
+
+    pub fn get_is_syncing_collections(&self) -> bool {
+        self.data.is_syncing_collections
+    }
+
+    pub fn set_is_syncing_collections(&mut self, val: bool) {
+        self.data.is_syncing_collections = val;
+    }
+
+    pub fn get_is_syncing_supplies(&self) -> bool {
+        self.data.is_syncing_supplies
+    }
+
+    pub fn set_is_syncing_supplies(&mut self, val: bool) {
+        self.data.is_syncing_supplies = val;
+    }
 }
 
 #[derive(CandidType, Serialize)]
@@ -65,22 +82,40 @@ pub struct CanisterInfo {
     pub version: BuildVersion,
     pub commit_hash: String,
 }
+
 #[derive(Serialize, SerdeDeserialize)]
 pub struct Data {
     /// Authorised principals for guarded calls
     pub authorised_principals: Vec<Principal>,
     /// collection of nft canisters
     pub collections: CollectionModel,
+    /// Admin-configurable USD price per item, keyed by collection canister id.
+    /// A collection with no entry here is skipped when computing locked value.
+    #[serde(default)]
+    pub item_prices_usd: HashMap<Principal, u64>,
     /// Overall computed stats
     pub overall_stats: OverallStats,
+    /// The claimlink canister that owns the source-of-truth list of collections
+    #[serde(default = "Principal::anonymous")]
+    pub claimlink_canister_id: Principal,
+    /// Check if we are currently syncing collections
+    #[serde(default)]
+    pub is_syncing_collections: bool,
+    /// Check if we are currently syncing supplies
+    #[serde(default)]
+    pub is_syncing_supplies: bool,
 }
 
 impl Data {
-    pub fn new(authorised_principals: Vec<Principal>) -> Self {
+    pub fn new(authorised_principals: Vec<Principal>, claimlink_canister_id: Principal) -> Self {
         Self {
             collections: CollectionModel::default(),
             authorised_principals,
             overall_stats: OverallStats::default(),
+            claimlink_canister_id,
+            item_prices_usd: HashMap::new(),
+            is_syncing_collections: false,
+            is_syncing_supplies: false,
         }
     }
 }

@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.3] - 2026-08-26
+
+#### Added
+
+- **Dynamic collection indexing**: Add a method to fetch all the created collections dynamically directly from the minting studio and assess the collections TVL based on per item price.
+
 ### [1.0.2] - 2026-03-23
 
 #### Added
