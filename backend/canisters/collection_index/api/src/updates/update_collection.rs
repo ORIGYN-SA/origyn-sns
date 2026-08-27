@@ -9,5 +9,8 @@ pub type Response = Result<(), UpdateCollectionError>;
 pub struct UpdateCollectionArgs {
     pub collection_canister_id: Principal,
     pub category_name: Option<String>,
+    // fixed TVL override, moves the collection to arbitrary_collections_tvl
     pub locked_value_usd: Option<u64>,
+    // per-item price, moves the collection to collections. mutually exclusive with locked_value_usd
+    pub item_price_usd: Option<u64>,
 }

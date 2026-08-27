@@ -1,6 +1,7 @@
 use crate::state::{mutate_state, read_state};
 use bity_ic_canister_time::run_now_then_interval;
-use candid::{Nat, Principal};
+use candid::Principal;
+use futures::future::join_all;
 use std::time::Duration;
 use tracing::{debug, info, warn};
 use types::Milliseconds;
@@ -51,18 +52,16 @@ async fn sync_supplies() {
     });
     info!("Syncing supplies and computing locked values for {} registered simple collections with configured price", simple_collections.len());
 
-    for (canister_id, price_usd, name) in simple_collections {
-        let supply = match crate::services::origyn_nft::get_total_supply(canister_id).await {
-            Ok(supply) => supply,
-            Err(e) => {
-                warn!("Failed to fetch icrc7_total_supply for {canister_id}: {e}");
-                continue;
-            }
-        };
+    let futures: Vec<_> = simple_collections
+        .iter()
+        .map(|(canister_id, price_usd, name)| {
+            fetch_locked_value(*canister_id, *price_usd, name.clone())
+        })
+        .collect();
 
-        let current_supply = nat_to_u64_saturating(&supply);
-        let locked_value_usd = current_supply.saturating_mul(price_usd);
+    let results = join_all(futures).await;
 
+    for (canister_id, name, current_supply, locked_value_usd) in results.into_iter().flatten() {
         // Check if the supply has changed.
         let needs_update = read_state(|state| {
             if let Some(existing) = state.data.collections.collections.get(&canister_id) {
@@ -92,10 +91,27 @@ async fn sync_supplies() {
     }
 }
 
-fn nat_to_u64_saturating(nat: &Nat) -> u64 {
-    match nat.0.to_u64_digits().as_slice() {
-        [] => 0,
-        [only] => *only,
-        _ => u64::MAX,
-    }
+async fn fetch_locked_value(
+    canister_id: Principal,
+    price_usd: u64,
+    name: Option<String>,
+) -> Option<(Principal, Option<String>, u64, u64)> {
+    let supply = match crate::services::origyn_nft::get_total_supply(canister_id).await {
+        Ok(supply) => supply,
+        Err(e) => {
+            warn!("Failed to fetch icrc7_total_supply for {canister_id}: {e}");
+            return None;
+        }
+    };
+
+    let current_supply = match u64::try_from(supply.0) {
+        Ok(supply) => supply,
+        Err(e) => {
+            warn!("icrc7_total_supply for {canister_id} doesn't fit in u64: {e:?}");
+            return None;
+        }
+    };
+    let locked_value_usd = current_supply.saturating_mul(price_usd);
+
+    Some((canister_id, name, current_supply, locked_value_usd))
 }

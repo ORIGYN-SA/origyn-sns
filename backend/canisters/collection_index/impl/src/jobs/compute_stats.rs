@@ -1,5 +1,6 @@
 use crate::state::{mutate_state, read_state};
 use bity_ic_canister_time::run_now_then_interval;
+use candid::Nat;
 use ic_cdk::api::canister_self;
 use ic_cdk_management_canister::{
     http_request, HttpHeader, HttpMethod, HttpRequestArgs, HttpRequestResult, TransformArgs,
@@ -34,26 +35,34 @@ async fn compute_stats() {
 
     match (fetch_gold_grams().await, get_gold_price_per_gram_cents().await) {
         (Some(gold_grams), Some(gold_price_per_gram_cents)) => {
-            info!("Fetched gold price per gram: {} cents", gold_price_per_gram_cents);
-            let gold_price_per_gram_usd = gold_price_per_gram_cents / 100.0;
+            // grams stay a Nat until here, only convert to u64 once
+            match u64::try_from(gold_grams.0) {
+                Ok(gold_grams_u64) => {
+                    info!("Fetched gold price per gram: {} cents", gold_price_per_gram_cents);
+                    let gold_price_per_gram_usd = gold_price_per_gram_cents / 100.0;
 
-            // total value = (grams * cents / gram) / 100
-            let gold_total_value_locked = ((gold_grams as f64 * gold_price_per_gram_cents) / 100.0) as u64;
+                    // total value = (grams * cents / gram) / 100
+                    let gold_total_value_locked = ((gold_grams_u64 as f64 * gold_price_per_gram_cents) / 100.0) as u64;
 
-            let overall_calculated = total_value_locked.saturating_add(gold_total_value_locked);
+                    let overall_calculated = total_value_locked.saturating_add(gold_total_value_locked);
 
-            info!(
-                "Computed overall TVL: {} USD (Calculated: {} USD, Gold: {} USD ({} grams at ${:.2}/gram)",
-                overall_calculated,
-                total_value_locked,
-                gold_total_value_locked,
-                gold_grams,
-                gold_price_per_gram_usd,
-            );
+                    info!(
+                        "Computed overall TVL: {} USD (Calculated: {} USD, Gold: {} USD ({} grams at ${:.2}/gram)",
+                        overall_calculated,
+                        total_value_locked,
+                        gold_total_value_locked,
+                        gold_grams_u64,
+                        gold_price_per_gram_usd,
+                    );
 
-            mutate_state(|state| {
-                state.data.overall_stats.total_value_locked = overall_calculated;
-            });
+                    mutate_state(|state| {
+                        state.data.overall_stats.total_value_locked = overall_calculated;
+                    });
+                }
+                Err(e) => {
+                    error!("Skipping TVL update this run: total gold grams doesn't fit in u64: {e:?}");
+                }
+            }
         }
         _ => {
             error!("Skipping TVL update this run: failed to fetch gold price and/or gold grams from external source(s).");
@@ -163,15 +172,13 @@ pub fn transform(raw: TransformArgs) -> HttpRequestResult {
 }
 
 
-async fn fetch_gold_grams() -> Option<u64> {
+async fn fetch_gold_grams() -> Option<Nat> {
     let config = read_state(|state| state.data.gold_collections_config.clone());
-    let mut total_grams = 0u64;
+    let mut total_grams = Nat::from(0u64);
 
     if let Some(c_1g) = config.canister_id_1g {
         match crate::services::origyn_nft::get_total_supply(c_1g).await {
-            Ok(supply) => {
-                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1));
-            }
+            Ok(supply) => total_grams += supply,
             Err(e) => {
                 error!("Failed to fetch supply for gold 1g collection {c_1g}: {e:?}");
                 return None;
@@ -180,9 +187,7 @@ async fn fetch_gold_grams() -> Option<u64> {
     }
     if let Some(c_10g) = config.canister_id_10g {
         match crate::services::origyn_nft::get_total_supply(c_10g).await {
-            Ok(supply) => {
-                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(10));
-            }
+            Ok(supply) => total_grams += supply * Nat::from(10u64),
             Err(e) => {
                 error!("Failed to fetch supply for gold 10g collection {c_10g}: {e:?}");
                 return None;
@@ -191,9 +196,7 @@ async fn fetch_gold_grams() -> Option<u64> {
     }
     if let Some(c_100g) = config.canister_id_100g {
         match crate::services::origyn_nft::get_total_supply(c_100g).await {
-            Ok(supply) => {
-                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(100));
-            }
+            Ok(supply) => total_grams += supply * Nat::from(100u64),
             Err(e) => {
                 error!("Failed to fetch supply for gold 100g collection {c_100g}: {e:?}");
                 return None;
@@ -202,9 +205,7 @@ async fn fetch_gold_grams() -> Option<u64> {
     }
     if let Some(c_1kg) = config.canister_id_1kg {
         match crate::services::origyn_nft::get_total_supply(c_1kg).await {
-            Ok(supply) => {
-                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1000));
-            }
+            Ok(supply) => total_grams += supply * Nat::from(1000u64),
             Err(e) => {
                 error!("Failed to fetch supply for gold 1kg collection {c_1kg}: {e:?}");
                 return None;

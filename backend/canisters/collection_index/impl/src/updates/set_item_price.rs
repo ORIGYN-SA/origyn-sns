@@ -12,6 +12,6 @@ pub fn set_item_price(args: SetItemPriceArgs) -> SetItemPriceResponse {
         state
             .data
             .collections
-            .update_price(args.collection_canister_id, Some(args.price_usd));
+            .update_price(args.collection_canister_id, Some(args.price_usd))
     })
 }

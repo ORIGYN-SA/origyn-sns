@@ -12,6 +12,6 @@ pub fn remove_item_price(args: RemoveItemPriceArgs) -> RemoveItemPriceResponse {
         state
             .data
             .collections
-            .update_price(args.collection_canister_id, None);
+            .update_price(args.collection_canister_id, None)
     })
 }

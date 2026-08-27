@@ -1,8 +1,10 @@
 use candid::{CandidType, Principal};
 use serde::{Deserialize, Serialize};
 
+use crate::errors::SetItemPriceError;
+
 pub type Args = SetItemPriceArgs;
-pub type Response = ();
+pub type Response = Result<(), SetItemPriceError>;
 
 /// Sets (or replaces) the admin-configured USD-per-item price for a
 /// collection's NFTs. The claimlink sync job multiplies this by the

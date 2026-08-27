@@ -25,8 +25,8 @@ impl From<DataV0> for Data {
             gold_collections_config: GoldCollectionsConfig::default(),
             overall_stats: old_data.overall_stats,
             claimlink_canister_id: Principal::from_text("uasjq-dyaaa-aaaas-qdwka-cai").unwrap(),
-            is_syncing_collections: false,
-            is_syncing_supplies: false,
+            is_syncing_collections: None,
+            is_syncing_supplies: None,
         }
     }
 }

@@ -4,7 +4,7 @@ use collection_index_api::{
     collection::{Collection, CollectionExtended},
     errors::{
         GetCollectionByPrincipal, GetCollectionsError, InsertCategoryError, InsertCollectionError,
-        RemoveCategoryError, RemoveCollectionError, SetCategoryVisibilityError,
+        RemoveCategoryError, RemoveCollectionError, SetCategoryVisibilityError, SetItemPriceError,
         TogglePromotedError, UpdateCollectionError,
     },
     get_collections::GetCollectionsResult,
@@ -15,6 +15,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use crate::memory::{get_collection_model_memory, VM};
+
+const MAX_PAGE_LIMIT: usize = 100;
 
 #[derive(Serialize, Deserialize)]
 pub struct CollectionModel {
@@ -116,10 +118,19 @@ impl CollectionModel {
         }
     }
 
-    pub fn update_price(&mut self, canister_id: Principal, price: Option<u64>) {
+    pub fn update_price(
+        &mut self,
+        canister_id: Principal,
+        price: Option<u64>,
+    ) -> Result<(), SetItemPriceError> {
         if let Some(mut col) = self.collections.remove(&canister_id) {
             col.item_price_usd = price;
             self.collections.insert(canister_id, col);
+            Ok(())
+        } else if self.arbitrary_collections_tvl.contains_key(&canister_id) {
+            Err(SetItemPriceError::CollectionIsArbitraryTvl)
+        } else {
+            Err(SetItemPriceError::CollectionNotFound)
         }
     }
 
@@ -128,7 +139,12 @@ impl CollectionModel {
         collection_canister_id: Principal,
         new_category: Option<String>,
         new_locked_value_usd: Option<u64>,
+        new_item_price_usd: Option<u64>,
     ) -> Result<(), UpdateCollectionError> {
+        if new_locked_value_usd.is_some() && new_item_price_usd.is_some() {
+            return Err(UpdateCollectionError::ConflictingPricingMode);
+        }
+
         let mut category = None;
         let mut is_promoted = false;
         let mut name = None;
@@ -181,10 +197,14 @@ impl CollectionModel {
             final_category = Some(new_cat);
         }
 
+        // item price -> collections tier, locked value -> arbitrary tier, neither -> stay put
+        if is_extended {
+            self.collections.remove(&collection_canister_id);
+        } else {
+            self.arbitrary_collections_tvl.remove(&collection_canister_id);
+        }
+
         if let Some(new_locked_val) = new_locked_value_usd {
-            if is_extended {
-                self.collections.remove(&collection_canister_id);
-            }
             let updated = Collection {
                 canister_id: collection_canister_id,
                 name,
@@ -193,27 +213,36 @@ impl CollectionModel {
                 locked_value_usd: Some(new_locked_val),
             };
             self.arbitrary_collections_tvl.insert(collection_canister_id, updated);
+        } else if let Some(new_price) = new_item_price_usd {
+            let updated = CollectionExtended {
+                canister_id: collection_canister_id,
+                name,
+                category: final_category,
+                is_promoted,
+                // sync_supplies will fill this in on its next run
+                total_supply: None,
+                item_price_usd: Some(new_price),
+            };
+            self.collections.insert(collection_canister_id, updated);
+        } else if is_extended {
+            let updated = CollectionExtended {
+                canister_id: collection_canister_id,
+                name,
+                category: final_category,
+                is_promoted,
+                total_supply,
+                item_price_usd,
+            };
+            self.collections.insert(collection_canister_id, updated);
         } else {
-            if is_extended {
-                let updated = CollectionExtended {
-                    canister_id: collection_canister_id,
-                    name,
-                    category: final_category,
-                    is_promoted,
-                    total_supply,
-                    item_price_usd,
-                };
-                self.collections.insert(collection_canister_id, updated);
-            } else {
-                let updated = Collection {
-                    canister_id: collection_canister_id,
-                    name,
-                    category: final_category,
-                    is_promoted,
-                    locked_value_usd,
-                };
-                self.arbitrary_collections_tvl.insert(collection_canister_id, updated);
-            }
+            let updated = Collection {
+                canister_id: collection_canister_id,
+                name,
+                category: final_category,
+                is_promoted,
+                locked_value_usd,
+            };
+            self.arbitrary_collections_tvl.insert(collection_canister_id, updated);
         }
 
         Ok(())
@@ -309,6 +338,7 @@ impl CollectionModel {
         offset: usize,
         limit: usize,
     ) -> Result<GetCollectionsResult, GetCollectionsError> {
+        let limit = limit.clamp(1, MAX_PAGE_LIMIT);
         let mut cat_names: Vec<String> = vec![];
         let cats: Vec<(String, Category)> = if let Some(items) = categories {
             let full_cats = items
@@ -365,16 +395,7 @@ impl CollectionModel {
             })
             .collect();
 
-        let total_pages: u64 = match (filtered_cols.len() as u64).checked_div(limit as u64) {
-            Some(pages) => {
-                if pages == 0 {
-                    1
-                } else {
-                    pages
-                }
-            }
-            None => 1,
-        };
+        let total_pages: u64 = (filtered_cols.len() as u64).div_ceil(limit as u64).max(1);
 
         let collections: Vec<Collection> = filtered_cols
             .into_iter()
@@ -395,6 +416,7 @@ impl CollectionModel {
         offset: usize,
         limit: usize,
     ) -> SearchCollectionsResponse {
+        let limit = limit.clamp(1, MAX_PAGE_LIMIT);
         let mut cat_names: Vec<String> = vec![];
 
         let cats: Vec<(String, Category)> = if let Some(items) = categories {
@@ -453,16 +475,7 @@ impl CollectionModel {
             })
             .collect();
 
-        let total_pages = match (collections.len() as u64).checked_div(limit as u64) {
-            Some(pages) => {
-                if pages == 0 {
-                    1
-                } else {
-                    pages
-                }
-            }
-            None => 1,
-        };
+        let total_pages: u64 = (collections.len() as u64).div_ceil(limit as u64).max(1);
 
         let collections: Vec<Collection> =
             collections.into_iter().skip(offset).take(limit).collect();
@@ -525,18 +538,15 @@ impl CollectionModel {
     }
 
     pub fn upsert_collection_metadata(&mut self, canister_id: Principal, name: Option<String>) {
-        // Collections newly discovered via the minting studio have no admin-set
-        // price yet; default to $500/item so they still count towards the TVL
-        // until an admin overrides it with `set_item_price`.
+        // no price yet from claimlink, default to $500/item until admin sets one
         const DEFAULT_ITEM_PRICE_USD: u64 = 500;
 
         if let Some(mut collection) = self.collections.remove(&canister_id) {
-            if collection.name != name {
-                collection.name = name;
-                self.collections.insert(canister_id, collection);
-            } else {
-                self.collections.insert(canister_id, collection);
-            }
+            collection.name = name;
+            self.collections.insert(canister_id, collection);
+        } else if let Some(collection) = self.arbitrary_collections_tvl.get_mut(&canister_id) {
+            // already tracked as arbitrary, don't duplicate it into collections
+            collection.name = name;
         } else {
             self.collections.insert(
                 canister_id,
@@ -684,14 +694,14 @@ mod tests {
         model.upsert_collection_value(p, Some("Pricey NFT".to_string()), 0, Some(10));
         
         // Update price
-        model.update_price(p, Some(150));
+        assert!(model.update_price(p, Some(150)).is_ok());
 
         let fetched = model.get_collection_by_key(p).unwrap();
         // locked_value_usd = item_price_usd (150) * total_supply (10) = 1500
         assert_eq!(fetched.locked_value_usd, Some(1500));
 
         // Clear price
-        model.update_price(p, None);
+        assert!(model.update_price(p, None).is_ok());
         let fetched_none = model.get_collection_by_key(p).unwrap();
         assert_eq!(fetched_none.locked_value_usd, None);
     }
