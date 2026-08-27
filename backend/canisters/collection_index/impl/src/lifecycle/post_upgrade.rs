@@ -49,6 +49,7 @@ fn post_upgrade(args: Args) {
                 ("of6pp-2iaaa-aaaap-akoza-cai", "01092-2022-01", 30000),
                 ("vnuik-tyaaa-aaaap-abyyq-cai", "MainCollection", 3150000),
                 ("fu7xh-xiaaa-aaaap-ahg7q-cai", "Magritte", 6400000),
+                ("3ue4a-haaaa-aaaas-qgwba-cai", "Suzanne Syz", 35000000),
             ];
 
             for (p_str, name, tvl) in arbitrary_collections {
