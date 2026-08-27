@@ -6,10 +6,12 @@ use ic_cdk_management_canister::{
     TransformContext, TransformFunc,
 };
 use std::time::Duration;
-use tracing::{debug, error, info};
+use tracing::{debug, error, info, warn};
 use types::Milliseconds;
 
 const COMPUTE_STATS_JOB_INTERVAL: Milliseconds = 10 * 60 * 1000; // 10 minutes
+const MIN_TVL_POSSIBLE: u64 = 50_000_000;
+
 
 pub fn start_job() {
     debug!("Starting the job to compute total locked value of collections");
@@ -45,13 +47,25 @@ async fn compute_stats() {
     let ogy_price_usd = ogy_price_cents / 100.0;
     let ogy_total_value_locked = ((staked_ogy_e8s as f64 * ogy_price_cents) / 10_000_000_000.0) as u64;
 
-    let overall_total_value_locked = total_value_locked
+    let overall_calculated = total_value_locked
         .saturating_add(gold_total_value_locked)
         .saturating_add(ogy_total_value_locked);
 
+    let overall_total_value_locked = if overall_calculated < MIN_TVL_POSSIBLE {
+        warn!(
+            "Calculated overall TVL ({} USD) is below the minimal threshold of {} USD. Setting overall TVL to minimal threshold.",
+            overall_calculated,
+            MIN_TVL_POSSIBLE
+        );
+        MIN_TVL_POSSIBLE
+    } else {
+        overall_calculated
+    };
+
     info!(
-        "Computed overall TVL: {} USD (Collections: {} USD, Gold: {} USD ({} grams at ${:.2}/gram), OGY Staked: {} USD ({} e8s at ${:.6}/token))",
+        "Computed overall TVL: {} USD (Calculated: {} USD, Collections: {} USD, Gold: {} USD ({} grams at ${:.2}/gram), OGY Staked: {} USD ({} e8s at ${:.6}/token))",
         overall_total_value_locked,
+        overall_calculated,
         total_value_locked,
         gold_total_value_locked,
         gold_grams,
