@@ -6,12 +6,10 @@ use ic_cdk_management_canister::{
     TransformContext, TransformFunc,
 };
 use std::time::Duration;
-use tracing::{debug, error, info, warn};
+use tracing::{debug, error, info};
 use types::Milliseconds;
 
 const COMPUTE_STATS_JOB_INTERVAL: Milliseconds = 10 * 60 * 1000; // 10 minutes
-const MIN_TVL_POSSIBLE: u64 = 50_000_000;
-
 
 pub fn start_job() {
     debug!("Starting the job to compute total locked value of collections");
@@ -42,41 +40,20 @@ async fn compute_stats() {
     // total value = (grams * cents / gram) / 100
     let gold_total_value_locked = ((gold_grams as f64 * gold_price_per_gram_cents) / 100.0) as u64;
 
-    let staked_ogy_e8s = fetch_ogy_staked_e8s().await;
-    let ogy_price_cents = get_ogy_price_cents().await;
-    let ogy_price_usd = ogy_price_cents / 100.0;
-    let ogy_total_value_locked = ((staked_ogy_e8s as f64 * ogy_price_cents) / 10_000_000_000.0) as u64;
-
     let overall_calculated = total_value_locked
-        .saturating_add(gold_total_value_locked)
-        .saturating_add(ogy_total_value_locked);
-
-    let overall_total_value_locked = if overall_calculated < MIN_TVL_POSSIBLE {
-        warn!(
-            "Calculated overall TVL ({} USD) is below the minimal threshold of {} USD. Setting overall TVL to minimal threshold.",
-            overall_calculated,
-            MIN_TVL_POSSIBLE
-        );
-        MIN_TVL_POSSIBLE
-    } else {
-        overall_calculated
-    };
+        .saturating_add(gold_total_value_locked);
 
     info!(
-        "Computed overall TVL: {} USD (Calculated: {} USD, Collections: {} USD, Gold: {} USD ({} grams at ${:.2}/gram), OGY Staked: {} USD ({} e8s at ${:.6}/token))",
-        overall_total_value_locked,
+        "Computed overall TVL: {} USD (Calculated: {} USD, Gold: {} USD ({} grams at ${:.2}/gram)",
         overall_calculated,
         total_value_locked,
         gold_total_value_locked,
         gold_grams,
         gold_price_per_gram_usd,
-        ogy_total_value_locked,
-        staked_ogy_e8s,
-        ogy_price_usd
     );
 
     mutate_state(|state| {
-        state.data.overall_stats.total_value_locked = overall_total_value_locked;
+        state.data.overall_stats.total_value_locked = overall_calculated;
         state.data.overall_stats.total_collections =
             state.data.collections.total_collections() as usize;
     });
@@ -209,123 +186,4 @@ async fn fetch_gold_grams() -> u64 {
     }
 
     total_grams
-}
-
-#[derive(serde::Deserialize, Debug)]
-struct OgyGovernanceStats {
-    total_staked: String,
-}
-
-pub async fn get_ogy_price_cents() -> f64 {
-    // Fallback OGY price: $0.00138 per token = 0.138 cents
-    const DEFAULT_OGY_PRICE_CENTS: f64 = 0.138;
-
-    let url = "https://api.gldt.org/v1/tokens/ogy/price/latest";
-
-    let request = HttpRequestArgs {
-        url: url.to_string(),
-        method: HttpMethod::GET,
-        body: None,
-        max_response_bytes: Some(1024),
-        transform: Some(TransformContext {
-            function: TransformFunc::new(canister_self(), "transform".to_string()),
-            context: vec![],
-        }),
-        headers: vec![],
-        is_replicated: None,
-    };
-
-    match http_request(&request).await {
-        Ok(response) => {
-            let str_body = match String::from_utf8(response.body) {
-                Ok(body) => body,
-                Err(e) => {
-                    error!("Transformed response is not UTF-8 encoded: {:?}", e);
-                    return DEFAULT_OGY_PRICE_CENTS;
-                }
-            };
-
-            match str_body.trim().parse::<f64>() {
-                Ok(price) => {
-                    info!("Fetched latest OGY price: {}", price);
-                    price * 100.0 // USD to cents
-                }
-                Err(e) => {
-                    error!(
-                        "Failed to parse latest OGY price: {} (body: {:?})",
-                        e, str_body
-                    );
-                    DEFAULT_OGY_PRICE_CENTS
-                }
-            }
-        }
-        Err(e) => {
-            error!("error fetching latest OGY price: {:?}. Falling back to default.", e);
-            DEFAULT_OGY_PRICE_CENTS
-        }
-    }
-}
-
-pub async fn fetch_ogy_staked_e8s() -> u128 {
-    // Fallback staked OGY in case of error: 0
-    const DEFAULT_OGY_STAKED_E8S: u128 = 0;
-
-    let url = "https://api.gldt.org/v1/tokens/OGY/governance/stats";
-
-    let request = HttpRequestArgs {
-        url: url.to_string(),
-        method: HttpMethod::GET,
-        body: None,
-        max_response_bytes: Some(2048),
-        transform: Some(TransformContext {
-            function: TransformFunc::new(canister_self(), "transform".to_string()),
-            context: vec![],
-        }),
-        headers: vec![HttpHeader {
-            name: "accept".to_string(),
-            value: "application/json".to_string(),
-        }],
-        is_replicated: None,
-    };
-
-    match http_request(&request).await {
-        Ok(response) => {
-            let str_body = match String::from_utf8(response.body) {
-                Ok(body) => body,
-                Err(e) => {
-                    error!("Transformed response is not UTF-8 encoded: {:?}", e);
-                    return DEFAULT_OGY_STAKED_E8S;
-                }
-            };
-
-            match serde_json::from_str::<OgyGovernanceStats>(&str_body) {
-                Ok(stats) => {
-                    match stats.total_staked.parse::<u128>() {
-                        Ok(staked) => {
-                            info!("Fetched OGY governance total staked: {}", staked);
-                            staked
-                        }
-                        Err(e) => {
-                            error!(
-                                "Failed to parse total_staked string as u128: {} (body: {:?})",
-                                e, str_body
-                            );
-                            DEFAULT_OGY_STAKED_E8S
-                        }
-                    }
-                }
-                Err(e) => {
-                    error!(
-                        "Failed to deserialize OgyGovernanceStats: {} (body: {:?})",
-                        e, str_body
-                    );
-                    DEFAULT_OGY_STAKED_E8S
-                }
-            }
-        }
-        Err(e) => {
-            error!("Error fetching OGY governance stats: {:?}. Falling back to default.", e);
-            DEFAULT_OGY_STAKED_E8S
-        }
-    }
 }
