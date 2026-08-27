@@ -525,6 +525,11 @@ impl CollectionModel {
     }
 
     pub fn upsert_collection_metadata(&mut self, canister_id: Principal, name: Option<String>) {
+        // Collections newly discovered via the minting studio have no admin-set
+        // price yet; default to $500/item so they still count towards the TVL
+        // until an admin overrides it with `set_item_price`.
+        const DEFAULT_ITEM_PRICE_USD: u64 = 500;
+
         if let Some(mut collection) = self.collections.remove(&canister_id) {
             if collection.name != name {
                 collection.name = name;
@@ -541,7 +546,7 @@ impl CollectionModel {
                     category: None,
                     is_promoted: false,
                     total_supply: None,
-                    item_price_usd: None,
+                    item_price_usd: Some(DEFAULT_ITEM_PRICE_USD),
                 },
             );
         }

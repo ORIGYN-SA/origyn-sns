@@ -32,38 +32,41 @@ async fn compute_stats() {
             .sum()
     });
 
-    let gold_grams = fetch_gold_grams().await;
-    let gold_price_per_gram_cents = get_gold_price_per_gram_cents().await;
-    info!("Fetched gold price per gram: {} cents", gold_price_per_gram_cents);
-    let gold_price_per_gram_usd = gold_price_per_gram_cents / 100.0;
-    
-    // total value = (grams * cents / gram) / 100
-    let gold_total_value_locked = ((gold_grams as f64 * gold_price_per_gram_cents) / 100.0) as u64;
+    match (fetch_gold_grams().await, get_gold_price_per_gram_cents().await) {
+        (Some(gold_grams), Some(gold_price_per_gram_cents)) => {
+            info!("Fetched gold price per gram: {} cents", gold_price_per_gram_cents);
+            let gold_price_per_gram_usd = gold_price_per_gram_cents / 100.0;
 
-    let overall_calculated = total_value_locked
-        .saturating_add(gold_total_value_locked);
+            // total value = (grams * cents / gram) / 100
+            let gold_total_value_locked = ((gold_grams as f64 * gold_price_per_gram_cents) / 100.0) as u64;
 
-    info!(
-        "Computed overall TVL: {} USD (Calculated: {} USD, Gold: {} USD ({} grams at ${:.2}/gram)",
-        overall_calculated,
-        total_value_locked,
-        gold_total_value_locked,
-        gold_grams,
-        gold_price_per_gram_usd,
-    );
+            let overall_calculated = total_value_locked.saturating_add(gold_total_value_locked);
+
+            info!(
+                "Computed overall TVL: {} USD (Calculated: {} USD, Gold: {} USD ({} grams at ${:.2}/gram)",
+                overall_calculated,
+                total_value_locked,
+                gold_total_value_locked,
+                gold_grams,
+                gold_price_per_gram_usd,
+            );
+
+            mutate_state(|state| {
+                state.data.overall_stats.total_value_locked = overall_calculated;
+            });
+        }
+        _ => {
+            error!("Skipping TVL update this run: failed to fetch gold price and/or gold grams from external source(s).");
+        }
+    }
 
     mutate_state(|state| {
-        state.data.overall_stats.total_value_locked = overall_calculated;
         state.data.overall_stats.total_collections =
             state.data.collections.total_collections() as usize;
     });
 }
 
-pub async fn get_gold_price_per_gram_cents() -> f64 {
-    // Fallback gold price: $2500.00 per ounce
-    const DEFAULT_GOLD_PRICE_PER_OUNCE_CENTS: u64 = 2500_00;
-    let fallback_cents = DEFAULT_GOLD_PRICE_PER_OUNCE_CENTS as f64 / 31.1034768;
-
+pub async fn get_gold_price_per_gram_cents() -> Option<f64> {
     let url = "https://api.gldt.org/v1/tokens/gold/price/latest";
 
     let request = HttpRequestArgs {
@@ -85,27 +88,27 @@ pub async fn get_gold_price_per_gram_cents() -> f64 {
                 Ok(body) => body,
                 Err(e) => {
                     error!("Transformed response is not UTF-8 encoded: {:?}", e);
-                    return fallback_cents;
+                    return None;
                 }
             };
 
             match str_body.trim().parse::<f64>() {
                 Ok(price) => {
                     info!("Fetched latest gold price: {}", price);
-                    price * 100.0 // USD per gram to cents per gram
+                    Some(price * 100.0) // USD per gram to cents per gram
                 }
                 Err(e) => {
                     error!(
                         "Failed to parse latest gold price: {} (body: {:?})",
                         e, str_body
                     );
-                    fallback_cents
+                    None
                 }
             }
         }
         Err(e) => {
-            error!("error fetching latest gold price: {:?}. Falling back to default.", e);
-            fallback_cents
+            error!("error fetching latest gold price: {:?}", e);
+            None
         }
     }
 }
@@ -160,30 +163,54 @@ pub fn transform(raw: TransformArgs) -> HttpRequestResult {
 }
 
 
-async fn fetch_gold_grams() -> u64 {
+async fn fetch_gold_grams() -> Option<u64> {
     let config = read_state(|state| state.data.gold_collections_config.clone());
     let mut total_grams = 0u64;
 
     if let Some(c_1g) = config.canister_id_1g {
-        if let Ok(supply) = crate::services::origyn_nft::get_total_supply(c_1g).await {
-            total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1));
+        match crate::services::origyn_nft::get_total_supply(c_1g).await {
+            Ok(supply) => {
+                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1));
+            }
+            Err(e) => {
+                error!("Failed to fetch supply for gold 1g collection {c_1g}: {e:?}");
+                return None;
+            }
         }
     }
     if let Some(c_10g) = config.canister_id_10g {
-        if let Ok(supply) = crate::services::origyn_nft::get_total_supply(c_10g).await {
-            total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(10));
+        match crate::services::origyn_nft::get_total_supply(c_10g).await {
+            Ok(supply) => {
+                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(10));
+            }
+            Err(e) => {
+                error!("Failed to fetch supply for gold 10g collection {c_10g}: {e:?}");
+                return None;
+            }
         }
     }
     if let Some(c_100g) = config.canister_id_100g {
-        if let Ok(supply) = crate::services::origyn_nft::get_total_supply(c_100g).await {
-            total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(100));
+        match crate::services::origyn_nft::get_total_supply(c_100g).await {
+            Ok(supply) => {
+                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(100));
+            }
+            Err(e) => {
+                error!("Failed to fetch supply for gold 100g collection {c_100g}: {e:?}");
+                return None;
+            }
         }
     }
     if let Some(c_1kg) = config.canister_id_1kg {
-        if let Ok(supply) = crate::services::origyn_nft::get_total_supply(c_1kg).await {
-            total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1000));
+        match crate::services::origyn_nft::get_total_supply(c_1kg).await {
+            Ok(supply) => {
+                total_grams = total_grams.saturating_add(u64::try_from(supply.0).expect("Error").saturating_mul(1000));
+            }
+            Err(e) => {
+                error!("Failed to fetch supply for gold 1kg collection {c_1kg}: {e:?}");
+                return None;
+            }
         }
     }
 
-    total_grams
+    Some(total_grams)
 }
