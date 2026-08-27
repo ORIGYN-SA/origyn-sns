@@ -27,7 +27,6 @@ type Collection = record {
   locked_value_usd : opt nat64;
   is_promoted : bool;
   category : opt text;
-  total_supply : opt nat64;
 };
 type GetCollectionByPrincipal = variant { CollectionNotFound };
 type GetCollectionsArgs = record {
@@ -42,6 +41,7 @@ type GetCollectionsResult = record {
 };
 type InitArgs = record {
   test_mode : bool;
+  claimlink_canister_id : principal;
   authorized_principals : vec principal;
   version : BuildVersion;
   commit_hash : text;
@@ -64,17 +64,23 @@ type InsertFakeCollectionArgs = record {
   collection : Collection;
   category : opt text;
 };
+type Job = variant { SyncSupplies; ComputeStats; SyncCollections };
 type OverallStats = record {
   total_collections : nat64;
-  collections_total_value_locked : nat64;
+  total_value_locked : nat64;
 };
 type RemoveCategoryError = variant { CategoryNotFound };
 type RemoveCollectionArgs = record { collection_canister_id : principal };
 type RemoveCollectionError = variant { CollectionNotFound };
+// Clears a collection's admin-configured USD-per-item price. Once removed,
+// the claimlink sync job stops valuing that collection until a new price is
+// set again.
+type RemoveItemPriceArgs = record { collection_canister_id : principal };
 type Result = variant { Ok : bool; Err : text };
 type Result_1 = variant { Ok : vec record { text; Category }; Err };
-type Result_10 = variant { Ok; Err : TogglePromotedError };
-type Result_11 = variant { Ok; Err : UpdateCollectionError };
+type Result_10 = variant { Ok; Err : text };
+type Result_11 = variant { Ok; Err : TogglePromotedError };
+type Result_12 = variant { Ok; Err : UpdateCollectionError };
 type Result_2 = variant { Ok : Collection; Err : GetCollectionByPrincipal };
 type Result_3 = variant {
   Ok : GetCollectionsResult;
@@ -93,6 +99,13 @@ type SearchCollectionsArg = record {
   limit : nat64;
 };
 type SetCategoryVisibility = record { hidden : bool; category_name : text };
+// Sets (or replaces) the admin-configured USD-per-item price for a
+// collection's NFTs. The claimlink sync job multiplies this by the
+// collection's current `icrc7_total_supply` to derive its locked value.
+type SetItemPriceArgs = record {
+  collection_canister_id : principal;
+  price_usd : nat64;
+};
 type TogglePromotedArgs = record { collection_canister_id : principal };
 type TogglePromotedError = variant { CollectionNotFound };
 type UpdateCollectionArgs = record {
@@ -110,6 +123,7 @@ service : (Args) -> {
   get_categories : () -> (Result_1) query;
   get_collection_by_principal : (principal) -> (Result_2) query;
   get_collections : (GetCollectionsArgs) -> (Result_3) query;
+  get_item_prices : () -> (vec record { principal; nat64 }) query;
   get_overall_stats : (null) -> (Result_4) query;
   get_user_collections : (opt principal) -> (vec Collection);
   insert_category : (InsertCategoryArgs) -> (Result_5);
@@ -117,8 +131,12 @@ service : (Args) -> {
   insert_fake_collection : (InsertFakeCollectionArgs) -> (Result_7);
   remove_category : (InsertCategoryArgs) -> (Result_8);
   remove_collection : (RemoveCollectionArgs) -> (Result_9);
+  remove_item_price : (RemoveItemPriceArgs) -> (null);
+  run_job : (Job) -> (Result_10);
   search_collections : (SearchCollectionsArg) -> (GetCollectionsResult) query;
   set_category_visibility : (SetCategoryVisibility) -> (Result_8);
-  toggle_promoted : (TogglePromotedArgs) -> (Result_10);
-  update_collection : (UpdateCollectionArgs) -> (Result_11);
+  set_claimlink_canister_id : (principal) -> (null);
+  set_item_price : (SetItemPriceArgs) -> (null);
+  toggle_promoted : (TogglePromotedArgs) -> (Result_11);
+  update_collection : (UpdateCollectionArgs) -> (Result_12);
 }

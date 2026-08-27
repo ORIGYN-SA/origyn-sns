@@ -6,6 +6,7 @@ use ic_cdk::api::is_controller;
 use serde::{Deserialize as SerdeDeserialize, Serialize};
 use std::collections::HashMap;
 use types::TimestampMillis;
+use crate::model::gold_collections::GoldCollectionsConfig;
 use utils::{
     env::{CanisterEnv, Environment},
     memory::MemorySize,
@@ -89,10 +90,8 @@ pub struct Data {
     pub authorised_principals: Vec<Principal>,
     /// collection of nft canisters
     pub collections: CollectionModel,
-    /// Admin-configurable USD price per item, keyed by collection canister id.
-    /// A collection with no entry here is skipped when computing locked value.
     #[serde(default)]
-    pub item_prices_usd: HashMap<Principal, u64>,
+    pub gold_collections_config: GoldCollectionsConfig,
     /// Overall computed stats
     pub overall_stats: OverallStats,
     /// The claimlink canister that owns the source-of-truth list of collections
@@ -113,9 +112,9 @@ impl Data {
             authorised_principals,
             overall_stats: OverallStats::default(),
             claimlink_canister_id,
-            item_prices_usd: HashMap::new(),
             is_syncing_collections: false,
             is_syncing_supplies: false,
+            gold_collections_config: GoldCollectionsConfig::default(),
         }
     }
 }

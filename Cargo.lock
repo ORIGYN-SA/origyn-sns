@@ -1010,6 +1010,7 @@ dependencies = [
  "futures",
  "http_request",
  "ic-cdk 0.20.0",
+ "ic-cdk-management-canister",
  "ic-cdk-timers",
  "ic-ledger-types",
  "ic-stable-structures 0.7.2",
@@ -2287,6 +2288,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "ic-cdk-management-canister"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92c1319a274caebf0ab70ab826b8905c29e8563498289356b9a59464f2a85c56"
+dependencies = [
+ "candid",
+ "ic-cdk 0.20.0",
+ "ic-management-canister-types 0.7.1",
+ "serde",
+ "serde_bytes",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "ic-cdk-timers"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2299,9 +2314,9 @@ dependencies = [
 
 [[package]]
 name = "ic-certification"
-version = "3.1.0"
+version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c11273a40f8d67926ee423b0bd21381ae8419db809b42f33c5cb3319549b40f"
+checksum = "754e3037360152de7e5f2bd0ccf51db8864b6a03c5a2b4ffc6a65286c0e2ffa7"
 dependencies = [
  "hex",
  "serde",

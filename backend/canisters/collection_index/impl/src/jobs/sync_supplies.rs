@@ -1,8 +1,8 @@
 use crate::state::{mutate_state, read_state};
 use bity_ic_canister_time::run_now_then_interval;
-use candid::Nat;
+use candid::{Nat, Principal};
 use std::time::Duration;
-use tracing::{debug, warn};
+use tracing::{debug, info, warn};
 use types::Milliseconds;
 
 const SYNC_SUPPLIES_JOB_INTERVAL: Milliseconds = 30 * 60 * 1000; // 30 minutes
@@ -18,8 +18,10 @@ pub fn run() {
 
 async fn run_async() {
     if read_state(|s| s.get_is_syncing_supplies()) {
+        debug!("Sync supplies job already running; skipping execution.");
         return;
     }
+    info!("Starting sync supplies job.");
     mutate_state(|state| {
         state.set_is_syncing_supplies(true);
     });
@@ -29,23 +31,27 @@ async fn run_async() {
     mutate_state(|state| {
         state.set_is_syncing_supplies(false);
     });
+    info!("Finished sync supplies job.");
 }
 
 /// Iterates over all registered collections, fetches their individual total supplies,
 /// and computes/updates their locked value if the supply has changed.
 async fn sync_supplies() {
-    let collections = read_state(|state| state.data.collections.get_all_collections());
+    let simple_collections: Vec<(Principal, u64, Option<String>)> = read_state(|state| {
+        state
+            .data
+            .collections
+            .collections
+            .iter()
+            .filter_map(|entry| {
+                let col = entry.value();
+                col.item_price_usd.map(|price| (entry.key().clone(), price, col.name.clone()))
+            })
+            .collect()
+    });
+    info!("Syncing supplies and computing locked values for {} registered simple collections with configured price", simple_collections.len());
 
-    for collection in collections {
-        let canister_id = collection.canister_id;
-
-        let price_usd = read_state(|state| state.data.item_prices_usd.get(&canister_id).copied());
-        let Some(price_usd) = price_usd else {
-            // No admin-configured price yet for this collection; skip valuing it.
-            debug!("No price configured for collection {canister_id}; skipping supply sync");
-            continue;
-        };
-
+    for (canister_id, price_usd, name) in simple_collections {
         let supply = match crate::services::origyn_nft::get_total_supply(canister_id).await {
             Ok(supply) => supply,
             Err(e) => {
@@ -57,21 +63,27 @@ async fn sync_supplies() {
         let current_supply = nat_to_u64_saturating(&supply);
         let locked_value_usd = current_supply.saturating_mul(price_usd);
 
-        // Check if the supply and locked value are already what we have in memory.
+        // Check if the supply has changed.
         let needs_update = read_state(|state| {
-            if let Ok(existing) = state.data.collections.get_collection_by_key(canister_id) {
+            if let Some(existing) = state.data.collections.collections.get(&canister_id) {
                 existing.total_supply != Some(current_supply)
-                    || existing.locked_value_usd != Some(locked_value_usd)
             } else {
                 true
             }
         });
 
         if needs_update {
+            info!(
+                "Updating value for collection {} ({:?}): supply = {}, locked value = {} USD",
+                canister_id,
+                name,
+                current_supply,
+                locked_value_usd
+            );
             mutate_state(|state| {
                 state.data.collections.upsert_collection_value(
                     canister_id,
-                    collection.name.clone(),
+                    name.clone(),
                     locked_value_usd,
                     Some(current_supply),
                 );

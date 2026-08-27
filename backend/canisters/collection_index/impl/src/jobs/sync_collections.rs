@@ -1,7 +1,7 @@
 use crate::state::{mutate_state, read_state};
 use bity_ic_canister_time::run_now_then_interval;
 use std::time::Duration;
-use tracing::{debug, warn};
+use tracing::{debug, info, warn};
 use types::Milliseconds;
 
 const SYNC_COLLECTIONS_JOB_INTERVAL: Milliseconds = 60 * 60 * 1000; // 60 minutes
@@ -17,8 +17,10 @@ pub fn run() {
 
 async fn run_async() {
     if read_state(|s| s.get_is_syncing_collections()) {
+        debug!("Sync collections job already running; skipping execution.");
         return;
     }
+    info!("Starting sync collections job.");
     mutate_state(|state| {
         state.set_is_syncing_collections(true);
     });
@@ -29,8 +31,9 @@ async fn run_async() {
         state.set_is_syncing_collections(false);
     });
 
-    if let Err(e) = res {
-        warn!("Failed to sync collections from claimlink: {e}");
+    match res {
+        Ok(_) => info!("Successfully completed sync collections job."),
+        Err(e) => warn!("Failed to sync collections from claimlink: {e}"),
     }
 }
 
@@ -42,6 +45,8 @@ async fn sync_collections() -> Result<(), String> {
     let collections = crate::services::claimlink::fetch_all_collections(claimlink_canister_id)
         .await
         .map_err(|e| format!("claimlink error: {e}"))?;
+
+    info!("Fetched {} collections from claimlink", collections.len());
 
     for collection in collections {
         let Some(canister_id) = collection.canister_id else {

@@ -10,6 +10,7 @@ pub mod set_claimlink_canister_id;
 pub mod set_item_price;
 pub mod toggle_promoted;
 pub mod update_collection;
+pub mod run_job;
 
 pub use add_authorised_principal::*;
 pub use insert_category::*;
@@ -23,3 +24,4 @@ pub use set_claimlink_canister_id::*;
 pub use set_item_price::*;
 pub use toggle_promoted::*;
 pub use update_collection::*;
+pub use run_job::*;

@@ -12,7 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 #### Added
 
-- **Dynamic collection indexing**: Add a method to fetch all the created collections dynamically directly from the minting studio and assess the collections TVL based on per item price.
+- **Dynamic collection indexing**: Added a method to fetch all collections directly from the minting studio and calculate total value locked (TVL) based on per-item pricing.
+- **Dynamic gold NFT TVL calculation**: Added a job to index gold canisters and calculate TVL in USD using the price oracle.
+- **Dynamic staked OGY calculation**: Added a job to dynamically calculate the value of staked OGY tokens.
 
 ### [1.0.2] - 2026-03-23
 

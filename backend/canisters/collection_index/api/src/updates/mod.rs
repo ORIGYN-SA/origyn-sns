@@ -10,3 +10,4 @@ pub mod set_claimlink_canister_id;
 pub mod set_item_price;
 pub mod toggle_promoted;
 pub mod update_collection;
+pub mod run_job;

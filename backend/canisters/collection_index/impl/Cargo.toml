@@ -26,6 +26,7 @@ claimlink_c2c_client = { path = "../../../external_canisters/claimlink/c2c_clien
 futures = { workspace = true }
 http_request = { path = '../../../libraries/http_request' }
 ic-cdk = { workspace = true }
+ic-cdk-management-canister = "0.1.1"
 
 ic-cdk-timers = { workspace = true }
 ic-stable-structures = { workspace = true }

@@ -11,9 +11,13 @@ pub fn get_item_prices() -> GetItemPricesResponse {
     read_state(|state| {
         state
             .data
-            .item_prices_usd
+            .collections
+            .collections
             .iter()
-            .map(|(canister_id, price_usd)| (*canister_id, *price_usd))
+            .filter_map(|entry| {
+                let col = entry.value();
+                col.item_price_usd.map(|price| (entry.key().clone(), price))
+            })
             .collect()
     })
 }
