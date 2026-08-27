@@ -16,8 +16,6 @@ use std::collections::HashMap;
 
 use crate::memory::{get_collection_model_memory, VM};
 
-const MAX_PAGE_LIMIT: usize = 100;
-
 #[derive(Serialize, Deserialize)]
 pub struct CollectionModel {
     #[serde(skip, default = "init_collection_model")]
@@ -338,7 +336,6 @@ impl CollectionModel {
         offset: usize,
         limit: usize,
     ) -> Result<GetCollectionsResult, GetCollectionsError> {
-        let limit = limit.clamp(1, MAX_PAGE_LIMIT);
         let mut cat_names: Vec<String> = vec![];
         let cats: Vec<(String, Category)> = if let Some(items) = categories {
             let full_cats = items
@@ -416,7 +413,6 @@ impl CollectionModel {
         offset: usize,
         limit: usize,
     ) -> SearchCollectionsResponse {
-        let limit = limit.clamp(1, MAX_PAGE_LIMIT);
         let mut cat_names: Vec<String> = vec![];
 
         let cats: Vec<(String, Category)> = if let Some(items) = categories {
