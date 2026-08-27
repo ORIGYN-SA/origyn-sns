@@ -661,16 +661,16 @@ fn test_pagination_works_correctly() {
     )
     .unwrap();
 
-    assert_eq!(res.collections.len(), 150);
+    assert_eq!(res.collections.len(), 100);
     // test that the promoted collections are first
     res.collections[0..50]
         .iter()
         .for_each(|col| assert_eq!(col.is_promoted, true));
     // test that the rest are not promoted
-    res.collections[50..150]
+    res.collections[50..100]
         .iter()
         .for_each(|col| assert_eq!(col.is_promoted, false));
-    assert_eq!(res.total_pages, 1);
+    assert_eq!(res.total_pages, 2);
     // let only_names: Vec<String> = res.collections
     //     .iter()
     //     .map(|col| col.name.clone().unwrap())

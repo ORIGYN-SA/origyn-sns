@@ -764,4 +764,123 @@ mod tests {
         assert_eq!(search_res.collections.len(), 1);
         assert_eq!(search_res.collections[0].name.as_deref(), Some("NFT 12"));
     }
+
+    #[test]
+    fn test_update_collection_moves_priced_to_arbitrary() {
+        let mut model = CollectionModel::default();
+        let p = mock_principal(20);
+        let _ = model.remove_collection(p);
+
+        model.collections.insert(
+            p,
+            CollectionExtended {
+                canister_id: p,
+                name: Some("Priced NFT".to_string()),
+                category: None,
+                is_promoted: false,
+                total_supply: Some(20),
+                item_price_usd: Some(100),
+            },
+        );
+
+        assert!(model.update_collection(p, None, Some(5000), None).is_ok());
+
+        assert!(!model.collections.contains_key(&p));
+        assert!(model.arbitrary_collections_tvl.contains_key(&p));
+
+        let fetched = model.get_collection_by_key(p).unwrap();
+        assert_eq!(fetched.locked_value_usd, Some(5000));
+        assert_eq!(fetched.name, Some("Priced NFT".to_string()));
+    }
+
+    #[test]
+    fn test_update_collection_moves_arbitrary_to_priced() {
+        let mut model = CollectionModel::default();
+        let p = mock_principal(21);
+        let _ = model.remove_collection(p);
+
+        model.arbitrary_collections_tvl.insert(
+            p,
+            Collection {
+                canister_id: p,
+                name: Some("Arbitrary NFT".to_string()),
+                category: None,
+                is_promoted: false,
+                locked_value_usd: Some(999),
+            },
+        );
+
+        assert!(model.update_collection(p, None, None, Some(150)).is_ok());
+
+        assert!(!model.arbitrary_collections_tvl.contains_key(&p));
+        let stored = model.collections.get(&p).unwrap();
+        assert_eq!(stored.item_price_usd, Some(150));
+        assert_eq!(stored.total_supply, None);
+        assert_eq!(stored.name, Some("Arbitrary NFT".to_string()));
+
+        // no supply yet, so locked_value_usd is None until sync_supplies fills it in
+        let fetched = model.get_collection_by_key(p).unwrap();
+        assert_eq!(fetched.locked_value_usd, None);
+    }
+
+    #[test]
+    fn test_update_collection_rejects_both_pricing_modes() {
+        let mut model = CollectionModel::default();
+        let p = mock_principal(22);
+        let _ = model.remove_collection(p);
+
+        model.arbitrary_collections_tvl.insert(
+            p,
+            Collection {
+                canister_id: p,
+                name: Some("Whatever".to_string()),
+                category: None,
+                is_promoted: false,
+                locked_value_usd: Some(1),
+            },
+        );
+
+        let result = model.update_collection(p, None, Some(10), Some(20));
+        assert!(matches!(result, Err(UpdateCollectionError::ConflictingPricingMode)));
+
+        // nothing should have moved
+        assert!(model.arbitrary_collections_tvl.contains_key(&p));
+    }
+
+    #[test]
+    fn test_update_collection_not_found() {
+        let mut model = CollectionModel::default();
+        let p = mock_principal(23);
+        let _ = model.remove_collection(p);
+
+        let result = model.update_collection(p, None, Some(10), None);
+        assert!(matches!(result, Err(UpdateCollectionError::CollectionNotFound)));
+    }
+
+    #[test]
+    fn test_update_collection_no_pricing_change_keeps_tier() {
+        let mut model = CollectionModel::default();
+        let p = mock_principal(24);
+        let _ = model.remove_collection(p);
+        let _ = model.insert_category("Gold".to_string());
+
+        model.collections.insert(
+            p,
+            CollectionExtended {
+                canister_id: p,
+                name: Some("Priced NFT".to_string()),
+                category: None,
+                is_promoted: false,
+                total_supply: Some(4),
+                item_price_usd: Some(50),
+            },
+        );
+
+        assert!(model.update_collection(p, Some("Gold".to_string()), None, None).is_ok());
+
+        let stored = model.collections.get(&p).unwrap();
+        assert_eq!(stored.category, Some("Gold".to_string()));
+        assert_eq!(stored.item_price_usd, Some(50));
+        assert_eq!(stored.total_supply, Some(4));
+    }
 }
