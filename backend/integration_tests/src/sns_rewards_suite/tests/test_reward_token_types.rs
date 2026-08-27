@@ -39,7 +39,7 @@ fn test_set_reward_token_types_when_not_sns_goverenance_principal() {
             TokenSymbol::ICP,
             TokenInfo {
                 ledger_id: Principal::anonymous(),
-                fee: 10_000,
+                fee: Nat::from(10_000u64),
                 decimals: 8,
             },
         )],
@@ -67,7 +67,7 @@ fn test_set_reward_token_types_when_caller_is_governance_principal() {
         TokenSymbol::ICP,
         TokenInfo {
             ledger_id: Principal::anonymous(),
-            fee: 10_000,
+            fee: Nat::from(10_000u64),
             decimals: 8,
         },
     )];
@@ -91,7 +91,7 @@ fn test_set_reward_token_validate_when_not_governance_canister() {
         TokenSymbol::ICP,
         TokenInfo {
             ledger_id: Principal::anonymous(),
-            fee: 10_000,
+            fee: Nat::from(10_000u64),
             decimals: 8,
         },
     )];
@@ -117,7 +117,7 @@ fn test_set_reward_token_validate() {
         TokenSymbol::ICP,
         TokenInfo {
             ledger_id: Principal::from_text("tyyy3-4aaaa-aaaaq-aab7a-cai").unwrap(),
-            fee: 10_000,
+            fee: Nat::from(10_000u64),
             decimals: 8,
         },
     )];

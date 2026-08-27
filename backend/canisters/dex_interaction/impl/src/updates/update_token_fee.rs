@@ -21,7 +21,7 @@ pub async fn update_token_fee_validate(
 pub async fn update_token_fee(
     token: TokenSymbol,
     custom_ledger_id: Option<Principal>,
-) -> Result<u64, String> {
+) -> Result<candid::Nat, String> {
     let ledger_id = match custom_ledger_id {
         Some(id) => id,
         None => {
@@ -41,9 +41,8 @@ pub async fn update_token_fee(
 
     match call_res {
         Ok(fee_nat) => {
-            let fee_u64 = fee_nat.0.clone().try_into().unwrap_or(0);
-            types::override_token_ledger(token, ledger_id, fee_u64);
-            Ok(fee_u64)
+            types::override_token_ledger(token, ledger_id, fee_nat.clone());
+            Ok(fee_nat)
         }
         Err(e) => Err(format!("Ledger call failed: {:?}", e)),
     }

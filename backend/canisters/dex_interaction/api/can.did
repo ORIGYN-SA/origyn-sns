@@ -95,5 +95,5 @@ service : (Args_3) -> {
   icrc10_supported_standards : () -> (vec SupportedStandard) query;
   remove_exchange_jobs : (Args_1) -> (Response);
   update_exchange_config : (Args_2) -> (Response_1);
-  update_token_fee : (TokenSymbol, opt principal) -> (Result_4);
+  update_token_fee : (TokenSymbol, opt principal) -> (Result_2);
 }

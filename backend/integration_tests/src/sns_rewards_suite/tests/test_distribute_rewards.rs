@@ -372,8 +372,9 @@ fn test_mixed_neurons_both_receive_rewards() {
     // 2. Check Neuron account got paid correctly
     // ********************************
     let n = neuron_data.len() as u64;
-    let fees =
-        n * TokenSymbol::OGY.get_token_info(true).fee + TokenSymbol::OGY.get_token_info(true).fee;
+    let single_fee = TokenSymbol::OGY.get_token_info(true).fee;
+    let fees_nat = Nat::from(n) * single_fee.clone() + single_fee;
+    let fees: u64 = fees_nat.0.try_into().expect("fees should fit in u64");
     let pool = (100_000_000_000u64 - fees) as f64;
     let expected_reward = 2 * (pool / n as f64) as u64; // NOTE: we expect 2x rewards since we funded both pools
     assert_eq!(expected_reward, 19999560000);

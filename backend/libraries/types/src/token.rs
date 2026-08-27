@@ -1,6 +1,6 @@
 use std::{borrow::Cow, fmt::Display};
 
-use candid::{CandidType, Principal};
+use candid::{CandidType, Nat, Principal};
 use ic_stable_structures::{storable::Bound, Storable};
 
 use serde::{Deserialize, Serialize};
@@ -104,7 +104,7 @@ thread_local! {
     static __TOKENS: RefCell<HashMap<TokenSymbol, TokenInfo>> = RefCell::new(HashMap::new());
 }
 
-pub fn override_token_ledger(symbol: TokenSymbol, ledger_id: Principal, fee: u64) {
+pub fn override_token_ledger(symbol: TokenSymbol, ledger_id: Principal, fee: Nat) {
     __TOKENS.with(|tokens| {
         let mut tokens = tokens.borrow_mut();
         tokens.insert(symbol, TokenInfo {
@@ -115,7 +115,7 @@ pub fn override_token_ledger(symbol: TokenSymbol, ledger_id: Principal, fee: u64
     });
 }
 
-pub fn update_token_fee_cache(ledger_id: Principal, fee: u64) {
+pub fn update_token_fee_cache(ledger_id: Principal, fee: Nat) {
     __TOKENS.with(|tokens| {
         let mut tokens = tokens.borrow_mut();
         let mut found_symbol = None;
@@ -153,7 +153,7 @@ pub fn update_token_fee_cache(ledger_id: Principal, fee: u64) {
     });
 }
 
-pub async fn update_token_fee(ledger_id: Principal) -> Result<u64, String> {
+pub async fn update_token_fee(ledger_id: Principal) -> Result<Nat, String> {
     let call_res = bity_ic_canister_client::make_c2c_call(
         ledger_id,
         "icrc1_fee",
@@ -164,9 +164,8 @@ pub async fn update_token_fee(ledger_id: Principal) -> Result<u64, String> {
     .await;
     match call_res {
         Ok(fee_nat) => {
-            let fee_u64 = fee_nat.0.clone().try_into().unwrap_or(0);
-            update_token_fee_cache(ledger_id, fee_u64);
-            Ok(fee_u64)
+            update_token_fee_cache(ledger_id, fee_nat.clone());
+            Ok(fee_nat)
         }
         Err(e) => Err(format!("Ledger call failed: {:?}", e)),
     }
@@ -203,13 +202,13 @@ impl TokenSymbol {
         let ledger_id = self.ledger_id(false);
         TokenInfo {
             ledger_id,
-            fee: match self {
-                TokenSymbol::ICP => 10_000,
-                TokenSymbol::OGY => 200_000,
-                TokenSymbol::GOLDAO => 100_000,
-                TokenSymbol::WTN => 1_000_000,
-                TokenSymbol::GLDT => 10_000_000,
-            },
+            fee: Nat::from(match self {
+                TokenSymbol::ICP => 10_000_u64,
+                TokenSymbol::OGY => 200_000_u64,
+                TokenSymbol::GOLDAO => 100_000_u64,
+                TokenSymbol::WTN => 1_000_000_u64,
+                TokenSymbol::GLDT => 10_000_000_u64,
+            }),
             decimals: 8,
         }
     }
@@ -222,13 +221,13 @@ impl TokenSymbol {
         let ledger_id = self.ledger_id(is_test_mode);
         TokenInfo {
             ledger_id,
-            fee: match self {
-                TokenSymbol::ICP => 10_000,
-                TokenSymbol::OGY => 200_000,
-                TokenSymbol::GOLDAO => 100_000,
-                TokenSymbol::WTN => 1_000_000,
-                TokenSymbol::GLDT => 10_000_000,
-            },
+            fee: Nat::from(match self {
+                TokenSymbol::ICP => 10_000_u64,
+                TokenSymbol::OGY => 200_000_u64,
+                TokenSymbol::GOLDAO => 100_000_u64,
+                TokenSymbol::WTN => 1_000_000_u64,
+                TokenSymbol::GLDT => 10_000_000_u64,
+            }),
             decimals: 8,
         }
     }
@@ -313,15 +312,15 @@ impl Storable for TokenSymbol {
     };
 }
 
-#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, Copy)]
+#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash)]
 pub struct TokenInfo {
     pub ledger_id: Principal,
-    pub fee: u64,
+    pub fee: Nat,
     pub decimals: u64,
 }
 
 impl TokenInfo {
-    pub fn validate(self) -> Result<(), String> {
+    pub fn validate(&self) -> Result<(), String> {
         if self.ledger_id == Principal::anonymous() {
             return Err("Invalid ledger_id: cannot be anonymous".to_string());
         }
