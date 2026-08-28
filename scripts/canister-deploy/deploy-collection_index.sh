@@ -21,7 +21,7 @@ else
 fi
 
 NETWORK=$1
-MODE="direct"
+MODE="proposal"
 
 # 1. Extract metadata (Populates $BUILD_VERSION and $COMMIT_SHA)
 . ./scripts/extract_commit_tag_data_and_commit_sha.sh collection_index $NETWORK
