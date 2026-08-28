@@ -13,6 +13,7 @@ pub fn update_collection(args: UpdateCollectionArgs) -> UpdateCollectionResponse
             args.collection_canister_id,
             args.category_name,
             args.locked_value_usd,
+            args.item_price_usd,
         )
     })
 }

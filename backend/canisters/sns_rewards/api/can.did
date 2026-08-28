@@ -38,6 +38,7 @@ type ClaimRewardErrorType = variant {
   TransferFailed : text;
   NeuronDoesNotExist;
   InternalError : text;
+  AnonymousCaller;
 };
 type ConsentInfo = record {
   metadata : ConsentMessageMetadata;
@@ -91,6 +92,7 @@ type Response = variant {
   TransferFailed : text;
   NeuronDoesNotExist;
   InternalError : text;
+  AnonymousCaller;
 };
 type Response_1 = variant { Success; InternalError : text };
 type Response_2 = variant { Success; InternalError : text };

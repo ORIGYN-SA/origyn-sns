@@ -506,6 +506,7 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
             collection_canister_id: origyn_nft_one_canister_id,
             category_name: Some("Category B".to_string()),
             locked_value_usd: Some(500u64),
+            item_price_usd: None,
         }),
     )
     .unwrap();
@@ -526,6 +527,7 @@ fn updating_a_collection_assigned_category_should_update_correctly() {
     assert_eq!(category_a.1.collection_count, 0);
     assert_eq!(category_b.1.collection_count, 1);
 }
+
 
 #[test]
 fn test_pagination_works_correctly() {
