@@ -191,19 +191,19 @@ async fn create_token_swap_if_possible(
         match GuardExchangeJob::new(exchange_job.exchange.get_swap_client_id()) {
             Ok(_guard_exchange_job) => _guard_exchange_job,
             Err(e) => {
-                // Guard is already held → retry later
+        // Guard is already held → retry later
                 error!(
                     "Exchange job is already being processed, retrying later: {}",
                     e
                 );
 
-                let retry_job = exchange_job.clone();
-                ic_cdk_timers::set_timer(RETRY_DELAY, async move {
-                    let _ = create_token_swap_if_possible(retry_job).await;
-                });
+        let retry_job = exchange_job.clone();
+        ic_cdk_timers::set_timer(RETRY_DELAY, async move {
+            let _ = create_token_swap_if_possible(retry_job).await;
+        });
 
-                return None;
-            }
+        return None;
+    }
         };
 
     let args = exchange_job.exchange.get_config();
@@ -258,7 +258,7 @@ async fn create_token_swap_if_possible(
         });
         let swap_id = token_swap.swap_id;
         let future = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, move || {
-            process_token_swap(exchange_job.clone(), token_swap.clone(), amount_to_dex)
+                process_token_swap(exchange_job.clone(), token_swap.clone(), amount_to_dex)
         });
         Some((future, swap_id))
     } else {
@@ -469,20 +469,23 @@ pub(crate) async fn process_token_swap(
 
     // Withdraw tokens from the DEX
     if extract_result(&token_swap.withdrawn_from_dex_at).is_none() {
-        if let Err(error) = swap_client.withdraw(successful_swap, amount_out).await {
-            let msg = format!("{error:?}");
-            mutate_state(|state| {
-                token_swap.withdrawn_from_dex_at = Some(Err(msg.clone()));
-                state.data.token_swaps.upsert(token_swap.clone());
-            });
-            error!("Failed to withdraw tokens: {}", msg.as_str());
-            return Err(msg);
-        } else {
-            mutate_state(|state| {
-                token_swap.withdrawn_from_dex_at = Some(Ok(amount_out));
-                token_swap.success = Some(successful_swap);
-                state.data.token_swaps.upsert(token_swap);
-            });
+        match swap_client.withdraw(successful_swap, amount_out).await {
+            Err(error) => {
+                let msg = format!("{error:?}");
+                mutate_state(|state| {
+                    token_swap.withdrawn_from_dex_at = Some(Err(msg.clone()));
+                    state.data.token_swaps.upsert(token_swap.clone());
+                });
+                error!("Failed to withdraw tokens: {}", msg.as_str());
+                return Err(msg);
+            }
+            Ok(withdrawn_amount) => {
+                mutate_state(|state| {
+                    token_swap.withdrawn_from_dex_at = Some(Ok(withdrawn_amount));
+                    token_swap.success = Some(successful_swap);
+                    state.data.token_swaps.upsert(token_swap.clone());
+                });
+            }
         }
     }
 
