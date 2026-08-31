@@ -84,7 +84,7 @@ async fn claim_rewards_batch(args: ClaimRewardsBatchArgs) -> ClaimRewardsBatchRe
     let mut transfer_meta = vec![]; // (neuron_id, token) for each future
 
     for (neuron_id, token) in &authed_requests {
-        let token_info_opt = read_state(|s: &RuntimeState| s.data.tokens.get(token).copied());
+        let token_info_opt = read_state(|s: &RuntimeState| s.data.tokens.get(token).cloned());
         match token_info_opt {
             Some(token_info) => {
                 transfer_futures.push(transfer_rewards(neuron_id.clone(), caller, token_info));
