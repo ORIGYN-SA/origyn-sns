@@ -132,7 +132,7 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
     let amount_to_send = available_amount.clone() - output_token_info.fee.clone();
 
     let now = read_state(|state| state.env.now());
-    let transfer_result = match icrc_ledger_canister_c2c_client::icrc1_transfer(
+    let mut transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
         output_token_info.ledger_id,
         &(TransferArg {
             from_subaccount: Default::default(),
@@ -143,8 +143,32 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
             amount: amount_to_send,
         }),
     )
-    .await
-    {
+    .await;
+
+    if let Ok(Err(icrc_ledger_types::icrc1::transfer::TransferError::BadFee { expected_fee })) = &transfer_result {
+        info!("Transfer failed with BadFee. Updating cached fee for ledger {:?} to {}", output_token_info.ledger_id, expected_fee);
+        types::update_token_fee_cache(output_token_info.ledger_id, expected_fee.clone());
+
+        // Retry with the new fee if balance allows
+        if available_amount > *expected_fee {
+            let new_amount_to_send = available_amount - expected_fee.clone();
+            info!("Retrying transfer to destination with new fee: {}", expected_fee);
+            transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
+                output_token_info.ledger_id,
+                &(TransferArg {
+                    from_subaccount: Default::default(),
+                    to: destination_account,
+                    fee: Some(expected_fee.clone()),
+                    created_at_time: Some(now * NANOS_PER_MILLISECOND),
+                    memo: Some(MEMO_SWAP.to_vec().into()),
+                    amount: new_amount_to_send,
+                }),
+            )
+            .await;
+        }
+    }
+
+    match transfer_result {
         Ok(Ok(index)) => Ok(index),
         Ok(Err(error)) => {
             error!("Ledger error transferring to destination: {:?}", error);
@@ -157,9 +181,7 @@ async fn transfer_to_destination(exchange_job: &ExchangeJob) -> Result<Nat, Stri
             );
             Err(format!("{:?}", error))
         }
-    };
-
-    transfer_result
+    }
 }
 
 async fn create_token_swap_if_possible(
@@ -169,19 +191,19 @@ async fn create_token_swap_if_possible(
         match GuardExchangeJob::new(exchange_job.exchange.get_swap_client_id()) {
             Ok(_guard_exchange_job) => _guard_exchange_job,
             Err(e) => {
-                // Guard is already held → retry later
+        // Guard is already held → retry later
                 error!(
                     "Exchange job is already being processed, retrying later: {}",
                     e
                 );
 
-                let retry_job = exchange_job.clone();
-                ic_cdk_timers::set_timer(RETRY_DELAY, async move {
-                    let _ = create_token_swap_if_possible(retry_job).await;
-                });
+        let retry_job = exchange_job.clone();
+        ic_cdk_timers::set_timer(RETRY_DELAY, async move {
+            let _ = create_token_swap_if_possible(retry_job).await;
+        });
 
-                return None;
-            }
+        return None;
+    }
         };
 
     let args = exchange_job.exchange.get_config();
@@ -202,8 +224,18 @@ async fn create_token_swap_if_possible(
         u128::try_from(exchange_job.rate_per_interval.apply_to(&available_amount).0)
             .expect("Failed to convert Nat");
 
-    let quote = get_swap_quote(&swap_client, amount_to_dex, input_token_info.fee).await;
-    let min_required = (exchange_job.min_amount.e8s() as u128) + (output_token_info.fee as u128);
+    info!(
+        "Swap check for job {}: ledger = {:?}, available_amount = {}, amount_to_dex = {}, input_token_fee = {}",
+        exchange_job.id, input_token_info.ledger_id, available_amount, amount_to_dex, input_token_info.fee
+    );
+
+    let quote = get_swap_quote(&swap_client, amount_to_dex, fee_as_u128(&input_token_info.fee)).await;
+    let min_required = (exchange_job.min_amount.e8s() as u128) + fee_as_u128(&output_token_info.fee);
+
+    info!(
+        "Swap quote for job {}: quote = {}, min_required = {}",
+        exchange_job.id, quote, min_required
+    );
 
     if let Some(max_amount) = exchange_job.max_amount {
         let max_allowed = max_amount.e8s() as u128;
@@ -217,6 +249,7 @@ async fn create_token_swap_if_possible(
     }
 
     if quote >= min_required {
+        info!("Executing swap job {}: amount_to_dex = {}", exchange_job.id, amount_to_dex);
         let token_swap = mutate_state(|state| {
             state
                 .data
@@ -225,7 +258,7 @@ async fn create_token_swap_if_possible(
         });
         let swap_id = token_swap.swap_id;
         let future = retry_with_attempts(MAX_ATTEMPTS, RETRY_DELAY, move || {
-            process_token_swap(exchange_job.clone(), token_swap.clone(), amount_to_dex)
+                process_token_swap(exchange_job.clone(), token_swap.clone(), amount_to_dex)
         });
         Some((future, swap_id))
     } else {
@@ -237,8 +270,8 @@ async fn create_token_swap_if_possible(
     }
 }
 
-async fn get_swap_quote(swap_client: &SwapClientEnum, amount_to_dex: u128, fee: u64) -> u128 {
-    if amount_to_dex <= fee as u128 {
+async fn get_swap_quote(swap_client: &SwapClientEnum, amount_to_dex: u128, fee: u128) -> u128 {
+    if amount_to_dex <= fee {
         error!(
             "Amount too small for swap: amount={}, fee={}",
             amount_to_dex, fee
@@ -247,7 +280,7 @@ async fn get_swap_quote(swap_client: &SwapClientEnum, amount_to_dex: u128, fee: 
     }
 
     match swap_client
-        .get_quote(amount_to_dex.saturating_sub(fee.into()), 0)
+        .get_quote(amount_to_dex.saturating_sub(fee), 0)
         .await
     {
         Ok(Ok(quote)) => quote,
@@ -275,7 +308,7 @@ pub(crate) async fn process_token_swap(
 ) -> Result<(), String> {
     let swap_client = exchange_job.exchange.clone();
     let swap_config = swap_client.get_config();
-    let input_token_info = swap_config.input_token.get_prod_token_info();
+    let mut input_token_info = swap_config.input_token.get_prod_token_info();
     let output_token_info = swap_config.output_token.get_prod_token_info();
     let min_output_amount = exchange_job.min_amount.e8s() as u128;
 
@@ -307,19 +340,41 @@ pub(crate) async fn process_token_swap(
     // Deposit tokens to the deposit account
     if extract_result(&token_swap.transfer).is_none() {
         let now = read_state(|state| state.env.now());
-        let transfer_result = match icrc_ledger_canister_c2c_client::icrc1_transfer(
+        let mut transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
             input_token_info.ledger_id,
             &(TransferArg {
                 from_subaccount: exchange_job.source_subaccount,
                 to: account,
-                fee: Some(input_token_info.fee.into()),
+                fee: Some(input_token_info.fee.clone()),
                 created_at_time: Some(now * NANOS_PER_MILLISECOND),
                 memo: Some(MEMO_SWAP.to_vec().into()),
-                amount: amount_to_dex.into(),
+                amount: (amount_to_dex.saturating_sub(fee_as_u128(&input_token_info.fee))).into(),
             }),
         )
-        .await
-        {
+        .await;
+
+        if let Ok(Err(icrc_ledger_types::icrc1::transfer::TransferError::BadFee { expected_fee })) = &transfer_result {
+            info!("Deposit failed with BadFee. Updating cached fee for ledger {:?} to {}", input_token_info.ledger_id, expected_fee);
+            types::update_token_fee_cache(input_token_info.ledger_id, expected_fee.clone());
+            input_token_info.fee = expected_fee.clone();
+
+            // Retry with the new fee
+            info!("Retrying deposit with new fee: {}", expected_fee);
+            transfer_result = icrc_ledger_canister_c2c_client::icrc1_transfer(
+                input_token_info.ledger_id,
+                &(TransferArg {
+                    from_subaccount: exchange_job.source_subaccount,
+                    to: account,
+                    fee: Some(expected_fee.clone()),
+                    created_at_time: Some(now * NANOS_PER_MILLISECOND),
+                    memo: Some(MEMO_SWAP.to_vec().into()),
+                    amount: (amount_to_dex.saturating_sub(fee_as_u128(expected_fee))).into(),
+                }),
+            )
+            .await;
+        }
+
+        let transfer_result_processed = match transfer_result {
             Ok(Ok(index)) => Ok(index),
             Ok(Err(error)) => {
                 error!("Failed to deposit tokens to deposit account: {:?}", error);
@@ -331,7 +386,7 @@ pub(crate) async fn process_token_swap(
             }
         };
 
-        match transfer_result {
+        match transfer_result_processed {
             Ok(index) => {
                 mutate_state(|state| {
                     token_swap.transfer = Some(Ok(index.0.try_into().unwrap()));
@@ -352,7 +407,8 @@ pub(crate) async fn process_token_swap(
 
     // Notify DEX
     if extract_result(&token_swap.notified_dex_at).is_none() {
-        if let Err(error) = swap_client.deposit(amount_to_dex).await {
+        let deposit_amount = amount_to_dex.saturating_sub(2 * fee_as_u128(&input_token_info.fee));
+        if let Err(error) = swap_client.deposit(deposit_amount).await {
             let msg = format!("{error:?}");
             mutate_state(|state| {
                 token_swap.notified_dex_at = Some(Err(msg.clone()));
@@ -372,9 +428,10 @@ pub(crate) async fn process_token_swap(
     let swap_result = if let Some(a) = extract_result(&token_swap.amount_swapped).cloned() {
         a
     } else {
+        let swap_amount = amount_to_dex.saturating_sub(3 * fee_as_u128(&input_token_info.fee));
         match swap_client
             .swap(
-                amount_to_dex.saturating_sub(input_token_info.fee.into()),
+                swap_amount,
                 min_output_amount,
             )
             .await
@@ -401,31 +458,34 @@ pub(crate) async fn process_token_swap(
     let (successful_swap, amount_out) = if let Ok(amount_swapped) = swap_result {
         (
             true,
-            amount_swapped.saturating_sub(output_token_info.fee.into()),
+            amount_swapped.saturating_sub(fee_as_u128(&output_token_info.fee)),
         )
     } else {
         (
             false,
-            amount_to_dex.saturating_sub(input_token_info.fee.into()),
+            amount_to_dex.saturating_sub(fee_as_u128(&input_token_info.fee)),
         )
     };
 
     // Withdraw tokens from the DEX
     if extract_result(&token_swap.withdrawn_from_dex_at).is_none() {
-        if let Err(error) = swap_client.withdraw(successful_swap, amount_out).await {
-            let msg = format!("{error:?}");
-            mutate_state(|state| {
-                token_swap.withdrawn_from_dex_at = Some(Err(msg.clone()));
-                state.data.token_swaps.upsert(token_swap.clone());
-            });
-            error!("Failed to withdraw tokens: {}", msg.as_str());
-            return Err(msg);
-        } else {
-            mutate_state(|state| {
-                token_swap.withdrawn_from_dex_at = Some(Ok(amount_out));
-                token_swap.success = Some(successful_swap);
-                state.data.token_swaps.upsert(token_swap);
-            });
+        match swap_client.withdraw(successful_swap, amount_out).await {
+            Err(error) => {
+                let msg = format!("{error:?}");
+                mutate_state(|state| {
+                    token_swap.withdrawn_from_dex_at = Some(Err(msg.clone()));
+                    state.data.token_swaps.upsert(token_swap.clone());
+                });
+                error!("Failed to withdraw tokens: {}", msg.as_str());
+                return Err(msg);
+            }
+            Ok(withdrawn_amount) => {
+                mutate_state(|state| {
+                    token_swap.withdrawn_from_dex_at = Some(Ok(withdrawn_amount));
+                    token_swap.success = Some(successful_swap);
+                    state.data.token_swaps.upsert(token_swap.clone());
+                });
+            }
         }
     }
 
@@ -438,4 +498,8 @@ pub(crate) async fn process_token_swap(
 
 fn extract_result<T>(subtask: &Option<Result<T, String>>) -> Option<&T> {
     subtask.as_ref().and_then(|t| t.as_ref().ok())
+}
+
+fn fee_as_u128(fee: &Nat) -> u128 {
+    u128::try_from(fee.0.clone()).expect("token fee should fit in u128")
 }

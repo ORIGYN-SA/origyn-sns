@@ -1427,6 +1427,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
+ "bity-ic-canister-client",
  "bity-ic-canister-logger",
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
@@ -6452,8 +6453,10 @@ checksum = "562d481066bde0658276a35467c4af00bdc6ee726305698a55b86e61d7ad82bb"
 name = "types"
 version = "0.1.0"
 dependencies = [
+ "bity-ic-canister-client",
  "candid",
  "hex",
+ "ic-cdk 0.20.0",
  "ic-ledger-types",
  "ic-stable-structures 0.7.2",
  "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",

@@ -74,7 +74,7 @@ impl PaymentRound {
 
         let total_neuron_maturity_for_interval =
             Self::calculate_aggregated_maturity(&neuron_maturity_for_interval);
-        if token_info.fee > reward_pool_balance.clone() {
+        if token_info.fee > reward_pool_balance {
             let err = format!(
                 "ROUND ID : {} & TOKEN : {:?} - Can't create PaymentRound. it would cost more than the balance of the reward pool to send it to the round pool",
                 id,
@@ -82,10 +82,10 @@ impl PaymentRound {
             );
             return Err(err);
         }
-        let round_funds_total = reward_pool_balance.clone() - token_info.fee;
+        let round_funds_total = reward_pool_balance - token_info.fee.clone();
 
         let transaction_fees =
-            Self::calculate_transaction_fees(&neuron_maturity_for_interval, token_info.fee)?;
+            Self::calculate_transaction_fees(&neuron_maturity_for_interval, token_info.fee.clone())?;
 
         if transaction_fees > round_funds_total.clone() {
             let err = format!(
@@ -162,7 +162,7 @@ impl PaymentRound {
 
     pub fn calculate_transaction_fees(
         neuron_maturity_deltas: &[(NeuronId, u64)],
-        single_fee: u64,
+        single_fee: Nat,
     ) -> Result<Nat, String> {
         // get only the neurons that have a positive maturity delta/change.
         let neurons_with_positive_maturity_delta: Vec<&(NeuronId, u64)> = neuron_maturity_deltas
@@ -171,12 +171,8 @@ impl PaymentRound {
             .collect();
 
         let number_of_valid_transactions = neurons_with_positive_maturity_delta.len() as u64;
-        let total_fees = number_of_valid_transactions.checked_mul(single_fee);
 
-        match total_fees {
-            Some(total) => Ok(Nat::from(total)),
-            None => Err("overflow when calculating total fees".to_string()),
-        }
+        Ok(Nat::from(number_of_valid_transactions) * single_fee)
     }
 
     pub fn calculate_aggregated_maturity(data: &[(NeuronId, u64)]) -> u64 {
@@ -607,7 +603,8 @@ mod tests {
         ];
         let expected = Nat::from(20_000u64); // 2 x neurons with positive maturity
 
-        let result = PaymentRound::calculate_transaction_fees(&neuron_deltas, 10_000u64).unwrap();
+        let result =
+            PaymentRound::calculate_transaction_fees(&neuron_deltas, Nat::from(10_000u64)).unwrap();
         assert_eq!(result, expected);
     }
 }

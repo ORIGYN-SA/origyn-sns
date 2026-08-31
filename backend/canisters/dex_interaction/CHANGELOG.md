@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.2.0] - 2026-08-25
+
+#### Fixed
+- **Token fees** : Add a token fee fallback for the case the fee was changed
+
 ### [1.1.1] - 2026-07-28
 
 #### Fixed

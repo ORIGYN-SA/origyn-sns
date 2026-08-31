@@ -43,7 +43,7 @@ pub async fn distribute_reserve_pool() {
 async fn handle_ogy_distribution() {
     let token = TokenSymbol::OGY;
     // get the ogy ledger id
-    let ogy_token_info = match read_state(|s| s.data.tokens.get(&token).copied()) {
+    let ogy_token_info = match read_state(|s| s.data.tokens.get(&token).cloned()) {
         Some(token_info) => token_info,
         None => {
             error!(
@@ -79,7 +79,7 @@ async fn handle_ogy_distribution() {
     // check the reserve pool has enough OGY to correctly transfer
     match fetch_balance_of_sub_account(ogy_token_info.ledger_id, RESERVE_POOL_SUB_ACCOUNT).await {
         Ok(balance) => {
-            if balance < amount_to_transfer.clone() + ogy_token_info.fee {
+            if balance < amount_to_transfer.clone() + ogy_token_info.fee.clone() {
                 debug!(
                     "Balance of reserve pool : {} is too low to make a transfer of {} plus a fee of {} ",
                     balance,

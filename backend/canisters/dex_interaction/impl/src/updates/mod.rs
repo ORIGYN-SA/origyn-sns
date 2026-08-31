@@ -9,3 +9,6 @@ pub use add_exchange_jobs::*;
 
 pub mod remove_exchange_jobs;
 pub use remove_exchange_jobs::*;
+
+pub mod update_token_fee;
+pub use update_token_fee::*;

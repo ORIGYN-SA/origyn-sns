@@ -99,11 +99,7 @@ type Response_2 = variant { Success; InternalError : text };
 type Result = variant { Ok; Err : vec ClaimRewardError };
 type Result_1 = variant { Ok : ConsentInfo; Err : Icrc21Error };
 type SupportedStandard = record { url : text; name : text };
-type TokenInfo = record {
-  fee : nat64;
-  decimals : nat64;
-  ledger_id : principal;
-};
+type TokenInfo = record { fee : nat; decimals : nat64; ledger_id : principal };
 // Compact enum for token identity (for keys, matching, etc.)
 type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };

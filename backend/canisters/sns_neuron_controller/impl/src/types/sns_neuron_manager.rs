@@ -200,6 +200,9 @@ pub trait NeuronRewardsManager: NeuronManager {
     fn get_reward_tokens(&self) -> HashMap<TokenSymbol, TokenParams>;
     async fn get_available_rewards(&self, token: TokenSymbol) -> Nat;
     async fn claim_rewards(&self, token: TokenSymbol) -> ClaimRewardResult;
+    async fn get_available_maturity(&self) -> Nat {
+        self.get_available_sns_rewards().await
+    }
     async fn claim_sns_rewards(
         &self,
         rewards_destination: sns_governance_canister::types::Account,
