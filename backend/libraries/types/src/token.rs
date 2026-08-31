@@ -126,11 +126,7 @@ pub fn update_token_fee_cache(ledger_id: Principal, fee: Nat) {
             }
         }
 
-        if let Some(symbol) = found_symbol {
-            if let Some(info) = tokens.get_mut(&symbol) {
-                info.fee = fee;
-            }
-        } else {
+        let symbol = found_symbol.or_else(|| {
             let symbols = [
                 TokenSymbol::ICP,
                 TokenSymbol::OGY,
@@ -138,17 +134,18 @@ pub fn update_token_fee_cache(ledger_id: Principal, fee: Nat) {
                 TokenSymbol::WTN,
                 TokenSymbol::GLDT,
             ];
-            for symbol in symbols {
-                if symbol.ledger_id(true) == ledger_id || symbol.ledger_id(false) == ledger_id {
-                    let info = TokenInfo {
-                        ledger_id,
-                        fee,
-                        decimals: 8,
-                    };
-                    tokens.insert(symbol, info);
-                    break;
-                }
-            }
+            symbols.into_iter().find(|s| {
+                s.ledger_id(true) == ledger_id || s.ledger_id(false) == ledger_id
+            })
+        });
+
+        if let Some(symbol) = symbol {
+            let entry = tokens.entry(symbol).or_insert_with(|| TokenInfo {
+                ledger_id,
+                fee: fee.clone(),
+                decimals: symbol.decimals(),
+            });
+            entry.fee = fee;
         }
     });
 }
@@ -172,6 +169,26 @@ pub async fn update_token_fee(ledger_id: Principal) -> Result<Nat, String> {
 }
 
 impl TokenSymbol {
+    pub fn decimals(&self) -> u64 {
+        match self {
+            TokenSymbol::ICP => 8,
+            TokenSymbol::OGY => 8,
+            TokenSymbol::GOLDAO => 8,
+            TokenSymbol::WTN => 8,
+            TokenSymbol::GLDT => 8,
+        }
+    }
+
+    pub fn default_fee(&self) -> Nat {
+        Nat::from(match self {
+            TokenSymbol::ICP => 10_000_u64,
+            TokenSymbol::OGY => 200_000_u64,
+            TokenSymbol::GOLDAO => 1_000_000_000_u64,
+            TokenSymbol::WTN => 1_000_000_u64,
+            TokenSymbol::GLDT => 10_000_000_u64,
+        })
+    }
+
     /// Return the display symbol for a token (can be renamed here)
     pub fn symbol(&self) -> &'static str {
         match self {
@@ -202,14 +219,8 @@ impl TokenSymbol {
         let ledger_id = self.ledger_id(false);
         TokenInfo {
             ledger_id,
-            fee: Nat::from(match self {
-                TokenSymbol::ICP => 10_000_u64,
-                TokenSymbol::OGY => 200_000_u64,
-                TokenSymbol::GOLDAO => 1_000_000_000_u64,
-                TokenSymbol::WTN => 1_000_000_u64,
-                TokenSymbol::GLDT => 10_000_000_u64,
-            }),
-            decimals: 8,
+            fee: self.default_fee(),
+            decimals: self.decimals(),
         }
     }
 
@@ -221,14 +232,8 @@ impl TokenSymbol {
         let ledger_id = self.ledger_id(is_test_mode);
         TokenInfo {
             ledger_id,
-            fee: Nat::from(match self {
-                TokenSymbol::ICP => 10_000_u64,
-                TokenSymbol::OGY => 200_000_u64,
-                TokenSymbol::GOLDAO => 1_000_000_000_u64,
-                TokenSymbol::WTN => 1_000_000_u64,
-                TokenSymbol::GLDT => 10_000_000_u64,
-            }),
-            decimals: 8,
+            fee: self.default_fee(),
+            decimals: self.decimals(),
         }
     }
 
