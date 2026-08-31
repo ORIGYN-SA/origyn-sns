@@ -172,6 +172,7 @@ fn install_canisters(pic: &mut PocketIc, controller: Principal) -> CanisterIds {
             test_mode: true,
             version: BuildVersion::default(),
             commit_hash: "commit_hash".to_string(),
+            claimlink_canister_id: Principal::anonymous(), // FIXME
         });
 
     install_canister(

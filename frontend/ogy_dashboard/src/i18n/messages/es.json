@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certificado no encontrado."
     },
+    "transactionPage": {
+      "title": "Detalles de la Transacción",
+      "notFound": "Transacción no encontrada.",
+      "minted": "Acuñado",
+      "burned": "Quemado"
+    },
     "collector": {
       "title": "Coleccionista",
       "owned": "Certificados",

@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certificatul nu a fost găsit."
     },
+    "transactionPage": {
+      "title": "Detalii tranzacție",
+      "notFound": "Tranzacția nu a fost găsită.",
+      "minted": "Emis",
+      "burned": "Ars"
+    },
     "collector": {
       "title": "Colecționar",
       "owned": "Certificate",

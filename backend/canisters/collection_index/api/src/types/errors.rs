@@ -68,4 +68,13 @@ pub enum SynCollectionInfoError {
 pub enum UpdateCollectionError {
     CollectionNotFound,
     CategoryNotFound(String),
+    // locked_value_usd and item_price_usd are mutually exclusive
+    ConflictingPricingMode,
+}
+
+#[derive(Clone, Debug, candid::CandidType, serde::Deserialize, serde::Serialize)]
+pub enum SetItemPriceError {
+    CollectionNotFound,
+    // collection has a manually pinned TVL, not a per-item price
+    CollectionIsArbitraryTvl,
 }

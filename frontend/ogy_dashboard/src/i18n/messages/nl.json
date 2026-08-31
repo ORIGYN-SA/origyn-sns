@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certificaat niet gevonden."
     },
+    "transactionPage": {
+      "title": "Transactiedetails",
+      "notFound": "Transactie niet gevonden.",
+      "minted": "Geslagen",
+      "burned": "Verbrand"
+    },
     "collector": {
       "title": "Verzamelaar",
       "owned": "Certificaten",

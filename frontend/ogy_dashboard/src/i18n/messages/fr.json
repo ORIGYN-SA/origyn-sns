@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "Certificat introuvable."
     },
+    "transactionPage": {
+      "title": "Détails de la transaction",
+      "notFound": "Transaction introuvable.",
+      "minted": "Frappé",
+      "burned": "Détruit"
+    },
     "collector": {
       "title": "Collectionneur",
       "owned": "Certificats",

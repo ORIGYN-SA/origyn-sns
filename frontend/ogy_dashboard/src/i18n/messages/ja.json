@@ -736,6 +736,12 @@
     "certificatePage": {
       "notFound": "証明書が見つかりません。"
     },
+    "transactionPage": {
+      "title": "取引の詳細",
+      "notFound": "取引が見つかりません。",
+      "minted": "ミント済み",
+      "burned": "バーン済み"
+    },
     "collector": {
       "title": "コレクター",
       "owned": "証明書",

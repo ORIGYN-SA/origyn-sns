@@ -58,8 +58,7 @@ type InitArgs = record {
   version : BuildVersion;
   commit_hash : text;
 };
-type Response = variant { Success };
-type Response_1 = variant { Success; InvalidBurnRate };
+type Response = variant { Success; InvalidBurnRate };
 type Result = variant { Ok : Account; Err : text };
 type Result_1 = variant { Ok; Err : text };
 type Result_2 = variant { Ok : nat; Err : text };
