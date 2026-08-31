@@ -47,3 +47,48 @@ pub async fn update_token_fee(
         Err(e) => Err(format!("Ledger call failed: {:?}", e)),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::state::{init_state, RuntimeState};
+    use candid::Nat;
+
+    fn init_runtime_state() {
+        init_state(RuntimeState::default());
+    }
+
+    #[test]
+    fn test_token_fee_overrides() {
+        init_runtime_state();
+
+        let is_test_mode = false;
+        let token = TokenSymbol::ICP;
+
+        // Clear the global cache to start with a cache miss
+        // Note: the thread local cache is in types::token::__TOKENS
+        // and we can clear it using override_token_ledger or test it directly.
+        
+        // 1. Initially it should return the default fee for ICP (10_000)
+        let info = token.get_token_info(is_test_mode);
+        assert_eq!(info.fee, Nat::from(10_000_u64));
+
+        // 2. Override the ledger and fee for ICP
+        let custom_fee = Nat::from(5_000_u64);
+        let ledger_id = token.ledger_id(is_test_mode);
+        types::override_token_ledger(token, ledger_id, custom_fee.clone());
+
+        // 3. Verify it returns the overridden fee
+        let info = token.get_token_info(is_test_mode);
+        assert_eq!(info.fee, custom_fee);
+
+        // 4. Update the fee cache using the update cache method (cache hit path)
+        let updated_fee = Nat::from(20_000_u64);
+        types::update_token_fee_cache(ledger_id, updated_fee.clone());
+
+        // 5. Verify it returns the updated fee
+        let info = token.get_token_info(is_test_mode);
+        assert_eq!(info.fee, updated_fee);
+    }
+}
+

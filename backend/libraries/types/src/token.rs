@@ -205,7 +205,7 @@ impl TokenSymbol {
             fee: Nat::from(match self {
                 TokenSymbol::ICP => 10_000_u64,
                 TokenSymbol::OGY => 200_000_u64,
-                TokenSymbol::GOLDAO => 100_000_u64,
+                TokenSymbol::GOLDAO => 1_000_000_000_u64,
                 TokenSymbol::WTN => 1_000_000_u64,
                 TokenSymbol::GLDT => 10_000_000_u64,
             }),
@@ -224,7 +224,7 @@ impl TokenSymbol {
             fee: Nat::from(match self {
                 TokenSymbol::ICP => 10_000_u64,
                 TokenSymbol::OGY => 200_000_u64,
-                TokenSymbol::GOLDAO => 100_000_u64,
+                TokenSymbol::GOLDAO => 1_000_000_000_u64,
                 TokenSymbol::WTN => 1_000_000_u64,
                 TokenSymbol::GLDT => 10_000_000_u64,
             }),
@@ -391,5 +391,31 @@ mod tests {
         assert!(TokenSymbol::parse("GLD").is_err());
         assert!(TokenSymbol::parse("").is_err());
         assert!(TokenSymbol::parse("UNKNOWN").is_err());
+    }
+
+    #[test]
+    fn test_update_token_fee_cache() {
+        use crate::token::{update_token_fee_cache, __TOKENS};
+        use candid::Nat;
+
+        // Clear the cache first to ensure a cache miss
+        __TOKENS.with(|tokens| tokens.borrow_mut().clear());
+
+        let ogy_ledger = TokenSymbol::OGY.ledger_id(true);
+        let expected_fee = Nat::from(123_456_u64);
+
+        // This call will trigger a cache miss and insert a new TokenInfo.
+        // It must not panic on RefCell borrows.
+        update_token_fee_cache(ogy_ledger, expected_fee.clone());
+
+        // Verify the cache has been updated
+        let info = TokenSymbol::OGY.get_token_info(true);
+        assert_eq!(info.fee, expected_fee);
+
+        // Verify cache hit behavior also works and updates the fee
+        let new_expected_fee = Nat::from(789_012_u64);
+        update_token_fee_cache(ogy_ledger, new_expected_fee.clone());
+        let updated_info = TokenSymbol::OGY.get_token_info(true);
+        assert_eq!(updated_info.fee, new_expected_fee);
     }
 }
