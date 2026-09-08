@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.1.4] - 2026-09-08
+
+#### Fixed
+- **Neuron maturity** : Set minimum disbursable maturity threshold (11 GOLDAO) to prevent governance errors.
+
 ### [1.1.3] - 2026-08-25
 
 #### Added

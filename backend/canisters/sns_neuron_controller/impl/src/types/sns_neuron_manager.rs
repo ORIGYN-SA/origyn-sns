@@ -15,11 +15,11 @@ use sns_governance_canister::types::{
         claim_or_refresh::{By, MemoAndController},
         ClaimOrRefresh, Command,
     },
-    manage_neuron_response, ManageNeuron,
+    manage_neuron_response, ManageNeuron, Neuron,
 };
 use sns_neuron_controller_api_canister::init::TokenParams;
 use std::collections::HashMap;
-use tracing::{error, trace};
+use tracing::{error, info, trace};
 use types::{CanisterId, TokenSymbol};
 use utils::env::Environment;
 
@@ -188,10 +188,19 @@ pub trait NeuronManager: NeuronConfig {
         self.get_neurons()
             .all_neurons
             .iter()
+            .filter(|neuron| is_neuron_eligible_for_disburse(neuron))
             .fold(Nat::from(0_u64), |sum, neuron| {
                 sum + neuron.maturity_e8s_equivalent
             })
     }
+}
+
+// The SNS rejects disbursing maturity when the maturity, after the worst case maturity modulation of -5%,
+// would disburse less than the transaction fee of 10 GOLDAO (1_000_000_000 e8s). 11 GOLDAO (1_100_000_000 e8s) keeps a small margin above that.
+pub const MIN_DISBURSABLE_MATURITY_E8S: u64 = 1_100_000_000;
+
+fn is_neuron_eligible_for_disburse(neuron: &Neuron) -> bool {
+    neuron.maturity_e8s_equivalent >= MIN_DISBURSABLE_MATURITY_E8S
 }
 
 #[async_trait]
@@ -208,14 +217,23 @@ pub trait NeuronRewardsManager: NeuronManager {
         rewards_destination: sns_governance_canister::types::Account,
     ) -> ClaimRewardResult {
         let neurons = &self.get_neurons().all_neurons;
-
         let mut neuron_ids = Vec::new();
         for neuron in neurons {
-            if let Some(id) = &neuron.id {
-                if let Ok(array) = id.clone().id.try_into() {
-                    neuron_ids.push(array);
+            if is_neuron_eligible_for_disburse(neuron) {
+                if let Some(id) = &neuron.id {
+                    if let Ok(array) = id.clone().id.try_into() {
+                        neuron_ids.push(array);
+                    }
                 }
             }
+        }
+
+        if neuron_ids.is_empty() {
+            info!(
+                "No SNS neurons eligible for maturity disbursement (min threshold: {} e8s)",
+                MIN_DISBURSABLE_MATURITY_E8S
+            );
+            return ClaimRewardResult::Successful;
         }
 
         let disburse_result = disburse_neuron_maturity(
