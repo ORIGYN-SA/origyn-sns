@@ -93,9 +93,10 @@ async fn run_async(exchange_job_id: u128) {
 
     if let Some((future, token_swap_id)) = create_token_swap_if_possible(exchange_job.clone()).await
     {
-        if future.await.is_ok() {
-            let _ = mutate_state(|state| state.data.token_swaps.archive_swap(token_swap_id));
+        let swap_result = future.await;
+        let _ = mutate_state(|state| state.data.token_swaps.archive_swap(token_swap_id));
 
+        if swap_result.is_ok() {
             if let Err(e) = transfer_to_destination(&exchange_job).await {
                 error!("Failed to transfer to destination: {}", e);
             }
