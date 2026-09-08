@@ -86,12 +86,43 @@ impl TokenSwaps {
         self.swaps.clone()
     }
 
+    pub fn archive_all_active_swaps(&mut self) {
+        let swap_ids: Vec<u128> = self.swaps.keys().copied().collect();
+        for swap_id in swap_ids {
+            let _ = self.archive_swap(swap_id);
+        }
+    }
+
     pub fn get_metrics(&self) -> TokenSwapsMetrics {
         TokenSwapsMetrics {
             active_swaps: self.swaps.clone(),
             active_swaps_len: self.swaps.len() as u64,
             history_len: self.history.len(),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_archive_all_active_swaps() {
+        let mut token_swaps = TokenSwaps::default();
+        let swap1 = TokenSwap::new(1, 100, 1000);
+        let swap2 = TokenSwap::new(2, 100, 2000);
+        token_swaps.upsert(swap1);
+        token_swaps.upsert(swap2);
+
+        assert_eq!(token_swaps.swaps.len(), 2);
+        assert_eq!(token_swaps.history.len(), 0);
+
+        token_swaps.archive_all_active_swaps();
+
+        assert_eq!(token_swaps.swaps.len(), 0);
+        assert_eq!(token_swaps.history.len(), 2);
+        assert!(token_swaps.get_swap_info(1).unwrap().is_archived);
+        assert!(token_swaps.get_swap_info(2).unwrap().is_archived);
     }
 }
 
