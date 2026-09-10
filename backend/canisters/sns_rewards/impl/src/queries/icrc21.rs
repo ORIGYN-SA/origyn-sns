@@ -15,7 +15,7 @@ use utils::icrcs::icrc21::create_error_response;
 #[derive(PartialEq, Debug, EnumString, EnumIter, Display)]
 #[strum(serialize_all = "snake_case")]
 pub enum Icrc21Function {
-    ClaimRewards,
+    ClaimReward,
     ClaimRewardsBatch,
 }
 
@@ -31,13 +31,13 @@ pub fn icrc21_canister_call_consent_message(args: Icrc21Args) -> Icrc21Response 
     }
 
     match args.method.parse::<Icrc21Function>() {
-        Ok(Icrc21Function::ClaimRewards) => handle_claim_rewards_consent(args),
+        Ok(Icrc21Function::ClaimReward) => handle_claim_reward_consent(args),
         Ok(Icrc21Function::ClaimRewardsBatch) => handle_claim_rewards_batch_consent(args),
         Err(err) => create_error_response(format!("Unsupported method: {}", err)),
     }
 }
 
-fn handle_claim_rewards_consent(args: Icrc21Args) -> Icrc21Response {
+fn handle_claim_reward_consent(args: Icrc21Args) -> Icrc21Response {
     match Decode!(&args.arg, sns_rewards_api_canister::claim_reward::Args) {
         Ok(claim_args) => {
             let fields = vec![
@@ -59,7 +59,7 @@ fn handle_claim_rewards_consent(args: Icrc21Args) -> Icrc21Response {
                 args.user_preferences.metadata,
             )
         }
-        Err(_) => create_error_response("Failed to decode ClaimRewards arguments.".to_string()),
+        Err(_) => create_error_response("Failed to decode ClaimReward arguments.".to_string()),
     }
 }
 
@@ -101,5 +101,59 @@ fn handle_claim_rewards_batch_consent(args: Icrc21Args) -> Icrc21Response {
         Err(_) => {
             create_error_response("Failed to decode ClaimRewardsBatch arguments.".to_string())
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use candid::Encode;
+    use icrc_ledger_types::icrc21::requests::{ConsentMessageMetadata, ConsentMessageSpec};
+    use sns_governance_canister::types::NeuronId;
+    use strum::IntoEnumIterator;
+
+    fn consent_request(method: &str, arg: Vec<u8>) -> Icrc21Args {
+        Icrc21Args {
+            method: method.to_string(),
+            arg,
+            user_preferences: ConsentMessageSpec {
+                metadata: ConsentMessageMetadata {
+                    language: "en".to_string(),
+                    utc_offset_minutes: None,
+                },
+                device_spec: None,
+            },
+        }
+    }
+
+    #[test]
+    fn every_icrc21_function_is_a_canister_method() {
+        let candid = include_str!("../../../api/can.did");
+        for function in Icrc21Function::iter() {
+            let signature = format!("{} :", function);
+            assert!(
+                candid
+                    .lines()
+                    .any(|line| line.trim_start().starts_with(&signature)),
+                "`{}` is not a method in can.did",
+                function
+            );
+        }
+    }
+
+    #[test]
+    fn claim_reward_consent_message() {
+        let neuron_id =
+            NeuronId::new("2a9ab729b173e14cc88c6c4d7f7e9f3e7468e72fc2b49f76a6d4f5af37397f98")
+                .unwrap();
+        let arg = Encode!(&sns_rewards_api_canister::claim_reward::Args {
+            neuron_id,
+            token: "OGY".to_string(),
+        })
+        .unwrap();
+
+        let response = icrc21_canister_call_consent_message(consent_request("claim_reward", arg));
+
+        assert!(response.is_ok(), "{:?}", response);
     }
 }
