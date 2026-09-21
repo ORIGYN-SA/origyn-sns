@@ -293,8 +293,24 @@
         "tooltip": "Átlagos szavazati erő az összes résztvevő között."
       }
     },
+    "boosterHistory": {
+      "link": "A bónuszról",
+      "title": "Bónuszkifizetések 5 éves zárolásra",
+      "description": "A Gold DAO jutalmakat OGY-re váltják, és hetente kifizetik az 5 évre zárolt neuronoknak.",
+      "rate": "Bónuszráta",
+      "chartLabel": "Kifizetett OGY",
+      "paid": "Kifizetve",
+      "paidTooltip": "Az 5 évre zárolt neuronoknak az első bónuszkör óta kifizetett összes OGY.",
+      "method": "A ráta az utolsó 12 heti kifizetés átlagából számított évesített érték, az 5 évre zárolt OGY mennyiségéhez viszonyítva. A múltbeli kifizetések nem garantálják a jövőbeli hozamokat."
+    },
     "estimateRewards": {
       "title": "Becsüld meg a jutalmaidat",
+      "booster": "bónusz",
+      "base": "alap",
+      "perYear": "évente",
+      "boosterPaid": "kifizetett bónusz",
+      "since": "kezdete:",
+      "boosterUnavailable": "A bónuszráta nem érhető el.",
       "lockDuration": "Zárolás időtartama",
       "participants": "résztvevő",
       "lockedForAtLeast": "jelenleg legalább erre zárolva",

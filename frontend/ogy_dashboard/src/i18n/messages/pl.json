@@ -293,8 +293,24 @@
         "tooltip": "Średnia siła głosu wszystkich uczestników."
       }
     },
+    "boosterHistory": {
+      "link": "O premii",
+      "title": "Wypłaty premii za blokadę na 5 lat",
+      "description": "Nagrody z Gold DAO są wymieniane na OGY i wypłacane co tydzień neuronom zablokowanym na 5 lat.",
+      "rate": "Stopa premii",
+      "chartLabel": "Wypłacone OGY",
+      "paid": "Wypłacono",
+      "paidTooltip": "Łączna liczba OGY wypłaconych neuronom zablokowanym na 5 lat od pierwszej rundy premii.",
+      "method": "Stopa jest średnią z ostatnich 12 tygodniowych wypłat, przeliczoną na wartość roczną w stosunku do OGY zablokowanych na 5 lat. Wcześniejsze wypłaty nie gwarantują przyszłych zwrotów."
+    },
     "estimateRewards": {
       "title": "Oszacuj swoje nagrody",
+      "booster": "premia",
+      "base": "podstawa",
+      "perYear": "rocznie",
+      "boosterPaid": "wypłacona premia",
+      "since": "od",
+      "boosterUnavailable": "Stopa premii jest niedostępna.",
       "lockDuration": "Czas blokady",
       "participants": "uczestnicy",
       "lockedForAtLeast": "obecnie zablokowane na co najmniej",

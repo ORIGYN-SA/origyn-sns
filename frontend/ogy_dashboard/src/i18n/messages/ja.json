@@ -293,8 +293,24 @@
         "tooltip": "全参加者にわたる平均投票力。"
       }
     },
+    "boosterHistory": {
+      "link": "ボーナスについて",
+      "title": "5年間ロックのボーナス支払履歴",
+      "description": "Gold DAOの報酬はOGYに交換され、5年間ロックされたニューロンに毎週支払われます。",
+      "rate": "ボーナス率",
+      "chartLabel": "支払済みOGY",
+      "paid": "支払済み",
+      "paidTooltip": "最初のボーナスラウンド以降、5年間ロックされたニューロンに支払われたOGYの合計。",
+      "method": "直近12回の週次支払額の平均を年換算し、5年間ロックされたOGYに対する比率として算出しています。過去の支払いは将来のリターンを保証するものではありません。"
+    },
     "estimateRewards": {
       "title": "報酬を見積もる",
+      "booster": "ボーナス",
+      "base": "基本",
+      "perYear": "年間",
+      "boosterPaid": "支払済みボーナス",
+      "since": "開始時期：",
+      "boosterUnavailable": "ボーナス率を取得できません。",
       "lockDuration": "ロック期間",
       "participants": "参加者",
       "lockedForAtLeast": "現在少なくとも次の期間ロック中",

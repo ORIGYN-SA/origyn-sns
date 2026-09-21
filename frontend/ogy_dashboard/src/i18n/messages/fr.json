@@ -293,8 +293,24 @@
         "tooltip": "Pouvoir de vote moyen de l'ensemble des participants."
       }
     },
+    "boosterHistory": {
+      "link": "À propos du bonus",
+      "title": "Versements du bonus de blocage sur 5 ans",
+      "description": "Les récompenses de Gold DAO sont converties en OGY et versées chaque semaine aux neurones bloqués pour 5 ans.",
+      "rate": "Taux du bonus",
+      "chartLabel": "OGY versés",
+      "paid": "Total versé",
+      "paidTooltip": "Total des OGY versés aux neurones bloqués pour 5 ans depuis le premier cycle de bonus.",
+      "method": "Le taux correspond à la moyenne des 12 derniers versements hebdomadaires, annualisée par rapport aux OGY bloqués pour 5 ans. Les versements passés ne garantissent pas les rendements futurs."
+    },
     "estimateRewards": {
       "title": "Estimez vos récompenses",
+      "booster": "bonus",
+      "base": "base",
+      "perYear": "par an",
+      "boosterPaid": "bonus versé",
+      "since": "depuis",
+      "boosterUnavailable": "Taux du bonus indisponible.",
       "lockDuration": "Durée de verrouillage",
       "participants": "participants",
       "lockedForAtLeast": "actuellement verrouillé pour au moins",

@@ -293,8 +293,24 @@
         "tooltip": "Quyền biểu quyết trung bình trên tất cả người tham gia."
       }
     },
+    "boosterHistory": {
+      "link": "Về thưởng bổ sung",
+      "title": "Các khoản thưởng bổ sung khi khóa 5 năm",
+      "description": "Phần thưởng từ Gold DAO được đổi sang OGY và trả hằng tuần cho các neuron bị khóa trong 5 năm.",
+      "rate": "Tỷ lệ thưởng bổ sung",
+      "chartLabel": "OGY đã trả",
+      "paid": "Đã trả",
+      "paidTooltip": "Tổng OGY đã trả cho các neuron bị khóa trong 5 năm kể từ đợt thưởng bổ sung đầu tiên.",
+      "method": "Tỷ lệ là giá trị trung bình của 12 khoản chi trả hằng tuần gần nhất, được quy đổi theo năm so với lượng OGY bị khóa trong 5 năm. Các khoản chi trả trước đây không đảm bảo lợi nhuận trong tương lai."
+    },
     "estimateRewards": {
       "title": "Ước tính phần thưởng của bạn",
+      "booster": "thưởng bổ sung",
+      "base": "cơ bản",
+      "perYear": "mỗi năm",
+      "boosterPaid": "thưởng bổ sung đã trả",
+      "since": "kể từ",
+      "boosterUnavailable": "Không có dữ liệu tỷ lệ thưởng bổ sung.",
       "lockDuration": "Thời gian khóa",
       "participants": "người tham gia",
       "lockedForAtLeast": "hiện đang khóa ít nhất",

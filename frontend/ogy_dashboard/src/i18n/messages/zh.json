@@ -293,8 +293,24 @@
         "tooltip": "所有参与者的平均投票权重。"
       }
     },
+    "boosterHistory": {
+      "link": "关于加成奖励",
+      "title": "5 年锁定加成奖励发放记录",
+      "description": "Gold DAO 奖励会兑换为 OGY，并每周发放给锁定 5 年的神经元。",
+      "rate": "加成奖励率",
+      "chartLabel": "已发放 OGY",
+      "paid": "已发放",
+      "paidTooltip": "自首轮加成奖励以来，发放给锁定 5 年的神经元的 OGY 总额。",
+      "method": "此比率以最近 12 次每周发放金额的平均值换算为年化金额，再除以锁定 5 年的 OGY 总量计算。过往发放记录不保证未来回报。"
+    },
     "estimateRewards": {
       "title": "估算您的奖励",
+      "booster": "加成",
+      "base": "基础",
+      "perYear": "每年",
+      "boosterPaid": "已发放加成奖励",
+      "since": "起始时间：",
+      "boosterUnavailable": "暂无加成奖励率。",
       "lockDuration": "锁定期",
       "participants": "参与者",
       "lockedForAtLeast": "当前至少锁定",

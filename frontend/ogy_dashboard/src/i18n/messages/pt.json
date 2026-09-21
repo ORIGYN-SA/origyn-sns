@@ -293,8 +293,24 @@
         "tooltip": "Poder de voto médio entre todos os participantes."
       }
     },
+    "boosterHistory": {
+      "link": "Sobre o bónus",
+      "title": "Pagamentos de bónus por bloqueio de 5 anos",
+      "description": "As recompensas do Gold DAO são convertidas em OGY e pagas semanalmente aos neurónios bloqueados por 5 anos.",
+      "rate": "Taxa de bónus",
+      "chartLabel": "OGY pagos",
+      "paid": "Total pago",
+      "paidTooltip": "Total de OGY pagos aos neurónios bloqueados por 5 anos desde a primeira ronda de bónus.",
+      "method": "A taxa é a média dos últimos 12 pagamentos semanais, anualizada em relação aos OGY bloqueados por 5 anos. Os pagamentos passados não garantem rendimentos futuros."
+    },
     "estimateRewards": {
       "title": "Estime as suas recompensas",
+      "booster": "bónus",
+      "base": "base",
+      "perYear": "por ano",
+      "boosterPaid": "bónus pago",
+      "since": "desde",
+      "boosterUnavailable": "Taxa de bónus indisponível.",
       "lockDuration": "Duração do bloqueio",
       "participants": "participantes",
       "lockedForAtLeast": "atualmente bloqueado por pelo menos",

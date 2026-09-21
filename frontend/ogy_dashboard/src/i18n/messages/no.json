@@ -293,8 +293,24 @@
         "tooltip": "Gjennomsnittlig stemmevekt på tvers av alle deltakere."
       }
     },
+    "boosterHistory": {
+      "link": "Om bonusen",
+      "title": "Bonusutbetalinger ved 5 års låsing",
+      "description": "Belønninger fra Gold DAO veksles til OGY og utbetales ukentlig til nevroner som er låst i 5 år.",
+      "rate": "Bonussats",
+      "chartLabel": "Utbetalt OGY",
+      "paid": "Utbetalt",
+      "paidTooltip": "Samlet OGY utbetalt til nevroner låst i 5 år siden første bonusrunde.",
+      "method": "Satsen er gjennomsnittet av de siste 12 ukentlige utbetalingene, omregnet til årsbasis i forhold til OGY låst i 5 år. Tidligere utbetalinger garanterer ikke fremtidig avkastning."
+    },
     "estimateRewards": {
       "title": "Beregn dine belønninger",
+      "booster": "bonus",
+      "base": "grunnsats",
+      "perYear": "per år",
+      "boosterPaid": "utbetalt bonus",
+      "since": "siden",
+      "boosterUnavailable": "Bonussatsen er ikke tilgjengelig.",
       "lockDuration": "Låsevarighet",
       "participants": "deltakere",
       "lockedForAtLeast": "for øyeblikket låst i minst",

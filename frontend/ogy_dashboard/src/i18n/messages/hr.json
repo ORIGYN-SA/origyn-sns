@@ -293,8 +293,24 @@
         "tooltip": "Prosječna glasačka moć svih sudionika."
       }
     },
+    "boosterHistory": {
+      "link": "O bonusu",
+      "title": "Isplate bonusa za zaključavanje na 5 godina",
+      "description": "Nagrade Gold DAO zamjenjuju se za OGY i isplaćuju tjedno neuronima zaključanima na 5 godina.",
+      "rate": "Stopa bonusa",
+      "chartLabel": "Isplaćeni OGY",
+      "paid": "Isplaćeno",
+      "paidTooltip": "Ukupni OGY isplaćeni neuronima zaključanima na 5 godina od prvog kruga bonusa.",
+      "method": "Stopa je prosjek posljednjih 12 tjednih isplata, preračunat na godišnju razinu u odnosu na OGY zaključane na 5 godina. Prošle isplate ne jamče buduće prinose."
+    },
     "estimateRewards": {
       "title": "Procijenite svoje nagrade",
+      "booster": "bonus",
+      "base": "osnovica",
+      "perYear": "godišnje",
+      "boosterPaid": "isplaćeni bonus",
+      "since": "od",
+      "boosterUnavailable": "Stopa bonusa nije dostupna.",
       "lockDuration": "Trajanje zaključavanja",
       "participants": "sudionika",
       "lockedForAtLeast": "trenutno zaključano na najmanje",

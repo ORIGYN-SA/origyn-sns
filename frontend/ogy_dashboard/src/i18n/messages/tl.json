@@ -293,8 +293,24 @@
         "tooltip": "Karaniwang voting power sa lahat ng kalahok."
       }
     },
+    "boosterHistory": {
+      "link": "Tungkol sa bonus",
+      "title": "Mga bayad na bonus para sa 5 taong lock",
+      "description": "Ang mga reward mula sa Gold DAO ay ipinapalit sa OGY at ibinabayad linggu-linggo sa mga neuron na naka-lock nang 5 taon.",
+      "rate": "Rate ng bonus",
+      "chartLabel": "OGY na naibayad",
+      "paid": "Naibayad",
+      "paidTooltip": "Kabuuang OGY na naibayad sa mga neuron na naka-lock nang 5 taon mula sa unang round ng bonus.",
+      "method": "Ang rate ay ang average ng huling 12 lingguhang bayad, na kinuwenta sa taunang batayan kaugnay ng OGY na naka-lock nang 5 taon. Hindi ginagarantiyahan ng mga nakaraang bayad ang mga kita sa hinaharap."
+    },
     "estimateRewards": {
       "title": "Tantyahin ang iyong mga reward",
+      "booster": "bonus",
+      "base": "base",
+      "perYear": "bawat taon",
+      "boosterPaid": "bonus na naibayad",
+      "since": "mula noong",
+      "boosterUnavailable": "Hindi available ang rate ng bonus.",
       "lockDuration": "Tagal ng lock",
       "participants": "mga kalahok",
       "lockedForAtLeast": "kasalukuyang naka-lock nang hindi bababa sa",
