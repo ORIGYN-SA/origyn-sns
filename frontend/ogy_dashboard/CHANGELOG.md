@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [Unreleased]
+
+#### Added
+
+- Add localized page titles, descriptions, canonical URLs, Open Graph and X metadata that update during navigation and language changes.
+- Generate crawler-readable HTML for fixed routes in all 36 languages, plus a sitemap and robots.txt.
+- Add dashboard social images to the shared `og.bity.com` worker using the website's renderer, fonts and language fallbacks.
+- Add a local SEO review page with language and page filters, image previews and metadata details.
+
 ### [1.0.48] - 2026-08-24
 
 #### Added

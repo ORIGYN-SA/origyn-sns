@@ -875,5 +875,12 @@
       "uploadSize": "Laki ng upload"
     },
     "bytesUnit": "bytes"
+  },
+  "seo": {
+    "dashboard": "Tuklasin ang supply ng OGY, staking, pamamahala at mga transaksyon sa ORIGYN dashboard.",
+    "transactions": "Tingnan ang mga paglilipat ng OGY, pagsunog ng token at aktibidad ng account sa ORIGYN ledger.",
+    "support": "Makipag-ugnayan sa ORIGYN support para sa tulong sa iyong wallet, mga token o dashboard.",
+    "transfersTitle": "Pinakamalalaking paglilipat ng OGY",
+    "burnsTitle": "Pinakamalalaking pagsunog ng OGY"
   }
 }
