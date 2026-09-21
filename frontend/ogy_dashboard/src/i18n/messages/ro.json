@@ -875,5 +875,12 @@
       "uploadSize": "Dimensiune încărcare"
     },
     "bytesUnit": "octeți"
+  },
+  "seo": {
+    "dashboard": "Explorează oferta OGY, stakingul, guvernanța și tranzacțiile în panoul ORIGYN.",
+    "transactions": "Consultă transferurile OGY, arderile de tokenuri și activitatea conturilor în registrul ORIGYN.",
+    "support": "Contactează asistența ORIGYN pentru ajutor cu portofelul, tokenurile sau panoul de control.",
+    "transfersTitle": "Cele mai mari transferuri OGY",
+    "burnsTitle": "Cele mai mari arderi OGY"
   }
 }

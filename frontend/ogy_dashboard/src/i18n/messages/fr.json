@@ -875,5 +875,12 @@
       "uploadSize": "Taille du téléversement"
     },
     "bytesUnit": "octets"
+  },
+  "seo": {
+    "dashboard": "Consultez l’offre d’OGY, le staking, la gouvernance et les transactions sur le tableau de bord ORIGYN.",
+    "transactions": "Parcourez les transferts d’OGY, les destructions de tokens et l’activité des comptes dans le registre ORIGYN.",
+    "support": "Contactez le support ORIGYN pour obtenir de l’aide avec votre portefeuille, vos tokens ou le tableau de bord.",
+    "transfersTitle": "Plus grands transferts d’OGY",
+    "burnsTitle": "Plus grandes destructions d’OGY"
   }
 }

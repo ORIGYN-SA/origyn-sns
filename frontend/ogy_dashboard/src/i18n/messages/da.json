@@ -875,5 +875,12 @@
       "uploadSize": "Uploadstørrelse"
     },
     "bytesUnit": "bytes"
+  },
+  "seo": {
+    "dashboard": "Udforsk OGY-udbud, staking, styring og transaktioner på ORIGYN-dashboardet.",
+    "transactions": "Se OGY-overførsler, tokenafbrændinger og kontoaktivitet i ORIGYNs hovedbog.",
+    "support": "Kontakt ORIGYN-support for hjælp med din wallet, dine tokens eller dashboardet.",
+    "transfersTitle": "Største OGY-overførsler",
+    "burnsTitle": "Største OGY-afbrændinger"
   }
 }

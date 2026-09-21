@@ -875,5 +875,12 @@
       "uploadSize": "Dimensione caricamento"
     },
     "bytesUnit": "byte"
+  },
+  "seo": {
+    "dashboard": "Esplora l’offerta di OGY, lo staking, la governance e le transazioni nella dashboard ORIGYN.",
+    "transactions": "Consulta i trasferimenti di OGY, i token bruciati e le attività degli account sul registro ORIGYN.",
+    "support": "Contatta il supporto ORIGYN per assistenza con il tuo wallet, i token o la dashboard.",
+    "transfersTitle": "Maggiori trasferimenti di OGY",
+    "burnsTitle": "Maggiori burn di OGY"
   }
 }

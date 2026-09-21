@@ -875,5 +875,12 @@
       "uploadSize": "Upload size"
     },
     "bytesUnit": "bytes"
+  },
+  "seo": {
+    "dashboard": "Explore OGY supply, staking, governance and transactions on the ORIGYN dashboard.",
+    "transactions": "Browse OGY transfers, token burns and account activity on the ORIGYN ledger.",
+    "support": "Contact ORIGYN support for help with your wallet, tokens or dashboard.",
+    "transfersTitle": "Top OGY transfers",
+    "burnsTitle": "Top OGY burns"
   }
 }

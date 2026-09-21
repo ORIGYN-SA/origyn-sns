@@ -10,22 +10,27 @@ import { cardLocale } from "../../src/seo/card.ts";
 import { copy } from "../../src/seo/copy.ts";
 import { pages } from "../../src/seo/pages.ts";
 
+import { pages as dashboardPages } from "../../../ogy_dashboard/src/seo/pages.ts";
+import { copy as dashboardCopy } from "../../../ogy_dashboard/src/seo/copy.ts";
+
 const out = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src", "copy.json");
+
+const sources = [{ pages, copy }, { pages: dashboardPages, copy: dashboardCopy }];
 
 const table = Object.fromEntries(
   [...new Set(locales.map(cardLocale))].map((locale) => [
     locale,
     Object.fromEntries(
-      pages.map((page) => [
+      sources.flatMap(({ pages, copy }) => pages.map((page) => [
         page.id,
         { title: copy(locale, page.keys.cardTitle), lead: copy(locale, page.keys.cardLead) },
-      ])
+      ]))
     ),
   ])
 );
 
 fs.writeFileSync(out, `${JSON.stringify(table)}\n`);
 console.log(
-  `${path.relative(process.cwd(), out)}: ${Object.keys(table).length} locales × ${pages.length} pages, ` +
+  `${path.relative(process.cwd(), out)}: ${Object.keys(table).length} locales × ${pages.length + dashboardPages.length} pages, ` +
     `${(fs.statSync(out).size / 1024).toFixed(0)}KB`
 );
