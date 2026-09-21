@@ -20,13 +20,7 @@ export type FontFace = {
   metrics: Font;
 };
 
-// satori shapes one glyph at a time: no bidi, no Arabic joining, no Indic
-// reordering. These come out reversed or mis-stacked, so they get the English
-// card instead.
-const UNSHAPED_SCRIPTS = new Set(["ar", "bn", "he", "hi", "ur"]);
-
-export const cardLocale = (locale: string): string =>
-  UNSHAPED_SCRIPTS.has(locale) ? "en" : locale;
+export { cardLocale } from "./card-locale.ts";
 
 // Order matters: satori takes the first font that has the glyph, so listing
 // General Sans first keeps ORIGYN and DPP in the brand face inside non-Latin
@@ -312,7 +306,7 @@ export const buildCard = ({ page, locale, title, lead, fonts, art, logo }: CardI
         h(
           "div",
           { fontSize: 19, letterSpacing: "0.02em", color: "rgba(255, 255, 255, 0.58)" },
-          "origyn.com"
+          page.siteLabel ?? "origyn.com"
         )
       )
     )

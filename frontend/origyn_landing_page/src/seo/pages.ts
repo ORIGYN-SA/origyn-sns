@@ -30,6 +30,7 @@ export type PageSeo = {
     cardLead: string;
   };
   card: PageCard;
+  siteLabel?: string;
 };
 
 // Keys pointing outside `seo` reuse copy the page already shows, which is

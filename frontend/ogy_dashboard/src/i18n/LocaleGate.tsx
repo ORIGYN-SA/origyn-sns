@@ -1,4 +1,5 @@
 import { Navigate, Outlet, useLocation, useParams } from "react-router-dom";
+import Seo from "../seo/Seo";
 import { isLocale } from "./config";
 import { LocaleProvider } from "./LocaleContext";
 import { useHtmlLang } from "./useHtmlLang";
@@ -60,6 +61,7 @@ const LocaleGate = () => {
   return (
     <LocaleProvider locale={locale}>
       <HtmlLangBinding locale={locale} />
+      <Seo />
       <Outlet />
     </LocaleProvider>
   );

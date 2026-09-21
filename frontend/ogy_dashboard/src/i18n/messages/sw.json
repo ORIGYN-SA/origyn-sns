@@ -875,5 +875,12 @@
       "uploadSize": "Ukubwa wa upakiaji"
     },
     "bytesUnit": "baiti"
+  },
+  "seo": {
+    "dashboard": "Chunguza ugavi wa OGY, staking, utawala na miamala kwenye dashibodi ya ORIGYN.",
+    "transactions": "Angalia uhamisho wa OGY, uchomaji wa tokeni na shughuli za akaunti kwenye leja ya ORIGYN.",
+    "support": "Wasiliana na usaidizi wa ORIGYN kwa msaada kuhusu pochi, tokeni au dashibodi yako.",
+    "transfersTitle": "Uhamisho mkubwa zaidi wa OGY",
+    "burnsTitle": "Uchomaji mkubwa zaidi wa OGY"
   }
 }

@@ -875,5 +875,12 @@
       "uploadSize": "Dung lượng tải lên"
     },
     "bytesUnit": "byte"
+  },
+  "seo": {
+    "dashboard": "Khám phá nguồn cung OGY, staking, quản trị và giao dịch trên bảng điều khiển ORIGYN.",
+    "transactions": "Xem các giao dịch chuyển OGY, đốt token và hoạt động tài khoản trên sổ cái ORIGYN.",
+    "support": "Liên hệ bộ phận hỗ trợ ORIGYN để được trợ giúp về ví, token hoặc bảng điều khiển.",
+    "transfersTitle": "Các giao dịch chuyển OGY lớn nhất",
+    "burnsTitle": "Các giao dịch đốt OGY lớn nhất"
   }
 }

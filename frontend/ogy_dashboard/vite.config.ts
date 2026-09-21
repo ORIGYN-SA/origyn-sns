@@ -1,3 +1,4 @@
+import { seoPlugin } from "./scripts/seo-plugin";
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -5,7 +6,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), nodePolyfills(), tsconfigPaths()],
+  plugins: [react(), nodePolyfills(), tsconfigPaths(), seoPlugin()],
   define: {
     // global: 'globalThis',
     process: {}

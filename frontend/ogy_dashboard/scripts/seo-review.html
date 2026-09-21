@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>ORIGYN Dashboard · SEO review</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#152844;background:#f2f5f9}*{box-sizing:border-box}body{margin:0}header{background:#061937;color:white;padding:36px max(24px,calc((100vw - 1320px)/2))}h1{font-size:30px;font-weight:500;margin:8px 0 12px}header p{color:#c4d7e8;line-height:1.6;max-width:850px}.brand{color:#73d4f3;font-size:12px;letter-spacing:3px}nav{position:sticky;top:0;background:#fff;z-index:1;border-bottom:1px solid #d9e1eb;padding:16px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}label{font-size:13px;font-weight:600}select,input{font:inherit;margin-left:8px;border:1px solid #a8b6c8;border-radius:6px;padding:9px;background:white;max-width:100%}main{max-width:1368px;padding:28px 24px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}article{background:white;border:1px solid #dce3ec;border-radius:12px;overflow:hidden}img{width:100%;height:auto;display:block;aspect-ratio:1200/630;background:#061937}.body{padding:24px}h2{font-size:20px;margin:0 0 10px}.route{color:#54667d;font:12px ui-monospace,monospace;overflow-wrap:anywhere}.badge{font-size:11px;border-radius:4px;background:#e8eef5;padding:5px 8px;display:inline-block;margin:0 5px 6px 0}.warning{background:#fff0cf;color:#694c13}dt{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#66788d;margin:18px 0 6px}dd{margin:0;line-height:1.6;overflow-wrap:anywhere}.search-title{color:#2446a6;font-size:19px}a{color:#205794}summary{cursor:pointer;margin-top:20px;font-size:13px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;background:#f3f6fa;padding:14px}#count{margin-left:auto;font-size:13px;color:#607089}@media(max-width:780px){main{grid-template-columns:1fr}header{padding:28px 24px}nav{gap:12px}select{max-width:230px}}
+</style>
+</head>
+<body>
+<header><div class="brand">ORIGYN / DASHBOARD</div><h1>Search & social previews</h1><p>Review every page in all 36 languages. These images use the website's renderer and the dashboard's translated copy. New image URLs need the shared OG worker release before they work online.</p></header>
+<nav aria-label="Review filters"><label>Language <select id="language"></select></label><label>Page <select id="page"><option value="">All pages</option></select></label><span id="count" role="status"></span></nav>
+<main id="cards"></main>
+<template id="card"><article><img loading="lazy" width="1200" height="630"><div class="body"><div class="badges"></div><h2></h2><div class="route"></div><dl><dt>Page title / search preview</dt><dd class="search-title"></dd><dt>Description</dt><dd class="description"></dd><dt>Canonical URL</dt><dd class="canonical"></dd><dt>Production OG image</dt><dd class="image-url"></dd></dl><details><summary>Inspect metadata</summary><pre></pre></details></div></article></template>
+<script>
+/* REVIEW_DATA */
+const language = document.querySelector('#language');
+const page = document.querySelector('#page');
+for (const item of languages) language.add(new Option(item.name + ' · ' + item.locale, item.locale));
+for (const item of data.filter(item => item.locale === 'en')) page.add(new Option(item.title.split(' | ')[0] + ' /' + item.path, item.id));
+const params = new URLSearchParams(location.search);
+if (languages.some(item => item.locale === params.get('lang'))) language.value = params.get('lang');
+if ([...page.options].some(item => item.value === params.get('page'))) page.value = params.get('page');
+function render() {
+  const selected = data.filter(item => item.locale === language.value && (!page.value || page.value === item.id));
+  document.querySelector('#cards').replaceChildren(...selected.map(item => {
+    const card = document.querySelector('#card').content.cloneNode(true);
+    const body = card.querySelector('.body'); body.lang = item.locale;
+    const img = card.querySelector('img'); img.src = item.imagePath; img.alt = item.tags['og:image:alt'];
+    card.querySelector('h2').textContent = item.title.split(' | ')[0]; card.querySelector('h2').dir = item.dir;
+    card.querySelector('.route').textContent = '/' + item.locale + '/' + item.path;
+    for (const [selector,value] of [['.search-title',item.title],['.description',item.description],['.canonical',item.canonical],['.image-url',item.image]]) {
+      const element = card.querySelector(selector); element.textContent = value;
+      if (selector === '.description' || selector === '.search-title') element.dir = item.dir;
+    }
+    const badges = [item.indexable ? 'Indexable' : 'No index', item.dynamic ? 'Dynamic route: browser metadata only' : 'Metadata in initial HTML'];
+    if (item.imageLocale !== item.locale) badges.push('English image fallback · localized metadata');
+    for (const text of badges) { const badge = document.createElement('span'); badge.className = 'badge' + (text.includes('fallback') || text.includes('Dynamic') ? ' warning' : ''); badge.textContent = text; card.querySelector('.badges').append(badge); }
+    card.querySelector('pre').textContent = JSON.stringify({tags:item.tags,alternates:item.alternates},null,2);
+    return card;
+  }));
+  document.querySelector('#count').textContent = selected.length + ' pages · ' + languages.length + ' languages';
+  const query = new URLSearchParams({lang:language.value}); if(page.value) query.set('page',page.value);
+  history.replaceState(null,'','?' + query);
+}
+language.addEventListener('change',render); page.addEventListener('change',render); render();
+</script>
+</body></html>

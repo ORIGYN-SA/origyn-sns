@@ -875,5 +875,12 @@
       "uploadSize": "上传大小"
     },
     "bytesUnit": "字节"
+  },
+  "seo": {
+    "dashboard": "在ORIGYN仪表板上探索OGY供应量、质押、治理和交易。",
+    "transactions": "在ORIGYN账本上查看OGY转账、代币销毁和账户活动。",
+    "support": "如需钱包、代币或仪表板方面的帮助，请联系ORIGYN支持团队。",
+    "transfersTitle": "最大额OGY转账",
+    "burnsTitle": "最大额OGY销毁"
   }
 }

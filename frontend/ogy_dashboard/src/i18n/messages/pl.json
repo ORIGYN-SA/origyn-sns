@@ -875,5 +875,12 @@
       "uploadSize": "Rozmiar przesyłanych plików"
     },
     "bytesUnit": "bajty"
+  },
+  "seo": {
+    "dashboard": "Poznaj podaż OGY, staking, zarządzanie i transakcje w panelu ORIGYN.",
+    "transactions": "Przeglądaj przelewy OGY, spalanie tokenów i aktywność kont w rejestrze ORIGYN.",
+    "support": "Skontaktuj się z pomocą ORIGYN, aby uzyskać wsparcie dotyczące portfela, tokenów lub panelu.",
+    "transfersTitle": "Największe przelewy OGY",
+    "burnsTitle": "Największe spalenia OGY"
   }
 }

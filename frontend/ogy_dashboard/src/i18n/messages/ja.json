@@ -875,5 +875,12 @@
       "uploadSize": "アップロードサイズ"
     },
     "bytesUnit": "バイト"
+  },
+  "seo": {
+    "dashboard": "ORIGYNダッシュボードでOGYの供給量、ステーキング、ガバナンス、取引を確認できます。",
+    "transactions": "ORIGYN台帳でOGYの送金、トークンのバーン、アカウントの活動を確認できます。",
+    "support": "ウォレット、トークン、ダッシュボードについてはORIGYNサポートにお問い合わせください。",
+    "transfersTitle": "OGYの高額送金",
+    "burnsTitle": "OGYの大規模バーン"
   }
 }

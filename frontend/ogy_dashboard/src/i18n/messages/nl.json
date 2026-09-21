@@ -875,5 +875,12 @@
       "uploadSize": "Uploadgrootte"
     },
     "bytesUnit": "bytes"
+  },
+  "seo": {
+    "dashboard": "Ontdek het OGY-aanbod, staking, governance en transacties op het ORIGYN-dashboard.",
+    "transactions": "Bekijk OGY-overboekingen, tokenverbrandingen en accountactiviteit in het ORIGYN-grootboek.",
+    "support": "Neem contact op met ORIGYN-support voor hulp met je wallet, tokens of dashboard.",
+    "transfersTitle": "Grootste OGY-overboekingen",
+    "burnsTitle": "Grootste OGY-verbrandingen"
   }
 }
