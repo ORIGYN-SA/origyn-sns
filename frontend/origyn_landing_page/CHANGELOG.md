@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.5.8] - 2026-09-21
+
+#### Fixed
+
+- Serve Open Graph images from `og.bity.com` to avoid social platforms blocking the `workers.dev` domain
+
 ### [1.5.7] - 2026-08-21
 
 #### Added
