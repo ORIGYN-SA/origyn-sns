@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.48] - 2026-09-21
+
+#### Added
+
+- Include the Gold DAO booster in reward estimates for neurons locked for five years.
+- Show the booster rate, total OGY paid out, and weekly payout history on the governance dashboard.
+
 ### [1.0.47] - 2026-08-17
 
 #### Added
