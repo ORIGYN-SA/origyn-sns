@@ -1,10 +1,13 @@
 import { PointerEvent, useRef, useState } from "react";
 import clsx from "clsx";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { Card } from "@components/ui";
 import { CardErrorOverlay } from "@components/dashboard";
 import useEstimatedRewards from "@hooks/governance/useEstimatedRewards";
 import { millify } from "@helpers/numbers";
-import { useT } from "@i18n/LocaleContext";
+import { useLocale } from "@i18n/LocaleContext";
+import useFiveYearBooster from "@hooks/governance/useFiveYearBooster";
+import { BOOSTER_HISTORY_ID } from "./BoosterHistory";
 
 const COMPACT_AMOUNT_THRESHOLD = 10_000;
 
@@ -87,7 +90,7 @@ const DiscreteSlider = ({
         }
       }}
       className={clsx(
-        "relative h-4 cursor-pointer select-none touch-none outline-none",
+        "relative h-4 cursor-pointer select-none touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-4",
         className
       )}
     >
@@ -151,22 +154,39 @@ const LockedStat = ({
   </div>
 );
 
-const placeholderData = [
-  { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
-  { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
-  { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
-  { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
-  { rate: "0.0 %", locked: "0", lockedSum: "0", count: 0, countSum: 0 },
-];
+const placeholderReward = {
+  ratePercent: 0,
+  locked: "0",
+  lockedSum: "0",
+  count: 0,
+  countSum: 0,
+};
 
 const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
-  const t = useT();
+  const { t, locale } = useLocale();
+  const booster = useFiveYearBooster();
   const { data, isSuccess, isLoading, isError } = useEstimatedRewards();
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(5);
 
   const hasError = !isLoading && isError;
-  const displayData = isSuccess && data ? data : placeholderData;
-  const current = displayData[activeIndex - 1];
+  const current =
+    (isSuccess ? data?.[activeIndex - 1] : null) ?? placeholderReward;
+  const fiveYears = activeIndex === 5;
+  const bonusRate = fiveYears ? booster.data?.rate : null;
+  const hasBonus = bonusRate != null && isSuccess;
+  const formatRate = (rate: number) =>
+    `${rate.toLocaleString(locale, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    })}%`;
+  const firstRound = booster.data?.firstRound;
+  const paidSince = firstRound
+    ? new Date(`${firstRound}T00:00:00Z`).toLocaleDateString(locale, {
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : null;
   const yearLabel =
     activeIndex === 1
       ? t("governance.estimateRewards.year")
@@ -181,9 +201,38 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         {t("governance.estimateRewards.title")}
       </h2>
 
-      <div className="text-[28px] sm:text-[40px] font-bold leading-none text-content">
-        {current?.rate?.replace(/\s+/g, "") || t("common.notAvailable")}
+      <div className="flex flex-wrap items-center gap-3" aria-live="polite">
+        <div
+          dir="ltr"
+          className="text-[28px] sm:text-[40px] font-bold leading-none text-content"
+        >
+          {hasBonus
+            ? `≈${formatRate(current.ratePercent + bonusRate)}`
+            : formatRate(current.ratePercent)}
+        </div>
+        {hasBonus && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 ps-3 pe-1 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+            +{formatRate(bonusRate)} {t("governance.estimateRewards.booster")}
+            <a
+              href={`#${BOOSTER_HISTORY_ID}`}
+              aria-label={t("governance.boosterHistory.link")}
+              className="inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-emerald-500/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              <QuestionMarkCircleIcon className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </span>
+        )}
       </div>
+      {hasBonus && (
+        <p className="text-[13px] leading-5 text-muted">
+          {formatRate(current.ratePercent)}{" "}
+          {t("governance.estimateRewards.base")}
+          {" + "}
+          {formatRate(bonusRate)} {t("governance.estimateRewards.booster")}
+          {", "}
+          {t("governance.estimateRewards.perYear")}
+        </p>
+      )}
 
       <DiscreteSlider
         min={1}
@@ -193,8 +242,8 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
         ariaLabel={t("governance.estimateRewards.lockDuration")}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {current?.lockedSum != null && (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-border pt-4">
+        {current.lockedSum != null && (
           <LockedStat
             amount={formatAmountCompact(current.lockedSum)}
             participants={current.countSum}
@@ -203,12 +252,40 @@ const EstimateRewards = ({ className, ...restProps }: EstimateRewardsProps) => {
           />
         )}
         <LockedStat
-          amount={formatAmountCompact(current?.locked || "0")}
-          participants={current?.count ?? 0}
+          amount={
+            fiveYears && booster.data
+              ? millify(Number(booster.data.locked / 100_000_000n), 2)
+              : formatAmountCompact(current.locked)
+          }
+          participants={current.count}
           participantsLabel={t("governance.estimateRewards.participants")}
           caption={`${t("governance.estimateRewards.lockedFor")} ${activeIndex} ${yearLabel}`}
         />
+        {fiveYears && (
+          <div className="min-w-0">
+            <div
+              dir="ltr"
+              className="text-[22px] font-semibold leading-none text-content"
+            >
+              {booster.data
+                ? millify(Number(booster.data.paid / 100_000_000n), 1)
+                : t("common.notAvailable")}
+              <span className="ml-1 text-base text-muted">OGY</span>
+            </div>
+            <p className="mt-2 text-[13px] leading-5 text-muted">
+              {t("governance.estimateRewards.boosterPaid")}
+              {paidSince
+                ? ` ${t("governance.estimateRewards.since")} ${paidSince}`
+                : ""}
+            </p>
+          </div>
+        )}
       </div>
+      {fiveYears && booster.isError && (
+        <p className="text-xs leading-5 text-muted" role="status">
+          {t("governance.estimateRewards.boosterUnavailable")}
+        </p>
+      )}
 
       {isLoading && (
         <>

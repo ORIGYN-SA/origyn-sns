@@ -18,11 +18,21 @@ type StatItem = {
 
 type PeriodOption = { value: string; label: string };
 
-type ChartStatsCardProps = {
+type PeriodControls =
+  | {
+      periodOptions: PeriodOption[];
+      period: string;
+      onPeriodChange: (value: string) => void;
+    }
+  | {
+      periodOptions?: never;
+      period?: never;
+      onPeriodChange?: never;
+    };
+
+type ChartStatsCardProps = PeriodControls & {
   title: string;
-  periodOptions: PeriodOption[];
-  period: string;
-  onPeriodChange: (value: string) => void;
+  description?: string;
   stats: StatItem[];
   chart: {
     data: { name: string; value: number }[] | undefined;
@@ -37,6 +47,7 @@ type ChartStatsCardProps = {
 
 const ChartStatsCard = ({
   title,
+  description,
   periodOptions,
   period,
   onPeriodChange,
@@ -60,14 +71,23 @@ const ChartStatsCard = ({
           data-skel-static
           className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
         >
-          <h2 className="text-content text-[22px] font-semibold leading-tight me-2">
-            {title}
-          </h2>
-          <PeriodSelect
-            options={periodOptions}
-            value={period}
-            onChange={onPeriodChange}
-          />
+          <div className="me-2">
+            <h2 className="text-content text-[22px] font-semibold leading-tight">
+              {title}
+            </h2>
+            {description && (
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                {description}
+              </p>
+            )}
+          </div>
+          {periodOptions && (
+            <PeriodSelect
+              options={periodOptions}
+              value={period}
+              onChange={onPeriodChange}
+            />
+          )}
         </div>
 
         <div

@@ -16,6 +16,9 @@ import ProposalsList from "@pages/proposals/proposals-list/ProposalsList";
 import { PieChartProvider } from "@components/charts/pie/context";
 import { StakingOverviewChart } from "@components/dashboard";
 import ChartVotingParticipation from "./ChartVotingParticipation";
+import BoosterHistory, {
+  BOOSTER_HISTORY_ID,
+} from "./estimate-rewards/BoosterHistory";
 
 const HeroBackground = () => (
   <div
@@ -161,6 +164,9 @@ export const Governance = () => {
         </div>
         <div className="mb-16">
           <ChartVotingParticipation />
+        </div>
+        <div id={BOOSTER_HISTORY_ID} className="mb-16 scroll-mt-28">
+          <BoosterHistory />
         </div>
 
         <div id="governance-proposals" ref={scrollRef} className="mb-16">

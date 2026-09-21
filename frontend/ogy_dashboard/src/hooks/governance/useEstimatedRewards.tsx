@@ -11,7 +11,7 @@ import { LockedNeuronsPeriodResponse } from "@services/types/token_metrics";
 export interface IEstimatedReward {
   value: number;
   label: string;
-  rate: string;
+  ratePercent: number;
   locked: string;
   lockedSum: string | null;
   count: number;
@@ -64,14 +64,14 @@ const useEstimatedRewards = () => {
     );
 
     return STEPS.map((step, index) => {
-      const votingPower = staked[index] * step;
-      const votingPowerShare = votingPower / totalVotingPower;
-      const rewardShare = REWARD_RATE * votingPowerShare;
-      const rate = (rewardShare / staked[index]) * 100;
+      const rate =
+        totalVotingPower > 0
+          ? ((REWARD_RATE * step) / totalVotingPower) * 100
+          : 0;
       return {
         value: index + 1,
         label: "",
-        rate: `${rate.toFixed(1)} %`,
+        ratePercent: rate,
         locked: roundAndFormatLocale({ number: staked[index] }),
         lockedSum:
           index < STEPS_LENGTH - 1
