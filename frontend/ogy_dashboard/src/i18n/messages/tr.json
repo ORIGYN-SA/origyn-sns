@@ -293,8 +293,24 @@
         "tooltip": "Tüm katılımcılar arasındaki ortalama oy gücü."
       }
     },
+    "boosterHistory": {
+      "link": "Bonus hakkında",
+      "title": "5 yıllık kilitleme bonus ödemeleri",
+      "description": "Gold DAO ödülleri OGY'ye dönüştürülür ve 5 yıl boyunca kilitli nöronlara haftalık olarak ödenir.",
+      "rate": "Bonus oranı",
+      "chartLabel": "Ödenen OGY",
+      "paid": "Ödenen",
+      "paidTooltip": "İlk bonus turundan bu yana 5 yıl boyunca kilitli nöronlara ödenen toplam OGY.",
+      "method": "Oran, son 12 haftalık ödemenin ortalamasının yıllık bazda hesaplanıp 5 yıl boyunca kilitli OGY miktarına oranlanmasıyla elde edilir. Geçmiş ödemeler gelecekteki getirileri garanti etmez."
+    },
     "estimateRewards": {
       "title": "Ödüllerinizi tahmin edin",
+      "booster": "bonus",
+      "base": "temel",
+      "perYear": "yıllık",
+      "boosterPaid": "ödenen bonus",
+      "since": "başlangıç:",
+      "boosterUnavailable": "Bonus oranı mevcut değil.",
       "lockDuration": "Kilit süresi",
       "participants": "katılımcı",
       "lockedForAtLeast": "şu anda en az şu süre boyunca kilitli",

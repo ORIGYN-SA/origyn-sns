@@ -293,8 +293,24 @@
         "tooltip": "Keskimääräinen äänivalta kaikkien osallistujien kesken."
       }
     },
+    "boosterHistory": {
+      "link": "Tietoa lisäpalkkiosta",
+      "title": "5 vuoden lukituksen lisäpalkkiot",
+      "description": "Gold DAO -palkkiot vaihdetaan OGY:ksi ja maksetaan viikoittain neuroneille, jotka on lukittu 5 vuodeksi.",
+      "rate": "Lisäpalkkioprosentti",
+      "chartLabel": "Maksetut OGY",
+      "paid": "Maksettu",
+      "paidTooltip": "Viideksi vuodeksi lukituille neuroneille maksettu OGY yhteensä ensimmäisestä lisäpalkkiokierroksesta lähtien.",
+      "method": "Prosentti perustuu viimeisten 12 viikoittaisen maksun keskiarvoon, joka muunnetaan vuositasolle suhteessa 5 vuodeksi lukittuun OGY-määrään. Aiemmat maksut eivät takaa tulevia tuottoja."
+    },
     "estimateRewards": {
       "title": "Arvioi palkkiosi",
+      "booster": "lisäpalkkio",
+      "base": "peruskorko",
+      "perYear": "vuodessa",
+      "boosterPaid": "maksettu lisäpalkkio",
+      "since": "alkaen",
+      "boosterUnavailable": "Lisäpalkkioprosentti ei ole saatavilla.",
       "lockDuration": "Lukituksen kesto",
       "participants": "osallistujaa",
       "lockedForAtLeast": "lukittuna tällä hetkellä vähintään",

@@ -293,8 +293,24 @@
         "tooltip": "Average voting power across all participants."
       }
     },
+    "boosterHistory": {
+      "link": "About the booster",
+      "title": "5-year booster payouts",
+      "description": "Gold DAO rewards are swapped to OGY and paid weekly to neurons locked for 5 years.",
+      "rate": "Booster rate",
+      "chartLabel": "OGY paid out",
+      "paid": "Paid out",
+      "paidTooltip": "Total OGY paid to 5-year neurons since the first booster round.",
+      "method": "Rate is the average of the last 12 weekly payouts, annualized over OGY locked for 5 years. Past payouts do not guarantee future returns."
+    },
     "estimateRewards": {
       "title": "Estimate your rewards",
+      "booster": "booster",
+      "base": "base",
+      "perYear": "per year",
+      "boosterPaid": "booster paid out",
+      "since": "since",
+      "boosterUnavailable": "Booster rate unavailable.",
       "lockDuration": "Lock duration",
       "participants": "participants",
       "lockedForAtLeast": "currently locked for at least",

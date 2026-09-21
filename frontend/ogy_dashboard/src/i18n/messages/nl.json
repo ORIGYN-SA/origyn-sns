@@ -293,8 +293,24 @@
         "tooltip": "Gemiddelde stemkracht over alle deelnemers."
       }
     },
+    "boosterHistory": {
+      "link": "Over de bonus",
+      "title": "Bonusuitbetalingen bij 5 jaar vergrendeling",
+      "description": "Beloningen van Gold DAO worden omgewisseld naar OGY en wekelijks uitbetaald aan neuronen die voor 5 jaar zijn vergrendeld.",
+      "rate": "Bonuspercentage",
+      "chartLabel": "Uitbetaalde OGY",
+      "paid": "Uitbetaald",
+      "paidTooltip": "Totaal aan OGY uitbetaald aan neuronen die voor 5 jaar zijn vergrendeld, sinds de eerste bonusronde.",
+      "method": "Het percentage is het gemiddelde van de laatste 12 wekelijkse uitbetalingen, omgerekend naar jaarbasis ten opzichte van de OGY die voor 5 jaar zijn vergrendeld. Eerdere uitbetalingen bieden geen garantie voor toekomstige rendementen."
+    },
     "estimateRewards": {
       "title": "Schat je beloningen",
+      "booster": "bonus",
+      "base": "basis",
+      "perYear": "per jaar",
+      "boosterPaid": "uitbetaalde bonus",
+      "since": "sinds",
+      "boosterUnavailable": "Bonuspercentage niet beschikbaar.",
       "lockDuration": "Vergrendelingsduur",
       "participants": "deelnemers",
       "lockedForAtLeast": "momenteel vergrendeld voor minstens",

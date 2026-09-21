@@ -293,8 +293,24 @@
         "tooltip": "Puterea medie de vot a tuturor participanților."
       }
     },
+    "boosterHistory": {
+      "link": "Despre bonus",
+      "title": "Plăți de bonus pentru blocarea pe 5 ani",
+      "description": "Recompensele Gold DAO sunt convertite în OGY și plătite săptămânal neuronilor blocați pe 5 ani.",
+      "rate": "Rata bonusului",
+      "chartLabel": "OGY plătiți",
+      "paid": "Total plătit",
+      "paidTooltip": "Totalul OGY plătiți neuronilor blocați pe 5 ani de la prima rundă de bonus.",
+      "method": "Rata este media ultimelor 12 plăți săptămânale, anualizată în raport cu OGY blocați pe 5 ani. Plățile anterioare nu garantează randamente viitoare."
+    },
     "estimateRewards": {
       "title": "Estimează-ți recompensele",
+      "booster": "bonus",
+      "base": "bază",
+      "perYear": "pe an",
+      "boosterPaid": "bonus plătit",
+      "since": "din",
+      "boosterUnavailable": "Rata bonusului nu este disponibilă.",
       "lockDuration": "Durată de blocare",
       "participants": "participanți",
       "lockedForAtLeast": "blocat în prezent pentru cel puțin",

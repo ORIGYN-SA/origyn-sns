@@ -293,8 +293,24 @@
         "tooltip": "Wastani wa nguvu ya upigaji kura kwa washiriki wote."
       }
     },
+    "boosterHistory": {
+      "link": "Kuhusu bonasi",
+      "title": "Malipo ya bonasi kwa kufunga kwa miaka 5",
+      "description": "Zawadi za Gold DAO hubadilishwa kuwa OGY na kulipwa kila wiki kwa neuroni zilizofungwa kwa miaka 5.",
+      "rate": "Kiwango cha bonasi",
+      "chartLabel": "OGY zilizolipwa",
+      "paid": "Zilizolipwa",
+      "paidTooltip": "Jumla ya OGY zilizolipwa kwa neuroni zilizofungwa kwa miaka 5 tangu awamu ya kwanza ya bonasi.",
+      "method": "Kiwango ni wastani wa malipo 12 ya mwisho ya kila wiki, uliokokotolewa kwa mwaka kulingana na OGY zilizofungwa kwa miaka 5. Malipo ya awali hayahakikishi mapato ya baadaye."
+    },
     "estimateRewards": {
       "title": "Kadiria zawadi zako",
+      "booster": "bonasi",
+      "base": "msingi",
+      "perYear": "kwa mwaka",
+      "boosterPaid": "bonasi iliyolipwa",
+      "since": "tangu",
+      "boosterUnavailable": "Kiwango cha bonasi hakipatikani.",
       "lockDuration": "Muda wa kufunga",
       "participants": "washiriki",
       "lockedForAtLeast": "kwa sasa imefungwa kwa angalau",
