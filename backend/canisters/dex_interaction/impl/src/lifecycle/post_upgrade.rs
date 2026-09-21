@@ -26,6 +26,8 @@ fn post_upgrade(args: Args) {
                 ::deserialize(reader)
                 .unwrap();
 
+            state.data.token_swaps.archive_all_active_swaps();
+
             // NOTE: uncomment these lines if you want to do an upgrade with migration
             // let (runtime_state_v0, logs, traces): (
             //     RuntimeStateV0,

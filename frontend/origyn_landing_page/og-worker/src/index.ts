@@ -17,6 +17,7 @@ import {
 } from "../../src/seo/card.ts";
 import { CARD_QUALITY, pageById, type PageSeo } from "../../src/seo/pages.ts";
 import copy from "./copy.json";
+import { pages as dashboardPages } from "../../../ogy_dashboard/src/seo/pages.ts";
 
 type Env = { ASSETS: Fetcher };
 
@@ -111,7 +112,7 @@ export default {
     const route = /^\/([a-z0-9-]+)\/([A-Za-z-]{2,5})\.jpg$/.exec(url.pathname);
     if (!route) return problem(404, "Expected /<page>/<locale>.jpg");
 
-    const page = pageById(route[1]);
+    const page = pageById(route[1]) ?? dashboardPages.find((candidate) => candidate.id === route[1]);
     if (!page) return problem(404, `Unknown page "${route[1]}"`);
 
     // 404 rather than quietly minting an English card under an unknown locale.

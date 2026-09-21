@@ -16,7 +16,7 @@ async fn add_exchange_jobs_validate(args: AddExchangeJobArgs) -> Result<String, 
     serde_json::to_string_pretty(&args).map_err(|_| "invalid payload".to_string())
 }
 
-#[update(guard = "caller_is_governance_principal", hidden = true)]
+#[update(guard = "caller_is_governance_principal")]
 #[trace]
 fn add_exchange_jobs(args: AddExchangeJobArgs) -> AddExchangeJobResponse {
     mutate_state(|state| add_exchange_jobs_impl(args, state))

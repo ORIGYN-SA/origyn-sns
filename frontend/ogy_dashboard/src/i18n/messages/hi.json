@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "प्रमाणपत्र नहीं मिला।"
     },
+    "transactionPage": {
+      "title": "लेनदेन विवरण",
+      "notFound": "लेनदेन नहीं मिला।",
+      "minted": "मिंट किया गया",
+      "burned": "बर्न किया गया"
+    },
     "collector": {
       "title": "संग्राहक",
       "owned": "प्रमाणपत्र",
@@ -885,5 +891,12 @@
       "uploadSize": "अपलोड आकार"
     },
     "bytesUnit": "बाइट्स"
+  },
+  "seo": {
+    "dashboard": "ORIGYN डैशबोर्ड पर OGY आपूर्ति, स्टेकिंग, गवर्नेंस और लेनदेन देखें।",
+    "transactions": "ORIGYN लेजर पर OGY ट्रांसफ़र, टोकन बर्न और खातों की गतिविधि देखें।",
+    "support": "अपने वॉलेट, टोकन या डैशबोर्ड में मदद के लिए ORIGYN सहायता से संपर्क करें।",
+    "transfersTitle": "सबसे बड़े OGY ट्रांसफ़र",
+    "burnsTitle": "सबसे बड़े OGY बर्न"
   }
 }

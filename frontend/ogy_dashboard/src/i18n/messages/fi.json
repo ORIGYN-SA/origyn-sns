@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Sertifikaattia ei löytynyt."
     },
+    "transactionPage": {
+      "title": "Tapahtuman tiedot",
+      "notFound": "Tapahtumaa ei löytynyt.",
+      "minted": "Luotu",
+      "burned": "Poltettu"
+    },
     "collector": {
       "title": "Keräilijä",
       "owned": "Sertifikaatit",
@@ -885,5 +891,12 @@
       "uploadSize": "Latauksen koko"
     },
     "bytesUnit": "tavua"
+  },
+  "seo": {
+    "dashboard": "Tutustu OGY:n tarjontaan, steikkaukseen, hallintoon ja tapahtumiin ORIGYN-hallintapaneelissa.",
+    "transactions": "Selaa OGY-siirtoja, tokenien polttoja ja tilien toimintaa ORIGYN-tilikirjassa.",
+    "support": "Ota yhteyttä ORIGYN-tukeen saadaksesi apua lompakon, tokenien tai hallintapaneelin käyttöön.",
+    "transfersTitle": "Suurimmat OGY-siirrot",
+    "burnsTitle": "Suurimmat OGY-poltot"
   }
 }

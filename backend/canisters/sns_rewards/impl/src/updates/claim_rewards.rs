@@ -45,7 +45,7 @@ pub async fn claim_reward_impl(
     };
 
     // get the token meta information associated with the valid token
-    let token_info = match read_state(|s: &RuntimeState| s.data.tokens.get(&token_symbol).copied())
+    let token_info = match read_state(|s: &RuntimeState| s.data.tokens.get(&token_symbol).cloned())
     {
         Some(token) => token,
         None => {
@@ -88,14 +88,14 @@ pub async fn transfer_rewards(
     // get the balance of the sub account ( NeuronId is the sub account id )
     let balance_of_neuron_id = fetch_balance_of_neuron_id(token_info.ledger_id, &neuron_id).await?;
 
-    if balance_of_neuron_id <= Nat::from(token_info.fee) {
+    if balance_of_neuron_id <= token_info.fee {
         return Err(format!(
             "Your balance must be higher than the transfer fee of {}",
-            Nat::from(token_info.fee)
+            token_info.fee
         ));
     }
 
-    let amount_to_transfer = balance_of_neuron_id - Nat::from(token_info.fee);
+    let amount_to_transfer = balance_of_neuron_id - token_info.fee;
     if amount_to_transfer == Nat::from(0u64) {
         return Err("no rewards to claim".to_string());
     }

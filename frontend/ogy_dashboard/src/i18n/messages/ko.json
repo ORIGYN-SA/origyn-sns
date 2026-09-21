@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "인증서를 찾을 수 없습니다."
     },
+    "transactionPage": {
+      "title": "거래 세부 정보",
+      "notFound": "거래를 찾을 수 없습니다.",
+      "minted": "발행됨",
+      "burned": "소각됨"
+    },
     "collector": {
       "title": "수집가",
       "owned": "인증서",
@@ -885,5 +891,12 @@
       "uploadSize": "업로드 크기"
     },
     "bytesUnit": "바이트"
+  },
+  "seo": {
+    "dashboard": "ORIGYN 대시보드에서 OGY 공급량, 스테이킹, 거버넌스 및 거래를 살펴보세요.",
+    "transactions": "ORIGYN 원장에서 OGY 전송, 토큰 소각 및 계정 활동을 확인하세요.",
+    "support": "지갑, 토큰 또는 대시보드 관련 도움이 필요하면 ORIGYN 지원팀에 문의하세요.",
+    "transfersTitle": "최대 OGY 전송",
+    "burnsTitle": "최대 OGY 소각"
   }
 }

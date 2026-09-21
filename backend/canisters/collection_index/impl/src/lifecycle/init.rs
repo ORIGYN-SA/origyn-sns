@@ -17,7 +17,10 @@ fn init(args: Args) {
                 init_args.version,
                 init_args.commit_hash,
             );
-            let data = Data::new(init_args.authorized_principals);
+            let data = Data::new(
+                init_args.authorized_principals,
+                init_args.claimlink_canister_id,
+            );
 
             let runtime_state = RuntimeState::new(env.clone(), data);
 

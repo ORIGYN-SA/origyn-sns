@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Certificado no encontrado."
     },
+    "transactionPage": {
+      "title": "Detalles de la Transacción",
+      "notFound": "Transacción no encontrada.",
+      "minted": "Acuñado",
+      "burned": "Quemado"
+    },
     "collector": {
       "title": "Coleccionista",
       "owned": "Certificados",
@@ -885,5 +891,12 @@
       "uploadSize": "Tamaño de subida"
     },
     "bytesUnit": "bytes"
+  },
+  "seo": {
+    "dashboard": "Explora la oferta de OGY, el staking, la gobernanza y las transacciones en el panel de ORIGYN.",
+    "transactions": "Consulta transferencias de OGY, quemas de tokens y actividad de cuentas en el registro de ORIGYN.",
+    "support": "Contacta con el soporte de ORIGYN para obtener ayuda con tu cartera, tus tokens o el panel.",
+    "transfersTitle": "Mayores transferencias de OGY",
+    "burnsTitle": "Mayores quemas de OGY"
   }
 }

@@ -20,6 +20,10 @@ members = [
   "backend/external_canisters/ogy_legacy_ledger/c2c_client",
   "backend/external_canisters/origyn_nft_reference/api",
   "backend/external_canisters/origyn_nft_reference/c2c_client",
+  "backend/external_canisters/origyn_nft/api",
+  "backend/external_canisters/origyn_nft/c2c_client",
+  "backend/external_canisters/claimlink/api",
+  "backend/external_canisters/claimlink/c2c_client",
   "backend/integration_tests",
   "backend/libraries/candid_gen",
   "backend/libraries/http_request",
@@ -87,9 +91,10 @@ strum = { version = "0.27.2", features = ["derive"] }
 strum_macros = "0.27.2"
 lazy_static = "1.4.0"
 anyhow = "1.0.99"
+ic-cdk-management-canister = "0.1.1"
 
 # Bity crates
-bity-ic-icrc3 = { version =  "0.4.7" } # , features = ["debug-logs"]
+bity-ic-icrc3 = { version =  "0.7.0" } # , features = ["debug-logs"]
 bity-ic-icrc3-macros = "0.3.3"
 bity-ic-canister-time = "0.3.0"
 bity-ic-serializer = "0.1.0"

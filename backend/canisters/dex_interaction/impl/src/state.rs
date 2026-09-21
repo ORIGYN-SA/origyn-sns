@@ -82,6 +82,27 @@ impl Data {
     }
 }
 
+impl Default for Data {
+    fn default() -> Self {
+        Self {
+            authorized_principals: Vec::new(),
+            token_swaps: TokenSwaps::default(),
+            icp_swap_canister_id: Principal::anonymous(),
+            exchange_jobs: ExchangeJobs::init(),
+            exchange_job_guards: BTreeSet::new(),
+        }
+    }
+}
+
+impl Default for RuntimeState {
+    fn default() -> Self {
+        Self {
+            env: CanisterEnv::default(),
+            data: Data::default(),
+        }
+    }
+}
+
 #[derive(Serialize)]
 pub struct Metrics {
     pub canister_info: CanisterInfo,

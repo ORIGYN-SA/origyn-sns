@@ -35,7 +35,7 @@ pub fn setup(
             test_mode: false,
             version: BuildVersion::min(),
             commit_hash: "integration_testing".to_string(),
-            authorized_principals: vec![*controller, ogy_sns_governance_canister_id],
+            authorized_principals: vec![*controller, ogy_sns_governance_canister_id, goldao_sns_governance_canister_id],
             goldao_manager_config: sns_neuron_controller_api_canister::init::GoldaoManagerConfig {
                 goldao_sns_governance_canister_id,
                 goldao_sns_ledger_canister_id,

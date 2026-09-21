@@ -9,4 +9,5 @@ pub struct InitArgs {
     pub test_mode: bool,
     pub version: BuildVersion,
     pub commit_hash: String,
+    pub claimlink_canister_id: Principal,
 }

@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Certifikat nije pronađen."
     },
+    "transactionPage": {
+      "title": "Detalji transakcije",
+      "notFound": "Transakcija nije pronađena.",
+      "minted": "Iskovano",
+      "burned": "Spaljeno"
+    },
     "collector": {
       "title": "Kolekcionar",
       "owned": "Certifikati",
@@ -885,5 +891,12 @@
       "uploadSize": "Veličina učitavanja"
     },
     "bytesUnit": "bajta"
+  },
+  "seo": {
+    "dashboard": "Istražite ponudu OGY-a, staking, upravljanje i transakcije na nadzornoj ploči ORIGYN.",
+    "transactions": "Pregledajte prijenose OGY-a, spaljivanja tokena i aktivnosti računa u glavnoj knjizi ORIGYN.",
+    "support": "Obratite se podršci ORIGYN za pomoć s novčanikom, tokenima ili nadzornom pločom.",
+    "transfersTitle": "Najveći prijenosi OGY-a",
+    "burnsTitle": "Najveća spaljivanja OGY-a"
   }
 }

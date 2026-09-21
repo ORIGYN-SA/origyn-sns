@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Certifikatet hittades inte."
     },
+    "transactionPage": {
+      "title": "Transaktionsdetaljer",
+      "notFound": "Transaktionen hittades inte.",
+      "minted": "Mintad",
+      "burned": "Bränd"
+    },
     "collector": {
       "title": "Samlare",
       "owned": "Certifikat",
@@ -885,5 +891,12 @@
       "uploadSize": "Uppladdningsstorlek"
     },
     "bytesUnit": "byte"
+  },
+  "seo": {
+    "dashboard": "Utforska OGY-utbud, staking, styrning och transaktioner i ORIGYNs kontrollpanel.",
+    "transactions": "Se OGY-överföringar, tokenbränningar och kontoaktivitet i ORIGYNs huvudbok.",
+    "support": "Kontakta ORIGYN-support för hjälp med din plånbok, dina token eller kontrollpanelen.",
+    "transfersTitle": "Största OGY-överföringarna",
+    "burnsTitle": "Största OGY-bränningarna"
   }
 }

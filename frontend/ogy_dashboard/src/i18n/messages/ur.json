@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "سرٹیفکیٹ نہیں ملا۔"
     },
+    "transactionPage": {
+      "title": "لین دین کی تفصیلات",
+      "notFound": "لین دین نہیں ملا۔",
+      "minted": "منٹ شدہ",
+      "burned": "برن کیا گیا"
+    },
     "collector": {
       "title": "کلیکٹر",
       "owned": "سرٹیفکیٹس",
@@ -885,5 +891,12 @@
       "uploadSize": "اپلوڈ حجم"
     },
     "bytesUnit": "بائٹس"
+  },
+  "seo": {
+    "dashboard": "ORIGYN ڈیش بورڈ پر OGY کی سپلائی، اسٹیکنگ، گورننس اور لین دین دیکھیں۔",
+    "transactions": "ORIGYN لیجر پر OGY کی منتقلی، ٹوکن برن اور اکاؤنٹ کی سرگرمیاں دیکھیں۔",
+    "support": "اپنے والٹ، ٹوکن یا ڈیش بورڈ میں مدد کے لیے ORIGYN سپورٹ سے رابطہ کریں۔",
+    "transfersTitle": "OGY کی سب سے بڑی منتقلیاں",
+    "burnsTitle": "OGY کے سب سے بڑے برن"
   }
 }

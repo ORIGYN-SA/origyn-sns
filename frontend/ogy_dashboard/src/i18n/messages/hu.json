@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "A tanúsítvány nem található."
     },
+    "transactionPage": {
+      "title": "Tranzakció részletei",
+      "notFound": "A tranzakció nem található.",
+      "minted": "Kibocsátva",
+      "burned": "Elégetve"
+    },
     "collector": {
       "title": "Gyűjtő",
       "owned": "Tanúsítványok",
@@ -885,5 +891,12 @@
       "uploadSize": "Feltöltési méret"
     },
     "bytesUnit": "bájt"
+  },
+  "seo": {
+    "dashboard": "Fedezze fel az OGY-kínálatot, a stakinget, az irányítást és a tranzakciókat az ORIGYN irányítópultján.",
+    "transactions": "Böngésszen az OGY-átutalások, tokenégetések és számlatevékenységek között az ORIGYN főkönyvében.",
+    "support": "Kérjen segítséget az ORIGYN ügyfélszolgálatától tárcájához, tokenjeihez vagy az irányítópulthoz.",
+    "transfersTitle": "Legnagyobb OGY-átutalások",
+    "burnsTitle": "Legnagyobb OGY-égetések"
   }
 }

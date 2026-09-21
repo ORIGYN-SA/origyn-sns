@@ -64,7 +64,9 @@ impl GoldaoManager {
                 let threshold: u128 = if is_test_mode {
                     0
                 } else {
-                    (symbol.get_prod_token_info().fee * MIN_THRESHOLD_FEE_MULTIPLIER) as u128
+                    let fee = u128::try_from(symbol.get_prod_token_info().fee.0)
+                        .expect("token fee should fit in u128");
+                    fee * MIN_THRESHOLD_FEE_MULTIPLIER as u128
                 };
 
                 // Determine the subaccount based on the token symbol

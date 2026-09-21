@@ -17,6 +17,7 @@ pub fn setup(pic: &PocketIc, controller: Principal, canister_id: Principal) -> P
             test_mode: true,
             version: bity_ic_types::BuildVersion::default(),
             commit_hash: "commit_hash".to_string(),
+            claimlink_canister_id: Principal::anonymous(), // FIXME
         });
 
     install_canister(

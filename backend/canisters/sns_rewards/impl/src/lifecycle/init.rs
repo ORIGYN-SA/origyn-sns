@@ -29,7 +29,7 @@ fn init(args: Args) {
                     TokenSymbol::OGY,
                     TokenInfo {
                         ledger_id: ogy_ledger_canister_id,
-                        fee: 200_000u64,
+                        fee: candid::Nat::from(200_000u64),
                         decimals: 8u64,
                     },
                 );

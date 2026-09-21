@@ -4,7 +4,8 @@ use ic_stable_structures::{
 };
 
 const UPGRADES: MemoryId = MemoryId::new(0);
-const COLLECTION_MEMORY: MemoryId = MemoryId::new(1);
+// NOTE: iterated to have a new model of collections compatible with minting studio
+const COLLECTION_MEMORY: MemoryId = MemoryId::new(2);
 
 pub type VM = VirtualMemory<DefaultMemoryImpl>;
 

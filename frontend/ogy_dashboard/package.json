@@ -15,7 +15,9 @@
     "lint": "eslint ./src/**/*.tsx",
     "preview": "vite preview --mode staging",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
+    "seo:review": "node --experimental-strip-types scripts/review-seo.mjs",
+    "seo:check": "node --experimental-strip-types scripts/check-seo.mjs"
   },
   "dependencies": {
     "@amerej/identitykit": "^1.0.15",

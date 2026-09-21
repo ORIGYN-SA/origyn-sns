@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "لم يتم العثور على الشهادة."
     },
+    "transactionPage": {
+      "title": "تفاصيل المعاملة",
+      "notFound": "لم يتم العثور على المعاملة.",
+      "minted": "مسكوك",
+      "burned": "محروق"
+    },
     "collector": {
       "title": "المقتني",
       "owned": "الشهادات",
@@ -885,5 +891,12 @@
       "uploadSize": "حجم الرفع"
     },
     "bytesUnit": "بايت"
+  },
+  "seo": {
+    "dashboard": "استكشف معروض OGY والتحصيص والحوكمة والمعاملات على لوحة معلومات ORIGYN.",
+    "transactions": "تصفح تحويلات OGY وحرق الرموز ونشاط الحسابات في سجل ORIGYN.",
+    "support": "تواصل مع دعم ORIGYN للمساعدة بشأن محفظتك أو رموزك أو لوحة المعلومات.",
+    "transfersTitle": "أكبر تحويلات OGY",
+    "burnsTitle": "أكبر عمليات حرق OGY"
   }
 }

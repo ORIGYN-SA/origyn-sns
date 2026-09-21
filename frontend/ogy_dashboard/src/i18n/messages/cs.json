@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Certifikát nebyl nalezen."
     },
+    "transactionPage": {
+      "title": "Podrobnosti transakce",
+      "notFound": "Transakce nebyla nalezena.",
+      "minted": "Vyraženo",
+      "burned": "Spáleno"
+    },
     "collector": {
       "title": "Sběratel",
       "owned": "Certifikáty",
@@ -885,5 +891,12 @@
       "uploadSize": "Velikost nahrávání"
     },
     "bytesUnit": "bajtů"
+  },
+  "seo": {
+    "dashboard": "Prozkoumejte nabídku OGY, staking, správu a transakce na dashboardu ORIGYN.",
+    "transactions": "Procházejte převody OGY, pálení tokenů a aktivitu účtů v účetní knize ORIGYN.",
+    "support": "Kontaktujte podporu ORIGYN, pokud potřebujete pomoc s peněženkou, tokeny nebo dashboardem.",
+    "transfersTitle": "Největší převody OGY",
+    "burnsTitle": "Největší pálení OGY"
   }
 }

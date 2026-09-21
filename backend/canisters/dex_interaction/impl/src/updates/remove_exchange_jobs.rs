@@ -14,7 +14,7 @@ async fn remove_exchange_jobs_validate(args: RemoveExchangeJobArgs) -> Result<St
     serde_json::to_string_pretty(&args).map_err(|_| "invalid payload".to_string())
 }
 
-#[update(guard = "caller_is_governance_principal", hidden = true)]
+#[update(guard = "caller_is_governance_principal")]
 #[trace]
 fn remove_exchange_jobs(args: RemoveExchangeJobArgs) -> RemoveExchangeJobResponse {
     mutate_state(|state| remove_exchange_jobs_impl(args, state))

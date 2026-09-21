@@ -1,6 +1,6 @@
 use std::{borrow::Cow, fmt::Display};
 
-use candid::{CandidType, Principal};
+use candid::{CandidType, Nat, Principal};
 use ic_stable_structures::{storable::Bound, Storable};
 
 use serde::{Deserialize, Serialize};
@@ -97,7 +97,98 @@ impl std::fmt::Display for TokenSymbol {
     }
 }
 
+use std::cell::RefCell;
+use std::collections::HashMap;
+
+thread_local! {
+    static __TOKENS: RefCell<HashMap<TokenSymbol, TokenInfo>> = RefCell::new(HashMap::new());
+}
+
+pub fn override_token_ledger(symbol: TokenSymbol, ledger_id: Principal, fee: Nat) {
+    __TOKENS.with(|tokens| {
+        let mut tokens = tokens.borrow_mut();
+        tokens.insert(symbol, TokenInfo {
+            ledger_id,
+            fee,
+            decimals: 8,
+        });
+    });
+}
+
+pub fn update_token_fee_cache(ledger_id: Principal, fee: Nat) {
+    __TOKENS.with(|tokens| {
+        let mut tokens = tokens.borrow_mut();
+        let mut found_symbol = None;
+        for (symbol, info) in tokens.iter() {
+            if info.ledger_id == ledger_id {
+                found_symbol = Some(*symbol);
+                break;
+            }
+        }
+
+        let symbol = found_symbol.or_else(|| {
+            let symbols = [
+                TokenSymbol::ICP,
+                TokenSymbol::OGY,
+                TokenSymbol::GOLDAO,
+                TokenSymbol::WTN,
+                TokenSymbol::GLDT,
+            ];
+            symbols.into_iter().find(|s| {
+                s.ledger_id(true) == ledger_id || s.ledger_id(false) == ledger_id
+            })
+        });
+
+        if let Some(symbol) = symbol {
+            let entry = tokens.entry(symbol).or_insert_with(|| TokenInfo {
+                ledger_id,
+                fee: fee.clone(),
+                decimals: symbol.decimals(),
+            });
+            entry.fee = fee;
+        }
+    });
+}
+
+pub async fn update_token_fee(ledger_id: Principal) -> Result<Nat, String> {
+    let call_res = bity_ic_canister_client::make_c2c_call(
+        ledger_id,
+        "icrc1_fee",
+        &(),
+        candid::encode_one,
+        |r| candid::decode_one::<candid::Nat>(r),
+    )
+    .await;
+    match call_res {
+        Ok(fee_nat) => {
+            update_token_fee_cache(ledger_id, fee_nat.clone());
+            Ok(fee_nat)
+        }
+        Err(e) => Err(format!("Ledger call failed: {:?}", e)),
+    }
+}
+
 impl TokenSymbol {
+    pub fn decimals(&self) -> u64 {
+        match self {
+            TokenSymbol::ICP => 8,
+            TokenSymbol::OGY => 8,
+            TokenSymbol::GOLDAO => 8,
+            TokenSymbol::WTN => 8,
+            TokenSymbol::GLDT => 8,
+        }
+    }
+
+    pub fn default_fee(&self) -> Nat {
+        Nat::from(match self {
+            TokenSymbol::ICP => 10_000_u64,
+            TokenSymbol::OGY => 200_000_u64,
+            TokenSymbol::GOLDAO => 1_000_000_000_u64,
+            TokenSymbol::WTN => 1_000_000_u64,
+            TokenSymbol::GLDT => 10_000_000_u64,
+        })
+    }
+
     /// Return the display symbol for a token (can be renamed here)
     pub fn symbol(&self) -> &'static str {
         match self {
@@ -121,30 +212,28 @@ impl TokenSymbol {
     }
 
     pub fn get_prod_token_info(self) -> TokenInfo {
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&self).cloned());
+        if let Some(info) = cached {
+            return info;
+        }
+        let ledger_id = self.ledger_id(false);
         TokenInfo {
-            ledger_id: self.ledger_id(false),
-            fee: match self {
-                TokenSymbol::ICP => 10_000,
-                TokenSymbol::OGY => 200_000,
-                TokenSymbol::GOLDAO => 100_000,
-                TokenSymbol::WTN => 1_000_000,
-                TokenSymbol::GLDT => 10_000_000,
-            },
-            decimals: 8,
+            ledger_id,
+            fee: self.default_fee(),
+            decimals: self.decimals(),
         }
     }
 
     pub fn get_token_info(self, is_test_mode: bool) -> TokenInfo {
+        let cached = __TOKENS.with(|tokens| tokens.borrow().get(&self).cloned());
+        if let Some(info) = cached {
+            return info;
+        }
+        let ledger_id = self.ledger_id(is_test_mode);
         TokenInfo {
-            ledger_id: self.ledger_id(is_test_mode),
-            fee: match self {
-                TokenSymbol::ICP => 10_000,
-                TokenSymbol::OGY => 200_000,
-                TokenSymbol::GOLDAO => 100_000,
-                TokenSymbol::WTN => 1_000_000,
-                TokenSymbol::GLDT => 10_000_000,
-            },
-            decimals: 8,
+            ledger_id,
+            fee: self.default_fee(),
+            decimals: self.decimals(),
         }
     }
 
@@ -228,15 +317,15 @@ impl Storable for TokenSymbol {
     };
 }
 
-#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash, Copy)]
+#[derive(Debug, Serialize, Clone, Deserialize, CandidType, PartialEq, Eq, Hash)]
 pub struct TokenInfo {
     pub ledger_id: Principal,
-    pub fee: u64,
+    pub fee: Nat,
     pub decimals: u64,
 }
 
 impl TokenInfo {
-    pub fn validate(self) -> Result<(), String> {
+    pub fn validate(&self) -> Result<(), String> {
         if self.ledger_id == Principal::anonymous() {
             return Err("Invalid ledger_id: cannot be anonymous".to_string());
         }
@@ -307,5 +396,31 @@ mod tests {
         assert!(TokenSymbol::parse("GLD").is_err());
         assert!(TokenSymbol::parse("").is_err());
         assert!(TokenSymbol::parse("UNKNOWN").is_err());
+    }
+
+    #[test]
+    fn test_update_token_fee_cache() {
+        use crate::token::{update_token_fee_cache, __TOKENS};
+        use candid::Nat;
+
+        // Clear the cache first to ensure a cache miss
+        __TOKENS.with(|tokens| tokens.borrow_mut().clear());
+
+        let ogy_ledger = TokenSymbol::OGY.ledger_id(true);
+        let expected_fee = Nat::from(123_456_u64);
+
+        // This call will trigger a cache miss and insert a new TokenInfo.
+        // It must not panic on RefCell borrows.
+        update_token_fee_cache(ogy_ledger, expected_fee.clone());
+
+        // Verify the cache has been updated
+        let info = TokenSymbol::OGY.get_token_info(true);
+        assert_eq!(info.fee, expected_fee);
+
+        // Verify cache hit behavior also works and updates the fee
+        let new_expected_fee = Nat::from(789_012_u64);
+        update_token_fee_cache(ogy_ledger, new_expected_fee.clone());
+        let updated_info = TokenSymbol::OGY.get_token_info(true);
+        assert_eq!(updated_info.fee, new_expected_fee);
     }
 }

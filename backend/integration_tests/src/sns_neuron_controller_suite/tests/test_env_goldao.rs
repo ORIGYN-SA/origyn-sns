@@ -394,3 +394,150 @@ fn test_process_goldao_neurons_partial_failure() {
 
     assert!(initial_sns_rewards_balance < current_sns_rewards_balance);
 }
+
+#[test]
+fn test_process_goldao_neurons_maturity_disbursement() {
+    let (ogy_neuron_data, _) = generate_neuron_data(
+        0,
+        1,
+        1,
+        &vec![Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap()],
+    );
+
+    // Create a neuron with a high maturity multiplier so that the maturity is:
+    // 100_000 * 1_000_000 = 100_000_000_000 e8s = 1000 GOLDAO
+    let (goldao_neuron_data, _) = generate_neuron_data(
+        0,
+        1,
+        1_000_000,
+        &vec![Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap()],
+    );
+
+    let env = TestEnvBuilder::new()
+        .add_sns(SnsConfig::new(SnsProject::Ogy).with_neurons(ogy_neuron_data))
+        .add_sns(SnsConfig::new(SnsProject::GoldDao).with_neurons(goldao_neuron_data))
+        .add_token_ledger(&types::TokenSymbol::GLDT)
+        .add_token_ledger(&types::TokenSymbol::ICP)
+        .add_token_ledger(&types::TokenSymbol::WTN)
+        .build();
+    let pic = env.pic.borrow();
+    let goldao_ledger_canister_id = env
+        .get_ledger_canister_id(types::TokenSymbol::GOLDAO)
+        .unwrap();
+    let ogy_ledger_canister_id = env.get_ledger_canister_id(types::TokenSymbol::OGY).unwrap();
+
+    let goldao_rewards_canister_id = env.install_goldao_rewards(
+        Principal::from_text("iyehc-lqaaa-aaaap-ab25a-cai").unwrap(),
+        env.get_sns(SnsProject::GoldDao).test_env.governance_id,
+        TokenSymbol::ICP.ledger_id(false),
+        ogy_ledger_canister_id,
+        goldao_ledger_canister_id,
+    );
+
+    let rewards_destination = Principal::from_slice(&[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    let ogy_rewards_destination = Principal::from_slice(&[1, 2, 3, 0, 0, 0, 0, 0, 0, 0]);
+
+    let mut reward_tokens = HashMap::new();
+    reward_tokens.insert(
+        TokenSymbol::ICP,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 9_999_999_999_999_u128, // set very high threshold to not claim standard rewards
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::WTN,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 9_999_999_999_999_u128,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::OGY,
+        TokenParams {
+            destination: ogy_rewards_destination.into(),
+            threshold: 9_999_999_999_999_u128,
+        },
+    );
+    reward_tokens.insert(
+        TokenSymbol::GOLDAO,
+        TokenParams {
+            destination: rewards_destination.into(),
+            threshold: 9_999_999_999_999_u128, // set high threshold to not claim standard rewards
+        },
+    );
+
+    let initial_sns_rewards_balance = balance_of(
+        &pic,
+        goldao_ledger_canister_id,
+        Account {
+            owner: rewards_destination,
+            subaccount: None,
+        },
+    );
+    println!(
+        "initial_sns_rewards_balance: {:?}",
+        initial_sns_rewards_balance
+    );
+
+    let sns_neuron_controller_id = env.install_sns_neuron_controller(
+        Principal::from_text("piyk3-liaaa-aaaae-qjvsa-cai").unwrap(),
+        env.get_sns(SnsProject::Ogy).test_env.governance_id,
+        env.get_sns(SnsProject::GoldDao).test_env.governance_id,
+        env.get_sns(SnsProject::GoldDao).test_env.ledger_id,
+        goldao_rewards_canister_id,
+        reward_tokens,
+    );
+
+    let response_before = crate::client::sns_neuron_controller::list_neurons(
+        &pic,
+        Principal::anonymous(),
+        sns_neuron_controller_id,
+        &(),
+    );
+    println!("goldao neurons before: {:?}", response_before.neurons.goldao_neurons);
+
+    // We do NOT transfer any rewards to the neuron's rewards account,
+    // so standard reward claiming won't disburse anything.
+    // Any disburse/increase in balance will come solely from maturity disbursement.
+
+    pic.advance_time(Duration::from_secs(24 * 60 * 60));
+    tick_n_blocks(&pic, 100);
+
+    let response_after = crate::client::sns_neuron_controller::list_neurons(
+        &pic,
+        Principal::anonymous(),
+        sns_neuron_controller_id,
+        &(),
+    );
+    println!("goldao neurons after: {:?}", response_after.neurons.goldao_neurons);
+
+    let minting_account = crate::client::icrc1::icrc1_minting_account(
+        &pic,
+        Principal::anonymous(),
+        goldao_ledger_canister_id,
+        &(),
+    );
+    println!("GOLDAO ledger minting account: {:?}", minting_account);
+    println!("GOLDAO governance canister ID: {:?}", env.get_sns(SnsProject::GoldDao).test_env.governance_id);
+
+    // Tick more blocks and advance time (by 8 days, since maturity disburse has a 7-day delay) to allow the governance canister to execute the queued maturity disburse transfer on the ledger
+    pic.advance_time(Duration::from_secs(8 * 24 * 60 * 60));
+    tick_n_blocks(&pic, 100);
+
+    let current_sns_rewards_balance = balance_of(
+        &pic,
+        goldao_ledger_canister_id,
+        Account {
+            owner: rewards_destination,
+            subaccount: None,
+        },
+    );
+    println!(
+        "current_sns_rewards_balance after processing: {:?}",
+        current_sns_rewards_balance
+    );
+
+    // Verify that the rewards destination received GOLDAO tokens from the maturity disburse.
+    assert!(current_sns_rewards_balance > initial_sns_rewards_balance);
+}

@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "証明書が見つかりません。"
     },
+    "transactionPage": {
+      "title": "取引の詳細",
+      "notFound": "取引が見つかりません。",
+      "minted": "ミント済み",
+      "burned": "バーン済み"
+    },
     "collector": {
       "title": "コレクター",
       "owned": "証明書",
@@ -885,5 +891,12 @@
       "uploadSize": "アップロードサイズ"
     },
     "bytesUnit": "バイト"
+  },
+  "seo": {
+    "dashboard": "ORIGYNダッシュボードでOGYの供給量、ステーキング、ガバナンス、取引を確認できます。",
+    "transactions": "ORIGYN台帳でOGYの送金、トークンのバーン、アカウントの活動を確認できます。",
+    "support": "ウォレット、トークン、ダッシュボードについてはORIGYNサポートにお問い合わせください。",
+    "transfersTitle": "OGYの高額送金",
+    "burnsTitle": "OGYの大規模バーン"
   }
 }

@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Sertifika bulunamadı."
     },
+    "transactionPage": {
+      "title": "İşlem Ayrıntıları",
+      "notFound": "İşlem bulunamadı.",
+      "minted": "Basıldı",
+      "burned": "Yakıldı"
+    },
     "collector": {
       "title": "Koleksiyoner",
       "owned": "Sertifikalar",
@@ -885,5 +891,12 @@
       "uploadSize": "Yükleme boyutu"
     },
     "bytesUnit": "bayt"
+  },
+  "seo": {
+    "dashboard": "ORIGYN panelinde OGY arzını, staking işlemlerini, yönetişimi ve işlemleri keşfedin.",
+    "transactions": "ORIGYN defterinde OGY transferlerini, token yakımlarını ve hesap etkinliklerini inceleyin.",
+    "support": "Cüzdanınız, tokenleriniz veya panel hakkında yardım almak için ORIGYN destek ekibiyle iletişime geçin.",
+    "transfersTitle": "En büyük OGY transferleri",
+    "burnsTitle": "En büyük OGY yakımları"
   }
 }

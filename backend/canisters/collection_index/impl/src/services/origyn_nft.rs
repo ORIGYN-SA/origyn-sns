@@ -1,6 +1,13 @@
-use candid::Principal;
+use candid::{Nat, Principal};
 use collection_index_api::origyn_nft::{GetCollectionInfoError, GetCollectionInfoResult};
 use tracing::{debug, info};
+
+/// Fetches a collection canister's current ICRC-7 total supply.
+pub async fn get_total_supply(collection_canister_id: Principal) -> Result<Nat, String> {
+    origyn_nft_canister_c2c_client::icrc7_total_supply(collection_canister_id, ())
+        .await
+        .map_err(|e| format!("{e:?}"))
+}
 
 pub async fn get_collection_info(
     collection_canister_id: Principal,

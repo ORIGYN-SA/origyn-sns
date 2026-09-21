@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.12] - 2026-09-10
+
+#### Fixed
+
+- Fixed the consent method name for `claim_reward` so OISY users can claim rewards.
+
 ### [1.0.11] - 2026-06-23
 
 #### Fixed

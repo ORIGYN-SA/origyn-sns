@@ -752,6 +752,12 @@
     "certificatePage": {
       "notFound": "Sertifikat tidak ditemukan."
     },
+    "transactionPage": {
+      "title": "Detail Transaksi",
+      "notFound": "Transaksi tidak ditemukan.",
+      "minted": "Dicetak",
+      "burned": "Di-burn"
+    },
     "collector": {
       "title": "Kolektor",
       "owned": "Sertifikat",
@@ -885,5 +891,12 @@
       "uploadSize": "Ukuran unggahan"
     },
     "bytesUnit": "bita"
+  },
+  "seo": {
+    "dashboard": "Jelajahi pasokan OGY, staking, tata kelola, dan transaksi di dasbor ORIGYN.",
+    "transactions": "Telusuri transfer OGY, pembakaran token, dan aktivitas akun di buku besar ORIGYN.",
+    "support": "Hubungi dukungan ORIGYN untuk bantuan terkait dompet, token, atau dasbor Anda.",
+    "transfersTitle": "Transfer OGY terbesar",
+    "burnsTitle": "Pembakaran OGY terbesar"
   }
 }
