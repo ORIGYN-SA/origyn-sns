@@ -293,8 +293,24 @@
         "tooltip": "모든 참여자에 걸친 평균 투표력."
       }
     },
+    "boosterHistory": {
+      "link": "보너스 안내",
+      "title": "5년 잠금 보너스 지급 내역",
+      "description": "Gold DAO 보상은 OGY로 교환되어 5년 동안 잠긴 뉴런에 매주 지급됩니다.",
+      "rate": "보너스율",
+      "chartLabel": "지급된 OGY",
+      "paid": "지급액",
+      "paidTooltip": "첫 보너스 회차 이후 5년 동안 잠긴 뉴런에 지급된 총 OGY입니다.",
+      "method": "최근 12회 주간 지급액의 평균을 연간으로 환산한 뒤, 5년 동안 잠긴 OGY 대비 비율로 계산합니다. 과거 지급 내역은 미래 수익을 보장하지 않습니다."
+    },
     "estimateRewards": {
       "title": "보상 추정하기",
+      "booster": "보너스",
+      "base": "기본",
+      "perYear": "연간",
+      "boosterPaid": "지급된 보너스",
+      "since": "시작:",
+      "boosterUnavailable": "보너스율을 확인할 수 없습니다.",
       "lockDuration": "잠금 기간",
       "participants": "참여자",
       "lockedForAtLeast": "현재 최소 다음 기간 동안 잠김",

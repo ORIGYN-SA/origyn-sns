@@ -293,8 +293,24 @@
         "tooltip": "Kekuatan suara rata-rata di antara semua peserta."
       }
     },
+    "boosterHistory": {
+      "link": "Tentang bonus",
+      "title": "Pembayaran bonus penguncian 5 tahun",
+      "description": "Imbalan Gold DAO ditukar menjadi OGY dan dibayarkan setiap minggu kepada neuron yang dikunci selama 5 tahun.",
+      "rate": "Tingkat bonus",
+      "chartLabel": "OGY yang dibayarkan",
+      "paid": "Dibayarkan",
+      "paidTooltip": "Total OGY yang dibayarkan kepada neuron yang dikunci selama 5 tahun sejak putaran bonus pertama.",
+      "method": "Tingkat ini adalah rata-rata dari 12 pembayaran mingguan terakhir, disetahunkan terhadap OGY yang dikunci selama 5 tahun. Pembayaran sebelumnya tidak menjamin imbal hasil di masa depan."
+    },
     "estimateRewards": {
       "title": "Perkirakan imbalan Anda",
+      "booster": "bonus",
+      "base": "dasar",
+      "perYear": "per tahun",
+      "boosterPaid": "bonus yang dibayarkan",
+      "since": "sejak",
+      "boosterUnavailable": "Tingkat bonus tidak tersedia.",
       "lockDuration": "Durasi penguncian",
       "participants": "peserta",
       "lockedForAtLeast": "saat ini terkunci setidaknya selama",

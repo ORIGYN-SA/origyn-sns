@@ -293,8 +293,24 @@
         "tooltip": "Durchschnittliche Stimmkraft über alle Teilnehmer."
       }
     },
+    "boosterHistory": {
+      "link": "Über den Bonus",
+      "title": "Bonusauszahlungen bei 5 Jahren Sperrdauer",
+      "description": "Belohnungen von Gold DAO werden in OGY getauscht und wöchentlich an Neuronen ausgezahlt, die für 5 Jahre gesperrt sind.",
+      "rate": "Bonusrate",
+      "chartLabel": "Ausgezahlte OGY",
+      "paid": "Ausgezahlt",
+      "paidTooltip": "Gesamte OGY, die seit der ersten Bonusrunde an Neuronen mit 5 Jahren Sperrdauer ausgezahlt wurden.",
+      "method": "Die Rate basiert auf dem Durchschnitt der letzten 12 wöchentlichen Auszahlungen, auf ein Jahr hochgerechnet und ins Verhältnis zu den für 5 Jahre gesperrten OGY gesetzt. Vergangene Auszahlungen garantieren keine zukünftigen Erträge."
+    },
     "estimateRewards": {
       "title": "Schätze deine Belohnungen",
+      "booster": "Bonus",
+      "base": "Basis",
+      "perYear": "pro Jahr",
+      "boosterPaid": "ausgezahlter Bonus",
+      "since": "seit",
+      "boosterUnavailable": "Bonusrate nicht verfügbar.",
       "lockDuration": "Sperrdauer",
       "participants": "Teilnehmer",
       "lockedForAtLeast": "derzeit gesperrt für mindestens",

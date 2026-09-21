@@ -293,8 +293,24 @@
         "tooltip": "所有參與者的平均投票權重。"
       }
     },
+    "boosterHistory": {
+      "link": "關於加成獎勵",
+      "title": "5 年鎖定加成獎勵發放紀錄",
+      "description": "Gold DAO 獎勵會兌換為 OGY，並每週發放給鎖定 5 年的神經元。",
+      "rate": "加成獎勵率",
+      "chartLabel": "已發放 OGY",
+      "paid": "已發放",
+      "paidTooltip": "自首輪加成獎勵以來，發放給鎖定 5 年的神經元的 OGY 總額。",
+      "method": "此比率以最近 12 次每週發放金額的平均值換算為年化金額，再除以鎖定 5 年的 OGY 總量計算。過往發放紀錄不保證未來回報。"
+    },
     "estimateRewards": {
       "title": "估算您的獎勵",
+      "booster": "加成",
+      "base": "基礎",
+      "perYear": "每年",
+      "boosterPaid": "已發放加成獎勵",
+      "since": "起始時間：",
+      "boosterUnavailable": "暫無加成獎勵率。",
       "lockDuration": "鎖定期",
       "participants": "參與者",
       "lockedForAtLeast": "目前至少鎖定",

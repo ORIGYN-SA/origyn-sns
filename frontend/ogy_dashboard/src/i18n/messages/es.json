@@ -293,8 +293,24 @@
         "tooltip": "Poder de voto medio entre todos los participantes."
       }
     },
+    "boosterHistory": {
+      "link": "Acerca de la bonificación",
+      "title": "Pagos de bonificación por bloqueo de 5 años",
+      "description": "Las recompensas de Gold DAO se convierten en OGY y se pagan semanalmente a las neuronas bloqueadas durante 5 años.",
+      "rate": "Tasa de bonificación",
+      "chartLabel": "OGY pagados",
+      "paid": "Pagado",
+      "paidTooltip": "Total de OGY pagados a las neuronas bloqueadas durante 5 años desde la primera ronda de bonificación.",
+      "method": "La tasa es el promedio de los últimos 12 pagos semanales, anualizado en relación con los OGY bloqueados durante 5 años. Los pagos pasados no garantizan rendimientos futuros."
+    },
     "estimateRewards": {
       "title": "Estima tus recompensas",
+      "booster": "bonificación",
+      "base": "base",
+      "perYear": "al año",
+      "boosterPaid": "bonificación pagada",
+      "since": "desde",
+      "boosterUnavailable": "Tasa de bonificación no disponible.",
       "lockDuration": "Duración del bloqueo",
       "participants": "participantes",
       "lockedForAtLeast": "actualmente bloqueado durante al menos",

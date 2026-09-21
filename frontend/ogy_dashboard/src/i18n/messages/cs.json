@@ -293,8 +293,24 @@
         "tooltip": "Průměrná hlasovací síla napříč všemi účastníky."
       }
     },
+    "boosterHistory": {
+      "link": "O bonusu",
+      "title": "Výplaty bonusu za uzamčení na 5 let",
+      "description": "Odměny z Gold DAO se směňují za OGY a každý týden se vyplácejí neuronům uzamčeným na 5 let.",
+      "rate": "Bonusová sazba",
+      "chartLabel": "Vyplacené OGY",
+      "paid": "Vyplaceno",
+      "paidTooltip": "Celkové OGY vyplacené neuronům uzamčeným na 5 let od prvního bonusového kola.",
+      "method": "Sazba vychází z průměru posledních 12 týdenních výplat, přepočteného na roční bázi vzhledem k OGY uzamčeným na 5 let. Minulé výplaty nezaručují budoucí výnosy."
+    },
     "estimateRewards": {
       "title": "Odhadněte své odměny",
+      "booster": "bonus",
+      "base": "základ",
+      "perYear": "ročně",
+      "boosterPaid": "vyplacené bonusy",
+      "since": "od",
+      "boosterUnavailable": "Bonusová sazba není k dispozici.",
       "lockDuration": "Doba uzamčení",
       "participants": "účastníků",
       "lockedForAtLeast": "aktuálně uzamčeno na nejméně",
