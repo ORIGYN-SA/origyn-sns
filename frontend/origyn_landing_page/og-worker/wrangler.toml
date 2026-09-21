@@ -4,6 +4,8 @@ account_id = "c615f9ee2d4be698e99d439964dbe626"
 compatibility_date = "2025-06-01"
 # jpeg-js encodes through Buffer.
 compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+routes = [{ pattern = "og.bity.com", custom_domain = true }]
 
 # Fonts and artwork are served through the binding rather than bundled, so they
 # do not count against the worker's script size. `run_worker_first` keeps the

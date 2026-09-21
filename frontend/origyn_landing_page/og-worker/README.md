@@ -3,7 +3,7 @@
 Draws the site's Open Graph cards on request.
 
 ```
-GET https://origyn-og.bity-c61.workers.dev/<page id>/<locale>.jpg
+GET https://og.bity.com/<page id>/<locale>.jpg
 ```
 
 Page ids come from [`src/seo/pages.ts`](../src/seo/pages.ts): `home`, `dpp`,
@@ -24,6 +24,22 @@ worker is down, social previews lose their image; the pages themselves are
 unaffected.
 
 ## Deploying
+
+`wrangler.toml` maps `og.bity.com` to this worker in the Bity account.
+Cloudflare manages the hostname's DNS and TLS certificate. The `workers.dev`
+endpoint remains enabled for previously published image URLs.
+
+To apply domain changes to the existing deployment:
+
+```sh
+cd frontend/origyn_landing_page/og-worker
+npx wrangler triggers deploy
+```
+
+Verify `https://og.bity.com/home/en.jpg` returns a JPEG over HTTPS before
+rebuilding and deploying the website with the new `VITE_OG_IMAGE_BASE_URL`.
+
+To deploy worker code and assets:
 
 ```
 cd frontend/origyn_landing_page/og-worker
