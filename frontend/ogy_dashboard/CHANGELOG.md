@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.51] - 2026-09-22
+
+#### Fixed
+
+- Open information and identifier tooltips, including chart-card tooltips, on mobile with a tap, and dismiss them by tapping again or outside.
+
 ### [1.0.50] - 2026-09-21
 
 #### Added
