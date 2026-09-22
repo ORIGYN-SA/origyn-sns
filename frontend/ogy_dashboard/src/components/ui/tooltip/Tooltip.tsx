@@ -4,6 +4,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "./TooltipPrimitive";
+import { useTouchTooltip } from "@origyn/shared-ui/ui";
 
 type TooltipProps = PropsWithChildren<{
   content: ReactNode;
@@ -16,13 +17,19 @@ const Tooltip = ({
   side = "bottom",
   className,
   children,
-}: TooltipProps) => (
-  <TooltipRoot>
-    <TooltipTrigger asChild>{children}</TooltipTrigger>
-    <TooltipContent side={side} className={className}>
-      <div className="px-3 py-2 text-xs break-all">{content}</div>
-    </TooltipContent>
-  </TooltipRoot>
-);
+}: TooltipProps) => {
+  const { rootProps, triggerProps } = useTouchTooltip();
+
+  return (
+    <TooltipRoot {...rootProps}>
+      <TooltipTrigger asChild {...triggerProps}>
+        {children}
+      </TooltipTrigger>
+      <TooltipContent side={side} className={className}>
+        <div className="px-3 py-2 text-xs break-all">{content}</div>
+      </TooltipContent>
+    </TooltipRoot>
+  );
+};
 
 export default Tooltip;
