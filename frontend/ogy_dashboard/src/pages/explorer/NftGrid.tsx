@@ -35,6 +35,9 @@ const NftGrid = ({
 
   return (
     <div className="flex flex-col gap-8">
+      {!isLoading && cards.length === 0 && (
+        <p className="text-muted">{t("explorer.noResults")}</p>
+      )}
       <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
         {isLoading
           ? Array.from({ length: SKELETON_COUNT }).map((_, i) => (
