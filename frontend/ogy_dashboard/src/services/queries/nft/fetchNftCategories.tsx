@@ -7,14 +7,15 @@ import {
 const PAGE_SIZE = 100;
 
 const fetchAllCollections = async (): Promise<ApiNftCollection[]> => {
-  const first = await gldtEndpoints.getNftCollections({ limit: PAGE_SIZE });
-  const items = [...first.items];
+  let page = await gldtEndpoints.getNftCollections({ limit: PAGE_SIZE });
+  const items = [...page.items];
 
-  for (let offset = PAGE_SIZE; offset < first.total; offset += PAGE_SIZE) {
-    const page = await gldtEndpoints.getNftCollections({
+  while (items.length < page.total) {
+    page = await gldtEndpoints.getNftCollections({
       limit: PAGE_SIZE,
-      offset,
+      offset: items.length,
     });
+    if (page.items.length === 0) break;
     items.push(...page.items);
   }
 
