@@ -2,6 +2,7 @@ import { TRANSACTION_FEE } from "@constants/index";
 import { getActor } from "@services/actor";
 import type { SubAccount } from "@dfinity/ledger-icp";
 import { decodeIcrcAccount } from "@dfinity/ledger-icrc";
+import { requireVariant } from "@services/queries/utils/variant";
 
 const transferOGY = async ({
   amount,
@@ -29,7 +30,7 @@ const transferOGY = async ({
     created_at_time: [],
     amount: amount - BigInt(TRANSACTION_FEE),
   });
-  return result;
+  return requireVariant<bigint>(result, "Ok", "OGY transfer failed");
 };
 
 export default transferOGY;
