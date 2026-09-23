@@ -1,5 +1,6 @@
 import gldtAPI from "@services/api/gldt/v1";
 import { gldtNftPath } from "@services/api/gldt/v1/utils";
+import { filterNftPage } from "@services/api/gldt/v1/collectionVisibility";
 
 export type NftEventType = "mint" | "transfer" | "burn";
 
@@ -56,10 +57,10 @@ const fetchNftTransactions = async ({
       offset,
     })
   );
-  return {
+  return filterNftPage({
     ...data,
     items: data.items ?? [],
-  };
+  });
 };
 
 export default fetchNftTransactions;

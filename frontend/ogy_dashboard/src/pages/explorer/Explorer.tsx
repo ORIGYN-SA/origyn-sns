@@ -5,6 +5,7 @@ import { Carousel, Search } from "@components/ui";
 import { useLocalePath, useT } from "@i18n/LocaleContext";
 import { shortenId } from "@helpers/strings";
 import { asValidPrincipal } from "@helpers/principal";
+import { isCollectionVisible } from "@services/api/gldt/v1/collectionVisibility";
 import useNftCategories from "@hooks/nft/useNftCategories";
 import useNftCollection, {
   collectionQueryOptions,
@@ -194,7 +195,9 @@ const SearchResults = ({
   const { cards, collections, accounts, isLoading, isError } =
     useNftSearch(query);
 
-  const queryPrincipal = asValidPrincipal(query);
+  const queryPrincipal = isCollectionVisible(query.trim())
+    ? asValidPrincipal(query)
+    : null;
   const collectionQuery = useNftCollection(queryPrincipal);
   const queryCollection = collectionQuery.data;
   const collectionRows =
@@ -302,7 +305,7 @@ export const Explorer = () => {
 
   const handleSearchEnter = async (value: string) => {
     const principal = asValidPrincipal(value);
-    if (!principal) return;
+    if (!principal || !isCollectionVisible(principal)) return;
 
     let collection;
     try {
