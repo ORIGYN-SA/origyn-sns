@@ -10,7 +10,12 @@ import {
 import type { Agent } from "@dfinity/agent";
 import { AccountIdentifier, type SubAccount } from "@dfinity/ledger-icp";
 import { Principal } from "@dfinity/principal";
-import { useAuth, useAgent, useIsInitializing } from "@amerej/identitykit/react";
+import {
+  useAuth,
+  useAgent,
+  useIdentity,
+  useIsInitializing,
+} from "@amerej/identitykit/react";
 import { InternetIdentity, OISY } from "@amerej/identitykit";
 
 import {
@@ -148,6 +153,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const { user, isConnecting, connect, disconnect } = useAuth();
   const identitykitAgent = useAgent({ host: IC_HOST });
   const isInitializing = useIsInitializing();
+  const identity = useIdentity();
 
   const [listOpen, setListOpen] = useState(false);
   const [pending, setPending] = useState<WalletId | null>(null);
@@ -156,7 +162,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     undefined
   );
 
-  const sessionExpired = useSyncExternalStore(
+  const authExpired = useSyncExternalStore(
     subscribeAuthExpiry,
     getAuthExpiredSnapshot,
     getAuthExpiredSnapshot
@@ -170,6 +176,16 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const activeWallet: WalletId | undefined = plugSession
     ? "plug"
     : (identityKitWalletId ?? undefined);
+
+  // IdentityKit restores a stored Internet Identity user even after its
+  // delegation has expired, and then signs every call as anonymous. A signing
+  // identity that isn't the user means the session is over.
+  const iiSessionStale =
+    activeWallet === "dfinity" &&
+    !!user &&
+    !!identity &&
+    identity.getPrincipal().toText() !== user.principal.toText();
+  const sessionExpired = authExpired || iiSessionStale;
 
   const authedAgent: Agent | undefined = plugSession
     ? plugSession.agent
