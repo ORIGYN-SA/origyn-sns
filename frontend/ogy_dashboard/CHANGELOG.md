@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.52] - 2026-09-23
+
+#### Added
+
+- Add frontend configuration to hide selected collections and their certificates and transactions from the Viewer, including search results and direct links.
+
 ### [1.0.51] - 2026-09-22
 
 #### Fixed

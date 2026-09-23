@@ -30,10 +30,13 @@ export const CollectionsPage = () => {
         onBack={() => navigate(-1)}
       />
       <div className="pt-8">
-        {!isLoading && collections.length === 0 ? (
+        {!isLoading && total === 0 ? (
           <p className="text-muted">{t("explorer.noResults")}</p>
         ) : (
           <div className="flex flex-col gap-8">
+            {!isLoading && collections.length === 0 && (
+              <p className="text-muted">{t("explorer.noResults")}</p>
+            )}
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
               {isLoading
                 ? Array.from({ length: 8 }).map((_, i) => (
