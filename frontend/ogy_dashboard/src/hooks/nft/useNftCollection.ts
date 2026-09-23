@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import gldtEndpoints from "@services/api/gldt/v1/endpoints";
 import { HttpError } from "@services/api/httpClient";
+import { isCollectionVisible } from "@services/api/gldt/v1/collectionVisibility";
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 const fetchCollectionOrNull = async (canisterId: string) => {
+  if (!isCollectionVisible(canisterId)) return null;
   try {
     return await gldtEndpoints.getNftCollection(canisterId);
   } catch (error) {

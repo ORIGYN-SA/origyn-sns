@@ -18,6 +18,7 @@ import { Proposals } from "@pages/proposals/Proposals";
 import { ProposalsDetails } from "@pages/proposals-details/ProposalsDetails";
 import { TokenDistribution } from "@pages/token-distribution";
 import { Explorer } from "@pages/explorer/Explorer";
+import { VisibleCollection } from "@pages/explorer/VisibleCollection";
 import { TransactionHistory } from "@pages/transaction-history/TransactionHistory";
 import { TransactionsDetails } from "@pages/transactions-details/TransactionsDetails";
 import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
@@ -172,7 +173,9 @@ const router = createBrowserRouter([
                 path: "certificate/:canisterId/:tokenId",
                 element: (
                   <LazyPage>
-                    <CertificatePage />
+                    <VisibleCollection>
+                      <CertificatePage />
+                    </VisibleCollection>
                   </LazyPage>
                 ),
               },
@@ -188,7 +191,9 @@ const router = createBrowserRouter([
                 path: "collections/:canisterId",
                 element: (
                   <LazyPage>
-                    <CollectionDetailPage />
+                    <VisibleCollection>
+                      <CollectionDetailPage />
+                    </VisibleCollection>
                   </LazyPage>
                 ),
               },
@@ -196,7 +201,9 @@ const router = createBrowserRouter([
                 path: "transaction/:canisterId/:tokenId/:blockId",
                 element: (
                   <LazyPage>
-                    <NftTransactionPage />
+                    <VisibleCollection>
+                      <NftTransactionPage />
+                    </VisibleCollection>
                   </LazyPage>
                 ),
               },

@@ -1,3 +1,17 @@
+# Dashboard collection visibility
+
+Edit `DISABLED_COLLECTION_IDS` in `src/services/api/gldt/v1/collectionVisibility.ts` to hide or restore a collection by canister ID.
+The list currently hides Collection Privée Bochsler, `rm7ew-myaaa-aaaas-qg3uq-cai`.
+
+The dashboard filters collection cards, certificates, search results, collector holdings and history, and NFT transactions.
+Direct collection, certificate, and transaction URLs for disabled collections redirect to the viewer in the current language.
+
+The frontend reads subsequent API pages until it fills the requested page with visible results or reaches the end.
+Page offsets count visible results, and pagination expands as more visible results are found. Collector statistics still use server totals.
+The backend and its public data are unchanged.
+
+Run `node --experimental-strip-types scripts/check-collection-visibility.mjs` with Node 22.6 or later to check the filters and pagination behavior.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
