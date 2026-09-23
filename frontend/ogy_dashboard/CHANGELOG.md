@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.54] - 2026-09-23
+
+#### Fixed
+
+- Show the ledger's error when an OGY transfer is rejected, instead of reporting it as successful.
+- Ask Internet Identity users to reconnect when their session expired while the dashboard was closed. Before, the dashboard kept showing them as signed in but sent their calls as an anonymous user, so transfers were rejected.
+
 ### [1.0.53] - 2026-09-23
 
 #### Fixed

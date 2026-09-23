@@ -93,14 +93,10 @@ const Transfer = ({ show, handleClose }: TransferProps) => {
     transfer(
       { amount: numberToE8s(data.amount), to: data.recipientAddress },
       {
-        onSuccess: (result) => {
-          if (Object.keys(result)[0] !== "Ok") {
-            throw new Error(Object.keys(result.Err).toString());
-          } else {
-            queryClient.invalidateQueries({
-              queryKey: ["userFetchBalanceOGY"],
-            });
-          }
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["userFetchBalanceOGY"],
+          });
         },
       }
     );
