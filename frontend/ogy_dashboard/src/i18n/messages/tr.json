@@ -798,7 +798,8 @@
       "openPage": "Sertifika sayfasını aç",
       "symbol": "Sembol",
       "canisterId": "Canister kimliği",
-      "categories": "Kategoriler"
+      "categories": "Kategoriler",
+      "privateField": "Bu alanı yalnızca yetkili kullanıcılar görebilir."
     }
   },
   "ui": {

@@ -798,7 +798,8 @@
       "openPage": "Fungua ukurasa wa cheti",
       "symbol": "Alama",
       "canisterId": "Kitambulisho cha canister",
-      "categories": "Kategoria"
+      "categories": "Kategoria",
+      "privateField": "Watumiaji walioidhinishwa pekee wanaweza kuona sehemu hii."
     }
   },
   "ui": {

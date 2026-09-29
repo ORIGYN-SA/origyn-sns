@@ -798,7 +798,8 @@
       "openPage": "Abrir página do certificado",
       "symbol": "Símbolo",
       "canisterId": "ID do canister",
-      "categories": "Categorias"
+      "categories": "Categorias",
+      "privateField": "Apenas utilizadores autorizados podem ver este campo."
     }
   },
   "ui": {

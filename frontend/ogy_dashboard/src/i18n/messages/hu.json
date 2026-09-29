@@ -798,7 +798,8 @@
       "openPage": "Tanúsítványoldal megnyitása",
       "symbol": "Szimbólum",
       "canisterId": "Canister-azonosító",
-      "categories": "Kategóriák"
+      "categories": "Kategóriák",
+      "privateField": "Ezt a mezőt csak jogosult felhasználók láthatják."
     }
   },
   "ui": {

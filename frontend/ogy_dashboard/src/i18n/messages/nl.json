@@ -798,7 +798,8 @@
       "openPage": "Certificaatpagina openen",
       "symbol": "Symbool",
       "canisterId": "Canister-ID",
-      "categories": "Categorieën"
+      "categories": "Categorieën",
+      "privateField": "Alleen geautoriseerde gebruikers kunnen dit veld zien."
     }
   },
   "ui": {
