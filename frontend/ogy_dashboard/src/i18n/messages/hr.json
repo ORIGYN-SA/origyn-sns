@@ -293,6 +293,13 @@
         "tooltip": "Prosječna glasačka moć svih sudionika."
       }
     },
+    "apyByLock": {
+      "title": "Nagrade prema trajanju zaključavanja",
+      "description": "Svaki uloženi neuron zarađuje OGY nagrade za glasanje, a dulje zaključavanje donosi više. Neuroni zaključani na 5 godina dobivaju i 5-godišnji bonus: nagrade Gold DAO zamjenjuju se za OGY i isplaćuju tjedno povrh osnovnih nagrada.",
+      "base": "Osnovne nagrade",
+      "booster": "5-godišnji bonus",
+      "footnote": "Osnovne stope procjenjuju se na temelju trenutne snage glasa. Stopa bonusa prosjek je posljednjih 12 tjednih isplata, izražen na godišnjoj razini. Prošle isplate ne jamče buduće prinose."
+    },
     "boosterHistory": {
       "link": "O bonusu",
       "title": "Isplate bonusa za zaključavanje na 5 godina",

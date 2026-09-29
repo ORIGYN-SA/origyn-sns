@@ -293,6 +293,13 @@
         "tooltip": "Genomsnittlig röstkraft för alla deltagare."
       }
     },
+    "apyByLock": {
+      "title": "Belöningar efter låsningstid",
+      "description": "Varje stakad neuron tjänar OGY-röstbelöningar, och längre låsning ger mer. Neuroner som är låsta i 5 år får också 5-årsbonusen: Gold DAO-belöningar växlas till OGY och betalas ut varje vecka utöver grundbelöningarna.",
+      "base": "Grundbelöningar",
+      "booster": "5-årsbonus",
+      "footnote": "Grundsatserna uppskattas utifrån nuvarande rösträtt. Bonussatsen är genomsnittet av de senaste 12 veckoutbetalningarna, omräknat till årsbasis. Tidigare utbetalningar garanterar inte framtida avkastning."
+    },
     "boosterHistory": {
       "link": "Om bonusen",
       "title": "Bonusutbetalningar vid 5 års låsning",

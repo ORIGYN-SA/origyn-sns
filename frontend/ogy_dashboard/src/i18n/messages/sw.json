@@ -293,6 +293,13 @@
         "tooltip": "Wastani wa nguvu ya upigaji kura kwa washiriki wote."
       }
     },
+    "apyByLock": {
+      "title": "Zawadi kulingana na muda wa kufunga",
+      "description": "Kila neuroni iliyowekwa stake hupata zawadi za kupiga kura kwa OGY, na kufunga kwa muda mrefu kunalipa zaidi. Neuroni zilizofungwa kwa miaka 5 pia hupokea bonasi ya miaka 5: zawadi za Gold DAO hubadilishwa kuwa OGY na kulipwa kila wiki juu ya zawadi za msingi.",
+      "base": "Zawadi za msingi",
+      "booster": "Bonasi ya miaka 5",
+      "footnote": "Viwango vya msingi hukadiriwa kutoka nguvu ya sasa ya kura. Kiwango cha bonasi ni wastani wa malipo 12 ya mwisho ya kila wiki, kwa msingi wa mwaka. Malipo ya awali hayahakikishi mapato ya baadaye."
+    },
     "boosterHistory": {
       "link": "Kuhusu bonasi",
       "title": "Malipo ya bonasi kwa kufunga kwa miaka 5",

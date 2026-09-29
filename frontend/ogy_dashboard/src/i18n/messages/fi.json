@@ -293,6 +293,13 @@
         "tooltip": "Keskimääräinen äänivalta kaikkien osallistujien kesken."
       }
     },
+    "apyByLock": {
+      "title": "Palkkiot lukituksen keston mukaan",
+      "description": "Jokainen panostettu neuroni ansaitsee OGY-äänestyspalkkioita, ja pidempi lukitus tuottaa enemmän. 5 vuodeksi lukitut neuronit saavat lisäksi 5 vuoden lisäpalkkion: Gold DAO -palkkiot vaihdetaan OGY:ksi ja maksetaan viikoittain peruspalkkioiden lisäksi.",
+      "base": "Peruspalkkiot",
+      "booster": "5 vuoden lisäpalkkio",
+      "footnote": "Peruskorot arvioidaan nykyisen äänivallan perusteella. Lisäpalkkioprosentti on viimeisimmän 12 viikkomaksun keskiarvo vuositettuna. Aiemmat maksut eivät takaa tulevaa tuottoa."
+    },
     "boosterHistory": {
       "link": "Tietoa lisäpalkkiosta",
       "title": "5 vuoden lukituksen lisäpalkkiot",

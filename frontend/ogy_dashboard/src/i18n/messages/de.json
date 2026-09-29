@@ -293,6 +293,13 @@
         "tooltip": "Durchschnittliche Stimmkraft über alle Teilnehmer."
       }
     },
+    "apyByLock": {
+      "title": "Belohnungen nach Sperrdauer",
+      "description": "Jedes gestakte Neuron verdient OGY-Abstimmungsbelohnungen, und längere Sperren bringen mehr. Neuronen, die für 5 Jahre gesperrt sind, erhalten zusätzlich den 5-Jahres-Bonus: Gold-DAO-Belohnungen werden in OGY getauscht und wöchentlich zusätzlich zu den Basisbelohnungen ausgezahlt.",
+      "base": "Basisbelohnungen",
+      "booster": "5-Jahres-Bonus",
+      "footnote": "Die Basisraten werden anhand der aktuellen Stimmkraft geschätzt. Die Bonusrate ist der auf ein Jahr hochgerechnete Durchschnitt der letzten 12 wöchentlichen Auszahlungen. Frühere Auszahlungen garantieren keine zukünftigen Erträge."
+    },
     "boosterHistory": {
       "link": "Über den Bonus",
       "title": "Bonusauszahlungen bei 5 Jahren Sperrdauer",

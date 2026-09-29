@@ -293,6 +293,13 @@
         "tooltip": "Kekuatan suara rata-rata di antara semua peserta."
       }
     },
+    "apyByLock": {
+      "title": "Imbalan berdasarkan durasi penguncian",
+      "description": "Setiap neuron yang di-stake memperoleh imbalan voting OGY, dan penguncian lebih lama memberi lebih banyak. Neuron yang dikunci selama 5 tahun juga menerima bonus 5 tahun: imbalan Gold DAO ditukar menjadi OGY dan dibayarkan setiap minggu di atas imbalan dasar.",
+      "base": "Imbalan dasar",
+      "booster": "Bonus 5 tahun",
+      "footnote": "Tingkat dasar diperkirakan dari kekuatan suara saat ini. Tingkat bonus adalah rata-rata 12 pembayaran mingguan terakhir, dihitung tahunan. Pembayaran sebelumnya tidak menjamin hasil di masa depan."
+    },
     "boosterHistory": {
       "link": "Tentang bonus",
       "title": "Pembayaran bonus penguncian 5 tahun",

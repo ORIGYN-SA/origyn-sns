@@ -293,6 +293,13 @@
         "tooltip": "Průměrná hlasovací síla napříč všemi účastníky."
       }
     },
+    "apyByLock": {
+      "title": "Odměny podle doby uzamčení",
+      "description": "Každý vložený neuron získává hlasovací odměny v OGY a delší uzamčení přináší víc. Neurony uzamčené na 5 let získávají navíc 5letý bonus: odměny z Gold DAO se směňují za OGY a každý týden se vyplácejí navíc k základním odměnám.",
+      "base": "Základní odměny",
+      "booster": "5letý bonus",
+      "footnote": "Základní sazby jsou odhadnuty z aktuální hlasovací síly. Bonusová sazba je průměr posledních 12 týdenních výplat přepočtený na rok. Minulé výplaty nezaručují budoucí výnosy."
+    },
     "boosterHistory": {
       "link": "O bonusu",
       "title": "Výplaty bonusu za uzamčení na 5 let",
