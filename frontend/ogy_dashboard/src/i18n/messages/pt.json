@@ -293,6 +293,13 @@
         "tooltip": "Poder de voto médio entre todos os participantes."
       }
     },
+    "apyByLock": {
+      "title": "Recompensas por duração do bloqueio",
+      "description": "Cada neurónio em staking ganha recompensas de votação em OGY, e bloqueios mais longos rendem mais. Os neurónios bloqueados por 5 anos também recebem o bónus de 5 anos: as recompensas do Gold DAO são convertidas em OGY e pagas semanalmente além das recompensas base.",
+      "base": "Recompensas base",
+      "booster": "Bónus de 5 anos",
+      "footnote": "As taxas base são estimadas a partir do poder de voto atual. A taxa do bónus é a média dos últimos 12 pagamentos semanais, anualizada. Pagamentos passados não garantem retornos futuros."
+    },
     "boosterHistory": {
       "link": "Sobre o bónus",
       "title": "Pagamentos de bónus por bloqueio de 5 anos",

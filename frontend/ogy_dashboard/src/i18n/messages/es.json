@@ -293,6 +293,13 @@
         "tooltip": "Poder de voto medio entre todos los participantes."
       }
     },
+    "apyByLock": {
+      "title": "Recompensas según la duración del bloqueo",
+      "description": "Cada neurona en staking obtiene recompensas de votación en OGY, y los bloqueos más largos rinden más. Las neuronas bloqueadas durante 5 años también reciben la bonificación de 5 años: las recompensas de Gold DAO se convierten en OGY y se pagan semanalmente además de las recompensas base.",
+      "base": "Recompensas base",
+      "booster": "Bonificación de 5 años",
+      "footnote": "Las tasas base se estiman a partir del poder de voto actual. La tasa de bonificación es el promedio de los últimos 12 pagos semanales, anualizado. Los pagos pasados no garantizan rendimientos futuros."
+    },
     "boosterHistory": {
       "link": "Acerca de la bonificación",
       "title": "Pagos de bonificación por bloqueo de 5 años",

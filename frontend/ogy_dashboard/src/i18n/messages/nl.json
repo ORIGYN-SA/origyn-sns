@@ -293,6 +293,13 @@
         "tooltip": "Gemiddelde stemkracht over alle deelnemers."
       }
     },
+    "apyByLock": {
+      "title": "Beloningen per vergrendelingsduur",
+      "description": "Elk gestaakt neuron verdient OGY-stembeloningen, en langer vergrendelen levert meer op. Neuronen die voor 5 jaar zijn vergrendeld ontvangen ook de 5-jaarsbonus: beloningen van Gold DAO worden omgewisseld naar OGY en wekelijks uitbetaald bovenop de basisbeloningen.",
+      "base": "Basisbeloningen",
+      "booster": "5-jaarsbonus",
+      "footnote": "De basispercentages zijn geschat op basis van de huidige stemkracht. Het bonuspercentage is het gemiddelde van de laatste 12 wekelijkse uitbetalingen, op jaarbasis. Eerdere uitbetalingen bieden geen garantie voor toekomstig rendement."
+    },
     "boosterHistory": {
       "link": "Over de bonus",
       "title": "Bonusuitbetalingen bij 5 jaar vergrendeling",

@@ -293,6 +293,13 @@
         "tooltip": "Średnia siła głosu wszystkich uczestników."
       }
     },
+    "apyByLock": {
+      "title": "Nagrody według okresu blokady",
+      "description": "Każdy zastakowany neuron zarabia nagrody OGY za głosowanie, a dłuższe blokady przynoszą więcej. Neurony zablokowane na 5 lat otrzymują też 5-letnią premię: nagrody z Gold DAO są wymieniane na OGY i wypłacane co tydzień oprócz nagród podstawowych.",
+      "base": "Nagrody podstawowe",
+      "booster": "5-letnia premia",
+      "footnote": "Stawki podstawowe są szacowane na podstawie bieżącej siły głosu. Stopa premii to średnia z ostatnich 12 tygodniowych wypłat w ujęciu rocznym. Wcześniejsze wypłaty nie gwarantują przyszłych zysków."
+    },
     "boosterHistory": {
       "link": "O premii",
       "title": "Wypłaty premii za blokadę na 5 lat",

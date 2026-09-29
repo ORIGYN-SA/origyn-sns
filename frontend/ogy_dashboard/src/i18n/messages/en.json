@@ -293,6 +293,13 @@
         "tooltip": "Average voting power across all participants."
       }
     },
+    "apyByLock": {
+      "title": "Rewards by lock duration",
+      "description": "Every staked neuron earns OGY voting rewards, and longer locks earn more. Neurons locked for 5 years also receive the 5-year booster: Gold DAO rewards are swapped to OGY and paid out weekly on top of the base rewards.",
+      "base": "Base rewards",
+      "booster": "5-year booster",
+      "footnote": "Base rates are estimated from current voting power. The booster rate is the average of the last 12 weekly payouts, annualized. Past payouts do not guarantee future returns."
+    },
     "boosterHistory": {
       "link": "About the booster",
       "title": "5-year booster payouts",

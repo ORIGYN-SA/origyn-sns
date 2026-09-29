@@ -293,6 +293,13 @@
         "tooltip": "Átlagos szavazati erő az összes résztvevő között."
       }
     },
+    "apyByLock": {
+      "title": "Jutalmak a zárolás időtartama szerint",
+      "description": "Minden letétbe helyezett neuron OGY szavazási jutalmat kap, és a hosszabb zárolás többet hoz. Az 5 évre zárolt neuronok az 5 éves bónuszt is megkapják: a Gold DAO jutalmakat OGY-re váltják, és hetente kifizetik az alapjutalmak mellett.",
+      "base": "Alapjutalmak",
+      "booster": "5 éves bónusz",
+      "footnote": "Az alapráták a jelenlegi szavazóerő alapján becsültek. A bónuszráta az utolsó 12 heti kifizetés éves szintre vetített átlaga. A korábbi kifizetések nem garantálják a jövőbeli hozamot."
+    },
     "boosterHistory": {
       "link": "A bónuszról",
       "title": "Bónuszkifizetések 5 éves zárolásra",

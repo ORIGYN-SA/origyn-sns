@@ -293,6 +293,13 @@
         "tooltip": "Gennemsnitlig stemmestyrke på tværs af alle deltagere."
       }
     },
+    "apyByLock": {
+      "title": "Belønninger efter låseperiode",
+      "description": "Hvert stakede neuron optjener OGY-stemmebelønninger, og længere låsning giver mere. Neuroner, der er låst i 5 år, får også 5-årsbonussen: Gold DAO-belønninger veksles til OGY og udbetales ugentligt oven i grundbelønningerne.",
+      "base": "Grundbelønninger",
+      "booster": "5-årsbonus",
+      "footnote": "Grundsatser er estimeret ud fra den aktuelle stemmekraft. Bonussatsen er gennemsnittet af de seneste 12 ugentlige udbetalinger, opgjort på årsbasis. Tidligere udbetalinger er ingen garanti for fremtidigt afkast."
+    },
     "boosterHistory": {
       "link": "Om bonussen",
       "title": "Bonusudbetalinger ved 5 års låsning",
