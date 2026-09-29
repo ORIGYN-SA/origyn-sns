@@ -798,7 +798,8 @@
       "openPage": "Deschide pagina certificatului",
       "symbol": "Simbol",
       "canisterId": "ID canister",
-      "categories": "Categorii"
+      "categories": "Categorii",
+      "privateField": "Doar utilizatorii autorizați pot vedea acest câmp."
     }
   },
   "ui": {

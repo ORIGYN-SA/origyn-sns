@@ -798,7 +798,8 @@
       "openPage": "Buksan ang pahina ng sertipiko",
       "symbol": "Simbolo",
       "canisterId": "Canister ID",
-      "categories": "Mga kategorya"
+      "categories": "Mga kategorya",
+      "privateField": "Mga awtorisadong user lang ang makakakita sa field na ito."
     }
   },
   "ui": {

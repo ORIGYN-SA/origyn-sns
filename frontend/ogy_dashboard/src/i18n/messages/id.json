@@ -798,7 +798,8 @@
       "openPage": "Buka halaman sertifikat",
       "symbol": "Simbol",
       "canisterId": "ID Canister",
-      "categories": "Kategori"
+      "categories": "Kategori",
+      "privateField": "Hanya pengguna yang berwenang yang dapat melihat kolom ini."
     }
   },
   "ui": {

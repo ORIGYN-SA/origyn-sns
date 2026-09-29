@@ -798,7 +798,8 @@
       "openPage": "打开证书页面",
       "symbol": "代号",
       "canisterId": "容器 ID",
-      "categories": "类别"
+      "categories": "类别",
+      "privateField": "只有获得授权的用户才能查看此字段。"
     }
   },
   "ui": {
