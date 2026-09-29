@@ -798,7 +798,8 @@
       "openPage": "開啟憑證頁面",
       "symbol": "代號",
       "canisterId": "容器 ID",
-      "categories": "類別"
+      "categories": "類別",
+      "privateField": "只有獲得授權的使用者才能查看此欄位。"
     }
   },
   "ui": {

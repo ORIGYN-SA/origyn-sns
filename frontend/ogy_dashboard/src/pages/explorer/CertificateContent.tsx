@@ -51,7 +51,11 @@ const CertificateContent = ({
     <div className="p-4 pt-2">
       <Suspense fallback={<CertificateSkeleton />}>
         <CertificateViewer
-          certificate={toCertificate(nft)}
+          certificate={toCertificate(
+            nft,
+            template,
+            t("explorer.detail.privateField")
+          )}
           template={template}
           selectedLanguage={locale}
           certificateTabLabel={t("explorer.detail.certificate")}

@@ -798,7 +798,8 @@
       "openPage": "Öppna certifikatsidan",
       "symbol": "Symbol",
       "canisterId": "Canister-ID",
-      "categories": "Kategorier"
+      "categories": "Kategorier",
+      "privateField": "Endast behöriga användare kan se det här fältet."
     }
   },
   "ui": {

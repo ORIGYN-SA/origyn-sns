@@ -798,7 +798,8 @@
       "openPage": "Zertifikatseite öffnen",
       "symbol": "Symbol",
       "canisterId": "Canister-ID",
-      "categories": "Kategorien"
+      "categories": "Kategorien",
+      "privateField": "Nur berechtigte Nutzer können dieses Feld sehen."
     }
   },
   "ui": {

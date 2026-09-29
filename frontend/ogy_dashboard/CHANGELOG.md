@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.57] - 2026-09-29
+
+#### Added
+
+- Show private fields on certificates and DPPs as locked in the Viewer, with a note that only authorized users can see them. Before, these fields were left out of the certificate.
+
 ### [1.0.56] - 2026-09-29
 
 #### Added

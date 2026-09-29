@@ -5,7 +5,11 @@ import {
   ApiNftMetadata,
   ApiNftOwnedItem,
 } from "@services/api/gldt/v1/types";
-import { Certificate } from "@origyn/shared-ui/certificate";
+import {
+  Certificate,
+  TemplateItem,
+  TemplateStructure,
+} from "@origyn/shared-ui/certificate";
 
 type NftLike = ApiNftItem | ApiNftHit | ApiNftAccountItem | ApiNftOwnedItem;
 
@@ -104,8 +108,36 @@ export const toNftCard = (
   };
 };
 
+// The Minting Studio marks private items on the template; shared-ui's type
+// doesn't carry the flag.
+type StudioTemplateItem = TemplateItem & { private?: boolean };
+
+// Private values are stored encrypted in `metadata.private` and only the
+// gateway can open them, so every public reader sees them locked.
+const lockedPrivateFields = (
+  metadata: ApiNftMetadata,
+  data: Record<string, unknown>,
+  template: TemplateStructure,
+  message: string
+): Certificate["fieldStates"] => {
+  if (!readRecord(metadata["private"])) return undefined;
+  const fieldStates: NonNullable<Certificate["fieldStates"]> = {};
+  for (const section of template.sections) {
+    for (const item of section.items as StudioTemplateItem[]) {
+      if (item.private && !Object.hasOwn(data, item.id)) {
+        fieldStates[item.id] = { locked: true, message };
+      }
+    }
+  }
+  return fieldStates;
+};
+
 // Maps the API metadata blob to the Minting Studio Certificate shape.
-export const toCertificate = (nft: NftCard): Certificate => {
+export const toCertificate = (
+  nft: NftCard,
+  template: TemplateStructure,
+  lockedMessage: string
+): Certificate => {
   const metadata = nft.metadata ?? {};
   const data = readRecord(metadata["data"]) ?? {};
 
@@ -115,6 +147,7 @@ export const toCertificate = (nft: NftCard): Certificate => {
     description: readString(metadata["description"]) ?? undefined,
     certified_by: nft.issuer ?? undefined,
     data: data as Certificate["data"],
+    fieldStates: lockedPrivateFields(metadata, data, template, lockedMessage),
   };
 };
 
