@@ -19,6 +19,7 @@ import ChartVotingParticipation from "./ChartVotingParticipation";
 import BoosterHistory, {
   BOOSTER_HISTORY_ID,
 } from "./estimate-rewards/BoosterHistory";
+import ApyByLockDuration from "./estimate-rewards/ApyByLockDuration";
 
 const HeroBackground = () => (
   <div
@@ -166,6 +167,7 @@ export const Governance = () => {
           <ChartVotingParticipation />
         </div>
         <div id={BOOSTER_HISTORY_ID} className="mb-16 scroll-mt-28">
+          <ApyByLockDuration className="mb-16" />
           <BoosterHistory />
         </div>
 

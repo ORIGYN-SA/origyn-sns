@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.56] - 2026-09-29
+
+#### Added
+
+- Add a chart to the governance dashboard comparing reward rates by lock duration, with the 5-year booster stacked on top of the base rate.
+- Explain how the 5-year booster works and how the rates are estimated.
+
 ### [1.0.55] - 2026-09-23
 
 #### Fixed

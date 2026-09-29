@@ -293,6 +293,13 @@
         "tooltip": "Karaniwang voting power sa lahat ng kalahok."
       }
     },
+    "apyByLock": {
+      "title": "Mga reward ayon sa tagal ng lock",
+      "description": "Ang bawat naka-stake na neuron ay kumikita ng OGY voting reward, at mas malaki ang kita sa mas mahabang lock. Ang mga neuron na naka-lock nang 5 taon ay nakakatanggap din ng 5-taong bonus: ang mga reward mula sa Gold DAO ay ipinapalit sa OGY at ibinabayad linggu-linggo bukod pa sa mga base na reward.",
+      "base": "Mga base na reward",
+      "booster": "5-taong bonus",
+      "footnote": "Ang mga base rate ay tinatantya mula sa kasalukuyang voting power. Ang rate ng bonus ay ang average ng huling 12 lingguhang bayad, annualized. Hindi ginagarantiya ng mga nakaraang bayad ang mga kita sa hinaharap."
+    },
     "boosterHistory": {
       "link": "Tungkol sa bonus",
       "title": "Mga bayad na bonus para sa 5 taong lock",

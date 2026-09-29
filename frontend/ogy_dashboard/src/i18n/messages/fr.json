@@ -293,6 +293,13 @@
         "tooltip": "Pouvoir de vote moyen de l'ensemble des participants."
       }
     },
+    "apyByLock": {
+      "title": "Récompenses selon la durée de blocage",
+      "description": "Chaque neurone staké gagne des récompenses de vote en OGY, et un blocage plus long rapporte davantage. Les neurones bloqués pour 5 ans reçoivent aussi le bonus 5 ans : les récompenses de Gold DAO sont converties en OGY et versées chaque semaine en plus des récompenses de base.",
+      "base": "Récompenses de base",
+      "booster": "Bonus 5 ans",
+      "footnote": "Les taux de base sont estimés à partir du pouvoir de vote actuel. Le taux du bonus correspond à la moyenne des 12 derniers versements hebdomadaires, annualisée. Les versements passés ne garantissent pas les rendements futurs."
+    },
     "boosterHistory": {
       "link": "À propos du bonus",
       "title": "Versements du bonus de blocage sur 5 ans",

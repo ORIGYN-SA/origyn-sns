@@ -293,6 +293,13 @@
         "tooltip": "Tüm katılımcılar arasındaki ortalama oy gücü."
       }
     },
+    "apyByLock": {
+      "title": "Kilit süresine göre ödüller",
+      "description": "Stake edilen her nöron OGY oy ödülü kazanır ve daha uzun kilitleme daha fazla kazandırır. 5 yıl kilitli nöronlar ayrıca 5 yıllık bonusu da alır: Gold DAO ödülleri OGY'ye dönüştürülür ve temel ödüllere ek olarak haftalık ödenir.",
+      "base": "Temel ödüller",
+      "booster": "5 yıllık bonus",
+      "footnote": "Temel oranlar mevcut oy gücünden tahmin edilir. Bonus oranı, son 12 haftalık ödemenin ortalamasıdır ve yıllık bazda hesaplanır. Geçmiş ödemeler gelecekteki getiriyi garanti etmez."
+    },
     "boosterHistory": {
       "link": "Bonus hakkında",
       "title": "5 yıllık kilitleme bonus ödemeleri",

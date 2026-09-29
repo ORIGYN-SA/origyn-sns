@@ -293,6 +293,13 @@
         "tooltip": "Puterea medie de vot a tuturor participanților."
       }
     },
+    "apyByLock": {
+      "title": "Recompense în funcție de durata blocării",
+      "description": "Fiecare neuron mizat câștigă recompense de vot în OGY, iar blocările mai lungi aduc mai mult. Neuronii blocați pe 5 ani primesc și bonusul de 5 ani: recompensele Gold DAO sunt convertite în OGY și plătite săptămânal, peste recompensele de bază.",
+      "base": "Recompense de bază",
+      "booster": "Bonus de 5 ani",
+      "footnote": "Ratele de bază sunt estimate pe baza puterii de vot actuale. Rata bonusului este media ultimelor 12 plăți săptămânale, anualizată. Plățile anterioare nu garantează randamente viitoare."
+    },
     "boosterHistory": {
       "link": "Despre bonus",
       "title": "Plăți de bonus pentru blocarea pe 5 ani",
