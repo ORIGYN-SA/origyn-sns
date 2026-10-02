@@ -60,7 +60,11 @@ fi
 
 echo $INTTEST
 ./scripts/canister-prebuilds.sh $1 $BASE_CANISTER_PATH "$INTTEST"
-cargo build --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked $INTTEST -p $1
+# Canisters with their own Cargo workspace (e.g. gldt_swap) are built from their own manifest
+if [[ -f $BASE_CANISTER_PATH/$1/Cargo.toml ]]; then
+  MANIFEST_PATH="--manifest-path $BASE_CANISTER_PATH/$1/Cargo.toml"
+fi
+cargo build $MANIFEST_PATH --target wasm32-unknown-unknown --target-dir $BASE_CANISTER_PATH/$1/target --release --locked $INTTEST -p $1
 
 if [[ -v $WASMONLY ]]; then
   rm -f $BASE_CANISTER_PATH/$1/api/can.did

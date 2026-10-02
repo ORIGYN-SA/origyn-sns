@@ -58,6 +58,9 @@ include:
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
     inputs:
       src-folder: canister_jobs
+  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
+    inputs:
+      src-folder: gldt_swap
 
 ################################################################################
 # Canister Builds
@@ -80,6 +83,9 @@ include:
   - local: scripts/ci-cd/.canister_builds.yml
     inputs:
       src-folder: canister_jobs
+  - local: scripts/ci-cd/.canister_builds.yml
+    inputs:
+      src-folder: gldt_swap
 
   # Canister generate declaration
   # - local: scripts/ci-cd/.generate_declaration.yml
@@ -131,6 +137,9 @@ include:
   - local: scripts/ci-cd/.canister_deploys.yml
     inputs:
       src-folder: collection_index
+  - local: scripts/ci-cd/.canister_deploys.yml
+    inputs:
+      src-folder: gldt_swap
   # Deployments
   - local: scripts/ci-cd/.dfx_templates.yml
 

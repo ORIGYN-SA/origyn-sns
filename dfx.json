@@ -129,6 +129,82 @@
         "env_override": null,
         "output": "backend/canisters/collection_index/api/declarations"
       }
+    },
+    "gldt_swap": {
+      "build": ["./scripts/build-canister.sh gldt_swap"],
+      "candid": "backend/canisters/gldt_swap/api/can.did",
+      "declarations": {
+        "bindings": ["ts", "js", "did"],
+        "env_override": null,
+        "output": "backend/canisters/gldt_swap/api/declarations"
+      },
+      "metadata": [
+        {
+          "name": "candid:service"
+        }
+      ],
+      "type": "custom",
+      "wasm": "backend/canisters/gldt_swap/target/wasm32-unknown-unknown/release/gldt_swap_canister.wasm.gz"
+    },
+    "gldt_swap_old_archive": {
+      "build": "",
+      "candid": "backend/canisters/gldt_swap/external_canisters/gldt_swap_archive/api/can.did",
+      "type": "custom",
+      "wasm": ""
+    },
+    "gldt_ledger": {
+      "candid": "https://raw.githubusercontent.com/dfinity/ic/75dd48c38f296fc907c269263f96633fa8a29d0e/rs/ledger_suite/icrc1/ledger/ledger.did",
+      "type": "custom",
+      "wasm": "https://download.dfinity.systems/ic/75dd48c38f296fc907c269263f96633fa8a29d0e/canisters/ic-icrc1-ledger.wasm.gz"
+    },
+    "gldt_ledger_indexer": {
+      "candid": "https://raw.githubusercontent.com/dfinity/ic/75dd48c38f296fc907c269263f96633fa8a29d0e/rs/ledger_suite/icrc1/index-ng/index-ng.did",
+      "type": "custom",
+      "wasm": "https://download.dfinity.systems/ic/75dd48c38f296fc907c269263f96633fa8a29d0e/canisters/ic-icrc1-index-ng.wasm.gz"
+    },
+    "gldnft_backend_1g": {
+      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "remote": {
+        "id": {
+          "ic": "io7gn-vyaaa-aaaak-qcbiq-cai",
+          "staging": "g6yny-dyaaa-aaaab-qb2kq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": ""
+    },
+    "gldnft_backend_10g": {
+      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "remote": {
+        "id": {
+          "ic": "sy3ra-iqaaa-aaaao-aixda-cai",
+          "staging": "qwf5l-cqaaa-aaaad-aapma-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": ""
+    },
+    "gldnft_backend_100g": {
+      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "remote": {
+        "id": {
+          "ic": "zhfjc-liaaa-aaaal-acgja-cai",
+          "staging": "hvanv-3iaaa-aaaap-qkfwq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": ""
+    },
+    "gldnft_backend_1000g": {
+      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "remote": {
+        "id": {
+          "ic": "7i7jl-6qaaa-aaaam-abjma-cai",
+          "staging": "vnpd6-iqaaa-aaaao-qbelq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": ""
     }
   },
   "dfx": "0.31.0",

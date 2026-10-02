@@ -1,0 +1,103 @@
+use std::time::Duration;
+
+use candid::{CandidType, Encode, Principal};
+use pocket_ic::PocketIc;
+use pocket_ic::RejectResponse;
+use serde::de::DeserializeOwned;
+use types::CanisterId;
+
+use crate::utils::T;
+
+const INIT_CYCLES_BALANCE: u128 = 1_000 * (T as u128);
+
+pub fn execute_query<P: CandidType, R: CandidType + DeserializeOwned>(
+    pic: &PocketIc,
+    sender: Principal,
+    canister_id: CanisterId,
+    method_name: &str,
+    payload: &P,
+) -> R {
+    unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        method_name,
+        candid::encode_one(payload).unwrap(),
+    ))
+}
+
+pub fn execute_update<P: CandidType, R: CandidType + DeserializeOwned>(
+    pic: &PocketIc,
+    sender: Principal,
+    canister_id: CanisterId,
+    method_name: &str,
+    payload: &P,
+) -> R {
+    unwrap_response(pic.update_call(
+        canister_id,
+        sender,
+        method_name,
+        candid::encode_one(payload).unwrap(),
+    ))
+}
+
+pub fn unwrap_response<R: CandidType + DeserializeOwned>(
+    response: Result<Vec<u8>, RejectResponse>,
+) -> R {
+    match response {
+        Ok(bytes) => candid::decode_one(&bytes).unwrap(),
+        Err(error) => panic!("FATAL ERROR: {error}"),
+    }
+}
+
+pub fn execute_update_encoded_args<R: CandidType + DeserializeOwned>(
+    pic: &PocketIc,
+    sender: Principal,
+    canister_id: CanisterId,
+    method_name: &str,
+    payload: std::vec::Vec<u8>,
+) -> R {
+    pic.advance_time(Duration::from_secs(1));
+    unwrap_response(pic.update_call(canister_id, sender, method_name, payload))
+}
+
+pub fn create_canister(pic: &PocketIc, controller: Principal) -> CanisterId {
+    let canister_id = pic.create_canister_with_settings(Some(controller), None);
+    pic.add_cycles(canister_id, INIT_CYCLES_BALANCE);
+    pic.advance_time(Duration::from_secs(1));
+    canister_id
+}
+
+pub fn create_canister_with_id<T: Into<String>>(
+    pic: &PocketIc,
+    controller: Principal,
+    canister_id: T,
+) -> CanisterId {
+    let canister_id_str = canister_id.into();
+    let canister_id = Principal::from_text(&canister_id_str)
+        .unwrap_or_else(|_| panic!("Invalid canister ID: {}", canister_id_str));
+
+    pic.create_canister_with_id(Some(controller), None, canister_id)
+        .expect("Create canister with ID failed");
+    pic.add_cycles(canister_id, INIT_CYCLES_BALANCE);
+    pic.advance_time(Duration::from_secs(1));
+    canister_id
+}
+
+pub fn start_canister(pic: &PocketIc, sender: Principal, canister_id: CanisterId) {
+    pic.start_canister(canister_id, Some(sender)).unwrap();
+}
+
+pub fn stop_canister(pic: &PocketIc, sender: Principal, canister_id: CanisterId) {
+    pic.stop_canister(canister_id, Some(sender)).unwrap();
+}
+
+pub fn install_canister<P: CandidType>(
+    pic: &PocketIc,
+    sender: Principal,
+    canister_id: CanisterId,
+    wasm: Vec<u8>,
+    payload: P,
+) {
+    pic.install_canister(canister_id, wasm, Encode!(&payload).unwrap(), Some(sender));
+    pic.advance_time(Duration::from_secs(1));
+}

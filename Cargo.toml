@@ -30,6 +30,8 @@ members = [
   "backend/libraries/types",
   "backend/libraries/utils",
 ]
+# gldt_swap is a standalone workspace with its own dependency set, see backend/canisters/gldt_swap/Cargo.toml
+exclude = ["backend/canisters/gldt_swap"]
 resolver = "2"
 
 [profile.release]

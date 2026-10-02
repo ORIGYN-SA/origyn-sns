@@ -10,7 +10,8 @@ spec:
           "dex_interaction",
           "token_metrics",
           "canister_jobs",
-          "collection_index"
+          "collection_index",
+          "gldt_swap"
         ]
 ---
 # Rust canisters deployments
