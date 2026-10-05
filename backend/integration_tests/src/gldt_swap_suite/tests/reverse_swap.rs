@@ -67,7 +67,7 @@ pub fn reverse_swap_basic_only() {
         gldt_ledger_canister_id,
         None,
         owner_2,
-        150_000_000_000_000,
+        150_000_000_000_000u128,
     )
     .unwrap();
     let user_token_balance_before_swap = balance_of(pic, gldt_ledger_canister_id, owner_2);
@@ -199,7 +199,7 @@ pub fn reverse_swap_not_enough_tokens() {
         gldt_ledger_canister_id,
         None,
         owner_2,
-        150_000_000_000_000,
+        150_000_000_000_000u128,
     )
     .unwrap();
 
@@ -280,7 +280,7 @@ pub fn reverse_swap_multiple_not_enough_tokens() {
     tick_n_blocks(pic, 20);
 
     // Approve only *half* the needed tokens (enough for 1 NFT, not 2)
-    let tokens_to_transfer = 100_000_000_000_000;
+    let tokens_to_transfer = 100_000_000_000_000u128;
     let _ = transfer(
         &pic,
         owner_1,

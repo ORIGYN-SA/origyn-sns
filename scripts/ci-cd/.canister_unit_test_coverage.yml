@@ -46,13 +46,7 @@ $[[ inputs.src-folder ]] tests:
     DOCKER_SECURITY_OPT: "--security-opt seccomp=unconfined"
   script:
     # - cargo tarpaulin -p $[[ inputs.src-folder ]] -j 2 --lib --no-fail-fast -o Xml
-    # Canisters with their own Cargo workspace (e.g. gldt_swap) are tested from their own manifest
-    - |
-      if [ -f backend/canisters/$[[ inputs.src-folder ]]/Cargo.toml ]; then
-        cargo test --manifest-path backend/canisters/$[[ inputs.src-folder ]]/Cargo.toml -p $[[ inputs.src-folder ]]
-      else
-        cargo test -p $[[ inputs.src-folder ]]
-      fi
+    - cargo test -p $[[ inputs.src-folder ]]
   # coverage: /^\d+.\d+% coverage/
   # artifacts:
   #   reports:

@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 #### Change
 
-- Moved from the gold-dao repository to origyn-sns as part of the GLDT handover to ORIGYN DAO. No code changes; built as a standalone Cargo workspace with its original dependencies.
+- Moved from the gold-dao repository to origyn-sns as part of the GLDT handover to ORIGYN DAO. Moved into the origyn-sns Cargo workspace and its shared dependency versions.
 
 ### [2.0.1] - 2025-11-27
 

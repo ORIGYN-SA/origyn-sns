@@ -28,7 +28,7 @@ use std::time::Duration;
 use tempfile::NamedTempFile;
 use url::Url;
 
-use crate::wasms::ORIGYN_NFT;
+use crate::wasms::ORIGYN_NFT_ICRC7;
 
 use candid::encode_one;
 use origyn_nft_canister::Args;
@@ -39,7 +39,7 @@ pub fn setup_core_canister(
     args: Args,
     controller: Principal,
 ) -> Principal {
-    let core_nft_wasm = ORIGYN_NFT.clone();
+    let core_nft_wasm = ORIGYN_NFT_ICRC7.clone();
     pic.add_cycles(core_canister_id, 100_000_000_000_000_000_000);
 
     pic.set_controllers(
@@ -66,7 +66,7 @@ pub fn upgrade_core_canister(
     args: Args,
     controller: Principal,
 ) {
-    let core_nft_wasm = ORIGYN_NFT.clone();
+    let core_nft_wasm = ORIGYN_NFT_ICRC7.clone();
     pic.add_cycles(core_canister_id, 100_000_000_000_000_000_000);
 
     pic.set_controllers(

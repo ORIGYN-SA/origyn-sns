@@ -10,8 +10,7 @@ pub fn setup_gldt_swap_canister(
     gldt_swap_canister_id: Principal,
     args: gldt_swap_api_canister::Args,
 ) -> Principal {
-    let gldt_swap_canister_id =
-        create_canister_with_id(pic, controller, &gldt_swap_canister_id.to_text());
+    let gldt_swap_canister_id = create_canister_with_id(pic, controller, gldt_swap_canister_id);
     let gldt_swap_wasm = GLDT_SWAP.clone();
     pic.add_cycles(gldt_swap_canister_id, 1_000_000_000_000_000);
 

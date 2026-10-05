@@ -18,7 +18,7 @@ bity-ic-canister-logger = { workspace = true }
 bity-ic-canister-state-macros = { workspace = true }
 bity-ic-canister-time = { workspace = true }
 bity-ic-canister-tracing-macros = { workspace = true }
-http_request = { path = '../libraries/http_request' }
+http_request = { path = '../../../libraries/http_request' }
 ic-cdk = { workspace = true }
 ic-cdk-macros = { workspace = true }
 ic-stable-structures = { workspace = true }
@@ -27,12 +27,12 @@ serde = { workspace = true, features = ["derive"] }
 bity-ic-types = { workspace = true }
 
 bity-ic-serializer = { workspace = true }
-icrc_ledger_canister_c2c_client = { path = "../external_canisters/icrc_ledger/c2c_client" }
+icrc_ledger_canister_c2c_client = { path = "../../../external_canisters/icrc_ledger/c2c_client" }
 serde_json = { workspace =  true }
-icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }
+icrc_ledger_canister = { path = "../../../external_canisters/icrc_ledger/api" }
 bity-ic-stable-memory = { workspace = true }
-types = { path = '../libraries/types' }
-utils = { path = '../libraries/utils' }
+types = { path = '../../../libraries/types' }
+utils = { path = '../../../libraries/utils' }
 tracing = { workspace = true }
 futures = { workspace = true }
 gldt_swap_api_canister = { path = "../api"}
@@ -40,12 +40,12 @@ gldt_swap_common = { path = "../common"}
 
 strum = { workspace = true }
 strum_macros = { workspace = true }
-bity-ic-icrc3 = { version =  "0.5.0" } # , features = ["debug-logs"]
+bity-ic-icrc3 = { workspace = true }
 bity-ic-icrc3-macros = { workspace = true }
 lazy_static = { workspace = true }
-origyn_nft_canister_c2c_client = { path = "../external_canisters/origyn_nft/c2c_client" }
-origyn_nft_canister = { path = "../external_canisters/origyn_nft/api" }
+origyn_nft_canister_c2c_client = { path = "../../../external_canisters/origyn_nft/c2c_client" }
+origyn_nft_canister = { path = "../../../external_canisters/origyn_nft/api" }
 async-trait = { workspace = true }
 
-gldt_swap_archive_c2c_client = { path = "../external_canisters/gldt_swap_archive/c2c_client" }
-gldt_swap_api_archive = { path = "../external_canisters/gldt_swap_archive/api" }
+gldt_swap_archive_c2c_client = { path = "../../../external_canisters/gldt_swap_archive/c2c_client" }
+gldt_swap_api_archive = { path = "../../../external_canisters/gldt_swap_archive/api" }

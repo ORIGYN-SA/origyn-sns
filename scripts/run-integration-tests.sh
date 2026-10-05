@@ -39,7 +39,3 @@ fi
 ./scripts/init-integration-test-environment.sh
 
 cargo test -p integration_tests -- --nocapture
-
-# gldt_swap is a standalone Cargo workspace using pocket-ic 9 (requires a PocketIC 9.x server binary)
-POCKET_IC_BIN="${GLDT_SWAP_POCKET_IC_BIN:-$POCKET_IC_BIN}" \
-  cargo test --manifest-path backend/canisters/gldt_swap/Cargo.toml -p gldt_swap_integration_tests -- --nocapture

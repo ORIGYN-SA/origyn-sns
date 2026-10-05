@@ -6,6 +6,9 @@ members = [
   "backend/canisters/canister_jobs/impl",
   "backend/canisters/collection_index/api",
   "backend/canisters/collection_index/impl",
+  "backend/canisters/gldt_swap/api",
+  "backend/canisters/gldt_swap/common",
+  "backend/canisters/gldt_swap/impl",
   "backend/external_canisters/sns_governance/api",
   "backend/external_canisters/sns_governance/c2c_client",
   "backend/canisters/ogy_token_swap/impl",
@@ -24,14 +27,15 @@ members = [
   "backend/external_canisters/origyn_nft/c2c_client",
   "backend/external_canisters/claimlink/api",
   "backend/external_canisters/claimlink/c2c_client",
+  "backend/external_canisters/gldt_swap_archive/api",
+  "backend/external_canisters/gldt_swap_archive/c2c_client",
   "backend/integration_tests",
   "backend/libraries/candid_gen",
+  "backend/libraries/cbor",
   "backend/libraries/http_request",
   "backend/libraries/types",
   "backend/libraries/utils",
 ]
-# gldt_swap is a standalone workspace with its own dependency set, see backend/canisters/gldt_swap/Cargo.toml
-exclude = ["backend/canisters/gldt_swap"]
 resolver = "2"
 
 [profile.release]
@@ -97,7 +101,7 @@ ic-cdk-management-canister = "0.1.1"
 
 # Bity crates
 bity-ic-icrc3 = { version =  "0.7.0" } # , features = ["debug-logs"]
-bity-ic-icrc3-macros = "0.3.3"
+bity-ic-icrc3-macros = "0.4.0"
 bity-ic-canister-time = "0.3.0"
 bity-ic-serializer = "0.1.0"
 bity-ic-canister-client = "0.3"

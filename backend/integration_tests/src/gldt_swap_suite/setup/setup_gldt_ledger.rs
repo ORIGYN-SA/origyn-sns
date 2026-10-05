@@ -13,8 +13,7 @@ pub fn setup_gldt_ledger(
     gldt_ledger_canister_id: Principal,
     gldt_swap_canister_id: Principal,
 ) -> Principal {
-    let gldt_ledger_canister_id =
-        create_canister_with_id(pic, controller, &gldt_ledger_canister_id.to_text());
+    let gldt_ledger_canister_id = create_canister_with_id(pic, controller, gldt_ledger_canister_id);
     pic.add_cycles(gldt_ledger_canister_id, 20_000_000_000_000);
 
     let gldt_ledger_canister_wasm: Vec<u8> = wasms::IC_ICRC2_LEDGER.clone();

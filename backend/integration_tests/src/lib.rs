@@ -2,7 +2,9 @@
 pub mod canister_jobs_suite;
 pub mod client;
 pub mod collection_index_suite;
+pub mod gldt_swap_suite;
 pub mod ogy_swap_suite;
+pub mod origyn_nft_test_env;
 pub mod sns_neuron_controller_suite;
 pub mod sns_rewards_suite;
 pub mod sns_test_env;

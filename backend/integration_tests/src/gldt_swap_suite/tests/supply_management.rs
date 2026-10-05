@@ -56,7 +56,7 @@ pub fn supply_manager_mints_when_burned() {
     tick_n_blocks(pic, 20);
 
     // Burn GLDT
-    let amount_to_burn = 10_000_000;
+    let amount_to_burn = 10_000_000u128;
     match transfer(
         &pic,
         owner_1,
