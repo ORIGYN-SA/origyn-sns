@@ -110,6 +110,8 @@ include:
   - local: scripts/ci-cd/.frontend_builds.yml
     inputs:
       src-folder: origyn_landing_page
+  # gldt_swap_app is a standalone pnpm project: linter, builds and deployments
+  - local: scripts/ci-cd/.gldt_swap_app.yml
 
 ################################################################################
 # Integration Tests

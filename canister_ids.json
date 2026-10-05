@@ -73,6 +73,11 @@
     "ic": "6f6ua-hqaaa-aaaar-qairq-cai",
     "staging": "m45be-jaaaa-aaaak-qcgnq-cai"
   },
+  "gldt_swap_app": {
+    "ic": "oj7ri-2qaaa-aaaap-abrzq-cai",
+    "preprod": "wmd7w-pqaaa-aaaai-qplaa-cai",
+    "staging": "qfyvj-4qaaa-aaaam-qbfka-cai"
+  },
   "gldt_swap_old_archive": {
     "ic": "van23-gaaaa-aaaar-qajmq-cai",
     "staging": "yx6zg-byaaa-aaaak-qucpq-cai"
