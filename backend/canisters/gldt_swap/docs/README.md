@@ -34,7 +34,7 @@ interface it's just the meta details of the NFT, i.e, it's weight that change. Y
 GLDT Swap was handed over from Gold DAO to ORIGYN DAO (Gold DAO SNS proposal 403) and moved here from the
 gold-dao repository as is. `backend/canisters/gldt_swap` is its own Cargo workspace, excluded from the root
 workspace, so it keeps the exact dependency set of the deployed canister (ic-cdk 0.20, ic-stable-structures 0.6,
-bity-ic-icrc3 0.4, pocket-ic 9).
+bity-ic-icrc3 0.5, pocket-ic 9).
 
 Do not move it to the root workspace dependencies without a stable state migration: bity-ic-icrc3 >= 0.5 changes
 the serialized `Blockchain` layout restored in `post_upgrade`, and allocates its own `MemoryManager` on stable

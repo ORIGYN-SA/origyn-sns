@@ -451,9 +451,7 @@ dependencies = [
 
 [[package]]
 name = "bity-ic-icrc3"
-version = "0.4.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c27f9ebe2b5b47fc71461718a729f11898a2ac039f458ed01ba1f7ade88337e"
+version = "0.5.1"
 dependencies = [
  "anyhow",
  "bity-ic-canister-time",
@@ -552,8 +550,6 @@ dependencies = [
 [[package]]
 name = "bity-ic-icrc3-archive-c2c-client"
 version = "0.3.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3fd5c3ca5e6dafefe3cbcda7d1381abee0a5c319707743a25155dc6926d200b8"
 dependencies = [
  "bity-ic-canister-client",
  "bity-ic-icrc3-archive-api 0.3.1",
@@ -2215,7 +2211,7 @@ dependencies = [
  "bity-ic-canister-state-macros",
  "bity-ic-canister-time",
  "bity-ic-canister-tracing-macros",
- "bity-ic-icrc3 0.4.11",
+ "bity-ic-icrc3 0.5.1",
  "bity-ic-icrc3-macros",
  "bity-ic-serializer",
  "bity-ic-stable-memory",
@@ -2263,7 +2259,7 @@ dependencies = [
 name = "gldt_swap_api_canister"
 version = "0.1.0"
 dependencies = [
- "bity-ic-icrc3 0.4.11",
+ "bity-ic-icrc3 0.5.1",
  "bity-ic-types 0.1.2",
  "candid",
  "gldt_swap_api_archive",
@@ -4236,7 +4232,7 @@ version = "0.1.0"
 dependencies = [
  "assert_matches",
  "bity-ic-canister-time",
- "bity-ic-icrc3 0.4.11",
+ "bity-ic-icrc3 0.5.1",
  "bity-ic-ledger-utils",
  "bity-ic-types 0.1.2",
  "bytes",
