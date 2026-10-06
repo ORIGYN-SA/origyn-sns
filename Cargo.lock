@@ -452,6 +452,8 @@ dependencies = [
 [[package]]
 name = "bity-ic-icrc3"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8f05ad2b42fbba09e16d376be49f4e938244b6e817ef8268ed9a691ce4aa8d14"
 dependencies = [
  "anyhow",
  "bity-ic-canister-time",
@@ -550,6 +552,8 @@ dependencies = [
 [[package]]
 name = "bity-ic-icrc3-archive-c2c-client"
 version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fd5c3ca5e6dafefe3cbcda7d1381abee0a5c319707743a25155dc6926d200b8"
 dependencies = [
  "bity-ic-canister-client",
  "bity-ic-icrc3-archive-api 0.3.1",

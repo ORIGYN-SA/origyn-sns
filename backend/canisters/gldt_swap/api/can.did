@@ -1,18 +1,42 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
 type Account = record { owner : principal; subaccount : opt blob };
+// Information about where to find archived blocks. Returned as part of [`GetBlocksResult`].
 type ArchivedBlocks = record {
   args : vec GetBlocksRequest;
   callback : func (vec GetBlocksRequest) -> (GetBlocksResult) query;
 };
 type Args = record { "principal" : opt principal; canister_id : principal };
 type Args_1 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+// A block with an ID. Returned as part of [`GetBlocksResult`].
 type BlockWithId = record { id : nat; block : ICRC3Value };
-type BuildVersion = record { major : nat32; minor : nat32; patch : nat32 };
+// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
+// 
+// # Examples
+// 
+// ```
+// use types::BuildVersion;
+// 
+// let version = BuildVersion::new(1, 2, 3);
+// assert_eq!(version.to_string(), "1.2.3");
+// 
+// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
+// assert_eq!(version, parsed);
+// ```
+type BuildVersion = record {
+  // Major version number, incremented for incompatible API changes
+  major : nat32;
+  // Minor version number, incremented for backwards-compatible functionality additions
+  minor : nat32;
+  // Patch version number, incremented for backwards-compatible bug fixes
+  patch : nat32;
+};
 type ConsentInfo = record {
   metadata : ConsentMessageMetadata;
   consent_message : ConsentMessage;
 };
 type ConsentMessage = variant {
-  LineDisplayMessage : record { pages : vec LineDisplayPage };
+  FieldsDisplayMessage : FieldsDisplay;
   GenericDisplayMessage : text;
 };
 type ConsentMessageMetadata = record {
@@ -31,12 +55,13 @@ type ConsentMessageSpec = record {
 type CustomFractionalizationConfig = record {
   per_token_config : vec record { nat; GeneralFractionalizationConfig };
 };
-type DisplayMessageType = variant {
-  GenericDisplay;
-  LineDisplay : record { characters_per_line : nat16; lines_per_page : nat16 };
-};
+type DisplayMessageType = variant { GenericDisplay; FieldsDisplay };
 type Duration = record { secs : nat64; nanos : nat32 };
 type ErrorInfo = record { description : text };
+type FieldsDisplay = record {
+  fields : vec record { text; Value };
+  intent : text;
+};
 type FractionalizationConfig = variant {
   Custom : CustomFractionalizationConfig;
   General : GeneralFractionalizationConfig;
@@ -62,38 +87,86 @@ type GeneralFractionalizationConfig = record {
   ledger_id : principal;
   swap_fee : nat;
 };
+// The arguments for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
 type GetBlocksRequest = record { start : nat; length : nat };
+// The result type for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
 type GetBlocksResult = record {
   log_length : nat;
   blocks : vec BlockWithId;
   archived_blocks : Vec;
 };
+// The result type for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
 type GetBlocksResult_1 = record {
   log_length : nat;
   blocks : vec BlockWithId;
   archived_blocks : vec ArchivedBlocks;
 };
+// The information returned as part of the return value for the
+// [`icrc3_get_archives`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md)
+// endpoint.
 type ICRC3ArchiveInfo = record {
   end : nat;
   canister_id : principal;
   start : nat;
 };
+// Configuration for the ICRC3 implementation.
+// 
+// This struct contains all the necessary configuration parameters for the ICRC3 implementation,
+// including supported block types and system constants.
+// 
+// # Examples
+// 
+// ```rust
+// use icrc3_library::config::{ICRC3Config, ICRC3Properties};
+// use std::time::Duration;
+// 
+// let config = ICRC3Config {
+// supported_blocks: vec![],
+// constants: ICRC3Properties::default(),
+// };
+// ```
 type ICRC3Config = record {
+  // System constants and limits
   constants : ICRC3Properties;
+  // List of supported block types and their URLs
   supported_blocks : vec SupportedBlockType;
 };
+// The data certificate returned from the
+// [ICRC-3 `icrc3_get_tip_certificate`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_tip_certificate)
+// endpoint.
 type ICRC3DataCertificate = record { certificate : blob; hash_tree : blob };
+// System constants and limits for the ICRC3 implementation.
+// 
+// This struct defines various system parameters that control the behavior
+// of the ICRC3 implementation, such as transaction windows, memory limits,
+// and cycle management.
 type ICRC3Properties = record {
+  // Maximum number of blocks per response
   max_blocks_per_response : nat;
+  // Initial number of cycles
   initial_cycles : nat;
+  // Time window for transaction validation
   tx_window : Duration;
+  // Maximum number of transactions to purge at once
   max_transactions_to_purge : nat;
+  // Maximum memory size in bytes
   max_memory_size_bytes : nat;
+  // ttl for non-archived transactions
   ttl_for_non_archived_transactions : Duration;
+  // Maximum number of transactions allowed in the window
   max_transactions_in_window : nat;
+  // Maximum number of unarchived transactions
   max_unarchived_transactions : nat;
+  // Number of cycles to reserve
   reserved_cycles : nat;
 };
+// A value defined in [the ICRC-3 standard](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value).
 type ICRC3Value = variant {
   Int : int;
   Map : vec record { text; ICRC3Value };
@@ -119,7 +192,6 @@ type InitArgs = record {
   commit_hash : text;
   swap_configs : vec SwapCanisterConfig;
 };
-type LineDisplayPage = record { lines : vec text };
 type Nft = record { id : nat; canister_id : principal };
 type Response = variant { Success; InternalError : text };
 type Result = variant {
@@ -130,6 +202,9 @@ type Result_1 = variant { Ok : vec nat; Err : GeneralError };
 type Result_2 = variant { Ok : ConsentInfo; Err : Icrc21Error };
 type Result_3 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
 type Result_4 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
+// The return type of the
+// [ICRC-3 `icrc3_supported_block_types`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_supported_block_types)
+// endpoint.
 type SupportedBlockType = record { url : text; block_type : text };
 type SupportedStandard = record { url : text; name : text };
 type SwapCanisterConfig = record {
@@ -175,6 +250,12 @@ type SwapTokensForNftErrors = variant {
 };
 type SwapType = variant { Forward; Reverse };
 type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+type Value = variant {
+  Text : record { content : text };
+  TokenAmount : record { decimals : nat8; amount : nat64; symbol : text };
+  TimestampSeconds : record { amount : nat64 };
+  DurationSeconds : record { amount : nat64 };
+};
 type Vec = vec record {
   args : vec record { start : nat; length : nat };
   callback : func (vec record { start : nat; length : nat }) -> (
