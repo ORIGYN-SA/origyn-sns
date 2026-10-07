@@ -148,7 +148,7 @@
     },
     "gldt_swap_old_archive": {
       "build": "",
-      "candid": "backend/canisters/gldt_swap/external_canisters/gldt_swap_archive/api/can.did",
+      "candid": "backend/external_canisters/gldt_swap_archive/api/can.did",
       "type": "custom",
       "wasm": ""
     },
@@ -163,7 +163,7 @@
       "wasm": "https://download.dfinity.systems/ic/75dd48c38f296fc907c269263f96633fa8a29d0e/canisters/ic-icrc1-index-ng.wasm.gz"
     },
     "gldnft_backend_1g": {
-      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "candid": "backend/external_canisters/origyn_nft/api/can.did",
       "remote": {
         "id": {
           "ic": "io7gn-vyaaa-aaaak-qcbiq-cai",
@@ -174,7 +174,7 @@
       "wasm": ""
     },
     "gldnft_backend_10g": {
-      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "candid": "backend/external_canisters/origyn_nft/api/can.did",
       "remote": {
         "id": {
           "ic": "sy3ra-iqaaa-aaaao-aixda-cai",
@@ -185,7 +185,7 @@
       "wasm": ""
     },
     "gldnft_backend_100g": {
-      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "candid": "backend/external_canisters/origyn_nft/api/can.did",
       "remote": {
         "id": {
           "ic": "zhfjc-liaaa-aaaal-acgja-cai",
@@ -196,7 +196,7 @@
       "wasm": ""
     },
     "gldnft_backend_1000g": {
-      "candid": "backend/canisters/gldt_swap/external_canisters/origyn_nft/api/can.did",
+      "candid": "backend/external_canisters/origyn_nft/api/can.did",
       "remote": {
         "id": {
           "ic": "7i7jl-6qaaa-aaaam-abjma-cai",
