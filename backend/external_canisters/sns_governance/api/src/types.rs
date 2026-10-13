@@ -177,6 +177,10 @@ pub struct Neuron {
     /// The neuron's followees, specified as a map of proposal functions IDs to followees neuron IDs.
     /// The map's keys are represented by integers as Protobuf does not support enum keys in maps.
     pub followees: std::collections::BTreeMap<u64, neuron::Followees>,
+    /// The neuron's topic-based followees. For a proposal whose topic is covered here,
+    /// these take precedence over the legacy `followees` map.
+    #[serde(default)]
+    pub topic_followees: Option<TopicFollowees>,
     /// The accumulated unstaked maturity of the neuron, measured in "e8s equivalent", i.e., in equivalent of
     /// 10E-8 of a governance token.
     ///
@@ -264,6 +268,76 @@ impl Neuron {
                 0
             })
     }
+}
+
+/// Proposal topics used for topic-based following.
+#[derive(
+    candid::CandidType,
+    candid::Deserialize,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    Serialize,
+    Debug,
+)]
+pub enum Topic {
+    DaoCommunitySettings,
+    SnsFrameworkManagement,
+    DappCanisterManagement,
+    ApplicationBusinessLogic,
+    Governance,
+    TreasuryAssetManagement,
+    CriticalDappOperations,
+}
+
+impl Topic {
+    /// Every topic, ordered by numeric id (1..=7).
+    pub const ALL: [Topic; 7] = [
+        Topic::DaoCommunitySettings,
+        Topic::SnsFrameworkManagement,
+        Topic::DappCanisterManagement,
+        Topic::ApplicationBusinessLogic,
+        Topic::Governance,
+        Topic::TreasuryAssetManagement,
+        Topic::CriticalDappOperations,
+    ];
+
+    /// Numeric id of the topic, as used for the keys of `TopicFollowees::topic_id_to_followees`.
+    pub fn id(self) -> i32 {
+        match self {
+            Topic::DaoCommunitySettings => 1,
+            Topic::SnsFrameworkManagement => 2,
+            Topic::DappCanisterManagement => 3,
+            Topic::ApplicationBusinessLogic => 4,
+            Topic::Governance => 5,
+            Topic::TreasuryAssetManagement => 6,
+            Topic::CriticalDappOperations => 7,
+        }
+    }
+}
+
+/// A followee of a neuron for a given topic.
+#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Serialize, Debug)]
+pub struct Followee {
+    pub neuron_id: Option<NeuronId>,
+    pub alias: Option<String>,
+}
+
+/// The followees of a neuron for a given topic.
+#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Serialize, Debug)]
+pub struct FolloweesForTopic {
+    pub followees: Vec<Followee>,
+    pub topic: Option<Topic>,
+}
+
+/// The topic-based followees of a neuron, keyed by `Topic::id`.
+#[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Serialize, Debug, Default)]
+pub struct TopicFollowees {
+    pub topic_id_to_followees: std::collections::BTreeMap<i32, FolloweesForTopic>,
 }
 
 /// Nested message and enum types in `Neuron`.
@@ -1617,6 +1691,13 @@ pub mod manage_neuron {
         /// The set of permissions that will be revoked from the PrincipalId.
         pub permissions_to_remove: Option<super::NeuronPermissionList>,
     }
+    /// Sets the topic-based followees of a neuron. Topics not mentioned keep their
+    /// current followees; a topic with an empty followee list stops following on that topic.
+    /// Requires `NeuronPermissionType::Vote`.
+    #[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Serialize, Debug)]
+    pub struct SetFollowing {
+        pub topic_following: Vec<super::FolloweesForTopic>,
+    }
     #[derive(candid::CandidType, candid::Deserialize)]
     #[allow(clippy::large_enum_variant)]
     #[derive(Clone, PartialEq, Serialize, Debug)]
@@ -1624,6 +1705,7 @@ pub mod manage_neuron {
         Configure(Configure),
         Disburse(Disburse),
         Follow(Follow),
+        SetFollowing(SetFollowing),
         /// Making a proposal is defined by a proposal, which contains the proposer neuron.
         /// Making a proposal will implicitly cast a yes vote for the proposing neuron.
         MakeProposal(super::Proposal),
@@ -1645,6 +1727,9 @@ pub struct ManageNeuronResponse {
 }
 /// Nested message and enum types in `ManageNeuronResponse`.
 pub mod manage_neuron_response {
+    /// The response to the ManageNeuron command 'set_following'.
+    #[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Debug)]
+    pub struct SetFollowingResponse {}
     /// The response to the ManageNeuron command 'configure'.
     #[derive(candid::CandidType, candid::Deserialize, Clone, PartialEq, Debug)]
     pub struct ConfigureResponse {}
@@ -1712,6 +1797,7 @@ pub mod manage_neuron_response {
         Configure(ConfigureResponse),
         Disburse(DisburseResponse),
         Follow(FollowResponse),
+        SetFollowing(SetFollowingResponse),
         MakeProposal(MakeProposalResponse),
         RegisterVote(RegisterVoteResponse),
         Split(SplitResponse),

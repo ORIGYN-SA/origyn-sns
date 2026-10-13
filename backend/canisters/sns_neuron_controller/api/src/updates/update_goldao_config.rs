@@ -1,4 +1,5 @@
 use crate::init::TokenParams;
+use crate::neuron_policy::NeuronPolicy;
 use candid::{CandidType, Nat, Principal};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -11,6 +12,9 @@ pub struct Args {
     pub goldao_sns_rewards_canister_id: Option<Principal>,
     /// Update destinations for specific reward tokens. Existing entries not present here are kept.
     pub reward_tokens: Option<HashMap<TokenSymbol, TokenParams>>,
+    /// Replace the neuron policy. None keeps the current policy.
+    #[serde(default)]
+    pub neuron_policy: Option<NeuronPolicy>,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Debug)]

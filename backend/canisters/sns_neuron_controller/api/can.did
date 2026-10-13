@@ -1,16 +1,16 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
+type Account = record { owner : principal; subaccount : opt blob };
 // A Ledger account identified by the owner of the account `of` and
 // the `subaccount`. If the `subaccount` is not specified then the default
 // one is used.
-type Account = record {
+type Account_1 = record {
   // The owner of the account.
   owner : opt principal;
   // The subaccount of the account. If not set then the default
   // subaccount (all bytes set to 0) is used.
   subaccount : opt Subaccount;
 };
-// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
-// representation of ledgers supporting the ICRC-1 standard.
-type Account_1 = record { owner : principal; subaccount : opt blob };
 // The action that the proposal proposes to take on adoption.
 // 
 // Each action is associated with an function id that can be used for following.
@@ -107,6 +107,8 @@ type Args_2 = record {
   goldao_sns_ledger_canister_id : opt principal;
   goldao_sns_governance_canister_id : opt principal;
   goldao_sns_rewards_canister_id : opt principal;
+  // Replace the neuron policy. None keeps the current policy.
+  neuron_policy : opt NeuronPolicy;
 };
 type Args_3 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
 // Represents a semantic version number following the MAJOR.MINOR.PATCH format.
@@ -161,6 +163,7 @@ type Command = variant {
   ClaimOrRefresh : ClaimOrRefresh;
   Configure : Configure;
   RegisterVote : RegisterVote;
+  SetFollowing : SetFollowing;
   // Making a proposal is defined by a proposal, which contains the proposer neuron.
   // Making a proposal will implicitly cast a yes vote for the proposing neuron.
   MakeProposal : Proposal;
@@ -191,7 +194,7 @@ type DeregisterDappCanisters = record {
 // maturity are minted and also transferred to the specified account.
 type Disburse = record {
   // The ledger account to which the disbursed tokens are transferred.
-  to_account : opt Account;
+  to_account : opt Account_1;
   // The (optional) amount to disburse out of the neuron. If not specified the cached
   // stake is used.
   amount : opt Amount;
@@ -203,14 +206,14 @@ type Disburse = record {
 // transaction fee.
 type DisburseMaturity = record {
   // The (optional) principal to which to transfer the stake.
-  to_account : opt Account;
+  to_account : opt Account_1;
   // The percentage to disburse, from 1 to 100
   percentage_to_disburse : nat32;
 };
 type DisburseMaturityInProgress = record {
   timestamp_of_disbursement_seconds : nat64;
   amount_e8s : nat64;
-  account_to_disburse_to : opt Account;
+  account_to_disburse_to : opt Account_1;
 };
 // The neuron's dissolve state, specifying whether the neuron is dissolving,
 // non-dissolving, or dissolved.
@@ -286,8 +289,12 @@ type Follow = record {
   // The list of followee neurons, specified by their neuron ID.
   followees : vec NeuronId;
 };
+// A followee of a neuron for a given topic.
+type Followee = record { alias : opt text; neuron_id : opt NeuronId };
 // A list of a neuron's followees for a specific function.
 type Followees = record { followees : vec NeuronId };
+// The followees of a neuron for a given topic.
+type FolloweesForTopic = record { topic : opt Topic; followees : vec Followee };
 type FunctionType = variant {
   // Whether this is a native function (i.e. a Action::Motion or
   // Action::UpgradeSnsControlledCanister) or one of user-defined
@@ -316,9 +323,11 @@ type GenericNervousSystemFunction = record {
 type GetConfigArgs = record { manager_type : ManagerType };
 type GetConfigResponse = record { config : ManagerConfig };
 type GoldaoManagerConfig = record {
+  reward_tokens : vec record { TokenSymbol; TokenParams };
   goldao_sns_ledger_canister_id : principal;
   goldao_sns_governance_canister_id : principal;
   goldao_sns_rewards_canister_id : principal;
+  neuron_policy : opt NeuronPolicy;
 };
 type GoldaoManagerConfig_1 = record {
   // Maps each reward token to its distribution destination
@@ -326,6 +335,8 @@ type GoldaoManagerConfig_1 = record {
   goldao_sns_ledger_canister_id : principal;
   goldao_sns_governance_canister_id : principal;
   goldao_sns_rewards_canister_id : principal;
+  // Following and maturity policy enforced on every managed neuron. None disables enforcement.
+  neuron_policy : opt NeuronPolicy;
 };
 type IcpManagerConfig = record {
   icp_rewards_threshold : nat;
@@ -568,6 +579,9 @@ type Neuron = record {
   cached_neuron_stake_e8s : nat64;
   // The timestamp, in seconds from the Unix epoch, when the neuron was created.
   created_timestamp_seconds : nat64;
+  // The neuron's topic-based followees. For a proposal whose topic is covered here,
+  // these take precedence over the legacy `followees` map.
+  topic_followees : opt TopicFollowees;
   // The ID of the NNS neuron whose Community Fund participation resulted in the
   // creation of this SNS neuron.
   source_nns_neuron_id : opt nat64;
@@ -641,6 +655,25 @@ type NeuronPermission = record {
 };
 // A wrapper for a list of neuron permissions.
 type NeuronPermissionList = record { permissions : vec int32 };
+// Desired configuration that the controller enforces on every SNS neuron it manages.
+// 
+// The daily neuron job compares each neuron against this policy and issues the
+// `manage_neuron` commands needed to converge, so the policy keeps holding even if
+// a neuron is reconfigured by hand.
+type NeuronPolicy = record {
+  // When true, every principal other than the controller is removed from the
+  // non-exempt neurons, so the DAO alone controls them. A permission the controller
+  // does not hold itself is never removed.
+  exclusive_control : bool;
+  // Neurons left alone by the following and permission rules: the followee itself, and
+  // any neuron that is voted and administered by hand. Auto-stake still applies to them.
+  exempt_neuron_ids : vec blob;
+  // When true, auto-stake maturity is switched on for every managed neuron
+  // (voting rewards are staked instead of accumulating as liquid maturity).
+  auto_stake_maturity : bool;
+  // Id (32 bytes) of the neuron that every managed neuron follows on all proposal topics.
+  followee_neuron_id : blob;
+};
 type NeuronType = variant { GOLDAO };
 type OgyManagerConfig = record {
   ogy_rewards_threshold : nat;
@@ -717,6 +750,10 @@ type SetDissolveTimestamp = record {
   // since the Unix epoch.
   dissolve_timestamp_seconds : nat64;
 };
+// Sets the topic-based followees of a neuron. Topics not mentioned keep their
+// current followees; a topic with an empty followee list stops following on that topic.
+// Requires `NeuronPermissionType::Vote`.
+type SetFollowing = record { topic_following : vec FolloweesForTopic };
 // The operation that splits a neuron (called 'parent neuron'), or rather a neuron's stake,
 // into two neurons.
 // Specifically, the parent neuron's stake is decreased by the specified amount of
@@ -746,9 +783,23 @@ type StakeMaturity = record {
 };
 // A Ledger subaccount.
 type Subaccount = record { subaccount : blob };
-type TokenParams = record { destination : Account_1; threshold : nat };
+type TokenParams = record { destination : Account; threshold : nat };
 // Compact enum for token identity (for keys, matching, etc.)
 type TokenSymbol = variant { ICP; OGY; WTN; GOLDAO; GLDT };
+// Proposal topics used for topic-based following.
+type Topic = variant {
+  DappCanisterManagement;
+  DaoCommunitySettings;
+  ApplicationBusinessLogic;
+  CriticalDappOperations;
+  TreasuryAssetManagement;
+  Governance;
+  SnsFrameworkManagement;
+};
+// The topic-based followees of a neuron, keyed by `Topic::id`.
+type TopicFollowees = record {
+  topic_id_to_followees : vec record { int32; FolloweesForTopic };
+};
 // A proposal to transfer SNS treasury funds to (optionally a Subaccount of) the
 // target principal.
 type TransferSnsTreasuryFunds = record {
