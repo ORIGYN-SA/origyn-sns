@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Skrolla",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Uppladdningsstorlek"
     },
     "bytesUnit": "byte"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Försök igen",
+    "cancel": "Avbryt",
+    "session": {
+      "verifyEmail": "Verifiera e-post",
+      "signOut": "Logga ut"
+    },
+    "balance": {
+      "title": "Krediter",
+      "incoming": "På väg",
+      "held": "Reserverade för agentarbete"
+    },
+    "buy": {
+      "title": "Köp krediter",
+      "amountLabel": "Belopp i amerikanska dollar",
+      "range": "Ange ett heltal från {min} till {max}.",
+      "submit": "Fortsätt till betalning · {amount}",
+      "youGet": "Du får",
+      "creditsUnit": "krediter",
+      "redirecting": "Öppnar säker betalning…"
+    },
+    "keys": {
+      "title": "API-nycklar",
+      "create": "Skapa nyckel",
+      "created": "Skapad {date}",
+      "revoke": "Återkalla",
+      "revokeConfirm": "Återkalla den här nyckeln?",
+      "newTitle": "Din nya API-nyckel",
+      "newWarning": "Kopiera den nu och spara den på ett säkert ställe. Vi kan inte visa den igen.",
+      "copy": "Kopiera",
+      "copied": "Kopierat",
+      "saved": "Klart, jag har sparat den",
+      "creating": "Skapar nyckel…",
+      "revoked": "Nyckeln har återkallats",
+      "emptyTitle": "Inga API-nycklar än",
+      "tryIt": "Kontrollera att den fungerar:"
+    },
+    "orders": {
+      "title": "Köp",
+      "empty": "Inga köp än.",
+      "statusLabel": {
+        "paid": "Behandlas",
+        "issued": "Slutfört",
+        "awaiting_liquidity": "Behandlas",
+        "awaiting_price": "Behandlas",
+        "failed": "Misslyckades",
+        "refunded": "Återbetalt",
+        "closed": "Stängt"
+      },
+      "creditsLine": "{credits} krediter",
+      "showAll": "Visa alla {count}",
+      "showLess": "Visa färre"
+    },
+    "order": {
+      "loading": "Kontrollerar din betalning…",
+      "slow": "Betalningen har tagits emot. Dina krediter kommer inom kort.",
+      "dismiss": "Stäng",
+      "status": {
+        "quoted": "Väntar på att din betalning ska slutföras.",
+        "paid": "Betalningen har tagits emot. Dina {credits} krediter är på väg.",
+        "issued": "Klart: {credits} krediter har lagts till i ditt saldo.",
+        "awaiting_liquidity": "Betalningen har tagits emot. Dina krediter kommer inom kort.",
+        "awaiting_price": "Betalningen har tagits emot. Dina krediter kommer inom kort.",
+        "expired": "Betalningssessionen gick ut innan den betalades.",
+        "failed": "Köpet misslyckades. Kontakta supporten om du har debiterats.",
+        "refunded": "Köpet har återbetalats.",
+        "closed": "Köpet har stängts. Kontakta supporten om du har debiterats."
+      }
+    },
+    "errors": {
+      "unknown": "Något gick fel. Försök igen.",
+      "network": "Kan inte nå servern. Kontrollera din anslutning och försök igen.",
+      "unauthorized": "Din session har gått ut. Logga in igen.",
+      "login_rejected": "Du är inloggad, men våra servrar kunde inte bekräfta din inloggning. Försök igen om en stund eller kontakta supporten.",
+      "email_unverified": "Verifiera din e-postadress för att fortsätta.",
+      "email_taken": "Ett annat konto använder redan den här e-postadressen.",
+      "terms_not_accepted": "Godkänn försäljningsvillkoren för att fortsätta.",
+      "amount_out_of_range": "Ange ett belopp från $10 till $100 000.",
+      "return_url_not_allowed": "Den här sidan kan inte ta emot betalningar. Kontakta supporten.",
+      "rate_limited": "För många förfrågningar. Vänta några sekunder och försök igen.",
+      "insufficient_liquidity": "Köp är tillfälligt pausade. Försök igen senare.",
+      "price_unavailable": "Köp är tillfälligt pausade. Försök igen senare.",
+      "pool_unavailable": "Köp är tillfälligt pausade. Försök igen senare.",
+      "stripe_unavailable": "Betalningsleverantören svarade inte. Försök igen.",
+      "clerk_unavailable": "Inloggningen svarade inte. Försök igen.",
+      "not_found": "Vi kunde inte hitta det köpet."
+    }
   }
 }

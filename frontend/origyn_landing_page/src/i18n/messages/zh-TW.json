@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "儀表板"
   },
   "scroll": "向下捲動",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "上傳容量"
     },
     "bytesUnit": "位元組"
+  },
+  "aiDashboard": {
+    "title": "儀表板",
+    "retry": "再試一次",
+    "cancel": "取消",
+    "session": {
+      "verifyEmail": "驗證電子郵件",
+      "signOut": "登出"
+    },
+    "balance": {
+      "title": "點數",
+      "incoming": "入帳中",
+      "held": "代理執行中保留"
+    },
+    "buy": {
+      "title": "購買點數",
+      "amountLabel": "金額（美元）",
+      "range": "請輸入 {min} 至 {max} 之間的整數金額。",
+      "submit": "前往付款 · {amount}",
+      "youGet": "您將獲得",
+      "creditsUnit": "點數",
+      "redirecting": "正在開啟安全結帳頁面…"
+    },
+    "keys": {
+      "title": "API 金鑰",
+      "create": "建立金鑰",
+      "created": "建立於 {date}",
+      "revoke": "撤銷",
+      "revokeConfirm": "要撤銷此金鑰嗎？",
+      "newTitle": "您的新 API 金鑰",
+      "newWarning": "請立即複製並妥善保存。此金鑰之後將無法再次顯示。",
+      "copy": "複製",
+      "copied": "已複製",
+      "saved": "完成，我已儲存",
+      "creating": "正在建立金鑰…",
+      "revoked": "金鑰已撤銷",
+      "emptyTitle": "尚無 API 金鑰",
+      "tryIt": "確認是否可用："
+    },
+    "orders": {
+      "title": "購買紀錄",
+      "empty": "尚無購買紀錄。",
+      "statusLabel": {
+        "paid": "處理中",
+        "issued": "已完成",
+        "awaiting_liquidity": "處理中",
+        "awaiting_price": "處理中",
+        "failed": "失敗",
+        "refunded": "已退款",
+        "closed": "已關閉"
+      },
+      "creditsLine": "{credits} 點數",
+      "showAll": "顯示全部 {count} 筆",
+      "showLess": "收合"
+    },
+    "order": {
+      "loading": "正在確認您的付款…",
+      "slow": "已收到付款，點數將很快入帳。",
+      "dismiss": "關閉",
+      "status": {
+        "quoted": "正在等待您完成付款。",
+        "paid": "已收到付款，您的 {credits} 點數即將入帳。",
+        "issued": "完成：已將 {credits} 點數加入您的餘額。",
+        "awaiting_liquidity": "已收到付款，點數將很快入帳。",
+        "awaiting_price": "已收到付款，點數將很快入帳。",
+        "expired": "此結帳頁面在付款前已逾期。",
+        "failed": "此筆購買失敗。若已被扣款，請聯絡客服。",
+        "refunded": "此筆購買已退款。",
+        "closed": "此筆購買已關閉。若已被扣款，請聯絡客服。"
+      }
+    },
+    "errors": {
+      "unknown": "發生錯誤，請再試一次。",
+      "network": "無法連線至伺服器。請檢查網路連線後再試一次。",
+      "unauthorized": "您的工作階段已過期，請重新登入。",
+      "login_rejected": "您已登入，但我們的伺服器無法確認您的登入狀態。請稍後再試或聯絡客服。",
+      "email_unverified": "請驗證您的電子郵件地址以繼續。",
+      "email_taken": "此電子郵件地址已被其他帳戶使用。",
+      "terms_not_accepted": "請接受銷售條款以繼續。",
+      "amount_out_of_range": "請輸入 $10 至 $100,000 之間的金額。",
+      "return_url_not_allowed": "此頁面無法接收付款，請聯絡客服。",
+      "rate_limited": "請求過於頻繁。請稍候幾秒再試一次。",
+      "insufficient_liquidity": "購買功能暫時停止，請稍後再試。",
+      "price_unavailable": "購買功能暫時停止，請稍後再試。",
+      "pool_unavailable": "購買功能暫時停止，請稍後再試。",
+      "stripe_unavailable": "付款服務商未回應，請再試一次。",
+      "clerk_unavailable": "登入服務未回應，請再試一次。",
+      "not_found": "找不到這筆購買紀錄。"
+    }
   }
 }

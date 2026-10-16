@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Rul",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Uploadstørrelse"
     },
     "bytesUnit": "bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Prøv igen",
+    "cancel": "Annuller",
+    "session": {
+      "verifyEmail": "Bekræft e-mail",
+      "signOut": "Log ud"
+    },
+    "balance": {
+      "title": "Credits",
+      "incoming": "På vej",
+      "held": "Reserveret til agentarbejde"
+    },
+    "buy": {
+      "title": "Køb credits",
+      "amountLabel": "Beløb i amerikanske dollars",
+      "range": "Indtast et helt beløb fra {min} til {max}.",
+      "submit": "Fortsæt til betaling · {amount}",
+      "youGet": "Du får",
+      "creditsUnit": "credits",
+      "redirecting": "Åbner sikker betaling…"
+    },
+    "keys": {
+      "title": "API-nøgler",
+      "create": "Opret nøgle",
+      "created": "Oprettet {date}",
+      "revoke": "Tilbagekald",
+      "revokeConfirm": "Tilbagekald denne nøgle?",
+      "newTitle": "Din nye API-nøgle",
+      "newWarning": "Kopiér den nu, og gem den et sikkert sted. Vi kan ikke vise den igen.",
+      "copy": "Kopiér",
+      "copied": "Kopieret",
+      "saved": "Færdig, jeg har gemt den",
+      "creating": "Opretter nøgle…",
+      "revoked": "Nøgle tilbagekaldt",
+      "emptyTitle": "Ingen API-nøgler endnu",
+      "tryIt": "Tjek, at den virker:"
+    },
+    "orders": {
+      "title": "Køb",
+      "empty": "Ingen køb endnu.",
+      "statusLabel": {
+        "paid": "Behandles",
+        "issued": "Gennemført",
+        "awaiting_liquidity": "Behandles",
+        "awaiting_price": "Behandles",
+        "failed": "Mislykkedes",
+        "refunded": "Refunderet",
+        "closed": "Lukket"
+      },
+      "creditsLine": "{credits} credits",
+      "showAll": "Vis alle {count}",
+      "showLess": "Vis færre"
+    },
+    "order": {
+      "loading": "Tjekker din betaling…",
+      "slow": "Betaling modtaget. Dine credits kommer om lidt.",
+      "dismiss": "Luk",
+      "status": {
+        "quoted": "Venter på, at din betaling gennemføres.",
+        "paid": "Betaling modtaget. Dine {credits} credits er på vej.",
+        "issued": "Færdig: {credits} credits er føjet til din saldo.",
+        "awaiting_liquidity": "Betaling modtaget. Dine credits kommer om lidt.",
+        "awaiting_price": "Betaling modtaget. Dine credits kommer om lidt.",
+        "expired": "Denne betaling udløb, før den blev betalt.",
+        "failed": "Dette køb mislykkedes. Kontakt support, hvis du er blevet opkrævet.",
+        "refunded": "Dette køb er refunderet.",
+        "closed": "Dette køb er lukket. Kontakt support, hvis du er blevet opkrævet."
+      }
+    },
+    "errors": {
+      "unknown": "Noget gik galt. Prøv igen.",
+      "network": "Kan ikke nå serveren. Tjek din forbindelse, og prøv igen.",
+      "unauthorized": "Din session er udløbet. Log ind igen.",
+      "login_rejected": "Du er logget ind, men vores servere kunne ikke bekræfte dit login. Prøv igen om lidt, eller kontakt support.",
+      "email_unverified": "Bekræft din e-mailadresse for at fortsætte.",
+      "email_taken": "En anden konto bruger allerede denne e-mailadresse.",
+      "terms_not_accepted": "Accepter salgsbetingelserne for at fortsætte.",
+      "amount_out_of_range": "Indtast et beløb fra 10 $ til 100.000 $.",
+      "return_url_not_allowed": "Denne side kan ikke modtage betalinger. Kontakt support.",
+      "rate_limited": "For mange anmodninger. Vent et par sekunder, og prøv igen.",
+      "insufficient_liquidity": "Køb er sat på pause et øjeblik. Prøv igen senere.",
+      "price_unavailable": "Køb er sat på pause et øjeblik. Prøv igen senere.",
+      "pool_unavailable": "Køb er sat på pause et øjeblik. Prøv igen senere.",
+      "stripe_unavailable": "Betalingsudbyderen svarede ikke. Prøv igen.",
+      "clerk_unavailable": "Login svarede ikke. Prøv igen.",
+      "not_found": "Vi kunne ikke finde det køb."
+    }
   }
 }

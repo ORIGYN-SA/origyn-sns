@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Tablou de bord"
   },
   "scroll": "Derulează",
   "hero": {
@@ -1178,5 +1179,94 @@
       "uploadSize": "Dimensiune încărcare"
     },
     "bytesUnit": "octeți"
+  },
+  "aiDashboard": {
+    "title": "Tablou de bord",
+    "retry": "Încearcă din nou",
+    "cancel": "Anulează",
+    "session": {
+      "verifyEmail": "Verifică emailul",
+      "signOut": "Deconectează-te"
+    },
+    "balance": {
+      "title": "Credite",
+      "incoming": "În curs de sosire",
+      "held": "Rezervate pentru agenți"
+    },
+    "buy": {
+      "title": "Cumpără credite",
+      "amountLabel": "Sumă în dolari americani",
+      "range": "Introdu o sumă întreagă între {min} și {max}.",
+      "submit": "Continuă spre plată · {amount}",
+      "youGet": "Primești",
+      "creditsUnit": "credite",
+      "redirecting": "Se deschide plata securizată…"
+    },
+    "keys": {
+      "title": "Chei API",
+      "create": "Creează cheie",
+      "created": "Creată pe {date}",
+      "revoke": "Revocă",
+      "revokeConfirm": "Revoci această cheie?",
+      "newTitle": "Noua ta cheie API",
+      "newWarning": "Copiaz-o acum și păstreaz-o într-un loc sigur. Nu o mai putem afișa.",
+      "copy": "Copiază",
+      "copied": "Copiat",
+      "saved": "Gata, am salvat-o",
+      "creating": "Se creează cheia…",
+      "revoked": "Cheie revocată",
+      "emptyTitle": "Nicio cheie API încă",
+      "tryIt": "Verifică dacă funcționează:"
+    },
+    "orders": {
+      "title": "Achiziții",
+      "empty": "Nicio achiziție încă.",
+      "statusLabel": {
+        "paid": "În procesare",
+        "issued": "Finalizată",
+        "awaiting_liquidity": "În procesare",
+        "awaiting_price": "În procesare",
+        "failed": "Eșuată",
+        "refunded": "Rambursată",
+        "closed": "Închisă"
+      },
+      "creditsLine": "{credits} credite",
+      "showAll": "Arată toate ({count})",
+      "showLess": "Arată mai puțin"
+    },
+    "order": {
+      "loading": "Se verifică plata…",
+      "slow": "Plată primită. Creditele tale sosesc în curând.",
+      "dismiss": "Închide",
+      "status": {
+        "quoted": "Se așteaptă finalizarea plății.",
+        "paid": "Plată primită. Cele {credits} credite sunt pe drum.",
+        "issued": "Gata: {credits} credite au fost adăugate la sold.",
+        "awaiting_liquidity": "Plată primită. Creditele tale sosesc în curând.",
+        "awaiting_price": "Plată primită. Creditele tale sosesc în curând.",
+        "expired": "Această sesiune de plată a expirat înainte de achitare.",
+        "failed": "Această achiziție a eșuat. Contactează asistența dacă ai fost taxat.",
+        "refunded": "Această achiziție a fost rambursată.",
+        "closed": "Această achiziție a fost închisă. Contactează asistența dacă ai fost taxat."
+      }
+    },
+    "errors": {
+      "unknown": "Ceva nu a mers bine. Încearcă din nou.",
+      "network": "Serverul nu poate fi contactat. Verifică-ți conexiunea și încearcă din nou.",
+      "unauthorized": "Sesiunea ta a expirat. Conectează-te din nou.",
+      "login_rejected": "Ești conectat, dar serverele noastre nu au putut confirma autentificarea. Încearcă din nou în câteva momente sau contactează asistența.",
+      "email_unverified": "Verifică-ți adresa de email pentru a continua.",
+      "email_taken": "Această adresă de email este deja folosită de alt cont.",
+      "terms_not_accepted": "Acceptă termenii de vânzare pentru a continua.",
+      "amount_out_of_range": "Introdu o sumă între $10 și $100.000.",
+      "return_url_not_allowed": "Această pagină nu poate primi plăți. Contactează asistența.",
+      "rate_limited": "Prea multe solicitări. Așteaptă câteva secunde și încearcă din nou.",
+      "insufficient_liquidity": "Achizițiile sunt suspendate temporar. Încearcă mai târziu.",
+      "price_unavailable": "Achizițiile sunt suspendate temporar. Încearcă mai târziu.",
+      "pool_unavailable": "Achizițiile sunt suspendate temporar. Încearcă mai târziu.",
+      "stripe_unavailable": "Furnizorul de plăți nu a răspuns. Încearcă din nou.",
+      "clerk_unavailable": "Serviciul de autentificare nu a răspuns. Încearcă din nou.",
+      "not_found": "Nu am găsit această achiziție."
+    }
   }
 }

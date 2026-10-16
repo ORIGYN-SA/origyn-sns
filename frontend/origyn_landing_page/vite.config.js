@@ -1,4 +1,5 @@
 import fs from "fs";
+import process from "process";
 import path from "path";
 import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
@@ -27,11 +28,16 @@ const localeHtml = () => {
       urls.site = trim(config.env.VITE_SITE_URL, urls.site);
       urls.cards = trim(config.env.VITE_OG_IMAGE_BASE_URL, "");
       if (!urls.cards) {
-        throw new Error("VITE_OG_IMAGE_BASE_URL is unset, so og:image would point nowhere");
+        throw new Error(
+          "VITE_OG_IMAGE_BASE_URL is unset, so og:image would point nowhere",
+        );
       }
     },
     closeBundle() {
-      const baseHtml = fs.readFileSync(path.resolve(__dirname, outDir, "index.html"), "utf8");
+      const baseHtml = fs.readFileSync(
+        path.resolve(__dirname, outDir, "index.html"),
+        "utf8",
+      );
       const writeAt = (relative, html) => {
         const dest = path.resolve(__dirname, outDir, relative);
         fs.mkdirSync(dest, { recursive: true });
@@ -43,7 +49,8 @@ const localeHtml = () => {
 
         // Unprefixed: no locale to go on yet, so LocaleRedirect takes over.
         writeAt(page.path, head(defaultLocale));
-        for (const locale of locales) writeAt(`${locale}/${page.path}`, head(locale));
+        for (const locale of locales)
+          writeAt(`${locale}/${page.path}`, head(locale));
       }
     },
   };
@@ -54,6 +61,24 @@ export default defineConfig({
   server: {
     // Dev only: lets tunnels such as ngrok reach the dev server.
     allowedHosts: true,
+    // Clerk only signs in on origyn.com pages, and refuses an origin with a
+    // port, so `npm run dev:clerk` serves https://dev.origyn.com on 443
+    // (pointed at 127.0.0.1 in /etc/hosts) with a locally trusted mkcert
+    // certificate. macOS lets a non-root process take 443 only on 0.0.0.0,
+    // which also exposes the dev server to the local network.
+    ...(process.env.DEV_CERT_DIR && {
+      host: "0.0.0.0",
+      port: 443,
+      strictPort: true,
+      https: {
+        cert: fs.readFileSync(
+          path.join(process.env.DEV_CERT_DIR, "dev.origyn.com.pem"),
+        ),
+        key: fs.readFileSync(
+          path.join(process.env.DEV_CERT_DIR, "dev.origyn.com-key.pem"),
+        ),
+      },
+    }),
   },
   resolve: {
     alias: {

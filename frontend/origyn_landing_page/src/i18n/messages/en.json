@@ -968,7 +968,8 @@
     }
   },
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Scroll",
   "hero": {
@@ -1207,6 +1208,95 @@
       "vi": "Tiếng Việt",
       "zh": "简体中文",
       "zh-TW": "繁體中文"
+    }
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "session": {
+      "verifyEmail": "Verify email",
+      "signOut": "Sign out"
+    },
+    "balance": {
+      "title": "Credits",
+      "incoming": "Arriving",
+      "held": "Held for agent work"
+    },
+    "buy": {
+      "title": "Buy credits",
+      "amountLabel": "Amount in US dollars",
+      "range": "Enter a whole amount from {min} to {max}.",
+      "submit": "Continue to payment · {amount}",
+      "youGet": "You get",
+      "creditsUnit": "credits",
+      "redirecting": "Opening secure checkout…"
+    },
+    "keys": {
+      "title": "API keys",
+      "create": "Create key",
+      "created": "Created {date}",
+      "revoke": "Revoke",
+      "revokeConfirm": "Revoke this key?",
+      "newTitle": "Your new API key",
+      "newWarning": "Copy it now and store it somewhere safe. We can't show it again.",
+      "copy": "Copy",
+      "copied": "Copied",
+      "saved": "Done, I've saved it",
+      "creating": "Creating key…",
+      "revoked": "Key revoked",
+      "emptyTitle": "No API keys yet",
+      "tryIt": "Check that it works:"
+    },
+    "orders": {
+      "title": "Purchases",
+      "empty": "No purchases yet.",
+      "statusLabel": {
+        "paid": "Processing",
+        "issued": "Completed",
+        "awaiting_liquidity": "Processing",
+        "awaiting_price": "Processing",
+        "failed": "Failed",
+        "refunded": "Refunded",
+        "closed": "Closed"
+      },
+      "creditsLine": "{credits} credits",
+      "showAll": "Show all {count}",
+      "showLess": "Show less"
+    },
+    "order": {
+      "loading": "Checking your payment…",
+      "slow": "Payment received. Your credits will arrive shortly.",
+      "dismiss": "Dismiss",
+      "status": {
+        "quoted": "Waiting for your payment to complete.",
+        "paid": "Payment received. Your {credits} credits are on the way.",
+        "issued": "Done: {credits} credits were added to your balance.",
+        "awaiting_liquidity": "Payment received. Your credits will arrive shortly.",
+        "awaiting_price": "Payment received. Your credits will arrive shortly.",
+        "expired": "This checkout expired before it was paid.",
+        "failed": "This purchase failed. Contact support if you were charged.",
+        "refunded": "This purchase was refunded.",
+        "closed": "This purchase was closed. Contact support if you were charged."
+      }
+    },
+    "errors": {
+      "unknown": "Something went wrong. Try again.",
+      "network": "Can't reach the server. Check your connection and try again.",
+      "unauthorized": "Your session expired. Sign in again.",
+      "login_rejected": "You're signed in, but our servers couldn't confirm your login. Try again in a moment or contact support.",
+      "email_unverified": "Verify your email address to continue.",
+      "email_taken": "Another account already uses this email address.",
+      "terms_not_accepted": "Accept the terms of sale to continue.",
+      "amount_out_of_range": "Enter an amount from $10 to $100,000.",
+      "return_url_not_allowed": "This page can't receive payments. Contact support.",
+      "rate_limited": "Too many requests. Wait a few seconds and try again.",
+      "insufficient_liquidity": "Purchases are paused for a moment. Try again later.",
+      "price_unavailable": "Purchases are paused for a moment. Try again later.",
+      "pool_unavailable": "Purchases are paused for a moment. Try again later.",
+      "stripe_unavailable": "The payment provider didn't answer. Try again.",
+      "clerk_unavailable": "Sign-in didn't answer. Try again.",
+      "not_found": "We couldn't find that purchase."
     }
   }
 }

@@ -4,6 +4,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import LocaleGate, { LocaleRedirect } from "@/i18n/LocaleGate";
 import HomePage from "@/pages/HomePage";
 import {
+  AIDashboardPage,
   AIPage,
   DPPPage,
   HelpCenterPage,
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         <Route path="integrator/join" element={<IntegratorJoinPage />} />
         <Route path="token" element={<TokenPage />} />
         <Route path="ai" element={<AIPage />} />
+        <Route path="ai/dashboard" element={<AIDashboardPage />} />
         <Route path="dpp" element={<DPPPage />} />
       </Route>
       <Route path="*" element={<LocaleRedirect />} />

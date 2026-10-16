@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Bla",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Opplastingsstørrelse"
     },
     "bytesUnit": "byte"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Prøv igjen",
+    "cancel": "Avbryt",
+    "session": {
+      "verifyEmail": "Bekreft e-post",
+      "signOut": "Logg ut"
+    },
+    "balance": {
+      "title": "Kreditter",
+      "incoming": "På vei",
+      "held": "Holdt av til agentarbeid"
+    },
+    "buy": {
+      "title": "Kjøp kreditter",
+      "amountLabel": "Beløp i amerikanske dollar",
+      "range": "Skriv inn et helt beløp fra {min} til {max}.",
+      "submit": "Fortsett til betaling · {amount}",
+      "youGet": "Du får",
+      "creditsUnit": "kreditter",
+      "redirecting": "Åpner sikker betaling…"
+    },
+    "keys": {
+      "title": "API-nøkler",
+      "create": "Opprett nøkkel",
+      "created": "Opprettet {date}",
+      "revoke": "Tilbakekall",
+      "revokeConfirm": "Vil du tilbakekalle denne nøkkelen?",
+      "newTitle": "Din nye API-nøkkel",
+      "newWarning": "Kopier den nå og oppbevar den et trygt sted. Vi kan ikke vise den igjen.",
+      "copy": "Kopier",
+      "copied": "Kopiert",
+      "saved": "Ferdig, jeg har lagret den",
+      "creating": "Oppretter nøkkel…",
+      "revoked": "Nøkkelen er tilbakekalt",
+      "emptyTitle": "Ingen API-nøkler ennå",
+      "tryIt": "Sjekk at den fungerer:"
+    },
+    "orders": {
+      "title": "Kjøp",
+      "empty": "Ingen kjøp ennå.",
+      "statusLabel": {
+        "paid": "Behandles",
+        "issued": "Fullført",
+        "awaiting_liquidity": "Behandles",
+        "awaiting_price": "Behandles",
+        "failed": "Mislyktes",
+        "refunded": "Refundert",
+        "closed": "Lukket"
+      },
+      "creditsLine": "{credits} kreditter",
+      "showAll": "Vis alle {count}",
+      "showLess": "Vis færre"
+    },
+    "order": {
+      "loading": "Sjekker betalingen din…",
+      "slow": "Betaling mottatt. Kredittene dine kommer snart.",
+      "dismiss": "Lukk",
+      "status": {
+        "quoted": "Venter på at betalingen skal fullføres.",
+        "paid": "Betaling mottatt. {credits} kreditter er på vei.",
+        "issued": "Ferdig: {credits} kreditter er lagt til saldoen din.",
+        "awaiting_liquidity": "Betaling mottatt. Kredittene dine kommer snart.",
+        "awaiting_price": "Betaling mottatt. Kredittene dine kommer snart.",
+        "expired": "Denne betalingsøkten utløp før den ble betalt.",
+        "failed": "Dette kjøpet mislyktes. Kontakt kundestøtte hvis du ble belastet.",
+        "refunded": "Dette kjøpet ble refundert.",
+        "closed": "Dette kjøpet ble lukket. Kontakt kundestøtte hvis du ble belastet."
+      }
+    },
+    "errors": {
+      "unknown": "Noe gikk galt. Prøv igjen.",
+      "network": "Får ikke kontakt med serveren. Sjekk tilkoblingen og prøv igjen.",
+      "unauthorized": "Økten din er utløpt. Logg inn på nytt.",
+      "login_rejected": "Du er logget inn, men serverne våre kunne ikke bekrefte innloggingen. Prøv igjen om litt eller kontakt kundestøtte.",
+      "email_unverified": "Bekreft e-postadressen din for å fortsette.",
+      "email_taken": "En annen konto bruker allerede denne e-postadressen.",
+      "terms_not_accepted": "Godta salgsvilkårene for å fortsette.",
+      "amount_out_of_range": "Skriv inn et beløp fra $10 til $100 000.",
+      "return_url_not_allowed": "Denne siden kan ikke motta betalinger. Kontakt kundestøtte.",
+      "rate_limited": "For mange forespørsler. Vent noen sekunder og prøv igjen.",
+      "insufficient_liquidity": "Kjøp er midlertidig satt på pause. Prøv igjen senere.",
+      "price_unavailable": "Kjøp er midlertidig satt på pause. Prøv igjen senere.",
+      "pool_unavailable": "Kjøp er midlertidig satt på pause. Prøv igjen senere.",
+      "stripe_unavailable": "Betalingsleverandøren svarte ikke. Prøv igjen.",
+      "clerk_unavailable": "Innloggingen svarte ikke. Prøv igjen.",
+      "not_found": "Vi fant ikke det kjøpet."
+    }
   }
 }

@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "ダッシュボード"
   },
   "scroll": "スクロール",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "アップロードサイズ"
     },
     "bytesUnit": "バイト"
+  },
+  "aiDashboard": {
+    "title": "ダッシュボード",
+    "retry": "再試行",
+    "cancel": "キャンセル",
+    "session": {
+      "verifyEmail": "メールを確認",
+      "signOut": "サインアウト"
+    },
+    "balance": {
+      "title": "クレジット",
+      "incoming": "反映待ち",
+      "held": "エージェント処理用に確保中"
+    },
+    "buy": {
+      "title": "クレジットを購入",
+      "amountLabel": "金額（米ドル）",
+      "range": "{min}〜{max}の整数で入力してください。",
+      "submit": "お支払いへ進む · {amount}",
+      "youGet": "付与されるクレジット",
+      "creditsUnit": "クレジット",
+      "redirecting": "安全な決済ページを開いています…"
+    },
+    "keys": {
+      "title": "API キー",
+      "create": "キーを作成",
+      "created": "{date} に作成",
+      "revoke": "無効化",
+      "revokeConfirm": "このキーを無効化しますか？",
+      "newTitle": "新しい API キー",
+      "newWarning": "今すぐコピーして安全な場所に保管してください。再表示はできません。",
+      "copy": "コピー",
+      "copied": "コピーしました",
+      "saved": "保存しました",
+      "creating": "キーを作成中…",
+      "revoked": "キーを無効化しました",
+      "emptyTitle": "API キーはまだありません",
+      "tryIt": "動作を確認する："
+    },
+    "orders": {
+      "title": "購入履歴",
+      "empty": "購入履歴はまだありません。",
+      "statusLabel": {
+        "paid": "処理中",
+        "issued": "完了",
+        "awaiting_liquidity": "処理中",
+        "awaiting_price": "処理中",
+        "failed": "失敗",
+        "refunded": "返金済み",
+        "closed": "終了"
+      },
+      "creditsLine": "{credits} クレジット",
+      "showAll": "すべて表示（{count}）",
+      "showLess": "表示を減らす"
+    },
+    "order": {
+      "loading": "お支払いを確認しています…",
+      "slow": "お支払いを受け付けました。まもなくクレジットが反映されます。",
+      "dismiss": "閉じる",
+      "status": {
+        "quoted": "お支払いの完了をお待ちしています。",
+        "paid": "お支払いを受け付けました。{credits} クレジットを反映中です。",
+        "issued": "完了：{credits} クレジットが残高に追加されました。",
+        "awaiting_liquidity": "お支払いを受け付けました。まもなくクレジットが反映されます。",
+        "awaiting_price": "お支払いを受け付けました。まもなくクレジットが反映されます。",
+        "expired": "この決済はお支払い前に期限切れになりました。",
+        "failed": "この購入は失敗しました。請求が発生している場合はサポートにお問い合わせください。",
+        "refunded": "この購入は返金されました。",
+        "closed": "この購入は終了しました。請求が発生している場合はサポートにお問い合わせください。"
+      }
+    },
+    "errors": {
+      "unknown": "問題が発生しました。もう一度お試しください。",
+      "network": "サーバーに接続できません。接続を確認して、もう一度お試しください。",
+      "unauthorized": "セッションの有効期限が切れました。もう一度サインインしてください。",
+      "login_rejected": "サインインは完了していますが、サーバーでログインを確認できませんでした。しばらくしてからもう一度お試しいただくか、サポートにお問い合わせください。",
+      "email_unverified": "続行するにはメールアドレスを確認してください。",
+      "email_taken": "このメールアドレスは別のアカウントで使用されています。",
+      "terms_not_accepted": "続行するには販売条件に同意してください。",
+      "amount_out_of_range": "$10〜$100,000の金額を入力してください。",
+      "return_url_not_allowed": "このページでは支払いを受け付けられません。サポートにお問い合わせください。",
+      "rate_limited": "リクエストが多すぎます。数秒待ってからもう一度お試しください。",
+      "insufficient_liquidity": "購入を一時停止しています。しばらくしてからもう一度お試しください。",
+      "price_unavailable": "購入を一時停止しています。しばらくしてからもう一度お試しください。",
+      "pool_unavailable": "購入を一時停止しています。しばらくしてからもう一度お試しください。",
+      "stripe_unavailable": "決済サービスから応答がありません。もう一度お試しください。",
+      "clerk_unavailable": "サインインサービスから応答がありません。もう一度お試しください。",
+      "not_found": "該当する購入が見つかりませんでした。"
+    }
   }
 }

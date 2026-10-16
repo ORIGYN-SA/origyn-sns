@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Przewiń",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Rozmiar przesyłanych plików"
     },
     "bytesUnit": "bajty"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Spróbuj ponownie",
+    "cancel": "Anuluj",
+    "session": {
+      "verifyEmail": "Zweryfikuj e-mail",
+      "signOut": "Wyloguj się"
+    },
+    "balance": {
+      "title": "Kredyty",
+      "incoming": "W drodze",
+      "held": "Zarezerwowane na pracę agentów"
+    },
+    "buy": {
+      "title": "Kup kredyty",
+      "amountLabel": "Kwota w dolarach amerykańskich",
+      "range": "Wpisz pełną kwotę od {min} do {max}.",
+      "submit": "Przejdź do płatności · {amount}",
+      "youGet": "Otrzymasz",
+      "creditsUnit": "kredytów",
+      "redirecting": "Otwieranie bezpiecznej płatności…"
+    },
+    "keys": {
+      "title": "Klucze API",
+      "create": "Utwórz klucz",
+      "created": "Utworzono {date}",
+      "revoke": "Unieważnij",
+      "revokeConfirm": "Unieważnić ten klucz?",
+      "newTitle": "Twój nowy klucz API",
+      "newWarning": "Skopiuj go teraz i przechowuj w bezpiecznym miejscu. Nie pokażemy go ponownie.",
+      "copy": "Kopiuj",
+      "copied": "Skopiowano",
+      "saved": "Gotowe, zapisano",
+      "creating": "Tworzenie klucza…",
+      "revoked": "Klucz unieważniony",
+      "emptyTitle": "Brak kluczy API",
+      "tryIt": "Sprawdź, czy działa:"
+    },
+    "orders": {
+      "title": "Zakupy",
+      "empty": "Brak zakupów.",
+      "statusLabel": {
+        "paid": "W realizacji",
+        "issued": "Zakończono",
+        "awaiting_liquidity": "W realizacji",
+        "awaiting_price": "W realizacji",
+        "failed": "Niepowodzenie",
+        "refunded": "Zwrócono",
+        "closed": "Zamknięto"
+      },
+      "creditsLine": "Kredyty: {credits}",
+      "showAll": "Pokaż wszystkie ({count})",
+      "showLess": "Pokaż mniej"
+    },
+    "order": {
+      "loading": "Sprawdzanie płatności…",
+      "slow": "Płatność otrzymana. Kredyty wkrótce dotrą.",
+      "dismiss": "Zamknij",
+      "status": {
+        "quoted": "Czekamy na zakończenie płatności.",
+        "paid": "Płatność otrzymana. Kredyty ({credits}) są w drodze.",
+        "issued": "Gotowe: dodano {credits} kredytów do Twojego salda.",
+        "awaiting_liquidity": "Płatność otrzymana. Kredyty wkrótce dotrą.",
+        "awaiting_price": "Płatność otrzymana. Kredyty wkrótce dotrą.",
+        "expired": "Ta sesja płatności wygasła przed opłaceniem.",
+        "failed": "Ten zakup się nie powiódł. Skontaktuj się z pomocą techniczną, jeśli pobrano opłatę.",
+        "refunded": "Za ten zakup zwrócono pieniądze.",
+        "closed": "Ten zakup został zamknięty. Skontaktuj się z pomocą techniczną, jeśli pobrano opłatę."
+      }
+    },
+    "errors": {
+      "unknown": "Coś poszło nie tak. Spróbuj ponownie.",
+      "network": "Nie można połączyć się z serwerem. Sprawdź połączenie i spróbuj ponownie.",
+      "unauthorized": "Sesja wygasła. Zaloguj się ponownie.",
+      "login_rejected": "Logowanie się powiodło, ale nasze serwery nie mogły go potwierdzić. Spróbuj ponownie za chwilę lub skontaktuj się z pomocą techniczną.",
+      "email_unverified": "Zweryfikuj adres e-mail, aby kontynuować.",
+      "email_taken": "Ten adres e-mail jest już używany przez inne konto.",
+      "terms_not_accepted": "Zaakceptuj warunki sprzedaży, aby kontynuować.",
+      "amount_out_of_range": "Wpisz kwotę od 10 $ do 100 000 $.",
+      "return_url_not_allowed": "Ta strona nie może przyjmować płatności. Skontaktuj się z pomocą techniczną.",
+      "rate_limited": "Zbyt wiele żądań. Odczekaj kilka sekund i spróbuj ponownie.",
+      "insufficient_liquidity": "Zakupy są chwilowo wstrzymane. Spróbuj ponownie później.",
+      "price_unavailable": "Zakupy są chwilowo wstrzymane. Spróbuj ponownie później.",
+      "pool_unavailable": "Zakupy są chwilowo wstrzymane. Spróbuj ponownie później.",
+      "stripe_unavailable": "Operator płatności nie odpowiedział. Spróbuj ponownie.",
+      "clerk_unavailable": "Usługa logowania nie odpowiedziała. Spróbuj ponownie.",
+      "not_found": "Nie znaleźliśmy tego zakupu."
+    }
   }
 }

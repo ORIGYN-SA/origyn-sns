@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Scrollen",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Uploadgrootte"
     },
     "bytesUnit": "bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Opnieuw proberen",
+    "cancel": "Annuleren",
+    "session": {
+      "verifyEmail": "E-mail verifiëren",
+      "signOut": "Uitloggen"
+    },
+    "balance": {
+      "title": "Credits",
+      "incoming": "Onderweg",
+      "held": "Gereserveerd voor agentwerk"
+    },
+    "buy": {
+      "title": "Credits kopen",
+      "amountLabel": "Bedrag in Amerikaanse dollars",
+      "range": "Voer een heel bedrag in van {min} tot {max}.",
+      "submit": "Doorgaan naar betalen · {amount}",
+      "youGet": "U ontvangt",
+      "creditsUnit": "credits",
+      "redirecting": "Beveiligde checkout openen…"
+    },
+    "keys": {
+      "title": "API-sleutels",
+      "create": "Sleutel maken",
+      "created": "Gemaakt op {date}",
+      "revoke": "Intrekken",
+      "revokeConfirm": "Deze sleutel intrekken?",
+      "newTitle": "Uw nieuwe API-sleutel",
+      "newWarning": "Kopieer deze nu en bewaar hem op een veilige plek. We kunnen hem niet opnieuw tonen.",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd",
+      "saved": "Klaar, ik heb hem bewaard",
+      "creating": "Sleutel maken…",
+      "revoked": "Sleutel ingetrokken",
+      "emptyTitle": "Nog geen API-sleutels",
+      "tryIt": "Controleer of het werkt:"
+    },
+    "orders": {
+      "title": "Aankopen",
+      "empty": "Nog geen aankopen.",
+      "statusLabel": {
+        "paid": "In behandeling",
+        "issued": "Voltooid",
+        "awaiting_liquidity": "In behandeling",
+        "awaiting_price": "In behandeling",
+        "failed": "Mislukt",
+        "refunded": "Terugbetaald",
+        "closed": "Gesloten"
+      },
+      "creditsLine": "{credits} credits",
+      "showAll": "Alle {count} tonen",
+      "showLess": "Minder tonen"
+    },
+    "order": {
+      "loading": "Uw betaling controleren…",
+      "slow": "Betaling ontvangen. Uw credits komen zo binnen.",
+      "dismiss": "Sluiten",
+      "status": {
+        "quoted": "Wachten tot uw betaling is voltooid.",
+        "paid": "Betaling ontvangen. Uw {credits} credits zijn onderweg.",
+        "issued": "Klaar: {credits} credits zijn aan uw saldo toegevoegd.",
+        "awaiting_liquidity": "Betaling ontvangen. Uw credits komen zo binnen.",
+        "awaiting_price": "Betaling ontvangen. Uw credits komen zo binnen.",
+        "expired": "Deze checkout is verlopen voordat er werd betaald.",
+        "failed": "Deze aankoop is mislukt. Neem contact op met support als er kosten in rekening zijn gebracht.",
+        "refunded": "Deze aankoop is terugbetaald.",
+        "closed": "Deze aankoop is gesloten. Neem contact op met support als er kosten in rekening zijn gebracht."
+      }
+    },
+    "errors": {
+      "unknown": "Er is iets misgegaan. Probeer het opnieuw.",
+      "network": "Kan de server niet bereiken. Controleer uw verbinding en probeer het opnieuw.",
+      "unauthorized": "Uw sessie is verlopen. Log opnieuw in.",
+      "login_rejected": "U bent ingelogd, maar onze servers konden uw login niet bevestigen. Probeer het zo opnieuw of neem contact op met support.",
+      "email_unverified": "Verifieer uw e-mailadres om door te gaan.",
+      "email_taken": "Dit e-mailadres wordt al door een ander account gebruikt.",
+      "terms_not_accepted": "Accepteer de verkoopvoorwaarden om door te gaan.",
+      "amount_out_of_range": "Voer een bedrag in van $10 tot $100.000.",
+      "return_url_not_allowed": "Deze pagina kan geen betalingen ontvangen. Neem contact op met support.",
+      "rate_limited": "Te veel verzoeken. Wacht een paar seconden en probeer het opnieuw.",
+      "insufficient_liquidity": "Aankopen zijn tijdelijk gepauzeerd. Probeer het later opnieuw.",
+      "price_unavailable": "Aankopen zijn tijdelijk gepauzeerd. Probeer het later opnieuw.",
+      "pool_unavailable": "Aankopen zijn tijdelijk gepauzeerd. Probeer het later opnieuw.",
+      "stripe_unavailable": "De betaalprovider reageerde niet. Probeer het opnieuw.",
+      "clerk_unavailable": "Inloggen reageerde niet. Probeer het opnieuw.",
+      "not_found": "We konden die aankoop niet vinden."
+    }
   }
 }

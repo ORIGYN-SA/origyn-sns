@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Scrollen",
   "hero": {
@@ -1178,5 +1179,94 @@
       "uploadSize": "Upload-Größe"
     },
     "bytesUnit": "Bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Erneut versuchen",
+    "cancel": "Abbrechen",
+    "session": {
+      "verifyEmail": "E-Mail bestätigen",
+      "signOut": "Abmelden"
+    },
+    "balance": {
+      "title": "Credits",
+      "incoming": "Unterwegs",
+      "held": "Für Agenten reserviert"
+    },
+    "buy": {
+      "title": "Credits kaufen",
+      "amountLabel": "Betrag in US-Dollar",
+      "range": "Gib einen ganzen Betrag von {min} bis {max} ein.",
+      "submit": "Weiter zur Zahlung · {amount}",
+      "youGet": "Du erhältst",
+      "creditsUnit": "Credits",
+      "redirecting": "Sicherer Checkout wird geöffnet…"
+    },
+    "keys": {
+      "title": "API-Schlüssel",
+      "create": "Schlüssel erstellen",
+      "created": "Erstellt am {date}",
+      "revoke": "Widerrufen",
+      "revokeConfirm": "Diesen Schlüssel widerrufen?",
+      "newTitle": "Dein neuer API-Schlüssel",
+      "newWarning": "Kopiere ihn jetzt und bewahre ihn sicher auf. Wir können ihn nicht erneut anzeigen.",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "saved": "Fertig, ich habe ihn gespeichert",
+      "creating": "Schlüssel wird erstellt…",
+      "revoked": "Schlüssel widerrufen",
+      "emptyTitle": "Noch keine API-Schlüssel",
+      "tryIt": "Teste, ob er funktioniert:"
+    },
+    "orders": {
+      "title": "Käufe",
+      "empty": "Noch keine Käufe.",
+      "statusLabel": {
+        "paid": "In Bearbeitung",
+        "issued": "Abgeschlossen",
+        "awaiting_liquidity": "In Bearbeitung",
+        "awaiting_price": "In Bearbeitung",
+        "failed": "Fehlgeschlagen",
+        "refunded": "Erstattet",
+        "closed": "Geschlossen"
+      },
+      "creditsLine": "{credits} Credits",
+      "showAll": "Alle {count} anzeigen",
+      "showLess": "Weniger anzeigen"
+    },
+    "order": {
+      "loading": "Zahlung wird geprüft…",
+      "slow": "Zahlung erhalten. Deine Credits kommen in Kürze.",
+      "dismiss": "Schließen",
+      "status": {
+        "quoted": "Warte auf den Abschluss deiner Zahlung.",
+        "paid": "Zahlung erhalten. Deine {credits} Credits sind unterwegs.",
+        "issued": "Fertig: {credits} Credits wurden deinem Guthaben gutgeschrieben.",
+        "awaiting_liquidity": "Zahlung erhalten. Deine Credits kommen in Kürze.",
+        "awaiting_price": "Zahlung erhalten. Deine Credits kommen in Kürze.",
+        "expired": "Dieser Checkout ist abgelaufen, bevor er bezahlt wurde.",
+        "failed": "Dieser Kauf ist fehlgeschlagen. Wende dich an den Support, falls dir etwas berechnet wurde.",
+        "refunded": "Dieser Kauf wurde erstattet.",
+        "closed": "Dieser Kauf wurde geschlossen. Wende dich an den Support, falls dir etwas berechnet wurde."
+      }
+    },
+    "errors": {
+      "unknown": "Etwas ist schiefgelaufen. Versuch es erneut.",
+      "network": "Server nicht erreichbar. Prüfe deine Verbindung und versuch es erneut.",
+      "unauthorized": "Deine Sitzung ist abgelaufen. Melde dich erneut an.",
+      "login_rejected": "Du bist angemeldet, aber unsere Server konnten deine Anmeldung nicht bestätigen. Versuch es gleich noch einmal oder wende dich an den Support.",
+      "email_unverified": "Bestätige deine E-Mail-Adresse, um fortzufahren.",
+      "email_taken": "Ein anderes Konto verwendet diese E-Mail-Adresse bereits.",
+      "terms_not_accepted": "Akzeptiere die Verkaufsbedingungen, um fortzufahren.",
+      "amount_out_of_range": "Gib einen Betrag von 10 $ bis 100.000 $ ein.",
+      "return_url_not_allowed": "Diese Seite kann keine Zahlungen empfangen. Wende dich an den Support.",
+      "rate_limited": "Zu viele Anfragen. Warte ein paar Sekunden und versuch es erneut.",
+      "insufficient_liquidity": "Käufe sind kurz pausiert. Versuch es später erneut.",
+      "price_unavailable": "Käufe sind kurz pausiert. Versuch es später erneut.",
+      "pool_unavailable": "Käufe sind kurz pausiert. Versuch es später erneut.",
+      "stripe_unavailable": "Der Zahlungsanbieter hat nicht geantwortet. Versuch es erneut.",
+      "clerk_unavailable": "Die Anmeldung hat nicht geantwortet. Versuch es erneut.",
+      "not_found": "Wir konnten diesen Kauf nicht finden."
+    }
   }
 }
