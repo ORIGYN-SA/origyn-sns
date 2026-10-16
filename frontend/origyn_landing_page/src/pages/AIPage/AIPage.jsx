@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import Footer from "@components/Footer/Footer";
-import { useT } from "@/i18n/LocaleContext";
+import { useLocale, useT } from "@/i18n/LocaleContext";
+import { localePath } from "@/i18n/paths";
+import { AIDashboardPage } from "@/routes/lazyPages";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import Hero from "./components/Hero";
 import SignupForm from "./components/SignupForm";
@@ -14,6 +17,7 @@ import NewsletterSection from "./components/NewsletterSection";
 
 const AIPage = () => {
   const t = useT();
+  const { locale } = useLocale();
   return (
     <div className="bg-white font-sans text-ink">
       <meta name="theme-color" content="#ffffff" />
@@ -34,7 +38,17 @@ const AIPage = () => {
               {t("header.badge")}
             </span>
           </div>
-          <LanguageSwitcher />
+          <div className="flex items-center gap-3">
+            <Link
+              to={localePath(locale, "ai/dashboard")}
+              onMouseEnter={AIDashboardPage.preload}
+              onFocus={AIDashboardPage.preload}
+              className="rounded-full bg-navy px-4 py-1.5 text-[0.8125rem] font-medium tracking-wide text-surface transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+            >
+              {t("header.dashboard")}
+            </Link>
+            <LanguageSwitcher />
+          </div>
         </header>
 
         <div className="flex flex-1 flex-col items-center px-6 pb-10 text-center">

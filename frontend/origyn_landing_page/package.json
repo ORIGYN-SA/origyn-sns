@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode staging",
+    "dev:clerk": "DEV_CERT_DIR=${DEV_CERT_DIR:-$HOME/.local/share/dev-certs} vite --mode staging",
     "build": "vite build",
     "build:staging": "vite build --mode staging",
     "build:preprod": "vite build --mode preprod",
@@ -18,6 +19,7 @@
     "og:fonts": "python3 scripts/build-og-fonts.py"
   },
   "dependencies": {
+    "@clerk/react": "^6.17.8",
     "@origyn/shared-ui": "^0.4.0",
     "@tanstack/react-query": "^5.74.4",
     "gsap": "^3.12.7",
