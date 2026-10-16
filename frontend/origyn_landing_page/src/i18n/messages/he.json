@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "לוח בקרה",
+    "docs": "תיעוד",
     "retry": "נסה שוב",
     "cancel": "ביטול",
     "session": {

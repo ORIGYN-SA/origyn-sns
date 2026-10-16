@@ -1212,6 +1212,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Docs",
     "retry": "Try again",
     "cancel": "Cancel",
     "session": {

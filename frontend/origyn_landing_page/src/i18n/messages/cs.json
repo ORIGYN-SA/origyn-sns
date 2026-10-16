@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Dokumentace",
     "retry": "Zkusit znovu",
     "cancel": "Zrušit",
     "session": {

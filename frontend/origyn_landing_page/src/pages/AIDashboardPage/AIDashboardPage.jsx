@@ -19,6 +19,7 @@ import Toaster from "./components/Toaster";
 import { AutoHeight, Skeleton } from "./components/ui";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const DOCS_URL = "https://origyn.gitbook.io/origyn/origyn-nft/";
 // A publishable key is pk_<env>_<base64 of "<frontend api host>$">.
 const CLERK_ORIGIN = `https://${atob(PUBLISHABLE_KEY.split("_")[2]).replace(/\$$/, "")}`;
 
@@ -124,7 +125,9 @@ const AIDashboardPage = () => {
           <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-8 md:px-16">
             <Link to={aiPage} dir="ltr" className="flex items-start">
               <img
-                src="/origyn-logo-blue.png"
+                src="/origyn-logo-blue.webp"
+                width={480}
+                height={112}
                 alt="Origyn"
                 className="h-7 w-auto md:h-9"
               />
@@ -132,7 +135,19 @@ const AIDashboardPage = () => {
                 {t("header.badge")}
               </span>
             </Link>
-            <Account />
+            {/* Docs sits on the trailing edge so the avatar appearing or
+                not after sign-in never moves it. */}
+            <div className="flex items-center gap-3">
+              <Account />
+              <a
+                href={DOCS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="-me-3 inline-flex h-9 items-center rounded-full px-3 text-[0.8125rem] font-medium text-navy transition-colors hover:bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+              >
+                {t("aiDashboard.docs")}
+              </a>
+            </div>
           </header>
 
           <main className="mx-auto w-full max-w-6xl px-6 pb-24 md:px-16">

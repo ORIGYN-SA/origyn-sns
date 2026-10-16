@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashibodi",
+    "docs": "Nyaraka",
     "retry": "Jaribu tena",
     "cancel": "Ghairi",
     "session": {

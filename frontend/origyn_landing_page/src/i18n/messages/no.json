@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Dokumentasjon",
     "retry": "Prøv igjen",
     "cancel": "Avbryt",
     "session": {

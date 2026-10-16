@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "ダッシュボード",
+    "docs": "ドキュメント",
     "retry": "再試行",
     "cancel": "キャンセル",
     "session": {

@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Belgeler",
     "retry": "Tekrar deneyin",
     "cancel": "İptal",
     "session": {

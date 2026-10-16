@@ -1182,6 +1182,7 @@
   },
   "aiDashboard": {
     "title": "대시보드",
+    "docs": "문서",
     "retry": "다시 시도",
     "cancel": "취소",
     "session": {
