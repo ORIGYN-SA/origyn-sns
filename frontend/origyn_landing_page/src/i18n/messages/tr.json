@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Kaydır",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Yükleme boyutu"
     },
     "bytesUnit": "bayt"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Tekrar deneyin",
+    "cancel": "İptal",
+    "session": {
+      "verifyEmail": "E-postayı doğrula",
+      "signOut": "Çıkış yap"
+    },
+    "balance": {
+      "title": "Krediler",
+      "incoming": "Yolda",
+      "held": "Agent işleri için ayrıldı"
+    },
+    "buy": {
+      "title": "Kredi satın al",
+      "amountLabel": "ABD doları cinsinden tutar",
+      "range": "{min} ile {max} arasında tam bir tutar girin.",
+      "submit": "Ödemeye devam et · {amount}",
+      "youGet": "Alacağınız",
+      "creditsUnit": "kredi",
+      "redirecting": "Güvenli ödeme sayfası açılıyor…"
+    },
+    "keys": {
+      "title": "API anahtarları",
+      "create": "Anahtar oluştur",
+      "created": "Oluşturulma: {date}",
+      "revoke": "İptal et",
+      "revokeConfirm": "Bu anahtar iptal edilsin mi?",
+      "newTitle": "Yeni API anahtarınız",
+      "newWarning": "Şimdi kopyalayın ve güvenli bir yerde saklayın. Bir daha gösteremeyiz.",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "saved": "Tamam, kaydettim",
+      "creating": "Anahtar oluşturuluyor…",
+      "revoked": "Anahtar iptal edildi",
+      "emptyTitle": "Henüz API anahtarı yok",
+      "tryIt": "Çalıştığını kontrol edin:"
+    },
+    "orders": {
+      "title": "Satın alımlar",
+      "empty": "Henüz satın alım yok.",
+      "statusLabel": {
+        "paid": "İşleniyor",
+        "issued": "Tamamlandı",
+        "awaiting_liquidity": "İşleniyor",
+        "awaiting_price": "İşleniyor",
+        "failed": "Başarısız",
+        "refunded": "İade edildi",
+        "closed": "Kapatıldı"
+      },
+      "creditsLine": "{credits} kredi",
+      "showAll": "Tümünü göster ({count})",
+      "showLess": "Daha az göster"
+    },
+    "order": {
+      "loading": "Ödemeniz kontrol ediliyor…",
+      "slow": "Ödeme alındı. Kredileriniz kısa süre içinde gelecek.",
+      "dismiss": "Kapat",
+      "status": {
+        "quoted": "Ödemenizin tamamlanması bekleniyor.",
+        "paid": "Ödeme alındı. {credits} krediniz yolda.",
+        "issued": "Tamamlandı: bakiyenize {credits} kredi eklendi.",
+        "awaiting_liquidity": "Ödeme alındı. Kredileriniz kısa süre içinde gelecek.",
+        "awaiting_price": "Ödeme alındı. Kredileriniz kısa süre içinde gelecek.",
+        "expired": "Bu ödeme sayfasının süresi, ödeme yapılmadan doldu.",
+        "failed": "Bu satın alım başarısız oldu. Ücret alındıysa destek ekibiyle iletişime geçin.",
+        "refunded": "Bu satın alım iade edildi.",
+        "closed": "Bu satın alım kapatıldı. Ücret alındıysa destek ekibiyle iletişime geçin."
+      }
+    },
+    "errors": {
+      "unknown": "Bir şeyler ters gitti. Tekrar deneyin.",
+      "network": "Sunucuya ulaşılamıyor. Bağlantınızı kontrol edip tekrar deneyin.",
+      "unauthorized": "Oturumunuzun süresi doldu. Tekrar giriş yapın.",
+      "login_rejected": "Giriş yaptınız ancak sunucularımız girişinizi doğrulayamadı. Biraz sonra tekrar deneyin veya destek ekibiyle iletişime geçin.",
+      "email_unverified": "Devam etmek için e-posta adresinizi doğrulayın.",
+      "email_taken": "Bu e-posta adresi başka bir hesap tarafından kullanılıyor.",
+      "terms_not_accepted": "Devam etmek için satış koşullarını kabul edin.",
+      "amount_out_of_range": "$10 ile $100.000 arasında bir tutar girin.",
+      "return_url_not_allowed": "Bu sayfa ödeme alamıyor. Destek ekibiyle iletişime geçin.",
+      "rate_limited": "Çok fazla istek. Birkaç saniye bekleyip tekrar deneyin.",
+      "insufficient_liquidity": "Satın alımlar kısa bir süreliğine durduruldu. Daha sonra tekrar deneyin.",
+      "price_unavailable": "Satın alımlar kısa bir süreliğine durduruldu. Daha sonra tekrar deneyin.",
+      "pool_unavailable": "Satın alımlar kısa bir süreliğine durduruldu. Daha sonra tekrar deneyin.",
+      "stripe_unavailable": "Ödeme sağlayıcısı yanıt vermedi. Tekrar deneyin.",
+      "clerk_unavailable": "Giriş servisi yanıt vermedi. Tekrar deneyin.",
+      "not_found": "Bu satın alımı bulamadık."
+    }
   }
 }

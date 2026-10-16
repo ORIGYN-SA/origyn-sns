@@ -1,4 +1,7 @@
 use crate::state::read_state;
+use crate::types::neuron_policy::{
+    has_permission, plan_policy_actions, PolicyAction, PolicyEnforcementReport,
+};
 use crate::types::neurons::sns_neurons::Neurons;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::GoldaoManager;
@@ -15,9 +18,10 @@ use sns_governance_canister::types::{
         claim_or_refresh::{By, MemoAndController},
         ClaimOrRefresh, Command,
     },
-    manage_neuron_response, ManageNeuron, Neuron,
+    manage_neuron_response, ManageNeuron, Neuron, NeuronPermissionType,
 };
 use sns_neuron_controller_api_canister::init::TokenParams;
+use sns_neuron_controller_api_canister::neuron_policy::NeuronPolicy;
 use std::collections::HashMap;
 use tracing::{error, info, trace};
 use types::{CanisterId, TokenSymbol};
@@ -35,6 +39,8 @@ pub trait NeuronConfig {
     fn get_sns_ledger_canister_id(&self) -> CanisterId;
     fn get_neurons_mut(&mut self) -> &mut Neurons;
     fn get_neurons(&self) -> &Neurons;
+    fn get_neuron_policy(&self) -> Option<&NeuronPolicy>;
+    fn set_last_policy_enforcement(&mut self, report: PolicyEnforcementReport);
 }
 
 #[async_trait]
@@ -171,6 +177,45 @@ pub trait NeuronManager: NeuronConfig {
         Ok(())
     }
 
+    /// Compares the cached neurons with the policy and issues the `manage_neuron` commands
+    /// needed to converge. Returns None when no policy is configured. Failures are collected
+    /// in the report rather than aborting, so one bad neuron does not block the others.
+    async fn enforce_neuron_policy(&self) -> Option<PolicyEnforcementReport> {
+        let policy = self.get_neuron_policy()?.clone();
+        let (controller, now) = read_state(|s| (s.env.canister_id(), s.env.now()));
+        let neurons = &self.get_neurons().all_neurons;
+        let plan = plan_policy_actions(neurons, &policy, &controller);
+
+        let mut report = PolicyEnforcementReport {
+            timestamp: now,
+            neurons_checked: neurons.len() as u32,
+            actions_planned: plan.actions.len() as u32,
+            actions_succeeded: 0,
+            skipped: plan.skipped,
+            errors: Vec::new(),
+        };
+        for skipped in &report.skipped {
+            error!("[neuron policy] {skipped}");
+        }
+
+        let governance_canister_id = self.get_sns_governance_canister_id();
+        for action in plan.actions {
+            let neuron_id = hex::encode(&action.neuron_id);
+            match apply_policy_action(governance_canister_id, &action).await {
+                Ok(()) => {
+                    report.actions_succeeded += 1;
+                    info!("[neuron policy] neuron {neuron_id}: {}", action.description);
+                }
+                Err(err) => {
+                    let msg = format!("neuron {neuron_id}: {} failed: {err}", action.description);
+                    error!("[neuron policy] {msg}");
+                    report.errors.push(msg);
+                }
+            }
+        }
+        Some(report)
+    }
+
     fn get_neuron_metrics(&self) -> Vec<SnsNeuronWithMetric> {
         self.get_neurons()
             .all_neurons
@@ -185,10 +230,11 @@ pub trait NeuronManager: NeuronConfig {
     }
 
     async fn get_available_sns_rewards(&self) -> Nat {
+        let controller = read_state(|s| s.env.canister_id());
         self.get_neurons()
             .all_neurons
             .iter()
-            .filter(|neuron| is_neuron_eligible_for_disburse(neuron))
+            .filter(|neuron| is_neuron_eligible_for_disburse(neuron, &controller))
             .fold(Nat::from(0_u64), |sum, neuron| {
                 sum + neuron.maturity_e8s_equivalent
             })
@@ -199,8 +245,33 @@ pub trait NeuronManager: NeuronConfig {
 // would disburse less than the transaction fee of 10 GOLDAO (1_000_000_000 e8s). 11 GOLDAO (1_100_000_000 e8s) keeps a small margin above that.
 pub const MIN_DISBURSABLE_MATURITY_E8S: u64 = 1_100_000_000;
 
-fn is_neuron_eligible_for_disburse(neuron: &Neuron) -> bool {
+/// A neuron can be disbursed when it holds enough liquid maturity and the controller is
+/// allowed to disburse it. Neurons where the controller is only a voting hotkey are skipped
+/// instead of producing a daily authorization error.
+fn is_neuron_eligible_for_disburse(neuron: &Neuron, controller: &candid::Principal) -> bool {
     neuron.maturity_e8s_equivalent >= MIN_DISBURSABLE_MATURITY_E8S
+        && has_permission(neuron, controller, NeuronPermissionType::DisburseMaturity)
+}
+
+/// Sends one planned `manage_neuron` command and interprets the governance reply.
+async fn apply_policy_action(
+    governance_canister_id: CanisterId,
+    action: &PolicyAction,
+) -> Result<(), String> {
+    let args = ManageNeuron {
+        subaccount: action.neuron_id.clone(),
+        command: Some(action.command.clone()),
+    };
+    let response = sns_governance_canister_c2c_client::manage_neuron(governance_canister_id, &args)
+        .await
+        .map_err(|e| format!("call failed: {e:?}"))?;
+    match response.command {
+        Some(manage_neuron_response::Command::Error(err)) => {
+            Err(format!("governance error: {err:?}"))
+        }
+        Some(_) => Ok(()),
+        None => Err("empty response from governance".to_string()),
+    }
 }
 
 #[async_trait]
@@ -216,10 +287,11 @@ pub trait NeuronRewardsManager: NeuronManager {
         &self,
         rewards_destination: sns_governance_canister::types::Account,
     ) -> ClaimRewardResult {
+        let controller = read_state(|s| s.env.canister_id());
         let neurons = &self.get_neurons().all_neurons;
         let mut neuron_ids = Vec::new();
         for neuron in neurons {
-            if is_neuron_eligible_for_disburse(neuron) {
+            if is_neuron_eligible_for_disburse(neuron, &controller) {
                 if let Some(id) = &neuron.id {
                     if let Ok(array) = id.clone().id.try_into() {
                         neuron_ids.push(array);

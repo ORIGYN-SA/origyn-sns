@@ -715,6 +715,7 @@ pub fn create_sns_neuron(
         created_timestamp_seconds: 1620329630,
         aging_since_timestamp_seconds: 1620329630,
         followees: BTreeMap::new(),
+        topic_followees: None,
         maturity_e8s_equivalent: 1 * maturity_multiplier,
         voting_power_percentage_multiplier: 1,
         source_nns_neuron_id: None,

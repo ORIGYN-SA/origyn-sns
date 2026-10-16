@@ -8,6 +8,7 @@ use std::collections::HashMap;
 use types::TokenSymbol;
 
 use sns_neuron_controller_api_canister::init::TokenParams;
+use sns_neuron_controller_api_canister::neuron_policy::NeuronPolicy;
 
 pub fn setup(
     pic: &PocketIc,
@@ -18,6 +19,7 @@ pub fn setup(
     goldao_sns_ledger_canister_id: Principal,
     goldao_sns_rewards_canister_id: Principal,
     reward_tokens: HashMap<TokenSymbol, TokenParams>,
+    neuron_policy: Option<NeuronPolicy>,
 ) -> Principal {
     let controller = controllers.first().unwrap();
     let canister_id = create_canister_with_id(pic, *controller, canister_id);
@@ -41,6 +43,7 @@ pub fn setup(
                 goldao_sns_ledger_canister_id,
                 goldao_sns_rewards_canister_id,
                 reward_tokens,
+                neuron_policy,
             },
         },
     );

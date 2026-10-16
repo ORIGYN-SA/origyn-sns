@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Vieritä",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Latauksen koko"
     },
     "bytesUnit": "tavua"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Yritä uudelleen",
+    "cancel": "Peruuta",
+    "session": {
+      "verifyEmail": "Vahvista sähköposti",
+      "signOut": "Kirjaudu ulos"
+    },
+    "balance": {
+      "title": "Krediitit",
+      "incoming": "Tulossa",
+      "held": "Varattu agenttien työhön"
+    },
+    "buy": {
+      "title": "Osta krediittejä",
+      "amountLabel": "Summa Yhdysvaltain dollareina",
+      "range": "Anna kokonaisluku väliltä {min}–{max}.",
+      "submit": "Jatka maksuun · {amount}",
+      "youGet": "Saat",
+      "creditsUnit": "krediittiä",
+      "redirecting": "Avataan suojattua maksua…"
+    },
+    "keys": {
+      "title": "API-avaimet",
+      "create": "Luo avain",
+      "created": "Luotu {date}",
+      "revoke": "Mitätöi",
+      "revokeConfirm": "Mitätöidäänkö tämä avain?",
+      "newTitle": "Uusi API-avaimesi",
+      "newWarning": "Kopioi se nyt ja säilytä turvallisessa paikassa. Emme voi näyttää sitä uudelleen.",
+      "copy": "Kopioi",
+      "copied": "Kopioitu",
+      "saved": "Valmis, tallensin sen",
+      "creating": "Luodaan avainta…",
+      "revoked": "Avain mitätöity",
+      "emptyTitle": "Ei vielä API-avaimia",
+      "tryIt": "Tarkista, että se toimii:"
+    },
+    "orders": {
+      "title": "Ostot",
+      "empty": "Ei vielä ostoja.",
+      "statusLabel": {
+        "paid": "Käsittelyssä",
+        "issued": "Valmis",
+        "awaiting_liquidity": "Käsittelyssä",
+        "awaiting_price": "Käsittelyssä",
+        "failed": "Epäonnistui",
+        "refunded": "Hyvitetty",
+        "closed": "Suljettu"
+      },
+      "creditsLine": "{credits} krediittiä",
+      "showAll": "Näytä kaikki {count}",
+      "showLess": "Näytä vähemmän"
+    },
+    "order": {
+      "loading": "Tarkistetaan maksuasi…",
+      "slow": "Maksu vastaanotettu. Krediittisi saapuvat pian.",
+      "dismiss": "Sulje",
+      "status": {
+        "quoted": "Odotetaan maksusi valmistumista.",
+        "paid": "Maksu vastaanotettu. {credits} krediittiäsi on matkalla.",
+        "issued": "Valmis: saldoosi lisättiin {credits} krediittiä.",
+        "awaiting_liquidity": "Maksu vastaanotettu. Krediittisi saapuvat pian.",
+        "awaiting_price": "Maksu vastaanotettu. Krediittisi saapuvat pian.",
+        "expired": "Tämä maksu vanheni ennen kuin se maksettiin.",
+        "failed": "Tämä osto epäonnistui. Ota yhteyttä tukeen, jos sinua veloitettiin.",
+        "refunded": "Tämä osto hyvitettiin.",
+        "closed": "Tämä osto suljettiin. Ota yhteyttä tukeen, jos sinua veloitettiin."
+      }
+    },
+    "errors": {
+      "unknown": "Jokin meni vikaan. Yritä uudelleen.",
+      "network": "Palvelimeen ei saada yhteyttä. Tarkista yhteytesi ja yritä uudelleen.",
+      "unauthorized": "Istuntosi vanheni. Kirjaudu sisään uudelleen.",
+      "login_rejected": "Olet kirjautunut sisään, mutta palvelimemme eivät voineet vahvistaa kirjautumistasi. Yritä hetken päästä uudelleen tai ota yhteyttä tukeen.",
+      "email_unverified": "Vahvista sähköpostiosoitteesi jatkaaksesi.",
+      "email_taken": "Toinen tili käyttää jo tätä sähköpostiosoitetta.",
+      "terms_not_accepted": "Hyväksy myyntiehdot jatkaaksesi.",
+      "amount_out_of_range": "Anna summa väliltä 10 $ – 100 000 $.",
+      "return_url_not_allowed": "Tämä sivu ei voi vastaanottaa maksuja. Ota yhteyttä tukeen.",
+      "rate_limited": "Liikaa pyyntöjä. Odota muutama sekunti ja yritä uudelleen.",
+      "insufficient_liquidity": "Ostot on keskeytetty hetkeksi. Yritä myöhemmin uudelleen.",
+      "price_unavailable": "Ostot on keskeytetty hetkeksi. Yritä myöhemmin uudelleen.",
+      "pool_unavailable": "Ostot on keskeytetty hetkeksi. Yritä myöhemmin uudelleen.",
+      "stripe_unavailable": "Maksupalvelu ei vastannut. Yritä uudelleen.",
+      "clerk_unavailable": "Kirjautumispalvelu ei vastannut. Yritä uudelleen.",
+      "not_found": "Emme löytäneet tätä ostoa."
+    }
   }
 }

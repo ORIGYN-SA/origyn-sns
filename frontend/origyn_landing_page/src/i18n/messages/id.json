@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dasbor"
   },
   "scroll": "Gulir",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Ukuran unggahan"
     },
     "bytesUnit": "bita"
+  },
+  "aiDashboard": {
+    "title": "Dasbor",
+    "retry": "Coba lagi",
+    "cancel": "Batal",
+    "session": {
+      "verifyEmail": "Verifikasi email",
+      "signOut": "Keluar"
+    },
+    "balance": {
+      "title": "Kredit",
+      "incoming": "Segera masuk",
+      "held": "Ditahan untuk kerja agen"
+    },
+    "buy": {
+      "title": "Beli kredit",
+      "amountLabel": "Jumlah dalam dolar AS",
+      "range": "Masukkan jumlah bulat dari {min} hingga {max}.",
+      "submit": "Lanjut ke pembayaran · {amount}",
+      "youGet": "Anda mendapatkan",
+      "creditsUnit": "kredit",
+      "redirecting": "Membuka checkout aman…"
+    },
+    "keys": {
+      "title": "Kunci API",
+      "create": "Buat kunci",
+      "created": "Dibuat {date}",
+      "revoke": "Cabut",
+      "revokeConfirm": "Cabut kunci ini?",
+      "newTitle": "Kunci API baru Anda",
+      "newWarning": "Salin sekarang dan simpan di tempat yang aman. Kunci ini tidak dapat ditampilkan lagi.",
+      "copy": "Salin",
+      "copied": "Disalin",
+      "saved": "Selesai, sudah saya simpan",
+      "creating": "Membuat kunci…",
+      "revoked": "Kunci dicabut",
+      "emptyTitle": "Belum ada kunci API",
+      "tryIt": "Periksa apakah berfungsi:"
+    },
+    "orders": {
+      "title": "Pembelian",
+      "empty": "Belum ada pembelian.",
+      "statusLabel": {
+        "paid": "Diproses",
+        "issued": "Selesai",
+        "awaiting_liquidity": "Diproses",
+        "awaiting_price": "Diproses",
+        "failed": "Gagal",
+        "refunded": "Dikembalikan",
+        "closed": "Ditutup"
+      },
+      "creditsLine": "{credits} kredit",
+      "showAll": "Tampilkan semua {count}",
+      "showLess": "Tampilkan lebih sedikit"
+    },
+    "order": {
+      "loading": "Memeriksa pembayaran Anda…",
+      "slow": "Pembayaran diterima. Kredit Anda akan segera masuk.",
+      "dismiss": "Tutup",
+      "status": {
+        "quoted": "Menunggu pembayaran Anda selesai.",
+        "paid": "Pembayaran diterima. {credits} kredit Anda sedang diproses.",
+        "issued": "Selesai: {credits} kredit telah ditambahkan ke saldo Anda.",
+        "awaiting_liquidity": "Pembayaran diterima. Kredit Anda akan segera masuk.",
+        "awaiting_price": "Pembayaran diterima. Kredit Anda akan segera masuk.",
+        "expired": "Checkout ini kedaluwarsa sebelum dibayar.",
+        "failed": "Pembelian ini gagal. Hubungi dukungan jika Anda sudah ditagih.",
+        "refunded": "Pembelian ini telah dikembalikan dananya.",
+        "closed": "Pembelian ini telah ditutup. Hubungi dukungan jika Anda sudah ditagih."
+      }
+    },
+    "errors": {
+      "unknown": "Terjadi kesalahan. Coba lagi.",
+      "network": "Tidak dapat terhubung ke server. Periksa koneksi Anda dan coba lagi.",
+      "unauthorized": "Sesi Anda telah berakhir. Masuk lagi.",
+      "login_rejected": "Anda sudah masuk, tetapi server kami tidak dapat mengonfirmasi login Anda. Coba lagi sebentar lagi atau hubungi dukungan.",
+      "email_unverified": "Verifikasi alamat email Anda untuk melanjutkan.",
+      "email_taken": "Alamat email ini sudah digunakan oleh akun lain.",
+      "terms_not_accepted": "Setujui ketentuan penjualan untuk melanjutkan.",
+      "amount_out_of_range": "Masukkan jumlah dari $10 hingga $100.000.",
+      "return_url_not_allowed": "Halaman ini tidak dapat menerima pembayaran. Hubungi dukungan.",
+      "rate_limited": "Terlalu banyak permintaan. Tunggu beberapa detik dan coba lagi.",
+      "insufficient_liquidity": "Pembelian dijeda sementara. Coba lagi nanti.",
+      "price_unavailable": "Pembelian dijeda sementara. Coba lagi nanti.",
+      "pool_unavailable": "Pembelian dijeda sementara. Coba lagi nanti.",
+      "stripe_unavailable": "Penyedia pembayaran tidak merespons. Coba lagi.",
+      "clerk_unavailable": "Layanan masuk tidak merespons. Coba lagi.",
+      "not_found": "Kami tidak dapat menemukan pembelian tersebut."
+    }
   }
 }

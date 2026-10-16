@@ -1,3 +1,4 @@
+use crate::types::neuron_policy::PolicyEnforcementReport;
 use crate::types::neurons::sns_neurons::SnsNeuronWithMetric;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
@@ -9,6 +10,7 @@ use serde::{Deserialize, Serialize};
 use sns_governance_canister::types::Neuron;
 use sns_neuron_controller_api_canister::init::GoldaoManagerConfig;
 use sns_neuron_controller_api_canister::init::TokenParams;
+use sns_neuron_controller_api_canister::neuron_policy::NeuronPolicy;
 use sns_neuron_controller_api_canister::neuron_type::NeuronType;
 use std::collections::HashMap;
 use types::TimestampMillis;
@@ -43,6 +45,13 @@ impl RuntimeState {
             authorized_principals: self.data.authorized_principals.clone(),
             goldao_neuron_manager_metrics: self.data.neuron_managers.goldao.get_neuron_metrics(),
             goldao_manager_reward_tokens: self.data.neuron_managers.goldao.reward_tokens.clone(),
+            goldao_neuron_policy: self.data.neuron_managers.goldao.neuron_policy.clone(),
+            goldao_last_policy_enforcement: self
+                .data
+                .neuron_managers
+                .goldao
+                .last_policy_enforcement
+                .clone(),
         }
     }
 
@@ -58,6 +67,8 @@ pub struct Metrics {
     pub authorized_principals: Vec<Principal>,
     pub goldao_neuron_manager_metrics: Vec<SnsNeuronWithMetric>,
     pub goldao_manager_reward_tokens: HashMap<TokenSymbol, TokenParams>,
+    pub goldao_neuron_policy: Option<NeuronPolicy>,
+    pub goldao_last_policy_enforcement: Option<PolicyEnforcementReport>,
 }
 
 #[derive(CandidType, Deserialize, Serialize)]

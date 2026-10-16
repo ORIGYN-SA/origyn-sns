@@ -2,6 +2,7 @@ use crate::lifecycle::init_canister;
 use crate::memory::get_upgrades_memory;
 use crate::migrations::types::state::RuntimeStateV0;
 use crate::state::RuntimeState;
+use crate::types::GoldaoManager;
 use bity_ic_canister_logger::LogEntry;
 use bity_ic_canister_tracing_macros::trace;
 use bity_ic_stable_memory::get_reader;
@@ -37,6 +38,14 @@ fn post_upgrade(args: Args) {
 
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
+
+            // Adopt the DAO's neuron policy on first upgrade to a version that knows about it.
+            // Later changes go through `update_goldao_config`.
+            if !state.env.is_test_mode() && state.data.neuron_managers.goldao.neuron_policy.is_none() {
+                state.data.neuron_managers.goldao.neuron_policy =
+                    Some(GoldaoManager::production_neuron_policy());
+                info!("Neuron policy initialised to the production default");
+            }
 
             bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
             init_canister(state);

@@ -1,4 +1,5 @@
 use crate::state::{mutate_state, read_state};
+use crate::types::sns_neuron_manager::NeuronConfig;
 use crate::types::sns_neuron_manager::NeuronManager;
 use crate::types::sns_neuron_manager::NeuronManagerEnum;
 use crate::types::sns_neuron_manager::NeuronRewardsManager;
@@ -68,6 +69,29 @@ pub(crate) async fn fetch_and_process_neurons(neuron_manager: &mut NeuronManager
             error!("{}", msg);
             err.to_string()
         })?;
+
+    // --- NEURON POLICY (following + auto-stake) ---
+    if let Some(report) = neuron_manager.enforce_neuron_policy().await {
+        info!(
+            "[{}] Neuron policy: {} neurons checked, {} actions planned, {} succeeded, {} skipped, {} errors",
+            manager_type,
+            report.neurons_checked,
+            report.actions_planned,
+            report.actions_succeeded,
+            report.skipped.len(),
+            report.errors.len()
+        );
+        if report.actions_succeeded > 0 {
+            // Refresh the cache so the rest of this run (and the metrics) see the new state.
+            if let Err(err) = neuron_manager.fetch_and_sync_neurons().await {
+                error!(
+                    "[{}] Re-sync after policy enforcement failed: {:?}",
+                    manager_type, err
+                );
+            }
+        }
+        neuron_manager.set_last_policy_enforcement(report);
+    }
 
     for (token, params) in neuron_manager.get_reward_tokens() {
         let available_rewards = neuron_manager.get_available_rewards(token).await;

@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Cuộn",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Dung lượng tải lên"
     },
     "bytesUnit": "byte"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Thử lại",
+    "cancel": "Hủy",
+    "session": {
+      "verifyEmail": "Xác minh email",
+      "signOut": "Đăng xuất"
+    },
+    "balance": {
+      "title": "Tín dụng",
+      "incoming": "Đang về",
+      "held": "Đang giữ cho agent làm việc"
+    },
+    "buy": {
+      "title": "Mua tín dụng",
+      "amountLabel": "Số tiền bằng đô la Mỹ",
+      "range": "Nhập số tiền nguyên từ {min} đến {max}.",
+      "submit": "Tiếp tục thanh toán · {amount}",
+      "youGet": "Bạn nhận được",
+      "creditsUnit": "tín dụng",
+      "redirecting": "Đang mở trang thanh toán bảo mật…"
+    },
+    "keys": {
+      "title": "Khóa API",
+      "create": "Tạo khóa",
+      "created": "Đã tạo {date}",
+      "revoke": "Thu hồi",
+      "revokeConfirm": "Thu hồi khóa này?",
+      "newTitle": "Khóa API mới của bạn",
+      "newWarning": "Hãy sao chép ngay và lưu ở nơi an toàn. Chúng tôi sẽ không hiển thị lại.",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép",
+      "saved": "Xong, tôi đã lưu",
+      "creating": "Đang tạo khóa…",
+      "revoked": "Đã thu hồi khóa",
+      "emptyTitle": "Chưa có khóa API nào",
+      "tryIt": "Kiểm tra xem khóa hoạt động:"
+    },
+    "orders": {
+      "title": "Lịch sử mua",
+      "empty": "Chưa có giao dịch mua nào.",
+      "statusLabel": {
+        "paid": "Đang xử lý",
+        "issued": "Hoàn tất",
+        "awaiting_liquidity": "Đang xử lý",
+        "awaiting_price": "Đang xử lý",
+        "failed": "Thất bại",
+        "refunded": "Đã hoàn tiền",
+        "closed": "Đã đóng"
+      },
+      "creditsLine": "{credits} tín dụng",
+      "showAll": "Hiện tất cả {count}",
+      "showLess": "Thu gọn"
+    },
+    "order": {
+      "loading": "Đang kiểm tra thanh toán của bạn…",
+      "slow": "Đã nhận thanh toán. Tín dụng sẽ sớm được cộng.",
+      "dismiss": "Đóng",
+      "status": {
+        "quoted": "Đang chờ thanh toán của bạn hoàn tất.",
+        "paid": "Đã nhận thanh toán. {credits} tín dụng của bạn đang được chuyển.",
+        "issued": "Xong: đã cộng {credits} tín dụng vào số dư của bạn.",
+        "awaiting_liquidity": "Đã nhận thanh toán. Tín dụng sẽ sớm được cộng.",
+        "awaiting_price": "Đã nhận thanh toán. Tín dụng sẽ sớm được cộng.",
+        "expired": "Phiên thanh toán này đã hết hạn trước khi được thanh toán.",
+        "failed": "Giao dịch mua này thất bại. Vui lòng liên hệ hỗ trợ nếu bạn đã bị trừ tiền.",
+        "refunded": "Giao dịch mua này đã được hoàn tiền.",
+        "closed": "Giao dịch mua này đã bị đóng. Vui lòng liên hệ hỗ trợ nếu bạn đã bị trừ tiền."
+      }
+    },
+    "errors": {
+      "unknown": "Đã xảy ra lỗi. Vui lòng thử lại.",
+      "network": "Không thể kết nối máy chủ. Vui lòng kiểm tra kết nối và thử lại.",
+      "unauthorized": "Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại.",
+      "login_rejected": "Bạn đã đăng nhập, nhưng máy chủ của chúng tôi chưa xác nhận được phiên đăng nhập. Vui lòng thử lại sau giây lát hoặc liên hệ hỗ trợ.",
+      "email_unverified": "Vui lòng xác minh địa chỉ email để tiếp tục.",
+      "email_taken": "Địa chỉ email này đã được một tài khoản khác sử dụng.",
+      "terms_not_accepted": "Vui lòng chấp nhận điều khoản bán hàng để tiếp tục.",
+      "amount_out_of_range": "Nhập số tiền từ $10 đến $100.000.",
+      "return_url_not_allowed": "Trang này không thể nhận thanh toán. Vui lòng liên hệ hỗ trợ.",
+      "rate_limited": "Quá nhiều yêu cầu. Vui lòng đợi vài giây rồi thử lại.",
+      "insufficient_liquidity": "Tạm thời chưa thể mua. Vui lòng thử lại sau.",
+      "price_unavailable": "Tạm thời chưa thể mua. Vui lòng thử lại sau.",
+      "pool_unavailable": "Tạm thời chưa thể mua. Vui lòng thử lại sau.",
+      "stripe_unavailable": "Nhà cung cấp thanh toán không phản hồi. Vui lòng thử lại.",
+      "clerk_unavailable": "Dịch vụ đăng nhập không phản hồi. Vui lòng thử lại.",
+      "not_found": "Không tìm thấy giao dịch mua đó."
+    }
   }
 }

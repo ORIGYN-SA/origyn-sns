@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Mag-scroll",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Laki ng upload"
     },
     "bytesUnit": "bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Subukan muli",
+    "cancel": "Kanselahin",
+    "session": {
+      "verifyEmail": "I-verify ang email",
+      "signOut": "Mag-sign out"
+    },
+    "balance": {
+      "title": "Credits",
+      "incoming": "Paparating",
+      "held": "Nakalaan para sa trabaho ng agent"
+    },
+    "buy": {
+      "title": "Bumili ng credits",
+      "amountLabel": "Halaga sa US dollar",
+      "range": "Maglagay ng buong halaga mula {min} hanggang {max}.",
+      "submit": "Magpatuloy sa pagbabayad · {amount}",
+      "youGet": "Matatanggap mo",
+      "creditsUnit": "credits",
+      "redirecting": "Binubuksan ang secure na checkout…"
+    },
+    "keys": {
+      "title": "Mga API key",
+      "create": "Gumawa ng key",
+      "created": "Ginawa noong {date}",
+      "revoke": "Bawiin",
+      "revokeConfirm": "Bawiin ang key na ito?",
+      "newTitle": "Ang iyong bagong API key",
+      "newWarning": "Kopyahin ito ngayon at itago sa ligtas na lugar. Hindi na namin ito maipapakita ulit.",
+      "copy": "Kopyahin",
+      "copied": "Nakopya",
+      "saved": "Tapos na, na-save ko na",
+      "creating": "Ginagawa ang key…",
+      "revoked": "Binawi ang key",
+      "emptyTitle": "Wala pang API key",
+      "tryIt": "Tingnan kung gumagana:"
+    },
+    "orders": {
+      "title": "Mga binili",
+      "empty": "Wala pang binili.",
+      "statusLabel": {
+        "paid": "Pinoproseso",
+        "issued": "Kumpleto",
+        "awaiting_liquidity": "Pinoproseso",
+        "awaiting_price": "Pinoproseso",
+        "failed": "Nabigo",
+        "refunded": "Na-refund",
+        "closed": "Sarado"
+      },
+      "creditsLine": "{credits} credits",
+      "showAll": "Ipakita lahat ng {count}",
+      "showLess": "Magpakita ng mas kaunti"
+    },
+    "order": {
+      "loading": "Sinusuri ang iyong bayad…",
+      "slow": "Natanggap ang bayad. Darating ang iyong credits sa ilang sandali.",
+      "dismiss": "Isara",
+      "status": {
+        "quoted": "Hinihintay matapos ang iyong bayad.",
+        "paid": "Natanggap ang bayad. Papunta na ang iyong {credits} credits.",
+        "issued": "Tapos na: {credits} credits ang naidagdag sa iyong balanse.",
+        "awaiting_liquidity": "Natanggap ang bayad. Darating ang iyong credits sa ilang sandali.",
+        "awaiting_price": "Natanggap ang bayad. Darating ang iyong credits sa ilang sandali.",
+        "expired": "Nag-expire ang checkout na ito bago ito nabayaran.",
+        "failed": "Nabigo ang pagbiling ito. Makipag-ugnayan sa support kung nasingil ka.",
+        "refunded": "Na-refund ang pagbiling ito.",
+        "closed": "Isinara ang pagbiling ito. Makipag-ugnayan sa support kung nasingil ka."
+      }
+    },
+    "errors": {
+      "unknown": "May naganap na mali. Subukan muli.",
+      "network": "Hindi maabot ang server. Tingnan ang iyong koneksyon at subukan muli.",
+      "unauthorized": "Nag-expire ang iyong session. Mag-sign in muli.",
+      "login_rejected": "Naka-sign in ka, pero hindi makumpirma ng aming mga server ang iyong login. Subukan muli mamaya o makipag-ugnayan sa support.",
+      "email_unverified": "I-verify ang iyong email address para magpatuloy.",
+      "email_taken": "May ibang account na gumagamit ng email address na ito.",
+      "terms_not_accepted": "Tanggapin ang mga tuntunin ng pagbebenta para magpatuloy.",
+      "amount_out_of_range": "Maglagay ng halaga mula $10 hanggang $100,000.",
+      "return_url_not_allowed": "Hindi makatanggap ng bayad ang page na ito. Makipag-ugnayan sa support.",
+      "rate_limited": "Masyadong maraming request. Maghintay ng ilang segundo at subukan muli.",
+      "insufficient_liquidity": "Pansamantalang naka-pause ang pagbili. Subukan muli mamaya.",
+      "price_unavailable": "Pansamantalang naka-pause ang pagbili. Subukan muli mamaya.",
+      "pool_unavailable": "Pansamantalang naka-pause ang pagbili. Subukan muli mamaya.",
+      "stripe_unavailable": "Hindi sumagot ang payment provider. Subukan muli.",
+      "clerk_unavailable": "Hindi sumagot ang sign-in. Subukan muli.",
+      "not_found": "Hindi namin mahanap ang pagbiling iyon."
+    }
   }
 }

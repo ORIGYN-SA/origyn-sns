@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Irányítópult"
   },
   "scroll": "Görgessen",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Feltöltési méret"
     },
     "bytesUnit": "bájt"
+  },
+  "aiDashboard": {
+    "title": "Irányítópult",
+    "retry": "Újrapróbálás",
+    "cancel": "Mégse",
+    "session": {
+      "verifyEmail": "E-mail megerősítése",
+      "signOut": "Kijelentkezés"
+    },
+    "balance": {
+      "title": "Kreditek",
+      "incoming": "Érkezőben",
+      "held": "Ügynökmunkára lefoglalva"
+    },
+    "buy": {
+      "title": "Kredit vásárlása",
+      "amountLabel": "Összeg amerikai dollárban",
+      "range": "Adjon meg egy egész összeget {min} és {max} között.",
+      "submit": "Tovább a fizetéshez · {amount}",
+      "youGet": "Ennyit kap",
+      "creditsUnit": "kredit",
+      "redirecting": "Biztonságos fizetés megnyitása…"
+    },
+    "keys": {
+      "title": "API-kulcsok",
+      "create": "Kulcs létrehozása",
+      "created": "Létrehozva: {date}",
+      "revoke": "Visszavonás",
+      "revokeConfirm": "Visszavonja ezt a kulcsot?",
+      "newTitle": "Az új API-kulcsa",
+      "newWarning": "Másolja ki most, és tárolja biztonságos helyen. Később nem tudjuk újra megjeleníteni.",
+      "copy": "Másolás",
+      "copied": "Másolva",
+      "saved": "Kész, elmentettem",
+      "creating": "Kulcs létrehozása…",
+      "revoked": "Kulcs visszavonva",
+      "emptyTitle": "Még nincsenek API-kulcsok",
+      "tryIt": "Ellenőrizze, hogy működik:"
+    },
+    "orders": {
+      "title": "Vásárlások",
+      "empty": "Még nincsenek vásárlások.",
+      "statusLabel": {
+        "paid": "Feldolgozás alatt",
+        "issued": "Teljesítve",
+        "awaiting_liquidity": "Feldolgozás alatt",
+        "awaiting_price": "Feldolgozás alatt",
+        "failed": "Sikertelen",
+        "refunded": "Visszatérítve",
+        "closed": "Lezárva"
+      },
+      "creditsLine": "{credits} kredit",
+      "showAll": "Mind a(z) {count} megjelenítése",
+      "showLess": "Kevesebb megjelenítése"
+    },
+    "order": {
+      "loading": "Fizetés ellenőrzése…",
+      "slow": "A fizetés beérkezett. A kreditek hamarosan megérkeznek.",
+      "dismiss": "Bezárás",
+      "status": {
+        "quoted": "Várakozás a fizetés teljesítésére.",
+        "paid": "A fizetés beérkezett. A(z) {credits} kredit úton van.",
+        "issued": "Kész: {credits} kredit jóváírva az egyenlegén.",
+        "awaiting_liquidity": "A fizetés beérkezett. A kreditek hamarosan megérkeznek.",
+        "awaiting_price": "A fizetés beérkezett. A kreditek hamarosan megérkeznek.",
+        "expired": "Ez a fizetési munkamenet lejárt, mielőtt kifizették volna.",
+        "failed": "A vásárlás sikertelen. Ha terhelés történt, forduljon az ügyfélszolgálathoz.",
+        "refunded": "A vásárlás összegét visszatérítettük.",
+        "closed": "A vásárlás lezárult. Ha terhelés történt, forduljon az ügyfélszolgálathoz."
+      }
+    },
+    "errors": {
+      "unknown": "Hiba történt. Próbálja újra.",
+      "network": "A szerver nem érhető el. Ellenőrizze a kapcsolatot, és próbálja újra.",
+      "unauthorized": "A munkamenet lejárt. Jelentkezzen be újra.",
+      "login_rejected": "Be van jelentkezve, de szervereink nem tudták megerősíteni a bejelentkezést. Próbálja újra egy pillanat múlva, vagy forduljon az ügyfélszolgálathoz.",
+      "email_unverified": "A folytatáshoz erősítse meg e-mail-címét.",
+      "email_taken": "Ezt az e-mail-címet már egy másik fiók használja.",
+      "terms_not_accepted": "A folytatáshoz fogadja el az értékesítési feltételeket.",
+      "amount_out_of_range": "Adjon meg 10 $ és 100 000 $ közötti összeget.",
+      "return_url_not_allowed": "Ez az oldal nem fogadhat fizetéseket. Forduljon az ügyfélszolgálathoz.",
+      "rate_limited": "Túl sok kérés. Várjon néhány másodpercet, és próbálja újra.",
+      "insufficient_liquidity": "A vásárlás átmenetileg szünetel. Próbálja újra később.",
+      "price_unavailable": "A vásárlás átmenetileg szünetel. Próbálja újra később.",
+      "pool_unavailable": "A vásárlás átmenetileg szünetel. Próbálja újra később.",
+      "stripe_unavailable": "A fizetési szolgáltató nem válaszolt. Próbálja újra.",
+      "clerk_unavailable": "A bejelentkezési szolgáltatás nem válaszolt. Próbálja újra.",
+      "not_found": "Nem találtuk ezt a vásárlást."
+    }
   }
 }

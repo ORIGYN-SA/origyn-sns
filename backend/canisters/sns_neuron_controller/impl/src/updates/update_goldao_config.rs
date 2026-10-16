@@ -54,5 +54,9 @@ fn update_config_impl(
             .extend(reward_tokens);
     }
 
+    if let Some(neuron_policy) = args.neuron_policy {
+        state.data.neuron_managers.goldao.neuron_policy = Some(neuron_policy);
+    }
+
     UpdateGoldaoConfigResponse::Success
 }

@@ -1,6 +1,10 @@
 // cecil-dao/backend/canisters/sns_neuron_controller/api/src/queries/get_config.rs
+use crate::init::TokenParams;
+use crate::neuron_policy::NeuronPolicy;
 use candid::{CandidType, Nat, Principal};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use types::TokenSymbol;
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
 pub enum ManagerType {
@@ -37,6 +41,8 @@ pub struct GoldaoManagerConfig {
     pub goldao_sns_governance_canister_id: Principal,
     pub goldao_sns_ledger_canister_id: Principal,
     pub goldao_sns_rewards_canister_id: Principal,
+    pub reward_tokens: HashMap<TokenSymbol, TokenParams>,
+    pub neuron_policy: Option<NeuronPolicy>,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]

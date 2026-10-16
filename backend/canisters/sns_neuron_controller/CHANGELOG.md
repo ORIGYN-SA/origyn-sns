@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.2.0] - 2026-10-13
+
+#### Added
+- **Neuron policy** : The daily job now enforces a following and maturity policy on every managed GOLDAO neuron: topic-based following of the hand-voted neuron `7eac04f2...` on all seven topics (legacy per-function following is cleared) and auto-stake maturity switched on. The two hand-configured neurons `85ba2947...` and `7eac04f2...` keep their following. The policy is stored in state, initialised to the production default on upgrade, changeable through `update_goldao_config` and visible in `get_config` and the metrics together with the last enforcement report.
+- **Exclusive control** : With `exclusive_control` set, the policy removes every principal other than the controller from the non-exempt neurons, so the DAO alone controls them. A permission the controller does not hold itself is never removed. The two exempt neurons keep their principals.
+- **Topic following types** : `SetFollowing`, `Topic`, `FolloweesForTopic`, `Followee` and `Neuron.topic_followees` added to the SNS governance API types, so `manage_sns_neuron` proposals can set topic following.
+
+#### Fixed
+- **Neuron maturity** : Disbursement skips neurons the controller is not allowed to disburse instead of failing on them every day.
+
 ### [1.1.4] - 2026-09-08
 
 #### Fixed

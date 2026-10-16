@@ -5743,6 +5743,7 @@ dependencies = [
  "candid",
  "enum_dispatch",
  "futures",
+ "hex",
  "http_request",
  "ic-cdk 0.20.0",
  "ic-cdk-macros 0.20.0",

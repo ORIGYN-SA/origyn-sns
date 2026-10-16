@@ -19,6 +19,8 @@ fn get_config(args: GetConfigArgs) -> GetConfigResponse {
                         .goldao_sns_governance_canister_id,
                     goldao_sns_ledger_canister_id: goldao_manager.goldao_sns_ledger_canister_id,
                     goldao_sns_rewards_canister_id: goldao_manager.goldao_sns_rewards_canister_id,
+                    reward_tokens: goldao_manager.reward_tokens.clone(),
+                    neuron_policy: goldao_manager.neuron_policy.clone(),
                 })
             }
         };

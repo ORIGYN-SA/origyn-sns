@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "控制台"
   },
   "scroll": "向下滚动",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "上传大小"
     },
     "bytesUnit": "字节"
+  },
+  "aiDashboard": {
+    "title": "控制台",
+    "retry": "重试",
+    "cancel": "取消",
+    "session": {
+      "verifyEmail": "验证邮箱",
+      "signOut": "退出登录"
+    },
+    "balance": {
+      "title": "积分",
+      "incoming": "入账中",
+      "held": "智能体运行中占用"
+    },
+    "buy": {
+      "title": "购买积分",
+      "amountLabel": "金额（美元）",
+      "range": "请输入 {min} 到 {max} 之间的整数金额。",
+      "submit": "继续付款 · {amount}",
+      "youGet": "你将获得",
+      "creditsUnit": "积分",
+      "redirecting": "正在打开安全支付页面…"
+    },
+    "keys": {
+      "title": "API 密钥",
+      "create": "创建密钥",
+      "created": "创建于 {date}",
+      "revoke": "吊销",
+      "revokeConfirm": "要吊销此密钥吗？",
+      "newTitle": "你的新 API 密钥",
+      "newWarning": "请立即复制并妥善保存。此密钥之后将无法再次显示。",
+      "copy": "复制",
+      "copied": "已复制",
+      "saved": "完成，我已保存",
+      "creating": "正在创建密钥…",
+      "revoked": "密钥已吊销",
+      "emptyTitle": "还没有 API 密钥",
+      "tryIt": "检查是否可用："
+    },
+    "orders": {
+      "title": "购买记录",
+      "empty": "暂无购买记录。",
+      "statusLabel": {
+        "paid": "处理中",
+        "issued": "已完成",
+        "awaiting_liquidity": "处理中",
+        "awaiting_price": "处理中",
+        "failed": "失败",
+        "refunded": "已退款",
+        "closed": "已关闭"
+      },
+      "creditsLine": "{credits} 积分",
+      "showAll": "显示全部 {count} 条",
+      "showLess": "收起"
+    },
+    "order": {
+      "loading": "正在确认你的付款…",
+      "slow": "已收到付款，积分即将到账。",
+      "dismiss": "关闭",
+      "status": {
+        "quoted": "正在等待你完成付款。",
+        "paid": "已收到付款，你的 {credits} 积分正在到账。",
+        "issued": "完成：已将 {credits} 积分添加到你的余额。",
+        "awaiting_liquidity": "已收到付款，积分即将到账。",
+        "awaiting_price": "已收到付款，积分即将到账。",
+        "expired": "此支付页面在付款前已过期。",
+        "failed": "此次购买失败。如已扣款，请联系客服。",
+        "refunded": "此次购买已退款。",
+        "closed": "此次购买已关闭。如已扣款，请联系客服。"
+      }
+    },
+    "errors": {
+      "unknown": "出了点问题，请重试。",
+      "network": "无法连接服务器。请检查网络连接后重试。",
+      "unauthorized": "你的登录已过期，请重新登录。",
+      "login_rejected": "你已登录，但我们的服务器无法确认你的登录状态。请稍后重试或联系客服。",
+      "email_unverified": "请验证你的邮箱地址以继续。",
+      "email_taken": "此邮箱地址已被其他账户使用。",
+      "terms_not_accepted": "请接受销售条款以继续。",
+      "amount_out_of_range": "请输入 $10 到 $100,000 之间的金额。",
+      "return_url_not_allowed": "此页面无法接收付款，请联系客服。",
+      "rate_limited": "请求过于频繁。请等待几秒后重试。",
+      "insufficient_liquidity": "购买暂时暂停，请稍后重试。",
+      "price_unavailable": "购买暂时暂停，请稍后重试。",
+      "pool_unavailable": "购买暂时暂停，请稍后重试。",
+      "stripe_unavailable": "支付服务商未响应，请重试。",
+      "clerk_unavailable": "登录服务未响应，请重试。",
+      "not_found": "找不到该购买记录。"
+    }
   }
 }

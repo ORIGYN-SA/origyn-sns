@@ -1,3 +1,4 @@
+use crate::neuron_policy::NeuronPolicy;
 use bity_ic_types::BuildVersion;
 use candid::{CandidType, Nat, Principal};
 use icrc_ledger_types::icrc1::account::Account;
@@ -28,6 +29,9 @@ pub struct GoldaoManagerConfig {
     pub goldao_sns_rewards_canister_id: Principal,
     /// Maps each reward token to its distribution destination
     pub reward_tokens: HashMap<TokenSymbol, TokenParams>,
+    /// Following and maturity policy enforced on every managed neuron. None disables enforcement.
+    #[serde(default)]
+    pub neuron_policy: Option<NeuronPolicy>,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]

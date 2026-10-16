@@ -25,4 +25,7 @@ export const IntegratorJoinPage = lazyWithPreload(
 );
 export const TokenPage = lazyWithPreload(() => import("@/pages/TokenPage"));
 export const AIPage = lazyWithPreload(() => import("@/pages/AIPage"));
+export const AIDashboardPage = lazyWithPreload(
+  () => import("@/pages/AIDashboardPage"),
+);
 export const DPPPage = lazyWithPreload(() => import("@/pages/DPPPage"));

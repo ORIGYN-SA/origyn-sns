@@ -8,6 +8,7 @@ use pocket_ic::PocketIcBuilder;
 use sns_governance_canister::types::Neuron;
 use sns_ledger_canister::types::Account as LedgerAccount;
 use sns_neuron_controller_api_canister::init::TokenParams;
+use sns_neuron_controller_api_canister::neuron_policy::NeuronPolicy;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -140,6 +141,27 @@ impl TestEnv {
         goldao_sns_rewards_canister_id: Principal,
         reward_tokens: HashMap<TokenSymbol, TokenParams>,
     ) -> Principal {
+        self.install_sns_neuron_controller_with_policy(
+            canister_id,
+            ogy_sns_governance_canister_id,
+            goldao_sns_governance_canister_id,
+            goldao_sns_ledger_canister_id,
+            goldao_sns_rewards_canister_id,
+            reward_tokens,
+            None,
+        )
+    }
+
+    pub fn install_sns_neuron_controller_with_policy(
+        &self,
+        canister_id: Principal,
+        ogy_sns_governance_canister_id: Principal,
+        goldao_sns_governance_canister_id: Principal,
+        goldao_sns_ledger_canister_id: Principal,
+        goldao_sns_rewards_canister_id: Principal,
+        reward_tokens: HashMap<TokenSymbol, TokenParams>,
+        neuron_policy: Option<NeuronPolicy>,
+    ) -> Principal {
         setup_sns_neuron_controller::setup(
             &self.pic.borrow(),
             canister_id,
@@ -149,6 +171,7 @@ impl TestEnv {
             goldao_sns_ledger_canister_id,
             goldao_sns_rewards_canister_id,
             reward_tokens,
+            neuron_policy,
         )
     }
 
