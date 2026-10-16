@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Défiler",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Taille du téléversement"
     },
     "bytesUnit": "octets"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Réessayer",
+    "cancel": "Annuler",
+    "session": {
+      "verifyEmail": "Vérifier l'e-mail",
+      "signOut": "Se déconnecter"
+    },
+    "balance": {
+      "title": "Crédits",
+      "incoming": "En cours d'arrivée",
+      "held": "Réservés aux agents"
+    },
+    "buy": {
+      "title": "Acheter des crédits",
+      "amountLabel": "Montant en dollars américains",
+      "range": "Saisissez un montant entier de {min} à {max}.",
+      "submit": "Continuer vers le paiement · {amount}",
+      "youGet": "Vous recevez",
+      "creditsUnit": "crédits",
+      "redirecting": "Ouverture du paiement sécurisé…"
+    },
+    "keys": {
+      "title": "Clés API",
+      "create": "Créer une clé",
+      "created": "Créée le {date}",
+      "revoke": "Révoquer",
+      "revokeConfirm": "Révoquer cette clé ?",
+      "newTitle": "Votre nouvelle clé API",
+      "newWarning": "Copiez-la maintenant et conservez-la en lieu sûr. Nous ne pourrons plus l'afficher.",
+      "copy": "Copier",
+      "copied": "Copiée",
+      "saved": "C'est fait, je l'ai enregistrée",
+      "creating": "Création de la clé…",
+      "revoked": "Clé révoquée",
+      "emptyTitle": "Aucune clé API pour l'instant",
+      "tryIt": "Vérifiez qu'elle fonctionne :"
+    },
+    "orders": {
+      "title": "Achats",
+      "empty": "Aucun achat pour l'instant.",
+      "statusLabel": {
+        "paid": "En cours",
+        "issued": "Terminé",
+        "awaiting_liquidity": "En cours",
+        "awaiting_price": "En cours",
+        "failed": "Échec",
+        "refunded": "Remboursé",
+        "closed": "Clôturé"
+      },
+      "creditsLine": "{credits} crédits",
+      "showAll": "Tout afficher ({count})",
+      "showLess": "Afficher moins"
+    },
+    "order": {
+      "loading": "Vérification de votre paiement…",
+      "slow": "Paiement reçu. Vos crédits arriveront sous peu.",
+      "dismiss": "Fermer",
+      "status": {
+        "quoted": "En attente de la finalisation de votre paiement.",
+        "paid": "Paiement reçu. Vos {credits} crédits sont en route.",
+        "issued": "C'est fait : {credits} crédits ont été ajoutés à votre solde.",
+        "awaiting_liquidity": "Paiement reçu. Vos crédits arriveront sous peu.",
+        "awaiting_price": "Paiement reçu. Vos crédits arriveront sous peu.",
+        "expired": "Ce paiement a expiré avant d'être réglé.",
+        "failed": "Cet achat a échoué. Contactez le support si vous avez été débité.",
+        "refunded": "Cet achat a été remboursé.",
+        "closed": "Cet achat a été clôturé. Contactez le support si vous avez été débité."
+      }
+    },
+    "errors": {
+      "unknown": "Une erreur est survenue. Réessayez.",
+      "network": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+      "unauthorized": "Votre session a expiré. Reconnectez-vous.",
+      "login_rejected": "Vous êtes connecté, mais nos serveurs n'ont pas pu confirmer votre connexion. Réessayez dans un instant ou contactez le support.",
+      "email_unverified": "Vérifiez votre adresse e-mail pour continuer.",
+      "email_taken": "Un autre compte utilise déjà cette adresse e-mail.",
+      "terms_not_accepted": "Acceptez les conditions de vente pour continuer.",
+      "amount_out_of_range": "Saisissez un montant de 10 $ à 100 000 $.",
+      "return_url_not_allowed": "Cette page ne peut pas recevoir de paiements. Contactez le support.",
+      "rate_limited": "Trop de requêtes. Patientez quelques secondes et réessayez.",
+      "insufficient_liquidity": "Les achats sont momentanément suspendus. Réessayez plus tard.",
+      "price_unavailable": "Les achats sont momentanément suspendus. Réessayez plus tard.",
+      "pool_unavailable": "Les achats sont momentanément suspendus. Réessayez plus tard.",
+      "stripe_unavailable": "Le prestataire de paiement n'a pas répondu. Réessayez.",
+      "clerk_unavailable": "Le service de connexion n'a pas répondu. Réessayez.",
+      "not_found": "Nous n'avons pas trouvé cet achat."
+    }
   }
 }

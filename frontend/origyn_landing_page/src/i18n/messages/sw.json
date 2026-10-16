@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashibodi"
   },
   "scroll": "Sogeza",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Ukubwa wa upakiaji"
     },
     "bytesUnit": "baiti"
+  },
+  "aiDashboard": {
+    "title": "Dashibodi",
+    "retry": "Jaribu tena",
+    "cancel": "Ghairi",
+    "session": {
+      "verifyEmail": "Thibitisha barua pepe",
+      "signOut": "Ondoka"
+    },
+    "balance": {
+      "title": "Salio la mikopo",
+      "incoming": "Yanakuja",
+      "held": "Yamezuiliwa kwa kazi za wakala"
+    },
+    "buy": {
+      "title": "Nunua mikopo",
+      "amountLabel": "Kiasi kwa dola za Marekani",
+      "range": "Weka kiasi kamili kati ya {min} na {max}.",
+      "submit": "Endelea kwenye malipo · {amount}",
+      "youGet": "Utapata",
+      "creditsUnit": "mikopo",
+      "redirecting": "Inafungua malipo salama…"
+    },
+    "keys": {
+      "title": "Funguo za API",
+      "create": "Unda ufunguo",
+      "created": "Uliundwa {date}",
+      "revoke": "Batilisha",
+      "revokeConfirm": "Ubatilishe ufunguo huu?",
+      "newTitle": "Ufunguo wako mpya wa API",
+      "newWarning": "Unakili sasa na uuhifadhi mahali salama. Hatuwezi kuuonyesha tena.",
+      "copy": "Nakili",
+      "copied": "Imenakiliwa",
+      "saved": "Sawa, nimeuhifadhi",
+      "creating": "Inaunda ufunguo…",
+      "revoked": "Ufunguo umebatilishwa",
+      "emptyTitle": "Bado hakuna funguo za API",
+      "tryIt": "Hakikisha unafanya kazi:"
+    },
+    "orders": {
+      "title": "Manunuzi",
+      "empty": "Bado hakuna manunuzi.",
+      "statusLabel": {
+        "paid": "Inashughulikiwa",
+        "issued": "Imekamilika",
+        "awaiting_liquidity": "Inashughulikiwa",
+        "awaiting_price": "Inashughulikiwa",
+        "failed": "Imeshindikana",
+        "refunded": "Imerejeshewa pesa",
+        "closed": "Imefungwa"
+      },
+      "creditsLine": "Mikopo {credits}",
+      "showAll": "Onyesha zote {count}",
+      "showLess": "Onyesha chache"
+    },
+    "order": {
+      "loading": "Inakagua malipo yako…",
+      "slow": "Malipo yamepokelewa. Mikopo yako itafika hivi karibuni.",
+      "dismiss": "Funga",
+      "status": {
+        "quoted": "Inasubiri malipo yako yakamilike.",
+        "paid": "Malipo yamepokelewa. Mikopo yako {credits} iko njiani.",
+        "issued": "Imekamilika: mikopo {credits} imeongezwa kwenye salio lako.",
+        "awaiting_liquidity": "Malipo yamepokelewa. Mikopo yako itafika hivi karibuni.",
+        "awaiting_price": "Malipo yamepokelewa. Mikopo yako itafika hivi karibuni.",
+        "expired": "Muda wa malipo haya uliisha kabla hayajalipwa.",
+        "failed": "Ununuzi huu umeshindikana. Wasiliana na usaidizi kama ulitozwa.",
+        "refunded": "Pesa za ununuzi huu zimerejeshwa.",
+        "closed": "Ununuzi huu umefungwa. Wasiliana na usaidizi kama ulitozwa."
+      }
+    },
+    "errors": {
+      "unknown": "Hitilafu imetokea. Jaribu tena.",
+      "network": "Imeshindwa kufikia seva. Angalia muunganisho wako na ujaribu tena.",
+      "unauthorized": "Muda wa kipindi chako umeisha. Ingia tena.",
+      "login_rejected": "Umeingia, lakini seva zetu hazikuweza kuthibitisha kuingia kwako. Jaribu tena baada ya muda mfupi au wasiliana na usaidizi.",
+      "email_unverified": "Thibitisha anwani yako ya barua pepe ili kuendelea.",
+      "email_taken": "Akaunti nyingine tayari inatumia anwani hii ya barua pepe.",
+      "terms_not_accepted": "Kubali masharti ya mauzo ili kuendelea.",
+      "amount_out_of_range": "Weka kiasi kati ya $10 na $100,000.",
+      "return_url_not_allowed": "Ukurasa huu hauwezi kupokea malipo. Wasiliana na usaidizi.",
+      "rate_limited": "Maombi mengi mno. Subiri sekunde chache kisha ujaribu tena.",
+      "insufficient_liquidity": "Manunuzi yamesitishwa kwa muda. Jaribu tena baadaye.",
+      "price_unavailable": "Manunuzi yamesitishwa kwa muda. Jaribu tena baadaye.",
+      "pool_unavailable": "Manunuzi yamesitishwa kwa muda. Jaribu tena baadaye.",
+      "stripe_unavailable": "Mtoa huduma wa malipo hakujibu. Jaribu tena.",
+      "clerk_unavailable": "Huduma ya kuingia haikujibu. Jaribu tena.",
+      "not_found": "Hatukuweza kupata ununuzi huo."
+    }
   }
 }

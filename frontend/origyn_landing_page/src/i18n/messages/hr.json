@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Nadzorna ploča"
   },
   "scroll": "Pomakni",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Veličina učitavanja"
     },
     "bytesUnit": "bajta"
+  },
+  "aiDashboard": {
+    "title": "Nadzorna ploča",
+    "retry": "Pokušajte ponovno",
+    "cancel": "Odustani",
+    "session": {
+      "verifyEmail": "Potvrdite e-poštu",
+      "signOut": "Odjava"
+    },
+    "balance": {
+      "title": "Krediti",
+      "incoming": "Pristižu",
+      "held": "Rezervirano za rad agenata"
+    },
+    "buy": {
+      "title": "Kupnja kredita",
+      "amountLabel": "Iznos u američkim dolarima",
+      "range": "Unesite cijeli iznos od {min} do {max}.",
+      "submit": "Nastavi na plaćanje · {amount}",
+      "youGet": "Dobivate",
+      "creditsUnit": "kredita",
+      "redirecting": "Otvaranje sigurnog plaćanja…"
+    },
+    "keys": {
+      "title": "API ključevi",
+      "create": "Izradi ključ",
+      "created": "Izrađen {date}",
+      "revoke": "Opozovi",
+      "revokeConfirm": "Opozvati ovaj ključ?",
+      "newTitle": "Vaš novi API ključ",
+      "newWarning": "Kopirajte ga sada i spremite na sigurno mjesto. Ne možemo ga ponovno prikazati.",
+      "copy": "Kopiraj",
+      "copied": "Kopirano",
+      "saved": "Gotovo, spremljeno je",
+      "creating": "Izrada ključa…",
+      "revoked": "Ključ opozvan",
+      "emptyTitle": "Još nema API ključeva",
+      "tryIt": "Provjerite radi li:"
+    },
+    "orders": {
+      "title": "Kupnje",
+      "empty": "Još nema kupnji.",
+      "statusLabel": {
+        "paid": "U obradi",
+        "issued": "Dovršeno",
+        "awaiting_liquidity": "U obradi",
+        "awaiting_price": "U obradi",
+        "failed": "Neuspjelo",
+        "refunded": "Povrat izvršen",
+        "closed": "Zatvoreno"
+      },
+      "creditsLine": "{credits} kredita",
+      "showAll": "Prikaži sve ({count})",
+      "showLess": "Prikaži manje"
+    },
+    "order": {
+      "loading": "Provjeravamo vaše plaćanje…",
+      "slow": "Plaćanje je primljeno. Vaši krediti uskoro stižu.",
+      "dismiss": "Zatvori",
+      "status": {
+        "quoted": "Čekamo da se vaše plaćanje dovrši.",
+        "paid": "Plaćanje je primljeno. Vaši krediti ({credits}) su na putu.",
+        "issued": "Gotovo: {credits} kredita dodano je na vaše stanje.",
+        "awaiting_liquidity": "Plaćanje je primljeno. Vaši krediti uskoro stižu.",
+        "awaiting_price": "Plaćanje je primljeno. Vaši krediti uskoro stižu.",
+        "expired": "Ovo plaćanje je isteklo prije nego što je izvršeno.",
+        "failed": "Ova kupnja nije uspjela. Ako ste terećeni, obratite se podršci.",
+        "refunded": "Za ovu kupnju izvršen je povrat novca.",
+        "closed": "Ova kupnja je zatvorena. Ako ste terećeni, obratite se podršci."
+      }
+    },
+    "errors": {
+      "unknown": "Nešto je pošlo po zlu. Pokušajte ponovno.",
+      "network": "Poslužitelj nije dostupan. Provjerite vezu i pokušajte ponovno.",
+      "unauthorized": "Vaša sesija je istekla. Ponovno se prijavite.",
+      "login_rejected": "Prijavljeni ste, ali naši poslužitelji nisu mogli potvrditi vašu prijavu. Pokušajte ponovno za trenutak ili se obratite podršci.",
+      "email_unverified": "Potvrdite svoju adresu e-pošte za nastavak.",
+      "email_taken": "Drugi račun već koristi ovu adresu e-pošte.",
+      "terms_not_accepted": "Prihvatite uvjete prodaje za nastavak.",
+      "amount_out_of_range": "Unesite iznos od 10 $ do 100.000 $.",
+      "return_url_not_allowed": "Ova stranica ne može primati plaćanja. Obratite se podršci.",
+      "rate_limited": "Previše zahtjeva. Pričekajte nekoliko sekundi i pokušajte ponovno.",
+      "insufficient_liquidity": "Kupnje su privremeno pauzirane. Pokušajte ponovno kasnije.",
+      "price_unavailable": "Kupnje su privremeno pauzirane. Pokušajte ponovno kasnije.",
+      "pool_unavailable": "Kupnje su privremeno pauzirane. Pokušajte ponovno kasnije.",
+      "stripe_unavailable": "Pružatelj usluge plaćanja nije odgovorio. Pokušajte ponovno.",
+      "clerk_unavailable": "Usluga prijave nije odgovorila. Pokušajte ponovno.",
+      "not_found": "Nismo pronašli tu kupnju."
+    }
   }
 }

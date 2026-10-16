@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Scorri",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Dimensione caricamento"
     },
     "bytesUnit": "byte"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Riprova",
+    "cancel": "Annulla",
+    "session": {
+      "verifyEmail": "Verifica email",
+      "signOut": "Esci"
+    },
+    "balance": {
+      "title": "Crediti",
+      "incoming": "In arrivo",
+      "held": "Riservati per il lavoro degli agenti"
+    },
+    "buy": {
+      "title": "Acquista crediti",
+      "amountLabel": "Importo in dollari USA",
+      "range": "Inserisci un importo intero da {min} a {max}.",
+      "submit": "Vai al pagamento · {amount}",
+      "youGet": "Ricevi",
+      "creditsUnit": "crediti",
+      "redirecting": "Apertura del checkout sicuro…"
+    },
+    "keys": {
+      "title": "Chiavi API",
+      "create": "Crea chiave",
+      "created": "Creata il {date}",
+      "revoke": "Revoca",
+      "revokeConfirm": "Revocare questa chiave?",
+      "newTitle": "La tua nuova chiave API",
+      "newWarning": "Copiala ora e conservala in un posto sicuro. Non potremo mostrarla di nuovo.",
+      "copy": "Copia",
+      "copied": "Copiata",
+      "saved": "Fatto, l'ho salvata",
+      "creating": "Creazione della chiave…",
+      "revoked": "Chiave revocata",
+      "emptyTitle": "Ancora nessuna chiave API",
+      "tryIt": "Verifica che funzioni:"
+    },
+    "orders": {
+      "title": "Acquisti",
+      "empty": "Ancora nessun acquisto.",
+      "statusLabel": {
+        "paid": "In elaborazione",
+        "issued": "Completato",
+        "awaiting_liquidity": "In elaborazione",
+        "awaiting_price": "In elaborazione",
+        "failed": "Non riuscito",
+        "refunded": "Rimborsato",
+        "closed": "Chiuso"
+      },
+      "creditsLine": "{credits} crediti",
+      "showAll": "Mostra tutti ({count})",
+      "showLess": "Mostra meno"
+    },
+    "order": {
+      "loading": "Verifica del pagamento…",
+      "slow": "Pagamento ricevuto. I tuoi crediti arriveranno a breve.",
+      "dismiss": "Chiudi",
+      "status": {
+        "quoted": "In attesa del completamento del pagamento.",
+        "paid": "Pagamento ricevuto. I tuoi {credits} crediti sono in arrivo.",
+        "issued": "Fatto: {credits} crediti aggiunti al tuo saldo.",
+        "awaiting_liquidity": "Pagamento ricevuto. I tuoi crediti arriveranno a breve.",
+        "awaiting_price": "Pagamento ricevuto. I tuoi crediti arriveranno a breve.",
+        "expired": "Questo checkout è scaduto prima del pagamento.",
+        "failed": "Questo acquisto non è riuscito. Contatta l'assistenza se ti è stato addebitato.",
+        "refunded": "Questo acquisto è stato rimborsato.",
+        "closed": "Questo acquisto è stato chiuso. Contatta l'assistenza se ti è stato addebitato."
+      }
+    },
+    "errors": {
+      "unknown": "Qualcosa è andato storto. Riprova.",
+      "network": "Impossibile raggiungere il server. Controlla la connessione e riprova.",
+      "unauthorized": "La sessione è scaduta. Accedi di nuovo.",
+      "login_rejected": "Hai effettuato l'accesso, ma i nostri server non sono riusciti a confermarlo. Riprova tra poco o contatta l'assistenza.",
+      "email_unverified": "Verifica il tuo indirizzo email per continuare.",
+      "email_taken": "Questo indirizzo email è già usato da un altro account.",
+      "terms_not_accepted": "Accetta le condizioni di vendita per continuare.",
+      "amount_out_of_range": "Inserisci un importo da $10 a $100.000.",
+      "return_url_not_allowed": "Questa pagina non può ricevere pagamenti. Contatta l'assistenza.",
+      "rate_limited": "Troppe richieste. Attendi qualche secondo e riprova.",
+      "insufficient_liquidity": "Gli acquisti sono momentaneamente sospesi. Riprova più tardi.",
+      "price_unavailable": "Gli acquisti sono momentaneamente sospesi. Riprova più tardi.",
+      "pool_unavailable": "Gli acquisti sono momentaneamente sospesi. Riprova più tardi.",
+      "stripe_unavailable": "Il fornitore di pagamento non ha risposto. Riprova.",
+      "clerk_unavailable": "Il servizio di accesso non ha risposto. Riprova.",
+      "not_found": "Non abbiamo trovato questo acquisto."
+    }
   }
 }

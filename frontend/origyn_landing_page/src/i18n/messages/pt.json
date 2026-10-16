@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Deslizar",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Tamanho do carregamento"
     },
     "bytesUnit": "bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Tentar novamente",
+    "cancel": "Cancelar",
+    "session": {
+      "verifyEmail": "Verificar email",
+      "signOut": "Terminar sessão"
+    },
+    "balance": {
+      "title": "Créditos",
+      "incoming": "A caminho",
+      "held": "Reservados para agentes"
+    },
+    "buy": {
+      "title": "Comprar créditos",
+      "amountLabel": "Montante em dólares americanos",
+      "range": "Introduz um montante inteiro entre {min} e {max}.",
+      "submit": "Continuar para o pagamento · {amount}",
+      "youGet": "Recebes",
+      "creditsUnit": "créditos",
+      "redirecting": "A abrir o checkout seguro…"
+    },
+    "keys": {
+      "title": "Chaves de API",
+      "create": "Criar chave",
+      "created": "Criada a {date}",
+      "revoke": "Revogar",
+      "revokeConfirm": "Revogar esta chave?",
+      "newTitle": "A tua nova chave de API",
+      "newWarning": "Copia-a agora e guarda-a num local seguro. Não a podemos mostrar outra vez.",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "saved": "Feito, já a guardei",
+      "creating": "A criar chave…",
+      "revoked": "Chave revogada",
+      "emptyTitle": "Ainda não tens chaves de API",
+      "tryIt": "Confirma que funciona:"
+    },
+    "orders": {
+      "title": "Compras",
+      "empty": "Ainda sem compras.",
+      "statusLabel": {
+        "paid": "Em processamento",
+        "issued": "Concluída",
+        "awaiting_liquidity": "Em processamento",
+        "awaiting_price": "Em processamento",
+        "failed": "Falhou",
+        "refunded": "Reembolsada",
+        "closed": "Encerrada"
+      },
+      "creditsLine": "{credits} créditos",
+      "showAll": "Mostrar todas ({count})",
+      "showLess": "Mostrar menos"
+    },
+    "order": {
+      "loading": "A verificar o teu pagamento…",
+      "slow": "Pagamento recebido. Os teus créditos chegam em breve.",
+      "dismiss": "Fechar",
+      "status": {
+        "quoted": "À espera de que o teu pagamento seja concluído.",
+        "paid": "Pagamento recebido. Os teus {credits} créditos estão a caminho.",
+        "issued": "Feito: {credits} créditos foram adicionados ao teu saldo.",
+        "awaiting_liquidity": "Pagamento recebido. Os teus créditos chegam em breve.",
+        "awaiting_price": "Pagamento recebido. Os teus créditos chegam em breve.",
+        "expired": "Este checkout expirou antes de ser pago.",
+        "failed": "Esta compra falhou. Contacta o suporte se foste cobrado.",
+        "refunded": "Esta compra foi reembolsada.",
+        "closed": "Esta compra foi encerrada. Contacta o suporte se foste cobrado."
+      }
+    },
+    "errors": {
+      "unknown": "Algo correu mal. Tenta novamente.",
+      "network": "Não é possível contactar o servidor. Verifica a tua ligação e tenta novamente.",
+      "unauthorized": "A tua sessão expirou. Inicia sessão novamente.",
+      "login_rejected": "Tens sessão iniciada, mas os nossos servidores não conseguiram confirmar o teu início de sessão. Tenta novamente daqui a pouco ou contacta o suporte.",
+      "email_unverified": "Verifica o teu endereço de email para continuar.",
+      "email_taken": "Outra conta já usa este endereço de email.",
+      "terms_not_accepted": "Aceita os termos de venda para continuar.",
+      "amount_out_of_range": "Introduz um montante entre $10 e $100 000.",
+      "return_url_not_allowed": "Esta página não pode receber pagamentos. Contacta o suporte.",
+      "rate_limited": "Demasiados pedidos. Aguarda alguns segundos e tenta novamente.",
+      "insufficient_liquidity": "As compras estão temporariamente em pausa. Tenta mais tarde.",
+      "price_unavailable": "As compras estão temporariamente em pausa. Tenta mais tarde.",
+      "pool_unavailable": "As compras estão temporariamente em pausa. Tenta mais tarde.",
+      "stripe_unavailable": "O fornecedor de pagamentos não respondeu. Tenta novamente.",
+      "clerk_unavailable": "O início de sessão não respondeu. Tenta novamente.",
+      "not_found": "Não encontrámos essa compra."
+    }
   }
 }

@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Desplázate",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Tamaño de subida"
     },
     "bytesUnit": "bytes"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Reintentar",
+    "cancel": "Cancelar",
+    "session": {
+      "verifyEmail": "Verificar correo",
+      "signOut": "Cerrar sesión"
+    },
+    "balance": {
+      "title": "Créditos",
+      "incoming": "En camino",
+      "held": "Reservados para agentes"
+    },
+    "buy": {
+      "title": "Comprar créditos",
+      "amountLabel": "Importe en dólares estadounidenses",
+      "range": "Introduzca un importe entero de {min} a {max}.",
+      "submit": "Continuar al pago · {amount}",
+      "youGet": "Recibe",
+      "creditsUnit": "créditos",
+      "redirecting": "Abriendo el pago seguro…"
+    },
+    "keys": {
+      "title": "Claves de API",
+      "create": "Crear clave",
+      "created": "Creada el {date}",
+      "revoke": "Revocar",
+      "revokeConfirm": "¿Revocar esta clave?",
+      "newTitle": "Su nueva clave de API",
+      "newWarning": "Cópiela ahora y guárdela en un lugar seguro. No podremos volver a mostrarla.",
+      "copy": "Copiar",
+      "copied": "Copiada",
+      "saved": "Listo, ya la guardé",
+      "creating": "Creando clave…",
+      "revoked": "Clave revocada",
+      "emptyTitle": "Aún no hay claves de API",
+      "tryIt": "Compruebe que funciona:"
+    },
+    "orders": {
+      "title": "Compras",
+      "empty": "Aún no hay compras.",
+      "statusLabel": {
+        "paid": "En proceso",
+        "issued": "Completada",
+        "awaiting_liquidity": "En proceso",
+        "awaiting_price": "En proceso",
+        "failed": "Fallida",
+        "refunded": "Reembolsada",
+        "closed": "Cerrada"
+      },
+      "creditsLine": "{credits} créditos",
+      "showAll": "Mostrar las {count}",
+      "showLess": "Mostrar menos"
+    },
+    "order": {
+      "loading": "Comprobando su pago…",
+      "slow": "Pago recibido. Sus créditos llegarán en breve.",
+      "dismiss": "Cerrar",
+      "status": {
+        "quoted": "Esperando a que se complete su pago.",
+        "paid": "Pago recibido. Sus {credits} créditos están en camino.",
+        "issued": "Listo: se añadieron {credits} créditos a su saldo.",
+        "awaiting_liquidity": "Pago recibido. Sus créditos llegarán en breve.",
+        "awaiting_price": "Pago recibido. Sus créditos llegarán en breve.",
+        "expired": "Este pago caducó antes de completarse.",
+        "failed": "Esta compra falló. Contacte con soporte si se le realizó un cargo.",
+        "refunded": "Esta compra se reembolsó.",
+        "closed": "Esta compra se cerró. Contacte con soporte si se le realizó un cargo."
+      }
+    },
+    "errors": {
+      "unknown": "Algo salió mal. Inténtelo de nuevo.",
+      "network": "No se puede conectar con el servidor. Revise su conexión e inténtelo de nuevo.",
+      "unauthorized": "Su sesión caducó. Vuelva a iniciar sesión.",
+      "login_rejected": "Ha iniciado sesión, pero nuestros servidores no pudieron confirmarla. Inténtelo de nuevo en un momento o contacte con soporte.",
+      "email_unverified": "Verifique su dirección de correo para continuar.",
+      "email_taken": "Otra cuenta ya usa esta dirección de correo.",
+      "terms_not_accepted": "Acepte las condiciones de venta para continuar.",
+      "amount_out_of_range": "Introduzca un importe de $10 a $100.000.",
+      "return_url_not_allowed": "Esta página no puede recibir pagos. Contacte con soporte.",
+      "rate_limited": "Demasiadas solicitudes. Espere unos segundos e inténtelo de nuevo.",
+      "insufficient_liquidity": "Las compras están en pausa por un momento. Inténtelo más tarde.",
+      "price_unavailable": "Las compras están en pausa por un momento. Inténtelo más tarde.",
+      "pool_unavailable": "Las compras están en pausa por un momento. Inténtelo más tarde.",
+      "stripe_unavailable": "El proveedor de pagos no respondió. Inténtelo de nuevo.",
+      "clerk_unavailable": "El servicio de inicio de sesión no respondió. Inténtelo de nuevo.",
+      "not_found": "No encontramos esa compra."
+    }
   }
 }

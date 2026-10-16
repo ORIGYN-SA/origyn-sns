@@ -1,6 +1,7 @@
 {
   "header": {
-    "badge": "AI"
+    "badge": "AI",
+    "dashboard": "Dashboard"
   },
   "scroll": "Posunout",
   "hero": {
@@ -1216,5 +1217,94 @@
       "uploadSize": "Velikost nahrávání"
     },
     "bytesUnit": "bajtů"
+  },
+  "aiDashboard": {
+    "title": "Dashboard",
+    "retry": "Zkusit znovu",
+    "cancel": "Zrušit",
+    "session": {
+      "verifyEmail": "Ověřit e-mail",
+      "signOut": "Odhlásit se"
+    },
+    "balance": {
+      "title": "Kredity",
+      "incoming": "Na cestě",
+      "held": "Blokováno pro práci agentů"
+    },
+    "buy": {
+      "title": "Koupit kredity",
+      "amountLabel": "Částka v amerických dolarech",
+      "range": "Zadejte celou částku od {min} do {max}.",
+      "submit": "Pokračovat k platbě · {amount}",
+      "youGet": "Získáte",
+      "creditsUnit": "kreditů",
+      "redirecting": "Otevírám zabezpečenou platbu…"
+    },
+    "keys": {
+      "title": "API klíče",
+      "create": "Vytvořit klíč",
+      "created": "Vytvořeno {date}",
+      "revoke": "Zneplatnit",
+      "revokeConfirm": "Zneplatnit tento klíč?",
+      "newTitle": "Váš nový API klíč",
+      "newWarning": "Zkopírujte si ho hned a uložte na bezpečné místo. Znovu ho už zobrazit nemůžeme.",
+      "copy": "Kopírovat",
+      "copied": "Zkopírováno",
+      "saved": "Hotovo, mám ho uložený",
+      "creating": "Vytvářím klíč…",
+      "revoked": "Klíč zneplatněn",
+      "emptyTitle": "Zatím žádné API klíče",
+      "tryIt": "Ověřte, že funguje:"
+    },
+    "orders": {
+      "title": "Nákupy",
+      "empty": "Zatím žádné nákupy.",
+      "statusLabel": {
+        "paid": "Zpracovává se",
+        "issued": "Dokončeno",
+        "awaiting_liquidity": "Zpracovává se",
+        "awaiting_price": "Zpracovává se",
+        "failed": "Selhalo",
+        "refunded": "Vráceno",
+        "closed": "Uzavřeno"
+      },
+      "creditsLine": "Kredity: {credits}",
+      "showAll": "Zobrazit všechny ({count})",
+      "showLess": "Zobrazit méně"
+    },
+    "order": {
+      "loading": "Ověřuji vaši platbu…",
+      "slow": "Platba přijata. Kredity brzy dorazí.",
+      "dismiss": "Zavřít",
+      "status": {
+        "quoted": "Čekáme na dokončení vaší platby.",
+        "paid": "Platba přijata. Kredity ({credits}) jsou na cestě.",
+        "issued": "Hotovo: na váš zůstatek bylo připsáno kreditů: {credits}.",
+        "awaiting_liquidity": "Platba přijata. Kredity brzy dorazí.",
+        "awaiting_price": "Platba přijata. Kredity brzy dorazí.",
+        "expired": "Platnost této platby vypršela dříve, než byla zaplacena.",
+        "failed": "Tento nákup selhal. Pokud vám byla stržena platba, kontaktujte podporu.",
+        "refunded": "Tento nákup byl vrácen.",
+        "closed": "Tento nákup byl uzavřen. Pokud vám byla stržena platba, kontaktujte podporu."
+      }
+    },
+    "errors": {
+      "unknown": "Něco se pokazilo. Zkuste to znovu.",
+      "network": "Server je nedostupný. Zkontrolujte připojení a zkuste to znovu.",
+      "unauthorized": "Vaše relace vypršela. Přihlaste se znovu.",
+      "login_rejected": "Jste přihlášeni, ale naše servery nemohly vaše přihlášení potvrdit. Zkuste to za chvíli znovu nebo kontaktujte podporu.",
+      "email_unverified": "Pro pokračování ověřte svou e-mailovou adresu.",
+      "email_taken": "Tuto e-mailovou adresu už používá jiný účet.",
+      "terms_not_accepted": "Pro pokračování přijměte obchodní podmínky.",
+      "amount_out_of_range": "Zadejte částku od 10 $ do 100 000 $.",
+      "return_url_not_allowed": "Tato stránka nemůže přijímat platby. Kontaktujte podporu.",
+      "rate_limited": "Příliš mnoho požadavků. Počkejte pár sekund a zkuste to znovu.",
+      "insufficient_liquidity": "Nákupy jsou dočasně pozastaveny. Zkuste to později.",
+      "price_unavailable": "Nákupy jsou dočasně pozastaveny. Zkuste to později.",
+      "pool_unavailable": "Nákupy jsou dočasně pozastaveny. Zkuste to později.",
+      "stripe_unavailable": "Platební služba neodpověděla. Zkuste to znovu.",
+      "clerk_unavailable": "Přihlašovací služba neodpověděla. Zkuste to znovu.",
+      "not_found": "Tento nákup jsme nenašli."
+    }
   }
 }

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.6.0] - 2026-10-16
+
+#### Added
+
+- Add the AI dashboard at `/ai/dashboard`, translated into every language: sign in, buy credits by card, track purchases and manage API keys
+- Link the dashboard from the AI page
+
 ### [1.5.8] - 2026-09-21
 
 #### Fixed
