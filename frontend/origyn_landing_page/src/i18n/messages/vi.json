@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Tài liệu",
     "retry": "Thử lại",
     "cancel": "Hủy",
     "session": {

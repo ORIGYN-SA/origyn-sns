@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Irányítópult",
+    "docs": "Dokumentáció",
     "retry": "Újrapróbálás",
     "cancel": "Mégse",
     "session": {

@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.6.1] - 2026-10-16
+
+#### Added
+
+- Link the ORIGYN AI docs from the dashboard header
+
+#### Changed
+
+- Serve the AI page logo at display size, cutting it from 764 KB to 10 KB
+
+#### Fixed
+
+- Keep sign-up on the AI dashboard, so new accounts no longer land on the homepage
+
 ### [1.6.0] - 2026-10-16
 
 #### Added

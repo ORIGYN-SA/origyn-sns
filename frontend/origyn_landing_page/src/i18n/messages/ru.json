@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Дашборд",
+    "docs": "Документация",
     "retry": "Повторить",
     "cancel": "Отмена",
     "session": {

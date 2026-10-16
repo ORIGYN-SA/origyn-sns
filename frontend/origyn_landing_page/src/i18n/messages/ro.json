@@ -1182,6 +1182,7 @@
   },
   "aiDashboard": {
     "title": "Tablou de bord",
+    "docs": "Documentație",
     "retry": "Încearcă din nou",
     "cancel": "Anulează",
     "session": {

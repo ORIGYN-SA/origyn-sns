@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Docs",
     "retry": "Opnieuw proberen",
     "cancel": "Annuleren",
     "session": {

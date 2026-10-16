@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "儀表板",
+    "docs": "文件",
     "retry": "再試一次",
     "cancel": "取消",
     "session": {
