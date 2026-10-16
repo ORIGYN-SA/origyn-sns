@@ -70,7 +70,7 @@ const Content = () => {
   if (isLoaded && !isSignedIn) {
     return (
       <div className="flex justify-center pt-8">
-        <SignIn routing="hash" />
+        <SignIn routing="hash" withSignUp />
       </div>
     );
   }
@@ -109,8 +109,10 @@ const AIDashboardPage = () => {
         routerPush={(to) => navigate(to)}
         routerReplace={(to) => navigate(to, { replace: true })}
         afterSignOutUrl={aiPage}
-        // Clerk otherwise lands a fresh sign-in or sign-up on "/", the
-        // Origyn homepage; this page is the only place either happens.
+        // Clerk otherwise sends sign-up to its hosted page and lands both
+        // flows on origyn.com; this page is the only place either happens.
+        signInUrl={dashboard}
+        signUpUrl={dashboard}
         signInForceRedirectUrl={dashboard}
         signUpForceRedirectUrl={dashboard}
       >
