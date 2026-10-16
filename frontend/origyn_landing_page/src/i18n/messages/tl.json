@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Docs",
     "retry": "Subukan muli",
     "cancel": "Kanselahin",
     "session": {

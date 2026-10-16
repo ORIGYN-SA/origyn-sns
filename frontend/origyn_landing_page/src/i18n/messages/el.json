@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dashboard",
+    "docs": "Τεκμηρίωση",
     "retry": "Δοκιμάστε ξανά",
     "cancel": "Ακύρωση",
     "session": {

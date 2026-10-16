@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Nadzorna ploča",
+    "docs": "Dokumentacija",
     "retry": "Pokušajte ponovno",
     "cancel": "Odustani",
     "session": {

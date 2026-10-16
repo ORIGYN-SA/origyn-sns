@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "控制台",
+    "docs": "文档",
     "retry": "重试",
     "cancel": "取消",
     "session": {

@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "แดชบอร์ด",
+    "docs": "เอกสาร",
     "retry": "ลองอีกครั้ง",
     "cancel": "ยกเลิก",
     "session": {

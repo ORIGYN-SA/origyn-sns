@@ -1220,6 +1220,7 @@
   },
   "aiDashboard": {
     "title": "Dasbor",
+    "docs": "Dokumentasi",
     "retry": "Coba lagi",
     "cancel": "Batal",
     "session": {

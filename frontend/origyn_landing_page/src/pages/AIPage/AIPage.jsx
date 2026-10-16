@@ -30,7 +30,9 @@ const AIPage = () => {
               so the lockup sits on the leading (right) edge under dir=rtl. */}
           <div dir="ltr" className="flex items-start">
             <img
-              src="/origyn-logo-blue.png"
+              src="/origyn-logo-blue.webp"
+              width={480}
+              height={112}
               alt="Origyn"
               className="h-7 w-auto md:h-10"
             />
