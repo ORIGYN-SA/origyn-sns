@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.2] - 2026-10-27
+
+#### Changed
+
+- Give each integrator card its own pictogram: a pickaxe for Geoforensic and a watch for 12H30 Agency
+
 ### [1.7.1] - 2026-10-27
 
 #### Fixed

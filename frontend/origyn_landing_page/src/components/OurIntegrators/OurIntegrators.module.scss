@@ -12,25 +12,10 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   @media (max-width: $bp-md) { padding: 48px 16px; }
 }
 
-// Same two-line upright + italic treatment as the other section titles on this page.
 .title {
-  @include type('display');
+  @include display-title;
   color: $color-text;
   margin-bottom: 24px;
-
-  span {
-    font-family: $font-italic;
-    font-weight: 200;
-    font-style: italic;
-    font-size: $fs-80;
-    line-height: 1.1;
-
-    @media (max-width: $bp-lg) { font-size: $fs-48; }
-    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
-  }
-
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
-  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
 }
 
 .subtitle {
@@ -107,7 +92,6 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   @media (max-width: $bp-md) { width: 48px; height: 48px; img { width: 26px; height: 26px; } }
 }
 
-// Logos are sized to a common optical weight rather than their raw export sizes.
 .cardLogo {
   display: flex;
   flex-direction: column;
@@ -117,21 +101,15 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   flex: 1;
   width: 100%;
 
-  img { max-width: 100%; height: auto; object-fit: contain; mix-blend-mode: multiply; }
-}
+  img {
+    width: var(--width);
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 
-.logo-geoforensic img { width: 170px; }
-.logo-bity img:first-child { width: 96px; }
-.logo-bity .caption { width: 80px; }
-.logo-cyber img { width: 180px; }
-.logo-12h30 img { width: 168px; }
-
-@media (max-width: $bp-md) {
-  .logo-geoforensic img { width: 120px; }
-  .logo-bity img:first-child { width: 68px; }
-  .logo-bity .caption { width: 58px; }
-  .logo-cyber img { width: 128px; }
-  .logo-12h30 img { width: 116px; }
+    @media (max-width: $bp-md) { width: var(--mobile-width); }
+  }
 }
 
 .cardCta {
@@ -170,6 +148,7 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   border-radius: 16px;
   color: white;
   background: #000 center / cover no-repeat;
+  background-image: var(--background);
   box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.81);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -179,6 +158,8 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   &::backdrop { background: rgba(0, 0, 0, 0.6); animation: fadeIn 0.25s ease-out; }
 
   @media (prefers-reduced-motion: reduce) { animation: none; &::backdrop { animation: none; } }
+
+  @media (max-width: $bp-lg) { background-image: var(--stacked-background, var(--background)); }
 
   // Full-screen sheet on phones: no floating card with slivers of page around it.
   @media (max-width: $bp-md) {
@@ -198,24 +179,6 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-// The rock photo is busy behind the text, so the overlay is weighted to the text side.
-.theme-geoforensic {
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0.25) 100%), url("/integrators/bg-geoforensic.webp");
-
-  // Text spans the full width once stacked, so the overlay has to be even.
-  @media (max-width: $bp-lg) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.74)), url("/integrators/bg-geoforensic.webp");
-  }
-}
-
-.theme-cyber {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.79), rgba(0, 0, 0, 0.79)), url("/integrators/bg-cyber.webp");
-}
-
-.theme-12h30 { background-image: url("/integrators/bg-12h30.webp"); }
-
-.theme-bity { background-image: linear-gradient(180deg, #3a361e 0%, #000 60%); }
 
 // Sticky so it stays reachable while the sheet scrolls on small screens.
 .dialog > form {
@@ -315,21 +278,20 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
 
 .mockup {
   flex-shrink: 0;
+  width: var(--width);
   height: auto;
-
-  .theme-geoforensic & { width: 280px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
-  .theme-cyber & { width: 270px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
-  .theme-12h30 & { width: 460px; filter: drop-shadow(0px 4px 51px rgba(0, 0, 0, 0.25)); }
-  .theme-bity & { width: 240px; }
 
   // Stacked layouts lead with the visual and keep the CTA as the last thing on the sheet.
   @media (max-width: $bp-lg) {
     order: -1;
     align-self: center;
-    width: auto !important;
+    width: auto;
     max-width: 100%;
     max-height: 340px;
   }
 
   @media (max-width: $bp-md) { max-height: 260px; }
 }
+
+.glow { border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
+.shadow { filter: drop-shadow(0px 4px 51px rgba(0, 0, 0, 0.25)); }
