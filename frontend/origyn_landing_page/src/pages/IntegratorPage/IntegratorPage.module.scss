@@ -1,11 +1,5 @@
 @use "styles/variables" as *;
 
-%italic-title {
-  font-family: $font-italic;
-  font-weight: 200;
-  font-style: italic;
-}
-
 .page { background: white; }
 
 // ===== HERO =====
@@ -25,20 +19,8 @@
 .heroContent { max-width: 700px; }
 
 .heroTitle {
-  @include type('display');
+  @include display-title;
   margin-bottom: 24px;
-
-  span {
-    @extend %italic-title;
-    font-size: $fs-80;
-    line-height: 1.1;
-
-    @media (max-width: $bp-lg) { font-size: $fs-48; }
-    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
-  }
-
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
-  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
 }
 
 .heroSubtitle {
@@ -84,21 +66,9 @@
 }
 
 .programTitle {
-  @include type('display');
+  @include display-title;
   color: $color-text;
   margin-bottom: 2rem;
-
-  span {
-    @extend %italic-title;
-    font-size: $fs-80;
-    line-height: 1.1;
-
-    @media (max-width: $bp-lg) { font-size: $fs-48; }
-    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
-  }
-
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
-  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
 }
 
 .programLabel {
@@ -191,21 +161,11 @@
 }
 
 .workflowTitle {
-  @include type('display');
+  @include display-title;
   color: $color-text;
   margin-bottom: 64px;
 
-  span {
-    @extend %italic-title;
-    font-size: $fs-80;
-    line-height: 1.1;
-
-    @media (max-width: $bp-lg) { font-size: $fs-48; }
-    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
-  }
-
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
-  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; margin-bottom: 32px; }
+  @media (max-width: $bp-md) { margin-bottom: 32px; }
 }
 
 .workflowSteps {
@@ -392,7 +352,9 @@
   margin-bottom: 32px;
 
   span {
-    @extend %italic-title;
+    font-family: $font-italic;
+    font-weight: 200;
+    font-style: italic;
     font-size: $fs-48;
     line-height: 1.2;
 

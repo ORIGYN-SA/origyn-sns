@@ -112,3 +112,21 @@ $type-scale: (
   font-weight: map.get($props, 'font-weight');
   font-family: map.get($props, 'font-family');
 }
+
+@mixin display-title {
+  @include type('display');
+
+  span {
+    font-family: $font-italic;
+    font-weight: 200;
+    font-style: italic;
+    font-size: $fs-80;
+    line-height: 1.1;
+
+    @media (max-width: $bp-lg) { font-size: $fs-48; }
+    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
+  }
+
+  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
+  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
+}

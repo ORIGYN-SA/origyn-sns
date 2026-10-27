@@ -12,25 +12,10 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   @media (max-width: $bp-md) { padding: 48px 16px; }
 }
 
-// Same two-line upright + italic treatment as the other section titles on this page.
 .title {
-  @include type('display');
+  @include display-title;
   color: $color-text;
   margin-bottom: 24px;
-
-  span {
-    font-family: $font-italic;
-    font-weight: 200;
-    font-style: italic;
-    font-size: $fs-80;
-    line-height: 1.1;
-
-    @media (max-width: $bp-lg) { font-size: $fs-48; }
-    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
-  }
-
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
-  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
 }
 
 .subtitle {
