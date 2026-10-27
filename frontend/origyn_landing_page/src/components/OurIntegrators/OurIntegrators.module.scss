@@ -107,6 +107,14 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   @media (max-width: $bp-md) { width: 48px; height: 48px; img { width: 26px; height: 26px; } }
 }
 
+// The watch is drawn on a 53px artboard against 47px for the others, as in the Figma.
+.icon-12h30 img {
+  width: 45px;
+  height: 45px;
+
+  @media (max-width: $bp-md) { width: 29px; height: 29px; }
+}
+
 // Logos are sized to a common optical weight rather than their raw export sizes.
 .cardLogo {
   display: flex;
