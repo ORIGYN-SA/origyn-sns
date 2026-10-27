@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PageLayout from "@components/PageLayout";
 import Button from "@components/Button";
 import GlassSurface from "@components/GlassSurface";
+import OurIntegrators from "@components/OurIntegrators";
 import { useLocale, useT } from "@/i18n/LocaleContext";
 import { localePath } from "@/i18n/paths";
 import styles from "./IntegratorPage.module.scss";
@@ -184,6 +185,8 @@ const IntegratorPage = () => {
           </div>
         </div>
       </section>
+
+      <OurIntegrators />
 
       {/* Application Workflow Section */}
       <section className={styles.workflowSection}>

@@ -1,0 +1,255 @@
+@use "styles/variables" as *;
+
+// Brand gradient used for the pictograms and the active card's button border.
+$brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #263c85 63%, #223169 79%, #1e2345 91%);
+
+.section {
+  padding: 96px 74px;
+  background: $bg-light;
+  text-align: center;
+
+  @media (max-width: $bp-lg) { padding: 64px 16px; }
+}
+
+.title {
+  font-family: $font-sans;
+  font-weight: 300;
+  font-size: 88px;
+  line-height: 1;
+  color: $color-navy;
+  margin-bottom: 40px;
+
+  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; margin-bottom: 24px; }
+  @media (max-width: $bp-md) { font-size: $fs-44; }
+}
+
+.subtitle {
+  font-family: $font-sans;
+  font-weight: 300;
+  font-size: $fs-24;
+  line-height: 32px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: $color-text;
+  max-width: 968px;
+  margin: 0 auto 64px;
+
+  @media (max-width: $bp-lg) { font-size: $fs-16; line-height: 1.5; margin-bottom: 40px; }
+  @media (max-width: $bp-md) { font-size: $fs-12; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 17px;
+  max-width: 1292px;
+  margin: 0 auto;
+
+  @media (max-width: $bp-lg) { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 424px;
+  padding: 45px 24px 0;
+  background: #fdfdfd;
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+
+  // Hovering one card dims its siblings, as in the Figma active state.
+  @media (hover: hover) {
+    .grid:hover &:not(:hover) { opacity: 0.24; box-shadow: none; }
+  }
+
+  .grid:has(.card:focus-visible) &:not(:focus-visible) { opacity: 0.24; box-shadow: none; }
+
+  &:hover .cardCta,
+  &:focus-visible .cardCta {
+    border-color: transparent;
+    background: linear-gradient(white, white) padding-box, $brand-gradient border-box;
+  }
+
+  @media (max-width: $bp-md) { height: 300px; padding-top: 28px; border-radius: 16px; }
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+
+  img { width: 46px; height: 46px; }
+
+  @media (max-width: $bp-md) { width: 56px; height: 56px; img { width: 32px; height: 32px; } }
+}
+
+.cardLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  flex: 1;
+  width: 100%;
+  max-height: 190px;
+
+  img { max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+}
+
+.logo-geoforensic img { width: 212px; }
+.logo-bity img:first-child { width: 120px; }
+.logo-bity .caption { width: 99px; }
+.logo-cyber img { width: 198px; }
+.logo-12h30 img { width: 210px; }
+
+.cardCta {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  width: 198px;
+  height: 52px;
+  margin-bottom: 52px;
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: $fs-18;
+  color: $color-text;
+
+  svg { width: 8px; height: 8px; flex-shrink: 0; }
+
+  @media (max-width: $bp-md) { width: auto; height: 40px; gap: 10px; margin-bottom: 24px; padding: 0 16px; font-size: $fs-14; }
+}
+
+// ===== DIALOG =====
+:global(body:has(dialog[open])) { overflow: hidden; }
+
+.dialog {
+  position: fixed;
+  width: min(1298px, calc(100vw - 48px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: none;
+  color: white;
+  background: #000 center / cover no-repeat;
+  box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.81);
+  overflow-y: auto;
+  text-align: left;
+
+  &::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+  @media (max-width: $bp-md) { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
+}
+
+.theme-geoforensic {
+  background-image: linear-gradient(to top left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 58%), url("/integrators/bg-geoforensic.webp");
+}
+
+.theme-cyber {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.79), rgba(0, 0, 0, 0.79)), url("/integrators/bg-cyber.webp");
+}
+
+.theme-12h30 { background-image: url("/integrators/bg-12h30.webp"); }
+
+.theme-bity { background-image: linear-gradient(180deg, #3a361e 0%, #000 60%); }
+
+.close {
+  position: absolute;
+  top: 38px;
+  right: 40px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 0.7; }
+  img { width: 100%; height: 100%; }
+
+  @media (max-width: $bp-md) { top: 12px; right: 12px; width: 36px; height: 36px; }
+}
+
+.dialogBody {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: min(882px, calc(100dvh - 48px));
+  padding: 110px 80px 72px 64px;
+
+  @media (max-width: $bp-lg) { flex-direction: column; align-items: flex-start; min-height: 0; padding: 72px 32px 40px; }
+  @media (max-width: $bp-md) { padding: 64px 20px 32px; gap: 32px; }
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+}
+
+.dialogTitle {
+  font-family: $font-gestura;
+  font-weight: 200;
+  font-style: italic;
+  font-size: 52px;
+  line-height: 1.15;
+
+  @media (max-width: $bp-md) { font-size: $fs-32; }
+}
+
+.dialogTagline {
+  font-family: "Helvetica Neue", $font-sans, sans-serif;
+  font-weight: 300;
+  font-size: $fs-24;
+  line-height: 29px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  max-width: 660px;
+
+  @media (max-width: $bp-md) { font-size: $fs-16; line-height: 1.4; }
+}
+
+.dialogText {
+  font-family: $font-sans;
+  font-weight: 400;
+  font-size: $fs-18;
+  line-height: 30px;
+
+  p + p { margin-top: 30px; }
+  strong { font-weight: 700; }
+
+  @media (max-width: $bp-md) { font-size: $fs-14; line-height: 1.6; p + p { margin-top: 16px; } }
+}
+
+.dialogCta { margin-top: 64px; }
+
+.mockup {
+  flex-shrink: 0;
+  height: auto;
+
+  .theme-geoforensic & { width: 296px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
+  .theme-cyber & { width: 285px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
+  .theme-12h30 & { width: 538px; filter: drop-shadow(0px 4px 51px rgba(0, 0, 0, 0.25)); }
+  .theme-bity & { width: 261px; }
+
+  @media (max-width: $bp-lg) { align-self: center; max-width: 100%; max-height: 420px; width: auto !important; }
+}
