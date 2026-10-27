@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.0] - 2026-10-27
+
+#### Added
+
+- Add an "Our integrators" section to the integrator page, presenting Geoforensic, Bity Tokenisation, CyberOrigin and 12H30 Agency
+- Open a popup for each integrator with its description, a product mockup and a link to its website
+
 ### [1.6.1] - 2026-10-16
 
 #### Added
