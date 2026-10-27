@@ -745,36 +745,36 @@
       "subtitle": "Companies already building trust with ORIGYN’s blockchain certification technology",
       "discover": "Discover",
       "close": "Close",
-      "items": [
-        {
+      "items": {
+        "geoforensic": {
           "name": "Geoforensic",
           "title": "GEOFORENSIC",
           "tagline": "Combining science and blockchain for enhanced metal traceability.",
           "cta": "Discover Geoforensic",
           "description": "<p>Founded by <strong>Dr. Barbara Beck,</strong> a geochemist and data science specialist, <strong>GEOFORENSIC</strong> verifies the provenance of mined gold through geochemical analysis and advanced data processing, comparing samples with reference data to assess their declared origin.</p><p>Combining <strong>GEOFORENSIC’s</strong> scientific verification with <strong>ORIGYN’s</strong> digital security, this collaboration addresses the growing need for transparency, authenticity and responsible sourcing in the gold industry.</p><p><strong>Scientific evidence</strong> and <strong>blockchain technology</strong> work together to preserve verifiable product data, reduce the risk of falsification and strengthen supply chain transparency. Ultimately, this approach connects the physical reality of precious metals to their verifiable digital history, building trust through more comprehensive traceability.</p>"
         },
-        {
+        "bity": {
           "name": "Bity Tokenisation",
           "title": "BITY TOKENISATION",
           "tagline": "Combining Financial Expertise, Real-World Assets and Blockchain Technology",
           "cta": "Discover Bity Tokenisation",
           "description": "<p><strong>BITY TOKENISATION</strong> develops solutions to tokenise real-world assets, particularly precious metals, within the Swiss regulatory framework. Its <strong>Bity Gold</strong> offering links physical gold bars to digital tokens.</p><p>Combining <strong>BITY TOKENISATION’s</strong> expertise in precious metals and regulation with <strong>ORIGYN’s</strong> blockchain technology, the partnership enables secure digital representations of physical assets and their ownership rights.</p><p>Together, they strengthen <strong>transparency, security</strong> and <strong>traceability</strong>, bridging physical asset ownership and digital identity.</p>"
         },
-        {
+        "cyber": {
           "name": "CyberOrigin",
           "title": "CYBER",
           "tagline": "Gil Sertissage Group company",
           "cta": "Discover Cyber",
           "description": "<p><strong>CYBER,</strong> part of the <strong>Gil Sertissage Group,</strong> specialises in diamond sales and setting. With expertise dating back to 1986 and membership in the Responsible Jewellery Council (RJC), the group promotes responsible practices across the jewellery supply chain.</p><p><strong>CYBER</strong> ensures traceability from mine to finished product, leveraging <strong>ORIGYN’s</strong> blockchain technology to guarantee the transparency, integrity and security of product data.</p><p>With up to 2 GB of data per certificate for less than $10, <strong>ORIGYN</strong> securely links technical documents, high-resolution images and identification records to digital certificates.</p><p>Together, <strong>CYBER’s</strong> industry expertise and ORIGYN’s blockchain infrastructure strengthen trust through reliable, verifiable digital records.</p>"
         },
-        {
+        "12h30": {
           "name": "12H30 Agency",
           "title": "12H30 Agency",
           "tagline": "Specialises in developing and implementing software solutions",
           "cta": "Discover 12H30 Agency",
           "description": "<p><strong>12H30 Agency</strong> develops stock, warranty and certificate management software for the watchmaking industry, serving independent brands such as <strong>CORUM.</strong></p><p>By integrating <strong>ORIGYN’s</strong> blockchain technology, its solutions provide secure, tamper-proof digital certificates, ensuring data integrity and enabling reliable verification.</p><p>Together, <strong>12H30 Agency and</strong> <strong>ORIGYN</strong> strengthen <strong>trust, authenticity</strong> and <strong>traceability</strong> across the watchmaking industry.</p>"
         }
-      ]
+      }
     },
     "workflow": {
       "titleLineOne": "Application",
