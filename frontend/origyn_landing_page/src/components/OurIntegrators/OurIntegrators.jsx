@@ -7,7 +7,7 @@ import styles from "./OurIntegrators.module.scss";
 const INTEGRATOR_VISUALS = [
   {
     id: "geoforensic",
-    icon: "/integrators/icon-gold.svg",
+    icon: "/integrators/icon-pickaxe.svg",
     logo: "/integrators/logo-geoforensic.webp",
     mockup: "/integrators/mock-geoforensic.webp",
     href: "https://geoforensic.ch/",
@@ -29,7 +29,7 @@ const INTEGRATOR_VISUALS = [
   },
   {
     id: "12h30",
-    icon: "/integrators/icon-bag.svg",
+    icon: "/integrators/icon-watch.svg",
     logo: "/integrators/logo-12h30.webp",
     mockup: "/integrators/mock-12h30.webp",
     href: "https://www.12h30.ch/",
@@ -65,7 +65,7 @@ const OurIntegrators = () => {
             onClick={() => setSelectedId(id)}
             aria-haspopup="dialog"
           >
-            <span className={styles.cardIcon}>
+            <span className={`${styles.cardIcon} ${styles[`icon-${id}`]}`}>
               <img src={icon} alt="" />
             </span>
             <span className={`${styles.cardLogo} ${styles[`logo-${id}`]}`}>
