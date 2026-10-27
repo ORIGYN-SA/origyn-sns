@@ -49,7 +49,11 @@ const OurIntegrators = () => {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.title}>{t("integratorPage.integrators.title")}</h2>
+      <h2 className={styles.title}>
+        {t("integratorPage.integrators.titleLineOne")}
+        <br />
+        <span>{t("integratorPage.integrators.titleLineTwo")}</span>
+      </h2>
       <p className={styles.subtitle}>{t("integratorPage.integrators.subtitle")}</p>
 
       <div className={styles.grid}>

@@ -740,8 +740,9 @@
       "joinNow": "Join now"
     },
     "integrators": {
-      "title": "Our integrators",
-      "subtitle": "Join the Integrator Program to Build the Future of Trust with ORIGYN’s Blockchain Certification Technology",
+      "titleLineOne": "Our",
+      "titleLineTwo": "integrators",
+      "subtitle": "Companies already building trust with ORIGYN’s blockchain certification technology",
       "discover": "Discover",
       "close": "Close",
       "items": [
@@ -756,7 +757,7 @@
           "name": "Bity Tokenisation",
           "title": "BITY TOKENISATION",
           "tagline": "Combining Financial Expertise, Real-World Assets and Blockchain Technology",
-          "cta": "Bity Tokenisation",
+          "cta": "Discover Bity Tokenisation",
           "description": "<p><strong>BITY TOKENISATION</strong> develops solutions to tokenise real-world assets, particularly precious metals, within the Swiss regulatory framework. Its <strong>Bity Gold</strong> offering links physical gold bars to digital tokens.</p><p>Combining <strong>BITY TOKENISATION’s</strong> expertise in precious metals and regulation with <strong>ORIGYN’s</strong> blockchain technology, the partnership enables secure digital representations of physical assets and their ownership rights.</p><p>Together, they strengthen <strong>transparency, security</strong> and <strong>traceability</strong>, bridging physical asset ownership and digital identity.</p>"
         },
         {

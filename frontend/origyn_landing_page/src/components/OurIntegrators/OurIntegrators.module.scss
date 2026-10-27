@@ -4,70 +4,83 @@
 $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #263c85 63%, #223169 79%, #1e2345 91%);
 
 .section {
-  padding: 96px 74px;
+  padding: 96px 75px;
   background: $bg-light;
   text-align: center;
 
   @media (max-width: $bp-lg) { padding: 64px 16px; }
+  @media (max-width: $bp-md) { padding: 48px 16px; }
 }
 
+// Same two-line upright + italic treatment as the other section titles on this page.
 .title {
-  font-family: $font-sans;
-  font-weight: 300;
-  font-size: 88px;
-  line-height: 1;
-  color: $color-navy;
-  margin-bottom: 40px;
+  @include type('display');
+  color: $color-text;
+  margin-bottom: 24px;
 
-  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; margin-bottom: 24px; }
-  @media (max-width: $bp-md) { font-size: $fs-44; }
+  span {
+    font-family: $font-italic;
+    font-weight: 200;
+    font-style: italic;
+    font-size: $fs-80;
+    line-height: 1.1;
+
+    @media (max-width: $bp-lg) { font-size: $fs-48; }
+    @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
+  }
+
+  @media (max-width: $bp-lg) { font-size: $fs-48; line-height: 1.2; }
+  @media (max-width: $bp-md) { font-size: $fs-44; line-height: 1.2; }
 }
 
 .subtitle {
+  @include type('label');
   font-family: $font-sans;
-  font-weight: 300;
-  font-size: $fs-24;
-  line-height: 32px;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
   color: $color-text;
-  max-width: 968px;
-  margin: 0 auto 64px;
+  max-width: 500px;
+  margin: 0 auto 56px;
 
-  @media (max-width: $bp-lg) { font-size: $fs-16; line-height: 1.5; margin-bottom: 40px; }
-  @media (max-width: $bp-md) { font-size: $fs-12; }
+  @media (max-width: $bp-md) { font-size: $fs-12; line-height: 1.5; margin-bottom: 32px; }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 17px;
-  max-width: 1292px;
+  gap: 16px;
+  max-width: 1290px;
   margin: 0 auto;
 
-  @media (max-width: $bp-lg) { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: $bp-lg) { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
+  @media (max-width: $bp-md) { gap: 12px; }
 }
 
 .card {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 424px;
-  padding: 45px 24px 0;
+  height: 360px;
+  padding: 40px 20px 40px;
   background: #fdfdfd;
   border: none;
   border-radius: 24px;
   box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 
-  // Hovering one card dims its siblings, as in the Figma active state.
+  // Only dim siblings while a card itself is hovered, so the gaps between cards don't dim everything.
   @media (hover: hover) {
-    .grid:hover &:not(:hover) { opacity: 0.24; box-shadow: none; }
+    .grid:has(.card:hover) &:not(:hover) { opacity: 0.5; box-shadow: none; }
+    &:hover { transform: translateY(-4px); box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.12); }
   }
 
-  .grid:has(.card:focus-visible) &:not(:focus-visible) { opacity: 0.24; box-shadow: none; }
+  .grid:has(.card:focus-visible) &:not(:focus-visible) { opacity: 0.5; box-shadow: none; }
+
+  &:focus-visible {
+    outline: 2px solid #1470b1;
+    outline-offset: 4px;
+  }
 
   &:hover .cardCta,
   &:focus-visible .cardCta {
@@ -75,63 +88,72 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
     background: linear-gradient(white, white) padding-box, $brand-gradient border-box;
   }
 
-  @media (max-width: $bp-md) { height: 300px; padding-top: 28px; border-radius: 16px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; &:hover { transform: none; } }
+  @media (max-width: $bp-md) { height: 248px; padding: 24px 12px; border-radius: 16px; }
 }
 
 .cardIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 78px;
-  height: 78px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: white;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
-  img { width: 46px; height: 46px; }
+  img { width: 40px; height: 40px; }
 
-  @media (max-width: $bp-md) { width: 56px; height: 56px; img { width: 32px; height: 32px; } }
+  @media (max-width: $bp-md) { width: 48px; height: 48px; img { width: 26px; height: 26px; } }
 }
 
+// Logos are sized to a common optical weight rather than their raw export sizes.
 .cardLogo {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 11px;
+  gap: 8px;
   flex: 1;
   width: 100%;
-  max-height: 190px;
 
-  img { max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  img { max-width: 100%; height: auto; object-fit: contain; mix-blend-mode: multiply; }
 }
 
-.logo-geoforensic img { width: 212px; }
-.logo-bity img:first-child { width: 120px; }
-.logo-bity .caption { width: 99px; }
-.logo-cyber img { width: 198px; }
-.logo-12h30 img { width: 210px; }
+.logo-geoforensic img { width: 170px; }
+.logo-bity img:first-child { width: 96px; }
+.logo-bity .caption { width: 80px; }
+.logo-cyber img { width: 180px; }
+.logo-12h30 img { width: 168px; }
+
+@media (max-width: $bp-md) {
+  .logo-geoforensic img { width: 120px; }
+  .logo-bity img:first-child { width: 68px; }
+  .logo-bity .caption { width: 58px; }
+  .logo-cyber img { width: 128px; }
+  .logo-12h30 img { width: 116px; }
+}
 
 .cardCta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 17px;
-  width: 198px;
+  justify-content: center;
+  gap: 12px;
+  min-width: 180px;
   height: 52px;
-  margin-bottom: 52px;
-  padding: 0 24px;
+  padding: 0 28px;
   border: 2px solid transparent;
   border-radius: 100px;
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   font-family: $font-sans;
   font-weight: 400;
-  font-size: $fs-18;
+  font-size: $fs-16;
   color: $color-text;
 
   svg { width: 8px; height: 8px; flex-shrink: 0; }
 
-  @media (max-width: $bp-md) { width: auto; height: 40px; gap: 10px; margin-bottom: 24px; padding: 0 16px; font-size: $fs-14; }
+  @media (max-width: $bp-md) { min-width: 0; height: 40px; gap: 8px; padding: 0 16px; font-size: $fs-14; }
 }
 
 // ===== DIALOG =====
@@ -139,25 +161,52 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
 
 .dialog {
   position: fixed;
-  width: min(1298px, calc(100vw - 48px));
+  width: min(1200px, calc(100vw - 48px));
   max-width: none;
   max-height: calc(100dvh - 48px);
   margin: auto;
   padding: 0;
   border: none;
+  border-radius: 16px;
   color: white;
   background: #000 center / cover no-repeat;
   box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.81);
   overflow-y: auto;
+  overscroll-behavior: contain;
   text-align: left;
+  animation: dialogIn 0.25s ease-out;
 
-  &::backdrop { background: rgba(0, 0, 0, 0.6); }
+  &::backdrop { background: rgba(0, 0, 0, 0.6); animation: fadeIn 0.25s ease-out; }
 
-  @media (max-width: $bp-md) { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
+  @media (prefers-reduced-motion: reduce) { animation: none; &::backdrop { animation: none; } }
+
+  // Full-screen sheet on phones: no floating card with slivers of page around it.
+  @media (max-width: $bp-md) {
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+  }
 }
 
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// The rock photo is busy behind the text, so the overlay is weighted to the text side.
 .theme-geoforensic {
-  background-image: linear-gradient(to top left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 58%), url("/integrators/bg-geoforensic.webp");
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0.25) 100%), url("/integrators/bg-geoforensic.webp");
+
+  // Text spans the full width once stacked, so the overlay has to be even.
+  @media (max-width: $bp-lg) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.74)), url("/integrators/bg-geoforensic.webp");
+  }
 }
 
 .theme-cyber {
@@ -168,42 +217,62 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
 
 .theme-bity { background-image: linear-gradient(180deg, #3a361e 0%, #000 60%); }
 
-.close {
-  position: absolute;
-  top: 38px;
-  right: 40px;
+// Sticky so it stays reachable while the sheet scrolls on small screens.
+.dialog > form {
+  position: sticky;
+  top: 0;
   z-index: 1;
-  width: 50px;
-  height: 50px;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 28px 28px 0 0;
   padding: 0;
-  background: none;
-  border: none;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease;
 
-  &:hover { opacity: 0.7; }
-  img { width: 100%; height: 100%; }
+  &:hover { background: rgba(255, 255, 255, 0.15); }
+  &:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+  img { width: 24px; height: 24px; }
 
-  @media (max-width: $bp-md) { top: 12px; right: 12px; width: 36px; height: 36px; }
+  @media (max-width: $bp-md) { width: 40px; height: 40px; margin: 12px 12px 0 0; img { width: 20px; height: 20px; } }
 }
 
 .dialogBody {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
-  min-height: min(882px, calc(100dvh - 48px));
-  padding: 110px 80px 72px 64px;
+  gap: 64px;
+  min-height: min(760px, calc(100dvh - 48px));
+  padding: 96px 80px 72px;
 
-  @media (max-width: $bp-lg) { flex-direction: column; align-items: flex-start; min-height: 0; padding: 72px 32px 40px; }
-  @media (max-width: $bp-md) { padding: 64px 20px 32px; gap: 32px; }
+  @media (max-width: $bp-lg) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+    min-height: 0;
+    padding: 80px 40px 48px;
+  }
+
+  @media (max-width: $bp-md) { gap: 32px; padding: 72px 20px 40px; }
 }
 
 .dialogContent {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 800px;
+  max-width: 640px;
 }
 
 .dialogTitle {
@@ -212,44 +281,55 @@ $brand-gradient: linear-gradient(90deg, #1f9cd4 3%, #1470b1 30%, #214b92 44%, #2
   font-style: italic;
   font-size: 52px;
   line-height: 1.15;
+  text-transform: uppercase;
 
   @media (max-width: $bp-md) { font-size: $fs-32; }
 }
 
 .dialogTagline {
-  font-family: "Helvetica Neue", $font-sans, sans-serif;
+  font-family: $font-sans;
   font-weight: 300;
-  font-size: $fs-24;
-  line-height: 29px;
+  font-size: $fs-20;
+  line-height: 1.4;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  max-width: 660px;
+  margin-bottom: 8px;
 
-  @media (max-width: $bp-md) { font-size: $fs-16; line-height: 1.4; }
+  @media (max-width: $bp-md) { font-size: $fs-14; letter-spacing: 1px; }
 }
 
 .dialogText {
   font-family: $font-sans;
-  font-weight: 400;
-  font-size: $fs-18;
-  line-height: 30px;
+  font-weight: 300;
+  font-size: $fs-16;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88);
 
-  p + p { margin-top: 30px; }
-  strong { font-weight: 700; }
+  p + p { margin-top: 20px; }
+  strong { font-weight: 600; color: white; }
 
-  @media (max-width: $bp-md) { font-size: $fs-14; line-height: 1.6; p + p { margin-top: 16px; } }
+  @media (max-width: $bp-md) { font-size: $fs-14; line-height: 1.65; p + p { margin-top: 14px; } }
 }
 
-.dialogCta { margin-top: 64px; }
+.dialogCta { margin-top: 32px; }
 
 .mockup {
   flex-shrink: 0;
   height: auto;
 
-  .theme-geoforensic & { width: 296px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
-  .theme-cyber & { width: 285px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
-  .theme-12h30 & { width: 538px; filter: drop-shadow(0px 4px 51px rgba(0, 0, 0, 0.25)); }
-  .theme-bity & { width: 261px; }
+  .theme-geoforensic & { width: 280px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
+  .theme-cyber & { width: 270px; border-radius: 6px; box-shadow: 0px 4px 100px rgba(255, 255, 255, 0.3); }
+  .theme-12h30 & { width: 460px; filter: drop-shadow(0px 4px 51px rgba(0, 0, 0, 0.25)); }
+  .theme-bity & { width: 240px; }
 
-  @media (max-width: $bp-lg) { align-self: center; max-width: 100%; max-height: 420px; width: auto !important; }
+  // Stacked layouts lead with the visual and keep the CTA as the last thing on the sheet.
+  @media (max-width: $bp-lg) {
+    order: -1;
+    align-self: center;
+    width: auto !important;
+    max-width: 100%;
+    max-height: 340px;
+  }
+
+  @media (max-width: $bp-md) { max-height: 260px; }
 }
