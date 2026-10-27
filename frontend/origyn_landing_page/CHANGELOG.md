@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.1] - 2026-10-27
+
+#### Fixed
+
+- Keep the selected Application workflow step on the integrator page when it is clicked again, so a double click no longer shows step 01's content under another step
+
 ### [1.7.0] - 2026-10-27
 
 #### Added

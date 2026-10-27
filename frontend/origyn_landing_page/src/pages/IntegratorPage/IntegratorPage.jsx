@@ -6,6 +6,7 @@ import GlassSurface from "@components/GlassSurface";
 import OurIntegrators from "@components/OurIntegrators";
 import { useLocale, useT } from "@/i18n/LocaleContext";
 import { localePath } from "@/i18n/paths";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import styles from "./IntegratorPage.module.scss";
 
 // Visuals stay in code; text comes from the catalog and is zipped in by index.
@@ -42,6 +43,9 @@ const IntegratorPage = () => {
 
   const [currentProgramStep, setCurrentProgramStep] = useState(0);
   const [activeWorkflowStep, setActiveWorkflowStep] = useState(0);
+  // Below $bp-md the steps are an accordion and can be collapsed; above it the
+  // panel always shows a step, so re-clicking the active one must keep it.
+  const isWorkflowAccordion = useMediaQuery("(max-width: 768px)");
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
@@ -206,7 +210,7 @@ const IntegratorPage = () => {
                 onClick={(e) => {
                   e.currentTarget.blur();
                   setActiveWorkflowStep((prev) =>
-                    prev === index ? null : index,
+                    isWorkflowAccordion && prev === index ? null : index,
                   );
                 }}
                 aria-expanded={index === activeWorkflowStep}
