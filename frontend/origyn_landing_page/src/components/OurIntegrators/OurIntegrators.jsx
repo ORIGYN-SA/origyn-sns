@@ -3,45 +3,57 @@ import Button from "@components/Button";
 import { useT } from "@/i18n/LocaleContext";
 import styles from "./OurIntegrators.module.scss";
 
-// Visuals and links stay in code; text comes from the catalog and is zipped in by index.
-const INTEGRATOR_VISUALS = [
+const INTEGRATORS = [
   {
     id: "geoforensic",
-    icon: "/integrators/icon-pickaxe.svg",
-    logo: "/integrators/logo-geoforensic.webp",
-    mockup: "/integrators/mock-geoforensic.webp",
     href: "https://geoforensic.ch/",
+    icon: "/integrators/icon-pickaxe.svg",
+    logo: { src: "/integrators/logo-geoforensic.webp", width: 170, mobileWidth: 120 },
+    mockup: { src: "/integrators/mock-geoforensic.webp", width: 280, effect: "glow" },
+    background:
+      'linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0.25) 100%), url("/integrators/bg-geoforensic.webp")',
+    stackedBackground:
+      'linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.74)), url("/integrators/bg-geoforensic.webp")',
   },
   {
     id: "bity",
-    icon: "/integrators/icon-gold.svg",
-    logo: "/integrators/logo-bity.svg",
-    caption: "/integrators/logo-bity-caption.svg",
-    mockup: "/integrators/mock-bity.webp",
     href: "https://bity.com/en/tokenization/",
+    icon: "/integrators/icon-gold.svg",
+    logo: { src: "/integrators/logo-bity.svg", width: 96, mobileWidth: 68 },
+    caption: { src: "/integrators/logo-bity-caption.svg", width: 80, mobileWidth: 58 },
+    mockup: { src: "/integrators/mock-bity.webp", width: 240 },
+    background: "linear-gradient(180deg, #3a361e 0%, #000 60%)",
   },
   {
     id: "cyber",
-    icon: "/integrators/icon-diamond.svg",
-    logo: "/integrators/logo-cyberorigin.webp",
-    mockup: "/integrators/mock-cyber.webp",
     href: "https://cyberorigin.ch/",
+    icon: "/integrators/icon-diamond.svg",
+    logo: { src: "/integrators/logo-cyberorigin.webp", width: 180, mobileWidth: 128 },
+    mockup: { src: "/integrators/mock-cyber.webp", width: 270, effect: "glow" },
+    background:
+      'linear-gradient(rgba(0, 0, 0, 0.79), rgba(0, 0, 0, 0.79)), url("/integrators/bg-cyber.webp")',
   },
   {
     id: "12h30",
-    icon: "/integrators/icon-watch.svg",
-    logo: "/integrators/logo-12h30.webp",
-    mockup: "/integrators/mock-12h30.webp",
     href: "https://www.12h30.ch/",
+    icon: "/integrators/icon-watch.svg",
+    logo: { src: "/integrators/logo-12h30.webp", width: 168, mobileWidth: 116 },
+    mockup: { src: "/integrators/mock-12h30.webp", width: 460, effect: "shadow" },
+    background: 'url("/integrators/bg-12h30.webp")',
   },
 ];
 
+const sizeVars = ({ width, mobileWidth }) => ({
+  "--width": `${width}px`,
+  "--mobile-width": `${mobileWidth}px`,
+});
+
 const OurIntegrators = () => {
   const t = useT();
-  const itemsText = t.raw("integratorPage.integrators.items") ?? [];
-  const integrators = INTEGRATOR_VISUALS.map((v, i) => ({
-    ...v,
-    ...(itemsText[i] ?? {}),
+  const copy = t.raw("integratorPage.integrators.items") ?? {};
+  const integrators = INTEGRATORS.map((integrator) => ({
+    ...integrator,
+    ...copy[integrator.id],
   }));
 
   const [selectedId, setSelectedId] = useState(null);
@@ -65,12 +77,12 @@ const OurIntegrators = () => {
             onClick={() => setSelectedId(id)}
             aria-haspopup="dialog"
           >
-            <span className={`${styles.cardIcon} ${styles[`icon-${id}`]}`}>
+            <span className={styles.cardIcon}>
               <img src={icon} alt="" />
             </span>
-            <span className={`${styles.cardLogo} ${styles[`logo-${id}`]}`}>
-              <img src={logo} alt={name} />
-              {caption && <img src={caption} alt="" className={styles.caption} />}
+            <span className={styles.cardLogo}>
+              <img src={logo.src} alt={name} style={sizeVars(logo)} />
+              {caption && <img src={caption.src} alt="" style={sizeVars(caption)} />}
             </span>
             <span className={styles.cardCta}>
               <svg viewBox="0 0 8 8" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -87,7 +99,11 @@ const OurIntegrators = () => {
           ref={(node) => {
             if (node && !node.open) node.showModal();
           }}
-          className={`${styles.dialog} ${styles[`theme-${selected.id}`]}`}
+          className={styles.dialog}
+          style={{
+            "--background": selected.background,
+            "--stacked-background": selected.stackedBackground,
+          }}
           aria-labelledby="integrator-dialog-title"
           onClose={() => setSelectedId(null)}
           onClick={(e) => {
@@ -114,7 +130,12 @@ const OurIntegrators = () => {
               />
               <Button url={selected.href} text={selected.cta} className={styles.dialogCta} />
             </div>
-            <img src={selected.mockup} alt="" className={styles.mockup} />
+            <img
+              src={selected.mockup.src}
+              alt=""
+              className={`${styles.mockup} ${styles[selected.mockup.effect] ?? ""}`}
+              style={{ "--width": `${selected.mockup.width}px` }}
+            />
           </div>
         </dialog>
       )}
