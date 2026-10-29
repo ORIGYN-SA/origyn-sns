@@ -923,12 +923,12 @@
         {
           "labelBold": "ENTEGRATÖRLER",
           "labelRest": "KİMLERDİR?",
-          "description": "<ul><li><strong>Entegratörler bağımsız şirketlerdir:</strong> ORIGYN sertifikası basmak ve ORIGYN protokolünü belirli bir sektörde, bir varlık sınıfında veya birden fazla alanda tanıtmak gibi ortak hedeflerle ORIGYN protokolüne dayalı ürünler geliştirirler.</li><li><strong>Kolaylaştırıcı olarak hareket ederek</strong> işletmelerin derin blok zinciri ve Web3 uzmanlığı gerektirmeksizin ORIGYN'in blok zinciri sertifikasyon teknolojisini benimsemelerine yardımcı olurlar.</li><li><strong>ORIGYN Vakfı tarafından yürütülen bir ön inceleme sürecinin ardından</strong> entegratörler, ORIGYN DAO token sahipleri tarafından seçilir ve oylanır.</li></ul>"
+          "description": "<ul><li><strong>Entegratörler bağımsız şirketlerdir:</strong> ORIGYN protokolünü ürünleri blok zinciri üzerinde sertifikalandırmak için kullanır; ORIGYN sertifikası basmak ve protokolü belirli bir sektörde, bir varlık sınıfında veya birden fazla alanda tanıtmak gibi ortak bir hedef paylaşırlar.</li><li><strong>İki türü vardır:</strong> kendi ürünlerini sertifikalandıran üreticiler ve diğer işletmelerin derin blok zinciri veya Web3 uzmanlığı gerektirmeden ORIGYN'in sertifikasyon teknolojisini benimsemelerine yardımcı olan kolaylaştırıcılar.</li><li><strong>ORIGYN Vakfı tarafından yürütülen bir ön inceleme sürecinin ardından</strong> entegratörler, ORIGYN DAO token sahipleri tarafından seçilir.</li></ul>"
         },
         {
           "labelBold": "ENTEGRATÖR",
           "labelRest": "NASIL OLUNABİLİR?",
-          "description": "Entegratör olabilmek için bir şirketin, belirli veya birden fazla sektöre hizmet etme konusundaki tüm gereksinimleri ve uzmanlığı karşılarken hizmetleri ölçekte sunabildiğini kanıtlaması gerekmektedir."
+          "description": "Entegratör olabilmek için bir şirketin, ister kendi ürünleri ister müşterilerininki olsun, ürünleri ölçekli şekilde sertifikalandırabildiğini ve bir veya birden fazla sektöre hizmet vermek için gereken teknik gereksinimleri ve sektörel uzmanlığı karşıladığını kanıtlaması gerekir."
         }
       ],
       "goToStep": "{n}. adıma git",

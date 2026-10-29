@@ -728,12 +728,12 @@
         {
           "labelBold": "WHO",
           "labelRest": "ARE THE INTEGRATORS ?",
-          "description": "<ul><li><strong>Integrators are independent firms</strong> that build products based on the ORIGYN protocol with a common goal of minting ORIGYN certificates and promoting the ORIGYN protocol in a specific industry, in an asset class or across multiple sectors.</li><li><strong>Acting as enablers,</strong> they help businesses to adopt ORIGYN's blockchain certification technology without requiring deep blockchain and Web3 expertise.</li><li><strong>Following a vetting process</strong> conducted by the ORIGYN Foundation, integrators are elected and voted by the ORIGYN DAO token holders.</li></ul>"
+          "description": "<ul><li><strong>Integrators are independent firms</strong> that use the ORIGYN protocol to certify products on the blockchain, with the common goal of minting ORIGYN certificates and promoting the protocol within a specific industry, an asset class, or across multiple sectors.</li><li><strong>They come in two forms:</strong> manufacturers that certify their own products, and enablers that help other businesses adopt ORIGYN's certification technology without requiring deep blockchain or Web3 expertise.</li><li><strong>Following a vetting process</strong> conducted by the ORIGYN Foundation, integrators are elected by the ORIGYN DAO token holders.</li></ul>"
         },
         {
           "labelBold": "HOW",
           "labelRest": "DO YOU BECOME AN INTEGRATOR ?",
-          "description": "To become an integrator a company must show that it can deliver services at scale, while meeting all the requirements and expertise to serve a specific or multiple sectors."
+          "description": "To become an integrator, a company must demonstrate that it can certify products at scale, whether its own or its clients', while meeting the technical requirements and sector expertise needed to serve one or several industries."
         }
       ],
       "goToStep": "Go to step {n}",

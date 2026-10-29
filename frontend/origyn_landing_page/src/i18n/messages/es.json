@@ -923,12 +923,12 @@
         {
           "labelBold": "¿QUIÉNES",
           "labelRest": "SON LOS INTEGRADORES?",
-          "description": "<ul><li><strong>Los integradores son empresas independientes</strong> que desarrollan productos basados en el protocolo ORIGYN con el objetivo común de acuñar certificados ORIGYN y promover el protocolo ORIGYN en un sector específico, en una clase de activos o en múltiples sectores.</li><li><strong>Actuando como facilitadores,</strong> ayudan a las empresas a adoptar la tecnología de certificación blockchain de ORIGYN sin necesidad de una profunda experiencia en blockchain y Web3.</li><li><strong>Tras un proceso de selección</strong> llevado a cabo por la Fundación ORIGYN, los integradores son elegidos y votados por los titulares de tokens del DAO de ORIGYN.</li></ul>"
+          "description": "<ul><li><strong>Los integradores son empresas independientes</strong> que utilizan el protocolo ORIGYN para certificar productos en la blockchain, con el objetivo común de acuñar certificados ORIGYN y promover el protocolo en un sector específico, en una clase de activos o en múltiples sectores.</li><li><strong>Existen dos tipos:</strong> fabricantes que certifican sus propios productos y facilitadores que ayudan a otras empresas a adoptar la tecnología de certificación de ORIGYN sin necesidad de una profunda experiencia en blockchain o Web3.</li><li><strong>Tras un proceso de selección</strong> llevado a cabo por la Fundación ORIGYN, los integradores son elegidos por los titulares de tokens del DAO de ORIGYN.</li></ul>"
         },
         {
           "labelBold": "¿CÓMO",
           "labelRest": "SE CONVIERTE USTED EN INTEGRADOR?",
-          "description": "Para convertirse en integrador, una empresa debe demostrar que puede prestar servicios a escala, cumpliendo con todos los requisitos y la experiencia necesarios para servir a uno o varios sectores específicos."
+          "description": "Para convertirse en integrador, una empresa debe demostrar que puede certificar productos a escala, ya sean propios o de sus clientes, cumpliendo con los requisitos técnicos y la experiencia sectorial necesarios para servir a una o varias industrias."
         }
       ],
       "goToStep": "Ir al paso {n}",

@@ -885,12 +885,12 @@
         {
           "labelBold": "CINE",
           "labelRest": "SUNT INTEGRATORII ?",
-          "description": "<ul><li><strong>Integratorii sunt firme independente</strong> care construiesc produse bazate pe protocolul ORIGYN cu scopul comun de a emite certificate ORIGYN și de a promova protocolul ORIGYN într-o industrie specifică, într-o clasă de active sau în mai multe sectoare.</li><li><strong>Acționând ca facilitatori,</strong> aceștia ajută companiile să adopte tehnologia de certificare blockchain ORIGYN fără a necesita cunoștințe profunde de blockchain și Web3.</li><li><strong>În urma unui proces de verificare</strong> efectuat de Fundația ORIGYN, integratorii sunt aleși și votați de deținătorii de tokenuri ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Integratorii sunt firme independente</strong> care folosesc protocolul ORIGYN pentru a certifica produse pe blockchain, cu scopul comun de a emite certificate ORIGYN și de a promova protocolul într-o industrie specifică, într-o clasă de active sau în mai multe sectoare.</li><li><strong>Există două tipuri:</strong> producători care își certifică propriile produse și facilitatori care ajută alte companii să adopte tehnologia de certificare ORIGYN fără a necesita cunoștințe aprofundate de blockchain sau Web3.</li><li><strong>În urma unui proces de verificare</strong> efectuat de Fundația ORIGYN, integratorii sunt aleși de deținătorii de tokenuri ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "CUM",
           "labelRest": "DEVENIȚI INTEGRATOR ?",
-          "description": "Pentru a deveni integrator, o companie trebuie să demonstreze că poate furniza servicii la scară largă, îndeplinind totodată toate cerințele și expertiza necesare pentru a deservi unul sau mai multe sectoare specifice."
+          "description": "Pentru a deveni integrator, o companie trebuie să demonstreze că poate certifica produse la scară largă, fie proprii, fie ale clienților săi, îndeplinind totodată cerințele tehnice și având expertiza sectorială necesară pentru a deservi una sau mai multe industrii."
         }
       ],
       "goToStep": "Mergeți la pasul {n}",
