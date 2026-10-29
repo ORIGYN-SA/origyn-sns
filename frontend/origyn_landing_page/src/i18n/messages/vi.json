@@ -923,12 +923,12 @@
         {
           "labelBold": "ĐỐI TÁC",
           "labelRest": "TÍCH HỢP LÀ AI?",
-          "description": "<ul><li><strong>Các đối tác tích hợp là các công ty độc lập</strong> xây dựng sản phẩm dựa trên giao thức ORIGYN với mục tiêu chung là đúc chứng chỉ ORIGYN và thúc đẩy giao thức ORIGYN trong một ngành cụ thể, trong một lớp tài sản hoặc qua nhiều lĩnh vực.</li><li><strong>Đóng vai trò là người kích hoạt,</strong> họ giúp các doanh nghiệp áp dụng công nghệ chứng nhận blockchain của ORIGYN mà không đòi hỏi kiến thức sâu về blockchain và Web3.</li><li><strong>Sau quy trình thẩm định</strong> được thực hiện bởi Quỹ ORIGYN, các đối tác tích hợp được bầu chọn và bỏ phiếu bởi những người nắm giữ token ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Các đối tác tích hợp là các công ty độc lập</strong> sử dụng giao thức ORIGYN để chứng nhận sản phẩm trên blockchain, với mục tiêu chung là đúc chứng chỉ ORIGYN và thúc đẩy giao thức trong một ngành cụ thể, một lớp tài sản hoặc trên nhiều lĩnh vực.</li><li><strong>Có hai loại đối tác tích hợp:</strong> nhà sản xuất tự chứng nhận sản phẩm của mình, và bên hỗ trợ giúp các doanh nghiệp khác áp dụng công nghệ chứng nhận của ORIGYN mà không đòi hỏi kiến thức sâu về blockchain hay Web3.</li><li><strong>Sau quy trình thẩm định</strong> được thực hiện bởi Quỹ ORIGYN, các đối tác tích hợp được bầu chọn bởi những người nắm giữ token ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "LÀM THẾ NÀO",
           "labelRest": "ĐỂ TRỞ THÀNH ĐỐI TÁC TÍCH HỢP?",
-          "description": "Để trở thành đối tác tích hợp, một công ty phải chứng minh rằng mình có thể cung cấp dịch vụ ở quy mô lớn, đồng thời đáp ứng tất cả các yêu cầu và chuyên môn để phục vụ một hoặc nhiều lĩnh vực cụ thể."
+          "description": "Để trở thành đối tác tích hợp, một công ty phải chứng minh rằng mình có thể chứng nhận sản phẩm ở quy mô lớn, dù là sản phẩm của chính mình hay của khách hàng, đồng thời đáp ứng các yêu cầu kỹ thuật và chuyên môn ngành cần thiết để phục vụ một hoặc nhiều ngành."
         }
       ],
       "goToStep": "Chuyển đến bước {n}",

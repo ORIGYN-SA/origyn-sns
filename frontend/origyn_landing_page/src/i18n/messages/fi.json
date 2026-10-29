@@ -923,12 +923,12 @@
         {
           "labelBold": "KETKÄ",
           "labelRest": "OVAT INTEGRAATTORIT ?",
-          "description": "<ul><li><strong>Integraattorit ovat itsenäisiä yrityksiä,</strong> jotka rakentavat ORIGYN-protokollaan perustuvia tuotteita yhteisellä tavoitteella luoda ORIGYN-sertifikaatteja ja edistää ORIGYN-protokollaa tietyllä toimialalla, omaisuusluokassa tai useilla sektoreilla.</li><li><strong>Toimien mahdollistajina</strong> ne auttavat yrityksiä ottamaan käyttöön ORIGYNin lohkoketjusertifiointiteknologian ilman syvällistä lohkoketju- ja Web3-osaamista.</li><li><strong>ORIGYN-säätiön suorittaman vetting-prosessin jälkeen</strong> integraattorit valitaan ja äänestetään ORIGYN DAO:n tokeninhaltijoiden toimesta.</li></ul>"
+          "description": "<ul><li><strong>Integraattorit ovat itsenäisiä yrityksiä,</strong> jotka käyttävät ORIGYN-protokollaa tuotteiden sertifiointiin lohkoketjussa yhteisenä tavoitteenaan luoda ORIGYN-sertifikaatteja ja edistää protokollaa tietyllä toimialalla, omaisuusluokassa tai useilla sektoreilla.</li><li><strong>Niitä on kahta tyyppiä:</strong> valmistajat, jotka sertifioivat omia tuotteitaan, ja mahdollistajat, jotka auttavat muita yrityksiä ottamaan käyttöön ORIGYNin sertifiointiteknologian ilman syvällistä lohkoketju- tai Web3-osaamista.</li><li><strong>ORIGYN-säätiön suorittaman arviointiprosessin jälkeen</strong> ORIGYN DAO:n tokeninhaltijat valitsevat integraattorit.</li></ul>"
         },
         {
           "labelBold": "MITEN",
           "labelRest": "RYHDYT INTEGRAATTORIKSI ?",
-          "description": "Tullakseen integraattoriksi yrityksen on osoitettava, että se pystyy toimittamaan palveluja laajassa mittakaavassa täyttäen samalla kaikki yhden tai useamman sektorin palvelemiseen tarvittavat vaatimukset ja osaamisen."
+          "description": "Tullakseen integraattoriksi yrityksen on osoitettava, että se pystyy sertifioimaan tuotteita laajassa mittakaavassa, joko omiaan tai asiakkaidensa, ja täyttää samalla tekniset vaatimukset sekä toimialaosaamisen, joita yhden tai useamman toimialan palveleminen edellyttää."
         }
       ],
       "goToStep": "Siirry vaiheeseen {n}",

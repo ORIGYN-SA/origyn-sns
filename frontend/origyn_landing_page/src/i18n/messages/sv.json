@@ -923,12 +923,12 @@
         {
           "labelBold": "VILKA",
           "labelRest": "ÄR INTEGRATÖRERNA?",
-          "description": "<ul><li><strong>Integratörer är oberoende företag</strong> som bygger produkter baserade på ORIGYN-protokollet med det gemensamma målet att prägla ORIGYN-certifikat och marknadsföra ORIGYN-protokollet inom en specifik bransch, tillgångsklass eller över flera sektorer.</li><li><strong>I rollen som möjliggörare</strong> hjälper de företag att ta till sig ORIGYN:s blockkedjecertifieringsteknik utan att kräva djup blockkedje- och Web3-kompetens.</li><li><strong>Efter en granskningsprocess</strong> genomförd av ORIGYN Foundation väljs integratörer ut och röstar av ORIGYN DAO-tokeninnehavarna.</li></ul>"
+          "description": "<ul><li><strong>Integratörer är oberoende företag</strong> som använder ORIGYN-protokollet för att certifiera produkter på blockkedjan, med det gemensamma målet att prägla ORIGYN-certifikat och marknadsföra protokollet inom en specifik bransch, en tillgångsklass eller över flera sektorer.</li><li><strong>De finns i två former:</strong> tillverkare som certifierar sina egna produkter och möjliggörare som hjälper andra företag att ta till sig ORIGYN:s certifieringsteknik utan att det krävs djup blockkedje- eller Web3-kompetens.</li><li><strong>Efter en granskningsprocess</strong> genomförd av ORIGYN Foundation väljs integratörer av ORIGYN DAO-tokeninnehavarna.</li></ul>"
         },
         {
           "labelBold": "HUR",
           "labelRest": "BLIR DU INTEGRATÖR?",
-          "description": "För att bli integratör måste ett företag visa att det kan leverera tjänster i stor skala och uppfylla alla krav och den kompetens som krävs för att betjäna en eller flera sektorer."
+          "description": "För att bli integratör måste ett företag visa att det kan certifiera produkter i stor skala, egna eller kunders, och samtidigt uppfylla de tekniska kraven och ha den branschkompetens som krävs för att betjäna en eller flera branscher."
         }
       ],
       "goToStep": "Gå till steg {n}",

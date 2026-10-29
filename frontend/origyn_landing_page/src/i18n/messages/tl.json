@@ -923,12 +923,12 @@
         {
           "labelBold": "SINO",
           "labelRest": "ANG MGA INTEGRATOR?",
-          "description": "<ul><li><strong>Ang mga Integrator ay mga independyenteng kumpanya</strong> na nagtatayo ng mga produkto batay sa protokol ng ORIGYN na may karaniwang layunin na mag-mint ng mga sertipiko ng ORIGYN at itaguyod ang protokol ng ORIGYN sa isang partikular na industriya, sa isang klase ng asset o sa iba't ibang sektor.</li><li><strong>Bilang mga tagapagpagana,</strong> tinutulungan nila ang mga negosyo na mag-adopt ng blockchain certification technology ng ORIGYN nang hindi nangangailangan ng malalim na kaalaman sa blockchain at Web3.</li><li><strong>Kasunod ng proseso ng pag-screen</strong> na isinasagawa ng ORIGYN Foundation, ang mga integrator ay pinipili at binoboto ng mga may-hawak ng token ng ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Ang mga Integrator ay mga independyenteng kumpanya</strong> na gumagamit ng protokol ng ORIGYN upang i-certify ang mga produkto sa blockchain, na may karaniwang layunin na mag-mint ng mga sertipiko ng ORIGYN at itaguyod ang protokol sa isang partikular na industriya, sa isang klase ng asset o sa iba't ibang sektor.</li><li><strong>May dalawang uri sila:</strong> mga manufacturer na nagse-certify ng sarili nilang mga produkto, at mga tagapagpagana na tumutulong sa ibang mga negosyo na mag-adopt ng certification technology ng ORIGYN nang hindi nangangailangan ng malalim na kaalaman sa blockchain o Web3.</li><li><strong>Kasunod ng proseso ng pag-screen</strong> na isinasagawa ng ORIGYN Foundation, ang mga integrator ay hinahalal ng mga may-hawak ng token ng ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "PAANO",
           "labelRest": "MAGIGING INTEGRATOR?",
-          "description": "Upang maging integrator, ang isang kumpanya ay dapat ipakita na kayang maghatid ng mga serbisyo sa malaking sukat, habang tinutupad ang lahat ng kinakailangan at kadalubhasaan upang maglingkod sa isang partikular o maraming sektor."
+          "description": "Upang maging integrator, dapat ipakita ng isang kumpanya na kaya nitong mag-certify ng mga produkto sa malaking sukat, sarili man nito o ng mga kliyente nito, habang tinutupad ang mga teknikal na kinakailangan at kadalubhasaan sa sektor na kailangan upang maglingkod sa isa o ilang industriya."
         }
       ],
       "goToStep": "Pumunta sa hakbang {n}",

@@ -923,12 +923,12 @@
         {
           "labelBold": "KIK",
           "labelRest": "AZ INTEGRÁLÓK?",
-          "description": "<ul><li><strong>Az integrálók független cégek,</strong> amelyek az ORIGYN protokoll alapján fejlesztenek termékeket azzal a közös céllal, hogy ORIGYN tanúsítványokat bocsássanak ki és népszerűsítsék az ORIGYN protokollt egy adott iparágban, eszközosztályban vagy több ágazatban.</li><li><strong>Lehetővé tevőként működve</strong> segítik a vállalkozásokat abban, hogy elfogadják az ORIGYN blokklánc-tanúsítási technológiáját anélkül, hogy mélyreható blokklánc- és Web3-szakértelemre lenne szükségük.</li><li><strong>Az ORIGYN Alapítvány által végzett átvilágítási folyamatot követően</strong> az integrálókat az ORIGYN DAO tokenbirtokosokai megválasztják és megszavazzák.</li></ul>"
+          "description": "<ul><li><strong>Az integrálók független cégek,</strong> amelyek az ORIGYN protokollt használják termékek blokkláncon történő tanúsítására, azzal a közös céllal, hogy ORIGYN tanúsítványokat bocsássanak ki és népszerűsítsék a protokollt egy adott iparágban, eszközosztályban vagy több ágazatban.</li><li><strong>Két formában léteznek:</strong> gyártók, amelyek saját termékeiket tanúsítják, és támogatók, amelyek más vállalkozásokat segítenek az ORIGYN tanúsítási technológiájának bevezetésében anélkül, hogy mélyreható blokklánc- vagy Web3-szakértelemre lenne szükségük.</li><li><strong>Az ORIGYN Alapítvány által végzett átvilágítási folyamatot követően</strong> az integrálókat az ORIGYN DAO tokenbirtokosai választják meg.</li></ul>"
         },
         {
           "labelBold": "HOGYAN",
           "labelRest": "VÁLHAT INTEGRÁLÓVÁ?",
-          "description": "Az integrálóvá váláshoz egy vállalatnak igazolnia kell, hogy nagy léptékben képes szolgáltatásokat nyújtani, miközben teljesíti az összes követelményt és rendelkezik a szükséges szakértelemmel egy vagy több ágazat kiszolgálásához."
+          "description": "Az integrálóvá váláshoz egy vállalatnak igazolnia kell, hogy nagy léptékben képes termékeket tanúsítani, akár a sajátjait, akár ügyfelei termékeit, miközben megfelel a technikai követelményeknek, és rendelkezik az egy vagy több iparág kiszolgálásához szükséges ágazati szakértelemmel."
         }
       ],
       "goToStep": "{n}. lépésre ugrás",

@@ -923,12 +923,12 @@
         {
           "labelBold": "WIE",
           "labelRest": "ZIJN DE INTEGRATOREN ?",
-          "description": "<ul><li><strong>Integratoren zijn onafhankelijke bedrijven</strong> die producten bouwen op basis van het ORIGYN-protocol met als gemeenschappelijk doel het minten van ORIGYN-certificaten en het promoten van het ORIGYN-protocol in een specifieke sector, activaklasse of meerdere sectoren.</li><li><strong>Als enablers</strong> helpen zij bedrijven de blockchains certificeringstechnologie van ORIGYN te adopteren zonder diepgaande blockchain- en Web3-expertise te vereisen.</li><li><strong>Na een screeningproces</strong> uitgevoerd door de ORIGYN Foundation worden integratoren verkozen en gestemd door de ORIGYN DAO-tokenhouders.</li></ul>"
+          "description": "<ul><li><strong>Integratoren zijn onafhankelijke bedrijven</strong> die het ORIGYN-protocol gebruiken om producten op de blockchain te certificeren, met als gemeenschappelijk doel het minten van ORIGYN-certificaten en het promoten van het protocol in een specifieke sector, een activaklasse of meerdere sectoren.</li><li><strong>Er zijn twee soorten:</strong> fabrikanten die hun eigen producten certificeren, en enablers die andere bedrijven helpen de certificeringstechnologie van ORIGYN te adopteren zonder diepgaande blockchain- of Web3-expertise te vereisen.</li><li><strong>Na een screeningproces</strong> uitgevoerd door de ORIGYN Foundation worden integratoren verkozen door de ORIGYN DAO-tokenhouders.</li></ul>"
         },
         {
           "labelBold": "HOE",
           "labelRest": "WORDT U EEN INTEGRATOR ?",
-          "description": "Om integrator te worden, moet een bedrijf aantonen dat het diensten op schaal kan leveren en voldoet aan alle vereisten en expertise om een specifieke of meerdere sectoren te bedienen."
+          "description": "Om integrator te worden, moet een bedrijf aantonen dat het producten op schaal kan certificeren, zowel eigen producten als die van klanten, en voldoet aan de technische vereisten en sectorexpertise die nodig zijn om een of meerdere sectoren te bedienen."
         }
       ],
       "goToStep": "Ga naar stap {n}",

@@ -923,12 +923,12 @@
         {
           "labelBold": "NANI",
           "labelRest": "NDIO WACHANGIAJI?",
-          "description": "<ul><li><strong>Wachangiaji ni makampuni huru</strong> yanayojenga bidhaa kulingana na itifaki ya ORIGYN kwa lengo la pamoja la kutengeneza vyeti vya ORIGYN na kukuza itifaki ya ORIGYN katika tasnia mahususi, katika darasa la mali au katika sekta mbalimbali.</li><li><strong>Wakifanya kazi kama wawezeshaji,</strong> wanasaidia biashara kupitisha teknolojia ya uthibitisho wa blockchain ya ORIGYN bila kuhitaji ujuzi wa kina wa blockchain na Web3.</li><li><strong>Kufuatia mchakato wa ukaguzi wa kina</strong> uliofanywa na Msingi wa ORIGYN, wachangiaji wanachaguliwa na kupigwa kura na wamiliki wa tokeni wa ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Wachangiaji ni makampuni huru</strong> yanayotumia itifaki ya ORIGYN kuthibitisha bidhaa kwenye blockchain, kwa lengo la pamoja la kutengeneza vyeti vya ORIGYN na kukuza itifaki katika tasnia mahususi, katika darasa la mali au katika sekta mbalimbali.</li><li><strong>Wako wa aina mbili:</strong> watengenezaji wanaothibitisha bidhaa zao wenyewe, na wawezeshaji wanaosaidia biashara nyingine kupitisha teknolojia ya uthibitisho ya ORIGYN bila kuhitaji ujuzi wa kina wa blockchain au Web3.</li><li><strong>Kufuatia mchakato wa ukaguzi wa kina</strong> uliofanywa na Msingi wa ORIGYN, wachangiaji wanachaguliwa na wamiliki wa tokeni wa ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "JINSI GANI",
           "labelRest": "UNAVYOKUWA MCHANGIAJI?",
-          "description": "Ili kuwa mchangiaji, kampuni lazima ionyeshe kwamba inaweza kutoa huduma kwa kiwango kikubwa, huku ikizingatia mahitaji yote na utaalamu wa kuhudumia sekta moja au nyingi."
+          "description": "Ili kuwa mchangiaji, kampuni lazima ionyeshe kwamba inaweza kuthibitisha bidhaa kwa kiwango kikubwa, ziwe zake au za wateja wake, huku ikitimiza mahitaji ya kiufundi na utaalamu wa sekta unaohitajika kuhudumia tasnia moja au kadhaa."
         }
       ],
       "goToStep": "Nenda hatua ya {n}",

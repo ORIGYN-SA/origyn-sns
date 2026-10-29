@@ -923,12 +923,12 @@
         {
           "labelBold": "CHI",
           "labelRest": "SONO GLI INTEGRATORI?",
-          "description": "<ul><li><strong>Gli integratori sono società indipendenti</strong> che sviluppano prodotti basati sul protocollo ORIGYN con l'obiettivo comune di coniare certificati ORIGYN e promuovere il protocollo ORIGYN in un settore specifico, in una classe di asset o in più ambiti.<br></li><li><strong>Agendo come abilitatori,</strong> aiutano le aziende ad adottare la tecnologia di certificazione blockchain di ORIGYN senza richiedere una profonda competenza in blockchain e Web3.</li><li><strong>In seguito a un processo di verifica</strong> condotto dalla Fondazione ORIGYN, gli integratori vengono eletti e votati dai detentori di token della DAO di ORIGYN.</li></ul>"
+          "description": "<ul><li><strong>Gli integratori sono società indipendenti</strong> che utilizzano il protocollo ORIGYN per certificare prodotti sulla blockchain, con l'obiettivo comune di coniare certificati ORIGYN e promuovere il protocollo in un settore specifico, in una classe di asset o in più ambiti.</li><li><strong>Si presentano in due forme:</strong> produttori che certificano i propri prodotti e abilitatori che aiutano altre aziende ad adottare la tecnologia di certificazione di ORIGYN senza richiedere una profonda competenza in blockchain o Web3.</li><li><strong>In seguito a un processo di verifica</strong> condotto dalla Fondazione ORIGYN, gli integratori vengono eletti dai detentori di token della DAO di ORIGYN.</li></ul>"
         },
         {
           "labelBold": "COME",
           "labelRest": "SI DIVENTA INTEGRATORI?",
-          "description": "Per diventare integratore, un'azienda deve dimostrare di poter erogare servizi su larga scala, soddisfacendo al contempo tutti i requisiti e le competenze necessari per servire uno o più settori specifici."
+          "description": "Per diventare integratore, un'azienda deve dimostrare di poter certificare prodotti su larga scala, propri o dei propri clienti, soddisfacendo al contempo i requisiti tecnici e le competenze settoriali necessari per servire uno o più settori."
         }
       ],
       "goToStep": "Vai al passaggio {n}",
