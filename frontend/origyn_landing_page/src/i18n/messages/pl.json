@@ -923,12 +923,12 @@
         {
           "labelBold": "KIM",
           "labelRest": "SĄ INTEGRATORZY?",
-          "description": "<ul><li><strong>Integratorzy to niezależne firmy,</strong> które budują produkty oparte na protokole ORIGYN, dążąc do wspólnego celu, jakim jest wybijanie certyfikatów ORIGYN i promowanie protokołu ORIGYN w określonej branży, klasie aktywów lub w wielu sektorach.</li><li><strong>Działając jako katalizatorzy,</strong> pomagają firmom adoptować technologię certyfikacji blockchain ORIGYN bez konieczności posiadania dogłębnej wiedzy z zakresu blockchain i Web3.</li><li><strong>Po przeprowadzeniu procesu weryfikacji</strong> przez Fundację ORIGYN integratorzy są wybierani i głosowani przez posiadaczy tokenów ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Integratorzy to niezależne firmy,</strong> które wykorzystują protokół ORIGYN do certyfikowania produktów na blockchainie, dążąc do wspólnego celu, jakim jest wybijanie certyfikatów ORIGYN i promowanie protokołu w określonej branży, klasie aktywów lub w wielu sektorach.</li><li><strong>Występują w dwóch formach:</strong> jako producenci certyfikujący własne produkty oraz jako katalizatorzy, którzy pomagają innym firmom wdrożyć technologię certyfikacji ORIGYN bez konieczności posiadania dogłębnej wiedzy z zakresu blockchain czy Web3.</li><li><strong>Po przeprowadzeniu procesu weryfikacji</strong> przez Fundację ORIGYN integratorzy są wybierani przez posiadaczy tokenów ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "JAK",
           "labelRest": "ZOSTAĆ INTEGRATOREM?",
-          "description": "Aby zostać integratorem, firma musi wykazać zdolność do świadczenia usług na dużą skalę, spełniając jednocześnie wszystkie wymagania i posiadając niezbędną wiedzę specjalistyczną do obsługi jednego lub wielu sektorów."
+          "description": "Aby zostać integratorem, firma musi wykazać, że potrafi certyfikować produkty na dużą skalę, zarówno własne, jak i swoich klientów, spełniając jednocześnie wymagania techniczne i posiadając wiedzę branżową niezbędną do obsługi jednej lub kilku branż."
         }
       ],
       "goToStep": "Przejdź do kroku {n}",

@@ -923,12 +923,12 @@
         {
           "labelBold": "KDO",
           "labelRest": "JSOU INTEGRÁTOŘI?",
-          "description": "<ul><li><strong>Integrátoři jsou nezávislé firmy,</strong> které budují produkty na základě protokolu ORIGYN se společným cílem vydávat certifikáty ORIGYN a propagovat protokol ORIGYN v konkrétním odvětví, třídě aktiv nebo napříč více sektory.</li><li><strong>Vystupují jako facilitátoři</strong> a pomáhají podnikům přijmout blockchainovou certifikační technologii ORIGYN bez nutnosti hlubokých znalostí blockchainu a Web3.</li><li><strong>Po prověřovacím procesu</strong> provedeném nadací ORIGYN Foundation jsou integrátoři zvoleni a schváleni hlasováním držitelů tokenů ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Integrátoři jsou nezávislé firmy,</strong> které využívají protokol ORIGYN k certifikaci produktů na blockchainu se společným cílem vydávat certifikáty ORIGYN a propagovat protokol v konkrétním odvětví, třídě aktiv nebo napříč více sektory.</li><li><strong>Existují ve dvou podobách:</strong> výrobci, kteří certifikují vlastní produkty, a facilitátoři, kteří pomáhají jiným podnikům přijmout certifikační technologii ORIGYN bez nutnosti hlubokých znalostí blockchainu nebo Web3.</li><li><strong>Po prověřovacím procesu</strong> provedeném nadací ORIGYN Foundation jsou integrátoři zvoleni držiteli tokenů ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "JAK",
           "labelRest": "SE STÁT INTEGRÁTOREM?",
-          "description": "Aby se společnost mohla stát integrátorem, musí prokázat, že je schopna poskytovat služby ve velkém měřítku a splňovat všechny požadavky a odborné předpoklady pro obsluhu jednoho nebo více sektorů."
+          "description": "Aby se společnost mohla stát integrátorem, musí prokázat, že dokáže certifikovat produkty ve velkém měřítku, ať už vlastní, nebo svých klientů, a zároveň splňuje technické požadavky a má odborné znalosti potřebné pro obsluhu jednoho či více odvětví."
         }
       ],
       "goToStep": "Přejít na krok {n}",

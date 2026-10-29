@@ -885,12 +885,12 @@
         {
           "labelBold": "WER",
           "labelRest": "SIND DIE INTEGRATOREN?",
-          "description": "<ul><li><strong>Integratoren sind unabhängige Unternehmen,</strong> die Produkte auf Basis des ORIGYN-Protokolls entwickeln mit dem gemeinsamen Ziel, ORIGYN-Zertifikate zu minten und das ORIGYN-Protokoll in einer bestimmten Branche, einer Anlageklasse oder branchenübergreifend zu fördern.</li><li><strong>Als Enabler</strong> helfen sie Unternehmen, die Blockchain-Zertifizierungstechnologie von ORIGYN zu übernehmen, ohne tiefgreifende Blockchain- und Web3-Kenntnisse zu benötigen.</li><li><strong>Nach einem Prüfungsprozess</strong> durch die ORIGYN Foundation werden Integratoren von den OGY-Token-Inhabern der ORIGYN DAO gewählt und bestätigt.</li></ul>"
+          "description": "<ul><li><strong>Integratoren sind unabhängige Unternehmen,</strong> die das ORIGYN-Protokoll nutzen, um Produkte auf der Blockchain zu zertifizieren, mit dem gemeinsamen Ziel, ORIGYN-Zertifikate zu minten und das Protokoll in einer bestimmten Branche, einer Anlageklasse oder branchenübergreifend zu fördern.</li><li><strong>Es gibt sie in zwei Formen:</strong> Hersteller, die ihre eigenen Produkte zertifizieren, und Enabler, die anderen Unternehmen helfen, die Zertifizierungstechnologie von ORIGYN zu übernehmen, ohne tiefgreifende Blockchain- oder Web3-Kenntnisse zu benötigen.</li><li><strong>Nach einem Prüfungsprozess</strong> durch die ORIGYN Foundation werden Integratoren von den Token-Inhabern der ORIGYN DAO gewählt.</li></ul>"
         },
         {
           "labelBold": "WIE",
           "labelRest": "WERDEN SIE INTEGRATOR?",
-          "description": "Um Integrator zu werden, muss ein Unternehmen nachweisen, dass es Dienstleistungen im großen Maßstab erbringen kann und dabei alle Anforderungen und das erforderliche Fachwissen für einen oder mehrere spezifische Sektoren erfüllt."
+          "description": "Um Integrator zu werden, muss ein Unternehmen nachweisen, dass es Produkte im großen Maßstab zertifizieren kann, ob eigene oder die seiner Kunden, und dabei die technischen Anforderungen sowie das Branchen-Know-how erfüllt, um eine oder mehrere Branchen zu bedienen."
         }
       ],
       "goToStep": "Zu Schritt {n}",

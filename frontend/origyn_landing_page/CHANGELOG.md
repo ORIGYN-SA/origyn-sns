@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.3] - 2026-10-29
+
+#### Changed
+
+- Rewrite the "Who are the integrators?" and "How do you become an integrator?" cards on the integrator page to describe the two kinds of integrators: manufacturers certifying their own products and enablers serving other businesses
+
 ### [1.7.2] - 2026-10-27
 
 #### Changed

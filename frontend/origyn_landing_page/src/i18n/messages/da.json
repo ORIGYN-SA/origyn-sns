@@ -923,12 +923,12 @@
         {
           "labelBold": "HVEM",
           "labelRest": "ER INTEGRATORERNE ?",
-          "description": "<ul><li><strong>Integratorer er uafhængige virksomheder</strong>, der bygger produkter baseret på ORIGYN-protokollen med det fælles mål at minte ORIGYN-certifikater og fremme ORIGYN-protokollen inden for en specifik branche, en aktivklasse eller på tværs af flere sektorer.</li><li><strong>Som facilitatorer</strong> hjælper de virksomheder med at adoptere ORIGYNs blockchain-certificeringsteknologi uden at kræve dyb blockchain- og Web3-ekspertise.</li><li><strong>Efter en due diligence-proces</strong> gennemført af ORIGYN Foundation vælges og godkendes integratorer af ORIGYN DAO-tokenindehavere.</li></ul>"
+          "description": "<ul><li><strong>Integratorer er uafhængige virksomheder</strong>, der bruger ORIGYN-protokollen til at certificere produkter på blockchainen, med det fælles mål at minte ORIGYN-certifikater og fremme protokollen inden for en specifik branche, en aktivklasse eller på tværs af flere sektorer.</li><li><strong>De findes i to former:</strong> producenter, der certificerer deres egne produkter, og facilitatorer, der hjælper andre virksomheder med at tage ORIGYNs certificeringsteknologi i brug uden at kræve dyb blockchain- eller Web3-ekspertise.</li><li><strong>Efter en due diligence-proces</strong> gennemført af ORIGYN Foundation vælges integratorer af ORIGYN DAO-tokenindehavere.</li></ul>"
         },
         {
           "labelBold": "HVORDAN",
           "labelRest": "BLIVER DU INTEGRATOR ?",
-          "description": "For at blive integrator skal en virksomhed dokumentere, at den kan levere tjenester i stor skala, mens den opfylder alle krav og besidder den nødvendige ekspertise til at betjene en eller flere sektorer."
+          "description": "For at blive integrator skal en virksomhed dokumentere, at den kan certificere produkter i stor skala, hvad enten det er dens egne eller dens kunders, og samtidig opfylde de tekniske krav og have den brancheekspertise, der skal til for at betjene en eller flere brancher."
         }
       ],
       "goToStep": "Gå til trin {n}",

@@ -923,12 +923,12 @@
         {
           "labelBold": "谁是",
           "labelRest": "集成商？",
-          "description": "<ul><li><strong>集成商是独立机构，</strong>以 ORIGYN 协议为基础构建产品，共同致力于铸造 ORIGYN 证书，并在特定行业、特定资产类别或跨多个领域推广 ORIGYN 协议。</li><li><strong>作为赋能者，</strong>集成商帮助企业采用 ORIGYN 区块链认证技术，无需具备深厚的区块链与 Web3 专业知识。</li><li><strong>经过 ORIGYN 基金会主导的审查流程后，</strong>集成商由 ORIGYN DAO 代币持有者选举和投票通过。</li></ul>"
+          "description": "<ul><li><strong>集成商是独立机构，</strong>使用 ORIGYN 协议在区块链上认证产品，共同致力于铸造 ORIGYN 证书，并在特定行业、特定资产类别或跨多个领域推广该协议。</li><li><strong>集成商分为两类：</strong>认证自有产品的制造商，以及帮助其他企业采用 ORIGYN 认证技术、无需具备深厚区块链或 Web3 专业知识的赋能者。</li><li><strong>经过 ORIGYN 基金会主导的审查流程后，</strong>集成商由 ORIGYN DAO 代币持有者选举产生。</li></ul>"
         },
         {
           "labelBold": "如何",
           "labelRest": "成为集成商？",
-          "description": "要成为集成商，企业须证明其具备大规模交付服务的能力，同时满足服务特定或多个行业所需的全部要求与专业资质。"
+          "description": "要成为集成商，企业须证明其能够大规模认证产品（无论是自有产品还是客户产品），同时满足服务一个或多个行业所需的技术要求与行业专业知识。"
         }
       ],
       "goToStep": "前往第 {n} 步",

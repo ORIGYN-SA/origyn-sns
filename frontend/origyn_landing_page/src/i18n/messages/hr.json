@@ -923,12 +923,12 @@
         {
           "labelBold": "TKO",
           "labelRest": "SU INTEGRATORI?",
-          "description": "<ul><li><strong>Integratori su neovisne tvrtke</strong> koje grade proizvode temeljene na ORIGYN protokolu sa zajedničkim ciljem iskivanja ORIGYN certifikata i promicanja ORIGYN protokola u određenoj industriji, klasi imovine ili kroz više sektora.</li><li><strong>Djelujući kao omogućitelji,</strong> pomažu tvrtkama da usvoje ORIGYN-ovu blockchain tehnologiju certifikacije bez potrebe za dubokim blockchain i Web3 znanjem.</li><li><strong>Nakon procesa provjere</strong> koji provodi ORIGYN Fondacija, integratori se biraju i glasaju od strane nositelja tokena ORIGYN DAO-a.</li></ul>"
+          "description": "<ul><li><strong>Integratori su neovisne tvrtke</strong> koje koriste ORIGYN protokol za certificiranje proizvoda na blockchainu, sa zajedničkim ciljem iskivanja ORIGYN certifikata i promicanja protokola u određenoj industriji, klasi imovine ili kroz više sektora.</li><li><strong>Postoje u dva oblika:</strong> proizvođači koji certificiraju vlastite proizvode i omogućitelji koji pomažu drugim tvrtkama da usvoje ORIGYN-ovu tehnologiju certifikacije bez potrebe za dubokim znanjem o blockchainu ili Web3.</li><li><strong>Nakon procesa provjere</strong> koji provodi ORIGYN Fondacija, integratore biraju nositelji tokena ORIGYN DAO-a.</li></ul>"
         },
         {
           "labelBold": "KAKO",
           "labelRest": "POSTATI INTEGRATOR?",
-          "description": "Kako bi postala integrator, tvrtka mora dokazati da može pružati usluge u velikom obimu, ispunjavajući sve zahtjeve i stručnost za posluživanje jednog ili više sektora."
+          "description": "Kako bi postala integrator, tvrtka mora dokazati da može certificirati proizvode u velikom opsegu, bilo vlastite ili svojih klijenata, ispunjavajući pritom tehničke zahtjeve i sektorsku stručnost potrebnu za posluživanje jedne ili više industrija."
         }
       ],
       "goToStep": "Idi na korak {n}",

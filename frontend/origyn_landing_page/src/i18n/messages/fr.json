@@ -923,12 +923,12 @@
         {
           "labelBold": "QUI",
           "labelRest": "SONT LES INTÉGRATEURS ?",
-          "description": "<ul><li><strong>Les intégrateurs sont des entreprises indépendantes</strong> qui construisent des produits basés sur le protocole ORIGYN avec pour objectif commun de créer des certificats ORIGYN et de promouvoir le protocole ORIGYN dans un secteur spécifique, une classe d'actifs ou plusieurs secteurs.</li><li><strong>Agissant comme facilitateurs,</strong> ils aident les entreprises à adopter la technologie de certification blockchain d'ORIGYN sans nécessiter une expertise approfondie en blockchain et en Web3.</li><li><strong>À l'issue d'un processus de vérification</strong> conduit par la Fondation ORIGYN, les intégrateurs sont élus et votés par les détenteurs de tokens de l'ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Les intégrateurs sont des entreprises indépendantes</strong> qui utilisent le protocole ORIGYN pour certifier des produits sur la blockchain, avec pour objectif commun de créer des certificats ORIGYN et de promouvoir le protocole dans un secteur spécifique, une classe d'actifs ou plusieurs secteurs.</li><li><strong>Ils prennent deux formes :</strong> les fabricants, qui certifient leurs propres produits, et les facilitateurs, qui aident d'autres entreprises à adopter la technologie de certification d'ORIGYN sans nécessiter une expertise approfondie en blockchain ou en Web3.</li><li><strong>À l'issue d'un processus de vérification</strong> conduit par la Fondation ORIGYN, les intégrateurs sont élus par les détenteurs de tokens de l'ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "COMMENT",
           "labelRest": "DEVENIR INTÉGRATEUR ?",
-          "description": "Pour devenir intégrateur, une entreprise doit démontrer sa capacité à fournir des services à grande échelle, tout en satisfaisant toutes les exigences et en disposant de l'expertise nécessaire pour servir un ou plusieurs secteurs."
+          "description": "Pour devenir intégrateur, une entreprise doit démontrer sa capacité à certifier des produits à grande échelle, les siens ou ceux de ses clients, tout en satisfaisant les exigences techniques et en disposant de l'expertise sectorielle nécessaires pour servir une ou plusieurs industries."
         }
       ],
       "goToStep": "Aller à l'étape {n}",

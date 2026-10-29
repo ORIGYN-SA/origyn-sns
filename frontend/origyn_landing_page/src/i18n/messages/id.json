@@ -923,12 +923,12 @@
         {
           "labelBold": "SIAPA",
           "labelRest": "PARA INTEGRATOR?",
-          "description": "<ul><li><strong>Integrator adalah perusahaan independen</strong> yang membangun produk berbasis protokol ORIGYN dengan tujuan bersama mencetak sertifikat ORIGYN dan mempromosikan protokol ORIGYN di industri tertentu, dalam kelas aset, atau lintas beberapa sektor.</li><li><strong>Bertindak sebagai enabler,</strong> mereka membantu bisnis mengadopsi teknologi sertifikasi blockchain ORIGYN tanpa memerlukan keahlian mendalam di bidang blockchain dan Web3.</li><li><strong>Setelah melalui proses vetting</strong> yang dilakukan oleh ORIGYN Foundation, integrator dipilih dan divotasi oleh pemegang token ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Integrator adalah perusahaan independen</strong> yang menggunakan protokol ORIGYN untuk menyertifikasi produk di blockchain, dengan tujuan bersama mencetak sertifikat ORIGYN dan mempromosikan protokol di industri tertentu, dalam kelas aset, atau lintas beberapa sektor.</li><li><strong>Ada dua jenis integrator:</strong> produsen yang menyertifikasi produk mereka sendiri, dan enabler yang membantu bisnis lain mengadopsi teknologi sertifikasi ORIGYN tanpa memerlukan keahlian mendalam di bidang blockchain atau Web3.</li><li><strong>Setelah melalui proses vetting</strong> yang dilakukan oleh ORIGYN Foundation, integrator dipilih oleh pemegang token ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "BAGAIMANA",
           "labelRest": "CARA MENJADI INTEGRATOR?",
-          "description": "Untuk menjadi integrator, sebuah perusahaan harus menunjukkan bahwa ia mampu memberikan layanan dalam skala besar, sekaligus memenuhi semua persyaratan dan keahlian untuk melayani satu atau beberapa sektor tertentu."
+          "description": "Untuk menjadi integrator, sebuah perusahaan harus menunjukkan bahwa ia mampu menyertifikasi produk dalam skala besar, baik milik sendiri maupun milik kliennya, sekaligus memenuhi persyaratan teknis dan keahlian sektoral yang dibutuhkan untuk melayani satu atau beberapa industri."
         }
       ],
       "goToStep": "Pergi ke langkah {n}",

@@ -923,12 +923,12 @@
         {
           "labelBold": "QUEM",
           "labelRest": "SÃO OS INTEGRADORES?",
-          "description": "<ul><li><strong>Os integradores são empresas independentes</strong> que desenvolvem produtos baseados no protocolo ORIGYN com o objetivo comum de emitir certificados ORIGYN e promover o protocolo ORIGYN numa indústria específica, numa classe de ativos ou em múltiplos setores.</li><li><strong>Atuando como facilitadores,</strong> ajudam as empresas a adotar a tecnologia de certificação blockchain da ORIGYN sem exigir conhecimentos aprofundados de blockchain e Web3.</li><li><strong>Após um processo de avaliação</strong> conduzido pela Fundação ORIGYN, os integradores são eleitos e votados pelos detentores de tokens do ORIGYN DAO.</li></ul>"
+          "description": "<ul><li><strong>Os integradores são empresas independentes</strong> que utilizam o protocolo ORIGYN para certificar produtos na blockchain, com o objetivo comum de emitir certificados ORIGYN e promover o protocolo numa indústria específica, numa classe de ativos ou em múltiplos setores.</li><li><strong>Dividem-se em dois tipos:</strong> fabricantes que certificam os seus próprios produtos e facilitadores que ajudam outras empresas a adotar a tecnologia de certificação da ORIGYN sem exigir conhecimentos aprofundados de blockchain ou Web3.</li><li><strong>Após um processo de avaliação</strong> conduzido pela Fundação ORIGYN, os integradores são eleitos pelos detentores de tokens do ORIGYN DAO.</li></ul>"
         },
         {
           "labelBold": "COMO",
           "labelRest": "SE TORNA UM INTEGRADOR?",
-          "description": "Para se tornar integrador, uma empresa deve demonstrar que consegue prestar serviços à escala, satisfazendo simultaneamente todos os requisitos e dispondo da especialização necessária para servir um ou múltiplos setores."
+          "description": "Para se tornar integrador, uma empresa deve demonstrar que consegue certificar produtos à escala, próprios ou dos seus clientes, satisfazendo os requisitos técnicos e dispondo da especialização setorial necessária para servir uma ou várias indústrias."
         }
       ],
       "goToStep": "Ir para o passo {n}",

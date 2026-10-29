@@ -923,12 +923,12 @@
         {
           "labelBold": "整合商",
           "labelRest": "是哪些單位？",
-          "description": "<ul><li><strong>整合商是獨立企業，</strong>以 ORIGYN 協定為基礎建構產品，共同目標為鑄造 ORIGYN 認證書，並在特定產業、資產類別或跨多個行業推廣 ORIGYN 協定。</li><li><strong>作為賦能者，</strong>他們協助企業採用 ORIGYN 的區塊鏈認證技術，無需深厚的區塊鏈與 Web3 專業知識。</li><li><strong>經 ORIGYN 基金會的審查程序後，</strong>整合商由 ORIGYN DAO 代幣持有者選舉投票產生。</li></ul>"
+          "description": "<ul><li><strong>整合商是獨立企業，</strong>使用 ORIGYN 協定在區塊鏈上認證產品，共同目標為鑄造 ORIGYN 認證書，並在特定產業、資產類別或跨多個行業推廣該協定。</li><li><strong>整合商分為兩類：</strong>認證自有產品的製造商，以及協助其他企業採用 ORIGYN 認證技術、無需深厚區塊鏈或 Web3 專業知識的賦能者。</li><li><strong>經 ORIGYN 基金會的審查程序後，</strong>整合商由 ORIGYN DAO 代幣持有者選舉產生。</li></ul>"
         },
         {
           "labelBold": "如何",
           "labelRest": "成為整合商？",
-          "description": "若要成為整合商，企業必須證明其具備大規模提供服務的能力，同時符合服務特定或多個行業所需的全部要求與專業資質。"
+          "description": "若要成為整合商，企業必須證明其能夠大規模認證產品（無論是自有產品或客戶產品），同時符合服務一個或多個產業所需的技術要求與產業專業知識。"
         }
       ],
       "goToStep": "前往第 {n} 步",
