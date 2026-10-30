@@ -687,28 +687,6 @@
       "error": "Overdrachtsfout!"
     }
   },
-  "support": {
-    "category": "Ondersteuning",
-    "title": "Een ticket aanmaken",
-    "titleSubmitted": "Ticket verzonden",
-    "successTitle": "Supportticket aangemaakt",
-    "successMessage": "We nemen contact met je op via het opgegeven e-mailadres.",
-    "submitAnother": "Nog een ticket indienen",
-    "intro": "Beschrijf je probleem en hoe we je kunnen bereiken.",
-    "form": {
-      "name": "Naam",
-      "email": "Contact-e-mail",
-      "emailRequired": "E-mailadres is vereist",
-      "emailInvalid": "Ongeldig e-mailadres",
-      "principal": "Wallet-principal",
-      "invalidPrincipal": "Ongeldig ontvangeradres.",
-      "description": "Beschrijving",
-      "descriptionPlaceholder": "Vertel ons wat er aan de hand is…",
-      "descriptionRequired": "Beschrijf je probleem"
-    },
-    "submitError": "Er is iets misgegaan. Probeer het opnieuw.",
-    "submitting": "Verzenden…"
-  },
   "explorer": {
     "title": "Viewer",
     "subtitle": "Bekijk en verifieer ORIGYN-certificaten, collecties en verzamelaars op de blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Ontdek het OGY-aanbod, staking, governance en transacties op het ORIGYN-dashboard.",
     "transactions": "Bekijk OGY-overboekingen, tokenverbrandingen en accountactiviteit in het ORIGYN-grootboek.",
-    "support": "Neem contact op met ORIGYN-support voor hulp met je wallet, tokens of dashboard.",
     "transfersTitle": "Grootste OGY-overboekingen",
     "burnsTitle": "Grootste OGY-verbrandingen"
   }

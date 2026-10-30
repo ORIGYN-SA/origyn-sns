@@ -687,28 +687,6 @@
       "error": "送金エラー！"
     }
   },
-  "support": {
-    "category": "サポート",
-    "title": "チケットを作成",
-    "titleSubmitted": "チケットを送信しました",
-    "successTitle": "サポートチケットを作成しました",
-    "successMessage": "ご提供いただいたメールアドレスにご連絡いたします。",
-    "submitAnother": "別のチケットを送信",
-    "intro": "問題の内容と連絡方法をご記入ください。",
-    "form": {
-      "name": "名前",
-      "email": "連絡先メールアドレス",
-      "emailRequired": "メールアドレスは必須です",
-      "emailInvalid": "メールアドレスが無効です",
-      "principal": "ウォレットのプリンシパル",
-      "invalidPrincipal": "受取人アドレスが無効です。",
-      "description": "説明",
-      "descriptionPlaceholder": "何が起きているか教えてください…",
-      "descriptionRequired": "問題の内容をご記入ください"
-    },
-    "submitError": "問題が発生しました。もう一度お試しください。",
-    "submitting": "送信中…"
-  },
   "explorer": {
     "title": "ビューア",
     "subtitle": "ブロックチェーン上で ORIGYN の証明書、コレクション、コレクターを閲覧・検証できます。",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "ORIGYNダッシュボードでOGYの供給量、ステーキング、ガバナンス、取引を確認できます。",
     "transactions": "ORIGYN台帳でOGYの送金、トークンのバーン、アカウントの活動を確認できます。",
-    "support": "ウォレット、トークン、ダッシュボードについてはORIGYNサポートにお問い合わせください。",
     "transfersTitle": "OGYの高額送金",
     "burnsTitle": "OGYの大規模バーン"
   }

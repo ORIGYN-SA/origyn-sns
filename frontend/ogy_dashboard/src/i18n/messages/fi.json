@@ -687,28 +687,6 @@
       "error": "Siirtovirhe!"
     }
   },
-  "support": {
-    "category": "Tuki",
-    "title": "Luo tukipyyntö",
-    "titleSubmitted": "Tukipyyntö lähetetty",
-    "successTitle": "Tukipyyntö luotu",
-    "successMessage": "Otamme yhteyttä antamaasi sähköpostiosoitteeseen.",
-    "submitAnother": "Lähetä toinen tukipyyntö",
-    "intro": "Kuvaile ongelmasi ja miten voimme tavoittaa sinut.",
-    "form": {
-      "name": "Nimi",
-      "email": "Yhteyssähköposti",
-      "emailRequired": "Sähköpostiosoite on pakollinen",
-      "emailInvalid": "Virheellinen sähköpostiosoite",
-      "principal": "Lompakon principal",
-      "invalidPrincipal": "Virheellinen vastaanottajan osoite.",
-      "description": "Kuvaus",
-      "descriptionPlaceholder": "Kerro meille, mistä on kyse…",
-      "descriptionRequired": "Kuvaile ongelmasi"
-    },
-    "submitError": "Jokin meni vikaan. Yritä uudelleen.",
-    "submitting": "Lähetetään…"
-  },
   "explorer": {
     "title": "Katselin",
     "subtitle": "Selaa ja vahvista ORIGYN-sertifikaatteja, kokoelmia ja keräilijöitä lohkoketjussa.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Tutustu OGY:n tarjontaan, steikkaukseen, hallintoon ja tapahtumiin ORIGYN-hallintapaneelissa.",
     "transactions": "Selaa OGY-siirtoja, tokenien polttoja ja tilien toimintaa ORIGYN-tilikirjassa.",
-    "support": "Ota yhteyttä ORIGYN-tukeen saadaksesi apua lompakon, tokenien tai hallintapaneelin käyttöön.",
     "transfersTitle": "Suurimmat OGY-siirrot",
     "burnsTitle": "Suurimmat OGY-poltot"
   }

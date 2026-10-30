@@ -167,13 +167,6 @@ export const pages: DashboardPage[] = [
     indexable: false,
   }),
   page({
-    id: "support",
-    path: "support",
-    title: "footer.support.contactSupport",
-    description: "seo.support",
-    indexable: false,
-  }),
-  page({
     id: "calculator",
     path: "calculator",
     title: "calculator.header.title",

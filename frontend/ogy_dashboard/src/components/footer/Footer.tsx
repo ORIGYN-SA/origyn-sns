@@ -86,7 +86,6 @@ const Footer = () => {
   ];
 
   const supportLinks: InternalLinkItem[] = [
-    { label: t("footer.support.contactSupport"), to: "/support" },
     { label: t("footer.support.recoverTokens"), to: "/recovery" },
   ];
 
@@ -161,6 +160,11 @@ const Footer = () => {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href="mailto:techsupport@origyn.ch" className={linkClass}>
+                  {t("footer.support.contactSupport")}
+                </a>
+              </li>
               {supportLinks.map(({ label, to }) => (
                 <li key={to}>
                   <Link to={lp(to)} className={linkClass}>

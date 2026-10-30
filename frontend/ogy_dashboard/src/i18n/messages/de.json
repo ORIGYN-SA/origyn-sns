@@ -687,28 +687,6 @@
       "error": "Übertragungsfehler!"
     }
   },
-  "support": {
-    "category": "Support",
-    "title": "Ticket erstellen",
-    "titleSubmitted": "Ticket übermittelt",
-    "successTitle": "Support-Ticket erstellt",
-    "successMessage": "Wir melden uns unter der von dir angegebenen E-Mail-Adresse.",
-    "submitAnother": "Weiteres Ticket einreichen",
-    "intro": "Beschreibe dein Problem und wie wir dich erreichen können.",
-    "form": {
-      "name": "Name",
-      "email": "Kontakt-E-Mail",
-      "emailRequired": "E-Mail-Adresse ist erforderlich",
-      "emailInvalid": "Ungültige E-Mail-Adresse",
-      "principal": "Wallet-Principal",
-      "invalidPrincipal": "Ungültige Empfängeradresse.",
-      "description": "Beschreibung",
-      "descriptionPlaceholder": "Erzähl uns, was los ist…",
-      "descriptionRequired": "Bitte beschreibe dein Problem"
-    },
-    "submitError": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
-    "submitting": "Wird übermittelt…"
-  },
   "explorer": {
     "title": "Viewer",
     "subtitle": "Entdecke und verifiziere ORIGYN-Zertifikate, Sammlungen und Sammler auf der Blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Entdecken Sie OGY-Angebot, Staking, Governance und Transaktionen im ORIGYN-Dashboard.",
     "transactions": "Durchsuchen Sie OGY-Transfers, Token-Burns und Kontoaktivitäten im ORIGYN-Ledger.",
-    "support": "Kontaktieren Sie den ORIGYN-Support für Hilfe mit Ihrer Wallet, Ihren Token oder dem Dashboard.",
     "transfersTitle": "Größte OGY-Transfers",
     "burnsTitle": "Größte OGY-Burns"
   }
