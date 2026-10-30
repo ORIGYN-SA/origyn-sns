@@ -24,57 +24,51 @@ interface it's just the meta details of the NFT, i.e, it's weight that change. Y
   - `/common` - this holds types used across all other folders
   - `/api` - holds the API interface types for the main swap canister
   - `/impl` - holds the business logic / core code for the main swap canister
-  - `/libraries`, `/external_canisters` - copies of the shared libraries and external canister clients this canister was built with in the Gold DAO repository
+- `backend/external_canisters/gldt_swap_archive` - API types and C2C client of the old swap archive canister (`gldt_swap_old_archive`)
+- `backend/libraries/cbor` - CBOR helpers used by the common types
 
 ## Folder structure - integration tests
-- `backend/canisters/gldt_swap/integration_tests/src/gldt_swap_suite` - holds the suite of tests dedicated to the gldt swap backend canister
+- `backend/integration_tests/src/gldt_swap_suite` - holds the suite of tests dedicated to the gldt swap backend canister
+- `backend/integration_tests/src/origyn_nft_test_env` - the GLD NFT test environment the suite installs from `backend/integration_tests/wasms/origyn_nft_canister.wasm.gz`
 
-## Standalone Cargo workspace
+## Handover from Gold DAO
 
 GLDT Swap was handed over from Gold DAO to ORIGYN DAO (Gold DAO SNS proposal 403) and moved here from the
-gold-dao repository as is. `backend/canisters/gldt_swap` is its own Cargo workspace, excluded from the root
-workspace, so it keeps the exact dependency set of the deployed canister (ic-cdk 0.20, ic-stable-structures 0.6,
-bity-ic-icrc3 0.5, pocket-ic 9).
+gold-dao repository as is. The crates are members of the root Cargo workspace and use its shared dependency
+versions, with one exception: `bity-ic-icrc3` is pinned to 0.5.x in `api/Cargo.toml` and `impl/Cargo.toml`,
+the version the deployed canister (build 2.0.1) serialized its ICRC-3 state with.
 
-Do not move it to the root workspace dependencies without a stable state migration: bity-ic-icrc3 >= 0.5 changes
+Do not switch it to the workspace version of `bity-ic-icrc3` (0.7) without a stable state migration: 0.7 changes
 the serialized `Blockchain` layout restored in `post_upgrade`, and allocates its own `MemoryManager` on stable
 memory, which would conflict with the memory manager in `impl/src/memory.rs`.
 
 ```bash
-scripts/build-canister.sh gldt_swap                                    # build (uses this workspace's manifest)
-cargo test --manifest-path backend/canisters/gldt_swap/Cargo.toml -p gldt_swap   # unit tests
-scripts/build-canister.sh -it gldt_swap                                # build for integration tests
-POCKET_IC_BIN=<path to pocket-ic 9.x server> \
-  cargo test --manifest-path backend/canisters/gldt_swap/Cargo.toml -p gldt_swap_integration_tests
+scripts/build-canister.sh gldt_swap        # optimized and gzipped build
+cargo test -p gldt_swap                    # unit tests
+scripts/build-canister.sh -it gldt_swap    # build with the integration test hooks
 ```
-
 
 ## Running integration tests locally
 
-1 - Typically you'll first need to make sure you have PocketIC v9.0.0 or above in the correct location below. Please make sure to read the [instructions](https://github.com/dfinity/pocketic) provided by PocketIC
-> /backend/integration_testing/pocket-ic
-
-2 - Now you have PocketIC downloaded in the correct location and correct execution permissions. you may need to alter how many open files your computer ( Mac ) may open. so open your terminal of choice and enter the following commands.
+1 - Build all canisters for testing, download the PocketIC server into `backend/integration_tests/` and run the
+whole suite in one go. On macOS you may need to raise the open file limits first.
 ```bash
    ulimit -n 202400
    ulimit -f 2024000
+   ./scripts/run-integration-tests.sh
 ```
 
-3 - Now you have run the integration tests. To do this, there is a handy script that builds the project and runs the integration tests for you. 
+2 - To rerun only the swap suite without rebuilding:
 ```bash
-./scripts/manual/run-integration-tests.sh
+cargo test -p integration_tests gldt_swap_suite -- --nocapture
 ```
 
-## Deployment to staging
+## Deployment
 
-1) ensure you have the GLD staging principal
-
-2) build and deploy in one single command
-```bash
-./scripts/_local/manual/deploy-gldt-swap.sh
-```
-
-
+CI deploys through `scripts/canister-deploy/deploy-gldt_swap.sh <network>`: to staging when a merge lands on
+`develop` (or manually from a merge request pipeline), and to mainnet by SNS proposal on a `gldt_swap-vX.Y.Z` tag.
+Upgrades pass only the version and commit hash; the init arguments in that script are used when the CI variable
+`REINSTALL_STAGING` is set to `gldt_swap` or `all`, which reinstalls on staging only.
 
 
 ## Architecture & Features
