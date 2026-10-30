@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Explorer top 100 holders now come from the GLDT analytics API (`api.gldt.org`) instead of the GLDT super_stats canister
 - Subaccount holders in the top 100 list now link to the right account page
+- Content-Security-Policy `connect-src` allows `https://api.gldt.org`, without which the browser blocks the top holders request
 
 ### [1.2.1] - 2026-02-17
 
