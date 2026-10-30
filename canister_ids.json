@@ -60,5 +60,26 @@
   "claimlink_backend": {
     "ic": "uasjq-dyaaa-aaaas-qdwka-cai",
     "staging": "zqa57-zaaaa-aaaah-qqopq-cai"
+  },
+  "gldt_ledger": {
+    "ic": "6c7su-kiaaa-aaaar-qaira-cai",
+    "staging": "6uad6-fqaaa-aaaam-abovq-cai"
+  },
+  "gldt_ledger_indexer": {
+    "ic": "oo6x4-xiaaa-aaaap-abrza-cai",
+    "staging": "wusb2-uiaaa-aaaao-a2lca-cai"
+  },
+  "gldt_swap": {
+    "ic": "6f6ua-hqaaa-aaaar-qairq-cai",
+    "staging": "m45be-jaaaa-aaaak-qcgnq-cai"
+  },
+  "gldt_swap_app": {
+    "ic": "oj7ri-2qaaa-aaaap-abrzq-cai",
+    "preprod": "wmd7w-pqaaa-aaaai-qplaa-cai",
+    "staging": "qfyvj-4qaaa-aaaam-qbfka-cai"
+  },
+  "gldt_swap_old_archive": {
+    "ic": "van23-gaaaa-aaaar-qajmq-cai",
+    "staging": "yx6zg-byaaa-aaaak-qucpq-cai"
   }
 }

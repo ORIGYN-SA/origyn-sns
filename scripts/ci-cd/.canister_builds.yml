@@ -11,6 +11,7 @@ spec:
           "token_metrics",
           "canister_jobs",
           "collection_index",
+          "gldt_swap",
         ]
 ---
 # Rust canisters builds
