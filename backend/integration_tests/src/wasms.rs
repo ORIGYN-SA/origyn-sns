@@ -11,6 +11,7 @@ lazy_static! {
     pub static ref IC_ICRC1_LEDGER: CanisterWasm = get_canister_wasm("ic_icrc1_ledger");
     pub static ref IC_ICRC2_LEDGER: CanisterWasm = get_canister_wasm_gz("icrc_ledger");
     pub static ref ORIGYN_NFT: CanisterWasm = get_external_canister_wasm("origyn_nft_reference");
+    pub static ref ORIGYN_NFT_ICRC7: CanisterWasm = get_canister_wasm_gz("origyn_nft");
 
     pub static ref SNS_REWARDS_OLD: CanisterWasm = get_canister_wasm_gz("sns_rewards_old");
     pub static ref GOLD_REWARDS: CanisterWasm = get_external_canister_wasm("sns_rewards");
@@ -21,6 +22,7 @@ lazy_static! {
     pub static ref CANISTER_JOBS: CanisterWasm = get_internal_canister_wasm("canister_jobs");
     pub static ref COLLECTION_INDEX: CanisterWasm = get_internal_canister_wasm("collection_index");
     pub static ref BUYBACK_BURN: CanisterWasm = get_internal_canister_wasm("dex_interaction");
+    pub static ref GLDT_SWAP: CanisterWasm = get_internal_canister_wasm("gldt_swap");
 
     // SNS wasms
     pub static ref SNS_SWAP: CanisterWasm = get_canister_wasm_gz("sns_swap");

@@ -1,11 +1,14 @@
 #![allow(dead_code)]
 
 pub mod collection_index;
+pub mod gldt_swap;
 pub mod icrc1;
+pub mod icrc1_icrc2_token;
 pub mod macros;
 pub mod nns_governance;
 pub mod ogy_legacy_ledger;
 pub mod ogy_token_swap;
+pub mod origyn_nft;
 pub mod origyn_nft_reference;
 pub mod pocket;
 pub mod sns_governance;

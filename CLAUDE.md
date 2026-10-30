@@ -24,7 +24,7 @@ scripts/build-all-canister.sh
 scripts/build-canister.sh --verify <CANISTER_NAME>
 ```
 
-Canister names: `ogy_token_swap`, `sns_rewards`, `canister_jobs`, `collection_index`, `dex_interaction`, `sns_neuron_controller`
+Canister names: `ogy_token_swap`, `sns_rewards`, `canister_jobs`, `collection_index`, `dex_interaction`, `sns_neuron_controller`, `gldt_swap`
 
 ### Frontend (React/Vite)
 
@@ -100,6 +100,7 @@ Wrappers for IC ledgers and SNS governance with:
 
 - `frontend/ogy_dashboard` - Main OGY dashboard (React 18, Vite, TailwindCSS)
 - `frontend/origyn_landing_page` - Landing page (React 19)
+- `frontend/gldt_swap_app` - GLDT swap app moved from the Gold DAO repo. Standalone pnpm project with its own lockfile, not in the npm workspaces; its CI jobs are in `scripts/ci-cd/.gldt_swap_app.yml`
 
 Both use Dfinity Agent for IC blockchain interaction.
 

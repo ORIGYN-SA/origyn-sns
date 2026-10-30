@@ -1,0 +1,309 @@
+// [Account](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value)
+// representation of ledgers supporting the ICRC-1 standard.
+type Account = record { owner : principal; subaccount : opt blob };
+// Information about where to find archived blocks. Returned as part of [`GetBlocksResult`].
+type ArchivedBlocks = record {
+  args : vec GetBlocksRequest;
+  callback : func (vec GetBlocksRequest) -> (GetBlocksResult) query;
+};
+type Args = record { "principal" : opt principal; canister_id : principal };
+type Args_1 = variant { Upgrade : UpgradeArgs; Init : InitArgs };
+// A block with an ID. Returned as part of [`GetBlocksResult`].
+type BlockWithId = record { id : nat; block : ICRC3Value };
+// Represents a semantic version number following the MAJOR.MINOR.PATCH format.
+// 
+// # Examples
+// 
+// ```
+// use types::BuildVersion;
+// 
+// let version = BuildVersion::new(1, 2, 3);
+// assert_eq!(version.to_string(), "1.2.3");
+// 
+// let parsed = "1.2.3".parse::<BuildVersion>().unwrap();
+// assert_eq!(version, parsed);
+// ```
+type BuildVersion = record {
+  // Major version number, incremented for incompatible API changes
+  major : nat32;
+  // Minor version number, incremented for backwards-compatible functionality additions
+  minor : nat32;
+  // Patch version number, incremented for backwards-compatible bug fixes
+  patch : nat32;
+};
+type ConsentInfo = record {
+  metadata : ConsentMessageMetadata;
+  consent_message : ConsentMessage;
+};
+type ConsentMessage = variant {
+  FieldsDisplayMessage : FieldsDisplay;
+  GenericDisplayMessage : text;
+};
+type ConsentMessageMetadata = record {
+  utc_offset_minutes : opt int16;
+  language : text;
+};
+type ConsentMessageRequest = record {
+  arg : blob;
+  method : text;
+  user_preferences : ConsentMessageSpec;
+};
+type ConsentMessageSpec = record {
+  metadata : ConsentMessageMetadata;
+  device_spec : opt DisplayMessageType;
+};
+type CustomFractionalizationConfig = record {
+  per_token_config : vec record { nat; GeneralFractionalizationConfig };
+};
+type DisplayMessageType = variant { GenericDisplay; FieldsDisplay };
+type Duration = record { secs : nat64; nanos : nat32 };
+type ErrorInfo = record { description : text };
+type FieldsDisplay = record {
+  fields : vec record { text; Value };
+  intent : text;
+};
+type FractionalizationConfig = variant {
+  Custom : CustomFractionalizationConfig;
+  General : GeneralFractionalizationConfig;
+};
+type GeneralError = variant {
+  InvalidConfig : text;
+  InvalidNftCanister : text;
+  TransactionAddError : text;
+  TransferError : text;
+  UserIsNotNftOwner : text;
+  AlreadyProcessing : text;
+  TransactionPreparationError : text;
+  InvalidPrincipal : text;
+  NotAuthorized : text;
+  EmptyArgs : text;
+  CallError : text;
+  CanisterIsNotNftOwner : text;
+  ConfigNotFound : text;
+  InvalidPercentage : text;
+};
+type GeneralFractionalizationConfig = record {
+  division : nat64;
+  ledger_id : principal;
+  swap_fee : nat;
+};
+// The arguments for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
+type GetBlocksRequest = record { start : nat; length : nat };
+// The result type for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
+type GetBlocksResult = record {
+  log_length : nat;
+  blocks : vec BlockWithId;
+  archived_blocks : Vec;
+};
+// The result type for the
+// [ICRC-3 `icrc3_get_blocks`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_blocks)
+// endpoint.
+type GetBlocksResult_1 = record {
+  log_length : nat;
+  blocks : vec BlockWithId;
+  archived_blocks : vec ArchivedBlocks;
+};
+// The information returned as part of the return value for the
+// [`icrc3_get_archives`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md)
+// endpoint.
+type ICRC3ArchiveInfo = record {
+  end : nat;
+  canister_id : principal;
+  start : nat;
+};
+// Configuration for the ICRC3 implementation.
+// 
+// This struct contains all the necessary configuration parameters for the ICRC3 implementation,
+// including supported block types and system constants.
+// 
+// # Examples
+// 
+// ```rust
+// use icrc3_library::config::{ICRC3Config, ICRC3Properties};
+// use std::time::Duration;
+// 
+// let config = ICRC3Config {
+// supported_blocks: vec![],
+// constants: ICRC3Properties::default(),
+// };
+// ```
+type ICRC3Config = record {
+  // System constants and limits
+  constants : ICRC3Properties;
+  // List of supported block types and their URLs
+  supported_blocks : vec SupportedBlockType;
+};
+// The data certificate returned from the
+// [ICRC-3 `icrc3_get_tip_certificate`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_get_tip_certificate)
+// endpoint.
+type ICRC3DataCertificate = record { certificate : blob; hash_tree : blob };
+// System constants and limits for the ICRC3 implementation.
+// 
+// This struct defines various system parameters that control the behavior
+// of the ICRC3 implementation, such as transaction windows, memory limits,
+// and cycle management.
+type ICRC3Properties = record {
+  // Maximum number of blocks per response
+  max_blocks_per_response : nat;
+  // Initial number of cycles
+  initial_cycles : nat;
+  // Time window for transaction validation
+  tx_window : Duration;
+  // Maximum number of transactions to purge at once
+  max_transactions_to_purge : nat;
+  // Maximum memory size in bytes
+  max_memory_size_bytes : nat;
+  // ttl for non-archived transactions
+  ttl_for_non_archived_transactions : Duration;
+  // Maximum number of transactions allowed in the window
+  max_transactions_in_window : nat;
+  // Maximum number of unarchived transactions
+  max_unarchived_transactions : nat;
+  // Number of cycles to reserve
+  reserved_cycles : nat;
+};
+// A value defined in [the ICRC-3 standard](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#value).
+type ICRC3Value = variant {
+  Int : int;
+  Map : vec record { text; ICRC3Value };
+  Nat : nat;
+  Blob : blob;
+  Text : text;
+  Array : vec ICRC3Value;
+};
+type Icrc21Error = variant {
+  GenericError : record { description : text; error_code : nat };
+  InsufficientPayment : ErrorInfo;
+  UnsupportedCanisterCall : ErrorInfo;
+  ConsentMessageUnavailable : ErrorInfo;
+};
+type Icrc28TrustedOriginsResponse = record { trusted_origins : vec text };
+type InitArgs = record {
+  buyback_burn_canister : opt Account;
+  test_mode : bool;
+  authorized_principals : vec principal;
+  version : BuildVersion;
+  icrc3_config : ICRC3Config;
+  gldt_swap_old_archive : principal;
+  commit_hash : text;
+  swap_configs : vec SwapCanisterConfig;
+};
+type Nft = record { id : nat; canister_id : principal };
+type Response = variant { Success; InternalError : text };
+type Result = variant {
+  Ok : vec record { principal; vec nat };
+  Err : GeneralError;
+};
+type Result_1 = variant { Ok : vec nat; Err : GeneralError };
+type Result_2 = variant { Ok : ConsentInfo; Err : Icrc21Error };
+type Result_3 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
+type Result_4 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
+// The return type of the
+// [ICRC-3 `icrc3_supported_block_types`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-3/README.md#icrc3_supported_block_types)
+// endpoint.
+type SupportedBlockType = record { url : text; block_type : text };
+type SupportedStandard = record { url : text; name : text };
+type SwapCanisterConfig = record {
+  icrc7_canister_id : principal;
+  fractionalization_config : FractionalizationConfig;
+};
+type SwapInfo = record {
+  nft : Nft;
+  status : SwapStatus;
+  created_at : nat64;
+  tokens_amount : GeneralFractionalizationConfig;
+  user_account : Account;
+  index : nat;
+  swap_type : SwapType;
+};
+type SwapNftForTokensErrors = variant {
+  Limit : text;
+  GeneralError : GeneralError;
+  Retry : record { nat64; text };
+  CantBeAnonymous : text;
+};
+type SwapStatus = variant {
+  Burned;
+  Failed : text;
+  NftTransferredFrom;
+  Init;
+  NftTransferred;
+  Complete;
+  BurnFailed : text;
+  ReimburseFailed : text;
+  Minted;
+  NftTransferFailed : text;
+  NftTransferFromFailed : text;
+  Reimbursed;
+  MintFailed : text;
+};
+type SwapTokensForNftErrors = variant {
+  Limit : text;
+  GeneralError : GeneralError;
+  Retry : record { nat64; text };
+  NotOwnedBySwapCanister;
+  SwapCreationError;
+};
+type SwapType = variant { Forward; Reverse };
+type UpgradeArgs = record { version : BuildVersion; commit_hash : text };
+type Value = variant {
+  Text : record { content : text };
+  TokenAmount : record { decimals : nat8; amount : nat64; symbol : text };
+  TimestampSeconds : record { amount : nat64 };
+  DurationSeconds : record { amount : nat64 };
+};
+type Vec = vec record {
+  args : vec record { start : nat; length : nat };
+  callback : func (vec record { start : nat; length : nat }) -> (
+      record {
+        log_length : nat;
+        blocks : vec record {
+          id : nat;
+          block : variant {
+            Int : int;
+            Map : vec record { text; ICRC3Value };
+            Nat : nat;
+            Blob : blob;
+            Text : text;
+            Array : vec ICRC3Value;
+          };
+        };
+        archived_blocks : Vec;
+      },
+    ) query;
+};
+service : (Args_1) -> {
+  commit : () -> ();
+  get_active_swap_ids_by_user : (opt principal) -> (vec nat) query;
+  get_active_swaps : (null) -> (vec record { nat; SwapInfo }) query;
+  get_active_swaps_by_ids : (vec nat) -> (vec record { nat; SwapInfo }) query;
+  get_active_swaps_by_user : (opt principal) -> (
+      vec record { nat; SwapInfo },
+    ) query;
+  get_available_nfts : (opt principal) -> (Result);
+  get_available_nfts_for_canister : (Args) -> (Result_1);
+  get_failed_swap_ids_by_user : (opt principal) -> (vec nat) query;
+  get_failed_swaps : (null) -> (vec record { nat; SwapInfo }) query;
+  get_failed_swaps_by_ids : (vec nat) -> (vec record { nat; SwapInfo }) query;
+  get_failed_swaps_by_user : (opt principal) -> (
+      vec record { nat; SwapInfo },
+    ) query;
+  get_swap_configs : (null) -> (vec SwapCanisterConfig) query;
+  icrc10_supported_standards : () -> (vec SupportedStandard) query;
+  icrc21_canister_call_consent_message : (ConsentMessageRequest) -> (
+      Result_2,
+    ) query;
+  icrc28_trusted_origins : () -> (Icrc28TrustedOriginsResponse);
+  icrc3_get_archives : (null) -> (vec ICRC3ArchiveInfo) query;
+  icrc3_get_blocks : (vec GetBlocksRequest) -> (GetBlocksResult_1) query;
+  icrc3_get_properties : (null) -> (ICRC3Properties) query;
+  icrc3_get_tip_certificate : (null) -> (ICRC3DataCertificate) query;
+  icrc3_supported_block_types : (null) -> (vec SupportedBlockType) query;
+  set_buyback_canister : (opt Account) -> (Response);
+  swap_nft_for_tokens : (vec Nft) -> (Result_3);
+  swap_tokens_for_nft : (vec Nft) -> (Result_4);
+}
