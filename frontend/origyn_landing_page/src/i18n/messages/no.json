@@ -918,17 +918,17 @@
         {
           "labelBold": "HVA",
           "labelRest": "ER INTEGRATOR-PROGRAMMET?",
-          "description": "Integrator-programmet er et strategisk initiativ rettet mot å fremme ORIGYN-protokollen, oppmuntre til adopsjon og utvide økosystemet."
+          "description": "<p><strong><em>Gi virksomheten din pålitelig digital sertifisering.</em></strong></p><p><strong>ORIGYN Integrator-programmet</strong> lar virksomheter bruke ORIGYN sin teknologi til å lage digitale sertifikater som beviser at et produkt er ekte, sporer historikken og beskytter verdien.<br>Enten du sertifiserer egne produkter eller tilbyr sertifisering til andre selskaper, leverer ORIGYN teknologien som gjør det mulig.</p>"
         },
         {
-          "labelBold": "HVEM",
-          "labelRest": "ER INTEGRATORENE?",
-          "description": "<ul><li><strong>Integratorer er uavhengige selskaper</strong> som bruker ORIGYN-protokollen til å sertifisere produkter på blokkjeden, med et felles mål om å prege ORIGYN-sertifikater og fremme protokollen i en bestemt bransje, i en aktivaklasse eller på tvers av flere sektorer.</li><li><strong>De finnes i to former:</strong> produsenter som sertifiserer egne produkter, og tilretteleggere som hjelper andre virksomheter med å ta i bruk ORIGYN sin sertifiseringsteknologi uten å kreve dyp blokkjede- eller Web3-kompetanse.</li><li><strong>Etter en due diligence-prosess</strong> gjennomført av ORIGYN Foundation, velges integratorer av ORIGYN DAO-tokenhavere.</li></ul>"
+          "labelBold": "HVORFOR",
+          "labelRest": "BLI INTEGRATOR?",
+          "description": "<p><strong><em>Nye muligheter for virksomheten din.</em></strong></p><p>Som <strong>ORIGYN-integrator</strong> kan du sertifisere egne produkter eller hjelpe andre virksomheter med å sertifisere sine.</p><p>Tilby en verdifull ny tjeneste, bygg tillit hos kundene og skap nye måter å utvikle virksomheten din på. Alt uten at du trenger å bygge din egen blokkjedeteknologi.</p>"
         },
         {
           "labelBold": "HVORDAN",
           "labelRest": "BLIR DU EN INTEGRATOR?",
-          "description": "For å bli integrator må et selskap vise at det kan sertifisere produkter i stor skala, enten egne eller kundenes, samtidig som det oppfyller de tekniske kravene og har bransjekompetansen som trengs for å betjene én eller flere bransjer."
+          "description": "<p><strong><em>Vis oss hva virksomheten din kan.</em></strong></p><p>For å bli <strong>integrator</strong> må selskapet ditt vise at det kan sertifisere produkter i stor skala og har riktig erfaring til å betjene bransjen sin.</p><p><strong>ORIGYN Foundation</strong> vurderer hver søknad, og ORIGYN DAO-tokenhavere tar den endelige avgjørelsen om hvem som blir med i programmet.</p>"
         }
       ],
       "goToStep": "Gå til trinn {n}",

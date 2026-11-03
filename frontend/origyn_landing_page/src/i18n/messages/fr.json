@@ -918,17 +918,17 @@
         {
           "labelBold": "QU'EST-CE QUE",
           "labelRest": "LE PROGRAMME INTÉGRATEUR ?",
-          "description": "Le Programme Intégrateur est une initiative stratégique visant à promouvoir le protocole ORIGYN, à encourager son adoption et à élargir son écosystème."
+          "description": "<p><strong><em>Apportez une certification numérique de confiance à votre entreprise.</em></strong></p><p><strong>Le Programme Intégrateur ORIGYN</strong> permet aux entreprises d'utiliser la technologie d'ORIGYN pour créer des certificats numériques qui prouvent l'authenticité d'un produit, retracent son historique et protègent sa valeur.<br>Que vous certifiiez vos propres produits ou que vous proposiez la certification à d'autres entreprises, ORIGYN vous fournit la technologie pour y parvenir.</p>"
         },
         {
-          "labelBold": "QUI",
-          "labelRest": "SONT LES INTÉGRATEURS ?",
-          "description": "<ul><li><strong>Les intégrateurs sont des entreprises indépendantes</strong> qui utilisent le protocole ORIGYN pour certifier des produits sur la blockchain, avec pour objectif commun de créer des certificats ORIGYN et de promouvoir le protocole dans un secteur spécifique, une classe d'actifs ou plusieurs secteurs.</li><li><strong>Ils prennent deux formes :</strong> les fabricants, qui certifient leurs propres produits, et les facilitateurs, qui aident d'autres entreprises à adopter la technologie de certification d'ORIGYN sans nécessiter une expertise approfondie en blockchain ou en Web3.</li><li><strong>À l'issue d'un processus de vérification</strong> conduit par la Fondation ORIGYN, les intégrateurs sont élus par les détenteurs de tokens de l'ORIGYN DAO.</li></ul>"
+          "labelBold": "POURQUOI",
+          "labelRest": "DEVENIR INTÉGRATEUR ?",
+          "description": "<p><strong><em>De nouvelles opportunités pour votre entreprise.</em></strong></p><p>En tant qu'<strong>intégrateur ORIGYN,</strong> vous pouvez certifier vos propres produits ou aider d'autres entreprises à certifier les leurs.</p><p>Proposez un nouveau service à forte valeur ajoutée, renforcez la confiance de vos clients et ouvrez de nouvelles voies de croissance pour votre entreprise. Le tout sans avoir à développer votre propre technologie blockchain.</p>"
         },
         {
           "labelBold": "COMMENT",
           "labelRest": "DEVENIR INTÉGRATEUR ?",
-          "description": "Pour devenir intégrateur, une entreprise doit démontrer sa capacité à certifier des produits à grande échelle, les siens ou ceux de ses clients, tout en satisfaisant les exigences techniques et en disposant de l'expertise sectorielle nécessaires pour servir une ou plusieurs industries."
+          "description": "<p><strong><em>Montrez-nous ce dont votre entreprise est capable.</em></strong></p><p>Pour devenir <strong>intégrateur,</strong> votre entreprise doit démontrer sa capacité à certifier des produits à grande échelle et disposer de l'expérience nécessaire pour servir son secteur.</p><p>La <strong>Fondation ORIGYN</strong> examine chaque candidature, et les détenteurs de tokens de l'ORIGYN DAO décident en dernier ressort qui rejoint le programme.</p>"
         }
       ],
       "goToStep": "Aller à l'étape {n}",

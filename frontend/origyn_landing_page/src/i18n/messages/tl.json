@@ -918,17 +918,17 @@
         {
           "labelBold": "ANO",
           "labelRest": "ANG INTEGRATOR PROGRAM?",
-          "description": "Ang Integrator Program ay isang estratehikong inisyatibo na naglalayong itaguyod ang protokol ng ORIGYN, hikayatin ang pag-adopt nito at palawakin ang ecosystem nito."
+          "description": "<p><strong><em>Dalhin ang mapagkakatiwalaang digital certification sa iyong negosyo.</em></strong></p><p>Ang <strong>ORIGYN Integrator</strong> Program ay nagbibigay-daan sa mga negosyo na gamitin ang teknolohiya ng ORIGYN upang lumikha ng mga digital certificate na nagpapatunay na tunay ang isang produkto, sumusubaybay sa kasaysayan nito, at nagpoprotekta sa halaga nito.<br>Sarili mo mang mga produkto ang iyong sine-certify o nag-aalok ka ng certification sa ibang mga kumpanya, ibinibigay ng ORIGYN ang teknolohiyang magpapasakatuparan nito.</p>"
         },
         {
-          "labelBold": "SINO",
-          "labelRest": "ANG MGA INTEGRATOR?",
-          "description": "<ul><li><strong>Ang mga Integrator ay mga independyenteng kumpanya</strong> na gumagamit ng protokol ng ORIGYN upang i-certify ang mga produkto sa blockchain, na may karaniwang layunin na mag-mint ng mga sertipiko ng ORIGYN at itaguyod ang protokol sa isang partikular na industriya, sa isang klase ng asset o sa iba't ibang sektor.</li><li><strong>May dalawang uri sila:</strong> mga manufacturer na nagse-certify ng sarili nilang mga produkto, at mga tagapagpagana na tumutulong sa ibang mga negosyo na mag-adopt ng certification technology ng ORIGYN nang hindi nangangailangan ng malalim na kaalaman sa blockchain o Web3.</li><li><strong>Kasunod ng proseso ng pag-screen</strong> na isinasagawa ng ORIGYN Foundation, ang mga integrator ay hinahalal ng mga may-hawak ng token ng ORIGYN DAO.</li></ul>"
+          "labelBold": "BAKIT",
+          "labelRest": "MAGING INTEGRATOR?",
+          "description": "<p><strong><em>Mga bagong oportunidad para sa iyong negosyo.</em></strong></p><p>Bilang isang <strong>ORIGYN Integrator,</strong> maaari mong i-certify ang sarili mong mga produkto o tulungan ang ibang mga negosyo na i-certify ang kanila.</p><p>Mag-alok ng mahalagang bagong serbisyo, bumuo ng tiwala sa mga customer, at lumikha ng mga bagong paraan upang palaguin ang iyong negosyo. Lahat ng ito nang hindi kinakailangang bumuo ng sarili mong blockchain technology.</p>"
         },
         {
           "labelBold": "PAANO",
           "labelRest": "MAGIGING INTEGRATOR?",
-          "description": "Upang maging integrator, dapat ipakita ng isang kumpanya na kaya nitong mag-certify ng mga produkto sa malaking sukat, sarili man nito o ng mga kliyente nito, habang tinutupad ang mga teknikal na kinakailangan at kadalubhasaan sa sektor na kailangan upang maglingkod sa isa o ilang industriya."
+          "description": "<p><strong><em>Ipakita sa amin ang kayang gawin ng iyong negosyo.</em></strong></p><p>Upang maging <strong>isang integrator,</strong> kailangang ipakita ng iyong kumpanya na kaya nitong mag-certify ng mga produkto sa malaking sukat at mayroon itong angkop na karanasan upang maglingkod sa industriya nito.</p><p>Sinusuri ng <strong>ORIGYN Foundation</strong> ang bawat aplikasyon, at ang mga may-hawak ng token ng ORIGYN DAO ang gumagawa ng huling desisyon kung sino ang makakasali sa programa.</p>"
         }
       ],
       "goToStep": "Pumunta sa hakbang {n}",

@@ -918,17 +918,17 @@
         {
           "labelBold": "什么是",
           "labelRest": "集成商计划？",
-          "description": "集成商计划是一项战略性举措，旨在推广 ORIGYN 协议、促进其广泛采用并扩展其生态系统。"
+          "description": "<p><strong><em>为您的企业带来值得信赖的数字认证。</em></strong></p><p><strong>ORIGYN 集成商</strong>计划让企业能够使用 ORIGYN 的技术创建数字证书，用以证明产品的真实性、追溯其历史并保护其价值。<br>无论您是认证自有产品，还是为其他公司提供认证服务，ORIGYN 都能提供实现这一切的技术。</p>"
         },
         {
-          "labelBold": "谁是",
-          "labelRest": "集成商？",
-          "description": "<ul><li><strong>集成商是独立机构，</strong>使用 ORIGYN 协议在区块链上认证产品，共同致力于铸造 ORIGYN 证书，并在特定行业、特定资产类别或跨多个领域推广该协议。</li><li><strong>集成商分为两类：</strong>认证自有产品的制造商，以及帮助其他企业采用 ORIGYN 认证技术、无需具备深厚区块链或 Web3 专业知识的赋能者。</li><li><strong>经过 ORIGYN 基金会主导的审查流程后，</strong>集成商由 ORIGYN DAO 代币持有者选举产生。</li></ul>"
+          "labelBold": "为什么",
+          "labelRest": "要成为集成商？",
+          "description": "<p><strong><em>为您的企业开拓新机遇。</em></strong></p><p>作为 <strong>ORIGYN 集成商，</strong>您可以认证自有产品，也可以帮助其他企业认证其产品。</p><p>提供一项有价值的新服务，与客户建立信任，开辟业务增长的新途径。而这一切都无需自行构建区块链技术。</p>"
         },
         {
           "labelBold": "如何",
           "labelRest": "成为集成商？",
-          "description": "要成为集成商，企业须证明其能够大规模认证产品（无论是自有产品还是客户产品），同时满足服务一个或多个行业所需的技术要求与行业专业知识。"
+          "description": "<p><strong><em>向我们展示您企业的实力。</em></strong></p><p>要成为<strong>集成商，</strong>贵公司需要证明其能够大规模认证产品，并具备服务所在行业的相关经验。</p><p><strong>ORIGYN 基金会</strong>会审核每一份申请，最终由 ORIGYN DAO 代币持有者决定哪些企业加入该计划。</p>"
         }
       ],
       "goToStep": "前往第 {n} 步",

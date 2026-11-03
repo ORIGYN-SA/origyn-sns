@@ -918,17 +918,17 @@
         {
           "labelBold": "O QUE",
           "labelRest": "É O PROGRAMA DE INTEGRADORES?",
-          "description": "O Programa de Integradores é uma iniciativa estratégica destinada a promover o protocolo ORIGYN, incentivar a sua adoção e alargar o seu ecossistema."
+          "description": "<p><strong><em>Leve a certificação digital de confiança ao seu negócio.</em></strong></p><p>O <strong>Programa de Integradores ORIGYN</strong> permite às empresas utilizar a tecnologia da ORIGYN para criar certificados digitais que comprovam a autenticidade de um produto, registam o seu histórico e protegem o seu valor.<br>Quer certifique os seus próprios produtos, quer ofereça certificação a outras empresas, a ORIGYN disponibiliza a tecnologia que o torna possível.</p>"
         },
         {
-          "labelBold": "QUEM",
-          "labelRest": "SÃO OS INTEGRADORES?",
-          "description": "<ul><li><strong>Os integradores são empresas independentes</strong> que utilizam o protocolo ORIGYN para certificar produtos na blockchain, com o objetivo comum de emitir certificados ORIGYN e promover o protocolo numa indústria específica, numa classe de ativos ou em múltiplos setores.</li><li><strong>Dividem-se em dois tipos:</strong> fabricantes que certificam os seus próprios produtos e facilitadores que ajudam outras empresas a adotar a tecnologia de certificação da ORIGYN sem exigir conhecimentos aprofundados de blockchain ou Web3.</li><li><strong>Após um processo de avaliação</strong> conduzido pela Fundação ORIGYN, os integradores são eleitos pelos detentores de tokens do ORIGYN DAO.</li></ul>"
+          "labelBold": "PORQUÊ",
+          "labelRest": "TORNAR-SE UM INTEGRADOR?",
+          "description": "<p><strong><em>Novas oportunidades para o seu negócio.</em></strong></p><p>Como <strong>Integrador ORIGYN,</strong> pode certificar os seus próprios produtos ou ajudar outras empresas a certificar os delas.</p><p>Ofereça um novo serviço de valor, reforce a confiança dos clientes e crie novas formas de fazer crescer o seu negócio. Tudo isto sem ter de desenvolver a sua própria tecnologia blockchain.</p>"
         },
         {
           "labelBold": "COMO",
           "labelRest": "SE TORNA UM INTEGRADOR?",
-          "description": "Para se tornar integrador, uma empresa deve demonstrar que consegue certificar produtos à escala, próprios ou dos seus clientes, satisfazendo os requisitos técnicos e dispondo da especialização setorial necessária para servir uma ou várias indústrias."
+          "description": "<p><strong><em>Mostre-nos do que a sua empresa é capaz.</em></strong></p><p>Para se tornar <strong>integrador,</strong> a sua empresa tem de demonstrar que consegue certificar produtos à escala e que tem a experiência certa para servir o seu setor.</p><p>A <strong>Fundação ORIGYN</strong> analisa cada candidatura e os detentores de tokens do ORIGYN DAO tomam a decisão final sobre quem integra o programa.</p>"
         }
       ],
       "goToStep": "Ir para o passo {n}",

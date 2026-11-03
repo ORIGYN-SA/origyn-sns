@@ -918,17 +918,17 @@
         {
           "labelBold": "整合商計畫",
           "labelRest": "是什麼？",
-          "description": "整合商計畫是一項策略性倡議，旨在推廣 ORIGYN 協定、促進其採用，並擴大其生態系統。"
+          "description": "<p><strong><em>為您的企業帶來值得信賴的數位認證。</em></strong></p><p><strong>ORIGYN 整合商</strong>計畫讓企業能運用 ORIGYN 的技術建立數位認證書，用以證明產品為真品、追蹤其履歷並保障其價值。<br>無論您是認證自有產品，或是為其他公司提供認證服務，ORIGYN 都能提供實現這一切的技術。</p>"
         },
         {
-          "labelBold": "整合商",
-          "labelRest": "是哪些單位？",
-          "description": "<ul><li><strong>整合商是獨立企業，</strong>使用 ORIGYN 協定在區塊鏈上認證產品，共同目標為鑄造 ORIGYN 認證書，並在特定產業、資產類別或跨多個行業推廣該協定。</li><li><strong>整合商分為兩類：</strong>認證自有產品的製造商，以及協助其他企業採用 ORIGYN 認證技術、無需深厚區塊鏈或 Web3 專業知識的賦能者。</li><li><strong>經 ORIGYN 基金會的審查程序後，</strong>整合商由 ORIGYN DAO 代幣持有者選舉產生。</li></ul>"
+          "labelBold": "為什麼",
+          "labelRest": "要成為整合商？",
+          "description": "<p><strong><em>為您的企業開創新契機。</em></strong></p><p>身為 <strong>ORIGYN 整合商，</strong>您可以認證自有產品，也能協助其他企業認證其產品。</p><p>提供具價值的全新服務、與客戶建立信任，並開創業務成長的新途徑。而這一切都無須自行開發區塊鏈技術。</p>"
         },
         {
           "labelBold": "如何",
           "labelRest": "成為整合商？",
-          "description": "若要成為整合商，企業必須證明其能夠大規模認證產品（無論是自有產品或客戶產品），同時符合服務一個或多個產業所需的技術要求與產業專業知識。"
+          "description": "<p><strong><em>向我們展現您企業的實力。</em></strong></p><p>若要成為<strong>整合商，</strong>貴公司須證明能夠大規模認證產品，並具備服務所屬產業的相關經驗。</p><p><strong>ORIGYN 基金會</strong>會審查每一份申請，最終由 ORIGYN DAO 代幣持有者決定哪些企業加入本計畫。</p>"
         }
       ],
       "goToStep": "前往第 {n} 步",
