@@ -918,17 +918,17 @@
         {
           "labelBold": "CO",
           "labelRest": "JE PROGRAM PRO INTEGRÁTORY?",
-          "description": "Program pro integrátory je strategická iniciativa zaměřená na propagaci protokolu ORIGYN, podporu jeho adopce a rozšíření jeho ekosystému."
+          "description": "<p><strong><em>Přineste do svého podnikání důvěryhodnou digitální certifikaci.</em></strong></p><p><strong>Program pro integrátory ORIGYN</strong> umožňuje firmám využívat technologii ORIGYN k vytváření digitálních certifikátů, které prokazují pravost produktu, sledují jeho historii a chrání jeho hodnotu.<br>Ať už certifikujete vlastní produkty, nebo nabízíte certifikaci jiným firmám, ORIGYN vám k tomu poskytne potřebnou technologii.</p>"
         },
         {
-          "labelBold": "KDO",
-          "labelRest": "JSOU INTEGRÁTOŘI?",
-          "description": "<ul><li><strong>Integrátoři jsou nezávislé firmy,</strong> které využívají protokol ORIGYN k certifikaci produktů na blockchainu se společným cílem vydávat certifikáty ORIGYN a propagovat protokol v konkrétním odvětví, třídě aktiv nebo napříč více sektory.</li><li><strong>Existují ve dvou podobách:</strong> výrobci, kteří certifikují vlastní produkty, a facilitátoři, kteří pomáhají jiným podnikům přijmout certifikační technologii ORIGYN bez nutnosti hlubokých znalostí blockchainu nebo Web3.</li><li><strong>Po prověřovacím procesu</strong> provedeném nadací ORIGYN Foundation jsou integrátoři zvoleni držiteli tokenů ORIGYN DAO.</li></ul>"
+          "labelBold": "PROČ",
+          "labelRest": "SE STÁT INTEGRÁTOREM?",
+          "description": "<p><strong><em>Nové příležitosti pro vaše podnikání.</em></strong></p><p>Jako <strong>integrátor ORIGYN</strong> můžete certifikovat vlastní produkty nebo pomáhat jiným firmám certifikovat ty jejich.</p><p>Nabídněte hodnotnou novou službu, budujte důvěru zákazníků a otevřete svému podnikání nové cesty k růstu. A to vše bez nutnosti vyvíjet vlastní blockchainovou technologii.</p>"
         },
         {
           "labelBold": "JAK",
           "labelRest": "SE STÁT INTEGRÁTOREM?",
-          "description": "Aby se společnost mohla stát integrátorem, musí prokázat, že dokáže certifikovat produkty ve velkém měřítku, ať už vlastní, nebo svých klientů, a zároveň splňuje technické požadavky a má odborné znalosti potřebné pro obsluhu jednoho či více odvětví."
+          "description": "<p><strong><em>Ukažte nám, co vaše firma dokáže.</em></strong></p><p>Aby se vaše společnost mohla stát <strong>integrátorem,</strong> musí prokázat, že dokáže certifikovat produkty ve velkém měřítku a má odpovídající zkušenosti pro služby ve svém odvětví.</p><p><strong>ORIGYN Foundation</strong> posuzuje každou žádost a o tom, kdo se do programu zapojí, s konečnou platností rozhodují držitelé tokenů ORIGYN DAO.</p>"
         }
       ],
       "goToStep": "Přejít na krok {n}",

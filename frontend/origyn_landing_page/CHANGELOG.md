@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.4] - 2026-11-03
+
+#### Changed
+
+- Rewrite the three "Integrator Program" cards on the integrator page from the new design: each card opens with a tagline, and "Who are the integrators?" becomes "Why become an integrator?"
+
 ### [1.7.3] - 2026-10-29
 
 #### Changed

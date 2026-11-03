@@ -918,17 +918,17 @@
         {
           "labelBold": "APA",
           "labelRest": "ITU PROGRAM INTEGRATOR?",
-          "description": "Program Integrator adalah inisiatif strategis yang bertujuan untuk mempromosikan protokol ORIGYN, mendorong adopsinya, dan memperluas ekosistemnya."
+          "description": "<p><strong><em>Hadirkan sertifikasi digital tepercaya untuk bisnis Anda.</em></strong></p><p>Program <strong>Integrator ORIGYN</strong> memungkinkan bisnis menggunakan teknologi ORIGYN untuk membuat sertifikat digital yang membuktikan keaslian produk, melacak riwayatnya, dan melindungi nilainya.<br>Baik Anda menyertifikasi produk sendiri maupun menawarkan sertifikasi kepada perusahaan lain, ORIGYN menyediakan teknologi untuk mewujudkannya.</p>"
         },
         {
-          "labelBold": "SIAPA",
-          "labelRest": "PARA INTEGRATOR?",
-          "description": "<ul><li><strong>Integrator adalah perusahaan independen</strong> yang menggunakan protokol ORIGYN untuk menyertifikasi produk di blockchain, dengan tujuan bersama mencetak sertifikat ORIGYN dan mempromosikan protokol di industri tertentu, dalam kelas aset, atau lintas beberapa sektor.</li><li><strong>Ada dua jenis integrator:</strong> produsen yang menyertifikasi produk mereka sendiri, dan enabler yang membantu bisnis lain mengadopsi teknologi sertifikasi ORIGYN tanpa memerlukan keahlian mendalam di bidang blockchain atau Web3.</li><li><strong>Setelah melalui proses vetting</strong> yang dilakukan oleh ORIGYN Foundation, integrator dipilih oleh pemegang token ORIGYN DAO.</li></ul>"
+          "labelBold": "MENGAPA",
+          "labelRest": "MENJADI INTEGRATOR?",
+          "description": "<p><strong><em>Peluang baru untuk bisnis Anda.</em></strong></p><p>Sebagai <strong>Integrator ORIGYN,</strong> Anda dapat menyertifikasi produk Anda sendiri atau membantu bisnis lain menyertifikasi produk mereka.</p><p>Tawarkan layanan baru yang bernilai, bangun kepercayaan pelanggan, dan ciptakan cara baru untuk mengembangkan bisnis Anda. Semua itu tanpa harus membangun teknologi blockchain sendiri.</p>"
         },
         {
           "labelBold": "BAGAIMANA",
           "labelRest": "CARA MENJADI INTEGRATOR?",
-          "description": "Untuk menjadi integrator, sebuah perusahaan harus menunjukkan bahwa ia mampu menyertifikasi produk dalam skala besar, baik milik sendiri maupun milik kliennya, sekaligus memenuhi persyaratan teknis dan keahlian sektoral yang dibutuhkan untuk melayani satu atau beberapa industri."
+          "description": "<p><strong><em>Tunjukkan kemampuan bisnis Anda.</em></strong></p><p>Untuk menjadi <strong>integrator,</strong> perusahaan Anda perlu menunjukkan bahwa ia mampu menyertifikasi produk dalam skala besar dan memiliki pengalaman yang tepat untuk melayani industrinya.</p><p><strong>ORIGYN Foundation</strong> meninjau setiap permohonan, dan pemegang token ORIGYN DAO membuat keputusan akhir tentang siapa yang bergabung dalam program ini.</p>"
         }
       ],
       "goToStep": "Pergi ke langkah {n}",

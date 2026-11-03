@@ -93,7 +93,9 @@
 
   ul { list-style: disc; padding-left: 20px; white-space: normal; }
   li { margin-bottom: 16px; }
+  p + p { margin-top: 16px; }
   strong { font-weight: 600; }
+  em { font-family: $font-italic; font-style: italic; }
 }
 
 .indicators {

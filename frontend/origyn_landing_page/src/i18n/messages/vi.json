@@ -918,17 +918,17 @@
         {
           "labelBold": "CHƯƠNG TRÌNH",
           "labelRest": "ĐỐI TÁC TÍCH HỢP LÀ GÌ?",
-          "description": "Chương Trình Đối Tác Tích Hợp là một sáng kiến chiến lược nhằm thúc đẩy giao thức ORIGYN, khuyến khích việc áp dụng và mở rộng hệ sinh thái của nó."
+          "description": "<p><strong><em>Mang chứng nhận số đáng tin cậy đến doanh nghiệp của bạn.</em></strong></p><p>Chương trình <strong>Đối tác Tích hợp ORIGYN</strong> cho phép các doanh nghiệp sử dụng công nghệ của ORIGYN để tạo chứng chỉ số giúp chứng minh sản phẩm là thật, theo dõi lịch sử và bảo vệ giá trị của sản phẩm.<br>Dù bạn tự chứng nhận sản phẩm của mình hay cung cấp dịch vụ chứng nhận cho các công ty khác, ORIGYN đều mang đến công nghệ để biến điều đó thành hiện thực.</p>"
         },
         {
-          "labelBold": "ĐỐI TÁC",
-          "labelRest": "TÍCH HỢP LÀ AI?",
-          "description": "<ul><li><strong>Các đối tác tích hợp là các công ty độc lập</strong> sử dụng giao thức ORIGYN để chứng nhận sản phẩm trên blockchain, với mục tiêu chung là đúc chứng chỉ ORIGYN và thúc đẩy giao thức trong một ngành cụ thể, một lớp tài sản hoặc trên nhiều lĩnh vực.</li><li><strong>Có hai loại đối tác tích hợp:</strong> nhà sản xuất tự chứng nhận sản phẩm của mình, và bên hỗ trợ giúp các doanh nghiệp khác áp dụng công nghệ chứng nhận của ORIGYN mà không đòi hỏi kiến thức sâu về blockchain hay Web3.</li><li><strong>Sau quy trình thẩm định</strong> được thực hiện bởi Quỹ ORIGYN, các đối tác tích hợp được bầu chọn bởi những người nắm giữ token ORIGYN DAO.</li></ul>"
+          "labelBold": "TẠI SAO",
+          "labelRest": "NÊN TRỞ THÀNH ĐỐI TÁC TÍCH HỢP?",
+          "description": "<p><strong><em>Cơ hội mới cho doanh nghiệp của bạn.</em></strong></p><p>Là <strong>Đối tác Tích hợp ORIGYN,</strong> bạn có thể chứng nhận sản phẩm của chính mình hoặc giúp các doanh nghiệp khác chứng nhận sản phẩm của họ.</p><p>Cung cấp một dịch vụ mới giá trị, xây dựng niềm tin với khách hàng và mở ra những hướng đi mới để phát triển doanh nghiệp. Tất cả mà không cần tự xây dựng công nghệ blockchain riêng.</p>"
         },
         {
           "labelBold": "LÀM THẾ NÀO",
           "labelRest": "ĐỂ TRỞ THÀNH ĐỐI TÁC TÍCH HỢP?",
-          "description": "Để trở thành đối tác tích hợp, một công ty phải chứng minh rằng mình có thể chứng nhận sản phẩm ở quy mô lớn, dù là sản phẩm của chính mình hay của khách hàng, đồng thời đáp ứng các yêu cầu kỹ thuật và chuyên môn ngành cần thiết để phục vụ một hoặc nhiều ngành."
+          "description": "<p><strong><em>Hãy cho chúng tôi thấy năng lực của doanh nghiệp bạn.</em></strong></p><p>Để trở thành <strong>đối tác tích hợp,</strong> công ty của bạn cần chứng minh rằng mình có thể chứng nhận sản phẩm ở quy mô lớn và có kinh nghiệm phù hợp để phục vụ ngành của mình.</p><p><strong>Quỹ ORIGYN</strong> xem xét từng hồ sơ đăng ký, và những người nắm giữ token ORIGYN DAO đưa ra quyết định cuối cùng về việc ai được tham gia chương trình.</p>"
         }
       ],
       "goToStep": "Chuyển đến bước {n}",

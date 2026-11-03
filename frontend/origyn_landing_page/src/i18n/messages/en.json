@@ -723,17 +723,17 @@
         {
           "labelBold": "WHAT",
           "labelRest": "IS THE INTEGRATOR PROGRAM ?",
-          "description": "The Integrator Program is a strategic initiative aimed at promoting the ORIGYN protocol, encouraging its adoption and broadening its ecosystem."
+          "description": "<p><strong><em>Bring trusted digital certification to your business.</em></strong></p><p><strong>The ORIGYN Integrator</strong> Program lets businesses use ORIGYN's technology to create digital certificates that prove a product is real, track its history, and protect its value.<br>Whether you certify your own products or offer certification to other companies, ORIGYN provides the technology to make it possible.</p>"
         },
         {
-          "labelBold": "WHO",
-          "labelRest": "ARE THE INTEGRATORS ?",
-          "description": "<ul><li><strong>Integrators are independent firms</strong> that use the ORIGYN protocol to certify products on the blockchain, with the common goal of minting ORIGYN certificates and promoting the protocol within a specific industry, an asset class, or across multiple sectors.</li><li><strong>They come in two forms:</strong> manufacturers that certify their own products, and enablers that help other businesses adopt ORIGYN's certification technology without requiring deep blockchain or Web3 expertise.</li><li><strong>Following a vetting process</strong> conducted by the ORIGYN Foundation, integrators are elected by the ORIGYN DAO token holders.</li></ul>"
+          "labelBold": "WHY",
+          "labelRest": "BECOME AN INTEGRATOR ?",
+          "description": "<p><strong><em>New opportunities for your business.</em></strong></p><p>As an <strong>ORIGYN Integrator,</strong> you can certify your own products or help other businesses certify theirs.</p><p>Offer a valuable new service, build trust with customers, and create new ways to grow your business. All without having to build your own blockchain technology.</p>"
         },
         {
           "labelBold": "HOW",
           "labelRest": "DO YOU BECOME AN INTEGRATOR ?",
-          "description": "To become an integrator, a company must demonstrate that it can certify products at scale, whether its own or its clients', while meeting the technical requirements and sector expertise needed to serve one or several industries."
+          "description": "<p><strong><em>Show us what your business can do.</em></strong></p><p>To become <strong>an integrator,</strong> your company needs to show that it can certify products at scale and has the right experience to serve its industry.</p><p>The <strong>ORIGYN Foundation</strong> reviews each application, and ORIGYN DAO token holders make the final decision on who joins the program.</p>"
         }
       ],
       "goToStep": "Go to step {n}",

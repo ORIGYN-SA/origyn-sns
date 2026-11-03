@@ -918,17 +918,17 @@
         {
           "labelBold": "WAT",
           "labelRest": "IS HET INTEGRATOR PROGRAMMA ?",
-          "description": "Het Integrator Programma is een strategisch initiatief gericht op het bevorderen van het ORIGYN-protocol, het stimuleren van de adoptie ervan en het uitbreiden van het ecosysteem."
+          "description": "<p><strong><em>Breng betrouwbare digitale certificering naar uw bedrijf.</em></strong></p><p>Met het <strong>ORIGYN Integrator</strong> Programma kunnen bedrijven de technologie van ORIGYN gebruiken om digitale certificaten te maken die aantonen dat een product echt is, de geschiedenis ervan bijhouden en de waarde ervan beschermen.<br>Of u nu uw eigen producten certificeert of certificering aanbiedt aan andere bedrijven, ORIGYN levert de technologie die dat mogelijk maakt.</p>"
         },
         {
-          "labelBold": "WIE",
-          "labelRest": "ZIJN DE INTEGRATOREN ?",
-          "description": "<ul><li><strong>Integratoren zijn onafhankelijke bedrijven</strong> die het ORIGYN-protocol gebruiken om producten op de blockchain te certificeren, met als gemeenschappelijk doel het minten van ORIGYN-certificaten en het promoten van het protocol in een specifieke sector, een activaklasse of meerdere sectoren.</li><li><strong>Er zijn twee soorten:</strong> fabrikanten die hun eigen producten certificeren, en enablers die andere bedrijven helpen de certificeringstechnologie van ORIGYN te adopteren zonder diepgaande blockchain- of Web3-expertise te vereisen.</li><li><strong>Na een screeningproces</strong> uitgevoerd door de ORIGYN Foundation worden integratoren verkozen door de ORIGYN DAO-tokenhouders.</li></ul>"
+          "labelBold": "WAAROM",
+          "labelRest": "INTEGRATOR WORDEN ?",
+          "description": "<p><strong><em>Nieuwe kansen voor uw bedrijf.</em></strong></p><p>Als <strong>ORIGYN Integrator</strong> kunt u uw eigen producten certificeren of andere bedrijven helpen die van hen te certificeren.</p><p>Bied een waardevolle nieuwe dienst aan, bouw vertrouwen op bij klanten en creëer nieuwe groeimogelijkheden voor uw bedrijf. En dat allemaal zonder zelf blockchaintechnologie te hoeven bouwen.</p>"
         },
         {
           "labelBold": "HOE",
           "labelRest": "WORDT U EEN INTEGRATOR ?",
-          "description": "Om integrator te worden, moet een bedrijf aantonen dat het producten op schaal kan certificeren, zowel eigen producten als die van klanten, en voldoet aan de technische vereisten en sectorexpertise die nodig zijn om een of meerdere sectoren te bedienen."
+          "description": "<p><strong><em>Laat ons zien wat uw bedrijf kan.</em></strong></p><p>Om <strong>integrator</strong> te worden, moet uw bedrijf aantonen dat het producten op schaal kan certificeren en over de juiste ervaring beschikt om zijn sector te bedienen.</p><p>De <strong>ORIGYN Foundation</strong> beoordeelt elke aanvraag, en de ORIGYN DAO-tokenhouders nemen de uiteindelijke beslissing over wie tot het programma toetreedt.</p>"
         }
       ],
       "goToStep": "Ga naar stap {n}",
