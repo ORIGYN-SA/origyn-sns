@@ -918,17 +918,17 @@
         {
           "labelBold": "CZYM",
           "labelRest": "JEST PROGRAM INTEGRATORÓW?",
-          "description": "Program Integratorów to inicjatywa strategiczna mająca na celu promowanie protokołu ORIGYN, zachęcanie do jego adopcji oraz poszerzanie jego ekosystemu."
+          "description": "<p><strong><em>Wprowadź zaufaną certyfikację cyfrową do swojej firmy.</em></strong></p><p><strong>Program Integratorów ORIGYN</strong> pozwala firmom korzystać z technologii ORIGYN do tworzenia cyfrowych certyfikatów, które potwierdzają autentyczność produktu, śledzą jego historię i chronią jego wartość.<br>Niezależnie od tego, czy certyfikujesz własne produkty, czy oferujesz certyfikację innym firmom, ORIGYN zapewnia technologię, która to umożliwia.</p>"
         },
         {
-          "labelBold": "KIM",
-          "labelRest": "SĄ INTEGRATORZY?",
-          "description": "<ul><li><strong>Integratorzy to niezależne firmy,</strong> które wykorzystują protokół ORIGYN do certyfikowania produktów na blockchainie, dążąc do wspólnego celu, jakim jest wybijanie certyfikatów ORIGYN i promowanie protokołu w określonej branży, klasie aktywów lub w wielu sektorach.</li><li><strong>Występują w dwóch formach:</strong> jako producenci certyfikujący własne produkty oraz jako katalizatorzy, którzy pomagają innym firmom wdrożyć technologię certyfikacji ORIGYN bez konieczności posiadania dogłębnej wiedzy z zakresu blockchain czy Web3.</li><li><strong>Po przeprowadzeniu procesu weryfikacji</strong> przez Fundację ORIGYN integratorzy są wybierani przez posiadaczy tokenów ORIGYN DAO.</li></ul>"
+          "labelBold": "DLACZEGO",
+          "labelRest": "WARTO ZOSTAĆ INTEGRATOREM?",
+          "description": "<p><strong><em>Nowe możliwości dla Twojej firmy.</em></strong></p><p>Jako <strong>Integrator ORIGYN</strong> możesz certyfikować własne produkty lub pomagać innym firmom w certyfikacji ich produktów.</p><p>Oferuj nową, wartościową usługę, buduj zaufanie klientów i twórz nowe możliwości rozwoju swojej firmy. Wszystko to bez konieczności budowania własnej technologii blockchain.</p>"
         },
         {
           "labelBold": "JAK",
           "labelRest": "ZOSTAĆ INTEGRATOREM?",
-          "description": "Aby zostać integratorem, firma musi wykazać, że potrafi certyfikować produkty na dużą skalę, zarówno własne, jak i swoich klientów, spełniając jednocześnie wymagania techniczne i posiadając wiedzę branżową niezbędną do obsługi jednej lub kilku branż."
+          "description": "<p><strong><em>Pokaż nam, co potrafi Twoja firma.</em></strong></p><p>Aby zostać <strong>integratorem,</strong> Twoja firma musi wykazać, że potrafi certyfikować produkty na dużą skalę i ma odpowiednie doświadczenie, by obsługiwać swoją branżę.</p><p><strong>Fundacja ORIGYN</strong> rozpatruje każde zgłoszenie, a ostateczną decyzję o przyjęciu do programu podejmują posiadacze tokenów ORIGYN DAO.</p>"
         }
       ],
       "goToStep": "Przejdź do kroku {n}",

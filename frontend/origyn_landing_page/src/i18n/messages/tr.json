@@ -918,17 +918,17 @@
         {
           "labelBold": "ENTEGRATÖR PROGRAMI",
           "labelRest": "NEDİR?",
-          "description": "Entegratör Programı, ORIGYN protokolünü tanıtmayı, benimsenmesini teşvik etmeyi ve ekosistemini genişletmeyi amaçlayan stratejik bir girişimdir."
+          "description": "<p><strong><em>İşletmenize güvenilir dijital sertifikasyon getirin.</em></strong></p><p><strong>ORIGYN Entegratör</strong> Programı, işletmelerin ORIGYN teknolojisini kullanarak bir ürünün gerçek olduğunu kanıtlayan, geçmişini izleyen ve değerini koruyan dijital sertifikalar oluşturmasını sağlar.<br>İster kendi ürünlerinizi sertifikalandırın ister diğer şirketlere sertifikasyon hizmeti sunun, ORIGYN bunu mümkün kılan teknolojiyi sağlar.</p>"
         },
         {
-          "labelBold": "ENTEGRATÖRLER",
-          "labelRest": "KİMLERDİR?",
-          "description": "<ul><li><strong>Entegratörler bağımsız şirketlerdir:</strong> ORIGYN protokolünü ürünleri blok zinciri üzerinde sertifikalandırmak için kullanır; ORIGYN sertifikası basmak ve protokolü belirli bir sektörde, bir varlık sınıfında veya birden fazla alanda tanıtmak gibi ortak bir hedef paylaşırlar.</li><li><strong>İki türü vardır:</strong> kendi ürünlerini sertifikalandıran üreticiler ve diğer işletmelerin derin blok zinciri veya Web3 uzmanlığı gerektirmeden ORIGYN'in sertifikasyon teknolojisini benimsemelerine yardımcı olan kolaylaştırıcılar.</li><li><strong>ORIGYN Vakfı tarafından yürütülen bir ön inceleme sürecinin ardından</strong> entegratörler, ORIGYN DAO token sahipleri tarafından seçilir.</li></ul>"
+          "labelBold": "ENTEGRATÖR",
+          "labelRest": "NEDEN OLUNMALI?",
+          "description": "<p><strong><em>İşletmeniz için yeni fırsatlar.</em></strong></p><p>Bir <strong>ORIGYN Entegratörü</strong> olarak kendi ürünlerinizi sertifikalandırabilir veya diğer işletmelerin kendi ürünlerini sertifikalandırmasına yardımcı olabilirsiniz.</p><p>Değerli yeni bir hizmet sunun, müşterilerinizle güven inşa edin ve işletmenizi büyütmenin yeni yollarını yaratın. Üstelik kendi blok zinciri teknolojinizi geliştirmenize gerek kalmadan.</p>"
         },
         {
           "labelBold": "ENTEGRATÖR",
           "labelRest": "NASIL OLUNABİLİR?",
-          "description": "Entegratör olabilmek için bir şirketin, ister kendi ürünleri ister müşterilerininki olsun, ürünleri ölçekli şekilde sertifikalandırabildiğini ve bir veya birden fazla sektöre hizmet vermek için gereken teknik gereksinimleri ve sektörel uzmanlığı karşıladığını kanıtlaması gerekir."
+          "description": "<p><strong><em>İşletmenizin neler yapabileceğini bize gösterin.</em></strong></p><p><strong>Entegratör</strong> olabilmek için şirketinizin ürünleri ölçekli şekilde sertifikalandırabildiğini ve sektörüne hizmet verecek doğru deneyime sahip olduğunu göstermesi gerekir.</p><p><strong>ORIGYN Vakfı</strong> her başvuruyu inceler; programa kimin katılacağına ilişkin nihai kararı ise ORIGYN DAO token sahipleri verir.</p>"
         }
       ],
       "goToStep": "{n}. adıma git",

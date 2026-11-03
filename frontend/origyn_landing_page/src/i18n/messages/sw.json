@@ -918,17 +918,17 @@
         {
           "labelBold": "NI NINI",
           "labelRest": "PROGRAMU YA WACHANGIAJI?",
-          "description": "Programu ya Wachangiaji ni mpango wa kimkakati unaolenga kukuza itifaki ya ORIGYN, kuhimiza upanuzi wake na kupanua mfumo wake wa ikolojia."
+          "description": "<p><strong><em>Leta uthibitisho wa kidijitali unaoaminika kwenye biashara yako.</em></strong></p><p>Programu ya <strong>Wachangiaji wa ORIGYN</strong> inaruhusu biashara kutumia teknolojia ya ORIGYN kutengeneza vyeti vya kidijitali vinavyothibitisha kwamba bidhaa ni halisi, kufuatilia historia yake na kulinda thamani yake.<br>Iwe unathibitisha bidhaa zako mwenyewe au unatoa huduma ya uthibitisho kwa makampuni mengine, ORIGYN inakupa teknolojia ya kuwezesha hilo.</p>"
         },
         {
-          "labelBold": "NANI",
-          "labelRest": "NDIO WACHANGIAJI?",
-          "description": "<ul><li><strong>Wachangiaji ni makampuni huru</strong> yanayotumia itifaki ya ORIGYN kuthibitisha bidhaa kwenye blockchain, kwa lengo la pamoja la kutengeneza vyeti vya ORIGYN na kukuza itifaki katika tasnia mahususi, katika darasa la mali au katika sekta mbalimbali.</li><li><strong>Wako wa aina mbili:</strong> watengenezaji wanaothibitisha bidhaa zao wenyewe, na wawezeshaji wanaosaidia biashara nyingine kupitisha teknolojia ya uthibitisho ya ORIGYN bila kuhitaji ujuzi wa kina wa blockchain au Web3.</li><li><strong>Kufuatia mchakato wa ukaguzi wa kina</strong> uliofanywa na Msingi wa ORIGYN, wachangiaji wanachaguliwa na wamiliki wa tokeni wa ORIGYN DAO.</li></ul>"
+          "labelBold": "KWA NINI",
+          "labelRest": "UWE MCHANGIAJI?",
+          "description": "<p><strong><em>Fursa mpya kwa biashara yako.</em></strong></p><p>Kama <strong>Mchangiaji wa ORIGYN,</strong> unaweza kuthibitisha bidhaa zako mwenyewe au kusaidia biashara nyingine kuthibitisha bidhaa zao.</p><p>Toa huduma mpya yenye thamani, jenga uaminifu kwa wateja na tengeneza njia mpya za kukuza biashara yako. Yote haya bila kulazimika kujenga teknolojia yako mwenyewe ya blockchain.</p>"
         },
         {
           "labelBold": "JINSI GANI",
           "labelRest": "UNAVYOKUWA MCHANGIAJI?",
-          "description": "Ili kuwa mchangiaji, kampuni lazima ionyeshe kwamba inaweza kuthibitisha bidhaa kwa kiwango kikubwa, ziwe zake au za wateja wake, huku ikitimiza mahitaji ya kiufundi na utaalamu wa sekta unaohitajika kuhudumia tasnia moja au kadhaa."
+          "description": "<p><strong><em>Tuonyeshe uwezo wa biashara yako.</em></strong></p><p>Ili kuwa <strong>mchangiaji,</strong> kampuni yako inahitaji kuonyesha kwamba inaweza kuthibitisha bidhaa kwa kiwango kikubwa na ina uzoefu unaofaa kuhudumia tasnia yake.</p><p><strong>Msingi wa ORIGYN</strong> hukagua kila ombi, na wamiliki wa tokeni wa ORIGYN DAO hufanya uamuzi wa mwisho kuhusu nani atajiunga na programu.</p>"
         }
       ],
       "goToStep": "Nenda hatua ya {n}",

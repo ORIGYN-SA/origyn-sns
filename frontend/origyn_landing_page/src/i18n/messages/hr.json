@@ -918,17 +918,17 @@
         {
           "labelBold": "ŠTO",
           "labelRest": "JE PROGRAM ZA INTEGRATORE?",
-          "description": "Program za integratore je strateška inicijativa s ciljem promicanja ORIGYN protokola, poticanja njegovog usvajanja i širenja ekosustava."
+          "description": "<p><strong><em>Donesite pouzdanu digitalnu certifikaciju u svoje poslovanje.</em></strong></p><p><strong>ORIGYN-ov program za integratore</strong> omogućuje tvrtkama da koriste ORIGYN-ovu tehnologiju za izradu digitalnih certifikata koji dokazuju autentičnost proizvoda, prate njegovu povijest i štite njegovu vrijednost.<br>Bilo da certificirate vlastite proizvode ili nudite certifikaciju drugim tvrtkama, ORIGYN pruža tehnologiju koja to omogućuje.</p>"
         },
         {
-          "labelBold": "TKO",
-          "labelRest": "SU INTEGRATORI?",
-          "description": "<ul><li><strong>Integratori su neovisne tvrtke</strong> koje koriste ORIGYN protokol za certificiranje proizvoda na blockchainu, sa zajedničkim ciljem iskivanja ORIGYN certifikata i promicanja protokola u određenoj industriji, klasi imovine ili kroz više sektora.</li><li><strong>Postoje u dva oblika:</strong> proizvođači koji certificiraju vlastite proizvode i omogućitelji koji pomažu drugim tvrtkama da usvoje ORIGYN-ovu tehnologiju certifikacije bez potrebe za dubokim znanjem o blockchainu ili Web3.</li><li><strong>Nakon procesa provjere</strong> koji provodi ORIGYN Fondacija, integratore biraju nositelji tokena ORIGYN DAO-a.</li></ul>"
+          "labelBold": "ZAŠTO",
+          "labelRest": "POSTATI INTEGRATOR?",
+          "description": "<p><strong><em>Nove prilike za vaše poslovanje.</em></strong></p><p>Kao <strong>ORIGYN integrator</strong> možete certificirati vlastite proizvode ili pomoći drugim tvrtkama da certificiraju svoje.</p><p>Ponudite vrijednu novu uslugu, izgradite povjerenje kupaca i otvorite nove putove rasta svog poslovanja. Sve to bez potrebe za razvojem vlastite blockchain tehnologije.</p>"
         },
         {
           "labelBold": "KAKO",
           "labelRest": "POSTATI INTEGRATOR?",
-          "description": "Kako bi postala integrator, tvrtka mora dokazati da može certificirati proizvode u velikom opsegu, bilo vlastite ili svojih klijenata, ispunjavajući pritom tehničke zahtjeve i sektorsku stručnost potrebnu za posluživanje jedne ili više industrija."
+          "description": "<p><strong><em>Pokažite nam što vaša tvrtka može.</em></strong></p><p>Kako bi postala <strong>integrator,</strong> vaša tvrtka mora dokazati da može certificirati proizvode u velikom opsegu i da ima odgovarajuće iskustvo za posluživanje svoje industrije.</p><p><strong>ORIGYN Fondacija</strong> pregledava svaku prijavu, a nositelji tokena ORIGYN DAO-a donose konačnu odluku o tome tko se pridružuje programu.</p>"
         }
       ],
       "goToStep": "Idi na korak {n}",

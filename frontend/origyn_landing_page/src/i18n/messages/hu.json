@@ -918,17 +918,17 @@
         {
           "labelBold": "MI",
           "labelRest": "AZ INTEGRÁLÓI PROGRAM?",
-          "description": "Az Integrálói Program egy stratégiai kezdeményezés, amelynek célja az ORIGYN protokoll népszerűsítése, elfogadásának ösztönzése és ökoszisztémájának bővítése."
+          "description": "<p><strong><em>Hozzon megbízható digitális tanúsítást vállalkozásába.</em></strong></p><p><strong>Az ORIGYN Integrálói</strong> Program lehetővé teszi a vállalkozások számára, hogy az ORIGYN technológiájával olyan digitális tanúsítványokat hozzanak létre, amelyek igazolják egy termék eredetiségét, nyomon követik előtörténetét és megóvják értékét.<br>Akár saját termékeit tanúsítja, akár más cégeknek kínál tanúsítást, az ORIGYN biztosítja ehhez a technológiát.</p>"
         },
         {
-          "labelBold": "KIK",
-          "labelRest": "AZ INTEGRÁLÓK?",
-          "description": "<ul><li><strong>Az integrálók független cégek,</strong> amelyek az ORIGYN protokollt használják termékek blokkláncon történő tanúsítására, azzal a közös céllal, hogy ORIGYN tanúsítványokat bocsássanak ki és népszerűsítsék a protokollt egy adott iparágban, eszközosztályban vagy több ágazatban.</li><li><strong>Két formában léteznek:</strong> gyártók, amelyek saját termékeiket tanúsítják, és támogatók, amelyek más vállalkozásokat segítenek az ORIGYN tanúsítási technológiájának bevezetésében anélkül, hogy mélyreható blokklánc- vagy Web3-szakértelemre lenne szükségük.</li><li><strong>Az ORIGYN Alapítvány által végzett átvilágítási folyamatot követően</strong> az integrálókat az ORIGYN DAO tokenbirtokosai választják meg.</li></ul>"
+          "labelBold": "MIÉRT",
+          "labelRest": "ÉRDEMES INTEGRÁLÓVÁ VÁLNI?",
+          "description": "<p><strong><em>Új lehetőségek vállalkozása számára.</em></strong></p><p><strong>ORIGYN integrálóként</strong> tanúsíthatja saját termékeit, vagy segíthet más vállalkozásoknak tanúsítani az övéiket.</p><p>Kínáljon értékes új szolgáltatást, építsen bizalmat ügyfelei körében, és teremtsen új növekedési lehetőségeket vállalkozása számára. Mindezt anélkül, hogy saját blokklánc-technológiát kellene fejlesztenie.</p>"
         },
         {
           "labelBold": "HOGYAN",
           "labelRest": "VÁLHAT INTEGRÁLÓVÁ?",
-          "description": "Az integrálóvá váláshoz egy vállalatnak igazolnia kell, hogy nagy léptékben képes termékeket tanúsítani, akár a sajátjait, akár ügyfelei termékeit, miközben megfelel a technikai követelményeknek, és rendelkezik az egy vagy több iparág kiszolgálásához szükséges ágazati szakértelemmel."
+          "description": "<p><strong><em>Mutassa meg, mire képes vállalkozása.</em></strong></p><p>Ahhoz, hogy <strong>integrálóvá</strong> váljon, vállalatának igazolnia kell, hogy nagy léptékben képes termékeket tanúsítani, és rendelkezik az iparága kiszolgálásához szükséges tapasztalattal.</p><p>Az <strong>ORIGYN Alapítvány</strong> minden jelentkezést megvizsgál, a programba való felvételről pedig az ORIGYN DAO tokenbirtokosai hozzák meg a végső döntést.</p>"
         }
       ],
       "goToStep": "{n}. lépésre ugrás",
