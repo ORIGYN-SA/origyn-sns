@@ -1,0 +1,39 @@
+{
+  "_source": {
+    "layerzero": "https://metadata.layerzero-api.com/v1/metadata/deployments, key base-mainnet: deployments[version 2] endpointV2, sendUln302, receiveUln302, executor, and dvns (fetched 2026-11-06)",
+    "dvns": "LayerZero Labs 0x9e059a54699a285714207b43B055483E78FAac25 (id layerzero-labs) and Twinstake 0xcd37CA043f8479064e10635020c65FfC005d36f6 (id nethermind, the Nethermind DVN now run by Twinstake); also listed in https://metadata.layerzero-api.com/v1/metadata/dvns",
+    "defaults": "SendUln302.getUlnConfig(0x0, 30101) and ReceiveUln302.getUlnConfig(0x0, 30101) on Base at block 53978427: LayerZero's default confirmations 10 out and 15 in, both DVNs in the default required set, executor 0x2CCA08ae69E0C44b18a57Ab2A87644234dAebaE4 with maxMessageSize 10000",
+    "signers": "tools/evm-signers: node evm-signers.mjs --json (canister 6f6ua-hqaaa-aaaar-qairq-cai, key_1, both live checks match), 2026-11-06; spec 7.1",
+    "operator_and_salt": "Not set yet. Fill in the operator wallet and a salt of that wallet address, then 0x00, then 11 random bytes (spec 7.2), the same in ethereum.json. Deploy refuses zero values."
+  },
+  "chain": "base",
+  "chainId": 8453,
+  "eid": 30184,
+  "endpoint": "0x1a44076050125825900e736c501f859c50fE728c",
+  "peerEid": 30101,
+  "sendLib": "0xB5320B0B3a13cC860893E2Bd79FCd7e13484Dda2",
+  "receiveLib": "0xc70AB6f32772f59fBfc23889Caf4Ba3376C84bAf",
+  "sendConfig": {
+    "executor": "0x2CCA08ae69E0C44b18a57Ab2A87644234dAebaE4",
+    "maxMessageSize": 10000,
+    "confirmations": 10,
+    "requiredDVNs": [
+      "0x9e059a54699a285714207b43B055483E78FAac25",
+      "0xcd37CA043f8479064e10635020c65FfC005d36f6"
+    ]
+  },
+  "receiveConfig": {
+    "confirmations": 15,
+    "requiredDVNs": [
+      "0x9e059a54699a285714207b43B055483E78FAac25",
+      "0xcd37CA043f8479064e10635020c65FfC005d36f6"
+    ]
+  },
+  "lzReceiveGas": 100000,
+  "operator": "0x0000000000000000000000000000000000000000",
+  "adminSigner": "0x216C1E5F2b9EB767Cec5C7d4DFa2d02b5A0AA143",
+  "icpSigner": "0x0A82D20142d067C8AF32f48664bDDfb65EcAE507",
+  "salt": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "name": "Gold Token",
+  "symbol": "GLDT"
+}
