@@ -1,0 +1,39 @@
+{
+  "_source": {
+    "layerzero": "https://metadata.layerzero-api.com/v1/metadata/deployments, key sepolia-testnet: deployments[version 2] endpointV2, sendUln302, receiveUln302, executor, and dvns (fetched 2026-11-06). Not checked on chain: no testnet RPC was used.",
+    "dvns": "LayerZero Labs 0x8eebf8b423B73bFCa51a1Db4B7354AA0bFCA9193 (id layerzero-labs) and Twinstake 0x68802e01D6321D5159208478f297d7007A7516Ed (id nethermind)",
+    "confirmations": "Not set: read LayerZero's defaults on chain first (SendUln302.getUlnConfig(0x0, 40245) and ReceiveUln302.getUlnConfig(0x0, 40245)); the receive value must equal the send value in base-sepolia.json. Deploy refuses 0.",
+    "signers": "tools/evm-signers: node evm-signers.mjs --canister m45be-jaaaa-aaaak-qcgnq-cai --key test_key_1 --json (staging gldt_swap), 2026-11-06. Confirm against get_bridge_evm_signers on staging before deploying.",
+    "operator_and_salt": "Not set yet: the staging operator wallet and a salt of that wallet address, then 0x00, then 11 random bytes, the same in base-sepolia.json."
+  },
+  "chain": "sepolia",
+  "chainId": 11155111,
+  "eid": 40161,
+  "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+  "peerEid": 40245,
+  "sendLib": "0xcc1ae8Cf5D3904Cef3360A9532B477529b177cCE",
+  "receiveLib": "0xdAf00F5eE2158dD58E0d3857851c432E34A3A851",
+  "sendConfig": {
+    "executor": "0x718B92b5CB0a5552039B593faF724D182A881eDA",
+    "maxMessageSize": 10000,
+    "confirmations": 0,
+    "requiredDVNs": [
+      "0x68802e01D6321D5159208478f297d7007A7516Ed",
+      "0x8eebf8b423B73bFCa51a1Db4B7354AA0bFCA9193"
+    ]
+  },
+  "receiveConfig": {
+    "confirmations": 0,
+    "requiredDVNs": [
+      "0x68802e01D6321D5159208478f297d7007A7516Ed",
+      "0x8eebf8b423B73bFCa51a1Db4B7354AA0bFCA9193"
+    ]
+  },
+  "lzReceiveGas": 100000,
+  "operator": "0x0000000000000000000000000000000000000000",
+  "adminSigner": "0x854D0963480005Fa301167b7f9C6878fAc5c9fa1",
+  "icpSigner": "0xb8f935e598953912485E76f04D0229F6d13DEF57",
+  "salt": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "name": "Gold Token",
+  "symbol": "GLDT"
+}

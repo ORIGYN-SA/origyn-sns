@@ -2,3 +2,7 @@ node_modules
 out
 cache
 broadcast
+tools/evm-signers/node_modules
+# Written by DeployLocal (anvil) and by dry runs; real deployment records are committed after launch.
+deployments/local.json
+deployments/dryrun-*.json
