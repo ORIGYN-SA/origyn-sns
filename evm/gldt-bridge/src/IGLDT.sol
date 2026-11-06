@@ -1,0 +1,95 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity 0.8.28;
+
+import { SetConfigParam } from "@layerzerolabs/lz-evm-protocol-v2/contracts/interfaces/IMessageLibManager.sol";
+
+/// @title GLDT bridge interface
+/// @notice Structs, events, errors and the GLDT specific functions of the token.
+/// The inherited LayerZero OFT, ERC-20, EIP-2612 and UUPS functions are not repeated here.
+interface IGLDT {
+    /// @notice Everything `initialize` sets, inside the proxy deployment (spec 6.2).
+    struct InitParams {
+        string name; // "Gold Token"
+        string symbol; // "GLDT"
+        address adminSigner; // gldt_swap admin key address
+        address icpSigner; // gldt_swap claims key address
+        address operator; // the operator wallet
+        uint32 peerEid; // the other chain: 30101 Ethereum, 30184 Base
+        bytes32 peer; // the token on the other chain, as bytes32
+        address sendLib; // SendUln302 on this chain
+        address receiveLib; // ReceiveUln302 on this chain
+        SetConfigParam[] sendConfig; // executor config (type 1) and ULN config (type 2), every field explicit
+        SetConfigParam[] receiveConfig; // ULN config (type 2), every field explicit
+        uint128 lzReceiveGas;
+        uint256 minBurnToIcp; // 100_000_000 (1 GLDT with 8 decimals)
+    }
+
+    /// @notice One call inside an admin action signed by gldt_swap (spec 6.6).
+    struct Call {
+        address target;
+        bytes data;
+    }
+
+    event ClaimedFromIcp(uint64 indexed icpBurnIndex, address indexed recipient, uint256 amount);
+    event BurnedToIcp(
+        uint64 indexed burnId,
+        address indexed from,
+        bytes32 icpPrincipal,
+        bytes32 icpSubaccount,
+        uint256 amount
+    );
+    event PausedSet(bool lzPaused, bool icpBridgePaused);
+    event LzReceiveGasSet(uint32 dstEid, uint128 gas);
+    event OperatorSet(address operator);
+    event IcpSignerSet(address signer);
+    event AdminSignerSet(address signer);
+    event MinBurnToIcpSet(uint256 amount);
+    event Executed(uint256 indexed nonce, bytes32 digest);
+    event NonceCancelled(uint256 indexed nonce);
+
+    error PathPaused();
+    error AlreadyClaimed();
+    error BadSignature();
+    error ZeroAddress();
+    error BadIcpPrincipal();
+    error BelowMinimum(uint256 min);
+    error NotOperator();
+    error GasOutOfBounds();
+    error Expired();
+    error NonceUsed();
+    error TargetNotAllowed(uint256 index);
+    error CallFailed(uint256 index, bytes reason);
+    error NotSelf();
+    error CodeHashMismatch();
+    error UpgradeNotAllowed();
+    error OwnershipFixed();
+    /// @notice `initialize` got an empty `sendConfig` or `receiveConfig` (spec 6.2 names no error for this).
+    error EmptyConfig();
+    /// @notice `minBurnToIcp` must be above 0 (spec 6.2 and 6.6 name no error for this).
+    error ZeroMinBurn();
+
+    /// @notice One time setup, run by the proxy constructor (spec 6.2).
+    function initialize(InitParams calldata p) external;
+
+    /// @notice Operator or the token itself: sets both pause flags (spec 6.5).
+    function setPaused(bool lzPaused, bool icpBridgePaused) external;
+
+    /// @notice Operator or the token itself: sets the enforced lzReceive gas for `dstEid`, value always 0 (spec 6.5).
+    function setLzReceiveGas(uint32 dstEid, uint128 gas) external;
+
+    /// @notice Everything the canister reads each tick, in one call (spec 6.8).
+    function bridgeInfo()
+        external
+        view
+        returns (uint64 nextBurnId, uint256 totalSupply, address owner, address adminSigner, address icpSigner);
+
+    function paused() external view returns (bool lzPaused, bool icpBridgePaused);
+
+    function operator() external view returns (address);
+
+    function adminSigner() external view returns (address);
+
+    function icpSigner() external view returns (address);
+
+    function minBurnToIcp() external view returns (uint256);
+}
