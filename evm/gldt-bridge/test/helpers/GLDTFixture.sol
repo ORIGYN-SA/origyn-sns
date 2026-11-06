@@ -160,6 +160,34 @@ abstract contract GLDTFixture is TestHelperOz5 {
         return abi.encodePacked(r, s, v);
     }
 
+    /// @notice The voucher digest gldt_swap signs, built from the type string and not from the contract.
+    function claimDigest(address token, uint64 index, address to, uint256 amount) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked("\x19\x01", domainSeparator(token), _claimStructHash(index, to, amount)));
+    }
+
+    /// @notice A voucher for `claimFromIcp` on `token`, signed with `key`.
+    function signClaim(
+        uint256 key,
+        address token,
+        uint64 index,
+        address to,
+        uint256 amount
+    ) internal view returns (bytes memory) {
+        return signTyped(key, token, _claimStructHash(index, to, amount));
+    }
+
+    /// @notice Mints on `token` with a voucher from the claims key, as gldt_swap does for an ICP burn.
+    function mintByClaim(GLDT token, uint64 index, address to, uint256 amount) internal {
+        token.claimFromIcp(index, to, amount, signClaim(icpKey, address(token), index, to, amount));
+    }
+
+    function _claimStructHash(uint64 index, address to, uint256 amount) private pure returns (bytes32) {
+        return
+            keccak256(
+                abi.encode(keccak256("Claim(uint64 icpBurnIndex,address recipient,uint256 amount)"), index, to, amount)
+            );
+    }
+
     // LayerZero delivery with every required DVN. TestHelperOz5.verifyPackets signs with requiredDVNs[0] only,
     // so it cannot commit a packet that needs two DVNs.
 

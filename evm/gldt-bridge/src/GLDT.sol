@@ -5,8 +5,10 @@ import { OFTUpgradeable } from "@layerzerolabs/oft-evm-upgradeable/contracts/oft
 import { EnforcedOptionParam } from "@layerzerolabs/oapp-evm/contracts/oapp/interfaces/IOAppOptionsType3.sol";
 import { ERC20PermitUpgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
 import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 import { IGLDT } from "./IGLDT.sol";
+import { IcpPrincipal } from "./libs/IcpPrincipal.sol";
 
 /// @title GLDT on Ethereum and Base
 /// @notice LayerZero OFT behind a UUPS proxy. The token is its own owner and its own LayerZero delegate.
@@ -28,6 +30,8 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
 
     // keccak256(abi.encode(uint256(keccak256("gldt.storage.GLDT")) - 1)) & ~bytes32(uint256(0xff))
     bytes32 private constant GLDT_STORAGE_LOCATION = 0x3084c67bbad50587897ca408b5a5f48944d58a2de470a5f329e23869660eeb00;
+
+    bytes32 public constant CLAIM_TYPEHASH = keccak256("Claim(uint64 icpBurnIndex,address recipient,uint256 amount)");
 
     uint128 public constant MIN_LZ_RECEIVE_GAS = 60_000;
     uint128 public constant MAX_LZ_RECEIVE_GAS = 500_000;
@@ -86,6 +90,43 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         $.minBurnToIcp = p.minBurnToIcp;
     }
 
+    // User functions (spec 6.4)
+
+    /// @inheritdoc IGLDT
+    function claimFromIcp(
+        uint64 icpBurnIndex,
+        address recipient,
+        uint256 amount,
+        bytes calldata signature
+    ) external {
+        GLDTStorage storage $ = _getGLDTStorage();
+        if ($.icpBridgePaused) revert PathPaused();
+        if ($.claimed[icpBurnIndex]) revert AlreadyClaimed();
+        if (recipient == address(0)) revert ZeroAddress();
+
+        // The domain has chainId and the proxy address, so a voucher for one chain fails on the other.
+        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(CLAIM_TYPEHASH, icpBurnIndex, recipient, amount)));
+        // OpenZeppelin rejects high s, so gldt_swap normalizes s before it hands out a voucher.
+        if (ECDSA.recover(digest, signature) != $.icpSigner) revert BadSignature();
+
+        $.claimed[icpBurnIndex] = true;
+        _mint(recipient, amount);
+        emit ClaimedFromIcp(icpBurnIndex, recipient, amount);
+    }
+
+    /// @inheritdoc IGLDT
+    function burnToIcp(uint256 amount, bytes32 icpPrincipal, bytes32 icpSubaccount) external returns (uint64 burnId) {
+        GLDTStorage storage $ = _getGLDTStorage();
+        if ($.icpBridgePaused) revert PathPaused();
+        uint256 min = $.minBurnToIcp;
+        if (amount < min) revert BelowMinimum(min);
+        if (!IcpPrincipal.isValid(icpPrincipal)) revert BadIcpPrincipal();
+
+        _burn(msg.sender, amount);
+        burnId = $.nextBurnId++;
+        emit BurnedToIcp(burnId, msg.sender, icpPrincipal, icpSubaccount, amount);
+    }
+
     // Operator functions (spec 6.5)
 
     /// @inheritdoc IGLDT
@@ -134,6 +175,16 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
     /// @inheritdoc IGLDT
     function minBurnToIcp() external view returns (uint256) {
         return _getGLDTStorage().minBurnToIcp;
+    }
+
+    /// @inheritdoc IGLDT
+    function isClaimed(uint64 icpBurnIndex) external view returns (bool) {
+        return _getGLDTStorage().claimed[icpBurnIndex];
+    }
+
+    /// @inheritdoc IGLDT
+    function nextBurnId() external view returns (uint64) {
+        return _getGLDTStorage().nextBurnId;
     }
 
     // Overrides (spec 6.7)

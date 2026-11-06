@@ -71,6 +71,14 @@ interface IGLDT {
     /// @notice One time setup, run by the proxy constructor (spec 6.2).
     function initialize(InitParams calldata p) external;
 
+    /// @notice Mints `amount` to `recipient` for an ICP burn, with a voucher signed by the claims key (spec 6.4).
+    /// Anyone may submit it. Each ICP burn index claims once.
+    function claimFromIcp(uint64 icpBurnIndex, address recipient, uint256 amount, bytes calldata signature) external;
+
+    /// @notice Burns the caller's `amount` for the ICP account (`icpPrincipal`, `icpSubaccount`) (spec 6.4).
+    /// gldt_swap finds the burn by its id and mints on ICP.
+    function burnToIcp(uint256 amount, bytes32 icpPrincipal, bytes32 icpSubaccount) external returns (uint64 burnId);
+
     /// @notice Operator or the token itself: sets both pause flags (spec 6.5).
     function setPaused(bool lzPaused, bool icpBridgePaused) external;
 
@@ -92,4 +100,12 @@ interface IGLDT {
     function icpSigner() external view returns (address);
 
     function minBurnToIcp() external view returns (uint256);
+
+    function isClaimed(uint64 icpBurnIndex) external view returns (bool);
+
+    /// @notice The id the next `burnToIcp` gets. Ids start at 0 and have no gaps.
+    function nextBurnId() external view returns (uint64);
+
+    /// @notice keccak256("Claim(uint64 icpBurnIndex,address recipient,uint256 amount)")
+    function CLAIM_TYPEHASH() external view returns (bytes32);
 }
