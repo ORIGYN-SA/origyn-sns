@@ -26,6 +26,17 @@ type BridgeConfig = record {
   admin_action_validity_secs : nat64;
   evm_rpc_canister : principal;
 };
+type BridgeError = variant {
+  Paused;
+  // The ledger refused the burn; nothing changed.
+  Burn : TransferFromError;
+  Busy;
+  UnknownChain;
+  // Keys not loaded, a chain has no start block, or this chain is stopped.
+  NotReady : text;
+  ZeroAmount;
+  InvalidRecipient;
+};
 // Authorized principals can only pause: a `true` sets the flag, a `false` leaves it as it is.
 type BridgePauseArgs = record { inbound : bool; outbound : bool };
 type BridgeStatus = record {
@@ -41,6 +52,12 @@ type BridgeStatus = record {
   alerts_total : nat64;
   out_pending : nat;
   bridged_out : nat;
+};
+type BridgeToEvmArgs = record {
+  chain : EvmChain;
+  recipient : text;
+  from_subaccount : opt blob;
+  amount : nat;
 };
 type BridgeUpgrade = record {
   chain_resets : vec ChainReset;
@@ -146,6 +163,15 @@ type EvmProvider = variant {
   Cloudflare;
   PublicNode;
   Ankr;
+};
+type EvmVoucher = record {
+  token : text;
+  // `0x` and 65 bytes of hex.
+  signature : text;
+  recipient : text;
+  icp_burn_index : nat64;
+  chain_id : nat64;
+  amount : nat;
 };
 type FieldsDisplay = record {
   fields : vec record { text; Value };
@@ -290,6 +316,25 @@ type InitArgs = record {
   swap_configs : vec SwapCanisterConfig;
 };
 type Nft = record { id : nat; canister_id : principal };
+type OutboundStatus = variant {
+  Burned : record { icp_burn_index : nat64 };
+  Failed : text;
+  // The ledger said TooOld while the outcome was unknown.
+  NeedsManualCheck : text;
+  // The ledger outcome is unknown; retried with the same arguments.
+  BurnUnknown;
+  Burning;
+  Signed : EvmVoucher;
+};
+type OutboundTransfer = record {
+  id : nat64;
+  status : OutboundStatus;
+  from : Account;
+  chain : EvmChain;
+  recipient : text;
+  created_at : nat64;
+  amount : nat;
+};
 // Inbound records waiting in the mint queue, by status.
 type QueueSizes = record {
   needs_manual_check : nat64;
@@ -298,14 +343,15 @@ type QueueSizes = record {
   quarantined : nat64;
 };
 type Response = variant { Success; InternalError : text };
-type Result = variant {
+type Result = variant { Ok : OutboundTransfer; Err : BridgeError };
+type Result_1 = variant {
   Ok : vec record { principal; vec nat };
   Err : GeneralError;
 };
-type Result_1 = variant { Ok : vec nat; Err : GeneralError };
-type Result_2 = variant { Ok : ConsentInfo; Err : Icrc21Error };
-type Result_3 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
-type Result_4 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
+type Result_2 = variant { Ok : vec nat; Err : GeneralError };
+type Result_3 = variant { Ok : ConsentInfo; Err : Icrc21Error };
+type Result_4 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
+type Result_5 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
 type Severity = variant { Info; Critical; Warning };
 // Both sides of the supply guard: minting holds while `evm_side > icp_side`.
 type SupplyGuardStatus = record {
@@ -363,6 +409,20 @@ type SwapTokensForNftErrors = variant {
   SwapCreationError;
 };
 type SwapType = variant { Forward; Reverse };
+// The error return type for the
+// [ICRC-2 `transfer_from`](https://github.com/dfinity/ICRC-1/blob/main/standards/ICRC-2/README.md#icrc2_transfer_from)
+// endpoint.
+type TransferFromError = variant {
+  GenericError : record { message : text; error_code : nat };
+  TemporarilyUnavailable;
+  InsufficientAllowance : record { allowance : nat };
+  BadBurn : record { min_burn_amount : nat };
+  Duplicate : record { duplicate_of : nat };
+  BadFee : record { expected_fee : nat };
+  CreatedInFuture : record { ledger_time : nat64 };
+  TooOld;
+  InsufficientFunds : record { balance : nat };
+};
 type UpgradeArgs = record {
   // Replaces the bridge config and restarts stopped chains. `None` keeps the bridge as it is.
   bridge : opt BridgeUpgrade;
@@ -404,6 +464,9 @@ service : (Args_1) -> {
   // Authorized principals can pause either direction but never unpause;
   // unpausing is an SNS `SetIcpPaused` action.
   bridge_pause : (BridgePauseArgs) -> ();
+  // Burns the caller's GLDT on ICP and signs a claim voucher for Ethereum or Base (spec 8.6).
+  // The caller first approves `gldt_swap` for `amount` on the GLDT ledger.
+  bridge_to_evm : (BridgeToEvmArgs) -> (Result);
   commit : () -> ();
   get_active_swap_ids_by_user : (opt principal) -> (vec nat) query;
   get_active_swaps : (null) -> (vec record { nat; SwapInfo }) query;
@@ -411,11 +474,19 @@ service : (Args_1) -> {
   get_active_swaps_by_user : (opt principal) -> (
       vec record { nat; SwapInfo },
     ) query;
-  get_available_nfts : (opt principal) -> (Result);
-  get_available_nfts_for_canister : (Args) -> (Result_1);
+  get_available_nfts : (opt principal) -> (Result_1);
+  get_available_nfts_for_canister : (Args) -> (Result_2);
   // The EIP-55 addresses of the claims and admin keys, once loaded.
   get_bridge_evm_signers : () -> (GetBridgeEvmSignersResponse) query;
   get_bridge_status : () -> (BridgeStatus) query;
+  // One outbound transfer. The frontend polls it until the status is `Signed`, then submits the
+  // voucher with `claimFromIcp`. Vouchers never expire.
+  get_bridge_transfer_out : (nat64) -> (opt OutboundTransfer) query;
+  // The account's outbound transfers, newest first. `start` is an exclusive upper bound on the
+  // id (the last id of the previous page); `limit` is capped at 100.
+  get_bridge_transfers_out_by_account : (Account, opt nat64, nat32) -> (
+      vec OutboundTransfer,
+    ) query;
   get_failed_swap_ids_by_user : (opt principal) -> (vec nat) query;
   get_failed_swaps : (null) -> (vec record { nat; SwapInfo }) query;
   get_failed_swaps_by_ids : (vec nat) -> (vec record { nat; SwapInfo }) query;
@@ -425,7 +496,7 @@ service : (Args_1) -> {
   get_swap_configs : (null) -> (vec SwapCanisterConfig) query;
   icrc10_supported_standards : () -> (vec SupportedStandard) query;
   icrc21_canister_call_consent_message : (ConsentMessageRequest) -> (
-      Result_2,
+      Result_3,
     ) query;
   icrc28_trusted_origins : () -> (Icrc28TrustedOriginsResponse);
   icrc3_get_archives : (null) -> (vec ICRC3ArchiveInfo) query;
@@ -434,6 +505,6 @@ service : (Args_1) -> {
   icrc3_get_tip_certificate : (null) -> (ICRC3DataCertificate) query;
   icrc3_supported_block_types : (null) -> (vec SupportedBlockType) query;
   set_buyback_canister : (opt Account) -> (Response);
-  swap_nft_for_tokens : (vec Nft) -> (Result_3);
-  swap_tokens_for_nft : (vec Nft) -> (Result_4);
+  swap_nft_for_tokens : (vec Nft) -> (Result_4);
+  swap_tokens_for_nft : (vec Nft) -> (Result_5);
 }

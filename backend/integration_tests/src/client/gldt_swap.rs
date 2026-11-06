@@ -28,3 +28,38 @@ generate_pocket_query_call!(icrc3_get_archives);
 generate_pocket_query_call!(get_bridge_status);
 generate_pocket_query_call!(get_bridge_evm_signers);
 generate_pocket_update_call!(bridge_pause);
+generate_pocket_update_call!(bridge_to_evm);
+generate_pocket_query_call!(get_bridge_transfer_out);
+
+/// Not built with `generate_pocket_query_call!`, which sends one Candid argument: this query
+/// takes three (account, start, limit).
+pub fn get_bridge_transfers_out_by_account(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_out_by_account::Args,
+) -> get_bridge_transfers_out_by_account::Response {
+    let (account, start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_out_by_account",
+        candid::encode_args((account, start, limit)).unwrap(),
+    ))
+}
+
+/// The api module is `icrc21`, not the method name, so this is written out.
+pub fn icrc21_canister_call_consent_message(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &icrc21::Args,
+) -> icrc21::Response {
+    crate::client::pocket::execute_query(
+        pic,
+        sender,
+        canister_id,
+        "icrc21_canister_call_consent_message",
+        args,
+    )
+}

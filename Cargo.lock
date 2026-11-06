@@ -4437,6 +4437,7 @@ dependencies = [
 name = "integration_tests"
 version = "0.1.0"
 dependencies = [
+ "alloy-primitives",
  "assert_matches",
  "bity-ic-canister-time",
  "bity-ic-icrc3 0.5.1",
@@ -4462,6 +4463,7 @@ dependencies = [
  "ic-nns-governance-api",
  "icrc-ledger-types 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "icrc_ledger_canister",
+ "k256",
  "lazy_static",
  "ledger_utils",
  "nns_governance_canister",

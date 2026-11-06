@@ -1,14 +1,19 @@
+use crate::client::gldt_swap::get_bridge_evm_signers;
 use crate::client::pocket::create_canister_with_id;
-use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger;
+use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger_with_balances;
 use crate::gldt_swap_suite::setup::setup_gldt_swap::setup_gldt_swap_canister;
 use crate::utils::random_principal;
 use crate::wasms::{EVM_RPC, GLDT_SWAP};
 use bity_ic_icrc3::config::{ICRC3Config, ICRC3Properties};
 use bity_ic_types::BuildVersion;
-use candid::{encode_one, CandidType, Principal};
+use candid::{encode_one, CandidType, Nat, Principal};
 use gldt_swap_api_canister::init::InitArgs;
 use gldt_swap_api_canister::post_upgrade::UpgradeArgs;
 use gldt_swap_common::bridge::{BridgeConfig, BridgeUpgrade, ChainConfig, EvmChain, EvmProvider};
+use gldt_swap_common::swap_canister_config::{
+    FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
+};
+use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc3::blocks::SupportedBlockType;
 use pocket_ic::{PocketIc, PocketIcBuilder, RejectResponse};
 use std::time::Duration;
@@ -21,6 +26,8 @@ pub const ECDSA_KEY_NAME: &str = "test_key_1";
 pub const FAKE_ETHEREUM_TOKEN: &str = "0x00000000000000000000000000000000000E7E01";
 pub const FAKE_BASE_TOKEN: &str = "0x00000000000000000000000000000000000BA5E1";
 pub const LZ_ENDPOINT: &str = "0x1a44076050125825900e736c501f859c50fE728c";
+/// `BridgeEnv::user` starts with 1,000 GLDT.
+pub const USER_BALANCE_E8S: u64 = 100_000_000_000;
 
 pub struct BridgeEnv {
     pub pic: PocketIc,
@@ -30,6 +37,8 @@ pub struct BridgeEnv {
     pub gldt_swap_canister_id: Principal,
     pub gldt_ledger_canister_id: Principal,
     pub evm_rpc_canister_id: Principal,
+    /// A user holding `USER_BALANCE_E8S` GLDT from the start.
+    pub user: Principal,
 }
 
 impl BridgeEnv {
@@ -53,6 +62,24 @@ impl BridgeEnv {
             self.pic.tick();
         }
     }
+}
+
+/// Opens every configured chain, so `bridge_to_evm` is no longer `NotReady`.
+pub fn start_all_chains(_env: &mut BridgeEnv) {
+    todo!("Task 8: drive the first tick with mocked outcalls")
+}
+
+/// Ticks until both signer addresses are loaded, and returns them.
+pub fn wait_for_signers(env: &BridgeEnv) -> (String, String) {
+    for _ in 0..30 {
+        env.pic.tick();
+        let signers =
+            get_bridge_evm_signers(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+        if let (Some(claims), Some(admin)) = (signers.claims, signers.admin) {
+            return (claims, admin);
+        }
+    }
+    panic!("signers were not loaded after 30 ticks");
 }
 
 /// The bridge config for chain ids 1 and 8453 with fake token addresses.
@@ -152,13 +179,15 @@ impl BridgeEnvBuilder {
             .build();
         let controller = random_principal();
         let sns_governance = random_principal();
+        let user = random_principal();
         let gldt_swap_canister_id = Principal::from_text(GLDT_SWAP_CANISTER_ID).unwrap();
 
-        let gldt_ledger_canister_id = setup_gldt_ledger(
+        let gldt_ledger_canister_id = setup_gldt_ledger_with_balances(
             &pic,
             controller,
             Principal::from_text(GLDT_LEDGER_CANISTER_ID).unwrap(),
             gldt_swap_canister_id,
+            vec![(Account::from(user), Nat::from(USER_BALANCE_E8S))],
         );
 
         let evm_rpc_canister_id = create_canister_with_id(
@@ -193,7 +222,17 @@ impl BridgeEnvBuilder {
             test_mode: true,
             version: BuildVersion::min(),
             commit_hash: "bridge".to_string(),
-            swap_configs: vec![],
+            // the bridge burns and mints on the one ledger the swap configs name
+            swap_configs: vec![SwapCanisterConfig {
+                icrc7_canister_id: random_principal(),
+                fractionalization_config: FractionalizationConfig::General(
+                    GeneralFractionalizationConfig {
+                        division: 100_000_000_000_000,
+                        swap_fee: Nat::from(100_000_000_u64),
+                        ledger_id: gldt_ledger_canister_id,
+                    },
+                ),
+            }],
             authorized_principals: vec![controller],
             buyback_burn_canister: None,
             gldt_swap_old_archive: Principal::from_text("yx6zg-byaaa-aaaak-qucpq-cai").unwrap(),
@@ -213,6 +252,7 @@ impl BridgeEnvBuilder {
             gldt_swap_canister_id,
             gldt_ledger_canister_id,
             evm_rpc_canister_id,
+            user,
         }
     }
 }

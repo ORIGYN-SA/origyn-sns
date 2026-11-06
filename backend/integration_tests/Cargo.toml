@@ -68,3 +68,7 @@ canister_jobs_api = { path = "../canisters/canister_jobs/api" }
 origyn_nft_reference = { path = '../external_canisters/origyn_nft_reference/api' }
 ogy_legacy_ledger_canister = { path = '../external_canisters/ogy_legacy_ledger/api' }
 icrc_ledger_canister = { path = "../external_canisters/icrc_ledger/api" }
+
+# GLDT bridge tests: recover voucher signers independently of the canister
+alloy-primitives = { workspace = true }
+k256 = { workspace = true, features = ["ecdsa"] }

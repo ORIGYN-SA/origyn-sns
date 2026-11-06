@@ -13,6 +13,23 @@ pub fn setup_gldt_ledger(
     gldt_ledger_canister_id: Principal,
     gldt_swap_canister_id: Principal,
 ) -> Principal {
+    setup_gldt_ledger_with_balances(
+        pic,
+        controller,
+        gldt_ledger_canister_id,
+        gldt_swap_canister_id,
+        vec![],
+    )
+}
+
+/// The GLDT ledger with `gldt_swap` as minting account and these starting balances.
+pub fn setup_gldt_ledger_with_balances(
+    pic: &PocketIc,
+    controller: Principal,
+    gldt_ledger_canister_id: Principal,
+    gldt_swap_canister_id: Principal,
+    initial_balances: Vec<(Account, Nat)>,
+) -> Principal {
     let gldt_ledger_canister_id = create_canister_with_id(pic, controller, gldt_ledger_canister_id);
     pic.add_cycles(gldt_ledger_canister_id, 20_000_000_000_000);
 
@@ -24,8 +41,7 @@ pub fn setup_gldt_ledger(
             subaccount: Some(GLDT_LEDGER_FEE_ACCOUNT),
         }),
         minting_account: Account::from(gldt_swap_canister_id),
-        // initial_balances: vec![(Account::from(controller), Nat::from(100_000_000_000 as u64))],
-        initial_balances: vec![],
+        initial_balances,
         archive_options: icrc_ledger_canister::init::ArchiveOptions {
             trigger_threshold: 2000,
             num_blocks_to_archive: 1000,

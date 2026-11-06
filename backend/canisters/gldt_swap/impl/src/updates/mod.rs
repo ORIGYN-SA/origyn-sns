@@ -1,6 +1,7 @@
 pub mod _insert_fake_bulk_swaps;
 pub mod _insert_fake_old_bulk_swaps;
 pub mod bridge_pause;
+pub mod bridge_to_evm;
 pub mod commit;
 pub mod get_all_available_nfts;
 pub mod get_available_nfts_for_canister;
@@ -15,6 +16,7 @@ pub mod swap_tokens_for_nft;
 pub use _insert_fake_bulk_swaps::*;
 pub use _insert_fake_old_bulk_swaps::*;
 pub use bridge_pause::*;
+pub use bridge_to_evm::*;
 pub use get_all_available_nfts::*;
 pub use get_available_nfts_for_canister::*;
 pub use icrc28::*;

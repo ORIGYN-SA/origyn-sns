@@ -70,31 +70,28 @@ pub fn reject_anonymous_caller() -> Result<(), String> {
 
 // Bridge guards
 //
-// Both live on the heap only: every call and job they guard has ended before an upgrade.
-// `bridge_to_evm` and the bridge timers are their callers; until those exist they are unused.
+// They live on the heap only: every call and job they guard has ended before an upgrade,
+// because an upgrade first stops the canister, which waits for every open call.
 
 /// At most this many bridge calls run at once.
-#[allow(dead_code)]
 const MAX_CONCURRENT_BRIDGE_CALLS: usize = 100;
 
 /// A job guard older than this no longer blocks a new run of the same job.
-#[allow(dead_code)]
 pub const JOB_LEASE_NANOS: u64 = 10 * 60 * 1_000_000_000;
 
 thread_local! {
     static BRIDGE_CALLERS: RefCell<BTreeSet<Principal>> = const { RefCell::new(BTreeSet::new()) };
     static JOB_GUARDS: RefCell<BTreeMap<Job, u64>> = const { RefCell::new(BTreeMap::new()) };
+    static OUTBOUND_IN_FLIGHT: RefCell<BTreeSet<u64>> = const { RefCell::new(BTreeSet::new()) };
 }
 
 /// One bridge call per caller at a time, released on drop like [GuardNft].
-#[allow(dead_code)]
 #[must_use]
 pub struct BridgeCallerGuard {
     caller: Principal,
     _marker: PhantomData<BridgeCallerGuard>,
 }
 
-#[allow(dead_code)]
 impl BridgeCallerGuard {
     pub fn new(caller: Principal) -> Result<Self, BridgeError> {
         BRIDGE_CALLERS.with_borrow_mut(|callers| {
@@ -116,6 +113,7 @@ impl Drop for BridgeCallerGuard {
     }
 }
 
+// `Scrape` and `Balancer` get their callers in later bridge tasks
 #[allow(dead_code)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Job {
@@ -126,7 +124,6 @@ pub enum Job {
 
 /// Keeps a job from overlapping itself. Released on drop (also when the job traps after an
 /// await), with a 10 minute lease as a backstop for a job that never finishes.
-#[allow(dead_code)]
 #[must_use]
 pub struct JobGuard {
     job: Job,
@@ -134,7 +131,6 @@ pub struct JobGuard {
     _marker: PhantomData<JobGuard>,
 }
 
-#[allow(dead_code)]
 impl JobGuard {
     /// `None` while a guard for the same job is younger than [JOB_LEASE_NANOS].
     pub fn new(job: Job, now_nanos: u64) -> Option<JobGuard> {
@@ -162,6 +158,33 @@ impl Drop for JobGuard {
                 guards.remove(&self.job);
             }
         });
+    }
+}
+
+/// Marks an outbound transfer whose burn or voucher signing is awaiting an answer, so
+/// `bridge_to_evm` and the processor never work on the same transfer at once.
+/// Released on drop, also when the call traps after an await.
+#[must_use]
+pub struct OutboundGuard {
+    id: u64,
+    _marker: PhantomData<OutboundGuard>,
+}
+
+impl OutboundGuard {
+    /// `None` while another call holds the transfer.
+    pub fn new(id: u64) -> Option<Self> {
+        // `then`, not `then_some`: a guard built on refusal would release the holder's id on drop
+        let taken = OUTBOUND_IN_FLIGHT.with_borrow_mut(|in_flight| in_flight.insert(id));
+        taken.then(|| Self {
+            id,
+            _marker: PhantomData,
+        })
+    }
+}
+
+impl Drop for OutboundGuard {
+    fn drop(&mut self) {
+        OUTBOUND_IN_FLIGHT.with_borrow_mut(|in_flight| in_flight.remove(&self.id));
     }
 }
 
@@ -204,5 +227,15 @@ mod tests {
         drop(guard);
         assert!(BridgeCallerGuard::new(alice).is_ok());
         drop(bob_guard);
+    }
+
+    #[test]
+    fn outbound_guard_holds_one_transfer_at_a_time() {
+        let first = OutboundGuard::new(3).expect("first");
+        assert!(OutboundGuard::new(3).is_none());
+        let other = OutboundGuard::new(4).expect("another transfer");
+        drop(first);
+        assert!(OutboundGuard::new(3).is_some());
+        drop(other);
     }
 }

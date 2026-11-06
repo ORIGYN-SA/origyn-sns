@@ -1,6 +1,8 @@
-use candid::Decode;
+use crate::bridge::evm::address::{format_address, parse_address};
+use candid::{Decode, Nat};
 pub use gldt_swap_api_canister::icrc21::Args as Icrc21Args;
 pub use gldt_swap_api_canister::icrc21::Response as Icrc21Response;
+use gldt_swap_common::bridge::{BridgeToEvmArgs, EvmChain};
 use ic_cdk::query;
 use icrc_ledger_types::icrc21::errors::ErrorInfo;
 use icrc_ledger_types::icrc21::errors::Icrc21Error;
@@ -17,6 +19,7 @@ use utils::icrcs::icrc21::create_error_response;
 pub enum Icrc21Function {
     SwapNftForTokens,
     SwapTokensForNft,
+    BridgeToEvm,
 }
 
 #[query]
@@ -33,6 +36,7 @@ pub fn icrc21_canister_call_consent_message(args: Icrc21Args) -> Icrc21Response 
     let message = match args.method.parse::<Icrc21Function>() {
         Ok(Icrc21Function::SwapNftForTokens) => handle_swap_nft_for_tokens_consent(args),
         Ok(Icrc21Function::SwapTokensForNft) => handle_swap_tokens_for_nft_consent(args),
+        Ok(Icrc21Function::BridgeToEvm) => handle_bridge_to_evm_consent(args),
         Err(err) => {
             return Err(Icrc21Error::UnsupportedCanisterCall(ErrorInfo {
                 description: format!("Unsupported method: {}", err),
@@ -121,5 +125,174 @@ pub fn handle_swap_tokens_for_nft_consent(args: Icrc21Args) -> Icrc21Response {
         Err(_) => {
             create_error_response("Failed to decode swap tokens for NFT arguments".to_string())
         }
+    }
+}
+
+fn handle_bridge_to_evm_consent(args: Icrc21Args) -> Icrc21Response {
+    let Ok(call) = Decode!(&args.arg, gldt_swap_api_canister::bridge_to_evm::Args) else {
+        return create_error_response("Failed to decode bridge_to_evm arguments".to_string());
+    };
+    match bridge_to_evm_consent(&call) {
+        Ok((message, fields)) => create_consent_info(
+            message,
+            format!("Bridge GLDT to {}", chain_name(call.chain)),
+            fields,
+            args.user_preferences.metadata,
+        ),
+        Err(e) => create_error_response(e),
+    }
+}
+
+/// The consent message for `bridge_to_evm`, for example "Burn 12.5 GLDT on ICP to receive
+/// 12.5 GLDT at 0xAbCd…12Ef on Base", and the fields shown with it. The fields carry the full
+/// recipient, because a lookalike address can share the short form's ends.
+pub fn bridge_to_evm_consent(
+    args: &BridgeToEvmArgs,
+) -> Result<(String, Vec<(String, String)>), String> {
+    let recipient = parse_address(&args.recipient)
+        .ok()
+        .filter(|address| *address != [0u8; 20])
+        .map(|address| format_address(&address))
+        .ok_or_else(|| format!("{:?} is not an EVM recipient address", args.recipient))?;
+    let amount = format_gldt(&args.amount);
+    let chain = chain_name(args.chain);
+    let message = format!(
+        "Burn {amount} GLDT on ICP to receive {amount} GLDT at {} on {chain}",
+        short_address(&recipient)
+    );
+    let from_subaccount = match args.from_subaccount {
+        Some(subaccount) if subaccount != [0u8; 32] => alloy_primitives::hex::encode(subaccount),
+        _ => "default".to_string(),
+    };
+    let fields = vec![
+        ("Chain".to_string(), chain.to_string()),
+        ("Recipient".to_string(), recipient),
+        (
+            "Amount".to_string(),
+            format!("{amount} GLDT ({} e8s)", args.amount.0),
+        ),
+        ("From subaccount".to_string(), from_subaccount),
+    ];
+    Ok((message, fields))
+}
+
+fn chain_name(chain: EvmChain) -> &'static str {
+    match chain {
+        EvmChain::Ethereum => "Ethereum",
+        EvmChain::Base => "Base",
+    }
+}
+
+/// `0x` and the first and last 4 hex digits of an EIP-55 address.
+fn short_address(eip55: &str) -> String {
+    let digits = &eip55[2..];
+    format!("0x{}\u{2026}{}", &digits[..4], &digits[digits.len() - 4..])
+}
+
+/// e8s as GLDT (8 decimals), without trailing zeros: 1_250_000_000 is "12.5".
+pub fn format_gldt(e8s: &Nat) -> String {
+    let whole = &e8s.0 / 100_000_000u64;
+    let fraction = &e8s.0 % 100_000_000u64;
+    if fraction == 0u64.into() {
+        return whole.to_string();
+    }
+    let fraction = format!("{fraction:0>8}");
+    format!("{whole}.{}", fraction.trim_end_matches('0'))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use candid::{Encode, Nat};
+    use gldt_swap_common::bridge::{BridgeToEvmArgs, EvmChain};
+    use icrc_ledger_types::icrc21::requests::{ConsentMessageMetadata, ConsentMessageSpec};
+    use icrc_ledger_types::icrc21::responses::ConsentMessage;
+
+    const RECIPIENT: &str = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+
+    fn bridge_args(recipient: &str, amount: u64) -> BridgeToEvmArgs {
+        BridgeToEvmArgs {
+            chain: EvmChain::Base,
+            recipient: recipient.to_string(),
+            amount: Nat::from(amount),
+            from_subaccount: None,
+        }
+    }
+
+    #[test]
+    fn gldt_amounts_print_without_trailing_zeros() {
+        assert_eq!(format_gldt(&Nat::from(0u8)), "0");
+        assert_eq!(format_gldt(&Nat::from(1u8)), "0.00000001");
+        assert_eq!(format_gldt(&Nat::from(100_000_000u64)), "1");
+        assert_eq!(format_gldt(&Nat::from(1_250_000_000u64)), "12.5");
+        assert_eq!(format_gldt(&Nat::from(123_456_789_012u64)), "1234.56789012");
+        assert_eq!(
+            format_gldt(&Nat::from(u128::MAX)),
+            "3402823669209384634633746074317.68211455"
+        );
+    }
+
+    #[test]
+    fn bridge_to_evm_consent_names_amount_recipient_and_chain() {
+        let (message, fields) =
+            bridge_to_evm_consent(&bridge_args(&RECIPIENT.to_lowercase(), 1_250_000_000)).unwrap();
+        assert_eq!(
+            message,
+            "Burn 12.5 GLDT on ICP to receive 12.5 GLDT at 0x7099\u{2026}79C8 on Base"
+        );
+        let field = |name: &str| {
+            fields
+                .iter()
+                .find(|(key, _)| key == name)
+                .map(|(_, value)| value.clone())
+                .unwrap_or_else(|| panic!("no field {name}"))
+        };
+        // the full address, so a lookalike with the same ends is caught
+        assert_eq!(field("Recipient"), RECIPIENT);
+        assert_eq!(field("Chain"), "Base");
+        assert_eq!(field("Amount"), "12.5 GLDT (1250000000 e8s)");
+        assert_eq!(field("From subaccount"), "default");
+
+        let mut with_subaccount = bridge_args(RECIPIENT, 1);
+        with_subaccount.from_subaccount = Some([0xab; 32]);
+        let (_, fields) = bridge_to_evm_consent(&with_subaccount).unwrap();
+        assert!(fields
+            .iter()
+            .any(|(key, value)| key == "From subaccount" && *value == "ab".repeat(32)));
+
+        assert!(bridge_to_evm_consent(&bridge_args(&format!("0x{}", "0".repeat(40)), 1)).is_err());
+        assert!(bridge_to_evm_consent(&bridge_args("0x1234", 1)).is_err());
+    }
+
+    #[test]
+    fn consent_endpoint_handles_bridge_to_evm() {
+        let request = |method: &str, arg: Vec<u8>| Icrc21Args {
+            method: method.to_string(),
+            arg,
+            user_preferences: ConsentMessageSpec {
+                metadata: ConsentMessageMetadata {
+                    language: "en".to_string(),
+                    utc_offset_minutes: None,
+                },
+                device_spec: None,
+            },
+        };
+        let arg = Encode!(&bridge_args(RECIPIENT, 1_250_000_000)).unwrap();
+        let info = icrc21_canister_call_consent_message(request("bridge_to_evm", arg)).unwrap();
+        let ConsentMessage::GenericDisplayMessage(text) = info.consent_message else {
+            panic!("expected a generic display message");
+        };
+        assert!(
+            text.contains(
+                "Burn 12.5 GLDT on ICP to receive 12.5 GLDT at 0x7099\u{2026}79C8 on Base"
+            ),
+            "{text}"
+        );
+        assert!(text.contains(RECIPIENT), "{text}");
+
+        // undecodable arguments are refused
+        assert!(
+            icrc21_canister_call_consent_message(request("bridge_to_evm", vec![1, 2, 3])).is_err()
+        );
     }
 }

@@ -1,6 +1,6 @@
 use crate::client::gldt_swap::{bridge_pause, get_bridge_evm_signers, get_bridge_status};
 use crate::gldt_swap_suite::bridge::setup::{
-    bridge_config, bridge_upgrade, setup_bridge_env, BridgeEnv, BridgeEnvBuilder,
+    bridge_config, bridge_upgrade, setup_bridge_env, wait_for_signers, BridgeEnvBuilder,
 };
 use candid::encode_one;
 use gldt_swap_common::bridge::{
@@ -11,19 +11,6 @@ fn is_eip55_text(address: &str) -> bool {
     address.len() == 42
         && address.starts_with("0x")
         && address[2..].bytes().all(|b| b.is_ascii_hexdigit())
-}
-
-/// Ticks until both signer addresses are loaded.
-fn wait_for_signers(env: &BridgeEnv) -> (String, String) {
-    for _ in 0..30 {
-        env.pic.tick();
-        let signers =
-            get_bridge_evm_signers(&env.pic, env.controller, env.gldt_swap_canister_id, &());
-        if let (Some(claims), Some(admin)) = (signers.claims, signers.admin) {
-            return (claims, admin);
-        }
-    }
-    panic!("signers were not loaded after 30 ticks");
 }
 
 #[test]

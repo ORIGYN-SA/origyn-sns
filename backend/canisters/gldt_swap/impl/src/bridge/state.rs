@@ -15,7 +15,7 @@ use gldt_swap_common::bridge::{
 };
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{Deserialize, Serialize};
-use std::collections::{BTreeMap, VecDeque};
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use tracing::{error, info, warn};
 
 /// `(chain_id, token)`. A new token address on a chain is a new deployment with its own state.
@@ -91,6 +91,10 @@ pub struct BridgeState {
     pub alerts: VecDeque<Alert>,
     /// Every alert ever raised.
     pub alerts_total: u64,
+    /// Outbound transfers the processor still has work on: `Burning`, `BurnUnknown` or
+    /// `Burned`. Kept with every status change (`outbound::store_outbound`), so the processor
+    /// never scans the whole outbound map.
+    pub outbound_work: BTreeSet<u64>,
 }
 
 impl BridgeState {
