@@ -88,7 +88,7 @@ contract GLDTInitTest is GLDTFixture {
 
         // The initializer uses the same gas bounds as setLzReceiveGas.
         p = initParams(EID_A, address(tokenB));
-        p.lzReceiveGas = 59_999;
+        p.lzReceiveGas = 99_999;
         _expectInitRevert(p, abi.encodeWithSelector(IGLDT.GasOutOfBounds.selector));
 
         // Control: the unchanged params deploy.
@@ -151,6 +151,9 @@ contract GLDTInitTest is GLDTFixture {
 
     function test_setLzReceiveGas_bounds_and_value_zero() public {
         uint16 send = tokenA.SEND();
+        // 100,000 covers the costliest first delivery (a fresh holder on a fresh path, about 81,000 gas).
+        assertEq(tokenA.MIN_LZ_RECEIVE_GAS(), 100_000);
+        assertEq(tokenA.MAX_LZ_RECEIVE_GAS(), 500_000);
 
         vm.prank(stranger);
         vm.expectRevert(IGLDT.NotOperator.selector);
@@ -158,13 +161,13 @@ contract GLDTInitTest is GLDTFixture {
 
         vm.startPrank(operator);
         vm.expectRevert(IGLDT.GasOutOfBounds.selector);
-        tokenA.setLzReceiveGas(EID_B, 59_999);
+        tokenA.setLzReceiveGas(EID_B, 99_999);
         vm.expectRevert(IGLDT.GasOutOfBounds.selector);
         tokenA.setLzReceiveGas(EID_B, 500_001);
 
         // Both bounds are inclusive.
-        tokenA.setLzReceiveGas(EID_B, 60_000);
-        assertEq(tokenA.enforcedOptions(EID_B, send), OptionsBuilder.newOptions().addExecutorLzReceiveOption(60_000, 0));
+        tokenA.setLzReceiveGas(EID_B, 100_000);
+        assertEq(tokenA.enforcedOptions(EID_B, send), OptionsBuilder.newOptions().addExecutorLzReceiveOption(100_000, 0));
         tokenA.setLzReceiveGas(EID_B, 500_000);
         assertEq(tokenA.enforcedOptions(EID_B, send), OptionsBuilder.newOptions().addExecutorLzReceiveOption(500_000, 0));
 

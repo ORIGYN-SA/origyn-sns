@@ -3,3 +3,4 @@
 @openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable/
 forge-std/=node_modules/@layerzerolabs/toolbox-foundry/lib/forge-std/
 solidity-bytes-utils/contracts/=node_modules/@layerzerolabs/toolbox-foundry/lib/solidity-bytes-utils/
+openzeppelin-foundry-upgrades/=node_modules/@openzeppelin/foundry-upgrades/src/

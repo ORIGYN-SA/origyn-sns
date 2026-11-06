@@ -188,6 +188,76 @@ abstract contract GLDTFixture is TestHelperOz5 {
             );
     }
 
+    // Admin actions (spec 6.6), hashed from the type strings and never from the contract.
+
+    /// @notice The admin action digest gldt_swap signs for `token`.
+    function executeDigest(
+        address token,
+        IGLDT.Call[] memory calls,
+        uint256 nonce,
+        uint256 deadline
+    ) internal view returns (bytes32) {
+        return
+            keccak256(abi.encodePacked("\x19\x01", domainSeparator(token), executeStructHash(calls, nonce, deadline)));
+    }
+
+    /// @notice An admin action for tokenA, signed with the admin key.
+    function signExecute(
+        IGLDT.Call[] memory calls,
+        uint256 nonce,
+        uint256 deadline
+    ) internal view returns (bytes memory) {
+        return signExecute(adminKey, address(tokenA), calls, nonce, deadline);
+    }
+
+    /// @notice An admin action for `token`, signed with `key`.
+    function signExecute(
+        uint256 key,
+        address token,
+        IGLDT.Call[] memory calls,
+        uint256 nonce,
+        uint256 deadline
+    ) internal view returns (bytes memory) {
+        return signTyped(key, token, executeStructHash(calls, nonce, deadline));
+    }
+
+    /// @notice Signs an admin action with the admin key, valid for 7 days, and submits it, as an ops script does
+    /// after the vote.
+    function executeAsAdmin(GLDT token, IGLDT.Call[] memory calls, uint256 nonce) internal {
+        uint256 deadline = block.timestamp + 7 days;
+        token.execute(calls, nonce, deadline, signExecute(adminKey, address(token), calls, nonce, deadline));
+    }
+
+    /// @notice A batch of one call to `token` itself.
+    function selfCall(GLDT token, bytes memory data) internal pure returns (IGLDT.Call[] memory calls) {
+        calls = new IGLDT.Call[](1);
+        calls[0] = IGLDT.Call(address(token), data);
+    }
+
+    /// @notice The EIP-712 struct hash of Execute{calls, nonce, deadline}.
+    function executeStructHash(
+        IGLDT.Call[] memory calls,
+        uint256 nonce,
+        uint256 deadline
+    ) internal pure returns (bytes32) {
+        bytes memory callHashes;
+        for (uint256 i = 0; i < calls.length; i++) {
+            bytes32 callHash = keccak256(
+                abi.encode(keccak256("Call(address target,bytes data)"), calls[i].target, keccak256(calls[i].data))
+            );
+            callHashes = abi.encodePacked(callHashes, callHash);
+        }
+        return
+            keccak256(
+                abi.encode(
+                    keccak256("Execute(Call[] calls,uint256 nonce,uint256 deadline)Call(address target,bytes data)"),
+                    keccak256(callHashes),
+                    nonce,
+                    deadline
+                )
+            );
+    }
+
     // LayerZero delivery with every required DVN. TestHelperOz5.verifyPackets signs with requiredDVNs[0] only,
     // so it cannot commit a packet that needs two DVNs.
 
@@ -235,12 +305,13 @@ abstract contract GLDTFixture is TestHelperOz5 {
         message = packet.message();
     }
 
+    /// @notice Two new DVNs on `localEid` for messages to and from `remoteEid`, sorted ascending.
     function _deployDvnPair(
         uint32 localEid,
         uint32 remoteEid,
         address sendLib,
         address receiveLib
-    ) private returns (address[] memory dvns) {
+    ) internal returns (address[] memory dvns) {
         dvns = new address[](2);
         dvns[0] = _deployDvn(localEid, remoteEid, sendLib, receiveLib, localEid * 10 + 1);
         dvns[1] = _deployDvn(localEid, remoteEid, sendLib, receiveLib, localEid * 10 + 2);

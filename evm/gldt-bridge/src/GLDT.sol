@@ -3,6 +3,8 @@ pragma solidity 0.8.28;
 
 import { OFTUpgradeable } from "@layerzerolabs/oft-evm-upgradeable/contracts/oft/OFTUpgradeable.sol";
 import { EnforcedOptionParam } from "@layerzerolabs/oapp-evm/contracts/oapp/interfaces/IOAppOptionsType3.sol";
+import { IMessageLibManager } from "@layerzerolabs/lz-evm-protocol-v2/contracts/interfaces/IMessageLibManager.sol";
+import { IMessagingChannel } from "@layerzerolabs/lz-evm-protocol-v2/contracts/interfaces/IMessagingChannel.sol";
 import { ERC20PermitUpgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
 import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
@@ -32,8 +34,12 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
     bytes32 private constant GLDT_STORAGE_LOCATION = 0x3084c67bbad50587897ca408b5a5f48944d58a2de470a5f329e23869660eeb00;
 
     bytes32 public constant CLAIM_TYPEHASH = keccak256("Claim(uint64 icpBurnIndex,address recipient,uint256 amount)");
+    bytes32 public constant CALL_TYPEHASH = keccak256("Call(address target,bytes data)");
+    bytes32 public constant EXECUTE_TYPEHASH =
+        keccak256("Execute(Call[] calls,uint256 nonce,uint256 deadline)Call(address target,bytes data)");
 
-    uint128 public constant MIN_LZ_RECEIVE_GAS = 60_000;
+    /// @dev The costliest delivery, the first one to a fresh holder on a fresh path, takes about 81,000 gas.
+    uint128 public constant MIN_LZ_RECEIVE_GAS = 100_000;
     uint128 public constant MAX_LZ_RECEIVE_GAS = 500_000;
 
     // Type 3 executor option encoding (LayerZero ExecutorOptions and OptionsBuilder).
@@ -47,13 +53,23 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         _;
     }
 
+    /// @dev The token itself, which means a call made by `execute`.
+    modifier onlySelf() {
+        _checkSelf();
+        _;
+    }
+
     /// @dev The endpoint is an immutable of the implementation, the same address on Ethereum and Base.
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor(address lzEndpoint) OFTUpgradeable(lzEndpoint) {
         _disableInitializers();
     }
 
+    // OpenZeppelin's upgrade check expects direct calls to __OAppSender_init and __OAppReceiver_init. LayerZero's
+    // __OApp_init runs only their empty _unchained parts, the full ones only repeat __OAppCore_init (a duplicate
+    // call), and neither contract has state. So that one finding is allowed here, for this function only.
     /// @inheritdoc IGLDT
+    /// @custom:oz-upgrades-unsafe-allow missing-initializer-call
     function initialize(InitParams calldata p) external initializer {
         if (
             p.adminSigner == address(0) ||
@@ -143,7 +159,96 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         emit LzReceiveGasSet(dstEid, gas);
     }
 
+    // Admin actions (spec 6.6)
+
+    /// @inheritdoc IGLDT
+    function execute(Call[] calldata calls, uint256 nonce, uint256 deadline, bytes calldata signature) external {
+        if (block.timestamp > deadline) revert Expired();
+        GLDTStorage storage $ = _getGLDTStorage();
+        if ($.usedNonce[nonce]) revert NonceUsed();
+        // Same domain as vouchers and permits; the type and the key keep them apart.
+        bytes32 digest = hashExecute(calls, nonce, deadline);
+        if (ECDSA.recover(digest, signature) != $.adminSigner) revert BadSignature();
+        uint256 count = calls.length;
+        for (uint256 i = 0; i < count; ++i) {
+            _checkTarget(i, calls[i]);
+        }
+
+        // Marked before any call runs, so no call (an inner execute included) can run this action again.
+        // A failed call reverts everything, this line too, so an action only counts as used once it all worked.
+        $.usedNonce[nonce] = true;
+        for (uint256 i = 0; i < count; ++i) {
+            (bool ok, bytes memory reason) = calls[i].target.call(calls[i].data);
+            if (!ok) revert CallFailed(i, reason);
+        }
+        emit Executed(nonce, digest);
+    }
+
+    /// @inheritdoc IGLDT
+    function setOperator(address newOperator) external onlySelf {
+        _getGLDTStorage().operator = newOperator;
+        emit OperatorSet(newOperator);
+    }
+
+    /// @inheritdoc IGLDT
+    function setIcpSigner(address signer) external onlySelf {
+        if (signer == address(0)) revert ZeroAddress();
+        _getGLDTStorage().icpSigner = signer;
+        emit IcpSignerSet(signer);
+    }
+
+    /// @inheritdoc IGLDT
+    function setAdminSigner(address signer) external onlySelf {
+        // Zero would lock execute, and with it every upgrade and setting, for good.
+        if (signer == address(0)) revert ZeroAddress();
+        _getGLDTStorage().adminSigner = signer;
+        emit AdminSignerSet(signer);
+    }
+
+    /// @inheritdoc IGLDT
+    function setMinBurnToIcp(uint256 amount) external onlySelf {
+        if (amount == 0) revert ZeroMinBurn();
+        _getGLDTStorage().minBurnToIcp = amount;
+        emit MinBurnToIcpSet(amount);
+    }
+
+    /// @inheritdoc IGLDT
+    function upgradeExact(address implementation, bytes32 codeHash) external onlySelf {
+        if (implementation.codehash != codeHash) revert CodeHashMismatch();
+        GLDTStorage storage $ = _getGLDTStorage();
+        // _authorizeUpgrade accepts exactly this implementation, and only while this call runs.
+        $.upgradeAllowed = implementation;
+        upgradeToAndCall(implementation, "");
+        $.upgradeAllowed = address(0);
+    }
+
+    /// @inheritdoc IGLDT
+    function cancelNonce(uint256 nonce) external onlySelf {
+        GLDTStorage storage $ = _getGLDTStorage();
+        // Only a live nonce can be cancelled, so NonceCancelled never shows up for an action that ran.
+        if ($.usedNonce[nonce]) revert NonceUsed();
+        $.usedNonce[nonce] = true;
+        emit NonceCancelled(nonce);
+    }
+
     // Views (spec 6.8)
+
+    /// @inheritdoc IGLDT
+    function hashExecute(Call[] calldata calls, uint256 nonce, uint256 deadline) public view returns (bytes32) {
+        bytes32[] memory callHashes = new bytes32[](calls.length);
+        for (uint256 i = 0; i < calls.length; ++i) {
+            callHashes[i] = keccak256(abi.encode(CALL_TYPEHASH, calls[i].target, keccak256(calls[i].data)));
+        }
+        return
+            _hashTypedDataV4(
+                keccak256(abi.encode(EXECUTE_TYPEHASH, keccak256(abi.encodePacked(callHashes)), nonce, deadline))
+            );
+    }
+
+    /// @inheritdoc IGLDT
+    function usedNonce(uint256 nonce) external view returns (bool) {
+        return _getGLDTStorage().usedNonce[nonce];
+    }
 
     /// @inheritdoc IGLDT
     function bridgeInfo() external view returns (uint64, uint256, address, address, address) {
@@ -209,9 +314,11 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         revert OwnershipFixed();
     }
 
-    /// @dev Passes only for the token itself, upgrading to the implementation upgradeExact allowed (spec 6.6).
+    /// @dev Passes only inside upgradeExact: the token itself, upgrading to the implementation it allowed (spec 6.6).
+    /// Outside upgradeExact upgradeAllowed is zero, and zero never passes.
     function _authorizeUpgrade(address newImplementation) internal view override {
-        if (msg.sender != address(this) || newImplementation != _getGLDTStorage().upgradeAllowed) {
+        address allowed = _getGLDTStorage().upgradeAllowed;
+        if (msg.sender != address(this) || allowed == address(0) || newImplementation != allowed) {
             revert UpgradeNotAllowed();
         }
     }
@@ -238,6 +345,28 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
 
     function _checkOperatorOrSelf() private view {
         if (msg.sender != _getGLDTStorage().operator && msg.sender != address(this)) revert NotOperator();
+    }
+
+    function _checkSelf() private view {
+        if (msg.sender != address(this)) revert NotSelf();
+    }
+
+    /// @dev A call may target the token itself (any function), or the LayerZero endpoint with one of four
+    /// ILayerZeroEndpointV2 selectors, declared in its parents IMessageLibManager and IMessagingChannel.
+    /// Calls carry no ETH, so no target can be paid.
+    function _checkTarget(uint256 index, Call calldata c) private view {
+        address target = c.target;
+        if (target == address(this)) return;
+        if (target == address(endpoint) && c.data.length >= 4) {
+            bytes4 selector = bytes4(c.data[:4]);
+            if (
+                selector == IMessageLibManager.setConfig.selector ||
+                selector == IMessageLibManager.setSendLibrary.selector ||
+                selector == IMessageLibManager.setReceiveLibrary.selector ||
+                selector == IMessagingChannel.burn.selector
+            ) return;
+        }
+        revert TargetNotAllowed(index);
     }
 
     /// @dev setPeer without the owner check, for the initializer.

@@ -85,6 +85,30 @@ interface IGLDT {
     /// @notice Operator or the token itself: sets the enforced lzReceive gas for `dstEid`, value always 0 (spec 6.5).
     function setLzReceiveGas(uint32 dstEid, uint128 gas) external;
 
+    /// @notice Runs `calls` signed by the admin key (gldt_swap, after an ORIGYN SNS vote). Anyone may submit
+    /// (spec 6.6). Each call targets the token itself, or the LayerZero endpoint with setConfig, setSendLibrary,
+    /// setReceiveLibrary or burn. If any call fails the whole batch reverts and the nonce stays unused.
+    function execute(Call[] calldata calls, uint256 nonce, uint256 deadline, bytes calldata signature) external;
+
+    /// @notice Only the token itself (so only through `execute`): replaces the operator, or removes it with zero.
+    function setOperator(address newOperator) external;
+
+    /// @notice Only the token itself: replaces the key that signs claim vouchers. Never zero.
+    function setIcpSigner(address signer) external;
+
+    /// @notice Only the token itself: replaces the key that signs `execute`, which moves control of the token
+    /// (spec 5.7). Never zero.
+    function setAdminSigner(address signer) external;
+
+    /// @notice Only the token itself: the smallest `burnToIcp`, above 0.
+    function setMinBurnToIcp(uint256 amount) external;
+
+    /// @notice Only the token itself: upgrades to `implementation`, only if its code hash is `codeHash`.
+    function upgradeExact(address implementation, bytes32 codeHash) external;
+
+    /// @notice Only the token itself: marks an unused nonce as used, so the action signed for it can never run.
+    function cancelNonce(uint256 nonce) external;
+
     /// @notice Everything the canister reads each tick, in one call (spec 6.8).
     function bridgeInfo()
         external
@@ -106,6 +130,18 @@ interface IGLDT {
     /// @notice The id the next `burnToIcp` gets. Ids start at 0 and have no gaps.
     function nextBurnId() external view returns (uint64);
 
+    /// @notice True once `nonce` ran in `execute` or was cancelled. Separate from the permit `nonces(owner)`.
+    function usedNonce(uint256 nonce) external view returns (bool);
+
+    /// @notice The EIP-712 digest the admin key signs for these arguments, over the token's own domain.
+    function hashExecute(Call[] calldata calls, uint256 nonce, uint256 deadline) external view returns (bytes32);
+
     /// @notice keccak256("Claim(uint64 icpBurnIndex,address recipient,uint256 amount)")
     function CLAIM_TYPEHASH() external view returns (bytes32);
+
+    /// @notice keccak256("Execute(Call[] calls,uint256 nonce,uint256 deadline)Call(address target,bytes data)")
+    function EXECUTE_TYPEHASH() external view returns (bytes32);
+
+    /// @notice keccak256("Call(address target,bytes data)")
+    function CALL_TYPEHASH() external view returns (bytes32);
 }
