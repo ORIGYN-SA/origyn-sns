@@ -160,6 +160,7 @@ impl RealDataTestEnvBuilder {
                 }],
                 constants,
             },
+            bridge: None,
         });
         let gldt_swap_canister_id = setup_gldt_swap_canister(
             &pic,

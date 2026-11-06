@@ -24,3 +24,7 @@ generate_pocket_query_call!(icrc3_get_blocks);
 generate_pocket_query_call!(icrc3_get_tip_certificate);
 generate_pocket_query_call!(icrc3_supported_block_types);
 generate_pocket_query_call!(icrc3_get_archives);
+
+generate_pocket_query_call!(get_bridge_status);
+generate_pocket_query_call!(get_bridge_evm_signers);
+generate_pocket_update_call!(bridge_pause);

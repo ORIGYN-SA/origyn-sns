@@ -12,6 +12,8 @@ lazy_static! {
     pub static ref IC_ICRC2_LEDGER: CanisterWasm = get_canister_wasm_gz("icrc_ledger");
     pub static ref ORIGYN_NFT: CanisterWasm = get_external_canister_wasm("origyn_nft_reference");
     pub static ref ORIGYN_NFT_ICRC7: CanisterWasm = get_canister_wasm_gz("origyn_nft");
+    // DFINITY EVM RPC canister, used by the GLDT bridge suite
+    pub static ref EVM_RPC: CanisterWasm = read_file_from_local_bin("evm_rpc.wasm.gz");
 
     pub static ref SNS_REWARDS_OLD: CanisterWasm = get_canister_wasm_gz("sns_rewards_old");
     pub static ref GOLD_REWARDS: CanisterWasm = get_external_canister_wasm("sns_rewards");

@@ -1,4 +1,5 @@
 use ic_cdk::export_candid;
+pub mod bridge;
 mod guards;
 mod jobs;
 pub mod lifecycle;

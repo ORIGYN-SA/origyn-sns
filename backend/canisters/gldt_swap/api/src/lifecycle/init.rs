@@ -1,5 +1,6 @@
 use bity_ic_icrc3::config::ICRC3Config;
 use candid::{CandidType, Principal};
+use gldt_swap_common::bridge::BridgeUpgrade;
 use gldt_swap_common::swap_canister_config::SwapCanisterConfig;
 use icrc_ledger_types::icrc1::account::Account;
 use serde::{Deserialize, Serialize};
@@ -16,4 +17,6 @@ pub struct InitArgs {
     pub buyback_burn_canister: Option<Account>,
     pub gldt_swap_old_archive: Principal,
     pub icrc3_config: ICRC3Config,
+    /// Bridge config and chain resets. `None` leaves the bridge unconfigured.
+    pub bridge: Option<BridgeUpgrade>,
 }

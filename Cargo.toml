@@ -61,7 +61,8 @@ ic-transport-types = "0.41.0"
 ic-xrc-types = "1.2.0"
 ic0 = "1.0.0"
 icrc-ledger-types = "0.1.6"
-k256 = "0.13.1"
+# default features off: k256 std pulls a host getrandom into the wasm. Members enable what they need.
+k256 = { version = "0.13.1", default-features = false }
 minicbor = { version = "1.0.0", features = ["alloc", "derive"] }
 proc-macro2 = "1.0.78"
 quote = "1.0.33"
@@ -98,6 +99,9 @@ strum_macros = "0.27.2"
 lazy_static = "1.4.0"
 anyhow = "1.0.99"
 ic-cdk-management-canister = "0.1.1"
+# EVM types for the GLDT bridge (gldt_swap). Default features off keeps the wasm lean and free of getrandom.
+alloy-primitives = { version = "=1.7.3", default-features = false }
+alloy-sol-types = { version = "=1.7.3", default-features = false }
 
 # Bity crates
 bity-ic-icrc3 = { version =  "0.7.0" } # , features = ["debug-logs"]

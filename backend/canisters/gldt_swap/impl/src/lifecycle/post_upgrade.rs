@@ -1,4 +1,5 @@
 use super::init_canister;
+use crate::bridge::config::apply_bridge_upgrade;
 use crate::state::replace_icrc3;
 use crate::state::start_default_archive_job;
 use crate::{memory::get_upgrades_memory, state::RuntimeState};
@@ -69,6 +70,12 @@ fn post_upgrade(args: Args) {
 
             state.env.set_version(upgrade_args.version);
             state.env.set_commit_hash(upgrade_args.commit_hash);
+
+            if let Some(bridge) = upgrade_args.bridge {
+                if let Err(e) = apply_bridge_upgrade(&mut state.data.bridge, bridge) {
+                    ic_cdk::trap(format!("invalid bridge upgrade argument: {e}"));
+                }
+            }
 
             // state.data.swap_system.finalize_all_swaps();
 

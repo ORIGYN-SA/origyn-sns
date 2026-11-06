@@ -3,6 +3,8 @@ pub mod get_active_swap_ids_by_user;
 pub mod get_active_swaps;
 pub mod get_active_swaps_by_ids;
 pub mod get_active_swaps_by_user;
+pub mod get_bridge_evm_signers;
+pub mod get_bridge_status;
 pub mod get_failed_swap_ids_by_user;
 pub mod get_failed_swaps;
 pub mod get_failed_swaps_by_ids;
