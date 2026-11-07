@@ -71,6 +71,14 @@ fn scrape_round(env: &BridgeEnv) {
     serve_outcalls(&env.pic, |r| env.evm.answer(r));
 }
 
+/// Lets the ledger's deduplication window pass, and answers the scrape ticks the jump starts
+/// right away: PocketIC times out an outcall left pending while time moves on, and the tick
+/// that waits for it keeps the chain's job guard, so the next round would scrape nothing.
+fn pass_dedup_window(env: &BridgeEnv) {
+    env.pic.advance_time(PAST_DEDUP_WINDOW);
+    serve_outcalls(&env.pic, |r| env.evm.answer(r));
+}
+
 /// Lets a minute pass, so `bridge_process` runs again, and lets its calls finish.
 fn process(env: &BridgeEnv) {
     env.pic.advance_time(Duration::from_secs(61));
@@ -283,7 +291,7 @@ fn resolve_actions_update_counters() {
         inbound_status(&env, EvmChain::Base, 0),
         InboundStatus::MintUnknown
     );
-    env.pic.advance_time(PAST_DEDUP_WINDOW);
+    pass_dedup_window(&env);
     start_canister(&env.pic, env.controller, env.gldt_ledger_canister_id);
     process(&env);
     assert!(matches!(
@@ -308,7 +316,7 @@ fn resolve_actions_update_counters() {
         inbound_status(&env, EvmChain::Base, 1),
         InboundStatus::MintUnknown
     );
-    env.pic.advance_time(PAST_DEDUP_WINDOW);
+    pass_dedup_window(&env);
     start_canister(&env.pic, env.controller, env.gldt_ledger_canister_id);
     process(&env);
     assert!(matches!(
