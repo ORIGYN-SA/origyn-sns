@@ -336,11 +336,13 @@ Base (8453), GLDT 0x00000000000000000000000000000000000B1d6E:
             save_burns(&mut s.data.bridge, deployment, vec![record(0), record(1)])
         });
         let reject = |burn_id| ResolveAction::InboundReject {
+            token: None,
             chain: EvmChain::Base,
             burn_id,
             reason: "forged".to_string(),
         };
         let minted = ResolveAction::InboundMarkMinted {
+            token: None,
             chain: EvmChain::Base,
             burn_id: 1,
             icp_block_index: 3,

@@ -277,20 +277,25 @@ pub enum ResolveAction {
     InboundMarkMinted {
         chain: EvmChain,
         burn_id: u64,
+        /// An earlier token of the chain; the current one when `None`.
+        token: Option<String>,
         icp_block_index: u64,
     },
     InboundRetry {
         chain: EvmChain,
         burn_id: u64,
+        token: Option<String>,
     },
     InboundMintTo {
         chain: EvmChain,
         burn_id: u64,
+        token: Option<String>,
         to: Account,
     },
     InboundReject {
         chain: EvmChain,
         burn_id: u64,
+        token: Option<String>,
         reason: String,
     },
     OutboundMarkBurned {

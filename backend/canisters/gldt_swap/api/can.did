@@ -418,12 +418,24 @@ type QueueSizes = record {
   quarantined : nat64;
 };
 type ResolveAction = variant {
-  InboundReject : record { chain : EvmChain; burn_id : nat64; reason : text };
+  InboundReject : record {
+    token : opt text;
+    chain : EvmChain;
+    burn_id : nat64;
+    reason : text;
+  };
   OutboundMarkBurned : record { id : nat64; icp_burn_index : nat64 };
   OutboundMarkFailed : record { id : nat64 };
-  InboundMintTo : record { to : Account; chain : EvmChain; burn_id : nat64 };
-  InboundRetry : record { chain : EvmChain; burn_id : nat64 };
+  InboundMintTo : record {
+    to : Account;
+    token : opt text;
+    chain : EvmChain;
+    burn_id : nat64;
+  };
+  InboundRetry : record { token : opt text; chain : EvmChain; burn_id : nat64 };
   InboundMarkMinted : record {
+    // An earlier token of the chain; the current one when `None`.
+    token : opt text;
     chain : EvmChain;
     icp_block_index : nat64;
     burn_id : nat64;

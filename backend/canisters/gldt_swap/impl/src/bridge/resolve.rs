@@ -15,6 +15,7 @@
 //! would otherwise hold the supply guard for good. [check_resolves] follows the counters
 //! through the list in order, so a list is accepted only if [apply_resolve] can apply all of it.
 
+use crate::bridge::evm::address::{format_address, parse_address};
 use crate::bridge::evm::num::u256_to_nat;
 use crate::bridge::inbound::{release_unminted, store_inbound};
 use crate::bridge::outbound::store_outbound;
@@ -152,9 +153,10 @@ fn check_one(
         InboundMarkMinted {
             chain,
             burn_id,
+            token,
             icp_block_index,
         } => {
-            let (key, record) = inbound(state, *chain, *burn_id)?;
+            let (key, record) = inbound(state, *chain, *burn_id, token)?;
             in_status(
                 &record,
                 matches!(record.status, In::NeedsManualCheck(_)),
@@ -176,8 +178,12 @@ fn check_one(
             counters.bridged_out = after;
             Ok((Target::In(key, record), line))
         }
-        InboundRetry { chain, burn_id } => {
-            let (key, record) = inbound(state, *chain, *burn_id)?;
+        InboundRetry {
+            chain,
+            burn_id,
+            token,
+        } => {
+            let (key, record) = inbound(state, *chain, *burn_id, token)?;
             in_status(
                 &record,
                 matches!(record.status, In::NeedsManualCheck(_)),
@@ -189,8 +195,13 @@ fn check_one(
             );
             Ok((Target::In(key, record), line))
         }
-        InboundMintTo { chain, burn_id, to } => {
-            let (key, record) = inbound(state, *chain, *burn_id)?;
+        InboundMintTo {
+            chain,
+            burn_id,
+            token,
+            to,
+        } => {
+            let (key, record) = inbound(state, *chain, *burn_id, token)?;
             in_status(
                 &record,
                 matches!(record.status, In::Quarantined(_)),
@@ -208,9 +219,10 @@ fn check_one(
         InboundReject {
             chain,
             burn_id,
+            token,
             reason,
         } => {
-            let (key, record) = inbound(state, *chain, *burn_id)?;
+            let (key, record) = inbound(state, *chain, *burn_id, token)?;
             in_status(
                 &record,
                 matches!(record.status, In::Queued | In::Quarantined(_)),
@@ -268,18 +280,30 @@ fn check_one(
     }
 }
 
-/// The burn on the chain's current token.
+/// The burn on the chain's current token, or on `token`, an earlier token of the chain with
+/// the same chain id (held records of a replaced token stay in the queue and the guard).
 fn inbound(
     state: &BridgeState,
     chain: EvmChain,
     burn_id: u64,
+    token: &Option<String>,
 ) -> Result<(InboundKey, InboundRecord), String> {
-    let deployment = state
+    let mut deployment = state
         .deployment(chain)
         .ok_or_else(|| format!("{chain:?} is not configured"))?;
+    if let Some(text) = token {
+        deployment.1 = parse_address(text).map_err(|e| format!("token {text}: {e}"))?;
+        if !state.chains.contains_key(&deployment) {
+            return Err(format!("{chain:?} never had the token {text}"));
+        }
+    }
     let key = (deployment, burn_id);
-    let record = with_inbound(|m| m.get(&key))
-        .ok_or_else(|| format!("no {chain:?} burn {burn_id} on the current token"))?;
+    let record = with_inbound(|m| m.get(&key)).ok_or_else(|| {
+        format!(
+            "no {chain:?} burn {burn_id} on token {}",
+            format_address(&deployment.1)
+        )
+    })?;
     Ok((key, record))
 }
 
@@ -302,9 +326,10 @@ fn in_amount(record: &InboundRecord) -> Result<u128, String> {
 
 fn in_name(record: &InboundRecord) -> String {
     format!(
-        "{:?} burn {} of {} GLDT to {}",
+        "{:?} burn {} on token {} of {} GLDT to {}",
         record.chain,
         record.burn_id,
+        record.token,
         format_gldt(&u256_to_nat(record.amount)),
         record.to
     )
@@ -360,6 +385,7 @@ fn requeue(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::bridge::config::apply_bridge_upgrade;
     use crate::bridge::config::test_fixtures::configured_state;
     use crate::bridge::scraper::save_burns;
     use crate::bridge::stable::{with_inbound, with_outbound, with_queue, InboundKey};
@@ -369,7 +395,7 @@ mod tests {
     use alloy_primitives::U256;
     use candid::{Nat, Principal};
     use gldt_swap_common::bridge::{
-        EvmChain, InboundStatus, OutboundStatus, OutboundTransfer, ResolveAction,
+        BridgeUpgrade, EvmChain, InboundStatus, OutboundStatus, OutboundTransfer, ResolveAction,
     };
     use icrc_ledger_types::icrc1::account::Account;
 
@@ -481,6 +507,57 @@ mod tests {
         read_state(|s| s.data.bridge.unminted_e8s)
     }
 
+    /// After a token replacement, burns held on the old token stay in the mint queue and in the
+    /// unminted total. Only a resolve that names the old token reaches them.
+    #[test]
+    fn resolve_reaches_held_burn_of_a_replaced_token() {
+        setup(10 * ONE, 0);
+        save(&[2 * ONE]);
+        let old_token = read_state(|s| s.data.bridge.chain_config(CHAIN).unwrap().token.clone());
+        let old_key = key(0);
+        let new_token = "0x000000000000000000000000000000000000bEEF";
+        mutate_state(|s| {
+            let mut cfg = s.data.bridge.config.clone().unwrap();
+            for chain in cfg.chains.iter_mut().filter(|c| c.chain == CHAIN) {
+                chain.token = new_token.to_string();
+            }
+            let upgrade = BridgeUpgrade {
+                config: Some(cfg),
+                chain_resets: vec![],
+            };
+            apply_bridge_upgrade(&mut s.data.bridge, upgrade).unwrap();
+        });
+        assert_ne!(key(0), old_key);
+        let reject = |token: Option<&str>| ResolveAction::InboundReject {
+            chain: CHAIN,
+            burn_id: 0,
+            token: token.map(str::to_string),
+            reason: "forged".to_string(),
+        };
+
+        // without a token, only the current token is searched
+        let err = resolve(vec![reject(None)]).unwrap_err();
+        assert!(err.contains("no Base burn 0 on token 0x"), "{err}");
+        // a token the chain never had is refused
+        let err = resolve(vec![reject(Some(
+            "0x000000000000000000000000000000000000dEaD",
+        ))])
+        .unwrap_err();
+        assert!(err.contains("never had the token"), "{err}");
+        assert_eq!(queued_keys(), vec![old_key]);
+
+        // the old token reaches the held burn, and the text names it
+        let text = resolve(vec![reject(Some(&old_token))]).unwrap();
+        assert!(text.contains(&format!("on token {old_token}")), "{text}");
+        assert_eq!(
+            with_inbound(|m| m.get(&old_key)).unwrap().status,
+            InboundStatus::Rejected("forged".to_string())
+        );
+        assert!(queued_keys().is_empty());
+        assert_eq!(unminted(), U256::ZERO);
+        assert_eq!(bridge().bridged_out, 10 * ONE);
+    }
+
     #[test]
     fn resolve_inbound_mark_minted_reduces_bridged_out_and_unminted() {
         setup(10 * ONE, 0);
@@ -489,6 +566,7 @@ mod tests {
         assert_eq!(unminted(), U256::from(5 * ONE));
 
         let text = resolve(vec![ResolveAction::InboundMarkMinted {
+            token: None,
             chain: CHAIN,
             burn_id: 0,
             icp_block_index: 77,
@@ -518,6 +596,7 @@ mod tests {
 
         // a burn the supply guard holds on the queue
         resolve(vec![ResolveAction::InboundReject {
+            token: None,
             chain: CHAIN,
             burn_id: 0,
             reason: "forged LayerZero mint".to_string(),
@@ -533,6 +612,7 @@ mod tests {
 
         // a quarantined one leaves the held set
         resolve(vec![ResolveAction::InboundReject {
+            token: None,
             chain: CHAIN,
             burn_id: 2,
             reason: "forged".to_string(),
@@ -546,6 +626,7 @@ mod tests {
 
         // a reason is required
         assert!(resolve(vec![ResolveAction::InboundReject {
+            token: None,
             chain: CHAIN,
             burn_id: 1,
             reason: " ".to_string(),
@@ -567,10 +648,12 @@ mod tests {
 
         resolve(vec![
             ResolveAction::InboundRetry {
+                token: None,
                 chain: CHAIN,
                 burn_id: 0,
             },
             ResolveAction::InboundMintTo {
+                token: None,
                 chain: CHAIN,
                 burn_id: 1,
                 to: other,
@@ -599,6 +682,7 @@ mod tests {
         // nobody controls the anonymous principal
         set_status(2, InboundStatus::Quarantined("x".to_string()));
         let err = resolve(vec![ResolveAction::InboundMintTo {
+            token: None,
             chain: CHAIN,
             burn_id: 2,
             to: Account::from(Principal::anonymous()),
@@ -661,20 +745,24 @@ mod tests {
         put_outbound(3, ONE, OutboundStatus::NeedsManualCheck("x".to_string()));
 
         let minted = |burn_id| ResolveAction::InboundMarkMinted {
+            token: None,
             chain: CHAIN,
             burn_id,
             icp_block_index: 1,
         };
         let retry = |burn_id| ResolveAction::InboundRetry {
+            token: None,
             chain: CHAIN,
             burn_id,
         };
         let mint_to = |burn_id| ResolveAction::InboundMintTo {
+            token: None,
             chain: CHAIN,
             burn_id,
             to: user(),
         };
         let reject = |burn_id| ResolveAction::InboundReject {
+            token: None,
             chain: CHAIN,
             burn_id,
             reason: "forged".to_string(),
@@ -713,6 +801,7 @@ mod tests {
             minted(9),
             burned(9),
             ResolveAction::InboundRetry {
+                token: None,
                 chain: EvmChain::Ethereum,
                 burn_id: 3,
             },
@@ -763,11 +852,13 @@ mod tests {
         set_status(1, manual("x"));
         let both = vec![
             ResolveAction::InboundMarkMinted {
+                token: None,
                 chain: CHAIN,
                 burn_id: 0,
                 icp_block_index: 1,
             },
             ResolveAction::InboundMarkMinted {
+                token: None,
                 chain: CHAIN,
                 burn_id: 1,
                 icp_block_index: 2,

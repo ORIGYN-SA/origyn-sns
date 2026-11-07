@@ -333,10 +333,12 @@ fn resolve_actions_update_counters() {
     // a person found burn 1's mint and outbound 0's burn, and confirmed the others never happened
     let resolve = BridgeSnsAction::Resolve(vec![
         ResolveAction::InboundRetry {
+            token: None,
             chain: EvmChain::Base,
             burn_id: 0,
         },
         ResolveAction::InboundMarkMinted {
+            token: None,
             chain: EvmChain::Base,
             burn_id: 1,
             icp_block_index: 999,
@@ -432,6 +434,7 @@ fn reject_and_mint_to_resolve_held_and_quarantined_burns() {
     assert_eq!(status(&env).supply_guard.evm_side, Nat::from(30 * ONE));
 
     let reject = BridgeSnsAction::Resolve(vec![ResolveAction::InboundReject {
+        token: None,
         chain: EvmChain::Ethereum,
         burn_id: 0,
         reason: "forged: no matching LayerZero send".to_string(),
@@ -455,6 +458,7 @@ fn reject_and_mint_to_resolve_held_and_quarantined_burns() {
     let balance_before = balance(&env, user);
 
     let mint_to = BridgeSnsAction::Resolve(vec![ResolveAction::InboundMintTo {
+        token: None,
         chain: EvmChain::Base,
         burn_id: 0,
         to: Account::from(user),
