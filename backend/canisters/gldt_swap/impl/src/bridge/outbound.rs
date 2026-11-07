@@ -410,6 +410,19 @@ async fn burn(
         .await
         .map_err(|e| warn!(id = record.id, error = ?e, "outbound burn got no reply"))
         .ok();
+    #[cfg(feature = "inttest")]
+    let reply = if crate::bridge::test_hooks::take_lost_reply(
+        crate::bridge::test_hooks::LedgerCall::Burn,
+    ) {
+        warn!(
+            id = record.id,
+            ?reply,
+            "outbound burn answer dropped by the test hook"
+        );
+        None
+    } else {
+        reply
+    };
     let result = classify_burn(reply, retry);
     info!(id = record.id, retry, ?result, "outbound burn answered");
     result

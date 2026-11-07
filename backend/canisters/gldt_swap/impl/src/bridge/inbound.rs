@@ -82,10 +82,16 @@ pub struct IcMinter {
 #[async_trait(?Send)]
 impl Minter for IcMinter {
     async fn transfer(&self, args: TransferArg) -> Option<TransferResponse> {
-        icrc1_transfer(self.ledger, &args)
+        let reply = icrc1_transfer(self.ledger, &args)
             .await
             .map_err(|e| warn!(error = ?e, "inbound mint got no reply"))
-            .ok()
+            .ok();
+        #[cfg(feature = "inttest")]
+        if crate::bridge::test_hooks::take_lost_reply(crate::bridge::test_hooks::LedgerCall::Mint) {
+            warn!(?reply, "inbound mint answer dropped by the test hook");
+            return None;
+        }
+        reply
     }
 }
 
