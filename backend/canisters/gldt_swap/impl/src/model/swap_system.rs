@@ -13,6 +13,10 @@ pub struct SwapSystem {
     pub failed_swaps: HashMap<SwapIndex, SwapInfo>,
     pub latest_timestamp: TimestampMillis,
     pub last_index: SwapIndex,
+    /// Every swap ever inserted. The supply balancer skips a run when it changes across the
+    /// run's reads.
+    #[serde(default)]
+    pub swaps_started: u64,
 }
 
 impl Default for SwapSystem {
@@ -23,6 +27,7 @@ impl Default for SwapSystem {
             failed_swaps: HashMap::new(),
             latest_timestamp: now,
             last_index: Nat::from(0_u64),
+            swaps_started: 0,
         }
     }
 }
@@ -91,10 +96,12 @@ impl SwapSystem {
         self.last_index.clone()
     }
 
+    /// The one place a new swap is inserted.
     pub fn insert_swap(&mut self, swap_id: SwapIndex, info: SwapInfo) {
         self.latest_timestamp = timestamp_millis();
         self.swaps.insert(swap_id.clone(), info.clone());
         self.last_index += SwapIndex::from(1u64);
+        self.swaps_started = self.swaps_started.wrapping_add(1);
     }
 
     pub fn get_swap(&self, swap_id: &SwapIndex) -> Option<&SwapInfo> {
@@ -273,5 +280,74 @@ impl SwapSystem {
             .into_iter()
             .filter(|(_, swap_info)| swap_info.is_swap_over_time_threshold())
             .collect()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::model::swap_configs::SwapConfigs;
+    use gldt_swap_common::swap_canister_config::{
+        FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
+    };
+    use types::TimestampMillis;
+
+    #[test]
+    fn swaps_started_counts_every_inserted_swap() {
+        let nft_canister = Principal::from_slice(&[1; 10]);
+        let configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+            icrc7_canister_id: nft_canister,
+            fractionalization_config: FractionalizationConfig::General(
+                GeneralFractionalizationConfig {
+                    division: 100_000_000_000,
+                    swap_fee: Nat::from(100_000_000u64),
+                    ledger_id: Principal::from_slice(&[2; 10]),
+                },
+            ),
+        }]);
+        let nft = |id: u64| Nft {
+            id: Nat::from(id),
+            canister_id: nft_canister,
+        };
+        let user = Principal::from_slice(&[3; 29]);
+        let mut system = SwapSystem::default();
+        assert_eq!(system.swaps_started, 0);
+        system
+            .create_swaps_batch(SwapType::Forward, user, vec![nft(1), nft(2)], &configs)
+            .unwrap();
+        assert_eq!(system.swaps_started, 2);
+        system
+            .create_swap(SwapType::Reverse, user, &nft(3), &configs)
+            .unwrap();
+        assert_eq!(system.swaps_started, 3);
+        // finishing or removing swaps does not move it
+        system.finalize_all_swaps();
+        assert!(system.swaps.is_empty());
+        assert_eq!(system.swaps_started, 3);
+    }
+
+    /// `SwapSystem` as deployed before the counter.
+    #[derive(Serialize)]
+    struct SwapSystemBefore {
+        swaps: HashMap<SwapIndex, SwapInfo>,
+        failed_swaps: HashMap<SwapIndex, SwapInfo>,
+        latest_timestamp: TimestampMillis,
+        last_index: SwapIndex,
+    }
+
+    #[test]
+    fn old_swap_system_without_counter_deserializes() {
+        let old = SwapSystemBefore {
+            swaps: HashMap::new(),
+            failed_swaps: HashMap::new(),
+            latest_timestamp: 9,
+            last_index: Nat::from(41u8),
+        };
+        let mut buf = Vec::new();
+        bity_ic_serializer::serialize(&old, &mut buf).unwrap();
+        let system: SwapSystem = bity_ic_serializer::deserialize(buf.as_slice()).unwrap();
+        assert_eq!(system.swaps_started, 0);
+        assert_eq!(system.last_index, Nat::from(41u8));
+        assert_eq!(system.latest_timestamp, 9);
     }
 }

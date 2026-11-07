@@ -6,7 +6,6 @@ pub mod get_available_nfts;
 pub mod get_available_nfts_for_canister;
 pub mod get_history_total;
 pub mod manual_gldt_supply_balance;
-pub mod manual_toggle_supply_balancer_var;
 pub mod manual_transfer_fees;
 pub mod recover_stuck_swap;
 pub mod set_buyback_canister;

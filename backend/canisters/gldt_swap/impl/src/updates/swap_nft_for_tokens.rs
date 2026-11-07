@@ -1,4 +1,4 @@
-use crate::guards::{reject_anonymous_caller, GuardNft};
+use crate::guards::{balancer_running, reject_anonymous_caller, GuardNft};
 use crate::model::nft_batches::GroupedNftsByCanister;
 use crate::state::{icrc3_commit_prepared_transaction, mutate_state, read_state};
 use crate::utils::prepare_transactions;
@@ -45,8 +45,7 @@ pub async fn swap_nft_for_tokens_impl(args: SwapNftForTokensArgs) -> SwapNftForT
         ));
     }
 
-    let is_balancer_running = read_state(|s| s.data.is_gldt_supply_balancer_running);
-    if is_balancer_running {
+    if balancer_running() {
         return Err(SwapNftForTokensErrors::Retry(RetryInMilliseconds(
             SECOND_IN_MS * 30,
             "the supply is currently being balanced. please try again in 15 seconds".to_string(),

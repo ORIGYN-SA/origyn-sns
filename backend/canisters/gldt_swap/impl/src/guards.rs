@@ -6,6 +6,7 @@ use gldt_swap_common::nft::Nft;
 use std::cell::RefCell;
 use std::collections::{BTreeMap, BTreeSet};
 use std::marker::PhantomData;
+use utils::env::Environment;
 
 // TODO: think on the limit, how much NFTs are issued now? + how much can be issued in the future?
 const MAX_CONCURRENT: usize = 100;
@@ -113,8 +114,6 @@ impl Drop for BridgeCallerGuard {
     }
 }
 
-// `Balancer` gets its caller in a later bridge task
-#[allow(dead_code)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Job {
     Scrape(EvmChain),
@@ -148,6 +147,20 @@ impl JobGuard {
             })
         })
     }
+}
+
+/// Whether a run of `job` holds its guard, within the lease.
+pub fn job_running(job: Job, now_nanos: u64) -> bool {
+    JOB_GUARDS.with_borrow(|guards| {
+        guards
+            .get(&job)
+            .is_some_and(|&taken_at| now_nanos.saturating_sub(taken_at) < JOB_LEASE_NANOS)
+    })
+}
+
+/// Whether a supply balancer run is in progress; swaps wait for it.
+pub fn balancer_running() -> bool {
+    job_running(Job::Balancer, read_state(|s| s.env.now_nanos()))
 }
 
 impl Drop for JobGuard {

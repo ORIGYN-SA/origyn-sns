@@ -46,7 +46,10 @@ impl RuntimeState {
             total_active_swaps: self.get_number_active_swaps(),
             total_stuck_swaps: self.get_total_stuck_swaps(),
             authorized_principals: self.data.authorized_principals.clone(),
-            is_gldt_supply_balancer_running: self.data.is_gldt_supply_balancer_running,
+            is_gldt_supply_balancer_running: crate::guards::job_running(
+                crate::guards::Job::Balancer,
+                self.env.now_nanos(),
+            ),
             is_archive_cron_running: self.data.is_archive_cron_running,
             is_remove_stale_swaps_cron_running: self.data.is_remove_stale_swaps_cron_running,
             buyback_burn_account: self.data.buyback_burn_canister,
@@ -143,6 +146,7 @@ pub struct Data {
     // cron job tasks
     pub is_remove_stale_swaps_cron_running: bool,
     pub is_archive_cron_running: bool,
+    // kept for the upgrade format only; the balancer's job guard replaced it and nothing reads it
     #[serde(default)]
     pub is_gldt_supply_balancer_running: bool,
     pub migration_finished: Option<TimestampMillis>,
