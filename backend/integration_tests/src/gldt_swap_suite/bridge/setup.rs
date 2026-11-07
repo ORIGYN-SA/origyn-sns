@@ -21,7 +21,7 @@ use gldt_swap_common::swap_canister_config::{
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc2::approve::ApproveArgs;
 use icrc_ledger_types::icrc3::blocks::SupportedBlockType;
-use pocket_ic::{PocketIc, PocketIcBuilder, RejectResponse};
+use pocket_ic::{ErrorCode, PocketIc, PocketIcBuilder, RejectResponse};
 use std::time::Duration;
 
 pub const GLDT_SWAP_CANISTER_ID: &str = "6f6ua-hqaaa-aaaar-qairq-cai";
@@ -131,18 +131,29 @@ pub fn upgrade_gldt_swap(
     gldt_swap: Principal,
     bridge: Option<BridgeUpgrade>,
 ) -> Result<(), RejectResponse> {
-    let args = gldt_swap_api_canister::Args::Upgrade(UpgradeArgs {
+    let args = encode_one(gldt_swap_api_canister::Args::Upgrade(UpgradeArgs {
         version: BuildVersion::min(),
         commit_hash: "bridge".to_string(),
         bridge,
-    });
-    pic.upgrade_canister(
-        gldt_swap,
-        GLDT_SWAP.clone(),
-        encode_one(args).unwrap(),
-        Some(controller),
-    )
+    }))
+    .unwrap();
+    // The subnet limits how many instructions install_code may spend on one canister in a
+    // while, and gldt_swap's install and upgrade are heavy: rounds pay the debt off.
+    for _ in 0..INSTALL_CODE_ATTEMPTS {
+        match pic.upgrade_canister(gldt_swap, GLDT_SWAP.clone(), args.clone(), Some(controller)) {
+            Err(e) if e.error_code == ErrorCode::CanisterInstallCodeRateLimited => {
+                for _ in 0..ROUNDS_BETWEEN_ATTEMPTS {
+                    pic.tick();
+                }
+            }
+            result => return result,
+        }
+    }
+    panic!("gldt_swap upgrade still rate limited after {INSTALL_CODE_ATTEMPTS} attempts");
 }
+
+const INSTALL_CODE_ATTEMPTS: usize = 100;
+const ROUNDS_BETWEEN_ATTEMPTS: usize = 10;
 
 /// Installs the EVM RPC canister at its mainnet id, in demo mode.
 pub fn install_evm_rpc(pic: &PocketIc, controller: Principal) -> Principal {

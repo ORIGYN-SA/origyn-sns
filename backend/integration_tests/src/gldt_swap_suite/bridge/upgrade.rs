@@ -1,6 +1,7 @@
 use crate::client::gldt_swap::{bridge_pause, get_bridge_evm_signers, get_bridge_status};
 use crate::gldt_swap_suite::bridge::setup::{
-    bridge_config, bridge_upgrade, setup_bridge_env, wait_for_signers, BridgeEnvBuilder,
+    bridge_config, bridge_upgrade, setup_bridge_env, start_all_chains, wait_for_signers,
+    BridgeEnvBuilder,
 };
 use candid::encode_one;
 use gldt_swap_common::bridge::{
@@ -48,7 +49,7 @@ fn upgrade_with_bridge_config_loads_signers() {
 
 #[test]
 fn init_with_bridge_config_loads_signers_and_upgrade_keeps_them() {
-    let env = setup_bridge_env();
+    let mut env = setup_bridge_env();
     // all three canisters share the fiduciary subnet, which holds the threshold keys
     let subnet = env.pic.get_subnet(env.gldt_swap_canister_id);
     assert!(subnet.is_some());
@@ -57,6 +58,8 @@ fn init_with_bridge_config_loads_signers_and_upgrade_keeps_them() {
 
     let (claims, admin) = wait_for_signers(&env);
     assert_ne!(claims, admin);
+    // the first ticks are answered, so no outcall is pending during the upgrade
+    start_all_chains(&mut env);
 
     // an upgrade without a bridge argument keeps the config, and the same key gives the same addresses
     env.upgrade_gldt_swap(None).expect("plain upgrade");
@@ -67,8 +70,9 @@ fn init_with_bridge_config_loads_signers_and_upgrade_keeps_them() {
 
 #[test]
 fn invalid_bridge_upgrade_is_rejected_and_state_kept() {
-    let env = setup_bridge_env();
+    let mut env = setup_bridge_env();
     let signers = wait_for_signers(&env);
+    start_all_chains(&mut env);
 
     let mut config = bridge_config(env.sns_governance);
     config.chains[0].confirmations = 0;
@@ -76,7 +80,13 @@ fn invalid_bridge_upgrade_is_rejected_and_state_kept() {
         config: Some(config),
         chain_resets: vec![],
     };
-    assert!(env.upgrade_gldt_swap(Some(bad_config)).is_err());
+    let rejected = env.upgrade_gldt_swap(Some(bad_config)).unwrap_err();
+    assert!(
+        rejected
+            .reject_message
+            .contains("invalid bridge upgrade argument: Ethereum: confirmations must be above 0"),
+        "{rejected}"
+    );
 
     // a reset of a chain that is not stopped is refused too
     let bad_reset = BridgeUpgrade {
@@ -87,7 +97,13 @@ fn invalid_bridge_upgrade_is_rejected_and_state_kept() {
             next_burn_id: 0,
         }],
     };
-    assert!(env.upgrade_gldt_swap(Some(bad_reset)).is_err());
+    let rejected = env.upgrade_gldt_swap(Some(bad_reset)).unwrap_err();
+    assert!(
+        rejected
+            .reject_message
+            .contains("chain reset: Base is not stopped"),
+        "{rejected}"
+    );
 
     assert_eq!(wait_for_signers(&env), signers);
     assert!(get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &()).configured);
