@@ -103,17 +103,17 @@ fn wait_for_signed(env: &BridgeEnv, id: u64) -> OutboundTransfer {
     );
 }
 
-fn keccak(data: &[u8]) -> [u8; 32] {
+pub(super) fn keccak(data: &[u8]) -> [u8; 32] {
     alloy_primitives::keccak256(data).0
 }
 
-fn word(be: &[u8]) -> [u8; 32] {
+pub(super) fn word(be: &[u8]) -> [u8; 32] {
     let mut word = [0u8; 32];
     word[32 - be.len()..].copy_from_slice(be);
     word
 }
 
-fn address_word(text: &str) -> [u8; 32] {
+pub(super) fn address_word(text: &str) -> [u8; 32] {
     let bytes = hex::decode(text.strip_prefix("0x").unwrap()).unwrap();
     assert_eq!(bytes.len(), 20, "{text}");
     word(&bytes)
@@ -151,7 +151,7 @@ fn claim_digest(voucher: &EvmVoucher) -> [u8; 32] {
 
 /// The lower case address `ecrecover` gives, after checking what OpenZeppelin's
 /// `ECDSA.recover` requires: 65 bytes, `v` 27 or 28, and a low `s`.
-fn recover(digest: [u8; 32], signature: &str) -> String {
+pub(super) fn recover(digest: [u8; 32], signature: &str) -> String {
     let bytes = hex::decode(signature.strip_prefix("0x").unwrap()).unwrap();
     assert_eq!(bytes.len(), 65);
     let v = bytes[64];

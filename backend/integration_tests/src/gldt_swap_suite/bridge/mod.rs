@@ -5,4 +5,5 @@ mod inbound;
 mod outbound;
 pub mod outcalls;
 pub mod setup;
+mod sns_actions;
 mod upgrade;

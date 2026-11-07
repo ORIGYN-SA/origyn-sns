@@ -1,6 +1,7 @@
 pub mod _insert_fake_bulk_swaps;
 pub mod _insert_fake_old_bulk_swaps;
 pub mod bridge_pause;
+pub mod bridge_sns_action;
 pub mod bridge_to_evm;
 pub mod get_available_nfts;
 pub mod get_available_nfts_for_canister;

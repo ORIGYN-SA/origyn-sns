@@ -39,6 +39,11 @@ type BridgeError = variant {
 };
 // Authorized principals can only pause: a `true` sets the flag, a `false` leaves it as it is.
 type BridgePauseArgs = record { inbound : bool; outbound : bool };
+type BridgeSnsAction = variant {
+  SignEvmAdmin : vec EvmAdminRequest;
+  Resolve : vec ResolveAction;
+  SetIcpPaused : record { inbound : opt bool; outbound : opt bool };
+};
 type BridgeStatus = record {
   claims_signer : opt text;
   paused_out : bool;
@@ -153,6 +158,47 @@ type CustomFractionalizationConfig = record {
 type DisplayMessageType = variant { GenericDisplay; FieldsDisplay };
 type Duration = record { secs : nat64; nanos : nat32 };
 type ErrorInfo = record { description : text };
+type EvmAdminAction = variant {
+  SetSendLibrary : record { eid : nat32; lib : text };
+  CancelNonce : record { nonce : nat64 };
+  SetLzReceiveGas : record { gas : nat; dst_eid : nat32 };
+  Upgrade : record { implementation : text; code_hash : text };
+  SetExecutorConfig : record {
+    eid : nat32;
+    lib : text;
+    max_message_size : nat32;
+    executor : text;
+  };
+  SetUlnConfig : record {
+    eid : nat32;
+    lib : text;
+    confirmations : nat64;
+    required_dvns : vec text;
+    optional_dvns : vec text;
+    optional_threshold : nat8;
+  };
+  SetAdminSigner : record { signer : text };
+  BurnLzMessage : record {
+    sender : text;
+    src_eid : nat32;
+    nonce : nat64;
+    payload_hash : text;
+  };
+  SetOperator : record { operator : opt text };
+  SetReceiveLibrary : record { eid : nat32; lib : text; grace_period : nat };
+  SetMinBurnToIcp : record { amount : nat };
+  SetIcpSigner : record { signer : text };
+  SetPeer : record { eid : nat32; peer : text };
+  SetPaused : record { lz_paused : bool; icp_bridge_paused : bool };
+};
+type EvmAdminRequest = record {
+  chain : EvmChain;
+  // One signed batch, run in order.
+  actions : vec EvmAdminAction;
+  // Defaults to 7 days, at most 30.
+  valid_for_secs : opt nat64;
+};
+type EvmCall = record { data : blob; target : text };
 type EvmChain = variant { Base; Ethereum };
 // A provider of the EVM RPC canister. A built-in one maps to the EVM RPC canister's providers
 // for the chain id: Sepolia (11155111) has no Llama or Cloudflare, Base (8453) has no
@@ -371,6 +417,18 @@ type QueueSizes = record {
   queued : nat64;
   quarantined : nat64;
 };
+type ResolveAction = variant {
+  InboundReject : record { chain : EvmChain; burn_id : nat64; reason : text };
+  OutboundMarkBurned : record { id : nat64; icp_burn_index : nat64 };
+  OutboundMarkFailed : record { id : nat64 };
+  InboundMintTo : record { to : Account; chain : EvmChain; burn_id : nat64 };
+  InboundRetry : record { chain : EvmChain; burn_id : nat64 };
+  InboundMarkMinted : record {
+    chain : EvmChain;
+    icp_block_index : nat64;
+    burn_id : nat64;
+  };
+};
 type Response = variant { Success; InternalError : text };
 type Result = variant { Ok : OutboundTransfer; Err : BridgeError };
 type Result_1 = variant {
@@ -381,7 +439,22 @@ type Result_2 = variant { Ok : vec nat; Err : GeneralError };
 type Result_3 = variant { Ok : ConsentInfo; Err : Icrc21Error };
 type Result_4 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
 type Result_5 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
+type Result_6 = variant { Ok : text; Err : text };
 type Severity = variant { Info; Critical; Warning };
+type SignedEvmAdminAction = record {
+  id : nat64;
+  token : text;
+  // `0x` and 65 bytes of hex.
+  signature : text;
+  calls : vec EvmCall;
+  chain : EvmChain;
+  description : text;
+  // Unix seconds.
+  deadline : nat64;
+  created_at : nat64;
+  chain_id : nat64;
+  nonce : nat64;
+};
 // Both sides of the supply guard: minting holds while `evm_side > icp_side`.
 type SupplyGuardStatus = record {
   // The sum of the chains' supply readings plus every unminted inbound burn.
@@ -493,6 +566,9 @@ service : (Args_1) -> {
   // Authorized principals can pause either direction but never unpause;
   // unpausing is an SNS `SetIcpPaused` action.
   bridge_pause : (BridgePauseArgs) -> ();
+  // The bridge's SNS generic function (spec 8.9), for ORIGYN SNS governance only. The action is
+  // checked again on the current state, and any error traps, so the proposal shows as failed.
+  bridge_sns_action : (BridgeSnsAction) -> ();
   // Burns the caller's GLDT on ICP and signs a claim voucher for Ethereum or Base (spec 8.6).
   // The caller first approves `gldt_swap` for `amount` on the GLDT ledger.
   bridge_to_evm : (BridgeToEvmArgs) -> (Result);
@@ -505,6 +581,14 @@ service : (Args_1) -> {
     ) query;
   get_available_nfts : (opt principal) -> (Result_1);
   get_available_nfts_for_canister : (Args) -> (Result_2);
+  // One signed admin action: anyone may submit it with `execute` on the token before its
+  // deadline.
+  get_bridge_admin_action : (nat64) -> (opt SignedEvmAdminAction) query;
+  // Signed admin actions, newest first. `start` is an exclusive upper bound on the id (the last
+  // id of the previous page); `limit` is capped at 100.
+  get_bridge_admin_actions : (opt nat64, nat32) -> (
+      vec SignedEvmAdminAction,
+    ) query;
   // The EIP-55 addresses of the claims and admin keys, once loaded.
   get_bridge_evm_signers : () -> (GetBridgeEvmSignersResponse) query;
   get_bridge_status : () -> (BridgeStatus) query;
@@ -547,4 +631,7 @@ service : (Args_1) -> {
   set_buyback_canister : (opt Account) -> (Response);
   swap_nft_for_tokens : (vec Nft) -> (Result_4);
   swap_tokens_for_nft : (vec Nft) -> (Result_5);
+  // The SNS validator of `bridge_sns_action` (spec 8.9): the text voters read, or why the action
+  // would fail. An update for SNS governance only, as in the spec's Candid; it changes nothing.
+  validate_bridge_sns_action : (BridgeSnsAction) -> (Result_6);
 }

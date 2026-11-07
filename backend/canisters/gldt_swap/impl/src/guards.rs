@@ -62,6 +62,11 @@ pub fn caller_is_authorized() -> Result<(), String> {
     }
 }
 
+/// Only the bridge's configured SNS governance (spec 8.9); nobody while the bridge has no config.
+pub fn caller_is_sns_governance() -> Result<(), String> {
+    read_state(|s| crate::bridge::sns::check_caller(&s.data.bridge, s.env.caller()))
+}
+
 pub fn reject_anonymous_caller() -> Result<(), String> {
     if ic_cdk::api::msg_caller() == Principal::anonymous() {
         return Err("You may not use an anonymous principal".to_string());

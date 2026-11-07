@@ -30,6 +30,40 @@ generate_pocket_query_call!(get_bridge_evm_signers);
 generate_pocket_update_call!(bridge_pause);
 generate_pocket_update_call!(bridge_to_evm);
 generate_pocket_query_call!(get_bridge_transfer_out);
+generate_pocket_update_call!(validate_bridge_sns_action);
+generate_pocket_query_call!(get_bridge_admin_action);
+
+/// `bridge_sns_action` traps on any error, so this returns the reject instead of panicking.
+pub fn bridge_sns_action(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &bridge_sns_action::Args,
+) -> Result<(), pocket_ic::RejectResponse> {
+    pic.update_call(
+        canister_id,
+        sender,
+        "bridge_sns_action",
+        candid::encode_one(args).unwrap(),
+    )
+    .map(|_| ())
+}
+
+/// Two Candid arguments (start, limit), so not built with `generate_pocket_query_call!`.
+pub fn get_bridge_admin_actions(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_admin_actions::Args,
+) -> get_bridge_admin_actions::Response {
+    let (start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_admin_actions",
+        candid::encode_args((start, limit)).unwrap(),
+    ))
+}
 
 /// Not built with `generate_pocket_query_call!`, which sends one Candid argument: this query
 /// takes three (account, start, limit).
