@@ -3,6 +3,7 @@
 //! The config is set only by init and upgrade arguments, so an SNS upgrade
 //! proposal is the only way to change it.
 
+use crate::bridge::alerts::FAILED_TICKS_ALERT;
 use crate::bridge::evm::address::parse_address;
 use crate::bridge::rpc::services;
 use crate::bridge::state::BridgeState;
@@ -140,8 +141,10 @@ fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
 ///   is new gets a fresh `ChainState`; the state of earlier deployments is kept.
 /// - A new `ecdsa_key_name` drops both loaded signers, so they are reloaded from the new key.
 /// - Each `ChainReset` applies to the chain's current deployment, only if that chain is
-///   stopped. It sets the cursor and clears the open window, the stop reason and the failed
-///   ticks. A chain stopped at its first tick has no start block, so it runs the first tick again.
+///   stopped, or has an open window that failed at least [FAILED_TICKS_ALERT] ticks in a row
+///   (a window that can never pass its checks never stops by itself). It sets the cursor and
+///   clears the open window, the stop reason and the failed ticks. A chain stopped at its first
+///   tick has no start block, so it runs the first tick again.
 pub fn apply_bridge_upgrade(state: &mut BridgeState, up: BridgeUpgrade) -> Result<(), String> {
     let mut next = state.clone();
 
@@ -173,9 +176,11 @@ pub fn apply_bridge_upgrade(state: &mut BridgeState, up: BridgeUpgrade) -> Resul
         let chain = next
             .chain_state_mut(reset.chain)
             .ok_or_else(|| format!("chain reset: {:?} is not configured", reset.chain))?;
-        if chain.stopped.is_none() {
+        let stuck_window = chain.window.is_some() && chain.failed_ticks >= FAILED_TICKS_ALERT;
+        if chain.stopped.is_none() && !stuck_window {
             return Err(format!(
-                "chain reset: {:?} is not stopped; only a stopped chain can be reset",
+                "chain reset: {:?} is not stopped and has no open window that failed \
+                 {FAILED_TICKS_ALERT} ticks in a row; only such a chain can be reset",
                 reset.chain
             ));
         }
@@ -539,6 +544,56 @@ mod tests {
 
         // a second reset in a row is refused, because the chain runs again
         assert!(apply_bridge_upgrade(&mut state, upgrade(None, vec![reset])).is_err());
+    }
+
+    /// A window that keeps failing its checks never stops by itself, so a reset reaches it
+    /// once it has failed FAILED_TICKS_ALERT ticks in a row.
+    #[test]
+    fn chain_reset_applies_to_open_window_that_keeps_failing() {
+        let mut state = configured_state();
+        let base = state.deployment(EvmChain::Base).unwrap();
+        {
+            let chain = state.chains.get_mut(&base).unwrap();
+            chain.start_block = Some(1_000);
+            chain.last_scraped_block = 2_000;
+            chain.next_burn_id = 8;
+            chain.failed_ticks = FAILED_TICKS_ALERT;
+        }
+        let reset = ChainReset {
+            chain: EvmChain::Base,
+            last_scraped_block: 1_900,
+            next_burn_id: 8,
+        };
+
+        // failing ticks without an open window: refused
+        let before = state.clone();
+        assert!(apply_bridge_upgrade(&mut state, upgrade(None, vec![reset.clone()])).is_err());
+        assert_eq!(state, before);
+
+        // an open window one tick short of the alert: refused
+        {
+            let chain = state.chains.get_mut(&base).unwrap();
+            chain.window = Some(Window {
+                to_block: 2_400,
+                end_burn_id: 20,
+                total_supply: U256::from(5u8),
+            });
+            chain.failed_ticks = FAILED_TICKS_ALERT - 1;
+        }
+        let before = state.clone();
+        let err = apply_bridge_upgrade(&mut state, upgrade(None, vec![reset.clone()])).unwrap_err();
+        assert!(err.contains("not stopped"), "{err}");
+        assert_eq!(state, before);
+
+        // the window failed FAILED_TICKS_ALERT ticks in a row: the reset clears it
+        state.chains.get_mut(&base).unwrap().failed_ticks = FAILED_TICKS_ALERT;
+        apply_bridge_upgrade(&mut state, upgrade(None, vec![reset])).unwrap();
+        let chain = &state.chains[&base];
+        assert_eq!(chain.last_scraped_block, 1_900);
+        assert_eq!(chain.next_burn_id, 8);
+        assert_eq!(chain.window, None);
+        assert_eq!(chain.failed_ticks, 0);
+        assert_eq!(chain.stopped, None);
     }
 
     #[test]

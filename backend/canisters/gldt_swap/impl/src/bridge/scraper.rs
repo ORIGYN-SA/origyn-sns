@@ -436,9 +436,43 @@ async fn fetch_batches<R: EvmReader>(
         } else {
             reader.burn_logs(&v.cfg, from_block, to_block, &ids).await?
         };
-        *saved += commit_batch(chain, &v, &ids, &logs)?;
+        match commit_batch(chain, &v, &ids, &logs) {
+            Ok(count) => *saved += count,
+            // both providers agreed on logs that fail the batch checks
+            Err(Fail::Call(e)) => return check_window_reorg(reader, chain, &v, to_block, e).await,
+            Err(other) => return Err(other),
+        }
     }
     Ok(())
+}
+
+/// After agreed logs failed the batch checks, reads `bridgeInfo()` at the window's end block
+/// again. A `nextBurnId` other than the window's end means a reorg deeper than the
+/// confirmations changed the window: the chain stops (spec 9 rule 9), and an SNS `ChainReset`
+/// restarts it. Otherwise the tick fails with `error` and is retried; lagging providers can
+/// agree on missing logs.
+async fn check_window_reorg<R: EvmReader>(
+    reader: &R,
+    chain: EvmChain,
+    v: &View,
+    to_block: u64,
+    error: String,
+) -> Result<(), Fail> {
+    let info = reader.bridge_info(&v.cfg, to_block).await?;
+    let end = v.chain.window.as_ref().map_or(0, |w| w.end_burn_id);
+    if info.next_burn_id == end {
+        return Err(Fail::Call(error));
+    }
+    commit(chain, v, |c| {
+        stop(
+            c,
+            format!(
+                "nextBurnId at block {to_block} is now {}, the open window ends at {end} \
+                 (a reorg changed the window): {error}",
+                info.next_burn_id
+            ),
+        )
+    })
 }
 
 /// The chain's state now, if it is where `v` saw it. After the job lease runs out, a second
@@ -1418,6 +1452,65 @@ mod tests {
         assert_eq!(chain.window, None);
         assert_eq!(chain.failed_ticks, 0);
         assert_eq!(queued_ids(), (0..120).collect::<Vec<_>>());
+    }
+
+    /// Agreed logs that miss an id, while the window's end block still holds the window's
+    /// `nextBurnId`: lagging providers, so the tick fails and is retried; the chain runs on.
+    #[test]
+    fn failed_batch_checks_without_reorg_fail_the_tick_only() {
+        // burn 1 is missing from both providers' logs
+        let logs = vec![burn_log(0, 101, one()), burn_log(2, 103, one())];
+        setup_chain(with_window(open_chain(100, 0), 600, 3, 7));
+        let reader = FakeReader::new(1_000, info(3, 7)).with_logs(logs);
+
+        assert_eq!(tick(&reader), 0);
+        assert_eq!(
+            reader.calls(),
+            vec!["burn_logs 101..=600 ids 0..=2", "bridge_info 600"]
+        );
+        let chain = chain_state();
+        assert_eq!(chain.stopped, None);
+        assert_eq!(chain.failed_ticks, 1);
+        assert_eq!(chain.next_burn_id, 0);
+        assert!(chain.window.is_some());
+        assert!(chain.last_error.unwrap().contains("Missing(1)"));
+        assert!(queued_ids().is_empty());
+    }
+
+    /// Agreed logs that fail the checks, and the window's end block now holds another
+    /// `nextBurnId`: a reorg deeper than the confirmations changed the window, so the chain
+    /// stops (spec 9 rule 9) and an SNS ChainReset restarts it.
+    #[test]
+    fn failed_batch_checks_after_reorg_stop_the_chain() {
+        // after the reorg only burns 0 and 1 exist at block 600
+        let logs = vec![burn_log(0, 101, one()), burn_log(1, 102, one())];
+        setup_chain(with_window(open_chain(100, 0), 600, 3, 7));
+        let reader = FakeReader::new(1_000, info(2, 7)).with_logs(logs);
+
+        assert_eq!(tick(&reader), 0);
+        assert_eq!(
+            reader.calls(),
+            vec!["burn_logs 101..=600 ids 0..=2", "bridge_info 600"]
+        );
+        let chain = chain_state();
+        let reason = chain.stopped.clone().expect("the chain stops");
+        assert!(
+            reason.contains("nextBurnId at block 600 is now 2, the open window ends at 3"),
+            "{reason}"
+        );
+        assert_eq!(chain.next_burn_id, 0);
+        assert!(queued_ids().is_empty());
+        let critical = bridge()
+            .alerts
+            .iter()
+            .filter(|a| a.severity == Severity::Critical && a.message.contains("stopped"))
+            .count();
+        assert_eq!(critical, 1);
+
+        // a stopped chain does nothing more
+        reader.clear_calls();
+        assert_eq!(tick(&reader), 0);
+        assert!(reader.calls().is_empty());
     }
 
     #[test]
