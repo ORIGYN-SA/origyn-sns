@@ -7,6 +7,7 @@ use crate::bridge::alerts::FAILED_TICKS_ALERT;
 use crate::bridge::evm::address::parse_address;
 use crate::bridge::rpc::services;
 use crate::bridge::state::BridgeState;
+use candid::Principal;
 pub use gldt_swap_common::bridge::{
     BridgeConfig, BridgeUpgrade, ChainConfig, ChainReset, EvmChain, EvmProvider,
 };
@@ -18,6 +19,15 @@ pub const MAX_LOG_BATCH_SIZE: u32 = 50;
 pub const MAX_ADMIN_ACTION_VALIDITY_SECS: u64 = 30 * 24 * 60 * 60;
 
 pub fn validate_config(cfg: &BridgeConfig) -> Result<(), String> {
+    // anyone could call bridge_sns_action as either of these
+    if cfg.sns_governance == Principal::anonymous()
+        || cfg.sns_governance == Principal::management_canister()
+    {
+        return Err(format!(
+            "sns_governance {} is not a governance canister",
+            cfg.sns_governance
+        ));
+    }
     if cfg.ecdsa_key_name.trim().is_empty() {
         return Err("ecdsa_key_name is empty".to_string());
     }
@@ -117,6 +127,17 @@ fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
         }
     }
     services(chain)?;
+    // mainnet takes two built-in providers (spec 8.4): a custom URL could carry an API key
+    let custom = chain
+        .providers
+        .iter()
+        .any(|p| matches!(p, EvmProvider::Custom { .. }));
+    if custom && !cfg!(feature = "inttest") && ![11155111, 84532].contains(&chain.chain_id) {
+        return Err(format!(
+            "chain id {} takes built-in providers; custom ones are for Sepolia and Base Sepolia",
+            chain.chain_id
+        ));
+    }
     if chain.scrape_interval_secs == 0 {
         return Err("scrape_interval_secs must be above 0".to_string());
     }
@@ -410,6 +431,33 @@ mod tests {
         assert_eq!(validate_config(&cfg), Ok(()));
         cfg.chains[0].providers = vec![EvmProvider::Alchemy, EvmProvider::Llama];
         rejects(cfg, "Llama");
+    }
+
+    #[test]
+    fn config_rejects_anonymous_or_management_sns_governance() {
+        for principal in [Principal::anonymous(), Principal::management_canister()] {
+            let mut cfg = bridge_config();
+            cfg.sns_governance = principal;
+            rejects(cfg, "sns_governance");
+        }
+    }
+
+    /// Mainnet takes two built-in providers; the integration build also takes custom ones
+    /// there.
+    #[test]
+    fn config_rejects_custom_providers_on_mainnet() {
+        for index in [0, 1] {
+            let mut cfg = bridge_config();
+            cfg.chains[index].providers = vec![
+                custom("https://a.example.org"),
+                custom("https://b.example.org"),
+            ];
+            if cfg!(feature = "inttest") {
+                assert_eq!(validate_config(&cfg), Ok(()));
+            } else {
+                rejects(cfg, "takes built-in providers");
+            }
+        }
     }
 
     #[test]

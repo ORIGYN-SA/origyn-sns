@@ -25,8 +25,8 @@ use ic_cdk_management_canister::{HttpHeader, HttpMethod, HttpRequestArgs};
 use serde::Deserialize;
 
 /// The largest head reply accepted, headers included. A public endpoint answers in about
-/// 460 bytes.
-pub const HEAD_RESPONSE_BYTES: u64 = 1_000;
+/// 460 bytes; the rest is room for endpoints that send more headers.
+pub const HEAD_RESPONSE_BYTES: u64 = 4_000;
 
 /// The head call goes to one replica. PocketIC 12 serves such calls too, so the integration
 /// build sends it the same way.
@@ -449,7 +449,7 @@ mod tests {
         let args = head_request("https://base-rpc.publicnode.com");
         assert_eq!(args.url, "https://base-rpc.publicnode.com");
         assert_eq!(args.method, HttpMethod::POST);
-        assert_eq!(args.max_response_bytes, Some(1_000));
+        assert_eq!(args.max_response_bytes, Some(4_000));
         assert_eq!(args.is_replicated, Some(false));
         assert_eq!(args.transform, None);
         let body: serde_json::Value = serde_json::from_slice(&args.body.unwrap()).unwrap();
