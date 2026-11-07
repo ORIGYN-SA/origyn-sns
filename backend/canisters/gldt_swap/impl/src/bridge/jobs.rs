@@ -1,13 +1,14 @@
 //! The bridge timers (spec 8.15). Timers don't survive upgrades, so `start_jobs` sets them
 //! again after init and every upgrade.
 
+use crate::bridge::alerts::track_cycles;
 use crate::bridge::gldt_ledger;
 use crate::bridge::inbound::{has_inbound_work, process_round, IcMinter};
 use crate::bridge::outbound::process_outbound;
 use crate::bridge::rpc::IcEvmReader;
 use crate::bridge::scraper::run_tick;
 use crate::guards::{Job, JobGuard};
-use crate::state::read_state;
+use crate::state::{mutate_state, read_state};
 use gldt_swap_common::bridge::EvmChain;
 use std::time::Duration;
 use tracing::warn;
@@ -87,12 +88,17 @@ async fn scrape(chain: EvmChain) {
     }
 }
 
-/// `bridge_process` (spec 8.8), only when there is work: first the mints whose outcome is
-/// unknown, then the outbound half (burns whose outcome is unknown, and vouchers), then the
-/// mint queue, which waits while a mint is still unknown. The outbound half always runs.
+/// Checks the cycle balance every minute (spec 8.14). Then `bridge_process` (spec 8.8), only
+/// when there is work: first the mints whose outcome is unknown, then the outbound half (burns
+/// whose outcome is unknown, and vouchers), then the mint queue, which waits while a mint is
+/// still unknown. The outbound half always runs.
 async fn bridge_process() {
-    let (now, has_outbound_work) =
-        read_state(|s| (s.env.now_nanos(), !s.data.bridge.outbound_work.is_empty()));
+    let (now, has_outbound_work) = mutate_state(|s| {
+        let now = s.env.now_nanos();
+        let cycles = s.env.cycles_balance();
+        track_cycles(&mut s.data.bridge, cycles, now);
+        (now, !s.data.bridge.outbound_work.is_empty())
+    });
     if !has_outbound_work && !has_inbound_work() {
         return;
     }

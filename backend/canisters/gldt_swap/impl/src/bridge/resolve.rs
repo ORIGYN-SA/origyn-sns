@@ -744,11 +744,12 @@ mod tests {
         let state = bridge();
         assert_eq!(state.out_pending, 0);
         assert_eq!(state.bridged_out, 10 * ONE);
-        // the processor signs the burned one's voucher next
+        // the processor signs the burned one's voucher next, and nothing waits for a resolve
         assert_eq!(
             state.outbound_work.iter().copied().collect::<Vec<_>>(),
             vec![0]
         );
+        assert!(state.outbound_held.is_empty());
     }
 
     /// An ICP burn index belongs to one outbound transfer only.

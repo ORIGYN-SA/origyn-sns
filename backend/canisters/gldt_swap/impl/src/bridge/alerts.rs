@@ -17,6 +17,23 @@ pub const STALE_CURSOR_NANOS: u64 = 30 * 60 * 1_000_000_000;
 /// Errors are kept to this many bytes in `last_error` and in alerts.
 pub const MAX_ERROR_LEN: usize = 300;
 
+/// Below this balance the bridge alerts that cycles run low (spec 8.14 gives no number). At
+/// spec 8.16's estimate of about 1.7 T cycles a day for scraping, it is about a day left.
+pub const LOW_CYCLES: u128 = 2_000_000_000_000;
+
+/// Alerts once when the balance drops below [LOW_CYCLES], and again only after it was above.
+pub fn track_cycles(state: &mut BridgeState, cycles: u128, now: u64) {
+    let low = cycles < LOW_CYCLES;
+    if low && !state.cycles_low {
+        state.push_alert(
+            now,
+            Severity::Critical,
+            format!("cycles run low: {cycles} left, below {LOW_CYCLES}"),
+        );
+    }
+    state.cycles_low = low;
+}
+
 /// Counts a failed tick and keeps its error. Alerts when the count reaches
 /// [FAILED_TICKS_ALERT]. Nothing else changes.
 pub fn record_tick_failure(state: &mut BridgeState, chain: EvmChain, err: &str, now: u64) {
@@ -126,6 +143,32 @@ mod tests {
 
     fn chain(state: &BridgeState, chain: EvmChain) -> ChainState {
         state.chain_state(chain).cloned().unwrap()
+    }
+
+    #[test]
+    fn low_cycles_alert_once_until_the_balance_recovers() {
+        let mut state = configured_state();
+        track_cycles(&mut state, LOW_CYCLES, 1);
+        assert!(state.alerts.is_empty());
+
+        // below the line: one Critical alert, however often it is checked
+        track_cycles(&mut state, LOW_CYCLES - 1, 2);
+        track_cycles(&mut state, LOW_CYCLES / 2, 3);
+        assert_eq!(state.alerts.len(), 1);
+        let alert = state.alerts.back().unwrap();
+        assert_eq!(alert.severity, Severity::Critical);
+        assert_eq!(alert.time, 2);
+        assert!(
+            alert.message.contains("cycles run low"),
+            "{}",
+            alert.message
+        );
+
+        // topped up, then low again: a new alert
+        track_cycles(&mut state, 3 * LOW_CYCLES, 4);
+        assert!(!state.cycles_low);
+        track_cycles(&mut state, 1, 5);
+        assert_eq!(state.alerts.len(), 2);
     }
 
     #[test]

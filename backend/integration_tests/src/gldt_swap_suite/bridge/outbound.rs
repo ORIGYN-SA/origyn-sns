@@ -11,7 +11,7 @@ use crate::gldt_swap_suite::bridge::setup::{
 };
 use candid::{Encode, Nat, Principal};
 use gldt_swap_common::bridge::{
-    BridgeToEvmArgs, EvmChain, EvmVoucher, OutboundStatus, OutboundTransfer,
+    BridgeToEvmArgs, EvmChain, EvmVoucher, OutboundCounts, OutboundStatus, OutboundTransfer,
 };
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc2::approve::ApproveArgs;
@@ -241,6 +241,7 @@ fn retry_after_ledger_unavailable_does_not_double_burn() {
     let status = get_bridge_status(&env.pic, env.user, env.gldt_swap_canister_id, &());
     assert_eq!(status.out_pending, AMOUNT);
     assert_eq!(status.bridged_out, 0u64);
+    assert_eq!(status.outbound.burn_unknown, 1);
 
     // while the ledger is down the processor keeps retrying and keeps the amount reserved
     env.pic.advance_time(Duration::from_secs(61));
@@ -270,6 +271,7 @@ fn retry_after_ledger_unavailable_does_not_double_burn() {
     let status = get_bridge_status(&env.pic, env.user, env.gldt_swap_canister_id, &());
     assert_eq!(status.bridged_out, AMOUNT);
     assert_eq!(status.out_pending, 0u64);
+    assert_eq!(status.outbound, OutboundCounts::default());
 }
 
 #[test]

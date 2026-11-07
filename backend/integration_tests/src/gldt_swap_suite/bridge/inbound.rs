@@ -88,6 +88,8 @@ fn first_tick_opens_chains() {
     }
     let status = get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &());
     assert!(status.alerts.is_empty(), "{:?}", status.alerts);
+    // the test canister holds 1,000 T cycles, far above the low cycles line
+    assert!(status.cycles > Nat::from(100_000_000_000_000u64));
 
     // with no new burn, the next tick moves the cursor and the supply reading
     env.evm.advance(100);

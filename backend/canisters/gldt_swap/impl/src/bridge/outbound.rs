@@ -257,6 +257,11 @@ pub fn store_outbound(state: &mut BridgeState, record: &OutboundTransfer) {
     } else {
         state.outbound_work.remove(&record.id);
     }
+    if matches!(record.status, OutboundStatus::NeedsManualCheck(_)) {
+        state.outbound_held.insert(record.id);
+    } else {
+        state.outbound_held.remove(&record.id);
+    }
     with_outbound(|m| m.insert(record.id, record.clone()));
 }
 
@@ -918,6 +923,10 @@ mod tests {
         assert_eq!(state.bridged_out, 0);
         // the processor has nothing left to do; an SNS resolve settles it
         assert!(state.outbound_work.is_empty());
+        assert_eq!(
+            state.outbound_held.iter().copied().collect::<Vec<_>>(),
+            vec![a.id]
+        );
         assert_eq!(state.alerts_total, alerts_before + 1);
         let alert = state.alerts.back().unwrap();
         assert_eq!(alert.time, NOW + 1);

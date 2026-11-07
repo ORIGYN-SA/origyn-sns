@@ -107,6 +107,12 @@ pub struct BridgeState {
     /// Inbound transfers waiting for an SNS resolve: `Quarantined` or `NeedsManualCheck`.
     /// They have left the mint queue.
     pub inbound_held: BTreeSet<(Deployment, u64)>,
+    /// Outbound transfers waiting for an SNS resolve: `NeedsManualCheck`. Kept by
+    /// `outbound::store_outbound`, like `outbound_work`.
+    pub outbound_held: BTreeSet<u64>,
+    /// The balance was below `alerts::LOW_CYCLES` at the last check, so the low cycles alert
+    /// fired already.
+    pub cycles_low: bool,
 }
 
 /// Why the mint queue waits (spec 8.8).

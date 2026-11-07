@@ -52,11 +52,14 @@ type BridgeStatus = record {
   admin_signer : opt text;
   paused_in : bool;
   queue : QueueSizes;
+  // The canister's cycle balance.
+  cycles : nat;
   configured : bool;
   chains : vec ChainStatus;
   alerts_total : nat64;
   out_pending : nat;
   bridged_out : nat;
+  outbound : OutboundCounts;
 };
 type BridgeToEvmArgs = record {
   chain : EvmChain;
@@ -390,6 +393,14 @@ type InitArgs = record {
   swap_configs : vec SwapCanisterConfig;
 };
 type Nft = record { id : nat; canister_id : principal };
+// Outbound transfers not yet settled, by status: the processor's work (`burning`,
+// `burn_unknown`, `burned`) and those held for an SNS resolve (`needs_manual_check`).
+type OutboundCounts = record {
+  needs_manual_check : nat64;
+  burn_unknown : nat64;
+  burning : nat64;
+  burned : nat64;
+};
 type OutboundStatus = variant {
   Burned : record { icp_burn_index : nat64 };
   Failed : text;

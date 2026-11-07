@@ -1,16 +1,17 @@
 use crate::bridge::evm::address::format_address;
 use crate::bridge::evm::num::u256_to_nat;
 use crate::bridge::inbound::{evm_side, guard_holds};
-use crate::bridge::stable::{with_inbound, with_queue};
+use crate::bridge::stable::{with_inbound, with_outbound, with_queue};
 use crate::bridge::state::{BridgeState, ChainState};
 use crate::state::read_state;
 use candid::Nat;
 pub use gldt_swap_api_canister::get_bridge_status::Response as GetBridgeStatusResponse;
 use gldt_swap_common::bridge::{
-    ChainConfig, ChainStatus, InboundStatus, QueueSizes, SupplyGuardStatus, SupplyReadingStatus,
-    WindowStatus,
+    ChainConfig, ChainStatus, InboundStatus, OutboundCounts, OutboundStatus, QueueSizes,
+    SupplyGuardStatus, SupplyReadingStatus, WindowStatus,
 };
 use ic_cdk::query;
+use utils::env::Environment;
 
 #[query]
 pub fn get_bridge_status() -> GetBridgeStatusResponse {
@@ -26,6 +27,8 @@ pub fn get_bridge_status() -> GetBridgeStatusResponse {
             chains: chain_statuses(bridge),
             supply_guard: supply_guard(bridge),
             queue,
+            outbound: outbound_counts(bridge),
+            cycles: Nat::from(s.env.cycles_balance()),
             claims_signer: bridge
                 .claims_signer
                 .as_ref()
@@ -89,6 +92,25 @@ fn supply_guard(bridge: &BridgeState) -> SupplyGuardStatus {
         evm_side: u256_to_nat(evm_side(bridge, bridge.unminted_e8s)),
         icp_side: Nat::from(bridge.bridged_out),
     }
+}
+
+/// Outbound transfers that are not settled, by status: the processor's work list and those
+/// held for an SNS resolve.
+fn outbound_counts(bridge: &BridgeState) -> OutboundCounts {
+    let ids = bridge.outbound_work.iter().chain(&bridge.outbound_held);
+    with_outbound(|outbound| {
+        let mut counts = OutboundCounts::default();
+        for id in ids {
+            match outbound.get(id).map(|record| record.status) {
+                Some(OutboundStatus::Burning) => counts.burning += 1,
+                Some(OutboundStatus::BurnUnknown) => counts.burn_unknown += 1,
+                Some(OutboundStatus::Burned { .. }) => counts.burned += 1,
+                Some(OutboundStatus::NeedsManualCheck(_)) => counts.needs_manual_check += 1,
+                _ => {}
+            }
+        }
+        counts
+    })
 }
 
 /// Inbound transfers that are not settled, by status: the mint queue (`Queued` and

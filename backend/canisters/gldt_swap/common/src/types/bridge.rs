@@ -420,6 +420,16 @@ pub struct QueueSizes {
     pub needs_manual_check: u64,
 }
 
+/// Outbound transfers not yet settled, by status: the processor's work (`burning`,
+/// `burn_unknown`, `burned`) and those held for an SNS resolve (`needs_manual_check`).
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug, Default, PartialEq, Eq)]
+pub struct OutboundCounts {
+    pub burning: u64,
+    pub burn_unknown: u64,
+    pub burned: u64,
+    pub needs_manual_check: u64,
+}
+
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct BridgeStatus {
     pub configured: bool,
@@ -430,6 +440,9 @@ pub struct BridgeStatus {
     pub chains: Vec<ChainStatus>,
     pub supply_guard: SupplyGuardStatus,
     pub queue: QueueSizes,
+    pub outbound: OutboundCounts,
+    /// The canister's cycle balance.
+    pub cycles: Nat,
     pub claims_signer: Option<String>,
     pub admin_signer: Option<String>,
     pub alerts: Vec<Alert>,

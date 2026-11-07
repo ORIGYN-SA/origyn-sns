@@ -328,6 +328,7 @@ fn resolve_actions_update_counters() {
     assert_eq!(before.bridged_out, Nat::from(10 * ONE));
     assert_eq!(before.out_pending, Nat::from(2 * ONE));
     assert_eq!(before.queue.needs_manual_check, 2);
+    assert_eq!(before.outbound.needs_manual_check, 2);
     let balance_before = balance(&env, user);
 
     // a person found burn 1's mint and outbound 0's burn, and confirmed the others never happened
@@ -375,6 +376,7 @@ fn resolve_actions_update_counters() {
     assert_eq!(after.out_pending, Nat::from(0u8));
     assert_eq!(after.queue.needs_manual_check, 0);
     assert_eq!(after.queue.queued, 1);
+    assert_eq!(after.outbound.needs_manual_check, 0);
 
     // the processor mints the retried burn with a new timestamp and signs the burned voucher
     process(&env);
