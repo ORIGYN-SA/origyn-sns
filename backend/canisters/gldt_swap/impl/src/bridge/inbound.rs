@@ -1,9 +1,10 @@
 //! EVM to ICP (spec 8.8): the mint processor and the supply guard.
 //!
 //! The scraper saves each burn as `Queued` in map 2 and on the mint queue (map 3), and adds its
-//! amount to `unminted_e8s`. Each `bridge_process` run first retries every mint whose outcome is
-//! unknown, with its stored arguments, and then (after the outbound half) mints the queue in
-//! order, one at a time. Before each new mint:
+//! amount to `unminted_e8s`. Each `bridge_process` round first retries every mint whose outcome
+//! is unknown, with its stored arguments, and then (after the outbound half) mints the queue in
+//! order, one at a time. While a mint's outcome is still unknown, no new mint goes out, so a
+//! ledger outage leaves at most one transfer to settle. Before each new mint:
 //!
 //! - rule 1: the burn is not above `bridged_out`;
 //! - the supply guard: the chains' supply readings plus `unminted_e8s` are not above
@@ -45,6 +46,8 @@ pub enum MintDecision {
     Mint(InboundKey),
     HoldGuard,
     HoldRule1,
+    /// A mint's outcome is still unknown; it settles before the next one goes out.
+    HoldUnknown,
     Paused,
     Empty,
 }
@@ -139,12 +142,16 @@ pub fn release_unminted(state: &mut BridgeState, amount: U256) {
     };
 }
 
-/// Spec 8.8 for the first `Queued` burn: rule 1 first (it needs no reading), then the supply
-/// guard. Mints whose outcome is unknown come earlier in the queue and are skipped here.
+/// Spec 8.8 for the head of the mint queue. A `MintUnknown` head holds new mints until it
+/// settles; a `NeedsManualCheck` has left the queue and holds nothing. For a `Queued` head:
+/// rule 1 first (it needs no reading), then the supply guard.
 pub fn next_mint(state: &BridgeState) -> MintDecision {
-    let Some((key, record)) = first_queued() else {
+    let Some((key, record)) = queue_head() else {
         return MintDecision::Empty;
     };
+    if record.status == InboundStatus::MintUnknown {
+        return MintDecision::HoldUnknown;
+    }
     if state.paused_in {
         return MintDecision::Paused;
     }
@@ -157,12 +164,17 @@ pub fn next_mint(state: &BridgeState) -> MintDecision {
     MintDecision::Mint(key)
 }
 
-fn first_queued() -> Option<(InboundKey, InboundRecord)> {
+/// The first record on the mint queue, which holds only `Queued` and `MintUnknown` records.
+fn queue_head() -> Option<(InboundKey, InboundRecord)> {
     with_queue(|q| {
         q.iter().find_map(|entry| {
             let key = entry.value();
             let record = with_inbound(|m| m.get(&key))?;
-            (record.status == InboundStatus::Queued).then_some((key, record))
+            matches!(
+                record.status,
+                InboundStatus::Queued | InboundStatus::MintUnknown
+            )
+            .then_some((key, record))
         })
     })
 }
@@ -449,8 +461,9 @@ pub async fn settle_unknown_mints<M: Minter>(minter: &M, minting_owner: Principa
 }
 
 /// The last inbound step of `bridge_process`: mints the queue in order, one at a time, until it
-/// is empty, a check holds, minting is paused, a mint gets no answer, or [MAX_MINTS_PER_RUN]
-/// mints went out.
+/// is empty, a check holds, a mint's outcome is unknown, minting is paused, or
+/// [MAX_MINTS_PER_RUN] mints went out. An unknown outcome raises no alert of its own: the
+/// no-answer path logs, and `NeedsManualCheck` alerts.
 pub async fn mint_queue<M: Minter>(minter: &M, minting_owner: Principal) {
     for _ in 0..MAX_MINTS_PER_RUN {
         let start = mutate_state(|s| {
@@ -463,7 +476,7 @@ pub async fn mint_queue<M: Minter>(minter: &M, minting_owner: Principal) {
                         begin_mint(bridge, key, minting_owner, now).map(|start| (key, start)),
                     );
                 }
-                MintDecision::Paused => return None,
+                MintDecision::Paused | MintDecision::HoldUnknown => return None,
                 MintDecision::Empty => None,
                 MintDecision::HoldGuard => Some(MintHold::Guard),
                 MintDecision::HoldRule1 => Some(MintHold::Rule1),
@@ -481,6 +494,23 @@ pub async fn mint_queue<M: Minter>(minter: &M, minting_owner: Principal) {
         if mint_once(minter, key, args, retry).await == MintResult::NoAnswer {
             return;
         }
+    }
+}
+
+/// One `bridge_process` round (spec 8.8): settles the mints whose outcome is unknown, runs
+/// `outbound` (the outbound half), then mints the queue, which waits while a mint is still
+/// unknown. `minter` is `None` when the GLDT ledger is not known: only `outbound` runs.
+pub async fn process_round<M: Minter>(
+    minter: Option<&M>,
+    minting_owner: Principal,
+    outbound: impl std::future::Future<Output = ()>,
+) {
+    if let Some(minter) = minter {
+        settle_unknown_mints(minter, minting_owner).await;
+    }
+    outbound.await;
+    if let Some(minter) = minter {
+        mint_queue(minter, minting_owner).await;
     }
 }
 
@@ -657,6 +687,14 @@ mod tests {
 
     fn settle(minter: &FakeMinter) {
         block_on(settle_unknown_mints(minter, minting_owner()));
+    }
+
+    /// One `bridge_process` round; `outbound` notes how many mint calls the minter had seen
+    /// when the outbound half ran.
+    fn round(minter: &FakeMinter, outbound: &RefCell<Option<usize>>) {
+        block_on(process_round(Some(minter), minting_owner(), async {
+            *outbound.borrow_mut() = Some(minter.calls().len());
+        }));
     }
 
     fn memo_burn_id(args: &TransferArg) -> u64 {
@@ -938,12 +976,105 @@ mod tests {
     }
 
     #[test]
+    fn unsettled_mint_unknown_holds_new_mints_but_outbound_runs() {
+        setup(10 * ONE, 5 * ONE);
+        save(vec![
+            burn(0, e8s(2 * ONE), user()),
+            burn(1, e8s(3 * ONE), user()),
+        ]);
+        // the first mint gets no answer, and neither does its first retry
+        let minter = FakeMinter::default().reply(None).reply(None);
+        mint(&minter);
+        assert_eq!(status(0), InboundStatus::MintUnknown);
+        assert_eq!(decision(), MintDecision::HoldUnknown);
+
+        // the retry is still unknown: the outbound half runs, burn 1 waits
+        let outbound = RefCell::new(None);
+        round(&minter, &outbound);
+        assert_eq!(*outbound.borrow(), Some(2));
+        assert_eq!(
+            minter.calls().iter().map(memo_burn_id).collect::<Vec<_>>(),
+            vec![0, 0]
+        );
+        assert_eq!(status(0), InboundStatus::MintUnknown);
+        assert_eq!(status(1), InboundStatus::Queued);
+        assert_eq!(decision(), MintDecision::HoldUnknown);
+        // no alert for it, and the hold kind is untouched
+        assert!(bridge().alerts.is_empty());
+        assert_eq!(bridge().mint_hold, None);
+
+        // without a ledger, a round runs the outbound half only
+        let outbound_only = RefCell::new(false);
+        block_on(process_round(None::<&FakeMinter>, minting_owner(), async {
+            *outbound_only.borrow_mut() = true;
+        }));
+        assert!(*outbound_only.borrow());
+        assert_eq!(minter.calls().len(), 2);
+
+        // the next round settles it first, then mints burn 1
+        let outbound = RefCell::new(None);
+        round(&minter, &outbound);
+        assert_eq!(*outbound.borrow(), Some(3));
+        assert_eq!(
+            minter.calls().iter().map(memo_burn_id).collect::<Vec<_>>(),
+            vec![0, 0, 0, 1]
+        );
+        assert_eq!(
+            status(0),
+            InboundStatus::Minted {
+                icp_block_index: 102
+            }
+        );
+        assert_eq!(
+            status(1),
+            InboundStatus::Minted {
+                icp_block_index: 103
+            }
+        );
+        assert_eq!(bridge().bridged_out, 5 * ONE);
+        assert_eq!(decision(), MintDecision::Empty);
+        assert!(bridge().alerts.is_empty());
+    }
+
+    #[test]
+    fn needs_manual_check_does_not_hold_new_mints() {
+        setup(10 * ONE, 6 * ONE);
+        save(vec![
+            burn(0, e8s(3 * ONE), user()),
+            burn(1, e8s(ONE), user()),
+        ]);
+        let minter = FakeMinter::default()
+            .reply(None)
+            .reply(Some(Err(TransferError::TooOld)));
+        mint(&minter);
+        assert_eq!(decision(), MintDecision::HoldUnknown);
+
+        // one round: the retry is TooOld, burn 0 needs a manual check, and burn 1 goes out
+        let outbound = RefCell::new(None);
+        round(&minter, &outbound);
+        assert!(matches!(status(0), InboundStatus::NeedsManualCheck(_)));
+        assert_eq!(*outbound.borrow(), Some(2));
+        assert_eq!(
+            status(1),
+            InboundStatus::Minted {
+                icp_block_index: 102
+            }
+        );
+        assert_eq!(decision(), MintDecision::Empty);
+        let state = bridge();
+        assert_eq!(state.bridged_out, 9 * ONE);
+        assert_eq!(state.unminted_e8s, e8s(3 * ONE));
+        assert_eq!(alerts_with("needs a manual check").len(), 1);
+    }
+
+    #[test]
     fn no_answer_then_duplicate_settles_once() {
         setup(10 * ONE, 7 * ONE);
         save(vec![burn(0, e8s(3 * ONE), user())]);
         let minter = FakeMinter::default().reply(None);
         mint(&minter);
         assert_eq!(status(0), InboundStatus::MintUnknown);
+        assert_eq!(decision(), MintDecision::HoldUnknown);
         let stored = record(0);
         assert_eq!(stored.created_at_time, minter.calls()[0].created_at_time);
         assert_eq!(bridge().bridged_out, 10 * ONE);

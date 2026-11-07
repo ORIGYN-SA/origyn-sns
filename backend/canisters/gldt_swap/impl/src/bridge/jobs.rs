@@ -2,7 +2,7 @@
 //! again after init and every upgrade.
 
 use crate::bridge::gldt_ledger;
-use crate::bridge::inbound::{has_inbound_work, mint_queue, settle_unknown_mints, IcMinter};
+use crate::bridge::inbound::{has_inbound_work, process_round, IcMinter};
 use crate::bridge::outbound::process_outbound;
 use crate::bridge::rpc::IcEvmReader;
 use crate::bridge::scraper::run_tick;
@@ -89,7 +89,7 @@ async fn scrape(chain: EvmChain) {
 
 /// `bridge_process` (spec 8.8), only when there is work: first the mints whose outcome is
 /// unknown, then the outbound half (burns whose outcome is unknown, and vouchers), then the
-/// mint queue. A mint that is still unknown never keeps the outbound half from running.
+/// mint queue, which waits while a mint is still unknown. The outbound half always runs.
 async fn bridge_process() {
     let (now, has_outbound_work) =
         read_state(|s| (s.env.now_nanos(), !s.data.bridge.outbound_work.is_empty()));
@@ -105,11 +105,5 @@ async fn bridge_process() {
         .map(|ledger| IcMinter { ledger })
         .map_err(|e| warn!(error = %e, "inbound mints wait"))
         .ok();
-    if let Some(minter) = &minter {
-        settle_unknown_mints(minter, minting_owner).await;
-    }
-    process_outbound().await;
-    if let Some(minter) = &minter {
-        mint_queue(minter, minting_owner).await;
-    }
+    process_round(minter.as_ref(), minting_owner, process_outbound()).await;
 }
