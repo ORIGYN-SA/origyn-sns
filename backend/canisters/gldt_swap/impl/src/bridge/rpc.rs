@@ -28,12 +28,9 @@ use serde::Deserialize;
 /// 460 bytes.
 pub const HEAD_RESPONSE_BYTES: u64 = 1_000;
 
-/// The head call goes to one replica. The integration build sends it replicated, in case
-/// PocketIC does not serve unreplicated outcalls.
-#[cfg(not(feature = "inttest"))]
+/// The head call goes to one replica. PocketIC 12 serves such calls too, so the integration
+/// build sends it the same way.
 const HEAD_REPLICATED: Option<bool> = Some(false);
-#[cfg(feature = "inttest")]
-const HEAD_REPLICATED: Option<bool> = Some(true);
 
 const HEAD_REQUEST: &[u8] = br#"{"jsonrpc":"2.0","id":1,"method":"eth_blockNumber","params":[]}"#;
 
@@ -453,7 +450,6 @@ mod tests {
         assert_eq!(args.url, "https://base-rpc.publicnode.com");
         assert_eq!(args.method, HttpMethod::POST);
         assert_eq!(args.max_response_bytes, Some(1_000));
-        #[cfg(not(feature = "inttest"))]
         assert_eq!(args.is_replicated, Some(false));
         assert_eq!(args.transform, None);
         let body: serde_json::Value = serde_json::from_slice(&args.body.unwrap()).unwrap();
