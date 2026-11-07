@@ -240,6 +240,11 @@ fn check_one(
         }
         OutboundMarkBurned { id, icp_burn_index } => {
             let record = outbound(*id)?;
+            if let Some(other) = burned_at(*icp_burn_index) {
+                return Err(format!(
+                    "ICP block {icp_burn_index} is already the burn of outbound {other}"
+                ));
+            }
             let amount = out_amount(&record)?;
             let pending = counters.out_pending.checked_sub(amount);
             let bridged = counters.bridged_out.checked_add(amount);
@@ -346,6 +351,21 @@ fn outbound(id: u64) -> Result<OutboundTransfer, String> {
         ));
     }
     Ok(record)
+}
+
+/// The outbound transfer whose burn is at ICP block `index`, if any. Two vouchers with one
+/// burn index would share one `claimed` slot on the token, so only one could ever be claimed.
+fn burned_at(index: u64) -> Option<u64> {
+    with_outbound(|m| {
+        m.iter()
+            .map(|entry| entry.value())
+            .find(|r| match &r.status {
+                OutboundStatus::Burned { icp_burn_index } => *icp_burn_index == index,
+                OutboundStatus::Signed(voucher) => voucher.icp_burn_index == index,
+                _ => false,
+            })
+            .map(|r| r.id)
+    })
 }
 
 fn out_amount(record: &OutboundTransfer) -> Result<u128, String> {
@@ -729,6 +749,28 @@ mod tests {
             state.outbound_work.iter().copied().collect::<Vec<_>>(),
             vec![0]
         );
+    }
+
+    /// An ICP burn index belongs to one outbound transfer only.
+    #[test]
+    fn resolve_outbound_mark_burned_refuses_a_burn_index_in_use() {
+        setup(0, 3 * ONE);
+        put_outbound(0, ONE, OutboundStatus::Burned { icp_burn_index: 41 });
+        put_outbound(1, ONE, OutboundStatus::NeedsManualCheck("TooOld".into()));
+        put_outbound(2, ONE, OutboundStatus::NeedsManualCheck("TooOld".into()));
+        let mark = |id, icp_burn_index| ResolveAction::OutboundMarkBurned { id, icp_burn_index };
+
+        let err = resolve(vec![mark(1, 41)]).unwrap_err();
+        assert!(err.contains("already the burn of outbound 0"), "{err}");
+        // once outbound 1 carries index 42, outbound 2 can't take it, and stays as it was
+        resolve(vec![mark(1, 42)]).unwrap();
+        let err = resolve(vec![mark(2, 42)]).unwrap_err();
+        assert!(err.contains("already the burn of outbound 1"), "{err}");
+        assert!(matches!(
+            outbound(2).status,
+            OutboundStatus::NeedsManualCheck(_)
+        ));
+        assert_eq!(bridge().out_pending, 2 * ONE);
     }
 
     #[test]
