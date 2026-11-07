@@ -99,6 +99,23 @@ pub struct BridgeState {
     /// `Burned`. Kept with every status change (`outbound::store_outbound`), so the processor
     /// never scans the whole outbound map.
     pub outbound_work: BTreeSet<u64>,
+    /// Every inbound burn that is not `Minted` or `Rejected`, e8s: the unminted side of the
+    /// supply guard. Saturating; a saturated total holds minting.
+    pub unminted_e8s: U256,
+    /// The check that last held the mint queue, so each hold alerts once.
+    pub mint_hold: Option<MintHold>,
+    /// Inbound transfers waiting for an SNS resolve: `Quarantined` or `NeedsManualCheck`.
+    /// They have left the mint queue.
+    pub inbound_held: BTreeSet<(Deployment, u64)>,
+}
+
+/// Why the mint queue waits (spec 8.8).
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum MintHold {
+    /// Supply readings plus unminted burns are above `bridged_out`.
+    Guard,
+    /// The next burn alone is above `bridged_out`.
+    Rule1,
 }
 
 impl BridgeState {
@@ -190,6 +207,10 @@ pub struct InboundRecord {
     pub amount: U256,
     pub discovered_at: u64,
     pub status: InboundStatus,
+    /// The mint's `created_at_time`, fixed before the first ledger call. Every retry sends
+    /// it again, so the ledger answers `Duplicate` if an earlier call minted.
+    #[serde(default)]
+    pub created_at_time: Option<u64>,
 }
 
 impl InboundRecord {
@@ -335,6 +356,7 @@ mod tests {
             status: InboundStatus::Minted {
                 icp_block_index: 12,
             },
+            created_at_time: Some(1_100),
         };
         let candid = record.to_candid();
         assert_eq!(candid.chain, record.chain);

@@ -1,9 +1,11 @@
-//! Scraper health (spec 8.14): failed ticks in a row, and a cursor that stopped moving.
+//! Bridge health (spec 8.14): failed ticks in a row, a cursor that stopped moving, and a mint
+//! queue held by the supply guard or rule 1.
 //!
 //! An alert is raised once when a condition starts, not on every tick, so the ring of 100
 //! alerts keeps older ones such as `NeedsManualCheck`.
 
-use crate::bridge::state::{BridgeState, ChainState, Severity};
+use crate::bridge::inbound::evm_side;
+use crate::bridge::state::{BridgeState, ChainState, MintHold, Severity};
 use gldt_swap_common::bridge::EvmChain;
 
 /// A chain alerts when this many ticks in a row fail (15 minutes at one tick every 3).
@@ -71,6 +73,36 @@ pub fn check_stale_cursor(state: &mut BridgeState, chain: EvmChain, confirmed_he
         c.last_scraped_block, c.next_burn_id
     );
     state.push_alert(now, Severity::Warning, msg);
+}
+
+/// Alerts once when the mint queue starts to wait on `hold`, or waits on another check than
+/// before. `None` (a mint went out, or nothing is queued) ends the hold. A guard hold is a
+/// Warning, since a LayerZero transfer can count on both chains for a moment; a rule 1 hold is
+/// Critical, since no honest burn is above `bridged_out`.
+pub fn track_mint_hold(state: &mut BridgeState, hold: Option<MintHold>, now: u64) {
+    if state.mint_hold == hold {
+        return;
+    }
+    state.mint_hold = hold;
+    let (severity, msg) = match hold {
+        None => return,
+        Some(MintHold::Guard) => (
+            Severity::Warning,
+            format!(
+                "minting waits: the supply guard holds, supply readings plus unminted burns ({} e8s) are above bridged_out ({} e8s)",
+                evm_side(state, state.unminted_e8s),
+                state.bridged_out
+            ),
+        ),
+        Some(MintHold::Rule1) => (
+            Severity::Critical,
+            format!(
+                "minting waits: the next burn is above bridged_out ({} e8s), rule 1",
+                state.bridged_out
+            ),
+        ),
+    };
+    state.push_alert(now, severity, msg);
 }
 
 /// `err`, cut to at most [MAX_ERROR_LEN] bytes on a character boundary.

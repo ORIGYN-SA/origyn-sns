@@ -3,6 +3,7 @@
 pub mod alerts;
 pub mod config;
 pub mod evm;
+pub mod inbound;
 pub mod jobs;
 pub mod outbound;
 pub mod rpc;
@@ -39,6 +40,30 @@ pub fn gldt_ledger(swap_configs: &SwapConfigs) -> Result<Principal, String> {
             "the swap configs name {} ledgers; the bridge needs exactly one GLDT ledger",
             ledgers.len()
         )),
+    }
+}
+
+/// Canister state for unit tests that go through `read_state` and `mutate_state`.
+#[cfg(test)]
+pub(crate) mod test_state {
+    use crate::bridge::stable::{with_inbound, with_queue};
+    use crate::state::{init_state, replace_state, RuntimeState};
+    use std::cell::Cell;
+
+    thread_local! {
+        static STATE_SET: Cell<bool> = const { Cell::new(false) };
+    }
+
+    /// Sets the canister state and empties the inbound map and the queue. The state lives in a
+    /// thread local, and a thread may run several tests.
+    pub fn install(state: RuntimeState) {
+        if STATE_SET.with(|set| set.replace(true)) {
+            replace_state(state);
+        } else {
+            init_state(state);
+        }
+        with_inbound(|m| m.clear_new());
+        with_queue(|m| m.clear_new());
     }
 }
 

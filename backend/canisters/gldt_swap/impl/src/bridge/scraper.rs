@@ -261,6 +261,7 @@ pub fn apply_batch(
             amount: burn.amount,
             discovered_at: now,
             status: InboundStatus::Queued,
+            created_at_time: None,
         })
         .collect();
 
@@ -277,12 +278,14 @@ pub fn apply_batch(
 }
 
 /// Saves new burns of `deployment` in the order given: each record goes into the inbound map
-/// and onto the mint queue. Every new inbound record is saved here.
+/// and onto the mint queue, and its amount into the unminted total. Every new inbound record is
+/// saved here.
 pub fn save_burns(state: &mut BridgeState, deployment: Deployment, records: Vec<InboundRecord>) {
     for record in records {
         let key = (deployment, record.burn_id);
         let seq = state.next_queue_seq;
         state.next_queue_seq = seq.checked_add(1).expect("next_queue_seq overflow");
+        state.unminted_e8s = state.unminted_e8s.saturating_add(record.amount);
         with_inbound(|m| m.insert(key, record));
         with_queue(|q| q.insert(seq, key));
     }
@@ -528,7 +531,8 @@ mod tests {
     use crate::bridge::rpc::{EvmReader, RpcError};
     use crate::bridge::stable::{with_inbound, with_queue};
     use crate::bridge::state::{BridgeState, ChainState, EvmSigner, SupplyReading, Window};
-    use crate::state::{init_state, mutate_state, read_state, replace_state, RuntimeState};
+    use crate::bridge::test_state::install;
+    use crate::state::{mutate_state, read_state, RuntimeState};
     use alloy_primitives::U256;
     use async_trait::async_trait;
     use candid::Principal;
@@ -728,10 +732,6 @@ mod tests {
         }
     }
 
-    thread_local! {
-        static STATE_SET: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
-    }
-
     /// The canister state with the test config, both signers loaded, and empty maps.
     fn setup() {
         let mut bridge = configured_state();
@@ -745,14 +745,7 @@ mod tests {
         });
         let mut state = RuntimeState::default();
         state.data.bridge = bridge;
-        // state lives in a thread local; a thread may run several tests
-        if STATE_SET.with(|set| set.replace(true)) {
-            replace_state(state);
-        } else {
-            init_state(state);
-        }
-        with_inbound(|m| m.clear_new());
-        with_queue(|m| m.clear_new());
+        install(state);
     }
 
     fn setup_chain(chain: ChainState) {

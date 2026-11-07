@@ -402,7 +402,8 @@ pub struct SupplyGuardStatus {
     pub icp_side: Nat,
 }
 
-/// Inbound records waiting in the mint queue, by status.
+/// Inbound transfers not yet settled, by status: the mint queue (`queued`, `mint_unknown`) and
+/// those held for an SNS resolve (`quarantined`, `needs_manual_check`).
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug, Default, PartialEq, Eq)]
 pub struct QueueSizes {
     pub queued: u64,

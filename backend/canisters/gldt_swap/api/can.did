@@ -303,6 +303,31 @@ type Icrc21Error = variant {
   ConsentMessageUnavailable : ErrorInfo;
 };
 type Icrc28TrustedOriginsResponse = record { trusted_origins : vec text };
+type InboundStatus = variant {
+  Queued;
+  // The ledger said TooOld while the outcome was unknown.
+  NeedsManualCheck : text;
+  // Set by an SNS resolve action.
+  Rejected : text;
+  Minted : record { icp_block_index : nat64 };
+  // The ledger refused the mint, for example because the destination is the minting account.
+  Quarantined : text;
+  // The ledger outcome is unknown; retried with the same arguments.
+  MintUnknown;
+};
+type InboundTransfer = record {
+  to : Account;
+  status : InboundStatus;
+  token : text;
+  log_index : nat64;
+  chain : EvmChain;
+  evm_from : text;
+  block_number : nat64;
+  burn_id : nat64;
+  discovered_at : nat64;
+  tx_hash : text;
+  amount : nat;
+};
 type InitArgs = record {
   buyback_burn_canister : opt Account;
   // Bridge config and chain resets. `None` leaves the bridge unconfigured.
@@ -335,7 +360,8 @@ type OutboundTransfer = record {
   created_at : nat64;
   amount : nat;
 };
-// Inbound records waiting in the mint queue, by status.
+// Inbound transfers not yet settled, by status: the mint queue (`queued`, `mint_unknown`) and
+// those held for an SNS resolve (`quarantined`, `needs_manual_check`).
 type QueueSizes = record {
   needs_manual_check : nat64;
   mint_unknown : nat64;
@@ -479,9 +505,20 @@ service : (Args_1) -> {
   // The EIP-55 addresses of the claims and admin keys, once loaded.
   get_bridge_evm_signers : () -> (GetBridgeEvmSignersResponse) query;
   get_bridge_status : () -> (BridgeStatus) query;
+  // The inbound transfer of burn `burn_id` on the chain's current token.
+  get_bridge_transfer_in : (EvmChain, nat64) -> (opt InboundTransfer) query;
   // One outbound transfer. The frontend polls it until the status is `Signed`, then submits the
   // voucher with `claimFromIcp`. Vouchers never expire.
   get_bridge_transfer_out : (nat64) -> (opt OutboundTransfer) query;
+  // The account's inbound transfers, newest first. `start` skips that many (the number already
+  // shown); `limit` is capped at 100.
+  get_bridge_transfers_in_by_account : (Account, opt nat64, nat32) -> (
+      vec InboundTransfer,
+    ) query;
+  // The saved burns of an EVM transaction, in burn id order. Lookup only: it never fetches.
+  get_bridge_transfers_in_by_tx : (EvmChain, text) -> (
+      vec InboundTransfer,
+    ) query;
   // The account's outbound transfers, newest first. `start` is an exclusive upper bound on the
   // id (the last id of the previous page); `limit` is capped at 100.
   get_bridge_transfers_out_by_account : (Account, opt nat64, nat32) -> (

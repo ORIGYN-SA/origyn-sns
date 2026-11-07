@@ -127,6 +127,7 @@ mod tests {
             amount,
             discovered_at: 2,
             status: InboundStatus::Queued,
+            created_at_time: None,
         }
     }
 

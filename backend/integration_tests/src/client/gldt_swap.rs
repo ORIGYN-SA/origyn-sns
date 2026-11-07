@@ -63,3 +63,51 @@ pub fn icrc21_canister_call_consent_message(
         args,
     )
 }
+
+/// Two Candid arguments (chain, burn id), so not built with `generate_pocket_query_call!`.
+pub fn get_bridge_transfer_in(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfer_in::Args,
+) -> get_bridge_transfer_in::Response {
+    let (chain, burn_id) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfer_in",
+        candid::encode_args((chain, burn_id)).unwrap(),
+    ))
+}
+
+/// Two Candid arguments (chain, transaction hash).
+pub fn get_bridge_transfers_in_by_tx(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_in_by_tx::Args,
+) -> get_bridge_transfers_in_by_tx::Response {
+    let (chain, tx_hash) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_in_by_tx",
+        candid::encode_args((chain, tx_hash)).unwrap(),
+    ))
+}
+
+/// Three Candid arguments (account, start, limit).
+pub fn get_bridge_transfers_in_by_account(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_in_by_account::Args,
+) -> get_bridge_transfers_in_by_account::Response {
+    let (account, start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_in_by_account",
+        candid::encode_args((account, start, limit)).unwrap(),
+    ))
+}

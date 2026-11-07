@@ -1,9 +1,9 @@
 use crate::bridge::evm::address::format_address;
 use crate::bridge::evm::num::u256_to_nat;
+use crate::bridge::inbound::{evm_side, guard_holds};
 use crate::bridge::stable::{with_inbound, with_queue};
 use crate::bridge::state::{BridgeState, ChainState};
 use crate::state::read_state;
-use alloy_primitives::U256;
 use candid::Nat;
 pub use gldt_swap_api_canister::get_bridge_status::Response as GetBridgeStatusResponse;
 use gldt_swap_common::bridge::{
@@ -14,9 +14,9 @@ use ic_cdk::query;
 
 #[query]
 pub fn get_bridge_status() -> GetBridgeStatusResponse {
-    let queue = queue_sizes();
     read_state(|s| {
         let bridge = &s.data.bridge;
+        let queue = queue_sizes(bridge);
         GetBridgeStatusResponse {
             configured: bridge.config.is_some(),
             bridged_out: Nat::from(bridge.bridged_out),
@@ -24,7 +24,7 @@ pub fn get_bridge_status() -> GetBridgeStatusResponse {
             paused_in: bridge.paused_in,
             paused_out: bridge.paused_out,
             chains: chain_statuses(bridge),
-            supply_guard: supply_guard(bridge, U256::ZERO),
+            supply_guard: supply_guard(bridge),
             queue,
             claims_signer: bridge
                 .claims_signer
@@ -81,27 +81,21 @@ fn chain_statuses(bridge: &BridgeState) -> Vec<ChainStatus> {
         .collect()
 }
 
-/// Both sides of the supply guard: the chains' supply readings plus `unminted`,
-/// against `bridged_out`. The sum saturates, and a saturated sum holds.
-fn supply_guard(bridge: &BridgeState, unminted: U256) -> SupplyGuardStatus {
-    let supply = current_chains(bridge)
-        .into_iter()
-        .filter_map(|(_, state)| state?.supply.as_ref())
-        .fold(U256::ZERO, |sum, reading| {
-            sum.saturating_add(reading.total_supply)
-        });
-    let evm_side = supply.saturating_add(unminted);
-    let icp_side = U256::from(bridge.bridged_out);
+/// Both sides of the supply guard, as the mint processor checks it: the chains' supply readings
+/// plus every unminted burn, against `bridged_out`. The sum saturates, and a saturated sum holds.
+fn supply_guard(bridge: &BridgeState) -> SupplyGuardStatus {
     SupplyGuardStatus {
-        holding: evm_side > icp_side,
-        evm_side: u256_to_nat(evm_side),
+        holding: guard_holds(bridge, bridge.unminted_e8s),
+        evm_side: u256_to_nat(evm_side(bridge, bridge.unminted_e8s)),
         icp_side: Nat::from(bridge.bridged_out),
     }
 }
 
-/// Inbound records waiting in the mint queue, by status.
-fn queue_sizes() -> QueueSizes {
-    let keys: Vec<_> = with_queue(|queue| queue.iter().map(|entry| entry.value()).collect());
+/// Inbound transfers that are not settled, by status: the mint queue (`Queued` and
+/// `MintUnknown`) and those held for an SNS resolve (`Quarantined` and `NeedsManualCheck`).
+fn queue_sizes(bridge: &BridgeState) -> QueueSizes {
+    let mut keys: Vec<_> = with_queue(|queue| queue.iter().map(|entry| entry.value()).collect());
+    keys.extend(bridge.inbound_held.iter().copied());
     with_inbound(|inbound| {
         let mut sizes = QueueSizes::default();
         for key in keys {

@@ -1,6 +1,8 @@
 //! The bridge timers (spec 8.15). Timers don't survive upgrades, so `start_jobs` sets them
 //! again after init and every upgrade.
 
+use crate::bridge::gldt_ledger;
+use crate::bridge::inbound::{has_inbound_work, mint_queue, settle_unknown_mints, IcMinter};
 use crate::bridge::outbound::process_outbound;
 use crate::bridge::rpc::IcEvmReader;
 use crate::bridge::scraper::run_tick;
@@ -8,6 +10,7 @@ use crate::guards::{Job, JobGuard};
 use crate::state::read_state;
 use gldt_swap_common::bridge::EvmChain;
 use std::time::Duration;
+use tracing::warn;
 use utils::env::Environment;
 
 /// `bridge_process` runs this often.
@@ -84,12 +87,29 @@ async fn scrape(chain: EvmChain) {
     }
 }
 
-/// `bridge_process`: settles burns whose outcome is unknown and signs vouchers. It has work
-/// only while `outbound_work` is not empty. The inbound half is added with the mint processor.
+/// `bridge_process` (spec 8.8), only when there is work: first the mints whose outcome is
+/// unknown, then the outbound half (burns whose outcome is unknown, and vouchers), then the
+/// mint queue. A mint that is still unknown never keeps the outbound half from running.
 async fn bridge_process() {
-    let now = read_state(|s| s.env.now_nanos());
+    let (now, has_outbound_work) =
+        read_state(|s| (s.env.now_nanos(), !s.data.bridge.outbound_work.is_empty()));
+    if !has_outbound_work && !has_inbound_work() {
+        return;
+    }
     let Some(_guard) = JobGuard::new(Job::Process, now) else {
         return;
     };
+    let (ledger, minting_owner) =
+        read_state(|s| (gldt_ledger(&s.data.swap_configs), s.env.canister_id()));
+    let minter = ledger
+        .map(|ledger| IcMinter { ledger })
+        .map_err(|e| warn!(error = %e, "inbound mints wait"))
+        .ok();
+    if let Some(minter) = &minter {
+        settle_unknown_mints(minter, minting_owner).await;
+    }
     process_outbound().await;
+    if let Some(minter) = &minter {
+        mint_queue(minter, minting_owner).await;
+    }
 }

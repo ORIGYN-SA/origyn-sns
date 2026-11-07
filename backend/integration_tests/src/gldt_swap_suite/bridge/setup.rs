@@ -1,4 +1,5 @@
-use crate::client::gldt_swap::{get_bridge_evm_signers, get_bridge_status};
+use crate::client::gldt_swap::{bridge_to_evm, get_bridge_evm_signers, get_bridge_status};
+use crate::client::icrc1_icrc2_token::icrc2_approve;
 use crate::client::pocket::create_canister_with_id;
 use crate::gldt_swap_suite::bridge::outcalls::{serve_outcalls, MockEvm};
 use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger_with_balances;
@@ -10,11 +11,15 @@ use bity_ic_types::BuildVersion;
 use candid::{encode_one, CandidType, Nat, Principal};
 use gldt_swap_api_canister::init::InitArgs;
 use gldt_swap_api_canister::post_upgrade::UpgradeArgs;
-use gldt_swap_common::bridge::{BridgeConfig, BridgeUpgrade, ChainConfig, EvmChain, EvmProvider};
+use gldt_swap_common::bridge::{
+    BridgeConfig, BridgeToEvmArgs, BridgeUpgrade, ChainConfig, EvmChain, EvmProvider,
+    OutboundTransfer,
+};
 use gldt_swap_common::swap_canister_config::{
     FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
 };
 use icrc_ledger_types::icrc1::account::Account;
+use icrc_ledger_types::icrc2::approve::ApproveArgs;
 use icrc_ledger_types::icrc3::blocks::SupportedBlockType;
 use pocket_ic::{PocketIc, PocketIcBuilder, RejectResponse};
 use std::time::Duration;
@@ -49,16 +54,11 @@ pub struct BridgeEnv {
 impl BridgeEnv {
     /// Upgrades gldt_swap with the same wasm and the given bridge argument.
     pub fn upgrade_gldt_swap(&self, bridge: Option<BridgeUpgrade>) -> Result<(), RejectResponse> {
-        let args = gldt_swap_api_canister::Args::Upgrade(UpgradeArgs {
-            version: BuildVersion::min(),
-            commit_hash: "bridge".to_string(),
-            bridge,
-        });
-        self.pic.upgrade_canister(
+        upgrade_gldt_swap(
+            &self.pic,
+            self.controller,
             self.gldt_swap_canister_id,
-            GLDT_SWAP.clone(),
-            encode_one(args).unwrap(),
-            Some(self.controller),
+            bridge,
         )
     }
 
@@ -73,42 +73,135 @@ impl BridgeEnv {
 /// first tick reads head `FIRST_HEAD`, then `bridgeInfo()`: no burn, no supply, and the
 /// canister's own signer addresses.
 pub fn start_all_chains(env: &mut BridgeEnv) {
+    env.evm = start_chains(&env.pic, env.controller, env.gldt_swap_canister_id);
+}
+
+/// [start_all_chains] on any PocketIC where gldt_swap runs with [bridge_config] and the EVM RPC
+/// canister is installed. Returns the mocked nodes.
+pub fn start_chains(pic: &PocketIc, controller: Principal, gldt_swap: Principal) -> MockEvm {
     // the first tick runs once both keys are loaded, and compares the token's signers with them
-    let (claims, admin) = wait_for_signers(env);
-    env.evm = MockEvm::new(
+    let (claims, admin) = wait_for_signers_on(pic, controller, gldt_swap);
+    let evm = MockEvm::new(
         FIRST_HEAD,
         &claims,
         &admin,
         &[FAKE_ETHEREUM_TOKEN, FAKE_BASE_TOKEN],
     );
     for _ in 0..5 {
-        serve_outcalls(&env.pic, |request| env.evm.answer(request));
-        let status = get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+        serve_outcalls(pic, |request| evm.answer(request));
+        let status = get_bridge_status(pic, controller, gldt_swap, &());
         if status.chains.iter().all(|c| c.start_block.is_some()) {
             // Base's scrape interval starts when its 90 s offset has passed. After that, every
             // further 180 s runs one scrape tick on each chain.
-            env.pic.advance_time(Duration::from_secs(90));
-            serve_outcalls(&env.pic, |request| env.evm.answer(request));
-            return;
+            pic.advance_time(Duration::from_secs(90));
+            serve_outcalls(pic, |request| evm.answer(request));
+            return evm;
         }
         // a first tick that failed runs again with the next scrape tick
-        env.pic.advance_time(Duration::from_secs(180));
+        pic.advance_time(Duration::from_secs(180));
     }
-    let status = get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+    let status = get_bridge_status(pic, controller, gldt_swap, &());
     panic!("the chains did not start: {:?}", status.chains);
 }
 
 /// Ticks until both signer addresses are loaded, and returns them.
 pub fn wait_for_signers(env: &BridgeEnv) -> (String, String) {
+    wait_for_signers_on(&env.pic, env.controller, env.gldt_swap_canister_id)
+}
+
+pub fn wait_for_signers_on(
+    pic: &PocketIc,
+    controller: Principal,
+    gldt_swap: Principal,
+) -> (String, String) {
     for _ in 0..30 {
-        env.pic.tick();
-        let signers =
-            get_bridge_evm_signers(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+        pic.tick();
+        let signers = get_bridge_evm_signers(pic, controller, gldt_swap, &());
         if let (Some(claims), Some(admin)) = (signers.claims, signers.admin) {
             return (claims, admin);
         }
     }
     panic!("signers were not loaded after 30 ticks");
+}
+
+/// Upgrades gldt_swap with the same wasm and the given bridge argument.
+pub fn upgrade_gldt_swap(
+    pic: &PocketIc,
+    controller: Principal,
+    gldt_swap: Principal,
+    bridge: Option<BridgeUpgrade>,
+) -> Result<(), RejectResponse> {
+    let args = gldt_swap_api_canister::Args::Upgrade(UpgradeArgs {
+        version: BuildVersion::min(),
+        commit_hash: "bridge".to_string(),
+        bridge,
+    });
+    pic.upgrade_canister(
+        gldt_swap,
+        GLDT_SWAP.clone(),
+        encode_one(args).unwrap(),
+        Some(controller),
+    )
+}
+
+/// Installs the EVM RPC canister at its mainnet id, in demo mode.
+pub fn install_evm_rpc(pic: &PocketIc, controller: Principal) -> Principal {
+    let evm_rpc_canister_id = create_canister_with_id(
+        pic,
+        controller,
+        Principal::from_text(EVM_RPC_CANISTER_ID).unwrap(),
+    );
+    pic.add_cycles(evm_rpc_canister_id, 100_000_000_000_000);
+    pic.install_canister(
+        evm_rpc_canister_id,
+        EVM_RPC.clone(),
+        encode_one(EvmRpcInstallArgs { demo: Some(true) }).unwrap(),
+        Some(controller),
+    );
+    evm_rpc_canister_id
+}
+
+/// `owner` approves the burn and bridges `amount` e8s to `chain`, to Anvil's account 1.
+/// The chains must be open.
+pub fn bridge_out(
+    pic: &PocketIc,
+    gldt_ledger: Principal,
+    gldt_swap: Principal,
+    owner: Principal,
+    chain: EvmChain,
+    amount: u64,
+) -> OutboundTransfer {
+    let approved = icrc2_approve(
+        pic,
+        owner,
+        gldt_ledger,
+        &ApproveArgs {
+            from_subaccount: None,
+            spender: Account::from(gldt_swap),
+            amount: Nat::from(amount),
+            expected_allowance: None,
+            expires_at: None,
+            fee: None,
+            memo: None,
+            created_at_time: None,
+        },
+    );
+    assert!(
+        matches!(approved, icrc2_approve::Response::Ok(_)),
+        "{approved:?}"
+    );
+    bridge_to_evm(
+        pic,
+        owner,
+        gldt_swap,
+        &BridgeToEvmArgs {
+            chain,
+            recipient: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8".to_string(),
+            amount: Nat::from(amount),
+            from_subaccount: None,
+        },
+    )
+    .expect("bridge_to_evm")
 }
 
 /// The bridge config for chain ids 1 and 8453 with fake token addresses.
@@ -219,18 +312,7 @@ impl BridgeEnvBuilder {
             vec![(Account::from(user), Nat::from(USER_BALANCE_E8S))],
         );
 
-        let evm_rpc_canister_id = create_canister_with_id(
-            &pic,
-            controller,
-            Principal::from_text(EVM_RPC_CANISTER_ID).unwrap(),
-        );
-        pic.add_cycles(evm_rpc_canister_id, 100_000_000_000_000);
-        pic.install_canister(
-            evm_rpc_canister_id,
-            EVM_RPC.clone(),
-            encode_one(EvmRpcInstallArgs { demo: Some(true) }).unwrap(),
-            Some(controller),
-        );
+        let evm_rpc_canister_id = install_evm_rpc(&pic, controller);
 
         let mut constants = ICRC3Properties::default();
         constants.max_memory_size_bytes = 60000;
