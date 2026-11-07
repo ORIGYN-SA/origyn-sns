@@ -1,5 +1,6 @@
-use crate::client::gldt_swap::get_bridge_evm_signers;
+use crate::client::gldt_swap::{get_bridge_evm_signers, get_bridge_status};
 use crate::client::pocket::create_canister_with_id;
+use crate::gldt_swap_suite::bridge::outcalls::{serve_outcalls, MockEvm};
 use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger_with_balances;
 use crate::gldt_swap_suite::setup::setup_gldt_swap::setup_gldt_swap_canister;
 use crate::utils::random_principal;
@@ -28,6 +29,8 @@ pub const FAKE_BASE_TOKEN: &str = "0x00000000000000000000000000000000000BA5E1";
 pub const LZ_ENDPOINT: &str = "0x1a44076050125825900e736c501f859c50fE728c";
 /// `BridgeEnv::user` starts with 1,000 GLDT.
 pub const USER_BALANCE_E8S: u64 = 100_000_000_000;
+/// The head block both mocked chains report at their first tick.
+pub const FIRST_HEAD: u64 = 1_000;
 
 pub struct BridgeEnv {
     pub pic: PocketIc,
@@ -39,6 +42,8 @@ pub struct BridgeEnv {
     pub evm_rpc_canister_id: Principal,
     /// A user holding `USER_BALANCE_E8S` GLDT from the start.
     pub user: Principal,
+    /// The mocked Ethereum and Base nodes; `start_all_chains` sets them up.
+    pub evm: MockEvm,
 }
 
 impl BridgeEnv {
@@ -64,9 +69,33 @@ impl BridgeEnv {
     }
 }
 
-/// Opens every configured chain, so `bridge_to_evm` is no longer `NotReady`.
-pub fn start_all_chains(_env: &mut BridgeEnv) {
-    todo!("Task 8: drive the first tick with mocked outcalls")
+/// Opens every configured chain, so `bridge_to_evm` is no longer `NotReady`. Each chain's
+/// first tick reads head `FIRST_HEAD`, then `bridgeInfo()`: no burn, no supply, and the
+/// canister's own signer addresses.
+pub fn start_all_chains(env: &mut BridgeEnv) {
+    // the first tick runs once both keys are loaded, and compares the token's signers with them
+    let (claims, admin) = wait_for_signers(env);
+    env.evm = MockEvm::new(
+        FIRST_HEAD,
+        &claims,
+        &admin,
+        &[FAKE_ETHEREUM_TOKEN, FAKE_BASE_TOKEN],
+    );
+    for _ in 0..5 {
+        serve_outcalls(&env.pic, |request| env.evm.answer(request));
+        let status = get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+        if status.chains.iter().all(|c| c.start_block.is_some()) {
+            // Base's scrape interval starts when its 90 s offset has passed. After that, every
+            // further 180 s runs one scrape tick on each chain.
+            env.pic.advance_time(Duration::from_secs(90));
+            serve_outcalls(&env.pic, |request| env.evm.answer(request));
+            return;
+        }
+        // a first tick that failed runs again with the next scrape tick
+        env.pic.advance_time(Duration::from_secs(180));
+    }
+    let status = get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &());
+    panic!("the chains did not start: {:?}", status.chains);
 }
 
 /// Ticks until both signer addresses are loaded, and returns them.
@@ -253,6 +282,7 @@ impl BridgeEnvBuilder {
             gldt_ledger_canister_id,
             evm_rpc_canister_id,
             user,
+            evm: MockEvm::default(),
         }
     }
 }

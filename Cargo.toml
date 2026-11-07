@@ -42,6 +42,10 @@ resolver = "2"
 lto = "thin"
 panic = "abort"
 
+# gldt_swap only: its wasm must stay well under the 2 MiB SNS proposal limit.
+[profile.release.package.gldt_swap]
+opt-level = "z"
+
 [workspace.dependencies]
 assert_matches = "1.5.0"
 candid = { version = "0.10", features = ["value"] }
@@ -102,6 +106,8 @@ ic-cdk-management-canister = "0.1.1"
 # EVM types for the GLDT bridge (gldt_swap). Default features off keeps the wasm lean and free of getrandom.
 alloy-primitives = { version = "=1.7.3", default-features = false }
 alloy-sol-types = { version = "=1.7.3", default-features = false }
+# DFINITY EVM RPC canister types; the `alloy` feature stays off.
+evm_rpc_types = { version = "=3.1.1", default-features = false }
 
 # Bity crates
 bity-ic-icrc3 = { version =  "0.7.0" } # , features = ["debug-logs"]

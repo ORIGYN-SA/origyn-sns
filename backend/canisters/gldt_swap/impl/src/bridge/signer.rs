@@ -60,6 +60,7 @@ pub fn signer(path: SignerPath) -> Option<EvmSigner> {
 /// Fetches both public keys with `config.ecdsa_key_name` and stores them, then
 /// retries every 30 s until both are loaded. Does nothing while the bridge has no config.
 /// Runs after init and every upgrade, so the stored keys always come from the current key.
+/// Once both are loaded, chains without a start block run their first tick.
 pub async fn load_signers() {
     let Some(key_name) = read_state(|s| {
         s.data
@@ -100,7 +101,9 @@ pub async fn load_signers() {
         }
     }
 
-    if !all_loaded {
+    if all_loaded {
+        crate::bridge::jobs::start_first_ticks();
+    } else {
         ic_cdk_timers::set_timer(LOAD_SIGNERS_RETRY, load_signers());
     }
 }

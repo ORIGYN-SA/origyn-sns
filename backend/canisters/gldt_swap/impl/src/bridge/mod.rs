@@ -1,9 +1,12 @@
 //! The GLDT bridge between ICP, Ethereum and Base.
 
+pub mod alerts;
 pub mod config;
 pub mod evm;
 pub mod jobs;
 pub mod outbound;
+pub mod rpc;
+pub mod scraper;
 pub mod signer;
 pub mod stable;
 pub mod state;

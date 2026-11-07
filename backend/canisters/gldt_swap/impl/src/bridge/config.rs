@@ -155,6 +155,9 @@ pub fn apply_bridge_upgrade(state: &mut BridgeState, up: BridgeUpgrade) -> Resul
         chain.window = None;
         chain.stopped = None;
         chain.failed_ticks = 0;
+        // the stale cursor check starts again from the next move
+        chain.cursor_moved_at = None;
+        chain.stale_alerted = false;
     }
 
     *state = next;

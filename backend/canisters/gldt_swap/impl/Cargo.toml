@@ -53,6 +53,7 @@ gldt_swap_api_archive = { path = "../../../external_canisters/gldt_swap_archive/
 # GLDT bridge
 alloy-primitives = { workspace = true, features = ["serde"] }
 alloy-sol-types = { workspace = true }
+evm_rpc_types = { workspace = true }
 k256 = { workspace = true, features = ["ecdsa"] }
 ic-cdk-management-canister = { workspace = true }
 ic-cdk-timers = { workspace = true }

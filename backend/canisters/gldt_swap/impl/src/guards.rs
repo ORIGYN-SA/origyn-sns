@@ -113,7 +113,7 @@ impl Drop for BridgeCallerGuard {
     }
 }
 
-// `Scrape` and `Balancer` get their callers in later bridge tasks
+// `Balancer` gets its caller in a later bridge task
 #[allow(dead_code)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Job {

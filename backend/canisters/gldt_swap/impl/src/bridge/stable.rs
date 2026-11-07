@@ -156,6 +156,8 @@ mod tests {
                 last_ok_at: Some(5),
                 last_error: Some("timeout".to_string()),
                 stopped: None,
+                cursor_moved_at: Some(4),
+                stale_alerted: true,
             },
         );
         state

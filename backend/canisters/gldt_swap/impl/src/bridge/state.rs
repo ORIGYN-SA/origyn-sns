@@ -65,6 +65,10 @@ pub struct ChainState {
     pub last_error: Option<String>,
     /// Why the chain stopped: the first tick failed, or a deep reorg. Only a `ChainReset` clears it.
     pub stopped: Option<String>,
+    /// When `last_scraped_block` or `next_burn_id` last moved; `None` until the first move.
+    pub cursor_moved_at: Option<u64>,
+    /// A stale cursor alert was raised since the cursor last moved.
+    pub stale_alerted: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq, Eq)]

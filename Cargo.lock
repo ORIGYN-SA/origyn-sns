@@ -1142,6 +1142,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "canlog"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bd21b4c7140d033fe006495a65ec5ae24d79219eca550a74e0ba140ff9aa71dc"
+dependencies = [
+ "candid",
+ "canlog_derive",
+ "ic-canister-log 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ic0 1.0.1",
+ "regex",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "canlog_derive"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6620814f83b784938b29ca6ca8867967a93a4f7f08c1b7ec6256d12c1b53abe8"
+dependencies = [
+ "darling 0.20.11",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.117",
+]
+
+[[package]]
 name = "cargo-platform"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2150,6 +2177,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "evm_rpc_types"
+version = "3.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c348e834a97e2ca221259d6ec813009346904860be95cf756123630c44b79d5c"
+dependencies = [
+ "candid",
+ "canlog",
+ "hex",
+ "ic-error-types 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ic-management-canister-types 0.5.0",
+ "num-bigint",
+ "serde",
+ "strum 0.27.2",
+ "thiserror 2.0.18",
+ "url",
+]
+
+[[package]]
 name = "fastrand"
 version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2397,6 +2442,7 @@ dependencies = [
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
+ "evm_rpc_types",
  "futures",
  "gldt_swap_api_archive",
  "gldt_swap_api_canister",
@@ -2852,6 +2898,15 @@ dependencies = [
 [[package]]
 name = "ic-canister-log"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb82c4f617ecff6e452fe65af0489626ec7330ffe3eedd9ea14e6178eea48d1a"
+dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "ic-canister-log"
+version = "0.2.0"
 source = "git+https://github.com/dfinity/ic.git?branch=master#91047a32296b38869b4645eccb9e1a16be6b4977"
 dependencies = [
  "serde",
@@ -3176,7 +3231,7 @@ dependencies = [
  "ciborium",
  "hex",
  "ic-base-types",
- "ic-canister-log",
+ "ic-canister-log 0.2.0 (git+https://github.com/dfinity/ic.git?branch=master)",
  "ic-cdk 0.19.0",
  "ic-cdk-timers",
  "ic-certification",
@@ -3226,7 +3281,7 @@ dependencies = [
  "async-trait",
  "candid",
  "ic-base-types",
- "ic-canister-log",
+ "ic-canister-log 0.2.0 (git+https://github.com/dfinity/ic.git?branch=master)",
  "ic-cdk 0.19.0",
  "ic-ledger-core",
  "ic-ledger-hash-of",
@@ -3402,7 +3457,7 @@ dependencies = [
  "bytes",
  "dfn_core",
  "ic-base-types",
- "ic-canister-log",
+ "ic-canister-log 0.2.0 (git+https://github.com/dfinity/ic.git?branch=master)",
  "ic-crypto-sha2",
  "ic-http-types",
  "ic-ledger-core",
@@ -3721,7 +3776,7 @@ dependencies = [
  "futures",
  "hex",
  "ic-base-types",
- "ic-canister-log",
+ "ic-canister-log 0.2.0 (git+https://github.com/dfinity/ic.git?branch=master)",
  "ic-canister-profiler",
  "ic-cdk 0.19.0",
  "ic-cdk-timers",
@@ -3853,7 +3908,7 @@ dependencies = [
  "comparable",
  "hex",
  "ic-base-types",
- "ic-canister-log",
+ "ic-canister-log 0.2.0 (git+https://github.com/dfinity/ic.git?branch=master)",
  "ic-cdk 0.19.0",
  "ic-cdk-timers",
  "ic-http-types",
