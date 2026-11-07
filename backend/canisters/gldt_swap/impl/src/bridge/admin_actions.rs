@@ -170,6 +170,12 @@ fn check_policy(action: &EvmAdminAction) -> Result<(), String> {
     }
 }
 
+/// Added to the warnings of `SetIcpSigner` and `SetAdminSigner`: the scraper compares the
+/// token's signers with the canister's keys at every window.
+const SCRAPER_STOPS: &str = " Unless the new signer is this canister's key, the scraper on this \
+     chain stops at its next window. Inbound transfers on this chain then need an SNS upgrade \
+     with a ChainReset.";
+
 /// The action in plain words: one line, then any detail or warning lines.
 fn describe(state: &BridgeState, config: &BridgeConfig, action: &EvmAdminAction) -> Vec<String> {
     use EvmAdminAction::*;
@@ -201,7 +207,7 @@ fn describe(state: &BridgeState, config: &BridgeConfig, action: &EvmAdminAction)
             format!("Set the claims signer (icpSigner) to {}", address(signer)),
             format!(
                 "WARNING: this moves voucher signing for this token: after it, only vouchers \
-                 signed by {} can claim. This canister's claims key is {}.",
+                 signed by {} can claim. This canister's claims key is {}.{SCRAPER_STOPS}",
                 address(signer),
                 key(&state.claims_signer)
             ),
@@ -210,7 +216,7 @@ fn describe(state: &BridgeState, config: &BridgeConfig, action: &EvmAdminAction)
             format!("Set the admin signer (adminSigner) to {}", address(signer)),
             format!(
                 "WARNING: this moves control of the token: after it, only {} can sign execute. \
-                 This canister's admin key is {}.",
+                 This canister's admin key is {}.{SCRAPER_STOPS}",
                 address(signer),
                 key(&state.admin_signer)
             ),
@@ -601,6 +607,11 @@ mod tests {
         .unwrap();
         assert!(text.contains("WARNING"), "{text}");
         assert!(text.contains("moves control of the token"), "{text}");
+        assert!(text.contains("stops at its next window"), "{text}");
+        assert!(
+            text.contains("need an SNS upgrade with a ChainReset"),
+            "{text}"
+        );
         assert!(text.contains(OTHER_KEY), "{text}");
         assert!(text.contains(&own), "{text}");
 
@@ -613,6 +624,7 @@ mod tests {
         .unwrap();
         assert!(text.contains("WARNING"), "{text}");
         assert!(text.contains("voucher signing"), "{text}");
+        assert!(text.contains("stops at its next window"), "{text}");
         assert!(text.contains(OTHER_KEY), "{text}");
 
         let text = check(&state, min_burn(Nat::from(200_000_000u64))).unwrap();
