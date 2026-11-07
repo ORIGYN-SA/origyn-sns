@@ -95,13 +95,13 @@ type ChainConfig = record {
   max_window_blocks : nat64;
   // The LayerZero EndpointV2 address.
   lz_endpoint : text;
-  // 1 for Ethereum, 8453 for Base (other ids on test networks).
+  // 1 (or Sepolia 11155111) for Ethereum, 8453 (or Base Sepolia 84532) for Base.
   chain_id : nat64;
   // Public HTTPS endpoint for `eth_blockNumber`, without an API key.
   head_rpc_url : text;
   // LayerZero endpoint id: 30101 for Ethereum, 30184 for Base.
   lz_eid : nat32;
-  // Exactly two distinct built-in EVM RPC providers.
+  // Exactly two distinct providers: both built-in for the chain id, or both `Custom`.
   providers : vec EvmProvider;
   // 1 to 50.
   log_batch_size : nat32;
@@ -154,8 +154,10 @@ type DisplayMessageType = variant { GenericDisplay; FieldsDisplay };
 type Duration = record { secs : nat64; nanos : nat32 };
 type ErrorInfo = record { description : text };
 type EvmChain = variant { Base; Ethereum };
-// A built-in provider of the EVM RPC canister. The canister maps it to the
-// EVM RPC canister's own provider types; Base has no Cloudflare.
+// A provider of the EVM RPC canister. A built-in one maps to the EVM RPC canister's providers
+// for the chain id: Sepolia (11155111) has no Llama or Cloudflare, Base (8453) has no
+// Cloudflare, and Base Sepolia (84532) has no built-in provider at all. `Custom` is an HTTPS
+// JSON-RPC URL sent with no headers, so no API key ever sits in canister state.
 type EvmProvider = variant {
   Alchemy;
   Llama;
@@ -163,6 +165,7 @@ type EvmProvider = variant {
   Cloudflare;
   PublicNode;
   Ankr;
+  Custom : record { url : text };
 };
 type EvmVoucher = record {
   token : text;

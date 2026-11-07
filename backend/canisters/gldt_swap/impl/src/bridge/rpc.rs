@@ -15,11 +15,11 @@ use crate::bridge::evm::address::parse_address;
 use async_trait::async_trait;
 use candid::Principal;
 use evm_rpc_types::{
-    BlockTag, CallArgs, ConsensusStrategy, EthMainnetService, GetLogsArgs, GetLogsRpcConfig, Hex,
-    Hex20, Hex32, L2MainnetService, LogEntry, MultiRpcResult, Nat256, RpcConfig, RpcServices,
-    TransactionRequest,
+    BlockTag, CallArgs, ConsensusStrategy, EthMainnetService, EthSepoliaService, GetLogsArgs,
+    GetLogsRpcConfig, Hex, Hex20, Hex32, L2MainnetService, LogEntry, MultiRpcResult, Nat256,
+    RpcApi, RpcConfig, RpcServices, TransactionRequest,
 };
-use gldt_swap_common::bridge::{ChainConfig, EvmChain, EvmProvider};
+use gldt_swap_common::bridge::{ChainConfig, EvmProvider};
 use ic_cdk::call::Call;
 use ic_cdk_management_canister::{HttpHeader, HttpMethod, HttpRequestArgs};
 use serde::Deserialize;
@@ -106,7 +106,7 @@ impl EvmReader for IcEvmReader {
             response_consensus: Some(ConsensusStrategy::Equality),
         };
         let args = (
-            services(chain)?,
+            services(chain).map_err(failed)?,
             Some(config),
             call_args(token(chain)?, block),
         );
@@ -134,7 +134,7 @@ impl EvmReader for IcEvmReader {
             max_block_range: Some(MAX_BLOCK_RANGE),
         };
         let args = (
-            services(chain)?,
+            services(chain).map_err(failed)?,
             Some(config),
             get_logs_args(token(chain)?, from_block, to_block, ids),
         );
@@ -203,38 +203,84 @@ fn parse_head(body: &[u8]) -> Result<u64, RpcError> {
         })
 }
 
-/// The chain's two providers as the EVM RPC canister names them.
-fn services(chain: &ChainConfig) -> Result<RpcServices, RpcError> {
+/// The chain's two providers as the EVM RPC canister names them. The service family comes
+/// from the chain id: Ethereum (1), Sepolia (11155111) and Base (8453) take their built-in
+/// providers; two `Custom` providers become `RpcServices::Custom` for the chain id, with no
+/// headers. Base Sepolia (84532) has no built-in provider, so it takes custom ones only. A
+/// chain's providers are never mixed. `validate_config` checks the config with this mapping.
+pub fn services(chain: &ChainConfig) -> Result<RpcServices, String> {
     use EvmProvider::*;
-    match chain.chain {
-        EvmChain::Ethereum => Ok(RpcServices::EthMainnet(Some(
-            chain
-                .providers
-                .iter()
-                .map(|p| match p {
-                    Alchemy => EthMainnetService::Alchemy,
-                    Ankr => EthMainnetService::Ankr,
-                    BlockPi => EthMainnetService::BlockPi,
-                    PublicNode => EthMainnetService::PublicNode,
-                    Llama => EthMainnetService::Llama,
-                    Cloudflare => EthMainnetService::Cloudflare,
-                })
-                .collect(),
-        ))),
-        EvmChain::Base => chain
-            .providers
-            .iter()
-            .map(|p| match p {
-                Alchemy => Ok(L2MainnetService::Alchemy),
-                Ankr => Ok(L2MainnetService::Ankr),
-                BlockPi => Ok(L2MainnetService::BlockPi),
-                PublicNode => Ok(L2MainnetService::PublicNode),
-                Llama => Ok(L2MainnetService::Llama),
-                Cloudflare => Err(failed("Cloudflare is not a Base provider".to_string())),
-            })
-            .collect::<Result<Vec<_>, _>>()
-            .map(|providers| RpcServices::BaseMainnet(Some(providers))),
+    let custom: Vec<RpcApi> = chain
+        .providers
+        .iter()
+        .filter_map(|p| match p {
+            Custom { url } => Some(RpcApi {
+                url: url.clone(),
+                headers: None,
+            }),
+            _ => None,
+        })
+        .collect();
+    if !custom.is_empty() {
+        if custom.len() != chain.providers.len() {
+            return Err("providers must be both built-in or both custom".to_string());
+        }
+        return Ok(RpcServices::Custom {
+            chain_id: chain.chain_id,
+            services: custom,
+        });
     }
+    match chain.chain_id {
+        1 => builtin(chain, |p| match p {
+            Alchemy => Some(EthMainnetService::Alchemy),
+            Ankr => Some(EthMainnetService::Ankr),
+            BlockPi => Some(EthMainnetService::BlockPi),
+            PublicNode => Some(EthMainnetService::PublicNode),
+            Llama => Some(EthMainnetService::Llama),
+            Cloudflare => Some(EthMainnetService::Cloudflare),
+            Custom { .. } => None,
+        })
+        .map(|p| RpcServices::EthMainnet(Some(p))),
+        11155111 => builtin(chain, |p| match p {
+            Alchemy => Some(EthSepoliaService::Alchemy),
+            Ankr => Some(EthSepoliaService::Ankr),
+            BlockPi => Some(EthSepoliaService::BlockPi),
+            PublicNode => Some(EthSepoliaService::PublicNode),
+            Llama | Cloudflare | Custom { .. } => None,
+        })
+        .map(|p| RpcServices::EthSepolia(Some(p))),
+        8453 => builtin(chain, |p| match p {
+            Alchemy => Some(L2MainnetService::Alchemy),
+            Ankr => Some(L2MainnetService::Ankr),
+            BlockPi => Some(L2MainnetService::BlockPi),
+            PublicNode => Some(L2MainnetService::PublicNode),
+            Llama => Some(L2MainnetService::Llama),
+            Cloudflare | Custom { .. } => None,
+        })
+        .map(|p| RpcServices::BaseMainnet(Some(p))),
+        id => Err(format!(
+            "chain id {id} has no built-in EVM RPC provider; use two custom providers"
+        )),
+    }
+}
+
+/// Every provider of `chain` mapped by `map`; `None` is a provider the family lacks.
+fn builtin<T>(
+    chain: &ChainConfig,
+    map: impl Fn(&EvmProvider) -> Option<T>,
+) -> Result<Vec<T>, String> {
+    chain
+        .providers
+        .iter()
+        .map(|p| {
+            map(p).ok_or_else(|| {
+                format!(
+                    "{p:?} is not a built-in EVM RPC provider for chain id {}",
+                    chain.chain_id
+                )
+            })
+        })
+        .collect()
 }
 
 /// `bridgeInfo()` on `token` at `block`.
@@ -315,9 +361,10 @@ mod tests {
     use crate::bridge::config::test_fixtures::chain_config;
     use crate::bridge::evm::abi::{bridge_info_calldata, RawLog, BURNED_TO_ICP_TOPIC};
     use evm_rpc_types::{
-        BlockTag, EthMainnetService, Hex, Hex20, Hex32, L2MainnetService, LogEntry, MultiRpcResult,
-        Nat256, RpcService, RpcServices, ValidationError,
+        BlockTag, EthMainnetService, EthSepoliaService, Hex, Hex20, Hex32, L2MainnetService,
+        LogEntry, MultiRpcResult, Nat256, RpcApi, RpcService, RpcServices, ValidationError,
     };
+    use gldt_swap_common::bridge::EvmChain;
     use ic_cdk_management_canister::HttpMethod;
 
     #[test]
@@ -342,6 +389,62 @@ mod tests {
         );
         base.providers = vec![EvmProvider::Alchemy, EvmProvider::Cloudflare];
         assert!(services(&base).is_err());
+    }
+
+    #[test]
+    fn sepolia_maps_to_eth_sepolia_service() {
+        let mut sepolia = chain_config(EvmChain::Ethereum);
+        sepolia.chain_id = 11155111;
+        sepolia.providers = vec![EvmProvider::BlockPi, EvmProvider::PublicNode];
+        assert_eq!(
+            services(&sepolia),
+            Ok(RpcServices::EthSepolia(Some(vec![
+                EthSepoliaService::BlockPi,
+                EthSepoliaService::PublicNode
+            ])))
+        );
+        // Sepolia has no Llama or Cloudflare
+        sepolia.providers = vec![EvmProvider::Alchemy, EvmProvider::Cloudflare];
+        assert!(services(&sepolia).is_err());
+
+        // two custom providers become the canister's custom service for the chain id, with no headers
+        let mut base_sepolia = chain_config(EvmChain::Base);
+        base_sepolia.chain_id = 84532;
+        base_sepolia.providers = vec![
+            EvmProvider::Custom {
+                url: "https://sepolia.base.org".to_string(),
+            },
+            EvmProvider::Custom {
+                url: "https://base-sepolia-rpc.publicnode.com".to_string(),
+            },
+        ];
+        assert_eq!(
+            services(&base_sepolia),
+            Ok(RpcServices::Custom {
+                chain_id: 84532,
+                services: vec![
+                    RpcApi {
+                        url: "https://sepolia.base.org".to_string(),
+                        headers: None,
+                    },
+                    RpcApi {
+                        url: "https://base-sepolia-rpc.publicnode.com".to_string(),
+                        headers: None,
+                    },
+                ],
+            })
+        );
+        // built-in providers don't exist for Base Sepolia
+        base_sepolia.providers = vec![EvmProvider::Alchemy, EvmProvider::Ankr];
+        assert!(services(&base_sepolia).is_err());
+        // and a chain's two providers are never mixed
+        base_sepolia.providers = vec![
+            EvmProvider::Alchemy,
+            EvmProvider::Custom {
+                url: "https://sepolia.base.org".to_string(),
+            },
+        ];
+        assert!(services(&base_sepolia).is_err());
     }
 
     #[test]

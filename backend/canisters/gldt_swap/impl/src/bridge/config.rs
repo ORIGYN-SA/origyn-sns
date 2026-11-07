@@ -4,6 +4,7 @@
 //! proposal is the only way to change it.
 
 use crate::bridge::evm::address::parse_address;
+use crate::bridge::rpc::services;
 use crate::bridge::state::BridgeState;
 pub use gldt_swap_common::bridge::{
     BridgeConfig, BridgeUpgrade, ChainConfig, ChainReset, EvmChain, EvmProvider,
@@ -55,10 +56,33 @@ pub fn validate_config(cfg: &BridgeConfig) -> Result<(), String> {
     Ok(())
 }
 
-fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
-    if chain.chain_id == 0 {
-        return Err("chain_id must be above 0".to_string());
+/// Ethereum runs on mainnet or Sepolia, Base on mainnet or Base Sepolia (spec 11 step 4).
+fn check_chain_id(chain: &ChainConfig) -> Result<(), String> {
+    let allowed: [u64; 2] = match chain.chain {
+        EvmChain::Ethereum => [1, 11155111],
+        EvmChain::Base => [8453, 84532],
+    };
+    // the integration build also takes a local anvil chain, with custom providers only
+    #[cfg(feature = "inttest")]
+    if chain.chain_id == ANVIL_CHAIN_ID {
+        return Ok(());
     }
+    if allowed.contains(&chain.chain_id) {
+        Ok(())
+    } else {
+        Err(format!(
+            "chain id {} is not a {:?} chain id ({} or {})",
+            chain.chain_id, chain.chain, allowed[0], allowed[1]
+        ))
+    }
+}
+
+/// A local anvil chain, accepted by the integration build only.
+#[cfg(feature = "inttest")]
+pub const ANVIL_CHAIN_ID: u64 = 31337;
+
+fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
+    check_chain_id(chain)?;
     if chain.lz_eid == 0 {
         return Err("lz_eid must be above 0".to_string());
     }
@@ -84,9 +108,14 @@ fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
             chain.providers
         ));
     }
-    if chain.chain == EvmChain::Base && chain.providers.contains(&EvmProvider::Cloudflare) {
-        return Err("Cloudflare is not an EVM RPC provider for Base".to_string());
+    for provider in &chain.providers {
+        if let EvmProvider::Custom { url } = provider {
+            if url.len() <= "https://".len() || !url.starts_with("https://") {
+                return Err(format!("custom provider URL {url:?} is not https"));
+            }
+        }
     }
+    services(chain)?;
     if chain.scrape_interval_secs == 0 {
         return Err("scrape_interval_secs must be above 0".to_string());
     }
@@ -342,6 +371,85 @@ mod tests {
         let mut cfg = bridge_config();
         cfg.ecdsa_key_name = String::new();
         rejects(cfg, "ecdsa_key_name");
+    }
+
+    fn custom(url: &str) -> EvmProvider {
+        EvmProvider::Custom {
+            url: url.to_string(),
+        }
+    }
+
+    #[test]
+    fn config_accepts_custom_providers_for_base_sepolia() {
+        let mut cfg = bridge_config();
+        cfg.chains[1].chain_id = 84532;
+        cfg.chains[1].providers = vec![
+            custom("https://sepolia.base.org"),
+            custom("https://base-sepolia-rpc.publicnode.com"),
+        ];
+        assert_eq!(validate_config(&cfg), Ok(()));
+
+        // Base Sepolia has no built-in EVM RPC provider
+        cfg.chains[1].providers = vec![EvmProvider::Alchemy, EvmProvider::Ankr];
+        rejects(cfg, "84532");
+
+        // Sepolia takes the built-in providers of its family, and custom ones
+        let mut cfg = bridge_config();
+        cfg.chains[0].chain_id = 11155111;
+        cfg.chains[0].providers = vec![EvmProvider::Alchemy, EvmProvider::PublicNode];
+        assert_eq!(validate_config(&cfg), Ok(()));
+        cfg.chains[0].providers = vec![
+            custom("https://ethereum-sepolia-rpc.publicnode.com"),
+            custom("https://sepolia.drpc.org"),
+        ];
+        assert_eq!(validate_config(&cfg), Ok(()));
+        cfg.chains[0].providers = vec![EvmProvider::Alchemy, EvmProvider::Llama];
+        rejects(cfg, "Llama");
+    }
+
+    #[test]
+    fn config_rejects_mixed_builtin_and_custom() {
+        let mut cfg = bridge_config();
+        cfg.chains[0].providers = vec![EvmProvider::Alchemy, custom("https://eth.example.org")];
+        rejects(cfg, "both built-in or both custom");
+
+        let mut cfg = bridge_config();
+        cfg.chains[1].chain_id = 84532;
+        cfg.chains[1].providers = vec![custom("https://sepolia.base.org"), EvmProvider::Ankr];
+        rejects(cfg, "both built-in or both custom");
+
+        // custom providers are https, and two distinct URLs
+        let mut cfg = bridge_config();
+        cfg.chains[0].providers = vec![
+            custom("http://eth.example.org"),
+            custom("https://eth2.example.org"),
+        ];
+        rejects(cfg, "https");
+        let mut cfg = bridge_config();
+        cfg.chains[0].providers = vec![custom("https://"), custom("https://eth2.example.org")];
+        rejects(cfg, "https");
+        let mut cfg = bridge_config();
+        cfg.chains[0].providers = vec![
+            custom("https://eth.example.org"),
+            custom("https://eth.example.org"),
+        ];
+        rejects(cfg, "providers");
+
+        // only the chain ids of Ethereum, Sepolia, Base and Base Sepolia, on the right chain
+        let mut wrong = vec![(0, 10), (0, 0), (0, 8453), (1, 11155111)];
+        if !cfg!(feature = "inttest") {
+            // the integration build also takes anvil
+            wrong.push((0, 31337));
+        }
+        for (index, chain_id) in wrong {
+            let mut cfg = bridge_config();
+            cfg.chains[index].chain_id = chain_id;
+            cfg.chains[index].providers = vec![
+                custom("https://a.example.org"),
+                custom("https://b.example.org"),
+            ];
+            rejects(cfg, "chain id");
+        }
     }
 
     #[test]

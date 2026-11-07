@@ -21,10 +21,12 @@ pub enum EvmChain {
 
 // Config, set only by init and upgrade arguments
 
-/// A built-in provider of the EVM RPC canister. The canister maps it to the
-/// EVM RPC canister's own provider types; Base has no Cloudflare.
+/// A provider of the EVM RPC canister. A built-in one maps to the EVM RPC canister's providers
+/// for the chain id: Sepolia (11155111) has no Llama or Cloudflare, Base (8453) has no
+/// Cloudflare, and Base Sepolia (84532) has no built-in provider at all. `Custom` is an HTTPS
+/// JSON-RPC URL sent with no headers, so no API key ever sits in canister state.
 #[derive(
-    CandidType, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash,
+    CandidType, Serialize, Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 pub enum EvmProvider {
     Alchemy,
@@ -33,12 +35,13 @@ pub enum EvmProvider {
     PublicNode,
     Llama,
     Cloudflare,
+    Custom { url: String },
 }
 
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct ChainConfig {
     pub chain: EvmChain,
-    /// 1 for Ethereum, 8453 for Base (other ids on test networks).
+    /// 1 (or Sepolia 11155111) for Ethereum, 8453 (or Base Sepolia 84532) for Base.
     pub chain_id: u64,
     /// LayerZero endpoint id: 30101 for Ethereum, 30184 for Base.
     pub lz_eid: u32,
@@ -49,7 +52,7 @@ pub struct ChainConfig {
     pub confirmations: u64,
     /// Public HTTPS endpoint for `eth_blockNumber`, without an API key.
     pub head_rpc_url: String,
-    /// Exactly two distinct built-in EVM RPC providers.
+    /// Exactly two distinct providers: both built-in for the chain id, or both `Custom`.
     pub providers: Vec<EvmProvider>,
     pub scrape_interval_secs: u64,
     /// At most 500.
