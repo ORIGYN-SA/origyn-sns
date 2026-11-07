@@ -14,7 +14,7 @@ use crate::gldt_swap_suite::bridge::setup::{
     bridge_out, setup_bridge_env, start_all_chains, wait_for_signers, BridgeEnv, BridgeEnvBuilder,
     FAKE_BASE_TOKEN, FAKE_ETHEREUM_TOKEN,
 };
-use candid::{encode_one, Nat, Principal};
+use candid::{Nat, Principal};
 use gldt_swap_common::bridge::{
     BridgeSnsAction, BridgeStatus, BridgeToEvmArgs, EvmAdminAction, EvmAdminRequest, EvmCall,
     EvmChain, InboundStatus, OutboundStatus, ResolveAction, SignedEvmAdminAction,
@@ -485,18 +485,13 @@ fn stranger_cannot_call_bridge_sns_action() {
         outbound: Some(true),
     };
 
-    // an authorized principal, a user and the anonymous principal are all refused
+    // an authorized principal, a user and the anonymous principal are all refused, but each
+    // can preview the voter text, which changes nothing
     for stranger in [env.controller, env.user, Principal::anonymous()] {
         assert!(bridge_sns_action(&env.pic, stranger, gldt_swap, &pause).is_err());
-        assert!(env
-            .pic
-            .update_call(
-                gldt_swap,
-                stranger,
-                "validate_bridge_sns_action",
-                encode_one(&pause).unwrap(),
-            )
-            .is_err());
+        let preview = validate_bridge_sns_action(&env.pic, stranger, gldt_swap, &pause)
+            .expect("anyone can preview the text");
+        assert!(preview.contains("inbound mints"), "{preview}");
     }
     let unchanged = status(&env);
     assert!(!unchanged.paused_in && !unchanged.paused_out);

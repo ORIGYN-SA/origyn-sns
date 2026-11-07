@@ -1,5 +1,6 @@
 //! `bridge_sns_action` and its validator (spec 8.9): the one SNS generic function of the
-//! bridge. Only ORIGYN SNS governance may call either.
+//! bridge. Only ORIGYN SNS governance may call the action. Anyone may call the validator,
+//! which only reads state, so proposers can preview the text.
 //!
 //! The validator returns the text voters read. The action runs the same checks again on the
 //! state at execution, then:

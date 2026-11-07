@@ -644,6 +644,7 @@ service : (Args_1) -> {
   swap_nft_for_tokens : (vec Nft) -> (Result_4);
   swap_tokens_for_nft : (vec Nft) -> (Result_5);
   // The SNS validator of `bridge_sns_action` (spec 8.9): the text voters read, or why the action
-  // would fail. An update for SNS governance only, as in the spec's Candid; it changes nothing.
+  // would fail. Open to every caller, so proposers can preview the text; it only reads state.
+  // An update, as in the spec's Candid, so SNS governance calls it as before.
   validate_bridge_sns_action : (BridgeSnsAction) -> (Result_6);
 }
