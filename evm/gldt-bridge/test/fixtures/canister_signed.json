@@ -1,0 +1,25 @@
+{
+  "adminAction": {
+    "calls": [
+      {
+        "data": "0x16b4d45a000000000000000000000000000000000000000000000000000000000bebc200",
+        "target": "0x00000000000000000000000000000000000B1d6E"
+      }
+    ],
+    "deadline": 1620933524,
+    "description": "Ethereum (31337), GLDT 0x00000000000000000000000000000000000B1d6E:\n  Step 1: Set the smallest burnToIcp to 200000000 e8s (2 GLDT)\n     target 0x00000000000000000000000000000000000B1d6E (token), data keccak 0x1f7486923006f789f84bdc3475ad15fded0e65117d0f81ea95fa4f757d7fb58c\n  Valid for 7 days after execution.",
+    "nonce": 0,
+    "signature": "0x9c3449a59ccf0d76ed48f9f3f58e2c6a5add92997d4e67344358384fb40b2d39085ea114cf8aec0e2bc0818507c2bff865e03efb471eb2944eff146167f9d9f11c"
+  },
+  "adminSigner": "0x29ef309aB8737504A0eD776943d0C8Fe5D426255",
+  "chainId": 31337,
+  "claimsSigner": "0x0E85D12995338478B7d6e9C64113CD1c3F019d8E",
+  "note": "Written by the PocketIC test write_canister_fixture (backend/integration_tests/src/gldt_swap_suite/bridge/fixtures.rs). Checked by test/CanisterFixture.t.sol. Do not edit by hand.",
+  "token": "0x00000000000000000000000000000000000B1d6E",
+  "voucher": {
+    "amount": "1250000000",
+    "icpBurnIndex": 2,
+    "recipient": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "signature": "0xe3064557f79d6cfd5bffcf0b7e8807a75abecd6608c82f27d34bb9e4fc4930f967234fc278c27af896a88ed7cc8a6025ae909bd914b2c1e74014f5a93b813a871b"
+  }
+}

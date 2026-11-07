@@ -8,9 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+#### Added
+
+- **GLDT bridge to Ethereum and Base.** `bridge_to_evm` burns GLDT on ICP and signs an EIP-712 claim voucher with threshold ECDSA. A scraper reads `BurnedToIcp` burns on each chain through the EVM RPC canister, and a mint processor mints them on ICP under the supply guard. The bridge config is set only by init and upgrade arguments.
+- **SNS control of the bridge.** `bridge_sns_action`, for ORIGYN SNS governance only, signs admin actions for the GLDT token contracts, sets the ICP pause flags and resolves transfers the bridge cannot settle by itself. `validate_bridge_sns_action` returns the text voters see. Authorized principals can pause either direction with `bridge_pause`.
+- **Bridge queries:** `get_bridge_status`, `get_bridge_evm_signers`, `get_bridge_transfer_out`, `get_bridge_transfers_out_by_account`, `get_bridge_transfer_in`, `get_bridge_transfers_in_by_tx`, `get_bridge_transfers_in_by_account`, `get_bridge_admin_action` and `get_bridge_admin_actions`.
+
 #### Change
 
 - Moved from the gold-dao repository to origyn-sns as part of the GLDT handover to ORIGYN DAO. Moved into the origyn-sns Cargo workspace and its shared dependency versions, except `bity-ic-icrc3`, which stays on 0.5 to keep the serialized ICRC-3 state of the deployed canister.
+- The supply balancer counts GLDT bridged out to Ethereum and Base, so it never mints it again on ICP. The hidden `manual_toggle_supply_balancer_var` endpoint is removed.
 
 ### [2.0.1] - 2025-11-27
 

@@ -8,7 +8,7 @@ use crate::utils::random_principal;
 use crate::wasms::{EVM_RPC, GLDT_SWAP};
 use bity_ic_icrc3::config::{ICRC3Config, ICRC3Properties};
 use bity_ic_types::BuildVersion;
-use candid::{encode_one, CandidType, Nat, Principal};
+use candid::{decode_one, encode_one, CandidType, Nat, Principal};
 use gldt_swap_api_canister::init::InitArgs;
 use gldt_swap_api_canister::post_upgrade::UpgradeArgs;
 use gldt_swap_common::bridge::{
@@ -21,8 +21,11 @@ use gldt_swap_common::swap_canister_config::{
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc2::approve::ApproveArgs;
 use icrc_ledger_types::icrc3::blocks::SupportedBlockType;
-use pocket_ic::{ErrorCode, PocketIc, PocketIcBuilder, RejectResponse};
-use std::time::Duration;
+use icrc_ledger_types::icrc3::transactions::{
+    GetTransactionsRequest, GetTransactionsResponse, Transaction,
+};
+use pocket_ic::{ErrorCode, PocketIc, PocketIcBuilder, RejectResponse, Time};
+use std::time::{Duration, SystemTime};
 
 pub const GLDT_SWAP_CANISTER_ID: &str = "6f6ua-hqaaa-aaaar-qairq-cai";
 pub const GLDT_LEDGER_CANISTER_ID: &str = "6c7su-kiaaa-aaaar-qaira-cai";
@@ -79,14 +82,24 @@ pub fn start_all_chains(env: &mut BridgeEnv) {
 /// [start_all_chains] on any PocketIC where gldt_swap runs with [bridge_config] and the EVM RPC
 /// canister is installed. Returns the mocked nodes.
 pub fn start_chains(pic: &PocketIc, controller: Principal, gldt_swap: Principal) -> MockEvm {
+    start_chains_with_tokens(
+        pic,
+        controller,
+        gldt_swap,
+        &[FAKE_ETHEREUM_TOKEN, FAKE_BASE_TOKEN],
+    )
+}
+
+/// [start_chains] for a config whose chains use `tokens`.
+pub fn start_chains_with_tokens(
+    pic: &PocketIc,
+    controller: Principal,
+    gldt_swap: Principal,
+    tokens: &[&str],
+) -> MockEvm {
     // the first tick runs once both keys are loaded, and compares the token's signers with them
     let (claims, admin) = wait_for_signers_on(pic, controller, gldt_swap);
-    let evm = MockEvm::new(
-        FIRST_HEAD,
-        &claims,
-        &admin,
-        &[FAKE_ETHEREUM_TOKEN, FAKE_BASE_TOKEN],
-    );
+    let evm = MockEvm::new(FIRST_HEAD, &claims, &admin, tokens);
     for _ in 0..5 {
         serve_outcalls(pic, |request| evm.answer(request));
         let status = get_bridge_status(pic, controller, gldt_swap, &());
@@ -170,6 +183,61 @@ pub fn install_evm_rpc(pic: &PocketIc, controller: Principal) -> Principal {
         Some(controller),
     );
     evm_rpc_canister_id
+}
+
+/// The integration build's `LedgerCall`, the argument of `_bridge_lose_next_ledger_reply`.
+#[derive(CandidType, Clone, Copy, Debug)]
+pub enum LedgerCall {
+    Mint,
+    Burn,
+}
+
+/// gldt_swap's next mint or burn runs on the ledger, but gldt_swap drops the answer, as if the
+/// call had got no reply. Only the integration build has this hook.
+pub fn lose_next_ledger_reply(env: &BridgeEnv, call: LedgerCall) {
+    env.pic
+        .update_call(
+            env.gldt_swap_canister_id,
+            env.controller,
+            "_bridge_lose_next_ledger_reply",
+            encode_one(call).unwrap(),
+        )
+        .expect("_bridge_lose_next_ledger_reply");
+}
+
+fn get_transactions(
+    pic: &PocketIc,
+    ledger: Principal,
+    start: u64,
+    length: u64,
+) -> GetTransactionsResponse {
+    let reply = pic
+        .query_call(
+            ledger,
+            Principal::anonymous(),
+            "get_transactions",
+            encode_one(GetTransactionsRequest {
+                start: Nat::from(start),
+                length: Nat::from(length),
+            })
+            .unwrap(),
+        )
+        .expect("get_transactions");
+    decode_one(&reply).expect("a GetTransactionsResponse")
+}
+
+/// How many blocks the ledger has: the next transaction gets this index.
+pub fn ledger_log_length(pic: &PocketIc, ledger: Principal) -> u64 {
+    u64::try_from(get_transactions(pic, ledger, 0, 0).log_length.0).unwrap()
+}
+
+/// The ledger's transaction at `index`.
+pub fn ledger_transaction(pic: &PocketIc, ledger: Principal, index: u64) -> Transaction {
+    get_transactions(pic, ledger, index, 1)
+        .transactions
+        .into_iter()
+        .next()
+        .unwrap_or_else(|| panic!("the ledger has no transaction {index}"))
 }
 
 /// `owner` approves the burn and bridges `amount` e8s to `chain`, to Anvil's account 1.
@@ -262,6 +330,36 @@ pub fn chain_config(chain: EvmChain) -> ChainConfig {
     }
 }
 
+/// Anvil's chain id, which only the integration build accepts.
+pub const ANVIL_CHAIN_ID: u64 = 31337;
+
+/// `chain` on a local anvil, with chain id 31337. It has no built-in EVM RPC provider, so it
+/// takes two custom ones, named so `outcalls::provider` tells them apart. No URL is ever reached:
+/// the tests answer every outcall themselves.
+pub fn anvil_chain_config(chain: EvmChain, token: &str) -> ChainConfig {
+    ChainConfig {
+        chain,
+        chain_id: ANVIL_CHAIN_ID,
+        // DeployLocal's first endpoint
+        lz_eid: 1,
+        token: token.to_string(),
+        lz_endpoint: LZ_ENDPOINT.to_string(),
+        confirmations: 2,
+        head_rpc_url: "https://head.anvil.test".to_string(),
+        providers: vec![
+            EvmProvider::Custom {
+                url: "https://alchemy.anvil.test".to_string(),
+            },
+            EvmProvider::Custom {
+                url: "https://ankr.anvil.test".to_string(),
+            },
+        ],
+        scrape_interval_secs: 180,
+        max_window_blocks: 500,
+        log_batch_size: 50,
+    }
+}
+
 pub fn bridge_upgrade(sns_governance: Principal) -> BridgeUpgrade {
     BridgeUpgrade {
         config: Some(bridge_config(sns_governance)),
@@ -277,12 +375,16 @@ pub fn setup_bridge_env() -> BridgeEnv {
 
 pub struct BridgeEnvBuilder {
     bridge_at_init: bool,
+    chains: Option<Vec<ChainConfig>>,
+    starts_now: bool,
 }
 
 impl Default for BridgeEnvBuilder {
     fn default() -> Self {
         Self {
             bridge_at_init: true,
+            chains: None,
+            starts_now: false,
         }
     }
 }
@@ -304,12 +406,28 @@ impl BridgeEnvBuilder {
         self
     }
 
+    /// Configures these chains instead of [chain_config] for Ethereum and Base.
+    pub fn with_chains(mut self, chains: Vec<ChainConfig>) -> Self {
+        self.chains = Some(chains);
+        self
+    }
+
+    /// Starts the PocketIC clock at the current time instead of PocketIC's default in May 2021,
+    /// so signed deadlines line up with a local anvil chain's block time.
+    pub fn starting_now(mut self) -> Self {
+        self.starts_now = true;
+        self
+    }
+
     pub fn build(self) -> BridgeEnv {
         // canister ids in -aaaar- ranges live on the fiduciary subnet, which also has the threshold keys
-        let pic = PocketIcBuilder::new()
+        let mut builder = PocketIcBuilder::new()
             .with_nns_subnet()
-            .with_fiduciary_subnet()
-            .build();
+            .with_fiduciary_subnet();
+        if self.starts_now {
+            builder = builder.with_initial_time(Time::from(SystemTime::now()));
+        }
+        let pic = builder.build();
         let controller = random_principal();
         let sns_governance = random_principal();
         let user = random_principal();
@@ -362,7 +480,13 @@ impl BridgeEnvBuilder {
                 supported_blocks: vec![block_type("reverse_swap"), block_type("forward_swap")],
                 constants,
             },
-            bridge: self.bridge_at_init.then(|| bridge_upgrade(sns_governance)),
+            bridge: self.bridge_at_init.then(|| {
+                let mut upgrade = bridge_upgrade(sns_governance);
+                if let (Some(config), Some(chains)) = (upgrade.config.as_mut(), self.chains) {
+                    config.chains = chains;
+                }
+                upgrade
+            }),
         });
         let gldt_swap_canister_id =
             setup_gldt_swap_canister(&pic, controller, gldt_swap_canister_id, init_args);

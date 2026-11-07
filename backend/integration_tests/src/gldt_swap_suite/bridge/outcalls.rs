@@ -53,6 +53,21 @@ pub fn rpc_method(request: &CanisterHttpRequest) -> String {
     body["method"].as_str().unwrap_or_default().to_string()
 }
 
+/// The burn ids an `eth_getLogs` request asks for, in its order.
+pub fn requested_burn_ids(request: &CanisterHttpRequest) -> Vec<u64> {
+    let body: Value = serde_json::from_slice(&request.body).expect("a JSON-RPC request");
+    all(&body["params"][0]["topics"][1])
+        .iter()
+        .map(|t| topic_u64(t))
+        .collect()
+}
+
+/// A node's JSON-RPC error for `request`.
+pub fn node_error(request: &CanisterHttpRequest, message: &str) -> CanisterHttpResponse {
+    let body: Value = serde_json::from_slice(&request.body).expect("a JSON-RPC request");
+    rpc_error(body["id"].clone(), -32000, message)
+}
+
 /// Which provider a request goes to: `alchemy`, `ankr`, or `other` (the head endpoint).
 pub fn provider(request: &CanisterHttpRequest) -> &'static str {
     if request.url.contains("alchemy") {
