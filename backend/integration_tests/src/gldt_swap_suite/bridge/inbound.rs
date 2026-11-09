@@ -95,9 +95,9 @@ fn first_tick_opens_chains() {
     env.evm.advance(100);
     scrape_round(&env, |r| env.evm.answer(r));
     let c = chain(&env, EvmChain::Ethereum);
-    assert_eq!(c.last_scraped_block, FIRST_HEAD + 100 - 3);
+    assert_eq!(c.last_scraped_block, FIRST_HEAD + 100 - 12);
     assert_eq!(c.window, None);
-    assert_eq!(c.supply.unwrap().block, FIRST_HEAD + 100 - 3);
+    assert_eq!(c.supply.unwrap().block, FIRST_HEAD + 100 - 12);
 }
 
 #[test]
