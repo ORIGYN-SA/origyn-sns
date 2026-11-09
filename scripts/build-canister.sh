@@ -66,16 +66,23 @@ if [[ -v $WASMONLY ]]; then
   rm -f $BASE_CANISTER_PATH/$1/api/can.did
 	echo "$1 wasm file created and ready for did generation"
 else
+  # The name section only maps function numbers to names in crash traces. gldt_swap drops it
+  # to stay well under the 2 MB limit of an SNS upgrade proposal.
+  KEEP_NAME_SECTION="--keep-name-section"
+  if [[ "$1" == "gldt_swap" ]]; then
+    KEEP_NAME_SECTION=""
+  fi
+
   ic-wasm $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm \
   -o $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}.wasm \
-  shrink --keep-name-section
+  shrink $KEEP_NAME_SECTION
 
   ic-wasm "$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/$1.wasm" \
     -o "$BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm" \
     metadata candid:service \
       -f "$BASE_CANISTER_PATH/$1/api/can.did" \
       -v public \
-      --keep-name-section
+      $KEEP_NAME_SECTION
 
   gzip --no-name -9 -v -c $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm \
     > $BASE_CANISTER_PATH/$1/target/wasm32-unknown-unknown/release/${1}_canister.wasm.gz
