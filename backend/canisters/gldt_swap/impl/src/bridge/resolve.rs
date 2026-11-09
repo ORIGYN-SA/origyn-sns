@@ -1,4 +1,4 @@
-//! SNS resolve actions (spec 8.11): a voted decision for a transfer the bridge can't settle
+//! SNS resolve actions: a voted decision for a transfer the bridge can't settle
 //! by itself. Each applies only from the status it is meant for, and moves the counters once.
 //!
 //! | Action | From | Effect |
@@ -211,7 +211,7 @@ fn check_one(
                 return Err("nobody controls the anonymous principal".to_string());
             }
             let line = format!(
-                "{}: mint to {to} instead (on the mint queue; the supply guard and rule 1 apply)",
+                "{}: mint to {to} instead (on the mint queue; the supply guard and the bridged_out cap apply)",
                 in_name(&record)
             );
             Ok((Target::In(key, record), line))

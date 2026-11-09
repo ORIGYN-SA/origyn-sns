@@ -5,7 +5,7 @@
 //! `0x0A82D20142d067C8AF32f48664bDDfb65EcAE507` and admin
 //! `0x216C1E5F2b9EB767Cec5C7d4DFa2d02b5A0AA143`.
 //!
-//! Both keys sign only Claim and Execute digests the canister builds itself (spec 8.13).
+//! Both keys sign only Claim and Execute digests the canister builds itself.
 
 pub use crate::bridge::evm::address::evm_address;
 use crate::bridge::evm::address::{format_address, try_evm_address};

@@ -1,4 +1,4 @@
-//! The supply balancer (spec 8.12), every 6 hours: GLDT on ICP should be the gold the canister
+//! The supply balancer, every 6 hours: GLDT on ICP should be the gold the canister
 //! holds, times 100, less what is bridged out to Ethereum and Base. Ledger fees burn a little
 //! GLDT, and the balancer mints that dust back to the fee account, at most 100 GLDT a run.
 //!

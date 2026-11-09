@@ -28,13 +28,13 @@ interface IReceiveUlnVerify {
 contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
     using PacketV1Codec for bytes;
 
-    // Spec 7.1 and Global Constraints.
+    // The production signer addresses and the LayerZero endpoint.
     address internal constant ICP_SIGNER = 0x0A82D20142d067C8AF32f48664bDDfb65EcAE507;
     address internal constant ADMIN_SIGNER = 0x216C1E5F2b9EB767Cec5C7d4DFa2d02b5A0AA143;
     address internal constant ENDPOINT_V2 = 0x1a44076050125825900e736c501f859c50fE728c;
 
     // The operator wallet and its salt are set only at launch. Until then a test wallet stands in for both,
-    // with the salt shape of spec 7.2: wallet address, 0x00, 11 more bytes.
+    // with the salt shape: wallet address, 0x00, 11 more bytes.
     address internal testWallet = makeAddr("operator wallet");
     bytes32 internal testSalt = bytes32(abi.encodePacked(testWallet, bytes1(0x00), bytes11(keccak256("fork dry run"))));
 
@@ -54,8 +54,8 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
         assertEq(ethProxy, baseProxy, "one proxy address on both chains");
     }
 
-    /// @notice The libraries, executor, DVNs and confirmations in the config files are LayerZero's own current
-    /// defaults for this path (spec 6.11: LayerZero's recommended confirmations), read on chain.
+    /// @notice The libraries, executor and DVNs in the config files are LayerZero's own current defaults for this
+    /// path, read on chain. Confirmations are our own choice (12 each way), so they are not compared here.
     function test_fork_config_matches_layerzero_defaults() public {
         (string memory ethRpc, string memory baseRpc) = _forkUrls();
         vm.createSelectFork(ethRpc);
@@ -141,11 +141,9 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
         assertEq(c.maxMessageSize, ex.maxMessageSize, "maxMessageSize is LayerZero's default");
 
         UlnConfig memory sendDefault = IUlnConfigReader(c.sendLib).getUlnConfig(address(0), c.peerEid);
-        assertEq(c.sendConfirmations, sendDefault.confirmations, "send confirmations are LayerZero's default");
         _assertSubset(c.sendDVNs, sendDefault.requiredDVNs, "send DVNs are in LayerZero's default set");
 
         UlnConfig memory receiveDefault = IUlnConfigReader(c.receiveLib).getUlnConfig(address(0), c.peerEid);
-        assertEq(c.receiveConfirmations, receiveDefault.confirmations, "receive confirmations are the default");
         _assertSubset(c.receiveDVNs, receiveDefault.requiredDVNs, "receive DVNs are in LayerZero's default set");
     }
 
@@ -207,10 +205,10 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
         assertEq(base.sendConfirmations, eth.receiveConfirmations, "Base to Ethereum confirmations agree");
         assertEq(eth.sendDVNs.length, 2, "two required DVNs");
         assertEq(base.sendDVNs.length, 2, "two required DVNs");
-        assertEq(eth.adminSigner, ADMIN_SIGNER, "Ethereum adminSigner is spec 7.1");
-        assertEq(base.adminSigner, ADMIN_SIGNER, "Base adminSigner is spec 7.1");
-        assertEq(eth.icpSigner, ICP_SIGNER, "Ethereum icpSigner is spec 7.1");
-        assertEq(base.icpSigner, ICP_SIGNER, "Base icpSigner is spec 7.1");
+        assertEq(eth.adminSigner, ADMIN_SIGNER, "Ethereum adminSigner is the production key");
+        assertEq(base.adminSigner, ADMIN_SIGNER, "Base adminSigner is the production key");
+        assertEq(eth.icpSigner, ICP_SIGNER, "Ethereum icpSigner is the production key");
+        assertEq(base.icpSigner, ICP_SIGNER, "Base icpSigner is the production key");
         assertEq(eth.lzReceiveGas, 100_000, "Ethereum lzReceiveGas");
         assertEq(base.lzReceiveGas, 100_000, "Base lzReceiveGas");
         assertEq(eth.operator, base.operator, "one operator wallet");

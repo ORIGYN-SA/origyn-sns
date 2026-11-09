@@ -67,7 +67,7 @@ pub fn validate_config(cfg: &BridgeConfig) -> Result<(), String> {
     Ok(())
 }
 
-/// Ethereum runs on mainnet or Sepolia, Base on mainnet or Base Sepolia (spec 11 step 4).
+/// Ethereum runs on mainnet or Sepolia, Base on mainnet or Base Sepolia.
 fn check_chain_id(chain: &ChainConfig) -> Result<(), String> {
     let allowed: [u64; 2] = match chain.chain {
         EvmChain::Ethereum => [1, 11155111],
@@ -127,7 +127,7 @@ fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
         }
     }
     services(chain)?;
-    // mainnet takes two built-in providers (spec 8.4): a custom URL could carry an API key
+    // mainnet takes two built-in providers: a custom URL could carry an API key
     let custom = chain
         .providers
         .iter()
@@ -227,7 +227,7 @@ pub(crate) mod test_fixtures {
 
     pub fn chain_config(chain: EvmChain) -> ChainConfig {
         let (chain_id, lz_eid, confirmations, head_rpc_url) = match chain {
-            EvmChain::Ethereum => (1, 30101, 3, "https://ethereum-rpc.publicnode.com"),
+            EvmChain::Ethereum => (1, 30101, 12, "https://ethereum-rpc.publicnode.com"),
             EvmChain::Base => (8453, 30184, 12, "https://base-rpc.publicnode.com"),
         };
         ChainConfig {

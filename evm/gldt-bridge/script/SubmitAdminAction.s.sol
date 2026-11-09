@@ -6,7 +6,7 @@ import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 import { IGLDT } from "../src/IGLDT.sol";
 
-/// @notice Submits an admin action signed by gldt_swap (spec 6.6). Anyone may submit and pay the gas; the signature
+/// @notice Submits an admin action signed by gldt_swap. Anyone may submit and pay the gas; the signature
 /// is the authority. The argument is the JSON text of get_bridge_admin_action, as dfx prints it:
 ///
 ///   forge script script/SubmitAdminAction.s.sol --sig 'run(string)' \
@@ -52,7 +52,7 @@ contract SubmitAdminAction is Script {
         require(signer == IGLDT(a.token).adminSigner(), "not signed by the token's adminSigner");
     }
 
-    /// @notice Reads one SignedEvmAdminAction from `json` (spec 8.5).
+    /// @notice Reads one SignedEvmAdminAction from `json`.
     function parseAction(string memory json) public view returns (Action memory a) {
         string memory root = ".";
         if (!vm.keyExistsJson(json, ".nonce")) {

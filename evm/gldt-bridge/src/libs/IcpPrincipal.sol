@@ -3,7 +3,7 @@ pragma solidity 0.8.28;
 
 /// @title ICP principal in one bytes32
 /// @notice Byte 0 is the principal's length (1 to 29), then that many principal bytes, then zeros.
-/// This is the encoding DFINITY's ckETH helper contract uses (spec 6.4).
+/// This is the encoding DFINITY's ckETH helper contract uses.
 library IcpPrincipal {
     uint256 internal constant MAX_LENGTH = 29;
 

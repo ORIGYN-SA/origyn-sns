@@ -1,5 +1,5 @@
 //! The Solidity ABI the canister speaks: the GLDT token (`evm/gldt-bridge/src/IGLDT.sol`) and
-//! the four LayerZero endpoint functions an admin action may call (spec 6.6 and 8.9).
+//! the four LayerZero endpoint functions an admin action may call.
 //!
 //! Every decoder here is strict: a word with dirty high bytes, a missing or extra byte, or a
 //! wrong topic count is an `Err`, never a truncated value or a panic.
@@ -127,16 +127,15 @@ fn strict() -> AbiDecoderConfig {
     AbiDecoderConfig::new().strict(true)
 }
 
-/// The calls for one typed admin action, as `(target, calldata)`, following the table in
-/// spec 8.9. Token functions go to `token`; endpoint functions go to `endpoint` with `token`
-/// as the OApp.
+/// The calls for one typed admin action, as `(target, calldata)`. Token functions go to
+/// `token`; endpoint functions go to `endpoint` with `token` as the OApp.
 ///
 /// It rejects what can't be encoded as given: text that is not an address or a 32-byte hash,
 /// numbers that don't fit, zero addresses (`SetOperator { operator: None }` is the one zero),
 /// and LayerZero zeros that mean "use the default". ULN DVN lists must be sorted ascending
 /// with no duplicates, as the ULN requires; they are never reordered, so the calldata matches
 /// what voters read. Policy checks (gas bounds, a minimum above 0, validity, the chain) are the
-/// SNS validator's (Task 10).
+/// SNS validator's.
 pub fn encode_call(
     action: &EvmAdminAction,
     token: [u8; 20],

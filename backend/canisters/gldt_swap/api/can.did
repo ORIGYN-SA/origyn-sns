@@ -589,10 +589,10 @@ service : (Args_1) -> {
   // Authorized principals can pause either direction but never unpause;
   // unpausing is an SNS `SetIcpPaused` action.
   bridge_pause : (BridgePauseArgs) -> ();
-  // The bridge's SNS generic function (spec 8.9), for ORIGYN SNS governance only. The action is
+  // The bridge's SNS generic function, for ORIGYN SNS governance only. The action is
   // checked again on the current state, and any error traps, so the proposal shows as failed.
   bridge_sns_action : (BridgeSnsAction) -> ();
-  // Burns the caller's GLDT on ICP and signs a claim voucher for Ethereum or Base (spec 8.6).
+  // Burns the caller's GLDT on ICP and signs a claim voucher for Ethereum or Base.
   // The caller first approves `gldt_swap` for `amount` on the GLDT ledger.
   bridge_to_evm : (BridgeToEvmArgs) -> (Result);
   commit : () -> ();
@@ -654,8 +654,8 @@ service : (Args_1) -> {
   set_buyback_canister : (opt Account) -> (Response);
   swap_nft_for_tokens : (vec Nft) -> (Result_4);
   swap_tokens_for_nft : (vec Nft) -> (Result_5);
-  // The SNS validator of `bridge_sns_action` (spec 8.9): the text voters read, or why the action
+  // The SNS validator of `bridge_sns_action`: the text voters read, or why the action
   // would fail. Open to every caller, so proposers can preview the text; it only reads state.
-  // An update, as in the spec's Candid, so SNS governance calls it as before.
+  // An update, not a query, so SNS governance can call it.
   validate_bridge_sns_action : (BridgeSnsAction) -> (Result_6);
 }

@@ -5,7 +5,7 @@ import { Script, console2 } from "forge-std/Script.sol";
 
 import { DeployLocalCore, LocalChain } from "./lib/DeployLocalCore.sol";
 
-/// @notice Plain anvil only: the LayerZero test stack and two GLDT tokens, for Task 12's e2e. Writes
+/// @notice Plain anvil only: the LayerZero test stack and two GLDT tokens, for the gldt_swap end to end test. Writes
 /// deployments/local.json. The signers are the gldt_swap test canister's addresses, passed in by the e2e:
 ///
 ///   ADMIN_SIGNER=0x... ICP_SIGNER=0x... forge script script/DeployLocal.s.sol --rpc-url http://127.0.0.1:8545 \

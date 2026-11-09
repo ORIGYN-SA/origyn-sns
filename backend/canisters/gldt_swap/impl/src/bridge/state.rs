@@ -115,13 +115,13 @@ pub struct BridgeState {
     pub cycles_low: bool,
 }
 
-/// Why the mint queue waits (spec 8.8).
+/// Why the mint queue waits.
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
 pub enum MintHold {
     /// Supply readings plus unminted burns are above `bridged_out`.
     Guard,
     /// The next burn alone is above `bridged_out`.
-    Rule1,
+    OverBridgedOut,
 }
 
 impl BridgeState {

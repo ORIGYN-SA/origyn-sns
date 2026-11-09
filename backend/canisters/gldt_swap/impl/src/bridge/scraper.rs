@@ -1,4 +1,4 @@
-//! The burn scraper (spec 7.5 and 8.7). A timer per chain reads the token's `bridgeInfo()` and
+//! The burn scraper. A timer per chain reads the token's `bridgeInfo()` and
 //! `BurnedToIcp` logs, and saves every burn exactly once, in burn id order, without gaps.
 //!
 //! The pure transitions decide what a tick does and change a `ChainState` only when an answer
@@ -31,7 +31,7 @@ const WAITING_FOR_SIGNERS: &str = "waiting for the signer keys to load";
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum TickAction {
-    /// No start block yet (spec 7.5).
+    /// No start block yet.
     FirstTick,
     /// No window is open: read the head, then `bridgeInfo()`.
     OpenWindow,
@@ -139,7 +139,7 @@ fn signer_problem(info: &BridgeInfo, expected: &Expected) -> Option<String> {
         })
 }
 
-/// The first tick (spec 7.5): `to_block` becomes the start block if the token shows no burn,
+/// The first tick: `to_block` becomes the start block if the token shows no burn,
 /// no supply, and the expected owner and signers. Otherwise the chain stops.
 pub fn apply_first_tick(
     chain: &mut ChainState,
@@ -307,7 +307,7 @@ impl From<RpcError> for Fail {
     }
 }
 
-/// One tick of `chain` (spec 8.7). Returns how many burns it saved, so the caller can start
+/// One tick of `chain`. Returns how many burns it saved, so the caller can start
 /// the mint processor.
 pub async fn run_tick<R: EvmReader>(reader: &R, chain: EvmChain) -> u64 {
     let mut saved = 0;
@@ -448,7 +448,7 @@ async fn fetch_batches<R: EvmReader>(
 
 /// After agreed logs failed the batch checks, reads `bridgeInfo()` at the window's end block
 /// again. A `nextBurnId` other than the window's end means a reorg deeper than the
-/// confirmations changed the window: the chain stops (spec 9 rule 9), and an SNS `ChainReset`
+/// confirmations changed the window: the chain stops, and an SNS `ChainReset`
 /// restarts it. Otherwise the tick fails with `error` and is retried; lagging providers can
 /// agree on missing logs.
 async fn check_window_reorg<R: EvmReader>(
@@ -981,10 +981,10 @@ mod tests {
         assert_eq!(window_target(&chain, &cfg(), 1_000), Some(600));
         assert_eq!(window_target(&chain, &cfg(), 300), Some(288));
         assert_eq!(window_target(&chain, &cfg(), 113), Some(101));
-        // Ethereum waits 3 confirmations
+        // Ethereum waits 12 confirmations too
         assert_eq!(
             window_target(&chain, &chain_config(EvmChain::Ethereum), 300),
-            Some(297)
+            Some(288)
         );
     }
 
@@ -1479,7 +1479,7 @@ mod tests {
 
     /// Agreed logs that fail the checks, and the window's end block now holds another
     /// `nextBurnId`: a reorg deeper than the confirmations changed the window, so the chain
-    /// stops (spec 9 rule 9) and an SNS ChainReset restarts it.
+    /// stops and an SNS ChainReset restarts it.
     #[test]
     fn failed_batch_checks_after_reorg_stop_the_chain() {
         // after the reorg only burns 0 and 1 exist at block 600

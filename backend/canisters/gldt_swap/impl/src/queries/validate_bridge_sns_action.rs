@@ -5,9 +5,9 @@ pub use gldt_swap_api_canister::validate_bridge_sns_action::{
 };
 use ic_cdk::update;
 
-/// The SNS validator of `bridge_sns_action` (spec 8.9): the text voters read, or why the action
+/// The SNS validator of `bridge_sns_action`: the text voters read, or why the action
 /// would fail. Open to every caller, so proposers can preview the text; it only reads state.
-/// An update, as in the spec's Candid, so SNS governance calls it as before.
+/// An update, not a query, so SNS governance can call it.
 #[update]
 pub fn validate_bridge_sns_action(
     action: ValidateBridgeSnsActionArgs,

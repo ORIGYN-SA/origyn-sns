@@ -1,4 +1,4 @@
-//! `bridge_sns_action` and its validator (spec 8.9 and 8.11): ORIGYN SNS governance, stood in
+//! `bridge_sns_action` and its validator: ORIGYN SNS governance, stood in
 //! for by `BridgeEnv::sns_governance`, gets admin actions signed with the canister's admin key,
 //! sets the ICP pause flags and resolves transfers the bridge can't settle by itself.
 

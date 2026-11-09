@@ -13,7 +13,7 @@ import { GLDT } from "../../src/GLDT.sol";
 import { IGLDT } from "../../src/IGLDT.sol";
 import { GLDTConfig, GLDTDeployment, GLDTConfigReader, IUlnConfigReader, IExecutorConfigReader, IEndpointDelegates } from "./GLDTConfig.sol";
 
-/// @notice Every check of spec 7.3, one PASS or FAIL line each. Returns the number of FAIL lines.
+/// @notice Every deployment check, one PASS or FAIL line each. Returns the number of FAIL lines.
 /// Check.s.sol runs it against a live chain; the fork test and Scripts.t.sol run it in process.
 abstract contract GLDTCheckCore is GLDTConfigReader {
     // OpenZeppelin's Initializable namespace:
@@ -63,7 +63,7 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
         return _summary();
     }
 
-    // Spec 7.3: supply, burns, pause, owner, delegate, signers, operator, minimum.
+    // Supply, burns, pause, owner, delegate, signers, operator, minimum.
     function _checkState(GLDTConfig memory c, GLDT token) private {
         _eq("totalSupply is 0", token.totalSupply(), 0);
         _eq("nextBurnId is 0", uint256(token.nextBurnId()), 0);
@@ -75,8 +75,8 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
             IEndpointDelegates(c.endpoint).delegates(address(token)),
             address(token)
         );
-        _eq("adminSigner is the config's (spec 7.1)", token.adminSigner(), c.adminSigner);
-        _eq("icpSigner is the config's (spec 7.1)", token.icpSigner(), c.icpSigner);
+        _eq("adminSigner is the config's", token.adminSigner(), c.adminSigner);
+        _eq("icpSigner is the config's", token.icpSigner(), c.icpSigner);
         _eq("operator is the config's", token.operator(), c.operator);
         _eq("minBurnToIcp is 1 GLDT", token.minBurnToIcp(), MIN_BURN_TO_ICP);
         _eq("decimals is 8", uint256(token.decimals()), 8);
@@ -85,7 +85,7 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
         _eqStr("symbol is the config's", token.symbol(), c.symbol);
     }
 
-    // Spec 7.3: the implementation's initializer can't be called, and neither can the proxy's again.
+    // The implementation's initializer can't be called, and neither can the proxy's again.
     function _checkInitializers(GLDTConfig memory c, GLDT token, address impl) private {
         uint256 raw = uint256(vm.load(impl, INITIALIZABLE_SLOT));
         _ok(
@@ -102,7 +102,7 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
         );
     }
 
-    // Spec 7.3: eip712Domain() is ("Gold Token", "1", chain id, proxy), the domain gldt_swap signs with.
+    // eip712Domain() is ("Gold Token", "1", chain id, proxy), the domain gldt_swap signs with.
     function _checkDomain(GLDTConfig memory c, GLDT token) private {
         (
             bytes1 fields,
@@ -129,7 +129,7 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
         _eq("DOMAIN_SEPARATOR matches the domain", token.DOMAIN_SEPARATOR(), expected);
     }
 
-    // Spec 7.3: peers, libraries, DVNs, executor, enforced options; nothing from LayerZero's defaults.
+    // Peers, libraries, DVNs, executor, enforced options; nothing from LayerZero's defaults.
     function _checkLayerZero(GLDTConfig memory c, GLDT token, address expectedPeer) private {
         ILayerZeroEndpointV2 endpoint = ILayerZeroEndpointV2(c.endpoint);
         address oapp = address(token);
@@ -183,7 +183,7 @@ abstract contract GLDTCheckCore is GLDTConfigReader {
         for (uint256 i = 0; i < c.sendDVNs.length; i++) _hasCode("send DVN", c.sendDVNs[i]);
         for (uint256 i = 0; i < c.receiveDVNs.length; i++) _hasCode("receive DVN", c.receiveDVNs[i]);
 
-        // Type 3 options, one lzReceive option of 16 bytes of gas and no value (spec 6.5).
+        // Type 3 options, one lzReceive option of 16 bytes of gas and no value.
         _eqBytes(
             string.concat("enforced options: lzReceive gas ", vm.toString(uint256(c.lzReceiveGas)), ", value 0"),
             token.enforcedOptions(c.peerEid, SEND),

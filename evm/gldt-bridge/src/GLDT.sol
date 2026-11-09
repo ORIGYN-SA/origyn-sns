@@ -106,7 +106,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         $.minBurnToIcp = p.minBurnToIcp;
     }
 
-    // User functions (spec 6.4)
+    // User functions
 
     /// @inheritdoc IGLDT
     function claimFromIcp(
@@ -143,7 +143,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         emit BurnedToIcp(burnId, msg.sender, icpPrincipal, icpSubaccount, amount);
     }
 
-    // Operator functions (spec 6.5)
+    // Operator functions
 
     /// @inheritdoc IGLDT
     function setPaused(bool lzPaused, bool icpBridgePaused) external onlyOperatorOrSelf {
@@ -159,7 +159,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         emit LzReceiveGasSet(dstEid, gas);
     }
 
-    // Admin actions (spec 6.6)
+    // Admin actions
 
     /// @inheritdoc IGLDT
     function execute(Call[] calldata calls, uint256 nonce, uint256 deadline, bytes calldata signature) external {
@@ -231,7 +231,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         emit NonceCancelled(nonce);
     }
 
-    // Views (spec 6.8)
+    // Views
 
     /// @inheritdoc IGLDT
     function hashExecute(Call[] calldata calls, uint256 nonce, uint256 deadline) public view returns (bytes32) {
@@ -292,7 +292,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         return _getGLDTStorage().nextBurnId;
     }
 
-    // Overrides (spec 6.7)
+    // Overrides
 
     /// @notice 8 decimals, like GLDT on ICP, so amounts map 1:1.
     function decimals() public pure override returns (uint8) {
@@ -314,7 +314,7 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
         revert OwnershipFixed();
     }
 
-    /// @dev Passes only inside upgradeExact: the token itself, upgrading to the implementation it allowed (spec 6.6).
+    /// @dev Passes only inside upgradeExact: the token itself, upgrading to the implementation it allowed.
     /// Outside upgradeExact upgradeAllowed is zero, and zero never passes.
     function _authorizeUpgrade(address newImplementation) internal view override {
         address allowed = _getGLDTStorage().upgradeAllowed;

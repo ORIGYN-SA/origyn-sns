@@ -6,14 +6,14 @@ import { Script, console2 } from "forge-std/Script.sol";
 import { GLDTConfig, GLDTDeployment } from "./lib/GLDTConfig.sol";
 import { GLDTDeployCore } from "./lib/GLDTDeployCore.sol";
 
-/// @notice Spec 7.3: deploys the GLDT implementation, then the proxy through CreateX CREATE3, from the operator
+/// @notice Deploys the GLDT implementation, then the proxy through CreateX CREATE3, from the operator
 /// wallet, and writes deployments/<chain>.json. Run on Ethereum, then Base, back to back, then run Check.s.sol.
 ///
 ///   forge script script/Deploy.s.sol --sig 'run(string)' ethereum \
 ///     --rpc-url <url> --ledger --sender <operator wallet> --broadcast
 ///
 /// `--account <keystore>` works in place of `--ledger`. Never pass a private key on the command line.
-/// Then verify the source on Etherscan and Basescan (spec 7.3 step 3), built with this same foundry.toml.
+/// Then verify the source on Etherscan and Basescan, built with this same foundry.toml.
 /// The file is written after the simulation, before the broadcast; its `block` is the block the simulation ran on,
 /// so the deployment lands at or after it.
 contract Deploy is Script, GLDTDeployCore {

@@ -1,4 +1,4 @@
-//! EVM to ICP (spec 8.8): the mint processor and the supply guard.
+//! EVM to ICP: the mint processor and the supply guard.
 //!
 //! The scraper saves each burn as `Queued` in map 2 and on the mint queue (map 3), and adds its
 //! amount to `unminted_e8s`. Each `bridge_process` round first retries every mint whose outcome
@@ -6,7 +6,7 @@
 //! order, one at a time. While a mint's outcome is still unknown, no new mint goes out, so a
 //! ledger outage leaves at most one transfer to settle. Before each new mint:
 //!
-//! - rule 1: the burn is not above `bridged_out`;
+//! - the `bridged_out` cap: the burn is not above `bridged_out`;
 //! - the supply guard: the chains' supply readings plus `unminted_e8s` are not above
 //!   `bridged_out`, in U256 with saturating sums, so a saturated sum holds.
 //!
@@ -45,7 +45,7 @@ pub const MAX_MINTS_PER_RUN: usize = 100;
 pub enum MintDecision {
     Mint(InboundKey),
     HoldGuard,
-    HoldRule1,
+    HoldOverBridgedOut,
     /// A mint's outcome is still unknown; it settles before the next one goes out.
     HoldUnknown,
     Paused,
@@ -87,7 +87,7 @@ impl Minter for IcMinter {
             .map_err(|e| warn!(error = ?e, "inbound mint got no reply"))
             .ok();
         #[cfg(feature = "inttest")]
-        if crate::bridge::test_hooks::take_lost_reply(crate::bridge::test_hooks::LedgerCall::Mint) {
+        if crate::inttest::take_lost_reply(crate::inttest::LedgerCall::Mint) {
             warn!(?reply, "inbound mint answer dropped by the test hook");
             return None;
         }
@@ -148,9 +148,9 @@ pub fn release_unminted(state: &mut BridgeState, amount: U256) {
     };
 }
 
-/// Spec 8.8 for the head of the mint queue. A `MintUnknown` head holds new mints until it
+/// What to do with the head of the mint queue. A `MintUnknown` head holds new mints until it
 /// settles; a `NeedsManualCheck` has left the queue and holds nothing. For a `Queued` head:
-/// rule 1 first (it needs no reading), then the supply guard.
+/// the `bridged_out` cap first (it needs no reading), then the supply guard.
 pub fn next_mint(state: &BridgeState) -> MintDecision {
     let Some((key, record)) = queue_head() else {
         return MintDecision::Empty;
@@ -162,7 +162,7 @@ pub fn next_mint(state: &BridgeState) -> MintDecision {
         return MintDecision::Paused;
     }
     if record.amount > U256::from(state.bridged_out) {
-        return MintDecision::HoldRule1;
+        return MintDecision::HoldOverBridgedOut;
     }
     if guard_holds(state, state.unminted_e8s) {
         return MintDecision::HoldGuard;
@@ -279,7 +279,7 @@ fn quarantine(
 /// deduplication lookup, so on a retry only `TooOld` settles anything besides `Ok` and
 /// `Duplicate`: every other refusal leaves the outcome unknown. A retry is never quarantined,
 /// because a quarantined burn may be minted again by an SNS resolve. On the first call a refusal
-/// is final, except `TemporarilyUnavailable` (spec 8.8).
+/// is final, except `TemporarilyUnavailable`.
 pub fn classify_mint(reply: Option<TransferResponse>, retry: bool) -> MintResult {
     use TransferError as E;
     match reply {
@@ -324,7 +324,7 @@ pub fn apply_mint_result(
     let (chain, burn_id) = (record.chain, record.burn_id);
     match result {
         MintResult::Ok(index) | MintResult::Duplicate(index) => {
-            // rule 1 held it to `bridged_out`, a u128, before the first call
+            // the cap held it to `bridged_out`, a u128, before the first call
             let amount = u128::try_from(record.amount)
                 .unwrap_or_else(|_| panic!("inbound {chain:?} burn {burn_id} minted above u128"));
             record.status = InboundStatus::Minted {
@@ -452,7 +452,7 @@ pub fn transfers_in_by_account(
 }
 
 /// The first inbound step of `bridge_process`: retries every mint whose outcome is unknown with
-/// its stored arguments. It runs while paused too (spec 8.10), and checks neither rule 1 nor the
+/// its stored arguments. It runs while paused too, and checks neither the cap nor the
 /// guard: these mints passed them before their first call.
 pub async fn settle_unknown_mints<M: Minter>(minter: &M, minting_owner: Principal) {
     for key in unknown_keys() {
@@ -485,7 +485,7 @@ pub async fn mint_queue<M: Minter>(minter: &M, minting_owner: Principal) {
                 MintDecision::Paused | MintDecision::HoldUnknown => return None,
                 MintDecision::Empty => None,
                 MintDecision::HoldGuard => Some(MintHold::Guard),
-                MintDecision::HoldRule1 => Some(MintHold::Rule1),
+                MintDecision::HoldOverBridgedOut => Some(MintHold::OverBridgedOut),
             };
             track_mint_hold(bridge, hold, now);
             None
@@ -503,7 +503,7 @@ pub async fn mint_queue<M: Minter>(minter: &M, minting_owner: Principal) {
     }
 }
 
-/// One `bridge_process` round (spec 8.8): settles the mints whose outcome is unknown, runs
+/// One `bridge_process` round: settles the mints whose outcome is unknown, runs
 /// `outbound` (the outbound half), then mints the queue, which waits while a mint is still
 /// unknown. `minter` is `None` when the GLDT ledger is not known: only `outbound` runs.
 pub async fn process_round<M: Minter>(
@@ -871,7 +871,7 @@ mod tests {
         let state = bridge();
         assert_eq!(state.unminted_e8s, U256::MAX);
         assert!(guard_holds(&state, state.unminted_e8s));
-        // the small burn passes rule 1, and the saturated total holds it
+        // the small burn passes the cap, and the saturated total holds it
         assert_eq!(decision(), MintDecision::HoldGuard);
         let minter = FakeMinter::default();
         mint(&minter);
@@ -920,18 +920,18 @@ mod tests {
             }
         });
         save(vec![burn(0, e8s(6 * ONE), user())]);
-        assert_eq!(decision(), MintDecision::HoldRule1);
-        // even with guard inputs that would pass, rule 1 holds the mint
+        assert_eq!(decision(), MintDecision::HoldOverBridgedOut);
+        // even with guard inputs that would pass, the cap holds the mint
         mutate_state(|s| s.data.bridge.unminted_e8s = U256::ZERO);
         assert!(!guard_holds(&bridge(), U256::ZERO));
-        assert_eq!(decision(), MintDecision::HoldRule1);
+        assert_eq!(decision(), MintDecision::HoldOverBridgedOut);
 
         let minter = FakeMinter::default();
         mint(&minter);
         mint(&minter);
         assert!(minter.calls().is_empty());
         assert_eq!(status(0), InboundStatus::Queued);
-        let alerts = alerts_with("rule 1");
+        let alerts = alerts_with("the next burn is above bridged_out");
         assert_eq!(alerts.len(), 1, "{alerts:?}");
         assert_eq!(alerts[0].0, Severity::Critical);
     }

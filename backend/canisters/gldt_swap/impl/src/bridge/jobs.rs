@@ -1,4 +1,4 @@
-//! The bridge timers (spec 8.15). Timers don't survive upgrades, so `start_jobs` sets them
+//! The bridge timers. Timers don't survive upgrades, so `start_jobs` sets them
 //! again after init and every upgrade.
 
 use crate::bridge::alerts::track_cycles;
@@ -45,7 +45,7 @@ pub fn start() {
     }
 }
 
-/// Runs the first tick at once on every chain without a start block (spec 7.5). The first
+/// Runs the first tick at once on every chain without a start block. The first
 /// tick compares the token's signers with the canister's, so `load_signers` calls this when
 /// both keys are loaded, right after init and every upgrade.
 pub fn start_first_ticks() {
@@ -88,7 +88,7 @@ async fn scrape(chain: EvmChain) {
     }
 }
 
-/// Checks the cycle balance every minute (spec 8.14). Then `bridge_process` (spec 8.8), only
+/// Checks the cycle balance every minute. Then `bridge_process`, only
 /// when there is work: first the mints whose outcome is unknown, then the outbound half (burns
 /// whose outcome is unknown, and vouchers), then the mint queue, which waits while a mint is
 /// still unknown. The outbound half always runs.

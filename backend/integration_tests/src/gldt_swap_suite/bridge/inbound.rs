@@ -1,6 +1,6 @@
 //! EVM to ICP: the scraper opens each chain at its first tick and finds burns on Ethereum
-//! and Base (spec 7.5 and 8.7), and the processor mints them on ICP under the supply guard
-//! (spec 8.8). The EVM nodes are mocked through PocketIC's HTTPS outcalls.
+//! and Base, and the processor mints them on ICP under the supply guard.
+//! The EVM nodes are mocked through PocketIC's HTTPS outcalls.
 
 use crate::client::gldt_swap::{
     get_bridge_status, get_bridge_transfer_in, get_bridge_transfers_in_by_account,
@@ -68,7 +68,7 @@ fn first_tick_opens_chains() {
 
     start_all_chains(&mut env);
 
-    for (evm_chain, confirmations) in [(EvmChain::Ethereum, 3), (EvmChain::Base, 12)] {
+    for (evm_chain, confirmations) in [(EvmChain::Ethereum, 12), (EvmChain::Base, 12)] {
         let c = chain(&env, evm_chain);
         let start = FIRST_HEAD - confirmations;
         assert_eq!(c.start_block, Some(start), "{evm_chain:?}");

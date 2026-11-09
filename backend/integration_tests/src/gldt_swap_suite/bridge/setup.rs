@@ -304,7 +304,7 @@ pub fn chain_config(chain: EvmChain) -> ChainConfig {
             1,
             30101,
             FAKE_ETHEREUM_TOKEN,
-            3,
+            12,
             "https://ethereum-rpc.publicnode.com",
         ),
         EvmChain::Base => (

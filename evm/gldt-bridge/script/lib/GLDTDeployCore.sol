@@ -6,11 +6,11 @@ import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy
 import { GLDT } from "../../src/GLDT.sol";
 import { GLDTConfig, GLDTDeployment, GLDTConfigReader, ICreateX } from "./GLDTConfig.sol";
 
-/// @notice Spec 7.3 steps 1 and 2: the implementation, then the proxy through CreateX CREATE3 with the salt.
+/// @notice The implementation, then the proxy through CreateX CREATE3 with the salt.
 /// Deploy.s.sol runs this under broadcast; the fork test runs it under a prank of the operator wallet.
 abstract contract GLDTDeployCore is GLDTConfigReader {
     /// @notice CreateX's guard for a salt that starts with the caller and has byte 21 = 0x00: permissioned, with no
-    /// chain id mixed in, so the same wallet and salt give the same address on every chain (spec 7.2).
+    /// chain id mixed in, so the same wallet and salt give the same address on every chain.
     function _guardedSalt(address deployer, bytes32 salt) internal pure returns (bytes32) {
         return keccak256(abi.encode(deployer, salt));
     }
@@ -23,7 +23,7 @@ abstract contract GLDTDeployCore is GLDTConfigReader {
     /// @notice Reverts unless the config is complete and `deployer` is the wallet the salt names.
     function _validateForDeploy(GLDTConfig memory c, address deployer) internal view {
         require(c.operator != address(0), "config: operator is not set");
-        require(deployer == c.operator, "deployer: the operator wallet deploys (spec 7.3)");
+        require(deployer == c.operator, "deployer: the operator wallet deploys");
         require(c.salt != bytes32(0), "config: salt is not set");
         require(address(bytes20(c.salt)) == deployer, "config: the salt must start with the deployer address");
         require(c.salt[20] == 0x00, "config: byte 21 of the salt must be 0x00 (no cross-chain redeploy protection)");
@@ -32,7 +32,7 @@ abstract contract GLDTDeployCore is GLDTConfigReader {
         require(c.executor != address(0) && c.maxMessageSize > 0, "config: executor or maxMessageSize is not set");
         require(c.sendConfirmations > 0 && c.receiveConfirmations > 0, "config: confirmations are not set");
         require(_sortedDvns(c.sendDVNs) && _sortedDvns(c.receiveDVNs), "config: DVNs must be set and sorted ascending");
-        require(c.sendDVNs.length >= 2 && c.receiveDVNs.length >= 2, "config: two required DVNs (spec 6.11)");
+        require(c.sendDVNs.length >= 2 && c.receiveDVNs.length >= 2, "config: two required DVNs");
         require(c.eid != 0 && c.peerEid != 0 && c.eid != c.peerEid, "config: eid and peerEid");
         require(keccak256(bytes(c.name)) == keccak256(bytes(TOKEN_NAME)), "config: name must be Gold Token");
         require(keccak256(bytes(c.symbol)) == keccak256(bytes(TOKEN_SYMBOL)), "config: symbol must be GLDT");

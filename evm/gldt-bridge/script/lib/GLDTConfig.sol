@@ -72,7 +72,7 @@ interface ICreateX {
 /// @notice Reads the config and deployment files and builds InitParams, for Deploy, Check and the fork test.
 abstract contract GLDTConfigReader is CommonBase {
     address internal constant CREATEX = 0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed;
-    uint256 internal constant MIN_BURN_TO_ICP = 100_000_000; // 1 GLDT with 8 decimals (spec 6.2)
+    uint256 internal constant MIN_BURN_TO_ICP = 100_000_000; // 1 GLDT with 8 decimals
     string internal constant TOKEN_NAME = "Gold Token"; // also the EIP-712 domain name gldt_swap signs with
     string internal constant TOKEN_SYMBOL = "GLDT";
     uint32 internal constant CONFIG_TYPE_EXECUTOR = 1;
@@ -148,7 +148,7 @@ abstract contract GLDTConfigReader is CommonBase {
         });
     }
 
-    /// @notice Every ULN field explicit: only required DVNs, optional count NIL and threshold 0 (spec 6.11).
+    /// @notice Every ULN field explicit: only required DVNs, optional count NIL and threshold 0.
     function _uln(uint64 confirmations, address[] memory dvns) internal pure returns (UlnConfig memory) {
         return
             UlnConfig({

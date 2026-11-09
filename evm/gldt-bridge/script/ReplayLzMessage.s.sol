@@ -7,8 +7,8 @@ import { PacketV1Codec } from "@layerzerolabs/lz-evm-protocol-v2/contracts/messa
 
 import { GLDT } from "../src/GLDT.sol";
 
-/// @notice Delivers a LayerZero message that the endpoint holds for GLDT, for example one rejected while lzPaused
-/// (spec 6.7). LayerZero's executor does not retry on its own, and anyone may call endpoint.lzReceive. Run it on
+/// @notice Delivers a LayerZero message that the endpoint holds for GLDT, for example one rejected while lzPaused.
+/// LayerZero's executor does not retry on its own, and anyone may call endpoint.lzReceive. Run it on
 /// the destination chain, after the unpause, with either the encoded packet from the source chain's PacketSent
 /// event, or the message's parts (LayerZero Scan shows them):
 ///

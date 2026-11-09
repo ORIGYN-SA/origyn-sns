@@ -1,4 +1,4 @@
-//! Reading Ethereum and Base (spec 8.7).
+//! Reading Ethereum and Base.
 //!
 //! - The head block comes from one unreplicated HTTPS outcall to the chain's `head_rpc_url`.
 //!   It can only change timing: a wrong head makes a later call fail or wait.

@@ -1,4 +1,4 @@
-//! End to end against a local anvil chain (spec 11 step 3). `DeployLocal.s.sol` deploys the
+//! End to end against a local anvil chain. `DeployLocal.s.sol` deploys the
 //! LayerZero test stack and GLDT with the canister's two addresses as signers, and every PocketIC
 //! outcall (gldt_swap's head call and the EVM RPC canister's calls) goes to anvil. A
 //! `bridge_to_evm` voucher claims on anvil through `cast send`, a `burnToIcp` on anvil is minted

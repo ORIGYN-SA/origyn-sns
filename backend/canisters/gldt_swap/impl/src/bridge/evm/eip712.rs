@@ -1,4 +1,4 @@
-//! The EIP-712 digests the canister signs (spec 6.4 and 6.6).
+//! The EIP-712 digests the canister signs.
 //!
 //! Claims, admin actions and EIP-2612 permits share the token's domain
 //! `("Gold Token", "1", chainId, token proxy)`: the name is the token's `name()`, set by

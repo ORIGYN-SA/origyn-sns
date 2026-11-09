@@ -7,7 +7,7 @@ import { SetConfigParam } from "@layerzerolabs/lz-evm-protocol-v2/contracts/inte
 /// @notice Structs, events, errors and the GLDT specific functions of the token.
 /// The inherited LayerZero OFT, ERC-20, EIP-2612 and UUPS functions are not repeated here.
 interface IGLDT {
-    /// @notice Everything `initialize` sets, inside the proxy deployment (spec 6.2).
+    /// @notice Everything `initialize` sets, inside the proxy deployment.
     struct InitParams {
         string name; // "Gold Token"
         string symbol; // "GLDT"
@@ -24,7 +24,7 @@ interface IGLDT {
         uint256 minBurnToIcp; // 100_000_000 (1 GLDT with 8 decimals)
     }
 
-    /// @notice One call inside an admin action signed by gldt_swap (spec 6.6).
+    /// @notice One call inside an admin action signed by gldt_swap.
     struct Call {
         address target;
         bytes data;
@@ -63,30 +63,30 @@ interface IGLDT {
     error CodeHashMismatch();
     error UpgradeNotAllowed();
     error OwnershipFixed();
-    /// @notice `initialize` got an empty `sendConfig` or `receiveConfig` (spec 6.2 names no error for this).
+    /// @notice `initialize` got an empty `sendConfig` or `receiveConfig`.
     error EmptyConfig();
-    /// @notice `minBurnToIcp` must be above 0 (spec 6.2 and 6.6 name no error for this).
+    /// @notice `minBurnToIcp` must be above 0.
     error ZeroMinBurn();
 
-    /// @notice One time setup, run by the proxy constructor (spec 6.2).
+    /// @notice One time setup, run by the proxy constructor.
     function initialize(InitParams calldata p) external;
 
-    /// @notice Mints `amount` to `recipient` for an ICP burn, with a voucher signed by the claims key (spec 6.4).
+    /// @notice Mints `amount` to `recipient` for an ICP burn, with a voucher signed by the claims key.
     /// Anyone may submit it. Each ICP burn index claims once.
     function claimFromIcp(uint64 icpBurnIndex, address recipient, uint256 amount, bytes calldata signature) external;
 
-    /// @notice Burns the caller's `amount` for the ICP account (`icpPrincipal`, `icpSubaccount`) (spec 6.4).
+    /// @notice Burns the caller's `amount` for the ICP account (`icpPrincipal`, `icpSubaccount`).
     /// gldt_swap finds the burn by its id and mints on ICP.
     function burnToIcp(uint256 amount, bytes32 icpPrincipal, bytes32 icpSubaccount) external returns (uint64 burnId);
 
-    /// @notice Operator or the token itself: sets both pause flags (spec 6.5).
+    /// @notice Operator or the token itself: sets both pause flags.
     function setPaused(bool lzPaused, bool icpBridgePaused) external;
 
-    /// @notice Operator or the token itself: sets the enforced lzReceive gas for `dstEid`, value always 0 (spec 6.5).
+    /// @notice Operator or the token itself: sets the enforced lzReceive gas for `dstEid`, value always 0.
     function setLzReceiveGas(uint32 dstEid, uint128 gas) external;
 
     /// @notice Runs `calls` signed by the admin key (gldt_swap, after an ORIGYN SNS vote). Anyone may submit
-    /// (spec 6.6). Each call targets the token itself, or the LayerZero endpoint with setConfig, setSendLibrary,
+    /// it. Each call targets the token itself, or the LayerZero endpoint with setConfig, setSendLibrary,
     /// setReceiveLibrary or burn. If any call fails the whole batch reverts and the nonce stays unused.
     function execute(Call[] calldata calls, uint256 nonce, uint256 deadline, bytes calldata signature) external;
 
@@ -97,7 +97,7 @@ interface IGLDT {
     function setIcpSigner(address signer) external;
 
     /// @notice Only the token itself: replaces the key that signs `execute`, which moves control of the token
-    /// (spec 5.7). Never zero.
+    /// to a new key. Never zero.
     function setAdminSigner(address signer) external;
 
     /// @notice Only the token itself: the smallest `burnToIcp`, above 0.
@@ -109,7 +109,7 @@ interface IGLDT {
     /// @notice Only the token itself: marks an unused nonce as used, so the action signed for it can never run.
     function cancelNonce(uint256 nonce) external;
 
-    /// @notice Everything the canister reads each tick, in one call (spec 6.8).
+    /// @notice Everything the canister reads each tick, in one call.
     function bridgeInfo()
         external
         view

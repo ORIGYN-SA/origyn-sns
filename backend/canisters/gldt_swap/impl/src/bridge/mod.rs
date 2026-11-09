@@ -14,8 +14,6 @@ pub mod signer;
 pub mod sns;
 pub mod stable;
 pub mod state;
-#[cfg(feature = "inttest")]
-pub mod test_hooks;
 
 use crate::model::swap_configs::SwapConfigs;
 use crate::state::read_state;

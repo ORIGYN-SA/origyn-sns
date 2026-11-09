@@ -188,7 +188,7 @@ abstract contract GLDTFixture is TestHelperOz5 {
             );
     }
 
-    // Admin actions (spec 6.6), hashed from the type strings and never from the contract.
+    // Admin actions, hashed from the type strings and never from the contract.
 
     /// @notice The admin action digest gldt_swap signs for `token`.
     function executeDigest(

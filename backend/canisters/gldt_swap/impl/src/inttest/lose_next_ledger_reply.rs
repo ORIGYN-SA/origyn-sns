@@ -1,9 +1,10 @@
-//! Integration build only. A PocketIC test can make the canister lose the answer to its next
-//! mint or burn on the GLDT ledger after the ledger ran it, as a lost reply or a trap after the
-//! await would. The retry then sends the same memo and `created_at_time`, and the ledger must
-//! answer `Duplicate`.
+//! A PocketIC test can make the canister lose the answer to its next mint or burn on the GLDT
+//! ledger after the ledger ran it, as a lost reply or a trap after the await would. The retry
+//! then sends the same memo and `created_at_time`, and the ledger must answer `Duplicate`.
 
+use crate::guards::caller_is_authorized;
 use candid::{CandidType, Deserialize};
+use ic_cdk::update;
 use std::cell::Cell;
 
 /// Which ledger call loses its answer.
@@ -27,12 +28,14 @@ fn flag(call: LedgerCall) -> &'static std::thread::LocalKey<Cell<bool>> {
     }
 }
 
-/// The next `call` runs on the ledger, but the canister drops its answer.
-pub fn lose_next_reply(call: LedgerCall) {
+/// The canister's next `call` on the GLDT ledger runs, but the canister drops its answer, as if
+/// the call had got no reply.
+#[update(guard = "caller_is_authorized")]
+fn _bridge_lose_next_ledger_reply(call: LedgerCall) {
     flag(call).with(|f| f.set(true));
 }
 
-/// True once after [lose_next_reply] for `call`.
+/// True once after `_bridge_lose_next_ledger_reply` for `call`.
 pub fn take_lost_reply(call: LedgerCall) -> bool {
     flag(call).with(|f| f.replace(false))
 }

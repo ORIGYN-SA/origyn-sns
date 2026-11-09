@@ -1,5 +1,5 @@
-//! Bridge health (spec 8.14): failed ticks in a row, a cursor that stopped moving, and a mint
-//! queue held by the supply guard or rule 1.
+//! Bridge health: failed ticks in a row, a cursor that stopped moving, and a mint
+//! queue held by the supply guard or the `bridged_out` cap.
 //!
 //! An alert is raised once when a condition starts, not on every tick, so the ring of 100
 //! alerts keeps older ones such as `NeedsManualCheck`.
@@ -17,8 +17,8 @@ pub const STALE_CURSOR_NANOS: u64 = 30 * 60 * 1_000_000_000;
 /// Errors are kept to this many bytes in `last_error` and in alerts.
 pub const MAX_ERROR_LEN: usize = 300;
 
-/// Below this balance the bridge alerts that cycles run low (spec 8.14 gives no number). At
-/// spec 8.16's estimate of about 1.7 T cycles a day for scraping, it is about a day left.
+/// Below this balance the bridge alerts that cycles run low. At about 1.7 T cycles a day for
+/// scraping, it is about a day left.
 pub const LOW_CYCLES: u128 = 2_000_000_000_000;
 
 /// Alerts once when the balance drops below [LOW_CYCLES], and again only after it was above.
@@ -94,8 +94,8 @@ pub fn check_stale_cursor(state: &mut BridgeState, chain: EvmChain, confirmed_he
 
 /// Alerts once when the mint queue starts to wait on `hold`, or waits on another check than
 /// before. `None` (a mint went out, or nothing is queued) ends the hold. A guard hold is a
-/// Warning, since a LayerZero transfer can count on both chains for a moment; a rule 1 hold is
-/// Critical, since no honest burn is above `bridged_out`.
+/// Warning, since a LayerZero transfer can count on both chains for a moment; a `bridged_out` cap
+/// hold is Critical, since no honest burn is above `bridged_out`.
 pub fn track_mint_hold(state: &mut BridgeState, hold: Option<MintHold>, now: u64) {
     if state.mint_hold == hold {
         return;
@@ -111,10 +111,10 @@ pub fn track_mint_hold(state: &mut BridgeState, hold: Option<MintHold>, now: u64
                 state.bridged_out
             ),
         ),
-        Some(MintHold::Rule1) => (
+        Some(MintHold::OverBridgedOut) => (
             Severity::Critical,
             format!(
-                "minting waits: the next burn is above bridged_out ({} e8s), rule 1",
+                "minting waits: the next burn is above bridged_out ({} e8s)",
                 state.bridged_out
             ),
         ),

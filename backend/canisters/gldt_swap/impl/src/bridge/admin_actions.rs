@@ -1,4 +1,4 @@
-//! Typed EVM admin actions (spec 8.9): the canister builds every `execute` call itself from a
+//! Typed EVM admin actions: the canister builds every `execute` call itself from a
 //! typed action, so voters read what they approve, and signs the batch with its admin key.
 //!
 //! Every call targets the chain's configured token or its LayerZero endpoint, and only through
@@ -75,7 +75,7 @@ impl PendingAdminAction {
     }
 }
 
-/// Checks one request (spec 8.9) and builds its calls and voter text. Changes nothing.
+/// Checks one request and builds its calls and voter text. Changes nothing.
 pub fn check_request(state: &BridgeState, req: &EvmAdminRequest) -> Result<CheckedRequest, String> {
     let config = state
         .config

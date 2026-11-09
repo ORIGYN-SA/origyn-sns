@@ -3,8 +3,9 @@
     "layerzero": "https://metadata.layerzero-api.com/v1/metadata/deployments, key base-mainnet: deployments[version 2] endpointV2, sendUln302, receiveUln302, executor, and dvns (fetched 2026-11-06)",
     "dvns": "LayerZero Labs 0x9e059a54699a285714207b43B055483E78FAac25 (id layerzero-labs) and Twinstake 0xcd37CA043f8479064e10635020c65FfC005d36f6 (id nethermind, the Nethermind DVN now run by Twinstake); also listed in https://metadata.layerzero-api.com/v1/metadata/dvns",
     "defaults": "SendUln302.getUlnConfig(0x0, 30101) and ReceiveUln302.getUlnConfig(0x0, 30101) on Base at block 53978427: LayerZero's default confirmations 10 out and 15 in, both DVNs in the default required set, executor 0x2CCA08ae69E0C44b18a57Ab2A87644234dAebaE4 with maxMessageSize 10000",
-    "signers": "tools/evm-signers: node evm-signers.mjs --json (canister 6f6ua-hqaaa-aaaar-qairq-cai, key_1, both live checks match), 2026-11-06; spec 7.1",
-    "operator_and_salt": "Not set yet. Fill in the operator wallet and a salt of that wallet address, then 0x00, then 11 random bytes (spec 7.2), the same in ethereum.json. Deploy refuses zero values."
+    "confirmations": "12 blocks each way, our choice. LayerZero's defaults are in \"defaults\"; the receive value here must equal the send value in ethereum.json.",
+    "signers": "tools/evm-signers: node evm-signers.mjs --json (canister 6f6ua-hqaaa-aaaar-qairq-cai, key_1, both live checks match), 2026-11-06",
+    "operator_and_salt": "Not set yet. Fill in the operator wallet and a salt of that wallet address, then 0x00, then 11 random bytes, the same in ethereum.json. Deploy refuses zero values."
   },
   "chain": "base",
   "chainId": 8453,
@@ -16,14 +17,14 @@
   "sendConfig": {
     "executor": "0x2CCA08ae69E0C44b18a57Ab2A87644234dAebaE4",
     "maxMessageSize": 10000,
-    "confirmations": 10,
+    "confirmations": 12,
     "requiredDVNs": [
       "0x9e059a54699a285714207b43B055483E78FAac25",
       "0xcd37CA043f8479064e10635020c65FfC005d36f6"
     ]
   },
   "receiveConfig": {
-    "confirmations": 15,
+    "confirmations": 12,
     "requiredDVNs": [
       "0x9e059a54699a285714207b43B055483E78FAac25",
       "0xcd37CA043f8479064e10635020c65FfC005d36f6"

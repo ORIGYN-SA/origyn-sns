@@ -99,7 +99,7 @@ contract ScriptsTest is GLDTFixture {
         harness.validateForDeploy(c, wallet);
 
         c.operator = wallet;
-        vm.expectRevert(bytes("deployer: the operator wallet deploys (spec 7.3)"));
+        vm.expectRevert(bytes("deployer: the operator wallet deploys"));
         harness.validateForDeploy(c, makeAddr("someone else"));
         vm.expectRevert(bytes("config: salt is not set"));
         harness.validateForDeploy(c, wallet);

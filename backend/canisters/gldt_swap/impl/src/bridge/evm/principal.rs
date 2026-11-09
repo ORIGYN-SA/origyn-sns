@@ -1,4 +1,4 @@
-//! ICP accounts in the `BurnedToIcp` event (spec 6.4 and 13).
+//! ICP accounts in the `BurnedToIcp` event.
 //!
 //! The principal is a `bytes32`: byte 0 is its length (1 to 29), then the principal bytes,
 //! then zeros. This is the encoding DFINITY's ckETH helper contract uses, and exactly what the

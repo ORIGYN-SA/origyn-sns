@@ -245,7 +245,7 @@ fn tick_until(env: &BridgeEnv, what: &str, done: impl Fn() -> bool) {
     panic!("{what} did not happen within 50 rounds");
 }
 
-/// Spec 9.4 and 9.8: an upgrade loses no work. gldt_swap is upgraded with a scrape window half
+/// An upgrade loses no work. gldt_swap is upgraded with a scrape window half
 /// saved, a mint and a burn whose answers were lost after the ledger ran them. Afterwards the
 /// window goes on from the saved burn id, and both retries, with the same memo and
 /// `created_at_time`, settle as `Duplicate` at the first call's block. Nothing moves twice.

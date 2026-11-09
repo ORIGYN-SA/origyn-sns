@@ -6,7 +6,7 @@ import { Script } from "forge-std/Script.sol";
 import { GLDTConfig, GLDTDeployment } from "./lib/GLDTConfig.sol";
 import { GLDTCheckCore } from "./lib/GLDTCheckCore.sol";
 
-/// @notice Spec 7.3: checks a deployed GLDT against its config, one PASS or FAIL line per item, and exits non-zero
+/// @notice Checks a deployed GLDT against its config, one PASS or FAIL line per item, and exits non-zero
 /// if any item fails. Read only: it never broadcasts. Run it on both chains; the peer must be the same proxy
 /// address on each, so together the two runs prove the peers point both ways.
 ///

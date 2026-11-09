@@ -1,4 +1,4 @@
-//! ICP to EVM (spec 8.6): `bridge_to_evm`, settling burns whose outcome is unknown, and
+//! ICP to EVM: `bridge_to_evm`, settling burns whose outcome is unknown, and
 //! signing the claim vouchers users submit on Ethereum or Base.
 //!
 //! A transfer goes `Burning`, then `Burned`, then `Signed`. A burn whose outcome is unknown
@@ -65,7 +65,7 @@ pub fn out_memo(id: u64) -> Memo {
     Memo::from(memo)
 }
 
-/// The synchronous part of `bridge_to_evm` (spec 8.6 steps 1 to 3): checks, then the id,
+/// The synchronous part of `bridge_to_evm`: checks, then the id,
 /// memo and `created_at_time` are fixed, `out_pending` is reserved and the transfer is stored
 /// as `Burning`. Nothing changes when it returns an error.
 pub fn begin_outbound(
@@ -120,7 +120,7 @@ pub fn begin_outbound(
     Ok(record)
 }
 
-/// Spec 8.6 step 1: both signer keys are loaded, every configured chain has a start block,
+/// Both signer keys are loaded, every configured chain has a start block,
 /// and `chain` is not stopped.
 fn check_ready(state: &BridgeState, chain: EvmChain) -> Result<(), BridgeError> {
     let config = state
@@ -199,7 +199,7 @@ fn block_index(n: &Nat) -> Option<u64> {
     u64::try_from(&n.0).ok()
 }
 
-/// Spec 8.6 step 4. Applies a burn result to a transfer that is `Burning` or `BurnUnknown`
+/// Applies a burn result to a transfer that is `Burning` or `BurnUnknown`
 /// and returns the updated transfer. Any other status is left alone (`None`), so a late or
 /// repeated answer can never move the counters twice.
 pub fn apply_burn_result(
@@ -364,7 +364,7 @@ pub fn transfers_out_by_account(
     })
 }
 
-/// `bridge_to_evm` (spec 8.6). Returns the transfer as it stands: `Signed` normally,
+/// `bridge_to_evm`. Returns the transfer as it stands: `Signed` normally,
 /// `BurnUnknown` or `Burned` when the processor finishes it later, or the ledger's refusal.
 pub async fn bridge_to_evm_impl(args: BridgeToEvmArgs) -> Result<OutboundTransfer, BridgeError> {
     let caller = read_state(|s| s.env.caller());
@@ -416,9 +416,7 @@ async fn burn(
         .map_err(|e| warn!(id = record.id, error = ?e, "outbound burn got no reply"))
         .ok();
     #[cfg(feature = "inttest")]
-    let reply = if crate::bridge::test_hooks::take_lost_reply(
-        crate::bridge::test_hooks::LedgerCall::Burn,
-    ) {
+    let reply = if crate::inttest::take_lost_reply(crate::inttest::LedgerCall::Burn) {
         warn!(
             id = record.id,
             ?reply,
@@ -455,8 +453,8 @@ async fn sign_voucher(id: u64) {
 }
 
 /// The outbound half of `bridge_process`: retries every burn whose outcome is unknown with
-/// the stored arguments, and signs every `Burned` transfer. It runs while paused too (spec
-/// 8.10): these users already started or paid.
+/// the stored arguments, and signs every `Burned` transfer. It runs while paused too: these
+/// users already started or paid.
 ///
 /// A `Burning` transfer that no call holds is retried like `BurnUnknown`: its first call
 /// ended without applying an answer (a trap after the await), so it may have burned.
