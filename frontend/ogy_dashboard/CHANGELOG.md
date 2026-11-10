@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.58] - 2026-11-10
+
+#### Changed
+
+- Hide AI collections from the Viewer, including their certificates, transactions, search results and direct links.
+
 ### [1.0.57] - 2026-09-29
 
 #### Added
