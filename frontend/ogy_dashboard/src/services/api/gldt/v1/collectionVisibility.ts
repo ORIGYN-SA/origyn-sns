@@ -13,15 +13,15 @@ const DISABLED_COLLECTION_IDS: ReadonlySet<string> = new Set([
 export const isCollectionVisible = (canisterId: string) =>
   !DISABLED_COLLECTION_IDS.has(canisterId);
 
-const visibleCollection = (collection: { canister_id: string }) =>
-  isCollectionVisible(collection.canister_id);
+export type IsVisible = (canisterId: string) => boolean;
 
 // Offsets refer to visible rows. Read one extra result so pagination never
 // advertises a next page made up entirely of hidden rows. Until exhausted,
 // total is the number of visible rows discovered, not the server's raw total.
 const fetchVisiblePage = async <T>(
   fetchPage: (params: PageParams) => Promise<ApiNftListPage<T>>,
-  isVisible: (item: T) => boolean,
+  idOf: (item: T) => string,
+  isVisible: IsVisible,
   { limit = 12, offset = 0 }: PageParams = {}
 ): Promise<ApiNftListPage<T>> => {
   const items: T[] = [];
@@ -31,9 +31,9 @@ const fetchVisiblePage = async <T>(
 
   while (items.length < offset + limit + 1) {
     const page = await fetchPage({ limit: batchSize, offset: rawOffset });
-    items.push(...page.items.filter(isVisible));
+    items.push(...page.items.filter((item) => isVisible(idOf(item))));
     for (const collection of page.collections ?? []) {
-      if (visibleCollection(collection)) {
+      if (isVisible(collection.canister_id)) {
         collections.set(collection.canister_id, collection);
       }
     }
@@ -52,65 +52,131 @@ const fetchVisiblePage = async <T>(
 
 export const fetchVisibleNftPage = <T extends { collection: string }>(
   fetchPage: (params: PageParams) => Promise<ApiNftListPage<T>>,
+  isVisible: IsVisible,
+  params: PageParams = {}
+) => fetchVisiblePage(fetchPage, (item) => item.collection, isVisible, params);
+
+const fetchVisibleCollectionPage = <T extends { canister_id: string }>(
+  fetchPage: (params: PageParams) => Promise<ApiNftListPage<T>>,
   params: PageParams = {}
 ) =>
   fetchVisiblePage(
     fetchPage,
-    (item) => isCollectionVisible(item.collection),
+    (collection) => collection.canister_id,
+    isCollectionVisible,
     params
   );
 
-export const withVisibleCollections = (api: GldtEndpoints): GldtEndpoints => ({
-  ...api,
-  getNfts: (params = {}) =>
-    fetchVisibleNftPage((page) => api.getNfts({ ...params, ...page }), params),
-  getNftCollections: (params = {}) =>
-    fetchVisiblePage(
-      (page) => api.getNftCollections({ ...params, ...page }),
-      visibleCollection,
-      params
-    ),
-  getNftAccountCollections: (principal, params = {}) =>
-    fetchVisiblePage(
-      (page) => api.getNftAccountCollections(principal, { ...params, ...page }),
-      visibleCollection,
-      params
-    ),
-  getNftOwnerCollections: (principal, params = {}) =>
-    fetchVisiblePage(
-      (page) => api.getNftOwnerCollections(principal, { ...params, ...page }),
-      visibleCollection,
-      params
-    ),
-  getNftAccountNfts: (principal, params = {}) =>
-    fetchVisibleNftPage(
-      (page) => api.getNftAccountNfts(principal, { ...params, ...page }),
-      params
-    ),
-  getNftAccountPastNfts: (principal, params = {}) =>
-    fetchVisibleNftPage(
-      (page) => api.getNftAccountPastNfts(principal, { ...params, ...page }),
-      params
-    ),
-  getNftOwnerNfts: (principal, params = {}) =>
-    fetchVisibleNftPage(
-      (page) => api.getNftOwnerNfts(principal, { ...params, ...page }),
-      params
-    ),
-  getNftSearch: async (...args) => {
-    if (!isCollectionVisible(args[0].q.trim())) {
-      return { collections: [], nfts: [], accounts: [] };
-    }
-    const result = await api.getNftSearch(...args);
-    return {
-      ...result,
-      collections: (result.collections ?? []).filter(visibleCollection),
-      nfts: (result.nfts ?? []).filter((nft) =>
-        isCollectionVisible(nft.collection)
+const fetchAiCollectionIds = async (api: GldtEndpoints) => {
+  const ids = new Set<string>();
+  let offset = 0;
+  for (;;) {
+    const page = await api.getNftCollections({
+      collectionType: "ai",
+      limit: 100,
+      offset,
+    });
+    for (const collection of page.items) ids.add(collection.canister_id);
+    offset += page.items.length;
+    if (page.items.length === 0 || offset >= page.total) return ids;
+  }
+};
+
+// The API flags AI collections with is_ai. Endpoints that accept
+// collection_type ask for "normal" collections only. The others can't filter,
+// so their results are checked against the list of AI collections.
+export const withVisibleCollections = (api: GldtEndpoints) => {
+  let aiCollectionIds: Promise<ReadonlySet<string>> | undefined;
+
+  const getIsVisible = async (): Promise<IsVisible> => {
+    aiCollectionIds ??= fetchAiCollectionIds(api).catch((error) => {
+      aiCollectionIds = undefined;
+      throw error;
+    });
+    const aiIds = await aiCollectionIds;
+    return (canisterId) =>
+      isCollectionVisible(canisterId) && !aiIds.has(canisterId);
+  };
+
+  const fetchVisibleNfts = async <T extends { collection: string }>(
+    fetchPage: (params: PageParams) => Promise<ApiNftListPage<T>>,
+    params: PageParams = {}
+  ) => fetchVisibleNftPage(fetchPage, await getIsVisible(), params);
+
+  return {
+    ...api,
+    getIsVisible,
+    fetchVisibleNfts,
+    getNfts: (params = {}) =>
+      fetchVisibleNftPage(
+        (page) => api.getNfts({ ...params, ...page, collectionType: "normal" }),
+        isCollectionVisible,
+        params
       ),
-      accounts: (result.accounts ?? []).filter((account) =>
-        isCollectionVisible(account.principal)
+    getNftCollections: (params = {}) =>
+      fetchVisibleCollectionPage(
+        (page) =>
+          api.getNftCollections({
+            ...params,
+            ...page,
+            collectionType: "normal",
+          }),
+        params
       ),
-    };
-  },
-});
+    getNftAccountCollections: (principal, params = {}) =>
+      fetchVisibleCollectionPage(
+        (page) =>
+          api.getNftAccountCollections(principal, {
+            ...params,
+            ...page,
+            collectionType: "normal",
+          }),
+        params
+      ),
+    getNftOwnerCollections: (principal, params = {}) =>
+      fetchVisibleCollectionPage(
+        (page) =>
+          api.getNftOwnerCollections(principal, {
+            ...params,
+            ...page,
+            collectionType: "normal",
+          }),
+        params
+      ),
+    getNftAccountNfts: (principal, params = {}) =>
+      fetchVisibleNfts(
+        (page) => api.getNftAccountNfts(principal, { ...params, ...page }),
+        params
+      ),
+    getNftAccountPastNfts: (principal, params = {}) =>
+      fetchVisibleNfts(
+        (page) => api.getNftAccountPastNfts(principal, { ...params, ...page }),
+        params
+      ),
+    getNftOwnerNfts: (principal, params = {}) =>
+      fetchVisibleNfts(
+        (page) => api.getNftOwnerNfts(principal, { ...params, ...page }),
+        params
+      ),
+    getNftSearch: async (params) => {
+      const empty = { collections: [], nfts: [], accounts: [] };
+      const q = params.q.trim();
+      if (!isCollectionVisible(q)) return empty;
+      const [isVisible, result] = await Promise.all([
+        getIsVisible(),
+        api.getNftSearch({ ...params, collectionType: "normal" }),
+      ]);
+      if (!isVisible(q)) return empty;
+      return {
+        ...result,
+        collections: (result.collections ?? []).filter((collection) =>
+          isVisible(collection.canister_id)
+        ),
+        nfts: (result.nfts ?? []).filter((nft) => isVisible(nft.collection)),
+        accounts: (result.accounts ?? []).filter((account) =>
+          isVisible(account.principal)
+        ),
+      };
+    },
+  } satisfies GldtEndpoints & Record<string, unknown>;
+};

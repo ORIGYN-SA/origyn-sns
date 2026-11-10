@@ -3,6 +3,8 @@
 Edit `DISABLED_COLLECTION_IDS` in `src/services/api/gldt/v1/collectionVisibility.ts` to hide or restore a collection by canister ID.
 The list currently hides Collection Privée Bochsler, `rm7ew-myaaa-aaaas-qg3uq-cai`.
 
+AI collections (`is_ai` in the NFT API) are always hidden. Endpoints that accept `collection_type` request `normal` collections. For the others (collector NFTs, NFT transactions, direct links), the dashboard loads the AI collection IDs once from `collections?collection_type=ai` and filters against them.
+
 The dashboard filters collection cards, certificates, search results, collector holdings and history, and NFT transactions.
 Direct collection, certificate, and transaction URLs for disabled collections redirect to the viewer in the current language.
 

@@ -1,6 +1,6 @@
 import gldtAPI from "@services/api/gldt/v1";
 import { gldtNftPath } from "@services/api/gldt/v1/utils";
-import { fetchVisibleNftPage } from "@services/api/gldt/v1/collectionVisibility";
+import gldtEndpoints from "@services/api/gldt/v1/endpoints";
 
 export type NftEventType = "mint" | "transfer" | "burn";
 
@@ -46,7 +46,7 @@ const fetchNftTransactions = async ({
   limit,
   offset,
 }: FetchNftTransactionsParams = {}): Promise<ApiNftTransactionsResponse> =>
-  fetchVisibleNftPage(
+  gldtEndpoints.fetchVisibleNfts(
     async (page) => {
       const { data } = await gldtAPI.get<ApiNftTransactionsResponse>(
         gldtNftPath("transactions", {
