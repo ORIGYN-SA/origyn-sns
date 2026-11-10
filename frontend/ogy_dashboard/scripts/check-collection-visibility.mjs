@@ -7,15 +7,21 @@ import {
 } from "../src/services/api/gldt/v1/collectionVisibility.ts";
 const hidden = "rm7ew-myaaa-aaaas-qg3uq-cai";
 const visible = "io7gn-vyaaa-aaaak-qcbiq-cai";
+const ai = "owasc-kiaaa-aaaas-qhd5a-cai";
 assert.equal(isCollectionVisible(hidden), false);
 assert.equal(isCollectionVisible(visible), true);
-const collections = [{ canister_id: hidden }, { canister_id: visible }];
+const collections = [
+  { canister_id: hidden },
+  { canister_id: ai, is_ai: true },
+  { canister_id: visible },
+];
+const isAi = (id) => collections.some((c) => c.canister_id === id && c.is_ai);
 const nfts = [
   hidden,
-  hidden,
+  ai,
   hidden,
   visible,
-  hidden,
+  ai,
   visible,
   visible,
   visible,
@@ -28,20 +34,32 @@ const api = withVisibleCollections(
       async get(path) {
         requests.push(path);
         const url = new URL(path, "https://example.test");
+        // Model the API: collection_type filters AI collections where the
+        // endpoint supports it, and account/owner NFT lists ignore it.
+        const type = url.searchParams.get("collection_type");
+        const ofType = (id) =>
+          type === "ai" ? isAi(id) : type === "normal" ? !isAi(id) : true;
+        const typedCollections = collections.filter((c) =>
+          ofType(c.canister_id)
+        );
         if (url.pathname.endsWith("/search"))
           return {
-            data: { collections, nfts, accounts: [{ principal: visible }] },
+            data: {
+              collections: typedCollections,
+              nfts: nfts.filter((n) => ofType(n.collection)),
+              accounts: [{ principal: visible }, { principal: ai }],
+            },
           };
         const source = url.pathname.endsWith("/collections")
-          ? collections
-          : nfts;
+          ? typedCollections
+          : nfts.filter((n) => ofType(n.collection));
         const offset = Number(url.searchParams.get("offset") ?? 0);
         // Model an API that caps page size, including entirely hidden pages.
         const limit = Math.min(2, Number(url.searchParams.get("limit") ?? 12));
         return {
           data: {
             items: source.slice(offset, offset + limit),
-            collections,
+            collections: typedCollections,
             total: source.length,
             limit,
             offset,
@@ -63,6 +81,11 @@ for (const fetchPage of [
   (params) => api.getNftAccountNfts("owner", params),
   (params) => api.getNftAccountPastNfts("owner", params),
   (params) => api.getNftOwnerNfts("owner", { ...params, status: "Received" }),
+  (params) =>
+    api.fetchVisibleNfts(
+      (page) => api.getNftAccountNfts("owner", page),
+      params
+    ),
 ]) {
   const first = await fetchPage({ limit: 2, offset: 0 });
   assert.deepEqual(
@@ -115,6 +138,24 @@ assert.ok(
     .filter((p) => p.includes("/owners/") && p.includes("/nfts?"))
     .every((p) => p.includes("status=Received"))
 );
+assert.ok(
+  requests
+    .filter(
+      (p) =>
+        p.includes("/nfts?") &&
+        !p.includes("/accounts/") &&
+        !p.includes("/owners/")
+    )
+    .every((p) => p.includes("collection_type=normal")),
+  "Ask the API for normal collections where it can filter"
+);
+assert.ok(
+  requests
+    .filter(
+      (p) => p.includes("/collections?") && !p.includes("collection_type=ai")
+    )
+    .every((p) => p.includes("collection_type=normal"))
+);
 assert.deepEqual(
   (await api.getNftSearch({ q: "gold" })).nfts.map((n) => n.token_id),
   ["3", "5", "6", "7", "8"]
@@ -126,6 +167,24 @@ assert.deepEqual(await api.getNftSearch({ q: ` ${hidden} ` }), {
   accounts: [],
 });
 assert.equal(requests.length, before);
+assert.ok(
+  requests.some(
+    (p) => p.includes("/search?") && p.includes("collection_type=normal")
+  )
+);
+assert.deepEqual(
+  (await api.getNftSearch({ q: "gold" })).accounts.map((a) => a.principal),
+  [visible]
+);
+assert.deepEqual(await api.getNftSearch({ q: ai }), {
+  collections: [],
+  nfts: [],
+  accounts: [],
+});
+const isVisible = await api.getIsVisible();
+assert.equal(isVisible(ai), false);
+assert.equal(isVisible(hidden), false);
+assert.equal(isVisible(visible), true);
 
 for (const rows of [[], nfts.slice(0, 3), nfts.slice(5, 7)]) {
   const result = await fetchVisibleNftPage(
@@ -135,6 +194,7 @@ for (const rows of [[], nfts.slice(0, 3), nfts.slice(5, 7)]) {
       limit: 2,
       offset,
     }),
+    isVisible,
     { limit: 2 }
   );
   const expected = rows.length === 2 ? ["5", "6"] : [];
@@ -147,9 +207,9 @@ for (const rows of [[], nfts.slice(0, 3), nfts.slice(5, 7)]) {
 await assert.rejects(
   fetchVisibleNftPage(async () => {
     throw new Error("API unavailable");
-  }),
+  }, isCollectionVisible),
   /API unavailable/
 );
 console.log(
-  "Collection visibility checks passed: fallback results, visible offsets, metadata, filters, and search."
+  "Collection visibility checks passed: disabled and AI collections, fallback results, visible offsets, metadata, filters, and search."
 );
