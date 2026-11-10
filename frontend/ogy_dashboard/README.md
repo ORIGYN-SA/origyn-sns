@@ -1,7 +1,7 @@
 # Dashboard collection visibility
 
 Edit `DISABLED_COLLECTION_IDS` in `src/services/api/gldt/v1/collectionVisibility.ts` to hide or restore a collection by canister ID.
-The list currently hides Collection Privée Bochsler, `rm7ew-myaaa-aaaas-qg3uq-cai`.
+The list currently hides Collection Privée Bochsler, `rm7ew-myaaa-aaaas-qg3uq-cai`, and the shared "Origyn AI" collection that Origyn Records mints into (`javsv-3qaaa-aaaas-qgvca-cai` in production, `2ov74-6yaaa-aaaah-quvia-cai` in staging). The NFT index reports `is_ai: false` for that collection, so the AI filter below misses it.
 
 AI collections (`is_ai` in the NFT API) are always hidden. Endpoints that accept `collection_type` request `normal` collections. For the others (collector NFTs, NFT transactions, direct links), the dashboard loads the AI collection IDs once from `collections?collection_type=ai` and filters against them.
 

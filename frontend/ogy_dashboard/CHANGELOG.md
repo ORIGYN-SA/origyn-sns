@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.59] - 2026-11-10
+
+#### Fixed
+
+- Hide the shared Origyn AI collection, where Origyn Records and AI agents mint their certificates. The NFT API doesn't flag it as AI, so 1.0.58 still showed it.
+
 ### [1.0.58] - 2026-11-10
 
 #### Changed

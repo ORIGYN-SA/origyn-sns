@@ -5,9 +5,14 @@ import type {
   GldtEndpoints,
 } from "@origyn/shared-ui/gldt";
 
-// Collection Privée Bochsler. Add canister IDs here to hide more collections.
+// Add canister IDs here to hide more collections.
 const DISABLED_COLLECTION_IDS: ReadonlySet<string> = new Set([
+  // Collection Privée Bochsler.
   "rm7ew-myaaa-aaaas-qg3uq-cai",
+  // The shared "Origyn AI" collection (production, staging) that Origyn
+  // Records and AI agents mint into. The index reports is_ai: false for it.
+  "javsv-3qaaa-aaaas-qgvca-cai",
+  "2ov74-6yaaa-aaaah-quvia-cai",
 ]);
 
 export const isCollectionVisible = (canisterId: string) =>
