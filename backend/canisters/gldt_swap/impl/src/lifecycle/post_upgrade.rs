@@ -77,8 +77,6 @@ fn post_upgrade(args: Args) {
                 }
             }
 
-            // state.data.swap_system.finalize_all_swaps();
-
             bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
             init_canister(state);
             replace_icrc3(icrc3);

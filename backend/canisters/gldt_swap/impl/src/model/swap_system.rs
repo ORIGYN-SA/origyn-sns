@@ -240,23 +240,25 @@ impl SwapSystem {
         }
     }
 
-    pub fn finalize_all_swaps(&mut self) {
+    /// Ends the swaps of one call, `swap_ids`: each leaves the active swaps, removed when
+    /// `Complete` and moved to `failed_swaps` in any other status. Swaps of other calls stay
+    /// active, except those older than
+    /// [`gldt_swap_common::swap::STALE_SWAP_TIME_THRESHOLD_MINUTES`]: a call that
+    /// trapped leaves its swaps behind, and they are ended the same way.
+    pub fn finalize_call_swaps(&mut self, swap_ids: &[SwapIndex]) {
         self.latest_timestamp = timestamp_millis();
 
-        let all_ids: Vec<SwapIndex> = self.swaps.keys().cloned().collect();
+        let stale: Vec<SwapIndex> = self
+            .swaps
+            .iter()
+            .filter(|(_, swap)| swap.is_swap_over_time_threshold())
+            .map(|(swap_id, _)| swap_id.clone())
+            .collect();
 
-        for swap_id in all_ids {
-            if let Some(swap) = self.swaps.remove(&swap_id) {
-                match swap.status {
-                    SwapStatus::Complete => {
-                        continue;
-                    }
-                    SwapStatus::NftTransferFailed(_) | SwapStatus::MintFailed(_) => {
-                        self.failed_swaps.insert(swap_id.clone(), swap);
-                    }
-                    _ => {
-                        self.failed_swaps.insert(swap_id.clone(), swap);
-                    }
+        for swap_id in swap_ids.iter().chain(&stale) {
+            if let Some(swap) = self.swaps.remove(swap_id) {
+                if swap.status != SwapStatus::Complete {
+                    self.failed_swaps.insert(swap_id.clone(), swap);
                 }
             }
         }
@@ -321,9 +323,90 @@ mod tests {
             .unwrap();
         assert_eq!(system.swaps_started, 3);
         // finishing or removing swaps does not move it
-        system.finalize_all_swaps();
+        let all: Vec<SwapIndex> = system.swaps.keys().cloned().collect();
+        system.finalize_call_swaps(&all);
         assert!(system.swaps.is_empty());
         assert_eq!(system.swaps_started, 3);
+    }
+
+    #[test]
+    fn finalizing_a_call_leaves_other_calls_in_flight_and_sweeps_old_leftovers() {
+        let nft_canister = Principal::from_slice(&[1; 10]);
+        let configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+            icrc7_canister_id: nft_canister,
+            fractionalization_config: FractionalizationConfig::General(
+                GeneralFractionalizationConfig {
+                    division: 100_000_000_000,
+                    swap_fee: Nat::from(100_000_000u64),
+                    ledger_id: Principal::from_slice(&[2; 10]),
+                },
+            ),
+        }]);
+        let nfts = |ids: &[u64]| -> Vec<Nft> {
+            ids.iter()
+                .map(|id| Nft {
+                    id: Nat::from(*id),
+                    canister_id: nft_canister,
+                })
+                .collect()
+        };
+        let user = Principal::from_slice(&[3; 29]);
+        let mut system = SwapSystem::default();
+        let ids = |swaps: HashMap<SwapIndex, SwapInfo>| -> Vec<SwapIndex> {
+            let mut ids: Vec<_> = swaps.into_keys().collect();
+            ids.sort();
+            ids
+        };
+
+        // a call that trapped long ago left a swap behind, one `Complete` and one in flight
+        let leftover = ids(system
+            .create_swaps_batch(SwapType::Forward, user, nfts(&[1, 2]), &configs)
+            .unwrap());
+        for id in &leftover {
+            system.swaps.get_mut(id).unwrap().created_at = 0;
+        }
+        let swap = system.swaps.get_mut(&leftover[0]).unwrap();
+        swap.update_status(SwapStatus::NftTransferredFrom).unwrap();
+        swap.update_status(SwapStatus::Minted).unwrap();
+        swap.update_status(SwapStatus::Complete).unwrap();
+        // call B is in flight
+        let b = ids(system
+            .create_swaps_batch(SwapType::Reverse, user, nfts(&[3, 4]), &configs)
+            .unwrap());
+        system.update_swaps_statuses(&b, SwapStatus::Burned);
+        // call A: one swap complete, one whose NFT did not move
+        let a = ids(system
+            .create_swaps_batch(SwapType::Forward, user, nfts(&[5, 6]), &configs)
+            .unwrap());
+        system.update_swaps_status(&a[0], SwapStatus::NftTransferredFrom);
+        system.update_swaps_status(&a[0], SwapStatus::Minted);
+        system.update_swaps_status(&a[0], SwapStatus::Complete);
+        system.update_swaps_status(&a[1], SwapStatus::NftTransferFromFailed("no".to_string()));
+
+        system.finalize_call_swaps(&a);
+
+        // B's swaps are still active, untouched
+        let mut active: Vec<_> = system.swaps.keys().cloned().collect();
+        active.sort();
+        assert_eq!(active, b);
+        assert!(b
+            .iter()
+            .all(|id| system.swaps[id].status == SwapStatus::Burned));
+        // A's complete swap is gone, its failed one is in `failed_swaps` with its status
+        assert!(!system.failed_swaps.contains_key(&a[0]));
+        assert_eq!(
+            system.failed_swaps[&a[1]].status,
+            SwapStatus::NftTransferFromFailed("no".to_string())
+        );
+        // the old leftovers are swept: the complete one removed, the other failed
+        assert!(!system.failed_swaps.contains_key(&leftover[0]));
+        assert_eq!(system.failed_swaps[&leftover[1]].status, SwapStatus::Init);
+        assert_eq!(system.failed_swaps.len(), 2);
+
+        // B finalizes its own swaps later
+        system.finalize_call_swaps(&b);
+        assert!(system.swaps.is_empty());
+        assert_eq!(system.failed_swaps.len(), 4);
     }
 
     /// `SwapSystem` as deployed before the counter.

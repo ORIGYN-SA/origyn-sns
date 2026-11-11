@@ -263,8 +263,24 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
 
     let swap_ids: Vec<candid::Nat> = swaps.keys().cloned().collect();
 
+    let result =
+        transfer_issue_and_reimburse(caller, &batched_nfts, &swaps, &swap_ids, payout).await;
+    // however the steps ended, this call's swaps leave the active swaps
+    mutate_state(|s| s.data.swap_system.finalize_call_swaps(&swap_ids));
+    Ok((swap_ids, result?))
+}
+
+/// Steps 2 to 4 of the forward swap, for the swaps [`forward_swap`] just created. It finalizes
+/// them however this returns.
+async fn transfer_issue_and_reimburse<P: ForwardPayout>(
+    caller: Principal,
+    batched_nfts: &GroupedNftsByCanister,
+    swaps: &HashMap<SwapIndex, SwapInfo>,
+    swap_ids: &[SwapIndex],
+    payout: &mut P,
+) -> Result<P::Receipt, P::Error> {
     let prepared_transactions =
-        prepare_transactions(&swaps).map_err(SwapNftForTokensErrors::from)?;
+        prepare_transactions(swaps).map_err(SwapNftForTokensErrors::from)?;
     ic_cdk::println!("prepared_transactions {:?}", prepared_transactions);
 
     // 2. Transfer NFTs
@@ -317,11 +333,11 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
 
     // 3. Issue the GLDT
     let issued = payout
-        .issue(caller, &swaps, successful_nfts, successful_swap_ids)
+        .issue(caller, swaps, successful_nfts, successful_swap_ids)
         .await?;
 
     let receipt = mutate_state(|s| {
-        let receipt = payout.record(s, caller, &swaps, &issued.issued);
+        let receipt = payout.record(s, caller, swaps, &issued.issued);
         let swap_system = &mut s.data.swap_system;
         // `Minted` also on the EVM path, where the GLDT was issued as an EVM voucher
         swap_system.update_swaps_statuses(&issued.issued, SwapStatus::Minted);
@@ -329,12 +345,12 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
             &issued.failed,
             SwapStatus::MintFailed("NFT mint failed".to_string()),
         );
-        swap_system.update_swaps_statuses(&swap_ids, SwapStatus::Complete);
+        swap_system.update_swaps_statuses(swap_ids, SwapStatus::Complete);
         receipt
     });
 
     info!("All token transfers completed");
-    let complete_swaps = read_state(|s| s.data.swap_system.filter_completed_swaps(&swap_ids));
+    let complete_swaps = read_state(|s| s.data.swap_system.filter_completed_swaps(swap_ids));
 
     for (swap_index, _) in complete_swaps {
         let (transaction, prepared_transaction) = prepared_transactions.get(&swap_index).unwrap();
@@ -359,8 +375,7 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
     }
 
     // 4. Reimburse failed swaps
-    let swaps_to_reimburse =
-        read_state(|s| s.data.swap_system.filter_swaps_to_reimburse(&swap_ids));
+    let swaps_to_reimburse = read_state(|s| s.data.swap_system.filter_swaps_to_reimburse(swap_ids));
 
     let nfts_for_reimburse: Vec<_> = swaps_to_reimburse.values().map(|s| s.nft.clone()).collect();
 
@@ -391,11 +406,10 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
     mutate_state(|s| {
         let swap_system = &mut s.data.swap_system;
         swap_system.update_swaps_statuses(&nft_transfer_success, SwapStatus::Reimbursed);
-        swap_system.finalize_all_swaps();
         for (idx, reason) in &nft_transfer_failed {
             swap_system.update_swaps_status(idx, SwapStatus::ReimburseFailed(reason.clone()));
         }
     });
 
-    Ok((swap_ids, receipt))
+    Ok(receipt)
 }
