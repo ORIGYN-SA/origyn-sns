@@ -3,7 +3,7 @@ use crate::model::nft_batches::{nft_transfer_outcome, GroupedNftsByCanister, Nft
 use crate::state::{icrc3_commit_prepared_transaction, mutate_state, read_state, RuntimeState};
 use crate::utils::prepare_transactions;
 use bity_ic_canister_time::SECOND_IN_MS;
-use candid::Principal;
+use candid::{Nat, Principal};
 use gldt_swap_api_canister::swap_nft_for_tokens::SwapNftForTokensErrors;
 pub use gldt_swap_api_canister::swap_nft_for_tokens::{
     Args as SwapNftForTokensArgs, Response as SwapNftForTokensResponse,
@@ -17,7 +17,7 @@ use ic_cdk::update;
 use icrc_ledger_canister_c2c_client::icrc1_transfer;
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc1::transfer::TransferArg;
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use tracing::{error, info};
 
 #[update]
@@ -46,12 +46,12 @@ pub(crate) trait ForwardPayout {
     /// changes nothing and moves no NFT.
     fn check(&mut self, nfts: &HashSet<Nft>) -> Result<(), Self::Error>;
 
-    /// Issues the GLDT of the swaps whose NFT moved (`moved`, the NFTs `moved_nfts`).
+    /// Issues the GLDT of the swaps whose NFT moved (`moved`), each for the value its swap
+    /// records.
     async fn issue(
         &mut self,
         caller: Principal,
         swaps: &HashMap<SwapIndex, SwapInfo>,
-        moved_nfts: Vec<Nft>,
         moved: Vec<SwapIndex>,
     ) -> Result<Issued, Self::Error>;
 
@@ -70,8 +70,8 @@ pub(crate) trait ForwardPayout {
 pub(crate) struct Issued {
     /// The swaps whose GLDT was issued.
     pub issued: Vec<SwapIndex>,
-    /// The swaps whose GLDT was not issued; their NFT is given back.
-    pub failed: Vec<SwapIndex>,
+    /// The swaps whose GLDT was not issued, each with the reason; their NFT is given back.
+    pub failed: Vec<(SwapIndex, String)>,
 }
 
 /// `swap_nft_for_tokens`: the GLDT is minted to the caller on ICP.
@@ -89,16 +89,15 @@ impl ForwardPayout for MintOnIcp {
         &mut self,
         caller: Principal,
         swaps: &HashMap<SwapIndex, SwapInfo>,
-        moved_nfts: Vec<Nft>,
-        _moved: Vec<SwapIndex>,
+        moved: Vec<SwapIndex>,
     ) -> Result<Issued, Self::Error> {
-        let filtered_nfts = GroupedNftsByCanister::from_nfts(moved_nfts);
-
-        let tokens_amount: HashMap<Principal, candid::Nat> =
-            filtered_nfts.calculate_token_equivalent().map_err(|e| {
-                error!("Token calculation failed: {:?}", e);
-                SwapNftForTokensErrors::GeneralError(e)
-            })?;
+        // one mint per ledger, of the moved swaps' recorded values
+        let mut tokens_amount: BTreeMap<Principal, Nat> = BTreeMap::new();
+        for swap in moved.iter().filter_map(|id| swaps.get(id)) {
+            *tokens_amount
+                .entry(swap.tokens_amount.ledger_id)
+                .or_insert_with(|| Nat::from(0u8)) += Nat::from(swap.tokens_amount.division);
+        }
 
         let transfer_args: Vec<_> = tokens_amount
             .iter()
@@ -128,47 +127,42 @@ impl ForwardPayout for MintOnIcp {
             .collect::<Vec<_>>();
 
         let transfer_results = futures::future::join_all(transfers_futures).await;
-        let mut successful_swap_ids = Vec::new();
-        let mut failed_swap_ids: Vec<SwapIndex> = Vec::new();
-        let mut failed_swaps: HashMap<SwapIndex, String> = HashMap::new();
-
-        for ((ledger_id, _transfer_arg), result) in
-            transfer_args.iter().zip(transfer_results.into_iter())
-        {
-            let swaps_for_ledger: Vec<&SwapInfo> = swaps
-                .values()
-                .filter(|swap| swap.tokens_amount.ledger_id == *ledger_id)
-                .collect();
-
-            for swap in swaps_for_ledger {
-                match &result {
-                    Ok(inner_result) => match inner_result {
-                        Ok(_amount) => {
-                            successful_swap_ids.push(swap.index.clone());
-                        }
-                        Err(transfer_err) => {
-                            failed_swap_ids.push(swap.index.clone());
-                            failed_swaps.insert(
-                                swap.index.clone(),
-                                format!("Token transfer failed: {:?}", transfer_err),
-                            );
-                        }
-                    },
-                    Err(call_err) => {
-                        failed_swap_ids.push(swap.index.clone());
-                        failed_swaps.insert(
-                            swap.index.clone(),
-                            format!("IC call failed: {:?}", call_err),
-                        );
+        let minted: HashMap<Principal, Result<(), String>> = transfer_args
+            .iter()
+            .zip(transfer_results)
+            .map(|((ledger_id, _transfer_arg), result)| {
+                let result = match result {
+                    Ok(Ok(_block_index)) => Ok(()),
+                    Ok(Err(transfer_err)) => {
+                        Err(format!("Token transfer failed: {:?}", transfer_err))
                     }
+                    Err(call_err) => Err(format!("IC call failed: {:?}", call_err)),
+                };
+                (*ledger_id, result)
+            })
+            .collect();
+
+        // each moved swap by the mint of its own ledger
+        let mut issued = Issued {
+            issued: Vec::new(),
+            failed: Vec::new(),
+        };
+        for swap_id in moved {
+            let mint = swaps
+                .get(&swap_id)
+                .and_then(|swap| minted.get(&swap.tokens_amount.ledger_id));
+            match mint {
+                Some(Ok(())) => issued.issued.push(swap_id),
+                Some(Err(reason)) => {
+                    error!("Mint failed for swap {:?}: {}", swap_id, reason);
+                    issued.failed.push((swap_id, reason.clone()));
                 }
+                None => issued
+                    .failed
+                    .push((swap_id, "No mint for this swap's ledger".to_string())),
             }
         }
-
-        Ok(Issued {
-            issued: successful_swap_ids,
-            failed: failed_swap_ids,
-        })
+        Ok(issued)
     }
 
     fn record(
@@ -286,7 +280,6 @@ async fn transfer_issue_and_reimburse<P: ForwardPayout>(
     // 2. Transfer NFTs
     let transfer_results = batched_nfts.batch_transfer_from_all(caller).await;
 
-    let mut successful_nfts = Vec::new();
     let mut successful_swap_ids = Vec::new();
     let mut failed_swaps: HashMap<SwapIndex, String> = HashMap::new();
 
@@ -294,7 +287,6 @@ async fn transfer_issue_and_reimburse<P: ForwardPayout>(
     for swap in swaps.values() {
         match nft_transfer_outcome(&transfer_results, &swap.nft) {
             NftTransferOutcome::Moved => {
-                successful_nfts.push(swap.nft.clone());
                 successful_swap_ids.push(swap.index.clone());
             }
             NftTransferOutcome::Failed(err) => {
@@ -332,19 +324,16 @@ async fn transfer_issue_and_reimburse<P: ForwardPayout>(
     }
 
     // 3. Issue the GLDT
-    let issued = payout
-        .issue(caller, swaps, successful_nfts, successful_swap_ids)
-        .await?;
+    let issued = payout.issue(caller, swaps, successful_swap_ids).await?;
 
     let receipt = mutate_state(|s| {
         let receipt = payout.record(s, caller, swaps, &issued.issued);
         let swap_system = &mut s.data.swap_system;
         // `Minted` also on the EVM path, where the GLDT was issued as an EVM voucher
         swap_system.update_swaps_statuses(&issued.issued, SwapStatus::Minted);
-        swap_system.update_swaps_statuses(
-            &issued.failed,
-            SwapStatus::MintFailed("NFT mint failed".to_string()),
-        );
+        for (swap_id, reason) in &issued.failed {
+            swap_system.update_swaps_status(swap_id, SwapStatus::MintFailed(reason.clone()));
+        }
         swap_system.update_swaps_statuses(swap_ids, SwapStatus::Complete);
         receipt
     });

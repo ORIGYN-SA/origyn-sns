@@ -297,23 +297,20 @@ impl GroupedNftsByCanister {
         all_results
     }
 
+    /// What the NFTs are worth, added up per ledger, as `SwapConfigs::token_equivalent` values
+    /// them.
     pub fn calculate_token_equivalent(&self) -> Result<HashMap<Principal, Nat>, GeneralError> {
-        let swap_configs = read_state(|s| s.data.swap_configs.clone());
-
-        let mut ledger_totals: HashMap<Principal, Nat> = HashMap::new();
-
-        for (canister_id, token_ids) in &self.grouped {
-            let config = swap_configs.find_by_canister_id(canister_id)?;
-            for token_id in token_ids {
-                let amount = config
-                    .fractionalization_config
-                    .division_for_token(token_id)?;
-                let ledger_id = config.fractionalization_config.get_ledger_id()?;
-                *ledger_totals.entry(ledger_id).or_insert(Nat::from(0_u64)) += amount;
-            }
-        }
-
-        Ok(ledger_totals)
+        let nfts: Vec<Nft> = self
+            .grouped
+            .iter()
+            .flat_map(|(canister_id, ids)| {
+                ids.iter().map(|id| Nft {
+                    canister_id: *canister_id,
+                    id: id.clone(),
+                })
+            })
+            .collect();
+        read_state(|s| s.data.swap_configs.token_equivalent(&nfts))
     }
 
     pub fn calculate_fees_amount(&self) -> Result<HashMap<Principal, Nat>, GeneralError> {

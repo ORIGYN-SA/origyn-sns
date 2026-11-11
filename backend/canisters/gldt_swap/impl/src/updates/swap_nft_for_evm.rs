@@ -63,7 +63,6 @@ impl ForwardPayout for EvmPayout {
         &mut self,
         _caller: Principal,
         _swaps: &HashMap<SwapIndex, SwapInfo>,
-        _moved_nfts: Vec<Nft>,
         moved: Vec<SwapIndex>,
     ) -> Result<Issued, Self::Error> {
         // no call: `record` stores the transfer when the swaps complete
@@ -113,13 +112,13 @@ fn check_nft_to_evm(
     Ok(recipient)
 }
 
-/// The GLDT value of `nfts` in e8s, as their swaps record it.
+/// The GLDT value of `nfts` in e8s, as their swaps record it: [`SwapConfigs::token_equivalent`]
+/// added up over the ledgers.
 pub fn nfts_value(configs: &SwapConfigs, nfts: &HashSet<Nft>) -> Result<Nat, GeneralError> {
-    let mut total = Nat::from(0u8);
-    for nft in nfts {
-        total += Nat::from(configs.get_nft_equivalent(nft)?.division);
-    }
-    Ok(total)
+    Ok(configs
+        .token_equivalent(nfts)?
+        .into_values()
+        .fold(Nat::from(0u8), |total, value| total + value))
 }
 
 #[cfg(test)]
