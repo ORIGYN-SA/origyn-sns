@@ -18,7 +18,7 @@
 use crate::bridge::evm::address::{format_address, parse_address};
 use crate::bridge::evm::num::u256_to_nat;
 use crate::bridge::inbound::{release_unminted, store_inbound};
-use crate::bridge::outbound::store_outbound;
+use crate::bridge::outbound::{store_outbound, NFT_BACKED_INDEX_FLAG};
 use crate::bridge::stable::{with_inbound, with_outbound, with_queue, InboundKey};
 use crate::bridge::state::{BridgeState, InboundRecord};
 use crate::queries::icrc21::format_gldt;
@@ -240,6 +240,12 @@ fn check_one(
         }
         OutboundMarkBurned { id, icp_burn_index } => {
             let record = outbound(*id)?;
+            if *icp_burn_index >= NFT_BACKED_INDEX_FLAG {
+                return Err(format!(
+                    "ICP block {icp_burn_index} is not a GLDT ledger block: indices from 2^63 \
+                     belong to vouchers backed by NFT swaps"
+                ));
+            }
             if let Some(other) = burned_at(*icp_burn_index) {
                 return Err(format!(
                     "ICP block {icp_burn_index} is already the burn of outbound {other}"
@@ -772,6 +778,17 @@ mod tests {
             OutboundStatus::NeedsManualCheck(_)
         ));
         assert_eq!(bridge().out_pending, 2 * ONE);
+
+        // an index of an NFT-backed voucher, even one no transfer has yet
+        for index in [1u64 << 63, (1 << 63) | 7, u64::MAX] {
+            let err = resolve(vec![mark(2, index)]).unwrap_err();
+            assert!(err.contains("backed by NFT swaps"), "{err}");
+        }
+        assert!(matches!(
+            outbound(2).status,
+            OutboundStatus::NeedsManualCheck(_)
+        ));
+        resolve(vec![mark(2, (1 << 63) - 1)]).unwrap();
     }
 
     #[test]

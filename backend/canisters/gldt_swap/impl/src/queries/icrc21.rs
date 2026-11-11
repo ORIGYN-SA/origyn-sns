@@ -1,7 +1,10 @@
 use crate::bridge::evm::address::{format_address, parse_address};
+use crate::state::read_state;
+use crate::updates::swap_nft_for_evm::nfts_value;
 use candid::{Decode, Nat};
 pub use gldt_swap_api_canister::icrc21::Args as Icrc21Args;
 pub use gldt_swap_api_canister::icrc21::Response as Icrc21Response;
+use gldt_swap_api_canister::swap_nft_for_evm::SwapNftForEvmArgs;
 use gldt_swap_common::bridge::{BridgeToEvmArgs, EvmChain};
 use ic_cdk::query;
 use icrc_ledger_types::icrc21::errors::ErrorInfo;
@@ -20,6 +23,7 @@ pub enum Icrc21Function {
     SwapNftForTokens,
     SwapTokensForNft,
     BridgeToEvm,
+    SwapNftForEvm,
 }
 
 #[query]
@@ -37,6 +41,7 @@ pub fn icrc21_canister_call_consent_message(args: Icrc21Args) -> Icrc21Response 
         Ok(Icrc21Function::SwapNftForTokens) => handle_swap_nft_for_tokens_consent(args),
         Ok(Icrc21Function::SwapTokensForNft) => handle_swap_tokens_for_nft_consent(args),
         Ok(Icrc21Function::BridgeToEvm) => handle_bridge_to_evm_consent(args),
+        Ok(Icrc21Function::SwapNftForEvm) => handle_swap_nft_for_evm_consent(args),
         Err(err) => {
             return Err(Icrc21Error::UnsupportedCanisterCall(ErrorInfo {
                 description: format!("Unsupported method: {}", err),
@@ -176,6 +181,63 @@ pub fn bridge_to_evm_consent(
     Ok((message, fields))
 }
 
+fn handle_swap_nft_for_evm_consent(args: Icrc21Args) -> Icrc21Response {
+    let Ok(call) = Decode!(&args.arg, gldt_swap_api_canister::swap_nft_for_evm::Args) else {
+        return create_error_response("Failed to decode swap_nft_for_evm arguments".to_string());
+    };
+    let value = read_state(|s| nfts_value(&s.data.swap_configs, &call.nfts))
+        .map_err(|e| format!("not every NFT can be swapped: {e}"));
+    match value.and_then(|value| swap_nft_for_evm_consent(&call, &value)) {
+        Ok((message, fields)) => create_consent_info(
+            message,
+            format!("Swap NFTs for GLDT on {}", chain_name(call.chain)),
+            fields,
+            args.user_preferences.metadata,
+        ),
+        Err(e) => create_error_response(e),
+    }
+}
+
+/// The consent message for `swap_nft_for_evm`, for example "Swap 2 NFTs worth 2000 GLDT to
+/// receive 2000 GLDT at 0xAbCd…12Ef on Ethereum", and the fields shown with it. `value` is the
+/// GLDT value of the NFTs in e8s. The fields carry the full recipient, as for `bridge_to_evm`.
+pub fn swap_nft_for_evm_consent(
+    args: &SwapNftForEvmArgs,
+    value: &Nat,
+) -> Result<(String, Vec<(String, String)>), String> {
+    let recipient = parse_address(&args.recipient)
+        .ok()
+        .filter(|address| *address != [0u8; 20])
+        .map(|address| format_address(&address))
+        .ok_or_else(|| format!("{:?} is not an EVM recipient address", args.recipient))?;
+    let amount = format_gldt(value);
+    let chain = chain_name(args.chain);
+    let count = args.nfts.len();
+    let message = format!(
+        "Swap {count} {} worth {amount} GLDT to receive {amount} GLDT at {} on {chain}",
+        if count == 1 { "NFT" } else { "NFTs" },
+        short_address(&recipient)
+    );
+    let mut nfts: Vec<_> = args.nfts.iter().collect();
+    nfts.sort();
+    let nft_list = nfts
+        .iter()
+        .map(|nft| format!("{} from {}", nft.id, nft.canister_id))
+        .collect::<Vec<_>>()
+        .join("; ");
+    let fields = vec![
+        ("Chain".to_string(), chain.to_string()),
+        ("Recipient".to_string(), recipient),
+        ("Number of NFTs".to_string(), count.to_string()),
+        ("NFTs".to_string(), nft_list),
+        (
+            "Amount".to_string(),
+            format!("{amount} GLDT ({} e8s)", value.0),
+        ),
+    ];
+    Ok((message, fields))
+}
+
 fn chain_name(chain: EvmChain) -> &'static str {
     match chain {
         EvmChain::Ethereum => "Ethereum",
@@ -262,6 +324,120 @@ mod tests {
 
         assert!(bridge_to_evm_consent(&bridge_args(&format!("0x{}", "0".repeat(40)), 1)).is_err());
         assert!(bridge_to_evm_consent(&bridge_args("0x1234", 1)).is_err());
+    }
+
+    fn nft(id: u64) -> gldt_swap_common::nft::Nft {
+        gldt_swap_common::nft::Nft {
+            id: Nat::from(id),
+            canister_id: candid::Principal::from_slice(&[1; 10]),
+        }
+    }
+
+    fn evm_args(recipient: &str, nfts: &[u64]) -> SwapNftForEvmArgs {
+        SwapNftForEvmArgs {
+            nfts: nfts.iter().map(|id| nft(*id)).collect(),
+            chain: EvmChain::Ethereum,
+            recipient: recipient.to_string(),
+        }
+    }
+
+    #[test]
+    fn swap_nft_for_evm_consent_names_nfts_amount_recipient_and_chain() {
+        let value = Nat::from(200_000_000_000u64);
+        let (message, fields) =
+            swap_nft_for_evm_consent(&evm_args(&RECIPIENT.to_lowercase(), &[2, 1]), &value)
+                .unwrap();
+        assert_eq!(
+            message,
+            "Swap 2 NFTs worth 2000 GLDT to receive 2000 GLDT at 0x7099\u{2026}79C8 on Ethereum"
+        );
+        let field = |name: &str| {
+            fields
+                .iter()
+                .find(|(key, _)| key == name)
+                .map(|(_, value)| value.clone())
+                .unwrap_or_else(|| panic!("no field {name}"))
+        };
+        assert_eq!(field("Recipient"), RECIPIENT);
+        assert_eq!(field("Chain"), "Ethereum");
+        assert_eq!(field("Number of NFTs"), "2");
+        assert_eq!(field("Amount"), "2000 GLDT (200000000000 e8s)");
+        let collection = candid::Principal::from_slice(&[1; 10]);
+        assert_eq!(
+            field("NFTs"),
+            format!("1 from {collection}; 2 from {collection}")
+        );
+
+        let (message, _) =
+            swap_nft_for_evm_consent(&evm_args(RECIPIENT, &[1]), &Nat::from(1_250_000_000u64))
+                .unwrap();
+        assert!(
+            message.starts_with("Swap 1 NFT worth 12.5 GLDT"),
+            "{message}"
+        );
+
+        assert!(swap_nft_for_evm_consent(
+            &evm_args(&format!("0x{}", "0".repeat(40)), &[1]),
+            &value
+        )
+        .is_err());
+        assert!(swap_nft_for_evm_consent(&evm_args("0x1234", &[1]), &value).is_err());
+    }
+
+    #[test]
+    fn consent_endpoint_values_the_nfts_from_the_swap_configs() {
+        use crate::model::swap_configs::SwapConfigs;
+        use crate::state::{mutate_state, RuntimeState};
+        use gldt_swap_common::swap_canister_config::{
+            FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
+        };
+
+        crate::bridge::test_state::install(RuntimeState::default());
+        mutate_state(|s| {
+            s.data.swap_configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+                icrc7_canister_id: candid::Principal::from_slice(&[1; 10]),
+                fractionalization_config: FractionalizationConfig::General(
+                    GeneralFractionalizationConfig {
+                        division: 100_000_000_000,
+                        swap_fee: Nat::from(100_000_000u64),
+                        ledger_id: candid::Principal::from_slice(&[2; 10]),
+                    },
+                ),
+            }]);
+        });
+        let request = |arg: Vec<u8>| Icrc21Args {
+            method: "swap_nft_for_evm".to_string(),
+            arg,
+            user_preferences: ConsentMessageSpec {
+                metadata: ConsentMessageMetadata {
+                    language: "en".to_string(),
+                    utc_offset_minutes: None,
+                },
+                device_spec: None,
+            },
+        };
+        let arg = Encode!(&evm_args(RECIPIENT, &[1, 2, 3])).unwrap();
+        let info = icrc21_canister_call_consent_message(request(arg)).unwrap();
+        let ConsentMessage::GenericDisplayMessage(text) = info.consent_message else {
+            panic!("expected a generic display message");
+        };
+        assert!(
+            text.contains(
+                "Swap 3 NFTs worth 3000 GLDT to receive 3000 GLDT at 0x7099\u{2026}79C8 on Ethereum"
+            ),
+            "{text}"
+        );
+        assert!(text.contains(RECIPIENT), "{text}");
+
+        // an NFT of a collection the swap does not know
+        let mut unknown = evm_args(RECIPIENT, &[1]);
+        unknown.nfts.insert(gldt_swap_common::nft::Nft {
+            id: Nat::from(1u8),
+            canister_id: candid::Principal::from_slice(&[9; 10]),
+        });
+        assert!(icrc21_canister_call_consent_message(request(Encode!(&unknown).unwrap())).is_err());
+        // undecodable arguments are refused
+        assert!(icrc21_canister_call_consent_message(request(vec![1, 2, 3])).is_err());
     }
 
     #[test]

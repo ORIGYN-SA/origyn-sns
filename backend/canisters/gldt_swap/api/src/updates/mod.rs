@@ -10,5 +10,6 @@ pub mod manual_gldt_supply_balance;
 pub mod manual_transfer_fees;
 pub mod recover_stuck_swap;
 pub mod set_buyback_canister;
+pub mod swap_nft_for_evm;
 pub mod swap_nft_for_tokens;
 pub mod swap_tokens_for_nft;

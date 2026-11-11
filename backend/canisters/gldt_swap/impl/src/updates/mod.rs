@@ -8,6 +8,7 @@ pub mod icrc28;
 pub mod manual_gldt_supply_balance;
 pub mod manual_transfer_fees;
 pub mod set_buyback_canister;
+pub mod swap_nft_for_evm;
 pub mod swap_nft_for_tokens;
 pub mod swap_tokens_for_nft;
 
@@ -20,5 +21,6 @@ pub use icrc28::*;
 pub use manual_gldt_supply_balance::*;
 pub use manual_transfer_fees::*;
 pub use set_buyback_canister::*;
+pub use swap_nft_for_evm::*;
 pub use swap_nft_for_tokens::*;
 pub use swap_tokens_for_nft::*;

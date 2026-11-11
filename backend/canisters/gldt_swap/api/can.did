@@ -221,6 +221,9 @@ type EvmVoucher = record {
   // `0x` and 65 bytes of hex.
   signature : text;
   recipient : text;
+  // The block index of the burn on the GLDT ledger. An index at or above 2^63 marks a
+  // voucher backed by an NFT swap (`swap_nft_for_evm`), not an ICP burn: 2^63 plus the
+  // outbound id.
   icp_burn_index : nat64;
   chain_id : nat64;
   amount : nat;
@@ -402,6 +405,8 @@ type OutboundCounts = record {
   burned : nat64;
 };
 type OutboundStatus = variant {
+  // Ready to sign. An `icp_burn_index` at or above 2^63 marks a transfer backed by an NFT
+  // swap, not an ICP burn: 2^63 plus the outbound id.
   Burned : record { icp_burn_index : nat64 };
   Failed : text;
   // The ledger said TooOld while the outcome was unknown.
@@ -460,9 +465,10 @@ type Result_1 = variant {
 };
 type Result_2 = variant { Ok : vec nat; Err : GeneralError };
 type Result_3 = variant { Ok : ConsentInfo; Err : Icrc21Error };
-type Result_4 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
-type Result_5 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
-type Result_6 = variant { Ok : text; Err : text };
+type Result_4 = variant { Ok : SwapNftForEvmOk; Err : SwapNftForEvmError };
+type Result_5 = variant { Ok : vec nat; Err : SwapNftForTokensErrors };
+type Result_6 = variant { Ok : vec nat; Err : SwapTokensForNftErrors };
+type Result_7 = variant { Ok : text; Err : text };
 type Severity = variant { Info; Critical; Warning };
 type SignedEvmAdminAction = record {
   id : nat64;
@@ -504,6 +510,20 @@ type SwapInfo = record {
   user_account : Account;
   index : nat;
   swap_type : SwapType;
+};
+type SwapNftForEvmArgs = record {
+  chain : EvmChain;
+  nfts : vec Nft;
+  // The EVM address that receives the GLDT.
+  recipient : text;
+};
+type SwapNftForEvmError = variant {
+  Swap : SwapNftForTokensErrors;
+  Bridge : BridgeError;
+};
+type SwapNftForEvmOk = record {
+  swap_ids : vec nat;
+  transfer : OutboundTransfer;
 };
 type SwapNftForTokensErrors = variant {
   Limit : text;
@@ -652,10 +672,15 @@ service : (Args_1) -> {
   icrc3_get_tip_certificate : (null) -> (ICRC3DataCertificate) query;
   icrc3_supported_block_types : (null) -> (vec SupportedBlockType) query;
   set_buyback_canister : (opt Account) -> (Response);
-  swap_nft_for_tokens : (vec Nft) -> (Result_4);
-  swap_tokens_for_nft : (vec Nft) -> (Result_5);
+  // Swaps the caller's gold NFTs for GLDT on Ethereum or Base in one call. The NFTs move to
+  // gldt_swap and back the GLDT: nothing is minted or burned on ICP. The reply carries the
+  // signed claim voucher, which anyone may submit with `claimFromIcp` on the token. The caller
+  // first approves gldt_swap for each NFT.
+  swap_nft_for_evm : (SwapNftForEvmArgs) -> (Result_4);
+  swap_nft_for_tokens : (vec Nft) -> (Result_5);
+  swap_tokens_for_nft : (vec Nft) -> (Result_6);
   // The SNS validator of `bridge_sns_action`: the text voters read, or why the action
   // would fail. Open to every caller, so proposers can preview the text; it only reads state.
   // An update, not a query, so SNS governance can call it.
-  validate_bridge_sns_action : (BridgeSnsAction) -> (Result_6);
+  validate_bridge_sns_action : (BridgeSnsAction) -> (Result_7);
 }

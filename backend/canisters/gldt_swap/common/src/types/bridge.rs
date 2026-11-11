@@ -102,6 +102,9 @@ pub struct BridgeToEvmArgs {
 pub struct EvmVoucher {
     pub chain_id: u64,
     pub token: String,
+    /// The block index of the burn on the GLDT ledger. An index at or above 2^63 marks a
+    /// voucher backed by an NFT swap (`swap_nft_for_evm`), not an ICP burn: 2^63 plus the
+    /// outbound id.
     pub icp_burn_index: u64,
     pub recipient: String,
     pub amount: Nat,
@@ -114,6 +117,8 @@ pub enum OutboundStatus {
     Burning,
     /// The ledger outcome is unknown; retried with the same arguments.
     BurnUnknown,
+    /// Ready to sign. An `icp_burn_index` at or above 2^63 marks a transfer backed by an NFT
+    /// swap, not an ICP burn: 2^63 plus the outbound id.
     Burned {
         icp_burn_index: u64,
     },

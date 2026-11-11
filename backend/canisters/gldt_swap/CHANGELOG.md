@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **GLDT bridge to Ethereum and Base.** `bridge_to_evm` burns GLDT on ICP and signs an EIP-712 claim voucher with threshold ECDSA. A scraper reads `BurnedToIcp` burns on each chain through the EVM RPC canister, and a mint processor mints them on ICP under the supply guard. The bridge config is set only by init and upgrade arguments.
 - **SNS control of the bridge.** `bridge_sns_action`, for ORIGYN SNS governance only, signs admin actions for the GLDT token contracts, sets the ICP pause flags and resolves transfers the bridge cannot settle by itself. `validate_bridge_sns_action` returns the text voters see. Authorized principals can pause either direction with `bridge_pause`.
+- **Gold NFTs straight to Ethereum or Base.** `swap_nft_for_evm` takes the caller's gold NFTs as `swap_nft_for_tokens` does and returns a signed claim voucher for Ethereum or Base instead of GLDT on ICP. Nothing is minted or burned on ICP: the NFTs back the EVM GLDT and count in `bridged_out`. The voucher's `icp_burn_index` is 2^63 plus the outbound id, so it never meets a GLDT ledger block index.
 - **Bridge queries:** `get_bridge_status`, `get_bridge_evm_signers`, `get_bridge_transfer_out`, `get_bridge_transfers_out_by_account`, `get_bridge_transfer_in`, `get_bridge_transfers_in_by_tx`, `get_bridge_transfers_in_by_account`, `get_bridge_admin_action` and `get_bridge_admin_actions`.
 
 #### Change

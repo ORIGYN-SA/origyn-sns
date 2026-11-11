@@ -5,6 +5,9 @@
 //! is `BurnUnknown`; the processor retries it with byte-identical arguments (the same memo
 //! and `created_at_time`), so the ledger answers `Duplicate` if an earlier call burned.
 //!
+//! A transfer of `swap_nft_for_evm` starts at `Burned`: nothing burns on ICP, the NFTs it
+//! locked back the GLDT, and its burn index is [`NFT_BACKED_INDEX_FLAG`] plus its id.
+//!
 //! `out_pending` and `bridged_out` move exactly once per transfer: a burn result is applied
 //! only while the stored status is `Burning` or `BurnUnknown`, and a voucher is stored only
 //! while the status is `Burned` with the same burn index. An [`OutboundGuard`] keeps the
@@ -43,6 +46,11 @@ pub const MAX_OUT_AMOUNT_E8S: u64 = u64::MAX;
 /// `get_bridge_transfers_out_by_account` returns at most this many transfers per call.
 pub const MAX_TRANSFERS_PER_PAGE: u32 = 100;
 
+/// Set in the burn index of a voucher backed by an NFT swap: its index is this flag plus the
+/// outbound id. ICP burn indices are GLDT ledger block indices, far below 2^63, so the two
+/// never meet, and the token keys its claims by this index.
+pub const NFT_BACKED_INDEX_FLAG: u64 = 1 << 63;
+
 /// The ledger's answer to a burn, as [`apply_burn_result`] uses it.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum BurnResult {
@@ -74,35 +82,9 @@ pub fn begin_outbound(
     args: &BridgeToEvmArgs,
     now: u64,
 ) -> Result<OutboundTransfer, BridgeError> {
-    if state.paused_out {
-        return Err(BridgeError::Paused);
-    }
-    check_ready(state, args.chain)?;
+    let (recipient, amount) = check_outbound(state, args.chain, &args.recipient, &args.amount)?;
 
-    if state.chain_config(args.chain).is_none() {
-        return Err(BridgeError::UnknownChain);
-    }
-    let recipient = parse_address(&args.recipient)
-        .ok()
-        .filter(|address| *address != [0u8; 20])
-        .ok_or(BridgeError::InvalidRecipient)?;
-    if args.amount == 0u8 {
-        return Err(BridgeError::ZeroAmount);
-    }
-    let amount = u64::try_from(&args.amount.0).map_err(|_| {
-        BridgeError::Burn(TransferFromError::GenericError {
-            error_code: Nat::from(0u8),
-            message: format!(
-                "amount {} is above the largest amount the bridge accepts, {MAX_OUT_AMOUNT_E8S} e8s",
-                args.amount
-            ),
-        })
-    })?;
-
-    let id = state.next_out_id;
-    state.next_out_id = id
-        .checked_add(1)
-        .unwrap_or_else(|| panic!("next_out_id overflow at {id}"));
+    let id = take_out_id(state);
     state.add_out_pending(u128::from(amount));
     let record = OutboundTransfer {
         id,
@@ -111,13 +93,91 @@ pub fn begin_outbound(
             subaccount: args.from_subaccount,
         },
         chain: args.chain,
-        recipient: format_address(&recipient),
+        recipient,
         amount: Nat::from(amount),
         created_at: now,
         status: OutboundStatus::Burning,
     };
     store_outbound(state, &record);
     Ok(record)
+}
+
+/// The checks of a new transfer to `recipient` on `chain`, before anything moves: outbound is
+/// not paused, the bridge is ready, the chain is configured, the recipient is a valid non-zero
+/// address, and the amount is above zero and at most [`MAX_OUT_AMOUNT_E8S`]. Returns the
+/// recipient in EIP-55 form and the amount. `bridge_to_evm` and `swap_nft_for_evm` both use it.
+pub fn check_outbound(
+    state: &BridgeState,
+    chain: EvmChain,
+    recipient: &str,
+    amount: &Nat,
+) -> Result<(String, u64), BridgeError> {
+    if state.paused_out {
+        return Err(BridgeError::Paused);
+    }
+    check_ready(state, chain)?;
+
+    if state.chain_config(chain).is_none() {
+        return Err(BridgeError::UnknownChain);
+    }
+    let recipient = parse_address(recipient)
+        .ok()
+        .filter(|address| *address != [0u8; 20])
+        .ok_or(BridgeError::InvalidRecipient)?;
+    if *amount == 0u8 {
+        return Err(BridgeError::ZeroAmount);
+    }
+    let amount = u64::try_from(&amount.0).map_err(|_| {
+        BridgeError::Burn(TransferFromError::GenericError {
+            error_code: Nat::from(0u8),
+            message: format!(
+                "amount {amount} is above the largest amount the bridge accepts, {MAX_OUT_AMOUNT_E8S} e8s"
+            ),
+        })
+    })?;
+    Ok((format_address(&recipient), amount))
+}
+
+/// Stores the transfer of an NFT swap to EVM: the NFTs are already gldt_swap's, so nothing
+/// burns on ICP. `bridged_out` goes up by `amount` (`out_pending` is not used, nothing is
+/// pending) and the transfer is stored as `Burned` at [`NFT_BACKED_INDEX_FLAG`] plus its id,
+/// ready to sign. No checks: the caller ran [`check_outbound`] before the NFTs moved, and work
+/// that started finishes, also when a pause came in since.
+pub fn record_nft_backed_outbound(
+    state: &mut BridgeState,
+    owner: Principal,
+    chain: EvmChain,
+    recipient: String,
+    amount: u128,
+    now: u64,
+) -> OutboundTransfer {
+    let id = take_out_id(state);
+    assert!(
+        id < NFT_BACKED_INDEX_FLAG,
+        "outbound id {id} has no NFT-backed burn index"
+    );
+    state.add_bridged_out(amount);
+    let record = OutboundTransfer {
+        id,
+        from: Account::from(owner),
+        chain,
+        recipient,
+        amount: Nat::from(amount),
+        created_at: now,
+        status: OutboundStatus::Burned {
+            icp_burn_index: NFT_BACKED_INDEX_FLAG | id,
+        },
+    };
+    store_outbound(state, &record);
+    record
+}
+
+fn take_out_id(state: &mut BridgeState) -> u64 {
+    let id = state.next_out_id;
+    state.next_out_id = id
+        .checked_add(1)
+        .unwrap_or_else(|| panic!("next_out_id overflow at {id}"));
+    id
 }
 
 /// Both signer keys are loaded, every configured chain has a start block,
@@ -272,7 +332,8 @@ fn needs_work(status: &OutboundStatus) -> bool {
     )
 }
 
-/// The amount in e8s; `begin_outbound` stores only amounts up to [`MAX_OUT_AMOUNT_E8S`].
+/// The amount in e8s; `begin_outbound` and `record_nft_backed_outbound` store only amounts
+/// that passed [`check_outbound`], so at most [`MAX_OUT_AMOUNT_E8S`].
 fn amount_e8s(record: &OutboundTransfer) -> u128 {
     u128::try_from(&record.amount.0).unwrap_or_else(|_| {
         panic!(
@@ -402,6 +463,23 @@ pub async fn bridge_to_evm_impl(args: BridgeToEvmArgs) -> Result<OutboundTransfe
         sign_voucher(record.id).await;
     }
     Ok(transfer_out(record.id).unwrap_or(record))
+}
+
+/// Signs the voucher of transfer `id` at once if it is `Burned` and no other call holds it, and
+/// returns the transfer as it stands. If signing fails, the processor signs it later.
+pub async fn sign_new_transfer(record: OutboundTransfer) -> OutboundTransfer {
+    let id = record.id;
+    // the processor may hold it already; it signs it then
+    let Some(_in_flight) = OutboundGuard::new(id) else {
+        return transfer_out(id).unwrap_or(record);
+    };
+    if matches!(
+        transfer_out(id).map(|t| t.status),
+        Some(OutboundStatus::Burned { .. })
+    ) {
+        sign_voucher(id).await;
+    }
+    transfer_out(id).unwrap_or(record)
 }
 
 /// Sends the burn once and reads the answer.
@@ -1088,6 +1166,138 @@ mod tests {
             .retain(|c| c.chain == EvmChain::Ethereum);
         assert!(voucher_request(&state, b.id).is_err());
         assert!(state.outbound_work.contains(&b.id));
+    }
+
+    #[test]
+    fn nft_backed_index_flag_is_bit_63() {
+        assert_eq!(NFT_BACKED_INDEX_FLAG, 9_223_372_036_854_775_808);
+        assert_eq!(NFT_BACKED_INDEX_FLAG, 2u64.pow(63));
+    }
+
+    #[test]
+    fn check_outbound_gives_eip55_recipient_and_amount_and_changes_nothing() {
+        let state = ready_state();
+        assert_eq!(
+            check_outbound(
+                &state,
+                EvmChain::Base,
+                &RECIPIENT.to_lowercase(),
+                &Nat::from(AMOUNT)
+            ),
+            Ok((RECIPIENT.to_string(), AMOUNT))
+        );
+        assert_nothing_reserved(&state);
+    }
+
+    #[test]
+    fn nft_backed_record_is_burned_at_the_flagged_index() {
+        let mut state = ready_state();
+        // ids are shared with `bridge_to_evm` transfers
+        let first = begin(&mut state, &base_args());
+        assert_eq!(first.id, 0);
+        let out_pending = state.out_pending;
+
+        let amount = 3 * 100_000_000_000u128;
+        let record = record_nft_backed_outbound(
+            &mut state,
+            user(),
+            EvmChain::Ethereum,
+            RECIPIENT.to_string(),
+            amount,
+            NOW,
+        );
+        assert_eq!(
+            record,
+            OutboundTransfer {
+                id: 1,
+                from: Account::from(user()),
+                chain: EvmChain::Ethereum,
+                recipient: RECIPIENT.to_string(),
+                amount: Nat::from(amount),
+                created_at: NOW,
+                status: OutboundStatus::Burned {
+                    icp_burn_index: (1 << 63) | 1,
+                },
+            }
+        );
+        assert_eq!(transfer_out(1), Some(record.clone()));
+        assert_eq!(state.next_out_id, 2);
+        // nothing is pending: the NFTs are already gldt_swap's
+        assert_eq!(state.bridged_out, amount);
+        assert_eq!(state.out_pending, out_pending);
+        assert!(state.outbound_work.contains(&1));
+        assert!(state.outbound_held.is_empty());
+        assert_eq!(
+            transfers_out_by_account(&Account::from(user()), None, 10)
+                .into_iter()
+                .map(|t| t.id)
+                .collect::<Vec<_>>(),
+            [1, 0]
+        );
+
+        // a burn result for it is ignored: it is not burning
+        assert_eq!(
+            apply_burn_result(&mut state, 1, BurnResult::Ok(5), NOW),
+            None
+        );
+        assert_eq!(status(1), record.status);
+        assert_eq!(state.bridged_out, amount);
+        assert_eq!(state.out_pending, out_pending);
+    }
+
+    /// The steps the processor (and `sign_new_transfer`) take for a `Burned` transfer, on one
+    /// backed by an NFT swap: the voucher request, the claims key signature, `store_voucher`.
+    #[test]
+    fn processor_signs_an_nft_backed_record_like_any_other() {
+        let mut state = ready_state();
+        let amount = 100_000_000_000u128;
+        let record = record_nft_backed_outbound(
+            &mut state,
+            user(),
+            EvmChain::Base,
+            RECIPIENT.to_string(),
+            amount,
+            NOW,
+        );
+        let index = NFT_BACKED_INDEX_FLAG | record.id;
+        // the processor has it as work, and no burn to retry
+        assert_eq!(
+            state.outbound_work.iter().copied().collect::<Vec<_>>(),
+            [record.id]
+        );
+        assert!(!matches!(
+            status(record.id),
+            OutboundStatus::Burning | OutboundStatus::BurnUnknown
+        ));
+
+        let (voucher, digest) = voucher_request(&state, record.id).unwrap();
+        let cfg = state.chain_config(EvmChain::Base).unwrap().clone();
+        let token = parse_address(&cfg.token).unwrap();
+        assert_eq!(
+            digest,
+            claim_digest(
+                cfg.chain_id,
+                token,
+                index,
+                parse_address(RECIPIENT).unwrap(),
+                U256::from(amount)
+            )
+        );
+        assert_eq!(voucher.icp_burn_index, index);
+        assert_eq!(voucher.amount, Nat::from(amount));
+        assert_eq!(voucher.recipient, RECIPIENT);
+
+        let key = signing_key();
+        let (sig, _) = key.sign_prehash_recoverable(&digest).unwrap();
+        let sig65 = normalize_signature(to_bytes64(&sig), digest, &public_key(&key)).unwrap();
+        let signed = with_signature(voucher, sig65);
+        assert_eq!(recover(digest, &signed.signature), signer().address);
+        assert!(store_voucher(&mut state, record.id, signed.clone()));
+        assert_eq!(status(record.id), OutboundStatus::Signed(signed));
+        assert!(state.outbound_work.is_empty());
+        // signing moves no counter
+        assert_eq!(state.bridged_out, amount);
+        assert_eq!(state.out_pending, 0);
     }
 
     #[test]
