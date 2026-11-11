@@ -13,7 +13,7 @@
 //! while the status is `Burned` with the same burn index. An [`OutboundGuard`] keeps the
 //! user's call and the processor from awaiting the same transfer at once.
 
-use crate::bridge::evm::address::{format_address, parse_address};
+use crate::bridge::evm::address::{format_address, parse_address, parse_recipient};
 use crate::bridge::evm::eip712::claim_digest;
 use crate::bridge::evm::num::nat_to_u256;
 use crate::bridge::gldt_ledger;
@@ -120,10 +120,7 @@ pub fn check_outbound(
     if state.chain_config(chain).is_none() {
         return Err(BridgeError::UnknownChain);
     }
-    let recipient = parse_address(recipient)
-        .ok()
-        .filter(|address| *address != [0u8; 20])
-        .ok_or(BridgeError::InvalidRecipient)?;
+    let recipient = parse_recipient(recipient).ok_or(BridgeError::InvalidRecipient)?;
     if *amount == 0u8 {
         return Err(BridgeError::ZeroAmount);
     }
@@ -135,7 +132,7 @@ pub fn check_outbound(
             ),
         })
     })?;
-    Ok((format_address(&recipient), amount))
+    Ok((recipient, amount))
 }
 
 /// Stores the transfer of an NFT swap to EVM: the NFTs are already gldt_swap's, so nothing

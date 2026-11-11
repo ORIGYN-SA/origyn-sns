@@ -98,17 +98,27 @@ impl ForwardPayout for EvmPayout {
 }
 
 /// The checks `swap_nft_for_evm` makes beyond the swap's: the swap configs name the one GLDT
-/// ledger the bridge counts, and [`check_outbound`] passes for the GLDT value of all `nfts`.
-/// Returns the recipient in EIP-55 form.
+/// ledger the bridge counts, [`check_outbound`] passes for the GLDT value of all `nfts`, and no
+/// NFT is worth 0, so whichever of them move the voucher is above 0. Returns the recipient in
+/// EIP-55 form.
 fn check_nft_to_evm(
     state: &RuntimeState,
     nfts: &HashSet<Nft>,
     chain: EvmChain,
     recipient: &str,
 ) -> Result<String, SwapNftForEvmError> {
-    gldt_ledger(&state.data.swap_configs).map_err(BridgeError::NotReady)?;
-    let amount = nfts_value(&state.data.swap_configs, nfts)?;
+    let configs = &state.data.swap_configs;
+    gldt_ledger(configs).map_err(BridgeError::NotReady)?;
+    let amount = nfts_value(configs, nfts)?;
     let (recipient, _) = check_outbound(&state.data.bridge, chain, recipient, &amount)?;
+    let worthless = nfts.iter().any(|nft| {
+        configs
+            .get_nft_equivalent(nft)
+            .is_ok_and(|value| value.division == 0)
+    });
+    if worthless {
+        return Err(BridgeError::ZeroAmount.into());
+    }
     Ok(recipient)
 }
 
@@ -402,6 +412,31 @@ mod tests {
                 SwapNftForTokensErrors::GeneralError(GeneralError::ConfigNotFound(_))
             ))
         ));
+        assert_nothing_changed();
+    }
+
+    #[test]
+    fn an_nft_worth_nothing_rejects_the_request() {
+        setup(ready_bridge(), swap_configs());
+        // the total is above 0, but if only the worthless NFT moved the voucher would be for 0
+        assert_eq!(
+            bridge_error(check(&[nft(1, 1), nft(3, 1)], EvmChain::Base, RECIPIENT)),
+            BridgeError::ZeroAmount
+        );
+        assert_eq!(
+            bridge_error(check(&[nft(3, 1)], EvmChain::Base, RECIPIENT)),
+            BridgeError::ZeroAmount
+        );
+        assert_nothing_changed();
+
+        // the bridge checks come first: paused wins
+        let mut paused = ready_bridge();
+        paused.paused_out = true;
+        setup(paused, swap_configs());
+        assert_eq!(
+            bridge_error(check(&[nft(1, 1), nft(3, 1)], EvmChain::Base, RECIPIENT)),
+            BridgeError::Paused
+        );
         assert_nothing_changed();
     }
 

@@ -47,6 +47,15 @@ pub fn parse_address(text: &str) -> Result<[u8; 20], String> {
     Ok(address)
 }
 
+/// A transfer recipient: `0x` text that [`parse_address`] accepts and that is not the zero
+/// address. Returns it in EIP-55 form.
+pub fn parse_recipient(text: &str) -> Option<String> {
+    parse_address(text)
+        .ok()
+        .filter(|address| *address != [0u8; 20])
+        .map(|address| format_address(&address))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -76,6 +85,25 @@ mod tests {
         assert!(try_evm_address(&[]).is_err());
         // 0x05 is not a SEC1 tag
         assert!(try_evm_address(&[5; 33]).is_err());
+    }
+
+    #[test]
+    fn parse_recipient_gives_eip55_and_refuses_the_zero_address() {
+        assert_eq!(
+            parse_recipient(&CLAIMS_ADDRESS.to_lowercase()).as_deref(),
+            Some(CLAIMS_ADDRESS)
+        );
+        assert_eq!(
+            parse_recipient(CLAIMS_ADDRESS).as_deref(),
+            Some(CLAIMS_ADDRESS)
+        );
+        assert_eq!(parse_recipient(&format!("0x{}", "0".repeat(40))), None);
+        assert_eq!(
+            parse_recipient("0x0a82D20142d067C8AF32f48664bDDfb65EcAE507"),
+            None
+        );
+        assert_eq!(parse_recipient(&CLAIMS_ADDRESS[2..]), None);
+        assert_eq!(parse_recipient(""), None);
     }
 
     #[test]

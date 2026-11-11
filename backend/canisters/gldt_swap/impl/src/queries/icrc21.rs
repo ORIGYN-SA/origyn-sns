@@ -1,4 +1,4 @@
-use crate::bridge::evm::address::{format_address, parse_address};
+use crate::bridge::evm::address::parse_recipient;
 use crate::state::read_state;
 use crate::updates::swap_nft_for_evm::nfts_value;
 use candid::{Decode, Nat};
@@ -154,10 +154,7 @@ fn handle_bridge_to_evm_consent(args: Icrc21Args) -> Icrc21Response {
 pub fn bridge_to_evm_consent(
     args: &BridgeToEvmArgs,
 ) -> Result<(String, Vec<(String, String)>), String> {
-    let recipient = parse_address(&args.recipient)
-        .ok()
-        .filter(|address| *address != [0u8; 20])
-        .map(|address| format_address(&address))
+    let recipient = parse_recipient(&args.recipient)
         .ok_or_else(|| format!("{:?} is not an EVM recipient address", args.recipient))?;
     let amount = format_gldt(&args.amount);
     let chain = chain_name(args.chain);
@@ -205,10 +202,7 @@ pub fn swap_nft_for_evm_consent(
     args: &SwapNftForEvmArgs,
     value: &Nat,
 ) -> Result<(String, Vec<(String, String)>), String> {
-    let recipient = parse_address(&args.recipient)
-        .ok()
-        .filter(|address| *address != [0u8; 20])
-        .map(|address| format_address(&address))
+    let recipient = parse_recipient(&args.recipient)
         .ok_or_else(|| format!("{:?} is not an EVM recipient address", args.recipient))?;
     let amount = format_gldt(value);
     let chain = chain_name(args.chain);
