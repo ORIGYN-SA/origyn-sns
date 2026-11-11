@@ -313,24 +313,22 @@ impl GroupedNftsByCanister {
         read_state(|s| s.data.swap_configs.token_equivalent(&nfts))
     }
 
+    /// The swap fees of the NFTs, added up per ledger. Each fee is on the ledger of the NFT's
+    /// own value, the ledger [Self::calculate_token_equivalent] puts that value on.
     pub fn calculate_fees_amount(&self) -> Result<HashMap<Principal, Nat>, GeneralError> {
         let swap_configs = read_state(|s| s.data.swap_configs.clone());
 
         let mut fee_totals: HashMap<Principal, Nat> = HashMap::new();
 
         for (canister_id, token_ids) in &self.grouped {
-            let config = swap_configs.find_by_canister_id(canister_id)?;
-
             for token_id in token_ids {
-                // Get the swap fee for this token
-                let fee = config
-                    .fractionalization_config
-                    .swap_fee_for_token(token_id)?;
-
-                // Ledger ID
-                let ledger_id = config.fractionalization_config.get_ledger_id()?;
-
-                *fee_totals.entry(ledger_id).or_insert(Nat::from(0_u64)) += fee;
+                let value = swap_configs.get_nft_equivalent(&Nft {
+                    canister_id: *canister_id,
+                    id: token_id.clone(),
+                })?;
+                *fee_totals
+                    .entry(value.ledger_id)
+                    .or_insert(Nat::from(0_u64)) += value.swap_fee;
             }
         }
 
@@ -650,5 +648,52 @@ mod tests {
 
         let totals = sum_result_map(nfts_batch.calculate_token_equivalent()).unwrap();
         assert_eq!(totals, Nat::from(211_u64));
+    }
+
+    #[test]
+    fn fees_are_on_the_ledger_of_each_nfts_own_value() {
+        use gldt_swap_common::swap_canister_config::{
+            CustomFractionalizationConfig, FractionalizationConfig, GeneralFractionalizationConfig,
+        };
+        use std::collections::BTreeMap;
+
+        init_runtime_state();
+        let on = |division: u64, fee: u64, ledger: u8| GeneralFractionalizationConfig {
+            division,
+            swap_fee: Nat::from(fee),
+            ledger_id: collection(ledger),
+        };
+        // token 1 is valued on ledger 8, token 2 on ledger 9
+        mutate_state(|state| {
+            state.data.swap_configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+                icrc7_canister_id: collection(1),
+                fractionalization_config: FractionalizationConfig::Custom(
+                    CustomFractionalizationConfig {
+                        per_token_config: BTreeMap::from([
+                            (Nat::from(1u8), on(100, 3, 8)),
+                            (Nat::from(2u8), on(1_000, 5, 9)),
+                        ]),
+                    },
+                ),
+            }]);
+        });
+        let batch = GroupedNftsByCanister::from_nfts(vec![nft(1, 1), nft(1, 2)]);
+
+        let values = batch.calculate_token_equivalent().unwrap();
+        let fees = batch.calculate_fees_amount().unwrap();
+        assert_eq!(
+            values,
+            HashMap::from([
+                (collection(8), Nat::from(100u8)),
+                (collection(9), Nat::from(1_000u16)),
+            ])
+        );
+        assert_eq!(
+            fees,
+            HashMap::from([
+                (collection(8), Nat::from(3u8)),
+                (collection(9), Nat::from(5u8))
+            ])
+        );
     }
 }

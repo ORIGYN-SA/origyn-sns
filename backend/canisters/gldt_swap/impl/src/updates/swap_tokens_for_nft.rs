@@ -104,7 +104,11 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     let result =
         burn_transfer_and_reimburse(caller, &swaps, &swap_ids, tokens_amount, swap_fees).await;
     // however the steps ended, this call's swaps leave the active swaps
-    mutate_state(|s| s.data.swap_system.finalize_call_swaps(&swap_ids));
+    mutate_state(|s| {
+        s.data
+            .swap_system
+            .finalize_call_swaps(&swap_ids, &s.data.nft_guards)
+    });
     result.map(|()| swap_ids)
 }
 
@@ -366,13 +370,14 @@ async fn burn_transfer_and_reimburse(
 
     // 4. Reimburse failed swaps
     let swaps_to_reimburse = read_state(|s| s.data.swap_system.filter_swaps_to_reimburse(swap_ids));
-    let nfts_for_reimburse: Vec<_> = swaps_to_reimburse.values().map(|s| s.nft.clone()).collect();
-
-    let filtered_nfts = GroupedNftsByCanister::from_nfts(nfts_for_reimburse);
-
-    let tokens_amount: HashMap<Principal, candid::Nat> = filtered_nfts
-        .calculate_token_equivalent()
-        .map_err(SwapTokensForNftErrors::GeneralError)?;
+    // the GLDT each swap burned, as it recorded it, back on the swap's own ledger
+    let mut tokens_amount: HashMap<Principal, candid::Nat> = HashMap::new();
+    for swap in swaps_to_reimburse.values() {
+        *tokens_amount
+            .entry(swap.tokens_amount.ledger_id)
+            .or_insert_with(|| candid::Nat::from(0u8)) +=
+            candid::Nat::from(swap.tokens_amount.division);
+    }
 
     let transfer_args: Vec<_> = tokens_amount
         .iter()

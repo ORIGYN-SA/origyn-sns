@@ -92,9 +92,10 @@ impl SwapConfigs {
         }
     }
 
-    /// What `nfts` are worth, added up per ledger. Each NFT is valued by
-    /// [`Self::get_nft_equivalent`], as its swap records it, so the checks, the consent message,
-    /// the mint and the supply balancer all value an NFT the same way.
+    /// What `nfts` are worth now, added up per ledger. Each NFT is valued by
+    /// [`Self::get_nft_equivalent`] from the current configs, the lookup a new swap records as its
+    /// `tokens_amount`, so the checks, the consent message and the supply balancer value an NFT
+    /// the way a swap created now would. A swap already created keeps the value it recorded.
     pub fn token_equivalent<'a>(
         &self,
         nfts: impl IntoIterator<Item = &'a Nft>,

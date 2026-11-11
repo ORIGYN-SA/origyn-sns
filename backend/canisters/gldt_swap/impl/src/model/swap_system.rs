@@ -4,7 +4,7 @@ use candid::{Nat, Principal};
 use gldt_swap_common::nft::Nft;
 use gldt_swap_common::swap::{SwapIndex, SwapInfo, SwapStatus, SwapType};
 use serde::{Deserialize, Serialize};
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeSet, HashMap, HashSet};
 use types::TimestampMillis;
 
 #[derive(Serialize, Deserialize)]
@@ -212,46 +212,20 @@ impl SwapSystem {
         self.swaps.remove(swap_id)
     }
 
-    pub fn remove_active_swaps(&mut self, swap_ids: Vec<SwapIndex>) {
-        self.latest_timestamp = timestamp_millis();
-        swap_ids.iter().for_each(|id| {
-            self.swaps.remove(id);
-        });
-    }
-
-    // Removes completed swaps and moves failed swaps to `failed_swaps`.
-    pub fn finalize_swaps(&mut self, swap_ids: &[SwapIndex]) {
-        self.latest_timestamp = timestamp_millis();
-
-        for swap_id in swap_ids {
-            if let Some(swap) = self.swaps.remove(swap_id) {
-                match swap.status {
-                    SwapStatus::Complete => {
-                        continue;
-                    }
-                    SwapStatus::NftTransferFailed(_) | SwapStatus::MintFailed(_) => {
-                        self.failed_swaps.insert(swap_id.clone(), swap);
-                    }
-                    _ => {
-                        self.swaps.insert(swap_id.clone(), swap);
-                    }
-                }
-            }
-        }
-    }
-
     /// Ends the swaps of one call, `swap_ids`: each leaves the active swaps, removed when
     /// `Complete` and moved to `failed_swaps` in any other status. Swaps of other calls stay
     /// active, except those older than
-    /// [`gldt_swap_common::swap::STALE_SWAP_TIME_THRESHOLD_MINUTES`]: a call that
-    /// trapped leaves its swaps behind, and they are ended the same way.
-    pub fn finalize_call_swaps(&mut self, swap_ids: &[SwapIndex]) {
+    /// [`gldt_swap_common::swap::STALE_SWAP_TIME_THRESHOLD_MINUTES`] whose NFT is not in
+    /// `guarded`: a call holds its NFTs' guards until it ends, also when it traps after an
+    /// await, so such a swap was left behind by a call that trapped, and it is ended the same
+    /// way. A call still running keeps its swaps however long it takes.
+    pub fn finalize_call_swaps(&mut self, swap_ids: &[SwapIndex], guarded: &BTreeSet<Nft>) {
         self.latest_timestamp = timestamp_millis();
 
         let stale: Vec<SwapIndex> = self
             .swaps
             .iter()
-            .filter(|(_, swap)| swap.is_swap_over_time_threshold())
+            .filter(|(_, swap)| swap.is_swap_over_time_threshold() && !guarded.contains(&swap.nft))
             .map(|(swap_id, _)| swap_id.clone())
             .collect();
 
@@ -324,7 +298,7 @@ mod tests {
         assert_eq!(system.swaps_started, 3);
         // finishing or removing swaps does not move it
         let all: Vec<SwapIndex> = system.swaps.keys().cloned().collect();
-        system.finalize_call_swaps(&all);
+        system.finalize_call_swaps(&all, &BTreeSet::new());
         assert!(system.swaps.is_empty());
         assert_eq!(system.swaps_started, 3);
     }
@@ -383,7 +357,7 @@ mod tests {
         system.update_swaps_status(&a[0], SwapStatus::Complete);
         system.update_swaps_status(&a[1], SwapStatus::NftTransferFromFailed("no".to_string()));
 
-        system.finalize_call_swaps(&a);
+        system.finalize_call_swaps(&a, &BTreeSet::new());
 
         // B's swaps are still active, untouched
         let mut active: Vec<_> = system.swaps.keys().cloned().collect();
@@ -404,9 +378,57 @@ mod tests {
         assert_eq!(system.failed_swaps.len(), 2);
 
         // B finalizes its own swaps later
-        system.finalize_call_swaps(&b);
+        system.finalize_call_swaps(&b, &BTreeSet::new());
         assert!(system.swaps.is_empty());
         assert_eq!(system.failed_swaps.len(), 4);
+    }
+
+    #[test]
+    fn a_slow_call_keeps_its_swaps_while_it_holds_their_nft_guards() {
+        let nft_canister = Principal::from_slice(&[1; 10]);
+        let configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+            icrc7_canister_id: nft_canister,
+            fractionalization_config: FractionalizationConfig::General(
+                GeneralFractionalizationConfig {
+                    division: 100_000_000_000,
+                    swap_fee: Nat::from(100_000_000u64),
+                    ledger_id: Principal::from_slice(&[2; 10]),
+                },
+            ),
+        }]);
+        let nft = |id: u64| Nft {
+            id: Nat::from(id),
+            canister_id: nft_canister,
+        };
+        let user = Principal::from_slice(&[3; 29]);
+        let mut system = SwapSystem::default();
+
+        // call A started long ago and is still waiting on a canister: it holds its NFT's guard
+        let slow: Vec<SwapIndex> = system
+            .create_swaps_batch(SwapType::Forward, user, vec![nft(1)], &configs)
+            .unwrap()
+            .into_keys()
+            .collect();
+        system.swaps.get_mut(&slow[0]).unwrap().created_at = 0;
+        system.update_swaps_status(&slow[0], SwapStatus::NftTransferredFrom);
+        // call B ends
+        let b: Vec<SwapIndex> = system
+            .create_swaps_batch(SwapType::Forward, user, vec![nft(2)], &configs)
+            .unwrap()
+            .into_keys()
+            .collect();
+        system.finalize_call_swaps(&b, &BTreeSet::from([nft(1)]));
+
+        // A's swap is still active, so A's later steps still find it
+        assert_eq!(system.swaps.keys().cloned().collect::<Vec<_>>(), slow);
+        assert_eq!(
+            system.swaps[&slow[0]].status,
+            SwapStatus::NftTransferredFrom
+        );
+        // once A's guard is gone, the old swap is a leftover and is swept
+        system.finalize_call_swaps(&[], &BTreeSet::new());
+        assert!(system.swaps.is_empty());
+        assert!(system.failed_swaps.contains_key(&slow[0]));
     }
 
     /// `SwapSystem` as deployed before the counter.

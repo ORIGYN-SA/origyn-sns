@@ -260,7 +260,11 @@ pub(crate) async fn forward_swap<P: ForwardPayout>(
     let result =
         transfer_issue_and_reimburse(caller, &batched_nfts, &swaps, &swap_ids, payout).await;
     // however the steps ended, this call's swaps leave the active swaps
-    mutate_state(|s| s.data.swap_system.finalize_call_swaps(&swap_ids));
+    mutate_state(|s| {
+        s.data
+            .swap_system
+            .finalize_call_swaps(&swap_ids, &s.data.nft_guards)
+    });
     Ok((swap_ids, result?))
 }
 
