@@ -159,6 +159,36 @@ contract GLDTInitTest is GLDTFixture {
         assertTrue(icp);
     }
 
+    function test_pause_emits_nothing_when_no_flag_changes() public {
+        // Nothing paused, nothing asked.
+        vm.recordLogs();
+        vm.prank(operator);
+        tokenA.pause(false, false);
+        assertEq(vm.getRecordedLogs().length, 0);
+
+        vm.prank(operator);
+        tokenA.pause(true, true);
+
+        // Both already paused: asking again changes nothing.
+        vm.recordLogs();
+        vm.prank(operator);
+        tokenA.pause(true, true);
+        vm.prank(operator);
+        tokenA.pause(true, false);
+        vm.prank(operator);
+        tokenA.pause(false, false);
+        assertEq(vm.getRecordedLogs().length, 0);
+        (bool lz, bool icp) = tokenA.paused();
+        assertTrue(lz);
+        assertTrue(icp);
+
+        // setPaused still emits, also with no change.
+        vm.expectEmit(address(tokenA));
+        emit IGLDT.PausedSet(true, true);
+        vm.prank(address(tokenA));
+        tokenA.setPaused(true, true);
+    }
+
     function test_setPaused_only_by_self() public {
         vm.prank(operator);
         tokenA.pause(true, true);

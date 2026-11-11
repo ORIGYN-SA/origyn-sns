@@ -148,7 +148,11 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
     /// @inheritdoc IGLDT
     function pause(bool lzPaused, bool icpBridgePaused) external onlyOperatorOrSelf {
         GLDTStorage storage $ = _getGLDTStorage();
-        _writePaused($.lzPaused || lzPaused, $.icpBridgePaused || icpBridgePaused);
+        bool newLz = $.lzPaused || lzPaused;
+        bool newIcp = $.icpBridgePaused || icpBridgePaused;
+        // Nothing changes: no write, no event.
+        if (newLz == $.lzPaused && newIcp == $.icpBridgePaused) return;
+        _writePaused(newLz, newIcp);
     }
 
     /// @inheritdoc IGLDT

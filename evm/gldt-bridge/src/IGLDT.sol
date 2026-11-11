@@ -80,7 +80,8 @@ interface IGLDT {
     function burnToIcp(uint256 amount, bytes32 icpPrincipal, bytes32 icpSubaccount) external returns (uint64 burnId);
 
     /// @notice Operator or the token itself: turns on each pause passed as true and leaves the other flag as it
-    /// is. It never turns a pause off; only `setPaused`, through an SNS-voted `execute`, does.
+    /// is. It never turns a pause off; only `setPaused`, through an SNS-voted `execute`, does. When no flag
+    /// changes, it writes nothing and emits no event.
     function pause(bool lzPaused, bool icpBridgePaused) external;
 
     /// @notice Only the token itself (so only through `execute`): sets both pause flags, on or off.
