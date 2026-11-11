@@ -264,7 +264,6 @@ async fn burn_transfer_and_reimburse(
 
     mutate_state(|s| {
         let sys = &mut s.data.swap_system;
-        (&burned_success, SwapStatus::Burned);
         for idx in &burned_failed {
             let reason = burn_fail_reasons
                 .get(idx)

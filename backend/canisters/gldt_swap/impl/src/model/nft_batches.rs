@@ -409,9 +409,9 @@ mod tests {
         rejected("No response from transfer")
     }
 
-    fn by_collection(
-        entries: Vec<(u8, Vec<(Nat, Result<(), TransferFromError>)>)>,
-    ) -> NftTransferResults<TransferFromError> {
+    type PerNft = Vec<(Nat, Result<(), TransferFromError>)>;
+
+    fn by_collection(entries: Vec<(u8, PerNft)>) -> NftTransferResults<TransferFromError> {
         entries
             .into_iter()
             .map(|(c, results)| (collection(c), results))
