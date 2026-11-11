@@ -4,6 +4,7 @@
 mod e2e_anvil;
 mod fixtures;
 mod inbound;
+mod nft_to_evm;
 mod outbound;
 pub mod outcalls;
 pub mod setup;

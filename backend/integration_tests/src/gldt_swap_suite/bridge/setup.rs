@@ -1,9 +1,11 @@
 use crate::client::gldt_swap::{bridge_to_evm, get_bridge_evm_signers, get_bridge_status};
 use crate::client::icrc1_icrc2_token::icrc2_approve;
+use crate::client::origyn_nft::icrc37_approve_tokens;
 use crate::client::pocket::create_canister_with_id;
 use crate::gldt_swap_suite::bridge::outcalls::{serve_outcalls, MockEvm};
 use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger_with_balances;
 use crate::gldt_swap_suite::setup::setup_gldt_swap::setup_gldt_swap_canister;
+use crate::origyn_nft_test_env::nft_utils::{mint_nft, setup_core_canister};
 use crate::utils::random_principal;
 use crate::wasms::{EVM_RPC, GLDT_SWAP};
 use bity_ic_icrc3::config::{ICRC3Config, ICRC3Properties};
@@ -15,16 +17,20 @@ use gldt_swap_common::bridge::{
     BridgeConfig, BridgeToEvmArgs, BridgeUpgrade, ChainConfig, EvmChain, EvmProvider,
     OutboundTransfer,
 };
+use gldt_swap_common::nft::Nft;
 use gldt_swap_common::swap_canister_config::{
     FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
 };
+use icrc_ledger_types::icrc::generic_value::ICRC3Value;
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc2::approve::ApproveArgs;
 use icrc_ledger_types::icrc3::blocks::SupportedBlockType;
 use icrc_ledger_types::icrc3::transactions::{
     GetTransactionsRequest, GetTransactionsResponse, Transaction,
 };
+use origyn_nft_canister::{InitApprovalsArg, Permission, PermissionManager};
 use pocket_ic::{ErrorCode, PocketIc, PocketIcBuilder, RejectResponse, Time};
+use std::collections::HashMap;
 use std::time::{Duration, SystemTime};
 
 pub const GLDT_SWAP_CANISTER_ID: &str = "6f6ua-hqaaa-aaaar-qairq-cai";
@@ -39,6 +45,8 @@ pub const LZ_ENDPOINT: &str = "0x1a44076050125825900e736c501f859c50fE728c";
 pub const USER_BALANCE_E8S: u64 = 100_000_000_000;
 /// The head block both mocked chains report at their first tick.
 pub const FIRST_HEAD: u64 = 1_000;
+/// The GLDT value of one NFT of the swap config, in e8s: 1,000,000 GLDT.
+pub const NFT_VALUE_E8S: u64 = 100_000_000_000_000;
 
 pub struct BridgeEnv {
     pub pic: PocketIc,
@@ -52,6 +60,11 @@ pub struct BridgeEnv {
     pub user: Principal,
     /// The mocked Ethereum and Base nodes; `start_all_chains` sets them up.
     pub evm: MockEvm,
+    /// The ORIGYN NFT collection the swap config names, with
+    /// [BridgeEnvBuilder::with_nft_collection]; otherwise the config names a random principal.
+    pub nft_collection: Option<Principal>,
+    /// The NFTs `user` holds in `nft_collection`, each approved for gldt_swap.
+    pub user_nfts: Vec<Nft>,
 }
 
 impl BridgeEnv {
@@ -377,6 +390,7 @@ pub struct BridgeEnvBuilder {
     bridge_at_init: bool,
     chains: Option<Vec<ChainConfig>>,
     starts_now: bool,
+    user_nfts: Option<usize>,
 }
 
 impl Default for BridgeEnvBuilder {
@@ -385,6 +399,7 @@ impl Default for BridgeEnvBuilder {
             bridge_at_init: true,
             chains: None,
             starts_now: false,
+            user_nfts: None,
         }
     }
 }
@@ -419,11 +434,23 @@ impl BridgeEnvBuilder {
         self
     }
 
+    /// Installs an ORIGYN NFT collection on an application subnet and points the swap config
+    /// at it, worth [NFT_VALUE_E8S] per NFT. `user` gets `user_nfts` NFTs, each approved for
+    /// gldt_swap. They are minted before gldt_swap is installed: a mint moves the clock 30
+    /// minutes, which would run the bridge jobs with nobody answering their outcalls.
+    pub fn with_nft_collection(mut self, user_nfts: usize) -> Self {
+        self.user_nfts = Some(user_nfts);
+        self
+    }
+
     pub fn build(self) -> BridgeEnv {
         // canister ids in -aaaar- ranges live on the fiduciary subnet, which also has the threshold keys
         let mut builder = PocketIcBuilder::new()
             .with_nns_subnet()
             .with_fiduciary_subnet();
+        if self.user_nfts.is_some() {
+            builder = builder.with_application_subnet();
+        }
         if self.starts_now {
             builder = builder.with_initial_time(Time::from(SystemTime::now()));
         }
@@ -442,6 +469,19 @@ impl BridgeEnvBuilder {
         );
 
         let evm_rpc_canister_id = install_evm_rpc(&pic, controller);
+
+        let (nft_collection, user_nfts) = match self.user_nfts {
+            Some(count) => {
+                let collection = install_nft_collection(&pic, controller);
+                let nfts = (0..count)
+                    .map(|_| {
+                        mint_approved_nft(&pic, controller, collection, user, gldt_swap_canister_id)
+                    })
+                    .collect();
+                (Some(collection), nfts)
+            }
+            None => (None, Vec::new()),
+        };
 
         let mut constants = ICRC3Properties::default();
         constants.max_memory_size_bytes = 60000;
@@ -464,10 +504,10 @@ impl BridgeEnvBuilder {
             commit_hash: "bridge".to_string(),
             // the bridge burns and mints on the one ledger the swap configs name
             swap_configs: vec![SwapCanisterConfig {
-                icrc7_canister_id: random_principal(),
+                icrc7_canister_id: nft_collection.unwrap_or_else(random_principal),
                 fractionalization_config: FractionalizationConfig::General(
                     GeneralFractionalizationConfig {
-                        division: 100_000_000_000_000,
+                        division: NFT_VALUE_E8S,
                         swap_fee: Nat::from(100_000_000_u64),
                         ledger_id: gldt_ledger_canister_id,
                     },
@@ -500,6 +540,99 @@ impl BridgeEnvBuilder {
             evm_rpc_canister_id,
             user,
             evm: MockEvm::default(),
+            nft_collection,
+            user_nfts,
         }
+    }
+}
+
+/// An ORIGYN NFT collection with `controller` as its minter, set up as
+/// `setup_one_canister.rs` does.
+fn install_nft_collection(pic: &PocketIc, controller: Principal) -> Principal {
+    let permissions = HashMap::from([(
+        controller,
+        vec![
+            Permission::Minting,
+            Permission::ManageAuthorities,
+            Permission::UpdateMetadata,
+            Permission::UpdateCollectionMetadata,
+            Permission::ReadUploads,
+            Permission::UpdateUploads,
+        ],
+    )]);
+    let init_args = origyn_nft_canister::InitArgs {
+        test_mode: true,
+        version: BuildVersion::min(),
+        commit_hash: "commit_hash".to_string(),
+        permissions: PermissionManager::new(permissions),
+        description: None,
+        symbol: "MC".to_string(),
+        name: "MyCollection".to_string(),
+        logo: None,
+        supply_cap: Some(Nat::from(10u64)),
+        max_query_batch_size: None,
+        max_update_batch_size: None,
+        max_take_value: None,
+        default_take_value: None,
+        max_memo_size: None,
+        atomic_batch_transfers: None,
+        tx_window: None,
+        permitted_drift: None,
+        max_canister_storage_threshold: None,
+        collection_metadata: HashMap::new(),
+        approval_init: InitApprovalsArg {
+            max_approvals_per_token_or_collection: Some(Nat::from(10u64)),
+            max_revoke_approvals: Some(Nat::from(10u64)),
+        },
+    };
+    let collection = pic.create_canister_with_settings(Some(controller), None);
+    setup_core_canister(
+        pic,
+        collection,
+        origyn_nft_canister::Args::Init(init_args),
+        controller,
+    )
+}
+
+/// Mints an NFT to `owner` and approves `spender` for it.
+fn mint_approved_nft(
+    pic: &PocketIc,
+    controller: Principal,
+    collection: Principal,
+    owner: Principal,
+    spender: Principal,
+) -> Nft {
+    let id = mint_nft(
+        pic,
+        Account::from(owner),
+        controller,
+        collection,
+        vec![("name".to_string(), ICRC3Value::Text("gold bar".to_string()))],
+    )
+    .expect("mint");
+    let approval = origyn_nft_canister::icrc37_approve_tokens::ApproveTokenArg {
+        token_id: id.clone(),
+        approval_info: origyn_nft_canister::ApprovalInfo {
+            spender: Account::from(spender),
+            from_subaccount: None,
+            expires_at: None,
+            memo: None,
+            created_at_time: pic.get_time().as_nanos_since_unix_epoch(),
+        },
+    };
+    let approved = icrc37_approve_tokens(pic, owner, collection, &vec![approval]).expect("approve");
+    assert!(
+        matches!(
+            approved.as_slice(),
+            [Some(
+                origyn_nft_canister::icrc37_approve_tokens::ApproveTokenResult::Ok(_)
+            )]
+        ),
+        "{approved:?}"
+    );
+    pic.tick();
+    Nft {
+        id,
+        canister_id: collection,
     }
 }

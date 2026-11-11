@@ -9,6 +9,7 @@ generate_pocket_update_call!(swap_tokens_for_nft);
 generate_pocket_update_call!(recover_stuck_swap);
 generate_pocket_query_call!(get_active_swap_ids_by_user);
 generate_pocket_update_call!(swap_nft_for_tokens);
+generate_pocket_update_call!(swap_nft_for_evm);
 generate_pocket_update_call!(get_history_total);
 generate_pocket_query_call!(get_owned_nfts);
 generate_pocket_query_call!(http_request);

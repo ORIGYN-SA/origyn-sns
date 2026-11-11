@@ -121,7 +121,7 @@ pub(super) fn address_word(text: &str) -> [u8; 32] {
 
 /// The digest `claimFromIcp` checks, built by hand from the contract's type strings and the
 /// `("Gold Token", "1", chainId, token)` domain, so the canister's own code is not reused.
-fn claim_digest(voucher: &EvmVoucher) -> [u8; 32] {
+pub(super) fn claim_digest(voucher: &EvmVoucher) -> [u8; 32] {
     let domain_type = keccak(
         b"EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)",
     );
