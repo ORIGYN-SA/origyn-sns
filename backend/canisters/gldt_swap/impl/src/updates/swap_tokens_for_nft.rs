@@ -1,5 +1,5 @@
 use crate::guards::{balancer_running, reject_anonymous_caller, GuardNft};
-use crate::model::nft_batches::GroupedNftsByCanister;
+use crate::model::nft_batches::{nft_transfer_outcome, GroupedNftsByCanister, NftTransferOutcome};
 use crate::state::{icrc3_commit_prepared_transaction, mutate_state, read_state};
 use crate::utils::prepare_transactions;
 use bity_ic_canister_time::SECOND_IN_MS;
@@ -278,36 +278,26 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     let mut nft_transfer_success: Vec<SwapIndex> = Vec::new();
     let mut nft_transfer_failed: HashMap<SwapIndex, String> = HashMap::new();
 
-    for swap in swaps.values() {
-        if let Some(results) = nft_transfer_results.get(&swap.nft.canister_id) {
-            let nft_success: Result<bool, _> =
-                results.iter().try_fold(false, |found, res| match res {
-                    Ok(nft_id) if *nft_id == swap.nft.id => Ok(true),
-                    Ok(_) => Ok(found),
-                    Err(e) => Err(e),
-                });
-
-            match nft_success {
-                Ok(true) => {
-                    // successful_nfts.push(swap.nft.clone());
-                    nft_transfer_success.push(swap.index.clone());
-                }
-                Ok(false) => {
-                    nft_transfer_failed.insert(
-                        swap.index.clone(),
-                        "NFT not found in transfer results".to_string(),
-                    );
-                }
-                Err(err) => {
-                    nft_transfer_failed
-                        .insert(swap.index.clone(), format!("Transfer error: {:?}", err));
-                }
+    // each swap whose NFT was sent, by its own NFT's result; a swap whose burn did not succeed
+    // had no NFT sent, so it gets no transfer status and no reimbursement
+    for swap in swaps
+        .values()
+        .filter(|s| successful_swaps_set.contains(&s.index))
+    {
+        match nft_transfer_outcome(&nft_transfer_results, &swap.nft) {
+            NftTransferOutcome::Moved => {
+                nft_transfer_success.push(swap.index.clone());
             }
-        } else {
-            nft_transfer_failed.insert(
-                swap.index.clone(),
-                "No transfer attempt for this canister".to_string(),
-            );
+            NftTransferOutcome::Failed(err) => {
+                nft_transfer_failed
+                    .insert(swap.index.clone(), format!("Transfer error: {:?}", err));
+            }
+            NftTransferOutcome::NoEntry => {
+                nft_transfer_failed.insert(
+                    swap.index.clone(),
+                    "NFT not found in transfer results".to_string(),
+                );
+            }
         }
     }
 

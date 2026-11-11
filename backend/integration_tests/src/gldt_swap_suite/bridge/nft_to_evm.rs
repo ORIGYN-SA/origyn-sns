@@ -3,8 +3,8 @@
 
 use crate::client::gldt_swap::{
     bridge_pause, bridge_sns_action, get_active_swap_ids_by_user, get_bridge_status,
-    get_bridge_transfer_out, get_bridge_transfers_out_by_account, http_request, icrc3_get_blocks,
-    manual_gldt_supply_balance, swap_nft_for_evm,
+    get_bridge_transfer_out, get_bridge_transfers_out_by_account, get_failed_swaps_by_user,
+    http_request, icrc3_get_blocks, manual_gldt_supply_balance, swap_nft_for_evm,
 };
 use crate::client::icrc1_icrc2_token::icrc1_total_supply;
 use crate::client::origyn_nft::icrc7_owner_of;
@@ -19,6 +19,7 @@ use gldt_swap_common::bridge::{
     BridgeError, BridgePauseArgs, BridgeSnsAction, EvmChain, OutboundCounts, OutboundStatus,
 };
 use gldt_swap_common::nft::Nft;
+use gldt_swap_common::swap::SwapStatus;
 use icrc_ledger_types::icrc::generic_value::ICRC3Value;
 use icrc_ledger_types::icrc1::account::Account;
 use icrc_ledger_types::icrc3::blocks::GetBlocksRequest;
@@ -268,4 +269,83 @@ fn swap_nft_for_evm_while_paused_moves_no_nft() {
         owner(&env, &nft),
         Some(Account::from(env.gldt_swap_canister_id))
     );
+}
+
+#[test]
+fn swap_nft_for_evm_pays_for_the_nfts_that_moved() {
+    // two NFTs of one collection, and only the first is approved for gldt_swap
+    let mut env = BridgeEnvBuilder::new()
+        .with_nft_collection(2)
+        .with_unapproved_nfts(1)
+        .build();
+    start_all_chains(&mut env);
+    wait_for_signers(&env);
+    let approved = env.user_nfts[0].clone();
+    let unapproved = env.user_nfts[1].clone();
+    assert_eq!(approved.canister_id, unapproved.canister_id);
+    let supply_before = total_supply(&env);
+
+    let reply = swap_nft_for_evm(
+        &env.pic,
+        env.user,
+        env.gldt_swap_canister_id,
+        &SwapNftForEvmArgs {
+            nfts: [approved.clone(), unapproved.clone()].into_iter().collect(),
+            chain: EvmChain::Ethereum,
+            recipient: RECIPIENT.to_string(),
+        },
+    )
+    .expect("swap_nft_for_evm with one NFT approved");
+
+    // the voucher is for the approved NFT alone
+    let transfer = reply.transfer;
+    assert_eq!(transfer.amount, NFT_VALUE_E8S);
+    let OutboundStatus::Signed(voucher) = &transfer.status else {
+        panic!("expected a signed voucher, got {:?}", transfer.status);
+    };
+    assert_eq!(voucher.amount, NFT_VALUE_E8S);
+    let status = get_bridge_status(&env.pic, env.user, env.gldt_swap_canister_id, &());
+    assert_eq!(status.bridged_out, NFT_VALUE_E8S);
+    assert_eq!(status.out_pending, 0u64);
+    assert_eq!(total_supply(&env), supply_before);
+
+    assert_eq!(
+        owner(&env, &approved),
+        Some(Account::from(env.gldt_swap_canister_id))
+    );
+    assert_eq!(owner(&env, &unapproved), Some(Account::from(env.user)));
+
+    // both swaps are finished: the approved one complete and logged, the other failed
+    assert_eq!(reply.swap_ids.len(), 2);
+    assert!(get_active_swap_ids_by_user(
+        &env.pic,
+        env.user,
+        env.gldt_swap_canister_id,
+        &Some(env.user)
+    )
+    .is_empty());
+    let failed = get_failed_swaps_by_user(
+        &env.pic,
+        env.user,
+        env.gldt_swap_canister_id,
+        &Some(env.user),
+    );
+    assert_eq!(failed.len(), 1, "{failed:?}");
+    let failed_swap = failed.values().next().unwrap();
+    assert_eq!(failed_swap.nft, unapproved);
+    assert!(
+        matches!(failed_swap.status, SwapStatus::NftTransferFromFailed(_)),
+        "{:?}",
+        failed_swap.status
+    );
+    let complete = reply
+        .swap_ids
+        .iter()
+        .find(|id| **id != failed_swap.index)
+        .unwrap();
+    assert_eq!(
+        logged_swap_status(&env, complete).as_deref(),
+        Some("Complete")
+    );
+    assert_eq!(logged_swap_status(&env, &failed_swap.index), None);
 }

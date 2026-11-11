@@ -6,7 +6,7 @@ use crate::gldt_swap_suite::bridge::outcalls::{serve_outcalls, MockEvm};
 use crate::gldt_swap_suite::setup::setup_gldt_ledger::setup_gldt_ledger_with_balances;
 use crate::gldt_swap_suite::setup::setup_gldt_swap::setup_gldt_swap_canister;
 use crate::origyn_nft_test_env::nft_utils::{mint_nft, setup_core_canister};
-use crate::utils::random_principal;
+use crate::utils::{random_principal, tick_n_blocks};
 use crate::wasms::{EVM_RPC, GLDT_SWAP};
 use bity_ic_icrc3::config::{ICRC3Config, ICRC3Properties};
 use bity_ic_types::BuildVersion;
@@ -63,7 +63,8 @@ pub struct BridgeEnv {
     /// The ORIGYN NFT collection the swap config names, with
     /// [BridgeEnvBuilder::with_nft_collection]; otherwise the config names a random principal.
     pub nft_collection: Option<Principal>,
-    /// The NFTs `user` holds in `nft_collection`, each approved for gldt_swap.
+    /// The NFTs `user` holds in `nft_collection`, each approved for gldt_swap except the last
+    /// ones [BridgeEnvBuilder::with_unapproved_nfts] leaves out.
     pub user_nfts: Vec<Nft>,
 }
 
@@ -391,6 +392,7 @@ pub struct BridgeEnvBuilder {
     chains: Option<Vec<ChainConfig>>,
     starts_now: bool,
     user_nfts: Option<usize>,
+    unapproved_nfts: usize,
 }
 
 impl Default for BridgeEnvBuilder {
@@ -400,6 +402,7 @@ impl Default for BridgeEnvBuilder {
             chains: None,
             starts_now: false,
             user_nfts: None,
+            unapproved_nfts: 0,
         }
     }
 }
@@ -443,6 +446,13 @@ impl BridgeEnvBuilder {
         self
     }
 
+    /// With [Self::with_nft_collection]: the last `count` of the user's NFTs get no approval for
+    /// gldt_swap.
+    pub fn with_unapproved_nfts(mut self, count: usize) -> Self {
+        self.unapproved_nfts = count;
+        self
+    }
+
     pub fn build(self) -> BridgeEnv {
         // canister ids in -aaaar- ranges live on the fiduciary subnet, which also has the threshold keys
         let mut builder = PocketIcBuilder::new()
@@ -472,10 +482,19 @@ impl BridgeEnvBuilder {
 
         let (nft_collection, user_nfts) = match self.user_nfts {
             Some(count) => {
+                assert!(
+                    self.unapproved_nfts <= count,
+                    "more unapproved NFTs than NFTs"
+                );
+                let approved = count - self.unapproved_nfts;
                 let collection = install_nft_collection(&pic, controller);
                 let nfts = (0..count)
-                    .map(|_| {
-                        mint_approved_nft(&pic, controller, collection, user, gldt_swap_canister_id)
+                    .map(|i| {
+                        let nft = mint_user_nft(&pic, controller, collection, user);
+                        if i < approved {
+                            approve_nft(&pic, user, gldt_swap_canister_id, &nft);
+                        }
+                        nft
                     })
                     .collect();
                 (Some(collection), nfts)
@@ -594,13 +613,12 @@ fn install_nft_collection(pic: &PocketIc, controller: Principal) -> Principal {
     )
 }
 
-/// Mints an NFT to `owner` and approves `spender` for it.
-fn mint_approved_nft(
+/// Mints an NFT to `owner`.
+fn mint_user_nft(
     pic: &PocketIc,
     controller: Principal,
     collection: Principal,
     owner: Principal,
-    spender: Principal,
 ) -> Nft {
     let id = mint_nft(
         pic,
@@ -610,8 +628,18 @@ fn mint_approved_nft(
         vec![("name".to_string(), ICRC3Value::Text("gold bar".to_string()))],
     )
     .expect("mint");
+    // as `OrigynNftTestEnv::mint_nft` does: the collection's timers run before the next mint
+    tick_n_blocks(pic, 10);
+    Nft {
+        id,
+        canister_id: collection,
+    }
+}
+
+/// `owner` approves `spender` for `nft`.
+fn approve_nft(pic: &PocketIc, owner: Principal, spender: Principal, nft: &Nft) {
     let approval = origyn_nft_canister::icrc37_approve_tokens::ApproveTokenArg {
-        token_id: id.clone(),
+        token_id: nft.id.clone(),
         approval_info: origyn_nft_canister::ApprovalInfo {
             spender: Account::from(spender),
             from_subaccount: None,
@@ -620,7 +648,8 @@ fn mint_approved_nft(
             created_at_time: pic.get_time().as_nanos_since_unix_epoch(),
         },
     };
-    let approved = icrc37_approve_tokens(pic, owner, collection, &vec![approval]).expect("approve");
+    let approved =
+        icrc37_approve_tokens(pic, owner, nft.canister_id, &vec![approval]).expect("approve");
     assert!(
         matches!(
             approved.as_slice(),
@@ -631,8 +660,4 @@ fn mint_approved_nft(
         "{approved:?}"
     );
     pic.tick();
-    Nft {
-        id,
-        canister_id: collection,
-    }
 }
