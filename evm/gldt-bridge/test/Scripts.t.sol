@@ -74,7 +74,7 @@ contract ScriptsTest is GLDTFixture {
 
     function test_check_reports_state_and_config_failures() public {
         vm.prank(operator);
-        tokenA.setPaused(false, true);
+        tokenA.pause(false, true);
         GLDTConfig memory c = _fixtureConfig(true);
         c.adminSigner = vm.addr(icpKey);
         // nothing is paused, adminSigner, and the peer (tokenA is not its own peer here)
@@ -266,10 +266,10 @@ contract ScriptsTest is GLDTFixture {
         assertEq(receiver, address(tokenB));
 
         vm.prank(operator);
-        tokenB.setPaused(true, false);
+        tokenB.pause(true, false);
         vm.expectRevert(bytes("the token is still lzPaused: unpause it first"));
         replayScript.preflight(receiver, origin, guid, message);
-        vm.prank(operator);
+        vm.prank(address(tokenB));
         tokenB.setPaused(false, false);
 
         replayScript.run(packet);

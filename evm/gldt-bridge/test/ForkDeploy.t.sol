@@ -102,7 +102,7 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
         address token = this.deployOnly(eth);
 
         vm.prank(eth.operator);
-        GLDT(token).setPaused(true, false);
+        GLDT(token).pause(true, false);
         GLDTConfig memory wrong = _forkConfig("ethereum");
         wrong.receiveConfirmations += 1;
         wrong.icpSigner = ADMIN_SIGNER;

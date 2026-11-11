@@ -44,7 +44,7 @@ contract GLDTLzTest is GLDTFixture {
 
     function test_send_reverts_while_lzPaused() public {
         vm.prank(operator);
-        tokenA.setPaused(true, false);
+        tokenA.pause(true, false);
 
         SendParam memory sp = _sendParam(EID_B, bob, 4e8);
         MessagingFee memory fee = tokenA.quoteSend(sp, false);
@@ -57,8 +57,8 @@ contract GLDTLzTest is GLDTFixture {
         // forge-lint: disable-next-line(unsafe-typecast)
         assertFalse(hasPendingPackets(uint16(EID_B), addressToBytes32(address(tokenB))));
 
-        // icpBridgePaused alone leaves LayerZero open.
-        vm.prank(operator);
+        // icpBridgePaused alone leaves LayerZero open. Only the token itself turns a pause off.
+        vm.prank(address(tokenA));
         tokenA.setPaused(false, true);
         _send(tokenA, EID_B, alice, bob, 4e8);
         deliverPackets(EID_B, address(tokenB));
@@ -67,7 +67,7 @@ contract GLDTLzTest is GLDTFixture {
 
     function test_receive_while_paused_is_held_then_replayed() public {
         vm.prank(operator);
-        tokenB.setPaused(true, false);
+        tokenB.pause(true, false);
 
         _send(tokenA, EID_B, alice, bob, 4e8);
         (bytes memory packet, bytes memory options) = verifyNextPacket(EID_B, address(tokenB));
@@ -95,7 +95,7 @@ contract GLDTLzTest is GLDTFixture {
         endpointB.lzReceive(origin, receiver, guid, message, "");
 
         // After the unpause anyone can replay it, and the balance arrives.
-        vm.prank(operator);
+        vm.prank(address(tokenB));
         tokenB.setPaused(false, false);
         vm.prank(stranger);
         endpointB.lzReceive(origin, receiver, guid, message, "");

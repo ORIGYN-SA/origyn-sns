@@ -87,7 +87,7 @@ contract GLDTPermitTest is GLDTFixture {
     function test_permit_works_while_both_pause_flags_set() public {
         deal(address(tokenA), alice, 10e8, true);
         vm.prank(operator);
-        tokenA.setPaused(true, true);
+        tokenA.pause(true, true);
 
         uint256 deadline = block.timestamp + 1 hours;
         Sig memory sig = _signPermit(aliceKey, address(tokenA), alice, relayer, 5e8, 0, deadline);

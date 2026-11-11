@@ -146,11 +146,9 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
     // Operator functions
 
     /// @inheritdoc IGLDT
-    function setPaused(bool lzPaused, bool icpBridgePaused) external onlyOperatorOrSelf {
+    function pause(bool lzPaused, bool icpBridgePaused) external onlyOperatorOrSelf {
         GLDTStorage storage $ = _getGLDTStorage();
-        $.lzPaused = lzPaused;
-        $.icpBridgePaused = icpBridgePaused;
-        emit PausedSet(lzPaused, icpBridgePaused);
+        _writePaused($.lzPaused || lzPaused, $.icpBridgePaused || icpBridgePaused);
     }
 
     /// @inheritdoc IGLDT
@@ -182,6 +180,11 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
             if (!ok) revert CallFailed(i, reason);
         }
         emit Executed(nonce, digest);
+    }
+
+    /// @inheritdoc IGLDT
+    function setPaused(bool lzPaused, bool icpBridgePaused) external onlySelf {
+        _writePaused(lzPaused, icpBridgePaused);
     }
 
     /// @inheritdoc IGLDT
@@ -373,6 +376,13 @@ contract GLDT is IGLDT, OFTUpgradeable, ERC20PermitUpgradeable, UUPSUpgradeable 
     function _writePeer(uint32 eid, bytes32 peer) private {
         _getOAppCoreStorage().peers[eid] = peer;
         emit PeerSet(eid, peer);
+    }
+
+    function _writePaused(bool lzPaused, bool icpBridgePaused) private {
+        GLDTStorage storage $ = _getGLDTStorage();
+        $.lzPaused = lzPaused;
+        $.icpBridgePaused = icpBridgePaused;
+        emit PausedSet(lzPaused, icpBridgePaused);
     }
 
     /// @dev Enforced options for SEND: one lzReceive option with `gas` and value 0, within the fixed bounds.

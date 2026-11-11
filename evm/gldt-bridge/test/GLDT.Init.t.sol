@@ -117,31 +117,76 @@ contract GLDTInitTest is GLDTFixture {
         deployTokenAt(fresh, address(implA), initParams(EID_A, address(tokenB)));
     }
 
-    function test_setPaused_by_operator_and_by_self_only() public {
+    function test_pause_by_operator_and_by_self_only() public {
         vm.prank(stranger);
         vm.expectRevert(IGLDT.NotOperator.selector);
-        tokenA.setPaused(true, true);
+        tokenA.pause(true, true);
 
         // The signer keys are not the operator either.
         vm.prank(vm.addr(adminKey));
         vm.expectRevert(IGLDT.NotOperator.selector);
-        tokenA.setPaused(true, true);
+        tokenA.pause(true, true);
 
         vm.expectEmit(address(tokenA));
         emit IGLDT.PausedSet(true, false);
         vm.prank(operator);
-        tokenA.setPaused(true, false);
+        tokenA.pause(true, false);
         (bool lz, bool icp) = tokenA.paused();
         assertTrue(lz);
         assertFalse(icp);
+
+        // false leaves a flag as it is: pausing the ICP path keeps LayerZero paused.
+        vm.expectEmit(address(tokenA));
+        emit IGLDT.PausedSet(true, true);
+        vm.prank(operator);
+        tokenA.pause(false, true);
+        (lz, icp) = tokenA.paused();
+        assertTrue(lz);
+        assertTrue(icp);
+
+        // pause never turns a flag off.
+        vm.prank(operator);
+        tokenA.pause(false, false);
+        (lz, icp) = tokenA.paused();
+        assertTrue(lz);
+        assertTrue(icp);
+
+        // The token itself may pause too.
+        vm.prank(address(tokenB));
+        tokenB.pause(false, true);
+        (lz, icp) = tokenB.paused();
+        assertFalse(lz);
+        assertTrue(icp);
+    }
+
+    function test_setPaused_only_by_self() public {
+        vm.prank(operator);
+        tokenA.pause(true, true);
+
+        // Nobody outside the token unpauses, not even one flag: not the operator, not a stranger.
+        vm.prank(operator);
+        vm.expectRevert(IGLDT.NotSelf.selector);
+        tokenA.setPaused(false, true);
+        vm.prank(operator);
+        vm.expectRevert(IGLDT.NotSelf.selector);
+        tokenA.setPaused(true, true);
+        vm.prank(stranger);
+        vm.expectRevert(IGLDT.NotSelf.selector);
+        tokenA.setPaused(false, false);
 
         vm.expectEmit(address(tokenA));
         emit IGLDT.PausedSet(false, true);
         vm.prank(address(tokenA));
         tokenA.setPaused(false, true);
-        (lz, icp) = tokenA.paused();
+        (bool lz, bool icp) = tokenA.paused();
         assertFalse(lz);
         assertTrue(icp);
+
+        // The SNS path: an admin action signed by gldt_swap unpauses through execute.
+        executeAsAdmin(tokenA, selfCall(tokenA, abi.encodeCall(IGLDT.setPaused, (false, false))), 1);
+        (lz, icp) = tokenA.paused();
+        assertFalse(lz);
+        assertFalse(icp);
 
         // Each token has its own flags.
         (lz, icp) = tokenB.paused();

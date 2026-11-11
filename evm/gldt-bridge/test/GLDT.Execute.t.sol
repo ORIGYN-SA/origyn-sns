@@ -489,7 +489,7 @@ contract GLDTExecuteTest is GLDTFixture {
         // The old operator lost both powers.
         vm.startPrank(operator);
         vm.expectRevert(IGLDT.NotOperator.selector);
-        tokenA.setPaused(true, true);
+        tokenA.pause(true, true);
         vm.expectRevert(IGLDT.NotOperator.selector);
         tokenA.setLzReceiveGas(EID_B, 200_000);
         vm.stopPrank();
@@ -505,9 +505,10 @@ contract GLDTExecuteTest is GLDTFixture {
         emit IGLDT.OperatorSet(newOperator);
         executeAsAdmin(tokenA, selfCall(tokenA, abi.encodeCall(IGLDT.setOperator, (newOperator))), 3);
         vm.prank(newOperator);
-        tokenA.setPaused(false, false);
-        (lz, ) = tokenA.paused();
-        assertFalse(lz);
+        tokenA.pause(false, true);
+        (bool lzAfter, bool icpAfter) = tokenA.paused();
+        assertTrue(lzAfter, "the new operator can't clear the voted pause");
+        assertTrue(icpAfter);
 
         // tokenB keeps its operator.
         assertEq(tokenB.operator(), operator);

@@ -132,7 +132,7 @@ contract GLDTIcpTest is GLDTFixture {
         bytes memory sig = signClaim(icpKey, address(tokenA), 2, bob, 1e8);
 
         vm.prank(operator);
-        tokenA.setPaused(false, true);
+        tokenA.pause(false, true);
 
         vm.expectRevert(IGLDT.PathPaused.selector);
         tokenA.claimFromIcp(2, bob, 1e8, sig);
@@ -144,8 +144,8 @@ contract GLDTIcpTest is GLDTFixture {
         assertEq(tokenA.nextBurnId(), 0);
         assertEq(tokenA.balanceOf(alice), 5e8);
 
-        // lzPaused alone leaves the ICP path open.
-        vm.prank(operator);
+        // lzPaused alone leaves the ICP path open. Only the token itself turns a pause off.
+        vm.prank(address(tokenA));
         tokenA.setPaused(true, false);
         tokenA.claimFromIcp(2, bob, 1e8, sig);
         vm.prank(alice);
