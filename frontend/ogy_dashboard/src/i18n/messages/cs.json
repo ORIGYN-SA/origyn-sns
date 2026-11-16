@@ -687,28 +687,6 @@
       "error": "Chyba převodu!"
     }
   },
-  "support": {
-    "category": "Podpora",
-    "title": "Vytvořit požadavek",
-    "titleSubmitted": "Požadavek odeslán",
-    "successTitle": "Požadavek na podporu vytvořen",
-    "successMessage": "Ozveme se vám na e-mailovou adresu, kterou jste uvedli.",
-    "submitAnother": "Odeslat další požadavek",
-    "intro": "Popište svůj problém a jak vás můžeme kontaktovat.",
-    "form": {
-      "name": "Jméno",
-      "email": "Kontaktní e-mail",
-      "emailRequired": "E-mailová adresa je povinná",
-      "emailInvalid": "Neplatná e-mailová adresa",
-      "principal": "Principal peněženky",
-      "invalidPrincipal": "Neplatná adresa příjemce.",
-      "description": "Popis",
-      "descriptionPlaceholder": "Řekněte nám, co se děje…",
-      "descriptionRequired": "Popište prosím svůj problém"
-    },
-    "submitError": "Něco se pokazilo. Zkuste to prosím znovu.",
-    "submitting": "Odesílání…"
-  },
   "explorer": {
     "title": "Prohlížeč",
     "subtitle": "Procházejte a ověřujte certifikáty, kolekce a sběratele ORIGYN na blockchainu.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Prozkoumejte nabídku OGY, staking, správu a transakce na dashboardu ORIGYN.",
     "transactions": "Procházejte převody OGY, pálení tokenů a aktivitu účtů v účetní knize ORIGYN.",
-    "support": "Kontaktujte podporu ORIGYN, pokud potřebujete pomoc s peněženkou, tokeny nebo dashboardem.",
     "transfersTitle": "Největší převody OGY",
     "burnsTitle": "Největší pálení OGY"
   }

@@ -687,28 +687,6 @@
       "error": "¡Error de transferencia!"
     }
   },
-  "support": {
-    "category": "Soporte",
-    "title": "Crear un ticket",
-    "titleSubmitted": "Ticket enviado",
-    "successTitle": "Ticket de soporte creado",
-    "successMessage": "Te responderemos en la dirección de correo electrónico que indicaste.",
-    "submitAnother": "Enviar otro ticket",
-    "intro": "Describe tu problema y cómo podemos contactarte.",
-    "form": {
-      "name": "Nombre",
-      "email": "Correo de contacto",
-      "emailRequired": "La dirección de correo electrónico es obligatoria",
-      "emailInvalid": "Dirección de correo electrónico no válida",
-      "principal": "Principal del monedero",
-      "invalidPrincipal": "Dirección del destinatario no válida.",
-      "description": "Descripción",
-      "descriptionPlaceholder": "Cuéntanos qué ocurre…",
-      "descriptionRequired": "Describe tu problema, por favor"
-    },
-    "submitError": "Algo salió mal. Vuelve a intentarlo.",
-    "submitting": "Enviando…"
-  },
   "explorer": {
     "title": "Visor",
     "subtitle": "Explora y verifica certificados, colecciones y coleccionistas de ORIGYN en la blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Explora la oferta de OGY, el staking, la gobernanza y las transacciones en el panel de ORIGYN.",
     "transactions": "Consulta transferencias de OGY, quemas de tokens y actividad de cuentas en el registro de ORIGYN.",
-    "support": "Contacta con el soporte de ORIGYN para obtener ayuda con tu cartera, tus tokens o el panel.",
     "transfersTitle": "Mayores transferencias de OGY",
     "burnsTitle": "Mayores quemas de OGY"
   }

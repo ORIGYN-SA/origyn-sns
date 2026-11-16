@@ -25,7 +25,6 @@ import TransactionsAccountsDetails from "@pages/transactions-accounts-details";
 import TransactionsAccountHistory from "@pages/transactions-accounts-history";
 import { Account } from "@pages/account/index";
 import Recovery from "@pages/recovery/Recovery";
-import Support from "@pages/support";
 import Calculator from "@pages/calculator/Calculator";
 import TopTransfersAndBurnsFull from "@pages/dashboard/top-transfers-and-burns/TopTransfersAndBurnsFull";
 import LocaleGate, { LocaleRedirect } from "@i18n/LocaleGate";
@@ -299,15 +298,6 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <Recovery />,
-              },
-            ],
-          },
-          {
-            path: "support",
-            children: [
-              {
-                index: true,
-                element: <Support />,
               },
             ],
           },

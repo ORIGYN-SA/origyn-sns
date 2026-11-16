@@ -687,28 +687,6 @@
       "error": "Aktarım hatası!"
     }
   },
-  "support": {
-    "category": "Destek",
-    "title": "Talep oluştur",
-    "titleSubmitted": "Talep gönderildi",
-    "successTitle": "Destek talebi oluşturuldu",
-    "successMessage": "Verdiğiniz e-posta adresinden sizinle iletişime geçeceğiz.",
-    "submitAnother": "Başka bir talep gönder",
-    "intro": "Sorununuzu ve size nasıl ulaşabileceğimizi açıklayın.",
-    "form": {
-      "name": "Ad",
-      "email": "İletişim e-postası",
-      "emailRequired": "E-posta adresi gereklidir",
-      "emailInvalid": "Geçersiz e-posta adresi",
-      "principal": "Cüzdan principal'ı",
-      "invalidPrincipal": "Geçersiz alıcı adresi.",
-      "description": "Açıklama",
-      "descriptionPlaceholder": "Bize neler olduğunu anlatın…",
-      "descriptionRequired": "Lütfen sorununuzu açıklayın"
-    },
-    "submitError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-    "submitting": "Gönderiliyor…"
-  },
   "explorer": {
     "title": "Görüntüleyici",
     "subtitle": "ORIGYN sertifikalarını, koleksiyonlarını ve koleksiyonerlerini blokzincirde inceleyin ve doğrulayın.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "ORIGYN panelinde OGY arzını, staking işlemlerini, yönetişimi ve işlemleri keşfedin.",
     "transactions": "ORIGYN defterinde OGY transferlerini, token yakımlarını ve hesap etkinliklerini inceleyin.",
-    "support": "Cüzdanınız, tokenleriniz veya panel hakkında yardım almak için ORIGYN destek ekibiyle iletişime geçin.",
     "transfersTitle": "En büyük OGY transferleri",
     "burnsTitle": "En büyük OGY yakımları"
   }

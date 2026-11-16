@@ -687,28 +687,6 @@
       "error": "Kesalahan transfer!"
     }
   },
-  "support": {
-    "category": "Dukungan",
-    "title": "Buat tiket",
-    "titleSubmitted": "Tiket terkirim",
-    "successTitle": "Tiket dukungan dibuat",
-    "successMessage": "Kami akan menindaklanjuti melalui alamat email yang Anda berikan.",
-    "submitAnother": "Kirim tiket lain",
-    "intro": "Jelaskan masalah Anda dan cara kami dapat menghubungi Anda.",
-    "form": {
-      "name": "Nama",
-      "email": "Email kontak",
-      "emailRequired": "Alamat email wajib diisi",
-      "emailInvalid": "Alamat email tidak valid",
-      "principal": "Principal dompet",
-      "invalidPrincipal": "Alamat penerima tidak valid.",
-      "description": "Deskripsi",
-      "descriptionPlaceholder": "Beri tahu kami apa yang terjadi…",
-      "descriptionRequired": "Silakan jelaskan masalah Anda"
-    },
-    "submitError": "Terjadi kesalahan. Silakan coba lagi.",
-    "submitting": "Mengirim…"
-  },
   "explorer": {
     "title": "Penampil",
     "subtitle": "Jelajahi dan verifikasi sertifikat, koleksi, dan kolektor ORIGYN di blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Jelajahi pasokan OGY, staking, tata kelola, dan transaksi di dasbor ORIGYN.",
     "transactions": "Telusuri transfer OGY, pembakaran token, dan aktivitas akun di buku besar ORIGYN.",
-    "support": "Hubungi dukungan ORIGYN untuk bantuan terkait dompet, token, atau dasbor Anda.",
     "transfersTitle": "Transfer OGY terbesar",
     "burnsTitle": "Pembakaran OGY terbesar"
   }

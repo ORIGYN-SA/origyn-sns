@@ -687,28 +687,6 @@
       "error": "Overførselsfejl!"
     }
   },
-  "support": {
-    "category": "Support",
-    "title": "Opret en sag",
-    "titleSubmitted": "Sag indsendt",
-    "successTitle": "Supportsag oprettet",
-    "successMessage": "Vi følger op på den e-mailadresse, du har angivet.",
-    "submitAnother": "Indsend en ny sag",
-    "intro": "Beskriv dit problem, og hvordan vi kan kontakte dig.",
-    "form": {
-      "name": "Navn",
-      "email": "Kontakt-e-mail",
-      "emailRequired": "E-mailadresse er påkrævet",
-      "emailInvalid": "Ugyldig e-mailadresse",
-      "principal": "Wallet-principal",
-      "invalidPrincipal": "Ugyldig modtageradresse.",
-      "description": "Beskrivelse",
-      "descriptionPlaceholder": "Fortæl os, hvad der foregår…",
-      "descriptionRequired": "Beskriv venligst dit problem"
-    },
-    "submitError": "Noget gik galt. Prøv venligst igen.",
-    "submitting": "Indsender…"
-  },
   "explorer": {
     "title": "Fremviser",
     "subtitle": "Gennemse og verificér ORIGYN-certifikater, samlinger og samlere på blockchainen.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Udforsk OGY-udbud, staking, styring og transaktioner på ORIGYN-dashboardet.",
     "transactions": "Se OGY-overførsler, tokenafbrændinger og kontoaktivitet i ORIGYNs hovedbog.",
-    "support": "Kontakt ORIGYN-support for hjælp med din wallet, dine tokens eller dashboardet.",
     "transfersTitle": "Største OGY-overførsler",
     "burnsTitle": "Største OGY-afbrændinger"
   }
