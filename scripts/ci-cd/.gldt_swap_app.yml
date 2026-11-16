@@ -17,8 +17,9 @@
     - npm install -g pnpm@latest-10
     - pnpm --dir frontend/gldt_swap_app install --frozen-lockfile
   variables:
+    # Same values as the .node template, see the note there.
     KUBERNETES_MEMORY_LIMIT: "5Gi"
-    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "2Gi"
 
 gldt_swap_app linter:
   stage: lint
