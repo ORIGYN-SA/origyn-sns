@@ -68,30 +68,4 @@ $[[ inputs.src-folder ]] production build:
       - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
     expire_in: 6 months
 
-$[[ inputs.src-folder ]] integration-test build:
-  stage: integration_testing
-  rules:
-    # Runs when any backend canister is released, not only this one. Frontend
-    # tags (ogy_dashboard, origyn_landing_page, gldt_swap_app) do not match.
-    - if: $CI_COMMIT_TAG =~ '/^(ogy_token_swap|sns_rewards|sns_neuron_controller|dex_interaction|canister_jobs|collection_index|gldt_swap)-v\d+\.\d+\.\d+(-reinstall)?$/'
-    # This will run on any MR to develop
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-      changes:
-        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "Cargo.{lock,toml}"
-      needs: ["integration tests trigger"]
-  extends: .rust template
-  script:
-    - scripts/build-canister.sh -it $[[ inputs.src-folder ]]
-    - scripts/generate-did.sh $[[ inputs.src-folder ]]
-  artifacts:
-    name: "$[[ inputs.src-folder ]]-${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
-    paths:
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm
-      - backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz
-      - backend/canisters/$[[ inputs.src-folder ]]/api/can.did
-    expire_in: 1 day
+# The integration-test build of all canisters is one job, see .integration_tests.yml

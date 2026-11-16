@@ -1,22 +1,72 @@
+# Integration tests (PocketIC)
+#
+# On a merge request to develop the jobs below appear when backend code changes
+# and wait for a manual start of "integration tests trigger". On a release tag
+# of a backend canister they run without a trigger. The production deploy has
+# no "needs", so it becomes available only after this stage has passed.
+
 integration tests trigger:
   stage: integration_testing
   rules:
     # This will run on any MR to develop
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
           $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-      changes:
+      changes: &integration_test_changes
         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "Cargo.{lock,toml}"
+        - "scripts/{build-canister,generate-did,canister-prebuilds}.sh"
+        - "scripts/ci-cd/.integration_tests.yml"
       when: manual
   script:
     - echo "Running integration tests"
 
+# Builds every canister with the "inttest" feature, in one job. The canisters
+# compile into one cargo target dir (CANISTER_SHARED_TARGET_DIR, see
+# scripts/build-canister.sh), so the dependencies they share are built once.
+# With one job and one target dir per canister each job compiled all of them
+# again, about 80% of a cold build. These wasm files are never deployed.
+integration-test build:
+  stage: integration_testing
+  extends: .rust template
+  variables:
+    CANISTER_SHARED_TARGET_DIR: "target/inttest"
+    # The scheduler reserves the request, not the limit.
+    KUBERNETES_MEMORY_REQUEST: "2Gi"
+    KUBERNETES_MEMORY_LIMIT: "5Gi"
+    KUBERNETES_CPU_REQUEST: "1"
+    KUBERNETES_CPU_LIMIT: "2"
+  rules:
+    # Release tag of a backend canister. Frontend tags (ogy_dashboard,
+    # origyn_landing_page, gldt_swap_app) do not match.
+    - if: $CI_COMMIT_TAG =~ '/^(ogy_token_swap|sns_rewards|sns_neuron_controller|dex_interaction|canister_jobs|collection_index|gldt_swap)-v\d+\.\d+\.\d+(-reinstall)?$/'
+    # This will run on any MR to develop
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+      changes: *integration_test_changes
+      needs: ["integration tests trigger"]
+  script:
+    # Same list as scripts/build-all-canister.sh and backend/integration_tests/src/wasms.rs
+    - |
+      for canister in dex_interaction canister_jobs collection_index ogy_token_swap sns_neuron_controller sns_rewards gldt_swap; do
+        scripts/build-canister.sh -it "$canister" || exit 1
+        scripts/generate-did.sh "$canister" || exit 1
+      done
+  artifacts:
+    name: "${CI_COMMIT_SHORT_SHA}-wasm-INT_TEST_BUILD"
+    paths:
+      - backend/canisters/*/target/wasm32-unknown-unknown/release/*_canister.wasm
+      - backend/canisters/*/target/wasm32-unknown-unknown/release/*_canister.wasm.gz
+      - backend/canisters/*/api/can.did
+    expire_in: 1 day
+
 integration tests:
   stage: integration_testing
   variables:
+    # Measured on 2026-11-16: the tests use between 3.6 and 4.45 GiB. The
+    # request has to stay this high, two of these jobs do not fit on the node.
     KUBERNETES_MEMORY_LIMIT: "5Gi"
     KUBERNETES_MEMORY_REQUEST: "5Gi"
     KUBERNETES_CPU_LIMIT: "2"
@@ -28,22 +78,8 @@ integration tests:
     # This will run on any MR to develop
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
           $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-      changes:
-        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "Cargo.{lock,toml}"
-  needs:
-    [
-      "ogy_token_swap integration-test build",
-      "canister_jobs integration-test build",
-      "collection_index integration-test build",
-      "sns_rewards integration-test build",
-      "dex_interaction integration-test build",
-      "sns_neuron_controller integration-test build",
-      "gldt_swap integration-test build",
-    ]
+      changes: *integration_test_changes
+  needs: ["integration-test build"]
   extends: .rust template
   script:
     - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/9.0.1/pocket-ic-x86_64-linux.gz
