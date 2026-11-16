@@ -9,23 +9,33 @@ spec:
         ]
 ---
 # Front-end linter job template
+#
+# The "changes" lists name the whole app folder and the files the npm
+# workspaces share. A list of file extensions misses things that change the
+# build, such as .env.production, stylesheets, images and the lockfile.
 
 $[[ inputs.src-folder ]] linter:
   stage: lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
     - if: $CI_OPEN_MERGE_REQUESTS
       when: never
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
   extends: .node template
   script:
     # Resolve by workspace path so it works regardless of the package name

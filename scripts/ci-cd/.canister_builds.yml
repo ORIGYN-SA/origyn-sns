@@ -28,7 +28,9 @@ $[[ inputs.src-folder ]] staging build:
       when: never
     # - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
     #   when: never
-    - if: $CI_COMMIT_REF_NAME == "develop"
+    # Not on a merge request from develop: the staging deploy does not run
+    # there, so nothing would use the build.
+    - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - "backend/canisters/$[[ inputs.src-folder ]]/**/*.{rs,toml,lock,md,did,wasm,gz}"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME != "develop"
@@ -79,7 +81,8 @@ $[[ inputs.src-folder ]] integration-test build:
         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "Cargo.{lock,toml}"
       needs: ["integration tests trigger"]
   extends: .rust template
   script:

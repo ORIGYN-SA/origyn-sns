@@ -8,7 +8,8 @@ integration tests trigger:
         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "Cargo.{lock,toml}"
       when: manual
   script:
     - echo "Running integration tests"
@@ -31,7 +32,8 @@ integration tests:
         - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
-        - "backend/integration_testing/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/integration_tests/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "Cargo.{lock,toml}"
   needs:
     [
       "ogy_token_swap integration-test build",
