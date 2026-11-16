@@ -11,6 +11,13 @@
     - if [[ $(date -R) == "Fri"* ]]; then echo "It appear you are deploying on a Friday....."; fi
     - dfx identity get-principal
 
+# didc encodes the payload of frontend upgrade proposals
+.include didc:
+  before_script:
+    - curl -fsSL https://github.com/dfinity/candid/releases/download/2025-07-29/didc-linux64 > /usr/bin/didc
+    - chmod +x /usr/bin/didc
+    - didc --version
+
 .asset canister staging deploy:
   script:
     - dfx deploy --network $TARGET_NETWORK --no-wallet --mode reinstall -y ${CANISTER_NAME}
