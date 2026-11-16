@@ -687,28 +687,6 @@
       "error": "Erreur de transfert !"
     }
   },
-  "support": {
-    "category": "Support",
-    "title": "Créer un ticket",
-    "titleSubmitted": "Ticket envoyé",
-    "successTitle": "Ticket de support créé",
-    "successMessage": "Nous vous recontacterons à l'adresse e-mail que vous avez fournie.",
-    "submitAnother": "Envoyer un autre ticket",
-    "intro": "Décrivez votre problème et comment nous pouvons vous joindre.",
-    "form": {
-      "name": "Nom",
-      "email": "E-mail de contact",
-      "emailRequired": "L'adresse e-mail est requise",
-      "emailInvalid": "Adresse e-mail invalide",
-      "principal": "Principal du portefeuille",
-      "invalidPrincipal": "Adresse du destinataire invalide.",
-      "description": "Description",
-      "descriptionPlaceholder": "Dites-nous ce qui se passe…",
-      "descriptionRequired": "Veuillez décrire votre problème"
-    },
-    "submitError": "Une erreur est survenue. Veuillez réessayer.",
-    "submitting": "Envoi en cours…"
-  },
   "explorer": {
     "title": "Visionneuse",
     "subtitle": "Parcourez et vérifiez les certificats, collections et collectionneurs ORIGYN sur la blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Consultez l’offre d’OGY, le staking, la gouvernance et les transactions sur le tableau de bord ORIGYN.",
     "transactions": "Parcourez les transferts d’OGY, les destructions de tokens et l’activité des comptes dans le registre ORIGYN.",
-    "support": "Contactez le support ORIGYN pour obtenir de l’aide avec votre portefeuille, vos tokens ou le tableau de bord.",
     "transfersTitle": "Plus grands transferts d’OGY",
     "burnsTitle": "Plus grandes destructions d’OGY"
   }

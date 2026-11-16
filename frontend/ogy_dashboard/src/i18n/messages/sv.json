@@ -687,28 +687,6 @@
       "error": "Överföringsfel!"
     }
   },
-  "support": {
-    "category": "Support",
-    "title": "Skapa ett ärende",
-    "titleSubmitted": "Ärende skickat",
-    "successTitle": "Supportärende skapat",
-    "successMessage": "Vi återkommer till den e-postadress du angav.",
-    "submitAnother": "Skicka ett annat ärende",
-    "intro": "Beskriv ditt problem och hur vi kan nå dig.",
-    "form": {
-      "name": "Namn",
-      "email": "Kontakt-e-post",
-      "emailRequired": "E-postadress krävs",
-      "emailInvalid": "Ogiltig e-postadress",
-      "principal": "Plånbokens principal",
-      "invalidPrincipal": "Ogiltig mottagaradress.",
-      "description": "Beskrivning",
-      "descriptionPlaceholder": "Berätta vad som händer…",
-      "descriptionRequired": "Beskriv ditt problem"
-    },
-    "submitError": "Något gick fel. Försök igen.",
-    "submitting": "Skickar…"
-  },
   "explorer": {
     "title": "Visare",
     "subtitle": "Bläddra bland och verifiera ORIGYN-certifikat, samlingar och samlare på blockkedjan.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Utforska OGY-utbud, staking, styrning och transaktioner i ORIGYNs kontrollpanel.",
     "transactions": "Se OGY-överföringar, tokenbränningar och kontoaktivitet i ORIGYNs huvudbok.",
-    "support": "Kontakta ORIGYN-support för hjälp med din plånbok, dina token eller kontrollpanelen.",
     "transfersTitle": "Största OGY-överföringarna",
     "burnsTitle": "Största OGY-bränningarna"
   }

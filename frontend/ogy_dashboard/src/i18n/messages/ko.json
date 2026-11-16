@@ -687,28 +687,6 @@
       "error": "전송 오류!"
     }
   },
-  "support": {
-    "category": "지원",
-    "title": "티켓 생성",
-    "titleSubmitted": "티켓이 제출되었습니다",
-    "successTitle": "지원 티켓이 생성되었습니다",
-    "successMessage": "제공해 주신 이메일 주소로 후속 연락을 드리겠습니다.",
-    "submitAnother": "다른 티켓 제출",
-    "intro": "문제 내용과 연락 방법을 설명해 주세요.",
-    "form": {
-      "name": "이름",
-      "email": "연락처 이메일",
-      "emailRequired": "이메일 주소는 필수입니다",
-      "emailInvalid": "유효하지 않은 이메일 주소입니다",
-      "principal": "지갑 프린시펄",
-      "invalidPrincipal": "유효하지 않은 받는 사람 주소입니다.",
-      "description": "설명",
-      "descriptionPlaceholder": "무슨 일이 있는지 알려주세요…",
-      "descriptionRequired": "문제를 설명해 주세요"
-    },
-    "submitError": "문제가 발생했습니다. 다시 시도해 주세요.",
-    "submitting": "제출 중…"
-  },
   "explorer": {
     "title": "뷰어",
     "subtitle": "블록체인에서 ORIGYN 인증서, 컬렉션, 수집가를 살펴보고 검증하세요.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "ORIGYN 대시보드에서 OGY 공급량, 스테이킹, 거버넌스 및 거래를 살펴보세요.",
     "transactions": "ORIGYN 원장에서 OGY 전송, 토큰 소각 및 계정 활동을 확인하세요.",
-    "support": "지갑, 토큰 또는 대시보드 관련 도움이 필요하면 ORIGYN 지원팀에 문의하세요.",
     "transfersTitle": "최대 OGY 전송",
     "burnsTitle": "최대 OGY 소각"
   }

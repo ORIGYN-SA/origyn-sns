@@ -687,28 +687,6 @@
       "error": "Hitilafu ya uhamishaji!"
     }
   },
-  "support": {
-    "category": "Msaada",
-    "title": "Fungua tiketi",
-    "titleSubmitted": "Tiketi imewasilishwa",
-    "successTitle": "Tiketi ya msaada imeundwa",
-    "successMessage": "Tutafuatilia kupitia anwani ya barua pepe uliyotoa.",
-    "submitAnother": "Wasilisha tiketi nyingine",
-    "intro": "Eleza tatizo lako na jinsi tunavyoweza kukufikia.",
-    "form": {
-      "name": "Jina",
-      "email": "Barua pepe ya mawasiliano",
-      "emailRequired": "Anwani ya barua pepe inahitajika",
-      "emailInvalid": "Anwani ya barua pepe si sahihi",
-      "principal": "Principal ya pochi",
-      "invalidPrincipal": "Anwani ya mpokeaji si sahihi.",
-      "description": "Maelezo",
-      "descriptionPlaceholder": "Tuambie kinachoendelea…",
-      "descriptionRequired": "Tafadhali eleza tatizo lako"
-    },
-    "submitError": "Hitilafu fulani imetokea. Tafadhali jaribu tena.",
-    "submitting": "Inawasilisha…"
-  },
   "explorer": {
     "title": "Kitazamaji",
     "subtitle": "Vinjari na uthibitishe vyeti, makusanyo na wakusanyaji wa ORIGYN kwenye blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Chunguza ugavi wa OGY, staking, utawala na miamala kwenye dashibodi ya ORIGYN.",
     "transactions": "Angalia uhamisho wa OGY, uchomaji wa tokeni na shughuli za akaunti kwenye leja ya ORIGYN.",
-    "support": "Wasiliana na usaidizi wa ORIGYN kwa msaada kuhusu pochi, tokeni au dashibodi yako.",
     "transfersTitle": "Uhamisho mkubwa zaidi wa OGY",
     "burnsTitle": "Uchomaji mkubwa zaidi wa OGY"
   }

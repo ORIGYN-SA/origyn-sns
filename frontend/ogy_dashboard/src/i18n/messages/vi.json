@@ -687,28 +687,6 @@
       "error": "Lỗi chuyển khoản!"
     }
   },
-  "support": {
-    "category": "Hỗ trợ",
-    "title": "Tạo phiếu yêu cầu",
-    "titleSubmitted": "Đã gửi phiếu yêu cầu",
-    "successTitle": "Đã tạo phiếu hỗ trợ",
-    "successMessage": "Chúng tôi sẽ liên hệ lại qua địa chỉ email bạn đã cung cấp.",
-    "submitAnother": "Gửi phiếu khác",
-    "intro": "Mô tả vấn đề của bạn và cách chúng tôi có thể liên hệ với bạn.",
-    "form": {
-      "name": "Tên",
-      "email": "Email liên hệ",
-      "emailRequired": "Địa chỉ email là bắt buộc",
-      "emailInvalid": "Địa chỉ email không hợp lệ",
-      "principal": "Principal ví",
-      "invalidPrincipal": "Địa chỉ người nhận không hợp lệ.",
-      "description": "Mô tả",
-      "descriptionPlaceholder": "Cho chúng tôi biết chuyện gì đang xảy ra…",
-      "descriptionRequired": "Vui lòng mô tả vấn đề của bạn"
-    },
-    "submitError": "Đã xảy ra lỗi. Vui lòng thử lại.",
-    "submitting": "Đang gửi…"
-  },
   "explorer": {
     "title": "Trình xem",
     "subtitle": "Duyệt và xác minh chứng chỉ, bộ sưu tập và nhà sưu tầm ORIGYN trên blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Khám phá nguồn cung OGY, staking, quản trị và giao dịch trên bảng điều khiển ORIGYN.",
     "transactions": "Xem các giao dịch chuyển OGY, đốt token và hoạt động tài khoản trên sổ cái ORIGYN.",
-    "support": "Liên hệ bộ phận hỗ trợ ORIGYN để được trợ giúp về ví, token hoặc bảng điều khiển.",
     "transfersTitle": "Các giao dịch chuyển OGY lớn nhất",
     "burnsTitle": "Các giao dịch đốt OGY lớn nhất"
   }

@@ -687,28 +687,6 @@
       "error": "Átutalási hiba!"
     }
   },
-  "support": {
-    "category": "Támogatás",
-    "title": "Jegy létrehozása",
-    "titleSubmitted": "Jegy elküldve",
-    "successTitle": "Támogatási jegy létrehozva",
-    "successMessage": "Felvesszük veled a kapcsolatot a megadott e-mail-címen.",
-    "submitAnother": "Másik jegy beküldése",
-    "intro": "Írd le a problémádat és azt, hogyan érhetünk el.",
-    "form": {
-      "name": "Név",
-      "email": "Kapcsolattartási e-mail",
-      "emailRequired": "Az e-mail-cím megadása kötelező",
-      "emailInvalid": "Érvénytelen e-mail-cím",
-      "principal": "Tárca principal",
-      "invalidPrincipal": "Érvénytelen címzett cím.",
-      "description": "Leírás",
-      "descriptionPlaceholder": "Mondd el, mi a probléma…",
-      "descriptionRequired": "Kérjük, írd le a problémádat"
-    },
-    "submitError": "Valami hiba történt. Kérjük, próbáld újra.",
-    "submitting": "Küldés…"
-  },
   "explorer": {
     "title": "Megtekintő",
     "subtitle": "Böngésszen és ellenőrizzen ORIGYN-tanúsítványokat, gyűjteményeket és gyűjtőket a blokkláncon.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Fedezze fel az OGY-kínálatot, a stakinget, az irányítást és a tranzakciókat az ORIGYN irányítópultján.",
     "transactions": "Böngésszen az OGY-átutalások, tokenégetések és számlatevékenységek között az ORIGYN főkönyvében.",
-    "support": "Kérjen segítséget az ORIGYN ügyfélszolgálatától tárcájához, tokenjeihez vagy az irányítópulthoz.",
     "transfersTitle": "Legnagyobb OGY-átutalások",
     "burnsTitle": "Legnagyobb OGY-égetések"
   }

@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.60] - 2026-11-16
+
+#### Changed
+
+- When ICPSwap can't be reached, take the OGY price from the GLDT API's daily price. It used to come from api.origyn.com, which is being shut down.
+- "Contact support" in the footer opens an email to techsupport@origyn.ch.
+
+#### Removed
+
+- The support ticket page. Its form was sent through api.origyn.com.
+- The visitor statistics script loaded from stats.origyn.ch.
+
 ### [1.0.59] - 2026-11-10
 
 #### Fixed

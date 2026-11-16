@@ -687,28 +687,6 @@
       "error": "Pogreška pri prijenosu!"
     }
   },
-  "support": {
-    "category": "Podrška",
-    "title": "Stvori prijavu",
-    "titleSubmitted": "Prijava poslana",
-    "successTitle": "Prijava podršci stvorena",
-    "successMessage": "Javit ćemo vam se na e-mail adresu koju ste naveli.",
-    "submitAnother": "Pošalji još jednu prijavu",
-    "intro": "Opišite svoj problem i kako vas možemo kontaktirati.",
-    "form": {
-      "name": "Ime",
-      "email": "Kontaktni e-mail",
-      "emailRequired": "E-mail adresa je obavezna",
-      "emailInvalid": "Nevažeća e-mail adresa",
-      "principal": "Principal novčanika",
-      "invalidPrincipal": "Nevažeća adresa primatelja.",
-      "description": "Opis",
-      "descriptionPlaceholder": "Recite nam što se događa…",
-      "descriptionRequired": "Molimo opišite svoj problem"
-    },
-    "submitError": "Nešto je pošlo po zlu. Molimo pokušajte ponovno.",
-    "submitting": "Slanje…"
-  },
   "explorer": {
     "title": "Preglednik",
     "subtitle": "Pregledajte i provjerite ORIGYN certifikate, kolekcije i kolekcionare na blockchainu.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Istražite ponudu OGY-a, staking, upravljanje i transakcije na nadzornoj ploči ORIGYN.",
     "transactions": "Pregledajte prijenose OGY-a, spaljivanja tokena i aktivnosti računa u glavnoj knjizi ORIGYN.",
-    "support": "Obratite se podršci ORIGYN za pomoć s novčanikom, tokenima ili nadzornom pločom.",
     "transfersTitle": "Najveći prijenosi OGY-a",
     "burnsTitle": "Najveća spaljivanja OGY-a"
   }

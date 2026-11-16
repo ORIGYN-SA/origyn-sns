@@ -687,28 +687,6 @@
       "error": "Błąd przelewu!"
     }
   },
-  "support": {
-    "category": "Wsparcie",
-    "title": "Utwórz zgłoszenie",
-    "titleSubmitted": "Zgłoszenie wysłane",
-    "successTitle": "Utworzono zgłoszenie do wsparcia",
-    "successMessage": "Skontaktujemy się pod podanym przez Ciebie adresem e-mail.",
-    "submitAnother": "Wyślij kolejne zgłoszenie",
-    "intro": "Opisz swój problem i sposób, w jaki możemy się z Tobą skontaktować.",
-    "form": {
-      "name": "Imię",
-      "email": "E-mail kontaktowy",
-      "emailRequired": "Adres e-mail jest wymagany",
-      "emailInvalid": "Nieprawidłowy adres e-mail",
-      "principal": "Principal portfela",
-      "invalidPrincipal": "Nieprawidłowy adres odbiorcy.",
-      "description": "Opis",
-      "descriptionPlaceholder": "Napisz nam, co się dzieje…",
-      "descriptionRequired": "Opisz swój problem"
-    },
-    "submitError": "Coś poszło nie tak. Spróbuj ponownie.",
-    "submitting": "Wysyłanie…"
-  },
   "explorer": {
     "title": "Przeglądarka",
     "subtitle": "Przeglądaj i weryfikuj certyfikaty, kolekcje i kolekcjonerów ORIGYN na blockchainie.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Poznaj podaż OGY, staking, zarządzanie i transakcje w panelu ORIGYN.",
     "transactions": "Przeglądaj przelewy OGY, spalanie tokenów i aktywność kont w rejestrze ORIGYN.",
-    "support": "Skontaktuj się z pomocą ORIGYN, aby uzyskać wsparcie dotyczące portfela, tokenów lub panelu.",
     "transfersTitle": "Największe przelewy OGY",
     "burnsTitle": "Największe spalenia OGY"
   }
