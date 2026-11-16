@@ -2,8 +2,16 @@
 
 CANISTER="$1"
 VERSION="$2"
+CANISTER_TYPE="${3:-backend}"
 
-CHANGELOG_FILE="backend/canisters/$CANISTER/CHANGELOG.md"
+if [[ $CANISTER_TYPE == "backend" ]]; then
+  CHANGELOG_FILE="backend/canisters/$CANISTER/CHANGELOG.md"
+elif [[ $CANISTER_TYPE == "frontend" ]]; then
+  CHANGELOG_FILE="frontend/$CANISTER/CHANGELOG.md"
+else
+  echo "Error: invalid CANISTER_TYPE. Needs to be 'backend' or 'frontend', found $CANISTER_TYPE" >&2
+  exit 1
+fi
 
 awk -v version="$VERSION" '
   BEGIN {print_version_info = 0}

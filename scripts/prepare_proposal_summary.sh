@@ -13,7 +13,7 @@ if [[ -z $CANISTER_NAME ]]; then
 fi
 
 if [[ $VERSION =~ ^([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-	./scripts/parse_changelog.sh $CANISTER_NAME $VERSION
+	./scripts/parse_changelog.sh $CANISTER_NAME $VERSION $CANISTER_TYPE
 	exit_status=$? # Capture the exit status of the last command
 
 	if [[ $exit_status -eq 1 ]]; then
