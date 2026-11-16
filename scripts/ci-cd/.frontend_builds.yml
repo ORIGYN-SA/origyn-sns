@@ -92,13 +92,9 @@ $[[ inputs.src-folder ]] preprod build:
 $[[ inputs.src-folder ]] production build:
   stage: build
   rules:
+    # Only on the release tag. A build on master was never deployed: the tag
+    # pipeline builds again and deploys its own build.
     - if: $CI_COMMIT_TAG =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/'
-    - if: $CI_COMMIT_REF_NAME == "master"
-      changes:
-        - "frontend/$[[ inputs.src-folder ]]/**/*"
-        - "package.json"
-        - "package-lock.json"
-        - ".npmrc"
   # needs: ["generate declarations"]
   extends: .node template
   variables:

@@ -31,10 +31,6 @@ gldt_swap_app linter:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "frontend/gldt_swap_app/**/*"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-      changes:
-        - "frontend/gldt_swap_app/**/*"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "frontend/gldt_swap_app/**/*"

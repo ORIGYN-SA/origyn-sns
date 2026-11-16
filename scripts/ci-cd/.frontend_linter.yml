@@ -23,13 +23,6 @@ $[[ inputs.src-folder ]] linter:
         - "package.json"
         - "package-lock.json"
         - ".npmrc"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-      changes:
-        - "frontend/$[[ inputs.src-folder ]]/**/*"
-        - "package.json"
-        - "package-lock.json"
-        - ".npmrc"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/**/*"

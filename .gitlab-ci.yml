@@ -15,10 +15,15 @@ default:
       - runner_unsupported
       - unknown_failure
 
-cache:
-  - key: "dfx-$CI_COMMIT_REF_SLUG"
-    paths:
-      - .dfx
+# A merge request from develop (the release merge request to master) gets no
+# pipeline of its own. Its commit has just been linted, tested and built by the
+# branch pipeline of develop, and GitLab shows that pipeline on the merge
+# request.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == "develop"
+      when: never
+    - when: always
 
 stages:
   - preparation
@@ -130,21 +135,6 @@ include:
   - local: scripts/ci-cd/.dfx_templates.yml
 
 ################################################################################
-# Cache preparation
-################################################################################
-node cache:
-  stage: preparation
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - "./frontend/{**,**/**,**/**/**}/*.{js,json,jsx,md,mdx,css,html,svg}"
-  extends: .node template
-  script:
-    - npm pkg get name description author license workspaces engines
-    - node --version
-    - npm --version
-
-################################################################################
 # Linters
 ################################################################################
 
@@ -152,11 +142,6 @@ rust lint:
   stage: lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - "Cargo.{lock,toml}"
-        - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
       changes:
         - "Cargo.{lock,toml}"
         - "backend/{**,**/**,**/**/**}/*.{rs,toml,lock}"

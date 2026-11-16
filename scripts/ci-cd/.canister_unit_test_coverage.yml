@@ -24,9 +24,6 @@ rust unit tests:
         - "backend/external_canisters/**/*.{rs,toml,did}"
         - "backend/canisters/**/*.{rs,toml,did}"
         - "scripts/ci-cd/.canister_unit_test_coverage.yml"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-      changes: *rust_unit_test_changes
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes: *rust_unit_test_changes
   script:
