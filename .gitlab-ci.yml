@@ -43,27 +43,8 @@ include:
 ################################################################################
 # Unit Tests
 ################################################################################
+  # One job for the whole workspace
   - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: ogy_token_swap
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: sns_rewards
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: collection_index
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: sns_neuron_controller
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: dex_interaction
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: canister_jobs
-  - local: scripts/ci-cd/.canister_unit_test_coverage.yml
-    inputs:
-      src-folder: gldt_swap
 
 ################################################################################
 # Canister Builds
