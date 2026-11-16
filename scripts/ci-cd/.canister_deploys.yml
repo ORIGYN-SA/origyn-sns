@@ -28,8 +28,11 @@ $[[ inputs.src-folder ]] staging deploy:
     # A reinstall is targeted at a different canister: skip this deploy entirely.
     - if: $REINSTALL_STAGING
       when: never
+    # Same list as the develop rule of the staging build.
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event" # deployment when merged to develop
       changes:
+        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/$[[ inputs.src-folder ]]/**/*.{rs,toml,lock,md,did,wasm,gz}"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME != "develop" # deployment when trigger manually on MR
       changes:
