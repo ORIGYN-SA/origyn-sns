@@ -127,7 +127,7 @@ gldt swap app staging:
   script:
     - !reference [.asset canister staging deploy, script]
   environment:
-    name: gldt swap app
+    name: staging/gldt_swap_app
     deployment_tier: staging
     url: https://qfyvj-4qaaa-aaaam-qbfka-cai.icp0.io/
     action: start
@@ -151,7 +151,7 @@ gldt swap app preprod:
   script:
     - !reference [.asset canister preprod deploy, script]
   environment:
-    name: gldt swap app
+    name: preprod/gldt_swap_app
     deployment_tier: staging
     url: https://wmd7w-pqaaa-aaaai-qplaa-cai.icp0.io/
     action: start
@@ -179,7 +179,7 @@ gldt swap app production:
   script:
     - . scripts/frontend-deploy/sns_frontend_deploy.sh $CANISTER_NAME $TARGET_NETWORK
   environment:
-    name: gldt swap app
+    name: production/gldt_swap_app
     deployment_tier: production
     url: https://oj7ri-2qaaa-aaaap-abrzq-cai.icp0.io/
     action: start

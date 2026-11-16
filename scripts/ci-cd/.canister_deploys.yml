@@ -52,7 +52,7 @@ $[[ inputs.src-folder ]] staging deploy:
   script:
     - . scripts/canister-deploy/deploy-$[[ inputs.src-folder ]].sh $TARGET_NETWORK
   environment:
-    name: $[[ inputs.src-folder ]]
+    name: staging/$[[ inputs.src-folder ]]
     deployment_tier: staging
     action: start
 
@@ -76,7 +76,7 @@ $[[ inputs.src-folder ]] production deploy:
   script:
     - . scripts/canister-deploy/deploy-$[[ inputs.src-folder ]].sh $TARGET_NETWORK
   environment:
-    name: $[[ inputs.src-folder ]]
+    name: production/$[[ inputs.src-folder ]]
     deployment_tier: production
     action: start
 

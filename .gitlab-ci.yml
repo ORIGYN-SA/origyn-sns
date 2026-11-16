@@ -158,6 +158,13 @@ rust lint:
 #######
 # The production jobs have no "changes" list: GitLab evaluates "changes" to
 # true on every tag pipeline, so it never filtered anything there.
+#
+# Every deploy job, frontend or backend, has an environment of its own named
+# "<tier>/<canister>" (staging/, preprod/, production/). The production key and
+# proposer neuron (PEM_FILE_PRODUCTION, SNS_PROPOSER_NEURON_ID_PRODUCTION) can
+# then be limited to the environment scope "production/*" in the GitLab
+# settings, so only the production deploy jobs receive them. Build jobs must
+# keep environment names outside "production/".
 
 ogy dashboard staging:
   stage: deploy
@@ -181,7 +188,7 @@ ogy dashboard staging:
   script:
     - !reference [.asset canister staging deploy, script]
   environment:
-    name: ogy dashboard
+    name: staging/ogy_dashboard
     deployment_tier: staging
     url: https://7ekbt-siaaa-aaaag-ak64a-cai.icp0.io/
     action: start
@@ -208,7 +215,7 @@ ogy dashboard preprod:
   script:
     - !reference [.asset canister preprod deploy, script]
   environment:
-    name: ogy dashboard
+    name: preprod/ogy_dashboard
     deployment_tier: staging
     url: https://m7nki-xaaaa-aaaan-qmlwa-cai.icp0.io/
     action: start
@@ -230,7 +237,7 @@ ogy dashboard production:
   script:
     - !reference [.asset canister production deploy, script]
   environment:
-    name: ogy dashboard
+    name: production/ogy_dashboard
     deployment_tier: production
     url: https://jbj2y-2qaaa-aaaal-ajc5q-cai.icp0.io/
     action: start
@@ -257,7 +264,7 @@ ogy landing page staging:
   script:
     - !reference [.asset canister staging deploy, script]
   environment:
-    name: ogy dashboard
+    name: staging/origyn_landing_page
     deployment_tier: staging
     url: https://ujkle-wiaaa-aaaap-qhxsa-cai.icp0.io/
     action: start
@@ -279,7 +286,7 @@ ogy landing page production:
   script:
     - !reference [.asset canister production deploy, script]
   environment:
-    name: origyn landing page
+    name: production/origyn_landing_page
     deployment_tier: production
     url: https://origyn.com
     action: start
