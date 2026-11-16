@@ -22,6 +22,9 @@ $[[ inputs.src-folder ]] test build:
         - "package.json"
         - "package-lock.json"
         - ".npmrc"
+        # A change to the job itself (for example the Node version) is tried
+        # on its merge request
+        - "scripts/ci-cd/.{node_template,frontend_builds}.yml"
   # needs: ["generate test declarations"]
   extends: .node template
   script:

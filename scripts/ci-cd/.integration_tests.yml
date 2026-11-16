@@ -71,6 +71,14 @@ integration tests:
     KUBERNETES_MEMORY_REQUEST: "5Gi"
     KUBERNETES_CPU_LIMIT: "2"
     KUBERNETES_CPU_REQUEST: "1"
+    # The PocketIC server has to match the pocket-ic crate in Cargo.lock (12.x
+    # needs a server from 12.0.0 up to, not including, 13). The crate uses the
+    # binary named by POCKET_IC_BIN and refuses one with another version.
+    # Without the variable it downloads a server itself while the tests run,
+    # with no checksum.
+    POCKET_IC_VERSION: "12.0.0"
+    POCKET_IC_SHA256: "91405ba12fe8a8402cd5903fb43f5927771a5493a970cfcf3ae0dfbd8bdb45ac"
+    POCKET_IC_BIN: "$CI_PROJECT_DIR/backend/integration_tests/pocket-ic"
   rules:
     # Release tag of a backend canister. Frontend tags (ogy_dashboard,
     # origyn_landing_page, gldt_swap_app) do not match.
@@ -82,10 +90,12 @@ integration tests:
   needs: ["integration-test build"]
   extends: .rust template
   script:
-    - wget -O pocket-ic.gz https://github.com/dfinity/pocketic/releases/download/9.0.1/pocket-ic-x86_64-linux.gz
+    - wget -O pocket-ic.gz "https://github.com/dfinity/pocketic/releases/download/${POCKET_IC_VERSION}/pocket-ic-x86_64-linux.gz"
+    - echo "${POCKET_IC_SHA256}  pocket-ic.gz" | sha256sum -c -
     - gzip -d pocket-ic.gz
     - chmod +x ./pocket-ic
-    - mv ./pocket-ic ./backend/integration_tests/pocket-ic
+    - mv ./pocket-ic $POCKET_IC_BIN
+    - $POCKET_IC_BIN --version
     - ulimit -n 809600
     - ulimit -f 8096000
     - cargo test -p integration_tests

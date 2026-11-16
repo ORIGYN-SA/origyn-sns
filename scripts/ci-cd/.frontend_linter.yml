@@ -23,6 +23,9 @@ $[[ inputs.src-folder ]] linter:
         - "package.json"
         - "package-lock.json"
         - ".npmrc"
+        # A change to the job itself (for example the Node version) is tried
+        # on its merge request
+        - "scripts/ci-cd/.{node_template,frontend_linter}.yml"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "frontend/$[[ inputs.src-folder ]]/**/*"

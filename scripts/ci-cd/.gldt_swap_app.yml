@@ -10,7 +10,8 @@
 # GitLab evaluates "changes" to true on every tag pipeline.
 
 .gldt_swap_app template:
-  image: node:current-alpine3.22
+  # Exact versions of Node and pnpm, the same Node as in .node_template.yml.
+  image: node:24.22.1-alpine3.23
   cache:
     - key:
         files:
@@ -18,7 +19,7 @@
       paths:
         - frontend/gldt_swap_app/node_modules/
   before_script:
-    - npm install -g pnpm@latest-10
+    - npm install -g pnpm@10.34.9
     - pnpm --dir frontend/gldt_swap_app install --frozen-lockfile
   variables:
     # Same values as the .node template, see the note there.
@@ -31,6 +32,8 @@ gldt_swap_app linter:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "frontend/gldt_swap_app/**/*"
+        # A change to the jobs themselves is tried on its merge request
+        - "scripts/ci-cd/.gldt_swap_app.yml"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
         - "frontend/gldt_swap_app/**/*"
@@ -44,6 +47,7 @@ gldt_swap_app test build:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - "frontend/gldt_swap_app/**/*"
+        - "scripts/ci-cd/.gldt_swap_app.yml"
   extends: .gldt_swap_app template
   script:
     - pnpm --dir frontend/gldt_swap_app run build:staging
