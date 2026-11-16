@@ -1,7 +1,7 @@
 import { LoaderSpin } from "@components/ui";
 
 import { useLedgerUserBalance } from "@hooks/ledger";
-import { useBalanceOGYUSD } from "@hooks/ogy_api";
+import { useBalanceOGYUSD } from "@hooks/gldt_api";
 
 const BalanceOGY = ({ className }: { className?: string }) => {
   const {

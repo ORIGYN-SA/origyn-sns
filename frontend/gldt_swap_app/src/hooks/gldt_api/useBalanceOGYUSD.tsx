@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import axios from "axios";
 
+import { GLDT_API_BASE_URL } from "@constants";
 import { roundAndFormatLocale } from "@utils/numbers/index";
-import { instance } from "./index";
 
+interface PriceHistoryItem {
+  date: string;
+  price: number;
+}
+
+// One USD price per day, oldest first. The last row is today's.
 const fetchOGYPrice = async () => {
-  const { data } = await instance.get(`/ogy/price`);
-  const { ogyPrice } = data;
+  const { data } = await axios.get<PriceHistoryItem[]>(
+    `${GLDT_API_BASE_URL}/v1/tokens/OGY/price/history`,
+    { params: { group: "day" } }
+  );
+  const latest = data[data.length - 1];
+  if (!latest) throw new Error("api.gldt.org returned no OGY price");
 
   return {
-    ogyPrice,
+    ogyPrice: latest.price,
   };
 };
 
