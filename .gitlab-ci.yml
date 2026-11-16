@@ -1,5 +1,8 @@
 default:
   image: dckreg.bity.com/bity/dev/runners_images/dfinity-canisters:0.31.0
+  # A newer pipeline on the same ref may cancel running jobs. Every job of the
+  # deploy stage sets "interruptible: false", so a deploy is never cut off half
+  # way (a canister upgrade is stop, install, start).
   interruptible: true
   before_script:
     - dfx --version
@@ -190,6 +193,7 @@ rust lint:
 
 ogy dashboard staging:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "ogy_dashboard"
@@ -214,6 +218,7 @@ ogy dashboard staging:
 
 ogy dashboard preprod:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "ogy_dashboard"
@@ -238,6 +243,7 @@ ogy dashboard preprod:
 
 ogy dashboard production:
   stage: deploy
+  interruptible: false
   resource_group: frontend production deployment
   variables:
     CANISTER_NAME: "ogy_dashboard"
@@ -262,6 +268,7 @@ ogy dashboard production:
 
 ogy landing page staging:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "origyn_landing_page"
@@ -286,6 +293,7 @@ ogy landing page staging:
 
 ogy landing page production:
   stage: deploy
+  interruptible: false
   resource_group: frontend production deployment
   variables:
     CANISTER_NAME: "origyn_landing_page"

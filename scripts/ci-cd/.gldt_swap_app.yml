@@ -116,6 +116,7 @@ gldt_swap_app production build:
 
 gldt swap app staging:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
@@ -140,6 +141,7 @@ gldt swap app staging:
 
 gldt swap app preprod:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
@@ -168,6 +170,7 @@ gldt swap app preprod:
 # when the proposal is adopted.
 gldt swap app production:
   stage: deploy
+  interruptible: false
   resource_group: frontend production deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
