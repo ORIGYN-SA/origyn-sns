@@ -236,6 +236,10 @@ ogy dashboard preprod:
     url: https://m7nki-xaaaa-aaaan-qmlwa-cai.icp0.io/
     action: start
 
+# The production dashboard is governed by the ORIGYN SNS. This job does not put
+# a new version live: it uploads the build to the asset canister as a proposed
+# batch and submits the SNS proposal that commits it. The version goes live
+# when the proposal is adopted.
 ogy dashboard production:
   stage: deploy
   resource_group: frontend production deployment
@@ -250,10 +254,12 @@ ogy dashboard production:
       variables:
         TARGET_NETWORK: ic
         PEM_FILE: "${PEM_FILE_PRODUCTION}"
+      when: manual
   before_script:
     - !reference [.import dfx identity, before_script]
+    - !reference [.include didc, before_script]
   script:
-    - !reference [.asset canister production deploy, script]
+    - . scripts/frontend-deploy/sns_frontend_deploy.sh $CANISTER_NAME $TARGET_NETWORK
   environment:
     name: ogy dashboard
     deployment_tier: production
