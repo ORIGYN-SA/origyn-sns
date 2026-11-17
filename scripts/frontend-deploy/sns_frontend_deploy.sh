@@ -54,6 +54,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Stops here, before anything is uploaded, if the proposal could not be submitted afterwards.
+./scripts/frontend-deploy/sns_check_inputs.sh $CANISTER_NAME $VERSION
+
+if [ $? -ne 0 ]; then
+  echo "Error in sns_check_inputs.sh"
+  exit 1
+fi
+
 # Uploads the built assets to the canister as a proposed batch. Exports BATCH_ID and EVIDENCE.
 . ./scripts/frontend-deploy/sns_prepare_assets.sh $CANISTER_NAME $NETWORK
 
