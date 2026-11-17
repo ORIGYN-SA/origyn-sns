@@ -122,15 +122,18 @@ echo "$RESPONSE"
 
 rm -f message.json $CANISTER_IDS_FILE
 
-# quill exits with 0 even if governance answers with an error, so look for the
-# id of the new proposal in the response.
-if [[ $SEND_STATUS -ne 0 ]] || ! echo "$RESPONSE" | grep -q "proposal_id"; then
+# quill exits with 0 even if governance answers with an error. It prints
+# "Successfully created new proposal with ID <n>" when the proposal exists and
+# "SNS governance error: ..." when governance refused it.
+if [[ $SEND_STATUS -ne 0 ]] || ! echo "$RESPONSE" | grep -q "Successfully created new proposal"; then
   echo "Error: SNS governance did not accept the proposal. Batch $BATCH_ID is still proposed on the canister."
   exit 1
 fi
 
+PROPOSAL_ID=$(echo "$RESPONSE" | grep -oE 'Successfully created new proposal with ID [0-9]+' | grep -oE '[0-9]+$')
+
 echo "
 ***********************************
-Proposal sent successfully.
+Proposal $PROPOSAL_ID sent successfully. Batch $BATCH_ID is committed when the proposal is adopted.
 ***********************************
 "
