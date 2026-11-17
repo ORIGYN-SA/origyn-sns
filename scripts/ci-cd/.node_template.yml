@@ -1,7 +1,9 @@
 # NodeJS & NextJS job template
 
 .node template:
-  image: node:18
+  # An exact version, so a production build does not change with whatever a
+  # floating tag points to that day. Keep it in step with .gldt_swap_app.yml.
+  image: node:24.22.1
   cache:
   - key:
       files:
