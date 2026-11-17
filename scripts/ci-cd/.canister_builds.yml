@@ -28,10 +28,13 @@ $[[ inputs.src-folder ]] staging build:
       when: never
     # - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
     #   when: never
-    # Not on a merge request from develop: the staging deploy does not run
-    # there, so nothing would use the build.
+    # On develop a change in the shared crates rebuilds every canister, so that
+    # staging follows develop. Not on a merge request from develop: the staging
+    # deploy does not run there, so nothing would use the build.
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
+        - "backend/libraries/**/*.{rs,toml,lock,md,did,wasm,gz}"
+        - "backend/external_canisters/**/*.{rs,toml,lock,md,did,wasm,gz}"
         - "backend/canisters/$[[ inputs.src-folder ]]/**/*.{rs,toml,lock,md,did,wasm,gz}"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME != "develop"
       changes:
