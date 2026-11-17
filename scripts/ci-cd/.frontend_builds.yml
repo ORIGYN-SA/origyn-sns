@@ -9,14 +9,22 @@ spec:
         ]
 ---
 # Frontend builds
+#
+# The "changes" lists name the whole app folder and the files the npm
+# workspaces share, see the note in .frontend_linter.yml.
 
 $[[ inputs.src-folder ]] test build:
   stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
+        # A change to the job itself (for example the Node version) is tried
+        # on its merge request
+        - "scripts/ci-cd/.{node_template,frontend_builds}.yml"
   # needs: ["generate test declarations"]
   extends: .node template
   script:
@@ -32,8 +40,10 @@ $[[ inputs.src-folder ]] staging build:
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
   # needs: ["generate declarations"]
   extends: .node template
   variables:
@@ -58,8 +68,10 @@ $[[ inputs.src-folder ]] preprod build:
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/$[[ inputs.src-folder ]]/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - ".npmrc"
   # needs: ["generate declarations"]
   extends: .node template
   variables:
@@ -83,11 +95,9 @@ $[[ inputs.src-folder ]] preprod build:
 $[[ inputs.src-folder ]] production build:
   stage: build
   rules:
+    # Only on the release tag. A build on master was never deployed: the tag
+    # pipeline builds again and deploys its own build.
     - if: $CI_COMMIT_TAG =~ '/^$[[ inputs.src-folder ]]-v\d+\.\d+\.\d+$/'
-    - if: $CI_COMMIT_REF_NAME == "master"
-      changes:
-        - "frontend/$[[ inputs.src-folder ]]/*.{js,json}"
-        - "frontend/$[[ inputs.src-folder ]]/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
   # needs: ["generate declarations"]
   extends: .node template
   variables:
