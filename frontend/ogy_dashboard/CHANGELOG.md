@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.61] - 2026-11-17
+
+#### Changed
+
+- First release through an SNS proposal. The dashboard itself is unchanged. From this version on, a new version goes live when the ORIGYN DAO adopts its upgrade proposal.
+
 ### [1.0.60] - 2026-11-16
 
 #### Changed
