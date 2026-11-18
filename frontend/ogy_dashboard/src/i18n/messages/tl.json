@@ -687,28 +687,6 @@
       "error": "Error sa paglipat!"
     }
   },
-  "support": {
-    "category": "Suporta",
-    "title": "Gumawa ng ticket",
-    "titleSubmitted": "Naisumite ang ticket",
-    "successTitle": "Nagawa ang support ticket",
-    "successMessage": "Susundan namin ito sa email address na ibinigay mo.",
-    "submitAnother": "Magsumite ng isa pang ticket",
-    "intro": "Ilarawan ang iyong isyu at kung paano ka namin maaabot.",
-    "form": {
-      "name": "Pangalan",
-      "email": "Email ng kontak",
-      "emailRequired": "Kailangan ang email address",
-      "emailInvalid": "Hindi wastong email address",
-      "principal": "Wallet principal",
-      "invalidPrincipal": "Hindi wastong address ng tatanggap.",
-      "description": "Paglalarawan",
-      "descriptionPlaceholder": "Sabihin sa amin kung ano ang nangyayari…",
-      "descriptionRequired": "Pakilarawan ang iyong isyu"
-    },
-    "submitError": "May nangyaring mali. Pakisubukan muli.",
-    "submitting": "Isinusumite…"
-  },
   "explorer": {
     "title": "Viewer",
     "subtitle": "I-browse at i-verify ang mga sertipiko, koleksyon, at kolektor ng ORIGYN sa blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Tuklasin ang supply ng OGY, staking, pamamahala at mga transaksyon sa ORIGYN dashboard.",
     "transactions": "Tingnan ang mga paglilipat ng OGY, pagsunog ng token at aktibidad ng account sa ORIGYN ledger.",
-    "support": "Makipag-ugnayan sa ORIGYN support para sa tulong sa iyong wallet, mga token o dashboard.",
     "transfersTitle": "Pinakamalalaking paglilipat ng OGY",
     "burnsTitle": "Pinakamalalaking pagsunog ng OGY"
   }

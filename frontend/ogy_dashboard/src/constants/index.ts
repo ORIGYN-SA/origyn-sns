@@ -20,9 +20,7 @@ export const ICPSWAP_OGY_ICP_POOL_CANISTER_ID = "ttnzy-lyaaa-aaaag-qj2bq-cai";
 export const ICPSWAP_ICP_CKUSDC_POOL_CANISTER_ID =
   "mohjv-bqaaa-aaaag-qjyia-cai";
 export const API_ICRC_V1_BASE_URL = import.meta.env.VITE_API_ICRC_V1_BASE_URL;
-export const API_OGY_BASE_URL = import.meta.env.VITE_API_OGY_BASE_URL;
 export const API_SNS_BASE_URL = import.meta.env.VITE_API_SNS_BASE_URL;
-export const API_ROSETTA = import.meta.env.VITE_API_ROSETTA;
 export const API_GLDT_BASE_URL = import.meta.env.VITE_API_GLDT_BASE_URL;
 export const GLDT_API_TOKEN_SYMBOL = "OGY";
 // Dataset segment for the GLDT NFT API. Mainnet data lives under "production".

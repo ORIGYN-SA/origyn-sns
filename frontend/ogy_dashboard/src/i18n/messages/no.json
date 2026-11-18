@@ -687,28 +687,6 @@
       "error": "Overføringsfeil!"
     }
   },
-  "support": {
-    "category": "Støtte",
-    "title": "Opprett en sak",
-    "titleSubmitted": "Sak sendt inn",
-    "successTitle": "Støttesak opprettet",
-    "successMessage": "Vi følger opp på e-postadressen du oppga.",
-    "submitAnother": "Send inn en ny sak",
-    "intro": "Beskriv problemet ditt og hvordan vi kan nå deg.",
-    "form": {
-      "name": "Navn",
-      "email": "Kontakt-e-post",
-      "emailRequired": "E-postadresse er påkrevd",
-      "emailInvalid": "Ugyldig e-postadresse",
-      "principal": "Lommebok-principal",
-      "invalidPrincipal": "Ugyldig mottakeradresse.",
-      "description": "Beskrivelse",
-      "descriptionPlaceholder": "Fortell oss hva som skjer…",
-      "descriptionRequired": "Vennligst beskriv problemet ditt"
-    },
-    "submitError": "Noe gikk galt. Vennligst prøv igjen.",
-    "submitting": "Sender inn…"
-  },
   "explorer": {
     "title": "Fremviser",
     "subtitle": "Bla gjennom og verifiser ORIGYN-sertifikater, samlinger og samlere på blokkjeden.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Utforsk OGY-tilbud, staking, styring og transaksjoner på ORIGYN-dashbordet.",
     "transactions": "Se OGY-overføringer, tokenbrenning og kontoaktivitet i ORIGYN-hovedboken.",
-    "support": "Kontakt ORIGYN-støtte for hjelp med lommeboken, tokenene eller dashbordet.",
     "transfersTitle": "Største OGY-overføringer",
     "burnsTitle": "Største OGY-brenninger"
   }

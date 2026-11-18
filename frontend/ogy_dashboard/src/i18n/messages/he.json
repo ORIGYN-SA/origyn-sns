@@ -687,28 +687,6 @@
       "error": "שגיאת העברה!"
     }
   },
-  "support": {
-    "category": "תמיכה",
-    "title": "צור פנייה",
-    "titleSubmitted": "הפנייה נשלחה",
-    "successTitle": "פניית תמיכה נוצרה",
-    "successMessage": "ניצור איתך קשר בכתובת האימייל שסיפקת.",
-    "submitAnother": "שלח פנייה נוספת",
-    "intro": "תאר את הבעיה שלך וכיצד נוכל ליצור איתך קשר.",
-    "form": {
-      "name": "שם",
-      "email": "אימייל ליצירת קשר",
-      "emailRequired": "כתובת אימייל היא שדה חובה",
-      "emailInvalid": "כתובת אימייל לא תקינה",
-      "principal": "Principal של הארנק",
-      "invalidPrincipal": "כתובת נמען לא תקינה.",
-      "description": "תיאור",
-      "descriptionPlaceholder": "ספר לנו מה קורה…",
-      "descriptionRequired": "אנא תאר את הבעיה שלך"
-    },
-    "submitError": "משהו השתבש. אנא נסה שוב.",
-    "submitting": "שולח…"
-  },
   "explorer": {
     "title": "מציג",
     "subtitle": "עיינו ואמתו תעודות, אוספים ואספנים של ORIGYN על הבלוקצ'יין.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "גלו את היצע OGY, הסטייקינג, הממשל והעסקאות בלוח הבקרה של ORIGYN.",
     "transactions": "עיינו בהעברות OGY, בשריפת טוקנים ובפעילות חשבונות בספר החשבונות של ORIGYN.",
-    "support": "פנו לתמיכת ORIGYN לקבלת עזרה עם הארנק, הטוקנים או לוח הבקרה.",
     "transfersTitle": "העברות OGY הגדולות ביותר",
     "burnsTitle": "שריפות OGY הגדולות ביותר"
   }

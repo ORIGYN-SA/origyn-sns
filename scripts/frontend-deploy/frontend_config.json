@@ -1,0 +1,12 @@
+{
+  "gldt_swap_app": {
+    "name": "GLDT swap app frontend",
+    "url": "https://gldt.org",
+    "sns_function_id": 2004
+  },
+  "ogy_dashboard": {
+    "name": "OGY dashboard frontend",
+    "url": "https://dashboard.origyn.com",
+    "sns_function_id": 2001
+  }
+}

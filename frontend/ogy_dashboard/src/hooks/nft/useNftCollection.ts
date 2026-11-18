@@ -8,7 +8,8 @@ const FIVE_MINUTES = 5 * 60 * 1000;
 const fetchCollectionOrNull = async (canisterId: string) => {
   if (!isCollectionVisible(canisterId)) return null;
   try {
-    return await gldtEndpoints.getNftCollection(canisterId);
+    const collection = await gldtEndpoints.getNftCollection(canisterId);
+    return collection.is_ai ? null : collection;
   } catch (error) {
     if ((error as HttpError | null)?.status === 404) return null;
     throw error;

@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.2.3] - 2026-11-16
+
+### Changed
+
+- The OGY balance on the account page takes its USD value from the GLDT analytics API (`api.gldt.org`) instead of `api.origyn.com`. The Content-Security-Policy blocked the old request, so the USD value was not shown
+
 ### [1.2.2] - 2026-10-27
 
 ### Changed

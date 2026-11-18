@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.7.5] - 2026-11-16
+
+#### Changed
+
+- Work out the market cap from the GLDT API's daily OGY price. The price used to come from api.origyn.com, which is being shut down.
+
 ### [1.7.4] - 2026-11-03
 
 #### Changed

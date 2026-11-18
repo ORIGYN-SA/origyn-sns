@@ -4,9 +4,14 @@
 # project with its own lockfile (frontend/gldt_swap_app/pnpm-lock.yaml) and is
 # not part of the npm workspaces, so it cannot use the shared frontend
 # templates, which run `npm run ... --workspace`.
+#
+# The "changes" lists name the whole app folder, which includes the lockfile,
+# the .env files and the assets. The production deploy has no "changes" list:
+# GitLab evaluates "changes" to true on every tag pipeline.
 
 .gldt_swap_app template:
-  image: node:current-alpine3.22
+  # Exact versions of Node and pnpm, the same Node as in .node_template.yml.
+  image: node:24.22.1-alpine3.23
   cache:
     - key:
         files:
@@ -14,28 +19,24 @@
       paths:
         - frontend/gldt_swap_app/node_modules/
   before_script:
-    - npm install -g pnpm@latest-10
+    - npm install -g pnpm@10.34.9
     - pnpm --dir frontend/gldt_swap_app install --frozen-lockfile
   variables:
+    # Same values as the .node template, see the note there.
     KUBERNETES_MEMORY_LIMIT: "5Gi"
-    KUBERNETES_MEMORY_REQUEST: "5Gi"
+    KUBERNETES_MEMORY_REQUEST: "2Gi"
 
 gldt_swap_app linter:
   stage: lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
-    - if: $CI_OPEN_MERGE_REQUESTS
-      when: never
-      changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
+        # A change to the jobs themselves is tried on its merge request
+        - "scripts/ci-cd/.gldt_swap_app.yml"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
   extends: .gldt_swap_app template
   script:
     - pnpm --dir frontend/gldt_swap_app run lint
@@ -45,8 +46,8 @@ gldt_swap_app test build:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
+        - "scripts/ci-cd/.gldt_swap_app.yml"
   extends: .gldt_swap_app template
   script:
     - pnpm --dir frontend/gldt_swap_app run build:staging
@@ -61,8 +62,7 @@ gldt_swap_app staging build:
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
   extends: .gldt_swap_app template
   script:
     - pnpm --dir frontend/gldt_swap_app run build:staging
@@ -81,8 +81,7 @@ gldt_swap_app preprod build:
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
   extends: .gldt_swap_app template
   script:
     - pnpm --dir frontend/gldt_swap_app run build:preprod
@@ -115,14 +114,14 @@ gldt_swap_app production build:
 
 gldt swap app staging:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
       needs: ["gldt_swap_app staging build"]
       variables:
         TARGET_NETWORK: staging
@@ -132,21 +131,21 @@ gldt swap app staging:
   script:
     - !reference [.asset canister staging deploy, script]
   environment:
-    name: gldt swap app
+    name: staging/gldt_swap_app
     deployment_tier: staging
     url: https://qfyvj-4qaaa-aaaam-qbfka-cai.icp0.io/
     action: start
 
 gldt swap app preprod:
   stage: deploy
+  interruptible: false
   resource_group: frontend staging deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
+        - "frontend/gldt_swap_app/**/*"
       needs: ["gldt_swap_app preprod build"]
       variables:
         TARGET_NETWORK: preprod
@@ -156,31 +155,35 @@ gldt swap app preprod:
   script:
     - !reference [.asset canister preprod deploy, script]
   environment:
-    name: gldt swap app
+    name: preprod/gldt_swap_app
     deployment_tier: staging
     url: https://wmd7w-pqaaa-aaaai-qplaa-cai.icp0.io/
     action: start
 
+# The production frontend is governed by the ORIGYN SNS. This job does not put a
+# new version live: it uploads the build to the asset canister as a proposed
+# batch and submits the SNS proposal that commits it. The version goes live
+# when the proposal is adopted.
 gldt swap app production:
   stage: deploy
+  interruptible: false
   resource_group: frontend production deployment
   variables:
     CANISTER_NAME: "gldt_swap_app"
   rules:
     - if: $CI_COMMIT_TAG =~ '/^gldt_swap_app-v\d+\.\d+\.\d+$/'
-      changes:
-        - "frontend/gldt_swap_app/*.{js,json}"
-        - "frontend/gldt_swap_app/{**,**/**,**/**/**}/*.{js,jsx,ts,tsx,md,mdx,css,html,svg}"
       needs: ["gldt_swap_app production build"]
       variables:
         TARGET_NETWORK: ic
         PEM_FILE: "${PEM_FILE_PRODUCTION}"
+      when: manual
   before_script:
     - !reference [.import dfx identity, before_script]
+    - !reference [.include didc, before_script]
   script:
-    - !reference [.asset canister production deploy, script]
+    - . scripts/frontend-deploy/sns_frontend_deploy.sh $CANISTER_NAME $TARGET_NETWORK
   environment:
-    name: gldt swap app
+    name: production/gldt_swap_app
     deployment_tier: production
     url: https://oj7ri-2qaaa-aaaap-abrzq-cai.icp0.io/
     action: start

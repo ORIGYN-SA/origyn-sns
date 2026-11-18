@@ -687,28 +687,6 @@
       "error": "Eroare la transfer!"
     }
   },
-  "support": {
-    "category": "Suport",
-    "title": "Creează un tichet",
-    "titleSubmitted": "Tichet trimis",
-    "successTitle": "Tichet de suport creat",
-    "successMessage": "Te vom contacta la adresa de e-mail furnizată.",
-    "submitAnother": "Trimite alt tichet",
-    "intro": "Descrie problema ta și cum te putem contacta.",
-    "form": {
-      "name": "Nume",
-      "email": "E-mail de contact",
-      "emailRequired": "Adresa de e-mail este obligatorie",
-      "emailInvalid": "Adresă de e-mail nevalidă",
-      "principal": "Principal portofel",
-      "invalidPrincipal": "Adresă de destinatar nevalidă.",
-      "description": "Descriere",
-      "descriptionPlaceholder": "Spune-ne ce se întâmplă…",
-      "descriptionRequired": "Te rugăm să îți descrii problema"
-    },
-    "submitError": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
-    "submitting": "Se trimite…"
-  },
   "explorer": {
     "title": "Vizualizator",
     "subtitle": "Explorați și verificați certificatele, colecțiile și colecționarii ORIGYN pe blockchain.",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "Explorează oferta OGY, stakingul, guvernanța și tranzacțiile în panoul ORIGYN.",
     "transactions": "Consultă transferurile OGY, arderile de tokenuri și activitatea conturilor în registrul ORIGYN.",
-    "support": "Contactează asistența ORIGYN pentru ajutor cu portofelul, tokenurile sau panoul de control.",
     "transfersTitle": "Cele mai mari transferuri OGY",
     "burnsTitle": "Cele mai mari arderi OGY"
   }

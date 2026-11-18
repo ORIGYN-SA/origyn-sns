@@ -687,28 +687,6 @@
       "error": "转账出错！"
     }
   },
-  "support": {
-    "category": "支持",
-    "title": "创建工单",
-    "titleSubmitted": "工单已提交",
-    "successTitle": "支持工单已创建",
-    "successMessage": "我们将通过您提供的电子邮件地址跟进。",
-    "submitAnother": "提交另一张工单",
-    "intro": "描述您的问题以及我们可以如何联系您。",
-    "form": {
-      "name": "姓名",
-      "email": "联系电子邮件",
-      "emailRequired": "电子邮件地址为必填项",
-      "emailInvalid": "电子邮件地址无效",
-      "principal": "钱包 principal",
-      "invalidPrincipal": "收款地址无效。",
-      "description": "描述",
-      "descriptionPlaceholder": "告诉我们发生了什么…",
-      "descriptionRequired": "请描述您的问题"
-    },
-    "submitError": "出现错误。请重试。",
-    "submitting": "正在提交…"
-  },
   "explorer": {
     "title": "查看器",
     "subtitle": "在区块链上浏览并验证 ORIGYN 证书、收藏系列和收藏家。",
@@ -903,7 +881,6 @@
   "seo": {
     "dashboard": "在ORIGYN仪表板上探索OGY供应量、质押、治理和交易。",
     "transactions": "在ORIGYN账本上查看OGY转账、代币销毁和账户活动。",
-    "support": "如需钱包、代币或仪表板方面的帮助，请联系ORIGYN支持团队。",
     "transfersTitle": "最大额OGY转账",
     "burnsTitle": "最大额OGY销毁"
   }

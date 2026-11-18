@@ -6,6 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [1.0.61] - 2026-11-17
+
+#### Changed
+
+- First release through an SNS proposal. The dashboard itself is unchanged. From this version on, a new version goes live when the ORIGYN DAO adopts its upgrade proposal.
+
+### [1.0.60] - 2026-11-16
+
+#### Changed
+
+- When ICPSwap can't be reached, take the OGY price from the GLDT API's daily price. It used to come from api.origyn.com, which is being shut down.
+- "Contact support" in the footer opens an email to techsupport@origyn.ch.
+
+#### Removed
+
+- The support ticket page. Its form was sent through api.origyn.com.
+- The visitor statistics script loaded from stats.origyn.ch.
+
+### [1.0.59] - 2026-11-10
+
+#### Fixed
+
+- Hide the shared Origyn AI collection, where Origyn Records and AI agents mint their certificates. The NFT API doesn't flag it as AI, so 1.0.58 still showed it.
+
+### [1.0.58] - 2026-11-10
+
+#### Changed
+
+- Hide AI collections from the Viewer, including their certificates, transactions, search results and direct links.
+
 ### [1.0.57] - 2026-09-29
 
 #### Added
