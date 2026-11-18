@@ -5,7 +5,7 @@
     "defaults": "SendUln302.getUlnConfig(0x0, 30184) and ReceiveUln302.getUlnConfig(0x0, 30184) on Ethereum at block 26357301: LayerZero's default confirmations 15 out and 10 in, both DVNs in the default required set, executor 0x173272739Bd7Aa6e4e214714048a9fE699453059 with maxMessageSize 10000",
     "confirmations": "12 blocks each way, our choice. LayerZero's defaults are in \"defaults\"; the receive value here must equal the send value in base.json.",
     "signers": "tools/evm-signers: node evm-signers.mjs --json (canister 6f6ua-hqaaa-aaaar-qairq-cai, key_1, both live checks match), 2026-11-06",
-    "operator_and_salt": "Not set yet. Fill in the operator wallet and a salt of that wallet address, then 0x00, then 11 random bytes, the same in base.json. Deploy refuses zero values."
+    "operator_and_salt": "The operator is the wallet of the GitLab variable GLDT_BRIDGE_OPERATOR_KEY (environment gldt-bridge-mainnet), read by the job gldt bridge mainnet operator on 2026-11-18. The salt is that wallet, then 0x00 (no cross-chain redeploy protection, so both chains get the same address), then 11 random bytes; the same in base.json."
   },
   "chain": "ethereum",
   "chainId": 1,
@@ -31,10 +31,10 @@
     ]
   },
   "lzReceiveGas": 100000,
-  "operator": "0x0000000000000000000000000000000000000000",
+  "operator": "0xF3ef7b81501Ded1DA05108D5944D4EfA02C8146f",
   "adminSigner": "0x216C1E5F2b9EB767Cec5C7d4DFa2d02b5A0AA143",
   "icpSigner": "0x0A82D20142d067C8AF32f48664bDDfb65EcAE507",
-  "salt": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "salt": "0xf3ef7b81501ded1da05108d5944d4efa02c8146f003f183660292e8524fd9e5d",
   "name": "Gold Token",
   "symbol": "GLDT"
 }

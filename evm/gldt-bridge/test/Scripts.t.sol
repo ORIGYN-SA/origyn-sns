@@ -95,6 +95,7 @@ contract ScriptsTest is GLDTFixture {
         address wallet = makeAddr("operator wallet");
         bytes32 salt = bytes32(abi.encodePacked(wallet, bytes1(0x00), bytes11(0)));
         GLDTConfig memory c = harness.loadConfig("script/config/ethereum.json");
+        (c.operator, c.salt) = (address(0), bytes32(0));
         vm.expectRevert(bytes("config: operator is not set"));
         harness.validateForDeploy(c, wallet);
 
@@ -130,6 +131,19 @@ contract ScriptsTest is GLDTFixture {
             vm.expectRevert(bytes("config: confirmations are not set"));
             harness.validateForDeploy(t, wallet);
         }
+    }
+
+    function test_mainnet_configs_pass_deploy_validation() public {
+        GLDTConfig memory eth = harness.loadConfig("script/config/ethereum.json");
+        GLDTConfig memory base = harness.loadConfig("script/config/base.json");
+        assertEq(eth.operator, base.operator, "one operator wallet");
+        assertEq(eth.salt, base.salt, "one salt");
+        // The chain checks need code at the endpoint and at CreateX; the fork tests check the real ones.
+        vm.etch(eth.endpoint, hex"00");
+        vm.etch(base.endpoint, hex"00");
+        vm.etch(0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed, hex"00");
+        harness.validateForDeploy(eth, eth.operator);
+        harness.validateForDeploy(base, base.operator);
     }
 
     // DeployLocal
