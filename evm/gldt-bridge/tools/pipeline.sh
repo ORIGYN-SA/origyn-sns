@@ -78,7 +78,7 @@ token_address() {
 }
 
 dry_run() {
-    local chain operator token
+    local chain operator token code
     for chain in $(chains "$1"); do
         operator=$(config "$chain" operator)
         if [ "$operator" = "$ZERO_ADDRESS" ]; then
@@ -86,7 +86,8 @@ dry_run() {
             continue
         fi
         token=$(token_address "$chain")
-        if [ "$(cast code "$token" --rpc-url "$(rpc_url "$chain")")" != 0x ]; then
+        code=$(cast code "$token" --rpc-url "$(rpc_url "$chain")")
+        if [ "$code" != 0x ]; then
             echo "$chain: skipped, GLDT is already deployed at $token"
             continue
         fi
@@ -133,11 +134,12 @@ verify() {
 
 # Not under `set -e` (it runs in an `if`), so every step returns on failure itself.
 pause_chain() {
-    local chain=$1 lz=$2 icp=$3 url address token operator
+    local chain=$1 lz=$2 icp=$3 url address token code operator
     url=$(rpc_url "$chain")
     address=$(key_address "$chain") || return 1
     token=$(token_address "$chain") || return 1
-    [ "$(cast code "$token" --rpc-url "$url")" != 0x ] || {
+    code=$(cast code "$token" --rpc-url "$url") || return 1
+    [ "$code" != 0x ] || {
         echo "$chain: no GLDT at $token" >&2
         return 1
     }

@@ -9,7 +9,8 @@
 #   pause                  manual, at any time: operator pause on both chains (PAUSE_LZ, PAUSE_ICP; default true)
 #
 # Deploy, verify and pause run in the protected environments gldt-bridge-testnet and gldt-bridge-mainnet, where
-# only Maintainers can run jobs. Only those jobs get GLDT_BRIDGE_OPERATOR_KEY, GLDT_BRIDGE_ALCHEMY_KEY and
+# only Maintainers can run jobs. Verify and pause are not deployments (action verify and access), so "Prevent
+# outdated deployment jobs" never blocks an older pipeline's pause button. Only those jobs get GLDT_BRIDGE_OPERATOR_KEY, GLDT_BRIDGE_ALCHEMY_KEY and
 # GLDT_BRIDGE_ETHERSCAN_KEY (Settings > CI/CD > Variables: Protected, Masked and hidden, scoped to the environment).
 
 .gldt bridge foundry:
@@ -63,6 +64,7 @@
 gldt bridge evm test:
   extends: .gldt bridge npm
   stage: test
+  needs: []
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
@@ -125,6 +127,7 @@ gldt bridge testnet verify:
   environment:
     name: gldt-bridge-testnet
     deployment_tier: testing
+    action: verify
   script:
     - tools/pipeline.sh verify testnet
 
@@ -143,6 +146,7 @@ gldt bridge testnet pause:
   environment:
     name: gldt-bridge-testnet
     deployment_tier: testing
+    action: access
   script:
     - tools/pipeline.sh pause testnet
 
@@ -192,6 +196,7 @@ gldt bridge mainnet verify:
   environment:
     name: gldt-bridge-mainnet
     deployment_tier: production
+    action: verify
   script:
     - tools/pipeline.sh verify mainnet
 
@@ -210,5 +215,6 @@ gldt bridge mainnet pause:
   environment:
     name: gldt-bridge-mainnet
     deployment_tier: production
+    action: access
   script:
     - tools/pipeline.sh pause mainnet
