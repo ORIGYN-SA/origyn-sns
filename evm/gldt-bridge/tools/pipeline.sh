@@ -8,6 +8,7 @@
 #   tools/pipeline.sh verify <target>    verify the implementation source with GLDT_BRIDGE_ETHERSCAN_KEY
 #   tools/pipeline.sh pause <target>     operator pause; PAUSE_LZ and PAUSE_ICP (true or false, default true)
 #   tools/pipeline.sh address <target>   the GLDT address that the config's operator and salt give
+#   tools/pipeline.sh operator <target>  the wallet of GLDT_BRIDGE_OPERATOR_KEY (only its address), and whether the configs name it
 #
 # RPC: GLDT_BRIDGE_RPC_URL when set (one RPC for every chain, for a local anvil fork), else Alchemy with
 # GLDT_BRIDGE_ALCHEMY_KEY, else the public publicnode endpoints.
@@ -179,6 +180,21 @@ pause() {
     [ "$failed" = 0 ] || die "the pause failed on a chain, see above"
 }
 
+show_operator() {
+    local address chain operator
+    load_operator_key
+    address=$(cast wallet address --private-key "$OPERATOR_KEY")
+    echo "GLDT_BRIDGE_OPERATOR_KEY is the wallet $address"
+    for chain in $(chains "$1"); do
+        operator=$(config "$chain" operator)
+        if [ "$(lower "$operator")" = "$(lower "$address")" ]; then
+            echo "$chain: script/config/$chain.json names this wallet"
+        else
+            echo "$chain: script/config/$chain.json names $operator, not this wallet"
+        fi
+    done
+}
+
 show_address() {
     local chain
     for chain in $(chains "$1"); do
@@ -186,7 +202,7 @@ show_address() {
     done
 }
 
-[ $# -eq 2 ] || die "usage: tools/pipeline.sh dry-run|deploy|check|verify|pause|address <mainnet|testnet|chain>"
+[ $# -eq 2 ] || die "usage: tools/pipeline.sh dry-run|deploy|check|verify|pause|address|operator <mainnet|testnet|chain>"
 chains "$2" >/dev/null
 case "$1" in
     dry-run) dry_run "$2" ;;
@@ -195,5 +211,6 @@ case "$1" in
     verify) verify "$2" ;;
     pause) pause "$2" ;;
     address) show_address "$2" ;;
+    operator) show_operator "$2" ;;
     *) die "unknown step: $1" ;;
 esac

@@ -7,6 +7,7 @@
 #   check                  Check.s.sol on both chains, through public RPCs
 #   verify                 the implementation source on Etherscan and Basescan
 #   pause                  manual, at any time: operator pause on both chains (PAUSE_LZ, PAUSE_ICP; default true)
+# "gldt bridge mainnet operator" (manual, on a tag or a "Run pipeline" pipeline) prints the key's wallet address.
 #
 # Deploy, verify and pause run in the protected environments gldt-bridge-testnet and gldt-bridge-mainnet, where
 # only Maintainers can run jobs. Verify and pause are not deployments (action verify and access), so "Prevent
@@ -220,3 +221,24 @@ gldt bridge mainnet pause:
     action: access
   script:
     - tools/pipeline.sh pause mainnet
+
+# Prints the wallet address of the mainnet GLDT_BRIDGE_OPERATOR_KEY (never the key). Manual, on a tag, or on a
+# pipeline started with "Run pipeline" on a protected branch.
+gldt bridge mainnet operator:
+  extends: [.gldt bridge foundry]
+  stage: deploy
+  interruptible: false
+  needs: []
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+      when: manual
+      allow_failure: true
+    - if: $CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_BRANCH
+      when: manual
+      allow_failure: true
+  environment:
+    name: gldt-bridge-mainnet
+    deployment_tier: production
+    action: access
+  script:
+    - tools/pipeline.sh operator mainnet
