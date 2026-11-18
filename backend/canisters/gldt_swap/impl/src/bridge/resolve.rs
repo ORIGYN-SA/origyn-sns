@@ -26,7 +26,7 @@ use candid::Principal;
 use gldt_swap_common::bridge::{
     EvmChain, InboundStatus, OutboundStatus, OutboundTransfer, ResolveAction,
 };
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// `bridged_out` and `out_pending` as a list of actions moves them.
 #[derive(Clone, Copy)]
@@ -72,6 +72,8 @@ pub fn check_resolves(state: &BridgeState, actions: &[ResolveAction]) -> Result<
     }
     let mut counters = Counters::of(state);
     let mut seen = BTreeSet::new();
+    // check_one sees the stored burns only, not the ones earlier actions of this list set
+    let mut burn_indexes = BTreeMap::new();
     let mut text = format!("Resolve {} bridge transfer(s):", actions.len());
     for (i, action) in actions.iter().enumerate() {
         let n = i + 1;
@@ -81,6 +83,14 @@ pub fn check_resolves(state: &BridgeState, actions: &[ResolveAction]) -> Result<
             return Err(format!(
                 "resolve {n}: the proposal names this transfer more than once"
             ));
+        }
+        if let ResolveAction::OutboundMarkBurned { icp_burn_index, .. } = action {
+            if let Some(first) = burn_indexes.insert(*icp_burn_index, n) {
+                return Err(format!(
+                    "resolve {n}: ICP block {icp_burn_index} is already the burn of resolve \
+                     {first} of this proposal"
+                ));
+            }
         }
         text.push_str(&format!("\n  {n}. {line}"));
     }
@@ -789,6 +799,35 @@ mod tests {
             OutboundStatus::NeedsManualCheck(_)
         ));
         resolve(vec![mark(2, (1 << 63) - 1)]).unwrap();
+    }
+
+    /// Two actions of one proposal can't name the same ICP burn either: the check refuses the
+    /// list, so an adopted proposal never fails half way.
+    #[test]
+    fn resolve_refuses_one_burn_index_twice_in_a_proposal() {
+        setup(0, 3 * ONE);
+        for id in 0..3 {
+            put_outbound(id, ONE, OutboundStatus::NeedsManualCheck("TooOld".into()));
+        }
+        let mark = |id, icp_burn_index| ResolveAction::OutboundMarkBurned { id, icp_burn_index };
+
+        let err = resolve(vec![mark(0, 50), mark(1, 51), mark(2, 50)]).unwrap_err();
+        assert!(
+            err.contains("resolve 3: ICP block 50 is already the burn of resolve 1"),
+            "{err}"
+        );
+        for id in 0..3 {
+            assert!(matches!(
+                outbound(id).status,
+                OutboundStatus::NeedsManualCheck(_)
+            ));
+        }
+        assert_eq!(bridge().out_pending, 3 * ONE);
+        assert_eq!(bridge().bridged_out, 0);
+
+        resolve(vec![mark(0, 50), mark(1, 51), mark(2, 52)]).unwrap();
+        assert_eq!(bridge().out_pending, 0);
+        assert_eq!(bridge().bridged_out, 3 * ONE);
     }
 
     #[test]

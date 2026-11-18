@@ -73,6 +73,16 @@ fn bridge_counters() -> u128 {
     })
 }
 
+/// Ends the swaps that calls which trapped left behind (older than
+/// `STALE_SWAP_TIME_THRESHOLD_MINUTES`, with no NFT guard held), as every swap call does when
+/// it ends. Without this, such a swap would hold the balancer until the next swap call.
+fn end_abandoned_swaps() {
+    mutate_state(|s| {
+        let data = &mut s.data;
+        data.swap_system.finalize_call_swaps(&[], &data.nft_guards);
+    });
+}
+
 /// Whether a swap is active, or one started since `started` was read.
 fn swap_overlaps(started: Option<u64>) -> bool {
     read_state(|s| {
@@ -89,6 +99,7 @@ async fn balance_supply() {
         info!("Supply balancer already running, exiting");
         return;
     };
+    end_abandoned_swaps();
     if swap_overlaps(None) {
         info!("A swap is active, skipping this run");
         return;
@@ -310,5 +321,81 @@ mod tests {
         // bridged GLDT is not minted again: 850 expected on ICP, 850 there
         let target = balancer_target(&gldt(1000), u128::from(150 * GLDT), 0);
         assert_eq!(balancer_mint_amount(&target, &gldt(850)), None);
+    }
+
+    /// A swap left by a call that trapped (old, NFT not guarded) is ended before the balancer
+    /// checks for active swaps; a swap whose call still runs (guarded) or that is new still
+    /// holds it.
+    #[test]
+    fn swaps_left_by_trapped_calls_do_not_hold_the_balancer() {
+        use crate::bridge::test_state::install;
+        use crate::model::swap_configs::SwapConfigs;
+        use crate::state::RuntimeState;
+        use gldt_swap_common::swap::{SwapStatus, SwapType};
+        use gldt_swap_common::swap_canister_config::{
+            FractionalizationConfig, GeneralFractionalizationConfig, SwapCanisterConfig,
+        };
+
+        let nft_canister = Principal::from_slice(&[1; 10]);
+        let configs = SwapConfigs::from_vec(vec![SwapCanisterConfig {
+            icrc7_canister_id: nft_canister,
+            fractionalization_config: FractionalizationConfig::General(
+                GeneralFractionalizationConfig {
+                    division: 100_000_000_000,
+                    swap_fee: Nat::from(100_000_000u64),
+                    ledger_id: Principal::from_slice(&[2; 10]),
+                },
+            ),
+        }]);
+        let nft = |id: u64| gldt_swap_common::nft::Nft {
+            id: Nat::from(id),
+            canister_id: nft_canister,
+        };
+        let user = Principal::from_slice(&[3; 29]);
+        let mut state = RuntimeState::default();
+        let swaps = state
+            .data
+            .swap_system
+            .create_swaps_batch(
+                SwapType::Reverse,
+                user,
+                vec![nft(1), nft(2), nft(3)],
+                &configs,
+            )
+            .unwrap();
+        let id_of = |n: u64| {
+            swaps
+                .iter()
+                .find(|(_, swap)| swap.nft == nft(n))
+                .map(|(id, _)| id.clone())
+                .unwrap()
+        };
+        let (abandoned, running, new) = (id_of(1), id_of(2), id_of(3));
+        // as on mainnet: reverse swaps stuck at BurnFailed by a call that ended long ago
+        for id in [&abandoned, &running] {
+            let swap = state.data.swap_system.swaps.get_mut(id).unwrap();
+            swap.created_at = 0;
+            swap.status = SwapStatus::BurnFailed("InsufficientAllowance".to_string());
+        }
+        state.data.nft_guards.insert(nft(2));
+        install(state);
+
+        end_abandoned_swaps();
+        read_state(|s| {
+            let system = &s.data.swap_system;
+            assert!(system.failed_swaps.contains_key(&abandoned));
+            assert!(system.swaps.contains_key(&running));
+            assert!(system.swaps.contains_key(&new));
+        });
+        assert!(swap_overlaps(None));
+
+        // the guarded call ends, the new swap completes: nothing holds the balancer any more
+        mutate_state(|s| {
+            s.data.nft_guards.clear();
+            s.data.swap_system.swaps.get_mut(&new).unwrap().created_at = 0;
+        });
+        end_abandoned_swaps();
+        assert!(!swap_overlaps(None));
+        read_state(|s| assert_eq!(s.data.swap_system.failed_swaps.len(), 3));
     }
 }
