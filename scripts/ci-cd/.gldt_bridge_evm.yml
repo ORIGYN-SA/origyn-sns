@@ -1,7 +1,7 @@
 # GLDT bridge contracts (evm/gldt-bridge), steps in evm/gldt-bridge/tools/pipeline.sh.
 #
 # Merge requests that touch them: build with the size limit, run the tests, simulate the deploy.
-# A gldt_bridge-vX.Y.Z tag (protected, Maintainers only) adds, for testnet and for mainnet:
+# A gldt_bridge-vX.Y.Z tag (protected, Maintainers only) on a commit of master adds, for testnet and for mainnet:
 #   deploy <first chain>   manual: simulates both chains, then deploys the first one
 #   deploy <second chain>  runs when the first one succeeded
 #   check                  Check.s.sol on both chains, through public RPCs
@@ -67,7 +67,11 @@
 gldt bridge evm test:
   extends: .gldt bridge npm
   stage: test
-  needs: []
+  # On a tag, the deploys wait for this through the test job: a tag that is not on master deploys nothing. The pause
+  # and operator jobs do not wait for it.
+  needs:
+    - job: release tag is on master
+      optional: true
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
