@@ -12,7 +12,8 @@ import { GLDTDeployCore } from "./lib/GLDTDeployCore.sol";
 ///   forge script script/Deploy.s.sol --sig 'run(string)' ethereum \
 ///     --rpc-url <url> --ledger --sender <operator wallet> --broadcast
 ///
-/// `--account <keystore>` works in place of `--ledger`. Never pass a private key on the command line.
+/// `--account <keystore>` works in place of `--ledger`. Never pass a private key on the command line from a laptop.
+/// The pipeline runs this through tools/pipeline.sh, with the key from its protected environment.
 /// Then verify the source on Etherscan and Basescan, built with this same foundry.toml.
 /// The file is written after the simulation, before the broadcast; its `block` is the block the simulation ran on,
 /// so the deployment lands at or after it.

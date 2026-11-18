@@ -112,6 +112,8 @@ include:
       src-folder: origyn_landing_page
   # gldt_swap_app is a standalone pnpm project: linter, builds and deployments
   - local: scripts/ci-cd/.gldt_swap_app.yml
+  # GLDT bridge contracts: tests on MRs; deploy, check, verify and pause from a gldt_bridge-vX.Y.Z tag
+  - local: scripts/ci-cd/.gldt_bridge_evm.yml
 
 ################################################################################
 # Integration Tests

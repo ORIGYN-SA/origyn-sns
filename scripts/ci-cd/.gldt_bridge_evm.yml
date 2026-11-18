@@ -1,0 +1,214 @@
+# GLDT bridge contracts (evm/gldt-bridge), steps in evm/gldt-bridge/tools/pipeline.sh.
+#
+# Merge requests that touch them: build with the size limit, run the tests, simulate the deploy.
+# A gldt_bridge-vX.Y.Z tag (protected, Maintainers only) adds, for testnet and for mainnet:
+#   deploy <first chain>   manual: simulates both chains, then deploys the first one
+#   deploy <second chain>  runs when the first one succeeded
+#   check                  Check.s.sol on both chains, through public RPCs
+#   verify                 the implementation source on Etherscan and Basescan
+#   pause                  manual, at any time: operator pause on both chains (PAUSE_LZ, PAUSE_ICP; default true)
+#
+# Deploy, verify and pause run in the protected environments gldt-bridge-testnet and gldt-bridge-mainnet, where
+# only Maintainers can run jobs. Only those jobs get GLDT_BRIDGE_OPERATOR_KEY, GLDT_BRIDGE_ALCHEMY_KEY and
+# GLDT_BRIDGE_ETHERSCAN_KEY (Settings > CI/CD > Variables: Protected, Masked and hidden, scoped to the environment).
+
+.gldt bridge foundry:
+  image: node:24-bookworm
+  cache: []
+  variables:
+    FOUNDRY_VERSION: v1.5.1
+    FOUNDRY_SHA256: 73640b01bd9ed29fdb4965085099371f8cf0dbbec3e2086cf54564efc4dcfe88
+    KUBERNETES_MEMORY_LIMIT: "4Gi"
+    KUBERNETES_MEMORY_REQUEST: "4Gi"
+  before_script:
+    - curl -fsSL -o /tmp/foundry.tar.gz "https://github.com/foundry-rs/foundry/releases/download/${FOUNDRY_VERSION}/foundry_${FOUNDRY_VERSION}_linux_amd64.tar.gz"
+    - echo "${FOUNDRY_SHA256}  /tmp/foundry.tar.gz" | sha256sum -c -
+    - tar -xzf /tmp/foundry.tar.gz -C /usr/local/bin forge cast
+    - forge --version
+    - cd evm/gldt-bridge
+
+.gldt bridge npm:
+  extends: .gldt bridge foundry
+  cache:
+    - key:
+        prefix: gldt-bridge
+        files:
+          - evm/gldt-bridge/package-lock.json
+      paths:
+        - evm/gldt-bridge/.npm/
+  before_script:
+    - !reference [.gldt bridge foundry, before_script]
+    - npm ci --cache .npm --prefer-offline
+
+.gldt bridge tag manual:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+      when: manual
+      allow_failure: false
+
+.gldt bridge tag:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+
+.gldt bridge deploy:
+  extends: .gldt bridge npm
+  stage: deploy
+  interruptible: false
+  retry: 0
+  # Each deploy job adds its paths: deployments/<chain>.json and broadcast/Deploy.s.sol/<chain id>/.
+  artifacts:
+    when: always
+    expire_in: never
+
+gldt bridge evm test:
+  extends: .gldt bridge npm
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - evm/gldt-bridge/**/*
+        - scripts/ci-cd/.gldt_bridge_evm.yml
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+      variables:
+        # The fork tests run on tags only: the deploy and its checks on forks of both mainnets.
+        ETH_RPC_URL: https://ethereum-rpc.publicnode.com
+        BASE_RPC_URL: https://base-rpc.publicnode.com
+  script:
+    - forge build --sizes
+    - forge test
+    - tools/pipeline.sh dry-run mainnet
+    - tools/pipeline.sh dry-run testnet
+
+# Testnet
+
+gldt bridge testnet deploy sepolia:
+  extends: [.gldt bridge deploy, .gldt bridge tag manual]
+  needs: ["gldt bridge evm test"]
+  resource_group: gldt-bridge-testnet
+  environment:
+    name: gldt-bridge-testnet
+    deployment_tier: testing
+  artifacts:
+    paths:
+      - evm/gldt-bridge/deployments/sepolia.json
+      - evm/gldt-bridge/broadcast/Deploy.s.sol/11155111/
+  script:
+    - tools/pipeline.sh dry-run testnet
+    - tools/pipeline.sh deploy sepolia
+
+gldt bridge testnet deploy base-sepolia:
+  extends: [.gldt bridge deploy, .gldt bridge tag]
+  needs: ["gldt bridge testnet deploy sepolia"]
+  resource_group: gldt-bridge-testnet
+  environment:
+    name: gldt-bridge-testnet
+    deployment_tier: testing
+  artifacts:
+    paths:
+      - evm/gldt-bridge/deployments/base-sepolia.json
+      - evm/gldt-bridge/broadcast/Deploy.s.sol/84532/
+  script:
+    - tools/pipeline.sh deploy base-sepolia
+
+gldt bridge testnet check:
+  extends: [.gldt bridge npm, .gldt bridge tag]
+  stage: deploy
+  needs: ["gldt bridge testnet deploy sepolia", "gldt bridge testnet deploy base-sepolia"]
+  script:
+    - tools/pipeline.sh check testnet
+
+gldt bridge testnet verify:
+  extends: [.gldt bridge npm, .gldt bridge tag]
+  stage: deploy
+  needs: ["gldt bridge testnet deploy sepolia", "gldt bridge testnet deploy base-sepolia", "gldt bridge testnet check"]
+  allow_failure: true
+  environment:
+    name: gldt-bridge-testnet
+    deployment_tier: testing
+  script:
+    - tools/pipeline.sh verify testnet
+
+gldt bridge testnet pause:
+  extends: [.gldt bridge foundry]
+  stage: deploy
+  interruptible: false
+  needs: []
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+      when: manual
+      allow_failure: true
+  variables:
+    PAUSE_LZ: "true"
+    PAUSE_ICP: "true"
+  environment:
+    name: gldt-bridge-testnet
+    deployment_tier: testing
+  script:
+    - tools/pipeline.sh pause testnet
+
+# Mainnet
+
+gldt bridge mainnet deploy ethereum:
+  extends: [.gldt bridge deploy, .gldt bridge tag manual]
+  needs: ["gldt bridge evm test"]
+  resource_group: gldt-bridge-mainnet
+  environment:
+    name: gldt-bridge-mainnet
+    deployment_tier: production
+  artifacts:
+    paths:
+      - evm/gldt-bridge/deployments/ethereum.json
+      - evm/gldt-bridge/broadcast/Deploy.s.sol/1/
+  script:
+    - tools/pipeline.sh dry-run mainnet
+    - tools/pipeline.sh deploy ethereum
+
+gldt bridge mainnet deploy base:
+  extends: [.gldt bridge deploy, .gldt bridge tag]
+  needs: ["gldt bridge mainnet deploy ethereum"]
+  resource_group: gldt-bridge-mainnet
+  environment:
+    name: gldt-bridge-mainnet
+    deployment_tier: production
+  artifacts:
+    paths:
+      - evm/gldt-bridge/deployments/base.json
+      - evm/gldt-bridge/broadcast/Deploy.s.sol/8453/
+  script:
+    - tools/pipeline.sh deploy base
+
+gldt bridge mainnet check:
+  extends: [.gldt bridge npm, .gldt bridge tag]
+  stage: deploy
+  needs: ["gldt bridge mainnet deploy ethereum", "gldt bridge mainnet deploy base"]
+  script:
+    - tools/pipeline.sh check mainnet
+
+gldt bridge mainnet verify:
+  extends: [.gldt bridge npm, .gldt bridge tag]
+  stage: deploy
+  needs: ["gldt bridge mainnet deploy ethereum", "gldt bridge mainnet deploy base", "gldt bridge mainnet check"]
+  allow_failure: true
+  environment:
+    name: gldt-bridge-mainnet
+    deployment_tier: production
+  script:
+    - tools/pipeline.sh verify mainnet
+
+gldt bridge mainnet pause:
+  extends: [.gldt bridge foundry]
+  stage: deploy
+  interruptible: false
+  needs: []
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^gldt_bridge-v\d+\.\d+\.\d+$/
+      when: manual
+      allow_failure: true
+  variables:
+    PAUSE_LZ: "true"
+    PAUSE_ICP: "true"
+  environment:
+    name: gldt-bridge-mainnet
+    deployment_tier: production
+  script:
+    - tools/pipeline.sh pause mainnet

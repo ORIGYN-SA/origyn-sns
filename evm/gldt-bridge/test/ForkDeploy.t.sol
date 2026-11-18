@@ -33,16 +33,16 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
     address internal constant ADMIN_SIGNER = 0x216C1E5F2b9EB767Cec5C7d4DFa2d02b5A0AA143;
     address internal constant ENDPOINT_V2 = 0x1a44076050125825900e736c501f859c50fE728c;
 
-    // The operator wallet and its salt are set only at launch. Until then a test wallet stands in for both,
-    // with the salt shape: wallet address, 0x00, 11 more bytes.
+    // A test wallet and salt stand in for the operator's, so the fork deploy still works after the real one took
+    // the config's address. The salt has the same shape: wallet address, 0x00, 11 more bytes.
     address internal testWallet = makeAddr("operator wallet");
     bytes32 internal testSalt = bytes32(abi.encodePacked(testWallet, bytes1(0x00), bytes11(keccak256("fork dry run"))));
 
     function test_fork_same_address_and_all_checks_pass() public {
         (string memory ethRpc, string memory baseRpc) = _forkUrls();
+        _assertPaired(_loadConfig("script/config/ethereum.json"), _loadConfig("script/config/base.json"));
         GLDTConfig memory eth = _forkConfig("ethereum");
         GLDTConfig memory base = _forkConfig("base");
-        _assertPaired(eth, base);
 
         vm.createSelectFork(ethRpc);
         (address ethProxy, uint256 ethFailures) = this.deployAndCheck(eth);
@@ -182,13 +182,11 @@ contract ForkDeployTest is Test, GLDTDeployCore, GLDTCheckCore {
         if (bytes(eth).length == 0 || bytes(base).length == 0) vm.skip(true);
     }
 
-    /// @dev The config file as is, with the test wallet and salt while the file leaves them unset.
+    /// @dev The config file as is, with the test wallet and salt in place of the operator's.
     function _forkConfig(string memory chain) internal view returns (GLDTConfig memory c) {
         c = _loadConfig(string.concat("script/config/", chain, ".json"));
-        if (c.operator == address(0) && c.salt == bytes32(0)) {
-            c.operator = testWallet;
-            c.salt = testSalt;
-        }
+        c.operator = testWallet;
+        c.salt = testSalt;
     }
 
     function _assertPaired(GLDTConfig memory eth, GLDTConfig memory base) internal pure {
