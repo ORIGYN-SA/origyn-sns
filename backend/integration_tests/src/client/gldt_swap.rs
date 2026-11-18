@@ -8,7 +8,9 @@ generate_pocket_query_call!(get_active_swaps_by_user);
 generate_pocket_update_call!(swap_tokens_for_nft);
 generate_pocket_update_call!(recover_stuck_swap);
 generate_pocket_query_call!(get_active_swap_ids_by_user);
+generate_pocket_query_call!(get_failed_swaps_by_user);
 generate_pocket_update_call!(swap_nft_for_tokens);
+generate_pocket_update_call!(swap_nft_for_evm);
 generate_pocket_update_call!(get_history_total);
 generate_pocket_query_call!(get_owned_nfts);
 generate_pocket_query_call!(http_request);
@@ -24,3 +26,124 @@ generate_pocket_query_call!(icrc3_get_blocks);
 generate_pocket_query_call!(icrc3_get_tip_certificate);
 generate_pocket_query_call!(icrc3_supported_block_types);
 generate_pocket_query_call!(icrc3_get_archives);
+
+generate_pocket_query_call!(get_bridge_status);
+generate_pocket_query_call!(get_bridge_evm_signers);
+generate_pocket_update_call!(bridge_pause);
+generate_pocket_update_call!(bridge_to_evm);
+generate_pocket_query_call!(get_bridge_transfer_out);
+generate_pocket_update_call!(validate_bridge_sns_action);
+generate_pocket_query_call!(get_bridge_admin_action);
+
+/// `bridge_sns_action` traps on any error, so this returns the reject instead of panicking.
+pub fn bridge_sns_action(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &bridge_sns_action::Args,
+) -> Result<(), pocket_ic::RejectResponse> {
+    pic.update_call(
+        canister_id,
+        sender,
+        "bridge_sns_action",
+        candid::encode_one(args).unwrap(),
+    )
+    .map(|_| ())
+}
+
+/// Two Candid arguments (start, limit), so not built with `generate_pocket_query_call!`.
+pub fn get_bridge_admin_actions(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_admin_actions::Args,
+) -> get_bridge_admin_actions::Response {
+    let (start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_admin_actions",
+        candid::encode_args((start, limit)).unwrap(),
+    ))
+}
+
+/// Not built with `generate_pocket_query_call!`, which sends one Candid argument: this query
+/// takes three (account, start, limit).
+pub fn get_bridge_transfers_out_by_account(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_out_by_account::Args,
+) -> get_bridge_transfers_out_by_account::Response {
+    let (account, start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_out_by_account",
+        candid::encode_args((account, start, limit)).unwrap(),
+    ))
+}
+
+/// The api module is `icrc21`, not the method name, so this is written out.
+pub fn icrc21_canister_call_consent_message(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &icrc21::Args,
+) -> icrc21::Response {
+    crate::client::pocket::execute_query(
+        pic,
+        sender,
+        canister_id,
+        "icrc21_canister_call_consent_message",
+        args,
+    )
+}
+
+/// Two Candid arguments (chain, burn id), so not built with `generate_pocket_query_call!`.
+pub fn get_bridge_transfer_in(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfer_in::Args,
+) -> get_bridge_transfer_in::Response {
+    let (chain, burn_id) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfer_in",
+        candid::encode_args((chain, burn_id)).unwrap(),
+    ))
+}
+
+/// Two Candid arguments (chain, transaction hash).
+pub fn get_bridge_transfers_in_by_tx(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_in_by_tx::Args,
+) -> get_bridge_transfers_in_by_tx::Response {
+    let (chain, tx_hash) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_in_by_tx",
+        candid::encode_args((chain, tx_hash)).unwrap(),
+    ))
+}
+
+/// Three Candid arguments (account, start, limit).
+pub fn get_bridge_transfers_in_by_account(
+    pic: &pocket_ic::PocketIc,
+    sender: candid::Principal,
+    canister_id: candid::Principal,
+    args: &get_bridge_transfers_in_by_account::Args,
+) -> get_bridge_transfers_in_by_account::Response {
+    let (account, start, limit) = args;
+    crate::client::pocket::unwrap_response(pic.query_call(
+        canister_id,
+        sender,
+        "get_bridge_transfers_in_by_account",
+        candid::encode_args((account, start, limit)).unwrap(),
+    ))
+}

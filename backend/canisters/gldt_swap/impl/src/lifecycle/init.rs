@@ -1,3 +1,4 @@
+use crate::bridge::config::apply_bridge_upgrade;
 use crate::model::swap_configs::SwapConfigs;
 use crate::state::init_icrc3;
 use crate::state::start_default_archive_job;
@@ -26,13 +27,18 @@ fn init(args: Args) {
                 init_args.version,
                 init_args.commit_hash,
             );
-            let data = Data {
+            let mut data = Data {
                 authorized_principals: init_args.authorized_principals,
                 swap_configs: SwapConfigs::from_vec(init_args.swap_configs),
                 buyback_burn_canister: init_args.buyback_burn_canister,
                 old_archive_canister: init_args.gldt_swap_old_archive,
                 ..Default::default()
             };
+            if let Some(bridge) = init_args.bridge {
+                if let Err(e) = apply_bridge_upgrade(&mut data.bridge, bridge) {
+                    ic_cdk::trap(format!("invalid bridge init argument: {e}"));
+                }
+            }
 
             let runtime_state = RuntimeState::new(env, data);
 

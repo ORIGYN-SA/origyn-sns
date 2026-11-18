@@ -97,9 +97,16 @@ elif [[ $DEPLOYMENT_VIA == "proposal" ]]; then
 
   echo "Sending proposal from proposer id $PROPOSER with following arguments: $ARGUMENTS"
 
+  # A canister script that encoded its argument itself (ARGUMENTS_BIN, the encoded bytes) has
+  # quill send them as they are; otherwise quill encodes the Candid text, without types.
+  UPGRADE_ARG_OPTION=(--canister-upgrade-arg "$ARGUMENTS")
+  if [[ -n $ARGUMENTS_BIN ]]; then
+    UPGRADE_ARG_OPTION=(--canister-upgrade-arg-path "$ARGUMENTS_BIN")
+  fi
+
   quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
     --pem-file $PEM_FILE \
-    --canister-upgrade-arg "$ARGUMENTS" \
+    "${UPGRADE_ARG_OPTION[@]}" \
     --mode $INSTALL_MODE \
     --target-canister-id $(cat canister_ids.json | jq -r .$CANISTER.$NETWORK) \
     --wasm-path backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \

@@ -1,4 +1,5 @@
 use self::types::state::RuntimeStateV0;
+use crate::bridge::state::BridgeState;
 use crate::state::{Data, RuntimeState};
 pub mod jobs;
 pub mod types;
@@ -20,6 +21,7 @@ impl From<RuntimeStateV0> for RuntimeState {
                 is_gldt_supply_balancer_running: old_state.data.is_gldt_supply_balancer_running,
                 migration_finished: old_state.data.migration_finished,
                 old_archive_canister: old_state.data.old_archive_canister,
+                bridge: BridgeState::default(),
             },
         }
     }

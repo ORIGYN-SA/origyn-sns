@@ -1,5 +1,5 @@
-use crate::guards::{reject_anonymous_caller, GuardNft};
-use crate::model::nft_batches::GroupedNftsByCanister;
+use crate::guards::{balancer_running, reject_anonymous_caller, GuardNft};
+use crate::model::nft_batches::{nft_transfer_outcome, GroupedNftsByCanister, NftTransferOutcome};
 use crate::state::{icrc3_commit_prepared_transaction, mutate_state, read_state};
 use crate::utils::prepare_transactions;
 use bity_ic_canister_time::SECOND_IN_MS;
@@ -46,7 +46,7 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
         ));
     }
 
-    if read_state(|s| s.data.is_gldt_supply_balancer_running) {
+    if balancer_running() {
         return Err(SwapTokensForNftErrors::Retry(RetryInMilliseconds(
             SECOND_IN_MS * 30,
             "The supply is currently being balanced. Please try again in ~15 seconds.".to_string(),
@@ -101,7 +101,27 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
 
     let swap_ids: Vec<candid::Nat> = swaps.keys().cloned().collect();
 
-    let prepared_transactions = prepare_transactions(&swaps)?;
+    let result =
+        burn_transfer_and_reimburse(caller, &swaps, &swap_ids, tokens_amount, swap_fees).await;
+    // however the steps ended, this call's swaps leave the active swaps
+    mutate_state(|s| {
+        s.data
+            .swap_system
+            .finalize_call_swaps(&swap_ids, &s.data.nft_guards)
+    });
+    result.map(|()| swap_ids)
+}
+
+/// Steps 2 to 4 of the reverse swap, for the swaps [`swap_tokens_for_nft_impl`] just created.
+/// It finalizes them however this returns.
+async fn burn_transfer_and_reimburse(
+    caller: Principal,
+    swaps: &HashMap<SwapIndex, SwapInfo>,
+    swap_ids: &[SwapIndex],
+    tokens_amount: HashMap<Principal, candid::Nat>,
+    swap_fees: HashMap<Principal, candid::Nat>,
+) -> Result<(), SwapTokensForNftErrors> {
+    let prepared_transactions = prepare_transactions(swaps)?;
 
     // 2.0 Transfer fees
     // NOTE: if something fails further - the fee is not returned
@@ -248,7 +268,6 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
 
     mutate_state(|s| {
         let sys = &mut s.data.swap_system;
-        (&burned_success, SwapStatus::Burned);
         for idx in &burned_failed {
             let reason = burn_fail_reasons
                 .get(idx)
@@ -278,36 +297,26 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     let mut nft_transfer_success: Vec<SwapIndex> = Vec::new();
     let mut nft_transfer_failed: HashMap<SwapIndex, String> = HashMap::new();
 
-    for swap in swaps.values() {
-        if let Some(results) = nft_transfer_results.get(&swap.nft.canister_id) {
-            let nft_success: Result<bool, _> =
-                results.iter().try_fold(false, |found, res| match res {
-                    Ok(nft_id) if *nft_id == swap.nft.id => Ok(true),
-                    Ok(_) => Ok(found),
-                    Err(e) => Err(e),
-                });
-
-            match nft_success {
-                Ok(true) => {
-                    // successful_nfts.push(swap.nft.clone());
-                    nft_transfer_success.push(swap.index.clone());
-                }
-                Ok(false) => {
-                    nft_transfer_failed.insert(
-                        swap.index.clone(),
-                        "NFT not found in transfer results".to_string(),
-                    );
-                }
-                Err(err) => {
-                    nft_transfer_failed
-                        .insert(swap.index.clone(), format!("Transfer error: {:?}", err));
-                }
+    // each swap whose NFT was sent, by its own NFT's result; a swap whose burn did not succeed
+    // had no NFT sent, so it gets no transfer status and no reimbursement
+    for swap in swaps
+        .values()
+        .filter(|s| successful_swaps_set.contains(&s.index))
+    {
+        match nft_transfer_outcome(&nft_transfer_results, &swap.nft) {
+            NftTransferOutcome::Moved => {
+                nft_transfer_success.push(swap.index.clone());
             }
-        } else {
-            nft_transfer_failed.insert(
-                swap.index.clone(),
-                "No transfer attempt for this canister".to_string(),
-            );
+            NftTransferOutcome::Failed(err) => {
+                nft_transfer_failed
+                    .insert(swap.index.clone(), format!("Transfer error: {:?}", err));
+            }
+            NftTransferOutcome::NoEntry => {
+                nft_transfer_failed.insert(
+                    swap.index.clone(),
+                    "NFT not found in transfer results".to_string(),
+                );
+            }
         }
     }
 
@@ -360,15 +369,15 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     }
 
     // 4. Reimburse failed swaps
-    let swaps_to_reimburse =
-        read_state(|s| s.data.swap_system.filter_swaps_to_reimburse(&swap_ids));
-    let nfts_for_reimburse: Vec<_> = swaps_to_reimburse.values().map(|s| s.nft.clone()).collect();
-
-    let filtered_nfts = GroupedNftsByCanister::from_nfts(nfts_for_reimburse);
-
-    let tokens_amount: HashMap<Principal, candid::Nat> = filtered_nfts
-        .calculate_token_equivalent()
-        .map_err(SwapTokensForNftErrors::GeneralError)?;
+    let swaps_to_reimburse = read_state(|s| s.data.swap_system.filter_swaps_to_reimburse(swap_ids));
+    // the GLDT each swap burned, as it recorded it, back on the swap's own ledger
+    let mut tokens_amount: HashMap<Principal, candid::Nat> = HashMap::new();
+    for swap in swaps_to_reimburse.values() {
+        *tokens_amount
+            .entry(swap.tokens_amount.ledger_id)
+            .or_insert_with(|| candid::Nat::from(0u8)) +=
+            candid::Nat::from(swap.tokens_amount.division);
+    }
 
     let transfer_args: Vec<_> = tokens_amount
         .iter()
@@ -397,12 +406,12 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     let transfer_results = futures::future::join_all(transfers_futures).await;
 
     let mut successful_swap_ids = Vec::new();
-    let mut failed_swap_ids: Vec<SwapIndex> = Vec::new();
     let mut failed_swaps: HashMap<SwapIndex, String> = HashMap::new();
     for ((ledger_id, _transfer_arg), result) in
         transfer_args.iter().zip(transfer_results.into_iter())
     {
-        let swaps_for_ledger: Vec<&SwapInfo> = swaps
+        // only the swaps being reimbursed
+        let swaps_for_ledger: Vec<&SwapInfo> = swaps_to_reimburse
             .values()
             .filter(|swap| swap.tokens_amount.ledger_id == *ledger_id)
             .collect();
@@ -413,7 +422,6 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
                         successful_swap_ids.push(swap.index.clone());
                     }
                     Err(transfer_err) => {
-                        failed_swap_ids.push(swap.index.clone());
                         failed_swaps.insert(
                             swap.index.clone(),
                             format!("Token transfer failed: {:?}", transfer_err),
@@ -421,7 +429,6 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
                     }
                 },
                 Err(call_err) => {
-                    failed_swap_ids.push(swap.index.clone());
                     failed_swaps.insert(
                         swap.index.clone(),
                         format!("IC call failed: {:?}", call_err),
@@ -434,12 +441,10 @@ pub async fn swap_tokens_for_nft_impl(args: SwapTokensForNftArgs) -> SwapTokensF
     mutate_state(|s| {
         let swap_system = &mut s.data.swap_system;
         swap_system.update_swaps_statuses(&successful_swap_ids, SwapStatus::Reimbursed);
-        swap_system.finalize_all_swaps();
-        swap_system.update_swaps_statuses(
-            &failed_swap_ids,
-            SwapStatus::ReimburseFailed("NFT mint failed".to_string()),
-        );
+        for (idx, reason) in &failed_swaps {
+            swap_system.update_swaps_status(idx, SwapStatus::ReimburseFailed(reason.clone()));
+        }
     });
 
-    SwapTokensForNftResponse::Ok(swap_ids)
+    Ok(())
 }
