@@ -3,7 +3,7 @@
 # TARGET is a network (mainnet: ethereum and base; testnet: sepolia and base-sepolia) or one chain.
 #
 #   tools/pipeline.sh dry-run <target>   simulate the deploy from the config's operator; no key, nothing is sent
-#   tools/pipeline.sh deploy <chain>     deploy on one chain with GLDT_BRIDGE_OPERATOR_KEY
+#   tools/pipeline.sh deploy <chain>     deploy on one chain with GLDT_BRIDGE_OPERATOR_KEY (hex or PEM, see operator-key.js)
 #   tools/pipeline.sh check <target>     Check.s.sol against deployments/<chain>.json
 #   tools/pipeline.sh verify <target>    verify the implementation source with GLDT_BRIDGE_ETHERSCAN_KEY
 #   tools/pipeline.sh pause <target>     operator pause; PAUSE_LZ and PAUSE_ICP (true or false, default true)
@@ -60,11 +60,17 @@ lower() { echo "$1" | tr '[:upper:]' '[:lower:]'; }
 
 need() { [ -n "${!1:-}" ] || die "$1 is not set; it comes from the protected environment"; }
 
+# The operator key as hex, from GLDT_BRIDGE_OPERATOR_KEY in any form operator-key.js reads.
+load_operator_key() {
+    local hex
+    hex=$(node tools/operator-key.js)
+    OPERATOR_KEY=0x$hex
+}
+
 # The key's wallet, which must be the config's operator.
 key_address() {
-    need GLDT_BRIDGE_OPERATOR_KEY
     local address
-    address=$(cast wallet address --private-key "$GLDT_BRIDGE_OPERATOR_KEY")
+    address=$(cast wallet address --private-key "$OPERATOR_KEY")
     [ "$(lower "$address")" = "$(lower "$(config "$1" operator)")" ] ||
         die "the key's wallet $address is not the operator in script/config/$1.json"
     echo "$address"
@@ -102,11 +108,12 @@ deploy() {
     [ "$(chains "$1")" = "$1" ] || die "deploy takes one chain, not a network"
     [ -n "${GLDT_BRIDGE_RPC_URL:-}${GLDT_BRIDGE_ALCHEMY_KEY:-}" ] || die "deploy needs GLDT_BRIDGE_ALCHEMY_KEY"
     local address token
+    load_operator_key
     address=$(key_address "$1")
     token=$(token_address "$1")
     echo "$1: deploying from $address, GLDT at $token"
     forge script script/Deploy.s.sol --sig 'run(string)' "$1" \
-        --rpc-url "$(rpc_url "$1")" --private-key "$GLDT_BRIDGE_OPERATOR_KEY" --broadcast --slow
+        --rpc-url "$(rpc_url "$1")" --private-key "$OPERATOR_KEY" --broadcast --slow
 }
 
 check() {
@@ -150,7 +157,7 @@ pause_chain() {
     }
     echo "$chain: pause(lz $lz, icp $icp) on $token"
     cast send "$token" 'pause(bool,bool)' "$lz" "$icp" \
-        --private-key "$GLDT_BRIDGE_OPERATOR_KEY" --rpc-url "$url" || return 1
+        --private-key "$OPERATOR_KEY" --rpc-url "$url" || return 1
     echo "$chain: paused() is now $(cast call "$token" 'paused()(bool,bool)' --rpc-url "$url" | tr '\n' ' ')"
 }
 
@@ -162,6 +169,7 @@ pause() {
     done
     [ "$lz" = true ] || [ "$icp" = true ] || die "nothing to pause: PAUSE_LZ and PAUSE_ICP are both false"
     [ -n "${GLDT_BRIDGE_RPC_URL:-}${GLDT_BRIDGE_ALCHEMY_KEY:-}" ] || die "pause needs GLDT_BRIDGE_ALCHEMY_KEY"
+    load_operator_key
     for chain in $(chains "$1"); do
         if ! pause_chain "$chain" "$lz" "$icp"; then
             echo "$chain: the pause FAILED" >&2

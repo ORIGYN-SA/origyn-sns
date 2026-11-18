@@ -12,6 +12,8 @@
 # only Maintainers can run jobs. Verify and pause are not deployments (action verify and access), so "Prevent
 # outdated deployment jobs" never blocks an older pipeline's pause button. Only those jobs get GLDT_BRIDGE_OPERATOR_KEY, GLDT_BRIDGE_ALCHEMY_KEY and
 # GLDT_BRIDGE_ETHERSCAN_KEY (Settings > CI/CD > Variables: Protected, Masked and hidden, scoped to the environment).
+# GLDT_BRIDGE_OPERATOR_KEY is the key as hex, or a secp256k1 PEM: a File variable (GitLab can't mask it), or the PEM
+# as one line of base64, which can be masked (evm/gldt-bridge/tools/operator-key.js).
 
 .gldt bridge foundry:
   image: node:24-bookworm
