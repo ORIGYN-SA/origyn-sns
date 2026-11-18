@@ -2442,6 +2442,7 @@ dependencies = [
  "bity-ic-stable-memory",
  "bity-ic-types 0.1.2",
  "candid",
+ "candid_parser",
  "evm_rpc_types",
  "futures",
  "gldt_swap_api_archive",

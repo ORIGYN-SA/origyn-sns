@@ -59,3 +59,6 @@ ic-cdk-management-canister = { workspace = true }
 ic-cdk-timers = { workspace = true }
 num-bigint = { workspace = true }
 serde_bytes = { workspace = true }
+
+[dev-dependencies]
+candid_parser = { workspace = true }

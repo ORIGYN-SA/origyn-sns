@@ -698,4 +698,87 @@ mod tests {
         assert_eq!(state.claims_signer, None);
         assert_eq!(state.admin_signer, None);
     }
+
+    fn repo_json(text: &str) -> serde_json::Value {
+        serde_json::from_str(text).unwrap()
+    }
+
+    /// The production upgrade that turns the bridge on sends this file as `bridge`
+    /// (scripts/canister-deploy/deploy-gldt_swap.sh). The script encodes the argument with didc
+    /// and the init type of can.did, as the test does here: without types, every variant of a
+    /// vec would take the first one's label.
+    #[test]
+    fn ic_launch_argument_decodes_and_matches_the_deployment() {
+        let file =
+            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.0.did");
+        let text = format!(
+            "(variant {{ Upgrade = record {{
+                version = record {{ major = 2 : nat32; minor = 1 : nat32; patch = 0 : nat32 }};
+                commit_hash = \"0\";
+                bridge = opt {file};
+            }} }})"
+        );
+        let (env, service) =
+            candid_parser::utils::CandidSource::Text(include_str!("../../../api/can.did"))
+                .load()
+                .unwrap();
+        let candid::types::TypeInner::Class(init, _) = service.unwrap().as_ref().clone() else {
+            panic!("can.did has no init arguments");
+        };
+        let bytes = candid_parser::parse_idl_args(&text)
+            .unwrap()
+            .to_bytes_with_types(&env, &init)
+            .unwrap();
+        let gldt_swap_api_canister::Args::Upgrade(args) = candid::decode_one(&bytes).unwrap()
+        else {
+            panic!("the argument is not an upgrade");
+        };
+        let up = args.bridge.expect("the argument sets the bridge");
+        assert!(up.chain_resets.is_empty());
+        let cfg = up.config.expect("the argument has a config");
+        validate_config(&cfg).unwrap();
+
+        let canister_ids = repo_json(include_str!("../../../../../../canister_ids.json"));
+        assert_eq!(
+            cfg.sns_governance.to_text(),
+            canister_ids["sns_governance"]["ic"].as_str().unwrap()
+        );
+        assert_eq!(cfg.ecdsa_key_name, "key_1");
+
+        let evm = [
+            (
+                EvmChain::Ethereum,
+                include_str!("../../../../../../evm/gldt-bridge/script/config/ethereum.json"),
+                include_str!("../../../../../../evm/gldt-bridge/deployments/ethereum.json"),
+            ),
+            (
+                EvmChain::Base,
+                include_str!("../../../../../../evm/gldt-bridge/script/config/base.json"),
+                include_str!("../../../../../../evm/gldt-bridge/deployments/base.json"),
+            ),
+        ];
+        assert_eq!(cfg.chains.len(), evm.len());
+        for (chain, config, deployment) in evm {
+            let (config, deployment) = (repo_json(config), repo_json(deployment));
+            let c = cfg.chains.iter().find(|c| c.chain == chain).unwrap();
+            assert_eq!(c.chain_id, config["chainId"].as_u64().unwrap(), "{chain:?}");
+            assert_eq!(
+                c.chain_id,
+                deployment["chainId"].as_u64().unwrap(),
+                "{chain:?}"
+            );
+            assert_eq!(
+                c.lz_eid as u64,
+                config["eid"].as_u64().unwrap(),
+                "{chain:?}"
+            );
+            assert_eq!(
+                c.lz_endpoint,
+                config["endpoint"].as_str().unwrap(),
+                "{chain:?}"
+            );
+            assert_eq!(c.token, deployment["proxy"].as_str().unwrap(), "{chain:?}");
+            assert_eq!(c.confirmations, 12, "{chain:?}");
+        }
+    }
 }

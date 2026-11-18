@@ -49,6 +49,7 @@ opt-level = "z"
 [workspace.dependencies]
 assert_matches = "1.5.0"
 candid = { version = "0.10", features = ["value"] }
+candid_parser = "0.1.4"
 ciborium = "0.2.2"
 futures = "0.3.29"
 # Enable `custom` feature of k256's getrandom dependency. See icp_neuron/impl/src/ecdsa.rs for more details.

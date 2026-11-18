@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [2.1.0] - 2026-11-18
+
+This upgrade turns the bridge on. Its argument sets the bridge config (`scripts/canister-deploy/gldt_swap-bridge/ic-2.1.0.did`): Ethereum and Base, the GLDT token `0x084B8b9819573A5EBc92b834e06608E0f41F383B` on both (deployed on 2026-11-18 and verified on Etherscan and Basescan), 12 confirmations each, the EVM RPC canister's built-in providers Alchemy and PublicNode on Ethereum and Alchemy and BlockPi on Base, and the threshold ECDSA key `key_1`. Later upgrades leave the config as it is.
+
 #### Added
 
 - **GLDT bridge to Ethereum and Base.** `bridge_to_evm` burns GLDT on ICP and signs an EIP-712 claim voucher with threshold ECDSA. A scraper reads `BurnedToIcp` burns on each chain through the EVM RPC canister, and a mint processor mints them on ICP under the supply guard. The bridge config is set only by init and upgrade arguments.
@@ -19,6 +23,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Moved from the gold-dao repository to origyn-sns as part of the GLDT handover to ORIGYN DAO. Moved into the origyn-sns Cargo workspace and its shared dependency versions, except `bity-ic-icrc3`, which stays on 0.5 to keep the serialized ICRC-3 state of the deployed canister.
 - The supply balancer counts GLDT bridged out to Ethereum and Base, so it never mints it again on ICP. The hidden `manual_toggle_supply_balancer_var` endpoint is removed.
+
+#### Fixed
+
+- Each swap is decided by its own NFT's transfer result. Before, an error for one NFT of a batch failed every swap of that batch: a reverse swap minted GLDT back for NFTs that were delivered, and a forward swap left the moved NFTs with no GLDT.
+- A swap call finalizes only its own swaps, plus swaps older than 3 minutes whose NFT guard is no longer held. Before, it moved every active swap, including other calls' swaps still in flight, to `failed_swaps`, which also let the supply balancer run during a swap.
+- Swap fees are taken on the ledger of each NFT's own config, and a reverse swap refund pays back the GLDT the swap recorded instead of reading the current config.
+- `ReimburseFailed` is now recorded, and failure texts carry the real reason: `MintFailed` has the mint's own error, and a forward swap whose NFT return failed is `ReimburseFailed`.
 
 ### [2.0.1] - 2025-11-27
 
