@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.2.2] - 2026-11-19
+
+#### Fixed
+
+- **Production build**: 1.2.1 (proposal 189) installed the integration-test build of the wasm instead of the production build: the deploy job took the integration-test build's file. This version installs the production build of the same code. That build had no test-only code, so the canister behaves the same.
+
 ### [1.2.1] - 2026-09-07
 
 #### Fixed

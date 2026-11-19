@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [1.0.4] - 2026-11-19
+
+#### Fixed
+
+- **Production build**: 1.0.3 (proposal 183) installed the integration-test build of the wasm instead of the production build: the deploy job took the integration-test build's file. This version installs the production build of the same code. The test-only endpoint `insert_fake_collection` is gone again. The upgrade loads the state as 1.0.3 saved it: the one-time migration of 1.0.3 is off.
+
 ### [1.0.3] - 2026-08-26
 
 #### Added
