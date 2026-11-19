@@ -1,3 +1,4 @@
+pub mod bridge;
 pub mod general_error;
 pub mod gldt;
 pub mod nft;

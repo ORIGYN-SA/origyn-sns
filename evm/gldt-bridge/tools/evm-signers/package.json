@@ -1,0 +1,17 @@
+{
+  "name": "gldt-swap-evm-signers",
+  "private": true,
+  "type": "module",
+  "description": "Prints the Ethereum and Base addresses gldt_swap signs with",
+  "scripts": {
+    "signers": "node evm-signers.mjs"
+  },
+  "dependencies": {
+    "@dfinity/agent": "3.4.3",
+    "@dfinity/candid": "3.4.3",
+    "@dfinity/ic-pub-key": "1.0.2",
+    "@dfinity/principal": "3.4.3",
+    "bitcoinjs-lib": "6.1.7",
+    "ethers": "6.17.0"
+  }
+}

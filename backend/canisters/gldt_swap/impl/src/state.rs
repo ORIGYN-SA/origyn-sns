@@ -1,3 +1,4 @@
+use crate::bridge::state::BridgeState;
 use crate::model::swap_configs::SwapConfigs;
 use crate::model::swap_system::SwapSystem;
 use bity_ic_canister_state_macros::canister_state;
@@ -45,7 +46,10 @@ impl RuntimeState {
             total_active_swaps: self.get_number_active_swaps(),
             total_stuck_swaps: self.get_total_stuck_swaps(),
             authorized_principals: self.data.authorized_principals.clone(),
-            is_gldt_supply_balancer_running: self.data.is_gldt_supply_balancer_running,
+            is_gldt_supply_balancer_running: crate::guards::job_running(
+                crate::guards::Job::Balancer,
+                self.env.now_nanos(),
+            ),
             is_archive_cron_running: self.data.is_archive_cron_running,
             is_remove_stale_swaps_cron_running: self.data.is_remove_stale_swaps_cron_running,
             buyback_burn_account: self.data.buyback_burn_canister,
@@ -142,10 +146,14 @@ pub struct Data {
     // cron job tasks
     pub is_remove_stale_swaps_cron_running: bool,
     pub is_archive_cron_running: bool,
+    // kept for the upgrade format only; the balancer's job guard replaced it and nothing reads it
     #[serde(default)]
     pub is_gldt_supply_balancer_running: bool,
     pub migration_finished: Option<TimestampMillis>,
     pub old_archive_canister: Principal,
+    // GLDT bridge; absent in state written before the bridge existed
+    #[serde(default)]
+    pub bridge: BridgeState,
 }
 
 impl Default for Data {
@@ -161,6 +169,86 @@ impl Default for Data {
             buyback_burn_canister: None,
             migration_finished: None,
             old_archive_canister: Principal::from_text("yx6zg-byaaa-aaaak-qucpq-cai").unwrap(),
+            bridge: BridgeState::default(),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// `Data` exactly as deployed before the bridge (origyn-sns 87b69c8d), field for field.
+    #[derive(Serialize)]
+    struct DataBeforeBridge {
+        authorized_principals: Vec<Principal>,
+        buyback_burn_canister: Option<Account>,
+        nft_guards: BTreeSet<Nft>,
+        swap_system: SwapSystem,
+        swap_configs: SwapConfigs,
+        is_remove_stale_swaps_cron_running: bool,
+        is_archive_cron_running: bool,
+        is_gldt_supply_balancer_running: bool,
+        migration_finished: Option<TimestampMillis>,
+        old_archive_canister: Principal,
+    }
+
+    /// `RuntimeState` as `pre_upgrade` wrote it before the bridge.
+    #[derive(Serialize)]
+    struct RuntimeStateBeforeBridge {
+        env: CanisterEnv,
+        data: DataBeforeBridge,
+    }
+
+    #[test]
+    fn old_state_without_bridge_field_deserializes() {
+        let admin = Principal::from_slice(&[3; 29]);
+        let archive = Principal::from_text("yx6zg-byaaa-aaaak-qucpq-cai").unwrap();
+        let buyback = Account {
+            owner: Principal::from_slice(&[4; 29]),
+            subaccount: Some([7; 32]),
+        };
+        let old = RuntimeStateBeforeBridge {
+            env: CanisterEnv::new(true, BuildVersion::min(), "abc".to_string()),
+            data: DataBeforeBridge {
+                authorized_principals: vec![admin],
+                buyback_burn_canister: Some(buyback),
+                nft_guards: BTreeSet::new(),
+                swap_system: SwapSystem::default(),
+                swap_configs: SwapConfigs::default(),
+                is_remove_stale_swaps_cron_running: true,
+                is_archive_cron_running: false,
+                is_gldt_supply_balancer_running: true,
+                migration_finished: Some(42),
+                old_archive_canister: archive,
+            },
+        };
+
+        // the same serializer and settings pre_upgrade uses
+        let mut buf = Vec::new();
+        bity_ic_serializer::serialize(&old, &mut buf).unwrap();
+        let state: RuntimeState = bity_ic_serializer::deserialize(buf.as_slice()).unwrap();
+
+        assert_eq!(state.data.bridge, BridgeState::default());
+        assert_eq!(state.data.authorized_principals, vec![admin]);
+        assert_eq!(state.data.buyback_burn_canister, Some(buyback));
+        assert!(state.data.is_remove_stale_swaps_cron_running);
+        assert!(!state.data.is_archive_cron_running);
+        assert!(state.data.is_gldt_supply_balancer_running);
+        assert_eq!(state.data.migration_finished, Some(42));
+        assert_eq!(state.data.old_archive_canister, archive);
+        assert!(state.env.is_test_mode());
+        assert_eq!(state.env.commit_hash(), "abc");
+    }
+
+    #[test]
+    fn data_with_bridge_state_roundtrips() {
+        let mut data = Data::default();
+        data.bridge.bridged_out = 12_345;
+        data.bridge.paused_in = true;
+        let mut buf = Vec::new();
+        bity_ic_serializer::serialize(&data, &mut buf).unwrap();
+        let back: Data = bity_ic_serializer::deserialize(buf.as_slice()).unwrap();
+        assert_eq!(back.bridge, data.bridge);
     }
 }

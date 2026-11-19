@@ -6,13 +6,10 @@ pub use gldt_swap_api_canister::_insert_fake_bulk_swaps::{
 use tracing::error;
 use tracing::info;
 
-#[cfg(feature = "inttest")]
 use crate::guards::caller_is_authorized;
-#[cfg(feature = "inttest")]
 use ic_cdk::update;
 
 #[update(guard = "caller_is_authorized")]
-#[cfg(feature = "inttest")]
 async fn _insert_fake_bulk_swaps(args: InsertFakeBulkSwapsArgs) -> InsertFakeBulkSwapsResponse {
     _insert_fake_bulk_swaps_impl(args).await
 }
