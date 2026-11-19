@@ -710,7 +710,7 @@ mod tests {
     #[test]
     fn ic_launch_argument_decodes_and_matches_the_deployment() {
         let file =
-            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.0.did");
+            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did");
         let text = format!(
             "(variant {{ Upgrade = record {{
                 version = record {{ major = 2 : nat32; minor = 1 : nat32; patch = 0 : nat32 }};

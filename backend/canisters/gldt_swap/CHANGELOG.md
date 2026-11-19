@@ -8,9 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
-### [2.1.0] - 2026-11-18
+### [2.1.1] - 2026-11-19
 
-This upgrade turns the bridge on. Its argument sets the bridge config (`scripts/canister-deploy/gldt_swap-bridge/ic-2.1.0.did`): Ethereum and Base, the GLDT token `0x084B8b9819573A5EBc92b834e06608E0f41F383B` on both (deployed on 2026-11-18 and verified on Etherscan and Basescan), 12 confirmations each, the EVM RPC canister's built-in providers Alchemy and PublicNode on Ethereum and Alchemy and BlockPi on Base, and the threshold ECDSA key `key_1`. Later upgrades leave the config as it is.
+This release replaces 2.1.0, which was never installed: its proposal (207) carried the integration-test build of the wasm instead of the production build. The code is the same.
+
+This upgrade turns the bridge on. Its argument sets the bridge config (`scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did`): Ethereum and Base, the GLDT token `0x084B8b9819573A5EBc92b834e06608E0f41F383B` on both (deployed on 2026-11-18 and verified on Etherscan and Basescan), 12 confirmations each, the EVM RPC canister's built-in providers Alchemy and PublicNode on Ethereum and Alchemy and BlockPi on Base, and the threshold ECDSA key `key_1`. Later upgrades leave the config as it is.
 
 #### Added
 

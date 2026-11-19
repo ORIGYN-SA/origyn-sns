@@ -31,6 +31,9 @@ integration tests trigger:
 integration-test build:
   stage: integration_testing
   extends: .rust template
+  # Nothing from the earlier jobs: the production build's wasm files have the same paths, and the
+  # tests must run on the wasm files this job builds.
+  dependencies: []
   variables:
     CANISTER_SHARED_TARGET_DIR: "target/inttest"
     # The scheduler reserves the request, not the limit.
