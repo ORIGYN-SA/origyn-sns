@@ -104,14 +104,27 @@ elif [[ $DEPLOYMENT_VIA == "proposal" ]]; then
     UPGRADE_ARG_OPTION=(--canister-upgrade-arg-path "$ARGUMENTS_BIN")
   fi
 
+  WASM_PATH=backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz
+  echo "The proposal installs $WASM_PATH with sha256 $(sha256sum "$WASM_PATH" | cut -d' ' -f1)"
+
   quill sns --canister-ids-file sns_canister_ids.json make-upgrade-canister-proposal $PROPOSER \
     --pem-file $PEM_FILE \
     "${UPGRADE_ARG_OPTION[@]}" \
     --mode $INSTALL_MODE \
     --target-canister-id $(cat canister_ids.json | jq -r .$CANISTER.$NETWORK) \
-    --wasm-path backend/canisters/$CANISTER/target/wasm32-unknown-unknown/release/${CANISTER}_canister.wasm.gz \
+    --wasm-path "$WASM_PATH" \
     --title "Upgrade $CANISTER to version $VERSION" \
-    --url ${DETAILS_URL} --summary-path proposal.md | quill send --yes -
+    --url ${DETAILS_URL} --summary-path proposal.md > proposal_message.json || exit 1
+
+  # quill send prints the whole message, the wasm too, and GitLab cuts a job log at 4 MB, so
+  # the log would end before the result. Only the first 500 characters of each line go to it.
+  QUILL_STATUS=0
+  quill send --yes proposal_message.json > quill_send.log 2>&1 || QUILL_STATUS=$?
+  cut -c1-500 quill_send.log
+  if [[ $QUILL_STATUS -ne 0 ]] || ! grep -q "Successfully created new proposal with ID" quill_send.log; then
+    echo "Error: quill send did not report a new proposal (exit $QUILL_STATUS). Check the SNS proposals before you run this job again." >&2
+    exit 1
+  fi
 else
   echo "Error: invalid deployment mode. Needs to be 'direct' or 'proposal'."
   exit 2
