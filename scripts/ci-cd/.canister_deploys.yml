@@ -73,12 +73,18 @@ $[[ inputs.src-folder ]] production deploy:
   variables:
     TARGET_NETWORK: ic
     PEM_FILE: "${PEM_FILE_PRODUCTION}"
-  # needs: ["$[[ inputs.src-folder ]] production build", "integration tests"]
+  # Only the production build's files. Without this the job also downloads the
+  # integration-test build, whose wasm files have the same paths, and proposes
+  # that wasm instead (gldt_swap 2.1.0, proposal 207). The job still waits for
+  # the integration tests, which are in an earlier stage.
+  dependencies: ["$[[ inputs.src-folder ]] production build"]
   before_script:
     - !reference [.import dfx identity, before_script]
     # a canister script can encode its upgrade argument with the Candid types (deploy-gldt_swap.sh)
     - !reference [.include didc, before_script]
   script:
+    # stop unless the wasm is the one the production build made
+    - sha256sum -c backend/canisters/$[[ inputs.src-folder ]]/target/wasm32-unknown-unknown/release/$[[ inputs.src-folder ]]_canister.wasm.gz.sha256
     - . scripts/canister-deploy/deploy-$[[ inputs.src-folder ]].sh $TARGET_NETWORK
   environment:
     name: production/$[[ inputs.src-folder ]]
