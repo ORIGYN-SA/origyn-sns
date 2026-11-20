@@ -93,6 +93,7 @@ fn invalid_bridge_upgrade_is_rejected_and_state_kept() {
     let bad_config = BridgeUpgrade {
         config: Some(config),
         chain_resets: vec![],
+        skip_to_head: None,
     };
     let rejected = env.upgrade_gldt_swap(Some(bad_config)).unwrap_err();
     assert!(
@@ -110,6 +111,7 @@ fn invalid_bridge_upgrade_is_rejected_and_state_kept() {
             last_scraped_block: 1,
             next_burn_id: 0,
         }],
+        skip_to_head: None,
     };
     let rejected = env.upgrade_gldt_swap(Some(bad_reset)).unwrap_err();
     assert!(
@@ -429,4 +431,81 @@ fn upgrade_mid_window_and_with_unknowns_resumes() {
     assert_eq!(done.bridged_out, Nat::from(7 * ONE));
     assert_eq!(done.out_pending, Nat::from(0u8));
     assert!(!done.supply_guard.holding);
+}
+
+/// An upgrade with `authorized_principals` replaces the whole list: the old principal is
+/// refused, the new one can pause. An empty list is refused and changes nothing.
+#[test]
+fn upgrade_replaces_the_authorized_principals() {
+    let env = setup_bridge_env();
+    let pause_out = BridgePauseArgs {
+        inbound: false,
+        outbound: true,
+    };
+    let pause_as = |caller: Principal| {
+        env.pic.update_call(
+            env.gldt_swap_canister_id,
+            caller,
+            "bridge_pause",
+            encode_one(pause_out).unwrap(),
+        )
+    };
+
+    let rejected = env.upgrade_gldt_swap_with(None, Some(vec![])).unwrap_err();
+    assert!(
+        rejected
+            .reject_message
+            .contains("invalid authorized principals: the list is empty"),
+        "{rejected}"
+    );
+    // the controller is the authorized principal from init
+    pause_as(env.controller).expect("the controller is still authorized");
+
+    env.upgrade_gldt_swap_with(None, Some(vec![env.sns_governance]))
+        .expect("upgrade with a new list");
+    assert!(pause_as(env.controller).is_err());
+    pause_as(env.sns_governance).expect("SNS governance is now authorized");
+}
+
+/// An upgrade's `skip_to_head` brings a chain that fell far behind to the confirmed head in one
+/// scrape when there was no burn, once. A chain not in the list goes on by windows.
+#[test]
+fn skip_to_head_catches_a_chain_up_in_one_scrape() {
+    let mut env = setup_bridge_env();
+    start_all_chains(&mut env);
+    let ethereum = |env: &BridgeEnv| {
+        get_bridge_status(&env.pic, env.controller, env.gldt_swap_canister_id, &())
+            .chains
+            .into_iter()
+            .find(|c| c.chain == EvmChain::Ethereum)
+            .unwrap()
+    };
+    let eth_before = ethereum(&env).last_scraped_block;
+
+    // ten windows of 500 blocks behind
+    env.evm.advance(5_000);
+    env.upgrade_gldt_swap(Some(BridgeUpgrade {
+        config: None,
+        chain_resets: vec![],
+        skip_to_head: Some(vec![EvmChain::Base]),
+    }))
+    .expect("upgrade with skip_to_head");
+    wait_for_signers(&env);
+
+    // after an upgrade Ethereum scrapes every 180 s; Base's interval starts once its 90 s
+    // offset has passed, so its first scrape is 180 s after that
+    env.pic.advance_time(Duration::from_secs(90));
+    serve_outcalls(&env.pic, |r| env.evm.answer(r));
+    env.pic.advance_time(Duration::from_secs(180));
+    serve_outcalls(&env.pic, |r| env.evm.answer(r));
+    let confirmed_head = env.evm.head - 12;
+    assert_eq!(base(&env).last_scraped_block, confirmed_head);
+    assert!(base(&env).failed_ticks == 0);
+    assert_eq!(ethereum(&env).last_scraped_block, eth_before + 500);
+
+    // once: the next Base scrape reads a capped window again
+    env.evm.advance(5_000);
+    env.pic.advance_time(Duration::from_secs(180));
+    serve_outcalls(&env.pic, |r| env.evm.answer(r));
+    assert_eq!(base(&env).last_scraped_block, confirmed_head + 500);
 }

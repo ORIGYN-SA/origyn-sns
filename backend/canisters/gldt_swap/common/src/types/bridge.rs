@@ -86,6 +86,10 @@ pub struct BridgeUpgrade {
     /// Replaces the whole config when present.
     pub config: Option<BridgeConfig>,
     pub chain_resets: Vec<ChainReset>,
+    /// Chains whose next scrape moves the cursor straight to the confirmed head, once, if the
+    /// token shows no burn since the cursor. With a burn in between, the chain scrapes on as
+    /// usual and keeps every burn.
+    pub skip_to_head: Option<Vec<EvmChain>>,
 }
 
 // Users

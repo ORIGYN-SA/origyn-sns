@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### [unreleased]
 
+### [2.1.2] - 2026-11-20
+
+#### Fixed
+
+- **Base scraping keeps up.** Base now makes a block every 0.2 seconds, 900 blocks in the 180 seconds between two scrapes, while one scrape reads at most 500. Base fell further behind on every scrape. The upgrade argument (`scripts/canister-deploy/gldt_swap-bridge/ic-2.1.2.did`) scrapes Base every 60 seconds instead, up to 500 of the 300 blocks Base makes in that time, and waits 120 confirmations instead of 12, the 24 seconds the bridge was set up for. Ethereum, the tokens and every other setting stay as 2.1.1 set them.
+- **Authorized principals.** The list still held Gold DAO SNS governance (`tr3th-kiaaa-aaaaq-aab6q-cai`) from before the handover. The upgrade argument (`scripts/canister-deploy/gldt_swap-authorized-principals/ic-2.1.2.did`) replaces it with ORIGYN SNS governance (`lnxxh-yaaaa-aaaaq-aadha-cai`) alone. Authorized principals can call `bridge_pause`, `set_buyback_canister` and the manual fee and supply jobs.
+
+#### Added
+
+- **Skip to the head, once.** An upgrade argument can name chains in `skip_to_head`. Their next scrape reads `bridgeInfo()` at the confirmed head: with no burn since the last block read, the scraper moves straight there, past the 500-block window, since there is nothing to read in between. With a burn in between it scrapes on as usual, so no burn is skipped. This upgrade names Ethereum and Base, so Base does not have to read the blocks it fell behind on. Later upgrades skip nothing unless their argument names a chain.
+- **Authorized principals in the upgrade argument.** `authorized_principals` replaces the whole list; an empty list or the anonymous principal is refused.
+
 ### [2.1.1] - 2026-11-19
 
 This release replaces 2.1.0, which was never installed: its proposal (207) carried the integration-test build of the wasm instead of the production build. The code is the same.

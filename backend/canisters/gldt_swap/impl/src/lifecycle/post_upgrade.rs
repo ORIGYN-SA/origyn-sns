@@ -76,6 +76,11 @@ fn post_upgrade(args: Args) {
                     ic_cdk::trap(format!("invalid bridge upgrade argument: {e}"));
                 }
             }
+            if let Some(principals) = upgrade_args.authorized_principals {
+                if let Err(e) = state.data.replace_authorized_principals(principals) {
+                    ic_cdk::trap(format!("invalid authorized principals: {e}"));
+                }
+            }
 
             bity_ic_canister_logger::init_with_logs(state.env.is_test_mode(), logs, traces);
             init_canister(state);

@@ -1,0 +1,39 @@
+record {
+  config = opt record {
+    sns_governance = principal "lnxxh-yaaaa-aaaaq-aadha-cai";
+    evm_rpc_canister = principal "7hfb6-caaaa-aaaar-qadga-cai";
+    ecdsa_key_name = "key_1";
+    admin_action_validity_secs = 604_800 : nat64;
+    admin_action_max_validity_secs = 2_592_000 : nat64;
+    chains = vec {
+      record {
+        chain = variant { Ethereum };
+        chain_id = 1 : nat64;
+        lz_eid = 30_101 : nat32;
+        token = "0x084B8b9819573A5EBc92b834e06608E0f41F383B";
+        lz_endpoint = "0x1a44076050125825900e736c501f859c50fE728c";
+        confirmations = 12 : nat64;
+        head_rpc_url = "https://ethereum-rpc.publicnode.com";
+        providers = vec { variant { Alchemy }; variant { PublicNode } };
+        scrape_interval_secs = 180 : nat64;
+        max_window_blocks = 500 : nat64;
+        log_batch_size = 50 : nat32;
+      };
+      record {
+        chain = variant { Base };
+        chain_id = 8_453 : nat64;
+        lz_eid = 30_184 : nat32;
+        token = "0x084B8b9819573A5EBc92b834e06608E0f41F383B";
+        lz_endpoint = "0x1a44076050125825900e736c501f859c50fE728c";
+        confirmations = 120 : nat64;
+        head_rpc_url = "https://base-rpc.publicnode.com";
+        providers = vec { variant { Alchemy }; variant { BlockPi } };
+        scrape_interval_secs = 60 : nat64;
+        max_window_blocks = 500 : nat64;
+        log_batch_size = 50 : nat32;
+      };
+    };
+  };
+  chain_resets = vec {};
+  skip_to_head = opt vec { variant { Ethereum }; variant { Base } };
+}

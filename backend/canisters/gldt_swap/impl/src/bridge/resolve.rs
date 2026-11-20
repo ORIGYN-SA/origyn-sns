@@ -560,6 +560,7 @@ mod tests {
             let upgrade = BridgeUpgrade {
                 config: Some(cfg),
                 chain_resets: vec![],
+                skip_to_head: None,
             };
             apply_bridge_upgrade(&mut s.data.bridge, upgrade).unwrap();
         });

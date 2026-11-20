@@ -131,6 +131,45 @@ mod tests {
         }
     }
 
+    /// `ChainState` as 2.1.1 saved it, before `skip_to_head`.
+    #[derive(serde::Serialize)]
+    struct ChainStateBeforeSkip {
+        start_block: Option<u64>,
+        last_scraped_block: u64,
+        next_burn_id: u64,
+        window: Option<Window>,
+        supply: Option<SupplyReading>,
+        failed_ticks: u32,
+        last_ok_at: Option<u64>,
+        last_error: Option<String>,
+        stopped: Option<String>,
+        cursor_moved_at: Option<u64>,
+        stale_alerted: bool,
+    }
+
+    #[test]
+    fn chain_state_saved_before_skip_to_head_loads_without_it() {
+        let old = ChainStateBeforeSkip {
+            start_block: Some(10),
+            last_scraped_block: 20,
+            next_burn_id: 3,
+            window: None,
+            supply: None,
+            failed_ticks: 0,
+            last_ok_at: Some(5),
+            last_error: None,
+            stopped: None,
+            cursor_moved_at: Some(4),
+            stale_alerted: false,
+        };
+        let mut buf = Vec::new();
+        bity_ic_serializer::serialize(&old, &mut buf).unwrap();
+        let back: ChainState = bity_ic_serializer::deserialize(buf.as_slice()).unwrap();
+        assert_eq!(back.last_scraped_block, 20);
+        assert_eq!(back.next_burn_id, 3);
+        assert!(!back.skip_to_head);
+    }
+
     #[test]
     fn u256_state_roundtrips_through_serializer() {
         let mut state = BridgeState {
@@ -159,6 +198,7 @@ mod tests {
                 stopped: None,
                 cursor_moved_at: Some(4),
                 stale_alerted: true,
+                skip_to_head: true,
             },
         );
         state
