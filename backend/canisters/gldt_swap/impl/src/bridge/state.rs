@@ -69,6 +69,9 @@ pub struct ChainState {
     pub cursor_moved_at: Option<u64>,
     /// A stale cursor alert was raised since the cursor last moved.
     pub stale_alerted: bool,
+    /// Set by an upgrade's `skip_to_head`: the next window opens at the confirmed head, past
+    /// `max_window_blocks`, if the token shows no burn since the cursor. Cleared by that tick.
+    pub skip_to_head: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq, Eq)]

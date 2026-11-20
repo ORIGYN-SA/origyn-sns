@@ -25,6 +25,7 @@ rust unit tests:
         - "backend/canisters/**/*.{rs,toml,did}"
         # upgrade arguments that a gldt_swap unit test decodes and validates
         - "scripts/canister-deploy/gldt_swap-bridge/*.did"
+        - "scripts/canister-deploy/gldt_swap-authorized-principals/*.did"
         - "scripts/ci-cd/.canister_unit_test_coverage.yml"
     - if: $CI_COMMIT_REF_NAME == "develop"
       changes: *rust_unit_test_changes

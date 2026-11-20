@@ -166,6 +166,9 @@ fn validate_chain(chain: &ChainConfig) -> Result<(), String> {
 ///   (a window that can never pass its checks never stops by itself). It sets the cursor and
 ///   clears the open window, the stop reason and the failed ticks. A chain stopped at its first
 ///   tick has no start block, so it runs the first tick again.
+/// - Each chain in `skip_to_head` must be open (it has a start block). Its next window opens
+///   at the confirmed head, once, if the token shows no burn since the cursor (see
+///   `scraper::tick`).
 pub fn apply_bridge_upgrade(state: &mut BridgeState, up: BridgeUpgrade) -> Result<(), String> {
     let mut next = state.clone();
 
@@ -213,6 +216,18 @@ pub fn apply_bridge_upgrade(state: &mut BridgeState, up: BridgeUpgrade) -> Resul
         // the stale cursor check starts again from the next move
         chain.cursor_moved_at = None;
         chain.stale_alerted = false;
+    }
+
+    for chain in up.skip_to_head.unwrap_or_default() {
+        let state = next
+            .chain_state_mut(chain)
+            .ok_or_else(|| format!("skip to head: {chain:?} is not configured"))?;
+        if state.start_block.is_none() {
+            return Err(format!(
+                "skip to head: {chain:?} is not open yet, its first tick reads at the head anyway"
+            ));
+        }
+        state.skip_to_head = true;
     }
 
     *state = next;
@@ -267,6 +282,7 @@ pub(crate) mod test_fixtures {
             BridgeUpgrade {
                 config: Some(bridge_config()),
                 chain_resets: vec![],
+                skip_to_head: None,
             },
         )
         .unwrap();
@@ -285,7 +301,37 @@ mod tests {
         BridgeUpgrade {
             config,
             chain_resets,
+            skip_to_head: None,
         }
+    }
+
+    #[test]
+    fn skip_to_head_marks_open_chains_only() {
+        let skip = |chains: Vec<EvmChain>| BridgeUpgrade {
+            config: None,
+            chain_resets: vec![],
+            skip_to_head: Some(chains),
+        };
+        let mut state = configured_state();
+        // neither chain has had its first tick
+        let err = apply_bridge_upgrade(&mut state, skip(vec![EvmChain::Base])).unwrap_err();
+        assert!(err.contains("Base is not open yet"), "{err}");
+        assert_eq!(state, configured_state());
+
+        state.chain_state_mut(EvmChain::Base).unwrap().start_block = Some(10);
+        let before = state.clone();
+        let err = apply_bridge_upgrade(&mut state, skip(vec![EvmChain::Base, EvmChain::Ethereum]))
+            .unwrap_err();
+        assert!(err.contains("Ethereum is not open yet"), "{err}");
+        assert_eq!(state, before);
+
+        apply_bridge_upgrade(&mut state, skip(vec![EvmChain::Base])).unwrap();
+        assert!(state.chain_state(EvmChain::Base).unwrap().skip_to_head);
+        assert!(!state.chain_state(EvmChain::Ethereum).unwrap().skip_to_head);
+
+        // no list leaves the flags alone
+        apply_bridge_upgrade(&mut state, upgrade(None, vec![])).unwrap();
+        assert!(state.chain_state(EvmChain::Base).unwrap().skip_to_head);
     }
 
     fn rejects(cfg: BridgeConfig, needle: &str) {
@@ -703,19 +749,24 @@ mod tests {
         serde_json::from_str(text).unwrap()
     }
 
-    /// The production upgrade that turns the bridge on sends this file as `bridge`
-    /// (scripts/canister-deploy/deploy-gldt_swap.sh). The script encodes the argument with didc
-    /// and the init type of can.did, as the test does here: without types, every variant of a
-    /// vec would take the first one's label.
-    #[test]
-    fn ic_launch_argument_decodes_and_matches_the_deployment() {
-        let file =
-            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did");
+    /// The upgrade argument as scripts/canister-deploy/deploy-gldt_swap.sh builds it from a
+    /// release's files: `bridge` from gldt_swap-bridge/, `authorized_principals` from
+    /// gldt_swap-authorized-principals/. The script encodes it with didc and the init type of
+    /// can.did, as this does here: without types, every variant of a vec would take the first
+    /// one's label.
+    fn ic_upgrade_argument(
+        bridge: &str,
+        authorized: Option<&str>,
+    ) -> gldt_swap_api_canister::post_upgrade::UpgradeArgs {
+        let authorized = authorized
+            .map(|file| format!("authorized_principals = opt {file};"))
+            .unwrap_or_default();
         let text = format!(
             "(variant {{ Upgrade = record {{
                 version = record {{ major = 2 : nat32; minor = 1 : nat32; patch = 0 : nat32 }};
                 commit_hash = \"0\";
-                bridge = opt {file};
+                bridge = opt {bridge};
+                {authorized}
             }} }})"
         );
         let (env, service) =
@@ -733,16 +784,24 @@ mod tests {
         else {
             panic!("the argument is not an upgrade");
         };
-        let up = args.bridge.expect("the argument sets the bridge");
+        args
+    }
+
+    fn ic_sns_governance() -> Principal {
+        let canister_ids = repo_json(include_str!("../../../../../../canister_ids.json"));
+        Principal::from_text(canister_ids["sns_governance"]["ic"].as_str().unwrap()).unwrap()
+    }
+
+    /// The bridge config of a release's bridge file, checked against the deployment.
+    fn ic_bridge_argument(file: &str) -> BridgeConfig {
+        let up = ic_upgrade_argument(file, None)
+            .bridge
+            .expect("the argument sets the bridge");
         assert!(up.chain_resets.is_empty());
         let cfg = up.config.expect("the argument has a config");
         validate_config(&cfg).unwrap();
 
-        let canister_ids = repo_json(include_str!("../../../../../../canister_ids.json"));
-        assert_eq!(
-            cfg.sns_governance.to_text(),
-            canister_ids["sns_governance"]["ic"].as_str().unwrap()
-        );
+        assert_eq!(cfg.sns_governance, ic_sns_governance());
         assert_eq!(cfg.ecdsa_key_name, "key_1");
 
         let evm = [
@@ -778,7 +837,81 @@ mod tests {
                 "{chain:?}"
             );
             assert_eq!(c.token, deployment["proxy"].as_str().unwrap(), "{chain:?}");
-            assert_eq!(c.confirmations, 12, "{chain:?}");
         }
+        cfg
+    }
+
+    fn ic_chain(cfg: &BridgeConfig, chain: EvmChain) -> &ChainConfig {
+        cfg.chains.iter().find(|c| c.chain == chain).unwrap()
+    }
+
+    /// 2.1.1 turned the bridge on.
+    #[test]
+    fn ic_launch_argument_decodes_and_matches_the_deployment() {
+        let cfg = ic_bridge_argument(include_str!(
+            "../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did"
+        ));
+        for chain in [EvmChain::Ethereum, EvmChain::Base] {
+            let c = ic_chain(&cfg, chain);
+            assert_eq!(c.confirmations, 12, "{chain:?}");
+            assert_eq!(c.scrape_interval_secs, 180, "{chain:?}");
+        }
+    }
+
+    /// Base makes a block every 0.2 s, 900 in 180 s, more than the 500 of a window. 2.1.2
+    /// scrapes Base every 60 s (up to 500 blocks, Base makes 300) and waits 120 confirmations
+    /// (24 s). Nothing else in the config changes. Both chains skip to the head once, and ORIGYN
+    /// SNS governance becomes the only authorized principal.
+    #[test]
+    fn ic_2_1_2_argument_changes_base_timing_skips_once_and_authorizes_governance() {
+        let args = ic_upgrade_argument(
+            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.2.did"),
+            Some(include_str!(
+                "../../../../../../scripts/canister-deploy/gldt_swap-authorized-principals/ic-2.1.2.did"
+            )),
+        );
+        assert_eq!(args.authorized_principals, Some(vec![ic_sns_governance()]));
+        assert_eq!(
+            args.authorized_principals.unwrap()[0].to_text(),
+            "lnxxh-yaaaa-aaaaq-aadha-cai"
+        );
+        let up = args.bridge.unwrap();
+        assert_eq!(
+            up.skip_to_head,
+            Some(vec![EvmChain::Ethereum, EvmChain::Base])
+        );
+
+        // the 2.1.1 file never skipped and sets no principals
+        let launch_args = ic_upgrade_argument(
+            include_str!("../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did"),
+            None,
+        );
+        assert_eq!(launch_args.authorized_principals, None);
+        assert_eq!(launch_args.bridge.unwrap().skip_to_head, None);
+    }
+
+    #[test]
+    fn ic_base_scrape_argument_changes_only_base_timing() {
+        let launch = ic_bridge_argument(include_str!(
+            "../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.1.did"
+        ));
+        let cfg = ic_bridge_argument(include_str!(
+            "../../../../../../scripts/canister-deploy/gldt_swap-bridge/ic-2.1.2.did"
+        ));
+        let base = ic_chain(&cfg, EvmChain::Base);
+        assert_eq!(base.confirmations, 120);
+        assert_eq!(base.scrape_interval_secs, 60);
+        assert_eq!(base.max_window_blocks, 500);
+
+        let mut expected = launch;
+        for c in expected
+            .chains
+            .iter_mut()
+            .filter(|c| c.chain == EvmChain::Base)
+        {
+            c.confirmations = 120;
+            c.scrape_interval_secs = 60;
+        }
+        assert_eq!(cfg, expected);
     }
 }

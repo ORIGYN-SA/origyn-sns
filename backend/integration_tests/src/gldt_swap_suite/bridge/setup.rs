@@ -71,11 +71,22 @@ pub struct BridgeEnv {
 impl BridgeEnv {
     /// Upgrades gldt_swap with the same wasm and the given bridge argument.
     pub fn upgrade_gldt_swap(&self, bridge: Option<BridgeUpgrade>) -> Result<(), RejectResponse> {
+        self.upgrade_gldt_swap_with(bridge, None)
+    }
+
+    /// Upgrades gldt_swap with the same wasm, the bridge argument and a new list of
+    /// authorized principals.
+    pub fn upgrade_gldt_swap_with(
+        &self,
+        bridge: Option<BridgeUpgrade>,
+        authorized_principals: Option<Vec<Principal>>,
+    ) -> Result<(), RejectResponse> {
         upgrade_gldt_swap(
             &self.pic,
             self.controller,
             self.gldt_swap_canister_id,
             bridge,
+            authorized_principals,
         )
     }
 
@@ -151,17 +162,19 @@ pub fn wait_for_signers_on(
     panic!("signers were not loaded after 30 ticks");
 }
 
-/// Upgrades gldt_swap with the same wasm and the given bridge argument.
+/// Upgrades gldt_swap with the same wasm and the given arguments.
 pub fn upgrade_gldt_swap(
     pic: &PocketIc,
     controller: Principal,
     gldt_swap: Principal,
     bridge: Option<BridgeUpgrade>,
+    authorized_principals: Option<Vec<Principal>>,
 ) -> Result<(), RejectResponse> {
     let args = encode_one(gldt_swap_api_canister::Args::Upgrade(UpgradeArgs {
         version: BuildVersion::min(),
         commit_hash: "bridge".to_string(),
         bridge,
+        authorized_principals,
     }))
     .unwrap();
     // The subnet limits how many instructions install_code may spend on one canister in a
@@ -378,6 +391,7 @@ pub fn bridge_upgrade(sns_governance: Principal) -> BridgeUpgrade {
     BridgeUpgrade {
         config: Some(bridge_config(sns_governance)),
         chain_resets: vec![],
+        skip_to_head: None,
     }
 }
 

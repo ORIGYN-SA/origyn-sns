@@ -125,6 +125,7 @@ pub fn balancer_does_not_remint_bridged_tokens() {
         controller,
         gldt_swap_canister_id,
         Some(bridge_upgrade(random_principal())),
+        None,
     )
     .expect("upgrade with the bridge config");
     start_chains(pic, controller, gldt_swap_canister_id);

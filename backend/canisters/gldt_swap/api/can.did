@@ -71,6 +71,10 @@ type BridgeUpgrade = record {
   chain_resets : vec ChainReset;
   // Replaces the whole config when present.
   config : opt BridgeConfig;
+  // Chains whose next scrape moves the cursor straight to the confirmed head, once, if the
+  // token shows no burn since the cursor. With a burn in between, the chain scrapes on as
+  // usual and keeps every burn.
+  skip_to_head : opt vec EvmChain;
 };
 // Represents a semantic version number following the MAJOR.MINOR.PATCH format.
 // 
@@ -571,6 +575,8 @@ type TransferFromError = variant {
 type UpgradeArgs = record {
   // Replaces the bridge config and restarts stopped chains. `None` keeps the bridge as it is.
   bridge : opt BridgeUpgrade;
+  // Replaces the whole list of authorized principals. `None` keeps it as it is.
+  authorized_principals : opt vec principal;
   version : BuildVersion;
   commit_hash : text;
 };

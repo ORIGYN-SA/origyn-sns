@@ -204,6 +204,25 @@ pub fn apply_window_open(
     Ok(())
 }
 
+/// An upgrade's `skip_to_head`, applied with `bridgeInfo()` at `to_block`, the confirmed head.
+/// With no burn since the cursor there are no logs to read, so the window opens and closes at
+/// `to_block`, past `max_window_blocks`, as `apply_window_open` does. With burns in between,
+/// nothing moves and the next window opens as usual, so every burn is read. The flag is
+/// cleared either way. Returns whether the cursor moved.
+pub fn apply_skip_to_head(
+    chain: &mut ChainState,
+    to_block: u64,
+    info: &BridgeInfo,
+    expected: &Expected,
+) -> Result<bool, StopReason> {
+    chain.skip_to_head = false;
+    if to_block <= chain.last_scraped_block || info.next_burn_id != chain.next_burn_id {
+        return Ok(false);
+    }
+    apply_window_open(chain, to_block, info, expected)?;
+    Ok(true)
+}
+
 /// Checks one batch of logs against the open window and, only if every id in `ids` came back
 /// exactly once and nothing else did, returns their records in id order and moves the cursor
 /// past them. The last batch also closes the window: the cursor moves to its `to_block` and its
@@ -390,6 +409,26 @@ async fn tick<R: EvmReader>(reader: &R, chain: EvmChain, saved: &mut u64) -> Res
             let expected = v.expected.clone().ok_or(Fail::Waiting)?;
             let head = reader.head_block(&v.cfg).await?;
             note_head(chain, head.saturating_sub(v.cfg.confirmations));
+            if v.chain.skip_to_head {
+                let to_block = head.saturating_sub(v.cfg.confirmations);
+                let mut moved = false;
+                if to_block > v.chain.last_scraped_block {
+                    let info = reader.bridge_info(&v.cfg, to_block).await?;
+                    commit(chain, &v, |c| {
+                        moved = apply_skip_to_head(c, to_block, &info, &expected)?;
+                        Ok(())
+                    })?;
+                } else {
+                    // nothing to skip
+                    commit(chain, &v, |c| {
+                        c.skip_to_head = false;
+                        Ok(())
+                    })?;
+                }
+                if moved {
+                    return Ok(());
+                }
+            }
             let Some(to_block) = window_target(&v.chain, &v.cfg, head) else {
                 return Ok(());
             };
@@ -1604,5 +1643,106 @@ mod tests {
         *reader.head.borrow_mut() = Ok(1_000);
         tick(&reader);
         assert_eq!(chain_state().failed_ticks, 0);
+    }
+
+    fn skipping(chain: ChainState) -> ChainState {
+        ChainState {
+            skip_to_head: true,
+            ..chain
+        }
+    }
+
+    #[test]
+    fn skip_to_head_with_no_burn_moves_the_cursor_past_the_window_cap() {
+        setup_chain(skipping(open_chain(100, 3)));
+        let reader = FakeReader::new(10_000, info(3, 7));
+        assert_eq!(tick(&reader), 0);
+        // one bridgeInfo() at the confirmed head, 9_888 blocks past the cursor, and no logs
+        assert_eq!(reader.calls(), vec!["head", "bridge_info 9988"]);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 9_988);
+        assert_eq!(chain.next_burn_id, 3);
+        assert_eq!(chain.window, None);
+        assert_eq!(
+            chain.supply,
+            Some(SupplyReading {
+                block: 9_988,
+                total_supply: U256::from(7u64)
+            })
+        );
+        assert!(!chain.skip_to_head);
+        assert_eq!(chain.failed_ticks, 0);
+
+        // once only: the next tick reads a capped window again
+        reader.clear_calls();
+        *reader.head.borrow_mut() = Ok(20_000);
+        tick(&reader);
+        assert_eq!(reader.calls(), vec!["head", "bridge_info 10488"]);
+    }
+
+    #[test]
+    fn skip_to_head_with_burns_in_between_reads_them_as_usual() {
+        setup_chain(skipping(open_chain(100, 0)));
+        let reader = FakeReader::new(10_000, info(2, 2))
+            .with_logs(vec![burn_log(0, 150, one()), burn_log(1, 400, one())]);
+        assert_eq!(tick(&reader), 2);
+        assert_eq!(
+            reader.calls(),
+            vec![
+                "head",
+                "bridge_info 9988",
+                "bridge_info 600",
+                "burn_logs 101..=600 ids 0..=1",
+            ]
+        );
+        assert_eq!(queued_ids(), vec![0, 1]);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 600);
+        assert_eq!(chain.next_burn_id, 2);
+        assert!(!chain.skip_to_head);
+    }
+
+    #[test]
+    fn skip_to_head_waits_for_the_open_window_to_close() {
+        setup_chain(skipping(with_window(open_chain(100, 0), 600, 2, 2)));
+        let reader = FakeReader::new(10_000, info(2, 2))
+            .with_logs(vec![burn_log(0, 150, one()), burn_log(1, 400, one())]);
+        assert_eq!(tick(&reader), 2);
+        assert_eq!(reader.calls(), vec!["burn_logs 101..=600 ids 0..=1"]);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 600);
+        assert!(chain.skip_to_head);
+
+        reader.clear_calls();
+        tick(&reader);
+        assert_eq!(reader.calls(), vec!["head", "bridge_info 9988"]);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 9_988);
+        assert_eq!(chain.next_burn_id, 2);
+        assert!(!chain.skip_to_head);
+    }
+
+    #[test]
+    fn skip_to_head_at_the_head_only_clears_the_flag() {
+        setup_chain(skipping(open_chain(995, 0)));
+        let reader = FakeReader::new(1_000, info(0, 5));
+        tick(&reader);
+        assert_eq!(reader.calls(), vec!["head"]);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 995);
+        assert!(!chain.skip_to_head);
+        assert_eq!(chain.failed_ticks, 0);
+    }
+
+    #[test]
+    fn skip_to_head_flag_stays_when_the_call_fails() {
+        setup_chain(skipping(open_chain(100, 0)));
+        let reader = FakeReader::new(10_000, info(0, 5));
+        *reader.info.borrow_mut() = Err(RpcError::Failed("eth_call: timeout".into()));
+        tick(&reader);
+        let chain = chain_state();
+        assert_eq!(chain.last_scraped_block, 100);
+        assert!(chain.skip_to_head);
+        assert_eq!(chain.failed_ticks, 1);
     }
 }

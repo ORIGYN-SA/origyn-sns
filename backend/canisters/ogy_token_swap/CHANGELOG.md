@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### unreleased
 
+### [1.0.12] - 2026-11-19
+
+#### Fixed
+
+- **Production build**: 1.0.11 (proposal 175) installed the integration-test build of the wasm instead of the production build: the deploy job took the integration-test build's file. This version installs the production build of the same code. The test-only endpoints `update_swap_status` and `restore_archived_swap` are gone again.
+
 ### [1.0.11] - 2026-07-27
 
 #### Updated

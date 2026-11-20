@@ -1,5 +1,5 @@
 use bity_ic_types::BuildVersion;
-use candid::CandidType;
+use candid::{CandidType, Principal};
 use gldt_swap_common::bridge::BridgeUpgrade;
 use serde::{Deserialize, Serialize};
 
@@ -9,4 +9,6 @@ pub struct UpgradeArgs {
     pub commit_hash: String,
     /// Replaces the bridge config and restarts stopped chains. `None` keeps the bridge as it is.
     pub bridge: Option<BridgeUpgrade>,
+    /// Replaces the whole list of authorized principals. `None` keeps it as it is.
+    pub authorized_principals: Option<Vec<Principal>>,
 }

@@ -174,9 +174,44 @@ impl Default for Data {
     }
 }
 
+impl Data {
+    /// Replaces the whole list of authorized principals, from an upgrade argument. The list
+    /// must not be empty or hold the anonymous principal.
+    pub fn replace_authorized_principals(
+        &mut self,
+        principals: Vec<Principal>,
+    ) -> Result<(), String> {
+        if principals.is_empty() {
+            return Err("the list is empty".to_string());
+        }
+        if principals.contains(&Principal::anonymous()) {
+            return Err("the list holds the anonymous principal".to_string());
+        }
+        self.authorized_principals = principals;
+        Ok(())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn upgrade_replaces_the_whole_authorized_list() {
+        let gold_dao = Principal::from_text("tr3th-kiaaa-aaaaq-aab6q-cai").unwrap();
+        let origyn = Principal::from_text("lnxxh-yaaaa-aaaaq-aadha-cai").unwrap();
+        let mut data = Data {
+            authorized_principals: vec![gold_dao],
+            ..Data::default()
+        };
+        data.replace_authorized_principals(vec![origyn]).unwrap();
+        assert_eq!(data.authorized_principals, vec![origyn]);
+
+        for bad in [vec![], vec![origyn, Principal::anonymous()]] {
+            assert!(data.replace_authorized_principals(bad).is_err());
+            assert_eq!(data.authorized_principals, vec![origyn]);
+        }
+    }
 
     /// `Data` exactly as deployed before the bridge (origyn-sns 87b69c8d), field for field.
     #[derive(Serialize)]

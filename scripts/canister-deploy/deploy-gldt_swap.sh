@@ -121,27 +121,35 @@ if [[ $REINSTALL == "reinstall" ]]; then
   }})"
 
 else
-  # The bridge config goes in only with the release that sets or changes it, the one that has
-  # a file scripts/canister-deploy/gldt_swap-bridge/<network>-<version>.did. Every other upgrade
-  # leaves the bridge as it is: sending the config again would restart stopped chains. A test in
-  # gldt_swap (impl/src/bridge/config.rs) decodes each of these files and validates it.
+  # The bridge argument and a new list of authorized principals go in only with the release
+  # that sets or changes them, the one that has a file
+  # scripts/canister-deploy/gldt_swap-bridge/<network>-<version>.did or
+  # scripts/canister-deploy/gldt_swap-authorized-principals/<network>-<version>.did. Every other
+  # upgrade leaves them as they are: sending the bridge config again would restart stopped
+  # chains. A test in gldt_swap (impl/src/bridge/config.rs) decodes these files and validates
+  # them.
   BRIDGE_UPGRADE_FILE="scripts/canister-deploy/gldt_swap-bridge/$NETWORK-$VERSION.did"
-  BRIDGE_UPGRADE=""
+  AUTHORIZED_FILE="scripts/canister-deploy/gldt_swap-authorized-principals/$NETWORK-$VERSION.did"
+  EXTRA_UPGRADE=""
   if [[ -f $BRIDGE_UPGRADE_FILE ]]; then
-    echo "The upgrade sets the bridge config from $BRIDGE_UPGRADE_FILE"
-    BRIDGE_UPGRADE="bridge = opt $(cat "$BRIDGE_UPGRADE_FILE");"
+    echo "The upgrade sets the bridge from $BRIDGE_UPGRADE_FILE"
+    EXTRA_UPGRADE="$EXTRA_UPGRADE bridge = opt $(cat "$BRIDGE_UPGRADE_FILE");"
+  fi
+  if [[ -f $AUTHORIZED_FILE ]]; then
+    echo "The upgrade replaces the authorized principals with $AUTHORIZED_FILE"
+    EXTRA_UPGRADE="$EXTRA_UPGRADE authorized_principals = opt $(cat "$AUTHORIZED_FILE");"
   fi
 
   ARGUMENTS="(variant { Upgrade = record {
     version = $BUILD_VERSION;
     commit_hash = \"$COMMIT_SHA\";
-    $BRIDGE_UPGRADE
+    $EXTRA_UPGRADE
   }})"
 
   # quill encodes Candid text without types, so in a vec every variant would take the first
   # one's label (the bridge providers and chains). This argument is encoded by didc with the
   # init type of can.did instead, and quill sends those bytes as they are.
-  if [[ -n $BRIDGE_UPGRADE ]]; then
+  if [[ -n $EXTRA_UPGRADE ]]; then
     DID_FILE="backend/canisters/gldt_swap/api/can.did"
     INIT_TYPE=$(sed -n 's/^service : \(([^)]*)\) ->.*/\1/p' "$DID_FILE")
     if [[ -z $INIT_TYPE ]] || ! command -v didc > /dev/null; then
