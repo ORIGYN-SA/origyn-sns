@@ -4,6 +4,11 @@ import Preset from "./src/theme/preset";
 export default {
   presets: [Preset],
   darkMode: "media",
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  // The GLDT app (src/app) is styled by its own kit, not Tailwind.
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "!./src/app/**/*",
+  ],
   plugins: [],
 };

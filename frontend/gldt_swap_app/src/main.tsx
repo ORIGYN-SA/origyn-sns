@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "@components/ui";
-import "@nfid/identitykit/react/styles.css";
+import "@amerej/identitykit/react/styles.css";
 import "./main.css";
 import { colors as themeColors } from "@theme/preset";
 import Router from "./router";

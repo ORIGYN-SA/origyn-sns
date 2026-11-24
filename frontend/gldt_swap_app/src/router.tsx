@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -15,7 +16,37 @@ import {
   AccountTransactionDetails,
 } from "features/index";
 
+// The GLDT app loads on its own, so the landing page and the explorer stay light.
+const AppLayout = lazy(() => import("./app/shell/AppLayout"));
+const WalletPage = lazy(() => import("./app/wallet/WalletPage"));
+const BridgePage = lazy(() => import("./app/bridge/BridgePage"));
+
 const router = createBrowserRouter([
+  {
+    element: (
+      <Suspense fallback={null}>
+        <AppLayout />
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "wallet",
+        element: (
+          <Suspense fallback={null}>
+            <WalletPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "bridge",
+        element: (
+          <Suspense fallback={null}>
+            <BridgePage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
   {
     path: "/",
     element: <Layout />,

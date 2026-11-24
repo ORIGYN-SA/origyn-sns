@@ -16,6 +16,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amerej/identitykit": "1.0.15",
     "@dfinity/agent": "^2.2.0",
     "@dfinity/auth-client": "^2.2.0",
     "@dfinity/candid": "^2.2.0",
@@ -27,7 +28,6 @@
     "@dfinity/utils": "^2.8.0",
     "@headlessui/react": "^2.1.3",
     "@heroicons/react": "^2.1.4",
-    "@nfid/identitykit": "^1.0.7",
     "@szhsin/react-accordion": "^1.2.5",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/line-clamp": "^0.4.4",
@@ -50,7 +50,10 @@
     "react-slick": "^0.31.0",
     "react-tooltip": "^5.27.1",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "viem": "2.57.10",
+    "wagmi": "2.19.5",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
