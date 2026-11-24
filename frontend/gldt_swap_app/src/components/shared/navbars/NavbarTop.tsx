@@ -1,5 +1,5 @@
 import { useState, Fragment } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Transition, TransitionChild, Dialog } from "@headlessui/react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/20/solid";
 
@@ -88,16 +88,13 @@ const NavbarTop = () => {
           </div>
         </div>
         <div className="flex justify-self-end items-center">
-          <a
-            href="https://app.gldt.org"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/wallet"
+            className="bg-surface/10 hover:bg-gold/10 dark:bg-surface-2 shadow rounded-full flex items-center justify-center gap-2 md:text-lg px-6 py-2 md:py-4"
           >
-            <button className="bg-surface/10 hover:bg-gold/10 dark:bg-surface-2 shadow rounded-full flex items-center justify-center gap-2 md:text-lg px-6 py-2 md:py-4">
-              <img src="/gldt_logo.svg" alt="GLDT Logo" className="w-6 h-6" />
-              <span className="whitespace-nowrap">Launch App</span>
-            </button>
-          </a>
+            <img src="/gldt_logo.svg" alt="GLDT Logo" className="w-6 h-6" />
+            <span className="whitespace-nowrap">Launch App</span>
+          </Link>
 
           <div className="md:hidden">
             <button

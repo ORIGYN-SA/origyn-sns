@@ -46,11 +46,7 @@ const Hero = () => {
           secured in Swiss vaults, available anytime.
         </div>
 
-        <Link
-          to="https://app.gldt.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/wallet">
           <Button className="rounded-full flex items-center justify-center gap-2 px-4 md:px-6 py-3 md:py-4 md:text-lg">
             <img src="/gldt_logo.svg" alt="GLDT Logo" className="w-6 h-6" />
             Buy GLDT now
