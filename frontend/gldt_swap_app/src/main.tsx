@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import { Tooltip } from "@components/ui";
 import "@nfid/identitykit/react/styles.css";
 import "./main.css";
-import { APP_MODE } from "@constants";
 import { colors as themeColors } from "@theme/preset";
 import Router from "./router";
 import { AuthProvider } from "./auth";
@@ -17,17 +16,11 @@ import {
   OGY_LEDGER_CANISTER_ID,
   GLDT_LEDGER_CANISTER_ID,
   GLDT_LEDGER_INDEXER_CANISTER_ID,
-  SWAP_CANISTER_ID,
-  ICP_SWAP_CANISTER_ID,
-  GLDT_STAKE_CANISTER_ID,
 } from "@constants";
 
 import { idlFactory as gld_nft_idl } from "@canisters/gld_nft/did";
-import { idlFactory as gldt_swap_idl } from "@canisters/gldt_swap/did";
 import { idlFactory as ledger_idl } from "@canisters/ledger/did";
-import { idlFactory as icp_swap_idl } from "@canisters/icp_swap/did";
 import { idlFactory as gldt_ledger_indexer_idl } from "@canisters/gldt_ledger_indexer/interface";
-import { idlFactory as gldt_stake_idl } from "@canisters/stake/idlFactory";
 
 const queryClient = new QueryClient();
 
@@ -53,11 +46,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
     <QueryClientProvider client={queryClient}>
       <AuthProvider
-        derivationOrigin={
-          ["preprod", "production"].includes(APP_MODE)
-            ? "https://rbsh4-yyaaa-aaaal-qdigq-cai.icp0.io"
-            : undefined
-        }
         targets={[
           GLD_NFT_1G_CANISTER_ID,
           GLD_NFT_10G_CANISTER_ID,
@@ -66,8 +54,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           OGY_LEDGER_CANISTER_ID,
           GLDT_LEDGER_CANISTER_ID,
           GLDT_LEDGER_INDEXER_CANISTER_ID,
-          SWAP_CANISTER_ID,
-          ICP_SWAP_CANISTER_ID,
         ]}
         canisters={{
           gld_nft_1g: {
@@ -86,10 +72,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             canisterId: GLD_NFT_1000G_CANISTER_ID,
             idlFactory: gld_nft_idl,
           },
-          gldt_swap: {
-            canisterId: SWAP_CANISTER_ID,
-            idlFactory: gldt_swap_idl,
-          },
           gldt_ledger: {
             canisterId: GLDT_LEDGER_CANISTER_ID,
             idlFactory: ledger_idl,
@@ -101,14 +83,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           ogy_ledger: {
             canisterId: OGY_LEDGER_CANISTER_ID,
             idlFactory: ledger_idl,
-          },
-          icp_swap: {
-            canisterId: ICP_SWAP_CANISTER_ID,
-            idlFactory: icp_swap_idl,
-          },
-          gldt_stake: {
-            canisterId: GLDT_STAKE_CANISTER_ID,
-            idlFactory: gldt_stake_idl,
           },
         }}
       >

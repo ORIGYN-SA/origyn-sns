@@ -1,22 +1,15 @@
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 
 import Layout from "@components/shared/Layout";
-import Protected from "@components/shared/routes/Protected";
 import NotFound from "@components/shared/routes/NotFound";
-
-import { SwapAppProvider } from "@context/index";
-import { TransactionDetailsProvider } from "@context/index";
 
 import Home from "features/home";
 
 import {
-  SwapTransfer,
-  Account,
-  TransactionDetails,
-  TransactionHistoryList,
   Explorer,
   AccountOverview,
   AccountTransactionDetails,
@@ -53,44 +46,8 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "swap",
-        children: [
-          {
-            index: true,
-            element: (
-              <SwapAppProvider>
-                <SwapTransfer />
-              </SwapAppProvider>
-            ),
-          },
-          {
-            path: "account",
-            element: <Protected />,
-            children: [
-              {
-                index: true,
-                element: <Account />,
-              },
-              {
-                path: "transactions",
-                children: [
-                  {
-                    index: true,
-                    element: <TransactionHistoryList />,
-                  },
-                  {
-                    path: ":nft_id",
-                    element: (
-                      <TransactionDetailsProvider>
-                        <TransactionDetails />
-                      </TransactionDetailsProvider>
-                    ),
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        path: "swap/*",
+        element: <Navigate to="/wallet" replace />,
       },
       {
         path: "*",
