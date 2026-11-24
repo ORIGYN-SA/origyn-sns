@@ -1,6 +1,6 @@
 import type { Agent } from "@dfinity/agent";
 import type { Principal } from "@dfinity/principal";
-import { bytesToHex, pad, type Address, type Hash, type Hex } from "viem";
+import { bytesToHex, getAddress, pad, type Address, type Hash, type Hex } from "viem";
 import { readContract, writeContract } from "wagmi/actions";
 
 import { gldtBridgeAbi } from "../evm/abi";
@@ -25,7 +25,7 @@ export const bridgeToEvm = async (signer: Agent, to: EvmNet, recipient: Address,
   onApproved();
   const res = await gldtSwap(signer).bridge_to_evm({
     chain: to === "ethereum" ? { Ethereum: null } : { Base: null },
-    recipient,
+    recipient: getAddress(recipient),
     from_subaccount: [],
     amount,
   });

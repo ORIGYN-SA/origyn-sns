@@ -15,6 +15,8 @@ import {
   GLD_NFT_1000G_CANISTER_ID,
   OGY_LEDGER_CANISTER_ID,
   GLDT_LEDGER_CANISTER_ID,
+  ICP_LEDGER_CANISTER_ID,
+  SWAP_CANISTER_ID,
 } from "@constants";
 
 import { idlFactory as gld_nft_idl } from "@canisters/gld_nft/did";
@@ -51,6 +53,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           GLD_NFT_1000G_CANISTER_ID,
           OGY_LEDGER_CANISTER_ID,
           GLDT_LEDGER_CANISTER_ID,
+          ICP_LEDGER_CANISTER_ID,
+          SWAP_CANISTER_ID,
         ]}
         canisters={{
           gld_nft_1g: {

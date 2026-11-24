@@ -11,6 +11,8 @@ import { EVM_TOKENS, NETS, type EvmNet, type EvmToken, type EvmTokenSym } from "
 import { COLLECTIONS, ICP_TOKENS, type IcpTokenSym } from "../icp/canisters";
 import { useIcpSession } from "../icp/session";
 import { evmBalance, useEvmBalances } from "../data/evm";
+import { fetchWallet } from "../data/api";
+import { useQuery } from "@tanstack/react-query";
 import { useIcpBalance, useNftHoldings, usePrice } from "../data/wallet";
 import { fmt, toNumber, usd } from "../lib/format";
 
@@ -98,6 +100,18 @@ export const useWalletData = () => {
   const icpBal = useIcpBalance("ICP");
   const nfts = useNftHoldings();
   const evm = useEvmBalances(address);
+  // GLDT on Ethereum and Base comes from the explorer's wallet endpoint; the other tokens from the
+  // EVM balances endpoint.
+  const evmGldt = useQuery({
+    queryKey: ["explorer-wallet", address],
+    enabled: !!address,
+    staleTime: 30_000,
+    retry: false,
+    queryFn: () => {
+      if (!address) throw new Error("no wallet");
+      return fetchWallet(address);
+    },
+  });
   const gldtPrice = usePrice("GLDT");
   const icpPrice = usePrice("ICP");
   const prices: Prices = { GLDT: gldtPrice.data ?? null, ICP: icpPrice.data ?? null, ETH: null };
@@ -113,6 +127,11 @@ export const useWalletData = () => {
       return { kind: "ready", units: BigInt(COLLECTIONS.reduce((n, c) => n + nfts.data[c.key].length, 0)) };
     }
     if (!address) return { kind: "off" };
+    if (t.token.sym === "GLDT") {
+      if (!evmGldt.data) return evmGldt.isError ? { kind: "unavailable" } : { kind: "loading" };
+      const n = evmGldt.data.networks.find((x) => x.network === t.token.net);
+      return n ? { kind: "ready", units: n.balance } : { kind: "unavailable" };
+    }
     if (!evm.data) return evm.isError ? { kind: "unavailable" } : { kind: "loading" };
     const v = evmBalance(evm.data, t.token.net, t.token.sym);
     return v === null ? { kind: "unavailable" } : { kind: "ready", units: v };
