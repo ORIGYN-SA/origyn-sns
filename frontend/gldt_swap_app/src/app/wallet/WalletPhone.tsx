@@ -11,7 +11,7 @@ import { ActionButton } from "./Hero";
 import { NET_INFO, SYM_INFO, decimalsOf, digitsOf, priceOf, type WalletData, type WalletToken } from "./model";
 import { kindIcon, nftName } from "./rows";
 import { TokenRows } from "./TokenList";
-import type { TxRow } from "./TxList";
+import type { TxRow, TxView } from "./TxList";
 import { Dialog } from "../shell/Dialog";
 
 type Fungible = Exclude<WalletToken, { kind: "nft" }>;
@@ -148,7 +148,7 @@ const TokenView = ({
 }: {
   t: Fungible;
   data: WalletData;
-  tx: { state: "off" | "loading" | "ready" | "unavailable"; rows: TxRow[]; me: string[] };
+  tx: TxView;
   onPick: () => void;
   onTransfer: () => void;
   onBurn: () => void;
@@ -209,6 +209,16 @@ const TokenView = ({
         <div className="wp-mb16">Transactions</div>
         {tx.state === "off" && <Placeholder />}
         {tx.state === "loading" && <div>Loading...</div>}
+        {tx.state === "external" && (
+          <div className="emptyb">
+            <div>
+              The history of {sym} is on{" "}
+              <a className="gold" href={tx.href} target="_blank" rel="noopener noreferrer">
+                {tx.scan}
+              </a>
+            </div>
+          </div>
+        )}
         {tx.state === "unavailable" && (
           <div className="emptyb">
             <div>Transactions can't be shown right now</div>
@@ -448,7 +458,7 @@ export const WalletPhone = ({
 }: {
   data: WalletData;
   selected: WalletToken;
-  tx: { state: "off" | "loading" | "ready" | "unavailable"; rows: TxRow[]; me: string[] };
+  tx: TxView;
   onSelect: (t: WalletToken) => void;
   onTransfer: (t: Fungible) => void;
   onNftTransfer: () => void;

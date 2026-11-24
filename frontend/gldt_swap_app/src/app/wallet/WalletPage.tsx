@@ -3,7 +3,8 @@ import { useAtom } from "jotai";
 
 import "../styles/wallet.css";
 import { useAuth } from "@auth/index";
-import { useEvmHistory } from "../data/evm";
+import { useEvmGldtHistory } from "../data/evm";
+import { addressUrl, NETS } from "../evm/chains";
 import { icpAccountId, useIcpHistory } from "../data/wallet";
 import type { Collection } from "../icp/canisters";
 import { toNumber } from "../lib/format";
@@ -17,36 +18,37 @@ import { SwapDialog } from "./SwapDialog";
 import { NftTransferDialog } from "./NftTransferDialog";
 import { NftDetails } from "./NftDetails";
 import { WalletPhone } from "./WalletPhone";
-import { TxList, type TxRow } from "./TxList";
+import { TxList, type TxView } from "./TxList";
 import { GLDT_ICP, decimalsOf, digitsOf, priceOf, useWalletData, type WalletData, type WalletToken } from "./model";
 
 type Fungible = Exclude<WalletToken, { kind: "nft" }>;
 const GLDT_ICP_F: Fungible = { kind: "icp", sym: "GLDT" };
 
-/** The selected token's history as list rows, from its ledger index or from api.gldt.org. */
-const useTxRows = (t: Fungible, data: WalletData): { state: "off" | "loading" | "ready" | "unavailable"; rows: TxRow[]; me: string[] } => {
-  const icpSym = t.kind === "icp" ? t.sym : "GLDT";
-  const icp = useIcpHistory(icpSym);
-  const evm = useEvmHistory(t.kind === "evm" ? data.evmAddress : undefined, t.kind === "evm" ? t.token.net : "ethereum", t.kind === "evm" ? t.token.sym : "GLDT");
+/** The selected token's history: from its ledger index, from the explorer feed (GLDT on Ethereum and
+ * Base), or a link to the chain's explorer for the other EVM tokens. */
+const useTxRows = (t: Fungible, data: WalletData): TxView => {
+  const icp = useIcpHistory(t.kind === "icp" ? t.sym : "GLDT");
+  const evmGldt = t.kind === "evm" && t.token.sym === "GLDT";
+  const evm = useEvmGldtHistory(evmGldt ? data.evmAddress : undefined, t.kind === "evm" ? t.token.net : "ethereum");
   const dec = decimalsOf(t);
   if (t.kind === "icp") {
-    if (data.icp?.kind !== "signedIn") return { state: "off", rows: [], me: [] };
+    if (data.icp?.kind !== "signedIn") return { state: "off" };
     const me = [t.sym === "ICP" ? icpAccountId(data.icp.principal) : data.icp.principal.toText()];
-    if (icp.isError) return { state: "unavailable", rows: [], me };
-    if (!icp.data) return { state: "loading", rows: [], me };
+    if (icp.isError) return { state: "unavailable" };
+    if (!icp.data) return { state: "loading" };
     return {
       state: "ready",
       me,
       rows: icp.data.map((r) => ({ key: String(r.id), kind: r.kind, from: r.from, to: r.to, amount: toNumber(r.amount, dec), at: r.at })),
     };
   }
-  if (!data.evmAddress) return { state: "off", rows: [], me: [] };
-  const me = [data.evmAddress];
-  if (evm.isError) return { state: "unavailable", rows: [], me };
-  if (!evm.data) return { state: "loading", rows: [], me };
+  if (!data.evmAddress) return { state: "off" };
+  if (!evmGldt) return { state: "external", href: addressUrl(t.token.net, data.evmAddress), scan: NETS[t.token.net].scanName };
+  if (evm.isError) return { state: "unavailable" };
+  if (!evm.data) return { state: "loading" };
   return {
     state: "ready",
-    me,
+    me: [data.evmAddress],
     rows: evm.data.map((r) => ({ key: r.key, kind: r.kind, from: r.from, to: r.to, amount: toNumber(r.amount, dec), at: r.at })),
   };
 };
@@ -68,7 +70,7 @@ const TokenPanel = ({
   return (
     <>
       <Hero t={t} data={data} onTransfer={onTransfer} onBurn={onBurn} />
-      <TxList state={tx.state} rows={tx.rows} me={tx.me} sym={sym} digits={digitsOf(t)} price={priceOf(data.prices, t)} />
+      <TxList view={tx} sym={sym} digits={digitsOf(t)} price={priceOf(data.prices, t)} />
     </>
   );
 };

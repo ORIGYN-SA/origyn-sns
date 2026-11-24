@@ -15,6 +15,13 @@ export type TxRow = {
   at: number;
 };
 
+/** What a token's Transactions section shows: a placeholder while its network is not connected,
+ * the rows, or (ETH, USDC, USDT) a link to the chain's explorer, which keeps their history. */
+export type TxView =
+  | { state: "off" | "loading" | "unavailable" }
+  | { state: "ready"; rows: TxRow[]; me: string[] }
+  | { state: "external"; href: string; scan: string };
+
 const MINTER = "Minting account";
 
 /** The design shows 6 + 4 characters of an EVM address and 12 + 12 of anything else. */
@@ -43,25 +50,10 @@ const AddrCell = ({ text }: { text: string | null }) => {
 };
 
 /** The Transactions section of a token: placeholder while logged out, then the rows. */
-export const TxList = ({
-  state,
-  rows,
-  me,
-  sym,
-  digits,
-  price,
-}: {
-  state: "off" | "loading" | "ready" | "unavailable";
-  rows: TxRow[];
-  /** The viewer's own addresses: a row to one of them is a credit. */
-  me: string[];
-  sym: string;
-  digits: number;
-  price: number | null;
-}) => (
+export const TxList = ({ view, sym, digits, price }: { view: TxView; sym: string; digits: number; price: number | null }) => (
   <div className="w-sec">
     <div className="w-mb16">Transactions</div>
-    {state === "off" && (
+    {view.state === "off" && (
       <div className="w-tph">
         {[0, 1].map((i) => (
           <div key={i}>
@@ -79,21 +71,31 @@ export const TxList = ({
         <div className="fade96 fadebg" />
       </div>
     )}
-    {state === "loading" && <div>Loading...</div>}
-    {state === "unavailable" && (
+    {view.state === "loading" && <div>Loading...</div>}
+    {view.state === "external" && (
+      <div className="emptyb">
+        <div>
+          The history of {sym} is on{" "}
+          <a className="gold" href={view.href} target="_blank" rel="noopener noreferrer">
+            {view.scan}
+          </a>
+        </div>
+      </div>
+    )}
+    {view.state === "unavailable" && (
       <div className="emptyb">
         <div>Transactions can't be shown right now</div>
       </div>
     )}
-    {state === "ready" && rows.length === 0 && (
+    {view.state === "ready" && view.rows.length === 0 && (
       <div className="emptyb">
         <div>No transactions found</div>
       </div>
     )}
-    {state === "ready" && rows.length > 0 && (
+    {view.state === "ready" && view.rows.length > 0 && (
       <div className="w-txl">
-        {rows.map((r) => {
-          const credit = r.to !== null && me.some((m) => m.toLowerCase() === r.to?.toLowerCase());
+        {view.rows.map((r) => {
+          const credit = r.to !== null && view.me.some((m) => m.toLowerCase() === r.to?.toLowerCase());
           return (
             <div key={r.key}>
               <div className="txr">

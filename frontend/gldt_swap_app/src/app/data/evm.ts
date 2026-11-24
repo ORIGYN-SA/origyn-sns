@@ -6,21 +6,24 @@ import { getJson, fetchExplorer, type Operation } from "./api";
 import type { EvmNet, EvmTokenSym } from "../evm/chains";
 
 /** Ethereum and Base data comes from api.gldt.org, not from the chain: the app reads a chain only
- * while the user signs there. The two endpoints below are what the app expects from the backend. */
+ * while the user signs there. Only GLDT has a history; the other tokens show balances. */
 
 const units = z
   .string()
   .regex(/^\d+$/)
   .transform((s) => BigInt(s));
 
+// A chain is null when its read failed, a token when only its read did.
 const balancesSchema = z.object({
-  ethereum: z.object({ ETH: units, GLDT: units, USDC: units, USDT: units }),
-  base: z.object({ ETH: units, GLDT: units, USDC: units }),
+  ethereum: z
+    .object({ ETH: units.nullable(), GLDT: units.nullable(), USDC: units.nullable(), USDT: units.nullable() })
+    .nullable(),
+  base: z.object({ ETH: units.nullable(), GLDT: units.nullable(), USDC: units.nullable() }).nullable(),
 });
 export type EvmBalances = z.infer<typeof balancesSchema>;
 
 /** GET /v1/evm/accounts/{address}/balances: the wallet's balances on both networks, each a decimal
- * string in the token's smallest unit. */
+ * string in the token's smallest unit, up to about 30 seconds old. */
 const fetchEvmBalances = (address: Address) =>
   getJson(`/v1/evm/accounts/${address}/balances`, balancesSchema);
 
@@ -37,45 +40,11 @@ export const useEvmBalances = (address: Address | undefined) =>
   });
 
 export const evmBalance = (b: EvmBalances, net: EvmNet, sym: EvmTokenSym): bigint | null => {
-  if (net === "ethereum") return b.ethereum[sym];
-  return sym === "USDT" ? null : b.base[sym];
+  if (net === "ethereum") return b.ethereum?.[sym] ?? null;
+  return sym === "USDT" ? null : b.base?.[sym] ?? null;
 };
-
-// The backend may page this list with a cursor (next_page) instead of a total; the app reads the
-// first page only.
-const historySchema = z.object({
-  data: z.array(
-    z.object({
-      tx_hash: z.string(),
-      from: z.string(),
-      to: z.string(),
-      amount: units,
-      at: z.number(),
-    })
-  ),
-});
 
 export type EvmTx = { key: string; kind: "Transfer" | "Mint" | "Burn"; from: string; to: string; amount: bigint; at: number; txHash: string | null };
-
-/** GET /v1/evm/accounts/{address}/transactions?chain=&token=: the wallet's ETH, USDC or USDT
- * transfers on one network, newest first. */
-const fetchEvmTokenHistory = async (address: Address, net: EvmNet, sym: Exclude<EvmTokenSym, "GLDT">): Promise<EvmTx[]> => {
-  const res = await getJson(`/v1/evm/accounts/${address}/transactions`, historySchema, {
-    chain: net,
-    token: sym,
-    offset: "0",
-    limit: "50",
-  });
-  return res.data.map((r) => ({
-    key: `${r.tx_hash}-${r.from}-${r.to}`,
-    kind: "Transfer",
-    from: r.from,
-    to: r.to,
-    amount: r.amount,
-    at: r.at,
-    txHash: r.tx_hash,
-  }));
-};
 
 const ZERO = "0x0000000000000000000000000000000000000000";
 
@@ -132,14 +101,15 @@ const gldtHistory = async (address: Address, net: EvmNet): Promise<EvmTx[]> => {
   });
 };
 
-export const useEvmHistory = (address: Address | undefined, net: EvmNet, sym: EvmTokenSym) =>
+/** The wallet's GLDT history on one network, from the explorer feed. */
+export const useEvmGldtHistory = (address: Address | undefined, net: EvmNet) =>
   useQuery({
-    queryKey: ["evm-history", address, net, sym],
+    queryKey: ["evm-history", address, net],
     enabled: !!address,
     staleTime: 30_000,
     retry: false,
     queryFn: () => {
       if (!address) throw new Error("no wallet");
-      return sym === "GLDT" ? gldtHistory(address, net) : fetchEvmTokenHistory(address, net, sym);
+      return gldtHistory(address, net);
     },
   });

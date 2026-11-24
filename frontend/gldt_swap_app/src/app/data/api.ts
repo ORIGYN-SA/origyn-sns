@@ -15,9 +15,9 @@ export const getJson = async <S extends z.ZodTypeAny>(
   return schema.parse(await res.json());
 };
 
-export type PricedSym = "GLDT" | "ICP";
+export type PricedSym = "GLDT" | "ICP" | "ETH";
 
-/** The latest USD price of a token the API prices (GLDT, ICP). */
+/** The latest USD price of a token the API prices (GLDT, ICP, ETH). */
 export const fetchPrice = (sym: PricedSym) =>
   getJson(`/v1/tokens/${sym.toLowerCase()}/price/latest`, z.number().positive());
 

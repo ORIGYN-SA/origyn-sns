@@ -114,7 +114,8 @@ export const useWalletData = () => {
   });
   const gldtPrice = usePrice("GLDT");
   const icpPrice = usePrice("ICP");
-  const prices: Prices = { GLDT: gldtPrice.data ?? null, ICP: icpPrice.data ?? null, ETH: null };
+  const ethPrice = usePrice("ETH");
+  const prices: Prices = { GLDT: gldtPrice.data ?? null, ICP: icpPrice.data ?? null, ETH: ethPrice.data ?? null };
 
   const icpBalOf = (q: typeof gldt): Bal =>
     !icpIn ? { kind: "off" } : q.data !== undefined ? { kind: "ready", units: q.data } : q.isError ? { kind: "unavailable" } : { kind: "loading" };
