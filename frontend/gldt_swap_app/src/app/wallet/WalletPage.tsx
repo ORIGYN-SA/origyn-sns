@@ -16,10 +16,12 @@ import { TransferDialog } from "./TransferDialog";
 import { SwapDialog } from "./SwapDialog";
 import { NftTransferDialog } from "./NftTransferDialog";
 import { NftDetails } from "./NftDetails";
+import { WalletPhone } from "./WalletPhone";
 import { TxList, type TxRow } from "./TxList";
 import { GLDT_ICP, decimalsOf, digitsOf, priceOf, useWalletData, type WalletData, type WalletToken } from "./model";
 
 type Fungible = Exclude<WalletToken, { kind: "nft" }>;
+const GLDT_ICP_F: Fungible = { kind: "icp", sym: "GLDT" };
 
 /** The selected token's history as list rows, from its ledger index or from api.gldt.org. */
 const useTxRows = (t: Fungible, data: WalletData): { state: "off" | "loading" | "ready" | "unavailable"; rows: TxRow[]; me: string[] } => {
@@ -49,8 +51,19 @@ const useTxRows = (t: Fungible, data: WalletData): { state: "off" | "loading" | 
   };
 };
 
-const TokenPanel = ({ t, data, onTransfer, onBurn }: { t: Fungible; data: WalletData; onTransfer: () => void; onBurn: () => void }) => {
-  const tx = useTxRows(t, data);
+const TokenPanel = ({
+  t,
+  data,
+  tx,
+  onTransfer,
+  onBurn,
+}: {
+  t: Fungible;
+  data: WalletData;
+  tx: ReturnType<typeof useTxRows>;
+  onTransfer: () => void;
+  onBurn: () => void;
+}) => {
   const sym = t.kind === "icp" ? t.sym : t.token.sym;
   return (
     <>
@@ -94,7 +107,35 @@ const WalletPage = () => {
     else evmDialog.open();
   };
 
-  if (phone) return null;
+  const tx = useTxRows(selected.kind === "nft" ? GLDT_ICP_F : selected, data);
+  const close = () => setDialog({ kind: "none" });
+  const dialogs = (
+    <>
+      {dialog.kind === "transfer" && <TransferDialog t={dialog.token} data={data} onClose={close} />}
+      {dialog.kind === "swap" && <SwapDialog data={data} initial={dialog.mode} onClose={close} />}
+      {dialog.kind === "nftTransfer" && <NftTransferDialog data={data} onClose={close} />}
+      {dialog.kind === "nft" && <NftDetails c={dialog.collection} id={dialog.id} onClose={close} />}
+    </>
+  );
+
+  if (phone) {
+    return (
+      <>
+        <WalletPhone
+          data={data}
+          selected={selected}
+          tx={tx}
+          onSelect={setSelected}
+          onTransfer={(token) => setDialog({ kind: "transfer", token })}
+          onNftTransfer={() => setDialog({ kind: "nftTransfer" })}
+          onSwap={(mode) => setDialog({ kind: "swap", mode })}
+          onOpenNft={(collection, id) => setDialog({ kind: "nft", collection, id })}
+          onConnect={onConnect}
+        />
+        {dialogs}
+      </>
+    );
+  }
 
   return (
     <div className="inner">
@@ -124,21 +165,13 @@ const WalletPage = () => {
           <TokenPanel
             t={selected}
             data={data}
+            tx={tx}
             onTransfer={() => setDialog({ kind: "transfer", token: selected })}
             onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
           />
         )}
       </section>
-      {dialog.kind === "transfer" && (
-        <TransferDialog t={dialog.token} data={data} onClose={() => setDialog({ kind: "none" })} />
-      )}
-      {dialog.kind === "swap" && (
-        <SwapDialog data={data} initial={dialog.mode} onClose={() => setDialog({ kind: "none" })} />
-      )}
-      {dialog.kind === "nftTransfer" && <NftTransferDialog data={data} onClose={() => setDialog({ kind: "none" })} />}
-      {dialog.kind === "nft" && (
-        <NftDetails c={dialog.collection} id={dialog.id} onClose={() => setDialog({ kind: "none" })} />
-      )}
+      {dialogs}
     </div>
   );
 };

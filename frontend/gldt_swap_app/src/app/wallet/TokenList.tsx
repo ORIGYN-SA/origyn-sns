@@ -174,8 +174,8 @@ const Single = ({
   );
 };
 
-/** The Tokens box: GLDT on every network, the GLD NFTs and ICP, then the Ethereum and Base tokens. */
-export const TokenList = (p: Props) => {
+/** The token rows: GLDT on every network, the GLD NFTs and ICP, then the Ethereum and Base tokens. */
+export const TokenRows = (p: Props) => {
   const [open, setOpen] = useState({ GLDT: true, ETH: false, USDC: false });
   const toggle = (k: keyof typeof open) => setOpen((o) => ({ ...o, [k]: !o[k] }));
   const { data } = p;
@@ -189,57 +189,61 @@ export const TokenList = (p: Props) => {
         ? { bal: "Loading...", usd: "Loading..." }
         : { bal: "—", usd: "" };
   const usdt = EVM_TOKENS.find((x) => x.sym === "USDT");
-
   return (
-    <div className="tbox">
-      <div className="tboxh">Tokens</div>
-      {data.icpIn || evmOn ? (
-        <div className="tlist">
-          <Group
-            sym="GLDT"
-            open={open.GLDT}
-            onToggle={() => toggle("GLDT")}
-            members={[{ t: { kind: "icp", sym: "GLDT" }, net: "icp" }, ...evmMembers("GLDT")]}
-            {...p}
-          />
-          {data.icpIn && (
-            <>
-              <Single t={{ kind: "nft" }} label="Gold NFT" extra={nftText} {...p} />
-              <Single t={{ kind: "icp", sym: "ICP" }} label="Internet Computer" {...p} />
-            </>
-          )}
-          {evmOn && (
-            <>
-              <Group sym="ETH" open={open.ETH} onToggle={() => toggle("ETH")} members={evmMembers("ETH")} {...p} />
-              <Group sym="USDC" open={open.USDC} onToggle={() => toggle("USDC")} members={evmMembers("USDC")} {...p} />
-              {usdt && <Single t={{ kind: "evm", token: usdt }} label="Tether USD" badge="ethereum" {...p} />}
-            </>
-          )}
-        </div>
-      ) : (
-        <div className="w-wld">
-          {[0, 1].map((i) => (
-            <div key={i}>
-              <div className="w-wph">
-                <div className="w-phi">
-                  <div className="w-phg">
-                    <div className="phc w-o40" />
-                    <div className="w-phc">
-                      <div className="phb w-h5 w-q16" />
-                      <div className="phb w-h4 w-q20" />
-                    </div>
-                  </div>
-                  <div className="w-phr">
-                    <div className="phb w-h5 w-q20" />
-                    <div className="phb w-h4 w-q16" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div className="fade96 fades1" />
-        </div>
+    <div className="tlist">
+      <Group
+        sym="GLDT"
+        open={open.GLDT}
+        onToggle={() => toggle("GLDT")}
+        members={[{ t: { kind: "icp", sym: "GLDT" }, net: "icp" }, ...evmMembers("GLDT")]}
+        {...p}
+      />
+      {data.icpIn && (
+        <>
+          <Single t={{ kind: "nft" }} label="Gold NFT" extra={nftText} {...p} />
+          <Single t={{ kind: "icp", sym: "ICP" }} label="Internet Computer" {...p} />
+        </>
+      )}
+      {evmOn && (
+        <>
+          <Group sym="ETH" open={open.ETH} onToggle={() => toggle("ETH")} members={evmMembers("ETH")} {...p} />
+          <Group sym="USDC" open={open.USDC} onToggle={() => toggle("USDC")} members={evmMembers("USDC")} {...p} />
+          {usdt && <Single t={{ kind: "evm", token: usdt }} label="Tether USD" badge="ethereum" {...p} />}
+        </>
       )}
     </div>
   );
 };
+
+/** The Tokens box of the desktop Wallet, with a placeholder until a wallet is connected. */
+export const TokenList = (p: Props) => (
+  <div className="tbox">
+    <div className="tboxh">Tokens</div>
+    {p.data.icpIn || p.data.evmAddress ? (
+      <TokenRows {...p} />
+    ) : (
+        <div className="w-wld">
+        {[0, 1].map((i) => (
+          <div key={i}>
+            <div className="w-wph">
+              <div className="w-phi">
+                <div className="w-phg">
+                  <div className="phc w-o40" />
+                  <div className="w-phc">
+                    <div className="phb w-h5 w-q16" />
+                    <div className="phb w-h4 w-q20" />
+                  </div>
+                </div>
+                <div className="w-phr">
+                  <div className="phb w-h5 w-q20" />
+                  <div className="phb w-h4 w-q16" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="fade96 fades1" />
+      </div>
+    )}
+  </div>
+);
