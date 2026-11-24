@@ -14,6 +14,8 @@ import { NftView } from "./NftView";
 import { TokenList } from "./TokenList";
 import { TransferDialog } from "./TransferDialog";
 import { SwapDialog } from "./SwapDialog";
+import { NftTransferDialog } from "./NftTransferDialog";
+import { NftDetails } from "./NftDetails";
 import { TxList, type TxRow } from "./TxList";
 import { GLDT_ICP, decimalsOf, digitsOf, priceOf, useWalletData, type WalletData, type WalletToken } from "./model";
 
@@ -132,6 +134,10 @@ const WalletPage = () => {
       )}
       {dialog.kind === "swap" && (
         <SwapDialog data={data} initial={dialog.mode} onClose={() => setDialog({ kind: "none" })} />
+      )}
+      {dialog.kind === "nftTransfer" && <NftTransferDialog data={data} onClose={() => setDialog({ kind: "none" })} />}
+      {dialog.kind === "nft" && (
+        <NftDetails c={dialog.collection} id={dialog.id} onClose={() => setDialog({ kind: "none" })} />
       )}
     </div>
   );

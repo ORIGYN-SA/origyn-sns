@@ -5,7 +5,16 @@ import { nftActor, type Collection } from "../icp/canisters";
 import { useIcpSession } from "../icp/session";
 
 /** What the app shows of a GLD NFT's metadata: the bar's serial number and its pictures. */
-export type NftMeta = { serial: string | null; front: string | null; back: string | null; description: string | null };
+export type NftMeta = {
+  serial: string | null;
+  front: string | null;
+  back: string | null;
+  description: string | null;
+  fineness: string | null;
+  dimensions: string | null;
+  hardness: string | null;
+  manufacturer: string | null;
+};
 
 const metaJson = z.object({
   description: z.string().optional(),
@@ -19,7 +28,8 @@ const fetchMeta = async (agent: Parameters<typeof nftActor>[0], c: Collection, i
   const [entry] = await nftActor(agent, c).icrc7_token_metadata([id]);
   const first = entry?.[0]?.[0]?.[1];
   const url = first && "Array" in first && first.Array[0] && "Text" in first.Array[0] ? first.Array[0].Text : null;
-  if (!url) return { serial: null, front: null, back: null, description: null };
+  if (!url)
+    return { serial: null, front: null, back: null, description: null, fineness: null, dimensions: null, hardness: null, manufacturer: null };
   const res = await fetch(url);
   if (!res.ok) throw new Error(`NFT metadata ${url}: ${res.status}`);
   const json = metaJson.parse(await res.json());
@@ -32,6 +42,10 @@ const fetchMeta = async (agent: Parameters<typeof nftActor>[0], c: Collection, i
     front: attr((t) => t.startsWith("front-")) ?? json.image ?? null,
     back: attr((t) => t.startsWith("back-")),
     description: json.description ?? null,
+    fineness: attr((t) => t === "Fineness"),
+    dimensions: attr((t) => t === "Dimensions"),
+    hardness: attr((t) => t === "Hardness"),
+    manufacturer: attr((t) => t === "Manufacturer"),
   };
 };
 
