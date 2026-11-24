@@ -4,7 +4,7 @@ import { z } from "zod";
 import { nftActor, type Collection } from "../icp/canisters";
 import { useIcpSession } from "../icp/session";
 
-/** What the app shows of a GLD NFT's metadata: the bar's serial number and its pictures. */
+/** What the app shows of a GLD NFT's metadata: the bar's serial number, pictures and specs. */
 export type NftMeta = {
   serial: string | null;
   front: string | null;
@@ -16,37 +16,60 @@ export type NftMeta = {
   manufacturer: string | null;
 };
 
-const metaJson = z.object({
+const EMPTY: NftMeta = {
+  serial: null,
+  front: null,
+  back: null,
+  description: null,
+  fineness: null,
+  dimensions: null,
+  hardness: null,
+  manufacturer: null,
+};
+
+/** The certificate JSON of a GLD NFT, as its collection stores it (JSON_DATA, or the document
+ * icrc97:metadata points at). */
+const certJson = z.object({
+  serial_number: z.string().optional(),
+  purity_fineness: z.string().optional(),
+  dimensions: z.string().optional(),
+  hardness: z.string().optional(),
+  manufacturer: z.string().optional(),
   description: z.string().optional(),
   image: z.string().optional(),
-  attributes: z.array(z.object({ trait_type: z.string(), value: z.union([z.string(), z.number()]) })).optional(),
+  product_images: z.array(z.object({ id: z.string(), path: z.string() })).optional(),
 });
 
-/** The NFT's metadata: icrc7_token_metadata points at a JSON document, whose attributes hold the
- * serial number and the front and back pictures. */
+const fromCert = (raw: unknown): NftMeta => {
+  const c = certJson.safeParse(raw);
+  if (!c.success) return EMPTY;
+  const img = (prefix: string) => c.data.product_images?.find((x) => x.id.startsWith(prefix))?.path ?? null;
+  return {
+    serial: c.data.serial_number ?? null,
+    front: img("front-") ?? c.data.image ?? null,
+    back: img("back-"),
+    description: c.data.description ?? null,
+    fineness: c.data.purity_fineness ?? null,
+    dimensions: c.data.dimensions ?? null,
+    hardness: c.data.hardness ?? null,
+    manufacturer: c.data.manufacturer ?? null,
+  };
+};
+
+type Value = { Text: string } | { Array: Value[] } | Record<string, unknown>;
+const text = (v: Value | undefined): string | null => (v && "Text" in v && typeof v.Text === "string" ? v.Text : null);
+
 const fetchMeta = async (agent: Parameters<typeof nftActor>[0], c: Collection, id: bigint): Promise<NftMeta> => {
   const [entry] = await nftActor(agent, c).icrc7_token_metadata([id]);
-  const first = entry?.[0]?.[0]?.[1];
-  const url = first && "Array" in first && first.Array[0] && "Text" in first.Array[0] ? first.Array[0].Text : null;
-  if (!url)
-    return { serial: null, front: null, back: null, description: null, fineness: null, dimensions: null, hardness: null, manufacturer: null };
+  const fields = new Map<string, Value>(entry?.[0] ?? []);
+  const inline = text(fields.get("JSON_DATA"));
+  if (inline) return fromCert(JSON.parse(inline));
+  const doc = fields.get("icrc97:metadata");
+  const url = doc && "Array" in doc && Array.isArray(doc.Array) ? text(doc.Array[0]) : null;
+  if (!url) return EMPTY;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`NFT metadata ${url}: ${res.status}`);
-  const json = metaJson.parse(await res.json());
-  const attr = (pred: (t: string) => boolean) => {
-    const a = json.attributes?.find((x) => pred(x.trait_type));
-    return a === undefined ? null : String(a.value);
-  };
-  return {
-    serial: attr((t) => t === "Serial Number"),
-    front: attr((t) => t.startsWith("front-")) ?? json.image ?? null,
-    back: attr((t) => t.startsWith("back-")),
-    description: json.description ?? null,
-    fineness: attr((t) => t === "Fineness"),
-    dimensions: attr((t) => t === "Dimensions"),
-    hardness: attr((t) => t === "Hardness"),
-    manufacturer: attr((t) => t === "Manufacturer"),
-  };
+  return fromCert(await res.json());
 };
 
 export const useNftMeta = (c: Collection, id: bigint) => {
