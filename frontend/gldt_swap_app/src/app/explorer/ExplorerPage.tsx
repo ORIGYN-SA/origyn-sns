@@ -129,6 +129,9 @@ const ExplorerPage = () => {
     setText("");
     if (c.kind === "wallet") {
       if (!chips.includes(c.value) && chips.length < 5) set({ w: [...chips, c.value].join(","), q: null, page: null, id: null, tab: null });
+    } else if (/^swap-v1-\d+$/i.test(c.value)) {
+      // The search does not take the old swap canister's ids; its operations open by id.
+      set({ id: c.value.toLowerCase(), q: null, page: null, tab: null });
     } else set({ q: c.value, page: null, id: null, tab: null });
     setMore(1);
   };
