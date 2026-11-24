@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { QRCodeSVG } from "qrcode.react";
-import { LedgerCanister } from "@dfinity/ledger-icp";
+import { LedgerCanister, TxDuplicateError } from "@dfinity/ledger-icp";
+import { IcrcTransferError } from "@dfinity/ledger-icrc";
 import { Principal } from "@dfinity/principal";
-import { isAddress, type Address } from "viem";
+import { formatUnits, isAddress, type Address, type Hash } from "viem";
 
 import { ICP_LEDGER_CANISTER_ID } from "@constants";
 import { CheckCircle, CopySm, NavWallet, XCircle } from "../icons";
 import { ICP_TOKENS, ledger } from "../icp/canisters";
 import { parseAccountId, parseIcrcAccount, parsePrincipalAndSub, splitAccount, type IcpRecipient } from "../icp/accounts";
-import { NETS } from "../evm/chains";
-import { isUserRejection, sendEvmToken } from "../evm/send";
+import { NETS, txUrl } from "../evm/chains";
+import { TxReplaced, confirmed, isUserRejection, sendEvmToken } from "../evm/send";
 import { fmt, parseUnits, toNumber } from "../lib/format";
 import { useCopy, useIsPhone } from "../lib/ui";
 import { Dialog, Pending } from "../shell/Dialog";
@@ -18,7 +19,9 @@ import { NET_INFO, SYM_INFO, decimalsOf, priceOf, type WalletData, type WalletTo
 
 type Fungible = Exclude<WalletToken, { kind: "nft" }>;
 type Recipient = { kind: "icp"; to: IcpRecipient } | { kind: "evm"; to: Address };
-type Status = "idle" | "pending" | "error" | "success";
+/** Where a confirmed transfer stands. `sent`: an EVM transaction went out but its block was not
+ * seen, so it must not be sent again. */
+type Status = "idle" | "pending" | "error" | "success" | "sent";
 
 /** The layout classes of the desktop dialog and of the phone board's. */
 const DESK = {
@@ -88,7 +91,9 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
   const phone = useIsPhone();
   const L = phone ? PHONE : DESK;
   const [tab, setTab] = useState<"send" | "receive">("send");
-  const [confirm, setConfirm] = useState<{ to: Recipient; send: bigint } | null>(null);
+  // `createdAt` stamps the ICP transfer, so a Retry of the same confirm is deduplicated by the ledger.
+  const [confirm, setConfirm] = useState<{ to: Recipient; send: bigint; createdAt: bigint } | null>(null);
+  const [sentHash, setSentHash] = useState<Hash | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [mode, setMode] = useState<"icrc" | "pa">("icrc");
   const [rcp, setRcp] = useState("");
@@ -113,8 +118,9 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
     if (!icp) {
       const v = rcp.trim();
       if (v === "") return { ok: null, err: rcpTouched ? "Ethereum address is required" : "" };
-      return isAddress(v, { strict: false })
-        ? { ok: { kind: "evm", to: v }, err: "" }
+      const a = /^0x[0-9A-F]{40}$/.test(v) ? v.toLowerCase() : v;
+      return isAddress(a)
+        ? { ok: { kind: "evm", to: a }, err: "" }
         : { ok: null, err: rcpTouched ? "Invalid Ethereum address" : "" };
     }
     const allowsId = t.sym === "ICP";
@@ -180,35 +186,65 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
     }
   };
 
-  const run = async (c: { to: Recipient; send: bigint }) => {
+  const refresh = () =>
+    queryClient.invalidateQueries({
+      predicate: (q) =>
+        ["icp-balance", "icp-history", "evm-balances", "evm-history", "explorer-wallet"].includes(String(q.queryKey[0])),
+    });
+
+  const run = async (c: { to: Recipient; send: bigint; createdAt: bigint }) => {
     setStatus("pending");
+    if (c.to.kind === "evm" && !icp) {
+      let hash: Hash;
+      try {
+        hash = await sendEvmToken(t.token, c.to.to, c.send);
+      } catch (e) {
+        setStatus(isUserRejection(e) ? "idle" : "error");
+        if (!isUserRejection(e)) console.error("Transfer failed", e);
+        return;
+      }
+      setSentHash(hash);
+      try {
+        await confirmed(t.token.net, hash);
+        setStatus("success");
+      } catch (e) {
+        // Sent: never offer to send it again.
+        console.error("Waiting for the transfer failed", e);
+        setStatus(e instanceof TxReplaced ? "error" : "sent");
+      } finally {
+        await refresh();
+      }
+      return;
+    }
     try {
       if (c.to.kind === "icp" && icp) {
         if (data.icp?.kind !== "signedIn") throw new Error("not signed in");
         const to = c.to.to;
         if (to.kind === "accountId") {
           const l = LedgerCanister.create({ agent: data.icp.signer, canisterId: Principal.fromText(ICP_LEDGER_CANISTER_ID) });
-          await l.transfer({ to: to.id, amount: c.send });
+          await l.transfer({ to: to.id, amount: c.send, createdAt: c.createdAt });
         } else {
           await ledger(data.icp.signer, t.sym).transfer({
             to: { owner: to.owner, subaccount: to.subaccount ? [to.subaccount] : [] },
             amount: c.send,
+            created_at_time: c.createdAt,
           });
         }
-      } else if (c.to.kind === "evm" && !icp) {
-        await sendEvmToken(t.token, c.to.to, c.send);
       }
       setStatus("success");
-      await queryClient.invalidateQueries({
-        predicate: (q) => ["icp-balance", "icp-history", "evm-balances", "evm-history"].includes(String(q.queryKey[0])),
-      });
     } catch (e) {
-      if (isUserRejection(e)) {
-        setStatus("idle");
-        return;
+      // The ledger already took this exact transfer (a Retry after an unclear failure).
+      const duplicate =
+        e instanceof TxDuplicateError ||
+        (e instanceof IcrcTransferError && typeof e.errorType === "object" && e.errorType !== null && "Duplicate" in e.errorType);
+      if (duplicate) setStatus("success");
+      else if (isUserRejection(e)) setStatus("idle");
+      else {
+        console.error("Transfer failed", e);
+        setStatus("error");
       }
-      console.error("Transfer failed", e);
-      setStatus("error");
+    } finally {
+      await refresh();
     }
   };
 
@@ -390,7 +426,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                     disabled={bal === null || isEth || (fee !== null ? bal < fee : bal <= 0n)}
                     onClick={() => {
                       if (bal === null) return;
-                      setAmt(String(n(fee !== null ? bal - fee : bal)));
+                      setAmt(formatUnits(fee !== null ? bal - fee : bal, dec));
                       setAmtTouched(true);
                     }}
                   >
@@ -433,7 +469,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
               onClick={() => {
                 if (recipient.ok && amount.send !== null) {
                   setStatus("idle");
-                  setConfirm({ to: recipient.ok, send: amount.send });
+                  setConfirm({ to: recipient.ok, send: amount.send, createdAt: BigInt(Date.now()) * 1_000_000n });
                 }
               }}
             >
@@ -497,6 +533,30 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
       {tab === "send" && confirm && status === "pending" && <Pending label="Transfer" />}
       {tab === "send" && confirm && (status === "error" || status === "success") && (
         <Result ok={status === "success"} onRetry={() => run(confirm)} onClose={onClose} L={L} />
+      )}
+      {tab === "send" && confirm && status === "sent" && sentHash && !icp && (
+        <div className={L.res}>
+          <div className={L.resh}>
+            <div className={L.mb16}>
+              <div className="stbox">
+                <div className="spin" />
+              </div>
+            </div>
+            <div>Transfer has been</div>
+            <div className="gold">sent</div>
+          </div>
+          <div className={`c60 t14 ${L.mb16}`}>
+            It is not in a block yet.{" "}
+            <a className="gold" href={txUrl(t.token.net, sentHash)} target="_blank" rel="noopener noreferrer">
+              Follow it on {NETS[t.token.net].scanName}
+            </a>
+          </div>
+          <div className={L.resb}>
+            <button type="button" className="btn" onClick={onClose}>
+              Back to wallet
+            </button>
+          </div>
+        </div>
       )}
     </Dialog>
   );

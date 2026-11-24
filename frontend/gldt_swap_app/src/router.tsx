@@ -7,6 +7,7 @@ import {
 
 import Layout from "@components/shared/Layout";
 import NotFound from "@components/shared/routes/NotFound";
+import RouteError from "@components/shared/routes/RouteError";
 
 import Home from "features/home";
 import { ExplorerAccountRedirect, ExplorerBlockRedirect } from "./app/explorer/redirects";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
         <AppLayout />
       </Suspense>
     ),
+    errorElement: <RouteError />,
     children: [
       {
         path: "wallet",
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <RouteError />,
     children: [
       {
         index: true,

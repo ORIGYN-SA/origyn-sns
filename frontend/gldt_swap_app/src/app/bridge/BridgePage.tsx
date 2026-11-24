@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { isAddress, type Address } from "viem";
+import { formatUnits, isAddress, type Address, type Hash } from "viem";
 
 import "../styles/bridge.css";
 import "../styles/wallet.css";
@@ -10,7 +10,7 @@ import { useAuth } from "@auth/index";
 import { ArrowDown, Chevron, CopySm, NavBridge } from "../icons";
 import type { Operation } from "../data/api";
 import type { EvmNet } from "../evm/chains";
-import { confirmed, isUserRejection } from "../evm/send";
+import { TxReplaced, confirmed, isUserRejection } from "../evm/send";
 import { parseIcrcAccount } from "../icp/accounts";
 import { fmt, parseUnits, shortDate, toNumber } from "../lib/format";
 import { useCopy, useIsPhone, useToast } from "../lib/ui";
@@ -31,7 +31,8 @@ const MIN_TO_ICP = 100_000_000n;
 type Dlg =
   | { kind: "none" }
   | { kind: "confirm" }
-  | { kind: "details"; from: BridgeNet; to: BridgeNet; opId: string | null; local: StepState[]; nft: boolean }
+  // `run` is the start() that opened it, or 0 for a transfer of the list.
+  | { kind: "details"; run: number; from: BridgeNet; to: BridgeNet; opId: string | null; local: StepState[]; nft: boolean }
   | { kind: "claim"; op: Operation };
 
 const NetPicker = ({
@@ -107,6 +108,7 @@ const BridgePage = () => {
   const [rc, setRc] = useState("");
   const [sel, setSel] = useState<"from" | "to" | null>(null);
   const [dlg, setDlg] = useState<Dlg>({ kind: "none" });
+  const runs = useRef(0);
   // From the Internet Computer the transfer can be paid with GLD NFTs instead of GLDT.
   const [pay, setPay] = useState<"gldt" | "nft">("gldt");
   const [nfts, setNfts] = useState<Selection>(NONE);
@@ -181,7 +183,9 @@ const BridgePage = () => {
   // The recipient: a principal or account on ICP, an address on Ethereum and Base.
   const rcT = rc.trim();
   const icpTo = to === "icp" ? parseIcrcAccount(rcT) : null;
-  const evmTo: Address | null = to !== "icp" && isAddress(rcT, { strict: false }) ? rcT : null;
+  // Mixed case must carry a valid EIP-55 checksum, so a typo is caught; all caps reads as lowercase.
+  const rcAddr = /^0x[0-9A-F]{40}$/.test(rcT) ? rcT.toLowerCase() : rcT;
+  const evmTo: Address | null = to !== "icp" && isAddress(rcAddr) ? rcAddr : null;
   const rOk = to === "icp" ? icpTo !== null : evmTo !== null;
   const rErr = rcT !== "" && !rOk ? (to === "icp" ? "Invalid Principal ID" : "Invalid Ethereum address") : "";
 
@@ -230,44 +234,67 @@ const BridgePage = () => {
     const f = from;
     const t = to;
     const n = t === "icp" && f !== "icp" ? 4 : f === "icp" ? 4 : 3;
-    const local: StepState[] = Array.from({ length: n }, (_, i) => (i === 0 ? "pend" : "idle"));
     const nftRoute = byNft;
     const chosen = nfts;
-    const show = (opId: string | null, l: StepState[]) => setDlg({ kind: "details", from: f, to: t, opId, local: l, nft: nftRoute });
-    show(null, local);
-    setAmt("");
-    setRc("");
-    setNfts(NONE);
+    const run = ++runs.current;
+    let sent = false;
+    // A step of this transfer updates its details only while they are still on screen: the user
+    // may have closed them or opened another transfer's.
+    const mine = (d: Dlg) => (d.kind === "details" && d.run === run) || (d.kind === "confirm" && !sent);
+    const show = (opId: string | null, l: StepState[]) =>
+      setDlg((d) => (mine(d) ? { kind: "details", run, from: f, to: t, opId, local: l, nft: nftRoute } : d));
+    const clearForm = () => {
+      sent = true;
+      setAmt("");
+      setRc("");
+      setNfts(NONE);
+    };
+    show(null, Array.from({ length: n }, (_, i) => (i === 0 ? "pend" : "idle")));
     try {
       if (nftRoute) {
         if (data.icp?.kind !== "signedIn" || !evmTo || t === "icp") return;
-        const out = await bridgeNftsToEvm(data.icp.signer, t, evmTo, chosen, () => show(null, ["ok", "pend", "idle", "idle"]));
+        const out = await bridgeNftsToEvm(data.icp.signer, t, evmTo, chosen, () => {
+          clearForm();
+          show(null, ["ok", "pend", "idle", "idle"]);
+        });
         show(`out-${out.id}`, ["ok", "ok", "pend", "idle"]);
       } else if (f === "icp") {
         if (data.icp?.kind !== "signedIn" || !evmTo || t === "icp") return;
-        const out = await bridgeToEvm(data.icp.signer, t, evmTo, a, () => show(null, ["ok", "pend", "idle", "idle"]));
+        const out = await bridgeToEvm(data.icp.signer, t, evmTo, a, () => {
+          clearForm();
+          show(null, ["ok", "pend", "idle", "idle"]);
+        });
         show(`out-${out.id}`, ["ok", "ok", "pend", "idle"]);
-      } else if (t === "icp") {
-        if (!icpTo || icpTo.kind !== "icrc") return;
-        const hash = await burnToIcp(f, a, icpTo.owner, icpTo.subaccount);
-        show(null, ["ok", "pend", "idle", "idle"]);
-        await confirmed(f, hash);
-        show(await opIdOfEvmTx(f, hash), ["ok", "ok", "pend", "idle"]);
       } else {
-        if (!evmTo || !evm) return;
-        const hash = await sendLayerZero(f, t, evmTo, a, evm);
-        show(null, ["ok", "pend", "idle"]);
-        await confirmed(f, hash);
-        show(await opIdOfEvmTx(f, hash), ["ok", "ok", "pend"]);
+        let hash: Hash;
+        if (t === "icp") {
+          if (icpTo?.kind !== "icrc") return;
+          hash = await burnToIcp(f, a, icpTo.owner, icpTo.subaccount);
+        } else {
+          if (!evmTo || !evm) return;
+          hash = await sendLayerZero(f, t, evmTo, a, evm);
+        }
+        clearForm();
+        show(null, t === "icp" ? ["ok", "pend", "idle", "idle"] : ["ok", "pend", "idle"]);
+        try {
+          const receipt = await confirmed(f, hash);
+          show(opIdOfEvmTx(f, receipt), t === "icp" ? ["ok", "ok", "pend", "idle"] : ["ok", "ok", "pend"]);
+        } catch (e) {
+          // The transaction was sent: whatever went wrong while waiting, it must not be sent again.
+          console.error("Waiting for the bridge transaction failed", e);
+          toast(
+            e instanceof TxReplaced
+              ? "The transaction was cancelled in your wallet."
+              : "Your transaction was sent. It shows in Transactions once it is in a block."
+          );
+          setDlg((d) => (mine(d) ? { kind: "none" } : d));
+        }
       }
     } catch (e) {
-      if (isUserRejection(e)) {
-        setDlg({ kind: "none" });
-        return;
-      }
+      setDlg((d) => (mine(d) ? { kind: "none" } : d));
+      if (!sent && isUserRejection(e)) return;
       console.error("Bridge failed", e);
-      toast("The bridge transfer did not go through. Nothing more was taken.");
-      setDlg({ kind: "none" });
+      toast(sent ? "The bridge transfer did not finish. Check Transactions before trying again." : "The bridge transfer did not go through. Nothing was taken.");
     } finally {
       await refresh();
     }
@@ -479,7 +506,8 @@ const BridgePage = () => {
                                 aria-label="Amount"
                                 value={amt}
                                 onChange={(e) => {
-                                  let v = e.target.value.replace(/[^0-9.]/g, "");
+                                  // A comma is the decimal point, as in 1,5.
+                                  let v = e.target.value.replace(/,/g, ".").replace(/[^0-9.]/g, "");
                                   const i = v.indexOf(".");
                                   if (i >= 0) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/[.]/g, "");
                                   setAmt(v);
@@ -495,7 +523,7 @@ const BridgePage = () => {
                                 type="button"
                                 className="maxb"
                                 disabled={fromBal === null || (from === "icp" ? fromBal < ICP_FEE : fromBal <= 0n)}
-                                onClick={() => fromBal !== null && setAmt(String(toNumber(from === "icp" ? fromBal - ICP_FEE : fromBal, 8)))}
+                                onClick={() => fromBal !== null && setAmt(formatUnits(from === "icp" ? fromBal - ICP_FEE : fromBal, 8))}
                               >
                                 Max
                               </button>
@@ -618,7 +646,7 @@ const BridgePage = () => {
                       const open = () =>
                         t.step === "awaiting_claim"
                           ? setDlg({ kind: "claim", op: t })
-                          : setDlg({ kind: "details", from: t.from_chain, to: t.to_chain, opId: t.id, local: [], nft: t.kind === "nft_to_evm" });
+                          : setDlg({ kind: "details", run: 0, from: t.from_chain, to: t.to_chain, opId: t.id, local: [], nft: t.kind === "nft_to_evm" });
                       const usd = price === null ? "" : "$" + fmt(toNumber(t.amount, 8) * price);
                       const icon = (
                         <div className="kic">

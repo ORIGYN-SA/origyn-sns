@@ -94,7 +94,7 @@ export const IcpAccount = ({ onTransfer }: { onTransfer: () => void }) => {
               <Link
                 className="mi"
                 role="menuitem"
-                to={`/explorer?q=${encodeURIComponent(principalId)}`}
+                to={`/explorer?w=${encodeURIComponent(principalId)}`}
                 onClick={menu.close}
               >
                 <External />

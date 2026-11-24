@@ -1,3 +1,4 @@
+import { Buffer } from "buffer";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
@@ -21,6 +22,9 @@ import {
 
 import { idlFactory as gld_nft_idl } from "@canisters/gld_nft/did";
 import { idlFactory as ledger_idl } from "@canisters/ledger/did";
+
+// @dfinity/ledger-icp's AccountIdentifier reads a global Buffer, which browsers do not have.
+if (!("Buffer" in globalThis)) Object.assign(globalThis, { Buffer });
 
 const queryClient = new QueryClient();
 

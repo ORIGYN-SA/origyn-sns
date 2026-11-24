@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { atom, useSetAtom } from "jotai";
+import { atom, useAtom, useSetAtom } from "jotai";
 
 /** Below this width the app uses its phone layout, as app.gold-dao.org does (Tailwind's xl). */
 const PHONE_QUERY = "(max-width: 1279px)";
@@ -28,18 +28,24 @@ const readTheme = (): ThemeChoice => {
   return "system";
 };
 
+// One choice for the whole app: the footer's switch and the root that applies it share it.
+const themeAtom = atom<ThemeChoice>(readTheme());
+
 /** The theme the viewer picked in the footer, and the one that applies. */
 export const useTheme = () => {
-  const [choice, setChoice] = useState<ThemeChoice>(readTheme);
+  const [choice, setChoice] = useAtom(themeAtom);
   const systemDark = useMedia("(prefers-color-scheme: dark)");
-  const pick = useCallback((c: ThemeChoice) => {
-    setChoice(c);
-    try {
-      localStorage.setItem(THEME_KEY, c);
-    } catch {
-      // Not remembered, but still applied.
-    }
-  }, []);
+  const pick = useCallback(
+    (c: ThemeChoice) => {
+      setChoice(c);
+      try {
+        localStorage.setItem(THEME_KEY, c);
+      } catch {
+        // Not remembered, but still applied.
+      }
+    },
+    [setChoice]
+  );
   const applied: "light" | "dark" = choice === "system" ? (systemDark ? "dark" : "light") : choice;
   return { choice, applied, pick };
 };

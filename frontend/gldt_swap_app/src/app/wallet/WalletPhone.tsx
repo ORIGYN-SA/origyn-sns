@@ -314,7 +314,7 @@ const NftTxCards = ({ c, me, goldUsd }: { c: Collection; me: string; goldUsd: nu
         return (
           <TxCard
             key={String(r.id)}
-            kind="Transfer"
+            kind={r.kind}
             from={r.from}
             to={r.to}
             at={r.at}

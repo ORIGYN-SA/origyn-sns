@@ -5,6 +5,7 @@ import {
   useAuth,
   useIsInitializing,
   useAgent,
+  useIdentity,
 } from "@amerej/identitykit/react";
 import { useAtom, useSetAtom } from "jotai";
 import { useQueryClient } from "@tanstack/react-query";
@@ -31,10 +32,19 @@ const AuthProviderInit = ({
   canisters: Canisters;
   children: ReactNode;
 }) => {
-  const { user } = useAuth();
+  const { user, disconnect } = useAuth();
   const isInitializing = useIsInitializing();
   const authenticatedAgent = useAgent({ host: HOST });
+  const identity = useIdentity();
   const [state, setState] = useAtom(stateAtom);
+  // A delegation that ran out (Internet Identity, NFID: one week) comes back as the stored user with
+  // an anonymous identity; every call would then run as the anonymous principal. OISY has no
+  // identity here and is not affected.
+  const expired = !isInitializing && !!user && !!identity && identity.getPrincipal().isAnonymous();
+
+  useEffect(() => {
+    if (expired) void disconnect();
+  }, [expired, disconnect]);
 
   useEffect(() => {
     let live = true;
@@ -50,7 +60,7 @@ const AuthProviderInit = ({
 
   useEffect(() => {
     setState((s) =>
-      user && authenticatedAgent
+      user && authenticatedAgent && !expired
         ? {
             ...s,
             principalId: user.principal.toText(),
@@ -66,7 +76,7 @@ const AuthProviderInit = ({
             authenticatedAgent: undefined,
           }
     );
-  }, [user, authenticatedAgent, isInitializing, setState]);
+  }, [user, authenticatedAgent, expired, isInitializing, setState]);
 
   if (!state.unauthenticatedAgent) {
     return (

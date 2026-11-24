@@ -24,7 +24,9 @@ export const EvmConnectDialog = () => {
     const connector = connectors.find((c) =>
       which === "browser" ? c.type === injected.type : c.type === walletConnect.type
     );
-    if (!connector) {
+    // The injected connector exists even with no wallet installed; only a provider makes it work.
+    const noBrowserWallet = which === "browser" && !("ethereum" in window);
+    if (!connector || noBrowserWallet) {
       toast(
         which === "browser"
           ? "No browser wallet found. Install MetaMask, Rabby or Coinbase Wallet."

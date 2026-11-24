@@ -115,7 +115,9 @@ export const SwapDialog = ({
         set({ swap: "ok" });
       } catch (e) {
         console.error("Swap failed", e);
-        set({ swap: "bad" });
+        // gldt_swap takes its fee before the burn, so a failed burn leaves the GLDT allowance short:
+        // a Retry approves again.
+        set(mode === "burn" ? { swap: "bad", approve: "idle" } : { swap: "bad" });
       } finally {
         await queryClient.invalidateQueries({
           predicate: (q) => ["icp-balance", "icp-history", "nft-holdings", "nft-history", "swap-stock"].includes(String(q.queryKey[0])),
@@ -132,12 +134,15 @@ export const SwapDialog = ({
     setStep("details");
   };
 
-  // Each collection runs on its own, once the details step shows it.
+  // The collections run one after another once the details step shows them: an ICRC-2 approve
+  // replaces the allowance, so a Burn of one collection must finish before the next approves.
   const [started, setStarted] = useState(false);
   useEffect(() => {
     if (step !== "details" || started) return;
     setStarted(true);
-    jobs.forEach((j) => void runJob(j));
+    void (async () => {
+      for (const j of jobs) await runJob(j);
+    })();
   }, [step, started, jobs, runJob]);
 
   const aria = mode === "burn" ? "Burn" : "Mint";
@@ -149,7 +154,8 @@ export const SwapDialog = ({
           <div>
             <div className="w-dgrid">
               {jobs.map((j) => {
-                const st = j.approve !== "ok" ? j.approve : j.swap;
+                const swapping = j.approve === "ok" || j.swap === "bad";
+                const st = j.swap === "bad" ? "bad" : j.approve !== "ok" ? j.approve : j.swap;
                 return (
                   <div key={j.c.key} className="w-dcol">
                     <div className="w-dct">{j.c.label} collection</div>
@@ -161,7 +167,7 @@ export const SwapDialog = ({
                               <JobIcon st={st} />
                             </div>
                           </div>
-                          <div>{j.approve !== "ok" ? "Approve" : mode === "burn" ? "Burning" : "Minting"}</div>
+                          <div>{!swapping ? "Approve" : mode === "burn" ? "Burning" : "Minting"}</div>
                         </div>
                         {st === "bad" && (
                           <div>

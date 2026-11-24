@@ -77,11 +77,11 @@ const NftTxs = ({ c, me, goldUsd }: { c: Collection; me: string; goldUsd: number
             <div className="txg w-txk">
               <div className="kic">
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d={kindIcon("Transfer", r.to === me)} />
+                  <path strokeLinecap="round" strokeLinejoin="round" d={kindIcon(r.kind, r.to === me)} />
                 </svg>
               </div>
               <div className="txb">
-                <div className="txk">Transfer</div>
+                <div className="txk">{r.kind}</div>
                 <div className="txs">
                   <span className="txd">{shortDate(r.at)}</span>
                 </div>

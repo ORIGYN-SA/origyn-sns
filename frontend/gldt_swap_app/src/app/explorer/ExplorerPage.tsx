@@ -55,7 +55,9 @@ const ExplorerPage = () => {
   const dark = useMedia("(prefers-color-scheme: dark)");
   const copy = useCopy();
   const [params, setParams] = useSearchParams();
-  const tab: Tab = params.get("tab") === "holders" ? "holders" : params.get("tab") === "info" ? "info" : "tx";
+  // "top_holders" is the old explorer's name for the holders tab.
+  const tabParam = params.get("tab");
+  const tab: Tab = tabParam === "holders" || tabParam === "top_holders" ? "holders" : tabParam === "info" ? "info" : "tx";
   const chips = (params.get("w") ?? "").split(",").filter(Boolean);
   const q = params.get("q") ?? "";
   const kind = (KINDS.find((k) => k.key === params.get("kind"))?.key ?? "all") as KindKey;
@@ -86,7 +88,8 @@ const ExplorerPage = () => {
   const stats = useQuery({ queryKey: ["explorer-stats"], queryFn: fetchExplorerStats, staleTime: 30_000, retry: false }).data;
 
   const filter = filterOf(kind, sub);
-  const limit = phone ? 20 * more : per;
+  // The API serves at most 100 rows a page; on phones the list grows to that.
+  const limit = phone ? Math.min(100, 20 * more) : per;
   const offset = phone ? 0 : page * per;
   const feed = useQuery({
     queryKey: ["explorer", q, chips.join(","), kind, sub, offset, limit],
@@ -367,7 +370,7 @@ const ExplorerPage = () => {
                     )}
                     {phone ? (
                       <div className="ex-more">
-                        {rows.length < total && (
+                        {rows.length < total && rows.length < 100 && (
                           <button type="button" className="ex-btn ol block" onClick={() => setMore((m) => m + 1)}>
                             Load more
                           </button>
@@ -458,7 +461,14 @@ const Row = ({ op, now, usdOf, onOpen, onWallet }: { op: Operation; now: number;
       <div className="ex-act">
         <Avatars op={op} usdOf={usdOf} />
         <div className="ex-at">
-          <button type="button" className="ex-rt" onClick={onOpen}>
+          <button
+            type="button"
+            className="ex-rt"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpen();
+            }}
+          >
             {L.title}
           </button>
           <div className="ex-rs">{L.sub}</div>
@@ -500,7 +510,14 @@ const Card = ({ op, now, usdOf, onOpen }: { op: Operation; now: number; usdOf: (
       <div className="ex-cl2">
         <Avatars op={op} usdOf={usdOf} />
         <div className="ex-ct">
-          <button type="button" className="ex-rt" onClick={onOpen}>
+          <button
+            type="button"
+            className="ex-rt"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpen();
+            }}
+          >
             {L.card}
           </button>
           <div className="ex-rs">{L.amt}</div>

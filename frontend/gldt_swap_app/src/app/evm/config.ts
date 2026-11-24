@@ -1,4 +1,4 @@
-import { createConfig, fallback, unstable_connector, type Config, type Transport } from "wagmi";
+import { createConfig, fallback, http, unstable_connector, type Config, type Transport } from "wagmi";
 import { injected, walletConnect } from "wagmi/connectors";
 import { base, mainnet } from "viem/chains";
 
@@ -25,20 +25,26 @@ const connectors = [
     : []),
 ];
 
-// Reads go through the connected wallet's own provider: balances and history come from
-// api.gldt.org, so the app only reads a chain while the user signs something there.
-const viaWallet = () =>
+// Reads go through the connected wallet's own provider, then Reown's RPC (which the CSP allows):
+// balances and history come from api.gldt.org, so the app only reads a chain while the user signs
+// something there, such as a transaction's receipt.
+const viaWallet = (chainId: number) =>
   fallback([
     unstable_connector(injected),
-    ...(WALLETCONNECT_READY ? [unstable_connector(walletConnect)] : []),
+    ...(WALLETCONNECT_READY
+      ? [
+          unstable_connector(walletConnect),
+          http(`https://rpc.walletconnect.org/v1/?chainId=eip155:${chainId}&projectId=${REOWN_PROJECT_ID}`),
+        ]
+      : []),
   ]);
 
 export const wagmiConfig: Config<readonly [typeof mainnet, typeof base], Record<typeof mainnet.id | typeof base.id, Transport>> = createConfig({
   chains: [mainnet, base],
   connectors,
   transports: {
-    [mainnet.id]: viaWallet(),
-    [base.id]: viaWallet(),
+    [mainnet.id]: viaWallet(mainnet.id),
+    [base.id]: viaWallet(base.id),
   },
 });
 

@@ -1,4 +1,4 @@
-import { AccountIdentifier } from "@dfinity/ledger-icp";
+import { AccountIdentifier, checkAccountId } from "@dfinity/ledger-icp";
 import { decodeIcrcAccount, encodeIcrcAccount } from "@dfinity/ledger-icrc";
 import { Principal } from "@dfinity/principal";
 
@@ -25,8 +25,8 @@ export const parseAccountId = (text: string): IcpRecipient | null => {
   const t = text.trim().toLowerCase();
   if (!/^[0-9a-f]{64}$/.test(t)) return null;
   try {
-    const id = AccountIdentifier.fromHex(t);
-    return id.toHex() === t ? { kind: "accountId", id, text: t } : null;
+    checkAccountId(t);
+    return { kind: "accountId", id: AccountIdentifier.fromHex(t), text: t };
   } catch {
     return null;
   }

@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { decodeEventLog, keccak256, toBytes, type Hash } from "viem";
-import { waitForTransactionReceipt } from "wagmi/actions";
+import { decodeEventLog, keccak256, toBytes, type TransactionReceipt } from "viem";
 
 import { fetchBridgeOperation, fetchBridgeOperations, type Operation, type OperationDetails } from "../data/api";
 import { gldtBridgeAbi } from "../evm/abi";
-import { GLDT_TOKEN, NETS, type EvmNet } from "../evm/chains";
-import { wagmiConfig } from "../evm/config";
+import { GLDT_TOKEN, type EvmNet } from "../evm/chains";
 import type { BridgeNet } from "./calls";
 
 export const netOf = (chain: Operation["from_chain"]): BridgeNet => chain;
@@ -46,10 +44,9 @@ export const useBridgeOperation = (id: string | null) =>
 /** LayerZero's OFTSent event: its first indexed topic is the message GUID. */
 const OFT_SENT_TOPIC = keccak256(toBytes("OFTSent(bytes32,uint32,address,uint256,uint256)"));
 
-/** The bridge API's id of a transfer started on an EVM chain, read from its transaction's logs:
+/** The bridge API's id of a transfer started on an EVM chain, read from its receipt's logs:
  * `in-<chain>-<burn id>` for a burn to ICP, `lz-<guid>` for a LayerZero send. */
-export const opIdOfEvmTx = async (net: EvmNet, hash: Hash): Promise<string | null> => {
-  const receipt = await waitForTransactionReceipt(wagmiConfig, { chainId: NETS[net].chainId, hash });
+export const opIdOfEvmTx = (net: EvmNet, receipt: TransactionReceipt): string | null => {
   for (const log of receipt.logs) {
     if (log.address.toLowerCase() !== GLDT_TOKEN.toLowerCase()) continue;
     try {

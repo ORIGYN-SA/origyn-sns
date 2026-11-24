@@ -13,7 +13,11 @@ export const toNumber = (units: bigint, decimals: number): number => {
 /** Parses a decimal string typed by the user into the token's smallest unit, or null when it is not
  * a plain positive decimal with at most `decimals` fraction digits. */
 export const parseUnits = (text: string, decimals: number): bigint | null => {
-  const t = text.trim().replace(/,/g, "");
+  const raw = text.trim();
+  // A single comma is a decimal point (1,5 is 1.5), never a thousands separator.
+  const commas = (raw.match(/,/g) ?? []).length;
+  if (commas > 1 || (commas === 1 && raw.includes("."))) return null;
+  const t = raw.replace(",", ".");
   if (!/^\d*\.?\d*$/.test(t) || t === "" || t === ".") return null;
   const [int, frac = ""] = t.split(".");
   if (frac.length > decimals) return null;

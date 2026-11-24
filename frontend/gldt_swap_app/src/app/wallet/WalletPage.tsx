@@ -102,7 +102,8 @@ const WalletPage = () => {
   // A token of a network that disconnected is not shown any more: back to GLDT.
   useEffect(() => {
     if (selected.kind === "evm" && !data.evmAddress) setSelected(GLDT_ICP);
-  }, [selected, data.evmAddress]);
+    if (selected.kind === "nft" && !data.icpIn) setSelected(GLDT_ICP);
+  }, [selected, data.evmAddress, data.icpIn]);
 
   const onConnect = (net: "icp" | "ethereum" | "base") => {
     if (net === "icp") login();
@@ -120,9 +121,9 @@ const WalletPage = () => {
     </>
   );
 
-  if (phone) {
-    return (
-      <>
+  return (
+    <>
+      {phone ? (
         <WalletPhone
           data={data}
           selected={selected}
@@ -134,47 +135,44 @@ const WalletPage = () => {
           onOpenNft={(collection, id) => setDialog({ kind: "nft", collection, id })}
           onConnect={onConnect}
         />
-        {dialogs}
-      </>
-    );
-  }
-
-  return (
-    <div className="inner">
-      <section className="lp" aria-label="Wallet">
-        <div className="t60 f6 gold">Wallet</div>
-        <div>
-          <TokenList data={data} selected={selected} onPick={setSelected} onConnect={onConnect} />
+      ) : (
+        <div className="inner">
+          <section className="lp" aria-label="Wallet">
+            <div className="t60 f6 gold">Wallet</div>
+            <div>
+              <TokenList data={data} selected={selected} onPick={setSelected} onConnect={onConnect} />
+            </div>
+            {!data.icpIn && (
+              <div className="lpconn">
+                <button type="button" className="btn block" onClick={() => onConnect("icp")}>
+                  Connect Wallet
+                </button>
+              </div>
+            )}
+          </section>
+          <section className="rp" aria-label="Token">
+            {selected.kind === "nft" ? (
+              <NftView
+                data={data}
+                onTransfer={() => setDialog({ kind: "nftTransfer" })}
+                onMint={() => setDialog({ kind: "swap", mode: "mint" })}
+                onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
+                onOpen={(collection, id) => setDialog({ kind: "nft", collection, id })}
+              />
+            ) : (
+              <TokenPanel
+                t={selected}
+                data={data}
+                tx={tx}
+                onTransfer={() => setDialog({ kind: "transfer", token: selected })}
+                onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
+              />
+            )}
+          </section>
         </div>
-        {!data.icpIn && (
-          <div className="lpconn">
-            <button type="button" className="btn block" onClick={() => onConnect("icp")}>
-              Connect Wallet
-            </button>
-          </div>
-        )}
-      </section>
-      <section className="rp" aria-label="Token">
-        {selected.kind === "nft" ? (
-          <NftView
-            data={data}
-            onTransfer={() => setDialog({ kind: "nftTransfer" })}
-            onMint={() => setDialog({ kind: "swap", mode: "mint" })}
-            onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
-            onOpen={(collection, id) => setDialog({ kind: "nft", collection, id })}
-          />
-        ) : (
-          <TokenPanel
-            t={selected}
-            data={data}
-            tx={tx}
-            onTransfer={() => setDialog({ kind: "transfer", token: selected })}
-            onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
-          />
-        )}
-      </section>
+      )}
       {dialogs}
-    </div>
+    </>
   );
 };
 

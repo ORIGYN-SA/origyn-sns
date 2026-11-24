@@ -161,13 +161,15 @@ export const useNftHoldings = () => {
     staleTime: FRESH_MS,
     queryFn: async () => {
       if (!s) throw new Error("not signed in");
-      const lists = await Promise.all(COLLECTIONS.map((c) => tokensOf(s, c)));
+      // One collection that cannot be read does not hide the NFTs of the others.
+      const lists = await Promise.all(COLLECTIONS.map((c) => tokensOf(s, c).catch((): bigint[] => [])));
       return Object.fromEntries(COLLECTIONS.map((c, i) => [c.key, lists[i]])) as Record<CollectionKey, bigint[]>;
     },
   });
 };
 
-export type NftTx = { id: bigint; nft: bigint; from: string | null; to: string | null; at: number };
+/** One GLD NFT block of an account: a transfer, or the NFT minted to it or burned. */
+export type NftTx = { id: bigint; kind: "Transfer" | "Mint" | "Burn"; nft: bigint; from: string | null; to: string | null; at: number };
 
 /** The signed-in principal's NFT transfers in one collection, newest first, from its block indexer. */
 export const useNftHistory = (c: Collection) => {
@@ -203,8 +205,10 @@ const field = (v: Icrc3Value, key: string): Icrc3Value | undefined =>
 const nat = (v: Icrc3Value | undefined): bigint | undefined =>
   v && "Nat" in v ? v.Nat : v && "Nat64" in v ? v.Nat64 : v && "Int" in v ? v.Int : undefined;
 
-/** An ICRC-3 account value ([owner blob, subaccount blob?]) as account text. */
+/** An account in a block: principal text (as the GLD NFT indexers write it), or the ICRC-3
+ * [owner blob, subaccount blob?] array. */
 const accountOf = (v: Icrc3Value | undefined): string | null => {
+  if (v && "Text" in v) return v.Text;
   if (!v || !("Array" in v)) return null;
   const [owner, sub] = v.Array;
   if (!owner || !("Blob" in owner)) return null;
@@ -213,12 +217,17 @@ const accountOf = (v: Icrc3Value | undefined): string | null => {
   return encodeIcrcAccount({ owner: principal, subaccount });
 };
 
-/** An ICRC-7 transfer, mint or burn block of the collection, or nothing for other blocks. */
+const KINDS: Record<string, NftTx["kind"]> = { "7xfer": "Transfer", "7mint": "Mint", "7burn": "Burn" };
+
+/** An ICRC-7 transfer, mint or burn block of the collection; approvals and metadata updates are
+ * left out. */
 const parseNftBlock = (id: bigint, block: Icrc3Value): NftTx[] => {
   const tx = field(block, "tx");
-  if (!tx) return [];
+  const btype = field(block, "btype");
+  const kind = btype && "Text" in btype ? KINDS[btype.Text] : undefined;
+  if (!tx || !kind) return [];
   const nft = nat(field(tx, "tid"));
-  const at = nat(field(block, "ts")) ?? nat(field(tx, "ts"));
+  const at = nat(field(block, "timestamp")) ?? nat(field(block, "ts")) ?? nat(field(tx, "created_at_time"));
   if (nft === undefined || at === undefined) return [];
-  return [{ id, nft, from: accountOf(field(tx, "from")), to: accountOf(field(tx, "to")), at: nanosToMs(at) }];
+  return [{ id, kind, nft, from: accountOf(field(tx, "from")), to: accountOf(field(tx, "to")), at: nanosToMs(at) }];
 };
