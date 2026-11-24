@@ -49,7 +49,7 @@ const OFT_SENT_TOPIC = keccak256(toBytes("OFTSent(bytes32,uint32,address,uint256
 /** The bridge API's id of a transfer started on an EVM chain, read from its transaction's logs:
  * `in-<chain>-<burn id>` for a burn to ICP, `lz-<guid>` for a LayerZero send. */
 export const opIdOfEvmTx = async (net: EvmNet, hash: Hash): Promise<string | null> => {
-  const receipt = await waitForTransactionReceipt(wagmiConfig, { chainId: NETS[net].chain.id, hash });
+  const receipt = await waitForTransactionReceipt(wagmiConfig, { chainId: NETS[net].chainId, hash });
   for (const log of receipt.logs) {
     if (log.address.toLowerCase() !== GLDT_TOKEN.toLowerCase()) continue;
     try {

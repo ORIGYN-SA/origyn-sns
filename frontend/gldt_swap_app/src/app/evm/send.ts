@@ -6,14 +6,14 @@ import { NETS, type EvmNet, type EvmToken } from "./chains";
 
 /** Puts the wallet on `net` before anything is signed there; the wallet asks the user if needed. */
 export const onNet = async (net: EvmNet) => {
-  const chainId = NETS[net].chain.id;
+  const chainId = NETS[net].chainId;
   if (getAccount(wagmiConfig).chainId !== chainId) await switchChain(wagmiConfig, { chainId });
   return chainId;
 };
 
 /** Waits until the transaction is in a block and did not revert. */
 export const confirmed = async (net: EvmNet, hash: Hash) => {
-  const receipt = await waitForTransactionReceipt(wagmiConfig, { chainId: NETS[net].chain.id, hash });
+  const receipt = await waitForTransactionReceipt(wagmiConfig, { chainId: NETS[net].chainId, hash });
   if (receipt.status !== "success") throw new Error(`transaction ${hash} reverted`);
   return receipt;
 };

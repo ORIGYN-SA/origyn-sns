@@ -41,8 +41,9 @@ export const evmBalance = (b: EvmBalances, net: EvmNet, sym: EvmTokenSym): bigin
   return sym === "USDT" ? null : b.base[sym];
 };
 
+// The backend may page this list with a cursor (next_page) instead of a total; the app reads the
+// first page only.
 const historySchema = z.object({
-  total_count: z.number(),
   data: z.array(
     z.object({
       tx_hash: z.string(),

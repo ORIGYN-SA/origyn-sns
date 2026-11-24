@@ -66,6 +66,12 @@ export const operationSchema = z.object({
   nft_label: z.string().nullable(),
   fee: units.nullable(),
   memo: z.string().nullable(),
+  // Served once the explorer additions are deployed; absent before.
+  parent_id: z.string().nullable().optional(),
+  block_hash: z.string().nullable().optional(),
+  source_block_number: z.number().nullable().optional(),
+  dest_block_number: z.number().nullable().optional(),
+  layerzero_fee: z.string().nullable().optional(),
 });
 export type Operation = z.infer<typeof operationSchema>;
 export type OperationKind = Operation["kind"];
@@ -114,6 +120,8 @@ export const detailsSchema = operationSchema.extend({
   ),
   layerzero_url: z.string().nullable(),
   voucher: voucherSchema.nullable(),
+  /** The ledger blocks and EVM transfers the operation is made of, oldest first. */
+  legs: z.array(operationSchema).optional(),
 });
 export type OperationDetails = z.infer<typeof detailsSchema>;
 
@@ -121,8 +129,8 @@ export type ListParams = {
   q?: string;
   address?: string[];
   kind?: OperationKind[];
-  from_chain?: Chain;
-  to_chain?: Chain;
+  from_chain?: Chain[];
+  to_chain?: Chain[];
   status?: Operation["status"];
   offset: number;
   limit: number;
@@ -133,8 +141,8 @@ const listQuery = (p: ListParams): Record<string, string> => {
   if (p.q) q.q = p.q;
   if (p.address?.length) q.address = p.address.join(",");
   if (p.kind?.length) q.kind = p.kind.join(",");
-  if (p.from_chain) q.from_chain = p.from_chain;
-  if (p.to_chain) q.to_chain = p.to_chain;
+  if (p.from_chain?.length) q.from_chain = p.from_chain.join(",");
+  if (p.to_chain?.length) q.to_chain = p.to_chain.join(",");
   if (p.status) q.status = p.status;
   return q;
 };
@@ -161,3 +169,47 @@ export const fetchGoldPrice = async () =>
       z.object({ gold_price_usd_per_gram: z.number().positive() })
     )
   ).gold_price_usd_per_gram;
+
+const network = z.enum(["icp", "ethereum", "base"]);
+
+/** One wallet's GLDT: in all, per network, and a principal's subaccounts. */
+export const walletSchema = z.object({
+  address: z.string(),
+  address_type: z.enum(["evm", "principal", "account"]),
+  balance: units,
+  networks: z.array(z.object({ network, balance: units, block: z.number().nullable() })),
+  subaccounts: z.array(z.object({ account: z.string(), subaccount: z.string().nullable(), balance: units })),
+  subaccount_count: z.number(),
+});
+export type Wallet = z.infer<typeof walletSchema>;
+
+export const fetchWallet = (address: string) =>
+  getJson(`/v1/tokens/gldt/explorer/wallets/${encodeURIComponent(address)}`, walletSchema);
+
+/** The largest holders, one row per address and network. */
+export const fetchHolders = (p: { network: Chain[]; offset: number; limit: number }) =>
+  getJson(
+    "/v1/tokens/gldt/explorer/holders",
+    pageSchema(z.object({ address: z.string(), network, balance: units })),
+    { network: p.network.join(","), offset: String(p.offset), limit: String(p.limit) }
+  );
+
+export const fetchExplorerStats = () =>
+  getJson(
+    "/v1/tokens/gldt/explorer/stats",
+    z.object({
+      holders: z.object({ total: z.number(), icp: z.number(), ethereum: z.number(), base: z.number(), evm: z.number() }),
+      last_24h: z.object({ transactions: z.number(), volume: units }),
+    })
+  );
+
+/** GLDT on each network, and what is between them. */
+export const fetchBridgeSupply = () =>
+  getJson(
+    "/v1/tokens/gldt/bridge/supply",
+    z.object({ icp: units, ethereum: units, base: units, total: units })
+  );
+
+/** Grams of gold that back the GLDT in circulation. */
+export const fetchGoldBacking = async () =>
+  (await getJson("/v1/tokens/gldt/gold/summary", z.object({ gldt_backing_grams: z.number() }))).gldt_backing_grams;

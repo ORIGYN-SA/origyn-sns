@@ -1,4 +1,4 @@
-import { createConfig, fallback, unstable_connector } from "wagmi";
+import { createConfig, fallback, unstable_connector, type Config, type Transport } from "wagmi";
 import { injected, walletConnect } from "wagmi/connectors";
 import { base, mainnet } from "viem/chains";
 
@@ -33,7 +33,7 @@ const viaWallet = () =>
     ...(WALLETCONNECT_READY ? [unstable_connector(walletConnect)] : []),
   ]);
 
-export const wagmiConfig = createConfig({
+export const wagmiConfig: Config<readonly [typeof mainnet, typeof base], Record<typeof mainnet.id | typeof base.id, Transport>> = createConfig({
   chains: [mainnet, base],
   connectors,
   transports: {

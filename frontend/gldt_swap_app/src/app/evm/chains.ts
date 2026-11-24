@@ -8,38 +8,38 @@ export const EVM_NETS: readonly EvmNet[] = ["ethereum", "base"];
 /** GLDT has the same address on both chains (deployed through CreateX with one salt). */
 export const GLDT_TOKEN: Address = "0x084B8b9819573A5EBc92b834e06608E0f41F383B";
 
-export const NETS = {
+export type ChainId = typeof mainnet.id | typeof base.id;
+
+type NetInfo = {
+  chainId: ChainId;
+  name: string;
+  scan: string;
+  scanName: string;
+  /** LayerZero endpoint id. */
+  lzEid: number;
+  /** Blocks gldt_swap waits on top of a burn before it mints on ICP. */
+  confirmations: number;
+};
+
+export const NETS: Record<EvmNet, NetInfo> = {
   ethereum: {
-    chain: mainnet,
+    chainId: mainnet.id,
     name: "Ethereum",
     scan: "https://etherscan.io",
     scanName: "Etherscan",
     lzEid: 30101,
-    // Blocks gldt_swap waits on top of a burn before it mints on ICP.
     confirmations: 12,
   },
   base: {
-    chain: base,
+    chainId: base.id,
     name: "Base",
     scan: "https://basescan.org",
     scanName: "Basescan",
     lzEid: 30184,
     confirmations: 120,
   },
-} as const satisfies Record<
-  EvmNet,
-  {
-    chain: typeof mainnet | typeof base;
-    name: string;
-    scan: string;
-    scanName: string;
-    lzEid: number;
-    confirmations: number;
-  }
->;
+};
 
-export const netOfChainId = (chainId: number | undefined): EvmNet | null =>
-  chainId === mainnet.id ? "ethereum" : chainId === base.id ? "base" : null;
 
 /** The tokens the wallet lists on each EVM network: GLDT, the native coin and stablecoins only. */
 export type EvmTokenSym = "GLDT" | "ETH" | "USDC" | "USDT";

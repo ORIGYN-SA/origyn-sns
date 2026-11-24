@@ -9,17 +9,13 @@ import Layout from "@components/shared/Layout";
 import NotFound from "@components/shared/routes/NotFound";
 
 import Home from "features/home";
+import { ExplorerAccountRedirect, ExplorerBlockRedirect } from "./app/explorer/redirects";
 
-import {
-  Explorer,
-  AccountOverview,
-  AccountTransactionDetails,
-} from "features/index";
-
-// The GLDT app loads on its own, so the landing page and the explorer stay light.
+// The GLDT app and the explorer load on their own, so the landing page stays light.
 const AppLayout = lazy(() => import("./app/shell/AppLayout"));
 const WalletPage = lazy(() => import("./app/wallet/WalletPage"));
 const BridgePage = lazy(() => import("./app/bridge/BridgePage"));
+const ExplorerPage = lazy(() => import("./app/explorer/ExplorerPage"));
 
 const router = createBrowserRouter([
   {
@@ -60,20 +56,16 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Explorer />,
+            element: (
+              <Suspense fallback={null}>
+                <ExplorerPage />
+              </Suspense>
+            ),
           },
-          {
-            path: "transactions/account",
-            element: <AccountOverview />,
-          },
-          {
-            path: "top_holders/account",
-            element: <AccountOverview />,
-          },
-          {
-            path: "transaction/:index",
-            element: <AccountTransactionDetails />,
-          },
+          // The old explorer's links: an account's page and a ledger block's page.
+          { path: "transactions/account", element: <ExplorerAccountRedirect /> },
+          { path: "top_holders/account", element: <ExplorerAccountRedirect /> },
+          { path: "transaction/:index", element: <ExplorerBlockRedirect /> },
         ],
       },
       {
