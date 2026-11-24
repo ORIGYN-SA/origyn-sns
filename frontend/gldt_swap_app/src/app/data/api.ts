@@ -152,3 +152,12 @@ export const fetchExplorer = (p: ListParams) =>
 
 export const fetchExplorerItem = (id: string) =>
   getJson(`/v1/tokens/gldt/explorer/${encodeURIComponent(id)}`, detailsSchema);
+
+/** The gold price per gram in USD, the price the GLD NFTs are shown at. */
+export const fetchGoldPrice = async () =>
+  (
+    await getJson(
+      "/v1/tokens/gldt/gold/summary",
+      z.object({ gold_price_usd_per_gram: z.number().positive() })
+    )
+  ).gold_price_usd_per_gram;

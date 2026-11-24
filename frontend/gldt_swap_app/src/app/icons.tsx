@@ -74,3 +74,56 @@ export const ThemeSystemOn = (props: P) => (
 export const ThemeSystemOff = (props: P) => (
   <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" {...props}><path d="M17.56 17.97H6.44c-3.98 0-5.19-1.21-5.19-5.19V6.44c0-3.98 1.21-5.19 5.19-5.19h11.11c3.98 0 5.19 1.21 5.19 5.19v6.33c.01 3.99-1.2 5.2-5.18 5.2ZM6.44 2.75c-3.14 0-3.69.55-3.69 3.69v6.33c0 3.14.55 3.69 3.69 3.69h11.11c3.14 0 3.69-.55 3.69-3.69V6.44c0-3.14-.55-3.69-3.69-3.69H6.44Z" fill="currentColor"></path><path d="M12 22.749c-.41 0-.75-.34-.75-.75v-4.78c0-.41.34-.75.75-.75s.75.34.75.75v4.78c0 .41-.34.75-.75.75ZM22 13.75H2c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h20c.41 0 .75.34.75.75s-.34.75-.75.75Z" fill="currentColor"></path><path d="M16.5 22.75h-9c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h9c.41 0 .75.34.75.75s-.34.75-.75.75Z" fill="currentColor"></path></svg>
 );
+
+export const ActTransfer = (props: P) => (
+  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path></svg>
+);
+
+export const ActBridge = (props: P) => (
+  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"></path></svg>
+);
+
+export const ActBurn = (props: P) => (
+  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"></path><path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"></path></svg>
+);
+
+export const ActMint = (props: P) => (
+  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3.5 20.5c.83.83 2.17.83 3 0l13-13c.83-.83.83-2.17 0-3-.83-.83-2.17-.83-3 0l-13 13c-.83.83-.83 2.17 0 3zM18.01 8.99l-3-3"></path><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M8.5 2.44L10 2l-.44 1.5L10 5l-1.5-.44L7 5l.44-1.5L7 2l1.5.44zM4.5 8.44L6 8l-.44 1.5L6 11l-1.5-.44L3 11l.44-1.5L3 8l1.5.44zM19.5 13.44L21 13l-.44 1.5L21 16l-1.5-.44L18 16l.44-1.5L18 13l1.5.44z"></path></svg>
+);
+
+export const ActBity = (props: P) => (
+  <svg aria-hidden="true" width="17" height="22" viewBox="0 0 17 22" fill="none" {...props}><path d="M12.9061 0H3.39257C1.83581 0 0.625 1.14925 0.625 2.54478V19.3731C0.625 20.8507 1.83581 22 3.39257 22H12.9061C14.9818 22 16.625 20.4403 16.625 18.5522V13.0522C16.625 12.1493 16.0196 11.4104 15.0682 11.1642L14.5493 11L15.0682 10.8358C16.0196 10.5896 16.625 9.85075 16.625 8.94776V3.44776C16.625 1.5597 14.9818 0 12.9061 0ZM13.5115 13.6269V18.0597C13.5115 18.7985 12.9061 19.3731 12.1277 19.3731H9.10068C8.3223 19.3731 7.71689 18.7985 7.71689 18.0597V13.6269C7.71689 12.8881 8.3223 12.3134 9.10068 12.3134H12.1277C12.9061 12.3134 13.5115 12.8881 13.5115 13.6269ZM13.5115 4.02239V8.37313C13.5115 9.11194 12.9061 9.68657 12.1277 9.68657H9.10068C8.3223 9.68657 7.71689 9.11194 7.71689 8.37313V4.02239C7.71689 3.28358 8.3223 2.70896 9.10068 2.70896H12.1277C12.9061 2.70896 13.5115 3.28358 13.5115 4.02239Z" fill="#ffffff"></path></svg>
+);
+
+export const CopySm = (props: P) => (
+  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"></path></svg>
+);
+
+export const ArrowDown = (props: P) => (
+  <svg aria-hidden="true"  width="12" height="12" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"></path></svg>
+);
+
+export const ShowAddr = (props: P) => (
+  <svg aria-hidden="true"  width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"></path></svg>
+);
+
+/** The path of a transaction row's kind icon: Burn, Mint, Approve, or an arrow in or out. */
+export const TX_ICON = {
+  Burn: "M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z",
+  Mint: "M12 4.5v15m7.5-7.5h-15",
+  Approve: "m4.5 12.75 6 6 9-13.5",
+  In: "m19.5 4.5-15 15m0 0h11.25m-11.25 0V8.25",
+  Out: "m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25",
+} as const;
+
+export const TxIcon = ({ d }: { d: string }) => (
+  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d={d}></path></svg>
+);
+
+export const XCircle = (props: P) => (
+  <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg>
+);
+
+export const CheckCircle = (props: P) => (
+  <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" {...props}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg>
+);

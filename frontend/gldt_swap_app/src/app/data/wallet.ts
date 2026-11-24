@@ -3,7 +3,7 @@ import { AccountIdentifier } from "@dfinity/ledger-icp";
 import { encodeIcrcAccount, type IcrcAccount } from "@dfinity/ledger-icrc";
 import { Principal } from "@dfinity/principal";
 
-import { fetchPrice, type PricedSym } from "./api";
+import { fetchGoldPrice, fetchPrice, type PricedSym } from "./api";
 import {
   COLLECTIONS,
   gldtIndex,
@@ -22,6 +22,9 @@ const FRESH_MS = 30_000;
 
 export const usePrice = (sym: PricedSym) =>
   useQuery({ queryKey: ["price", sym], queryFn: () => fetchPrice(sym), staleTime: 60_000 });
+
+export const useGoldPrice = () =>
+  useQuery({ queryKey: ["gold-price"], queryFn: fetchGoldPrice, staleTime: 5 * 60_000 });
 
 const signedIn = (s: ReturnType<typeof useIcpSession>) => (s?.kind === "signedIn" ? s : null);
 

@@ -16,6 +16,9 @@ export const useAuth = () => {
     connectIK();
   };
 
+  /** Opens the login dialog, from anywhere (not only a button's click). */
+  const login = () => connectIK();
+
   const disconnect = () => {
     disconnectIK();
   };
@@ -51,6 +54,7 @@ export const useAuth = () => {
     isConnecting: state.isConnecting,
     principalId: state.principalId,
     connect,
+    login,
     disconnect,
     createActor,
   };
