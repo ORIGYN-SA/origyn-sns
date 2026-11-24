@@ -37,23 +37,62 @@ const Placeholder = () => (
 
 const cut = (a: string): [string, string] => (a.startsWith("0x") ? [a.slice(0, 6), a.slice(-4)] : [a.slice(0, 6), a.slice(-6)]);
 
-/** A transaction as a phone card: the other side's address, the date and the amount. */
+/** Both addresses of a transaction, each with a copy button. */
+const AddressesSheet = ({ from, to, onClose }: { from: string | null; to: string | null; onClose: () => void }) => {
+  const copy = useCopy();
+  const box = (label: string, a: string | null) => (
+    <div className="wp-cpb">
+      <div className="wp-cph">
+        <div className="wp-cpht">{label}</div>
+      </div>
+      <div className="wp-cpr">
+        <div>{a ?? "Minting account"}</div>
+        {a && (
+          <div>
+            <button type="button" className="cpb" aria-label="Copy" onClick={() => copy(a)}>
+              <CopySm />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+  return (
+    <Dialog label="Addresses" title={null} onClose={onClose}>
+      <div className="wp-py16">
+        <div className="wp-cpcol">
+          {box("From", from)}
+          {box("To", to)}
+        </div>
+        <button type="button" className="btn round block wp-mt24" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </Dialog>
+  );
+};
+
+/** A transaction as a phone card: the other side's address, the date and the amount. The button
+ * next to the address shows both addresses. */
 const TxCard = ({
   kind,
-  other,
+  from,
+  to,
   at,
   credit,
   amount,
   usd,
 }: {
   kind: TxRow["kind"];
-  other: string | null;
+  from: string | null;
+  to: string | null;
   at: number;
   credit: boolean;
   amount: string;
   usd: string;
 }) => {
-  const copy = useCopy();
+  const [sheet, setSheet] = useState(false);
+  const other = credit ? from : to;
   const [a, b] = other ? cut(other) : ["Minting account", ""];
   return (
     <div className="txm">
@@ -73,11 +112,9 @@ const TxCard = ({
                 {b && <span className="a3">{b}</span>}
               </div>
             </div>
-            {other && (
-              <button type="button" className="cpb" aria-label="Copy address" onClick={() => copy(other)}>
-                <CopySm className="c60" />
-              </button>
-            )}
+            <button type="button" className="cpb" aria-label="Show addresses" onClick={() => setSheet(true)}>
+              <CopySm className="c60" />
+            </button>
             <span className="txd">· {shortDate(at)}</span>
           </div>
         </div>
@@ -86,6 +123,7 @@ const TxCard = ({
         <div className={`txa ${credit ? "ok" : "err"}`}>{amount}</div>
         <div className="txu">{usd}</div>
       </div>
+      {sheet && <AddressesSheet from={from} to={to} onClose={() => setSheet(false)} />}
     </div>
   );
 };
@@ -237,7 +275,8 @@ const TokenView = ({
                 <TxCard
                   key={r.key}
                   kind={r.kind}
-                  other={credit ? r.from : r.to}
+                  from={r.from}
+                  to={r.to}
                   at={r.at}
                   credit={credit}
                   amount={`${credit ? "+" : "−"}${fmt(r.amount, digitsOf(t))} ${sym}`}
@@ -276,7 +315,8 @@ const NftTxCards = ({ c, me, goldUsd }: { c: Collection; me: string; goldUsd: nu
           <TxCard
             key={String(r.id)}
             kind="Transfer"
-            other={credit ? r.from : r.to}
+            from={r.from}
+            to={r.to}
             at={r.at}
             credit={credit}
             amount={c.weight}

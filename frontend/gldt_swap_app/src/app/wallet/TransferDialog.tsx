@@ -12,7 +12,7 @@ import { parseAccountId, parseIcrcAccount, parsePrincipalAndSub, splitAccount, t
 import { NETS } from "../evm/chains";
 import { isUserRejection, sendEvmToken } from "../evm/send";
 import { fmt, parseUnits, toNumber } from "../lib/format";
-import { useCopy } from "../lib/ui";
+import { useCopy, useIsPhone } from "../lib/ui";
 import { Dialog, Pending } from "../shell/Dialog";
 import { NET_INFO, SYM_INFO, decimalsOf, priceOf, type WalletData, type WalletToken } from "./model";
 
@@ -20,10 +20,26 @@ type Fungible = Exclude<WalletToken, { kind: "nft" }>;
 type Recipient = { kind: "icp"; to: IcpRecipient } | { kind: "evm"; to: Address };
 type Status = "idle" | "pending" | "error" | "success";
 
-const Copyable = ({ text, head, tail }: { text: string; head: number; tail: number }) => {
+/** The layout classes of the desktop dialog and of the phone board's. */
+const DESK = {
+  segw: "w-segw", rbox: "w-rcb", rh: "w-rch", qr: "w-qr", rlbl: "w-mt32", rpill: "w-rpill", mt8: "w-mt8", close: "w-mt24",
+  ttl: "w-ttl", fcol: "w-fcol", full: "w-full", rrow: "w-rrow", f1: "w-f1", shr: "w-shr", info: "w-info", bal: "w-bpill",
+  fee: "w-fee", mt32: "w-mt32", cft: "w-cft", cc: "w-cc", mb8: "w-mb8", dv: "w-dv dashd", mt8b: "c60 t14 w-mt8", tot: "w-tot",
+  trw: "w-trw", tre: "w-tre", res: "w-res", resh: "w-resh", mb16: "w-mb16", resb: "w-resb", ml16: "w-ml16",
+};
+const PHONE: typeof DESK = {
+  segw: "wp-swo", rbox: "wp-rbox", rh: "wp-rh t36 f6", qr: "wp-qr", rlbl: "wp-mt16", rpill: "wp-rpill", mt8: "wp-mt8", close: "wp-mt16",
+  ttl: "wp-ttl", fcol: "wp-fcol", full: "wp-w100", rrow: "wp-rcol", f1: "wp-f1", shr: "wp-sh0", info: "wp-info", bal: "c60 t14 wp-balp",
+  fee: "wp-fee c60 t14", mt32: "wp-mt32", cft: "t36 wp-tc wp-mb32", cc: "wp-ccard", mb8: "wp-mb8", dv: "dashd wp-my16",
+  mt8b: "c60 t14 wp-mt8 wp-brk", tot: "wp-tot", trw: "wp-trow t14", tre: "wp-tend", res: "wp-res", resh: "wp-resh t36",
+  mb16: "wp-mb16", resb: "wp-resb", ml16: "wp-ml16",
+};
+type Layout = typeof DESK;
+
+const Copyable = ({ text, head, tail, L }: { text: string; head: number; tail: number; L: Layout }) => {
   const copy = useCopy();
   return (
-    <div className="w-rpill">
+    <div className={L.rpill}>
       <span className="adr lg tip" data-tip={text}>
         <span className="adri">
           <span className="a1">{text.slice(0, head)}</span>
@@ -38,17 +54,17 @@ const Copyable = ({ text, head, tail }: { text: string; head: number; tail: numb
   );
 };
 
-const Result = ({ ok, onRetry, onClose }: { ok: boolean; onRetry: () => void; onClose: () => void }) => (
-  <div className="w-res">
-    <div className="w-resh">
-      <div className="w-mb16">
+const Result = ({ ok, onRetry, onClose, L }: { ok: boolean; onRetry: () => void; onClose: () => void; L: Layout }) => (
+  <div className={L.res}>
+    <div className={L.resh}>
+      <div className={L.mb16}>
         <div className="stbox">{ok ? <CheckCircle className="ok" /> : <XCircle className="err" />}</div>
       </div>
       <div>{ok ? "Transfer has been" : "Transfer has"}</div>
       <div className="gold">{ok ? "completed" : "failed"}</div>
     </div>
     {ok ? (
-      <div className="w-resb">
+      <div className={L.resb}>
         <button type="button" className="btn" onClick={onClose}>
           Back to wallet
         </button>
@@ -58,7 +74,7 @@ const Result = ({ ok, onRetry, onClose }: { ok: boolean; onRetry: () => void; on
         <button type="button" className="btn ol" onClick={onRetry}>
           Retry
         </button>
-        <button type="button" className="btn w-ml16" onClick={onClose}>
+        <button type="button" className={`btn ${L.ml16}`} onClick={onClose}>
           Back to wallet
         </button>
       </div>
@@ -69,6 +85,8 @@ const Result = ({ ok, onRetry, onClose }: { ok: boolean; onRetry: () => void; on
 /** Send and Receive for one token: an ICP ledger token or a token on Ethereum or Base. */
 export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: WalletData; onClose: () => void }) => {
   const queryClient = useQueryClient();
+  const phone = useIsPhone();
+  const L = phone ? PHONE : DESK;
   const [tab, setTab] = useState<"send" | "receive">("send");
   const [confirm, setConfirm] = useState<{ to: Recipient; send: bigint } | null>(null);
   const [status, setStatus] = useState<Status>("idle");
@@ -209,8 +227,8 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
       onClose={onClose}
     >
       {!confirm && (
-        <div className="w-segw">
-          <div className="w-segw">
+        <div className={L.segw}>
+          <div className={L.segw}>
             <div className="seg">
               <button type="button" className={tab === "send" ? "on" : ""} onClick={() => switchTab("send")}>
                 Send
@@ -224,38 +242,47 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
       )}
       {tab === "receive" && (
         <>
-          <div className="w-rcb">
-            <div className="w-rch">
+          <div className={L.rbox}>
+            <div className={L.rh}>
               <div>Scan to</div>
               <div className="gold f6">receive</div>
             </div>
-            <div className="w-qr">
+            <div className={L.qr}>
               <QRCodeSVG value={me} size={160} role="img" aria-label="QR code of your address" />
             </div>
           </div>
-          <div className="w-mt32">
+          <div className={L.rlbl}>
             <div>{icp ? "Principal ID" : "Ethereum address"}</div>
-            <Copyable text={me} head={head} tail={tail} />
-            {!icp && <div className="c60 t14 w-mt8">Same address on Ethereum and Base.</div>}
+            <Copyable text={me} head={head} tail={tail} L={L} />
+            {!icp && <div className={`c60 t14 ${L.mt8}`}>Same address on Ethereum and Base.</div>}
           </div>
-          <button type="button" className="btn block w-mt24" onClick={onClose}>
+          <button type="button" className={`btn block ${L.close}`} onClick={onClose}>
             Close
           </button>
         </>
       )}
       {tab === "send" && !confirm && (
         <div>
-          <div className="w-ttl">
-            <div className="t36">
-              Send <span className="f6 gold">{sym}</span>
-              {(sym === "GLDT" || !icp) && <span className="f4 c60 tnet">on {netName}</span>}
-            </div>
+          <div className={L.ttl}>
+            {phone ? (
+              <div className="wp-ttc">
+                <div className="t36">
+                  Send <span className="f6 gold">{sym}</span>
+                </div>
+                {(sym === "GLDT" || !icp) && <div className="t18 c60">on {netName}</div>}
+              </div>
+            ) : (
+              <div className="t36">
+                Send <span className="f6 gold">{sym}</span>
+                {(sym === "GLDT" || !icp) && <span className="f4 c60 tnet">on {netName}</span>}
+              </div>
+            )}
           </div>
-          <div className="w-fcol">
-            <div className="w-full">
-              <div className="w-rrow">
+          <div className={L.fcol}>
+            <div className={L.full}>
+              <div className={L.rrow}>
                 {mode === "icrc" || !icp ? (
-                  <div className="w-full">
+                  <div className={L.full}>
                     <label className="lbl" htmlFor="w-rcp">
                       {!icp ? "Ethereum address" : t.sym === "ICP" ? "Principal ID or Account ID (or ICRC Account)" : "Principal ID (or ICRC account)"}
                     </label>
@@ -281,10 +308,10 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                     </div>
                   </div>
                 ) : (
-                  <div className="w-full">
+                  <div className={L.full}>
                     <div>
-                      <div className="w-rrow">
-                        <div className="w-f1">
+                      <div className={L.rrow}>
+                        <div className={L.f1}>
                           <label className="lbl" htmlFor="w-pr">
                             Principal
                           </label>
@@ -303,7 +330,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                             />
                           </div>
                         </div>
-                        <div className="w-f1">
+                        <div className={L.f1}>
                           <label className="lbl" htmlFor="w-sub">
                             Subaccount
                           </label>
@@ -324,7 +351,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                   </div>
                 )}
                 {icp && (
-                  <div className="w-shr">
+                  <div className={L.shr}>
                     <button type="button" className="modet" onClick={toggleMode}>
                       {mode === "icrc" ? "Use Principal & Subaccount" : "Use ICRC Account"}
                     </button>
@@ -338,10 +365,10 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                 Amount
               </label>
               <div className="icard">
-                <div className="w-arow">
-                  <div className="w-al">
-                    <div className="w-lgb">
-                      <img src={SYM_INFO[sym].img} alt={SYM_INFO[sym].alt} />
+                <div className={phone ? "wp-amtrow" : "w-arow"}>
+                  <div className={phone ? "wp-amtl" : "w-al"}>
+                    <div className={phone ? "wp-lgbox" : "w-lgb"}>
+                      <img className={phone ? "wp-i40" : undefined} src={SYM_INFO[sym].img} alt={SYM_INFO[sym].alt} />
                     </div>
                     <input
                       id="w-amt"
@@ -370,21 +397,21 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                     Max
                   </button>
                 </div>
-                <div className="w-usd">
+                <div className={phone ? "c40 t14 wp-usdl" : "w-usd"}>
                   {price === null ? "" : "$" + fmt((parseUnits(amt, dec) === null ? 0 : n(parseUnits(amt, dec) ?? 0n)) * price)}
                 </div>
               </div>
               <p className="errt">{amtTouched ? amount.err : ""}</p>
             </div>
-            <div className="w-info">
-              <div className="w-bpill">
+            <div className={L.info}>
+              <div className={L.bal}>
                 <div className="balav">
                   <NavWallet width={14} height={14} />
                   <div>{bal === null ? "—" : fmt(n(bal), isEth ? 6 : 5)}</div>
                   <div>{sym}</div>
                 </div>
               </div>
-              <div className="w-fee">
+              <div className={L.fee}>
                 <div className="c40">Fee:</div>
                 {fee !== null ? (
                   <>
@@ -398,7 +425,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
               </div>
             </div>
           </div>
-          <div className="w-mt32">
+          <div className={L.mt32}>
             <button
               type="button"
               className="btn block"
@@ -417,28 +444,28 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
       )}
       {tab === "send" && confirm && status === "idle" && (
         <div>
-          <div className="w-cft">You are sending</div>
-          <div className="w-cc">
-            <div className="w-mb8">Sending Account</div>
+          <div className={L.cft}>You are sending</div>
+          <div className={L.cc}>
+            <div className={L.mb8}>Sending Account</div>
             <div className="c60 t14">{me}</div>
-            <div className="w-dv dashd" />
+            <div className={L.dv} />
             <div>Receiving Account</div>
-            <div className="c60 t14 w-mt8">{confirm.to.kind === "icp" ? confirm.to.to.text : confirm.to.to}</div>
-            <div className="w-dv dashd" />
-            <div className="w-mb8">Total</div>
-            <div className="w-tot">
-              <div className="w-trw">
+            <div className={L.mt8b}>{confirm.to.kind === "icp" ? confirm.to.to.text : confirm.to.to}</div>
+            <div className={L.dv} />
+            <div className={L.mb8}>Total</div>
+            <div className={L.tot}>
+              <div className={L.trw}>
                 <div className="c60">{fee !== null || isEth ? "Amount deducted (including fee)" : "Amount deducted"}</div>
-                <div className="w-tre">
+                <div className={L.tre}>
                   <div>
                     {fmt(n(confirm.send + (fee ?? 0n)), 8)} {sym}
                   </div>
                   <div className="c60">{usdOf(confirm.send + (fee ?? 0n))}</div>
                 </div>
               </div>
-              <div className="w-trw c60">
+              <div className={`${L.trw} c60`}>
                 <div>Fee</div>
-                <div className="w-tre">
+                <div className={L.tre}>
                   {fee !== null ? (
                     <>
                       <div>
@@ -451,9 +478,9 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
                   )}
                 </div>
               </div>
-              <div className="w-trw">
+              <div className={L.trw}>
                 <div className="c60">Amount received on new wallet</div>
-                <div className="w-tre">
+                <div className={L.tre}>
                   <div>
                     {fmt(n(confirm.send), 8)} {sym}
                   </div>
@@ -462,14 +489,14 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
               </div>
             </div>
           </div>
-          <button type="button" className="btn block w-mt32" onClick={() => run(confirm)}>
+          <button type="button" className={`btn block ${L.mt32}`} onClick={() => run(confirm)}>
             Confirm Transfer
           </button>
         </div>
       )}
       {tab === "send" && confirm && status === "pending" && <Pending label="Transfer" />}
       {tab === "send" && confirm && (status === "error" || status === "success") && (
-        <Result ok={status === "success"} onRetry={() => run(confirm)} onClose={onClose} />
+        <Result ok={status === "success"} onRetry={() => run(confirm)} onClose={onClose} L={L} />
       )}
     </Dialog>
   );
