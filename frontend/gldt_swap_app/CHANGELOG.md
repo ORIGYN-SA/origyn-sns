@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [2.0.0] - 2026-11-24
+
+### Added
+
+- The GLDT app on gldt.org, with desktop and phone layouts
+- Wallet at /wallet: GLDT on ICP, Ethereum and Base, GLD NFTs, ICP, and ETH, USDC and USDT on Ethereum and Base. Send and receive tokens, swap GLD NFTs for GLDT and GLDT for GLD NFTs, send GLD NFTs and see their details
+- Bridge at /bridge: move GLDT from ICP to Ethereum or Base (paid with GLDT or with GLD NFTs), from Ethereum or Base to ICP, and between Ethereum and Base over LayerZero
+- Ethereum wallets connect through a browser wallet or WalletConnect
+
+### Changed
+
+- The Explorer at /explorer lists every GLDT operation on ICP, Ethereum and Base, with filters, search, wallet balances, top holders and supply. Links to the old explorer pages open the matching new ones
+- Login with Internet Identity, NFID or OISY uses gldt.org's own origin. Principals on gldt.org differ from the ones on app.gold-dao.org: GLDT and GLD NFTs held under an app.gold-dao.org principal stay there and show on app.gold-dao.org
+- Launch App and Buy GLDT open the Wallet
+
+### Removed
+
+- The /swap pages, which called a gldt_swap interface that mainnet no longer serves. /swap now opens the Wallet, where GLD NFTs and GLDT are swapped
+
 ### [1.2.3] - 2026-11-16
 
 ### Changed

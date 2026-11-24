@@ -1,31 +1,54 @@
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider as ReactRouterProvider,
 } from "react-router-dom";
 
 import Layout from "@components/shared/Layout";
-import Protected from "@components/shared/routes/Protected";
 import NotFound from "@components/shared/routes/NotFound";
-
-import { SwapAppProvider } from "@context/index";
-import { TransactionDetailsProvider } from "@context/index";
+import RouteError from "@components/shared/routes/RouteError";
 
 import Home from "features/home";
+import { ExplorerAccountRedirect, ExplorerBlockRedirect } from "./app/explorer/redirects";
 
-import {
-  SwapTransfer,
-  Account,
-  TransactionDetails,
-  TransactionHistoryList,
-  Explorer,
-  AccountOverview,
-  AccountTransactionDetails,
-} from "features/index";
+// The GLDT app and the explorer load on their own, so the landing page stays light.
+const AppLayout = lazy(() => import("./app/shell/AppLayout"));
+const WalletPage = lazy(() => import("./app/wallet/WalletPage"));
+const BridgePage = lazy(() => import("./app/bridge/BridgePage"));
+const ExplorerPage = lazy(() => import("./app/explorer/ExplorerPage"));
 
 const router = createBrowserRouter([
   {
+    element: (
+      <Suspense fallback={null}>
+        <AppLayout />
+      </Suspense>
+    ),
+    errorElement: <RouteError />,
+    children: [
+      {
+        path: "wallet",
+        element: (
+          <Suspense fallback={null}>
+            <WalletPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "bridge",
+        element: (
+          <Suspense fallback={null}>
+            <BridgePage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
     path: "/",
     element: <Layout />,
+    errorElement: <RouteError />,
     children: [
       {
         index: true,
@@ -36,61 +59,21 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Explorer />,
+            element: (
+              <Suspense fallback={null}>
+                <ExplorerPage />
+              </Suspense>
+            ),
           },
-          {
-            path: "transactions/account",
-            element: <AccountOverview />,
-          },
-          {
-            path: "top_holders/account",
-            element: <AccountOverview />,
-          },
-          {
-            path: "transaction/:index",
-            element: <AccountTransactionDetails />,
-          },
+          // The old explorer's links: an account's page and a ledger block's page.
+          { path: "transactions/account", element: <ExplorerAccountRedirect /> },
+          { path: "top_holders/account", element: <ExplorerAccountRedirect /> },
+          { path: "transaction/:index", element: <ExplorerBlockRedirect /> },
         ],
       },
       {
-        path: "swap",
-        children: [
-          {
-            index: true,
-            element: (
-              <SwapAppProvider>
-                <SwapTransfer />
-              </SwapAppProvider>
-            ),
-          },
-          {
-            path: "account",
-            element: <Protected />,
-            children: [
-              {
-                index: true,
-                element: <Account />,
-              },
-              {
-                path: "transactions",
-                children: [
-                  {
-                    index: true,
-                    element: <TransactionHistoryList />,
-                  },
-                  {
-                    path: ":nft_id",
-                    element: (
-                      <TransactionDetailsProvider>
-                        <TransactionDetails />
-                      </TransactionDetailsProvider>
-                    ),
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        path: "swap/*",
+        element: <Navigate to="/wallet" replace />,
       },
       {
         path: "*",

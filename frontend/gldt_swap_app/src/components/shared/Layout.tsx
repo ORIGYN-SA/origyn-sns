@@ -1,6 +1,4 @@
-import { Outlet, useNavigation, useLocation } from "react-router-dom";
-import NavbarSwap from "./navbars/swap/NavbarSwap";
-import ConnectingDialog from "@components/auth/ConnectingDialog";
+import { Outlet, useNavigation } from "react-router-dom";
 
 const NavigationProgress = () => {
   return (
@@ -14,20 +12,8 @@ const NavigationProgress = () => {
 
 const Layout = () => {
   const navigation = useNavigation();
-  const location = useLocation();
-  const isSwap = location.pathname.match(/\/swap/) ? true : false;
 
-  return isSwap ? (
-    <>
-      <div className="flex flex-col min-h-screen pb-12 bg-cover-img bg-cover bg-fixed bg-background">
-        <NavbarSwap />
-        <div className="flex-grow px-4 sm:px-6">
-          {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}
-        </div>
-      </div>
-      <ConnectingDialog />
-    </>
-  ) : (
+  return (
     <div className={`flex flex-col min-h-screen`}>
       <div className="flex-grow">
         {navigation.state !== "idle" ? <NavigationProgress /> : <Outlet />}

@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 import { useAtomValue } from "jotai";
-import { useAuth as useAuthIK } from "@nfid/identitykit/react";
+import { useAuth as useAuthIK } from "@amerej/identitykit/react";
 import { Actor, ActorSubclass } from "@dfinity/agent";
 
 import { stateAtom } from "../atoms";
@@ -15,6 +15,9 @@ export const useAuth = () => {
     e.stopPropagation();
     connectIK();
   };
+
+  /** Opens the login dialog, from anywhere (not only a button's click). */
+  const login = () => connectIK();
 
   const disconnect = () => {
     disconnectIK();
@@ -51,6 +54,7 @@ export const useAuth = () => {
     isConnecting: state.isConnecting,
     principalId: state.principalId,
     connect,
+    login,
     disconnect,
     createActor,
   };

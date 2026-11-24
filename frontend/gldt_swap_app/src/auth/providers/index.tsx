@@ -1,24 +1,29 @@
-import { ReactNode, useEffect, useState } from "react";
-import {
-  IdentityKitAuthType,
-  NFIDW,
-  InternetIdentity,
-  IdentityKitSignerConfig,
-} from "@nfid/identitykit";
-import { useAtom, useSetAtom } from "jotai";
-import { useQueryClient } from "@tanstack/react-query";
+import { ReactNode, useEffect } from "react";
+import { NFIDW, InternetIdentity, OISY } from "@amerej/identitykit";
 import {
   IdentityKitProvider,
   useAuth,
   useIsInitializing,
+  useAgent,
   useIdentity,
-} from "@nfid/identitykit/react";
-import { Agent, HttpAgent } from "@dfinity/agent";
-// import { isMobile } from "react-device-detect";
+} from "@amerej/identitykit/react";
+import { useAtom, useSetAtom } from "jotai";
+import { useQueryClient } from "@tanstack/react-query";
+import { HttpAgent } from "@dfinity/agent";
 
 import { stateAtom } from "../atoms";
 import { Canisters } from "../interfaces";
 import { LoaderSpin } from "@components/ui";
+
+const HOST = "https://icp-api.io";
+
+// The fork ships InternetIdentity with an empty providerUrl, which makes @dfinity/auth-client fall
+// back to the old identity.internetcomputer.org. id.ai with the guided upgrade lets existing II
+// users move over, as on app.gold-dao.org.
+const InternetIdentityIdAi = {
+  ...InternetIdentity,
+  providerUrl: "https://id.ai/?feature_flag_guided_upgrade=true",
+};
 
 const AuthProviderInit = ({
   canisters,
@@ -27,73 +32,53 @@ const AuthProviderInit = ({
   canisters: Canisters;
   children: ReactNode;
 }) => {
-  const connected = localStorage.getItem("connected");
-
-  const { user } = useAuth();
+  const { user, disconnect } = useAuth();
   const isInitializing = useIsInitializing();
-  const HOST = "https://icp-api.io/"; // "https://ic0.app"
+  const authenticatedAgent = useAgent({ host: HOST });
   const identity = useIdentity();
-  const agent = HttpAgent.createSync({
-    host: HOST,
-    identity: identity,
-  });
-
   const [state, setState] = useAtom(stateAtom);
-  const [, setUnauthenticatedAgent] = useState<HttpAgent | undefined>();
+  // A delegation that ran out (Internet Identity, NFID: one week) comes back as the stored user with
+  // an anonymous identity; every call would then run as the anonymous principal. OISY has no
+  // identity here and is not affected.
+  const expired = !isInitializing && !!user && !!identity && identity.getPrincipal().isAnonymous();
 
   useEffect(() => {
-    setUnauthenticatedAgent(agent);
+    if (expired) void disconnect();
+  }, [expired, disconnect]);
 
-    setState((prevState) => ({
-      ...prevState,
-      unauthenticatedAgent: agent,
-      canisters: canisters,
-    }));
+  useEffect(() => {
+    let live = true;
+    HttpAgent.create({ host: HOST }).then((unauthenticatedAgent) => {
+      if (live) setState((s) => ({ ...s, unauthenticatedAgent, canisters }));
+    });
+    return () => {
+      live = false;
+    };
+    // The canister map is fixed for the life of the app.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (!isInitializing && connected === "1" && (!user || !agent)) {
-      setState((prevState) => ({
-        ...prevState,
-        isConnecting: true,
-      }));
-
-      const timer = setTimeout(() => {
-        if (!user || !agent) {
-          localStorage.clear();
-          setState((prevState) => ({
-            ...prevState,
+    setState((s) =>
+      user && authenticatedAgent && !expired
+        ? {
+            ...s,
+            principalId: user.principal.toText(),
+            isConnected: true,
             isConnecting: false,
-          }));
-        }
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected, user, agent, isInitializing]);
+            authenticatedAgent,
+          }
+        : {
+            ...s,
+            principalId: "",
+            isConnected: false,
+            isConnecting: isInitializing,
+            authenticatedAgent: undefined,
+          }
+    );
+  }, [user, authenticatedAgent, expired, isInitializing, setState]);
 
-  useEffect(() => {
-    if (user && agent) {
-      setState((prevState) => ({
-        ...prevState,
-        principalId: user.principal.toText(),
-        isConnected: true,
-        isConnecting: false,
-        authenticatedAgent: agent as unknown as Agent,
-      }));
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        principalId: "",
-        isConnected: false,
-        authenticatedAgent: undefined,
-      }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, state.canisters]);
-
-  if (!Object.keys(state.canisters).length || !state.unauthenticatedAgent) {
+  if (!state.unauthenticatedAgent) {
     return (
       <div className="flex h-screen">
         <div className="m-auto">
@@ -101,56 +86,45 @@ const AuthProviderInit = ({
         </div>
       </div>
     );
-  } else return children;
+  }
+  return children;
 };
 
 export const AuthProvider = ({
   children,
   targets = [],
-  signers = [NFIDW, InternetIdentity],
   canisters = {},
-  derivationOrigin = undefined,
-  maxTimeToLive = 604800000000000n, // ? one week
 }: {
   children: ReactNode;
   targets?: string[];
-  signers?: IdentityKitSignerConfig[];
   canisters: Canisters;
-  derivationOrigin?: string | undefined;
-  maxTimeToLive?: bigint;
 }) => {
   const setState = useSetAtom(stateAtom);
   const queryClient = useQueryClient();
 
   return (
     <IdentityKitProvider
-      // signers={isMobile ? [NFIDW, InternetIdentity] : signers}
-      signers={signers}
-      authType={IdentityKitAuthType.DELEGATION}
+      signers={[NFIDW, InternetIdentityIdAi, OISY]}
       signerClientOptions={{
         targets,
-        maxTimeToLive,
-        derivationOrigin,
-        idleOptions: {
-          disableIdle: false,
-        },
+        maxTimeToLive: 604800000000000n, // one week
+        idleOptions: { disableIdle: false },
       }}
       onConnectFailure={(err: Error) => {
-        // window.location.reload();
-        console.log(err);
+        console.error("Login failed", err);
       }}
       onConnectSuccess={() => {
         queryClient.clear();
       }}
       onDisconnect={() => {
-        setState((prevState) => ({
-          ...prevState,
+        queryClient.clear();
+        setState((s) => ({
+          ...s,
           principalId: "",
           isConnected: false,
           isConnecting: false,
           authenticatedAgent: undefined,
         }));
-        // window.location.reload();
       }}
     >
       <AuthProviderInit canisters={canisters}>{children}</AuthProviderInit>

@@ -14,10 +14,8 @@ export const GLDT_LEDGER_CANISTER_ID = import.meta.env
   .VITE_GLDT_LEDGER_CANISTER_ID;
 export const GLDT_LEDGER_INDEXER_CANISTER_ID = import.meta.env
   .VITE_GLDT_LEDGER_INDEXER_CANISTER_ID;
-export const ICP_SWAP_CANISTER_ID = import.meta.env.VITE_ICP_SWAP_CANISTER_ID;
 export const GOLD_API_BASE_URL = import.meta.env.VITE_GOLD_API_BASE_URL;
 export const GLDT_API_BASE_URL = import.meta.env.VITE_GLDT_API_BASE_URL;
-export const GLDT_STAKE_CANISTER_ID = import.meta.env.VITE_GLDT_STAKE_CANISTER_ID;
 
 export const OGY_TX_FEE = 200000
 export const GLDT_TX_FEE = 10000000;
@@ -88,11 +86,14 @@ if (!(APP_MODE === "production")) {
     );
   else console.log(`GLDT_API_BASE_URL=${GLDT_API_BASE_URL}`);
 
-  if (!ICP_SWAP_CANISTER_ID)
-    console.log(
-      "No ICP_SWAP_CANISTER_ID environment variable. Set ICP_SWAP_CANISTER_ID environment variable."
-    );
-  else console.log(`ICP_SWAP_CANISTER_ID=${ICP_SWAP_CANISTER_ID}`);
-
-
 }
+// The ICP ledger and its index are the same on every network the app is built for.
+export const ICP_LEDGER_CANISTER_ID = "ryjl3-tyaaa-aaaaa-aaaba-cai";
+export const ICP_INDEX_CANISTER_ID = "qhbym-qaaaa-aaaaa-aaafq-cai";
+// WalletConnect (Reown) project for gldt.org; empty until one is set in the build's .env.
+export const REOWN_PROJECT_ID: string = import.meta.env.VITE_REOWN_PROJECT_ID ?? "";
+// The GLD NFT collections' block indexers (ICRC-3 history per account).
+export const GLD_NFT_1G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_1G_INDEXER_CANISTER_ID;
+export const GLD_NFT_10G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_10G_INDEXER_CANISTER_ID;
+export const GLD_NFT_100G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_100G_INDEXER_CANISTER_ID;
+export const GLD_NFT_1000G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_1000G_INDEXER_CANISTER_ID;
