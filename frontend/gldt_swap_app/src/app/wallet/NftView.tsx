@@ -7,10 +7,8 @@ import { useGoldPrice, useNftHistory } from "../data/wallet";
 import { fmt, shortDate } from "../lib/format";
 import { useCopy } from "../lib/ui";
 import { ActionButton } from "./Hero";
-import { kindIcon } from "./TxList";
+import { kindIcon, nftName } from "./rows";
 import type { WalletData } from "./model";
-
-export const nftName = (c: Collection, id: bigint) => `GLD NFT ${c.key} #${id}`;
 
 const Placeholder = () => (
   <div className="w-tph">

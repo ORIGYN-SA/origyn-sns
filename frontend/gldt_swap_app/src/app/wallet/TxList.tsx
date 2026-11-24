@@ -1,4 +1,5 @@
-import { ArrowDown, CopySm, TX_ICON, TxIcon } from "../icons";
+import { ArrowDown, CopySm, TxIcon } from "../icons";
+import { kindIcon, type TxKind } from "./rows";
 import { fmt, shortDate } from "../lib/format";
 import { useCopy } from "../lib/ui";
 
@@ -6,7 +7,7 @@ import { useCopy } from "../lib/ui";
  * account. */
 export type TxRow = {
   key: string;
-  kind: "Transfer" | "Approve" | "Mint" | "Burn";
+  kind: TxKind;
   from: string | null;
   to: string | null;
   /** In whole tokens. */
@@ -40,9 +41,6 @@ const AddrCell = ({ text }: { text: string | null }) => {
     </div>
   );
 };
-
-export const kindIcon = (kind: TxRow["kind"], credit: boolean): string =>
-  kind === "Transfer" ? (credit ? TX_ICON.In : TX_ICON.Out) : TX_ICON[kind];
 
 /** The Transactions section of a token: placeholder while logged out, then the rows. */
 export const TxList = ({

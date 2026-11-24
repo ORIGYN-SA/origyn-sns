@@ -13,6 +13,7 @@ import { Hero } from "./Hero";
 import { NftView } from "./NftView";
 import { TokenList } from "./TokenList";
 import { TransferDialog } from "./TransferDialog";
+import { SwapDialog } from "./SwapDialog";
 import { TxList, type TxRow } from "./TxList";
 import { GLDT_ICP, decimalsOf, digitsOf, priceOf, useWalletData, type WalletData, type WalletToken } from "./model";
 
@@ -128,6 +129,9 @@ const WalletPage = () => {
       </section>
       {dialog.kind === "transfer" && (
         <TransferDialog t={dialog.token} data={data} onClose={() => setDialog({ kind: "none" })} />
+      )}
+      {dialog.kind === "swap" && (
+        <SwapDialog data={data} initial={dialog.mode} onClose={() => setDialog({ kind: "none" })} />
       )}
     </div>
   );
