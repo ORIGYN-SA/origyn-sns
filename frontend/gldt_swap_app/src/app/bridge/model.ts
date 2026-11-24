@@ -33,12 +33,18 @@ export const stepsOf = (
   from: BridgeNet,
   to: BridgeNet,
   local: StepState[],
-  op: OperationDetails | null
+  op: OperationDetails | null,
+  nft = false
 ): Step[] => {
   const toName = NET[to].name;
   const fromName = NET[from].name;
   if (from === "icp") {
-    const labels = ["Approve", "Burn on Internet Computer", `Claim ready on ${toName}`, `Claim on ${toName}`];
+    const labels = [
+      "Approve",
+      nft || op?.kind === "nft_to_evm" ? "Send the NFTs to the swap" : "Burn on Internet Computer",
+      `Claim ready on ${toName}`,
+      `Claim on ${toName}`,
+    ];
     if (!op) return labels.map((label, i) => ({ label, state: local[i] ?? "idle" }));
     const [burned, signed, claimed] = op.steps;
     return [

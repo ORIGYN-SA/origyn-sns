@@ -1,5 +1,5 @@
 import type { Agent } from "@dfinity/agent";
-import type { Principal } from "@dfinity/principal";
+import { Principal } from "@dfinity/principal";
 import { bytesToHex, getAddress, pad, type Address, type Hash, type Hex } from "viem";
 import { readContract, writeContract } from "wagmi/actions";
 
@@ -7,7 +7,9 @@ import { gldtBridgeAbi } from "../evm/abi";
 import { GLDT_TOKEN, NETS, type EvmNet } from "../evm/chains";
 import { wagmiConfig } from "../evm/config";
 import { onNet } from "../evm/send";
-import { SWAP_PRINCIPAL, gldtSwap, ledger } from "../icp/canisters";
+import { COLLECTIONS, SWAP_PRINCIPAL, gldtSwap, ledger } from "../icp/canisters";
+import { approveNfts } from "../wallet/swap";
+import type { Selection } from "../wallet/Picker";
 
 /** Where the bridge moves GLDT: the Internet Computer or one of the EVM networks. */
 export type BridgeNet = "icp" | EvmNet;
@@ -31,6 +33,21 @@ export const bridgeToEvm = async (signer: Agent, to: EvmNet, recipient: Address,
   });
   if ("Err" in res) throw new Error(`bridge_to_evm: ${variantText(res.Err)}`);
   return res.Ok;
+};
+
+/** ICP to Ethereum or Base paid with GLD NFTs: approve gldt_swap for the NFTs of each collection,
+ * then swap them for a voucher of their GLDT value. Nothing is minted or burned on ICP. */
+export const bridgeNftsToEvm = async (signer: Agent, to: EvmNet, recipient: Address, nfts: Selection, onApproved: () => void) => {
+  const chosen = COLLECTIONS.filter((c) => nfts[c.key].length > 0);
+  for (const c of chosen) await approveNfts(signer, c, nfts[c.key]);
+  onApproved();
+  const res = await gldtSwap(signer).swap_nft_for_evm({
+    chain: to === "ethereum" ? { Ethereum: null } : { Base: null },
+    recipient: getAddress(recipient),
+    nfts: chosen.flatMap((c) => nfts[c.key].map((id) => ({ id, canister_id: Principal.fromText(c.canister) }))),
+  });
+  if ("Err" in res) throw new Error(`swap_nft_for_evm: ${variantText(res.Err)}`);
+  return res.Ok.transfer;
 };
 
 /** The ICP principal as burnToIcp takes it: its length, its bytes, then zeros. */

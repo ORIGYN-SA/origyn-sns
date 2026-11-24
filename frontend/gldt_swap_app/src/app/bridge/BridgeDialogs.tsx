@@ -121,18 +121,20 @@ export const DetailsDialog = ({
   to,
   opId,
   local,
+  nft,
   onClose,
 }: {
   from: BridgeNet;
   to: BridgeNet;
   opId: string | null;
   local: StepState[];
+  nft: boolean;
   onClose: () => void;
 }) => {
   const op = useBridgeOperation(opId).data ?? null;
   return (
     <Dialog label="Bridge details" onClose={onClose}>
-      <Steps title={`${NET[from].name} to ${NET[to].name}`} steps={stepsOf(from, to, local, op)} />
+      <Steps title={`${NET[from].name} to ${NET[to].name}`} steps={stepsOf(from, to, local, op, nft)} />
       <button type="button" className="btn block" onClick={onClose}>
         Close
       </button>
