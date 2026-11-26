@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useQueries, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { isAddress, type Address } from "viem";
 
-import { swapNftsForEvm } from "../bridge/calls";
+import { SwapRefused, swapNftsForEvm } from "../bridge/calls";
 import { useClaim } from "../bridge/claim";
 import { useBridgeOperation } from "../bridge/history";
 import { NET, stepsOf, type StepState } from "../bridge/model";
@@ -36,8 +37,9 @@ const MAX_NFTS_TO_EVM = 100;
 
 type Job = { c: Collection; ids: bigint[]; approve: "idle" | "pend" | "ok" | "bad"; swap: "idle" | "pend" | "ok" | "bad" };
 
-/** A Mint to Ethereum or Base once confirmed: its recipient, the swap call, and the transfer it made. */
-type EvmMint = { net: EvmNet; to: Address; send: StepState; opId: string | null };
+/** A Mint to Ethereum or Base once confirmed: its recipient, the swap call, and the transfer it made.
+ * `unknown`: the swap's reply was lost, so it may have run. */
+type EvmMint = { net: EvmNet; to: Address; send: StepState; opId: string | null; unknown: boolean };
 
 const JobIcon = ({ st }: { st: "idle" | "pend" | "ok" | "bad" }) =>
   st === "pend" ? (
@@ -119,9 +121,11 @@ export const SwapDialog = ({
   const tooMany = toEvm && n > MAX_NFTS_TO_EVM;
   const mine = data.evmAddress ?? null;
 
-  // A wallet connected from the dialog fills an empty recipient.
+  // A wallet connected from the dialog fills an empty recipient; clearing it later stays cleared.
+  const hadWallet = useRef(mine !== null);
   useEffect(() => {
-    if (mine && rc === "") setRc(mine);
+    if (mine && !hadWallet.current && rc === "") setRc(mine);
+    hadWallet.current = mine !== null;
   }, [mine, rc]);
 
   const switchMode = (m: SwapMode) => {
@@ -188,9 +192,14 @@ export const SwapDialog = ({
         setEvm((e) => e && { ...e, send: "ok", opId: `out-${out.id}` });
       } catch (e) {
         console.error("Mint to " + m.net + " failed", e);
-        // The swap moves no NFT when it fails, so a Retry sends it again.
-        sent.current = false;
-        setEvm((x) => x && { ...x, send: "bad" });
+        if (e instanceof SwapRefused) {
+          // gldt_swap refused it and moved no NFT, so a Retry sends it again.
+          sent.current = false;
+          setEvm((x) => x && { ...x, send: "bad" });
+        } else {
+          // The reply was lost: the swap may have run, so it is never sent again from here.
+          setEvm((x) => x && { ...x, send: "bad", unknown: true });
+        }
       } finally {
         await queryClient.invalidateQueries({
           predicate: (q) => ["nft-holdings", "nft-history", "bridge-history", "explorer-wallet"].includes(String(q.queryKey[0])),
@@ -203,7 +212,7 @@ export const SwapDialog = ({
   const confirm = () => {
     const next: Job[] = chosen.map((c) => ({ c, ids: sel[c.key].slice(), approve: "idle", swap: "idle" }));
     setJobs(next);
-    if (toEvm && evmTo) setEvm({ net, to: evmTo, send: "idle", opId: null });
+    if (toEvm && evmTo) setEvm({ net, to: evmTo, send: "idle", opId: null, unknown: false });
     setSel(NONE);
     setStep("details");
   };
@@ -234,7 +243,8 @@ export const SwapDialog = ({
     ? stepsOf("icp", evmNet, [allApproved ? "ok" : "pend", evm.send, evm.send === "ok" ? "pend" : "idle", "idle"], detail, true).slice(1)
     : [];
   const claimRun = claimer.run;
-  const claimState: StepState = claimRun ? (claimRun[0] !== "ok" ? claimRun[0] : claimRun[1] ?? "idle") : evSteps[2]?.state ?? "idle";
+  const apiClaim = evSteps[2]?.state ?? "idle";
+  const claimState: StepState = apiClaim === "ok" ? "ok" : claimRun ? (claimRun[0] !== "ok" ? claimRun[0] : claimRun[1] ?? "idle") : apiClaim;
   const canClaim = !!evm && claimer.ready && (claimRun === null || claimRun.includes("bad")) && claimState !== "ok";
 
   const aria = mode === "burn" ? "Burn" : "Mint";
@@ -290,7 +300,7 @@ export const SwapDialog = ({
                               </div>
                               <div>{stp.label}</div>
                             </div>
-                            {i === 0 && evm.send === "bad" && (
+                            {i === 0 && evm.send === "bad" && !evm.unknown && (
                               <div>
                                 <button type="button" className="btn sm" onClick={() => void sendEvm(evm, jobs)}>
                                   Retry
@@ -309,6 +319,15 @@ export const SwapDialog = ({
                       );
                     })}
                   </div>
+                  {evm.unknown && (
+                    <div className="t14 c60 w-mt16">
+                      The answer did not arrive, so the NFTs may already be swapped. Check the{" "}
+                      <Link className="gold" to="/bridge">
+                        Bridge
+                      </Link>{" "}
+                      transactions before trying again.
+                    </div>
+                  )}
                 </div>
               )}
             </div>

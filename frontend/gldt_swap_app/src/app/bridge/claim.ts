@@ -4,7 +4,7 @@ import { getAddress, isHex, type Hex } from "viem";
 
 import type { OperationDetails } from "../data/api";
 import type { EvmNet } from "../evm/chains";
-import { TxReplaced, confirmed, isUserRejection } from "../evm/send";
+import { confirmed, isUserRejection, txFailed } from "../evm/send";
 import { useToast } from "../lib/ui";
 import { claimFromIcp } from "./calls";
 import type { StepState } from "./model";
@@ -49,8 +49,8 @@ export const useClaim = (to: EvmNet, detail: OperationDetails | null) => {
     } catch (e) {
       // The claim was sent: it must not be sent again from here.
       console.error("Waiting for the claim failed", e);
-      setRun(["ok", e instanceof TxReplaced ? "bad" : "pend"]);
-      if (!(e instanceof TxReplaced)) toast("Your claim was sent. It shows as claimed once it is in a block.");
+      setRun(["ok", txFailed(e) ? "bad" : "pend"]);
+      if (!txFailed(e)) toast("Your claim was sent. It shows as claimed once it is in a block.");
     } finally {
       await queryClient.invalidateQueries({
         predicate: (q) =>

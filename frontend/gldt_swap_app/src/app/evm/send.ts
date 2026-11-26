@@ -10,6 +10,13 @@ const RECEIPT_TIMEOUT_MS = 10 * 60_000;
 /** The wallet replaced a sent transaction with another (the user cancelled it), so it never ran. */
 export class TxReplaced extends Error {}
 
+/** A sent transaction is in a block but reverted: it did nothing. */
+export class TxReverted extends Error {}
+
+/** A sent transaction that is known to have done nothing: replaced, or reverted. Any other error
+ * from `confirmed` leaves its outcome open. */
+export const txFailed = (e: unknown): boolean => e instanceof TxReplaced || e instanceof TxReverted;
+
 /** Puts the wallet on `net` before anything is signed there; the wallet asks the user if needed. */
 export const onNet = async (net: EvmNet) => {
   const chainId = NETS[net].chainId;
@@ -18,7 +25,8 @@ export const onNet = async (net: EvmNet) => {
 };
 
 /** Waits until the transaction, or the one that sped it up, is in a block and did not revert. A
- * cancelled or replaced transaction throws TxReplaced; a wait past the timeout throws. */
+ * cancelled or replaced transaction throws TxReplaced, a reverted one TxReverted; a wait past the
+ * timeout throws. */
 export const confirmed = async (net: EvmNet, hash: Hash): Promise<TransactionReceipt> => {
   let replaced = false;
   const receipt = await waitForTransactionReceipt(wagmiConfig, {
@@ -30,7 +38,7 @@ export const confirmed = async (net: EvmNet, hash: Hash): Promise<TransactionRec
     },
   });
   if (replaced) throw new TxReplaced(`transaction ${hash} was replaced`);
-  if (receipt.status !== "success") throw new Error(`transaction ${hash} reverted`);
+  if (receipt.status !== "success") throw new TxReverted(`transaction ${hash} reverted`);
   return receipt;
 };
 

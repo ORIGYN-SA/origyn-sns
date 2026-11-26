@@ -11,7 +11,7 @@ import { CheckCircle, CopySm, NavWallet, XCircle } from "../icons";
 import { ICP_TOKENS, ledger } from "../icp/canisters";
 import { parseAccountId, parseIcrcAccount, parsePrincipalAndSub, splitAccount, type IcpRecipient } from "../icp/accounts";
 import { NETS, txUrl } from "../evm/chains";
-import { TxReplaced, confirmed, isUserRejection, sendEvmToken } from "../evm/send";
+import { confirmed, isUserRejection, sendEvmToken, txFailed } from "../evm/send";
 import { fmt, parseUnits, toNumber } from "../lib/format";
 import { useCopy, useIsPhone } from "../lib/ui";
 import { Dialog, Pending } from "../shell/Dialog";
@@ -210,7 +210,7 @@ export const TransferDialog = ({ t, data, onClose }: { t: Fungible; data: Wallet
       } catch (e) {
         // Sent: never offer to send it again.
         console.error("Waiting for the transfer failed", e);
-        setStatus(e instanceof TxReplaced ? "error" : "sent");
+        setStatus(txFailed(e) ? "error" : "sent");
       } finally {
         await refresh();
       }

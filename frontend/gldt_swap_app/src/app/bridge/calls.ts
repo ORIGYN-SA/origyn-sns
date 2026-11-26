@@ -34,6 +34,9 @@ export const bridgeToEvm = async (signer: Agent, to: EvmNet, recipient: Address,
   return res.Ok;
 };
 
+/** gldt_swap answered with an error: the call changed nothing. */
+export class SwapRefused extends Error {}
+
 /** GLD NFTs to GLDT on Ethereum or Base: gldt_swap takes the NFTs, which the caller approved for
  * it, and signs a claim voucher for their GLDT value. No fee; nothing is minted or burned on ICP.
  * One call may mix collections, up to 100 NFTs. */
@@ -44,7 +47,7 @@ export const swapNftsForEvm = async (signer: Agent, to: EvmNet, recipient: Addre
     recipient: getAddress(recipient),
     nfts: chosen.flatMap((c) => nfts[c.key].map((id) => ({ id, canister_id: Principal.fromText(c.canister) }))),
   });
-  if ("Err" in res) throw new Error(`swap_nft_for_evm: ${variantText(res.Err)}`);
+  if ("Err" in res) throw new SwapRefused(`swap_nft_for_evm: ${variantText(res.Err)}`);
   return res.Ok.transfer;
 };
 

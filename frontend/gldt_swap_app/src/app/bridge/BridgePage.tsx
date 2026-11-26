@@ -9,7 +9,7 @@ import { useAuth } from "@auth/index";
 import { ArrowDown, Chevron, CopySm, NavBridge } from "../icons";
 import type { Operation } from "../data/api";
 import type { EvmNet } from "../evm/chains";
-import { TxReplaced, confirmed, isUserRejection } from "../evm/send";
+import { TxReplaced, TxReverted, confirmed, isUserRejection } from "../evm/send";
 import { parseIcrcAccount } from "../icp/accounts";
 import { fmt, parseUnits, shortDate, toNumber } from "../lib/format";
 import { useCopy, useIsPhone, useToast } from "../lib/ui";
@@ -254,7 +254,9 @@ const BridgePage = () => {
           toast(
             e instanceof TxReplaced
               ? "The transaction was cancelled in your wallet."
-              : "Your transaction was sent. It shows in Transactions once it is in a block."
+              : e instanceof TxReverted
+                ? `The transaction failed on ${NET[f].name}. Nothing was bridged.`
+                : "Your transaction was sent. It shows in Transactions once it is in a block."
           );
           setDlg((d) => (mine(d) ? { kind: "none" } : d));
         }

@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Internet Identity and NFID derive principals from https://gldt.org, which lists the app's canister URL and the preprod canister as alternative origins. Principals on gldt.org stay the same, and the canister URL now gives the same principal as gldt.org
+- Internet Identity and NFID derive principals from https://gldt.org, which lists the app's canister URL and the preprod canister as alternative origins. Principals on gldt.org stay the same, and the canister URL now gives the same principal as gldt.org. A login on the canister URL while 2.0.0 was live had that URL's own principal, which this version no longer gives
 
 ### Removed
 
