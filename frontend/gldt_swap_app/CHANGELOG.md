@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Versions
 
+### [2.1.0] - 2026-11-26
+
+### Added
+
+- Mint to Ethereum or Base: the Wallet's Mint swaps GLD NFTs for GLDT on Ethereum or Base, with no fee. The GLDT is then claimed on that network, paid in ETH. GLDT on Ethereum and on Base has a Mint button that opens it for that network
+
+### Changed
+
+- Internet Identity and NFID derive principals from https://gldt.org, which lists the app's canister URL and the preprod canister as alternative origins. Principals on gldt.org stay the same, and the canister URL now gives the same principal as gldt.org
+
+### Removed
+
+- The Bridge's "Pay with GLD NFTs" option, which moved to the Wallet's Mint
+
 ### [2.0.0] - 2026-11-24
 
 ### Added
