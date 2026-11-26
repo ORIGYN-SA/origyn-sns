@@ -92,6 +92,11 @@ export const ICP_LEDGER_CANISTER_ID = "ryjl3-tyaaa-aaaaa-aaaba-cai";
 export const ICP_INDEX_CANISTER_ID = "qhbym-qaaaa-aaaaa-aaafq-cai";
 // WalletConnect (Reown) project for gldt.org; empty until one is set in the build's .env.
 export const REOWN_PROJECT_ID: string = import.meta.env.VITE_REOWN_PROJECT_ID ?? "";
+
+/** The origin Internet Identity and NFID derive principals from, so several URLs of the app share
+ * one principal per user. It must list each of those URLs in its
+ * /.well-known/ii-alternative-origins. Unset: the page's own origin. */
+export const II_DERIVATION_ORIGIN: string | undefined = import.meta.env.VITE_II_DERIVATION_ORIGIN || undefined;
 // The GLD NFT collections' block indexers (ICRC-3 history per account).
 export const GLD_NFT_1G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_1G_INDEXER_CANISTER_ID;
 export const GLD_NFT_10G_INDEXER_CANISTER_ID: string = import.meta.env.VITE_GLD_NFT_10G_INDEXER_CANISTER_ID;
