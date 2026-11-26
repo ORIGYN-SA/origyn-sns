@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import "../styles/wallet.css";
 import { useAuth } from "@auth/index";
 import { useEvmGldtHistory } from "../data/evm";
-import { addressUrl, NETS } from "../evm/chains";
+import { addressUrl, NETS, type EvmNet } from "../evm/chains";
 import { icpAccountId, useIcpHistory } from "../data/wallet";
 import type { Collection } from "../icp/canisters";
 import { toNumber } from "../lib/format";
@@ -59,17 +59,19 @@ const TokenPanel = ({
   tx,
   onTransfer,
   onBurn,
+  onMint,
 }: {
   t: Fungible;
   data: WalletData;
   tx: ReturnType<typeof useTxRows>;
   onTransfer: () => void;
   onBurn: () => void;
+  onMint: () => void;
 }) => {
   const sym = t.kind === "icp" ? t.sym : t.token.sym;
   return (
     <>
-      <Hero t={t} data={data} onTransfer={onTransfer} onBurn={onBurn} />
+      <Hero t={t} data={data} onTransfer={onTransfer} onBurn={onBurn} onMint={onMint} />
       <TxList view={tx} sym={sym} digits={digitsOf(t)} price={priceOf(data.prices, t)} />
     </>
   );
@@ -80,7 +82,7 @@ export type WalletDialog =
   | { kind: "none" }
   | { kind: "transfer"; token: Fungible }
   | { kind: "nftTransfer" }
-  | { kind: "swap"; mode: "mint" | "burn" }
+  | { kind: "swap"; mode: "mint" | "burn"; net?: EvmNet }
   | { kind: "nft"; collection: Collection; id: bigint };
 
 const WalletPage = () => {
@@ -115,7 +117,9 @@ const WalletPage = () => {
   const dialogs = (
     <>
       {dialog.kind === "transfer" && <TransferDialog t={dialog.token} data={data} onClose={close} />}
-      {dialog.kind === "swap" && <SwapDialog data={data} initial={dialog.mode} onClose={close} />}
+      {dialog.kind === "swap" && (
+        <SwapDialog data={data} initial={dialog.mode} initialNet={dialog.net} onConnectEvm={evmDialog.open} onClose={close} />
+      )}
       {dialog.kind === "nftTransfer" && <NftTransferDialog data={data} onClose={close} />}
       {dialog.kind === "nft" && <NftDetails c={dialog.collection} id={dialog.id} onClose={close} />}
     </>
@@ -131,7 +135,7 @@ const WalletPage = () => {
           onSelect={setSelected}
           onTransfer={(token) => setDialog({ kind: "transfer", token })}
           onNftTransfer={() => setDialog({ kind: "nftTransfer" })}
-          onSwap={(mode) => setDialog({ kind: "swap", mode })}
+          onSwap={(mode, net) => setDialog({ kind: "swap", mode, net })}
           onOpenNft={(collection, id) => setDialog({ kind: "nft", collection, id })}
           onConnect={onConnect}
         />
@@ -166,6 +170,7 @@ const WalletPage = () => {
                 tx={tx}
                 onTransfer={() => setDialog({ kind: "transfer", token: selected })}
                 onBurn={() => setDialog({ kind: "swap", mode: "burn" })}
+                onMint={() => setDialog({ kind: "swap", mode: "mint", net: selected.kind === "evm" ? selected.token.net : undefined })}
               />
             )}
           </section>

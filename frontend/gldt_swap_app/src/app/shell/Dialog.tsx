@@ -1,6 +1,9 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
 import { Chevron, Close } from "../icons";
+
+// The dialogs open now, oldest first: one can open over another (Connect Ethereum Wallet over Mint).
+const openDialogs: symbol[] = [];
 
 /** The design's dialog: a dimmed backdrop and a centered panel (a bottom sheet on phones), with a
  * title row and a close button. Escape and a click outside close it. */
@@ -22,13 +25,23 @@ export const Dialog = ({
   onClose: () => void;
   children: ReactNode;
 }) => {
+  const close = useRef(onClose);
   useEffect(() => {
+    close.current = onClose;
+  });
+  // Escape closes only the dialog on top.
+  useEffect(() => {
+    const me = Symbol("dialog");
+    openDialogs.push(me);
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && openDialogs[openDialogs.length - 1] === me) close.current();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      openDialogs.splice(openDialogs.indexOf(me), 1);
+    };
+  }, []);
   return (
     <div className="d1">
       <div className="d1b" />

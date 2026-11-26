@@ -23,5 +23,14 @@
   {
     match: ".well-known",
     ignore: false,
+  },
+  {
+    // Internet Identity reads this list from gldt.org, the login's derivation origin.
+    match: ".well-known/ii-alternative-origins",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    ignore: false,
   }
 ]

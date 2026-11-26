@@ -94,10 +94,12 @@ export const AuthProvider = ({
   children,
   targets = [],
   canisters = {},
+  derivationOrigin,
 }: {
   children: ReactNode;
   targets?: string[];
   canisters: Canisters;
+  derivationOrigin?: string;
 }) => {
   const setState = useSetAtom(stateAtom);
   const queryClient = useQueryClient();
@@ -107,6 +109,7 @@ export const AuthProvider = ({
       signers={[NFIDW, InternetIdentityIdAi, OISY]}
       signerClientOptions={{
         targets,
+        derivationOrigin,
         maxTimeToLive: 604800000000000n, // one week
         idleOptions: { disableIdle: false },
       }}

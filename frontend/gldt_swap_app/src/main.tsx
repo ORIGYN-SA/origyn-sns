@@ -18,6 +18,7 @@ import {
   GLDT_LEDGER_CANISTER_ID,
   ICP_LEDGER_CANISTER_ID,
   SWAP_CANISTER_ID,
+  II_DERIVATION_ORIGIN,
 } from "@constants";
 
 import { idlFactory as gld_nft_idl } from "@canisters/gld_nft/did";
@@ -50,6 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
     <QueryClientProvider client={queryClient}>
       <AuthProvider
+        derivationOrigin={II_DERIVATION_ORIGIN}
         targets={[
           GLD_NFT_1G_CANISTER_ID,
           GLD_NFT_10G_CANISTER_ID,

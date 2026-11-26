@@ -1,21 +1,13 @@
-import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { getAddress, isHex, type Hex } from "viem";
 
 import { CheckCircle, CopySm, XCircle } from "../icons";
 import type { Operation } from "../data/api";
-import { TxReplaced, confirmed, isUserRejection } from "../evm/send";
 import { fmt, toNumber } from "../lib/format";
-import { useCopy, useToast } from "../lib/ui";
+import { useCopy } from "../lib/ui";
 import { Dialog } from "../shell/Dialog";
-import { claimFromIcp, type BridgeNet } from "./calls";
+import { type BridgeNet } from "./calls";
+import { useClaim } from "./claim";
 import { useBridgeOperation } from "./history";
 import { NET, stepsOf, type Step, type StepState } from "./model";
-
-const asHex = (s: string): Hex => {
-  if (!isHex(s)) throw new Error(`not hex: ${s}`);
-  return s;
-};
 
 const StepIcon = ({ state }: { state: StepState }) =>
   state === "pend" ? (
@@ -157,51 +149,11 @@ export const ClaimDialog = ({
   onClose: () => void;
 }) => {
   const copy = useCopy();
-  const toast = useToast();
-  const queryClient = useQueryClient();
   const detail = useBridgeOperation(op.id).data ?? null;
-  const [run, setRun] = useState<StepState[] | null>(null);
   const to = op.to_chain === "icp" ? "ethereum" : op.to_chain;
   const recipient = op.to_address ?? "";
   const amount = toNumber(op.amount, 8);
-
-  const claim = async () => {
-    const v = detail?.voucher;
-    if (!v) return;
-    setRun(["pend", "idle"]);
-    let hash: Hex;
-    try {
-      hash = await claimFromIcp(to, {
-        icpBurnIndex: BigInt(v.icp_burn_index),
-        recipient: getAddress(v.recipient),
-        amount: BigInt(v.amount),
-        signature: asHex(v.signature),
-      });
-    } catch (e) {
-      if (isUserRejection(e)) {
-        setRun(null);
-        return;
-      }
-      console.error("Claim failed", e);
-      setRun(["bad", "idle"]);
-      return;
-    }
-    setRun(["ok", "pend"]);
-    try {
-      await confirmed(to, hash);
-      setRun(["ok", "ok"]);
-    } catch (e) {
-      // The claim was sent: it must not be sent again from here.
-      console.error("Waiting for the claim failed", e);
-      setRun(["ok", e instanceof TxReplaced ? "bad" : "pend"]);
-      if (!(e instanceof TxReplaced)) toast("Your claim was sent. It shows as claimed once it is in a block.");
-    } finally {
-      await queryClient.invalidateQueries({
-        predicate: (q) =>
-          ["bridge-history", "bridge-op", "evm-balances", "evm-history", "explorer-wallet"].includes(String(q.queryKey[0])),
-      });
-    }
-  };
+  const { run, claim } = useClaim(to, detail);
 
   const title = `Claim on ${NET[to].name}`;
   return (
