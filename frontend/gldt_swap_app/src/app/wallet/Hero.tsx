@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ActBridge, ActBurn, ActTransfer } from "../icons";
+import { ActBridge, ActBurn, ActMint, ActTransfer } from "../icons";
 import { fmt, toNumber } from "../lib/format";
 import { NET_INFO, SYM_INFO, decimalsOf, digitsOf, priceOf, type WalletData, type WalletToken } from "./model";
 
@@ -24,18 +24,21 @@ export const ActionButton = ({
   </button>
 );
 
-/** The selected token's card: its name and price, the balance, and Transfer, Bridge and (GLDT on
- * ICP) Burn, which swaps GLDT for a GLD NFT. */
+/** The selected token's card: its name and price, the balance, and Transfer, Bridge, Burn (GLDT on
+ * ICP), which swaps GLDT for a GLD NFT, and Mint (GLDT on Ethereum or Base), which swaps GLD NFTs for
+ * GLDT there. */
 export const Hero = ({
   t,
   data,
   onTransfer,
   onBurn,
+  onMint,
 }: {
   t: Exclude<WalletToken, { kind: "nft" }>;
   data: WalletData;
   onTransfer: () => void;
   onBurn: () => void;
+  onMint: () => void;
 }) => {
   const navigate = useNavigate();
   const sym = t.kind === "icp" ? t.sym : t.token.sym;
@@ -109,6 +112,8 @@ export const Hero = ({
           {isGldt && t.kind === "icp" && (
             <ActionButton label="Burn" icon={<ActBurn />} disabled={!connected} onClick={onBurn} />
           )}
+          {/* The NFTs are on the Internet Computer, so Mint needs that login. */}
+          {isGldt && t.kind === "evm" && <ActionButton label="Mint" icon={<ActMint />} disabled={!data.icpIn} onClick={onMint} />}
         </div>
       </div>
     </div>

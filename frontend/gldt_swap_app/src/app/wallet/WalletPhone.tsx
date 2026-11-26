@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import nftLogo from "../assets/gold-nft.svg";
 import { ActBity, ActBridge, ActBurn, ActMint, ActTransfer, Chevron, CopySm } from "../icons";
+import type { EvmNet } from "../evm/chains";
 import { COLLECTIONS, type Collection, type CollectionKey } from "../icp/canisters";
 import { useGoldPrice, useNftHistory } from "../data/wallet";
 import { fmt, shortDate, toNumber } from "../lib/format";
@@ -183,6 +184,7 @@ const TokenView = ({
   onPick,
   onTransfer,
   onBurn,
+  onMint,
 }: {
   t: Fungible;
   data: WalletData;
@@ -190,6 +192,7 @@ const TokenView = ({
   onPick: () => void;
   onTransfer: () => void;
   onBurn: () => void;
+  onMint: () => void;
 }) => {
   const navigate = useNavigate();
   const sym = t.kind === "icp" ? t.sym : t.token.sym;
@@ -240,6 +243,8 @@ const TokenView = ({
               </div>
             )}
             {sym === "GLDT" && t.kind === "icp" && <ActionButton label="Burn" icon={<ActBurn />} disabled={!connected} onClick={onBurn} />}
+            {/* The NFTs are on the Internet Computer, so Mint needs that login. */}
+            {sym === "GLDT" && t.kind === "evm" && <ActionButton label="Mint" icon={<ActMint />} disabled={!data.icpIn} onClick={onMint} />}
           </div>
         </div>
       </div>
@@ -502,7 +507,7 @@ export const WalletPhone = ({
   onSelect: (t: WalletToken) => void;
   onTransfer: (t: Fungible) => void;
   onNftTransfer: () => void;
-  onSwap: (mode: "mint" | "burn") => void;
+  onSwap: (mode: "mint" | "burn", net?: EvmNet) => void;
   onOpenNft: (c: Collection, id: bigint) => void;
   onConnect: (net: "icp" | "ethereum" | "base") => void;
 }) => {
@@ -532,6 +537,7 @@ export const WalletPhone = ({
             onPick={() => setSheet(true)}
             onTransfer={() => onTransfer(selected)}
             onBurn={() => onSwap("burn")}
+            onMint={() => onSwap("mint", selected.kind === "evm" ? selected.token.net : undefined)}
           />
         )}
       </section>

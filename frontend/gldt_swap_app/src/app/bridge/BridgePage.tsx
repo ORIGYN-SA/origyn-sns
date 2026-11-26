@@ -5,7 +5,6 @@ import { formatUnits, isAddress, type Address, type Hash } from "viem";
 import "../styles/bridge.css";
 import "../styles/wallet.css";
 import gldtLogo from "../assets/gldt.svg";
-import nftLogo from "../assets/gold-nft.svg";
 import { useAuth } from "@auth/index";
 import { ArrowDown, Chevron, CopySm, NavBridge } from "../icons";
 import type { Operation } from "../data/api";
@@ -16,11 +15,7 @@ import { fmt, parseUnits, shortDate, toNumber } from "../lib/format";
 import { useCopy, useIsPhone, useToast } from "../lib/ui";
 import { useEvmDialog } from "../shell/state";
 import { evmToken, useWalletData, type Bal } from "../wallet/model";
-import { Picker, type Selection } from "../wallet/Picker";
-import { NONE } from "../wallet/selection";
-import { COLLECTIONS, nftValueE8s } from "../icp/canisters";
-import { Dialog } from "../shell/Dialog";
-import { bridgeNftsToEvm, bridgeToEvm, burnToIcp, sendLayerZero, type BridgeNet } from "./calls";
+import { bridgeToEvm, burnToIcp, sendLayerZero, type BridgeNet } from "./calls";
 import { ClaimDialog, ConfirmDialog, DetailsDialog, type ConfirmRow } from "./BridgeDialogs";
 import { opIdOfEvmTx, useBridgeHistory } from "./history";
 import { BRIDGE_NETS, NET, arrivalText, statusOf, type StepState } from "./model";
@@ -109,10 +104,6 @@ const BridgePage = () => {
   const [sel, setSel] = useState<"from" | "to" | null>(null);
   const [dlg, setDlg] = useState<Dlg>({ kind: "none" });
   const runs = useRef(0);
-  // From the Internet Computer the transfer can be paid with GLD NFTs instead of GLDT.
-  const [pay, setPay] = useState<"gldt" | "nft">("gldt");
-  const [nfts, setNfts] = useState<Selection>(NONE);
-  const [picking, setPicking] = useState(false);
 
   const principal = data.icp?.kind === "signedIn" ? data.icp.principal : null;
   const evm = data.evmAddress ?? null;
@@ -159,18 +150,12 @@ const BridgePage = () => {
     setTo(from);
   };
 
-  const byNft = from === "icp" && pay === "nft" && !!principal;
-  const nftCount = COLLECTIONS.reduce((n, c) => n + nfts[c.key].length, 0);
-  const nftGrams = COLLECTIONS.reduce((g, c) => g + nfts[c.key].length * c.grams, 0);
-  const nftUnits = COLLECTIONS.reduce((u, c) => u + BigInt(nfts[c.key].length) * nftValueE8s(c), 0n);
-
   // The amount, checked against the source balance and the bridge's rules.
-  const a = byNft ? (nftCount > 0 ? nftUnits : null) : parseUnits(amt, 8);
+  const a = parseUnits(amt, 8);
   const fromBal = units(balOf(from));
   let amtErr = "";
   let amtOk = false;
-  if (byNft) amtOk = nftCount > 0;
-  else if (a !== null && a > 0n && connected(from)) {
+  if (a !== null && a > 0n && connected(from)) {
     if (from === "icp") {
       if (fromBal !== null && a + ICP_FEE > fromBal) amtErr = "Amount must not exceed your balance minus network fees";
       else if (a < ICP_FEE) amtErr = "Amount must not be less or equal than transaction fee";
@@ -199,16 +184,10 @@ const BridgePage = () => {
 
   const camt = a !== null ? toNumber(a, 8) : 0;
   const usdText = (v: number) => (price === null ? "" : `≈ $${fmt(v * price)}`);
-  const pillA = byNft ? "No fee on Internet Computer" : from === "icp" ? "Network fee: 0.1 GLDT" : to === "icp" ? "Network fee: paid in ETH" : "LayerZero fee: paid in ETH";
+  const pillA = from === "icp" ? "Network fee: 0.1 GLDT" : to === "icp" ? "Network fee: paid in ETH" : "LayerZero fee: paid in ETH";
   const pillB = from === "icp" ? `Then claim on ${NET[to].name}: paid in ETH` : arrivalText(from, to);
-  const cfRows: ConfirmRow[] = byNft
-    ? [
-        { l: "NFTs sent", v: `${nftCount} GLD NFT (${nftGrams} g)`, u: "", rc: "", lc: "c60" },
-        { l: "Fee", v: "None", u: "", rc: "c60", lc: "" },
-        { l: `Amount received on ${NET[to].name}`, v: `${fmt(camt, 8)} GLDT`, u: usdText(camt), rc: "", lc: "c60" },
-        { l: `Claim on ${NET[to].name} (paid in ETH)`, v: "Shown by your wallet", u: "", rc: "", lc: "c60" },
-      ]
-    : from === "icp"
+  const cfRows: ConfirmRow[] =
+    from === "icp"
       ? [
           { l: "Amount deducted (including fee)", v: `${fmt(camt + 0.1, 8)} GLDT`, u: usdText(camt + 0.1), rc: "", lc: "c60" },
           { l: "Fee", v: "0.1 GLDT", u: usdText(0.1), rc: "c60", lc: "" },
@@ -234,31 +213,21 @@ const BridgePage = () => {
     const f = from;
     const t = to;
     const n = t === "icp" && f !== "icp" ? 4 : f === "icp" ? 4 : 3;
-    const nftRoute = byNft;
-    const chosen = nfts;
     const run = ++runs.current;
     let sent = false;
     // A step of this transfer updates its details only while they are still on screen: the user
     // may have closed them or opened another transfer's.
     const mine = (d: Dlg) => (d.kind === "details" && d.run === run) || (d.kind === "confirm" && !sent);
     const show = (opId: string | null, l: StepState[]) =>
-      setDlg((d) => (mine(d) ? { kind: "details", run, from: f, to: t, opId, local: l, nft: nftRoute } : d));
+      setDlg((d) => (mine(d) ? { kind: "details", run, from: f, to: t, opId, local: l, nft: false } : d));
     const clearForm = () => {
       sent = true;
       setAmt("");
       setRc("");
-      setNfts(NONE);
     };
     show(null, Array.from({ length: n }, (_, i) => (i === 0 ? "pend" : "idle")));
     try {
-      if (nftRoute) {
-        if (data.icp?.kind !== "signedIn" || !evmTo || t === "icp") return;
-        const out = await bridgeNftsToEvm(data.icp.signer, t, evmTo, chosen, () => {
-          clearForm();
-          show(null, ["ok", "pend", "idle", "idle"]);
-        });
-        show(`out-${out.id}`, ["ok", "ok", "pend", "idle"]);
-      } else if (f === "icp") {
+      if (f === "icp") {
         if (data.icp?.kind !== "signedIn" || !evmTo || t === "icp") return;
         const out = await bridgeToEvm(data.icp.signer, t, evmTo, a, () => {
           clearForm();
@@ -462,37 +431,12 @@ const BridgePage = () => {
                   <img src={gldtLogo} alt="GLDT logo" />
                   100 GLDT = 1 gram of physical gold
                 </div>
-                {from === "icp" && principal && (
-                  <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
-                    <div className="seg" role="group" aria-label="Pay with">
-                      <button type="button" className={pay === "gldt" ? "on" : ""} onClick={() => setPay("gldt")}>
-                        GLDT
-                      </button>
-                      <button type="button" className={pay === "nft" ? "on" : ""} onClick={() => setPay("nft")}>
-                        GLD NFTs
-                      </button>
-                    </div>
-                  </div>
-                )}
                 <div className="br-frm">
                   <div className="br-grid">
                     <div className="br-c4 br-box">
                       <div className="br-boxl">From</div>
                       <div className="br-boxr">
-                        {byNft ? (
-                          <div className="br-boxi">
-                            <div className="br-amf">
-                              <div className="br-amt">{nftCount ? `${fmt(nftGrams)} g` : "0 g"}</div>
-                              <div>GLD NFT</div>
-                              <div className="br-lgb">
-                                <img src={nftLogo} alt="GOLD NFT logo" />
-                              </div>
-                            </div>
-                            <button type="button" className="maxb" onClick={() => setPicking(true)}>
-                              Choose
-                            </button>
-                          </div>
-                        ) : connected(from) && balOf(from).kind === "loading" ? (
+                        {connected(from) && balOf(from).kind === "loading" ? (
                           <div className="br-ld">Loading...</div>
                         ) : (
                           <div className="br-boxi">
@@ -771,26 +715,6 @@ const BridgePage = () => {
       )}
       {dlg.kind === "details" && (
         <DetailsDialog from={dlg.from} to={dlg.to} opId={dlg.opId} local={dlg.local} nft={dlg.nft} onClose={() => setDlg({ kind: "none" })} />
-      )}
-      {picking && (
-        <Dialog label="Choose GLD NFTs" onClose={() => setPicking(false)}>
-          <div className="w-mt32">
-            <div className="w-pkl">
-              {COLLECTIONS.map((c) => (
-                <Picker
-                  key={c.key}
-                  c={c}
-                  ids={data.nfts.data?.[c.key] ?? null}
-                  selected={nfts[c.key]}
-                  onChange={(ids) => setNfts((x) => ({ ...x, [c.key]: ids }))}
-                />
-              ))}
-            </div>
-            <button type="button" className="btn block w-mt32" onClick={() => setPicking(false)}>
-              Done ({nftCount} selected)
-            </button>
-          </div>
-        </Dialog>
       )}
       {dlg.kind === "claim" && (
         <ClaimDialog op={dlg.op} evmConnected={!!evm} price={price} onConnectEvm={evmDialog.open} onClose={() => setDlg({ kind: "none" })} />

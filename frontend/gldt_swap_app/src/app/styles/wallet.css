@@ -338,3 +338,29 @@
 
 .wp-pk>.wp-pkh:last-child{margin-bottom:0}
 .phone .wp-pk{margin-bottom:12px}
+
+/* Mint to a network: the Bridge's network picker and recipient field inside the Mint dialog */
+.mn-row{display:flex;gap:8px;align-items:stretch}
+.mn-row .w-gbx{flex:1 1 0%;min-width:0}
+.mn-selw{position:relative;flex-shrink:0;width:208px}
+.mn-selb{display:block;width:100%;height:100%;border-radius:12px;border:1px solid var(--bd);padding:12px 16px;font-size:14px;line-height:24px;cursor:pointer;background:var(--s1);color:var(--tc)}
+.mn-seli{display:flex;justify-content:space-between;align-items:center}
+.mn-sell{display:flex;align-items:center;gap:8px;text-align:left;min-width:0;font-weight:600}
+.mn-sell div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mn-chev{margin-left:8px;flex-shrink:0}
+/* It opens upward: the To box sits at the bottom of a scrolling dialog. */
+.mn-selo{left:0;right:0;top:auto;bottom:100%;margin:0 0 4px;transform-origin:bottom center}
+.mn-opt{display:flex;align-items:center;gap:8px;padding:12px;text-align:left}
+.mn-lg{display:block;flex-shrink:0;width:24px;height:24px}
+.mn-lg img{display:block;width:100%;height:100%}
+.mn-lg.br-wh{background:#FFFFFF;border-radius:9999px;overflow:hidden}
+.mn-rc{display:flex;align-items:center;gap:8px;padding:16px;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
+.mn-rc input{flex:1 1 0%;min-width:0;outline:none;border:0;padding:0;background:transparent;font:inherit;color:var(--tc)}
+.mn-err{margin-top:8px;color:var(--err);font-size:14px;line-height:20px}
+.mn-steps{display:flex;flex-direction:column;gap:8px}
+.phone .mn-selw{width:150px}
+.phone .mn-selb{padding:10px 12px;line-height:20px}
+.phone .mn-chev{margin-left:4px}
+.phone .mn-selo{left:auto;right:0;width:220px;transform-origin:bottom right}
+.phone .mn-rc{padding:14px 16px}
+.phone .mn-rc input{font-size:14px}
